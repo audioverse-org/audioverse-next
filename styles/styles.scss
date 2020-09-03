@@ -20,3 +20,36 @@ $accent: #3DA88E;
     margin-bottom: 2rem;
   }
 }
+
+/* Move to Sass module once I figure out how to get them working */
+.template-sermon {
+  .template-sermon__meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    img {
+      flex: 0 0 50px;
+      margin-right: .75rem;
+      border-radius: 100%;
+    }
+    h1 {
+      margin: 0;
+    }
+  }
+  .template-sermon__speakers  {
+    margin: 0;
+    padding-left: 0;
+    li {
+      display: inline;
+      list-style-type: none;
+      font-style: italic;
+      opacity: .5;
+    }
+    li:after {
+      content: ", ";
+    }
+    li:last-child:after {
+      content: "";
+    }
+  }
+}

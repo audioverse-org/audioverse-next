@@ -3,6 +3,7 @@ import ErrorPage from 'next/error'
 import React from "react";
 // import Layout from '../../../components/layout'
 import { getAllPostsWithSlug as getLatestSermons, getSermon } from '../../../lib/api'
+import './[id].module.scss'
 
 export default function Post({ sermon }) {
     const router = useRouter()
