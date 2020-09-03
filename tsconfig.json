@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+	  "module": "commonjs",
+	  "declaration": true,
+	  "removeComments": true,
+	  "emitDecoratorMetadata": true,
+	  "experimentalDecorators": true,
+	  "allowSyntheticDefaultImports": true,
+      "target": "es5",
+      "lib": ["es2017", "dom"],
+	  "sourceMap": true,
+	  "outDir": "./dist",
+	  "baseUrl": "./",
+	  "incremental": true,
+	  "skipLibCheck": true,
+      "strictPropertyInitialization": false,
+      "allowJs": true
+    },
+    "exclude": ["./*.js"]
+  }
+  
