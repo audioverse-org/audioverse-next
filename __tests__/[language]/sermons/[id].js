@@ -1,5 +1,5 @@
 import { getAllPostsWithSlug as getLatestSermons, getSermon } from '../../../lib/api'
-import { getStaticPaths } from './[id]'
+import { getStaticPaths } from '../../../pages/[language]/sermons/[id]'
 
 jest.mock('../../../lib/api')
 

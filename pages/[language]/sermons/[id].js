@@ -27,7 +27,7 @@ export default function Post({sermon}) {
                             <h1>{sermon.title}</h1>
                             <ul className={styles.speakers}>
                                 {sermon.persons.map(speaker => {
-                                    return <li>{speaker.name}</li>
+                                    return <li key={speaker.name}>{speaker.name}</li>
                                 })}
                             </ul>
                         </div>
@@ -35,7 +35,7 @@ export default function Post({sermon}) {
 
                     {sermon.recordingDate ? <p>{(new Date(sermon.recordingDate)).toLocaleDateString()}</p> : null}
                     {sermon.audioFiles.map(file => {
-                        return <div>
+                        return <div key={file.url}>
                             <audio controls src={file.url} preload={'metadata'}>Your browser doesn't support this
                                 player.
                             </audio>
