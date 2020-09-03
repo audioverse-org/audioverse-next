@@ -1,0 +1,22 @@
+$gray-night: #1c1c1d;
+$gray-dark: #242426;
+$gray-mid: #262627;
+$gray-light: #747474;
+$gray-lighter: #dbdbdb;
+$gray-lightest: #e5e5e5;
+$gray-bleached: #eee;
+
+$accent: #3DA88E;
+
+.template-base {
+  > * {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+  .template-base__header {
+    background-color: $gray-dark;
+    color: $gray-bleached;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+}
