@@ -1,0 +1,7 @@
+.nyc_output
+dist
+coverage
+package.json
+package-lock.json
+seeds
+*.handlebars
