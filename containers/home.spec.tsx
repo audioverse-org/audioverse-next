@@ -2,10 +2,14 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
 
+const renderHome = async (params = {}) => {
+	const { props } = await getStaticProps({ params });
+	return render(<Home {...props} />);
+};
+
 describe('home page', () => {
 	it('can render', async () => {
-		const { props } = await getStaticProps({ params: {} });
-		render(<Home {...props} />);
+		await renderHome();
 	});
 
 	it('revalidates static copy every 10s', async () => {
