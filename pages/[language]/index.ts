@@ -4,10 +4,11 @@ import { getRecentSermons } from '../../lib/api';
 export default Home;
 
 export async function getStaticProps({ params }) {
-	await getRecentSermons();
-
+	const sermons = await getRecentSermons();
 	return {
-		props: {},
+		props: {
+			sermons: (sermons && sermons.nodes) || [],
+		},
 		revalidate: 10,
 	};
 }

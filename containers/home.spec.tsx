@@ -34,4 +34,19 @@ describe('home page', () => {
 
 		expect(getRecentSermons).toHaveBeenCalled();
 	});
+
+	it('displays recent sermons', async () => {
+		(getRecentSermons as jest.Mock).mockReturnValue({
+			nodes: [
+				{
+					id: 1,
+					title: 'the_sermon_title',
+				},
+			],
+		});
+
+		const { getByText } = await renderHome();
+
+		expect(getByText('the_sermon_title')).toBeDefined();
+	});
 });
