@@ -1,14 +1,14 @@
-import { getAllPostsWithSlug as getLatestSermons } from '../../lib/api'
-import { getStaticPaths } from '../../pages/[language]/sermons/[id]'
+import { getRecentSermons as getLatestSermons } from '../../lib/api';
+import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
 
-jest.mock('../../lib/api')
+jest.mock('../../lib/api');
 
-describe("detailPageGenerator", () => {
-    it("gets sermons", async () => {
-        getLatestSermons.mockReturnValue({nodes: []})
+describe('detailPageGenerator', () => {
+	it('gets sermons', async () => {
+		(getLatestSermons as jest.Mock).mockReturnValue({ nodes: [] });
 
-        await getStaticPaths()
+		await getStaticPaths();
 
-        expect(getLatestSermons).toBeCalled()
-    })
-})
+		expect(getLatestSermons).toBeCalled();
+	});
+});

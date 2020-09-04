@@ -1,5 +1,5 @@
 import SermonDetail from '../../../containers/sermon/detail';
-import { getAllPostsWithSlug as getLatestSermons, getSermon } from '../../../lib/api';
+import { getRecentSermons as getLatestSermons, getSermon } from '../../../lib/api';
 
 export default SermonDetail;
 

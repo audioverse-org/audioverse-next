@@ -1,6 +1,9 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
+import { getRecentSermons } from '../lib/api';
+
+jest.mock('../lib/api');
 
 const renderHome = async (params = {}) => {
 	const { props } = await getStaticProps({ params });
@@ -8,10 +11,6 @@ const renderHome = async (params = {}) => {
 };
 
 describe('home page', () => {
-	it('can render', async () => {
-		await renderHome();
-	});
-
 	it('revalidates static copy every 10s', async () => {
 		const { revalidate } = await getStaticProps({ params: {} });
 
@@ -28,5 +27,11 @@ describe('home page', () => {
 		const { fallback } = await getStaticPaths();
 
 		expect(fallback).toBe('unstable_blocking');
+	});
+
+	it('gets recent sermons', async () => {
+		await renderHome();
+
+		expect(getRecentSermons).toHaveBeenCalled();
 	});
 });

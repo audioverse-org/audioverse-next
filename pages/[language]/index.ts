@@ -1,8 +1,11 @@
 import Home from '../../containers/home';
+import { getRecentSermons } from '../../lib/api';
 
 export default Home;
 
 export async function getStaticProps({ params }) {
+	await getRecentSermons();
+
 	return {
 		props: {},
 		revalidate: 10,
