@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
-import Home from './home';
 import React from 'react';
-import { getStaticProps } from '../pages/[language]/index';
+import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
 
 describe('home page', () => {
 	it('can render', async () => {
@@ -13,5 +12,17 @@ describe('home page', () => {
 		const { revalidate } = await getStaticProps({ params: {} });
 
 		expect(revalidate).toBe(10);
+	});
+
+	it('generates static paths', async () => {
+		const { paths } = await getStaticPaths();
+
+		expect(paths).toContain('/en');
+	});
+
+	it('sets proper fallback strategy', async () => {
+		const { fallback } = await getStaticPaths();
+
+		expect(fallback).toBe('unstable_blocking');
 	});
 });
