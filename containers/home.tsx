@@ -5,7 +5,9 @@ export default function Home({ sermons }) {
 		<div>
 			<ul>
 				{sermons.map((s) => (
-					<li key={s.id}>{s.title}</li>
+					<li key={s.id}>
+						<a href={`/en/sermons/${s.id}`}>{s.title}</a>
+					</li>
 				))}
 			</ul>
 		</div>

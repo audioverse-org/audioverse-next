@@ -49,4 +49,21 @@ describe('home page', () => {
 
 		expect(getByText('the_sermon_title')).toBeDefined();
 	});
+
+	it('links sermons', async () => {
+		(getRecentSermons as jest.Mock).mockReturnValue({
+			nodes: [
+				{
+					id: 1,
+					title: 'the_sermon_title',
+				},
+			],
+		});
+
+		const { getByText } = await renderHome();
+		const el = getByText('the_sermon_title');
+		const href = el.getAttribute('href');
+
+		expect(href).toBe('/en/sermons/1');
+	});
 });
