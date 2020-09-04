@@ -1,21 +1,38 @@
 {
-	"compilerOptions": {
-	  "module": "commonjs",
-	  "declaration": true,
-	  "removeComments": true,
-	  "emitDecoratorMetadata": true,
-	  "experimentalDecorators": true,
-	  "allowSyntheticDefaultImports": true,
-      "target": "es5",
-      "lib": ["es2017", "dom"],
-	  "sourceMap": true,
-	  "outDir": "./dist",
-	  "baseUrl": "./",
-	  "incremental": true,
-	  "skipLibCheck": true,
-      "strictPropertyInitialization": false,
-      "allowJs": true
-    },
-    "exclude": ["./*.js"]
-  }
-  
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es5",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
+    "jsx": "preserve",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "exclude": [
+    "./*.js"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
+}
