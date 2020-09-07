@@ -1,3 +1,5 @@
+export const entriesPerPage = 25;
+
 export const languages = {
 	ENGLISH: { base_url: 'en' },
 	SPANISH: { base_url: 'es' },

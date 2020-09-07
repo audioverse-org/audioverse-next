@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
 
-async function fetchAPI(query, { variables } = {}) {
+async function fetchAPI(query, { variables = {} } = {}) {
 	const headers = { 'Content-Type': 'application/json' };
 
 	const res = await fetch(API_URL, {
@@ -97,4 +99,24 @@ fragment SermonFragment on Recording {
 		}
 	);
 	return data && data.sermon;
+}
+
+export async function getSermonCount(language): Promise<number> {
+	const data = fetchAPI(
+		`
+	query countQuery($language: Language!) {
+    sermons(language: $language) {
+      aggregate { 
+        count 
+      }
+    }
+	}
+	`,
+		{
+			variables: {
+				language,
+			},
+		}
+	);
+	return _.get(data, 'sermons.aggregate.count') || 0;
 }
