@@ -1,5 +1,6 @@
 import SermonDetail from '../../../containers/sermon/detail';
 import { getRecentSermons as getLatestSermons, getSermon } from '../../../lib/api';
+import { languages } from '../../../lib/constants';
 
 export default SermonDetail;
 
@@ -15,14 +16,20 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const allPosts = await getLatestSermons('ENGLISH');
-	const cutOffDate = new Date('2020-06-01');
+	const keys = Object.keys(languages),
+		pathSetPromises = keys.map(async (l) => {
+			const { nodes } = await getLatestSermons(l),
+				dateFloor = new Date('2020-06-01'), // TODO: Should this be rolling?
+				filteredNodes = nodes.filter((n) => new Date(n.recordingDate) > dateFloor),
+				baseUrl = languages[l].base_url;
+
+			return filteredNodes.map((node) => `/${baseUrl}/sermons/${node.id}`) || [];
+		});
+
+	const pathSets = await Promise.all(pathSetPromises);
 
 	return {
-		paths:
-			allPosts.nodes
-				.filter((node) => new Date(node.recordingDate) > cutOffDate)
-				.map((node) => `/en/sermons/${node.id}`) || [],
+		paths: pathSets.flat(),
 		fallback: 'unstable_blocking',
 	};
 }

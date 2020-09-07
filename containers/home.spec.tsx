@@ -29,6 +29,8 @@ function loadRecentSermons() {
 }
 
 describe('home page', () => {
+	beforeEach(() => jest.resetAllMocks());
+
 	it('revalidates static copy every 10s', async () => {
 		const { revalidate } = await getStaticProps({ params: {} });
 
