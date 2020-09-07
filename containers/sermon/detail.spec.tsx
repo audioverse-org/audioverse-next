@@ -1,11 +1,11 @@
-import { getRecentSermons, getRecentSermons as getLatestSermons } from '../../lib/api';
+import { getSermons, getSermons as getLatestSermons } from '../../lib/api';
 import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
 import { waitFor } from '@testing-library/dom';
 
 jest.mock('../../lib/api');
 
 function loadRecentSermons() {
-	(getRecentSermons as jest.Mock).mockReturnValue({
+	(getSermons as jest.Mock).mockReturnValue({
 		nodes: [
 			{
 				id: 1,

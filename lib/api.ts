@@ -26,11 +26,11 @@ async function fetchAPI(query, { variables = {} } = {}) {
 	return json.data;
 }
 
-export async function getRecentSermons(language) {
+export async function getSermons(language, { offset = 0, first = 1000 } = {}) {
 	const data = await fetchAPI(
 		`
-  query loadPagesQuery($language: Language!, $cursor: String, $first: Int!) {
-    sermons(language: $language, first: $first, after: $cursor, orderBy: {direction: DESC, field: CREATED_AT}) {
+  query loadPagesQuery($language: Language!, $offset: Int, $first: Int!) {
+    sermons(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: CREATED_AT}) {
       nodes {
             ...SermonsFragment
         }
@@ -60,8 +60,8 @@ fragment SermonsFragment on Recording {
 		{
 			variables: {
 				language,
-				cursor: null,
-				first: 1000,
+				offset,
+				first,
 			},
 		}
 	);

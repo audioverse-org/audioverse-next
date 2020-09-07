@@ -1,8 +1,8 @@
 import SermonList, { getStaticPaths, getStaticProps } from '../../pages/[language]/sermons/page/[i]';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { useRouter } from 'next/router';
-import { getSermonCount } from '../../lib/api';
+import { getSermonCount, getSermons } from '../../lib/api';
 import { entriesPerPage, languages } from '../../lib/constants';
 
 jest.mock('../../lib/api');
@@ -23,6 +23,8 @@ function setSermonCount(count: number) {
 }
 
 describe('sermons list page', () => {
+	beforeEach(() => jest.resetAllMocks());
+
 	it('can be rendered', async () => {
 		await renderPage();
 	});
@@ -44,6 +46,8 @@ describe('sermons list page', () => {
 	});
 
 	it('sets proper fallback strategy', async () => {
+		setSermonCount(1);
+
 		const { fallback } = await getStaticPaths();
 
 		expect(fallback).toBe('unstable_blocking');
@@ -59,8 +63,21 @@ describe('sermons list page', () => {
 	});
 
 	it('uses language codes to get sermon counts', async () => {
+		setSermonCount(1);
+
 		await getStaticPaths();
 
 		expect(getSermonCount).toBeCalledWith('ENGLISH');
+	});
+
+	it('gets sermons for list page', async () => {
+		await getStaticProps({ params: { i: 2, language: 'en' } });
+
+		await waitFor(() =>
+			expect(getSermons).toBeCalledWith('ENGLISH', {
+				offset: entriesPerPage,
+				first: entriesPerPage,
+			})
+		);
 	});
 });

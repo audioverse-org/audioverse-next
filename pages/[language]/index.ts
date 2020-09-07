@@ -1,5 +1,5 @@
 import Home from '../../containers/home';
-import { getRecentSermons } from '../../lib/api';
+import { getSermons } from '../../lib/api';
 import { languages } from '../../lib/constants';
 import _ from 'lodash';
 
@@ -9,7 +9,7 @@ export async function getStaticProps({ params }) {
 	const language = _.get(params, 'language'),
 		langKey = _.findKey(languages, (l) => l.base_url === language);
 
-	const sermons = await getRecentSermons(langKey);
+	const sermons = await getSermons(langKey);
 	return {
 		props: {
 			sermons: (sermons && sermons.nodes) || [],
