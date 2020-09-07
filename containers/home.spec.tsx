@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
 import { getRecentSermons } from '../lib/api';
@@ -7,8 +7,12 @@ import { useRouter } from 'next/router';
 jest.mock('../lib/api');
 jest.mock('next/router');
 
-const renderHome = async ({ params = {}, query = {} } = {}) => {
+function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
+}
+
+const renderHome = async ({ params = {}, query = {} } = {}) => {
+	loadQuery(query);
 	const { props } = await getStaticProps({ params });
 	return render(<Home {...props} />);
 };
@@ -81,5 +85,11 @@ describe('home page', () => {
 		const href = el.getAttribute('href');
 
 		expect(href).toBe('/es/sermons/1');
+	});
+
+	it('queries with language', async () => {
+		await renderHome({ params: { language: 'es' } });
+
+		await waitFor(() => expect(getRecentSermons).toBeCalledWith('SPANISH'));
 	});
 });

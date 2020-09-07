@@ -15,7 +15,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const allPosts = await getLatestSermons();
+	const allPosts = await getLatestSermons('ENGLISH');
 	const cutOffDate = new Date('2020-06-01');
 
 	return {

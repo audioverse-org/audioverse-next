@@ -1,5 +1,6 @@
 import { getRecentSermons as getLatestSermons } from '../../lib/api';
 import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
+import { waitFor } from '@testing-library/dom';
 
 jest.mock('../../lib/api');
 
@@ -9,6 +10,6 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		expect(getLatestSermons).toBeCalled();
+		await waitFor(() => expect(getLatestSermons).toBeCalledWith('ENGLISH'));
 	});
 });
