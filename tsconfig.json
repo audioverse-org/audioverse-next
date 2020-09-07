@@ -16,6 +16,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
     "allowJs": true,
