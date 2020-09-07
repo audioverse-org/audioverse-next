@@ -13,6 +13,17 @@ const renderHome = async ({ params = {}, query = {} } = {}) => {
 	return render(<Home {...props} />);
 };
 
+function loadRecentSermons() {
+	(getRecentSermons as jest.Mock).mockReturnValue({
+		nodes: [
+			{
+				id: 1,
+				title: 'the_sermon_title',
+			},
+		],
+	});
+}
+
 describe('home page', () => {
 	it('revalidates static copy every 10s', async () => {
 		const { revalidate } = await getStaticProps({ params: {} });
@@ -39,14 +50,7 @@ describe('home page', () => {
 	});
 
 	it('displays recent sermons', async () => {
-		(getRecentSermons as jest.Mock).mockReturnValue({
-			nodes: [
-				{
-					id: 1,
-					title: 'the_sermon_title',
-				},
-			],
-		});
+		loadRecentSermons();
 
 		const { getByText } = await renderHome();
 
@@ -54,14 +58,7 @@ describe('home page', () => {
 	});
 
 	it('links sermons', async () => {
-		(getRecentSermons as jest.Mock).mockReturnValue({
-			nodes: [
-				{
-					id: 1,
-					title: 'the_sermon_title',
-				},
-			],
-		});
+		loadRecentSermons();
 
 		const { getByText } = await renderHome({ query: { language: 'en' } });
 		const el = getByText('the_sermon_title');
@@ -77,14 +74,7 @@ describe('home page', () => {
 	});
 
 	it('uses query lang in urls', async () => {
-		(getRecentSermons as jest.Mock).mockReturnValue({
-			nodes: [
-				{
-					id: 1,
-					title: 'the_sermon_title',
-				},
-			],
-		});
+		loadRecentSermons();
 
 		const { getByText } = await renderHome({ query: { language: 'es' } });
 		const el = getByText('the_sermon_title');
