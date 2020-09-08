@@ -1,6 +1,6 @@
-import SermonDetail from '../../../containers/sermon/detail';
-import { getSermon, getSermons } from '../../../lib/api';
-import { LANGUAGES } from '../../../lib/constants';
+import SermonDetail from '@containers/sermon/detail';
+import { getSermon, getSermons } from '@lib/api';
+import { LANGUAGES } from '@lib/constants';
 
 export default SermonDetail;
 

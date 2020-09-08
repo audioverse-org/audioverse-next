@@ -2,11 +2,11 @@ import { render, waitFor } from '@testing-library/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { getSermonCount, getSermons } from '../../lib/api';
-import { ENTRIES_PER_PAGE, LANGUAGES } from '../../lib/constants';
-import SermonList, { getStaticPaths, getStaticProps } from '../../pages/[language]/sermons/page/[i]';
+import { getSermonCount, getSermons } from '@lib/api';
+import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import SermonList, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/page/[i]';
 
-jest.mock('../../lib/api');
+jest.mock('@lib/api');
 jest.mock('next/router');
 
 function loadQuery(query = {}) {

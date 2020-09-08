@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import SermonList from '../../../../containers/sermon/list';
-import { getSermonCount, getSermons } from '../../../../lib/api';
-import { ENTRIES_PER_PAGE, LANGUAGES } from '../../../../lib/constants';
+import SermonList from '@containers/sermon/list';
+import { getSermonCount, getSermons } from '@lib/api';
+import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export default SermonList;
 
