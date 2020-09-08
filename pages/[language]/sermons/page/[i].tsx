@@ -8,14 +8,15 @@ export default SermonList;
 export async function getStaticProps({ params }) {
 	const { i, language } = params,
 		langKey = _.findKey(languages, (l) => l.base_url === language),
-		offset = (i - 1) * entriesPerPage;
+		offset = (i - 1) * entriesPerPage,
+		response = await getSermons(langKey, {
+			offset,
+			first: entriesPerPage,
+		});
 
 	return {
 		props: {
-			sermons: await getSermons(langKey, {
-				offset,
-				first: entriesPerPage,
-			}),
+			sermons: response.nodes,
 		},
 	};
 }

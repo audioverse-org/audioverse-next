@@ -60,7 +60,7 @@ fragment SermonsFragment on Recording {
 		{
 			variables: {
 				language,
-				offset: offset || null,
+				offset,
 				first,
 			},
 		}
@@ -71,25 +71,25 @@ fragment SermonsFragment on Recording {
 export async function getSermon(id) {
 	const data = await fetchAPI(
 		`
-  query loadSermonQuery($id: ID!) {
-    sermon(id: $id) {
-      ...SermonFragment
-    }
+query loadSermonQuery($id: ID!) {
+	sermon(id: $id) {
+		...SermonFragment
+	}
 }
 fragment SermonFragment on Recording {
-    id
-    title
-    persons {
-        name
-    }
-    audioFiles {
-        url
-    }
-    description
-    imageWithFallback {
-        url(size: 50)
-    }
-    recordingDate
+	id
+	title
+	persons {
+			name
+	}
+	audioFiles {
+			url
+	}
+	description
+	imageWithFallback {
+			url(size: 50)
+	}
+	recordingDate
 }
   `,
 		{

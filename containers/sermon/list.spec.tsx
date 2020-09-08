@@ -22,10 +22,23 @@ function setSermonCount(count: number) {
 	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
 }
 
+function loadSermons() {
+	(getSermons as jest.Mock).mockReturnValue({
+		nodes: [
+			{
+				id: 1,
+				title: 'the_sermon_title',
+			},
+		],
+	});
+}
+
 describe('sermons list page', () => {
 	beforeEach(() => jest.resetAllMocks());
 
 	it('can be rendered', async () => {
+		loadSermons();
+
 		await renderPage();
 	});
 
@@ -71,6 +84,8 @@ describe('sermons list page', () => {
 	});
 
 	it('gets sermons for list page', async () => {
+		loadSermons();
+
 		await getStaticProps({ params: { i: 2, language: 'en' } });
 
 		await waitFor(() =>
@@ -79,5 +94,13 @@ describe('sermons list page', () => {
 				first: entriesPerPage,
 			})
 		);
+	});
+
+	it('displays sermons list', async () => {
+		loadSermons();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sermon_title')).toBeDefined();
 	});
 });

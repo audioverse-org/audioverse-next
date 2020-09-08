@@ -1,19 +1,10 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import RecordingList from '../components/molecules/recordingList';
 
 export default function Home({ sermons }) {
-	const router = useRouter(),
-		lang = router.query.language;
-
 	return (
 		<div>
-			<ul>
-				{sermons.map((s) => (
-					<li key={s.id}>
-						<a href={`/${lang}/sermons/${s.id}`}>{s.title}</a>
-					</li>
-				))}
-			</ul>
+			<RecordingList sermons={sermons} />
 		</div>
 	);
 }
