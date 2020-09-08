@@ -1,9 +1,10 @@
 import { render, waitFor } from '@testing-library/react';
-import React from 'react';
-import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
-import { getSermons } from '../lib/api';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { getSermons } from '../lib/api';
 import { entriesPerPage } from '../lib/constants';
+import Home, { getStaticPaths, getStaticProps } from '../pages/[language]';
 
 jest.mock('../lib/api');
 jest.mock('next/router');

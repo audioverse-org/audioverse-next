@@ -1,6 +1,7 @@
-import { getSermons, getSermons as getLatestSermons } from '../../lib/api';
-import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
 import { waitFor } from '@testing-library/dom';
+
+import { getSermons as getLatestSermons, getSermons } from '../../lib/api';
+import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
 
 jest.mock('../../lib/api');
 

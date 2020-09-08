@@ -1,7 +1,8 @@
+import _ from 'lodash';
+
 import Home from '../../containers/home';
 import { getSermons } from '../../lib/api';
 import { languages } from '../../lib/constants';
-import _ from 'lodash';
 
 export default Home;
 
