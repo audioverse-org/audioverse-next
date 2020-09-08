@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermonCount, getSermons } from '../../lib/api';
-import { entriesPerPage, languages } from '../../lib/constants';
+import { ENTRIES_PER_PAGE, LANGUAGES } from '../../lib/constants';
 import SermonList, { getStaticPaths, getStaticProps } from '../../pages/[language]/sermons/page/[i]';
 
 jest.mock('../../lib/api');
@@ -68,11 +68,11 @@ describe('sermons list page', () => {
 	});
 
 	it('generates all pages in language', async () => {
-		setSermonCount(100 * entriesPerPage);
+		setSermonCount(100 * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
 
-		const expected = 100 * Object.keys(languages).length;
+		const expected = 100 * Object.keys(LANGUAGES).length;
 		expect(result.paths.length).toBe(expected);
 	});
 
@@ -91,8 +91,8 @@ describe('sermons list page', () => {
 
 		await waitFor(() =>
 			expect(getSermons).toBeCalledWith('ENGLISH', {
-				offset: entriesPerPage,
-				first: entriesPerPage,
+				offset: ENTRIES_PER_PAGE,
+				first: ENTRIES_PER_PAGE,
 			})
 		);
 	});

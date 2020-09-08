@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermons } from '../lib/api';
-import { entriesPerPage } from '../lib/constants';
+import { ENTRIES_PER_PAGE } from '../lib/constants';
 import Home, { getStaticPaths, getStaticProps } from '../pages/[language]';
 
 jest.mock('../lib/api');

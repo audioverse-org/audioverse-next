@@ -2,17 +2,17 @@ import _ from 'lodash';
 
 import SermonList from '../../../../containers/sermon/list';
 import { getSermonCount, getSermons } from '../../../../lib/api';
-import { entriesPerPage, languages } from '../../../../lib/constants';
+import { ENTRIES_PER_PAGE, LANGUAGES } from '../../../../lib/constants';
 
 export default SermonList;
 
 export async function getStaticProps({ params }) {
 	const { i, language } = params,
-		langKey = _.findKey(languages, (l) => l.base_url === language),
-		offset = (i - 1) * entriesPerPage,
+		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
+		offset = (i - 1) * ENTRIES_PER_PAGE,
 		response = await getSermons(langKey, {
 			offset,
-			first: entriesPerPage,
+			first: ENTRIES_PER_PAGE,
 		});
 
 	return {
@@ -23,11 +23,11 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const pathSetPromises = Object.keys(languages).map(async (k) => {
+	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
 			const sermonCount = await getSermonCount(k),
-				pageCount = Math.ceil(sermonCount / entriesPerPage),
+				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),
 				numbers = Array.from(Array(pageCount).keys()),
-				base = languages[k].base_url;
+				base = LANGUAGES[k].base_url;
 
 			return numbers.map((x) => `/${base}/sermons/page/${x + 1}`);
 		}),
