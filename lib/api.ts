@@ -29,7 +29,7 @@ async function fetchAPI(query, { variables = {} } = {}) {
 export async function getSermons(language, { offset = null, first = 1000 } = {}) {
 	const data = await fetchAPI(
 		`
-  query loadPagesQuery($language: Language!, $offset: Int, $first: Int!) {
+  query getSermons($language: Language!, $offset: Int, $first: Int!) {
     sermons(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: CREATED_AT}) {
       nodes {
             ...SermonsFragment
@@ -71,7 +71,7 @@ fragment SermonsFragment on Recording {
 export async function getSermon(id) {
 	const data = await fetchAPI(
 		`
-query loadSermonQuery($id: ID!) {
+query getSermon($id: ID!) {
 	sermon(id: $id) {
 		...SermonFragment
 	}
@@ -104,7 +104,7 @@ fragment SermonFragment on Recording {
 export async function getSermonCount(language): Promise<number> {
 	const data = fetchAPI(
 		`
-	query countQuery($language: Language!) {
+	query getSermonCount($language: Language!) {
     sermons(language: $language) {
       aggregate { 
         count 
