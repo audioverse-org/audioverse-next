@@ -26,7 +26,7 @@ async function fetchAPI(query, { variables = {} } = {}) {
 	return json.data;
 }
 
-export async function getSermons(language, { offset = 0, first = 1000 } = {}) {
+export async function getSermons(language, { offset = null, first = 1000 } = {}) {
 	const data = await fetchAPI(
 		`
   query loadPagesQuery($language: Language!, $offset: Int, $first: Int!) {
@@ -60,7 +60,7 @@ fragment SermonsFragment on Recording {
 		{
 			variables: {
 				language,
-				offset,
+				offset: offset || null,
 				first,
 			},
 		}
