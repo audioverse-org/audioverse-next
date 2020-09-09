@@ -5,7 +5,13 @@ import { LANGUAGES } from '@lib/constants';
 export default SermonDetail;
 
 export async function getStaticProps({ params }) {
-	const sermon = await getSermon(params.id);
+	let sermon;
+
+	try {
+		sermon = await getSermon(params.id);
+	} catch {
+		sermon = null;
+	}
 
 	return {
 		props: {

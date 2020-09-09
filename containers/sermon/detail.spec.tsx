@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/dom';
 
-import { getSermons as getLatestSermons, getSermons } from '@lib/api';
-import { getStaticPaths } from '@pages/[language]/sermons/[id]';
+import { getSermon, getSermons } from '@lib/api';
+import { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
 
 jest.mock('@lib/api');
 
@@ -25,7 +25,7 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getLatestSermons).toBeCalledWith('ENGLISH'));
+		await waitFor(() => expect(getSermons).toBeCalledWith('ENGLISH'));
 	});
 
 	it('gets recent sermons in all languages', async () => {
@@ -33,7 +33,7 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getLatestSermons).toBeCalledWith('SPANISH'));
+		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
 	});
 
 	it('returns paths', async () => {
@@ -50,5 +50,15 @@ describe('detailPageGenerator', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).toContain('/es/sermons/1');
+	});
+
+	it('catches API errors', async () => {
+		(getSermon as jest.Mock).mockImplementation(() => {
+			throw new Error('API failure');
+		});
+
+		const result = await getStaticProps({ params: { id: 1 } });
+
+		expect(result.props.sermon).toBeNull();
 	});
 });
