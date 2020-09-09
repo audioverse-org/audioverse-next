@@ -83,4 +83,12 @@ describe('detailPageGenerator', () => {
 
 		expect(getByText('404')).toBeDefined();
 	});
+
+	it('shows loading screen', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: true });
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Loading…')).toBeDefined();
+	});
 });
