@@ -1,10 +1,10 @@
 import { waitFor } from '@testing-library/dom';
+import { render } from '@testing-library/react';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 import { getSermon, getSermons } from '@lib/api';
 import SermonDetail, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
-import { render } from '@testing-library/react';
-import React from 'react';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
