@@ -1,10 +1,11 @@
 import { render, waitFor } from '@testing-library/react';
-import React from 'react';
-import Home, { getStaticProps, getStaticPaths } from '../pages/[language]';
-import { getRecentSermons } from '../lib/api';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-jest.mock('../lib/api');
+import { getSermons } from '@lib/api';
+import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
+
+jest.mock('@lib/api');
 jest.mock('next/router');
 
 function loadQuery(query = {}) {
@@ -18,7 +19,7 @@ const renderHome = async ({ params = {}, query = {} } = {}) => {
 };
 
 function loadRecentSermons() {
-	(getRecentSermons as jest.Mock).mockReturnValue({
+	(getSermons as jest.Mock).mockReturnValue({
 		nodes: [
 			{
 				id: 1,
@@ -52,7 +53,7 @@ describe('home page', () => {
 	it('gets recent sermons', async () => {
 		await renderHome();
 
-		expect(getRecentSermons).toHaveBeenCalled();
+		expect(getSermons).toHaveBeenCalled();
 	});
 
 	it('displays recent sermons', async () => {
@@ -92,6 +93,6 @@ describe('home page', () => {
 	it('queries with language', async () => {
 		await renderHome({ params: { language: 'es' } });
 
-		await waitFor(() => expect(getRecentSermons).toBeCalledWith('SPANISH'));
+		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
 	});
 });

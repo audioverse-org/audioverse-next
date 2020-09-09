@@ -1,51 +1,44 @@
-import {useRouter} from "next/router";
-import ErrorPage from "next/error";
-import styles from "./detail.module.scss";
-import React from "react";
+import _ from 'lodash';
+import React from 'react';
 
+import WithFailStates from '@components/templates/withFailStates';
 
-export default function SermonDetail({sermon}) {
-    const router = useRouter()
+import styles from './detail.module.scss';
 
-    if (!router.isFallback && !sermon) {
-        return <ErrorPage statusCode={404}/>
-    }
+export default function SermonDetail({ sermon }) {
+	const imageSrc = _.get(sermon, 'imageWithFallback.url'),
+		imageAlt = _.get(sermon, 'title');
 
-    const imageSrc = sermon.imageWithFallback.url,
-        imageAlt = sermon.title;
-
-    return (
-        <div>
-            {router.isFallback ? (
-                <h1>Loading…</h1>
-            ) : (
-                <div>
-                    <div className={styles.meta}>
-                        {imageSrc ? <img src={imageSrc} alt={imageAlt}/> : null}
-                        <div>
-                            <h1>{sermon.title}</h1>
-                            <ul className={styles.speakers}>
-                                {sermon.persons.map(speaker => {
-                                    return <li key={speaker.name}>{speaker.name}</li>
-                                })}
-                            </ul>
-                        </div>
-                    </div>
-
-                    {sermon.recordingDate ? <p>{(new Date(sermon.recordingDate)).toLocaleDateString()}</p> : null}
-                    {sermon.audioFiles.map(file => {
-                        return <div key={file.url}>
-                            <audio controls src={file.url} preload={'metadata'}>Your browser doesn't support this
-                                player.
-                            </audio>
-                        </div>
-                    })}
-
-                    {sermon.description ? <div dangerouslySetInnerHTML={{__html: sermon.description}}/> : null}
-
-                    Other sermons: ...
-                </div>
-            )}
-        </div>
-    )
+	return (
+		<WithFailStates
+			dependencies={sermon}
+			getChildren={() => (
+				<>
+					<div className={styles.meta}>
+						{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
+						<div>
+							<h1>{sermon.title}</h1>
+							<ul className={styles.speakers}>
+								{sermon.persons.map((speaker) => {
+									return <li key={speaker.name}>{speaker.name}</li>;
+								})}
+							</ul>
+						</div>
+					</div>
+					{sermon.recordingDate ? <p>{new Date(sermon.recordingDate).toLocaleDateString()}</p> : null}
+					{sermon.audioFiles.map((file) => {
+						return (
+							<div key={file.url}>
+								<audio controls src={file.url} preload={'metadata'}>
+									Your browser doesn't support this player.
+								</audio>
+							</div>
+						);
+					})}
+					{sermon.description ? <div dangerouslySetInnerHTML={{ __html: sermon.description }} /> : null}
+					Other sermons: ...
+				</>
+			)}
+		/>
+	);
 }

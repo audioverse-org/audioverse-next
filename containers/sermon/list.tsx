@@ -2,7 +2,7 @@ import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
 
-export default function Home({ sermons }) {
+export default function SermonList({ sermons }) {
 	return (
 		<div>
 			<RecordingList sermons={sermons} />

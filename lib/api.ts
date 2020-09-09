@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
 
-async function fetchAPI(query, { variables } = {}) {
+async function fetchAPI(query, { variables = {} } = {}) {
 	const headers = { 'Content-Type': 'application/json' };
 
 	const res = await fetch(API_URL, {
@@ -24,11 +26,11 @@ async function fetchAPI(query, { variables } = {}) {
 	return json.data;
 }
 
-export async function getRecentSermons(language) {
+export async function getSermons(language, { offset = null, first = 1000 } = {}) {
 	const data = await fetchAPI(
 		`
-  query loadPagesQuery($language: Language!, $cursor: String, $first: Int!) {
-    sermons(language: $language, first: $first, after: $cursor, orderBy: {direction: DESC, field: CREATED_AT}) {
+  query getSermons($language: Language!, $offset: Int, $first: Int!) {
+    sermons(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: CREATED_AT}) {
       nodes {
             ...SermonsFragment
         }
@@ -58,8 +60,8 @@ fragment SermonsFragment on Recording {
 		{
 			variables: {
 				language,
-				cursor: null,
-				first: 1000,
+				offset,
+				first,
 			},
 		}
 	);
@@ -69,25 +71,25 @@ fragment SermonsFragment on Recording {
 export async function getSermon(id) {
 	const data = await fetchAPI(
 		`
-  query loadSermonQuery($id: ID!) {
-    sermon(id: $id) {
-      ...SermonFragment
-    }
+query getSermon($id: ID!) {
+	sermon(id: $id) {
+		...SermonFragment
+	}
 }
 fragment SermonFragment on Recording {
-    id
-    title
-    persons {
-        name
-    }
-    audioFiles {
-        url
-    }
-    description
-    imageWithFallback {
-        url(size: 50)
-    }
-    recordingDate
+	id
+	title
+	persons {
+			name
+	}
+	audioFiles {
+			url
+	}
+	description
+	imageWithFallback {
+			url(size: 50)
+	}
+	recordingDate
 }
   `,
 		{
@@ -97,4 +99,24 @@ fragment SermonFragment on Recording {
 		}
 	);
 	return data && data.sermon;
+}
+
+export async function getSermonCount(language): Promise<number> {
+	const data = fetchAPI(
+		`
+	query getSermonCount($language: Language!) {
+    sermons(language: $language) {
+      aggregate { 
+        count 
+      }
+    }
+	}
+	`,
+		{
+			variables: {
+				language,
+			},
+		}
+	);
+	return _.get(data, 'sermons.aggregate.count') || 0;
 }

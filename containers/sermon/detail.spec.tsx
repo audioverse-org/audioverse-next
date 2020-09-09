@@ -1,11 +1,16 @@
-import { getRecentSermons, getRecentSermons as getLatestSermons } from '../../lib/api';
-import { getStaticPaths } from '../../pages/[language]/sermons/[id]';
 import { waitFor } from '@testing-library/dom';
+import { render } from '@testing-library/react';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-jest.mock('../../lib/api');
+import { getSermon, getSermons } from '@lib/api';
+import SermonDetail, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
+
+jest.mock('@lib/api');
+jest.mock('next/router');
 
 function loadRecentSermons() {
-	(getRecentSermons as jest.Mock).mockReturnValue({
+	(getSermons as jest.Mock).mockReturnValue({
 		nodes: [
 			{
 				id: 1,
@@ -16,6 +21,17 @@ function loadRecentSermons() {
 	});
 }
 
+function loadGetSermonError() {
+	(getSermon as jest.Mock).mockImplementation(() => {
+		throw new Error('API failure');
+	});
+}
+
+async function renderPage() {
+	const { props } = await getStaticProps({ params: { id: 1 } });
+	return render(<SermonDetail {...props} />);
+}
+
 describe('detailPageGenerator', () => {
 	beforeEach(() => jest.resetAllMocks());
 
@@ -24,7 +40,7 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getLatestSermons).toBeCalledWith('ENGLISH'));
+		await waitFor(() => expect(getSermons).toBeCalledWith('ENGLISH'));
 	});
 
 	it('gets recent sermons in all languages', async () => {
@@ -32,7 +48,7 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getLatestSermons).toBeCalledWith('SPANISH'));
+		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
 	});
 
 	it('returns paths', async () => {
@@ -49,5 +65,30 @@ describe('detailPageGenerator', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).toContain('/es/sermons/1');
+	});
+
+	it('catches API errors', async () => {
+		loadGetSermonError();
+
+		const result = await getStaticProps({ params: { id: 1 } });
+
+		expect(result.props.sermon).toBeNull();
+	});
+
+	it('renders 404 on missing sermon', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		loadGetSermonError();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeDefined();
+	});
+
+	it('shows loading screen', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: true });
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Loading…')).toBeDefined();
 	});
 });
