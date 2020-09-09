@@ -1,9 +1,13 @@
 import { waitFor } from '@testing-library/dom';
+import { useRouter } from 'next/router';
 
 import { getSermon, getSermons } from '@lib/api';
-import { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
+import SermonDetail, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
+import { render } from '@testing-library/react';
+import React from 'react';
 
 jest.mock('@lib/api');
+jest.mock('next/router');
 
 function loadRecentSermons() {
 	(getSermons as jest.Mock).mockReturnValue({
@@ -60,5 +64,17 @@ describe('detailPageGenerator', () => {
 		const result = await getStaticProps({ params: { id: 1 } });
 
 		expect(result.props.sermon).toBeNull();
+	});
+
+	it('renders 404 on missing sermon', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		(getSermon as jest.Mock).mockImplementation(() => {
+			throw new Error('API failure');
+		});
+
+		const { props } = await getStaticProps({ params: { id: 1 } });
+		const { getByText } = render(<SermonDetail {...props} />);
+
+		expect(getByText('404')).toBeDefined();
 	});
 });
