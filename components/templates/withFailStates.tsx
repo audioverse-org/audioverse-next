@@ -2,16 +2,23 @@ import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function WithFailStates({ getChildren, dependencies }) {
-	const router = useRouter();
+const withFailStates = <P extends any>(
+	Component: React.ComponentType<P>,
+	dependencyKey?: string
+): React.ComponentType<P> | React.ReactChild => {
+	function WithFailStates(props) {
+		const router = useRouter();
 
-	if (!router.isFallback && !dependencies) {
-		return <ErrorPage statusCode={404} />;
+		if (!router.isFallback && !props[dependencyKey]) {
+			return <ErrorPage statusCode={404} />;
+		}
+
+		if (router.isFallback) {
+			return <h1>Loading…</h1>;
+		}
+
+		return <Component {...(props as P)} />;
 	}
-
-	if (router.isFallback) {
-		return <h1>Loading…</h1>;
-	}
-
-	return getChildren();
-}
+	return WithFailStates;
+};
+export default withFailStates;
