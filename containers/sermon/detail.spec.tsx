@@ -21,6 +21,17 @@ function loadRecentSermons() {
 	});
 }
 
+function loadGetSermonError() {
+	(getSermon as jest.Mock).mockImplementation(() => {
+		throw new Error('API failure');
+	});
+}
+
+async function renderPage() {
+	const { props } = await getStaticProps({ params: { id: 1 } });
+	return render(<SermonDetail {...props} />);
+}
+
 describe('detailPageGenerator', () => {
 	beforeEach(() => jest.resetAllMocks());
 
@@ -57,9 +68,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('catches API errors', async () => {
-		(getSermon as jest.Mock).mockImplementation(() => {
-			throw new Error('API failure');
-		});
+		loadGetSermonError();
 
 		const result = await getStaticProps({ params: { id: 1 } });
 
@@ -68,12 +77,9 @@ describe('detailPageGenerator', () => {
 
 	it('renders 404 on missing sermon', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		(getSermon as jest.Mock).mockImplementation(() => {
-			throw new Error('API failure');
-		});
+		loadGetSermonError();
 
-		const { props } = await getStaticProps({ params: { id: 1 } });
-		const { getByText } = render(<SermonDetail {...props} />);
+		const { getByText } = await renderPage();
 
 		expect(getByText('404')).toBeDefined();
 	});
