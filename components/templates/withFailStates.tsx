@@ -9,5 +9,9 @@ export default function WithFailStates({ getChildren, dependencies }) {
 		return <ErrorPage statusCode={404} />;
 	}
 
+	if (router.isFallback) {
+		return <h1>Loading…</h1>;
+	}
+
 	return getChildren();
 }
