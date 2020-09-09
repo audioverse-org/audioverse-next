@@ -1,14 +1,11 @@
-import ErrorPage from 'next/error';
-import { useRouter } from 'next/router';
+import _ from 'lodash';
 import React from 'react';
 
-import styles from './detail.module.scss';
 import WithFailStates from '@components/templates/withFailStates';
-import _ from 'lodash';
+
+import styles from './detail.module.scss';
 
 export default function SermonDetail({ sermon }) {
-	const router = useRouter();
-
 	const imageSrc = _.get(sermon, 'imageWithFallback.url'),
 		imageAlt = _.get(sermon, 'title');
 
