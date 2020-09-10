@@ -5,7 +5,7 @@ import React from 'react';
 const withFailStates = <P extends any>(
 	Component: React.ComponentType<P>,
 	dependencyKey?: string
-): React.ComponentType<P> | React.ReactChild => {
+): React.ComponentType<P> => {
 	function WithFailStates(props) {
 		const router = useRouter();
 
