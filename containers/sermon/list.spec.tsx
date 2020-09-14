@@ -24,20 +24,20 @@ function setSermonCount(count: number) {
 }
 
 function loadSermons(nodes = null) {
-	(getSermons as jest.Mock).mockReturnValue({
-		nodes: nodes || [
-			{
-				id: 1,
-				title: 'the_sermon_title',
-			},
-		],
-	});
+	(getSermons as jest.Mock).mockReturnValue(
+		Promise.resolve({
+			nodes: nodes || [
+				{
+					id: 1,
+					title: 'the_sermon_title',
+				},
+			],
+		})
+	);
 }
 
 function loadGetSermonsError() {
-	(getSermons as jest.Mock).mockImplementation(() => {
-		throw new Error('API failure');
-	});
+	(getSermons as jest.Mock).mockReturnValue(Promise.reject('API failure'));
 }
 
 describe('sermons list page', () => {
