@@ -1,12 +1,4 @@
-$gray-night: #1c1c1d;
-$gray-dark: #242426;
-$gray-mid: #262627;
-$gray-light: #747474;
-$gray-lighter: #dbdbdb;
-$gray-lightest: #e5e5e5;
-$gray-bleached: #eee;
-
-$accent: #3DA88E;
+@import "common";
 
 .template-base {
   > * {

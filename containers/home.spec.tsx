@@ -12,7 +12,7 @@ function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
 }
 
-const renderHome = async ({ params = {}, query = {} } = {}) => {
+const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
 	return render(<Home {...props} />);
@@ -33,7 +33,7 @@ describe('home page', () => {
 	beforeEach(() => jest.resetAllMocks());
 
 	it('revalidates static copy every 10s', async () => {
-		const { revalidate } = await getStaticProps({ params: {} });
+		const { revalidate } = await getStaticProps({ params: { language: 'en' } });
 
 		expect(revalidate).toBe(10);
 	});

@@ -13,7 +13,7 @@ function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
 }
 
-const renderPage = async ({ params = {}, query = {} } = {}) => {
+const renderPage = async ({ params = { i: '1', language: 'en' }, query = {} } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
 	return render(<SermonList {...props} />);
@@ -23,7 +23,7 @@ function setSermonCount(count: number) {
 	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
 }
 
-function loadSermons(nodes = null) {
+function loadSermons({ nodes = undefined, count = undefined }: { nodes?: any[]; count?: number } = {}) {
 	(getSermons as jest.Mock).mockReturnValue(
 		Promise.resolve({
 			nodes: nodes || [
@@ -32,6 +32,9 @@ function loadSermons(nodes = null) {
 					title: 'the_sermon_title',
 				},
 			],
+			aggregate: {
+				count: count || 1,
+			},
 		})
 	);
 }
@@ -122,10 +125,48 @@ describe('sermons list page', () => {
 
 	it('returns 404 on empty data', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadSermons([]);
+		loadSermons({ nodes: [] });
 
 		const { getByText } = await renderPage();
 
 		expect(getByText('404')).toBeDefined();
+	});
+
+	it('includes pagination', async () => {
+		loadSermons();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1')).toBeDefined();
+	});
+
+	it('links to last pagination page', async () => {
+		loadSermons({ count: 75 });
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('3')).toBeDefined();
+	});
+
+	it('calculates pages using items per page', async () => {
+		loadSermons({ count: 75 });
+
+		const { getByText } = await renderPage({ params: { i: '3', language: 'en' } });
+
+		expect(() => getByText('4')).toThrow();
+	});
+
+	it('handles string page index', async () => {
+		loadSermons();
+
+		await renderPage({ params: { i: '3', language: 'en' } });
+	});
+
+	it('links pagination properly', async () => {
+		loadSermons();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1').href).toContain('/en/sermons/page/1');
 	});
 });

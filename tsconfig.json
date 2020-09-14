@@ -21,7 +21,7 @@
     "strictPropertyInitialization": false,
     "allowJs": true,
     "jsx": "preserve",
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,

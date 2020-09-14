@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.161",
     "lodash": "^4.17.20",
     "next": "9.5.2",
     "react": "16.13.1",

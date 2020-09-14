@@ -10,6 +10,8 @@ export async function getStaticProps({ params }) {
 	const language = _.get(params, 'language'),
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language);
 
+	if (!langKey) throw Error('Missing or invalid language');
+
 	const sermons = await getSermons(langKey);
 	return {
 		props: {
