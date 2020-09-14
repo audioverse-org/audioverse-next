@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import SermonList from '@containers/sermon/list';
-import { getSermonCount, getSermons } from '@lib/api';
+import { getSermon, getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export default SermonList;
@@ -9,16 +9,17 @@ export default SermonList;
 export async function getStaticProps({ params }) {
 	const { i, language } = params,
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
-		offset = (i - 1) * ENTRIES_PER_PAGE,
-		response = await getSermons(langKey, {
-			offset,
-			first: ENTRIES_PER_PAGE,
-		});
+		offset = (i - 1) * ENTRIES_PER_PAGE;
+
+	const sermons = await getSermons(langKey, {
+		offset,
+		first: ENTRIES_PER_PAGE,
+	})
+		.then((response) => response.nodes)
+		.catch(() => null);
 
 	return {
-		props: {
-			sermons: response.nodes,
-		},
+		props: { sermons },
 	};
 }
 

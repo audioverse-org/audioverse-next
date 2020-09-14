@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { getSermonCount, getSermons } from '@lib/api';
+import { getSermon, getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 import SermonList, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/page/[i]';
 
@@ -23,15 +23,21 @@ function setSermonCount(count: number) {
 	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
 }
 
-function loadSermons() {
-	(getSermons as jest.Mock).mockReturnValue({
-		nodes: [
-			{
-				id: 1,
-				title: 'the_sermon_title',
-			},
-		],
-	});
+function loadSermons(nodes = null) {
+	(getSermons as jest.Mock).mockReturnValue(
+		Promise.resolve({
+			nodes: nodes || [
+				{
+					id: 1,
+					title: 'the_sermon_title',
+				},
+			],
+		})
+	);
+}
+
+function loadGetSermonsError() {
+	(getSermons as jest.Mock).mockReturnValue(Promise.reject('API failure'));
 }
 
 describe('sermons list page', () => {
@@ -103,5 +109,23 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sermon_title')).toBeDefined();
+	});
+
+	it('renders 404 on api error', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		loadGetSermonsError();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeDefined();
+	});
+
+	it('returns 404 on empty data', async () => {
+		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		loadSermons([]);
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeDefined();
 	});
 });

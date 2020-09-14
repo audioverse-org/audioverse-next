@@ -4,12 +4,12 @@ import React from 'react';
 
 const withFailStates = <P extends any>(
 	Component: React.ComponentType<P>,
-	dependencyKey?: string
-): React.ComponentType<P> | React.ReactChild => {
+	should404?: (props) => boolean
+): React.ComponentType<P> => {
 	function WithFailStates(props) {
 		const router = useRouter();
 
-		if (!router.isFallback && !props[dependencyKey]) {
+		if (!router.isFallback && should404 && should404(props)) {
 			return <ErrorPage statusCode={404} />;
 		}
 

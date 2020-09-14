@@ -38,4 +38,4 @@ function SermonDetail({ sermon }) {
 	);
 }
 
-export default withFailStates(SermonDetail, 'sermon');
+export default withFailStates(SermonDetail, (props) => !props.sermon);
