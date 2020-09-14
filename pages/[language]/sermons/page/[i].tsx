@@ -6,7 +6,21 @@ import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export default SermonList;
 
-export async function getStaticProps({ params }) {
+interface StaticProps {
+	props: {
+		sermons: Sermon[];
+		pagination: {
+			total: number;
+			current: number;
+		};
+	};
+}
+
+interface GetStaticPropsArgs {
+	params: { i: string; language: string };
+}
+
+export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params,
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
 		offset = (i - 1) * ENTRIES_PER_PAGE;
@@ -32,7 +46,7 @@ export async function getStaticProps({ params }) {
 	};
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<StaticPaths> {
 	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
 			const sermonCount = await getSermonCount(k),
 				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),

@@ -1,10 +1,19 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import withFailStates from '@components/templates/withFailStates';
 
-function SermonList({ sermons, pagination }) {
+interface SermonListProps {
+	sermons: Sermon[];
+	pagination: {
+		current: number;
+		total: number;
+	};
+}
+
+function SermonList({ sermons, pagination }: SermonListProps) {
 	return (
 		<div>
 			<RecordingList sermons={sermons} />
@@ -13,6 +22,11 @@ function SermonList({ sermons, pagination }) {
 	);
 }
 
-const should404 = (props) => !props.sermons?.length;
+SermonList.propTypes = {
+	sermons: PropTypes.arrayOf(PropTypes.object),
+	pagination: PropTypes.object,
+};
+
+const should404 = (props: SermonListProps) => !props.sermons?.length;
 
 export default withFailStates(SermonList, should404);

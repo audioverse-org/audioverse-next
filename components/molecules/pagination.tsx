@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './pagination.module.scss';
 
-export function pagination(current: number, total: number) {
+export function pagination(current: number, total: number): (number | string)[] {
 	if (!current) throw Error('Current page number required');
 	if (!Number.isInteger(current)) throw Error('Current must be integer');
 	if (!Number.isInteger(total)) throw Error('Total must be integer');
@@ -35,13 +35,21 @@ const PaginationEntry = ({
 	label?: string;
 	base: string;
 	className?: string;
-}) => (
+}): JSX.Element => (
 	<li className={`${className} ${styles.link}`}>
 		{Number.isInteger(page) ? <a href={`${base}/page/${page}`}>{label || page}</a> : label || page}
 	</li>
 );
 
-export default function Pagination({ current, total, base }: { current: number; total: number; base: string }) {
+export default function Pagination({
+	current,
+	total,
+	base,
+}: {
+	current: number;
+	total: number;
+	base: string;
+}): JSX.Element {
 	const pagePrevious = current - 1,
 		pageNext = current + 1;
 

@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { getSermon, getSermonCount, getSermons } from '@lib/api';
+import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 import SermonList, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/page/[i]';
 

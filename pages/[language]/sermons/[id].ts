@@ -4,7 +4,14 @@ import { LANGUAGES } from '@lib/constants';
 
 export default SermonDetail;
 
-export async function getStaticProps({ params }) {
+interface StaticProps {
+	props: {
+		sermon: Sermon;
+	};
+	revalidate: number;
+}
+
+export async function getStaticProps({ params }: { params: { id: string } }): Promise<StaticProps> {
 	let sermon;
 
 	try {
@@ -21,7 +28,7 @@ export async function getStaticProps({ params }) {
 	};
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<StaticPaths> {
 	const keys = Object.keys(LANGUAGES),
 		pathSetPromises = keys.map(async (l) => {
 			const { nodes } = await getSermons(l),

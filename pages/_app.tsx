@@ -1,8 +1,9 @@
-import '../styles/globals.css';
+import PropTypes from 'prop-types';
 import React from 'react';
+import '../styles/globals.css';
 import '../styles/styles.scss';
 
-function MyApp({ Component, pageProps }) {
+function MyApp<P>({ Component, pageProps }: { Component: typeof React.Component; pageProps: P }): JSX.Element {
 	return (
 		<div className={'template-base'}>
 			<header className={'template-base__header'}>
@@ -14,5 +15,10 @@ function MyApp({ Component, pageProps }) {
 		</div>
 	);
 }
+
+MyApp.propTypes = {
+	Component: React.Component,
+	pageProps: PropTypes.object,
+};
 
 export default MyApp;
