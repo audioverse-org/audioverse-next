@@ -11,6 +11,6 @@ function SermonList({ sermons }) {
 	);
 }
 
-const should404 = (props) => !props['sermons'] || props['sermons'].length === 0;
+const should404 = (props) => !props.sermons?.length;
 
 export default withFailStates(SermonList, should404);
