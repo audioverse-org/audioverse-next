@@ -11,17 +11,12 @@ export async function getStaticProps({ params }) {
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
 		offset = (i - 1) * ENTRIES_PER_PAGE;
 
-	let sermons;
-
-	try {
-		const response = await getSermons(langKey, {
+	const sermons = await getSermons(langKey, {
 			offset,
 			first: ENTRIES_PER_PAGE,
-		});
-		sermons = response.nodes;
-	} catch {
-		sermons = null;
-	}
+		})
+		.then(response => response.nodes)
+		.catch(() => null);
 
 	return {
 		props: { sermons },
