@@ -1,4 +1,5 @@
 interface Sermon {
+	recordingDate: string;
 	id: string;
 	description: string;
 	persons: Person[];

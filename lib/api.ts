@@ -29,7 +29,7 @@ async function fetchAPI(query: string, { variables = {} } = {}) {
 export async function getSermons(
 	language: string,
 	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
-): Promise<Sermon[]> {
+): Promise<{ nodes: Sermon[] }> {
 	const data = await fetchAPI(
 		`
   query getSermons($language: Language!, $offset: Int, $first: Int!) {
@@ -71,7 +71,7 @@ fragment SermonsFragment on Recording {
 	return data && data.sermons;
 }
 
-export async function getSermon(id: number): Promise<Sermon> {
+export async function getSermon(id: number | string): Promise<Sermon> {
 	const data = await fetchAPI(
 		`
 query getSermon($id: ID!) {

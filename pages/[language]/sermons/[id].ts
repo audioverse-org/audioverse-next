@@ -6,7 +6,7 @@ export default SermonDetail;
 
 interface StaticProps {
 	props: {
-		sermon: Sermon;
+		sermon: Sermon | null;
 	};
 	revalidate: number;
 }

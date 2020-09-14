@@ -8,7 +8,7 @@ export default SermonList;
 
 interface StaticProps {
 	props: {
-		sermons: Sermon[];
+		sermons: Sermon[] | undefined;
 		pagination: {
 			total: number;
 			current: number;
@@ -23,7 +23,7 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params,
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
-		offset = (i - 1) * ENTRIES_PER_PAGE;
+		offset = (parseInt(i) - 1) * ENTRIES_PER_PAGE;
 
 	if (!langKey) throw Error('Missing or invalid language');
 
