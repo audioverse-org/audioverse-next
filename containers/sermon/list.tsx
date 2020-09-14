@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import withFailStates from '@components/templates/withFailStates';
-import Pagination from '@components/molecules/pagination';
 
 function SermonList({ sermons, pagination }) {
 	return (

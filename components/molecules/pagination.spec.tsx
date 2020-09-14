@@ -1,6 +1,7 @@
-import Pagination, { pagination } from './pagination';
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
+
+import Pagination, { pagination } from './pagination';
 
 describe('pagination component', () => {
 	it('has next button', () => {
@@ -95,7 +96,7 @@ describe('pagination algorithm', () => {
 
 	it('throws if passed a string for current', () => {
 		expect(() => {
-			// @ts-ignore
+			// @ts-expect-error Testing bad input
 			pagination('1', 1);
 		}).toThrow();
 	});

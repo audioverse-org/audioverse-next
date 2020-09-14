@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './pagination.module.scss';
 
 export function pagination(current: number, total: number) {
