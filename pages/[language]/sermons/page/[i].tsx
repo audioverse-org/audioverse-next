@@ -12,10 +12,10 @@ export async function getStaticProps({ params }) {
 		offset = (i - 1) * ENTRIES_PER_PAGE;
 
 	const sermons = await getSermons(langKey, {
-			offset,
-			first: ENTRIES_PER_PAGE,
-		})
-		.then(response => response.nodes)
+		offset,
+		first: ENTRIES_PER_PAGE,
+	})
+		.then((response) => response.nodes)
 		.catch(() => null);
 
 	return {
