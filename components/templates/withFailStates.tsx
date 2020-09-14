@@ -9,7 +9,7 @@ const withFailStates = <P extends any>(
 	function WithFailStates(props) {
 		const router = useRouter();
 
-		if (!router.isFallback && should404(props)) {
+		if (!router.isFallback && should404 && should404(props)) {
 			return <ErrorPage statusCode={404} />;
 		}
 
