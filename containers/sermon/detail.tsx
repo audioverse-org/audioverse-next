@@ -5,7 +5,7 @@ import withFailStates from '@components/templates/withFailStates';
 
 import styles from './detail.module.scss';
 
-interface SermonDetailProps {
+export interface SermonDetailProps {
 	sermon: Sermon | null;
 }
 

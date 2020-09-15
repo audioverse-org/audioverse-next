@@ -1,13 +1,11 @@
-import SermonDetail from '@containers/sermon/detail';
+import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { getSermon, getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
 
 export default SermonDetail;
 
 interface StaticProps {
-	props: {
-		sermon: Sermon | null;
-	};
+	props: SermonDetailProps;
 	revalidate: number;
 }
 

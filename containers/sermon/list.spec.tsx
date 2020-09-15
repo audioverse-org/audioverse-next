@@ -170,4 +170,25 @@ describe('sermons list page', () => {
 
 		expect(link.href).toContain('/en/sermons/page/1');
 	});
+
+	it('gets sermons for list page', async () => {
+		loadSermons();
+
+		await getStaticProps({ params: { i: '2', language: 'en' } });
+
+		await waitFor(() =>
+			expect(getSermons).toBeCalledWith('ENGLISH', {
+				offset: ENTRIES_PER_PAGE,
+				first: ENTRIES_PER_PAGE,
+			})
+		);
+	});
+
+	it('revalidates static pages', async () => {
+		loadSermons();
+
+		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
+
+		expect(props.revalidate).toBe(10);
+	});
 });

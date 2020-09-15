@@ -4,7 +4,7 @@ import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import withFailStates from '@components/templates/withFailStates';
 
-interface SermonListProps {
+export interface SermonListProps {
 	sermons: Sermon[];
 	pagination: {
 		current: number;

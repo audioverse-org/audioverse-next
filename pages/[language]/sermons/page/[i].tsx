@@ -1,19 +1,14 @@
 import _ from 'lodash';
 
-import SermonList from '@containers/sermon/list';
+import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export default SermonList;
 
 interface StaticProps {
-	props: {
-		sermons: Sermon[];
-		pagination: {
-			total: number;
-			current: number;
-		};
-	};
+	props: SermonListProps;
+	revalidate: number;
 }
 
 interface GetStaticPropsArgs {
@@ -43,6 +38,7 @@ export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<St
 				current: parseInt(i),
 			},
 		},
+		revalidate: 10,
 	};
 }
 

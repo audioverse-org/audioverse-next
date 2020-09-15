@@ -1,15 +1,13 @@
 import _ from 'lodash';
 
-import Home from '@containers/home';
+import Home, { HomeProps } from '@containers/home';
 import { getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
 
 export default Home;
 
 interface StaticProps {
-	props: {
-		sermons: Sermon[];
-	};
+	props: HomeProps;
 	revalidate: number;
 }
 

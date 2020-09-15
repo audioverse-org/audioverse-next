@@ -3,7 +3,7 @@ import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
 
-interface HomeProps {
+export interface HomeProps {
 	sermons: Sermon[];
 }
 
