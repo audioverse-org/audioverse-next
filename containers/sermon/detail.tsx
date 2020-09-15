@@ -5,7 +5,13 @@ import withFailStates from '@components/templates/withFailStates';
 
 import styles from './detail.module.scss';
 
-function SermonDetail({ sermon }) {
+export interface SermonDetailProps {
+	sermon: Sermon | null;
+}
+
+function SermonDetail({ sermon }: SermonDetailProps) {
+	if (!sermon) return null;
+
 	const imageSrc = _.get(sermon, 'imageWithFallback.url'),
 		imageAlt = _.get(sermon, 'title');
 
@@ -27,7 +33,7 @@ function SermonDetail({ sermon }) {
 				return (
 					<div key={file.url}>
 						<audio controls src={file.url} preload={'metadata'}>
-							Your browser doesn't support this player.
+							Your browser doesn&apos;t support this player.
 						</audio>
 					</div>
 				);

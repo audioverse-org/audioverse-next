@@ -1,6 +1,6 @@
 export const ENTRIES_PER_PAGE = 25;
 
-export const LANGUAGES = {
+export const LANGUAGES: { [key: string]: { base_url: string } } = {
 	ENGLISH: { base_url: 'en' },
 	SPANISH: { base_url: 'es' },
 	FRENCH: { base_url: 'fr' },

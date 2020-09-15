@@ -4,9 +4,9 @@ import React from 'react';
 
 const withFailStates = <P extends any>(
 	Component: React.ComponentType<P>,
-	should404?: (props) => boolean
+	should404?: (props: P) => boolean
 ): React.ComponentType<P> => {
-	function WithFailStates(props) {
+	function WithFailStates(props: P) {
 		const router = useRouter();
 
 		if (!router.isFallback && should404 && should404(props)) {
@@ -17,7 +17,7 @@ const withFailStates = <P extends any>(
 			return <h1>Loading…</h1>;
 		}
 
-		return <Component {...(props as P)} />;
+		return <Component {...(props as any)} />;
 	}
 	return WithFailStates;
 };

@@ -15,13 +15,11 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo",
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
     "allowJs": true,
     "jsx": "preserve",
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -29,10 +27,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@lib/*": ["lib/*"],
-      "@components/*": ["components/*"],
-      "@containers/*": ["containers/*"],
-      "@pages/*": ["pages/*"]
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@containers/*": [
+        "containers/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ]
     }
   },
   "exclude": [

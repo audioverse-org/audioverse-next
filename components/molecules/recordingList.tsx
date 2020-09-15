@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function RecordingList({ sermons }) {
+interface RecordingListProps {
+	sermons: Sermon[];
+}
+
+export default function RecordingList({ sermons }: RecordingListProps): JSX.Element {
 	const router = useRouter(),
 		lang = router.query.language;
 

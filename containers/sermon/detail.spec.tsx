@@ -28,7 +28,7 @@ function loadGetSermonError() {
 }
 
 async function renderPage() {
-	const { props } = await getStaticProps({ params: { id: 1 } });
+	const { props } = await getStaticProps({ params: { id: '1' } });
 	return render(<SermonDetail {...props} />);
 }
 
@@ -70,7 +70,7 @@ describe('detailPageGenerator', () => {
 	it('catches API errors', async () => {
 		loadGetSermonError();
 
-		const result = await getStaticProps({ params: { id: 1 } });
+		const result = await getStaticProps({ params: { id: '1' } });
 
 		expect(result.props.sermon).toBeNull();
 	});
