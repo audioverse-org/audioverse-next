@@ -10,7 +10,7 @@ interface SermonDetailProps {
 }
 
 function SermonDetail({ sermon }: SermonDetailProps) {
-	if (!sermon) return;
+	if (!sermon) return null;
 
 	const imageSrc = _.get(sermon, 'imageWithFallback.url'),
 		imageAlt = _.get(sermon, 'title');

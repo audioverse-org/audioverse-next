@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import Pagination from '@components/molecules/pagination';
@@ -21,11 +20,6 @@ function SermonList({ sermons, pagination }: SermonListProps) {
 		</div>
 	);
 }
-
-SermonList.propTypes = {
-	sermons: PropTypes.arrayOf(PropTypes.object),
-	pagination: PropTypes.object,
-};
 
 const should404 = (props: SermonListProps) => !props.sermons?.length;
 

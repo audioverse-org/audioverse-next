@@ -17,7 +17,7 @@ const withFailStates = <P extends any>(
 			return <h1>Loading…</h1>;
 		}
 
-		return <Component {...(props as P)} />;
+		return <Component {...(props as any)} />;
 	}
 	return WithFailStates;
 };
