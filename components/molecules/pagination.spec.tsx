@@ -99,11 +99,4 @@ describe('pagination algorithm', () => {
 	it('handles single page', () => {
 		expect(pagination(1, 1)).toStrictEqual([1]);
 	});
-
-	it('throws if passed a string for current', () => {
-		expect(() => {
-			// @ts-expect-error Testing bad input
-			pagination('1', 1);
-		}).toThrow();
-	});
 });

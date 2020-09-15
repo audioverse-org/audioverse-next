@@ -4,8 +4,6 @@ import styles from './pagination.module.scss';
 
 export function pagination(current: number, total: number): (number | string)[] {
 	if (!current) throw Error('Current page number required');
-	if (!Number.isInteger(current)) throw Error('Current must be integer');
-	if (!Number.isInteger(total)) throw Error('Total must be integer');
 
 	if (total === 1) return [1];
 
