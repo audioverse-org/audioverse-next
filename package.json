@@ -53,6 +53,14 @@
       "@components/(.*)": "<rootDir>/components/$1",
       "@containers/(.*)": "<rootDir>/containers/$1",
       "@pages/(.*)": "<rootDir>/pages/$1"
+    },
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
     }
   }
 }
