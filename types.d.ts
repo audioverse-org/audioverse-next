@@ -1,3 +1,5 @@
+// TODO: Generate GraphQL response types from queries
+
 interface Sermon {
 	audioFiles: AudioFile[];
 	recordingDate: string;
