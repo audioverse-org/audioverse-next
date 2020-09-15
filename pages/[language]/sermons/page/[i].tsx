@@ -8,7 +8,7 @@ export default SermonList;
 
 interface StaticProps {
 	props: {
-		sermons: Sermon[] | undefined;
+		sermons: Sermon[];
 		pagination: {
 			total: number;
 			current: number;
@@ -30,7 +30,7 @@ export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<St
 	const result = await getSermons(langKey, {
 		offset,
 		first: ENTRIES_PER_PAGE,
-	}).catch(() => null);
+	}).catch(() => []);
 
 	const sermons = _.get(result, 'nodes'),
 		total = Math.ceil(_.get(result, 'aggregate.count') / ENTRIES_PER_PAGE);

@@ -96,7 +96,7 @@ describe('sermons list page', () => {
 	it('gets sermons for list page', async () => {
 		loadSermons();
 
-		await getStaticProps({ params: { i: 2, language: 'en' } });
+		await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		await waitFor(() =>
 			expect(getSermons).toBeCalledWith('ENGLISH', {
@@ -165,8 +165,9 @@ describe('sermons list page', () => {
 	it('links pagination properly', async () => {
 		loadSermons();
 
-		const { getByText } = await renderPage();
+		const { getByText } = await renderPage(),
+			link = getByText('1') as HTMLAnchorElement;
 
-		expect(getByText('1').href).toContain('/en/sermons/page/1');
+		expect(link.href).toContain('/en/sermons/page/1');
 	});
 });

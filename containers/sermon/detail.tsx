@@ -6,10 +6,12 @@ import withFailStates from '@components/templates/withFailStates';
 import styles from './detail.module.scss';
 
 interface SermonDetailProps {
-	sermon: Sermon;
+	sermon: Sermon | null;
 }
 
 function SermonDetail({ sermon }: SermonDetailProps) {
+	if (!sermon) return;
+
 	const imageSrc = _.get(sermon, 'imageWithFallback.url'),
 		imageAlt = _.get(sermon, 'title');
 

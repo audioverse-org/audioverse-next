@@ -3,53 +3,59 @@ import React from 'react';
 
 import Pagination, { pagination } from './pagination';
 
+const renderPagination = ({ current = 1, total = 1, base = 'base' } = {}) => {
+	return render(<Pagination current={current} total={total} base={base} />);
+};
+
 describe('pagination component', () => {
 	it('has next button', () => {
-		const { getByText } = render(<Pagination current={1} total={2} />);
+		const { getByText } = renderPagination({ total: 2 });
 
 		expect(getByText('>')).toBeDefined();
 	});
 
 	it('has previous button', () => {
-		const { getByText } = render(<Pagination current={2} total={2} />);
+		const { getByText } = renderPagination({ current: 2, total: 2 });
 
 		expect(getByText('<')).toBeDefined();
 	});
 
 	it('hides next when unneeded', () => {
-		const { getByText } = render(<Pagination current={1} total={1} />);
+		const { getByText } = renderPagination();
 
 		expect(() => getByText('>')).toThrow();
 	});
 
 	it('hides previous when unneeded', () => {
-		const { getByText } = render(<Pagination current={1} total={1} />);
+		const { getByText } = renderPagination();
 
 		expect(() => getByText('<')).toThrow();
 	});
 
 	it('sets next href', () => {
-		const { getByText } = render(<Pagination current={1} total={2} base={'/en/sermons'} />);
+		const { getByText } = renderPagination({ total: 2, base: '/en/sermons' }),
+			link = getByText('>') as HTMLAnchorElement;
 
-		expect(getByText('>').href).toContain('/en/sermons/page/2');
+		expect(link.href).toContain('/en/sermons/page/2');
 	});
 
 	it('includes dots', () => {
-		const { getByText } = render(<Pagination current={1} total={100} />);
+		const { getByText } = renderPagination({ total: 100 });
 
 		expect(getByText('...')).toBeDefined();
 	});
 
 	it('unlinks dots', () => {
-		const { getByText } = render(<Pagination current={1} total={100} />);
+		const { getByText } = renderPagination({ total: 100 });
 
-		expect(getByText('...').href).toBeUndefined();
+		expect(getByText('...').hasAttribute('href')).toBeFalsy();
 	});
 
 	it('uses url base', () => {
-		const { getByText } = render(<Pagination current={1} total={2} base={'/en/presenters'} />);
+		const { getByText } = renderPagination({ total: 2, base: '/en/presenters' }),
+			link = getByText('>') as HTMLAnchorElement;
 
-		expect(getByText('>').href).toContain('/en/presenters/page/2');
+		expect(link.href).toContain('/en/presenters/page/2');
 	});
 });
 
