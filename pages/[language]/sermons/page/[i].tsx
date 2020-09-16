@@ -3,6 +3,7 @@ import _ from 'lodash';
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { makeNumberedPaths } from '@lib/helpers';
 
 export default SermonList;
 
@@ -43,15 +44,8 @@ export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<St
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
-			const sermonCount = await getSermonCount(k),
-				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),
-				numbers = Array.from(Array(pageCount).keys()),
-				base = LANGUAGES[k].base_url;
-
-			return numbers.map((x) => `/${base}/sermons/page/${x + 1}`);
-		}),
-		pathSets = await Promise.all(pathSetPromises);
-
-	return { paths: pathSets.flat(), fallback: 'unstable_blocking' };
+	return {
+		paths: await makeNumberedPaths('sermons/page', getSermonCount),
+		fallback: 'unstable_blocking',
+	};
 }

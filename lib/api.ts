@@ -123,3 +123,23 @@ export async function getSermonCount(language: string): Promise<number> {
 	);
 	return _.get(data, 'sermons.aggregate.count') || 0;
 }
+
+export async function getTestimonyCount(language: string): Promise<number> {
+	const data = fetchAPI(
+		`
+	query getTestimonyCount($language: Language!) {
+    testimonies(language: $language) {
+      aggregate { 
+        count 
+      }
+    }
+	}
+	`,
+		{
+			variables: {
+				language,
+			},
+		}
+	);
+	return _.get(data, 'testimonies.aggregate.count') || 0;
+}
