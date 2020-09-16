@@ -3,7 +3,7 @@ import _ from 'lodash';
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
-import { makeNumberedPaths } from '@lib/helpers';
+import { getNumberedStaticPaths } from '@lib/helpers';
 
 export default SermonList;
 
@@ -44,8 +44,5 @@ export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<St
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return {
-		paths: await makeNumberedPaths('sermons/page', getSermonCount),
-		fallback: 'unstable_blocking',
-	};
+	return await getNumberedStaticPaths('sermons/page', getSermonCount);
 }

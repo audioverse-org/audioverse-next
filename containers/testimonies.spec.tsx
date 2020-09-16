@@ -38,4 +38,12 @@ describe('testimonies pages', () => {
 
 		expect(result.paths).toContain('/en/testimonies/page/1');
 	});
+
+	it('sets path fallback strategy', async () => {
+		setEntityCount(1);
+
+		const result = await getStaticPaths();
+
+		expect(result.fallback).toBe('unstable_blocking');
+	});
 });

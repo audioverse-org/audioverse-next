@@ -1,6 +1,9 @@
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
-export const makeNumberedPaths = async (sectionSegments: string, getCount: (language: string) => Promise<number>) => {
+export const getNumberedStaticPaths = async (
+	sectionSegments: string,
+	getCount: (language: string) => Promise<number>
+) => {
 	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
 			const sermonCount = await getCount(k),
 				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),
@@ -11,5 +14,8 @@ export const makeNumberedPaths = async (sectionSegments: string, getCount: (lang
 		}),
 		pathSets = await Promise.all(pathSetPromises);
 
-	return pathSets.flat();
+	return {
+		paths: pathSets.flat(),
+		fallback: 'unstable_blocking',
+	};
 };

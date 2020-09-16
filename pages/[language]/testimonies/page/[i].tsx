@@ -1,5 +1,5 @@
 import Testimonies from '@containers/testimonies';
-import { makeNumberedPaths } from '@lib/helpers';
+import { getNumberedStaticPaths } from '@lib/helpers';
 import { getTestimonyCount } from '@lib/api';
 
 export default Testimonies;
@@ -16,7 +16,5 @@ export async function getStaticProps({ params }: GetStaticPropsArgs) {
 }
 
 export async function getStaticPaths() {
-	return {
-		paths: await makeNumberedPaths('testimonies/page', getTestimonyCount),
-	};
+	return await getNumberedStaticPaths('testimonies/page', getTestimonyCount);
 }
