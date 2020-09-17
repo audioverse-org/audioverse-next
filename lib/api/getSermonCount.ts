@@ -1,5 +1,6 @@
-import { fetchAPI } from '@lib/api/fetchAPI';
 import _ from 'lodash';
+
+import { fetchApi } from '@lib/api/fetchApi';
 
 const query = `
 query getSermonCount($language: Language!) {
@@ -13,7 +14,7 @@ query getSermonCount($language: Language!) {
 
 export async function getSermonCount(language: string): Promise<number> {
 	const variables = { language },
-		data = await fetchAPI(query, { variables });
+		data = await fetchApi(query, { variables });
 
 	return _.get(data, 'sermons.aggregate.count') || 0;
 }

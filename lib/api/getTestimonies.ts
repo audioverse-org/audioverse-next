@@ -1,4 +1,4 @@
-import { fetchAPI } from '@lib/api/fetchAPI';
+import { fetchApi } from '@lib/api/fetchApi';
 
 const query = `
 query getTestimonies($language: Language!, $offset: Int, $first: Int!) {
@@ -24,7 +24,7 @@ export async function getTestimonies(
 	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
 ): Promise<{ nodes: Sermon[] }> {
 	const variables = { language, offset, first },
-		data = await fetchAPI(query, { variables });
+		data = await fetchApi(query, { variables });
 
 	return data?.testimonies;
 }

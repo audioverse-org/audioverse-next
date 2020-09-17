@@ -1,4 +1,4 @@
-import { fetchAPI } from '@lib/api/fetchAPI';
+import { fetchApi } from '@lib/api/fetchApi';
 
 const query = `
 query getSermon($id: ID!) {
@@ -26,7 +26,7 @@ fragment SermonFragment on Recording {
 
 export async function getSermon(id: number | string): Promise<Sermon> {
 	const variables = { id },
-		data = await fetchAPI(query, { variables });
+		data = await fetchApi(query, { variables });
 
 	return data?.sermon;
 }
