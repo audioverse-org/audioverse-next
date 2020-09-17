@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Pagination from '@components/molecules/pagination';
+
 export interface TestimoniesProps {
 	nodes: any[];
 	pagination: {
@@ -9,6 +11,14 @@ export interface TestimoniesProps {
 }
 
 export default function Testimonies({ nodes, pagination }: TestimoniesProps): JSX.Element {
-	console.log({ nodes, pagination });
-	return <div>hello world</div>;
+	return (
+		<>
+			<ul>
+				{nodes.map((n, i) => (
+					<li key={i}>{n.body}</li>
+				))}
+			</ul>
+			<Pagination current={pagination.current} total={pagination.total} base={'/en/testimonies'} />
+		</>
+	);
 }
