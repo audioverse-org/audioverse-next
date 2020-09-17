@@ -1,18 +1,17 @@
 import Testimonies from '@containers/testimonies';
-import { getNumberedStaticPaths } from '@lib/helpers';
-import { getTestimonyCount } from '@lib/api';
+import { getNumberedStaticPaths, getPaginatedStaticProps } from '@lib/helpers';
+import { getTestimonies, getTestimonyCount } from '@lib/api';
 
 export default Testimonies;
 
 interface GetStaticPropsArgs {
-	params: {};
+	params: { i: string; language: string };
 }
 
 export async function getStaticProps({ params }: GetStaticPropsArgs) {
-	return {
-		props: {},
-		revalidate: 10,
-	};
+	const { i, language } = params;
+
+	return await getPaginatedStaticProps(language, parseInt(i), getTestimonies);
 }
 
 export async function getStaticPaths() {

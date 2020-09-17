@@ -105,7 +105,7 @@ fragment SermonFragment on Recording {
 }
 
 export async function getSermonCount(language: string): Promise<number> {
-	const data = fetchAPI(
+	const data = await fetchAPI(
 		`
 	query getSermonCount($language: Language!) {
     sermons(language: $language) {
@@ -125,7 +125,7 @@ export async function getSermonCount(language: string): Promise<number> {
 }
 
 export async function getTestimonyCount(language: string): Promise<number> {
-	const data = fetchAPI(
+	const data = await fetchAPI(
 		`
 	query getTestimonyCount($language: Language!) {
     testimonies(language: $language) {
@@ -142,4 +142,38 @@ export async function getTestimonyCount(language: string): Promise<number> {
 		}
 	);
 	return _.get(data, 'testimonies.aggregate.count') || 0;
+}
+
+export async function getTestimonies(
+	language: string,
+	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
+): Promise<{ nodes: Sermon[] }> {
+	const data = await fetchAPI(
+		`
+query getTestimonies($language: Language!, $offset: Int, $first: Int!) {
+	testimonies(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: WRITTEN_DATE}) {
+		nodes {
+			author
+      body
+      writtenDate
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+		aggregate {
+			count
+		}
+	}
+}
+  `,
+		{
+			variables: {
+				language,
+				offset,
+				first,
+			},
+		}
+	);
+	return data && data.testimonies;
 }
