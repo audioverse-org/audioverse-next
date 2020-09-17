@@ -1,10 +1,11 @@
-import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 import _ from 'lodash';
+
+import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export const getNumberedStaticPaths = async (
 	sectionSegments: string,
 	getCount: (language: string) => Promise<number>
-) => {
+): Promise<StaticPaths> => {
 	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
 			const sermonCount = await getCount(k),
 				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),
@@ -21,7 +22,22 @@ export const getNumberedStaticPaths = async (
 	};
 };
 
-export async function getPaginatedStaticProps(language: string, pageIndex: number, getter: any) {
+export interface PaginatedStaticProps {
+	props: {
+		nodes: any[];
+		pagination: {
+			total: number;
+			current: number;
+		};
+	};
+	revalidate: number;
+}
+
+export async function getPaginatedStaticProps(
+	language: string,
+	pageIndex: number,
+	getter: (language: string, { offset, first }: { offset?: number; first?: number }) => Promise<{ nodes: any[] }>
+): Promise<PaginatedStaticProps> {
 	const langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
 		offset = (pageIndex - 1) * ENTRIES_PER_PAGE;
 
