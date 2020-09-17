@@ -2,13 +2,10 @@ import _ from 'lodash';
 
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
-export const getNumberedStaticPaths = async (
-	sectionSegments: string,
-	getCount: (language: string) => Promise<number>
-): Promise<StaticPaths> => {
+async function makeNumberedPaths(getCount: (language: string) => Promise<number>, sectionSegments: string) {
 	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
-			const sermonCount = await getCount(k),
-				pageCount = Math.ceil(sermonCount / ENTRIES_PER_PAGE),
+			const entryCount = await getCount(k),
+				pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE),
 				numbers = Array.from(Array(pageCount).keys()),
 				base = LANGUAGES[k].base_url;
 
@@ -16,8 +13,15 @@ export const getNumberedStaticPaths = async (
 		}),
 		pathSets = await Promise.all(pathSetPromises);
 
+	return pathSets.flat();
+}
+
+export const getNumberedStaticPaths = async (
+	sectionSegments: string,
+	getCount: (language: string) => Promise<number>
+): Promise<StaticPaths> => {
 	return {
-		paths: pathSets.flat(),
+		paths: await makeNumberedPaths(getCount, sectionSegments),
 		fallback: 'unstable_blocking',
 	};
 };

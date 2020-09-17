@@ -11,9 +11,9 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
 	const { i, language } = params;
 
-	return await getPaginatedStaticProps(language, parseInt(i), getTestimonies);
+	return getPaginatedStaticProps(language, parseInt(i), getTestimonies);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return await getNumberedStaticPaths('testimonies/page', getTestimonyCount);
+	return getNumberedStaticPaths('testimonies/page', getTestimonyCount);
 }
