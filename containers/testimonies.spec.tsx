@@ -12,17 +12,29 @@ function setEntityCount(count: number) {
 }
 
 function loadTestimonies() {
-	(getTestimonies as jest.Mock).mockResolvedValue([]);
+	(getTestimonies as jest.Mock).mockResolvedValue({
+		nodes: [
+			{
+				author: 'the_testimony_author',
+				body: 'the_testimony_body',
+				writtenDate: 'the_testimony_date',
+			},
+		],
+	});
+}
+
+async function renderPage() {
+	const params = { i: '1', language: 'en' };
+	const { props } = await getStaticProps({ params });
+
+	return render(<Testimonies {...props} />);
 }
 
 describe('testimonies pages', () => {
 	it('renders', async () => {
 		loadTestimonies();
 
-		const params = { i: '1', language: 'en' };
-		const { props } = await getStaticProps({ params });
-
-		await render(<Testimonies {...props} />);
+		await renderPage();
 	});
 
 	it('revalidates', async () => {
@@ -66,5 +78,30 @@ describe('testimonies pages', () => {
 			offset: 0,
 			first: ENTRIES_PER_PAGE,
 		});
+	});
+
+	it('lists testimonies', async () => {
+		loadTestimonies();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_testimony_body')).toBeDefined();
+	});
+
+	it('paginates', async () => {
+		loadTestimonies();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1')).toBeDefined();
+	});
+
+	it('links pagination properly', async () => {
+		loadTestimonies();
+
+		const { getByText } = await renderPage(),
+			link = getByText('1') as HTMLAnchorElement;
+
+		expect(link.href).toContain('/en/testimonies/page/1');
 	});
 });
