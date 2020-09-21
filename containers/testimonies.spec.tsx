@@ -118,4 +118,12 @@ describe('testimonies pages', () => {
 
 		expect(() => getByText('<p>text</p>')).toThrow();
 	});
+
+	it('includes names', async () => {
+		loadTestimonies();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_testimony_author')).toBeDefined();
+	});
 });

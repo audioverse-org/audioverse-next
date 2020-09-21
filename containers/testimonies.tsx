@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Pagination from '@components/molecules/pagination';
+import styles from './testimonies.module.scss';
 
 export interface TestimoniesProps {
 	nodes: any[];
@@ -11,11 +12,18 @@ export interface TestimoniesProps {
 }
 
 export default function Testimonies({ nodes, pagination }: TestimoniesProps): JSX.Element {
+	// Semantic quotations:
+	// https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/#hey-what-about-the-figure-element
 	return (
 		<>
-			<ul>
+			<ul className={styles.list}>
 				{nodes.map((n, i) => (
-					<li key={i} dangerouslySetInnerHTML={{ __html: n.body }} />
+					<li className={styles.entry} key={i}>
+						<figure className={styles.figure}>
+							<blockquote className={styles.quotation} dangerouslySetInnerHTML={{ __html: n.body }} />
+							<figcaption>{n.author}</figcaption>
+						</figure>
+					</li>
 				))}
 			</ul>
 			<Pagination current={pagination.current} total={pagination.total} base={'/en/testimonies'} />
