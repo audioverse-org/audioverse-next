@@ -15,7 +15,7 @@ export default function Testimonies({ nodes, pagination }: TestimoniesProps): JS
 		<>
 			<ul>
 				{nodes.map((n, i) => (
-					<li key={i}>{n.body}</li>
+					<li key={i} dangerouslySetInnerHTML={{ __html: n.body }} />
 				))}
 			</ul>
 			<Pagination current={pagination.current} total={pagination.total} base={'/en/testimonies'} />

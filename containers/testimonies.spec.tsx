@@ -11,9 +11,9 @@ function setEntityCount(count: number) {
 	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));
 }
 
-function loadTestimonies() {
+function loadTestimonies(nodes: Testimony[] | null = null) {
 	(getTestimonies as jest.Mock).mockResolvedValue({
-		nodes: [
+		nodes: nodes || [
 			{
 				author: 'the_testimony_author',
 				body: 'the_testimony_body',
@@ -103,5 +103,19 @@ describe('testimonies pages', () => {
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/testimonies/page/1');
+	});
+
+	it('renders testimony html', async () => {
+		loadTestimonies([
+			{
+				body: '<p>text</p>',
+				author: '',
+				writtenDate: '',
+			},
+		]);
+
+		const { getByText } = await renderPage();
+
+		expect(() => getByText('<p>text</p>')).toThrow();
 	});
 });
