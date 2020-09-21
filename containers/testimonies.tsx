@@ -21,7 +21,7 @@ export default function Testimonies({ nodes, pagination }: TestimoniesProps): JS
 					<li className={styles.entry} key={i}>
 						<figure className={styles.figure}>
 							<blockquote className={styles.quotation} dangerouslySetInnerHTML={{ __html: n.body }} />
-							<figcaption>{n.author}</figcaption>
+							<figcaption className={styles.source}>{n.author}</figcaption>
 						</figure>
 					</li>
 				))}
