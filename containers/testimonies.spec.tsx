@@ -2,8 +2,12 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { getTestimonies, getTestimonyCount } from '@lib/api';
+import * as api from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import Testimonies, { getStaticPaths, getStaticProps } from '@pages/[language]/testimonies/page/[i]';
+import Testimonies, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/testimonies/page/[i]';
 
 jest.mock('@lib/api');
 
@@ -12,7 +16,7 @@ function setEntityCount(count: number) {
 }
 
 function loadTestimonies(nodes: Testimony[] | null = null) {
-	(getTestimonies as jest.Mock).mockResolvedValue({
+	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
 		nodes: nodes || [
 			{
 				author: 'the_testimony_author',
@@ -20,6 +24,9 @@ function loadTestimonies(nodes: Testimony[] | null = null) {
 				writtenDate: 'the_testimony_date',
 			},
 		],
+		aggregate: {
+			count: 1,
+		},
 	});
 }
 
@@ -40,7 +47,9 @@ describe('testimonies pages', () => {
 	it('revalidates', async () => {
 		loadTestimonies();
 
-		const { revalidate } = await getStaticProps({ params: { i: '1', language: 'en' } });
+		const { revalidate } = await getStaticProps({
+			params: { i: '1', language: 'en' },
+		});
 
 		expect(revalidate).toBe(10);
 	});

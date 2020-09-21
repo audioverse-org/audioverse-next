@@ -3,6 +3,8 @@ import React from 'react';
 import styles from './pagination.module.scss';
 
 export function pagination(current: number, total: number): (number | string)[] {
+	console.log(total);
+
 	if (!current) throw Error('Current page number required');
 
 	if (total === 1) return [1];
@@ -52,6 +54,8 @@ export default function Pagination({
 		pageNext = current + 1;
 
 	const pages = pagination(current, total);
+
+	console.log(pages);
 
 	return (
 		<ul className={styles.base}>
