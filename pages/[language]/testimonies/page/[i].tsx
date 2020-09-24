@@ -18,9 +18,7 @@ interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<
-	PaginatedStaticProps<GetTestimoniesReturnType>
-> {
+}: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
 	const { i, language } = params;
 
 	return getPaginatedStaticProps(language, parseInt(i), getTestimonies);

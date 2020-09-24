@@ -2,32 +2,17 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { getTestimonies, getTestimonyCount } from '@lib/api';
-import * as api from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
+import { loadTestimonies } from '@lib/test/helpers';
 
 jest.mock('@lib/api');
 
 function setEntityCount(count: number) {
 	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));
-}
-
-function loadTestimonies(nodes: Testimony[] | null = null) {
-	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
-		nodes: nodes || [
-			{
-				author: 'the_testimony_author',
-				body: 'the_testimony_body',
-				writtenDate: 'the_testimony_date',
-			},
-		],
-		aggregate: {
-			count: 1,
-		},
-	});
 }
 
 async function renderPage() {
