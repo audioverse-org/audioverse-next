@@ -1,5 +1,9 @@
 @import "common";
 
+p {
+  line-height: 1.3em;
+}
+
 .template-base {
   > * {
     padding-left: 20%;

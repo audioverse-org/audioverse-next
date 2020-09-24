@@ -4,7 +4,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermon, getSermons } from '@lib/api';
-import SermonDetail, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/[id]';
+import SermonDetail, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/sermons/[id]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');

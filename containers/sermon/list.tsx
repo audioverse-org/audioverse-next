@@ -16,7 +16,11 @@ function SermonList({ nodes, pagination }: SermonListProps) {
 	return (
 		<div>
 			<RecordingList sermons={nodes} />
-			<Pagination current={pagination.current} total={pagination.total} base={'/en/sermons'} />
+			<Pagination
+				current={pagination.current}
+				total={pagination.total}
+				base={'/en/sermons'}
+			/>
 		</div>
 	);
 }

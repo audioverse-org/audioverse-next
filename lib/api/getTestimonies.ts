@@ -8,10 +8,6 @@ query getTestimonies($language: Language!, $offset: Int, $first: Int!) {
 			body
 			writtenDate
 		}
-		pageInfo {
-			hasNextPage
-			endCursor
-		}
 		aggregate {
 			count
 		}
@@ -19,10 +15,17 @@ query getTestimonies($language: Language!, $offset: Int, $first: Int!) {
 }
 `;
 
+export interface GetTestimoniesReturnType {
+	nodes: Testimony[];
+	aggregate: {
+		count: number;
+	};
+}
+
 export async function getTestimonies(
 	language: string,
 	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
-): Promise<{ nodes: Sermon[] }> {
+): Promise<GetTestimoniesReturnType> {
 	const variables = { language, offset, first },
 		data = await fetchApi(query, { variables });
 

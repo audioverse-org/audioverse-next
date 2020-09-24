@@ -3,24 +3,16 @@ import React from 'react';
 
 import { getTestimonies, getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import Testimonies, { getStaticPaths, getStaticProps } from '@pages/[language]/testimonies/page/[i]';
+import { loadTestimonies } from '@lib/test/helpers';
+import Testimonies, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/testimonies/page/[i]';
 
 jest.mock('@lib/api');
 
 function setEntityCount(count: number) {
 	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));
-}
-
-function loadTestimonies() {
-	(getTestimonies as jest.Mock).mockResolvedValue({
-		nodes: [
-			{
-				author: 'the_testimony_author',
-				body: 'the_testimony_body',
-				writtenDate: 'the_testimony_date',
-			},
-		],
-	});
 }
 
 async function renderPage() {
@@ -40,7 +32,9 @@ describe('testimonies pages', () => {
 	it('revalidates', async () => {
 		loadTestimonies();
 
-		const { revalidate } = await getStaticProps({ params: { i: '1', language: 'en' } });
+		const { revalidate } = await getStaticProps({
+			params: { i: '1', language: 'en' },
+		});
 
 		expect(revalidate).toBe(10);
 	});
@@ -103,5 +97,27 @@ describe('testimonies pages', () => {
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/testimonies/page/1');
+	});
+
+	it('renders testimony html', async () => {
+		loadTestimonies([
+			{
+				body: '<p>text</p>',
+				author: '',
+				writtenDate: '',
+			},
+		]);
+
+		const { getByText } = await renderPage();
+
+		expect(() => getByText('<p>text</p>')).toThrow();
+	});
+
+	it('includes names', async () => {
+		loadTestimonies();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_testimony_author')).toBeDefined();
 	});
 });

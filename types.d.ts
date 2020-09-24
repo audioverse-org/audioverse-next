@@ -9,6 +9,12 @@ interface Sermon {
 	title: string;
 }
 
+interface Testimony {
+	author: string;
+	body: string;
+	writtenDate: string;
+}
+
 interface AudioFile {
 	url: string;
 }

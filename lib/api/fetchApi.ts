@@ -1,6 +1,9 @@
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
 
-export async function fetchApi(query: string, { variables = {} } = {}): Promise<any> {
+export async function fetchApi(
+	query: string,
+	{ variables = {} } = {}
+): Promise<any> {
 	const headers = { 'Content-Type': 'application/json' };
 
 	const res = await fetch(API_URL, {

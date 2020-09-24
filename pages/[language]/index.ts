@@ -17,7 +17,9 @@ interface GetStaticPropsArgs {
 	};
 }
 
-export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<StaticProps> {
+export async function getStaticProps({
+	params,
+}: GetStaticPropsArgs): Promise<StaticProps> {
 	const language = _.get(params, 'language'),
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language);
 

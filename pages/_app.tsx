@@ -3,7 +3,13 @@ import React from 'react';
 import '../styles/globals.css';
 import '../styles/styles.scss';
 
-function MyApp<P>({ Component, pageProps }: { Component: typeof React.Component; pageProps: P }): JSX.Element {
+function MyApp<P>({
+	Component,
+	pageProps,
+}: {
+	Component: typeof React.Component;
+	pageProps: P;
+}): JSX.Element {
 	return (
 		<div className={'template-base'}>
 			<header className={'template-base__header'}>

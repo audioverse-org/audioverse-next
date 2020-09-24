@@ -2,7 +2,10 @@ import _ from 'lodash';
 
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
-async function makeNumberedPaths(getCount: (language: string) => Promise<number>, sectionSegments: string) {
+async function makeNumberedPaths(
+	getCount: (language: string) => Promise<number>,
+	sectionSegments: string
+) {
 	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
 			const entryCount = await getCount(k),
 				pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE),
@@ -37,10 +40,24 @@ export interface PaginatedStaticProps {
 	revalidate: number;
 }
 
-export async function getPaginatedStaticProps(
+interface IGetterResolved {
+	nodes: any[];
+	aggregate: {
+		count: number;
+	};
+}
+
+interface Getter<T> {
+	(
+		language: string,
+		{ offset, first }: { offset?: number; first?: number }
+	): Promise<T>;
+}
+
+export async function getPaginatedStaticProps<T extends IGetterResolved>(
 	language: string,
 	pageIndex: number,
-	getter: (language: string, { offset, first }: { offset?: number; first?: number }) => Promise<{ nodes: any[] }>
+	getter: Getter<T>
 ): Promise<PaginatedStaticProps> {
 	const langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
 		offset = (pageIndex - 1) * ENTRIES_PER_PAGE;
@@ -50,10 +67,11 @@ export async function getPaginatedStaticProps(
 	const result = await getter(langKey, {
 		offset,
 		first: ENTRIES_PER_PAGE,
-	}).catch(() => []);
+	}).catch(() => ({}));
 
 	const nodes = _.get(result, 'nodes'),
-		total = Math.ceil(_.get(result, 'aggregate.count') / ENTRIES_PER_PAGE);
+		count = _.get(result, 'aggregate.count', 0),
+		total = Math.ceil(count / ENTRIES_PER_PAGE);
 
 	return {
 		props: {

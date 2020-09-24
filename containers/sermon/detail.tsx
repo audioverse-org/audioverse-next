@@ -28,7 +28,9 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</ul>
 				</div>
 			</div>
-			{sermon.recordingDate ? <p>{new Date(sermon.recordingDate).toLocaleDateString()}</p> : null}
+			{sermon.recordingDate ? (
+				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
+			) : null}
 			{sermon.audioFiles.map((file) => {
 				return (
 					<div key={file.url}>
@@ -38,7 +40,9 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</div>
 				);
 			})}
-			{sermon.description ? <div dangerouslySetInnerHTML={{ __html: sermon.description }} /> : null}
+			{sermon.description ? (
+				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
+			) : null}
 			Other sermons: ...
 		</>
 	);
