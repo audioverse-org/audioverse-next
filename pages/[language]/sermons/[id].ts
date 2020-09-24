@@ -9,7 +9,11 @@ interface StaticProps {
 	revalidate: number;
 }
 
-export async function getStaticProps({ params }: { params: { id: string } }): Promise<StaticProps> {
+export async function getStaticProps({
+	params,
+}: {
+	params: { id: string };
+}): Promise<StaticProps> {
 	let sermon;
 
 	try {
@@ -31,10 +35,14 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 		pathSetPromises = keys.map(async (l) => {
 			const { nodes } = await getSermons(l),
 				dateFloor = new Date('2020-06-01'), // TODO: Should this be rolling?
-				filteredNodes = nodes.filter((n) => new Date(n.recordingDate) > dateFloor),
+				filteredNodes = nodes.filter(
+					(n) => new Date(n.recordingDate) > dateFloor
+				),
 				baseUrl = LANGUAGES[l].base_url;
 
-			return filteredNodes.map((node) => `/${baseUrl}/sermons/${node.id}`) || [];
+			return (
+				filteredNodes.map((node) => `/${baseUrl}/sermons/${node.id}`) || []
+			);
 		});
 
 	const pathSets = await Promise.all(pathSetPromises);

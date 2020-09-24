@@ -29,7 +29,7 @@ export const getNumberedStaticPaths = async (
 	};
 };
 
-export interface PaginatedStaticProps<T> {
+export interface PaginatedStaticProps {
 	props: {
 		nodes: any[];
 		pagination: {
@@ -58,7 +58,7 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 	language: string,
 	pageIndex: number,
 	getter: Getter<T>
-): Promise<PaginatedStaticProps<T>> {
+): Promise<PaginatedStaticProps> {
 	const langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
 		offset = (pageIndex - 1) * ENTRIES_PER_PAGE;
 
@@ -67,10 +67,11 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 	const result = await getter(langKey, {
 		offset,
 		first: ENTRIES_PER_PAGE,
-	});
+	}).catch(() => ({}));
 
 	const nodes = _.get(result, 'nodes'),
-		total = Math.ceil(_.get(result, 'aggregate.count', 0) / ENTRIES_PER_PAGE);
+		count = _.get(result, 'aggregate.count', 0),
+		total = Math.ceil(count / ENTRIES_PER_PAGE);
 
 	return {
 		props: {

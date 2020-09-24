@@ -5,7 +5,9 @@ interface RecordingListProps {
 	sermons: Sermon[];
 }
 
-export default function RecordingList({ sermons }: RecordingListProps): JSX.Element {
+export default function RecordingList({
+	sermons,
+}: RecordingListProps): JSX.Element {
 	const router = useRouter(),
 		lang = router.query.language;
 

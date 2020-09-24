@@ -4,7 +4,10 @@ import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
-import SermonList, { getStaticPaths, getStaticProps } from '@pages/[language]/sermons/page/[i]';
+import SermonList, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/sermons/page/[i]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
@@ -13,7 +16,10 @@ function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
 }
 
-const renderPage = async ({ params = { i: '1', language: 'en' }, query = {} } = {}) => {
+const renderPage = async ({
+	params = { i: '1', language: 'en' },
+	query = {},
+} = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
 	return render(<SermonList {...props} />);
@@ -23,7 +29,10 @@ function setSermonCount(count: number) {
 	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
 }
 
-function loadSermons({ nodes = undefined, count = undefined }: { nodes?: any[]; count?: number } = {}) {
+function loadSermons({
+	nodes = undefined,
+	count = undefined,
+}: { nodes?: any[]; count?: number } = {}) {
 	(getSermons as jest.Mock).mockReturnValue(
 		Promise.resolve({
 			nodes: nodes || [
@@ -151,7 +160,9 @@ describe('sermons list page', () => {
 	it('calculates pages using items per page', async () => {
 		loadSermons({ count: 75 });
 
-		const { getByText } = await renderPage({ params: { i: '3', language: 'en' } });
+		const { getByText } = await renderPage({
+			params: { i: '3', language: 'en' },
+		});
 
 		expect(() => getByText('4')).toThrow();
 	});

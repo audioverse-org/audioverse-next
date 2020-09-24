@@ -52,7 +52,10 @@ describe('pagination component', () => {
 	});
 
 	it('uses url base', () => {
-		const { getByText } = renderPagination({ total: 2, base: '/en/presenters' }),
+		const { getByText } = renderPagination({
+				total: 2,
+				base: '/en/presenters',
+			}),
 			link = getByText('>') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/presenters/page/2');

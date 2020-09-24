@@ -13,7 +13,9 @@ interface GetStaticPropsArgs {
 	params: { i: string; language: string };
 }
 
-export async function getStaticProps({ params }: GetStaticPropsArgs): Promise<StaticProps> {
+export async function getStaticProps({
+	params,
+}: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params;
 
 	return getPaginatedStaticProps(language, parseInt(i), getSermons);

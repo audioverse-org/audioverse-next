@@ -6,10 +6,6 @@ query getSermons($language: Language!, $offset: Int, $first: Int!) {
 		nodes {
 			...SermonsFragment
 		}
-		pageInfo {
-			hasNextPage
-			endCursor
-		}
 		aggregate {
 			count
 		}
@@ -30,10 +26,17 @@ fragment SermonsFragment on Recording {
 }
 `;
 
+export interface GetSermonsReturnType {
+	nodes: Sermon[];
+	aggregate: {
+		count: number;
+	};
+}
+
 export async function getSermons(
 	language: string,
 	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
-): Promise<{ nodes: Sermon[] }> {
+): Promise<GetSermonsReturnType> {
 	const variables = { language, offset, first },
 		data = await fetchApi(query, { variables });
 
