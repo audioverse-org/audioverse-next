@@ -1,9 +1,5 @@
 import Testimonies from '@containers/testimonies';
-import {
-	getTestimonies,
-	GetTestimoniesReturnType,
-	getTestimonyCount,
-} from '@lib/api';
+import { getTestimonies, getTestimonyCount } from '@lib/api';
 import {
 	getNumberedStaticPaths,
 	getPaginatedStaticProps,

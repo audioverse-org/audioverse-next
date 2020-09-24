@@ -1,6 +1,6 @@
 import * as api from '@lib/api';
 
-export function loadTestimonies(nodes: Testimony[] | null = null) {
+export function loadTestimonies(nodes: Testimony[] | null = null): void {
 	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
 		nodes: nodes || [
 			{
