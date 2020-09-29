@@ -96,7 +96,7 @@ describe('pagination algorithm', () => {
 		pagination(1, 99999999999);
 		const t1 = performance.now();
 
-		expect(t1 - t0).toBeLessThan(1);
+		expect(t1 - t0).toBeLessThan(2);
 	});
 
 	it('handles single page', () => {

@@ -1,16 +1,12 @@
 import { render, waitFor } from '@testing-library/react';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermons } from '@lib/api';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
+import { loadQuery } from '@lib/test/helpers';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
-
-function loadQuery(query = {}) {
-	(useRouter as jest.Mock).mockReturnValue({ query });
-}
 
 const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
 	loadQuery(query);
