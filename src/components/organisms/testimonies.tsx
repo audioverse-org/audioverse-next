@@ -6,7 +6,7 @@ import withIntl from '@components/HOCs/withIntl';
 const Testimonies = () => {
 	return (
 		<h2>
-			<FormattedMessage defaultMessage={'Testimonies'} />
+			<FormattedMessage id={'title'} defaultMessage={'Testimonies'} />
 		</h2>
 	);
 };
