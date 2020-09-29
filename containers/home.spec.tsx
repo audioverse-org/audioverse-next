@@ -2,8 +2,8 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { getSermons } from '@lib/api';
-import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 import { loadQuery } from '@lib/test/helpers';
+import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');

@@ -1,8 +1,9 @@
-import * as api from '@lib/api';
-import * as router from 'next/router';
-import { Url } from 'url';
-import { PrefetchOptions } from 'next/dist/next-server/lib/router/router';
 import { ParsedUrlQuery } from 'querystring';
+
+import * as router from 'next/router';
+import { NextRouter } from 'next/router';
+
+import * as api from '@lib/api';
 
 export function loadTestimonies(nodes: Testimony[] | null = null): void {
 	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
@@ -19,38 +20,8 @@ export function loadTestimonies(nodes: Testimony[] | null = null): void {
 	});
 }
 
-export function loadQuery(query: ParsedUrlQuery = {}) {
-	jest.spyOn(router, 'useRouter').mockReturnValue({
-		asPath: '',
-		back(): void {},
-		basePath: '',
-		beforePopState(cb): void {},
-		events: { on(): void {}, off(): void {}, emit(): void {} },
-		isFallback: false,
-		pathname: '',
-		prefetch(
-			url: string,
-			asPath: string | undefined,
-			options: PrefetchOptions | undefined
-		): Promise<void> {
-			return Promise.resolve(undefined);
-		},
-		push(
-			url: Url,
-			as: Url | undefined,
-			options: any | undefined
-		): Promise<boolean> {
-			return Promise.resolve(false);
-		},
-		reload(): void {},
-		replace(
-			url: Url,
-			as: Url | undefined,
-			options: any | undefined
-		): Promise<boolean> {
-			return Promise.resolve(false);
-		},
-		route: '',
+export function loadQuery(query: ParsedUrlQuery = {}): void {
+	jest.spyOn(router, 'useRouter').mockReturnValue(({
 		query,
-	});
+	} as Partial<NextRouter>) as any);
 }

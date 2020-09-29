@@ -1,8 +1,8 @@
 import React from 'react';
 
+import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import withFailStates from '@components/HOCs/withFailStates';
 
 export interface SermonListProps {
 	nodes: Sermon[];

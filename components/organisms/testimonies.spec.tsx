@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+
 import Testimonies from '@components/organisms/testimonies';
 import { loadQuery } from '@lib/test/helpers';
 
