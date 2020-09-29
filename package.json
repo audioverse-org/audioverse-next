@@ -8,7 +8,8 @@
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx components/ containers/ lib/ pages/",
     "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx components/ containers/ lib/ pages/",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "extract": "formatjs extract -- 'src/**/*.tsx' --out-file public/lang/en.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'"
   },
   "dependencies": {
     "@types/lodash": "^4.14.161",
@@ -28,6 +29,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@formatjs/cli": "^2.12.0",
     "@testing-library/dom": "^7.24.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.2",
@@ -36,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "babel-jest": "^26.3.0",
+    "babel-plugin-react-intl": "^8.2.4",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-typescript": "^2.3.0",
@@ -51,12 +54,12 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "@lib/(.*)": "<rootDir>/lib/$1",
-      "@components/(.*)": "<rootDir>/components/$1",
-      "@containers/(.*)": "<rootDir>/containers/$1",
-      "@pages/(.*)": "<rootDir>/pages/$1"
+      "@lib/(.*)": "<rootDir>/src/lib/$1",
+      "@components/(.*)": "<rootDir>/src/components/$1",
+      "@containers/(.*)": "<rootDir>/src/containers/$1",
+      "@pages/(.*)": "<rootDir>/src/pages/$1"
     },
     "transform": {
       "^.+\\.(t|j)sx?$": "ts-jest"

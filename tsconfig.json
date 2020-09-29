@@ -28,16 +28,16 @@
     "isolatedModules": true,
     "paths": {
       "@lib/*": [
-        "lib/*"
+        "src/lib/*"
       ],
       "@components/*": [
-        "components/*"
+        "src/components/*"
       ],
       "@containers/*": [
-        "containers/*"
+        "src/containers/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "src/pages/*"
       ]
     }
   },
