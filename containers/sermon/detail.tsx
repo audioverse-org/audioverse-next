@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 
-import withFailStates from '@components/templates/withFailStates';
+import withFailStates from '@components/HOCs/withFailStates';
 
 import styles from './detail.module.scss';
 
