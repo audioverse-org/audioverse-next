@@ -4,7 +4,7 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	plugins: ['@typescript-eslint/eslint-plugin', 'import'],
+	plugins: ['@typescript-eslint/eslint-plugin', 'import', 'formatjs'],
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/eslint-recommended',
@@ -30,7 +30,14 @@ module.exports = {
 		'import/order': [
 			'error',
 			{
-				groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					'sibling',
+					'index',
+				],
 				'newlines-between': 'always',
 				alphabetize: {
 					order: 'asc',
@@ -47,6 +54,7 @@ module.exports = {
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'@typescript-eslint/explicit-function-return-type': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		'formatjs/no-offset': 'error',
 	},
 	settings: {
 		'import/parsers': {

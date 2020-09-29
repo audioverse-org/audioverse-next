@@ -19,15 +19,13 @@ export function loadTestimonies(nodes: Testimony[] | null = null): void {
 	});
 }
 
-interface TransitionOptions {}
-
 export function loadQuery(query: ParsedUrlQuery = {}) {
 	jest.spyOn(router, 'useRouter').mockReturnValue({
 		asPath: '',
 		back(): void {},
 		basePath: '',
 		beforePopState(cb): void {},
-		events: { on: () => null, off: () => null, emit: () => null },
+		events: { on(): void {}, off(): void {}, emit(): void {} },
 		isFallback: false,
 		pathname: '',
 		prefetch(
@@ -40,7 +38,7 @@ export function loadQuery(query: ParsedUrlQuery = {}) {
 		push(
 			url: Url,
 			as: Url | undefined,
-			options: TransitionOptions | undefined
+			options: any | undefined
 		): Promise<boolean> {
 			return Promise.resolve(false);
 		},
@@ -48,7 +46,7 @@ export function loadQuery(query: ParsedUrlQuery = {}) {
 		replace(
 			url: Url,
 			as: Url | undefined,
-			options: TransitionOptions | undefined
+			options: any | undefined
 		): Promise<boolean> {
 			return Promise.resolve(false);
 		},
