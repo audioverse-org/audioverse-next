@@ -9,7 +9,8 @@
     "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx components/ containers/ lib/ pages/",
     "start": "next start",
     "test": "jest",
-    "extract": "formatjs extract src/**/*.tsx --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json"
+    "extract": "formatjs extract src/**/*.tsx --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
+    "compile": "formatjs compile-folder --ast public/lang public/compiled-lang"
   },
   "dependencies": {
     "@types/lodash": "^4.14.161",
