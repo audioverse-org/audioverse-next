@@ -3,6 +3,8 @@ import React from 'react';
 import '../styles/globals.css';
 import '../styles/styles.scss';
 
+import withIntl from '@components/HOCs/withIntl';
+
 function MyApp<P>({
 	Component,
 	pageProps,
@@ -27,4 +29,4 @@ MyApp.propTypes = {
 	pageProps: PropTypes.object,
 };
 
-export default MyApp;
+export default withIntl(MyApp);
