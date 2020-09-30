@@ -1,2 +1,11 @@
 {
+  "title": {
+    "col": 3,
+    "defaultMessage": "Testimonies",
+    "description": "Testimonies slider title",
+    "end": 288,
+    "file": "src/components/organisms/testimonies.tsx",
+    "line": 9,
+    "start": 174
+  }
 }
