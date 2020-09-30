@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const Testimonies = () => {
+const Testimonies = (): JSX.Element => {
 	return (
 		<h2>
 			<FormattedMessage

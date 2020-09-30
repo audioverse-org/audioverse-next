@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import '../styles/globals.css';
 import '../styles/styles.scss';
@@ -23,10 +22,5 @@ function MyApp<P>({
 		</div>
 	);
 }
-
-MyApp.propTypes = {
-	Component: React.Component,
-	pageProps: PropTypes.object,
-};
 
 export default withIntl(MyApp);

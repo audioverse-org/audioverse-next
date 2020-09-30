@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx components/ containers/ lib/ pages/",
-    "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx components/ containers/ lib/ pages/",
+    "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx src/",
+    "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
     "start": "next start",
     "test": "jest",
     "extract": "formatjs extract src/**/*.tsx --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
