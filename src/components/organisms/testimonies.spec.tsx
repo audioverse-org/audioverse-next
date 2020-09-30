@@ -1,14 +1,8 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-
-import withIntl from '@components/HOCs/withIntl';
 import Testimonies from '@components/organisms/testimonies';
-import { loadQuery } from '@lib/test/helpers';
+import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 
 const renderTestimonies = async () => {
-	const WithIntl = withIntl(Testimonies);
-
-	return render(<WithIntl />);
+	return renderWithIntl(Testimonies);
 };
 
 describe('testimonies', () => {

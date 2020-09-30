@@ -1,8 +1,11 @@
 import { ParsedUrlQuery } from 'querystring';
 
+import { render, RenderResult } from '@testing-library/react';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
+import React from 'react';
 
+import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
 
 export function loadTestimonies(nodes: Testimony[] | null = null): void {
@@ -24,4 +27,12 @@ export function loadQuery(query: ParsedUrlQuery = {}): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(({
 		query,
 	} as Partial<NextRouter>) as any);
+}
+
+export async function renderWithIntl(
+	Component: React.ComponentType
+): Promise<RenderResult> {
+	const WithIntl = withIntl(Component);
+
+	return render(<WithIntl />);
 }
