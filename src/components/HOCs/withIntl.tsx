@@ -2,19 +2,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 
-type Messages = {
-	[langCode: string]: {
-		[key: string]: string;
-	};
-};
-
-const messages: Messages = {
-	en: {},
-	es: {
-		title: 'Testimonios',
-	},
-};
-
 const withIntl = <P extends any>(
 	Component: React.ComponentType<P>
 ): React.ComponentType<P> => {
@@ -25,12 +12,11 @@ const withIntl = <P extends any>(
 			? query.language[0]
 			: query.language || 'en';
 
+		// TODO: Use uriencodecomponent
+		const messages = require(`../../../public/compiled-lang/${language}.json`);
+
 		return (
-			<IntlProvider
-				messages={messages[language]}
-				locale={language}
-				defaultLocale="en"
-			>
+			<IntlProvider messages={messages} locale={language} defaultLocale="en">
 				<Component {...(props as any)} />
 			</IntlProvider>
 		);
