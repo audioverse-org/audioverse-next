@@ -10,6 +10,7 @@ export interface HomeProps {
 export default function Home({ sermons }: HomeProps): JSX.Element {
 	return (
 		<div>
+			<h2>Recent</h2>
 			<RecordingList sermons={sermons} />
 			<Testimonies />
 		</div>
