@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
@@ -16,7 +15,3 @@ export default function Home({ sermons }: HomeProps): JSX.Element {
 		</div>
 	);
 }
-
-Home.propTypes = {
-	sermons: PropTypes.arrayOf(PropTypes.object),
-};
