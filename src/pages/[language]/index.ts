@@ -25,7 +25,7 @@ export async function getStaticProps({
 
 	if (!langKey) throw Error('Missing or invalid language');
 
-	const sermons = await getSermons(langKey);
+	const sermons = await getSermons(langKey, { first: 5 });
 	return {
 		props: {
 			sermons: (sermons && sermons.nodes) || [],

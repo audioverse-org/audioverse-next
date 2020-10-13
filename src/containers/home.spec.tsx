@@ -49,7 +49,7 @@ describe('home page', () => {
 	it('gets recent sermons', async () => {
 		await renderHome();
 
-		expect(getSermons).toHaveBeenCalled();
+		expect(getSermons).toHaveBeenCalledWith('ENGLISH', { first: 5 });
 	});
 
 	it('displays recent sermons', async () => {
@@ -89,7 +89,9 @@ describe('home page', () => {
 	it('queries with language', async () => {
 		await renderHome({ params: { language: 'es' } });
 
-		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
+		await waitFor(() =>
+			expect(getSermons).toBeCalledWith('SPANISH', { first: 5 })
+		);
 	});
 
 	it('includes testimonies', async () => {
