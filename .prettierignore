@@ -1,6 +1,7 @@
 .nyc_output
+.next
 dist
-coverage
+public
 package.json
 package-lock.json
 seeds
