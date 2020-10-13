@@ -29,10 +29,11 @@ export function loadQuery(query: ParsedUrlQuery = {}): void {
 	} as Partial<NextRouter>) as any);
 }
 
-export async function renderWithIntl(
-	Component: React.ComponentType
+export async function renderWithIntl<T>(
+	Component: React.ComponentType<T>,
+	props: T
 ): Promise<RenderResult> {
 	const WithIntl = withIntl(Component);
 
-	return render(<WithIntl />);
+	return render(<WithIntl {...props} />);
 }

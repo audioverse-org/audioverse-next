@@ -2,7 +2,7 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import { getSermons } from '@lib/api';
-import { loadQuery } from '@lib/test/helpers';
+import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
 jest.mock('@lib/api');
@@ -11,7 +11,7 @@ jest.mock('next/router');
 const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
-	return render(<Home {...props} />);
+	return renderWithIntl(Home, props);
 };
 
 function loadRecentSermons() {
@@ -90,5 +90,11 @@ describe('home page', () => {
 		await renderHome({ params: { language: 'es' } });
 
 		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
+	});
+
+	it('includes testimonies', async () => {
+		const { getByText } = await renderHome();
+
+		expect(getByText('Testimonies')).toBeDefined();
 	});
 });

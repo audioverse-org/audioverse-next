@@ -1,10 +1,10 @@
 import Testimonies from '@containers/testimonies';
 import { getTestimonies, getTestimonyCount } from '@lib/api';
 import {
-	getNumberedStaticPaths,
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
-} from '@lib/helpers';
+} from '@lib/getPaginatedStaticProps';
+import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 
 export default Testimonies;
 

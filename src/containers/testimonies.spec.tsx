@@ -3,7 +3,7 @@ import React from 'react';
 
 import { getTestimonies, getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { loadTestimonies } from '@lib/test/helpers';
+import { loadTestimonies, renderWithIntl } from '@lib/test/helpers';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
@@ -19,7 +19,7 @@ async function renderPage() {
 	const params = { i: '1', language: 'en' };
 	const { props } = await getStaticProps({ params });
 
-	return render(<Testimonies {...props} />);
+	return renderWithIntl(Testimonies, props);
 }
 
 describe('testimonies pages', () => {
