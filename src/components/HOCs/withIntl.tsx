@@ -8,12 +8,13 @@ const useTranslation = () => {
 		languageParam = _.get(router, 'query.language', 'en'),
 		language = Array.isArray(languageParam) ? languageParam[0] : languageParam;
 
-	let messages = {};
+	let messages = null;
 
 	try {
-		// TODO: Use uriencodecomponent
 		messages = require(`../../../public/compiled-lang/${language}.json`);
-	} catch (e) {
+	} catch (e) {}
+
+	if (!messages) {
 		messages = require(`../../../public/compiled-lang/en.json`);
 	}
 

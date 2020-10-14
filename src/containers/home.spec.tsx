@@ -99,4 +99,12 @@ describe('home page', () => {
 
 		expect(getByText('Testimonies')).toBeDefined();
 	});
+
+	it('falls back to English', async () => {
+		loadQuery({ language: 'ak' });
+
+		const { getByText } = await renderHome();
+
+		expect(getByText('Testimonies')).toBeDefined();
+	});
 });
