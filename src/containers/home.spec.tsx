@@ -1,5 +1,4 @@
-import { render, waitFor } from '@testing-library/react';
-import React from 'react';
+import { waitFor } from '@testing-library/react';
 
 import { getSermons } from '@lib/api';
 import { loadQuery, renderWithIntl } from '@lib/test/helpers';

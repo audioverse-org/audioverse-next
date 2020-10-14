@@ -1,6 +1,3 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-
 import { getTestimonies, getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { loadTestimonies, renderWithIntl } from '@lib/test/helpers';

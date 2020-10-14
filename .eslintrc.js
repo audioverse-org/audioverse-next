@@ -57,6 +57,9 @@ module.exports = {
 		'formatjs/no-offset': 'error',
 	},
 	settings: {
+		react: {
+			version: 'detect',
+		},
 		'import/parsers': {
 			'@typescript-eslint/parser': ['.ts', '.tsx'],
 		},
