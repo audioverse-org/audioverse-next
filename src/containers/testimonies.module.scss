@@ -1,47 +1,47 @@
-@import "../styles/common";
+@import '../styles/common';
 
 .list {
-  padding: 0;
+	padding: 0;
 }
 
 .entry {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 .figure {
-  margin: 0;
+	margin: 0;
 }
 
 .quotation {
-  color: $gray-mid;
-  padding: 1em;
-  background-color: $gray-bleached;
-  border-radius: 10px;
-  position: relative;
-  margin: 0;
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: -20px;
-    width: 0;
-    height: 0;
-    border-top: 10px solid $gray-bleached;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-  }
-  &>*:first-child {
-    margin-top: 0;
-  }
-  &>*:last-child {
-    margin-bottom: 0;
-  }
+	color: $gray-mid;
+	padding: 1em;
+	background-color: $gray-bleached;
+	border-radius: 10px;
+	position: relative;
+	margin: 0;
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		bottom: -20px;
+		width: 0;
+		height: 0;
+		border-top: 10px solid $gray-bleached;
+		border-right: 10px solid transparent;
+		border-left: 10px solid transparent;
+		border-bottom: 10px solid transparent;
+	}
+	& > *:first-child {
+		margin-top: 0;
+	}
+	& > *:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .source {
-  margin-top: 1em;
-  margin-bottom: 2em;
-  font-style: italic;
-  color: $gray-light;
+	margin-top: 1em;
+	margin-bottom: 2em;
+	font-style: italic;
+	color: $gray-light;
 }

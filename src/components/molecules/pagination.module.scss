@@ -1,32 +1,32 @@
-@import "../../styles/common";
+@import '../../styles/common';
 
 .base {
-  margin-left: 0;
-  margin-top: 2em;
-  text-align: center;
+	margin-left: 0;
+	margin-top: 2em;
+	text-align: center;
 }
 
 .link {
-  display: inline-block;
-  margin-right: .2em;
+	display: inline-block;
+	margin-right: 0.2em;
 
-  a {
-    color: $gray-dark;
-    text-decoration: none;
-    display: block;
-    border-radius: 3px;
-    padding: .2em .5em;
-  }
+	a {
+		color: $gray-dark;
+		text-decoration: none;
+		display: block;
+		border-radius: 3px;
+		padding: 0.2em 0.5em;
+	}
 
-  &:not(.active) a:hover {
-    background-color: $gray-lighter;
-  }
+	&:not(.active) a:hover {
+		background-color: $gray-lighter;
+	}
 }
 
 .active {
-  a {
-    color: white;
-    font-weight: bold;
-    background-color: $accent;
-  }
+	a {
+		color: white;
+		font-weight: bold;
+		background-color: $accent;
+	}
 }
