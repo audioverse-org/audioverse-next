@@ -1,5 +1,5 @@
-import { renderWithIntl } from '@lib/test/helpers';
 import Header from '@components/organisms/header';
+import { renderWithIntl } from '@lib/test/helpers';
 
 const renderHeader = async () => {
 	return renderWithIntl(Header, {});
