@@ -26,5 +26,5 @@ npm run compile
 
 ## Module shorthand
 
-Module paths must be mapped in both `tsconfig.json` and `package.json`. 
+Module paths must be mapped in both `tsconfig.json` and `package.json`.
 [More info](https://github.com/kulshekhar/ts-jest/issues/414#issuecomment-369876280)
