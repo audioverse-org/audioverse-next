@@ -1,0 +1,18 @@
+@import 'common';
+
+p {
+	line-height: 1.3em;
+}
+
+.template-base {
+	> * {
+		padding-left: 20%;
+		padding-right: 20%;
+	}
+	.template-base__header {
+		background-color: $gray-dark;
+		color: $gray-bleached;
+		overflow: hidden;
+		margin-bottom: 2rem;
+	}
+}
