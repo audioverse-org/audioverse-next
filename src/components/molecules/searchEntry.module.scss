@@ -1,0 +1,12 @@
+.entry {
+  border: 1px solid grey;
+  padding: 1em;
+  margin: 1em;
+  & > * {
+    margin: 0;
+  }
+  p {
+    font-size: .8em;
+    opacity: .8;
+  }
+}
