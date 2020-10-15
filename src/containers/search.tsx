@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchEntry from '@components/molecules/searchEntry';
+import styles from './search.module.scss';
 
 export interface SearchProps {
 	sermons?: Sermon[];
@@ -9,7 +10,7 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 	return (
 		<>
 			<h2>Search</h2>
-			<ul>
+			<ul className={styles.list}>
 				{sermons.map((s, i) => (
 					<li key={i}>sermon</li>
 				))}
