@@ -7,6 +7,9 @@ interface Sermon {
 	description: string;
 	persons: Person[];
 	title: string;
+	imageWithFallback: {
+		url: string;
+	};
 }
 
 interface Testimony {
