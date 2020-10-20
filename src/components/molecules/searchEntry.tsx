@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './searchEntry.module.scss';
 
 interface SearchEntryProps {
@@ -16,11 +17,11 @@ const SearchEntry = ({
 		<p>{type}</p>
 		<h3>{title}</h3>
 		<p>
-			{metaLines.map((l) => (
-				<>
+			{metaLines.map((l, i) => (
+				<span key={i}>
 					{l}
 					<br />
-				</>
+				</span>
 			))}
 		</p>
 	</div>

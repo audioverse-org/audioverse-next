@@ -1,12 +1,18 @@
-import { renderWithIntl } from '@lib/test/helpers';
+import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/search';
 
+const renderPage = async () => {
+	return renderWithIntl(Search, { sermons: [] });
+};
+
 describe('search', () => {
 	it('renders', async () => {
-		await renderWithIntl(Search, { sermons: [] });
+		loadQuery();
+
+		await renderPage();
 	});
 
 	it('registers search paths', async () => {
@@ -19,5 +25,13 @@ describe('search', () => {
 		const { props } = await getStaticProps();
 
 		expect(props).toBeDefined();
+	});
+
+	it('displays search term', async () => {
+		loadQuery({ q: 'search_term' });
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('heading', { name: /search_term/i })).toBeInTheDocument();
 	});
 });

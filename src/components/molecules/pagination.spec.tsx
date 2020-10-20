@@ -48,7 +48,7 @@ describe('pagination component', () => {
 	it('unlinks dots', () => {
 		const { getByText } = renderPagination({ total: 100 });
 
-		expect(getByText('...').hasAttribute('href')).toBeFalsy();
+		expect(getByText('...')).not.toHaveAttribute('href');
 	});
 
 	it('uses url base', () => {

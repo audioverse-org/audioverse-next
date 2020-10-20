@@ -8,20 +8,13 @@ const common = {
 		'@containers/(.*)': '<rootDir>/src/containers/$1',
 		'@pages/(.*)': '<rootDir>/src/pages/$1',
 	},
-	transform: {
-		'^.+\\.(t|j)sx?$': 'ts-jest',
-	},
-	globals: {
-		'ts-jest': {
-			tsConfig: 'tsconfig.test.json',
-		},
-	},
 };
 
 module.exports = {
 	projects: [
 		{
 			displayName: 'test',
+			setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
 			...common,
 		},
 		{
@@ -31,4 +24,13 @@ module.exports = {
 			...common,
 		},
 	],
+	watchPlugins: ['jest-runner-eslint/watch-fix'],
+	transform: {
+		'^.+\\.(t|j)sx?$': 'ts-jest',
+	},
+	globals: {
+		'ts-jest': {
+			tsConfig: 'tsconfig.test.json',
+		},
+	},
 };
