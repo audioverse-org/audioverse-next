@@ -29,8 +29,6 @@ describe('recording list', () => {
 	it('has image', async () => {
 		const { getByRole } = await renderComponent();
 
-		// broken type is annoying. Shouldn't require container since it's being
-		// used from render result.
 		expect(getByRole('img')).toBeInTheDocument();
 	});
 
