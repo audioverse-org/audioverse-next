@@ -14,6 +14,74 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 
 	return (
 		<>
+			<div className={styles.filters}>
+				<h3>Filters</h3>
+				<h4>Type</h4>
+				<ul>
+					<li>
+						<input type={'checkbox'} checked={true} /> Sermon
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Bible
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Bible Book
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Bible Chapter
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Audiobook
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Story Album
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Music Album
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Scripture Song
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Conference
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Person
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Tag
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Sponsor
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Series
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Playlist
+					</li>
+				</ul>
+				<h4>Person</h4>
+				<ul>
+					<li>
+						<input type={'checkbox'} checked={true} /> Mark Finley
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Chad Kreuzer
+					</li>
+					<li>
+						<input type={'checkbox'} checked={true} /> Jean Boonstra
+					</li>
+				</ul>
+				<h4>Date</h4>
+				<label>
+					Minimum <input placeholder={'mm/dd/yyyy'} />
+				</label>
+				<br />
+				<label>
+					Maximum <input placeholder={'mm/dd/yyyy'} checked={true} />
+				</label>
+			</div>
 			<h2>Search{query.q ? `: ${query.q}` : null}</h2>
 			<ul className={styles.list}>
 				{sermons.map((s, i) => (
