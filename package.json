@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
     "start": "next start",
     "test": "jest",
+    "test:watch": "jest --watch",
     "extract": "formatjs extract src/**/*.tsx --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang"
   },
@@ -45,30 +46,26 @@
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-formatjs": "^2.7.12",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest-dom": "^3.2.3",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-testing-library": "^3.9.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
+    "jest-runner-eslint": "^0.10.0",
     "prettier": "^2.1.1",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "@lib/(.*)": "<rootDir>/src/lib/$1",
-      "@components/(.*)": "<rootDir>/src/components/$1",
-      "@containers/(.*)": "<rootDir>/src/containers/$1",
-      "@pages/(.*)": "<rootDir>/src/pages/$1"
-    },
-    "transform": {
-      "^.+\\.(t|j)sx?$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.test.json"
-      }
+  "jest-runner-eslint": {
+    "cliOptions": {
+      "ext": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ],
+      "maxWarnings": 0
     }
   }
 }

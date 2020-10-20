@@ -21,7 +21,7 @@ describe('testimonies', () => {
 	});
 
 	it('falls back to english', async () => {
-		loadQuery({ language: 'fake' });
+		loadQuery({ language: 'ak' });
 
 		const { getByText } = await renderTestimonies();
 
