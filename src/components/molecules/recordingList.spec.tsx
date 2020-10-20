@@ -1,12 +1,48 @@
-import { render } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
 import { loadQuery } from '@lib/test/helpers';
 
+async function renderComponent(): Promise<RenderResult> {
+	loadQuery({ language: 'en' });
+
+	return render(
+		<RecordingList
+			sermons={[
+				{
+					imageWithFallback: {
+						url: 'the_url',
+					},
+					title: 'the_title',
+				} as any,
+			]}
+		/>
+	);
+}
+
 describe('recording list', () => {
 	it('renders', async () => {
-		loadQuery({ language: 'en' });
-		await render(<RecordingList sermons={[]} />);
+		await renderComponent();
+	});
+
+	it('has image', async () => {
+		const { getByRole } = await renderComponent();
+
+		// broken type is annoying. Shouldn't require container since it's being
+		// used from render result.
+		expect(getByRole('img')).toBeInTheDocument();
+	});
+
+	it('sets image src', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('img')).toHaveAttribute('src', 'the_url');
+	});
+
+	it('sets alt', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('img')).toHaveAttribute('alt', 'the_title');
 	});
 });

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -15,6 +16,10 @@ export default function RecordingList({
 		<ul>
 			{sermons.map((s) => (
 				<li key={s.id}>
+					<img
+						src={_.get(s, 'imageWithFallback.url')}
+						alt={_.get(s, 'title')}
+					/>
 					<a href={`/${lang}/sermons/${s.id}`}>{s.title}</a>
 				</li>
 			))}
