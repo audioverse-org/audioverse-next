@@ -4,7 +4,7 @@ import React from 'react';
 import RecordingList from '@components/molecules/recordingList';
 import { loadQuery } from '@lib/test/helpers';
 
-async function renderComponent(): Promise<RenderResult> {
+async function renderComponent(sermonData = {}): Promise<RenderResult> {
 	loadQuery({ language: 'en' });
 
 	return render(
@@ -16,6 +16,8 @@ async function renderComponent(): Promise<RenderResult> {
 					},
 					title: 'the_title',
 					persons: [{ name: 'the_person_name', id: 'the_person_id' }],
+					duration: 600,
+					...sermonData,
 				} as any,
 			]}
 		/>
@@ -58,5 +60,43 @@ describe('recording list', () => {
 			'href',
 			'/en/presenters/the_person_id'
 		);
+	});
+
+	it('includes duration', async () => {
+		const { getByText } = await renderComponent();
+
+		expect(getByText('10:00')).toBeInTheDocument();
+	});
+
+	it('includes seconds in duration', async () => {
+		const { getByText } = await renderComponent({
+			duration: 601,
+		});
+
+		expect(getByText('10:01')).toBeInTheDocument();
+	});
+
+	it('includes hours in duration', async () => {
+		const { getByText } = await renderComponent({
+			duration: 60 * 60,
+		});
+
+		expect(getByText('1:00:00')).toBeInTheDocument();
+	});
+
+	it('pads seconds correctly', async () => {
+		const { getByText } = await renderComponent({
+			duration: 610,
+		});
+
+		expect(getByText('10:10')).toBeInTheDocument();
+	});
+
+	it('rounds seconds', async () => {
+		const { getByText } = await renderComponent({
+			duration: 0.7,
+		});
+
+		expect(getByText('0:01')).toBeInTheDocument();
 	});
 });

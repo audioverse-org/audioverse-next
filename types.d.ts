@@ -3,6 +3,7 @@
 interface Sermon {
 	audioFiles: AudioFile[];
 	recordingDate: string;
+	duration: number;
 	id: string;
 	description: string;
 	persons: Person[];
