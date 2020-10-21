@@ -21,6 +21,7 @@ fragment SermonsFragment on Recording {
 	}
 	persons {
 		name
+		id
 	}
 	recordingDate
 }
