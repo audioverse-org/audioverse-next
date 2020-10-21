@@ -4,20 +4,14 @@ import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
 
-const formatDuration = (seconds: number, m = 0, h = 0): string => {
-	seconds = Math.round(seconds);
-
-	if (seconds >= 60 * 60) {
-		return formatDuration(seconds - 60 * 60, m, h + 1);
-	}
-
-	if (seconds >= 60) {
-		return formatDuration(seconds - 60, m + 1, h);
-	}
-
-	const ms = `${m}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-	return h ? `${h}:${h && m < 10 ? '0' : ''}${ms}` : ms;
+const formatDuration = (duration: number): string => {
+	duration = Math.round(duration);
+	const hours = Math.floor(duration / 3600);
+	const minutes = Math.floor((duration - hours * 3600) / 60);
+	const seconds = String(duration % 60).padStart(2, '0');
+	return `${
+		hours ? hours + ':' + String(minutes).padStart(2, '0') : minutes
+	}:${seconds}`;
 };
 
 export default function RecordingListEntry({
