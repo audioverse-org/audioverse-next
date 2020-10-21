@@ -24,6 +24,7 @@ interface AudioFile {
 
 interface Person {
 	name: string;
+	id: string;
 }
 
 interface StaticPaths {

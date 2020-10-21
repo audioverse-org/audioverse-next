@@ -15,6 +15,7 @@ async function renderComponent(): Promise<RenderResult> {
 						url: 'the_url',
 					},
 					title: 'the_title',
+					persons: [{ name: 'the_person_name', id: 'the_person_id' }],
 				} as any,
 			]}
 		/>
@@ -42,5 +43,20 @@ describe('recording list', () => {
 		const { getByRole } = await renderComponent();
 
 		expect(getByRole('img')).toHaveAttribute('alt', 'the_title');
+	});
+
+	it('includes presenter names', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('link', { name: 'the_person_name' })).toBeInTheDocument();
+	});
+
+	it('includes presenter link', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('link', { name: 'the_person_name' })).toHaveAttribute(
+			'href',
+			'/en/presenters/the_person_id'
+		);
 	});
 });

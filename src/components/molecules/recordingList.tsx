@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { useRouter } from 'next/router';
 import React from 'react';
+
+import RecordingListEntry from '@components/molecules/recordingListEntry';
 
 import styles from './recordingList.module.scss';
 
@@ -11,22 +11,11 @@ interface RecordingListProps {
 export default function RecordingList({
 	sermons,
 }: RecordingListProps): JSX.Element {
-	const router = useRouter(),
-		lang = router.query.language;
-
 	return (
-		<ul className={styles.list}>
+		<table className={styles.table}>
 			{sermons.map((s) => (
-				<li key={s.id} className={styles.item}>
-					<a href={`/${lang}/sermons/${s.id}`}>
-						<img
-							src={_.get(s, 'imageWithFallback.url')}
-							alt={_.get(s, 'title')}
-						/>
-						{s.title}
-					</a>
-				</li>
+				<RecordingListEntry key={s.id} sermon={s} />
 			))}
-		</ul>
+		</table>
 	);
 }
