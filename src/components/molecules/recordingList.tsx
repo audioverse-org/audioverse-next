@@ -12,10 +12,17 @@ export default function RecordingList({
 	sermons,
 }: RecordingListProps): JSX.Element {
 	return (
-		<table className={styles.list}>
-			{sermons.map((s) => (
-				<RecordingListEntry key={s.id} sermon={s} />
-			))}
-		</table>
+		<div>
+			<div>
+				<a>All</a>
+				<a>Video</a>
+				<a>Audio</a>
+			</div>
+			<table className={styles.list}>
+				{sermons.map((s) => (
+					<RecordingListEntry key={s.id} sermon={s} />
+				))}
+			</table>
+		</div>
 	);
 }
