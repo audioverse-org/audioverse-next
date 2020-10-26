@@ -110,40 +110,4 @@ describe('recording list', () => {
 
 		expect(getByText('0:01')).toBeInTheDocument();
 	});
-
-	it('links All button', async () => {
-		const { getByRole } = await renderComponent();
-
-		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
-			'href',
-			'/en/sermons/page/1'
-		);
-	});
-
-	it('links All button using lang', async () => {
-		const { getByRole } = await renderComponent({ language: 'es' });
-
-		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
-			'href',
-			'/es/sermons/page/1'
-		);
-	});
-
-	it('links Video button', async () => {
-		const { getByRole } = await renderComponent();
-
-		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
-			'href',
-			'/en/sermons/video/page/1'
-		);
-	});
-
-	it('links Audio button', async () => {
-		const { getByRole } = await renderComponent();
-
-		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
-			'href',
-			'/en/sermons/audio/page/1'
-		);
-	});
 });

@@ -17,7 +17,7 @@ export default function RecordingList({
 	return (
 		<div>
 			<div>
-				<a href={`/${lang}/sermons/page/1`}>All</a>
+				<a href={`/${lang}/sermons/all/page/1`}>All</a>
 				<a href={`/${lang}/sermons/video/page/1`}>Video</a>
 				<a href={`/${lang}/sermons/audio/page/1`}>Audio</a>
 			</div>

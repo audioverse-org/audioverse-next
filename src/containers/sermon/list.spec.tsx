@@ -7,7 +7,7 @@ import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/page/[i]';
+} from '@pages/[language]/sermons/[filter]/page/[i]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
@@ -201,5 +201,49 @@ describe('sermons list page', () => {
 		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		expect(props.revalidate).toBe(10);
+	});
+
+	it('links All button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/en/sermons/all/page/1'
+		);
+	});
+
+	it('links All button using lang', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage({ query: { language: 'es' } });
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/es/sermons/all/page/1'
+		);
+	});
+
+	it('links Video button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
+			'href',
+			'/en/sermons/video/page/1'
+		);
+	});
+
+	it('links Audio button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
+			'href',
+			'/en/sermons/audio/page/1'
+		);
 	});
 });
