@@ -18,8 +18,8 @@ export default function RecordingList({
 		<div>
 			<div>
 				<a href={`/${lang}/sermons/page/1`}>All</a>
-				<a href={''}>Video</a>
-				<a href={''}>Audio</a>
+				<a href={`/${lang}/sermons/video/page/1`}>Video</a>
+				<a href={`/${lang}/sermons/audio/page/1`}>Audio</a>
 			</div>
 			<table className={styles.list}>
 				<tbody>

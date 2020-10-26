@@ -128,4 +128,22 @@ describe('recording list', () => {
 			'/es/sermons/page/1'
 		);
 	});
+
+	it('links Video button', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
+			'href',
+			'/en/sermons/video/page/1'
+		);
+	});
+
+	it('links Audio button', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
+			'href',
+			'/en/sermons/audio/page/1'
+		);
+	});
 });
