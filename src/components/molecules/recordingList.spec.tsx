@@ -4,8 +4,11 @@ import React from 'react';
 import RecordingList from '@components/molecules/recordingList';
 import { loadQuery } from '@lib/test/helpers';
 
-async function renderComponent(sermonData = {}): Promise<RenderResult> {
-	loadQuery({ language: 'en' });
+async function renderComponent({
+	sermonData = {},
+	language = 'en',
+} = {}): Promise<RenderResult> {
+	loadQuery({ language });
 
 	return render(
 		<RecordingList
@@ -70,7 +73,9 @@ describe('recording list', () => {
 
 	it('includes seconds in duration', async () => {
 		const { getByText } = await renderComponent({
-			duration: 601,
+			sermonData: {
+				duration: 601,
+			},
 		});
 
 		expect(getByText('10:01')).toBeInTheDocument();
@@ -78,7 +83,9 @@ describe('recording list', () => {
 
 	it('includes hours in duration', async () => {
 		const { getByText } = await renderComponent({
-			duration: 60 * 60,
+			sermonData: {
+				duration: 60 * 60,
+			},
 		});
 
 		expect(getByText('1:00:00')).toBeInTheDocument();
@@ -86,7 +93,9 @@ describe('recording list', () => {
 
 	it('pads seconds correctly', async () => {
 		const { getByText } = await renderComponent({
-			duration: 610,
+			sermonData: {
+				duration: 610,
+			},
 		});
 
 		expect(getByText('10:10')).toBeInTheDocument();
@@ -94,9 +103,29 @@ describe('recording list', () => {
 
 	it('rounds seconds', async () => {
 		const { getByText } = await renderComponent({
-			duration: 0.7,
+			sermonData: {
+				duration: 0.7,
+			},
 		});
 
 		expect(getByText('0:01')).toBeInTheDocument();
+	});
+
+	it('links All button', async () => {
+		const { getByRole } = await renderComponent();
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/en/sermons/page/1'
+		);
+	});
+
+	it('links All button using lang', async () => {
+		const { getByRole } = await renderComponent({ language: 'es' });
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/es/sermons/page/1'
+		);
 	});
 });
