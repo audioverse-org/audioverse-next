@@ -11,15 +11,25 @@ interface StaticProps {
 }
 
 interface GetStaticPropsArgs {
-	params: { i: string; language: string };
+	params: { i: string; filter: string; language: string };
 }
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
+	const { i, filter, language } = params;
 
-	return getPaginatedStaticProps(language, parseInt(i), getSermons);
+	return getPaginatedStaticProps(
+		language,
+		parseInt(i),
+		async (lang, options) => {
+			if (filter === 'video' || filter === 'audio') {
+				options.hasVideo = filter === 'video';
+			}
+
+			return getSermons(lang, options);
+		}
+	);
 }
 
 const makeListPaths = async (

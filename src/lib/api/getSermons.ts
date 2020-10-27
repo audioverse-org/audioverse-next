@@ -1,8 +1,8 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
 const query = `
-query getSermons($language: Language!, $offset: Int, $first: Int!) {
-	sermons(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: CREATED_AT}) {
+query getSermons($language: Language!, $offset: Int, $first: Int!, $hasVideo: Boolean) {
+	sermons(language: $language, hasVideo: $hasVideo, first: $first, offset: $offset, orderBy: {direction: DESC, field: CREATED_AT}) {
 		nodes {
 			...SermonsFragment
 		}
@@ -34,11 +34,17 @@ export interface GetSermonsReturnType {
 	};
 }
 
+interface GetSermonsProps {
+	offset?: number;
+	first?: number;
+	hasVideo?: boolean | null;
+}
+
 export async function getSermons(
 	language: string,
-	{ offset = undefined, first = 1000 }: { offset?: number; first?: number } = {}
+	{ offset = undefined, first = 1000, hasVideo = null }: GetSermonsProps = {}
 ): Promise<GetSermonsReturnType> {
-	const variables = { language, offset, first },
+	const variables = { language, offset, first, hasVideo },
 		data = await fetchApi(query, { variables });
 
 	return data?.sermons;

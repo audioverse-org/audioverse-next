@@ -23,7 +23,14 @@ interface IGetterResolved {
 interface Getter<T> {
 	(
 		language: string,
-		{ offset, first }: { offset?: number; first?: number }
+		{
+			offset,
+			first,
+		}: {
+			hasVideo?: boolean | null;
+			offset?: number;
+			first?: number;
+		}
 	): Promise<T>;
 }
 

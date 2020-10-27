@@ -17,7 +17,7 @@ function loadQuery(query = {}) {
 }
 
 const renderPage = async ({
-	params = { i: '1', language: 'en' },
+	params = { i: '1', language: 'en', filter: 'all' },
 	query = {},
 } = {}) => {
 	loadQuery(query);
@@ -265,5 +265,41 @@ describe('sermons list page', () => {
 		await getStaticPaths();
 
 		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: false });
+	});
+
+	it('gets video filtered sermons', async () => {
+		loadSermons();
+
+		await renderPage({
+			params: {
+				i: '1',
+				filter: 'video',
+				language: 'en',
+			},
+		});
+
+		expect(getSermons).toBeCalledWith('ENGLISH', {
+			hasVideo: true,
+			first: 25,
+			offset: 0,
+		});
+	});
+
+	it('gets audio filtered sermons', async () => {
+		loadSermons();
+
+		await renderPage({
+			params: {
+				i: '1',
+				filter: 'audio',
+				language: 'en',
+			},
+		});
+
+		expect(getSermons).toBeCalledWith('ENGLISH', {
+			hasVideo: false,
+			first: 25,
+			offset: 0,
+		});
 	});
 });
