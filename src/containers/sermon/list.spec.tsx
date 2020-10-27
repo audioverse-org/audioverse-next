@@ -66,7 +66,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/page/1');
+		expect(result.paths).toContain('/en/sermons/all/page/1');
 	});
 
 	it('generates in all languages', async () => {
@@ -74,7 +74,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/page/1');
+		expect(result.paths).toContain('/es/sermons/all/page/1');
 	});
 
 	it('sets proper fallback strategy', async () => {
@@ -90,7 +90,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		const expected = 100 * Object.keys(LANGUAGES).length;
+		const expected = 100 * Object.keys(LANGUAGES).length * 3;
 		expect(result.paths.length).toBe(expected);
 	});
 
@@ -245,5 +245,25 @@ describe('sermons list page', () => {
 			'href',
 			'/en/sermons/audio/page/1'
 		);
+	});
+
+	it('generates filtered pages', async () => {
+		setSermonCount(1);
+
+		const result = await getStaticPaths();
+
+		expect(result.paths).toContain('/es/sermons/video/page/1');
+	});
+
+	it('gets video count', async () => {
+		await getStaticPaths();
+
+		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: true });
+	});
+
+	it('gets audio count', async () => {
+		await getStaticPaths();
+
+		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: false });
 	});
 });

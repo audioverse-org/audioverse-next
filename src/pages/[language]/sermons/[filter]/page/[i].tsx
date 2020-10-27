@@ -1,6 +1,6 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
+import { makeNumberedPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default SermonList;
@@ -23,5 +23,16 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/page', getSermonCount);
+	const all = await makeNumberedPaths('sermons/all', getSermonCount);
+	const video = await makeNumberedPaths('sermons/video', (lang) =>
+		getSermonCount(lang, { hasVideo: true })
+	);
+	const audio = await makeNumberedPaths('sermons/audio', (lang) =>
+		getSermonCount(lang, { hasVideo: false })
+	);
+
+	return {
+		paths: [...all, ...video, ...audio],
+		fallback: 'unstable_blocking',
+	};
 }
