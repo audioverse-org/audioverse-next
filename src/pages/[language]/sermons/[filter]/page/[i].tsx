@@ -22,17 +22,22 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(language, parseInt(i), getSermons);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
-	const all = await makeNumberedPaths('sermons/all', getSermonCount);
-	const video = await makeNumberedPaths('sermons/video', (lang) =>
-		getSermonCount(lang, { hasVideo: true })
+const makeListPaths = async (
+	pathModifier: string,
+	hasVideo: boolean | null = null
+) => {
+	return makeNumberedPaths(`sermons/${pathModifier}`, (lang) =>
+		getSermonCount(lang, { hasVideo })
 	);
-	const audio = await makeNumberedPaths('sermons/audio', (lang) =>
-		getSermonCount(lang, { hasVideo: false })
-	);
+};
 
+export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: [...all, ...video, ...audio],
+		paths: [
+			...(await makeListPaths('all')),
+			...(await makeListPaths('video', true)),
+			...(await makeListPaths('audio', false)),
+		],
 		fallback: 'unstable_blocking',
 	};
 }

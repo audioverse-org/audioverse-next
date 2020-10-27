@@ -99,7 +99,7 @@ describe('sermons list page', () => {
 
 		await getStaticPaths();
 
-		expect(getSermonCount).toBeCalledWith('ENGLISH');
+		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: null });
 	});
 
 	it('gets sermons for list page', async () => {
