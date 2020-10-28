@@ -3,6 +3,7 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import useLanguage from '@lib/useLanguage';
 
 export interface SermonListProps {
 	nodes: Sermon[];
@@ -13,8 +14,14 @@ export interface SermonListProps {
 }
 
 function SermonList({ nodes, pagination }: SermonListProps) {
+	const lang = useLanguage();
 	return (
 		<div>
+			<div>
+				<a href={`/${lang}/sermons/all/page/1`}>All</a>
+				<a href={`/${lang}/sermons/video/page/1`}>Video</a>
+				<a href={`/${lang}/sermons/audio/page/1`}>Audio</a>
+			</div>
 			<RecordingList sermons={nodes} />
 			<Pagination
 				current={pagination.current}
