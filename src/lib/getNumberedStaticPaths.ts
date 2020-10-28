@@ -23,6 +23,6 @@ export const getNumberedStaticPaths = async (
 ): Promise<StaticPaths> => {
 	return {
 		paths: await makeNumberedPaths(basePath, getCount),
-		fallback: 'unstable_blocking',
+		fallback: true,
 	};
 };
