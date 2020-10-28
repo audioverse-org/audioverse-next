@@ -21,5 +21,5 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('testimonies/page', getTestimonyCount);
+	return getNumberedStaticPaths('testimonies', getTestimonyCount);
 }

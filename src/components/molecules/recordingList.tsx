@@ -13,9 +13,11 @@ export default function RecordingList({
 }: RecordingListProps): JSX.Element {
 	return (
 		<table className={styles.list}>
-			{sermons.map((s) => (
-				<RecordingListEntry key={s.id} sermon={s} />
-			))}
+			<tbody>
+				{sermons.map((s, i) => (
+					<RecordingListEntry key={i} sermon={s} />
+				))}
+			</tbody>
 		</table>
 	);
 }

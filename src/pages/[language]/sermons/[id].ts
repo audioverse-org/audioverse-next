@@ -49,6 +49,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	return {
 		paths: pathSets.flat(),
-		fallback: 'unstable_blocking',
+		fallback: true,
 	};
 }

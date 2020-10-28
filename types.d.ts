@@ -30,5 +30,5 @@ interface Person {
 
 interface StaticPaths {
 	paths: string[];
-	fallback: 'unstable_blocking';
+	fallback: boolean;
 }

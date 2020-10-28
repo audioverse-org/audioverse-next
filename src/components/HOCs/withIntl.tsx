@@ -1,12 +1,10 @@
-import _ from 'lodash';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 
+import useLanguage from '@lib/useLanguage';
+
 const useTranslation = () => {
-	const router = useRouter(),
-		languageParam = _.get(router, 'query.language', 'en'),
-		language = Array.isArray(languageParam) ? languageParam[0] : languageParam;
+	const language = useLanguage();
 
 	let messages;
 

@@ -18,6 +18,6 @@ export async function getStaticProps(): Promise<StaticProps> {
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
 		paths: Object.values(LANGUAGES).map((l) => `/${l.base_url}/search`),
-		fallback: 'unstable_blocking',
+		fallback: true,
 	};
 }

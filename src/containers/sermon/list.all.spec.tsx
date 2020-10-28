@@ -4,10 +4,11 @@ import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { loadSermons, setSermonCount } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/page/[i]';
+} from '@pages/[language]/sermons/all/page/[i]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
@@ -24,29 +25,6 @@ const renderPage = async ({
 	const { props } = await getStaticProps({ params });
 	return render(<SermonList {...props} />);
 };
-
-function setSermonCount(count: number) {
-	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
-}
-
-function loadSermons({
-	nodes = undefined,
-	count = undefined,
-}: { nodes?: any[]; count?: number } = {}) {
-	(getSermons as jest.Mock).mockReturnValue(
-		Promise.resolve({
-			nodes: nodes || [
-				{
-					id: 1,
-					title: 'the_sermon_title',
-				},
-			],
-			aggregate: {
-				count: count || 1,
-			},
-		})
-	);
-}
 
 function loadGetSermonsError() {
 	(getSermons as jest.Mock).mockReturnValue(Promise.reject('API failure'));
@@ -66,7 +44,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/page/1');
+		expect(result.paths).toContain('/en/sermons/all/page/1');
 	});
 
 	it('generates in all languages', async () => {
@@ -74,7 +52,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/page/1');
+		expect(result.paths).toContain('/es/sermons/all/page/1');
 	});
 
 	it('sets proper fallback strategy', async () => {
@@ -82,7 +60,7 @@ describe('sermons list page', () => {
 
 		const { fallback } = await getStaticPaths();
 
-		expect(fallback).toBe('unstable_blocking');
+		expect(fallback).toBe(true);
 	});
 
 	it('generates all pages in language', async () => {
@@ -201,5 +179,57 @@ describe('sermons list page', () => {
 		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		expect(props.revalidate).toBe(10);
+	});
+
+	it('links All button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/en/sermons/all/page/1'
+		);
+	});
+
+	it('links All button using lang', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage({ query: { language: 'es' } });
+
+		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+			'href',
+			'/es/sermons/all/page/1'
+		);
+	});
+
+	it('links Video button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
+			'href',
+			'/en/sermons/video/page/1'
+		);
+	});
+
+	it('links Audio button', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
+			'href',
+			'/en/sermons/audio/page/1'
+		);
+	});
+
+	it('does not include video paths', async () => {
+		setSermonCount(1);
+
+		const result = await getStaticPaths();
+
+		expect(result.paths).not.toContain('/en/sermons/video/page/1');
 	});
 });

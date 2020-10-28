@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
+import useLanguage from '@lib/useLanguage';
 
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);
@@ -19,8 +19,7 @@ export default function RecordingListEntry({
 }: {
 	sermon: Sermon;
 }): JSX.Element {
-	const router = useRouter(),
-		lang = router.query.language,
+	const lang = useLanguage(),
 		persons: Person[] = _.get(sermon, 'persons', []);
 
 	return (

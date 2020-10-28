@@ -23,5 +23,5 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/page', getSermonCount);
+	return getNumberedStaticPaths('sermons/all', getSermonCount);
 }
