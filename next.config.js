@@ -8,7 +8,7 @@ module.exports = withPWA({
 		return [
 			{
 				source: '/:lang/sermons',
-				destination: '/:lang/sermons/page/1',
+				destination: '/:lang/sermons/all/page/1',
 				permanent: true,
 			},
 		];

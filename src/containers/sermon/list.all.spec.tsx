@@ -4,10 +4,11 @@ import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { loadSermons, setSermonCount } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/[filter]/page/[i]';
+} from '@pages/[language]/sermons/all/page/[i]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
@@ -17,36 +18,13 @@ function loadQuery(query = {}) {
 }
 
 const renderPage = async ({
-	params = { i: '1', language: 'en', filter: 'all' },
+	params = { i: '1', language: 'en' },
 	query = {},
 } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
 	return render(<SermonList {...props} />);
 };
-
-function setSermonCount(count: number) {
-	(getSermonCount as jest.Mock).mockReturnValue(Promise.resolve(count));
-}
-
-function loadSermons({
-	nodes = undefined,
-	count = undefined,
-}: { nodes?: any[]; count?: number } = {}) {
-	(getSermons as jest.Mock).mockReturnValue(
-		Promise.resolve({
-			nodes: nodes || [
-				{
-					id: 1,
-					title: 'the_sermon_title',
-				},
-			],
-			aggregate: {
-				count: count || 1,
-			},
-		})
-	);
-}
 
 function loadGetSermonsError() {
 	(getSermons as jest.Mock).mockReturnValue(Promise.reject('API failure'));
@@ -90,7 +68,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		const expected = 100 * Object.keys(LANGUAGES).length * 3;
+		const expected = 100 * Object.keys(LANGUAGES).length;
 		expect(result.paths.length).toBe(expected);
 	});
 
@@ -99,7 +77,7 @@ describe('sermons list page', () => {
 
 		await getStaticPaths();
 
-		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: null });
+		expect(getSermonCount).toBeCalledWith('ENGLISH');
 	});
 
 	it('gets sermons for list page', async () => {
@@ -247,59 +225,11 @@ describe('sermons list page', () => {
 		);
 	});
 
-	it('generates filtered pages', async () => {
+	it('does not include video paths', async () => {
 		setSermonCount(1);
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/video/page/1');
-	});
-
-	it('gets video count', async () => {
-		await getStaticPaths();
-
-		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: true });
-	});
-
-	it('gets audio count', async () => {
-		await getStaticPaths();
-
-		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: false });
-	});
-
-	it('gets video filtered sermons', async () => {
-		loadSermons();
-
-		await renderPage({
-			params: {
-				i: '1',
-				filter: 'video',
-				language: 'en',
-			},
-		});
-
-		expect(getSermons).toBeCalledWith('ENGLISH', {
-			hasVideo: true,
-			first: 25,
-			offset: 0,
-		});
-	});
-
-	it('gets audio filtered sermons', async () => {
-		loadSermons();
-
-		await renderPage({
-			params: {
-				i: '1',
-				filter: 'audio',
-				language: 'en',
-			},
-		});
-
-		expect(getSermons).toBeCalledWith('ENGLISH', {
-			hasVideo: false,
-			first: 25,
-			offset: 0,
-		});
+		expect(result.paths).not.toContain('/en/sermons/video/page/1');
 	});
 });
