@@ -57,7 +57,7 @@ describe('testimonies pages', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.fallback).toBe('unstable_blocking');
+		expect(result.fallback).toBe(true);
 	});
 
 	it('gets page of testimonies', async () => {

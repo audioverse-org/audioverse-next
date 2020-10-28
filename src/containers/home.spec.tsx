@@ -42,7 +42,7 @@ describe('home page', () => {
 	it('sets proper fallback strategy', async () => {
 		const { fallback } = await getStaticPaths();
 
-		expect(fallback).toBe('unstable_blocking');
+		expect(fallback).toBe(true);
 	});
 
 	it('gets recent sermons', async () => {

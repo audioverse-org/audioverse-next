@@ -60,7 +60,7 @@ describe('sermons list page', () => {
 
 		const { fallback } = await getStaticPaths();
 
-		expect(fallback).toBe('unstable_blocking');
+		expect(fallback).toBe(true);
 	});
 
 	it('generates all pages in language', async () => {
