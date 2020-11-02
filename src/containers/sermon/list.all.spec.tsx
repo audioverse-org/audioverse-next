@@ -257,11 +257,30 @@ describe('sermons list page', () => {
 		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
 	});
 
-	it('calls mikdirp', async () => {
+	it('calls mikdirSync', async () => {
 		loadSermons();
 
 		await renderPage();
 
 		expect(fs.mkdirSync).toBeCalled();
+	});
+
+	it('only renders feed once per language', async () => {
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'en' } });
+		await renderPage({ params: { i: '2', language: 'en' } });
+
+		expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
+	});
+
+	it('renders feeds for other languages', async () => {
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'es' } });
+
+		const { calls } = (fs.writeFileSync as any).mock;
+
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/sermons/all.xml`);
 	});
 });
