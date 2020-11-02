@@ -1,5 +1,3 @@
-import { resolve } from 'path';
-
 export const ENTRIES_PER_PAGE = 25;
 
 export const LANGUAGES: { [key: string]: { base_url: string } } = {

@@ -26,12 +26,6 @@ export default async function createFeed({
 
 	const path = resolve(PROJECT_ROOT, projectRelativePath);
 
-	console.log({
-		__dirname,
-		PROJECT_ROOT,
-		path,
-	});
-
 	if (!path.startsWith(PROJECT_ROOT)) {
 		throw new Error('Path not within project');
 	}

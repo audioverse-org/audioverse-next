@@ -254,8 +254,6 @@ describe('sermons list page', () => {
 
 		const { calls } = (fs.writeFileSync as any).mock;
 
-		console.log(calls);
-
 		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
 	});
 
