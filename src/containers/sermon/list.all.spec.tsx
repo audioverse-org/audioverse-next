@@ -1,10 +1,12 @@
+import fs from 'fs';
+
 import { render, waitFor } from '@testing-library/react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
-import { loadSermons, setSermonCount } from '@lib/test/helpers';
+import { loadSermons, mockFeed, setSermonCount } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -12,6 +14,7 @@ import SermonList, {
 
 jest.mock('@lib/api');
 jest.mock('next/router');
+jest.mock('fs');
 
 function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
@@ -31,7 +34,10 @@ function loadGetSermonsError() {
 }
 
 describe('sermons list page', () => {
-	beforeEach(() => jest.resetAllMocks());
+	beforeEach(() => {
+		jest.resetAllMocks();
+		mockFeed();
+	});
 
 	it('can be rendered', async () => {
 		loadSermons();
@@ -231,5 +237,13 @@ describe('sermons list page', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).not.toContain('/en/sermons/video/page/1');
+	});
+
+	it('calls createFeed', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		expect(fs.writeFileSync).toBeCalled();
 	});
 });

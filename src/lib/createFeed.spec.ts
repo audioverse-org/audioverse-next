@@ -3,19 +3,11 @@ import fs from 'fs';
 import * as feed from 'feed';
 
 import { PROJECT_ROOT } from '@lib/constants';
+import { mockFeed } from '@lib/test/helpers';
 
 import createFeed from './createFeed';
 
 jest.mock('fs');
-jest.mock('feed');
-
-const mockFeed = () => {
-	const addItem = jest.fn();
-	const rss2 = jest.fn();
-	jest.spyOn(feed, 'Feed').mockImplementation(() => ({ addItem, rss2 } as any));
-
-	return { addItem, rss2 };
-};
 
 describe('createFeed', () => {
 	it('can be called', async () => {

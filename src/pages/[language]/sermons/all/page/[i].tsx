@@ -1,5 +1,6 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
+import createFeed from '@lib/createFeed';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -18,6 +19,8 @@ export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params;
+
+	createFeed({ recordings: [], projectRelativePath: '', title: '' });
 
 	return getPaginatedStaticProps(language, parseInt(i), getSermons);
 }

@@ -1,6 +1,7 @@
 import { ParsedUrlQuery } from 'querystring';
 
 import { render, RenderResult } from '@testing-library/react';
+import * as feed from 'feed';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React from 'react';
@@ -8,6 +9,14 @@ import React from 'react';
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
 import { getSermons } from '@lib/api';
+
+export const mockFeed = (): { addItem: any; rss2: any } => {
+	const addItem = jest.fn();
+	const rss2 = jest.fn();
+	jest.spyOn(feed, 'Feed').mockImplementation(() => ({ addItem, rss2 } as any));
+
+	return { addItem, rss2 };
+};
 
 export function loadSermons({
 	nodes = undefined,
