@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
-import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
 import { loadSermons, mockFeed, setSermonCount } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
@@ -245,5 +245,25 @@ describe('sermons list page', () => {
 		await renderPage();
 
 		expect(fs.writeFileSync).toBeCalled();
+	});
+
+	it('provides path', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		const { calls } = (fs.writeFileSync as any).mock;
+
+		console.log(calls);
+
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
+	});
+
+	it('calls mikdirp', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		expect(fs.mkdirSync).toBeCalled();
 	});
 });

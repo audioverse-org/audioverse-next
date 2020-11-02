@@ -12,4 +12,4 @@ export const LANGUAGES: { [key: string]: { base_url: string } } = {
 	RUSSIAN: { base_url: 'ru' },
 };
 
-export const PROJECT_ROOT = resolve(__dirname, '../..');
+export const PROJECT_ROOT = process.cwd();

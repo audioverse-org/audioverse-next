@@ -74,4 +74,18 @@ describe('createFeed', () => {
 			})
 		).rejects.toBeDefined();
 	});
+
+	it('creates folder tree', async () => {
+		mockFeed();
+
+		await createFeed({
+			recordings: [],
+			title: 'the_title',
+			projectRelativePath: 'the/out/file.xml',
+		});
+
+		expect(fs.mkdirSync).toBeCalledWith(`${PROJECT_ROOT}/the/out`, {
+			recursive: true,
+		});
+	});
 });

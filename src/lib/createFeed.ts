@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { resolve } from 'path';
+import { dirname, resolve } from 'path';
 
 import { Feed } from 'feed';
 
@@ -11,11 +11,11 @@ interface CreateFeedProps {
 	projectRelativePath: string;
 }
 
-export default function createFeed({
+export default async function createFeed({
 	recordings,
 	title,
 	projectRelativePath,
-}: CreateFeedProps): void {
+}: CreateFeedProps): Promise<void> {
 	const feed = new Feed({
 		id: '',
 		title,
@@ -26,9 +26,17 @@ export default function createFeed({
 
 	const path = resolve(PROJECT_ROOT, projectRelativePath);
 
+	console.log({
+		__dirname,
+		PROJECT_ROOT,
+		path,
+	});
+
 	if (!path.startsWith(PROJECT_ROOT)) {
 		throw new Error('Path not within project');
 	}
+
+	fs.mkdirSync(dirname(path), { recursive: true });
 
 	fs.writeFileSync(path, feed.rss2());
 }

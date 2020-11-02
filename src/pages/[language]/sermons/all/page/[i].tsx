@@ -20,7 +20,11 @@ export async function getStaticProps({
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params;
 
-	createFeed({ recordings: [], projectRelativePath: '', title: '' });
+	await createFeed({
+		recordings: [],
+		projectRelativePath: 'public/en/sermons/all.xml',
+		title: '',
+	});
 
 	return getPaginatedStaticProps(language, parseInt(i), getSermons);
 }
