@@ -2,6 +2,7 @@ import fs from 'fs';
 import { dirname, resolve } from 'path';
 
 import { Feed } from 'feed';
+import _ from 'lodash';
 
 import { PROJECT_ROOT } from '@lib/constants';
 
@@ -22,7 +23,21 @@ export default async function createFeed({
 		copyright: '',
 	});
 
-	recordings.map((i) => feed.addItem(i));
+	recordings.map((i) => {
+		const file = _.get(i, 'audioFiles[0]') || _.get(i, 'videoFiles[0]'),
+			url = _.get(file, 'url'),
+			length = _.get(file, 'filesize');
+
+		if (!url) return;
+
+		feed.addItem({
+			title: i.title,
+			description: i.description,
+			link: i.canonicalUrl,
+			date: new Date(i.recordingDate),
+			enclosure: { url, length },
+		});
+	});
 
 	const path = resolve(PROJECT_ROOT, projectRelativePath);
 

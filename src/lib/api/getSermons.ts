@@ -24,6 +24,16 @@ fragment SermonsFragment on Recording {
 		name
 		id
 	}
+	audioFiles {
+		url
+		duration
+		filesize
+	}
+	videoFiles {
+		url
+		duration
+		filesize
+	}
 	recordingDate
 	canonicalUrl
 }

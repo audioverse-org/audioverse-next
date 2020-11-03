@@ -88,4 +88,39 @@ describe('createFeed', () => {
 			recursive: true,
 		});
 	});
+
+	it('includes adds item', async () => {
+		const { addItem } = mockFeed();
+
+		await createFeed({
+			recordings: [
+				{
+					title: 'recording_title',
+					description: 'recording_description',
+					recordingDate: '2007-03-05T12:00:00.000Z',
+					canonicalUrl: 'the_url',
+					audioFiles: [
+						{
+							url: 'file_url',
+							duration: 1,
+							filesize: '3', // should this be a number?
+						},
+					],
+				},
+			],
+			title: 'the_title',
+			projectRelativePath: 'the/out/file.xml',
+		});
+
+		expect(addItem).toBeCalledWith({
+			title: 'recording_title',
+			description: 'recording_description',
+			date: new Date('2007-03-05T12:00:00.000Z'),
+			link: 'the_url',
+			enclosure: {
+				url: 'file_url',
+				length: '3',
+			},
+		});
+	});
 });
