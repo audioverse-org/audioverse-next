@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import { render, waitFor } from '@testing-library/react';
+import * as feed from 'feed';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -282,5 +283,26 @@ describe('sermons list page', () => {
 		const { calls } = (fs.writeFileSync as any).mock;
 
 		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/sermons/all.xml`);
+	});
+
+	it('adds sermons to feed', async () => {
+		const { addItem } = mockFeed();
+
+		loadSermons({ nodes: [{}, {}] });
+
+		await renderPage();
+
+		expect(addItem).toBeCalledTimes(2);
+	});
+
+	it('titles feeds', async () => {
+		mockFeed();
+		loadSermons();
+
+		await renderPage();
+
+		const calls = (feed.Feed as any).mock.calls;
+
+		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings: English');
 	});
 });

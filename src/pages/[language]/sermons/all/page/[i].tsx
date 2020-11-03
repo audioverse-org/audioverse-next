@@ -1,6 +1,7 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import createFeed from '@lib/createFeed';
+import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -18,17 +19,25 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
+	const { i, language: base_url } = params;
 
-	if (i === '1') {
+	const lang = getLanguageByBaseUrl(base_url);
+
+	const response = await getPaginatedStaticProps(
+		base_url,
+		parseInt(i),
+		getSermons
+	);
+
+	if (i === '1' && response.props.nodes) {
 		await createFeed({
-			recordings: [],
-			projectRelativePath: `public/${language}/sermons/all.xml`,
-			title: '',
+			recordings: response.props.nodes,
+			projectRelativePath: `public/${base_url}/sermons/all.xml`,
+			title: `AudioVerse Recent Recordings: ${lang.display_name}`,
 		});
 	}
 
-	return getPaginatedStaticProps(language, parseInt(i), getSermons);
+	return response;
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

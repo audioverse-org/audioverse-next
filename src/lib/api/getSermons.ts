@@ -15,6 +15,7 @@ query getSermons($language: Language!, $offset: Int, $first: Int!, $hasVideo: Bo
 fragment SermonsFragment on Recording {
 	id
 	title
+	description
 	duration
 	imageWithFallback {
 		url(size: 50)
@@ -24,6 +25,7 @@ fragment SermonsFragment on Recording {
 		id
 	}
 	recordingDate
+	canonicalUrl
 }
 `;
 
