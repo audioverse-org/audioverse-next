@@ -288,7 +288,24 @@ describe('sermons list page', () => {
 	it('adds sermons to feed', async () => {
 		const { addItem } = mockFeed();
 
-		loadSermons({ nodes: [{}, {}] });
+		loadSermons({
+			nodes: [
+				{
+					audioFiles: [
+						{
+							url: 'file_url',
+						},
+					],
+				},
+				{
+					audioFiles: [
+						{
+							url: 'file_url',
+						},
+					],
+				},
+			],
+		});
 
 		await renderPage();
 

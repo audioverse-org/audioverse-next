@@ -29,7 +29,19 @@ describe('createFeed', () => {
 	it('writes file', async () => {
 		const { addItem } = mockFeed();
 
-		await createFeed({ recordings: [{}], title: '', projectRelativePath: '' });
+		await createFeed({
+			recordings: [
+				{
+					audioFiles: [
+						{
+							url: 'file_url',
+						},
+					],
+				},
+			],
+			title: '',
+			projectRelativePath: '',
+		});
 
 		expect(addItem).toBeCalled();
 	});
