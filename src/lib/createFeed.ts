@@ -23,18 +23,24 @@ export default async function createFeed({
 		copyright: '',
 	});
 
-	recordings.map((i) => {
-		const file = _.get(i, 'audioFiles[0]') || _.get(i, 'videoFiles[0]'),
+	recordings.map((r) => {
+		const file = _.get(r, 'audioFiles[0]') || _.get(r, 'videoFiles[0]'),
 			url = _.get(file, 'url'),
 			length = _.get(file, 'filesize');
 
 		if (!url) return;
 
+		// https://github.com/avorg/wp-avorg-plugin/blob/master/view/page-feed.twig
+		// TODO: Add image
+		// TODO: Add itunes:subtitle
+		// TODO: Add itunes:author
+		// TODO: Add pubDate (?)
+		// TODO: Add itunes:duration
 		feed.addItem({
-			title: i.title,
-			description: i.description,
-			link: i.canonicalUrl,
-			date: new Date(i.recordingDate),
+			title: r.title,
+			description: r.description,
+			link: r.canonicalUrl,
+			date: new Date(r.recordingDate),
 			enclosure: { url, length },
 		});
 	});
