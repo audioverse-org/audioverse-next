@@ -1,9 +1,7 @@
-import { createIntl } from 'react-intl';
-
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import createFeed from '@lib/createFeed';
-import getIntlMessages from '@lib/getIntlMessages';
+import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
@@ -32,12 +30,7 @@ export async function getStaticProps({
 		getSermons
 	);
 
-	const messages = getIntlMessages(base_url);
-
-	const intl = createIntl({
-		locale: base_url,
-		messages,
-	});
+	const intl = getIntl(base_url);
 
 	const title = intl.formatMessage(
 		{

@@ -17,6 +17,16 @@ export default async function createFeed({
 	title,
 	projectRelativePath,
 }: CreateFeedProps): Promise<void> {
+	// https://github.com/avorg/wp-avorg-plugin/blob/master/view/page-feed.twig
+	// TODO: copyright
+	// TODO: itunes:subtitle
+	// TODO: id?
+	// TODO: itunes:explicit
+	// TODO: link
+	// TODO: atom:link
+	// TODO: itunes:author
+	// TODO: image
+	// TODO: categories
 	const feed = new Feed({
 		id: '',
 		title,
