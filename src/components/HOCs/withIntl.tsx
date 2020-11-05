@@ -1,18 +1,12 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 
+import getIntlMessages from '@lib/getIntlMessages';
 import useLanguage from '@lib/useLanguage';
 
 const useTranslation = () => {
 	const language = useLanguage();
-
-	let messages;
-
-	try {
-		messages = require(`../../../public/compiled-lang/${language}.json`);
-	} catch (e) {
-		messages = require(`../../../public/compiled-lang/en.json`);
-	}
+	const messages = getIntlMessages(language);
 
 	return { language, messages };
 };

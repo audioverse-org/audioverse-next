@@ -322,4 +322,17 @@ describe('sermons list page', () => {
 
 		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings: English');
 	});
+
+	it('translates feed titles', async () => {
+		mockFeed();
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'es' } });
+
+		const calls = (feed.Feed as any).mock.calls;
+
+		expect(calls[0][0].title).toEqual(
+			'Grabaciones Recientes de AudioVerse: Español'
+		);
+	});
 });

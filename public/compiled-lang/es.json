@@ -1,4 +1,14 @@
 {
+  "feed-title": [
+    {
+      "type": 0,
+      "value": "Grabaciones Recientes de AudioVerse: "
+    },
+    {
+      "type": 1,
+      "value": "lang"
+    }
+  ],
   "title": [
     {
       "type": 0,
