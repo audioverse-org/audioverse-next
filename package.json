@@ -13,7 +13,6 @@
     "test:watch": "jest --watch",
     "extract": "formatjs extract 'src/**/*.tsx' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
-    "list": "ls src/**/*.tsx"
   },
   "dependencies": {
     "@types/lodash": "^4.14.161",
