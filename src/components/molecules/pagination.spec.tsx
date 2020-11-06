@@ -102,4 +102,16 @@ describe('pagination algorithm', () => {
 	it('handles single page', () => {
 		expect(pagination(1, 1)).toStrictEqual([1]);
 	});
+
+	it('handles missing current', async () => {
+		await render(<Pagination {...({ total: 3, base: 'base' } as any)} />);
+	});
+
+	it('handles missing total', async () => {
+		await render(<Pagination {...({ current: 1, base: 'base' } as any)} />);
+	});
+
+	it('handles missing base', async () => {
+		await render(<Pagination {...({ current: 1, total: 3 } as any)} />);
+	});
 });

@@ -1,11 +1,20 @@
 {
+  "feed-title": {
+    "col": 34,
+    "defaultMessage": "AudioVerse Recent Recordings: {lang}",
+    "description": "All sermons feed title",
+    "end": 1199,
+    "file": "src/pages/[language]/sermons/all/page/[i].tsx",
+    "line": 42,
+    "start": 1069
+  },
   "title": {
     "col": 3,
     "defaultMessage": "Testimonies",
     "description": "Testimonies slider title",
-    "end": 288,
+    "end": 250,
     "file": "src/components/organisms/testimonies.tsx",
-    "line": 9,
-    "start": 174
+    "line": 7,
+    "start": 136
   }
 }

@@ -1,10 +1,12 @@
+import _ from 'lodash';
+
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
 
 export async function makeNumberedPaths(
 	sectionSegments: string,
 	getCount: (language: string) => Promise<number>
 ): Promise<string[]> {
-	const pathSetPromises = Object.keys(LANGUAGES).map(async (k) => {
+	const pathSetPromises = _.keys(LANGUAGES).map(async (k) => {
 			const entryCount = (await getCount(k)) || 0,
 				pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE),
 				numbers = Array.from(Array(pageCount).keys()),

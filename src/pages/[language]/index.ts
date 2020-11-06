@@ -36,7 +36,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: Object.values(LANGUAGES).map((l) => `/${l.base_url}`),
+		paths: _.values(LANGUAGES).map((l) => `/${l.base_url}`),
 		fallback: true,
 	};
 }

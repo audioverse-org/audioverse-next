@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import Search, { SearchProps } from '@containers/search';
 import { LANGUAGES } from '@lib/constants';
 
@@ -17,7 +19,7 @@ export async function getStaticProps(): Promise<StaticProps> {
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: Object.values(LANGUAGES).map((l) => `/${l.base_url}/search`),
+		paths: _.values(LANGUAGES).map((l) => `/${l.base_url}/search`),
 		fallback: true,
 	};
 }

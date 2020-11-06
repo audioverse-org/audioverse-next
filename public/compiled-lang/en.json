@@ -1,4 +1,14 @@
 {
+  "feed-title": [
+    {
+      "type": 0,
+      "value": "AudioVerse Recent Recordings: "
+    },
+    {
+      "type": 1,
+      "value": "lang"
+    }
+  ],
   "title": [
     {
       "type": 0,

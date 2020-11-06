@@ -1,10 +1,13 @@
+import fs from 'fs';
+
 import { render, waitFor } from '@testing-library/react';
+import * as feed from 'feed';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
-import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
-import { loadSermons, setSermonCount } from '@lib/test/helpers';
+import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
+import { loadSermons, mockFeed, setSermonCount } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -12,6 +15,7 @@ import SermonList, {
 
 jest.mock('@lib/api');
 jest.mock('next/router');
+jest.mock('fs');
 
 function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
@@ -31,7 +35,10 @@ function loadGetSermonsError() {
 }
 
 describe('sermons list page', () => {
-	beforeEach(() => jest.resetAllMocks());
+	beforeEach(() => {
+		jest.resetAllMocks();
+		mockFeed();
+	});
 
 	it('can be rendered', async () => {
 		loadSermons();
@@ -231,5 +238,101 @@ describe('sermons list page', () => {
 		const result = await getStaticPaths();
 
 		expect(result.paths).not.toContain('/en/sermons/video/page/1');
+	});
+
+	it('calls createFeed', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		expect(fs.writeFileSync).toBeCalled();
+	});
+
+	it('provides path', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		const { calls } = (fs.writeFileSync as any).mock;
+
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
+	});
+
+	it('calls mikdirSync', async () => {
+		loadSermons();
+
+		await renderPage();
+
+		expect(fs.mkdirSync).toBeCalled();
+	});
+
+	it('only renders feed once per language', async () => {
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'en' } });
+		await renderPage({ params: { i: '2', language: 'en' } });
+
+		expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
+	});
+
+	it('renders feeds for other languages', async () => {
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'es' } });
+
+		const { calls } = (fs.writeFileSync as any).mock;
+
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/sermons/all.xml`);
+	});
+
+	it('adds sermons to feed', async () => {
+		const { addItem } = mockFeed();
+
+		loadSermons({
+			nodes: [
+				{
+					audioFiles: [
+						{
+							url: 'file_url',
+						},
+					],
+				},
+				{
+					audioFiles: [
+						{
+							url: 'file_url',
+						},
+					],
+				},
+			],
+		});
+
+		await renderPage();
+
+		expect(addItem).toBeCalledTimes(2);
+	});
+
+	it('titles feeds', async () => {
+		mockFeed();
+		loadSermons();
+
+		await renderPage();
+
+		const calls = (feed.Feed as any).mock.calls;
+
+		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings: English');
+	});
+
+	it('translates feed titles', async () => {
+		mockFeed();
+		loadSermons();
+
+		await renderPage({ params: { i: '1', language: 'es' } });
+
+		const calls = (feed.Feed as any).mock.calls;
+
+		expect(calls[0][0].title).toEqual(
+			'Grabaciones Recientes de AudioVerse: Español'
+		);
 	});
 });
