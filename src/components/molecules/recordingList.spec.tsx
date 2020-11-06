@@ -110,4 +110,10 @@ describe('recording list', () => {
 
 		expect(getByText('0:01')).toBeInTheDocument();
 	});
+
+	it('handles missing sermons', async () => {
+		loadQuery({ language: 'en' });
+
+		await render(<RecordingList sermons={undefined as any} />);
+	});
 });

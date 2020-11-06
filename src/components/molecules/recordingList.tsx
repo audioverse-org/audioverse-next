@@ -14,9 +14,8 @@ export default function RecordingList({
 	return (
 		<table className={styles.list}>
 			<tbody>
-				{sermons.map((s, i) => (
-					<RecordingListEntry key={i} sermon={s} />
-				))}
+				{sermons &&
+					sermons.map((s, i) => <RecordingListEntry key={i} sermon={s} />)}
 			</tbody>
 		</table>
 	);

@@ -49,7 +49,7 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 		first: ENTRIES_PER_PAGE,
 	}).catch(() => ({}));
 
-	const nodes = _.get(result, 'nodes'),
+	const nodes = _.get(result, 'nodes', []),
 		count = _.get(result, 'aggregate.count', 0),
 		total = Math.ceil(count / ENTRIES_PER_PAGE);
 

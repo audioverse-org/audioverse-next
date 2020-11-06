@@ -57,6 +57,8 @@ export default function Pagination({
 	total: number;
 	base: string;
 }): JSX.Element {
+	current = current || 1;
+
 	const pagePrevious = current - 1,
 		pageNext = current + 1;
 

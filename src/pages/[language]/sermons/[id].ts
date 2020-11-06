@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { getSermon, getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
@@ -31,7 +33,7 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	const keys = Object.keys(LANGUAGES),
+	const keys = _.keys(LANGUAGES),
 		pathSetPromises = keys.map(async (l) => {
 			const { nodes } = await getSermons(l),
 				dateFloor = new Date('2020-06-01'), // TODO: Should this be rolling?

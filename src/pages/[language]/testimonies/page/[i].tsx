@@ -17,9 +17,9 @@ export async function getStaticProps({
 }: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
 	const { i, language } = params;
 
-	return getPaginatedStaticProps(language, parseInt(i), getTestimonies);
+	return await getPaginatedStaticProps(language, parseInt(i), getTestimonies);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('testimonies', getTestimonyCount);
+	return await getNumberedStaticPaths('testimonies', getTestimonyCount);
 }

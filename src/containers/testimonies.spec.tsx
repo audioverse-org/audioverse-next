@@ -117,4 +117,25 @@ describe('testimonies pages', () => {
 
 		expect(getByText('the_testimony_author')).toBeDefined();
 	});
+
+	it('renders without testimonies', async () => {
+		await renderPage();
+	});
+
+	it('does not error if no nodes', async () => {
+		await renderWithIntl(Testimonies, {
+			nodes: undefined,
+			pagination: {
+				current: 1,
+				total: 1,
+			},
+		} as any);
+	});
+
+	it('does not error if no pagination', async () => {
+		await renderWithIntl(Testimonies, {
+			nodes: undefined,
+			pagination: undefined,
+		} as any);
+	});
 });
