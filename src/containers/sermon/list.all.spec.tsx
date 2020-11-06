@@ -17,6 +17,7 @@ jest.mock('@lib/api');
 jest.mock('next/router');
 jest.mock('fs');
 
+// TODO: use helper import
 function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
 }
@@ -333,6 +334,36 @@ describe('sermons list page', () => {
 
 		expect(calls[0][0].title).toEqual(
 			'Grabaciones Recientes de AudioVerse: Español'
+		);
+	});
+
+	it('includes feed link', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toBeInTheDocument();
+	});
+
+	it('links to feed', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'href',
+			'/en/sermons/all.xml'
+		);
+	});
+
+	it('targets blank', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'target',
+			'_blank'
 		);
 	});
 });

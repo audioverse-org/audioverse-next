@@ -7,13 +7,13 @@ const withFailStates = <P extends any>(
 	should404?: (props: P) => boolean
 ): React.ComponentType<P> => {
 	function WithFailStates(props: P) {
-		const router = useRouter();
+		const { isFallback = false } = useRouter() || {};
 
-		if (!router.isFallback && should404 && should404(props)) {
+		if (!isFallback && should404 && should404(props)) {
 			return <ErrorPage statusCode={404} />;
 		}
 
-		if (router.isFallback) {
+		if (isFallback) {
 			return <h1>Loading…</h1>;
 		}
 

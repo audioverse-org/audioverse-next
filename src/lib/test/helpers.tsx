@@ -57,9 +57,11 @@ export function loadTestimonies(nodes: Testimony[] | null = null): void {
 }
 
 export function loadQuery(query: ParsedUrlQuery = {}): void {
-	jest.spyOn(router, 'useRouter').mockReturnValue(({
-		query,
-	} as Partial<NextRouter>) as any);
+	loadRouter({ query });
+}
+
+export function loadRouter(router_: Partial<NextRouter>): void {
+	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
 }
 
 export async function renderWithIntl<T>(
