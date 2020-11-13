@@ -23,7 +23,11 @@ function SermonList({ nodes, pagination }: SermonListProps) {
 
 	return (
 		<div>
-			<a href={`/${lang}/sermons/${filter}.xml`} target={'_blank'}>
+			<a
+				href={`/${lang}/sermons/${filter}.xml`}
+				target={'_blank'}
+				rel={'noreferrer noopener'}
+			>
 				RSS
 			</a>
 			<div>
