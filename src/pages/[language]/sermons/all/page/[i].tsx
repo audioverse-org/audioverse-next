@@ -51,7 +51,13 @@ export async function getStaticProps({
 		});
 	}
 
-	return response;
+	return {
+		...response,
+		props: {
+			...response.props,
+			rssPath: `/${base_url}/sermons/all.xml`,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

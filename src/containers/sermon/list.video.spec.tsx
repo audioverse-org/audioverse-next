@@ -50,4 +50,15 @@ describe('sermon video list page', () => {
 			offset: 0,
 		});
 	});
+
+	it('links to feed', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'href',
+			'/en/sermons/video.xml'
+		);
+	});
 });

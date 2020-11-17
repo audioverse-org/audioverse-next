@@ -1,5 +1,3 @@
-import _ from 'lodash';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
@@ -9,25 +7,19 @@ import useLanguage from '@lib/useLanguage';
 
 export interface SermonListProps {
 	nodes: Sermon[];
+	rssPath: string;
 	pagination: {
 		current: number;
 		total: number;
 	};
 }
 
-function SermonList({ nodes, pagination }: SermonListProps) {
+function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
 	const lang = useLanguage();
-	const { pathname = '' } = useRouter() || {};
-	const match = pathname.match(/sermons\/(\w+)\/page/i);
-	const filter = _.get(match, '[1]', 'all');
 
 	return (
 		<div>
-			<a
-				href={`/${lang}/sermons/${filter}.xml`}
-				target={'_blank'}
-				rel={'noreferrer noopener'}
-			>
+			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
 				RSS
 			</a>
 			<div>
