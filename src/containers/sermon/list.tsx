@@ -31,7 +31,7 @@ function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				base={'/en/sermons'}
+				base={`/${lang}/sermons`}
 			/>
 		</div>
 	);

@@ -366,4 +366,13 @@ describe('sermons list page', () => {
 			'_blank'
 		);
 	});
+
+	it('localizes pagination', async () => {
+		loadSermons();
+
+		const { getByText } = await renderPage({ query: { language: 'es' } }),
+			link = getByText('1') as HTMLAnchorElement;
+
+		expect(link.href).toContain('/es/sermons/page/1');
+	});
 });
