@@ -16,7 +16,7 @@ export async function makeNumberedPaths(
 		}),
 		pathSets = await Promise.all(pathSetPromises);
 
-	return pathSets.flat();
+	return _.flatten(pathSets);
 }
 
 export const getNumberedStaticPaths = async (
