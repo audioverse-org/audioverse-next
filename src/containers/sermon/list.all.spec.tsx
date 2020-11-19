@@ -387,4 +387,14 @@ describe('sermons list page', () => {
 
 		expect(head.innerHTML).toContain('/en/sermons/all.xml');
 	});
+
+	it('does not set title', async () => {
+		loadSermons();
+
+		const { getByTestId } = await renderPage();
+
+		const head = getByTestId('head');
+
+		expect(head.innerHTML).not.toContain('title');
+	});
 });

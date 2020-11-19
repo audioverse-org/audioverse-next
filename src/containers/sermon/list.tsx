@@ -21,7 +21,6 @@ function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
 	return (
 		<div>
 			<Head>
-				<title>hello world</title>
 				<link type="application/atom+xml" rel="alternate" href={rssPath} />
 			</Head>
 			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
