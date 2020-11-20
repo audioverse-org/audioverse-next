@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
-import { loadQuery, loadSermons } from '@lib/test/helpers';
+import { loadRouter, loadSermons } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
@@ -10,11 +10,7 @@ import SermonList, {
 
 jest.mock('@lib/api');
 
-const renderPage = async ({
-	params = { i: '1', language: 'en' },
-	query = {},
-} = {}) => {
-	loadQuery(query);
+const renderPage = async ({ params = { i: '1', language: 'en' } } = {}) => {
 	const { props } = await getStaticProps({ params });
 	return render(<SermonList {...props} />);
 };
@@ -41,5 +37,17 @@ describe('sermon audio list page', () => {
 			first: 25,
 			offset: 0,
 		});
+	});
+
+	it('links to feed', async () => {
+		loadSermons();
+		loadRouter({ pathname: '/[language]/sermons/audio/page/[i]' });
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'href',
+			'/en/sermons/audio.xml'
+		);
 	});
 });

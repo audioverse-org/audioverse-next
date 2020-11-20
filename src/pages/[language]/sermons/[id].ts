@@ -49,8 +49,10 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	const pathSets = await Promise.all(pathSetPromises);
 
+	console.log(pathSets);
+
 	return {
-		paths: pathSets.flat(),
+		paths: _.flatten(pathSets),
 		fallback: true,
 	};
 }

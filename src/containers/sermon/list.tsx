@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
@@ -7,16 +8,24 @@ import useLanguage from '@lib/useLanguage';
 
 export interface SermonListProps {
 	nodes: Sermon[];
+	rssPath: string;
 	pagination: {
 		current: number;
 		total: number;
 	};
 }
 
-function SermonList({ nodes, pagination }: SermonListProps) {
+function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
 	const lang = useLanguage();
+
 	return (
 		<div>
+			<Head>
+				<link type="application/atom+xml" rel="alternate" href={rssPath} />
+			</Head>
+			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
+				RSS
+			</a>
 			<div>
 				<a href={`/${lang}/sermons/all/page/1`}>All</a>
 				<a href={`/${lang}/sermons/video/page/1`}>Video</a>
@@ -26,7 +35,7 @@ function SermonList({ nodes, pagination }: SermonListProps) {
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				base={'/en/sermons'}
+				base={`/${lang}/sermons`}
 			/>
 		</div>
 	);

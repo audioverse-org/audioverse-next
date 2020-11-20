@@ -16,7 +16,9 @@ import SermonList, {
 jest.mock('@lib/api');
 jest.mock('next/router');
 jest.mock('fs');
+jest.mock('next/head');
 
+// TODO: use helper import
 function loadQuery(query = {}) {
 	(useRouter as jest.Mock).mockReturnValue({ query });
 }
@@ -24,10 +26,11 @@ function loadQuery(query = {}) {
 const renderPage = async ({
 	params = { i: '1', language: 'en' },
 	query = {},
+	renderOptions = {},
 } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
-	return render(<SermonList {...props} />);
+	return render(<SermonList {...props} />, renderOptions);
 };
 
 function loadGetSermonsError() {
@@ -334,5 +337,64 @@ describe('sermons list page', () => {
 		expect(calls[0][0].title).toEqual(
 			'Grabaciones Recientes de AudioVerse: Español'
 		);
+	});
+
+	it('includes feed link', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toBeInTheDocument();
+	});
+
+	it('links to feed', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'href',
+			'/en/sermons/all.xml'
+		);
+	});
+
+	it('targets blank', async () => {
+		loadSermons();
+
+		const { getByRole } = await renderPage();
+
+		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+			'target',
+			'_blank'
+		);
+	});
+
+	it('localizes pagination', async () => {
+		loadSermons();
+
+		const { getByText } = await renderPage({ query: { language: 'es' } }),
+			link = getByText('1') as HTMLAnchorElement;
+
+		expect(link.href).toContain('/es/sermons/page/1');
+	});
+
+	it('sets rss head link', async () => {
+		loadSermons();
+
+		const { getByTestId } = await renderPage();
+
+		const head = getByTestId('head');
+
+		expect(head.innerHTML).toContain('/en/sermons/all.xml');
+	});
+
+	it('does not set title', async () => {
+		loadSermons();
+
+		const { getByTestId } = await renderPage();
+
+		const head = getByTestId('head');
+
+		expect(head.innerHTML).not.toContain('title');
 	});
 });

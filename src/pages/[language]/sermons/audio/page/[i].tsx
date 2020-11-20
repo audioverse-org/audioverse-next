@@ -19,13 +19,23 @@ export async function getStaticProps({
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language } = params;
 
-	return getPaginatedStaticProps(
+	const response = await getPaginatedStaticProps(
 		language,
 		parseInt(i),
 		async (lang, options) => {
 			return getSermons(lang, { ...options, hasVideo: false });
 		}
 	);
+
+	// TODO: generate rss
+
+	return {
+		...response,
+		props: {
+			...response.props,
+			rssPath: `/${language}/sermons/audio.xml`,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

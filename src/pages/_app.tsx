@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 import '../styles/globals.css';
 import '../styles/styles.scss';
@@ -14,6 +15,9 @@ function MyApp<P>({
 }): JSX.Element {
 	return (
 		<div className={'template-base'}>
+			<Head>
+				<title>AudioVerse</title>
+			</Head>
 			<Header />
 			<div className={'template-base__content'}>
 				<Component {...pageProps} />
