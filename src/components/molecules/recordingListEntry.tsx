@@ -33,7 +33,9 @@ export default function RecordingListEntry({
 				</a>
 			</td>
 			<td>
-				<a href={`/${lang}/sermons/${sermon.id}`}>{sermon.title}</a>
+				<a href={`/${lang}/sermons/${sermon.id}`} className={styles.title}>
+					{sermon.title}
+				</a>
 			</td>
 			<td className={styles.presenters}>
 				<ul>
