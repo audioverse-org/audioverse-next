@@ -40,4 +40,14 @@ describe('favorite button', () => {
 
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
+
+	it('supports init > fav > no-fav > fav', async () => {
+		const { getByText, button } = await renderComponent();
+
+		userEvent.click(button);
+		userEvent.click(button);
+		userEvent.click(button);
+
+		expect(getByText('Unfavorite')).toBeInTheDocument();
+	});
 });
