@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
+import Favorite from '@components/molecules/favorite';
 
 import styles from './detail.module.scss';
 
@@ -17,6 +18,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 
 	return (
 		<>
+			<Favorite />
 			<div className={styles.meta}>
 				{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
 				<div>

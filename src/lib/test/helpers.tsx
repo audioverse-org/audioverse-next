@@ -26,7 +26,7 @@ export function loadSermons({
 		Promise.resolve({
 			nodes: nodes || [
 				{
-					id: 1,
+					id: '1',
 					title: 'the_sermon_title',
 				},
 			],
@@ -35,6 +35,17 @@ export function loadSermons({
 			},
 		})
 	);
+}
+
+export function loadSermon(sermon = undefined): void {
+	const data = sermon || {
+		id: '1',
+		title: 'the_sermon_title',
+		persons: [],
+		audioFiles: [],
+	};
+
+	jest.spyOn(api, 'getSermon').mockResolvedValue((data as any) as Sermon);
 }
 
 export function setSermonCount(count: number): void {

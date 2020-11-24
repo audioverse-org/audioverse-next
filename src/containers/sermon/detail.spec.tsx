@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermon, getSermons } from '@lib/api';
+import { loadRouter, loadSermon } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -93,5 +94,14 @@ describe('detailPageGenerator', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Loading…')).toBeDefined();
+	});
+
+	it('has favorite button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 });
