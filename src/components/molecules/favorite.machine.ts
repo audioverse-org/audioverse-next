@@ -13,7 +13,11 @@ const createFavoriteMachine = (): StateMachine<any, any, any> => {
 				},
 			},
 			unfavorited: {},
-			favorited: {},
+			favorited: {
+				on: {
+					TOGGLE: { target: 'unfavorited' },
+				},
+			},
 		},
 	});
 };

@@ -5,7 +5,12 @@ import React from 'react';
 import Favorite from '@components/molecules/favorite';
 
 const renderComponent = () => {
-	return render(<Favorite />);
+	const result = render(<Favorite />);
+
+	return {
+		...result,
+		button: result.getByText('Favorite'),
+	};
 };
 
 describe('favorite button', () => {
@@ -14,18 +19,25 @@ describe('favorite button', () => {
 	});
 
 	it('includes button', async () => {
-		const { getByText } = await renderComponent();
+		const { button } = await renderComponent();
 
-		expect(getByText('Favorite')).toBeInTheDocument();
+		expect(button).toBeInTheDocument();
 	});
 
 	it('toggles button', async () => {
-		const { getByText } = await renderComponent();
-
-		const button = getByText('Favorite');
+		const { getByText, button } = await renderComponent();
 
 		userEvent.click(button);
 
 		expect(getByText('Unfavorite')).toBeInTheDocument();
+	});
+
+	it('supports init > fav > no-fav', async () => {
+		const { getByText, button } = await renderComponent();
+
+		userEvent.click(button);
+		userEvent.click(button);
+
+		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 });
