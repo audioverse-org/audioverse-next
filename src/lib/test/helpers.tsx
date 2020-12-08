@@ -8,7 +8,6 @@ import React from 'react';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
-import { getSermons } from '@lib/api';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
@@ -22,7 +21,7 @@ export function loadSermons({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	(getSermons as jest.Mock).mockReturnValue(
+	jest.spyOn(api, 'getSermons').mockReturnValue(
 		Promise.resolve({
 			nodes: nodes || [
 				{

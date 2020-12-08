@@ -7,7 +7,8 @@ import Favorite from '@components/molecules/favorite';
 import { isFavorited, setFavorited } from '@lib/api';
 import * as api from '@lib/api';
 
-jest.mock('@lib/api');
+jest.mock('@lib/api/isFavorited');
+jest.mock('@lib/api/setFavorited');
 
 const renderComponent = () => {
 	const result = render(<Favorite id={'-1'} />),
@@ -111,12 +112,11 @@ describe('favorite button', () => {
 
 	it('does not roll back state if API succeeds', async () => {
 		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
+		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
 
 		isFavoritedSpy.mockResolvedValue(false);
 
 		const { button, findByText } = await renderComponent();
-
-		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
 
 		isFavoritedSpy.mockResolvedValue(true);
 
