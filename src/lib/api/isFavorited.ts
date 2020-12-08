@@ -12,7 +12,5 @@ export async function isFavorited(id: number | string): Promise<boolean> {
 	const variables = { id },
 		data = await fetchApi(query, { variables });
 
-	console.log({ id, data });
-
 	return data?.sermon.viewerHasFavorited;
 }

@@ -5,10 +5,9 @@ import { isFavorited, setFavorited } from '@lib/api';
 
 export default function Favorite({ id }: { id: string }): JSX.Element {
 	const cache = useQueryCache();
+	const queryKey = ['isFavorited', id];
 
-	const { data: faved } = useQuery(['isFavorited', id], async () =>
-		isFavorited(id)
-	);
+	const { data: faved } = useQuery(queryKey, async () => isFavorited(id));
 
 	const [toggle] = useMutation(
 		() => {
@@ -21,19 +20,17 @@ export default function Favorite({ id }: { id: string }): JSX.Element {
 		},
 		{
 			onMutate: () => {
-				cache.cancelQueries('isFavorited');
+				cache.cancelQueries(queryKey);
 
 				const previousFaved = faved;
 
-				cache.setQueryData(['isFavorited', id], !faved);
+				cache.setQueryData(queryKey, !faved);
 
-				return () => cache.setQueryData(['isFavorited', id], previousFaved);
+				return () => cache.setQueryData(queryKey, previousFaved);
 			},
 			onError: (err, options, rollback) => rollback(),
 		}
 	);
-
-	const label = faved ? 'Unfavorite' : 'Favorite';
 
 	return (
 		<button
@@ -41,7 +38,7 @@ export default function Favorite({ id }: { id: string }): JSX.Element {
 				await toggle();
 			}}
 		>
-			{label}
+			{faved ? 'Unfavorite' : 'Favorite'}
 		</button>
 	);
 }
