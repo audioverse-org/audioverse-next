@@ -90,26 +90,6 @@ describe('favorite button', () => {
 		await expect(findByText('Favorite')).resolves.toBeInTheDocument();
 	});
 
-	it('tests right', async () => {
-		const mock = jest.fn();
-		mock.mockReturnValue(true);
-		mock.mockReturnValue(false);
-		expect(mock()).toBeFalsy();
-	});
-
-	it('tests isFavorited right', async () => {
-		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
-		isFavoritedSpy.mockResolvedValue(false);
-		isFavoritedSpy.mockResolvedValue(true);
-		expect(isFavorited(-1)).toBeTruthy();
-	});
-
-	it('tests throwing properly', async () => {
-		const { findByText } = await renderComponent();
-
-		await expect(findByText('Unfavorite')).rejects.toThrow();
-	});
-
 	it('does not roll back state if API succeeds', async () => {
 		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
 		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
