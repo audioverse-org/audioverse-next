@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.161",
-    "@xstate/react": "^1.0.3",
     "feed": "^4.2.1",
     "full-icu": "^1.3.1",
     "lodash": "^4.17.20",
@@ -26,8 +25,7 @@
     "react-dom": "16.13.1",
     "react-intl": "^5.8.3",
     "react-query": "^2.26.3",
-    "sass": "^1.26.10",
-    "xstate": "^4.14.0"
+    "sass": "^1.26.10"
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
