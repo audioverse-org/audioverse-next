@@ -18,7 +18,6 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 
 	return (
 		<>
-			<Favorite />
 			<div className={styles.meta}>
 				{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
 				<div>
@@ -33,6 +32,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			{sermon.recordingDate ? (
 				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
 			) : null}
+			<Favorite id={sermon.id} />
 			{sermon.audioFiles.map((file) => {
 				return (
 					<div key={file.url}>

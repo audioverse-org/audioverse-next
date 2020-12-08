@@ -1,14 +1,47 @@
-import { useMachine } from '@xstate/react';
 import React from 'react';
+import { useMutation, useQuery, useQueryCache } from 'react-query';
 
-import createFavoriteMachine from '@components/molecules/favorite.machine';
+import { isFavorited, setFavorited } from '@lib/api';
 
-const machine = createFavoriteMachine();
+export default function Favorite({ id }: { id: string }): JSX.Element {
+	const cache = useQueryCache();
 
-export default function Favorite(): JSX.Element {
-	const [state, send] = useMachine(machine);
+	const { data: faved } = useQuery(['isFavorited', id], async () =>
+		isFavorited(id)
+	);
 
-	const label = state.value === 'favorited' ? 'Unfavorite' : 'Favorite';
+	const [toggle] = useMutation(
+		() => {
+			// TODO: Consider using setFavorited response to update data instead of
+			//  invalidating `isFavorited` query
 
-	return <button onClick={() => send('TOGGLE')}>{label}</button>;
+			// onMutate optimistically changes cached data, so we don't
+			// flip faved since it's already been flipped in onMutate
+			return setFavorited(id, !!faved);
+		},
+		{
+			onMutate: () => {
+				cache.cancelQueries('isFavorited');
+
+				const previousFaved = faved;
+
+				cache.setQueryData(['isFavorited', id], !faved);
+
+				return () => cache.setQueryData(['isFavorited', id], previousFaved);
+			},
+			onError: (err, options, rollback) => rollback(),
+		}
+	);
+
+	const label = faved ? 'Unfavorite' : 'Favorite';
+
+	return (
+		<button
+			onClick={async () => {
+				await toggle();
+			}}
+		>
+			{label}
+		</button>
+	);
 }

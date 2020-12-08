@@ -1,19 +1,34 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { queryCache } from 'react-query';
 
 import Favorite from '@components/molecules/favorite';
+import { isFavorited, setFavorited } from '@lib/api';
+import * as api from '@lib/api';
+
+jest.mock('@lib/api');
 
 const renderComponent = () => {
-	const result = render(<Favorite />);
+	const result = render(<Favorite id={'-1'} />),
+		button = result.queryByText('Favorite') || result.queryByText('Unfavorite');
+
+	if (!button) {
+		throw new Error("Can't find button");
+	}
 
 	return {
 		...result,
-		button: result.getByText('Favorite'),
+		button,
 	};
 };
 
 describe('favorite button', () => {
+	beforeEach(() => {
+		jest.resetAllMocks();
+		queryCache.clear();
+	});
+
 	it('can render', async () => {
 		await renderComponent();
 	});
@@ -24,30 +39,90 @@ describe('favorite button', () => {
 		expect(button).toBeInTheDocument();
 	});
 
-	it('toggles button', async () => {
-		const { getByText, button } = await renderComponent();
-
-		userEvent.click(button);
-
-		expect(getByText('Unfavorite')).toBeInTheDocument();
-	});
-
-	it('supports init > fav > no-fav', async () => {
-		const { getByText, button } = await renderComponent();
-
-		userEvent.click(button);
-		userEvent.click(button);
+	it('shows favorite button', async () => {
+		const { getByText } = await renderComponent();
 
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 
-	it('supports init > fav > no-fav > fav', async () => {
-		const { getByText, button } = await renderComponent();
+	it('shows unfavorite button', async () => {
+		jest.spyOn(api, 'isFavorited').mockResolvedValue(true);
+
+		const { findByText } = await renderComponent();
+
+		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+	});
+
+	it('gets favorited status', async () => {
+		await renderComponent();
+
+		expect(isFavorited).toBeCalled();
+	});
+
+	it('triggers mutation', async () => {
+		const { button } = await renderComponent();
 
 		userEvent.click(button);
-		userEvent.click(button);
+
+		await waitFor(() => expect(setFavorited).toBeCalledWith('-1', true));
+	});
+
+	it('updates button when clicked', async () => {
+		const { findByText, button } = await renderComponent();
+
+		jest.spyOn(api, 'isFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+
 		userEvent.click(button);
 
-		expect(getByText('Unfavorite')).toBeInTheDocument();
+		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+	});
+
+	it('rolls back state if API fails', async () => {
+		const { button, findByText } = await renderComponent();
+
+		jest.spyOn(api, 'setFavorited').mockRejectedValue('error');
+
+		userEvent.click(button);
+
+		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+		await expect(findByText('Favorite')).resolves.toBeInTheDocument();
+	});
+
+	it('tests right', async () => {
+		const mock = jest.fn();
+		mock.mockReturnValue(true);
+		mock.mockReturnValue(false);
+		expect(mock()).toBeFalsy();
+	});
+
+	it('tests isFavorited right', async () => {
+		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
+		isFavoritedSpy.mockResolvedValue(false);
+		isFavoritedSpy.mockResolvedValue(true);
+		expect(isFavorited(-1)).toBeTruthy();
+	});
+
+	it('tests throwing properly', async () => {
+		const { findByText } = await renderComponent();
+
+		await expect(findByText('Unfavorite')).rejects.toThrow();
+	});
+
+	it('does not roll back state if API succeeds', async () => {
+		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
+
+		isFavoritedSpy.mockResolvedValue(false);
+
+		const { button, findByText } = await renderComponent();
+
+		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+
+		isFavoritedSpy.mockResolvedValue(true);
+
+		userEvent.click(button);
+
+		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+		await expect(findByText('Favorite')).rejects.toThrow();
 	});
 });
