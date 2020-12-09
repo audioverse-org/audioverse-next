@@ -28,6 +28,8 @@ interface Person {
 	id: string;
 }
 
+interface User {}
+
 interface StaticPaths {
 	paths: string[];
 	fallback: boolean;
