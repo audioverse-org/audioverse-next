@@ -24,6 +24,7 @@
     "react": "^16.13.1",
     "react-dom": "16.13.1",
     "react-intl": "^5.8.3",
+    "react-query": "^2.26.3",
     "sass": "^1.26.10"
   },
   "devDependencies": {

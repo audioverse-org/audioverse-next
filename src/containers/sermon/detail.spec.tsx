@@ -4,16 +4,18 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { getSermon, getSermons } from '@lib/api';
+import { loadRouter, loadSermon, loadSermons } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sermons/[id]';
 
-jest.mock('@lib/api');
 jest.mock('next/router');
+jest.mock('@lib/api/getSermon');
+jest.mock('@lib/api/getSermons');
 
 function loadRecentSermons() {
-	(getSermons as jest.Mock).mockReturnValue({
+	loadSermons({
 		nodes: [
 			{
 				id: 1,
@@ -93,5 +95,14 @@ describe('detailPageGenerator', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Loading…')).toBeDefined();
+	});
+
+	it('has favorite button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 });

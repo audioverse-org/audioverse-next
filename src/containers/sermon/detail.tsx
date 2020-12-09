@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
+import Favorite from '@components/molecules/favorite';
 
 import styles from './detail.module.scss';
 
@@ -31,6 +32,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			{sermon.recordingDate ? (
 				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
 			) : null}
+			<Favorite id={sermon.id} />
 			{sermon.audioFiles.map((file) => {
 				return (
 					<div key={file.url}>
