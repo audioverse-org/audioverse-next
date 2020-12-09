@@ -7,7 +7,9 @@ import { getMe } from '@lib/api';
 export default Profile;
 
 interface StaticProps {
-	dehydratedState: DehydratedState;
+	props: {
+		dehydratedState: DehydratedState;
+	};
 }
 
 export async function getServerProps(): Promise<StaticProps> {
@@ -16,6 +18,8 @@ export async function getServerProps(): Promise<StaticProps> {
 	await queryCache.prefetchQuery('me', getMe);
 
 	return {
-		dehydratedState: dehydrate(queryCache),
+		props: {
+			dehydratedState: dehydrate(queryCache),
+		},
 	};
 }
