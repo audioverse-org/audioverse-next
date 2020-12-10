@@ -1,5 +1,7 @@
 // TODO: Generate GraphQL response types from queries
 
+import { IncomingMessage } from 'http';
+
 interface Sermon {
 	audioFiles: AudioFile[];
 	recordingDate: string;

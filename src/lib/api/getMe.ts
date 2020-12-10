@@ -1,7 +1,7 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
 const query = `
-	meQuery {
+	query getMe {
 		me {
 			user {
 				givenName

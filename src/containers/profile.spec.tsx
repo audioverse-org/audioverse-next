@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 import React from 'react';
@@ -6,15 +6,17 @@ import { QueryCache } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
 import * as api from '@lib/api';
-import Profile, { getServerProps } from '@pages/[language]/profile';
+import { storeRequest } from '@lib/api/fetchApi';
+import Profile, { getServerSideProps } from '@pages/[language]/profile';
 import MyApp from '@pages/_app';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/login');
+jest.mock('@lib/api/fetchApi');
 
 async function renderPage() {
-	const { props } = await getServerProps();
-	return render(<MyApp Component={Profile} pageProps={props} />);
+	const { props } = await getServerSideProps({ req: {} as any });
+	return render(<MyApp Component={Profile as any} pageProps={props} />);
 }
 
 describe('profile page', () => {
@@ -29,7 +31,7 @@ describe('profile page', () => {
 			name: 'the_name',
 		});
 
-		const { props } = await getServerProps();
+		const { props } = await getServerSideProps({ req: {} as any });
 
 		const queryCache = new QueryCache();
 
@@ -76,5 +78,54 @@ describe('profile page', () => {
 		loginButton.click();
 
 		expect(api.login).toHaveBeenCalledWith('the_email', 'the_password');
+	});
+
+	it('stores request', async () => {
+		await getServerSideProps({ req: 'the_request' as any });
+
+		expect(storeRequest).toBeCalledWith('the_request');
+	});
+
+	it('catches login errors', async () => {
+		jest.spyOn(api, 'login').mockImplementation(() => {
+			throw new Error();
+		});
+
+		const { getByText } = await renderPage();
+
+		const loginButton = getByText('login');
+
+		loginButton.click();
+
+		expect(getByText('Login failed')).toBeInTheDocument();
+	});
+
+	it('prevents default form submission', async () => {
+		const { getByTestId } = await renderPage();
+
+		const form = getByTestId('loginForm');
+
+		const event = new Event('submit');
+		Object.assign(event, { preventDefault: jest.fn() });
+
+		fireEvent(form, event);
+
+		expect(event.preventDefault).toHaveBeenCalled();
+	});
+
+	it('invalidates cache on successful login', async () => {
+		jest.spyOn(api, 'login').mockResolvedValue(true);
+
+		const { getByText, getByDisplayValue } = await renderPage();
+
+		jest.spyOn(api, 'getMe').mockResolvedValue({
+			givenName: 'first',
+		});
+
+		const loginButton = getByText('login');
+
+		loginButton.click();
+
+		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
 	});
 });
