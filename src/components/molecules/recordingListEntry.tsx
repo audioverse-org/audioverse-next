@@ -4,6 +4,8 @@ import React from 'react';
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import useLanguage from '@lib/useLanguage';
 
+import type { Person, Sermon } from '../../../types';
+
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);
 	const hours = Math.floor(duration / 3600);

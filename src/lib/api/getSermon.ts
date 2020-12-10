@@ -1,5 +1,7 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
+import type { Sermon } from '../../../types';
+
 const query = `
 query getSermon($id: ID!) {
 	sermon(id: $id) {

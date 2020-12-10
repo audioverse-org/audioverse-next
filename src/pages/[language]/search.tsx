@@ -3,6 +3,8 @@ import _ from 'lodash';
 import Search, { SearchProps } from '@containers/search';
 import { LANGUAGES } from '@lib/constants';
 
+import type { StaticPaths } from '../../../types';
+
 export default Search;
 
 interface StaticProps {

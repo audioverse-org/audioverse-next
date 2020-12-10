@@ -1,5 +1,7 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
+import type { Testimony } from '../../../types';
+
 const query = `
 query getTestimonies($language: Language!, $offset: Int, $first: Int!) {
 	testimonies(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: WRITTEN_DATE}) {

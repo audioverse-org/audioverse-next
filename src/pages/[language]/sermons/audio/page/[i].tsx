@@ -2,6 +2,7 @@ import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount, getSermons } from '@lib/api';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import type { StaticPaths } from 'types';
 
 export default SermonList;
 

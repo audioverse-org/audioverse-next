@@ -1,5 +1,7 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
+import type { User } from '../../../types';
+
 const query = `
 	query getMe {
 		me {

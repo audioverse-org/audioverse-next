@@ -4,6 +4,8 @@ import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { getSermon, getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
 
+import type { StaticPaths } from '../../../../types';
+
 export default SermonDetail;
 
 interface StaticProps {

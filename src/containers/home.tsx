@@ -3,6 +3,8 @@ import React from 'react';
 import RecordingList from '@components/molecules/recordingList';
 import Testimonies from '@components/organisms/testimonies';
 
+import type { Sermon } from '../../types';
+
 export interface HomeProps {
 	sermons: Sermon[];
 }
