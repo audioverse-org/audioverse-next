@@ -7,7 +7,13 @@ import _ from 'lodash';
 export default function getCookies(
 	req: IncomingMessage | null
 ): { [key: string]: string } {
-	return cookie.parse(
-		req ? _.get(req.headers, 'cookie') || '' : document.cookie
-	);
+	if (req) {
+		return cookie.parse(_.get(req.headers, 'cookie') || '');
+	}
+
+	if (process.browser) {
+		return cookie.parse(_.get(document, 'cookie'));
+	}
+
+	return {};
 }
