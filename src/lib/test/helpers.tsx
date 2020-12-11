@@ -8,7 +8,6 @@ import React from 'react';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
-import type { Sermon, Testimony } from 'types';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
@@ -38,12 +37,13 @@ export function loadSermons({
 	);
 }
 
-export function loadSermon(sermon = undefined): void {
+export function loadSermon(sermon: any = undefined): void {
 	const data = sermon || {
 		id: '1',
 		title: 'the_sermon_title',
 		persons: [],
 		audioFiles: [],
+		videoFiles: [],
 	};
 
 	jest.spyOn(api, 'getSermon').mockResolvedValue((data as any) as Sermon);

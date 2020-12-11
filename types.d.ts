@@ -22,10 +22,12 @@ interface Testimony {
 
 interface AudioFile {
 	url: string;
+	mimeType: string;
 }
 
 interface VideoFile {
 	url: string;
+	mimeType: string;
 }
 
 interface Person {

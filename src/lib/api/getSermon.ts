@@ -15,6 +15,15 @@ fragment SermonFragment on Recording {
 	}
 	audioFiles {
 		url
+		duration
+		filesize
+		mimeType
+	}
+	videoFiles {
+		url
+		duration
+		filesize
+		mimeType
 	}
 	description
 	imageWithFallback {

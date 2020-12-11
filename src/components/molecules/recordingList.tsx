@@ -1,7 +1,6 @@
 import React from 'react';
 
 import RecordingListEntry from '@components/molecules/recordingListEntry';
-import type { Sermon } from 'types';
 
 import styles from './recordingList.module.scss';
 
