@@ -105,4 +105,13 @@ describe('detailPageGenerator', () => {
 
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
+
+	it('includes player', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon();
+
+		const { getByTestId } = await renderPage();
+
+		expect(getByTestId('player')).toBeInTheDocument();
+	});
 });

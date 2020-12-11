@@ -5,6 +5,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import useLanguage from '@lib/useLanguage';
+import type { Sermon } from 'types';
 
 export interface SermonListProps {
 	nodes: Sermon[];

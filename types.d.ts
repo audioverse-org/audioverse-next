@@ -2,6 +2,7 @@
 
 interface Sermon {
 	audioFiles: AudioFile[];
+	videoFiles: VideoFile[];
 	recordingDate: string;
 	duration: number;
 	id: string;
@@ -20,6 +21,10 @@ interface Testimony {
 }
 
 interface AudioFile {
+	url: string;
+}
+
+interface VideoFile {
 	url: string;
 }
 

@@ -3,6 +3,7 @@ import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
+import type { Sermon } from 'types';
 
 import styles from './detail.module.scss';
 
@@ -33,15 +34,28 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
 			) : null}
 			<Favorite id={sermon.id} />
-			{sermon.audioFiles.map((file) => {
-				return (
-					<div key={file.url}>
-						<audio controls src={file.url} preload={'metadata'}>
-							Your browser doesn&apos;t support this player.
-						</audio>
-					</div>
-				);
-			})}
+			<video
+				className={'video-js vjs-fluid'}
+				controls
+				preload={'auto'}
+				poster={'https://s.audioverse.org/images/template/player-bg4.jpg'}
+				data-testid={'player'}
+			>
+				{sermon.audioFiles.map((file) => {
+					// TODO: Add type attr
+					// https://github.com/avorg/wp-avorg-plugin/blob/master/script/playlist.js#L16
+					return <source key={file.url} src={file.url} />;
+				})}
+			</video>
+			{/*{sermon.audioFiles.map((file) => {*/}
+			{/*	return (*/}
+			{/*		<div key={file.url}>*/}
+			{/*			<audio controls src={file.url} preload={'metadata'}>*/}
+			{/*				Your browser doesn&apos;t support this player.*/}
+			{/*			</audio>*/}
+			{/*		</div>*/}
+			{/*	);*/}
+			{/*})}*/}
 			{sermon.description ? (
 				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
 			) : null}
