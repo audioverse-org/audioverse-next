@@ -12,17 +12,15 @@ import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 	// TODO: Fix poster disappearing after audio playback start
-	const options = _.assign(
-		{
-			poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
-			controls: true,
-			fluid: true,
-			// TODO: Should this be set back to `auto` once streaming urls are fixed?
-			// https://docs.videojs.com/docs/guides/options.html
-			preload: 'metadata',
-		},
-		props
-	);
+	const options = {
+		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
+		controls: true,
+		fluid: true,
+		// TODO: Should this be set back to `auto` once streaming urls are fixed?
+		// https://docs.videojs.com/docs/guides/options.html
+		preload: 'metadata',
+		...props,
+	};
 
 	const [videoEl, setVideoEl] = useState(null);
 	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
