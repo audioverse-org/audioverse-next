@@ -161,12 +161,12 @@ describe('detailPageGenerator', () => {
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('Toggle Video'));
+		userEvent.click(getByText('Play Audio'));
 
 		const calls = ((videojs as any) as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
@@ -181,5 +181,92 @@ describe('detailPageGenerator', () => {
 				],
 			])
 		);
+	});
+
+	it('toggles toggle button label', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+		});
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Play Audio'));
+
+		expect(getByText('Play Video')).toBeInTheDocument();
+	});
+
+	it('falls back to video files', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+			videoStreams: [],
+		});
+
+		await renderPage();
+
+		const calls = ((videojs as any) as jest.Mock).mock.calls;
+		const sourceSets = calls.map((c) => c[1].sources);
+
+		expect(sourceSets).toEqual(
+			expect.arrayContaining([
+				[
+					{
+						src: 'video_url',
+						type: 'video_mimetype',
+					},
+				],
+			])
+		);
+	});
+
+	it('falls back to audio files', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			videoFiles: [],
+			videoStreams: [],
+		});
+
+		await renderPage();
+
+		const calls = ((videojs as any) as jest.Mock).mock.calls;
+		const sourceSets = calls.map((c) => c[1].sources);
+
+		expect(sourceSets).toEqual(
+			expect.arrayContaining([
+				[
+					{
+						src: 'audio_url',
+						type: 'audio_mimetype',
+					},
+				],
+			])
+		);
+	});
+
+	it('hides toggle if no video', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Play Audio')).toBeNull();
 	});
 });

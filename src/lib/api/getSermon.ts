@@ -19,7 +19,13 @@ fragment SermonFragment on Recording {
 		filesize
 		mimeType
 	}
-	videoFiles {
+	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+		url
+		duration
+		filesize
+		mimeType
+	}
+	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
 		url
 		duration
 		filesize

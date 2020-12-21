@@ -11,22 +11,38 @@ export interface SermonDetailProps {
 	sermon: Sermon | null;
 }
 
+const getFiles = (sermon: Sermon, prefersAudio: boolean) => {
+	const { videoStreams = [], videoFiles = [], audioFiles = [] } = sermon;
+
+	if (prefersAudio) return audioFiles;
+	if (videoStreams.length > 0) return videoStreams;
+	if (videoFiles.length > 0) return videoFiles;
+
+	return audioFiles;
+};
+
+const getSources = (sermon: Sermon, prefersAudio: boolean) => {
+	const files = getFiles(sermon, prefersAudio);
+
+	return files.map((f) => ({
+		src: f.url,
+		type: f.mimeType,
+	}));
+};
+
+const hasVideo = (sermon: Sermon) => {
+	const { videoStreams = [], videoFiles = [] } = sermon;
+
+	return videoStreams.length > 0 || videoFiles.length > 0;
+};
+
 function SermonDetail({ sermon }: SermonDetailProps) {
 	if (!sermon) return null;
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
-
 	const imageSrc = _.get(sermon, 'imageWithFallback.url');
 	const imageAlt = _.get(sermon, 'title');
-
-	// TODO: Fall back to audio files if no video files
-	const files = prefersAudio ? sermon.audioFiles : sermon.videoFiles;
-	const sources = files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-	}));
-
-	console.log({ prefersAudio, files, sources });
+	const sources = getSources(sermon, prefersAudio);
 
 	return (
 		<>
@@ -47,47 +63,11 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			<Favorite id={sermon.id} />
 			<Player sources={sources} />
 			{/*TODO: Hide toggle button if no video files*/}
-			<button
-				onClick={() => {
-					setPrefersAudio(!prefersAudio);
-				}}
-			>
-				Toggle Video
-			</button>
-			{/*<video*/}
-			{/*	id={`recording-${sermon.id}`}*/}
-			{/*	className={'video-js vjs-fluid'}*/}
-			{/*	controls*/}
-			{/*	preload={'auto'}*/}
-			{/*	poster={'https://s.audioverse.org/images/template/player-bg4.jpg'}*/}
-			{/*	data-testid={'player'}*/}
-			{/*>*/}
-			{/*	{sermon.audioFiles.map((file) => {*/}
-			{/*		// TODO: Add type attr*/}
-			{/*		// https://github.com/avorg/wp-avorg-plugin/blob/master/script/playlist.js#L16*/}
-			{/*		return <source key={file.url} src={file.url} type={file.mimeType} />;*/}
-			{/*	})}*/}
-			{/*	<p className="vjs-no-js">*/}
-			{/*		To view this video please enable JavaScript, and consider upgrading to*/}
-			{/*		a web browser that*/}
-			{/*		<a*/}
-			{/*			href="https://videojs.com/html5-video-support/"*/}
-			{/*			target="_blank"*/}
-			{/*			rel={'noreferrer'}*/}
-			{/*		>*/}
-			{/*			supports HTML5 video*/}
-			{/*		</a>*/}
-			{/*	</p>*/}
-			{/*</video>*/}
-			{/*{sermon.audioFiles.map((file) => {*/}
-			{/*	return (*/}
-			{/*		<div key={file.url}>*/}
-			{/*			<audio controls src={file.url} preload={'metadata'}>*/}
-			{/*				Your browser doesn&apos;t support this player.*/}
-			{/*			</audio>*/}
-			{/*		</div>*/}
-			{/*	);*/}
-			{/*})}*/}
+			{hasVideo(sermon) && (
+				<button onClick={() => setPrefersAudio(!prefersAudio)}>
+					Play {prefersAudio ? 'Video' : 'Audio'}
+				</button>
+			)}
 			{sermon.description ? (
 				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
 			) : null}
