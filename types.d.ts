@@ -1,7 +1,9 @@
 // TODO: Generate GraphQL response types from queries
 
 interface Sermon {
-	audioFiles: AudioFile[];
+	audioFiles: MediaFile[];
+	videoFiles: MediaFile[];
+	videoStreams: MediaFile[];
 	recordingDate: string;
 	duration: number;
 	id: string;
@@ -19,8 +21,9 @@ interface Testimony {
 	writtenDate: string;
 }
 
-interface AudioFile {
+interface MediaFile {
 	url: string;
+	mimeType: string;
 }
 
 interface Person {

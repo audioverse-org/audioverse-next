@@ -397,4 +397,28 @@ describe('sermons list page', () => {
 
 		expect(head.innerHTML).not.toContain('title');
 	});
+
+	it('includes format indicators', async () => {
+		loadSermons();
+
+		const { getAllByText } = await renderPage();
+
+		expect(getAllByText('Audio').length).toEqual(2);
+	});
+
+	it('includes video format indicator', async () => {
+		loadSermons({
+			nodes: [
+				{
+					id: '1',
+					title: 'the_sermon_title',
+					videoFiles: [{}],
+				},
+			],
+		});
+
+		const { getAllByText } = await renderPage();
+
+		expect(getAllByText('Video').length).toEqual(2);
+	});
 });

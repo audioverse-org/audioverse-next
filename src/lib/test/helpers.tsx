@@ -27,6 +27,7 @@ export function loadSermons({
 				{
 					id: '1',
 					title: 'the_sermon_title',
+					videoFiles: [],
 				},
 			],
 			aggregate: {
@@ -36,12 +37,13 @@ export function loadSermons({
 	);
 }
 
-export function loadSermon(sermon = undefined): void {
+export function loadSermon(sermon: any = undefined): void {
 	const data = sermon || {
 		id: '1',
 		title: 'the_sermon_title',
 		persons: [],
 		audioFiles: [],
+		videoFiles: [],
 	};
 
 	jest.spyOn(api, 'getSermon').mockResolvedValue((data as any) as Sermon);
