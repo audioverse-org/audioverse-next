@@ -1,10 +1,10 @@
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { QueryCache } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query/hydration';
 
 import Profile from '@containers/profile';
 import { getMe } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 export default Profile;
 
