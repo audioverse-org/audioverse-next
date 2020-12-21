@@ -21,7 +21,7 @@ export default function RecordingListEntry({
 }): JSX.Element {
 	const lang = useLanguage();
 	const persons: Person[] = _.get(sermon, 'persons', []);
-	const videoFiles: VideoFile[] = _.get(sermon, 'videoFiles', []);
+	const videoFiles: MediaFile[] = _.get(sermon, 'videoFiles', []);
 
 	return (
 		<tr className={styles.item}>
