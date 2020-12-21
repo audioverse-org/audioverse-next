@@ -20,8 +20,9 @@ export default function RecordingListEntry({
 }: {
 	sermon: Sermon;
 }): JSX.Element {
-	const lang = useLanguage(),
-		persons: Person[] = _.get(sermon, 'persons', []);
+	const lang = useLanguage();
+	const persons: Person[] = _.get(sermon, 'persons', []);
+	const videoFiles: MediaFile[] = _.get(sermon, 'videoFiles', []);
 
 	return (
 		<tr className={styles.item}>
@@ -50,6 +51,7 @@ export default function RecordingListEntry({
 				</ul>
 			</td>
 			<td className={styles.duration}>{formatDuration(sermon.duration)}</td>
+			<td>{videoFiles.length > 0 ? 'Video' : 'Audio'}</td>
 		</tr>
 	);
 }

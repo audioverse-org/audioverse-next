@@ -29,11 +29,13 @@ fragment SermonsFragment on Recording {
 		url
 		duration
 		filesize
+		mimeType
 	}
 	videoFiles {
 		url
 		duration
 		filesize
+		mimeType
 	}
 	recordingDate
 	canonicalUrl
