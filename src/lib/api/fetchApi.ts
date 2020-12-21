@@ -1,7 +1,5 @@
 import { IncomingMessage } from 'http';
 
-import _ from 'lodash';
-
 import getCookies from '@lib/getCookies';
 
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
@@ -20,7 +18,7 @@ export async function fetchApi(
 
 	const headers = {
 		'Content-Type': 'application/json',
-		'x-av-session': _.get(cookies, 'avSession'),
+		'x-av-session': cookies?.avSession,
 	};
 
 	const res = await fetch(API_URL, {

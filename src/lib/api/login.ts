@@ -17,9 +17,7 @@ export async function login(email: string, password: string): Promise<boolean> {
 		data = await fetchApi(query, { variables }),
 		token = data.login.authenticatedUser.sessionToken;
 
-	if (token) {
-		Cookie.set('avSession', token);
-	}
+	Cookie.set('avSession', token);
 
 	return !!token;
 }

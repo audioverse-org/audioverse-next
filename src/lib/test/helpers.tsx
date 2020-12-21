@@ -8,8 +8,7 @@ import React from 'react';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
-
-import type { Sermon, Testimony } from '../../../types';
+import type { Sermon, Testimony } from 'types';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();

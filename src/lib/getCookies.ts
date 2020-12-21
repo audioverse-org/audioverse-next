@@ -11,7 +11,7 @@ export default function getCookies(
 		return cookie.parse(_.get(req.headers, 'cookie') || '');
 	}
 
-	if (process.browser) {
+	if (process && process.browser) {
 		return cookie.parse(_.get(document, 'cookie'));
 	}
 

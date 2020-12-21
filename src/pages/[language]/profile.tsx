@@ -1,25 +1,22 @@
-import { IncomingMessage } from 'http';
-
 import { QueryCache } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query/hydration';
 
 import Profile from '@containers/profile';
 import { getMe } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 export default Profile;
 
 interface ServerSideProps {
-	props: {
-		dehydratedState: DehydratedState;
-	};
+	dehydratedState: DehydratedState;
 }
 
 export async function getServerSideProps({
 	req,
-}: {
-	req: IncomingMessage;
-}): Promise<ServerSideProps> {
+}: GetServerSidePropsContext): Promise<
+	GetServerSidePropsResult<ServerSideProps>
+> {
 	storeRequest(req);
 
 	const queryCache = new QueryCache();

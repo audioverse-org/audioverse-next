@@ -3,8 +3,7 @@ import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
-
-import type { Sermon } from '../../../types';
+import type { Sermon } from 'types';
 
 import styles from './detail.module.scss';
 
