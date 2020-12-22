@@ -1,4 +1,5 @@
 import { fetchApi } from '@lib/api/fetchApi';
+import type { Sermon } from 'types';
 
 const query = `
 query getSermons($language: Language!, $offset: Int, $first: Int!, $hasVideo: Boolean) {

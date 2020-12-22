@@ -1,7 +1,10 @@
+import _ from 'lodash';
 import Head from 'next/head';
 import React from 'react';
 import '../styles/globals.css';
 import '../styles/styles.scss';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
+import { Hydrate } from 'react-query/hydration';
 import 'video.js/dist/video-js.css';
 
 import withIntl from '@components/HOCs/withIntl';
@@ -14,6 +17,8 @@ function MyApp<P>({
 	Component: typeof React.Component;
 	pageProps: P;
 }): JSX.Element {
+	const queryCache = new QueryCache();
+
 	return (
 		<div className={'template-base'}>
 			<Head>
@@ -22,7 +27,11 @@ function MyApp<P>({
 			</Head>
 			<Header />
 			<div className={'template-base__content'}>
-				<Component {...pageProps} />
+				<ReactQueryCacheProvider queryCache={queryCache}>
+					<Hydrate state={_.get(pageProps, 'dehydratedState')}>
+						<Component {...pageProps} />
+					</Hydrate>
+				</ReactQueryCacheProvider>
 			</div>
 			{/*<script src="//vjs.zencdn.net/6.7/video.min.js" />*/}
 		</div>
