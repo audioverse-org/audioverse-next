@@ -1,12 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import { useQuery } from 'react-query';
 
 import Protected from '@containers/protected';
-import { getMe } from '@lib/api';
+import { useMe } from '@lib/api/useMe';
 
 export default function Profile(): JSX.Element {
-	const { data: me } = useQuery('me', getMe);
+	const me = useMe();
 
 	return (
 		<Protected>
