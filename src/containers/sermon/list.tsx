@@ -4,7 +4,7 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import useLanguage from '@lib/useLanguage';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import type { Sermon } from 'types';
 
 export interface SermonListProps {
@@ -17,7 +17,7 @@ export interface SermonListProps {
 }
 
 function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
-	const lang = useLanguage();
+	const lang = useLanguageRoute();
 
 	return (
 		<div>

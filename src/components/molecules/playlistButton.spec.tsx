@@ -41,6 +41,12 @@ describe('playlist button', () => {
 		).toBeNull();
 	});
 
+	it('queries me with language', async () => {
+		await render(<PlaylistButton />);
+
+		await waitFor(() => expect(getMe).toBeCalledWith('ENGLISH'));
+	});
+
 	// gets user playlists
 	// shows user playlists
 	// adds recording to playlist
