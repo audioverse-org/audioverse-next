@@ -3,6 +3,7 @@ import _ from 'lodash';
 import Home, { HomeProps } from '@containers/home';
 import { getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
+import type { StaticPaths } from 'types';
 
 export default Home;
 

@@ -6,3 +6,5 @@ export * from '@lib/api/getTestimonyCount';
 export * from '@lib/api/isFavorited';
 export * from '@lib/api/setFavorited';
 export * from '@lib/api/useIsFavorited';
+export * from '@lib/api/getMe';
+export * from '@lib/api/login';

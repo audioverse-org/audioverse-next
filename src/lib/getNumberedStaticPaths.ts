@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import type { StaticPaths } from 'types';
 
 export async function makeNumberedPaths(
 	sectionSegments: string,

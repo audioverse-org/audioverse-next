@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import SearchEntry from '@components/molecules/searchEntry';
+import type { Sermon } from 'types';
 
 import styles from './search.module.scss';
 

@@ -1,5 +1,7 @@
 // TODO: Generate GraphQL response types from queries
 
+import { IncomingMessage } from 'http';
+
 interface Sermon {
 	audioFiles: MediaFile[];
 	videoFiles: MediaFile[];
@@ -30,6 +32,8 @@ interface Person {
 	name: string;
 	id: string;
 }
+
+interface User {}
 
 interface StaticPaths {
 	paths: string[];
