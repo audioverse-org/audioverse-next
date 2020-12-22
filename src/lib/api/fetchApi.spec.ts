@@ -7,7 +7,8 @@ global.fetch = jest.fn();
 describe('fetchApi', () => {
 	it('uses saved request', async () => {
 		(global.fetch as jest.Mock).mockResolvedValue({
-			json: () => Promise.resolve('result'),
+			text: () => Promise.resolve(JSON.stringify('result')),
+			ok: true,
 		});
 
 		const req = _.set({}, 'headers.cookie', 'avSession=the_token');
