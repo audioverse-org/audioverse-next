@@ -11,7 +11,7 @@ const query = `
 	}
 `;
 
-export async function getMe(): Promise<User> {
+export async function getMe(): Promise<User | undefined> {
 	const data = await fetchApi(query);
 
 	return data?.me?.user;
