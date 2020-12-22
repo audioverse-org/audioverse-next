@@ -1,6 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
+import { GetServerSidePropsContext } from 'next';
 import React from 'react';
 import { QueryCache } from 'react-query';
 import { hydrate } from 'react-query/hydration';
@@ -15,7 +16,9 @@ jest.mock('@lib/api/login');
 jest.mock('@lib/api/fetchApi');
 
 async function renderPage() {
-	const { props } = await getServerSideProps({ req: {} as any });
+	const { props } = (await getServerSideProps({
+		req: {} as any,
+	} as GetServerSidePropsContext)) as any;
 	return render(<MyApp Component={Profile as any} pageProps={props} />);
 }
 
@@ -31,7 +34,9 @@ describe('profile page', () => {
 			name: 'the_name',
 		});
 
-		const { props } = await getServerSideProps({ req: {} as any });
+		const { props } = (await getServerSideProps({
+			req: {} as any,
+		} as GetServerSidePropsContext)) as any;
 
 		const queryCache = new QueryCache();
 
@@ -81,7 +86,9 @@ describe('profile page', () => {
 	});
 
 	it('stores request', async () => {
-		await getServerSideProps({ req: 'the_request' as any });
+		await getServerSideProps({
+			req: 'the_request' as any,
+		} as GetServerSidePropsContext);
 
 		expect(storeRequest).toBeCalledWith('the_request');
 	});

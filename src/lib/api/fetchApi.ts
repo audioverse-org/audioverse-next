@@ -30,7 +30,22 @@ export async function fetchApi(
 		}),
 	});
 
-	const json = await res.json();
+	const text = await res.text();
+
+	if (!res.ok) {
+		console.error({ text, res, query, variables, headers });
+		throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
+	}
+
+	let json;
+
+	try {
+		json = JSON.parse(text);
+	} catch (error) {
+		console.error({ error, text, res, query, variables, headers });
+		throw error;
+	}
+
 	if (json.errors) {
 		console.error({
 			query,
@@ -38,7 +53,8 @@ export async function fetchApi(
 			headers,
 			errors: json.errors,
 		});
-		throw new Error('Failed to fetch API');
+		throw new Error('API encountered errors');
 	}
+
 	return json.data;
 }

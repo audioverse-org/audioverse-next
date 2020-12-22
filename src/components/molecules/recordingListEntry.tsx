@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import useLanguage from '@lib/useLanguage';
-import type { Person, Sermon } from 'types';
+import type { MediaFile, Person, Sermon } from 'types';
 
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);

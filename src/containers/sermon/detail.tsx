@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
-import type { Sermon } from 'types';
+import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
 
