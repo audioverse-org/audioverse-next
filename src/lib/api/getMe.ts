@@ -4,7 +4,7 @@ import type { User } from 'types';
 // TODO: handle playlist pagination?
 
 const query = `
-	query getMe($language: Language) {
+	query getMe($language: Language!) {
 		me {
 			user {
 				givenName

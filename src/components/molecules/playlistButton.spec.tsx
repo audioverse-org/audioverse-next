@@ -26,13 +26,15 @@ describe('playlist button', () => {
 	});
 
 	it('does not show error if user logged in', async () => {
-		jest.spyOn(api, 'getMe').mockResolvedValue({});
+		jest.spyOn(api, 'getMe').mockResolvedValue({} as any);
 
 		const { getByText, queryByText } = await render(<PlaylistButton />);
 
 		const button = getByText('Add to Playlist');
 
 		await waitFor(() => expect(getMe).toHaveBeenCalled());
+
+		console.log('clicking');
 
 		userEvent.click(button);
 
@@ -62,7 +64,9 @@ describe('playlist button', () => {
 
 		userEvent.click(button);
 
-		expect(getByText('playlist_title')).toBeInTheDocument();
+		await waitFor(() =>
+			expect(getByText('playlist_title')).toBeInTheDocument()
+		);
 	});
 
 	// adds recording to playlist

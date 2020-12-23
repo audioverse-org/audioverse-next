@@ -270,5 +270,12 @@ describe('detailPageGenerator', () => {
 		expect(queryByText('Play Audio')).toBeNull();
 	});
 
-	// TODO: has add to playlist button
+	it('has playlist button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Add to Playlist')).toBeInTheDocument();
+	});
 });

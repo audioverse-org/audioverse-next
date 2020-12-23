@@ -21,6 +21,7 @@ export async function getServerSideProps({
 
 	const queryCache = new QueryCache();
 
+	// TODO: provide getMe with languageId
 	await queryCache.prefetchQuery('me', getMe);
 
 	return {

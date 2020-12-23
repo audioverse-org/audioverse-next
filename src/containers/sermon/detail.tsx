@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
+import PlaylistButton from '@components/molecules/playlistButton';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
@@ -44,6 +45,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const imageSrc = _.get(sermon, 'imageWithFallback.url');
 	const imageAlt = _.get(sermon, 'title');
 	const sources = getSources(sermon, prefersAudio);
+	const speakers: Person[] = _.get(sermon, 'persons', []);
 
 	return (
 		<>
@@ -52,7 +54,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<div>
 					<h1>{sermon.title}</h1>
 					<ul className={styles.speakers}>
-						{sermon.persons.map((speaker: Person) => {
+						{speakers.map((speaker: Person) => {
 							return <li key={speaker.name}>{speaker.name}</li>;
 						})}
 					</ul>
@@ -62,6 +64,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
 			) : null}
 			<Favorite id={sermon.id} />
+			<PlaylistButton />
 			<Player sources={sources} />
 			{/*TODO: Hide toggle button if no video files*/}
 			{hasVideo(sermon) && (

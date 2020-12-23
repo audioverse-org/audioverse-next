@@ -7,6 +7,7 @@ import { QueryCache } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
 import * as api from '@lib/api';
+import { getMe } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import Profile, { getServerSideProps } from '@pages/[language]/profile';
 import MyApp from '@pages/_app';
@@ -32,7 +33,7 @@ describe('profile page', () => {
 	it('dehydrates user', async () => {
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			name: 'the_name',
-		});
+		} as any);
 
 		const { props } = (await getServerSideProps({
 			req: {} as any,
@@ -50,7 +51,7 @@ describe('profile page', () => {
 	it('includes first name', async () => {
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			givenName: 'first',
-		});
+		} as any);
 
 		const { getByDisplayValue } = await renderPage();
 
@@ -127,12 +128,18 @@ describe('profile page', () => {
 
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			givenName: 'first',
-		});
+		} as any);
 
 		const loginButton = getByText('login');
 
 		loginButton.click();
 
 		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
+	});
+
+	it('uses language id when getting me', async () => {
+		await renderPage();
+
+		expect(getMe).toBeCalledWith('ENGLISH');
 	});
 });

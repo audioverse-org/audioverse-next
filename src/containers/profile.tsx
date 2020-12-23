@@ -7,6 +7,7 @@ import { useMe } from '@lib/api/useMe';
 export default function Profile(): JSX.Element {
 	const me = useMe();
 
+	// TODO: make sure givenName doesn't get populated with email on login (why??)
 	return (
 		<Protected>
 			<form>
