@@ -47,11 +47,25 @@ describe('playlist button', () => {
 		await waitFor(() => expect(getMe).toBeCalledWith('ENGLISH'));
 	});
 
-	// gets user playlists
-	// shows user playlists
+	it('shows user playlists', async () => {
+		jest.spyOn(api, 'getMe').mockResolvedValue({
+			playlists: {
+				nodes: [{ title: 'playlist_title' }],
+			},
+		} as any);
+
+		const { getByText } = render(<PlaylistButton />);
+
+		const button = getByText('Add to Playlist');
+
+		await waitFor(() => expect(getMe).toHaveBeenCalled());
+
+		userEvent.click(button);
+
+		expect(getByText('playlist_title')).toBeInTheDocument();
+	});
+
 	// adds recording to playlist
-
-	// punt
-
-	// busts playlist cache
+	// allows new playlist creation
+	// busts me cache
 });
