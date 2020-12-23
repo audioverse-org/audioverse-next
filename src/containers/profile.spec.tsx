@@ -130,9 +130,7 @@ describe('profile page', () => {
 			givenName: 'first',
 		} as any);
 
-		const loginButton = getByText('login');
-
-		loginButton.click();
+		userEvent.click(getByText('login'));
 
 		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
 	});
