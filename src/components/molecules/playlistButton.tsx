@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
@@ -9,6 +9,33 @@ import { Playlist } from 'types';
 interface PlaylistButtonProps {
 	recordingId: string;
 }
+
+const Entry = ({
+	playlist,
+	recordingId,
+}: {
+	playlist: Playlist;
+	recordingId: string;
+}) => {
+	const [isChecked, setIsChecked] = useState<boolean>(false);
+
+	useEffect(() => {
+		setPlaylistMembership(recordingId, playlist.id, isChecked);
+	}, [isChecked]);
+
+	return (
+		<li>
+			<label>
+				<input
+					type={'checkbox'}
+					checked={isChecked}
+					onChange={() => setIsChecked(!isChecked)}
+				/>
+				{playlist.title}
+			</label>
+		</li>
+	);
+};
 
 export default function PlaylistButton({
 	recordingId,
@@ -20,18 +47,7 @@ export default function PlaylistButton({
 		return (
 			lists &&
 			lists.map((l: Playlist, i: number) => (
-				<li key={i}>
-					<label>
-						<input
-							type={'checkbox'}
-							onChange={() => {
-								// TODO: toggle bool
-								setPlaylistMembership(recordingId, l.id, true);
-							}}
-						/>
-						{l.title}
-					</label>
-				</li>
+				<Entry recordingId={recordingId} playlist={l} key={i} />
 			))
 		);
 	};
@@ -41,7 +57,12 @@ export default function PlaylistButton({
 			<button data-tip data-for={'playlistButton'}>
 				Add to Playlist
 			</button>
-			<ReactTooltip id={'playlistButton'} event={'click'}>
+			<ReactTooltip
+				id={'playlistButton'}
+				uuid={'tooltipUuid'}
+				event={'click'}
+				effect={'solid'}
+			>
 				{me ? (
 					<ul>{getEntries()}</ul>
 				) : (

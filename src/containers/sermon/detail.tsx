@@ -64,7 +64,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
 			) : null}
 			<Favorite id={sermon.id} />
-			<PlaylistButton />
+			<PlaylistButton recordingId={sermon.id} />
 			<Player sources={sources} />
 			{/*TODO: Hide toggle button if no video files*/}
 			{hasVideo(sermon) && (

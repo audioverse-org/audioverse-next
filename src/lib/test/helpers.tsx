@@ -8,7 +8,7 @@ import React from 'react';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
-import type { Sermon, Testimony } from 'types';
+import type { Playlist, Sermon, Testimony } from 'types';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
@@ -17,6 +17,16 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 
 	return { addItem, rss2 };
 };
+
+export function loadMe({
+	playlists = [],
+}: { playlists?: Partial<Playlist>[] } = {}): void {
+	jest.spyOn(api, 'getMe').mockResolvedValue({
+		playlists: {
+			nodes: playlists,
+		},
+	} as any);
+}
 
 export function loadSermons({
 	nodes = undefined,
