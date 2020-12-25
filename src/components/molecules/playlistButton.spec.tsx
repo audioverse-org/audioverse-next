@@ -4,12 +4,14 @@ import React from 'react';
 
 import PlaylistButton from '@components/molecules/playlistButton';
 import * as api from '@lib/api';
+import { addPlaylist } from '@lib/api/addPlaylist';
 import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
 jest.mock('@lib/api/getPlaylists');
+jest.mock('@lib/api/addPlaylist');
 
 const renderComponent = async ({
 	recordingId = 'recording_id',
@@ -262,10 +264,57 @@ describe('playlist button', () => {
 		expect(setPlaylistMembership).not.toBeCalled();
 	});
 
-	// allows new playlist creation
-	// loads playlist membership statuses on initial page load
+	it('creates playlist', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
-	// usePlaylistMemberships
-	// useSetPlaylistMembership
-	// bust playlist membership query cache
+		const {
+			getByPlaceholderText,
+			getByText,
+			waitForPlaylists,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		const newPlaylistInput = getByPlaceholderText('New Playlist');
+		const submitButton = getByText('Create');
+
+		await userEvent.type(newPlaylistInput, 'the_title');
+
+		userEvent.click(submitButton);
+
+		await waitFor(() =>
+			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', false)
+		);
+	});
+
+	it('busts playlist cache on playlist create', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			getByPlaceholderText,
+			getByText,
+			waitForPlaylists,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		const newPlaylistInput = getByPlaceholderText('New Playlist');
+		const submitButton = getByText('Create');
+
+		await userEvent.type(newPlaylistInput, 'the_title');
+
+		userEvent.click(submitButton);
+
+		await waitFor(() => {
+			const callCount = (getPlaylists as jest.Mock).mock.calls.length;
+			expect(callCount > 1).toBeTruthy();
+		});
+	});
+
+	// resets new playlist input
+	// adds recording to newly-created playlist
+	// adds playlist optimistically
+	// displays new playlist optimistically
+	// clears new playlist input
+	// allows switching between private and public
 });

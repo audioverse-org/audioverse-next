@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 
+import { useAddPlaylist } from '@lib/api/useAddPlaylist';
 import { usePlaylists } from '@lib/api/usePlaylists';
 import { useSetPlaylistMembership } from '@lib/api/useSetPlaylistMembership';
 import { Playlist } from 'types';
@@ -46,6 +47,8 @@ export default function PlaylistButton({
 	recordingId,
 }: PlaylistButtonProps): JSX.Element {
 	const lists = usePlaylists({ recordingId });
+	const addPlaylist = useAddPlaylist();
+	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
 
 	const getEntries = () => {
 		return (
@@ -69,7 +72,21 @@ export default function PlaylistButton({
 				clickable={true}
 			>
 				{lists ? (
-					<ul className={styles.list}>{getEntries()}</ul>
+					<>
+						<ul className={styles.list}>{getEntries()}</ul>
+						<input
+							placeholder={'New Playlist'}
+							value={newPlaylistTitle}
+							onChange={(e) => setNewPlaylistTitle(e.target.value)}
+						/>
+						<button
+							onClick={async () => {
+								await addPlaylist(newPlaylistTitle, false);
+							}}
+						>
+							Create
+						</button>
+					</>
 				) : (
 					'You must be logged in to perform this action'
 				)}
