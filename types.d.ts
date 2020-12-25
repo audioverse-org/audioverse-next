@@ -43,6 +43,7 @@ interface User {
 interface Playlist {
 	id: string;
 	title: string;
+	hasRecording?: boolean;
 }
 
 interface StaticPaths {

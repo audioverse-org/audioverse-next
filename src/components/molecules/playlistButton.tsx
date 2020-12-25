@@ -1,10 +1,11 @@
-import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { useMe } from '@lib/api/useMe';
+import { usePlaylists } from '@lib/api/usePlaylists';
+import { useSetPlaylistMembership } from '@lib/api/useSetPlaylistMembership';
 import { Playlist } from 'types';
+
+import styles from './playlistButton.module.scss';
 
 interface PlaylistButtonProps {
 	recordingId: string;
@@ -18,10 +19,11 @@ const Entry = ({
 	recordingId: string;
 }) => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const setPlaylistMembership = useSetPlaylistMembership();
 
 	useEffect(() => {
-		setPlaylistMembership(recordingId, playlist.id, isChecked);
-	}, [isChecked]);
+		setIsChecked(!!playlist?.hasRecording);
+	}, [playlist]);
 
 	return (
 		<li>
@@ -29,7 +31,10 @@ const Entry = ({
 				<input
 					type={'checkbox'}
 					checked={isChecked}
-					onChange={() => setIsChecked(!isChecked)}
+					onChange={() => {
+						setPlaylistMembership(recordingId, playlist.id, !isChecked);
+						setIsChecked(!isChecked);
+					}}
 				/>
 				{playlist.title}
 			</label>
@@ -40,8 +45,7 @@ const Entry = ({
 export default function PlaylistButton({
 	recordingId,
 }: PlaylistButtonProps): JSX.Element {
-	const me = useMe();
-	const lists = _.get(me, 'playlists.nodes', []);
+	const lists = usePlaylists({ recordingId });
 
 	const getEntries = () => {
 		return (
@@ -62,9 +66,10 @@ export default function PlaylistButton({
 				uuid={'tooltipUuid'}
 				event={'click'}
 				effect={'solid'}
+				clickable={true}
 			>
-				{me ? (
-					<ul>{getEntries()}</ul>
+				{lists ? (
+					<ul className={styles.list}>{getEntries()}</ul>
 				) : (
 					'You must be logged in to perform this action'
 				)}
