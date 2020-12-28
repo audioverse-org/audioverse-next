@@ -28,8 +28,8 @@ const renderComponent = async ({
 		waitForPlaylists: () =>
 			waitFor(() => expect(getPlaylists).toHaveBeenCalled()),
 		getEntry,
-		getCheckbox: (playlistTitle: string) =>
-			getEntry(playlistTitle).querySelector('input'),
+		getCheckbox: (playlistTitle: string): HTMLInputElement =>
+			result.getByLabelText(playlistTitle) as HTMLInputElement,
 	};
 };
 
@@ -73,13 +73,15 @@ describe('playlist button', () => {
 			},
 		]);
 
-		const { getEntry, button, waitForPlaylists } = await renderComponent();
+		const { getCheckbox, button, waitForPlaylists } = await renderComponent();
 
 		await waitForPlaylists();
 
 		userEvent.click(button);
 
-		await waitFor(() => expect(getEntry('playlist_title')).toBeInTheDocument());
+		await waitFor(() =>
+			expect(getCheckbox('playlist_title')).toBeInTheDocument()
+		);
 	});
 
 	it('adds recording to playlist', async () => {
@@ -287,6 +289,7 @@ describe('playlist button', () => {
 		);
 	});
 
+	// TODO: Should this be passing yet or not?
 	it('busts playlist cache on playlist create', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 

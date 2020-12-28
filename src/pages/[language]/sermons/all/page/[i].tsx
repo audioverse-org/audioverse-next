@@ -40,7 +40,7 @@ export async function getStaticProps({
 			description: 'All sermons feed title',
 		},
 		{
-			lang: lang.display_name,
+			lang: lang?.display_name,
 		}
 	);
 
