@@ -30,6 +30,10 @@ const renderComponent = async ({
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
 			result.getByLabelText(playlistTitle) as HTMLInputElement,
+		newPlaylistInput: result.queryByPlaceholderText(
+			'New Playlist'
+		) as HTMLInputElement,
+		submitButton: result.queryByText('Create') as HTMLButtonElement,
 	};
 };
 
@@ -270,15 +274,12 @@ describe('playlist button', () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
 		const {
-			getByPlaceholderText,
-			getByText,
+			newPlaylistInput,
+			submitButton,
 			waitForPlaylists,
 		} = await renderComponent();
 
 		await waitForPlaylists();
-
-		const newPlaylistInput = getByPlaceholderText('New Playlist');
-		const submitButton = getByText('Create');
 
 		await userEvent.type(newPlaylistInput, 'the_title');
 
@@ -289,20 +290,16 @@ describe('playlist button', () => {
 		);
 	});
 
-	// TODO: Should this be passing yet or not?
 	it('busts playlist cache on playlist create', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
 		const {
-			getByPlaceholderText,
-			getByText,
+			newPlaylistInput,
+			submitButton,
 			waitForPlaylists,
 		} = await renderComponent();
 
 		await waitForPlaylists();
-
-		const newPlaylistInput = getByPlaceholderText('New Playlist');
-		const submitButton = getByText('Create');
 
 		await userEvent.type(newPlaylistInput, 'the_title');
 
@@ -315,6 +312,10 @@ describe('playlist button', () => {
 	});
 
 	// resets new playlist input
+	// it('resets new playlist input on create', async () => {
+	//
+	// })
+
 	// adds recording to newly-created playlist
 	// adds playlist optimistically
 	// displays new playlist optimistically
