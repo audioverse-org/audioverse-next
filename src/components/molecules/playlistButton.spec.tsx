@@ -1,4 +1,11 @@
-import { render, waitFor } from '@testing-library/react';
+import {
+	getByLabelText,
+	getByText,
+	queryByPlaceholderText,
+	queryByText,
+	render,
+	waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -20,20 +27,22 @@ const renderComponent = async ({
 } = {}) => {
 	const result = await render(<PlaylistButton recordingId={recordingId} />);
 
-	const getEntry = (playlistTitle: string) => result.getByText(playlistTitle);
+	const getEntry = (playlistTitle: string) =>
+		getByText(result.container, playlistTitle);
 
 	return {
 		...result,
-		button: result.getByText('Add to Playlist'),
-		waitForPlaylists: () =>
-			waitFor(() => expect(getPlaylists).toHaveBeenCalled()),
+		button: getByText(result.container, 'Add to Playlist'),
+		waitForPlaylists: (count = 1) =>
+			waitFor(() => expect(getPlaylists).toHaveBeenCalledTimes(count)),
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
-			result.getByLabelText(playlistTitle) as HTMLInputElement,
-		newPlaylistInput: result.queryByPlaceholderText(
+			getByLabelText(result.container, playlistTitle) as HTMLInputElement,
+		newPlaylistInput: queryByPlaceholderText(
+			result.container,
 			'New Playlist'
 		) as HTMLInputElement,
-		submitButton: result.queryByText('Create') as HTMLButtonElement,
+		submitButton: queryByText(result.container, 'Create') as HTMLButtonElement,
 	};
 };
 
@@ -357,7 +366,20 @@ describe('playlist button', () => {
 		});
 	});
 
-	// adds recording to newly-created playlist
+	it('uses separate playlist caches for separate recordings', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const { waitForPlaylists } = await renderComponent({
+			recordingId: 'recording1',
+		});
+
+		await renderComponent({
+			recordingId: 'recording2',
+		});
+
+		await waitForPlaylists(2);
+	});
+
 	// adds playlist optimistically
 	// displays new playlist optimistically
 	// clears new playlist input

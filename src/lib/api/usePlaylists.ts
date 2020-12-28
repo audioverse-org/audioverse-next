@@ -11,8 +11,9 @@ export function usePlaylists(
 	} = {}
 ): Playlist[] | undefined {
 	const languageId = useLanguageId();
+	const { recordingId } = options;
 
-	const { data } = useQuery('playlists', () =>
+	const { data } = useQuery(['playlists', 'withRecording', recordingId], () =>
 		getPlaylists(languageId, options)
 	);
 
