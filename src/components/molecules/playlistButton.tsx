@@ -48,6 +48,7 @@ export default function PlaylistButton({
 }: PlaylistButtonProps): JSX.Element {
 	const lists = usePlaylists({ recordingId });
 	const addPlaylist = useAddPlaylist();
+	const setPlaylistMembership = useSetPlaylistMembership();
 	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
 
 	const getEntries = () => {
@@ -82,7 +83,13 @@ export default function PlaylistButton({
 						<button
 							onClick={async () => {
 								setNewPlaylistTitle('');
-								await addPlaylist(newPlaylistTitle, false);
+								const playlistId = await addPlaylist(newPlaylistTitle, false);
+
+								if (!playlistId) {
+									throw new Error('Failed to create new playlist');
+								}
+
+								await setPlaylistMembership(recordingId, playlistId, true);
 							}}
 						>
 							Create

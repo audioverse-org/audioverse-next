@@ -272,6 +272,7 @@ describe('playlist button', () => {
 
 	it('creates playlist', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
 
 		const {
 			newPlaylistInput,
@@ -292,6 +293,7 @@ describe('playlist button', () => {
 
 	it('busts playlist cache on playlist create', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
 
 		const {
 			newPlaylistInput,
@@ -313,6 +315,7 @@ describe('playlist button', () => {
 
 	it('resets new playlist input on create', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
 
 		const {
 			newPlaylistInput,
@@ -327,6 +330,31 @@ describe('playlist button', () => {
 		userEvent.click(submitButton);
 
 		expect(newPlaylistInput.value).toBeFalsy();
+	});
+
+	it('adds recording to new playlist on create', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
+
+		const {
+			newPlaylistInput,
+			submitButton,
+			waitForPlaylists,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		await userEvent.type(newPlaylistInput, 'the_title');
+
+		userEvent.click(submitButton);
+
+		await waitFor(() => {
+			expect(setPlaylistMembership).toBeCalledWith(
+				'recording_id',
+				'playlist_id',
+				true
+			);
+		});
 	});
 
 	// adds recording to newly-created playlist
