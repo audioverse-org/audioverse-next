@@ -81,6 +81,7 @@ export default function PlaylistButton({
 						/>
 						<button
 							onClick={async () => {
+								setNewPlaylistTitle('');
 								await addPlaylist(newPlaylistTitle, false);
 							}}
 						>

@@ -311,10 +311,23 @@ describe('playlist button', () => {
 		});
 	});
 
-	// resets new playlist input
-	// it('resets new playlist input on create', async () => {
-	//
-	// })
+	it('resets new playlist input on create', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			newPlaylistInput,
+			submitButton,
+			waitForPlaylists,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		await userEvent.type(newPlaylistInput, 'the_title');
+
+		userEvent.click(submitButton);
+
+		expect(newPlaylistInput.value).toBeFalsy();
+	});
 
 	// adds recording to newly-created playlist
 	// adds playlist optimistically
