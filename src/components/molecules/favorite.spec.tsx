@@ -1,17 +1,18 @@
-import { render, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { queryCache } from 'react-query';
 
 import Favorite from '@components/molecules/favorite';
 import { isFavorited, setFavorited } from '@lib/api';
 import * as api from '@lib/api';
+import { renderWithQueryProvider } from '@lib/test/helpers';
 
 jest.mock('@lib/api/isFavorited');
 jest.mock('@lib/api/setFavorited');
+jest.mock('@lib/api/fetchApi');
 
-const renderComponent = () => {
-	const result = render(<Favorite id={'-1'} />),
+const renderComponent = async () => {
+	const result = await renderWithQueryProvider(<Favorite id={'-1'} />),
 		button = result.queryByText('Favorite') || result.queryByText('Unfavorite');
 
 	if (!button) {
@@ -27,7 +28,9 @@ const renderComponent = () => {
 describe('favorite button', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		queryCache.clear();
+
+		// TODO: I think we can get away with not using this
+		// queryCache.clear();
 	});
 
 	it('can render', async () => {

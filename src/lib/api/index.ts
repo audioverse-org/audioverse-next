@@ -10,3 +10,4 @@ export * from '@lib/api/getMe';
 export * from '@lib/api/login';
 export * from '@lib/api/getPlaylists';
 export * from '@lib/api/addPlaylist';
+export * from '@lib/api/fetchApi';

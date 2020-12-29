@@ -24,7 +24,5 @@ export async function getPlaylists(
 	const variables = { language: languageId, recordingId };
 	const result = await fetchApi(query, { variables });
 
-	console.log({ m: 'getting playlists', languageId, recordingId, result });
-
 	return result?.me?.user?.playlists?.nodes;
 }

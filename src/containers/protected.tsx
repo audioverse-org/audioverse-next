@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { useQueryCache } from 'react-query';
+import { useQueryClient } from 'react-query';
 
 import { login } from '@lib/api';
 import { useMe } from '@lib/api/useMe';
@@ -9,7 +9,7 @@ export default function Protected({
 }: {
 	children: JSX.Element;
 }): JSX.Element {
-	const cache = useQueryCache();
+	const queryClient = useQueryClient();
 	const me = useMe();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -19,7 +19,7 @@ export default function Protected({
 		e.preventDefault();
 		try {
 			await login(email, password);
-			await cache.invalidateQueries('me');
+			await queryClient.invalidateQueries('me');
 		} catch (e) {
 			setError('Login failed');
 		}

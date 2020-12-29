@@ -7,7 +7,7 @@ import { Playlist } from '../../../types';
 
 export function usePlaylists(
 	options: {
-		recordingId?: string | number;
+		recordingId?: string;
 	} = {}
 ): Playlist[] | undefined {
 	const languageId = useLanguageId();

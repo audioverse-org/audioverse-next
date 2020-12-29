@@ -48,7 +48,6 @@ export default function PlaylistButton({
 }: PlaylistButtonProps): JSX.Element {
 	const lists = usePlaylists({ recordingId });
 	const addPlaylist = useAddPlaylist();
-	const setPlaylistMembership = useSetPlaylistMembership();
 	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
 
 	const getEntries = () => {
@@ -81,15 +80,17 @@ export default function PlaylistButton({
 							onChange={(e) => setNewPlaylistTitle(e.target.value)}
 						/>
 						<button
-							onClick={async () => {
+							onClick={() => {
 								setNewPlaylistTitle('');
-								const playlistId = await addPlaylist(newPlaylistTitle, false);
+								addPlaylist(newPlaylistTitle, { recordingIds: [recordingId] });
 
-								if (!playlistId) {
-									throw new Error('Failed to create new playlist');
-								}
+								// TODO: use graphql add query to include recording id
 
-								await setPlaylistMembership(recordingId, playlistId, true);
+								// if (!playlistId) {
+								// 	throw new Error('Failed to create new playlist');
+								// }
+								//
+								// await setPlaylistMembership(recordingId, playlistId, true);
 							}}
 						>
 							Create

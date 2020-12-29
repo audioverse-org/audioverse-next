@@ -1,12 +1,16 @@
 import { waitFor } from '@testing-library/dom';
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';
 
 import { getSermon, getSermons } from '@lib/api';
-import { loadRouter, loadSermon, loadSermons } from '@lib/test/helpers';
+import {
+	loadRouter,
+	loadSermon,
+	loadSermons,
+	renderWithQueryProvider,
+} from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -16,6 +20,7 @@ jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/getSermon');
 jest.mock('@lib/api/getSermons');
+jest.mock('@lib/api/fetchApi');
 
 function loadRecentSermons() {
 	loadSermons({
@@ -37,7 +42,7 @@ function loadGetSermonError() {
 
 async function renderPage() {
 	const { props } = await getStaticProps({ params: { id: '1' } });
-	return render(<SermonDetail {...props} />);
+	return renderWithQueryProvider(<SermonDetail {...props} />);
 }
 
 describe('detailPageGenerator', () => {

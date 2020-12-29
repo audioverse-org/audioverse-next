@@ -1,12 +1,13 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
 const mutation = `
-mutation($language: Language!, $title: String!, $isPublic: Boolean!) {
+mutation($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
 	playlistAdd(
 		input: {
 			language: $language,
 			title: $title,
-			isPublic: $isPublic
+			isPublic: $isPublic,
+			recordingIds: $recordingIds,
 		}
 	) {
 	  id
@@ -18,9 +19,13 @@ mutation($language: Language!, $title: String!, $isPublic: Boolean!) {
 export async function addPlaylist(
 	languageId: string,
 	title: string,
-	isPublic: boolean
+	options: {
+		isPublic?: boolean;
+		recordingIds?: string[];
+	}
 ): Promise<string | false> {
-	const variables = { language: languageId, title, isPublic };
+	const { isPublic = false, recordingIds = [] } = options;
+	const variables = { language: languageId, title, isPublic, recordingIds };
 	const result = await fetchApi(mutation, { variables });
 
 	return result?.playlistAdd?.id || false;
