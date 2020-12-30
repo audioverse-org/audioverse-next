@@ -83,14 +83,6 @@ export default function PlaylistButton({
 							onClick={() => {
 								setNewPlaylistTitle('');
 								addPlaylist(newPlaylistTitle, { recordingIds: [recordingId] });
-
-								// TODO: use graphql add query to include recording id
-
-								// if (!playlistId) {
-								// 	throw new Error('Failed to create new playlist');
-								// }
-								//
-								// await setPlaylistMembership(recordingId, playlistId, true);
 							}}
 						>
 							Create

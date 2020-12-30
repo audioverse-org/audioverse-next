@@ -117,3 +117,22 @@ export async function renderWithQueryProvider(
 		queryClient,
 	};
 }
+
+export function sleep<Payload>({
+	ms = 50,
+	value = undefined,
+}: { ms?: number; value?: Payload } = {}): Promise<Payload> {
+	return new Promise((resolve) =>
+		setTimeout(() => {
+			resolve(value);
+		}, ms)
+	);
+}
+
+export function resolveWithDelay(
+	mock: jest.SpyInstance,
+	ms = 50,
+	value: any = undefined
+): void {
+	mock.mockImplementation(() => sleep({ ms, value }));
+}

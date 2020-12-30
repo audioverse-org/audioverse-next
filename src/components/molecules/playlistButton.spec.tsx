@@ -1,6 +1,6 @@
 import {
-	getByLabelText,
 	getByText,
+	queryByLabelText,
 	queryByPlaceholderText,
 	queryByText,
 	waitFor,
@@ -13,7 +13,7 @@ import * as api from '@lib/api';
 import { addPlaylist } from '@lib/api/addPlaylist';
 import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { renderWithQueryProvider } from '@lib/test/helpers';
+import { renderWithQueryProvider, resolveWithDelay } from '@lib/test/helpers';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -39,7 +39,7 @@ const renderComponent = async ({
 			waitFor(() => expect(getPlaylists).toHaveBeenCalledTimes(count)),
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
-			getByLabelText(result.container, playlistTitle) as HTMLInputElement,
+			queryByLabelText(result.container, playlistTitle) as HTMLInputElement,
 		getNewPlaylistInput: () =>
 			queryByPlaceholderText(
 				result.container,
@@ -391,7 +391,6 @@ describe('playlist button', () => {
 		await waitForPlaylists(2);
 	});
 
-	// adds playlist optimistically
 	it('adds playlist optimistically', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
@@ -411,25 +410,31 @@ describe('playlist button', () => {
 		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
 	});
 
-	// it('defaults new playlist checkbox to checked', async () => {
-	// 	jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-	//
-	// 	const {
-	// 		getNewPlaylistInput,
-	// 		getSubmitButton,
-	// 		waitForPlaylists,
-	// 		getCheckbox,
-	// 		debug,
-	// 	} = await renderComponent();
-	//
-	// 	await waitForPlaylists();
-	//
-	// 	await userEvent.type(getNewPlaylistInput(), 'the_title');
-	//
-	// 	userEvent.click(getSubmitButton());
-	//
-	// 	await waitFor(() => expect(getCheckbox('the_title').checked).toBeTruthy());
-	// });
+	it('defaults new playlist checkbox to checked', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			getNewPlaylistInput,
+			getSubmitButton,
+			waitForPlaylists,
+			getCheckbox,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		await userEvent.type(getNewPlaylistInput(), 'the_title');
+
+		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, []);
+
+		userEvent.click(getSubmitButton());
+
+		await waitFor(() => {
+			const checkbox = getCheckbox('the_title');
+			expect(checkbox?.checked).toBeTruthy();
+		});
+	});
 
 	// allows switching between private and public
+	// on add playlist, cancel queries to avoid clobbering
+	// on add playlist fail, rollback optimistic update
 });
