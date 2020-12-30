@@ -36,13 +36,14 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	const keys = _.keys(LANGUAGES),
 		pathSetPromises = keys.map(async (l) => {
-			const { nodes } = await getSermons(l),
-				dateFloor = new Date('2020-06-01'), // TODO: Should this be rolling?
-				filteredNodes = nodes.filter(
-					(n) => new Date(n.recordingDate) > dateFloor
-				),
-				baseUrl = LANGUAGES[l].base_url;
-
+			const { nodes } = await getSermons(l, {
+				first: process.env.NODE_ENV === 'production' ? 1000 : 100,
+			});
+			const dateFloor = new Date('2020-06-01'); // TODO: Should this be rolling?
+			const filteredNodes = nodes.filter(
+				(n) => new Date(n.recordingDate) > dateFloor
+			);
+			const baseUrl = LANGUAGES[l].base_url;
 			return (
 				filteredNodes.map((node) => `/${baseUrl}/sermons/${node.id}`) || []
 			);
