@@ -28,9 +28,6 @@ const renderComponent = async () => {
 describe('favorite button', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-
-		// TODO: I think we can get away with not using this
-		// queryCache.clear();
 	});
 
 	it('can render', async () => {
