@@ -474,7 +474,7 @@ describe('playlist button', () => {
 
 		await userAddPlaylist('playlist2');
 
-		// Sleep 100ms
+		// Sleep
 
 		await sleep({ ms: 200 });
 

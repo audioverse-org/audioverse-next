@@ -14,7 +14,6 @@ const LoadingIndicator = (): JSX.Element | null => {
 	const isFetching = useIsFetching();
 
 	if (isFetching) {
-		console.log('fetching...');
 		return <TopBarProgress />;
 	}
 
