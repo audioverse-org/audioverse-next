@@ -483,7 +483,7 @@ describe('playlist button', () => {
 		expect(getEntry('playlist2')).toBeInTheDocument();
 	});
 
-	it('roles back if mutation fails', async () => {
+	it('rolls back if mutation fails', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
 		jest.spyOn(api, 'addPlaylist').mockImplementation(() => {
