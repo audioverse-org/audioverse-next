@@ -32,6 +32,15 @@ const renderComponent = async ({
 	const getEntry = (playlistTitle: string) =>
 		getByText(result.container, playlistTitle);
 
+	const getNewPlaylistInput = () =>
+		queryByPlaceholderText(
+			result.container,
+			'New Playlist'
+		) as HTMLInputElement;
+
+	const getSubmitButton = () =>
+		queryByText(result.container, 'Create') as HTMLButtonElement;
+
 	return {
 		...result,
 		getButton: () => getByText(result.container, 'Add to Playlist'),
@@ -40,13 +49,13 @@ const renderComponent = async ({
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
 			queryByLabelText(result.container, playlistTitle) as HTMLInputElement,
-		getNewPlaylistInput: () =>
-			queryByPlaceholderText(
-				result.container,
-				'New Playlist'
-			) as HTMLInputElement,
-		getSubmitButton: () =>
-			queryByText(result.container, 'Create') as HTMLButtonElement,
+		getNewPlaylistInput,
+		getSubmitButton,
+		userAddPlaylist: async (playlistTitle: string) => {
+			await userEvent.type(getNewPlaylistInput(), playlistTitle);
+
+			userEvent.click(getSubmitButton());
+		},
 	};
 };
 
@@ -295,17 +304,11 @@ describe('playlist button', () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
 
-		const {
-			getNewPlaylistInput,
-			getSubmitButton,
-			waitForPlaylists,
-		} = await renderComponent();
+		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		await waitFor(() =>
 			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
@@ -318,17 +321,11 @@ describe('playlist button', () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
 
-		const {
-			getNewPlaylistInput,
-			getSubmitButton,
-			waitForPlaylists,
-		} = await renderComponent();
+		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
 			const callCount = (getPlaylists as jest.Mock).mock.calls.length;
@@ -342,15 +339,13 @@ describe('playlist button', () => {
 
 		const {
 			getNewPlaylistInput,
-			getSubmitButton,
+			userAddPlaylist,
 			waitForPlaylists,
 		} = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		expect(getNewPlaylistInput().value).toBeFalsy();
 	});
@@ -358,17 +353,11 @@ describe('playlist button', () => {
 	it('adds recording to new playlist on create', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
-		const {
-			getNewPlaylistInput,
-			getSubmitButton,
-			waitForPlaylists,
-		} = await renderComponent();
+		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
 			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
@@ -395,17 +384,14 @@ describe('playlist button', () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
 		const {
-			getNewPlaylistInput,
-			getSubmitButton,
+			userAddPlaylist,
 			waitForPlaylists,
 			getEntry,
 		} = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
 	});
@@ -414,19 +400,16 @@ describe('playlist button', () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
 
 		const {
-			getNewPlaylistInput,
-			getSubmitButton,
 			waitForPlaylists,
 			getCheckbox,
+			userAddPlaylist,
 		} = await renderComponent();
 
 		await waitForPlaylists();
 
-		await userEvent.type(getNewPlaylistInput(), 'the_title');
-
 		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, []);
 
-		userEvent.click(getSubmitButton());
+		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
 			const checkbox = getCheckbox('the_title');
