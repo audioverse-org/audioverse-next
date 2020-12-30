@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 import {
 	getByText,
 	queryByLabelText,
@@ -18,7 +20,6 @@ import {
 	resolveWithDelay,
 	sleep,
 } from '@lib/test/helpers';
-import exp from 'constants';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -533,7 +534,7 @@ describe('playlist button', () => {
 
 		const checkbox = getByLabelText('Public') as HTMLInputElement;
 
-		expect(checkbox.checked).toBeFalsy();
+		expect(checkbox).not.toBeChecked();
 	});
 
 	it('allows checkbox to be checked', async () => {
@@ -547,7 +548,7 @@ describe('playlist button', () => {
 
 		userEvent.click(checkbox);
 
-		expect(checkbox.checked).toBeTruthy();
+		expect(checkbox).toBeChecked();
 	});
 
 	it('creates public playlist', async () => {
@@ -592,6 +593,6 @@ describe('playlist button', () => {
 
 		await userAddPlaylist('the_title');
 
-		expect(checkbox.checked).toBeFalsy();
+		expect(checkbox).not.toBeChecked();
 	});
 });
