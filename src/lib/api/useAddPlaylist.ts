@@ -42,21 +42,24 @@ export function useAddPlaylist(): AddPlaylist {
 
 				// const snap = queryClient.getQueryData(['playlists', 'withRecording', recordingId])
 
-				recordingIds.forEach((id: string) => {
-					queryClient.setQueryData(
-						['playlists', 'withRecording', id],
-						(old) => {
-							return [
-								...(old as Playlist[]),
-								{
-									id: '',
-									title,
-									hasRecording: true,
-								},
-							];
-						}
-					);
-				});
+				await Promise.all(
+					recordingIds.map(async (id: string) => {
+						const key = ['playlists', 'withRecording', id];
+
+						await queryClient.cancelQueries(key);
+
+						const newPlaylist = {
+							id: '',
+							title,
+							hasRecording: true,
+						};
+
+						queryClient.setQueryData(key, (old) => [
+							...(old as Playlist[]),
+							newPlaylist,
+						]);
+					})
+				);
 
 				// TODO: optimistically add playlist to base playlists cache, too, once
 				//  we're actually using such a cache

@@ -13,7 +13,11 @@ import * as api from '@lib/api';
 import { addPlaylist } from '@lib/api/addPlaylist';
 import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { renderWithQueryProvider, resolveWithDelay } from '@lib/test/helpers';
+import {
+	renderWithQueryProvider,
+	resolveWithDelay,
+	sleep,
+} from '@lib/test/helpers';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -417,7 +421,66 @@ describe('playlist button', () => {
 		});
 	});
 
-	// allows switching between private and public
 	// on add playlist, cancel queries to avoid clobbering
+	it('cancels old queries to avoid clobbering optimistic update', async () => {
+		// Setup & initial render
+
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			waitForPlaylists,
+			userAddPlaylist,
+			getEntry,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		// Load slow query to clobber
+
+		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
+			{
+				id: 'id1',
+				title: 'playlist1',
+				hasRecording: true,
+			},
+		]);
+
+		// Add first playlist
+
+		await userAddPlaylist('playlist1');
+
+		// Wait for slow response to be requested
+
+		await waitForPlaylists(2);
+
+		// Load second, fast response
+
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
+			{
+				id: 'id1',
+				title: 'playlist1',
+				hasRecording: true,
+			},
+			{
+				id: 'id2',
+				title: 'playlist2',
+				hasRecording: true,
+			},
+		]);
+
+		// Add second playlist
+
+		await userAddPlaylist('playlist2');
+
+		// Sleep 100ms
+
+		await sleep({ ms: 200 });
+
+		// Check that first, slow response didn't clobber second, fast response
+
+		expect(getEntry('playlist2')).toBeInTheDocument();
+	});
+
 	// on add playlist fail, rollback optimistic update
+	// allows switching between private and public
 });
