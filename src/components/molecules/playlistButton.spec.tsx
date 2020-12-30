@@ -506,11 +506,7 @@ describe('playlist button', () => {
 
 		await userAddPlaylist('the_title');
 
-		console.log('expecting playlist');
-
 		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
-
-		console.log('expecting no playlist');
 
 		await waitFor(() => expect(() => getEntry('the_title')).toThrow());
 	});
