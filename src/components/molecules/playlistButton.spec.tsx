@@ -18,6 +18,7 @@ import {
 	resolveWithDelay,
 	sleep,
 } from '@lib/test/helpers';
+import exp from 'constants';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -317,6 +318,7 @@ describe('playlist button', () => {
 		await waitFor(() =>
 			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
 				recordingIds: ['recording_id'],
+				isPublic: false,
 			})
 		);
 	});
@@ -366,6 +368,7 @@ describe('playlist button', () => {
 		await waitFor(() => {
 			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
 				recordingIds: ['recording_id'],
+				isPublic: false,
 			});
 		});
 	});
@@ -511,5 +514,84 @@ describe('playlist button', () => {
 		await waitFor(() => expect(() => getEntry('the_title')).toThrow());
 	});
 
-	// allows switching between private and public
+	it('has privacy switcher', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const { getByLabelText, waitForPlaylists } = await renderComponent();
+
+		await waitForPlaylists();
+
+		expect(getByLabelText('Public')).toBeInTheDocument();
+	});
+
+	it('does not check public box by default', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const { getByLabelText, waitForPlaylists } = await renderComponent();
+
+		await waitForPlaylists();
+
+		const checkbox = getByLabelText('Public') as HTMLInputElement;
+
+		expect(checkbox.checked).toBeFalsy();
+	});
+
+	it('allows checkbox to be checked', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const { getByLabelText, waitForPlaylists } = await renderComponent();
+
+		await waitForPlaylists();
+
+		const checkbox = getByLabelText('Public') as HTMLInputElement;
+
+		userEvent.click(checkbox);
+
+		expect(checkbox.checked).toBeTruthy();
+	});
+
+	it('creates public playlist', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			getByLabelText,
+			waitForPlaylists,
+			userAddPlaylist,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		const checkbox = getByLabelText('Public') as HTMLInputElement;
+
+		userEvent.click(checkbox);
+
+		await userAddPlaylist('the_title');
+
+		await waitFor(() => {
+			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
+				recordingIds: ['recording_id'],
+				isPublic: true,
+			});
+		});
+	});
+
+	it('resets public checkbox on playlist creation', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		const {
+			getByLabelText,
+			waitForPlaylists,
+			userAddPlaylist,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		const checkbox = getByLabelText('Public') as HTMLInputElement;
+
+		userEvent.click(checkbox);
+
+		await userAddPlaylist('the_title');
+
+		expect(checkbox.checked).toBeFalsy();
+	});
 });

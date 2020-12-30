@@ -49,6 +49,7 @@ export default function PlaylistButton({
 	const lists = usePlaylists({ recordingId });
 	const addPlaylist = useAddPlaylist();
 	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
+	const [isPublic, setIsPublic] = useState<boolean>(false);
 
 	const getEntries = () => {
 		return (
@@ -79,10 +80,22 @@ export default function PlaylistButton({
 							value={newPlaylistTitle}
 							onChange={(e) => setNewPlaylistTitle(e.target.value)}
 						/>
+						<label>
+							<input
+								type={'checkbox'}
+								checked={isPublic}
+								onChange={() => setIsPublic(!isPublic)}
+							/>{' '}
+							Public
+						</label>
 						<button
 							onClick={() => {
 								setNewPlaylistTitle('');
-								addPlaylist(newPlaylistTitle, { recordingIds: [recordingId] });
+								setIsPublic(false);
+								addPlaylist(newPlaylistTitle, {
+									recordingIds: [recordingId],
+									isPublic,
+								});
 							}}
 						>
 							Create

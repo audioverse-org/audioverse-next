@@ -34,9 +34,10 @@ export function useAddPlaylist(): AddPlaylist {
 	const { mutate } = useMutation(
 		(variables: MutateVariables): Promise<string | false> => {
 			const { title, options = {} } = variables;
-			const { recordingIds = [] } = options;
+			const { recordingIds = [], isPublic = false } = options;
 			return addPlaylist(languageId, title, {
 				recordingIds,
+				isPublic,
 			});
 		},
 		{
