@@ -54,7 +54,7 @@ describe('detailPageGenerator', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('ENGLISH', { first: 100 })
+			expect(getSermons).toBeCalledWith('ENGLISH', { first: 1000 })
 		);
 	});
 
@@ -64,7 +64,7 @@ describe('detailPageGenerator', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 100 })
+			expect(getSermons).toBeCalledWith('SPANISH', { first: 1000 })
 		);
 	});
 
@@ -288,12 +288,12 @@ describe('detailPageGenerator', () => {
 		expect(getByText('Add to Playlist')).toBeInTheDocument();
 	});
 
-	it('loads more sermons in production', async () => {
+	it('loads fewer sermons in development', async () => {
 		jest.resetModules();
 		const oldEnv = process.env;
 		process.env = {
 			...process.env,
-			NODE_ENV: 'production',
+			NODE_ENV: 'development',
 		};
 
 		loadRecentSermons();
@@ -301,7 +301,7 @@ describe('detailPageGenerator', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 1000 })
+			expect(getSermons).toBeCalledWith('SPANISH', { first: 100 })
 		);
 
 		process.env = oldEnv;

@@ -37,7 +37,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	const keys = _.keys(LANGUAGES),
 		pathSetPromises = keys.map(async (l) => {
 			const { nodes } = await getSermons(l, {
-				first: process.env.NODE_ENV === 'production' ? 1000 : 100,
+				first: process.env.NODE_ENV === 'development' ? 100 : 1000,
 			});
 			const dateFloor = new Date('2020-06-01'); // TODO: Should this be rolling?
 			const filteredNodes = nodes.filter(
