@@ -481,6 +481,39 @@ describe('playlist button', () => {
 		expect(getEntry('playlist2')).toBeInTheDocument();
 	});
 
-	// on add playlist fail, rollback optimistic update
+	it('roles back if mutation fails', async () => {
+		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+
+		jest.spyOn(api, 'addPlaylist').mockImplementation(() => {
+			throw new Error('Oops!');
+		});
+
+		const {
+			waitForPlaylists,
+			userAddPlaylist,
+			getEntry,
+		} = await renderComponent();
+
+		await waitForPlaylists();
+
+		// load new playlist into response to avoid cache invalidation causing a pass
+		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
+			{
+				id: 'playlist_id',
+				title: 'the_title',
+			},
+		]);
+
+		await userAddPlaylist('the_title');
+
+		console.log('expecting playlist');
+
+		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
+
+		console.log('expecting no playlist');
+
+		await waitFor(() => expect(() => getEntry('the_title')).toThrow());
+	});
+
 	// allows switching between private and public
 });

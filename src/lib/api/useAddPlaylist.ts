@@ -20,6 +20,13 @@ type AddPlaylist = (
 	}
 ) => void;
 
+interface Context {
+	snapshots: {
+		key: string[];
+		data: any;
+	}[];
+}
+
 export function useAddPlaylist(): AddPlaylist {
 	const queryClient = useQueryClient();
 	const languageId = useLanguageId();
@@ -40,13 +47,11 @@ export function useAddPlaylist(): AddPlaylist {
 				const { title, options } = variables;
 				const { recordingIds = [] } = options || {};
 
-				// const snap = queryClient.getQueryData(['playlists', 'withRecording', recordingId])
-
-				await Promise.all(
+				const snapshots = await Promise.all(
 					recordingIds.map(async (id: string) => {
 						const key = ['playlists', 'withRecording', id];
-
 						await queryClient.cancelQueries(key);
+						const snap = queryClient.getQueryData(key);
 
 						const newPlaylist = {
 							id: '',
@@ -58,11 +63,22 @@ export function useAddPlaylist(): AddPlaylist {
 							...(old as Playlist[]),
 							newPlaylist,
 						]);
+
+						return { key, data: snap };
 					})
 				);
 
 				// TODO: optimistically add playlist to base playlists cache, too, once
 				//  we're actually using such a cache
+
+				return { snapshots };
+			},
+			onError: (err, variables, context: Context | undefined) => {
+				if (!context) return;
+
+				context.snapshots.forEach(({ key, data }) => {
+					queryClient.setQueryData(key, data);
+				});
 			},
 			onSettled: async () => {
 				await queryClient.invalidateQueries('playlists');
