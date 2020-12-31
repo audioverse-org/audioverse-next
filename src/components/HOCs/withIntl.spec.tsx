@@ -8,10 +8,10 @@ import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 
 import PlaylistButton from '@components/molecules/playlistButton';
+import SpeakerName from '@components/molecules/speakerName';
 import * as api from '@lib/api';
 import { getPlaylists } from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
-import SpeakerName from '@components/molecules/speakerName';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/getPlaylists');

@@ -1,8 +1,8 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import ReactTooltip from 'react-tooltip';
 
 import { Person } from 'types';
-import { FormattedMessage } from 'react-intl';
 
 export default function SpeakerName({
 	person,
