@@ -8,3 +8,6 @@ export * from '@lib/api/setFavorited';
 export * from '@lib/api/useIsFavorited';
 export * from '@lib/api/getMe';
 export * from '@lib/api/login';
+export * from '@lib/api/getPlaylists';
+export * from '@lib/api/addPlaylist';
+export * from '@lib/api/fetchApi';

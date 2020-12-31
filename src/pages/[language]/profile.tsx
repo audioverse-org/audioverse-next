@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import { QueryCache } from 'react-query';
+import { QueryClient } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query/hydration';
 
 import Profile from '@containers/profile';
@@ -19,13 +19,16 @@ export async function getServerSideProps({
 > {
 	storeRequest(req);
 
-	const queryCache = new QueryCache();
+	const queryClient = new QueryClient();
 
-	await queryCache.prefetchQuery('me', getMe);
+	// TODO: provide getMe with languageId
+	await queryClient.prefetchQuery('me', () => {
+		return getMe();
+	});
 
 	return {
 		props: {
-			dehydratedState: dehydrate(queryCache),
+			dehydratedState: dehydrate(queryClient),
 		},
 	};
 }

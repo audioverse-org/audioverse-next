@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { QueryCache, useQuery } from 'react-query';
+import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
 import MyApp from '@pages/_app';
@@ -24,9 +24,9 @@ describe('app', () => {
 	});
 
 	it('rehydrates react-query', async () => {
-		const queryCache = new QueryCache();
+		const queryClient = new QueryClient();
 
-		await queryCache.prefetchQuery('myQuery', async () => 'myResult');
+		await queryClient.prefetchQuery('myQuery', async () => 'myResult');
 
 		const spy = jest.fn();
 
@@ -36,7 +36,7 @@ describe('app', () => {
 				return <>{myQuery}</>;
 			},
 			{
-				dehydratedState: dehydrate(queryCache),
+				dehydratedState: dehydrate(queryClient),
 			}
 		);
 

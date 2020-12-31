@@ -2,10 +2,10 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 
 import getIntlMessages from '@lib/getIntlMessages';
-import useLanguage from '@lib/useLanguage';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 const useTranslation = () => {
-	const language = useLanguage();
+	const language = useLanguageRoute();
 	const messages = getIntlMessages(language);
 
 	return { language, messages };

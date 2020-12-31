@@ -1,15 +1,16 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
 import React from 'react';
-import { QueryCache } from 'react-query';
+import { QueryClient } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
 import * as api from '@lib/api';
+import { getMe } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
+import { renderWithQueryProvider } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/profile';
-import MyApp from '@pages/_app';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/login');
@@ -19,7 +20,8 @@ async function renderPage() {
 	const { props } = (await getServerSideProps({
 		req: {} as any,
 	} as GetServerSidePropsContext)) as any;
-	return render(<MyApp Component={Profile as any} pageProps={props} />);
+
+	return renderWithQueryProvider(<Profile {...props} />);
 }
 
 describe('profile page', () => {
@@ -32,17 +34,17 @@ describe('profile page', () => {
 	it('dehydrates user', async () => {
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			name: 'the_name',
-		});
+		} as any);
 
 		const { props } = (await getServerSideProps({
 			req: {} as any,
 		} as GetServerSidePropsContext)) as any;
 
-		const queryCache = new QueryCache();
+		const queryClient = new QueryClient();
 
-		hydrate(queryCache, props.dehydratedState);
+		hydrate(queryClient, props.dehydratedState);
 
-		const me = queryCache.getQueryData('me');
+		const me = queryClient.getQueryData('me');
 
 		expect(_.get(me, 'name')).toEqual('the_name');
 	});
@@ -50,11 +52,11 @@ describe('profile page', () => {
 	it('includes first name', async () => {
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			givenName: 'first',
-		});
+		} as any);
 
 		const { getByDisplayValue } = await renderPage();
 
-		expect(getByDisplayValue('first')).toBeInTheDocument();
+		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
 	});
 
 	it('displays email field if unauthenticated', async () => {
@@ -127,12 +129,16 @@ describe('profile page', () => {
 
 		jest.spyOn(api, 'getMe').mockResolvedValue({
 			givenName: 'first',
-		});
+		} as any);
 
-		const loginButton = getByText('login');
-
-		loginButton.click();
+		userEvent.click(getByText('login'));
 
 		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
+	});
+
+	it('uses language id when getting me', async () => {
+		await renderPage();
+
+		expect(getMe).toBeCalledWith('ENGLISH');
 	});
 });

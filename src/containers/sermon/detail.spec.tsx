@@ -1,12 +1,15 @@
 import { waitFor } from '@testing-library/dom';
-import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
-import React from 'react';
 import videojs from 'video.js';
 
 import { getSermon, getSermons } from '@lib/api';
-import { loadRouter, loadSermon, loadSermons } from '@lib/test/helpers';
+import {
+	loadRouter,
+	loadSermon,
+	loadSermons,
+	renderWithIntl,
+} from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -16,6 +19,7 @@ jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/getSermon');
 jest.mock('@lib/api/getSermons');
+jest.mock('@lib/api/fetchApi');
 
 function loadRecentSermons() {
 	loadSermons({
@@ -37,7 +41,7 @@ function loadGetSermonError() {
 
 async function renderPage() {
 	const { props } = await getStaticProps({ params: { id: '1' } });
-	return render(<SermonDetail {...props} />);
+	return renderWithIntl(SermonDetail, props);
 }
 
 describe('detailPageGenerator', () => {
@@ -48,7 +52,9 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getSermons).toBeCalledWith('ENGLISH'));
+		await waitFor(() =>
+			expect(getSermons).toBeCalledWith('ENGLISH', { first: 1000 })
+		);
 	});
 
 	it('gets recent sermons in all languages', async () => {
@@ -56,7 +62,9 @@ describe('detailPageGenerator', () => {
 
 		await getStaticPaths();
 
-		await waitFor(() => expect(getSermons).toBeCalledWith('SPANISH'));
+		await waitFor(() =>
+			expect(getSermons).toBeCalledWith('SPANISH', { first: 1000 })
+		);
 	});
 
 	it('returns paths', async () => {
@@ -268,5 +276,41 @@ describe('detailPageGenerator', () => {
 		const { queryByText } = await renderPage();
 
 		expect(queryByText('Play Audio')).toBeNull();
+	});
+
+	it('has playlist button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Add to Playlist')).toBeInTheDocument();
+	});
+
+	describe('with process.env', () => {
+		const oldEnv = process.env;
+
+		beforeEach(() => {
+			jest.resetModules();
+		});
+
+		afterEach(() => {
+			process.env = oldEnv;
+		});
+
+		it('loads fewer sermons in development', async () => {
+			process.env = {
+				...process.env,
+				NODE_ENV: 'development',
+			};
+
+			loadRecentSermons();
+
+			await getStaticPaths();
+
+			await waitFor(() =>
+				expect(getSermons).toBeCalledWith('SPANISH', { first: 10 })
+			);
+		});
 	});
 });

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
-import useLanguage from '@lib/useLanguage';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import type { MediaFile, Person, Sermon } from 'types';
 
 const formatDuration = (duration: number): string => {
@@ -20,7 +20,7 @@ export default function RecordingListEntry({
 }: {
 	sermon: Sermon;
 }): JSX.Element {
-	const lang = useLanguage();
+	const lang = useLanguageRoute();
 	const persons: Person[] = _.get(sermon, 'persons', []);
 	const videoFiles: MediaFile[] = _.get(sermon, 'videoFiles', []);
 

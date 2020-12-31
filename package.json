@@ -12,14 +12,17 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "extract": "formatjs extract 'src/**/*.tsx' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
-    "compile": "formatjs compile-folder --ast public/lang public/compiled-lang"
+    "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
+    "precommit": "npm run lint:fix && npm run test",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@types/cookie": "^0.4.0",
     "@types/js-cookie": "^2.2.6",
     "@types/lodash": "^4.14.161",
-    "cookie": "^0.4.1",
+    "@types/react-query": "^1.1.2",
     "@types/video.js": "^7.3.11",
+    "cookie": "^0.4.1",
     "feed": "^4.2.1",
     "full-icu": "^1.3.1",
     "js-cookie": "^2.2.1",
@@ -29,7 +32,8 @@
     "react": "^16.13.1",
     "react-dom": "16.13.1",
     "react-intl": "^5.8.3",
-    "react-query": "^2.26.3",
+    "react-query": "^3.5.5",
+    "react-tooltip": "^4.2.11",
     "sass": "^1.26.10",
     "video.js": "^7.10.2"
   },
@@ -58,22 +62,34 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-testing-library": "^3.9.2",
+    "husky": "^5.0.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.4.2",
-    "jest-runner-eslint": "^0.10.0",
+    "jest-canvas-mock": "^2.3.0",
     "prettier": "^2.1.1",
+    "react-topbar-progress-indicator": "^4.1.0",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
-  "jest-runner-eslint": {
-    "cliOptions": {
-      "ext": [
-        ".js",
-        ".jsx",
-        ".ts",
-        ".tsx"
-      ],
-      "maxWarnings": 0
-    }
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "@lib/(.*)": "<rootDir>/src/lib/$1",
+      "@components/(.*)": "<rootDir>/src/components/$1",
+      "@containers/(.*)": "<rootDir>/src/containers/$1",
+      "@pages/(.*)": "<rootDir>/src/pages/$1"
+    },
+    "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.test.json"
+      }
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/testSetup.ts"
+    ]
   }
 }

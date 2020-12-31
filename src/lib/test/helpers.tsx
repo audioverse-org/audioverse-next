@@ -4,11 +4,12 @@ import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
-import type { Sermon, Testimony } from 'types';
+import type { Playlist, Sermon, Testimony } from 'types';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
@@ -17,6 +18,16 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 
 	return { addItem, rss2 };
 };
+
+export function loadMe({
+	playlists = [],
+}: { playlists?: Partial<Playlist>[] } = {}): void {
+	jest.spyOn(api, 'getMe').mockResolvedValue({
+		playlists: {
+			nodes: playlists,
+		},
+	} as any);
+}
 
 export function loadSermons({
 	nodes = undefined,
@@ -83,5 +94,47 @@ export async function renderWithIntl<T>(
 ): Promise<RenderResult> {
 	const WithIntl = withIntl(Component);
 
-	return render(<WithIntl {...props} />);
+	return renderWithQueryProvider(<WithIntl {...props} />);
+}
+
+export async function renderWithQueryProvider(
+	ui: ReactElement
+): Promise<RenderResult & { queryClient: QueryClient }> {
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: false,
+			},
+		},
+	});
+
+	const result = await render(
+		<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+	);
+
+	return {
+		...result,
+		queryClient,
+	};
+}
+
+export function sleep<Payload>({
+	ms = 50,
+	value = undefined,
+}: { ms?: number; value?: Payload | undefined } = {}): Promise<
+	Payload | undefined
+> {
+	return new Promise((resolve) =>
+		setTimeout(() => {
+			resolve(value);
+		}, ms)
+	);
+}
+
+export function resolveWithDelay(
+	mock: jest.SpyInstance,
+	ms = 50,
+	value: any = undefined
+): void {
+	mock.mockImplementation(() => sleep({ ms, value }));
 }

@@ -33,7 +33,18 @@ interface Person {
 	id: string;
 }
 
-interface User {}
+interface User {
+	givenName: string;
+	playlists: {
+		nodes: Playlist[];
+	};
+}
+
+interface Playlist {
+	id: string;
+	title: string;
+	hasRecording?: boolean;
+}
 
 interface StaticPaths {
 	paths: string[];
