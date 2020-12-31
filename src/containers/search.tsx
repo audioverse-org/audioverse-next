@@ -20,58 +20,74 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 				<h4>Type</h4>
 				<ul>
 					<li>
-						<input type={'checkbox'} checked={true} /> Sermon
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Sermon
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Bible
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Bible
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Bible Book
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Bible Book
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Bible Chapter
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Bible Chapter
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Audiobook
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Audiobook
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Story Album
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Story Album
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Music Album
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Music Album
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Scripture Song
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Scripture Song
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Conference
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Conference
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Person
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Person
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Tag
+						<input type={'checkbox'} checked={true} onChange={() => null} /> Tag
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Sponsor
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Sponsor
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Series
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Series
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Playlist
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Playlist
 					</li>
 				</ul>
 				<h4>Person</h4>
 				<ul>
 					<li>
-						<input type={'checkbox'} checked={true} /> Mark Finley
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Mark Finley
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Chad Kreuzer
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Chad Kreuzer
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} /> Jean Boonstra
+						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						Jean Boonstra
 					</li>
 				</ul>
 				<h4>Date</h4>
@@ -80,7 +96,12 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 				</label>
 				<br />
 				<label>
-					Maximum <input placeholder={'mm/dd/yyyy'} checked={true} />
+					Maximum{' '}
+					<input
+						placeholder={'mm/dd/yyyy'}
+						checked={true}
+						onChange={() => null}
+					/>
 				</label>
 			</div>
 			<h2>Search{query.q ? `: ${query.q}` : null}</h2>

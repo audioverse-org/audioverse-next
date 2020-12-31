@@ -27,7 +27,7 @@ const renderComponent = async ({
 	const result = await renderWithIntl(PlaylistButton, { recordingId });
 
 	const getEntry = (playlistTitle: string) =>
-		getByText(result.container, playlistTitle);
+		queryByText(result.container, playlistTitle);
 
 	const getNewPlaylistInput = () =>
 		queryByPlaceholderText(
@@ -133,7 +133,7 @@ describe('playlist button', () => {
 
 		const entry = getEntry('playlist_title');
 
-		userEvent.click(entry);
+		if (entry) userEvent.click(entry);
 
 		await waitFor(() =>
 			expect(setPlaylistMembership).toBeCalledWith(
@@ -165,7 +165,7 @@ describe('playlist button', () => {
 
 		const entry = getEntry('playlist_title');
 
-		userEvent.click(entry);
+		if (entry) userEvent.click(entry);
 
 		const checkbox = getCheckbox('playlist_title');
 
@@ -193,8 +193,8 @@ describe('playlist button', () => {
 
 		const entry = getEntry('playlist_title');
 
-		userEvent.click(entry);
-		userEvent.click(entry);
+		if (entry) userEvent.click(entry);
+		if (entry) userEvent.click(entry);
 
 		const checkbox = getCheckbox('playlist_title');
 
@@ -217,8 +217,8 @@ describe('playlist button', () => {
 
 		const entry = getEntry('playlist_title');
 
-		userEvent.click(entry);
-		userEvent.click(entry);
+		if (entry) userEvent.click(entry);
+		if (entry) userEvent.click(entry);
 
 		await waitFor(() => {
 			expect(setPlaylistMembership).toBeCalledWith(
@@ -251,7 +251,7 @@ describe('playlist button', () => {
 
 		const entry = getEntry('playlist_title');
 
-		userEvent.click(entry);
+		if (entry) userEvent.click(entry);
 
 		await waitFor(() => {
 			const callCount = (getPlaylists as jest.Mock).mock.calls.length;
@@ -480,10 +480,7 @@ describe('playlist button', () => {
 
 	it('rolls back if mutation fails', async () => {
 		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-
-		jest.spyOn(api, 'addPlaylist').mockImplementation(() => {
-			throw new Error('Oops!');
-		});
+		jest.spyOn(api, 'addPlaylist').mockRejectedValue('Oops!');
 
 		const {
 			waitForPlaylists,
@@ -505,7 +502,7 @@ describe('playlist button', () => {
 
 		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
 
-		await waitFor(() => expect(() => getEntry('the_title')).toThrow());
+		await waitFor(() => expect(getEntry('the_title')).toBeNull());
 	});
 
 	it('has privacy switcher', async () => {

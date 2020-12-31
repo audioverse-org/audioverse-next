@@ -10,6 +10,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import * as api from '@lib/api';
 import { getPlaylists } from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
+import { FormattedMessage } from 'react-intl';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/getPlaylists');
@@ -28,6 +29,9 @@ describe('localization usage', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 		jest.spyOn(intl, 'FormattedMessage').mockImplementation((() => 'z') as any);
+		jest
+			.spyOn(FormattedMessage.prototype, 'shouldComponentUpdate')
+			.mockImplementation(() => true);
 	});
 
 	it('localizes playlistButton logged out', async () => {
