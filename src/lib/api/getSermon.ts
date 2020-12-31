@@ -13,6 +13,12 @@ fragment SermonFragment on Recording {
 	title
 	persons {
 		name
+		imageWithFallback {
+			url(size: 100)
+		}
+		summary
+		website
+		viewerHasFavorited
 	}
 	audioFiles {
 		url

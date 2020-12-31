@@ -31,6 +31,12 @@ interface MediaFile {
 interface Person {
 	name: string;
 	id: string;
+	summary?: string;
+	website?: string | null;
+	imageWithFallback?: {
+		url: string;
+	};
+	viewerHasFavorited?: boolean;
 }
 
 interface User {
