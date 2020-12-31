@@ -1,7 +1,7 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import { Person } from 'types';
-import ReactTooltip from 'react-tooltip';
 
 export default function SpeakerName({
 	person,
