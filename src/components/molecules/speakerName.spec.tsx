@@ -21,4 +21,32 @@ describe('speaker name component', () => {
 
 		expect(getByText('the_name')).toBeInTheDocument();
 	});
+
+	it('renders speaker summary', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				summary: 'the_summary',
+			},
+		});
+
+		expect(getByText('the_summary')).toBeInTheDocument();
+	});
+
+	it('renders speaker image', async () => {
+		const { getByAltText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				imageWithFallback: {
+					url: 'the_url',
+				},
+			},
+		});
+
+		const image = getByAltText('the_name') as HTMLImageElement;
+
+		expect(image.src).toContain('the_url');
+	});
 });
