@@ -309,7 +309,7 @@ describe('detailPageGenerator', () => {
 			await getStaticPaths();
 
 			await waitFor(() =>
-				expect(getSermons).toBeCalledWith('SPANISH', { first: 100 })
+				expect(getSermons).toBeCalledWith('SPANISH', { first: 10 })
 			);
 		});
 	});
