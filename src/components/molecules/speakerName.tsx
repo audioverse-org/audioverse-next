@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Person } from 'types';
 
 export default function SpeakerName({
