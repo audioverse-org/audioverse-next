@@ -2,6 +2,7 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 
 import { Person } from 'types';
+import { FormattedMessage } from 'react-intl';
 
 export default function SpeakerName({
 	person,
@@ -23,6 +24,13 @@ export default function SpeakerName({
 			>
 				{image && <img alt={name} src={image.url} />}
 				{summary}
+				<button>
+					<FormattedMessage
+						id="speakerName__favorite"
+						defaultMessage="Favorite"
+						description="SpeakerName Favorite button label"
+					/>
+				</button>
 			</ReactTooltip>
 		</>
 	);

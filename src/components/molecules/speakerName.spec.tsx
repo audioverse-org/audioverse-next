@@ -49,4 +49,22 @@ describe('speaker name component', () => {
 
 		expect(image.src).toContain('the_url');
 	});
+
+	it('has favorite toggle', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		expect(getByText('Favorite')).toBeInTheDocument();
+	});
+
+	// sets initial toggle state
+	// toggles favorite status
+	// saves toggle state optimistically
+	// cancels queries to avoid clobbering optimistic updates
+	// roles back state if error
+	// includes rss link
 });

@@ -11,6 +11,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import * as api from '@lib/api';
 import { getPlaylists } from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
+import SpeakerName from '@components/molecules/speakerName';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/getPlaylists');
@@ -50,6 +51,19 @@ describe('localization usage', () => {
 		);
 
 		await waitFor(() => expect(getPlaylists).toHaveBeenCalled());
+
+		expectNoUnlocalizedText(queryByText);
+	});
+
+	it('localizes speakerName', async () => {
+		const { queryByText } = await renderWithQueryProvider(
+			<SpeakerName
+				person={{
+					id: 'z',
+					name: 'z',
+				}}
+			/>
+		);
 
 		expectNoUnlocalizedText(queryByText);
 	});
