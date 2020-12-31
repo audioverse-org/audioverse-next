@@ -5,12 +5,12 @@ import {
 } from '@testing-library/react';
 import React from 'react';
 import * as intl from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import PlaylistButton from '@components/molecules/playlistButton';
 import * as api from '@lib/api';
 import { getPlaylists } from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
-import { FormattedMessage } from 'react-intl';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/getPlaylists');
