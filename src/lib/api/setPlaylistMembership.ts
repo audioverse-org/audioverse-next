@@ -26,9 +26,6 @@ export async function setPlaylistMembership(
 	const mutation = add ? mutationAdd : mutationRemove;
 	const variables = { recordingId, playlistId };
 	const result = await fetchApi(mutation, { variables });
-	console.log({ m: 'set membership', recordingId, playlistId, add, result });
 
 	return result.ok;
 }
-
-// TODO: implement

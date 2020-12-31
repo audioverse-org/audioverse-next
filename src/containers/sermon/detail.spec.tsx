@@ -1,7 +1,6 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
-import React from 'react';
 import videojs from 'video.js';
 
 import { getSermon, getSermons } from '@lib/api';
@@ -9,7 +8,7 @@ import {
 	loadRouter,
 	loadSermon,
 	loadSermons,
-	renderWithQueryProvider,
+	renderWithIntl,
 } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
@@ -42,7 +41,7 @@ function loadGetSermonError() {
 
 async function renderPage() {
 	const { props } = await getStaticProps({ params: { id: '1' } });
-	return renderWithQueryProvider(<SermonDetail {...props} />);
+	return renderWithIntl(SermonDetail, props);
 }
 
 describe('detailPageGenerator', () => {
@@ -288,24 +287,30 @@ describe('detailPageGenerator', () => {
 		expect(getByText('Add to Playlist')).toBeInTheDocument();
 	});
 
-	it('loads fewer sermons in development', async () => {
-		jest.resetModules();
+	describe('with process.env', () => {
 		const oldEnv = process.env;
-		process.env = {
-			...process.env,
-			NODE_ENV: 'development',
-		};
 
-		loadRecentSermons();
+		beforeEach(() => {
+			jest.resetModules();
+		});
 
-		await getStaticPaths();
+		afterEach(() => {
+			process.env = oldEnv;
+		});
 
-		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 100 })
-		);
+		it('loads fewer sermons in development', async () => {
+			process.env = {
+				...process.env,
+				NODE_ENV: 'development',
+			};
 
-		process.env = oldEnv;
+			loadRecentSermons();
 
-		expect(process.env.NODE_ENV).toEqual('test');
+			await getStaticPaths();
+
+			await waitFor(() =>
+				expect(getSermons).toBeCalledWith('SPANISH', { first: 100 })
+			);
+		});
 	});
 });

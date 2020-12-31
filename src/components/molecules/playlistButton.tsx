@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import ReactTooltip from 'react-tooltip';
 
 import { useAddPlaylist } from '@lib/api/useAddPlaylist';
@@ -63,7 +64,11 @@ export default function PlaylistButton({
 	return (
 		<>
 			<button data-tip data-for={'playlistButton'}>
-				Add to Playlist
+				<FormattedMessage
+					id="playlistButton__trigger"
+					defaultMessage="Add to Playlist"
+					description="PlaylistButton button text"
+				/>
 			</button>
 			<ReactTooltip
 				id={'playlistButton'}
@@ -86,7 +91,11 @@ export default function PlaylistButton({
 								checked={isPublic}
 								onChange={() => setIsPublic(!isPublic)}
 							/>{' '}
-							Public
+							<FormattedMessage
+								id="playlistButton__publicToggle"
+								defaultMessage="Public"
+								description="PlaylistButton public toggle label"
+							/>
 						</label>
 						<button
 							onClick={() => {
@@ -98,11 +107,19 @@ export default function PlaylistButton({
 								});
 							}}
 						>
-							Create
+							<FormattedMessage
+								id="playlistButton__createButton"
+								defaultMessage="Create"
+								description="PlaylistButton create button label"
+							/>
 						</button>
 					</>
 				) : (
-					'You must be logged in to perform this action'
+					<FormattedMessage
+						id="playlistButton__unauthenticated"
+						defaultMessage="You must be logged in to perform this action"
+						description="PlaylistButton not authenticated error"
+					/>
 				)}
 			</ReactTooltip>
 		</>

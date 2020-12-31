@@ -6,18 +6,13 @@ import {
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 
 import PlaylistButton from '@components/molecules/playlistButton';
 import * as api from '@lib/api';
 import { addPlaylist } from '@lib/api/addPlaylist';
 import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import {
-	renderWithQueryProvider,
-	resolveWithDelay,
-	sleep,
-} from '@lib/test/helpers';
+import { renderWithIntl, resolveWithDelay, sleep } from '@lib/test/helpers';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -29,9 +24,7 @@ const renderComponent = async ({
 }: {
 	recordingId?: string;
 } = {}) => {
-	const result = await renderWithQueryProvider(
-		<PlaylistButton recordingId={recordingId} />
-	);
+	const result = await renderWithIntl(PlaylistButton, { recordingId });
 
 	const getEntry = (playlistTitle: string) =>
 		getByText(result.container, playlistTitle);
@@ -64,7 +57,9 @@ const renderComponent = async ({
 };
 
 describe('playlist button', () => {
-	beforeEach(() => jest.resetAllMocks());
+	beforeEach(() => {
+		jest.resetAllMocks();
+	});
 
 	it('shows error if user not logged in', async () => {
 		const { getByText, getButton } = await renderComponent();
