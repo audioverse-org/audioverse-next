@@ -126,12 +126,16 @@ describe('speaker name component', () => {
 	});
 
 	it('favorites speaker', async () => {
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
 		const { getByText } = await renderWithIntl(SpeakerName, {
 			person: {
 				id: 'the_id',
 				name: 'the_name',
 			},
 		});
+
+		await waitFor(() => expect(isPersonFavorited).toBeCalled);
 
 		userEvent.click(getByText('Favorite'));
 
@@ -156,6 +160,20 @@ describe('speaker name component', () => {
 	});
 
 	// does not call api if user not authenticated
+	it('does not call api if user not authenticated', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		userEvent.click(getByText('Favorite'));
+
+		expect(setPersonFavorited).not.toBeCalled();
+	});
+
+	// does not toast error before initial load (isLoading)
 	// caches isPersonFavorited
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates

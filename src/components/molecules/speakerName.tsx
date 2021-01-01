@@ -50,8 +50,9 @@ export default function SpeakerName({
 						e.preventDefault();
 						if (isPersonFavorited === undefined) {
 							toast('You must be logged in to do this');
+						} else {
+							await setPersonFavorited(id, !favorited);
 						}
-						await setPersonFavorited(id, !favorited);
 					}}
 				>
 					{favorited ? (
