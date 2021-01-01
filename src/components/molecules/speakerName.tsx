@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
-import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { Person } from 'types';
@@ -20,10 +19,16 @@ export default function SpeakerName({
 		name,
 		summary = '',
 		imageWithFallback: image,
-		viewerHasFavorited: favorited,
+		viewerHasFavorited: initialIsFavorited,
 	} = person;
 	const lang = useLanguageRoute();
-	const { isPersonFavorited, isLoading } = useIsPersonFavorited(id);
+	const {
+		isPersonFavorited: queryIsFavorited,
+		toggleFavorited,
+		isLoading,
+	} = useIsPersonFavorited(id);
+	const isPersonFavorited =
+		queryIsFavorited === undefined ? initialIsFavorited : queryIsFavorited;
 
 	return (
 		<>
@@ -51,11 +56,11 @@ export default function SpeakerName({
 						if (isPersonFavorited === undefined && !isLoading) {
 							toast('You must be logged in to do this');
 						} else {
-							await setPersonFavorited(id, !favorited);
+							toggleFavorited();
 						}
 					}}
 				>
-					{favorited ? (
+					{isPersonFavorited ? (
 						<FormattedMessage
 							id="speakerName__unfavorite"
 							defaultMessage="Unfavorite"

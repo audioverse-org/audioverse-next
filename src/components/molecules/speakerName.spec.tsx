@@ -139,7 +139,9 @@ describe('speaker name component', () => {
 
 		userEvent.click(getByText('Favorite'));
 
-		expect(setPersonFavorited).toBeCalledWith('the_id', true);
+		await waitFor(() =>
+			expect(setPersonFavorited).toBeCalledWith('the_id', true)
+		);
 	});
 
 	it('does not toast if authenticated', async () => {
@@ -159,7 +161,6 @@ describe('speaker name component', () => {
 		expect(toast).not.toBeCalled();
 	});
 
-	// does not call api if user not authenticated
 	it('does not call api if user not authenticated', async () => {
 		const { getByText } = await renderWithIntl(SpeakerName, {
 			person: {
@@ -188,7 +189,35 @@ describe('speaker name component', () => {
 		expect(toast).not.toBeCalled();
 	});
 
-	// saves toggle state optimistically
+	it('updates state optimistically', async () => {
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		userEvent.click(getByText('Favorite'));
+
+		await waitFor(() => expect(getByText('Unfavorite')).toBeInTheDocument());
+	});
+
+	it('does not allow initial data to override new data', async () => {
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				viewerHasFavorited: true,
+			},
+		});
+
+		await waitFor(() => expect(getByText('Favorite')).toBeInTheDocument());
+	});
+
 	// cancels queries to avoid clobbering optimistic updates
 	// roles back state if error
 	// includes rss link
