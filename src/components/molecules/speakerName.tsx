@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ReactTooltip from 'react-tooltip';
-import styles from './speakerName.module.scss';
 
 import { Person } from 'types';
+
+import styles from './speakerName.module.scss';
 
 export default function SpeakerName({
 	person,

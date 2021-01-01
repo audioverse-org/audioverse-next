@@ -5,10 +5,10 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
+import SpeakerName from '@components/molecules/speakerName';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
-import SpeakerName from '@components/molecules/speakerName';
 
 export interface SermonDetailProps {
 	sermon: Sermon | null;
