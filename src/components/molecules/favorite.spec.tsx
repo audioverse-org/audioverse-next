@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import Favorite from '@components/molecules/favorite';
-import { isFavorited, setFavorited } from '@lib/api';
+import { isFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
 
 jest.mock('@lib/api/isFavorited');
-jest.mock('@lib/api/setFavorited');
+jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
 
 const renderComponent = async () => {
@@ -65,14 +65,16 @@ describe('favorite button', () => {
 
 		userEvent.click(button);
 
-		await waitFor(() => expect(setFavorited).toBeCalledWith('-1', true));
+		await waitFor(() =>
+			expect(setRecordingFavorited).toBeCalledWith('-1', true)
+		);
 	});
 
 	it('updates button when clicked', async () => {
 		const { findByText, button } = await renderComponent();
 
 		jest.spyOn(api, 'isFavorited').mockResolvedValue(true);
-		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
 
 		userEvent.click(button);
 
@@ -82,7 +84,7 @@ describe('favorite button', () => {
 	it('rolls back state if API fails', async () => {
 		const { button, findByText } = await renderComponent();
 
-		jest.spyOn(api, 'setFavorited').mockRejectedValue('error');
+		jest.spyOn(api, 'setRecordingFavorited').mockRejectedValue('error');
 
 		userEvent.click(button);
 
@@ -92,7 +94,7 @@ describe('favorite button', () => {
 
 	it('does not roll back state if API succeeds', async () => {
 		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
-		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
 
 		isFavoritedSpy.mockResolvedValue(false);
 

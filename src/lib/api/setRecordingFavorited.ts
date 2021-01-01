@@ -13,7 +13,7 @@ query unfavorite($id: ID!) {
 `;
 
 // TODO: Replace `any` in return type with something more specific
-export function setFavorited(
+export function setRecordingFavorited(
 	id: number | string,
 	favorite: boolean
 ): Promise<any> {

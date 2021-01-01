@@ -117,8 +117,9 @@ describe('speaker name component', () => {
 		expect(result).toBe(false);
 	});
 
-	// alert needs login on click if not logged in
 	// toggles favorite status
+	// it('favorites speaker', async () => {});
+
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates
 	// roles back state if error

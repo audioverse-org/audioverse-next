@@ -6,7 +6,7 @@ import {
 } from 'react-query';
 
 import { isFavorited as _isFavorited } from '@lib/api/isFavorited';
-import { setFavorited as _setFavorited } from '@lib/api/setFavorited';
+import { setRecordingFavorited as _setFavorited } from '@lib/api/setRecordingFavorited';
 
 export function useIsFavorited(
 	id: string
