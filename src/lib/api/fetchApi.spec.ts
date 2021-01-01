@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { fetchApi, storeRequest } from '@lib/api/fetchApi';
 
 global.fetch = jest.fn();
+jest.unmock('@lib/api/fetchApi');
 
 describe('fetchApi', () => {
 	it('uses saved request', async () => {

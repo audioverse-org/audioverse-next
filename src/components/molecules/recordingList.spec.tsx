@@ -4,6 +4,8 @@ import React from 'react';
 import RecordingList from '@components/molecules/recordingList';
 import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 
+jest.mock('@lib/api/fetchApi');
+
 async function renderComponent({
 	sermonData = {},
 	language = 'en',

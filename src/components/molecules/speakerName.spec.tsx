@@ -1,15 +1,21 @@
-import { fireEvent } from '@testing-library/dom';
+import { fireEvent, waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { toast } from 'react-toastify';
 
 import SpeakerName from '@components/molecules/speakerName';
+import * as api from '@lib/api';
+import { isPersonFavorited } from '@lib/api';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 import { renderWithIntl } from '@lib/test/helpers';
 
 jest.mock('react-toastify');
 jest.mock('@lib/api/setPersonFavorited');
+jest.mock('@lib/api/isPersonFavorited');
+jest.mock('@lib/api/fetchApi');
 
 describe('speaker name component', () => {
+	beforeEach(() => jest.resetAllMocks());
+
 	it('renders', async () => {
 		await renderWithIntl(SpeakerName, {
 			person: {
@@ -132,10 +138,25 @@ describe('speaker name component', () => {
 		expect(setPersonFavorited).toBeCalledWith('the_id', true);
 	});
 
-	// it('does not toast if authenticated', async () => {
-	//
-	// })
+	it('does not toast if authenticated', async () => {
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		await waitFor(() => expect(isPersonFavorited).toBeCalled());
+
+		userEvent.click(getByText('Favorite'));
+
+		expect(toast).not.toBeCalled();
+	});
+
+	// does not call api if user not authenticated
+	// caches isPersonFavorited
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates
 	// roles back state if error

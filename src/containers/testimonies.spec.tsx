@@ -7,6 +7,7 @@ import Testimonies, {
 } from '@pages/[language]/testimonies/page/[i]';
 
 jest.mock('@lib/api');
+jest.mock('@lib/api/fetchApi');
 
 function setEntityCount(count: number) {
 	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));

@@ -18,6 +18,7 @@ jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
 jest.mock('@lib/api/getPlaylists');
 jest.mock('@lib/api/addPlaylist');
+jest.mock('@lib/api/fetchApi');
 
 const renderComponent = async ({
 	recordingId = 'recording_id',

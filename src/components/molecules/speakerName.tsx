@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
+import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { Person } from 'types';
 
@@ -22,6 +23,7 @@ export default function SpeakerName({
 		viewerHasFavorited: favorited,
 	} = person;
 	const lang = useLanguageRoute();
+	const { isPersonFavorited } = useIsPersonFavorited(id);
 
 	return (
 		<>
@@ -46,7 +48,9 @@ export default function SpeakerName({
 				<button
 					onClick={async (e) => {
 						e.preventDefault();
-						toast('You must be logged in to do this');
+						if (isPersonFavorited === undefined) {
+							toast('You must be logged in to do this');
+						}
 						await setPersonFavorited(id, !favorited);
 					}}
 				>
