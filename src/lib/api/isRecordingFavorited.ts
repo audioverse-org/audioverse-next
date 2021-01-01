@@ -8,7 +8,9 @@ query isFavorited($id: ID!) {
 }
 `;
 
-export async function isFavorited(id: number | string): Promise<boolean> {
+export async function isRecordingFavorited(
+	id: number | string
+): Promise<boolean> {
 	const variables = { id },
 		data = await fetchApi(query, { variables });
 

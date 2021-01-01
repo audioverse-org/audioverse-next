@@ -7,6 +7,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import { Person } from 'types';
 
 import styles from './speakerName.module.scss';
+import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 
 export default function SpeakerName({
 	person,
@@ -43,9 +44,10 @@ export default function SpeakerName({
 				{image && <img width={50} alt={name} src={image.url} />}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
 				<button
-					onClick={(e) => {
+					onClick={async (e) => {
 						e.preventDefault();
 						toast('You must be logged in to do this');
+						await setPersonFavorited(id, !favorited);
 					}}
 				>
 					{favorited ? (

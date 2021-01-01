@@ -4,8 +4,10 @@ import { toast } from 'react-toastify';
 
 import SpeakerName from '@components/molecules/speakerName';
 import { renderWithIntl } from '@lib/test/helpers';
+import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 
 jest.mock('react-toastify');
+jest.mock('@lib/api/setPersonFavorited');
 
 describe('speaker name component', () => {
 	it('renders', async () => {
@@ -117,8 +119,22 @@ describe('speaker name component', () => {
 		expect(result).toBe(false);
 	});
 
-	// toggles favorite status
-	// it('favorites speaker', async () => {});
+	it('favorites speaker', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		userEvent.click(getByText('Favorite'));
+
+		expect(setPersonFavorited).toBeCalledWith('the_id', true);
+	});
+
+	// it('does not toast if authenticated', async () => {
+	//
+	// })
 
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates
