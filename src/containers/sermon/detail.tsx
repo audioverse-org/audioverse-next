@@ -8,6 +8,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
+import SpeakerName from '@components/molecules/speakerName';
 
 export interface SermonDetailProps {
 	sermon: Sermon | null;
@@ -54,9 +55,11 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<div>
 					<h1>{sermon.title}</h1>
 					<ul className={styles.speakers}>
-						{speakers.map((speaker: Person) => {
-							return <li key={speaker.name}>{speaker.name}</li>;
-						})}
+						{speakers.map((speaker: Person) => (
+							<li key={speaker.name}>
+								<SpeakerName person={speaker} />
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

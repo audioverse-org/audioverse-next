@@ -313,4 +313,23 @@ describe('detailPageGenerator', () => {
 			);
 		});
 	});
+
+	it('uses speaker name widget', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_summary')).toBeInTheDocument();
+	});
 });

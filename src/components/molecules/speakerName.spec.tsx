@@ -61,10 +61,25 @@ describe('speaker name component', () => {
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 
+	it('renders summary html', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				summary: 'hello <i>target</i> hello',
+			},
+		});
+
+		expect(getByText('target')).toBeInTheDocument();
+	});
+
 	// sets initial toggle state
 	// toggles favorite status
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates
 	// roles back state if error
 	// includes rss link
+	// includes person website
+	// renders person summary html
+	// link to person detail page
 });
