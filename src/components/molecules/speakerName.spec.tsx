@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { toast } from 'react-toastify';
 
 import SpeakerName from '@components/molecules/speakerName';
-import { renderWithIntl } from '@lib/test/helpers';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
+import { renderWithIntl } from '@lib/test/helpers';
 
 jest.mock('react-toastify');
 jest.mock('@lib/api/setPersonFavorited');

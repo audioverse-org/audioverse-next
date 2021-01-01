@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
+import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { Person } from 'types';
 
 import styles from './speakerName.module.scss';
-import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 
 export default function SpeakerName({
 	person,
