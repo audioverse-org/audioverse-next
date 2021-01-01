@@ -173,8 +173,21 @@ describe('speaker name component', () => {
 		expect(setPersonFavorited).not.toBeCalled();
 	});
 
-	// does not toast error before initial load (isLoading)
-	// caches isPersonFavorited
+	it('does not toast error before initial load', async () => {
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		userEvent.click(getByText('Favorite'));
+
+		expect(toast).not.toBeCalled();
+	});
+
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates
 	// roles back state if error

@@ -23,7 +23,7 @@ export default function SpeakerName({
 		viewerHasFavorited: favorited,
 	} = person;
 	const lang = useLanguageRoute();
-	const { isPersonFavorited } = useIsPersonFavorited(id);
+	const { isPersonFavorited, isLoading } = useIsPersonFavorited(id);
 
 	return (
 		<>
@@ -48,7 +48,7 @@ export default function SpeakerName({
 				<button
 					onClick={async (e) => {
 						e.preventDefault();
-						if (isPersonFavorited === undefined) {
+						if (isPersonFavorited === undefined && !isLoading) {
 							toast('You must be logged in to do this');
 						} else {
 							await setPersonFavorited(id, !favorited);

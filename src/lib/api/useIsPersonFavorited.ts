@@ -6,10 +6,12 @@ export function useIsPersonFavorited(
 	id: string
 ): {
 	isPersonFavorited: boolean | undefined;
+	isLoading: boolean;
 } {
-	const { data: isPersonFavorited } = useQuery(['isPersonFavorited', id], () =>
-		_isPersonFavorited(id)
+	const { data: isPersonFavorited, isLoading } = useQuery(
+		['isPersonFavorited', id],
+		() => _isPersonFavorited(id)
 	);
 
-	return { isPersonFavorited };
+	return { isPersonFavorited, isLoading };
 }
