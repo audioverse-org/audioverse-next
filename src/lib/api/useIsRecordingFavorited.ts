@@ -10,11 +10,14 @@ import { setRecordingFavorited as _setFavorited } from '@lib/api/setRecordingFav
 
 export function useIsRecordingFavorited(
 	id: string
-): { isFavorited: boolean | undefined; toggleFavorited: UseMutateFunction } {
+): {
+	isPersonFavorited: boolean | undefined;
+	toggleFavorited: UseMutateFunction;
+} {
 	const queryClient = useQueryClient();
-	const queryKey = ['isFavorited', id];
+	const queryKey = ['isRecordingFavorited', id];
 
-	const { data: isFavorited } = useQuery(queryKey, async () =>
+	const { data: isPersonFavorited } = useQuery(queryKey, async () =>
 		_isFavorited(id)
 	);
 
@@ -23,15 +26,15 @@ export function useIsRecordingFavorited(
 			// TODO: Consider using setFavorited response to update data instead of
 			//  invalidating `isFavorited` query
 
-			return _setFavorited(id, !isFavorited);
+			return _setFavorited(id, !isPersonFavorited);
 		},
 		{
 			onMutate: async () => {
 				await queryClient.cancelQueries(queryKey);
 
-				const snapshot = isFavorited;
+				const snapshot = isPersonFavorited;
 
-				queryClient.setQueryData(queryKey, !isFavorited);
+				queryClient.setQueryData(queryKey, !isPersonFavorited);
 
 				return () => queryClient.setQueryData(queryKey, snapshot);
 			},
@@ -43,5 +46,5 @@ export function useIsRecordingFavorited(
 		}
 	);
 
-	return { isFavorited, toggleFavorited };
+	return { isPersonFavorited, toggleFavorited };
 }
