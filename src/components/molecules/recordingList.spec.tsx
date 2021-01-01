@@ -2,7 +2,7 @@ import { render, RenderResult } from '@testing-library/react';
 import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
-import { loadQuery } from '@lib/test/helpers';
+import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 
 async function renderComponent({
 	sermonData = {},
@@ -10,21 +10,19 @@ async function renderComponent({
 } = {}): Promise<RenderResult> {
 	loadQuery({ language });
 
-	return render(
-		<RecordingList
-			sermons={[
-				{
-					imageWithFallback: {
-						url: 'the_url',
-					},
-					title: 'the_title',
-					persons: [{ name: 'the_person_name', id: 'the_person_id' }],
-					duration: 600,
-					...sermonData,
-				} as any,
-			]}
-		/>
-	);
+	return renderWithIntl(RecordingList, {
+		sermons: [
+			{
+				imageWithFallback: {
+					url: 'the_url',
+				},
+				title: 'the_title',
+				persons: [{ name: 'the_person_name', id: 'the_person_id' }],
+				duration: 600,
+				...sermonData,
+			} as any,
+		],
+	});
 }
 
 describe('recording list', () => {

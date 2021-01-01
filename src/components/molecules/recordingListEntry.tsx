@@ -4,6 +4,7 @@ import React from 'react';
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import type { MediaFile, Person, Sermon } from 'types';
+import SpeakerName from '@components/molecules/speakerName';
 
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);
@@ -41,13 +42,11 @@ export default function RecordingListEntry({
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p: Person, i: number) => {
-						return (
-							<li key={i}>
-								<a href={`/${lang}/presenters/${p.id}`}>{p.name}</a>
-							</li>
-						);
-					})}
+					{persons.map((p: Person, i: number) => (
+						<li key={i}>
+							<SpeakerName person={p} />
+						</li>
+					))}
 				</ul>
 			</td>
 			<td className={styles.duration}>{formatDuration(sermon.duration)}</td>

@@ -7,7 +7,12 @@ import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
-import { loadSermons, mockFeed, setSermonCount } from '@lib/test/helpers';
+import {
+	loadSermons,
+	mockFeed,
+	renderWithIntl,
+	setSermonCount,
+} from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -26,11 +31,10 @@ function loadQuery(query = {}) {
 const renderPage = async ({
 	params = { i: '1', language: 'en' },
 	query = {},
-	renderOptions = {},
 } = {}) => {
 	loadQuery(query);
 	const { props } = await getStaticProps({ params });
-	return render(<SermonList {...props} />, renderOptions);
+	return renderWithIntl(SermonList, props);
 };
 
 function loadGetSermonsError() {
@@ -420,5 +424,27 @@ describe('sermons list page', () => {
 		const { getAllByText } = await renderPage();
 
 		expect(getAllByText('Video').length).toEqual(2);
+	});
+
+	it('uses speaker widgets', async () => {
+		loadSermons({
+			nodes: [
+				{
+					id: '1',
+					title: 'the_sermon_title',
+					persons: [
+						{
+							id: 'the_id',
+							name: 'the_name',
+							summary: 'the_summary',
+						},
+					],
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_summary')).toBeInTheDocument();
 	});
 });

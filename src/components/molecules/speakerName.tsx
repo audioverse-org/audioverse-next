@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import { Person } from 'types';
 
 import styles from './speakerName.module.scss';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 export default function SpeakerName({
 	person,
@@ -12,10 +13,15 @@ export default function SpeakerName({
 	person: Person;
 }): JSX.Element {
 	const { id, name, summary = '', imageWithFallback: image } = person;
+	const lang = useLanguageRoute();
 
 	return (
 		<>
-			<a data-tip data-for={`person-${id}-speakerTip`}>
+			<a
+				href={`/${lang}/presenters/${id}`}
+				data-tip
+				data-for={`person-${id}-speakerTip`}
+			>
 				{name}
 			</a>
 			<ReactTooltip
@@ -25,6 +31,7 @@ export default function SpeakerName({
 				clickable={true}
 				className={styles.tooltip}
 				delayHide={200}
+				delayShow={500}
 			>
 				{image && <img width={50} alt={name} src={image.url} />}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
