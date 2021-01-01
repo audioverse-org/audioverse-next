@@ -33,6 +33,7 @@
     "react-dom": "16.13.1",
     "react-intl": "^5.8.3",
     "react-query": "^3.5.5",
+    "react-toastify": "^6.2.0",
     "react-tooltip": "^4.2.11",
     "sass": "^1.26.10",
     "video.js": "^7.10.2"

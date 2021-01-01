@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -12,7 +13,13 @@ export default function SpeakerName({
 }: {
 	person: Person;
 }): JSX.Element {
-	const { id, name, summary = '', imageWithFallback: image } = person;
+	const {
+		id,
+		name,
+		summary = '',
+		imageWithFallback: image,
+		viewerHasFavorited: favorited,
+	} = person;
 	const lang = useLanguageRoute();
 
 	return (
@@ -35,12 +42,25 @@ export default function SpeakerName({
 			>
 				{image && <img width={50} alt={name} src={image.url} />}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
-				<button>
-					<FormattedMessage
-						id="speakerName__favorite"
-						defaultMessage="Favorite"
-						description="SpeakerName Favorite button label"
-					/>
+				<button
+					onClick={(e) => {
+						e.preventDefault();
+						toast('You must be logged in to do this');
+					}}
+				>
+					{favorited ? (
+						<FormattedMessage
+							id="speakerName__unfavorite"
+							defaultMessage="Unfavorite"
+							description="SpeakerName Unfavorite button label"
+						/>
+					) : (
+						<FormattedMessage
+							id="speakerName__favorite"
+							defaultMessage="Favorite"
+							description="SpeakerName Favorite button label"
+						/>
+					)}
 				</button>
 			</ReactTooltip>
 		</>

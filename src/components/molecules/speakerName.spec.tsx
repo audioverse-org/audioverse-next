@@ -1,5 +1,11 @@
+import { fireEvent } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
+import { toast } from 'react-toastify';
+
 import SpeakerName from '@components/molecules/speakerName';
 import { renderWithIntl } from '@lib/test/helpers';
+
+jest.mock('react-toastify');
 
 describe('speaker name component', () => {
 	it('renders', async () => {
@@ -73,7 +79,45 @@ describe('speaker name component', () => {
 		expect(getByText('target')).toBeInTheDocument();
 	});
 
-	// sets initial toggle state
+	it('sets initial toggle state', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				viewerHasFavorited: true,
+			},
+		});
+
+		expect(getByText('Unfavorite')).toBeInTheDocument();
+	});
+
+	it('alerts need for login', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		userEvent.click(getByText('Favorite'));
+
+		expect(toast).toBeCalledWith('You must be logged in to do this');
+	});
+
+	it('prevents button click default action', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		const result = fireEvent.click(getByText('Favorite'));
+
+		expect(result).toBe(false);
+	});
+
+	// alert needs login on click if not logged in
 	// toggles favorite status
 	// saves toggle state optimistically
 	// cancels queries to avoid clobbering optimistic updates

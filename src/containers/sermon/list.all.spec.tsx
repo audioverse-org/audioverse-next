@@ -1,9 +1,8 @@
 import fs from 'fs';
 
-import { render, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import * as feed from 'feed';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 import { getSermonCount, getSermons } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
