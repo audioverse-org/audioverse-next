@@ -2,10 +2,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ReactTooltip from 'react-tooltip';
 
+import useLanguageRoute from '@lib/useLanguageRoute';
 import { Person } from 'types';
 
 import styles from './speakerName.module.scss';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
 export default function SpeakerName({
 	person,

@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
+import SpeakerName from '@components/molecules/speakerName';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import type { MediaFile, Person, Sermon } from 'types';
-import SpeakerName from '@components/molecules/speakerName';
 
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);
