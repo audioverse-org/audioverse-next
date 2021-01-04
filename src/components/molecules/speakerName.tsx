@@ -20,6 +20,7 @@ export default function SpeakerName({
 		summary = '',
 		imageWithFallback: image,
 		viewerHasFavorited: initialIsFavorited,
+		website = '',
 	} = person;
 	const lang = useLanguageRoute();
 	const {
@@ -50,6 +51,18 @@ export default function SpeakerName({
 			>
 				{image && <img width={50} alt={name} src={image.url} />}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
+				{website && (
+					<p>
+						<a
+							className={styles.speakerWebsite}
+							href={website}
+							target="_blank"
+							rel="nofollow noreferrer"
+						>
+							{website}
+						</a>
+					</p>
+				)}
 				<button
 					onClick={async (e) => {
 						e.preventDefault();

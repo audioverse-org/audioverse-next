@@ -285,8 +285,19 @@ describe('speaker name component', () => {
 		});
 	});
 
-	// includes rss link
-	// includes person website
-	// renders person summary html
-	// link to person detail page
+	it('includes website', async () => {
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+				website: 'the_website',
+			},
+		});
+
+		const link = getByText('the_website') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_website');
+	});
+
+	// TODO: includes rss link
 });
