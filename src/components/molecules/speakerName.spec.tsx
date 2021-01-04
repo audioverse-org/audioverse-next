@@ -6,7 +6,12 @@ import SpeakerName from '@components/molecules/speakerName';
 import * as api from '@lib/api';
 import { isPersonFavorited } from '@lib/api';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
-import { renderWithIntl, resolveWithDelay, sleep } from '@lib/test/helpers';
+import {
+	renderWithIntl,
+	resolveWithDelay,
+	sleep,
+	withMutedReactQueryLogger,
+} from '@lib/test/helpers';
 
 jest.mock('react-toastify');
 jest.mock('@lib/api/setPersonFavorited');
@@ -257,7 +262,29 @@ describe('speaker name component', () => {
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 
-	// roles back state if error
+	it('roles back isFavorited if error on mutate', async () => {
+		await withMutedReactQueryLogger(async () => {
+			jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
+			const { getByText } = await renderWithIntl(SpeakerName, {
+				person: {
+					id: 'the_id',
+					name: 'the_name',
+				},
+			});
+
+			await waitFor(() => expect(isPersonFavorited).toBeCalled());
+
+			jest.spyOn(api, 'setPersonFavorited').mockRejectedValue('Oops!');
+
+			userEvent.click(getByText('Favorite'));
+
+			await waitFor(() => expect(getByText('Unfavorite')).toBeInTheDocument());
+
+			await waitFor(() => expect(getByText('Favorite')).toBeInTheDocument());
+		});
+	});
+
 	// includes rss link
 	// includes person website
 	// renders person summary html

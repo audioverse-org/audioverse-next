@@ -32,11 +32,13 @@ export default function Protected({
 			<input
 				placeholder={'email'}
 				type={'email'}
+				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<input
 				placeholder={'password'}
 				type={'password'}
+				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			/>
 

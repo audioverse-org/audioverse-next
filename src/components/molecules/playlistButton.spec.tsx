@@ -12,7 +12,12 @@ import * as api from '@lib/api';
 import { addPlaylist } from '@lib/api/addPlaylist';
 import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { renderWithIntl, resolveWithDelay, sleep } from '@lib/test/helpers';
+import {
+	renderWithIntl,
+	resolveWithDelay,
+	sleep,
+	withMutedReactQueryLogger,
+} from '@lib/test/helpers';
 
 jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
@@ -479,30 +484,32 @@ describe('playlist button', () => {
 	});
 
 	it('rolls back if mutation fails', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-		jest.spyOn(api, 'addPlaylist').mockRejectedValue('Oops!');
+		await withMutedReactQueryLogger(async () => {
+			jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+			jest.spyOn(api, 'addPlaylist').mockRejectedValue('Oops!');
 
-		const {
-			waitForPlaylists,
-			userAddPlaylist,
-			getEntry,
-		} = await renderComponent();
+			const {
+				waitForPlaylists,
+				userAddPlaylist,
+				getEntry,
+			} = await renderComponent();
 
-		await waitForPlaylists();
+			await waitForPlaylists();
 
-		// load new playlist into response to avoid cache invalidation causing a pass
-		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
-			{
-				id: 'playlist_id',
-				title: 'the_title',
-			},
-		]);
+			// load new playlist into response to avoid cache invalidation causing a pass
+			resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
+				{
+					id: 'playlist_id',
+					title: 'the_title',
+				},
+			]);
 
-		await userAddPlaylist('the_title');
+			await userAddPlaylist('the_title');
 
-		await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
+			await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
 
-		await waitFor(() => expect(getEntry('the_title')).toBeNull());
+			await waitFor(() => expect(getEntry('the_title')).toBeNull());
+		});
 	});
 
 	it('has privacy switcher', async () => {

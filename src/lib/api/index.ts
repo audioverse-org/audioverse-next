@@ -12,3 +12,4 @@ export * from '@lib/api/getPlaylists';
 export * from '@lib/api/addPlaylist';
 export * from '@lib/api/fetchApi';
 export * from '@lib/api/isPersonFavorited';
+export * from '@lib/api/setPersonFavorited';

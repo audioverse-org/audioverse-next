@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "extract": "formatjs extract 'src/**/*.tsx' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
-    "precommit": "npm run lint:fix && npm run test",
+    "precommit": "npm run lint:fix && jest --config=jest.config.precommit.js",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -71,26 +71,5 @@
     "react-topbar-progress-indicator": "^4.1.0",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "@lib/(.*)": "<rootDir>/src/lib/$1",
-      "@components/(.*)": "<rootDir>/src/components/$1",
-      "@containers/(.*)": "<rootDir>/src/containers/$1",
-      "@pages/(.*)": "<rootDir>/src/pages/$1"
-    },
-    "transform": {
-      "^.+\\.(t|j)sx?$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.test.json"
-      }
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/testSetup.ts"
-    ]
   }
 }

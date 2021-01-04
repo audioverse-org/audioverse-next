@@ -5,7 +5,10 @@ import React from 'react';
 import Favorite from '@components/molecules/favorite';
 import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
-import { renderWithQueryProvider } from '@lib/test/helpers';
+import {
+	renderWithQueryProvider,
+	withMutedReactQueryLogger,
+} from '@lib/test/helpers';
 
 jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
@@ -82,14 +85,16 @@ describe('favorite button', () => {
 	});
 
 	it('rolls back state if API fails', async () => {
-		const { button, findByText } = await renderComponent();
+		await withMutedReactQueryLogger(async () => {
+			const { button, findByText } = await renderComponent();
 
-		jest.spyOn(api, 'setRecordingFavorited').mockRejectedValue('error');
+			jest.spyOn(api, 'setRecordingFavorited').mockRejectedValue('error');
 
-		userEvent.click(button);
+			userEvent.click(button);
 
-		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
-		await expect(findByText('Favorite')).resolves.toBeInTheDocument();
+			await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+			await expect(findByText('Favorite')).resolves.toBeInTheDocument();
+		});
 	});
 
 	it('does not roll back state if API succeeds', async () => {

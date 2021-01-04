@@ -28,7 +28,16 @@ export function useIsPersonFavorited(
 			onMutate: async () => {
 				await queryClient.cancelQueries(queryKey);
 
+				const snapshot = isPersonFavorited;
+
 				queryClient.setQueryData(queryKey, !isPersonFavorited);
+
+				return () => queryClient.setQueryData(queryKey, snapshot);
+			},
+			onError: (err, variables, rollback) => {
+				if (rollback) {
+					rollback();
+				}
 			},
 		}
 	);

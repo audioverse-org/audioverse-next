@@ -5,7 +5,7 @@ import * as feed from 'feed';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ReactElement } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
@@ -137,4 +137,24 @@ export function resolveWithDelay(
 	value: any = undefined
 ): void {
 	mock.mockImplementation(() => sleep({ ms, value }));
+}
+
+export async function withMutedReactQueryLogger(
+	func: () => Promise<any>
+): Promise<any> {
+	const noop = () => {
+		// do nothing
+	};
+
+	setLogger({
+		log: noop,
+		warn: noop,
+		error: noop,
+	});
+
+	const result = await func();
+
+	setLogger(window.console);
+
+	return result;
 }
