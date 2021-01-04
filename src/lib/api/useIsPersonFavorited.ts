@@ -23,11 +23,11 @@ export function useIsPersonFavorited(
 	);
 
 	const { mutate: toggleFavorited } = useMutation(
-		() => {
-			return setPersonFavorited(id, !isPersonFavorited);
-		},
+		() => setPersonFavorited(id, !isPersonFavorited),
 		{
 			onMutate: async () => {
+				await queryClient.cancelQueries(queryKey);
+
 				queryClient.setQueryData(queryKey, !isPersonFavorited);
 			},
 		}

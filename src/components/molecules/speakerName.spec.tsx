@@ -6,7 +6,7 @@ import SpeakerName from '@components/molecules/speakerName';
 import * as api from '@lib/api';
 import { isPersonFavorited } from '@lib/api';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
-import { renderWithIntl } from '@lib/test/helpers';
+import { renderWithIntl, resolveWithDelay, sleep } from '@lib/test/helpers';
 
 jest.mock('react-toastify');
 jest.mock('@lib/api/setPersonFavorited');
@@ -218,7 +218,45 @@ describe('speaker name component', () => {
 		await waitFor(() => expect(getByText('Favorite')).toBeInTheDocument());
 	});
 
-	// cancels queries to avoid clobbering optimistic updates
+	it('cancels queries to avoid clobbering optimistic updates', async () => {
+		// Load slow query to clobber
+
+		resolveWithDelay(jest.spyOn(api, 'isPersonFavorited'), 50, true);
+
+		// Setup & initial render
+
+		const { getByText } = await renderWithIntl(SpeakerName, {
+			person: {
+				id: 'the_id',
+				name: 'the_name',
+			},
+		});
+
+		// Click button
+
+		userEvent.click(getByText('Favorite'));
+
+		// Wait for slow response to be requested
+
+		await waitFor(() => expect(isPersonFavorited).toBeCalled());
+
+		// Load second, fast response
+
+		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
+
+		// Click button
+
+		userEvent.click(getByText('Unfavorite'));
+
+		// Sleep
+
+		await sleep({ ms: 100 });
+
+		// Check that first, slow response didn't clobber second, fast response
+
+		expect(getByText('Favorite')).toBeInTheDocument();
+	});
+
 	// roles back state if error
 	// includes rss link
 	// includes person website

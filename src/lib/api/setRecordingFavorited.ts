@@ -1,13 +1,13 @@
 import { fetchApi } from '@lib/api/fetchApi';
 
 const favoriteQuery = `
-query favorite($id: ID!) {
+mutation favorite($id: ID!) {
 	favoriteRecording(id: $id)
 }
 `;
 
 const unfavoriteQuery = `
-query unfavorite($id: ID!) {
+mutation unfavorite($id: ID!) {
 	unfavoriteRecording(id: $id)
 }
 `;

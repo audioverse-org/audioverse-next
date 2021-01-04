@@ -419,7 +419,6 @@ describe('playlist button', () => {
 		});
 	});
 
-	// on add playlist, cancel queries to avoid clobbering
 	it('cancels old queries to avoid clobbering optimistic update', async () => {
 		// Setup & initial render
 
