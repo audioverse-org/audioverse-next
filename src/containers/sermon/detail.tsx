@@ -75,6 +75,12 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					Play {prefersAudio ? 'Video' : 'Audio'}
 				</button>
 			)}
+			<div>
+				<p>
+					Just a $10 donation will help us reach 300 more people!{' '}
+					<a href="#">Give Now!</a>
+				</p>
+			</div>
 			{sermon.description ? (
 				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
 			) : null}

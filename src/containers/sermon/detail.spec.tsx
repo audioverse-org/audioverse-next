@@ -332,4 +332,24 @@ describe('detailPageGenerator', () => {
 
 		expect(getByText('the_summary')).toBeInTheDocument();
 	});
+
+	it('includes donation banner', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText('Just a $10 donation will help us reach 300 more people!')
+		).toBeInTheDocument();
+	});
+
+	it('includes a donate button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Give Now!')).toBeInTheDocument();
+	});
 });
