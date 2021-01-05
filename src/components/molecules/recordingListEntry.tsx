@@ -42,8 +42,8 @@ export default function RecordingListEntry({
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p: Person, i: number) => (
-						<li key={i}>
+					{persons.map((p: Person) => (
+						<li key={p.id}>
 							<SpeakerName person={p} />
 						</li>
 					))}

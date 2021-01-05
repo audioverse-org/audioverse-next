@@ -9,6 +9,7 @@ import SpeakerName from '@components/molecules/speakerName';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
+import { FormattedMessage } from 'react-intl';
 
 export interface SermonDetailProps {
 	sermon: Sermon | null;
@@ -56,7 +57,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					<h1>{sermon.title}</h1>
 					<ul className={styles.speakers}>
 						{speakers.map((speaker: Person) => (
-							<li key={speaker.name}>
+							<li key={speaker.id}>
 								<SpeakerName person={speaker} />
 							</li>
 						))}
@@ -77,14 +78,25 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			)}
 			<div>
 				<p>
-					Just a $10 donation will help us reach 300 more people!{' '}
-					<a href="#">Give Now!</a>
+					<FormattedMessage
+						id="sermonDetailPage__donationMessage"
+						defaultMessage="Just a $10 donation will help us reach 300 more people!"
+						description="Sermon detail page donation message"
+					/>
+					{/*TODO: Add CTA URL*/}
+					<a href="#">
+						<FormattedMessage
+							id="sermonDetailPage__donationCta"
+							defaultMessage="Give Now!"
+							description="Sermon detail page donation CTA"
+						/>
+					</a>
 				</p>
 			</div>
 			{sermon.description ? (
 				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
 			) : null}
-			Other sermons: ...
+			{/*TODO: Add related sermons*/}
 		</>
 	);
 }

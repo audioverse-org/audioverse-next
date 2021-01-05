@@ -6,6 +6,7 @@ import Favorite from '@components/molecules/favorite';
 import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
 import {
+	renderWithIntl,
 	renderWithQueryProvider,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
@@ -15,7 +16,7 @@ jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
 
 const renderComponent = async () => {
-	const result = await renderWithQueryProvider(<Favorite id={'-1'} />),
+	const result = await renderWithIntl(Favorite, { id: '-1' }),
 		button = result.queryByText('Favorite') || result.queryByText('Unfavorite');
 
 	if (!button) {

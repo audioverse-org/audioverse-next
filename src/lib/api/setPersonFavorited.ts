@@ -16,7 +16,6 @@ mutation unfavorite($id: ID!) {
 }
 `;
 
-// TODO: Replace `any` in return type with something more specific
 export async function setPersonFavorited(
 	id: number | string,
 	favorite: boolean

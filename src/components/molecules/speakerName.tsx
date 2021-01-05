@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
@@ -30,6 +30,7 @@ export default function SpeakerName({
 	} = useIsPersonFavorited(id);
 	const isPersonFavorited =
 		queryIsFavorited === undefined ? initialIsFavorited : queryIsFavorited;
+	const intl = useIntl();
 
 	return (
 		<>
@@ -64,10 +65,16 @@ export default function SpeakerName({
 					</p>
 				)}
 				<button
-					onClick={async (e) => {
+					onClick={(e) => {
 						e.preventDefault();
 						if (isPersonFavorited === undefined && !isLoading) {
-							toast('You must be logged in to do this');
+							toast(
+								intl.formatMessage({
+									id: 'speakerName__unauthenticated',
+									defaultMessage: 'You must be logged in to do this',
+									description: 'SpeakerName unauthenticated error',
+								})
+							);
 						} else {
 							toggleFavorited();
 						}

@@ -119,7 +119,9 @@ describe('detailPageGenerator', () => {
 
 	it('includes player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -128,7 +130,9 @@ describe('detailPageGenerator', () => {
 
 	it('enables controls', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -140,7 +144,9 @@ describe('detailPageGenerator', () => {
 
 	it('makes fluid player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -150,9 +156,11 @@ describe('detailPageGenerator', () => {
 		expect(options.fluid).toBeTruthy();
 	});
 
-	it('makes fluid player', async () => {
+	it('sets poster', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
