@@ -7,13 +7,13 @@
     "build": "next build",
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx src/",
-    "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
+    "lint:fix": "eslint --max-warnings 0 --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
     "extract": "formatjs extract 'src/**/*.tsx' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
-    "precommit": "npm run lint:fix && npm run test",
+    "precommit": "npm run lint:fix && jest --config=jest.config.precommit.js",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -33,7 +33,9 @@
     "react-dom": "16.13.1",
     "react-intl": "^5.8.3",
     "react-query": "^3.5.5",
+    "react-toastify": "^6.2.0",
     "react-tooltip": "^4.2.11",
+    "react-topbar-progress-indicator": "^4.1.0",
     "sass": "^1.26.10",
     "video.js": "^7.10.2"
   },
@@ -67,29 +69,7 @@
     "jest": "^26.4.2",
     "jest-canvas-mock": "^2.3.0",
     "prettier": "^2.1.1",
-    "react-topbar-progress-indicator": "^4.1.0",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "@lib/(.*)": "<rootDir>/src/lib/$1",
-      "@components/(.*)": "<rootDir>/src/components/$1",
-      "@containers/(.*)": "<rootDir>/src/containers/$1",
-      "@pages/(.*)": "<rootDir>/src/pages/$1"
-    },
-    "transform": {
-      "^.+\\.(t|j)sx?$": "ts-jest"
-    },
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.test.json"
-      }
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/testSetup.ts"
-    ]
   }
 }

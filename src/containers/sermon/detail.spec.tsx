@@ -97,7 +97,7 @@ describe('detailPageGenerator', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeDefined();
+		expect(getByText('404')).toBeInTheDocument();
 	});
 
 	it('shows loading screen', async () => {
@@ -105,7 +105,7 @@ describe('detailPageGenerator', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Loading…')).toBeDefined();
+		expect(getByText('Loading…')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
@@ -119,7 +119,9 @@ describe('detailPageGenerator', () => {
 
 	it('includes player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -128,7 +130,9 @@ describe('detailPageGenerator', () => {
 
 	it('enables controls', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -140,7 +144,9 @@ describe('detailPageGenerator', () => {
 
 	it('makes fluid player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -150,9 +156,11 @@ describe('detailPageGenerator', () => {
 		expect(options.fluid).toBeTruthy();
 	});
 
-	it('makes fluid player', async () => {
+	it('sets poster', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermon({
+			audioFiles: ['the_source'],
+		});
 
 		await renderPage();
 
@@ -275,7 +283,7 @@ describe('detailPageGenerator', () => {
 
 		const { queryByText } = await renderPage();
 
-		expect(queryByText('Play Audio')).toBeNull();
+		expect(queryByText('Play Audio')).not.toBeInTheDocument();
 	});
 
 	it('has playlist button', async () => {
@@ -312,5 +320,44 @@ describe('detailPageGenerator', () => {
 				expect(getSermons).toBeCalledWith('SPANISH', { first: 10 })
 			);
 		});
+	});
+
+	it('uses speaker name widget', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			id: '1',
+			title: 'the_sermon_title',
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_summary')).toBeInTheDocument();
+	});
+
+	it('includes donation banner', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText('Just a $10 donation will help us reach 300 more people!')
+		).toBeInTheDocument();
+	});
+
+	it('includes a donate button', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Give Now!')).toBeInTheDocument();
 	});
 });

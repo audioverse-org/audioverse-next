@@ -7,7 +7,7 @@ import { QueryClient } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
 import * as api from '@lib/api';
-import { getMe } from '@lib/api';
+import { getMe, login } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import { renderWithQueryProvider } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/profile';
@@ -140,5 +140,16 @@ describe('profile page', () => {
 		await renderPage();
 
 		expect(getMe).toBeCalledWith('ENGLISH');
+	});
+
+	it('logs in with email and password', async () => {
+		const { getByText, getByPlaceholderText } = await renderPage();
+
+		await userEvent.type(getByPlaceholderText('email'), 'the_email');
+		await userEvent.type(getByPlaceholderText('password'), 'the_password');
+
+		userEvent.click(getByText('login'));
+
+		expect(login).toBeCalledWith('the_email', 'the_password');
 	});
 });

@@ -11,13 +11,13 @@ describe('pagination component', () => {
 	it('has next button', () => {
 		const { getByText } = renderPagination({ total: 2 });
 
-		expect(getByText('>')).toBeDefined();
+		expect(getByText('>')).toBeInTheDocument();
 	});
 
 	it('has previous button', () => {
 		const { getByText } = renderPagination({ current: 2, total: 2 });
 
-		expect(getByText('<')).toBeDefined();
+		expect(getByText('<')).toBeInTheDocument();
 	});
 
 	it('hides next when unneeded', () => {
@@ -42,7 +42,7 @@ describe('pagination component', () => {
 	it('includes dots', () => {
 		const { getByText } = renderPagination({ total: 100 });
 
-		expect(getByText('...')).toBeDefined();
+		expect(getByText('...')).toBeInTheDocument();
 	});
 
 	it('unlinks dots', () => {

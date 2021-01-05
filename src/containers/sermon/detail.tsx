@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
+import SpeakerName from '@components/molecules/speakerName';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
@@ -54,9 +56,11 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<div>
 					<h1>{sermon.title}</h1>
 					<ul className={styles.speakers}>
-						{speakers.map((speaker: Person) => {
-							return <li key={speaker.name}>{speaker.name}</li>;
-						})}
+						{speakers.map((speaker: Person) => (
+							<li key={speaker.id}>
+								<SpeakerName person={speaker} />
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>
@@ -72,10 +76,27 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					Play {prefersAudio ? 'Video' : 'Audio'}
 				</button>
 			)}
+			<div>
+				<p>
+					<FormattedMessage
+						id="sermonDetailPage__donationMessage"
+						defaultMessage="Just a $10 donation will help us reach 300 more people!"
+						description="Sermon detail page donation message"
+					/>
+					{/*TODO: Add CTA URL*/}
+					<a href="#">
+						<FormattedMessage
+							id="sermonDetailPage__donationCta"
+							defaultMessage="Give Now!"
+							description="Sermon detail page donation CTA"
+						/>
+					</a>
+				</p>
+			</div>
 			{sermon.description ? (
 				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
 			) : null}
-			Other sermons: ...
+			{/*TODO: Add related sermons*/}
 		</>
 	);
 }

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
+import SpeakerName from '@components/molecules/speakerName';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import type { MediaFile, Person, Sermon } from 'types';
 
@@ -41,13 +42,11 @@ export default function RecordingListEntry({
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p: Person, i: number) => {
-						return (
-							<li key={i}>
-								<a href={`/${lang}/presenters/${p.id}`}>{p.name}</a>
-							</li>
-						);
-					})}
+					{persons.map((p: Person) => (
+						<li key={p.id}>
+							<SpeakerName person={p} />
+						</li>
+					))}
 				</ul>
 			</td>
 			<td className={styles.duration}>{formatDuration(sermon.duration)}</td>

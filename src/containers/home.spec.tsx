@@ -56,7 +56,7 @@ describe('home page', () => {
 
 		const { getByText } = await renderHome();
 
-		expect(getByText('the_sermon_title')).toBeDefined();
+		expect(getByText('the_sermon_title')).toBeInTheDocument();
 	});
 
 	it('links sermons', async () => {
@@ -96,7 +96,7 @@ describe('home page', () => {
 	it('includes testimonies', async () => {
 		const { getByText } = await renderHome();
 
-		expect(getByText('Testimonies')).toBeDefined();
+		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
 
 	it('falls back to English', async () => {
@@ -104,6 +104,6 @@ describe('home page', () => {
 
 		const { getByText } = await renderHome();
 
-		expect(getByText('Testimonies')).toBeDefined();
+		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
 });

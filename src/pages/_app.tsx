@@ -6,11 +6,21 @@ import '../styles/styles.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 import 'video.js/dist/video-js.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
 import Header from '@components/organisms/header';
+import 'react-toastify/dist/ReactToastify.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+		},
+	},
+});
+
+toast.configure();
 
 function MyApp<P>({
 	Component,
@@ -34,6 +44,7 @@ function MyApp<P>({
 					{/*<script src="//vjs.zencdn.net/6.7/video.min.js" />*/}
 				</Hydrate>
 			</QueryClientProvider>
+			<ToastContainer />
 		</div>
 	);
 }

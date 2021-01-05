@@ -9,6 +9,7 @@ import SermonList, {
 } from '@pages/[language]/sermons/audio/page/[i]';
 
 jest.mock('@lib/api');
+jest.mock('@lib/api/fetchApi');
 
 const renderPage = async ({ params = { i: '1', language: 'en' } } = {}) => {
 	const { props } = await getStaticProps({ params });

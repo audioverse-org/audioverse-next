@@ -1,18 +1,17 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 
 import Favorite from '@components/molecules/favorite';
-import { isFavorited, setFavorited } from '@lib/api';
+import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
-import { renderWithQueryProvider } from '@lib/test/helpers';
+import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
 
-jest.mock('@lib/api/isFavorited');
-jest.mock('@lib/api/setFavorited');
+jest.mock('@lib/api/isRecordingFavorited');
+jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
 
 const renderComponent = async () => {
-	const result = await renderWithQueryProvider(<Favorite id={'-1'} />),
+	const result = await renderWithIntl(Favorite, { id: '-1' }),
 		button = result.queryByText('Favorite') || result.queryByText('Unfavorite');
 
 	if (!button) {
@@ -47,7 +46,7 @@ describe('favorite button', () => {
 	});
 
 	it('shows unfavorite button', async () => {
-		jest.spyOn(api, 'isFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
 
 		const { findByText } = await renderComponent();
 
@@ -57,7 +56,7 @@ describe('favorite button', () => {
 	it('gets favorited status', async () => {
 		await renderComponent();
 
-		expect(isFavorited).toBeCalled();
+		expect(isRecordingFavorited).toBeCalled();
 	});
 
 	it('triggers mutation', async () => {
@@ -65,14 +64,16 @@ describe('favorite button', () => {
 
 		userEvent.click(button);
 
-		await waitFor(() => expect(setFavorited).toBeCalledWith('-1', true));
+		await waitFor(() =>
+			expect(setRecordingFavorited).toBeCalledWith('-1', true)
+		);
 	});
 
 	it('updates button when clicked', async () => {
 		const { findByText, button } = await renderComponent();
 
-		jest.spyOn(api, 'isFavorited').mockResolvedValue(true);
-		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
 
 		userEvent.click(button);
 
@@ -80,19 +81,21 @@ describe('favorite button', () => {
 	});
 
 	it('rolls back state if API fails', async () => {
-		const { button, findByText } = await renderComponent();
+		await withMutedReactQueryLogger(async () => {
+			const { button, findByText } = await renderComponent();
 
-		jest.spyOn(api, 'setFavorited').mockRejectedValue('error');
+			jest.spyOn(api, 'setRecordingFavorited').mockRejectedValue('error');
 
-		userEvent.click(button);
+			userEvent.click(button);
 
-		await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
-		await expect(findByText('Favorite')).resolves.toBeInTheDocument();
+			await expect(findByText('Unfavorite')).resolves.toBeInTheDocument();
+			await expect(findByText('Favorite')).resolves.toBeInTheDocument();
+		});
 	});
 
 	it('does not roll back state if API succeeds', async () => {
-		const isFavoritedSpy = jest.spyOn(api, 'isFavorited');
-		jest.spyOn(api, 'setFavorited').mockResolvedValue('success');
+		const isFavoritedSpy = jest.spyOn(api, 'isRecordingFavorited');
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
 
 		isFavoritedSpy.mockResolvedValue(false);
 

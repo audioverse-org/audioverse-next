@@ -1,13 +1,26 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { useIsFavorited } from '@lib/api';
+import { useIsRecordingFavorited } from '@lib/api';
 
 export default function Favorite({ id }: { id: string }): JSX.Element {
-	const { isFavorited, toggleFavorited } = useIsFavorited(id);
+	const { isRecordingFavorited, toggleFavorited } = useIsRecordingFavorited(id);
 
 	return (
 		<button onClick={() => toggleFavorited()}>
-			{isFavorited ? 'Unfavorite' : 'Favorite'}
+			{isRecordingFavorited ? (
+				<FormattedMessage
+					id="RecordingFavorite__unfavorite"
+					defaultMessage="Unfavorite"
+					description="Recording unfavorite button label"
+				/>
+			) : (
+				<FormattedMessage
+					id="RecordingFavorite__favorite"
+					defaultMessage="Favorite"
+					description="Recording favorite button label"
+				/>
+			)}
 		</button>
 	);
 }
