@@ -77,7 +77,7 @@ describe('testimonies pages', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_testimony_body')).toBeDefined();
+		expect(getByText('the_testimony_body')).toBeInTheDocument();
 	});
 
 	it('paginates', async () => {
@@ -85,7 +85,7 @@ describe('testimonies pages', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toBeDefined();
+		expect(getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
@@ -116,7 +116,7 @@ describe('testimonies pages', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_testimony_author')).toBeDefined();
+		expect(getByText('the_testimony_author')).toBeInTheDocument();
 	});
 
 	it('renders without testimonies', async () => {

@@ -35,7 +35,7 @@ type QueryByText = (
 ) => HTMLElement | null;
 
 const expectNoUnlocalizedText = (queryByText: QueryByText) => {
-	expect(queryByText(/[^z]+/)).toBeNull();
+	expect(queryByText(/[^z]+/)).not.toBeInTheDocument();
 };
 
 const expectNoUnlocalizedToasts = () => {

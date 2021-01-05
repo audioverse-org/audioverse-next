@@ -111,7 +111,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sermon_title')).toBeDefined();
+		expect(getByText('the_sermon_title')).toBeInTheDocument();
 	});
 
 	it('renders 404 on api error', async () => {
@@ -120,7 +120,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeDefined();
+		expect(getByText('404')).toBeInTheDocument();
 	});
 
 	it('returns 404 on empty data', async () => {
@@ -129,7 +129,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeDefined();
+		expect(getByText('404')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {
@@ -137,7 +137,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toBeDefined();
+		expect(getByText('1')).toBeInTheDocument();
 	});
 
 	it('links to last pagination page', async () => {
@@ -145,7 +145,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('3')).toBeDefined();
+		expect(getByText('3')).toBeInTheDocument();
 	});
 
 	it('calculates pages using items per page', async () => {

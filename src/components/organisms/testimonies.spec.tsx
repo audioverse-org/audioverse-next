@@ -9,7 +9,7 @@ describe('testimonies', () => {
 	it('has title', async () => {
 		const { getByText } = await renderTestimonies();
 
-		expect(getByText('Testimonies')).toBeDefined();
+		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
 
 	it('translates title', async () => {
@@ -17,7 +17,7 @@ describe('testimonies', () => {
 
 		const { getByText } = await renderTestimonies();
 
-		expect(getByText('Testimonios')).toBeDefined();
+		expect(getByText('Testimonios')).toBeInTheDocument();
 	});
 
 	it('falls back to english', async () => {
@@ -25,6 +25,6 @@ describe('testimonies', () => {
 
 		const { getByText } = await renderTestimonies();
 
-		expect(getByText('Testimonies')).toBeDefined();
+		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
 });

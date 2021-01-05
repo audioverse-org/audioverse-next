@@ -95,7 +95,7 @@ describe('playlist button', () => {
 
 		expect(
 			queryByText('You must be logged in to perform this action')
-		).toBeNull();
+		).not.toBeInTheDocument();
 	});
 
 	it('shows user playlists', async () => {

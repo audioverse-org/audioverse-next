@@ -97,7 +97,7 @@ describe('detailPageGenerator', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeDefined();
+		expect(getByText('404')).toBeInTheDocument();
 	});
 
 	it('shows loading screen', async () => {
@@ -105,7 +105,7 @@ describe('detailPageGenerator', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Loading…')).toBeDefined();
+		expect(getByText('Loading…')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
@@ -283,7 +283,7 @@ describe('detailPageGenerator', () => {
 
 		const { queryByText } = await renderPage();
 
-		expect(queryByText('Play Audio')).toBeNull();
+		expect(queryByText('Play Audio')).not.toBeInTheDocument();
 	});
 
 	it('has playlist button', async () => {
