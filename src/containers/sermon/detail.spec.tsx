@@ -389,4 +389,32 @@ describe('detailPageGenerator', () => {
 
 		expect(queryByText('Tags')).not.toBeInTheDocument();
 	});
+
+	it('includes sponsor title', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			sponsor: {
+				title: 'the_title',
+				location: 'the_location',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_title')).toBeInTheDocument();
+	});
+
+	it('includes sponsor location', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			sponsor: {
+				title: 'the_title',
+				location: 'the_location',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_location')).toBeInTheDocument();
+	});
 });

@@ -18,6 +18,10 @@ interface Sermon {
 	recordingTags: {
 		nodes: RecordingTag[];
 	};
+	sponsor: {
+		title: string;
+		location: string;
+	};
 }
 
 interface Testimony {

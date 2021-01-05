@@ -52,6 +52,10 @@ fragment SermonFragment on Recording {
 			}
 		}
 	}
+	sponsor {
+		title
+		location
+	}
 }
 `;
 

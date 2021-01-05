@@ -49,6 +49,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const sources = getSources(sermon, prefersAudio);
 	const speakers: Person[] = _.get(sermon, 'persons', []);
 	const tags: RecordingTag[] = _.get(sermon, 'recordingTags.nodes', []);
+	const { sponsor = { title: '', location: '' } } = sermon;
 
 	return (
 		<>
@@ -118,6 +119,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					<ul>
 						{tags.map((t) => (
 							<li key={t.tag.id}>
+								{/* TODO: link tags */}
 								<a href="#">{t.tag.name}</a>
 							</li>
 						))}
@@ -125,6 +127,19 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				</>
 			)}
 			{/*TODO: Add related sermons*/}
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__sponsorInfoTitle"
+					defaultMessage="Sponsor"
+					description="Sermon detail sponsor info title"
+				/>
+			</h2>
+			{/* TODO: link sponsor title */}
+			<p>
+				<a href="#">{sponsor.title}</a>
+				<br />
+				<span>{sponsor.location}</span>
+			</p>
 		</>
 	);
 }
