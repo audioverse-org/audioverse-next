@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Favorite from '@components/molecules/favorite';
@@ -9,7 +10,6 @@ import SpeakerName from '@components/molecules/speakerName';
 import type { Person, Sermon } from 'types';
 
 import styles from './detail.module.scss';
-import { FormattedMessage } from 'react-intl';
 
 export interface SermonDetailProps {
 	sermon: Sermon | null;

@@ -3,12 +3,16 @@ import {
 	SelectorMatcherOptions,
 	waitFor,
 } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
+import { toast } from 'react-toastify';
 
+import Favorite from '@components/molecules/favorite';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
+import SermonDetail from '@containers/sermon/detail';
 import * as api from '@lib/api';
 import {
 	getPlaylists,
@@ -16,11 +20,7 @@ import {
 	isRecordingFavorited,
 } from '@lib/api';
 import { renderWithQueryProvider } from '@lib/test/helpers';
-import SermonDetail from '@containers/sermon/detail';
 import { Person, Sermon } from 'types';
-import Favorite from '@components/molecules/favorite';
-import { toast } from 'react-toastify';
-import userEvent from '@testing-library/user-event';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/getPlaylists');

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 import { FormattedMessage } from 'react-intl';
+import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
