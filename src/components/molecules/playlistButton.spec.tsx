@@ -31,27 +31,25 @@ const renderComponent = async ({
 	recordingId?: string;
 } = {}) => {
 	const result = await renderWithIntl(PlaylistButton, { recordingId });
+	const container = result.container as HTMLElement;
 
 	const getEntry = (playlistTitle: string) =>
-		queryByText(result.container, playlistTitle);
+		queryByText(container, playlistTitle);
 
 	const getNewPlaylistInput = () =>
-		queryByPlaceholderText(
-			result.container,
-			'New Playlist'
-		) as HTMLInputElement;
+		queryByPlaceholderText(container, 'New Playlist') as HTMLInputElement;
 
 	const getSubmitButton = () =>
-		queryByText(result.container, 'Create') as HTMLButtonElement;
+		queryByText(container, 'Create') as HTMLButtonElement;
 
 	return {
 		...result,
-		getButton: () => getByText(result.container, 'Add to Playlist'),
+		getButton: () => getByText(container, 'Add to Playlist'),
 		waitForPlaylists: (count = 1) =>
 			waitFor(() => expect(getPlaylists).toHaveBeenCalledTimes(count)),
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
-			queryByLabelText(result.container, playlistTitle) as HTMLInputElement,
+			queryByLabelText(container, playlistTitle) as HTMLInputElement,
 		getNewPlaylistInput,
 		getSubmitButton,
 		userAddPlaylist: async (playlistTitle: string) => {
