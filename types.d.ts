@@ -15,6 +15,9 @@ interface Sermon {
 	imageWithFallback: {
 		url: string;
 	};
+	recordingTags: {
+		nodes: RecordingTag[];
+	};
 }
 
 interface Testimony {
@@ -55,4 +58,11 @@ interface Playlist {
 interface StaticPaths {
 	paths: string[];
 	fallback: boolean;
+}
+
+interface RecordingTag {
+	tag: {
+		id: string;
+		name: string;
+	};
 }
