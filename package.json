@@ -7,7 +7,7 @@
     "build": "next build",
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx src/",
-    "lint:fix": "eslint --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
+    "lint:fix": "eslint --max-warnings 0 --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
