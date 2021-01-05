@@ -1,15 +1,10 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react';
 
 import Favorite from '@components/molecules/favorite';
 import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
-import {
-	renderWithIntl,
-	renderWithQueryProvider,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
 
 jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
