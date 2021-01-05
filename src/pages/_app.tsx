@@ -12,7 +12,13 @@ import withIntl from '@components/HOCs/withIntl';
 import Header from '@components/organisms/header';
 import 'react-toastify/dist/ReactToastify.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			refetchOnWindowFocus: false,
+		},
+	},
+});
 
 toast.configure();
 
