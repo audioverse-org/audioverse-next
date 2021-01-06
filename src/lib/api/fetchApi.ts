@@ -58,3 +58,10 @@ export async function fetchApi(
 
 	return json.data;
 }
+
+export function graphqlFetcher<TData, TVariables>(
+	query: string,
+	variables: TVariables
+): () => Promise<TData> {
+	return () => fetchApi(query, { variables });
+}
