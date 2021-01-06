@@ -96,7 +96,23 @@ describe('localization usage', () => {
 
 	it('localizes sermon detail page', async () => {
 		const { queryByText } = await renderWithQueryProvider(
-			<SermonDetail sermon={{} as Sermon} />
+			<SermonDetail
+				sermon={
+					{
+						description: 'z',
+						recordingTags: {
+							nodes: [
+								{
+									tag: {
+										id: 'z',
+										name: 'z',
+									},
+								},
+							],
+						},
+					} as Sermon
+				}
+			/>
 		);
 
 		expectNoUnlocalizedText(queryByText);

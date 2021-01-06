@@ -7,7 +7,7 @@ import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
-import type { Person, Sermon } from 'types';
+import type { Person, RecordingTag, Sermon } from 'types';
 
 import styles from './detail.module.scss';
 
@@ -48,6 +48,8 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const imageAlt = _.get(sermon, 'title');
 	const sources = getSources(sermon, prefersAudio);
 	const speakers: Person[] = _.get(sermon, 'persons', []);
+	const tags: RecordingTag[] = _.get(sermon, 'recordingTags.nodes', []);
+	const { sponsor = { title: '', location: '' } } = sermon;
 
 	return (
 		<>
@@ -93,10 +95,51 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</a>
 				</p>
 			</div>
-			{sermon.description ? (
-				<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
-			) : null}
+			{sermon.description && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__descriptionTitle"
+							defaultMessage="Description"
+							description="Sermon detail description title"
+						/>
+					</h2>
+					<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
+				</>
+			)}
+			{tags.length > 0 && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__tagsTitle"
+							defaultMessage="Tags"
+							description="Sermon detail tags title"
+						/>
+					</h2>
+					<ul>
+						{tags.map((t) => (
+							<li key={t.tag.id}>
+								{/* TODO: link tags */}
+								<a href="#">{t.tag.name}</a>
+							</li>
+						))}
+					</ul>
+				</>
+			)}
 			{/*TODO: Add related sermons*/}
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__sponsorInfoTitle"
+					defaultMessage="Sponsor"
+					description="Sermon detail sponsor info title"
+				/>
+			</h2>
+			{/* TODO: link sponsor title */}
+			<p>
+				<a href="#">{sponsor.title}</a>
+				<br />
+				<span>{sponsor.location}</span>
+			</p>
 		</>
 	);
 }

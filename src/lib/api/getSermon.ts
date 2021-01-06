@@ -44,6 +44,18 @@ fragment SermonFragment on Recording {
 		url(size: 50)
 	}
 	recordingDate
+	recordingTags {
+		nodes {
+			tag {
+				id
+				name
+			}
+		}
+	}
+	sponsor {
+		title
+		location
+	}
 }
 `;
 

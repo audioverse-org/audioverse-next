@@ -360,4 +360,61 @@ describe('detailPageGenerator', () => {
 
 		expect(getByText('Give Now!')).toBeInTheDocument();
 	});
+
+	it('includes tags', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			recordingTags: {
+				nodes: [
+					{
+						tag: {
+							id: 'the_id',
+							name: 'the_name',
+						},
+					},
+				],
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_name')).toBeInTheDocument();
+	});
+
+	it('excludes tag section if no tags', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Tags')).not.toBeInTheDocument();
+	});
+
+	it('includes sponsor title', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			sponsor: {
+				title: 'the_title',
+				location: 'the_location',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_title')).toBeInTheDocument();
+	});
+
+	it('includes sponsor location', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			sponsor: {
+				title: 'the_title',
+				location: 'the_location',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_location')).toBeInTheDocument();
+	});
 });
