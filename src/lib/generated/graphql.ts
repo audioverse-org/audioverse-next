@@ -120,7 +120,7 @@ export type BibleReference = {
   verse?: Maybe<Scalars['Int']>;
 };
 
-export enum BibleReferenceBook {
+export const enum BibleReferenceBook {
   Acts = 'ACTS',
   Amos = 'AMOS',
   Colossians = 'COLOSSIANS',
@@ -187,7 +187,7 @@ export enum BibleReferenceBook {
   Titus = 'TITUS',
   Zechariah = 'ZECHARIAH',
   Zephaniah = 'ZEPHANIAH'
-}
+};
 
 /** A Bible reference. */
 export type BibleReferenceInput = {
@@ -256,9 +256,9 @@ export type BlogPostOrder = {
 };
 
 /** Properties by which blog post connections can be ordered. */
-export enum BlogPostSortableField {
+export const enum BlogPostSortableField {
   PublishedAt = 'PUBLISHED_AT'
-}
+};
 
 export type CatalogHistoryComment = {
   __typename?: 'CatalogHistoryComment';
@@ -315,15 +315,15 @@ export type CatalogHistoryItemPayload = {
 };
 
 /** Properties by which history item connections can be ordered. */
-export enum CatalogHistoryItemSortableField {
+export const enum CatalogHistoryItemSortableField {
   CreatedAt = 'CREATED_AT'
-}
+};
 
 /** The supported types of catalog history items. */
-export enum CatalogHistoryItemType {
+export const enum CatalogHistoryItemType {
   InternalComment = 'INTERNAL_COMMENT',
   SponsorChanged = 'SPONSOR_CHANGED'
-}
+};
 
 export type Collection = Node & {
   __typename?: 'Collection';
@@ -411,12 +411,12 @@ export type CollectionConnection = {
 };
 
 /** The available types of collections. */
-export enum CollectionContentType {
+export const enum CollectionContentType {
   AudiobookSeries = 'AUDIOBOOK_SERIES',
   Conference = 'CONFERENCE',
   MusicSeries = 'MUSIC_SERIES',
   StoryProgram = 'STORY_PROGRAM'
-}
+};
 
 export type CollectionCreateInput = {
   contentType: CollectionContentType;
@@ -449,11 +449,11 @@ export type CollectionsOrder = {
 };
 
 /** Properties by which collection connections can be ordered. */
-export enum CollectionsSortableField {
+export const enum CollectionsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type CollectionUpdateInput = {
   description?: Maybe<Scalars['String']>;
@@ -567,11 +567,11 @@ export type DistributionAgreementsOrder = {
 };
 
 /** Properties by which distribution agreement connections can be ordered. */
-export enum DistributionAgreementsSortableField {
+export const enum DistributionAgreementsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type DistributionAgreementUpdateInput = {
   isDefault?: Maybe<Scalars['Boolean']>;
@@ -602,14 +602,14 @@ export type ImageConnectionSlim = {
 };
 
 /** The available image type containers. */
-export enum ImageContainer {
+export const enum ImageContainer {
   Collection = 'COLLECTION',
   License = 'LICENSE',
   News = 'NEWS',
   Person = 'PERSON',
   Sequence = 'SEQUENCE',
   Sponsor = 'SPONSOR'
-}
+};
 
 export type ImageEdge = {
   __typename?: 'ImageEdge';
@@ -648,7 +648,7 @@ export type InternalContactInput = {
 };
 
 /** Supported languages */
-export enum Language {
+export const enum Language {
   Chinese = 'CHINESE',
   English = 'ENGLISH',
   French = 'FRENCH',
@@ -656,7 +656,7 @@ export enum Language {
   Japanese = 'JAPANESE',
   Russian = 'RUSSIAN',
   Spanish = 'SPANISH'
-}
+};
 
 export type License = Node & {
   __typename?: 'License';
@@ -719,11 +719,11 @@ export type LicensesOrder = {
 };
 
 /** Properties by which license connections can be ordered. */
-export enum LicensesSortableField {
+export const enum LicensesSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type LicenseUpdateInput = {
   description?: Maybe<Scalars['String']>;
@@ -737,7 +737,7 @@ export type LicenseUpdateInput = {
 };
 
 /** The media file container types. */
-export enum MediaFileContainer {
+export const enum MediaFileContainer {
   Doc = 'DOC',
   Docx = 'DOCX',
   Flv = 'FLV',
@@ -760,7 +760,7 @@ export enum MediaFileContainer {
   Wav = 'WAV',
   Wma = 'WMA',
   Wmv = 'WMV'
-}
+};
 
 export type MediaFileUpload = Node & {
   __typename?: 'MediaFileUpload';
@@ -811,10 +811,10 @@ export type MediaFileUploadsOrder = {
 };
 
 /** Properties by which media file uploads connections can be ordered. */
-export enum MediaFileUploadsSortableField {
+export const enum MediaFileUploadsSortableField {
   CreatedAt = 'CREATED_AT',
   Filename = 'FILENAME'
-}
+};
 
 export type MediaFileUploadStartInput = {
   filename: Scalars['String'];
@@ -928,12 +928,12 @@ export type MediaReleaseFormPayload = {
 };
 
 /** Properties by which media release form connections can be ordered. */
-export enum MediaReleaseFormSortableField {
+export const enum MediaReleaseFormSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE',
   Type = 'TYPE'
-}
+};
 
 export type MediaReleaseFormTemplate = {
   __typename?: 'MediaReleaseFormTemplate';
@@ -943,13 +943,13 @@ export type MediaReleaseFormTemplate = {
 };
 
 /** Supported types of media releases. */
-export enum MediaReleaseFormType {
+export const enum MediaReleaseFormType {
   Collection = 'COLLECTION',
   Master = 'MASTER',
   Recording = 'RECORDING',
   Sequence = 'SEQUENCE',
   Sponsor = 'SPONSOR'
-}
+};
 
 export type MediaReleaseFormUpdateInput = {
   /** Required if `type` is `COLLECTION`. */
@@ -1050,12 +1050,12 @@ export type MediaReleasePersonUpdateInput = {
 };
 
 /** Properties by which media release connections can be ordered. */
-export enum MediaReleaseSortableField {
+export const enum MediaReleaseSortableField {
   CreatedAt = 'CREATED_AT',
   GivenName = 'GIVEN_NAME',
   Id = 'ID',
   Surname = 'SURNAME'
-}
+};
 
 export type MediaReleaseUpdateInput = {
   /** The personal information collected with the media release. */
@@ -1571,10 +1571,10 @@ export type Node = {
 };
 
 /** Possible directions in which to order a list of items when provided an `orderBy` argument. */
-export enum OrderByDirection {
+export const enum OrderByDirection {
   Asc = 'ASC',
   Desc = 'DESC'
-}
+};
 
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -1704,7 +1704,7 @@ export type PersonsOrder = {
 };
 
 /** The roles a Person can hold. */
-export enum PersonsRoleField {
+export const enum PersonsRoleField {
   Artist = 'ARTIST',
   Author = 'AUTHOR',
   Composer = 'COMPOSER',
@@ -1712,14 +1712,14 @@ export enum PersonsRoleField {
   Speaker = 'SPEAKER',
   Translator = 'TRANSLATOR',
   Writer = 'WRITER'
-}
+};
 
 /** Properties by which person connections can be ordered. */
-export enum PersonsSortableField {
+export const enum PersonsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Name = 'NAME'
-}
+};
 
 export type PersonUpdateInput = {
   address?: Maybe<Scalars['String']>;
@@ -2602,15 +2602,15 @@ export type RecordingContentScreeningEvaluationPayload = {
 };
 
 /** The content screening evaluation recommendations for a recording. */
-export enum RecordingContentScreeningEvaluationRecommendation {
+export const enum RecordingContentScreeningEvaluationRecommendation {
   Approve = 'APPROVE',
   NeedsEditing = 'NEEDS_EDITING',
   Pending = 'PENDING',
   Reject = 'REJECT'
-}
+};
 
 /** The content screening statuses of a recording. */
-export enum RecordingContentScreeningStatus {
+export const enum RecordingContentScreeningStatus {
   /** Approved by admin override */
   AdminOverride = 'ADMIN_OVERRIDE',
   /** Approved by screener consensus */
@@ -2631,15 +2631,15 @@ export enum RecordingContentScreeningStatus {
   Rejected = 'REJECTED',
   /** Screening not yet begun */
   Unevaluated = 'UNEVALUATED'
-}
+};
 
 /** The available types of recordings. */
-export enum RecordingContentType {
+export const enum RecordingContentType {
   AudiobookTrack = 'AUDIOBOOK_TRACK',
   MusicTrack = 'MUSIC_TRACK',
   Sermon = 'SERMON',
   Story = 'STORY'
-}
+};
 
 export type RecordingCreateInput = {
   bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
@@ -2670,7 +2670,7 @@ export type RecordingEdge = {
 };
 
 /** The legal screening statuses of a recording. */
-export enum RecordingLegalScreeningStatus {
+export const enum RecordingLegalScreeningStatus {
   Approved = 'APPROVED',
   Pending = 'PENDING',
   /** Awaiting re-evaluation */
@@ -2678,7 +2678,7 @@ export enum RecordingLegalScreeningStatus {
   Rejected = 'REJECTED',
   /** Not Yet Begun */
   Unevaluated = 'UNEVALUATED'
-}
+};
 
 export type RecordingPayload = {
   __typename?: 'RecordingPayload';
@@ -2701,11 +2701,11 @@ export type RecordingPersonRoleInput = {
 };
 
 /** The available bitrates of recordings. */
-export enum RecordingQuality {
+export const enum RecordingQuality {
   Highest = 'HIGHEST',
   Low = 'LOW',
   Lowest = 'LOWEST'
-}
+};
 
 export type RecordingScreeningCheckout = {
   __typename?: 'RecordingScreeningCheckout';
@@ -2736,14 +2736,14 @@ export type RecordingScreeningIssue = Node & {
 };
 
 /** The recording screening issue categories. */
-export enum RecordingScreeningIssueCategory {
+export const enum RecordingScreeningIssueCategory {
   /** General Issues */
   General = 'GENERAL',
   /** Spirit of AudioVerse */
   SpiritOfAudioverse = 'SPIRIT_OF_AUDIOVERSE',
   /** Technical Issues */
   Technical = 'TECHNICAL'
-}
+};
 
 export type RecordingScreeningIssueConnection = {
   __typename?: 'RecordingScreeningIssueConnection';
@@ -2781,16 +2781,16 @@ export type RecordingScreeningIssuePayload = {
 };
 
 /** Properties by which recording screening issue connections can be ordered. */
-export enum RecordingScreeningIssuesSortableField {
+export const enum RecordingScreeningIssuesSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID'
-}
+};
 
 /** The applicable recording format for the screening issue. */
-export enum RecordingScreeningIssueTarget {
+export const enum RecordingScreeningIssueTarget {
   Audio = 'AUDIO',
   Video = 'VIDEO'
-}
+};
 
 export type RecordingScreeningIssueType = Node & {
   __typename?: 'RecordingScreeningIssueType';
@@ -2815,12 +2815,12 @@ export type RecordingScreeningIssueTypeEdge = {
 };
 
 /** The supported screening evaluation methods. */
-export enum RecordingScreeningMethod {
+export const enum RecordingScreeningMethod {
   Live = 'LIVE',
   Recording = 'RECORDING',
   ThirdPartyInfo = 'THIRD_PARTY_INFO',
   Transcript = 'TRANSCRIPT'
-}
+};
 
 export type RecordingsOrder = {
   direction: OrderByDirection;
@@ -2828,7 +2828,7 @@ export type RecordingsOrder = {
 };
 
 /** Properties by which recording connections can be ordered. */
-export enum RecordingsSortableField {
+export const enum RecordingsSortableField {
   CollectionTitle = 'COLLECTION_TITLE',
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
@@ -2837,16 +2837,16 @@ export enum RecordingsSortableField {
   SequenceTitle = 'SEQUENCE_TITLE',
   SponsorTitle = 'SPONSOR_TITLE',
   Title = 'TITLE'
-}
+};
 
 /** The stages a recording may be in. */
-export enum RecordingStage {
+export const enum RecordingStage {
   Draft = 'DRAFT',
   Published = 'PUBLISHED',
   Scheduling = 'SCHEDULING',
   Screening = 'SCREENING',
   Withdrawn = 'WITHDRAWN'
-}
+};
 
 export type RecordingTag = {
   __typename?: 'RecordingTag';
@@ -2873,7 +2873,7 @@ export type RecordingTagInput = {
 };
 
 /** The technical screening statuses of a recording. */
-export enum RecordingTechnicalScreeningStatus {
+export const enum RecordingTechnicalScreeningStatus {
   Approved = 'APPROVED',
   Pending = 'PENDING',
   /** Awaiting re-evaluation */
@@ -2881,7 +2881,7 @@ export enum RecordingTechnicalScreeningStatus {
   Rejected = 'REJECTED',
   /** Not Yet Begun */
   Unevaluated = 'UNEVALUATED'
-}
+};
 
 export type RecordingUpdateInput = {
   bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
@@ -2975,12 +2975,12 @@ export type SequenceConnection = {
 };
 
 /** The available types of sequence. */
-export enum SequenceContentType {
+export const enum SequenceContentType {
   Audiobook = 'AUDIOBOOK',
   MusicAlbum = 'MUSIC_ALBUM',
   Series = 'SERIES',
   StorySeason = 'STORY_SEASON'
-}
+};
 
 export type SequenceCreateInput = {
   collectionId?: Maybe<Scalars['ID']>;
@@ -3013,11 +3013,11 @@ export type SequencePayload = {
 };
 
 /** Properties by which sequence connections can be ordered. */
-export enum SequenceSortableField {
+export const enum SequenceSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type SequenceUpdateInput = {
   collectionId?: Maybe<Scalars['ID']>;
@@ -3190,11 +3190,11 @@ export type SponsorsOrder = {
 };
 
 /** Properties by which sponsor connections can be ordered. */
-export enum SponsorsSortableField {
+export const enum SponsorsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type SponsorUpdateInput = {
   address?: Maybe<Scalars['String']>;
@@ -3245,9 +3245,9 @@ export type TestimoniesOrder = {
 };
 
 /** Properties by which testimony connections can be ordered. */
-export enum TestimoniesSortableField {
+export const enum TestimoniesSortableField {
   WrittenDate = 'WRITTEN_DATE'
-}
+};
 
 export type Testimony = Node & {
   __typename?: 'Testimony';
@@ -3272,7 +3272,7 @@ export type TestimonyEdge = {
 };
 
 /** The supported timezones. */
-export enum Timezone {
+export const enum Timezone {
   AfricaAbidjan = 'AFRICA_ABIDJAN',
   AfricaAccra = 'AFRICA_ACCRA',
   AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
@@ -3792,7 +3792,7 @@ export enum Timezone {
   UsMountain = 'US_MOUNTAIN',
   UsPacific = 'US_PACIFIC',
   UsSamoa = 'US_SAMOA'
-}
+};
 
 export type Transcript = Node & {
   __typename?: 'Transcript';
@@ -3957,7 +3957,7 @@ export type UserEdge = {
 };
 
 /** User languages */
-export enum UserLanguage {
+export const enum UserLanguage {
   Abkhazian = 'ABKHAZIAN',
   Afrikaans = 'AFRIKAANS',
   Akan = 'AKAN',
@@ -4010,7 +4010,7 @@ export enum UserLanguage {
   Twi = 'TWI',
   Xhosa = 'XHOSA',
   Zulu = 'ZULU'
-}
+};
 
 export type UserLanguageRole = {
   __typename?: 'UserLanguageRole';
@@ -4115,11 +4115,11 @@ export type UserPlaylistsOrder = {
 };
 
 /** Properties by which a user's playlists connection can be ordered. */
-export enum UserPlaylistsSortableField {
+export const enum UserPlaylistsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Title = 'TITLE'
-}
+};
 
 export type UserPlaylistUpdateInput = {
   isPublic: Scalars['Boolean'];
@@ -4128,7 +4128,7 @@ export type UserPlaylistUpdateInput = {
 };
 
 /** The administrative roles a user may hold. */
-export enum UserRole {
+export const enum UserRole {
   /** Language Administrator */
   Administration = 'ADMINISTRATION',
   Communications = 'COMMUNICATIONS',
@@ -4139,7 +4139,7 @@ export enum UserRole {
   Mediamanager = 'MEDIAMANAGER',
   Stats = 'STATS',
   TechnicalScreener = 'TECHNICAL_SCREENER'
-}
+};
 
 export type UserSignupInput = {
   email: Scalars['String'];
@@ -4147,11 +4147,11 @@ export type UserSignupInput = {
 };
 
 /** The supported social login services. */
-export enum UserSocialServiceName {
+export const enum UserSocialServiceName {
   Apple = 'APPLE',
   Facebook = 'FACEBOOK',
   Google = 'GOOGLE'
-}
+};
 
 export type UsersOrder = {
   direction: OrderByDirection;
@@ -4159,11 +4159,11 @@ export type UsersOrder = {
 };
 
 /** Properties by which user connections can be ordered. */
-export enum UsersSortableField {
+export const enum UsersSortableField {
   CreatedAt = 'CREATED_AT',
   Email = 'EMAIL',
   Id = 'ID'
-}
+};
 
 export type UserUpdateInput = {
   /** The first line of the address. Typically the street address or PO Box number. */

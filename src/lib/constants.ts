@@ -1,3 +1,5 @@
+import { Language } from './generated/graphql';
+
 export const ENTRIES_PER_PAGE = 25;
 
 export interface LanguageConfiguration {
@@ -5,10 +7,9 @@ export interface LanguageConfiguration {
 	display_name: string;
 }
 
-// TODO: fix this type thing....
-interface Languages {
-	[key: string]: LanguageConfiguration;
-}
+type Languages = {
+	[key in Language]: LanguageConfiguration;
+};
 
 export const LANGUAGES: Languages = {
 	ENGLISH: { base_url: 'en', display_name: 'English' },
