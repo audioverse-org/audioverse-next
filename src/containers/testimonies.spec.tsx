@@ -1,5 +1,6 @@
-import { getTestimonies, getTestimonyCount } from '@lib/api';
+import { getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
+import { getTestimonies } from '@lib/generated/graphql';
 import { loadTestimonies, renderWithIntl } from '@lib/test/helpers';
 import Testimonies, {
 	getStaticPaths,
@@ -66,7 +67,8 @@ describe('testimonies pages', () => {
 
 		await getStaticProps({ params: { language: 'en', i: '1' } });
 
-		expect(getTestimonies).toBeCalledWith('ENGLISH', {
+		expect(getTestimonies).toBeCalledWith({
+			language: 'ENGLISH',
 			offset: 0,
 			first: ENTRIES_PER_PAGE,
 		});

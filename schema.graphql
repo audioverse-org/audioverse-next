@@ -1,0 +1,3624 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+interface Node {
+    id: ID!
+}
+
+"Represents a type that can be retrieved by a URL."
+interface UniformResourceLocatable {
+    canonicalPath: String!
+    canonicalUrl: String!
+    shareUrl: String!
+}
+
+type Aggregate {
+    count: Int!
+}
+
+type Attachment implements Node {
+    filename: String!
+    "In bytes"
+    filesize: String!
+    id: ID!
+    mimeType: String!
+    recording: Recording!
+    url: URL!
+}
+
+type AudioFile implements Node {
+    bitrate: Int!
+    duration: Float!
+    filename: String!
+    "In bytes"
+    filesize: String!
+    id: ID!
+    mimeType: String!
+    recording: Recording!
+    url: URL!
+}
+
+type AuthenticatedUser {
+    sessionToken: String!
+    user: User!
+}
+
+type AuthenticatedUserPayload {
+    authenticatedUser: AuthenticatedUser
+    errors: [InputValidationError!]!
+}
+
+type Bible implements Node {
+    book(id: ID!): BibleBook!
+    books: [BibleBook!]!
+    id: ID!
+    isDramatized: Boolean!
+    title: String!
+}
+
+type BibleBook implements Node {
+    chapter(id: ID!): BibleChapter!
+    chapterCount: Int!
+    chapters: [BibleChapter!]!
+    id: ID!
+    isDramatized: Boolean!
+    title: String!
+}
+
+type BibleChapter implements Node {
+    id: ID!
+    text: String!
+    title: String!
+    url: URL!
+}
+
+type BibleConnection {
+    aggregate: Aggregate
+    edges: [BibleEdge!]
+    nodes: [Bible!]
+    pageInfo: PageInfo!
+}
+
+type BibleEdge {
+    cursor: String!
+    node: Bible!
+}
+
+type BibleReference {
+    book: BibleReferenceBook!
+    chapter: Int
+    verse: Int
+}
+
+"The Bible reference range applicable to an item."
+type BibleReferenceRange implements Node {
+    "The end reference."
+    endReference: BibleReference!
+    id: ID!
+    "The start reference."
+    startReference: BibleReference!
+}
+
+type BibleReferenceRangeConnection {
+    aggregate: Aggregate
+    edges: [BibleReferenceRangeEdge!]
+    nodes: [BibleReferenceRange!]
+    pageInfo: PageInfo!
+}
+
+type BibleReferenceRangeEdge {
+    cursor: String!
+    node: BibleReferenceRange!
+}
+
+type BlogPost implements Node {
+    body: String!
+    id: ID!
+    image: Image
+    title: String!
+}
+
+type BlogPostConnection {
+    aggregate: Aggregate
+    edges: [BlogPostEdge!]
+    nodes: [BlogPost!]
+    pageInfo: PageInfo!
+}
+
+type BlogPostEdge {
+    cursor: String!
+    node: BlogPost!
+}
+
+type CatalogHistoryComment {
+    isSticky: Boolean!
+    mentions: [User!]!
+    "Includes mentions in the format of @user:[id] (e.g., `@user:123`)."
+    message: String!
+}
+
+type CatalogHistoryItem implements Node {
+    comment: CatalogHistoryComment
+    createdAt: DateTime!
+    id: ID!
+    performer: User!
+    type: CatalogHistoryItemType!
+}
+
+type CatalogHistoryItemConnection {
+    aggregate: Aggregate
+    edges: [CatalogHistoryItemEdge!]
+    nodes: [CatalogHistoryItem!]
+    pageInfo: PageInfo!
+}
+
+type CatalogHistoryItemEdge {
+    cursor: String!
+    node: CatalogHistoryItem!
+}
+
+type CatalogHistoryItemPayload {
+    catalogHistoryItem: CatalogHistoryItem
+    errors: [InputValidationError!]!
+}
+
+type Collection implements Node {
+    "The canonical HTML path to this resource."
+    canonicalPath: String!
+    "The canonical URL to this resource."
+    canonicalUrl: String!
+    contentType: CollectionContentType!
+    description: String!
+    endDate: Date
+    hidingReason: String
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    image: Image
+    imageWithFallback: Image!
+    isHidden: Boolean
+    location: String
+    logoImage: Image @deprecated(reason : "Collection.logoImage is replaced with Collection.image")
+    logoImageWithFallback: Image! @deprecated(reason : "Collection.logoImageWithFallback is replaced with Collection.imageWithFallback")
+    mediaReleaseForm: MediaReleaseForm
+    notes: String
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    sequences(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    "A shareable short URL to this resource."
+    shareUrl: String!
+    sponsor: Sponsor
+    startDate: Date
+    summary: String!
+    title: String!
+}
+
+type CollectionConnection {
+    aggregate: Aggregate
+    edges: [CollectionEdge!]
+    nodes: [Collection!]
+    pageInfo: PageInfo!
+}
+
+type CollectionEdge {
+    cursor: String!
+    node: Collection!
+}
+
+type CollectionPayload {
+    collection: Collection
+    errors: [InputValidationError!]!
+}
+
+type DistributionAgreement implements Node {
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    isDefault: Boolean!
+    isHidden: Boolean
+    isRetired: Boolean!
+    license: License
+    notes: String
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    sponsor: Sponsor
+    summary: String!
+    title: String!
+}
+
+type DistributionAgreementConnection {
+    aggregate: Aggregate
+    edges: [DistributionAgreementEdge!]
+    nodes: [DistributionAgreement!]
+    pageInfo: PageInfo!
+}
+
+type DistributionAgreementEdge {
+    cursor: String!
+    node: DistributionAgreement!
+}
+
+type DistributionAgreementPayload {
+    distributionAgreement: DistributionAgreement
+    errors: [InputValidationError!]!
+}
+
+type Image {
+    name: String!
+    url(size: Int!): URL!
+}
+
+"The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields."
+type ImageConnectionSlim {
+    edges: [ImageEdge!]
+}
+
+type ImageEdge {
+    cursor: String!
+    node: Image!
+}
+
+type ImagePayload {
+    errors: [InputValidationError!]!
+    image: Image
+}
+
+type InputValidationError {
+    message: String!
+}
+
+type InternalContact {
+    address: String!
+    email: String!
+    name: String!
+    phone: String!
+}
+
+type License implements Node {
+    description: String!
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    image: Image
+    isDefault: Boolean!
+    isHidden: Boolean
+    notes: String
+    permitsSales: Boolean
+    summary: String!
+    title: String!
+}
+
+type LicenseConnection {
+    aggregate: Aggregate
+    edges: [LicenseEdge!]
+    nodes: [License!]
+    pageInfo: PageInfo!
+}
+
+type LicenseEdge {
+    cursor: String!
+    node: License!
+}
+
+type LicensePayload {
+    errors: [InputValidationError!]!
+    license: License
+}
+
+type MediaRelease implements Node {
+    createdAt: DateTime!
+    id: ID!
+    mediaReleaseForm: MediaReleaseForm!
+    "The personal information collected with the media release."
+    mediaReleasePerson: MediaReleasePerson!
+    notes: String
+    "The catalog person associated with the media release."
+    person: Person
+}
+
+type MediaReleaseConnection {
+    aggregate: Aggregate
+    edges: [MediaReleaseEdge!]
+    nodes: [MediaRelease!]
+    pageInfo: PageInfo!
+}
+
+type MediaReleaseEdge {
+    cursor: String!
+    node: MediaRelease!
+}
+
+type MediaReleaseForm implements Node {
+    collection: Collection
+    createdAt: DateTime!
+    id: ID!
+    isClosed: Boolean!
+    mediaReleases(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [MediaReleaseOrder!],
+        "The catalog person associated with the media release."
+        personId: ID,
+        recordingId: ID,
+        search: String
+    ): MediaReleaseConnection!
+    recording: Recording
+    sequence: Sequence
+    sponsor: Sponsor
+    summary: String!
+    title: String!
+    type: MediaReleaseFormType!
+    "The URL for media release form."
+    url: URL
+}
+
+type MediaReleaseFormConnection {
+    aggregate: Aggregate
+    edges: [MediaReleaseFormEdge!]
+    nodes: [MediaReleaseForm!]
+    pageInfo: PageInfo!
+}
+
+type MediaReleaseFormEdge {
+    cursor: String!
+    node: MediaReleaseForm!
+}
+
+type MediaReleaseFormPayload {
+    errors: [InputValidationError!]!
+    mediaReleaseForm: MediaReleaseForm
+}
+
+type MediaReleaseFormTemplate {
+    summary: String!
+    title: String!
+    type: MediaReleaseFormType!
+}
+
+type MediaReleasePayload {
+    errors: [InputValidationError!]!
+    mediaRelease: MediaRelease
+}
+
+type MediaReleasePerson {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "The name of the city, district, village, or town."
+    city: String
+    "The name of the country."
+    country: String
+    "The person's email address."
+    email: String!
+    "The person's first name."
+    givenName: String!
+    "The full name of the person, based on the values for givenName and surname."
+    name: String!
+    "The person's phone number."
+    phone: String!
+    "The postal or zip code."
+    postalCode: String
+    "The name of the region, such as the province, state, or district."
+    province: String
+    "The person's last name."
+    surname: String!
+}
+
+type Mutation {
+    catalogHistoryCommentDelete(catalogHistoryCommentId: ID!): SuccessPayload!
+    catalogHistoryCommentUpdate(catalogHistoryCommentId: ID!, input: CatalogHistoryCommentUpdateInput!): CatalogHistoryItemPayload!
+    collectionCreate(input: CollectionCreateInput!): CollectionPayload!
+    collectionDelete(collectionId: ID!): SuccessPayload!
+    collectionHistoryCommentCreate(collectionId: ID!, input: CatalogHistoryCommentCreateInput!): CatalogHistoryItemPayload!
+    collectionUpdate(collectionId: ID!, input: CollectionUpdateInput!): CollectionPayload!
+    distributionAgreementCreate(input: DistributionAgreementCreateInput!): DistributionAgreementPayload!
+    distributionAgreementDelete(distributionAgreementId: ID!): SuccessPayload!
+    distributionAgreementHistoryCommentCreate(distributionAgreementId: ID!, input: CatalogHistoryCommentCreateInput!): CatalogHistoryItemPayload!
+    distributionAgreementUpdate(distributionAgreementId: ID!, input: DistributionAgreementUpdateInput!): DistributionAgreementPayload!
+    favoriteRecording(id: ID!): Boolean! @deprecated(reason : "favoriteRecording is replaced with recordingFavorite")
+    "Upload an image to an image type container."
+    imageUpload(
+        "The image to upload."
+        image: Upload!,
+        "The image type container to upload the file to."
+        imageType: ImageContainer!
+    ): ImagePayload!
+    licenseCreate(input: LicenseCreateInput!): LicensePayload!
+    licenseDelete(licenseId: ID!): SuccessPayload!
+    licenseHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, licenseId: ID!): CatalogHistoryItemPayload!
+    licenseUpdate(input: LicenseUpdateInput!, licenseId: ID!): LicensePayload!
+    login(input: UserLoginInput!): AuthenticatedUserPayload!
+    loginSocial(input: UserLoginSocialInput!): AuthenticatedUserPayload!
+    mediaReleaseCreate(input: MediaReleaseCreateInput!): MediaReleasePayload!
+    mediaReleaseDelete(mediaReleaseId: ID!): SuccessPayload!
+    mediaReleaseFormCreate(input: MediaReleaseFormCreateInput!): MediaReleaseFormPayload!
+    mediaReleaseFormDelete(mediaReleaseFormId: ID!): SuccessPayload!
+    mediaReleaseFormTemplateUpdate(input: MediaReleaseFormUpdateInput!, language: Language!, type: MediaReleaseFormType!): SuccessPayload!
+    mediaReleaseFormUpdate(input: MediaReleaseFormUpdateInput!, mediaReleaseFormId: ID!): MediaReleaseFormPayload!
+    mediaReleaseUpdate(input: MediaReleaseUpdateInput!, mediaReleaseId: ID!): MediaReleasePayload!
+    personCreate(input: PersonCreateInput!): PersonPayload!
+    personDelete(personId: ID!): SuccessPayload!
+    personFavorite(id: ID!): SuccessPayload!
+    personHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, personId: ID!): CatalogHistoryItemPayload!
+    personUnfavorite(id: ID!): SuccessPayload!
+    personUpdate(input: PersonUpdateInput!, personId: ID!): PersonPayload!
+    playlistAdd(input: UserPlaylistAddInput!): UserPlaylist!
+    playlistDelete(playlistId: ID!): Boolean!
+    playlistRecordingAdd(playlistId: ID!, recordingId: ID!): Boolean!
+    playlistRecordingRemove(playlistId: ID!, recordingId: ID!): Boolean!
+    playlistUpdate(input: UserPlaylistUpdateInput!, playlistId: ID!): UserPlaylist!
+    recordingArchive(reason: String!, recordingId: ID!): SuccessPayload!
+    recordingCreate(input: RecordingCreateInput!): RecordingPayload!
+    "Advances a recording from or withdraws a recording to draft stage."
+    recordingDrafting(
+        "If `true` advance to screening; if `false` withdraw to draft stage."
+        finished: Boolean!,
+        recordingId: ID!
+    ): RecordingPayload!
+    recordingFavorite(id: ID!): SuccessPayload!
+    recordingHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, recordingId: ID!): CatalogHistoryItemPayload!
+    recordingScreeningContentCheckoutCreate(recordingId: ID!, userId: ID): RecordingScreeningCheckoutPayload!
+    recordingScreeningContentCheckoutDelete(recordingId: ID!, userId: ID): SuccessPayload!
+    recordingScreeningContentEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
+    "Sets the methods used in evaluating the recording."
+    recordingScreeningContentMethodsSet(methods: [RecordingScreeningMethod!]!, recordingId: ID!): RecordingContentScreeningEvaluationPayload!
+    recordingScreeningIssueCreate(input: RecordingScreeningIssueInput!, recordingId: ID!): RecordingScreeningIssuePayload!
+    recordingScreeningIssueDelete(issueId: ID!): SuccessPayload!
+    recordingScreeningIssueUpdate(input: RecordingScreeningIssueInput!, issueId: ID!): RecordingScreeningIssuePayload!
+    recordingScreeningLegalCheckoutCreate(recordingId: ID!, userId: ID): RecordingScreeningCheckoutPayload!
+    recordingScreeningLegalCheckoutDelete(recordingId: ID!, userId: ID): SuccessPayload!
+    recordingScreeningLegalEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
+    recordingScreeningTechnicalCheckoutCreate(recordingId: ID!, userId: ID): RecordingScreeningCheckoutPayload!
+    recordingScreeningTechnicalCheckoutDelete(recordingId: ID!, userId: ID): SuccessPayload!
+    recordingScreeningTechnicalEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
+    recordingUnfavorite(id: ID!): SuccessPayload!
+    recordingUpdate(input: RecordingUpdateInput!, recordingId: ID!): RecordingPayload!
+    sequenceCreate(input: SequenceCreateInput!): SequencePayload!
+    sequenceDelete(sequenceId: ID!): SuccessPayload!
+    sequenceHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, sequenceId: ID!): CatalogHistoryItemPayload!
+    sequenceUpdate(input: SequenceUpdateInput!, sequenceId: ID!): SequencePayload!
+    signup(input: UserSignupInput!): AuthenticatedUserPayload!
+    sponsorCreate(input: SponsorCreateInput!): SponsorPayload!
+    sponsorDelete(sponsorId: ID!): SuccessPayload!
+    sponsorHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, sponsorId: ID!): CatalogHistoryItemPayload!
+    sponsorUpdate(input: SponsorUpdateInput!, sponsorId: ID!): SponsorPayload!
+    unfavoriteRecording(id: ID!): Boolean! @deprecated(reason : "unfavoriteRecording is replaced with recordingUnfavorite")
+    updateMyProfile(input: UserUpdateInput!): AuthenticatedUserPayload!
+    userCreate(input: UserCreateInput!): UserPayload!
+    userDelete(userId: ID!): SuccessPayload!
+    "Sends a reset password email to the user, as the first step in the reset password process."
+    userRecover(
+        "The email address of the user to recover."
+        email: String!
+    ): SuccessPayload!
+    "Resets a user's password with a token received from `userRecover`."
+    userReset(
+        "New password that will be set as part of the reset password process."
+        password: String!,
+        "The reset token required to reset the user's password."
+        token: String!
+    ): SuccessPayload!
+    userUpdate(input: UserUpdateInput!, userId: ID!): UserPayload!
+}
+
+type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+}
+
+type Person implements Node {
+    address: String
+    "The canonical HTML path to this resource."
+    canonicalPath: String!
+    "The canonical URL to this resource."
+    canonicalUrl: String!
+    description: String!
+    designations: String!
+    email: String
+    givenName: String!
+    hidingReason: String
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    image: Image
+    imageWithFallback: Image!
+    internalContact: InternalContact
+    isHidden: Boolean!
+    isPreapproved: Boolean
+    name: String!
+    notes: String
+    phone: String
+    photo: Image @deprecated(reason : "Person.photo is replaced with Person.image")
+    photoWithFallback: Image! @deprecated(reason : "Person.photoWithFallback is replaced with Person.imageWithFallback")
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!],
+        "Finds all the recordings where the person has the specified role."
+        withRole: PersonsRoleField
+    ): RecordingConnection!
+    "A shareable short URL to this resource."
+    shareUrl: String!
+    suffix: String!
+    summary: String!
+    surname: String!
+    title: String!
+    viewerHasFavorited: Boolean!
+    website: URL
+}
+
+type PersonConnection {
+    aggregate: Aggregate
+    edges: [PersonEdge!]
+    nodes: [Person!]
+    pageInfo: PageInfo!
+}
+
+type PersonEdge {
+    cursor: String!
+    node: Person!
+}
+
+type PersonPayload {
+    errors: [InputValidationError!]!
+    person: Person
+}
+
+type PopularRecording {
+    recording: Recording!
+    weight: Float!
+}
+
+type PopularRecordingConnection {
+    aggregate: Aggregate
+    edges: [PopularRecordingEdge!]
+    nodes: [PopularRecording!]
+    pageInfo: PageInfo!
+}
+
+type PopularRecordingEdge {
+    cursor: String!
+    node: PopularRecording!
+}
+
+type Query {
+    adminImage(
+        "The image type container to locate the image in."
+        imageType: ImageContainer!,
+        "The image name."
+        name: String!
+    ): Image
+    adminImages(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "The image type container to list the images."
+        imageType: ImageContainer!
+    ): ImageConnectionSlim!
+    audiobible(id: ID!): Bible
+    audiobibles(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): BibleConnection!
+    "Alias for `sequence(id: ID)`"
+    audiobook(id: ID!): Sequence
+    "Alias for `collection(id: ID)`"
+    audiobookSeries(id: ID!): Collection
+    audiobookSerieses(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorId: ID,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    "Alias for `recording(id: ID)`"
+    audiobookTrack(id: ID!): Recording
+    audiobookTracks(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    audiobooks(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    blogPost(id: ID!): BlogPost
+    blogPosts(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [BlogPostOrder!]
+    ): BlogPostConnection!
+    collection(id: ID!): Collection
+    collections(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorId: ID,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    "Alias for `collection(id: ID)`"
+    conference(id: ID!): Collection
+    conferences(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorId: ID,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    distributionAgreement(id: ID!): DistributionAgreement
+    distributionAgreements(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isDefault: Boolean,
+        isRetired: Boolean,
+        language: Language!,
+        licenseId: ID,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [DistributionAgreementsOrder!],
+        search: String,
+        sponsorId: ID
+    ): DistributionAgreementConnection!
+    featuredBlogPosts(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): BlogPostConnection!
+    featuredRecordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    license(id: ID!): License
+    licenses(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished licenses. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Limit to default licenses."
+        isDefault: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [LicensesOrder!],
+        search: String
+    ): LicenseConnection!
+    me: AuthenticatedUser
+    mediaRelease(id: ID!): MediaRelease
+    mediaReleaseForm(id: ID!): MediaReleaseForm
+    mediaReleaseFormTemplates(language: Language!): [MediaReleaseFormTemplate!]!
+    mediaReleaseForms(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [MediaReleaseFormOrder!],
+        search: String,
+        type: MediaReleaseFormType
+    ): MediaReleaseFormConnection!
+    mediaReleases(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        mediaReleaseFormId: ID,
+        mediaReleaseFormType: MediaReleaseFormType,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [MediaReleaseOrder!],
+        "The catalog person associated with the media release."
+        personId: ID,
+        recordingId: ID,
+        search: String
+    ): MediaReleaseConnection!
+    "Alias for `sequence(id: ID)`"
+    musicAlbum(id: ID!): Sequence
+    musicAlbums(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    musicBookTags(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): TagConnection! @deprecated(reason : "Query.musicBookTags will be replaced with a scriptural reference type.")
+    musicMoodTags(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): TagConnection!
+    musicSerieses(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorId: ID,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    "Alias for `recording(id: ID)`"
+    musicTrack(id: ID!): Recording
+    musicTracks(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    person(id: ID!): Person
+    persons(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished persons. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [PersonsOrder!],
+        role: PersonsRoleField,
+        search: String,
+        "Filters persons by those with published recordings of any of the provided content types."
+        withContentTypes: [RecordingContentType!]
+    ): PersonConnection!
+    popularRecordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): PopularRecordingConnection!
+    recording(id: ID!): Recording
+    recordingScreeningIssueType(id: ID!): RecordingScreeningIssueType
+    recordingScreeningIssueTypes(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): RecordingScreeningIssueTypeConnection!
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    sequence(id: ID!): Sequence
+    sequences(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    "Alias for `sequence(id: ID)`"
+    series(id: ID!): Sequence
+    "Series is both a singular and plural form. `series` returns a single sequence. `serieses` is an archaic plural form of series used here to avoid `seriess` or some other ugly solution."
+    serieses(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    "Alias for `recording(id: ID)`"
+    sermon(id: ID!): Recording
+    sermons(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    sponsor(id: ID!): Sponsor
+    sponsors(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sponsors. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SponsorsOrder!],
+        search: String,
+        withMusic: Boolean
+    ): SponsorConnection!
+    stories(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    "Alias for `recording(id: ID)`"
+    story(id: ID!): Recording
+    "Alias for `collection(id: ID)`"
+    storyProgram(id: ID!): Collection
+    storyPrograms(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorId: ID,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    "Alias for `sequence(id: ID)`"
+    storySeason(id: ID!): Sequence
+    storySeasons(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String,
+        sponsorId: ID
+    ): SequenceConnection!
+    tags(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        search: String
+    ): TagConnection!
+    testimonies(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [TestimoniesOrder!]
+    ): TestimonyConnection!
+    user(id: ID!): User
+    users(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether the user has any administrative roles."
+        hasAnyRoles: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [UsersOrder!],
+        search: String,
+        "Filters users to those with the specified role."
+        withRole: UserLanguageRoleInput
+    ): UserConnection!
+    websites(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): WebsiteConnection!
+}
+
+type Recording implements Node {
+    attachments(allowedContainers: [MediaFileContainer!]): [Attachment!]!
+    audioFiles(allowedContainers: [MediaFileContainer!], includeUnpublished: Boolean): [AudioFile!]!
+    bibleReferences(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): BibleReferenceRangeConnection!
+    "The canonical HTML path to this resource."
+    canonicalPath: String!
+    canonicalUrl: URL!
+    collection: Collection
+    contentScreeningCheckouts: [RecordingScreeningCheckout!]!
+    contentScreeningEvaluations: [RecordingContentScreeningEvaluation!]!
+    contentScreeningStatus: RecordingContentScreeningStatus!
+    contentType: RecordingContentType!
+    copyrightYear: Int
+    description: String
+    distributionAgreement: DistributionAgreement
+    downloadDisabled: Boolean! @deprecated(reason : "Recording.downloadDisabled is replaced with Recording.isDownloadAllowed")
+    duration: Float!
+    hidingReason: String
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    imageWithFallback: Image!
+    isDownloadAllowed: Boolean!
+    isFeatured: Boolean!
+    "Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status."
+    isHidden: Boolean!
+    language: Language!
+    legalScreeningCheckouts: [RecordingScreeningCheckout!]!
+    legalScreeningStatus: RecordingLegalScreeningStatus!
+    mediaReleaseForm: MediaReleaseForm
+    notes: String
+    persons(includeUnpublished: Boolean, role: PersonsRoleField): [Person!]!
+    publishDate: DateTime
+    recordingDate: DateTime
+    recordingTags(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int
+    ): RecordingTagConnection!
+    screeningIssues(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        category: RecordingScreeningIssueCategory,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingScreeningIssueOrder!]
+    ): RecordingScreeningIssueConnection
+    sequence: Sequence
+    shareUrl: URL
+    sponsor: Sponsor
+    stage: RecordingStage!
+    technicalScreeningCheckouts: [RecordingScreeningCheckout!]!
+    technicalScreeningStatus: RecordingTechnicalScreeningStatus!
+    title: String!
+    transcript: Transcript
+    videoFiles(allowedContainers: [MediaFileContainer!], includeUnpublished: Boolean): [VideoFile!]!
+    viewerHasFavorited: Boolean!
+    websites: [Website!]!
+}
+
+type RecordingConnection {
+    aggregate: Aggregate
+    edges: [RecordingEdge!]
+    nodes: [Recording!]
+    pageInfo: PageInfo!
+}
+
+type RecordingContentScreeningEvaluation {
+    "The methods used in evaluating the recording."
+    methods: [RecordingScreeningMethod!]!
+    "The screener's overall recommendation for the recording."
+    recommendation: RecordingContentScreeningEvaluationRecommendation!
+    "The screener user."
+    screener: User!
+}
+
+type RecordingContentScreeningEvaluationPayload {
+    errors: [InputValidationError!]!
+    recordingContentScreeningEvaluation: RecordingContentScreeningEvaluation
+}
+
+type RecordingEdge {
+    cursor: String!
+    node: Recording!
+}
+
+type RecordingPayload {
+    errors: [InputValidationError!]!
+    recording: Recording
+}
+
+type RecordingScreeningCheckout {
+    "The user who assigned the screener."
+    assigner: User!
+    createdAt: DateTime!
+    "The screener user."
+    screener: User!
+}
+
+type RecordingScreeningCheckoutPayload {
+    errors: [InputValidationError!]!
+    recordingScreeningCheckout: RecordingScreeningCheckout
+}
+
+type RecordingScreeningIssue implements Node {
+    "In HH:mm format."
+    endTime: String
+    id: ID!
+    notes: String!
+    screener: User!
+    "In HH:mm format."
+    startTime: String
+    target: RecordingScreeningIssueTarget!
+    type: RecordingScreeningIssueType!
+}
+
+type RecordingScreeningIssueConnection {
+    aggregate: Aggregate
+    edges: [RecordingScreeningIssueEdge!]
+    nodes: [RecordingScreeningIssue!]
+    pageInfo: PageInfo!
+}
+
+type RecordingScreeningIssueEdge {
+    cursor: String!
+    node: RecordingScreeningIssue!
+}
+
+type RecordingScreeningIssuePayload {
+    errors: [InputValidationError!]!
+    recordingScreeningIssue: RecordingScreeningIssue
+}
+
+type RecordingScreeningIssueType implements Node {
+    category: RecordingScreeningIssueCategory!
+    id: ID!
+    notes: String!
+    title: String!
+}
+
+type RecordingScreeningIssueTypeConnection {
+    aggregate: Aggregate
+    edges: [RecordingScreeningIssueTypeEdge!]
+    nodes: [RecordingScreeningIssueType!]
+    pageInfo: PageInfo!
+}
+
+type RecordingScreeningIssueTypeEdge {
+    cursor: String!
+    node: RecordingScreeningIssueType!
+}
+
+type RecordingTag {
+    tag: Tag!
+}
+
+type RecordingTagConnection {
+    aggregate: Aggregate
+    edges: [RecordingTagEdge!]
+    nodes: [RecordingTag!]
+    pageInfo: PageInfo!
+}
+
+type RecordingTagEdge {
+    cursor: String!
+    node: RecordingTag!
+}
+
+type Sequence implements Node {
+    "The canonical HTML path to this resource."
+    canonicalPath: String!
+    "The canonical URL to this resource."
+    canonicalUrl: String!
+    collection: Collection
+    contentType: SequenceContentType!
+    description: String!
+    hidingReason: String
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    image: Image
+    imageWithFallback: Image!
+    isHidden: Boolean
+    logoImage: Image @deprecated(reason : "Sequence.logoImage is replaced with Sequence.image")
+    logoImageWithFallback: Image! @deprecated(reason : "Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback")
+    mediaReleaseForm: MediaReleaseForm
+    notes: String
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    "A shareable short URL to this resource."
+    shareUrl: String!
+    sponsor: Sponsor
+    summary: String!
+    title: String!
+}
+
+type SequenceConnection {
+    aggregate: Aggregate
+    edges: [SequenceEdge!]
+    nodes: [Sequence!]
+    pageInfo: PageInfo!
+}
+
+type SequenceEdge {
+    cursor: String!
+    node: Sequence!
+}
+
+type SequencePayload {
+    errors: [InputValidationError!]!
+    sequence: Sequence
+}
+
+type Sponsor implements Node & UniformResourceLocatable {
+    address: String
+    "The canonical HTML path to this resource."
+    canonicalPath: String!
+    "The canonical URL to this resource."
+    canonicalUrl: String!
+    collections(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        contentType: CollectionContentType = CONFERENCE,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished collections. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CollectionsOrder!],
+        search: String,
+        sponsorIds: [ID!]
+    ): CollectionConnection!
+    description: String!
+    distributionAgreements(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isDefault: Boolean,
+        isRetired: Boolean,
+        licenseId: ID,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [DistributionAgreementsOrder!],
+        search: String
+    ): DistributionAgreementConnection
+    email: String
+    hidingReason: String
+    history(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        isSticky: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [CatalogHistoryItemOrder!]
+    ): CatalogHistoryItemConnection
+    id: ID!
+    image: Image
+    imageWithFallback: Image!
+    internalContact: InternalContact
+    isHidden: Boolean!
+    location: String
+    logoImage: Image @deprecated(reason : "Sponsor.logoImage is replaced with Sponsor.image")
+    logoImageWithFallback: Image! @deprecated(reason : "Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback")
+    mediaReleaseForm: MediaReleaseForm
+    notes: String
+    phone: String
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    sequences(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        collectionId: ID,
+        contentType: SequenceContentType = SERIES,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished sequences. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [SequenceOrder!],
+        search: String
+    ): SequenceConnection!
+    "A shareable short URL to this resource."
+    shareUrl: String!
+    summary: String!
+    title: String!
+    website: URL
+}
+
+type SponsorConnection {
+    aggregate: Aggregate
+    edges: [SponsorEdge!]
+    nodes: [Sponsor!]
+    pageInfo: PageInfo!
+}
+
+type SponsorEdge {
+    cursor: String!
+    node: Sponsor!
+}
+
+type SponsorPayload {
+    errors: [InputValidationError!]!
+    sponsor: Sponsor
+}
+
+type SuccessPayload {
+    errors: [InputValidationError!]!
+    success: Boolean!
+}
+
+type Tag implements Node {
+    id: ID!
+    name: String!
+}
+
+type TagConnection {
+    aggregate: Aggregate
+    edges: [TagEdge!]
+    nodes: [Tag!]
+    pageInfo: PageInfo!
+}
+
+type TagEdge {
+    cursor: String!
+    node: Tag!
+}
+
+type Testimony implements Node {
+    author: String!
+    body: String!
+    id: ID!
+    writtenDate: DateTime!
+}
+
+type TestimonyConnection {
+    aggregate: Aggregate
+    edges: [TestimonyEdge!]
+    nodes: [Testimony!]
+    pageInfo: PageInfo!
+}
+
+type TestimonyEdge {
+    cursor: String!
+    node: Testimony!
+}
+
+type Transcript implements Node {
+    id: ID!
+    text: String!
+}
+
+type User implements Node {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "Whether recordings should autoplay by default."
+    autoplay: Boolean!
+    "The name of the city, district, village, or town."
+    city: String
+    "The name of the country."
+    country: String
+    createdAt: DateTime!
+    "The user's email address."
+    email: String!
+    favoritePersons(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Whether to include unpublished persons. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [PersonsOrder!],
+        role: PersonsRoleField,
+        search: String,
+        "Filters persons by those with published recordings of any of the provided content types."
+        withContentTypes: [RecordingContentType!]
+    ): PersonConnection!
+    favoriteRecordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    "The user's first name."
+    givenName: String
+    id: ID!
+    "Whether the user has permission to perform all administrative functions."
+    isSuperuser: Boolean!
+    "Whether the user has verified their email."
+    isVerified: Boolean!
+    "The user's preferred interface language."
+    language: UserLanguage!
+    "The last date the user had activity."
+    lastActivity: DateTime!
+    "The full name of the user, based on the values for givenName and surname."
+    name: String!
+    playlist(id: ID!): UserPlaylist
+    playlists(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        language: Language!,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [UserPlaylistsOrder!]
+    ): UserPlaylistConnection!
+    "The postal or zip code."
+    postalCode: String
+    "The user's preferred audio bitrate in kbps."
+    preferredAudioQuality: RecordingQuality!
+    "The name of the region, such as the province, state, or district."
+    province: String
+    "The user's administrative roles."
+    roles: [UserLanguageRole!]!
+    "The user's last name."
+    surname: String
+    "The user's timezone."
+    timezone: Timezone!
+}
+
+type UserConnection {
+    aggregate: Aggregate
+    edges: [UserEdge!]
+    nodes: [User!]
+    pageInfo: PageInfo!
+}
+
+type UserEdge {
+    cursor: String!
+    node: User!
+}
+
+type UserLanguageRole {
+    "The language scope for this role."
+    language: Language!
+    "The  administrative role."
+    role: UserRole!
+}
+
+type UserPayload {
+    errors: [InputValidationError!]!
+    user: User
+}
+
+type UserPlaylist implements Node {
+    hasRecording(id: ID!): Boolean!
+    id: ID!
+    isPublic: Boolean!
+    language: Language!
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires catalog role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "Deprecated: presenterId is replaced with person."
+        presenterId: ID,
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires catalog role."
+        stage: RecordingStage,
+        "The name of the tag to filter the recordings by."
+        tagName: String,
+        websiteIds: [ID!]
+    ): RecordingConnection!
+    summary: String!
+    title: String!
+}
+
+type UserPlaylistConnection {
+    aggregate: Aggregate
+    edges: [UserPlaylistEdge!]
+    nodes: [UserPlaylist!]
+    pageInfo: PageInfo!
+}
+
+type UserPlaylistEdge {
+    cursor: String!
+    node: UserPlaylist!
+}
+
+type VideoFile implements Node {
+    bitrate: Int!
+    container: String!
+    duration: Float!
+    filename: String!
+    "In bytes"
+    filesize: String!
+    height: Int!
+    id: ID!
+    "The URL to record video views for analytics."
+    logUrl: URL
+    mimeType: String!
+    recording: Recording!
+    url: URL!
+    width: Int!
+}
+
+type Website implements Node {
+    id: ID!
+    title: String!
+}
+
+type WebsiteConnection {
+    aggregate: Aggregate
+    edges: [WebsiteEdge!]
+    nodes: [Website!]
+    pageInfo: PageInfo!
+}
+
+type WebsiteEdge {
+    cursor: String!
+    node: Website!
+}
+
+enum BibleReferenceBook {
+    ACTS
+    AMOS
+    COLOSSIANS
+    DANIEL
+    DEUTERONOMY
+    ECCLESIASTES
+    EPHESIANS
+    ESTHER
+    EXODUS
+    EZEKIEL
+    EZRA
+    FIRST_CHRONICLES
+    FIRST_CORINTHIANS
+    FIRST_JOHN
+    FIRST_KINGS
+    FIRST_PETER
+    FIRST_SAMUEL
+    FIRST_THESSALONIANS
+    FIRST_TIMOTHY
+    GALATIANS
+    GENESIS
+    HABAKKUK
+    HAGGAI
+    HEBREWS
+    HOSEA
+    ISAIAH
+    JAMES
+    JEREMIAH
+    JOB
+    JOEL
+    JOHN
+    JONAH
+    JOSHUA
+    JUDE
+    JUDGES
+    LAMENTATIONS
+    LEVITICUS
+    LUKE
+    MALACHI
+    MARK
+    MATTHEW
+    MICAH
+    NAHUM
+    NEHEMIAH
+    NUMBERS
+    OBADIAH
+    PHILEMON
+    PHILIPPIANS
+    PROVERBS
+    PSALMS
+    REVELATION
+    ROMANS
+    RUTH
+    SECOND_CHRONICLES
+    SECOND_CORINTHIANS
+    SECOND_JOHN
+    SECOND_KINGS
+    SECOND_PETER
+    SECOND_SAMUEL
+    SECOND_THESSALONIANS
+    SECOND_TIMOTHY
+    SONG_OF_SOLOMON
+    THIRD_JOHN
+    TITUS
+    ZECHARIAH
+    ZEPHANIAH
+}
+
+"Properties by which blog post connections can be ordered."
+enum BlogPostSortableField {
+    PUBLISHED_AT
+}
+
+"Properties by which history item connections can be ordered."
+enum CatalogHistoryItemSortableField {
+    CREATED_AT
+}
+
+"The supported types of catalog history items."
+enum CatalogHistoryItemType {
+    INTERNAL_COMMENT
+    SPONSOR_CHANGED
+}
+
+"The available types of collections."
+enum CollectionContentType {
+    AUDIOBOOK_SERIES
+    CONFERENCE
+    MUSIC_SERIES
+    STORY_PROGRAM
+}
+
+"Properties by which collection connections can be ordered."
+enum CollectionsSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"Properties by which distribution agreement connections can be ordered."
+enum DistributionAgreementsSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"The available image type containers."
+enum ImageContainer {
+    COLLECTION
+    LICENSE
+    NEWS
+    PERSON
+    SEQUENCE
+    SPONSOR
+}
+
+"Supported languages"
+enum Language {
+    CHINESE
+    ENGLISH
+    FRENCH
+    GERMAN
+    JAPANESE
+    RUSSIAN
+    SPANISH
+}
+
+"Properties by which license connections can be ordered."
+enum LicensesSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"The media file container types."
+enum MediaFileContainer {
+    DOC
+    DOCX
+    FLV
+    JPG
+    KEY
+    M3U8_IOS
+    M3U8_WEB
+    M4A
+    M4V
+    MOV
+    MP3
+    MP4
+    ODP
+    ODT
+    PAGES
+    PDF
+    PNG
+    PPT
+    PPTX
+    WAV
+    WMA
+    WMV
+}
+
+"Properties by which media release form connections can be ordered."
+enum MediaReleaseFormSortableField {
+    CREATED_AT
+    ID
+    TITLE
+    TYPE
+}
+
+"Supported types of media releases."
+enum MediaReleaseFormType {
+    COLLECTION
+    MASTER
+    RECORDING
+    SEQUENCE
+    SPONSOR
+}
+
+"Properties by which media release connections can be ordered."
+enum MediaReleaseSortableField {
+    CREATED_AT
+    GIVEN_NAME
+    ID
+    SURNAME
+}
+
+"Possible directions in which to order a list of items when provided an `orderBy` argument."
+enum OrderByDirection {
+    ASC
+    DESC
+}
+
+"The roles a Person can hold."
+enum PersonsRoleField {
+    ARTIST
+    AUTHOR
+    COMPOSER
+    NARRATOR
+    SPEAKER
+    TRANSLATOR
+    WRITER
+}
+
+"Properties by which person connections can be ordered."
+enum PersonsSortableField {
+    CREATED_AT
+    ID
+    NAME
+}
+
+"The content screening evaluation recommendations for a recording."
+enum RecordingContentScreeningEvaluationRecommendation {
+    APPROVE
+    NEEDS_EDITING
+    PENDING
+    REJECT
+}
+
+"The content screening statuses of a recording."
+enum RecordingContentScreeningStatus {
+    "Approved by admin override"
+    ADMIN_OVERRIDE
+    "Approved by screener consensus"
+    APPROVED
+    "Awaiting final authorization (Screener consensus)"
+    APPROVED_PENDING_AUTHORIZATION
+    "Awaiting screener consensus"
+    PENDING_CONSENSUS
+    "Awaiting more evaluations"
+    PENDING_EVALUATIONS
+    "Awaiting re-evaluation"
+    PENDING_REEVALUATION
+    "Approved by pre-approval"
+    PREAPPROVED
+    "Awaiting final authorization (Pre-approved)"
+    PREAPPROVED_PENDING_AUTHORIZATION
+    "Rejected by screener consensus"
+    REJECTED
+    "Screening not yet begun"
+    UNEVALUATED
+}
+
+"The available types of recordings."
+enum RecordingContentType {
+    AUDIOBOOK_TRACK
+    MUSIC_TRACK
+    SERMON
+    STORY
+}
+
+"The legal screening statuses of a recording."
+enum RecordingLegalScreeningStatus {
+    APPROVED
+    PENDING
+    "Awaiting re-evaluation"
+    PENDING_REEVALUATION
+    REJECTED
+    "Not Yet Begun"
+    UNEVALUATED
+}
+
+"The available bitrates of recordings."
+enum RecordingQuality {
+    HIGHEST
+    LOW
+    LOWEST
+}
+
+"The recording screening issue categories."
+enum RecordingScreeningIssueCategory {
+    "General Issues"
+    GENERAL
+    "Spirit of AudioVerse"
+    SPIRIT_OF_AUDIOVERSE
+    "Technical Issues"
+    TECHNICAL
+}
+
+"The applicable recording format for the screening issue."
+enum RecordingScreeningIssueTarget {
+    AUDIO
+    VIDEO
+}
+
+"Properties by which recording screening issue connections can be ordered."
+enum RecordingScreeningIssuesSortableField {
+    CREATED_AT
+    ID
+}
+
+"The supported screening evaluation methods."
+enum RecordingScreeningMethod {
+    LIVE
+    RECORDING
+    THIRD_PARTY_INFO
+    TRANSCRIPT
+}
+
+"The stages a recording may be in."
+enum RecordingStage {
+    DRAFT
+    PUBLISHED
+    SCHEDULING
+    SCREENING
+    WITHDRAWN
+}
+
+"The technical screening statuses of a recording."
+enum RecordingTechnicalScreeningStatus {
+    APPROVED
+    PENDING
+    "Awaiting re-evaluation"
+    PENDING_REEVALUATION
+    REJECTED
+    "Not Yet Begun"
+    UNEVALUATED
+}
+
+"Properties by which recording connections can be ordered."
+enum RecordingsSortableField {
+    COLLECTION_TITLE
+    CREATED_AT
+    ID
+    PUBLISHED_AT
+    RECORDED_AT
+    SEQUENCE_TITLE
+    SPONSOR_TITLE
+    TITLE
+}
+
+"The available types of sequence."
+enum SequenceContentType {
+    AUDIOBOOK
+    MUSIC_ALBUM
+    SERIES
+    STORY_SEASON
+}
+
+"Properties by which sequence connections can be ordered."
+enum SequenceSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"Properties by which sponsor connections can be ordered."
+enum SponsorsSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"Properties by which testimony connections can be ordered."
+enum TestimoniesSortableField {
+    WRITTEN_DATE
+}
+
+"The supported timezones."
+enum Timezone {
+    AFRICA_ABIDJAN
+    AFRICA_ACCRA
+    AFRICA_ADDIS_ABABA
+    AFRICA_ALGIERS
+    AFRICA_ASMARA
+    AFRICA_ASMERA
+    AFRICA_BAMAKO
+    AFRICA_BANGUI
+    AFRICA_BANJUL
+    AFRICA_BISSAU
+    AFRICA_BLANTYRE
+    AFRICA_BRAZZAVILLE
+    AFRICA_BUJUMBURA
+    AFRICA_CAIRO
+    AFRICA_CASABLANCA
+    AFRICA_CEUTA
+    AFRICA_CONAKRY
+    AFRICA_DAKAR
+    AFRICA_DAR_ES_SALAAM
+    AFRICA_DJIBOUTI
+    AFRICA_DOUALA
+    AFRICA_EL_AAIUN
+    AFRICA_FREETOWN
+    AFRICA_GABORONE
+    AFRICA_HARARE
+    AFRICA_JOHANNESBURG
+    AFRICA_JUBA
+    AFRICA_KAMPALA
+    AFRICA_KHARTOUM
+    AFRICA_KIGALI
+    AFRICA_KINSHASA
+    AFRICA_LAGOS
+    AFRICA_LIBREVILLE
+    AFRICA_LOME
+    AFRICA_LUANDA
+    AFRICA_LUBUMBASHI
+    AFRICA_LUSAKA
+    AFRICA_MALABO
+    AFRICA_MAPUTO
+    AFRICA_MASERU
+    AFRICA_MBABANE
+    AFRICA_MOGADISHU
+    AFRICA_MONROVIA
+    AFRICA_NAIROBI
+    AFRICA_NDJAMENA
+    AFRICA_NIAMEY
+    AFRICA_NOUAKCHOTT
+    AFRICA_OUAGADOUGOU
+    AFRICA_PORTO_NOVO
+    AFRICA_SAO_TOME
+    AFRICA_TIMBUKTU
+    AFRICA_TRIPOLI
+    AFRICA_TUNIS
+    AFRICA_WINDHOEK
+    AMERICA_ADAK
+    AMERICA_ANCHORAGE
+    AMERICA_ANGUILLA
+    AMERICA_ANTIGUA
+    AMERICA_ARAGUAINA
+    AMERICA_ARGENTINA_BUENOS_AIRES
+    AMERICA_ARGENTINA_CATAMARCA
+    AMERICA_ARGENTINA_COMODRIVADAVIA
+    AMERICA_ARGENTINA_CORDOBA
+    AMERICA_ARGENTINA_JUJUY
+    AMERICA_ARGENTINA_LA_RIOJA
+    AMERICA_ARGENTINA_MENDOZA
+    AMERICA_ARGENTINA_RIO_GALLEGOS
+    AMERICA_ARGENTINA_SALTA
+    AMERICA_ARGENTINA_SAN_JUAN
+    AMERICA_ARGENTINA_SAN_LUIS
+    AMERICA_ARGENTINA_TUCUMAN
+    AMERICA_ARGENTINA_USHUAIA
+    AMERICA_ARUBA
+    AMERICA_ASUNCION
+    AMERICA_ATIKOKAN
+    AMERICA_ATKA
+    AMERICA_BAHIA
+    AMERICA_BAHIA_BANDERAS
+    AMERICA_BARBADOS
+    AMERICA_BELEM
+    AMERICA_BELIZE
+    AMERICA_BLANC_SABLON
+    AMERICA_BOA_VISTA
+    AMERICA_BOGOTA
+    AMERICA_BOISE
+    AMERICA_BUENOS_AIRES
+    AMERICA_CAMBRIDGE_BAY
+    AMERICA_CAMPO_GRANDE
+    AMERICA_CANCUN
+    AMERICA_CARACAS
+    AMERICA_CATAMARCA
+    AMERICA_CAYENNE
+    AMERICA_CAYMAN
+    AMERICA_CHICAGO
+    AMERICA_CHIHUAHUA
+    AMERICA_CORAL_HARBOUR
+    AMERICA_CORDOBA
+    AMERICA_COSTA_RICA
+    AMERICA_CRESTON
+    AMERICA_CUIABA
+    AMERICA_CURACAO
+    AMERICA_DANMARKSHAVN
+    AMERICA_DAWSON
+    AMERICA_DAWSON_CREEK
+    AMERICA_DENVER
+    AMERICA_DETROIT
+    AMERICA_DOMINICA
+    AMERICA_EDMONTON
+    AMERICA_EIRUNEPE
+    AMERICA_EL_SALVADOR
+    AMERICA_ENSENADA
+    AMERICA_FORTALEZA
+    AMERICA_FORT_NELSON
+    AMERICA_FORT_WAYNE
+    AMERICA_GLACE_BAY
+    AMERICA_GODTHAB
+    AMERICA_GOOSE_BAY
+    AMERICA_GRAND_TURK
+    AMERICA_GRENADA
+    AMERICA_GUADELOUPE
+    AMERICA_GUATEMALA
+    AMERICA_GUAYAQUIL
+    AMERICA_GUYANA
+    AMERICA_HALIFAX
+    AMERICA_HAVANA
+    AMERICA_HERMOSILLO
+    AMERICA_INDIANAPOLIS
+    AMERICA_INDIANA_INDIANAPOLIS
+    AMERICA_INDIANA_KNOX
+    AMERICA_INDIANA_MARENGO
+    AMERICA_INDIANA_PETERSBURG
+    AMERICA_INDIANA_TELL_CITY
+    AMERICA_INDIANA_VEVAY
+    AMERICA_INDIANA_VINCENNES
+    AMERICA_INDIANA_WINAMAC
+    AMERICA_INUVIK
+    AMERICA_IQALUIT
+    AMERICA_JAMAICA
+    AMERICA_JUJUY
+    AMERICA_JUNEAU
+    AMERICA_KENTUCKY_LOUISVILLE
+    AMERICA_KENTUCKY_MONTICELLO
+    AMERICA_KNOX_IN
+    AMERICA_KRALENDIJK
+    AMERICA_LA_PAZ
+    AMERICA_LIMA
+    AMERICA_LOS_ANGELES
+    AMERICA_LOUISVILLE
+    AMERICA_LOWER_PRINCES
+    AMERICA_MACEIO
+    AMERICA_MANAGUA
+    AMERICA_MANAUS
+    AMERICA_MARIGOT
+    AMERICA_MARTINIQUE
+    AMERICA_MATAMOROS
+    AMERICA_MAZATLAN
+    AMERICA_MENDOZA
+    AMERICA_MENOMINEE
+    AMERICA_MERIDA
+    AMERICA_METLAKATLA
+    AMERICA_MEXICO_CITY
+    AMERICA_MIQUELON
+    AMERICA_MONCTON
+    AMERICA_MONTERREY
+    AMERICA_MONTEVIDEO
+    AMERICA_MONTREAL
+    AMERICA_MONTSERRAT
+    AMERICA_NASSAU
+    AMERICA_NEW_YORK
+    AMERICA_NIPIGON
+    AMERICA_NOME
+    AMERICA_NORONHA
+    AMERICA_NORTH_DAKOTA_BEULAH
+    AMERICA_NORTH_DAKOTA_CENTER
+    AMERICA_NORTH_DAKOTA_NEW_SALEM
+    AMERICA_NUUK
+    AMERICA_OJINAGA
+    AMERICA_PANAMA
+    AMERICA_PANGNIRTUNG
+    AMERICA_PARAMARIBO
+    AMERICA_PHOENIX
+    AMERICA_PORTO_ACRE
+    AMERICA_PORTO_VELHO
+    AMERICA_PORT_AU_PRINCE
+    AMERICA_PORT_OF_SPAIN
+    AMERICA_PUERTO_RICO
+    AMERICA_PUNTA_ARENAS
+    AMERICA_RAINY_RIVER
+    AMERICA_RANKIN_INLET
+    AMERICA_RECIFE
+    AMERICA_REGINA
+    AMERICA_RESOLUTE
+    AMERICA_RIO_BRANCO
+    AMERICA_ROSARIO
+    AMERICA_SANTAREM
+    AMERICA_SANTA_ISABEL
+    AMERICA_SANTIAGO
+    AMERICA_SANTO_DOMINGO
+    AMERICA_SAO_PAULO
+    AMERICA_SCORESBYSUND
+    AMERICA_SHIPROCK
+    AMERICA_SITKA
+    AMERICA_ST_BARTHELEMY
+    AMERICA_ST_JOHNS
+    AMERICA_ST_KITTS
+    AMERICA_ST_LUCIA
+    AMERICA_ST_THOMAS
+    AMERICA_ST_VINCENT
+    AMERICA_SWIFT_CURRENT
+    AMERICA_TEGUCIGALPA
+    AMERICA_THULE
+    AMERICA_THUNDER_BAY
+    AMERICA_TIJUANA
+    AMERICA_TORONTO
+    AMERICA_TORTOLA
+    AMERICA_VANCOUVER
+    AMERICA_VIRGIN
+    AMERICA_WHITEHORSE
+    AMERICA_WINNIPEG
+    AMERICA_YAKUTAT
+    AMERICA_YELLOWKNIFE
+    ANTARCTICA_CASEY
+    ANTARCTICA_DAVIS
+    ANTARCTICA_DUMONTDURVILLE
+    ANTARCTICA_MACQUARIE
+    ANTARCTICA_MAWSON
+    ANTARCTICA_MCMURDO
+    ANTARCTICA_PALMER
+    ANTARCTICA_ROTHERA
+    ANTARCTICA_SOUTH_POLE
+    ANTARCTICA_SYOWA
+    ANTARCTICA_TROLL
+    ANTARCTICA_VOSTOK
+    ARCTIC_LONGYEARBYEN
+    ASIA_ADEN
+    ASIA_ALMATY
+    ASIA_AMMAN
+    ASIA_ANADYR
+    ASIA_AQTAU
+    ASIA_AQTOBE
+    ASIA_ASHGABAT
+    ASIA_ASHKHABAD
+    ASIA_ATYRAU
+    ASIA_BAGHDAD
+    ASIA_BAHRAIN
+    ASIA_BAKU
+    ASIA_BANGKOK
+    ASIA_BARNAUL
+    ASIA_BEIRUT
+    ASIA_BISHKEK
+    ASIA_BRUNEI
+    ASIA_CALCUTTA
+    ASIA_CHITA
+    ASIA_CHOIBALSAN
+    ASIA_CHONGQING
+    ASIA_CHUNGKING
+    ASIA_COLOMBO
+    ASIA_DACCA
+    ASIA_DAMASCUS
+    ASIA_DHAKA
+    ASIA_DILI
+    ASIA_DUBAI
+    ASIA_DUSHANBE
+    ASIA_FAMAGUSTA
+    ASIA_GAZA
+    ASIA_HARBIN
+    ASIA_HEBRON
+    ASIA_HONG_KONG
+    ASIA_HOVD
+    ASIA_HO_CHI_MINH
+    ASIA_IRKUTSK
+    ASIA_ISTANBUL
+    ASIA_JAKARTA
+    ASIA_JAYAPURA
+    ASIA_JERUSALEM
+    ASIA_KABUL
+    ASIA_KAMCHATKA
+    ASIA_KARACHI
+    ASIA_KASHGAR
+    ASIA_KATHMANDU
+    ASIA_KATMANDU
+    ASIA_KHANDYGA
+    ASIA_KOLKATA
+    ASIA_KRASNOYARSK
+    ASIA_KUALA_LUMPUR
+    ASIA_KUCHING
+    ASIA_KUWAIT
+    ASIA_MACAO
+    ASIA_MACAU
+    ASIA_MAGADAN
+    ASIA_MAKASSAR
+    ASIA_MANILA
+    ASIA_MUSCAT
+    ASIA_NICOSIA
+    ASIA_NOVOKUZNETSK
+    ASIA_NOVOSIBIRSK
+    ASIA_OMSK
+    ASIA_ORAL
+    ASIA_PHNOM_PENH
+    ASIA_PONTIANAK
+    ASIA_PYONGYANG
+    ASIA_QATAR
+    ASIA_QOSTANAY
+    ASIA_QYZYLORDA
+    ASIA_RANGOON
+    ASIA_RIYADH
+    ASIA_SAIGON
+    ASIA_SAKHALIN
+    ASIA_SAMARKAND
+    ASIA_SEOUL
+    ASIA_SHANGHAI
+    ASIA_SINGAPORE
+    ASIA_SREDNEKOLYMSK
+    ASIA_TAIPEI
+    ASIA_TASHKENT
+    ASIA_TBILISI
+    ASIA_TEHRAN
+    ASIA_TEL_AVIV
+    ASIA_THIMBU
+    ASIA_THIMPHU
+    ASIA_TOKYO
+    ASIA_TOMSK
+    ASIA_UJUNG_PANDANG
+    ASIA_ULAANBAATAR
+    ASIA_ULAN_BATOR
+    ASIA_URUMQI
+    ASIA_UST_NERA
+    ASIA_VIENTIANE
+    ASIA_VLADIVOSTOK
+    ASIA_YAKUTSK
+    ASIA_YANGON
+    ASIA_YEKATERINBURG
+    ASIA_YEREVAN
+    ATLANTIC_AZORES
+    ATLANTIC_BERMUDA
+    ATLANTIC_CANARY
+    ATLANTIC_CAPE_VERDE
+    ATLANTIC_FAEROE
+    ATLANTIC_FAROE
+    ATLANTIC_JAN_MAYEN
+    ATLANTIC_MADEIRA
+    ATLANTIC_REYKJAVIK
+    ATLANTIC_SOUTH_GEORGIA
+    ATLANTIC_STANLEY
+    ATLANTIC_ST_HELENA
+    AUSTRALIA_ACT
+    AUSTRALIA_ADELAIDE
+    AUSTRALIA_BRISBANE
+    AUSTRALIA_BROKEN_HILL
+    AUSTRALIA_CANBERRA
+    AUSTRALIA_CURRIE
+    AUSTRALIA_DARWIN
+    AUSTRALIA_EUCLA
+    AUSTRALIA_HOBART
+    AUSTRALIA_LHI
+    AUSTRALIA_LINDEMAN
+    AUSTRALIA_LORD_HOWE
+    AUSTRALIA_MELBOURNE
+    AUSTRALIA_NORTH
+    AUSTRALIA_NSW
+    AUSTRALIA_PERTH
+    AUSTRALIA_QUEENSLAND
+    AUSTRALIA_SOUTH
+    AUSTRALIA_SYDNEY
+    AUSTRALIA_TASMANIA
+    AUSTRALIA_VICTORIA
+    AUSTRALIA_WEST
+    AUSTRALIA_YANCOWINNA
+    BRAZIL_ACRE
+    BRAZIL_DENORONHA
+    BRAZIL_EAST
+    BRAZIL_WEST
+    CANADA_ATLANTIC
+    CANADA_CENTRAL
+    CANADA_EASTERN
+    CANADA_MOUNTAIN
+    CANADA_NEWFOUNDLAND
+    CANADA_PACIFIC
+    CANADA_SASKATCHEWAN
+    CANADA_YUKON
+    CHILE_CONTINENTAL
+    CHILE_EASTERISLAND
+    ETC_GREENWICH
+    ETC_UCT
+    ETC_UNIVERSAL
+    ETC_UTC
+    ETC_ZULU
+    EUROPE_AMSTERDAM
+    EUROPE_ANDORRA
+    EUROPE_ASTRAKHAN
+    EUROPE_ATHENS
+    EUROPE_BELFAST
+    EUROPE_BELGRADE
+    EUROPE_BERLIN
+    EUROPE_BRATISLAVA
+    EUROPE_BRUSSELS
+    EUROPE_BUCHAREST
+    EUROPE_BUDAPEST
+    EUROPE_BUSINGEN
+    EUROPE_CHISINAU
+    EUROPE_COPENHAGEN
+    EUROPE_DUBLIN
+    EUROPE_GIBRALTAR
+    EUROPE_GUERNSEY
+    EUROPE_HELSINKI
+    EUROPE_ISLE_OF_MAN
+    EUROPE_ISTANBUL
+    EUROPE_JERSEY
+    EUROPE_KALININGRAD
+    EUROPE_KIEV
+    EUROPE_KIROV
+    EUROPE_LISBON
+    EUROPE_LJUBLJANA
+    EUROPE_LONDON
+    EUROPE_LUXEMBOURG
+    EUROPE_MADRID
+    EUROPE_MALTA
+    EUROPE_MARIEHAMN
+    EUROPE_MINSK
+    EUROPE_MONACO
+    EUROPE_MOSCOW
+    EUROPE_NICOSIA
+    EUROPE_OSLO
+    EUROPE_PARIS
+    EUROPE_PODGORICA
+    EUROPE_PRAGUE
+    EUROPE_RIGA
+    EUROPE_ROME
+    EUROPE_SAMARA
+    EUROPE_SAN_MARINO
+    EUROPE_SARAJEVO
+    EUROPE_SARATOV
+    EUROPE_SIMFEROPOL
+    EUROPE_SKOPJE
+    EUROPE_SOFIA
+    EUROPE_STOCKHOLM
+    EUROPE_TALLINN
+    EUROPE_TIRANE
+    EUROPE_TIRASPOL
+    EUROPE_ULYANOVSK
+    EUROPE_UZHGOROD
+    EUROPE_VADUZ
+    EUROPE_VATICAN
+    EUROPE_VIENNA
+    EUROPE_VILNIUS
+    EUROPE_VOLGOGRAD
+    EUROPE_WARSAW
+    EUROPE_ZAGREB
+    EUROPE_ZAPOROZHYE
+    EUROPE_ZURICH
+    INDIAN_ANTANANARIVO
+    INDIAN_CHAGOS
+    INDIAN_CHRISTMAS
+    INDIAN_COCOS
+    INDIAN_COMORO
+    INDIAN_KERGUELEN
+    INDIAN_MAHE
+    INDIAN_MALDIVES
+    INDIAN_MAURITIUS
+    INDIAN_MAYOTTE
+    INDIAN_REUNION
+    MEXICO_BAJANORTE
+    MEXICO_BAJASUR
+    MEXICO_GENERAL
+    PACIFIC_APIA
+    PACIFIC_AUCKLAND
+    PACIFIC_BOUGAINVILLE
+    PACIFIC_CHATHAM
+    PACIFIC_CHUUK
+    PACIFIC_EASTER
+    PACIFIC_EFATE
+    PACIFIC_ENDERBURY
+    PACIFIC_FAKAOFO
+    PACIFIC_FIJI
+    PACIFIC_FUNAFUTI
+    PACIFIC_GALAPAGOS
+    PACIFIC_GAMBIER
+    PACIFIC_GUADALCANAL
+    PACIFIC_GUAM
+    PACIFIC_HONOLULU
+    PACIFIC_JOHNSTON
+    PACIFIC_KIRITIMATI
+    PACIFIC_KOSRAE
+    PACIFIC_KWAJALEIN
+    PACIFIC_MAJURO
+    PACIFIC_MARQUESAS
+    PACIFIC_MIDWAY
+    PACIFIC_NAURU
+    PACIFIC_NIUE
+    PACIFIC_NORFOLK
+    PACIFIC_NOUMEA
+    PACIFIC_PAGO_PAGO
+    PACIFIC_PALAU
+    PACIFIC_PITCAIRN
+    PACIFIC_POHNPEI
+    PACIFIC_PONAPE
+    PACIFIC_PORT_MORESBY
+    PACIFIC_RAROTONGA
+    PACIFIC_SAIPAN
+    PACIFIC_SAMOA
+    PACIFIC_TAHITI
+    PACIFIC_TARAWA
+    PACIFIC_TONGATAPU
+    PACIFIC_TRUK
+    PACIFIC_WAKE
+    PACIFIC_WALLIS
+    PACIFIC_YAP
+    US_ALASKA
+    US_ALEUTIAN
+    US_ARIZONA
+    US_CENTRAL
+    US_EASTERN
+    US_EAST_INDIANA
+    US_HAWAII
+    US_INDIANA_STARKE
+    US_MICHIGAN
+    US_MOUNTAIN
+    US_PACIFIC
+    US_SAMOA
+}
+
+"User languages"
+enum UserLanguage {
+    ABKHAZIAN
+    AFRIKAANS
+    AKAN
+    AMHARIC
+    BOKMAL
+    BURMESE
+    CEBUANO
+    CHINESE
+    CROATIAN
+    CZECH
+    DANISH
+    DINKA
+    DUTCH
+    ENGLISH
+    ERZYA
+    FILIPINO
+    FINNISH
+    FRENCH
+    GERMAN
+    GREEK
+    HAITIAN
+    HEBREW
+    HINDI
+    HUNGARIAN
+    INDONESIAN
+    ITALIAN
+    KIKUYU
+    KOREAN
+    LATVIAN
+    LUO
+    MALAY
+    MONGOLIAN
+    NEPALI
+    NORWEGIAN
+    PHILIPPINE
+    POLISH
+    PORTUGUESE
+    ROMANIAN
+    RUSSIAN
+    SAMOAN
+    SHAN
+    SHONA
+    SLOVENIAN
+    SPANISH
+    SWAHILI
+    SWEDISH
+    TAGALOG
+    TAMIL
+    TSWANA
+    TWI
+    XHOSA
+    ZULU
+}
+
+"Properties by which a user's playlists connection can be ordered."
+enum UserPlaylistsSortableField {
+    CREATED_AT
+    ID
+    TITLE
+}
+
+"The administrative roles a user may hold."
+enum UserRole {
+    "Language Administrator"
+    ADMINISTRATION
+    COMMUNICATIONS @deprecated(reason : "No longer used.")
+    CONTENT_SCREENER
+    EDITOR
+    EQUIPMENT @deprecated(reason : "No longer used.")
+    LEGAL_SCREENER
+    MEDIAMANAGER @deprecated(reason : "No longer used.")
+    STATS @deprecated(reason : "No longer used.")
+    TECHNICAL_SCREENER
+}
+
+"The supported social login services."
+enum UserSocialServiceName {
+    APPLE
+    FACEBOOK
+    GOOGLE
+}
+
+"Properties by which user connections can be ordered."
+enum UsersSortableField {
+    CREATED_AT
+    EMAIL
+    ID
+}
+
+"A Bible reference."
+input BibleReferenceInput {
+    book: BibleReferenceBook!
+    chapter: Int
+    verse: Int
+}
+
+"The Bible reference range the items must fall in to be applicable."
+input BibleReferenceRangeInput {
+    "The end reference."
+    endReference: BibleReferenceInput
+    "The start reference."
+    startReference: BibleReferenceInput!
+}
+
+input BlogPostOrder {
+    direction: OrderByDirection!
+    field: BlogPostSortableField!
+}
+
+input CatalogHistoryCommentCreateInput {
+    isSticky: Boolean
+    "Can include mentions in the format of @user:[id] (e.g., `@user:123`)."
+    message: String!
+}
+
+input CatalogHistoryCommentUpdateInput {
+    isSticky: Boolean
+    "Can include mentions in the format of @user:[id] (e.g., `@user:123`)."
+    message: String!
+}
+
+input CatalogHistoryItemOrder {
+    direction: OrderByDirection!
+    field: CatalogHistoryItemSortableField!
+}
+
+input CollectionCreateInput {
+    contentType: CollectionContentType!
+    description: String
+    hidingReason: String
+    image: ImageInput
+    isHidden: Boolean
+    location: String
+    notes: String
+    sponsorId: ID!
+    summary: String
+    title: String!
+}
+
+input CollectionUpdateInput {
+    description: String
+    hidingReason: String
+    image: ImageInput
+    isHidden: Boolean
+    location: String
+    notes: String
+    sponsorId: ID
+    summary: String
+    title: String
+}
+
+input CollectionsOrder {
+    direction: OrderByDirection!
+    field: CollectionsSortableField!
+}
+
+"The date range the items must fall in to be applicable."
+input DateRangeInput {
+    "The lower bound of the date range."
+    greaterThan: Date
+    "The lower or equal bound of the date range."
+    greaterThanOrEqualTo: Date
+    "The upper bound of the date range."
+    lessThan: Date
+    "The upper or equal bound of the date range."
+    lessThanOrEqualTo: Date
+}
+
+input DistributionAgreementCreateInput {
+    isDefault: Boolean
+    isHidden: Boolean
+    isRetired: Boolean
+    licenseId: ID!
+    notes: String
+    sponsorId: ID!
+    summary: String
+    title: String!
+}
+
+input DistributionAgreementUpdateInput {
+    isDefault: Boolean
+    isHidden: Boolean
+    isRetired: Boolean
+    licenseId: ID
+    notes: String
+    sponsorId: ID
+    summary: String
+    title: String
+}
+
+input DistributionAgreementsOrder {
+    direction: OrderByDirection!
+    field: DistributionAgreementsSortableField!
+}
+
+input ImageInput {
+    name: String!
+}
+
+input InternalContactInput {
+    address: String
+    email: String
+    name: String
+    phone: String
+}
+
+input LicenseCreateInput {
+    description: String
+    image: ImageInput
+    isDefault: Boolean
+    isHidden: Boolean
+    language: Language!
+    notes: String
+    permitsSales: Boolean
+    summary: String
+    title: String!
+}
+
+input LicenseUpdateInput {
+    description: String
+    image: ImageInput
+    isDefault: Boolean
+    isHidden: Boolean
+    notes: String
+    permitsSales: Boolean
+    summary: String
+    title: String
+}
+
+input LicensesOrder {
+    direction: OrderByDirection!
+    field: LicensesSortableField!
+}
+
+input MediaReleaseCreateInput {
+    mediaReleaseFormId: ID!
+    "The personal information collected with the media release."
+    mediaReleasePerson: MediaReleasePersonCreateInput!
+    notes: String
+    "The catalog person associated with the media release."
+    personId: ID
+}
+
+input MediaReleaseFormCreateInput {
+    "Required if `type` is `COLLECTION`."
+    collectionId: ID
+    isClosed: Boolean
+    language: Language!
+    "Required if `type` is `RECORDING`."
+    recordingId: ID
+    "Required if `type` is `SEQUENCE`."
+    sequenceId: ID
+    "Required if `type` is `SPONSOR`."
+    sponsorId: ID
+    summary: String!
+    title: String!
+    type: MediaReleaseFormType!
+}
+
+input MediaReleaseFormOrder {
+    direction: OrderByDirection!
+    field: MediaReleaseFormSortableField!
+}
+
+input MediaReleaseFormUpdateInput {
+    "Required if `type` is `COLLECTION`."
+    collectionId: ID
+    isClosed: Boolean
+    "Required if `type` is `RECORDING`."
+    recordingId: ID
+    "Required if `type` is `SEQUENCE`."
+    sequenceId: ID
+    "Required if `type` is `SPONSOR`."
+    sponsorId: ID
+    summary: String
+    title: String
+    type: MediaReleaseFormType
+}
+
+input MediaReleaseOrder {
+    direction: OrderByDirection!
+    field: MediaReleaseSortableField!
+}
+
+input MediaReleasePersonCreateInput {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String!
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "The name of the city, district, village, or town."
+    city: String!
+    "The name of the country."
+    country: String!
+    "The person's email address."
+    email: String!
+    "The person's first name."
+    givenName: String!
+    "The person's phone number."
+    phone: String!
+    "The postal or zip code."
+    postalCode: String!
+    "The name of the region, such as the province, state, or district."
+    province: String!
+    "The person's last name."
+    surname: String!
+}
+
+input MediaReleasePersonUpdateInput {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "The name of the city, district, village, or town."
+    city: String
+    "The name of the country."
+    country: String
+    "The person's email address."
+    email: String
+    "The person's first name."
+    givenName: String
+    "The person's phone number."
+    phone: String
+    "The postal or zip code."
+    postalCode: String
+    "The name of the region, such as the province, state, or district."
+    province: String
+    "The person's last name."
+    surname: String
+}
+
+input MediaReleaseUpdateInput {
+    "The personal information collected with the media release."
+    mediaReleasePerson: MediaReleasePersonUpdateInput
+    notes: String
+    "The catalog person associated with the media release."
+    personId: ID
+}
+
+input PersonCreateInput {
+    address: String
+    description: String
+    designations: String
+    email: String
+    givenName: String!
+    hidingReason: String
+    image: ImageInput
+    internalContact: InternalContactInput
+    isHidden: Boolean
+    isPreapproved: Boolean
+    language: Language!
+    notes: String
+    phone: String
+    suffix: String
+    summary: String
+    surname: String!
+    title: String
+    website: URL
+}
+
+input PersonUpdateInput {
+    address: String
+    description: String
+    designations: String
+    email: String
+    givenName: String
+    hidingReason: String
+    image: ImageInput
+    internalContact: InternalContactInput
+    isHidden: Boolean
+    isPreapproved: Boolean
+    notes: String
+    phone: String
+    suffix: String
+    summary: String
+    surname: String
+    title: String
+    website: URL
+}
+
+input PersonsOrder {
+    direction: OrderByDirection!
+    field: PersonsSortableField!
+}
+
+input RecordingCreateInput {
+    bibleReferences: [BibleReferenceRangeInput!]
+    collectionId: ID
+    contentType: RecordingContentType!
+    copyrightYear: Int
+    description: String
+    distributionAgreementId: ID!
+    hidingReason: String
+    isDownloadAllowed: Boolean
+    isFeatured: Boolean
+    isHidden: Boolean
+    notes: String
+    publishDate: DateTime
+    recordingDate: DateTime
+    recordingPersons: [RecordingPersonRoleInput!]
+    recordingTags: [RecordingTagInput!]
+    sequenceId: ID
+    sponsorId: ID!
+    title: String!
+    websiteIds: [ID!]
+}
+
+input RecordingPersonInput {
+    "The ID of a person associated with the recording."
+    personId: ID!
+    "The role a person has with the recording."
+    role: PersonsRoleField
+}
+
+input RecordingPersonRoleInput {
+    "The ID of a person associated with the recording."
+    personId: ID!
+    "The role a person has with the recording."
+    role: PersonsRoleField!
+}
+
+input RecordingScreeningIssueInput {
+    "In HH:mm format."
+    endTime: String
+    notes: String
+    recordingScreeningIssueTypeId: ID!
+    "In HH:mm format."
+    startTime: String
+    target: RecordingScreeningIssueTarget!
+}
+
+input RecordingScreeningIssueOrder {
+    direction: OrderByDirection!
+    field: RecordingScreeningIssuesSortableField!
+}
+
+input RecordingTagInput {
+    "The name of a tag."
+    tagName: String!
+}
+
+input RecordingUpdateInput {
+    bibleReferences: [BibleReferenceRangeInput!]
+    collectionId: ID
+    copyrightYear: Int
+    description: String
+    distributionAgreementId: ID
+    hidingReason: String
+    isDownloadAllowed: Boolean
+    isFeatured: Boolean
+    isHidden: Boolean
+    notes: String
+    publishDate: DateTime
+    recordingDate: DateTime
+    recordingPersons: [RecordingPersonRoleInput!]
+    recordingTags: [RecordingTagInput!]
+    sequenceId: ID
+    sponsorId: ID
+    title: String
+    websiteIds: [ID!]
+}
+
+input RecordingsOrder {
+    direction: OrderByDirection!
+    field: RecordingsSortableField!
+}
+
+input SequenceCreateInput {
+    collectionId: ID
+    contentType: SequenceContentType!
+    description: String
+    hidingReason: String
+    image: ImageInput
+    isHidden: Boolean
+    notes: String
+    sponsorId: ID!
+    summary: String
+    title: String!
+}
+
+input SequenceOrder {
+    direction: OrderByDirection!
+    field: SequenceSortableField!
+}
+
+input SequenceUpdateInput {
+    collectionId: ID
+    description: String
+    hidingReason: String
+    image: ImageInput
+    isHidden: Boolean
+    notes: String
+    sponsorId: ID
+    summary: String
+    title: String
+}
+
+input SponsorCreateInput {
+    address: String
+    description: String
+    distributionAgreements: [SponsorDistributionAgreementInput!]
+    email: String
+    hidingReason: String
+    image: ImageInput
+    internalContact: InternalContactInput
+    isHidden: Boolean
+    language: Language!
+    location: String
+    notes: String
+    phone: String
+    summary: String
+    title: String!
+    website: URL
+}
+
+input SponsorDistributionAgreementInput {
+    isDefault: Boolean
+    isRetired: Boolean
+    licenseId: ID!
+    notes: String
+    summary: String
+    title: String!
+}
+
+input SponsorUpdateInput {
+    address: String
+    description: String
+    distributionAgreements: [SponsorDistributionAgreementInput!]
+    email: String
+    hidingReason: String
+    image: ImageInput
+    internalContact: InternalContactInput
+    isHidden: Boolean
+    location: String
+    notes: String
+    phone: String
+    summary: String
+    title: String
+    website: URL
+}
+
+input SponsorsOrder {
+    direction: OrderByDirection!
+    field: SponsorsSortableField!
+}
+
+input TestimoniesOrder {
+    direction: OrderByDirection!
+    field: TestimoniesSortableField!
+}
+
+input UserCreateInput {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "Whether recordings should autoplay by default."
+    autoplay: Boolean
+    "The name of the city, district, village, or town."
+    city: String
+    "The name of the country."
+    country: String
+    "The user's email address."
+    email: String!
+    "The user's first name."
+    givenName: String
+    "Whether the user has permission to perform all administrative functions."
+    isSuperuser: Boolean
+    "The user's preferred interface language."
+    language: Language
+    "The user's password."
+    password: String
+    "The postal or zip code."
+    postalCode: String
+    "The user's preferred audio bitrate in kbps."
+    preferredAudioQuality: RecordingQuality
+    "The name of the region, such as the province, state, or district."
+    province: String
+    "The user's administrative roles."
+    roles: [UserLanguageRoleInput!]
+    "The user's last name."
+    surname: String
+    "The user's timezone."
+    timezone: Timezone
+}
+
+input UserLanguageRoleInput {
+    "The language scope for this role."
+    language: Language!
+    "The  administrative role."
+    role: UserRole!
+}
+
+input UserLoginInput {
+    email: String!
+    password: String!
+}
+
+input UserLoginSocialInput {
+    givenName: String
+    socialId: String!
+    socialName: UserSocialServiceName!
+    socialToken: String!
+    surname: String
+}
+
+input UserPlaylistAddInput {
+    isPublic: Boolean!
+    language: Language!
+    recordingIds: [ID!]
+    summary: String
+    title: String!
+}
+
+input UserPlaylistUpdateInput {
+    isPublic: Boolean!
+    summary: String
+    title: String!
+}
+
+input UserPlaylistsOrder {
+    direction: OrderByDirection!
+    field: UserPlaylistsSortableField!
+}
+
+input UserSignupInput {
+    email: String!
+    password: String!
+}
+
+input UserUpdateInput {
+    "The first line of the address. Typically the street address or PO Box number."
+    address1: String
+    "The second line of the address. Typically the number of the apartment, suite, or unit."
+    address2: String
+    "Whether recordings should autoplay by default."
+    autoplay: Boolean
+    "The name of the city, district, village, or town."
+    city: String
+    "The name of the country."
+    country: String
+    "The user's email address."
+    email: String
+    "The user's first name."
+    givenName: String
+    "Whether the user has permission to perform all administrative functions."
+    isSuperuser: Boolean
+    "The user's preferred interface language."
+    language: Language
+    "The user's password."
+    password: String
+    "The postal or zip code."
+    postalCode: String
+    "The user's preferred audio bitrate in kbps."
+    preferredAudioQuality: RecordingQuality
+    "The name of the region, such as the province, state, or district."
+    province: String
+    "The user's administrative roles."
+    roles: [UserLanguageRoleInput!]
+    "The user's last name."
+    surname: String
+    "The user's timezone."
+    timezone: Timezone
+}
+
+input UsersOrder {
+    direction: OrderByDirection!
+    field: UsersSortableField!
+}
+
+
+"A date value string in YYYY-MM-DD format. Example value: \"2020-10-05\"."
+scalar Date
+
+"A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
+scalar DateTime
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+"A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt."
+scalar URL

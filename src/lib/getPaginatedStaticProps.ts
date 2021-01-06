@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { Language } from '@lib/generated/graphql';
 
 export interface PaginatedStaticProps {
 	props: {
@@ -14,15 +15,15 @@ export interface PaginatedStaticProps {
 }
 
 interface IGetterResolved {
-	nodes: any[];
-	aggregate: {
+	nodes?: any[] | null;
+	aggregate?: {
 		count: number;
-	};
+	} | null;
 }
 
 interface Getter<T> {
 	(
-		language: string,
+		language: Language,
 		{
 			offset,
 			first,
@@ -44,7 +45,8 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 
 	if (!langKey) throw Error('Missing or invalid language');
 
-	const result = await getter(langKey, {
+	// TODO: Fix langKey type
+	const result = await getter(langKey as any, {
 		offset,
 		first: ENTRIES_PER_PAGE,
 	}).catch(() => ({}));

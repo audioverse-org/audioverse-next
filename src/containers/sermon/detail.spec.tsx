@@ -336,9 +336,9 @@ describe('detailPageGenerator', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_summary')).toBeInTheDocument();
+		expect(getAllByText('the_summary').length > 0).toBeTruthy();
 	});
 
 	it('includes donation banner', async () => {
@@ -416,5 +416,39 @@ describe('detailPageGenerator', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_location')).toBeInTheDocument();
+	});
+
+	it('includes presenters section', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Presenters')).toBeInTheDocument();
+	});
+
+	it('duplicates presenter list', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getAllByText } = await renderPage();
+
+		expect(getAllByText('the_name').length).toEqual(2);
 	});
 });

@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import * as api from '@lib/api';
+import * as graphql from '@lib/generated/graphql';
 import type { Playlist, Sermon, Testimony } from 'types';
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
@@ -66,16 +67,18 @@ export function setSermonCount(count: number): void {
 }
 
 export function loadTestimonies(nodes: Testimony[] | null = null): void {
-	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
-		nodes: nodes || [
-			{
-				author: 'the_testimony_author',
-				body: 'the_testimony_body',
-				writtenDate: 'the_testimony_date',
+	jest.spyOn(graphql, 'getTestimonies').mockResolvedValue({
+		testimonies: {
+			nodes: nodes || [
+				{
+					author: 'the_testimony_author',
+					body: 'the_testimony_body',
+					writtenDate: 'the_testimony_date',
+				},
+			],
+			aggregate: {
+				count: 1,
 			},
-		],
-		aggregate: {
-			count: 1,
 		},
 	});
 }

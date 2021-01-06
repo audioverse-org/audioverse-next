@@ -1,12 +1,13 @@
 export const ENTRIES_PER_PAGE = 25;
 
-export interface Language {
+export interface LanguageConfiguration {
 	base_url: string;
 	display_name: string;
 }
 
+// TODO: fix this type thing....
 interface Languages {
-	[key: string]: Language;
+	[key: string]: LanguageConfiguration;
 }
 
 export const LANGUAGES: Languages = {

@@ -1,0 +1,12 @@
+{
+  "name": "Remote Schema",
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Remote GraphQL Endpoint": {
+        "url": "https://graphql-staging.audioverse.org/graphql",
+        "introspect": true
+      }
+    }
+  }
+}

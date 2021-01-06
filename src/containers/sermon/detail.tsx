@@ -140,6 +140,20 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<br />
 				<span>{sponsor.location}</span>
 			</p>
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__presenterInfoTitle"
+					defaultMessage="Presenters"
+					description="Sermon detail presenter info title"
+				/>
+			</h2>
+			<ul>
+				{speakers.map((s) => (
+					<li key={s.id}>
+						<SpeakerName person={s} />
+					</li>
+				))}
+			</ul>
 		</>
 	);
 }
