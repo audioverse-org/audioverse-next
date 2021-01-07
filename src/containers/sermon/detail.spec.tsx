@@ -451,4 +451,21 @@ describe('detailPageGenerator', () => {
 
 		expect(getAllByText('the_name').length).toEqual(2);
 	});
+
+	it('includes time recorded', async () => {
+		loadRouter({ isFallback: false });
+		loadSermon({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+				},
+			],
+			recordingDate: '2003-03-01T09:30:00.000Z',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('March 1, 2003, 9:30 AM')).toBeInTheDocument();
+	});
 });

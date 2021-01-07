@@ -50,6 +50,16 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const speakers: Person[] = _.get(sermon, 'persons', []);
 	const tags: RecordingTag[] = _.get(sermon, 'recordingTags.nodes', []);
 	const { sponsor = { title: '', location: '' } } = sermon;
+	const recordingDateString = new Date(sermon.recordingDate).toLocaleString(
+		[],
+		{
+			hour: 'numeric',
+			minute: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+		}
+	);
 
 	return (
 		<>
@@ -66,9 +76,6 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</ul>
 				</div>
 			</div>
-			{sermon.recordingDate ? (
-				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
-			) : null}
 			<Favorite id={sermon.id} />
 			<PlaylistButton recordingId={sermon.id} />
 			<Player sources={sources} />
@@ -154,6 +161,18 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</li>
 				))}
 			</ul>
+			{sermon.recordingDate ? (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__recordedTitle"
+							defaultMessage="Recorded"
+							description="Sermon detail recorded date title"
+						/>
+					</h2>
+					<p>{recordingDateString}</p>
+				</>
+			) : null}
 		</>
 	);
 }

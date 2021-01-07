@@ -45,6 +45,8 @@ const expectNoUnlocalizedToasts = () => {
 	});
 };
 
+const toLocaleStringBackup = global.Date.prototype.toLocaleString;
+
 describe('localization usage', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
@@ -59,6 +61,14 @@ describe('localization usage', () => {
 		jest.spyOn(intl, 'useIntl').mockReturnValue({
 			formatMessage: formatter,
 		} as any);
+	});
+
+	beforeAll(() => {
+		global.Date.prototype.toLocaleString = jest.fn(() => 'z');
+	});
+
+	afterAll(() => {
+		global.Date.prototype.toLocaleString = toLocaleStringBackup;
 	});
 
 	it('localizes playlistButton logged out', async () => {
@@ -100,6 +110,7 @@ describe('localization usage', () => {
 				sermon={
 					{
 						description: 'z',
+						recordingDate: '2003-03-01T09:30:00.000Z',
 						recordingTags: {
 							nodes: [
 								{
