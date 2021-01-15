@@ -3,6 +3,11 @@ module.exports = {
 		const result = documents
 			.map((doc) => {
 				return doc.document.definitions
+					.filter((def) => {
+						return (
+							def.kind !== 'FragmentDefinition' && def?.operation !== 'mutation'
+						);
+					})
 					.map((def) => {
 						const capitalName =
 							def.name.value.charAt(0).toUpperCase() + def.name.value.slice(1);

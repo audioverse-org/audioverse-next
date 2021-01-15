@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { QueryKey, useMutation, useQueryClient } from 'react-query';
 
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 
@@ -8,11 +8,15 @@ interface MutateVariables {
 	add: boolean;
 }
 
-export function useSetPlaylistMembership(): (
+type ReturnType = (
 	recordingId: string,
 	playlistId: string,
 	add: boolean
-) => void {
+) => void;
+
+export function useSetPlaylistMembership(
+	cacheKey: QueryKey | undefined = undefined
+): ReturnType {
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation(
 		(variables: MutateVariables): Promise<boolean> => {
@@ -21,7 +25,7 @@ export function useSetPlaylistMembership(): (
 		},
 		{
 			onSettled: async () => {
-				await queryClient.invalidateQueries('playlists');
+				await queryClient.invalidateQueries(cacheKey);
 			},
 		}
 	);

@@ -1,7 +1,8 @@
 import { getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { getTestimonies } from '@lib/generated/graphql';
-import { loadTestimonies, renderWithIntl } from '@lib/test/helpers';
+import { getTestimonies, Testimony } from '@lib/generated/graphql';
+import * as graphql from '@lib/generated/graphql';
+import { renderWithIntl } from '@lib/test/helpers';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
@@ -9,6 +10,23 @@ import Testimonies, {
 
 jest.mock('@lib/api');
 jest.mock('@lib/api/fetchApi');
+
+function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
+	jest.spyOn(graphql, 'getTestimonies').mockResolvedValue({
+		testimonies: {
+			nodes: (nodes as Testimony[]) || [
+				{
+					author: 'the_testimony_author',
+					body: 'the_testimony_body',
+					writtenDate: 'the_testimony_date',
+				},
+			],
+			aggregate: {
+				count: 1,
+			},
+		},
+	});
+}
 
 function setEntityCount(count: number) {
 	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));

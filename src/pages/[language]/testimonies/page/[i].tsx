@@ -6,7 +6,6 @@ import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
-import type { StaticPaths } from 'types';
 
 export default Testimonies;
 

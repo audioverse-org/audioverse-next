@@ -1,0 +1,10 @@
+fragment speakerName on Person {
+    id
+    name
+    imageWithFallback {
+        url(size: 100)
+    }
+    summary
+    website
+    viewerHasFavorited
+}

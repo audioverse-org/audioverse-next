@@ -7,11 +7,11 @@ export interface LanguageConfiguration {
 	display_name: string;
 }
 
-type Languages = {
+export type LanguageConfigurations = {
 	[key in Language]: LanguageConfiguration;
 };
 
-export const LANGUAGES: Languages = {
+export const LANGUAGES: LanguageConfigurations = {
 	ENGLISH: { base_url: 'en', display_name: 'English' },
 	SPANISH: { base_url: 'es', display_name: 'Español' },
 	FRENCH: { base_url: 'fr', display_name: 'Français' },

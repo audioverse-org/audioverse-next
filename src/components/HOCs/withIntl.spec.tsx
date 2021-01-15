@@ -12,18 +12,17 @@ import { toast } from 'react-toastify';
 import Favorite from '@components/molecules/favorite';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
-import SermonDetail from '@containers/sermon/detail';
+import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import * as api from '@lib/api';
+import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
+import { Person } from '@lib/generated/graphql';
 import {
-	getPlaylists,
-	isPersonFavorited,
-	isRecordingFavorited,
-} from '@lib/api';
-import { renderWithQueryProvider } from '@lib/test/helpers';
-import { Person, Sermon } from 'types';
+	makePlaylistButtonData,
+	mockedFetchApi,
+	renderWithQueryProvider,
+} from '@lib/test/helpers';
 
 jest.mock('react-intl');
-jest.mock('@lib/api/getPlaylists');
 jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
@@ -80,13 +79,13 @@ describe('localization usage', () => {
 	});
 
 	it('localizes playlistButton logged in', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		mockedFetchApi.mockResolvedValue(makePlaylistButtonData([]));
 
 		const { queryByText } = await renderWithQueryProvider(
 			<PlaylistButton recordingId={'recording_id'} />
 		);
 
-		await waitFor(() => expect(getPlaylists).toHaveBeenCalled());
+		await waitFor(() => expect(mockedFetchApi).toHaveBeenCalled());
 
 		expectNoUnlocalizedText(queryByText);
 	});
@@ -94,10 +93,12 @@ describe('localization usage', () => {
 	it('localizes speakerName', async () => {
 		const { queryByText } = await renderWithQueryProvider(
 			<SpeakerName
-				person={{
-					id: 'z',
-					name: 'z',
-				}}
+				person={
+					{
+						id: 'z',
+						name: 'z',
+					} as Person
+				}
 			/>
 		);
 

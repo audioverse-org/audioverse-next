@@ -3,11 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
 import videojs from 'video.js';
 
-import { getSermon, getSermons } from '@lib/api';
+import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
+import * as graphql from '@lib/generated/graphql';
 import {
 	loadRouter,
 	loadSermon,
-	loadSermons,
+	mockedFetchApi,
 	renderWithIntl,
 } from '@lib/test/helpers';
 import SermonDetail, {
@@ -17,25 +18,18 @@ import SermonDetail, {
 
 jest.mock('next/router');
 jest.mock('video.js');
-jest.mock('@lib/api/getSermon');
-jest.mock('@lib/api/getSermons');
 jest.mock('@lib/api/fetchApi');
 
 function loadRecentSermons() {
-	loadSermons({
-		nodes: [
-			{
-				id: 1,
-				title: 'the_sermon_title',
-				recordingDate: '2020-06-01T09:30:00.000Z',
-			},
-		],
-	});
-}
-
-function loadGetSermonError() {
-	(getSermon as jest.Mock).mockImplementation(() => {
-		throw new Error('API failure');
+	jest.spyOn(graphql, 'getSermonDetailStaticPaths').mockResolvedValue({
+		sermons: {
+			nodes: [
+				{
+					id: 'sermon_id',
+					recordingDate: '2020-06-01T09:30:00.000Z',
+				},
+			],
+		},
 	});
 }
 
@@ -53,7 +47,10 @@ describe('detailPageGenerator', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('ENGLISH', { first: 1000 })
+			expect(getSermonDetailStaticPaths).toBeCalledWith({
+				language: 'ENGLISH',
+				first: 1000,
+			})
 		);
 	});
 
@@ -63,7 +60,10 @@ describe('detailPageGenerator', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 1000 })
+			expect(getSermonDetailStaticPaths).toBeCalledWith({
+				language: 'SPANISH',
+				first: 1000,
+			})
 		);
 	});
 
@@ -72,7 +72,7 @@ describe('detailPageGenerator', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/1');
+		expect(result.paths).toContain('/en/sermons/sermon_id');
 	});
 
 	it('generates localized paths', async () => {
@@ -80,20 +80,20 @@ describe('detailPageGenerator', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/1');
+		expect(result.paths).toContain('/es/sermons/sermon_id');
 	});
 
 	it('catches API errors', async () => {
-		loadGetSermonError();
+		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
-		expect(result.props.sermon).toBeNull();
+		expect(result.props.sermon).toBeUndefined();
 	});
 
 	it('renders 404 on missing sermon', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadGetSermonError();
+		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -103,7 +103,9 @@ describe('detailPageGenerator', () => {
 	it('shows loading screen', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: true });
 
-		const { getByText } = await renderPage();
+		const { getByText } = await renderWithIntl(SermonDetail, {
+			sermon: undefined,
+		});
 
 		expect(getByText('Loading…')).toBeInTheDocument();
 	});
@@ -317,7 +319,10 @@ describe('detailPageGenerator', () => {
 			await getStaticPaths();
 
 			await waitFor(() =>
-				expect(getSermons).toBeCalledWith('SPANISH', { first: 10 })
+				expect(getSermonDetailStaticPaths).toBeCalledWith({
+					language: 'SPANISH',
+					first: 10,
+				})
 			);
 		});
 	});
@@ -453,6 +458,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes time recorded', async () => {
+		mockedFetchApi.mockResolvedValue({});
 		loadRouter({ isFallback: false });
 		loadSermon({
 			persons: [

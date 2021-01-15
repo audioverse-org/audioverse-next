@@ -4,11 +4,13 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import type { Sermon } from 'types';
+
+type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
 
 export interface SermonListProps {
-	nodes: Sermon[];
+	nodes: Sermons;
 	rssPath: string;
 	pagination: {
 		current: number;

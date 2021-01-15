@@ -1,8 +1,8 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
-import { getSermonCount, getSermons } from '@lib/api';
+import { getSermonCount } from '@lib/api';
+import { getSermonListStaticProps } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import type { StaticPaths } from 'types';
 
 export default SermonList;
 
@@ -23,8 +23,15 @@ export async function getStaticProps({
 	const response = await getPaginatedStaticProps(
 		language,
 		parseInt(i),
-		async (lang, options) => {
-			return getSermons(lang, { ...options, hasVideo: true });
+		async (lang, { offset, first }) => {
+			const result = await getSermonListStaticProps({
+				language: lang,
+				hasVideo: true,
+				offset,
+				first,
+			});
+
+			return result?.sermons;
 		}
 	);
 

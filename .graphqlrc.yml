@@ -9,5 +9,4 @@ generates:
       - 'typescript-react-query'
       - 'getter-plugin.js'
     config:
-      constEnums: true
       fetcher: '@lib/api/fetchApi#graphqlFetcher'

@@ -1,0 +1,21 @@
+query getSermonListStaticProps(
+    $language: Language!,
+    $hasVideo: Boolean,
+    $first: Int,
+    $offset: Int
+) {
+    sermons(
+        language: $language,
+        hasVideo: $hasVideo,
+        first: $first,
+        offset: $offset,
+        orderBy: {direction: DESC, field: CREATED_AT}
+    ) {
+        nodes {
+            ...recordingList
+        }
+        aggregate {
+            count
+        }
+    }
+}

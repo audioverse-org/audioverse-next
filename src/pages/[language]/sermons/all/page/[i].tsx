@@ -1,11 +1,11 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
-import { getSermonCount, getSermons } from '@lib/api';
+import { getSermonCount } from '@lib/api';
 import createFeed from '@lib/createFeed';
+import { getSermonListStaticProps, Language } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import type { StaticPaths } from 'types';
 
 export default SermonList;
 
@@ -28,8 +28,18 @@ export async function getStaticProps({
 	const response = await getPaginatedStaticProps(
 		base_url,
 		parseInt(i),
-		getSermons
+		async (language: Language, { offset, first }) => {
+			const result = await getSermonListStaticProps({
+				language,
+				offset,
+				first,
+			});
+
+			return result?.sermons;
+		}
 	);
+
+	// TODO: Extract feed generation into its own function for readability
 
 	const intl = getIntl(base_url);
 
@@ -44,6 +54,8 @@ export async function getStaticProps({
 		}
 	);
 
+	// TODO: Find a less-hacky way to generate feeds regularly.
+	//  This solution may generate the feed too much or not enough.
 	if (i === '1' && response.props.nodes) {
 		await createFeed({
 			recordings: response.props.nodes,

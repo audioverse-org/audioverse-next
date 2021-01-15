@@ -3,8 +3,8 @@ import { QueryClient } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query/hydration';
 
 import Profile from '@containers/profile';
-import { getMe } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
+import { getProfileData } from '@lib/generated/graphql';
 
 export default Profile;
 
@@ -21,9 +21,8 @@ export async function getServerSideProps({
 
 	const queryClient = new QueryClient();
 
-	// TODO: provide getMe with languageId
-	await queryClient.prefetchQuery('me', () => {
-		return getMe();
+	await queryClient.prefetchQuery('getProfileData', () => {
+		return getProfileData({});
 	});
 
 	return {

@@ -27,6 +27,7 @@ type Attachment implements Node {
     id: ID!
     mimeType: String!
     recording: Recording!
+    updatedAt: DateTime
     url: URL!
 }
 
@@ -39,6 +40,7 @@ type AudioFile implements Node {
     id: ID!
     mimeType: String!
     recording: Recording!
+    updatedAt: DateTime
     url: URL!
 }
 
@@ -219,6 +221,7 @@ type Collection implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -309,6 +312,7 @@ type DistributionAgreement implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -343,6 +347,7 @@ type DistributionAgreementPayload {
 
 type Image {
     name: String!
+    updatedAt: DateTime
     url(size: Int!): URL!
 }
 
@@ -409,6 +414,39 @@ type LicenseEdge {
 type LicensePayload {
     errors: [InputValidationError!]!
     license: License
+}
+
+type MediaFileUpload implements Node {
+    filename: String!
+    "In bytes"
+    filesize: String!
+    hasUploaded: Boolean!
+    id: ID!
+    mimeType: String!
+    "The presigned part upload URLs. Unavailable after the upload has completed."
+    partUploadUrls(
+        "The number of parts the multipart upload will use. A signed upload URL will be returned for each part."
+        count: Int!
+    ): [String!]
+    recording: Recording
+    updatedAt: DateTime
+}
+
+type MediaFileUploadConnection {
+    aggregate: Aggregate
+    edges: [MediaFileUploadEdge!]
+    nodes: [MediaFileUpload!]
+    pageInfo: PageInfo!
+}
+
+type MediaFileUploadEdge {
+    cursor: String!
+    node: MediaFileUpload!
+}
+
+type MediaFileUploadPayload {
+    errors: [InputValidationError!]!
+    mediaFileUpload: MediaFileUpload
 }
 
 type MediaRelease implements Node {
@@ -541,6 +579,10 @@ type Mutation {
     licenseUpdate(input: LicenseUpdateInput!, licenseId: ID!): LicensePayload!
     login(input: UserLoginInput!): AuthenticatedUserPayload!
     loginSocial(input: UserLoginSocialInput!): AuthenticatedUserPayload!
+    mediaFileUploadAbort(mediaFileUploadId: ID!): SuccessPayload!
+    mediaFileUploadAssign(mediaFileUploadId: ID!, recordingId: ID!): SuccessPayload!
+    mediaFileUploadFinish(input: MediaFileUploadFinishInput!, mediaFileUploadId: ID!): MediaFileUploadPayload!
+    mediaFileUploadStart(input: MediaFileUploadStartInput!): MediaFileUploadPayload!
     mediaReleaseCreate(input: MediaReleaseCreateInput!): MediaReleasePayload!
     mediaReleaseDelete(mediaReleaseId: ID!): SuccessPayload!
     mediaReleaseFormCreate(input: MediaReleaseFormCreateInput!): MediaReleaseFormPayload!
@@ -677,6 +719,7 @@ type Person implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -805,7 +848,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
-        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
@@ -928,6 +971,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -955,6 +999,16 @@ type Query {
         search: String
     ): LicenseConnection!
     me: AuthenticatedUser
+    mediaFileUploads(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        hasUploaded: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        orderBy: [MediaFileUploadsOrder!]
+    ): MediaFileUploadConnection!
     mediaRelease(id: ID!): MediaRelease
     mediaReleaseForm(id: ID!): MediaReleaseForm
     mediaReleaseFormTemplates(language: Language!): [MediaReleaseFormTemplate!]!
@@ -1066,7 +1120,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
-        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
@@ -1122,6 +1176,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -1170,7 +1225,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
-        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
@@ -1245,7 +1300,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
-        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
@@ -1299,7 +1354,7 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
-        "`search` will find matching recordings and order the recordings by relevance to the search term. Any `orderBy` arguments provided will be ignored."
+        "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
@@ -1416,6 +1471,8 @@ type Recording implements Node {
     distributionAgreement: DistributionAgreement
     downloadDisabled: Boolean! @deprecated(reason : "Recording.downloadDisabled is replaced with Recording.isDownloadAllowed")
     duration: Float!
+    hasAudio: Boolean!
+    hasVideo: Boolean!
     hidingReason: String
     history(
         "Return the elements that come after the specified cursor."
@@ -1632,6 +1689,7 @@ type Sequence implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
@@ -1749,6 +1807,7 @@ type Sponsor implements Node & UniformResourceLocatable {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorIds: [ID!],
@@ -1897,6 +1956,7 @@ type User implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -1999,6 +2059,7 @@ type UserPlaylist implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
@@ -2038,6 +2099,7 @@ type VideoFile implements Node {
     logUrl: URL
     mimeType: String!
     recording: Recording!
+    updatedAt: DateTime
     url: URL!
     width: Int!
 }
@@ -2218,6 +2280,12 @@ enum MediaFileContainer {
     WAV
     WMA
     WMV
+}
+
+"Properties by which media file uploads connections can be ordered."
+enum MediaFileUploadsSortableField {
+    CREATED_AT
+    FILENAME
 }
 
 "Properties by which media release form connections can be ordered."
@@ -3173,6 +3241,22 @@ input LicenseUpdateInput {
 input LicensesOrder {
     direction: OrderByDirection!
     field: LicensesSortableField!
+}
+
+input MediaFileUploadFinishInput {
+    "The list of entity tags returned from the part upload API calls."
+    uploadPartEtags: [String!]!
+}
+
+input MediaFileUploadStartInput {
+    filename: String!
+    filesize: String!
+    recordingId: ID
+}
+
+input MediaFileUploadsOrder {
+    direction: OrderByDirection!
+    field: MediaFileUploadsSortableField!
 }
 
 input MediaReleaseCreateInput {

@@ -35,6 +35,7 @@ interface Getter<T> {
 	): Promise<T>;
 }
 
+// TODO: Modify so it accepts getters straight from graphql codegen
 export async function getPaginatedStaticProps<T extends IGetterResolved>(
 	language: string,
 	pageIndex: number,

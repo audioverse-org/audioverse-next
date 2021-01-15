@@ -1,15 +1,15 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { getSermonCount, getSermons } from '@lib/api';
-import { loadRouter, loadSermons } from '@lib/test/helpers';
+import { getSermonCount } from '@lib/api';
+import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
+import { loadRouter, loadSermons, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/audio/page/[i]';
 
-jest.mock('@lib/api');
-jest.mock('@lib/api/fetchApi');
+jest.mock('@lib/api/getSermonCount');
 
 const renderPage = async ({ params = { i: '1', language: 'en' } } = {}) => {
 	const { props } = await getStaticProps({ params });
@@ -33,15 +33,32 @@ describe('sermon audio list page', () => {
 			},
 		});
 
-		expect(getSermons).toBeCalledWith('ENGLISH', {
-			hasVideo: false,
-			first: 25,
-			offset: 0,
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
+			variables: {
+				language: 'ENGLISH',
+				hasVideo: false,
+				first: 25,
+				offset: 0,
+			},
 		});
 	});
 
-	it('links to feed', async () => {
-		loadSermons();
+	it('links to feed in audio list page', async () => {
+		mockedFetchApi.mockResolvedValue({
+			sermons: {
+				nodes: [
+					{
+						id: '1',
+						title: 'the_sermon_title',
+						videoFiles: [],
+					},
+				],
+				aggregate: {
+					count: 1,
+				},
+			},
+		});
+
 		loadRouter({ pathname: '/[language]/sermons/audio/page/[i]' });
 
 		const { getByRole } = await renderPage();

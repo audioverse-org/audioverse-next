@@ -1,9 +1,8 @@
 import _ from 'lodash';
 
 import Home, { HomeProps } from '@containers/home';
-import { getSermons } from '@lib/api';
 import { LANGUAGES } from '@lib/constants';
-import type { StaticPaths } from 'types';
+import { getHomeStaticProps, Language } from '@lib/generated/graphql';
 
 export default Home;
 
@@ -22,14 +21,16 @@ export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const language = _.get(params, 'language'),
-		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language);
+		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language) as Language;
 
 	if (!langKey) throw Error('Missing or invalid language');
 
-	const sermons = await getSermons(langKey, { first: 5 });
+	const result = await getHomeStaticProps({ language: langKey });
+	const nodes = result?.sermons?.nodes || [];
+
 	return {
 		props: {
-			sermons: (sermons && sermons.nodes) || [],
+			sermons: nodes,
 		},
 		revalidate: 10,
 	};

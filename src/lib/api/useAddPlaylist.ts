@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from 'react-query';
+import _ from 'lodash';
+import { QueryKey, useQueryClient } from 'react-query';
 
-import { addPlaylist } from '@lib/api/addPlaylist';
+import { useAddPlaylistMutation } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
-import { Playlist } from 'types';
 
 interface MutateVariables {
 	title: string;
@@ -21,71 +21,65 @@ type AddPlaylist = (
 ) => void;
 
 interface Context {
-	snapshots: {
-		key: string[];
-		data: any;
-	}[];
+	key?: QueryKey;
+	snapshot?: any;
 }
 
-export function useAddPlaylist(): AddPlaylist {
+export function useAddPlaylist(
+	cacheKey: QueryKey | undefined = undefined,
+	updatePath: string | undefined = undefined
+): AddPlaylist {
 	const queryClient = useQueryClient();
 	const languageId = useLanguageId();
 
-	const { mutate } = useMutation(
-		(variables: MutateVariables): Promise<string | false> => {
-			const { title, options = {} } = variables;
-			const { recordingIds = [], isPublic = false } = options;
-			return addPlaylist(languageId, title, {
-				recordingIds,
-				isPublic,
+	const { mutate } = useAddPlaylistMutation({
+		onMutate: async (variables: MutateVariables) => {
+			// TODO: Finish implementing optimistic updates using
+			//  react-query docs guide
+
+			if (!cacheKey) return {};
+
+			await queryClient.cancelQueries(cacheKey);
+
+			if (!updatePath) return {};
+
+			const snapshot = _.cloneDeep(queryClient.getQueryData(cacheKey));
+
+			queryClient.setQueryData(cacheKey, (old) => {
+				old = old || {};
+				const prev = _.get(old, updatePath) || [];
+				const newPlaylist = {
+					id: '',
+					title: variables.title,
+					hasRecording: true,
+				};
+				const value = [...prev, newPlaylist];
+
+				// TODO: Does `as [type]` introduce errors?
+				return _.set(old as Record<string, unknown>, updatePath, value);
 			});
+
+			// TODO: optimistically add playlist to base playlists cache, too, once
+			//  we're actually using such a cache
+
+			return { key: cacheKey, snapshot };
 		},
-		{
-			onMutate: async (variables: MutateVariables) => {
-				// TODO: Finish implementing optimistic updates using
-				//  react-query docs guide
+		onError: (err, variables, context: Context | undefined) => {
+			const { key = undefined, snapshot = undefined } = context || {};
 
-				const { title, options } = variables;
-				const { recordingIds = [] } = options || {};
+			if (!key) return;
 
-				const snapshots = await Promise.all(
-					recordingIds.map(async (id: string) => {
-						const key = ['playlists', 'withRecording', id];
-						await queryClient.cancelQueries(key);
-						const snap = queryClient.getQueryData(key);
+			queryClient.setQueryData(key, snapshot);
+		},
+		onSettled: () => queryClient.invalidateQueries(cacheKey),
+	});
 
-						const newPlaylist = {
-							id: '',
-							title,
-							hasRecording: true,
-						};
-
-						queryClient.setQueryData(key, (old) => [
-							...(old as Playlist[]),
-							newPlaylist,
-						]);
-
-						return { key, data: snap };
-					})
-				);
-
-				// TODO: optimistically add playlist to base playlists cache, too, once
-				//  we're actually using such a cache
-
-				return { snapshots };
-			},
-			onError: (err, variables, context: Context | undefined) => {
-				if (!context) return;
-
-				context.snapshots.forEach(({ key, data }) => {
-					queryClient.setQueryData(key, data);
-				});
-			},
-			onSettled: async () => {
-				await queryClient.invalidateQueries('playlists');
-			},
-		}
-	);
-
-	return (title: string, options = {}): void => mutate({ title, options });
+	// TODO: add options type
+	return (title: string, options = {}): void =>
+		mutate({
+			language: languageId,
+			title: title,
+			isPublic: options?.isPublic || false,
+			recordingIds: options?.recordingIds || [],
+		});
 }

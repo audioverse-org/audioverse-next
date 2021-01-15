@@ -1,14 +1,20 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { getSermonCount, getSermons } from '@lib/api';
-import { loadQuery, loadSermons, setSermonCount } from '@lib/test/helpers';
+import { getSermonCount } from '@lib/api';
+import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
+import {
+	loadQuery,
+	loadSermons,
+	mockedFetchApi,
+	setSermonCount,
+} from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/video/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/video/page/[i]';
 
-jest.mock('@lib/api');
+jest.mock('@lib/api/getSermonCount');
 
 const renderPage = async ({
 	params = { i: '1', language: 'en' },
@@ -44,10 +50,13 @@ describe('sermon video list page', () => {
 			},
 		});
 
-		expect(getSermons).toBeCalledWith('ENGLISH', {
-			hasVideo: true,
-			first: 25,
-			offset: 0,
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
+			variables: {
+				language: 'ENGLISH',
+				hasVideo: true,
+				first: 25,
+				offset: 0,
+			},
 		});
 	});
 

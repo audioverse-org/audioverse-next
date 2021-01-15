@@ -61,7 +61,7 @@ export async function fetchApi(
 
 export function graphqlFetcher<TData, TVariables>(
 	query: string,
-	variables: TVariables
+	variables: TVariables | undefined
 ): () => Promise<TData> {
 	return () => fetchApi(query, { variables });
 }
