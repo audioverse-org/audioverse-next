@@ -8,7 +8,7 @@ import { getSermonCount } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
 import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
 import {
-	loadSermons,
+	loadSermonListData,
 	mockedFetchApi,
 	mockFeed,
 	renderWithIntl,
@@ -51,7 +51,7 @@ describe('sermons list page', () => {
 	});
 
 	it('can be rendered', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage();
 	});
@@ -98,7 +98,7 @@ describe('sermons list page', () => {
 	});
 
 	it('gets sermons for list page', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await getStaticProps({ params: { i: '2', language: 'en' } });
 
@@ -114,7 +114,7 @@ describe('sermons list page', () => {
 	});
 
 	it('displays sermons list', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByText } = await renderPage();
 
@@ -132,7 +132,7 @@ describe('sermons list page', () => {
 
 	it('returns 404 on empty data', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadSermons({ nodes: [] });
+		loadSermonListData({ nodes: [] });
 
 		const { getByText } = await renderPage();
 
@@ -140,7 +140,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes pagination', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByText } = await renderPage();
 
@@ -148,7 +148,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links to last pagination page', async () => {
-		loadSermons({ count: 75 });
+		loadSermonListData({ count: 75 });
 
 		const { getByText } = await renderPage();
 
@@ -156,7 +156,7 @@ describe('sermons list page', () => {
 	});
 
 	it('calculates pages using items per page', async () => {
-		loadSermons({ count: 75 });
+		loadSermonListData({ count: 75 });
 
 		const { getByText } = await renderPage({
 			params: { i: '3', language: 'en' },
@@ -166,13 +166,13 @@ describe('sermons list page', () => {
 	});
 
 	it('handles string page index', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage({ params: { i: '3', language: 'en' } });
 	});
 
 	it('links pagination properly', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
@@ -181,7 +181,7 @@ describe('sermons list page', () => {
 	});
 
 	it('revalidates static pages', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
 
@@ -189,7 +189,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links All button', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -200,7 +200,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links All button using lang', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage({ query: { language: 'es' } });
 
@@ -211,7 +211,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links Video button', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -222,7 +222,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links Audio button', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -241,7 +241,7 @@ describe('sermons list page', () => {
 	});
 
 	it('calls createFeed', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage();
 
@@ -249,7 +249,7 @@ describe('sermons list page', () => {
 	});
 
 	it('provides path', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage();
 
@@ -259,7 +259,7 @@ describe('sermons list page', () => {
 	});
 
 	it('calls mikdirSync', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage();
 
@@ -267,7 +267,7 @@ describe('sermons list page', () => {
 	});
 
 	it('only renders feed once per language', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage({ params: { i: '1', language: 'en' } });
 		await renderPage({ params: { i: '2', language: 'en' } });
@@ -276,7 +276,7 @@ describe('sermons list page', () => {
 	});
 
 	it('renders feeds for other languages', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage({ params: { i: '1', language: 'es' } });
 
@@ -288,7 +288,7 @@ describe('sermons list page', () => {
 	it('adds sermons to feed', async () => {
 		const { addItem } = mockFeed();
 
-		loadSermons({
+		loadSermonListData({
 			nodes: [
 				{
 					audioFiles: [
@@ -314,7 +314,7 @@ describe('sermons list page', () => {
 
 	it('titles feeds', async () => {
 		mockFeed();
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage();
 
@@ -325,7 +325,7 @@ describe('sermons list page', () => {
 
 	it('translates feed titles', async () => {
 		mockFeed();
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage({ params: { i: '1', language: 'es' } });
 
@@ -337,7 +337,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes feed link', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -345,7 +345,7 @@ describe('sermons list page', () => {
 	});
 
 	it('links to feed', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -356,7 +356,7 @@ describe('sermons list page', () => {
 	});
 
 	it('targets blank', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 
@@ -367,7 +367,7 @@ describe('sermons list page', () => {
 	});
 
 	it('localizes pagination', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByText } = await renderPage({ query: { language: 'es' } }),
 			link = getByText('1') as HTMLAnchorElement;
@@ -376,7 +376,7 @@ describe('sermons list page', () => {
 	});
 
 	it('sets rss head link', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByTestId } = await renderPage();
 
@@ -386,7 +386,7 @@ describe('sermons list page', () => {
 	});
 
 	it('does not set title', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByTestId } = await renderPage();
 

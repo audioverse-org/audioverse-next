@@ -5,7 +5,7 @@ import { getSermonCount } from '@lib/api';
 import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
 import {
 	loadQuery,
-	loadSermons,
+	loadSermonListData,
 	mockedFetchApi,
 	setSermonCount,
 } from '@lib/test/helpers';
@@ -41,7 +41,7 @@ describe('sermon video list page', () => {
 	});
 
 	it('gets video filtered sermons', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		await renderPage({
 			params: {
@@ -61,7 +61,7 @@ describe('sermon video list page', () => {
 	});
 
 	it('links to feed', async () => {
-		loadSermons();
+		loadSermonListData();
 
 		const { getByRole } = await renderPage();
 

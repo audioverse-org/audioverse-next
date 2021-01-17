@@ -23,9 +23,7 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 	return { addItem, rss2 };
 };
 
-// TODO: Consider deleting since there is no standard set of sermon node data.
-//  Probably better to add data loading functions at the spec file level.
-export function loadSermons({
+export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
