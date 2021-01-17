@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
 import * as api from '@lib/api';
-import * as graphql from '@lib/generated/graphql';
 import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
@@ -44,19 +43,6 @@ export function loadSermons({
 			},
 		},
 	});
-}
-
-// TODO: Delete
-export function loadSermon(sermon: any = undefined): void {
-	sermon = sermon || {
-		id: '1',
-		title: 'the_sermon_title',
-		persons: [],
-		audioFiles: [],
-		videoFiles: [],
-	};
-
-	jest.spyOn(graphql, 'getSermon').mockResolvedValue({ sermon });
 }
 
 export function setSermonCount(count: number): void {

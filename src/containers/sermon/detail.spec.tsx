@@ -5,12 +5,7 @@ import videojs from 'video.js';
 
 import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
 import * as graphql from '@lib/generated/graphql';
-import {
-	loadRouter,
-	loadSermon,
-	mockedFetchApi,
-	renderWithIntl,
-} from '@lib/test/helpers';
+import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -20,7 +15,8 @@ jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
 
-function loadRecentSermons() {
+// TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
+function loadSermonDetailPathsData() {
 	jest.spyOn(graphql, 'getSermonDetailStaticPaths').mockResolvedValue({
 		sermons: {
 			nodes: [
@@ -33,6 +29,19 @@ function loadRecentSermons() {
 	});
 }
 
+// TODO: Rename getSermon graphql query to getSermonDetailData
+function loadSermonDetailData(sermon: any = undefined): void {
+	sermon = sermon || {
+		id: '1',
+		title: 'the_sermon_title',
+		persons: [],
+		audioFiles: [],
+		videoFiles: [],
+	};
+
+	jest.spyOn(graphql, 'getSermon').mockResolvedValue({ sermon });
+}
+
 async function renderPage() {
 	const { props } = await getStaticProps({ params: { id: '1' } });
 	return renderWithIntl(SermonDetail, props);
@@ -40,7 +49,7 @@ async function renderPage() {
 
 describe('sermon detail page', () => {
 	it('gets sermons', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		await getStaticPaths();
 
@@ -53,7 +62,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('gets recent sermons in all languages', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		await getStaticPaths();
 
@@ -66,7 +75,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('returns paths', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		const result = await getStaticPaths();
 
@@ -74,7 +83,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('generates localized paths', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		const result = await getStaticPaths();
 
@@ -110,7 +119,7 @@ describe('sermon detail page', () => {
 
 	it('has favorite button', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermonDetailData();
 
 		const { getByText } = await renderPage();
 
@@ -119,7 +128,7 @@ describe('sermon detail page', () => {
 
 	it('includes player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -130,7 +139,7 @@ describe('sermon detail page', () => {
 
 	it('enables controls', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -144,7 +153,7 @@ describe('sermon detail page', () => {
 
 	it('makes fluid player', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -158,7 +167,7 @@ describe('sermon detail page', () => {
 
 	it('sets poster', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -172,7 +181,7 @@ describe('sermon detail page', () => {
 
 	it('toggles sources', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -201,7 +210,7 @@ describe('sermon detail page', () => {
 
 	it('toggles toggle button label', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -218,7 +227,7 @@ describe('sermon detail page', () => {
 
 	it('falls back to video files', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -246,7 +255,7 @@ describe('sermon detail page', () => {
 
 	it('falls back to audio files', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -274,7 +283,7 @@ describe('sermon detail page', () => {
 
 	it('hides toggle if no video', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -288,7 +297,7 @@ describe('sermon detail page', () => {
 
 	it('has playlist button', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -311,7 +320,7 @@ describe('sermon detail page', () => {
 			jest.isolateModules(async () => {
 				(process.env as any).NODE_ENV = 'development';
 
-				loadRecentSermons();
+				loadSermonDetailPathsData();
 
 				await getStaticPaths();
 
@@ -327,7 +336,7 @@ describe('sermon detail page', () => {
 
 	it('uses speaker name widget', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [
@@ -346,7 +355,7 @@ describe('sermon detail page', () => {
 
 	it('includes donation banner', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -357,7 +366,7 @@ describe('sermon detail page', () => {
 
 	it('includes a donate button', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -366,7 +375,7 @@ describe('sermon detail page', () => {
 
 	it('includes tags', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			recordingTags: {
 				nodes: [
 					{
@@ -386,7 +395,7 @@ describe('sermon detail page', () => {
 
 	it('excludes tag section if no tags', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { queryByText } = await renderPage();
 
@@ -395,7 +404,7 @@ describe('sermon detail page', () => {
 
 	it('includes sponsor title', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
@@ -409,7 +418,7 @@ describe('sermon detail page', () => {
 
 	it('includes sponsor location', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
@@ -423,7 +432,7 @@ describe('sermon detail page', () => {
 
 	it('includes presenters section', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			persons: [
 				{
 					id: 'the_id',
@@ -440,7 +449,7 @@ describe('sermon detail page', () => {
 
 	it('duplicates presenter list', async () => {
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			persons: [
 				{
 					id: 'the_id',
@@ -458,7 +467,7 @@ describe('sermon detail page', () => {
 	it('includes time recorded', async () => {
 		mockedFetchApi.mockResolvedValue({});
 		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			persons: [
 				{
 					id: 'the_id',
