@@ -48,6 +48,8 @@ async function renderPage() {
 }
 
 describe('sermon detail page', () => {
+	beforeEach(() => loadRouter({ isFallback: false }));
+
 	it('gets sermons', async () => {
 		loadSermonDetailPathsData();
 
@@ -118,7 +120,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('has favorite button', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData();
 
 		const { getByText } = await renderPage();
@@ -127,7 +128,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes player', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
@@ -138,7 +138,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('enables controls', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
@@ -152,7 +151,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('makes fluid player', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
@@ -166,7 +164,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('sets poster', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
@@ -180,7 +177,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('toggles sources', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -209,7 +205,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('toggles toggle button label', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -226,7 +221,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('falls back to video files', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -254,7 +248,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('falls back to audio files', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -282,7 +275,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('hides toggle if no video', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -296,7 +288,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('has playlist button', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
@@ -335,7 +326,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('uses speaker name widget', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
@@ -354,7 +344,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes donation banner', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
@@ -365,7 +354,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes a donate button', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
@@ -374,7 +362,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes tags', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			recordingTags: {
 				nodes: [
@@ -394,7 +381,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('excludes tag section if no tags', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({});
 
 		const { queryByText } = await renderPage();
@@ -403,7 +389,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes sponsor title', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
@@ -417,7 +402,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes sponsor location', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
@@ -431,7 +415,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes presenters section', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			persons: [
 				{
@@ -448,7 +431,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('duplicates presenter list', async () => {
-		loadRouter({ isFallback: false });
 		loadSermonDetailData({
 			persons: [
 				{
@@ -466,7 +448,7 @@ describe('sermon detail page', () => {
 
 	it('includes time recorded', async () => {
 		mockedFetchApi.mockResolvedValue({});
-		loadRouter({ isFallback: false });
+
 		loadSermonDetailData({
 			persons: [
 				{
