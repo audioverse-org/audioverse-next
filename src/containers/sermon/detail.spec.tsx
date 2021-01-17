@@ -1,6 +1,5 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from 'next/router';
 import videojs from 'video.js';
 
 import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
@@ -101,7 +100,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
 		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
@@ -110,7 +108,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('shows loading screen', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: true });
+		loadRouter({ isFallback: true });
 
 		const { getByText } = await renderWithIntl(SermonDetail, {
 			sermon: undefined,
