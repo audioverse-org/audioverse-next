@@ -22,3 +22,5 @@ export const LANGUAGES: LanguageConfigurations = {
 };
 
 export const PROJECT_ROOT = process.cwd();
+export const LIST_PRERENDER_LENGTH =
+	process.env.NODE_ENV === 'development' ? 10 : 1000;

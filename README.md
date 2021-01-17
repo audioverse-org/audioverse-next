@@ -24,6 +24,14 @@ npm run extract
 npm run compile
 ```
 
+## GraphQL Code Generation
+
+```bash
+npm run graphql:codegen
+```
+
+Compiles to `src/lib/generated/graphql.ts`
+
 ## Module shorthand
 
 Module paths must be mapped in both `tsconfig.json` and `package.json`.

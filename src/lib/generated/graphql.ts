@@ -1,4295 +1,4529 @@
-import {
-	useQuery,
-	UseQueryOptions,
-	useMutation,
-	UseMutationOptions,
-} from 'react-query';
+import { useQuery, UseQueryOptions, useMutation, UseMutationOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-	[K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-	{ [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-	{ [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-	ID: string;
-	String: string;
-	Boolean: boolean;
-	Int: number;
-	Float: number;
-	/** A date value string in YYYY-MM-DD format. Example value: "2020-10-05". */
-	Date: any;
-	/** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-	DateTime: any;
-	/** The `Upload` scalar type represents a file upload. */
-	Upload: any;
-	/** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
-	URL: any;
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  /** A date value string in YYYY-MM-DD format. Example value: "2020-10-05". */
+  Date: any;
+  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
+  DateTime: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
+  /** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
+  URL: any;
 };
 
 export type Aggregate = {
-	__typename?: 'Aggregate';
-	count: Scalars['Int'];
+  __typename?: 'Aggregate';
+  count: Scalars['Int'];
 };
 
 export type Attachment = Node & {
-	__typename?: 'Attachment';
-	filename: Scalars['String'];
-	/** In bytes */
-	filesize: Scalars['String'];
-	id: Scalars['ID'];
-	mimeType: Scalars['String'];
-	recording: Recording;
-	updatedAt?: Maybe<Scalars['DateTime']>;
-	url: Scalars['URL'];
+  __typename?: 'Attachment';
+  filename: Scalars['String'];
+  /** In bytes */
+  filesize: Scalars['String'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  recording: Recording;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['URL'];
 };
 
 export type AudioFile = Node & {
-	__typename?: 'AudioFile';
-	bitrate: Scalars['Int'];
-	duration: Scalars['Float'];
-	filename: Scalars['String'];
-	/** In bytes */
-	filesize: Scalars['String'];
-	id: Scalars['ID'];
-	mimeType: Scalars['String'];
-	recording: Recording;
-	updatedAt?: Maybe<Scalars['DateTime']>;
-	url: Scalars['URL'];
+  __typename?: 'AudioFile';
+  bitrate: Scalars['Int'];
+  duration: Scalars['Float'];
+  filename: Scalars['String'];
+  /** In bytes */
+  filesize: Scalars['String'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  recording: Recording;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['URL'];
 };
 
 export type AuthenticatedUser = {
-	__typename?: 'AuthenticatedUser';
-	sessionToken: Scalars['String'];
-	user: User;
+  __typename?: 'AuthenticatedUser';
+  sessionToken: Scalars['String'];
+  user: User;
 };
 
 export type AuthenticatedUserPayload = {
-	__typename?: 'AuthenticatedUserPayload';
-	authenticatedUser?: Maybe<AuthenticatedUser>;
-	errors: Array<InputValidationError>;
+  __typename?: 'AuthenticatedUserPayload';
+  authenticatedUser?: Maybe<AuthenticatedUser>;
+  errors: Array<InputValidationError>;
 };
 
 export type Bible = Node & {
-	__typename?: 'Bible';
-	book: BibleBook;
-	books: Array<BibleBook>;
-	id: Scalars['ID'];
-	isDramatized: Scalars['Boolean'];
-	title: Scalars['String'];
+  __typename?: 'Bible';
+  book: BibleBook;
+  books: Array<BibleBook>;
+  id: Scalars['ID'];
+  isDramatized: Scalars['Boolean'];
+  title: Scalars['String'];
 };
 
+
 export type BibleBookArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
 export type BibleBook = Node & {
-	__typename?: 'BibleBook';
-	chapter: BibleChapter;
-	chapterCount: Scalars['Int'];
-	chapters: Array<BibleChapter>;
-	id: Scalars['ID'];
-	isDramatized: Scalars['Boolean'];
-	title: Scalars['String'];
+  __typename?: 'BibleBook';
+  chapter: BibleChapter;
+  chapterCount: Scalars['Int'];
+  chapters: Array<BibleChapter>;
+  id: Scalars['ID'];
+  isDramatized: Scalars['Boolean'];
+  title: Scalars['String'];
 };
 
+
 export type BibleBookChapterArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
 export type BibleChapter = Node & {
-	__typename?: 'BibleChapter';
-	id: Scalars['ID'];
-	text: Scalars['String'];
-	title: Scalars['String'];
-	url: Scalars['URL'];
+  __typename?: 'BibleChapter';
+  id: Scalars['ID'];
+  text: Scalars['String'];
+  title: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type BibleConnection = {
-	__typename?: 'BibleConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<BibleEdge>>;
-	nodes?: Maybe<Array<Bible>>;
-	pageInfo: PageInfo;
+  __typename?: 'BibleConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<BibleEdge>>;
+  nodes?: Maybe<Array<Bible>>;
+  pageInfo: PageInfo;
 };
 
 export type BibleEdge = {
-	__typename?: 'BibleEdge';
-	cursor: Scalars['String'];
-	node: Bible;
+  __typename?: 'BibleEdge';
+  cursor: Scalars['String'];
+  node: Bible;
 };
 
 export type BibleReference = {
-	__typename?: 'BibleReference';
-	book: BibleReferenceBook;
-	chapter?: Maybe<Scalars['Int']>;
-	verse?: Maybe<Scalars['Int']>;
+  __typename?: 'BibleReference';
+  book: BibleReferenceBook;
+  chapter?: Maybe<Scalars['Int']>;
+  verse?: Maybe<Scalars['Int']>;
 };
 
 export enum BibleReferenceBook {
-	Acts = 'ACTS',
-	Amos = 'AMOS',
-	Colossians = 'COLOSSIANS',
-	Daniel = 'DANIEL',
-	Deuteronomy = 'DEUTERONOMY',
-	Ecclesiastes = 'ECCLESIASTES',
-	Ephesians = 'EPHESIANS',
-	Esther = 'ESTHER',
-	Exodus = 'EXODUS',
-	Ezekiel = 'EZEKIEL',
-	Ezra = 'EZRA',
-	FirstChronicles = 'FIRST_CHRONICLES',
-	FirstCorinthians = 'FIRST_CORINTHIANS',
-	FirstJohn = 'FIRST_JOHN',
-	FirstKings = 'FIRST_KINGS',
-	FirstPeter = 'FIRST_PETER',
-	FirstSamuel = 'FIRST_SAMUEL',
-	FirstThessalonians = 'FIRST_THESSALONIANS',
-	FirstTimothy = 'FIRST_TIMOTHY',
-	Galatians = 'GALATIANS',
-	Genesis = 'GENESIS',
-	Habakkuk = 'HABAKKUK',
-	Haggai = 'HAGGAI',
-	Hebrews = 'HEBREWS',
-	Hosea = 'HOSEA',
-	Isaiah = 'ISAIAH',
-	James = 'JAMES',
-	Jeremiah = 'JEREMIAH',
-	Job = 'JOB',
-	Joel = 'JOEL',
-	John = 'JOHN',
-	Jonah = 'JONAH',
-	Joshua = 'JOSHUA',
-	Jude = 'JUDE',
-	Judges = 'JUDGES',
-	Lamentations = 'LAMENTATIONS',
-	Leviticus = 'LEVITICUS',
-	Luke = 'LUKE',
-	Malachi = 'MALACHI',
-	Mark = 'MARK',
-	Matthew = 'MATTHEW',
-	Micah = 'MICAH',
-	Nahum = 'NAHUM',
-	Nehemiah = 'NEHEMIAH',
-	Numbers = 'NUMBERS',
-	Obadiah = 'OBADIAH',
-	Philemon = 'PHILEMON',
-	Philippians = 'PHILIPPIANS',
-	Proverbs = 'PROVERBS',
-	Psalms = 'PSALMS',
-	Revelation = 'REVELATION',
-	Romans = 'ROMANS',
-	Ruth = 'RUTH',
-	SecondChronicles = 'SECOND_CHRONICLES',
-	SecondCorinthians = 'SECOND_CORINTHIANS',
-	SecondJohn = 'SECOND_JOHN',
-	SecondKings = 'SECOND_KINGS',
-	SecondPeter = 'SECOND_PETER',
-	SecondSamuel = 'SECOND_SAMUEL',
-	SecondThessalonians = 'SECOND_THESSALONIANS',
-	SecondTimothy = 'SECOND_TIMOTHY',
-	SongOfSolomon = 'SONG_OF_SOLOMON',
-	ThirdJohn = 'THIRD_JOHN',
-	Titus = 'TITUS',
-	Zechariah = 'ZECHARIAH',
-	Zephaniah = 'ZEPHANIAH',
+  Acts = 'ACTS',
+  Amos = 'AMOS',
+  Colossians = 'COLOSSIANS',
+  Daniel = 'DANIEL',
+  Deuteronomy = 'DEUTERONOMY',
+  Ecclesiastes = 'ECCLESIASTES',
+  Ephesians = 'EPHESIANS',
+  Esther = 'ESTHER',
+  Exodus = 'EXODUS',
+  Ezekiel = 'EZEKIEL',
+  Ezra = 'EZRA',
+  FirstChronicles = 'FIRST_CHRONICLES',
+  FirstCorinthians = 'FIRST_CORINTHIANS',
+  FirstJohn = 'FIRST_JOHN',
+  FirstKings = 'FIRST_KINGS',
+  FirstPeter = 'FIRST_PETER',
+  FirstSamuel = 'FIRST_SAMUEL',
+  FirstThessalonians = 'FIRST_THESSALONIANS',
+  FirstTimothy = 'FIRST_TIMOTHY',
+  Galatians = 'GALATIANS',
+  Genesis = 'GENESIS',
+  Habakkuk = 'HABAKKUK',
+  Haggai = 'HAGGAI',
+  Hebrews = 'HEBREWS',
+  Hosea = 'HOSEA',
+  Isaiah = 'ISAIAH',
+  James = 'JAMES',
+  Jeremiah = 'JEREMIAH',
+  Job = 'JOB',
+  Joel = 'JOEL',
+  John = 'JOHN',
+  Jonah = 'JONAH',
+  Joshua = 'JOSHUA',
+  Jude = 'JUDE',
+  Judges = 'JUDGES',
+  Lamentations = 'LAMENTATIONS',
+  Leviticus = 'LEVITICUS',
+  Luke = 'LUKE',
+  Malachi = 'MALACHI',
+  Mark = 'MARK',
+  Matthew = 'MATTHEW',
+  Micah = 'MICAH',
+  Nahum = 'NAHUM',
+  Nehemiah = 'NEHEMIAH',
+  Numbers = 'NUMBERS',
+  Obadiah = 'OBADIAH',
+  Philemon = 'PHILEMON',
+  Philippians = 'PHILIPPIANS',
+  Proverbs = 'PROVERBS',
+  Psalms = 'PSALMS',
+  Revelation = 'REVELATION',
+  Romans = 'ROMANS',
+  Ruth = 'RUTH',
+  SecondChronicles = 'SECOND_CHRONICLES',
+  SecondCorinthians = 'SECOND_CORINTHIANS',
+  SecondJohn = 'SECOND_JOHN',
+  SecondKings = 'SECOND_KINGS',
+  SecondPeter = 'SECOND_PETER',
+  SecondSamuel = 'SECOND_SAMUEL',
+  SecondThessalonians = 'SECOND_THESSALONIANS',
+  SecondTimothy = 'SECOND_TIMOTHY',
+  SongOfSolomon = 'SONG_OF_SOLOMON',
+  ThirdJohn = 'THIRD_JOHN',
+  Titus = 'TITUS',
+  Zechariah = 'ZECHARIAH',
+  Zephaniah = 'ZEPHANIAH'
 }
 
 /** A Bible reference. */
 export type BibleReferenceInput = {
-	book: BibleReferenceBook;
-	chapter?: Maybe<Scalars['Int']>;
-	verse?: Maybe<Scalars['Int']>;
+  book: BibleReferenceBook;
+  chapter?: Maybe<Scalars['Int']>;
+  verse?: Maybe<Scalars['Int']>;
 };
 
 /** The Bible reference range applicable to an item. */
 export type BibleReferenceRange = Node & {
-	__typename?: 'BibleReferenceRange';
-	/** The end reference. */
-	endReference: BibleReference;
-	id: Scalars['ID'];
-	/** The start reference. */
-	startReference: BibleReference;
+  __typename?: 'BibleReferenceRange';
+  /** The end reference. */
+  endReference: BibleReference;
+  id: Scalars['ID'];
+  /** The start reference. */
+  startReference: BibleReference;
 };
 
 export type BibleReferenceRangeConnection = {
-	__typename?: 'BibleReferenceRangeConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<BibleReferenceRangeEdge>>;
-	nodes?: Maybe<Array<BibleReferenceRange>>;
-	pageInfo: PageInfo;
+  __typename?: 'BibleReferenceRangeConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<BibleReferenceRangeEdge>>;
+  nodes?: Maybe<Array<BibleReferenceRange>>;
+  pageInfo: PageInfo;
 };
 
 export type BibleReferenceRangeEdge = {
-	__typename?: 'BibleReferenceRangeEdge';
-	cursor: Scalars['String'];
-	node: BibleReferenceRange;
+  __typename?: 'BibleReferenceRangeEdge';
+  cursor: Scalars['String'];
+  node: BibleReferenceRange;
 };
 
 /** The Bible reference range the items must fall in to be applicable. */
 export type BibleReferenceRangeInput = {
-	/** The end reference. */
-	endReference?: Maybe<BibleReferenceInput>;
-	/** The start reference. */
-	startReference: BibleReferenceInput;
+  /** The end reference. */
+  endReference?: Maybe<BibleReferenceInput>;
+  /** The start reference. */
+  startReference: BibleReferenceInput;
 };
 
 export type BlogPost = Node & {
-	__typename?: 'BlogPost';
-	body: Scalars['String'];
-	id: Scalars['ID'];
-	image?: Maybe<Image>;
-	title: Scalars['String'];
+  __typename?: 'BlogPost';
+  body: Scalars['String'];
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  title: Scalars['String'];
 };
 
 export type BlogPostConnection = {
-	__typename?: 'BlogPostConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<BlogPostEdge>>;
-	nodes?: Maybe<Array<BlogPost>>;
-	pageInfo: PageInfo;
+  __typename?: 'BlogPostConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<BlogPostEdge>>;
+  nodes?: Maybe<Array<BlogPost>>;
+  pageInfo: PageInfo;
 };
 
 export type BlogPostEdge = {
-	__typename?: 'BlogPostEdge';
-	cursor: Scalars['String'];
-	node: BlogPost;
+  __typename?: 'BlogPostEdge';
+  cursor: Scalars['String'];
+  node: BlogPost;
 };
 
 export type BlogPostOrder = {
-	direction: OrderByDirection;
-	field: BlogPostSortableField;
+  direction: OrderByDirection;
+  field: BlogPostSortableField;
 };
 
 /** Properties by which blog post connections can be ordered. */
 export enum BlogPostSortableField {
-	PublishedAt = 'PUBLISHED_AT',
+  PublishedAt = 'PUBLISHED_AT'
 }
 
 export type CatalogHistoryComment = {
-	__typename?: 'CatalogHistoryComment';
-	isSticky: Scalars['Boolean'];
-	mentions: Array<User>;
-	/** Includes mentions in the format of @user:[id] (e.g., `@user:123`). */
-	message: Scalars['String'];
+  __typename?: 'CatalogHistoryComment';
+  isSticky: Scalars['Boolean'];
+  mentions: Array<User>;
+  /** Includes mentions in the format of @user:[id] (e.g., `@user:123`). */
+  message: Scalars['String'];
 };
 
 export type CatalogHistoryCommentCreateInput = {
-	isSticky?: Maybe<Scalars['Boolean']>;
-	/** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
-	message: Scalars['String'];
+  isSticky?: Maybe<Scalars['Boolean']>;
+  /** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
+  message: Scalars['String'];
 };
 
 export type CatalogHistoryCommentUpdateInput = {
-	isSticky?: Maybe<Scalars['Boolean']>;
-	/** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
-	message: Scalars['String'];
+  isSticky?: Maybe<Scalars['Boolean']>;
+  /** Can include mentions in the format of @user:[id] (e.g., `@user:123`). */
+  message: Scalars['String'];
 };
 
 export type CatalogHistoryItem = Node & {
-	__typename?: 'CatalogHistoryItem';
-	comment?: Maybe<CatalogHistoryComment>;
-	createdAt: Scalars['DateTime'];
-	id: Scalars['ID'];
-	performer: User;
-	type: CatalogHistoryItemType;
+  __typename?: 'CatalogHistoryItem';
+  comment?: Maybe<CatalogHistoryComment>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  performer: User;
+  type: CatalogHistoryItemType;
 };
 
 export type CatalogHistoryItemConnection = {
-	__typename?: 'CatalogHistoryItemConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<CatalogHistoryItemEdge>>;
-	nodes?: Maybe<Array<CatalogHistoryItem>>;
-	pageInfo: PageInfo;
+  __typename?: 'CatalogHistoryItemConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<CatalogHistoryItemEdge>>;
+  nodes?: Maybe<Array<CatalogHistoryItem>>;
+  pageInfo: PageInfo;
 };
 
 export type CatalogHistoryItemEdge = {
-	__typename?: 'CatalogHistoryItemEdge';
-	cursor: Scalars['String'];
-	node: CatalogHistoryItem;
+  __typename?: 'CatalogHistoryItemEdge';
+  cursor: Scalars['String'];
+  node: CatalogHistoryItem;
 };
 
 export type CatalogHistoryItemOrder = {
-	direction: OrderByDirection;
-	field: CatalogHistoryItemSortableField;
+  direction: OrderByDirection;
+  field: CatalogHistoryItemSortableField;
 };
 
 export type CatalogHistoryItemPayload = {
-	__typename?: 'CatalogHistoryItemPayload';
-	catalogHistoryItem?: Maybe<CatalogHistoryItem>;
-	errors: Array<InputValidationError>;
+  __typename?: 'CatalogHistoryItemPayload';
+  catalogHistoryItem?: Maybe<CatalogHistoryItem>;
+  errors: Array<InputValidationError>;
 };
 
 /** Properties by which history item connections can be ordered. */
 export enum CatalogHistoryItemSortableField {
-	CreatedAt = 'CREATED_AT',
+  CreatedAt = 'CREATED_AT'
 }
 
 /** The supported types of catalog history items. */
 export enum CatalogHistoryItemType {
-	InternalComment = 'INTERNAL_COMMENT',
-	SponsorChanged = 'SPONSOR_CHANGED',
+  InternalComment = 'INTERNAL_COMMENT',
+  SponsorChanged = 'SPONSOR_CHANGED'
 }
 
 export type Collection = Node & {
-	__typename?: 'Collection';
-	/** The canonical HTML path to this resource. */
-	canonicalPath: Scalars['String'];
-	/** The canonical URL to this resource. */
-	canonicalUrl: Scalars['String'];
-	contentType: CollectionContentType;
-	description: Scalars['String'];
-	endDate?: Maybe<Scalars['Date']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	image?: Maybe<Image>;
-	imageWithFallback: Image;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	location?: Maybe<Scalars['String']>;
-	/** @deprecated Collection.logoImage is replaced with Collection.image */
-	logoImage?: Maybe<Image>;
-	/** @deprecated Collection.logoImageWithFallback is replaced with Collection.imageWithFallback */
-	logoImageWithFallback: Image;
-	mediaReleaseForm?: Maybe<MediaReleaseForm>;
-	notes?: Maybe<Scalars['String']>;
-	recordings: RecordingConnection;
-	sequences: SequenceConnection;
-	/** A shareable short URL to this resource. */
-	shareUrl: Scalars['String'];
-	sponsor?: Maybe<Sponsor>;
-	startDate?: Maybe<Scalars['Date']>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'Collection';
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String'];
+  /** The canonical URL to this resource. */
+  canonicalUrl: Scalars['String'];
+  contentType: CollectionContentType;
+  description: Scalars['String'];
+  endDate?: Maybe<Scalars['Date']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  imageWithFallback: Image;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  location?: Maybe<Scalars['String']>;
+  /** @deprecated Collection.logoImage is replaced with Collection.image */
+  logoImage?: Maybe<Image>;
+  /** @deprecated Collection.logoImageWithFallback is replaced with Collection.imageWithFallback */
+  logoImageWithFallback: Image;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  notes?: Maybe<Scalars['String']>;
+  recordings: RecordingConnection;
+  sequences: SequenceConnection;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['String'];
+  sponsor?: Maybe<Sponsor>;
+  startDate?: Maybe<Scalars['Date']>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
 };
+
 
 export type CollectionHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
+
 
 export type CollectionRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
+
 export type CollectionSequencesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
 
 export type CollectionConnection = {
-	__typename?: 'CollectionConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<CollectionEdge>>;
-	nodes?: Maybe<Array<Collection>>;
-	pageInfo: PageInfo;
+  __typename?: 'CollectionConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<CollectionEdge>>;
+  nodes?: Maybe<Array<Collection>>;
+  pageInfo: PageInfo;
 };
 
 /** The available types of collections. */
 export enum CollectionContentType {
-	AudiobookSeries = 'AUDIOBOOK_SERIES',
-	Conference = 'CONFERENCE',
-	MusicSeries = 'MUSIC_SERIES',
-	StoryProgram = 'STORY_PROGRAM',
+  AudiobookSeries = 'AUDIOBOOK_SERIES',
+  Conference = 'CONFERENCE',
+  MusicSeries = 'MUSIC_SERIES',
+  StoryProgram = 'STORY_PROGRAM'
 }
 
 export type CollectionCreateInput = {
-	contentType: CollectionContentType;
-	description?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	location?: Maybe<Scalars['String']>;
-	notes?: Maybe<Scalars['String']>;
-	sponsorId: Scalars['ID'];
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  contentType: CollectionContentType;
+  description?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  location?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
+  sponsorId: Scalars['ID'];
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type CollectionEdge = {
-	__typename?: 'CollectionEdge';
-	cursor: Scalars['String'];
-	node: Collection;
+  __typename?: 'CollectionEdge';
+  cursor: Scalars['String'];
+  node: Collection;
 };
 
 export type CollectionPayload = {
-	__typename?: 'CollectionPayload';
-	collection?: Maybe<Collection>;
-	errors: Array<InputValidationError>;
+  __typename?: 'CollectionPayload';
+  collection?: Maybe<Collection>;
+  errors: Array<InputValidationError>;
 };
 
 export type CollectionsOrder = {
-	direction: OrderByDirection;
-	field: CollectionsSortableField;
+  direction: OrderByDirection;
+  field: CollectionsSortableField;
 };
 
 /** Properties by which collection connections can be ordered. */
 export enum CollectionsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type CollectionUpdateInput = {
-	description?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	location?: Maybe<Scalars['String']>;
-	notes?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  location?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
+
 
 /** The date range the items must fall in to be applicable. */
 export type DateRangeInput = {
-	/** The lower bound of the date range. */
-	greaterThan?: Maybe<Scalars['Date']>;
-	/** The lower or equal bound of the date range. */
-	greaterThanOrEqualTo?: Maybe<Scalars['Date']>;
-	/** The upper bound of the date range. */
-	lessThan?: Maybe<Scalars['Date']>;
-	/** The upper or equal bound of the date range. */
-	lessThanOrEqualTo?: Maybe<Scalars['Date']>;
+  /** The lower bound of the date range. */
+  greaterThan?: Maybe<Scalars['Date']>;
+  /** The lower or equal bound of the date range. */
+  greaterThanOrEqualTo?: Maybe<Scalars['Date']>;
+  /** The upper bound of the date range. */
+  lessThan?: Maybe<Scalars['Date']>;
+  /** The upper or equal bound of the date range. */
+  lessThanOrEqualTo?: Maybe<Scalars['Date']>;
 };
+
 
 export type DistributionAgreement = Node & {
-	__typename?: 'DistributionAgreement';
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	isDefault: Scalars['Boolean'];
-	isHidden?: Maybe<Scalars['Boolean']>;
-	isRetired: Scalars['Boolean'];
-	license?: Maybe<License>;
-	notes?: Maybe<Scalars['String']>;
-	recordings: RecordingConnection;
-	sponsor?: Maybe<Sponsor>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'DistributionAgreement';
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  isDefault: Scalars['Boolean'];
+  isHidden?: Maybe<Scalars['Boolean']>;
+  isRetired: Scalars['Boolean'];
+  license?: Maybe<License>;
+  notes?: Maybe<Scalars['String']>;
+  recordings: RecordingConnection;
+  sponsor?: Maybe<Sponsor>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
 };
+
 
 export type DistributionAgreementHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
 
+
 export type DistributionAgreementRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type DistributionAgreementConnection = {
-	__typename?: 'DistributionAgreementConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<DistributionAgreementEdge>>;
-	nodes?: Maybe<Array<DistributionAgreement>>;
-	pageInfo: PageInfo;
+  __typename?: 'DistributionAgreementConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<DistributionAgreementEdge>>;
+  nodes?: Maybe<Array<DistributionAgreement>>;
+  pageInfo: PageInfo;
 };
 
 export type DistributionAgreementCreateInput = {
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	isRetired?: Maybe<Scalars['Boolean']>;
-	licenseId: Scalars['ID'];
-	notes?: Maybe<Scalars['String']>;
-	sponsorId: Scalars['ID'];
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  isRetired?: Maybe<Scalars['Boolean']>;
+  licenseId: Scalars['ID'];
+  notes?: Maybe<Scalars['String']>;
+  sponsorId: Scalars['ID'];
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type DistributionAgreementEdge = {
-	__typename?: 'DistributionAgreementEdge';
-	cursor: Scalars['String'];
-	node: DistributionAgreement;
+  __typename?: 'DistributionAgreementEdge';
+  cursor: Scalars['String'];
+  node: DistributionAgreement;
 };
 
 export type DistributionAgreementPayload = {
-	__typename?: 'DistributionAgreementPayload';
-	distributionAgreement?: Maybe<DistributionAgreement>;
-	errors: Array<InputValidationError>;
+  __typename?: 'DistributionAgreementPayload';
+  distributionAgreement?: Maybe<DistributionAgreement>;
+  errors: Array<InputValidationError>;
 };
 
 export type DistributionAgreementsOrder = {
-	direction: OrderByDirection;
-	field: DistributionAgreementsSortableField;
+  direction: OrderByDirection;
+  field: DistributionAgreementsSortableField;
 };
 
 /** Properties by which distribution agreement connections can be ordered. */
 export enum DistributionAgreementsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type DistributionAgreementUpdateInput = {
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	isRetired?: Maybe<Scalars['Boolean']>;
-	licenseId?: Maybe<Scalars['ID']>;
-	notes?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  isRetired?: Maybe<Scalars['Boolean']>;
+  licenseId?: Maybe<Scalars['ID']>;
+  notes?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 export type Image = {
-	__typename?: 'Image';
-	name: Scalars['String'];
-	updatedAt?: Maybe<Scalars['DateTime']>;
-	url: Scalars['URL'];
+  __typename?: 'Image';
+  name: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['URL'];
 };
 
+
 export type ImageUrlArgs = {
-	size: Scalars['Int'];
+  size: Scalars['Int'];
 };
 
 /** The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields. */
 export type ImageConnectionSlim = {
-	__typename?: 'ImageConnectionSlim';
-	edges?: Maybe<Array<ImageEdge>>;
+  __typename?: 'ImageConnectionSlim';
+  edges?: Maybe<Array<ImageEdge>>;
 };
 
 /** The available image type containers. */
 export enum ImageContainer {
-	Collection = 'COLLECTION',
-	License = 'LICENSE',
-	News = 'NEWS',
-	Person = 'PERSON',
-	Sequence = 'SEQUENCE',
-	Sponsor = 'SPONSOR',
+  Collection = 'COLLECTION',
+  License = 'LICENSE',
+  News = 'NEWS',
+  Person = 'PERSON',
+  Sequence = 'SEQUENCE',
+  Sponsor = 'SPONSOR'
 }
 
 export type ImageEdge = {
-	__typename?: 'ImageEdge';
-	cursor: Scalars['String'];
-	node: Image;
+  __typename?: 'ImageEdge';
+  cursor: Scalars['String'];
+  node: Image;
 };
 
 export type ImageInput = {
-	name: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type ImagePayload = {
-	__typename?: 'ImagePayload';
-	errors: Array<InputValidationError>;
-	image?: Maybe<Image>;
+  __typename?: 'ImagePayload';
+  errors: Array<InputValidationError>;
+  image?: Maybe<Image>;
 };
 
 export type InputValidationError = {
-	__typename?: 'InputValidationError';
-	message: Scalars['String'];
+  __typename?: 'InputValidationError';
+  message: Scalars['String'];
 };
 
 export type InternalContact = {
-	__typename?: 'InternalContact';
-	address: Scalars['String'];
-	email: Scalars['String'];
-	name: Scalars['String'];
-	phone: Scalars['String'];
+  __typename?: 'InternalContact';
+  address: Scalars['String'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  phone: Scalars['String'];
 };
 
 export type InternalContactInput = {
-	address?: Maybe<Scalars['String']>;
-	email?: Maybe<Scalars['String']>;
-	name?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
 };
 
 /** Supported languages */
 export enum Language {
-	Chinese = 'CHINESE',
-	English = 'ENGLISH',
-	French = 'FRENCH',
-	German = 'GERMAN',
-	Japanese = 'JAPANESE',
-	Russian = 'RUSSIAN',
-	Spanish = 'SPANISH',
+  Chinese = 'CHINESE',
+  English = 'ENGLISH',
+  French = 'FRENCH',
+  German = 'GERMAN',
+  Japanese = 'JAPANESE',
+  Russian = 'RUSSIAN',
+  Spanish = 'SPANISH'
 }
 
 export type License = Node & {
-	__typename?: 'License';
-	description: Scalars['String'];
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	image?: Maybe<Image>;
-	isDefault: Scalars['Boolean'];
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	permitsSales?: Maybe<Scalars['Boolean']>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'License';
+  description: Scalars['String'];
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  isDefault: Scalars['Boolean'];
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  permitsSales?: Maybe<Scalars['Boolean']>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
 };
 
+
 export type LicenseHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
 
 export type LicenseConnection = {
-	__typename?: 'LicenseConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<LicenseEdge>>;
-	nodes?: Maybe<Array<License>>;
-	pageInfo: PageInfo;
+  __typename?: 'LicenseConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<LicenseEdge>>;
+  nodes?: Maybe<Array<License>>;
+  pageInfo: PageInfo;
 };
 
 export type LicenseCreateInput = {
-	description?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	notes?: Maybe<Scalars['String']>;
-	permitsSales?: Maybe<Scalars['Boolean']>;
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  notes?: Maybe<Scalars['String']>;
+  permitsSales?: Maybe<Scalars['Boolean']>;
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type LicenseEdge = {
-	__typename?: 'LicenseEdge';
-	cursor: Scalars['String'];
-	node: License;
+  __typename?: 'LicenseEdge';
+  cursor: Scalars['String'];
+  node: License;
 };
 
 export type LicensePayload = {
-	__typename?: 'LicensePayload';
-	errors: Array<InputValidationError>;
-	license?: Maybe<License>;
+  __typename?: 'LicensePayload';
+  errors: Array<InputValidationError>;
+  license?: Maybe<License>;
 };
 
 export type LicensesOrder = {
-	direction: OrderByDirection;
-	field: LicensesSortableField;
+  direction: OrderByDirection;
+  field: LicensesSortableField;
 };
 
 /** Properties by which license connections can be ordered. */
 export enum LicensesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type LicenseUpdateInput = {
-	description?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	permitsSales?: Maybe<Scalars['Boolean']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  permitsSales?: Maybe<Scalars['Boolean']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
 /** The media file container types. */
 export enum MediaFileContainer {
-	Doc = 'DOC',
-	Docx = 'DOCX',
-	Flv = 'FLV',
-	Jpg = 'JPG',
-	Key = 'KEY',
-	M3U8Ios = 'M3U8_IOS',
-	M3U8Web = 'M3U8_WEB',
-	M4A = 'M4A',
-	M4V = 'M4V',
-	Mov = 'MOV',
-	Mp3 = 'MP3',
-	Mp4 = 'MP4',
-	Odp = 'ODP',
-	Odt = 'ODT',
-	Pages = 'PAGES',
-	Pdf = 'PDF',
-	Png = 'PNG',
-	Ppt = 'PPT',
-	Pptx = 'PPTX',
-	Wav = 'WAV',
-	Wma = 'WMA',
-	Wmv = 'WMV',
+  Doc = 'DOC',
+  Docx = 'DOCX',
+  Flv = 'FLV',
+  Jpg = 'JPG',
+  Key = 'KEY',
+  M3U8Ios = 'M3U8_IOS',
+  M3U8Web = 'M3U8_WEB',
+  M4A = 'M4A',
+  M4V = 'M4V',
+  Mov = 'MOV',
+  Mp3 = 'MP3',
+  Mp4 = 'MP4',
+  Odp = 'ODP',
+  Odt = 'ODT',
+  Pages = 'PAGES',
+  Pdf = 'PDF',
+  Png = 'PNG',
+  Ppt = 'PPT',
+  Pptx = 'PPTX',
+  Wav = 'WAV',
+  Wma = 'WMA',
+  Wmv = 'WMV'
 }
 
 export type MediaFileUpload = Node & {
-	__typename?: 'MediaFileUpload';
-	filename: Scalars['String'];
-	/** In bytes */
-	filesize: Scalars['String'];
-	hasUploaded: Scalars['Boolean'];
-	id: Scalars['ID'];
-	mimeType: Scalars['String'];
-	/** The presigned part upload URLs. Unavailable after the upload has completed. */
-	partUploadUrls?: Maybe<Array<Scalars['String']>>;
-	recording?: Maybe<Recording>;
-	updatedAt?: Maybe<Scalars['DateTime']>;
+  __typename?: 'MediaFileUpload';
+  filename: Scalars['String'];
+  /** In bytes */
+  filesize: Scalars['String'];
+  hasUploaded: Scalars['Boolean'];
+  id: Scalars['ID'];
+  mimeType: Scalars['String'];
+  /** The presigned part upload URLs. Unavailable after the upload has completed. */
+  partUploadUrls?: Maybe<Array<Scalars['String']>>;
+  recording?: Maybe<Recording>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
+
 export type MediaFileUploadPartUploadUrlsArgs = {
-	count: Scalars['Int'];
+  count: Scalars['Int'];
 };
 
 export type MediaFileUploadConnection = {
-	__typename?: 'MediaFileUploadConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<MediaFileUploadEdge>>;
-	nodes?: Maybe<Array<MediaFileUpload>>;
-	pageInfo: PageInfo;
+  __typename?: 'MediaFileUploadConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<MediaFileUploadEdge>>;
+  nodes?: Maybe<Array<MediaFileUpload>>;
+  pageInfo: PageInfo;
 };
 
 export type MediaFileUploadEdge = {
-	__typename?: 'MediaFileUploadEdge';
-	cursor: Scalars['String'];
-	node: MediaFileUpload;
+  __typename?: 'MediaFileUploadEdge';
+  cursor: Scalars['String'];
+  node: MediaFileUpload;
 };
 
 export type MediaFileUploadFinishInput = {
-	/** The list of entity tags returned from the part upload API calls. */
-	uploadPartEtags: Array<Scalars['String']>;
+  /** The list of entity tags returned from the part upload API calls. */
+  uploadPartEtags: Array<Scalars['String']>;
 };
 
 export type MediaFileUploadPayload = {
-	__typename?: 'MediaFileUploadPayload';
-	errors: Array<InputValidationError>;
-	mediaFileUpload?: Maybe<MediaFileUpload>;
+  __typename?: 'MediaFileUploadPayload';
+  errors: Array<InputValidationError>;
+  mediaFileUpload?: Maybe<MediaFileUpload>;
 };
 
 export type MediaFileUploadsOrder = {
-	direction: OrderByDirection;
-	field: MediaFileUploadsSortableField;
+  direction: OrderByDirection;
+  field: MediaFileUploadsSortableField;
 };
 
 /** Properties by which media file uploads connections can be ordered. */
 export enum MediaFileUploadsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Filename = 'FILENAME',
+  CreatedAt = 'CREATED_AT',
+  Filename = 'FILENAME'
 }
 
 export type MediaFileUploadStartInput = {
-	filename: Scalars['String'];
-	filesize: Scalars['String'];
-	recordingId?: Maybe<Scalars['ID']>;
+  filename: Scalars['String'];
+  filesize: Scalars['String'];
+  recordingId?: Maybe<Scalars['ID']>;
 };
 
 export type MediaRelease = Node & {
-	__typename?: 'MediaRelease';
-	createdAt: Scalars['DateTime'];
-	id: Scalars['ID'];
-	mediaReleaseForm: MediaReleaseForm;
-	/** The personal information collected with the media release. */
-	mediaReleasePerson: MediaReleasePerson;
-	notes?: Maybe<Scalars['String']>;
-	/** The catalog person associated with the media release. */
-	person?: Maybe<Person>;
+  __typename?: 'MediaRelease';
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  mediaReleaseForm: MediaReleaseForm;
+  /** The personal information collected with the media release. */
+  mediaReleasePerson: MediaReleasePerson;
+  notes?: Maybe<Scalars['String']>;
+  /** The catalog person associated with the media release. */
+  person?: Maybe<Person>;
 };
 
 export type MediaReleaseConnection = {
-	__typename?: 'MediaReleaseConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<MediaReleaseEdge>>;
-	nodes?: Maybe<Array<MediaRelease>>;
-	pageInfo: PageInfo;
+  __typename?: 'MediaReleaseConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<MediaReleaseEdge>>;
+  nodes?: Maybe<Array<MediaRelease>>;
+  pageInfo: PageInfo;
 };
 
 export type MediaReleaseCreateInput = {
-	mediaReleaseFormId: Scalars['ID'];
-	/** The personal information collected with the media release. */
-	mediaReleasePerson: MediaReleasePersonCreateInput;
-	notes?: Maybe<Scalars['String']>;
-	/** The catalog person associated with the media release. */
-	personId?: Maybe<Scalars['ID']>;
+  mediaReleaseFormId: Scalars['ID'];
+  /** The personal information collected with the media release. */
+  mediaReleasePerson: MediaReleasePersonCreateInput;
+  notes?: Maybe<Scalars['String']>;
+  /** The catalog person associated with the media release. */
+  personId?: Maybe<Scalars['ID']>;
 };
 
 export type MediaReleaseEdge = {
-	__typename?: 'MediaReleaseEdge';
-	cursor: Scalars['String'];
-	node: MediaRelease;
+  __typename?: 'MediaReleaseEdge';
+  cursor: Scalars['String'];
+  node: MediaRelease;
 };
 
 export type MediaReleaseForm = Node & {
-	__typename?: 'MediaReleaseForm';
-	collection?: Maybe<Collection>;
-	createdAt: Scalars['DateTime'];
-	id: Scalars['ID'];
-	isClosed: Scalars['Boolean'];
-	mediaReleases: MediaReleaseConnection;
-	recording?: Maybe<Recording>;
-	sequence?: Maybe<Sequence>;
-	sponsor?: Maybe<Sponsor>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
-	type: MediaReleaseFormType;
-	/** The URL for media release form. */
-	url?: Maybe<Scalars['URL']>;
+  __typename?: 'MediaReleaseForm';
+  collection?: Maybe<Collection>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ID'];
+  isClosed: Scalars['Boolean'];
+  mediaReleases: MediaReleaseConnection;
+  recording?: Maybe<Recording>;
+  sequence?: Maybe<Sequence>;
+  sponsor?: Maybe<Sponsor>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
+  type: MediaReleaseFormType;
+  /** The URL for media release form. */
+  url?: Maybe<Scalars['URL']>;
 };
 
+
 export type MediaReleaseFormMediaReleasesArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<MediaReleaseOrder>>;
-	personId?: Maybe<Scalars['ID']>;
-	recordingId?: Maybe<Scalars['ID']>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<MediaReleaseOrder>>;
+  personId?: Maybe<Scalars['ID']>;
+  recordingId?: Maybe<Scalars['ID']>;
+  search?: Maybe<Scalars['String']>;
 };
 
 export type MediaReleaseFormConnection = {
-	__typename?: 'MediaReleaseFormConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<MediaReleaseFormEdge>>;
-	nodes?: Maybe<Array<MediaReleaseForm>>;
-	pageInfo: PageInfo;
+  __typename?: 'MediaReleaseFormConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<MediaReleaseFormEdge>>;
+  nodes?: Maybe<Array<MediaReleaseForm>>;
+  pageInfo: PageInfo;
 };
 
 export type MediaReleaseFormCreateInput = {
-	/** Required if `type` is `COLLECTION`. */
-	collectionId?: Maybe<Scalars['ID']>;
-	isClosed?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	/** Required if `type` is `RECORDING`. */
-	recordingId?: Maybe<Scalars['ID']>;
-	/** Required if `type` is `SEQUENCE`. */
-	sequenceId?: Maybe<Scalars['ID']>;
-	/** Required if `type` is `SPONSOR`. */
-	sponsorId?: Maybe<Scalars['ID']>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
-	type: MediaReleaseFormType;
+  /** Required if `type` is `COLLECTION`. */
+  collectionId?: Maybe<Scalars['ID']>;
+  isClosed?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  /** Required if `type` is `RECORDING`. */
+  recordingId?: Maybe<Scalars['ID']>;
+  /** Required if `type` is `SEQUENCE`. */
+  sequenceId?: Maybe<Scalars['ID']>;
+  /** Required if `type` is `SPONSOR`. */
+  sponsorId?: Maybe<Scalars['ID']>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
+  type: MediaReleaseFormType;
 };
 
 export type MediaReleaseFormEdge = {
-	__typename?: 'MediaReleaseFormEdge';
-	cursor: Scalars['String'];
-	node: MediaReleaseForm;
+  __typename?: 'MediaReleaseFormEdge';
+  cursor: Scalars['String'];
+  node: MediaReleaseForm;
 };
 
 export type MediaReleaseFormOrder = {
-	direction: OrderByDirection;
-	field: MediaReleaseFormSortableField;
+  direction: OrderByDirection;
+  field: MediaReleaseFormSortableField;
 };
 
 export type MediaReleaseFormPayload = {
-	__typename?: 'MediaReleaseFormPayload';
-	errors: Array<InputValidationError>;
-	mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  __typename?: 'MediaReleaseFormPayload';
+  errors: Array<InputValidationError>;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
 };
 
 /** Properties by which media release form connections can be ordered. */
 export enum MediaReleaseFormSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
-	Type = 'TYPE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE',
+  Type = 'TYPE'
 }
 
 export type MediaReleaseFormTemplate = {
-	__typename?: 'MediaReleaseFormTemplate';
-	summary: Scalars['String'];
-	title: Scalars['String'];
-	type: MediaReleaseFormType;
+  __typename?: 'MediaReleaseFormTemplate';
+  summary: Scalars['String'];
+  title: Scalars['String'];
+  type: MediaReleaseFormType;
 };
 
 /** Supported types of media releases. */
 export enum MediaReleaseFormType {
-	Collection = 'COLLECTION',
-	Master = 'MASTER',
-	Recording = 'RECORDING',
-	Sequence = 'SEQUENCE',
-	Sponsor = 'SPONSOR',
+  Collection = 'COLLECTION',
+  Master = 'MASTER',
+  Recording = 'RECORDING',
+  Sequence = 'SEQUENCE',
+  Sponsor = 'SPONSOR'
 }
 
 export type MediaReleaseFormUpdateInput = {
-	/** Required if `type` is `COLLECTION`. */
-	collectionId?: Maybe<Scalars['ID']>;
-	isClosed?: Maybe<Scalars['Boolean']>;
-	/** Required if `type` is `RECORDING`. */
-	recordingId?: Maybe<Scalars['ID']>;
-	/** Required if `type` is `SEQUENCE`. */
-	sequenceId?: Maybe<Scalars['ID']>;
-	/** Required if `type` is `SPONSOR`. */
-	sponsorId?: Maybe<Scalars['ID']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
-	type?: Maybe<MediaReleaseFormType>;
+  /** Required if `type` is `COLLECTION`. */
+  collectionId?: Maybe<Scalars['ID']>;
+  isClosed?: Maybe<Scalars['Boolean']>;
+  /** Required if `type` is `RECORDING`. */
+  recordingId?: Maybe<Scalars['ID']>;
+  /** Required if `type` is `SEQUENCE`. */
+  sequenceId?: Maybe<Scalars['ID']>;
+  /** Required if `type` is `SPONSOR`. */
+  sponsorId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<MediaReleaseFormType>;
 };
 
 export type MediaReleaseOrder = {
-	direction: OrderByDirection;
-	field: MediaReleaseSortableField;
+  direction: OrderByDirection;
+  field: MediaReleaseSortableField;
 };
 
 export type MediaReleasePayload = {
-	__typename?: 'MediaReleasePayload';
-	errors: Array<InputValidationError>;
-	mediaRelease?: Maybe<MediaRelease>;
+  __typename?: 'MediaReleasePayload';
+  errors: Array<InputValidationError>;
+  mediaRelease?: Maybe<MediaRelease>;
 };
 
 export type MediaReleasePerson = {
-	__typename?: 'MediaReleasePerson';
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1?: Maybe<Scalars['String']>;
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** The name of the city, district, village, or town. */
-	city?: Maybe<Scalars['String']>;
-	/** The name of the country. */
-	country?: Maybe<Scalars['String']>;
-	/** The person's email address. */
-	email: Scalars['String'];
-	/** The person's first name. */
-	givenName: Scalars['String'];
-	/** The full name of the person, based on the values for givenName and surname. */
-	name: Scalars['String'];
-	/** The person's phone number. */
-	phone: Scalars['String'];
-	/** The postal or zip code. */
-	postalCode?: Maybe<Scalars['String']>;
-	/** The name of the region, such as the province, state, or district. */
-	province?: Maybe<Scalars['String']>;
-	/** The person's last name. */
-	surname: Scalars['String'];
+  __typename?: 'MediaReleasePerson';
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1?: Maybe<Scalars['String']>;
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** The name of the city, district, village, or town. */
+  city?: Maybe<Scalars['String']>;
+  /** The name of the country. */
+  country?: Maybe<Scalars['String']>;
+  /** The person's email address. */
+  email: Scalars['String'];
+  /** The person's first name. */
+  givenName: Scalars['String'];
+  /** The full name of the person, based on the values for givenName and surname. */
+  name: Scalars['String'];
+  /** The person's phone number. */
+  phone: Scalars['String'];
+  /** The postal or zip code. */
+  postalCode?: Maybe<Scalars['String']>;
+  /** The name of the region, such as the province, state, or district. */
+  province?: Maybe<Scalars['String']>;
+  /** The person's last name. */
+  surname: Scalars['String'];
 };
 
 export type MediaReleasePersonCreateInput = {
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1: Scalars['String'];
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** The name of the city, district, village, or town. */
-	city: Scalars['String'];
-	/** The name of the country. */
-	country: Scalars['String'];
-	/** The person's email address. */
-	email: Scalars['String'];
-	/** The person's first name. */
-	givenName: Scalars['String'];
-	/** The person's phone number. */
-	phone: Scalars['String'];
-	/** The postal or zip code. */
-	postalCode: Scalars['String'];
-	/** The name of the region, such as the province, state, or district. */
-	province: Scalars['String'];
-	/** The person's last name. */
-	surname: Scalars['String'];
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1: Scalars['String'];
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** The name of the city, district, village, or town. */
+  city: Scalars['String'];
+  /** The name of the country. */
+  country: Scalars['String'];
+  /** The person's email address. */
+  email: Scalars['String'];
+  /** The person's first name. */
+  givenName: Scalars['String'];
+  /** The person's phone number. */
+  phone: Scalars['String'];
+  /** The postal or zip code. */
+  postalCode: Scalars['String'];
+  /** The name of the region, such as the province, state, or district. */
+  province: Scalars['String'];
+  /** The person's last name. */
+  surname: Scalars['String'];
 };
 
 export type MediaReleasePersonUpdateInput = {
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1?: Maybe<Scalars['String']>;
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** The name of the city, district, village, or town. */
-	city?: Maybe<Scalars['String']>;
-	/** The name of the country. */
-	country?: Maybe<Scalars['String']>;
-	/** The person's email address. */
-	email?: Maybe<Scalars['String']>;
-	/** The person's first name. */
-	givenName?: Maybe<Scalars['String']>;
-	/** The person's phone number. */
-	phone?: Maybe<Scalars['String']>;
-	/** The postal or zip code. */
-	postalCode?: Maybe<Scalars['String']>;
-	/** The name of the region, such as the province, state, or district. */
-	province?: Maybe<Scalars['String']>;
-	/** The person's last name. */
-	surname?: Maybe<Scalars['String']>;
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1?: Maybe<Scalars['String']>;
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** The name of the city, district, village, or town. */
+  city?: Maybe<Scalars['String']>;
+  /** The name of the country. */
+  country?: Maybe<Scalars['String']>;
+  /** The person's email address. */
+  email?: Maybe<Scalars['String']>;
+  /** The person's first name. */
+  givenName?: Maybe<Scalars['String']>;
+  /** The person's phone number. */
+  phone?: Maybe<Scalars['String']>;
+  /** The postal or zip code. */
+  postalCode?: Maybe<Scalars['String']>;
+  /** The name of the region, such as the province, state, or district. */
+  province?: Maybe<Scalars['String']>;
+  /** The person's last name. */
+  surname?: Maybe<Scalars['String']>;
 };
 
 /** Properties by which media release connections can be ordered. */
 export enum MediaReleaseSortableField {
-	CreatedAt = 'CREATED_AT',
-	GivenName = 'GIVEN_NAME',
-	Id = 'ID',
-	Surname = 'SURNAME',
+  CreatedAt = 'CREATED_AT',
+  GivenName = 'GIVEN_NAME',
+  Id = 'ID',
+  Surname = 'SURNAME'
 }
 
 export type MediaReleaseUpdateInput = {
-	/** The personal information collected with the media release. */
-	mediaReleasePerson?: Maybe<MediaReleasePersonUpdateInput>;
-	notes?: Maybe<Scalars['String']>;
-	/** The catalog person associated with the media release. */
-	personId?: Maybe<Scalars['ID']>;
+  /** The personal information collected with the media release. */
+  mediaReleasePerson?: Maybe<MediaReleasePersonUpdateInput>;
+  notes?: Maybe<Scalars['String']>;
+  /** The catalog person associated with the media release. */
+  personId?: Maybe<Scalars['ID']>;
 };
 
 export type Mutation = {
-	__typename?: 'Mutation';
-	catalogHistoryCommentDelete: SuccessPayload;
-	catalogHistoryCommentUpdate: CatalogHistoryItemPayload;
-	collectionCreate: CollectionPayload;
-	collectionDelete: SuccessPayload;
-	collectionHistoryCommentCreate: CatalogHistoryItemPayload;
-	collectionUpdate: CollectionPayload;
-	distributionAgreementCreate: DistributionAgreementPayload;
-	distributionAgreementDelete: SuccessPayload;
-	distributionAgreementHistoryCommentCreate: CatalogHistoryItemPayload;
-	distributionAgreementUpdate: DistributionAgreementPayload;
-	/** @deprecated favoriteRecording is replaced with recordingFavorite */
-	favoriteRecording: Scalars['Boolean'];
-	/** Upload an image to an image type container. */
-	imageUpload: ImagePayload;
-	licenseCreate: LicensePayload;
-	licenseDelete: SuccessPayload;
-	licenseHistoryCommentCreate: CatalogHistoryItemPayload;
-	licenseUpdate: LicensePayload;
-	login: AuthenticatedUserPayload;
-	loginSocial: AuthenticatedUserPayload;
-	mediaFileDelete: SuccessPayload;
-	mediaFileUploadAbort: SuccessPayload;
-	mediaFileUploadAssign: SuccessPayload;
-	mediaFileUploadFinish: MediaFileUploadPayload;
-	mediaFileUploadStart: MediaFileUploadPayload;
-	mediaReleaseCreate: MediaReleasePayload;
-	mediaReleaseDelete: SuccessPayload;
-	mediaReleaseFormCreate: MediaReleaseFormPayload;
-	mediaReleaseFormDelete: SuccessPayload;
-	mediaReleaseFormTemplateUpdate: SuccessPayload;
-	mediaReleaseFormUpdate: MediaReleaseFormPayload;
-	mediaReleaseUpdate: MediaReleasePayload;
-	personCreate: PersonPayload;
-	personDelete: SuccessPayload;
-	personFavorite: SuccessPayload;
-	personHistoryCommentCreate: CatalogHistoryItemPayload;
-	personUnfavorite: SuccessPayload;
-	personUpdate: PersonPayload;
-	playlistAdd: UserPlaylist;
-	playlistDelete: Scalars['Boolean'];
-	playlistRecordingAdd: Scalars['Boolean'];
-	playlistRecordingRemove: Scalars['Boolean'];
-	playlistUpdate: UserPlaylist;
-	recordingArchive: SuccessPayload;
-	recordingCreate: RecordingPayload;
-	/** Advances a recording from or withdraws a recording to draft stage. */
-	recordingDrafting: RecordingPayload;
-	recordingFavorite: SuccessPayload;
-	recordingHistoryCommentCreate: CatalogHistoryItemPayload;
-	recordingScreeningContentCheckoutCreate: RecordingScreeningCheckoutPayload;
-	recordingScreeningContentCheckoutDelete: SuccessPayload;
-	recordingScreeningContentEvaluate: RecordingPayload;
-	/** Sets the methods used in evaluating the recording. */
-	recordingScreeningContentMethodsSet: RecordingContentScreeningEvaluationPayload;
-	recordingScreeningIssueCreate: RecordingScreeningIssuePayload;
-	recordingScreeningIssueDelete: SuccessPayload;
-	recordingScreeningIssueUpdate: RecordingScreeningIssuePayload;
-	recordingScreeningLegalCheckoutCreate: RecordingScreeningCheckoutPayload;
-	recordingScreeningLegalCheckoutDelete: SuccessPayload;
-	recordingScreeningLegalEvaluate: RecordingPayload;
-	recordingScreeningTechnicalCheckoutCreate: RecordingScreeningCheckoutPayload;
-	recordingScreeningTechnicalCheckoutDelete: SuccessPayload;
-	recordingScreeningTechnicalEvaluate: RecordingPayload;
-	recordingUnfavorite: SuccessPayload;
-	recordingUpdate: RecordingPayload;
-	sequenceCreate: SequencePayload;
-	sequenceDelete: SuccessPayload;
-	sequenceHistoryCommentCreate: CatalogHistoryItemPayload;
-	sequenceUpdate: SequencePayload;
-	signup: AuthenticatedUserPayload;
-	sponsorCreate: SponsorPayload;
-	sponsorDelete: SuccessPayload;
-	sponsorHistoryCommentCreate: CatalogHistoryItemPayload;
-	sponsorUpdate: SponsorPayload;
-	/** @deprecated unfavoriteRecording is replaced with recordingUnfavorite */
-	unfavoriteRecording: Scalars['Boolean'];
-	updateMyProfile: AuthenticatedUserPayload;
-	userCreate: UserPayload;
-	userDelete: SuccessPayload;
-	/** Sends a reset password email to the user, as the first step in the reset password process. */
-	userRecover: SuccessPayload;
-	/** Resets a user's password with a token received from `userRecover`. */
-	userReset: SuccessPayload;
-	userUpdate: UserPayload;
+  __typename?: 'Mutation';
+  catalogHistoryCommentDelete: SuccessPayload;
+  catalogHistoryCommentUpdate: CatalogHistoryItemPayload;
+  collectionCreate: CollectionPayload;
+  collectionDelete: SuccessPayload;
+  collectionHistoryCommentCreate: CatalogHistoryItemPayload;
+  collectionUpdate: CollectionPayload;
+  distributionAgreementCreate: DistributionAgreementPayload;
+  distributionAgreementDelete: SuccessPayload;
+  distributionAgreementHistoryCommentCreate: CatalogHistoryItemPayload;
+  distributionAgreementUpdate: DistributionAgreementPayload;
+  /** @deprecated favoriteRecording is replaced with recordingFavorite */
+  favoriteRecording: Scalars['Boolean'];
+  /** Upload an image to an image type container. */
+  imageUpload: ImagePayload;
+  licenseCreate: LicensePayload;
+  licenseDelete: SuccessPayload;
+  licenseHistoryCommentCreate: CatalogHistoryItemPayload;
+  licenseUpdate: LicensePayload;
+  login: AuthenticatedUserPayload;
+  loginSocial: AuthenticatedUserPayload;
+  mediaFileDelete: SuccessPayload;
+  mediaFileUploadAbort: SuccessPayload;
+  mediaFileUploadAssign: SuccessPayload;
+  mediaFileUploadFinish: MediaFileUploadPayload;
+  mediaFileUploadStart: MediaFileUploadPayload;
+  mediaReleaseCreate: MediaReleasePayload;
+  mediaReleaseDelete: SuccessPayload;
+  mediaReleaseFormCreate: MediaReleaseFormPayload;
+  mediaReleaseFormDelete: SuccessPayload;
+  mediaReleaseFormTemplateUpdate: SuccessPayload;
+  mediaReleaseFormUpdate: MediaReleaseFormPayload;
+  mediaReleaseUpdate: MediaReleasePayload;
+  personCreate: PersonPayload;
+  personDelete: SuccessPayload;
+  personFavorite: SuccessPayload;
+  personHistoryCommentCreate: CatalogHistoryItemPayload;
+  personUnfavorite: SuccessPayload;
+  personUpdate: PersonPayload;
+  playlistAdd: UserPlaylist;
+  playlistDelete: Scalars['Boolean'];
+  playlistRecordingAdd: Scalars['Boolean'];
+  playlistRecordingRemove: Scalars['Boolean'];
+  playlistUpdate: UserPlaylist;
+  recordingArchive: SuccessPayload;
+  recordingCreate: RecordingPayload;
+  /** Advances a recording from or withdraws a recording to draft stage. */
+  recordingDrafting: RecordingPayload;
+  recordingFavorite: SuccessPayload;
+  recordingHistoryCommentCreate: CatalogHistoryItemPayload;
+  recordingScreeningContentCheckoutCreate: RecordingScreeningCheckoutPayload;
+  recordingScreeningContentCheckoutDelete: SuccessPayload;
+  recordingScreeningContentEvaluate: RecordingPayload;
+  /** Sets the methods used in evaluating the recording. */
+  recordingScreeningContentMethodsSet: RecordingContentScreeningEvaluationPayload;
+  recordingScreeningIssueCreate: RecordingScreeningIssuePayload;
+  recordingScreeningIssueDelete: SuccessPayload;
+  recordingScreeningIssueUpdate: RecordingScreeningIssuePayload;
+  recordingScreeningLegalCheckoutCreate: RecordingScreeningCheckoutPayload;
+  recordingScreeningLegalCheckoutDelete: SuccessPayload;
+  recordingScreeningLegalEvaluate: RecordingPayload;
+  recordingScreeningTechnicalCheckoutCreate: RecordingScreeningCheckoutPayload;
+  recordingScreeningTechnicalCheckoutDelete: SuccessPayload;
+  recordingScreeningTechnicalEvaluate: RecordingPayload;
+  recordingUnfavorite: SuccessPayload;
+  recordingUpdate: RecordingPayload;
+  sequenceCreate: SequencePayload;
+  sequenceDelete: SuccessPayload;
+  sequenceHistoryCommentCreate: CatalogHistoryItemPayload;
+  sequenceUpdate: SequencePayload;
+  signup: AuthenticatedUserPayload;
+  sponsorCreate: SponsorPayload;
+  sponsorDelete: SuccessPayload;
+  sponsorHistoryCommentCreate: CatalogHistoryItemPayload;
+  sponsorUpdate: SponsorPayload;
+  /** @deprecated unfavoriteRecording is replaced with recordingUnfavorite */
+  unfavoriteRecording: Scalars['Boolean'];
+  updateMyProfile: AuthenticatedUserPayload;
+  userCreate: UserPayload;
+  userDelete: SuccessPayload;
+  /** Sends a reset password email to the user, as the first step in the reset password process. */
+  userRecover: SuccessPayload;
+  /** Resets a user's password with a token received from `userRecover`. */
+  userReset: SuccessPayload;
+  userUpdate: UserPayload;
 };
+
 
 export type MutationCatalogHistoryCommentDeleteArgs = {
-	catalogHistoryCommentId: Scalars['ID'];
+  catalogHistoryCommentId: Scalars['ID'];
 };
+
 
 export type MutationCatalogHistoryCommentUpdateArgs = {
-	catalogHistoryCommentId: Scalars['ID'];
-	input: CatalogHistoryCommentUpdateInput;
+  catalogHistoryCommentId: Scalars['ID'];
+  input: CatalogHistoryCommentUpdateInput;
 };
+
 
 export type MutationCollectionCreateArgs = {
-	input: CollectionCreateInput;
+  input: CollectionCreateInput;
 };
+
 
 export type MutationCollectionDeleteArgs = {
-	collectionId: Scalars['ID'];
+  collectionId: Scalars['ID'];
 };
+
 
 export type MutationCollectionHistoryCommentCreateArgs = {
-	collectionId: Scalars['ID'];
-	input: CatalogHistoryCommentCreateInput;
+  collectionId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
 };
+
 
 export type MutationCollectionUpdateArgs = {
-	collectionId: Scalars['ID'];
-	input: CollectionUpdateInput;
+  collectionId: Scalars['ID'];
+  input: CollectionUpdateInput;
 };
+
 
 export type MutationDistributionAgreementCreateArgs = {
-	input: DistributionAgreementCreateInput;
+  input: DistributionAgreementCreateInput;
 };
+
 
 export type MutationDistributionAgreementDeleteArgs = {
-	distributionAgreementId: Scalars['ID'];
+  distributionAgreementId: Scalars['ID'];
 };
+
 
 export type MutationDistributionAgreementHistoryCommentCreateArgs = {
-	distributionAgreementId: Scalars['ID'];
-	input: CatalogHistoryCommentCreateInput;
+  distributionAgreementId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
 };
+
 
 export type MutationDistributionAgreementUpdateArgs = {
-	distributionAgreementId: Scalars['ID'];
-	input: DistributionAgreementUpdateInput;
+  distributionAgreementId: Scalars['ID'];
+  input: DistributionAgreementUpdateInput;
 };
+
 
 export type MutationFavoriteRecordingArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationImageUploadArgs = {
-	image: Scalars['Upload'];
-	imageType: ImageContainer;
+  image: Scalars['Upload'];
+  imageType: ImageContainer;
 };
+
 
 export type MutationLicenseCreateArgs = {
-	input: LicenseCreateInput;
+  input: LicenseCreateInput;
 };
+
 
 export type MutationLicenseDeleteArgs = {
-	licenseId: Scalars['ID'];
+  licenseId: Scalars['ID'];
 };
+
 
 export type MutationLicenseHistoryCommentCreateArgs = {
-	input: CatalogHistoryCommentCreateInput;
-	licenseId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
+  licenseId: Scalars['ID'];
 };
+
 
 export type MutationLicenseUpdateArgs = {
-	input: LicenseUpdateInput;
-	licenseId: Scalars['ID'];
+  input: LicenseUpdateInput;
+  licenseId: Scalars['ID'];
 };
+
 
 export type MutationLoginArgs = {
-	input: UserLoginInput;
+  input: UserLoginInput;
 };
+
 
 export type MutationLoginSocialArgs = {
-	input: UserLoginSocialInput;
+  input: UserLoginSocialInput;
 };
+
 
 export type MutationMediaFileDeleteArgs = {
-	mediaFileId: Scalars['ID'];
+  mediaFileId: Scalars['ID'];
 };
+
 
 export type MutationMediaFileUploadAbortArgs = {
-	mediaFileUploadId: Scalars['ID'];
+  mediaFileUploadId: Scalars['ID'];
 };
+
 
 export type MutationMediaFileUploadAssignArgs = {
-	mediaFileUploadId: Scalars['ID'];
-	recordingId: Scalars['ID'];
+  mediaFileUploadId: Scalars['ID'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationMediaFileUploadFinishArgs = {
-	input: MediaFileUploadFinishInput;
-	mediaFileUploadId: Scalars['ID'];
+  input: MediaFileUploadFinishInput;
+  mediaFileUploadId: Scalars['ID'];
 };
+
 
 export type MutationMediaFileUploadStartArgs = {
-	input: MediaFileUploadStartInput;
+  input: MediaFileUploadStartInput;
 };
+
 
 export type MutationMediaReleaseCreateArgs = {
-	input: MediaReleaseCreateInput;
+  input: MediaReleaseCreateInput;
 };
+
 
 export type MutationMediaReleaseDeleteArgs = {
-	mediaReleaseId: Scalars['ID'];
+  mediaReleaseId: Scalars['ID'];
 };
+
 
 export type MutationMediaReleaseFormCreateArgs = {
-	input: MediaReleaseFormCreateInput;
+  input: MediaReleaseFormCreateInput;
 };
+
 
 export type MutationMediaReleaseFormDeleteArgs = {
-	mediaReleaseFormId: Scalars['ID'];
+  mediaReleaseFormId: Scalars['ID'];
 };
+
 
 export type MutationMediaReleaseFormTemplateUpdateArgs = {
-	input: MediaReleaseFormUpdateInput;
-	language: Language;
-	type: MediaReleaseFormType;
+  input: MediaReleaseFormUpdateInput;
+  language: Language;
+  type: MediaReleaseFormType;
 };
+
 
 export type MutationMediaReleaseFormUpdateArgs = {
-	input: MediaReleaseFormUpdateInput;
-	mediaReleaseFormId: Scalars['ID'];
+  input: MediaReleaseFormUpdateInput;
+  mediaReleaseFormId: Scalars['ID'];
 };
+
 
 export type MutationMediaReleaseUpdateArgs = {
-	input: MediaReleaseUpdateInput;
-	mediaReleaseId: Scalars['ID'];
+  input: MediaReleaseUpdateInput;
+  mediaReleaseId: Scalars['ID'];
 };
+
 
 export type MutationPersonCreateArgs = {
-	input: PersonCreateInput;
+  input: PersonCreateInput;
 };
+
 
 export type MutationPersonDeleteArgs = {
-	personId: Scalars['ID'];
+  personId: Scalars['ID'];
 };
+
 
 export type MutationPersonFavoriteArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationPersonHistoryCommentCreateArgs = {
-	input: CatalogHistoryCommentCreateInput;
-	personId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
+  personId: Scalars['ID'];
 };
+
 
 export type MutationPersonUnfavoriteArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationPersonUpdateArgs = {
-	input: PersonUpdateInput;
-	personId: Scalars['ID'];
+  input: PersonUpdateInput;
+  personId: Scalars['ID'];
 };
+
 
 export type MutationPlaylistAddArgs = {
-	input: UserPlaylistAddInput;
+  input: UserPlaylistAddInput;
 };
+
 
 export type MutationPlaylistDeleteArgs = {
-	playlistId: Scalars['ID'];
+  playlistId: Scalars['ID'];
 };
+
 
 export type MutationPlaylistRecordingAddArgs = {
-	playlistId: Scalars['ID'];
-	recordingId: Scalars['ID'];
+  playlistId: Scalars['ID'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationPlaylistRecordingRemoveArgs = {
-	playlistId: Scalars['ID'];
-	recordingId: Scalars['ID'];
+  playlistId: Scalars['ID'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationPlaylistUpdateArgs = {
-	input: UserPlaylistUpdateInput;
-	playlistId: Scalars['ID'];
+  input: UserPlaylistUpdateInput;
+  playlistId: Scalars['ID'];
 };
+
 
 export type MutationRecordingArchiveArgs = {
-	reason: Scalars['String'];
-	recordingId: Scalars['ID'];
+  reason: Scalars['String'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingCreateArgs = {
-	input: RecordingCreateInput;
+  input: RecordingCreateInput;
 };
+
 
 export type MutationRecordingDraftingArgs = {
-	finished: Scalars['Boolean'];
-	recordingId: Scalars['ID'];
+  finished: Scalars['Boolean'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingFavoriteArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationRecordingHistoryCommentCreateArgs = {
-	input: CatalogHistoryCommentCreateInput;
-	recordingId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningContentCheckoutCreateArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningContentCheckoutDeleteArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningContentEvaluateArgs = {
-	approve: Scalars['Boolean'];
-	recordingId: Scalars['ID'];
+  approve: Scalars['Boolean'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningContentMethodsSetArgs = {
-	methods: Array<RecordingScreeningMethod>;
-	recordingId: Scalars['ID'];
+  methods: Array<RecordingScreeningMethod>;
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningIssueCreateArgs = {
-	input: RecordingScreeningIssueInput;
-	recordingId: Scalars['ID'];
+  input: RecordingScreeningIssueInput;
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningIssueDeleteArgs = {
-	issueId: Scalars['ID'];
+  issueId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningIssueUpdateArgs = {
-	input: RecordingScreeningIssueInput;
-	issueId: Scalars['ID'];
+  input: RecordingScreeningIssueInput;
+  issueId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningLegalCheckoutCreateArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningLegalCheckoutDeleteArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningLegalEvaluateArgs = {
-	approve: Scalars['Boolean'];
-	recordingId: Scalars['ID'];
+  approve: Scalars['Boolean'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingScreeningTechnicalCheckoutCreateArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningTechnicalCheckoutDeleteArgs = {
-	recordingId: Scalars['ID'];
-	userId?: Maybe<Scalars['ID']>;
+  recordingId: Scalars['ID'];
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationRecordingScreeningTechnicalEvaluateArgs = {
-	approve: Scalars['Boolean'];
-	recordingId: Scalars['ID'];
+  approve: Scalars['Boolean'];
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationRecordingUnfavoriteArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationRecordingUpdateArgs = {
-	input: RecordingUpdateInput;
-	recordingId: Scalars['ID'];
+  input: RecordingUpdateInput;
+  recordingId: Scalars['ID'];
 };
+
 
 export type MutationSequenceCreateArgs = {
-	input: SequenceCreateInput;
+  input: SequenceCreateInput;
 };
+
 
 export type MutationSequenceDeleteArgs = {
-	sequenceId: Scalars['ID'];
+  sequenceId: Scalars['ID'];
 };
+
 
 export type MutationSequenceHistoryCommentCreateArgs = {
-	input: CatalogHistoryCommentCreateInput;
-	sequenceId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
+  sequenceId: Scalars['ID'];
 };
+
 
 export type MutationSequenceUpdateArgs = {
-	input: SequenceUpdateInput;
-	sequenceId: Scalars['ID'];
+  input: SequenceUpdateInput;
+  sequenceId: Scalars['ID'];
 };
+
 
 export type MutationSignupArgs = {
-	input: UserSignupInput;
+  input: UserSignupInput;
 };
+
 
 export type MutationSponsorCreateArgs = {
-	input: SponsorCreateInput;
+  input: SponsorCreateInput;
 };
+
 
 export type MutationSponsorDeleteArgs = {
-	sponsorId: Scalars['ID'];
+  sponsorId: Scalars['ID'];
 };
+
 
 export type MutationSponsorHistoryCommentCreateArgs = {
-	input: CatalogHistoryCommentCreateInput;
-	sponsorId: Scalars['ID'];
+  input: CatalogHistoryCommentCreateInput;
+  sponsorId: Scalars['ID'];
 };
+
 
 export type MutationSponsorUpdateArgs = {
-	input: SponsorUpdateInput;
-	sponsorId: Scalars['ID'];
+  input: SponsorUpdateInput;
+  sponsorId: Scalars['ID'];
 };
+
 
 export type MutationUnfavoriteRecordingArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type MutationUpdateMyProfileArgs = {
-	input: UserUpdateInput;
+  input: UserUpdateInput;
 };
+
 
 export type MutationUserCreateArgs = {
-	input: UserCreateInput;
+  input: UserCreateInput;
 };
+
 
 export type MutationUserDeleteArgs = {
-	userId: Scalars['ID'];
+  userId: Scalars['ID'];
 };
+
 
 export type MutationUserRecoverArgs = {
-	email: Scalars['String'];
+  email: Scalars['String'];
 };
+
 
 export type MutationUserResetArgs = {
-	password: Scalars['String'];
-	token: Scalars['String'];
+  password: Scalars['String'];
+  token: Scalars['String'];
 };
 
+
 export type MutationUserUpdateArgs = {
-	input: UserUpdateInput;
-	userId: Scalars['ID'];
+  input: UserUpdateInput;
+  userId: Scalars['ID'];
 };
 
 export type Node = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
 /** Possible directions in which to order a list of items when provided an `orderBy` argument. */
 export enum OrderByDirection {
-	Asc = 'ASC',
-	Desc = 'DESC',
+  Asc = 'ASC',
+  Desc = 'DESC'
 }
 
 export type PageInfo = {
-	__typename?: 'PageInfo';
-	endCursor?: Maybe<Scalars['String']>;
-	hasNextPage: Scalars['Boolean'];
-	hasPreviousPage: Scalars['Boolean'];
-	startCursor?: Maybe<Scalars['String']>;
+  __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']>;
+  hasNextPage: Scalars['Boolean'];
+  hasPreviousPage: Scalars['Boolean'];
+  startCursor?: Maybe<Scalars['String']>;
 };
 
 export type Person = Node & {
-	__typename?: 'Person';
-	address?: Maybe<Scalars['String']>;
-	/** The canonical HTML path to this resource. */
-	canonicalPath: Scalars['String'];
-	/** The canonical URL to this resource. */
-	canonicalUrl: Scalars['String'];
-	description: Scalars['String'];
-	designations: Scalars['String'];
-	email?: Maybe<Scalars['String']>;
-	givenName: Scalars['String'];
-	hidingReason?: Maybe<Scalars['String']>;
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	image?: Maybe<Image>;
-	imageWithFallback: Image;
-	internalContact?: Maybe<InternalContact>;
-	isHidden: Scalars['Boolean'];
-	isPreapproved?: Maybe<Scalars['Boolean']>;
-	name: Scalars['String'];
-	notes?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
-	/** @deprecated Person.photo is replaced with Person.image */
-	photo?: Maybe<Image>;
-	/** @deprecated Person.photoWithFallback is replaced with Person.imageWithFallback */
-	photoWithFallback: Image;
-	recordings: RecordingConnection;
-	/** A shareable short URL to this resource. */
-	shareUrl: Scalars['String'];
-	suffix: Scalars['String'];
-	summary: Scalars['String'];
-	surname: Scalars['String'];
-	title: Scalars['String'];
-	viewerHasFavorited: Scalars['Boolean'];
-	website?: Maybe<Scalars['URL']>;
+  __typename?: 'Person';
+  address?: Maybe<Scalars['String']>;
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String'];
+  /** The canonical URL to this resource. */
+  canonicalUrl: Scalars['String'];
+  description: Scalars['String'];
+  designations: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  givenName: Scalars['String'];
+  hidingReason?: Maybe<Scalars['String']>;
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  imageWithFallback: Image;
+  internalContact?: Maybe<InternalContact>;
+  isHidden: Scalars['Boolean'];
+  isPreapproved?: Maybe<Scalars['Boolean']>;
+  name: Scalars['String'];
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  /** @deprecated Person.photo is replaced with Person.image */
+  photo?: Maybe<Image>;
+  /** @deprecated Person.photoWithFallback is replaced with Person.imageWithFallback */
+  photoWithFallback: Image;
+  recordings: RecordingConnection;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['String'];
+  suffix: Scalars['String'];
+  summary: Scalars['String'];
+  surname: Scalars['String'];
+  title: Scalars['String'];
+  viewerHasFavorited: Scalars['Boolean'];
+  website?: Maybe<Scalars['URL']>;
 };
+
 
 export type PersonHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
 
+
 export type PersonRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	contentType?: Maybe<RecordingContentType>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
-	withRole?: Maybe<PersonsRoleField>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
+  withRole?: Maybe<PersonsRoleField>;
 };
 
 export type PersonConnection = {
-	__typename?: 'PersonConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<PersonEdge>>;
-	nodes?: Maybe<Array<Person>>;
-	pageInfo: PageInfo;
+  __typename?: 'PersonConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<PersonEdge>>;
+  nodes?: Maybe<Array<Person>>;
+  pageInfo: PageInfo;
 };
 
 export type PersonCreateInput = {
-	address?: Maybe<Scalars['String']>;
-	description?: Maybe<Scalars['String']>;
-	designations?: Maybe<Scalars['String']>;
-	email?: Maybe<Scalars['String']>;
-	givenName: Scalars['String'];
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	internalContact?: Maybe<InternalContactInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	isPreapproved?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	notes?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
-	suffix?: Maybe<Scalars['String']>;
-	summary?: Maybe<Scalars['String']>;
-	surname: Scalars['String'];
-	title?: Maybe<Scalars['String']>;
-	website?: Maybe<Scalars['URL']>;
+  address?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  designations?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  givenName: Scalars['String'];
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  internalContact?: Maybe<InternalContactInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  isPreapproved?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  suffix?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  surname: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['URL']>;
 };
 
 export type PersonEdge = {
-	__typename?: 'PersonEdge';
-	cursor: Scalars['String'];
-	node: Person;
+  __typename?: 'PersonEdge';
+  cursor: Scalars['String'];
+  node: Person;
 };
 
 export type PersonPayload = {
-	__typename?: 'PersonPayload';
-	errors: Array<InputValidationError>;
-	person?: Maybe<Person>;
+  __typename?: 'PersonPayload';
+  errors: Array<InputValidationError>;
+  person?: Maybe<Person>;
 };
 
 export type PersonsOrder = {
-	direction: OrderByDirection;
-	field: PersonsSortableField;
+  direction: OrderByDirection;
+  field: PersonsSortableField;
 };
 
 /** The roles a Person can hold. */
 export enum PersonsRoleField {
-	Artist = 'ARTIST',
-	Author = 'AUTHOR',
-	Composer = 'COMPOSER',
-	Narrator = 'NARRATOR',
-	Speaker = 'SPEAKER',
-	Translator = 'TRANSLATOR',
-	Writer = 'WRITER',
+  Artist = 'ARTIST',
+  Author = 'AUTHOR',
+  Composer = 'COMPOSER',
+  Narrator = 'NARRATOR',
+  Speaker = 'SPEAKER',
+  Translator = 'TRANSLATOR',
+  Writer = 'WRITER'
 }
 
 /** Properties by which person connections can be ordered. */
 export enum PersonsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Name = 'NAME',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Name = 'NAME'
 }
 
 export type PersonUpdateInput = {
-	address?: Maybe<Scalars['String']>;
-	description?: Maybe<Scalars['String']>;
-	designations?: Maybe<Scalars['String']>;
-	email?: Maybe<Scalars['String']>;
-	givenName?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	internalContact?: Maybe<InternalContactInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	isPreapproved?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
-	suffix?: Maybe<Scalars['String']>;
-	summary?: Maybe<Scalars['String']>;
-	surname?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
-	website?: Maybe<Scalars['URL']>;
+  address?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  designations?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  internalContact?: Maybe<InternalContactInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  isPreapproved?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  suffix?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  surname?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['URL']>;
 };
 
 export type PopularRecording = {
-	__typename?: 'PopularRecording';
-	recording: Recording;
-	weight: Scalars['Float'];
+  __typename?: 'PopularRecording';
+  recording: Recording;
+  weight: Scalars['Float'];
 };
 
 export type PopularRecordingConnection = {
-	__typename?: 'PopularRecordingConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<PopularRecordingEdge>>;
-	nodes?: Maybe<Array<PopularRecording>>;
-	pageInfo: PageInfo;
+  __typename?: 'PopularRecordingConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<PopularRecordingEdge>>;
+  nodes?: Maybe<Array<PopularRecording>>;
+  pageInfo: PageInfo;
 };
 
 export type PopularRecordingEdge = {
-	__typename?: 'PopularRecordingEdge';
-	cursor: Scalars['String'];
-	node: PopularRecording;
+  __typename?: 'PopularRecordingEdge';
+  cursor: Scalars['String'];
+  node: PopularRecording;
 };
 
 export type Query = {
-	__typename?: 'Query';
-	adminImage?: Maybe<Image>;
-	adminImages: ImageConnectionSlim;
-	audiobible?: Maybe<Bible>;
-	audiobibles: BibleConnection;
-	/** Alias for `sequence(id: ID)` */
-	audiobook?: Maybe<Sequence>;
-	audiobooks: SequenceConnection;
-	/** Alias for `collection(id: ID)` */
-	audiobookSeries?: Maybe<Collection>;
-	audiobookSerieses: CollectionConnection;
-	/** Alias for `recording(id: ID)` */
-	audiobookTrack?: Maybe<Recording>;
-	audiobookTracks: RecordingConnection;
-	blogPost?: Maybe<BlogPost>;
-	blogPosts: BlogPostConnection;
-	collection?: Maybe<Collection>;
-	collections: CollectionConnection;
-	/** Alias for `collection(id: ID)` */
-	conference?: Maybe<Collection>;
-	conferences: CollectionConnection;
-	distributionAgreement?: Maybe<DistributionAgreement>;
-	distributionAgreements: DistributionAgreementConnection;
-	featuredBlogPosts: BlogPostConnection;
-	featuredRecordings: RecordingConnection;
-	license?: Maybe<License>;
-	licenses: LicenseConnection;
-	me?: Maybe<AuthenticatedUser>;
-	mediaFileUploads: MediaFileUploadConnection;
-	mediaRelease?: Maybe<MediaRelease>;
-	mediaReleaseForm?: Maybe<MediaReleaseForm>;
-	mediaReleaseForms: MediaReleaseFormConnection;
-	mediaReleaseFormTemplates: Array<MediaReleaseFormTemplate>;
-	mediaReleases: MediaReleaseConnection;
-	/** Alias for `sequence(id: ID)` */
-	musicAlbum?: Maybe<Sequence>;
-	musicAlbums: SequenceConnection;
-	/** @deprecated Query.musicBookTags will be replaced with a scriptural reference type. */
-	musicBookTags: TagConnection;
-	musicMoodTags: TagConnection;
-	musicSerieses: CollectionConnection;
-	/** Alias for `recording(id: ID)` */
-	musicTrack?: Maybe<Recording>;
-	musicTracks: RecordingConnection;
-	person?: Maybe<Person>;
-	persons: PersonConnection;
-	popularRecordings: PopularRecordingConnection;
-	recording?: Maybe<Recording>;
-	recordings: RecordingConnection;
-	recordingScreeningIssueType?: Maybe<RecordingScreeningIssueType>;
-	recordingScreeningIssueTypes: RecordingScreeningIssueTypeConnection;
-	sequence?: Maybe<Sequence>;
-	sequences: SequenceConnection;
-	/** Alias for `sequence(id: ID)` */
-	series?: Maybe<Sequence>;
-	/** Series is both a singular and plural form. `series` returns a single sequence. `serieses` is an archaic plural form of series used here to avoid `seriess` or some other ugly solution. */
-	serieses: SequenceConnection;
-	/** Alias for `recording(id: ID)` */
-	sermon?: Maybe<Recording>;
-	sermons: RecordingConnection;
-	sponsor?: Maybe<Sponsor>;
-	sponsors: SponsorConnection;
-	stories: RecordingConnection;
-	/** Alias for `recording(id: ID)` */
-	story?: Maybe<Recording>;
-	/** Alias for `collection(id: ID)` */
-	storyProgram?: Maybe<Collection>;
-	storyPrograms: CollectionConnection;
-	/** Alias for `sequence(id: ID)` */
-	storySeason?: Maybe<Sequence>;
-	storySeasons: SequenceConnection;
-	tags: TagConnection;
-	testimonies: TestimonyConnection;
-	user?: Maybe<User>;
-	users: UserConnection;
-	websites: WebsiteConnection;
+  __typename?: 'Query';
+  adminImage?: Maybe<Image>;
+  adminImages: ImageConnectionSlim;
+  audiobible?: Maybe<Bible>;
+  audiobibles: BibleConnection;
+  /** Alias for `sequence(id: ID)` */
+  audiobook?: Maybe<Sequence>;
+  audiobooks: SequenceConnection;
+  /** Alias for `collection(id: ID)` */
+  audiobookSeries?: Maybe<Collection>;
+  audiobookSerieses: CollectionConnection;
+  /** Alias for `recording(id: ID)` */
+  audiobookTrack?: Maybe<Recording>;
+  audiobookTracks: RecordingConnection;
+  blogPost?: Maybe<BlogPost>;
+  blogPosts: BlogPostConnection;
+  collection?: Maybe<Collection>;
+  collections: CollectionConnection;
+  /** Alias for `collection(id: ID)` */
+  conference?: Maybe<Collection>;
+  conferences: CollectionConnection;
+  distributionAgreement?: Maybe<DistributionAgreement>;
+  distributionAgreements: DistributionAgreementConnection;
+  featuredBlogPosts: BlogPostConnection;
+  featuredRecordings: RecordingConnection;
+  license?: Maybe<License>;
+  licenses: LicenseConnection;
+  me?: Maybe<AuthenticatedUser>;
+  mediaFileUploads: MediaFileUploadConnection;
+  mediaRelease?: Maybe<MediaRelease>;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  mediaReleaseForms: MediaReleaseFormConnection;
+  mediaReleaseFormTemplates: Array<MediaReleaseFormTemplate>;
+  mediaReleases: MediaReleaseConnection;
+  /** Alias for `sequence(id: ID)` */
+  musicAlbum?: Maybe<Sequence>;
+  musicAlbums: SequenceConnection;
+  /** @deprecated Query.musicBookTags will be replaced with a scriptural reference type. */
+  musicBookTags: TagConnection;
+  musicMoodTags: TagConnection;
+  musicSerieses: CollectionConnection;
+  /** Alias for `recording(id: ID)` */
+  musicTrack?: Maybe<Recording>;
+  musicTracks: RecordingConnection;
+  person?: Maybe<Person>;
+  persons: PersonConnection;
+  popularRecordings: PopularRecordingConnection;
+  recording?: Maybe<Recording>;
+  recordings: RecordingConnection;
+  recordingScreeningIssueType?: Maybe<RecordingScreeningIssueType>;
+  recordingScreeningIssueTypes: RecordingScreeningIssueTypeConnection;
+  sequence?: Maybe<Sequence>;
+  sequences: SequenceConnection;
+  /** Alias for `sequence(id: ID)` */
+  series?: Maybe<Sequence>;
+  /** Series is both a singular and plural form. `series` returns a single sequence. `serieses` is an archaic plural form of series used here to avoid `seriess` or some other ugly solution. */
+  serieses: SequenceConnection;
+  /** Alias for `recording(id: ID)` */
+  sermon?: Maybe<Recording>;
+  sermons: RecordingConnection;
+  sponsor?: Maybe<Sponsor>;
+  sponsors: SponsorConnection;
+  stories: RecordingConnection;
+  /** Alias for `recording(id: ID)` */
+  story?: Maybe<Recording>;
+  /** Alias for `collection(id: ID)` */
+  storyProgram?: Maybe<Collection>;
+  storyPrograms: CollectionConnection;
+  /** Alias for `sequence(id: ID)` */
+  storySeason?: Maybe<Sequence>;
+  storySeasons: SequenceConnection;
+  tags: TagConnection;
+  testimonies: TestimonyConnection;
+  user?: Maybe<User>;
+  users: UserConnection;
+  websites: WebsiteConnection;
 };
+
 
 export type QueryAdminImageArgs = {
-	imageType: ImageContainer;
-	name: Scalars['String'];
+  imageType: ImageContainer;
+  name: Scalars['String'];
 };
+
 
 export type QueryAdminImagesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	imageType: ImageContainer;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  imageType: ImageContainer;
 };
+
 
 export type QueryAudiobibleArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryAudiobiblesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type QueryAudiobookArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryAudiobooksArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QueryAudiobookSeriesArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryAudiobookSeriesesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryAudiobookTrackArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryAudiobookTracksArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryBlogPostArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryBlogPostsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<BlogPostOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<BlogPostOrder>>;
 };
+
 
 export type QueryCollectionArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryCollectionsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryConferenceArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryConferencesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryDistributionAgreementArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryDistributionAgreementsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isRetired?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	licenseId?: Maybe<Scalars['ID']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<DistributionAgreementsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isRetired?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  licenseId?: Maybe<Scalars['ID']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<DistributionAgreementsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QueryFeaturedBlogPostsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type QueryFeaturedRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	contentType?: Maybe<RecordingContentType>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryLicenseArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryLicensesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	isDefault?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<LicensesOrder>>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<LicensesOrder>>;
+  search?: Maybe<Scalars['String']>;
 };
+
 
 export type QueryMediaFileUploadsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	hasUploaded?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<MediaFileUploadsOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  hasUploaded?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<MediaFileUploadsOrder>>;
 };
+
 
 export type QueryMediaReleaseArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryMediaReleaseFormArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryMediaReleaseFormsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<MediaReleaseFormOrder>>;
-	search?: Maybe<Scalars['String']>;
-	type?: Maybe<MediaReleaseFormType>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<MediaReleaseFormOrder>>;
+  search?: Maybe<Scalars['String']>;
+  type?: Maybe<MediaReleaseFormType>;
 };
+
 
 export type QueryMediaReleaseFormTemplatesArgs = {
-	language: Language;
+  language: Language;
 };
+
 
 export type QueryMediaReleasesArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	mediaReleaseFormId?: Maybe<Scalars['ID']>;
-	mediaReleaseFormType?: Maybe<MediaReleaseFormType>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<MediaReleaseOrder>>;
-	personId?: Maybe<Scalars['ID']>;
-	recordingId?: Maybe<Scalars['ID']>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  mediaReleaseFormId?: Maybe<Scalars['ID']>;
+  mediaReleaseFormType?: Maybe<MediaReleaseFormType>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<MediaReleaseOrder>>;
+  personId?: Maybe<Scalars['ID']>;
+  recordingId?: Maybe<Scalars['ID']>;
+  search?: Maybe<Scalars['String']>;
 };
+
 
 export type QueryMusicAlbumArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryMusicAlbumsArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QueryMusicBookTagsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type QueryMusicMoodTagsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type QueryMusicSeriesesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryMusicTrackArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryMusicTracksArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryPersonArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryPersonsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<PersonsOrder>>;
-	role?: Maybe<PersonsRoleField>;
-	search?: Maybe<Scalars['String']>;
-	withContentTypes?: Maybe<Array<RecordingContentType>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<PersonsOrder>>;
+  role?: Maybe<PersonsRoleField>;
+  search?: Maybe<Scalars['String']>;
+  withContentTypes?: Maybe<Array<RecordingContentType>>;
 };
+
 
 export type QueryPopularRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	contentType?: Maybe<RecordingContentType>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryRecordingArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	contentType?: Maybe<RecordingContentType>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryRecordingScreeningIssueTypeArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryRecordingScreeningIssueTypesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type QuerySequenceArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QuerySequencesArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QuerySeriesArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QuerySeriesesArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QuerySermonArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QuerySermonsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QuerySponsorArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QuerySponsorsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SponsorsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	withMusic?: Maybe<Scalars['Boolean']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SponsorsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  withMusic?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type QueryStoriesArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryStoryArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryStoryProgramArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryStoryProgramsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type QueryStorySeasonArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryStorySeasonsArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
 };
+
 
 export type QueryTagsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  search?: Maybe<Scalars['String']>;
 };
+
 
 export type QueryTestimoniesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<TestimoniesOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<TestimoniesOrder>>;
 };
+
 
 export type QueryUserArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
+
 
 export type QueryUsersArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	hasAnyRoles?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<UsersOrder>>;
-	search?: Maybe<Scalars['String']>;
-	withRole?: Maybe<UserLanguageRoleInput>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  hasAnyRoles?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<UsersOrder>>;
+  search?: Maybe<Scalars['String']>;
+  withRole?: Maybe<UserLanguageRoleInput>;
 };
 
+
 export type QueryWebsitesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
 
 export type Recording = Node & {
-	__typename?: 'Recording';
-	attachments: Array<Attachment>;
-	audioFiles: Array<AudioFile>;
-	bibleReferences: BibleReferenceRangeConnection;
-	/** The canonical HTML path to this resource. */
-	canonicalPath: Scalars['String'];
-	canonicalUrl: Scalars['URL'];
-	collection?: Maybe<Collection>;
-	contentScreeningCheckouts: Array<RecordingScreeningCheckout>;
-	contentScreeningEvaluations: Array<RecordingContentScreeningEvaluation>;
-	contentScreeningStatus: RecordingContentScreeningStatus;
-	contentType: RecordingContentType;
-	copyrightYear?: Maybe<Scalars['Int']>;
-	description?: Maybe<Scalars['String']>;
-	distributionAgreement?: Maybe<DistributionAgreement>;
-	/** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
-	downloadDisabled: Scalars['Boolean'];
-	duration: Scalars['Float'];
-	hasAudio: Scalars['Boolean'];
-	hasVideo: Scalars['Boolean'];
-	hidingReason?: Maybe<Scalars['String']>;
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	imageWithFallback: Image;
-	isDownloadAllowed: Scalars['Boolean'];
-	isFeatured: Scalars['Boolean'];
-	/** Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status. */
-	isHidden: Scalars['Boolean'];
-	language: Language;
-	legalScreeningCheckouts: Array<RecordingScreeningCheckout>;
-	legalScreeningStatus: RecordingLegalScreeningStatus;
-	mediaReleaseForm?: Maybe<MediaReleaseForm>;
-	notes?: Maybe<Scalars['String']>;
-	persons: Array<Person>;
-	publishDate?: Maybe<Scalars['DateTime']>;
-	recordingDate?: Maybe<Scalars['DateTime']>;
-	recordingTags: RecordingTagConnection;
-	screeningIssues?: Maybe<RecordingScreeningIssueConnection>;
-	sequence?: Maybe<Sequence>;
-	shareUrl?: Maybe<Scalars['URL']>;
-	sponsor?: Maybe<Sponsor>;
-	stage: RecordingStage;
-	technicalScreeningCheckouts: Array<RecordingScreeningCheckout>;
-	technicalScreeningStatus: RecordingTechnicalScreeningStatus;
-	title: Scalars['String'];
-	transcript?: Maybe<Transcript>;
-	videoFiles: Array<VideoFile>;
-	viewerHasFavorited: Scalars['Boolean'];
-	websites: Array<Website>;
+  __typename?: 'Recording';
+  attachments: Array<Attachment>;
+  audioFiles: Array<AudioFile>;
+  bibleReferences: BibleReferenceRangeConnection;
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
+  collection?: Maybe<Collection>;
+  contentScreeningCheckouts: Array<RecordingScreeningCheckout>;
+  contentScreeningEvaluations: Array<RecordingContentScreeningEvaluation>;
+  contentScreeningStatus: RecordingContentScreeningStatus;
+  contentType: RecordingContentType;
+  copyrightYear?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  distributionAgreement?: Maybe<DistributionAgreement>;
+  /** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
+  downloadDisabled: Scalars['Boolean'];
+  duration: Scalars['Float'];
+  hasAudio: Scalars['Boolean'];
+  hasVideo: Scalars['Boolean'];
+  hidingReason?: Maybe<Scalars['String']>;
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  imageWithFallback: Image;
+  isDownloadAllowed: Scalars['Boolean'];
+  isFeatured: Scalars['Boolean'];
+  /** Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status. */
+  isHidden: Scalars['Boolean'];
+  language: Language;
+  legalScreeningCheckouts: Array<RecordingScreeningCheckout>;
+  legalScreeningStatus: RecordingLegalScreeningStatus;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  notes?: Maybe<Scalars['String']>;
+  persons: Array<Person>;
+  publishDate?: Maybe<Scalars['DateTime']>;
+  recordingDate?: Maybe<Scalars['DateTime']>;
+  recordingTags: RecordingTagConnection;
+  screeningIssues?: Maybe<RecordingScreeningIssueConnection>;
+  sequence?: Maybe<Sequence>;
+  shareUrl?: Maybe<Scalars['URL']>;
+  sponsor?: Maybe<Sponsor>;
+  stage: RecordingStage;
+  technicalScreeningCheckouts: Array<RecordingScreeningCheckout>;
+  technicalScreeningStatus: RecordingTechnicalScreeningStatus;
+  title: Scalars['String'];
+  transcript?: Maybe<Transcript>;
+  videoFiles: Array<VideoFile>;
+  viewerHasFavorited: Scalars['Boolean'];
+  websites: Array<Website>;
 };
+
 
 export type RecordingAttachmentsArgs = {
-	allowedContainers?: Maybe<Array<MediaFileContainer>>;
+  allowedContainers?: Maybe<Array<MediaFileContainer>>;
 };
+
 
 export type RecordingAudioFilesArgs = {
-	allowedContainers?: Maybe<Array<MediaFileContainer>>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
+  allowedContainers?: Maybe<Array<MediaFileContainer>>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type RecordingBibleReferencesArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RecordingHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
+
 
 export type RecordingPersonsArgs = {
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	role?: Maybe<PersonsRoleField>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  role?: Maybe<PersonsRoleField>;
 };
+
 
 export type RecordingRecordingTagsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 };
+
 
 export type RecordingScreeningIssuesArgs = {
-	after?: Maybe<Scalars['String']>;
-	category?: Maybe<RecordingScreeningIssueCategory>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingScreeningIssueOrder>>;
+  after?: Maybe<Scalars['String']>;
+  category?: Maybe<RecordingScreeningIssueCategory>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingScreeningIssueOrder>>;
 };
 
+
 export type RecordingVideoFilesArgs = {
-	allowedContainers?: Maybe<Array<MediaFileContainer>>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
+  allowedContainers?: Maybe<Array<MediaFileContainer>>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
 };
 
 export type RecordingConnection = {
-	__typename?: 'RecordingConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<RecordingEdge>>;
-	nodes?: Maybe<Array<Recording>>;
-	pageInfo: PageInfo;
+  __typename?: 'RecordingConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<RecordingEdge>>;
+  nodes?: Maybe<Array<Recording>>;
+  pageInfo: PageInfo;
 };
 
 export type RecordingContentScreeningEvaluation = {
-	__typename?: 'RecordingContentScreeningEvaluation';
-	/** The methods used in evaluating the recording. */
-	methods: Array<RecordingScreeningMethod>;
-	/** The screener's overall recommendation for the recording. */
-	recommendation: RecordingContentScreeningEvaluationRecommendation;
-	/** The screener user. */
-	screener: User;
+  __typename?: 'RecordingContentScreeningEvaluation';
+  /** The methods used in evaluating the recording. */
+  methods: Array<RecordingScreeningMethod>;
+  /** The screener's overall recommendation for the recording. */
+  recommendation: RecordingContentScreeningEvaluationRecommendation;
+  /** The screener user. */
+  screener: User;
 };
 
 export type RecordingContentScreeningEvaluationPayload = {
-	__typename?: 'RecordingContentScreeningEvaluationPayload';
-	errors: Array<InputValidationError>;
-	recordingContentScreeningEvaluation?: Maybe<RecordingContentScreeningEvaluation>;
+  __typename?: 'RecordingContentScreeningEvaluationPayload';
+  errors: Array<InputValidationError>;
+  recordingContentScreeningEvaluation?: Maybe<RecordingContentScreeningEvaluation>;
 };
 
 /** The content screening evaluation recommendations for a recording. */
 export enum RecordingContentScreeningEvaluationRecommendation {
-	Approve = 'APPROVE',
-	NeedsEditing = 'NEEDS_EDITING',
-	Pending = 'PENDING',
-	Reject = 'REJECT',
+  Approve = 'APPROVE',
+  NeedsEditing = 'NEEDS_EDITING',
+  Pending = 'PENDING',
+  Reject = 'REJECT'
 }
 
 /** The content screening statuses of a recording. */
 export enum RecordingContentScreeningStatus {
-	/** Approved by admin override */
-	AdminOverride = 'ADMIN_OVERRIDE',
-	/** Approved by screener consensus */
-	Approved = 'APPROVED',
-	/** Awaiting final authorization (Screener consensus) */
-	ApprovedPendingAuthorization = 'APPROVED_PENDING_AUTHORIZATION',
-	/** Awaiting screener consensus */
-	PendingConsensus = 'PENDING_CONSENSUS',
-	/** Awaiting more evaluations */
-	PendingEvaluations = 'PENDING_EVALUATIONS',
-	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
-	/** Approved by pre-approval */
-	Preapproved = 'PREAPPROVED',
-	/** Awaiting final authorization (Pre-approved) */
-	PreapprovedPendingAuthorization = 'PREAPPROVED_PENDING_AUTHORIZATION',
-	/** Rejected by screener consensus */
-	Rejected = 'REJECTED',
-	/** Screening not yet begun */
-	Unevaluated = 'UNEVALUATED',
+  /** Approved by admin override */
+  AdminOverride = 'ADMIN_OVERRIDE',
+  /** Approved by screener consensus */
+  Approved = 'APPROVED',
+  /** Awaiting final authorization (Screener consensus) */
+  ApprovedPendingAuthorization = 'APPROVED_PENDING_AUTHORIZATION',
+  /** Awaiting screener consensus */
+  PendingConsensus = 'PENDING_CONSENSUS',
+  /** Awaiting more evaluations */
+  PendingEvaluations = 'PENDING_EVALUATIONS',
+  /** Awaiting re-evaluation */
+  PendingReevaluation = 'PENDING_REEVALUATION',
+  /** Approved by pre-approval */
+  Preapproved = 'PREAPPROVED',
+  /** Awaiting final authorization (Pre-approved) */
+  PreapprovedPendingAuthorization = 'PREAPPROVED_PENDING_AUTHORIZATION',
+  /** Rejected by screener consensus */
+  Rejected = 'REJECTED',
+  /** Screening not yet begun */
+  Unevaluated = 'UNEVALUATED'
 }
 
 /** The available types of recordings. */
 export enum RecordingContentType {
-	AudiobookTrack = 'AUDIOBOOK_TRACK',
-	MusicTrack = 'MUSIC_TRACK',
-	Sermon = 'SERMON',
-	Story = 'STORY',
+  AudiobookTrack = 'AUDIOBOOK_TRACK',
+  MusicTrack = 'MUSIC_TRACK',
+  Sermon = 'SERMON',
+  Story = 'STORY'
 }
 
 export type RecordingCreateInput = {
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	contentType: RecordingContentType;
-	copyrightYear?: Maybe<Scalars['Int']>;
-	description?: Maybe<Scalars['String']>;
-	distributionAgreementId: Scalars['ID'];
-	hidingReason?: Maybe<Scalars['String']>;
-	isDownloadAllowed?: Maybe<Scalars['Boolean']>;
-	isFeatured?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	/** Requires administration role */
-	publishDate?: Maybe<Scalars['DateTime']>;
-	recordingDate?: Maybe<Scalars['DateTime']>;
-	recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
-	recordingTags?: Maybe<Array<RecordingTagInput>>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	/** Requires administration role */
-	skipContentScreening?: Maybe<Scalars['Boolean']>;
-	/** Requires administration role */
-	skipLegalScreening?: Maybe<Scalars['Boolean']>;
-	/** Requires administration role */
-	skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
-	sponsorId: Scalars['ID'];
-	title: Scalars['String'];
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  contentType: RecordingContentType;
+  copyrightYear?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  distributionAgreementId: Scalars['ID'];
+  hidingReason?: Maybe<Scalars['String']>;
+  isDownloadAllowed?: Maybe<Scalars['Boolean']>;
+  isFeatured?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  /** Requires administration role */
+  publishDate?: Maybe<Scalars['DateTime']>;
+  recordingDate?: Maybe<Scalars['DateTime']>;
+  recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
+  recordingTags?: Maybe<Array<RecordingTagInput>>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  /** Requires administration role */
+  skipContentScreening?: Maybe<Scalars['Boolean']>;
+  /** Requires administration role */
+  skipLegalScreening?: Maybe<Scalars['Boolean']>;
+  /** Requires administration role */
+  skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
+  sponsorId: Scalars['ID'];
+  title: Scalars['String'];
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type RecordingEdge = {
-	__typename?: 'RecordingEdge';
-	cursor: Scalars['String'];
-	node: Recording;
+  __typename?: 'RecordingEdge';
+  cursor: Scalars['String'];
+  node: Recording;
 };
 
 /** The legal screening statuses of a recording. */
 export enum RecordingLegalScreeningStatus {
-	AdminOverride = 'ADMIN_OVERRIDE',
-	Approved = 'APPROVED',
-	Pending = 'PENDING',
-	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
-	Rejected = 'REJECTED',
-	/** Not Yet Begun */
-	Unevaluated = 'UNEVALUATED',
+  AdminOverride = 'ADMIN_OVERRIDE',
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  /** Awaiting re-evaluation */
+  PendingReevaluation = 'PENDING_REEVALUATION',
+  Rejected = 'REJECTED',
+  /** Not Yet Begun */
+  Unevaluated = 'UNEVALUATED'
 }
 
 export type RecordingPayload = {
-	__typename?: 'RecordingPayload';
-	errors: Array<InputValidationError>;
-	recording?: Maybe<Recording>;
+  __typename?: 'RecordingPayload';
+  errors: Array<InputValidationError>;
+  recording?: Maybe<Recording>;
 };
 
 export type RecordingPersonInput = {
-	/** The ID of a person associated with the recording. */
-	personId: Scalars['ID'];
-	/** The role a person has with the recording. */
-	role?: Maybe<PersonsRoleField>;
+  /** The ID of a person associated with the recording. */
+  personId: Scalars['ID'];
+  /** The role a person has with the recording. */
+  role?: Maybe<PersonsRoleField>;
 };
 
 export type RecordingPersonRoleInput = {
-	/** The ID of a person associated with the recording. */
-	personId: Scalars['ID'];
-	/** The role a person has with the recording. */
-	role: PersonsRoleField;
+  /** The ID of a person associated with the recording. */
+  personId: Scalars['ID'];
+  /** The role a person has with the recording. */
+  role: PersonsRoleField;
 };
 
 /** The available bitrates of recordings. */
 export enum RecordingQuality {
-	Highest = 'HIGHEST',
-	Low = 'LOW',
-	Lowest = 'LOWEST',
+  Highest = 'HIGHEST',
+  Low = 'LOW',
+  Lowest = 'LOWEST'
 }
 
 export type RecordingScreeningCheckout = {
-	__typename?: 'RecordingScreeningCheckout';
-	/** The user who assigned the screener. */
-	assigner: User;
-	createdAt: Scalars['DateTime'];
-	/** The screener user. */
-	screener: User;
+  __typename?: 'RecordingScreeningCheckout';
+  /** The user who assigned the screener. */
+  assigner: User;
+  createdAt: Scalars['DateTime'];
+  /** The screener user. */
+  screener: User;
 };
 
 export type RecordingScreeningCheckoutPayload = {
-	__typename?: 'RecordingScreeningCheckoutPayload';
-	errors: Array<InputValidationError>;
-	recordingScreeningCheckout?: Maybe<RecordingScreeningCheckout>;
+  __typename?: 'RecordingScreeningCheckoutPayload';
+  errors: Array<InputValidationError>;
+  recordingScreeningCheckout?: Maybe<RecordingScreeningCheckout>;
 };
 
 export type RecordingScreeningIssue = Node & {
-	__typename?: 'RecordingScreeningIssue';
-	/** In HH:mm format. */
-	endTime?: Maybe<Scalars['String']>;
-	id: Scalars['ID'];
-	notes: Scalars['String'];
-	screener: User;
-	/** In HH:mm format. */
-	startTime?: Maybe<Scalars['String']>;
-	target: RecordingScreeningIssueTarget;
-	type: RecordingScreeningIssueType;
+  __typename?: 'RecordingScreeningIssue';
+  /** In HH:mm format. */
+  endTime?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  notes: Scalars['String'];
+  screener: User;
+  /** In HH:mm format. */
+  startTime?: Maybe<Scalars['String']>;
+  target: RecordingScreeningIssueTarget;
+  type: RecordingScreeningIssueType;
 };
 
 /** The recording screening issue categories. */
 export enum RecordingScreeningIssueCategory {
-	/** General Issues */
-	General = 'GENERAL',
-	/** Spirit of AudioVerse */
-	SpiritOfAudioverse = 'SPIRIT_OF_AUDIOVERSE',
-	/** Technical Issues */
-	Technical = 'TECHNICAL',
+  /** General Issues */
+  General = 'GENERAL',
+  /** Spirit of AudioVerse */
+  SpiritOfAudioverse = 'SPIRIT_OF_AUDIOVERSE',
+  /** Technical Issues */
+  Technical = 'TECHNICAL'
 }
 
 export type RecordingScreeningIssueConnection = {
-	__typename?: 'RecordingScreeningIssueConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<RecordingScreeningIssueEdge>>;
-	nodes?: Maybe<Array<RecordingScreeningIssue>>;
-	pageInfo: PageInfo;
+  __typename?: 'RecordingScreeningIssueConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<RecordingScreeningIssueEdge>>;
+  nodes?: Maybe<Array<RecordingScreeningIssue>>;
+  pageInfo: PageInfo;
 };
 
 export type RecordingScreeningIssueEdge = {
-	__typename?: 'RecordingScreeningIssueEdge';
-	cursor: Scalars['String'];
-	node: RecordingScreeningIssue;
+  __typename?: 'RecordingScreeningIssueEdge';
+  cursor: Scalars['String'];
+  node: RecordingScreeningIssue;
 };
 
 export type RecordingScreeningIssueInput = {
-	/** In HH:mm format. */
-	endTime?: Maybe<Scalars['String']>;
-	notes?: Maybe<Scalars['String']>;
-	recordingScreeningIssueTypeId: Scalars['ID'];
-	/** In HH:mm format. */
-	startTime?: Maybe<Scalars['String']>;
-	target: RecordingScreeningIssueTarget;
+  /** In HH:mm format. */
+  endTime?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
+  recordingScreeningIssueTypeId: Scalars['ID'];
+  /** In HH:mm format. */
+  startTime?: Maybe<Scalars['String']>;
+  target: RecordingScreeningIssueTarget;
 };
 
 export type RecordingScreeningIssueOrder = {
-	direction: OrderByDirection;
-	field: RecordingScreeningIssuesSortableField;
+  direction: OrderByDirection;
+  field: RecordingScreeningIssuesSortableField;
 };
 
 export type RecordingScreeningIssuePayload = {
-	__typename?: 'RecordingScreeningIssuePayload';
-	errors: Array<InputValidationError>;
-	recordingScreeningIssue?: Maybe<RecordingScreeningIssue>;
+  __typename?: 'RecordingScreeningIssuePayload';
+  errors: Array<InputValidationError>;
+  recordingScreeningIssue?: Maybe<RecordingScreeningIssue>;
 };
 
 /** Properties by which recording screening issue connections can be ordered. */
 export enum RecordingScreeningIssuesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID'
 }
 
 /** The applicable recording format for the screening issue. */
 export enum RecordingScreeningIssueTarget {
-	Audio = 'AUDIO',
-	Video = 'VIDEO',
+  Audio = 'AUDIO',
+  Video = 'VIDEO'
 }
 
 export type RecordingScreeningIssueType = Node & {
-	__typename?: 'RecordingScreeningIssueType';
-	category: RecordingScreeningIssueCategory;
-	id: Scalars['ID'];
-	notes: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'RecordingScreeningIssueType';
+  category: RecordingScreeningIssueCategory;
+  id: Scalars['ID'];
+  notes: Scalars['String'];
+  title: Scalars['String'];
 };
 
 export type RecordingScreeningIssueTypeConnection = {
-	__typename?: 'RecordingScreeningIssueTypeConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<RecordingScreeningIssueTypeEdge>>;
-	nodes?: Maybe<Array<RecordingScreeningIssueType>>;
-	pageInfo: PageInfo;
+  __typename?: 'RecordingScreeningIssueTypeConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<RecordingScreeningIssueTypeEdge>>;
+  nodes?: Maybe<Array<RecordingScreeningIssueType>>;
+  pageInfo: PageInfo;
 };
 
 export type RecordingScreeningIssueTypeEdge = {
-	__typename?: 'RecordingScreeningIssueTypeEdge';
-	cursor: Scalars['String'];
-	node: RecordingScreeningIssueType;
+  __typename?: 'RecordingScreeningIssueTypeEdge';
+  cursor: Scalars['String'];
+  node: RecordingScreeningIssueType;
 };
 
 /** The supported screening evaluation methods. */
 export enum RecordingScreeningMethod {
-	Live = 'LIVE',
-	Recording = 'RECORDING',
-	ThirdPartyInfo = 'THIRD_PARTY_INFO',
-	Transcript = 'TRANSCRIPT',
+  Live = 'LIVE',
+  Recording = 'RECORDING',
+  ThirdPartyInfo = 'THIRD_PARTY_INFO',
+  Transcript = 'TRANSCRIPT'
 }
 
 export type RecordingsOrder = {
-	direction: OrderByDirection;
-	field: RecordingsSortableField;
+  direction: OrderByDirection;
+  field: RecordingsSortableField;
 };
 
 /** Properties by which recording connections can be ordered. */
 export enum RecordingsSortableField {
-	CollectionTitle = 'COLLECTION_TITLE',
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	PublishedAt = 'PUBLISHED_AT',
-	RecordedAt = 'RECORDED_AT',
-	SequenceTitle = 'SEQUENCE_TITLE',
-	SponsorTitle = 'SPONSOR_TITLE',
-	Title = 'TITLE',
+  CollectionTitle = 'COLLECTION_TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  PublishedAt = 'PUBLISHED_AT',
+  RecordedAt = 'RECORDED_AT',
+  SequenceTitle = 'SEQUENCE_TITLE',
+  SponsorTitle = 'SPONSOR_TITLE',
+  Title = 'TITLE'
 }
 
 /** The stages a recording may be in. */
 export enum RecordingStage {
-	Draft = 'DRAFT',
-	Published = 'PUBLISHED',
-	Scheduling = 'SCHEDULING',
-	Screening = 'SCREENING',
-	Withdrawn = 'WITHDRAWN',
+  Draft = 'DRAFT',
+  Published = 'PUBLISHED',
+  Scheduling = 'SCHEDULING',
+  Screening = 'SCREENING',
+  Withdrawn = 'WITHDRAWN'
 }
 
 export type RecordingTag = {
-	__typename?: 'RecordingTag';
-	tag: Tag;
+  __typename?: 'RecordingTag';
+  tag: Tag;
 };
 
 export type RecordingTagConnection = {
-	__typename?: 'RecordingTagConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<RecordingTagEdge>>;
-	nodes?: Maybe<Array<RecordingTag>>;
-	pageInfo: PageInfo;
+  __typename?: 'RecordingTagConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<RecordingTagEdge>>;
+  nodes?: Maybe<Array<RecordingTag>>;
+  pageInfo: PageInfo;
 };
 
 export type RecordingTagEdge = {
-	__typename?: 'RecordingTagEdge';
-	cursor: Scalars['String'];
-	node: RecordingTag;
+  __typename?: 'RecordingTagEdge';
+  cursor: Scalars['String'];
+  node: RecordingTag;
 };
 
 export type RecordingTagInput = {
-	/** The name of a tag. */
-	tagName: Scalars['String'];
+  /** The name of a tag. */
+  tagName: Scalars['String'];
 };
 
 /** The technical screening statuses of a recording. */
 export enum RecordingTechnicalScreeningStatus {
-	AdminOverride = 'ADMIN_OVERRIDE',
-	Approved = 'APPROVED',
-	Pending = 'PENDING',
-	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
-	Rejected = 'REJECTED',
-	/** Not Yet Begun */
-	Unevaluated = 'UNEVALUATED',
+  AdminOverride = 'ADMIN_OVERRIDE',
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  /** Awaiting re-evaluation */
+  PendingReevaluation = 'PENDING_REEVALUATION',
+  Rejected = 'REJECTED',
+  /** Not Yet Begun */
+  Unevaluated = 'UNEVALUATED'
 }
 
 export type RecordingUpdateInput = {
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	copyrightYear?: Maybe<Scalars['Int']>;
-	description?: Maybe<Scalars['String']>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	isDownloadAllowed?: Maybe<Scalars['Boolean']>;
-	isFeatured?: Maybe<Scalars['Boolean']>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	/** Requires administration role */
-	publishDate?: Maybe<Scalars['DateTime']>;
-	recordingDate?: Maybe<Scalars['DateTime']>;
-	recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
-	recordingTags?: Maybe<Array<RecordingTagInput>>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	/** Requires administration role */
-	skipContentScreening?: Maybe<Scalars['Boolean']>;
-	/** Requires administration role */
-	skipLegalScreening?: Maybe<Scalars['Boolean']>;
-	/** Requires administration role */
-	skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	title?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  copyrightYear?: Maybe<Scalars['Int']>;
+  description?: Maybe<Scalars['String']>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  isDownloadAllowed?: Maybe<Scalars['Boolean']>;
+  isFeatured?: Maybe<Scalars['Boolean']>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  /** Requires administration role */
+  publishDate?: Maybe<Scalars['DateTime']>;
+  recordingDate?: Maybe<Scalars['DateTime']>;
+  recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
+  recordingTags?: Maybe<Array<RecordingTagInput>>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  /** Requires administration role */
+  skipContentScreening?: Maybe<Scalars['Boolean']>;
+  /** Requires administration role */
+  skipLegalScreening?: Maybe<Scalars['Boolean']>;
+  /** Requires administration role */
+  skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type Sequence = Node & {
-	__typename?: 'Sequence';
-	/** The canonical HTML path to this resource. */
-	canonicalPath: Scalars['String'];
-	/** The canonical URL to this resource. */
-	canonicalUrl: Scalars['String'];
-	collection?: Maybe<Collection>;
-	contentType: SequenceContentType;
-	description: Scalars['String'];
-	hidingReason?: Maybe<Scalars['String']>;
-	history?: Maybe<CatalogHistoryItemConnection>;
-	id: Scalars['ID'];
-	image?: Maybe<Image>;
-	imageWithFallback: Image;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	/** @deprecated Sequence.logoImage is replaced with Sequence.image */
-	logoImage?: Maybe<Image>;
-	/** @deprecated Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback */
-	logoImageWithFallback: Image;
-	mediaReleaseForm?: Maybe<MediaReleaseForm>;
-	notes?: Maybe<Scalars['String']>;
-	recordings: RecordingConnection;
-	/** A shareable short URL to this resource. */
-	shareUrl: Scalars['String'];
-	sponsor?: Maybe<Sponsor>;
-	summary: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'Sequence';
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String'];
+  /** The canonical URL to this resource. */
+  canonicalUrl: Scalars['String'];
+  collection?: Maybe<Collection>;
+  contentType: SequenceContentType;
+  description: Scalars['String'];
+  hidingReason?: Maybe<Scalars['String']>;
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  imageWithFallback: Image;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  /** @deprecated Sequence.logoImage is replaced with Sequence.image */
+  logoImage?: Maybe<Image>;
+  /** @deprecated Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback */
+  logoImageWithFallback: Image;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  notes?: Maybe<Scalars['String']>;
+  recordings: RecordingConnection;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['String'];
+  sponsor?: Maybe<Sponsor>;
+  summary: Scalars['String'];
+  title: Scalars['String'];
 };
+
 
 export type SequenceHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
 
+
 export type SequenceRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type SequenceConnection = {
-	__typename?: 'SequenceConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<SequenceEdge>>;
-	nodes?: Maybe<Array<Sequence>>;
-	pageInfo: PageInfo;
+  __typename?: 'SequenceConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<SequenceEdge>>;
+  nodes?: Maybe<Array<Sequence>>;
+  pageInfo: PageInfo;
 };
 
 /** The available types of sequence. */
 export enum SequenceContentType {
-	Audiobook = 'AUDIOBOOK',
-	MusicAlbum = 'MUSIC_ALBUM',
-	Series = 'SERIES',
-	StorySeason = 'STORY_SEASON',
+  Audiobook = 'AUDIOBOOK',
+  MusicAlbum = 'MUSIC_ALBUM',
+  Series = 'SERIES',
+  StorySeason = 'STORY_SEASON'
 }
 
 export type SequenceCreateInput = {
-	collectionId?: Maybe<Scalars['ID']>;
-	contentType: SequenceContentType;
-	description?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	sponsorId: Scalars['ID'];
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  collectionId?: Maybe<Scalars['ID']>;
+  contentType: SequenceContentType;
+  description?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  sponsorId: Scalars['ID'];
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type SequenceEdge = {
-	__typename?: 'SequenceEdge';
-	cursor: Scalars['String'];
-	node: Sequence;
+  __typename?: 'SequenceEdge';
+  cursor: Scalars['String'];
+  node: Sequence;
 };
 
 export type SequenceOrder = {
-	direction: OrderByDirection;
-	field: SequenceSortableField;
+  direction: OrderByDirection;
+  field: SequenceSortableField;
 };
 
 export type SequencePayload = {
-	__typename?: 'SequencePayload';
-	errors: Array<InputValidationError>;
-	sequence?: Maybe<Sequence>;
+  __typename?: 'SequencePayload';
+  errors: Array<InputValidationError>;
+  sequence?: Maybe<Sequence>;
 };
 
 /** Properties by which sequence connections can be ordered. */
 export enum SequenceSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type SequenceUpdateInput = {
-	collectionId?: Maybe<Scalars['ID']>;
-	description?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	notes?: Maybe<Scalars['String']>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  notes?: Maybe<Scalars['String']>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
 };
 
-export type Sponsor = Node &
-	UniformResourceLocatable & {
-		__typename?: 'Sponsor';
-		address?: Maybe<Scalars['String']>;
-		/** The canonical HTML path to this resource. */
-		canonicalPath: Scalars['String'];
-		/** The canonical URL to this resource. */
-		canonicalUrl: Scalars['String'];
-		collections: CollectionConnection;
-		description: Scalars['String'];
-		distributionAgreements?: Maybe<DistributionAgreementConnection>;
-		email?: Maybe<Scalars['String']>;
-		hidingReason?: Maybe<Scalars['String']>;
-		history?: Maybe<CatalogHistoryItemConnection>;
-		id: Scalars['ID'];
-		image?: Maybe<Image>;
-		imageWithFallback: Image;
-		internalContact?: Maybe<InternalContact>;
-		isHidden: Scalars['Boolean'];
-		location?: Maybe<Scalars['String']>;
-		/** @deprecated Sponsor.logoImage is replaced with Sponsor.image */
-		logoImage?: Maybe<Image>;
-		/** @deprecated Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback */
-		logoImageWithFallback: Image;
-		mediaReleaseForm?: Maybe<MediaReleaseForm>;
-		notes?: Maybe<Scalars['String']>;
-		phone?: Maybe<Scalars['String']>;
-		recordings: RecordingConnection;
-		sequences: SequenceConnection;
-		/** A shareable short URL to this resource. */
-		shareUrl: Scalars['String'];
-		summary: Scalars['String'];
-		title: Scalars['String'];
-		website?: Maybe<Scalars['URL']>;
-	};
+export type Sponsor = Node & UniformResourceLocatable & {
+  __typename?: 'Sponsor';
+  address?: Maybe<Scalars['String']>;
+  /** The canonical HTML path to this resource. */
+  canonicalPath: Scalars['String'];
+  /** The canonical URL to this resource. */
+  canonicalUrl: Scalars['String'];
+  collections: CollectionConnection;
+  description: Scalars['String'];
+  distributionAgreements?: Maybe<DistributionAgreementConnection>;
+  email?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  history?: Maybe<CatalogHistoryItemConnection>;
+  id: Scalars['ID'];
+  image?: Maybe<Image>;
+  imageWithFallback: Image;
+  internalContact?: Maybe<InternalContact>;
+  isHidden: Scalars['Boolean'];
+  location?: Maybe<Scalars['String']>;
+  /** @deprecated Sponsor.logoImage is replaced with Sponsor.image */
+  logoImage?: Maybe<Image>;
+  /** @deprecated Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback */
+  logoImageWithFallback: Image;
+  mediaReleaseForm?: Maybe<MediaReleaseForm>;
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  recordings: RecordingConnection;
+  sequences: SequenceConnection;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['String'];
+  summary: Scalars['String'];
+  title: Scalars['String'];
+  website?: Maybe<Scalars['URL']>;
+};
+
 
 export type SponsorCollectionsArgs = {
-	after?: Maybe<Scalars['String']>;
-	contentType?: Maybe<CollectionContentType>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CollectionsOrder>>;
-	search?: Maybe<Scalars['String']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  contentType?: Maybe<CollectionContentType>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CollectionsOrder>>;
+  search?: Maybe<Scalars['String']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type SponsorDistributionAgreementsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isRetired?: Maybe<Scalars['Boolean']>;
-	licenseId?: Maybe<Scalars['ID']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<DistributionAgreementsOrder>>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isRetired?: Maybe<Scalars['Boolean']>;
+  licenseId?: Maybe<Scalars['ID']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<DistributionAgreementsOrder>>;
+  search?: Maybe<Scalars['String']>;
 };
+
 
 export type SponsorHistoryArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	isSticky?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  isSticky?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<CatalogHistoryItemOrder>>;
 };
+
 
 export type SponsorRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	contentType?: Maybe<RecordingContentType>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
+
 export type SponsorSequencesArgs = {
-	after?: Maybe<Scalars['String']>;
-	collectionId?: Maybe<Scalars['ID']>;
-	contentType?: Maybe<SequenceContentType>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<SequenceOrder>>;
-	search?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  collectionId?: Maybe<Scalars['ID']>;
+  contentType?: Maybe<SequenceContentType>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<SequenceOrder>>;
+  search?: Maybe<Scalars['String']>;
 };
 
 export type SponsorConnection = {
-	__typename?: 'SponsorConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<SponsorEdge>>;
-	nodes?: Maybe<Array<Sponsor>>;
-	pageInfo: PageInfo;
+  __typename?: 'SponsorConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<SponsorEdge>>;
+  nodes?: Maybe<Array<Sponsor>>;
+  pageInfo: PageInfo;
 };
 
 export type SponsorCreateInput = {
-	address?: Maybe<Scalars['String']>;
-	description?: Maybe<Scalars['String']>;
-	distributionAgreements?: Maybe<Array<SponsorDistributionAgreementInput>>;
-	email?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	internalContact?: Maybe<InternalContactInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	language: Language;
-	location?: Maybe<Scalars['String']>;
-	notes?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
-	website?: Maybe<Scalars['URL']>;
+  address?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  distributionAgreements?: Maybe<Array<SponsorDistributionAgreementInput>>;
+  email?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  internalContact?: Maybe<InternalContactInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  language: Language;
+  location?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  website?: Maybe<Scalars['URL']>;
 };
 
 export type SponsorDistributionAgreementInput = {
-	isDefault?: Maybe<Scalars['Boolean']>;
-	isRetired?: Maybe<Scalars['Boolean']>;
-	licenseId: Scalars['ID'];
-	notes?: Maybe<Scalars['String']>;
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  isDefault?: Maybe<Scalars['Boolean']>;
+  isRetired?: Maybe<Scalars['Boolean']>;
+  licenseId: Scalars['ID'];
+  notes?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type SponsorEdge = {
-	__typename?: 'SponsorEdge';
-	cursor: Scalars['String'];
-	node: Sponsor;
+  __typename?: 'SponsorEdge';
+  cursor: Scalars['String'];
+  node: Sponsor;
 };
 
 export type SponsorPayload = {
-	__typename?: 'SponsorPayload';
-	errors: Array<InputValidationError>;
-	sponsor?: Maybe<Sponsor>;
+  __typename?: 'SponsorPayload';
+  errors: Array<InputValidationError>;
+  sponsor?: Maybe<Sponsor>;
 };
 
 export type SponsorsOrder = {
-	direction: OrderByDirection;
-	field: SponsorsSortableField;
+  direction: OrderByDirection;
+  field: SponsorsSortableField;
 };
 
 /** Properties by which sponsor connections can be ordered. */
 export enum SponsorsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type SponsorUpdateInput = {
-	address?: Maybe<Scalars['String']>;
-	description?: Maybe<Scalars['String']>;
-	distributionAgreements?: Maybe<Array<SponsorDistributionAgreementInput>>;
-	email?: Maybe<Scalars['String']>;
-	hidingReason?: Maybe<Scalars['String']>;
-	image?: Maybe<ImageInput>;
-	internalContact?: Maybe<InternalContactInput>;
-	isHidden?: Maybe<Scalars['Boolean']>;
-	location?: Maybe<Scalars['String']>;
-	notes?: Maybe<Scalars['String']>;
-	phone?: Maybe<Scalars['String']>;
-	summary?: Maybe<Scalars['String']>;
-	title?: Maybe<Scalars['String']>;
-	website?: Maybe<Scalars['URL']>;
+  address?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  distributionAgreements?: Maybe<Array<SponsorDistributionAgreementInput>>;
+  email?: Maybe<Scalars['String']>;
+  hidingReason?: Maybe<Scalars['String']>;
+  image?: Maybe<ImageInput>;
+  internalContact?: Maybe<InternalContactInput>;
+  isHidden?: Maybe<Scalars['Boolean']>;
+  location?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['URL']>;
 };
 
 export type SuccessPayload = {
-	__typename?: 'SuccessPayload';
-	errors: Array<InputValidationError>;
-	success: Scalars['Boolean'];
+  __typename?: 'SuccessPayload';
+  errors: Array<InputValidationError>;
+  success: Scalars['Boolean'];
 };
 
 export type Tag = Node & {
-	__typename?: 'Tag';
-	id: Scalars['ID'];
-	name: Scalars['String'];
+  __typename?: 'Tag';
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export type TagConnection = {
-	__typename?: 'TagConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<TagEdge>>;
-	nodes?: Maybe<Array<Tag>>;
-	pageInfo: PageInfo;
+  __typename?: 'TagConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<TagEdge>>;
+  nodes?: Maybe<Array<Tag>>;
+  pageInfo: PageInfo;
 };
 
 export type TagEdge = {
-	__typename?: 'TagEdge';
-	cursor: Scalars['String'];
-	node: Tag;
+  __typename?: 'TagEdge';
+  cursor: Scalars['String'];
+  node: Tag;
 };
 
 export type TestimoniesOrder = {
-	direction: OrderByDirection;
-	field: TestimoniesSortableField;
+  direction: OrderByDirection;
+  field: TestimoniesSortableField;
 };
 
 /** Properties by which testimony connections can be ordered. */
 export enum TestimoniesSortableField {
-	WrittenDate = 'WRITTEN_DATE',
+  WrittenDate = 'WRITTEN_DATE'
 }
 
 export type Testimony = Node & {
-	__typename?: 'Testimony';
-	author: Scalars['String'];
-	body: Scalars['String'];
-	id: Scalars['ID'];
-	writtenDate: Scalars['DateTime'];
+  __typename?: 'Testimony';
+  author: Scalars['String'];
+  body: Scalars['String'];
+  id: Scalars['ID'];
+  writtenDate: Scalars['DateTime'];
 };
 
 export type TestimonyConnection = {
-	__typename?: 'TestimonyConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<TestimonyEdge>>;
-	nodes?: Maybe<Array<Testimony>>;
-	pageInfo: PageInfo;
+  __typename?: 'TestimonyConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<TestimonyEdge>>;
+  nodes?: Maybe<Array<Testimony>>;
+  pageInfo: PageInfo;
 };
 
 export type TestimonyEdge = {
-	__typename?: 'TestimonyEdge';
-	cursor: Scalars['String'];
-	node: Testimony;
+  __typename?: 'TestimonyEdge';
+  cursor: Scalars['String'];
+  node: Testimony;
 };
 
 /** The supported timezones. */
 export enum Timezone {
-	AfricaAbidjan = 'AFRICA_ABIDJAN',
-	AfricaAccra = 'AFRICA_ACCRA',
-	AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
-	AfricaAlgiers = 'AFRICA_ALGIERS',
-	AfricaAsmara = 'AFRICA_ASMARA',
-	AfricaAsmera = 'AFRICA_ASMERA',
-	AfricaBamako = 'AFRICA_BAMAKO',
-	AfricaBangui = 'AFRICA_BANGUI',
-	AfricaBanjul = 'AFRICA_BANJUL',
-	AfricaBissau = 'AFRICA_BISSAU',
-	AfricaBlantyre = 'AFRICA_BLANTYRE',
-	AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
-	AfricaBujumbura = 'AFRICA_BUJUMBURA',
-	AfricaCairo = 'AFRICA_CAIRO',
-	AfricaCasablanca = 'AFRICA_CASABLANCA',
-	AfricaCeuta = 'AFRICA_CEUTA',
-	AfricaConakry = 'AFRICA_CONAKRY',
-	AfricaDakar = 'AFRICA_DAKAR',
-	AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
-	AfricaDjibouti = 'AFRICA_DJIBOUTI',
-	AfricaDouala = 'AFRICA_DOUALA',
-	AfricaElAaiun = 'AFRICA_EL_AAIUN',
-	AfricaFreetown = 'AFRICA_FREETOWN',
-	AfricaGaborone = 'AFRICA_GABORONE',
-	AfricaHarare = 'AFRICA_HARARE',
-	AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
-	AfricaJuba = 'AFRICA_JUBA',
-	AfricaKampala = 'AFRICA_KAMPALA',
-	AfricaKhartoum = 'AFRICA_KHARTOUM',
-	AfricaKigali = 'AFRICA_KIGALI',
-	AfricaKinshasa = 'AFRICA_KINSHASA',
-	AfricaLagos = 'AFRICA_LAGOS',
-	AfricaLibreville = 'AFRICA_LIBREVILLE',
-	AfricaLome = 'AFRICA_LOME',
-	AfricaLuanda = 'AFRICA_LUANDA',
-	AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
-	AfricaLusaka = 'AFRICA_LUSAKA',
-	AfricaMalabo = 'AFRICA_MALABO',
-	AfricaMaputo = 'AFRICA_MAPUTO',
-	AfricaMaseru = 'AFRICA_MASERU',
-	AfricaMbabane = 'AFRICA_MBABANE',
-	AfricaMogadishu = 'AFRICA_MOGADISHU',
-	AfricaMonrovia = 'AFRICA_MONROVIA',
-	AfricaNairobi = 'AFRICA_NAIROBI',
-	AfricaNdjamena = 'AFRICA_NDJAMENA',
-	AfricaNiamey = 'AFRICA_NIAMEY',
-	AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
-	AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
-	AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
-	AfricaSaoTome = 'AFRICA_SAO_TOME',
-	AfricaTimbuktu = 'AFRICA_TIMBUKTU',
-	AfricaTripoli = 'AFRICA_TRIPOLI',
-	AfricaTunis = 'AFRICA_TUNIS',
-	AfricaWindhoek = 'AFRICA_WINDHOEK',
-	AmericaAdak = 'AMERICA_ADAK',
-	AmericaAnchorage = 'AMERICA_ANCHORAGE',
-	AmericaAnguilla = 'AMERICA_ANGUILLA',
-	AmericaAntigua = 'AMERICA_ANTIGUA',
-	AmericaAraguaina = 'AMERICA_ARAGUAINA',
-	AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
-	AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
-	AmericaArgentinaComodrivadavia = 'AMERICA_ARGENTINA_COMODRIVADAVIA',
-	AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
-	AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
-	AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
-	AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
-	AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
-	AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
-	AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
-	AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
-	AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
-	AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
-	AmericaAruba = 'AMERICA_ARUBA',
-	AmericaAsuncion = 'AMERICA_ASUNCION',
-	AmericaAtikokan = 'AMERICA_ATIKOKAN',
-	AmericaAtka = 'AMERICA_ATKA',
-	AmericaBahia = 'AMERICA_BAHIA',
-	AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
-	AmericaBarbados = 'AMERICA_BARBADOS',
-	AmericaBelem = 'AMERICA_BELEM',
-	AmericaBelize = 'AMERICA_BELIZE',
-	AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
-	AmericaBoaVista = 'AMERICA_BOA_VISTA',
-	AmericaBogota = 'AMERICA_BOGOTA',
-	AmericaBoise = 'AMERICA_BOISE',
-	AmericaBuenosAires = 'AMERICA_BUENOS_AIRES',
-	AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
-	AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
-	AmericaCancun = 'AMERICA_CANCUN',
-	AmericaCaracas = 'AMERICA_CARACAS',
-	AmericaCatamarca = 'AMERICA_CATAMARCA',
-	AmericaCayenne = 'AMERICA_CAYENNE',
-	AmericaCayman = 'AMERICA_CAYMAN',
-	AmericaChicago = 'AMERICA_CHICAGO',
-	AmericaChihuahua = 'AMERICA_CHIHUAHUA',
-	AmericaCoralHarbour = 'AMERICA_CORAL_HARBOUR',
-	AmericaCordoba = 'AMERICA_CORDOBA',
-	AmericaCostaRica = 'AMERICA_COSTA_RICA',
-	AmericaCreston = 'AMERICA_CRESTON',
-	AmericaCuiaba = 'AMERICA_CUIABA',
-	AmericaCuracao = 'AMERICA_CURACAO',
-	AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
-	AmericaDawson = 'AMERICA_DAWSON',
-	AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
-	AmericaDenver = 'AMERICA_DENVER',
-	AmericaDetroit = 'AMERICA_DETROIT',
-	AmericaDominica = 'AMERICA_DOMINICA',
-	AmericaEdmonton = 'AMERICA_EDMONTON',
-	AmericaEirunepe = 'AMERICA_EIRUNEPE',
-	AmericaElSalvador = 'AMERICA_EL_SALVADOR',
-	AmericaEnsenada = 'AMERICA_ENSENADA',
-	AmericaFortNelson = 'AMERICA_FORT_NELSON',
-	AmericaFortWayne = 'AMERICA_FORT_WAYNE',
-	AmericaFortaleza = 'AMERICA_FORTALEZA',
-	AmericaGlaceBay = 'AMERICA_GLACE_BAY',
-	AmericaGodthab = 'AMERICA_GODTHAB',
-	AmericaGooseBay = 'AMERICA_GOOSE_BAY',
-	AmericaGrandTurk = 'AMERICA_GRAND_TURK',
-	AmericaGrenada = 'AMERICA_GRENADA',
-	AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
-	AmericaGuatemala = 'AMERICA_GUATEMALA',
-	AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
-	AmericaGuyana = 'AMERICA_GUYANA',
-	AmericaHalifax = 'AMERICA_HALIFAX',
-	AmericaHavana = 'AMERICA_HAVANA',
-	AmericaHermosillo = 'AMERICA_HERMOSILLO',
-	AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
-	AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
-	AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
-	AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
-	AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
-	AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
-	AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
-	AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
-	AmericaIndianapolis = 'AMERICA_INDIANAPOLIS',
-	AmericaInuvik = 'AMERICA_INUVIK',
-	AmericaIqaluit = 'AMERICA_IQALUIT',
-	AmericaJamaica = 'AMERICA_JAMAICA',
-	AmericaJujuy = 'AMERICA_JUJUY',
-	AmericaJuneau = 'AMERICA_JUNEAU',
-	AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
-	AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
-	AmericaKnoxIn = 'AMERICA_KNOX_IN',
-	AmericaKralendijk = 'AMERICA_KRALENDIJK',
-	AmericaLaPaz = 'AMERICA_LA_PAZ',
-	AmericaLima = 'AMERICA_LIMA',
-	AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
-	AmericaLouisville = 'AMERICA_LOUISVILLE',
-	AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
-	AmericaMaceio = 'AMERICA_MACEIO',
-	AmericaManagua = 'AMERICA_MANAGUA',
-	AmericaManaus = 'AMERICA_MANAUS',
-	AmericaMarigot = 'AMERICA_MARIGOT',
-	AmericaMartinique = 'AMERICA_MARTINIQUE',
-	AmericaMatamoros = 'AMERICA_MATAMOROS',
-	AmericaMazatlan = 'AMERICA_MAZATLAN',
-	AmericaMendoza = 'AMERICA_MENDOZA',
-	AmericaMenominee = 'AMERICA_MENOMINEE',
-	AmericaMerida = 'AMERICA_MERIDA',
-	AmericaMetlakatla = 'AMERICA_METLAKATLA',
-	AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
-	AmericaMiquelon = 'AMERICA_MIQUELON',
-	AmericaMoncton = 'AMERICA_MONCTON',
-	AmericaMonterrey = 'AMERICA_MONTERREY',
-	AmericaMontevideo = 'AMERICA_MONTEVIDEO',
-	AmericaMontreal = 'AMERICA_MONTREAL',
-	AmericaMontserrat = 'AMERICA_MONTSERRAT',
-	AmericaNassau = 'AMERICA_NASSAU',
-	AmericaNewYork = 'AMERICA_NEW_YORK',
-	AmericaNipigon = 'AMERICA_NIPIGON',
-	AmericaNome = 'AMERICA_NOME',
-	AmericaNoronha = 'AMERICA_NORONHA',
-	AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
-	AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
-	AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
-	AmericaNuuk = 'AMERICA_NUUK',
-	AmericaOjinaga = 'AMERICA_OJINAGA',
-	AmericaPanama = 'AMERICA_PANAMA',
-	AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
-	AmericaParamaribo = 'AMERICA_PARAMARIBO',
-	AmericaPhoenix = 'AMERICA_PHOENIX',
-	AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
-	AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
-	AmericaPortoAcre = 'AMERICA_PORTO_ACRE',
-	AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
-	AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
-	AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
-	AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
-	AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
-	AmericaRecife = 'AMERICA_RECIFE',
-	AmericaRegina = 'AMERICA_REGINA',
-	AmericaResolute = 'AMERICA_RESOLUTE',
-	AmericaRioBranco = 'AMERICA_RIO_BRANCO',
-	AmericaRosario = 'AMERICA_ROSARIO',
-	AmericaSantaIsabel = 'AMERICA_SANTA_ISABEL',
-	AmericaSantarem = 'AMERICA_SANTAREM',
-	AmericaSantiago = 'AMERICA_SANTIAGO',
-	AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
-	AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
-	AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
-	AmericaShiprock = 'AMERICA_SHIPROCK',
-	AmericaSitka = 'AMERICA_SITKA',
-	AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
-	AmericaStJohns = 'AMERICA_ST_JOHNS',
-	AmericaStKitts = 'AMERICA_ST_KITTS',
-	AmericaStLucia = 'AMERICA_ST_LUCIA',
-	AmericaStThomas = 'AMERICA_ST_THOMAS',
-	AmericaStVincent = 'AMERICA_ST_VINCENT',
-	AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
-	AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
-	AmericaThule = 'AMERICA_THULE',
-	AmericaThunderBay = 'AMERICA_THUNDER_BAY',
-	AmericaTijuana = 'AMERICA_TIJUANA',
-	AmericaToronto = 'AMERICA_TORONTO',
-	AmericaTortola = 'AMERICA_TORTOLA',
-	AmericaVancouver = 'AMERICA_VANCOUVER',
-	AmericaVirgin = 'AMERICA_VIRGIN',
-	AmericaWhitehorse = 'AMERICA_WHITEHORSE',
-	AmericaWinnipeg = 'AMERICA_WINNIPEG',
-	AmericaYakutat = 'AMERICA_YAKUTAT',
-	AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
-	AntarcticaCasey = 'ANTARCTICA_CASEY',
-	AntarcticaDavis = 'ANTARCTICA_DAVIS',
-	AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
-	AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
-	AntarcticaMawson = 'ANTARCTICA_MAWSON',
-	AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
-	AntarcticaPalmer = 'ANTARCTICA_PALMER',
-	AntarcticaRothera = 'ANTARCTICA_ROTHERA',
-	AntarcticaSouthPole = 'ANTARCTICA_SOUTH_POLE',
-	AntarcticaSyowa = 'ANTARCTICA_SYOWA',
-	AntarcticaTroll = 'ANTARCTICA_TROLL',
-	AntarcticaVostok = 'ANTARCTICA_VOSTOK',
-	ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
-	AsiaAden = 'ASIA_ADEN',
-	AsiaAlmaty = 'ASIA_ALMATY',
-	AsiaAmman = 'ASIA_AMMAN',
-	AsiaAnadyr = 'ASIA_ANADYR',
-	AsiaAqtau = 'ASIA_AQTAU',
-	AsiaAqtobe = 'ASIA_AQTOBE',
-	AsiaAshgabat = 'ASIA_ASHGABAT',
-	AsiaAshkhabad = 'ASIA_ASHKHABAD',
-	AsiaAtyrau = 'ASIA_ATYRAU',
-	AsiaBaghdad = 'ASIA_BAGHDAD',
-	AsiaBahrain = 'ASIA_BAHRAIN',
-	AsiaBaku = 'ASIA_BAKU',
-	AsiaBangkok = 'ASIA_BANGKOK',
-	AsiaBarnaul = 'ASIA_BARNAUL',
-	AsiaBeirut = 'ASIA_BEIRUT',
-	AsiaBishkek = 'ASIA_BISHKEK',
-	AsiaBrunei = 'ASIA_BRUNEI',
-	AsiaCalcutta = 'ASIA_CALCUTTA',
-	AsiaChita = 'ASIA_CHITA',
-	AsiaChoibalsan = 'ASIA_CHOIBALSAN',
-	AsiaChongqing = 'ASIA_CHONGQING',
-	AsiaChungking = 'ASIA_CHUNGKING',
-	AsiaColombo = 'ASIA_COLOMBO',
-	AsiaDacca = 'ASIA_DACCA',
-	AsiaDamascus = 'ASIA_DAMASCUS',
-	AsiaDhaka = 'ASIA_DHAKA',
-	AsiaDili = 'ASIA_DILI',
-	AsiaDubai = 'ASIA_DUBAI',
-	AsiaDushanbe = 'ASIA_DUSHANBE',
-	AsiaFamagusta = 'ASIA_FAMAGUSTA',
-	AsiaGaza = 'ASIA_GAZA',
-	AsiaHarbin = 'ASIA_HARBIN',
-	AsiaHebron = 'ASIA_HEBRON',
-	AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
-	AsiaHongKong = 'ASIA_HONG_KONG',
-	AsiaHovd = 'ASIA_HOVD',
-	AsiaIrkutsk = 'ASIA_IRKUTSK',
-	AsiaIstanbul = 'ASIA_ISTANBUL',
-	AsiaJakarta = 'ASIA_JAKARTA',
-	AsiaJayapura = 'ASIA_JAYAPURA',
-	AsiaJerusalem = 'ASIA_JERUSALEM',
-	AsiaKabul = 'ASIA_KABUL',
-	AsiaKamchatka = 'ASIA_KAMCHATKA',
-	AsiaKarachi = 'ASIA_KARACHI',
-	AsiaKashgar = 'ASIA_KASHGAR',
-	AsiaKathmandu = 'ASIA_KATHMANDU',
-	AsiaKatmandu = 'ASIA_KATMANDU',
-	AsiaKhandyga = 'ASIA_KHANDYGA',
-	AsiaKolkata = 'ASIA_KOLKATA',
-	AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
-	AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
-	AsiaKuching = 'ASIA_KUCHING',
-	AsiaKuwait = 'ASIA_KUWAIT',
-	AsiaMacao = 'ASIA_MACAO',
-	AsiaMacau = 'ASIA_MACAU',
-	AsiaMagadan = 'ASIA_MAGADAN',
-	AsiaMakassar = 'ASIA_MAKASSAR',
-	AsiaManila = 'ASIA_MANILA',
-	AsiaMuscat = 'ASIA_MUSCAT',
-	AsiaNicosia = 'ASIA_NICOSIA',
-	AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
-	AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
-	AsiaOmsk = 'ASIA_OMSK',
-	AsiaOral = 'ASIA_ORAL',
-	AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
-	AsiaPontianak = 'ASIA_PONTIANAK',
-	AsiaPyongyang = 'ASIA_PYONGYANG',
-	AsiaQatar = 'ASIA_QATAR',
-	AsiaQostanay = 'ASIA_QOSTANAY',
-	AsiaQyzylorda = 'ASIA_QYZYLORDA',
-	AsiaRangoon = 'ASIA_RANGOON',
-	AsiaRiyadh = 'ASIA_RIYADH',
-	AsiaSaigon = 'ASIA_SAIGON',
-	AsiaSakhalin = 'ASIA_SAKHALIN',
-	AsiaSamarkand = 'ASIA_SAMARKAND',
-	AsiaSeoul = 'ASIA_SEOUL',
-	AsiaShanghai = 'ASIA_SHANGHAI',
-	AsiaSingapore = 'ASIA_SINGAPORE',
-	AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
-	AsiaTaipei = 'ASIA_TAIPEI',
-	AsiaTashkent = 'ASIA_TASHKENT',
-	AsiaTbilisi = 'ASIA_TBILISI',
-	AsiaTehran = 'ASIA_TEHRAN',
-	AsiaTelAviv = 'ASIA_TEL_AVIV',
-	AsiaThimbu = 'ASIA_THIMBU',
-	AsiaThimphu = 'ASIA_THIMPHU',
-	AsiaTokyo = 'ASIA_TOKYO',
-	AsiaTomsk = 'ASIA_TOMSK',
-	AsiaUjungPandang = 'ASIA_UJUNG_PANDANG',
-	AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
-	AsiaUlanBator = 'ASIA_ULAN_BATOR',
-	AsiaUrumqi = 'ASIA_URUMQI',
-	AsiaUstNera = 'ASIA_UST_NERA',
-	AsiaVientiane = 'ASIA_VIENTIANE',
-	AsiaVladivostok = 'ASIA_VLADIVOSTOK',
-	AsiaYakutsk = 'ASIA_YAKUTSK',
-	AsiaYangon = 'ASIA_YANGON',
-	AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
-	AsiaYerevan = 'ASIA_YEREVAN',
-	AtlanticAzores = 'ATLANTIC_AZORES',
-	AtlanticBermuda = 'ATLANTIC_BERMUDA',
-	AtlanticCanary = 'ATLANTIC_CANARY',
-	AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
-	AtlanticFaeroe = 'ATLANTIC_FAEROE',
-	AtlanticFaroe = 'ATLANTIC_FAROE',
-	AtlanticJanMayen = 'ATLANTIC_JAN_MAYEN',
-	AtlanticMadeira = 'ATLANTIC_MADEIRA',
-	AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
-	AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
-	AtlanticStHelena = 'ATLANTIC_ST_HELENA',
-	AtlanticStanley = 'ATLANTIC_STANLEY',
-	AustraliaAct = 'AUSTRALIA_ACT',
-	AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
-	AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
-	AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
-	AustraliaCanberra = 'AUSTRALIA_CANBERRA',
-	AustraliaCurrie = 'AUSTRALIA_CURRIE',
-	AustraliaDarwin = 'AUSTRALIA_DARWIN',
-	AustraliaEucla = 'AUSTRALIA_EUCLA',
-	AustraliaHobart = 'AUSTRALIA_HOBART',
-	AustraliaLhi = 'AUSTRALIA_LHI',
-	AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
-	AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
-	AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
-	AustraliaNorth = 'AUSTRALIA_NORTH',
-	AustraliaNsw = 'AUSTRALIA_NSW',
-	AustraliaPerth = 'AUSTRALIA_PERTH',
-	AustraliaQueensland = 'AUSTRALIA_QUEENSLAND',
-	AustraliaSouth = 'AUSTRALIA_SOUTH',
-	AustraliaSydney = 'AUSTRALIA_SYDNEY',
-	AustraliaTasmania = 'AUSTRALIA_TASMANIA',
-	AustraliaVictoria = 'AUSTRALIA_VICTORIA',
-	AustraliaWest = 'AUSTRALIA_WEST',
-	AustraliaYancowinna = 'AUSTRALIA_YANCOWINNA',
-	BrazilAcre = 'BRAZIL_ACRE',
-	BrazilDenoronha = 'BRAZIL_DENORONHA',
-	BrazilEast = 'BRAZIL_EAST',
-	BrazilWest = 'BRAZIL_WEST',
-	CanadaAtlantic = 'CANADA_ATLANTIC',
-	CanadaCentral = 'CANADA_CENTRAL',
-	CanadaEastern = 'CANADA_EASTERN',
-	CanadaMountain = 'CANADA_MOUNTAIN',
-	CanadaNewfoundland = 'CANADA_NEWFOUNDLAND',
-	CanadaPacific = 'CANADA_PACIFIC',
-	CanadaSaskatchewan = 'CANADA_SASKATCHEWAN',
-	CanadaYukon = 'CANADA_YUKON',
-	ChileContinental = 'CHILE_CONTINENTAL',
-	ChileEasterisland = 'CHILE_EASTERISLAND',
-	EtcGreenwich = 'ETC_GREENWICH',
-	EtcUct = 'ETC_UCT',
-	EtcUniversal = 'ETC_UNIVERSAL',
-	EtcUtc = 'ETC_UTC',
-	EtcZulu = 'ETC_ZULU',
-	EuropeAmsterdam = 'EUROPE_AMSTERDAM',
-	EuropeAndorra = 'EUROPE_ANDORRA',
-	EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
-	EuropeAthens = 'EUROPE_ATHENS',
-	EuropeBelfast = 'EUROPE_BELFAST',
-	EuropeBelgrade = 'EUROPE_BELGRADE',
-	EuropeBerlin = 'EUROPE_BERLIN',
-	EuropeBratislava = 'EUROPE_BRATISLAVA',
-	EuropeBrussels = 'EUROPE_BRUSSELS',
-	EuropeBucharest = 'EUROPE_BUCHAREST',
-	EuropeBudapest = 'EUROPE_BUDAPEST',
-	EuropeBusingen = 'EUROPE_BUSINGEN',
-	EuropeChisinau = 'EUROPE_CHISINAU',
-	EuropeCopenhagen = 'EUROPE_COPENHAGEN',
-	EuropeDublin = 'EUROPE_DUBLIN',
-	EuropeGibraltar = 'EUROPE_GIBRALTAR',
-	EuropeGuernsey = 'EUROPE_GUERNSEY',
-	EuropeHelsinki = 'EUROPE_HELSINKI',
-	EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
-	EuropeIstanbul = 'EUROPE_ISTANBUL',
-	EuropeJersey = 'EUROPE_JERSEY',
-	EuropeKaliningrad = 'EUROPE_KALININGRAD',
-	EuropeKiev = 'EUROPE_KIEV',
-	EuropeKirov = 'EUROPE_KIROV',
-	EuropeLisbon = 'EUROPE_LISBON',
-	EuropeLjubljana = 'EUROPE_LJUBLJANA',
-	EuropeLondon = 'EUROPE_LONDON',
-	EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
-	EuropeMadrid = 'EUROPE_MADRID',
-	EuropeMalta = 'EUROPE_MALTA',
-	EuropeMariehamn = 'EUROPE_MARIEHAMN',
-	EuropeMinsk = 'EUROPE_MINSK',
-	EuropeMonaco = 'EUROPE_MONACO',
-	EuropeMoscow = 'EUROPE_MOSCOW',
-	EuropeNicosia = 'EUROPE_NICOSIA',
-	EuropeOslo = 'EUROPE_OSLO',
-	EuropeParis = 'EUROPE_PARIS',
-	EuropePodgorica = 'EUROPE_PODGORICA',
-	EuropePrague = 'EUROPE_PRAGUE',
-	EuropeRiga = 'EUROPE_RIGA',
-	EuropeRome = 'EUROPE_ROME',
-	EuropeSamara = 'EUROPE_SAMARA',
-	EuropeSanMarino = 'EUROPE_SAN_MARINO',
-	EuropeSarajevo = 'EUROPE_SARAJEVO',
-	EuropeSaratov = 'EUROPE_SARATOV',
-	EuropeSimferopol = 'EUROPE_SIMFEROPOL',
-	EuropeSkopje = 'EUROPE_SKOPJE',
-	EuropeSofia = 'EUROPE_SOFIA',
-	EuropeStockholm = 'EUROPE_STOCKHOLM',
-	EuropeTallinn = 'EUROPE_TALLINN',
-	EuropeTirane = 'EUROPE_TIRANE',
-	EuropeTiraspol = 'EUROPE_TIRASPOL',
-	EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
-	EuropeUzhgorod = 'EUROPE_UZHGOROD',
-	EuropeVaduz = 'EUROPE_VADUZ',
-	EuropeVatican = 'EUROPE_VATICAN',
-	EuropeVienna = 'EUROPE_VIENNA',
-	EuropeVilnius = 'EUROPE_VILNIUS',
-	EuropeVolgograd = 'EUROPE_VOLGOGRAD',
-	EuropeWarsaw = 'EUROPE_WARSAW',
-	EuropeZagreb = 'EUROPE_ZAGREB',
-	EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
-	EuropeZurich = 'EUROPE_ZURICH',
-	IndianAntananarivo = 'INDIAN_ANTANANARIVO',
-	IndianChagos = 'INDIAN_CHAGOS',
-	IndianChristmas = 'INDIAN_CHRISTMAS',
-	IndianCocos = 'INDIAN_COCOS',
-	IndianComoro = 'INDIAN_COMORO',
-	IndianKerguelen = 'INDIAN_KERGUELEN',
-	IndianMahe = 'INDIAN_MAHE',
-	IndianMaldives = 'INDIAN_MALDIVES',
-	IndianMauritius = 'INDIAN_MAURITIUS',
-	IndianMayotte = 'INDIAN_MAYOTTE',
-	IndianReunion = 'INDIAN_REUNION',
-	MexicoBajanorte = 'MEXICO_BAJANORTE',
-	MexicoBajasur = 'MEXICO_BAJASUR',
-	MexicoGeneral = 'MEXICO_GENERAL',
-	PacificApia = 'PACIFIC_APIA',
-	PacificAuckland = 'PACIFIC_AUCKLAND',
-	PacificBougainville = 'PACIFIC_BOUGAINVILLE',
-	PacificChatham = 'PACIFIC_CHATHAM',
-	PacificChuuk = 'PACIFIC_CHUUK',
-	PacificEaster = 'PACIFIC_EASTER',
-	PacificEfate = 'PACIFIC_EFATE',
-	PacificEnderbury = 'PACIFIC_ENDERBURY',
-	PacificFakaofo = 'PACIFIC_FAKAOFO',
-	PacificFiji = 'PACIFIC_FIJI',
-	PacificFunafuti = 'PACIFIC_FUNAFUTI',
-	PacificGalapagos = 'PACIFIC_GALAPAGOS',
-	PacificGambier = 'PACIFIC_GAMBIER',
-	PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
-	PacificGuam = 'PACIFIC_GUAM',
-	PacificHonolulu = 'PACIFIC_HONOLULU',
-	PacificJohnston = 'PACIFIC_JOHNSTON',
-	PacificKiritimati = 'PACIFIC_KIRITIMATI',
-	PacificKosrae = 'PACIFIC_KOSRAE',
-	PacificKwajalein = 'PACIFIC_KWAJALEIN',
-	PacificMajuro = 'PACIFIC_MAJURO',
-	PacificMarquesas = 'PACIFIC_MARQUESAS',
-	PacificMidway = 'PACIFIC_MIDWAY',
-	PacificNauru = 'PACIFIC_NAURU',
-	PacificNiue = 'PACIFIC_NIUE',
-	PacificNorfolk = 'PACIFIC_NORFOLK',
-	PacificNoumea = 'PACIFIC_NOUMEA',
-	PacificPagoPago = 'PACIFIC_PAGO_PAGO',
-	PacificPalau = 'PACIFIC_PALAU',
-	PacificPitcairn = 'PACIFIC_PITCAIRN',
-	PacificPohnpei = 'PACIFIC_POHNPEI',
-	PacificPonape = 'PACIFIC_PONAPE',
-	PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
-	PacificRarotonga = 'PACIFIC_RAROTONGA',
-	PacificSaipan = 'PACIFIC_SAIPAN',
-	PacificSamoa = 'PACIFIC_SAMOA',
-	PacificTahiti = 'PACIFIC_TAHITI',
-	PacificTarawa = 'PACIFIC_TARAWA',
-	PacificTongatapu = 'PACIFIC_TONGATAPU',
-	PacificTruk = 'PACIFIC_TRUK',
-	PacificWake = 'PACIFIC_WAKE',
-	PacificWallis = 'PACIFIC_WALLIS',
-	PacificYap = 'PACIFIC_YAP',
-	UsAlaska = 'US_ALASKA',
-	UsAleutian = 'US_ALEUTIAN',
-	UsArizona = 'US_ARIZONA',
-	UsCentral = 'US_CENTRAL',
-	UsEastIndiana = 'US_EAST_INDIANA',
-	UsEastern = 'US_EASTERN',
-	UsHawaii = 'US_HAWAII',
-	UsIndianaStarke = 'US_INDIANA_STARKE',
-	UsMichigan = 'US_MICHIGAN',
-	UsMountain = 'US_MOUNTAIN',
-	UsPacific = 'US_PACIFIC',
-	UsSamoa = 'US_SAMOA',
+  AfricaAbidjan = 'AFRICA_ABIDJAN',
+  AfricaAccra = 'AFRICA_ACCRA',
+  AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
+  AfricaAlgiers = 'AFRICA_ALGIERS',
+  AfricaAsmara = 'AFRICA_ASMARA',
+  AfricaAsmera = 'AFRICA_ASMERA',
+  AfricaBamako = 'AFRICA_BAMAKO',
+  AfricaBangui = 'AFRICA_BANGUI',
+  AfricaBanjul = 'AFRICA_BANJUL',
+  AfricaBissau = 'AFRICA_BISSAU',
+  AfricaBlantyre = 'AFRICA_BLANTYRE',
+  AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
+  AfricaBujumbura = 'AFRICA_BUJUMBURA',
+  AfricaCairo = 'AFRICA_CAIRO',
+  AfricaCasablanca = 'AFRICA_CASABLANCA',
+  AfricaCeuta = 'AFRICA_CEUTA',
+  AfricaConakry = 'AFRICA_CONAKRY',
+  AfricaDakar = 'AFRICA_DAKAR',
+  AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
+  AfricaDjibouti = 'AFRICA_DJIBOUTI',
+  AfricaDouala = 'AFRICA_DOUALA',
+  AfricaElAaiun = 'AFRICA_EL_AAIUN',
+  AfricaFreetown = 'AFRICA_FREETOWN',
+  AfricaGaborone = 'AFRICA_GABORONE',
+  AfricaHarare = 'AFRICA_HARARE',
+  AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
+  AfricaJuba = 'AFRICA_JUBA',
+  AfricaKampala = 'AFRICA_KAMPALA',
+  AfricaKhartoum = 'AFRICA_KHARTOUM',
+  AfricaKigali = 'AFRICA_KIGALI',
+  AfricaKinshasa = 'AFRICA_KINSHASA',
+  AfricaLagos = 'AFRICA_LAGOS',
+  AfricaLibreville = 'AFRICA_LIBREVILLE',
+  AfricaLome = 'AFRICA_LOME',
+  AfricaLuanda = 'AFRICA_LUANDA',
+  AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
+  AfricaLusaka = 'AFRICA_LUSAKA',
+  AfricaMalabo = 'AFRICA_MALABO',
+  AfricaMaputo = 'AFRICA_MAPUTO',
+  AfricaMaseru = 'AFRICA_MASERU',
+  AfricaMbabane = 'AFRICA_MBABANE',
+  AfricaMogadishu = 'AFRICA_MOGADISHU',
+  AfricaMonrovia = 'AFRICA_MONROVIA',
+  AfricaNairobi = 'AFRICA_NAIROBI',
+  AfricaNdjamena = 'AFRICA_NDJAMENA',
+  AfricaNiamey = 'AFRICA_NIAMEY',
+  AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
+  AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
+  AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
+  AfricaSaoTome = 'AFRICA_SAO_TOME',
+  AfricaTimbuktu = 'AFRICA_TIMBUKTU',
+  AfricaTripoli = 'AFRICA_TRIPOLI',
+  AfricaTunis = 'AFRICA_TUNIS',
+  AfricaWindhoek = 'AFRICA_WINDHOEK',
+  AmericaAdak = 'AMERICA_ADAK',
+  AmericaAnchorage = 'AMERICA_ANCHORAGE',
+  AmericaAnguilla = 'AMERICA_ANGUILLA',
+  AmericaAntigua = 'AMERICA_ANTIGUA',
+  AmericaAraguaina = 'AMERICA_ARAGUAINA',
+  AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
+  AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
+  AmericaArgentinaComodrivadavia = 'AMERICA_ARGENTINA_COMODRIVADAVIA',
+  AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
+  AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
+  AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
+  AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
+  AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
+  AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
+  AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
+  AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
+  AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
+  AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
+  AmericaAruba = 'AMERICA_ARUBA',
+  AmericaAsuncion = 'AMERICA_ASUNCION',
+  AmericaAtikokan = 'AMERICA_ATIKOKAN',
+  AmericaAtka = 'AMERICA_ATKA',
+  AmericaBahia = 'AMERICA_BAHIA',
+  AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
+  AmericaBarbados = 'AMERICA_BARBADOS',
+  AmericaBelem = 'AMERICA_BELEM',
+  AmericaBelize = 'AMERICA_BELIZE',
+  AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
+  AmericaBoaVista = 'AMERICA_BOA_VISTA',
+  AmericaBogota = 'AMERICA_BOGOTA',
+  AmericaBoise = 'AMERICA_BOISE',
+  AmericaBuenosAires = 'AMERICA_BUENOS_AIRES',
+  AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
+  AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
+  AmericaCancun = 'AMERICA_CANCUN',
+  AmericaCaracas = 'AMERICA_CARACAS',
+  AmericaCatamarca = 'AMERICA_CATAMARCA',
+  AmericaCayenne = 'AMERICA_CAYENNE',
+  AmericaCayman = 'AMERICA_CAYMAN',
+  AmericaChicago = 'AMERICA_CHICAGO',
+  AmericaChihuahua = 'AMERICA_CHIHUAHUA',
+  AmericaCoralHarbour = 'AMERICA_CORAL_HARBOUR',
+  AmericaCordoba = 'AMERICA_CORDOBA',
+  AmericaCostaRica = 'AMERICA_COSTA_RICA',
+  AmericaCreston = 'AMERICA_CRESTON',
+  AmericaCuiaba = 'AMERICA_CUIABA',
+  AmericaCuracao = 'AMERICA_CURACAO',
+  AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
+  AmericaDawson = 'AMERICA_DAWSON',
+  AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
+  AmericaDenver = 'AMERICA_DENVER',
+  AmericaDetroit = 'AMERICA_DETROIT',
+  AmericaDominica = 'AMERICA_DOMINICA',
+  AmericaEdmonton = 'AMERICA_EDMONTON',
+  AmericaEirunepe = 'AMERICA_EIRUNEPE',
+  AmericaElSalvador = 'AMERICA_EL_SALVADOR',
+  AmericaEnsenada = 'AMERICA_ENSENADA',
+  AmericaFortNelson = 'AMERICA_FORT_NELSON',
+  AmericaFortWayne = 'AMERICA_FORT_WAYNE',
+  AmericaFortaleza = 'AMERICA_FORTALEZA',
+  AmericaGlaceBay = 'AMERICA_GLACE_BAY',
+  AmericaGodthab = 'AMERICA_GODTHAB',
+  AmericaGooseBay = 'AMERICA_GOOSE_BAY',
+  AmericaGrandTurk = 'AMERICA_GRAND_TURK',
+  AmericaGrenada = 'AMERICA_GRENADA',
+  AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
+  AmericaGuatemala = 'AMERICA_GUATEMALA',
+  AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
+  AmericaGuyana = 'AMERICA_GUYANA',
+  AmericaHalifax = 'AMERICA_HALIFAX',
+  AmericaHavana = 'AMERICA_HAVANA',
+  AmericaHermosillo = 'AMERICA_HERMOSILLO',
+  AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
+  AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
+  AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
+  AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
+  AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
+  AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
+  AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
+  AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
+  AmericaIndianapolis = 'AMERICA_INDIANAPOLIS',
+  AmericaInuvik = 'AMERICA_INUVIK',
+  AmericaIqaluit = 'AMERICA_IQALUIT',
+  AmericaJamaica = 'AMERICA_JAMAICA',
+  AmericaJujuy = 'AMERICA_JUJUY',
+  AmericaJuneau = 'AMERICA_JUNEAU',
+  AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
+  AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
+  AmericaKnoxIn = 'AMERICA_KNOX_IN',
+  AmericaKralendijk = 'AMERICA_KRALENDIJK',
+  AmericaLaPaz = 'AMERICA_LA_PAZ',
+  AmericaLima = 'AMERICA_LIMA',
+  AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
+  AmericaLouisville = 'AMERICA_LOUISVILLE',
+  AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
+  AmericaMaceio = 'AMERICA_MACEIO',
+  AmericaManagua = 'AMERICA_MANAGUA',
+  AmericaManaus = 'AMERICA_MANAUS',
+  AmericaMarigot = 'AMERICA_MARIGOT',
+  AmericaMartinique = 'AMERICA_MARTINIQUE',
+  AmericaMatamoros = 'AMERICA_MATAMOROS',
+  AmericaMazatlan = 'AMERICA_MAZATLAN',
+  AmericaMendoza = 'AMERICA_MENDOZA',
+  AmericaMenominee = 'AMERICA_MENOMINEE',
+  AmericaMerida = 'AMERICA_MERIDA',
+  AmericaMetlakatla = 'AMERICA_METLAKATLA',
+  AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
+  AmericaMiquelon = 'AMERICA_MIQUELON',
+  AmericaMoncton = 'AMERICA_MONCTON',
+  AmericaMonterrey = 'AMERICA_MONTERREY',
+  AmericaMontevideo = 'AMERICA_MONTEVIDEO',
+  AmericaMontreal = 'AMERICA_MONTREAL',
+  AmericaMontserrat = 'AMERICA_MONTSERRAT',
+  AmericaNassau = 'AMERICA_NASSAU',
+  AmericaNewYork = 'AMERICA_NEW_YORK',
+  AmericaNipigon = 'AMERICA_NIPIGON',
+  AmericaNome = 'AMERICA_NOME',
+  AmericaNoronha = 'AMERICA_NORONHA',
+  AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
+  AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
+  AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
+  AmericaNuuk = 'AMERICA_NUUK',
+  AmericaOjinaga = 'AMERICA_OJINAGA',
+  AmericaPanama = 'AMERICA_PANAMA',
+  AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
+  AmericaParamaribo = 'AMERICA_PARAMARIBO',
+  AmericaPhoenix = 'AMERICA_PHOENIX',
+  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
+  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
+  AmericaPortoAcre = 'AMERICA_PORTO_ACRE',
+  AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
+  AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
+  AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
+  AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
+  AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
+  AmericaRecife = 'AMERICA_RECIFE',
+  AmericaRegina = 'AMERICA_REGINA',
+  AmericaResolute = 'AMERICA_RESOLUTE',
+  AmericaRioBranco = 'AMERICA_RIO_BRANCO',
+  AmericaRosario = 'AMERICA_ROSARIO',
+  AmericaSantaIsabel = 'AMERICA_SANTA_ISABEL',
+  AmericaSantarem = 'AMERICA_SANTAREM',
+  AmericaSantiago = 'AMERICA_SANTIAGO',
+  AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
+  AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
+  AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
+  AmericaShiprock = 'AMERICA_SHIPROCK',
+  AmericaSitka = 'AMERICA_SITKA',
+  AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
+  AmericaStJohns = 'AMERICA_ST_JOHNS',
+  AmericaStKitts = 'AMERICA_ST_KITTS',
+  AmericaStLucia = 'AMERICA_ST_LUCIA',
+  AmericaStThomas = 'AMERICA_ST_THOMAS',
+  AmericaStVincent = 'AMERICA_ST_VINCENT',
+  AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
+  AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
+  AmericaThule = 'AMERICA_THULE',
+  AmericaThunderBay = 'AMERICA_THUNDER_BAY',
+  AmericaTijuana = 'AMERICA_TIJUANA',
+  AmericaToronto = 'AMERICA_TORONTO',
+  AmericaTortola = 'AMERICA_TORTOLA',
+  AmericaVancouver = 'AMERICA_VANCOUVER',
+  AmericaVirgin = 'AMERICA_VIRGIN',
+  AmericaWhitehorse = 'AMERICA_WHITEHORSE',
+  AmericaWinnipeg = 'AMERICA_WINNIPEG',
+  AmericaYakutat = 'AMERICA_YAKUTAT',
+  AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
+  AntarcticaCasey = 'ANTARCTICA_CASEY',
+  AntarcticaDavis = 'ANTARCTICA_DAVIS',
+  AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
+  AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
+  AntarcticaMawson = 'ANTARCTICA_MAWSON',
+  AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
+  AntarcticaPalmer = 'ANTARCTICA_PALMER',
+  AntarcticaRothera = 'ANTARCTICA_ROTHERA',
+  AntarcticaSouthPole = 'ANTARCTICA_SOUTH_POLE',
+  AntarcticaSyowa = 'ANTARCTICA_SYOWA',
+  AntarcticaTroll = 'ANTARCTICA_TROLL',
+  AntarcticaVostok = 'ANTARCTICA_VOSTOK',
+  ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
+  AsiaAden = 'ASIA_ADEN',
+  AsiaAlmaty = 'ASIA_ALMATY',
+  AsiaAmman = 'ASIA_AMMAN',
+  AsiaAnadyr = 'ASIA_ANADYR',
+  AsiaAqtau = 'ASIA_AQTAU',
+  AsiaAqtobe = 'ASIA_AQTOBE',
+  AsiaAshgabat = 'ASIA_ASHGABAT',
+  AsiaAshkhabad = 'ASIA_ASHKHABAD',
+  AsiaAtyrau = 'ASIA_ATYRAU',
+  AsiaBaghdad = 'ASIA_BAGHDAD',
+  AsiaBahrain = 'ASIA_BAHRAIN',
+  AsiaBaku = 'ASIA_BAKU',
+  AsiaBangkok = 'ASIA_BANGKOK',
+  AsiaBarnaul = 'ASIA_BARNAUL',
+  AsiaBeirut = 'ASIA_BEIRUT',
+  AsiaBishkek = 'ASIA_BISHKEK',
+  AsiaBrunei = 'ASIA_BRUNEI',
+  AsiaCalcutta = 'ASIA_CALCUTTA',
+  AsiaChita = 'ASIA_CHITA',
+  AsiaChoibalsan = 'ASIA_CHOIBALSAN',
+  AsiaChongqing = 'ASIA_CHONGQING',
+  AsiaChungking = 'ASIA_CHUNGKING',
+  AsiaColombo = 'ASIA_COLOMBO',
+  AsiaDacca = 'ASIA_DACCA',
+  AsiaDamascus = 'ASIA_DAMASCUS',
+  AsiaDhaka = 'ASIA_DHAKA',
+  AsiaDili = 'ASIA_DILI',
+  AsiaDubai = 'ASIA_DUBAI',
+  AsiaDushanbe = 'ASIA_DUSHANBE',
+  AsiaFamagusta = 'ASIA_FAMAGUSTA',
+  AsiaGaza = 'ASIA_GAZA',
+  AsiaHarbin = 'ASIA_HARBIN',
+  AsiaHebron = 'ASIA_HEBRON',
+  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
+  AsiaHongKong = 'ASIA_HONG_KONG',
+  AsiaHovd = 'ASIA_HOVD',
+  AsiaIrkutsk = 'ASIA_IRKUTSK',
+  AsiaIstanbul = 'ASIA_ISTANBUL',
+  AsiaJakarta = 'ASIA_JAKARTA',
+  AsiaJayapura = 'ASIA_JAYAPURA',
+  AsiaJerusalem = 'ASIA_JERUSALEM',
+  AsiaKabul = 'ASIA_KABUL',
+  AsiaKamchatka = 'ASIA_KAMCHATKA',
+  AsiaKarachi = 'ASIA_KARACHI',
+  AsiaKashgar = 'ASIA_KASHGAR',
+  AsiaKathmandu = 'ASIA_KATHMANDU',
+  AsiaKatmandu = 'ASIA_KATMANDU',
+  AsiaKhandyga = 'ASIA_KHANDYGA',
+  AsiaKolkata = 'ASIA_KOLKATA',
+  AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
+  AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
+  AsiaKuching = 'ASIA_KUCHING',
+  AsiaKuwait = 'ASIA_KUWAIT',
+  AsiaMacao = 'ASIA_MACAO',
+  AsiaMacau = 'ASIA_MACAU',
+  AsiaMagadan = 'ASIA_MAGADAN',
+  AsiaMakassar = 'ASIA_MAKASSAR',
+  AsiaManila = 'ASIA_MANILA',
+  AsiaMuscat = 'ASIA_MUSCAT',
+  AsiaNicosia = 'ASIA_NICOSIA',
+  AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
+  AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
+  AsiaOmsk = 'ASIA_OMSK',
+  AsiaOral = 'ASIA_ORAL',
+  AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
+  AsiaPontianak = 'ASIA_PONTIANAK',
+  AsiaPyongyang = 'ASIA_PYONGYANG',
+  AsiaQatar = 'ASIA_QATAR',
+  AsiaQostanay = 'ASIA_QOSTANAY',
+  AsiaQyzylorda = 'ASIA_QYZYLORDA',
+  AsiaRangoon = 'ASIA_RANGOON',
+  AsiaRiyadh = 'ASIA_RIYADH',
+  AsiaSaigon = 'ASIA_SAIGON',
+  AsiaSakhalin = 'ASIA_SAKHALIN',
+  AsiaSamarkand = 'ASIA_SAMARKAND',
+  AsiaSeoul = 'ASIA_SEOUL',
+  AsiaShanghai = 'ASIA_SHANGHAI',
+  AsiaSingapore = 'ASIA_SINGAPORE',
+  AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
+  AsiaTaipei = 'ASIA_TAIPEI',
+  AsiaTashkent = 'ASIA_TASHKENT',
+  AsiaTbilisi = 'ASIA_TBILISI',
+  AsiaTehran = 'ASIA_TEHRAN',
+  AsiaTelAviv = 'ASIA_TEL_AVIV',
+  AsiaThimbu = 'ASIA_THIMBU',
+  AsiaThimphu = 'ASIA_THIMPHU',
+  AsiaTokyo = 'ASIA_TOKYO',
+  AsiaTomsk = 'ASIA_TOMSK',
+  AsiaUjungPandang = 'ASIA_UJUNG_PANDANG',
+  AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
+  AsiaUlanBator = 'ASIA_ULAN_BATOR',
+  AsiaUrumqi = 'ASIA_URUMQI',
+  AsiaUstNera = 'ASIA_UST_NERA',
+  AsiaVientiane = 'ASIA_VIENTIANE',
+  AsiaVladivostok = 'ASIA_VLADIVOSTOK',
+  AsiaYakutsk = 'ASIA_YAKUTSK',
+  AsiaYangon = 'ASIA_YANGON',
+  AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
+  AsiaYerevan = 'ASIA_YEREVAN',
+  AtlanticAzores = 'ATLANTIC_AZORES',
+  AtlanticBermuda = 'ATLANTIC_BERMUDA',
+  AtlanticCanary = 'ATLANTIC_CANARY',
+  AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
+  AtlanticFaeroe = 'ATLANTIC_FAEROE',
+  AtlanticFaroe = 'ATLANTIC_FAROE',
+  AtlanticJanMayen = 'ATLANTIC_JAN_MAYEN',
+  AtlanticMadeira = 'ATLANTIC_MADEIRA',
+  AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
+  AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
+  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
+  AtlanticStanley = 'ATLANTIC_STANLEY',
+  AustraliaAct = 'AUSTRALIA_ACT',
+  AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
+  AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
+  AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
+  AustraliaCanberra = 'AUSTRALIA_CANBERRA',
+  AustraliaCurrie = 'AUSTRALIA_CURRIE',
+  AustraliaDarwin = 'AUSTRALIA_DARWIN',
+  AustraliaEucla = 'AUSTRALIA_EUCLA',
+  AustraliaHobart = 'AUSTRALIA_HOBART',
+  AustraliaLhi = 'AUSTRALIA_LHI',
+  AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
+  AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
+  AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
+  AustraliaNorth = 'AUSTRALIA_NORTH',
+  AustraliaNsw = 'AUSTRALIA_NSW',
+  AustraliaPerth = 'AUSTRALIA_PERTH',
+  AustraliaQueensland = 'AUSTRALIA_QUEENSLAND',
+  AustraliaSouth = 'AUSTRALIA_SOUTH',
+  AustraliaSydney = 'AUSTRALIA_SYDNEY',
+  AustraliaTasmania = 'AUSTRALIA_TASMANIA',
+  AustraliaVictoria = 'AUSTRALIA_VICTORIA',
+  AustraliaWest = 'AUSTRALIA_WEST',
+  AustraliaYancowinna = 'AUSTRALIA_YANCOWINNA',
+  BrazilAcre = 'BRAZIL_ACRE',
+  BrazilDenoronha = 'BRAZIL_DENORONHA',
+  BrazilEast = 'BRAZIL_EAST',
+  BrazilWest = 'BRAZIL_WEST',
+  CanadaAtlantic = 'CANADA_ATLANTIC',
+  CanadaCentral = 'CANADA_CENTRAL',
+  CanadaEastern = 'CANADA_EASTERN',
+  CanadaMountain = 'CANADA_MOUNTAIN',
+  CanadaNewfoundland = 'CANADA_NEWFOUNDLAND',
+  CanadaPacific = 'CANADA_PACIFIC',
+  CanadaSaskatchewan = 'CANADA_SASKATCHEWAN',
+  CanadaYukon = 'CANADA_YUKON',
+  ChileContinental = 'CHILE_CONTINENTAL',
+  ChileEasterisland = 'CHILE_EASTERISLAND',
+  EtcGreenwich = 'ETC_GREENWICH',
+  EtcUct = 'ETC_UCT',
+  EtcUniversal = 'ETC_UNIVERSAL',
+  EtcUtc = 'ETC_UTC',
+  EtcZulu = 'ETC_ZULU',
+  EuropeAmsterdam = 'EUROPE_AMSTERDAM',
+  EuropeAndorra = 'EUROPE_ANDORRA',
+  EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
+  EuropeAthens = 'EUROPE_ATHENS',
+  EuropeBelfast = 'EUROPE_BELFAST',
+  EuropeBelgrade = 'EUROPE_BELGRADE',
+  EuropeBerlin = 'EUROPE_BERLIN',
+  EuropeBratislava = 'EUROPE_BRATISLAVA',
+  EuropeBrussels = 'EUROPE_BRUSSELS',
+  EuropeBucharest = 'EUROPE_BUCHAREST',
+  EuropeBudapest = 'EUROPE_BUDAPEST',
+  EuropeBusingen = 'EUROPE_BUSINGEN',
+  EuropeChisinau = 'EUROPE_CHISINAU',
+  EuropeCopenhagen = 'EUROPE_COPENHAGEN',
+  EuropeDublin = 'EUROPE_DUBLIN',
+  EuropeGibraltar = 'EUROPE_GIBRALTAR',
+  EuropeGuernsey = 'EUROPE_GUERNSEY',
+  EuropeHelsinki = 'EUROPE_HELSINKI',
+  EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
+  EuropeIstanbul = 'EUROPE_ISTANBUL',
+  EuropeJersey = 'EUROPE_JERSEY',
+  EuropeKaliningrad = 'EUROPE_KALININGRAD',
+  EuropeKiev = 'EUROPE_KIEV',
+  EuropeKirov = 'EUROPE_KIROV',
+  EuropeLisbon = 'EUROPE_LISBON',
+  EuropeLjubljana = 'EUROPE_LJUBLJANA',
+  EuropeLondon = 'EUROPE_LONDON',
+  EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
+  EuropeMadrid = 'EUROPE_MADRID',
+  EuropeMalta = 'EUROPE_MALTA',
+  EuropeMariehamn = 'EUROPE_MARIEHAMN',
+  EuropeMinsk = 'EUROPE_MINSK',
+  EuropeMonaco = 'EUROPE_MONACO',
+  EuropeMoscow = 'EUROPE_MOSCOW',
+  EuropeNicosia = 'EUROPE_NICOSIA',
+  EuropeOslo = 'EUROPE_OSLO',
+  EuropeParis = 'EUROPE_PARIS',
+  EuropePodgorica = 'EUROPE_PODGORICA',
+  EuropePrague = 'EUROPE_PRAGUE',
+  EuropeRiga = 'EUROPE_RIGA',
+  EuropeRome = 'EUROPE_ROME',
+  EuropeSamara = 'EUROPE_SAMARA',
+  EuropeSanMarino = 'EUROPE_SAN_MARINO',
+  EuropeSarajevo = 'EUROPE_SARAJEVO',
+  EuropeSaratov = 'EUROPE_SARATOV',
+  EuropeSimferopol = 'EUROPE_SIMFEROPOL',
+  EuropeSkopje = 'EUROPE_SKOPJE',
+  EuropeSofia = 'EUROPE_SOFIA',
+  EuropeStockholm = 'EUROPE_STOCKHOLM',
+  EuropeTallinn = 'EUROPE_TALLINN',
+  EuropeTirane = 'EUROPE_TIRANE',
+  EuropeTiraspol = 'EUROPE_TIRASPOL',
+  EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
+  EuropeUzhgorod = 'EUROPE_UZHGOROD',
+  EuropeVaduz = 'EUROPE_VADUZ',
+  EuropeVatican = 'EUROPE_VATICAN',
+  EuropeVienna = 'EUROPE_VIENNA',
+  EuropeVilnius = 'EUROPE_VILNIUS',
+  EuropeVolgograd = 'EUROPE_VOLGOGRAD',
+  EuropeWarsaw = 'EUROPE_WARSAW',
+  EuropeZagreb = 'EUROPE_ZAGREB',
+  EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
+  EuropeZurich = 'EUROPE_ZURICH',
+  IndianAntananarivo = 'INDIAN_ANTANANARIVO',
+  IndianChagos = 'INDIAN_CHAGOS',
+  IndianChristmas = 'INDIAN_CHRISTMAS',
+  IndianCocos = 'INDIAN_COCOS',
+  IndianComoro = 'INDIAN_COMORO',
+  IndianKerguelen = 'INDIAN_KERGUELEN',
+  IndianMahe = 'INDIAN_MAHE',
+  IndianMaldives = 'INDIAN_MALDIVES',
+  IndianMauritius = 'INDIAN_MAURITIUS',
+  IndianMayotte = 'INDIAN_MAYOTTE',
+  IndianReunion = 'INDIAN_REUNION',
+  MexicoBajanorte = 'MEXICO_BAJANORTE',
+  MexicoBajasur = 'MEXICO_BAJASUR',
+  MexicoGeneral = 'MEXICO_GENERAL',
+  PacificApia = 'PACIFIC_APIA',
+  PacificAuckland = 'PACIFIC_AUCKLAND',
+  PacificBougainville = 'PACIFIC_BOUGAINVILLE',
+  PacificChatham = 'PACIFIC_CHATHAM',
+  PacificChuuk = 'PACIFIC_CHUUK',
+  PacificEaster = 'PACIFIC_EASTER',
+  PacificEfate = 'PACIFIC_EFATE',
+  PacificEnderbury = 'PACIFIC_ENDERBURY',
+  PacificFakaofo = 'PACIFIC_FAKAOFO',
+  PacificFiji = 'PACIFIC_FIJI',
+  PacificFunafuti = 'PACIFIC_FUNAFUTI',
+  PacificGalapagos = 'PACIFIC_GALAPAGOS',
+  PacificGambier = 'PACIFIC_GAMBIER',
+  PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
+  PacificGuam = 'PACIFIC_GUAM',
+  PacificHonolulu = 'PACIFIC_HONOLULU',
+  PacificJohnston = 'PACIFIC_JOHNSTON',
+  PacificKiritimati = 'PACIFIC_KIRITIMATI',
+  PacificKosrae = 'PACIFIC_KOSRAE',
+  PacificKwajalein = 'PACIFIC_KWAJALEIN',
+  PacificMajuro = 'PACIFIC_MAJURO',
+  PacificMarquesas = 'PACIFIC_MARQUESAS',
+  PacificMidway = 'PACIFIC_MIDWAY',
+  PacificNauru = 'PACIFIC_NAURU',
+  PacificNiue = 'PACIFIC_NIUE',
+  PacificNorfolk = 'PACIFIC_NORFOLK',
+  PacificNoumea = 'PACIFIC_NOUMEA',
+  PacificPagoPago = 'PACIFIC_PAGO_PAGO',
+  PacificPalau = 'PACIFIC_PALAU',
+  PacificPitcairn = 'PACIFIC_PITCAIRN',
+  PacificPohnpei = 'PACIFIC_POHNPEI',
+  PacificPonape = 'PACIFIC_PONAPE',
+  PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
+  PacificRarotonga = 'PACIFIC_RAROTONGA',
+  PacificSaipan = 'PACIFIC_SAIPAN',
+  PacificSamoa = 'PACIFIC_SAMOA',
+  PacificTahiti = 'PACIFIC_TAHITI',
+  PacificTarawa = 'PACIFIC_TARAWA',
+  PacificTongatapu = 'PACIFIC_TONGATAPU',
+  PacificTruk = 'PACIFIC_TRUK',
+  PacificWake = 'PACIFIC_WAKE',
+  PacificWallis = 'PACIFIC_WALLIS',
+  PacificYap = 'PACIFIC_YAP',
+  UsAlaska = 'US_ALASKA',
+  UsAleutian = 'US_ALEUTIAN',
+  UsArizona = 'US_ARIZONA',
+  UsCentral = 'US_CENTRAL',
+  UsEastIndiana = 'US_EAST_INDIANA',
+  UsEastern = 'US_EASTERN',
+  UsHawaii = 'US_HAWAII',
+  UsIndianaStarke = 'US_INDIANA_STARKE',
+  UsMichigan = 'US_MICHIGAN',
+  UsMountain = 'US_MOUNTAIN',
+  UsPacific = 'US_PACIFIC',
+  UsSamoa = 'US_SAMOA'
 }
 
 export type Transcript = Node & {
-	__typename?: 'Transcript';
-	id: Scalars['ID'];
-	text: Scalars['String'];
+  __typename?: 'Transcript';
+  id: Scalars['ID'];
+  text: Scalars['String'];
 };
 
 /** Represents a type that can be retrieved by a URL. */
 export type UniformResourceLocatable = {
-	canonicalPath: Scalars['String'];
-	canonicalUrl: Scalars['String'];
-	shareUrl: Scalars['String'];
+  canonicalPath: Scalars['String'];
+  canonicalUrl: Scalars['String'];
+  shareUrl: Scalars['String'];
 };
+
+
 
 export type User = Node & {
-	__typename?: 'User';
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1?: Maybe<Scalars['String']>;
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** Whether recordings should autoplay by default. */
-	autoplay: Scalars['Boolean'];
-	/** The name of the city, district, village, or town. */
-	city?: Maybe<Scalars['String']>;
-	/** The name of the country. */
-	country?: Maybe<Scalars['String']>;
-	createdAt: Scalars['DateTime'];
-	/** The user's email address. */
-	email: Scalars['String'];
-	favoritePersons: PersonConnection;
-	favoriteRecordings: RecordingConnection;
-	/** The user's first name. */
-	givenName?: Maybe<Scalars['String']>;
-	id: Scalars['ID'];
-	/** Whether the user has permission to perform all administrative functions. */
-	isSuperuser: Scalars['Boolean'];
-	/** Whether the user has verified their email. */
-	isVerified: Scalars['Boolean'];
-	/** The user's preferred interface language. */
-	language: UserLanguage;
-	/** The last date the user had activity. */
-	lastActivity: Scalars['DateTime'];
-	/** The full name of the user, based on the values for givenName and surname. */
-	name: Scalars['String'];
-	playlist?: Maybe<UserPlaylist>;
-	playlists: UserPlaylistConnection;
-	/** The postal or zip code. */
-	postalCode?: Maybe<Scalars['String']>;
-	/** The user's preferred audio bitrate in kbps. */
-	preferredAudioQuality: RecordingQuality;
-	/** The name of the region, such as the province, state, or district. */
-	province?: Maybe<Scalars['String']>;
-	/** The user's administrative roles. */
-	roles: Array<UserLanguageRole>;
-	/** The user's last name. */
-	surname?: Maybe<Scalars['String']>;
-	/** The user's timezone. */
-	timezone: Timezone;
+  __typename?: 'User';
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1?: Maybe<Scalars['String']>;
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** Whether recordings should autoplay by default. */
+  autoplay: Scalars['Boolean'];
+  /** The name of the city, district, village, or town. */
+  city?: Maybe<Scalars['String']>;
+  /** The name of the country. */
+  country?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  /** The user's email address. */
+  email: Scalars['String'];
+  favoritePersons: PersonConnection;
+  favoriteRecordings: RecordingConnection;
+  /** The user's first name. */
+  givenName?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  /** Whether the user has permission to perform all administrative functions. */
+  isSuperuser: Scalars['Boolean'];
+  /** Whether the user has verified their email. */
+  isVerified: Scalars['Boolean'];
+  /** The user's preferred interface language. */
+  language: UserLanguage;
+  /** The last date the user had activity. */
+  lastActivity: Scalars['DateTime'];
+  /** The full name of the user, based on the values for givenName and surname. */
+  name: Scalars['String'];
+  playlist?: Maybe<UserPlaylist>;
+  playlists: UserPlaylistConnection;
+  /** The postal or zip code. */
+  postalCode?: Maybe<Scalars['String']>;
+  /** The user's preferred audio bitrate in kbps. */
+  preferredAudioQuality: RecordingQuality;
+  /** The name of the region, such as the province, state, or district. */
+  province?: Maybe<Scalars['String']>;
+  /** The user's administrative roles. */
+  roles: Array<UserLanguageRole>;
+  /** The user's last name. */
+  surname?: Maybe<Scalars['String']>;
+  /** The user's timezone. */
+  timezone: Timezone;
 };
+
 
 export type UserFavoritePersonsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<PersonsOrder>>;
-	role?: Maybe<PersonsRoleField>;
-	search?: Maybe<Scalars['String']>;
-	withContentTypes?: Maybe<Array<RecordingContentType>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<PersonsOrder>>;
+  role?: Maybe<PersonsRoleField>;
+  search?: Maybe<Scalars['String']>;
+  withContentTypes?: Maybe<Array<RecordingContentType>>;
 };
+
 
 export type UserFavoriteRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<RecordingsOrder>>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
+
 
 export type UserPlaylistArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
+
 export type UserPlaylistsArgs = {
-	after?: Maybe<Scalars['String']>;
-	first?: Maybe<Scalars['Int']>;
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	orderBy?: Maybe<Array<UserPlaylistsOrder>>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<UserPlaylistsOrder>>;
 };
 
 export type UserConnection = {
-	__typename?: 'UserConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<UserEdge>>;
-	nodes?: Maybe<Array<User>>;
-	pageInfo: PageInfo;
+  __typename?: 'UserConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<UserEdge>>;
+  nodes?: Maybe<Array<User>>;
+  pageInfo: PageInfo;
 };
 
 export type UserCreateInput = {
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1?: Maybe<Scalars['String']>;
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** Whether recordings should autoplay by default. */
-	autoplay?: Maybe<Scalars['Boolean']>;
-	/** The name of the city, district, village, or town. */
-	city?: Maybe<Scalars['String']>;
-	/** The name of the country. */
-	country?: Maybe<Scalars['String']>;
-	/** The user's email address. */
-	email: Scalars['String'];
-	/** The user's first name. */
-	givenName?: Maybe<Scalars['String']>;
-	/** Whether the user has permission to perform all administrative functions. */
-	isSuperuser?: Maybe<Scalars['Boolean']>;
-	/** The user's preferred interface language. */
-	language?: Maybe<Language>;
-	/** The user's password. */
-	password?: Maybe<Scalars['String']>;
-	/** The postal or zip code. */
-	postalCode?: Maybe<Scalars['String']>;
-	/** The user's preferred audio bitrate in kbps. */
-	preferredAudioQuality?: Maybe<RecordingQuality>;
-	/** The name of the region, such as the province, state, or district. */
-	province?: Maybe<Scalars['String']>;
-	/** The user's administrative roles. */
-	roles?: Maybe<Array<UserLanguageRoleInput>>;
-	/** The user's last name. */
-	surname?: Maybe<Scalars['String']>;
-	/** The user's timezone. */
-	timezone?: Maybe<Timezone>;
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1?: Maybe<Scalars['String']>;
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** Whether recordings should autoplay by default. */
+  autoplay?: Maybe<Scalars['Boolean']>;
+  /** The name of the city, district, village, or town. */
+  city?: Maybe<Scalars['String']>;
+  /** The name of the country. */
+  country?: Maybe<Scalars['String']>;
+  /** The user's email address. */
+  email: Scalars['String'];
+  /** The user's first name. */
+  givenName?: Maybe<Scalars['String']>;
+  /** Whether the user has permission to perform all administrative functions. */
+  isSuperuser?: Maybe<Scalars['Boolean']>;
+  /** The user's preferred interface language. */
+  language?: Maybe<Language>;
+  /** The user's password. */
+  password?: Maybe<Scalars['String']>;
+  /** The postal or zip code. */
+  postalCode?: Maybe<Scalars['String']>;
+  /** The user's preferred audio bitrate in kbps. */
+  preferredAudioQuality?: Maybe<RecordingQuality>;
+  /** The name of the region, such as the province, state, or district. */
+  province?: Maybe<Scalars['String']>;
+  /** The user's administrative roles. */
+  roles?: Maybe<Array<UserLanguageRoleInput>>;
+  /** The user's last name. */
+  surname?: Maybe<Scalars['String']>;
+  /** The user's timezone. */
+  timezone?: Maybe<Timezone>;
 };
 
 export type UserEdge = {
-	__typename?: 'UserEdge';
-	cursor: Scalars['String'];
-	node: User;
+  __typename?: 'UserEdge';
+  cursor: Scalars['String'];
+  node: User;
 };
 
 /** User languages */
 export enum UserLanguage {
-	Abkhazian = 'ABKHAZIAN',
-	Afrikaans = 'AFRIKAANS',
-	Akan = 'AKAN',
-	Amharic = 'AMHARIC',
-	Bokmal = 'BOKMAL',
-	Burmese = 'BURMESE',
-	Cebuano = 'CEBUANO',
-	Chinese = 'CHINESE',
-	Croatian = 'CROATIAN',
-	Czech = 'CZECH',
-	Danish = 'DANISH',
-	Dinka = 'DINKA',
-	Dutch = 'DUTCH',
-	English = 'ENGLISH',
-	Erzya = 'ERZYA',
-	Filipino = 'FILIPINO',
-	Finnish = 'FINNISH',
-	French = 'FRENCH',
-	German = 'GERMAN',
-	Greek = 'GREEK',
-	Haitian = 'HAITIAN',
-	Hebrew = 'HEBREW',
-	Hindi = 'HINDI',
-	Hungarian = 'HUNGARIAN',
-	Indonesian = 'INDONESIAN',
-	Italian = 'ITALIAN',
-	Kikuyu = 'KIKUYU',
-	Korean = 'KOREAN',
-	Latvian = 'LATVIAN',
-	Luo = 'LUO',
-	Malay = 'MALAY',
-	Mongolian = 'MONGOLIAN',
-	Nepali = 'NEPALI',
-	Norwegian = 'NORWEGIAN',
-	Philippine = 'PHILIPPINE',
-	Polish = 'POLISH',
-	Portuguese = 'PORTUGUESE',
-	Romanian = 'ROMANIAN',
-	Russian = 'RUSSIAN',
-	Samoan = 'SAMOAN',
-	Shan = 'SHAN',
-	Shona = 'SHONA',
-	Slovenian = 'SLOVENIAN',
-	Spanish = 'SPANISH',
-	Swahili = 'SWAHILI',
-	Swedish = 'SWEDISH',
-	Tagalog = 'TAGALOG',
-	Tamil = 'TAMIL',
-	Tswana = 'TSWANA',
-	Twi = 'TWI',
-	Xhosa = 'XHOSA',
-	Zulu = 'ZULU',
+  Abkhazian = 'ABKHAZIAN',
+  Afrikaans = 'AFRIKAANS',
+  Akan = 'AKAN',
+  Amharic = 'AMHARIC',
+  Bokmal = 'BOKMAL',
+  Burmese = 'BURMESE',
+  Cebuano = 'CEBUANO',
+  Chinese = 'CHINESE',
+  Croatian = 'CROATIAN',
+  Czech = 'CZECH',
+  Danish = 'DANISH',
+  Dinka = 'DINKA',
+  Dutch = 'DUTCH',
+  English = 'ENGLISH',
+  Erzya = 'ERZYA',
+  Filipino = 'FILIPINO',
+  Finnish = 'FINNISH',
+  French = 'FRENCH',
+  German = 'GERMAN',
+  Greek = 'GREEK',
+  Haitian = 'HAITIAN',
+  Hebrew = 'HEBREW',
+  Hindi = 'HINDI',
+  Hungarian = 'HUNGARIAN',
+  Indonesian = 'INDONESIAN',
+  Italian = 'ITALIAN',
+  Kikuyu = 'KIKUYU',
+  Korean = 'KOREAN',
+  Latvian = 'LATVIAN',
+  Luo = 'LUO',
+  Malay = 'MALAY',
+  Mongolian = 'MONGOLIAN',
+  Nepali = 'NEPALI',
+  Norwegian = 'NORWEGIAN',
+  Philippine = 'PHILIPPINE',
+  Polish = 'POLISH',
+  Portuguese = 'PORTUGUESE',
+  Romanian = 'ROMANIAN',
+  Russian = 'RUSSIAN',
+  Samoan = 'SAMOAN',
+  Shan = 'SHAN',
+  Shona = 'SHONA',
+  Slovenian = 'SLOVENIAN',
+  Spanish = 'SPANISH',
+  Swahili = 'SWAHILI',
+  Swedish = 'SWEDISH',
+  Tagalog = 'TAGALOG',
+  Tamil = 'TAMIL',
+  Tswana = 'TSWANA',
+  Twi = 'TWI',
+  Xhosa = 'XHOSA',
+  Zulu = 'ZULU'
 }
 
 export type UserLanguageRole = {
-	__typename?: 'UserLanguageRole';
-	/** The language scope for this role. */
-	language: Language;
-	/** The  administrative role. */
-	role: UserRole;
+  __typename?: 'UserLanguageRole';
+  /** The language scope for this role. */
+  language: Language;
+  /** The  administrative role. */
+  role: UserRole;
 };
 
 export type UserLanguageRoleInput = {
-	/** The language scope for this role. */
-	language: Language;
-	/** The  administrative role. */
-	role: UserRole;
+  /** The language scope for this role. */
+  language: Language;
+  /** The  administrative role. */
+  role: UserRole;
 };
 
 export type UserLoginInput = {
-	email: Scalars['String'];
-	password: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type UserLoginSocialInput = {
-	givenName?: Maybe<Scalars['String']>;
-	socialId: Scalars['String'];
-	socialName: UserSocialServiceName;
-	socialToken: Scalars['String'];
-	surname?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
+  socialId: Scalars['String'];
+  socialName: UserSocialServiceName;
+  socialToken: Scalars['String'];
+  surname?: Maybe<Scalars['String']>;
 };
 
 export type UserPayload = {
-	__typename?: 'UserPayload';
-	errors: Array<InputValidationError>;
-	user?: Maybe<User>;
+  __typename?: 'UserPayload';
+  errors: Array<InputValidationError>;
+  user?: Maybe<User>;
 };
 
 export type UserPlaylist = Node & {
-	__typename?: 'UserPlaylist';
-	hasRecording: Scalars['Boolean'];
-	id: Scalars['ID'];
-	isPublic: Scalars['Boolean'];
-	language: Language;
-	recordings: RecordingConnection;
-	summary: Scalars['String'];
-	title: Scalars['String'];
+  __typename?: 'UserPlaylist';
+  hasRecording: Scalars['Boolean'];
+  id: Scalars['ID'];
+  isPublic: Scalars['Boolean'];
+  language: Language;
+  recordings: RecordingConnection;
+  summary: Scalars['String'];
+  title: Scalars['String'];
 };
+
 
 export type UserPlaylistHasRecordingArgs = {
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 };
 
+
 export type UserPlaylistRecordingsArgs = {
-	after?: Maybe<Scalars['String']>;
-	bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
-	collectionId?: Maybe<Scalars['ID']>;
-	collectionIds?: Maybe<Array<Scalars['ID']>>;
-	distributionAgreementId?: Maybe<Scalars['ID']>;
-	first?: Maybe<Scalars['Int']>;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	includeUnpublished?: Maybe<Scalars['Boolean']>;
-	offset?: Maybe<Scalars['Int']>;
-	person?: Maybe<RecordingPersonInput>;
-	persons?: Maybe<Array<RecordingPersonInput>>;
-	presenterId?: Maybe<Scalars['ID']>;
-	publishDates?: Maybe<Array<DateRangeInput>>;
-	recordingDates?: Maybe<Array<DateRangeInput>>;
-	search?: Maybe<Scalars['String']>;
-	sequenceId?: Maybe<Scalars['ID']>;
-	sequenceIds?: Maybe<Array<Scalars['ID']>>;
-	sponsorId?: Maybe<Scalars['ID']>;
-	sponsorIds?: Maybe<Array<Scalars['ID']>>;
-	stage?: Maybe<RecordingStage>;
-	tagName?: Maybe<Scalars['String']>;
-	websiteIds?: Maybe<Array<Scalars['ID']>>;
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  presenterId?: Maybe<Scalars['ID']>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  tagName?: Maybe<Scalars['String']>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type UserPlaylistAddInput = {
-	isPublic: Scalars['Boolean'];
-	language: Language;
-	recordingIds?: Maybe<Array<Scalars['ID']>>;
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  isPublic: Scalars['Boolean'];
+  language: Language;
+  recordingIds?: Maybe<Array<Scalars['ID']>>;
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type UserPlaylistConnection = {
-	__typename?: 'UserPlaylistConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<UserPlaylistEdge>>;
-	nodes?: Maybe<Array<UserPlaylist>>;
-	pageInfo: PageInfo;
+  __typename?: 'UserPlaylistConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<UserPlaylistEdge>>;
+  nodes?: Maybe<Array<UserPlaylist>>;
+  pageInfo: PageInfo;
 };
 
 export type UserPlaylistEdge = {
-	__typename?: 'UserPlaylistEdge';
-	cursor: Scalars['String'];
-	node: UserPlaylist;
+  __typename?: 'UserPlaylistEdge';
+  cursor: Scalars['String'];
+  node: UserPlaylist;
 };
 
 export type UserPlaylistsOrder = {
-	direction: OrderByDirection;
-	field: UserPlaylistsSortableField;
+  direction: OrderByDirection;
+  field: UserPlaylistsSortableField;
 };
 
 /** Properties by which a user's playlists connection can be ordered. */
 export enum UserPlaylistsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
 }
 
 export type UserPlaylistUpdateInput = {
-	isPublic: Scalars['Boolean'];
-	summary?: Maybe<Scalars['String']>;
-	title: Scalars['String'];
+  isPublic: Scalars['Boolean'];
+  summary?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 /** The administrative roles a user may hold. */
 export enum UserRole {
-	/** Language Administrator */
-	Administration = 'ADMINISTRATION',
-	Communications = 'COMMUNICATIONS',
-	ContentScreener = 'CONTENT_SCREENER',
-	Editor = 'EDITOR',
-	Equipment = 'EQUIPMENT',
-	LegalScreener = 'LEGAL_SCREENER',
-	Mediamanager = 'MEDIAMANAGER',
-	Stats = 'STATS',
-	TechnicalScreener = 'TECHNICAL_SCREENER',
+  /** Language Administrator */
+  Administration = 'ADMINISTRATION',
+  Communications = 'COMMUNICATIONS',
+  ContentScreener = 'CONTENT_SCREENER',
+  Editor = 'EDITOR',
+  Equipment = 'EQUIPMENT',
+  LegalScreener = 'LEGAL_SCREENER',
+  Mediamanager = 'MEDIAMANAGER',
+  Stats = 'STATS',
+  TechnicalScreener = 'TECHNICAL_SCREENER'
 }
 
 export type UserSignupInput = {
-	email: Scalars['String'];
-	password: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 /** The supported social login services. */
 export enum UserSocialServiceName {
-	Apple = 'APPLE',
-	Facebook = 'FACEBOOK',
-	Google = 'GOOGLE',
+  Apple = 'APPLE',
+  Facebook = 'FACEBOOK',
+  Google = 'GOOGLE'
 }
 
 export type UsersOrder = {
-	direction: OrderByDirection;
-	field: UsersSortableField;
+  direction: OrderByDirection;
+  field: UsersSortableField;
 };
 
 /** Properties by which user connections can be ordered. */
 export enum UsersSortableField {
-	CreatedAt = 'CREATED_AT',
-	Email = 'EMAIL',
-	Id = 'ID',
+  CreatedAt = 'CREATED_AT',
+  Email = 'EMAIL',
+  Id = 'ID'
 }
 
 export type UserUpdateInput = {
-	/** The first line of the address. Typically the street address or PO Box number. */
-	address1?: Maybe<Scalars['String']>;
-	/** The second line of the address. Typically the number of the apartment, suite, or unit. */
-	address2?: Maybe<Scalars['String']>;
-	/** Whether recordings should autoplay by default. */
-	autoplay?: Maybe<Scalars['Boolean']>;
-	/** The name of the city, district, village, or town. */
-	city?: Maybe<Scalars['String']>;
-	/** The name of the country. */
-	country?: Maybe<Scalars['String']>;
-	/** The user's email address. */
-	email?: Maybe<Scalars['String']>;
-	/** The user's first name. */
-	givenName?: Maybe<Scalars['String']>;
-	/** Whether the user has permission to perform all administrative functions. */
-	isSuperuser?: Maybe<Scalars['Boolean']>;
-	/** The user's preferred interface language. */
-	language?: Maybe<Language>;
-	/** The user's password. */
-	password?: Maybe<Scalars['String']>;
-	/** The postal or zip code. */
-	postalCode?: Maybe<Scalars['String']>;
-	/** The user's preferred audio bitrate in kbps. */
-	preferredAudioQuality?: Maybe<RecordingQuality>;
-	/** The name of the region, such as the province, state, or district. */
-	province?: Maybe<Scalars['String']>;
-	/** The user's administrative roles. */
-	roles?: Maybe<Array<UserLanguageRoleInput>>;
-	/** The user's last name. */
-	surname?: Maybe<Scalars['String']>;
-	/** The user's timezone. */
-	timezone?: Maybe<Timezone>;
+  /** The first line of the address. Typically the street address or PO Box number. */
+  address1?: Maybe<Scalars['String']>;
+  /** The second line of the address. Typically the number of the apartment, suite, or unit. */
+  address2?: Maybe<Scalars['String']>;
+  /** Whether recordings should autoplay by default. */
+  autoplay?: Maybe<Scalars['Boolean']>;
+  /** The name of the city, district, village, or town. */
+  city?: Maybe<Scalars['String']>;
+  /** The name of the country. */
+  country?: Maybe<Scalars['String']>;
+  /** The user's email address. */
+  email?: Maybe<Scalars['String']>;
+  /** The user's first name. */
+  givenName?: Maybe<Scalars['String']>;
+  /** Whether the user has permission to perform all administrative functions. */
+  isSuperuser?: Maybe<Scalars['Boolean']>;
+  /** The user's preferred interface language. */
+  language?: Maybe<Language>;
+  /** The user's password. */
+  password?: Maybe<Scalars['String']>;
+  /** The postal or zip code. */
+  postalCode?: Maybe<Scalars['String']>;
+  /** The user's preferred audio bitrate in kbps. */
+  preferredAudioQuality?: Maybe<RecordingQuality>;
+  /** The name of the region, such as the province, state, or district. */
+  province?: Maybe<Scalars['String']>;
+  /** The user's administrative roles. */
+  roles?: Maybe<Array<UserLanguageRoleInput>>;
+  /** The user's last name. */
+  surname?: Maybe<Scalars['String']>;
+  /** The user's timezone. */
+  timezone?: Maybe<Timezone>;
 };
 
 export type VideoFile = Node & {
-	__typename?: 'VideoFile';
-	bitrate: Scalars['Int'];
-	container: Scalars['String'];
-	duration: Scalars['Float'];
-	filename: Scalars['String'];
-	/** In bytes */
-	filesize: Scalars['String'];
-	height: Scalars['Int'];
-	id: Scalars['ID'];
-	/** The URL to record video views for analytics. */
-	logUrl?: Maybe<Scalars['URL']>;
-	mimeType: Scalars['String'];
-	recording: Recording;
-	updatedAt?: Maybe<Scalars['DateTime']>;
-	url: Scalars['URL'];
-	width: Scalars['Int'];
+  __typename?: 'VideoFile';
+  bitrate: Scalars['Int'];
+  container: Scalars['String'];
+  duration: Scalars['Float'];
+  filename: Scalars['String'];
+  /** In bytes */
+  filesize: Scalars['String'];
+  height: Scalars['Int'];
+  id: Scalars['ID'];
+  /** The URL to record video views for analytics. */
+  logUrl?: Maybe<Scalars['URL']>;
+  mimeType: Scalars['String'];
+  recording: Recording;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['URL'];
+  width: Scalars['Int'];
 };
 
 export type Website = Node & {
-	__typename?: 'Website';
-	id: Scalars['ID'];
-	title: Scalars['String'];
+  __typename?: 'Website';
+  id: Scalars['ID'];
+  title: Scalars['String'];
 };
 
 export type WebsiteConnection = {
-	__typename?: 'WebsiteConnection';
-	aggregate?: Maybe<Aggregate>;
-	edges?: Maybe<Array<WebsiteEdge>>;
-	nodes?: Maybe<Array<Website>>;
-	pageInfo: PageInfo;
+  __typename?: 'WebsiteConnection';
+  aggregate?: Maybe<Aggregate>;
+  edges?: Maybe<Array<WebsiteEdge>>;
+  nodes?: Maybe<Array<Website>>;
+  pageInfo: PageInfo;
 };
 
 export type WebsiteEdge = {
-	__typename?: 'WebsiteEdge';
-	cursor: Scalars['String'];
-	node: Website;
+  __typename?: 'WebsiteEdge';
+  cursor: Scalars['String'];
+  node: Website;
 };
 
 export type GetPlaylistButtonDataQueryVariables = Exact<{
-	language: Language;
-	recordingId: Scalars['ID'];
+  language: Language;
+  recordingId: Scalars['ID'];
 }>;
 
-export type GetPlaylistButtonDataQuery = { __typename?: 'Query' } & {
-	me?: Maybe<
-		{ __typename?: 'AuthenticatedUser' } & {
-			user: { __typename?: 'User' } & {
-				playlists: { __typename?: 'UserPlaylistConnection' } & {
-					nodes?: Maybe<
-						Array<
-							{ __typename?: 'UserPlaylist' } & Pick<
-								UserPlaylist,
-								'id' | 'title' | 'hasRecording'
-							>
-						>
-					>;
-				};
-			};
-		}
-	>;
-};
 
-export type RecordingListFragment = { __typename?: 'Recording' } & Pick<
-	Recording,
-	'id' | 'title' | 'description' | 'duration' | 'recordingDate' | 'canonicalUrl'
-> & {
-		imageWithFallback: { __typename?: 'Image' } & Pick<Image, 'url'>;
-		persons: Array<{ __typename?: 'Person' } & SpeakerNameFragment>;
-		videoFiles: Array<{ __typename?: 'VideoFile' } & Pick<VideoFile, 'url'>>;
-	};
+export type GetPlaylistButtonDataQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & { playlists: (
+        { __typename?: 'UserPlaylistConnection' }
+        & { nodes?: Maybe<Array<(
+          { __typename?: 'UserPlaylist' }
+          & Pick<UserPlaylist, 'id' | 'title' | 'hasRecording'>
+        )>> }
+      ) }
+    ) }
+  )> }
+);
 
-export type SpeakerNameFragment = { __typename?: 'Person' } & Pick<
-	Person,
-	'id' | 'name' | 'summary' | 'website' | 'viewerHasFavorited'
-> & { imageWithFallback: { __typename?: 'Image' } & Pick<Image, 'url'> };
+export type RecordingListFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id' | 'title' | 'description' | 'duration' | 'recordingDate' | 'canonicalUrl'>
+  & { imageWithFallback: (
+    { __typename?: 'Image' }
+    & Pick<Image, 'url'>
+  ), persons: Array<(
+    { __typename?: 'Person' }
+    & SpeakerNameFragment
+  )>, videoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url'>
+  )> }
+);
+
+export type SpeakerNameFragment = (
+  { __typename?: 'Person' }
+  & Pick<Person, 'id' | 'name' | 'summary' | 'website' | 'viewerHasFavorited'>
+  & { imageWithFallback: (
+    { __typename?: 'Image' }
+    & Pick<Image, 'url'>
+  ) }
+);
 
 export type GetHomeStaticPropsQueryVariables = Exact<{
-	language: Language;
+  language: Language;
 }>;
 
-export type GetHomeStaticPropsQuery = { __typename?: 'Query' } & {
-	sermons: { __typename?: 'RecordingConnection' } & {
-		nodes?: Maybe<Array<{ __typename?: 'Recording' } & RecordingListFragment>>;
-	};
-};
 
-export type GetProfileDataQueryVariables = Exact<{ [key: string]: never }>;
+export type GetHomeStaticPropsQuery = (
+  { __typename?: 'Query' }
+  & { sermons: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingListFragment
+    )>> }
+  ) }
+);
 
-export type GetProfileDataQuery = { __typename?: 'Query' } & {
-	me?: Maybe<
-		{ __typename?: 'AuthenticatedUser' } & {
-			user: { __typename?: 'User' } & Pick<User, 'givenName'>;
-		}
-	>;
-};
+export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type GetProtectedDataQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetProtectedDataQuery = { __typename?: 'Query' } & {
-	me?: Maybe<
-		{ __typename?: 'AuthenticatedUser' } & {
-			user: { __typename?: 'User' } & Pick<User, 'givenName'>;
-		}
-	>;
-};
+export type GetProfileDataQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'givenName'>
+    ) }
+  )> }
+);
+
+export type GetProtectedDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProtectedDataQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'givenName'>
+    ) }
+  )> }
+);
+
+export type GetSeriesDetailDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetSeriesDetailDataQuery = (
+  { __typename?: 'Query' }
+  & { series?: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'title'>
+    & { image?: Maybe<(
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    )> }
+  )> }
+);
+
+export type GetSeriesDetailPathsDataQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSeriesDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { serieses: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id'>
+    )>> }
+  ) }
+);
 
 export type GetSermonQueryVariables = Exact<{
-	id: Scalars['ID'];
+  id: Scalars['ID'];
 }>;
 
-export type GetSermonQuery = { __typename?: 'Query' } & {
-	sermon?: Maybe<
-		{ __typename?: 'Recording' } & Pick<
-			Recording,
-			'id' | 'title' | 'description' | 'recordingDate'
-		> & {
-				persons: Array<{ __typename?: 'Person' } & SpeakerNameFragment>;
-				audioFiles: Array<
-					{ __typename?: 'AudioFile' } & Pick<
-						AudioFile,
-						'url' | 'duration' | 'filesize' | 'mimeType'
-					>
-				>;
-				videoFiles: Array<
-					{ __typename?: 'VideoFile' } & Pick<
-						VideoFile,
-						'url' | 'duration' | 'filesize' | 'mimeType'
-					>
-				>;
-				videoStreams: Array<
-					{ __typename?: 'VideoFile' } & Pick<
-						VideoFile,
-						'url' | 'duration' | 'filesize' | 'mimeType'
-					>
-				>;
-				imageWithFallback: { __typename?: 'Image' } & Pick<Image, 'url'>;
-				recordingTags: { __typename?: 'RecordingTagConnection' } & {
-					nodes?: Maybe<
-						Array<
-							{ __typename?: 'RecordingTag' } & {
-								tag: { __typename?: 'Tag' } & Pick<Tag, 'id' | 'name'>;
-							}
-						>
-					>;
-				};
-				sponsor?: Maybe<
-					{ __typename?: 'Sponsor' } & Pick<Sponsor, 'title' | 'location'>
-				>;
-			}
-	>;
-};
+
+export type GetSermonQuery = (
+  { __typename?: 'Query' }
+  & { sermon?: Maybe<(
+    { __typename?: 'Recording' }
+    & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate'>
+    & { persons: Array<(
+      { __typename?: 'Person' }
+      & SpeakerNameFragment
+    )>, audioFiles: Array<(
+      { __typename?: 'AudioFile' }
+      & Pick<AudioFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+    )>, videoFiles: Array<(
+      { __typename?: 'VideoFile' }
+      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+    )>, videoStreams: Array<(
+      { __typename?: 'VideoFile' }
+      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+    )>, imageWithFallback: (
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    ), recordingTags: (
+      { __typename?: 'RecordingTagConnection' }
+      & { nodes?: Maybe<Array<(
+        { __typename?: 'RecordingTag' }
+        & { tag: (
+          { __typename?: 'Tag' }
+          & Pick<Tag, 'id' | 'name'>
+        ) }
+      )>> }
+    ), sponsor?: Maybe<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'title' | 'location'>
+    )> }
+  )> }
+);
 
 export type GetSermonListStaticPropsQueryVariables = Exact<{
-	language: Language;
-	hasVideo?: Maybe<Scalars['Boolean']>;
-	first?: Maybe<Scalars['Int']>;
-	offset?: Maybe<Scalars['Int']>;
+  language: Language;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
 }>;
 
-export type GetSermonListStaticPropsQuery = { __typename?: 'Query' } & {
-	sermons: { __typename?: 'RecordingConnection' } & {
-		nodes?: Maybe<Array<{ __typename?: 'Recording' } & RecordingListFragment>>;
-		aggregate?: Maybe<{ __typename?: 'Aggregate' } & Pick<Aggregate, 'count'>>;
-	};
-};
+
+export type GetSermonListStaticPropsQuery = (
+  { __typename?: 'Query' }
+  & { sermons: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingListFragment
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
 
 export type GetTestimoniesQueryVariables = Exact<{
-	language: Language;
-	offset?: Maybe<Scalars['Int']>;
-	first?: Maybe<Scalars['Int']>;
+  language: Language;
+  offset?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
 }>;
 
-export type GetTestimoniesQuery = { __typename?: 'Query' } & {
-	testimonies: { __typename?: 'TestimonyConnection' } & {
-		nodes?: Maybe<
-			Array<
-				{ __typename?: 'Testimony' } & Pick<
-					Testimony,
-					'author' | 'body' | 'writtenDate'
-				>
-			>
-		>;
-		aggregate?: Maybe<{ __typename?: 'Aggregate' } & Pick<Aggregate, 'count'>>;
-	};
-};
+
+export type GetTestimoniesQuery = (
+  { __typename?: 'Query' }
+  & { testimonies: (
+    { __typename?: 'TestimonyConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Testimony' }
+      & Pick<Testimony, 'author' | 'body' | 'writtenDate'>
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
 
 export type AddPlaylistMutationVariables = Exact<{
-	language: Language;
-	title: Scalars['String'];
-	isPublic: Scalars['Boolean'];
-	recordingIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  language: Language;
+  title: Scalars['String'];
+  isPublic: Scalars['Boolean'];
+  recordingIds?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
 }>;
 
-export type AddPlaylistMutation = { __typename?: 'Mutation' } & {
-	playlistAdd: { __typename?: 'UserPlaylist' } & Pick<UserPlaylist, 'id'>;
-};
+
+export type AddPlaylistMutation = (
+  { __typename?: 'Mutation' }
+  & { playlistAdd: (
+    { __typename?: 'UserPlaylist' }
+    & Pick<UserPlaylist, 'id'>
+  ) }
+);
 
 export type GetSermonDetailStaticPathsQueryVariables = Exact<{
-	language: Language;
-	first?: Maybe<Scalars['Int']>;
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
 }>;
 
-export type GetSermonDetailStaticPathsQuery = { __typename?: 'Query' } & {
-	sermons: { __typename?: 'RecordingConnection' } & {
-		nodes?: Maybe<
-			Array<
-				{ __typename?: 'Recording' } & Pick<Recording, 'id' | 'recordingDate'>
-			>
-		>;
-	};
-};
+
+export type GetSermonDetailStaticPathsQuery = (
+  { __typename?: 'Query' }
+  & { sermons: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & Pick<Recording, 'id' | 'recordingDate'>
+    )>> }
+  ) }
+);
 
 export const SpeakerNameFragmentDoc = `
     fragment speakerName on Person {
@@ -4338,20 +4572,17 @@ export const GetPlaylistButtonDataDocument = `
 }
     `;
 export const useGetPlaylistButtonDataQuery = <
-	TData = GetPlaylistButtonDataQuery,
-	TError = unknown
->(
-	variables: GetPlaylistButtonDataQueryVariables,
-	options?: UseQueryOptions<GetPlaylistButtonDataQuery, TError, TData>
-) =>
-	useQuery<GetPlaylistButtonDataQuery, TError, TData>(
-		['getPlaylistButtonData', variables],
-		graphqlFetcher<
-			GetPlaylistButtonDataQuery,
-			GetPlaylistButtonDataQueryVariables
-		>(GetPlaylistButtonDataDocument, variables),
-		options
-	);
+      TData = GetPlaylistButtonDataQuery,
+      TError = unknown
+    >(
+      variables: GetPlaylistButtonDataQueryVariables, 
+      options?: UseQueryOptions<GetPlaylistButtonDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPlaylistButtonDataQuery, TError, TData>(
+      ['getPlaylistButtonData', variables],
+      graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
+      options
+    );
 export const GetHomeStaticPropsDocument = `
     query getHomeStaticProps($language: Language!) {
   sermons(language: $language, first: 5) {
@@ -4362,20 +4593,17 @@ export const GetHomeStaticPropsDocument = `
 }
     ${RecordingListFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
-	TData = GetHomeStaticPropsQuery,
-	TError = unknown
->(
-	variables: GetHomeStaticPropsQueryVariables,
-	options?: UseQueryOptions<GetHomeStaticPropsQuery, TError, TData>
-) =>
-	useQuery<GetHomeStaticPropsQuery, TError, TData>(
-		['getHomeStaticProps', variables],
-		graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(
-			GetHomeStaticPropsDocument,
-			variables
-		),
-		options
-	);
+      TData = GetHomeStaticPropsQuery,
+      TError = unknown
+    >(
+      variables: GetHomeStaticPropsQueryVariables, 
+      options?: UseQueryOptions<GetHomeStaticPropsQuery, TError, TData>
+    ) => 
+    useQuery<GetHomeStaticPropsQuery, TError, TData>(
+      ['getHomeStaticProps', variables],
+      graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
+      options
+    );
 export const GetProfileDataDocument = `
     query getProfileData {
   me {
@@ -4386,20 +4614,17 @@ export const GetProfileDataDocument = `
 }
     `;
 export const useGetProfileDataQuery = <
-	TData = GetProfileDataQuery,
-	TError = unknown
->(
-	variables?: GetProfileDataQueryVariables,
-	options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
-) =>
-	useQuery<GetProfileDataQuery, TError, TData>(
-		['getProfileData', variables],
-		graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(
-			GetProfileDataDocument,
-			variables
-		),
-		options
-	);
+      TData = GetProfileDataQuery,
+      TError = unknown
+    >(
+      variables?: GetProfileDataQueryVariables, 
+      options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
+    ) => 
+    useQuery<GetProfileDataQuery, TError, TData>(
+      ['getProfileData', variables],
+      graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
+      options
+    );
 export const GetProtectedDataDocument = `
     query getProtectedData {
   me {
@@ -4410,20 +4635,60 @@ export const GetProtectedDataDocument = `
 }
     `;
 export const useGetProtectedDataQuery = <
-	TData = GetProtectedDataQuery,
-	TError = unknown
->(
-	variables?: GetProtectedDataQueryVariables,
-	options?: UseQueryOptions<GetProtectedDataQuery, TError, TData>
-) =>
-	useQuery<GetProtectedDataQuery, TError, TData>(
-		['getProtectedData', variables],
-		graphqlFetcher<GetProtectedDataQuery, GetProtectedDataQueryVariables>(
-			GetProtectedDataDocument,
-			variables
-		),
-		options
-	);
+      TData = GetProtectedDataQuery,
+      TError = unknown
+    >(
+      variables?: GetProtectedDataQueryVariables, 
+      options?: UseQueryOptions<GetProtectedDataQuery, TError, TData>
+    ) => 
+    useQuery<GetProtectedDataQuery, TError, TData>(
+      ['getProtectedData', variables],
+      graphqlFetcher<GetProtectedDataQuery, GetProtectedDataQueryVariables>(GetProtectedDataDocument, variables),
+      options
+    );
+export const GetSeriesDetailDataDocument = `
+    query getSeriesDetailData($id: ID!) {
+  series(id: $id) {
+    title
+    image {
+      url(size: 100)
+    }
+  }
+}
+    `;
+export const useGetSeriesDetailDataQuery = <
+      TData = GetSeriesDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesDetailDataQueryVariables, 
+      options?: UseQueryOptions<GetSeriesDetailDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSeriesDetailDataQuery, TError, TData>(
+      ['getSeriesDetailData', variables],
+      graphqlFetcher<GetSeriesDetailDataQuery, GetSeriesDetailDataQueryVariables>(GetSeriesDetailDataDocument, variables),
+      options
+    );
+export const GetSeriesDetailPathsDataDocument = `
+    query getSeriesDetailPathsData($language: Language!, $first: Int) {
+  serieses(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetSeriesDetailPathsDataQuery = <
+      TData = GetSeriesDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSeriesDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSeriesDetailPathsDataQuery, TError, TData>(
+      ['getSeriesDetailPathsData', variables],
+      graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, variables),
+      options
+    );
 export const GetSermonDocument = `
     query getSermon($id: ID!) {
   sermon(id: $id) {
@@ -4470,18 +4735,18 @@ export const GetSermonDocument = `
   }
 }
     ${SpeakerNameFragmentDoc}`;
-export const useGetSermonQuery = <TData = GetSermonQuery, TError = unknown>(
-	variables: GetSermonQueryVariables,
-	options?: UseQueryOptions<GetSermonQuery, TError, TData>
-) =>
-	useQuery<GetSermonQuery, TError, TData>(
-		['getSermon', variables],
-		graphqlFetcher<GetSermonQuery, GetSermonQueryVariables>(
-			GetSermonDocument,
-			variables
-		),
-		options
-	);
+export const useGetSermonQuery = <
+      TData = GetSermonQuery,
+      TError = unknown
+    >(
+      variables: GetSermonQueryVariables, 
+      options?: UseQueryOptions<GetSermonQuery, TError, TData>
+    ) => 
+    useQuery<GetSermonQuery, TError, TData>(
+      ['getSermon', variables],
+      graphqlFetcher<GetSermonQuery, GetSermonQueryVariables>(GetSermonDocument, variables),
+      options
+    );
 export const GetSermonListStaticPropsDocument = `
     query getSermonListStaticProps($language: Language!, $hasVideo: Boolean, $first: Int, $offset: Int) {
   sermons(
@@ -4501,20 +4766,17 @@ export const GetSermonListStaticPropsDocument = `
 }
     ${RecordingListFragmentDoc}`;
 export const useGetSermonListStaticPropsQuery = <
-	TData = GetSermonListStaticPropsQuery,
-	TError = unknown
->(
-	variables: GetSermonListStaticPropsQueryVariables,
-	options?: UseQueryOptions<GetSermonListStaticPropsQuery, TError, TData>
-) =>
-	useQuery<GetSermonListStaticPropsQuery, TError, TData>(
-		['getSermonListStaticProps', variables],
-		graphqlFetcher<
-			GetSermonListStaticPropsQuery,
-			GetSermonListStaticPropsQueryVariables
-		>(GetSermonListStaticPropsDocument, variables),
-		options
-	);
+      TData = GetSermonListStaticPropsQuery,
+      TError = unknown
+    >(
+      variables: GetSermonListStaticPropsQueryVariables, 
+      options?: UseQueryOptions<GetSermonListStaticPropsQuery, TError, TData>
+    ) => 
+    useQuery<GetSermonListStaticPropsQuery, TError, TData>(
+      ['getSermonListStaticProps', variables],
+      graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
+      options
+    );
 export const GetTestimoniesDocument = `
     query getTestimonies($language: Language!, $offset: Int, $first: Int) {
   testimonies(
@@ -4535,20 +4797,17 @@ export const GetTestimoniesDocument = `
 }
     `;
 export const useGetTestimoniesQuery = <
-	TData = GetTestimoniesQuery,
-	TError = unknown
->(
-	variables: GetTestimoniesQueryVariables,
-	options?: UseQueryOptions<GetTestimoniesQuery, TError, TData>
-) =>
-	useQuery<GetTestimoniesQuery, TError, TData>(
-		['getTestimonies', variables],
-		graphqlFetcher<GetTestimoniesQuery, GetTestimoniesQueryVariables>(
-			GetTestimoniesDocument,
-			variables
-		),
-		options
-	);
+      TData = GetTestimoniesQuery,
+      TError = unknown
+    >(
+      variables: GetTestimoniesQueryVariables, 
+      options?: UseQueryOptions<GetTestimoniesQuery, TError, TData>
+    ) => 
+    useQuery<GetTestimoniesQuery, TError, TData>(
+      ['getTestimonies', variables],
+      graphqlFetcher<GetTestimoniesQuery, GetTestimoniesQueryVariables>(GetTestimoniesDocument, variables),
+      options
+    );
 export const AddPlaylistDocument = `
     mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
   playlistAdd(
@@ -4558,27 +4817,14 @@ export const AddPlaylistDocument = `
   }
 }
     `;
-export const useAddPlaylistMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		AddPlaylistMutation,
-		TError,
-		AddPlaylistMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		AddPlaylistMutation,
-		TError,
-		AddPlaylistMutationVariables,
-		TContext
-	>(
-		(variables?: AddPlaylistMutationVariables) =>
-			graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(
-				AddPlaylistDocument,
-				variables
-			)(),
-		options
-	);
+export const useAddPlaylistMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>) => 
+    useMutation<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>(
+      (variables?: AddPlaylistMutationVariables) => graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(AddPlaylistDocument, variables)(),
+      options
+    );
 export const GetSermonDetailStaticPathsDocument = `
     query getSermonDetailStaticPaths($language: Language!, $first: Int) {
   sermons(language: $language, first: $first) {
@@ -4590,66 +4836,89 @@ export const GetSermonDetailStaticPathsDocument = `
 }
     `;
 export const useGetSermonDetailStaticPathsQuery = <
-	TData = GetSermonDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetSermonDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
-		['getSermonDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetSermonDetailStaticPathsQuery,
-			GetSermonDetailStaticPathsQueryVariables
-		>(GetSermonDetailStaticPathsDocument, variables),
-		options
-	);
-import { fetchApi } from '@lib/api/fetchApi';
+      TData = GetSermonDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetSermonDetailStaticPathsQueryVariables, 
+      options?: UseQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
+    ) => 
+    useQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
+      ['getSermonDetailStaticPaths', variables],
+      graphqlFetcher<GetSermonDetailStaticPathsQuery, GetSermonDetailStaticPathsQueryVariables>(GetSermonDetailStaticPathsDocument, variables),
+      options
+    );
+import { fetchApi } from '@lib/api/fetchApi' 
 
 export async function getPlaylistButtonData(
-	variables: GetPlaylistButtonDataQueryVariables
+  variables: GetPlaylistButtonDataQueryVariables
 ): Promise<GetPlaylistButtonDataQuery> {
-	return fetchApi(GetPlaylistButtonDataDocument, { variables });
+  return fetchApi(GetPlaylistButtonDataDocument, { variables });
 }
+				
+
+
 
 export async function getHomeStaticProps(
-	variables: GetHomeStaticPropsQueryVariables
+  variables: GetHomeStaticPropsQueryVariables
 ): Promise<GetHomeStaticPropsQuery> {
-	return fetchApi(GetHomeStaticPropsDocument, { variables });
+  return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
+				
 
 export async function getProfileData(
-	variables: GetProfileDataQueryVariables
+  variables: GetProfileDataQueryVariables
 ): Promise<GetProfileDataQuery> {
-	return fetchApi(GetProfileDataDocument, { variables });
+  return fetchApi(GetProfileDataDocument, { variables });
 }
+				
 
 export async function getProtectedData(
-	variables: GetProtectedDataQueryVariables
+  variables: GetProtectedDataQueryVariables
 ): Promise<GetProtectedDataQuery> {
-	return fetchApi(GetProtectedDataDocument, { variables });
+  return fetchApi(GetProtectedDataDocument, { variables });
 }
+				
+
+export async function getSeriesDetailData(
+  variables: GetSeriesDetailDataQueryVariables
+): Promise<GetSeriesDetailDataQuery> {
+  return fetchApi(GetSeriesDetailDataDocument, { variables });
+}
+				
+
+
+export async function getSeriesDetailPathsData(
+  variables: GetSeriesDetailPathsDataQueryVariables
+): Promise<GetSeriesDetailPathsDataQuery> {
+  return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
+}
+				
 
 export async function getSermon(
-	variables: GetSermonQueryVariables
+  variables: GetSermonQueryVariables
 ): Promise<GetSermonQuery> {
-	return fetchApi(GetSermonDocument, { variables });
+  return fetchApi(GetSermonDocument, { variables });
 }
+				
 
 export async function getSermonListStaticProps(
-	variables: GetSermonListStaticPropsQueryVariables
+  variables: GetSermonListStaticPropsQueryVariables
 ): Promise<GetSermonListStaticPropsQuery> {
-	return fetchApi(GetSermonListStaticPropsDocument, { variables });
+  return fetchApi(GetSermonListStaticPropsDocument, { variables });
 }
+				
 
 export async function getTestimonies(
-	variables: GetTestimoniesQueryVariables
+  variables: GetTestimoniesQueryVariables
 ): Promise<GetTestimoniesQuery> {
-	return fetchApi(GetTestimoniesDocument, { variables });
+  return fetchApi(GetTestimoniesDocument, { variables });
 }
+				
+
 
 export async function getSermonDetailStaticPaths(
-	variables: GetSermonDetailStaticPathsQueryVariables
+  variables: GetSermonDetailStaticPathsQueryVariables
 ): Promise<GetSermonDetailStaticPathsQuery> {
-	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
+  return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
+				

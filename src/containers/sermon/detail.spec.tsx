@@ -38,9 +38,7 @@ async function renderPage() {
 	return renderWithIntl(SermonDetail, props);
 }
 
-describe('detailPageGenerator', () => {
-	beforeEach(() => jest.resetAllMocks());
-
+describe('sermon detail page', () => {
 	it('gets sermons', async () => {
 		loadRecentSermons();
 
@@ -302,6 +300,7 @@ describe('detailPageGenerator', () => {
 
 		beforeEach(() => {
 			jest.resetModules();
+			process.env = { ...oldEnv };
 		});
 
 		afterEach(() => {
@@ -309,21 +308,20 @@ describe('detailPageGenerator', () => {
 		});
 
 		it('loads fewer sermons in development', async () => {
-			process.env = {
-				...process.env,
-				NODE_ENV: 'development',
-			};
+			jest.isolateModules(async () => {
+				(process.env as any).NODE_ENV = 'development';
 
-			loadRecentSermons();
+				loadRecentSermons();
 
-			await getStaticPaths();
+				await getStaticPaths();
 
-			await waitFor(() =>
-				expect(getSermonDetailStaticPaths).toBeCalledWith({
-					language: 'SPANISH',
-					first: 10,
-				})
-			);
+				await waitFor(() =>
+					expect(getSermonDetailStaticPaths).toBeCalledWith({
+						language: 'SPANISH',
+						first: 10,
+					})
+				);
+			});
 		});
 	});
 
