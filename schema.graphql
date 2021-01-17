@@ -579,6 +579,7 @@ type Mutation {
     licenseUpdate(input: LicenseUpdateInput!, licenseId: ID!): LicensePayload!
     login(input: UserLoginInput!): AuthenticatedUserPayload!
     loginSocial(input: UserLoginSocialInput!): AuthenticatedUserPayload!
+    mediaFileDelete(mediaFileId: ID!): SuccessPayload!
     mediaFileUploadAbort(mediaFileUploadId: ID!): SuccessPayload!
     mediaFileUploadAssign(mediaFileUploadId: ID!, recordingId: ID!): SuccessPayload!
     mediaFileUploadFinish(input: MediaFileUploadFinishInput!, mediaFileUploadId: ID!): MediaFileUploadPayload!
@@ -2352,17 +2353,17 @@ enum RecordingContentScreeningStatus {
     "Approved by screener consensus"
     APPROVED
     "Awaiting final authorization (Screener consensus)"
-    APPROVED_PENDING_AUTHORIZATION
+    APPROVED_PENDING_AUTHORIZATION @deprecated(reason : "To be replaced by `PREAPPROVED`.")
     "Awaiting screener consensus"
-    PENDING_CONSENSUS
+    PENDING_CONSENSUS @deprecated(reason : "To be removed.")
     "Awaiting more evaluations"
-    PENDING_EVALUATIONS
+    PENDING_EVALUATIONS @deprecated(reason : "To be removed.")
     "Awaiting re-evaluation"
     PENDING_REEVALUATION
     "Approved by pre-approval"
     PREAPPROVED
     "Awaiting final authorization (Pre-approved)"
-    PREAPPROVED_PENDING_AUTHORIZATION
+    PREAPPROVED_PENDING_AUTHORIZATION @deprecated(reason : "To be replaced by `PREAPPROVED`.")
     "Rejected by screener consensus"
     REJECTED
     "Screening not yet begun"
@@ -2379,10 +2380,11 @@ enum RecordingContentType {
 
 "The legal screening statuses of a recording."
 enum RecordingLegalScreeningStatus {
+    ADMIN_OVERRIDE
     APPROVED
-    PENDING
+    PENDING @deprecated(reason : "To be removed.")
     "Awaiting re-evaluation"
-    PENDING_REEVALUATION
+    PENDING_REEVALUATION @deprecated(reason : "To be removed.")
     REJECTED
     "Not Yet Begun"
     UNEVALUATED
@@ -2436,10 +2438,11 @@ enum RecordingStage {
 
 "The technical screening statuses of a recording."
 enum RecordingTechnicalScreeningStatus {
+    ADMIN_OVERRIDE
     APPROVED
-    PENDING
+    PENDING @deprecated(reason : "To be removed.")
     "Awaiting re-evaluation"
-    PENDING_REEVALUATION
+    PENDING_REEVALUATION @deprecated(reason : "To be removed.")
     REJECTED
     "Not Yet Begun"
     UNEVALUATED
@@ -3421,11 +3424,18 @@ input RecordingCreateInput {
     isFeatured: Boolean
     isHidden: Boolean
     notes: String
+    "Requires administration role"
     publishDate: DateTime
     recordingDate: DateTime
     recordingPersons: [RecordingPersonRoleInput!]
     recordingTags: [RecordingTagInput!]
     sequenceId: ID
+    "Requires administration role"
+    skipContentScreening: Boolean
+    "Requires administration role"
+    skipLegalScreening: Boolean
+    "Requires administration role"
+    skipTechnicalScreening: Boolean
     sponsorId: ID!
     title: String!
     websiteIds: [ID!]
@@ -3476,11 +3486,18 @@ input RecordingUpdateInput {
     isFeatured: Boolean
     isHidden: Boolean
     notes: String
+    "Requires administration role"
     publishDate: DateTime
     recordingDate: DateTime
     recordingPersons: [RecordingPersonRoleInput!]
     recordingTags: [RecordingTagInput!]
     sequenceId: ID
+    "Requires administration role"
+    skipContentScreening: Boolean
+    "Requires administration role"
+    skipLegalScreening: Boolean
+    "Requires administration role"
+    skipTechnicalScreening: Boolean
     sponsorId: ID
     title: String
     websiteIds: [ID!]
