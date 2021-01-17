@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { QueryKey } from 'react-query';
 import ReactTooltip from 'react-tooltip';
 
 import { useAddPlaylist } from '@lib/api/useAddPlaylist';
-import { usePlaylists } from '@lib/api/usePlaylists';
 import { useSetPlaylistMembership } from '@lib/api/useSetPlaylistMembership';
-import { Playlist } from 'types';
+import {
+	useGetPlaylistButtonDataQuery,
+	UserPlaylist,
+} from '@lib/generated/graphql';
+import { useLanguageId } from '@lib/useLanguageId';
 
 import styles from './playlistButton.module.scss';
+
+type Playlist = Pick<UserPlaylist, 'id' | 'title' | 'hasRecording'>;
 
 interface PlaylistButtonProps {
 	recordingId: string;
 }
 
+// TODO: Move this component to its own file
 const Entry = ({
 	playlist,
 	recordingId,
+	cacheKey,
 }: {
 	playlist: Playlist;
 	recordingId: string;
+	cacheKey: QueryKey;
 }) => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const setPlaylistMembership = useSetPlaylistMembership();
+	const setPlaylistMembership = useSetPlaylistMembership(cacheKey);
 
 	useEffect(() => {
 		setIsChecked(!!playlist?.hasRecording);
@@ -47,8 +56,15 @@ const Entry = ({
 export default function PlaylistButton({
 	recordingId,
 }: PlaylistButtonProps): JSX.Element {
-	const lists = usePlaylists({ recordingId });
-	const addPlaylist = useAddPlaylist();
+	const language = useLanguageId();
+	const queryVariables = {
+		language,
+		recordingId,
+	};
+	const { data = {} } = useGetPlaylistButtonDataQuery(queryVariables) || {};
+	const lists = data?.me?.user?.playlists?.nodes;
+	const cacheKey = ['getPlaylistButtonData', queryVariables];
+	const addPlaylist = useAddPlaylist(cacheKey, 'me.user.playlists.nodes');
 	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
 	const [isPublic, setIsPublic] = useState<boolean>(false);
 
@@ -56,7 +72,12 @@ export default function PlaylistButton({
 		return (
 			lists &&
 			lists.map((l: Playlist, i: number) => (
-				<Entry recordingId={recordingId} playlist={l} key={i} />
+				<Entry
+					recordingId={recordingId}
+					playlist={l}
+					key={i}
+					cacheKey={cacheKey}
+				/>
 			))
 		);
 	};
@@ -98,10 +119,10 @@ export default function PlaylistButton({
 							/>
 						</label>
 						<button
-							onClick={() => {
+							onClick={async () => {
 								setNewPlaylistTitle('');
 								setIsPublic(false);
-								addPlaylist(newPlaylistTitle, {
+								await addPlaylist(newPlaylistTitle, {
 									recordingIds: [recordingId],
 									isPublic,
 								});

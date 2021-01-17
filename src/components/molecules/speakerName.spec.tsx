@@ -18,49 +18,46 @@ jest.mock('@lib/api/setPersonFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('@lib/api/fetchApi');
 
+const renderComponent = (speaker: any | undefined = undefined) => {
+	return renderWithIntl(SpeakerName, {
+		person:
+			speaker ||
+			({
+				id: 'the_id',
+				name: 'the_name',
+			} as any),
+	});
+};
+
 describe('speaker name component', () => {
 	beforeEach(() => jest.resetAllMocks());
 
 	it('renders', async () => {
-		await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		await renderComponent();
 	});
 
 	it('renders speaker name', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		expect(getByText('the_name')).toBeInTheDocument();
 	});
 
 	it('renders speaker summary', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				summary: 'the_summary',
-			},
+		const { getByText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			summary: 'the_summary',
 		});
 
 		expect(getByText('the_summary')).toBeInTheDocument();
 	});
 
 	it('renders speaker image', async () => {
-		const { getByAltText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				imageWithFallback: {
-					url: 'the_url',
-				},
+		const { getByAltText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			imageWithFallback: {
+				url: 'the_url',
 			},
 		});
 
@@ -70,47 +67,33 @@ describe('speaker name component', () => {
 	});
 
 	it('has favorite toggle', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		expect(getByText('Favorite')).toBeInTheDocument();
 	});
 
 	it('renders summary html', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				summary: 'hello <i>target</i> hello',
-			},
+		const { getByText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			summary: 'hello <i>target</i> hello',
 		});
 
 		expect(getByText('target')).toBeInTheDocument();
 	});
 
 	it('sets initial toggle state', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				viewerHasFavorited: true,
-			},
+		const { getByText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			viewerHasFavorited: true,
 		});
 
 		expect(getByText('Unfavorite')).toBeInTheDocument();
 	});
 
 	it('alerts need for login', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		userEvent.click(getByText('Favorite'));
 
@@ -118,12 +101,7 @@ describe('speaker name component', () => {
 	});
 
 	it('prevents button click default action', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		const result = fireEvent.click(getByText('Favorite'));
 
@@ -133,12 +111,7 @@ describe('speaker name component', () => {
 	it('favorites speaker', async () => {
 		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		await waitFor(() => expect(isPersonFavorited).toBeCalled);
 
@@ -152,12 +125,7 @@ describe('speaker name component', () => {
 	it('does not toast if authenticated', async () => {
 		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		await waitFor(() => expect(isPersonFavorited).toBeCalled());
 
@@ -167,12 +135,7 @@ describe('speaker name component', () => {
 	});
 
 	it('does not call api if user not authenticated', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		userEvent.click(getByText('Favorite'));
 
@@ -182,12 +145,7 @@ describe('speaker name component', () => {
 	it('does not toast error before initial load', async () => {
 		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		userEvent.click(getByText('Favorite'));
 
@@ -197,12 +155,7 @@ describe('speaker name component', () => {
 	it('updates state optimistically', async () => {
 		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		userEvent.click(getByText('Favorite'));
 
@@ -212,12 +165,10 @@ describe('speaker name component', () => {
 	it('does not allow initial data to override new data', async () => {
 		jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				viewerHasFavorited: true,
-			},
+		const { getByText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			viewerHasFavorited: true,
 		});
 
 		await waitFor(() => expect(getByText('Favorite')).toBeInTheDocument());
@@ -230,12 +181,7 @@ describe('speaker name component', () => {
 
 		// Setup & initial render
 
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-			},
-		});
+		const { getByText } = await renderComponent();
 
 		// Click button
 
@@ -266,12 +212,7 @@ describe('speaker name component', () => {
 		await withMutedReactQueryLogger(async () => {
 			jest.spyOn(api, 'isPersonFavorited').mockResolvedValue(false);
 
-			const { getByText } = await renderWithIntl(SpeakerName, {
-				person: {
-					id: 'the_id',
-					name: 'the_name',
-				},
-			});
+			const { getByText } = await renderComponent();
 
 			await waitFor(() => expect(isPersonFavorited).toBeCalled());
 
@@ -286,12 +227,10 @@ describe('speaker name component', () => {
 	});
 
 	it('includes website', async () => {
-		const { getByText } = await renderWithIntl(SpeakerName, {
-			person: {
-				id: 'the_id',
-				name: 'the_name',
-				website: 'the_website',
-			},
+		const { getByText } = await renderComponent({
+			id: 'the_id',
+			name: 'the_name',
+			website: 'the_website',
 		});
 
 		const link = getByText('the_website') as HTMLLinkElement;

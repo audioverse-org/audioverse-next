@@ -2,14 +2,18 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
+import _ from 'lodash';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
+import { fetchApi } from '@lib/api';
 import * as api from '@lib/api';
-import type { Playlist, Sermon, Testimony } from 'types';
+import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
+
+export const mockedFetchApi = fetchApi as jest.Mock;
 
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
@@ -19,22 +23,12 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 	return { addItem, rss2 };
 };
 
-export function loadMe({
-	playlists = [],
-}: { playlists?: Partial<Playlist>[] } = {}): void {
-	jest.spyOn(api, 'getMe').mockResolvedValue({
-		playlists: {
-			nodes: playlists,
-		},
-	} as any);
-}
-
-export function loadSermons({
+export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	jest.spyOn(api, 'getSermons').mockReturnValue(
-		Promise.resolve({
+	mockedFetchApi.mockResolvedValue({
+		sermons: {
 			nodes: nodes || [
 				{
 					id: '1',
@@ -45,39 +39,12 @@ export function loadSermons({
 			aggregate: {
 				count: count || 1,
 			},
-		})
-	);
-}
-
-export function loadSermon(sermon: any = undefined): void {
-	const data = sermon || {
-		id: '1',
-		title: 'the_sermon_title',
-		persons: [],
-		audioFiles: [],
-		videoFiles: [],
-	};
-
-	jest.spyOn(api, 'getSermon').mockResolvedValue((data as any) as Sermon);
+		},
+	});
 }
 
 export function setSermonCount(count: number): void {
 	jest.spyOn(api, 'getSermonCount').mockResolvedValue(count);
-}
-
-export function loadTestimonies(nodes: Testimony[] | null = null): void {
-	jest.spyOn(api, 'getTestimonies').mockResolvedValue({
-		nodes: nodes || [
-			{
-				author: 'the_testimony_author',
-				body: 'the_testimony_body',
-				writtenDate: 'the_testimony_date',
-			},
-		],
-		aggregate: {
-			count: 1,
-		},
-	});
 }
 
 export function loadQuery(query: ParsedUrlQuery = {}): void {
@@ -158,3 +125,16 @@ export async function withMutedReactQueryLogger(
 
 	return result;
 }
+
+export const makePlaylistButtonData = (
+	playlists: any[] | undefined = undefined
+): GetPlaylistButtonDataQuery => {
+	const value = playlists || [
+		{
+			id: 'playlist_id',
+			title: 'playlist_title',
+		},
+	];
+
+	return _.set({}, 'me.user.playlists.nodes', value);
+};

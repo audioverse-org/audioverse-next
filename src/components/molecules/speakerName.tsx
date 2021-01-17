@@ -4,15 +4,15 @@ import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
+import { SpeakerNameFragment } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { Person } from 'types';
 
 import styles from './speakerName.module.scss';
 
 export default function SpeakerName({
 	person,
 }: {
-	person: Person;
+	person: SpeakerNameFragment;
 }): JSX.Element {
 	const {
 		id,

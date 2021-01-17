@@ -1,0 +1,7 @@
+query getProfileData {
+    me {
+        user {
+            givenName
+        }
+    }
+}

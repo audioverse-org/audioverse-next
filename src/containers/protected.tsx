@@ -2,15 +2,17 @@ import React, { FormEvent, useState } from 'react';
 import { useQueryClient } from 'react-query';
 
 import { login } from '@lib/api';
-import { useMe } from '@lib/api/useMe';
+import { useGetProtectedDataQuery } from '@lib/generated/graphql';
 
+// TODO: use isLoading and error from react-query to avoid flashing login form
+//  while query is loading
 export default function Protected({
 	children,
 }: {
 	children: JSX.Element;
 }): JSX.Element {
 	const queryClient = useQueryClient();
-	const me = useMe();
+	const { data = undefined } = useGetProtectedDataQuery() || {};
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
@@ -19,7 +21,7 @@ export default function Protected({
 		e.preventDefault();
 		try {
 			await login(email, password);
-			await queryClient.invalidateQueries('me');
+			await queryClient.invalidateQueries();
 		} catch (e) {
 			setError('Login failed');
 		}
@@ -46,5 +48,5 @@ export default function Protected({
 		</form>
 	);
 
-	return me ? children : loginForm;
+	return data ? children : loginForm;
 }

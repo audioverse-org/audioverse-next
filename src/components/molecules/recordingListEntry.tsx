@@ -3,8 +3,8 @@ import React from 'react';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
+import { RecordingListFragment } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import type { MediaFile, Person, Sermon } from 'types';
 
 const formatDuration = (duration: number): string => {
 	duration = Math.round(duration);
@@ -19,11 +19,11 @@ const formatDuration = (duration: number): string => {
 export default function RecordingListEntry({
 	sermon,
 }: {
-	sermon: Sermon;
+	sermon: RecordingListFragment;
 }): JSX.Element {
 	const lang = useLanguageRoute();
-	const persons: Person[] = _.get(sermon, 'persons', []);
-	const videoFiles: MediaFile[] = _.get(sermon, 'videoFiles', []);
+	const persons = sermon?.persons || [];
+	const videoFiles = sermon?.videoFiles || [];
 
 	return (
 		<tr className={styles.item}>
@@ -42,7 +42,7 @@ export default function RecordingListEntry({
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p: Person) => (
+					{persons.map((p) => (
 						<li key={p.id}>
 							<SpeakerName person={p} />
 						</li>

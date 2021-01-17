@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import SearchEntry from '@components/molecules/searchEntry';
-import type { Sermon } from 'types';
 
 import styles from './search.module.scss';
 
+// TODO: When I wire up search page, improve `sermons` type
 export interface SearchProps {
-	sermons?: Sermon[];
+	sermons?: any[];
 }
 
 export default function Search({ sermons = [] }: SearchProps): JSX.Element {

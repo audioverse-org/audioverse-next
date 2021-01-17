@@ -14,5 +14,5 @@ export async function isRecordingFavorited(
 	const variables = { id },
 		data = await fetchApi(query, { variables });
 
-	return data?.sermon.viewerHasFavorited;
+	return !!data?.sermon?.viewerHasFavorited;
 }

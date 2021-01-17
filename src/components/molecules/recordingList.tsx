@@ -1,12 +1,12 @@
 import React from 'react';
 
 import RecordingListEntry from '@components/molecules/recordingListEntry';
-import type { Sermon } from 'types';
+import { RecordingListFragment } from '@lib/generated/graphql';
 
 import styles from './recordingList.module.scss';
 
 interface RecordingListProps {
-	sermons: Sermon[];
+	sermons: RecordingListFragment[];
 }
 
 export default function RecordingList({

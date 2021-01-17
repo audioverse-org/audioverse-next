@@ -12,6 +12,7 @@ query getSermonCount($language: Language!, $hasVideo: Boolean) {
 }
 `;
 
+// TODO: Delete this file
 export async function getSermonCount(
 	language: string,
 	{ hasVideo = null }: { hasVideo?: boolean | null } = {}

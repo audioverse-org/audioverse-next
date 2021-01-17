@@ -1,15 +1,10 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from 'next/router';
 import videojs from 'video.js';
 
-import { getSermon, getSermons } from '@lib/api';
-import {
-	loadRouter,
-	loadSermon,
-	loadSermons,
-	renderWithIntl,
-} from '@lib/test/helpers';
+import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
+import * as graphql from '@lib/generated/graphql';
+import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -17,26 +12,33 @@ import SermonDetail, {
 
 jest.mock('next/router');
 jest.mock('video.js');
-jest.mock('@lib/api/getSermon');
-jest.mock('@lib/api/getSermons');
 jest.mock('@lib/api/fetchApi');
 
-function loadRecentSermons() {
-	loadSermons({
-		nodes: [
-			{
-				id: 1,
-				title: 'the_sermon_title',
-				recordingDate: '2020-06-01T09:30:00.000Z',
-			},
-		],
+// TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
+function loadSermonDetailPathsData() {
+	jest.spyOn(graphql, 'getSermonDetailStaticPaths').mockResolvedValue({
+		sermons: {
+			nodes: [
+				{
+					id: 'sermon_id',
+					recordingDate: '2020-06-01T09:30:00.000Z',
+				},
+			],
+		},
 	});
 }
 
-function loadGetSermonError() {
-	(getSermon as jest.Mock).mockImplementation(() => {
-		throw new Error('API failure');
-	});
+// TODO: Rename getSermon graphql query to getSermonDetailData
+function loadSermonDetailData(sermon: any = undefined): void {
+	sermon = sermon || {
+		id: '1',
+		title: 'the_sermon_title',
+		persons: [],
+		audioFiles: [],
+		videoFiles: [],
+	};
+
+	jest.spyOn(graphql, 'getSermon').mockResolvedValue({ sermon });
 }
 
 async function renderPage() {
@@ -44,56 +46,61 @@ async function renderPage() {
 	return renderWithIntl(SermonDetail, props);
 }
 
-describe('detailPageGenerator', () => {
-	beforeEach(() => jest.resetAllMocks());
+describe('sermon detail page', () => {
+	beforeEach(() => loadRouter({ isFallback: false }));
 
 	it('gets sermons', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('ENGLISH', { first: 1000 })
+			expect(getSermonDetailStaticPaths).toBeCalledWith({
+				language: 'ENGLISH',
+				first: 1000,
+			})
 		);
 	});
 
 	it('gets recent sermons in all languages', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 1000 })
+			expect(getSermonDetailStaticPaths).toBeCalledWith({
+				language: 'SPANISH',
+				first: 1000,
+			})
 		);
 	});
 
 	it('returns paths', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/1');
+		expect(result.paths).toContain('/en/sermons/sermon_id');
 	});
 
 	it('generates localized paths', async () => {
-		loadRecentSermons();
+		loadSermonDetailPathsData();
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/1');
+		expect(result.paths).toContain('/es/sermons/sermon_id');
 	});
 
 	it('catches API errors', async () => {
-		loadGetSermonError();
+		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
-		expect(result.props.sermon).toBeNull();
+		expect(result.props.sermon).toBeUndefined();
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadGetSermonError();
+		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -101,16 +108,17 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('shows loading screen', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: true });
+		loadRouter({ isFallback: true });
 
-		const { getByText } = await renderPage();
+		const { getByText } = await renderWithIntl(SermonDetail, {
+			sermon: undefined,
+		});
 
 		expect(getByText('Loading…')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon();
+		loadSermonDetailData();
 
 		const { getByText } = await renderPage();
 
@@ -118,8 +126,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes player', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -129,8 +136,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('enables controls', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -143,8 +149,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('makes fluid player', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -157,8 +162,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('sets poster', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			audioFiles: ['the_source'],
 		});
 
@@ -171,8 +175,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('toggles sources', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -200,8 +203,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('toggles toggle button label', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -217,8 +219,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('falls back to video files', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -245,8 +246,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('falls back to audio files', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -273,8 +273,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('hides toggle if no video', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
@@ -287,8 +286,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('has playlist button', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -300,6 +298,7 @@ describe('detailPageGenerator', () => {
 
 		beforeEach(() => {
 			jest.resetModules();
+			process.env = { ...oldEnv };
 		});
 
 		afterEach(() => {
@@ -307,24 +306,25 @@ describe('detailPageGenerator', () => {
 		});
 
 		it('loads fewer sermons in development', async () => {
-			process.env = {
-				...process.env,
-				NODE_ENV: 'development',
-			};
+			jest.isolateModules(async () => {
+				(process.env as any).NODE_ENV = 'development';
 
-			loadRecentSermons();
+				loadSermonDetailPathsData();
 
-			await getStaticPaths();
+				await getStaticPaths();
 
-			await waitFor(() =>
-				expect(getSermons).toBeCalledWith('SPANISH', { first: 10 })
-			);
+				await waitFor(() =>
+					expect(getSermonDetailStaticPaths).toBeCalledWith({
+						language: 'SPANISH',
+						first: 10,
+					})
+				);
+			});
 		});
 	});
 
 	it('uses speaker name widget', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			id: '1',
 			title: 'the_sermon_title',
 			persons: [
@@ -336,14 +336,13 @@ describe('detailPageGenerator', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_summary')).toBeInTheDocument();
+		expect(getAllByText('the_summary').length > 0).toBeTruthy();
 	});
 
 	it('includes donation banner', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -353,8 +352,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes a donate button', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { getByText } = await renderPage();
 
@@ -362,8 +360,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes tags', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			recordingTags: {
 				nodes: [
 					{
@@ -382,8 +379,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('excludes tag section if no tags', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({});
+		loadSermonDetailData({});
 
 		const { queryByText } = await renderPage();
 
@@ -391,8 +387,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes sponsor title', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
@@ -405,8 +400,7 @@ describe('detailPageGenerator', () => {
 	});
 
 	it('includes sponsor location', async () => {
-		loadRouter({ isFallback: false });
-		loadSermon({
+		loadSermonDetailData({
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
@@ -416,5 +410,55 @@ describe('detailPageGenerator', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_location')).toBeInTheDocument();
+	});
+
+	it('includes presenters section', async () => {
+		loadSermonDetailData({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Presenters')).toBeInTheDocument();
+	});
+
+	it('duplicates presenter list', async () => {
+		loadSermonDetailData({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+					summary: 'the_summary',
+				},
+			],
+		});
+
+		const { getAllByText } = await renderPage();
+
+		expect(getAllByText('the_name').length).toEqual(2);
+	});
+
+	it('includes time recorded', async () => {
+		mockedFetchApi.mockResolvedValue({});
+
+		loadSermonDetailData({
+			persons: [
+				{
+					id: 'the_id',
+					name: 'the_name',
+				},
+			],
+			recordingDate: '2003-03-01T09:30:00.000Z',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('March 1, 2003, 9:30 AM')).toBeInTheDocument();
 	});
 });

@@ -12,5 +12,5 @@ export async function isPersonFavorited(id: number | string): Promise<boolean> {
 	const variables = { id },
 		data = await fetchApi(query, { variables });
 
-	return data?.person.viewerHasFavorited;
+	return !!data?.person?.viewerHasFavorited;
 }

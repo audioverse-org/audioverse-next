@@ -1,0 +1,44 @@
+query getSermon($id: ID!) {
+    sermon(id: $id) {
+        id
+        title
+        persons {
+            ...speakerName
+        }
+        audioFiles {
+            url
+            duration
+            filesize
+            mimeType
+        }
+        videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+            url
+            duration
+            filesize
+            mimeType
+        }
+        videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+            url
+            duration
+            filesize
+            mimeType
+        }
+        description
+        imageWithFallback {
+            url(size: 50)
+        }
+        recordingDate
+        recordingTags {
+            nodes {
+                tag {
+                    id
+                    name
+                }
+            }
+        }
+        sponsor {
+            title
+            location
+        }
+    }
+}

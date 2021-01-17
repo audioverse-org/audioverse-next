@@ -1,11 +1,11 @@
 import Testimonies from '@containers/testimonies';
-import { getTestimonies, getTestimonyCount } from '@lib/api';
+import { getTestimonyCount } from '@lib/api';
+import { getTestimonies } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
-import type { StaticPaths } from 'types';
 
 export default Testimonies;
 
@@ -16,9 +16,18 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
-	const { i, language } = params;
+	const { i, language: baseUrl } = params;
 
-	return await getPaginatedStaticProps(language, parseInt(i), getTestimonies);
+	return await getPaginatedStaticProps(
+		baseUrl,
+		parseInt(i),
+		async (language, { offset, first }) => {
+			// TODO: Update getPaginatedStaticProps args so that wrapping getter not necessary
+			const data = await getTestimonies({ language, first, offset });
+
+			return data?.testimonies;
+		}
+	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

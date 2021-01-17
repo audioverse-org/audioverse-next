@@ -7,15 +7,22 @@ import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
-import type { Person, RecordingTag, Sermon } from 'types';
+import { GetSermonQuery } from '@lib/generated/graphql';
 
 import styles from './detail.module.scss';
 
+export type Sermon = NonNullable<GetSermonQuery['sermon']>;
+
 export interface SermonDetailProps {
-	sermon: Sermon | null;
+	sermon: Sermon | null | undefined;
 }
 
-const getFiles = (sermon: Sermon, prefersAudio: boolean) => {
+interface Playable {
+	url: string;
+	mimeType: string;
+}
+
+const getFiles = (sermon: Sermon, prefersAudio: boolean): Playable[] => {
 	const { videoStreams = [], videoFiles = [], audioFiles = [] } = sermon;
 
 	if (prefersAudio) return audioFiles;
@@ -26,7 +33,7 @@ const getFiles = (sermon: Sermon, prefersAudio: boolean) => {
 };
 
 const getSources = (sermon: Sermon, prefersAudio: boolean) => {
-	const files = getFiles(sermon, prefersAudio);
+	const files = getFiles(sermon, prefersAudio) || [];
 
 	return files.map((f) => ({
 		src: f.url,
@@ -41,15 +48,26 @@ const hasVideo = (sermon: Sermon) => {
 };
 
 function SermonDetail({ sermon }: SermonDetailProps) {
+	// TODO: Figure out how to get rid of this type guard
 	if (!sermon) return null;
 
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const imageSrc = _.get(sermon, 'imageWithFallback.url');
 	const imageAlt = _.get(sermon, 'title');
 	const sources = getSources(sermon, prefersAudio);
-	const speakers: Person[] = _.get(sermon, 'persons', []);
-	const tags: RecordingTag[] = _.get(sermon, 'recordingTags.nodes', []);
+	const speakers = sermon?.persons || [];
+	const tags = sermon?.recordingTags?.nodes || [];
 	const { sponsor = { title: '', location: '' } } = sermon;
+	const recordingDateString = new Date(sermon.recordingDate).toLocaleString(
+		[],
+		{
+			hour: 'numeric',
+			minute: 'numeric',
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+		}
+	);
 
 	return (
 		<>
@@ -58,7 +76,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 				<div>
 					<h1>{sermon.title}</h1>
 					<ul className={styles.speakers}>
-						{speakers.map((speaker: Person) => (
+						{speakers.map((speaker) => (
 							<li key={speaker.id}>
 								<SpeakerName person={speaker} />
 							</li>
@@ -66,9 +84,6 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</ul>
 				</div>
 			</div>
-			{sermon.recordingDate ? (
-				<p>{new Date(sermon.recordingDate).toLocaleDateString()}</p>
-			) : null}
 			<Favorite id={sermon.id} />
 			<PlaylistButton recordingId={sermon.id} />
 			<Player sources={sources} />
@@ -136,10 +151,37 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			</h2>
 			{/* TODO: link sponsor title */}
 			<p>
-				<a href="#">{sponsor.title}</a>
+				<a href="#">{sponsor?.title}</a>
 				<br />
-				<span>{sponsor.location}</span>
+				<span>{sponsor?.location}</span>
 			</p>
+			{/* TODO: If no presenters (see sermon 4689) don't show presenters section */}
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__presenterInfoTitle"
+					defaultMessage="Presenters"
+					description="Sermon detail presenter info title"
+				/>
+			</h2>
+			<ul>
+				{speakers.map((s) => (
+					<li key={s.id}>
+						<SpeakerName person={s} />
+					</li>
+				))}
+			</ul>
+			{sermon.recordingDate ? (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__recordedTitle"
+							defaultMessage="Recorded"
+							description="Sermon detail recorded date title"
+						/>
+					</h2>
+					<p>{recordingDateString}</p>
+				</>
+			) : null}
 		</>
 	);
 }

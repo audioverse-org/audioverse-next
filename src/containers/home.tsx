@@ -2,10 +2,12 @@ import React from 'react';
 
 import RecordingList from '@components/molecules/recordingList';
 import Testimonies from '@components/organisms/testimonies';
-import type { Sermon } from 'types';
+import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
+
+type Sermons = NonNullable<GetHomeStaticPropsQuery['sermons']['nodes']>;
 
 export interface HomeProps {
-	sermons: Sermon[];
+	sermons: Sermons;
 }
 
 export default function Home({ sermons }: HomeProps): JSX.Element {

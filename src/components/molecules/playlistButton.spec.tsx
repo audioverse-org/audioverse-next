@@ -6,24 +6,30 @@ import {
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
 
 import PlaylistButton from '@components/molecules/playlistButton';
-import * as api from '@lib/api';
-import { addPlaylist } from '@lib/api/addPlaylist';
-import { getPlaylists } from '@lib/api/getPlaylists';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 import {
+	AddPlaylistDocument,
+	GetPlaylistButtonDataDocument,
+} from '@lib/generated/graphql';
+import {
+	makePlaylistButtonData,
+	mockedFetchApi,
 	renderWithIntl,
 	resolveWithDelay,
 	sleep,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
 
-jest.mock('@lib/api/getMe');
 jest.mock('@lib/api/setPlaylistMembership');
-jest.mock('@lib/api/getPlaylists');
-jest.mock('@lib/api/addPlaylist');
-jest.mock('@lib/api/fetchApi');
+
+const loadComponentData = (playlists: any[] | undefined = undefined) => {
+	when(mockedFetchApi)
+		.calledWith(GetPlaylistButtonDataDocument, expect.anything())
+		.mockResolvedValue(makePlaylistButtonData(playlists));
+};
 
 const renderComponent = async ({
 	recordingId = 'recording_id',
@@ -45,8 +51,13 @@ const renderComponent = async ({
 	return {
 		...result,
 		getButton: () => getByText(container, 'Add to Playlist'),
-		waitForPlaylists: (count = 1) =>
-			waitFor(() => expect(getPlaylists).toHaveBeenCalledTimes(count)),
+		waitForDataCall: (count = 1) =>
+			waitFor(() => {
+				const matches = mockedFetchApi.mock.calls.filter((c) => {
+					return c[0] === GetPlaylistButtonDataDocument;
+				});
+				expect(matches).toHaveLength(count);
+			}),
 		getEntry,
 		getCheckbox: (playlistTitle: string): HTMLInputElement =>
 			queryByLabelText(container, playlistTitle) as HTMLInputElement,
@@ -61,10 +72,6 @@ const renderComponent = async ({
 };
 
 describe('playlist button', () => {
-	beforeEach(() => {
-		jest.resetAllMocks();
-	});
-
 	it('shows error if user not logged in', async () => {
 		const { getByText, getButton } = await renderComponent();
 
@@ -76,20 +83,11 @@ describe('playlist button', () => {
 	});
 
 	it('does not show error if user logged in', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
-		const {
-			queryByText,
-			getButton,
-			waitForPlaylists,
-		} = await renderComponent();
+		const { queryByText, getButton, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -99,20 +97,11 @@ describe('playlist button', () => {
 	});
 
 	it('shows user playlists', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
-		const {
-			getCheckbox,
-			getButton,
-			waitForPlaylists,
-		} = await renderComponent();
+		const { getCheckbox, getButton, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -122,16 +111,11 @@ describe('playlist button', () => {
 	});
 
 	it('adds recording to playlist', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
-		const { getEntry, getButton, waitForPlaylists } = await renderComponent();
+		const { getEntry, getButton, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -149,21 +133,16 @@ describe('playlist button', () => {
 	});
 
 	it('toggles checkbox', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
 		const {
 			getEntry,
 			getCheckbox,
 			getButton,
-			waitForPlaylists,
+			waitForDataCall,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -177,21 +156,16 @@ describe('playlist button', () => {
 	});
 
 	it('toggles back and forth', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
 		const {
 			getEntry,
 			getCheckbox,
 			getButton,
-			waitForPlaylists,
+			waitForDataCall,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -206,16 +180,11 @@ describe('playlist button', () => {
 	});
 
 	it('removes item from playlist', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+		loadComponentData();
 
-		const { getEntry, getButton, waitForPlaylists } = await renderComponent();
+		const { getEntry, getButton, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -234,22 +203,19 @@ describe('playlist button', () => {
 	});
 
 	it('uses playlists', async () => {
-		await renderComponent({ recordingId: 'recording_id' });
+		const { waitForDataCall } = await renderComponent({
+			recordingId: 'recording_id',
+		});
 
-		expect(getPlaylists).toBeCalled();
+		await waitForDataCall();
 	});
 
-	it('busts playlist cache', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
-			{
-				id: 'playlist_id',
-				title: 'playlist_title',
-			},
-		]);
+	it('busts playlist cache on entry toggle', async () => {
+		loadComponentData();
 
-		const { getEntry, getButton, waitForPlaylists } = await renderComponent();
+		const { getEntry, getButton, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		userEvent.click(getButton());
 
@@ -257,28 +223,28 @@ describe('playlist button', () => {
 
 		if (entry) userEvent.click(entry);
 
-		await waitFor(() => {
-			const callCount = (getPlaylists as jest.Mock).mock.calls.length;
-			expect(callCount > 1).toBeTruthy();
-		});
+		await waitForDataCall(2);
 	});
 
 	it('gets playlists using recording id', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		await renderComponent({
 			recordingId: 'recording_id',
 		});
 
 		await waitFor(() =>
-			expect(getPlaylists).toBeCalledWith('ENGLISH', {
-				recordingId: 'recording_id',
+			expect(mockedFetchApi).toBeCalledWith(GetPlaylistButtonDataDocument, {
+				variables: {
+					language: 'ENGLISH',
+					recordingId: 'recording_id',
+				},
 			})
 		);
 	});
 
 	it('loads checkbox state from api response', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
+		loadComponentData([
 			{
 				id: 'playlist_id',
 				title: 'playlist_title',
@@ -286,68 +252,65 @@ describe('playlist button', () => {
 			},
 		]);
 
-		const { waitForPlaylists, getCheckbox } = await renderComponent();
+		const { waitForDataCall, getCheckbox } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		expect(getCheckbox('playlist_title')?.checked).toBeTruthy();
 	});
 
 	it('does not set membership without user action', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { waitForPlaylists } = await renderComponent();
+		const { waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		expect(setPlaylistMembership).not.toBeCalled();
 	});
 
 	it('creates playlist', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
+		loadComponentData([]);
+		const { userAddPlaylist, waitForDataCall } = await renderComponent();
 
-		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
-
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		await userAddPlaylist('the_title');
 
 		await waitFor(() =>
-			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
-				recordingIds: ['recording_id'],
-				isPublic: false,
+			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+				variables: {
+					language: 'ENGLISH',
+					title: 'the_title',
+					recordingIds: ['recording_id'],
+					isPublic: false,
+				},
 			})
 		);
 	});
 
 	it('busts playlist cache on playlist create', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
+		loadComponentData([]);
 
-		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
+		const { userAddPlaylist, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		await userAddPlaylist('the_title');
 
-		await waitFor(() => {
-			const callCount = (getPlaylists as jest.Mock).mock.calls.length;
-			expect(callCount > 1).toBeTruthy();
-		});
+		await waitForDataCall(2);
 	});
 
 	it('resets new playlist input on create', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-		jest.spyOn(api, 'addPlaylist').mockResolvedValue('playlist_id');
+		loadComponentData([]);
 
 		const {
 			getNewPlaylistInput,
 			userAddPlaylist,
-			waitForPlaylists,
+			waitForDataCall,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		await userAddPlaylist('the_title');
 
@@ -355,26 +318,30 @@ describe('playlist button', () => {
 	});
 
 	it('adds recording to new playlist on create', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { userAddPlaylist, waitForPlaylists } = await renderComponent();
+		const { userAddPlaylist, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
-			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
-				recordingIds: ['recording_id'],
-				isPublic: false,
+			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+				variables: {
+					language: 'ENGLISH',
+					title: 'the_title',
+					recordingIds: ['recording_id'],
+					isPublic: false,
+				},
 			});
 		});
 	});
 
 	it('uses separate playlist caches for separate recordings', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { waitForPlaylists } = await renderComponent({
+		const { waitForDataCall } = await renderComponent({
 			recordingId: 'recording1',
 		});
 
@@ -382,19 +349,19 @@ describe('playlist button', () => {
 			recordingId: 'recording2',
 		});
 
-		await waitForPlaylists(2);
+		await waitForDataCall(2);
 	});
 
 	it('adds playlist optimistically', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		const {
 			userAddPlaylist,
-			waitForPlaylists,
+			waitForDataCall,
 			getEntry,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		await userAddPlaylist('the_title');
 
@@ -402,17 +369,17 @@ describe('playlist button', () => {
 	});
 
 	it('defaults new playlist checkbox to checked', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		const {
-			waitForPlaylists,
+			waitForDataCall,
 			getCheckbox,
 			userAddPlaylist,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
-		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, []);
+		resolveWithDelay(mockedFetchApi, 50, makePlaylistButtonData([]));
 
 		await userAddPlaylist('the_title');
 
@@ -425,25 +392,33 @@ describe('playlist button', () => {
 	it('cancels old queries to avoid clobbering optimistic update', async () => {
 		// Setup & initial render
 
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		const {
-			waitForPlaylists,
+			waitForDataCall,
 			userAddPlaylist,
 			getEntry,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		// Load slow query to clobber
 
-		resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
-			{
-				id: 'id1',
-				title: 'playlist1',
-				hasRecording: true,
+		resolveWithDelay(mockedFetchApi, 50, {
+			me: {
+				user: {
+					playlists: {
+						nodes: [
+							{
+								id: 'id1',
+								title: 'playlist1',
+								hasRecording: true,
+							},
+						],
+					},
+				},
 			},
-		]);
+		});
 
 		// Add first playlist
 
@@ -451,11 +426,11 @@ describe('playlist button', () => {
 
 		// Wait for slow response to be requested
 
-		await waitForPlaylists(2);
+		await waitForDataCall(2);
 
 		// Load second, fast response
 
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([
+		loadComponentData([
 			{
 				id: 'id1',
 				title: 'playlist1',
@@ -483,49 +458,51 @@ describe('playlist button', () => {
 
 	it('rolls back if mutation fails', async () => {
 		await withMutedReactQueryLogger(async () => {
-			jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
-			jest.spyOn(api, 'addPlaylist').mockRejectedValue('Oops!');
+			mockedFetchApi.mockResolvedValue(makePlaylistButtonData());
 
 			const {
-				waitForPlaylists,
+				waitForDataCall,
 				userAddPlaylist,
 				getEntry,
 			} = await renderComponent();
 
-			await waitForPlaylists();
+			await waitForDataCall();
 
 			// load new playlist into response to avoid cache invalidation causing a pass
-			resolveWithDelay(jest.spyOn(api, 'getPlaylists'), 50, [
-				{
-					id: 'playlist_id',
-					title: 'the_title',
-				},
-			]);
+			resolveWithDelay(mockedFetchApi, 50, makePlaylistButtonData());
+
+			when(mockedFetchApi)
+				.calledWith(AddPlaylistDocument, expect.anything())
+				.mockRejectedValue('Oops!');
 
 			await userAddPlaylist('the_title');
 
-			await waitFor(() => expect(getEntry('the_title')).toBeInTheDocument());
+			await waitFor(() => {
+				expect(getEntry('the_title')).toBeInTheDocument();
+			});
 
-			await waitFor(() => expect(getEntry('the_title')).toBeNull());
+			await waitFor(() => {
+				expect(getEntry('the_title')).toBeNull();
+			});
 		});
 	});
 
 	it('has privacy switcher', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { getByLabelText, waitForPlaylists } = await renderComponent();
+		const { getByLabelText, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		expect(getByLabelText('Public')).toBeInTheDocument();
 	});
 
 	it('does not check public box by default', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { getByLabelText, waitForPlaylists } = await renderComponent();
+		const { getByLabelText, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		const checkbox = getByLabelText('Public') as HTMLInputElement;
 
@@ -533,11 +510,11 @@ describe('playlist button', () => {
 	});
 
 	it('allows checkbox to be checked', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
-		const { getByLabelText, waitForPlaylists } = await renderComponent();
+		const { getByLabelText, waitForDataCall } = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		const checkbox = getByLabelText('Public') as HTMLInputElement;
 
@@ -547,15 +524,15 @@ describe('playlist button', () => {
 	});
 
 	it('creates public playlist', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		const {
 			getByLabelText,
-			waitForPlaylists,
+			waitForDataCall,
 			userAddPlaylist,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		const checkbox = getByLabelText('Public') as HTMLInputElement;
 
@@ -564,23 +541,27 @@ describe('playlist button', () => {
 		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
-			expect(addPlaylist).toBeCalledWith('ENGLISH', 'the_title', {
-				recordingIds: ['recording_id'],
-				isPublic: true,
+			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+				variables: {
+					language: 'ENGLISH',
+					title: 'the_title',
+					recordingIds: ['recording_id'],
+					isPublic: true,
+				},
 			});
 		});
 	});
 
 	it('resets public checkbox on playlist creation', async () => {
-		jest.spyOn(api, 'getPlaylists').mockResolvedValue([]);
+		loadComponentData([]);
 
 		const {
 			getByLabelText,
-			waitForPlaylists,
+			waitForDataCall,
 			userAddPlaylist,
 		} = await renderComponent();
 
-		await waitForPlaylists();
+		await waitForDataCall();
 
 		const checkbox = getByLabelText('Public') as HTMLInputElement;
 

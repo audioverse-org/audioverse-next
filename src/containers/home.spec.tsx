@@ -1,11 +1,13 @@
 import { waitFor } from '@testing-library/react';
 
-import { getSermons } from '@lib/api';
+import { getHomeStaticProps } from '@lib/generated/graphql';
+import * as graphql from '@lib/generated/graphql';
 import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
 jest.mock('@lib/api');
 jest.mock('next/router');
+jest.mock('@lib/generated/graphql');
 
 const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
 	loadQuery(query);
@@ -13,15 +15,17 @@ const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
 	return renderWithIntl(Home, props);
 };
 
-function loadRecentSermons() {
-	(getSermons as jest.Mock).mockReturnValue({
-		nodes: [
-			{
-				id: 1,
-				title: 'the_sermon_title',
-			},
-		],
-	});
+function loadQueryResponse() {
+	jest.spyOn(graphql, 'getHomeStaticProps').mockResolvedValue({
+		sermons: {
+			nodes: [
+				{
+					id: 'sermon_id',
+					title: 'the_sermon_title',
+				},
+			],
+		},
+	} as any);
 }
 
 describe('home page', () => {
@@ -48,11 +52,11 @@ describe('home page', () => {
 	it('gets recent sermons', async () => {
 		await renderHome();
 
-		expect(getSermons).toHaveBeenCalledWith('ENGLISH', { first: 5 });
+		expect(getHomeStaticProps).toHaveBeenCalledWith({ language: 'ENGLISH' });
 	});
 
 	it('displays recent sermons', async () => {
-		loadRecentSermons();
+		loadQueryResponse();
 
 		const { getByText } = await renderHome();
 
@@ -60,13 +64,13 @@ describe('home page', () => {
 	});
 
 	it('links sermons', async () => {
-		loadRecentSermons();
+		loadQueryResponse();
 
 		const { getByText } = await renderHome({ query: { language: 'en' } });
 		const el = getByText('the_sermon_title');
 		const href = el.getAttribute('href');
 
-		expect(href).toBe('/en/sermons/1');
+		expect(href).toBe('/en/sermons/sermon_id');
 	});
 
 	it('generates static paths for all languages', async () => {
@@ -76,20 +80,20 @@ describe('home page', () => {
 	});
 
 	it('uses query lang in urls', async () => {
-		loadRecentSermons();
+		loadQueryResponse();
 
 		const { getByText } = await renderHome({ query: { language: 'es' } });
 		const el = getByText('the_sermon_title');
 		const href = el.getAttribute('href');
 
-		expect(href).toBe('/es/sermons/1');
+		expect(href).toBe('/es/sermons/sermon_id');
 	});
 
 	it('queries with language', async () => {
 		await renderHome({ params: { language: 'es' } });
 
 		await waitFor(() =>
-			expect(getSermons).toBeCalledWith('SPANISH', { first: 5 })
+			expect(getHomeStaticProps).toBeCalledWith({ language: 'SPANISH' })
 		);
 	});
 

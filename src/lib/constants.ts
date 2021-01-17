@@ -1,15 +1,17 @@
+import { Language } from './generated/graphql';
+
 export const ENTRIES_PER_PAGE = 25;
 
-export interface Language {
+export interface LanguageConfiguration {
 	base_url: string;
 	display_name: string;
 }
 
-interface Languages {
-	[key: string]: Language;
-}
+export type LanguageConfigurations = {
+	[key in Language]: LanguageConfiguration;
+};
 
-export const LANGUAGES: Languages = {
+export const LANGUAGES: LanguageConfigurations = {
 	ENGLISH: { base_url: 'en', display_name: 'English' },
 	SPANISH: { base_url: 'es', display_name: 'Español' },
 	FRENCH: { base_url: 'fr', display_name: 'Français' },
@@ -20,3 +22,5 @@ export const LANGUAGES: Languages = {
 };
 
 export const PROJECT_ROOT = process.cwd();
+export const LIST_PRERENDER_LENGTH =
+	process.env.NODE_ENV === 'development' ? 10 : 1000;
