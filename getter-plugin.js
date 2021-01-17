@@ -5,7 +5,7 @@ module.exports = {
 				return doc.document.definitions
 					.filter((def) => {
 						return (
-							def.kind !== 'FragmentDefinition' && def?.operation !== 'mutation'
+							def.kind !== 'FragmentDefinition' && def.operation !== 'mutation'
 						);
 					})
 					.map((def) => {
