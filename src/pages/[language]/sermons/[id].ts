@@ -1,5 +1,8 @@
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
-import { getSermon, getSermonDetailStaticPaths } from '@lib/generated/graphql';
+import {
+	getSermonDetailData,
+	getSermonDetailStaticPaths,
+} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default SermonDetail;
@@ -15,7 +18,7 @@ export async function getStaticProps({
 	params: { id: string };
 }): Promise<StaticProps> {
 	const { id } = params;
-	const { sermon } = await getSermon({ id }).catch(() => ({
+	const { sermon } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: undefined,
 	}));
 

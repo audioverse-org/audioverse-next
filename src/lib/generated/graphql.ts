@@ -4408,12 +4408,12 @@ export type GetSeriesDetailPathsDataQuery = (
   ) }
 );
 
-export type GetSermonQueryVariables = Exact<{
+export type GetSermonDetailDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetSermonQuery = (
+export type GetSermonDetailDataQuery = (
   { __typename?: 'Query' }
   & { sermon?: Maybe<(
     { __typename?: 'Recording' }
@@ -4445,8 +4445,28 @@ export type GetSermonQuery = (
     ), sponsor?: Maybe<(
       { __typename?: 'Sponsor' }
       & Pick<Sponsor, 'title' | 'location'>
+    )>, sequence?: Maybe<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id' | 'title'>
     )> }
   )> }
+);
+
+export type GetSermonDetailStaticPathsQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSermonDetailStaticPathsQuery = (
+  { __typename?: 'Query' }
+  & { sermons: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & Pick<Recording, 'id' | 'recordingDate'>
+    )>> }
+  ) }
 );
 
 export type GetSermonListStaticPropsQueryVariables = Exact<{
@@ -4505,23 +4525,6 @@ export type AddPlaylistMutation = (
   & { playlistAdd: (
     { __typename?: 'UserPlaylist' }
     & Pick<UserPlaylist, 'id'>
-  ) }
-);
-
-export type GetSermonDetailStaticPathsQueryVariables = Exact<{
-  language: Language;
-  first?: Maybe<Scalars['Int']>;
-}>;
-
-
-export type GetSermonDetailStaticPathsQuery = (
-  { __typename?: 'Query' }
-  & { sermons: (
-    { __typename?: 'RecordingConnection' }
-    & { nodes?: Maybe<Array<(
-      { __typename?: 'Recording' }
-      & Pick<Recording, 'id' | 'recordingDate'>
-    )>> }
   ) }
 );
 
@@ -4689,8 +4692,8 @@ export const useGetSeriesDetailPathsDataQuery = <
       graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, variables),
       options
     );
-export const GetSermonDocument = `
-    query getSermon($id: ID!) {
+export const GetSermonDetailDataDocument = `
+    query getSermonDetailData($id: ID!) {
   sermon(id: $id) {
     id
     title
@@ -4732,19 +4735,45 @@ export const GetSermonDocument = `
       title
       location
     }
+    sequence {
+      id
+      title
+    }
   }
 }
     ${SpeakerNameFragmentDoc}`;
-export const useGetSermonQuery = <
-      TData = GetSermonQuery,
+export const useGetSermonDetailDataQuery = <
+      TData = GetSermonDetailDataQuery,
       TError = unknown
     >(
-      variables: GetSermonQueryVariables, 
-      options?: UseQueryOptions<GetSermonQuery, TError, TData>
+      variables: GetSermonDetailDataQueryVariables, 
+      options?: UseQueryOptions<GetSermonDetailDataQuery, TError, TData>
     ) => 
-    useQuery<GetSermonQuery, TError, TData>(
-      ['getSermon', variables],
-      graphqlFetcher<GetSermonQuery, GetSermonQueryVariables>(GetSermonDocument, variables),
+    useQuery<GetSermonDetailDataQuery, TError, TData>(
+      ['getSermonDetailData', variables],
+      graphqlFetcher<GetSermonDetailDataQuery, GetSermonDetailDataQueryVariables>(GetSermonDetailDataDocument, variables),
+      options
+    );
+export const GetSermonDetailStaticPathsDocument = `
+    query getSermonDetailStaticPaths($language: Language!, $first: Int) {
+  sermons(language: $language, first: $first) {
+    nodes {
+      id
+      recordingDate
+    }
+  }
+}
+    `;
+export const useGetSermonDetailStaticPathsQuery = <
+      TData = GetSermonDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetSermonDetailStaticPathsQueryVariables, 
+      options?: UseQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
+    ) => 
+    useQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
+      ['getSermonDetailStaticPaths', variables],
+      graphqlFetcher<GetSermonDetailStaticPathsQuery, GetSermonDetailStaticPathsQueryVariables>(GetSermonDetailStaticPathsDocument, variables),
       options
     );
 export const GetSermonListStaticPropsDocument = `
@@ -4825,28 +4854,6 @@ export const useAddPlaylistMutation = <
       (variables?: AddPlaylistMutationVariables) => graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(AddPlaylistDocument, variables)(),
       options
     );
-export const GetSermonDetailStaticPathsDocument = `
-    query getSermonDetailStaticPaths($language: Language!, $first: Int) {
-  sermons(language: $language, first: $first) {
-    nodes {
-      id
-      recordingDate
-    }
-  }
-}
-    `;
-export const useGetSermonDetailStaticPathsQuery = <
-      TData = GetSermonDetailStaticPathsQuery,
-      TError = unknown
-    >(
-      variables: GetSermonDetailStaticPathsQueryVariables, 
-      options?: UseQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
-    ) => 
-    useQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
-      ['getSermonDetailStaticPaths', variables],
-      graphqlFetcher<GetSermonDetailStaticPathsQuery, GetSermonDetailStaticPathsQueryVariables>(GetSermonDetailStaticPathsDocument, variables),
-      options
-    );
 import { fetchApi } from '@lib/api/fetchApi' 
 
 export async function getPlaylistButtonData(
@@ -4894,10 +4901,18 @@ export async function getSeriesDetailPathsData(
 }
 				
 
-export async function getSermon(
-  variables: GetSermonQueryVariables
-): Promise<GetSermonQuery> {
-  return fetchApi(GetSermonDocument, { variables });
+export async function getSermonDetailData(
+  variables: GetSermonDetailDataQueryVariables
+): Promise<GetSermonDetailDataQuery> {
+  return fetchApi(GetSermonDetailDataDocument, { variables });
+}
+				
+
+
+export async function getSermonDetailStaticPaths(
+  variables: GetSermonDetailStaticPathsQueryVariables
+): Promise<GetSermonDetailStaticPathsQuery> {
+  return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
 				
 
@@ -4912,13 +4927,5 @@ export async function getTestimonies(
   variables: GetTestimoniesQueryVariables
 ): Promise<GetTestimoniesQuery> {
   return fetchApi(GetTestimoniesDocument, { variables });
-}
-				
-
-
-export async function getSermonDetailStaticPaths(
-  variables: GetSermonDetailStaticPathsQueryVariables
-): Promise<GetSermonDetailStaticPathsQuery> {
-  return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
 				

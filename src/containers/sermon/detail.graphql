@@ -1,4 +1,4 @@
-query getSermon($id: ID!) {
+query getSermonDetailData($id: ID!) {
     sermon(id: $id) {
         id
         title
@@ -39,6 +39,19 @@ query getSermon($id: ID!) {
         sponsor {
             title
             location
+        }
+        sequence {
+            id
+            title
+        }
+    }
+}
+
+query getSermonDetailStaticPaths($language: Language!, $first: Int) {
+    sermons(language: $language, first: $first) {
+        nodes {
+            id
+            recordingDate
         }
     }
 }
