@@ -70,4 +70,13 @@ describe('sermon video list page', () => {
 			'/en/sermons/video.xml'
 		);
 	});
+
+	it('includes filter in pagination', async () => {
+		loadSermonListData();
+
+		const { getByText } = await renderPage();
+		const link = getByText('1') as HTMLAnchorElement;
+
+		expect(link.href).toContain('/en/sermons/video/page/1');
+	});
 });

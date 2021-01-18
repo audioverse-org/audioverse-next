@@ -8,6 +8,7 @@ import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { makeSeriesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './detail.module.scss';
@@ -193,7 +194,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 							description="Sermon detail series title"
 						/>
 					</h2>
-					<a href={`/${langRoute}/series/${sermon?.sequence?.id}`}>
+					<a href={makeSeriesRoute(langRoute, sermon?.sequence?.id)}>
 						{sermon?.sequence?.title}
 					</a>
 				</>

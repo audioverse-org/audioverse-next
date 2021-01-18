@@ -4,6 +4,7 @@ import React from 'react';
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
 import { RecordingListFragment } from '@lib/generated/graphql';
+import { makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 const formatDuration = (duration: number): string => {
@@ -28,7 +29,7 @@ export default function RecordingListEntry({
 	return (
 		<tr className={styles.item}>
 			<td>
-				<a href={`/${lang}/sermons/${sermon.id}`}>
+				<a href={makeSermonRoute(lang, sermon.id)}>
 					<img
 						src={_.get(sermon, 'imageWithFallback.url')}
 						alt={_.get(sermon, 'title')}
@@ -36,7 +37,7 @@ export default function RecordingListEntry({
 				</a>
 			</td>
 			<td>
-				<a href={`/${lang}/sermons/${sermon.id}`} className={styles.title}>
+				<a href={makeSermonRoute(lang, sermon.id)} className={styles.title}>
 					{sermon.title}
 				</a>
 			</td>

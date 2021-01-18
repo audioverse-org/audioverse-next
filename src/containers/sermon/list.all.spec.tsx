@@ -177,7 +177,7 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/sermons/page/1');
+		expect(link.href).toContain('/en/sermons/all/page/1');
 	});
 
 	it('revalidates static pages', async () => {
@@ -372,7 +372,7 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage({ query: { language: 'es' } }),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/es/sermons/page/1');
+		expect(link.href).toContain('/es/sermons/all/page/1');
 	});
 
 	it('sets rss head link', async () => {

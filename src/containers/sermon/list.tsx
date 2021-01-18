@@ -5,6 +5,12 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
+import {
+	makeSermonListBaseRoute,
+	makeSermonListRouteAll,
+	makeSermonListRouteAudio,
+	makeSermonListRouteVideo,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
@@ -12,13 +18,14 @@ type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
 export interface SermonListProps {
 	nodes: Sermons;
 	rssPath: string;
+	filter: string;
 	pagination: {
 		current: number;
 		total: number;
 	};
 }
 
-function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
+function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 	const lang = useLanguageRoute();
 
 	return (
@@ -30,15 +37,15 @@ function SermonList({ nodes, pagination, rssPath }: SermonListProps) {
 				RSS
 			</a>
 			<div>
-				<a href={`/${lang}/sermons/all/page/1`}>All</a>
-				<a href={`/${lang}/sermons/video/page/1`}>Video</a>
-				<a href={`/${lang}/sermons/audio/page/1`}>Audio</a>
+				<a href={makeSermonListRouteAll(lang, 1)}>All</a>
+				<a href={makeSermonListRouteVideo(lang, 1)}>Video</a>
+				<a href={makeSermonListRouteAudio(lang, 1)}>Audio</a>
 			</div>
 			<RecordingList sermons={nodes} />
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				base={`/${lang}/sermons`}
+				base={makeSermonListBaseRoute(lang, filter)}
 			/>
 		</div>
 	);

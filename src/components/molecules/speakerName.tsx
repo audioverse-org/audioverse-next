@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { SpeakerNameFragment } from '@lib/generated/graphql';
+import { makePersonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './speakerName.module.scss';
@@ -35,7 +36,7 @@ export default function SpeakerName({
 	return (
 		<>
 			<a
-				href={`/${lang}/presenters/${id}`}
+				href={makePersonRoute(lang, id)}
 				data-tip
 				data-for={`person-${id}-speakerTip`}
 			>
