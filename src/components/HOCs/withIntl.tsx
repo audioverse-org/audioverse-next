@@ -27,7 +27,7 @@ const withIntl = <P extends any>(
 					if (err.code === 'MISSING_TRANSLATION') {
 						return;
 					}
-					throw err;
+					console.error(err);
 				}}
 			>
 				<Component {...(props as any)} />
