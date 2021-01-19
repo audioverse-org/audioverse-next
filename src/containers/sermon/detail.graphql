@@ -44,6 +44,15 @@ query getSermonDetailData($id: ID!) {
             id
             title
         }
+        copyrightYear
+        distributionAgreement {
+            sponsor {
+                title
+            }
+            license {
+                summary
+            }
+        }
     }
 }
 

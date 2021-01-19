@@ -515,4 +515,46 @@ describe('sermon detail page', () => {
 
 		expect(link.href).toContain('/es/series/series_id');
 	});
+
+	it('shows copyright', async () => {
+		loadSermonDetailData({
+			copyrightYear: 1999,
+			distributionAgreement: {
+				sponsor: {
+					title: 'the_sponsor',
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor'));
+	});
+
+	it('falls back to top-level sponsor', async () => {
+		loadSermonDetailData({
+			copyrightYear: 1999,
+			sponsor: {
+				title: 'the_sponsor',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor')).toBeInTheDocument();
+	});
+
+	it('displays license summary', async () => {
+		loadSermonDetailData({
+			distributionAgreement: {
+				license: {
+					summary: 'the_license_summary',
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_license_summary')).toBeInTheDocument();
+	});
 });

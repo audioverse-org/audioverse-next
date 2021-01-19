@@ -72,6 +72,8 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 		}
 	);
 
+	const copyrightOwner =
+		sermon?.distributionAgreement?.sponsor?.title || sermon?.sponsor?.title;
 	return (
 		<>
 			<div className={styles.meta}>
@@ -199,6 +201,21 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</a>
 				</>
 			)}
+			<p>
+				<span>
+					<FormattedMessage
+						id={'sermonDetailPage__copyright'}
+						defaultMessage={'Copyright ⓒ{year} {owner}'}
+						description={'Copyright year and owner'}
+						values={{
+							year: sermon?.copyrightYear,
+							owner: copyrightOwner,
+						}}
+					/>
+				</span>
+				<br />
+				<span>{sermon?.distributionAgreement?.license?.summary}</span>
+			</p>
 		</>
 	);
 }

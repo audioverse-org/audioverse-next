@@ -4417,7 +4417,7 @@ export type GetSermonDetailDataQuery = (
   { __typename?: 'Query' }
   & { sermon?: Maybe<(
     { __typename?: 'Recording' }
-    & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate'>
+    & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear'>
     & { persons: Array<(
       { __typename?: 'Person' }
       & SpeakerNameFragment
@@ -4448,6 +4448,15 @@ export type GetSermonDetailDataQuery = (
     )>, sequence?: Maybe<(
       { __typename?: 'Sequence' }
       & Pick<Sequence, 'id' | 'title'>
+    )>, distributionAgreement?: Maybe<(
+      { __typename?: 'DistributionAgreement' }
+      & { sponsor?: Maybe<(
+        { __typename?: 'Sponsor' }
+        & Pick<Sponsor, 'title'>
+      )>, license?: Maybe<(
+        { __typename?: 'License' }
+        & Pick<License, 'summary'>
+      )> }
     )> }
   )> }
 );
@@ -4738,6 +4747,15 @@ export const GetSermonDetailDataDocument = `
     sequence {
       id
       title
+    }
+    copyrightYear
+    distributionAgreement {
+      sponsor {
+        title
+      }
+      license {
+        summary
+      }
     }
   }
 }

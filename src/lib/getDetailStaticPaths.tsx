@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { LANGUAGES, LIST_PRERENDER_LENGTH } from '@lib/constants';
+import { LANGUAGES, DETAIL_PRERENDER_LIMIT } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 
 type Getter = (variables: { language: Language; first: number }) => any;
@@ -15,7 +15,7 @@ export async function getDetailStaticPaths(
 	const pathSetPromises = languages.map(async (l: Language) => {
 		const result = await getter({
 			language: l,
-			first: LIST_PRERENDER_LENGTH,
+			first: DETAIL_PRERENDER_LIMIT,
 		});
 		const nodes = _.get(result, nodesPath, []);
 		const baseUrl = LANGUAGES[l].base_url;

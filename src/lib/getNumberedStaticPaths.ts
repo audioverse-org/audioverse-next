@@ -1,6 +1,10 @@
 import _ from 'lodash';
 
-import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import {
+	ENTRIES_PER_PAGE,
+	LANGUAGES,
+	LIST_PRERENDER_LIMIT,
+} from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 
 export async function makeNumberedPaths(
@@ -9,11 +13,13 @@ export async function makeNumberedPaths(
 ): Promise<string[]> {
 	const keys = _.keys(LANGUAGES) as Language[];
 	const pathSetPromises = keys.map(async (k) => {
-			const entryCount = (await getCount(k)) || 0,
-				pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE),
-				numbers = Array.from(Array(pageCount).keys()),
-				base = LANGUAGES[k].base_url;
+			const entryCount = (await getCount(k)) || 0;
+			const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
+			const toGenerate = Math.max(pageCount, LIST_PRERENDER_LIMIT);
+			const numbers = Array.from(Array(toGenerate).keys());
+			const base = LANGUAGES[k].base_url;
 
+			// TODO: Extract route generation
 			return numbers.map((x) => `/${base}/${sectionSegments}/page/${x + 1}`);
 		}),
 		pathSets = await Promise.all(pathSetPromises);
