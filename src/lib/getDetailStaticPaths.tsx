@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { LANGUAGES, DETAIL_PRERENDER_LIMIT } from '@lib/constants';
+import { DETAIL_PRERENDER_LIMIT, LANGUAGES } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 
 type Getter = (variables: { language: Language; first: number }) => any;
