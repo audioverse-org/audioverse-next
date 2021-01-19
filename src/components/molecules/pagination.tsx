@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { makePaginationRoute } from '@lib/routes';
+
 import styles from './pagination.module.scss';
 
 export function pagination(
@@ -41,7 +43,7 @@ const PaginationEntry = ({
 }): JSX.Element => (
 	<li className={`${className} ${styles.link}`}>
 		{Number.isInteger(page) ? (
-			<a href={`${base}/page/${page}`}>{label || page}</a>
+			<a href={makePaginationRoute(base, page)}>{label || page}</a>
 		) : (
 			label || page
 		)}

@@ -72,4 +72,13 @@ describe('sermon audio list page', () => {
 			'/en/sermons/audio.xml'
 		);
 	});
+
+	it('includes filter in pagination', async () => {
+		loadSermonListData();
+
+		const { getByText } = await renderPage();
+		const link = getByText('1') as HTMLAnchorElement;
+
+		expect(link.href).toContain('/en/sermons/audio/page/1');
+	});
 });

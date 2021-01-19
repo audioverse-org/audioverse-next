@@ -18,7 +18,18 @@ const withIntl = <P extends any>(
 		const { language, messages } = useTranslation();
 
 		return (
-			<IntlProvider messages={messages} locale={language} defaultLocale="en">
+			<IntlProvider
+				messages={messages}
+				locale={language}
+				defaultLocale="en"
+				onError={(err) => {
+					// TODO: Stop swallowing these errors
+					if (err.code === 'MISSING_TRANSLATION') {
+						return;
+					}
+					console.error(err);
+				}}
+			>
 				<Component {...(props as any)} />
 			</IntlProvider>
 		);

@@ -42,6 +42,7 @@ export async function getStaticProps({
 		props: {
 			...response.props,
 			rssPath: `/${language}/sermons/video.xml`,
+			filter: 'video',
 		},
 	};
 }

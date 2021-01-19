@@ -7,11 +7,13 @@ import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
-import { GetSermonQuery } from '@lib/generated/graphql';
+import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { makeSeriesRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './detail.module.scss';
 
-export type Sermon = NonNullable<GetSermonQuery['sermon']>;
+export type Sermon = NonNullable<GetSermonDetailDataQuery['sermon']>;
 
 export interface SermonDetailProps {
 	sermon: Sermon | null | undefined;
@@ -51,6 +53,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	// TODO: Figure out how to get rid of this type guard
 	if (!sermon) return null;
 
+	const langRoute = useLanguageRoute();
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const imageSrc = _.get(sermon, 'imageWithFallback.url');
 	const imageAlt = _.get(sermon, 'title');
@@ -69,6 +72,8 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 		}
 	);
 
+	const copyrightOwner =
+		sermon?.distributionAgreement?.sponsor?.title || sermon?.sponsor?.title;
 	return (
 		<>
 			<div className={styles.meta}>
@@ -182,6 +187,35 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					<p>{recordingDateString}</p>
 				</>
 			) : null}
+			{sermon?.sequence && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__seriesTitle"
+							defaultMessage="Series"
+							description="Sermon detail series title"
+						/>
+					</h2>
+					<a href={makeSeriesRoute(langRoute, sermon?.sequence?.id)}>
+						{sermon?.sequence?.title}
+					</a>
+				</>
+			)}
+			<p>
+				<span>
+					<FormattedMessage
+						id={'sermonDetailPage__copyright'}
+						defaultMessage={'Copyright ⓒ{year} {owner}'}
+						description={'Copyright year and owner'}
+						values={{
+							year: sermon?.copyrightYear,
+							owner: copyrightOwner,
+						}}
+					/>
+				</span>
+				<br />
+				<span>{sermon?.distributionAgreement?.license?.summary}</span>
+			</p>
 		</>
 	);
 }

@@ -29,6 +29,7 @@ export async function getStaticProps({
 		base_url,
 		parseInt(i),
 		async (language: Language, { offset, first }) => {
+			// TODO: Refactor to eliminate this wrapper
 			const result = await getSermonListStaticProps({
 				language,
 				offset,
@@ -69,6 +70,7 @@ export async function getStaticProps({
 		props: {
 			...response.props,
 			rssPath: `/${base_url}/sermons/all.xml`,
+			filter: 'all',
 		},
 	};
 }

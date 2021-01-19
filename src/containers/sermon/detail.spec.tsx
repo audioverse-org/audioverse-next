@@ -28,7 +28,6 @@ function loadSermonDetailPathsData() {
 	});
 }
 
-// TODO: Rename getSermon graphql query to getSermonDetailData
 function loadSermonDetailData(sermon: any = undefined): void {
 	sermon = sermon || {
 		id: '1',
@@ -38,7 +37,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		videoFiles: [],
 	};
 
-	jest.spyOn(graphql, 'getSermon').mockResolvedValue({ sermon });
+	jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
 }
 
 async function renderPage() {
@@ -47,7 +46,9 @@ async function renderPage() {
 }
 
 describe('sermon detail page', () => {
-	beforeEach(() => loadRouter({ isFallback: false }));
+	beforeEach(() => {
+		loadRouter({ isFallback: false });
+	});
 
 	it('gets sermons', async () => {
 		loadSermonDetailPathsData();
@@ -92,7 +93,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
+		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
@@ -100,7 +101,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		jest.spyOn(graphql, 'getSermon').mockRejectedValue('Oops!');
+		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -460,5 +461,100 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('March 1, 2003, 9:30 AM')).toBeInTheDocument();
+	});
+
+	it('includes series title', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('series_title')).toBeInTheDocument();
+	});
+
+	it('does not include series heading if no series', async () => {
+		loadSermonDetailData();
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Series')).not.toBeInTheDocument();
+	});
+
+	it('links series title', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('series_title') as HTMLLinkElement;
+
+		expect(link.href).toContain('/en/series/series_id');
+	});
+
+	it('uses language base route in series link', async () => {
+		loadRouter({ query: { language: 'es' } });
+
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('series_title') as HTMLLinkElement;
+
+		expect(link.href).toContain('/es/series/series_id');
+	});
+
+	it('shows copyright', async () => {
+		loadSermonDetailData({
+			copyrightYear: 1999,
+			distributionAgreement: {
+				sponsor: {
+					title: 'the_sponsor',
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor'));
+	});
+
+	it('falls back to top-level sponsor', async () => {
+		loadSermonDetailData({
+			copyrightYear: 1999,
+			sponsor: {
+				title: 'the_sponsor',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor')).toBeInTheDocument();
+	});
+
+	it('displays license summary', async () => {
+		loadSermonDetailData({
+			distributionAgreement: {
+				license: {
+					summary: 'the_license_summary',
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_license_summary')).toBeInTheDocument();
 	});
 });

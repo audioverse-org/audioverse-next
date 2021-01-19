@@ -1,8 +1,0 @@
-query getSermonDetailStaticPaths($language: Language!, $first: Int) {
-    sermons(language: $language, first: $first) {
-        nodes {
-            id
-            recordingDate
-        }
-    }
-}
