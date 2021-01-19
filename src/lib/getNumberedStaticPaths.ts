@@ -15,7 +15,7 @@ export async function makeNumberedPaths(
 	const pathSetPromises = keys.map(async (k) => {
 			const entryCount = (await getCount(k)) || 0;
 			const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
-			const toGenerate = Math.max(pageCount, LIST_PRERENDER_LIMIT);
+			const toGenerate = Math.min(pageCount, LIST_PRERENDER_LIMIT);
 			const numbers = Array.from(Array(toGenerate).keys());
 			const base = LANGUAGES[k].base_url;
 
