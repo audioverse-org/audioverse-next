@@ -17,6 +17,8 @@ const withIntl = <P extends any>(
 	function WithIntl(props: P) {
 		const { language, messages } = useTranslation();
 
+		console.log({ messages });
+
 		return (
 			<IntlProvider
 				messages={messages}
