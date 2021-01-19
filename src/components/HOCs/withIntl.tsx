@@ -24,13 +24,13 @@ const withIntl = <P extends any>(
 				messages={messages}
 				locale={language}
 				defaultLocale="en"
-				onError={(err) => {
-					// TODO: Stop swallowing these errors
-					if (err.code === 'MISSING_TRANSLATION') {
-						return;
-					}
-					console.error(err);
-				}}
+				// onError={(err) => {
+				// 	// TODO: Stop swallowing these errors
+				// 	if (err.code === 'MISSING_TRANSLATION') {
+				// 		return;
+				// 	}
+				// 	console.error(err);
+				// }}
 			>
 				<Component {...(props as any)} />
 			</IntlProvider>
