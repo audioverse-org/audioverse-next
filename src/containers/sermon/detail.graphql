@@ -51,6 +51,9 @@ query getSermonDetailData($id: ID!) {
             }
             license {
                 summary
+                image {
+                    url(size:100)
+                }
             }
         }
     }

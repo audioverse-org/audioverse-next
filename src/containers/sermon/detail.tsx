@@ -71,9 +71,10 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 			year: 'numeric',
 		}
 	);
-
 	const copyrightOwner =
 		sermon?.distributionAgreement?.sponsor?.title || sermon?.sponsor?.title;
+	const copyrightImageUrl = sermon?.distributionAgreement?.license?.image?.url;
+
 	return (
 		<>
 			<div className={styles.meta}>
@@ -201,6 +202,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</a>
 				</>
 			)}
+			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
 			<p>
 				<span>
 					<FormattedMessage

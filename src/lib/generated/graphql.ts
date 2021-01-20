@@ -4456,6 +4456,10 @@ export type GetSermonDetailDataQuery = (
       )>, license?: Maybe<(
         { __typename?: 'License' }
         & Pick<License, 'summary'>
+        & { image?: Maybe<(
+          { __typename?: 'Image' }
+          & Pick<Image, 'url'>
+        )> }
       )> }
     )> }
   )> }
@@ -4755,6 +4759,9 @@ export const GetSermonDetailDataDocument = `
       }
       license {
         summary
+        image {
+          url(size: 100)
+        }
       }
     }
   }

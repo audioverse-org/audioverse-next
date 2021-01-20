@@ -2,8 +2,8 @@ import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import videojs from 'video.js';
 
-import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
 import * as graphql from '@lib/generated/graphql';
+import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
 import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
@@ -556,5 +556,31 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_license_summary')).toBeInTheDocument();
+	});
+
+	it('displays copyright image', async () => {
+		loadSermonDetailData({
+			distributionAgreement: {
+				license: {
+					image: {
+						url: 'the_license_image_url',
+					},
+				},
+			},
+		});
+
+		const { getByAltText } = await renderPage();
+
+		const image = getByAltText('copyright') as HTMLImageElement;
+
+		expect(image.src).toContain('the_license_image_url');
+	});
+
+	it('does not display missing copyright image', async () => {
+		loadSermonDetailData();
+
+		const { queryByAltText } = await renderPage();
+
+		expect(queryByAltText('copyright')).toBeNull();
 	});
 });
