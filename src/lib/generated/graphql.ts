@@ -4433,6 +4433,9 @@ export type GetSermonDetailDataQuery = (
     )>, videoDownloads: Array<(
       { __typename?: 'VideoFile' }
       & Pick<VideoFile, 'id' | 'url' | 'filesize'>
+    )>, audioDownloads: Array<(
+      { __typename?: 'AudioFile' }
+      & Pick<AudioFile, 'id' | 'url' | 'filesize'>
     )>, imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
@@ -4732,6 +4735,11 @@ export const GetSermonDetailDataDocument = `
       mimeType
     }
     videoDownloads: videoFiles(allowedContainers: MP4) {
+      id
+      url
+      filesize
+    }
+    audioDownloads: audioFiles(allowedContainers: MP3) {
       id
       url
       filesize

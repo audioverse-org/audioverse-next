@@ -61,7 +61,11 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const sources = getSources(sermon, prefersAudio);
 	const speakers = sermon?.persons || [];
 	const tags = sermon?.recordingTags?.nodes || [];
-	const { sponsor = { title: '', location: '' } } = sermon;
+	const {
+		sponsor = { title: '', location: '' },
+		videoDownloads = [],
+		audioDownloads = [],
+	} = sermon;
 	const recordingDateString = new Date(sermon.recordingDate).toLocaleString(
 		[],
 		{
@@ -75,7 +79,9 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const copyrightOwner =
 		sermon?.distributionAgreement?.sponsor?.title || sermon?.sponsor?.title;
 	const copyrightImageUrl = sermon?.distributionAgreement?.license?.image?.url;
-
+	const hasVideoDownloads = videoDownloads.length > 0;
+	const hasAudioDownloads = audioDownloads.length > 0;
+	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
 	return (
 		<>
 			<div className={styles.meta}>
@@ -203,7 +209,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					</a>
 				</>
 			)}
-			{sermon?.videoDownloads?.length > 0 && (
+			{hasDownloads && (
 				<>
 					<h2>
 						<FormattedMessage
@@ -212,13 +218,42 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 							description="Sermon detail downloads title"
 						/>
 					</h2>
-					<ul>
-						{sermon?.videoDownloads.map((vid) => (
-							<li key={vid.id}>
-								<a href={vid.url}>{readableBytes(vid.filesize)}</a>
-							</li>
-						))}
-					</ul>
+					{hasAudioDownloads && (
+						<>
+							<h3>
+								<FormattedMessage
+									id="sermonDetailPage__downloadsAudioTitle"
+									defaultMessage="Audio Files"
+									description="Sermon detail audio downloads title"
+								/>
+							</h3>
+							<ul>
+								{audioDownloads.map((file) => (
+									<li key={file.id}>
+										<a href={file.url}>{readableBytes(file.filesize)}</a>
+									</li>
+								))}
+							</ul>
+						</>
+					)}
+					{hasVideoDownloads && (
+						<>
+							<h3>
+								<FormattedMessage
+									id="sermonDetailPage__downloadsVideoTitle"
+									defaultMessage="Video Files"
+									description="Sermon detail video downloads title"
+								/>
+							</h3>
+							<ul>
+								{videoDownloads.map((file) => (
+									<li key={file.id}>
+										<a href={file.url}>{readableBytes(file.filesize)}</a>
+									</li>
+								))}
+							</ul>
+						</>
+					)}
 				</>
 			)}
 			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}

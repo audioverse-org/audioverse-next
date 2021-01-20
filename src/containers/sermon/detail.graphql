@@ -25,6 +25,11 @@ query getSermonDetailData($id: ID!) {
             url
             filesize
         }
+        audioDownloads: audioFiles(allowedContainers: MP3) {
+            id
+            url
+            filesize
+        }
         description
         imageWithFallback {
             url(size: 50)

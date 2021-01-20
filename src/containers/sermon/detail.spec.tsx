@@ -612,4 +612,54 @@ describe('sermon detail page', () => {
 
 		expect(queryByText('Downloads')).not.toBeInTheDocument();
 	});
+
+	it('links audio downloads', async () => {
+		loadSermonDetailData({
+			audioDownloads: [
+				{
+					id: 'the_audio_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('1 GB') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_url');
+	});
+
+	it('does not show audio downloads if none to show', async () => {
+		loadSermonDetailData({
+			videoDownloads: [
+				{
+					id: 'the_video_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Audio Files')).not.toBeInTheDocument();
+	});
+
+	it('does not show video downloads if none to show', async () => {
+		loadSermonDetailData({
+			audioDownloads: [
+				{
+					id: 'the_audio_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Video Files')).not.toBeInTheDocument();
+	});
 });
