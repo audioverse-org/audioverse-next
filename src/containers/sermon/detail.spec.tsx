@@ -581,6 +581,6 @@ describe('sermon detail page', () => {
 
 		const { queryByAltText } = await renderPage();
 
-		expect(queryByAltText('copyright')).toBeNull();
+		expect(queryByAltText('copyright')).not.toBeInTheDocument();
 	});
 });
