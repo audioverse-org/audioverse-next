@@ -583,4 +583,33 @@ describe('sermon detail page', () => {
 
 		expect(queryByAltText('copyright')).not.toBeInTheDocument();
 	});
+
+	it('links video downloads', async () => {
+		loadSermonDetailData({
+			videoDownloads: [
+				{
+					id: 'the_video_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('1 GB') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_url');
+	});
+
+	it('does not display downloads if no downloads', async () => {
+		loadSermonDetailData({
+			videoDownloads: [],
+			audioDownloads: [],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Downloads')).not.toBeInTheDocument();
+	});
 });

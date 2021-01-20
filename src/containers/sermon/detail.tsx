@@ -8,6 +8,7 @@ import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { readableBytes } from '@lib/readableBytes';
 import { makeSeriesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -200,6 +201,24 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 					<a href={makeSeriesRoute(langRoute, sermon?.sequence?.id)}>
 						{sermon?.sequence?.title}
 					</a>
+				</>
+			)}
+			{sermon?.videoDownloads?.length > 0 && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__downloadsTitle"
+							defaultMessage="Downloads"
+							description="Sermon detail downloads title"
+						/>
+					</h2>
+					<ul>
+						{sermon?.videoDownloads.map((vid) => (
+							<li key={vid.id}>
+								<a href={vid.url}>{readableBytes(vid.filesize)}</a>
+							</li>
+						))}
+					</ul>
 				</>
 			)}
 			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}

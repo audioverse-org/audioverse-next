@@ -4423,13 +4423,16 @@ export type GetSermonDetailDataQuery = (
       & SpeakerNameFragment
     )>, audioFiles: Array<(
       { __typename?: 'AudioFile' }
-      & Pick<AudioFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+      & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
     )>, videoFiles: Array<(
       { __typename?: 'VideoFile' }
-      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+      & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
     )>, videoStreams: Array<(
       { __typename?: 'VideoFile' }
-      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
+      & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+    )>, videoDownloads: Array<(
+      { __typename?: 'VideoFile' }
+      & Pick<VideoFile, 'id' | 'url' | 'filesize'>
     )>, imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
@@ -4715,21 +4718,23 @@ export const GetSermonDetailDataDocument = `
     }
     audioFiles {
       url
-      duration
       filesize
       mimeType
     }
     videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
       url
-      duration
       filesize
       mimeType
     }
     videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
       url
-      duration
       filesize
       mimeType
+    }
+    videoDownloads: videoFiles(allowedContainers: MP4) {
+      id
+      url
+      filesize
     }
     description
     imageWithFallback {
