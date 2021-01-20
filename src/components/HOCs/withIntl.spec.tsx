@@ -16,12 +16,12 @@ import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
 import { Person } from '@lib/generated/graphql';
+import { readableBytes } from '@lib/readableBytes';
 import {
 	makePlaylistButtonData,
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import { readableBytes } from '@lib/readableBytes';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
