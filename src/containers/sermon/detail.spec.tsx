@@ -1,9 +1,13 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
 import videojs from 'video.js';
 
-import * as graphql from '@lib/generated/graphql';
-import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
+import {
+	GetSermonDetailDataDocument,
+	getSermonDetailStaticPaths,
+	GetSermonDetailStaticPathsDocument,
+} from '@lib/generated/graphql';
 import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
@@ -16,16 +20,20 @@ jest.mock('@lib/api/fetchApi');
 
 // TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
 function loadSermonDetailPathsData() {
-	jest.spyOn(graphql, 'getSermonDetailStaticPaths').mockResolvedValue({
-		sermons: {
-			nodes: [
-				{
-					id: 'sermon_id',
-					recordingDate: '2020-06-01T09:30:00.000Z',
-				},
-			],
-		},
-	});
+	// jest.spyOn(graphql, 'getSermonDetailStaticPaths')
+
+	when(mockedFetchApi)
+		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
+		.mockResolvedValue({
+			sermons: {
+				nodes: [
+					{
+						id: 'sermon_id',
+						recordingDate: '2020-06-01T09:30:00.000Z',
+					},
+				],
+			},
+		});
 }
 
 function loadSermonDetailData(sermon: any = undefined): void {
@@ -37,7 +45,10 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		videoFiles: [],
 	};
 
-	jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
+	// jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
+	when(mockedFetchApi)
+		.calledWith(GetSermonDetailDataDocument, expect.anything())
+		.mockResolvedValue({ sermon });
 }
 
 async function renderPage() {
@@ -56,10 +67,15 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermonDetailStaticPaths).toBeCalledWith({
-				language: 'ENGLISH',
-				first: 1000,
-			})
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailStaticPathsDocument,
+				{
+					variables: {
+						language: 'ENGLISH',
+						first: 1000,
+					},
+				}
+			)
 		);
 	});
 
@@ -69,10 +85,15 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermonDetailStaticPaths).toBeCalledWith({
-				language: 'SPANISH',
-				first: 1000,
-			})
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailStaticPathsDocument,
+				{
+					variables: {
+						language: 'SPANISH',
+						first: 1000,
+					},
+				}
+			)
 		);
 	});
 
@@ -93,7 +114,9 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
+		when(mockedFetchApi)
+			.calledWith(GetSermonDetailDataDocument, expect.anything())
+			.mockRejectedValue('Oops!');
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
@@ -101,7 +124,9 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
+		when(mockedFetchApi)
+			.calledWith(GetSermonDetailDataDocument, expect.anything())
+			.mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -661,5 +686,30 @@ describe('sermon detail page', () => {
 		const { queryByText } = await renderPage();
 
 		expect(queryByText('Video Files')).not.toBeInTheDocument();
+	});
+
+	it('displays recordings in series', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		await waitFor(() =>
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailDataDocument,
+				expect.anything()
+			)
+		);
+
+		expect(getByText('sibling_title')).toBeInTheDocument();
 	});
 });

@@ -1,5 +1,8 @@
 import { IncomingMessage } from 'http';
 
+import { parse } from 'graphql';
+import { print } from 'graphql/language/printer';
+
 import getCookies from '@lib/getCookies';
 
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
@@ -10,16 +13,50 @@ export function storeRequest(request: IncomingMessage): void {
 	_request = request;
 }
 
+const removeDuplicateFragments = (query: string): string => {
+	const ast = parse(query);
+
+	const seen: string[] = [];
+	const newDefinitions: any[] = [];
+
+	ast.definitions.forEach((def) => {
+		if (def.kind !== 'FragmentDefinition') {
+			newDefinitions.push(def);
+			return;
+		}
+
+		const id = `${def.name.value}-${def.typeCondition.name.value}`;
+
+		if (!seen.includes(id)) {
+			seen.push(id);
+			newDefinitions.push(def);
+		}
+	});
+
+	const newAst = {
+		...ast,
+		definitions: newDefinitions,
+	};
+
+	return print(newAst);
+};
+
 export async function fetchApi(
 	query: string,
 	{ variables = {} } = {}
 ): Promise<any> {
 	const cookies = getCookies(_request);
 
-	const headers = {
+	query = removeDuplicateFragments(query);
+
+	// TODO: Improve type
+	const headers: any = {
 		'Content-Type': 'application/json',
-		'x-av-session': cookies?.avSession,
 	};
+
+	if (cookies?.avSession) {
+		headers['x-av-session'] = cookies?.avSession;
+	}
 
 	const res = await fetch(API_URL, {
 		method: 'POST',

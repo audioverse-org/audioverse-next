@@ -43,11 +43,13 @@ export default function RecordingListEntry({
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p) => (
-						<li key={p.id}>
-							<SpeakerName person={p} />
-						</li>
-					))}
+					{persons.map(
+						(p): JSX.Element => (
+							<li key={p.id}>
+								<SpeakerName person={p} />
+							</li>
+						)
+					)}
 				</ul>
 			</td>
 			<td className={styles.duration}>{formatDuration(sermon.duration)}</td>
