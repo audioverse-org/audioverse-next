@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import { GetTagDetailPageDataQuery } from '@lib/generated/graphql';
@@ -35,4 +36,6 @@ function TagDetail({ pagination, nodes }: TagDetailProps): JSX.Element {
 	);
 }
 
-export default TagDetail;
+const should404 = (props: TagDetailProps) => !props.nodes?.length;
+
+export default withFailStates(TagDetail, should404);

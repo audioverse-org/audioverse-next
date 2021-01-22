@@ -320,7 +320,7 @@ describe('sermons list page', () => {
 
 		const calls = (feed.Feed as any).mock.calls;
 
-		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings: English');
+		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings (English)');
 	});
 
 	it('translates feed titles', async () => {
@@ -332,7 +332,7 @@ describe('sermons list page', () => {
 		const calls = (feed.Feed as any).mock.calls;
 
 		expect(calls[0][0].title).toEqual(
-			'Grabaciones Recientes de AudioVerse: Español'
+			'Grabaciones Recientes de AudioVerse (Español)'
 		);
 	});
 

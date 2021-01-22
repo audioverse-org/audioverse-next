@@ -12,6 +12,7 @@ query getTagDetailPageData(
     ) {
         nodes {
             ...recordingList
+            ...createFeed
         }
         aggregate {
             count

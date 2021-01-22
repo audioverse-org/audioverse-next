@@ -1,12 +1,201 @@
 {
+  "RecordingFavorite__favorite": {
+    "col": 8,
+    "defaultMessage": "Favorite",
+    "description": "Recording favorite button label",
+    "end": 677,
+    "file": "src/components/molecules/favorite.tsx",
+    "line": 17,
+    "start": 528
+  },
+  "RecordingFavorite__unfavorite": {
+    "col": 28,
+    "defaultMessage": "Unfavorite",
+    "description": "Recording unfavorite button label",
+    "end": 519,
+    "file": "src/components/molecules/favorite.tsx",
+    "line": 11,
+    "start": 364
+  },
   "feed-title": {
     "col": 34,
-    "defaultMessage": "AudioVerse Recent Recordings: {lang}",
+    "defaultMessage": "AudioVerse Recent Recordings ({lang})",
     "description": "All sermons feed title",
-    "end": 1199,
+    "end": 1126,
     "file": "src/pages/[language]/sermons/all/page/[i].tsx",
-    "line": 42,
-    "start": 1069
+    "line": 35,
+    "start": 996
+  },
+  "player__noSources": {
+    "col": 3,
+    "defaultMessage": "No media sources provided.",
+    "description": "Player 'No media sources' error",
+    "end": 1743,
+    "file": "src/components/molecules/player.tsx",
+    "line": 49,
+    "start": 1595
+  },
+  "playlistButton__createButton": {
+    "col": 7,
+    "defaultMessage": "Create",
+    "description": "PlaylistButton create button label",
+    "end": 3402,
+    "file": "src/components/molecules/playlistButton.tsx",
+    "line": 131,
+    "start": 3244
+  },
+  "playlistButton__publicToggle": {
+    "col": 7,
+    "defaultMessage": "Public",
+    "description": "PlaylistButton public toggle label",
+    "end": 2983,
+    "file": "src/components/molecules/playlistButton.tsx",
+    "line": 115,
+    "start": 2825
+  },
+  "playlistButton__trigger": {
+    "col": 4,
+    "defaultMessage": "Add to Playlist",
+    "description": "PlaylistButton button text",
+    "end": 2297,
+    "file": "src/components/molecules/playlistButton.tsx",
+    "line": 88,
+    "start": 2155
+  },
+  "playlistButton__unauthenticated": {
+    "col": 9,
+    "defaultMessage": "You must be logged in to perform this action",
+    "description": "PlaylistButton not authenticated error",
+    "end": 3638,
+    "file": "src/components/molecules/playlistButton.tsx",
+    "line": 138,
+    "start": 3437
+  },
+  "sermonDetailPage__descriptionTitle": {
+    "col": 6,
+    "defaultMessage": "Description",
+    "description": "Sermon detail description title",
+    "end": 3837,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 124,
+    "start": 3675
+  },
+  "sermonDetailPage__donationCta": {
+    "col": 6,
+    "defaultMessage": "Give Now!",
+    "description": "Sermon detail page donation CTA",
+    "end": 3594,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 113,
+    "start": 3439
+  },
+  "sermonDetailPage__donationMessage": {
+    "col": 5,
+    "defaultMessage": "Just a $10 donation will help us reach 300 more people!",
+    "description": "Sermon detail page donation message",
+    "end": 3385,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 106,
+    "start": 3180
+  },
+  "sermonDetailPage__downloadsAudioTitle": {
+    "col": 8,
+    "defaultMessage": "Audio Files",
+    "description": "Sermon detail audio downloads title",
+    "end": 6090,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 219,
+    "start": 5913
+  },
+  "sermonDetailPage__downloadsTitle": {
+    "col": 6,
+    "defaultMessage": "Downloads",
+    "description": "Sermon detail downloads title",
+    "end": 5843,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 210,
+    "start": 5687
+  },
+  "sermonDetailPage__downloadsVideoTitle": {
+    "col": 8,
+    "defaultMessage": "Video Files",
+    "description": "Sermon detail video downloads title",
+    "end": 6541,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 237,
+    "start": 6364
+  },
+  "sermonDetailPage__presenterInfoTitle": {
+    "col": 4,
+    "defaultMessage": "Presenters",
+    "description": "Sermon detail presenter info title",
+    "end": 4909,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 168,
+    "start": 4751
+  },
+  "sermonDetailPage__recordedTitle": {
+    "col": 6,
+    "defaultMessage": "Recorded",
+    "description": "Sermon detail recorded date title",
+    "end": 5246,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 184,
+    "start": 5088
+  },
+  "sermonDetailPage__seriesTitle": {
+    "col": 6,
+    "defaultMessage": "Series",
+    "description": "Sermon detail series title",
+    "end": 5509,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 196,
+    "start": 5362
+  },
+  "sermonDetailPage__sponsorInfoTitle": {
+    "col": 4,
+    "defaultMessage": "Sponsor",
+    "description": "Sermon detail sponsor info title",
+    "end": 4511,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 154,
+    "start": 4360
+  },
+  "sermonDetailPage__tagsTitle": {
+    "col": 6,
+    "defaultMessage": "Tags",
+    "description": "Sermon detail tags title",
+    "end": 4122,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 136,
+    "start": 3981
+  },
+  "speakerName__favorite": {
+    "col": 10,
+    "defaultMessage": "Favorite",
+    "description": "SpeakerName Favorite button label",
+    "end": 2394,
+    "file": "src/components/molecules/speakerName.tsx",
+    "line": 90,
+    "start": 2239
+  },
+  "speakerName__unauthenticated": {
+    "col": 27,
+    "defaultMessage": "You must be logged in to do this",
+    "description": "SpeakerName unauthenticated error",
+    "end": 1965,
+    "file": "src/components/molecules/speakerName.tsx",
+    "line": 73,
+    "start": 1789
+  },
+  "speakerName__unfavorite": {
+    "col": 27,
+    "defaultMessage": "Unfavorite",
+    "description": "SpeakerName Unfavorite button label",
+    "end": 2228,
+    "file": "src/components/molecules/speakerName.tsx",
+    "line": 84,
+    "start": 2067
   },
   "title": {
     "col": 3,

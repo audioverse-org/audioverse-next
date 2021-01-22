@@ -1,15 +1,25 @@
+import fs from 'fs';
+
+import * as feed from 'feed';
 import { when } from 'jest-when';
 
-import { ENTRIES_PER_PAGE } from '@lib/constants';
+import { ENTRIES_PER_PAGE, PROJECT_ROOT } from '@lib/constants';
 import {
 	GetTagDetailPageDataDocument,
 	GetTagDetailPathsQueryDocument,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import {
+	loadRouter,
+	mockedFetchApi,
+	mockFeed,
+	renderWithIntl,
+} from '@lib/test/helpers';
 import TagDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/tags/[slug]/page/[i]';
+
+jest.mock('fs');
 
 async function renderPage(parameters = {}) {
 	const params = { slug: 'the_tag', language: 'en', i: '1', ...parameters };
@@ -19,6 +29,20 @@ async function renderPage(parameters = {}) {
 	const { props } = await getStaticProps({ params });
 
 	return renderWithIntl(TagDetail, props);
+}
+
+function loadPageData() {
+	when(mockedFetchApi)
+		.calledWith(GetTagDetailPageDataDocument, expect.anything())
+		.mockResolvedValue({
+			recordings: {
+				nodes: [
+					{
+						title: 'the_recording_title',
+					},
+				],
+			},
+		});
 }
 
 describe('tag detail page', () => {
@@ -53,12 +77,16 @@ describe('tag detail page', () => {
 	});
 
 	it('displays pagination', async () => {
+		loadPageData();
+
 		const { getByText } = await renderPage();
 
 		expect(getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination', async () => {
+		loadPageData();
+
 		const { getByText } = await renderPage();
 
 		const link = getByText('1') as HTMLLinkElement;
@@ -67,17 +95,7 @@ describe('tag detail page', () => {
 	});
 
 	it('displays recordings', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetTagDetailPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				recordings: {
-					nodes: [
-						{
-							title: 'the_recording_title',
-						},
-					],
-				},
-			});
+		loadPageData();
 
 		const { getByText } = await renderPage();
 
@@ -131,6 +149,26 @@ describe('tag detail page', () => {
 				offset: 0,
 			},
 		});
+	});
+
+	it('creates feed', async () => {
+		await renderPage();
+
+		const { calls } = (fs.writeFileSync as any).mock;
+
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/tags/the_tag.xml`);
+	});
+
+	it('sets feed title', async () => {
+		mockFeed();
+
+		await renderPage({ slug: 'my%20%3A%20tag' });
+
+		const calls = (feed.Feed as any).mock.calls;
+
+		expect(calls[0][0].title).toEqual(
+			'AudioVerse Recordings Tagged my : tag (English)'
+		);
 	});
 
 	// generates RSS feed

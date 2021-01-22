@@ -1,12 +1,142 @@
 {
+  "RecordingFavorite__favorite": [
+    {
+      "type": 0,
+      "value": "Favorite"
+    }
+  ],
+  "RecordingFavorite__unfavorite": [
+    {
+      "type": 0,
+      "value": "Unfavorite"
+    }
+  ],
   "feed-title": [
     {
       "type": 0,
-      "value": "AudioVerse Recent Recordings: "
+      "value": "AudioVerse Recent Recordings ("
     },
     {
       "type": 1,
       "value": "lang"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "player__noSources": [
+    {
+      "type": 0,
+      "value": "No media sources provided."
+    }
+  ],
+  "playlistButton__createButton": [
+    {
+      "type": 0,
+      "value": "Create"
+    }
+  ],
+  "playlistButton__publicToggle": [
+    {
+      "type": 0,
+      "value": "Public"
+    }
+  ],
+  "playlistButton__trigger": [
+    {
+      "type": 0,
+      "value": "Add to Playlist"
+    }
+  ],
+  "playlistButton__unauthenticated": [
+    {
+      "type": 0,
+      "value": "You must be logged in to perform this action"
+    }
+  ],
+  "sermonDetailPage__descriptionTitle": [
+    {
+      "type": 0,
+      "value": "Description"
+    }
+  ],
+  "sermonDetailPage__donationCta": [
+    {
+      "type": 0,
+      "value": "Give Now!"
+    }
+  ],
+  "sermonDetailPage__donationMessage": [
+    {
+      "type": 0,
+      "value": "Just a $10 donation will help us reach 300 more people!"
+    }
+  ],
+  "sermonDetailPage__downloadsAudioTitle": [
+    {
+      "type": 0,
+      "value": "Audio Files"
+    }
+  ],
+  "sermonDetailPage__downloadsTitle": [
+    {
+      "type": 0,
+      "value": "Downloads"
+    }
+  ],
+  "sermonDetailPage__downloadsVideoTitle": [
+    {
+      "type": 0,
+      "value": "Video Files"
+    }
+  ],
+  "sermonDetailPage__presenterInfoTitle": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "sermonDetailPage__recordedTitle": [
+    {
+      "type": 0,
+      "value": "Recorded"
+    }
+  ],
+  "sermonDetailPage__seriesTitle": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "sermonDetailPage__sponsorInfoTitle": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
+  "sermonDetailPage__tagsTitle": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "speakerName__favorite": [
+    {
+      "type": 0,
+      "value": "Favorite"
+    }
+  ],
+  "speakerName__unauthenticated": [
+    {
+      "type": 0,
+      "value": "You must be logged in to do this"
+    }
+  ],
+  "speakerName__unfavorite": [
+    {
+      "type": 0,
+      "value": "Unfavorite"
     }
   ],
   "title": [

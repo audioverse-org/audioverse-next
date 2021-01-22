@@ -4541,6 +4541,7 @@ export type GetTagDetailPageDataQuery = (
     & { nodes?: Maybe<Array<(
       { __typename?: 'Recording' }
       & RecordingListFragment
+      & CreateFeedFragment
     )>>, aggregate?: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
@@ -4600,6 +4601,18 @@ export type AddPlaylistMutation = (
     { __typename?: 'UserPlaylist' }
     & Pick<UserPlaylist, 'id'>
   ) }
+);
+
+export type CreateFeedFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title' | 'description' | 'canonicalUrl' | 'recordingDate'>
+  & { audioFiles: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize'>
+  )>, videoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize'>
+  )> }
 );
 
 export const SpeakerNameFragmentDoc = `
@@ -4700,6 +4713,22 @@ export const RecordingFragmentDoc = `
   }
 }
     ${SpeakerNameFragmentDoc}`;
+export const CreateFeedFragmentDoc = `
+    fragment createFeed on Recording {
+  title
+  description
+  canonicalUrl
+  recordingDate
+  audioFiles {
+    url
+    filesize
+  }
+  videoFiles {
+    url
+    filesize
+  }
+}
+    `;
 export const GetPlaylistButtonDataDocument = `
     query getPlaylistButtonData($language: Language!, $recordingId: ID!) {
   me {
@@ -4922,13 +4951,15 @@ export const GetTagDetailPageDataDocument = `
   ) {
     nodes {
       ...recordingList
+      ...createFeed
     }
     aggregate {
       count
     }
   }
 }
-    ${RecordingListFragmentDoc}`;
+    ${RecordingListFragmentDoc}
+${CreateFeedFragmentDoc}`;
 export const useGetTagDetailPageDataQuery = <
       TData = GetTagDetailPageDataQuery,
       TError = unknown
@@ -5101,3 +5132,4 @@ export async function getTestimonies(
   return fetchApi(GetTestimoniesDocument, { variables });
 }
 				
+

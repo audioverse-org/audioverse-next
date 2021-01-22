@@ -61,7 +61,6 @@ export async function getStaticProps({
 		base_url,
 		i,
 		async ({ language, offset, first }) => {
-			// TODO: Refactor to eliminate this wrapper
 			const result = await getSermonListStaticProps({
 				language,
 				offset,
