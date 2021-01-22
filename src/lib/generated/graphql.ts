@@ -4526,6 +4526,28 @@ export type GetSermonListStaticPropsQuery = (
   ) }
 );
 
+export type GetTagDetailPageDataQueryVariables = Exact<{
+  language: Language;
+  tagName?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetTagDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { recordings: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingListFragment
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetTestimoniesQueryVariables = Exact<{
   language: Language;
   offset?: Maybe<Scalars['Int']>;
@@ -4874,6 +4896,35 @@ export const useGetSermonListStaticPropsQuery = <
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
       options
     );
+export const GetTagDetailPageDataDocument = `
+    query getTagDetailPageData($language: Language!, $tagName: String, $first: Int, $offset: Int) {
+  recordings(
+    language: $language
+    tagName: $tagName
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      ...recordingList
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${RecordingListFragmentDoc}`;
+export const useGetTagDetailPageDataQuery = <
+      TData = GetTagDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetTagDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetTagDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetTagDetailPageDataQuery, TError, TData>(
+      ['getTagDetailPageData', variables],
+      graphqlFetcher<GetTagDetailPageDataQuery, GetTagDetailPageDataQueryVariables>(GetTagDetailPageDataDocument, variables),
+      options
+    );
 export const GetTestimoniesDocument = `
     query getTestimonies($language: Language!, $offset: Int, $first: Int) {
   testimonies(
@@ -4989,6 +5040,13 @@ export async function getSermonListStaticProps(
   variables: GetSermonListStaticPropsQueryVariables
 ): Promise<GetSermonListStaticPropsQuery> {
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
+}
+				
+
+export async function getTagDetailPageData(
+  variables: GetTagDetailPageDataQueryVariables
+): Promise<GetTagDetailPageDataQuery> {
+  return fetchApi(GetTagDetailPageDataDocument, { variables });
 }
 				
 

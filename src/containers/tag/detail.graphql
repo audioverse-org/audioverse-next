@@ -1,0 +1,20 @@
+query getTagDetailPageData(
+    $language: Language!,
+    $tagName: String,
+    $first: Int,
+    $offset: Int
+) {
+    recordings(
+        language: $language
+        tagName: $tagName
+        first: $first
+        offset: $offset
+    ) {
+        nodes {
+            ...recordingList
+        }
+        aggregate {
+            count
+        }
+    }
+}

@@ -37,3 +37,8 @@ export const makeSermonListBaseRoute = (
 	languageRoute: string,
 	filter: string
 ): string => `/${languageRoute}/sermons/${filter}`;
+
+export const makeTagDetailBaseRoute = (
+	languageRoute: string,
+	tagSlug: string
+): string => `/${languageRoute}/tags/${tagSlug}`;

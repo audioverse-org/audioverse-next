@@ -19,7 +19,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	return (
 		<>
 			<Recording sermon={sermon} />
-			{seriesItems && <RecordingList sermons={seriesItems} />}
+			{seriesItems && <RecordingList recordings={seriesItems} />}
 		</>
 	);
 }

@@ -454,4 +454,12 @@ describe('sermons list page', () => {
 
 		expect(getByText('the_summary')).toBeInTheDocument();
 	});
+
+	it('skips feed creation if invalid language', async () => {
+		loadSermonListData();
+
+		await renderPage({ params: { i: '1', language: 'bad' } });
+
+		expect(fs.writeFileSync).not.toBeCalled();
+	});
 });

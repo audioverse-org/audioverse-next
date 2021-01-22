@@ -13,7 +13,7 @@ async function renderComponent({
 	loadQuery({ language });
 
 	return renderWithIntl(RecordingList, {
-		sermons: [
+		recordings: [
 			{
 				imageWithFallback: {
 					url: 'the_url',
@@ -114,6 +114,6 @@ describe('recording list', () => {
 	it('handles missing sermons', async () => {
 		loadQuery({ language: 'en' });
 
-		await render(<RecordingList sermons={undefined as any} />);
+		await render(<RecordingList recordings={undefined as any} />);
 	});
 });

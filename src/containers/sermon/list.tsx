@@ -41,7 +41,7 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 				<a href={makeSermonListRouteVideo(lang, 1)}>Video</a>
 				<a href={makeSermonListRouteAudio(lang, 1)}>Audio</a>
 			</div>
-			<RecordingList sermons={nodes} />
+			<RecordingList recordings={nodes} />
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}

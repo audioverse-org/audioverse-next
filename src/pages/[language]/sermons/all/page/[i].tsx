@@ -1,11 +1,14 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount } from '@lib/api';
 import createFeed from '@lib/createFeed';
-import { getSermonListStaticProps, Language } from '@lib/generated/graphql';
+import { getSermonListStaticProps } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 
 export default SermonList;
 
@@ -18,17 +21,46 @@ interface GetStaticPropsArgs {
 	params: { i: string; language: string };
 }
 
+const generateRssFeed = async (
+	params: GetStaticPropsArgs['params'],
+	response: PaginatedStaticProps
+) => {
+	const { i, language: languageRoute } = params;
+	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
+
+	if (!display_name) return;
+
+	const intl = getIntl(languageRoute);
+
+	const title = intl.formatMessage(
+		{
+			id: 'feed-title',
+			defaultMessage: 'AudioVerse Recent Recordings: {lang}',
+			description: 'All sermons feed title',
+		},
+		{
+			lang: display_name,
+		}
+	);
+
+	if (i === '1' && response.props.nodes) {
+		await createFeed({
+			recordings: response.props.nodes,
+			projectRelativePath: `public/${languageRoute}/sermons/all.xml`,
+			title,
+		});
+	}
+};
+
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { i, language: base_url } = params;
 
-	const lang = getLanguageByBaseUrl(base_url);
-
 	const response = await getPaginatedStaticProps(
 		base_url,
-		parseInt(i),
-		async (language: Language, { offset, first }) => {
+		i,
+		async ({ language, offset, first }) => {
 			// TODO: Refactor to eliminate this wrapper
 			const result = await getSermonListStaticProps({
 				language,
@@ -40,30 +72,7 @@ export async function getStaticProps({
 		}
 	);
 
-	// TODO: Extract feed generation into its own function for readability
-
-	const intl = getIntl(base_url);
-
-	const title = intl.formatMessage(
-		{
-			id: 'feed-title',
-			defaultMessage: 'AudioVerse Recent Recordings: {lang}',
-			description: 'All sermons feed title',
-		},
-		{
-			lang: lang?.display_name,
-		}
-	);
-
-	// TODO: Find a less-hacky way to generate feeds regularly.
-	//  This solution may generate the feed too much or not enough.
-	if (i === '1' && response.props.nodes) {
-		await createFeed({
-			recordings: response.props.nodes,
-			projectRelativePath: `public/${base_url}/sermons/all.xml`,
-			title,
-		});
-	}
+	await generateRssFeed(params, response);
 
 	return {
 		...response,

@@ -22,10 +22,10 @@ export async function getStaticProps({
 
 	const response = await getPaginatedStaticProps(
 		language,
-		parseInt(i),
-		async (lang, { offset, first }) => {
+		i,
+		async ({ language, offset, first }) => {
 			const result = await getSermonListStaticProps({
-				language: lang,
+				language,
 				hasVideo: false,
 				offset,
 				first,
