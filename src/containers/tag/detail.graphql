@@ -18,3 +18,11 @@ query getTagDetailPageData(
         }
     }
 }
+
+query getTagDetailPathsQuery($language: Language!, $first: Int) {
+    tags(language: $language, first: $first) {
+        nodes {
+            name
+        }
+    }
+}

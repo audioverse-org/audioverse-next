@@ -1,7 +1,11 @@
 import TagDetail, { TagDetailProps } from '@containers/tag/detail';
-import { getTagDetailPageData } from '@lib/generated/graphql';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
+import {
+	getTagDetailPageData,
+	getTagDetailPathsQuery,
+} from '@lib/generated/graphql';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { makeTagRoute } from '@lib/routes';
 
 export default TagDetail;
 
@@ -25,7 +29,7 @@ export async function getStaticProps({
 				language,
 				offset,
 				first,
-				tagName: slug,
+				tagName: decodeURIComponent(slug),
 			});
 
 			return result?.recordings;
@@ -34,6 +38,10 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	// TODO: fix
-	return getNumberedStaticPaths('', async () => 0);
+	// TODO: eventually switch to using API-supplied canonical URL
+	return getDetailStaticPaths(
+		getTagDetailPathsQuery,
+		'tags.nodes',
+		(languageRoute, node) => makeTagRoute(languageRoute, node.name)
+	);
 }

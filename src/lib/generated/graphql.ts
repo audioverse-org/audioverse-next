@@ -4499,7 +4499,7 @@ export type GetSermonDetailStaticPathsQuery = (
     { __typename?: 'RecordingConnection' }
     & { nodes?: Maybe<Array<(
       { __typename?: 'Recording' }
-      & Pick<Recording, 'id' | 'recordingDate'>
+      & Pick<Recording, 'id'>
     )>> }
   ) }
 );
@@ -4545,6 +4545,23 @@ export type GetTagDetailPageDataQuery = (
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
     )> }
+  ) }
+);
+
+export type GetTagDetailPathsQueryQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetTagDetailPathsQueryQuery = (
+  { __typename?: 'Query' }
+  & { tags: (
+    { __typename?: 'TagConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'name'>
+    )>> }
   ) }
 );
 
@@ -4849,7 +4866,6 @@ export const GetSermonDetailStaticPathsDocument = `
   sermons(language: $language, first: $first) {
     nodes {
       id
-      recordingDate
     }
   }
 }
@@ -4923,6 +4939,27 @@ export const useGetTagDetailPageDataQuery = <
     useQuery<GetTagDetailPageDataQuery, TError, TData>(
       ['getTagDetailPageData', variables],
       graphqlFetcher<GetTagDetailPageDataQuery, GetTagDetailPageDataQueryVariables>(GetTagDetailPageDataDocument, variables),
+      options
+    );
+export const GetTagDetailPathsQueryDocument = `
+    query getTagDetailPathsQuery($language: Language!, $first: Int) {
+  tags(language: $language, first: $first) {
+    nodes {
+      name
+    }
+  }
+}
+    `;
+export const useGetTagDetailPathsQueryQuery = <
+      TData = GetTagDetailPathsQueryQuery,
+      TError = unknown
+    >(
+      variables: GetTagDetailPathsQueryQueryVariables, 
+      options?: UseQueryOptions<GetTagDetailPathsQueryQuery, TError, TData>
+    ) => 
+    useQuery<GetTagDetailPathsQueryQuery, TError, TData>(
+      ['getTagDetailPathsQuery', variables],
+      graphqlFetcher<GetTagDetailPathsQueryQuery, GetTagDetailPathsQueryQueryVariables>(GetTagDetailPathsQueryDocument, variables),
       options
     );
 export const GetTestimoniesDocument = `
@@ -5047,6 +5084,14 @@ export async function getTagDetailPageData(
   variables: GetTagDetailPageDataQueryVariables
 ): Promise<GetTagDetailPageDataQuery> {
   return fetchApi(GetTagDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getTagDetailPathsQuery(
+  variables: GetTagDetailPathsQueryQueryVariables
+): Promise<GetTagDetailPathsQueryQuery> {
+  return fetchApi(GetTagDetailPathsQueryDocument, { variables });
 }
 				
 

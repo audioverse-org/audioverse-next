@@ -18,6 +18,14 @@ export const makeSeriesRoute = (
 	seriesId: string
 ): string => `/${languageRoute}/series/${seriesId}`;
 
+// TODO: url encode tagName
+export const makeTagRoute = (
+	languageRoute: string,
+	tagName: string,
+	pageIndex = 1
+): string =>
+	`/${languageRoute}/tags/${encodeURIComponent(tagName)}/page/${pageIndex}`;
+
 export const makeSermonListRouteAll = (
 	languageRoute: string,
 	page: number | string
