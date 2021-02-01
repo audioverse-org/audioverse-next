@@ -37,12 +37,13 @@ function loadSermonDetailPathsData() {
 }
 
 function loadSermonDetailData(sermon: any = undefined): void {
-	sermon = sermon || {
-		id: '1',
+	sermon = {
+		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		persons: [],
 		audioFiles: [],
 		videoFiles: [],
+		...sermon,
 	};
 
 	// jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
@@ -52,7 +53,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 }
 
 async function renderPage() {
-	const { props } = await getStaticProps({ params: { id: '1' } });
+	const { props } = await getStaticProps({ params: { id: 'the_sermon_id' } });
 	return renderWithIntl(SermonDetail, props);
 }
 
@@ -202,7 +203,6 @@ describe('sermon detail page', () => {
 
 	it('toggles sources', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -230,7 +230,6 @@ describe('sermon detail page', () => {
 
 	it('toggles toggle button label', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -246,7 +245,6 @@ describe('sermon detail page', () => {
 
 	it('falls back to video files', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -273,7 +271,6 @@ describe('sermon detail page', () => {
 
 	it('falls back to audio files', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -300,7 +297,6 @@ describe('sermon detail page', () => {
 
 	it('hides toggle if no video', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -351,7 +347,6 @@ describe('sermon detail page', () => {
 
 	it('uses speaker name widget', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [
 				{
@@ -694,6 +689,7 @@ describe('sermon detail page', () => {
 				recordings: {
 					nodes: [
 						{
+							id: 'the_sibling_id',
 							title: 'sibling_title',
 						},
 					],

@@ -291,6 +291,7 @@ describe('sermons list page', () => {
 		loadSermonListData({
 			nodes: [
 				{
+					id: 'the_sermon_id_1',
 					audioFiles: [
 						{
 							url: 'file_url',
@@ -298,6 +299,7 @@ describe('sermons list page', () => {
 					],
 				},
 				{
+					id: 'the_sermon_id_2',
 					audioFiles: [
 						{
 							url: 'file_url',
@@ -400,7 +402,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						audioFiles: [{}],
 					},
@@ -418,7 +420,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						videoFiles: [{}],
 					},
@@ -436,7 +438,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						persons: [
 							{

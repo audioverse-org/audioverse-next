@@ -15,6 +15,7 @@ async function renderComponent({
 	return renderWithIntl(RecordingList, {
 		recordings: [
 			{
+				id: 'the_recording_id',
 				imageWithFallback: {
 					url: 'the_url',
 				},

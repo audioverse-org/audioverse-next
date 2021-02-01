@@ -38,6 +38,7 @@ function loadPageData() {
 			recordings: {
 				nodes: [
 					{
+						id: 'the_recording_id',
 						title: 'the_recording_title',
 					},
 				],

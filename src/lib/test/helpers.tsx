@@ -31,7 +31,7 @@ export function loadSermonListData({
 		sermons: {
 			nodes: nodes || [
 				{
-					id: '1',
+					id: 'the_sermon_id',
 					title: 'the_sermon_title',
 					videoFiles: [],
 				},

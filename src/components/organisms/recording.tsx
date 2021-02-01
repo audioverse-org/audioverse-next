@@ -12,15 +12,18 @@ import { readableBytes } from '@lib/readableBytes';
 import { makeSeriesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-export type Sermon = NonNullable<RecordingFragment>;
+export type RecordingType = NonNullable<RecordingFragment>;
 
 interface Playable {
 	url: string;
 	mimeType: string;
 }
 
-const getFiles = (sermon: Sermon, prefersAudio: boolean): Playable[] => {
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = sermon;
+const getFiles = (
+	recording: RecordingType,
+	prefersAudio: boolean
+): Playable[] => {
+	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
 
 	if (prefersAudio) return audioFiles;
 	if (videoStreams.length > 0) return videoStreams;
@@ -29,8 +32,8 @@ const getFiles = (sermon: Sermon, prefersAudio: boolean): Playable[] => {
 	return audioFiles;
 };
 
-const getSources = (sermon: Sermon, prefersAudio: boolean) => {
-	const files = getFiles(sermon, prefersAudio) || [];
+const getSources = (recording: RecordingType, prefersAudio: boolean) => {
+	const files = getFiles(recording, prefersAudio) || [];
 
 	return files.map((f) => ({
 		src: f.url,
@@ -38,30 +41,30 @@ const getSources = (sermon: Sermon, prefersAudio: boolean) => {
 	}));
 };
 
-const hasVideo = (sermon: Sermon) => {
-	const { videoStreams = [], videoFiles = [] } = sermon;
+const hasVideo = (recording: RecordingType) => {
+	const { videoStreams = [], videoFiles = [] } = recording;
 
 	return videoStreams.length > 0 || videoFiles.length > 0;
 };
 
-interface SermonProps {
-	sermon: RecordingFragment;
+interface RecordingProps {
+	recording: RecordingFragment;
 }
 
-export function Recording({ sermon }: SermonProps): JSX.Element {
+export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
 	const [prefersAudio, setPrefersAudio] = useState(false);
-	const imageSrc = _.get(sermon, 'imageWithFallback.url');
-	const imageAlt = _.get(sermon, 'title');
-	const sources = getSources(sermon, prefersAudio);
-	const speakers = sermon?.persons || [];
-	const tags = sermon?.recordingTags?.nodes || [];
+	const imageSrc = _.get(recording, 'imageWithFallback.url');
+	const imageAlt = _.get(recording, 'title');
+	const sources = getSources(recording, prefersAudio);
+	const speakers = recording?.persons || [];
+	const tags = recording?.recordingTags?.nodes || [];
 	const {
 		sponsor = { title: '', location: '' },
 		videoDownloads = [],
 		audioDownloads = [],
-	} = sermon;
-	const recordingDateString = new Date(sermon.recordingDate).toLocaleString(
+	} = recording;
+	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
 		[],
 		{
 			hour: 'numeric',
@@ -72,8 +75,10 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 		}
 	);
 	const copyrightOwner =
-		sermon?.distributionAgreement?.sponsor?.title || sermon?.sponsor?.title;
-	const copyrightImageUrl = sermon?.distributionAgreement?.license?.image?.url;
+		recording?.distributionAgreement?.sponsor?.title ||
+		recording?.sponsor?.title;
+	const copyrightImageUrl =
+		recording?.distributionAgreement?.license?.image?.url;
 	const hasVideoDownloads = videoDownloads.length > 0;
 	const hasAudioDownloads = audioDownloads.length > 0;
 	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
@@ -82,7 +87,7 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 			<div className={styles.meta}>
 				{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
 				<div>
-					<h1>{sermon.title}</h1>
+					<h1>{recording.title}</h1>
 					<ul className={styles.speakers}>
 						{speakers.map((speaker) => (
 							<li key={speaker.id}>
@@ -92,11 +97,11 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 					</ul>
 				</div>
 			</div>
-			<Favorite id={sermon.id} />
-			<PlaylistButton recordingId={sermon.id} />
+			<Favorite id={recording.id} />
+			<PlaylistButton recordingId={recording.id} />
 			<Player sources={sources} />
 			{/*TODO: Hide toggle button if no video files*/}
-			{hasVideo(sermon) && (
+			{hasVideo(recording) && (
 				<button onClick={() => setPrefersAudio(!prefersAudio)}>
 					Play {prefersAudio ? 'Video' : 'Audio'}
 				</button>
@@ -118,7 +123,7 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 					</a>
 				</p>
 			</div>
-			{sermon.description && (
+			{recording.description && (
 				<>
 					<h2>
 						<FormattedMessage
@@ -127,7 +132,7 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 							description="Sermon detail description title"
 						/>
 					</h2>
-					<div dangerouslySetInnerHTML={{ __html: sermon.description }} />
+					<div dangerouslySetInnerHTML={{ __html: recording.description }} />
 				</>
 			)}
 			{tags.length > 0 && (
@@ -178,7 +183,7 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 					</li>
 				))}
 			</ul>
-			{sermon.recordingDate ? (
+			{recording.recordingDate ? (
 				<>
 					<h2>
 						<FormattedMessage
@@ -190,7 +195,7 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 					<p>{recordingDateString}</p>
 				</>
 			) : null}
-			{sermon?.sequence && (
+			{recording?.sequence && (
 				<>
 					<h2>
 						<FormattedMessage
@@ -199,8 +204,8 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 							description="Sermon detail series title"
 						/>
 					</h2>
-					<a href={makeSeriesRoute(langRoute, sermon?.sequence?.id)}>
-						{sermon?.sequence?.title}
+					<a href={makeSeriesRoute(langRoute, recording?.sequence?.id)}>
+						{recording?.sequence?.title}
 					</a>
 				</>
 			)}
@@ -259,13 +264,13 @@ export function Recording({ sermon }: SermonProps): JSX.Element {
 						defaultMessage={'Copyright ⓒ{year} {owner}'}
 						description={'Copyright year and owner'}
 						values={{
-							year: sermon?.copyrightYear,
+							year: recording?.copyrightYear,
 							owner: copyrightOwner,
 						}}
 					/>
 				</span>
 				<br />
-				<span>{sermon?.distributionAgreement?.license?.summary}</span>
+				<span>{recording?.distributionAgreement?.license?.summary}</span>
 			</p>
 		</>
 	);

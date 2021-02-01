@@ -15,10 +15,9 @@ export default function RecordingList({
 	return (
 		<table className={styles.list}>
 			<tbody>
-				{recordings &&
-					recordings.map((rec, i) => (
-						<RecordingListEntry key={i} recordings={rec} />
-					))}
+				{recordings?.map((rec) => (
+					<RecordingListEntry key={rec.id} recording={rec} />
+				))}
 			</tbody>
 		</table>
 	);

@@ -13,24 +13,26 @@ export function storeRequest(request: IncomingMessage): void {
 	_request = request;
 }
 
+// WORKAROUND
+// Graphql Code Generator duplicates fragment definitions
+// for fragments that get referenced multiple times.
+// https://github.com/dotansimha/graphql-code-generator/issues/3063
 const removeDuplicateFragments = (query: string): string => {
 	const ast = parse(query);
 
 	const seen: string[] = [];
-	const newDefinitions: any[] = [];
 
-	ast.definitions.forEach((def) => {
+	const newDefinitions = ast.definitions.filter((def) => {
 		if (def.kind !== 'FragmentDefinition') {
-			newDefinitions.push(def);
-			return;
+			return true;
 		}
 
 		const id = `${def.name.value}-${def.typeCondition.name.value}`;
+		const haveSeen = seen.includes(id);
 
-		if (!seen.includes(id)) {
-			seen.push(id);
-			newDefinitions.push(def);
-		}
+		seen.push(id);
+
+		return !haveSeen;
 	});
 
 	const newAst = {
@@ -54,8 +56,8 @@ export async function fetchApi(
 		'Content-Type': 'application/json',
 	};
 
-	if (cookies?.avSession) {
-		headers['x-av-session'] = cookies?.avSession;
+	if (cookies.avSession) {
+		headers['x-av-session'] = cookies.avSession;
 	}
 
 	const res = await fetch(API_URL, {

@@ -18,7 +18,7 @@ function SermonDetail({ sermon }: SermonDetailProps) {
 	const seriesItems = sermon?.sequence?.recordings?.nodes;
 	return (
 		<>
-			<Recording sermon={sermon} />
+			<Recording recording={sermon} />
 			{seriesItems && <RecordingList recordings={seriesItems} />}
 		</>
 	);

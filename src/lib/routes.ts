@@ -18,7 +18,6 @@ export const makeSeriesRoute = (
 	seriesId: string
 ): string => `/${languageRoute}/series/${seriesId}`;
 
-// TODO: url encode tagName
 export const makeTagRoute = (
 	languageRoute: string,
 	tagName: string,
