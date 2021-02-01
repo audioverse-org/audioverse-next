@@ -61,7 +61,7 @@ export async function getStaticProps({
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { slug, language, i } = params;
 
-	const result = await getPaginatedStaticProps(
+	const response = await getPaginatedStaticProps(
 		language,
 		i,
 		async ({ language, offset, first }) => {
@@ -76,9 +76,15 @@ export async function getStaticProps({
 		}
 	);
 
-	await generateRssFeed(params, result);
+	await generateRssFeed(params, response);
 
-	return result;
+	return {
+		...response,
+		props: {
+			...response.props,
+			rssPath: `/${language}/tags/${slug}.xml`,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

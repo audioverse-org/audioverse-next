@@ -171,6 +171,23 @@ describe('tag detail page', () => {
 		);
 	});
 
-	// generates RSS feed
-	// includes RSS feed
+	it('includes rss feed link in page', async () => {
+		mockFeed();
+		loadPageData();
+
+		const { getByText } = await renderPage({ slug: 'my%20%3A%20tag' });
+
+		const link = getByText('RSS') as HTMLLinkElement;
+
+		expect(link.href).toContain('/en/tags/my%20%3A%20tag.xml');
+	});
+
+	it('includes tag title on page', async () => {
+		mockFeed();
+		loadPageData();
+
+		const { getByText } = await renderPage({ slug: 'my%20%3A%20tag' });
+
+		expect(getByText('my : tag')).toBeInTheDocument();
+	});
 });
