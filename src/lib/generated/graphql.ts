@@ -4330,6 +4330,61 @@ export type SpeakerNameFragment = (
   ) }
 );
 
+export type RecordingFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear'>
+  & { persons: Array<(
+    { __typename?: 'Person' }
+    & SpeakerNameFragment
+  )>, audioFiles: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
+  )>, videoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )>, videoStreams: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )>, videoDownloads: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'id' | 'url' | 'filesize'>
+  )>, audioDownloads: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'id' | 'url' | 'filesize'>
+  )>, imageWithFallback: (
+    { __typename?: 'Image' }
+    & Pick<Image, 'url'>
+  ), recordingTags: (
+    { __typename?: 'RecordingTagConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'RecordingTag' }
+      & { tag: (
+        { __typename?: 'Tag' }
+        & Pick<Tag, 'id' | 'name'>
+      ) }
+    )>> }
+  ), sponsor?: Maybe<(
+    { __typename?: 'Sponsor' }
+    & Pick<Sponsor, 'title' | 'location'>
+  )>, sequence?: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'id' | 'title'>
+  )>, distributionAgreement?: Maybe<(
+    { __typename?: 'DistributionAgreement' }
+    & { sponsor?: Maybe<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'title'>
+    )>, license?: Maybe<(
+      { __typename?: 'License' }
+      & Pick<License, 'summary'>
+      & { image?: Maybe<(
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      )> }
+    )> }
+  )> }
+);
+
 export type GetHomeStaticPropsQueryVariables = Exact<{
   language: Language;
 }>;
@@ -4417,47 +4472,18 @@ export type GetSermonDetailDataQuery = (
   { __typename?: 'Query' }
   & { sermon?: Maybe<(
     { __typename?: 'Recording' }
-    & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear'>
-    & { persons: Array<(
-      { __typename?: 'Person' }
-      & SpeakerNameFragment
-    )>, audioFiles: Array<(
-      { __typename?: 'AudioFile' }
-      & Pick<AudioFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
-    )>, videoFiles: Array<(
-      { __typename?: 'VideoFile' }
-      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
-    )>, videoStreams: Array<(
-      { __typename?: 'VideoFile' }
-      & Pick<VideoFile, 'url' | 'duration' | 'filesize' | 'mimeType'>
-    )>, imageWithFallback: (
-      { __typename?: 'Image' }
-      & Pick<Image, 'url'>
-    ), recordingTags: (
-      { __typename?: 'RecordingTagConnection' }
-      & { nodes?: Maybe<Array<(
-        { __typename?: 'RecordingTag' }
-        & { tag: (
-          { __typename?: 'Tag' }
-          & Pick<Tag, 'id' | 'name'>
-        ) }
-      )>> }
-    ), sponsor?: Maybe<(
-      { __typename?: 'Sponsor' }
-      & Pick<Sponsor, 'title' | 'location'>
-    )>, sequence?: Maybe<(
+    & { sequence?: Maybe<(
       { __typename?: 'Sequence' }
-      & Pick<Sequence, 'id' | 'title'>
-    )>, distributionAgreement?: Maybe<(
-      { __typename?: 'DistributionAgreement' }
-      & { sponsor?: Maybe<(
-        { __typename?: 'Sponsor' }
-        & Pick<Sponsor, 'title'>
-      )>, license?: Maybe<(
-        { __typename?: 'License' }
-        & Pick<License, 'summary'>
-      )> }
+      & Pick<Sequence, 'title'>
+      & { recordings: (
+        { __typename?: 'RecordingConnection' }
+        & { nodes?: Maybe<Array<(
+          { __typename?: 'Recording' }
+          & RecordingListFragment
+        )>> }
+      ) }
     )> }
+    & RecordingFragment
   )> }
 );
 
@@ -4473,7 +4499,7 @@ export type GetSermonDetailStaticPathsQuery = (
     { __typename?: 'RecordingConnection' }
     & { nodes?: Maybe<Array<(
       { __typename?: 'Recording' }
-      & Pick<Recording, 'id' | 'recordingDate'>
+      & Pick<Recording, 'id'>
     )>> }
   ) }
 );
@@ -4497,6 +4523,46 @@ export type GetSermonListStaticPropsQuery = (
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
     )> }
+  ) }
+);
+
+export type GetTagDetailPageDataQueryVariables = Exact<{
+  language: Language;
+  tagName?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetTagDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { recordings: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingListFragment
+      & CreateFeedFragment
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetTagDetailPathsQueryQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetTagDetailPathsQueryQuery = (
+  { __typename?: 'Query' }
+  & { tags: (
+    { __typename?: 'TagConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'name'>
+    )>> }
   ) }
 );
 
@@ -4537,6 +4603,18 @@ export type AddPlaylistMutation = (
   ) }
 );
 
+export type CreateFeedFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title' | 'description' | 'canonicalUrl' | 'recordingDate'>
+  & { audioFiles: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize'>
+  )>, videoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize'>
+  )> }
+);
+
 export const SpeakerNameFragmentDoc = `
     fragment speakerName on Person {
   id
@@ -4568,6 +4646,89 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${SpeakerNameFragmentDoc}`;
+export const RecordingFragmentDoc = `
+    fragment recording on Recording {
+  id
+  title
+  persons {
+    ...speakerName
+  }
+  audioFiles {
+    url
+    filesize
+    mimeType
+  }
+  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+    url
+    filesize
+    mimeType
+  }
+  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+    url
+    filesize
+    mimeType
+  }
+  videoDownloads: videoFiles(allowedContainers: MP4) {
+    id
+    url
+    filesize
+  }
+  audioDownloads: audioFiles(allowedContainers: MP3) {
+    id
+    url
+    filesize
+  }
+  description
+  imageWithFallback {
+    url(size: 50)
+  }
+  recordingDate
+  recordingTags {
+    nodes {
+      tag {
+        id
+        name
+      }
+    }
+  }
+  sponsor {
+    title
+    location
+  }
+  sequence {
+    id
+    title
+  }
+  copyrightYear
+  distributionAgreement {
+    sponsor {
+      title
+    }
+    license {
+      summary
+      image {
+        url(size: 100)
+      }
+    }
+  }
+}
+    ${SpeakerNameFragmentDoc}`;
+export const CreateFeedFragmentDoc = `
+    fragment createFeed on Recording {
+  title
+  description
+  canonicalUrl
+  recordingDate
+  audioFiles {
+    url
+    filesize
+  }
+  videoFiles {
+    url
+    filesize
+  }
+}
+    `;
 export const GetPlaylistButtonDataDocument = `
     query getPlaylistButtonData($language: Language!, $recordingId: ID!) {
   me {
@@ -4704,62 +4865,19 @@ export const useGetSeriesDetailPathsDataQuery = <
 export const GetSermonDetailDataDocument = `
     query getSermonDetailData($id: ID!) {
   sermon(id: $id) {
-    id
-    title
-    persons {
-      ...speakerName
-    }
-    audioFiles {
-      url
-      duration
-      filesize
-      mimeType
-    }
-    videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-      url
-      duration
-      filesize
-      mimeType
-    }
-    videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-      url
-      duration
-      filesize
-      mimeType
-    }
-    description
-    imageWithFallback {
-      url(size: 50)
-    }
-    recordingDate
-    recordingTags {
-      nodes {
-        tag {
-          id
-          name
-        }
-      }
-    }
-    sponsor {
-      title
-      location
-    }
+    ...recording
     sequence {
-      id
       title
-    }
-    copyrightYear
-    distributionAgreement {
-      sponsor {
-        title
-      }
-      license {
-        summary
+      recordings {
+        nodes {
+          ...recordingList
+        }
       }
     }
   }
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${RecordingListFragmentDoc}`;
 export const useGetSermonDetailDataQuery = <
       TData = GetSermonDetailDataQuery,
       TError = unknown
@@ -4777,7 +4895,6 @@ export const GetSermonDetailStaticPathsDocument = `
   sermons(language: $language, first: $first) {
     nodes {
       id
-      recordingDate
     }
   }
 }
@@ -4822,6 +4939,58 @@ export const useGetSermonListStaticPropsQuery = <
     useQuery<GetSermonListStaticPropsQuery, TError, TData>(
       ['getSermonListStaticProps', variables],
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
+      options
+    );
+export const GetTagDetailPageDataDocument = `
+    query getTagDetailPageData($language: Language!, $tagName: String, $first: Int, $offset: Int) {
+  recordings(
+    language: $language
+    tagName: $tagName
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      ...recordingList
+      ...createFeed
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${RecordingListFragmentDoc}
+${CreateFeedFragmentDoc}`;
+export const useGetTagDetailPageDataQuery = <
+      TData = GetTagDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetTagDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetTagDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetTagDetailPageDataQuery, TError, TData>(
+      ['getTagDetailPageData', variables],
+      graphqlFetcher<GetTagDetailPageDataQuery, GetTagDetailPageDataQueryVariables>(GetTagDetailPageDataDocument, variables),
+      options
+    );
+export const GetTagDetailPathsQueryDocument = `
+    query getTagDetailPathsQuery($language: Language!, $first: Int) {
+  tags(language: $language, first: $first) {
+    nodes {
+      name
+    }
+  }
+}
+    `;
+export const useGetTagDetailPathsQueryQuery = <
+      TData = GetTagDetailPathsQueryQuery,
+      TError = unknown
+    >(
+      variables: GetTagDetailPathsQueryQueryVariables, 
+      options?: UseQueryOptions<GetTagDetailPathsQueryQuery, TError, TData>
+    ) => 
+    useQuery<GetTagDetailPathsQueryQuery, TError, TData>(
+      ['getTagDetailPathsQuery', variables],
+      graphqlFetcher<GetTagDetailPathsQueryQuery, GetTagDetailPathsQueryQueryVariables>(GetTagDetailPathsQueryDocument, variables),
       options
     );
 export const GetTestimoniesDocument = `
@@ -4883,6 +5052,7 @@ export async function getPlaylistButtonData(
 
 
 
+
 export async function getHomeStaticProps(
   variables: GetHomeStaticPropsQueryVariables
 ): Promise<GetHomeStaticPropsQuery> {
@@ -4941,9 +5111,25 @@ export async function getSermonListStaticProps(
 }
 				
 
+export async function getTagDetailPageData(
+  variables: GetTagDetailPageDataQueryVariables
+): Promise<GetTagDetailPageDataQuery> {
+  return fetchApi(GetTagDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getTagDetailPathsQuery(
+  variables: GetTagDetailPathsQueryQueryVariables
+): Promise<GetTagDetailPathsQueryQuery> {
+  return fetchApi(GetTagDetailPathsQueryDocument, { variables });
+}
+				
+
 export async function getTestimonies(
   variables: GetTestimoniesQueryVariables
 ): Promise<GetTestimoniesQuery> {
   return fetchApi(GetTestimoniesDocument, { variables });
 }
 				
+

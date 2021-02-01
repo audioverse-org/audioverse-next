@@ -2,11 +2,15 @@
   "feed-title": [
     {
       "type": 0,
-      "value": "Grabaciones Recientes de AudioVerse: "
+      "value": "Grabaciones Recientes de AudioVerse ("
     },
     {
       "type": 1,
       "value": "lang"
+    },
+    {
+      "type": 0,
+      "value": ")"
     }
   ],
   "title": [

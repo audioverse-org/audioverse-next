@@ -21,7 +21,7 @@ export async function getStaticProps({
 	return await getPaginatedStaticProps(
 		baseUrl,
 		parseInt(i),
-		async (language, { offset, first }) => {
+		async ({ language, offset, first }) => {
 			// TODO: Update getPaginatedStaticProps args so that wrapping getter not necessary
 			const data = await getTestimonies({ language, first, offset });
 

@@ -1,0 +1,29 @@
+query getTagDetailPageData(
+    $language: Language!,
+    $tagName: String,
+    $first: Int,
+    $offset: Int
+) {
+    recordings(
+        language: $language
+        tagName: $tagName
+        first: $first
+        offset: $offset
+    ) {
+        nodes {
+            ...recordingList
+            ...createFeed
+        }
+        aggregate {
+            count
+        }
+    }
+}
+
+query getTagDetailPathsQuery($language: Language!, $first: Int) {
+    tags(language: $language, first: $first) {
+        nodes {
+            name
+        }
+    }
+}

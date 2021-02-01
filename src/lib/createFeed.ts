@@ -34,9 +34,9 @@ export default async function createFeed({
 	});
 
 	recordings.map((r) => {
-		const file = _.get(r, 'audioFiles[0]') || _.get(r, 'videoFiles[0]'),
-			url = _.get(file, 'url'),
-			length = _.get(file, 'filesize');
+		const file = _.get(r, 'audioFiles[0]') || _.get(r, 'videoFiles[0]');
+		const url = _.get(file, 'url');
+		const length = _.get(file, 'filesize');
 
 		if (!url) return;
 

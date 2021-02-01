@@ -1,7 +1,8 @@
 import _ from 'lodash';
 
-import { ENTRIES_PER_PAGE, LANGUAGES } from '@lib/constants';
+import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export interface PaginatedStaticProps {
 	props: {
@@ -22,46 +23,39 @@ interface IGetterResolved {
 }
 
 interface Getter<T> {
-	(
-		language: Language,
-		{
-			offset,
-			first,
-		}: {
-			hasVideo?: boolean | null;
-			offset?: number;
-			first?: number;
-		}
-	): Promise<T>;
+	({
+		language,
+		offset,
+		first,
+	}: {
+		language: Language;
+		hasVideo?: boolean | null;
+		offset?: number;
+		first?: number;
+	}): Promise<T>;
 }
 
-// TODO: Modify so it accepts getters straight from graphql codegen
 export async function getPaginatedStaticProps<T extends IGetterResolved>(
-	language: string,
-	pageIndex: number,
+	languageRoute: string,
+	pageIndex: number | string,
 	getter: Getter<T>
 ): Promise<PaginatedStaticProps> {
-	const langKey = _.findKey(LANGUAGES, (l) => l.base_url === language),
-		offset = (pageIndex - 1) * ENTRIES_PER_PAGE;
-
-	if (!langKey) throw Error('Missing or invalid language');
-
-	// TODO: Fix langKey type
-	const result = await getter(langKey as any, {
-		offset,
+	const result = await getter({
+		language: getLanguageIdByRoute(languageRoute),
+		offset: (+pageIndex - 1) * ENTRIES_PER_PAGE,
 		first: ENTRIES_PER_PAGE,
 	}).catch(() => ({}));
 
-	const nodes = _.get(result, 'nodes', []),
-		count = _.get(result, 'aggregate.count', 0),
-		total = Math.ceil(count / ENTRIES_PER_PAGE);
+	const nodes = _.get(result, 'nodes', []);
+	const count = _.get(result, 'aggregate.count', 0);
+	const total = Math.ceil(count / ENTRIES_PER_PAGE);
 
 	return {
 		props: {
 			nodes,
 			pagination: {
 				total,
-				current: pageIndex,
+				current: +pageIndex,
 			},
 		},
 		revalidate: 10,

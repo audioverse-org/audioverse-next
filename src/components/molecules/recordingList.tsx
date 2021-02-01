@@ -6,17 +6,18 @@ import { RecordingListFragment } from '@lib/generated/graphql';
 import styles from './recordingList.module.scss';
 
 interface RecordingListProps {
-	sermons: RecordingListFragment[];
+	recordings: RecordingListFragment[];
 }
 
 export default function RecordingList({
-	sermons,
+	recordings,
 }: RecordingListProps): JSX.Element {
 	return (
 		<table className={styles.list}>
 			<tbody>
-				{sermons &&
-					sermons.map((s, i) => <RecordingListEntry key={i} sermon={s} />)}
+				{recordings?.map((rec) => (
+					<RecordingListEntry key={rec.id} recording={rec} />
+				))}
 			</tbody>
 		</table>
 	);

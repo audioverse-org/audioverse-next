@@ -1,9 +1,13 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
 import videojs from 'video.js';
 
-import { getSermonDetailStaticPaths } from '@lib/generated/graphql';
-import * as graphql from '@lib/generated/graphql';
+import {
+	GetSermonDetailDataDocument,
+	getSermonDetailStaticPaths,
+	GetSermonDetailStaticPathsDocument,
+} from '@lib/generated/graphql';
 import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
@@ -16,32 +20,40 @@ jest.mock('@lib/api/fetchApi');
 
 // TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
 function loadSermonDetailPathsData() {
-	jest.spyOn(graphql, 'getSermonDetailStaticPaths').mockResolvedValue({
-		sermons: {
-			nodes: [
-				{
-					id: 'sermon_id',
-					recordingDate: '2020-06-01T09:30:00.000Z',
-				},
-			],
-		},
-	});
+	// jest.spyOn(graphql, 'getSermonDetailStaticPaths')
+
+	when(mockedFetchApi)
+		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
+		.mockResolvedValue({
+			sermons: {
+				nodes: [
+					{
+						id: 'sermon_id',
+						recordingDate: '2020-06-01T09:30:00.000Z',
+					},
+				],
+			},
+		});
 }
 
 function loadSermonDetailData(sermon: any = undefined): void {
-	sermon = sermon || {
-		id: '1',
+	sermon = {
+		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		persons: [],
 		audioFiles: [],
 		videoFiles: [],
+		...sermon,
 	};
 
-	jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
+	// jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
+	when(mockedFetchApi)
+		.calledWith(GetSermonDetailDataDocument, expect.anything())
+		.mockResolvedValue({ sermon });
 }
 
 async function renderPage() {
-	const { props } = await getStaticProps({ params: { id: '1' } });
+	const { props } = await getStaticProps({ params: { id: 'the_sermon_id' } });
 	return renderWithIntl(SermonDetail, props);
 }
 
@@ -56,10 +68,15 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermonDetailStaticPaths).toBeCalledWith({
-				language: 'ENGLISH',
-				first: 1000,
-			})
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailStaticPathsDocument,
+				{
+					variables: {
+						language: 'ENGLISH',
+						first: 1000,
+					},
+				}
+			)
 		);
 	});
 
@@ -69,10 +86,15 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(getSermonDetailStaticPaths).toBeCalledWith({
-				language: 'SPANISH',
-				first: 1000,
-			})
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailStaticPathsDocument,
+				{
+					variables: {
+						language: 'SPANISH',
+						first: 1000,
+					},
+				}
+			)
 		);
 	});
 
@@ -93,7 +115,9 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
+		when(mockedFetchApi)
+			.calledWith(GetSermonDetailDataDocument, expect.anything())
+			.mockRejectedValue('Oops!');
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
@@ -101,7 +125,9 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		jest.spyOn(graphql, 'getSermonDetailData').mockRejectedValue('Oops!');
+		when(mockedFetchApi)
+			.calledWith(GetSermonDetailDataDocument, expect.anything())
+			.mockRejectedValue('Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -177,7 +203,6 @@ describe('sermon detail page', () => {
 
 	it('toggles sources', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -205,7 +230,6 @@ describe('sermon detail page', () => {
 
 	it('toggles toggle button label', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -221,7 +245,6 @@ describe('sermon detail page', () => {
 
 	it('falls back to video files', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -248,7 +271,6 @@ describe('sermon detail page', () => {
 
 	it('falls back to audio files', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -275,7 +297,6 @@ describe('sermon detail page', () => {
 
 	it('hides toggle if no video', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
@@ -326,7 +347,6 @@ describe('sermon detail page', () => {
 
 	it('uses speaker name widget', async () => {
 		loadSermonDetailData({
-			id: '1',
 			title: 'the_sermon_title',
 			persons: [
 				{
@@ -556,5 +576,136 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_license_summary')).toBeInTheDocument();
+	});
+
+	it('displays copyright image', async () => {
+		loadSermonDetailData({
+			distributionAgreement: {
+				license: {
+					image: {
+						url: 'the_license_image_url',
+					},
+				},
+			},
+		});
+
+		const { getByAltText } = await renderPage();
+
+		const image = getByAltText('copyright') as HTMLImageElement;
+
+		expect(image.src).toContain('the_license_image_url');
+	});
+
+	it('does not display missing copyright image', async () => {
+		loadSermonDetailData();
+
+		const { queryByAltText } = await renderPage();
+
+		expect(queryByAltText('copyright')).not.toBeInTheDocument();
+	});
+
+	it('links video downloads', async () => {
+		loadSermonDetailData({
+			videoDownloads: [
+				{
+					id: 'the_video_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('1 GB') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_url');
+	});
+
+	it('does not display downloads if no downloads', async () => {
+		loadSermonDetailData({
+			videoDownloads: [],
+			audioDownloads: [],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Downloads')).not.toBeInTheDocument();
+	});
+
+	it('links audio downloads', async () => {
+		loadSermonDetailData({
+			audioDownloads: [
+				{
+					id: 'the_audio_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('1 GB') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_url');
+	});
+
+	it('does not show audio downloads if none to show', async () => {
+		loadSermonDetailData({
+			videoDownloads: [
+				{
+					id: 'the_video_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Audio Files')).not.toBeInTheDocument();
+	});
+
+	it('does not show video downloads if none to show', async () => {
+		loadSermonDetailData({
+			audioDownloads: [
+				{
+					id: 'the_audio_id',
+					url: 'the_url',
+					filesize: '1073741824',
+				},
+			],
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Video Files')).not.toBeInTheDocument();
+	});
+
+	it('displays recordings in series', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		await waitFor(() =>
+			expect(mockedFetchApi).toBeCalledWith(
+				GetSermonDetailDataDocument,
+				expect.anything()
+			)
+		);
+
+		expect(getByText('sibling_title')).toBeInTheDocument();
 	});
 });

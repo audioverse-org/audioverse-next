@@ -18,39 +18,44 @@ const formatDuration = (duration: number): string => {
 };
 
 export default function RecordingListEntry({
-	sermon,
+	recording,
 }: {
-	sermon: RecordingListFragment;
+	recording: RecordingListFragment;
 }): JSX.Element {
 	const lang = useLanguageRoute();
-	const persons = sermon?.persons || [];
-	const videoFiles = sermon?.videoFiles || [];
+	const persons = recording?.persons || [];
+	const videoFiles = recording?.videoFiles || [];
 
+	// TODO: Replace makeSermonRoute with canonical URL provided by API
+	// This is doubly important because RecordingList can display things
+	// other than sermons.
 	return (
 		<tr className={styles.item}>
 			<td>
-				<a href={makeSermonRoute(lang, sermon.id)}>
+				<a href={makeSermonRoute(lang, recording.id)}>
 					<img
-						src={_.get(sermon, 'imageWithFallback.url')}
-						alt={_.get(sermon, 'title')}
+						src={_.get(recording, 'imageWithFallback.url')}
+						alt={_.get(recording, 'title')}
 					/>
 				</a>
 			</td>
 			<td>
-				<a href={makeSermonRoute(lang, sermon.id)} className={styles.title}>
-					{sermon.title}
+				<a href={makeSermonRoute(lang, recording.id)} className={styles.title}>
+					{recording.title}
 				</a>
 			</td>
 			<td className={styles.presenters}>
 				<ul>
-					{persons.map((p) => (
-						<li key={p.id}>
-							<SpeakerName person={p} />
-						</li>
-					))}
+					{persons.map(
+						(p): JSX.Element => (
+							<li key={p.id}>
+								<SpeakerName person={p} />
+							</li>
+						)
+					)}
 				</ul>
 			</td>
-			<td className={styles.duration}>{formatDuration(sermon.duration)}</td>
+			<td className={styles.duration}>{formatDuration(recording.duration)}</td>
 			<td>{videoFiles.length > 0 ? 'Video' : 'Audio'}</td>
 		</tr>
 	);

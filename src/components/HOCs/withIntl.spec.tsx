@@ -16,6 +16,7 @@ import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
 import { Person } from '@lib/generated/graphql';
+import { readableBytes } from '@lib/readableBytes';
 import {
 	makePlaylistButtonData,
 	mockedFetchApi,
@@ -26,6 +27,7 @@ jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
+jest.mock('@lib/readableBytes');
 
 type QueryByText = (
 	text: Matcher,
@@ -60,6 +62,8 @@ describe('localization usage', () => {
 		jest.spyOn(intl, 'useIntl').mockReturnValue({
 			formatMessage: formatter,
 		} as any);
+
+		(readableBytes as jest.Mock).mockReturnValue('z');
 	});
 
 	beforeAll(() => {
@@ -122,6 +126,13 @@ describe('localization usage', () => {
 								},
 							],
 						},
+						videoDownloads: [
+							{
+								id: 'z',
+								url: 'z',
+								filesize: '100',
+							},
+						],
 					} as Sermon
 				}
 			/>

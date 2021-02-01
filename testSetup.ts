@@ -3,6 +3,7 @@ import 'jest-canvas-mock';
 import { resetAllWhenMocks } from 'jest-when';
 
 jest.mock('@lib/api/fetchApi');
+jest.mock('fs');
 
 beforeEach(() => {
 	jest.resetAllMocks();

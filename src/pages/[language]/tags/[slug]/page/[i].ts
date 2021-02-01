@@ -1,31 +1,34 @@
-import SermonList, { SermonListProps } from '@containers/sermon/list';
-import { getSermonCount } from '@lib/api';
+import TagDetail, { TagDetailProps } from '@containers/tag/detail';
 import createFeed from '@lib/createFeed';
-import { getSermonListStaticProps } from '@lib/generated/graphql';
+import {
+	getTagDetailPageData,
+	getTagDetailPathsQuery,
+} from '@lib/generated/graphql';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
+import { makeTagRoute } from '@lib/routes';
 
-export default SermonList;
+export default TagDetail;
 
 interface StaticProps {
-	props: SermonListProps;
+	props: TagDetailProps;
 	revalidate: number;
 }
 
-interface GetStaticPropsArgs {
-	params: { i: string; language: string };
-}
+type GetStaticPropsArgs = {
+	params: { slug: string; language: string; i: string };
+};
 
 const generateRssFeed = async (
 	params: GetStaticPropsArgs['params'],
 	response: PaginatedStaticProps
 ) => {
-	const { i, language: languageRoute } = params;
+	const { i, language: languageRoute, slug } = params;
 	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
 
 	if (!display_name) return;
@@ -34,19 +37,20 @@ const generateRssFeed = async (
 
 	const title = intl.formatMessage(
 		{
-			id: 'feed-title',
-			defaultMessage: 'AudioVerse Recent Recordings: {lang}',
-			description: 'All sermons feed title',
+			id: 'tag-feed-title',
+			defaultMessage: 'AudioVerse Recordings Tagged {tag} ({lang})',
+			description: 'Tag feed title',
 		},
 		{
 			lang: display_name,
+			tag: decodeURIComponent(slug),
 		}
 	);
 
 	if (i === '1' && response.props.nodes) {
 		await createFeed({
 			recordings: response.props.nodes,
-			projectRelativePath: `public/${languageRoute}/sermons/all.xml`,
+			projectRelativePath: `public/${languageRoute}/tags/${slug}.xml`,
 			title,
 		});
 	}
@@ -55,19 +59,20 @@ const generateRssFeed = async (
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language: base_url } = params;
+	const { slug, language, i } = params;
 
 	const response = await getPaginatedStaticProps(
-		base_url,
+		language,
 		i,
 		async ({ language, offset, first }) => {
-			const result = await getSermonListStaticProps({
+			const result = await getTagDetailPageData({
 				language,
 				offset,
 				first,
+				tagName: decodeURIComponent(slug),
 			});
 
-			return result?.sermons;
+			return result?.recordings;
 		}
 	);
 
@@ -77,12 +82,16 @@ export async function getStaticProps({
 		...response,
 		props: {
 			...response.props,
-			rssPath: `/${base_url}/sermons/all.xml`,
-			filter: 'all',
+			rssPath: `/${language}/tags/${slug}.xml`,
 		},
 	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/all', getSermonCount);
+	// TODO: eventually switch to using API-supplied canonical URL
+	return getDetailStaticPaths(
+		getTagDetailPathsQuery,
+		'tags.nodes',
+		(languageRoute, node) => makeTagRoute(languageRoute, node.name)
+	);
 }

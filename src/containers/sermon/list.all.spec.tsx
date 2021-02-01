@@ -291,6 +291,7 @@ describe('sermons list page', () => {
 		loadSermonListData({
 			nodes: [
 				{
+					id: 'the_sermon_id_1',
 					audioFiles: [
 						{
 							url: 'file_url',
@@ -298,6 +299,7 @@ describe('sermons list page', () => {
 					],
 				},
 				{
+					id: 'the_sermon_id_2',
 					audioFiles: [
 						{
 							url: 'file_url',
@@ -320,7 +322,7 @@ describe('sermons list page', () => {
 
 		const calls = (feed.Feed as any).mock.calls;
 
-		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings: English');
+		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings (English)');
 	});
 
 	it('translates feed titles', async () => {
@@ -332,7 +334,7 @@ describe('sermons list page', () => {
 		const calls = (feed.Feed as any).mock.calls;
 
 		expect(calls[0][0].title).toEqual(
-			'Grabaciones Recientes de AudioVerse: Español'
+			'Grabaciones Recientes de AudioVerse (Español)'
 		);
 	});
 
@@ -400,7 +402,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						audioFiles: [{}],
 					},
@@ -418,7 +420,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						videoFiles: [{}],
 					},
@@ -436,7 +438,7 @@ describe('sermons list page', () => {
 			sermons: {
 				nodes: [
 					{
-						id: '1',
+						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						persons: [
 							{
@@ -453,5 +455,13 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_summary')).toBeInTheDocument();
+	});
+
+	it('skips feed creation if invalid language', async () => {
+		loadSermonListData();
+
+		await renderPage({ params: { i: '1', language: 'bad' } });
+
+		expect(fs.writeFileSync).not.toBeCalled();
 	});
 });

@@ -18,6 +18,13 @@ export const makeSeriesRoute = (
 	seriesId: string
 ): string => `/${languageRoute}/series/${seriesId}`;
 
+export const makeTagRoute = (
+	languageRoute: string,
+	tagName: string,
+	pageIndex = 1
+): string =>
+	`/${languageRoute}/tags/${encodeURIComponent(tagName)}/page/${pageIndex}`;
+
 export const makeSermonListRouteAll = (
 	languageRoute: string,
 	page: number | string
@@ -37,3 +44,8 @@ export const makeSermonListBaseRoute = (
 	languageRoute: string,
 	filter: string
 ): string => `/${languageRoute}/sermons/${filter}`;
+
+export const makeTagDetailBaseRoute = (
+	languageRoute: string,
+	tagSlug: string
+): string => `/${languageRoute}/tags/${tagSlug}`;
