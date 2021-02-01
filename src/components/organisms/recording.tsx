@@ -12,7 +12,7 @@ import { readableBytes } from '@lib/readableBytes';
 import { makeSeriesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-export type RecordingType = NonNullable<RecordingFragment>;
+type RecordingType = NonNullable<RecordingFragment>;
 
 interface Playable {
 	url: string;
