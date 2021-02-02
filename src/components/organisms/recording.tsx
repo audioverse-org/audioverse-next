@@ -271,6 +271,17 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				/>
 			</h3>
 			<p>{recording.shareUrl}</p>
+			<label>
+				<FormattedMessage
+					id="sermonDetailPage__embedCodeLabel"
+					defaultMessage="Embed Code"
+					description="Sermon detail embed code label"
+				/>{' '}
+				<input
+					readOnly={true}
+					value={`<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`}
+				/>
+			</label>
 			{recording.transcript?.text && (
 				<>
 					<h2>

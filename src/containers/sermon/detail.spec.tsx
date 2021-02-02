@@ -804,4 +804,24 @@ describe('sermon detail page', () => {
 
 		expect(getByText('Share')).toBeInTheDocument();
 	});
+
+	it('has embed input', async () => {
+		loadSermonDetailData();
+
+		const { getByLabelText } = await renderPage();
+
+		expect(getByLabelText('Embed Code')).toBeInTheDocument();
+	});
+
+	it('populates embed input', async () => {
+		loadSermonDetailData();
+
+		const { getByLabelText } = await renderPage();
+
+		const input = getByLabelText('Embed Code') as HTMLInputElement;
+
+		expect(input.value).toContain(
+			'https://www.audioverse.org/english/embed/media/the_sermon_id'
+		);
+	});
 });
