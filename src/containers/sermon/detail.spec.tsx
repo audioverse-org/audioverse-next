@@ -774,4 +774,34 @@ describe('sermon detail page', () => {
 
 		expect(queryByText('Transcript')).not.toBeInTheDocument();
 	});
+
+	it('includes share url', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_share_url')).toBeInTheDocument();
+	});
+
+	it('includes share url title', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Short URL')).toBeInTheDocument();
+	});
+
+	it('includes share title', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Share')).toBeInTheDocument();
+	});
 });

@@ -256,6 +256,21 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					)}
 				</>
 			)}
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__shareTitle"
+					defaultMessage="Share"
+					description="Sermon detail share section title"
+				/>
+			</h2>
+			<h3>
+				<FormattedMessage
+					id="sermonDetailPage__shortUrlLabel"
+					defaultMessage="Short URL"
+					description="Sermon detail short url label"
+				/>
+			</h3>
+			<p>{recording.shareUrl}</p>
 			{recording.transcript?.text && (
 				<>
 					<h2>

@@ -4426,7 +4426,7 @@ export type SpeakerNameFragment = (
 
 export type RecordingFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear'>
+  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear' | 'shareUrl'>
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
@@ -4848,6 +4848,7 @@ export const RecordingFragmentDoc = `
   transcript {
     text
   }
+  shareUrl
 }
     ${SpeakerNameFragmentDoc}`;
 export const CreateFeedFragmentDoc = `

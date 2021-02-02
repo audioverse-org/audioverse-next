@@ -65,4 +65,5 @@ fragment recording on Recording {
     transcript {
         text
     }
+    shareUrl
 }
