@@ -597,6 +597,7 @@ export type Image = {
 
 
 export type ImageUrlArgs = {
+  cropMode?: Maybe<ImageCropMode>;
   size: Scalars['Int'];
 };
 
@@ -613,7 +614,16 @@ export enum ImageContainer {
   News = 'NEWS',
   Person = 'PERSON',
   Sequence = 'SEQUENCE',
+  Site = 'SITE',
   Sponsor = 'SPONSOR'
+}
+
+/** Aavailable crop modes for images. */
+export enum ImageCropMode {
+  /** Resizes the image to the requested size and in the process crops parts from the original image. */
+  Default = 'DEFAULT',
+  /** Scales the whole image content (no cropping) at the original aspect ratio to fit within the output size. */
+  MaxSize = 'MAX_SIZE'
 }
 
 export type ImageEdge = {
@@ -767,6 +777,20 @@ export enum MediaFileContainer {
   Wmv = 'WMV'
 }
 
+/** The transcoding status of a media file upload. */
+export enum MediaFileTranscodingStatus {
+  /** Transcoding completed. */
+  Complete = 'COMPLETE',
+  /** Transcoding failed. */
+  Failed = 'FAILED',
+  /** Transcoding in process. */
+  Processing = 'PROCESSING',
+  /** Waiting for transcoding slot. */
+  Queued = 'QUEUED',
+  /** Not Yet Begun */
+  Unstarted = 'UNSTARTED'
+}
+
 export type MediaFileUpload = Node & {
   __typename?: 'MediaFileUpload';
   filename: Scalars['String'];
@@ -778,6 +802,7 @@ export type MediaFileUpload = Node & {
   /** The presigned part upload URLs. Unavailable after the upload has completed. */
   partUploadUrls?: Maybe<Array<Scalars['String']>>;
   recording?: Maybe<Recording>;
+  transcodingStatus: MediaFileTranscodingStatus;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -2083,6 +2108,7 @@ export type QueryMediaFileUploadsArgs = {
   hasUploaded?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
   orderBy?: Maybe<Array<MediaFileUploadsOrder>>;
+  transcodingStatuses?: Maybe<Array<MediaFileTranscodingStatus>>;
 };
 
 
@@ -2459,6 +2485,7 @@ export type QueryTagsArgs = {
   first?: Maybe<Scalars['Int']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<TagsOrder>>;
   search?: Maybe<Scalars['String']>;
 };
 
@@ -2508,6 +2535,7 @@ export type Recording = Node & {
   contentScreeningStatus: RecordingContentScreeningStatus;
   contentType: RecordingContentType;
   copyrightYear?: Maybe<Scalars['Int']>;
+  coverImage?: Maybe<Image>;
   description?: Maybe<Scalars['String']>;
   distributionAgreement?: Maybe<DistributionAgreement>;
   /** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
@@ -2670,6 +2698,7 @@ export type RecordingCreateInput = {
   collectionId?: Maybe<Scalars['ID']>;
   contentType: RecordingContentType;
   copyrightYear?: Maybe<Scalars['Int']>;
+  coverImage?: Maybe<ImageInput>;
   description?: Maybe<Scalars['String']>;
   distributionAgreementId: Scalars['ID'];
   hidingReason?: Maybe<Scalars['String']>;
@@ -2920,6 +2949,7 @@ export type RecordingUpdateInput = {
   bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId?: Maybe<Scalars['ID']>;
   copyrightYear?: Maybe<Scalars['Int']>;
+  coverImage?: Maybe<ImageInput>;
   description?: Maybe<Scalars['String']>;
   distributionAgreementId?: Maybe<Scalars['ID']>;
   hidingReason?: Maybe<Scalars['String']>;
@@ -3265,6 +3295,33 @@ export type Tag = Node & {
   __typename?: 'Tag';
   id: Scalars['ID'];
   name: Scalars['String'];
+  recordings: RecordingConnection;
+};
+
+
+export type TagRecordingsArgs = {
+  after?: Maybe<Scalars['String']>;
+  bibleReferences?: Maybe<Array<BibleReferenceRangeInput>>;
+  collectionId?: Maybe<Scalars['ID']>;
+  collectionIds?: Maybe<Array<Scalars['ID']>>;
+  contentType?: Maybe<RecordingContentType>;
+  distributionAgreementId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  hasVideo?: Maybe<Scalars['Boolean']>;
+  includeUnpublished?: Maybe<Scalars['Boolean']>;
+  offset?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<Array<RecordingsOrder>>;
+  person?: Maybe<RecordingPersonInput>;
+  persons?: Maybe<Array<RecordingPersonInput>>;
+  publishDates?: Maybe<Array<DateRangeInput>>;
+  recordingDates?: Maybe<Array<DateRangeInput>>;
+  search?: Maybe<Scalars['String']>;
+  sequenceId?: Maybe<Scalars['ID']>;
+  sequenceIds?: Maybe<Array<Scalars['ID']>>;
+  sponsorId?: Maybe<Scalars['ID']>;
+  sponsorIds?: Maybe<Array<Scalars['ID']>>;
+  stage?: Maybe<RecordingStage>;
+  websiteIds?: Maybe<Array<Scalars['ID']>>;
 };
 
 export type TagConnection = {
@@ -3280,6 +3337,18 @@ export type TagEdge = {
   cursor: Scalars['String'];
   node: Tag;
 };
+
+export type TagsOrder = {
+  direction: OrderByDirection;
+  field: TagsSortableField;
+};
+
+/** Properties by which tags connections can be ordered. */
+export enum TagsSortableField {
+  Name = 'NAME',
+  RecordingCount = 'RECORDING_COUNT',
+  SermonCount = 'SERMON_COUNT'
+}
 
 export type TestimoniesOrder = {
   direction: OrderByDirection;
@@ -4566,6 +4635,43 @@ export type GetTagDetailPathsQueryQuery = (
   ) }
 );
 
+export type GetTagListPageDataQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetTagListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { tags: (
+    { __typename?: 'TagConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'name'>
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetTagListPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetTagListPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { tags: (
+    { __typename?: 'TagConnection' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetTestimoniesQueryVariables = Exact<{
   language: Language;
   offset?: Maybe<Scalars['Int']>;
@@ -4993,6 +5099,52 @@ export const useGetTagDetailPathsQueryQuery = <
       graphqlFetcher<GetTagDetailPathsQueryQuery, GetTagDetailPathsQueryQueryVariables>(GetTagDetailPathsQueryDocument, variables),
       options
     );
+export const GetTagListPageDataDocument = `
+    query getTagListPageData($language: Language!, $first: Int, $offset: Int) {
+  tags(language: $language, first: $first, offset: $offset) {
+    nodes {
+      id
+      name
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetTagListPageDataQuery = <
+      TData = GetTagListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetTagListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetTagListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetTagListPageDataQuery, TError, TData>(
+      ['getTagListPageData', variables],
+      graphqlFetcher<GetTagListPageDataQuery, GetTagListPageDataQueryVariables>(GetTagListPageDataDocument, variables),
+      options
+    );
+export const GetTagListPathsDataDocument = `
+    query getTagListPathsData($language: Language!) {
+  tags(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetTagListPathsDataQuery = <
+      TData = GetTagListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetTagListPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetTagListPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetTagListPathsDataQuery, TError, TData>(
+      ['getTagListPathsData', variables],
+      graphqlFetcher<GetTagListPathsDataQuery, GetTagListPathsDataQueryVariables>(GetTagListPathsDataDocument, variables),
+      options
+    );
 export const GetTestimoniesDocument = `
     query getTestimonies($language: Language!, $offset: Int, $first: Int) {
   testimonies(
@@ -5123,6 +5275,21 @@ export async function getTagDetailPathsQuery(
   variables: GetTagDetailPathsQueryQueryVariables
 ): Promise<GetTagDetailPathsQueryQuery> {
   return fetchApi(GetTagDetailPathsQueryDocument, { variables });
+}
+				
+
+export async function getTagListPageData(
+  variables: GetTagListPageDataQueryVariables
+): Promise<GetTagListPageDataQuery> {
+  return fetchApi(GetTagListPageDataDocument, { variables });
+}
+				
+
+
+export async function getTagListPathsData(
+  variables: GetTagListPathsDataQueryVariables
+): Promise<GetTagListPathsDataQuery> {
+  return fetchApi(GetTagListPathsDataDocument, { variables });
 }
 				
 
