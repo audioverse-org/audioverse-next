@@ -9,7 +9,7 @@ import { Language } from '@lib/generated/graphql';
 
 export async function makeNumberedPaths(
 	sectionSegments: string,
-	getCount: (language: string) => Promise<number>
+	getCount: (language: Language) => Promise<number>
 ): Promise<string[]> {
 	const keys = _.keys(LANGUAGES) as Language[];
 	const pathSetPromises = keys.map(async (k) => {
@@ -29,7 +29,7 @@ export async function makeNumberedPaths(
 
 export const getNumberedStaticPaths = async (
 	basePath: string,
-	getCount: (language: string) => Promise<number>
+	getCount: (language: Language) => Promise<number>
 ): Promise<StaticPaths> => {
 	return {
 		paths: await makeNumberedPaths(basePath, getCount),

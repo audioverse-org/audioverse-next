@@ -13,6 +13,7 @@ import Favorite from '@components/molecules/favorite';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
 import { Person } from '@lib/generated/graphql';
@@ -36,7 +37,7 @@ type QueryByText = (
 ) => HTMLElement | null;
 
 const expectNoUnlocalizedText = (queryByText: QueryByText) => {
-	expect(queryByText(/[^z]+/)).not.toBeInTheDocument();
+	expect(queryByText(/[^z0-9]+/)).not.toBeInTheDocument();
 };
 
 const expectNoUnlocalizedToasts = () => {
@@ -165,5 +166,21 @@ describe('localization usage', () => {
 		userEvent.click(byRole);
 
 		expectNoUnlocalizedToasts();
+	});
+
+	it('localizes tag list page', async () => {
+		const { queryByText } = await renderWithQueryProvider(
+			<TagList
+				nodes={[
+					{
+						id: 'z',
+						name: 'z',
+					},
+				]}
+				pagination={{ current: 0, total: 0 }}
+			/>
+		);
+
+		expectNoUnlocalizedText(queryByText);
 	});
 });
