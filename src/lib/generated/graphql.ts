@@ -384,6 +384,7 @@ export type CollectionRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -524,6 +525,7 @@ export type DistributionAgreementRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -1691,6 +1693,7 @@ export type PersonRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -1969,6 +1972,7 @@ export type QueryAudiobookTracksArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2074,6 +2078,7 @@ export type QueryFeaturedRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2222,6 +2227,7 @@ export type QueryMusicTracksArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2268,6 +2274,7 @@ export type QueryPopularRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2302,6 +2309,7 @@ export type QueryRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2383,6 +2391,7 @@ export type QuerySermonsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2428,6 +2437,7 @@ export type QueryStoriesArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2706,17 +2716,17 @@ export type RecordingCreateInput = {
   isFeatured?: Maybe<Scalars['Boolean']>;
   isHidden?: Maybe<Scalars['Boolean']>;
   notes?: Maybe<Scalars['String']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   publishDate?: Maybe<Scalars['DateTime']>;
   recordingDate?: Maybe<Scalars['DateTime']>;
   recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags?: Maybe<Array<RecordingTagInput>>;
   sequenceId?: Maybe<Scalars['ID']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipContentScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipLegalScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
   sponsorId: Scalars['ID'];
   title: Scalars['String'];
@@ -2782,6 +2792,16 @@ export type RecordingScreeningCheckoutPayload = {
   errors: Array<InputValidationError>;
   recordingScreeningCheckout?: Maybe<RecordingScreeningCheckout>;
 };
+
+/** The recording content screening view filters. */
+export enum RecordingScreeningContentViewFilter {
+  /** Limits recordings to those assigned to users other than the viewer. */
+  AssignedNonViewer = 'ASSIGNED_NON_VIEWER',
+  /** Limits recordings to those assigned to the viewer. */
+  AssignedViewer = 'ASSIGNED_VIEWER',
+  /** Limits to unassigned recordings. */
+  Unassigned = 'UNASSIGNED'
+}
 
 export type RecordingScreeningIssue = Node & {
   __typename?: 'RecordingScreeningIssue';
@@ -2957,17 +2977,17 @@ export type RecordingUpdateInput = {
   isFeatured?: Maybe<Scalars['Boolean']>;
   isHidden?: Maybe<Scalars['Boolean']>;
   notes?: Maybe<Scalars['String']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   publishDate?: Maybe<Scalars['DateTime']>;
   recordingDate?: Maybe<Scalars['DateTime']>;
   recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags?: Maybe<Array<RecordingTagInput>>;
   sequenceId?: Maybe<Scalars['ID']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipContentScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipLegalScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
   sponsorId?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
@@ -3028,6 +3048,7 @@ export type SequenceRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
   sponsorId?: Maybe<Scalars['ID']>;
@@ -3188,6 +3209,7 @@ export type SponsorRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -3315,6 +3337,7 @@ export type TagRecordingsArgs = {
   persons?: Maybe<Array<RecordingPersonInput>>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -3995,6 +4018,7 @@ export type UserFavoriteRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -4190,6 +4214,7 @@ export type UserPlaylistRecordingsArgs = {
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -4451,6 +4476,9 @@ export type RecordingFragment = (
         & Pick<Image, 'url'>
       )> }
     )> }
+  )>, transcript?: Maybe<(
+    { __typename?: 'Transcript' }
+    & Pick<Transcript, 'text'>
   )> }
 );
 
@@ -4816,6 +4844,9 @@ export const RecordingFragmentDoc = `
         url(size: 100)
       }
     }
+  }
+  transcript {
+    text
   }
 }
     ${SpeakerNameFragmentDoc}`;

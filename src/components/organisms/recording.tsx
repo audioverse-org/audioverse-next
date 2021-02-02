@@ -256,6 +256,32 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					)}
 				</>
 			)}
+			{recording.transcript?.text && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptTitle"
+							defaultMessage="Transcript"
+							description="Sermon detail transcript title"
+						/>
+					</h2>
+					<p>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptDisclaimer"
+							defaultMessage="This transcript may be automatically generated."
+							description="Sermon detail transcript disclaimer"
+						/>
+					</p>
+					<p>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptHelp"
+							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
+							description="Sermon detail transcript assistence request"
+						/>
+					</p>
+					<p>{recording.transcript?.text}</p>
+				</>
+			)}
 			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
 			<p>
 				<span>
