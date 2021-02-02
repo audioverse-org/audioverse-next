@@ -23,6 +23,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Header from '@components/organisms/header';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -180,6 +181,12 @@ describe('localization usage', () => {
 				pagination={{ current: 0, total: 0 }}
 			/>
 		);
+
+		expectNoUnlocalizedText(queryByText);
+	});
+
+	it('localizes header', async () => {
+		const { queryByText } = await renderWithQueryProvider(<Header />);
 
 		expectNoUnlocalizedText(queryByText);
 	});

@@ -1,5 +1,5 @@
 import Header from '@components/organisms/header';
-import { renderWithIntl } from '@lib/test/helpers';
+import { loadRouter, renderWithIntl } from '@lib/test/helpers';
 
 jest.mock('@lib/api/fetchApi');
 
@@ -18,5 +18,37 @@ describe('header', () => {
 		const { getByPlaceholderText } = await renderHeader();
 
 		expect(getByPlaceholderText('Search')).toBeInTheDocument();
+	});
+
+	it('has donate button', async () => {
+		const { getByRole } = await renderHeader();
+
+		expect(
+			getByRole('link', {
+				name: 'Donate Now',
+			})
+		).toBeInTheDocument();
+	});
+
+	it('links donate button', async () => {
+		const { getByRole } = await renderHeader();
+
+		const link = getByRole('link', {
+			name: 'Donate Now',
+		}) as HTMLLinkElement;
+
+		expect(link.href).toContain('/en/give');
+	});
+
+	it('localizes donate button', async () => {
+		loadRouter({ query: { language: 'ru' } });
+
+		const { getByRole } = await renderHeader();
+
+		const link = getByRole('link', {
+			name: 'Donate Now',
+		}) as HTMLLinkElement;
+
+		expect(link.href).toContain('/ru/give');
 	});
 });

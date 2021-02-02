@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: How will we translate this page?
 export default function Give(): JSX.Element {
 	return (
 		<>
@@ -18,7 +19,7 @@ export default function Give(): JSX.Element {
 					minWidth: '310px',
 					maxHeight: 'none !important',
 				}}
-				seamless="seamless"
+				seamless
 				name="donorbox"
 				frameBorder="0"
 				scrolling="no"
