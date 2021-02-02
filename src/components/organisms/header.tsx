@@ -23,6 +23,152 @@ const Header = (): JSX.Element => {
 				/>
 			</a>
 			<LoadingIndicator />
+			<ul>
+				<li>
+					<a href={`/${languageRoute}/sermons/all/page/1`}>
+						<FormattedMessage
+							id={`header__navItemPresentations`}
+							defaultMessage="Presentations"
+							description={`Header nav link name: Presentations`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__navItemBibles`}
+							defaultMessage="Bibles"
+							description={`Header nav link name: Bibles`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemBooks`}
+							defaultMessage="Books"
+							description={`Header nav link name: Books`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemStories`}
+							defaultMessage="Stories"
+							description={`Header nav link name: Stories`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemScriptureSongs`}
+							defaultMessage="Scripture Songs"
+							description={`Header nav link name: Scripture Songs`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemConferences`}
+							defaultMessage="Conferences"
+							description={`Header nav link name: Conferences`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemPresenters`}
+							defaultMessage="Presenters"
+							description={`Header nav link name: Presenters`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href={`/${languageRoute}/tags/page/1`}>
+						<FormattedMessage
+							id={`header__naveItemTags`}
+							defaultMessage="Tags"
+							description={`Header nav link name: Tags`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemSponsors`}
+							defaultMessage="Sponsors"
+							description={`Header nav link name: Sponsors`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemSeries`}
+							defaultMessage="Series"
+							description={`Header nav link name: Series`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemPlaylists`}
+							defaultMessage="Playlists"
+							description={`Header nav link name: Playlists`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href={`/${languageRoute}/profile`}>
+						<FormattedMessage
+							id={`header__naveItemManageAccount`}
+							defaultMessage="Manage Account"
+							description={`Header nav link name: Manage Account`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemMyPlaylists`}
+							defaultMessage="My Playlists"
+							description={`Header nav link name: My Playlists`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemFavorites`}
+							defaultMessage="Favorites"
+							description={`Header nav link name: Favorites`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemHistory`}
+							defaultMessage="History"
+							description={`Header nav link name: History`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<FormattedMessage
+							id={`header__naveItemLogout`}
+							defaultMessage="Logout"
+							description={`Header nav link name: Logout`}
+						/>
+					</a>
+				</li>
+			</ul>
 		</header>
 	);
 };

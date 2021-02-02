@@ -51,4 +51,31 @@ describe('header', () => {
 
 		expect(link.href).toContain('/ru/give');
 	});
+
+	it('has navigation', async () => {
+		const links = [
+			'Presentations',
+			'Bibles',
+			'Books',
+			'Stories',
+			'Scripture Songs',
+			'Conferences',
+			'Presenters',
+			'Tags',
+			'Sponsors',
+			'Series',
+			'Playlists',
+			'Manage Account',
+			'My Playlists',
+			'Favorites',
+			'History',
+			'Logout',
+		];
+
+		const { getByRole } = await renderHeader();
+
+		links.map((name) => {
+			expect(getByRole('link', { name })).toBeInTheDocument();
+		});
+	});
 });
