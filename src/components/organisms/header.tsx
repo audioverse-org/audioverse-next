@@ -12,11 +12,7 @@ const Header = (): JSX.Element => {
 	return (
 		<header className={styles.header}>
 			<h1>
-				<FormattedMessage
-					id="header__siteName"
-					defaultMessage="AudioVerse"
-					description="Header site name"
-				/>
+				<img src="/img/av-logo.png" alt="AudioVerse" width={300} />
 			</h1>
 			<input placeholder={'Search'} />
 			<a href={`/${languageRoute}/give`}>

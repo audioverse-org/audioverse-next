@@ -9,9 +9,9 @@ const renderHeader = async () => {
 
 describe('header', () => {
 	it('has title', async () => {
-		const { getByText } = await renderHeader();
+		const { getByAltText } = await renderHeader();
 
-		expect(getByText('AudioVerse')).toBeInTheDocument();
+		expect(getByAltText('AudioVerse')).toBeInTheDocument();
 	});
 
 	it('has search box', async () => {
