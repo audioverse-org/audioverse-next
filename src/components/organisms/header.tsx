@@ -1,10 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import LoadingIndicator from '@components/molecules/loadingIndicator';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { FormattedMessage } from 'react-intl';
 
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
