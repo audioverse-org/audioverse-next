@@ -70,6 +70,8 @@ describe('header', () => {
 			'Favorites',
 			'History',
 			'Logout',
+			'AudioVerse Store',
+			'Journeys Unscripted',
 		];
 
 		const { getByRole } = await renderHeader();

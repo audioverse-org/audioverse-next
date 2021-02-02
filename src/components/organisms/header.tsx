@@ -11,6 +11,34 @@ const Header = (): JSX.Element => {
 
 	return (
 		<header className={styles.header}>
+			<ul>
+				<li>
+					<a
+						href={`https://audioversestore.org/`}
+						target={'_blank'}
+						rel={'noreferrer noopener'}
+					>
+						<FormattedMessage
+							id={`header__sisterSiteStoreLink`}
+							defaultMessage="AudioVerse Store"
+							description={`Header sister site link: store`}
+						/>
+					</a>
+				</li>
+				<li>
+					<a
+						href={`https://www.journeysunscripted.com/`}
+						target={'_blank'}
+						rel={'noreferrer noopener'}
+					>
+						<FormattedMessage
+							id={`header__sisterSiteJourneysUnscriptedLink`}
+							defaultMessage="Journeys Unscripted"
+							description={`Header sister site link: Journeys Unscripted`}
+						/>
+					</a>
+				</li>
+			</ul>
 			<h1>
 				<img src="/img/av-logo.png" alt="AudioVerse" width={300} />
 			</h1>
