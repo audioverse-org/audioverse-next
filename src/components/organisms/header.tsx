@@ -40,7 +40,9 @@ const Header = (): JSX.Element => {
 				</li>
 			</ul>
 			<h1>
-				<img src="/img/av-logo.png" alt="AudioVerse" width={300} />
+				<a href={`/${languageRoute}`}>
+					<img src="/img/av-logo.png" alt="AudioVerse" width={300} />
+				</a>
 			</h1>
 			<input placeholder={'Search'} />
 			<a href={`/${languageRoute}/give`}>

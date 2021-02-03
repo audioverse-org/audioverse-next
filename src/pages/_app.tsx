@@ -9,6 +9,7 @@ import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
+import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,6 +42,7 @@ function MyApp<P>({
 					<div className={'template-base__content'}>
 						<Component {...pageProps} />
 					</div>
+					<Footer />
 					{/*<script src="//vjs.zencdn.net/6.7/video.min.js" />*/}
 				</Hydrate>
 			</QueryClientProvider>

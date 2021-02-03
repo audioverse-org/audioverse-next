@@ -80,4 +80,13 @@ describe('header', () => {
 			expect(getByRole('link', { name })).toBeInTheDocument();
 		});
 	});
+
+	it('links logo', async () => {
+		const { getByAltText } = await renderHeader();
+
+		const logo = getByAltText('AudioVerse');
+		const link = logo.parentElement as HTMLLinkElement;
+
+		expect(link.href).toContain('/en');
+	});
 });
