@@ -4482,6 +4482,20 @@ export type RecordingFragment = (
   )> }
 );
 
+export type GetBibleVersionsPageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBibleVersionsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & Pick<Bible, 'title' | 'id'>
+    )>> }
+  ) }
+);
+
 export type GetHomeStaticPropsQueryVariables = Exact<{
   language: Language;
 }>;
@@ -4894,6 +4908,28 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetBibleVersionsPageDataDocument = `
+    query getBibleVersionsPageData {
+  audiobibles {
+    nodes {
+      title
+      id
+    }
+  }
+}
+    `;
+export const useGetBibleVersionsPageDataQuery = <
+      TData = GetBibleVersionsPageDataQuery,
+      TError = unknown
+    >(
+      variables?: GetBibleVersionsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleVersionsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleVersionsPageDataQuery, TError, TData>(
+      ['getBibleVersionsPageData', variables],
+      graphqlFetcher<GetBibleVersionsPageDataQuery, GetBibleVersionsPageDataQueryVariables>(GetBibleVersionsPageDataDocument, variables),
+      options
+    );
 export const GetHomeStaticPropsDocument = `
     query getHomeStaticProps($language: Language!) {
   sermons(language: $language, first: 5) {
@@ -5236,6 +5272,13 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getBibleVersionsPageData(
+  variables: GetBibleVersionsPageDataQueryVariables
+): Promise<GetBibleVersionsPageDataQuery> {
+  return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+}
+				
 
 export async function getHomeStaticProps(
   variables: GetHomeStaticPropsQueryVariables

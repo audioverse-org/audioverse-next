@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO: Ensure this page gets statically generated
 // TODO: How will we translate this page?
 export default function Give(): JSX.Element {
 	return (

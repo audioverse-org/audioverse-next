@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import Search, { SearchProps } from '@containers/search';
-import { LANGUAGES } from '@lib/constants';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 
 export default Search;
 
@@ -13,7 +13,7 @@ interface StaticProps {
 export async function getStaticProps(): Promise<StaticProps> {
 	return {
 		props: {},
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 

@@ -5,6 +5,7 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeSermonRoute } from '@lib/routes';
+import { REVALIDATE } from '@lib/constants';
 
 export default SermonDetail;
 
@@ -27,7 +28,7 @@ export async function getStaticProps({
 		props: {
 			sermon,
 		},
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 

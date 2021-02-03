@@ -5,6 +5,7 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeSeriesRoute } from '@lib/routes';
+import { REVALIDATE } from '@lib/constants';
 
 export default SeriesDetail;
 
@@ -24,7 +25,7 @@ export async function getStaticProps({
 
 	return {
 		props: { series },
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 
