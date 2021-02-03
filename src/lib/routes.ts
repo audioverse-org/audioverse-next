@@ -57,3 +57,8 @@ export const makeBibleVersionRoute = (
 	languageRoute: string,
 	versionId: string
 ): string => `/${languageRoute}/bibles/${versionId}`;
+
+export const makeBibleBookRoute = (
+	languageRoute: string,
+	bookId: string
+): string => `/${languageRoute}/bibles/${bookId.replace('-', '/')}`;

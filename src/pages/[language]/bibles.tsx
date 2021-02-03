@@ -1,7 +1,8 @@
 import Versions, { VersionsProps } from '@containers/bibles/versions';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import { getBibleVersionsPageData, Language } from '@lib/generated/graphql';
+import { REVALIDATE } from '@lib/constants';
+import { getBibleVersionsPageData } from '@lib/generated/graphql';
 import { makeBibleListRoute } from '@lib/routes';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 
 // TODO: If we ever add a load of Bibles, we may need to
 //  add support for pagination.
@@ -25,11 +26,10 @@ export async function getStaticProps(): Promise<StaticProps> {
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	const keys = Object.keys(LANGUAGES) as Language[];
-	const base_routes = keys.map((k: Language) => LANGUAGES[k].base_url);
+	const baseRoutes = getLanguageRoutes();
 
 	return {
-		paths: base_routes.map(makeBibleListRoute),
+		paths: baseRoutes.map(makeBibleListRoute),
 		fallback: true,
 	};
 }

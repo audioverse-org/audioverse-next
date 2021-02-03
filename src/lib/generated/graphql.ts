@@ -4482,6 +4482,36 @@ export type RecordingFragment = (
   )> }
 );
 
+export type GetVersionDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetVersionDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobible?: Maybe<(
+    { __typename?: 'Bible' }
+    & { books: Array<(
+      { __typename?: 'BibleBook' }
+      & Pick<BibleBook, 'id' | 'title' | 'chapterCount'>
+    )> }
+  )> }
+);
+
+export type GetVersionDetailPathDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVersionDetailPathDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & Pick<Bible, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetBibleVersionsPageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4908,6 +4938,50 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetVersionDetailPageDataDocument = `
+    query getVersionDetailPageData($id: ID!) {
+  audiobible(id: $id) {
+    books {
+      id
+      title
+      chapterCount
+    }
+  }
+}
+    `;
+export const useGetVersionDetailPageDataQuery = <
+      TData = GetVersionDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetVersionDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetVersionDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetVersionDetailPageDataQuery, TError, TData>(
+      ['getVersionDetailPageData', variables],
+      graphqlFetcher<GetVersionDetailPageDataQuery, GetVersionDetailPageDataQueryVariables>(GetVersionDetailPageDataDocument, variables),
+      options
+    );
+export const GetVersionDetailPathDataDocument = `
+    query getVersionDetailPathData {
+  audiobibles {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetVersionDetailPathDataQuery = <
+      TData = GetVersionDetailPathDataQuery,
+      TError = unknown
+    >(
+      variables?: GetVersionDetailPathDataQueryVariables, 
+      options?: UseQueryOptions<GetVersionDetailPathDataQuery, TError, TData>
+    ) => 
+    useQuery<GetVersionDetailPathDataQuery, TError, TData>(
+      ['getVersionDetailPathData', variables],
+      graphqlFetcher<GetVersionDetailPathDataQuery, GetVersionDetailPathDataQueryVariables>(GetVersionDetailPathDataDocument, variables),
+      options
+    );
 export const GetBibleVersionsPageDataDocument = `
     query getBibleVersionsPageData {
   audiobibles {
@@ -5272,6 +5346,21 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getVersionDetailPageData(
+  variables: GetVersionDetailPageDataQueryVariables
+): Promise<GetVersionDetailPageDataQuery> {
+  return fetchApi(GetVersionDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getVersionDetailPathData(
+  variables: GetVersionDetailPathDataQueryVariables
+): Promise<GetVersionDetailPathDataQuery> {
+  return fetchApi(GetVersionDetailPathDataDocument, { variables });
+}
+				
 
 export async function getBibleVersionsPageData(
   variables: GetBibleVersionsPageDataQueryVariables
