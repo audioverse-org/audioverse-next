@@ -39,4 +39,22 @@ describe('footer', () => {
 			expect(getByRole('link', { name })).toBeInTheDocument();
 		});
 	});
+
+	it('has iOS link', async () => {
+		const { getByAltText } = await renderWithIntl(Footer, {});
+
+		const img = getByAltText('iOS App');
+		const link = img.parentElement as HTMLLinkElement;
+
+		expect(link.href).toContain('itunes.apple.com');
+	});
+
+	it('has Android link', async () => {
+		const { getByAltText } = await renderWithIntl(Footer, {});
+
+		const img = getByAltText('Android App');
+		const link = img.parentElement as HTMLLinkElement;
+
+		expect(link.href).toContain('play.google.com');
+	});
 });

@@ -263,6 +263,22 @@ export default function Footer(): JSX.Element {
 					</a>
 				</li>
 			</ul>
+
+			<a
+				href="https://itunes.apple.com/us/app/audioverse/id726998810?mt=8"
+				target={'_blank'}
+				rel={'noreferrer noopener'}
+			>
+				<img src="/img/app-apple.png" alt="iOS App" />
+			</a>
+
+			<a
+				href="https://play.google.com/store/apps/details?id=org.audioverse.exodus"
+				target={'_blank'}
+				rel={'noreferrer noopener'}
+			>
+				<img src="/img/app-android.png" alt="Android App" />
+			</a>
 		</div>
 	);
 }
