@@ -279,6 +279,14 @@ export default function Footer(): JSX.Element {
 			>
 				<img src="/img/app-android.png" alt="Android App" />
 			</a>
+
+			<p>
+				<span>{`AudioVerse © ${new Date().getFullYear()} All Rights Reserved.`}</span>{' '}
+				{/* TODO: Update links when pages exist */}
+				<a href="#">Legal Info</a>, <a href="#">Terms of Use</a>,{' '}
+				<a href="#">Privacy Policy</a>. Designed by{' '}
+				<a href="https://typesandsymbols.com/">Types & Symbols</a>.
+			</p>
 		</div>
 	);
 }
