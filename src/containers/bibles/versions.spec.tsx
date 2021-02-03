@@ -1,10 +1,11 @@
+import { when } from 'jest-when';
+
+import { GetBibleVersionsPageDataDocument } from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles';
-import { GetBibleVersionsPageDataDocument } from '@lib/generated/graphql';
-import { when } from 'jest-when';
 
 async function renderPage() {
 	const { props } = await getStaticProps();

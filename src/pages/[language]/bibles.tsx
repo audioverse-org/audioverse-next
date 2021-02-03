@@ -1,6 +1,6 @@
 import Versions, { VersionsProps } from '@containers/bibles/versions';
-import { getBibleVersionsPageData, Language } from '@lib/generated/graphql';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { getBibleVersionsPageData, Language } from '@lib/generated/graphql';
 import { makeBibleListRoute } from '@lib/routes';
 
 // TODO: If we ever add a load of Bibles, we may need to

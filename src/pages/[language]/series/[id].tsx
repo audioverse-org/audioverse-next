@@ -1,11 +1,11 @@
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSeriesDetailData,
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeSeriesRoute } from '@lib/routes';
-import { REVALIDATE } from '@lib/constants';
 
 export default SeriesDetail;
 

@@ -1,11 +1,11 @@
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeSermonRoute } from '@lib/routes';
-import { REVALIDATE } from '@lib/constants';
 
 export default SermonDetail;
 
