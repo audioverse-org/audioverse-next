@@ -1,13 +1,14 @@
+import { when } from 'jest-when';
+
+import {
+	GetVersionDetailPageDataDocument,
+	GetVersionDetailPathDataDocument,
+} from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Version, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]';
-import {
-	GetVersionDetailPageDataDocument,
-	GetVersionDetailPathDataDocument,
-} from '@lib/generated/graphql';
-import { when } from 'jest-when';
 
 async function renderPage() {
 	const { props } = await getStaticProps({ params: { id: 'the_version_id' } });
@@ -77,5 +78,9 @@ describe('version detail page', () => {
 		expect(link.href).toContain('/en/bibles/ENGESVC/Gen');
 	});
 
-	// TODO: add with fail states
+	it('renders 404', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
 });

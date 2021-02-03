@@ -1,9 +1,9 @@
 import Version, { VersionProps } from '@containers/bibles/version';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getVersionDetailPageData,
 	getVersionDetailPathData,
 } from '@lib/generated/graphql';
-import { REVALIDATE } from '@lib/constants';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeBibleVersionRoute } from '@lib/routes';
 
@@ -11,7 +11,7 @@ export default Version;
 
 interface StaticProps {
 	props: VersionProps;
-	revalidate: Number;
+	revalidate: number;
 }
 
 export async function getStaticProps({
@@ -19,11 +19,18 @@ export async function getStaticProps({
 }: {
 	params: { id: string };
 }): Promise<StaticProps> {
-	const response = await getVersionDetailPageData({ id: params.id });
+	let books: VersionProps['books'] = [];
+
+	try {
+		const response = await getVersionDetailPageData({ id: params.id });
+		books = response?.audiobible?.books || [];
+	} catch {
+		// do nothing
+	}
 
 	return {
 		props: {
-			books: response?.audiobible?.books || [],
+			books,
 		},
 		revalidate: REVALIDATE,
 	};

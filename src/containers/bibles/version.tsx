@@ -1,7 +1,9 @@
 import React from 'react';
+
+import withFailStates from '@components/HOCs/withFailStates';
 import { GetVersionDetailPageDataQuery } from '@lib/generated/graphql';
-import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeBibleBookRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Books = NonNullable<
 	NonNullable<GetVersionDetailPageDataQuery['audiobible']>['books']
@@ -11,7 +13,7 @@ export interface VersionProps {
 	books: Books;
 }
 
-export default function Version({ books }: VersionProps): JSX.Element {
+function Version({ books }: VersionProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -26,3 +28,5 @@ export default function Version({ books }: VersionProps): JSX.Element {
 		</>
 	);
 }
+
+export default withFailStates(Version, (props) => !props.books.length);

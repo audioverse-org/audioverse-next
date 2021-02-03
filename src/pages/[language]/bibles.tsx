@@ -1,8 +1,8 @@
 import Versions, { VersionsProps } from '@containers/bibles/versions';
 import { REVALIDATE } from '@lib/constants';
 import { getBibleVersionsPageData } from '@lib/generated/graphql';
-import { makeBibleListRoute } from '@lib/routes';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { makeBibleListRoute } from '@lib/routes';
 
 // TODO: If we ever add a load of Bibles, we may need to
 //  add support for pagination.
