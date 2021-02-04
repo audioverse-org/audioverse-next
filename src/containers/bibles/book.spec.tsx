@@ -1,13 +1,14 @@
+import { when } from 'jest-when';
+
+import {
+	GetBibleBookDetailPageDataDocument,
+	GetBibleBookDetailPathsDataDocument,
+} from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
-import {
-	GetBibleBookDetailPageDataDocument,
-	GetBibleBookDetailPathsDataDocument,
-} from '@lib/generated/graphql';
-import { when } from 'jest-when';
 
 async function renderPage() {
 	const { props } = await getStaticProps({

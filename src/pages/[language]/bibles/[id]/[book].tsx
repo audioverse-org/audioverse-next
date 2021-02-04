@@ -1,11 +1,11 @@
 import Book, { BookProps } from '@containers/bibles/book';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getBibleBookDetailPageData,
 	getBibleBookDetailPathsData,
 } from '@lib/generated/graphql';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeBibleBookRoute } from '@lib/routes';
-import { REVALIDATE } from '@lib/constants';
 
 export default Book;
 

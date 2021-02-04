@@ -1,6 +1,7 @@
 import React from 'react';
-import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
+
 import withFailStates from '@components/HOCs/withFailStates';
+import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
 
 export interface BookProps {
 	data: NonNullable<GetBibleBookDetailPageDataQuery>;
