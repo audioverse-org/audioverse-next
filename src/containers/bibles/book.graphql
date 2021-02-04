@@ -9,6 +9,11 @@ query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
                 url
             }
         }
+        sponsor {
+            name
+            url
+        }
+        copyrightText
     }
 }
 

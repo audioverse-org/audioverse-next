@@ -68,8 +68,10 @@ export type Bible = Node & {
   __typename?: 'Bible';
   book: BibleBook;
   books: Array<BibleBook>;
+  copyrightText: Scalars['String'];
   id: Scalars['ID'];
   isDramatized: Scalars['Boolean'];
+  sponsor: BibleSponsor;
   title: Scalars['String'];
 };
 
@@ -228,6 +230,12 @@ export type BibleReferenceRangeInput = {
   endReference?: Maybe<BibleReferenceInput>;
   /** The start reference. */
   startReference: BibleReferenceInput;
+};
+
+export type BibleSponsor = {
+  __typename?: 'BibleSponsor';
+  name: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type BlogPost = Node & {
@@ -4492,7 +4500,7 @@ export type GetBibleBookDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { audiobible?: Maybe<(
     { __typename?: 'Bible' }
-    & Pick<Bible, 'title'>
+    & Pick<Bible, 'title' | 'copyrightText'>
     & { book: (
       { __typename?: 'BibleBook' }
       & Pick<BibleBook, 'title'>
@@ -4500,6 +4508,9 @@ export type GetBibleBookDetailPageDataQuery = (
         { __typename?: 'BibleChapter' }
         & Pick<BibleChapter, 'id' | 'title' | 'url'>
       )> }
+    ), sponsor: (
+      { __typename?: 'BibleSponsor' }
+      & Pick<BibleSponsor, 'name' | 'url'>
     ) }
   )> }
 );
@@ -4989,6 +5000,11 @@ export const GetBibleBookDetailPageDataDocument = `
         url
       }
     }
+    sponsor {
+      name
+      url
+    }
+    copyrightText
   }
 }
     `;

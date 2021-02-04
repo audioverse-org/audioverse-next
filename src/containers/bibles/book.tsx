@@ -35,6 +35,30 @@ function Book({ data }: BookProps): JSX.Element {
 					))}
 				</select>
 			</label>
+			<h3>
+				<FormattedMessage
+					id="bibleBook__tabAbout"
+					defaultMessage="About"
+					description="Bible book detail page about tab title"
+				/>
+			</h3>
+			<h4>{data.audiobible?.sponsor.name}</h4>
+			<p>{data.audiobible?.sponsor.url}</p>
+			<p>
+				<FormattedMessage
+					id="bibleBook__copyrightPrefix"
+					defaultMessage="Copyright ⓒ"
+					description="Bible book detail page copyright prefix"
+				/>{' '}
+				<span>{data.audiobible?.copyrightText}</span>
+			</p>
+			<h3>
+				<FormattedMessage
+					id="bibleBook__tabDownloads"
+					defaultMessage="Downloads"
+					description="Bible book detail page downloads tab title"
+				/>
+			</h3>
 			<a href={chapter?.url}>
 				<FormattedMessage
 					id="bibleBook__mp3Label"

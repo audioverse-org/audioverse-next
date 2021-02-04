@@ -39,6 +39,11 @@ function loadPageData() {
 						},
 					],
 				},
+				sponsor: {
+					name: 'the_sponsor_name',
+					url: 'the_sponsor_url',
+				},
+				copyrightText: 'the_sponsor_copyright',
 			},
 		});
 }
@@ -143,5 +148,29 @@ describe('Bible book detail page', () => {
 		const link = getByText('mp3: the_chapter_title') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_chapter_url');
+	});
+
+	it('displays sponsor name', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_name')).toBeInTheDocument();
+	});
+
+	it('displays sponsor url', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_url')).toBeInTheDocument();
+	});
+
+	it('displays copyright text', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_copyright')).toBeInTheDocument();
 	});
 });

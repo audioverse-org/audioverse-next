@@ -208,6 +208,11 @@ describe('localization usage', () => {
 								},
 							],
 						},
+						sponsor: {
+							name: 'z',
+							url: 'z',
+						},
+						copyrightText: 'z',
 					},
 				}}
 			/>
