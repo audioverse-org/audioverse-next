@@ -1,0 +1,22 @@
+query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
+    audiobible(id: $versionId) {
+        title
+        book(id: $bookId) {
+            title
+            chapters {
+                id
+                title
+            }
+        }
+    }
+}
+
+query getBibleBookDetailPathsData {
+    audiobibles {
+        nodes {
+            books {
+                id
+            }
+        }
+    }
+}

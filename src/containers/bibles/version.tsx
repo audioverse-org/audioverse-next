@@ -13,6 +13,8 @@ export interface VersionProps {
 	books: Books;
 }
 
+// TODO: ADD VERSION TITLE
+
 function Version({ books }: VersionProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 

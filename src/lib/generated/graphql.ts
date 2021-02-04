@@ -4482,6 +4482,45 @@ export type RecordingFragment = (
   )> }
 );
 
+export type GetBibleBookDetailPageDataQueryVariables = Exact<{
+  versionId: Scalars['ID'];
+  bookId: Scalars['ID'];
+}>;
+
+
+export type GetBibleBookDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobible?: Maybe<(
+    { __typename?: 'Bible' }
+    & Pick<Bible, 'title'>
+    & { book: (
+      { __typename?: 'BibleBook' }
+      & Pick<BibleBook, 'title'>
+      & { chapters: Array<(
+        { __typename?: 'BibleChapter' }
+        & Pick<BibleChapter, 'id' | 'title'>
+      )> }
+    ) }
+  )> }
+);
+
+export type GetBibleBookDetailPathsDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBibleBookDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & { books: Array<(
+        { __typename?: 'BibleBook' }
+        & Pick<BibleBook, 'id'>
+      )> }
+    )>> }
+  ) }
+);
+
 export type GetVersionDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -4938,6 +4977,55 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetBibleBookDetailPageDataDocument = `
+    query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
+  audiobible(id: $versionId) {
+    title
+    book(id: $bookId) {
+      title
+      chapters {
+        id
+        title
+      }
+    }
+  }
+}
+    `;
+export const useGetBibleBookDetailPageDataQuery = <
+      TData = GetBibleBookDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetBibleBookDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleBookDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleBookDetailPageDataQuery, TError, TData>(
+      ['getBibleBookDetailPageData', variables],
+      graphqlFetcher<GetBibleBookDetailPageDataQuery, GetBibleBookDetailPageDataQueryVariables>(GetBibleBookDetailPageDataDocument, variables),
+      options
+    );
+export const GetBibleBookDetailPathsDataDocument = `
+    query getBibleBookDetailPathsData {
+  audiobibles {
+    nodes {
+      books {
+        id
+      }
+    }
+  }
+}
+    `;
+export const useGetBibleBookDetailPathsDataQuery = <
+      TData = GetBibleBookDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables?: GetBibleBookDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleBookDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleBookDetailPathsDataQuery, TError, TData>(
+      ['getBibleBookDetailPathsData', variables],
+      graphqlFetcher<GetBibleBookDetailPathsDataQuery, GetBibleBookDetailPathsDataQueryVariables>(GetBibleBookDetailPathsDataDocument, variables),
+      options
+    );
 export const GetVersionDetailPageDataDocument = `
     query getVersionDetailPageData($id: ID!) {
   audiobible(id: $id) {
@@ -5346,6 +5434,21 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getBibleBookDetailPageData(
+  variables: GetBibleBookDetailPageDataQueryVariables
+): Promise<GetBibleBookDetailPageDataQuery> {
+  return fetchApi(GetBibleBookDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getBibleBookDetailPathsData(
+  variables: GetBibleBookDetailPathsDataQueryVariables
+): Promise<GetBibleBookDetailPathsDataQuery> {
+  return fetchApi(GetBibleBookDetailPathsDataDocument, { variables });
+}
+				
 
 export async function getVersionDetailPageData(
   variables: GetVersionDetailPageDataQueryVariables
