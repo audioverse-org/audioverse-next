@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 
 import {
@@ -9,7 +10,6 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
-import userEvent from '@testing-library/user-event';
 
 async function renderPage() {
 	const { props } = await getStaticProps({

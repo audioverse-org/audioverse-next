@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
-import { FormattedMessage } from 'react-intl';
 
 export interface BookProps {
 	data: NonNullable<GetBibleBookDetailPageDataQuery>;
