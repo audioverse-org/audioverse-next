@@ -4498,7 +4498,7 @@ export type GetBibleBookDetailPageDataQuery = (
       & Pick<BibleBook, 'title'>
       & { chapters: Array<(
         { __typename?: 'BibleChapter' }
-        & Pick<BibleChapter, 'id' | 'title'>
+        & Pick<BibleChapter, 'id' | 'title' | 'url'>
       )> }
     ) }
   )> }
@@ -4986,6 +4986,7 @@ export const GetBibleBookDetailPageDataDocument = `
       chapters {
         id
         title
+        url
       }
     }
   }

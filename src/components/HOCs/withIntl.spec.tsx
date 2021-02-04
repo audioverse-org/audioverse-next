@@ -24,6 +24,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Book from '@containers/bibles/book';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -187,6 +188,30 @@ describe('localization usage', () => {
 
 	it('localizes header', async () => {
 		const { queryByText } = await renderWithQueryProvider(<Header />);
+
+		expectNoUnlocalizedText(queryByText);
+	});
+
+	it('localizes Bible book page', async () => {
+		const { queryByText } = await renderWithQueryProvider(
+			<Book
+				data={{
+					audiobible: {
+						title: 'z',
+						book: {
+							title: 'z',
+							chapters: [
+								{
+									title: 'z',
+									url: 'z',
+									id: 'z',
+								},
+							],
+						},
+					},
+				}}
+			/>
+		);
 
 		expectNoUnlocalizedText(queryByText);
 	});

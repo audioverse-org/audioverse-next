@@ -9,6 +9,7 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
+import userEvent from '@testing-library/user-event';
 
 async function renderPage() {
 	const { props } = await getStaticProps({
@@ -29,6 +30,12 @@ function loadPageData() {
 						{
 							id: 'the_chapter_id',
 							title: 'the_chapter_title',
+							url: 'the_chapter_url',
+						},
+						{
+							id: 'second_chapter_id',
+							title: 'second_chapter_title',
+							url: 'second_chapter_url',
 						},
 					],
 				},
@@ -92,8 +99,49 @@ describe('Bible book detail page', () => {
 		const { getByLabelText } = await renderPage();
 
 		const select = getByLabelText('Chapter') as HTMLSelectElement;
-		const optionLabels = Array.from(select.options).map((opt) => opt.value);
+		const optionLabels = Array.from(select.options).map((opt) => opt.text);
 
 		expect(optionLabels).toContain('the_chapter_title');
+	});
+
+	it('sets option value to chapter id', async () => {
+		loadPageData();
+
+		const { getByLabelText } = await renderPage();
+
+		const select = getByLabelText('Chapter') as HTMLSelectElement;
+		const optionLabels = Array.from(select.options).map((opt) => opt.value);
+
+		expect(optionLabels).toContain('the_chapter_id');
+	});
+
+	it('has download link', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('mp3: the_chapter_title')).toBeInTheDocument();
+	});
+
+	it('updates download link', async () => {
+		loadPageData();
+
+		const { getByLabelText, getByText } = await renderPage();
+
+		const input = getByLabelText('Chapter');
+
+		userEvent.selectOptions(input, 'second_chapter_id');
+
+		expect(getByText('mp3: second_chapter_title')).toBeInTheDocument();
+	});
+
+	it('sets download link href', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('mp3: the_chapter_title') as HTMLLinkElement;
+
+		expect(link.href).toContain('the_chapter_url');
 	});
 });
