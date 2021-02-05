@@ -1,12 +1,15 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './footer.module.scss';
 
+// TODO: Finish linking all entries
+
 export default function Footer(): JSX.Element {
 	const languageRoute = useLanguageRoute();
+	const intl = useIntl();
 
 	return (
 		<div className={styles.footer}>
@@ -200,67 +203,25 @@ export default function Footer(): JSX.Element {
 					</a>
 				</li>
 				<li>
-					<a href="/de">
-						<FormattedMessage
-							id={`footer__NavItemGerman`}
-							defaultMessage="Deutsch"
-							description={`Footer nav link name: German`}
-						/>
-					</a>
+					<a href="/de">Deutsch</a>
 				</li>
 				<li>
-					<a href="/en">
-						<FormattedMessage
-							id={`footer__NavItemEnglish`}
-							defaultMessage="English"
-							description={`Footer nav link name: English`}
-						/>
-					</a>
+					<a href="/en">English</a>
 				</li>
 				<li>
-					<a href="/es">
-						<FormattedMessage
-							id={`footer__NavItemSpanish`}
-							defaultMessage="Español"
-							description={`Footer nav link name: Spanish`}
-						/>
-					</a>
+					<a href="/es">Español</a>
 				</li>
 				<li>
-					<a href="/fr">
-						<FormattedMessage
-							id={`footer__NavItemFrench`}
-							defaultMessage="Français"
-							description={`Footer nav link name: French`}
-						/>
-					</a>
+					<a href="/fr">Français</a>
 				</li>
 				<li>
-					<a href="/ja">
-						<FormattedMessage
-							id={`footer__NavItemJapanese`}
-							defaultMessage="日本語"
-							description={`Footer nav link name: Japanese`}
-						/>
-					</a>
+					<a href="/ja">日本語</a>
 				</li>
 				<li>
-					<a href="/zh">
-						<FormattedMessage
-							id={`footer__NavItemZhongwen`}
-							defaultMessage="中文"
-							description={`Footer nav link name: Zhongwen`}
-						/>
-					</a>
+					<a href="/zh">中文</a>
 				</li>
 				<li>
-					<a href="/ru">
-						<FormattedMessage
-							id={`footer__NavItemRussian`}
-							defaultMessage="Русский"
-							description={`Footer nav link name: Russian`}
-						/>
-					</a>
+					<a href="/ru">Русский</a>
 				</li>
 			</ul>
 
@@ -269,7 +230,14 @@ export default function Footer(): JSX.Element {
 				target={'_blank'}
 				rel={'noreferrer noopener'}
 			>
-				<img src="/img/app-apple.png" alt="iOS App" />
+				<img
+					src="/img/app-apple.png"
+					alt={intl.formatMessage({
+						id: 'footer__iosAppImageAlt',
+						defaultMessage: 'iOS App',
+						description: 'iOS app link image alt text',
+					})}
+				/>
 			</a>
 
 			<a
@@ -277,15 +245,62 @@ export default function Footer(): JSX.Element {
 				target={'_blank'}
 				rel={'noreferrer noopener'}
 			>
-				<img src="/img/app-android.png" alt="Android App" />
+				<img
+					src="/img/app-android.png"
+					alt={intl.formatMessage({
+						id: 'footer__androidAppImageAlt',
+						defaultMessage: 'Android App',
+						description: 'Android app link image alt text',
+					})}
+				/>
 			</a>
 
 			<p>
-				<span>{`AudioVerse © ${new Date().getFullYear()} All Rights Reserved.`}</span>{' '}
+				<FormattedMessage
+					id={`footer__copyright`}
+					defaultMessage="AudioVerse © {year} All Rights Reserved."
+					description={`Footer copyright`}
+					values={{ year: new Date().getFullYear() }}
+				/>
+				{/*<span>{`AudioVerse © ${new Date().getFullYear()} All Rights Reserved.`}</span>{' '}*/}
 				{/* TODO: Update links when pages exist */}
-				<a href="#">Legal Info</a>, <a href="#">Terms of Use</a>,{' '}
-				<a href="#">Privacy Policy</a>. Designed by{' '}
-				<a href="https://typesandsymbols.com/">Types & Symbols</a>.
+				<a href="#">
+					<FormattedMessage
+						id={`footer__legalInfoLink`}
+						defaultMessage="Legal Info"
+						description={`Footer legal info link text`}
+					/>
+				</a>
+				,{' '}
+				<a href="#">
+					<FormattedMessage
+						id={`footer__termsLink`}
+						defaultMessage="Terms of Use"
+						description={`Footer terms of use link text`}
+					/>
+				</a>
+				,{' '}
+				<a href="#">
+					<FormattedMessage
+						id={`footer__privacyPolicyLink`}
+						defaultMessage="Privacy Policy"
+						description={`Footer privacy policy link text`}
+					/>
+				</a>
+				.{' '}
+				<FormattedMessage
+					id={`footer__designedBy`}
+					defaultMessage="Designed by"
+					description={`Footer designed by prefix`}
+				/>{' '}
+				<a
+					href="https://typesandsymbols.com/"
+					target={'_blank'}
+					rel={'noreferrer noopener'}
+				>
+					Types & Symbols
+				</a>
+				.
 			</p>
 		</div>
 	);

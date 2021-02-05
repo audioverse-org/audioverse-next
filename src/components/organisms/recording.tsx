@@ -82,6 +82,12 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const hasVideoDownloads = videoDownloads.length > 0;
 	const hasAudioDownloads = audioDownloads.length > 0;
 	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
+
+	// TODO: Switch embed link to new site when route is implemented
+	// language=HTML
+	// noinspection HtmlDeprecatedAttribute
+	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
+
 	return (
 		<>
 			<div className={styles.meta}>
@@ -277,10 +283,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					defaultMessage="Embed Code"
 					description="Sermon detail embed code label"
 				/>{' '}
-				<input
-					readOnly={true}
-					value={`<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`}
-				/>
+				<input readOnly={true} value={embedCode} />
 			</label>
 			{recording.transcript?.text && (
 				<>
@@ -302,7 +305,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						<FormattedMessage
 							id="sermonDetailPage__transcriptHelp"
 							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-							description="Sermon detail transcript assistence request"
+							description="Sermon detail transcript assistance request"
 						/>
 					</p>
 					<p>{recording.transcript?.text}</p>

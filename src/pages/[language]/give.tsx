@@ -7,10 +7,11 @@ export default function Give(): JSX.Element {
 		<>
 			<h1>Donate Now</h1>
 
+			{/* WORKAROUND: https://stackoverflow.com/a/55322126/937377 */}
 			<script
 				src="https://donorbox.org/widget.js"
-				paypalexpress="true"
-			></script>
+				{...{ paypalexpress: 'true' }}
+			/>
 			<iframe
 				src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
 				height="685px"
@@ -25,7 +26,7 @@ export default function Give(): JSX.Element {
 				frameBorder="0"
 				scrolling="no"
 				allow={'payment'}
-			></iframe>
+			/>
 
 			<p>
 				If you would like to donate using Apple Pay{' '}

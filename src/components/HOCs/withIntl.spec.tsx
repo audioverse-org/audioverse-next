@@ -1,8 +1,4 @@
-import {
-	Matcher,
-	SelectorMatcherOptions,
-	waitFor,
-} from '@testing-library/react';
+import { RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as intl from 'react-intl';
@@ -25,6 +21,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Footer from '@components/organisms/footer';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -32,14 +29,16 @@ jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 
-type QueryByText = (
-	text: Matcher,
-	options?: SelectorMatcherOptions | undefined,
-	waitForElementOptions?: unknown
-) => HTMLElement | null;
+const expectNoUnlocalizedText = (
+	screen: RenderResult,
+	whitelist: string[] = []
+) => {
+	const { queryAllByText, queryAllByAltText } = screen;
+	const r = /[^z\d\W\s]+/;
+	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
+	const hits = [...queryAllByText(m), ...queryAllByAltText(m)];
 
-const expectNoUnlocalizedText = (queryByText: QueryByText) => {
-	expect(queryByText(/[^z0-9]+/)).not.toBeInTheDocument();
+	expect(hits).toHaveLength(0);
 };
 
 const expectNoUnlocalizedToasts = () => {
@@ -78,27 +77,27 @@ describe('localization usage', () => {
 	});
 
 	it('localizes playlistButton logged out', async () => {
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<PlaylistButton recordingId={'recording_id'} />
 		);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes playlistButton logged in', async () => {
 		mockedFetchApi.mockResolvedValue(makePlaylistButtonData([]));
 
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<PlaylistButton recordingId={'recording_id'} />
 		);
 
 		await waitFor(() => expect(mockedFetchApi).toHaveBeenCalled());
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes speakerName', async () => {
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<SpeakerName
 				person={
 					{
@@ -109,11 +108,11 @@ describe('localization usage', () => {
 			/>
 		);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes sermon detail page', async () => {
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<SermonDetail
 				sermon={
 					{
@@ -141,19 +140,19 @@ describe('localization usage', () => {
 			/>
 		);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes Unfavorite button', async () => {
 		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
 
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<Favorite id={'recording_id'} />
 		);
 
 		await waitFor(() => expect(isRecordingFavorited).toBeCalled());
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes SpeakerName login error', async () => {
@@ -171,7 +170,7 @@ describe('localization usage', () => {
 	});
 
 	it('localizes tag list page', async () => {
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<TagList
 				nodes={[
 					{
@@ -183,17 +182,17 @@ describe('localization usage', () => {
 			/>
 		);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes header', async () => {
-		const { queryByText } = await renderWithQueryProvider(<Header />);
+		const screen = await renderWithQueryProvider(<Header />);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen, ['AudioVerse']);
 	});
 
 	it('localizes Bible book page', async () => {
-		const { queryByText } = await renderWithQueryProvider(
+		const screen = await renderWithQueryProvider(
 			<Book
 				data={{
 					audiobible: {
@@ -218,6 +217,19 @@ describe('localization usage', () => {
 			/>
 		);
 
-		expectNoUnlocalizedText(queryByText);
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes footer', async () => {
+		const screen = await renderWithQueryProvider(<Footer />);
+
+		expectNoUnlocalizedText(screen, [
+			'Types & Symbols',
+			'Русский',
+			'Français',
+			'Español',
+			'English',
+			'Deutsch',
+		]);
 	});
 });

@@ -6,6 +6,8 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
 
+// TODO: Finish linking all entries
+
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 
