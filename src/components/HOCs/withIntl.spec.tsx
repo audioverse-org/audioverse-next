@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import Favorite from '@components/molecules/favorite';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
+import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import Book from '@containers/bibles/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
@@ -21,7 +22,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import Footer from '@components/organisms/footer';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
