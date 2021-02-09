@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 import Home, { HomeProps } from '@containers/home';
-import { LANGUAGES } from '@lib/constants';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { getHomeStaticProps, Language } from '@lib/generated/graphql';
 
 export default Home;
@@ -32,7 +32,7 @@ export async function getStaticProps({
 		props: {
 			sermons: nodes,
 		},
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 

@@ -49,3 +49,16 @@ export const makeTagDetailBaseRoute = (
 	languageRoute: string,
 	tagSlug: string
 ): string => `/${languageRoute}/tags/${tagSlug}`;
+
+export const makeBibleListRoute = (languageRoute: string): string =>
+	`/${languageRoute}/bibles`;
+
+export const makeBibleVersionRoute = (
+	languageRoute: string,
+	versionId: string
+): string => `/${languageRoute}/bibles/${versionId}`;
+
+export const makeBibleBookRoute = (
+	languageRoute: string,
+	bookId: string
+): string => `/${languageRoute}/bibles/${bookId.replace('-', '/')}`;

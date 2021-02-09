@@ -1,0 +1,8 @@
+query getBibleVersionsPageData {
+    audiobibles {
+        nodes {
+            title
+            id
+        }
+    }
+}

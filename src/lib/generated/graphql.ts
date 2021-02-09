@@ -68,8 +68,10 @@ export type Bible = Node & {
   __typename?: 'Bible';
   book: BibleBook;
   books: Array<BibleBook>;
+  copyrightText: Scalars['String'];
   id: Scalars['ID'];
   isDramatized: Scalars['Boolean'];
+  sponsor: BibleSponsor;
   title: Scalars['String'];
 };
 
@@ -99,6 +101,7 @@ export type BibleChapter = Node & {
   text: Scalars['String'];
   title: Scalars['String'];
   url: Scalars['URL'];
+  verses: Array<BibleVerse>;
 };
 
 export type BibleConnection = {
@@ -230,6 +233,18 @@ export type BibleReferenceRangeInput = {
   startReference: BibleReferenceInput;
 };
 
+export type BibleSponsor = {
+  __typename?: 'BibleSponsor';
+  name: Scalars['String'];
+  url: Scalars['URL'];
+};
+
+export type BibleVerse = {
+  __typename?: 'BibleVerse';
+  number: Scalars['Int'];
+  text: Scalars['String'];
+};
+
 export type BlogPost = Node & {
   __typename?: 'BlogPost';
   body: Scalars['String'];
@@ -323,8 +338,10 @@ export enum CatalogHistoryItemSortableField {
 
 /** The supported types of catalog history items. */
 export enum CatalogHistoryItemType {
+  Archive = 'ARCHIVE',
   InternalComment = 'INTERNAL_COMMENT',
-  SponsorChanged = 'SPONSOR_CHANGED'
+  SponsorChanged = 'SPONSOR_CHANGED',
+  Unarchive = 'UNARCHIVE'
 }
 
 export type Collection = Node & {
@@ -378,12 +395,14 @@ export type CollectionRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -518,12 +537,14 @@ export type DistributionAgreementRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -1161,6 +1182,7 @@ export type Mutation = {
   recordingScreeningTechnicalCheckoutCreate: RecordingScreeningCheckoutPayload;
   recordingScreeningTechnicalCheckoutDelete: SuccessPayload;
   recordingScreeningTechnicalEvaluate: RecordingPayload;
+  recordingUnarchive: SuccessPayload;
   recordingUnfavorite: SuccessPayload;
   recordingUpdate: RecordingPayload;
   sequenceCreate: SequencePayload;
@@ -1514,6 +1536,11 @@ export type MutationRecordingScreeningTechnicalEvaluateArgs = {
 };
 
 
+export type MutationRecordingUnarchiveArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
 export type MutationRecordingUnfavoriteArgs = {
   id: Scalars['ID'];
 };
@@ -1686,11 +1713,13 @@ export type PersonRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -1963,12 +1992,14 @@ export type QueryAudiobookTracksArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2069,11 +2100,13 @@ export type QueryFeaturedRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2216,12 +2249,14 @@ export type QueryMusicTracksArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2263,11 +2298,13 @@ export type QueryPopularRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2296,12 +2333,14 @@ export type QueryRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2377,12 +2416,14 @@ export type QuerySermonsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2422,12 +2463,14 @@ export type QueryStoriesArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -2523,6 +2566,12 @@ export type QueryWebsitesArgs = {
 
 export type Recording = Node & {
   __typename?: 'Recording';
+  /** Requires `ADMINISTRATION` role. */
+  archiveDate?: Maybe<Scalars['DateTime']>;
+  /** Requires `ADMINISTRATION` role. */
+  archiveReason?: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  archiveUser?: Maybe<User>;
   attachments: Array<Attachment>;
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
@@ -2706,17 +2755,17 @@ export type RecordingCreateInput = {
   isFeatured?: Maybe<Scalars['Boolean']>;
   isHidden?: Maybe<Scalars['Boolean']>;
   notes?: Maybe<Scalars['String']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   publishDate?: Maybe<Scalars['DateTime']>;
   recordingDate?: Maybe<Scalars['DateTime']>;
   recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags?: Maybe<Array<RecordingTagInput>>;
   sequenceId?: Maybe<Scalars['ID']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipContentScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipLegalScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
   sponsorId: Scalars['ID'];
   title: Scalars['String'];
@@ -2782,6 +2831,16 @@ export type RecordingScreeningCheckoutPayload = {
   errors: Array<InputValidationError>;
   recordingScreeningCheckout?: Maybe<RecordingScreeningCheckout>;
 };
+
+/** The recording content screening view filters. */
+export enum RecordingScreeningContentViewFilter {
+  /** Limits recordings to those assigned to users other than the viewer. */
+  AssignedNonViewer = 'ASSIGNED_NON_VIEWER',
+  /** Limits recordings to those assigned to the viewer. */
+  AssignedViewer = 'ASSIGNED_VIEWER',
+  /** Limits to unassigned recordings. */
+  Unassigned = 'UNASSIGNED'
+}
 
 export type RecordingScreeningIssue = Node & {
   __typename?: 'RecordingScreeningIssue';
@@ -2957,17 +3016,17 @@ export type RecordingUpdateInput = {
   isFeatured?: Maybe<Scalars['Boolean']>;
   isHidden?: Maybe<Scalars['Boolean']>;
   notes?: Maybe<Scalars['String']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   publishDate?: Maybe<Scalars['DateTime']>;
   recordingDate?: Maybe<Scalars['DateTime']>;
   recordingPersons?: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags?: Maybe<Array<RecordingTagInput>>;
   sequenceId?: Maybe<Scalars['ID']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipContentScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipLegalScreening?: Maybe<Scalars['Boolean']>;
-  /** Requires administration role */
+  /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening?: Maybe<Scalars['Boolean']>;
   sponsorId?: Maybe<Scalars['ID']>;
   title?: Maybe<Scalars['String']>;
@@ -3023,11 +3082,13 @@ export type SequenceRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
   sponsorId?: Maybe<Scalars['ID']>;
@@ -3182,12 +3243,14 @@ export type SponsorRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -3310,11 +3373,13 @@ export type TagRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -3989,12 +4054,14 @@ export type UserFavoriteRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -4185,11 +4252,13 @@ export type UserPlaylistRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
   publishDates?: Maybe<Array<DateRangeInput>>;
   recordingDates?: Maybe<Array<DateRangeInput>>;
+  screeningContentViewFilter?: Maybe<RecordingScreeningContentViewFilter>;
   search?: Maybe<Scalars['String']>;
   sequenceId?: Maybe<Scalars['ID']>;
   sequenceIds?: Maybe<Array<Scalars['ID']>>;
@@ -4401,7 +4470,7 @@ export type SpeakerNameFragment = (
 
 export type RecordingFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear'>
+  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear' | 'shareUrl'>
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
@@ -4451,7 +4520,96 @@ export type RecordingFragment = (
         & Pick<Image, 'url'>
       )> }
     )> }
+  )>, transcript?: Maybe<(
+    { __typename?: 'Transcript' }
+    & Pick<Transcript, 'text'>
   )> }
+);
+
+export type GetBibleBookDetailPageDataQueryVariables = Exact<{
+  versionId: Scalars['ID'];
+  bookId: Scalars['ID'];
+}>;
+
+
+export type GetBibleBookDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobible?: Maybe<(
+    { __typename?: 'Bible' }
+    & Pick<Bible, 'title' | 'copyrightText'>
+    & { book: (
+      { __typename?: 'BibleBook' }
+      & Pick<BibleBook, 'title'>
+      & { chapters: Array<(
+        { __typename?: 'BibleChapter' }
+        & Pick<BibleChapter, 'id' | 'title' | 'url'>
+      )> }
+    ), sponsor: (
+      { __typename?: 'BibleSponsor' }
+      & Pick<BibleSponsor, 'name' | 'url'>
+    ) }
+  )> }
+);
+
+export type GetBibleBookDetailPathsDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBibleBookDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & { books: Array<(
+        { __typename?: 'BibleBook' }
+        & Pick<BibleBook, 'id'>
+      )> }
+    )>> }
+  ) }
+);
+
+export type GetVersionDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetVersionDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobible?: Maybe<(
+    { __typename?: 'Bible' }
+    & { books: Array<(
+      { __typename?: 'BibleBook' }
+      & Pick<BibleBook, 'id' | 'title' | 'chapterCount'>
+    )> }
+  )> }
+);
+
+export type GetVersionDetailPathDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVersionDetailPathDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & Pick<Bible, 'id'>
+    )>> }
+  ) }
+);
+
+export type GetBibleVersionsPageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBibleVersionsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobibles: (
+    { __typename?: 'BibleConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Bible' }
+      & Pick<Bible, 'title' | 'id'>
+    )>> }
+  ) }
 );
 
 export type GetHomeStaticPropsQueryVariables = Exact<{
@@ -4817,6 +4975,10 @@ export const RecordingFragmentDoc = `
       }
     }
   }
+  transcript {
+    text
+  }
+  shareUrl
 }
     ${SpeakerNameFragmentDoc}`;
 export const CreateFeedFragmentDoc = `
@@ -4860,6 +5022,127 @@ export const useGetPlaylistButtonDataQuery = <
     useQuery<GetPlaylistButtonDataQuery, TError, TData>(
       ['getPlaylistButtonData', variables],
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
+      options
+    );
+export const GetBibleBookDetailPageDataDocument = `
+    query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
+  audiobible(id: $versionId) {
+    title
+    book(id: $bookId) {
+      title
+      chapters {
+        id
+        title
+        url
+      }
+    }
+    sponsor {
+      name
+      url
+    }
+    copyrightText
+  }
+}
+    `;
+export const useGetBibleBookDetailPageDataQuery = <
+      TData = GetBibleBookDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetBibleBookDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleBookDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleBookDetailPageDataQuery, TError, TData>(
+      ['getBibleBookDetailPageData', variables],
+      graphqlFetcher<GetBibleBookDetailPageDataQuery, GetBibleBookDetailPageDataQueryVariables>(GetBibleBookDetailPageDataDocument, variables),
+      options
+    );
+export const GetBibleBookDetailPathsDataDocument = `
+    query getBibleBookDetailPathsData {
+  audiobibles {
+    nodes {
+      books {
+        id
+      }
+    }
+  }
+}
+    `;
+export const useGetBibleBookDetailPathsDataQuery = <
+      TData = GetBibleBookDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables?: GetBibleBookDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleBookDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleBookDetailPathsDataQuery, TError, TData>(
+      ['getBibleBookDetailPathsData', variables],
+      graphqlFetcher<GetBibleBookDetailPathsDataQuery, GetBibleBookDetailPathsDataQueryVariables>(GetBibleBookDetailPathsDataDocument, variables),
+      options
+    );
+export const GetVersionDetailPageDataDocument = `
+    query getVersionDetailPageData($id: ID!) {
+  audiobible(id: $id) {
+    books {
+      id
+      title
+      chapterCount
+    }
+  }
+}
+    `;
+export const useGetVersionDetailPageDataQuery = <
+      TData = GetVersionDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetVersionDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetVersionDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetVersionDetailPageDataQuery, TError, TData>(
+      ['getVersionDetailPageData', variables],
+      graphqlFetcher<GetVersionDetailPageDataQuery, GetVersionDetailPageDataQueryVariables>(GetVersionDetailPageDataDocument, variables),
+      options
+    );
+export const GetVersionDetailPathDataDocument = `
+    query getVersionDetailPathData {
+  audiobibles {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetVersionDetailPathDataQuery = <
+      TData = GetVersionDetailPathDataQuery,
+      TError = unknown
+    >(
+      variables?: GetVersionDetailPathDataQueryVariables, 
+      options?: UseQueryOptions<GetVersionDetailPathDataQuery, TError, TData>
+    ) => 
+    useQuery<GetVersionDetailPathDataQuery, TError, TData>(
+      ['getVersionDetailPathData', variables],
+      graphqlFetcher<GetVersionDetailPathDataQuery, GetVersionDetailPathDataQueryVariables>(GetVersionDetailPathDataDocument, variables),
+      options
+    );
+export const GetBibleVersionsPageDataDocument = `
+    query getBibleVersionsPageData {
+  audiobibles {
+    nodes {
+      title
+      id
+    }
+  }
+}
+    `;
+export const useGetBibleVersionsPageDataQuery = <
+      TData = GetBibleVersionsPageDataQuery,
+      TError = unknown
+    >(
+      variables?: GetBibleVersionsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetBibleVersionsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBibleVersionsPageDataQuery, TError, TData>(
+      ['getBibleVersionsPageData', variables],
+      graphqlFetcher<GetBibleVersionsPageDataQuery, GetBibleVersionsPageDataQueryVariables>(GetBibleVersionsPageDataDocument, variables),
       options
     );
 export const GetHomeStaticPropsDocument = `
@@ -5204,6 +5487,43 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getBibleBookDetailPageData(
+  variables: GetBibleBookDetailPageDataQueryVariables
+): Promise<GetBibleBookDetailPageDataQuery> {
+  return fetchApi(GetBibleBookDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getBibleBookDetailPathsData(
+  variables: GetBibleBookDetailPathsDataQueryVariables
+): Promise<GetBibleBookDetailPathsDataQuery> {
+  return fetchApi(GetBibleBookDetailPathsDataDocument, { variables });
+}
+				
+
+export async function getVersionDetailPageData(
+  variables: GetVersionDetailPageDataQueryVariables
+): Promise<GetVersionDetailPageDataQuery> {
+  return fetchApi(GetVersionDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getVersionDetailPathData(
+  variables: GetVersionDetailPathDataQueryVariables
+): Promise<GetVersionDetailPathDataQuery> {
+  return fetchApi(GetVersionDetailPathDataDocument, { variables });
+}
+				
+
+export async function getBibleVersionsPageData(
+  variables: GetBibleVersionsPageDataQueryVariables
+): Promise<GetBibleVersionsPageDataQuery> {
+  return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+}
+				
 
 export async function getHomeStaticProps(
   variables: GetHomeStaticPropsQueryVariables

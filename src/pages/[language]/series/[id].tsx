@@ -1,4 +1,5 @@
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSeriesDetailData,
 	getSeriesDetailPathsData,
@@ -24,7 +25,7 @@ export async function getStaticProps({
 
 	return {
 		props: { series },
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 

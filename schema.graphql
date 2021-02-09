@@ -57,8 +57,10 @@ type AuthenticatedUserPayload {
 type Bible implements Node {
     book(id: ID!): BibleBook!
     books: [BibleBook!]!
+    copyrightText: String!
     id: ID!
     isDramatized: Boolean!
+    sponsor: BibleSponsor!
     title: String!
 }
 
@@ -76,6 +78,7 @@ type BibleChapter implements Node {
     text: String!
     title: String!
     url: URL!
+    verses: [BibleVerse!]!
 }
 
 type BibleConnection {
@@ -115,6 +118,16 @@ type BibleReferenceRangeConnection {
 type BibleReferenceRangeEdge {
     cursor: String!
     node: BibleReferenceRange!
+}
+
+type BibleSponsor {
+    name: String!
+    url: URL!
+}
+
+type BibleVerse {
+    number: Int!
+    text: String!
 }
 
 type BlogPost implements Node {
@@ -206,10 +219,12 @@ type Collection implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -221,12 +236,14 @@ type Collection implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -237,7 +254,7 @@ type Collection implements Node {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
@@ -297,10 +314,12 @@ type DistributionAgreement implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -312,12 +331,14 @@ type DistributionAgreement implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -348,7 +369,7 @@ type DistributionAgreementPayload {
 type Image {
     name: String!
     updatedAt: DateTime
-    url(size: Int!): URL!
+    url(cropMode: ImageCropMode = DEFAULT, size: Int!): URL!
 }
 
 "The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields."
@@ -429,6 +450,7 @@ type MediaFileUpload implements Node {
         count: Int!
     ): [String!]
     recording: Recording
+    transcodingStatus: MediaFileTranscodingStatus!
     updatedAt: DateTime
 }
 
@@ -626,6 +648,7 @@ type Mutation {
     recordingScreeningTechnicalCheckoutCreate(recordingId: ID!, userId: ID): RecordingScreeningCheckoutPayload!
     recordingScreeningTechnicalCheckoutDelete(recordingId: ID!, userId: ID): SuccessPayload!
     recordingScreeningTechnicalEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
+    recordingUnarchive(recordingId: ID!): SuccessPayload!
     recordingUnfavorite(id: ID!): SuccessPayload!
     recordingUpdate(input: RecordingUpdateInput!, recordingId: ID!): RecordingPayload!
     sequenceCreate(input: SequenceCreateInput!): SequencePayload!
@@ -707,10 +730,12 @@ type Person implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "The recording must be associated with one of the persons provided."
         persons: [RecordingPersonInput!],
@@ -720,12 +745,14 @@ type Person implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -810,7 +837,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -833,11 +860,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -849,13 +878,15 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -867,7 +898,7 @@ type Query {
         collectionId: ID,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -893,7 +924,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -910,7 +941,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -957,11 +988,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -972,12 +1005,14 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -989,7 +1024,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished licenses. Requires catalog role."
+        "Whether to include unpublished licenses. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Limit to default licenses."
         isDefault: Boolean,
@@ -1008,7 +1043,8 @@ type Query {
         hasUploaded: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
-        orderBy: [MediaFileUploadsOrder!]
+        orderBy: [MediaFileUploadsOrder!],
+        transcodingStatuses: [MediaFileTranscodingStatus!]
     ): MediaFileUploadConnection!
     mediaRelease(id: ID!): MediaRelease
     mediaReleaseForm(id: ID!): MediaReleaseForm
@@ -1050,7 +1086,7 @@ type Query {
         collectionId: ID,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1082,7 +1118,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1105,11 +1141,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1121,13 +1159,15 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1139,7 +1179,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished persons. Requires catalog role."
+        "Whether to include unpublished persons. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1162,11 +1202,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -1177,12 +1219,14 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1210,11 +1254,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1226,13 +1272,15 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1245,7 +1293,7 @@ type Query {
         collectionId: ID,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1263,7 +1311,7 @@ type Query {
         collectionId: ID,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1285,11 +1333,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1301,13 +1351,15 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1319,7 +1371,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sponsors. Requires catalog role."
+        "Whether to include unpublished sponsors. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1339,11 +1391,13 @@ type Query {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1355,13 +1409,15 @@ type Query {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         "`search` will find matching recordings and order the recordings by relevance to the search term, unless other filters (e.g., `collectionId`, `persons`, etc.) are provided. If other filters are provided, `orderBy` arguments will be respected."
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1376,7 +1432,7 @@ type Query {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1394,7 +1450,7 @@ type Query {
         collectionId: ID,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         language: Language!,
         "Return the elements that come after the specified offset."
@@ -1411,6 +1467,7 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        orderBy: [TagsOrder!],
         search: String
     ): TagConnection!
     testimonies(
@@ -1449,6 +1506,12 @@ type Query {
 }
 
 type Recording implements Node {
+    "Requires `ADMINISTRATION` role."
+    archiveDate: DateTime
+    "Requires `ADMINISTRATION` role."
+    archiveReason: String
+    "Requires `ADMINISTRATION` role."
+    archiveUser: User
     attachments(allowedContainers: [MediaFileContainer!]): [Attachment!]!
     audioFiles(allowedContainers: [MediaFileContainer!], includeUnpublished: Boolean): [AudioFile!]!
     bibleReferences(
@@ -1468,6 +1531,7 @@ type Recording implements Node {
     contentScreeningStatus: RecordingContentScreeningStatus!
     contentType: RecordingContentType!
     copyrightYear: Int
+    coverImage: Image
     description: String
     distributionAgreement: DistributionAgreement
     downloadDisabled: Boolean! @deprecated(reason : "Recording.downloadDisabled is replaced with Recording.isDownloadAllowed")
@@ -1676,10 +1740,12 @@ type Sequence implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -1690,11 +1756,13 @@ type Sequence implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1736,7 +1804,7 @@ type Sponsor implements Node & UniformResourceLocatable {
         contentType: CollectionContentType = CONFERENCE,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished collections. Requires catalog role."
+        "Whether to include unpublished collections. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
@@ -1793,10 +1861,12 @@ type Sponsor implements Node & UniformResourceLocatable {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1808,11 +1878,13 @@ type Sponsor implements Node & UniformResourceLocatable {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -1825,7 +1897,7 @@ type Sponsor implements Node & UniformResourceLocatable {
         contentType: SequenceContentType = SERIES,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished sequences. Requires catalog role."
+        "Whether to include unpublished sequences. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
@@ -1864,6 +1936,44 @@ type SuccessPayload {
 type Tag implements Node {
     id: ID!
     name: String!
+    recordings(
+        "Return the elements that come after the specified cursor."
+        after: String,
+        bibleReferences: [BibleReferenceRangeInput!],
+        collectionId: ID,
+        collectionIds: [ID!],
+        contentType: RecordingContentType,
+        distributionAgreementId: ID,
+        "Return up to the first `n` elements from the list."
+        first: Int,
+        "Limit recordings to those with video media files."
+        hasVideo: Boolean,
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
+        includeUnpublished: Boolean,
+        "Return the elements that come after the specified offset."
+        offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
+        orderBy: [RecordingsOrder!],
+        "A person associated with the recordings."
+        person: RecordingPersonInput,
+        "The recording must be associated with one of the persons provided."
+        persons: [RecordingPersonInput!],
+        "The publish date of the recording must fall within one of the sets of date ranges."
+        publishDates: [DateRangeInput!],
+        "The date of the recording must fall within one of the sets of date ranges."
+        recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
+        search: String,
+        sequenceId: ID,
+        sequenceIds: [ID!],
+        sponsorId: ID,
+        sponsorIds: [ID!],
+        "Implies includeUnpublished. Requires `EDITOR` role."
+        stage: RecordingStage,
+        websiteIds: [ID!]
+    ): RecordingConnection!
 }
 
 type TagConnection {
@@ -1921,7 +2031,7 @@ type User implements Node {
         after: String,
         "Return up to the first `n` elements from the list."
         first: Int,
-        "Whether to include unpublished persons. Requires catalog role."
+        "Whether to include unpublished persons. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
@@ -1942,10 +2052,12 @@ type User implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1957,12 +2069,14 @@ type User implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -2046,10 +2160,12 @@ type UserPlaylist implements Node {
         first: Int,
         "Limit recordings to those with video media files."
         hasVideo: Boolean,
-        "Whether to include unpublished recordings. Requires catalog role."
+        "Whether to include unpublished recordings. Requires `EDITOR` role."
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -2060,12 +2176,14 @@ type UserPlaylist implements Node {
         publishDates: [DateRangeInput!],
         "The date of the recording must fall within one of the sets of date ranges."
         recordingDates: [DateRangeInput!],
+        "Requires `CONTENT_SCREENER` role."
+        screeningContentViewFilter: RecordingScreeningContentViewFilter,
         search: String,
         sequenceId: ID,
         sequenceIds: [ID!],
         sponsorId: ID,
         sponsorIds: [ID!],
-        "Implies includeUnpublished. Requires catalog role."
+        "Implies includeUnpublished. Requires `EDITOR` role."
         stage: RecordingStage,
         "The name of the tag to filter the recordings by."
         tagName: String,
@@ -2203,8 +2321,10 @@ enum CatalogHistoryItemSortableField {
 
 "The supported types of catalog history items."
 enum CatalogHistoryItemType {
+    ARCHIVE
     INTERNAL_COMMENT
     SPONSOR_CHANGED
+    UNARCHIVE
 }
 
 "The available types of collections."
@@ -2236,7 +2356,16 @@ enum ImageContainer {
     NEWS
     PERSON
     SEQUENCE
+    SITE
     SPONSOR
+}
+
+"Aavailable crop modes for images."
+enum ImageCropMode {
+    "Resizes the image to the requested size and in the process crops parts from the original image."
+    DEFAULT
+    "Scales the whole image content (no cropping) at the original aspect ratio to fit within the output size."
+    MAX_SIZE
 }
 
 "Supported languages"
@@ -2281,6 +2410,20 @@ enum MediaFileContainer {
     WAV
     WMA
     WMV
+}
+
+"The transcoding status of a media file upload."
+enum MediaFileTranscodingStatus {
+    "Transcoding completed."
+    COMPLETE
+    "Transcoding failed."
+    FAILED
+    "Transcoding in process."
+    PROCESSING
+    "Waiting for transcoding slot."
+    QUEUED
+    "Not Yet Begun"
+    UNSTARTED
 }
 
 "Properties by which media file uploads connections can be ordered."
@@ -2397,6 +2540,16 @@ enum RecordingQuality {
     LOWEST
 }
 
+"The recording content screening view filters."
+enum RecordingScreeningContentViewFilter {
+    "Limits recordings to those assigned to users other than the viewer."
+    ASSIGNED_NON_VIEWER
+    "Limits recordings to those assigned to the viewer."
+    ASSIGNED_VIEWER
+    "Limits to unassigned recordings."
+    UNASSIGNED
+}
+
 "The recording screening issue categories."
 enum RecordingScreeningIssueCategory {
     "General Issues"
@@ -2480,6 +2633,13 @@ enum SponsorsSortableField {
     CREATED_AT
     ID
     TITLE
+}
+
+"Properties by which tags connections can be ordered."
+enum TagsSortableField {
+    NAME
+    RECORDING_COUNT
+    SERMON_COUNT
 }
 
 "Properties by which testimony connections can be ordered."
@@ -3417,6 +3577,7 @@ input RecordingCreateInput {
     collectionId: ID
     contentType: RecordingContentType!
     copyrightYear: Int
+    coverImage: ImageInput
     description: String
     distributionAgreementId: ID!
     hidingReason: String
@@ -3424,17 +3585,17 @@ input RecordingCreateInput {
     isFeatured: Boolean
     isHidden: Boolean
     notes: String
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     publishDate: DateTime
     recordingDate: DateTime
     recordingPersons: [RecordingPersonRoleInput!]
     recordingTags: [RecordingTagInput!]
     sequenceId: ID
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipContentScreening: Boolean
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipLegalScreening: Boolean
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipTechnicalScreening: Boolean
     sponsorId: ID!
     title: String!
@@ -3479,6 +3640,7 @@ input RecordingUpdateInput {
     bibleReferences: [BibleReferenceRangeInput!]
     collectionId: ID
     copyrightYear: Int
+    coverImage: ImageInput
     description: String
     distributionAgreementId: ID
     hidingReason: String
@@ -3486,17 +3648,17 @@ input RecordingUpdateInput {
     isFeatured: Boolean
     isHidden: Boolean
     notes: String
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     publishDate: DateTime
     recordingDate: DateTime
     recordingPersons: [RecordingPersonRoleInput!]
     recordingTags: [RecordingTagInput!]
     sequenceId: ID
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipContentScreening: Boolean
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipLegalScreening: Boolean
-    "Requires administration role"
+    "Requires `ADMINISTRATION` role."
     skipTechnicalScreening: Boolean
     sponsorId: ID
     title: String
@@ -3585,6 +3747,11 @@ input SponsorUpdateInput {
 input SponsorsOrder {
     direction: OrderByDirection!
     field: SponsorsSortableField!
+}
+
+input TagsOrder {
+    direction: OrderByDirection!
+    field: TagsSortableField!
 }
 
 input TestimoniesOrder {

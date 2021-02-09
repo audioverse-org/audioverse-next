@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { ENTRIES_PER_PAGE } from '@lib/constants';
+import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
@@ -58,6 +58,6 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 				current: +pageIndex,
 			},
 		},
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }

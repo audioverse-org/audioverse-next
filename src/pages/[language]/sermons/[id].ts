@@ -1,4 +1,5 @@
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
@@ -27,7 +28,7 @@ export async function getStaticProps({
 		props: {
 			sermon,
 		},
-		revalidate: 10,
+		revalidate: REVALIDATE,
 	};
 }
 

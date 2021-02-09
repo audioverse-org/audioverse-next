@@ -9,6 +9,7 @@ import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
+import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,10 +42,16 @@ function MyApp<P>({
 					<div className={'template-base__content'}>
 						<Component {...pageProps} />
 					</div>
+					<Footer />
 					{/*<script src="//vjs.zencdn.net/6.7/video.min.js" />*/}
 				</Hydrate>
 			</QueryClientProvider>
 			<ToastContainer />
+			{/* Go to www.addthis.com/dashboard to customize your tools */}
+			<script
+				type="text/javascript"
+				src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"
+			/>
 		</div>
 	);
 }

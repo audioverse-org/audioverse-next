@@ -708,4 +708,120 @@ describe('sermon detail page', () => {
 
 		expect(getByText('sibling_title')).toBeInTheDocument();
 	});
+
+	it('includes transcripts', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_transcript_text')).toBeInTheDocument();
+	});
+
+	it('includes transcript title', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Transcript')).toBeInTheDocument();
+	});
+
+	it('notes probable auto generation', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText('This transcript may be automatically generated.')
+		).toBeInTheDocument();
+	});
+
+	it('includes transcript assistance request', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText(
+				'Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org'
+			)
+		).toBeInTheDocument();
+	});
+
+	it('does not include transcript section if no transcript', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: '',
+			},
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Transcript')).not.toBeInTheDocument();
+	});
+
+	it('includes share url', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_share_url')).toBeInTheDocument();
+	});
+
+	it('includes share url title', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Short URL')).toBeInTheDocument();
+	});
+
+	it('includes share title', async () => {
+		loadSermonDetailData({
+			shareUrl: 'the_share_url',
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Share')).toBeInTheDocument();
+	});
+
+	it('has embed input', async () => {
+		loadSermonDetailData();
+
+		const { getByLabelText } = await renderPage();
+
+		expect(getByLabelText('Embed Code')).toBeInTheDocument();
+	});
+
+	it('populates embed input', async () => {
+		loadSermonDetailData();
+
+		const { getByLabelText } = await renderPage();
+
+		const input = getByLabelText('Embed Code') as HTMLInputElement;
+
+		expect(input.value).toContain(
+			'https://www.audioverse.org/english/embed/media/the_sermon_id'
+		);
+	});
 });

@@ -82,6 +82,12 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const hasVideoDownloads = videoDownloads.length > 0;
 	const hasAudioDownloads = audioDownloads.length > 0;
 	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
+
+	// TODO: Switch embed link to new site when route is implemented
+	// language=HTML
+	// noinspection HtmlDeprecatedAttribute
+	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
+
 	return (
 		<>
 			<div className={styles.meta}>
@@ -254,6 +260,55 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							</ul>
 						</>
 					)}
+				</>
+			)}
+			<h2>
+				<FormattedMessage
+					id="sermonDetailPage__shareTitle"
+					defaultMessage="Share"
+					description="Sermon detail share section title"
+				/>
+			</h2>
+			<h3>
+				<FormattedMessage
+					id="sermonDetailPage__shortUrlLabel"
+					defaultMessage="Short URL"
+					description="Sermon detail short url label"
+				/>
+			</h3>
+			<p>{recording.shareUrl}</p>
+			<label>
+				<FormattedMessage
+					id="sermonDetailPage__embedCodeLabel"
+					defaultMessage="Embed Code"
+					description="Sermon detail embed code label"
+				/>{' '}
+				<input readOnly={true} value={embedCode} />
+			</label>
+			{recording.transcript?.text && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptTitle"
+							defaultMessage="Transcript"
+							description="Sermon detail transcript title"
+						/>
+					</h2>
+					<p>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptDisclaimer"
+							defaultMessage="This transcript may be automatically generated."
+							description="Sermon detail transcript disclaimer"
+						/>
+					</p>
+					<p>
+						<FormattedMessage
+							id="sermonDetailPage__transcriptHelp"
+							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
+							description="Sermon detail transcript assistance request"
+						/>
+					</p>
+					<p>{recording.transcript?.text}</p>
 				</>
 			)}
 			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
