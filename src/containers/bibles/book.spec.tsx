@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import videojs from 'video.js';
 
 import {
 	GetBibleBookDetailPageDataDocument,
@@ -10,7 +11,6 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
-import videojs from 'video.js';
 
 jest.mock('video.js');
 

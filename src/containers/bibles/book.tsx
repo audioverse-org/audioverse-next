@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
+import Player from '@components/molecules/player';
 import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './book.module.scss';
-import Player from '@components/molecules/player';
 
 export interface BookProps {
 	data: NonNullable<GetBibleBookDetailPageDataQuery>;
