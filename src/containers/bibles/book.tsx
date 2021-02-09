@@ -5,6 +5,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './book.module.scss';
+import Player from '@components/molecules/player';
 
 export interface BookProps {
 	data: NonNullable<GetBibleBookDetailPageDataQuery>;
@@ -20,6 +21,7 @@ function Book({ data }: BookProps): JSX.Element {
 		<>
 			<h1>{data.audiobible?.book.title}</h1>
 			<h2>{data.audiobible?.title}</h2>
+			{chapter?.url && <Player sources={[{ src: chapter?.url }]} />}
 			<label>
 				<FormattedMessage
 					id="bibleBook__chapterSelectLabel"

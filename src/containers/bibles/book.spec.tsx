@@ -10,6 +10,9 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
+import videojs from 'video.js';
+
+jest.mock('video.js');
 
 async function renderPage() {
 	const { props } = await getStaticProps({
@@ -194,5 +197,13 @@ describe('Bible book detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_verse_text')).toBeInTheDocument();
+	});
+
+	it('includes player', async () => {
+		loadPageData();
+
+		await renderPage();
+
+		expect(videojs).toBeCalled();
 	});
 });

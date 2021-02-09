@@ -202,7 +202,7 @@ describe('localization usage', () => {
 							chapters: [
 								{
 									title: 'z',
-									url: 'z',
+									url: '',
 									id: 'z',
 									verses: [],
 								},
