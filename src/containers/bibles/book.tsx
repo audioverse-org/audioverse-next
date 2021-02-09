@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
+
 import styles from './book.module.scss';
 
 export interface BookProps {
