@@ -1,9 +1,9 @@
 import React from 'react';
 
+import withFailStates from '@components/HOCs/withFailStates';
 import { GetBibleVersionsPageDataQuery } from '@lib/generated/graphql';
 import { makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import withFailStates from '@components/HOCs/withFailStates';
 
 type Versions = NonNullable<
 	GetBibleVersionsPageDataQuery['audiobibles']['nodes']
