@@ -101,6 +101,7 @@ export type BibleChapter = Node & {
   text: Scalars['String'];
   title: Scalars['String'];
   url: Scalars['URL'];
+  verses: Array<BibleVerse>;
 };
 
 export type BibleConnection = {
@@ -238,6 +239,12 @@ export type BibleSponsor = {
   url: Scalars['URL'];
 };
 
+export type BibleVerse = {
+  __typename?: 'BibleVerse';
+  number: Scalars['Int'];
+  text: Scalars['String'];
+};
+
 export type BlogPost = Node & {
   __typename?: 'BlogPost';
   body: Scalars['String'];
@@ -331,8 +338,10 @@ export enum CatalogHistoryItemSortableField {
 
 /** The supported types of catalog history items. */
 export enum CatalogHistoryItemType {
+  Archive = 'ARCHIVE',
   InternalComment = 'INTERNAL_COMMENT',
-  SponsorChanged = 'SPONSOR_CHANGED'
+  SponsorChanged = 'SPONSOR_CHANGED',
+  Unarchive = 'UNARCHIVE'
 }
 
 export type Collection = Node & {
@@ -386,6 +395,7 @@ export type CollectionRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -527,6 +537,7 @@ export type DistributionAgreementRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -1171,6 +1182,7 @@ export type Mutation = {
   recordingScreeningTechnicalCheckoutCreate: RecordingScreeningCheckoutPayload;
   recordingScreeningTechnicalCheckoutDelete: SuccessPayload;
   recordingScreeningTechnicalEvaluate: RecordingPayload;
+  recordingUnarchive: SuccessPayload;
   recordingUnfavorite: SuccessPayload;
   recordingUpdate: RecordingPayload;
   sequenceCreate: SequencePayload;
@@ -1524,6 +1536,11 @@ export type MutationRecordingScreeningTechnicalEvaluateArgs = {
 };
 
 
+export type MutationRecordingUnarchiveArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
 export type MutationRecordingUnfavoriteArgs = {
   id: Scalars['ID'];
 };
@@ -1696,6 +1713,7 @@ export type PersonRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
@@ -1974,6 +1992,7 @@ export type QueryAudiobookTracksArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -2081,6 +2100,7 @@ export type QueryFeaturedRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
@@ -2229,6 +2249,7 @@ export type QueryMusicTracksArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -2277,6 +2298,7 @@ export type QueryPopularRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
@@ -2311,6 +2333,7 @@ export type QueryRecordingsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -2393,6 +2416,7 @@ export type QuerySermonsArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -2439,6 +2463,7 @@ export type QueryStoriesArgs = {
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   language: Language;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -2541,6 +2566,12 @@ export type QueryWebsitesArgs = {
 
 export type Recording = Node & {
   __typename?: 'Recording';
+  /** Requires `ADMINISTRATION` role. */
+  archiveDate?: Maybe<Scalars['DateTime']>;
+  /** Requires `ADMINISTRATION` role. */
+  archiveReason?: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  archiveUser?: Maybe<User>;
   attachments: Array<Attachment>;
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
@@ -3051,6 +3082,7 @@ export type SequenceRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;
@@ -3211,6 +3243,7 @@ export type SponsorRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -3340,6 +3373,7 @@ export type TagRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -4020,6 +4054,7 @@ export type UserFavoriteRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   orderBy?: Maybe<Array<RecordingsOrder>>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
@@ -4217,6 +4252,7 @@ export type UserPlaylistRecordingsArgs = {
   hasVideo?: Maybe<Scalars['Boolean']>;
   includeUnpublished?: Maybe<Scalars['Boolean']>;
   offset?: Maybe<Scalars['Int']>;
+  onlyArchived?: Maybe<Scalars['Boolean']>;
   person?: Maybe<RecordingPersonInput>;
   persons?: Maybe<Array<RecordingPersonInput>>;
   presenterId?: Maybe<Scalars['ID']>;

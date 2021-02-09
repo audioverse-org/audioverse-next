@@ -61,5 +61,9 @@ describe('versions list', () => {
 		expect(link.href).toContain('/en/bibles/the_version_id');
 	});
 
-	// TODO: add withfailstates
+	it('renders 404', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
 });

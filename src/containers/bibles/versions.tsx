@@ -3,6 +3,7 @@ import React from 'react';
 import { GetBibleVersionsPageDataQuery } from '@lib/generated/graphql';
 import { makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import withFailStates from '@components/HOCs/withFailStates';
 
 type Versions = NonNullable<
 	GetBibleVersionsPageDataQuery['audiobibles']['nodes']
@@ -12,7 +13,7 @@ export interface VersionsProps {
 	versions: Versions;
 }
 
-export default function Versions({ versions }: VersionsProps): JSX.Element {
+function Versions({ versions }: VersionsProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -27,3 +28,5 @@ export default function Versions({ versions }: VersionsProps): JSX.Element {
 		</>
 	);
 }
+
+export default withFailStates(Versions, ({ versions }) => !versions.length);

@@ -78,6 +78,7 @@ type BibleChapter implements Node {
     text: String!
     title: String!
     url: URL!
+    verses: [BibleVerse!]!
 }
 
 type BibleConnection {
@@ -122,6 +123,11 @@ type BibleReferenceRangeEdge {
 type BibleSponsor {
     name: String!
     url: URL!
+}
+
+type BibleVerse {
+    number: Int!
+    text: String!
 }
 
 type BlogPost implements Node {
@@ -217,6 +223,8 @@ type Collection implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -310,6 +318,8 @@ type DistributionAgreement implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -638,6 +648,7 @@ type Mutation {
     recordingScreeningTechnicalCheckoutCreate(recordingId: ID!, userId: ID): RecordingScreeningCheckoutPayload!
     recordingScreeningTechnicalCheckoutDelete(recordingId: ID!, userId: ID): SuccessPayload!
     recordingScreeningTechnicalEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
+    recordingUnarchive(recordingId: ID!): SuccessPayload!
     recordingUnfavorite(id: ID!): SuccessPayload!
     recordingUpdate(input: RecordingUpdateInput!, recordingId: ID!): RecordingPayload!
     sequenceCreate(input: SequenceCreateInput!): SequencePayload!
@@ -723,6 +734,8 @@ type Person implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "The recording must be associated with one of the persons provided."
         persons: [RecordingPersonInput!],
@@ -852,6 +865,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -978,6 +993,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -1129,6 +1146,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1188,6 +1207,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -1238,6 +1259,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1315,6 +1338,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1371,6 +1396,8 @@ type Query {
         language: Language!,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1479,6 +1506,12 @@ type Query {
 }
 
 type Recording implements Node {
+    "Requires `ADMINISTRATION` role."
+    archiveDate: DateTime
+    "Requires `ADMINISTRATION` role."
+    archiveReason: String
+    "Requires `ADMINISTRATION` role."
+    archiveUser: User
     attachments(allowedContainers: [MediaFileContainer!]): [Attachment!]!
     audioFiles(allowedContainers: [MediaFileContainer!], includeUnpublished: Boolean): [AudioFile!]!
     bibleReferences(
@@ -1711,6 +1744,8 @@ type Sequence implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -1830,6 +1865,8 @@ type Sponsor implements Node & UniformResourceLocatable {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -1915,6 +1952,8 @@ type Tag implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -2017,6 +2056,8 @@ type User implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         orderBy: [RecordingsOrder!],
         "A person associated with the recordings."
         person: RecordingPersonInput,
@@ -2123,6 +2164,8 @@ type UserPlaylist implements Node {
         includeUnpublished: Boolean,
         "Return the elements that come after the specified offset."
         offset: Int,
+        "Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
+        onlyArchived: Boolean,
         "A person associated with the recordings."
         person: RecordingPersonInput,
         "The recording must be associated with one of the persons provided."
@@ -2278,8 +2321,10 @@ enum CatalogHistoryItemSortableField {
 
 "The supported types of catalog history items."
 enum CatalogHistoryItemType {
+    ARCHIVE
     INTERNAL_COMMENT
     SPONSOR_CHANGED
+    UNARCHIVE
 }
 
 "The available types of collections."
