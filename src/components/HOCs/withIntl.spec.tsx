@@ -204,6 +204,7 @@ describe('localization usage', () => {
 									title: 'z',
 									url: 'z',
 									id: 'z',
+									verses: [],
 								},
 							],
 						},

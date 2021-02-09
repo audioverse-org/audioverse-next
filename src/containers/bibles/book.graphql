@@ -7,6 +7,10 @@ query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
                 id
                 title
                 url
+                verses {
+                    number
+                    text
+                }
             }
         }
         sponsor {

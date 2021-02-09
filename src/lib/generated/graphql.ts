@@ -620,6 +620,7 @@ export type Image = {
 export type ImageUrlArgs = {
   cropMode?: Maybe<ImageCropMode>;
   size: Scalars['Int'];
+  skipCache?: Maybe<Scalars['Boolean']>;
 };
 
 /** The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields. */
@@ -825,6 +826,7 @@ export type MediaFileUpload = Node & {
   recording?: Maybe<Recording>;
   transcodingStatus: MediaFileTranscodingStatus;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  url?: Maybe<Scalars['URL']>;
 };
 
 
@@ -4543,6 +4545,10 @@ export type GetBibleBookDetailPageDataQuery = (
       & { chapters: Array<(
         { __typename?: 'BibleChapter' }
         & Pick<BibleChapter, 'id' | 'title' | 'url'>
+        & { verses: Array<(
+          { __typename?: 'BibleVerse' }
+          & Pick<BibleVerse, 'number' | 'text'>
+        )> }
       )> }
     ), sponsor: (
       { __typename?: 'BibleSponsor' }
@@ -5034,6 +5040,10 @@ export const GetBibleBookDetailPageDataDocument = `
         id
         title
         url
+        verses {
+          number
+          text
+        }
       }
     }
     sponsor {
