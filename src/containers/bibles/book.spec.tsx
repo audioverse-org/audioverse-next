@@ -187,6 +187,7 @@ describe('Bible book detail page', () => {
 
 		expect(getByText('1')).toBeInTheDocument();
 	});
+
 	it('displays verse text', async () => {
 		loadPageData();
 
