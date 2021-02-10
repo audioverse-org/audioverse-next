@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import videojs from 'video.js';
 
@@ -11,7 +12,6 @@ import Audiobook, {
 	getStaticProps,
 	GetStaticPropsArgs,
 } from '@pages/[language]/books/[id]';
-import userEvent from '@testing-library/user-event';
 
 jest.mock('video.js');
 
