@@ -4558,7 +4558,7 @@ export type GetAudiobookDetailPageDataQuery = (
       { __typename?: 'RecordingConnection' }
       & { nodes?: Maybe<Array<(
         { __typename?: 'Recording' }
-        & Pick<Recording, 'title'>
+        & Pick<Recording, 'id' | 'title'>
         & { audioFiles: Array<(
           { __typename?: 'AudioFile' }
           & Pick<AudioFile, 'url'>
@@ -5134,6 +5134,7 @@ export const GetAudiobookDetailPageDataDocument = `
   audiobook(id: $id) {
     recordings {
       nodes {
+        id
         title
         audioFiles {
           url

@@ -2,6 +2,7 @@ query getAudiobookDetailPageData($id: ID!) {
     audiobook(id: $id) {
         recordings {
             nodes {
+                id
                 title
                 audioFiles {
                     url

@@ -11,6 +11,7 @@ import Audiobook, {
 	getStaticProps,
 	GetStaticPropsArgs,
 } from '@pages/[language]/books/[id]';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('video.js');
 
@@ -22,6 +23,37 @@ async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
 	});
 
 	return renderWithIntl(Audiobook, props);
+}
+
+function loadData() {
+	when(mockedFetchApi)
+		.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
+		.mockResolvedValue({
+			audiobook: {
+				recordings: {
+					nodes: [
+						{
+							id: 'first_recording_id',
+							title: 'first_recording_title',
+							audioFiles: [
+								{
+									url: 'first_recording_url',
+								},
+							],
+						},
+						{
+							id: 'second_recording_id',
+							title: 'second_recording_title',
+							audioFiles: [
+								{
+									url: 'second_recording_url',
+								},
+							],
+						},
+					],
+				},
+			},
+		});
 }
 
 describe('audiobook detail page', () => {
@@ -42,23 +74,7 @@ describe('audiobook detail page', () => {
 	});
 
 	it('loads recording src', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				audiobook: {
-					recordings: {
-						nodes: [
-							{
-								audioFiles: [
-									{
-										url: 'first_recording_url',
-									},
-								],
-							},
-						],
-					},
-				},
-			});
+		loadData();
 
 		await renderPage();
 
@@ -88,9 +104,31 @@ describe('audiobook detail page', () => {
 		expect(paths).toContain('/en/books/the_book_id');
 	});
 
-	// lists recordings
-	// loads recording src
-	// includes download links for each recording
+	it('lists recordings', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('first_recording_title')).toBeInTheDocument();
+	});
+
+	it('switches recording on click', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('second_recording_title'));
+
+		expect(videojs).toBeCalledWith(
+			expect.anything(),
+			expect.objectContaining({
+				sources: [{ src: 'second_recording_url' }],
+			})
+		);
+	});
+
 	// switches player src on recording click
+	// indicates which recording is playing
+	// includes download links for each recording
 	// show book title
 });
