@@ -1,4 +1,4 @@
-import Book, { BookProps } from '@containers/bibles/book';
+import Book, { BookProps } from '@containers/bible/book';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getBibleBookDetailPageData,

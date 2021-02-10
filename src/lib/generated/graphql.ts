@@ -4545,6 +4545,47 @@ export type RecordingFragment = (
   )> }
 );
 
+export type GetAudiobookListPageDataQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetAudiobookListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobooks: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ) }
+    )>>, aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetAudiobookListPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetAudiobookListPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobooks: (
+    { __typename?: 'SequenceConnection' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetBibleBookDetailPageDataQueryVariables = Exact<{
   versionId: Scalars['ID'];
   bookId: Scalars['ID'];
@@ -5047,6 +5088,55 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetAudiobookListPageDataDocument = `
+    query getAudiobookListPageData($language: Language!, $first: Int, $offset: Int) {
+  audiobooks(language: $language, first: $first, offset: $offset) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
+      }
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetAudiobookListPageDataQuery = <
+      TData = GetAudiobookListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetAudiobookListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAudiobookListPageDataQuery, TError, TData>(
+      ['getAudiobookListPageData', variables],
+      graphqlFetcher<GetAudiobookListPageDataQuery, GetAudiobookListPageDataQueryVariables>(GetAudiobookListPageDataDocument, variables),
+      options
+    );
+export const GetAudiobookListPathsDataDocument = `
+    query getAudiobookListPathsData($language: Language!) {
+  audiobooks(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetAudiobookListPathsDataQuery = <
+      TData = GetAudiobookListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookListPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetAudiobookListPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAudiobookListPathsDataQuery, TError, TData>(
+      ['getAudiobookListPathsData', variables],
+      graphqlFetcher<GetAudiobookListPathsDataQuery, GetAudiobookListPathsDataQueryVariables>(GetAudiobookListPathsDataDocument, variables),
+      options
+    );
 export const GetBibleBookDetailPageDataDocument = `
     query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
   audiobible(id: $versionId) {
@@ -5515,6 +5605,21 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getAudiobookListPageData(
+  variables: GetAudiobookListPageDataQueryVariables
+): Promise<GetAudiobookListPageDataQuery> {
+  return fetchApi(GetAudiobookListPageDataDocument, { variables });
+}
+				
+
+
+export async function getAudiobookListPathsData(
+  variables: GetAudiobookListPathsDataQueryVariables
+): Promise<GetAudiobookListPathsDataQuery> {
+  return fetchApi(GetAudiobookListPathsDataDocument, { variables });
+}
+				
 
 export async function getBibleBookDetailPageData(
   variables: GetBibleBookDetailPageDataQueryVariables

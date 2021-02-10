@@ -1,4 +1,4 @@
-import Versions, { VersionsProps } from '@containers/bibles/versions';
+import Versions, { VersionsProps } from '@containers/bible/versions';
 import { REVALIDATE } from '@lib/constants';
 import { getBibleVersionsPageData } from '@lib/generated/graphql';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';

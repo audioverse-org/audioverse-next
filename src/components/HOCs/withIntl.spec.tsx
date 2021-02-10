@@ -10,7 +10,8 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
-import Book from '@containers/bibles/book';
+import Audiobooks from '@containers/audiobook/audiobooks';
+import Book from '@containers/bible/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -199,6 +200,7 @@ describe('localization usage', () => {
 						title: 'z',
 						book: {
 							title: 'z',
+							shareUrl: 'z',
 							chapters: [
 								{
 									title: 'z',
@@ -232,5 +234,24 @@ describe('localization usage', () => {
 			'English',
 			'Deutsch',
 		]);
+	});
+
+	it('localizes audiobooks list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Audiobooks
+				nodes={[
+					{
+						id: 'z',
+						title: 'z',
+						imageWithFallback: {
+							url: 'z',
+						},
+					},
+				]}
+				pagination={{ total: 1, current: 1 }}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
 	});
 });
