@@ -23,6 +23,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Audiobook from '@containers/audiobook/audiobook';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -249,6 +250,18 @@ describe('localization usage', () => {
 					},
 				]}
 				pagination={{ total: 1, current: 1 }}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes audiobook detail page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Audiobook
+				audiobook={{
+					recordings: [],
+				}}
 			/>
 		);
 

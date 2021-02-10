@@ -73,12 +73,6 @@ describe('audiobook detail page', () => {
 		});
 	});
 
-	it('loads player', async () => {
-		await renderPage();
-
-		expect(videojs).toBeCalled();
-	});
-
 	it('loads recording src', async () => {
 		loadData();
 
@@ -141,6 +135,14 @@ describe('audiobook detail page', () => {
 		const link = getByRole('link', { name: '5 MB' }) as HTMLLinkElement;
 
 		expect(link).toHaveAttribute('href', 'first_recording_download');
+	});
+
+	it('indicates currently-playing recording', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Now playing: first_recording_title')).toBeInTheDocument();
 	});
 
 	// support isDownloadAllowed

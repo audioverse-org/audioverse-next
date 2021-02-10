@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Player from '@components/molecules/player';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
+import { FormattedMessage } from 'react-intl';
 
 type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
 
@@ -19,7 +20,15 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 
 	return (
 		<>
-			<Player sources={sources} />
+			{recording && <Player sources={sources} />}
+			<p>
+				<FormattedMessage
+					id="audiobookDetailPage__nowPlaying"
+					defaultMessage="Now playing:"
+					description="Audiobook detail now playing prefix"
+				/>{' '}
+				{recording?.title}
+			</p>
 			<ul>
 				{recordings.map((r) => (
 					<li key={r.id}>
