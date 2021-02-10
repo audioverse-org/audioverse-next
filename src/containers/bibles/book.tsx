@@ -87,6 +87,21 @@ function Book({ data }: BookProps): JSX.Element {
 					</span>
 				))}
 			</div>
+			<h3>
+				<FormattedMessage
+					id="bibleBook__tabShare"
+					defaultMessage="Share"
+					description="Bible book detail page share tab title"
+				/>
+			</h3>
+			<h4>
+				<FormattedMessage
+					id="bibleBook__shortUrlLabel"
+					defaultMessage="Short URL"
+					description="Bible book detail page short url label"
+				/>
+			</h4>
+			<p>{data.audiobible?.book.shareUrl}</p>
 		</>
 	);
 }

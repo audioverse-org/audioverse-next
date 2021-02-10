@@ -3,6 +3,7 @@ query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
         title
         book(id: $bookId) {
             title
+            shareUrl
             chapters {
                 id
                 title

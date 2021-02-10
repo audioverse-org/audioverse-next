@@ -38,6 +38,11 @@ export type Attachment = Node & {
   url: Scalars['URL'];
 };
 
+
+export type AttachmentUrlArgs = {
+  skipAnalytics?: Maybe<Scalars['Boolean']>;
+};
+
 export type AudioFile = Node & {
   __typename?: 'AudioFile';
   bitrate: Scalars['Int'];
@@ -50,6 +55,11 @@ export type AudioFile = Node & {
   recording: Recording;
   updatedAt?: Maybe<Scalars['DateTime']>;
   url: Scalars['URL'];
+};
+
+
+export type AudioFileUrlArgs = {
+  skipAnalytics?: Maybe<Scalars['Boolean']>;
 };
 
 export type AuthenticatedUser = {
@@ -87,6 +97,8 @@ export type BibleBook = Node & {
   chapters: Array<BibleChapter>;
   id: Scalars['ID'];
   isDramatized: Scalars['Boolean'];
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -4403,6 +4415,11 @@ export type VideoFile = Node & {
   width: Scalars['Int'];
 };
 
+
+export type VideoFileUrlArgs = {
+  skipAnalytics?: Maybe<Scalars['Boolean']>;
+};
+
 export type Website = Node & {
   __typename?: 'Website';
   id: Scalars['ID'];
@@ -4541,7 +4558,7 @@ export type GetBibleBookDetailPageDataQuery = (
     & Pick<Bible, 'title' | 'copyrightText'>
     & { book: (
       { __typename?: 'BibleBook' }
-      & Pick<BibleBook, 'title'>
+      & Pick<BibleBook, 'title' | 'shareUrl'>
       & { chapters: Array<(
         { __typename?: 'BibleChapter' }
         & Pick<BibleChapter, 'id' | 'title' | 'url'>
@@ -5036,6 +5053,7 @@ export const GetBibleBookDetailPageDataDocument = `
     title
     book(id: $bookId) {
       title
+      shareUrl
       chapters {
         id
         title

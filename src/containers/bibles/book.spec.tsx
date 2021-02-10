@@ -29,6 +29,7 @@ function loadPageData() {
 				title: 'the_version_title',
 				book: {
 					title: 'the_book_title',
+					shareUrl: 'the_book_share_url',
 					chapters: [
 						{
 							id: 'the_chapter_id',
@@ -205,5 +206,13 @@ describe('Bible book detail page', () => {
 		await renderPage();
 
 		expect(videojs).toBeCalled();
+	});
+
+	it('includes share url', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_book_share_url')).toBeInTheDocument();
 	});
 });
