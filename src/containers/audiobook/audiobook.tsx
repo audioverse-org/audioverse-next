@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Player from '@components/molecules/player';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
 

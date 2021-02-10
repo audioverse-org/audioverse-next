@@ -1,15 +1,16 @@
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
-import Audiobook, {
-	getStaticProps,
-	GetStaticPropsArgs,
-	getStaticPaths,
-} from '@pages/[language]/books/[id]';
+import { when } from 'jest-when';
+import videojs from 'video.js';
+
 import {
 	GetAudiobookDetailPageDataDocument,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import videojs from 'video.js';
-import { when } from 'jest-when';
+import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import Audiobook, {
+	getStaticPaths,
+	getStaticProps,
+	GetStaticPropsArgs,
+} from '@pages/[language]/books/[id]';
 
 jest.mock('video.js');
 
