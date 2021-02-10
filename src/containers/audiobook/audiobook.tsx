@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Player from '@components/molecules/player';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
+import { readableBytes } from '@lib/readableBytes';
 
 type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
 
@@ -23,6 +24,16 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 				{recordings.map((r) => (
 					<li key={r.id}>
 						<button onClick={() => setId(r.id)}>{r.title}</button>
+						{r.audioDownloads?.map((d) => (
+							<a
+								key={d.url}
+								href={d.url}
+								target={'_blank'}
+								rel={'noreferrer noopener'}
+							>
+								{readableBytes(d.filesize)}
+							</a>
+						))}
 					</li>
 				))}
 			</ul>

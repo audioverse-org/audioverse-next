@@ -215,6 +215,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					</a>
 				</>
 			)}
+			{/* TODO: Disable if downloads not allowed */}
 			{hasDownloads && (
 				<>
 					<h2>

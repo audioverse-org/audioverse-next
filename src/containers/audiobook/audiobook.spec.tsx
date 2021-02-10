@@ -40,6 +40,12 @@ function loadData() {
 									url: 'first_recording_url',
 								},
 							],
+							audioDownloads: [
+								{
+									url: 'first_recording_download',
+									filesize: '5242880',
+								},
+							],
 						},
 						{
 							id: 'second_recording_id',
@@ -127,8 +133,18 @@ describe('audiobook detail page', () => {
 		);
 	});
 
-	// switches player src on recording click
-	// indicates which recording is playing
+	it('includes download links', async () => {
+		loadData();
+
+		const { getByRole } = await renderPage();
+
+		const link = getByRole('link', { name: '5 MB' }) as HTMLLinkElement;
+
+		expect(link).toHaveAttribute('href', 'first_recording_download');
+	});
+
+	// support isDownloadAllowed
 	// includes download links for each recording
+	// indicates which recording is playing
 	// show book title
 });

@@ -4562,6 +4562,9 @@ export type GetAudiobookDetailPageDataQuery = (
         & { audioFiles: Array<(
           { __typename?: 'AudioFile' }
           & Pick<AudioFile, 'url'>
+        )>, audioDownloads: Array<(
+          { __typename?: 'AudioFile' }
+          & Pick<AudioFile, 'url' | 'filesize'>
         )> }
       )>> }
     ) }
@@ -5138,6 +5141,10 @@ export const GetAudiobookDetailPageDataDocument = `
         title
         audioFiles {
           url
+        }
+        audioDownloads: audioFiles(allowedContainers: MP3) {
+          url
+          filesize
         }
       }
     }
