@@ -4545,6 +4545,47 @@ export type RecordingFragment = (
   )> }
 );
 
+export type GetAudiobookDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetAudiobookDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobook?: Maybe<(
+    { __typename?: 'Sequence' }
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes?: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & Pick<Recording, 'title'>
+        & { audioFiles: Array<(
+          { __typename?: 'AudioFile' }
+          & Pick<AudioFile, 'url'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type GetAudiobookDetailPathsDataQueryVariables = Exact<{
+  language: Language;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetAudiobookDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { audiobooks: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes?: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetAudiobookListPageDataQueryVariables = Exact<{
   language: Language;
   first?: Maybe<Scalars['Int']>;
@@ -5088,6 +5129,53 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetAudiobookDetailPageDataDocument = `
+    query getAudiobookDetailPageData($id: ID!) {
+  audiobook(id: $id) {
+    recordings {
+      nodes {
+        title
+        audioFiles {
+          url
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetAudiobookDetailPageDataQuery = <
+      TData = GetAudiobookDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetAudiobookDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAudiobookDetailPageDataQuery, TError, TData>(
+      ['getAudiobookDetailPageData', variables],
+      graphqlFetcher<GetAudiobookDetailPageDataQuery, GetAudiobookDetailPageDataQueryVariables>(GetAudiobookDetailPageDataDocument, variables),
+      options
+    );
+export const GetAudiobookDetailPathsDataDocument = `
+    query getAudiobookDetailPathsData($language: Language!, $first: Int, $offset: Int) {
+  audiobooks(language: $language, first: $first, offset: $offset) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetAudiobookDetailPathsDataQuery = <
+      TData = GetAudiobookDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetAudiobookDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetAudiobookDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAudiobookDetailPathsDataQuery, TError, TData>(
+      ['getAudiobookDetailPathsData', variables],
+      graphqlFetcher<GetAudiobookDetailPathsDataQuery, GetAudiobookDetailPathsDataQueryVariables>(GetAudiobookDetailPathsDataDocument, variables),
+      options
+    );
 export const GetAudiobookListPageDataDocument = `
     query getAudiobookListPageData($language: Language!, $first: Int, $offset: Int) {
   audiobooks(language: $language, first: $first, offset: $offset) {
@@ -5605,6 +5693,21 @@ export async function getPlaylistButtonData(
 
 
 
+
+export async function getAudiobookDetailPageData(
+  variables: GetAudiobookDetailPageDataQueryVariables
+): Promise<GetAudiobookDetailPageDataQuery> {
+  return fetchApi(GetAudiobookDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getAudiobookDetailPathsData(
+  variables: GetAudiobookDetailPathsDataQueryVariables
+): Promise<GetAudiobookDetailPathsDataQuery> {
+  return fetchApi(GetAudiobookDetailPathsDataDocument, { variables });
+}
+				
 
 export async function getAudiobookListPageData(
   variables: GetAudiobookListPageDataQueryVariables

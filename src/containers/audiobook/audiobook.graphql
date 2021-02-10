@@ -1,0 +1,28 @@
+query getAudiobookDetailPageData($id: ID!) {
+    audiobook(id: $id) {
+        recordings {
+            nodes {
+                title
+                audioFiles {
+                    url
+                }
+            }
+        }
+    }
+}
+
+query getAudiobookDetailPathsData(
+    $language: Language!,
+    $first: Int,
+    $offset: Int
+) {
+    audiobooks(
+        language: $language,
+        first: $first,
+        offset: $offset
+    ) {
+        nodes {
+            id
+        }
+    }
+}
