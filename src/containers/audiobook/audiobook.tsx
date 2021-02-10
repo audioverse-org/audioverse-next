@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Player from '@components/molecules/player';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
-import { FormattedMessage } from 'react-intl';
 
 type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
 

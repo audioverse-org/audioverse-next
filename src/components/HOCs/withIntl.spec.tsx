@@ -10,6 +10,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
@@ -23,7 +24,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import Audiobook from '@containers/audiobook/audiobook';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
