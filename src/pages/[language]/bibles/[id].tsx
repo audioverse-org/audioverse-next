@@ -1,4 +1,4 @@
-import Version, { VersionProps } from '@containers/bibles/version';
+import Version, { VersionProps } from '@containers/bible/version';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getVersionDetailPageData,

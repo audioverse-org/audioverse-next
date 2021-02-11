@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import videojs from 'video.js';
 
 import {
 	GetBibleBookDetailPageDataDocument,
@@ -10,6 +11,8 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]';
+
+jest.mock('video.js');
 
 async function renderPage() {
 	const { props } = await getStaticProps({
@@ -26,11 +29,18 @@ function loadPageData() {
 				title: 'the_version_title',
 				book: {
 					title: 'the_book_title',
+					shareUrl: 'the_book_share_url',
 					chapters: [
 						{
 							id: 'the_chapter_id',
 							title: 'the_chapter_title',
 							url: 'the_chapter_url',
+							verses: [
+								{
+									number: 1,
+									text: 'the_verse_text',
+								},
+							],
 						},
 						{
 							id: 'second_chapter_id',
@@ -172,5 +182,37 @@ describe('Bible book detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_copyright')).toBeInTheDocument();
+	});
+
+	it('displays verse number', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1')).toBeInTheDocument();
+	});
+
+	it('displays verse text', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_verse_text')).toBeInTheDocument();
+	});
+
+	it('includes player', async () => {
+		loadPageData();
+
+		await renderPage();
+
+		expect(videojs).toBeCalled();
+	});
+
+	it('includes share url', async () => {
+		loadPageData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_book_share_url')).toBeInTheDocument();
 	});
 });

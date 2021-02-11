@@ -6,6 +6,7 @@ import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
+import SponsorInfo from '@components/molecules/sponsorInfo';
 import styles from '@containers/sermon/detail.module.scss';
 import { RecordingFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
@@ -161,19 +162,18 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				</>
 			)}
 			{/*TODO: Add related sermons*/}
-			<h2>
-				<FormattedMessage
-					id="sermonDetailPage__sponsorInfoTitle"
-					defaultMessage="Sponsor"
-					description="Sermon detail sponsor info title"
-				/>
-			</h2>
-			{/* TODO: link sponsor title */}
-			<p>
-				<a href="#">{sponsor?.title}</a>
-				<br />
-				<span>{sponsor?.location}</span>
-			</p>
+			{sponsor && (
+				<>
+					<h2>
+						<FormattedMessage
+							id="sermonDetailPage__sponsorInfoTitle"
+							defaultMessage="Sponsor"
+							description="Sermon detail sponsor info title"
+						/>
+					</h2>
+					<SponsorInfo sponsor={sponsor} />
+				</>
+			)}
 			{/* TODO: If no presenters (see sermon 4689) don't show presenters section */}
 			<h2>
 				<FormattedMessage
@@ -215,6 +215,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					</a>
 				</>
 			)}
+			{/* TODO: Disable if downloads not allowed */}
 			{hasDownloads && (
 				<>
 					<h2>

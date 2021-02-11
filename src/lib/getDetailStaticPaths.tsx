@@ -5,6 +5,8 @@ import { Language } from '@lib/generated/graphql';
 
 type Getter = (variables: { language: Language; first: number }) => any;
 
+// TODO: Improve types such that nodesPath is required to be a
+//  valid path in the getter return type
 export async function getDetailStaticPaths(
 	getter: Getter,
 	nodesPath: string,

@@ -62,3 +62,8 @@ export const makeBibleBookRoute = (
 	languageRoute: string,
 	bookId: string
 ): string => `/${languageRoute}/bibles/${bookId.replace('-', '/')}`;
+
+export const makeAudiobookRoute = (
+	languageRoute: string,
+	bookId: string
+): string => `/${languageRoute}/books/${bookId}`;

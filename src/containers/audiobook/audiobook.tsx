@@ -1,0 +1,69 @@
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import Player from '@components/molecules/player';
+import SponsorInfo from '@components/molecules/sponsorInfo';
+import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
+import { readableBytes } from '@lib/readableBytes';
+
+type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
+
+export interface AudiobookProps {
+	audiobook: Audiobook | undefined | null;
+}
+
+function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
+	const recordings = audiobook?.recordings.nodes || [];
+	const firstId = recordings.length ? recordings[0].id : undefined;
+	const [id, setId] = useState<string | undefined>(firstId);
+	const recording = recordings.find((r) => r.id === id);
+	const sources = [{ src: recording?.audioFiles[0].url }];
+
+	return (
+		<>
+			{recording && <Player sources={sources} />}
+			<p>
+				<FormattedMessage
+					id="audiobookDetailPage__nowPlaying"
+					defaultMessage="Now playing:"
+					description="Audiobook detail now playing prefix"
+				/>{' '}
+				{recording?.title}
+			</p>
+			<h2>
+				<FormattedMessage
+					id="audiobookDetailPage__aboutTab"
+					defaultMessage="About"
+					description="Audiobook detail about tab"
+				/>
+			</h2>
+			{audiobook?.sponsor && <SponsorInfo sponsor={audiobook.sponsor} />}
+			<h2>
+				<FormattedMessage
+					id="audiobookDetailPage__chaptersTab"
+					defaultMessage="Chapters"
+					description="Audiobook detail chapters tab"
+				/>
+			</h2>
+			<ul>
+				{recordings.map((r) => (
+					<li key={r.id}>
+						<button onClick={() => setId(r.id)}>{r.title}</button>
+						{r.audioDownloads?.map((d) => (
+							<a
+								key={d.url}
+								href={d.url}
+								target={'_blank'}
+								rel={'noreferrer noopener'}
+							>
+								{readableBytes(d.filesize)}
+							</a>
+						))}
+					</li>
+				))}
+			</ul>
+		</>
+	);
+}
+
+export default Audiobook;

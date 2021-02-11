@@ -28,7 +28,10 @@ type Attachment implements Node {
     mimeType: String!
     recording: Recording!
     updatedAt: DateTime
-    url: URL!
+    url(
+        "Requires `Recording` read access."
+        skipAnalytics: Boolean
+    ): URL!
 }
 
 type AudioFile implements Node {
@@ -41,7 +44,10 @@ type AudioFile implements Node {
     mimeType: String!
     recording: Recording!
     updatedAt: DateTime
-    url: URL!
+    url(
+        "Requires `Recording` read access."
+        skipAnalytics: Boolean
+    ): URL!
 }
 
 type AuthenticatedUser {
@@ -70,6 +76,8 @@ type BibleBook implements Node {
     chapters: [BibleChapter!]!
     id: ID!
     isDramatized: Boolean!
+    "A shareable short URL to this resource."
+    shareUrl: String!
     title: String!
 }
 
@@ -369,7 +377,12 @@ type DistributionAgreementPayload {
 type Image {
     name: String!
     updatedAt: DateTime
-    url(cropMode: ImageCropMode = DEFAULT, size: Int!): URL!
+    url(
+        cropMode: ImageCropMode = DEFAULT,
+        size: Int!,
+        "Enable to avoid cached image URLs."
+        skipCache: Boolean
+    ): URL!
 }
 
 "The underlying API doesn't support offset-based pagination or count requests. As a result this connection doesn't include `pageInfo` or `aggregate` fields."
@@ -452,6 +465,7 @@ type MediaFileUpload implements Node {
     recording: Recording
     transcodingStatus: MediaFileTranscodingStatus!
     updatedAt: DateTime
+    url: URL
 }
 
 type MediaFileUploadConnection {
@@ -2219,7 +2233,10 @@ type VideoFile implements Node {
     mimeType: String!
     recording: Recording!
     updatedAt: DateTime
-    url: URL!
+    url(
+        "Requires `Recording` read access."
+        skipAnalytics: Boolean
+    ): URL!
     width: Int!
 }
 

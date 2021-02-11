@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
@@ -26,23 +26,25 @@ describe('app', () => {
 	});
 
 	it('rehydrates react-query', async () => {
-		const queryClient = new QueryClient();
+		await act(async () => {
+			const queryClient = new QueryClient();
 
-		await queryClient.prefetchQuery('myQuery', async () => 'myResult');
+			await queryClient.prefetchQuery('myQuery', async () => 'myResult');
 
-		const spy = jest.fn();
+			const spy = jest.fn();
 
-		const { getByText } = await renderApp(
-			() => {
-				const { data: myQuery } = useQuery('myQuery', spy);
-				return <>{myQuery}</>;
-			},
-			{
-				dehydratedState: dehydrate(queryClient),
-			}
-		);
+			const { getByText } = await renderApp(
+				() => {
+					const { data: myQuery } = useQuery('myQuery', spy);
+					return <>{myQuery}</>;
+				},
+				{
+					dehydratedState: dehydrate(queryClient),
+				}
+			);
 
-		expect(getByText('myResult')).toBeInTheDocument();
+			expect(getByText('myResult')).toBeInTheDocument();
+		});
 	});
 
 	it('includes footer', async () => {

@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
+import Player from '@components/molecules/player';
 import { GetBibleBookDetailPageDataQuery } from '@lib/generated/graphql';
+
+import styles from './book.module.scss';
 
 export interface BookProps {
 	data: NonNullable<GetBibleBookDetailPageDataQuery>;
@@ -12,11 +15,13 @@ function Book({ data }: BookProps): JSX.Element {
 	const chapters = data.audiobible?.book.chapters || [];
 	const [chapterId, setChapterId] = useState<string>(chapters[0].id);
 	const chapter = chapters.find((c) => c.id === chapterId);
+	const verses = chapter?.verses || [];
 
 	return (
 		<>
 			<h1>{data.audiobible?.book.title}</h1>
 			<h2>{data.audiobible?.title}</h2>
+			{chapter?.url && <Player sources={[{ src: chapter?.url }]} />}
 			<label>
 				<FormattedMessage
 					id="bibleBook__chapterSelectLabel"
@@ -67,6 +72,36 @@ function Book({ data }: BookProps): JSX.Element {
 				/>{' '}
 				{chapter?.title}
 			</a>
+			<h3>
+				<FormattedMessage
+					id="bibleBook__tabTranscript"
+					defaultMessage="Transcript"
+					description="Bible book detail page transcript tab title"
+				/>
+			</h3>
+			<div>
+				{verses.map(({ number, text }) => (
+					<span className={styles.verse} key={number}>
+						<sup>{number}</sup>
+						<span>{text}</span>
+					</span>
+				))}
+			</div>
+			<h3>
+				<FormattedMessage
+					id="bibleBook__tabShare"
+					defaultMessage="Share"
+					description="Bible book detail page share tab title"
+				/>
+			</h3>
+			<h4>
+				<FormattedMessage
+					id="bibleBook__shortUrlLabel"
+					defaultMessage="Short URL"
+					description="Bible book detail page short url label"
+				/>
+			</h4>
+			<p>{data.audiobible?.book.shareUrl}</p>
 		</>
 	);
 }
