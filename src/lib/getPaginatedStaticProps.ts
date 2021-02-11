@@ -29,9 +29,8 @@ interface Getter<T> {
 		first,
 	}: {
 		language: Language;
-		hasVideo?: boolean | null;
-		offset?: number;
-		first?: number;
+		offset: number;
+		first: number;
 	}): Promise<T>;
 }
 

@@ -4,6 +4,7 @@ import videojs from 'video.js';
 
 import {
 	GetAudiobookDetailPageDataDocument,
+	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
@@ -25,7 +26,7 @@ async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
 	return renderWithIntl(Audiobook, props);
 }
 
-function loadData() {
+function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 	when(mockedFetchApi)
 		.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
@@ -40,6 +41,10 @@ function loadData() {
 						{
 							id: 'first_recording_id',
 							title: 'first_recording_title',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'first_recording_sponsor_title',
+							},
 							audioFiles: [
 								{
 									url: 'first_recording_url',
@@ -64,6 +69,7 @@ function loadData() {
 					],
 				},
 			},
+			...data,
 		});
 }
 
@@ -164,6 +170,88 @@ describe('audiobook detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_website')).toBeInTheDocument();
+	});
+
+	it('displays copyright', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 first_recording_sponsor_title'));
+	});
+
+	it('dedupes copyright', async () => {
+		loadData({
+			audiobook: {
+				recordings: {
+					nodes: [
+						{
+							id: 'first',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+						{
+							id: 'second',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+					],
+				},
+			},
+		} as any);
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor_title')).toBeInTheDocument();
+	});
+
+	it('includes explanation for multiple copyrights', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText(
+				'Portions of this audiobook are covered under the following license terms:'
+			)
+		);
+	});
+
+	it('leaves out multiple copyright explanation if only one copyright', async () => {
+		loadData({
+			audiobook: {
+				recordings: {
+					nodes: [
+						{
+							id: 'first',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+						{
+							id: 'second',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+					],
+				},
+			},
+		} as any);
+
+		const { queryByText } = await renderPage();
+
+		expect(
+			queryByText(
+				'Portions of this audiobook are covered under the following license terms:'
+			)
+		).not.toBeInTheDocument();
 	});
 
 	// support isDownloadAllowed

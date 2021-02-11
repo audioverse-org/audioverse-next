@@ -63,6 +63,7 @@ export async function getStaticProps({
 		async ({ language, offset, first }) => {
 			const result = await getSermonListStaticProps({
 				language,
+				hasVideo: null,
 				offset,
 				first,
 			});

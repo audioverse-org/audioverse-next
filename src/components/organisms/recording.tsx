@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import CopyrightInfo from '@components/molecules/copyrightInfo';
 import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -60,11 +61,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const sources = getSources(recording, prefersAudio);
 	const speakers = recording?.persons || [];
 	const tags = recording?.recordingTags?.nodes || [];
-	const {
-		sponsor = { title: '', location: '' },
-		videoDownloads = [],
-		audioDownloads = [],
-	} = recording;
+	const { sponsor, videoDownloads = [], audioDownloads = [] } = recording;
 	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
 		[],
 		{
@@ -75,11 +72,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			year: 'numeric',
 		}
 	);
-	const copyrightOwner =
-		recording?.distributionAgreement?.sponsor?.title ||
-		recording?.sponsor?.title;
-	const copyrightImageUrl =
-		recording?.distributionAgreement?.license?.image?.url;
 	const hasVideoDownloads = videoDownloads.length > 0;
 	const hasAudioDownloads = audioDownloads.length > 0;
 	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
@@ -312,22 +304,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					<p>{recording.transcript?.text}</p>
 				</>
 			)}
-			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
-			<p>
-				<span>
-					<FormattedMessage
-						id={'sermonDetailPage__copyright'}
-						defaultMessage={'Copyright ⓒ{year} {owner}'}
-						description={'Copyright year and owner'}
-						values={{
-							year: recording?.copyrightYear,
-							owner: copyrightOwner,
-						}}
-					/>
-				</span>
-				<br />
-				<span>{recording?.distributionAgreement?.license?.summary}</span>
-			</p>
+			<CopyrightInfo recording={recording} />
 		</>
 	);
 }

@@ -10,3 +10,4 @@ generates:
       - 'graphql-plugin-getters.js'
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
+      avoidOptionals: true

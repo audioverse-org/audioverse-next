@@ -1,0 +1,38 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { CopyrightInfoFragment } from '@lib/generated/graphql';
+
+interface CopyrightInfoProps {
+	recording: CopyrightInfoFragment;
+}
+
+export default function CopyrightInfo({
+	recording,
+}: CopyrightInfoProps): JSX.Element {
+	const copyrightOwner =
+		recording?.distributionAgreement?.sponsor?.title ||
+		recording?.sponsor?.title;
+	const copyrightImageUrl =
+		recording?.distributionAgreement?.license?.image?.url;
+	return (
+		<>
+			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
+			<p>
+				<span>
+					<FormattedMessage
+						id={'sermonDetailPage__copyright'}
+						defaultMessage={'Copyright ⓒ{year} {owner}'}
+						description={'Copyright year and owner'}
+						values={{
+							year: recording?.copyrightYear,
+							owner: copyrightOwner,
+						}}
+					/>
+				</span>
+				<br />
+				<span>{recording?.distributionAgreement?.license?.summary}</span>
+			</p>
+		</>
+	);
+}

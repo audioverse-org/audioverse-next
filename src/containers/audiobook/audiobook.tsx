@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import CopyrightInfo from '@components/molecules/copyrightInfo';
 import Player from '@components/molecules/player';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
@@ -17,7 +19,17 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 	const firstId = recordings.length ? recordings[0].id : undefined;
 	const [id, setId] = useState<string | undefined>(firstId);
 	const recording = recordings.find((r) => r.id === id);
-	const sources = [{ src: recording?.audioFiles[0].url }];
+	const audioFiles = recording?.audioFiles || [];
+	const sources = [{ src: audioFiles[0]?.url }];
+	const copyrightSources = _.uniqBy(recordings, (r) => {
+		const compare = _.pick(r, [
+			'copyrightYear',
+			'distributionAgreement',
+			'sponsor',
+		]);
+
+		return JSON.stringify(compare);
+	});
 
 	return (
 		<>
@@ -38,6 +50,18 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 				/>
 			</h2>
 			{audiobook?.sponsor && <SponsorInfo sponsor={audiobook.sponsor} />}
+			{copyrightSources.length > 1 && (
+				<p>
+					<FormattedMessage
+						id="audiobookDetailPage__multipleCopyrightExplanation"
+						defaultMessage="Portions of this audiobook are covered under the following license terms:"
+						description="Audiobook detail multiple copyright explanation"
+					/>
+				</p>
+			)}
+			{copyrightSources.map((r) => (
+				<CopyrightInfo key={r.id} recording={r} />
+			))}
 			<h2>
 				<FormattedMessage
 					id="audiobookDetailPage__chaptersTab"

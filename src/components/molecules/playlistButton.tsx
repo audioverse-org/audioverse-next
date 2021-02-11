@@ -61,7 +61,7 @@ export default function PlaylistButton({
 		language,
 		recordingId,
 	};
-	const { data = {} } = useGetPlaylistButtonDataQuery(queryVariables) || {};
+	const { data } = useGetPlaylistButtonDataQuery(queryVariables);
 	const lists = data?.me?.user?.playlists?.nodes;
 	const cacheKey = ['getPlaylistButtonData', queryVariables];
 	const addPlaylist = useAddPlaylist(cacheKey, 'me.user.playlists.nodes');

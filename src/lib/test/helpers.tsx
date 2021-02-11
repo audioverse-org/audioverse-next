@@ -136,5 +136,5 @@ export const makePlaylistButtonData = (
 		},
 	];
 
-	return _.set({}, 'me.user.playlists.nodes', value);
+	return _.set({} as any, 'me.user.playlists.nodes', value);
 };

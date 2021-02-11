@@ -1,6 +1,7 @@
 query getAudiobookDetailPageData($id: ID!) {
     audiobook(id: $id) {
         sponsor {
+            title
             ...sponsorInfo
         }
         recordings {
@@ -14,6 +15,7 @@ query getAudiobookDetailPageData($id: ID!) {
                     url
                     filesize
                 }
+                ...copyrightInfo
             }
         }
     }
@@ -21,13 +23,11 @@ query getAudiobookDetailPageData($id: ID!) {
 
 query getAudiobookDetailPathsData(
     $language: Language!,
-    $first: Int,
-    $offset: Int
+    $first: Int
 ) {
     audiobooks(
         language: $language,
-        first: $first,
-        offset: $offset
+        first: $first
     ) {
         nodes {
             id

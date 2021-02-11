@@ -106,6 +106,7 @@ describe('sermons list page', () => {
 			expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
 				variables: {
 					language: 'ENGLISH',
+					hasVideo: null,
 					offset: ENTRIES_PER_PAGE,
 					first: ENTRIES_PER_PAGE,
 				},
