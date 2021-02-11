@@ -43,8 +43,7 @@ fragment recording on Recording {
         }
     }
     sponsor {
-        title
-        location
+        ...sponsorInfo
     }
     sequence {
         id

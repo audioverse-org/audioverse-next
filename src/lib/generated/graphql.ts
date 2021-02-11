@@ -4487,6 +4487,11 @@ export type SpeakerNameFragment = (
   ) }
 );
 
+export type SponsorInfoFragment = (
+  { __typename?: 'Sponsor' }
+  & Pick<Sponsor, 'title' | 'location' | 'website'>
+);
+
 export type RecordingFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'copyrightYear' | 'shareUrl'>
@@ -4522,7 +4527,7 @@ export type RecordingFragment = (
     )>> }
   ), sponsor?: Maybe<(
     { __typename?: 'Sponsor' }
-    & Pick<Sponsor, 'title' | 'location'>
+    & SponsorInfoFragment
   )>, sequence?: Maybe<(
     { __typename?: 'Sequence' }
     & Pick<Sequence, 'id' | 'title'>
@@ -4554,7 +4559,10 @@ export type GetAudiobookDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { audiobook?: Maybe<(
     { __typename?: 'Sequence' }
-    & { recordings: (
+    & { sponsor?: Maybe<(
+      { __typename?: 'Sponsor' }
+      & SponsorInfoFragment
+    )>, recordings: (
       { __typename?: 'RecordingConnection' }
       & { nodes?: Maybe<Array<(
         { __typename?: 'Recording' }
@@ -5018,6 +5026,13 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${SpeakerNameFragmentDoc}`;
+export const SponsorInfoFragmentDoc = `
+    fragment sponsorInfo on Sponsor {
+  title
+  location
+  website
+}
+    `;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -5064,8 +5079,7 @@ export const RecordingFragmentDoc = `
     }
   }
   sponsor {
-    title
-    location
+    ...sponsorInfo
   }
   sequence {
     id
@@ -5088,7 +5102,8 @@ export const RecordingFragmentDoc = `
   }
   shareUrl
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${SpeakerNameFragmentDoc}
+${SponsorInfoFragmentDoc}`;
 export const CreateFeedFragmentDoc = `
     fragment createFeed on Recording {
   title
@@ -5135,6 +5150,9 @@ export const useGetPlaylistButtonDataQuery = <
 export const GetAudiobookDetailPageDataDocument = `
     query getAudiobookDetailPageData($id: ID!) {
   audiobook(id: $id) {
+    sponsor {
+      ...sponsorInfo
+    }
     recordings {
       nodes {
         id
@@ -5150,7 +5168,7 @@ export const GetAudiobookDetailPageDataDocument = `
     }
   }
 }
-    `;
+    ${SponsorInfoFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
       TError = unknown
@@ -5698,6 +5716,7 @@ export async function getPlaylistButtonData(
   return fetchApi(GetPlaylistButtonDataDocument, { variables });
 }
 				
+
 
 
 

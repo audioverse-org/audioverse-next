@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Player from '@components/molecules/player';
+import SponsorInfo from '@components/molecules/sponsorInfo';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 
@@ -29,6 +30,21 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 				/>{' '}
 				{recording?.title}
 			</p>
+			<h2>
+				<FormattedMessage
+					id="audiobookDetailPage__aboutTab"
+					defaultMessage="About"
+					description="Audiobook detail about tab"
+				/>
+			</h2>
+			{audiobook?.sponsor && <SponsorInfo sponsor={audiobook.sponsor} />}
+			<h2>
+				<FormattedMessage
+					id="audiobookDetailPage__chaptersTab"
+					defaultMessage="Chapters"
+					description="Audiobook detail chapters tab"
+				/>
+			</h2>
 			<ul>
 				{recordings.map((r) => (
 					<li key={r.id}>

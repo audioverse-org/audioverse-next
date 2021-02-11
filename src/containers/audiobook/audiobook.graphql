@@ -1,5 +1,8 @@
 query getAudiobookDetailPageData($id: ID!) {
     audiobook(id: $id) {
+        sponsor {
+            ...sponsorInfo
+        }
         recordings {
             nodes {
                 id

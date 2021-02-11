@@ -30,6 +30,11 @@ function loadData() {
 		.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			audiobook: {
+				sponsor: {
+					title: 'the_sponsor_title',
+					location: 'the_sponsor_location',
+					website: 'the_sponsor_website',
+				},
 				recordings: {
 					nodes: [
 						{
@@ -143,6 +148,22 @@ describe('audiobook detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Now playing: first_recording_title')).toBeInTheDocument();
+	});
+
+	it('renders sponsor info', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+	});
+
+	it('displays sponsor website url', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_website')).toBeInTheDocument();
 	});
 
 	// support isDownloadAllowed
