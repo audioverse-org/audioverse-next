@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import videojs from 'video.js';
 
+import createFeed from '@lib/createFeed';
 import {
 	GetAudiobookDetailPageDataDocument,
 	GetAudiobookDetailPageDataQuery,
@@ -15,6 +16,7 @@ import Audiobook, {
 } from '@pages/[language]/books/[id]';
 
 jest.mock('video.js');
+jest.mock('@lib/createFeed');
 
 async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
 	loadRouter({ query: params });
@@ -31,6 +33,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 		.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			audiobook: {
+				title: 'the_book_title',
 				sponsor: {
 					title: 'the_sponsor_title',
 					location: 'the_sponsor_location',
@@ -252,6 +255,30 @@ describe('audiobook detail page', () => {
 				'Portions of this audiobook are covered under the following license terms:'
 			)
 		).not.toBeInTheDocument();
+	});
+
+	it('renders RSS feed', async () => {
+		loadData();
+
+		await getStaticProps({
+			params: { language: 'en', id: 'the_book_id' },
+		});
+
+		expect(createFeed).toBeCalledWith({
+			recordings: expect.any(Array),
+			projectRelativePath: 'public/en/books/the_book_id.xml',
+			title: 'the_book_title : AudioVerse audiobook',
+		});
+	});
+
+	it('links to rss feed', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('RSS') as HTMLLinkElement;
+
+		expect(link).toHaveAttribute('href', '/en/books/the_book_id.xml');
 	});
 
 	// support isDownloadAllowed

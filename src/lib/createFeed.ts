@@ -5,9 +5,10 @@ import { Feed } from 'feed';
 import _ from 'lodash';
 
 import { PROJECT_ROOT } from '@lib/constants';
+import { CreateFeedFragment } from '@lib/generated/graphql';
 
 interface CreateFeedProps {
-	recordings: any[];
+	recordings: CreateFeedFragment[];
 	title: string;
 	projectRelativePath: string;
 }
@@ -48,7 +49,7 @@ export default async function createFeed({
 		// TODO: Add itunes:duration
 		feed.addItem({
 			title: r.title,
-			description: r.description,
+			description: r.description || undefined,
 			link: r.canonicalUrl,
 			date: new Date(r.recordingDate),
 			enclosure: { url, length },

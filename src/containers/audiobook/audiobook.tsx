@@ -12,9 +12,10 @@ type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
 
 export interface AudiobookProps {
 	audiobook: Audiobook | undefined | null;
+	rssPath: string;
 }
 
-function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
+function Audiobook({ audiobook, rssPath }: AudiobookProps): JSX.Element {
 	const recordings = audiobook?.recordings.nodes || [];
 	const firstId = recordings.length ? recordings[0].id : undefined;
 	const [id, setId] = useState<string | undefined>(firstId);
@@ -33,6 +34,13 @@ function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
 
 	return (
 		<>
+			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
+				<FormattedMessage
+					id="audiobookDetailPage__rssLinkLabel"
+					defaultMessage="RSS"
+					description="Audiobook detail rss link label"
+				/>
+			</a>
 			{recording && <Player sources={sources} />}
 			<p>
 				<FormattedMessage

@@ -4577,6 +4577,7 @@ export type GetAudiobookDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { audiobook: Maybe<(
     { __typename?: 'Sequence' }
+    & Pick<Sequence, 'title'>
     & { sponsor: Maybe<(
       { __typename?: 'Sponsor' }
       & Pick<Sponsor, 'title'>
@@ -4594,6 +4595,7 @@ export type GetAudiobookDetailPageDataQuery = (
           & Pick<AudioFile, 'url' | 'filesize'>
         )> }
         & CopyrightInfoFragment
+        & CreateFeedFragment
       )>> }
     ) }
   )> }
@@ -5178,6 +5180,7 @@ export const useGetPlaylistButtonDataQuery = <
 export const GetAudiobookDetailPageDataDocument = `
     query getAudiobookDetailPageData($id: ID!) {
   audiobook(id: $id) {
+    title
     sponsor {
       title
       ...sponsorInfo
@@ -5194,12 +5197,14 @@ export const GetAudiobookDetailPageDataDocument = `
           filesize
         }
         ...copyrightInfo
+        ...createFeed
       }
     }
   }
 }
     ${SponsorInfoFragmentDoc}
-${CopyrightInfoFragmentDoc}`;
+${CopyrightInfoFragmentDoc}
+${CreateFeedFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
       TError = unknown

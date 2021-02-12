@@ -1,5 +1,6 @@
 query getAudiobookDetailPageData($id: ID!) {
     audiobook(id: $id) {
+        title
         sponsor {
             title
             ...sponsorInfo
@@ -16,6 +17,7 @@ query getAudiobookDetailPageData($id: ID!) {
                     filesize
                 }
                 ...copyrightInfo
+                ...createFeed
             }
         }
     }

@@ -258,7 +258,7 @@ describe('localization usage', () => {
 
 	it('localizes audiobook detail page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Audiobook audiobook={undefined as any} />
+			<Audiobook audiobook={undefined as any} rssPath={''} />
 		);
 
 		expectNoUnlocalizedText(screen);
