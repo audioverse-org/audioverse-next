@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
@@ -56,7 +57,21 @@ export default function RecordingListEntry({
 				</ul>
 			</td>
 			<td className={styles.duration}>{formatDuration(recording.duration)}</td>
-			<td>{videoFiles.length > 0 ? 'Video' : 'Audio'}</td>
+			<td>
+				{videoFiles.length > 0 ? (
+					<FormattedMessage
+						id="recordingListEntry__videoLabel"
+						defaultMessage="Video"
+						description="Recording list entry video label"
+					/>
+				) : (
+					<FormattedMessage
+						id="recordingListEntry__audioLabel"
+						defaultMessage="Audio"
+						description="Recording list entry audio label"
+					/>
+				)}
+			</td>
 		</tr>
 	);
 }

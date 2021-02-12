@@ -5,7 +5,7 @@ import * as feed from 'feed';
 import _ from 'lodash';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
-import React, { ReactElement } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
@@ -55,6 +55,24 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
 }
 
+export function buildRenderer<
+	C extends ComponentType<any>,
+	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(
+	Component: C,
+	getStaticProps: F,
+	defaultParams: P = {} as P
+): (params?: P) => Promise<RenderResult> {
+	return async (params: P = {} as P): Promise<RenderResult> => {
+		const p = { ...defaultParams, ...params };
+		loadRouter({ query: p });
+		const { props } = await getStaticProps({ params: p });
+		return renderWithIntl(Component, props);
+	};
+}
+
+// TODO: Merge with buildRenderer
 export async function renderWithIntl<T>(
 	Component: React.ComponentType<T>,
 	props: T
@@ -64,6 +82,7 @@ export async function renderWithIntl<T>(
 	return renderWithQueryProvider(<WithIntl {...props} />);
 }
 
+// TODO: Merge with buildRenderer
 export async function renderWithQueryProvider(
 	ui: ReactElement
 ): Promise<RenderResult & { queryClient: QueryClient }> {

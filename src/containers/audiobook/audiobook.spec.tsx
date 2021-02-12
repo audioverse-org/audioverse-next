@@ -8,25 +8,19 @@ import {
 	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Audiobook, {
 	getStaticPaths,
 	getStaticProps,
-	GetStaticPropsArgs,
 } from '@pages/[language]/books/[id]';
 
 jest.mock('video.js');
 jest.mock('@lib/createFeed');
 
-async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
-	loadRouter({ query: params });
-
-	const { props } = await getStaticProps({
-		params: { language: 'en', id: 'the_book_id', ...params },
-	});
-
-	return renderWithIntl(Audiobook, props);
-}
+const renderPage = buildRenderer(Audiobook, getStaticProps, {
+	language: 'en',
+	id: 'the_book_id',
+});
 
 function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 	when(mockedFetchApi)

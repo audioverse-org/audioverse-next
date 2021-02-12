@@ -14,6 +14,7 @@ import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
@@ -259,6 +260,22 @@ describe('localization usage', () => {
 	it('localizes audiobook detail page', async () => {
 		const screen = await renderWithQueryProvider(
 			<Audiobook audiobook={undefined as any} rssPath={''} />
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes stories list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Stories
+				nodes={[
+					{
+						id: 'the_story_id',
+						duration: 100,
+					} as any,
+				]}
+				pagination={undefined as any}
+			/>
 		);
 
 		expectNoUnlocalizedText(screen);

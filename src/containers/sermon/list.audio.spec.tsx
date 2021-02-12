@@ -1,9 +1,7 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-
 import { getSermonCount } from '@lib/api';
 import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
 import {
+	buildRenderer,
 	loadRouter,
 	loadSermonListData,
 	mockedFetchApi,
@@ -15,10 +13,10 @@ import SermonList, {
 
 jest.mock('@lib/api/getSermonCount');
 
-const renderPage = async ({ params = { i: '1', language: 'en' } } = {}) => {
-	const { props } = await getStaticProps({ params });
-	return render(<SermonList {...props} />);
-};
+const renderPage = buildRenderer(SermonList, getStaticProps, {
+	i: '1',
+	language: 'en',
+});
 
 describe('sermon audio list page', () => {
 	it('gets audio count', async () => {
@@ -31,10 +29,8 @@ describe('sermon audio list page', () => {
 		loadSermonListData();
 
 		await renderPage({
-			params: {
-				i: '1',
-				language: 'en',
-			},
+			i: '1',
+			language: 'en',
 		});
 
 		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {

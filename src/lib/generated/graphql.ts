@@ -4890,6 +4890,43 @@ export type GetSermonListStaticPropsQuery = (
   ) }
 );
 
+export type GetStoriesPageDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetStoriesPageDataQuery = (
+  { __typename?: 'Query' }
+  & { stories: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingListFragment
+    )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetStoriesPathDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetStoriesPathDataQuery = (
+  { __typename?: 'Query' }
+  & { stories: (
+    { __typename?: 'RecordingConnection' }
+    & { aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetTagDetailPageDataQueryVariables = Exact<{
   language: Language;
   tagName: Maybe<Scalars['String']>;
@@ -5599,6 +5636,51 @@ export const useGetSermonListStaticPropsQuery = <
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
       options
     );
+export const GetStoriesPageDataDocument = `
+    query getStoriesPageData($language: Language!, $first: Int, $offset: Int) {
+  stories(language: $language, first: $first, offset: $offset) {
+    nodes {
+      ...recordingList
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${RecordingListFragmentDoc}`;
+export const useGetStoriesPageDataQuery = <
+      TData = GetStoriesPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoriesPageDataQueryVariables, 
+      options?: UseQueryOptions<GetStoriesPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetStoriesPageDataQuery, TError, TData>(
+      ['getStoriesPageData', variables],
+      graphqlFetcher<GetStoriesPageDataQuery, GetStoriesPageDataQueryVariables>(GetStoriesPageDataDocument, variables),
+      options
+    );
+export const GetStoriesPathDataDocument = `
+    query getStoriesPathData($language: Language!) {
+  stories(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetStoriesPathDataQuery = <
+      TData = GetStoriesPathDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoriesPathDataQueryVariables, 
+      options?: UseQueryOptions<GetStoriesPathDataQuery, TError, TData>
+    ) => 
+    useQuery<GetStoriesPathDataQuery, TError, TData>(
+      ['getStoriesPathData', variables],
+      graphqlFetcher<GetStoriesPathDataQuery, GetStoriesPathDataQueryVariables>(GetStoriesPathDataDocument, variables),
+      options
+    );
 export const GetTagDetailPageDataDocument = `
     query getTagDetailPageData($language: Language!, $tagName: String, $first: Int, $offset: Int) {
   recordings(
@@ -5881,6 +5963,21 @@ export async function getSermonListStaticProps(
   variables: GetSermonListStaticPropsQueryVariables
 ): Promise<GetSermonListStaticPropsQuery> {
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
+}
+				
+
+export async function getStoriesPageData(
+  variables: GetStoriesPageDataQueryVariables
+): Promise<GetStoriesPageDataQuery> {
+  return fetchApi(GetStoriesPageDataDocument, { variables });
+}
+				
+
+
+export async function getStoriesPathData(
+  variables: GetStoriesPathDataQueryVariables
+): Promise<GetStoriesPathDataQuery> {
+  return fetchApi(GetStoriesPathDataDocument, { variables });
 }
 				
 

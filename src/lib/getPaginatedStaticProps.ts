@@ -4,6 +4,7 @@ import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
+// TODO: Switch any[] to T[]
 export interface PaginatedStaticProps {
 	props: {
 		nodes: any[];
