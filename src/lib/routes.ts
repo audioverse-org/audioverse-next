@@ -67,3 +67,8 @@ export const makeAudiobookRoute = (
 	languageRoute: string,
 	bookId: string
 ): string => `/${languageRoute}/books/${bookId}`;
+
+export const makeStoryRoute = (
+	languageRoute: string,
+	storyId: string
+): string => `/${languageRoute}/stories/${storyId}`;

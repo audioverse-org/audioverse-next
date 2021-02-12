@@ -4927,6 +4927,36 @@ export type GetStoriesPathDataQuery = (
   ) }
 );
 
+export type GetStoryDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetStoryDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { story: Maybe<(
+    { __typename?: 'Recording' }
+    & RecordingFragment
+  )> }
+);
+
+export type GetStoryDetailPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetStoryDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { stories: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & Pick<Recording, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetTagDetailPageDataQueryVariables = Exact<{
   language: Language;
   tagName: Maybe<Scalars['String']>;
@@ -5681,6 +5711,46 @@ export const useGetStoriesPathDataQuery = <
       graphqlFetcher<GetStoriesPathDataQuery, GetStoriesPathDataQueryVariables>(GetStoriesPathDataDocument, variables),
       options
     );
+export const GetStoryDetailPageDataDocument = `
+    query getStoryDetailPageData($id: ID!) {
+  story(id: $id) {
+    ...recording
+  }
+}
+    ${RecordingFragmentDoc}`;
+export const useGetStoryDetailPageDataQuery = <
+      TData = GetStoryDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetStoryDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetStoryDetailPageDataQuery, TError, TData>(
+      ['getStoryDetailPageData', variables],
+      graphqlFetcher<GetStoryDetailPageDataQuery, GetStoryDetailPageDataQueryVariables>(GetStoryDetailPageDataDocument, variables),
+      options
+    );
+export const GetStoryDetailPathsDataDocument = `
+    query getStoryDetailPathsData($language: Language!, $first: Int) {
+  stories(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetStoryDetailPathsDataQuery = <
+      TData = GetStoryDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetStoryDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetStoryDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetStoryDetailPathsDataQuery, TError, TData>(
+      ['getStoryDetailPathsData', variables],
+      graphqlFetcher<GetStoryDetailPathsDataQuery, GetStoryDetailPathsDataQueryVariables>(GetStoryDetailPathsDataDocument, variables),
+      options
+    );
 export const GetTagDetailPageDataDocument = `
     query getTagDetailPageData($language: Language!, $tagName: String, $first: Int, $offset: Int) {
   recordings(
@@ -5978,6 +6048,21 @@ export async function getStoriesPathData(
   variables: GetStoriesPathDataQueryVariables
 ): Promise<GetStoriesPathDataQuery> {
   return fetchApi(GetStoriesPathDataDocument, { variables });
+}
+				
+
+export async function getStoryDetailPageData(
+  variables: GetStoryDetailPageDataQueryVariables
+): Promise<GetStoryDetailPageDataQuery> {
+  return fetchApi(GetStoryDetailPageDataDocument, { variables });
+}
+				
+
+
+export async function getStoryDetailPathsData(
+  variables: GetStoryDetailPathsDataQueryVariables
+): Promise<GetStoryDetailPathsDataQuery> {
+  return fetchApi(GetStoryDetailPathsDataDocument, { variables });
 }
 				
 

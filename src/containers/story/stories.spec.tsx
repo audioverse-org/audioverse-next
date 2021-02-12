@@ -101,5 +101,13 @@ describe('stories list page', () => {
 		expect(getByText('404')).toBeInTheDocument();
 	});
 
-	// add fail states
+	it('links stories properly', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('the_story_title') as HTMLLinkElement;
+
+		expect(link).toHaveAttribute('href', '/en/stories/the_story_id');
+	});
 });

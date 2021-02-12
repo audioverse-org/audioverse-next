@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import styles from '@components/molecules/recordingListEntry.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
 import { RecordingListFragment } from '@lib/generated/graphql';
-import { makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 const formatDuration = (duration: number): string => {
@@ -20,20 +19,20 @@ const formatDuration = (duration: number): string => {
 
 export default function RecordingListEntry({
 	recording,
+	route,
 }: {
 	recording: RecordingListFragment;
+	route: (languageRoute: string, entityId: string) => string;
 }): JSX.Element {
 	const lang = useLanguageRoute();
 	const persons = recording?.persons || [];
 	const videoFiles = recording?.videoFiles || [];
 
-	// TODO: Replace makeSermonRoute with canonical URL provided by API
-	// This is doubly important because RecordingList can display things
-	// other than sermons.
+	// TODO: Replace route function with canonical URL provided by API
 	return (
 		<tr className={styles.item}>
 			<td>
-				<a href={makeSermonRoute(lang, recording.id)}>
+				<a href={route(lang, recording.id)}>
 					<img
 						src={_.get(recording, 'imageWithFallback.url')}
 						alt={_.get(recording, 'title')}
@@ -41,7 +40,7 @@ export default function RecordingListEntry({
 				</a>
 			</td>
 			<td>
-				<a href={makeSermonRoute(lang, recording.id)} className={styles.title}>
+				<a href={route(lang, recording.id)} className={styles.title}>
 					{recording.title}
 				</a>
 			</td>

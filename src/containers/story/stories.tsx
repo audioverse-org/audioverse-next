@@ -7,6 +7,7 @@ import RecordingList from '@components/molecules/recordingList';
 import { GetStoriesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeStoryRoute } from '@lib/routes';
 
 type Stories = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>;
 
@@ -27,7 +28,7 @@ function Stories({ nodes, pagination }: StoriesProps): JSX.Element {
 					description="Stories list page title"
 				/>
 			</h1>
-			<RecordingList recordings={nodes} />
+			<RecordingList recordings={nodes} route={makeStoryRoute} />
 			<Pagination base={`/${languageRoute}/stories`} {...pagination} />
 		</>
 	);
