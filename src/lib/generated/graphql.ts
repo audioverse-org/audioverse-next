@@ -4577,7 +4577,7 @@ export type GetAudiobookDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { audiobook: Maybe<(
     { __typename?: 'Sequence' }
-    & Pick<Sequence, 'title'>
+    & Pick<Sequence, 'title' | 'shareUrl'>
     & { sponsor: Maybe<(
       { __typename?: 'Sponsor' }
       & Pick<Sponsor, 'title'>
@@ -5200,6 +5200,7 @@ export const GetAudiobookDetailPageDataDocument = `
         ...createFeed
       }
     }
+    shareUrl
   }
 }
     ${SponsorInfoFragmentDoc}

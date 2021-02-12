@@ -34,6 +34,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 		.mockResolvedValue({
 			audiobook: {
 				title: 'the_book_title',
+				shareUrl: 'the_book_share_url',
 				sponsor: {
 					title: 'the_sponsor_title',
 					location: 'the_sponsor_location',
@@ -279,6 +280,16 @@ describe('audiobook detail page', () => {
 		const link = getByText('RSS') as HTMLLinkElement;
 
 		expect(link).toHaveAttribute('href', '/en/books/the_book_id.xml');
+	});
+
+	it('displays share url', async () => {
+		loadData();
+
+		const { getByLabelText } = await renderPage();
+
+		const input = getByLabelText('Short URL') as HTMLInputElement;
+
+		expect(input).toHaveValue('the_book_share_url');
 	});
 
 	// support isDownloadAllowed

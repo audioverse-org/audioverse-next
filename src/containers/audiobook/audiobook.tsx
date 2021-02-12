@@ -94,6 +94,21 @@ function Audiobook({ audiobook, rssPath }: AudiobookProps): JSX.Element {
 					</li>
 				))}
 			</ul>
+			<h2>
+				<FormattedMessage
+					id="audiobookDetailPage__shareTabTitle"
+					defaultMessage="Share"
+					description="Audiobook detail share tab"
+				/>
+			</h2>
+			<label>
+				<FormattedMessage
+					id="audiobookDetailPage__shortUrlLabel"
+					defaultMessage="Short URL"
+					description="Audiobook detail short url label"
+				/>{' '}
+				<input type="text" value={audiobook?.shareUrl} readOnly={true} />
+			</label>
 		</>
 	);
 }

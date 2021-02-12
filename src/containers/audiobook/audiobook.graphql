@@ -20,6 +20,7 @@ query getAudiobookDetailPageData($id: ID!) {
                 ...createFeed
             }
         }
+        shareUrl
     }
 }
 
