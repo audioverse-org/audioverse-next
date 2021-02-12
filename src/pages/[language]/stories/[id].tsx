@@ -1,9 +1,9 @@
 import Story, { StoryProps } from '@containers/story/story';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getStoryDetailPageData,
 	getStoryDetailPathsData,
 } from '@lib/generated/graphql';
-import { REVALIDATE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeStoryRoute } from '@lib/routes';
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import { GetStoryDetailPageDataQuery } from '@lib/generated/graphql';
-import { Recording } from '@components/organisms/recording';
+
 import withFailStates from '@components/HOCs/withFailStates';
+import { Recording } from '@components/organisms/recording';
+import { GetStoryDetailPageDataQuery } from '@lib/generated/graphql';
 
 type Story = NonNullable<GetStoryDetailPageDataQuery['story']>;
 

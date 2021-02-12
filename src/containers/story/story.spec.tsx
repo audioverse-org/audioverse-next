@@ -1,13 +1,14 @@
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import Story, {
-	getStaticProps,
-	getStaticPaths,
-} from '@pages/[language]/stories/[id]';
+import { when } from 'jest-when';
+
 import {
 	GetStoryDetailPageDataDocument,
 	GetStoryDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { when } from 'jest-when';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import Story, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/stories/[id]';
 
 const renderPage = buildRenderer(Story, getStaticProps, {
 	language: 'en',

@@ -6,8 +6,8 @@ import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import { GetStoriesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeStoryRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Stories = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>;
 

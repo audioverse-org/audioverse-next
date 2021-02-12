@@ -2,9 +2,9 @@ import React from 'react';
 
 import RecordingListEntry from '@components/molecules/recordingListEntry';
 import { RecordingListFragment } from '@lib/generated/graphql';
+import { makeSermonRoute } from '@lib/routes';
 
 import styles from './recordingList.module.scss';
-import { makeSermonRoute } from '@lib/routes';
 
 interface RecordingListProps {
 	recordings: RecordingListFragment[];
