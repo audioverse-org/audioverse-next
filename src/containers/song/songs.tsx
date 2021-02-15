@@ -1,8 +1,9 @@
 import React from 'react';
-import { GetSongsListPageDataQuery } from '@lib/generated/graphql';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { makeAlbumRoute } from '@lib/routes';
 import { FormattedMessage } from 'react-intl';
+
+import { GetSongsListPageDataQuery } from '@lib/generated/graphql';
+import { makeAlbumRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 export interface SongsProps {
 	data: GetSongsListPageDataQuery;

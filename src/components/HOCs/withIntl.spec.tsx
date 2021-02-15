@@ -14,6 +14,7 @@ import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import Songs from '@containers/song/songs';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -25,7 +26,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import Songs from '@containers/song/songs';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');

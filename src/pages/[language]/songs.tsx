@@ -1,5 +1,5 @@
-import { REVALIDATE } from '@lib/constants';
 import Songs, { SongsProps } from '@containers/song/songs';
+import { REVALIDATE } from '@lib/constants';
 import { getSongsListPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
