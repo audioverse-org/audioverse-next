@@ -41,7 +41,7 @@ describe('createFeed', () => {
 			],
 			title: '',
 			projectRelativePath: '',
-		});
+		} as any);
 
 		expect(addItem).toBeCalled();
 	});
@@ -122,7 +122,7 @@ describe('createFeed', () => {
 			],
 			title: 'the_title',
 			projectRelativePath: 'the/out/file.xml',
-		});
+		} as any);
 
 		expect(addItem).toBeCalledWith({
 			title: 'recording_title',

@@ -21,9 +21,18 @@ function loadData() {
 		.mockResolvedValue({
 			story: {
 				id: 'the_story_id',
-				title: 'the_story_title',
-				videoStreams: [],
-				audioStreams: [],
+				sequence: {
+					recordings: {
+						nodes: [
+							{
+								id: 'the_story_id',
+								title: 'the_story_title',
+								videoStreams: [],
+								audioStreams: [],
+							},
+						],
+					},
+				},
 			},
 		});
 }
@@ -79,5 +88,49 @@ describe('story detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('404')).toBeInTheDocument();
+	});
+
+	it('does not show item selector if less than two items', async () => {
+		loadData();
+
+		const { queryByRole } = await renderPage();
+
+		expect(
+			queryByRole('button', { name: 'the_story_title' })
+		).not.toBeInTheDocument();
+	});
+
+	it('loads selected story', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetStoryDetailPageDataDocument, expect.anything())
+			.mockResolvedValue({
+				story: {
+					id: 'second_story_id',
+					sequence: {
+						recordings: {
+							nodes: [
+								{
+									id: 'the_story_id',
+									title: 'the_story_title',
+									shareUrl: 'the_story_shareurl',
+									videoStreams: [],
+									audioStreams: [],
+								},
+								{
+									id: 'second_story_id',
+									title: 'second_story_title',
+									shareUrl: 'second_story_shareurl',
+									videoStreams: [],
+									audioStreams: [],
+								},
+							],
+						},
+					},
+				},
+			});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('second_story_shareurl')).toBeInTheDocument();
 	});
 });

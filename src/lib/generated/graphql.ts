@@ -4522,6 +4522,15 @@ export type SponsorInfoFragment = (
   & Pick<Sponsor, 'title' | 'location' | 'website'>
 );
 
+export type PlaylistFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id' | 'title'>
+  & { audioDownloads: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize'>
+  )> }
+);
+
 export type RecordingFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'shareUrl'>
@@ -4936,7 +4945,18 @@ export type GetStoryDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { story: Maybe<(
     { __typename?: 'Recording' }
-    & RecordingFragment
+    & Pick<Recording, 'id'>
+    & { sequence: Maybe<(
+      { __typename?: 'Sequence' }
+      & { recordings: (
+        { __typename?: 'RecordingConnection' }
+        & { nodes: Maybe<Array<(
+          { __typename?: 'Recording' }
+          & RecordingFragment
+          & PlaylistFragment
+        )>> }
+      ) }
+    )> }
   )> }
 );
 
@@ -5114,6 +5134,16 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${SpeakerNameFragmentDoc}`;
+export const PlaylistFragmentDoc = `
+    fragment playlist on Recording {
+  id
+  title
+  audioDownloads: audioFiles(allowedContainers: MP3) {
+    url
+    filesize
+  }
+}
+    `;
 export const SponsorInfoFragmentDoc = `
     fragment sponsorInfo on Sponsor {
   title
@@ -5714,10 +5744,19 @@ export const useGetStoriesPathDataQuery = <
 export const GetStoryDetailPageDataDocument = `
     query getStoryDetailPageData($id: ID!) {
   story(id: $id) {
-    ...recording
+    id
+    sequence {
+      recordings {
+        nodes {
+          ...recording
+          ...playlist
+        }
+      }
+    }
   }
 }
-    ${RecordingFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${PlaylistFragmentDoc}`;
 export const useGetStoryDetailPageDataQuery = <
       TData = GetStoryDetailPageDataQuery,
       TError = unknown
@@ -5906,6 +5945,7 @@ export async function getPlaylistButtonData(
   return fetchApi(GetPlaylistButtonDataDocument, { variables });
 }
 				
+
 
 
 

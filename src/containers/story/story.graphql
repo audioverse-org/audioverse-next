@@ -1,6 +1,14 @@
 query getStoryDetailPageData($id: ID!) {
     story(id: $id) {
-        ...recording
+        id
+        sequence {
+            recordings {
+                nodes {
+                    ...recording,
+                    ...playlist
+                }
+            }
+        }
     }
 }
 
