@@ -88,5 +88,35 @@ describe('songs list page', () => {
 		expect(getByText('Albums')).toBeInTheDocument();
 	});
 
-	// renders 404
+	it('renders Bible book titles', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('Genesis')).toBeInTheDocument();
+	});
+
+	it('links Bible book titles', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('Genesis')).toHaveAttribute(
+			'href',
+			'/en/songs/book/Genesis'
+		);
+	});
+
+	it('slugifies Bible book urls', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('3 John')).toHaveAttribute(
+			'href',
+			'/en/songs/book/3-John'
+		);
+	});
+
+	it('includes books tab title', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Books')).toBeInTheDocument();
+	});
 });

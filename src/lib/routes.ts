@@ -80,3 +80,9 @@ export const makeAlbumRoute = (
 	languageRoute: string,
 	albumId: string
 ): string => `/${languageRoute}/songs/album/${albumId}`;
+
+// TODO: encode book name
+export const makeBibleMusicRoute = (
+	languageRoute: string,
+	bookName: string
+): string => `/${languageRoute}/songs/book/${bookName.replace(' ', '-')}`;
