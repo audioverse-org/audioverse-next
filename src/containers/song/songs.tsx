@@ -29,7 +29,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Genesis"
 							description="Songs list page Genesis link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Exodus')}>
@@ -38,7 +38,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Exodus"
 							description="Songs list page Exodus link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Leviticus')}>
@@ -47,7 +47,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Leviticus"
 							description="Songs list page Leviticus link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Numbers')}>
@@ -56,7 +56,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Numbers"
 							description="Songs list page Numbers link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Deuteronomy')}>
@@ -65,7 +65,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Deuteronomy"
 							description="Songs list page Deuteronomy link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Joshua')}>
@@ -74,7 +74,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Joshua"
 							description="Songs list page Joshua link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Judges')}>
@@ -83,7 +83,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Judges"
 							description="Songs list page Judges link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Ruth')}>
@@ -92,7 +92,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Ruth"
 							description="Songs list page Ruth link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Samuel')}>
@@ -101,7 +101,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Samuel"
 							description="Songs list page 1 Samuel link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Samuel')}>
@@ -110,7 +110,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Samuel"
 							description="Songs list page 2 Samuel link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Kings')}>
@@ -119,7 +119,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Kings"
 							description="Songs list page 1 Kings link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Kings')}>
@@ -128,7 +128,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Kings"
 							description="Songs list page 2 Kings link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Chronicles')}>
@@ -137,7 +137,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Chronicles"
 							description="Songs list page 1 Chronicles link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Chronicles')}>
@@ -146,7 +146,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Chronicles"
 							description="Songs list page 2 Chronicles link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Ezra')}>
@@ -155,7 +155,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Ezra"
 							description="Songs list page Ezra link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Nehemiah')}>
@@ -164,7 +164,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Nehemiah"
 							description="Songs list page Nehemiah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Esther')}>
@@ -173,7 +173,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Esther"
 							description="Songs list page Esther link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Job')}>
@@ -182,7 +182,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Job"
 							description="Songs list page Job link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Psalms')}>
@@ -191,7 +191,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Psalms"
 							description="Songs list page Psalms link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Proverbs')}>
@@ -200,7 +200,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Proverbs"
 							description="Songs list page Proverbs link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Ecclesiastes')}>
@@ -209,7 +209,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Ecclesiastes"
 							description="Songs list page Ecclesiastes link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Song of Solomon')}>
@@ -218,7 +218,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Song of Solomon"
 							description="Songs list page Song of Solomon link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Isaiah')}>
@@ -227,7 +227,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Isaiah"
 							description="Songs list page Isaiah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Jeremiah')}>
@@ -236,7 +236,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Jeremiah"
 							description="Songs list page Jeremiah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Lamentations')}>
@@ -245,7 +245,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Lamentations"
 							description="Songs list page Lamentations link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Ezekiel')}>
@@ -254,7 +254,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Ezekiel"
 							description="Songs list page Ezekiel link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Daniel')}>
@@ -263,7 +263,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Daniel"
 							description="Songs list page Daniel link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Hosea')}>
@@ -272,7 +272,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Hosea"
 							description="Songs list page Hosea link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Joel')}>
@@ -281,7 +281,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Joel"
 							description="Songs list page Joel link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Amos')}>
@@ -290,7 +290,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Amos"
 							description="Songs list page Amos link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Obadiah')}>
@@ -299,7 +299,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Obadiah"
 							description="Songs list page Obadiah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Jonah')}>
@@ -308,7 +308,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Jonah"
 							description="Songs list page Jonah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Micah')}>
@@ -317,7 +317,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Micah"
 							description="Songs list page Micah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Nahum')}>
@@ -326,7 +326,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Nahum"
 							description="Songs list page Nahum link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Habakkuk')}>
@@ -335,7 +335,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Habakkuk"
 							description="Songs list page Habakkuk link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Zephaniah')}>
@@ -344,7 +344,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Zephaniah"
 							description="Songs list page Zephaniah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Haggai')}>
@@ -353,7 +353,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Haggai"
 							description="Songs list page Haggai link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Zechariah')}>
@@ -362,7 +362,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Zechariah"
 							description="Songs list page Zechariah link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Malachi')}>
@@ -371,7 +371,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Malachi"
 							description="Songs list page Malachi link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Matthew')}>
@@ -380,7 +380,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Matthew"
 							description="Songs list page Matthew link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Mark')}>
@@ -389,7 +389,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Mark"
 							description="Songs list page Mark link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Luke')}>
@@ -398,7 +398,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Luke"
 							description="Songs list page Luke link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'John')}>
@@ -407,7 +407,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="John"
 							description="Songs list page John link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Acts')}>
@@ -416,7 +416,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Acts"
 							description="Songs list page Acts link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Romans')}>
@@ -425,7 +425,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Romans"
 							description="Songs list page Romans link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Corinthians')}>
@@ -434,7 +434,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Corinthians"
 							description="Songs list page 1 Corinthians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Corinthians')}>
@@ -443,7 +443,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Corinthians"
 							description="Songs list page 2 Corinthians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Galatians')}>
@@ -452,7 +452,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Galatians"
 							description="Songs list page Galatians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Ephesians')}>
@@ -461,7 +461,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Ephesians"
 							description="Songs list page Ephesians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Philippians')}>
@@ -470,7 +470,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Philippians"
 							description="Songs list page Philippians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Colossians')}>
@@ -479,7 +479,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Colossians"
 							description="Songs list page Colossians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Thessalonians')}>
@@ -488,7 +488,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Thessalonians"
 							description="Songs list page 1 Thessalonians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Thessalonians')}>
@@ -497,7 +497,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Thessalonians"
 							description="Songs list page 2 Thessalonians link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Timothy')}>
@@ -506,7 +506,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Timothy"
 							description="Songs list page 1 Timothy link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Timothy')}>
@@ -515,7 +515,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Timothy"
 							description="Songs list page 2 Timothy link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Titus')}>
@@ -524,7 +524,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Titus"
 							description="Songs list page Titus link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Philemon')}>
@@ -533,7 +533,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Philemon"
 							description="Songs list page Philemon link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Hebrews')}>
@@ -542,7 +542,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Hebrews"
 							description="Songs list page Hebrews link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'James')}>
@@ -551,7 +551,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="James"
 							description="Songs list page James link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 Peter')}>
@@ -560,7 +560,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 Peter"
 							description="Songs list page 1 Peter link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 Peter')}>
@@ -569,7 +569,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 Peter"
 							description="Songs list page 2 Peter link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '1 John')}>
@@ -578,7 +578,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="1 John"
 							description="Songs list page 1 John link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '2 John')}>
@@ -587,7 +587,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="2 John"
 							description="Songs list page 2 John link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, '3 John')}>
@@ -596,7 +596,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="3 John"
 							description="Songs list page 3 John link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Jude')}>
@@ -605,7 +605,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Jude"
 							description="Songs list page Jude link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 				<li>
 					<a href={makeBibleMusicRoute(languageRoute, 'Revelation')}>
@@ -614,7 +614,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 							defaultMessage="Revelation"
 							description="Songs list page Revelation link label"
 						/>
-					</a>{' '}
+					</a>
 				</li>
 			</ul>
 			<h2>
