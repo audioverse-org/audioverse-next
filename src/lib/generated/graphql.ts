@@ -4899,6 +4899,29 @@ export type GetSermonListStaticPropsQuery = (
   ) }
 );
 
+export type GetSongsListPageDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetSongsListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { musicAlbums: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ), sponsor: Maybe<(
+        { __typename?: 'Sponsor' }
+        & Pick<Sponsor, 'title'>
+      )> }
+    )>> }
+  ) }
+);
+
 export type GetStoriesPageDataQueryVariables = Exact<{
   language: Language;
   first: Maybe<Scalars['Int']>;
@@ -5696,6 +5719,34 @@ export const useGetSermonListStaticPropsQuery = <
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
       options
     );
+export const GetSongsListPageDataDocument = `
+    query getSongsListPageData($language: Language!) {
+  musicAlbums(language: $language, first: 1000) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
+      }
+      sponsor {
+        title
+      }
+    }
+  }
+}
+    `;
+export const useGetSongsListPageDataQuery = <
+      TData = GetSongsListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongsListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSongsListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongsListPageDataQuery, TError, TData>(
+      ['getSongsListPageData', variables],
+      graphqlFetcher<GetSongsListPageDataQuery, GetSongsListPageDataQueryVariables>(GetSongsListPageDataDocument, variables),
+      options
+    );
 export const GetStoriesPageDataDocument = `
     query getStoriesPageData($language: Language!, $first: Int, $offset: Int) {
   stories(language: $language, first: $first, offset: $offset) {
@@ -6073,6 +6124,13 @@ export async function getSermonListStaticProps(
   variables: GetSermonListStaticPropsQueryVariables
 ): Promise<GetSermonListStaticPropsQuery> {
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
+}
+				
+
+export async function getSongsListPageData(
+  variables: GetSongsListPageDataQueryVariables
+): Promise<GetSongsListPageDataQuery> {
+  return fetchApi(GetSongsListPageDataDocument, { variables });
 }
 				
 

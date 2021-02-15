@@ -72,3 +72,11 @@ export const makeStoryRoute = (
 	languageRoute: string,
 	storyId: string
 ): string => `/${languageRoute}/stories/${storyId}`;
+
+export const makeSongsListRoute = (languageRoute: string): string =>
+	`/${languageRoute}/songs`;
+
+export const makeAlbumRoute = (
+	languageRoute: string,
+	albumId: string
+): string => `/${languageRoute}/songs/album/${albumId}`;

@@ -25,6 +25,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Songs from '@containers/song/songs';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -276,6 +277,14 @@ describe('localization usage', () => {
 				]}
 				pagination={undefined as any}
 			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes songs list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Songs data={undefined as any} />
 		);
 
 		expectNoUnlocalizedText(screen);
