@@ -20,4 +20,10 @@ query getSongsListPageData($language: Language!) {
             }
         }
     }
+    musicMoodTags(language: ENGLISH, first: 1000) {
+        nodes {
+            id
+            name
+        }
+    }
 }

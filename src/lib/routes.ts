@@ -1,3 +1,5 @@
+const slug = (s: string): string => s.replace(/\s/g, '-');
+
 export const makePaginationRoute = (
 	base: string,
 	page: number | string
@@ -84,9 +86,14 @@ export const makeAlbumRoute = (
 export const makeBibleMusicRoute = (
 	languageRoute: string,
 	bookName: string
-): string => `/${languageRoute}/songs/book/${bookName.replace(' ', '-')}`;
+): string => `/${languageRoute}/songs/book/${slug(bookName)}`;
 
 export const makeSponsorMusicRoute = (
 	languageRoute: string,
 	sponsorId: string
 ): string => `/${languageRoute}/songs/sponsor/${sponsorId}`;
+
+export const makeTagMusicRoute = (
+	languageRoute: string,
+	tagName: string
+): string => `/${languageRoute}/songs/tag/${slug(tagName)}`;

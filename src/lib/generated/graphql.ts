@@ -4929,6 +4929,12 @@ export type GetSongsListPageDataQuery = (
         & Pick<Image, 'url'>
       ) }
     )>> }
+  ), musicMoodTags: (
+    { __typename?: 'TagConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'id' | 'name'>
+    )>> }
   ) }
 );
 
@@ -5750,6 +5756,12 @@ export const GetSongsListPageDataDocument = `
       imageWithFallback {
         url(size: 100)
       }
+    }
+  }
+  musicMoodTags(language: ENGLISH, first: 1000) {
+    nodes {
+      id
+      name
     }
   }
 }

@@ -35,6 +35,14 @@ function loadData() {
 					},
 				],
 			},
+			musicMoodTags: {
+				nodes: [
+					{
+						id: 'the_tag_id',
+						name: 'the_tag_name',
+					},
+				],
+			},
 		});
 }
 
@@ -158,6 +166,47 @@ describe('songs list page', () => {
 		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
 			'/en/songs/sponsor/the_sponsor_id'
+		);
+	});
+
+	it('lists tags', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_tag_name')).toBeInTheDocument();
+	});
+
+	it('links tags', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_tag_name')).toHaveAttribute(
+			'href',
+			'/en/songs/tag/the_tag_name'
+		);
+	});
+
+	it('slugifies tag routes', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetSongsListPageDataDocument, expect.anything())
+			.mockResolvedValue({
+				musicMoodTags: {
+					nodes: [
+						{
+							id: 'the_tag_id',
+							name: 'the tag name',
+						},
+					],
+				},
+			});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the tag name')).toHaveAttribute(
+			'href',
+			'/en/songs/tag/the-tag-name'
 		);
 	});
 });

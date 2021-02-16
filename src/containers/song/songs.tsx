@@ -6,6 +6,7 @@ import {
 	makeAlbumRoute,
 	makeBibleMusicRoute,
 	makeSponsorMusicRoute,
+	makeTagMusicRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -629,7 +630,7 @@ function Songs({ data }: SongsProps): JSX.Element {
 				/>
 			</h2>
 			<ul>
-				{data?.musicAlbums.nodes?.map((n) => (
+				{data?.musicAlbums?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeAlbumRoute(languageRoute, n.id)}>
 							<img src={n.imageWithFallback.url} alt={n.title} />
@@ -647,12 +648,26 @@ function Songs({ data }: SongsProps): JSX.Element {
 				/>
 			</h2>
 			<ul>
-				{data?.sponsors.nodes?.map((n) => (
+				{data?.sponsors?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeSponsorMusicRoute(languageRoute, n.id)}>
 							<img src={n.imageWithFallback.url} alt={n.title} />
 							{n.title}
 						</a>
+					</li>
+				))}
+			</ul>
+			<h2>
+				<FormattedMessage
+					id="songsListPage__tagTabLabel"
+					defaultMessage="Tags"
+					description="Songs list page tag tab label"
+				/>
+			</h2>
+			<ul>
+				{data?.musicMoodTags?.nodes?.map((n) => (
+					<li key={n.id}>
+						<a href={makeTagMusicRoute(languageRoute, n.name)}>{n.name}</a>
 					</li>
 				))}
 			</ul>
