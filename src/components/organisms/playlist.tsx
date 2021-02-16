@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlaylistFragment } from '@lib/generated/graphql';
@@ -14,15 +14,21 @@ interface PlaylistProps<R> {
 
 export default function Playlist<R>({
 	children,
-	recordings,
+	recordings = [],
 	initial,
 }: PlaylistProps<R>): JSX.Element {
-	const [id, setId] = useState<string | undefined>(() => {
+	const getInitialId = () => {
 		const ids = recordings.map((r) => r.id);
 		return initial && ids.includes(initial) ? initial : recordings[0]?.id;
-	});
+	};
+	const [id, setId] = useState<string | undefined>(getInitialId);
 	const recording = recordings.find((r) => r.id === id);
 	const detail = recording && children(recording);
+
+	useEffect(() => {
+		if (id) return;
+		setId(getInitialId());
+	}, [recordings, initial]);
 
 	// TODO: Add video download links
 	return (

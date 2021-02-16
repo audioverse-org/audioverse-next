@@ -1,3 +1,6 @@
+import { render } from '@testing-library/react';
+import React from 'react';
+
 import Playlist from '@components/organisms/playlist';
 import { renderWithIntl } from '@lib/test/helpers';
 
@@ -29,6 +32,20 @@ describe('playlist component', () => {
 
 	it('defaults to first recording if invalid initial provided', async () => {
 		await renderComponent({ initial: 'invalid' });
+
+		expect(renderProp).toBeCalledWith({ id: 'first', title: 'first' });
+	});
+
+	it('supports lazy loading recordings', async () => {
+		const { rerender } = await render(
+			<Playlist recordings={[] as any}>{renderProp}</Playlist>
+		);
+
+		rerender(
+			<Playlist recordings={[{ id: 'first', title: 'first' }] as any}>
+				{renderProp}
+			</Playlist>
+		);
 
 		expect(renderProp).toBeCalledWith({ id: 'first', title: 'first' });
 	});

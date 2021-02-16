@@ -4899,6 +4899,29 @@ export type GetSermonListStaticPropsQuery = (
   ) }
 );
 
+export type GetSongBookPageDataQueryVariables = Exact<{
+  language: Language;
+  book: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetSongBookPageDataQuery = (
+  { __typename?: 'Query' }
+  & { musicTracks: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & SongFragment
+    )>> }
+  ) }
+);
+
+export type SongFragment = (
+  { __typename?: 'Recording' }
+  & PlaylistFragment
+  & RecordingFragment
+);
+
 export type GetSongsListPageDataQueryVariables = Exact<{
   language: Language;
 }>;
@@ -5270,6 +5293,13 @@ export const RecordingFragmentDoc = `
     ${SpeakerNameFragmentDoc}
 ${SponsorInfoFragmentDoc}
 ${CopyrightInfoFragmentDoc}`;
+export const SongFragmentDoc = `
+    fragment song on Recording {
+  ...playlist
+  ...recording
+}
+    ${PlaylistFragmentDoc}
+${RecordingFragmentDoc}`;
 export const CreateFeedFragmentDoc = `
     fragment createFeed on Recording {
   title
@@ -5735,6 +5765,27 @@ export const useGetSermonListStaticPropsQuery = <
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
       options
     );
+export const GetSongBookPageDataDocument = `
+    query getSongBookPageData($language: Language!, $book: String) {
+  musicTracks(language: $language, tagName: $book) {
+    nodes {
+      ...song
+    }
+  }
+}
+    ${SongFragmentDoc}`;
+export const useGetSongBookPageDataQuery = <
+      TData = GetSongBookPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongBookPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSongBookPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongBookPageDataQuery, TError, TData>(
+      ['getSongBookPageData', variables],
+      graphqlFetcher<GetSongBookPageDataQuery, GetSongBookPageDataQueryVariables>(GetSongBookPageDataDocument, variables),
+      options
+    );
 export const GetSongsListPageDataDocument = `
     query getSongsListPageData($language: Language!) {
   musicAlbums(language: $language, first: 1000) {
@@ -6157,6 +6208,14 @@ export async function getSermonListStaticProps(
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
 }
 				
+
+export async function getSongBookPageData(
+  variables: GetSongBookPageDataQueryVariables
+): Promise<GetSongBookPageDataQuery> {
+  return fetchApi(GetSongBookPageDataDocument, { variables });
+}
+				
+
 
 export async function getSongsListPageData(
   variables: GetSongsListPageDataQueryVariables

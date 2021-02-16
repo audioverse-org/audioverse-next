@@ -1,0 +1,4 @@
+fragment song on Recording {
+    ...playlist
+    ...recording
+}
