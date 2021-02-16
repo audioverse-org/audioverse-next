@@ -2048,6 +2048,7 @@ export type QueryCollectionArgs = {
 
 export type QueryCollectionsArgs = {
   after: Maybe<Scalars['String']>;
+  contentType: Maybe<CollectionContentType>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
@@ -2394,6 +2395,7 @@ export type QuerySequenceArgs = {
 export type QuerySequencesArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  contentType: Maybe<SequenceContentType>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
@@ -4899,6 +4901,41 @@ export type GetSermonListStaticPropsQuery = (
   ) }
 );
 
+export type GetSongAlbumPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetSongAlbumPageDataQuery = (
+  { __typename?: 'Query' }
+  & { musicAlbum: Maybe<(
+    { __typename?: 'Sequence' }
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & SongFragment
+      )>> }
+    ) }
+  )> }
+);
+
+export type GetSongAlbumPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetSongAlbumPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { musicAlbums: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetSongBookPageDataQueryVariables = Exact<{
   language: Language;
   book: Maybe<Scalars['String']>;
@@ -5765,6 +5802,50 @@ export const useGetSermonListStaticPropsQuery = <
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
       options
     );
+export const GetSongAlbumPageDataDocument = `
+    query getSongAlbumPageData($id: ID!) {
+  musicAlbum(id: $id) {
+    recordings {
+      nodes {
+        ...song
+      }
+    }
+  }
+}
+    ${SongFragmentDoc}`;
+export const useGetSongAlbumPageDataQuery = <
+      TData = GetSongAlbumPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongAlbumPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSongAlbumPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongAlbumPageDataQuery, TError, TData>(
+      ['getSongAlbumPageData', variables],
+      graphqlFetcher<GetSongAlbumPageDataQuery, GetSongAlbumPageDataQueryVariables>(GetSongAlbumPageDataDocument, variables),
+      options
+    );
+export const GetSongAlbumPathsDataDocument = `
+    query getSongAlbumPathsData($language: Language!) {
+  musicAlbums(language: $language) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetSongAlbumPathsDataQuery = <
+      TData = GetSongAlbumPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongAlbumPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSongAlbumPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongAlbumPathsDataQuery, TError, TData>(
+      ['getSongAlbumPathsData', variables],
+      graphqlFetcher<GetSongAlbumPathsDataQuery, GetSongAlbumPathsDataQueryVariables>(GetSongAlbumPathsDataDocument, variables),
+      options
+    );
 export const GetSongBookPageDataDocument = `
     query getSongBookPageData($language: Language!, $book: String) {
   musicTracks(language: $language, tagName: $book) {
@@ -6206,6 +6287,21 @@ export async function getSermonListStaticProps(
   variables: GetSermonListStaticPropsQueryVariables
 ): Promise<GetSermonListStaticPropsQuery> {
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
+}
+				
+
+export async function getSongAlbumPageData(
+  variables: GetSongAlbumPageDataQueryVariables
+): Promise<GetSongAlbumPageDataQuery> {
+  return fetchApi(GetSongAlbumPageDataDocument, { variables });
+}
+				
+
+
+export async function getSongAlbumPathsData(
+  variables: GetSongAlbumPathsDataQueryVariables
+): Promise<GetSongAlbumPathsDataQuery> {
+  return fetchApi(GetSongAlbumPathsDataDocument, { variables });
 }
 				
 

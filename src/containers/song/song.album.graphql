@@ -1,0 +1,17 @@
+query getSongAlbumPageData($id: ID!) {
+    musicAlbum(id: $id) {
+        recordings {
+            nodes {
+                ...song
+            }
+        }
+    }
+}
+
+query getSongAlbumPathsData($language: Language!) {
+    musicAlbums(language: $language) {
+        nodes {
+            id
+        }
+    }
+}
