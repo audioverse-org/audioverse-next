@@ -1,13 +1,14 @@
+import { when } from 'jest-when';
+
+import {
+	GetSongAlbumPageDataDocument,
+	GetSongAlbumPathsDataDocument,
+} from '@lib/generated/graphql';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/album/[id]';
-import {
-	GetSongAlbumPageDataDocument,
-	GetSongAlbumPathsDataDocument,
-} from '@lib/generated/graphql';
-import { when } from 'jest-when';
 
 const renderPage = buildRenderer(Song, getStaticProps, {
 	language: 'en',
