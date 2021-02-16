@@ -2,7 +2,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { GetSongsListPageDataQuery } from '@lib/generated/graphql';
-import { makeAlbumRoute, makeBibleMusicRoute } from '@lib/routes';
+import {
+	makeAlbumRoute,
+	makeBibleMusicRoute,
+	makeSponsorMusicRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export interface SongsProps {
@@ -631,6 +635,23 @@ function Songs({ data }: SongsProps): JSX.Element {
 							<img src={n.imageWithFallback.url} alt={n.title} />
 							<span>{n.title}</span>
 							<span>{n.sponsor?.title}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+			<h2>
+				<FormattedMessage
+					id="songsListPage__sponsorTabLabel"
+					defaultMessage="Sponsors"
+					description="Songs list page sponsor tab label"
+				/>
+			</h2>
+			<ul>
+				{data?.sponsors.nodes?.map((n) => (
+					<li key={n.id}>
+						<a href={makeSponsorMusicRoute(languageRoute, n.id)}>
+							<img src={n.imageWithFallback.url} alt={n.title} />
+							{n.title}
 						</a>
 					</li>
 				))}

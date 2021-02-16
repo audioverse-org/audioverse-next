@@ -4919,6 +4919,16 @@ export type GetSongsListPageDataQuery = (
         & Pick<Sponsor, 'title'>
       )> }
     )>> }
+  ), sponsors: (
+    { __typename?: 'SponsorConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ) }
+    )>> }
   ) }
 );
 
@@ -5730,6 +5740,15 @@ export const GetSongsListPageDataDocument = `
       }
       sponsor {
         title
+      }
+    }
+  }
+  sponsors(language: $language, withMusic: true, first: 1000) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
       }
     }
   }

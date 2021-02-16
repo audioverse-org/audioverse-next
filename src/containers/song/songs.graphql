@@ -11,4 +11,13 @@ query getSongsListPageData($language: Language!) {
             }
         }
     }
+    sponsors(language: $language, withMusic: true, first: 1000) {
+        nodes {
+            id
+            title
+            imageWithFallback {
+                url(size: 100)
+            }
+        }
+    }
 }

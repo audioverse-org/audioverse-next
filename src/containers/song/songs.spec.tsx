@@ -24,6 +24,17 @@ function loadData() {
 					},
 				],
 			},
+			sponsors: {
+				nodes: [
+					{
+						id: 'the_sponsor_id',
+						title: 'the_sponsor_title',
+						imageWithFallback: {
+							url: 'the_sponsor_image',
+						},
+					},
+				],
+			},
 		});
 }
 
@@ -118,5 +129,35 @@ describe('songs list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Books')).toBeInTheDocument();
+	});
+
+	it('lists sponsors', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+	});
+
+	it('includes sponsor image', async () => {
+		loadData();
+
+		const { getByAltText } = await renderPage();
+
+		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
+			'src',
+			'the_sponsor_image'
+		);
+	});
+
+	it('links sponsor entries', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_title')).toHaveAttribute(
+			'href',
+			'/en/songs/sponsor/the_sponsor_id'
+		);
 	});
 });
