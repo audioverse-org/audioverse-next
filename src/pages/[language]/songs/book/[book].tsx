@@ -1,4 +1,4 @@
-import Song, { SongProps } from '@containers/song/song.tsx';
+import Song, { SongDetailProps } from '@containers/song/detail.tsx';
 import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
 import { getSongBookPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -11,7 +11,7 @@ export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; book: string };
-}): Promise<StaticProps<SongProps>> {
+}): Promise<StaticProps<SongDetailProps>> {
 	const { language: languageRoute, book } = params;
 	const language = getLanguageIdByRoute(languageRoute);
 

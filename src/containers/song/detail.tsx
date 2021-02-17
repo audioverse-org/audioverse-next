@@ -5,11 +5,11 @@ import Playlist from '@components/organisms/playlist';
 import { Recording } from '@components/organisms/recording';
 import { SongFragment } from '@lib/generated/graphql';
 
-export interface SongProps {
+export interface SongDetailProps {
 	songs: SongFragment[];
 }
 
-function Song({ songs }: SongProps): JSX.Element {
+function SongDetail({ songs }: SongDetailProps): JSX.Element {
 	return (
 		<Playlist recordings={songs}>
 			{(song) => <Recording recording={song} />}
@@ -17,4 +17,4 @@ function Song({ songs }: SongProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Song, ({ songs }) => !songs.length);
+export default withFailStates(SongDetail, ({ songs }) => !songs.length);

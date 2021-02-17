@@ -14,7 +14,7 @@ export interface SongsProps {
 	data: GetSongsListPageDataQuery;
 }
 
-function Songs({ data }: SongsProps): JSX.Element {
+function SongList({ data }: SongsProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -217,11 +217,11 @@ function Songs({ data }: SongsProps): JSX.Element {
 					</a>
 				</li>
 				<li>
-					<a href={makeBibleMusicRoute(languageRoute, 'Song of Solomon')}>
+					<a href={makeBibleMusicRoute(languageRoute, 'Detail of Solomon')}>
 						<FormattedMessage
 							id="songsListPage__Song of SolomonLabel"
-							defaultMessage="Song of Solomon"
-							description="Songs list page Song of Solomon link label"
+							defaultMessage="Detail of Solomon"
+							description="Songs list page Detail of Solomon link label"
 						/>
 					</a>
 				</li>
@@ -675,4 +675,4 @@ function Songs({ data }: SongsProps): JSX.Element {
 	);
 }
 
-export default Songs;
+export default SongList;

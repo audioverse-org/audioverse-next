@@ -14,7 +14,7 @@ import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
-import Songs from '@containers/song/songs';
+import SongList from '@containers/song/list';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -284,7 +284,7 @@ describe('localization usage', () => {
 
 	it('localizes songs list page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Songs data={undefined as any} />
+			<SongList data={undefined as any} />
 		);
 
 		expectNoUnlocalizedText(screen);

@@ -1,11 +1,11 @@
-import Songs, { SongsProps } from '@containers/song/songs';
+import SongList, { SongsProps } from '@containers/song/list';
 import { REVALIDATE } from '@lib/constants';
 import { getSongsListPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeSongsListRoute } from '@lib/routes';
 
-export default Songs;
+export default SongList;
 
 export async function getStaticProps({
 	params,

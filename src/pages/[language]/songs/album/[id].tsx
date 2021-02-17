@@ -1,4 +1,4 @@
-import Song, { SongProps } from '@containers/song/song';
+import Song, { SongDetailProps } from '@containers/song/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getSongAlbumPageData,
@@ -13,7 +13,7 @@ export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string };
-}): Promise<StaticProps<SongProps>> {
+}): Promise<StaticProps<SongDetailProps>> {
 	const { id } = params;
 
 	let response = undefined;
