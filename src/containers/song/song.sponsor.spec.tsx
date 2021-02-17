@@ -1,36 +1,36 @@
 import { when } from 'jest-when';
 
 import {
-	GetSongAlbumPageDataDocument,
-	GetSongAlbumPathsDataDocument,
+	GetSongSponsorPageDataDocument,
+	GetSongSponsorPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/album/[id]';
+} from '@pages/[language]/songs/sponsor/[id]';
 
 const renderPage = buildRenderer(Song, getStaticProps, {
 	language: 'en',
-	id: 'the_album_id',
+	id: 'the_sponsor_id',
 });
 
-describe('song album detail page', () => {
+describe('song sponsor detail page', () => {
 	it('renders', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSongAlbumPageDataDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetSongSponsorPageDataDocument, {
 			variables: {
-				id: 'the_album_id',
+				id: 'the_sponsor_id',
 			},
 		});
 	});
 
-	it('renders song list', async () => {
+	it('renders recording list', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetSongAlbumPageDataDocument, expect.anything())
+			.calledWith(GetSongSponsorPageDataDocument, expect.anything())
 			.mockResolvedValue({
-				musicAlbum: {
+				sponsor: {
 					recordings: {
 						nodes: [
 							{
@@ -53,9 +53,9 @@ describe('song album detail page', () => {
 
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetSongAlbumPathsDataDocument, expect.anything())
+			.calledWith(GetSongSponsorPathsDataDocument, expect.anything())
 			.mockResolvedValue({
-				musicAlbums: {
+				sponsors: {
 					nodes: [
 						{
 							id: 'the_album_id',
@@ -66,12 +66,12 @@ describe('song album detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/songs/album/the_album_id');
+		expect(paths).toContain('/en/songs/sponsor/the_album_id');
 	});
 
 	it('renders 404', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetSongAlbumPageDataDocument, expect.anything())
+			.calledWith(GetSongSponsorPathsDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
 		const { getByText } = await renderPage();

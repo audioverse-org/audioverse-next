@@ -434,6 +434,7 @@ export type CollectionSequencesArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 export type CollectionConnection = {
@@ -952,6 +953,7 @@ export type MediaReleaseFormMediaReleasesArgs = {
   search: Maybe<Scalars['String']>;
   seriesId: Maybe<Scalars['ID']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 export type MediaReleaseFormConnection = {
@@ -1140,6 +1142,8 @@ export type Mutation = {
   collectionCreate: CollectionPayload;
   collectionDelete: SuccessPayload;
   collectionHistoryCommentCreate: CatalogHistoryItemPayload;
+  /** Approve all recordings in collection through legal screening. */
+  collectionScreeningLegalOverride: SuccessPayload;
   collectionUpdate: CollectionPayload;
   distributionAgreementCreate: DistributionAgreementPayload;
   distributionAgreementDelete: SuccessPayload;
@@ -1204,6 +1208,8 @@ export type Mutation = {
   sequenceCreate: SequencePayload;
   sequenceDelete: SuccessPayload;
   sequenceHistoryCommentCreate: CatalogHistoryItemPayload;
+  /** Approve all recordings in sequence through legal screening. */
+  sequenceScreeningLegalOverride: SuccessPayload;
   sequenceUpdate: SequencePayload;
   signup: AuthenticatedUserPayload;
   sponsorCreate: SponsorPayload;
@@ -1247,6 +1253,11 @@ export type MutationCollectionDeleteArgs = {
 export type MutationCollectionHistoryCommentCreateArgs = {
   collectionId: Scalars['ID'];
   input: CatalogHistoryCommentCreateInput;
+};
+
+
+export type MutationCollectionScreeningLegalOverrideArgs = {
+  collectionId: Scalars['ID'];
 };
 
 
@@ -1580,6 +1591,11 @@ export type MutationSequenceDeleteArgs = {
 
 export type MutationSequenceHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
+  sequenceId: Scalars['ID'];
+};
+
+
+export type MutationSequenceScreeningLegalOverrideArgs = {
   sequenceId: Scalars['ID'];
 };
 
@@ -1971,6 +1987,7 @@ export type QueryAudiobooksArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2094,6 +2111,7 @@ export type QueryDistributionAgreementsArgs = {
   orderBy: Maybe<Array<DistributionAgreementsOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2183,6 +2201,7 @@ export type QueryMediaReleaseFormsArgs = {
   search: Maybe<Scalars['String']>;
   seriesId: Maybe<Scalars['ID']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
   type: Maybe<MediaReleaseFormType>;
 };
 
@@ -2206,6 +2225,7 @@ export type QueryMediaReleasesArgs = {
   search: Maybe<Scalars['String']>;
   seriesId: Maybe<Scalars['ID']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2224,6 +2244,7 @@ export type QueryMusicAlbumsArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2403,6 +2424,7 @@ export type QuerySequencesArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2421,6 +2443,7 @@ export type QuerySeriesesArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2544,6 +2567,7 @@ export type QueryStorySeasonsArgs = {
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -3244,6 +3268,7 @@ export type SponsorDistributionAgreementsArgs = {
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<DistributionAgreementsOrder>>;
   search: Maybe<Scalars['String']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -3294,6 +3319,7 @@ export type SponsorSequencesArgs = {
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
   search: Maybe<Scalars['String']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 export type SponsorConnection = {
@@ -4922,6 +4948,7 @@ export type GetSongAlbumPageDataQuery = (
 
 export type GetSongAlbumPathsDataQueryVariables = Exact<{
   language: Language;
+  first: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -4957,6 +4984,42 @@ export type SongFragment = (
   { __typename?: 'Recording' }
   & PlaylistFragment
   & RecordingFragment
+);
+
+export type GetSongSponsorPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetSongSponsorPageDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsor: Maybe<(
+    { __typename?: 'Sponsor' }
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & SongFragment
+      )>> }
+    ) }
+  )> }
+);
+
+export type GetSongSponsorPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSongSponsorPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsors: (
+    { __typename?: 'SponsorConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id'>
+    )>> }
+  ) }
 );
 
 export type GetSongsListPageDataQueryVariables = Exact<{
@@ -5826,8 +5889,8 @@ export const useGetSongAlbumPageDataQuery = <
       options
     );
 export const GetSongAlbumPathsDataDocument = `
-    query getSongAlbumPathsData($language: Language!) {
-  musicAlbums(language: $language) {
+    query getSongAlbumPathsData($language: Language!, $first: Int) {
+  musicAlbums(language: $language, first: $first) {
     nodes {
       id
     }
@@ -5865,6 +5928,50 @@ export const useGetSongBookPageDataQuery = <
     useQuery<GetSongBookPageDataQuery, TError, TData>(
       ['getSongBookPageData', variables],
       graphqlFetcher<GetSongBookPageDataQuery, GetSongBookPageDataQueryVariables>(GetSongBookPageDataDocument, variables),
+      options
+    );
+export const GetSongSponsorPageDataDocument = `
+    query getSongSponsorPageData($id: ID!) {
+  sponsor(id: $id) {
+    recordings(contentType: MUSIC_TRACK) {
+      nodes {
+        ...song
+      }
+    }
+  }
+}
+    ${SongFragmentDoc}`;
+export const useGetSongSponsorPageDataQuery = <
+      TData = GetSongSponsorPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongSponsorPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSongSponsorPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongSponsorPageDataQuery, TError, TData>(
+      ['getSongSponsorPageData', variables],
+      graphqlFetcher<GetSongSponsorPageDataQuery, GetSongSponsorPageDataQueryVariables>(GetSongSponsorPageDataDocument, variables),
+      options
+    );
+export const GetSongSponsorPathsDataDocument = `
+    query getSongSponsorPathsData($language: Language!, $first: Int) {
+  sponsors(language: $language, withMusic: true, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetSongSponsorPathsDataQuery = <
+      TData = GetSongSponsorPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongSponsorPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSongSponsorPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongSponsorPathsDataQuery, TError, TData>(
+      ['getSongSponsorPathsData', variables],
+      graphqlFetcher<GetSongSponsorPathsDataQuery, GetSongSponsorPathsDataQueryVariables>(GetSongSponsorPathsDataDocument, variables),
       options
     );
 export const GetSongsListPageDataDocument = `
@@ -6153,237 +6260,207 @@ export const useAddPlaylistMutation = <
 import { fetchApi } from '@lib/api/fetchApi' 
 
 
-export async function getPlaylistButtonData(
-  variables: GetPlaylistButtonDataQueryVariables
+export async function getPlaylistButtonData<T>(
+  variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
 ): Promise<GetPlaylistButtonDataQuery> {
   return fetchApi(GetPlaylistButtonDataDocument, { variables });
 }
-				
 
 
 
 
 
 
-export async function getAudiobookDetailPageData(
-  variables: GetAudiobookDetailPageDataQueryVariables
+export async function getAudiobookDetailPageData<T>(
+  variables: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>
 ): Promise<GetAudiobookDetailPageDataQuery> {
   return fetchApi(GetAudiobookDetailPageDataDocument, { variables });
 }
-				
 
-
-export async function getAudiobookDetailPathsData(
-  variables: GetAudiobookDetailPathsDataQueryVariables
+export async function getAudiobookDetailPathsData<T>(
+  variables: ExactAlt<T, GetAudiobookDetailPathsDataQueryVariables>
 ): Promise<GetAudiobookDetailPathsDataQuery> {
   return fetchApi(GetAudiobookDetailPathsDataDocument, { variables });
 }
-				
 
-export async function getAudiobookListPageData(
-  variables: GetAudiobookListPageDataQueryVariables
+export async function getAudiobookListPageData<T>(
+  variables: ExactAlt<T, GetAudiobookListPageDataQueryVariables>
 ): Promise<GetAudiobookListPageDataQuery> {
   return fetchApi(GetAudiobookListPageDataDocument, { variables });
 }
-				
 
-
-export async function getAudiobookListPathsData(
-  variables: GetAudiobookListPathsDataQueryVariables
+export async function getAudiobookListPathsData<T>(
+  variables: ExactAlt<T, GetAudiobookListPathsDataQueryVariables>
 ): Promise<GetAudiobookListPathsDataQuery> {
   return fetchApi(GetAudiobookListPathsDataDocument, { variables });
 }
-				
 
-export async function getBibleBookDetailPageData(
-  variables: GetBibleBookDetailPageDataQueryVariables
+export async function getBibleBookDetailPageData<T>(
+  variables: ExactAlt<T, GetBibleBookDetailPageDataQueryVariables>
 ): Promise<GetBibleBookDetailPageDataQuery> {
   return fetchApi(GetBibleBookDetailPageDataDocument, { variables });
 }
-				
 
-
-export async function getBibleBookDetailPathsData(
-  variables: GetBibleBookDetailPathsDataQueryVariables
+export async function getBibleBookDetailPathsData<T>(
+  variables: ExactAlt<T, GetBibleBookDetailPathsDataQueryVariables>
 ): Promise<GetBibleBookDetailPathsDataQuery> {
   return fetchApi(GetBibleBookDetailPathsDataDocument, { variables });
 }
-				
 
-export async function getVersionDetailPageData(
-  variables: GetVersionDetailPageDataQueryVariables
+export async function getVersionDetailPageData<T>(
+  variables: ExactAlt<T, GetVersionDetailPageDataQueryVariables>
 ): Promise<GetVersionDetailPageDataQuery> {
   return fetchApi(GetVersionDetailPageDataDocument, { variables });
 }
-				
 
-
-export async function getVersionDetailPathData(
-  variables: GetVersionDetailPathDataQueryVariables
+export async function getVersionDetailPathData<T>(
+  variables: ExactAlt<T, GetVersionDetailPathDataQueryVariables>
 ): Promise<GetVersionDetailPathDataQuery> {
   return fetchApi(GetVersionDetailPathDataDocument, { variables });
 }
-				
 
-export async function getBibleVersionsPageData(
-  variables: GetBibleVersionsPageDataQueryVariables
+export async function getBibleVersionsPageData<T>(
+  variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
 ): Promise<GetBibleVersionsPageDataQuery> {
   return fetchApi(GetBibleVersionsPageDataDocument, { variables });
 }
-				
 
-export async function getHomeStaticProps(
-  variables: GetHomeStaticPropsQueryVariables
+export async function getHomeStaticProps<T>(
+  variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 ): Promise<GetHomeStaticPropsQuery> {
   return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
-				
 
-export async function getProfileData(
-  variables: GetProfileDataQueryVariables
+export async function getProfileData<T>(
+  variables: ExactAlt<T, GetProfileDataQueryVariables>
 ): Promise<GetProfileDataQuery> {
   return fetchApi(GetProfileDataDocument, { variables });
 }
-				
 
-export async function getProtectedData(
-  variables: GetProtectedDataQueryVariables
+export async function getProtectedData<T>(
+  variables: ExactAlt<T, GetProtectedDataQueryVariables>
 ): Promise<GetProtectedDataQuery> {
   return fetchApi(GetProtectedDataDocument, { variables });
 }
-				
 
-export async function getSeriesDetailData(
-  variables: GetSeriesDetailDataQueryVariables
+export async function getSeriesDetailData<T>(
+  variables: ExactAlt<T, GetSeriesDetailDataQueryVariables>
 ): Promise<GetSeriesDetailDataQuery> {
   return fetchApi(GetSeriesDetailDataDocument, { variables });
 }
-				
 
-
-export async function getSeriesDetailPathsData(
-  variables: GetSeriesDetailPathsDataQueryVariables
+export async function getSeriesDetailPathsData<T>(
+  variables: ExactAlt<T, GetSeriesDetailPathsDataQueryVariables>
 ): Promise<GetSeriesDetailPathsDataQuery> {
   return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
 }
-				
 
-export async function getSermonDetailData(
-  variables: GetSermonDetailDataQueryVariables
+export async function getSermonDetailData<T>(
+  variables: ExactAlt<T, GetSermonDetailDataQueryVariables>
 ): Promise<GetSermonDetailDataQuery> {
   return fetchApi(GetSermonDetailDataDocument, { variables });
 }
-				
 
-
-export async function getSermonDetailStaticPaths(
-  variables: GetSermonDetailStaticPathsQueryVariables
+export async function getSermonDetailStaticPaths<T>(
+  variables: ExactAlt<T, GetSermonDetailStaticPathsQueryVariables>
 ): Promise<GetSermonDetailStaticPathsQuery> {
   return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
-				
 
-export async function getSermonListStaticProps(
-  variables: GetSermonListStaticPropsQueryVariables
+export async function getSermonListStaticProps<T>(
+  variables: ExactAlt<T, GetSermonListStaticPropsQueryVariables>
 ): Promise<GetSermonListStaticPropsQuery> {
   return fetchApi(GetSermonListStaticPropsDocument, { variables });
 }
-				
 
-export async function getSongAlbumPageData(
-  variables: GetSongAlbumPageDataQueryVariables
+export async function getSongAlbumPageData<T>(
+  variables: ExactAlt<T, GetSongAlbumPageDataQueryVariables>
 ): Promise<GetSongAlbumPageDataQuery> {
   return fetchApi(GetSongAlbumPageDataDocument, { variables });
 }
-				
 
-
-export async function getSongAlbumPathsData(
-  variables: GetSongAlbumPathsDataQueryVariables
+export async function getSongAlbumPathsData<T>(
+  variables: ExactAlt<T, GetSongAlbumPathsDataQueryVariables>
 ): Promise<GetSongAlbumPathsDataQuery> {
   return fetchApi(GetSongAlbumPathsDataDocument, { variables });
 }
-				
 
-export async function getSongBookPageData(
-  variables: GetSongBookPageDataQueryVariables
+export async function getSongBookPageData<T>(
+  variables: ExactAlt<T, GetSongBookPageDataQueryVariables>
 ): Promise<GetSongBookPageDataQuery> {
   return fetchApi(GetSongBookPageDataDocument, { variables });
 }
-				
 
 
-export async function getSongsListPageData(
-  variables: GetSongsListPageDataQueryVariables
+export async function getSongSponsorPageData<T>(
+  variables: ExactAlt<T, GetSongSponsorPageDataQueryVariables>
+): Promise<GetSongSponsorPageDataQuery> {
+  return fetchApi(GetSongSponsorPageDataDocument, { variables });
+}
+
+export async function getSongSponsorPathsData<T>(
+  variables: ExactAlt<T, GetSongSponsorPathsDataQueryVariables>
+): Promise<GetSongSponsorPathsDataQuery> {
+  return fetchApi(GetSongSponsorPathsDataDocument, { variables });
+}
+
+export async function getSongsListPageData<T>(
+  variables: ExactAlt<T, GetSongsListPageDataQueryVariables>
 ): Promise<GetSongsListPageDataQuery> {
   return fetchApi(GetSongsListPageDataDocument, { variables });
 }
-				
 
-export async function getStoriesPageData(
-  variables: GetStoriesPageDataQueryVariables
+export async function getStoriesPageData<T>(
+  variables: ExactAlt<T, GetStoriesPageDataQueryVariables>
 ): Promise<GetStoriesPageDataQuery> {
   return fetchApi(GetStoriesPageDataDocument, { variables });
 }
-				
 
-
-export async function getStoriesPathData(
-  variables: GetStoriesPathDataQueryVariables
+export async function getStoriesPathData<T>(
+  variables: ExactAlt<T, GetStoriesPathDataQueryVariables>
 ): Promise<GetStoriesPathDataQuery> {
   return fetchApi(GetStoriesPathDataDocument, { variables });
 }
-				
 
-export async function getStoryDetailPageData(
-  variables: GetStoryDetailPageDataQueryVariables
+export async function getStoryDetailPageData<T>(
+  variables: ExactAlt<T, GetStoryDetailPageDataQueryVariables>
 ): Promise<GetStoryDetailPageDataQuery> {
   return fetchApi(GetStoryDetailPageDataDocument, { variables });
 }
-				
 
-
-export async function getStoryDetailPathsData(
-  variables: GetStoryDetailPathsDataQueryVariables
+export async function getStoryDetailPathsData<T>(
+  variables: ExactAlt<T, GetStoryDetailPathsDataQueryVariables>
 ): Promise<GetStoryDetailPathsDataQuery> {
   return fetchApi(GetStoryDetailPathsDataDocument, { variables });
 }
-				
 
-export async function getTagDetailPageData(
-  variables: GetTagDetailPageDataQueryVariables
+export async function getTagDetailPageData<T>(
+  variables: ExactAlt<T, GetTagDetailPageDataQueryVariables>
 ): Promise<GetTagDetailPageDataQuery> {
   return fetchApi(GetTagDetailPageDataDocument, { variables });
 }
-				
 
-
-export async function getTagDetailPathsQuery(
-  variables: GetTagDetailPathsQueryQueryVariables
+export async function getTagDetailPathsQuery<T>(
+  variables: ExactAlt<T, GetTagDetailPathsQueryQueryVariables>
 ): Promise<GetTagDetailPathsQueryQuery> {
   return fetchApi(GetTagDetailPathsQueryDocument, { variables });
 }
-				
 
-export async function getTagListPageData(
-  variables: GetTagListPageDataQueryVariables
+export async function getTagListPageData<T>(
+  variables: ExactAlt<T, GetTagListPageDataQueryVariables>
 ): Promise<GetTagListPageDataQuery> {
   return fetchApi(GetTagListPageDataDocument, { variables });
 }
-				
 
-
-export async function getTagListPathsData(
-  variables: GetTagListPathsDataQueryVariables
+export async function getTagListPathsData<T>(
+  variables: ExactAlt<T, GetTagListPathsDataQueryVariables>
 ): Promise<GetTagListPathsDataQuery> {
   return fetchApi(GetTagListPathsDataDocument, { variables });
 }
-				
 
-export async function getTestimonies(
-  variables: GetTestimoniesQueryVariables
+export async function getTestimonies<T>(
+  variables: ExactAlt<T, GetTestimoniesQueryVariables>
 ): Promise<GetTestimoniesQuery> {
   return fetchApi(GetTestimoniesDocument, { variables });
 }
-				
 

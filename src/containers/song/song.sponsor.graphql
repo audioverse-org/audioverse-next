@@ -1,0 +1,18 @@
+query getSongSponsorPageData($id: ID!) {
+    sponsor(id: $id) {
+        recordings(contentType: MUSIC_TRACK) {
+            nodes {
+                ...song
+            }
+        }
+    }
+}
+
+# TODO: Add $first
+query getSongSponsorPathsData($language: Language!, $first: Int) {
+    sponsors(language: $language, withMusic: true, first: $first) {
+        nodes {
+            id
+        }
+    }
+}

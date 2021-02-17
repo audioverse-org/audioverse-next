@@ -67,5 +67,13 @@ describe('song book detail page', () => {
 		expect(paths).toContain('/en/songs/book/Genesis');
 	});
 
-	// renders 404
+	it('renders 404', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetSongBookPageDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
 });

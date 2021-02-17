@@ -14,7 +14,13 @@ export async function getStaticProps({
 }): Promise<StaticProps<SongProps>> {
 	const { language: languageRoute, book } = params;
 	const language = getLanguageIdByRoute(languageRoute);
-	const response = await getSongBookPageData({ language, book });
+
+	let response = undefined;
+	try {
+		response = await getSongBookPageData({ language, book });
+	} catch {
+		// do nothing
+	}
 
 	return {
 		props: {

@@ -11,19 +11,18 @@ module.exports = {
 					.map((def) => {
 						const capitalName =
 							def.name.value.charAt(0).toUpperCase() + def.name.value.slice(1);
-						const variablesType = `${capitalName}QueryVariables`;
+						const variablesType = `ExactAlt<T, ${capitalName}QueryVariables>`;
 						const returnType = `${capitalName}Query`;
 						const query = `${capitalName}Document`;
 
 						return `
-export async function ${def.name.value}(
+export async function ${def.name.value}<T>(
   variables: ${variablesType}
 ): Promise<${returnType}> {
   return fetchApi(${query}, { variables });
-}
-				`;
+}`;
 					})
-					.join('\n\n');
+					.join('\n');
 			})
 			.join('\n');
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import withFailStates from '@components/HOCs/withFailStates';
 import Playlist from '@components/organisms/playlist';
 import { Recording } from '@components/organisms/recording';
 import { SongFragment } from '@lib/generated/graphql';
@@ -16,4 +17,4 @@ function Song({ songs }: SongProps): JSX.Element {
 	);
 }
 
-export default Song;
+export default withFailStates(Song, ({ songs }) => !songs.length);
