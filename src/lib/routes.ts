@@ -97,3 +97,8 @@ export const makeTagMusicRoute = (
 	languageRoute: string,
 	tagName: string
 ): string => `/${languageRoute}/songs/tag/${slug(tagName)}`;
+
+export const makeConferenceRoute = (
+	languageRoute: string,
+	conferenceId: string
+): string => `/${languageRoute}/conferences/${conferenceId}`;

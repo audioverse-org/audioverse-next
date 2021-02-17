@@ -17,8 +17,8 @@ export interface PaginatedStaticProps {
 }
 
 interface IGetterResolved {
-	nodes?: any[] | null;
-	aggregate?: {
+	nodes: any[] | null;
+	aggregate: {
 		count: number;
 	} | null;
 }

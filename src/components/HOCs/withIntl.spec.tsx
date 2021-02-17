@@ -26,6 +26,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import ConferenceList from '@containers/conference/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -285,6 +286,17 @@ describe('localization usage', () => {
 	it('localizes songs list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<SongList data={undefined as any} />
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes conferences list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<ConferenceList
+				nodes={[{ id: 'z' }] as any}
+				pagination={undefined as any}
+			/>
 		);
 
 		expectNoUnlocalizedText(screen);

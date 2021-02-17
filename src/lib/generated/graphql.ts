@@ -4786,6 +4786,50 @@ export type GetBibleVersionsPageDataQuery = (
   ) }
 );
 
+export type GetConferenceListPageDataQueryVariables = Exact<{
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetConferenceListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { conferences: (
+    { __typename?: 'CollectionConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Collection' }
+      & Pick<Collection, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ), sponsor: Maybe<(
+        { __typename?: 'Sponsor' }
+        & Pick<Sponsor, 'title'>
+      )> }
+    )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetConferenceListPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetConferenceListPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { conferences: (
+    { __typename?: 'CollectionConnection' }
+    & { aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetHomeStaticPropsQueryVariables = Exact<{
   language: Language;
 }>;
@@ -5715,6 +5759,58 @@ export const useGetBibleVersionsPageDataQuery = <
       graphqlFetcher<GetBibleVersionsPageDataQuery, GetBibleVersionsPageDataQueryVariables>(GetBibleVersionsPageDataDocument, variables),
       options
     );
+export const GetConferenceListPageDataDocument = `
+    query getConferenceListPageData($language: Language!, $offset: Int, $first: Int) {
+  conferences(language: $language, offset: $offset, first: $first) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
+      }
+      sponsor {
+        title
+      }
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetConferenceListPageDataQuery = <
+      TData = GetConferenceListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetConferenceListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetConferenceListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetConferenceListPageDataQuery, TError, TData>(
+      ['getConferenceListPageData', variables],
+      graphqlFetcher<GetConferenceListPageDataQuery, GetConferenceListPageDataQueryVariables>(GetConferenceListPageDataDocument, variables),
+      options
+    );
+export const GetConferenceListPathsDataDocument = `
+    query getConferenceListPathsData($language: Language!) {
+  conferences(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetConferenceListPathsDataQuery = <
+      TData = GetConferenceListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetConferenceListPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetConferenceListPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetConferenceListPathsDataQuery, TError, TData>(
+      ['getConferenceListPathsData', variables],
+      graphqlFetcher<GetConferenceListPathsDataQuery, GetConferenceListPathsDataQueryVariables>(GetConferenceListPathsDataDocument, variables),
+      options
+    );
 export const GetHomeStaticPropsDocument = `
     query getHomeStaticProps($language: Language!) {
   sermons(language: $language, first: 5) {
@@ -6402,6 +6498,18 @@ export async function getBibleVersionsPageData<T>(
   variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
 ): Promise<GetBibleVersionsPageDataQuery> {
   return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+}
+
+export async function getConferenceListPageData<T>(
+  variables: ExactAlt<T, GetConferenceListPageDataQueryVariables>
+): Promise<GetConferenceListPageDataQuery> {
+  return fetchApi(GetConferenceListPageDataDocument, { variables });
+}
+
+export async function getConferenceListPathsData<T>(
+  variables: ExactAlt<T, GetConferenceListPathsDataQueryVariables>
+): Promise<GetConferenceListPathsDataQuery> {
+  return fetchApi(GetConferenceListPathsDataDocument, { variables });
 }
 
 export async function getHomeStaticProps<T>(
