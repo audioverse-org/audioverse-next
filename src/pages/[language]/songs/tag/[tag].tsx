@@ -4,8 +4,8 @@ import {
 	getSongDetailTagPageData,
 	getSongDetailTagPathsData,
 } from '@lib/generated/graphql';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { makeTagMusicRoute } from '@lib/routes';
 
 export default SongDetail;
