@@ -5022,6 +5022,41 @@ export type GetSongSponsorPathsDataQuery = (
   ) }
 );
 
+export type GetSongDetailTagPageDataQueryVariables = Exact<{
+  language: Language;
+  tag: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetSongDetailTagPageDataQuery = (
+  { __typename?: 'Query' }
+  & { musicTracks: (
+    { __typename?: 'RecordingConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Recording' }
+      & RecordingFragment
+      & PlaylistFragment
+    )>> }
+  ) }
+);
+
+export type GetSongDetailTagPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSongDetailTagPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { musicMoodTags: (
+    { __typename?: 'TagConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'name'>
+    )>> }
+  ) }
+);
+
 export type GetSongsListPageDataQueryVariables = Exact<{
   language: Language;
 }>;
@@ -5974,6 +6009,50 @@ export const useGetSongSponsorPathsDataQuery = <
       graphqlFetcher<GetSongSponsorPathsDataQuery, GetSongSponsorPathsDataQueryVariables>(GetSongSponsorPathsDataDocument, variables),
       options
     );
+export const GetSongDetailTagPageDataDocument = `
+    query getSongDetailTagPageData($language: Language!, $tag: String) {
+  musicTracks(language: $language, tagName: $tag) {
+    nodes {
+      ...recording
+      ...playlist
+    }
+  }
+}
+    ${RecordingFragmentDoc}
+${PlaylistFragmentDoc}`;
+export const useGetSongDetailTagPageDataQuery = <
+      TData = GetSongDetailTagPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongDetailTagPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSongDetailTagPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongDetailTagPageDataQuery, TError, TData>(
+      ['getSongDetailTagPageData', variables],
+      graphqlFetcher<GetSongDetailTagPageDataQuery, GetSongDetailTagPageDataQueryVariables>(GetSongDetailTagPageDataDocument, variables),
+      options
+    );
+export const GetSongDetailTagPathsDataDocument = `
+    query getSongDetailTagPathsData($language: Language!, $first: Int) {
+  musicMoodTags(language: $language, first: $first) {
+    nodes {
+      name
+    }
+  }
+}
+    `;
+export const useGetSongDetailTagPathsDataQuery = <
+      TData = GetSongDetailTagPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSongDetailTagPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSongDetailTagPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSongDetailTagPathsDataQuery, TError, TData>(
+      ['getSongDetailTagPathsData', variables],
+      graphqlFetcher<GetSongDetailTagPathsDataQuery, GetSongDetailTagPathsDataQueryVariables>(GetSongDetailTagPathsDataDocument, variables),
+      options
+    );
 export const GetSongsListPageDataDocument = `
     query getSongsListPageData($language: Language!) {
   musicAlbums(language: $language, first: 1000) {
@@ -6402,6 +6481,18 @@ export async function getSongSponsorPathsData<T>(
   variables: ExactAlt<T, GetSongSponsorPathsDataQueryVariables>
 ): Promise<GetSongSponsorPathsDataQuery> {
   return fetchApi(GetSongSponsorPathsDataDocument, { variables });
+}
+
+export async function getSongDetailTagPageData<T>(
+  variables: ExactAlt<T, GetSongDetailTagPageDataQueryVariables>
+): Promise<GetSongDetailTagPageDataQuery> {
+  return fetchApi(GetSongDetailTagPageDataDocument, { variables });
+}
+
+export async function getSongDetailTagPathsData<T>(
+  variables: ExactAlt<T, GetSongDetailTagPathsDataQueryVariables>
+): Promise<GetSongDetailTagPathsDataQuery> {
+  return fetchApi(GetSongDetailTagPathsDataDocument, { variables });
 }
 
 export async function getSongsListPageData<T>(

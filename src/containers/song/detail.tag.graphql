@@ -1,0 +1,16 @@
+query getSongDetailTagPageData($language: Language!, $tag: String) {
+    musicTracks(language: $language, tagName: $tag) {
+        nodes {
+            ...recording
+            ...playlist
+        }
+    }
+}
+
+query getSongDetailTagPathsData($language: Language!, $first: Int) {
+    musicMoodTags(language: $language, first: $first) {
+        nodes {
+            name
+        }
+    }
+}
