@@ -1,11 +1,12 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
 import { GetConferenceListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeConferenceRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import Pagination from '@components/molecules/pagination';
-import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import withFailStates from '@components/HOCs/withFailStates';
-import { FormattedMessage } from 'react-intl';
 
 type Conferences = NonNullable<
 	GetConferenceListPageDataQuery['conferences']['nodes']

@@ -5,8 +5,8 @@ import {
 	getConferenceListPageData,
 	getConferenceListPathsData,
 } from '@lib/generated/graphql';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default ConferenceList;
 

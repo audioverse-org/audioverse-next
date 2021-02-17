@@ -1,13 +1,14 @@
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import ConferenceList, {
-	getStaticProps,
-	getStaticPaths,
-} from '@pages/[language]/conferences/page/[i]';
+import { when } from 'jest-when';
+
 import {
 	GetConferenceListPageDataDocument,
 	GetConferenceListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { when } from 'jest-when';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import ConferenceList, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/conferences/page/[i]';
 
 const renderPage = buildRenderer(ConferenceList, getStaticProps, {
 	language: 'en',
@@ -114,7 +115,7 @@ describe('conference list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeDefined();
+		expect(getByText('404')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {

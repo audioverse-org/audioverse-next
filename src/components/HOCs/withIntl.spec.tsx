@@ -13,6 +13,7 @@ import Header from '@components/organisms/header';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
+import ConferenceList from '@containers/conference/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
 import Stories from '@containers/story/stories';
@@ -26,7 +27,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import ConferenceList from '@containers/conference/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
