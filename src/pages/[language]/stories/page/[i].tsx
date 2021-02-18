@@ -1,5 +1,9 @@
 import Stories from '@containers/story/stories';
-import { getStoriesPageData, getStoriesPathData } from '@lib/generated/graphql';
+import {
+	getStoriesPageData,
+	GetStoriesPageDataQuery,
+	getStoriesPathData,
+} from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
 	getPaginatedStaticProps,
@@ -17,12 +21,13 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
-	const { language, i } = params;
-
-	return getPaginatedStaticProps(language, i, async (vars) => {
-		return (await getStoriesPageData(vars)).stories;
-	});
+}: GetStaticPropsArgs): Promise<PaginatedStaticProps<GetStoriesPageDataQuery>> {
+	return getPaginatedStaticProps(
+		params,
+		getStoriesPageData,
+		'stories.nodes',
+		'stories.aggregate.count'
+	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

@@ -13,7 +13,7 @@ type Stories = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>;
 
 export interface StoriesProps {
 	nodes: Stories;
-	pagination: PaginatedStaticProps['props']['pagination'];
+	pagination: PaginatedStaticProps<GetStoriesPageDataQuery>['props']['pagination'];
 }
 
 function Stories({ nodes, pagination }: StoriesProps): JSX.Element {

@@ -100,5 +100,11 @@ export const makeTagMusicRoute = (
 
 export const makeConferenceRoute = (
 	languageRoute: string,
-	conferenceId: string
-): string => `/${languageRoute}/conferences/${conferenceId}`;
+	conferenceId: string,
+	page: number | string
+): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
+
+export const makeSponsorRoute = (
+	languageRoute: string,
+	sponsorId: string
+): string => `/${languageRoute}/sponsors/${sponsorId}`;

@@ -4,23 +4,17 @@ import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
-// TODO: Switch any[] to T[]
-export interface PaginatedStaticProps {
+// TODO: Improve nodes type
+export interface PaginatedStaticProps<T> {
 	props: {
 		nodes: any[];
 		pagination: {
 			total: number;
 			current: number;
 		};
+		data: T | undefined;
 	};
 	revalidate: number;
-}
-
-interface IGetterResolved {
-	nodes: any[] | null;
-	aggregate: {
-		count: number;
-	} | null;
 }
 
 interface Getter<T> {
@@ -35,19 +29,25 @@ interface Getter<T> {
 	}): Promise<T>;
 }
 
-export async function getPaginatedStaticProps<T extends IGetterResolved>(
-	languageRoute: string,
-	pageIndex: number | string,
-	getter: Getter<T>
-): Promise<PaginatedStaticProps> {
-	const result = await getter({
+export async function getPaginatedStaticProps<T>(
+	params: {
+		language: string;
+		i: number | string;
+	},
+	getter: Getter<T>,
+	nodesPath: string,
+	countPath: string
+): Promise<PaginatedStaticProps<T>> {
+	const { language: languageRoute, i: pageIndex } = params;
+
+	const data = await getter({
 		language: getLanguageIdByRoute(languageRoute),
 		offset: (+pageIndex - 1) * ENTRIES_PER_PAGE,
 		first: ENTRIES_PER_PAGE,
-	}).catch(() => ({}));
+	}).catch(() => undefined);
 
-	const nodes = _.get(result, 'nodes', []);
-	const count = _.get(result, 'aggregate.count', 0);
+	const nodes = _.get(data, nodesPath, []);
+	const count = _.get(data, countPath, 0);
 	const total = Math.ceil(count / ENTRIES_PER_PAGE);
 
 	return {
@@ -57,6 +57,7 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 				total,
 				current: +pageIndex,
 			},
+			data,
 		},
 		revalidate: REVALIDATE,
 	};

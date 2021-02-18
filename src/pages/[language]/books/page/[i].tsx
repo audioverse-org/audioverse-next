@@ -20,20 +20,11 @@ export interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
-
 	return getPaginatedStaticProps(
-		language,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getAudiobookListPageData({
-				language,
-				offset,
-				first,
-			});
-
-			return result?.audiobooks;
-		}
+		params,
+		getAudiobookListPageData,
+		'audiobooks.nodes',
+		'audiobooks.aggregate.count'
 	);
 }
 

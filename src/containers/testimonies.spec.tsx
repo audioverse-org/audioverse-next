@@ -1,31 +1,32 @@
 import { getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { getTestimonies, Testimony } from '@lib/generated/graphql';
-import * as graphql from '@lib/generated/graphql';
-import { renderWithIntl } from '@lib/test/helpers';
+import { GetTestimoniesDocument, Testimony } from '@lib/generated/graphql';
+import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
+import { when } from 'jest-when';
 
-jest.mock('@lib/api');
-jest.mock('@lib/api/fetchApi');
+jest.mock('@lib/api/getTestimonyCount');
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
-	jest.spyOn(graphql, 'getTestimonies').mockResolvedValue({
-		testimonies: {
-			nodes: (nodes as Testimony[]) || [
-				{
-					author: 'the_testimony_author',
-					body: 'the_testimony_body',
-					writtenDate: 'the_testimony_date',
+	when(mockedFetchApi)
+		.calledWith(GetTestimoniesDocument, expect.anything())
+		.mockResolvedValue({
+			testimonies: {
+				nodes: (nodes as Testimony[]) || [
+					{
+						author: 'the_testimony_author',
+						body: 'the_testimony_body',
+						writtenDate: 'the_testimony_date',
+					},
+				],
+				aggregate: {
+					count: 1,
 				},
-			],
-			aggregate: {
-				count: 1,
 			},
-		},
-	});
+		});
 }
 
 function setEntityCount(count: number) {
@@ -85,10 +86,12 @@ describe('testimonies pages', () => {
 
 		await getStaticProps({ params: { language: 'en', i: '1' } });
 
-		expect(getTestimonies).toBeCalledWith({
-			language: 'ENGLISH',
-			offset: 0,
-			first: ENTRIES_PER_PAGE,
+		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesDocument, {
+			variables: {
+				language: 'ENGLISH',
+				offset: 0,
+				first: ENTRIES_PER_PAGE,
+			},
 		});
 	});
 

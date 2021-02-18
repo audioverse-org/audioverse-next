@@ -14,7 +14,7 @@ type Conferences = NonNullable<
 
 export type ConferenceListProps = {
 	nodes: Conferences;
-	pagination: PaginatedStaticProps['props']['pagination'];
+	pagination: PaginatedStaticProps<GetConferenceListPageDataQuery>['props']['pagination'];
 };
 
 function ConferenceList({
@@ -35,7 +35,7 @@ function ConferenceList({
 			<ul>
 				{nodes.map((n) => (
 					<li key={n.id}>
-						<a href={makeConferenceRoute(languageRoute, n.id)}>
+						<a href={makeConferenceRoute(languageRoute, n.id, 1)}>
 							<img src={n.imageWithFallback?.url} alt={n.title} />
 							<span>{n.title}</span>
 							<span>{n.sponsor?.title}</span>

@@ -4786,6 +4786,51 @@ export type GetBibleVersionsPageDataQuery = (
   ) }
 );
 
+export type GetConferenceDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetConferenceDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { conference: Maybe<(
+    { __typename?: 'Collection' }
+    & Pick<Collection, 'title'>
+    & { sponsor: Maybe<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id' | 'title'>
+    )>, recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & RecordingListFragment
+      )>>, aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
+);
+
+export type GetConferenceDetailPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetConferenceDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { conferences: (
+    { __typename?: 'CollectionConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Collection' }
+      & Pick<Collection, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetConferenceListPageDataQueryVariables = Exact<{
   language: Language;
   offset: Maybe<Scalars['Int']>;
@@ -5759,6 +5804,58 @@ export const useGetBibleVersionsPageDataQuery = <
       graphqlFetcher<GetBibleVersionsPageDataQuery, GetBibleVersionsPageDataQueryVariables>(GetBibleVersionsPageDataDocument, variables),
       options
     );
+export const GetConferenceDetailPageDataDocument = `
+    query getConferenceDetailPageData($id: ID!, $offset: Int, $first: Int) {
+  conference(id: $id) {
+    title
+    sponsor {
+      id
+      title
+    }
+    recordings(offset: $offset, first: $first) {
+      nodes {
+        ...recordingList
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${RecordingListFragmentDoc}`;
+export const useGetConferenceDetailPageDataQuery = <
+      TData = GetConferenceDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetConferenceDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetConferenceDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetConferenceDetailPageDataQuery, TError, TData>(
+      ['getConferenceDetailPageData', variables],
+      graphqlFetcher<GetConferenceDetailPageDataQuery, GetConferenceDetailPageDataQueryVariables>(GetConferenceDetailPageDataDocument, variables),
+      options
+    );
+export const GetConferenceDetailPathsDataDocument = `
+    query getConferenceDetailPathsData($language: Language!, $first: Int) {
+  conferences(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetConferenceDetailPathsDataQuery = <
+      TData = GetConferenceDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetConferenceDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetConferenceDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetConferenceDetailPathsDataQuery, TError, TData>(
+      ['getConferenceDetailPathsData', variables],
+      graphqlFetcher<GetConferenceDetailPathsDataQuery, GetConferenceDetailPathsDataQueryVariables>(GetConferenceDetailPathsDataDocument, variables),
+      options
+    );
 export const GetConferenceListPageDataDocument = `
     query getConferenceListPageData($language: Language!, $offset: Int, $first: Int) {
   conferences(language: $language, offset: $offset, first: $first) {
@@ -6498,6 +6595,18 @@ export async function getBibleVersionsPageData<T>(
   variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
 ): Promise<GetBibleVersionsPageDataQuery> {
   return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+}
+
+export async function getConferenceDetailPageData<T>(
+  variables: ExactAlt<T, GetConferenceDetailPageDataQueryVariables>
+): Promise<GetConferenceDetailPageDataQuery> {
+  return fetchApi(GetConferenceDetailPageDataDocument, { variables });
+}
+
+export async function getConferenceDetailPathsData<T>(
+  variables: ExactAlt<T, GetConferenceDetailPathsDataQueryVariables>
+): Promise<GetConferenceDetailPathsDataQuery> {
+  return fetchApi(GetConferenceDetailPathsDataDocument, { variables });
 }
 
 export async function getConferenceListPageData<T>(

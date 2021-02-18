@@ -20,13 +20,12 @@ interface StaticProps {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { language, i } = params;
-
-	return getPaginatedStaticProps(language, i, async (params) => {
-		const result = await getTagListPageData(params);
-
-		return result?.tags;
-	});
+	return getPaginatedStaticProps(
+		params,
+		getTagListPageData,
+		'tags.nodes',
+		'tags.aggregate.count'
+	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

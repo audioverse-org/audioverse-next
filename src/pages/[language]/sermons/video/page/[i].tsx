@@ -18,21 +18,17 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
+	const { language } = params;
 
 	const response = await getPaginatedStaticProps(
-		language,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getSermonListStaticProps({
-				language,
+		params,
+		async (variables) =>
+			getSermonListStaticProps({
+				...variables,
 				hasVideo: true,
-				offset,
-				first,
-			});
-
-			return result?.sermons;
-		}
+			}),
+		'sermons.nodes',
+		'sermons.aggregate.count'
 	);
 
 	// TODO: generate rss

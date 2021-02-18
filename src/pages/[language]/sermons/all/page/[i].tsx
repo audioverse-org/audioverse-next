@@ -1,7 +1,10 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import { getSermonCount } from '@lib/api';
 import createFeed from '@lib/createFeed';
-import { getSermonListStaticProps } from '@lib/generated/graphql';
+import {
+	getSermonListStaticProps,
+	GetSermonListStaticPropsQuery,
+} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
@@ -23,7 +26,7 @@ interface GetStaticPropsArgs {
 
 const generateRssFeed = async (
 	params: GetStaticPropsArgs['params'],
-	response: PaginatedStaticProps
+	response: PaginatedStaticProps<GetSermonListStaticPropsQuery>
 ) => {
 	const { i, language: languageRoute } = params;
 	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
@@ -55,21 +58,17 @@ const generateRssFeed = async (
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language: base_url } = params;
+	const { language: base_url } = params;
 
 	const response = await getPaginatedStaticProps(
-		base_url,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getSermonListStaticProps({
-				language,
+		params,
+		async (variables) =>
+			getSermonListStaticProps({
+				...variables,
 				hasVideo: null,
-				offset,
-				first,
-			});
-
-			return result?.sermons;
-		}
+			}),
+		'sermons.nodes',
+		'sermons.aggregate.count'
 	);
 
 	await generateRssFeed(params, response);

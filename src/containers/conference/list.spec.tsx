@@ -96,7 +96,7 @@ describe('conference list page', () => {
 
 		expect(getByAltText('the_conference_title').parentElement).toHaveAttribute(
 			'href',
-			'/en/conferences/the_conference_id'
+			'/en/conferences/the_conference_id/page/1'
 		);
 	});
 

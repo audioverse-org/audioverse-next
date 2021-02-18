@@ -15,10 +15,12 @@ export async function getStaticProps({
 }: {
 	params: { language: string; i: string };
 }): Promise<StaticProps<ConferenceListProps>> {
-	const { language, i } = params;
-	return getPaginatedStaticProps(language, i, async (variables) => {
-		return (await getConferenceListPageData(variables)).conferences;
-	});
+	return getPaginatedStaticProps(
+		params,
+		getConferenceListPageData,
+		'conferences.nodes',
+		'conferences.aggregate.count'
+	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

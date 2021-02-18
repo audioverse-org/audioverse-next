@@ -6,8 +6,9 @@ import Pagination from '@components/molecules/pagination';
 import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeAudiobookRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
 
-export type AudiobooksProps = PaginatedStaticProps['props'];
+export type AudiobooksProps = PaginatedStaticProps<GetAudiobookListPageDataQuery>['props'];
 
 function Audiobooks({ nodes, pagination }: AudiobooksProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
