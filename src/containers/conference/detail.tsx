@@ -1,8 +1,9 @@
 import React from 'react';
+
 import RecordingList from '@components/molecules/recordingList';
 import { GetConferenceDetailPageDataQuery } from '@lib/generated/graphql';
-import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeSponsorRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Recordings = NonNullable<
 	NonNullable<

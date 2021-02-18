@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
+import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeAudiobookRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
 
 export type AudiobooksProps = PaginatedStaticProps<GetAudiobookListPageDataQuery>['props'];
 

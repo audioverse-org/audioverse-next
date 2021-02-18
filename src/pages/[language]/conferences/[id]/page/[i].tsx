@@ -1,12 +1,12 @@
 import ConferenceDetail, {
 	ConferenceDetailProps,
 } from '@containers/conference/detail';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import {
 	getConferenceDetailPageData,
 	getConferenceDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeConferenceRoute } from '@lib/routes';
 
 export default ConferenceDetail;

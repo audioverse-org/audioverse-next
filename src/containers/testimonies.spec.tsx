@@ -1,3 +1,5 @@
+import { when } from 'jest-when';
+
 import { getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { GetTestimoniesDocument, Testimony } from '@lib/generated/graphql';
@@ -6,7 +8,6 @@ import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
-import { when } from 'jest-when';
 
 jest.mock('@lib/api/getTestimonyCount');
 

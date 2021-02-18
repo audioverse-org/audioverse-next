@@ -1,14 +1,15 @@
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import ConferenceDetail, {
-	getStaticProps,
-	getStaticPaths,
-} from '@pages/[language]/conferences/[id]/page/[i]';
+import { when } from 'jest-when';
+
+import { ENTRIES_PER_PAGE } from '@lib/constants';
 import {
 	GetConferenceDetailPageDataDocument,
 	GetConferenceDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { when } from 'jest-when';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import ConferenceDetail, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/conferences/[id]/page/[i]';
 
 const renderPage = buildRenderer(ConferenceDetail, getStaticProps, {
 	language: 'en',
