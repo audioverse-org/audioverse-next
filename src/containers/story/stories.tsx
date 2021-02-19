@@ -4,19 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import { GetStoriesPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeStoryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { StoriesStaticProps } from '@pages/[language]/stories/page/[i]';
 
-type Stories = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>;
+type Props = StoriesStaticProps['props'];
 
-export interface StoriesProps {
-	nodes: Stories;
-	pagination: PaginatedStaticProps<GetStoriesPageDataQuery>['props']['pagination'];
-}
-
-function Stories({ nodes, pagination }: StoriesProps): JSX.Element {
+function Stories({ nodes, pagination }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (

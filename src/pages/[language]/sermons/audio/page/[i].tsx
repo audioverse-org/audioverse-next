@@ -28,8 +28,8 @@ export async function getStaticProps({
 				hasVideo: false,
 			});
 		},
-		'sermons.nodes',
-		'sermons.aggregate.count'
+		(d) => d.sermons.nodes,
+		(d) => d.sermons.aggregate?.count
 	);
 
 	// TODO: generate rss

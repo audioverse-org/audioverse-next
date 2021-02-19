@@ -1,4 +1,4 @@
-import TagDetail, { TagDetailProps } from '@containers/tag/detail';
+import TagDetail from '@containers/tag/detail';
 import createFeed from '@lib/createFeed';
 import {
 	getTagDetailPageData,
@@ -16,10 +16,14 @@ import { makeTagRoute } from '@lib/routes';
 
 export default TagDetail;
 
-interface StaticProps {
-	props: TagDetailProps;
-	revalidate: number;
-}
+type Recording = NonNullable<
+	GetTagDetailPageDataQuery['recordings']['nodes']
+>[0];
+type PaginatedProps = PaginatedStaticProps<
+	GetTagDetailPageDataQuery,
+	Recording
+>;
+type StaticProps = PaginatedProps & { props: { rssPath: string } };
 
 type GetStaticPropsArgs = {
 	params: { slug: string; language: string; i: string };
@@ -27,7 +31,7 @@ type GetStaticPropsArgs = {
 
 const generateRssFeed = async (
 	params: GetStaticPropsArgs['params'],
-	response: PaginatedStaticProps<GetTagDetailPageDataQuery>
+	response: PaginatedProps
 ) => {
 	const { i, language: languageRoute, slug } = params;
 	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
@@ -69,8 +73,8 @@ export async function getStaticProps({
 				...variables,
 				tagName: decodeURIComponent(slug),
 			}),
-		'recordings.nodes',
-		'recordings.aggregate.count'
+		(d) => d.recordings.nodes,
+		(d) => d.recordings.aggregate?.count
 	);
 
 	await generateRssFeed(params, response);

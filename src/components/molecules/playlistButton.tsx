@@ -84,7 +84,7 @@ export default function PlaylistButton({
 
 	return (
 		<>
-			<button data-tip data-for={'playlistButton'}>
+			<button data-tip={true} data-for={'playlistButton'}>
 				<FormattedMessage
 					id="playlistButton__trigger"
 					defaultMessage="Add to Playlist"

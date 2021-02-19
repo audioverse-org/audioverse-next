@@ -23,8 +23,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		getTagListPageData,
-		'tags.nodes',
-		'tags.aggregate.count'
+		(d) => d.tags.nodes,
+		(d) => d.tags.aggregate?.count
 	);
 }
 

@@ -1,30 +1,52 @@
-import ConferenceDetail, {
-	ConferenceDetailProps,
-} from '@containers/conference/detail';
+import ConferenceDetail from '@containers/conference/detail';
+import createFeed from '@lib/createFeed';
 import {
 	getConferenceDetailPageData,
+	GetConferenceDetailPageDataQuery,
 	getConferenceDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 import { makeConferenceRoute } from '@lib/routes';
 
 export default ConferenceDetail;
+
+type Recording = NonNullable<
+	NonNullable<
+		GetConferenceDetailPageDataQuery['conference']
+	>['recordings']['nodes']
+>[0];
+export type ConferenceStaticProps = PaginatedStaticProps<
+	GetConferenceDetailPageDataQuery,
+	Recording
+>;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<ConferenceDetailProps>> {
+}): Promise<ConferenceStaticProps> {
 	const { id } = params;
 
-	return getPaginatedStaticProps(
+	const staticProps = await getPaginatedStaticProps(
 		params,
 		async ({ offset, first }) =>
 			getConferenceDetailPageData({ id, offset, first }),
-		'conference.recordings.nodes',
-		'conference.recordings.aggregate.count'
+		(d) => d.conference?.recordings.nodes,
+		(d) => d.conference?.recordings.aggregate?.count
 	);
+
+	// TODO: Standardize on an RSS feed naming convention
+	await createFeed({
+		recordings: staticProps.props.nodes,
+		title: `${staticProps.props.data?.conference?.title} : AudioVerse`,
+		projectRelativePath: `public/en/conferences/${staticProps.props.data?.conference?.id}.xml`,
+	});
+
+	return staticProps;
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

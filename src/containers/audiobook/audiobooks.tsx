@@ -3,14 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
-import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeAudiobookRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { AudiobooksStaticProps } from '@pages/[language]/books/page/[i]';
 
-export type AudiobooksProps = PaginatedStaticProps<GetAudiobookListPageDataQuery>['props'];
+type Props = AudiobooksStaticProps['props'];
 
-function Audiobooks({ nodes, pagination }: AudiobooksProps): JSX.Element {
+function Audiobooks({ nodes, pagination }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (

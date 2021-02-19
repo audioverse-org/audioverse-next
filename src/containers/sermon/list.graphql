@@ -13,6 +13,7 @@ query getSermonListStaticProps(
     ) {
         nodes {
             ...recordingList
+            ...createFeed
         }
         aggregate {
             count

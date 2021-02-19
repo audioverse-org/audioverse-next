@@ -8,8 +8,8 @@ describe('getPaginatedStaticProps', () => {
 				i: 1,
 			},
 			async (): Promise<any> => undefined,
-			'recordings.nodes',
-			'recordings.aggregate.count'
+			(d) => d.recordings.nodes,
+			(d) => d.recordings.aggregate.count
 		);
 
 		expect(result.props.nodes).toEqual([]);

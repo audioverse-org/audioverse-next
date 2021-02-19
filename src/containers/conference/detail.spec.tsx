@@ -1,6 +1,7 @@
 import { when } from 'jest-when';
 
 import { ENTRIES_PER_PAGE } from '@lib/constants';
+import createFeed from '@lib/createFeed';
 import {
 	GetConferenceDetailPageDataDocument,
 	GetConferenceDetailPathsDataDocument,
@@ -10,6 +11,8 @@ import ConferenceDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/page/[i]';
+
+jest.mock('@lib/createFeed');
 
 const renderPage = buildRenderer(ConferenceDetail, getStaticProps, {
 	language: 'en',
@@ -22,7 +25,10 @@ function loadData() {
 		.calledWith(GetConferenceDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			conference: {
+				id: 'the_conference_id',
 				title: 'the_conference_title',
+				startDate: '2007-12-19',
+				endDate: '2007-12-23',
 				sponsor: {
 					id: 'the_sponsor_id',
 					title: 'the_sponsor_title',
@@ -92,11 +98,51 @@ describe('conference detail page', () => {
 			'/en/sponsors/the_sponsor_id'
 		);
 	});
+
+	it('renders pagination', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1')).toHaveAttribute(
+			'href',
+			'/en/conferences/the_conference_id/page/1'
+		);
+	});
+
+	it('renders 404', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetConferenceDetailPageDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
+
+	it('renders conference dates', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('2007-12-19 — 2007-12-23')).toBeInTheDocument();
+	});
+
+	it('creates RSS feed', async () => {
+		loadData();
+
+		await getStaticProps({
+			params: { language: 'en', id: 'the_conference_id', i: '1' },
+		});
+
+		expect(createFeed).toBeCalledWith({
+			recordings: expect.any(Array),
+			projectRelativePath: 'public/en/conferences/the_conference_id.xml',
+			title: 'the_conference_title : AudioVerse',
+		});
+	});
 });
 
+// modify createFeed with better types to enforce required data on recording nodes
 // generates rss feed
 // links to rss feed
-// renders 404 page
-// renders pagination
-// links pagination properly
-// renders conference dates

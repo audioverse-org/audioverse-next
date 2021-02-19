@@ -1,6 +1,9 @@
 query getConferenceDetailPageData($id: ID!, $offset: Int, $first: Int) {
     conference(id: $id) {
+        id
         title
+        startDate
+        endDate
         sponsor {
             id
             title
@@ -8,6 +11,7 @@ query getConferenceDetailPageData($id: ID!, $offset: Int, $first: Int) {
         recordings(offset: $offset, first: $first) {
             nodes {
                 ...recordingList
+                ...createFeed
             }
             aggregate {
                 count

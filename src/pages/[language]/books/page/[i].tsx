@@ -1,17 +1,24 @@
-import Audiobooks, { AudiobooksProps } from '@containers/audiobook/audiobooks';
+import Audiobooks from '@containers/audiobook/audiobooks';
 import {
 	getAudiobookListPageData,
+	GetAudiobookListPageDataQuery,
 	getAudiobookListPathsData,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 
 export default Audiobooks;
 
-interface StaticProps {
-	props: AudiobooksProps;
-	revalidate: number;
-}
+type Audiobook = NonNullable<
+	GetAudiobookListPageDataQuery['audiobooks']['nodes']
+>[0];
+export type AudiobooksStaticProps = PaginatedStaticProps<
+	GetAudiobookListPageDataQuery,
+	Audiobook
+>;
 
 export interface GetStaticPropsArgs {
 	params: { i: string; language: string };
@@ -19,12 +26,12 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
+}: GetStaticPropsArgs): Promise<AudiobooksStaticProps> {
 	return getPaginatedStaticProps(
 		params,
 		getAudiobookListPageData,
-		'audiobooks.nodes',
-		'audiobooks.aggregate.count'
+		(d) => d.audiobooks.nodes,
+		(d) => d.audiobooks.aggregate?.count
 	);
 }
 

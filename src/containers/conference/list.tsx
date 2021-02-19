@@ -3,24 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
-import { GetConferenceListPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeConferenceRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { ConferenceListStaticProps } from '@pages/[language]/conferences/page/[i]';
 
-type Conferences = NonNullable<
-	GetConferenceListPageDataQuery['conferences']['nodes']
->;
+type Props = ConferenceListStaticProps['props'];
 
-export type ConferenceListProps = {
-	nodes: Conferences;
-	pagination: PaginatedStaticProps<GetConferenceListPageDataQuery>['props']['pagination'];
-};
-
-function ConferenceList({
-	nodes,
-	pagination,
-}: ConferenceListProps): JSX.Element {
+function ConferenceList({ nodes, pagination }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (

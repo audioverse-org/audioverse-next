@@ -21,6 +21,7 @@ import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
+import formatDuration from '@lib/formatDuration';
 import { Person } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 import {
@@ -34,6 +35,7 @@ jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
+jest.mock('@lib/formatDuration');
 
 const expectNoUnlocalizedText = (
 	screen: RenderResult,
@@ -72,6 +74,7 @@ describe('localization usage', () => {
 		} as any);
 
 		(readableBytes as jest.Mock).mockReturnValue('z');
+		(formatDuration as jest.Mock).mockReturnValue('z');
 	});
 
 	beforeAll(() => {
@@ -279,6 +282,7 @@ describe('localization usage', () => {
 					} as any,
 				]}
 				pagination={undefined as any}
+				data={undefined as any}
 			/>
 		);
 
@@ -298,6 +302,7 @@ describe('localization usage', () => {
 			<ConferenceList
 				nodes={[{ id: 'z' }] as any}
 				pagination={undefined as any}
+				data={undefined as any}
 			/>
 		);
 
@@ -306,7 +311,11 @@ describe('localization usage', () => {
 
 	it('localizes conference detail page', async () => {
 		const screen = await renderWithQueryProvider(
-			<ConferenceDetail nodes={undefined as any} data={undefined as any} />
+			<ConferenceDetail
+				nodes={[{ id: 'z' }] as any}
+				data={undefined as any}
+				pagination={undefined as any}
+			/>
 		);
 
 		expectNoUnlocalizedText(screen);

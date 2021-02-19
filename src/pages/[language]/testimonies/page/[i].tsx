@@ -13,14 +13,19 @@ interface GetStaticPropsArgs {
 	params: { i: string; language: string };
 }
 
+type Testimony = NonNullable<
+	NonNullable<GetTestimoniesQuery>['testimonies']['nodes']
+>[0];
+type StaticProps = PaginatedStaticProps<GetTestimoniesQuery, Testimony>;
+
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<PaginatedStaticProps<GetTestimoniesQuery>> {
-	return await getPaginatedStaticProps(
+}: GetStaticPropsArgs): Promise<StaticProps> {
+	return getPaginatedStaticProps(
 		params,
 		getTestimonies,
-		'testimonies.nodes',
-		'testimonies.aggregate.count'
+		(d) => d.testimonies.nodes,
+		(d) => d.testimonies.aggregate?.count
 	);
 }
 

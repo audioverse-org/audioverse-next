@@ -1,4 +1,4 @@
-import SermonList, { SermonListProps } from '@containers/sermon/list';
+import SermonList from '@containers/sermon/list';
 import { getSermonCount } from '@lib/api';
 import createFeed from '@lib/createFeed';
 import {
@@ -15,10 +15,14 @@ import {
 
 export default SermonList;
 
-interface StaticProps {
-	props: SermonListProps;
-	revalidate: number;
-}
+type Sermon = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>[0];
+type PaginatedProps = PaginatedStaticProps<
+	GetSermonListStaticPropsQuery,
+	Sermon
+>;
+type StaticProps = PaginatedProps & {
+	props: { rssPath: string; filter: string };
+};
 
 interface GetStaticPropsArgs {
 	params: { i: string; language: string };
@@ -26,7 +30,7 @@ interface GetStaticPropsArgs {
 
 const generateRssFeed = async (
 	params: GetStaticPropsArgs['params'],
-	response: PaginatedStaticProps<GetSermonListStaticPropsQuery>
+	response: PaginatedProps
 ) => {
 	const { i, language: languageRoute } = params;
 	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
@@ -67,8 +71,8 @@ export async function getStaticProps({
 				...variables,
 				hasVideo: null,
 			}),
-		'sermons.nodes',
-		'sermons.aggregate.count'
+		(d) => d.sermons.nodes,
+		(d) => d.sermons.aggregate?.count
 	);
 
 	await generateRssFeed(params, response);

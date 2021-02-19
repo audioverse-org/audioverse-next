@@ -11,16 +11,12 @@ module.exports = {
 					.map((def) => {
 						const capitalName =
 							def.name.value.charAt(0).toUpperCase() + def.name.value.slice(1);
-						const variablesType = `ExactAlt<T, ${capitalName}QueryVariables>`;
-						const returnType = `${capitalName}Query`;
-						const query = `${capitalName}Document`;
-
 						return `
-export async function ${def.name.value}<T>(
-  variables: ${variablesType}
-): Promise<${returnType}> {
-  return fetchApi(${query}, { variables });
-}`;
+							export async function ${def.name.value}<T>(
+								variables: ExactAlt<T, ${capitalName}QueryVariables>
+							): Promise<${capitalName}Query> {
+								return fetchApi(${capitalName}Document, { variables });
+							}`;
 					})
 					.join('\n');
 			})

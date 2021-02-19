@@ -19,14 +19,20 @@ export interface GetStaticPropsArgs {
 	};
 }
 
+type Story = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>[0];
+export type StoriesStaticProps = PaginatedStaticProps<
+	GetStoriesPageDataQuery,
+	Story
+>;
+
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<PaginatedStaticProps<GetStoriesPageDataQuery>> {
+}: GetStaticPropsArgs): Promise<StoriesStaticProps> {
 	return getPaginatedStaticProps(
 		params,
 		getStoriesPageData,
-		'stories.nodes',
-		'stories.aggregate.count'
+		(d) => d.stories.nodes,
+		(d) => d.stories.aggregate?.count
 	);
 }
 

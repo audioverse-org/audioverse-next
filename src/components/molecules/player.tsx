@@ -41,7 +41,7 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 	}, [hasSources, sources, videoEl]);
 
 	return hasSources ? (
-		<div data-vjs-player>
+		<div data-vjs-player={true}>
 			<video ref={onVideo} className="video-js" playsInline />
 		</div>
 	) : (

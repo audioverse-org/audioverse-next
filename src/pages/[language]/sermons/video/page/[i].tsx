@@ -27,8 +27,8 @@ export async function getStaticProps({
 				...variables,
 				hasVideo: true,
 			}),
-		'sermons.nodes',
-		'sermons.aggregate.count'
+		(d) => d.sermons.nodes,
+		(d) => d.sermons.aggregate?.count
 	);
 
 	// TODO: generate rss
