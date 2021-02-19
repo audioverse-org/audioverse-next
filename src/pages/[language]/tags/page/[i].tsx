@@ -29,9 +29,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('tags', async (language) => {
-		const result = await getTagListPathsData({ language });
-
-		return result?.tags?.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'tags',
+		getTagListPathsData,
+		(d) => d.tags?.aggregate?.count
+	);
 }

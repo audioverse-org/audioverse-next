@@ -1,17 +1,17 @@
-import { getSermonCount } from '@lib/api';
-import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
+import { loadSermonListPagePathsData } from '@containers/sermon/list.all.spec';
+import {
+	GetSermonListPagePathsDataDocument,
+	GetSermonListStaticPropsDocument,
+} from '@lib/generated/graphql';
 import {
 	buildRenderer,
 	loadSermonListData,
 	mockedFetchApi,
-	setSermonCount,
 } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/video/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/video/page/[i]';
-
-jest.mock('@lib/api/getSermonCount');
 
 const renderPage = buildRenderer(SermonList, getStaticProps, {
 	i: '1',
@@ -22,11 +22,13 @@ describe('sermon video list page', () => {
 	it('gets video count', async () => {
 		await getStaticPaths();
 
-		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: true });
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
+			variables: { language: 'ENGLISH', hasVideo: true },
+		});
 	});
 
 	it('generates filtered pages', async () => {
-		setSermonCount(1);
+		loadSermonListPagePathsData(1);
 
 		const result = await getStaticPaths();
 

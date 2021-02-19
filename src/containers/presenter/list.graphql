@@ -1,0 +1,19 @@
+query getPresenterListPageData($language: Language!, $offset: Int, $first: Int) {
+    persons(language: $language, offset: $offset, first: $first) {
+        nodes {
+            id
+            name
+        }
+        aggregate {
+            count
+        }
+    }
+}
+
+query getPresenterListPathsData($language: Language!) {
+    persons(language: $language) {
+        aggregate {
+            count
+        }
+    }
+}

@@ -12,7 +12,8 @@ describe('getNumberedStaticPaths', () => {
 
 		const result = await getNumberedStaticPaths(
 			'base',
-			async () => 2 * ENTRIES_PER_PAGE * expected
+			async () => 2 * ENTRIES_PER_PAGE * expected,
+			(d) => d
 		);
 
 		expect(result.paths.length).toEqual(expected);

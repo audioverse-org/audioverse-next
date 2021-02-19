@@ -36,9 +36,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('books', async (language) => {
-		const data = await getAudiobookListPathsData({ language });
-
-		return data.audiobooks.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'books',
+		getAudiobookListPathsData,
+		(d) => d.audiobooks.aggregate?.count
+	);
 }

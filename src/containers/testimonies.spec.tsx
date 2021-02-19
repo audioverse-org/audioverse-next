@@ -1,19 +1,20 @@
 import { when } from 'jest-when';
 
-import { getTestimonyCount } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { GetTestimoniesDocument, Testimony } from '@lib/generated/graphql';
+import {
+	GetTestimoniesPageDataDocument,
+	GetTestimoniesPathsDataDocument,
+	Testimony,
+} from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
 
-jest.mock('@lib/api/getTestimonyCount');
-
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 	when(mockedFetchApi)
-		.calledWith(GetTestimoniesDocument, expect.anything())
+		.calledWith(GetTestimoniesPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			testimonies: {
 				nodes: (nodes as Testimony[]) || [
@@ -31,7 +32,15 @@ function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 }
 
 function setEntityCount(count: number) {
-	(getTestimonyCount as jest.Mock).mockReturnValue(Promise.resolve(count));
+	when(mockedFetchApi)
+		.calledWith(GetTestimoniesPathsDataDocument, expect.anything())
+		.mockResolvedValue({
+			testimonies: {
+				aggregate: {
+					count,
+				},
+			},
+		});
 }
 
 async function renderPage() {
@@ -63,7 +72,9 @@ describe('testimonies pages', () => {
 
 		await getStaticPaths();
 
-		expect(getTestimonyCount).toBeCalledWith('ENGLISH');
+		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesPathsDataDocument, {
+			variables: { language: 'ENGLISH' },
+		});
 	});
 
 	it('generates static paths', async () => {
@@ -87,7 +98,7 @@ describe('testimonies pages', () => {
 
 		await getStaticProps({ params: { language: 'en', i: '1' } });
 
-		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				offset: 0,

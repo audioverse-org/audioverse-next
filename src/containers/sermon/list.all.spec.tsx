@@ -2,17 +2,19 @@ import fs from 'fs';
 
 import { waitFor } from '@testing-library/react';
 import * as feed from 'feed';
+import { when } from 'jest-when';
 import { useRouter } from 'next/router';
 
-import { getSermonCount } from '@lib/api';
 import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
-import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
 import {
+	GetSermonListPagePathsDataDocument,
+	GetSermonListStaticPropsDocument,
+} from '@lib/generated/graphql';
+import {
+	buildRenderer,
 	loadSermonListData,
 	mockedFetchApi,
 	mockFeed,
-	renderWithIntl,
-	setSermonCount,
 } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
@@ -23,25 +25,22 @@ jest.mock('next/router');
 jest.mock('fs');
 jest.mock('next/head');
 jest.mock('@lib/api/isPersonFavorited');
-jest.mock('@lib/api/getSermonCount');
 
-// TODO: use helper import
-function loadQuery(query = {}) {
-	(useRouter as jest.Mock).mockReturnValue({ query });
-}
+const renderPage = buildRenderer(SermonList, getStaticProps, {
+	language: 'en',
+	i: '1',
+});
 
-const renderPage = async ({
-	params = { i: '1', language: 'en' },
-	query = {},
-} = {}) => {
-	loadQuery(query);
-	const { props } = await getStaticProps({ params });
-	return renderWithIntl(SermonList, props);
-};
-
-function loadGetSermonsError() {
-	// TODO: replace functionality
-	// (getSermons as jest.Mock).mockReturnValue(Promise.reject('API failure'));
+export function loadSermonListPagePathsData(count: number): void {
+	when(mockedFetchApi)
+		.calledWith(GetSermonListPagePathsDataDocument, expect.anything())
+		.mockResolvedValue({
+			sermons: {
+				aggregate: {
+					count,
+				},
+			},
+		});
 }
 
 describe('sermons list page', () => {
@@ -57,7 +56,7 @@ describe('sermons list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		setSermonCount(1);
+		loadSermonListPagePathsData(1);
 
 		const result = await getStaticPaths();
 
@@ -65,7 +64,7 @@ describe('sermons list page', () => {
 	});
 
 	it('generates in all languages', async () => {
-		setSermonCount(1);
+		loadSermonListPagePathsData(1);
 
 		const result = await getStaticPaths();
 
@@ -73,15 +72,13 @@ describe('sermons list page', () => {
 	});
 
 	it('sets proper fallback strategy', async () => {
-		setSermonCount(1);
-
 		const { fallback } = await getStaticPaths();
 
 		expect(fallback).toBe(true);
 	});
 
 	it('generates all pages in language', async () => {
-		setSermonCount(100 * ENTRIES_PER_PAGE);
+		loadSermonListPagePathsData(100 * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
 
@@ -90,11 +87,11 @@ describe('sermons list page', () => {
 	});
 
 	it('uses language codes to get sermon counts', async () => {
-		setSermonCount(1);
-
 		await getStaticPaths();
 
-		expect(getSermonCount).toBeCalledWith('ENGLISH');
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
+			variables: { language: 'ENGLISH', hasVideo: null },
+		});
 	});
 
 	it('gets sermons for list page', async () => {
@@ -124,7 +121,9 @@ describe('sermons list page', () => {
 
 	it('renders 404 on api error', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadGetSermonsError();
+		when(mockedFetchApi)
+			.calledWith(GetSermonListStaticPropsDocument, expect.anything())
+			.mockRejectedValue('oops');
 
 		const { getByText } = await renderPage();
 
@@ -159,9 +158,7 @@ describe('sermons list page', () => {
 	it('calculates pages using items per page', async () => {
 		loadSermonListData({ count: 75 });
 
-		const { getByText } = await renderPage({
-			params: { i: '3', language: 'en' },
-		});
+		const { getByText } = await renderPage({ i: '3', language: 'en' });
 
 		expect(() => getByText('4')).toThrow();
 	});
@@ -169,7 +166,7 @@ describe('sermons list page', () => {
 	it('handles string page index', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '3', language: 'en' } });
+		await renderPage({ i: '3', language: 'en' });
 	});
 
 	it('links pagination properly', async () => {
@@ -203,7 +200,7 @@ describe('sermons list page', () => {
 	it('links All button using lang', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage({ query: { language: 'es' } });
+		const { getByRole } = await renderPage({ language: 'es' });
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
@@ -234,8 +231,6 @@ describe('sermons list page', () => {
 	});
 
 	it('does not include video paths', async () => {
-		setSermonCount(1);
-
 		const result = await getStaticPaths();
 
 		expect(result.paths).not.toContain('/en/sermons/video/page/1');
@@ -270,8 +265,8 @@ describe('sermons list page', () => {
 	it('only renders feed once per language', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '1', language: 'en' } });
-		await renderPage({ params: { i: '2', language: 'en' } });
+		await renderPage({ i: '1', language: 'en' });
+		await renderPage({ i: '2', language: 'en' });
 
 		expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
 	});
@@ -279,7 +274,7 @@ describe('sermons list page', () => {
 	it('renders feeds for other languages', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '1', language: 'es' } });
+		await renderPage({ i: '1', language: 'es' });
 
 		const { calls } = (fs.writeFileSync as any).mock;
 
@@ -330,7 +325,7 @@ describe('sermons list page', () => {
 		mockFeed();
 		loadSermonListData();
 
-		await renderPage({ params: { i: '1', language: 'es' } });
+		await renderPage({ i: '1', language: 'es' });
 
 		const calls = (feed.Feed as any).mock.calls;
 
@@ -372,7 +367,7 @@ describe('sermons list page', () => {
 	it('localizes pagination', async () => {
 		loadSermonListData();
 
-		const { getByText } = await renderPage({ query: { language: 'es' } }),
+		const { getByText } = await renderPage({ language: 'es' }),
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/es/sermons/all/page/1');
@@ -461,7 +456,7 @@ describe('sermons list page', () => {
 	it('skips feed creation if invalid language', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '1', language: 'bad' } });
+		await renderPage({ i: '1', language: 'bad' });
 
 		expect(fs.writeFileSync).not.toBeCalled();
 	});

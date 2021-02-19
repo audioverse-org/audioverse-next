@@ -7,32 +7,40 @@ import {
 } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 
-export async function makeNumberedPaths(
-	sectionSegments: string,
-	getCount: (language: Language) => Promise<number>
-): Promise<string[]> {
-	const keys = _.keys(LANGUAGES) as Language[];
-	const pathSetPromises = keys.map(async (k) => {
-			const entryCount = (await getCount(k)) || 0;
-			const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
-			const toGenerate = Math.min(pageCount, LIST_PRERENDER_LIMIT);
-			const numbers = Array.from(Array(toGenerate).keys());
-			const base = LANGUAGES[k].base_url;
+type Getter<T> = (variables: { language: Language }) => Promise<T>;
+type Parser<T> = (data: T) => number | null | undefined;
 
-			// TODO: Extract route generation
-			return numbers.map((x) => `/${base}/${sectionSegments}/page/${x + 1}`);
-		}),
-		pathSets = await Promise.all(pathSetPromises);
+const makeLanguagePaths = async <T>(
+	language: Language,
+	innerSegment: string,
+	getter: Getter<T>,
+	parseCount: Parser<T>
+) => {
+	const data = await getter({ language });
+	const entryCount = parseCount(data) || 0;
+	const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
+	const toGenerate = Math.min(pageCount, LIST_PRERENDER_LIMIT);
+	const numbers = Array.from(Array(toGenerate).keys());
+	const base = LANGUAGES[language].base_url;
 
-	return _.flatten(pathSets);
-}
+	// TODO: Extract route generation
+	return numbers.map((x) => `/${base}/${innerSegment}/page/${x + 1}`);
+};
 
-export const getNumberedStaticPaths = async (
-	basePath: string,
-	getCount: (language: Language) => Promise<number>
+export const getNumberedStaticPaths = async <T>(
+	innerSegment: string,
+	getter: Getter<T>,
+	parseCount: Parser<T>
 ): Promise<StaticPaths> => {
+	const keys = _.keys(LANGUAGES) as Language[];
+	const pathSetPromises = keys.map(async (k) =>
+		makeLanguagePaths(k, innerSegment, getter, parseCount)
+	);
+	const pathSets = await Promise.all(pathSetPromises);
+	const paths = _.flatten(pathSets);
+
 	return {
-		paths: await makeNumberedPaths(basePath, getCount),
+		paths,
 		fallback: true,
 	};
 };

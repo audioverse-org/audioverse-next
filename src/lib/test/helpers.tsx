@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import * as api from '@lib/api';
 import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
@@ -44,10 +43,6 @@ export function loadSermonListData({
 	});
 }
 
-export function setSermonCount(count: number): void {
-	jest.spyOn(api, 'getSermonCount').mockResolvedValue(count);
-}
-
 export function loadQuery(query: ParsedUrlQuery = {}): void {
 	loadRouter({ query });
 }
@@ -64,8 +59,8 @@ export function buildRenderer<
 	Component: C,
 	getStaticProps: F,
 	defaultParams: P = {} as P
-): (params?: P) => Promise<RenderResult> {
-	return async (params: P = {} as P): Promise<RenderResult> => {
+): (params?: Partial<P>) => Promise<RenderResult> {
+	return async (params: Partial<P> = {}): Promise<RenderResult> => {
 		const p = { ...defaultParams, ...params };
 		loadRouter({ query: p });
 		const { props } = await getStaticProps({ params: p });
@@ -83,7 +78,7 @@ export async function renderWithIntl<T>(
 	return renderWithQueryProvider(<WithIntl {...props} />);
 }
 
-// TODO: Merge with buildRenderer
+// TODO: Merge with buildRenderer, or just make it private
 export async function renderWithQueryProvider(
 	ui: ReactElement
 ): Promise<RenderResult & { queryClient: QueryClient }> {

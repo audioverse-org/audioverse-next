@@ -1,7 +1,7 @@
 import SermonList from '@containers/sermon/list';
-import { getSermonCount } from '@lib/api';
 import createFeed from '@lib/createFeed';
 import {
+	getSermonListPagePathsData,
 	getSermonListStaticProps,
 	GetSermonListStaticPropsQuery,
 } from '@lib/generated/graphql';
@@ -88,5 +88,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/all', getSermonCount);
+	return getNumberedStaticPaths(
+		'sermons/all',
+		({ language }) => getSermonListPagePathsData({ language, hasVideo: null }),
+		(d) => d?.sermons.aggregate?.count
+	);
 }

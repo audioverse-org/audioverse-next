@@ -1,5 +1,3 @@
-export * from '@lib/api/getSermonCount';
-export * from '@lib/api/getTestimonyCount';
 export * from '@lib/api/isRecordingFavorited';
 export * from '@lib/api/setRecordingFavorited';
 export * from '@lib/api/useIsRecordingFavorited';

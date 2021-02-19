@@ -1,6 +1,8 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
-import { getSermonCount } from '@lib/api';
-import { getSermonListStaticProps } from '@lib/generated/graphql';
+import {
+	getSermonListPagePathsData,
+	getSermonListStaticProps,
+} from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -45,7 +47,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/audio', (lang) => {
-		return getSermonCount(lang, { hasVideo: false });
-	});
+	return getNumberedStaticPaths(
+		'sermons/audio',
+		({ language }) => getSermonListPagePathsData({ language, hasVideo: false }),
+		(d) => d?.sermons.aggregate?.count
+	);
 }

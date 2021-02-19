@@ -37,8 +37,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('stories', async (language) => {
-		const response = await getStoriesPathData({ language });
-		return response.stories.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'stories',
+		getStoriesPathData,
+		(d) => d.stories.aggregate?.count
+	);
 }

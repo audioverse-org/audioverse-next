@@ -20,3 +20,11 @@ query getSermonListStaticProps(
         }
     }
 }
+
+query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
+    sermons(language: $language, hasVideo: $hasVideo) {
+        aggregate {
+            count
+        }
+    }
+}

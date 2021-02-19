@@ -986,6 +986,22 @@ export type MediaReleaseFormEdge = {
   node: MediaReleaseForm;
 };
 
+/** Content types of the media release form entities with content types. */
+export enum MediaReleaseFormEntityContentType {
+  Audiobook = 'AUDIOBOOK',
+  AudiobookSeries = 'AUDIOBOOK_SERIES',
+  AudiobookTrack = 'AUDIOBOOK_TRACK',
+  Conference = 'CONFERENCE',
+  MusicAlbum = 'MUSIC_ALBUM',
+  MusicSeries = 'MUSIC_SERIES',
+  MusicTrack = 'MUSIC_TRACK',
+  Series = 'SERIES',
+  Sermon = 'SERMON',
+  Story = 'STORY',
+  StoryProgram = 'STORY_PROGRAM',
+  StorySeason = 'STORY_SEASON'
+}
+
 export type MediaReleaseFormOrder = {
   direction: OrderByDirection;
   field: MediaReleaseFormSortableField;
@@ -1012,7 +1028,7 @@ export type MediaReleaseFormTemplate = {
   type: MediaReleaseFormType;
 };
 
-/** Supported types of media releases. */
+/** Supported types of media release forms. */
 export enum MediaReleaseFormType {
   Collection = 'COLLECTION',
   Master = 'MASTER',
@@ -2193,6 +2209,7 @@ export type QueryMediaReleaseFormArgs = {
 export type QueryMediaReleaseFormsArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  entityContentType: Maybe<MediaReleaseFormEntityContentType>;
   first: Maybe<Scalars['Int']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
@@ -4892,6 +4909,43 @@ export type GetHomeStaticPropsQuery = (
   ) }
 );
 
+export type GetPresenterListPageDataQueryVariables = Exact<{
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetPresenterListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { persons: (
+    { __typename?: 'PersonConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Person' }
+      & Pick<Person, 'id' | 'name'>
+    )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetPresenterListPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetPresenterListPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { persons: (
+    { __typename?: 'PersonConnection' }
+    & { aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5012,6 +5066,23 @@ export type GetSermonListStaticPropsQuery = (
       & RecordingListFragment
       & CreateFeedFragment
     )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetSermonListPagePathsDataQueryVariables = Exact<{
+  language: Language;
+  hasVideo: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type GetSermonListPagePathsDataQuery = (
+  { __typename?: 'Query' }
+  & { sermons: (
+    { __typename?: 'RecordingConnection' }
+    & { aggregate: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
     )> }
@@ -5342,14 +5413,14 @@ export type GetTagListPathsDataQuery = (
   ) }
 );
 
-export type GetTestimoniesQueryVariables = Exact<{
+export type GetTestimoniesPageDataQueryVariables = Exact<{
   language: Language;
   offset: Maybe<Scalars['Int']>;
   first: Maybe<Scalars['Int']>;
 }>;
 
 
-export type GetTestimoniesQuery = (
+export type GetTestimoniesPageDataQuery = (
   { __typename?: 'Query' }
   & { testimonies: (
     { __typename?: 'TestimonyConnection' }
@@ -5357,6 +5428,22 @@ export type GetTestimoniesQuery = (
       { __typename?: 'Testimony' }
       & Pick<Testimony, 'author' | 'body' | 'writtenDate'>
     )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetTestimoniesPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetTestimoniesPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { testimonies: (
+    { __typename?: 'TestimonyConnection' }
+    & { aggregate: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
     )> }
@@ -5936,6 +6023,52 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
+export const GetPresenterListPageDataDocument = `
+    query getPresenterListPageData($language: Language!, $offset: Int, $first: Int) {
+  persons(language: $language, offset: $offset, first: $first) {
+    nodes {
+      id
+      name
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetPresenterListPageDataQuery = <
+      TData = GetPresenterListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetPresenterListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPresenterListPageDataQuery, TError, TData>(
+      ['getPresenterListPageData', variables],
+      graphqlFetcher<GetPresenterListPageDataQuery, GetPresenterListPageDataQueryVariables>(GetPresenterListPageDataDocument, variables),
+      options
+    );
+export const GetPresenterListPathsDataDocument = `
+    query getPresenterListPathsData($language: Language!) {
+  persons(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetPresenterListPathsDataQuery = <
+      TData = GetPresenterListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterListPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetPresenterListPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPresenterListPathsDataQuery, TError, TData>(
+      ['getPresenterListPathsData', variables],
+      graphqlFetcher<GetPresenterListPathsDataQuery, GetPresenterListPathsDataQueryVariables>(GetPresenterListPathsDataDocument, variables),
+      options
+    );
 export const GetProfileDataDocument = `
     query getProfileData {
   me {
@@ -6100,6 +6233,27 @@ export const useGetSermonListStaticPropsQuery = <
     useQuery<GetSermonListStaticPropsQuery, TError, TData>(
       ['getSermonListStaticProps', variables],
       graphqlFetcher<GetSermonListStaticPropsQuery, GetSermonListStaticPropsQueryVariables>(GetSermonListStaticPropsDocument, variables),
+      options
+    );
+export const GetSermonListPagePathsDataDocument = `
+    query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
+  sermons(language: $language, hasVideo: $hasVideo) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetSermonListPagePathsDataQuery = <
+      TData = GetSermonListPagePathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSermonListPagePathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSermonListPagePathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSermonListPagePathsDataQuery, TError, TData>(
+      ['getSermonListPagePathsData', variables],
+      graphqlFetcher<GetSermonListPagePathsDataQuery, GetSermonListPagePathsDataQueryVariables>(GetSermonListPagePathsDataDocument, variables),
       options
     );
 export const GetSongAlbumPageDataDocument = `
@@ -6490,8 +6644,8 @@ export const useGetTagListPathsDataQuery = <
       graphqlFetcher<GetTagListPathsDataQuery, GetTagListPathsDataQueryVariables>(GetTagListPathsDataDocument, variables),
       options
     );
-export const GetTestimoniesDocument = `
-    query getTestimonies($language: Language!, $offset: Int, $first: Int) {
+export const GetTestimoniesPageDataDocument = `
+    query getTestimoniesPageData($language: Language!, $offset: Int, $first: Int) {
   testimonies(
     language: $language
     first: $first
@@ -6509,16 +6663,37 @@ export const GetTestimoniesDocument = `
   }
 }
     `;
-export const useGetTestimoniesQuery = <
-      TData = GetTestimoniesQuery,
+export const useGetTestimoniesPageDataQuery = <
+      TData = GetTestimoniesPageDataQuery,
       TError = unknown
     >(
-      variables: GetTestimoniesQueryVariables, 
-      options?: UseQueryOptions<GetTestimoniesQuery, TError, TData>
+      variables: GetTestimoniesPageDataQueryVariables, 
+      options?: UseQueryOptions<GetTestimoniesPageDataQuery, TError, TData>
     ) => 
-    useQuery<GetTestimoniesQuery, TError, TData>(
-      ['getTestimonies', variables],
-      graphqlFetcher<GetTestimoniesQuery, GetTestimoniesQueryVariables>(GetTestimoniesDocument, variables),
+    useQuery<GetTestimoniesPageDataQuery, TError, TData>(
+      ['getTestimoniesPageData', variables],
+      graphqlFetcher<GetTestimoniesPageDataQuery, GetTestimoniesPageDataQueryVariables>(GetTestimoniesPageDataDocument, variables),
+      options
+    );
+export const GetTestimoniesPathsDataDocument = `
+    query getTestimoniesPathsData($language: Language!) {
+  testimonies(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetTestimoniesPathsDataQuery = <
+      TData = GetTestimoniesPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetTestimoniesPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetTestimoniesPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetTestimoniesPathsDataQuery, TError, TData>(
+      ['getTestimoniesPathsData', variables],
+      graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, variables),
       options
     );
 export const AddPlaylistDocument = `
@@ -6538,7 +6713,7 @@ export const useAddPlaylistMutation = <
       (variables?: AddPlaylistMutationVariables) => graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(AddPlaylistDocument, variables)(),
       options
     );
-import { fetchApi } from '@lib/api/fetchApi'
+import { fetchApi } from '@lib/api/fetchApi' 
 
 
 							export async function getPlaylistButtonData<T>(
@@ -6636,6 +6811,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								return fetchApi(GetHomeStaticPropsDocument, { variables });
 							}
 
+							export async function getPresenterListPageData<T>(
+								variables: ExactAlt<T, GetPresenterListPageDataQueryVariables>
+							): Promise<GetPresenterListPageDataQuery> {
+								return fetchApi(GetPresenterListPageDataDocument, { variables });
+							}
+
+							export async function getPresenterListPathsData<T>(
+								variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
+							): Promise<GetPresenterListPathsDataQuery> {
+								return fetchApi(GetPresenterListPathsDataDocument, { variables });
+							}
+
 							export async function getProfileData<T>(
 								variables: ExactAlt<T, GetProfileDataQueryVariables>
 							): Promise<GetProfileDataQuery> {
@@ -6676,6 +6863,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetSermonListStaticPropsQueryVariables>
 							): Promise<GetSermonListStaticPropsQuery> {
 								return fetchApi(GetSermonListStaticPropsDocument, { variables });
+							}
+
+							export async function getSermonListPagePathsData<T>(
+								variables: ExactAlt<T, GetSermonListPagePathsDataQueryVariables>
+							): Promise<GetSermonListPagePathsDataQuery> {
+								return fetchApi(GetSermonListPagePathsDataDocument, { variables });
 							}
 
 							export async function getSongAlbumPageData<T>(
@@ -6775,9 +6968,15 @@ import { fetchApi } from '@lib/api/fetchApi'
 								return fetchApi(GetTagListPathsDataDocument, { variables });
 							}
 
-							export async function getTestimonies<T>(
-								variables: ExactAlt<T, GetTestimoniesQueryVariables>
-							): Promise<GetTestimoniesQuery> {
-								return fetchApi(GetTestimoniesDocument, { variables });
+							export async function getTestimoniesPageData<T>(
+								variables: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
+							): Promise<GetTestimoniesPageDataQuery> {
+								return fetchApi(GetTestimoniesPageDataDocument, { variables });
+							}
+
+							export async function getTestimoniesPathsData<T>(
+								variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
+							): Promise<GetTestimoniesPathsDataQuery> {
+								return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 							}
 

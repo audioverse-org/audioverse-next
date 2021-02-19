@@ -34,9 +34,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('conferences', async (language) => {
-		const response = await getConferenceListPathsData({ language });
-
-		return response?.conferences.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'conferences',
+		getConferenceListPathsData,
+		(d) => d?.conferences.aggregate?.count
+	);
 }

@@ -1,5 +1,7 @@
-import { getSermonCount } from '@lib/api';
-import { GetSermonListStaticPropsDocument } from '@lib/generated/graphql';
+import {
+	GetSermonListPagePathsDataDocument,
+	GetSermonListStaticPropsDocument,
+} from '@lib/generated/graphql';
 import {
 	buildRenderer,
 	loadRouter,
@@ -11,8 +13,6 @@ import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/audio/page/[i]';
 
-jest.mock('@lib/api/getSermonCount');
-
 const renderPage = buildRenderer(SermonList, getStaticProps, {
 	i: '1',
 	language: 'en',
@@ -22,7 +22,9 @@ describe('sermon audio list page', () => {
 	it('gets audio count', async () => {
 		await getStaticPaths();
 
-		expect(getSermonCount).toBeCalledWith('ENGLISH', { hasVideo: false });
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
+			variables: { language: 'ENGLISH', hasVideo: false },
+		});
 	});
 
 	it('gets audio filtered sermons', async () => {
