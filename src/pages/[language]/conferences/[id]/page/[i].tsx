@@ -22,7 +22,7 @@ type Recording = NonNullable<
 export type ConferenceStaticProps = PaginatedStaticProps<
 	GetConferenceDetailPageDataQuery,
 	Recording
->;
+> & { props: { rssPath: string } };
 
 export async function getStaticProps({
 	params,
@@ -46,7 +46,13 @@ export async function getStaticProps({
 		projectRelativePath: `public/en/conferences/${staticProps.props.data?.conference?.id}.xml`,
 	});
 
-	return staticProps;
+	return {
+		...staticProps,
+		props: {
+			...staticProps.props,
+			rssPath: `/en/conferences/${staticProps.props.data?.conference?.id}.xml`,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

@@ -315,6 +315,7 @@ describe('localization usage', () => {
 				nodes={[{ id: 'z' }] as any}
 				data={undefined as any}
 				pagination={undefined as any}
+				rssPath={''}
 			/>
 		);
 

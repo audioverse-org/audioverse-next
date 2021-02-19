@@ -141,8 +141,15 @@ describe('conference detail page', () => {
 			title: 'the_conference_title : AudioVerse',
 		});
 	});
-});
 
-// modify createFeed with better types to enforce required data on recording nodes
-// generates rss feed
-// links to rss feed
+	it('links to RSS feed', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('RSS')).toHaveAttribute(
+			'href',
+			'/en/conferences/the_conference_id.xml'
+		);
+	});
+});

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
@@ -9,7 +10,12 @@ import { ConferenceStaticProps } from '@pages/[language]/conferences/[id]/page/[
 
 type Props = ConferenceStaticProps['props'];
 
-function ConferenceDetail({ nodes, data, pagination }: Props): JSX.Element {
+function ConferenceDetail({
+	nodes,
+	data,
+	pagination,
+	rssPath,
+}: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const sponsorId = data?.conference?.sponsor?.id;
 
@@ -24,6 +30,13 @@ function ConferenceDetail({ nodes, data, pagination }: Props): JSX.Element {
 					{data?.conference?.sponsor?.title}
 				</a>
 			)}
+			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
+				<FormattedMessage
+					id="conferenceDetail__rssLink"
+					defaultMessage="RSS"
+					description="Conference detail RSS link"
+				/>
+			</a>
 			<RecordingList recordings={nodes} />
 			<Pagination
 				base={`/${languageRoute}/conferences/${data?.conference?.id}`}
