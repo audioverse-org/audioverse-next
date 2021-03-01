@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { PresenterStaticProps } from '@pages/[language]/presenters/[id]/page/[i]';
-import RecordingList from '@components/molecules/recordingList';
 import Pagination from '@components/molecules/pagination';
+import RecordingList from '@components/molecules/recordingList';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { PresenterStaticProps } from '@pages/[language]/presenters/[id]/page/[i]';
 
 type Props = PresenterStaticProps['props'];
 
