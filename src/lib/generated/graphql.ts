@@ -4922,7 +4922,11 @@ export type GetPresenterListPageDataQuery = (
     { __typename?: 'PersonConnection' }
     & { nodes: Maybe<Array<(
       { __typename?: 'Person' }
-      & Pick<Person, 'id' | 'name'>
+      & Pick<Person, 'id' | 'name' | 'summary'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ) }
     )>>, aggregate: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
@@ -6029,6 +6033,10 @@ export const GetPresenterListPageDataDocument = `
     nodes {
       id
       name
+      summary
+      imageWithFallback {
+        url(size: 100)
+      }
     }
     aggregate {
       count

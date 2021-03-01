@@ -10,12 +10,7 @@ import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import {
-	buildRenderer,
-	loadSermonListData,
-	mockedFetchApi,
-	mockFeed,
-} from '@lib/test/helpers';
+import { buildRenderer, mockedFetchApi, mockFeed } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -41,6 +36,26 @@ export function loadSermonListPagePathsData(count: number): void {
 				},
 			},
 		});
+}
+
+export function loadSermonListData({
+	nodes = undefined,
+	count = undefined,
+}: { nodes?: any[]; count?: number } = {}): void {
+	mockedFetchApi.mockResolvedValue({
+		sermons: {
+			nodes: nodes || [
+				{
+					id: 'the_sermon_id',
+					title: 'the_sermon_title',
+					videoFiles: [],
+				},
+			],
+			aggregate: {
+				count: count || 1,
+			},
+		},
+	});
 }
 
 describe('sermons list page', () => {

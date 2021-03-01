@@ -29,6 +29,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Presenters from '@containers/presenter/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -316,6 +317,18 @@ describe('localization usage', () => {
 				data={undefined as any}
 				pagination={undefined as any}
 				rssPath={''}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes presenter list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Presenters
+				nodes={[{ id: 'z' }] as any}
+				pagination={undefined as any}
+				data={undefined as any}
 			/>
 		);
 

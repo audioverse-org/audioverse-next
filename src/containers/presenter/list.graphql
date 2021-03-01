@@ -3,6 +3,10 @@ query getPresenterListPageData($language: Language!, $offset: Int, $first: Int) 
         nodes {
             id
             name
+            summary
+            imageWithFallback {
+                url(size: 100)
+            }
         }
         aggregate {
             count

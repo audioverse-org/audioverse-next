@@ -24,6 +24,10 @@ function loadData() {
 					{
 						id: 'the_person_id',
 						name: 'the_person_name',
+						summary: 'the_person_summary',
+						imageWithFallback: {
+							url: 'the_person_image',
+						},
 					},
 				],
 			},
@@ -72,7 +76,42 @@ describe('presenter list page', () => {
 
 		expect(paths).toContain('/en/presenters/page/1');
 	});
-});
 
-// renders page title
-// localizes page title >>
+	it('links presenters', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_person_name').parentElement).toHaveAttribute(
+			'href',
+			'/en/presenters/the_person_id'
+		);
+	});
+
+	it('includes presenter images', async () => {
+		loadData();
+
+		const { getByAltText } = await renderPage();
+
+		expect(getByAltText('the_person_name')).toHaveAttribute(
+			'src',
+			'the_person_image'
+		);
+	});
+
+	it('includes summaries', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_person_summary')).toBeInTheDocument();
+	});
+
+	it('renders page title', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Presenters')).toBeInTheDocument();
+	});
+});

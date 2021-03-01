@@ -23,26 +23,6 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 	return { addItem, rss2 };
 };
 
-export function loadSermonListData({
-	nodes = undefined,
-	count = undefined,
-}: { nodes?: any[]; count?: number } = {}): void {
-	mockedFetchApi.mockResolvedValue({
-		sermons: {
-			nodes: nodes || [
-				{
-					id: 'the_sermon_id',
-					title: 'the_sermon_title',
-					videoFiles: [],
-				},
-			],
-			aggregate: {
-				count: count || 1,
-			},
-		},
-	});
-}
-
 export function loadQuery(query: ParsedUrlQuery = {}): void {
 	loadRouter({ query });
 }
@@ -68,7 +48,7 @@ export function buildRenderer<
 	};
 }
 
-// TODO: Merge with buildRenderer
+// TODO: Merge with buildRenderer, or just make it private
 export async function renderWithIntl<T>(
 	Component: React.ComponentType<T>,
 	props: T

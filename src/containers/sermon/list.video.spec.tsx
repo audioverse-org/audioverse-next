@@ -1,13 +1,12 @@
-import { loadSermonListPagePathsData } from '@containers/sermon/list.all.spec';
+import {
+	loadSermonListData,
+	loadSermonListPagePathsData,
+} from '@containers/sermon/list.all.spec';
 import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import {
-	buildRenderer,
-	loadSermonListData,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/video/page/[i]';
 import SermonList, {
 	getStaticProps,

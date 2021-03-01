@@ -2,16 +2,12 @@ import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import {
-	buildRenderer,
-	loadRouter,
-	loadSermonListData,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildRenderer, loadRouter, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/audio/page/[i]';
+import { loadSermonListData } from '@containers/sermon/list.all.spec';
 
 const renderPage = buildRenderer(SermonList, getStaticProps, {
 	i: '1',
