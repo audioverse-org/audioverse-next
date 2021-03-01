@@ -1,5 +1,4 @@
 import TagDetail from '@containers/tag/detail';
-import createFeed from '@lib/createFeed';
 import {
 	getTagDetailPageData,
 	GetTagDetailPageDataQuery,
@@ -13,6 +12,7 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 import { makeTagRoute } from '@lib/routes';
+import writeFeedFile from '@lib/writeFeedFile';
 
 export default TagDetail;
 
@@ -53,7 +53,7 @@ const generateRssFeed = async (
 	);
 
 	if (i === '1' && response.props.nodes) {
-		await createFeed({
+		await writeFeedFile({
 			recordings: response.props.nodes,
 			projectRelativePath: `public/${languageRoute}/tags/${slug}.xml`,
 			title,
@@ -92,7 +92,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	// TODO: eventually switch to using API-supplied canonical URL
 	return getDetailStaticPaths(
 		getTagDetailPathsQuery,
-		'tags.nodes',
+		(d) => d.tags.nodes,
 		(languageRoute, node) => makeTagRoute(languageRoute, node.name)
 	);
 }

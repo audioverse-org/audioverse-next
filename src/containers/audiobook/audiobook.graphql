@@ -17,7 +17,7 @@ query getAudiobookDetailPageData($id: ID!) {
                     filesize
                 }
                 ...copyrightInfo
-                ...createFeed
+                ...writeFeedFile
             }
         }
         shareUrl

@@ -11,7 +11,7 @@ query getConferenceDetailPageData($id: ID!, $offset: Int, $first: Int) {
         recordings(offset: $offset, first: $first) {
             nodes {
                 ...recordingList
-                ...createFeed
+                ...writeFeedFile
             }
             aggregate {
                 count

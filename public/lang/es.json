@@ -1,8 +1,8 @@
 {
   "feed-title": {
     "col": 34,
-    "defaultMessage": "Grabaciones Recientes de AudioVerse ({lang})",
-    "description": "All sermons feed title",
+    "defaultMessage": "{identifier} | AudioVerse {lang}",
+    "description": "Generic feed title",
     "end": 1126,
     "file": "src/pages/[language]/sermons/all/page/[i].tsx",
     "line": 35,
@@ -16,5 +16,14 @@
     "file": "src/components/organisms/testimonies.tsx",
     "line": 7,
     "start": 136
+  },
+  "sermons-all-rss-identifier": {
+    "col": 22,
+    "defaultMessage": "Grabaciones Recientes",
+    "description": "All sermons RSS feed pretty identifier",
+    "end": 1383,
+    "file": "src/pages/[language]/sermons/all/page/[i].tsx",
+    "line": 49,
+    "start": 1245
   }
 }

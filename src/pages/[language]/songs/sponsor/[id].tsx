@@ -33,7 +33,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSongSponsorPathsData,
-		'sponsors.nodes',
+		(d) => d.sponsors.nodes,
 		(languageRoute, node) => makeSponsorMusicRoute(languageRoute, node.id)
 	);
 }

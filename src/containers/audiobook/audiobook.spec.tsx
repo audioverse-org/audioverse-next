@@ -2,20 +2,20 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import videojs from 'video.js';
 
-import createFeed from '@lib/createFeed';
 import {
 	GetAudiobookDetailPageDataDocument,
 	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import writeFeedFile from '@lib/writeFeedFile';
 import Audiobook, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/books/[id]';
 
 jest.mock('video.js');
-jest.mock('@lib/createFeed');
+jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildRenderer(Audiobook, getStaticProps, {
 	language: 'en',
@@ -259,7 +259,7 @@ describe('audiobook detail page', () => {
 			params: { language: 'en', id: 'the_book_id' },
 		});
 
-		expect(createFeed).toBeCalledWith({
+		expect(writeFeedFile).toBeCalledWith({
 			recordings: expect.any(Array),
 			projectRelativePath: 'public/en/books/the_book_id.xml',
 			title: 'the_book_title : AudioVerse audiobook',

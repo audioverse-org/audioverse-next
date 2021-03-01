@@ -402,10 +402,12 @@ export type CollectionRecordingsArgs = {
   after: Maybe<Scalars['String']>;
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -422,6 +424,7 @@ export type CollectionRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -546,9 +549,11 @@ export type DistributionAgreementRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -565,6 +570,7 @@ export type DistributionAgreementRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -1200,6 +1206,7 @@ export type Mutation = {
   playlistUpdate: UserPlaylist;
   recordingArchive: SuccessPayload;
   recordingCreate: RecordingPayload;
+  recordingDelete: SuccessPayload;
   /** Advances a recording from or withdraws a recording to draft stage. */
   recordingDrafting: RecordingPayload;
   recordingFavorite: SuccessPayload;
@@ -1485,6 +1492,11 @@ export type MutationRecordingCreateArgs = {
 };
 
 
+export type MutationRecordingDeleteArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
 export type MutationRecordingDraftingArgs = {
   finished: Scalars['Boolean'];
   recordingId: Scalars['ID'];
@@ -1755,11 +1767,13 @@ export type PersonRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -1775,6 +1789,7 @@ export type PersonRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
   withRole: Maybe<PersonsRoleField>;
 };
@@ -2035,11 +2050,13 @@ export type QueryAudiobookTracksArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -2056,6 +2073,7 @@ export type QueryAudiobookTracksArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2144,12 +2162,14 @@ export type QueryFeaturedRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   person: Maybe<RecordingPersonInput>;
@@ -2165,6 +2185,7 @@ export type QueryFeaturedRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2304,11 +2325,13 @@ export type QueryMusicTracksArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -2325,6 +2348,7 @@ export type QueryMusicTracksArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2352,12 +2376,14 @@ export type QueryPopularRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   person: Maybe<RecordingPersonInput>;
@@ -2373,6 +2399,7 @@ export type QueryPopularRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2387,12 +2414,14 @@ export type QueryRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -2409,6 +2438,7 @@ export type QueryRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2474,11 +2504,13 @@ export type QuerySermonsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -2495,6 +2527,7 @@ export type QuerySermonsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -2521,11 +2554,13 @@ export type QueryStoriesArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -2542,6 +2577,7 @@ export type QueryStoriesArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -3142,10 +3178,12 @@ export type SequenceRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   person: Maybe<RecordingPersonInput>;
@@ -3160,6 +3198,7 @@ export type SequenceRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -3303,11 +3342,13 @@ export type SponsorRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -3323,6 +3364,7 @@ export type SponsorRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -3434,11 +3476,13 @@ export type TagRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: Maybe<RecordingContentType>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -3453,6 +3497,7 @@ export type TagRecordingsArgs = {
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -4116,10 +4161,12 @@ export type UserFavoriteRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   orderBy: Maybe<Array<RecordingsOrder>>;
@@ -4136,6 +4183,7 @@ export type UserFavoriteRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -4314,10 +4362,12 @@ export type UserPlaylistRecordingsArgs = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
   collectionIds: Maybe<Array<Scalars['ID']>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   distributionAgreementId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
   person: Maybe<RecordingPersonInput>;
@@ -4333,6 +4383,7 @@ export type UserPlaylistRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
 
@@ -4649,7 +4700,7 @@ export type GetAudiobookDetailPageDataQuery = (
           & Pick<AudioFile, 'url' | 'filesize'>
         )> }
         & CopyrightInfoFragment
-        & CreateFeedFragment
+        & WriteFeedFileFragment
       )>> }
     ) }
   )> }
@@ -4823,7 +4874,7 @@ export type GetConferenceDetailPageDataQuery = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & RecordingListFragment
-        & CreateFeedFragment
+        & WriteFeedFileFragment
       )>>, aggregate: Maybe<(
         { __typename?: 'Aggregate' }
         & Pick<Aggregate, 'count'>
@@ -4905,6 +4956,49 @@ export type GetHomeStaticPropsQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
       & RecordingListFragment
+    )>> }
+  ) }
+);
+
+export type GetPresenterDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetPresenterDetailPageDataQuery = (
+  { __typename?: 'Query' }
+  & { person: Maybe<(
+    { __typename?: 'Person' }
+    & Pick<Person, 'name'>
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & Pick<Recording, 'title'>
+        & WriteFeedFileFragment
+      )>>, aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
+);
+
+export type GetPresenterDetailPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetPresenterDetailPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { persons: (
+    { __typename?: 'PersonConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Person' }
+      & Pick<Person, 'id'>
     )>> }
   ) }
 );
@@ -5068,7 +5162,7 @@ export type GetSermonListStaticPropsQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
       & RecordingListFragment
-      & CreateFeedFragment
+      & WriteFeedFileFragment
     )>>, aggregate: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
@@ -5355,7 +5449,7 @@ export type GetTagDetailPageDataQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
       & RecordingListFragment
-      & CreateFeedFragment
+      & WriteFeedFileFragment
     )>>, aggregate: Maybe<(
       { __typename?: 'Aggregate' }
       & Pick<Aggregate, 'count'>
@@ -5470,7 +5564,7 @@ export type AddPlaylistMutation = (
   ) }
 );
 
-export type CreateFeedFragment = (
+export type WriteFeedFileFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'title' | 'description' | 'canonicalUrl' | 'recordingDate'>
   & { audioFiles: Array<(
@@ -5617,8 +5711,8 @@ export const SongFragmentDoc = `
 }
     ${PlaylistFragmentDoc}
 ${RecordingFragmentDoc}`;
-export const CreateFeedFragmentDoc = `
-    fragment createFeed on Recording {
+export const WriteFeedFileFragmentDoc = `
+    fragment writeFeedFile on Recording {
   title
   description
   canonicalUrl
@@ -5680,7 +5774,7 @@ export const GetAudiobookDetailPageDataDocument = `
           filesize
         }
         ...copyrightInfo
-        ...createFeed
+        ...writeFeedFile
       }
     }
     shareUrl
@@ -5688,7 +5782,7 @@ export const GetAudiobookDetailPageDataDocument = `
 }
     ${SponsorInfoFragmentDoc}
 ${CopyrightInfoFragmentDoc}
-${CreateFeedFragmentDoc}`;
+${WriteFeedFileFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
       TError = unknown
@@ -5911,7 +6005,7 @@ export const GetConferenceDetailPageDataDocument = `
     recordings(offset: $offset, first: $first) {
       nodes {
         ...recordingList
-        ...createFeed
+        ...writeFeedFile
       }
       aggregate {
         count
@@ -5920,7 +6014,7 @@ export const GetConferenceDetailPageDataDocument = `
   }
 }
     ${RecordingListFragmentDoc}
-${CreateFeedFragmentDoc}`;
+${WriteFeedFileFragmentDoc}`;
 export const useGetConferenceDetailPageDataQuery = <
       TData = GetConferenceDetailPageDataQuery,
       TError = unknown
@@ -6025,6 +6119,55 @@ export const useGetHomeStaticPropsQuery = <
     useQuery<GetHomeStaticPropsQuery, TError, TData>(
       ['getHomeStaticProps', variables],
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
+      options
+    );
+export const GetPresenterDetailPageDataDocument = `
+    query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
+  person(id: $id) {
+    name
+    recordings(offset: $offset, first: $first) {
+      nodes {
+        title
+        ...writeFeedFile
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${WriteFeedFileFragmentDoc}`;
+export const useGetPresenterDetailPageDataQuery = <
+      TData = GetPresenterDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterDetailPageDataQueryVariables, 
+      options?: UseQueryOptions<GetPresenterDetailPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPresenterDetailPageDataQuery, TError, TData>(
+      ['getPresenterDetailPageData', variables],
+      graphqlFetcher<GetPresenterDetailPageDataQuery, GetPresenterDetailPageDataQueryVariables>(GetPresenterDetailPageDataDocument, variables),
+      options
+    );
+export const GetPresenterDetailPathsDataDocument = `
+    query getPresenterDetailPathsData($language: Language!, $first: Int) {
+  persons(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetPresenterDetailPathsDataQuery = <
+      TData = GetPresenterDetailPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetPresenterDetailPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetPresenterDetailPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPresenterDetailPathsDataQuery, TError, TData>(
+      ['getPresenterDetailPathsData', variables],
+      graphqlFetcher<GetPresenterDetailPathsDataQuery, GetPresenterDetailPathsDataQueryVariables>(GetPresenterDetailPathsDataDocument, variables),
       options
     );
 export const GetPresenterListPageDataDocument = `
@@ -6222,7 +6365,7 @@ export const GetSermonListStaticPropsDocument = `
   ) {
     nodes {
       ...recordingList
-      ...createFeed
+      ...writeFeedFile
     }
     aggregate {
       count
@@ -6230,7 +6373,7 @@ export const GetSermonListStaticPropsDocument = `
   }
 }
     ${RecordingListFragmentDoc}
-${CreateFeedFragmentDoc}`;
+${WriteFeedFileFragmentDoc}`;
 export const useGetSermonListStaticPropsQuery = <
       TData = GetSermonListStaticPropsQuery,
       TError = unknown
@@ -6564,7 +6707,7 @@ export const GetTagDetailPageDataDocument = `
   ) {
     nodes {
       ...recordingList
-      ...createFeed
+      ...writeFeedFile
     }
     aggregate {
       count
@@ -6572,7 +6715,7 @@ export const GetTagDetailPageDataDocument = `
   }
 }
     ${RecordingListFragmentDoc}
-${CreateFeedFragmentDoc}`;
+${WriteFeedFileFragmentDoc}`;
 export const useGetTagDetailPageDataQuery = <
       TData = GetTagDetailPageDataQuery,
       TError = unknown
@@ -6817,6 +6960,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 							): Promise<GetHomeStaticPropsQuery> {
 								return fetchApi(GetHomeStaticPropsDocument, { variables });
+							}
+
+							export async function getPresenterDetailPageData<T>(
+								variables: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>
+							): Promise<GetPresenterDetailPageDataQuery> {
+								return fetchApi(GetPresenterDetailPageDataDocument, { variables });
+							}
+
+							export async function getPresenterDetailPathsData<T>(
+								variables: ExactAlt<T, GetPresenterDetailPathsDataQueryVariables>
+							): Promise<GetPresenterDetailPathsDataQuery> {
+								return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 							}
 
 							export async function getPresenterListPageData<T>(

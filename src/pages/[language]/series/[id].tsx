@@ -32,7 +32,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
-		'serieses.nodes',
+		(d) => d.serieses.nodes,
 		(baseUrl, node) => makeSeriesRoute(baseUrl, node.id)
 	);
 }

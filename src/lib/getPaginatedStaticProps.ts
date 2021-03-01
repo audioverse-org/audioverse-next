@@ -3,19 +3,19 @@ import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 // TODO: Improve nodes type
-export interface PaginatedStaticProps<T, N> {
+export interface PaginatedStaticProps<DATA, NODE> {
 	props: {
-		nodes: N[];
+		nodes: NODE[];
 		pagination: {
 			total: number;
 			current: number;
 		};
-		data: T | null;
+		data: DATA | null;
 	};
 	revalidate: number;
 }
 
-interface Getter<T> {
+interface Getter<DATA> {
 	({
 		language,
 		offset,
@@ -24,18 +24,18 @@ interface Getter<T> {
 		language: Language;
 		offset: number;
 		first: number;
-	}): Promise<T>;
+	}): Promise<DATA>;
 }
 
-export async function getPaginatedStaticProps<T, N>(
+export async function getPaginatedStaticProps<DATA, NODE>(
 	params: {
 		language: string;
 		i: number | string;
 	},
-	getter: Getter<T>,
-	parseNodes: (data: T) => N[] | null | undefined,
-	parseCount: (count: T) => number | null | undefined
-): Promise<PaginatedStaticProps<T, N>> {
+	getter: Getter<DATA>,
+	parseNodes: (data: DATA) => NODE[] | null | undefined,
+	parseCount: (count: DATA) => number | null | undefined
+): Promise<PaginatedStaticProps<DATA, NODE>> {
 	const { language: languageRoute, i: pageIndex } = params;
 
 	const data = await getter({

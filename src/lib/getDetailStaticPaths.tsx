@@ -3,26 +3,27 @@ import _ from 'lodash';
 import { DETAIL_PRERENDER_LIMIT, LANGUAGES } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 
-type Getter = (variables: { language: Language; first: number }) => any;
+type Getter<DATA> = (variables: {
+	language: Language;
+	first: number;
+}) => Promise<DATA>;
 
-// TODO: Improve types such that nodesPath is required to be a
-//  valid path in the getter return type
-export async function getDetailStaticPaths(
-	getter: Getter,
-	nodesPath: string,
-	pathMapper: (languageRoute: string, node: any) => string
+export async function getDetailStaticPaths<DATA, NODE>(
+	getter: Getter<DATA>,
+	parseNodes: (data: DATA) => NODE[] | null | undefined,
+	pathMapper: (languageRoute: string, node: NODE) => string
 ): Promise<StaticPaths> {
 	const languages = _.values(Language);
 
 	const pathSetPromises = languages.map(async (l: Language) => {
-		const result = await getter({
+		const data = await getter({
 			language: l,
 			first: DETAIL_PRERENDER_LIMIT,
 		});
-		const nodes = _.get(result, nodesPath, []);
+		const nodes = (data && parseNodes(data)) || [];
 		const languageRoute = LANGUAGES[l].base_url;
 
-		return nodes.map((n: any) => pathMapper(languageRoute, n)) || [];
+		return nodes.map((n: any) => pathMapper(languageRoute, n));
 	});
 
 	const pathSets = await Promise.all(pathSetPromises);

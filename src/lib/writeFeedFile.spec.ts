@@ -5,15 +5,15 @@ import * as feed from 'feed';
 import { PROJECT_ROOT } from '@lib/constants';
 import { mockFeed } from '@lib/test/helpers';
 
-import createFeed from './createFeed';
+import writeFeedFile from './writeFeedFile';
 
 jest.mock('fs');
 
-describe('createFeed', () => {
+describe('writeFeedFile', () => {
 	it('can be called', async () => {
 		mockFeed();
 
-		await createFeed({ recordings: [], title: '', projectRelativePath: '' });
+		await writeFeedFile({ recordings: [], title: '', projectRelativePath: '' });
 
 		expect(fs.writeFileSync).toBeCalled();
 	});
@@ -21,7 +21,7 @@ describe('createFeed', () => {
 	it('makes feed', async () => {
 		mockFeed();
 
-		await createFeed({ recordings: [], title: '', projectRelativePath: '' });
+		await writeFeedFile({ recordings: [], title: '', projectRelativePath: '' });
 
 		expect(feed.Feed).toBeCalled();
 	});
@@ -29,7 +29,7 @@ describe('createFeed', () => {
 	it('writes file', async () => {
 		const { addItem } = mockFeed();
 
-		await createFeed({
+		await writeFeedFile({
 			recordings: [
 				{
 					audioFiles: [
@@ -49,7 +49,7 @@ describe('createFeed', () => {
 	it('includes feed title', async () => {
 		const { rss2 } = mockFeed();
 
-		await createFeed({
+		await writeFeedFile({
 			recordings: [],
 			title: 'the_title',
 			projectRelativePath: '',
@@ -63,7 +63,7 @@ describe('createFeed', () => {
 
 		rss2.mockReturnValue('content');
 
-		await createFeed({
+		await writeFeedFile({
 			recordings: [],
 			title: 'the_title',
 			projectRelativePath: 'the/out/file.xml',
@@ -79,7 +79,7 @@ describe('createFeed', () => {
 		mockFeed();
 
 		await expect(async () =>
-			createFeed({
+			writeFeedFile({
 				recordings: [],
 				title: '',
 				projectRelativePath: '../out.xml',
@@ -90,7 +90,7 @@ describe('createFeed', () => {
 	it('creates folder tree', async () => {
 		mockFeed();
 
-		await createFeed({
+		await writeFeedFile({
 			recordings: [],
 			title: 'the_title',
 			projectRelativePath: 'the/out/file.xml',
@@ -104,7 +104,7 @@ describe('createFeed', () => {
 	it('includes adds item', async () => {
 		const { addItem } = mockFeed();
 
-		await createFeed({
+		await writeFeedFile({
 			recordings: [
 				{
 					title: 'recording_title',

@@ -1,68 +1,44 @@
-import fs from 'fs';
-import { dirname, resolve } from 'path';
+import { WriteFeedFileFragment } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
+import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
+import writeFeedFile from '@lib/writeFeedFile';
 
-import { Feed } from 'feed';
-import _ from 'lodash';
+// TODO: Make all pages use this function for feed gen
 
-import { PROJECT_ROOT } from '@lib/constants';
-import { CreateFeedFragment } from '@lib/generated/graphql';
+export async function createFeed(
+	prettyIdentifier: string | undefined,
+	params: { language: string },
+	recordings: WriteFeedFileFragment[],
+	languageRelativePath: string
+): Promise<string | null> {
+	const { language: languageRoute } = params;
+	const languageName = getLanguageByBaseUrl(languageRoute)?.display_name;
 
-interface CreateFeedProps {
-	recordings: CreateFeedFragment[];
-	title: string;
-	projectRelativePath: string;
-}
+	if (!prettyIdentifier || !recordings || !languageName) return null;
 
-export default async function createFeed({
-	recordings,
-	title,
-	projectRelativePath,
-}: CreateFeedProps): Promise<void> {
-	// https://github.com/avorg/wp-avorg-plugin/blob/master/view/page-feed.twig
-	// TODO: copyright
-	// TODO: itunes:subtitle
-	// TODO: id?
-	// TODO: itunes:explicit
-	// TODO: link
-	// TODO: atom:link
-	// TODO: itunes:author
-	// TODO: image
-	// TODO: categories
-	const feed = new Feed({
-		id: '',
+	const intl = getIntl(languageRoute);
+
+	// TODO: Switch to automatic ID generation:
+	// https://formatjs.io/docs/getting-started/message-extraction/#automatic-id-generation
+	const title = intl.formatMessage(
+		{
+			id: 'feed-title',
+			defaultMessage: '{identifier} | AudioVerse {lang}',
+			description: 'Generic feed title',
+		},
+		{
+			identifier: prettyIdentifier,
+			lang: languageName,
+		}
+	);
+
+	const webPath = `/${languageRoute}/${languageRelativePath}`;
+
+	await writeFeedFile({
+		recordings,
+		projectRelativePath: `public${webPath}`,
 		title,
-		copyright: '',
 	});
 
-	recordings.map((r) => {
-		const file = _.get(r, 'audioFiles[0]') || _.get(r, 'videoFiles[0]');
-		const url = _.get(file, 'url');
-		const length = _.get(file, 'filesize');
-
-		if (!url) return;
-
-		// https://github.com/avorg/wp-avorg-plugin/blob/master/view/page-feed.twig
-		// TODO: Add image
-		// TODO: Add itunes:subtitle
-		// TODO: Add itunes:author
-		// TODO: Add pubDate (?)
-		// TODO: Add itunes:duration
-		feed.addItem({
-			title: r.title,
-			description: r.description || undefined,
-			link: r.canonicalUrl,
-			date: new Date(r.recordingDate),
-			enclosure: { url, length },
-		});
-	});
-
-	const path = resolve(PROJECT_ROOT, projectRelativePath);
-
-	if (!path.startsWith(PROJECT_ROOT)) {
-		throw new Error('Path not within project');
-	}
-
-	fs.mkdirSync(dirname(path), { recursive: true });
-
-	fs.writeFileSync(path, feed.rss2());
+	return webPath;
 }

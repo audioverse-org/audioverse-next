@@ -31,7 +31,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	// TODO: extract route generation
 	return getDetailStaticPaths(
 		getSermonDetailStaticPaths,
-		'sermons.nodes',
+		(d) => d.sermons.nodes,
 		(baseUrl, node) => makeSermonRoute(baseUrl, node.id)
 	);
 }

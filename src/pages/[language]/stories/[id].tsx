@@ -41,7 +41,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getStoryDetailPathsData,
-		'stories.nodes',
+		(d) => d.stories.nodes,
 		(languageRoute, node) => makeStoryRoute(languageRoute, node.id)
 	);
 }

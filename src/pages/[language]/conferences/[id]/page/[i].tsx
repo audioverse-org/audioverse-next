@@ -1,5 +1,4 @@
 import ConferenceDetail from '@containers/conference/detail';
-import createFeed from '@lib/createFeed';
 import {
 	getConferenceDetailPageData,
 	GetConferenceDetailPageDataQuery,
@@ -11,6 +10,7 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 import { makeConferenceRoute } from '@lib/routes';
+import writeFeedFile from '@lib/writeFeedFile';
 
 export default ConferenceDetail;
 
@@ -40,7 +40,8 @@ export async function getStaticProps({
 	);
 
 	// TODO: Standardize on an RSS feed naming convention
-	await createFeed({
+	// TODO: Only generate feed on page 1 !!BUG
+	await writeFeedFile({
 		recordings: staticProps.props.nodes,
 		title: `${staticProps.props.data?.conference?.title} : AudioVerse`,
 		projectRelativePath: `public/en/conferences/${staticProps.props.data?.conference?.id}.xml`,
@@ -58,7 +59,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getConferenceDetailPathsData,
-		'conferences.nodes',
+		(d) => d.conferences.nodes,
 		(languageRoute, node) => makeConferenceRoute(languageRoute, node.id, 1)
 	);
 }

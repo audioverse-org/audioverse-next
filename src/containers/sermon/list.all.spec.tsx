@@ -251,7 +251,7 @@ describe('sermons list page', () => {
 		expect(result.paths).not.toContain('/en/sermons/video/page/1');
 	});
 
-	it('calls createFeed', async () => {
+	it('calls writeFeedFile', async () => {
 		loadSermonListData();
 
 		await renderPage();
@@ -333,7 +333,7 @@ describe('sermons list page', () => {
 
 		const calls = (feed.Feed as any).mock.calls;
 
-		expect(calls[0][0].title).toEqual('AudioVerse Recent Recordings (English)');
+		expect(calls[0][0].title).toEqual('All Sermons | AudioVerse English');
 	});
 
 	it('translates feed titles', async () => {
@@ -345,7 +345,7 @@ describe('sermons list page', () => {
 		const calls = (feed.Feed as any).mock.calls;
 
 		expect(calls[0][0].title).toEqual(
-			'Grabaciones Recientes de AudioVerse (Español)'
+			'Grabaciones Recientes | AudioVerse Español'
 		);
 	});
 

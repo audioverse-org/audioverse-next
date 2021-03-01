@@ -34,7 +34,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSongAlbumPathsData,
-		'musicAlbums.nodes',
+		(d) => d.musicAlbums.nodes,
 		(languageRoute, node) => makeAlbumRoute(languageRoute, node.id)
 	);
 }

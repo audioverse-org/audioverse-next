@@ -14,7 +14,7 @@ import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
 
-// TODO: Delete this and mock @lib/createFeed instead, except in createFeed.spec.ts
+// TODO: Delete this and mock @lib/writeFeedFile instead, except in writeFeedFile.spec.ts
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
 	const rss2 = jest.fn();

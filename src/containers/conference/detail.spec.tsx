@@ -1,18 +1,18 @@
 import { when } from 'jest-when';
 
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import createFeed from '@lib/createFeed';
 import {
 	GetConferenceDetailPageDataDocument,
 	GetConferenceDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import writeFeedFile from '@lib/writeFeedFile';
 import ConferenceDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/page/[i]';
 
-jest.mock('@lib/createFeed');
+jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildRenderer(ConferenceDetail, getStaticProps, {
 	language: 'en',
@@ -135,7 +135,7 @@ describe('conference detail page', () => {
 			params: { language: 'en', id: 'the_conference_id', i: '1' },
 		});
 
-		expect(createFeed).toBeCalledWith({
+		expect(writeFeedFile).toBeCalledWith({
 			recordings: expect.any(Array),
 			projectRelativePath: 'public/en/conferences/the_conference_id.xml',
 			title: 'the_conference_title : AudioVerse',

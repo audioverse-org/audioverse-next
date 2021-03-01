@@ -1,12 +1,11 @@
 import SermonList from '@containers/sermon/list';
-import createFeed from '@lib/createFeed';
+import { createFeed } from '@lib/createFeed';
 import {
 	getSermonListPagePathsData,
 	getSermonListStaticProps,
 	GetSermonListStaticPropsQuery,
 } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
-import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
 	getPaginatedStaticProps,
@@ -28,41 +27,10 @@ interface GetStaticPropsArgs {
 	params: { i: string; language: string };
 }
 
-const generateRssFeed = async (
-	params: GetStaticPropsArgs['params'],
-	response: PaginatedProps
-) => {
-	const { i, language: languageRoute } = params;
-	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
-
-	if (!display_name) return;
-
-	const intl = getIntl(languageRoute);
-
-	const title = intl.formatMessage(
-		{
-			id: 'feed-title',
-			defaultMessage: 'AudioVerse Recent Recordings: {lang}',
-			description: 'All sermons feed title',
-		},
-		{
-			lang: display_name,
-		}
-	);
-
-	if (i === '1' && response.props.nodes) {
-		await createFeed({
-			recordings: response.props.nodes,
-			projectRelativePath: `public/${languageRoute}/sermons/all.xml`,
-			title,
-		});
-	}
-};
-
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { language: base_url } = params;
+	const { language: base_url, i } = params;
 
 	const response = await getPaginatedStaticProps(
 		params,
@@ -75,7 +43,19 @@ export async function getStaticProps({
 		(d) => d.sermons.aggregate?.count
 	);
 
-	await generateRssFeed(params, response);
+	if (i == '1') {
+		const intl = getIntl(base_url);
+		await createFeed(
+			intl.formatMessage({
+				id: 'sermons-all-rss-identifier',
+				defaultMessage: 'All Sermons',
+				description: 'All sermons RSS feed pretty identifier',
+			}),
+			params,
+			response.props.nodes,
+			'sermons/all.xml'
+		);
+	}
 
 	return {
 		...response,

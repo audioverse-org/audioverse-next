@@ -1,16 +1,22 @@
 {
   "feed-title": [
     {
+      "type": 1,
+      "value": "identifier"
+    },
+    {
       "type": 0,
-      "value": "Grabaciones Recientes de AudioVerse ("
+      "value": " | AudioVerse "
     },
     {
       "type": 1,
       "value": "lang"
-    },
+    }
+  ],
+  "sermons-all-rss-identifier": [
     {
       "type": 0,
-      "value": ")"
+      "value": "Grabaciones Recientes"
     }
   ],
   "title": [

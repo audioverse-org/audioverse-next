@@ -1,6 +1,5 @@
 import Audiobook, { AudiobookProps } from '@containers/audiobook/audiobook';
 import { REVALIDATE } from '@lib/constants';
-import createFeed from '@lib/createFeed';
 import {
 	getAudiobookDetailPageData,
 	getAudiobookDetailPathsData,
@@ -8,6 +7,7 @@ import {
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { makeAudiobookRoute } from '@lib/routes';
+import writeFeedFile from '@lib/writeFeedFile';
 
 export default Audiobook;
 
@@ -45,7 +45,7 @@ const generateRssFeed = async (
 	const webPath = `/${languageRoute}/books/${id}.xml`;
 
 	if (audiobook?.recordings.nodes) {
-		await createFeed({
+		await writeFeedFile({
 			recordings: audiobook?.recordings.nodes,
 			projectRelativePath: `public${webPath}`,
 			title,
@@ -74,7 +74,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getAudiobookDetailPathsData,
-		'audiobooks.nodes',
+		(d) => d.audiobooks.nodes,
 		(languageRoute, node) => makeAudiobookRoute(languageRoute, node.id)
 	);
 }

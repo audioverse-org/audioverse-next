@@ -39,7 +39,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSongDetailTagPathsData,
-		'musicMoodTags.nodes',
+		(d) => d.musicMoodTags.nodes,
 		(languageRoute, node) => makeTagMusicRoute(languageRoute, node.name)
 	);
 }
