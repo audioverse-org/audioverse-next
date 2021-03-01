@@ -1,11 +1,11 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
+import { makePersonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { PresentersStaticProps } from '@pages/[language]/presenters/page/[i]';
-import { makePersonRoute } from '@lib/routes';
-import { FormattedMessage } from 'react-intl';
 
 type Props = PresentersStaticProps['props'];
 
