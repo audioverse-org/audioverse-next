@@ -24,11 +24,13 @@ function loadData() {
 		.calledWith(GetPresenterDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			person: {
-				name: 'the_person_name',
+				id: 'the_presenter_id',
+				name: 'the_presenter_name',
 				recordings: {
 					nodes: [
 						{
 							id: 'the_recording_id',
+							title: 'the_recording_title',
 						},
 					],
 				},
@@ -70,7 +72,7 @@ describe('presenter detail page', () => {
 		expect(writeFeedFile).toBeCalledWith({
 			recordings: expect.any(Array),
 			projectRelativePath: 'public/en/presenters/the_presenter_id.xml',
-			title: 'the_person_name | AudioVerse English',
+			title: 'the_presenter_name | AudioVerse English',
 		});
 	});
 
@@ -108,9 +110,29 @@ describe('presenter detail page', () => {
 		);
 	});
 
-	// links to rss feeds
+	it('lists presenter recordings', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_recording_title')).toBeInTheDocument();
+	});
+
+	it('links pagination properly', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('1')).toHaveAttribute(
+			'href',
+			'/en/presenters/the_presenter_id/page/1'
+		);
+	});
+
+	// links recording pagination properly
+
 	// displays person image
 	// displays person name
-	// lists person recordings
-	// links recording pagination properly
+	// displays person description
+	// renders 404
 });

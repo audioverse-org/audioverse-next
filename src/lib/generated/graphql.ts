@@ -4971,13 +4971,13 @@ export type GetPresenterDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { person: Maybe<(
     { __typename?: 'Person' }
-    & Pick<Person, 'name'>
+    & Pick<Person, 'id' | 'name'>
     & { recordings: (
       { __typename?: 'RecordingConnection' }
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
-        & Pick<Recording, 'title'>
         & WriteFeedFileFragment
+        & RecordingListFragment
       )>>, aggregate: Maybe<(
         { __typename?: 'Aggregate' }
         & Pick<Aggregate, 'count'>
@@ -6124,11 +6124,12 @@ export const useGetHomeStaticPropsQuery = <
 export const GetPresenterDetailPageDataDocument = `
     query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
   person(id: $id) {
+    id
     name
     recordings(offset: $offset, first: $first) {
       nodes {
-        title
         ...writeFeedFile
+        ...recordingList
       }
       aggregate {
         count
@@ -6136,7 +6137,8 @@ export const GetPresenterDetailPageDataDocument = `
     }
   }
 }
-    ${WriteFeedFileFragmentDoc}`;
+    ${WriteFeedFileFragmentDoc}
+${RecordingListFragmentDoc}`;
 export const useGetPresenterDetailPageDataQuery = <
       TData = GetPresenterDetailPageDataQuery,
       TError = unknown

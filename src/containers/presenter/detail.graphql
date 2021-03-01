@@ -1,10 +1,11 @@
 query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
     person(id: $id) {
+        id
         name
         recordings(offset: $offset, first: $first) {
             nodes {
-                title
                 ...writeFeedFile
+                ...recordingList
             }
             aggregate {
                 count
