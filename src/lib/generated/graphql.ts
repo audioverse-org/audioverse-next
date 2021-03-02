@@ -2405,6 +2405,7 @@ export type QueryPopularRecordingsArgs = {
 
 
 export type QueryRecordingArgs = {
+  allowArchived: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
 };
 

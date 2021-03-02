@@ -1,7 +1,7 @@
 query getHomeStaticProps($language: Language!) {
-    sermons(language: $language, first: 5) {
-        nodes {
-            ...recordingList
-        }
-    }
+	sermons(language: $language, first: 5) {
+		nodes {
+			...recordingList
+		}
+	}
 }

@@ -1,20 +1,25 @@
 query getTestimoniesPageData($language: Language!, $offset: Int, $first: Int) {
-    testimonies(language: $language, first: $first, offset: $offset, orderBy: {direction: DESC, field: WRITTEN_DATE}) {
-        nodes {
-            author
-            body
-            writtenDate
-        }
-        aggregate {
-            count
-        }
-    }
+	testimonies(
+		language: $language
+		first: $first
+		offset: $offset
+		orderBy: { direction: DESC, field: WRITTEN_DATE }
+	) {
+		nodes {
+			author
+			body
+			writtenDate
+		}
+		aggregate {
+			count
+		}
+	}
 }
 
 query getTestimoniesPathsData($language: Language!) {
-    testimonies(language: $language) {
-        aggregate {
-            count
-        }
-    }
+	testimonies(language: $language) {
+		aggregate {
+			count
+		}
+	}
 }

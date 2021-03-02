@@ -1,29 +1,29 @@
 query getSongsListPageData($language: Language!) {
-    musicAlbums(language: $language, first: 1000) {
-        nodes {
-            id
-            title
-            imageWithFallback {
-                url(size: 100)
-            }
-            sponsor {
-                title
-            }
-        }
-    }
-    sponsors(language: $language, withMusic: true, first: 1000) {
-        nodes {
-            id
-            title
-            imageWithFallback {
-                url(size: 100)
-            }
-        }
-    }
-    musicMoodTags(language: ENGLISH, first: 1000) {
-        nodes {
-            id
-            name
-        }
-    }
+	musicAlbums(language: $language, first: 1000) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+			sponsor {
+				title
+			}
+		}
+	}
+	sponsors(language: $language, withMusic: true, first: 1000) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+	}
+	musicMoodTags(language: ENGLISH, first: 1000) {
+		nodes {
+			id
+			name
+		}
+	}
 }

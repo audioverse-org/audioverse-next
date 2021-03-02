@@ -1,17 +1,17 @@
 fragment copyrightInfo on Recording {
-    copyrightYear
-    distributionAgreement {
-        sponsor {
-            title
-        }
-        license {
-            summary
-            image {
-                url(size:100, cropMode: MAX_SIZE)
-            }
-        }
-    }
-    sponsor {
-        title
-    }
+	copyrightYear
+	distributionAgreement {
+		sponsor {
+			title
+		}
+		license {
+			summary
+			image {
+				url(size: 100, cropMode: MAX_SIZE)
+			}
+		}
+	}
+	sponsor {
+		title
+	}
 }

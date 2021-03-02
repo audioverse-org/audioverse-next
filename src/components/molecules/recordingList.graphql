@@ -1,17 +1,17 @@
 fragment recordingList on Recording {
-    id
-    title
-    description
-    duration
-    imageWithFallback {
-        url(size: 50)
-    }
-    persons {
-        ...speakerName
-    }
-    videoFiles {
-        url
-    }
-    recordingDate
-    canonicalUrl
+	id
+	title
+	description
+	duration
+	imageWithFallback {
+		url(size: 50)
+	}
+	persons {
+		...speakerName
+	}
+	videoFiles {
+		url
+	}
+	recordingDate
+	canonicalUrl
 }

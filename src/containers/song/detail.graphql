@@ -1,4 +1,4 @@
 fragment song on Recording {
-    ...playlist
-    ...recording
+	...playlist
+	...recording
 }

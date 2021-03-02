@@ -1,22 +1,18 @@
-query getStoriesPageData(
-    $language: Language!,
-    $first: Int,
-    $offset: Int
-) {
-    stories(language: $language, first: $first, offset: $offset) {
-        nodes {
-            ...recordingList
-        }
-        aggregate {
-            count
-        }
-    }
+query getStoriesPageData($language: Language!, $first: Int, $offset: Int) {
+	stories(language: $language, first: $first, offset: $offset) {
+		nodes {
+			...recordingList
+		}
+		aggregate {
+			count
+		}
+	}
 }
 
 query getStoriesPathData($language: Language!) {
-    stories(language: $language) {
-        aggregate {
-            count
-        }
-    }
+	stories(language: $language) {
+		aggregate {
+			count
+		}
+	}
 }

@@ -1,33 +1,33 @@
 query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
-    audiobible(id: $versionId) {
-        title
-        book(id: $bookId) {
-            title
-            shareUrl
-            chapters {
-                id
-                title
-                url
-                verses {
-                    number
-                    text
-                }
-            }
-        }
-        sponsor {
-            name
-            url
-        }
-        copyrightText
-    }
+	audiobible(id: $versionId) {
+		title
+		book(id: $bookId) {
+			title
+			shareUrl
+			chapters {
+				id
+				title
+				url
+				verses {
+					number
+					text
+				}
+			}
+		}
+		sponsor {
+			name
+			url
+		}
+		copyrightText
+	}
 }
 
 query getBibleBookDetailPathsData {
-    audiobibles {
-        nodes {
-            books {
-                id
-            }
-        }
-    }
+	audiobibles {
+		nodes {
+			books {
+				id
+			}
+		}
+	}
 }

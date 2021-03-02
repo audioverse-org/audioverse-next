@@ -1,23 +1,23 @@
 query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
-    person(id: $id) {
-        id
-        name
-        recordings(offset: $offset, first: $first) {
-            nodes {
-                ...writeFeedFile
-                ...recordingList
-            }
-            aggregate {
-                count
-            }
-        }
-    }
+	person(id: $id) {
+		id
+		name
+		recordings(offset: $offset, first: $first) {
+			nodes {
+				...writeFeedFile
+				...recordingList
+			}
+			aggregate {
+				count
+			}
+		}
+	}
 }
 
 query getPresenterDetailPathsData($language: Language!, $first: Int) {
-    persons(language: $language, first: $first) {
-        nodes {
-            id
-        }
-    }
+	persons(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
 }

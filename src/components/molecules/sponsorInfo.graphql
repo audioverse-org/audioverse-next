@@ -1,5 +1,5 @@
 fragment sponsorInfo on Sponsor {
-    title
-    location
-    website
+	title
+	location
+	website
 }

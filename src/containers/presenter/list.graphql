@@ -1,23 +1,27 @@
-query getPresenterListPageData($language: Language!, $offset: Int, $first: Int) {
-    persons(language: $language, offset: $offset, first: $first) {
-        nodes {
-            id
-            name
-            summary
-            imageWithFallback {
-                url(size: 100)
-            }
-        }
-        aggregate {
-            count
-        }
-    }
+query getPresenterListPageData(
+	$language: Language!
+	$offset: Int
+	$first: Int
+) {
+	persons(language: $language, offset: $offset, first: $first) {
+		nodes {
+			id
+			name
+			summary
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
 }
 
 query getPresenterListPathsData($language: Language!) {
-    persons(language: $language) {
-        aggregate {
-            count
-        }
-    }
+	persons(language: $language) {
+		aggregate {
+			count
+		}
+	}
 }

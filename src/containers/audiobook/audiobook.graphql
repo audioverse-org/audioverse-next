@@ -1,39 +1,33 @@
 query getAudiobookDetailPageData($id: ID!) {
-    audiobook(id: $id) {
-        title
-        sponsor {
-            title
-            ...sponsorInfo
-        }
-        recordings {
-            nodes {
-                id
-                title
-                audioFiles {
-                    url
-                }
-                audioDownloads: audioFiles(allowedContainers: MP3) {
-                    url
-                    filesize
-                }
-                ...copyrightInfo
-                ...writeFeedFile
-            }
-        }
-        shareUrl
-    }
+	audiobook(id: $id) {
+		title
+		sponsor {
+			title
+			...sponsorInfo
+		}
+		recordings {
+			nodes {
+				id
+				title
+				audioFiles {
+					url
+				}
+				audioDownloads: audioFiles(allowedContainers: MP3) {
+					url
+					filesize
+				}
+				...copyrightInfo
+				...writeFeedFile
+			}
+		}
+		shareUrl
+	}
 }
 
-query getAudiobookDetailPathsData(
-    $language: Language!,
-    $first: Int
-) {
-    audiobooks(
-        language: $language,
-        first: $first
-    ) {
-        nodes {
-            id
-        }
-    }
+query getAudiobookDetailPathsData($language: Language!, $first: Int) {
+	audiobooks(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
 }

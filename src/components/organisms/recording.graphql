@@ -1,57 +1,57 @@
 fragment recording on Recording {
-    id
-    title
-    persons {
-        ...speakerName
-    }
-    audioFiles {
-        url
-        filesize
-        mimeType
-    }
-    videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-        url
-        filesize
-        mimeType
-    }
-    videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-        url
-        filesize
-        mimeType
-    }
-    videoDownloads: videoFiles(allowedContainers: MP4) {
-        id
-        url
-        filesize
-    }
-    audioDownloads: audioFiles(allowedContainers: MP3) {
-        id
-        url
-        filesize
-    }
-    description
-    imageWithFallback {
-        url(size: 50)
-    }
-    recordingDate
-    recordingTags {
-        nodes {
-            tag {
-                id
-                name
-            }
-        }
-    }
-    sponsor {
-        ...sponsorInfo
-    }
-    sequence {
-        id
-        title
-    }
-    transcript {
-        text
-    }
-    shareUrl
-    ...copyrightInfo
+	id
+	title
+	persons {
+		...speakerName
+	}
+	audioFiles {
+		url
+		filesize
+		mimeType
+	}
+	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+		url
+		filesize
+		mimeType
+	}
+	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+		url
+		filesize
+		mimeType
+	}
+	videoDownloads: videoFiles(allowedContainers: MP4) {
+		id
+		url
+		filesize
+	}
+	audioDownloads: audioFiles(allowedContainers: MP3) {
+		id
+		url
+		filesize
+	}
+	description
+	imageWithFallback {
+		url(size: 50)
+	}
+	recordingDate
+	recordingTags {
+		nodes {
+			tag {
+				id
+				name
+			}
+		}
+	}
+	sponsor {
+		...sponsorInfo
+	}
+	sequence {
+		id
+		title
+	}
+	transcript {
+		text
+	}
+	shareUrl
+	...copyrightInfo
 }
