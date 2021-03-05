@@ -25,6 +25,7 @@ export async function getStaticProps({
 
 	if (!langKey) throw Error('Missing or invalid language');
 
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const result = await getHomeStaticProps({ language: langKey });
 	const nodes = result?.sermons?.nodes || [];
 

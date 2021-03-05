@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import { makeSponsorRoute } from '@lib/routes';
+import { makeConferenceRoute, makeSponsorRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { ConferenceStaticProps } from '@pages/[language]/conferences/[id]/page/[i]';
 
@@ -39,7 +39,9 @@ function ConferenceDetail({
 			</a>
 			<RecordingList recordings={nodes} />
 			<Pagination
-				base={`/${languageRoute}/conferences/${data?.conference?.id}`}
+				makeRoute={(l, i) =>
+					makeConferenceRoute(l, data?.conference?.id || '', i)
+				}
 				{...pagination}
 			/>
 		</>

@@ -64,7 +64,7 @@ describe('song book detail page', () => {
 	it('generates static paths', async () => {
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/songs/book/Genesis');
+		expect(paths).toContain('/en/songs/book/genesis');
 	});
 
 	it('renders 404', async () => {

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
-import { makePersonRoute } from '@lib/routes';
+import { makePersonRoute, makePresenterListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { PresentersStaticProps } from '@pages/[language]/presenters/page/[i]';
 
@@ -11,7 +11,7 @@ type Props = PresentersStaticProps['props'];
 
 function Presenters({ nodes, pagination }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
-
+	// TODO: Use PaginatedList component
 	return (
 		<>
 			<h1>
@@ -32,7 +32,7 @@ function Presenters({ nodes, pagination }: Props): JSX.Element {
 					</li>
 				))}
 			</ul>
-			<Pagination base={`/${languageRoute}/presenters`} {...pagination} />
+			<Pagination makeRoute={makePresenterListRoute} {...pagination} />
 		</>
 	);
 }

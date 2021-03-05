@@ -19,12 +19,11 @@ const makeLanguagePaths = async <T>(
 	const data = await getter({ language });
 	const entryCount = parseCount(data) || 0;
 	const pageCount = Math.ceil(entryCount / ENTRIES_PER_PAGE);
-	const toGenerate = Math.min(pageCount, LIST_PRERENDER_LIMIT);
-	const numbers = Array.from(Array(toGenerate).keys());
+	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT) + 1;
 	const base = LANGUAGES[language].base_url;
 
 	// TODO: Extract route generation
-	return numbers.map((x) => `/${base}/${innerSegment}/page/${x + 1}`);
+	return _.range(1, limit).map((x) => `/${base}/${innerSegment}/page/${x}`);
 };
 
 export const getNumberedStaticPaths = async <T>(
@@ -33,7 +32,7 @@ export const getNumberedStaticPaths = async <T>(
 	parseCount: Parser<T>
 ): Promise<StaticPaths> => {
 	const keys = _.keys(LANGUAGES) as Language[];
-	const pathSetPromises = keys.map(async (k) =>
+	const pathSetPromises = keys.map((k) =>
 		makeLanguagePaths(k, innerSegment, getter, parseCount)
 	);
 	const pathSets = await Promise.all(pathSetPromises);

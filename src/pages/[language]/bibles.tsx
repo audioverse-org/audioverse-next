@@ -10,6 +10,7 @@ import { makeBibleListRoute } from '@lib/routes';
 export default Versions;
 
 export async function getStaticProps(): Promise<StaticProps<VersionsProps>> {
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const response = await getBibleVersionsPageData({});
 
 	return {

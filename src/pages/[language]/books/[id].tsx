@@ -60,6 +60,7 @@ export async function getStaticProps({
 }: GetStaticPropsArgs): Promise<StaticProps> {
 	const { id } = params;
 
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const { audiobook = undefined } =
 		(await getAudiobookDetailPageData({ id })) || {};
 

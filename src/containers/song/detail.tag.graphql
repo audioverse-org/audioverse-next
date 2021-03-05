@@ -1,4 +1,4 @@
-query getSongDetailTagPageData($language: Language!, $tag: String) {
+query getSongDetailTagPageData($language: Language!, $tag: String!) {
 	musicTracks(language: $language, tagName: $tag) {
 		nodes {
 			...recording

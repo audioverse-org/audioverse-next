@@ -1,27 +1,74 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import RecordingListEntry from '@components/molecules/recordingListEntry';
+import SpeakerName from '@components/molecules/speakerName';
+import TableList from '@components/organisms/tableList';
+import formatDuration from '@lib/formatDuration';
 import { RecordingListFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 
-import styles from './recordingList.module.scss';
+const columns = [
+	{
+		name: 'speakers',
+		View: function View({ node }: { node: RecordingListFragment }) {
+			return (
+				<ul>
+					{node.persons?.map(
+						(p): JSX.Element => (
+							<li key={p.id}>
+								<SpeakerName person={p} />
+							</li>
+						)
+					)}
+				</ul>
+			);
+		},
+	},
+	{
+		name: 'duration',
+		View: function View({ node }: { node: RecordingListFragment }) {
+			return <>{formatDuration(node.duration)}</>;
+		},
+	},
+	{
+		name: 'format',
+		View: function View({ node }: { node: RecordingListFragment }) {
+			return node.hasVideo ? (
+				<FormattedMessage
+					id="recordingList__videoLabel"
+					defaultMessage="Video"
+					description="Recording list entry video label"
+				/>
+			) : (
+				<FormattedMessage
+					id="recordingList__audioLabel"
+					defaultMessage="Audio"
+					description="Recording list entry audio label"
+				/>
+			);
+		},
+	},
+];
 
 interface RecordingListProps {
 	recordings: RecordingListFragment[];
-	route?: (languageRoute: string, entityId: string) => string;
+	makeRoute?: (languageRoute: string, entityId: string) => string;
 }
 
 export default function RecordingList({
 	recordings,
-	route = makeSermonRoute,
+	makeRoute = makeSermonRoute,
 }: RecordingListProps): JSX.Element {
 	return (
-		<table className={styles.list}>
-			<tbody>
-				{recordings?.map((rec) => (
-					<RecordingListEntry key={rec.id} recording={rec} route={route} />
-				))}
-			</tbody>
-		</table>
+		<TableList
+			nodes={recordings}
+			parseTitle={(n) => n.title}
+			parseImageUrl={(n) => n.imageWithFallback?.url}
+			parseKey={(n) => n.id}
+			makeEntryRoute={(languageRoute, node) =>
+				makeRoute(languageRoute, node.id)
+			}
+			columns={columns}
+		/>
 	);
 }

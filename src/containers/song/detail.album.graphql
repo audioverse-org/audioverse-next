@@ -8,7 +8,6 @@ query getSongAlbumPageData($id: ID!) {
 	}
 }
 
-# TODO: Add $first
 query getSongAlbumPathsData($language: Language!, $first: Int) {
 	musicAlbums(language: $language, first: $first) {
 		nodes {

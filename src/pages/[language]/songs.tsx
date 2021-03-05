@@ -14,6 +14,7 @@ export async function getStaticProps({
 }): Promise<StaticProps<SongsProps>> {
 	const { language } = params;
 	const languageId = getLanguageIdByRoute(language);
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const data = await getSongsListPageData({ language: languageId });
 
 	return {

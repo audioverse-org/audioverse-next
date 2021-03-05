@@ -62,7 +62,7 @@ describe('recording list', () => {
 
 		expect(getByRole('link', { name: 'the_person_name' })).toHaveAttribute(
 			'href',
-			'/en/presenters/the_person_id'
+			'/en/presenters/the_person_id/page/1'
 		);
 	});
 

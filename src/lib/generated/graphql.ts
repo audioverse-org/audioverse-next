@@ -4567,6 +4567,19 @@ export type CopyrightInfoFragment = (
   )> }
 );
 
+export type CopyrightInfosFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id' | 'copyrightYear'>
+  & { distributionAgreement: Maybe<(
+    { __typename?: 'DistributionAgreement' }
+    & Pick<DistributionAgreement, 'id'>
+  )>, sponsor: Maybe<(
+    { __typename?: 'Sponsor' }
+    & Pick<Sponsor, 'id'>
+  )> }
+  & CopyrightInfoFragment
+);
+
 export type GetPlaylistButtonDataQueryVariables = Exact<{
   language: Language;
   recordingId: Scalars['ID'];
@@ -4592,16 +4605,13 @@ export type GetPlaylistButtonDataQuery = (
 
 export type RecordingListFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title' | 'description' | 'duration' | 'recordingDate' | 'canonicalUrl'>
+  & Pick<Recording, 'id' | 'title' | 'description' | 'duration' | 'hasVideo' | 'recordingDate' | 'canonicalUrl'>
   & { imageWithFallback: (
     { __typename?: 'Image' }
     & Pick<Image, 'url'>
   ), persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
-  )>, videoFiles: Array<(
-    { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'url'>
   )> }
 );
 
@@ -4700,7 +4710,7 @@ export type GetAudiobookDetailPageDataQuery = (
           { __typename?: 'AudioFile' }
           & Pick<AudioFile, 'url' | 'filesize'>
         )> }
-        & CopyrightInfoFragment
+        & CopyrightInfosFragment
         & WriteFeedFileFragment
       )>> }
     ) }
@@ -5226,7 +5236,7 @@ export type GetSongAlbumPathsDataQuery = (
 
 export type GetSongBookPageDataQueryVariables = Exact<{
   language: Language;
-  book: Maybe<Scalars['String']>;
+  book: Scalars['String'];
 }>;
 
 
@@ -5285,7 +5295,7 @@ export type GetSongSponsorPathsDataQuery = (
 
 export type GetSongDetailTagPageDataQueryVariables = Exact<{
   language: Language;
-  tag: Maybe<Scalars['String']>;
+  tag: Scalars['String'];
 }>;
 
 
@@ -5577,6 +5587,38 @@ export type WriteFeedFileFragment = (
   )> }
 );
 
+export const CopyrightInfoFragmentDoc = `
+    fragment copyrightInfo on Recording {
+  copyrightYear
+  distributionAgreement {
+    sponsor {
+      title
+    }
+    license {
+      summary
+      image {
+        url(size: 100, cropMode: MAX_SIZE)
+      }
+    }
+  }
+  sponsor {
+    title
+  }
+}
+    `;
+export const CopyrightInfosFragmentDoc = `
+    fragment copyrightInfos on Recording {
+  id
+  copyrightYear
+  distributionAgreement {
+    id
+  }
+  sponsor {
+    id
+  }
+  ...copyrightInfo
+}
+    ${CopyrightInfoFragmentDoc}`;
 export const SpeakerNameFragmentDoc = `
     fragment speakerName on Person {
   id
@@ -5601,9 +5643,7 @@ export const RecordingListFragmentDoc = `
   persons {
     ...speakerName
   }
-  videoFiles {
-    url
-  }
+  hasVideo
   recordingDate
   canonicalUrl
 }
@@ -5623,25 +5663,6 @@ export const SponsorInfoFragmentDoc = `
   title
   location
   website
-}
-    `;
-export const CopyrightInfoFragmentDoc = `
-    fragment copyrightInfo on Recording {
-  copyrightYear
-  distributionAgreement {
-    sponsor {
-      title
-    }
-    license {
-      summary
-      image {
-        url(size: 100, cropMode: MAX_SIZE)
-      }
-    }
-  }
-  sponsor {
-    title
-  }
 }
     `;
 export const RecordingFragmentDoc = `
@@ -5774,7 +5795,7 @@ export const GetAudiobookDetailPageDataDocument = `
           url
           filesize
         }
-        ...copyrightInfo
+        ...copyrightInfos
         ...writeFeedFile
       }
     }
@@ -5782,7 +5803,7 @@ export const GetAudiobookDetailPageDataDocument = `
   }
 }
     ${SponsorInfoFragmentDoc}
-${CopyrightInfoFragmentDoc}
+${CopyrightInfosFragmentDoc}
 ${WriteFeedFileFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
@@ -6455,7 +6476,7 @@ export const useGetSongAlbumPathsDataQuery = <
       options
     );
 export const GetSongBookPageDataDocument = `
-    query getSongBookPageData($language: Language!, $book: String) {
+    query getSongBookPageData($language: Language!, $book: String!) {
   musicTracks(language: $language, tagName: $book) {
     nodes {
       ...song
@@ -6520,7 +6541,7 @@ export const useGetSongSponsorPathsDataQuery = <
       options
     );
 export const GetSongDetailTagPageDataDocument = `
-    query getSongDetailTagPageData($language: Language!, $tag: String) {
+    query getSongDetailTagPageData($language: Language!, $tag: String!) {
   musicTracks(language: $language, tagName: $tag) {
     nodes {
       ...recording
@@ -6868,6 +6889,7 @@ export const useAddPlaylistMutation = <
       options
     );
 import { fetchApi } from '@lib/api/fetchApi' 
+
 
 
 							export async function getPlaylistButtonData<T>(

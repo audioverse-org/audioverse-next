@@ -1,4 +1,4 @@
-const slug = (s: string): string => s.replace(/\s/g, '-');
+const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePaginationRoute = (
 	base: string,
@@ -10,47 +10,61 @@ export const makeSermonRoute = (
 	sermonId: string
 ): string => `/${languageRoute}/sermons/${sermonId}`;
 
+// TODO: rename to makePresenterDetailRoute
 export const makePersonRoute = (
 	languageRoute: string,
-	personId: string
-): string => `/${languageRoute}/presenters/${personId}`;
+	personId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
+
+export const makePresenterListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/presenters/page/${page}`;
 
 export const makeSeriesRoute = (
 	languageRoute: string,
 	seriesId: string
 ): string => `/${languageRoute}/series/${seriesId}`;
 
-export const makeTagRoute = (
+export const makeTagDetailRoute = (
 	languageRoute: string,
 	tagName: string,
 	pageIndex = 1
 ): string =>
 	`/${languageRoute}/tags/${encodeURIComponent(tagName)}/page/${pageIndex}`;
 
+export const makeTagListRoute = (
+	languageRoute: string,
+	pageIndex = 1
+): string => `/${languageRoute}/tags/page/${pageIndex}`;
+
+export const makeSermonListRoute = (
+	languageRoute: string,
+	filter: string,
+	page: number | string
+): string => `/${languageRoute}/sermons/${filter}/page/${page}`;
+
+// TODO: use makeSermonListRoute
+// TODO: default page to 1
 export const makeSermonListRouteAll = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/sermons/all/page/${page}`;
 
+// TODO: use makeSermonListRoute
+// TODO: default page to 1
 export const makeSermonListRouteVideo = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/sermons/video/page/${page}`;
 
+// TODO: use makeSermonListRoute
+// TODO: default page to 1
 export const makeSermonListRouteAudio = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/sermons/audio/page/${page}`;
-
-export const makeSermonListBaseRoute = (
-	languageRoute: string,
-	filter: string
-): string => `/${languageRoute}/sermons/${filter}`;
-
-export const makeTagDetailBaseRoute = (
-	languageRoute: string,
-	tagSlug: string
-): string => `/${languageRoute}/tags/${tagSlug}`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;
@@ -65,15 +79,27 @@ export const makeBibleBookRoute = (
 	bookId: string
 ): string => `/${languageRoute}/bibles/${bookId.replace('-', '/')}`;
 
+// TODO: rename to makeAudiobookDetailRoute
 export const makeAudiobookRoute = (
 	languageRoute: string,
 	bookId: string
 ): string => `/${languageRoute}/books/${bookId}`;
 
+export const makeAudiobookListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/books/page/${page}`;
+
+// TODO: rename to makeStoryDetailPage
 export const makeStoryRoute = (
 	languageRoute: string,
 	storyId: string
 ): string => `/${languageRoute}/stories/${storyId}`;
+
+export const makeStoryListPage = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/stories/page/${page}`;
 
 export const makeSongsListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/songs`;
@@ -104,7 +130,17 @@ export const makeConferenceRoute = (
 	page: number | string
 ): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
 
+export const makeConferenceListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/conferences/page/${page}`;
+
 export const makeSponsorRoute = (
 	languageRoute: string,
 	sponsorId: string
 ): string => `/${languageRoute}/sponsors/${sponsorId}`;
+
+export const makeTestimoniesRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/testimonies/page/${page}`;

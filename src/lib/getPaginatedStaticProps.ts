@@ -2,14 +2,16 @@ import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
+export interface PaginationData {
+	total: number;
+	current: number;
+}
+
 // TODO: Improve nodes type
 export interface PaginatedStaticProps<DATA, NODE> {
 	props: {
 		nodes: NODE[];
-		pagination: {
-			total: number;
-			current: number;
-		};
+		pagination: PaginationData;
 		data: DATA | null;
 	};
 	revalidate: number;

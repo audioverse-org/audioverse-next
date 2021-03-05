@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makePaginationRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './pagination.module.scss';
 
@@ -33,54 +33,54 @@ export function pagination(
 const PaginationEntry = ({
 	page,
 	label,
-	base,
+	makeRoute,
 	className,
 }: {
 	page: number | string;
 	label?: string;
-	base: string;
+	makeRoute?: (languageRoute: string, pageIndex: number) => string;
 	className?: string;
-}): JSX.Element => (
-	<li className={`${className} ${styles.link}`}>
-		{Number.isInteger(page) ? (
-			<a href={makePaginationRoute(base, page)}>{label || page}</a>
-		) : (
-			label || page
-		)}
-	</li>
-);
+}): JSX.Element => {
+	const languageRoute = useLanguageRoute();
+	return (
+		<li className={`${className} ${styles.link}`}>
+			{Number.isInteger(page) && makeRoute ? (
+				<a href={makeRoute(languageRoute, +page)}>{label || page}</a>
+			) : (
+				label || page
+			)}
+		</li>
+	);
+};
 
 export default function Pagination({
 	current,
 	total,
-	base,
+	makeRoute,
 }: {
 	current: number;
 	total: number;
-	base: string;
+	makeRoute: (languageRoute: string, pageIndex: number) => string;
 }): JSX.Element {
 	current = current || 1;
 
-	const pagePrevious = current - 1,
-		pageNext = current + 1;
-
+	const pagePrevious = current - 1;
+	const pageNext = current + 1;
 	const pages = pagination(current, total);
 
 	return (
 		<ul className={styles.base}>
-			{current > 1 ? (
-				<PaginationEntry page={pagePrevious} label={'<'} base={base} />
-			) : null}
+			{current > 1 ? <PaginationEntry page={pagePrevious} label={'<'} /> : null}
 			{pages.map((p, i) => (
 				<PaginationEntry
 					page={p}
 					key={i}
-					base={base}
-					className={p === current ? styles.active : undefined}
+					makeRoute={makeRoute}
+					className={p === current ? styles.active : ''}
 				/>
 			))}
 			{current < total ? (
-				<PaginationEntry page={pageNext} label={'>'} base={base} />
+				<PaginationEntry page={pageNext} label={'>'} makeRoute={makeRoute} />
 			) : null}
 		</ul>
 	);

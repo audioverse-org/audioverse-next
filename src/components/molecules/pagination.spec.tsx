@@ -3,8 +3,15 @@ import React from 'react';
 
 import Pagination, { pagination } from './pagination';
 
-const renderPagination = ({ current = 1, total = 1, base = 'base' } = {}) => {
-	return render(<Pagination current={current} total={total} base={base} />);
+const renderPagination = ({
+	current = 1,
+	total = 1,
+	makeRoute = (languageRoute: string, pageIndex: number): string =>
+		`${languageRoute}/the_route/page/${pageIndex}`,
+} = {}) => {
+	return render(
+		<Pagination current={current} total={total} makeRoute={makeRoute} />
+	);
 };
 
 describe('pagination component', () => {
@@ -33,8 +40,11 @@ describe('pagination component', () => {
 	});
 
 	it('sets next href', () => {
-		const { getByText } = renderPagination({ total: 2, base: '/en/sermons' }),
-			link = getByText('>') as HTMLAnchorElement;
+		const { getByText } = renderPagination({
+			total: 2,
+			makeRoute: (l, i) => `/${l}/sermons/page/${i}`,
+		});
+		const link = getByText('>') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/sermons/page/2');
 	});
@@ -54,7 +64,7 @@ describe('pagination component', () => {
 	it('uses url base', () => {
 		const { getByText } = renderPagination({
 				total: 2,
-				base: '/en/presenters',
+				makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
 			}),
 			link = getByText('>') as HTMLAnchorElement;
 

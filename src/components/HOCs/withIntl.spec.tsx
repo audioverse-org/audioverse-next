@@ -15,6 +15,7 @@ import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
+import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
@@ -329,6 +330,19 @@ describe('localization usage', () => {
 				nodes={[{ id: 'z' }] as any}
 				pagination={undefined as any}
 				data={undefined as any}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes presenter detail page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Presenter
+				rssPath={'rssPath'}
+				nodes={[]}
+				data={undefined as any}
+				pagination={undefined as any}
 			/>
 		);
 

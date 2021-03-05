@@ -11,7 +11,7 @@ import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
-import { makeTagRoute } from '@lib/routes';
+import { makeTagDetailRoute } from '@lib/routes';
 import writeFeedFile from '@lib/writeFeedFile';
 
 export default TagDetail;
@@ -77,6 +77,7 @@ export async function getStaticProps({
 		(d) => d.recordings.aggregate?.count
 	);
 
+	// TODO: Switch to createFeed function
 	await generateRssFeed(params, response);
 
 	return {
@@ -93,6 +94,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getTagDetailPathsQuery,
 		(d) => d.tags.nodes,
-		(languageRoute, node) => makeTagRoute(languageRoute, node.name)
+		(languageRoute, node) => makeTagDetailRoute(languageRoute, node.name)
 	);
 }

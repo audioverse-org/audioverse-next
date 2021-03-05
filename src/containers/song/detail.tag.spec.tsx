@@ -78,4 +78,22 @@ describe('song tag detail page', () => {
 
 		expect(getByText('404')).toBeInTheDocument();
 	});
+
+	it('lower cases static paths', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetSongDetailTagPathsDataDocument, expect.anything())
+			.mockResolvedValue({
+				musicMoodTags: {
+					nodes: [
+						{
+							name: 'TheTagName',
+						},
+					],
+				},
+			});
+
+		const { paths } = await getStaticPaths();
+
+		expect(paths).toContain('/en/songs/tag/thetagname');
+	});
 });

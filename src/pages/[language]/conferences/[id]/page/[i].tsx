@@ -39,7 +39,7 @@ export async function getStaticProps({
 		(d) => d.conference?.recordings.aggregate?.count
 	);
 
-	// TODO: Standardize on an RSS feed naming convention
+	// TODO: Switch to createFeed function
 	// TODO: Only generate feed on page 1 !!BUG
 	await writeFeedFile({
 		recordings: staticProps.props.nodes,

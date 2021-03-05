@@ -6,8 +6,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import { GetTagDetailPageDataQuery } from '@lib/generated/graphql';
-import { makeTagDetailBaseRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeTagDetailRoute } from '@lib/routes';
 
 type Recordings = NonNullable<GetTagDetailPageDataQuery['recordings']['nodes']>;
 
@@ -27,7 +26,6 @@ function TagDetail({
 }: TagDetailProps): JSX.Element {
 	const router = useRouter();
 	const slug = _.get(router, 'query.slug');
-	const languageRoute = useLanguageRoute();
 	const title = decodeURIComponent(slug);
 
 	// TODO: Use API-supplied canonical URLs so that each entity type
@@ -42,7 +40,7 @@ function TagDetail({
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				base={makeTagDetailBaseRoute(languageRoute, slug)}
+				makeRoute={(l, i) => makeTagDetailRoute(l, slug, i)}
 			/>
 		</>
 	);

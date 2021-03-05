@@ -21,6 +21,7 @@ export async function getStaticProps({
 }): Promise<StaticProps> {
 	const { id, book } = params;
 
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const data = await getBibleBookDetailPageData({
 		versionId: id,
 		bookId: `${id}-${book}`,

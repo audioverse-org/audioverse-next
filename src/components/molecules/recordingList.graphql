@@ -9,9 +9,7 @@ fragment recordingList on Recording {
 	persons {
 		...speakerName
 	}
-	videoFiles {
-		url
-	}
+	hasVideo
 	recordingDate
 	canonicalUrl
 }

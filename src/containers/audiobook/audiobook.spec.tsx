@@ -214,7 +214,7 @@ describe('audiobook detail page', () => {
 
 		expect(
 			getByText(
-				'Portions of this audiobook are covered under the following license terms:'
+				'Portions of this production are covered under the following license terms:'
 			)
 		);
 	});

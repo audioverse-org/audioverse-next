@@ -21,6 +21,7 @@ export async function getStaticProps({
 }): Promise<StaticProps> {
 	const { id } = params;
 
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const { series = undefined } = (await getSeriesDetailData({ id })) || {};
 
 	return {

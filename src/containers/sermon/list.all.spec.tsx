@@ -433,7 +433,7 @@ describe('sermons list page', () => {
 					{
 						id: 'the_sermon_id',
 						title: 'the_sermon_title',
-						videoFiles: [{}],
+						hasVideo: true,
 					},
 				],
 			},

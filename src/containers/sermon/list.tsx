@@ -6,7 +6,7 @@ import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
 import {
-	makeSermonListBaseRoute,
+	makeSermonListRoute,
 	makeSermonListRouteAll,
 	makeSermonListRouteAudio,
 	makeSermonListRouteVideo,
@@ -45,7 +45,7 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 			<Pagination
 				current={pagination.current}
 				total={pagination.total}
-				base={makeSermonListBaseRoute(lang, filter)}
+				makeRoute={(l, i) => makeSermonListRoute(l, filter, i)}
 			/>
 		</div>
 	);

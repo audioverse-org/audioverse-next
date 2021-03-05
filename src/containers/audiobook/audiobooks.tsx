@@ -1,38 +1,33 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import Pagination from '@components/molecules/pagination';
-import { makeAudiobookRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import PaginatedList from '@components/templates/paginatedList';
+import { makeAudiobookListRoute, makeAudiobookRoute } from '@lib/routes';
 import { AudiobooksStaticProps } from '@pages/[language]/books/page/[i]';
 
 type Props = AudiobooksStaticProps['props'];
 
+// TODO: rename this file to list.tsx
+
 function Audiobooks({ nodes, pagination }: Props): JSX.Element {
-	const languageRoute = useLanguageRoute();
+	const intl = useIntl();
 
 	return (
-		<>
-			<h1>
-				<FormattedMessage
-					id="audiobooks__pageTitle"
-					defaultMessage="Audiobooks"
-					description="Audiobooks list page title"
-				/>
-			</h1>
-			<ul>
-				{nodes.map(({ id, title, imageWithFallback }) => (
-					<li key={id}>
-						<a href={makeAudiobookRoute(languageRoute, id)}>
-							<img src={imageWithFallback.url} alt={title} width={25} />
-							{title}
-						</a>
-					</li>
-				))}
-			</ul>
-			<Pagination base={`/${languageRoute}/books`} {...pagination} />
-		</>
+		<PaginatedList
+			pageTitle={intl.formatMessage({
+				id: 'audiobookListPage__title',
+				defaultMessage: 'Audiobooks',
+				description: 'Audiobook list page title',
+			})}
+			nodes={nodes}
+			makePageRoute={makeAudiobookListRoute}
+			makeEntryRoute={(l, n) => makeAudiobookRoute(l, n.id)}
+			parseEntryImageUrl={(n) => n.imageWithFallback.url}
+			parseEntryTitle={(n) => n.title}
+			parseEntryKey={(n) => n.id}
+			pagination={pagination}
+		/>
 	);
 }
 

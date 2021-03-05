@@ -118,7 +118,7 @@ describe('songs list page', () => {
 
 		expect(getByText('Genesis')).toHaveAttribute(
 			'href',
-			'/en/songs/book/Genesis'
+			'/en/songs/book/genesis'
 		);
 	});
 
@@ -127,7 +127,7 @@ describe('songs list page', () => {
 
 		expect(getByText('3 John')).toHaveAttribute(
 			'href',
-			'/en/songs/book/3-John'
+			'/en/songs/book/3-john'
 		);
 	});
 

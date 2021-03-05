@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
-import { makeConferenceRoute } from '@lib/routes';
+import { makeConferenceListRoute, makeConferenceRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { ConferenceListStaticProps } from '@pages/[language]/conferences/page/[i]';
 
@@ -12,6 +12,7 @@ type Props = ConferenceListStaticProps['props'];
 function ConferenceList({ nodes, pagination }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
+	// TODO: Use PaginatedList component
 	return (
 		<>
 			<h1>
@@ -33,7 +34,7 @@ function ConferenceList({ nodes, pagination }: Props): JSX.Element {
 				))}
 			</ul>
 
-			<Pagination base={`/${languageRoute}/conferences`} {...pagination} />
+			<Pagination makeRoute={makeConferenceListRoute} {...pagination} />
 		</>
 	);
 }

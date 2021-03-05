@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Pagination from '@components/molecules/pagination';
 import { GetTagListPageDataQuery } from '@lib/generated/graphql';
-import { makeTagRoute } from '@lib/routes';
+import { makeTagDetailRoute, makeTagListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Tags = NonNullable<GetTagListPageDataQuery['tags']['nodes']>;
@@ -18,7 +18,7 @@ export interface TagListProps {
 
 function TagList({ pagination, nodes }: TagListProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
-
+	// TODO: Use PaginatedList component
 	return (
 		<>
 			<h1>
@@ -32,11 +32,11 @@ function TagList({ pagination, nodes }: TagListProps): JSX.Element {
 				{nodes &&
 					nodes.map((t) => (
 						<li key={t.id}>
-							<a href={makeTagRoute(languageRoute, t.name)}>{t.name}</a>
+							<a href={makeTagDetailRoute(languageRoute, t.name)}>{t.name}</a>
 						</li>
 					))}
 			</ul>
-			<Pagination base={'/en/tags'} {...pagination} />
+			<Pagination {...pagination} makeRoute={makeTagListRoute} />
 		</>
 	);
 }
