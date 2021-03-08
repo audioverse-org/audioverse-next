@@ -10,6 +10,8 @@ interface Listable {
 
 interface PaginatedListProps<T extends Listable> {
 	pageTitle: string;
+	pageImage?: string;
+	children?: React.ReactNode;
 	nodes: T[];
 	makePageRoute: (languageRoute: string, page: number | string) => string;
 	makeEntryRoute: (languageRoute: string, node: T) => string;
@@ -21,6 +23,8 @@ interface PaginatedListProps<T extends Listable> {
 
 export default function PaginatedList<T extends Listable>({
 	pageTitle,
+	pageImage,
+	children,
 	nodes,
 	makePageRoute,
 	makeEntryRoute,
@@ -31,7 +35,9 @@ export default function PaginatedList<T extends Listable>({
 }: PaginatedListProps<T>): JSX.Element {
 	return (
 		<>
+			<img src={pageImage} alt={pageTitle} />
 			<h1>{pageTitle}</h1>
+			{children}
 			<TableList
 				nodes={nodes}
 				parseTitle={parseEntryTitle}
