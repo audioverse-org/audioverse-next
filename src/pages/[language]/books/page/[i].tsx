@@ -1,17 +1,24 @@
-import Audiobooks, { AudiobooksProps } from '@containers/audiobook/audiobooks';
+import Audiobooks from '@containers/audiobook/audiobooks';
 import {
 	getAudiobookListPageData,
+	GetAudiobookListPageDataQuery,
 	getAudiobookListPathsData,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 
 export default Audiobooks;
 
-interface StaticProps {
-	props: AudiobooksProps;
-	revalidate: number;
-}
+type Audiobook = NonNullable<
+	GetAudiobookListPageDataQuery['audiobooks']['nodes']
+>[0];
+export type AudiobooksStaticProps = PaginatedStaticProps<
+	GetAudiobookListPageDataQuery,
+	Audiobook
+>;
 
 export interface GetStaticPropsArgs {
 	params: { i: string; language: string };
@@ -19,28 +26,19 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
-
+}: GetStaticPropsArgs): Promise<AudiobooksStaticProps> {
 	return getPaginatedStaticProps(
-		language,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getAudiobookListPageData({
-				language,
-				offset,
-				first,
-			});
-
-			return result?.audiobooks;
-		}
+		params,
+		getAudiobookListPageData,
+		(d) => d.audiobooks.nodes,
+		(d) => d.audiobooks.aggregate?.count
 	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('books', async (language) => {
-		const data = await getAudiobookListPathsData({ language });
-
-		return data.audiobooks.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'books',
+		getAudiobookListPathsData,
+		(d) => d.audiobooks.aggregate?.count
+	);
 }

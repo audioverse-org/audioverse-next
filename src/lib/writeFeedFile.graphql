@@ -1,0 +1,14 @@
+fragment writeFeedFile on Recording {
+	title
+	description
+	canonicalUrl
+	recordingDate
+	audioFiles {
+		url
+		filesize
+	}
+	videoFiles {
+		url
+		filesize
+	}
+}

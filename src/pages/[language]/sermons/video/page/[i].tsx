@@ -1,6 +1,8 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
-import { getSermonCount } from '@lib/api';
-import { getSermonListStaticProps } from '@lib/generated/graphql';
+import {
+	getSermonListPagePathsData,
+	getSermonListStaticProps,
+} from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -18,21 +20,17 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { i, language } = params;
+	const { language } = params;
 
 	const response = await getPaginatedStaticProps(
-		language,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getSermonListStaticProps({
-				language,
+		params,
+		async (variables) =>
+			getSermonListStaticProps({
+				...variables,
 				hasVideo: true,
-				offset,
-				first,
-			});
-
-			return result?.sermons;
-		}
+			}),
+		(d) => d.sermons.nodes,
+		(d) => d.sermons.aggregate?.count
 	);
 
 	// TODO: generate rss
@@ -48,7 +46,9 @@ export async function getStaticProps({
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('sermons/video', (lang) => {
-		return getSermonCount(lang, { hasVideo: true });
-	});
+	return getNumberedStaticPaths(
+		'sermons/video',
+		({ language }) => getSermonListPagePathsData({ language, hasVideo: true }),
+		(d) => d?.sermons.aggregate?.count
+	);
 }

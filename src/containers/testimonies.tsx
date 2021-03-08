@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Pagination from '@components/molecules/pagination';
+import { makeTestimoniesRoute } from '@lib/routes';
 
 import styles from './testimonies.module.scss';
 
@@ -39,7 +40,7 @@ export default function Testimonies({
 				<Pagination
 					current={pagination.current}
 					total={pagination.total}
-					base={'/en/testimonies'}
+					makeRoute={makeTestimoniesRoute}
 				/>
 			)}
 		</>

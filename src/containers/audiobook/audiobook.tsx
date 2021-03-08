@@ -1,68 +1,74 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import CopyrightInfos from '@components/molecules/copyrightInfos';
 import Player from '@components/molecules/player';
 import SponsorInfo from '@components/molecules/sponsorInfo';
+import Playlist from '@components/organisms/playlist';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
-import { readableBytes } from '@lib/readableBytes';
 
 type Audiobook = NonNullable<GetAudiobookDetailPageDataQuery['audiobook']>;
 
 export interface AudiobookProps {
 	audiobook: Audiobook | undefined | null;
+	rssPath: string;
 }
 
-function Audiobook({ audiobook }: AudiobookProps): JSX.Element {
+function Audiobook({ audiobook, rssPath }: AudiobookProps): JSX.Element {
 	const recordings = audiobook?.recordings.nodes || [];
-	const firstId = recordings.length ? recordings[0].id : undefined;
-	const [id, setId] = useState<string | undefined>(firstId);
-	const recording = recordings.find((r) => r.id === id);
-	const sources = [{ src: recording?.audioFiles[0].url }];
 
 	return (
-		<>
-			{recording && <Player sources={sources} />}
-			<p>
-				<FormattedMessage
-					id="audiobookDetailPage__nowPlaying"
-					defaultMessage="Now playing:"
-					description="Audiobook detail now playing prefix"
-				/>{' '}
-				{recording?.title}
-			</p>
-			<h2>
-				<FormattedMessage
-					id="audiobookDetailPage__aboutTab"
-					defaultMessage="About"
-					description="Audiobook detail about tab"
-				/>
-			</h2>
-			{audiobook?.sponsor && <SponsorInfo sponsor={audiobook.sponsor} />}
-			<h2>
-				<FormattedMessage
-					id="audiobookDetailPage__chaptersTab"
-					defaultMessage="Chapters"
-					description="Audiobook detail chapters tab"
-				/>
-			</h2>
-			<ul>
-				{recordings.map((r) => (
-					<li key={r.id}>
-						<button onClick={() => setId(r.id)}>{r.title}</button>
-						{r.audioDownloads?.map((d) => (
-							<a
-								key={d.url}
-								href={d.url}
-								target={'_blank'}
-								rel={'noreferrer noopener'}
-							>
-								{readableBytes(d.filesize)}
-							</a>
-						))}
-					</li>
-				))}
-			</ul>
-		</>
+		<Playlist recordings={recordings}>
+			{(recording) => {
+				const audioFiles = recording.audioFiles || [];
+				const sources = [{ src: audioFiles[0]?.url }];
+
+				return (
+					<>
+						<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
+							<FormattedMessage
+								id="audiobookDetailPage__rssLinkLabel"
+								defaultMessage="RSS"
+								description="Audiobook detail rss link label"
+							/>
+						</a>
+						{recording && <Player sources={sources} />}
+						<p>
+							<FormattedMessage
+								id="audiobookDetailPage__nowPlaying"
+								defaultMessage="Now playing:"
+								description="Audiobook detail now playing prefix"
+							/>{' '}
+							{recording?.title}
+						</p>
+						<h2>
+							<FormattedMessage
+								id="audiobookDetailPage__aboutTab"
+								defaultMessage="About"
+								description="Audiobook detail about tab"
+							/>
+						</h2>
+						{audiobook?.sponsor && <SponsorInfo sponsor={audiobook.sponsor} />}
+						<CopyrightInfos recordings={recordings} />
+						<h2>
+							<FormattedMessage
+								id="audiobookDetailPage__shareTabTitle"
+								defaultMessage="Share"
+								description="Audiobook detail share tab"
+							/>
+						</h2>
+						<label>
+							<FormattedMessage
+								id="audiobookDetailPage__shortUrlLabel"
+								defaultMessage="Short URL"
+								description="Audiobook detail short url label"
+							/>{' '}
+							<input type="text" value={audiobook?.shareUrl} readOnly={true} />
+						</label>
+					</>
+				);
+			}}
+		</Playlist>
 	);
 }
 

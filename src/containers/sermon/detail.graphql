@@ -1,21 +1,21 @@
 query getSermonDetailData($id: ID!) {
-    sermon(id: $id) {
-        ...recording
-        sequence {
-            title
-            recordings {
-                nodes {
-                    ...recordingList
-                }
-            }
-        }
-    }
+	sermon(id: $id) {
+		...recording
+		sequence {
+			title
+			recordings {
+				nodes {
+					...recordingList
+				}
+			}
+		}
+	}
 }
 
 query getSermonDetailStaticPaths($language: Language!, $first: Int) {
-    sermons(language: $language, first: $first) {
-        nodes {
-            id
-        }
-    }
+	sermons(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
 }

@@ -20,19 +20,18 @@ interface StaticProps {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { language, i } = params;
-
-	return getPaginatedStaticProps(language, i, async (params) => {
-		const result = await getTagListPageData(params);
-
-		return result?.tags;
-	});
+	return getPaginatedStaticProps(
+		params,
+		getTagListPageData,
+		(d) => d.tags.nodes,
+		(d) => d.tags.aggregate?.count
+	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return getNumberedStaticPaths('tags', async (language) => {
-		const result = await getTagListPathsData({ language });
-
-		return result?.tags?.aggregate?.count || 0;
-	});
+	return getNumberedStaticPaths(
+		'tags',
+		getTagListPathsData,
+		(d) => d.tags?.aggregate?.count
+	);
 }

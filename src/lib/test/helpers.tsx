@@ -5,16 +5,16 @@ import * as feed from 'feed';
 import _ from 'lodash';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
-import React, { ReactElement } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import * as api from '@lib/api';
 import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
 
+// TODO: Delete this and mock @lib/writeFeedFile instead, except in writeFeedFile.spec.ts
 export const mockFeed = (): { addItem: any; rss2: any } => {
 	const addItem = jest.fn();
 	const rss2 = jest.fn();
@@ -22,30 +22,6 @@ export const mockFeed = (): { addItem: any; rss2: any } => {
 
 	return { addItem, rss2 };
 };
-
-export function loadSermonListData({
-	nodes = undefined,
-	count = undefined,
-}: { nodes?: any[]; count?: number } = {}): void {
-	mockedFetchApi.mockResolvedValue({
-		sermons: {
-			nodes: nodes || [
-				{
-					id: 'the_sermon_id',
-					title: 'the_sermon_title',
-					videoFiles: [],
-				},
-			],
-			aggregate: {
-				count: count || 1,
-			},
-		},
-	});
-}
-
-export function setSermonCount(count: number): void {
-	jest.spyOn(api, 'getSermonCount').mockResolvedValue(count);
-}
 
 export function loadQuery(query: ParsedUrlQuery = {}): void {
 	loadRouter({ query });
@@ -55,6 +31,24 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
 }
 
+export function buildRenderer<
+	C extends ComponentType<any>,
+	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(
+	Component: C,
+	getStaticProps: F,
+	defaultParams: P = {} as P
+): (params?: Partial<P>) => Promise<RenderResult> {
+	return async (params: Partial<P> = {}): Promise<RenderResult> => {
+		const p = { ...defaultParams, ...params };
+		loadRouter({ query: p });
+		const { props } = await getStaticProps({ params: p });
+		return renderWithIntl(Component, props);
+	};
+}
+
+// TODO: Merge with buildRenderer, or just make it private
 export async function renderWithIntl<T>(
 	Component: React.ComponentType<T>,
 	props: T
@@ -64,6 +58,7 @@ export async function renderWithIntl<T>(
 	return renderWithQueryProvider(<WithIntl {...props} />);
 }
 
+// TODO: Merge with buildRenderer, or just make it private
 export async function renderWithQueryProvider(
 	ui: ReactElement
 ): Promise<RenderResult & { queryClient: QueryClient }> {
@@ -136,5 +131,5 @@ export const makePlaylistButtonData = (
 		},
 	];
 
-	return _.set({}, 'me.user.playlists.nodes', value);
+	return _.set({} as any, 'me.user.playlists.nodes', value);
 };

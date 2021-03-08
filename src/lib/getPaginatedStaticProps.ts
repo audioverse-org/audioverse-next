@@ -1,53 +1,53 @@
-import _ from 'lodash';
-
 import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
-export interface PaginatedStaticProps {
+export interface PaginationData {
+	total: number;
+	current: number;
+}
+
+// TODO: Improve nodes type
+export interface PaginatedStaticProps<DATA, NODE> {
 	props: {
-		nodes: any[];
-		pagination: {
-			total: number;
-			current: number;
-		};
+		nodes: NODE[];
+		pagination: PaginationData;
+		data: DATA | null;
 	};
 	revalidate: number;
 }
 
-interface IGetterResolved {
-	nodes?: any[] | null;
-	aggregate?: {
-		count: number;
-	} | null;
-}
-
-interface Getter<T> {
+interface Getter<DATA> {
 	({
 		language,
 		offset,
 		first,
 	}: {
 		language: Language;
-		hasVideo?: boolean | null;
-		offset?: number;
-		first?: number;
-	}): Promise<T>;
+		offset: number;
+		first: number;
+	}): Promise<DATA>;
 }
 
-export async function getPaginatedStaticProps<T extends IGetterResolved>(
-	languageRoute: string,
-	pageIndex: number | string,
-	getter: Getter<T>
-): Promise<PaginatedStaticProps> {
-	const result = await getter({
+export async function getPaginatedStaticProps<DATA, NODE>(
+	params: {
+		language: string;
+		i: number | string;
+	},
+	getter: Getter<DATA>,
+	parseNodes: (data: DATA) => NODE[] | null | undefined,
+	parseCount: (count: DATA) => number | null | undefined
+): Promise<PaginatedStaticProps<DATA, NODE>> {
+	const { language: languageRoute, i: pageIndex } = params;
+
+	const data = await getter({
 		language: getLanguageIdByRoute(languageRoute),
 		offset: (+pageIndex - 1) * ENTRIES_PER_PAGE,
 		first: ENTRIES_PER_PAGE,
-	}).catch(() => ({}));
+	}).catch(() => null);
 
-	const nodes = _.get(result, 'nodes', []);
-	const count = _.get(result, 'aggregate.count', 0);
+	const nodes = (data && parseNodes(data)) || [];
+	const count = (data && parseCount(data)) || 0;
 	const total = Math.ceil(count / ENTRIES_PER_PAGE);
 
 	return {
@@ -57,6 +57,7 @@ export async function getPaginatedStaticProps<T extends IGetterResolved>(
 				total,
 				current: +pageIndex,
 			},
+			data,
 		},
 		revalidate: REVALIDATE,
 	};

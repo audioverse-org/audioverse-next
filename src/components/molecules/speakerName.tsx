@@ -37,7 +37,7 @@ export default function SpeakerName({
 		<>
 			<a
 				href={makePersonRoute(lang, id)}
-				data-tip
+				data-tip={true}
 				data-for={`person-${id}-speakerTip`}
 			>
 				{name}

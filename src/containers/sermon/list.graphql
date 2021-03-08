@@ -1,21 +1,30 @@
 query getSermonListStaticProps(
-    $language: Language!,
-    $hasVideo: Boolean,
-    $first: Int,
-    $offset: Int
+	$language: Language!
+	$hasVideo: Boolean
+	$first: Int
+	$offset: Int
 ) {
-    sermons(
-        language: $language,
-        hasVideo: $hasVideo,
-        first: $first,
-        offset: $offset,
-        orderBy: {direction: DESC, field: CREATED_AT}
-    ) {
-        nodes {
-            ...recordingList
-        }
-        aggregate {
-            count
-        }
-    }
+	sermons(
+		language: $language
+		hasVideo: $hasVideo
+		first: $first
+		offset: $offset
+		orderBy: { direction: DESC, field: CREATED_AT }
+	) {
+		nodes {
+			...recordingList
+			...writeFeedFile
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
+	sermons(language: $language, hasVideo: $hasVideo) {
+		aggregate {
+			count
+		}
+	}
 }

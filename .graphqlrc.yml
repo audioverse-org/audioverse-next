@@ -1,12 +1,13 @@
 overwrite: true
-schema: "https://graphql-staging.audioverse.org/graphql"
-documents: "src/**/*.graphql"
+schema: 'https://graphql-staging.audioverse.org/graphql'
+documents: 'src/**/*.graphql'
 generates:
   src/lib/generated/graphql.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
+      - 'typescript'
+      - 'typescript-operations'
       - 'typescript-react-query'
       - 'graphql-plugin-getters.js'
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
+      avoidOptionals: true

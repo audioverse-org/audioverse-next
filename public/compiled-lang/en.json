@@ -11,18 +11,414 @@
       "value": "Unfavorite"
     }
   ],
-  "feed-title": [
+  "audiobook-feed-title": [
+    {
+      "type": 1,
+      "value": "title"
+    },
     {
       "type": 0,
-      "value": "AudioVerse Recent Recordings ("
+      "value": " : AudioVerse audiobook"
+    }
+  ],
+  "audiobookDetailPage__aboutTab": [
+    {
+      "type": 0,
+      "value": "About"
+    }
+  ],
+  "audiobookDetailPage__multipleCopyrightExplanation": [
+    {
+      "type": 0,
+      "value": "Portions of this audiobook are covered under the following license terms:"
+    }
+  ],
+  "audiobookDetailPage__nowPlaying": [
+    {
+      "type": 0,
+      "value": "Now playing:"
+    }
+  ],
+  "audiobookDetailPage__rssLinkLabel": [
+    {
+      "type": 0,
+      "value": "RSS"
+    }
+  ],
+  "audiobookDetailPage__shareTabTitle": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "audiobookDetailPage__shortUrlLabel": [
+    {
+      "type": 0,
+      "value": "Short URL"
+    }
+  ],
+  "audiobooks__pageTitle": [
+    {
+      "type": 0,
+      "value": "Audiobooks"
+    }
+  ],
+  "bibleBook__chapterSelectLabel": [
+    {
+      "type": 0,
+      "value": "Chapter"
+    }
+  ],
+  "bibleBook__copyrightPrefix": [
+    {
+      "type": 0,
+      "value": "Copyright ⓒ"
+    }
+  ],
+  "bibleBook__mp3Label": [
+    {
+      "type": 0,
+      "value": "mp3:"
+    }
+  ],
+  "bibleBook__shortUrlLabel": [
+    {
+      "type": 0,
+      "value": "Short URL"
+    }
+  ],
+  "bibleBook__tabAbout": [
+    {
+      "type": 0,
+      "value": "About"
+    }
+  ],
+  "bibleBook__tabDownloads": [
+    {
+      "type": 0,
+      "value": "Downloads"
+    }
+  ],
+  "bibleBook__tabShare": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "bibleBook__tabTranscript": [
+    {
+      "type": 0,
+      "value": "Transcript"
+    }
+  ],
+  "conferenceDetail__rssLink": [
+    {
+      "type": 0,
+      "value": "RSS"
+    }
+  ],
+  "conferenceListPage__title": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "feed-title": [
+    {
+      "type": 1,
+      "value": "identifier"
+    },
+    {
+      "type": 0,
+      "value": " | AudioVerse "
     },
     {
       "type": 1,
       "value": "lang"
+    }
+  ],
+  "footer__NavItemAboutUs": [
+    {
+      "type": 0,
+      "value": "About Us"
+    }
+  ],
+  "footer__NavItemAudioVerseStore": [
+    {
+      "type": 0,
+      "value": "AudioVerse Store"
+    }
+  ],
+  "footer__NavItemBibles": [
+    {
+      "type": 0,
+      "value": "Bibles"
+    }
+  ],
+  "footer__NavItemBlog": [
+    {
+      "type": 0,
+      "value": "Blog"
+    }
+  ],
+  "footer__NavItemBooks": [
+    {
+      "type": 0,
+      "value": "Books"
+    }
+  ],
+  "footer__NavItemConferences": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "footer__NavItemContactUs": [
+    {
+      "type": 0,
+      "value": "Contact Us"
+    }
+  ],
+  "footer__NavItemFAQ": [
+    {
+      "type": 0,
+      "value": "FAQ"
+    }
+  ],
+  "footer__NavItemJourneysUnscripted": [
+    {
+      "type": 0,
+      "value": "Journeys Unscripted"
+    }
+  ],
+  "footer__NavItemMeetTheTeam": [
+    {
+      "type": 0,
+      "value": "Meet the Team"
+    }
+  ],
+  "footer__NavItemPlaylists": [
+    {
+      "type": 0,
+      "value": "Playlists"
+    }
+  ],
+  "footer__NavItemPresentations": [
+    {
+      "type": 0,
+      "value": "Presentations"
+    }
+  ],
+  "footer__NavItemPresenters": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "footer__NavItemScriptureSongs": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "footer__NavItemSeries": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "footer__NavItemSpiritOfAudioVerse": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "footer__NavItemSponsors": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "footer__NavItemStories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "footer__NavItemTags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "footer__NavItemTestimonials": [
+    {
+      "type": 0,
+      "value": "Testimonials"
+    }
+  ],
+  "footer__androidAppImageAlt": [
+    {
+      "type": 0,
+      "value": "Android App"
+    }
+  ],
+  "footer__copyright": [
+    {
+      "type": 0,
+      "value": "AudioVerse © "
+    },
+    {
+      "type": 1,
+      "value": "year"
     },
     {
       "type": 0,
-      "value": ")"
+      "value": " All Rights Reserved."
+    }
+  ],
+  "footer__designedBy": [
+    {
+      "type": 0,
+      "value": "Designed by"
+    }
+  ],
+  "footer__iosAppImageAlt": [
+    {
+      "type": 0,
+      "value": "iOS App"
+    }
+  ],
+  "footer__legalInfoLink": [
+    {
+      "type": 0,
+      "value": "Legal Info"
+    }
+  ],
+  "footer__privacyPolicyLink": [
+    {
+      "type": 0,
+      "value": "Privacy Policy"
+    }
+  ],
+  "footer__termsLink": [
+    {
+      "type": 0,
+      "value": "Terms of Use"
+    }
+  ],
+  "header__donateButton": [
+    {
+      "type": 0,
+      "value": "Donate Now"
+    }
+  ],
+  "header__navItemBibles": [
+    {
+      "type": 0,
+      "value": "Bibles"
+    }
+  ],
+  "header__navItemPresentations": [
+    {
+      "type": 0,
+      "value": "Presentations"
+    }
+  ],
+  "header__naveItemBooks": [
+    {
+      "type": 0,
+      "value": "Books"
+    }
+  ],
+  "header__naveItemConferences": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "header__naveItemFavorites": [
+    {
+      "type": 0,
+      "value": "Favorites"
+    }
+  ],
+  "header__naveItemHistory": [
+    {
+      "type": 0,
+      "value": "History"
+    }
+  ],
+  "header__naveItemLogout": [
+    {
+      "type": 0,
+      "value": "Logout"
+    }
+  ],
+  "header__naveItemManageAccount": [
+    {
+      "type": 0,
+      "value": "Manage Account"
+    }
+  ],
+  "header__naveItemMyPlaylists": [
+    {
+      "type": 0,
+      "value": "My Playlists"
+    }
+  ],
+  "header__naveItemPlaylists": [
+    {
+      "type": 0,
+      "value": "Playlists"
+    }
+  ],
+  "header__naveItemPresenters": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "header__naveItemScriptureSongs": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "header__naveItemSeries": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "header__naveItemSponsors": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "header__naveItemStories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "header__naveItemTags": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "header__sisterSiteJourneysUnscriptedLink": [
+    {
+      "type": 0,
+      "value": "Journeys Unscripted"
+    }
+  ],
+  "header__sisterSiteStoreLink": [
+    {
+      "type": 0,
+      "value": "AudioVerse Store"
     }
   ],
   "player__noSources": [
@@ -53,6 +449,30 @@
     {
       "type": 0,
       "value": "You must be logged in to perform this action"
+    }
+  ],
+  "playlist__heading": [
+    {
+      "type": 0,
+      "value": "Playlist"
+    }
+  ],
+  "presenterListPage__title": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "recordingListEntry__audioLabel": [
+    {
+      "type": 0,
+      "value": "Audio"
+    }
+  ],
+  "recordingListEntry__videoLabel": [
+    {
+      "type": 0,
+      "value": "Video"
     }
   ],
   "sermonDetailPage__descriptionTitle": [
@@ -91,6 +511,12 @@
       "value": "Video Files"
     }
   ],
+  "sermonDetailPage__embedCodeLabel": [
+    {
+      "type": 0,
+      "value": "Embed Code"
+    }
+  ],
   "sermonDetailPage__presenterInfoTitle": [
     {
       "type": 0,
@@ -109,6 +535,18 @@
       "value": "Series"
     }
   ],
+  "sermonDetailPage__shareTitle": [
+    {
+      "type": 0,
+      "value": "Share"
+    }
+  ],
+  "sermonDetailPage__shortUrlLabel": [
+    {
+      "type": 0,
+      "value": "Short URL"
+    }
+  ],
   "sermonDetailPage__sponsorInfoTitle": [
     {
       "type": 0,
@@ -116,6 +554,450 @@
     }
   ],
   "sermonDetailPage__tagsTitle": [
+    {
+      "type": 0,
+      "value": "Tags"
+    }
+  ],
+  "sermonDetailPage__transcriptDisclaimer": [
+    {
+      "type": 0,
+      "value": "This transcript may be automatically generated."
+    }
+  ],
+  "sermonDetailPage__transcriptHelp": [
+    {
+      "type": 0,
+      "value": "Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
+    }
+  ],
+  "sermonDetailPage__transcriptTitle": [
+    {
+      "type": 0,
+      "value": "Transcript"
+    }
+  ],
+  "sermons-all-rss-identifier": [
+    {
+      "type": 0,
+      "value": "All Sermons"
+    }
+  ],
+  "songsListPage__1ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "1 Chronicles"
+    }
+  ],
+  "songsListPage__1CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "1 Corinthians"
+    }
+  ],
+  "songsListPage__1JohnLabel": [
+    {
+      "type": 0,
+      "value": "1 John"
+    }
+  ],
+  "songsListPage__1KingsLabel": [
+    {
+      "type": 0,
+      "value": "1 Kings"
+    }
+  ],
+  "songsListPage__1PeterLabel": [
+    {
+      "type": 0,
+      "value": "1 Peter"
+    }
+  ],
+  "songsListPage__1SamuelLabel": [
+    {
+      "type": 0,
+      "value": "1 Samuel"
+    }
+  ],
+  "songsListPage__1ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "1 Thessalonians"
+    }
+  ],
+  "songsListPage__1TimothyLabel": [
+    {
+      "type": 0,
+      "value": "1 Timothy"
+    }
+  ],
+  "songsListPage__2ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "2 Chronicles"
+    }
+  ],
+  "songsListPage__2CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "2 Corinthians"
+    }
+  ],
+  "songsListPage__2JohnLabel": [
+    {
+      "type": 0,
+      "value": "2 John"
+    }
+  ],
+  "songsListPage__2KingsLabel": [
+    {
+      "type": 0,
+      "value": "2 Kings"
+    }
+  ],
+  "songsListPage__2PeterLabel": [
+    {
+      "type": 0,
+      "value": "2 Peter"
+    }
+  ],
+  "songsListPage__2SamuelLabel": [
+    {
+      "type": 0,
+      "value": "2 Samuel"
+    }
+  ],
+  "songsListPage__2ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "2 Thessalonians"
+    }
+  ],
+  "songsListPage__2TimothyLabel": [
+    {
+      "type": 0,
+      "value": "2 Timothy"
+    }
+  ],
+  "songsListPage__3JohnLabel": [
+    {
+      "type": 0,
+      "value": "3 John"
+    }
+  ],
+  "songsListPage__ActsLabel": [
+    {
+      "type": 0,
+      "value": "Acts"
+    }
+  ],
+  "songsListPage__AmosLabel": [
+    {
+      "type": 0,
+      "value": "Amos"
+    }
+  ],
+  "songsListPage__ColossiansLabel": [
+    {
+      "type": 0,
+      "value": "Colossians"
+    }
+  ],
+  "songsListPage__DanielLabel": [
+    {
+      "type": 0,
+      "value": "Daniel"
+    }
+  ],
+  "songsListPage__DeuteronomyLabel": [
+    {
+      "type": 0,
+      "value": "Deuteronomy"
+    }
+  ],
+  "songsListPage__EcclesiastesLabel": [
+    {
+      "type": 0,
+      "value": "Ecclesiastes"
+    }
+  ],
+  "songsListPage__EphesiansLabel": [
+    {
+      "type": 0,
+      "value": "Ephesians"
+    }
+  ],
+  "songsListPage__EstherLabel": [
+    {
+      "type": 0,
+      "value": "Esther"
+    }
+  ],
+  "songsListPage__ExodusLabel": [
+    {
+      "type": 0,
+      "value": "Exodus"
+    }
+  ],
+  "songsListPage__EzekielLabel": [
+    {
+      "type": 0,
+      "value": "Ezekiel"
+    }
+  ],
+  "songsListPage__EzraLabel": [
+    {
+      "type": 0,
+      "value": "Ezra"
+    }
+  ],
+  "songsListPage__GalatiansLabel": [
+    {
+      "type": 0,
+      "value": "Galatians"
+    }
+  ],
+  "songsListPage__GenesisLabel": [
+    {
+      "type": 0,
+      "value": "Genesis"
+    }
+  ],
+  "songsListPage__HabakkukLabel": [
+    {
+      "type": 0,
+      "value": "Habakkuk"
+    }
+  ],
+  "songsListPage__HaggaiLabel": [
+    {
+      "type": 0,
+      "value": "Haggai"
+    }
+  ],
+  "songsListPage__HebrewsLabel": [
+    {
+      "type": 0,
+      "value": "Hebrews"
+    }
+  ],
+  "songsListPage__HoseaLabel": [
+    {
+      "type": 0,
+      "value": "Hosea"
+    }
+  ],
+  "songsListPage__IsaiahLabel": [
+    {
+      "type": 0,
+      "value": "Isaiah"
+    }
+  ],
+  "songsListPage__JamesLabel": [
+    {
+      "type": 0,
+      "value": "James"
+    }
+  ],
+  "songsListPage__JeremiahLabel": [
+    {
+      "type": 0,
+      "value": "Jeremiah"
+    }
+  ],
+  "songsListPage__JobLabel": [
+    {
+      "type": 0,
+      "value": "Job"
+    }
+  ],
+  "songsListPage__JoelLabel": [
+    {
+      "type": 0,
+      "value": "Joel"
+    }
+  ],
+  "songsListPage__JohnLabel": [
+    {
+      "type": 0,
+      "value": "John"
+    }
+  ],
+  "songsListPage__JonahLabel": [
+    {
+      "type": 0,
+      "value": "Jonah"
+    }
+  ],
+  "songsListPage__JoshuaLabel": [
+    {
+      "type": 0,
+      "value": "Joshua"
+    }
+  ],
+  "songsListPage__JudeLabel": [
+    {
+      "type": 0,
+      "value": "Jude"
+    }
+  ],
+  "songsListPage__JudgesLabel": [
+    {
+      "type": 0,
+      "value": "Judges"
+    }
+  ],
+  "songsListPage__LamentationsLabel": [
+    {
+      "type": 0,
+      "value": "Lamentations"
+    }
+  ],
+  "songsListPage__LeviticusLabel": [
+    {
+      "type": 0,
+      "value": "Leviticus"
+    }
+  ],
+  "songsListPage__LukeLabel": [
+    {
+      "type": 0,
+      "value": "Luke"
+    }
+  ],
+  "songsListPage__MalachiLabel": [
+    {
+      "type": 0,
+      "value": "Malachi"
+    }
+  ],
+  "songsListPage__MarkLabel": [
+    {
+      "type": 0,
+      "value": "Mark"
+    }
+  ],
+  "songsListPage__MatthewLabel": [
+    {
+      "type": 0,
+      "value": "Matthew"
+    }
+  ],
+  "songsListPage__MicahLabel": [
+    {
+      "type": 0,
+      "value": "Micah"
+    }
+  ],
+  "songsListPage__NahumLabel": [
+    {
+      "type": 0,
+      "value": "Nahum"
+    }
+  ],
+  "songsListPage__NehemiahLabel": [
+    {
+      "type": 0,
+      "value": "Nehemiah"
+    }
+  ],
+  "songsListPage__NumbersLabel": [
+    {
+      "type": 0,
+      "value": "Numbers"
+    }
+  ],
+  "songsListPage__ObadiahLabel": [
+    {
+      "type": 0,
+      "value": "Obadiah"
+    }
+  ],
+  "songsListPage__PhilemonLabel": [
+    {
+      "type": 0,
+      "value": "Philemon"
+    }
+  ],
+  "songsListPage__PhilippiansLabel": [
+    {
+      "type": 0,
+      "value": "Philippians"
+    }
+  ],
+  "songsListPage__ProverbsLabel": [
+    {
+      "type": 0,
+      "value": "Proverbs"
+    }
+  ],
+  "songsListPage__PsalmsLabel": [
+    {
+      "type": 0,
+      "value": "Psalms"
+    }
+  ],
+  "songsListPage__RevelationLabel": [
+    {
+      "type": 0,
+      "value": "Revelation"
+    }
+  ],
+  "songsListPage__RomansLabel": [
+    {
+      "type": 0,
+      "value": "Romans"
+    }
+  ],
+  "songsListPage__RuthLabel": [
+    {
+      "type": 0,
+      "value": "Ruth"
+    }
+  ],
+  "songsListPage__Song of SolomonLabel": [
+    {
+      "type": 0,
+      "value": "Detail of Solomon"
+    }
+  ],
+  "songsListPage__TitusLabel": [
+    {
+      "type": 0,
+      "value": "Titus"
+    }
+  ],
+  "songsListPage__ZechariahLabel": [
+    {
+      "type": 0,
+      "value": "Zechariah"
+    }
+  ],
+  "songsListPage__ZephaniahLabel": [
+    {
+      "type": 0,
+      "value": "Zephaniah"
+    }
+  ],
+  "songsListPage__albumTabLabel": [
+    {
+      "type": 0,
+      "value": "Albums"
+    }
+  ],
+  "songsListPage__bookTabLabel": [
+    {
+      "type": 0,
+      "value": "Books"
+    }
+  ],
+  "songsListPage__sponsorTabLabel": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "songsListPage__tagTabLabel": [
     {
       "type": 0,
       "value": "Tags"
@@ -137,6 +1019,40 @@
     {
       "type": 0,
       "value": "Unfavorite"
+    }
+  ],
+  "storiesListPage__pageTitle": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "tag-feed-title": [
+    {
+      "type": 0,
+      "value": "AudioVerse Recordings Tagged "
+    },
+    {
+      "type": 1,
+      "value": "tag"
+    },
+    {
+      "type": 0,
+      "value": " ("
+    },
+    {
+      "type": 1,
+      "value": "lang"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "tagListPage__title": [
+    {
+      "type": 0,
+      "value": "Tags"
     }
   ],
   "title": [

@@ -27,6 +27,9 @@ const withIntl = <P extends any>(
 					if (err.code === 'MISSING_TRANSLATION') {
 						return;
 					}
+					if (err.code === 'MISSING_DATA') {
+						return;
+					}
 					console.error(err);
 				}}
 			>

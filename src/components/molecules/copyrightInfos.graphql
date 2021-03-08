@@ -1,0 +1,11 @@
+fragment copyrightInfos on Recording {
+	id
+	copyrightYear
+	distributionAgreement {
+		id
+	}
+	sponsor {
+		id
+	}
+	...copyrightInfo
+}

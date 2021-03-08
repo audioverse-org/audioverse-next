@@ -824,4 +824,6 @@ describe('sermon detail page', () => {
 			'https://www.audioverse.org/english/embed/media/the_sermon_id'
 		);
 	});
+
+	// TODO: Catch fetch error in getStaticProps and render 404
 });

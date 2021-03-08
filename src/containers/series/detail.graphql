@@ -1,16 +1,16 @@
 query getSeriesDetailData($id: ID!) {
-    series(id: $id) {
-        title
-        image {
-            url(size: 100)
-        }
-    }
+	series(id: $id) {
+		title
+		image {
+			url(size: 100)
+		}
+	}
 }
 
 query getSeriesDetailPathsData($language: Language!, $first: Int) {
-    serieses(language: $language, first: $first) {
-        nodes {
-            id
-        }
-    }
+	serieses(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
 }

@@ -1,10 +1,10 @@
 .verse {
-    line-height: 1.4em;
-    & > * {
-        margin-right: 0.2em;
-    }
-    sup {
-        font-weight: bold;
-        line-height: 0;
-    }
+	line-height: 1.4em;
+	& > * {
+		margin-right: 0.2em;
+	}
+	sup {
+		font-weight: bold;
+		line-height: 0;
+	}
 }

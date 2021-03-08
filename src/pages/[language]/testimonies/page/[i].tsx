@@ -1,6 +1,9 @@
 import Testimonies from '@containers/testimonies';
-import { getTestimonyCount } from '@lib/api';
-import { getTestimonies } from '@lib/generated/graphql';
+import {
+	getTestimoniesPageData,
+	GetTestimoniesPageDataQuery,
+	getTestimoniesPathsData,
+} from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
 	getPaginatedStaticProps,
@@ -13,23 +16,26 @@ interface GetStaticPropsArgs {
 	params: { i: string; language: string };
 }
 
+type Testimony = NonNullable<
+	NonNullable<GetTestimoniesPageDataQuery>['testimonies']['nodes']
+>[0];
+type StaticProps = PaginatedStaticProps<GetTestimoniesPageDataQuery, Testimony>;
+
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<PaginatedStaticProps> {
-	const { i, language: baseUrl } = params;
-
-	return await getPaginatedStaticProps(
-		baseUrl,
-		parseInt(i),
-		async ({ language, offset, first }) => {
-			// TODO: Update getPaginatedStaticProps args so that wrapping getter not necessary
-			const data = await getTestimonies({ language, first, offset });
-
-			return data?.testimonies;
-		}
+}: GetStaticPropsArgs): Promise<StaticProps> {
+	return getPaginatedStaticProps(
+		params,
+		getTestimoniesPageData,
+		(d) => d?.testimonies.nodes,
+		(d) => d?.testimonies.aggregate?.count
 	);
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
-	return await getNumberedStaticPaths('testimonies', getTestimonyCount);
+	return await getNumberedStaticPaths(
+		'testimonies',
+		getTestimoniesPathsData,
+		(d) => d?.testimonies?.aggregate?.count
+	);
 }

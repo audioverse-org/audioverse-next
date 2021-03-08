@@ -21,6 +21,7 @@ export async function getStaticProps({
 }): Promise<StaticProps> {
 	const { id } = params;
 
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const { series = undefined } = (await getSeriesDetailData({ id })) || {};
 
 	return {
@@ -32,7 +33,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
-		'serieses.nodes',
+		(d) => d.serieses.nodes,
 		(baseUrl, node) => makeSeriesRoute(baseUrl, node.id)
 	);
 }

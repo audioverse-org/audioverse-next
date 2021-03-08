@@ -1,7 +1,7 @@
-import TagDetail, { TagDetailProps } from '@containers/tag/detail';
-import createFeed from '@lib/createFeed';
+import TagDetail from '@containers/tag/detail';
 import {
 	getTagDetailPageData,
+	GetTagDetailPageDataQuery,
 	getTagDetailPathsQuery,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
@@ -11,14 +11,19 @@ import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
-import { makeTagRoute } from '@lib/routes';
+import { makeTagDetailRoute } from '@lib/routes';
+import writeFeedFile from '@lib/writeFeedFile';
 
 export default TagDetail;
 
-interface StaticProps {
-	props: TagDetailProps;
-	revalidate: number;
-}
+type Recording = NonNullable<
+	GetTagDetailPageDataQuery['recordings']['nodes']
+>[0];
+type PaginatedProps = PaginatedStaticProps<
+	GetTagDetailPageDataQuery,
+	Recording
+>;
+type StaticProps = PaginatedProps & { props: { rssPath: string } };
 
 type GetStaticPropsArgs = {
 	params: { slug: string; language: string; i: string };
@@ -26,7 +31,7 @@ type GetStaticPropsArgs = {
 
 const generateRssFeed = async (
 	params: GetStaticPropsArgs['params'],
-	response: PaginatedStaticProps
+	response: PaginatedProps
 ) => {
 	const { i, language: languageRoute, slug } = params;
 	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
@@ -48,7 +53,7 @@ const generateRssFeed = async (
 	);
 
 	if (i === '1' && response.props.nodes) {
-		await createFeed({
+		await writeFeedFile({
 			recordings: response.props.nodes,
 			projectRelativePath: `public/${languageRoute}/tags/${slug}.xml`,
 			title,
@@ -59,23 +64,20 @@ const generateRssFeed = async (
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { slug, language, i } = params;
+	const { slug, language } = params;
 
 	const response = await getPaginatedStaticProps(
-		language,
-		i,
-		async ({ language, offset, first }) => {
-			const result = await getTagDetailPageData({
-				language,
-				offset,
-				first,
+		params,
+		async (variables) =>
+			getTagDetailPageData({
+				...variables,
 				tagName: decodeURIComponent(slug),
-			});
-
-			return result?.recordings;
-		}
+			}),
+		(d) => d.recordings.nodes,
+		(d) => d.recordings.aggregate?.count
 	);
 
+	// TODO: Switch to createFeed function
 	await generateRssFeed(params, response);
 
 	return {
@@ -91,7 +93,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	// TODO: eventually switch to using API-supplied canonical URL
 	return getDetailStaticPaths(
 		getTagDetailPathsQuery,
-		'tags.nodes',
-		(languageRoute, node) => makeTagRoute(languageRoute, node.name)
+		(d) => d.tags.nodes,
+		(languageRoute, node) => makeTagDetailRoute(languageRoute, node.name)
 	);
 }

@@ -4,32 +4,31 @@ import videojs from 'video.js';
 
 import {
 	GetAudiobookDetailPageDataDocument,
+	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import writeFeedFile from '@lib/writeFeedFile';
 import Audiobook, {
 	getStaticPaths,
 	getStaticProps,
-	GetStaticPropsArgs,
 } from '@pages/[language]/books/[id]';
 
 jest.mock('video.js');
+jest.mock('@lib/writeFeedFile');
 
-async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
-	loadRouter({ query: params });
+const renderPage = buildRenderer(Audiobook, getStaticProps, {
+	language: 'en',
+	id: 'the_book_id',
+});
 
-	const { props } = await getStaticProps({
-		params: { language: 'en', id: 'the_book_id', ...params },
-	});
-
-	return renderWithIntl(Audiobook, props);
-}
-
-function loadData() {
+function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 	when(mockedFetchApi)
 		.calledWith(GetAudiobookDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			audiobook: {
+				title: 'the_book_title',
+				shareUrl: 'the_book_share_url',
 				sponsor: {
 					title: 'the_sponsor_title',
 					location: 'the_sponsor_location',
@@ -40,6 +39,10 @@ function loadData() {
 						{
 							id: 'first_recording_id',
 							title: 'first_recording_title',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'first_recording_sponsor_title',
+							},
 							audioFiles: [
 								{
 									url: 'first_recording_url',
@@ -64,6 +67,7 @@ function loadData() {
 					],
 				},
 			},
+			...data,
 		});
 }
 
@@ -164,6 +168,122 @@ describe('audiobook detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_website')).toBeInTheDocument();
+	});
+
+	it('displays copyright', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 first_recording_sponsor_title'));
+	});
+
+	it('dedupes copyright', async () => {
+		loadData({
+			audiobook: {
+				recordings: {
+					nodes: [
+						{
+							id: 'first',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+						{
+							id: 'second',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+					],
+				},
+			},
+		} as any);
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Copyright ⓒ1999 the_sponsor_title')).toBeInTheDocument();
+	});
+
+	it('includes explanation for multiple copyrights', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(
+			getByText(
+				'Portions of this production are covered under the following license terms:'
+			)
+		);
+	});
+
+	it('leaves out multiple copyright explanation if only one copyright', async () => {
+		loadData({
+			audiobook: {
+				recordings: {
+					nodes: [
+						{
+							id: 'first',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+						{
+							id: 'second',
+							copyrightYear: 1999,
+							sponsor: {
+								title: 'the_sponsor_title',
+							},
+						},
+					],
+				},
+			},
+		} as any);
+
+		const { queryByText } = await renderPage();
+
+		expect(
+			queryByText(
+				'Portions of this audiobook are covered under the following license terms:'
+			)
+		).not.toBeInTheDocument();
+	});
+
+	it('renders RSS feed', async () => {
+		loadData();
+
+		await getStaticProps({
+			params: { language: 'en', id: 'the_book_id' },
+		});
+
+		expect(writeFeedFile).toBeCalledWith({
+			recordings: expect.any(Array),
+			projectRelativePath: 'public/en/books/the_book_id.xml',
+			title: 'the_book_title : AudioVerse audiobook',
+		});
+	});
+
+	it('links to rss feed', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		const link = getByText('RSS') as HTMLLinkElement;
+
+		expect(link).toHaveAttribute('href', '/en/books/the_book_id.xml');
+	});
+
+	it('displays share url', async () => {
+		loadData();
+
+		const { getByLabelText } = await renderPage();
+
+		const input = getByLabelText('Short URL') as HTMLInputElement;
+
+		expect(input).toHaveValue('the_book_share_url');
 	});
 
 	// support isDownloadAllowed

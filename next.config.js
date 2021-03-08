@@ -1,5 +1,9 @@
 const withPWA = require('next-pwa');
 
+// TODO: /en/books >> /en/books/page/1
+// TODO: /en/sermons/all >> /en/sermons/all/page/1 (also video, audio)
+// TODO: /en/stories >> /en/stories/page/1
+
 module.exports = withPWA({
 	pwa: {
 		dest: 'public',

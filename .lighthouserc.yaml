@@ -1,6 +1,6 @@
 ci:
   collect:
-  # collect options here
+    # collect options here
     startServerCommand: npm run start
     url:
       - http://localhost:3000

@@ -1,23 +1,19 @@
-query getTagListPageData(
-    $language: Language!,
-    $first: Int,
-    $offset: Int
-) {
-    tags(language: $language, first: $first, offset: $offset) {
-        nodes {
-            id
-            name
-        }
-        aggregate {
-            count
-        }
-    }
+query getTagListPageData($language: Language!, $first: Int, $offset: Int) {
+	tags(language: $language, first: $first, offset: $offset) {
+		nodes {
+			id
+			name
+		}
+		aggregate {
+			count
+		}
+	}
 }
 
 query getTagListPathsData($language: Language!) {
-    tags(language: $language) {
-        aggregate {
-            count
-        }
-    }
+	tags(language: $language) {
+		aggregate {
+			count
+		}
+	}
 }

@@ -9,17 +9,13 @@ import { makeSermonRoute } from '@lib/routes';
 
 export default SermonDetail;
 
-interface StaticProps {
-	props: SermonDetailProps;
-	revalidate: number;
-}
-
 export async function getStaticProps({
 	params,
 }: {
 	params: { id: string };
-}): Promise<StaticProps> {
+}): Promise<StaticProps<SermonDetailProps>> {
 	const { id } = params;
+	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const { sermon } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: undefined,
 	}));
@@ -36,7 +32,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	// TODO: extract route generation
 	return getDetailStaticPaths(
 		getSermonDetailStaticPaths,
-		'sermons.nodes',
+		(d) => d.sermons.nodes,
 		(baseUrl, node) => makeSermonRoute(baseUrl, node.id)
 	);
 }

@@ -1,17 +1,17 @@
 query getVersionDetailPageData($id: ID!) {
-    audiobible(id: $id) {
-        books {
-            id
-            title
-            chapterCount
-        }
-    }
+	audiobible(id: $id) {
+		books {
+			id
+			title
+			chapterCount
+		}
+	}
 }
 
 query getVersionDetailPathData {
-    audiobibles {
-        nodes {
-            id
-        }
-    }
+	audiobibles {
+		nodes {
+			id
+		}
+	}
 }

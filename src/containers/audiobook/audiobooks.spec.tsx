@@ -137,11 +137,11 @@ describe('audiobook list page', () => {
 	it('links entries', async () => {
 		loadData();
 
-		const { getByRole } = await renderPage();
+		const { getAllByRole } = await renderPage();
 
-		const link = getByRole('link', {
-			name: 'the_book_title the_book_title',
-		}) as HTMLLinkElement;
+		const link = getAllByRole('link', {
+			name: 'the_book_title',
+		})[0] as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/books/the_book_id');
 	});
