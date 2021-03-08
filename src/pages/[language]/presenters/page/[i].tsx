@@ -1,4 +1,4 @@
-import Presenters from '@containers/presenter/list.tsx';
+import Presenters from '@containers/presenter/list';
 import {
 	getPresenterListPageData,
 	GetPresenterListPageDataQuery,

@@ -1,4 +1,4 @@
-import Song, { SongDetailProps } from '@containers/song/detail.tsx';
+import Song, { SongDetailProps } from '@containers/song/detail';
 import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
 import { getSongBookPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
