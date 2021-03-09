@@ -135,10 +135,16 @@ export const makeConferenceListRoute = (
 	page: number | string
 ): string => `/${languageRoute}/conferences/page/${page}`;
 
+// TODO: rename makeSponsorDetailRoute
 export const makeSponsorRoute = (
 	languageRoute: string,
 	sponsorId: string
-): string => `/${languageRoute}/sponsors/${sponsorId}`;
+): string => `/${languageRoute}/sponsors/${sponsorId}/page/1`;
+
+export const makeSponsorListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/sponsors/page/${page}`;
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,

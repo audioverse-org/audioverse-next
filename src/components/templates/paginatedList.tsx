@@ -17,7 +17,6 @@ interface PaginatedListProps<T extends Listable> {
 	makeEntryRoute: (languageRoute: string, node: T) => string;
 	parseEntryTitle: (n: T) => string;
 	parseEntryImageUrl: (n: T) => string;
-	parseEntryKey: (n: T) => string;
 	pagination: PaginationData;
 }
 
@@ -30,7 +29,6 @@ export default function PaginatedList<T extends Listable>({
 	makeEntryRoute,
 	parseEntryTitle,
 	parseEntryImageUrl,
-	parseEntryKey,
 	pagination,
 }: PaginatedListProps<T>): JSX.Element {
 	return (
@@ -42,7 +40,7 @@ export default function PaginatedList<T extends Listable>({
 				nodes={nodes}
 				parseTitle={parseEntryTitle}
 				parseImageUrl={parseEntryImageUrl}
-				parseKey={parseEntryKey}
+				parseKey={(n) => n.id}
 				makeEntryRoute={makeEntryRoute}
 			/>
 			<Pagination makeRoute={makePageRoute} {...pagination} />

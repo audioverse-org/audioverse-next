@@ -8,11 +8,11 @@ export interface PaginationData {
 }
 
 // TODO: Improve nodes type
-export interface PaginatedStaticProps<DATA, NODE> {
+export interface PaginatedStaticProps<T, N> {
 	props: {
-		nodes: NODE[];
+		nodes: N[];
 		pagination: PaginationData;
-		data: DATA | null;
+		data: T | null;
 	};
 	revalidate: number;
 }

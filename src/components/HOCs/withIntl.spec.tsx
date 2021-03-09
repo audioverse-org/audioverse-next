@@ -31,6 +31,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Sponsors from '@containers/sponsor/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -343,6 +344,24 @@ describe('localization usage', () => {
 				nodes={[{ id: 'id' }] as any}
 				data={undefined as any}
 				pagination={undefined as any}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes sponsor list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Sponsors
+				nodes={[
+					{
+						id: 'z',
+						imageWithFallback: {
+							url: 'z',
+						},
+					} as any,
+				]}
+				{...({} as any)}
 			/>
 		);
 
