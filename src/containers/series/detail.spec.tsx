@@ -52,7 +52,7 @@ describe('series detail page', () => {
 		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'ENGLISH',
-				first: 1000,
+				first: 500,
 			},
 		});
 	});
@@ -63,7 +63,7 @@ describe('series detail page', () => {
 		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'SPANISH',
-				first: 1000,
+				first: 500,
 			},
 		});
 	});
