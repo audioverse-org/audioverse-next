@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
-import PaginatedList from '@components/templates/paginatedList';
 import React from 'react';
+
+import PaginatedList from '@components/templates/paginatedList';
 
 describe('paginated list template', () => {
 	it('does not render image if none provided', async () => {
