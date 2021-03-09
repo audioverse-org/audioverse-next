@@ -4982,8 +4982,11 @@ export type GetPresenterDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { person: Maybe<(
     { __typename?: 'Person' }
-    & Pick<Person, 'id' | 'name'>
-    & { recordings: (
+    & Pick<Person, 'id' | 'name' | 'summary' | 'description'>
+    & { imageWithFallback: (
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    ), recordings: (
       { __typename?: 'RecordingConnection' }
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
@@ -6148,6 +6151,11 @@ export const GetPresenterDetailPageDataDocument = `
   person(id: $id) {
     id
     name
+    summary
+    description
+    imageWithFallback {
+      url(size: 100)
+    }
     recordings(offset: $offset, first: $first) {
       nodes {
         ...writeFeedFile

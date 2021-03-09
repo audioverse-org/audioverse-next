@@ -340,7 +340,7 @@ describe('localization usage', () => {
 		const screen = await renderWithQueryProvider(
 			<Presenter
 				rssPath={'rssPath'}
-				nodes={[]}
+				nodes={[{ id: 'id' }] as any}
 				data={undefined as any}
 				pagination={undefined as any}
 			/>

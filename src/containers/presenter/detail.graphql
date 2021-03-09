@@ -2,6 +2,11 @@ query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
 	person(id: $id) {
 		id
 		name
+		summary
+		description
+		imageWithFallback {
+			url(size: 100)
+		}
 		recordings(offset: $offset, first: $first) {
 			nodes {
 				...writeFeedFile

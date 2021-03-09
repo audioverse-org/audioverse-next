@@ -26,6 +26,11 @@ function loadData() {
 			person: {
 				id: 'the_presenter_id',
 				name: 'the_presenter_name',
+				summary: 'the_presenter_summary',
+				description: '<i>the</i> <b>description</b>',
+				imageWithFallback: {
+					url: 'the_presenter_image',
+				},
 				recordings: {
 					nodes: [
 						{
@@ -129,10 +134,48 @@ describe('presenter detail page', () => {
 		);
 	});
 
-	// links recording pagination properly
+	it('displays speaker name', async () => {
+		loadData();
 
-	// displays person image
-	// displays person name
-	// displays person description
-	// renders 404
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_presenter_name')).toBeInTheDocument();
+	});
+
+	it('displays speaker summary', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_presenter_summary')).toBeInTheDocument();
+	});
+
+	it('renders description', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('description')).toBeInTheDocument();
+	});
+
+	it('displays person image', async () => {
+		loadData();
+
+		const { getByAltText } = await renderPage();
+
+		expect(getByAltText('the_presenter_name')).toHaveAttribute(
+			'src',
+			'the_presenter_image'
+		);
+	});
+
+	it('renders 404', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetPresenterDetailPageDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
 });
