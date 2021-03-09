@@ -4,7 +4,7 @@ query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
 			id
 			title
 			imageWithFallback {
-				url(size:100)
+				url(size: 100)
 			}
 		}
 		aggregate {

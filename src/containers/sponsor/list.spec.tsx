@@ -1,13 +1,14 @@
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import Sponsors, {
-	getStaticProps,
-	getStaticPaths,
-} from '@pages/[language]/sponsors/page/[i]';
 import { when } from 'jest-when';
+
 import {
 	GetSponsorListPageDataDocument,
 	GetSponsorListPathsDataDocument,
 } from '@lib/generated/graphql';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import Sponsors, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/sponsors/page/[i]';
 
 const renderPage = buildRenderer(Sponsors, getStaticProps, {
 	language: 'en',

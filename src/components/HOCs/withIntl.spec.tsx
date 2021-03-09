@@ -19,6 +19,7 @@ import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
+import Sponsors from '@containers/sponsor/list';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -31,7 +32,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import Sponsors from '@containers/sponsor/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');

@@ -1,9 +1,10 @@
 import React from 'react';
-import PaginatedList from '@components/templates/paginatedList';
-import { SponsorsStaticProps } from '@pages/[language]/sponsors/page/[i]';
-import { makeSponsorListRoute, makeSponsorRoute } from '@lib/routes';
-import withFailStates from '@components/HOCs/withFailStates';
 import { useIntl } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import PaginatedList from '@components/templates/paginatedList';
+import { makeSponsorListRoute, makeSponsorRoute } from '@lib/routes';
+import { SponsorsStaticProps } from '@pages/[language]/sponsors/page/[i]';
 
 type Props = SponsorsStaticProps['props'];
 
