@@ -5458,6 +5458,51 @@ export type GetSponsorListPathsDataQuery = (
   ) }
 );
 
+export type GetSponsorTeachingsPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSponsorTeachingsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsor: Maybe<(
+    { __typename?: 'Sponsor' }
+    & Pick<Sponsor, 'id' | 'title'>
+    & { imageWithFallback: (
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    ), recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & RecordingListFragment
+      )>>, aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
+);
+
+export type GetSponsorTeachingsPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSponsorTeachingsPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsors: (
+    { __typename?: 'SponsorConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetStoriesPageDataQueryVariables = Exact<{
   language: Language;
   first: Maybe<Scalars['Int']>;
@@ -6828,6 +6873,58 @@ export const useGetSponsorListPathsDataQuery = <
       graphqlFetcher<GetSponsorListPathsDataQuery, GetSponsorListPathsDataQueryVariables>(GetSponsorListPathsDataDocument, variables),
       options
     );
+export const GetSponsorTeachingsPageDataDocument = `
+    query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
+  sponsor(id: $id) {
+    id
+    title
+    imageWithFallback {
+      url(size: 100)
+    }
+    recordings(offset: $offset, first: $first) {
+      nodes {
+        ...recordingList
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${RecordingListFragmentDoc}`;
+export const useGetSponsorTeachingsPageDataQuery = <
+      TData = GetSponsorTeachingsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorTeachingsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSponsorTeachingsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSponsorTeachingsPageDataQuery, TError, TData>(
+      ['getSponsorTeachingsPageData', variables],
+      graphqlFetcher<GetSponsorTeachingsPageDataQuery, GetSponsorTeachingsPageDataQueryVariables>(GetSponsorTeachingsPageDataDocument, variables),
+      options
+    );
+export const GetSponsorTeachingsPathsDataDocument = `
+    query getSponsorTeachingsPathsData($language: Language!, $first: Int) {
+  sponsors(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetSponsorTeachingsPathsDataQuery = <
+      TData = GetSponsorTeachingsPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorTeachingsPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSponsorTeachingsPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSponsorTeachingsPathsDataQuery, TError, TData>(
+      ['getSponsorTeachingsPathsData', variables],
+      graphqlFetcher<GetSponsorTeachingsPathsDataQuery, GetSponsorTeachingsPathsDataQueryVariables>(GetSponsorTeachingsPathsDataDocument, variables),
+      options
+    );
 export const GetStoriesPageDataDocument = `
     query getStoriesPageData($language: Language!, $first: Int, $offset: Int) {
   stories(language: $language, first: $first, offset: $offset) {
@@ -7331,6 +7428,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetSponsorListPathsDataQueryVariables>
 							): Promise<GetSponsorListPathsDataQuery> {
 								return fetchApi(GetSponsorListPathsDataDocument, { variables });
+							}
+
+							export async function getSponsorTeachingsPageData<T>(
+								variables: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>
+							): Promise<GetSponsorTeachingsPageDataQuery> {
+								return fetchApi(GetSponsorTeachingsPageDataDocument, { variables });
+							}
+
+							export async function getSponsorTeachingsPathsData<T>(
+								variables: ExactAlt<T, GetSponsorTeachingsPathsDataQueryVariables>
+							): Promise<GetSponsorTeachingsPathsDataQuery> {
+								return fetchApi(GetSponsorTeachingsPathsDataDocument, { variables });
 							}
 
 							export async function getStoriesPageData<T>(

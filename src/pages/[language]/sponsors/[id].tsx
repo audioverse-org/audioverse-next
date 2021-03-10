@@ -27,6 +27,7 @@ export async function getStaticProps({
 	params: { language: string; id: string; i: string };
 }): Promise<SponsorStaticProps> {
 	const { id } = params;
+	// TODO: Stop returning paginated props, just return sponsor meta
 	return getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSponsorDetailPageData({ id, offset, first }),

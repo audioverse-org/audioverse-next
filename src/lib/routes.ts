@@ -138,14 +138,19 @@ export const makeConferenceListRoute = (
 // TODO: rename makeSponsorDetailRoute
 export const makeSponsorRoute = (
 	languageRoute: string,
-	sponsorId: string,
-	page: number | string = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/page/${page}`;
+	sponsorId: string
+): string => `/${languageRoute}/sponsors/${sponsorId}`;
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/sponsors/page/${page}`;
+
+export const makeSponsorTeachingsRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/teachings/page/${page}`;
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,

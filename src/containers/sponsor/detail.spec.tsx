@@ -8,12 +8,11 @@ import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Sponsor, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/page/[i]';
+} from '@pages/[language]/sponsors/[id]';
 
 const renderPage = buildRenderer(Sponsor, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
-	i: '1',
 });
 
 function loadData() {
@@ -46,17 +45,13 @@ function loadData() {
 }
 
 describe('sponsor detail page', () => {
-	it('renders', async () => {
-		await renderPage();
-	});
-
-	it('lists recordings', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_recording_title')).toBeInTheDocument();
-	});
+	// it('lists recordings', async () => {
+	// 	loadData();
+	//
+	// 	const { getByText } = await renderPage();
+	//
+	// 	expect(getByText('the_recording_title')).toBeInTheDocument();
+	// });
 
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
@@ -69,7 +64,7 @@ describe('sponsor detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/sponsors/the_sponsor_id/page/1');
+		expect(paths).toContain('/en/sponsors/the_sponsor_id');
 	});
 
 	it('displays sponsor title', async () => {
@@ -113,16 +108,16 @@ describe('sponsor detail page', () => {
 		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
 	});
 
-	it('properly links pagination', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toHaveAttribute(
-			'href',
-			'/en/sponsors/the_sponsor_id/page/1'
-		);
-	});
+	// it('properly links pagination', async () => {
+	// 	loadData();
+	//
+	// 	const { getByText } = await renderPage();
+	//
+	// 	expect(getByText('1')).toHaveAttribute(
+	// 		'href',
+	// 		'/en/sponsors/the_sponsor_id/page/1'
+	// 	);
+	// });
 
 	it('renders 404', async () => {
 		when(mockedFetchApi)
@@ -166,3 +161,10 @@ describe('sponsor detail page', () => {
 		expect(getByText('description')).toBeInTheDocument();
 	});
 });
+
+// TODO:
+// remove pagination
+// remove recordings
+// edit route
+// link to sub pages
+// use something other than nodes.length to trigger 404

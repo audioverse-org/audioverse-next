@@ -20,6 +20,7 @@ import Presenters from '@containers/presenter/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
 import Sponsors from '@containers/sponsor/list';
+import SponsorTeachings from '@containers/sponsor/teachings';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -363,6 +364,14 @@ describe('localization usage', () => {
 				]}
 				{...({} as any)}
 			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes sponsor teachings page', async () => {
+		const screen = await renderWithQueryProvider(
+			<SponsorTeachings nodes={[{ id: 'z' } as any]} {...({} as any)} />
 		);
 
 		expectNoUnlocalizedText(screen);
