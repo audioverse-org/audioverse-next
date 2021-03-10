@@ -138,8 +138,9 @@ export const makeConferenceListRoute = (
 // TODO: rename makeSponsorDetailRoute
 export const makeSponsorRoute = (
 	languageRoute: string,
-	sponsorId: string
-): string => `/${languageRoute}/sponsors/${sponsorId}/page/1`;
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/page/${page}`;
 
 export const makeSponsorListRoute = (
 	languageRoute: string,

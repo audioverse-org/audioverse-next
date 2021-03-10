@@ -20,6 +20,7 @@ interface PaginatedListProps<T extends Listable> {
 	pagination: PaginationData;
 }
 
+// TODO: Maybe delete this.
 export default function PaginatedList<T extends Listable>({
 	pageTitle,
 	pageImage,

@@ -17,7 +17,7 @@ export interface PaginatedStaticProps<T, N> {
 	revalidate: number;
 }
 
-interface Getter<DATA> {
+interface Getter<T> {
 	({
 		language,
 		offset,
@@ -26,18 +26,18 @@ interface Getter<DATA> {
 		language: Language;
 		offset: number;
 		first: number;
-	}): Promise<DATA>;
+	}): Promise<T>;
 }
 
-export async function getPaginatedStaticProps<DATA, NODE>(
+export async function getPaginatedStaticProps<T, N>(
 	params: {
 		language: string;
 		i: number | string;
 	},
-	getter: Getter<DATA>,
-	parseNodes: (data: DATA) => NODE[] | null | undefined,
-	parseCount: (count: DATA) => number | null | undefined
-): Promise<PaginatedStaticProps<DATA, NODE>> {
+	getter: Getter<T>,
+	parseNodes: (data: T) => N[] | null | undefined,
+	parseCount: (count: T) => number | null | undefined
+): Promise<PaginatedStaticProps<T, N>> {
 	const { language: languageRoute, i: pageIndex } = params;
 
 	const data = await getter({
