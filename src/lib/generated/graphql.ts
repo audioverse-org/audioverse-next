@@ -5383,7 +5383,7 @@ export type GetSponsorDetailPageDataQuery = (
   { __typename?: 'Query' }
   & { sponsor: Maybe<(
     { __typename?: 'Sponsor' }
-    & Pick<Sponsor, 'id' | 'title'>
+    & Pick<Sponsor, 'id' | 'title' | 'location' | 'website' | 'summary' | 'description'>
     & { imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
@@ -6728,6 +6728,10 @@ export const GetSponsorDetailPageDataDocument = `
   sponsor(id: $id) {
     id
     title
+    location
+    website
+    summary
+    description
     imageWithFallback {
       url(size: 100)
     }

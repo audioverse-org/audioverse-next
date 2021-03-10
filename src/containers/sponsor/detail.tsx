@@ -14,6 +14,13 @@ function Sponsor({ nodes, data, pagination }: Props): JSX.Element {
 		<>
 			{img && <img alt={data?.sponsor?.title} src={img} />}
 			<h1>{data?.sponsor?.title}</h1>
+			{/* TODO: Do not render these elements if nothing to display */}
+			<p>{data?.sponsor?.summary}</p>
+			<p>{data?.sponsor?.location}</p>
+			<p>{data?.sponsor?.website}</p>
+			<p
+				dangerouslySetInnerHTML={{ __html: data?.sponsor?.description || '' }}
+			/>
 			<RecordingList recordings={nodes} />
 			<Pagination
 				{...pagination}

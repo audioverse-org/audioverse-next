@@ -2,6 +2,10 @@ query getSponsorDetailPageData($id: ID!, $offset: Int, $first: Int) {
 	sponsor(id: $id) {
 		id
 		title
+		location
+		website
+		summary
+		description
 		imageWithFallback {
 			url(size: 100)
 		}

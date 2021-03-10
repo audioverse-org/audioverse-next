@@ -26,6 +26,10 @@ function loadData() {
 				imageWithFallback: {
 					url: 'the_sponsor_image',
 				},
+				location: 'the_sponsor_location',
+				website: 'the_sponsor_website',
+				summary: 'the_sponsor_summary',
+				description: '<i>the</i> <b>description</b>',
 				recordings: {
 					nodes: [
 						{
@@ -129,6 +133,36 @@ describe('sponsor detail page', () => {
 
 		expect(getByText('404')).toBeInTheDocument();
 	});
-});
 
-// renders 404
+	it('displays location', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_location')).toBeInTheDocument();
+	});
+
+	it('displays website', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_website')).toBeInTheDocument();
+	});
+
+	it('displays summary', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_sponsor_summary')).toBeInTheDocument();
+	});
+
+	it('renders description html', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('description')).toBeInTheDocument();
+	});
+});
