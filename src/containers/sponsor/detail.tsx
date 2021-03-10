@@ -1,9 +1,10 @@
 import React from 'react';
-import RecordingList from '@components/molecules/recordingList';
-import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]/page/[i]';
-import Pagination from '@components/molecules/pagination';
-import { makeSponsorRoute } from '@lib/routes';
+
 import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
+import RecordingList from '@components/molecules/recordingList';
+import { makeSponsorRoute } from '@lib/routes';
+import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]/page/[i]';
 
 type Props = SponsorStaticProps['props'];
 

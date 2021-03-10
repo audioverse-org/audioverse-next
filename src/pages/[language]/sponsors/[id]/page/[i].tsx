@@ -1,14 +1,14 @@
 import Sponsor from '@containers/sponsor/detail';
 import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
-import {
 	getSponsorDetailPageData,
 	GetSponsorDetailPageDataQuery,
 	getSponsorDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 import { makeSponsorRoute } from '@lib/routes';
 
 export default Sponsor;
