@@ -1,15 +1,16 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
-import { SponsorBooksStaticProps } from '@pages/[language]/sponsors/[id]/books/page/[i]';
 import {
 	makeAudiobookRoute,
 	makeSponsorBooksRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { FormattedMessage } from 'react-intl';
-import Pagination from '@components/molecules/pagination';
-import withFailStates from '@components/HOCs/withFailStates';
+import { SponsorBooksStaticProps } from '@pages/[language]/sponsors/[id]/books/page/[i]';
 
 type Props = SponsorBooksStaticProps['props'];
 
