@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import CopyrightInfos from '@components/molecules/copyrightInfos';
 import Player from '@components/molecules/player';
+import RssLink from '@components/molecules/rssLink';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import Playlist from '@components/organisms/playlist';
 import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
@@ -25,13 +26,7 @@ function Audiobook({ audiobook, rssPath }: AudiobookProps): JSX.Element {
 
 				return (
 					<>
-						<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
-							<FormattedMessage
-								id="audiobookDetailPage__rssLinkLabel"
-								defaultMessage="RSS"
-								description="Audiobook detail rss link label"
-							/>
-						</a>
+						<RssLink href={rssPath} />
 						{recording && <Player sources={sources} />}
 						<p>
 							<FormattedMessage

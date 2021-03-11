@@ -8,6 +8,7 @@ query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
 		recordings(offset: $offset, first: $first) {
 			nodes {
 				...recordingList
+				...writeFeedFile
 			}
 			aggregate {
 				count

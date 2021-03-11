@@ -47,6 +47,7 @@ export async function getStaticProps({
 		projectRelativePath: `public/en/conferences/${staticProps.props.data?.conference?.id}.xml`,
 	});
 
+	// TODO: Set feed url using language route
 	return {
 		...staticProps,
 		props: {

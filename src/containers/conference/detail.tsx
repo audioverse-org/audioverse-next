@@ -1,9 +1,9 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import RssLink from '@components/molecules/rssLink';
 import { makeConferenceRoute, makeSponsorRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { ConferenceStaticProps } from '@pages/[language]/conferences/[id]/page/[i]';
@@ -30,13 +30,7 @@ function ConferenceDetail({
 					{data?.conference?.sponsor?.title}
 				</a>
 			)}
-			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
-				<FormattedMessage
-					id="conferenceDetail__rssLink"
-					defaultMessage="RSS"
-					description="Conference detail RSS link"
-				/>
-			</a>
+			<RssLink href={rssPath} />
 			<RecordingList recordings={nodes} />
 			<Pagination
 				makeRoute={(l, i) =>

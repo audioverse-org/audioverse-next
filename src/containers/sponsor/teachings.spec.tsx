@@ -4,11 +4,14 @@ import {
 	GetSponsorTeachingsPageDataDocument,
 	GetSponsorTeachingsPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import writeFeedFile from '@lib/writeFeedFile';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
+
+jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildRenderer(SponsorTeachings, getStaticProps, {
 	language: 'en',
@@ -16,25 +19,21 @@ const renderPage = buildRenderer(SponsorTeachings, getStaticProps, {
 	i: '1',
 });
 
-function loadData() {
-	when(mockedFetchApi)
-		.calledWith(GetSponsorTeachingsPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			sponsor: {
-				id: 'the_sponsor_id',
-				title: 'the_sponsor_title',
-				imageWithFallback: {
-					url: 'the_sponsor_image',
-				},
-				recordings: {
-					nodes: [{ id: 'the_recording_id', title: 'the_recording_title' }],
-					aggregate: {
-						count: 1,
-					},
-				},
+const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
+	sponsor: {
+		id: 'the_sponsor_id',
+		title: 'the_sponsor_title',
+		imageWithFallback: {
+			url: 'the_sponsor_image',
+		},
+		recordings: {
+			nodes: [{ id: 'the_recording_id', title: 'the_recording_title' }],
+			aggregate: {
+				count: 1,
 			},
-		});
-}
+		},
+	},
+});
 
 describe('sponsor teachings page', () => {
 	it('renders', async () => {
@@ -123,24 +122,50 @@ describe('sponsor teachings page', () => {
 	});
 
 	it('skips image display if sponsor has none', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetSponsorTeachingsPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsor: {
-					title: 'the_sponsor_title',
-					recordings: {
-						nodes: [
-							{
-								id: 'the_recording_id',
-								title: 'the_recording_title',
-							},
-						],
-					},
+		loadData({
+			sponsor: {
+				imageWithFallback: {
+					url: null as any,
 				},
-			});
+			},
+		});
 
 		const { queryByAltText } = await renderPage();
 
 		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
+	});
+
+	it('generates rss feed', async () => {
+		const data = loadData();
+		const params = { language: 'en', id: 'the_sponsor_id', i: '1' };
+
+		await getStaticProps({ params });
+
+		expect(writeFeedFile).toBeCalledWith({
+			recordings: data.sponsor.recordings.nodes,
+			projectRelativePath: 'public/en/sponsors/the_sponsor_id/teachings.xml',
+			title: 'the_sponsor_title | AudioVerse English',
+		});
+	});
+
+	it('only generates rss on page 1', async () => {
+		loadData();
+
+		const params = { language: 'en', id: 'the_sponsor_id', i: '2' };
+
+		await getStaticProps({ params });
+
+		expect(writeFeedFile).not.toBeCalled();
+	});
+
+	it('links to rss feed', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('RSS')).toHaveAttribute(
+			'href',
+			'/en/sponsors/the_sponsor_id/teachings.xml'
+		);
 	});
 });

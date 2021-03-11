@@ -5478,6 +5478,7 @@ export type GetSponsorTeachingsPageDataQuery = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & RecordingListFragment
+        & WriteFeedFileFragment
       )>>, aggregate: Maybe<(
         { __typename?: 'Aggregate' }
         & Pick<Aggregate, 'count'>
@@ -6884,6 +6885,7 @@ export const GetSponsorTeachingsPageDataDocument = `
     recordings(offset: $offset, first: $first) {
       nodes {
         ...recordingList
+        ...writeFeedFile
       }
       aggregate {
         count
@@ -6891,7 +6893,8 @@ export const GetSponsorTeachingsPageDataDocument = `
     }
   }
 }
-    ${RecordingListFragmentDoc}`;
+    ${RecordingListFragmentDoc}
+${WriteFeedFileFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
       TData = GetSponsorTeachingsPageDataQuery,
       TError = unknown

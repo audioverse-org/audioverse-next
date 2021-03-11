@@ -1,4 +1,5 @@
 import SponsorTeachings from '@containers/sponsor/teachings';
+import { createFeed } from '@lib/createFeed';
 import {
 	getSponsorTeachingsPageData,
 	GetSponsorTeachingsPageDataQuery,
@@ -21,20 +22,37 @@ type Teaching = NonNullable<
 export type SponsorTeachingsStaticProps = PaginatedStaticProps<
 	GetSponsorTeachingsPageDataQuery,
 	Teaching
->;
+> & { props: { rssPath: string } };
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
 }): Promise<SponsorTeachingsStaticProps> {
-	const { id } = params;
-	return getPaginatedStaticProps(
+	const { language, id, i } = params;
+	const result = await getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSponsorTeachingsPageData({ id, offset, first }),
 		(d) => d?.sponsor?.recordings.nodes,
 		(d) => d?.sponsor?.recordings.aggregate?.count
 	);
+
+	if (i === '1') {
+		await createFeed(
+			result.props.data?.sponsor?.title,
+			params,
+			result.props.nodes,
+			`sponsors/${id}/teachings.xml`
+		);
+	}
+
+	return {
+		...result,
+		props: {
+			rssPath: `/${language}/sponsors/${id}/teachings.xml`,
+			...result.props,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

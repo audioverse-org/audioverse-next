@@ -2,6 +2,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
+import { when } from 'jest-when';
 import _ from 'lodash';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
@@ -29,6 +30,20 @@ export function loadQuery(query: ParsedUrlQuery = {}): void {
 
 export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
+}
+
+export function buildLoader<T>(
+	document: string,
+	defaults: T
+): (data?: PartialDeep<T>) => T {
+	// TODO: Figure out how to set T to actual query return type
+	return (data: PartialDeep<T> = {}) => {
+		const value = _.defaultsDeep(data, defaults);
+		when(mockedFetchApi)
+			.calledWith(document, expect.anything())
+			.mockResolvedValue(value);
+		return value;
+	};
 }
 
 export function buildRenderer<
