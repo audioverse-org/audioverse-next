@@ -2,11 +2,17 @@ import React from 'react';
 
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-interface TableListProps<T> {
+interface Listable {
+	id: string;
+	imageWithFallback?: {
+		url?: string;
+	};
+}
+
+interface TableListProps<T extends Listable> {
 	nodes: T[];
 	parseTitle: (n: T) => string;
-	parseImageUrl: (n: T) => string;
-	parseKey: (n: T) => string;
+	parseImageUrl?: (n: T) => string | undefined;
 	makeEntryRoute: (languageRoute: string, node: T) => string;
 	columns?: {
 		name: string;
@@ -14,11 +20,10 @@ interface TableListProps<T> {
 	}[];
 }
 
-export default function TableList<T>({
+export default function TableList<T extends Listable>({
 	nodes,
 	parseTitle,
-	parseImageUrl,
-	parseKey,
+	parseImageUrl = (n: T) => n.imageWithFallback?.url,
 	makeEntryRoute,
 	columns,
 }: TableListProps<T>): JSX.Element {
@@ -30,13 +35,16 @@ export default function TableList<T>({
 				{nodes?.map((n) => {
 					const route = makeEntryRoute(languageRoute, n);
 					const title = parseTitle(n);
+					const imageSrc = parseImageUrl(n);
 
 					return (
-						<tr key={parseKey(n)}>
+						<tr key={n.id}>
 							<td>
-								<a href={route}>
-									<img src={parseImageUrl(n)} alt={title} />
-								</a>
+								{imageSrc && (
+									<a href={route}>
+										<img src={imageSrc} alt={title} />
+									</a>
+								)}
 							</td>
 							<td>
 								<a href={route}>{title}</a>

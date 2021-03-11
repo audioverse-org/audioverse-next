@@ -33,6 +33,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import SponsorBooks from '@containers/sponsor/books';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -372,6 +373,14 @@ describe('localization usage', () => {
 	it('localizes sponsor teachings page', async () => {
 		const screen = await renderWithQueryProvider(
 			<SponsorTeachings nodes={[{ id: 'z' } as any]} {...({} as any)} />
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes sponsor books page', async () => {
+		const screen = await renderWithQueryProvider(
+			<SponsorBooks nodes={[{ id: 'z' } as any]} {...({} as any)} />
 		);
 
 		expectNoUnlocalizedText(screen);

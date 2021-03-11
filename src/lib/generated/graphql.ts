@@ -5372,6 +5372,56 @@ export type GetSongsListPageDataQuery = (
   ) }
 );
 
+export type GetSponsorBooksPageDataQueryVariables = Exact<{
+  language: Language;
+  id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSponsorBooksPageDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsor: Maybe<(
+    { __typename?: 'Sponsor' }
+    & Pick<Sponsor, 'id' | 'title'>
+    & { imageWithFallback: (
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    ) }
+  )>, audiobooks: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ) }
+    )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetSponsorBooksPathsDataQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSponsorBooksPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { sponsors: (
+    { __typename?: 'SponsorConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id'>
+    )>> }
+  ) }
+);
+
 export type GetSponsorDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
   offset: Maybe<Scalars['Int']>;
@@ -6769,6 +6819,62 @@ export const useGetSongsListPageDataQuery = <
       graphqlFetcher<GetSongsListPageDataQuery, GetSongsListPageDataQueryVariables>(GetSongsListPageDataDocument, variables),
       options
     );
+export const GetSponsorBooksPageDataDocument = `
+    query getSponsorBooksPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
+  sponsor(id: $id) {
+    id
+    title
+    imageWithFallback {
+      url(size: 100)
+    }
+  }
+  audiobooks(language: $language, sponsorId: $id, offset: $offset, first: $first) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
+      }
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetSponsorBooksPageDataQuery = <
+      TData = GetSponsorBooksPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorBooksPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSponsorBooksPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSponsorBooksPageDataQuery, TError, TData>(
+      ['getSponsorBooksPageData', variables],
+      graphqlFetcher<GetSponsorBooksPageDataQuery, GetSponsorBooksPageDataQueryVariables>(GetSponsorBooksPageDataDocument, variables),
+      options
+    );
+export const GetSponsorBooksPathsDataDocument = `
+    query getSponsorBooksPathsData($language: Language!, $first: Int) {
+  sponsors(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetSponsorBooksPathsDataQuery = <
+      TData = GetSponsorBooksPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorBooksPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSponsorBooksPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSponsorBooksPathsDataQuery, TError, TData>(
+      ['getSponsorBooksPathsData', variables],
+      graphqlFetcher<GetSponsorBooksPathsDataQuery, GetSponsorBooksPathsDataQueryVariables>(GetSponsorBooksPathsDataDocument, variables),
+      options
+    );
 export const GetSponsorDetailPageDataDocument = `
     query getSponsorDetailPageData($id: ID!, $offset: Int, $first: Int) {
   sponsor(id: $id) {
@@ -7407,6 +7513,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetSongsListPageDataQueryVariables>
 							): Promise<GetSongsListPageDataQuery> {
 								return fetchApi(GetSongsListPageDataDocument, { variables });
+							}
+
+							export async function getSponsorBooksPageData<T>(
+								variables: ExactAlt<T, GetSponsorBooksPageDataQueryVariables>
+							): Promise<GetSponsorBooksPageDataQuery> {
+								return fetchApi(GetSponsorBooksPageDataDocument, { variables });
+							}
+
+							export async function getSponsorBooksPathsData<T>(
+								variables: ExactAlt<T, GetSponsorBooksPathsDataQueryVariables>
+							): Promise<GetSponsorBooksPathsDataQuery> {
+								return fetchApi(GetSponsorBooksPathsDataDocument, { variables });
 							}
 
 							export async function getSponsorDetailPageData<T>(

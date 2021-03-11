@@ -20,7 +20,7 @@ interface PaginatedListProps<T extends Listable> {
 	pagination: PaginationData;
 }
 
-// TODO: Maybe delete this.
+// TODO: Delete this component.
 export default function PaginatedList<T extends Listable>({
 	pageTitle,
 	pageImage,
@@ -41,7 +41,6 @@ export default function PaginatedList<T extends Listable>({
 				nodes={nodes}
 				parseTitle={parseEntryTitle}
 				parseImageUrl={parseEntryImageUrl}
-				parseKey={(n) => n.id}
 				makeEntryRoute={makeEntryRoute}
 			/>
 			<Pagination makeRoute={makePageRoute} {...pagination} />

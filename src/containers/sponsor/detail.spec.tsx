@@ -167,4 +167,5 @@ describe('sponsor detail page', () => {
 // remove recordings
 // edit route
 // link to sub pages
+// don't link to sub pages if no sub entities exist
 // use something other than nodes.length to trigger 404
