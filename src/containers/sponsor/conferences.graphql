@@ -1,13 +1,23 @@
-query getSponsorConferencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
+query getSponsorConferencesPageData(
+	$language: Language!
+	$id: ID!
+	$offset: Int
+	$first: Int
+) {
 	sponsor(id: $id) {
 		title
 	}
-	conferences(language: $language, sponsorId: $id, offset: $offset, first: $first) {
+	conferences(
+		language: $language
+		sponsorId: $id
+		offset: $offset
+		first: $first
+	) {
 		nodes {
 			id
 			title
 			imageWithFallback {
-				url(size:100)
+				url(size: 100)
 			}
 		}
 		aggregate {

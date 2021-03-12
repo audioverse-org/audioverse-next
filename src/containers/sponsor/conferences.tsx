@@ -1,6 +1,9 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
-import { SponsorConferencesStaticProps } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 import {
 	makeConferenceRoute,
 	makeSponsorConferencesRoute,
@@ -8,9 +11,7 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
-import { FormattedMessage } from 'react-intl';
-import Pagination from '@components/molecules/pagination';
-import withFailStates from '@components/HOCs/withFailStates';
+import { SponsorConferencesStaticProps } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 
 type Props = SponsorConferencesStaticProps['props'];
 

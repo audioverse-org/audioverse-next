@@ -1,14 +1,14 @@
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import SponsorConferences from '@containers/sponsor/conferences';
 import {
 	getSponsorConferencesPageData,
 	GetSponsorConferencesPageDataQuery,
 	getSponsorConferencesPathsData,
 } from '@lib/generated/graphql';
-import SponsorConferences from '@containers/sponsor/conferences';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 import { makeSponsorConferencesRoute } from '@lib/routes';
 
 export default SponsorConferences;

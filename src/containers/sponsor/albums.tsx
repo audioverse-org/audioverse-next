@@ -10,8 +10,8 @@ import {
 	makeSponsorRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 import { useQueryString } from '@lib/useQueryString';
+import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 
 type Props = SponsorSongsStaticProps['props'];
 
