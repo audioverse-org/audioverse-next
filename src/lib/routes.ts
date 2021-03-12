@@ -158,6 +158,12 @@ export const makeSponsorBooksRoute = (
 	page: number | string = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/books/page/${page}`;
 
+export const makeSponsorAlbumsRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/albums/page/${page}`;
+
 export const makeTestimoniesRoute = (
 	languageRoute: string,
 	page: number | string
