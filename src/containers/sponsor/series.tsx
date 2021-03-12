@@ -1,5 +1,9 @@
 import React from 'react';
-import { SponsorSeriesStaticProps } from '@pages/[language]/sponsors/[id]/series/page/[i]';
+import { FormattedMessage } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
+import TableList from '@components/organisms/tableList';
 import {
 	makeSeriesRoute,
 	makeSponsorRoute,
@@ -7,10 +11,7 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
-import { FormattedMessage } from 'react-intl';
-import TableList from '@components/organisms/tableList';
-import Pagination from '@components/molecules/pagination';
-import withFailStates from '@components/HOCs/withFailStates';
+import { SponsorSeriesStaticProps } from '@pages/[language]/sponsors/[id]/series/page/[i]';
 
 type Props = SponsorSeriesStaticProps['props'];
 
