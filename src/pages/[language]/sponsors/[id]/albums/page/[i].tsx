@@ -1,14 +1,14 @@
 import SponsorAlbums from '@containers/sponsor/albums';
 import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
-import {
 	getSponsorAlbumsPageData,
 	GetSponsorAlbumsPageDataQuery,
 	getSponsorAlbumsPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 import { makeSponsorAlbumsRoute } from '@lib/routes';
 
 export default SponsorAlbums;

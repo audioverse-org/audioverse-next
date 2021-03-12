@@ -1,16 +1,17 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import withFailStates from '@components/HOCs/withFailStates';
+import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
-import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 import {
 	makeAlbumRoute,
 	makeSponsorAlbumsRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
-import Pagination from '@components/molecules/pagination';
-import useRouterQuery from '@lib/useRouterQuery';
-import withFailStates from '@components/HOCs/withFailStates';
-import { FormattedMessage } from 'react-intl';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import useRouterQuery from '@lib/useRouterQuery';
+import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 
 type Props = SponsorSongsStaticProps['props'];
 
