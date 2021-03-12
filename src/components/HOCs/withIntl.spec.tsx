@@ -35,6 +35,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import SponsorConferences from '@containers/sponsor/conferences';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -60,6 +61,18 @@ const expectNoUnlocalizedToasts = () => {
 	calls.forEach((c) => {
 		expect(c[0]).not.toMatch(/[^z]+/);
 	});
+};
+
+const expectNoUnlocalizedMessages = async <T extends unknown>(
+	Component: React.ComponentType<T>,
+	data: { [key: string]: any }
+) => {
+	const screen = await renderWithQueryProvider(
+		<Component {...(data as any)} />
+	);
+
+	expectNoUnlocalizedText(screen);
+	expectNoUnlocalizedToasts();
 };
 
 const toLocaleStringBackup = global.Date.prototype.toLocaleString;
@@ -393,5 +406,11 @@ describe('localization usage', () => {
 		);
 
 		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes sponsor conferences page', async () => {
+		await expectNoUnlocalizedMessages(SponsorConferences, {
+			nodes: [{ id: 'z' }],
+		});
 	});
 });

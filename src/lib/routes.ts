@@ -127,7 +127,7 @@ export const makeTagMusicRoute = (
 export const makeConferenceRoute = (
 	languageRoute: string,
 	conferenceId: string,
-	page: number | string
+	page: number | string = 1
 ): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
 
 export const makeConferenceListRoute = (
@@ -163,6 +163,12 @@ export const makeSponsorAlbumsRoute = (
 	sponsorId: string,
 	page: number | string = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/albums/page/${page}`;
+
+export const makeSponsorConferencesRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/conferences/page/${page}`;
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,

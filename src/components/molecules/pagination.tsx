@@ -68,6 +68,7 @@ export default function Pagination({
 	const pageNext = current + 1;
 	const pages = pagination(current, total);
 
+	// TODO: Consider not rendering pagination if only one page
 	return (
 		<ul className={styles.base}>
 			{current > 1 ? <PaginationEntry page={pagePrevious} label={'<'} /> : null}

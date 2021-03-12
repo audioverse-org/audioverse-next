@@ -10,21 +10,19 @@ import {
 	makeSponsorRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import useRouterQuery from '@lib/useRouterQuery';
 import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
+import { useQueryString } from '@lib/useQueryString';
 
 type Props = SponsorSongsStaticProps['props'];
 
 function SponsorAlbums({ nodes, pagination, data }: Props): JSX.Element {
-	const { id = '' } = useRouterQuery();
+	const id = useQueryString('id') || '';
 	const languageRoute = useLanguageRoute();
 
 	return (
 		<>
 			<h1>
-				<a href={makeSponsorRoute(languageRoute, id.toString())}>
-					{data?.sponsor?.title}
-				</a>
+				<a href={makeSponsorRoute(languageRoute, id)}>{data?.sponsor?.title}</a>
 			</h1>
 			<h2>
 				<FormattedMessage
@@ -38,7 +36,7 @@ function SponsorAlbums({ nodes, pagination, data }: Props): JSX.Element {
 				makeEntryRoute={(l, n) => makeAlbumRoute(l, n.id)}
 			/>
 			<Pagination
-				makeRoute={(l, i) => makeSponsorAlbumsRoute(l, id.toString(), i)}
+				makeRoute={(l, i) => makeSponsorAlbumsRoute(l, id, i)}
 				{...pagination}
 			/>
 		</>
