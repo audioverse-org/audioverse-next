@@ -170,6 +170,12 @@ export const makeSponsorConferencesRoute = (
 	page: number | string = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/conferences/page/${page}`;
 
+export const makeSponsorSeriesRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/series/page/${page}`;
+
 export const makeTestimoniesRoute = (
 	languageRoute: string,
 	page: number | string

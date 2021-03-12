@@ -36,6 +36,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import SponsorSeries from '@containers/sponsor/series';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -410,6 +411,12 @@ describe('localization usage', () => {
 
 	it('localizes sponsor conferences page', async () => {
 		await expectNoUnlocalizedMessages(SponsorConferences, {
+			nodes: [{ id: 'z' }],
+		});
+	});
+
+	it('localizes sponsor series page', async () => {
+		await expectNoUnlocalizedMessages(SponsorSeries, {
 			nodes: [{ id: 'z' }],
 		});
 	});
