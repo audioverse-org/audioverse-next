@@ -15,8 +15,8 @@ interface PaginatedListProps<T extends Listable> {
 	nodes: T[];
 	makePageRoute: (languageRoute: string, page: number | string) => string;
 	makeEntryRoute: (languageRoute: string, node: T) => string;
-	parseEntryTitle: (n: T) => string;
-	parseEntryImageUrl: (n: T) => string;
+	parseEntryTitle?: (n: T) => string;
+	parseEntryImageUrl?: (n: T) => string;
 	pagination: PaginationData;
 }
 

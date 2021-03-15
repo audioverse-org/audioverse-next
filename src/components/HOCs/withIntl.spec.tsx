@@ -37,6 +37,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import SeriesList from '@containers/series/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -385,39 +386,18 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes sponsor teachings page', async () => {
-		const screen = await renderWithQueryProvider(
-			<SponsorTeachings nodes={[{ id: 'z' } as any]} {...({} as any)} />
-		);
+	const scenarios: [React.ComponentType<any>, any][] = [
+		[SponsorTeachings, { nodes: [{ id: 'z' }] }],
+		[SponsorBooks, { nodes: [{ id: 'z' }] }],
+		[SponsorAlbums, { nodes: [{ id: 'z' }] }],
+		[SponsorConferences, { nodes: [{ id: 'z' }] }],
+		[SponsorSeries, { nodes: [{ id: 'z' }] }],
+		[SeriesList, { nodes: [{ id: 'z' }] }],
+	];
 
-		expectNoUnlocalizedText(screen);
-	});
-
-	it('localizes sponsor books page', async () => {
-		const screen = await renderWithQueryProvider(
-			<SponsorBooks nodes={[{ id: 'z' } as any]} {...({} as any)} />
-		);
-
-		expectNoUnlocalizedText(screen);
-	});
-
-	it('localizes sponsor albums page', async () => {
-		const screen = await renderWithQueryProvider(
-			<SponsorAlbums nodes={[{ id: 'z' } as any]} {...({} as any)} />
-		);
-
-		expectNoUnlocalizedText(screen);
-	});
-
-	it('localizes sponsor conferences page', async () => {
-		await expectNoUnlocalizedMessages(SponsorConferences, {
-			nodes: [{ id: 'z' }],
-		});
-	});
-
-	it('localizes sponsor series page', async () => {
-		await expectNoUnlocalizedMessages(SponsorSeries, {
-			nodes: [{ id: 'z' }],
+	scenarios.map((s: [React.ComponentType, any], i: number) => {
+		it(`Localizes scenario index ${i}`, async () => {
+			await expectNoUnlocalizedMessages(...s);
 		});
 	});
 });

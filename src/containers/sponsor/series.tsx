@@ -5,7 +5,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
 import {
-	makeSeriesRoute,
+	makeSeriesDetailRoute,
 	makeSponsorRoute,
 	makeSponsorSeriesRoute,
 } from '@lib/routes';
@@ -34,7 +34,7 @@ function SponsorSeries({ data, nodes, pagination }: Props): JSX.Element {
 			</h2>
 			<TableList
 				nodes={nodes}
-				makeEntryRoute={(l, n) => makeSeriesRoute(l, n.id)}
+				makeEntryRoute={(l, n) => makeSeriesDetailRoute(l, n.id)}
 			/>
 			<Pagination
 				{...pagination}

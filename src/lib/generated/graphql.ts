@@ -5122,6 +5122,47 @@ export type GetSeriesDetailPathsDataQuery = (
   ) }
 );
 
+export type GetSeriesListPageDataQueryVariables = Exact<{
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetSeriesListPageDataQuery = (
+  { __typename?: 'Query' }
+  & { serieses: (
+    { __typename?: 'SequenceConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Sequence' }
+      & Pick<Sequence, 'id' | 'title'>
+      & { imageWithFallback: (
+        { __typename?: 'Image' }
+        & Pick<Image, 'url'>
+      ) }
+    )>>, aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
+export type GetSeriesListPathsDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetSeriesListPathsDataQuery = (
+  { __typename?: 'Query' }
+  & { serieses: (
+    { __typename?: 'SequenceConnection' }
+    & { aggregate: Maybe<(
+      { __typename?: 'Aggregate' }
+      & Pick<Aggregate, 'count'>
+    )> }
+  ) }
+);
+
 export type GetSermonDetailDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -6652,6 +6693,55 @@ export const useGetSeriesDetailPathsDataQuery = <
       graphqlFetcher<GetSeriesDetailPathsDataQuery, GetSeriesDetailPathsDataQueryVariables>(GetSeriesDetailPathsDataDocument, variables),
       options
     );
+export const GetSeriesListPageDataDocument = `
+    query getSeriesListPageData($language: Language!, $offset: Int, $first: Int) {
+  serieses(language: $language, offset: $offset, first: $first) {
+    nodes {
+      id
+      title
+      imageWithFallback {
+        url(size: 100)
+      }
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetSeriesListPageDataQuery = <
+      TData = GetSeriesListPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesListPageDataQueryVariables, 
+      options?: UseQueryOptions<GetSeriesListPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSeriesListPageDataQuery, TError, TData>(
+      ['getSeriesListPageData', variables],
+      graphqlFetcher<GetSeriesListPageDataQuery, GetSeriesListPageDataQueryVariables>(GetSeriesListPageDataDocument, variables),
+      options
+    );
+export const GetSeriesListPathsDataDocument = `
+    query getSeriesListPathsData($language: Language!) {
+  serieses(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetSeriesListPathsDataQuery = <
+      TData = GetSeriesListPathsDataQuery,
+      TError = unknown
+    >(
+      variables: GetSeriesListPathsDataQueryVariables, 
+      options?: UseQueryOptions<GetSeriesListPathsDataQuery, TError, TData>
+    ) => 
+    useQuery<GetSeriesListPathsDataQuery, TError, TData>(
+      ['getSeriesListPathsData', variables],
+      graphqlFetcher<GetSeriesListPathsDataQuery, GetSeriesListPathsDataQueryVariables>(GetSeriesListPathsDataDocument, variables),
+      options
+    );
 export const GetSermonDetailDataDocument = `
     query getSermonDetailData($id: ID!) {
   sermon(id: $id) {
@@ -7722,6 +7812,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetSeriesDetailPathsDataQueryVariables>
 							): Promise<GetSeriesDetailPathsDataQuery> {
 								return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
+							}
+
+							export async function getSeriesListPageData<T>(
+								variables: ExactAlt<T, GetSeriesListPageDataQueryVariables>
+							): Promise<GetSeriesListPageDataQuery> {
+								return fetchApi(GetSeriesListPageDataDocument, { variables });
+							}
+
+							export async function getSeriesListPathsData<T>(
+								variables: ExactAlt<T, GetSeriesListPathsDataQueryVariables>
+							): Promise<GetSeriesListPathsDataQuery> {
+								return fetchApi(GetSeriesListPathsDataDocument, { variables });
 							}
 
 							export async function getSermonDetailData<T>(

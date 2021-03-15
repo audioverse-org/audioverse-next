@@ -5,7 +5,7 @@ import {
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeSeriesRoute } from '@lib/routes';
+import { makeSeriesDetailRoute } from '@lib/routes';
 
 export default SeriesDetail;
 
@@ -34,6 +34,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
 		(d) => d.serieses.nodes,
-		(baseUrl, node) => makeSeriesRoute(baseUrl, node.id)
+		(baseUrl, node) => makeSeriesDetailRoute(baseUrl, node.id)
 	);
 }
