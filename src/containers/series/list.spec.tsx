@@ -52,7 +52,7 @@ describe('series list page', () => {
 
 		expect(getByText('the_series_title')).toHaveAttribute(
 			'href',
-			'/en/series/the_series_id'
+			'/en/series/the_series_id/page/1'
 		);
 	});
 

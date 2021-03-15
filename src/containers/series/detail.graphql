@@ -1,8 +1,16 @@
-query getSeriesDetailData($id: ID!) {
+query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
 	series(id: $id) {
 		title
-		image {
+		imageWithFallback {
 			url(size: 100)
+		}
+		recordings(offset: $offset, first: $first) {
+			nodes {
+				...recordingList
+			}
+			aggregate {
+				count
+			}
 		}
 	}
 }

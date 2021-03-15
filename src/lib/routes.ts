@@ -22,11 +22,11 @@ export const makePresenterListRoute = (
 	page: number | string
 ): string => `/${languageRoute}/presenters/page/${page}`;
 
-// TODO: Add page number?
 export const makeSeriesDetailRoute = (
 	languageRoute: string,
-	seriesId: string
-): string => `/${languageRoute}/series/${seriesId}`;
+	seriesId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/series/${seriesId}/page/${page}`;
 
 export const makeSeriesListRoute = (
 	languageRoute: string,

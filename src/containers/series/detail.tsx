@@ -1,16 +1,30 @@
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import { GetSeriesDetailDataQuery } from '@lib/generated/graphql';
+import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
+import RecordingList from '@components/molecules/recordingList';
+import Pagination from '@components/molecules/pagination';
+import { makeSeriesDetailRoute } from '@lib/routes';
+import { useQueryString } from '@lib/useQueryString';
 
-type Series = NonNullable<GetSeriesDetailDataQuery['series']>;
+type Props = SeriesDetailStaticProps['props'];
 
-export interface SeriesDetailProps {
-	series: Series | null | undefined;
+function SeriesDetail({ data, nodes, pagination }: Props) {
+	const id = useQueryString('id') || '';
+	return (
+		<>
+			<img
+				src={data?.series?.imageWithFallback.url}
+				alt={data?.series?.title}
+			/>
+			<h1>{data?.series?.title}</h1>
+			<RecordingList recordings={nodes} />
+			<Pagination
+				makeRoute={(l, i) => makeSeriesDetailRoute(l, id, i)}
+				{...pagination}
+			/>
+		</>
+	);
 }
 
-function SeriesDetail({ series }: SeriesDetailProps) {
-	return <h1>{series?.title}</h1>;
-}
-
-export default withFailStates(SeriesDetail, (props) => !props.series);
+export default withFailStates(SeriesDetail, ({ nodes }) => !nodes?.length);

@@ -5090,6 +5090,8 @@ export type GetProtectedDataQuery = (
 
 export type GetSeriesDetailDataQueryVariables = Exact<{
   id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -5098,10 +5100,19 @@ export type GetSeriesDetailDataQuery = (
   & { series: Maybe<(
     { __typename?: 'Sequence' }
     & Pick<Sequence, 'title'>
-    & { image: Maybe<(
+    & { imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
-    )> }
+    ), recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & RecordingListFragment
+      )>>, aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
   )> }
 );
 
@@ -6651,15 +6662,23 @@ export const useGetProtectedDataQuery = <
       options
     );
 export const GetSeriesDetailDataDocument = `
-    query getSeriesDetailData($id: ID!) {
+    query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
   series(id: $id) {
     title
-    image {
+    imageWithFallback {
       url(size: 100)
+    }
+    recordings(offset: $offset, first: $first) {
+      nodes {
+        ...recordingList
+      }
+      aggregate {
+        count
+      }
     }
   }
 }
-    `;
+    ${RecordingListFragmentDoc}`;
 export const useGetSeriesDetailDataQuery = <
       TData = GetSeriesDetailDataQuery,
       TError = unknown
