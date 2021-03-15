@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
@@ -8,10 +9,9 @@ import {
 	makeSeriesDetailRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { FormattedMessage } from 'react-intl';
 
 type Props = SeriesDetailStaticProps['props'];
 

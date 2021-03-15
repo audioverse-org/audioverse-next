@@ -2,10 +2,10 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LoadingIndicator from '@components/molecules/loadingIndicator';
+import { makeSeriesListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
-import { makeSeriesListRoute } from '@lib/routes';
 
 // TODO: Finish linking all entries
 

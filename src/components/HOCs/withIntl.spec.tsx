@@ -17,6 +17,7 @@ import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
 import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
+import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
@@ -38,7 +39,6 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import SeriesDetail from '@containers/series/detail';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
