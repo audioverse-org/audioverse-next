@@ -1,13 +1,14 @@
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import SeriesList, {
-	getStaticProps,
-	getStaticPaths,
-} from '@pages/[language]/series/page/[i]';
 import { when } from 'jest-when';
+
 import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
 } from '@lib/generated/graphql';
+import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import SeriesList, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/series/page/[i]';
 
 const renderPage = buildRenderer(SeriesList, getStaticProps, {
 	language: 'en',

@@ -1,14 +1,14 @@
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import SeriesList from '@containers/series/list';
 import {
 	getSeriesListPageData,
 	GetSeriesListPageDataQuery,
 	getSeriesListPathsData,
 } from '@lib/generated/graphql';
-import SeriesList from '@containers/series/list';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
+import {
+	getPaginatedStaticProps,
+	PaginatedStaticProps,
+} from '@lib/getPaginatedStaticProps';
 
 export default SeriesList;
 

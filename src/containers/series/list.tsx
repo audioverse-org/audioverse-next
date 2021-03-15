@@ -1,9 +1,10 @@
 import React from 'react';
-import PaginatedList from '@components/templates/paginatedList';
-import { SeriesListStaticProps } from '@pages/[language]/series/page/[i]';
-import { makeSeriesDetailRoute, makeSeriesListRoute } from '@lib/routes';
 import { useIntl } from 'react-intl';
+
 import withFailStates from '@components/HOCs/withFailStates';
+import PaginatedList from '@components/templates/paginatedList';
+import { makeSeriesDetailRoute, makeSeriesListRoute } from '@lib/routes';
+import { SeriesListStaticProps } from '@pages/[language]/series/page/[i]';
 
 type Props = SeriesListStaticProps['props'];
 
