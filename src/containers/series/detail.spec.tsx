@@ -20,6 +20,14 @@ const loadData = buildLoader(GetSeriesDetailDataDocument, {
 		imageWithFallback: {
 			url: 'the_series_image',
 		},
+		sponsor: {
+			id: 'the_sponsor_id',
+			title: 'the_sponsor_title',
+		},
+		collection: {
+			id: 'the_conference_id',
+			title: 'the_conference_title',
+		},
 		recordings: {
 			nodes: [{ id: 'the_recording_id', title: 'the_recording_title' }],
 			aggregate: { count: 1 },
@@ -121,4 +129,37 @@ describe('series detail page', () => {
 			'the_series_image'
 		);
 	});
+
+	it('links to sponsor', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Sponsor: the_sponsor_title')).toHaveAttribute(
+			'href',
+			'/en/sponsors/the_sponsor_id'
+		);
+	});
+
+	it('links to conference', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Conference: the_conference_title')).toHaveAttribute(
+			'href',
+			'/en/conferences/the_conference_id/page/1'
+		);
+	});
+
+	it('skips rendering conference link if no conference', async () => {
+		loadData({ series: { collection: { id: null as any, title: '' } } });
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Conference:')).not.toBeInTheDocument();
+	});
 });
+
+// link to sponsor
+// link to conference

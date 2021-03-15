@@ -30,7 +30,7 @@ export const makeSeriesDetailRoute = (
 
 export const makeSeriesListRoute = (
 	languageRoute: string,
-	page: number | string
+	page: number | string = 1
 ): string => `/${languageRoute}/series/page/${page}`;
 
 export const makeTagDetailRoute = (

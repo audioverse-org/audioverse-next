@@ -4,6 +4,14 @@ query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
 		imageWithFallback {
 			url(size: 100)
 		}
+		sponsor {
+			id
+			title
+		}
+		collection {
+			id
+			title
+		}
 		recordings(offset: $offset, first: $first) {
 			nodes {
 				...recordingList

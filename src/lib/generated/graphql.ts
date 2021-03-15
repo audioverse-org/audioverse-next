@@ -5103,7 +5103,13 @@ export type GetSeriesDetailDataQuery = (
     & { imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
-    ), recordings: (
+    ), sponsor: Maybe<(
+      { __typename?: 'Sponsor' }
+      & Pick<Sponsor, 'id' | 'title'>
+    )>, collection: Maybe<(
+      { __typename?: 'Collection' }
+      & Pick<Collection, 'id' | 'title'>
+    )>, recordings: (
       { __typename?: 'RecordingConnection' }
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
@@ -6667,6 +6673,14 @@ export const GetSeriesDetailDataDocument = `
     title
     imageWithFallback {
       url(size: 100)
+    }
+    sponsor {
+      id
+      title
+    }
+    collection {
+      id
+      title
     }
     recordings(offset: $offset, first: $first) {
       nodes {

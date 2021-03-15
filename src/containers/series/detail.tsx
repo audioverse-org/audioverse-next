@@ -3,14 +3,23 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import { makeSeriesDetailRoute } from '@lib/routes';
+import {
+	makeConferenceRoute,
+	makeSeriesDetailRoute,
+	makeSponsorRoute,
+} from '@lib/routes';
 import { useQueryString } from '@lib/useQueryString';
 import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
+import useLanguageRoute from '@lib/useLanguageRoute';
+import { FormattedMessage } from 'react-intl';
 
 type Props = SeriesDetailStaticProps['props'];
 
 function SeriesDetail({ data, nodes, pagination }: Props) {
-	const id = useQueryString('id') || '';
+	const languageRoute = useLanguageRoute();
+	const seriesId = useQueryString('id') || '';
+	const sponsorId = data?.series?.sponsor?.id || '';
+	const conferenceId = data?.series?.collection?.id || '';
 	return (
 		<>
 			<img
@@ -18,9 +27,31 @@ function SeriesDetail({ data, nodes, pagination }: Props) {
 				alt={data?.series?.title}
 			/>
 			<h1>{data?.series?.title}</h1>
+			<p>
+				<a href={makeSponsorRoute(languageRoute, sponsorId)}>
+					<FormattedMessage
+						id={'seriesDetail__sponsorLinkPrefix'}
+						defaultMessage={'Sponsor:'}
+						description={'Series detail page sponsor link prefix'}
+					/>{' '}
+					{data?.series?.sponsor?.title}
+				</a>
+			</p>
+			{conferenceId && (
+				<p>
+					<a href={makeConferenceRoute(languageRoute, conferenceId)}>
+						<FormattedMessage
+							id={'seriesDetail__conferenceLinkPrefix'}
+							defaultMessage={'Conference:'}
+							description={'Series detail page conference link prefix'}
+						/>{' '}
+						{data?.series?.collection?.title}
+					</a>
+				</p>
+			)}
 			<RecordingList recordings={nodes} />
 			<Pagination
-				makeRoute={(l, i) => makeSeriesDetailRoute(l, id, i)}
+				makeRoute={(l, i) => makeSeriesDetailRoute(l, seriesId, i)}
 				{...pagination}
 			/>
 		</>

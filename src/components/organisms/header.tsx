@@ -5,6 +5,7 @@ import LoadingIndicator from '@components/molecules/loadingIndicator';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
+import { makeSeriesListRoute } from '@lib/routes';
 
 // TODO: Finish linking all entries
 
@@ -138,7 +139,7 @@ const Header = (): JSX.Element => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href={makeSeriesListRoute(languageRoute)}>
 						<FormattedMessage
 							id={`header__naveItemSeries`}
 							defaultMessage="Series"

@@ -38,6 +38,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import SeriesDetail from '@containers/series/detail';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -393,6 +394,7 @@ describe('localization usage', () => {
 		[SponsorConferences, { nodes: [{ id: 'z' }] }],
 		[SponsorSeries, { nodes: [{ id: 'z' }] }],
 		[SeriesList, { nodes: [{ id: 'z' }] }],
+		[SeriesDetail, { nodes: [{ id: 'z' }] }],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
