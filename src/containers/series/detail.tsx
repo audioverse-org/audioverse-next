@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import RssLink from '@components/molecules/rssLink';
 import {
 	makeConferenceRoute,
 	makeSeriesDetailRoute,
@@ -12,7 +13,6 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
-import RssLink from '@components/molecules/rssLink';
 
 type Props = SeriesDetailStaticProps['props'];
 

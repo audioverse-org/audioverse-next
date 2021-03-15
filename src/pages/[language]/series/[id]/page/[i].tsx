@@ -1,4 +1,5 @@
 import SeriesDetail from '@containers/series/detail';
+import { createFeed } from '@lib/createFeed';
 import {
 	getSeriesDetailData,
 	GetSeriesDetailDataQuery,
@@ -10,7 +11,6 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 import { makeSeriesDetailRoute } from '@lib/routes';
-import { createFeed } from '@lib/createFeed';
 
 export default SeriesDetail;
 

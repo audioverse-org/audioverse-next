@@ -3,11 +3,11 @@ import {
 	GetSeriesDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import writeFeedFile from '@lib/writeFeedFile';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/page/[i]';
-import writeFeedFile from '@lib/writeFeedFile';
 
 const renderPage = buildRenderer(SeriesDetail, getStaticProps, {
 	language: 'en',
