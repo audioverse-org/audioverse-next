@@ -5,11 +5,11 @@ import {
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeSeriesDetailRoute } from '@lib/routes';
 import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
+import { makeSeriesDetailRoute } from '@lib/routes';
 
 export default SeriesDetail;
 

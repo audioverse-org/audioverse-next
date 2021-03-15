@@ -1,11 +1,11 @@
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
-import RecordingList from '@components/molecules/recordingList';
 import Pagination from '@components/molecules/pagination';
+import RecordingList from '@components/molecules/recordingList';
 import { makeSeriesDetailRoute } from '@lib/routes';
 import { useQueryString } from '@lib/useQueryString';
+import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
 
 type Props = SeriesDetailStaticProps['props'];
 
