@@ -5,21 +5,19 @@ import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]';
 
 type Props = SponsorStaticProps['props'];
 
-function Sponsor({ data }: Props): JSX.Element {
-	const img = data?.sponsor?.imageWithFallback?.url;
+function Sponsor({ sponsor }: Props): JSX.Element {
+	const img = sponsor?.imageWithFallback?.url;
 	return (
 		<>
-			{img && <img alt={data?.sponsor?.title} src={img} />}
-			<h1>{data?.sponsor?.title}</h1>
+			{img && <img alt={sponsor?.title} src={img} />}
+			<h1>{sponsor?.title}</h1>
 			{/* TODO: Do not render these elements if nothing to display */}
-			<p>{data?.sponsor?.summary}</p>
-			<p>{data?.sponsor?.location}</p>
-			<p>{data?.sponsor?.website}</p>
-			<p
-				dangerouslySetInnerHTML={{ __html: data?.sponsor?.description || '' }}
-			/>
+			<p>{sponsor?.summary}</p>
+			<p>{sponsor?.location}</p>
+			<p>{sponsor?.website}</p>
+			<p dangerouslySetInnerHTML={{ __html: sponsor?.description || '' }} />
 		</>
 	);
 }
 
-export default withFailStates(Sponsor, ({ nodes }) => !nodes?.length);
+export default withFailStates(Sponsor, ({ sponsor }) => !sponsor);

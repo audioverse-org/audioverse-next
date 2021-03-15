@@ -29,30 +29,11 @@ function loadData() {
 				website: 'the_sponsor_website',
 				summary: 'the_sponsor_summary',
 				description: '<i>the</i> <b>description</b>',
-				recordings: {
-					nodes: [
-						{
-							id: 'the_recording_id',
-							title: 'the_recording_title',
-						},
-					],
-					aggregate: {
-						count: 1,
-					},
-				},
 			},
 		});
 }
 
 describe('sponsor detail page', () => {
-	// it('lists recordings', async () => {
-	// 	loadData();
-	//
-	// 	const { getByText } = await renderPage();
-	//
-	// 	expect(getByText('the_recording_title')).toBeInTheDocument();
-	// });
-
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetSponsorDetailPathsDataDocument, expect.anything())
@@ -108,17 +89,6 @@ describe('sponsor detail page', () => {
 		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
 	});
 
-	// it('properly links pagination', async () => {
-	// 	loadData();
-	//
-	// 	const { getByText } = await renderPage();
-	//
-	// 	expect(getByText('1')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/sponsors/the_sponsor_id/page/1'
-	// 	);
-	// });
-
 	it('renders 404', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetSponsorDetailPageDataDocument, expect.anything())
@@ -163,9 +133,6 @@ describe('sponsor detail page', () => {
 });
 
 // TODO:
-// remove pagination
-// remove recordings
-// edit route
 // link to sub pages
 // don't link to sub pages if no sub entities exist
 // use something other than nodes.length to trigger 404

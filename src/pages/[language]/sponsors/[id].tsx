@@ -1,25 +1,16 @@
 import Sponsor from '@containers/sponsor/detail';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSponsorDetailPageData,
 	GetSponsorDetailPageDataQuery,
 	getSponsorDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
 import { makeSponsorRoute } from '@lib/routes';
 
 export default Sponsor;
 
-type Recording = NonNullable<
-	NonNullable<GetSponsorDetailPageDataQuery['sponsor']>['recordings']['nodes']
->[0];
-export type SponsorStaticProps = PaginatedStaticProps<
-	GetSponsorDetailPageDataQuery,
-	Recording
->;
+export type SponsorStaticProps = StaticProps<GetSponsorDetailPageDataQuery>;
 
 export async function getStaticProps({
 	params,
@@ -27,13 +18,12 @@ export async function getStaticProps({
 	params: { language: string; id: string; i: string };
 }): Promise<SponsorStaticProps> {
 	const { id } = params;
-	// TODO: Stop returning paginated props, just return sponsor meta
-	return getPaginatedStaticProps(
-		params,
-		({ offset, first }) => getSponsorDetailPageData({ id, offset, first }),
-		(d) => d?.sponsor?.recordings.nodes,
-		(d) => d?.sponsor?.recordings.aggregate?.count
-	);
+	return {
+		props: await getSponsorDetailPageData({ id }).catch(() => ({
+			sponsor: null,
+		})),
+		revalidate: REVALIDATE,
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

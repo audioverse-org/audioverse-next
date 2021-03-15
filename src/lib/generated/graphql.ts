@@ -5516,8 +5516,6 @@ export type GetSponsorConferencesPathsDataQuery = (
 
 export type GetSponsorDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
-  offset: Maybe<Scalars['Int']>;
-  first: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -5529,15 +5527,6 @@ export type GetSponsorDetailPageDataQuery = (
     & { imageWithFallback: (
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
-    ), recordings: (
-      { __typename?: 'RecordingConnection' }
-      & { nodes: Maybe<Array<(
-        { __typename?: 'Recording' }
-        & RecordingListFragment
-      )>>, aggregate: Maybe<(
-        { __typename?: 'Aggregate' }
-        & Pick<Aggregate, 'count'>
-      )> }
     ) }
   )> }
 );
@@ -7122,7 +7111,7 @@ export const useGetSponsorConferencesPathsDataQuery = <
       options
     );
 export const GetSponsorDetailPageDataDocument = `
-    query getSponsorDetailPageData($id: ID!, $offset: Int, $first: Int) {
+    query getSponsorDetailPageData($id: ID!) {
   sponsor(id: $id) {
     id
     title
@@ -7133,17 +7122,9 @@ export const GetSponsorDetailPageDataDocument = `
     imageWithFallback {
       url(size: 100)
     }
-    recordings(offset: $offset, first: $first) {
-      nodes {
-        ...recordingList
-      }
-      aggregate {
-        count
-      }
-    }
   }
 }
-    ${RecordingListFragmentDoc}`;
+    `;
 export const useGetSponsorDetailPageDataQuery = <
       TData = GetSponsorDetailPageDataQuery,
       TError = unknown

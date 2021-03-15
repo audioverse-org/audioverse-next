@@ -1,4 +1,4 @@
-query getSponsorDetailPageData($id: ID!, $offset: Int, $first: Int) {
+query getSponsorDetailPageData($id: ID!) {
 	sponsor(id: $id) {
 		id
 		title
@@ -8,14 +8,6 @@ query getSponsorDetailPageData($id: ID!, $offset: Int, $first: Int) {
 		description
 		imageWithFallback {
 			url(size: 100)
-		}
-		recordings(offset: $offset, first: $first) {
-			nodes {
-				...recordingList
-			}
-			aggregate {
-				count
-			}
 		}
 	}
 }
