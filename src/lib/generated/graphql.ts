@@ -5114,6 +5114,7 @@ export type GetSeriesDetailDataQuery = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & RecordingListFragment
+        & WriteFeedFileFragment
       )>>, aggregate: Maybe<(
         { __typename?: 'Aggregate' }
         & Pick<Aggregate, 'count'>
@@ -6685,6 +6686,7 @@ export const GetSeriesDetailDataDocument = `
     recordings(offset: $offset, first: $first) {
       nodes {
         ...recordingList
+        ...writeFeedFile
       }
       aggregate {
         count
@@ -6692,7 +6694,8 @@ export const GetSeriesDetailDataDocument = `
     }
   }
 }
-    ${RecordingListFragmentDoc}`;
+    ${RecordingListFragmentDoc}
+${WriteFeedFileFragmentDoc}`;
 export const useGetSeriesDetailDataQuery = <
       TData = GetSeriesDetailDataQuery,
       TError = unknown

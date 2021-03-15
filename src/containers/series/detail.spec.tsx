@@ -7,12 +7,15 @@ import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/page/[i]';
+import writeFeedFile from '@lib/writeFeedFile';
 
 const renderPage = buildRenderer(SeriesDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_series_id',
 	i: '1',
 });
+
+jest.mock('@lib/writeFeedFile');
 
 const loadData = buildLoader(GetSeriesDetailDataDocument, {
 	series: {
@@ -159,7 +162,43 @@ describe('series detail page', () => {
 
 		expect(queryByText('Conference:')).not.toBeInTheDocument();
 	});
+
+	it('generates rss', async () => {
+		loadData();
+
+		await getStaticProps({
+			params: { language: 'en', id: 'the_series_id', i: '1' },
+		});
+
+		expect(writeFeedFile).toBeCalledWith({
+			recordings: expect.anything(),
+			title: 'the_series_title | AudioVerse English',
+			projectRelativePath: 'public/en/series/the_series_id.xml',
+		});
+	});
+
+	it('does not generate rss on page 2', async () => {
+		loadData();
+
+		await getStaticProps({
+			params: { language: 'en', id: 'the_series_id', i: '2' },
+		});
+
+		expect(writeFeedFile).not.toBeCalled();
+	});
+
+	it('links rss feed', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('RSS')).toHaveAttribute(
+			'href',
+			'/en/series/the_series_id.xml'
+		);
+	});
 });
 
-// link to sponsor
-// link to conference
+// TODO: The way RSS gen is happening means it will never contain more than 25
+//  recordings. Is this wrong? If a playlist has more than 25 recordings, should
+//  the RSS file contain all of them?

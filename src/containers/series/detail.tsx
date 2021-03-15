@@ -12,10 +12,11 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
+import RssLink from '@components/molecules/rssLink';
 
 type Props = SeriesDetailStaticProps['props'];
 
-function SeriesDetail({ data, nodes, pagination }: Props) {
+function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 	const languageRoute = useLanguageRoute();
 	const seriesId = useQueryString('id') || '';
 	const sponsorId = data?.series?.sponsor?.id || '';
@@ -27,6 +28,7 @@ function SeriesDetail({ data, nodes, pagination }: Props) {
 				alt={data?.series?.title}
 			/>
 			<h1>{data?.series?.title}</h1>
+			<RssLink href={rssUrl} />
 			<p>
 				<a href={makeSponsorRoute(languageRoute, sponsorId)}>
 					<FormattedMessage

@@ -10,6 +10,7 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 import { makeSeriesDetailRoute } from '@lib/routes';
+import { createFeed } from '@lib/createFeed';
 
 export default SeriesDetail;
 
@@ -19,21 +20,38 @@ type Series = NonNullable<
 export type SeriesDetailStaticProps = PaginatedStaticProps<
 	GetSeriesDetailDataQuery,
 	Series
->;
+> & { props: { rssUrl: string } };
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
 }): Promise<SeriesDetailStaticProps> {
-	const { id } = params;
+	const { language, id, i } = params;
 
-	return getPaginatedStaticProps(
+	const result = await getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSeriesDetailData({ id, offset, first }),
 		(d) => d.series?.recordings.nodes,
 		(d) => d.series?.recordings.aggregate?.count
 	);
+
+	if (i === '1') {
+		await createFeed(
+			result.props.data?.series?.title,
+			params,
+			result.props.nodes,
+			`series/${id}.xml`
+		);
+	}
+
+	return {
+		...result,
+		props: {
+			...result.props,
+			rssUrl: `/${language}/series/${id}.xml`,
+		},
+	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
