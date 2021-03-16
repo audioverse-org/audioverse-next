@@ -4,7 +4,11 @@ import {
 	GetSponsorTeachingsPageDataDocument,
 	GetSponsorTeachingsPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import SponsorTeachings, {
 	getStaticPaths,
@@ -13,7 +17,7 @@ import SponsorTeachings, {
 
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildRenderer(SponsorTeachings, getStaticProps, {
+const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
 	i: '1',

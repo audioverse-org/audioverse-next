@@ -4,13 +4,17 @@ import {
 	GetSponsorConferencesPageDataDocument,
 	GetSponsorConferencesPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import SponsorConferences, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 
-const renderPage = buildRenderer(SponsorConferences, getStaticProps, {
+const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
 	i: '1',

@@ -34,16 +34,19 @@ const PaginationEntry = ({
 	page,
 	label,
 	makeRoute,
-	className,
+	isActive,
 }: {
 	page: number | string;
 	label?: string;
 	makeRoute?: (languageRoute: string, pageIndex: number) => string;
-	className?: string;
+	isActive?: boolean;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	return (
-		<li className={`${className} ${styles.link}`}>
+		<li
+			className={`${isActive ? styles.active : ''} ${styles.link}`}
+			data-testid={isActive ? 'active' : ''}
+		>
 			{Number.isInteger(page) && makeRoute ? (
 				<a href={makeRoute(languageRoute, +page)}>{label || page}</a>
 			) : (
@@ -77,7 +80,7 @@ export default function Pagination({
 					page={p}
 					key={i}
 					makeRoute={makeRoute}
-					className={p === current ? styles.active : ''}
+					isActive={p === current}
 				/>
 			))}
 			{current < total ? (

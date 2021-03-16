@@ -4,7 +4,7 @@ import {
 	GetPresenterDetailPageDataDocument,
 	GetPresenterDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import Presenter, {
 	getStaticPaths,
@@ -13,7 +13,7 @@ import Presenter, {
 
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildRenderer(Presenter, getStaticProps, {
+const renderPage = buildStaticRenderer(Presenter, getStaticProps, {
 	language: 'en',
 	id: 'the_presenter_id',
 	i: '1',

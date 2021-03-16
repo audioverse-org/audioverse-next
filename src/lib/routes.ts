@@ -186,3 +186,13 @@ export const makeTestimoniesRoute = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/testimonies/page/${page}`;
+
+export const makePlaylistListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/playlists/page/${page}`;
+
+export const makePlaylistDetailRoute = (
+	languageRoute: string,
+	playlistId: string
+): string => `/${languageRoute}/playlists/${playlistId}`;

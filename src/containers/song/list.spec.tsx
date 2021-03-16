@@ -1,10 +1,12 @@
 import { when } from 'jest-when';
 
 import { GetSongsListPageDataDocument } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Songs, { getStaticPaths, getStaticProps } from '@pages/[language]/songs';
 
-const renderPage = buildRenderer(Songs, getStaticProps, { language: 'en' });
+const renderPage = buildStaticRenderer(Songs, getStaticProps, {
+	language: 'en',
+});
 
 function loadData() {
 	when(mockedFetchApi)

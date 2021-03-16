@@ -5,7 +5,7 @@ import {
 	GetConferenceDetailPageDataDocument,
 	GetConferenceDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import ConferenceDetail, {
 	getStaticPaths,
@@ -14,7 +14,7 @@ import ConferenceDetail, {
 
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildRenderer(ConferenceDetail, getStaticProps, {
+const renderPage = buildStaticRenderer(ConferenceDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_conference_id',
 	i: '1',

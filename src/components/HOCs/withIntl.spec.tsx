@@ -15,6 +15,7 @@ import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
+import Playlists from '@containers/playlist/list';
 import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
 import SeriesDetail from '@containers/series/detail';
@@ -395,6 +396,7 @@ describe('localization usage', () => {
 		[SponsorSeries, { nodes: [{ id: 'z' }] }],
 		[SeriesList, { nodes: [{ id: 'z' }] }],
 		[SeriesDetail, { nodes: [{ id: 'z' }] }],
+		[Playlists, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

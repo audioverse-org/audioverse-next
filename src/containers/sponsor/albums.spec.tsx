@@ -4,13 +4,17 @@ import {
 	GetSponsorAlbumsPageDataDocument,
 	GetSponsorAlbumsPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import SponsorAlbums, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 
-const renderPage = buildRenderer(SponsorAlbums, getStaticProps, {
+const renderPage = buildStaticRenderer(SponsorAlbums, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
 	i: '1',

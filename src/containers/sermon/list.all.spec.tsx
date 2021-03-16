@@ -10,7 +10,11 @@ import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi, mockFeed } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	mockedFetchApi,
+	mockFeed,
+} from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -21,7 +25,7 @@ jest.mock('fs');
 jest.mock('next/head');
 jest.mock('@lib/api/isPersonFavorited');
 
-const renderPage = buildRenderer(SermonList, getStaticProps, {
+const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
 	language: 'en',
 	i: '1',
 });

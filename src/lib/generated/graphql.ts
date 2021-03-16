@@ -4973,6 +4973,33 @@ export type GetHomeStaticPropsQuery = (
   ) }
 );
 
+export type GetPlaylistsPageDataQueryVariables = Exact<{
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetPlaylistsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & { playlists: (
+        { __typename?: 'UserPlaylistConnection' }
+        & { nodes: Maybe<Array<(
+          { __typename?: 'UserPlaylist' }
+          & Pick<UserPlaylist, 'id' | 'title'>
+        )>>, aggregate: Maybe<(
+          { __typename?: 'Aggregate' }
+          & Pick<Aggregate, 'count'>
+        )> }
+      ) }
+    ) }
+  )> }
+);
+
 export type GetPresenterDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
   offset: Maybe<Scalars['Int']>;
@@ -6520,6 +6547,35 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
+export const GetPlaylistsPageDataDocument = `
+    query getPlaylistsPageData($language: Language!, $offset: Int, $first: Int) {
+  me {
+    user {
+      playlists(language: $language, offset: $offset, first: $first) {
+        nodes {
+          id
+          title
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetPlaylistsPageDataQuery = <
+      TData = GetPlaylistsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPlaylistsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetPlaylistsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPlaylistsPageDataQuery, TError, TData>(
+      ['getPlaylistsPageData', variables],
+      graphqlFetcher<GetPlaylistsPageDataQuery, GetPlaylistsPageDataQueryVariables>(GetPlaylistsPageDataDocument, variables),
+      options
+    );
 export const GetPresenterDetailPageDataDocument = `
     query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
   person(id: $id) {
@@ -7800,6 +7856,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 							): Promise<GetHomeStaticPropsQuery> {
 								return fetchApi(GetHomeStaticPropsDocument, { variables });
+							}
+
+							export async function getPlaylistsPageData<T>(
+								variables: ExactAlt<T, GetPlaylistsPageDataQueryVariables>
+							): Promise<GetPlaylistsPageDataQuery> {
+								return fetchApi(GetPlaylistsPageDataDocument, { variables });
 							}
 
 							export async function getPresenterDetailPageData<T>(

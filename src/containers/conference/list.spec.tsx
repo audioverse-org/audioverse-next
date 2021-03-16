@@ -4,13 +4,13 @@ import {
 	GetConferenceListPageDataDocument,
 	GetConferenceListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import ConferenceList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/page/[i]';
 
-const renderPage = buildRenderer(ConferenceList, getStaticProps, {
+const renderPage = buildStaticRenderer(ConferenceList, getStaticProps, {
 	language: 'en',
 	i: '1',
 });

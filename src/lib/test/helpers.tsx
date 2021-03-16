@@ -4,6 +4,7 @@ import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
 import { when } from 'jest-when';
 import _ from 'lodash';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
@@ -46,20 +47,40 @@ export function buildLoader<T>(
 	};
 }
 
-export function buildRenderer<
+type Renderer<P> = (params?: Partial<P>) => Promise<RenderResult>;
+
+export function buildStaticRenderer<
 	C extends ComponentType<any>,
 	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
 	P extends Partial<Parameters<F>[0]['params']>
->(
-	Component: C,
-	getStaticProps: F,
-	defaultParams: P = {} as P
-): (params?: Partial<P>) => Promise<RenderResult> {
+>(Component: C, getStaticProps: F, defaultParams: P = {} as P): Renderer<P> {
 	return async (params: Partial<P> = {}): Promise<RenderResult> => {
 		const p = { ...defaultParams, ...params };
 		loadRouter({ query: p });
 		const { props } = await getStaticProps({ params: p });
 		return renderWithIntl(Component, props);
+	};
+}
+
+export function buildServerRenderer<
+	C extends ComponentType<any>,
+	F extends (
+		context: GetServerSidePropsContext
+	) => Promise<GetServerSidePropsResult<any>>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(
+	Component: C,
+	getServerSideProps: F,
+	defaultParams: P = {} as P
+): Renderer<P> {
+	return async (params: Partial<P> = {}): Promise<RenderResult> => {
+		const p = { ...defaultParams, ...params };
+		loadRouter({ query: p });
+		const result = await getServerSideProps({ params: p, query: p } as any);
+		if (!('props' in result)) {
+			throw new Error('Failed to get server props');
+		}
+		return renderWithIntl(Component, result.props);
 	};
 }
 

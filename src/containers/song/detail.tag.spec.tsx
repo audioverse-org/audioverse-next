@@ -4,13 +4,13 @@ import {
 	GetSongDetailTagPageDataDocument,
 	GetSongDetailTagPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SongDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/tag/[tag]';
 
-const renderPage = buildRenderer(SongDetail, getStaticProps, {
+const renderPage = buildStaticRenderer(SongDetail, getStaticProps, {
 	language: 'en',
 	tag: 'the_tag_name',
 });

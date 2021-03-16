@@ -1,0 +1,15 @@
+query getPlaylistsPageData($language: Language!, $offset: Int, $first: Int) {
+	me {
+		user {
+			playlists(language: $language, offset: $offset, first: $first) {
+				nodes {
+					id
+					title
+				}
+				aggregate {
+					count
+				}
+			}
+		}
+	}
+}

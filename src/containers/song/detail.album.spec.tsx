@@ -4,13 +4,13 @@ import {
 	GetSongAlbumPageDataDocument,
 	GetSongAlbumPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/album/[id]';
 
-const renderPage = buildRenderer(Song, getStaticProps, {
+const renderPage = buildStaticRenderer(Song, getStaticProps, {
 	language: 'en',
 	id: 'the_album_id',
 });

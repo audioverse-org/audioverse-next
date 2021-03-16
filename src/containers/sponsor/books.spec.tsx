@@ -4,13 +4,17 @@ import {
 	GetSponsorBooksPageDataDocument,
 	GetSponsorBooksPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import SponsorBooks, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/books/page/[i]';
 
-const renderPage = buildRenderer(SponsorBooks, getStaticProps, {
+const renderPage = buildStaticRenderer(SponsorBooks, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
 	i: '1',

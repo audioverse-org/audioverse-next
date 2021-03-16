@@ -4,13 +4,17 @@ import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildLoader, buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import SeriesList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/page/[i]';
 
-const renderPage = buildRenderer(SeriesList, getStaticProps, {
+const renderPage = buildStaticRenderer(SeriesList, getStaticProps, {
 	language: 'en',
 	i: '1',
 });
