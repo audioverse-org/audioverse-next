@@ -6,6 +6,7 @@ import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { useGetPlaylistsPageDataQuery } from '@lib/generated/graphql';
 import getPageOffset from '@lib/getPageOffset';
 import { PaginationData } from '@lib/getPaginatedStaticProps';
+import getPaginationPageCount from '@lib/getPaginationPageCount';
 import { makePlaylistDetailRoute, makePlaylistListRoute } from '@lib/routes';
 import { useLanguageId } from '@lib/useLanguageId';
 import { useQueryString } from '@lib/useQueryString';
@@ -22,7 +23,7 @@ function Playlists(): JSX.Element {
 	const playlists = data?.me?.user.playlists.nodes || [];
 	const count = data?.me?.user.playlists.aggregate?.count || 0;
 	const pagination: PaginationData = {
-		total: Math.ceil(count / ENTRIES_PER_PAGE),
+		total: getPaginationPageCount(count),
 		current: +page,
 	};
 	const intl = useIntl();

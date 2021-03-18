@@ -194,5 +194,6 @@ export const makePlaylistListRoute = (
 
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
-	playlistId: string
-): string => `/${languageRoute}/playlists/${playlistId}`;
+	playlistId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/playlists/${playlistId}/page/${page}`;

@@ -7,7 +7,7 @@ export type DehydratedProps = GetServerSidePropsResult<{
 }>;
 
 export default async function getDehydratedProps(
-	queryPairs: [string, () => any][]
+	queryPairs: [string, () => Promise<any>][]
 ): Promise<DehydratedProps> {
 	const queryClient = new QueryClient();
 

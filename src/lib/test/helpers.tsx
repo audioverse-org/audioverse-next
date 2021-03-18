@@ -4,7 +4,7 @@ import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
 import { when } from 'jest-when';
 import _ from 'lodash';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
@@ -64,9 +64,7 @@ export function buildStaticRenderer<
 
 export function buildServerRenderer<
 	C extends ComponentType<any>,
-	F extends (
-		context: GetServerSidePropsContext
-	) => Promise<GetServerSidePropsResult<any>>,
+	F extends (context: any) => Promise<GetServerSidePropsResult<any>>,
 	P extends Partial<Parameters<F>[0]['params']>
 >(
 	Component: C,

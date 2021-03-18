@@ -4,12 +4,14 @@ import { hydrate } from 'react-query/hydration';
 import { storeRequest } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { GetPlaylistsPageDataDocument } from '@lib/generated/graphql';
-import { buildLoader, buildServerRenderer } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildServerRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import Playlists, {
 	getServerSideProps,
 } from '@pages/[language]/playlists/page/[i]';
-
-// Playlists list page should only display user's own playlists
 
 const renderPage = buildServerRenderer(Playlists, getServerSideProps, {
 	language: 'en',
@@ -123,7 +125,22 @@ describe('playlists list page', () => {
 
 		expect(getByText('the_playlist_title')).toHaveAttribute(
 			'href',
-			'/en/playlists/the_playlist_id'
+			'/en/playlists/the_playlist_id/page/1'
 		);
+	});
+
+	it('queries data with language and index', async () => {
+		await getServerSideProps({
+			req: 'the_request',
+			query: { language: 'en', i: '1' },
+		} as any);
+
+		expect(mockedFetchApi).toBeCalledWith(GetPlaylistsPageDataDocument, {
+			variables: {
+				language: 'ENGLISH',
+				offset: 0,
+				first: ENTRIES_PER_PAGE,
+			},
+		});
 	});
 });

@@ -1,31 +1,18 @@
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getPageOffset from '@lib/getPageOffset';
 
-export interface PaginatedGetter<T> {
-	({
-		language,
-		offset,
-		first,
-	}: {
-		language: Language;
-		offset: number;
-		first: number;
-	}): Promise<T>;
+export interface PaginatedGetter<T, E> {
+	(variables: { offset: number; first: number } & E): Promise<T>;
 }
 
-export async function getPaginatedData<T>(
-	params: {
-		language: string;
-		i: number | string;
-	},
-	getter: PaginatedGetter<T>
+export async function getPaginatedData<T, E>(
+	index: number | string,
+	getter: PaginatedGetter<T, E>,
+	extraVariables: E = {} as E
 ): Promise<T | null> {
-	const { language, i } = params;
 	return getter({
-		language: getLanguageIdByRoute(language),
-		offset: getPageOffset(i),
+		...extraVariables,
+		offset: getPageOffset(index),
 		first: ENTRIES_PER_PAGE,
 	}).catch(() => null);
 }

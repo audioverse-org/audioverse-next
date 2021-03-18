@@ -15,10 +15,10 @@ export type Scalars = {
   Date: any;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
   /** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type Aggregate = {
@@ -481,18 +481,6 @@ export type CollectionPayload = {
   errors: Array<InputValidationError>;
 };
 
-export type CollectionsOrder = {
-  direction: OrderByDirection;
-  field: CollectionsSortableField;
-};
-
-/** Properties by which collection connections can be ordered. */
-export enum CollectionsSortableField {
-  CreatedAt = 'CREATED_AT',
-  Id = 'ID',
-  Title = 'TITLE'
-}
-
 export type CollectionUpdateInput = {
   description: Maybe<Scalars['String']>;
   hidingReason: Maybe<Scalars['String']>;
@@ -504,6 +492,18 @@ export type CollectionUpdateInput = {
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
 };
+
+export type CollectionsOrder = {
+  direction: OrderByDirection;
+  field: CollectionsSortableField;
+};
+
+/** Properties by which collection connections can be ordered. */
+export enum CollectionsSortableField {
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
+}
 
 
 /** The date range the items must fall in to be applicable. */
@@ -605,6 +605,17 @@ export type DistributionAgreementPayload = {
   errors: Array<InputValidationError>;
 };
 
+export type DistributionAgreementUpdateInput = {
+  isDefault: Maybe<Scalars['Boolean']>;
+  isHidden: Maybe<Scalars['Boolean']>;
+  isRetired: Maybe<Scalars['Boolean']>;
+  licenseId: Maybe<Scalars['ID']>;
+  notes: Maybe<Scalars['String']>;
+  sponsorId: Maybe<Scalars['ID']>;
+  summary: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+};
+
 export type DistributionAgreementsOrder = {
   direction: OrderByDirection;
   field: DistributionAgreementsSortableField;
@@ -616,17 +627,6 @@ export enum DistributionAgreementsSortableField {
   Id = 'ID',
   Title = 'TITLE'
 }
-
-export type DistributionAgreementUpdateInput = {
-  isDefault: Maybe<Scalars['Boolean']>;
-  isHidden: Maybe<Scalars['Boolean']>;
-  isRetired: Maybe<Scalars['Boolean']>;
-  licenseId: Maybe<Scalars['ID']>;
-  notes: Maybe<Scalars['String']>;
-  sponsorId: Maybe<Scalars['ID']>;
-  summary: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-};
 
 export type Image = {
   __typename?: 'Image';
@@ -717,6 +717,7 @@ export enum Language {
 export type License = Node & {
   __typename?: 'License';
   description: Scalars['String'];
+  distributionAgreements: DistributionAgreementConnection;
   history: Maybe<CatalogHistoryItemConnection>;
   id: Scalars['ID'];
   image: Maybe<Image>;
@@ -726,6 +727,19 @@ export type License = Node & {
   permitsSales: Maybe<Scalars['Boolean']>;
   summary: Scalars['String'];
   title: Scalars['String'];
+};
+
+
+export type LicenseDistributionAgreementsArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  isDefault: Maybe<Scalars['Boolean']>;
+  isRetired: Maybe<Scalars['Boolean']>;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<DistributionAgreementsOrder>>;
+  search: Maybe<Scalars['String']>;
+  sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -769,6 +783,17 @@ export type LicensePayload = {
   license: Maybe<License>;
 };
 
+export type LicenseUpdateInput = {
+  description: Maybe<Scalars['String']>;
+  image: Maybe<ImageInput>;
+  isDefault: Maybe<Scalars['Boolean']>;
+  isHidden: Maybe<Scalars['Boolean']>;
+  notes: Maybe<Scalars['String']>;
+  permitsSales: Maybe<Scalars['Boolean']>;
+  summary: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+};
+
 export type LicensesOrder = {
   direction: OrderByDirection;
   field: LicensesSortableField;
@@ -780,17 +805,6 @@ export enum LicensesSortableField {
   Id = 'ID',
   Title = 'TITLE'
 }
-
-export type LicenseUpdateInput = {
-  description: Maybe<Scalars['String']>;
-  image: Maybe<ImageInput>;
-  isDefault: Maybe<Scalars['Boolean']>;
-  isHidden: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
-  permitsSales: Maybe<Scalars['Boolean']>;
-  summary: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-};
 
 /** The media file container types. */
 export enum MediaFileContainer {
@@ -878,6 +892,12 @@ export type MediaFileUploadPayload = {
   mediaFileUpload: Maybe<MediaFileUpload>;
 };
 
+export type MediaFileUploadStartInput = {
+  filename: Scalars['String'];
+  filesize: Scalars['String'];
+  recordingId: Maybe<Scalars['ID']>;
+};
+
 export type MediaFileUploadsOrder = {
   direction: OrderByDirection;
   field: MediaFileUploadsSortableField;
@@ -888,12 +908,6 @@ export enum MediaFileUploadsSortableField {
   CreatedAt = 'CREATED_AT',
   Filename = 'FILENAME'
 }
-
-export type MediaFileUploadStartInput = {
-  filename: Scalars['String'];
-  filesize: Scalars['String'];
-  recordingId: Maybe<Scalars['ID']>;
-};
 
 export type MediaRelease = Node & {
   __typename?: 'MediaRelease';
@@ -1225,6 +1239,10 @@ export type Mutation = {
   recordingScreeningTechnicalCheckoutCreate: RecordingScreeningCheckoutPayload;
   recordingScreeningTechnicalCheckoutDelete: SuccessPayload;
   recordingScreeningTechnicalEvaluate: RecordingPayload;
+  /** Deletes a recording's transcript, if extant. */
+  recordingTranscriptDelete: SuccessPayload;
+  /** Requests a recording be enqueued for automated transcription. */
+  recordingTranscriptionRequest: SuccessPayload;
   recordingUnarchive: SuccessPayload;
   recordingUnfavorite: SuccessPayload;
   recordingUpdate: RecordingPayload;
@@ -1591,6 +1609,16 @@ export type MutationRecordingScreeningTechnicalEvaluateArgs = {
 };
 
 
+export type MutationRecordingTranscriptDeleteArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
+export type MutationRecordingTranscriptionRequestArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
 export type MutationRecordingUnarchiveArgs = {
   recordingId: Scalars['ID'];
 };
@@ -1835,6 +1863,26 @@ export type PersonPayload = {
   person: Maybe<Person>;
 };
 
+export type PersonUpdateInput = {
+  address: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  designations: Maybe<Scalars['String']>;
+  email: Maybe<Scalars['String']>;
+  givenName: Maybe<Scalars['String']>;
+  hidingReason: Maybe<Scalars['String']>;
+  image: Maybe<ImageInput>;
+  internalContact: Maybe<InternalContactInput>;
+  isHidden: Maybe<Scalars['Boolean']>;
+  isPreapproved: Maybe<Scalars['Boolean']>;
+  notes: Maybe<Scalars['String']>;
+  phone: Maybe<Scalars['String']>;
+  suffix: Maybe<Scalars['String']>;
+  summary: Maybe<Scalars['String']>;
+  surname: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  website: Maybe<Scalars['URL']>;
+};
+
 export type PersonsOrder = {
   direction: OrderByDirection;
   field: PersonsSortableField;
@@ -1857,26 +1905,6 @@ export enum PersonsSortableField {
   Id = 'ID',
   Name = 'NAME'
 }
-
-export type PersonUpdateInput = {
-  address: Maybe<Scalars['String']>;
-  description: Maybe<Scalars['String']>;
-  designations: Maybe<Scalars['String']>;
-  email: Maybe<Scalars['String']>;
-  givenName: Maybe<Scalars['String']>;
-  hidingReason: Maybe<Scalars['String']>;
-  image: Maybe<ImageInput>;
-  internalContact: Maybe<InternalContactInput>;
-  isHidden: Maybe<Scalars['Boolean']>;
-  isPreapproved: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
-  phone: Maybe<Scalars['String']>;
-  suffix: Maybe<Scalars['String']>;
-  summary: Maybe<Scalars['String']>;
-  surname: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  website: Maybe<Scalars['URL']>;
-};
 
 export type PopularRecording = {
   __typename?: 'PopularRecording';
@@ -1906,13 +1934,13 @@ export type Query = {
   audiobibles: BibleConnection;
   /** Alias for `sequence(id: ID)` */
   audiobook: Maybe<Sequence>;
-  audiobooks: SequenceConnection;
   /** Alias for `collection(id: ID)` */
   audiobookSeries: Maybe<Collection>;
   audiobookSerieses: CollectionConnection;
   /** Alias for `recording(id: ID)` */
   audiobookTrack: Maybe<Recording>;
   audiobookTracks: RecordingConnection;
+  audiobooks: SequenceConnection;
   blogPost: Maybe<BlogPost>;
   blogPosts: BlogPostConnection;
   collection: Maybe<Collection>;
@@ -1930,8 +1958,8 @@ export type Query = {
   mediaFileUploads: MediaFileUploadConnection;
   mediaRelease: Maybe<MediaRelease>;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  mediaReleaseForms: MediaReleaseFormConnection;
   mediaReleaseFormTemplates: Array<MediaReleaseFormTemplate>;
+  mediaReleaseForms: MediaReleaseFormConnection;
   mediaReleases: MediaReleaseConnection;
   /** Alias for `sequence(id: ID)` */
   musicAlbum: Maybe<Sequence>;
@@ -1947,9 +1975,9 @@ export type Query = {
   persons: PersonConnection;
   popularRecordings: PopularRecordingConnection;
   recording: Maybe<Recording>;
-  recordings: RecordingConnection;
   recordingScreeningIssueType: Maybe<RecordingScreeningIssueType>;
   recordingScreeningIssueTypes: RecordingScreeningIssueTypeConnection;
+  recordings: RecordingConnection;
   sequence: Maybe<Sequence>;
   sequences: SequenceConnection;
   /** Alias for `sequence(id: ID)` */
@@ -2008,20 +2036,6 @@ export type QueryAudiobookArgs = {
 };
 
 
-export type QueryAudiobooksArgs = {
-  after: Maybe<Scalars['String']>;
-  collectionId: Maybe<Scalars['ID']>;
-  first: Maybe<Scalars['Int']>;
-  includeUnpublished: Maybe<Scalars['Boolean']>;
-  language: Language;
-  offset: Maybe<Scalars['Int']>;
-  orderBy: Maybe<Array<SequenceOrder>>;
-  search: Maybe<Scalars['String']>;
-  sponsorId: Maybe<Scalars['ID']>;
-  sponsorIds: Maybe<Array<Scalars['ID']>>;
-};
-
-
 export type QueryAudiobookSeriesArgs = {
   id: Scalars['ID'];
 };
@@ -2075,6 +2089,20 @@ export type QueryAudiobookTracksArgs = {
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
+};
+
+
+export type QueryAudiobooksArgs = {
+  after: Maybe<Scalars['String']>;
+  collectionId: Maybe<Scalars['ID']>;
+  first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<SequenceOrder>>;
+  search: Maybe<Scalars['String']>;
+  sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
 
 
@@ -2227,6 +2255,11 @@ export type QueryMediaReleaseFormArgs = {
 };
 
 
+export type QueryMediaReleaseFormTemplatesArgs = {
+  language: Language;
+};
+
+
 export type QueryMediaReleaseFormsArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
@@ -2241,11 +2274,6 @@ export type QueryMediaReleaseFormsArgs = {
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   type: Maybe<MediaReleaseFormType>;
-};
-
-
-export type QueryMediaReleaseFormTemplatesArgs = {
-  language: Language;
 };
 
 
@@ -2410,6 +2438,18 @@ export type QueryRecordingArgs = {
 };
 
 
+export type QueryRecordingScreeningIssueTypeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryRecordingScreeningIssueTypesArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryRecordingsArgs = {
   after: Maybe<Scalars['String']>;
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
@@ -2441,18 +2481,6 @@ export type QueryRecordingsArgs = {
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
-};
-
-
-export type QueryRecordingScreeningIssueTypeArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryRecordingScreeningIssueTypesArgs = {
-  after: Maybe<Scalars['String']>;
-  first: Maybe<Scalars['Int']>;
-  offset: Maybe<Scalars['Int']>;
 };
 
 
@@ -2677,6 +2705,8 @@ export type Recording = Node & {
   attachments: Array<Attachment>;
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
+  /** Whether the recording can be manually enqueued for transcribing. */
+  canRequestTranscription: Scalars['Boolean'];
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   canonicalUrl: Scalars['URL'];
@@ -2722,6 +2752,7 @@ export type Recording = Node & {
   technicalScreeningStatus: RecordingTechnicalScreeningStatus;
   title: Scalars['String'];
   transcript: Maybe<Transcript>;
+  transcriptionStatus: Maybe<RecordingTranscriptionStatus>;
   videoFiles: Array<VideoFile>;
   viewerHasFavorited: Scalars['Boolean'];
   websites: Array<Website>;
@@ -2849,6 +2880,7 @@ export enum RecordingContentType {
 export type RecordingCreateInput = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
+  contentScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   contentType: RecordingContentType;
   copyrightYear: Maybe<Scalars['Int']>;
   coverImage: Maybe<ImageInput>;
@@ -2858,6 +2890,7 @@ export type RecordingCreateInput = {
   isDownloadAllowed: Maybe<Scalars['Boolean']>;
   isFeatured: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
+  legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   notes: Maybe<Scalars['String']>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
@@ -2872,6 +2905,7 @@ export type RecordingCreateInput = {
   /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Scalars['ID'];
+  technicalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   title: Scalars['String'];
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2928,6 +2962,10 @@ export type RecordingScreeningCheckout = {
   createdAt: Scalars['DateTime'];
   /** The screener user. */
   screener: User;
+};
+
+export type RecordingScreeningCheckoutInput = {
+  userId: Scalars['ID'];
 };
 
 export type RecordingScreeningCheckoutPayload = {
@@ -3004,12 +3042,6 @@ export type RecordingScreeningIssuePayload = {
   recordingScreeningIssue: Maybe<RecordingScreeningIssue>;
 };
 
-/** Properties by which recording screening issue connections can be ordered. */
-export enum RecordingScreeningIssuesSortableField {
-  CreatedAt = 'CREATED_AT',
-  Id = 'ID'
-}
-
 /** The applicable recording format for the screening issue. */
 export enum RecordingScreeningIssueTarget {
   Audio = 'AUDIO',
@@ -3038,29 +3070,18 @@ export type RecordingScreeningIssueTypeEdge = {
   node: RecordingScreeningIssueType;
 };
 
+/** Properties by which recording screening issue connections can be ordered. */
+export enum RecordingScreeningIssuesSortableField {
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID'
+}
+
 /** The supported screening evaluation methods. */
 export enum RecordingScreeningMethod {
   Live = 'LIVE',
   Recording = 'RECORDING',
   ThirdPartyInfo = 'THIRD_PARTY_INFO',
   Transcript = 'TRANSCRIPT'
-}
-
-export type RecordingsOrder = {
-  direction: OrderByDirection;
-  field: RecordingsSortableField;
-};
-
-/** Properties by which recording connections can be ordered. */
-export enum RecordingsSortableField {
-  CollectionTitle = 'COLLECTION_TITLE',
-  CreatedAt = 'CREATED_AT',
-  Id = 'ID',
-  PublishedAt = 'PUBLISHED_AT',
-  RecordedAt = 'RECORDED_AT',
-  SequenceTitle = 'SEQUENCE_TITLE',
-  SponsorTitle = 'SPONSOR_TITLE',
-  Title = 'TITLE'
 }
 
 /** The stages a recording may be in. */
@@ -3108,9 +3129,22 @@ export enum RecordingTechnicalScreeningStatus {
   Unevaluated = 'UNEVALUATED'
 }
 
+/** The status of a recording's transcript. */
+export enum RecordingTranscriptionStatus {
+  /** Transcription completed. */
+  Complete = 'COMPLETE',
+  /** Transcription failed. */
+  Failed = 'FAILED',
+  /** Transcription in process. */
+  Processing = 'PROCESSING',
+  /** Not Yet Begun */
+  Unstarted = 'UNSTARTED'
+}
+
 export type RecordingUpdateInput = {
   bibleReferences: Maybe<Array<BibleReferenceRangeInput>>;
   collectionId: Maybe<Scalars['ID']>;
+  contentScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   copyrightYear: Maybe<Scalars['Int']>;
   coverImage: Maybe<ImageInput>;
   description: Maybe<Scalars['String']>;
@@ -3119,6 +3153,7 @@ export type RecordingUpdateInput = {
   isDownloadAllowed: Maybe<Scalars['Boolean']>;
   isFeatured: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
+  legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   notes: Maybe<Scalars['String']>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
@@ -3133,9 +3168,27 @@ export type RecordingUpdateInput = {
   /** Requires `ADMINISTRATION` role. */
   skipTechnicalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Maybe<Scalars['ID']>;
+  technicalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   title: Maybe<Scalars['String']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
+
+export type RecordingsOrder = {
+  direction: OrderByDirection;
+  field: RecordingsSortableField;
+};
+
+/** Properties by which recording connections can be ordered. */
+export enum RecordingsSortableField {
+  CollectionTitle = 'COLLECTION_TITLE',
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  PublishedAt = 'PUBLISHED_AT',
+  RecordedAt = 'RECORDED_AT',
+  SequenceTitle = 'SEQUENCE_TITLE',
+  SponsorTitle = 'SPONSOR_TITLE',
+  Title = 'TITLE'
+}
 
 export type Sequence = Node & {
   __typename?: 'Sequence';
@@ -3431,18 +3484,6 @@ export type SponsorPayload = {
   sponsor: Maybe<Sponsor>;
 };
 
-export type SponsorsOrder = {
-  direction: OrderByDirection;
-  field: SponsorsSortableField;
-};
-
-/** Properties by which sponsor connections can be ordered. */
-export enum SponsorsSortableField {
-  CreatedAt = 'CREATED_AT',
-  Id = 'ID',
-  Title = 'TITLE'
-}
-
 export type SponsorUpdateInput = {
   address: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
@@ -3459,6 +3500,18 @@ export type SponsorUpdateInput = {
   title: Maybe<Scalars['String']>;
   website: Maybe<Scalars['URL']>;
 };
+
+export type SponsorsOrder = {
+  direction: OrderByDirection;
+  field: SponsorsSortableField;
+};
+
+/** Properties by which sponsor connections can be ordered. */
+export enum SponsorsSortableField {
+  CreatedAt = 'CREATED_AT',
+  Id = 'ID',
+  Title = 'TITLE'
+}
 
 export type SuccessPayload = {
   __typename?: 'SuccessPayload';
@@ -3675,9 +3728,9 @@ export enum Timezone {
   AmericaEirunepe = 'AMERICA_EIRUNEPE',
   AmericaElSalvador = 'AMERICA_EL_SALVADOR',
   AmericaEnsenada = 'AMERICA_ENSENADA',
+  AmericaFortaleza = 'AMERICA_FORTALEZA',
   AmericaFortNelson = 'AMERICA_FORT_NELSON',
   AmericaFortWayne = 'AMERICA_FORT_WAYNE',
-  AmericaFortaleza = 'AMERICA_FORTALEZA',
   AmericaGlaceBay = 'AMERICA_GLACE_BAY',
   AmericaGodthab = 'AMERICA_GODTHAB',
   AmericaGooseBay = 'AMERICA_GOOSE_BAY',
@@ -3690,6 +3743,7 @@ export enum Timezone {
   AmericaHalifax = 'AMERICA_HALIFAX',
   AmericaHavana = 'AMERICA_HAVANA',
   AmericaHermosillo = 'AMERICA_HERMOSILLO',
+  AmericaIndianapolis = 'AMERICA_INDIANAPOLIS',
   AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
   AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
   AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
@@ -3698,7 +3752,6 @@ export enum Timezone {
   AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
   AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
   AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
-  AmericaIndianapolis = 'AMERICA_INDIANAPOLIS',
   AmericaInuvik = 'AMERICA_INUVIK',
   AmericaIqaluit = 'AMERICA_IQALUIT',
   AmericaJamaica = 'AMERICA_JAMAICA',
@@ -3745,10 +3798,10 @@ export enum Timezone {
   AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
   AmericaParamaribo = 'AMERICA_PARAMARIBO',
   AmericaPhoenix = 'AMERICA_PHOENIX',
-  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
-  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
   AmericaPortoAcre = 'AMERICA_PORTO_ACRE',
   AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
+  AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
+  AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
   AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
   AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
   AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
@@ -3758,8 +3811,8 @@ export enum Timezone {
   AmericaResolute = 'AMERICA_RESOLUTE',
   AmericaRioBranco = 'AMERICA_RIO_BRANCO',
   AmericaRosario = 'AMERICA_ROSARIO',
-  AmericaSantaIsabel = 'AMERICA_SANTA_ISABEL',
   AmericaSantarem = 'AMERICA_SANTAREM',
+  AmericaSantaIsabel = 'AMERICA_SANTA_ISABEL',
   AmericaSantiago = 'AMERICA_SANTIAGO',
   AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
   AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
@@ -3831,9 +3884,9 @@ export enum Timezone {
   AsiaGaza = 'ASIA_GAZA',
   AsiaHarbin = 'ASIA_HARBIN',
   AsiaHebron = 'ASIA_HEBRON',
-  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
   AsiaHongKong = 'ASIA_HONG_KONG',
   AsiaHovd = 'ASIA_HOVD',
+  AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
   AsiaIrkutsk = 'ASIA_IRKUTSK',
   AsiaIstanbul = 'ASIA_ISTANBUL',
   AsiaJakarta = 'ASIA_JAKARTA',
@@ -3907,8 +3960,8 @@ export enum Timezone {
   AtlanticMadeira = 'ATLANTIC_MADEIRA',
   AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
   AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
-  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
   AtlanticStanley = 'ATLANTIC_STANLEY',
+  AtlanticStHelena = 'ATLANTIC_ST_HELENA',
   AustraliaAct = 'AUSTRALIA_ACT',
   AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
   AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
@@ -4075,8 +4128,8 @@ export enum Timezone {
   UsAleutian = 'US_ALEUTIAN',
   UsArizona = 'US_ARIZONA',
   UsCentral = 'US_CENTRAL',
-  UsEastIndiana = 'US_EAST_INDIANA',
   UsEastern = 'US_EASTERN',
+  UsEastIndiana = 'US_EAST_INDIANA',
   UsHawaii = 'US_HAWAII',
   UsIndianaStarke = 'US_INDIANA_STARKE',
   UsMichigan = 'US_MICHIGAN',
@@ -4091,13 +4144,13 @@ export type Transcript = Node & {
   text: Scalars['String'];
 };
 
+
 /** Represents a type that can be retrieved by a URL. */
 export type UniformResourceLocatable = {
   canonicalPath: Scalars['String'];
   canonicalUrl: Scalars['String'];
   shareUrl: Scalars['String'];
 };
-
 
 
 export type User = Node & {
@@ -4412,6 +4465,12 @@ export type UserPlaylistEdge = {
   node: UserPlaylist;
 };
 
+export type UserPlaylistUpdateInput = {
+  isPublic: Scalars['Boolean'];
+  summary: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+};
+
 export type UserPlaylistsOrder = {
   direction: OrderByDirection;
   field: UserPlaylistsSortableField;
@@ -4423,12 +4482,6 @@ export enum UserPlaylistsSortableField {
   Id = 'ID',
   Title = 'TITLE'
 }
-
-export type UserPlaylistUpdateInput = {
-  isPublic: Scalars['Boolean'];
-  summary: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-};
 
 /** The administrative roles a user may hold. */
 export enum UserRole {
@@ -4454,18 +4507,6 @@ export enum UserSocialServiceName {
   Apple = 'APPLE',
   Facebook = 'FACEBOOK',
   Google = 'GOOGLE'
-}
-
-export type UsersOrder = {
-  direction: OrderByDirection;
-  field: UsersSortableField;
-};
-
-/** Properties by which user connections can be ordered. */
-export enum UsersSortableField {
-  CreatedAt = 'CREATED_AT',
-  Email = 'EMAIL',
-  Id = 'ID'
 }
 
 export type UserUpdateInput = {
@@ -4502,6 +4543,18 @@ export type UserUpdateInput = {
   /** The user's timezone. */
   timezone: Maybe<Timezone>;
 };
+
+export type UsersOrder = {
+  direction: OrderByDirection;
+  field: UsersSortableField;
+};
+
+/** Properties by which user connections can be ordered. */
+export enum UsersSortableField {
+  CreatedAt = 'CREATED_AT',
+  Email = 'EMAIL',
+  Id = 'ID'
+}
 
 export type VideoFile = Node & {
   __typename?: 'VideoFile';
@@ -4971,6 +5024,37 @@ export type GetHomeStaticPropsQuery = (
       & RecordingListFragment
     )>> }
   ) }
+);
+
+export type GetPlaylistPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+  offset: Maybe<Scalars['Int']>;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetPlaylistPageDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & { playlist: Maybe<(
+        { __typename?: 'UserPlaylist' }
+        & Pick<UserPlaylist, 'title'>
+        & { recordings: (
+          { __typename?: 'RecordingConnection' }
+          & { nodes: Maybe<Array<(
+            { __typename?: 'Recording' }
+            & RecordingListFragment
+          )>>, aggregate: Maybe<(
+            { __typename?: 'Aggregate' }
+            & Pick<Aggregate, 'count'>
+          )> }
+        ) }
+      )> }
+    ) }
+  )> }
 );
 
 export type GetPlaylistsPageDataQueryVariables = Exact<{
@@ -6547,6 +6631,37 @@ export const useGetHomeStaticPropsQuery = <
       graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(GetHomeStaticPropsDocument, variables),
       options
     );
+export const GetPlaylistPageDataDocument = `
+    query getPlaylistPageData($id: ID!, $offset: Int, $first: Int) {
+  me {
+    user {
+      playlist(id: $id) {
+        title
+        recordings(offset: $offset, first: $first) {
+          nodes {
+            ...recordingList
+          }
+          aggregate {
+            count
+          }
+        }
+      }
+    }
+  }
+}
+    ${RecordingListFragmentDoc}`;
+export const useGetPlaylistPageDataQuery = <
+      TData = GetPlaylistPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetPlaylistPageDataQueryVariables, 
+      options?: UseQueryOptions<GetPlaylistPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetPlaylistPageDataQuery, TError, TData>(
+      ['getPlaylistPageData', variables],
+      graphqlFetcher<GetPlaylistPageDataQuery, GetPlaylistPageDataQueryVariables>(GetPlaylistPageDataDocument, variables),
+      options
+    );
 export const GetPlaylistsPageDataDocument = `
     query getPlaylistsPageData($language: Language!, $offset: Int, $first: Int) {
   me {
@@ -7856,6 +7971,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 							): Promise<GetHomeStaticPropsQuery> {
 								return fetchApi(GetHomeStaticPropsDocument, { variables });
+							}
+
+							export async function getPlaylistPageData<T>(
+								variables: ExactAlt<T, GetPlaylistPageDataQueryVariables>
+							): Promise<GetPlaylistPageDataQuery> {
+								return fetchApi(GetPlaylistPageDataDocument, { variables });
 							}
 
 							export async function getPlaylistsPageData<T>(
