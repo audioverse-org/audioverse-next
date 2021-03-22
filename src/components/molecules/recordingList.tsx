@@ -64,7 +64,6 @@ export default function RecordingList({
 			nodes={recordings}
 			parseTitle={(n) => n.title}
 			parseImageUrl={(n) => n.imageWithFallback?.url}
-			parseKey={(n) => n.id}
 			makeEntryRoute={(languageRoute, node) =>
 				makeRoute(languageRoute, node.id)
 			}
