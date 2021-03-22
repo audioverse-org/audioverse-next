@@ -29,7 +29,7 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
-  typescript:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,8 +41,12 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
-      - name: Compile TypeScript
-        run: tsc
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build-output
+          path: .next/
   test:
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +65,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install && npm install -g @lhci/cli@0.6.x
-      - run: npm run build
-      - run: lhci autorun
+      #      - uses: actions/setup-node@v1
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-output
+      - name: Install dependencies
+        run: npm ci && npm install -g @lhci/cli@0.6.x
+      - name: Run Lighthouse
+        run: lhci autorun
