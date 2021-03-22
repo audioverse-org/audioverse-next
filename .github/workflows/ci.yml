@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Compile TypeScript
-        run: tsc
+        run: npm run checkTs
   test:
     runs-on: ubuntu-latest
     steps:
