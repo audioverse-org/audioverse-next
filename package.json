@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
+    "checkTs": "tsc --noEmit",
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx src/",
     "lint:fix": "eslint --max-warnings 0 --fix --ext .ts --ext .tsx --ext .js --ext .jsx src/",
