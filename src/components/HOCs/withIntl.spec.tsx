@@ -40,6 +40,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -47,6 +48,7 @@ jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 jest.mock('@lib/formatDuration');
+jest.mock('@lib/api/logout');
 
 const expectNoUnlocalizedText = (
 	screen: RenderResult,
@@ -397,6 +399,7 @@ describe('localization usage', () => {
 		[SeriesList, { nodes: [{ id: 'z' }] }],
 		[SeriesDetail, { nodes: [{ id: 'z' }] }],
 		[Playlists, {}],
+		[Logout, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

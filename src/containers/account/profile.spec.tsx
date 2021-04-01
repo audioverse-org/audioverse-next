@@ -11,7 +11,7 @@ import { login } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import * as graphql from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithQueryProvider } from '@lib/test/helpers';
-import Profile, { getServerSideProps } from '@pages/[language]/profile';
+import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
 jest.mock('@lib/api/login');
 
@@ -57,6 +57,7 @@ describe('profile page', () => {
 			me: {
 				user: {
 					givenName: 'first',
+					email: 'the_email',
 				},
 			},
 		});
@@ -134,6 +135,7 @@ describe('profile page', () => {
 			me: {
 				user: {
 					givenName: 'first',
+					email: 'the_email',
 				},
 			},
 		});

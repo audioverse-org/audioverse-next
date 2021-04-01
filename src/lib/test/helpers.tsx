@@ -49,17 +49,35 @@ export function buildLoader<T>(
 
 type Renderer<P> = (params?: Partial<P>) => Promise<RenderResult>;
 
+export function buildRenderer<
+	C extends ComponentType<any>,
+	F extends (params: any) => Promise<any>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(
+	Component: C,
+	options: {
+		getProps?: F;
+		defaultParams?: P;
+	} = {}
+): Renderer<P> {
+	const { getProps = () => ({}), defaultParams } = options;
+	return async (params: Partial<P> = {}): Promise<RenderResult> => {
+		const p = { ...defaultParams, ...params };
+		const props = await getProps(p);
+		loadRouter({ query: p });
+		return renderWithIntl(Component, props);
+	};
+}
+
 export function buildStaticRenderer<
 	C extends ComponentType<any>,
 	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
 	P extends Partial<Parameters<F>[0]['params']>
 >(Component: C, getStaticProps: F, defaultParams: P = {} as P): Renderer<P> {
-	return async (params: Partial<P> = {}): Promise<RenderResult> => {
-		const p = { ...defaultParams, ...params };
-		loadRouter({ query: p });
-		const { props } = await getStaticProps({ params: p });
-		return renderWithIntl(Component, props);
-	};
+	const getProps = async (p: any) =>
+		(await getStaticProps({ params: p })).props;
+
+	return buildRenderer(Component, { getProps, defaultParams });
 }
 
 export function buildServerRenderer<
@@ -71,15 +89,15 @@ export function buildServerRenderer<
 	getServerSideProps: F,
 	defaultParams: P = {} as P
 ): Renderer<P> {
-	return async (params: Partial<P> = {}): Promise<RenderResult> => {
-		const p = { ...defaultParams, ...params };
-		loadRouter({ query: p });
+	const getProps = async (p: any) => {
 		const result = await getServerSideProps({ params: p, query: p } as any);
 		if (!('props' in result)) {
 			throw new Error('Failed to get server props');
 		}
-		return renderWithIntl(Component, result.props);
+		return result.props;
 	};
+
+	return buildRenderer(Component, { getProps, defaultParams });
 }
 
 // TODO: Merge with buildRenderer, or just make it private

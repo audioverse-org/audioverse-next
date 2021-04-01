@@ -113,6 +113,7 @@ export type BibleChapter = Node & {
   text: Scalars['String'];
   title: Scalars['String'];
   url: Scalars['URL'];
+  verseCount: Scalars['Int'];
   verses: Array<BibleVerse>;
 };
 
@@ -4739,6 +4740,20 @@ export type RecordingFragment = (
   & CopyrightInfoFragment
 );
 
+export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProfileDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'givenName' | 'surname' | 'email'>
+    ) }
+  )> }
+);
+
 export type GetAudiobookDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -5171,20 +5186,6 @@ export type GetPresenterListPathsDataQuery = (
   ) }
 );
 
-export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetProfileDataQuery = (
-  { __typename?: 'Query' }
-  & { me: Maybe<(
-    { __typename?: 'AuthenticatedUser' }
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'givenName'>
-    ) }
-  )> }
-);
-
 export type GetProtectedDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5194,7 +5195,7 @@ export type GetProtectedDataQuery = (
     { __typename?: 'AuthenticatedUser' }
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'givenName'>
+      & Pick<User, 'email'>
     ) }
   )> }
 );
@@ -6264,6 +6265,29 @@ export const useGetPlaylistButtonDataQuery = <
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
+export const GetProfileDataDocument = `
+    query getProfileData {
+  me {
+    user {
+      givenName
+      surname
+      email
+    }
+  }
+}
+    `;
+export const useGetProfileDataQuery = <
+      TData = GetProfileDataQuery,
+      TError = unknown
+    >(
+      variables?: GetProfileDataQueryVariables, 
+      options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
+    ) => 
+    useQuery<GetProfileDataQuery, TError, TData>(
+      ['getProfileData', variables],
+      graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
+      options
+    );
 export const GetAudiobookDetailPageDataDocument = `
     query getAudiobookDetailPageData($id: ID!) {
   audiobook(id: $id) {
@@ -6797,32 +6821,11 @@ export const useGetPresenterListPathsDataQuery = <
       graphqlFetcher<GetPresenterListPathsDataQuery, GetPresenterListPathsDataQueryVariables>(GetPresenterListPathsDataDocument, variables),
       options
     );
-export const GetProfileDataDocument = `
-    query getProfileData {
-  me {
-    user {
-      givenName
-    }
-  }
-}
-    `;
-export const useGetProfileDataQuery = <
-      TData = GetProfileDataQuery,
-      TError = unknown
-    >(
-      variables?: GetProfileDataQueryVariables, 
-      options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
-    ) => 
-    useQuery<GetProfileDataQuery, TError, TData>(
-      ['getProfileData', variables],
-      graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
-      options
-    );
 export const GetProtectedDataDocument = `
     query getProtectedData {
   me {
     user {
-      givenName
+      email
     }
   }
 }
@@ -7889,6 +7892,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
+							export async function getProfileData<T>(
+								variables: ExactAlt<T, GetProfileDataQueryVariables>
+							): Promise<GetProfileDataQuery> {
+								return fetchApi(GetProfileDataDocument, { variables });
+							}
+
 							export async function getAudiobookDetailPageData<T>(
 								variables: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>
 							): Promise<GetAudiobookDetailPageDataQuery> {
@@ -8007,12 +8016,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
 							): Promise<GetPresenterListPathsDataQuery> {
 								return fetchApi(GetPresenterListPathsDataDocument, { variables });
-							}
-
-							export async function getProfileData<T>(
-								variables: ExactAlt<T, GetProfileDataQueryVariables>
-							): Promise<GetProfileDataQuery> {
-								return fetchApi(GetProfileDataDocument, { variables });
 							}
 
 							export async function getProtectedData<T>(
