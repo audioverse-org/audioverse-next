@@ -1,5 +1,7 @@
 name: CI
 on: push
+env:
+  NODE_ENV: development
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -42,11 +44,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: NODE_ENV=development npm run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: build-output
-          path: .next/
+        run: npm run build
+      - name: Run Lighthouse
+        run: lhci autorun
   test:
     runs-on: ubuntu-latest
     steps:
@@ -61,22 +61,3 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
-  lighthouse:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      #      - uses: actions/setup-node@v1
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - uses: actions/download-artifact@v2
-        with:
-          name: build-output
-      - name: Install dependencies
-        run: npm ci && npm install -g @lhci/cli@0.6.x
-      - name: Run Lighthouse
-        run: lhci autorun
