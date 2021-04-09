@@ -2,8 +2,8 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 
 import getIntlMessages from '@lib/getIntlMessages';
+import handleIntlError from '@lib/handleIntlError';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import handleIntlError from "@lib/handleIntlError";
 
 const useTranslation = () => {
 	const language = useLanguageRoute();
