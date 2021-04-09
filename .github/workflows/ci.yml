@@ -42,11 +42,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci && npm install -g @lhci/cli@0.6.x
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Run Lighthouse
-        run: lhci autorun
+        run: npm run lighthouse
   test:
     runs-on: ubuntu-latest
     steps:
