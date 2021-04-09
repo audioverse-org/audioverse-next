@@ -3,6 +3,7 @@ import { IntlProvider } from 'react-intl';
 
 import getIntlMessages from '@lib/getIntlMessages';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import handleIntlError from "@lib/handleIntlError";
 
 const useTranslation = () => {
 	const language = useLanguageRoute();
@@ -22,16 +23,7 @@ const withIntl = <P extends any>(
 				messages={messages}
 				locale={language}
 				defaultLocale="en"
-				onError={(err) => {
-					// TODO: Stop swallowing these errors
-					if (err.code === 'MISSING_TRANSLATION') {
-						return;
-					}
-					if (err.code === 'MISSING_DATA') {
-						return;
-					}
-					console.error(err);
-				}}
+				onError={handleIntlError}
 			>
 				<Component {...(props as any)} />
 			</IntlProvider>
