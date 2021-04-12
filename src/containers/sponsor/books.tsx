@@ -19,7 +19,14 @@ function SponsorBooks({ nodes, data, pagination }: Props): JSX.Element {
 	const sponsorImage = data?.sponsor?.imageWithFallback?.url;
 	return (
 		<>
-			{sponsorImage && <img alt={data?.sponsor?.title} src={sponsorImage} />}
+			{sponsorImage && (
+				<img
+					alt={data?.sponsor?.title}
+					src={sponsorImage}
+					width={100}
+					height={100}
+				/>
+			)}
 			<h1>
 				<a href={makeSponsorRoute(languageRoute, data?.sponsor?.id || '')}>
 					{data?.sponsor?.title}

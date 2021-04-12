@@ -51,7 +51,7 @@ export default function SpeakerName({
 				delayHide={200}
 				delayShow={500}
 			>
-				{image && <img width={50} alt={name} src={image.url} />}
+				{image && <img width={100} height={100} alt={name} src={image.url} />}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
 				{website && (
 					<p>

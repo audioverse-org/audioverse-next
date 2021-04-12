@@ -22,7 +22,9 @@ function SponsorTeachings({
 
 	return (
 		<>
-			{img && <img alt={data?.sponsor?.title} src={img} />}
+			{img && (
+				<img alt={data?.sponsor?.title} src={img} width={100} height={100} />
+			)}
 			<h1>
 				<a href={makeSponsorRoute(languageRoute, data?.sponsor?.id || '')}>
 					{data?.sponsor?.title}

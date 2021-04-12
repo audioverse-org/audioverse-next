@@ -633,7 +633,12 @@ function SongList({ data }: SongsProps): JSX.Element {
 				{data?.musicAlbums?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeAlbumRoute(languageRoute, n.id)}>
-							<img src={n.imageWithFallback.url} alt={n.title} />
+							<img
+								src={n.imageWithFallback.url}
+								alt={n.title}
+								width={100}
+								height={100}
+							/>
 							<span>{n.title}</span>
 							<span>{n.sponsor?.title}</span>
 						</a>
@@ -651,7 +656,12 @@ function SongList({ data }: SongsProps): JSX.Element {
 				{data?.sponsors?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeSponsorMusicRoute(languageRoute, n.id)}>
-							<img src={n.imageWithFallback.url} alt={n.title} />
+							<img
+								src={n.imageWithFallback.url}
+								alt={n.title}
+								width={100}
+								height={100}
+							/>
 							{n.title}
 						</a>
 					</li>

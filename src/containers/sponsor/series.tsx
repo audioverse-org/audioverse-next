@@ -21,7 +21,14 @@ function SponsorSeries({ data, nodes, pagination }: Props): JSX.Element {
 	const imageSrc = data?.sponsor?.imageWithFallback.url;
 	return (
 		<>
-			{imageSrc && <img src={imageSrc} alt={data?.sponsor?.title} />}
+			{imageSrc && (
+				<img
+					src={imageSrc}
+					alt={data?.sponsor?.title}
+					width={100}
+					height={100}
+				/>
+			)}
 			<h1>
 				<a href={makeSponsorRoute(languageRoute, id)}>{data?.sponsor?.title}</a>
 			</h1>

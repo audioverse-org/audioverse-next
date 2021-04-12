@@ -26,7 +26,12 @@ function ConferenceList({ nodes, pagination }: Props): JSX.Element {
 				{nodes.map((n) => (
 					<li key={n.id}>
 						<a href={makeConferenceRoute(languageRoute, n.id, 1)}>
-							<img src={n.imageWithFallback?.url} alt={n.title} />
+							<img
+								src={n.imageWithFallback?.url}
+								alt={n.title}
+								width={100}
+								height={100}
+							/>
 							<span>{n.title}</span>
 							<span>{n.sponsor?.title}</span>
 						</a>

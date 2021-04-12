@@ -34,7 +34,9 @@ export default function PaginatedList<T extends Listable>({
 }: PaginatedListProps<T>): JSX.Element {
 	return (
 		<>
-			{pageImage && <img src={pageImage} alt={pageTitle} />}
+			{pageImage && (
+				<img src={pageImage} alt={pageTitle} width={100} height={100} />
+			)}
 			<h1>{pageTitle}</h1>
 			{children}
 			<TableList

@@ -44,7 +44,7 @@ export default function TableList<T extends Listable>({
 							<td>
 								{imageSrc && (
 									<a href={route}>
-										<img src={imageSrc} alt={title} />
+										<img src={imageSrc} alt={title} width={100} height={100} />
 									</a>
 								)}
 							</td>

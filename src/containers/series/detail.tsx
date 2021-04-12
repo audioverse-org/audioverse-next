@@ -26,6 +26,8 @@ function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 			<img
 				src={data?.series?.imageWithFallback.url}
 				alt={data?.series?.title}
+				width={100}
+				height={100}
 			/>
 			<h1>{data?.series?.title}</h1>
 			<RssLink href={rssUrl} />

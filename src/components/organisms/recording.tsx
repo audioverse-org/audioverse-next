@@ -84,7 +84,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	return (
 		<>
 			<div className={styles.meta}>
-				{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
+				{imageSrc ? (
+					<img src={imageSrc} alt={imageAlt} width={100} height={100} />
+				) : null}
 				<div>
 					<h1>{recording.title}</h1>
 					<ul className={styles.speakers}>
