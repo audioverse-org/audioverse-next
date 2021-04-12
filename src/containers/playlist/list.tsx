@@ -28,7 +28,6 @@ function Playlists(): JSX.Element {
 	};
 	const intl = useIntl();
 	return (
-		<>
 			<PaginatedList
 				pageTitle={intl.formatMessage({
 					id: 'playlists__pageTitle',
@@ -40,7 +39,6 @@ function Playlists(): JSX.Element {
 				makeEntryRoute={(l, n) => makePlaylistDetailRoute(l, n.id)}
 				pagination={pagination}
 			/>
-		</>
 	);
 }
 

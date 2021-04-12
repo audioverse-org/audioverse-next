@@ -35,6 +35,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getNumberedStaticPaths(
 		'sponsors',
 		getSponsorListPathsData,
-		(d) => d?.sponsors.aggregate?.count
+		(d) => d.sponsors.aggregate?.count
 	);
 }

@@ -33,8 +33,8 @@ export async function getStaticProps({
 	const result = await getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSponsorTeachingsPageData({ id, offset, first }),
-		(d) => d?.sponsor?.recordings.nodes,
-		(d) => d?.sponsor?.recordings.aggregate?.count
+		(d) => d.sponsor?.recordings.nodes,
+		(d) => d.sponsor?.recordings.aggregate?.count
 	);
 
 	if (i === '1') {
