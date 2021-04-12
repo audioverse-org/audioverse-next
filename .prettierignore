@@ -7,3 +7,4 @@ package-lock.json
 seeds
 *.handlebars
 /src/lib/generated/graphql.ts
+/schema.graphql
