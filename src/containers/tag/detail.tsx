@@ -5,6 +5,7 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import RssLink from '@components/molecules/rssLink';
 import { GetTagDetailPageDataQuery } from '@lib/generated/graphql';
 import { makeTagDetailRoute } from '@lib/routes';
 
@@ -33,9 +34,7 @@ function TagDetail({
 	return (
 		<>
 			<h1>{title}</h1>
-			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
-				RSS
-			</a>
+			<RssLink href={rssPath} />
 			<RecordingList recordings={nodes} />
 			<Pagination
 				current={pagination.current}

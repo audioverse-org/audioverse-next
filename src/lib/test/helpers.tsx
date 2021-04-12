@@ -2,7 +2,9 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { render, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
+import { when } from 'jest-when';
 import _ from 'lodash';
+import { GetServerSidePropsResult } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
@@ -31,21 +33,71 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
 }
 
+export function buildLoader<T>(
+	document: string,
+	defaults: T
+): (data?: PartialDeep<T>) => T {
+	// TODO: Figure out how to set T to actual query return type
+	return (data: PartialDeep<T> = {}) => {
+		const value = _.defaultsDeep(data, defaults);
+		when(mockedFetchApi)
+			.calledWith(document, expect.anything())
+			.mockResolvedValue(value);
+		return value;
+	};
+}
+
+type Renderer<P> = (params?: Partial<P>) => Promise<RenderResult>;
+
 export function buildRenderer<
 	C extends ComponentType<any>,
-	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
+	F extends (params: any) => Promise<any>,
 	P extends Partial<Parameters<F>[0]['params']>
 >(
 	Component: C,
-	getStaticProps: F,
-	defaultParams: P = {} as P
-): (params?: Partial<P>) => Promise<RenderResult> {
+	options: {
+		getProps?: F;
+		defaultParams?: P;
+	} = {}
+): Renderer<P> {
+	const { getProps = () => ({}), defaultParams } = options;
 	return async (params: Partial<P> = {}): Promise<RenderResult> => {
 		const p = { ...defaultParams, ...params };
+		const props = await getProps(p);
 		loadRouter({ query: p });
-		const { props } = await getStaticProps({ params: p });
 		return renderWithIntl(Component, props);
 	};
+}
+
+export function buildStaticRenderer<
+	C extends ComponentType<any>,
+	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(Component: C, getStaticProps: F, defaultParams: P = {} as P): Renderer<P> {
+	const getProps = async (p: any) =>
+		(await getStaticProps({ params: p })).props;
+
+	return buildRenderer(Component, { getProps, defaultParams });
+}
+
+export function buildServerRenderer<
+	C extends ComponentType<any>,
+	F extends (context: any) => Promise<GetServerSidePropsResult<any>>,
+	P extends Partial<Parameters<F>[0]['params']>
+>(
+	Component: C,
+	getServerSideProps: F,
+	defaultParams: P = {} as P
+): Renderer<P> {
+	const getProps = async (p: any) => {
+		const result = await getServerSideProps({ params: p, query: p } as any);
+		if (!('props' in result)) {
+			throw new Error('Failed to get server props');
+		}
+		return result.props;
+	};
+
+	return buildRenderer(Component, { getProps, defaultParams });
 }
 
 // TODO: Merge with buildRenderer, or just make it private

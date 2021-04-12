@@ -1,54 +1,39 @@
-import { ENTRIES_PER_PAGE, REVALIDATE } from '@lib/constants';
+import { REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getPaginatedData, PaginatedGetter } from '@lib/getPaginatedData';
+import getPaginationPageCount from '@lib/getPaginationPageCount';
 
 export interface PaginationData {
 	total: number;
 	current: number;
 }
 
-// TODO: Improve nodes type
-export interface PaginatedStaticProps<DATA, NODE> {
+export interface PaginatedStaticProps<T, N> {
 	props: {
-		nodes: NODE[];
+		nodes: N[];
 		pagination: PaginationData;
-		data: DATA | null;
+		data: T | null;
 	};
 	revalidate: number;
 }
 
-interface Getter<DATA> {
-	({
-		language,
-		offset,
-		first,
-	}: {
-		language: Language;
-		offset: number;
-		first: number;
-	}): Promise<DATA>;
-}
-
-export async function getPaginatedStaticProps<DATA, NODE>(
+export async function getPaginatedStaticProps<T, N>(
 	params: {
 		language: string;
 		i: number | string;
 	},
-	getter: Getter<DATA>,
-	parseNodes: (data: DATA) => NODE[] | null | undefined,
-	parseCount: (count: DATA) => number | null | undefined
-): Promise<PaginatedStaticProps<DATA, NODE>> {
-	const { language: languageRoute, i: pageIndex } = params;
-
-	const data = await getter({
+	getter: PaginatedGetter<T, { language: Language }>,
+	parseNodes: (data: T) => N[] | null | undefined,
+	parseCount: (count: T) => number | null | undefined
+): Promise<PaginatedStaticProps<T, N>> {
+	const { i: pageIndex, language: languageRoute } = params;
+	const data = await getPaginatedData(pageIndex, getter, {
 		language: getLanguageIdByRoute(languageRoute),
-		offset: (+pageIndex - 1) * ENTRIES_PER_PAGE,
-		first: ENTRIES_PER_PAGE,
-	}).catch(() => null);
-
+	});
 	const nodes = (data && parseNodes(data)) || [];
 	const count = (data && parseCount(data)) || 0;
-	const total = Math.ceil(count / ENTRIES_PER_PAGE);
+	const total = getPaginationPageCount(count);
 
 	return {
 		props: {

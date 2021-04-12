@@ -11,7 +11,7 @@ import SponsorInfo from '@components/molecules/sponsorInfo';
 import styles from '@containers/sermon/detail.module.scss';
 import { RecordingFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
-import { makeSeriesRoute } from '@lib/routes';
+import { makeSeriesDetailRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type RecordingType = NonNullable<RecordingFragment>;
@@ -84,7 +84,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	return (
 		<>
 			<div className={styles.meta}>
-				{imageSrc ? <img src={imageSrc} alt={imageAlt} /> : null}
+				{imageSrc ? (
+					<img src={imageSrc} alt={imageAlt} width={100} height={100} />
+				) : null}
 				<div>
 					<h1>{recording.title}</h1>
 					<ul className={styles.speakers}>
@@ -202,7 +204,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							description="Sermon detail series title"
 						/>
 					</h2>
-					<a href={makeSeriesRoute(langRoute, recording?.sequence?.id)}>
+					<a href={makeSeriesDetailRoute(langRoute, recording?.sequence?.id)}>
 						{recording?.sequence?.title}
 					</a>
 				</>

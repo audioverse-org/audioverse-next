@@ -31,7 +31,13 @@ export default function Give(): JSX.Element {
 			<p>
 				If you would like to donate using Apple Pay{' '}
 				<a href="https://donorbox.org/audioverse-give">
-					click here <img src="/img/Apple_Pay.svg" alt="Apple Pay" width={50} />
+					click here{' '}
+					<img
+						src="/img/Apple_Pay.svg"
+						alt="Apple Pay"
+						width={166}
+						height={106}
+					/>
 				</a>
 			</p>
 
@@ -49,7 +55,12 @@ export default function Give(): JSX.Element {
 				system, please email us at: billing@audioverse.org
 			</p>
 
-			<img src="/img/paypal.png" alt="Paypal Giving Fund" />
+			<img
+				src="/img/paypal.png"
+				alt="Paypal Giving Fund"
+				width={448}
+				height={55}
+			/>
 			<h2>Give 100% of your donation to AudioVerse</h2>
 			<p>
 				Visit the <strong>AudioVerse PayPal Giving Fund</strong> page to
@@ -58,7 +69,7 @@ export default function Give(): JSX.Element {
 				will receive a tax-deductible receipt from Paypal Giving Fund and not
 				from AudioVerse.
 			</p>
-			<img src="/img/mail.png" alt="Check by Mail" />
+			<img src="/img/mail.png" alt="Check by Mail" width={195} height={220} />
 			<h2>Check by Mail</h2>
 			<p>Please make checks payable to AudioVerse.</p>
 
@@ -73,7 +84,12 @@ export default function Give(): JSX.Element {
 				<br />
 				USA
 			</address>
-			<img src="/img/amazon-smile.png" alt="Amazon Smile" />
+			<img
+				src="/img/amazon-smile.png"
+				alt="Amazon Smile"
+				width={701}
+				height={156}
+			/>
 			<h2>Shop AmazonSmile, Support AudioVerse</h2>
 			<p>With every purchase on AmazonSmile, AudioVerse receives 0.5%.</p>
 
@@ -85,7 +101,12 @@ export default function Give(): JSX.Element {
 				regular Amazon site.
 			</p>
 
-			<img src="/img/giving-assistant.png" alt="Giving Assistant" />
+			<img
+				src="/img/giving-assistant.png"
+				alt="Giving Assistant"
+				width={700}
+				height={148}
+			/>
 			<h2>Giving Assistant</h2>
 			<p>
 				Donate up to 30% of your purchase price to AudioVerse when you shop at
@@ -96,7 +117,12 @@ export default function Give(): JSX.Element {
 				Penney!
 			</p>
 
-			<img src="/img/estate-planning-legacy.png" alt="Estate Planning Legacy" />
+			<img
+				src="/img/estate-planning-legacy.png"
+				alt="Estate Planning Legacy"
+				width={366}
+				height={359}
+			/>
 			<h2>Remember AudioVerse in Your Estate Plan</h2>
 
 			<p>

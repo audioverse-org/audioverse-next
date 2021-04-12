@@ -10,6 +10,7 @@ module.exports = {
 		'formatjs',
 		'testing-library',
 		'jest-dom',
+		'@mizdra/layout-shift',
 	],
 	extends: [
 		'eslint:recommended',
@@ -63,6 +64,7 @@ module.exports = {
 		'@typescript-eslint/explicit-function-return-type': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
 		'formatjs/no-offset': 'error',
+		'@mizdra/layout-shift/require-size-attributes': 2,
 	},
 	settings: {
 		react: {

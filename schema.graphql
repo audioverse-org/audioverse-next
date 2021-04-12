@@ -80,6 +80,7 @@ type BibleChapter implements Node {
 	text: String!
 	title: String!
 	url: URL!
+	verseCount: Int!
 	verses: [BibleVerse!]!
 }
 
@@ -222,6 +223,7 @@ type Collection implements Node {
 		after: String
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -229,6 +231,7 @@ type Collection implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -255,6 +258,7 @@ type Collection implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequences(
@@ -269,6 +273,7 @@ type Collection implements Node {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	"A shareable short URL to this resource."
 	shareUrl: String!
@@ -318,12 +323,14 @@ type DistributionAgreement implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		"Return up to the first `n` elements from the list."
 		first: Int
 		"Limit recordings to those with video media files."
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -350,6 +357,7 @@ type DistributionAgreement implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sponsor: Sponsor
@@ -413,6 +421,20 @@ type InternalContact {
 
 type License implements Node {
 	description: String!
+	distributionAgreements(
+		"Return the elements that come after the specified cursor."
+		after: String
+		"Return up to the first `n` elements from the list."
+		first: Int
+		isDefault: Boolean
+		isRetired: Boolean
+		"Return the elements that come after the specified offset."
+		offset: Int
+		orderBy: [DistributionAgreementsOrder!]
+		search: String
+		sponsorId: ID
+		sponsorIds: [ID!]
+	): DistributionAgreementConnection!
 	history(
 		"Return the elements that come after the specified cursor."
 		after: String
@@ -526,6 +548,9 @@ type MediaReleaseForm implements Node {
 		personId: ID
 		recordingId: ID
 		search: String
+		seriesId: ID
+		sponsorId: ID
+		sponsorIds: [ID!]
 	): MediaReleaseConnection!
 	recording: Recording
 	sequence: Sequence
@@ -602,6 +627,8 @@ type Mutation {
 		collectionId: ID!
 		input: CatalogHistoryCommentCreateInput!
 	): CatalogHistoryItemPayload!
+	"Approve all recordings in collection through legal screening."
+	collectionScreeningLegalOverride(collectionId: ID!): SuccessPayload!
 	collectionUpdate(
 		collectionId: ID!
 		input: CollectionUpdateInput!
@@ -687,6 +714,7 @@ type Mutation {
 	): UserPlaylist!
 	recordingArchive(reason: String!, recordingId: ID!): SuccessPayload!
 	recordingCreate(input: RecordingCreateInput!): RecordingPayload!
+	recordingDelete(recordingId: ID!): SuccessPayload!
 	"Advances a recording from or withdraws a recording to draft stage."
 	recordingDrafting(
 		"If `true` advance to screening; if `false` withdraw to draft stage."
@@ -748,6 +776,10 @@ type Mutation {
 		approve: Boolean!
 		recordingId: ID!
 	): RecordingPayload!
+	"Deletes a recording's transcript, if extant."
+	recordingTranscriptDelete(recordingId: ID!): SuccessPayload!
+	"Requests a recording be enqueued for automated transcription."
+	recordingTranscriptionRequest(recordingId: ID!): SuccessPayload!
 	recordingUnarchive(recordingId: ID!): SuccessPayload!
 	recordingUnfavorite(id: ID!): SuccessPayload!
 	recordingUpdate(
@@ -760,6 +792,8 @@ type Mutation {
 		input: CatalogHistoryCommentCreateInput!
 		sequenceId: ID!
 	): CatalogHistoryItemPayload!
+	"Approve all recordings in sequence through legal screening."
+	sequenceScreeningLegalOverride(sequenceId: ID!): SuccessPayload!
 	sequenceUpdate(input: SequenceUpdateInput!, sequenceId: ID!): SequencePayload!
 	signup(input: UserSignupInput!): AuthenticatedUserPayload!
 	sponsorCreate(input: SponsorCreateInput!): SponsorPayload!
@@ -839,6 +873,7 @@ type Person implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -847,6 +882,7 @@ type Person implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -871,6 +907,7 @@ type Person implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 		"Finds all the recordings where the person has the specified role."
 		withRole: PersonsRoleField
@@ -970,6 +1007,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -978,6 +1016,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1005,6 +1044,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	audiobooks(
@@ -1021,6 +1061,7 @@ type Query {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	blogPost(id: ID!): BlogPost
 	blogPosts(
@@ -1037,6 +1078,7 @@ type Query {
 	collections(
 		"Return the elements that come after the specified cursor."
 		after: String
+		contentType: CollectionContentType
 		"Return up to the first `n` elements from the list."
 		first: Int
 		"Whether to include unpublished collections. Requires `EDITOR` role."
@@ -1081,6 +1123,7 @@ type Query {
 		orderBy: [DistributionAgreementsOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): DistributionAgreementConnection!
 	featuredBlogPosts(
 		"Return the elements that come after the specified cursor."
@@ -1097,6 +1140,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -1106,6 +1150,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1131,6 +1176,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	license(id: ID!): License
@@ -1167,13 +1213,19 @@ type Query {
 	mediaReleaseForms(
 		"Return the elements that come after the specified cursor."
 		after: String
+		collectionId: ID
+		entityContentType: MediaReleaseFormEntityContentType
 		"Return up to the first `n` elements from the list."
 		first: Int
 		language: Language!
 		"Return the elements that come after the specified offset."
 		offset: Int
 		orderBy: [MediaReleaseFormOrder!]
+		recordingId: ID
 		search: String
+		seriesId: ID
+		sponsorId: ID
+		sponsorIds: [ID!]
 		type: MediaReleaseFormType
 	): MediaReleaseFormConnection!
 	mediaReleases(
@@ -1192,6 +1244,9 @@ type Query {
 		personId: ID
 		recordingId: ID
 		search: String
+		seriesId: ID
+		sponsorId: ID
+		sponsorIds: [ID!]
 	): MediaReleaseConnection!
 	"Alias for `sequence(id: ID)`"
 	musicAlbum(id: ID!): Sequence
@@ -1209,6 +1264,7 @@ type Query {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	musicBookTags(
 		"Return the elements that come after the specified cursor."
@@ -1254,6 +1310,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -1262,6 +1319,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1289,6 +1347,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	person(id: ID!): Person
@@ -1314,6 +1373,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -1323,6 +1383,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1348,9 +1409,14 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): PopularRecordingConnection!
-	recording(id: ID!): Recording
+	recording(
+		"Requires `ADMINISTRATION` role."
+		allowArchived: Boolean
+		id: ID!
+	): Recording
 	recordingScreeningIssueType(id: ID!): RecordingScreeningIssueType
 	recordingScreeningIssueTypes(
 		"Return the elements that come after the specified cursor."
@@ -1366,6 +1432,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -1375,6 +1442,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1402,6 +1470,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequence(id: ID!): Sequence
@@ -1409,6 +1478,7 @@ type Query {
 		"Return the elements that come after the specified cursor."
 		after: String
 		collectionId: ID
+		contentType: SequenceContentType
 		"Return up to the first `n` elements from the list."
 		first: Int
 		"Whether to include unpublished sequences. Requires `EDITOR` role."
@@ -1419,6 +1489,7 @@ type Query {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	"Alias for `sequence(id: ID)`"
 	series(id: ID!): Sequence
@@ -1437,6 +1508,7 @@ type Query {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	"Alias for `recording(id: ID)`"
 	sermon(id: ID!): Recording
@@ -1446,6 +1518,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -1454,6 +1527,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1481,6 +1555,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sponsor(id: ID!): Sponsor
@@ -1504,6 +1579,7 @@ type Query {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -1512,6 +1588,7 @@ type Query {
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
 		language: Language!
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1539,6 +1616,7 @@ type Query {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	"Alias for `recording(id: ID)`"
@@ -1576,6 +1654,7 @@ type Query {
 		orderBy: [SequenceOrder!]
 		search: String
 		sponsorId: ID
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	tags(
 		"Return the elements that come after the specified cursor."
@@ -1643,6 +1722,8 @@ type Recording implements Node {
 		"Return the elements that come after the specified offset."
 		offset: Int
 	): BibleReferenceRangeConnection!
+	"Whether the recording can be manually enqueued for transcribing."
+	canRequestTranscription: Boolean!
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	canonicalUrl: URL!
@@ -1706,6 +1787,8 @@ type Recording implements Node {
 		orderBy: [RecordingScreeningIssueOrder!]
 	): RecordingScreeningIssueConnection
 	sequence: Sequence
+	"The index of the recording within its sequence."
+	sequenceIndex: Int
 	shareUrl: URL
 	sponsor: Sponsor
 	stage: RecordingStage!
@@ -1713,6 +1796,7 @@ type Recording implements Node {
 	technicalScreeningStatus: RecordingTechnicalScreeningStatus!
 	title: String!
 	transcript: Transcript
+	transcriptionStatus: RecordingTranscriptionStatus
 	videoFiles(
 		allowedContainers: [MediaFileContainer!]
 		includeUnpublished: Boolean
@@ -1866,6 +1950,7 @@ type Sequence implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -1873,6 +1958,7 @@ type Sequence implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -1897,6 +1983,7 @@ type Sequence implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	"A shareable short URL to this resource."
@@ -1956,6 +2043,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		offset: Int
 		orderBy: [DistributionAgreementsOrder!]
 		search: String
+		sponsorIds: [ID!]
 	): DistributionAgreementConnection
 	email: String
 	hidingReason: String
@@ -1990,6 +2078,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -1998,6 +2087,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -2023,6 +2113,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequences(
@@ -2038,6 +2129,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		offset: Int
 		orderBy: [SequenceOrder!]
 		search: String
+		sponsorIds: [ID!]
 	): SequenceConnection!
 	"A shareable short URL to this resource."
 	shareUrl: String!
@@ -2077,6 +2169,7 @@ type Tag implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
@@ -2085,6 +2178,7 @@ type Tag implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -2107,6 +2201,7 @@ type Tag implements Node {
 		sponsorIds: [ID!]
 		"Implies includeUnpublished. Requires `EDITOR` role."
 		stage: RecordingStage
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 }
@@ -2182,6 +2277,7 @@ type User implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -2189,6 +2285,7 @@ type User implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -2215,6 +2312,7 @@ type User implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	"The user's first name."
@@ -2290,6 +2388,7 @@ type UserPlaylist implements Node {
 		bibleReferences: [BibleReferenceRangeInput!]
 		collectionId: ID
 		collectionIds: [ID!]
+		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
 		"Return up to the first `n` elements from the list."
 		first: Int
@@ -2297,6 +2396,7 @@ type UserPlaylist implements Node {
 		hasVideo: Boolean
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean
+		legalScreeningStatus: RecordingLegalScreeningStatus
 		"Return the elements that come after the specified offset."
 		offset: Int
 		"Only include archived recordings. Implies `includeUnpublished: true`. Requires `ADMINISTRATION` role."
@@ -2322,6 +2422,7 @@ type UserPlaylist implements Node {
 		stage: RecordingStage
 		"The name of the tag to filter the recordings by."
 		tagName: String
+		technicalScreeningStatus: RecordingTechnicalScreeningStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	summary: String!
@@ -2567,6 +2668,22 @@ enum MediaFileUploadsSortableField {
 	FILENAME
 }
 
+"Content types of the media release form entities with content types."
+enum MediaReleaseFormEntityContentType {
+	AUDIOBOOK
+	AUDIOBOOK_SERIES
+	AUDIOBOOK_TRACK
+	CONFERENCE
+	MUSIC_ALBUM
+	MUSIC_SERIES
+	MUSIC_TRACK
+	SERIES
+	SERMON
+	STORY
+	STORY_PROGRAM
+	STORY_SEASON
+}
+
 "Properties by which media release form connections can be ordered."
 enum MediaReleaseFormSortableField {
 	CREATED_AT
@@ -2575,7 +2692,7 @@ enum MediaReleaseFormSortableField {
 	TYPE
 }
 
-"Supported types of media releases."
+"Supported types of media release forms."
 enum MediaReleaseFormType {
 	COLLECTION
 	MASTER
@@ -2736,6 +2853,18 @@ enum RecordingTechnicalScreeningStatus {
 	REJECTED
 	"Not Yet Begun"
 	UNEVALUATED
+}
+
+"The status of a recording's transcript."
+enum RecordingTranscriptionStatus {
+	"Transcription completed."
+	COMPLETE
+	"Transcription failed."
+	FAILED
+	"Transcription in process."
+	PROCESSING
+	"Not Yet Begun"
+	UNSTARTED
 }
 
 "Properties by which recording connections can be ordered."
@@ -3712,6 +3841,7 @@ input PersonsOrder {
 input RecordingCreateInput {
 	bibleReferences: [BibleReferenceRangeInput!]
 	collectionId: ID
+	contentScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	contentType: RecordingContentType!
 	copyrightYear: Int
 	coverImage: ImageInput
@@ -3721,6 +3851,7 @@ input RecordingCreateInput {
 	isDownloadAllowed: Boolean
 	isFeatured: Boolean
 	isHidden: Boolean
+	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
@@ -3735,6 +3866,7 @@ input RecordingCreateInput {
 	"Requires `ADMINISTRATION` role."
 	skipTechnicalScreening: Boolean
 	sponsorId: ID!
+	technicalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	title: String!
 	websiteIds: [ID!]
 }
@@ -3751,6 +3883,10 @@ input RecordingPersonRoleInput {
 	personId: ID!
 	"The role a person has with the recording."
 	role: PersonsRoleField!
+}
+
+input RecordingScreeningCheckoutInput {
+	userId: ID!
 }
 
 input RecordingScreeningIssueInput {
@@ -3776,6 +3912,7 @@ input RecordingTagInput {
 input RecordingUpdateInput {
 	bibleReferences: [BibleReferenceRangeInput!]
 	collectionId: ID
+	contentScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	copyrightYear: Int
 	coverImage: ImageInput
 	description: String
@@ -3784,6 +3921,7 @@ input RecordingUpdateInput {
 	isDownloadAllowed: Boolean
 	isFeatured: Boolean
 	isHidden: Boolean
+	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
@@ -3798,6 +3936,7 @@ input RecordingUpdateInput {
 	"Requires `ADMINISTRATION` role."
 	skipTechnicalScreening: Boolean
 	sponsorId: ID
+	technicalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	title: String
 	websiteIds: [ID!]
 }
@@ -4021,8 +4160,8 @@ scalar Date
 "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
 scalar DateTime
 
-"The `Upload` scalar type represents a file upload."
-scalar Upload
-
 "A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt."
 scalar URL
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

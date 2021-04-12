@@ -7,7 +7,7 @@ import {
 	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import Audiobook, {
 	getStaticPaths,
@@ -17,7 +17,7 @@ import Audiobook, {
 jest.mock('video.js');
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildRenderer(Audiobook, getStaticProps, {
+const renderPage = buildStaticRenderer(Audiobook, getStaticProps, {
 	language: 'en',
 	id: 'the_book_id',
 });

@@ -1,0 +1,22 @@
+query getSeriesListPageData($language: Language!, $offset: Int, $first: Int) {
+	serieses(language: $language, offset: $offset, first: $first) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSeriesListPathsData($language: Language!) {
+	serieses(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

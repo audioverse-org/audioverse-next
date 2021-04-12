@@ -17,7 +17,15 @@ export default function CopyrightInfo({
 		recording?.distributionAgreement?.license?.image?.url;
 	return (
 		<>
-			{copyrightImageUrl && <img alt={'copyright'} src={copyrightImageUrl} />}
+			{/* TODO: Correct copyright image dimensions */}
+			{copyrightImageUrl && (
+				<img
+					alt={'copyright'}
+					src={copyrightImageUrl}
+					width={100}
+					height={100}
+				/>
+			)}
 			<p>
 				<span>
 					<FormattedMessage

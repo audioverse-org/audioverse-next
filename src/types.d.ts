@@ -4,6 +4,10 @@ type ExactAlt<T, Shape> = T extends Shape
 		: never
 	: never;
 
+type PartialDeep<T> = {
+	[P in keyof T]?: PartialDeep<T[P]>;
+};
+
 interface StaticPaths {
 	paths: string[];
 	fallback: boolean;

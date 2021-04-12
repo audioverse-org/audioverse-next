@@ -1,11 +1,9 @@
-import _ from 'lodash';
-import { useRouter } from 'next/router';
+import useRouterQuery from '@lib/useRouterQuery';
 
 const useLanguageRoute = (): string => {
-	const router = useRouter();
-	const lang = _.get(router, 'query.language');
+	const { language = 'en' } = useRouterQuery();
 
-	return typeof lang === 'string' ? lang : 'en';
+	return language.toString();
 };
 
 export default useLanguageRoute;

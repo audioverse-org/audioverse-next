@@ -13,7 +13,6 @@ describe('paginated list template', () => {
 				makeEntryRoute={undefined as any}
 				parseEntryTitle={undefined as any}
 				parseEntryImageUrl={undefined as any}
-				parseEntryKey={undefined as any}
 				pagination={undefined as any}
 			/>
 		);

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
+    "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
     "checkTs": "tsc --noEmit",
     "format": "prettier --write .",
     "lint": "eslint --max-warnings 0 --ext .ts --ext .tsx --ext .js --ext .jsx src/",
@@ -14,9 +15,10 @@
     "test:watch": "TZ=UTC jest --watch",
     "extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts*' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
-    "precommit": "npm run format && npm run lint:fix && TZ=UTC jest --config=jest.config.precommit.js",
+    "precommit": "npm run format && npm run lint:fix && tsc --noEmit && TZ=UTC jest --config=jest.config.precommit.js",
     "postinstall": "husky install",
-    "graphql:codegen": "graphql-codegen --config .graphqlrc.yml"
+    "graphql:codegen": "graphql-codegen --config .graphqlrc.yml",
+    "lighthouse": "npx lhci autorun"
   },
   "dependencies": {
     "cookie": "^0.4.1",
@@ -35,7 +37,7 @@
     "react-tooltip": "^4.2.11",
     "react-topbar-progress-indicator": "^4.1.0",
     "sass": "^1.26.10",
-    "video.js": "^7.10.2"
+    "video.js": "^7.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
@@ -48,6 +50,8 @@
     "@graphql-codegen/typescript": "1.20.0",
     "@graphql-codegen/typescript-operations": "1.17.13",
     "@graphql-codegen/typescript-react-query": "^1.0.0",
+    "@lhci/cli": "^0.7.0",
+    "@mizdra/eslint-plugin-layout-shift": "^1.0.1",
     "@testing-library/dom": "^7.24.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.2",
@@ -63,7 +67,7 @@
     "@typescript-eslint/parser": "^4.0.1",
     "babel-jest": "^26.3.0",
     "babel-plugin-react-intl": "^8.2.4",
-    "eslint": "^7.10.0",
+    "eslint": "^7.24.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-formatjs": "^2.7.12",

@@ -12,7 +12,7 @@ export default function Protected({
 	children: JSX.Element;
 }): JSX.Element {
 	const queryClient = useQueryClient();
-	const { data = undefined } = useGetProtectedDataQuery() || {};
+	const { data } = useGetProtectedDataQuery();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
@@ -27,6 +27,7 @@ export default function Protected({
 		}
 	};
 
+	// TODO: Localize input placeholders
 	const loginForm = (
 		<form onSubmit={onSubmit} data-testid={'loginForm'}>
 			{error ? <p>{error}</p> : null}
@@ -48,5 +49,5 @@ export default function Protected({
 		</form>
 	);
 
-	return data ? children : loginForm;
+	return data?.me?.user.email ? children : loginForm;
 }

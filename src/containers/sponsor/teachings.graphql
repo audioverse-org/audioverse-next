@@ -1,0 +1,26 @@
+query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
+	sponsor(id: $id) {
+		id
+		title
+		imageWithFallback {
+			url(size: 100)
+		}
+		recordings(offset: $offset, first: $first) {
+			nodes {
+				...recordingList
+				...writeFeedFile
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}
+
+query getSponsorTeachingsPathsData($language: Language!, $first: Int) {
+	sponsors(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

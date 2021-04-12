@@ -1,9 +1,9 @@
-import Head from 'next/head';
 import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import RssLink from '@components/molecules/rssLink';
 import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
 import {
 	makeSermonListRoute,
@@ -30,12 +30,7 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 
 	return (
 		<div>
-			<Head>
-				<link type="application/atom+xml" rel="alternate" href={rssPath} />
-			</Head>
-			<a href={rssPath} target={'_blank'} rel={'noreferrer noopener'}>
-				RSS
-			</a>
+			<RssLink href={rssPath} />
 			<div>
 				<a href={makeSermonListRouteAll(lang, 1)}>All</a>
 				<a href={makeSermonListRouteVideo(lang, 1)}>Video</a>

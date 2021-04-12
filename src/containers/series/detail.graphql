@@ -1,8 +1,25 @@
-query getSeriesDetailData($id: ID!) {
+query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
 	series(id: $id) {
 		title
-		image {
+		imageWithFallback {
 			url(size: 100)
+		}
+		sponsor {
+			id
+			title
+		}
+		collection {
+			id
+			title
+		}
+		recordings(offset: $offset, first: $first) {
+			nodes {
+				...recordingList
+				...writeFeedFile
+			}
+			aggregate {
+				count
+			}
 		}
 	}
 }

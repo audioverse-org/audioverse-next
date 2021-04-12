@@ -15,10 +15,19 @@ import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
+import Playlists from '@containers/playlist/list';
 import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
+import SeriesDetail from '@containers/series/detail';
+import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
 import SongList from '@containers/song/list';
+import SponsorAlbums from '@containers/sponsor/albums';
+import SponsorBooks from '@containers/sponsor/books';
+import SponsorConferences from '@containers/sponsor/conferences';
+import Sponsors from '@containers/sponsor/list';
+import SponsorSeries from '@containers/sponsor/series';
+import SponsorTeachings from '@containers/sponsor/teachings';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
@@ -31,6 +40,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -38,6 +48,7 @@ jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 jest.mock('@lib/formatDuration');
+jest.mock('@lib/api/logout');
 
 const expectNoUnlocalizedText = (
 	screen: RenderResult,
@@ -56,6 +67,18 @@ const expectNoUnlocalizedToasts = () => {
 	calls.forEach((c) => {
 		expect(c[0]).not.toMatch(/[^z]+/);
 	});
+};
+
+const expectNoUnlocalizedMessages = async <T extends unknown>(
+	Component: React.ComponentType<T>,
+	data: { [key: string]: any }
+) => {
+	const screen = await renderWithQueryProvider(
+		<Component {...(data as any)} />
+	);
+
+	expectNoUnlocalizedText(screen);
+	expectNoUnlocalizedToasts();
 };
 
 const toLocaleStringBackup = global.Date.prototype.toLocaleString;
@@ -347,5 +370,41 @@ describe('localization usage', () => {
 		);
 
 		expectNoUnlocalizedText(screen);
+	});
+
+	it('localizes sponsor list page', async () => {
+		const screen = await renderWithQueryProvider(
+			<Sponsors
+				nodes={[
+					{
+						id: 'z',
+						imageWithFallback: {
+							url: 'z',
+						},
+					} as any,
+				]}
+				{...({} as any)}
+			/>
+		);
+
+		expectNoUnlocalizedText(screen);
+	});
+
+	const scenarios: [React.ComponentType<any>, any][] = [
+		[SponsorTeachings, { nodes: [{ id: 'z' }] }],
+		[SponsorBooks, { nodes: [{ id: 'z' }] }],
+		[SponsorAlbums, { nodes: [{ id: 'z' }] }],
+		[SponsorConferences, { nodes: [{ id: 'z' }] }],
+		[SponsorSeries, { nodes: [{ id: 'z' }] }],
+		[SeriesList, { nodes: [{ id: 'z' }] }],
+		[SeriesDetail, { nodes: [{ id: 'z' }] }],
+		[Playlists, {}],
+		[Logout, {}],
+	];
+
+	scenarios.map((s: [React.ComponentType, any], i: number) => {
+		it(`Localizes scenario index ${i}`, async () => {
+			await expectNoUnlocalizedMessages(...s);
+		});
 	});
 });

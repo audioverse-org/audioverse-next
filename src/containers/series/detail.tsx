@@ -1,16 +1,64 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import { GetSeriesDetailDataQuery } from '@lib/generated/graphql';
+import PageHeader from '@components/molecules/pageHeader';
+import Pagination from '@components/molecules/pagination';
+import RecordingList from '@components/molecules/recordingList';
+import {
+	makeConferenceRoute,
+	makeSeriesDetailRoute,
+	makeSponsorRoute,
+} from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
+import { useQueryString } from '@lib/useQueryString';
+import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
 
-type Series = NonNullable<GetSeriesDetailDataQuery['series']>;
+type Props = SeriesDetailStaticProps['props'];
 
-export interface SeriesDetailProps {
-	series: Series | null | undefined;
+function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
+	const languageRoute = useLanguageRoute();
+	const seriesId = useQueryString('id') || '';
+	const sponsorId = data?.series?.sponsor?.id || '';
+	const conferenceId = data?.series?.collection?.id || '';
+	return (
+		<>
+			<PageHeader
+				imageUrl={data?.series?.imageWithFallback.url}
+				title={data?.series?.title || ''}
+				rssUrl={rssUrl}
+			/>
+			<p>
+				<a href={makeSponsorRoute(languageRoute, sponsorId)}>
+					<FormattedMessage
+						id={'seriesDetail__sponsorLinkPrefix'}
+						defaultMessage={'Sponsor: {sponsorTitle}'}
+						description={'Series detail page sponsor link prefix'}
+						values={{
+							sponsorTitle: data?.series?.sponsor?.title,
+						}}
+					/>
+				</a>
+			</p>
+			{conferenceId && (
+				<p>
+					<a href={makeConferenceRoute(languageRoute, conferenceId)}>
+						<FormattedMessage
+							id={'seriesDetail__conferenceLinkPrefix'}
+							defaultMessage={'Conference:'}
+							description={'Series detail page conference link prefix'}
+						/>{' '}
+						{data?.series?.collection?.title}
+					</a>
+				</p>
+			)}
+			<RecordingList recordings={nodes} />
+			<Pagination
+				makeRoute={(l, i) => makeSeriesDetailRoute(l, seriesId, i)}
+				{...pagination}
+			/>
+		</>
+	);
 }
 
-function SeriesDetail({ series }: SeriesDetailProps) {
-	return <h1>{series?.title}</h1>;
-}
-
-export default withFailStates(SeriesDetail, (props) => !props.series);
+export default withFailStates(SeriesDetail, ({ nodes }) => !nodes?.length);

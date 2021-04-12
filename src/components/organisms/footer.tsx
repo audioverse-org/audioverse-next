@@ -237,6 +237,8 @@ export default function Footer(): JSX.Element {
 						defaultMessage: 'iOS App',
 						description: 'iOS app link image alt text',
 					})}
+					width={230}
+					height={80}
 				/>
 			</a>
 
@@ -252,6 +254,8 @@ export default function Footer(): JSX.Element {
 						defaultMessage: 'Android App',
 						description: 'Android app link image alt text',
 					})}
+					width={230}
+					height={80}
 				/>
 			</a>
 

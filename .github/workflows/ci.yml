@@ -29,7 +29,7 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
-  typescript:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -41,8 +41,11 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
-      - name: Compile TypeScript
-        run: npm run checkTs
+      - name: Build
+        run: npm run build:dev
+      - name: Run Lighthouse
+        # remove `|| true` when we're ready to get serious about lighthouse errors
+        run: npm run lighthouse || true
   test:
     runs-on: ubuntu-latest
     steps:
@@ -57,11 +60,3 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
-  lighthouse:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install && npm install -g @lhci/cli@0.6.x
-      - run: npm run build
-      - run: lhci autorun

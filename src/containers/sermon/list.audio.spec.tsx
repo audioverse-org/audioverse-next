@@ -3,13 +3,17 @@ import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	loadRouter,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/sermons/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/sermons/audio/page/[i]';
 
-const renderPage = buildRenderer(SermonList, getStaticProps, {
+const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
 	i: '1',
 	language: 'en',
 });

@@ -1,0 +1,35 @@
+query getSponsorConferencesPageData(
+	$language: Language!
+	$id: ID!
+	$offset: Int
+	$first: Int
+) {
+	sponsor(id: $id) {
+		title
+	}
+	conferences(
+		language: $language
+		sponsorId: $id
+		offset: $offset
+		first: $first
+	) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSponsorConferencesPathsData($language: Language!, $first: Int) {
+	sponsors(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

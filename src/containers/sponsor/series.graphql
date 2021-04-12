@@ -1,0 +1,38 @@
+query getSponsorSeriesPageData(
+	$language: Language!
+	$id: ID!
+	$first: Int
+	$offset: Int
+) {
+	sponsor(id: $id) {
+		title
+		imageWithFallback {
+			url(size: 100)
+		}
+	}
+	serieses(
+		language: $language
+		sponsorId: $id
+		first: $first
+		offset: $offset
+	) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSponsorSeriesPathsData($language: Language!, $first: Int) {
+	sponsors(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

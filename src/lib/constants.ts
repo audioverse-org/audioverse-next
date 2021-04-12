@@ -22,7 +22,9 @@ export const LANGUAGES: LanguageConfigurations = {
 };
 
 export const PROJECT_ROOT = process.cwd();
-export const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
+export const IS_DEVELOPMENT =
+	process.env.NODE_ENV === 'development' ||
+	process.env.ENV_OVERRIDE === 'development';
 export const DETAIL_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 500;
 export const LIST_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 100;
 export const REVALIDATE = 10;

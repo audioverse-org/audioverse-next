@@ -25,7 +25,6 @@ function Audiobooks({ nodes, pagination }: Props): JSX.Element {
 			makeEntryRoute={(l, n) => makeAudiobookRoute(l, n.id)}
 			parseEntryImageUrl={(n) => n.imageWithFallback.url}
 			parseEntryTitle={(n) => n.title}
-			parseEntryKey={(n) => n.id}
 			pagination={pagination}
 		/>
 	);

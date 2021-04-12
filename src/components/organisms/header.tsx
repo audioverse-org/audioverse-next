@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LoadingIndicator from '@components/molecules/loadingIndicator';
+import { makeSeriesListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
@@ -43,7 +44,12 @@ const Header = (): JSX.Element => {
 			</ul>
 			<h1>
 				<a href={`/${languageRoute}`}>
-					<img src="/img/av-logo.png" alt="AudioVerse" width={300} />
+					<img
+						src="/img/av-logo.png"
+						alt="AudioVerse"
+						width={538}
+						height={160}
+					/>
 				</a>
 			</h1>
 			<input placeholder={'Search'} />
@@ -138,7 +144,7 @@ const Header = (): JSX.Element => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href={makeSeriesListRoute(languageRoute)}>
 						<FormattedMessage
 							id={`header__naveItemSeries`}
 							defaultMessage="Series"

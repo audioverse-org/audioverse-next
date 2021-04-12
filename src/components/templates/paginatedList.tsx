@@ -15,12 +15,12 @@ interface PaginatedListProps<T extends Listable> {
 	nodes: T[];
 	makePageRoute: (languageRoute: string, page: number | string) => string;
 	makeEntryRoute: (languageRoute: string, node: T) => string;
-	parseEntryTitle: (n: T) => string;
-	parseEntryImageUrl: (n: T) => string;
-	parseEntryKey: (n: T) => string;
+	parseEntryTitle?: (n: T) => string;
+	parseEntryImageUrl?: (n: T) => string;
 	pagination: PaginationData;
 }
 
+// TODO: Delete this component.
 export default function PaginatedList<T extends Listable>({
 	pageTitle,
 	pageImage,
@@ -30,19 +30,19 @@ export default function PaginatedList<T extends Listable>({
 	makeEntryRoute,
 	parseEntryTitle,
 	parseEntryImageUrl,
-	parseEntryKey,
 	pagination,
 }: PaginatedListProps<T>): JSX.Element {
 	return (
 		<>
-			{pageImage && <img src={pageImage} alt={pageTitle} />}
+			{pageImage && (
+				<img src={pageImage} alt={pageTitle} width={100} height={100} />
+			)}
 			<h1>{pageTitle}</h1>
 			{children}
 			<TableList
 				nodes={nodes}
 				parseTitle={parseEntryTitle}
 				parseImageUrl={parseEntryImageUrl}
-				parseKey={parseEntryKey}
 				makeEntryRoute={makeEntryRoute}
 			/>
 			<Pagination makeRoute={makePageRoute} {...pagination} />

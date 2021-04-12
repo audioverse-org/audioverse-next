@@ -1,0 +1,35 @@
+query getSponsorAlbumsPageData(
+	$language: Language!
+	$id: ID!
+	$offset: Int
+	$first: Int
+) {
+	sponsor(id: $id) {
+		title
+	}
+	musicAlbums(
+		language: $language
+		sponsorId: $id
+		offset: $offset
+		first: $first
+	) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSponsorAlbumsPathsData($language: Language!, $first: Int) {
+	sponsors(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

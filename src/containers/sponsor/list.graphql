@@ -1,0 +1,22 @@
+query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
+	sponsors(language: $language, offset: $offset, first: $first) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getSponsorListPathsData($language: Language!) {
+	sponsors(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

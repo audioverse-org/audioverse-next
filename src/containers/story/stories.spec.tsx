@@ -4,13 +4,13 @@ import {
 	GetStoriesPageDataDocument,
 	GetStoriesPathDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Stories, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/page/[i]';
 
-const renderPage = buildRenderer(Stories, getStaticProps);
+const renderPage = buildStaticRenderer(Stories, getStaticProps);
 
 function loadData() {
 	when(mockedFetchApi)

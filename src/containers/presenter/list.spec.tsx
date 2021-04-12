@@ -4,13 +4,13 @@ import {
 	GetPresenterListPageDataDocument,
 	GetPresenterListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/page/[i]';
 
-const renderPage = buildRenderer(Presenters, getStaticProps, {
+const renderPage = buildStaticRenderer(Presenters, getStaticProps, {
 	language: 'en',
 	i: '1',
 });

@@ -22,10 +22,16 @@ export const makePresenterListRoute = (
 	page: number | string
 ): string => `/${languageRoute}/presenters/page/${page}`;
 
-export const makeSeriesRoute = (
+export const makeSeriesDetailRoute = (
 	languageRoute: string,
-	seriesId: string
-): string => `/${languageRoute}/series/${seriesId}`;
+	seriesId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/series/${seriesId}/page/${page}`;
+
+export const makeSeriesListRoute = (
+	languageRoute: string,
+	page: number | string = 1
+): string => `/${languageRoute}/series/page/${page}`;
 
 export const makeTagDetailRoute = (
 	languageRoute: string,
@@ -127,7 +133,7 @@ export const makeTagMusicRoute = (
 export const makeConferenceRoute = (
 	languageRoute: string,
 	conferenceId: string,
-	page: number | string
+	page: number | string = 1
 ): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
 
 export const makeConferenceListRoute = (
@@ -135,12 +141,59 @@ export const makeConferenceListRoute = (
 	page: number | string
 ): string => `/${languageRoute}/conferences/page/${page}`;
 
+// TODO: rename makeSponsorDetailRoute
 export const makeSponsorRoute = (
 	languageRoute: string,
 	sponsorId: string
 ): string => `/${languageRoute}/sponsors/${sponsorId}`;
 
+export const makeSponsorListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/sponsors/page/${page}`;
+
+export const makeSponsorTeachingsRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/teachings/page/${page}`;
+
+export const makeSponsorBooksRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/books/page/${page}`;
+
+export const makeSponsorAlbumsRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/albums/page/${page}`;
+
+export const makeSponsorConferencesRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/conferences/page/${page}`;
+
+export const makeSponsorSeriesRoute = (
+	languageRoute: string,
+	sponsorId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/sponsors/${sponsorId}/series/page/${page}`;
+
 export const makeTestimoniesRoute = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/testimonies/page/${page}`;
+
+export const makePlaylistListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/playlists/page/${page}`;
+
+export const makePlaylistDetailRoute = (
+	languageRoute: string,
+	playlistId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/playlists/${playlistId}/page/${page}`;

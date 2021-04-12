@@ -1,0 +1,21 @@
+query getSponsorDetailPageData($id: ID!) {
+	sponsor(id: $id) {
+		id
+		title
+		location
+		website
+		summary
+		description
+		imageWithFallback {
+			url(size: 100)
+		}
+	}
+}
+
+query getSponsorDetailPathsData($language: Language!, $first: Int) {
+	sponsors(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}
