@@ -28,17 +28,17 @@ function Playlists(): JSX.Element {
 	};
 	const intl = useIntl();
 	return (
-			<PaginatedList
-				pageTitle={intl.formatMessage({
-					id: 'playlists__pageTitle',
-					defaultMessage: 'Playlists',
-					description: 'Playlists list page title',
-				})}
-				nodes={playlists}
-				makePageRoute={makePlaylistListRoute}
-				makeEntryRoute={(l, n) => makePlaylistDetailRoute(l, n.id)}
-				pagination={pagination}
-			/>
+		<PaginatedList
+			pageTitle={intl.formatMessage({
+				id: 'playlists__pageTitle',
+				defaultMessage: 'Playlists',
+				description: 'Playlists list page title',
+			})}
+			nodes={playlists}
+			makePageRoute={makePlaylistListRoute}
+			makeEntryRoute={(l, n) => makePlaylistDetailRoute(l, n.id)}
+			pagination={pagination}
+		/>
 	);
 }
 

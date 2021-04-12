@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
+import PageHeader from '@components/molecules/pageHeader';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import {
@@ -12,7 +13,6 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 import { SeriesDetailStaticProps } from '@pages/[language]/series/[id]/page/[i]';
-import PageHeader from "@components/molecules/pageHeader";
 
 type Props = SeriesDetailStaticProps['props'];
 
@@ -23,7 +23,11 @@ function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 	const conferenceId = data?.series?.collection?.id || '';
 	return (
 		<>
-			<PageHeader imageUrl={data?.series?.imageWithFallback.url} title={data?.series?.title || ''} rssUrl={rssUrl} />
+			<PageHeader
+				imageUrl={data?.series?.imageWithFallback.url}
+				title={data?.series?.title || ''}
+				rssUrl={rssUrl}
+			/>
 			<p>
 				<a href={makeSponsorRoute(languageRoute, sponsorId)}>
 					<FormattedMessage
@@ -31,7 +35,7 @@ function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 						defaultMessage={'Sponsor: {sponsorTitle}'}
 						description={'Series detail page sponsor link prefix'}
 						values={{
-							sponsorTitle: data?.series?.sponsor?.title
+							sponsorTitle: data?.series?.sponsor?.title,
 						}}
 					/>
 				</a>
