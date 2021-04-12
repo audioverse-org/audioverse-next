@@ -1,10 +1,13 @@
-import Register from "@containers/account/register"
-import { GetServerSidePropsResult } from "next";
+import { GetServerSidePropsResult } from 'next';
 
-export default Register
+import Register from '@containers/account/register';
 
-export async function getServerSideProps(): Promise<GetServerSidePropsResult<any>> {
-  return {
-    props: {}
-  }
+export default Register;
+
+export async function getServerSideProps(): Promise<
+	GetServerSidePropsResult<any>
+> {
+	return {
+		props: {},
+	};
 }

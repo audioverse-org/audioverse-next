@@ -1,11 +1,12 @@
+import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
+
+import { RegisterDocument } from '@lib/generated/graphql';
 import { buildServerRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Register, {
 	getServerSideProps,
 } from '@pages/[language]/account/register';
-import userEvent from '@testing-library/user-event';
-import { RegisterDocument } from '@lib/generated/graphql';
-import { waitFor } from '@testing-library/react';
-import { when } from 'jest-when';
 
 const renderPage = buildServerRenderer(Register, getServerSideProps, {
 	language: 'en',

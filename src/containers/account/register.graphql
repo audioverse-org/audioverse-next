@@ -1,8 +1,5 @@
 mutation register($email: String!, $password: String!) {
-	signup(input: {
-		email: $email,
-		password: $password
-	}) {
+	signup(input: { email: $email, password: $password }) {
 		errors {
 			message
 		}

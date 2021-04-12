@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { useRegisterMutation } from '@lib/generated/graphql';
 
 function Register(): JSX.Element {
@@ -54,7 +55,7 @@ function Register(): JSX.Element {
 			<button
 				onClick={() => {
 					setErrors([]);
-					let newErrors = [];
+					const newErrors = [];
 					if (!email.length) {
 						newErrors.push('email is required');
 					}
