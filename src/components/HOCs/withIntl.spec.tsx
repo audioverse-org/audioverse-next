@@ -10,6 +10,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import Register from '@containers/account/register';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
@@ -54,10 +55,18 @@ const expectNoUnlocalizedText = (
 	screen: RenderResult,
 	whitelist: string[] = []
 ) => {
-	const { queryAllByText, queryAllByAltText } = screen;
+	const {
+		queryAllByText,
+		queryAllByAltText,
+		queryAllByPlaceholderText,
+	} = screen;
 	const r = /[^z\d\W\s]+/;
 	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
-	const hits = [...queryAllByText(m), ...queryAllByAltText(m)];
+	const hits = [
+		...queryAllByText(m),
+		...queryAllByAltText(m),
+		...queryAllByPlaceholderText(m),
+	];
 
 	expect(hits).toHaveLength(0);
 };
@@ -400,6 +409,7 @@ describe('localization usage', () => {
 		[SeriesDetail, { nodes: [{ id: 'z' }] }],
 		[Playlists, {}],
 		[Logout, {}],
+		[Register, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

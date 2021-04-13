@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useGoogleLogin } from 'react-google-login';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import {
@@ -37,8 +38,8 @@ function Register(): JSX.Element {
 	});
 
 	const [errors, setErrors] = useState<string[]>([]);
-	const [pass, setPass] = useState<string>('');
-	const [pass2, setPass2] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 
 	const {
@@ -57,6 +58,8 @@ function Register(): JSX.Element {
 		data: dataSocial,
 		isSuccess: isSuccessSocial,
 	} = useRegisterSocialMutation();
+
+	const intl = useIntl();
 
 	useEffect(() => {
 		if (dataRegister?.signup.errors.length) {
@@ -78,7 +81,15 @@ function Register(): JSX.Element {
 	}, [dataSocial]);
 
 	if (isLoading || isLoadingLoggedIn) {
-		return <p>loading...</p>;
+		return (
+			<p>
+				<FormattedMessage
+					id={'register__loadingMessage'}
+					defaultMessage={'loading...'}
+					description={'register loading message'}
+				/>
+			</p>
+		);
 	}
 
 	if (dataLoggedIn?.me?.user.email) {
@@ -86,16 +97,23 @@ function Register(): JSX.Element {
 	}
 
 	if ((isSuccess || isSuccessSocial) && !errors.length) {
-		return <p>success</p>;
+		return (
+			<p>
+				<FormattedMessage
+					id={'register__successMessage'}
+					defaultMessage={'success'}
+					description={'register success message'}
+				/>
+			</p>
+		);
 	}
 
 	return (
 		<>
-			{/* TODO: figure out a better key to use */}
 			{/* TODO: show errors inline */}
 			<ul>
-				{errors.map((e, i) => (
-					<li key={i}>{e}</li>
+				{errors.map((e) => (
+					<li key={e}>{e}</li>
 				))}
 			</ul>
 
@@ -132,47 +150,58 @@ function Register(): JSX.Element {
 
 			<input
 				type="email"
-				placeholder={'email'}
+				placeholder={intl.formatMessage({
+					id: 'register__emailInputPlaceholder',
+					defaultMessage: 'email',
+					description: 'register page email input placeholder',
+				})}
 				required={true}
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<input
 				type="password"
-				placeholder={'password'}
+				placeholder={intl.formatMessage({
+					id: 'register__passwordInputPlaceholder',
+					defaultMessage: 'password',
+					description: 'register page password input placeholder',
+				})}
 				required={true}
-				onChange={(e) => {
-					setPass(e.target.value);
-				}}
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<input
 				type="password"
-				placeholder={'confirm password'}
+				placeholder={intl.formatMessage({
+					id: 'register__confirmPasswordInputPlaceholder',
+					defaultMessage: 'confirm password',
+					description: 'register page confirm password input placeholder',
+				})}
 				required={true}
-				onChange={(e) => setPass2(e.target.value)}
+				onChange={(e) => setPasswordConfirm(e.target.value)}
 			/>
 			<button
 				onClick={() => {
-					setErrors([]);
 					const newErrors = [];
 					if (!email.length) {
 						newErrors.push('email is required');
 					}
-					if (!pass || !pass2) {
+					if (!password || !passwordConfirm) {
 						newErrors.push('please type password twice');
 					}
-					if (pass !== pass2) {
+					if (password !== passwordConfirm) {
 						newErrors.push('passwords do not match');
 					}
-					if (newErrors.length) {
-						setErrors(newErrors);
-					}
+					setErrors(newErrors);
 					mutate({
 						email,
-						password: pass,
+						password: password,
 					});
 				}}
 			>
-				sign up
+				<FormattedMessage
+					id={'register__signUpButton'}
+					defaultMessage={'sign up'}
+					description={'sign up button label on register page'}
+				/>
 			</button>
 		</>
 	);
