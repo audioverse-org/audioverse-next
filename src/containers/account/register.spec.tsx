@@ -160,6 +160,3 @@ describe('register page', () => {
 		});
 	});
 });
-
-// displays registration errors
-// displays success message

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import { useRegisterMutation } from '@lib/generated/graphql';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 function Register(): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
-	const [pass, setPass] = useState<string>('');
-	const [pass2, setPass2] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
+
+	const intl = useIntl();
 
 	const { mutate, isLoading, data, isSuccess } = useRegisterMutation();
 
@@ -17,64 +20,90 @@ function Register(): JSX.Element {
 	}, [data]);
 
 	if (isLoading) {
-		return <p>loading...</p>;
+		return (
+			<p>
+				<FormattedMessage
+					id={'register__loadingMessage'}
+					defaultMessage={'loading...'}
+					description={'register loading message'}
+				/>
+			</p>
+		);
 	}
 
 	if (isSuccess && !errors.length) {
-		return <p>success</p>;
+		return (
+			<p>
+				<FormattedMessage
+					id={'register__successMessage'}
+					defaultMessage={'success'}
+					description={'register success message'}
+				/>
+			</p>
+		);
 	}
 
 	return (
 		<>
-			{/* TODO: figure out a better key to use */}
 			<ul>
-				{errors.map((e, i) => (
-					<li key={i}>{e}</li>
+				{errors.map((e) => (
+					<li key={e}>{e}</li>
 				))}
 			</ul>
 			<input
 				type="email"
-				placeholder={'email'}
+				placeholder={intl.formatMessage({
+					id: 'register__emailInputPlaceholder',
+					defaultMessage: 'email',
+					description: 'register page email input placeholder',
+				})}
 				required={true}
 				onChange={(e) => setEmail(e.target.value)}
 			/>
 			<input
 				type="password"
-				placeholder={'password'}
+				placeholder={intl.formatMessage({
+					id: 'register__passwordInputPlaceholder',
+					defaultMessage: 'password',
+					description: 'register page password input placeholder',
+				})}
 				required={true}
-				onChange={(e) => {
-					setPass(e.target.value);
-				}}
+				onChange={(e) => setPassword(e.target.value)}
 			/>
 			<input
 				type="password"
-				placeholder={'confirm password'}
+				placeholder={intl.formatMessage({
+					id: 'register__confirmPasswordInputPlaceholder',
+					defaultMessage: 'confirm password',
+					description: 'register page confirm password input placeholder',
+				})}
 				required={true}
-				onChange={(e) => setPass2(e.target.value)}
+				onChange={(e) => setPasswordConfirm(e.target.value)}
 			/>
 			<button
 				onClick={() => {
-					setErrors([]);
 					const newErrors = [];
 					if (!email.length) {
 						newErrors.push('email is required');
 					}
-					if (!pass || !pass2) {
+					if (!password || !passwordConfirm) {
 						newErrors.push('please type password twice');
 					}
-					if (pass !== pass2) {
+					if (password !== passwordConfirm) {
 						newErrors.push('passwords do not match');
 					}
-					if (newErrors.length) {
-						setErrors(newErrors);
-					}
+					setErrors(newErrors);
 					mutate({
 						email,
-						password: pass,
+						password: password,
 					});
 				}}
 			>
-				sign up
+				<FormattedMessage
+					id={'register__signUpButton'}
+					defaultMessage={'sign up'}
+					description={'sign up button label on register page'}
+				/>
 			</button>
 		</>
 	);

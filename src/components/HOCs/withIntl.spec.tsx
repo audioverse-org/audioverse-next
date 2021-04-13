@@ -41,6 +41,7 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
+import Register from '@containers/account/register';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -54,10 +55,18 @@ const expectNoUnlocalizedText = (
 	screen: RenderResult,
 	whitelist: string[] = []
 ) => {
-	const { queryAllByText, queryAllByAltText } = screen;
+	const {
+		queryAllByText,
+		queryAllByAltText,
+		queryAllByPlaceholderText,
+	} = screen;
 	const r = /[^z\d\W\s]+/;
 	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
-	const hits = [...queryAllByText(m), ...queryAllByAltText(m)];
+	const hits = [
+		...queryAllByText(m),
+		...queryAllByAltText(m),
+		...queryAllByPlaceholderText(m),
+	];
 
 	expect(hits).toHaveLength(0);
 };
@@ -400,6 +409,7 @@ describe('localization usage', () => {
 		[SeriesDetail, { nodes: [{ id: 'z' }] }],
 		[Playlists, {}],
 		[Logout, {}],
+		[Register, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryKey } from 'react-query';
 import ReactTooltip from 'react-tooltip';
 
@@ -67,6 +67,7 @@ export default function PlaylistButton({
 	const addPlaylist = useAddPlaylist(cacheKey, 'me.user.playlists.nodes');
 	const [newPlaylistTitle, setNewPlaylistTitle] = useState<string>('');
 	const [isPublic, setIsPublic] = useState<boolean>(false);
+	const intl = useIntl();
 
 	const getEntries = () => {
 		return (
@@ -102,7 +103,11 @@ export default function PlaylistButton({
 					<>
 						<ul className={styles.list}>{getEntries()}</ul>
 						<input
-							placeholder={'New Playlist'}
+							placeholder={intl.formatMessage({
+								id: 'playlistButton__newPlaylistInputPlaceholder',
+								defaultMessage: 'New Playlist',
+								description: 'playlist button new playlist input placeholder',
+							})}
 							value={newPlaylistTitle}
 							onChange={(e) => setNewPlaylistTitle(e.target.value)}
 						/>
