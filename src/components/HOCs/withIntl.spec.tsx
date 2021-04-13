@@ -10,6 +10,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import Register from '@containers/account/register';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
@@ -41,7 +42,6 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
-import Register from '@containers/account/register';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');

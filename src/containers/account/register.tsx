@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useRegisterMutation } from '@lib/generated/graphql';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 function Register(): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
