@@ -1,27 +1,35 @@
+function generateCodeSnippets(documents, shouldProcess, makeSnippet) {
+	return documents
+		.map((doc) => {
+			return doc.document.definitions
+				.filter(shouldProcess)
+				.map(makeSnippet)
+				.join('\n');
+		})
+		.join('\n');
+}
+
+function capitalize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 module.exports = {
 	plugin: (schema, documents, config, info) => {
-		const result = documents
-			.map((doc) => {
-				return doc.document.definitions
-					.filter((def) => {
-						return (
-							def.kind !== 'FragmentDefinition' && def.operation !== 'mutation'
-						);
-					})
-					.map((def) => {
-						const capitalName =
-							def.name.value.charAt(0).toUpperCase() + def.name.value.slice(1);
-						return `
+		const result = generateCodeSnippets(
+			documents,
+			(def) => def.kind !== 'FragmentDefinition',
+			(def) => {
+				const capitalName = capitalize(def.name.value);
+				const capitalType = capitalize(def.operation);
+				return `
 							export async function ${def.name.value}<T>(
-								variables: ExactAlt<T, ${capitalName}QueryVariables>
-							): Promise<${capitalName}Query> {
+								variables: ExactAlt<T, ${capitalName}${capitalType}Variables>
+							): Promise<${capitalName}${capitalType}> {
 								return fetchApi(${capitalName}Document, { variables });
 							}`;
-					})
-					.join('\n');
-			})
-			.join('\n');
+			}
+		);
 
-		return `import { fetchApi } from '@lib/api/fetchApi' \n` + result;
+		return `import { fetchApi } from '@lib/api/fetchApi' \n ${result}`;
 	},
 };

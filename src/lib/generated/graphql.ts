@@ -53,6 +53,7 @@ export type AudioFile = Node & {
   id: Scalars['ID'];
   mimeType: Scalars['String'];
   recording: Recording;
+  transcodingStatus: MediaFileTranscodingStatus;
   updatedAt: Maybe<Scalars['DateTime']>;
   url: Scalars['URL'];
 };
@@ -432,10 +433,12 @@ export type CollectionRecordingsArgs = {
 
 export type CollectionSequencesArgs = {
   after: Maybe<Scalars['String']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -858,7 +861,6 @@ export type MediaFileUpload = Node & {
   /** The presigned part upload URLs. Unavailable after the upload has completed. */
   partUploadUrls: Maybe<Array<Scalars['String']>>;
   recording: Maybe<Recording>;
-  transcodingStatus: MediaFileTranscodingStatus;
   updatedAt: Maybe<Scalars['DateTime']>;
   url: Maybe<Scalars['URL']>;
 };
@@ -2049,7 +2051,9 @@ export type QueryAudiobookSeriesesArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
+  sequenceIds: Maybe<Array<Scalars['ID']>>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2096,11 +2100,13 @@ export type QueryAudiobookTracksArgs = {
 export type QueryAudiobooksArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -2134,7 +2140,9 @@ export type QueryCollectionsArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
+  sequenceIds: Maybe<Array<Scalars['ID']>>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2152,7 +2160,9 @@ export type QueryConferencesArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
+  sequenceIds: Maybe<Array<Scalars['ID']>>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2304,11 +2314,13 @@ export type QueryMusicAlbumArgs = {
 export type QueryMusicAlbumsArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -2338,7 +2350,9 @@ export type QueryMusicSeriesesArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
+  sequenceIds: Maybe<Array<Scalars['ID']>>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2396,6 +2410,8 @@ export type QueryPersonsArgs = {
   orderBy: Maybe<Array<PersonsOrder>>;
   role: Maybe<PersonsRoleField>;
   search: Maybe<Scalars['String']>;
+  sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
   withContentTypes: Maybe<Array<RecordingContentType>>;
 };
 
@@ -2493,12 +2509,14 @@ export type QuerySequenceArgs = {
 export type QuerySequencesArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   contentType: Maybe<SequenceContentType>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -2513,11 +2531,13 @@ export type QuerySeriesArgs = {
 export type QuerySeriesesArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -2629,7 +2649,9 @@ export type QueryStoryProgramsArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
+  sequenceIds: Maybe<Array<Scalars['ID']>>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2643,11 +2665,13 @@ export type QueryStorySeasonArgs = {
 export type QueryStorySeasonsArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
@@ -3367,6 +3391,7 @@ export type SponsorCollectionsArgs = {
   includeUnpublished: Maybe<Scalars['Boolean']>;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CollectionsOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3429,11 +3454,13 @@ export type SponsorRecordingsArgs = {
 export type SponsorSequencesArgs = {
   after: Maybe<Scalars['String']>;
   collectionId: Maybe<Scalars['ID']>;
+  collectionIds: Maybe<Array<Scalars['ID']>>;
   contentType?: Maybe<SequenceContentType>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<SequenceOrder>>;
+  persons: Maybe<Array<RecordingPersonInput>>;
   search: Maybe<Scalars['String']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -4209,6 +4236,8 @@ export type UserFavoritePersonsArgs = {
   orderBy: Maybe<Array<PersonsOrder>>;
   role: Maybe<PersonsRoleField>;
   search: Maybe<Scalars['String']>;
+  sponsorId: Maybe<Scalars['ID']>;
+  sponsorIds: Maybe<Array<Scalars['ID']>>;
   withContentTypes: Maybe<Array<RecordingContentType>>;
 };
 
@@ -4571,6 +4600,7 @@ export type VideoFile = Node & {
   logUrl: Maybe<Scalars['URL']>;
   mimeType: Scalars['String'];
   recording: Recording;
+  transcodingStatus: MediaFileTranscodingStatus;
   updatedAt: Maybe<Scalars['DateTime']>;
   url: Scalars['URL'];
   width: Scalars['Int'];
@@ -4752,6 +4782,23 @@ export type GetProfileDataQuery = (
       & Pick<User, 'givenName' | 'surname' | 'email'>
     ) }
   )> }
+);
+
+export type RegisterMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type RegisterMutation = (
+  { __typename?: 'Mutation' }
+  & { signup: (
+    { __typename?: 'AuthenticatedUserPayload' }
+    & { errors: Array<(
+      { __typename?: 'InputValidationError' }
+      & Pick<InputValidationError, 'message'>
+    )> }
+  ) }
 );
 
 export type GetAudiobookDetailPageDataQueryVariables = Exact<{
@@ -6286,6 +6333,23 @@ export const useGetProfileDataQuery = <
     useQuery<GetProfileDataQuery, TError, TData>(
       ['getProfileData', variables],
       graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
+      options
+    );
+export const RegisterDocument = `
+    mutation register($email: String!, $password: String!) {
+  signup(input: {email: $email, password: $password}) {
+    errors {
+      message
+    }
+  }
+}
+    `;
+export const useRegisterMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<RegisterMutation, TError, RegisterMutationVariables, TContext>) => 
+    useMutation<RegisterMutation, TError, RegisterMutationVariables, TContext>(
+      (variables?: RegisterMutationVariables) => graphqlFetcher<RegisterMutation, RegisterMutationVariables>(RegisterDocument, variables)(),
       options
     );
 export const GetAudiobookDetailPageDataDocument = `
@@ -7878,7 +7942,7 @@ export const useAddPlaylistMutation = <
       options
     );
 import { fetchApi } from '@lib/api/fetchApi' 
-
+ 
 
 
 							export async function getPlaylistButtonData<T>(
@@ -7896,6 +7960,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetProfileDataQueryVariables>
 							): Promise<GetProfileDataQuery> {
 								return fetchApi(GetProfileDataDocument, { variables });
+							}
+
+							export async function register<T>(
+								variables: ExactAlt<T, RegisterMutationVariables>
+							): Promise<RegisterMutation> {
+								return fetchApi(RegisterDocument, { variables });
 							}
 
 							export async function getAudiobookDetailPageData<T>(
@@ -8265,3 +8335,8 @@ import { fetchApi } from '@lib/api/fetchApi'
 								return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 							}
 
+							export async function addPlaylist<T>(
+								variables: ExactAlt<T, AddPlaylistMutationVariables>
+							): Promise<AddPlaylistMutation> {
+								return fetchApi(AddPlaylistDocument, { variables });
+							}
