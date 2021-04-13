@@ -1,14 +1,15 @@
-import FacebookLogin from 'react-facebook-login';
-import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
+import Cookie from 'js-cookie';
 import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import FacebookLogin from 'react-facebook-login';
+import { useGoogleLogin } from 'react-google-login';
+import { FormattedMessage } from 'react-intl';
+
+import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
 } from '@lib/generated/graphql';
-import React, { useEffect, useState } from 'react';
-import { useGoogleLogin } from 'react-google-login';
-import Cookie from 'js-cookie';
-import { FormattedMessage } from 'react-intl';
 
 export default function SocialLogin(): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);

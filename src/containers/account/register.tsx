@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import SocialLogin from '@components/molecules/socialLogin';
 import {
 	useRegisterIsLoggedInQuery,
 	useRegisterMutation,
 } from '@lib/generated/graphql';
-import SocialLogin from '@components/molecules/socialLogin';
 
 function Register(): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
