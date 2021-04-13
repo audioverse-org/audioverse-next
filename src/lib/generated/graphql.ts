@@ -4801,6 +4801,43 @@ export type RegisterMutation = (
   ) }
 );
 
+export type RegisterSocialMutationVariables = Exact<{
+  socialId: Scalars['String'];
+  socialName: UserSocialServiceName;
+  socialToken: Scalars['String'];
+  givenName: Maybe<Scalars['String']>;
+  surname: Maybe<Scalars['String']>;
+}>;
+
+
+export type RegisterSocialMutation = (
+  { __typename?: 'Mutation' }
+  & { loginSocial: (
+    { __typename?: 'AuthenticatedUserPayload' }
+    & { authenticatedUser: Maybe<(
+      { __typename?: 'AuthenticatedUser' }
+      & Pick<AuthenticatedUser, 'sessionToken'>
+    )>, errors: Array<(
+      { __typename?: 'InputValidationError' }
+      & Pick<InputValidationError, 'message'>
+    )> }
+  ) }
+);
+
+export type RegisterIsLoggedInQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RegisterIsLoggedInQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'email'>
+    ) }
+  )> }
+);
+
 export type GetAudiobookDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -6350,6 +6387,49 @@ export const useRegisterMutation = <
     >(options?: UseMutationOptions<RegisterMutation, TError, RegisterMutationVariables, TContext>) => 
     useMutation<RegisterMutation, TError, RegisterMutationVariables, TContext>(
       (variables?: RegisterMutationVariables) => graphqlFetcher<RegisterMutation, RegisterMutationVariables>(RegisterDocument, variables)(),
+      options
+    );
+export const RegisterSocialDocument = `
+    mutation registerSocial($socialId: String!, $socialName: UserSocialServiceName!, $socialToken: String!, $givenName: String, $surname: String) {
+  loginSocial(
+    input: {socialId: $socialId, socialName: $socialName, socialToken: $socialToken, givenName: $givenName, surname: $surname}
+  ) {
+    authenticatedUser {
+      sessionToken
+    }
+    errors {
+      message
+    }
+  }
+}
+    `;
+export const useRegisterSocialMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<RegisterSocialMutation, TError, RegisterSocialMutationVariables, TContext>) => 
+    useMutation<RegisterSocialMutation, TError, RegisterSocialMutationVariables, TContext>(
+      (variables?: RegisterSocialMutationVariables) => graphqlFetcher<RegisterSocialMutation, RegisterSocialMutationVariables>(RegisterSocialDocument, variables)(),
+      options
+    );
+export const RegisterIsLoggedInDocument = `
+    query registerIsLoggedIn {
+  me {
+    user {
+      email
+    }
+  }
+}
+    `;
+export const useRegisterIsLoggedInQuery = <
+      TData = RegisterIsLoggedInQuery,
+      TError = unknown
+    >(
+      variables?: RegisterIsLoggedInQueryVariables, 
+      options?: UseQueryOptions<RegisterIsLoggedInQuery, TError, TData>
+    ) => 
+    useQuery<RegisterIsLoggedInQuery, TError, TData>(
+      ['registerIsLoggedIn', variables],
+      graphqlFetcher<RegisterIsLoggedInQuery, RegisterIsLoggedInQueryVariables>(RegisterIsLoggedInDocument, variables),
       options
     );
 export const GetAudiobookDetailPageDataDocument = `
@@ -7966,6 +8046,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, RegisterMutationVariables>
 							): Promise<RegisterMutation> {
 								return fetchApi(RegisterDocument, { variables });
+							}
+
+							export async function registerSocial<T>(
+								variables: ExactAlt<T, RegisterSocialMutationVariables>
+							): Promise<RegisterSocialMutation> {
+								return fetchApi(RegisterSocialDocument, { variables });
+							}
+
+							export async function registerIsLoggedIn<T>(
+								variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
+							): Promise<RegisterIsLoggedInQuery> {
+								return fetchApi(RegisterIsLoggedInDocument, { variables });
 							}
 
 							export async function getAudiobookDetailPageData<T>(

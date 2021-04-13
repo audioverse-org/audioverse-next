@@ -28,6 +28,11 @@ export const IS_DEVELOPMENT =
 export const DETAIL_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 500;
 export const LIST_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 100;
 export const REVALIDATE = 10;
+export const FACEBOOK_APP_ID = IS_DEVELOPMENT
+	? '484026402743558'
+	: '1435507090029440';
+export const GOOGLE_CLIENT_ID =
+	'555720614796-29k08to8g49c25mq6smacl116ps06m1c.apps.googleusercontent.com';
 
 export const BIBLE_BOOKS = [
 	'Genesis',

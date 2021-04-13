@@ -162,7 +162,7 @@ const Header = (): JSX.Element => {
 					</a>
 				</li>
 				<li>
-					<a href={`/${languageRoute}/profile`}>
+					<a href={`/${languageRoute}/account/profile`}>
 						<FormattedMessage
 							id={`header__naveItemManageAccount`}
 							defaultMessage="Manage Account"
@@ -198,7 +198,7 @@ const Header = (): JSX.Element => {
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href={`/${languageRoute}/account/logout`}>
 						<FormattedMessage
 							id={`header__naveItemLogout`}
 							defaultMessage="Logout"
