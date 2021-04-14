@@ -95,7 +95,7 @@ function Register(): JSX.Element {
 					setErrors(newErrors);
 					mutate({
 						email,
-						password: password,
+						password,
 					});
 				}}
 			>
