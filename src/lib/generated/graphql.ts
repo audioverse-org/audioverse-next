@@ -1260,6 +1260,9 @@ export type Mutation = {
   sponsorDelete: SuccessPayload;
   sponsorHistoryCommentCreate: CatalogHistoryItemPayload;
   sponsorUpdate: SponsorPayload;
+  testimonyCreate: TestimonyPayload;
+  testimonyDelete: SuccessPayload;
+  testimonyUpdate: TestimonyPayload;
   /** @deprecated unfavoriteRecording is replaced with recordingUnfavorite */
   unfavoriteRecording: Scalars['Boolean'];
   updateMyProfile: AuthenticatedUserPayload;
@@ -1689,6 +1692,22 @@ export type MutationSponsorHistoryCommentCreateArgs = {
 export type MutationSponsorUpdateArgs = {
   input: SponsorUpdateInput;
   sponsorId: Scalars['ID'];
+};
+
+
+export type MutationTestimonyCreateArgs = {
+  input: TestimonyCreateInput;
+};
+
+
+export type MutationTestimonyDeleteArgs = {
+  testimonyId: Scalars['ID'];
+};
+
+
+export type MutationTestimonyUpdateArgs = {
+  input: TestimonyUpdateInput;
+  testimonyId: Scalars['ID'];
 };
 
 
@@ -2252,6 +2271,7 @@ export type QueryMediaFileUploadsArgs = {
   hasUploaded: Maybe<Scalars['Boolean']>;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<MediaFileUploadsOrder>>;
+  search: Maybe<Scalars['String']>;
   transcodingStatuses: Maybe<Array<MediaFileTranscodingStatus>>;
 };
 
@@ -2691,6 +2711,7 @@ export type QueryTagsArgs = {
 export type QueryTestimoniesArgs = {
   after: Maybe<Scalars['String']>;
   first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<TestimoniesOrder>>;
@@ -3621,11 +3642,13 @@ export enum TestimoniesSortableField {
   WrittenDate = 'WRITTEN_DATE'
 }
 
+/** A user testimony. */
 export type Testimony = Node & {
   __typename?: 'Testimony';
   author: Scalars['String'];
   body: Scalars['String'];
   id: Scalars['ID'];
+  publishDate: Scalars['DateTime'];
   writtenDate: Scalars['DateTime'];
 };
 
@@ -3637,10 +3660,31 @@ export type TestimonyConnection = {
   pageInfo: PageInfo;
 };
 
+export type TestimonyCreateInput = {
+  author: Scalars['String'];
+  body: Scalars['String'];
+  language: Language;
+  publishDate: Scalars['DateTime'];
+  writtenDate: Scalars['DateTime'];
+};
+
 export type TestimonyEdge = {
   __typename?: 'TestimonyEdge';
   cursor: Scalars['String'];
   node: Testimony;
+};
+
+export type TestimonyPayload = {
+  __typename?: 'TestimonyPayload';
+  errors: Array<InputValidationError>;
+  testimony: Maybe<Testimony>;
+};
+
+export type TestimonyUpdateInput = {
+  author: Maybe<Scalars['String']>;
+  body: Maybe<Scalars['String']>;
+  publishDate: Maybe<Scalars['DateTime']>;
+  writtenDate: Maybe<Scalars['DateTime']>;
 };
 
 /** The supported timezones. */
@@ -5270,20 +5314,6 @@ export type GetPresenterListPathsDataQuery = (
   ) }
 );
 
-export type GetProtectedDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetProtectedDataQuery = (
-  { __typename?: 'Query' }
-  & { me: Maybe<(
-    { __typename?: 'AuthenticatedUser' }
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'email'>
-    ) }
-  )> }
-);
-
 export type GetSeriesDetailDataQueryVariables = Exact<{
   id: Scalars['ID'];
   offset: Maybe<Scalars['Int']>;
@@ -6132,6 +6162,20 @@ export type GetTestimoniesPathsDataQuery = (
   ) }
 );
 
+export type GetWithAuthGuardDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWithAuthGuardDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'email'>
+    ) }
+  )> }
+);
+
 export type AddPlaylistMutationVariables = Exact<{
   language: Language;
   title: Scalars['String'];
@@ -6963,27 +7007,6 @@ export const useGetPresenterListPathsDataQuery = <
     useQuery<GetPresenterListPathsDataQuery, TError, TData>(
       ['getPresenterListPathsData', variables],
       graphqlFetcher<GetPresenterListPathsDataQuery, GetPresenterListPathsDataQueryVariables>(GetPresenterListPathsDataDocument, variables),
-      options
-    );
-export const GetProtectedDataDocument = `
-    query getProtectedData {
-  me {
-    user {
-      email
-    }
-  }
-}
-    `;
-export const useGetProtectedDataQuery = <
-      TData = GetProtectedDataQuery,
-      TError = unknown
-    >(
-      variables?: GetProtectedDataQueryVariables, 
-      options?: UseQueryOptions<GetProtectedDataQuery, TError, TData>
-    ) => 
-    useQuery<GetProtectedDataQuery, TError, TData>(
-      ['getProtectedData', variables],
-      graphqlFetcher<GetProtectedDataQuery, GetProtectedDataQueryVariables>(GetProtectedDataDocument, variables),
       options
     );
 export const GetSeriesDetailDataDocument = `
@@ -8004,6 +8027,27 @@ export const useGetTestimoniesPathsDataQuery = <
       graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, variables),
       options
     );
+export const GetWithAuthGuardDataDocument = `
+    query getWithAuthGuardData {
+  me {
+    user {
+      email
+    }
+  }
+}
+    `;
+export const useGetWithAuthGuardDataQuery = <
+      TData = GetWithAuthGuardDataQuery,
+      TError = unknown
+    >(
+      variables?: GetWithAuthGuardDataQueryVariables, 
+      options?: UseQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
+    ) => 
+    useQuery<GetWithAuthGuardDataQuery, TError, TData>(
+      ['getWithAuthGuardData', variables],
+      graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
+      options
+    );
 export const AddPlaylistDocument = `
     mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
   playlistAdd(
@@ -8022,7 +8066,7 @@ export const useAddPlaylistMutation = <
       options
     );
 import { fetchApi } from '@lib/api/fetchApi' 
- 
+
 
 
 							export async function getPlaylistButtonData<T>(
@@ -8178,12 +8222,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
 							): Promise<GetPresenterListPathsDataQuery> {
 								return fetchApi(GetPresenterListPathsDataDocument, { variables });
-							}
-
-							export async function getProtectedData<T>(
-								variables: ExactAlt<T, GetProtectedDataQueryVariables>
-							): Promise<GetProtectedDataQuery> {
-								return fetchApi(GetProtectedDataDocument, { variables });
 							}
 
 							export async function getSeriesDetailData<T>(
@@ -8425,6 +8463,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 							): Promise<GetTestimoniesPathsDataQuery> {
 								return fetchApi(GetTestimoniesPathsDataDocument, { variables });
+							}
+
+							export async function getWithAuthGuardData<T>(
+								variables: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
+							): Promise<GetWithAuthGuardDataQuery> {
+								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
 
 							export async function addPlaylist<T>(

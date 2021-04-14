@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage } from 'react-intl';
@@ -11,14 +11,32 @@ import {
 	UserSocialServiceName,
 } from '@lib/generated/graphql';
 
-export default function SocialLogin(): JSX.Element {
+export default function SocialLogin({
+	onSuccess,
+}: {
+	onSuccess?: () => void;
+}): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 
 	const {
 		mutate: mutateSocial,
-		data: dataSocial,
 		isSuccess: isSuccessSocial,
-	} = useRegisterSocialMutation();
+	} = useRegisterSocialMutation({
+		onSuccess: (response) => {
+			const errors = response?.loginSocial.errors || [];
+			const token = response?.loginSocial.authenticatedUser?.sessionToken;
+
+			if (errors.length) {
+				setErrors(errors.map((e) => e.message));
+			}
+
+			if (token) {
+				Cookie.set('avSession', token);
+			}
+
+			onSuccess && onSuccess();
+		},
+	});
 
 	const { signIn } = useGoogleLogin({
 		clientId: GOOGLE_CLIENT_ID,
@@ -42,19 +60,6 @@ export default function SocialLogin(): JSX.Element {
 			});
 		},
 	});
-
-	useEffect(() => {
-		const errors = dataSocial?.loginSocial.errors || [];
-		const token = dataSocial?.loginSocial.authenticatedUser?.sessionToken;
-
-		if (errors.length) {
-			setErrors(errors.map((e) => e.message));
-		}
-
-		if (token) {
-			Cookie.set('avSession', token);
-		}
-	}, [dataSocial]);
 
 	if (isSuccessSocial && !errors.length) {
 		return (

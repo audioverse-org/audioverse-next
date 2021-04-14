@@ -5,22 +5,19 @@ import Cookie from 'js-cookie';
 // @ts-ignore because this is a helper function in manual mock
 import { __setFacebookResponse } from 'react-facebook-login';
 
+import { sleep } from '@lib/api/sleep';
 import {
 	RegisterDocument,
 	RegisterIsLoggedInDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
-import { buildServerRenderer, mockedFetchApi, sleep } from '@lib/test/helpers';
-import Register, {
-	getServerSideProps,
-} from '@pages/[language]/account/register';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import Register from '@pages/[language]/account/register';
 
 jest.mock('js-cookie');
 jest.mock('react-google-login');
 
-const renderPage = buildServerRenderer(Register, getServerSideProps, {
-	language: 'en',
-});
+const renderPage = buildRenderer(Register);
 
 describe('register page', () => {
 	it('renders', async () => {

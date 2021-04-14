@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
+import { sleep } from '@lib/api/sleep';
 import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
@@ -114,14 +115,7 @@ export async function renderWithIntl<T>(
 export async function renderWithQueryProvider(
 	ui: ReactElement
 ): Promise<RenderResult & { queryClient: QueryClient }> {
-	const queryClient = new QueryClient({
-		defaultOptions: {
-			queries: {
-				retry: false,
-			},
-		},
-	});
-
+	const queryClient = new QueryClient();
 	const result = await render(
 		<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
 	);
@@ -130,19 +124,6 @@ export async function renderWithQueryProvider(
 		...result,
 		queryClient,
 	};
-}
-
-export function sleep<Payload>({
-	ms = 50,
-	value = undefined,
-}: { ms?: number; value?: Payload | undefined } = {}): Promise<
-	Payload | undefined
-> {
-	return new Promise((resolve) =>
-		setTimeout(() => {
-			resolve(value);
-		}, ms)
-	);
 }
 
 export function resolveWithDelay(

@@ -10,6 +10,7 @@ import * as api from '@lib/api';
 import { login } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import * as graphql from '@lib/generated/graphql';
+import { GetProfileDataDocument } from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithQueryProvider } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
@@ -162,5 +163,14 @@ describe('profile page', () => {
 		userEvent.click(getByText('login'));
 
 		expect(login).toBeCalledWith('the_email', 'the_password');
+	});
+
+	it('does not fetch profile data if not logged in', async () => {
+		await renderWithQueryProvider(<Profile />);
+
+		expect(mockedFetchApi).not.toBeCalledWith(
+			GetProfileDataDocument,
+			expect.anything()
+		);
 	});
 });
