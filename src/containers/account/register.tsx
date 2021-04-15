@@ -50,6 +50,7 @@ function Register(): JSX.Element {
 	}
 
 	if (isSuccess && !errors.length) {
+		// TODO: Consider doing a redirect.
 		return (
 			<p>
 				<FormattedMessage

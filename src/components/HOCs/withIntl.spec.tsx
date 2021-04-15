@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 import Favorite from '@components/molecules/favorite';
+import Login from '@components/molecules/login';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
@@ -410,6 +411,7 @@ describe('localization usage', () => {
 		[Playlists, {}],
 		[Logout, {}],
 		[Register, {}],
+		[Login, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

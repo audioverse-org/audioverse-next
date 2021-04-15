@@ -2,7 +2,6 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
-import React from 'react';
 import { QueryClient } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
@@ -11,7 +10,7 @@ import { login } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import * as graphql from '@lib/generated/graphql';
 import { GetProfileDataDocument } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithQueryProvider } from '@lib/test/helpers';
+import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
 jest.mock('@lib/api/login');
@@ -21,7 +20,7 @@ async function renderPage() {
 		req: {} as any,
 	} as GetServerSidePropsContext)) as any;
 
-	return renderWithQueryProvider(<Profile {...props} />);
+	return renderWithIntl(Profile, props);
 }
 
 describe('profile page', () => {
@@ -166,7 +165,7 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
-		await renderWithQueryProvider(<Profile />);
+		await renderWithIntl(Profile, {});
 
 		expect(mockedFetchApi).not.toBeCalledWith(
 			GetProfileDataDocument,

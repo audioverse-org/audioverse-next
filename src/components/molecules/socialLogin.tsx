@@ -3,7 +3,7 @@ import _ from 'lodash';
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
 import { useGoogleLogin } from 'react-google-login';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import {
@@ -17,6 +17,7 @@ export default function SocialLogin({
 	onSuccess?: () => void;
 }): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
+	const intl = useIntl();
 
 	const {
 		mutate: mutateSocial,
@@ -83,7 +84,11 @@ export default function SocialLogin({
 
 			<FacebookLogin
 				appId={FACEBOOK_APP_ID}
-				textButton={'continue with Facebook'}
+				textButton={intl.formatMessage({
+					id: 'socialLogin__facebookButton',
+					defaultMessage: 'continue with Facebook',
+					description: 'social login facebook button',
+				})}
 				callback={(response) => {
 					const name = _.get(response, 'name', '');
 					const [givenName, surname] = name.split(' ');
@@ -108,7 +113,13 @@ export default function SocialLogin({
 				}}
 			/>
 
-			<button onClick={signIn}>continue with Google</button>
+			<button onClick={signIn}>
+				{intl.formatMessage({
+					id: 'socialLogin__googleButton',
+					defaultMessage: 'continue with Google',
+					description: 'social login google button',
+				})}
+			</button>
 		</>
 	);
 }
