@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import { makeSeriesListRoute } from '@lib/routes';
@@ -11,6 +11,7 @@ import styles from './header.module.scss';
 
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
+	const intl = useIntl();
 
 	return (
 		<header className={styles.header}>
@@ -52,7 +53,13 @@ const Header = (): JSX.Element => {
 					/>
 				</a>
 			</h1>
-			<input placeholder={'Search'} />
+			<input
+				placeholder={intl.formatMessage({
+					id: 'header__searchBoxPlaceholder',
+					defaultMessage: 'Search',
+					description: 'header search box placeholder',
+				})}
+			/>
 			<a href={`/${languageRoute}/give`}>
 				<FormattedMessage
 					id="header__donateButton"
