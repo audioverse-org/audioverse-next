@@ -6,12 +6,12 @@ import SpeakerName from '@components/molecules/speakerName';
 import * as api from '@lib/api';
 import { isPersonFavorited } from '@lib/api';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
+import { sleep } from '@lib/sleep';
 import {
 	renderWithIntl,
 	resolveWithDelay,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
-import { sleep } from '@lib/test/sleep';
 
 jest.mock('react-toastify');
 jest.mock('@lib/api/setPersonFavorited');

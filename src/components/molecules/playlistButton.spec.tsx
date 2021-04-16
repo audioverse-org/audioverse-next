@@ -14,6 +14,7 @@ import {
 	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
 } from '@lib/generated/graphql';
+import { sleep } from '@lib/sleep';
 import {
 	makePlaylistButtonData,
 	mockedFetchApi,
@@ -21,7 +22,6 @@ import {
 	resolveWithDelay,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
-import { sleep } from '@lib/test/sleep';
 
 jest.mock('@lib/api/setPlaylistMembership');
 

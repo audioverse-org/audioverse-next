@@ -10,8 +10,8 @@ import {
 	RegisterIsLoggedInDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
+import { sleep } from '@lib/sleep';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
-import { sleep } from '@lib/test/sleep';
 import Register from '@pages/[language]/account/register';
 
 jest.mock('js-cookie');

@@ -4,6 +4,7 @@ import { parse } from 'graphql';
 import { print } from 'graphql/language/printer';
 
 import getCookies from '@lib/getCookies';
+import { sleep } from '@lib/sleep';
 
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
 
@@ -43,6 +44,17 @@ const removeDuplicateFragments = (query: string): string => {
 	return print(newAst);
 };
 
+async function getResponse(headers: any, query: string, variables: unknown) {
+	return fetch(API_URL, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify({
+			query,
+			variables,
+		}),
+	});
+}
+
 export async function fetchApi(
 	query: string,
 	{ variables = {} } = {}
@@ -60,16 +72,14 @@ export async function fetchApi(
 		headers['x-av-session'] = cookies.avSession;
 	}
 
-	const res = await fetch(API_URL, {
-		method: 'POST',
-		headers,
-		body: JSON.stringify({
-			query,
-			variables,
-		}),
-	});
+	let res = await getResponse(headers, query, variables);
+	let text = await res.text();
 
-	const text = await res.text();
+	if (!res.ok) {
+		await sleep({ ms: 10000 });
+		res = await getResponse(headers, query, variables);
+		text = await res.text();
+	}
 
 	if (!res.ok) {
 		console.error({ text, res, query, variables, headers });
