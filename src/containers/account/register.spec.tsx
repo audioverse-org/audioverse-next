@@ -5,13 +5,13 @@ import Cookie from 'js-cookie';
 // @ts-ignore because this is a helper function in manual mock
 import { __setFacebookResponse } from 'react-facebook-login';
 
-import { sleep } from '@lib/api/sleep';
 import {
 	RegisterDocument,
 	RegisterIsLoggedInDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { sleep } from '@lib/test/sleep';
 import Register from '@pages/[language]/account/register';
 
 jest.mock('js-cookie');

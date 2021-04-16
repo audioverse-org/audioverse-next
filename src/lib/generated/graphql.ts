@@ -4675,6 +4675,20 @@ export type WebsiteEdge = {
   node: Website;
 };
 
+export type GetWithAuthGuardDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWithAuthGuardDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'email'>
+    ) }
+  )> }
+);
+
 export type CopyrightInfoFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'copyrightYear'>
@@ -6162,20 +6176,6 @@ export type GetTestimoniesPathsDataQuery = (
   ) }
 );
 
-export type GetWithAuthGuardDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetWithAuthGuardDataQuery = (
-  { __typename?: 'Query' }
-  & { me: Maybe<(
-    { __typename?: 'AuthenticatedUser' }
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'email'>
-    ) }
-  )> }
-);
-
 export type AddPlaylistMutationVariables = Exact<{
   language: Language;
   title: Scalars['String'];
@@ -6366,6 +6366,27 @@ export const WriteFeedFileFragmentDoc = `
   }
 }
     `;
+export const GetWithAuthGuardDataDocument = `
+    query getWithAuthGuardData {
+  me {
+    user {
+      email
+    }
+  }
+}
+    `;
+export const useGetWithAuthGuardDataQuery = <
+      TData = GetWithAuthGuardDataQuery,
+      TError = unknown
+    >(
+      variables?: GetWithAuthGuardDataQueryVariables, 
+      options?: UseQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
+    ) => 
+    useQuery<GetWithAuthGuardDataQuery, TError, TData>(
+      ['getWithAuthGuardData', variables],
+      graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
+      options
+    );
 export const GetPlaylistButtonDataDocument = `
     query getPlaylistButtonData($language: Language!, $recordingId: ID!) {
   me {
@@ -8027,27 +8048,6 @@ export const useGetTestimoniesPathsDataQuery = <
       graphqlFetcher<GetTestimoniesPathsDataQuery, GetTestimoniesPathsDataQueryVariables>(GetTestimoniesPathsDataDocument, variables),
       options
     );
-export const GetWithAuthGuardDataDocument = `
-    query getWithAuthGuardData {
-  me {
-    user {
-      email
-    }
-  }
-}
-    `;
-export const useGetWithAuthGuardDataQuery = <
-      TData = GetWithAuthGuardDataQuery,
-      TError = unknown
-    >(
-      variables?: GetWithAuthGuardDataQueryVariables, 
-      options?: UseQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
-    ) => 
-    useQuery<GetWithAuthGuardDataQuery, TError, TData>(
-      ['getWithAuthGuardData', variables],
-      graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
-      options
-    );
 export const AddPlaylistDocument = `
     mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
   playlistAdd(
@@ -8066,6 +8066,12 @@ export const useAddPlaylistMutation = <
       options
     );
 import { fetchApi } from '@lib/api/fetchApi' 
+
+							export async function getWithAuthGuardData<T>(
+								variables: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
+							): Promise<GetWithAuthGuardDataQuery> {
+								return fetchApi(GetWithAuthGuardDataDocument, { variables });
+							}
 
 
 
@@ -8463,12 +8469,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 							): Promise<GetTestimoniesPathsDataQuery> {
 								return fetchApi(GetTestimoniesPathsDataDocument, { variables });
-							}
-
-							export async function getWithAuthGuardData<T>(
-								variables: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
-							): Promise<GetWithAuthGuardDataQuery> {
-								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
 
 							export async function addPlaylist<T>(

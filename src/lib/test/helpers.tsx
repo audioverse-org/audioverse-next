@@ -12,8 +12,8 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import { sleep } from '@lib/api/sleep';
 import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
+import { sleep } from '@lib/test/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
 

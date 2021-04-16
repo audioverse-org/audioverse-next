@@ -4,7 +4,10 @@ import { when } from 'jest-when';
 import React from 'react';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
-import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
+import {
+	GetWithAuthGuardDataDocument,
+	RegisterSocialDocument,
+} from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 
 function render() {
@@ -41,6 +44,17 @@ describe('withAuthGuard', () => {
 		const { getByText, queryByText } = await render();
 
 		expect(queryByText('hello world')).not.toBeInTheDocument();
+
+		when(mockedFetchApi)
+			.calledWith(RegisterSocialDocument, expect.anything())
+			.mockResolvedValue({
+				loginSocial: {
+					errors: [],
+					authenticatedUser: {
+						sessionToken: 'the_token',
+					},
+				},
+			});
 
 		when(mockedFetchApi)
 			.calledWith(GetWithAuthGuardDataDocument, expect.anything())

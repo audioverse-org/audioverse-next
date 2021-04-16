@@ -10,6 +10,7 @@ import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
 } from '@lib/generated/graphql';
+import useDidUnmount from '@lib/useDidUnmount';
 
 export default function SocialLogin({
 	onSuccess,
@@ -18,6 +19,7 @@ export default function SocialLogin({
 }): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
+	const didUnmount = useDidUnmount();
 
 	const {
 		mutate: mutateSocial,
@@ -27,15 +29,12 @@ export default function SocialLogin({
 			const errors = response?.loginSocial.errors || [];
 			const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
-			if (errors.length) {
+			if (token && !errors.length) {
+				Cookie.set('avSession', token);
+				onSuccess && onSuccess();
+			} else if (!didUnmount.current) {
 				setErrors(errors.map((e) => e.message));
 			}
-
-			if (token) {
-				Cookie.set('avSession', token);
-			}
-
-			onSuccess && onSuccess();
 		},
 	});
 

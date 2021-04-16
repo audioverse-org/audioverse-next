@@ -10,7 +10,6 @@ import { when } from 'jest-when';
 
 import PlaylistButton from '@components/molecules/playlistButton';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { sleep } from '@lib/api/sleep';
 import {
 	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
@@ -22,6 +21,7 @@ import {
 	resolveWithDelay,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
+import { sleep } from '@lib/test/sleep';
 
 jest.mock('@lib/api/setPlaylistMembership');
 
