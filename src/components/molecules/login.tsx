@@ -4,6 +4,7 @@ import { useQueryClient } from 'react-query';
 
 import SocialLogin from '@components/molecules/socialLogin';
 import { login } from '@lib/api';
+import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
 
 export default function Login(): JSX.Element {
 	const queryClient = useQueryClient();
@@ -12,6 +13,25 @@ export default function Login(): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+	const [successMessage, setSuccessMessage] = useState('');
+
+	const { mutate } = useLoginForgotPasswordMutation({
+		onSuccess: (data) => {
+			const errors = data.userRecover.errors;
+			if (errors.length) {
+				// TODO: display all errors, not just first
+				setError(errors[0].message);
+			} else {
+				// TODO: localize
+				setSuccessMessage('Check your email for a password reset link');
+			}
+		},
+		onError: () => {
+			setError(
+				'Something went wrong while trying to send a password reset link'
+			);
+		},
+	});
 
 	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -23,7 +43,6 @@ export default function Login(): JSX.Element {
 		}
 	};
 
-	// TODO: Localize input placeholders
 	return (
 		<>
 			<SocialLogin
@@ -42,6 +61,7 @@ export default function Login(): JSX.Element {
 
 			<form onSubmit={onSubmit} data-testid={'loginForm'}>
 				{error ? <p>{error}</p> : null}
+				{successMessage ? <p>{successMessage}</p> : null}
 
 				<input
 					placeholder={intl.formatMessage({
@@ -64,7 +84,12 @@ export default function Login(): JSX.Element {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 
-				<button>
+				<button
+					onClick={(e) => {
+						e.preventDefault();
+						mutate({ email });
+					}}
+				>
 					<FormattedMessage
 						id={'loginForm__forgotPasswordButton'}
 						defaultMessage={'forgot password'}

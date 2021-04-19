@@ -1,0 +1,8 @@
+mutation loginForgotPassword($email: String!) {
+	userRecover(email: $email) {
+		errors {
+			message
+		}
+		success
+	}
+}

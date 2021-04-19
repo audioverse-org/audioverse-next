@@ -4724,6 +4724,23 @@ export type CopyrightInfosFragment = (
   & CopyrightInfoFragment
 );
 
+export type LoginForgotPasswordMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type LoginForgotPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { userRecover: (
+    { __typename?: 'SuccessPayload' }
+    & Pick<SuccessPayload, 'success'>
+    & { errors: Array<(
+      { __typename?: 'InputValidationError' }
+      & Pick<InputValidationError, 'message'>
+    )> }
+  ) }
+);
+
 export type GetPlaylistButtonDataQueryVariables = Exact<{
   language: Language;
   recordingId: Scalars['ID'];
@@ -6385,6 +6402,24 @@ export const useGetWithAuthGuardDataQuery = <
     useQuery<GetWithAuthGuardDataQuery, TError, TData>(
       ['getWithAuthGuardData', variables],
       graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
+      options
+    );
+export const LoginForgotPasswordDocument = `
+    mutation loginForgotPassword($email: String!) {
+  userRecover(email: $email) {
+    errors {
+      message
+    }
+    success
+  }
+}
+    `;
+export const useLoginForgotPasswordMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<LoginForgotPasswordMutation, TError, LoginForgotPasswordMutationVariables, TContext>) => 
+    useMutation<LoginForgotPasswordMutation, TError, LoginForgotPasswordMutationVariables, TContext>(
+      (variables?: LoginForgotPasswordMutationVariables) => graphqlFetcher<LoginForgotPasswordMutation, LoginForgotPasswordMutationVariables>(LoginForgotPasswordDocument, variables)(),
       options
     );
 export const GetPlaylistButtonDataDocument = `
@@ -8074,6 +8109,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 							}
 
 
+
+							export async function loginForgotPassword<T>(
+								variables: ExactAlt<T, LoginForgotPasswordMutationVariables>
+							): Promise<LoginForgotPasswordMutation> {
+								return fetchApi(LoginForgotPasswordDocument, { variables });
+							}
 
 							export async function getPlaylistButtonData<T>(
 								variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
