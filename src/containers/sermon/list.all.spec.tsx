@@ -97,11 +97,11 @@ describe('sermons list page', () => {
 	});
 
 	it('generates all pages in language', async () => {
-		loadSermonListPagePathsData(100 * ENTRIES_PER_PAGE);
+		loadSermonListPagePathsData(50 * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
 
-		const expected = 100 * Object.keys(LANGUAGES).length;
+		const expected = 50 * Object.keys(LANGUAGES).length;
 		expect(result.paths.length).toBe(expected);
 	});
 
