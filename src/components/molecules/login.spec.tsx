@@ -1,13 +1,14 @@
+import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
+
 import Login from '@components/molecules/login';
+import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import {
 	mockedFetchApi,
 	renderWithIntl,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
-import userEvent from '@testing-library/user-event';
-import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
-import { waitFor } from '@testing-library/react';
-import { when } from 'jest-when';
 
 function loadForgotPasswordResponse({
 	success = true,
