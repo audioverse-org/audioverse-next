@@ -12,24 +12,33 @@ export default function Login(): JSX.Element {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
+	const [errors, setErrors] = useState<string[]>([]);
 	const [successMessage, setSuccessMessage] = useState('');
 
 	const { mutate } = useLoginForgotPasswordMutation({
 		onSuccess: (data) => {
 			const errors = data.userRecover.errors;
 			if (errors.length) {
-				// TODO: display all errors, not just first
-				setError(errors[0].message);
+				setErrors(errors.map((e) => e.message));
 			} else {
-				// TODO: localize
-				setSuccessMessage('Check your email for a password reset link');
+				setSuccessMessage(
+					intl.formatMessage({
+						id: 'loginForm__resetPasswordSuccessMessage',
+						defaultMessage: 'Check your email for a password reset link',
+						description: 'reset password success message',
+					})
+				);
 			}
 		},
 		onError: () => {
-			setError(
-				'Something went wrong while trying to send a password reset link'
-			);
+			setErrors([
+				intl.formatMessage({
+					id: 'loginForm__resetPasswordErrorMessage',
+					defaultMessage:
+						'Something went wrong while trying to send a password reset link',
+					description: 'reset password error message',
+				}),
+			]);
 		},
 	});
 
@@ -39,7 +48,7 @@ export default function Login(): JSX.Element {
 			await login(email, password);
 			await queryClient.invalidateQueries();
 		} catch (e) {
-			setError('Login failed');
+			setErrors(['Login failed']);
 		}
 	};
 
@@ -60,7 +69,11 @@ export default function Login(): JSX.Element {
 			</p>
 
 			<form onSubmit={onSubmit} data-testid={'loginForm'}>
-				{error ? <p>{error}</p> : null}
+				<ul>
+					{errors.map((e) => (
+						<li key={e}>{e}</li>
+					))}
+				</ul>
 				{successMessage ? <p>{successMessage}</p> : null}
 
 				<input

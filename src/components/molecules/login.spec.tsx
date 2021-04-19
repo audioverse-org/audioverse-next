@@ -124,4 +124,20 @@ describe('login form', () => {
 			});
 		});
 	});
+
+	it('displays multiple errors', async () => {
+		loadForgotPasswordResponse({
+			success: false,
+			errors: [{ message: 'error_one' }, { message: 'error_two' }],
+		});
+
+		const { getByText, getByPlaceholderText } = await renderWithIntl(Login, {});
+
+		userEvent.type(getByPlaceholderText('email'), 'the_email');
+		userEvent.click(getByText('forgot password'));
+
+		await waitFor(() => {
+			expect(getByText('error_two'));
+		});
+	});
 });
