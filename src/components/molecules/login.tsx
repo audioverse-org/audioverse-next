@@ -4,6 +4,7 @@ import { useQueryClient } from 'react-query';
 
 import SocialLogin from '@components/molecules/socialLogin';
 import { login } from '@lib/api';
+import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
 
 export default function Login(): JSX.Element {
 	const queryClient = useQueryClient();
@@ -11,7 +12,35 @@ export default function Login(): JSX.Element {
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
+	const [errors, setErrors] = useState<string[]>([]);
+	const [successMessage, setSuccessMessage] = useState('');
+
+	const { mutate } = useLoginForgotPasswordMutation({
+		onSuccess: (data) => {
+			const errors = data.userRecover.errors;
+			if (errors.length) {
+				setErrors(errors.map((e) => e.message));
+			} else {
+				setSuccessMessage(
+					intl.formatMessage({
+						id: 'loginForm__resetPasswordSuccessMessage',
+						defaultMessage: 'Check your email for a password reset link',
+						description: 'reset password success message',
+					})
+				);
+			}
+		},
+		onError: () => {
+			setErrors([
+				intl.formatMessage({
+					id: 'loginForm__resetPasswordErrorMessage',
+					defaultMessage:
+						'Something went wrong while trying to send a password reset link',
+					description: 'reset password error message',
+				}),
+			]);
+		},
+	});
 
 	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -19,11 +48,10 @@ export default function Login(): JSX.Element {
 			await login(email, password);
 			await queryClient.invalidateQueries();
 		} catch (e) {
-			setError('Login failed');
+			setErrors(['Login failed']);
 		}
 	};
 
-	// TODO: Localize input placeholders
 	return (
 		<>
 			<SocialLogin
@@ -41,7 +69,12 @@ export default function Login(): JSX.Element {
 			</p>
 
 			<form onSubmit={onSubmit} data-testid={'loginForm'}>
-				{error ? <p>{error}</p> : null}
+				<ul>
+					{errors.map((e) => (
+						<li key={e}>{e}</li>
+					))}
+				</ul>
+				{successMessage ? <p>{successMessage}</p> : null}
 
 				<input
 					placeholder={intl.formatMessage({
@@ -64,7 +97,12 @@ export default function Login(): JSX.Element {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 
-				<button>
+				<button
+					onClick={(e) => {
+						e.preventDefault();
+						mutate({ email });
+					}}
+				>
 					<FormattedMessage
 						id={'loginForm__forgotPasswordButton'}
 						defaultMessage={'forgot password'}

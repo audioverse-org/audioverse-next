@@ -1,5 +1,6 @@
 import Cookie from 'js-cookie';
 
+// TODO: use graphql codegen for this
 const query = `
 mutation($email: String!, $password: String!) {
 	login(input: { email: $email, password: $password }) {
