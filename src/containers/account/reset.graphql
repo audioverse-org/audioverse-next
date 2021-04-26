@@ -1,0 +1,8 @@
+mutation resetPassword($token: String!, $password: String!) {
+	userReset(password: $password, token: $token) {
+		errors {
+			message
+		}
+		success
+	}
+}

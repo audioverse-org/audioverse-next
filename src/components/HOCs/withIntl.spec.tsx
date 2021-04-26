@@ -12,6 +12,7 @@ import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import Register from '@containers/account/register';
+import Reset from '@containers/account/reset';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
@@ -412,6 +413,7 @@ describe('localization usage', () => {
 		[Logout, {}],
 		[Register, {}],
 		[Login, {}],
+		[Reset, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
