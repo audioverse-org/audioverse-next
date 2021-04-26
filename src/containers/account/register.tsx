@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { useRegisterMutation } from '@lib/generated/graphql';
+import SocialLogin from '@components/molecules/socialLogin';
+import {
+	useRegisterIsLoggedInQuery,
+	useRegisterMutation,
+} from '@lib/generated/graphql';
 
 function Register(): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
@@ -9,17 +13,27 @@ function Register(): JSX.Element {
 	const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 
+	const {
+		data: dataLoggedIn,
+		isLoading: isLoadingLoggedIn,
+	} = useRegisterIsLoggedInQuery({}, { retry: false });
+
+	const {
+		mutate,
+		isLoading,
+		data: dataRegister,
+		isSuccess,
+	} = useRegisterMutation();
+
 	const intl = useIntl();
 
-	const { mutate, isLoading, data, isSuccess } = useRegisterMutation();
-
 	useEffect(() => {
-		if (data?.signup.errors.length) {
-			setErrors(data?.signup.errors.map((e) => e.message));
+		if (dataRegister?.signup.errors.length) {
+			setErrors(dataRegister?.signup.errors.map((e) => e.message));
 		}
-	}, [data]);
+	}, [dataRegister]);
 
-	if (isLoading) {
+	if (isLoading || isLoadingLoggedIn) {
 		return (
 			<p>
 				<FormattedMessage
@@ -31,7 +45,12 @@ function Register(): JSX.Element {
 		);
 	}
 
+	if (dataLoggedIn?.me?.user.email) {
+		return <p>You are already logged in</p>;
+	}
+
 	if (isSuccess && !errors.length) {
+		// TODO: Consider doing a redirect.
 		return (
 			<p>
 				<FormattedMessage
@@ -45,11 +64,17 @@ function Register(): JSX.Element {
 
 	return (
 		<>
+			<SocialLogin />
+
+			<p>or</p>
+
+			{/* TODO: show errors inline */}
 			<ul>
 				{errors.map((e) => (
 					<li key={e}>{e}</li>
 				))}
 			</ul>
+
 			<input
 				type="email"
 				placeholder={intl.formatMessage({

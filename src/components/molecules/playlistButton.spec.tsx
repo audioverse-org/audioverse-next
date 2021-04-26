@@ -14,12 +14,12 @@ import {
 	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
 } from '@lib/generated/graphql';
+import { sleep } from '@lib/sleep';
 import {
 	makePlaylistButtonData,
 	mockedFetchApi,
 	renderWithIntl,
 	resolveWithDelay,
-	sleep,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
 

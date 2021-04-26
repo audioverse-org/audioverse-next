@@ -5,3 +5,36 @@ mutation register($email: String!, $password: String!) {
 		}
 	}
 }
+
+mutation registerSocial(
+	$socialId: String!
+	$socialName: UserSocialServiceName!
+	$socialToken: String!
+	$givenName: String
+	$surname: String
+) {
+	loginSocial(
+		input: {
+			socialId: $socialId
+			socialName: $socialName
+			socialToken: $socialToken
+			givenName: $givenName
+			surname: $surname
+		}
+	) {
+		authenticatedUser {
+			sessionToken
+		}
+		errors {
+			message
+		}
+	}
+}
+
+query registerIsLoggedIn {
+	me {
+		user {
+			email
+		}
+	}
+}

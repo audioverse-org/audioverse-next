@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import Protected from '@containers/protected';
+import withAuthGuard from '@components/HOCs/withAuthGuard';
 import { useGetProfileDataQuery } from '@lib/generated/graphql';
 
-export default function Profile(): JSX.Element {
+function Profile(): JSX.Element {
 	const { data = undefined } = useGetProfileDataQuery() || {};
 	const [givenName, setGivenName] = useState('');
 
@@ -14,14 +14,14 @@ export default function Profile(): JSX.Element {
 	// TODO: make sure givenName doesn't get populated with email on login (why??)
 	// TODO: fix err: "A component is changing an uncontrolled input of type text to be controlled."
 	return (
-		<Protected>
-			<form>
-				<input
-					type={'text'}
-					value={givenName}
-					onChange={(e) => setGivenName(e.target.value)}
-				/>
-			</form>
-		</Protected>
+		<form>
+			<input
+				type={'text'}
+				value={givenName}
+				onChange={(e) => setGivenName(e.target.value)}
+			/>
+		</form>
 	);
 }
+
+export default withAuthGuard(Profile);

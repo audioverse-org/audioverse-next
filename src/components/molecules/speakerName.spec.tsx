@@ -6,10 +6,10 @@ import SpeakerName from '@components/molecules/speakerName';
 import * as api from '@lib/api';
 import { isPersonFavorited } from '@lib/api';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
+import { sleep } from '@lib/sleep';
 import {
 	renderWithIntl,
 	resolveWithDelay,
-	sleep,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
 
