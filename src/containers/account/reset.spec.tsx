@@ -1,14 +1,15 @@
+import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
+
+import { ResetPasswordDocument } from '@lib/generated/graphql';
+import { sleep } from '@lib/sleep';
 import {
 	buildRenderer,
 	mockedFetchApi,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
 import Reset from '@pages/[language]/account/reset';
-import userEvent from '@testing-library/user-event';
-import { ResetPasswordDocument } from '@lib/generated/graphql';
-import { waitFor } from '@testing-library/react';
-import { sleep } from '@lib/sleep';
-import { when } from 'jest-when';
 
 const renderPage = buildRenderer(Reset);
 

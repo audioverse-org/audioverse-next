@@ -1,7 +1,8 @@
 import React, { FormEvent, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { useResetPasswordMutation } from '@lib/generated/graphql';
 import { useQueryString } from '@lib/useQueryString';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 function Reset(): JSX.Element {
 	const token = useQueryString('token') || '';

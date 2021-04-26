@@ -12,6 +12,7 @@ import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import Register from '@containers/account/register';
+import Reset from '@containers/account/reset';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
@@ -43,7 +44,6 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
-import Reset from '@containers/account/reset';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
