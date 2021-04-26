@@ -262,8 +262,12 @@ export type BibleVerse = {
 export type BlogPost = Node & {
   __typename?: 'BlogPost';
   body: Scalars['String'];
+  /** The number of days to feature blog post. */
+  featuredDuration: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   image: Maybe<Image>;
+  publishDate: Scalars['DateTime'];
+  teaser: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -273,6 +277,17 @@ export type BlogPostConnection = {
   edges: Maybe<Array<BlogPostEdge>>;
   nodes: Maybe<Array<BlogPost>>;
   pageInfo: PageInfo;
+};
+
+export type BlogPostCreateInput = {
+  body: Scalars['String'];
+  /** The number of days to feature blog post. */
+  featuredDuration: Maybe<Scalars['Int']>;
+  image: Maybe<ImageInput>;
+  language: Language;
+  publishDate: Maybe<Scalars['DateTime']>;
+  teaser: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type BlogPostEdge = {
@@ -286,10 +301,26 @@ export type BlogPostOrder = {
   field: BlogPostSortableField;
 };
 
+export type BlogPostPayload = {
+  __typename?: 'BlogPostPayload';
+  blogPost: Maybe<BlogPost>;
+  errors: Array<InputValidationError>;
+};
+
 /** Properties by which blog post connections can be ordered. */
 export enum BlogPostSortableField {
   PublishedAt = 'PUBLISHED_AT'
 }
+
+export type BlogPostUpdateInput = {
+  body: Maybe<Scalars['String']>;
+  /** The number of days to feature blog post. */
+  featuredDuration: Maybe<Scalars['Int']>;
+  image: Maybe<ImageInput>;
+  publishDate: Maybe<Scalars['DateTime']>;
+  teaser: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+};
 
 export type CatalogHistoryComment = {
   __typename?: 'CatalogHistoryComment';
@@ -861,6 +892,7 @@ export type MediaFileUpload = Node & {
   /** The presigned part upload URLs. Unavailable after the upload has completed. */
   partUploadUrls: Maybe<Array<Scalars['String']>>;
   recording: Maybe<Recording>;
+  transcodingStatus: MediaFileTranscodingStatus;
   updatedAt: Maybe<Scalars['DateTime']>;
   url: Maybe<Scalars['URL']>;
 };
@@ -1176,6 +1208,9 @@ export type MediaReleaseUpdateInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  blogPostCreate: BlogPostPayload;
+  blogPostDelete: SuccessPayload;
+  blogPostUpdate: BlogPostPayload;
   catalogHistoryCommentDelete: SuccessPayload;
   catalogHistoryCommentUpdate: CatalogHistoryItemPayload;
   collectionCreate: CollectionPayload;
@@ -1244,6 +1279,8 @@ export type Mutation = {
   recordingScreeningTechnicalEvaluate: RecordingPayload;
   /** Deletes a recording's transcript, if extant. */
   recordingTranscriptDelete: SuccessPayload;
+  /** Update a recording's transcript. */
+  recordingTranscriptUpdate: RecordingPayload;
   /** Requests a recording be enqueued for automated transcription. */
   recordingTranscriptionRequest: SuccessPayload;
   recordingUnarchive: SuccessPayload;
@@ -1273,6 +1310,22 @@ export type Mutation = {
   /** Resets a user's password with a token received from `userRecover`. */
   userReset: SuccessPayload;
   userUpdate: UserPayload;
+};
+
+
+export type MutationBlogPostCreateArgs = {
+  input: BlogPostCreateInput;
+};
+
+
+export type MutationBlogPostDeleteArgs = {
+  blogPostId: Scalars['ID'];
+};
+
+
+export type MutationBlogPostUpdateArgs = {
+  blogPostId: Scalars['ID'];
+  input: BlogPostUpdateInput;
 };
 
 
@@ -1616,6 +1669,12 @@ export type MutationRecordingScreeningTechnicalEvaluateArgs = {
 
 
 export type MutationRecordingTranscriptDeleteArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
+export type MutationRecordingTranscriptUpdateArgs = {
+  input: TranscriptUpdateInput;
   recordingId: Scalars['ID'];
 };
 
@@ -2140,6 +2199,7 @@ export type QueryBlogPostArgs = {
 export type QueryBlogPostsArgs = {
   after: Maybe<Scalars['String']>;
   first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<BlogPostOrder>>;
@@ -2210,6 +2270,7 @@ export type QueryDistributionAgreementsArgs = {
 export type QueryFeaturedBlogPostsArgs = {
   after: Maybe<Scalars['String']>;
   first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
   offset: Maybe<Scalars['Int']>;
 };
@@ -2752,14 +2813,14 @@ export type Recording = Node & {
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
   /** Whether the recording can be manually enqueued for transcribing. */
-  canRequestTranscription: Scalars['Boolean'];
+  canRequestTranscription: Maybe<Scalars['Boolean']>;
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   canonicalUrl: Scalars['URL'];
   collection: Maybe<Collection>;
-  contentScreeningCheckouts: Array<RecordingScreeningCheckout>;
-  contentScreeningEvaluations: Array<RecordingContentScreeningEvaluation>;
-  contentScreeningStatus: RecordingContentScreeningStatus;
+  contentScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
+  contentScreeningEvaluations: Maybe<Array<RecordingContentScreeningEvaluation>>;
+  contentScreeningStatus: Maybe<RecordingContentScreeningStatus>;
   contentType: RecordingContentType;
   copyrightYear: Maybe<Scalars['Int']>;
   coverImage: Maybe<Image>;
@@ -2779,13 +2840,14 @@ export type Recording = Node & {
   /** Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status. */
   isHidden: Scalars['Boolean'];
   language: Language;
-  legalScreeningCheckouts: Array<RecordingScreeningCheckout>;
-  legalScreeningStatus: RecordingLegalScreeningStatus;
+  legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
+  legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   notes: Maybe<Scalars['String']>;
   persons: Array<Person>;
   publishDate: Maybe<Scalars['DateTime']>;
   recordingDate: Maybe<Scalars['DateTime']>;
+  recordingTagSuggestions: RecordingTagSuggestionConnection;
   recordingTags: RecordingTagConnection;
   screeningIssues: Maybe<RecordingScreeningIssueConnection>;
   sequence: Maybe<Sequence>;
@@ -2794,8 +2856,8 @@ export type Recording = Node & {
   shareUrl: Maybe<Scalars['URL']>;
   sponsor: Maybe<Sponsor>;
   stage: RecordingStage;
-  technicalScreeningCheckouts: Array<RecordingScreeningCheckout>;
-  technicalScreeningStatus: RecordingTechnicalScreeningStatus;
+  technicalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
+  technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   title: Scalars['String'];
   transcript: Maybe<Transcript>;
   transcriptionStatus: Maybe<RecordingTranscriptionStatus>;
@@ -2835,6 +2897,13 @@ export type RecordingHistoryArgs = {
 export type RecordingPersonsArgs = {
   includeUnpublished: Maybe<Scalars['Boolean']>;
   role: Maybe<PersonsRoleField>;
+};
+
+
+export type RecordingRecordingTagSuggestionsArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
 };
 
 
@@ -3032,12 +3101,12 @@ export enum RecordingScreeningContentViewFilter {
 
 export type RecordingScreeningIssue = Node & {
   __typename?: 'RecordingScreeningIssue';
-  /** In HH:mm format. */
+  /** In HH:mm:ss format. */
   endTime: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   notes: Scalars['String'];
   screener: User;
-  /** In HH:mm format. */
+  /** In HH:mm:ss format. */
   startTime: Maybe<Scalars['String']>;
   target: RecordingScreeningIssueTarget;
   type: RecordingScreeningIssueType;
@@ -3068,11 +3137,11 @@ export type RecordingScreeningIssueEdge = {
 };
 
 export type RecordingScreeningIssueInput = {
-  /** In HH:mm format. */
+  /** In HH:mm:ss format. */
   endTime: Maybe<Scalars['String']>;
   notes: Maybe<Scalars['String']>;
   recordingScreeningIssueTypeId: Scalars['ID'];
-  /** In HH:mm format. */
+  /** In HH:mm:ss format. */
   startTime: Maybe<Scalars['String']>;
   target: RecordingScreeningIssueTarget;
 };
@@ -3161,6 +3230,25 @@ export type RecordingTagEdge = {
 export type RecordingTagInput = {
   /** The name of a tag. */
   tagName: Scalars['String'];
+};
+
+export type RecordingTagSuggestion = {
+  __typename?: 'RecordingTagSuggestion';
+  name: Scalars['String'];
+};
+
+export type RecordingTagSuggestionConnection = {
+  __typename?: 'RecordingTagSuggestionConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<RecordingTagSuggestionEdge>>;
+  nodes: Maybe<Array<RecordingTagSuggestion>>;
+  pageInfo: PageInfo;
+};
+
+export type RecordingTagSuggestionEdge = {
+  __typename?: 'RecordingTagSuggestionEdge';
+  cursor: Scalars['String'];
+  node: RecordingTagSuggestion;
 };
 
 /** The technical screening statuses of a recording. */
@@ -3395,6 +3483,7 @@ export type Sponsor = Node & UniformResourceLocatable & {
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
+  primaryDistributionAgreement: Maybe<DistributionAgreement>;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
@@ -4216,6 +4305,10 @@ export type Transcript = Node & {
   text: Scalars['String'];
 };
 
+export type TranscriptUpdateInput = {
+  transcript: Scalars['String'];
+};
+
 
 /** Represents a type that can be retrieved by a URL. */
 export type UniformResourceLocatable = {
@@ -4408,6 +4501,7 @@ export enum UserLanguage {
   Hungarian = 'HUNGARIAN',
   Indonesian = 'INDONESIAN',
   Italian = 'ITALIAN',
+  Japanese = 'JAPANESE',
   Kikuyu = 'KIKUYU',
   Korean = 'KOREAN',
   Latvian = 'LATVIAN',
@@ -4911,6 +5005,24 @@ export type RegisterIsLoggedInQuery = (
       & Pick<User, 'email'>
     ) }
   )> }
+);
+
+export type ResetPasswordMutationVariables = Exact<{
+  token: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type ResetPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { userReset: (
+    { __typename?: 'SuccessPayload' }
+    & Pick<SuccessPayload, 'success'>
+    & { errors: Array<(
+      { __typename?: 'InputValidationError' }
+      & Pick<InputValidationError, 'message'>
+    )> }
+  ) }
 );
 
 export type GetAudiobookDetailPageDataQueryVariables = Exact<{
@@ -6532,6 +6644,24 @@ export const useRegisterIsLoggedInQuery = <
       graphqlFetcher<RegisterIsLoggedInQuery, RegisterIsLoggedInQueryVariables>(RegisterIsLoggedInDocument, variables),
       options
     );
+export const ResetPasswordDocument = `
+    mutation resetPassword($token: String!, $password: String!) {
+  userReset(password: $password, token: $token) {
+    errors {
+      message
+    }
+    success
+  }
+}
+    `;
+export const useResetPasswordMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<ResetPasswordMutation, TError, ResetPasswordMutationVariables, TContext>) => 
+    useMutation<ResetPasswordMutation, TError, ResetPasswordMutationVariables, TContext>(
+      (variables?: ResetPasswordMutationVariables) => graphqlFetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(ResetPasswordDocument, variables)(),
+      options
+    );
 export const GetAudiobookDetailPageDataDocument = `
     query getAudiobookDetailPageData($id: ID!) {
   audiobook(id: $id) {
@@ -8149,6 +8279,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
 							): Promise<RegisterIsLoggedInQuery> {
 								return fetchApi(RegisterIsLoggedInDocument, { variables });
+							}
+
+							export async function resetPassword<T>(
+								variables: ExactAlt<T, ResetPasswordMutationVariables>
+							): Promise<ResetPasswordMutation> {
+								return fetchApi(ResetPasswordDocument, { variables });
 							}
 
 							export async function getAudiobookDetailPageData<T>(

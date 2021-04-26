@@ -52,6 +52,7 @@ export default function Login(): JSX.Element {
 		}
 	};
 
+	// TODO: Use a form element for accessibility
 	return (
 		<>
 			<SocialLogin
@@ -74,7 +75,7 @@ export default function Login(): JSX.Element {
 						<li key={e}>{e}</li>
 					))}
 				</ul>
-				{successMessage ? <p>{successMessage}</p> : null}
+				{successMessage && <p>{successMessage}</p>}
 
 				<input
 					placeholder={intl.formatMessage({

@@ -43,6 +43,7 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
+import Reset from '@containers/account/reset';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -412,6 +413,7 @@ describe('localization usage', () => {
 		[Logout, {}],
 		[Register, {}],
 		[Login, {}],
+		[Reset, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
