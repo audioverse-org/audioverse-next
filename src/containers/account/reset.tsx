@@ -18,7 +18,13 @@ function Reset(): JSX.Element {
 			if (errors.length) {
 				setErrors(errors.map((e) => e.message));
 			} else if (data.userReset.success) {
-				setSuccessMessage('Your password was successfully changed');
+				setSuccessMessage(
+					intl.formatMessage({
+						id: 'reset__successMessage',
+						defaultMessage: 'Your password was successfully changed',
+						description: 'password reset success message',
+					})
+				);
 			}
 		},
 		onError: () => {
