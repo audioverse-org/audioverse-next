@@ -1,9 +1,26 @@
 query getProfileData {
 	me {
 		user {
-			givenName
-			surname
-			email
+			...profile
 		}
 	}
+}
+
+mutation updateProfileData($email: String, $password: String) {
+	updateMyProfile(input: { email: $email, password: $password }) {
+		errors {
+			message
+		}
+		authenticatedUser {
+			user {
+				...profile
+			}
+		}
+	}
+}
+
+fragment profile on User {
+	givenName
+	surname
+	email
 }

@@ -3465,6 +3465,7 @@ export type Sponsor = Node & UniformResourceLocatable & {
   /** The canonical URL to this resource. */
   canonicalUrl: Scalars['String'];
   collections: CollectionConnection;
+  defaultDistributionAgreement: Maybe<DistributionAgreement>;
   description: Scalars['String'];
   distributionAgreements: Maybe<DistributionAgreementConnection>;
   email: Maybe<Scalars['String']>;
@@ -3483,7 +3484,6 @@ export type Sponsor = Node & UniformResourceLocatable & {
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
-  primaryDistributionAgreement: Maybe<DistributionAgreement>;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
@@ -4948,9 +4948,37 @@ export type GetProfileDataQuery = (
     { __typename?: 'AuthenticatedUser' }
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'givenName' | 'surname' | 'email'>
+      & ProfileFragment
     ) }
   )> }
+);
+
+export type UpdateProfileDataMutationVariables = Exact<{
+  email: Maybe<Scalars['String']>;
+  password: Maybe<Scalars['String']>;
+}>;
+
+
+export type UpdateProfileDataMutation = (
+  { __typename?: 'Mutation' }
+  & { updateMyProfile: (
+    { __typename?: 'AuthenticatedUserPayload' }
+    & { errors: Array<(
+      { __typename?: 'InputValidationError' }
+      & Pick<InputValidationError, 'message'>
+    )>, authenticatedUser: Maybe<(
+      { __typename?: 'AuthenticatedUser' }
+      & { user: (
+        { __typename?: 'User' }
+        & ProfileFragment
+      ) }
+    )> }
+  ) }
+);
+
+export type ProfileFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'givenName' | 'surname' | 'email'>
 );
 
 export type RegisterMutationVariables = Exact<{
@@ -6394,6 +6422,13 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${SpeakerNameFragmentDoc}`;
+export const ProfileFragmentDoc = `
+    fragment profile on User {
+  givenName
+  surname
+  email
+}
+    `;
 export const PlaylistFragmentDoc = `
     fragment playlist on Recording {
   id
@@ -6565,13 +6600,11 @@ export const GetProfileDataDocument = `
     query getProfileData {
   me {
     user {
-      givenName
-      surname
-      email
+      ...profile
     }
   }
 }
-    `;
+    ${ProfileFragmentDoc}`;
 export const useGetProfileDataQuery = <
       TData = GetProfileDataQuery,
       TError = unknown
@@ -6582,6 +6615,28 @@ export const useGetProfileDataQuery = <
     useQuery<GetProfileDataQuery, TError, TData>(
       ['getProfileData', variables],
       graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(GetProfileDataDocument, variables),
+      options
+    );
+export const UpdateProfileDataDocument = `
+    mutation updateProfileData($email: String, $password: String) {
+  updateMyProfile(input: {email: $email, password: $password}) {
+    errors {
+      message
+    }
+    authenticatedUser {
+      user {
+        ...profile
+      }
+    }
+  }
+}
+    ${ProfileFragmentDoc}`;
+export const useUpdateProfileDataMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<UpdateProfileDataMutation, TError, UpdateProfileDataMutationVariables, TContext>) => 
+    useMutation<UpdateProfileDataMutation, TError, UpdateProfileDataMutationVariables, TContext>(
+      (variables?: UpdateProfileDataMutationVariables) => graphqlFetcher<UpdateProfileDataMutation, UpdateProfileDataMutationVariables>(UpdateProfileDataDocument, variables)(),
       options
     );
 export const RegisterDocument = `
@@ -8261,6 +8316,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetProfileDataQueryVariables>
 							): Promise<GetProfileDataQuery> {
 								return fetchApi(GetProfileDataDocument, { variables });
+							}
+
+							export async function updateProfileData<T>(
+								variables: ExactAlt<T, UpdateProfileDataMutationVariables>
+							): Promise<UpdateProfileDataMutation> {
+								return fetchApi(UpdateProfileDataDocument, { variables });
 							}
 
 							export async function register<T>(
