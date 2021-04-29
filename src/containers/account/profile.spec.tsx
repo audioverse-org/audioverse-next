@@ -1,5 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { when } from 'jest-when';
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
 import { QueryClient } from 'react-query';
@@ -19,7 +20,6 @@ import {
 	renderWithIntl,
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
-import { when } from 'jest-when';
 
 jest.mock('@lib/api/login');
 
@@ -44,6 +44,20 @@ function loadData() {
 					givenName: 'the_given_name',
 					surname: 'the_surname',
 					email: 'the_email',
+				},
+			},
+		});
+
+	when(mockedFetchApi)
+		.calledWith(UpdateProfileDataDocument, expect.anything())
+		.mockResolvedValue({
+			updateMyProfile: {
+				authenticatedUser: {
+					user: {
+						givenName: 'the_new_given_name',
+						surname: 'the_new_surname',
+						email: 'the_new_email',
+					},
 				},
 			},
 		});
@@ -316,12 +330,52 @@ describe('profile page', () => {
 			});
 		});
 	});
+
+	it('loads mutated email on success', async () => {
+		loadData();
+
+		when(mockedFetchApi)
+			.calledWith(UpdateProfileDataDocument, expect.anything())
+			.mockResolvedValue({
+				updateMyProfile: {
+					authenticatedUser: {
+						user: {
+							givenName: 'the_new_given_name',
+							surname: 'the_new_surname',
+							email: 'the_new_email',
+						},
+					},
+				},
+			});
+
+		const { getByText, getByDisplayValue } = await renderPage();
+
+		userEvent.click(getByText('save'));
+
+		await waitFor(() => {
+			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
+		});
+	});
+
+	it('loads mutated name on success', async () => {
+		loadData();
+
+		const { getByText, getByDisplayValue } = await renderPage();
+
+		userEvent.click(getByText('save'));
+
+		await waitFor(() => {
+			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
+		});
+	});
 });
 
-// submits password
-// submits null for password if no password change requested
-// loads modified user data directly from update mutation
-// includes given name
 // includes surname
 // saves given name
 // saves surname
+// Address, Line 1
+// Address, Line 2
+// City
+// State / Province
+// Zip / Postal Code
+// Country

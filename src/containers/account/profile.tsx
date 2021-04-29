@@ -1,26 +1,28 @@
 import React, { FormEvent, useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
-import { useIntl } from 'react-intl';
 
 function Profile(): JSX.Element {
-	const { data = undefined } = useGetProfileDataQuery() || {};
+	const { data } = useGetProfileDataQuery() || {};
 	const [givenName, setGivenName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [errors, setErrors] = useState<string[]>([]);
-	const { mutate } = useUpdateProfileDataMutation();
+	const { mutate, data: updatedData } = useUpdateProfileDataMutation();
 	const intl = useIntl();
 
 	useEffect(() => {
-		setGivenName(data?.me?.user?.givenName || '');
-		setEmail(data?.me?.user.email || '');
-	}, [data]);
+		const d =
+			updatedData?.updateMyProfile?.authenticatedUser?.user || data?.me?.user;
+		setGivenName(d?.givenName || '');
+		setEmail(d?.email || '');
+	}, [data, updatedData]);
 
 	function submit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
