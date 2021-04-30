@@ -20,6 +20,7 @@ import {
 	renderWithIntl,
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+
 import resetAllMocks = jest.resetAllMocks;
 
 jest.mock('@lib/api/login');

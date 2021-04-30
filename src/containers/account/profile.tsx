@@ -2,11 +2,11 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
+import Input from '@components/molecules/input';
 import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
-import Input from '@components/molecules/input';
 
 function Profile(): JSX.Element {
 	const { data } = useGetProfileDataQuery() || {};
