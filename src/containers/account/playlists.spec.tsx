@@ -1,8 +1,9 @@
+import _ from 'lodash';
+
+import { GetAccountPlaylistsPageDataDocument } from '@lib/generated/graphql';
 import { buildLoader, buildServerRenderer } from '@lib/test/helpers';
 import Playlists from '@pages/[language]/account/playlists';
 import { getServerSideProps } from '@pages/[language]/account/playlists';
-import { GetAccountPlaylistsPageDataDocument } from '@lib/generated/graphql';
-import _ from 'lodash';
 
 const renderPage = buildServerRenderer(Playlists, getServerSideProps, {
 	language: 'en',
