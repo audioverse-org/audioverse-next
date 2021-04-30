@@ -2812,6 +2812,10 @@ export type Recording = Node & {
   attachments: Array<Attachment>;
   audioFiles: Array<AudioFile>;
   bibleReferences: BibleReferenceRangeConnection;
+  /** Whether the current viewer may archive the recording. */
+  canArchive: Maybe<Scalars['Boolean']>;
+  /** Whether the current viewer may delete the recording. */
+  canDelete: Maybe<Scalars['Boolean']>;
   /** Whether the recording can be manually enqueued for transcribing. */
   canRequestTranscription: Maybe<Scalars['Boolean']>;
   /** The canonical HTML path to this resource. */
@@ -4956,6 +4960,14 @@ export type GetProfileDataQuery = (
 export type UpdateProfileDataMutationVariables = Exact<{
   email: Maybe<Scalars['String']>;
   password: Maybe<Scalars['String']>;
+  givenName: Maybe<Scalars['String']>;
+  surname: Maybe<Scalars['String']>;
+  address1: Maybe<Scalars['String']>;
+  address2: Maybe<Scalars['String']>;
+  city: Maybe<Scalars['String']>;
+  province: Maybe<Scalars['String']>;
+  postalCode: Maybe<Scalars['String']>;
+  country: Maybe<Scalars['String']>;
 }>;
 
 
@@ -4978,7 +4990,7 @@ export type UpdateProfileDataMutation = (
 
 export type ProfileFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'givenName' | 'surname' | 'email'>
+  & Pick<User, 'email' | 'givenName' | 'surname' | 'address1' | 'address2' | 'city' | 'province' | 'postalCode' | 'country'>
 );
 
 export type RegisterMutationVariables = Exact<{
@@ -6424,9 +6436,15 @@ export const RecordingListFragmentDoc = `
     ${SpeakerNameFragmentDoc}`;
 export const ProfileFragmentDoc = `
     fragment profile on User {
+  email
   givenName
   surname
-  email
+  address1
+  address2
+  city
+  province
+  postalCode
+  country
 }
     `;
 export const PlaylistFragmentDoc = `
@@ -6618,8 +6636,10 @@ export const useGetProfileDataQuery = <
       options
     );
 export const UpdateProfileDataDocument = `
-    mutation updateProfileData($email: String, $password: String) {
-  updateMyProfile(input: {email: $email, password: $password}) {
+    mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String, $address1: String, $address2: String, $city: String, $province: String, $postalCode: String, $country: String) {
+  updateMyProfile(
+    input: {email: $email, password: $password, givenName: $givenName, surname: $surname, address1: $address1, address2: $address2, city: $city, province: $province, postalCode: $postalCode, country: $country}
+  ) {
     errors {
       message
     }

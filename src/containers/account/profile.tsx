@@ -6,22 +6,43 @@ import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
+import Input from '@components/molecules/input';
 
 function Profile(): JSX.Element {
 	const { data } = useGetProfileDataQuery() || {};
-	const [givenName, setGivenName] = useState('');
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
+	const [givenName, setGivenName] = useState('');
+	const [surname, setSurname] = useState('');
+	const [address1, setAddress1] = useState('');
+	const [address2, setAddress2] = useState('');
+	const [city, setCity] = useState('');
+	const [postalCode, setPostalCode] = useState('');
+	const [province, setProvince] = useState('');
+	const [country, setCountry] = useState('');
+
 	const [errors, setErrors] = useState<string[]>([]);
+
 	const { mutate, data: updatedData } = useUpdateProfileDataMutation();
 	const intl = useIntl();
 
 	useEffect(() => {
+		// TODO: This line prevents re-fetched data from ever being displayed
+		//   after the form has been saved. Fix?
 		const d =
 			updatedData?.updateMyProfile?.authenticatedUser?.user || data?.me?.user;
-		setGivenName(d?.givenName || '');
+
 		setEmail(d?.email || '');
+		setGivenName(d?.givenName || '');
+		setSurname(d?.surname || '');
+		setAddress1(d?.address1 || '');
+		setAddress2(d?.address2 || '');
+		setCity(d?.city || '');
+		setPostalCode(d?.postalCode || '');
+		setProvince(d?.province || '');
+		setCountry(d?.country || '');
 	}, [data, updatedData]);
 
 	function submit(e: FormEvent<HTMLFormElement>) {
@@ -54,6 +75,14 @@ function Profile(): JSX.Element {
 		return mutate({
 			email,
 			password: password || null,
+			givenName,
+			surname,
+			address1,
+			address2,
+			city,
+			province,
+			postalCode,
+			country,
 		});
 	}
 
@@ -65,38 +94,40 @@ function Profile(): JSX.Element {
 				))}
 			</ul>
 
-			<label>
-				email{' '}
-				<input
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-			</label>
+			<Input label={'email'} type={'email'} value={email} setValue={setEmail} />
 
-			<label>
-				password{' '}
-				<input
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-			</label>
-
-			<label>
-				confirm password{' '}
-				<input
-					type="password"
-					value={passwordConfirm}
-					onChange={(e) => setPasswordConfirm(e.target.value)}
-				/>
-			</label>
-
-			<input
-				type={'text'}
-				value={givenName}
-				onChange={(e) => setGivenName(e.target.value)}
+			<Input
+				label={'password'}
+				type={'password'}
+				value={password}
+				setValue={setPassword}
 			/>
+
+			<Input
+				label={'confirm password'}
+				type={'password'}
+				value={passwordConfirm}
+				setValue={setPasswordConfirm}
+			/>
+
+			<Input label={'first name'} value={givenName} setValue={setGivenName} />
+
+			<Input label={'last name'} value={surname} setValue={setSurname} />
+
+			<Input label={'address line 1'} value={address1} setValue={setAddress1} />
+
+			<Input label={'address line 2'} value={address2} setValue={setAddress2} />
+
+			<Input label={'city'} value={city} setValue={setCity} />
+
+			<Input
+				label={'postal code'}
+				value={postalCode}
+				setValue={setPostalCode}
+			/>
+
+			<Input label={'province'} value={province} setValue={setProvince} />
+			<Input label={'country'} value={country} setValue={setCountry} />
 
 			<button type={'submit'}>save</button>
 		</form>

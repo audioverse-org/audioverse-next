@@ -20,10 +20,35 @@ import {
 	renderWithIntl,
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+import resetAllMocks = jest.resetAllMocks;
 
 jest.mock('@lib/api/login');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
+
+const userBefore = {
+	givenName: 'the_given_name',
+	surname: 'the_surname',
+	email: 'the_email',
+	address1: 'the_address_1',
+	address2: 'the_address_2',
+	city: 'the_city',
+	province: 'the_province',
+	postalCode: 'the_postal_code',
+	country: 'the_country',
+};
+
+const userAfter = {
+	givenName: 'the_new_given_name',
+	surname: 'the_new_surname',
+	email: 'the_new_email',
+	address1: 'the_new_address_1',
+	address2: 'the_new_address_2',
+	city: 'the_new_city',
+	province: 'the_new_province',
+	postalCode: 'the_new_postal_code',
+	country: 'the_new_country',
+};
 
 function loadData() {
 	when(mockedFetchApi)
@@ -40,11 +65,7 @@ function loadData() {
 		.calledWith(GetProfileDataDocument, expect.anything())
 		.mockResolvedValue({
 			me: {
-				user: {
-					givenName: 'the_given_name',
-					surname: 'the_surname',
-					email: 'the_email',
-				},
+				user: userBefore,
 			},
 		});
 
@@ -53,17 +74,15 @@ function loadData() {
 		.mockResolvedValue({
 			updateMyProfile: {
 				authenticatedUser: {
-					user: {
-						givenName: 'the_new_given_name',
-						surname: 'the_new_surname',
-						email: 'the_new_email',
-					},
+					user: userAfter,
 				},
 			},
 		});
 }
 
 describe('profile page', () => {
+	beforeEach(() => resetAllMocks());
+
 	it('dehydrates user', async () => {
 		mockedFetchApi.mockResolvedValue({
 			me: {
@@ -252,6 +271,7 @@ describe('profile page', () => {
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
+					...userBefore,
 					email: 'the_email123',
 					password: null,
 				},
@@ -324,7 +344,7 @@ describe('profile page', () => {
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
-					email: 'the_email',
+					...userBefore,
 					password: 'the_password',
 				},
 			});
@@ -368,14 +388,57 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
 		});
 	});
-});
 
-// includes surname
-// saves given name
-// saves surname
-// Address, Line 1
-// Address, Line 2
-// City
-// State / Province
-// Zip / Postal Code
-// Country
+	it('sets email input type to email', async () => {
+		loadData();
+
+		const { getByDisplayValue } = await renderPage();
+
+		await waitFor(() => {
+			expect(getByDisplayValue('the_email')).toHaveAttribute('type', 'email');
+		});
+	});
+
+	it('renders surname', async () => {
+		loadData();
+
+		const { getByDisplayValue } = await renderPage();
+
+		await waitFor(() => {
+			expect(getByDisplayValue('the_surname')).toBeInTheDocument();
+		});
+	});
+
+	it('all initial user data', async () => {
+		loadData();
+
+		const { getByDisplayValue } = await renderPage();
+
+		await waitFor(() => {
+			Object.values(userBefore).map((v) => {
+				expect(getByDisplayValue(v)).toBeInTheDocument();
+			});
+		});
+	});
+
+	it('saves all form data', async () => {
+		loadData();
+
+		const { getByText, getByDisplayValue } = await renderPage();
+
+		await waitFor(() => {
+			expect(getByDisplayValue('the_email')).toBeInTheDocument();
+		});
+
+		userEvent.click(getByText('save'));
+
+		await waitFor(() => {
+			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+				variables: {
+					password: null,
+					...userBefore,
+				},
+			});
+		});
+	});
+});
