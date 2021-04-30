@@ -1,0 +1,19 @@
+query getAccountPlaylistsPageData($language: Language!) {
+	me {
+		user {
+			playlists(language: $language) {
+				nodes {
+					id
+					title
+					isPublic
+					summary
+					recordings {
+						aggregate {
+							count
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -4943,6 +4943,35 @@ export type RecordingFragment = (
   & CopyrightInfoFragment
 );
 
+export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetAccountPlaylistsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & { playlists: (
+        { __typename?: 'UserPlaylistConnection' }
+        & { nodes: Maybe<Array<(
+          { __typename?: 'UserPlaylist' }
+          & Pick<UserPlaylist, 'id' | 'title' | 'isPublic' | 'summary'>
+          & { recordings: (
+            { __typename?: 'RecordingConnection' }
+            & { aggregate: Maybe<(
+              { __typename?: 'Aggregate' }
+              & Pick<Aggregate, 'count'>
+            )> }
+          ) }
+        )>> }
+      ) }
+    ) }
+  )> }
+);
+
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6612,6 +6641,39 @@ export const useGetPlaylistButtonDataQuery = <
     useQuery<GetPlaylistButtonDataQuery, TError, TData>(
       ['getPlaylistButtonData', variables],
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
+      options
+    );
+export const GetAccountPlaylistsPageDataDocument = `
+    query getAccountPlaylistsPageData($language: Language!) {
+  me {
+    user {
+      playlists(language: $language) {
+        nodes {
+          id
+          title
+          isPublic
+          summary
+          recordings {
+            aggregate {
+              count
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetAccountPlaylistsPageDataQuery = <
+      TData = GetAccountPlaylistsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAccountPlaylistsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
+      ['getAccountPlaylistsPageData', variables],
+      graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
       options
     );
 export const GetProfileDataDocument = `
@@ -8331,6 +8393,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
+
+							export async function getAccountPlaylistsPageData<T>(
+								variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
+							): Promise<GetAccountPlaylistsPageDataQuery> {
+								return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
+							}
 
 							export async function getProfileData<T>(
 								variables: ExactAlt<T, GetProfileDataQueryVariables>
