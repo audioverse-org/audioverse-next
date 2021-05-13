@@ -12,7 +12,10 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
+import {
+	GetPlaylistButtonDataQuery,
+	GetWithAuthGuardDataDocument,
+} from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
@@ -32,6 +35,18 @@ export function loadQuery(query: ParsedUrlQuery = {}): void {
 
 export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
+}
+
+export function loadWithAuthGuardData(email: any = 'the_email'): void {
+	when(mockedFetchApi)
+		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
+		.mockResolvedValue({
+			me: {
+				user: {
+					email,
+				},
+			},
+		});
 }
 
 export function buildLoader<T>(

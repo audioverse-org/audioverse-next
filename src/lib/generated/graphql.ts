@@ -28,6 +28,8 @@ export type Aggregate = {
 
 export type Attachment = Node & {
   __typename?: 'Attachment';
+  /** Whether the current viewer may delete the file. */
+  canDelete: Maybe<Scalars['Boolean']>;
   filename: Scalars['String'];
   /** In bytes */
   filesize: Scalars['String'];
@@ -46,6 +48,8 @@ export type AttachmentUrlArgs = {
 export type AudioFile = Node & {
   __typename?: 'AudioFile';
   bitrate: Scalars['Int'];
+  /** Whether the current viewer may delete the file. */
+  canDelete: Maybe<Scalars['Boolean']>;
   duration: Scalars['Float'];
   filename: Scalars['String'];
   /** In bytes */
@@ -410,7 +414,6 @@ export type Collection = Node & {
   /** @deprecated Collection.logoImageWithFallback is replaced with Collection.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  notes: Maybe<Scalars['String']>;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
@@ -498,7 +501,6 @@ export type CollectionCreateInput = {
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
-  notes: Maybe<Scalars['String']>;
   sponsorId: Scalars['ID'];
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -522,7 +524,6 @@ export type CollectionUpdateInput = {
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
-  notes: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -562,7 +563,6 @@ export type DistributionAgreement = Node & {
   isHidden: Maybe<Scalars['Boolean']>;
   isRetired: Scalars['Boolean'];
   license: Maybe<License>;
-  notes: Maybe<Scalars['String']>;
   recordings: RecordingConnection;
   sponsor: Maybe<Sponsor>;
   summary: Scalars['String'];
@@ -622,7 +622,6 @@ export type DistributionAgreementCreateInput = {
   isHidden: Maybe<Scalars['Boolean']>;
   isRetired: Maybe<Scalars['Boolean']>;
   licenseId: Scalars['ID'];
-  notes: Maybe<Scalars['String']>;
   sponsorId: Scalars['ID'];
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -645,7 +644,6 @@ export type DistributionAgreementUpdateInput = {
   isHidden: Maybe<Scalars['Boolean']>;
   isRetired: Maybe<Scalars['Boolean']>;
   licenseId: Maybe<Scalars['ID']>;
-  notes: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -685,6 +683,7 @@ export type ImageConnectionSlim = {
 
 /** The available image type containers. */
 export enum ImageContainer {
+  Avatar = 'AVATAR',
   Collection = 'COLLECTION',
   License = 'LICENSE',
   News = 'NEWS',
@@ -758,7 +757,6 @@ export type License = Node & {
   image: Maybe<Image>;
   isDefault: Scalars['Boolean'];
   isHidden: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
   permitsSales: Maybe<Scalars['Boolean']>;
   summary: Scalars['String'];
   title: Scalars['String'];
@@ -800,7 +798,6 @@ export type LicenseCreateInput = {
   isDefault: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
   language: Language;
-  notes: Maybe<Scalars['String']>;
   permitsSales: Maybe<Scalars['Boolean']>;
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -823,7 +820,6 @@ export type LicenseUpdateInput = {
   image: Maybe<ImageInput>;
   isDefault: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
   permitsSales: Maybe<Scalars['Boolean']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -883,6 +879,8 @@ export enum MediaFileTranscodingStatus {
 
 export type MediaFileUpload = Node & {
   __typename?: 'MediaFileUpload';
+  /** Whether the current viewer may delete the file. */
+  canDelete: Maybe<Scalars['Boolean']>;
   filename: Scalars['String'];
   /** In bytes */
   filesize: Scalars['String'];
@@ -1844,7 +1842,6 @@ export type Person = Node & {
   isHidden: Scalars['Boolean'];
   isPreapproved: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   /** @deprecated Person.photo is replaced with Person.image */
   photo: Maybe<Image>;
@@ -1923,7 +1920,6 @@ export type PersonCreateInput = {
   isHidden: Maybe<Scalars['Boolean']>;
   isPreapproved: Maybe<Scalars['Boolean']>;
   language: Language;
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   suffix: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
@@ -1955,7 +1951,6 @@ export type PersonUpdateInput = {
   internalContact: Maybe<InternalContactInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   isPreapproved: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   suffix: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
@@ -2847,7 +2842,6 @@ export type Recording = Node & {
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  notes: Maybe<Scalars['String']>;
   persons: Array<Person>;
   publishDate: Maybe<Scalars['DateTime']>;
   recordingDate: Maybe<Scalars['DateTime']>;
@@ -3010,7 +3004,6 @@ export type RecordingCreateInput = {
   isFeatured: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
-  notes: Maybe<Scalars['String']>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
   recordingDate: Maybe<Scalars['DateTime']>;
@@ -3292,7 +3285,6 @@ export type RecordingUpdateInput = {
   isFeatured: Maybe<Scalars['Boolean']>;
   isHidden: Maybe<Scalars['Boolean']>;
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
-  notes: Maybe<Scalars['String']>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
   recordingDate: Maybe<Scalars['DateTime']>;
@@ -3325,7 +3317,8 @@ export enum RecordingsSortableField {
   RecordedAt = 'RECORDED_AT',
   SequenceTitle = 'SEQUENCE_TITLE',
   SponsorTitle = 'SPONSOR_TITLE',
-  Title = 'TITLE'
+  Title = 'TITLE',
+  UpdatedAt = 'UPDATED_AT'
 }
 
 export type Sequence = Node & {
@@ -3348,7 +3341,6 @@ export type Sequence = Node & {
   /** @deprecated Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  notes: Maybe<Scalars['String']>;
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['String'];
@@ -3419,7 +3411,6 @@ export type SequenceCreateInput = {
   hidingReason: Maybe<Scalars['String']>;
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
   sponsorId: Scalars['ID'];
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -3455,7 +3446,6 @@ export type SequenceUpdateInput = {
   hidingReason: Maybe<Scalars['String']>;
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
-  notes: Maybe<Scalars['String']>;
   sponsorId: Maybe<Scalars['ID']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -3486,7 +3476,6 @@ export type Sponsor = Node & UniformResourceLocatable & {
   /** @deprecated Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
@@ -3598,7 +3587,6 @@ export type SponsorCreateInput = {
   isHidden: Maybe<Scalars['Boolean']>;
   language: Language;
   location: Maybe<Scalars['String']>;
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -3609,7 +3597,6 @@ export type SponsorDistributionAgreementInput = {
   isDefault: Maybe<Scalars['Boolean']>;
   isRetired: Maybe<Scalars['Boolean']>;
   licenseId: Scalars['ID'];
-  notes: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
 };
@@ -3636,7 +3623,6 @@ export type SponsorUpdateInput = {
   internalContact: Maybe<InternalContactInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
-  notes: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -4342,6 +4328,8 @@ export type User = Node & {
   /** The user's first name. */
   givenName: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  /** The user's avatar image. */
+  image: Maybe<Image>;
   /** Whether the user has permission to perform all administrative functions. */
   isSuperuser: Scalars['Boolean'];
   /** Whether the user has verified their email. */
@@ -4451,6 +4439,8 @@ export type UserCreateInput = {
   email: Scalars['String'];
   /** The user's first name. */
   givenName: Maybe<Scalars['String']>;
+  /** The user's avatar image. */
+  image: Maybe<Scalars['Upload']>;
   /** Whether the user has permission to perform all administrative functions. */
   isSuperuser: Maybe<Scalars['Boolean']>;
   /** The user's preferred interface language. */
@@ -4463,7 +4453,7 @@ export type UserCreateInput = {
   preferredAudioQuality: Maybe<RecordingQuality>;
   /** The name of the region, such as the province, state, or district. */
   province: Maybe<Scalars['String']>;
-  /** The user's administrative roles. */
+  /** The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for. */
   roles: Maybe<Array<UserLanguageRoleInput>>;
   /** The user's last name. */
   surname: Maybe<Scalars['String']>;
@@ -4570,6 +4560,7 @@ export type UserPayload = {
 
 export type UserPlaylist = Node & {
   __typename?: 'UserPlaylist';
+  createdAt: Scalars['DateTime'];
   hasRecording: Scalars['Boolean'];
   id: Scalars['ID'];
   isPublic: Scalars['Boolean'];
@@ -4577,6 +4568,7 @@ export type UserPlaylist = Node & {
   recordings: RecordingConnection;
   summary: Scalars['String'];
   title: Scalars['String'];
+  updatedAt: Scalars['DateTime'];
 };
 
 
@@ -4696,6 +4688,8 @@ export type UserUpdateInput = {
   email: Maybe<Scalars['String']>;
   /** The user's first name. */
   givenName: Maybe<Scalars['String']>;
+  /** The user's avatar image. */
+  image: Maybe<Scalars['Upload']>;
   /** Whether the user has permission to perform all administrative functions. */
   isSuperuser: Maybe<Scalars['Boolean']>;
   /** The user's preferred interface language. */
@@ -4708,7 +4702,7 @@ export type UserUpdateInput = {
   preferredAudioQuality: Maybe<RecordingQuality>;
   /** The name of the region, such as the province, state, or district. */
   province: Maybe<Scalars['String']>;
-  /** The user's administrative roles. */
+  /** The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for. */
   roles: Maybe<Array<UserLanguageRoleInput>>;
   /** The user's last name. */
   surname: Maybe<Scalars['String']>;
@@ -4731,6 +4725,8 @@ export enum UsersSortableField {
 export type VideoFile = Node & {
   __typename?: 'VideoFile';
   bitrate: Scalars['Int'];
+  /** Whether the current viewer may delete the file. */
+  canDelete: Maybe<Scalars['Boolean']>;
   container: Scalars['String'];
   duration: Scalars['Float'];
   filename: Scalars['String'];
@@ -4970,6 +4966,23 @@ export type GetAccountPlaylistsPageDataQuery = (
       ) }
     ) }
   )> }
+);
+
+export type AddAccountPlaylistMutationVariables = Exact<{
+  isPublic: Scalars['Boolean'];
+  language: Language;
+  recordingIds: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  summary: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+}>;
+
+
+export type AddAccountPlaylistMutation = (
+  { __typename?: 'Mutation' }
+  & { playlistAdd: (
+    { __typename?: 'UserPlaylist' }
+    & Pick<UserPlaylist, 'id'>
+  ) }
 );
 
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
@@ -6674,6 +6687,23 @@ export const useGetAccountPlaylistsPageDataQuery = <
     useQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
       ['getAccountPlaylistsPageData', variables],
       graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
+      options
+    );
+export const AddAccountPlaylistDocument = `
+    mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
+  playlistAdd(
+    input: {isPublic: $isPublic, language: $language, recordingIds: $recordingIds, summary: $summary, title: $title}
+  ) {
+    id
+  }
+}
+    `;
+export const useAddAccountPlaylistMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>) => 
+    useMutation<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>(
+      (variables?: AddAccountPlaylistMutationVariables) => graphqlFetcher<AddAccountPlaylistMutation, AddAccountPlaylistMutationVariables>(AddAccountPlaylistDocument, variables)(),
       options
     );
 export const GetProfileDataDocument = `
@@ -8398,6 +8428,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
 							): Promise<GetAccountPlaylistsPageDataQuery> {
 								return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
+							}
+
+							export async function addAccountPlaylist<T>(
+								variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
+							): Promise<AddAccountPlaylistMutation> {
+								return fetchApi(AddAccountPlaylistDocument, { variables });
 							}
 
 							export async function getProfileData<T>(

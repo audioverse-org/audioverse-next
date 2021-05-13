@@ -1,12 +1,47 @@
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
+import { useQueryClient } from 'react-query';
 
-import { useGetAccountPlaylistsPageDataQuery } from '@lib/generated/graphql';
+import withAuthGuard from '@components/HOCs/withAuthGuard';
+import Checkbox from '@components/molecules/checkbox';
+import Input from '@components/molecules/input';
+import {
+	useAddAccountPlaylistMutation,
+	useGetAccountPlaylistsPageDataQuery,
+} from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 
 function Playlists(): JSX.Element {
 	const language = useLanguageId();
+	const queryClient = useQueryClient();
 	const { data } = useGetAccountPlaylistsPageDataQuery({ language });
 	const playlists = data?.me?.user.playlists.nodes || [];
+	const [title, setTitle] = useState('');
+	const [summary, setSummary] = useState('');
+	const [isPublic, setIsPublic] = useState(false);
+	const [errors, setErrors] = useState<string[]>([]);
+	const { mutate } = useAddAccountPlaylistMutation({
+		onSuccess: async () => {
+			// TODO: Only invalidate `useGetAccountPlaylistsPageDataQuery`
+			await queryClient.invalidateQueries();
+		},
+	});
+
+	async function addPlaylist(e: FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+
+		if (!title) {
+			setErrors(['missing title']);
+			return;
+		}
+
+		await mutate({
+			isPublic,
+			language,
+			recordingIds: [],
+			summary,
+			title,
+		});
+	}
 
 	return (
 		<>
@@ -20,8 +55,29 @@ function Playlists(): JSX.Element {
 					</li>
 				))}
 			</ul>
+			<form onSubmit={addPlaylist}>
+				<ul>
+					{errors.map((e) => (
+						<li key={e}>{e}</li>
+					))}
+				</ul>
+				<Input type="text" label={'title'} value={title} setValue={setTitle} />
+				<Input
+					type="text"
+					label={'summary'}
+					value={summary}
+					setValue={setSummary}
+				/>
+				<Checkbox
+					type="checkbox"
+					label={'public'}
+					checked={isPublic}
+					setChecked={setIsPublic}
+				/>
+				<button type={'submit'}>Add Playlist</button>
+			</form>
 		</>
 	);
 }
 
-export default Playlists;
+export default withAuthGuard(Playlists);

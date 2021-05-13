@@ -10,6 +10,7 @@ function withAuthGuard<P>(
 		const { data } = useGetWithAuthGuardDataQuery({}, { retry: false });
 		const isUserLoggedIn = !!data?.me?.user.email;
 
+		// TODO: Fix login flash while data is loading when user actually is already logged in
 		return isUserLoggedIn ? <Component {...props} /> : <Login />;
 	};
 }

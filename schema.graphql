@@ -227,7 +227,6 @@ type Collection implements Node {
 	logoImage: Image @deprecated(reason : "Collection.logoImage is replaced with Collection.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Collection.logoImageWithFallback is replaced with Collection.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -329,7 +328,6 @@ type DistributionAgreement implements Node {
 	isHidden: Boolean
 	isRetired: Boolean!
 	license: License
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -462,7 +460,6 @@ type License implements Node {
 	image: Image
 	isDefault: Boolean!
 	isHidden: Boolean
-	notes: String
 	permitsSales: Boolean
 	summary: String!
 	title: String!
@@ -783,7 +780,6 @@ type Person implements Node {
 	isHidden: Boolean!
 	isPreapproved: Boolean
 	name: String!
-	notes: String
 	phone: String
 	photo: Image @deprecated(reason : "Person.photo is replaced with Person.image")
 	photoWithFallback: Image! @deprecated(reason : "Person.photoWithFallback is replaced with Person.imageWithFallback")
@@ -1718,7 +1714,6 @@ type Recording implements Node {
 	legalScreeningCheckouts: [RecordingScreeningCheckout!]
 	legalScreeningStatus: RecordingLegalScreeningStatus
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	persons(includeUnpublished: Boolean, role: PersonsRoleField): [Person!]!
 	publishDate: DateTime
 	recordingDate: DateTime
@@ -1914,7 +1909,6 @@ type Sequence implements Node {
 	logoImage: Image @deprecated(reason : "Sequence.logoImage is replaced with Sequence.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -2040,7 +2034,6 @@ type Sponsor implements Node & UniformResourceLocatable {
 	logoImage: Image @deprecated(reason : "Sponsor.logoImage is replaced with Sponsor.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	phone: String
 	recordings(
 		"Return the elements that come after the specified cursor."
@@ -2360,6 +2353,7 @@ type UserPayload {
 }
 
 type UserPlaylist implements Node {
+	createdAt: DateTime!
 	hasRecording(id: ID!): Boolean!
 	id: ID!
 	isPublic: Boolean!
@@ -2409,6 +2403,7 @@ type UserPlaylist implements Node {
 	): RecordingConnection!
 	summary: String!
 	title: String!
+	updatedAt: DateTime!
 }
 
 type UserPlaylistConnection {
@@ -3577,7 +3572,6 @@ input CollectionCreateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3589,7 +3583,6 @@ input CollectionUpdateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3617,7 +3610,6 @@ input DistributionAgreementCreateInput {
 	isHidden: Boolean
 	isRetired: Boolean
 	licenseId: ID!
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3628,7 +3620,6 @@ input DistributionAgreementUpdateInput {
 	isHidden: Boolean
 	isRetired: Boolean
 	licenseId: ID
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3656,7 +3647,6 @@ input LicenseCreateInput {
 	isDefault: Boolean
 	isHidden: Boolean
 	language: Language!
-	notes: String
 	permitsSales: Boolean
 	summary: String
 	title: String!
@@ -3667,7 +3657,6 @@ input LicenseUpdateInput {
 	image: ImageInput
 	isDefault: Boolean
 	isHidden: Boolean
-	notes: String
 	permitsSales: Boolean
 	summary: String
 	title: String
@@ -3810,7 +3799,6 @@ input PersonCreateInput {
 	isHidden: Boolean
 	isPreapproved: Boolean
 	language: Language!
-	notes: String
 	phone: String
 	suffix: String
 	summary: String
@@ -3830,7 +3818,6 @@ input PersonUpdateInput {
 	internalContact: InternalContactInput
 	isHidden: Boolean
 	isPreapproved: Boolean
-	notes: String
 	phone: String
 	suffix: String
 	summary: String
@@ -3858,7 +3845,6 @@ input RecordingCreateInput {
 	isFeatured: Boolean
 	isHidden: Boolean
 	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
-	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
 	recordingDate: DateTime
@@ -3928,7 +3914,6 @@ input RecordingUpdateInput {
 	isFeatured: Boolean
 	isHidden: Boolean
 	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
-	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
 	recordingDate: DateTime
@@ -3959,7 +3944,6 @@ input SequenceCreateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3976,7 +3960,6 @@ input SequenceUpdateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3993,7 +3976,6 @@ input SponsorCreateInput {
 	isHidden: Boolean
 	language: Language!
 	location: String
-	notes: String
 	phone: String
 	summary: String
 	title: String!
@@ -4004,7 +3986,6 @@ input SponsorDistributionAgreementInput {
 	isDefault: Boolean
 	isRetired: Boolean
 	licenseId: ID!
-	notes: String
 	summary: String
 	title: String!
 }
@@ -4019,7 +4000,6 @@ input SponsorUpdateInput {
 	internalContact: InternalContactInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	phone: String
 	summary: String
 	title: String
@@ -4087,7 +4067,7 @@ input UserCreateInput {
 	preferredAudioQuality: RecordingQuality
 	"The name of the region, such as the province, state, or district."
 	province: String
-	"The user's administrative roles."
+	"The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for."
 	roles: [UserLanguageRoleInput!]
 	"The user's last name."
 	surname: String
@@ -4166,7 +4146,7 @@ input UserUpdateInput {
 	preferredAudioQuality: RecordingQuality
 	"The name of the region, such as the province, state, or district."
 	province: String
-	"The user's administrative roles."
+	"The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for."
 	roles: [UserLanguageRoleInput!]
 	"The user's last name."
 	surname: String
