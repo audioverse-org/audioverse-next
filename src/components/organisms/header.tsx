@@ -1,219 +1,67 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
+import Icon from '@components/atoms/icon';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
-import { makeSeriesListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
 
-// TODO: Finish linking all entries
-
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
-	const intl = useIntl();
 
 	return (
 		<header className={styles.header}>
-			<ul>
-				<li>
-					<a
-						href={`https://audioversestore.org/`}
-						target={'_blank'}
-						rel={'noreferrer noopener'}
-					>
-						<FormattedMessage
-							id={`header__sisterSiteStoreLink`}
-							defaultMessage="AudioVerse Store"
-							description={`Header sister site link: store`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a
-						href={`https://www.journeysunscripted.com/`}
-						target={'_blank'}
-						rel={'noreferrer noopener'}
-					>
-						<FormattedMessage
-							id={`header__sisterSiteJourneysUnscriptedLink`}
-							defaultMessage="Journeys Unscripted"
-							description={`Header sister site link: Journeys Unscripted`}
-						/>
-					</a>
-				</li>
-			</ul>
-			<h1>
+			<h1 className={styles.logo}>
 				<a href={`/${languageRoute}`}>
-					<img
-						src="/img/av-logo.png"
-						alt="AudioVerse"
-						width={538}
-						height={160}
-					/>
+					<img src="/img/logo.svg" alt="AudioVerse" width={161} height={23} />
 				</a>
 			</h1>
-			<input
-				placeholder={intl.formatMessage({
-					id: 'header__searchBoxPlaceholder',
-					defaultMessage: 'Search',
-					description: 'header search box placeholder',
-				})}
-			/>
-			<a href={`/${languageRoute}/give`}>
-				<FormattedMessage
-					id="header__donateButton"
-					defaultMessage="Donate Now"
-					description="Header donate button"
-				/>
-			</a>
-			<LoadingIndicator />
 			<ul>
 				<li>
-					<a href={`/${languageRoute}/sermons/all/page/1`}>
-						<FormattedMessage
-							id={`header__navItemPresentations`}
-							defaultMessage="Presentations"
-							description={`Header nav link name: Presentations`}
-						/>
-					</a>
+					<Icon icon={'playlist'} />{' '}
+					<FormattedMessage
+						id={`header__navItemPlaylist`}
+						defaultMessage="Playlist"
+						description={`Header nav link name: Playlist`}
+					/>
 				</li>
 				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__navItemBibles`}
-							defaultMessage="Bibles"
-							description={`Header nav link name: Bibles`}
-						/>
-					</a>
+					<Icon icon={'search'} />{' '}
+					<FormattedMessage
+						id={`header__navItemDiscover`}
+						defaultMessage="Discover"
+						description={`Header nav link name: Discover`}
+					/>
 				</li>
 				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemBooks`}
-							defaultMessage="Books"
-							description={`Header nav link name: Books`}
-						/>
-					</a>
+					<Icon icon={'bible'} />{' '}
+					<FormattedMessage
+						id={`header__naveItemBible`}
+						defaultMessage="Bible"
+						description={`Header nav link name: Bible`}
+					/>
 				</li>
 				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemStories`}
-							defaultMessage="Stories"
-							description={`Header nav link name: Stories`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemScriptureSongs`}
-							defaultMessage="Scripture Songs"
-							description={`Header nav link name: Scripture Songs`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemConferences`}
-							defaultMessage="Conferences"
-							description={`Header nav link name: Conferences`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemPresenters`}
-							defaultMessage="Presenters"
-							description={`Header nav link name: Presenters`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href={`/${languageRoute}/tags/page/1`}>
-						<FormattedMessage
-							id={`header__naveItemTags`}
-							defaultMessage="Tags"
-							description={`Header nav link name: Tags`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemSponsors`}
-							defaultMessage="Sponsors"
-							description={`Header nav link name: Sponsors`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href={makeSeriesListRoute(languageRoute)}>
-						<FormattedMessage
-							id={`header__naveItemSeries`}
-							defaultMessage="Series"
-							description={`Header nav link name: Series`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemPlaylists`}
-							defaultMessage="Playlists"
-							description={`Header nav link name: Playlists`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href={`/${languageRoute}/account/profile`}>
-						<FormattedMessage
-							id={`header__naveItemManageAccount`}
-							defaultMessage="Manage Account"
-							description={`Header nav link name: Manage Account`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemMyPlaylists`}
-							defaultMessage="My Playlists"
-							description={`Header nav link name: My Playlists`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemFavorites`}
-							defaultMessage="Favorites"
-							description={`Header nav link name: Favorites`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<FormattedMessage
-							id={`header__naveItemHistory`}
-							defaultMessage="History"
-							description={`Header nav link name: History`}
-						/>
-					</a>
-				</li>
-				<li>
-					<a href={`/${languageRoute}/account/logout`}>
-						<FormattedMessage
-							id={`header__naveItemLogout`}
-							defaultMessage="Logout"
-							description={`Header nav link name: Logout`}
-						/>
-					</a>
+					<Icon icon={'collections'} />{' '}
+					<FormattedMessage
+						id={`header__navItemCollections`}
+						defaultMessage="Collections"
+						description={`Header nav link name: Collections`}
+					/>
 				</li>
 			</ul>
+			<div className={styles.user}>
+				{/* TODO: Make dynamic; hide when user not logged in */}
+				<img src="/img/ivan.png" width={16} height={16} />{' '}
+				<FormattedMessage
+					id={`header__userNamePlaceholder`}
+					defaultMessage="User Name"
+					description={`User name placeholder`}
+				/>{' '}
+				<Icon icon={'chevron-down'} />
+			</div>
+			<LoadingIndicator />
 		</header>
 	);
 };
