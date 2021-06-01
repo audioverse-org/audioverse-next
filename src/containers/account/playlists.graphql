@@ -1,0 +1,39 @@
+query getAccountPlaylistsPageData($language: Language!) {
+	me {
+		user {
+			playlists(language: $language) {
+				nodes {
+					id
+					title
+					isPublic
+					summary
+					recordings {
+						aggregate {
+							count
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+mutation addAccountPlaylist(
+	$isPublic: Boolean!
+	$language: Language!
+	$recordingIds: [ID!]
+	$summary: String
+	$title: String!
+) {
+	playlistAdd(
+		input: {
+			isPublic: $isPublic
+			language: $language
+			recordingIds: $recordingIds
+			summary: $summary
+			title: $title
+		}
+	) {
+		id
+	}
+}

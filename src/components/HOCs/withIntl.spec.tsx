@@ -11,6 +11,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
 import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
@@ -429,6 +430,22 @@ describe('localization usage', () => {
 		loadAuthGuardData();
 
 		const screen = await renderWithQueryProvider(<Profile />);
+
+		await waitFor(() => {
+			expect(mockedFetchApi).toBeCalledWith(
+				GetWithAuthGuardDataDocument,
+				expect.anything()
+			);
+		});
+
+		expectNoUnlocalizedText(screen);
+		expectNoUnlocalizedToasts();
+	});
+
+	it('localizes playlists page', async () => {
+		loadAuthGuardData();
+
+		const screen = await renderWithQueryProvider(<AccountPlaylists />);
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(

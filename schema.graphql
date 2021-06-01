@@ -142,8 +142,12 @@ type BibleVerse {
 
 type BlogPost implements Node {
 	body: String!
+	"The number of days to feature blog post."
+	featuredDuration: Int
 	id: ID!
 	image: Image
+	publishDate: DateTime!
+	teaser: String!
 	title: String!
 }
 
@@ -157,6 +161,11 @@ type BlogPostConnection {
 type BlogPostEdge {
 	cursor: String!
 	node: BlogPost!
+}
+
+type BlogPostPayload {
+	blogPost: BlogPost
+	errors: [InputValidationError!]!
 }
 
 type CatalogHistoryComment {
@@ -218,7 +227,6 @@ type Collection implements Node {
 	logoImage: Image @deprecated(reason : "Collection.logoImage is replaced with Collection.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Collection.logoImageWithFallback is replaced with Collection.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -320,7 +328,6 @@ type DistributionAgreement implements Node {
 	isHidden: Boolean
 	isRetired: Boolean!
 	license: License
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -453,7 +460,6 @@ type License implements Node {
 	image: Image
 	isDefault: Boolean!
 	isHidden: Boolean
-	notes: String
 	permitsSales: Boolean
 	summary: String!
 	title: String!
@@ -489,6 +495,7 @@ type MediaFileUpload implements Node {
 		count: Int!
 	): [String!]
 	recording: Recording
+	transcodingStatus: MediaFileTranscodingStatus!
 	updatedAt: DateTime
 	url: URL
 }
@@ -619,6 +626,9 @@ type MediaReleasePerson {
 }
 
 type Mutation {
+	blogPostCreate(input: BlogPostCreateInput!): BlogPostPayload!
+	blogPostDelete(blogPostId: ID!): SuccessPayload!
+	blogPostUpdate(blogPostId: ID!, input: BlogPostUpdateInput!): BlogPostPayload!
 	catalogHistoryCommentDelete(catalogHistoryCommentId: ID!): SuccessPayload!
 	catalogHistoryCommentUpdate(catalogHistoryCommentId: ID!, input: CatalogHistoryCommentUpdateInput!): CatalogHistoryItemPayload!
 	collectionCreate(input: CollectionCreateInput!): CollectionPayload!
@@ -695,6 +705,8 @@ type Mutation {
 	recordingScreeningTechnicalEvaluate(approve: Boolean!, recordingId: ID!): RecordingPayload!
 	"Deletes a recording's transcript, if extant."
 	recordingTranscriptDelete(recordingId: ID!): SuccessPayload!
+	"Update a recording's transcript."
+	recordingTranscriptUpdate(input: TranscriptUpdateInput!, recordingId: ID!): RecordingPayload!
 	"Requests a recording be enqueued for automated transcription."
 	recordingTranscriptionRequest(recordingId: ID!): SuccessPayload!
 	recordingUnarchive(recordingId: ID!): SuccessPayload!
@@ -711,6 +723,9 @@ type Mutation {
 	sponsorDelete(sponsorId: ID!): SuccessPayload!
 	sponsorHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, sponsorId: ID!): CatalogHistoryItemPayload!
 	sponsorUpdate(input: SponsorUpdateInput!, sponsorId: ID!): SponsorPayload!
+	testimonyCreate(input: TestimonyCreateInput!): TestimonyPayload!
+	testimonyDelete(testimonyId: ID!): SuccessPayload!
+	testimonyUpdate(input: TestimonyUpdateInput!, testimonyId: ID!): TestimonyPayload!
 	unfavoriteRecording(id: ID!): Boolean! @deprecated(reason : "unfavoriteRecording is replaced with recordingUnfavorite")
 	updateMyProfile(input: UserUpdateInput!): AuthenticatedUserPayload!
 	userCreate(input: UserCreateInput!): UserPayload!
@@ -765,7 +780,6 @@ type Person implements Node {
 	isHidden: Boolean!
 	isPreapproved: Boolean
 	name: String!
-	notes: String
 	phone: String
 	photo: Image @deprecated(reason : "Person.photo is replaced with Person.image")
 	photoWithFallback: Image! @deprecated(reason : "Person.photoWithFallback is replaced with Person.imageWithFallback")
@@ -977,6 +991,8 @@ type Query {
 		after: String,
 		"Return up to the first `n` elements from the list."
 		first: Int,
+		"Whether to include unpublished blog posts. Requires `COMMUNICATIONS` role."
+		includeUnpublished: Boolean,
 		language: Language!,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -1044,6 +1060,8 @@ type Query {
 		after: String,
 		"Return up to the first `n` elements from the list."
 		first: Int,
+		"Whether to include unpublished blog posts. Requires `COMMUNICATIONS` role."
+		includeUnpublished: Boolean,
 		language: Language!,
 		"Return the elements that come after the specified offset."
 		offset: Int
@@ -1119,6 +1137,7 @@ type Query {
 		"Return the elements that come after the specified offset."
 		offset: Int,
 		orderBy: [MediaFileUploadsOrder!],
+		search: String,
 		transcodingStatuses: [MediaFileTranscodingStatus!]
 	): MediaFileUploadConnection!
 	mediaRelease(id: ID!): MediaRelease
@@ -1603,6 +1622,8 @@ type Query {
 		after: String,
 		"Return up to the first `n` elements from the list."
 		first: Int,
+		"Whether to include unpublished testimonies. Requires `COMMUNICATIONS` role."
+		includeUnpublished: Boolean,
 		language: Language!,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -1650,15 +1671,19 @@ type Recording implements Node {
 		"Return the elements that come after the specified offset."
 		offset: Int
 	): BibleReferenceRangeConnection!
+	"Whether the current viewer may archive the recording."
+	canArchive: Boolean
+	"Whether the current viewer may delete the recording."
+	canDelete: Boolean
 	"Whether the recording can be manually enqueued for transcribing."
-	canRequestTranscription: Boolean!
+	canRequestTranscription: Boolean
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	canonicalUrl: URL!
 	collection: Collection
-	contentScreeningCheckouts: [RecordingScreeningCheckout!]!
-	contentScreeningEvaluations: [RecordingContentScreeningEvaluation!]!
-	contentScreeningStatus: RecordingContentScreeningStatus!
+	contentScreeningCheckouts: [RecordingScreeningCheckout!]
+	contentScreeningEvaluations: [RecordingContentScreeningEvaluation!]
+	contentScreeningStatus: RecordingContentScreeningStatus
 	contentType: RecordingContentType!
 	copyrightYear: Int
 	coverImage: Image
@@ -1686,13 +1711,20 @@ type Recording implements Node {
 	"Whether the recording has been hidden. `isHidden` being `false` does not indicate the recording is published. Use `stage` to determine published status."
 	isHidden: Boolean!
 	language: Language!
-	legalScreeningCheckouts: [RecordingScreeningCheckout!]!
-	legalScreeningStatus: RecordingLegalScreeningStatus!
+	legalScreeningCheckouts: [RecordingScreeningCheckout!]
+	legalScreeningStatus: RecordingLegalScreeningStatus
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	persons(includeUnpublished: Boolean, role: PersonsRoleField): [Person!]!
 	publishDate: DateTime
 	recordingDate: DateTime
+	recordingTagSuggestions(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		"Return the elements that come after the specified offset."
+		offset: Int
+	): RecordingTagSuggestionConnection!
 	recordingTags(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -1717,8 +1749,8 @@ type Recording implements Node {
 	shareUrl: URL
 	sponsor: Sponsor
 	stage: RecordingStage!
-	technicalScreeningCheckouts: [RecordingScreeningCheckout!]!
-	technicalScreeningStatus: RecordingTechnicalScreeningStatus!
+	technicalScreeningCheckouts: [RecordingScreeningCheckout!]
+	technicalScreeningStatus: RecordingTechnicalScreeningStatus
 	title: String!
 	transcript: Transcript
 	transcriptionStatus: RecordingTranscriptionStatus
@@ -1772,12 +1804,12 @@ type RecordingScreeningCheckoutPayload {
 }
 
 type RecordingScreeningIssue implements Node {
-	"In HH:mm format."
+	"In HH:mm:ss format."
 	endTime: String
 	id: ID!
 	notes: String!
 	screener: User!
-	"In HH:mm format."
+	"In HH:mm:ss format."
 	startTime: String
 	target: RecordingScreeningIssueTarget!
 	type: RecordingScreeningIssueType!
@@ -1835,6 +1867,22 @@ type RecordingTagEdge {
 	node: RecordingTag!
 }
 
+type RecordingTagSuggestion {
+	name: String!
+}
+
+type RecordingTagSuggestionConnection {
+	aggregate: Aggregate
+	edges: [RecordingTagSuggestionEdge!]
+	nodes: [RecordingTagSuggestion!]
+	pageInfo: PageInfo!
+}
+
+type RecordingTagSuggestionEdge {
+	cursor: String!
+	node: RecordingTagSuggestion!
+}
+
 type Sequence implements Node {
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
@@ -1861,7 +1909,6 @@ type Sequence implements Node {
 	logoImage: Image @deprecated(reason : "Sequence.logoImage is replaced with Sequence.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	recordings(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -1950,6 +1997,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		search: String,
 		sponsorIds: [ID!]
 	): CollectionConnection!
+	defaultDistributionAgreement: DistributionAgreement
 	description: String!
 	distributionAgreements(
 		"Return the elements that come after the specified cursor."
@@ -1986,7 +2034,6 @@ type Sponsor implements Node & UniformResourceLocatable {
 	logoImage: Image @deprecated(reason : "Sponsor.logoImage is replaced with Sponsor.image")
 	logoImageWithFallback: Image! @deprecated(reason : "Sponsor.logoImageWithFallback is replaced with Sponsor.imageWithFallback")
 	mediaReleaseForm: MediaReleaseForm
-	notes: String
 	phone: String
 	recordings(
 		"Return the elements that come after the specified cursor."
@@ -2137,10 +2184,12 @@ type TagEdge {
 	node: Tag!
 }
 
+"A user testimony."
 type Testimony implements Node {
 	author: String!
 	body: String!
 	id: ID!
+	publishDate: DateTime!
 	writtenDate: DateTime!
 }
 
@@ -2154,6 +2203,11 @@ type TestimonyConnection {
 type TestimonyEdge {
 	cursor: String!
 	node: Testimony!
+}
+
+type TestimonyPayload {
+	errors: [InputValidationError!]!
+	testimony: Testimony
 }
 
 type Transcript implements Node {
@@ -2299,6 +2353,7 @@ type UserPayload {
 }
 
 type UserPlaylist implements Node {
+	createdAt: DateTime!
 	hasRecording(id: ID!): Boolean!
 	id: ID!
 	isPublic: Boolean!
@@ -2348,6 +2403,7 @@ type UserPlaylist implements Node {
 	): RecordingConnection!
 	summary: String!
 	title: String!
+	updatedAt: DateTime!
 }
 
 type UserPlaylistConnection {
@@ -3387,6 +3443,7 @@ enum UserLanguage {
 	HUNGARIAN
 	INDONESIAN
 	ITALIAN
+	JAPANESE
 	KIKUYU
 	KOREAN
 	LATVIAN
@@ -3465,9 +3522,30 @@ input BibleReferenceRangeInput {
 	startReference: BibleReferenceInput!
 }
 
+input BlogPostCreateInput {
+	body: String!
+	"The number of days to feature blog post."
+	featuredDuration: Int
+	image: ImageInput
+	language: Language!
+	publishDate: DateTime
+	teaser: String
+	title: String!
+}
+
 input BlogPostOrder {
 	direction: OrderByDirection!
 	field: BlogPostSortableField!
+}
+
+input BlogPostUpdateInput {
+	body: String
+	"The number of days to feature blog post."
+	featuredDuration: Int
+	image: ImageInput
+	publishDate: DateTime
+	teaser: String
+	title: String
 }
 
 input CatalogHistoryCommentCreateInput {
@@ -3494,7 +3572,6 @@ input CollectionCreateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3506,7 +3583,6 @@ input CollectionUpdateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3534,7 +3610,6 @@ input DistributionAgreementCreateInput {
 	isHidden: Boolean
 	isRetired: Boolean
 	licenseId: ID!
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3545,7 +3620,6 @@ input DistributionAgreementUpdateInput {
 	isHidden: Boolean
 	isRetired: Boolean
 	licenseId: ID
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3573,7 +3647,6 @@ input LicenseCreateInput {
 	isDefault: Boolean
 	isHidden: Boolean
 	language: Language!
-	notes: String
 	permitsSales: Boolean
 	summary: String
 	title: String!
@@ -3584,7 +3657,6 @@ input LicenseUpdateInput {
 	image: ImageInput
 	isDefault: Boolean
 	isHidden: Boolean
-	notes: String
 	permitsSales: Boolean
 	summary: String
 	title: String
@@ -3727,7 +3799,6 @@ input PersonCreateInput {
 	isHidden: Boolean
 	isPreapproved: Boolean
 	language: Language!
-	notes: String
 	phone: String
 	suffix: String
 	summary: String
@@ -3747,7 +3818,6 @@ input PersonUpdateInput {
 	internalContact: InternalContactInput
 	isHidden: Boolean
 	isPreapproved: Boolean
-	notes: String
 	phone: String
 	suffix: String
 	summary: String
@@ -3775,7 +3845,6 @@ input RecordingCreateInput {
 	isFeatured: Boolean
 	isHidden: Boolean
 	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
-	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
 	recordingDate: DateTime
@@ -3813,11 +3882,11 @@ input RecordingScreeningCheckoutInput {
 }
 
 input RecordingScreeningIssueInput {
-	"In HH:mm format."
+	"In HH:mm:ss format."
 	endTime: String
 	notes: String
 	recordingScreeningIssueTypeId: ID!
-	"In HH:mm format."
+	"In HH:mm:ss format."
 	startTime: String
 	target: RecordingScreeningIssueTarget!
 }
@@ -3845,7 +3914,6 @@ input RecordingUpdateInput {
 	isFeatured: Boolean
 	isHidden: Boolean
 	legalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
-	notes: String
 	"Requires `ADMINISTRATION` role."
 	publishDate: DateTime
 	recordingDate: DateTime
@@ -3876,7 +3944,6 @@ input SequenceCreateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
-	notes: String
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3893,7 +3960,6 @@ input SequenceUpdateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
-	notes: String
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3910,7 +3976,6 @@ input SponsorCreateInput {
 	isHidden: Boolean
 	language: Language!
 	location: String
-	notes: String
 	phone: String
 	summary: String
 	title: String!
@@ -3921,7 +3986,6 @@ input SponsorDistributionAgreementInput {
 	isDefault: Boolean
 	isRetired: Boolean
 	licenseId: ID!
-	notes: String
 	summary: String
 	title: String!
 }
@@ -3936,7 +4000,6 @@ input SponsorUpdateInput {
 	internalContact: InternalContactInput
 	isHidden: Boolean
 	location: String
-	notes: String
 	phone: String
 	summary: String
 	title: String
@@ -3956,6 +4019,25 @@ input TagsOrder {
 input TestimoniesOrder {
 	direction: OrderByDirection!
 	field: TestimoniesSortableField!
+}
+
+input TestimonyCreateInput {
+	author: String!
+	body: String!
+	language: Language!
+	publishDate: DateTime!
+	writtenDate: DateTime!
+}
+
+input TestimonyUpdateInput {
+	author: String
+	body: String
+	publishDate: DateTime
+	writtenDate: DateTime
+}
+
+input TranscriptUpdateInput {
+	transcript: String!
 }
 
 input UserCreateInput {
@@ -3985,7 +4067,7 @@ input UserCreateInput {
 	preferredAudioQuality: RecordingQuality
 	"The name of the region, such as the province, state, or district."
 	province: String
-	"The user's administrative roles."
+	"The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for."
 	roles: [UserLanguageRoleInput!]
 	"The user's last name."
 	surname: String
@@ -4064,7 +4146,7 @@ input UserUpdateInput {
 	preferredAudioQuality: RecordingQuality
 	"The name of the region, such as the province, state, or district."
 	province: String
-	"The user's administrative roles."
+	"The user's administrative roles. Viewers with `ADMINISTRATION` role(s) may only manage roles for the languages they hold `ADMINISTRATION` role(s) for."
 	roles: [UserLanguageRoleInput!]
 	"The user's last name."
 	surname: String

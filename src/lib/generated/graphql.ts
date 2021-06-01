@@ -5279,6 +5279,52 @@ export type RecordingFragment = (
   & CopyrightInfoFragment
 );
 
+export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetAccountPlaylistsPageDataQuery = (
+  { __typename?: 'Query' }
+  & { me: Maybe<(
+    { __typename?: 'AuthenticatedUser' }
+    & { user: (
+      { __typename?: 'User' }
+      & { playlists: (
+        { __typename?: 'UserPlaylistConnection' }
+        & { nodes: Maybe<Array<(
+          { __typename?: 'UserPlaylist' }
+          & Pick<UserPlaylist, 'id' | 'title' | 'isPublic' | 'summary'>
+          & { recordings: (
+            { __typename?: 'RecordingConnection' }
+            & { aggregate: Maybe<(
+              { __typename?: 'Aggregate' }
+              & Pick<Aggregate, 'count'>
+            )> }
+          ) }
+        )>> }
+      ) }
+    ) }
+  )> }
+);
+
+export type AddAccountPlaylistMutationVariables = Exact<{
+  isPublic: Scalars['Boolean'];
+  language: Language;
+  recordingIds: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  summary: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+}>;
+
+
+export type AddAccountPlaylistMutation = (
+  { __typename?: 'Mutation' }
+  & { playlistAdd: (
+    { __typename?: 'UserPlaylist' }
+    & Pick<UserPlaylist, 'id'>
+  ) }
+);
+
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6948,6 +6994,56 @@ export const useGetPlaylistButtonDataQuery = <
     useQuery<GetPlaylistButtonDataQuery, TError, TData>(
       ['getPlaylistButtonData', variables],
       graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
+      options
+    );
+export const GetAccountPlaylistsPageDataDocument = `
+    query getAccountPlaylistsPageData($language: Language!) {
+  me {
+    user {
+      playlists(language: $language) {
+        nodes {
+          id
+          title
+          isPublic
+          summary
+          recordings {
+            aggregate {
+              count
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetAccountPlaylistsPageDataQuery = <
+      TData = GetAccountPlaylistsPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetAccountPlaylistsPageDataQueryVariables, 
+      options?: UseQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
+    ) => 
+    useQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
+      ['getAccountPlaylistsPageData', variables],
+      graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
+      options
+    );
+export const AddAccountPlaylistDocument = `
+    mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
+  playlistAdd(
+    input: {isPublic: $isPublic, language: $language, recordingIds: $recordingIds, summary: $summary, title: $title}
+  ) {
+    id
+  }
+}
+    `;
+export const useAddAccountPlaylistMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(options?: UseMutationOptions<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>) => 
+    useMutation<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>(
+      (variables?: AddAccountPlaylistMutationVariables) => graphqlFetcher<AddAccountPlaylistMutation, AddAccountPlaylistMutationVariables>(AddAccountPlaylistDocument, variables)(),
       options
     );
 export const GetProfileDataDocument = `
@@ -8667,6 +8763,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
+
+							export async function getAccountPlaylistsPageData<T>(
+								variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
+							): Promise<GetAccountPlaylistsPageDataQuery> {
+								return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
+							}
+
+							export async function addAccountPlaylist<T>(
+								variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
+							): Promise<AddAccountPlaylistMutation> {
+								return fetchApi(AddAccountPlaylistDocument, { variables });
+							}
 
 							export async function getProfileData<T>(
 								variables: ExactAlt<T, GetProfileDataQueryVariables>
