@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
@@ -12,6 +13,7 @@ import { useLanguageId } from '@lib/useLanguageId';
 
 function Playlists(): JSX.Element {
 	const language = useLanguageId();
+	const intl = useIntl();
 	const queryClient = useQueryClient();
 	const { data } = useGetAccountPlaylistsPageDataQuery({ language });
 	const playlists = data?.me?.user.playlists.nodes || [];
@@ -30,7 +32,13 @@ function Playlists(): JSX.Element {
 		e.preventDefault();
 
 		if (!title) {
-			setErrors(['missing title']);
+			setErrors([
+				intl.formatMessage({
+					id: 'accountPlaylists__errorMissingTitle',
+					defaultMessage: 'missing title',
+					description: 'account playlists page missing title error message',
+				}),
+			]);
 			return;
 		}
 
@@ -50,7 +58,20 @@ function Playlists(): JSX.Element {
 					<li key={p.id}>
 						<h4>{p.title}</h4>
 						<span>{p.recordings.aggregate?.count}</span>
-						<span>{p.isPublic ? 'public' : 'private'}</span>
+						<span>
+							{p.isPublic
+								? intl.formatMessage({
+										id: 'accountPlaylists__labelPublic',
+										defaultMessage: 'public',
+										description: 'account playlists page playlist public label',
+								  })
+								: intl.formatMessage({
+										id: 'accountPlaylists__labelPrivate',
+										defaultMessage: 'private',
+										description:
+											'account playlists page playlist private label',
+								  })}
+						</span>
 						<span>{p.summary}</span>
 					</li>
 				))}
@@ -61,20 +82,43 @@ function Playlists(): JSX.Element {
 						<li key={e}>{e}</li>
 					))}
 				</ul>
-				<Input type="text" label={'title'} value={title} setValue={setTitle} />
 				<Input
 					type="text"
-					label={'summary'}
+					label={intl.formatMessage({
+						id: 'accountPlaylists__inputLabelTitle',
+						defaultMessage: 'title',
+						description: 'account playlists page input label title',
+					})}
+					value={title}
+					setValue={setTitle}
+				/>
+				<Input
+					type="text"
+					label={intl.formatMessage({
+						id: 'accountPlaylists__inputLabelSummary',
+						defaultMessage: 'summary',
+						description: 'account playlists page input label summary',
+					})}
 					value={summary}
 					setValue={setSummary}
 				/>
 				<Checkbox
 					type="checkbox"
-					label={'public'}
+					label={intl.formatMessage({
+						id: 'accountPlaylists__inputLabelPublic',
+						defaultMessage: 'public',
+						description: 'account playlists page input label public',
+					})}
 					checked={isPublic}
 					setChecked={setIsPublic}
 				/>
-				<button type={'submit'}>Add Playlist</button>
+				<button type={'submit'}>
+					<FormattedMessage
+						id={'accountPlaylists__buttonLabelSubmit'}
+						defaultMessage={'Add Playlist'}
+						description={'account playlists page submit button label'}
+					/>
+				</button>
 			</form>
 		</>
 	);

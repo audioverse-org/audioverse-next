@@ -37,7 +37,7 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
 }
 
-export function loadWithAuthGuardData(email: any = 'the_email'): void {
+export function loadAuthGuardData(email: any = 'the_email'): void {
 	when(mockedFetchApi)
 		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
 		.mockResolvedValue({
