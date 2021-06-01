@@ -181,3 +181,15 @@ export const makePlaylistButtonData = (
 
 	return _.set({} as any, 'me.user.playlists.nodes', value);
 };
+
+export function loadAuthGuardData(): void {
+	when(mockedFetchApi)
+		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
+		.mockResolvedValue({
+			me: {
+				user: {
+					email: 'the_email',
+				},
+			},
+		});
+}

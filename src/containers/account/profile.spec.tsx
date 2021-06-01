@@ -15,7 +15,7 @@ import {
 } from '@lib/generated/graphql';
 import {
 	buildServerRenderer,
-	loadWithAuthGuardData,
+	loadAuthGuardData,
 	mockedFetchApi,
 	renderWithIntl,
 } from '@lib/test/helpers';
@@ -52,7 +52,7 @@ const userAfter = {
 };
 
 function loadData() {
-	loadWithAuthGuardData();
+	loadAuthGuardData();
 
 	when(mockedFetchApi)
 		.calledWith(GetProfileDataDocument, expect.anything())
