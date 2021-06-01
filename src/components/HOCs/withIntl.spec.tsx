@@ -33,6 +33,7 @@ import Sponsors from '@containers/sponsor/list';
 import SponsorSeries from '@containers/sponsor/series';
 import SponsorTeachings from '@containers/sponsor/teachings';
 import Stories from '@containers/story/stories';
+import AccountPlaylists from '@containers/account/playlists';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
@@ -429,6 +430,22 @@ describe('localization usage', () => {
 		loadAuthGuardData();
 
 		const screen = await renderWithQueryProvider(<Profile />);
+
+		await waitFor(() => {
+			expect(mockedFetchApi).toBeCalledWith(
+				GetWithAuthGuardDataDocument,
+				expect.anything()
+			);
+		});
+
+		expectNoUnlocalizedText(screen);
+		expectNoUnlocalizedToasts();
+	});
+
+	it('localizes playlists page', async () => {
+		loadAuthGuardData();
+
+		const screen = await renderWithQueryProvider(<AccountPlaylists />);
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(
