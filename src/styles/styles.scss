@@ -1,3 +1,24 @@
+@use "~inter-ui/default" with (
+  $inter-font-display: swap,
+  $inter-font-path: '~inter-ui/Inter (web)'
+);
+@use "~inter-ui/variable" with (
+  $inter-font-display: swap,
+  $inter-font-path: '~inter-ui/Inter (web)'
+);
+@include default.all;
+@include variable.all;
+
+html {
+	font-family: 'Inter', 'system-ui', sans-serif;
+}
+
+@supports (font-variation-settings: normal) {
+	html {
+		font-family: 'Inter var', 'system-ui', sans-serif;
+	}
+}
+
 @import 'common';
 
 p {
@@ -5,8 +26,13 @@ p {
 }
 
 .template-base {
+	display: flex;
+	> *:first-child {
+		flex: 0 0 200px;
+		border-right: 0.5px solid $gray-bleached;
+	}
 	> * {
-		padding-left: 20%;
-		padding-right: 20%;
+		flex: 0 0 100%;
+		overflow: scroll;
 	}
 }

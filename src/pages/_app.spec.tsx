@@ -46,15 +46,4 @@ describe('app', () => {
 			expect(getByText('myResult')).toBeInTheDocument();
 		});
 	});
-
-	it('includes footer', async () => {
-		const { getByText } = await render(
-			<MyApp
-				Component={((() => null) as unknown) as typeof React.Component}
-				pageProps={{}}
-			/>
-		);
-
-		expect(getByText('Deutsch')).toBeInTheDocument();
-	});
 });

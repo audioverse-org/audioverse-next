@@ -9,7 +9,6 @@ import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
-import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -31,31 +30,30 @@ function MyApp<P>({
 	pageProps: P;
 }): JSX.Element {
 	return (
-		<div className={'template-base'}>
-			<React.StrictMode>
-				<Head>
-					<title>AudioVerse</title>
-					{/*<link href="//vjs.zencdn.net/6.7/video-js.min.css" rel="stylesheet" />*/}
-				</Head>
-				<QueryClientProvider client={queryClient}>
-					<Hydrate state={_.get(pageProps, 'dehydratedState')}>
-						<Header />
-						<div className={'template-base__content'}>
-							<Component {...pageProps} />
-						</div>
-						<Footer />
-						{/*<script src="//vjs.zencdn.net/6.7/video.min.js" />*/}
-					</Hydrate>
-				</QueryClientProvider>
-				<ToastContainer />
-				{/* Go to www.addthis.com/dashboard to customize your tools */}
-				<script
-					type="text/javascript"
-					src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"
-					defer
-				/>
-			</React.StrictMode>
-		</div>
+		<>
+			<div className={'template-base'}>
+				<React.StrictMode>
+					<Head>
+						<title>AudioVerse</title>
+					</Head>
+					<QueryClientProvider client={queryClient}>
+						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
+							<Header />
+							<div className={'template-base__content'}>
+								<Component {...pageProps} />
+							</div>
+						</Hydrate>
+					</QueryClientProvider>
+				</React.StrictMode>
+			</div>
+			<ToastContainer />
+			{/* Go to www.addthis.com/dashboard to customize your tools */}
+			<script
+				type="text/javascript"
+				src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"
+				defer
+			/>
+		</>
 	);
 }
 

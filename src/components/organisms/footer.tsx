@@ -6,6 +6,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import styles from './footer.module.scss';
 
 // TODO: Finish linking all entries
+// TODO: Delete this component and migrate functionality according to T&S design
 
 export default function Footer(): JSX.Element {
 	const languageRoute = useLanguageRoute();
