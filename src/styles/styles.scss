@@ -6,17 +6,18 @@
   $inter-font-display: swap,
   $inter-font-path: '~inter-ui/Inter (web)'
 );
+
 @include default.all;
 @include variable.all;
 
 html {
-	font-family: 'Inter', 'system-ui', sans-serif;
+  font-family: 'Inter', 'system-ui', sans-serif;
 }
 
 @supports (font-variation-settings: normal) {
-	html {
-		font-family: 'Inter var', 'system-ui', sans-serif;
-	}
+  html {
+    font-family: 'Inter var', 'system-ui', sans-serif;
+  }
 }
 
 h1,
@@ -24,16 +25,33 @@ h2,
 h3,
 h4,
 h5 {
-	font-family: serif;
+  font-family: serif;
 }
 
+
 a {
-	color: inherit;
-	&:hover {
-		text-decoration: none;
-	}
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.template-base {
+  display: flex;
+
+  > *:first-child {
+    flex: 0 0 200px;
+    border-right: 0.5px solid $gray-bleached;
+  }
+
+  > * {
+    flex: 0 0 100%;
+    overflow: scroll;
+
+  }
 }
 
 p {
-	line-height: 1.3em;
+  line-height: 1.3em;
 }

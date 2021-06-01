@@ -12,7 +12,7 @@ import {
 import {
 	buildLoader,
 	buildServerRenderer,
-	loadWithAuthGuardData,
+	loadAuthGuardData,
 	mockedFetchApi,
 } from '@lib/test/helpers';
 import Playlists from '@pages/[language]/account/playlists';
@@ -53,7 +53,7 @@ describe('playlists page', () => {
 
 	it('lists playlists', async () => {
 		loadData();
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 
 		const { getByText } = await renderPage();
 
@@ -64,7 +64,7 @@ describe('playlists page', () => {
 
 	it('includes number of presentations', async () => {
 		loadData();
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 
 		const { getByText } = await renderPage();
 
@@ -75,7 +75,7 @@ describe('playlists page', () => {
 
 	it('says if it is private', async () => {
 		loadData();
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 
 		const { getByText } = await renderPage();
 
@@ -92,7 +92,7 @@ describe('playlists page', () => {
 		);
 
 		loadData(testData);
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 
 		const { getByText } = await renderPage();
 
@@ -102,7 +102,7 @@ describe('playlists page', () => {
 	});
 
 	it('renders summary', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText } = await renderPage();
@@ -121,7 +121,7 @@ describe('playlists page', () => {
 	});
 
 	it('adds playlist', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText, getByLabelText } = await renderPage();
@@ -149,7 +149,7 @@ describe('playlists page', () => {
 	});
 
 	it('reloads playlists on add', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText, getByLabelText } = await renderPage();
@@ -172,7 +172,7 @@ describe('playlists page', () => {
 	});
 
 	it('allows creating public playlists', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText, getByLabelText } = await renderPage();
@@ -201,7 +201,7 @@ describe('playlists page', () => {
 	});
 
 	it('re-fetches data on playlist add', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText, getByLabelText } = await renderPage();
@@ -228,7 +228,7 @@ describe('playlists page', () => {
 	});
 
 	it('displays missing title error', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText } = await renderPage();
@@ -245,7 +245,7 @@ describe('playlists page', () => {
 	});
 
 	it('does not submit new playlist without title', async () => {
-		loadWithAuthGuardData();
+		loadAuthGuardData();
 		loadData();
 
 		const { getByText } = await renderPage();
