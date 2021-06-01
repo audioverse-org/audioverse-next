@@ -11,11 +11,11 @@ import { login } from '@lib/api';
 import { storeRequest } from '@lib/api/fetchApi';
 import {
 	GetProfileDataDocument,
-	GetWithAuthGuardDataDocument,
 	UpdateProfileDataDocument,
 } from '@lib/generated/graphql';
 import {
 	buildServerRenderer,
+	loadAuthGuardData,
 	mockedFetchApi,
 	renderWithIntl,
 } from '@lib/test/helpers';
@@ -52,15 +52,7 @@ const userAfter = {
 };
 
 function loadData() {
-	when(mockedFetchApi)
-		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
-		.mockResolvedValue({
-			me: {
-				user: {
-					email: 'the_email',
-				},
-			},
-		});
+	loadAuthGuardData();
 
 	when(mockedFetchApi)
 		.calledWith(GetProfileDataDocument, expect.anything())

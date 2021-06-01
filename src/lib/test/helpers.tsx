@@ -12,7 +12,10 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
+import {
+	GetPlaylistButtonDataQuery,
+	GetWithAuthGuardDataDocument,
+} from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
@@ -166,3 +169,15 @@ export const makePlaylistButtonData = (
 
 	return _.set({} as any, 'me.user.playlists.nodes', value);
 };
+
+export function loadAuthGuardData(): void {
+	when(mockedFetchApi)
+		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
+		.mockResolvedValue({
+			me: {
+				user: {
+					email: 'the_email',
+				},
+			},
+		});
+}

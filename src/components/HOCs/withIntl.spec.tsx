@@ -11,6 +11,7 @@ import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import Profile from '@containers/account/profile';
 import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
 import Audiobook from '@containers/audiobook/audiobook';
@@ -36,9 +37,10 @@ import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
 import formatDuration from '@lib/formatDuration';
-import { Person } from '@lib/generated/graphql';
+import { GetWithAuthGuardDataDocument, Person } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 import {
+	loadAuthGuardData,
 	makePlaylistButtonData,
 	mockedFetchApi,
 	renderWithQueryProvider,
@@ -414,11 +416,28 @@ describe('localization usage', () => {
 		[Register, {}],
 		[Login, {}],
 		[Reset, {}],
+		[Profile, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
 		it(`Localizes scenario index ${i}`, async () => {
 			await expectNoUnlocalizedMessages(...s);
 		});
+	});
+
+	it('localizes profile page', async () => {
+		loadAuthGuardData();
+
+		const screen = await renderWithQueryProvider(<Profile />);
+
+		await waitFor(() => {
+			expect(mockedFetchApi).toBeCalledWith(
+				GetWithAuthGuardDataDocument,
+				expect.anything()
+			);
+		});
+
+		expectNoUnlocalizedText(screen);
+		expectNoUnlocalizedToasts();
 	});
 });
