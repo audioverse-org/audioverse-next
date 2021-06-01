@@ -1,9 +1,56 @@
 query getProfileData {
 	me {
 		user {
-			givenName
-			surname
-			email
+			...profile
 		}
 	}
+}
+
+mutation updateProfileData(
+	$email: String
+	$password: String
+	$givenName: String
+	$surname: String
+	$address1: String
+	$address2: String
+	$city: String
+	$province: String
+	$postalCode: String
+	$country: String
+) {
+	updateMyProfile(
+		input: {
+			email: $email
+			password: $password
+			givenName: $givenName
+			surname: $surname
+			address1: $address1
+			address2: $address2
+			city: $city
+			province: $province
+			postalCode: $postalCode
+			country: $country
+		}
+	) {
+		errors {
+			message
+		}
+		authenticatedUser {
+			user {
+				...profile
+			}
+		}
+	}
+}
+
+fragment profile on User {
+	email
+	givenName
+	surname
+	address1
+	address2
+	city
+	province
+	postalCode
+	country
 }
