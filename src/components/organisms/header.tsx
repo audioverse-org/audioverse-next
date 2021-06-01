@@ -7,8 +7,11 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './header.module.scss';
 
+// TODO: rename component (sidebar?)
+
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
+	const iconSize = 20;
 
 	return (
 		<header className={styles.header}>
@@ -19,7 +22,7 @@ const Header = (): JSX.Element => {
 			</h1>
 			<ul>
 				<li>
-					<Icon icon={'playlist'} />{' '}
+					<Icon icon={'playlist'} size={iconSize} />{' '}
 					<FormattedMessage
 						id={`header__navItemPlaylist`}
 						defaultMessage="Playlist"
@@ -27,7 +30,7 @@ const Header = (): JSX.Element => {
 					/>
 				</li>
 				<li>
-					<Icon icon={'search'} />{' '}
+					<Icon icon={'search'} size={iconSize} />{' '}
 					<FormattedMessage
 						id={`header__navItemDiscover`}
 						defaultMessage="Discover"
@@ -35,7 +38,7 @@ const Header = (): JSX.Element => {
 					/>
 				</li>
 				<li>
-					<Icon icon={'bible'} />{' '}
+					<Icon icon={'bible'} size={iconSize} />{' '}
 					<FormattedMessage
 						id={`header__naveItemBible`}
 						defaultMessage="Bible"
@@ -43,7 +46,7 @@ const Header = (): JSX.Element => {
 					/>
 				</li>
 				<li>
-					<Icon icon={'collections'} />{' '}
+					<Icon icon={'collections'} size={iconSize} />{' '}
 					<FormattedMessage
 						id={`header__navItemCollections`}
 						defaultMessage="Collections"

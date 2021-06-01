@@ -1,5 +1,10 @@
 import React from 'react';
 
-export default function Icon({ icon }: { icon: string }): JSX.Element {
-	return <img src={`/img/icon-${icon}.svg`} height={16} width={16} />;
+type IconProps = {
+	icon: string;
+	size?: number;
+};
+
+export default function Icon({ icon, size = 16 }: IconProps): JSX.Element {
+	return <img src={`/img/icon-${icon}.svg`} height={size} width={size} />;
 }
