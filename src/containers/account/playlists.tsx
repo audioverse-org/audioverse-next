@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
@@ -9,7 +10,6 @@ import {
 	useGetAccountPlaylistsPageDataQuery,
 } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 function Playlists(): JSX.Element {
 	const language = useLanguageId();
