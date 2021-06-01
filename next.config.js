@@ -11,6 +11,11 @@ module.exports = withPWA({
 	async redirects() {
 		return [
 			{
+				source: '/',
+				destination: '/en',
+				permanent: false,
+			},
+			{
 				source: '/:lang/sermons',
 				destination: '/:lang/sermons/all/page/1',
 				permanent: true,
@@ -24,6 +29,14 @@ module.exports = withPWA({
 			loader: 'graphql-tag/loader',
 		});
 
+		config.module.rules.push({
+			test: /\.svg$/,
+			use: ['@svgr/webpack'],
+		});
+
 		return config;
 	},
+	// future: {
+	// 	webpack5: true,
+	// },
 });

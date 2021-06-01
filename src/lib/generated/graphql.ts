@@ -47,6 +47,7 @@ export type AttachmentUrlArgs = {
 
 export type AudioFile = Node & {
   __typename?: 'AudioFile';
+  /** Bitrate of the audio file in kbps. */
   bitrate: Scalars['Int'];
   /** Whether the current viewer may delete the file. */
   canDelete: Maybe<Scalars['Boolean']>;
@@ -418,6 +419,10 @@ export type Collection = Node & {
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['String'];
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsor: Maybe<Sponsor>;
   startDate: Maybe<Scalars['Date']>;
   summary: Scalars['String'];
@@ -501,6 +506,10 @@ export type CollectionCreateInput = {
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Scalars['ID'];
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -524,6 +533,10 @@ export type CollectionUpdateInput = {
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Maybe<Scalars['ID']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -1243,6 +1256,9 @@ export type Mutation = {
   mediaReleaseFormTemplateUpdate: SuccessPayload;
   mediaReleaseFormUpdate: MediaReleaseFormPayload;
   mediaReleaseUpdate: MediaReleasePayload;
+  pageCreate: PagePayload;
+  pageDelete: SuccessPayload;
+  pageUpdate: PagePayload;
   personCreate: PersonPayload;
   personDelete: SuccessPayload;
   personFavorite: SuccessPayload;
@@ -1493,6 +1509,22 @@ export type MutationMediaReleaseFormUpdateArgs = {
 export type MutationMediaReleaseUpdateArgs = {
   input: MediaReleaseUpdateInput;
   mediaReleaseId: Scalars['ID'];
+};
+
+
+export type MutationPageCreateArgs = {
+  input: PageCreateInput;
+};
+
+
+export type MutationPageDeleteArgs = {
+  pageId: Scalars['ID'];
+};
+
+
+export type MutationPageUpdateArgs = {
+  input: PageUpdateInput;
+  pageId: Scalars['ID'];
 };
 
 
@@ -1814,6 +1846,39 @@ export enum OrderByDirection {
   Desc = 'DESC'
 }
 
+export type Page = Node & {
+  __typename?: 'Page';
+  body: Scalars['String'];
+  id: Scalars['ID'];
+  isHidden: Scalars['Boolean'];
+  pageMenuId: Maybe<Scalars['Int']>;
+  slug: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type PageConnection = {
+  __typename?: 'PageConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<PageEdge>>;
+  nodes: Maybe<Array<Page>>;
+  pageInfo: PageInfo;
+};
+
+export type PageCreateInput = {
+  body: Scalars['String'];
+  isHidden: Maybe<Scalars['Boolean']>;
+  language: Language;
+  pageMenuId: Maybe<Scalars['Int']>;
+  slug: Scalars['String'];
+  title: Scalars['String'];
+};
+
+export type PageEdge = {
+  __typename?: 'PageEdge';
+  cursor: Scalars['String'];
+  node: Page;
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   endCursor: Maybe<Scalars['String']>;
@@ -1821,6 +1886,52 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   startCursor: Maybe<Scalars['String']>;
 };
+
+export type PageMenu = Node & {
+  __typename?: 'PageMenu';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
+export type PageMenuConnection = {
+  __typename?: 'PageMenuConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<PageMenuEdge>>;
+  nodes: Maybe<Array<PageMenu>>;
+  pageInfo: PageInfo;
+};
+
+export type PageMenuEdge = {
+  __typename?: 'PageMenuEdge';
+  cursor: Scalars['String'];
+  node: PageMenu;
+};
+
+export type PagePayload = {
+  __typename?: 'PagePayload';
+  errors: Array<InputValidationError>;
+  page: Maybe<Page>;
+};
+
+export type PageUpdateInput = {
+  body: Maybe<Scalars['String']>;
+  isHidden: Maybe<Scalars['Boolean']>;
+  pageMenuId: Maybe<Scalars['Int']>;
+  slug: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+};
+
+export type PagesOrder = {
+  direction: OrderByDirection;
+  field: PagesSortableField;
+};
+
+/** Properties by which page connections can be ordered. */
+export enum PagesSortableField {
+  CreatedAt = 'CREATED_AT',
+  Slug = 'SLUG',
+  Title = 'TITLE'
+}
 
 export type Person = Node & {
   __typename?: 'Person';
@@ -1840,6 +1951,7 @@ export type Person = Node & {
   imageWithFallback: Image;
   internalContact: Maybe<InternalContact>;
   isHidden: Scalars['Boolean'];
+  /** @deprecated Person.isPreapproved is replaced with Person.skipContentScreening */
   isPreapproved: Maybe<Scalars['Boolean']>;
   name: Scalars['String'];
   phone: Maybe<Scalars['String']>;
@@ -1850,6 +1962,10 @@ export type Person = Node & {
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['String'];
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   suffix: Scalars['String'];
   summary: Scalars['String'];
   surname: Scalars['String'];
@@ -1918,9 +2034,14 @@ export type PersonCreateInput = {
   image: Maybe<ImageInput>;
   internalContact: Maybe<InternalContactInput>;
   isHidden: Maybe<Scalars['Boolean']>;
+  /** Deprecated: isPreapproved is replaced with skipContentScreening. */
   isPreapproved: Maybe<Scalars['Boolean']>;
   language: Language;
   phone: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   suffix: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
   surname: Scalars['String'];
@@ -1950,8 +2071,13 @@ export type PersonUpdateInput = {
   image: Maybe<ImageInput>;
   internalContact: Maybe<InternalContactInput>;
   isHidden: Maybe<Scalars['Boolean']>;
+  /** Deprecated: isPreapproved is replaced with skipContentScreening. */
   isPreapproved: Maybe<Scalars['Boolean']>;
   phone: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   suffix: Maybe<Scalars['String']>;
   summary: Maybe<Scalars['String']>;
   surname: Maybe<Scalars['String']>;
@@ -2047,6 +2173,9 @@ export type Query = {
   /** Alias for `recording(id: ID)` */
   musicTrack: Maybe<Recording>;
   musicTracks: RecordingConnection;
+  page: Maybe<Page>;
+  pageMenus: Maybe<PageMenuConnection>;
+  pages: PageConnection;
   person: Maybe<Person>;
   persons: PersonConnection;
   popularRecordings: PopularRecordingConnection;
@@ -2469,6 +2598,29 @@ export type QueryMusicTracksArgs = {
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
+};
+
+
+export type QueryPageArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryPageMenusArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  offset: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPagesArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<PagesOrder>>;
+  pageMenuId: Maybe<Scalars['Int']>;
 };
 
 
@@ -3035,6 +3187,7 @@ export enum RecordingLegalScreeningStatus {
   Pending = 'PENDING',
   /** Awaiting re-evaluation */
   PendingReevaluation = 'PENDING_REEVALUATION',
+  Preapproved = 'PREAPPROVED',
   Rejected = 'REJECTED',
   /** Not Yet Begun */
   Unevaluated = 'UNEVALUATED'
@@ -3268,6 +3421,8 @@ export enum RecordingTranscriptionStatus {
   Failed = 'FAILED',
   /** Transcription in process. */
   Processing = 'PROCESSING',
+  /** Transcription has been requested. */
+  Requested = 'REQUESTED',
   /** Not Yet Begun */
   Unstarted = 'UNSTARTED'
 }
@@ -3344,6 +3499,10 @@ export type Sequence = Node & {
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['String'];
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsor: Maybe<Sponsor>;
   summary: Scalars['String'];
   title: Scalars['String'];
@@ -3411,6 +3570,10 @@ export type SequenceCreateInput = {
   hidingReason: Maybe<Scalars['String']>;
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Scalars['ID'];
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
@@ -3446,6 +3609,10 @@ export type SequenceUpdateInput = {
   hidingReason: Maybe<Scalars['String']>;
   image: Maybe<ImageInput>;
   isHidden: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsorId: Maybe<Scalars['ID']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -3481,6 +3648,10 @@ export type Sponsor = Node & UniformResourceLocatable & {
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['String'];
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   summary: Scalars['String'];
   title: Scalars['String'];
   website: Maybe<Scalars['URL']>;
@@ -3588,6 +3759,10 @@ export type SponsorCreateInput = {
   language: Language;
   location: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   summary: Maybe<Scalars['String']>;
   title: Scalars['String'];
   website: Maybe<Scalars['URL']>;
@@ -3624,6 +3799,10 @@ export type SponsorUpdateInput = {
   isHidden: Maybe<Scalars['Boolean']>;
   location: Maybe<Scalars['String']>;
   phone: Maybe<Scalars['String']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipContentScreening: Maybe<Scalars['Boolean']>;
+  /** Requires `ADMINISTRATION` role. */
+  skipLegalScreening: Maybe<Scalars['Boolean']>;
   summary: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
   website: Maybe<Scalars['URL']>;
@@ -4724,6 +4903,7 @@ export enum UsersSortableField {
 
 export type VideoFile = Node & {
   __typename?: 'VideoFile';
+  /** Bitrate of the video file in kbps. */
   bitrate: Scalars['Int'];
   /** Whether the current viewer may delete the file. */
   canDelete: Maybe<Scalars['Boolean']>;

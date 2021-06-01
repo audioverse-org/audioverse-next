@@ -110,4 +110,21 @@ describe('home page', () => {
 
 		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
+
+	it('disables sidebar', async () => {
+		const { props } = await getStaticProps({
+			params: {
+				language: 'en',
+			},
+		});
+
+		expect(props.disableSidebar).toBeTruthy();
+	});
 });
+
+// shows marketing header
+// includes language switcher
+// includes login and signup links
+// language switcher opens
+// language switcher closes
+// localize all text

@@ -11,7 +11,8 @@ export default function getCookies(
 		return cookie.parse(_.get(req.headers, 'cookie') || '');
 	}
 
-	if (process && process.browser) {
+	// https://github.com/vercel/next.js/issues/2177#issuecomment-536178575
+	if (typeof window !== 'undefined') {
 		return cookie.parse(_.get(document, 'cookie'));
 	}
 

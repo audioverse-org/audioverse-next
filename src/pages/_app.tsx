@@ -10,6 +10,8 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
 import Header from '@components/organisms/header';
+
+import styles from './_app.module.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient({
@@ -27,19 +29,24 @@ function MyApp<P>({
 	pageProps,
 }: {
 	Component: typeof React.Component;
-	pageProps: P;
+	pageProps: P & { disableSidebar?: boolean };
 }): JSX.Element {
+	const disableSidebar = pageProps.disableSidebar;
 	return (
 		<>
-			<div className={'template-base'}>
+			<div className={styles.base}>
 				<React.StrictMode>
 					<Head>
 						<title>AudioVerse</title>
 					</Head>
 					<QueryClientProvider client={queryClient}>
 						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
-							<Header />
-							<div className={'template-base__content'}>
+							{!disableSidebar && (
+								<div className={styles.header}>
+									<Header />
+								</div>
+							)}
+							<div className={styles.content}>
 								<Component {...pageProps} />
 							</div>
 						</Hydrate>

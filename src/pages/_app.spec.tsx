@@ -46,4 +46,18 @@ describe('app', () => {
 			expect(getByText('myResult')).toBeInTheDocument();
 		});
 	});
+
+	it('includes sidebar', async () => {
+		const { getByText } = await renderApp(() => <>h</>, {});
+
+		expect(getByText('Discover')).toBeInTheDocument();
+	});
+
+	it('disables sidebar', async () => {
+		const { queryByText } = await renderApp(() => <>h</>, {
+			disableSidebar: true,
+		});
+
+		expect(queryByText('Discover')).not.toBeInTheDocument();
+	});
 });

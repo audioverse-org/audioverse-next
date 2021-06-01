@@ -32,6 +32,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			sermons: nodes,
+			disableSidebar: true,
 		},
 		revalidate: REVALIDATE,
 	};
