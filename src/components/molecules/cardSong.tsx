@@ -4,8 +4,13 @@ import Card from '@components/molecules/card';
 import { COLORS } from '@lib/constants';
 
 import HatIcon from '../../../public/img/icon-music-solid.svg';
+import { CardSongFragment } from '@lib/generated/graphql';
 
-export default function CardSong(): JSX.Element {
+interface CardSongProps {
+	song: CardSongFragment;
+}
+
+export default function CardSong({ song }: CardSongProps): JSX.Element {
 	return (
 		<Card
 			style={
@@ -24,7 +29,7 @@ export default function CardSong(): JSX.Element {
 				icon: <HatIcon width={12} height={12} />,
 				title: 'Hope Sabbath School Special Edition',
 			}}
-			title={'Behold, Bless the Lord - Psalm 134:1-3'}
+			title={song.title}
 			duration={2520}
 			progress={0.3}
 			persons={[

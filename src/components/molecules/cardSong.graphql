@@ -1,0 +1,3 @@
+fragment cardSong on Recording {
+	title
+}

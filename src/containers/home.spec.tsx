@@ -1,21 +1,31 @@
 import { waitFor } from '@testing-library/react';
 
-import { getHomeStaticProps } from '@lib/generated/graphql';
-import { loadQuery, renderWithIntl } from '@lib/test/helpers';
+import { GetHomeStaticPropsDocument } from '@lib/generated/graphql';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	loadQuery,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
-jest.mock('@lib/api');
 jest.mock('next/router');
-jest.mock('@lib/generated/graphql');
 
-const renderHome = async ({ params = { language: 'en' }, query = {} } = {}) => {
-	loadQuery(query);
-	const { props } = await getStaticProps({ params });
-	return renderWithIntl(Home, props);
-};
+const renderPage = buildStaticRenderer(Home, getStaticProps, {
+	language: 'en',
+});
+
+const loadData = buildLoader(GetHomeStaticPropsDocument, {
+	musicTracks: {
+		nodes: [{ title: 'the_song_title' }],
+	},
+});
 
 describe('home page', () => {
-	beforeEach(() => jest.resetAllMocks());
+	beforeEach(() => {
+		jest.resetAllMocks();
+		loadData();
+	});
 
 	it('revalidates static copy every 10s', async () => {
 		const { revalidate } = await getStaticProps({ params: { language: 'en' } });
@@ -35,12 +45,6 @@ describe('home page', () => {
 		expect(fallback).toBe(true);
 	});
 
-	it('gets recent sermons', async () => {
-		await renderHome();
-
-		expect(getHomeStaticProps).toHaveBeenCalledWith({ language: 'ENGLISH' });
-	});
-
 	it('generates static paths for all languages', async () => {
 		const { paths } = await getStaticPaths();
 
@@ -48,15 +52,19 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		await renderHome({ params: { language: 'es' } });
+		await renderPage({ language: 'es' });
 
 		await waitFor(() =>
-			expect(getHomeStaticProps).toBeCalledWith({ language: 'SPANISH' })
+			expect(mockedFetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {
+				variables: {
+					language: 'SPANISH',
+				},
+			})
 		);
 	});
 
 	it('includes testimonies', async () => {
-		const { getByText } = await renderHome();
+		const { getByText } = await renderPage();
 
 		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
@@ -64,7 +72,7 @@ describe('home page', () => {
 	it('falls back to English', async () => {
 		loadQuery({ language: 'ak' });
 
-		const { getByText } = await renderHome();
+		const { getByText } = await renderPage();
 
 		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
@@ -77,6 +85,16 @@ describe('home page', () => {
 		});
 
 		expect(props.disableSidebar).toBeTruthy();
+	});
+
+	it('renders song title', async () => {
+		loadData();
+
+		const { getByText } = await renderPage();
+
+		await waitFor(() => {
+			expect(getByText('the_song_title')).toBeInTheDocument();
+		});
 	});
 });
 

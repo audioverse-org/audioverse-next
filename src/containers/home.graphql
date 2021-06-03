@@ -1,7 +1,36 @@
 query getHomeStaticProps($language: Language!) {
-	sermons(language: $language, first: 5) {
+	musicTracks(language: $language, first: 1, orderBy:{field:PUBLISHED_AT,direction:DESC}) {
 		nodes {
-			...recordingList
+			title
+		}
+	}
+	audiobible(id:"ENGKJVC") {
+		id
+		title
+		book(id:"ENGKJVC-Gen") {
+			title
+		}
+	}
+	stories(language: $language, first:1, orderBy:{field:PUBLISHED_AT,direction:DESC}) {
+		nodes {
+			title
+		}
+	}
+	tags(language:$language, first:1) {
+		nodes {
+			name
+			recordings(first:1) {
+				nodes {
+					title
+				}
+			}
+		}
+	}
+	recordings(language:$language, first:1, orderBy:{field:PUBLISHED_AT,direction:DESC}) {
+		nodes {
+			id
+			title
+			publishDate
 		}
 	}
 }

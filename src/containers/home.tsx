@@ -13,8 +13,11 @@ import Testimonies from '@components/organisms/testimonies';
 import LanguageIcon from '../../public/img/icon-language-solid.svg';
 
 import styles from './home.module.scss';
+import { HomeProps } from '@pages/[language]';
 
-export default function Home(): JSX.Element {
+export default function Home({ data }: HomeProps): JSX.Element {
+	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -79,7 +82,7 @@ export default function Home(): JSX.Element {
 				}
 				media={
 					<div className={styles.recent}>
-						<CardSong />
+						{song && <CardSong song={song} />}
 						<CardChapter />
 						<CardStory />
 						<CardTopic />
