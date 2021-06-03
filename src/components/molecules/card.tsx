@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import Icon from '@components/atoms/icon';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
 import formatDuration from '@lib/formatDuration';
 import { SpeakerNameFragment } from '@lib/generated/graphql';
+
+import PlayIcon from '../../../public/img/icon-play.svg';
 
 interface CardProps {
 	container?: {
@@ -17,6 +19,7 @@ interface CardProps {
 	persons?: SpeakerNameFragment[];
 	duration?: number;
 	progress: number;
+	style?: CSSProperties;
 }
 
 export default function Card({
@@ -24,9 +27,11 @@ export default function Card({
 	title,
 	persons = [],
 	duration,
+	style,
+	progress,
 }: CardProps): JSX.Element {
 	return (
-		<div className={styles.card}>
+		<div className={styles.card} style={style}>
 			{container && (
 				<div className={styles.hat}>
 					<span className={styles.hatIcon}>{container?.icon}</span>
@@ -41,7 +46,7 @@ export default function Card({
 					</span>
 				)}
 				<div className={styles.heading}>
-					<h1>{title}</h1> <Icon icon={'play'} size={24} />
+					<h1>{title}</h1> <PlayIcon width={24} height={24} />
 				</div>
 				<div>
 					{persons.map((p) => (
@@ -52,7 +57,10 @@ export default function Card({
 					{duration && (
 						<span className={styles.duration}>{formatDuration(duration)}</span>
 					)}
-					<span className={styles.progress}>
+					<span
+						className={styles.progress}
+						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
+					>
 						<span />
 					</span>
 					<Icon icon={'bookmark'} size={24} />

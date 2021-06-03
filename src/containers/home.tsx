@@ -4,24 +4,17 @@ import { FormattedMessage } from 'react-intl';
 import Icon from '@components/atoms/icon';
 import CardChapter from '@components/molecules/cardChapter';
 import CardRecording from '@components/molecules/cardRecording';
-import RecordingList from '@components/molecules/recordingList';
+import CardSong from '@components/molecules/cardSong';
+import CardStory from '@components/molecules/cardStory';
+import CardTopic from '@components/molecules/cardTopic';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
-import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 
 import LanguageIcon from '../../public/img/icon-language-solid.svg';
 
 import styles from './home.module.scss';
 
-type Sermons = NonNullable<GetHomeStaticPropsQuery['sermons']['nodes']>;
-
-// TODO: Move this interface into index.ts where the component is re-exported
-export interface HomeProps {
-	sermons: Sermons;
-	disableSidebar: boolean;
-}
-
-export default function Home({ sermons }: HomeProps): JSX.Element {
+export default function Home(): JSX.Element {
 	return (
 		<div>
 			<div className={styles.header}>
@@ -85,11 +78,13 @@ export default function Home({ sermons }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<>
-						<CardRecording />
+					<div className={styles.recent}>
+						<CardSong />
 						<CardChapter />
-						<RecordingList recordings={sermons} />
-					</>
+						<CardStory />
+						<CardTopic />
+						<CardRecording />
+					</div>
 				}
 				center={true}
 				reverse={true}

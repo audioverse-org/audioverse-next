@@ -1,13 +1,14 @@
 import _ from 'lodash';
 
-import Home, { HomeProps } from '@containers/home';
+import Home from '@containers/home';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { getHomeStaticProps, Language } from '@lib/generated/graphql';
 
 export default Home;
 
+// TODO: Add a props interface to this file; import in home.tsx
 interface StaticProps {
-	props: HomeProps;
+	props: any;
 	revalidate: number;
 }
 

@@ -1,16 +1,16 @@
 .card {
 	text-align: left;
-	background: #ffffff;
+	background: var(--cardBg, #ffffff);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 16px;
 }
 
 .hat {
 	border-radius: 16px 16px 0 0;
-	background-color: #efebeb;
+	background-color: var(--hatBg, #efebeb);
+	color: var(--hatColor, #323e48);
 	padding: 16px;
 	width: 100%;
-	color: #323e48;
 	font-size: 0.9em;
 	display: flex;
 	align-items: center;
@@ -18,7 +18,7 @@
 
 .hatIcon {
 	margin-right: 0.3em;
-	color: #ff224a;
+	color: var(--iconColor, #ff224a);
 }
 
 .hatTitle {
@@ -27,23 +27,29 @@
 
 .content {
 	padding: 16px;
-	color: #6b7680;
+	color: var(--cardColor, #6b7680);
 }
 
 .part {
 	font-size: 0.7em;
 	font-weight: 600;
-	color: #ff224a;
+	color: var(--partColor, #ff224a);
 }
 
 .heading {
 	display: flex;
 	justify-content: space-between;
+	color: var(--headingColor, #323e48);
 	h1 {
-		color: #323e48;
 		font-size: 1.5em;
 		margin: 0 0 0.5em 0;
 		flex-grow: 1;
+	}
+	svg {
+		flex: 0 0 auto;
+	}
+	path {
+		stroke: var(--headingColor, #323e48);
 	}
 }
 
@@ -59,9 +65,14 @@
 }
 
 .progress {
-	--progress: 0.5;
 	border-bottom: 1px solid #cdd9e3;
 	flex: 1 1 100%;
 	margin-left: 1em;
 	margin-right: 1em;
+	span {
+		margin-bottom: -1px;
+		display: block;
+		border-bottom: 1px solid var(--progressColor, #ff224a);
+		width: var(--progress, 0);
+	}
 }

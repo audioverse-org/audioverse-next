@@ -30,3 +30,14 @@
 	text-decoration: none;
 	display: inline-block;
 }
+
+.recent {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: 1fr;
+	grid-gap: 1rem;
+	align-items: start;
+	position: relative;
+	margin-left: -20vw;
+	margin-right: -20vw;
+}
