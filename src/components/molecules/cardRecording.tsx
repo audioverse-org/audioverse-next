@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Card from '@components/molecules/card';
+import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
@@ -10,31 +11,29 @@ import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 // Dynamically render progress bar
 // Dynamically render all content
 
-export default function CardRecording(): JSX.Element {
+interface CardRecordingProps {
+	recording: CardRecordingFragment;
+}
+
+export default function CardRecording({
+	recording,
+}: CardRecordingProps): JSX.Element {
+	const container = recording.sequence
+		? {
+				icon: <ListIcon width={12} height={12} />,
+				title: recording.sequence.title,
+				length: recording.sequence.recordings.aggregate?.count,
+				// TODO: set index dynamically
+				index: 1,
+		  }
+		: undefined;
+
 	return (
 		<Card
-			container={{
-				icon: <ListIcon width={12} height={12} />,
-				title: 'Leading People From Health To Him',
-				length: 6,
-				index: 1,
-			}}
-			title={'Leading People From Health To Him, Part I'}
-			persons={[
-				{
-					id: 'the_id',
-					name: 'Don Mackintosh',
-					summary: 'This is his summary.',
-					website: 'the_website',
-					viewerHasFavorited: false,
-					imageWithFallback: {
-						url:
-							'https://s.audioverse.org/english/gallery/persons/_/36/36/Mackintosh_Don.jpg',
-					},
-				},
-			]}
-			duration={4980}
+			container={container}
+			// TODO: set progress dynamically
 			progress={0}
+			{...recording}
 		/>
 	);
 }

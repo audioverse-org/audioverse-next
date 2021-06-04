@@ -11,6 +11,13 @@ interface CardSongProps {
 }
 
 export default function CardSong({ song }: CardSongProps): JSX.Element {
+	const container = song.collection
+		? {
+				icon: <HatIcon width={12} height={12} />,
+				title: song.collection.title,
+		  }
+		: undefined;
+
 	return (
 		<Card
 			style={
@@ -25,37 +32,9 @@ export default function CardSong({ song }: CardSongProps): JSX.Element {
 					'--iconColor': COLORS.red,
 				} as CSSProperties
 			}
-			container={{
-				icon: <HatIcon width={12} height={12} />,
-				title: 'Hope Sabbath School Special Edition',
-			}}
-			title={song.title}
-			duration={2520}
+			container={container}
 			progress={0.3}
-			persons={[
-				{
-					id: '1',
-					name: 'Ashley Hold',
-					summary: 'This is his summary.',
-					website: 'the_website',
-					viewerHasFavorited: false,
-					imageWithFallback: {
-						url:
-							'https://s.audioverse.org/english/gallery/persons/_/150/150/dupreez_ron.jpg',
-					},
-				},
-				{
-					id: '2',
-					name: 'Bodil Moris',
-					summary: 'This is his summary.',
-					website: 'the_website',
-					viewerHasFavorited: false,
-					imageWithFallback: {
-						url:
-							'https://s.audioverse.org/english/gallery/persons/_/150/150/dupreez_ron.jpg',
-					},
-				},
-			]}
+			{...song}
 		/>
 	);
 }

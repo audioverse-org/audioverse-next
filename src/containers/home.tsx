@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
-import CardChapter from '@components/molecules/cardChapter';
+import CardBibleChapter from '@components/molecules/cardBibleChapter';
 import CardRecording from '@components/molecules/cardRecording';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
@@ -17,6 +17,10 @@ import styles from './home.module.scss';
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];
+	const chapter = data?.audiobible?.book.chapter;
+	const story = data?.stories.nodes && data.stories.nodes[0];
+	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
+	const recording = data?.recordings.nodes && data.recordings.nodes[0];
 
 	return (
 		<div>
@@ -83,10 +87,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				media={
 					<div className={styles.recent}>
 						{song && <CardSong song={song} />}
-						<CardChapter />
-						<CardStory />
-						<CardTopic />
-						<CardRecording />
+						{chapter && <CardBibleChapter chapter={chapter} />}
+						{story && <CardStory story={story} />}
+						{topicRecording && <CardTopic topicRecording={topicRecording} />}
+						{recording && <CardRecording recording={recording} />}
 					</div>
 				}
 				center={true}

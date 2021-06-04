@@ -33,6 +33,7 @@ export default function Card({
 	return (
 		<div className={styles.card} style={style}>
 			{container && (
+				// TODO: Link the hat
 				<div className={styles.hat}>
 					<span className={styles.hatIcon}>{container?.icon}</span>
 					<span className={styles.hatTitle}>{container?.title}</span>

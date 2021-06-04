@@ -5,7 +5,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			title
+			...cardSong
 		}
 	}
 	audiobible(id: "ENGKJVC") {
@@ -13,6 +13,9 @@ query getHomeStaticProps($language: Language!) {
 		title
 		book(id: "ENGKJVC-Gen") {
 			title
+			chapter(id: "ENGKJVC-Gen-1") {
+				...cardBibleChapter
+			}
 		}
 	}
 	stories(
@@ -21,17 +24,18 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			title
+			...cardStory
 		}
 	}
-	tags(language: $language, first: 1) {
+	# TODO: Replace with new topics entity when it's added
+	tag: recordings(
+		language: $language
+		tagName: "Family"
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
 		nodes {
-			name
-			recordings(first: 1) {
-				nodes {
-					title
-				}
-			}
+			...cardTopic
 		}
 	}
 	recordings(
@@ -40,9 +44,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			id
-			title
-			publishDate
+			...cardRecording
 		}
 	}
 }

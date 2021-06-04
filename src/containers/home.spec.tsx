@@ -1,6 +1,9 @@
 import { waitFor } from '@testing-library/react';
 
-import { GetHomeStaticPropsDocument } from '@lib/generated/graphql';
+import {
+	GetHomeStaticPropsDocument,
+	GetHomeStaticPropsQuery,
+} from '@lib/generated/graphql';
 import {
 	buildLoader,
 	buildStaticRenderer,
@@ -15,11 +18,82 @@ const renderPage = buildStaticRenderer(Home, getStaticProps, {
 	language: 'en',
 });
 
-const loadData = buildLoader(GetHomeStaticPropsDocument, {
-	musicTracks: {
-		nodes: [{ title: 'the_song_title' }],
+const song = {
+	title: 'the_song_title',
+	persons: [{ id: 'the_song_person_id', name: 'the_song_person_name' }],
+	duration: 5 * 60,
+	collection: {
+		id: 'the_song_collection_id',
+		title: 'the_song_collection_title',
 	},
-});
+};
+
+const story = {
+	title: 'the_story_title',
+	duration: 21 * 60,
+	persons: [{ id: 'the_story_person_id', name: 'the_story_person_name' }],
+	sequence: {
+		title: 'the_story_sequence_title',
+		recordings: {
+			aggregate: {
+				count: 7,
+			},
+		},
+	},
+};
+
+const taggedRecording = {
+	title: 'the_tagged_recording_title',
+	persons: [
+		{
+			id: 'the_tagged_recording_person_id',
+			name: 'the_tagged_recording_person_name',
+		},
+	],
+	duration: 27 * 60,
+};
+
+const recording = {
+	title: 'the_recording_title',
+	persons: [
+		{
+			id: 'the_recording_person_id',
+			name: 'the_recording_person_name',
+		},
+	],
+	duration: 33 * 60,
+	sequence: {
+		title: 'the_recording_sequence_title',
+		recordings: {
+			aggregate: {
+				count: 15,
+			},
+		},
+	},
+};
+
+const loadData = buildLoader<GetHomeStaticPropsQuery>(
+	GetHomeStaticPropsDocument,
+	{
+		musicTracks: {
+			nodes: [song],
+		},
+		audiobible: {
+			book: {
+				chapter: {
+					title: 'the_chapter_title',
+				},
+			},
+		},
+		stories: { nodes: [story] },
+		tag: {
+			nodes: [taggedRecording],
+		},
+		recordings: {
+			nodes: [recording],
+		},
+	}
+);
 
 describe('home page', () => {
 	beforeEach(() => {
@@ -88,16 +162,91 @@ describe('home page', () => {
 	});
 
 	it('renders song title', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		await waitFor(() => {
 			expect(getByText('the_song_title')).toBeInTheDocument();
 		});
 	});
+
+	it('renders song person', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_song_person_name')).toBeInTheDocument();
+	});
+
+	it('renders song duration', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('5m')).toBeInTheDocument();
+	});
+
+	it('renders song collection title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_song_collection_title')).toBeInTheDocument();
+	});
+
+	it('renders chapter title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_chapter_title')).toBeInTheDocument();
+	});
+
+	it('renders story title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_story_title')).toBeInTheDocument();
+	});
+
+	it('renders story duration', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('21m')).toBeInTheDocument();
+	});
+
+	it('renders story parts total', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('Part 1 of 7')).toBeInTheDocument();
+	});
+
+	it('renders story sequence title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_story_sequence_title')).toBeInTheDocument();
+	});
+
+	it('renders tagged recording title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_tagged_recording_title')).toBeInTheDocument();
+	});
+
+	it('renders recording title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_recording_title')).toBeInTheDocument();
+	});
+
+	it('renders recording sequence title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_recording_sequence_title')).toBeInTheDocument();
+	});
+
+	it('renders recording sequence part info', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('Part 1 of 15')).toBeInTheDocument();
+	});
 });
 
+// TODO:
+// render Bible chapter duration
+// render Bible chapter progress
+// render Bible chapter container title (book and version)
+// render song progress
 // shows marketing header
 // includes language switcher
 // includes login and signup links

@@ -5176,9 +5176,72 @@ export type GetWithAuthGuardDataQuery = (
   )> }
 );
 
+export type CardBibleChapterFragment = (
+  { __typename?: 'BibleChapter' }
+  & Pick<BibleChapter, 'title'>
+);
+
+export type CardRecordingFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title' | 'duration'>
+  & { persons: Array<(
+    { __typename?: 'Person' }
+    & SpeakerNameFragment
+  )>, sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'title'>
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
+);
+
 export type CardSongFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'title'>
+  & Pick<Recording, 'title' | 'duration'>
+  & { persons: Array<(
+    { __typename?: 'Person' }
+    & Pick<Person, 'id' | 'name' | 'viewerHasFavorited' | 'summary' | 'website'>
+    & { imageWithFallback: (
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    ) }
+  )>, collection: Maybe<(
+    { __typename?: 'Collection' }
+    & Pick<Collection, 'id' | 'title'>
+  )> }
+);
+
+export type CardStoryFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title' | 'duration'>
+  & { persons: Array<(
+    { __typename?: 'Person' }
+    & SpeakerNameFragment
+  )>, sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'title'>
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
+);
+
+export type CardTopicFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title' | 'duration'>
+  & { persons: Array<(
+    { __typename?: 'Person' }
+    & SpeakerNameFragment
+  )> }
 );
 
 export type CopyrightInfoFragment = (
@@ -5787,7 +5850,7 @@ export type GetHomeStaticPropsQuery = (
     { __typename?: 'RecordingConnection' }
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
-      & Pick<Recording, 'title'>
+      & CardSongFragment
     )>> }
   ), audiobible: Maybe<(
     { __typename?: 'Bible' }
@@ -5795,31 +5858,28 @@ export type GetHomeStaticPropsQuery = (
     & { book: (
       { __typename?: 'BibleBook' }
       & Pick<BibleBook, 'title'>
+      & { chapter: (
+        { __typename?: 'BibleChapter' }
+        & CardBibleChapterFragment
+      ) }
     ) }
   )>, stories: (
     { __typename?: 'RecordingConnection' }
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
-      & Pick<Recording, 'title'>
+      & CardStoryFragment
     )>> }
-  ), tags: (
-    { __typename?: 'TagConnection' }
+  ), tag: (
+    { __typename?: 'RecordingConnection' }
     & { nodes: Maybe<Array<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'name'>
-      & { recordings: (
-        { __typename?: 'RecordingConnection' }
-        & { nodes: Maybe<Array<(
-          { __typename?: 'Recording' }
-          & Pick<Recording, 'title'>
-        )>> }
-      ) }
+      { __typename?: 'Recording' }
+      & CardTopicFragment
     )>> }
   ), recordings: (
     { __typename?: 'RecordingConnection' }
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
-      & Pick<Recording, 'id' | 'title' | 'publishDate'>
+      & CardRecordingFragment
     )>> }
   ) }
 );
@@ -6845,11 +6905,86 @@ export type WriteFeedFileFragment = (
   )> }
 );
 
-export const CardSongFragmentDoc = `
-    fragment cardSong on Recording {
+export const CardBibleChapterFragmentDoc = `
+    fragment cardBibleChapter on BibleChapter {
   title
 }
     `;
+export const SpeakerNameFragmentDoc = `
+    fragment speakerName on Person {
+  id
+  name
+  imageWithFallback {
+    url(size: 100)
+  }
+  summary
+  website
+  viewerHasFavorited
+}
+    `;
+export const CardRecordingFragmentDoc = `
+    fragment cardRecording on Recording {
+  title
+  duration
+  persons {
+    ...speakerName
+  }
+  sequence {
+    title
+    recordings {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${SpeakerNameFragmentDoc}`;
+export const CardSongFragmentDoc = `
+    fragment cardSong on Recording {
+  title
+  persons {
+    id
+    name
+    viewerHasFavorited
+    summary
+    website
+    imageWithFallback {
+      url(size: 100)
+    }
+  }
+  duration
+  collection {
+    id
+    title
+  }
+}
+    `;
+export const CardStoryFragmentDoc = `
+    fragment cardStory on Recording {
+  title
+  duration
+  persons {
+    ...speakerName
+  }
+  sequence {
+    title
+    recordings {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${SpeakerNameFragmentDoc}`;
+export const CardTopicFragmentDoc = `
+    fragment cardTopic on Recording {
+  title
+  duration
+  persons {
+    ...speakerName
+  }
+}
+    ${SpeakerNameFragmentDoc}`;
 export const CopyrightInfoFragmentDoc = `
     fragment copyrightInfo on Recording {
   copyrightYear
@@ -6882,18 +7017,6 @@ export const CopyrightInfosFragmentDoc = `
   ...copyrightInfo
 }
     ${CopyrightInfoFragmentDoc}`;
-export const SpeakerNameFragmentDoc = `
-    fragment speakerName on Person {
-  id
-  name
-  imageWithFallback {
-    url(size: 100)
-  }
-  summary
-  website
-  viewerHasFavorited
-}
-    `;
 export const RecordingListFragmentDoc = `
     fragment recordingList on Recording {
   id
@@ -7618,7 +7741,7 @@ export const GetHomeStaticPropsDocument = `
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {
-      title
+      ...cardSong
     }
   }
   audiobible(id: "ENGKJVC") {
@@ -7626,6 +7749,9 @@ export const GetHomeStaticPropsDocument = `
     title
     book(id: "ENGKJVC-Gen") {
       title
+      chapter(id: "ENGKJVC-Gen-1") {
+        ...cardBibleChapter
+      }
     }
   }
   stories(
@@ -7634,17 +7760,17 @@ export const GetHomeStaticPropsDocument = `
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {
-      title
+      ...cardStory
     }
   }
-  tags(language: $language, first: 1) {
+  tag: recordings(
+    language: $language
+    tagName: "Family"
+    first: 1
+    orderBy: {field: PUBLISHED_AT, direction: DESC}
+  ) {
     nodes {
-      name
-      recordings(first: 1) {
-        nodes {
-          title
-        }
-      }
+      ...cardTopic
     }
   }
   recordings(
@@ -7653,13 +7779,15 @@ export const GetHomeStaticPropsDocument = `
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {
-      id
-      title
-      publishDate
+      ...cardRecording
     }
   }
 }
-    `;
+    ${CardSongFragmentDoc}
+${CardBibleChapterFragmentDoc}
+${CardStoryFragmentDoc}
+${CardTopicFragmentDoc}
+${CardRecordingFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
       TData = GetHomeStaticPropsQuery,
       TError = unknown
@@ -8880,6 +9008,10 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
+
+
+
+
 
 
 

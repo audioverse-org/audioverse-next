@@ -1,0 +1,15 @@
+fragment cardRecording on Recording {
+	title
+	duration
+	persons {
+		...speakerName
+	}
+	sequence {
+		title
+		recordings {
+			aggregate {
+				count
+			}
+		}
+	}
+}

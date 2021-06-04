@@ -1,3 +1,18 @@
 fragment cardSong on Recording {
 	title
+	persons {
+		id
+		name
+		viewerHasFavorited
+		summary
+		website
+		imageWithFallback {
+			url(size: 100)
+		}
+	}
+	duration
+	collection {
+		id
+		title
+	}
 }

@@ -2,10 +2,26 @@ import React, { CSSProperties } from 'react';
 
 import Card from '@components/molecules/card';
 import { COLORS } from '@lib/constants';
+import { CardStoryFragment } from '@lib/generated/graphql';
 
 import FeatherIcon from '../../../public/img/icon-feather-solid.svg';
 
-export default function CardStory(): JSX.Element {
+interface CardStoryProps {
+	story: CardStoryFragment;
+}
+
+export default function CardStory({ story }: CardStoryProps): JSX.Element {
+	const container = story.sequence
+		? {
+				icon: <FeatherIcon width={12} height={12} />,
+				title: story.sequence?.title,
+				length: story.sequence?.recordings.aggregate?.count,
+				// TODO: set index to live data
+				// https://trello.com/c/DSJLqX29/238-add-parts-info-eg-part-1-of-7
+				index: 1,
+		  }
+		: undefined;
+
 	return (
 		<Card
 			style={
@@ -20,28 +36,9 @@ export default function CardStory(): JSX.Element {
 					'--iconColor': COLORS.salmon,
 				} as CSSProperties
 			}
-			container={{
-				icon: <FeatherIcon width={12} height={12} />,
-				title: 'Discovery Mountain, Season 2: Summer of Strife',
-				length: 10,
-				index: 1,
-			}}
-			title={'01 - Goodnight, Blackfoot Cabin'}
-			duration={1800}
+			container={container}
 			progress={0.3}
-			persons={[
-				{
-					id: 'the_id',
-					name: 'Jean Boonstra',
-					summary: 'This is his summary.',
-					website: 'the_website',
-					viewerHasFavorited: false,
-					imageWithFallback: {
-						url:
-							'https://s.audioverse.org/english/gallery/persons/_/86/86/default.png',
-					},
-				},
-			]}
+			{...story}
 		/>
 	);
 }
