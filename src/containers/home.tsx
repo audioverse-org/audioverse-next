@@ -9,11 +9,11 @@ import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
+import { HomeProps } from '@pages/[language]';
 
 import LanguageIcon from '../../public/img/icon-language-solid.svg';
 
 import styles from './home.module.scss';
-import { HomeProps } from '@pages/[language]';
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];

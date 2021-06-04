@@ -2,9 +2,9 @@ import React, { CSSProperties } from 'react';
 
 import Card from '@components/molecules/card';
 import { COLORS } from '@lib/constants';
+import { CardSongFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../public/img/icon-music-solid.svg';
-import { CardSongFragment } from '@lib/generated/graphql';
 
 interface CardSongProps {
 	song: CardSongFragment;
