@@ -10,7 +10,7 @@ import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 // Dynamically render progress bar
 // Dynamically render all content
 
-export default function CardRecording(): JSX.Element {
+export default function CardSermon(): JSX.Element {
 	return (
 		<Card
 			container={{
@@ -35,6 +35,7 @@ export default function CardRecording(): JSX.Element {
 			]}
 			duration={4980}
 			progress={0}
+			theme={'sermon'}
 		/>
 	);
 }

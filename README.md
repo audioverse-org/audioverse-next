@@ -37,5 +37,5 @@ Compiles to `src/lib/generated/graphql.ts`
 
 ## Module shorthand / aliases
 
-Module paths must be mapped in `tsconfig.json`, `package.json`, and `.storybook/webpack.config.js`.
+Module paths must be mapped in `tsconfig.json`, `jest.config.js`, and `.storybook/webpack.config.js`.
 [More info](https://github.com/kulshekhar/ts-jest/issues/414#issuecomment-369876280)

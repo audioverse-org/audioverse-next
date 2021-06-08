@@ -1,25 +1,13 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import Card from '@components/molecules/card';
-import { COLORS } from '@lib/constants';
 
 import HatIcon from '../../../public/img/icon-layer-group-solid.svg';
 
 export default function CardTopic(): JSX.Element {
 	return (
 		<Card
-			style={
-				{
-					'--hatBg': '#040253',
-					'--hatColor': 'white',
-					'--cardBg': '#3E3D6D',
-					'--cardColor': COLORS.lightTone,
-					'--headingColor': 'white',
-					'--progressColor': COLORS.salmon,
-					'--partColor': COLORS.salmon,
-					'--iconColor': COLORS.salmon,
-				} as CSSProperties
-			}
+			theme={'topic'}
 			container={{
 				icon: <HatIcon width={12} height={12} />,
 				title: 'Marriage and the Family',

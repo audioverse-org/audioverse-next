@@ -19,7 +19,7 @@ interface CardProps {
 	persons?: SpeakerNameFragment[];
 	duration?: number;
 	progress: number;
-	style?: CSSProperties;
+	theme: 'chapter' | 'sermon' | 'song' | 'story' | 'topic';
 }
 
 export default function Card({
@@ -27,15 +27,15 @@ export default function Card({
 	title,
 	persons = [],
 	duration,
-	style,
+	theme,
 	progress,
 }: CardProps): JSX.Element {
 	return (
-		<div className={styles.card} style={style}>
+		<div className={`${styles.card} ${styles[theme]}`}>
 			{container && (
 				<div className={styles.hat}>
-					<span className={styles.hatIcon}>{container?.icon}</span>
-					<span className={styles.hatTitle}>{container?.title}</span>
+					<span className={styles.hatIcon}>{container.icon}</span>
+					<span className={styles.hatTitle}>{container.title}</span>
 					<Icon icon={'chevron-down'} size={16} />
 				</div>
 			)}

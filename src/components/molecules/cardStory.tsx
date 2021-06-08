@@ -1,25 +1,13 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import Card from '@components/molecules/card';
-import { COLORS } from '@lib/constants';
 
 import FeatherIcon from '../../../public/img/icon-feather-solid.svg';
 
 export default function CardStory(): JSX.Element {
 	return (
 		<Card
-			style={
-				{
-					'--hatBg': '#003849',
-					'--hatColor': 'white',
-					'--cardBg': '#325763',
-					'--cardColor': COLORS.lightTone,
-					'--headingColor': 'white',
-					'--progressColor': COLORS.salmon,
-					'--partColor': COLORS.salmon,
-					'--iconColor': COLORS.salmon,
-				} as CSSProperties
-			}
+			theme={'story'}
 			container={{
 				icon: <FeatherIcon width={12} height={12} />,
 				title: 'Discovery Mountain, Season 2: Summer of Strife',

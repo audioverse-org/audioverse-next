@@ -1,25 +1,13 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import Card from '@components/molecules/card';
-import { COLORS } from '@lib/constants';
 
 import HatIcon from '../../../public/img/icon-music-solid.svg';
 
 export default function CardSong(): JSX.Element {
 	return (
 		<Card
-			style={
-				{
-					'--hatBg': '#D7EBFB',
-					'--hatColor': COLORS.dark,
-					'--cardBg': '#EBF2F9',
-					'--cardColor': COLORS.midTone,
-					'--headingColor': COLORS.dark,
-					'--progressColor': COLORS.red,
-					'--partColor': COLORS.red,
-					'--iconColor': COLORS.red,
-				} as CSSProperties
-			}
+			theme={'song'}
 			container={{
 				icon: <HatIcon width={12} height={12} />,
 				title: 'Hope Sabbath School Special Edition',

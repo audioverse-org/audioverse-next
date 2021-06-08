@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
 import CardChapter from '@components/molecules/cardChapter';
-import CardRecording from '@components/molecules/cardRecording';
+import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
@@ -17,9 +17,9 @@ import styles from './home.module.scss';
 export default function Home(): JSX.Element {
 	return (
 		<div>
-			<div className={styles.header}>
+			<header className={styles.header}>
 				<img src="/img/logo.svg" width={161} height={23} />
-				<div className={styles.nav}>
+				<nav className={styles.nav}>
 					{/* TODO: give FA attribution, or purchase a license */}
 					<span className={styles.languages}>
 						<LanguageIcon
@@ -41,8 +41,8 @@ export default function Home(): JSX.Element {
 					<span>|</span>
 					<a href={'#'}>Login</a>
 					<a href={'#'}>Sign Up</a>
-				</div>
-			</div>
+				</nav>
+			</header>
 			<Section
 				text={
 					<>
@@ -83,7 +83,7 @@ export default function Home(): JSX.Element {
 						<CardChapter />
 						<CardStory />
 						<CardTopic />
-						<CardRecording />
+						<CardSermon />
 					</div>
 				}
 				center={true}
