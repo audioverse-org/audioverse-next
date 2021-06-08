@@ -7,6 +7,7 @@ import CardRecording from '@components/molecules/cardRecording';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
+import CardSlider from '@components/organisms/cardSlider';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
 import { HomeProps } from '@pages/[language]';
@@ -39,10 +40,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<span>English</span>
 						<Icon icon={'chevron-down'} />
 					</span>
-					<a href={'#'} className={styles.button}>
+					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
 						Donate
 					</a>
-					<a href={'#'} className={styles.button}>
+					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
 						Download App
 					</a>
 					<span>|</span>
@@ -59,7 +60,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							content. Be challenged and inspired to grow in your relationship
 							with Jesus through songs, sermons, audiobooks, and Bible readings.
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							Join AudioVerse
 						</a>
 					</>
@@ -85,13 +86,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<div className={styles.recent}>
+					<CardSlider>
 						{song && <CardSong song={song} />}
 						{chapter && <CardBibleChapter chapter={chapter} />}
 						{story && <CardStory story={story} />}
 						{topicRecording && <CardTopic topicRecording={topicRecording} />}
 						{recording && <CardRecording recording={recording} />}
-					</div>
+					</CardSlider>
 				}
 				center={true}
 				reverse={true}
@@ -106,7 +107,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							network connection or download before-hand to listen on-the-go
 							without using your data.
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							Download Now
 						</a>
 					</>
@@ -145,7 +146,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							sermons, and conferences. It’s updated semi-regularly at least
 							once a month.
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							View all blog posts
 						</a>
 					</>
@@ -167,7 +168,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							teachings, save series to your library, and subscribe to sponsors
 							and speakers to always get the latest.
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							Sign up now
 						</a>
 					</>
@@ -190,7 +191,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					donors. Consider contributing today, even if it’s just 5 dollars a
 					month, and help ensure that we can continue providing sound doctrine.
 				</p>
-				<a href="#" className={styles.button}>
+				<a href="#" className={`${styles.button} ${styles.primary}`}>
 					Make a donation
 				</a>
 				<div>image</div>
@@ -200,7 +201,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				<div>circle 1</div>
 				<div>circle 2</div>
 				<div>circle 3</div>
-				<a href="#" className={styles.button}>
+				<a href="#" className={`${styles.button} ${styles.primary}`}>
 					Sign up for newsletter
 				</a>
 			</div>

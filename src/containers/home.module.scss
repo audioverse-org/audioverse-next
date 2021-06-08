@@ -20,24 +20,3 @@
 		margin-left: 0.5rem;
 	}
 }
-
-.button {
-	border-radius: 4px;
-	padding: 8px;
-	background: #ff224a;
-	color: white;
-	box-shadow: 0 4px 10px 0 #00000026;
-	text-decoration: none;
-	display: inline-block;
-}
-
-.recent {
-	display: grid;
-	grid-auto-flow: column;
-	grid-auto-columns: 1fr;
-	grid-gap: 1rem;
-	align-items: start;
-	position: relative;
-	margin-left: -20vw;
-	margin-right: -20vw;
-}
