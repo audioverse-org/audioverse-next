@@ -43,7 +43,7 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 						description: 'card slider previous page label',
 					})}
 					onClick={pageLeft}
-					className={styles.button}
+					className={`${styles.button} ${styles.square}`}
 				>
 					<ArrowLeft />
 				</button>
@@ -70,7 +70,7 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 						description: 'card slider next page label',
 					})}
 					onClick={pageRight}
-					className={styles.button}
+					className={`${styles.button} ${styles.square}`}
 				>
 					<ArrowRight />
 				</button>
