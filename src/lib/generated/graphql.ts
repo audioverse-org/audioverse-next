@@ -98,6 +98,7 @@ export type BibleBookArgs = {
 
 export type BibleBook = Node & {
   __typename?: 'BibleBook';
+  bible: Bible;
   chapter: BibleChapter;
   chapterCount: Scalars['Int'];
   chapters: Array<BibleChapter>;
@@ -115,6 +116,7 @@ export type BibleBookChapterArgs = {
 
 export type BibleChapter = Node & {
   __typename?: 'BibleChapter';
+  book: BibleBook;
   id: Scalars['ID'];
   text: Scalars['String'];
   title: Scalars['String'];
@@ -2297,6 +2299,7 @@ export type Query = {
   adminImage: Maybe<Image>;
   adminImages: ImageConnectionSlim;
   audiobible: Maybe<Bible>;
+  audiobibleChapter: Maybe<BibleChapter>;
   audiobibles: BibleConnection;
   /** Alias for `sequence(id: ID)` */
   audiobook: Maybe<Sequence>;
@@ -2394,6 +2397,11 @@ export type QueryAdminImagesArgs = {
 
 
 export type QueryAudiobibleArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAudiobibleChapterArgs = {
   id: Scalars['ID'];
 };
 

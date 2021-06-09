@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
-
 import CardBibleChapter from '@components/molecules/cardBibleChapter';
 import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
