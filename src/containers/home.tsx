@@ -29,31 +29,71 @@ export default function Home(): JSX.Element {
 								color: '#FF6E6E',
 							}}
 						/>
-						<span>English</span>
+						<span>
+							<FormattedMessage
+								id={'srcContainersHomeTsx__english'}
+								defaultMessage={'English'}
+								description={'home: language selector English label'}
+							/>
+						</span>
 						<Icon icon={'chevron-down'} />
 					</span>
 					<a href={'#'} className={styles.button}>
-						Donate
+						<FormattedMessage
+							id={'homePage__donateButtonLabel'}
+							defaultMessage={'Donate'}
+							description={'home page donate button label'}
+						/>
 					</a>
 					<a href={'#'} className={styles.button}>
-						Download App
+						<FormattedMessage
+							id={'homePage__downloadAppButtonLabel'}
+							defaultMessage={'Download App'}
+							description={'home page download app button label'}
+						/>
 					</a>
 					<span>|</span>
-					<a href={'#'}>Login</a>
-					<a href={'#'}>Sign Up</a>
+					<a href={'#'}>
+						<FormattedMessage
+							id={'homePage__loginButtonLabel'}
+							defaultMessage={'Login'}
+							description={'home page login button label'}
+						/>
+					</a>
+					<a href={'#'}>
+						<FormattedMessage
+							id={'srcContainersHomeTsx__signUp'}
+							defaultMessage={'Sign Up'}
+							description={'home: Sign up button label'}
+						/>
+					</a>
 				</nav>
 			</header>
 			<Section
 				text={
 					<>
-						<h2>Sound Doctrine</h2>
+						<h2>
+							<FormattedMessage
+								id={'homePage__soundDoctrineTitle'}
+								defaultMessage={'Sound Doctrine'}
+								description={'home: Sound Doctrine section title'}
+							/>
+						</h2>
 						<p>
-							AudioVerse is a platform curating the best in Adventist audio
-							content. Be challenged and inspired to grow in your relationship
-							with Jesus through songs, sermons, audiobooks, and Bible readings.
+							<FormattedMessage
+								id={'homePage__soundDoctrineText'}
+								defaultMessage={
+									'AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings.'
+								}
+								description={'home page sound doctrine text'}
+							/>
 						</p>
 						<a href="#" className={styles.button}>
-							Join AudioVerse
+							<FormattedMessage
+								id={'homePage__joinAudioverseButtonLabel'}
+								defaultMessage={'Join AudioVerse'}
+								description={'home page join audioverse button label'}
+							/>
 						</a>
 					</>
 				}
@@ -70,10 +110,26 @@ export default function Home(): JSX.Element {
 			<Section
 				text={
 					<>
-						<h2>Recent content</h2>
+						<h2>
+							<FormattedMessage
+								id={'homePage__recentContentSectionTitle'}
+								defaultMessage={'Recent content'}
+								description={'home page recent content section title'}
+							/>
+						</h2>
 						<p>
-							Explore a select few of our audio pieces. Then when you’re ready,{' '}
-							<a href="#">create an account</a> to view even more.
+							<FormattedMessage
+								id={'homePage__recentContentSectionText'}
+								defaultMessage={
+									'Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more.'
+								}
+								description={'home page recent content section text'}
+								values={{
+									a: function a(chunks: string) {
+										return <a href="#">{chunks}</a>;
+									},
+								}}
+							/>
 						</p>
 					</>
 				}
@@ -92,15 +148,28 @@ export default function Home(): JSX.Element {
 			<Section
 				text={
 					<>
-						<h2>Download the App</h2>
+						<h2>
+							<FormattedMessage
+								id={'homePage__downloadAppSectionTitle'}
+								defaultMessage={'Download the App'}
+								description={'home page download app section title'}
+							/>
+						</h2>
 						<p>
-							If you have a smartphone, download the app to take AudioVerse with
-							you wherever you go. Stream teachings from anywhere over your
-							network connection or download before-hand to listen on-the-go
-							without using your data.
+							<FormattedMessage
+								id={'homePage__downloadAppSectionText'}
+								defaultMessage={
+									'If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data.'
+								}
+								description={'home page download app section text'}
+							/>
 						</p>
 						<a href="#" className={styles.button}>
-							Download Now
+							<FormattedMessage
+								id={'homePage__downloadNowButtonLabel'}
+								defaultMessage={'Download Now'}
+								description={'home page download now button label'}
+							/>
 						</a>
 					</>
 				}
@@ -117,13 +186,27 @@ export default function Home(): JSX.Element {
 								description="Testimonies slider title"
 							/>
 						</h2>
-						<p>Hear from some of the people who use AudioVerse.</p>
+						<p>
+							<FormattedMessage
+								id={'homePage__testimoniesSectionText'}
+								defaultMessage={
+									'Hear from some of the people who use AudioVerse.'
+								}
+								description={'home page testimonies section text'}
+							/>
+						</p>
 					</>
 				}
 				media={
 					<>
 						<Testimonies />
-						<div>pagination</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__testimoniesPaginationPlaceholder'}
+								defaultMessage={'pagination'}
+								description={'home page testimonies pagination placeholder'}
+							/>
+						</div>
 					</>
 				}
 				center={true}
@@ -132,96 +215,251 @@ export default function Home(): JSX.Element {
 			<Section
 				text={
 					<>
-						<h2>Recent blog posts</h2>
+						<h2>
+							<FormattedMessage
+								id={'homePage__recentPostsSectionTitle'}
+								defaultMessage={'Recent blog posts'}
+								description={'home page recent posts section title'}
+							/>
+						</h2>
 						<p>
-							Read through our blog to find articles about recent events,
-							sermons, and conferences. It’s updated semi-regularly at least
-							once a month.
+							<FormattedMessage
+								id={'homePage__recentPostsSectionText'}
+								defaultMessage={
+									'Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month.'
+								}
+								description={'home page recent posts section text'}
+							/>
 						</p>
 						<a href="#" className={styles.button}>
-							View all blog posts
+							<FormattedMessage
+								id={'homePage__recentPostsButtonLabel'}
+								defaultMessage={'View all blog posts'}
+								description={'home page recent posts button label'}
+							/>
 						</a>
 					</>
 				}
 				media={
 					<>
-						<div>post 1</div>
-						<div>post 2</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__postOnePlaceholder'}
+								defaultMessage={'post 1'}
+								description={'home page post one placeholder'}
+							/>
+						</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__postTwoPlaceholder'}
+								defaultMessage={'post 2'}
+								description={'post two placeholder'}
+							/>
+						</div>
 					</>
 				}
-				theme={'sky'}
+				theme={'lightTone'}
 			/>
 			<Section
 				text={
 					<>
-						<h2>Create an account</h2>
+						<h2>
+							<FormattedMessage
+								id={'homePage__createAccountSectionTitle'}
+								defaultMessage={'Create an account'}
+								description={'home page create account section title'}
+							/>
+						</h2>
 						<p>
-							Create an account to get the most of Audioverse. Download
-							teachings, save series to your library, and subscribe to sponsors
-							and speakers to always get the latest.
+							<FormattedMessage
+								id={'homePage__createAccountSectionText'}
+								defaultMessage={
+									'Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest.'
+								}
+								description={'home page create account section text'}
+							/>
 						</p>
 						<a href="#" className={styles.button}>
-							Sign up now
+							<FormattedMessage
+								id={'homePage__createAccountSectionCTA'}
+								defaultMessage={'Sign up now'}
+								description={'home page create account section cta'}
+							/>
 						</a>
 					</>
 				}
 				media={
 					<>
-						<div>Add to Library</div>
-						<div>Download Queue</div>
-						<div>Follow Functionality</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__addToLibraryPlaceholder'}
+								defaultMessage={'Add to Library'}
+								description={'home page add to library placeholder'}
+							/>
+						</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__downloadQueuePlaceholder'}
+								defaultMessage={'Download Queue'}
+								description={'home page downloaed queue placeholder'}
+							/>
+						</div>
+						<div>
+							<FormattedMessage
+								id={'homePage__followFunctionalityPlaceholder'}
+								defaultMessage={'Follow Functionality'}
+								description={'home page follow functionality placeholder'}
+							/>
+						</div>
 					</>
 				}
 				reverse={true}
 			/>
-			<div>
-				<h2>Support free audio</h2>
-				<p>
-					AudioVerse is a non-profit ministry that exists because of our
-					supporters. Creating, maintaining, and improving a technology platform
-					takes a lot of resources and we’re grateful to our generous group of
-					donors. Consider contributing today, even if it’s just 5 dollars a
-					month, and help ensure that we can continue providing sound doctrine.
-				</p>
-				<a href="#" className={styles.button}>
-					Make a donation
-				</a>
-				<div>image</div>
-			</div>
-			<div>
-				<h2>Stay in touch</h2>
-				<div>circle 1</div>
-				<div>circle 2</div>
-				<div>circle 3</div>
-				<a href="#" className={styles.button}>
-					Sign up for newsletter
-				</a>
-			</div>
+			<Section
+				text={
+					<>
+						<h2>
+							<FormattedMessage
+								id={'homePage__supportSectionTitle'}
+								defaultMessage={'Support free audio'}
+								description={'home page support section title'}
+							/>
+						</h2>
+						<p>
+							<FormattedMessage
+								id={'homePage__supportSectionText'}
+								defaultMessage={
+									'AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine.'
+								}
+								description={'home page support section text'}
+							/>
+						</p>
+						<a href="#" className={styles.button}>
+							<FormattedMessage
+								id={'homePage__supportSectionCTA'}
+								defaultMessage={'Make a donation'}
+								description={'home page support section cta'}
+							/>
+						</a>
+					</>
+				}
+				media={
+					<div>
+						<FormattedMessage
+							id={'homePage__supportSectionImagePlaceholder'}
+							defaultMessage={'image'}
+							description={'home page support section image placeholder'}
+						/>
+					</div>
+				}
+				theme={'cream'}
+			/>
+			<Section
+				theme={'dark'}
+				reverse={true}
+				text={
+					<>
+						<h2>
+							<FormattedMessage
+								id={'homePage__newsletterSectionTitle'}
+								defaultMessage={'Subscribe to Updates'}
+								description={'home page newsletter section title'}
+							/>
+						</h2>
+						<p>
+							<FormattedMessage
+								id={'homePage__newsletterSectionText'}
+								defaultMessage={
+									'Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates.'
+								}
+								description={'home page newsletter section text'}
+							/>
+						</p>
+					</>
+				}
+				media={
+					<div>
+						<FormattedMessage
+							id={'homePage__newsletterSectionFormPlaceholder'}
+							defaultMessage={'newsletter signup form'}
+							description={'home page newsletter section form placeholder'}
+						/>
+					</div>
+				}
+			/>
 			<div>
 				<span>footer</span>
 				<img src="/img/logo.svg" width={161} height={23} />
-				<h5>Social</h5>
+				<h5>
+					<FormattedMessage
+						id={'homePage__footerSocialTitle'}
+						defaultMessage={'Social'}
+						description={'home page footer social title'}
+					/>
+				</h5>
 				<ul>
 					<li>
-						<a href="#">Facebook</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerFacebookLink'}
+								defaultMessage={'Facebook'}
+								description={'home page footer facebook link'}
+							/>
+						</a>
 					</li>
 					<li>
-						<a href="#">Instagram</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerInstagramLink'}
+								defaultMessage={'Instagram'}
+								description={'home page footer instagram link'}
+							/>
+						</a>
 					</li>
 					<li>
-						<a href="#">Twitter</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerTwitterLink'}
+								defaultMessage={'Twitter'}
+								description={'home page footer twitter link'}
+							/>
+						</a>
 					</li>
 				</ul>
-				<h5>Links</h5>
+				<h5>
+					<FormattedMessage
+						id={'homePage__footerLinksTitle'}
+						defaultMessage={'Links'}
+						description={'home page footer links title'}
+					/>
+				</h5>
 				<ul>
 					<li>
-						<a href="#">Download app</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerDownloadAppButton'}
+								defaultMessage={'Download app'}
+								description={'home page footer download app button'}
+							/>
+						</a>
 					</li>
 					<li>
-						<a href="#">Sign up for newsletter</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerNewsletterSignup'}
+								defaultMessage={'Sign up for newsletter'}
+								description={'homePage__footerNewsletterSignup'}
+							/>
+						</a>
 					</li>
 					<li>
-						<a href="#">Donate</a>
+						<a href="#">
+							<FormattedMessage
+								id={'homePage__footerDonateLink'}
+								defaultMessage={'Donate'}
+								description={'home page footer donate link'}
+							/>
+						</a>
 					</li>
 				</ul>
 			</div>
