@@ -65,6 +65,7 @@ const expectNoUnlocalizedText = (
 		queryAllByText,
 		queryAllByAltText,
 		queryAllByPlaceholderText,
+		queryAllByLabelText,
 	} = screen;
 	const r = /[^z\d\W\s]+/;
 	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
@@ -72,6 +73,7 @@ const expectNoUnlocalizedText = (
 		...queryAllByText(m),
 		...queryAllByAltText(m),
 		...queryAllByPlaceholderText(m),
+		...queryAllByLabelText(m),
 	];
 
 	expect(hits).toHaveLength(0);

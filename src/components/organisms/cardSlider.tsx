@@ -4,6 +4,7 @@ import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 
 import styles from './cardSlider.module.scss';
+import { useIntl } from 'react-intl';
 
 // TODO: improve children type
 interface CardSliderProps {
@@ -18,6 +19,8 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 
 	const pageLeft = () => setDelta(Math.max(0, delta - 1));
 	const pageRight = () => setDelta(Math.min(pages - 1, delta + 1));
+
+	const intl = useIntl();
 
 	// TODO: Should the controls be made invisible to assistive technologies,
 	//  since the content is not being technically hidden, only shifted horizontally?
@@ -34,13 +37,24 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 			</div>
 			<div className={styles.controls}>
 				<button
-					aria-label={'Previous page'}
+					aria-label={intl.formatMessage({
+						id: 'cardSlider__previousPageLabel',
+						defaultMessage: 'Previous page',
+						description: 'card slider previous page label',
+					})}
 					onClick={pageLeft}
 					className={styles.button}
 				>
 					<ArrowLeft />
 				</button>
-				<ul aria-label={'Slider Pagination'} className={styles.dots}>
+				<ul
+					aria-label={intl.formatMessage({
+						id: 'cardSlider__paginationLabel',
+						defaultMessage: 'Slider Pagination',
+						description: 'card slider pagination label',
+					})}
+					className={styles.dots}
+				>
 					{Array.from(new Array(pages).keys()).map((i) => (
 						<li
 							key={i}
@@ -50,7 +64,11 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 					))}
 				</ul>
 				<button
-					aria-label={'Next page'}
+					aria-label={intl.formatMessage({
+						id: 'cardSlider__nextPageLabel',
+						defaultMessage: 'Next page',
+						description: 'card slider next page label',
+					})}
 					onClick={pageRight}
 					className={styles.button}
 				>
