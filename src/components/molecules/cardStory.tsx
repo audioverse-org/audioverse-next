@@ -13,8 +13,8 @@ export default function CardStory({ story }: CardStoryProps): JSX.Element {
 	const container = story.sequence
 		? {
 				icon: <FeatherIcon width={12} height={12} />,
-				title: story.sequence?.title,
-				length: story.sequence?.recordings.aggregate?.count,
+				title: story.sequence.title,
+				length: story.sequence.recordings.aggregate?.count,
 				// TODO: set index to live data
 				// https://trello.com/c/DSJLqX29/238-add-parts-info-eg-part-1-of-7
 				index: 1,

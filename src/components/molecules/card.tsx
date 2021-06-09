@@ -49,7 +49,7 @@ export default function Card({
 				<div className={styles.heading}>
 					<h1>{title}</h1> <PlayIcon width={24} height={24} />
 				</div>
-				<div>
+				<div className={styles.speakers}>
 					{persons.map((p) => (
 						<SpeakerName person={p} key={p.id} />
 					))}

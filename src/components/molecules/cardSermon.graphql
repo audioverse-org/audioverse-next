@@ -1,4 +1,4 @@
-fragment cardRecording on Recording {
+fragment cardSermon on Recording {
 	title
 	duration
 	persons {

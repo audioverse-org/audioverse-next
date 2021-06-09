@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '@components/molecules/card';
-import { CardRecordingFragment } from '@lib/generated/graphql';
+import { CardSermonFragment } from '@lib/generated/graphql';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
@@ -11,13 +11,13 @@ import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 // Dynamically render progress bar
 // Dynamically render all content
 
-interface CardRecordingProps {
-	recording: CardRecordingFragment;
+interface CardSermonProps {
+	recording: CardSermonFragment;
 }
 
 export default function CardSermon({
 	recording,
-}: CardRecordingProps): JSX.Element {
+}: CardSermonProps): JSX.Element {
 	const container = recording.sequence
 		? {
 				icon: <ListIcon width={12} height={12} />,

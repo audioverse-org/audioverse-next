@@ -20,7 +20,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const chapter = data?.audiobible?.book.chapter;
 	const story = data?.stories.nodes && data.stories.nodes[0];
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
-	const recording = data?.recordings.nodes && data.recordings.nodes[0];
+	const recording = data?.sermons.nodes && data.sermons.nodes[0];
 
 	return (
 		<div>

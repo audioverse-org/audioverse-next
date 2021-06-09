@@ -272,14 +272,14 @@ export type BlogPost = Node & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   /** The number of days to feature blog post. */
   featuredDuration: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   image: Maybe<Image>;
   publishDate: Scalars['DateTime'];
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   teaser: Scalars['String'];
   title: Scalars['String'];
 };
@@ -407,7 +407,7 @@ export type Collection = Node & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   contentType: CollectionContentType;
   description: Scalars['String'];
   endDate: Maybe<Scalars['Date']>;
@@ -426,7 +426,7 @@ export type Collection = Node & {
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   /** Requires `ADMINISTRATION` role. */
   skipContentScreening: Maybe<Scalars['Boolean']>;
   /** Requires `ADMINISTRATION` role. */
@@ -435,6 +435,7 @@ export type Collection = Node & {
   startDate: Maybe<Scalars['Date']>;
   summary: Scalars['String'];
   title: Scalars['String'];
+  viewerHasFavorited: Scalars['Boolean'];
 };
 
 
@@ -769,6 +770,27 @@ export enum FaqsSortableField {
   CreatedAt = 'CREATED_AT',
   Index = 'INDEX',
   Title = 'TITLE'
+}
+
+/** The types of catalog entities that may be favorited. */
+export enum FavoritableCatalogEntityType {
+  Collection = 'COLLECTION',
+  Person = 'PERSON',
+  Recording = 'RECORDING',
+  Sequence = 'SEQUENCE',
+  Sponsor = 'SPONSOR'
+}
+
+export type FavoriteEntityUnion = Collection | Person | Recording | Sequence | Sponsor;
+
+export type FavoritesOrder = {
+  direction: OrderByDirection;
+  field: FavoritesSortableField;
+};
+
+/** Properties by which user favorites connections can be ordered. */
+export enum FavoritesSortableField {
+  FavoritedAt = 'FAVORITED_AT'
 }
 
 export type Image = {
@@ -1351,9 +1373,11 @@ export type Mutation = {
   catalogHistoryCommentUpdate: CatalogHistoryItemPayload;
   collectionCreate: CollectionPayload;
   collectionDelete: SuccessPayload;
+  collectionFavorite: SuccessPayload;
   collectionHistoryCommentCreate: CatalogHistoryItemPayload;
   /** Approve all recordings in collection through legal screening. */
   collectionScreeningLegalOverride: SuccessPayload;
+  collectionUnfavorite: SuccessPayload;
   collectionUpdate: CollectionPayload;
   distributionAgreementCreate: DistributionAgreementPayload;
   distributionAgreementDelete: SuccessPayload;
@@ -1430,14 +1454,18 @@ export type Mutation = {
   recordingUpdate: RecordingPayload;
   sequenceCreate: SequencePayload;
   sequenceDelete: SuccessPayload;
+  sequenceFavorite: SuccessPayload;
   sequenceHistoryCommentCreate: CatalogHistoryItemPayload;
   /** Approve all recordings in sequence through legal screening. */
   sequenceScreeningLegalOverride: SuccessPayload;
+  sequenceUnfavorite: SuccessPayload;
   sequenceUpdate: SequencePayload;
   signup: AuthenticatedUserPayload;
   sponsorCreate: SponsorPayload;
   sponsorDelete: SuccessPayload;
+  sponsorFavorite: SuccessPayload;
   sponsorHistoryCommentCreate: CatalogHistoryItemPayload;
+  sponsorUnfavorite: SuccessPayload;
   sponsorUpdate: SponsorPayload;
   testimonyCreate: TestimonyPayload;
   testimonyDelete: SuccessPayload;
@@ -1492,6 +1520,11 @@ export type MutationCollectionDeleteArgs = {
 };
 
 
+export type MutationCollectionFavoriteArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationCollectionHistoryCommentCreateArgs = {
   collectionId: Scalars['ID'];
   input: CatalogHistoryCommentCreateInput;
@@ -1500,6 +1533,11 @@ export type MutationCollectionHistoryCommentCreateArgs = {
 
 export type MutationCollectionScreeningLegalOverrideArgs = {
   collectionId: Scalars['ID'];
+};
+
+
+export type MutationCollectionUnfavoriteArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1884,6 +1922,11 @@ export type MutationSequenceDeleteArgs = {
 };
 
 
+export type MutationSequenceFavoriteArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationSequenceHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
   sequenceId: Scalars['ID'];
@@ -1892,6 +1935,11 @@ export type MutationSequenceHistoryCommentCreateArgs = {
 
 export type MutationSequenceScreeningLegalOverrideArgs = {
   sequenceId: Scalars['ID'];
+};
+
+
+export type MutationSequenceUnfavoriteArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1916,9 +1964,19 @@ export type MutationSponsorDeleteArgs = {
 };
 
 
+export type MutationSponsorFavoriteArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationSponsorHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
   sponsorId: Scalars['ID'];
+};
+
+
+export type MutationSponsorUnfavoriteArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1996,12 +2054,12 @@ export type Page = Node & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   id: Scalars['ID'];
   isHidden: Scalars['Boolean'];
   pageMenu: Maybe<PageMenu>;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   slug: Scalars['String'];
   title: Scalars['String'];
   type: PageType;
@@ -2104,7 +2162,7 @@ export type Person = Node & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   description: Scalars['String'];
   designations: Scalars['String'];
   email: Maybe<Scalars['String']>;
@@ -2126,7 +2184,7 @@ export type Person = Node & {
   photoWithFallback: Image;
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   /** Requires `ADMINISTRATION` role. */
   skipContentScreening: Maybe<Scalars['Boolean']>;
   /** Requires `ADMINISTRATION` role. */
@@ -3183,6 +3241,7 @@ export type Recording = Node & {
   canRequestTranscription: Maybe<Scalars['Boolean']>;
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
+  /** The canonical URL to this resource. */
   canonicalUrl: Scalars['URL'];
   collection: Maybe<Collection>;
   contentScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
@@ -3219,7 +3278,8 @@ export type Recording = Node & {
   sequence: Maybe<Sequence>;
   /** The index of the recording within its sequence. */
   sequenceIndex: Maybe<Scalars['Int']>;
-  shareUrl: Maybe<Scalars['URL']>;
+  /** A shareable short URL to this resource. */
+  shareUrl: Scalars['URL'];
   sponsor: Maybe<Sponsor>;
   stage: RecordingStage;
   technicalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckout>>;
@@ -3697,7 +3757,7 @@ export type Sequence = Node & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   collection: Maybe<Collection>;
   contentType: SequenceContentType;
   description: Scalars['String'];
@@ -3714,7 +3774,7 @@ export type Sequence = Node & {
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   /** Requires `ADMINISTRATION` role. */
   skipContentScreening: Maybe<Scalars['Boolean']>;
   /** Requires `ADMINISTRATION` role. */
@@ -3722,6 +3782,7 @@ export type Sequence = Node & {
   sponsor: Maybe<Sponsor>;
   summary: Scalars['String'];
   title: Scalars['String'];
+  viewerHasFavorited: Scalars['Boolean'];
 };
 
 
@@ -3841,7 +3902,7 @@ export type Sponsor = Node & UniformResourceLocatable & {
   /** The canonical HTML path to this resource. */
   canonicalPath: Scalars['String'];
   /** The canonical URL to this resource. */
-  canonicalUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
   collections: CollectionConnection;
   defaultDistributionAgreement: Maybe<DistributionAgreement>;
   description: Scalars['String'];
@@ -3864,13 +3925,14 @@ export type Sponsor = Node & UniformResourceLocatable & {
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
-  shareUrl: Scalars['String'];
+  shareUrl: Scalars['URL'];
   /** Requires `ADMINISTRATION` role. */
   skipContentScreening: Maybe<Scalars['Boolean']>;
   /** Requires `ADMINISTRATION` role. */
   skipLegalScreening: Maybe<Scalars['Boolean']>;
   summary: Scalars['String'];
   title: Scalars['String'];
+  viewerHasFavorited: Scalars['Boolean'];
   website: Maybe<Scalars['URL']>;
 };
 
@@ -4701,8 +4763,8 @@ export type TranscriptUpdateInput = {
 /** Represents a type that can be retrieved by a URL. */
 export type UniformResourceLocatable = {
   canonicalPath: Scalars['String'];
-  canonicalUrl: Scalars['String'];
-  shareUrl: Scalars['String'];
+  canonicalUrl: Scalars['URL'];
+  shareUrl: Scalars['URL'];
 };
 
 
@@ -4723,6 +4785,7 @@ export type User = Node & {
   email: Scalars['String'];
   favoritePersons: PersonConnection;
   favoriteRecordings: RecordingConnection;
+  favorites: UserFavoriteConnection;
   /** The user's first name. */
   givenName: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -4802,6 +4865,16 @@ export type UserFavoriteRecordingsArgs = {
 };
 
 
+export type UserFavoritesArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<FavoritesOrder>>;
+  types: Maybe<Array<FavoritableCatalogEntityType>>;
+};
+
+
 export type UserPlaylistArgs = {
   id: Scalars['ID'];
 };
@@ -4864,6 +4937,26 @@ export type UserEdge = {
   __typename?: 'UserEdge';
   cursor: Scalars['String'];
   node: User;
+};
+
+export type UserFavorite = {
+  __typename?: 'UserFavorite';
+  createdAt: Scalars['DateTime'];
+  entity: FavoriteEntityUnion;
+};
+
+export type UserFavoriteConnection = {
+  __typename?: 'UserFavoriteConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<UserFavoriteEdge>>;
+  nodes: Maybe<Array<UserFavorite>>;
+  pageInfo: PageInfo;
+};
+
+export type UserFavoriteEdge = {
+  __typename?: 'UserFavoriteEdge';
+  cursor: Scalars['String'];
+  node: UserFavorite;
 };
 
 /** User languages */
@@ -5189,7 +5282,7 @@ export type CardBibleChapterFragment = (
   & Pick<BibleChapter, 'title'>
 );
 
-export type CardRecordingFragment = (
+export type CardSermonFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'title' | 'duration'>
   & { persons: Array<(
@@ -5213,14 +5306,10 @@ export type CardSongFragment = (
   & Pick<Recording, 'title' | 'duration'>
   & { persons: Array<(
     { __typename?: 'Person' }
-    & Pick<Person, 'id' | 'name' | 'viewerHasFavorited' | 'summary' | 'website'>
-    & { imageWithFallback: (
-      { __typename?: 'Image' }
-      & Pick<Image, 'url'>
-    ) }
-  )>, collection: Maybe<(
-    { __typename?: 'Collection' }
-    & Pick<Collection, 'id' | 'title'>
+    & SpeakerNameFragment
+  )>, sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'id' | 'title'>
   )> }
 );
 
@@ -5883,11 +5972,11 @@ export type GetHomeStaticPropsQuery = (
       { __typename?: 'Recording' }
       & CardTopicFragment
     )>> }
-  ), recordings: (
+  ), sermons: (
     { __typename?: 'RecordingConnection' }
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
-      & CardRecordingFragment
+      & CardSermonFragment
     )>> }
   ) }
 );
@@ -6930,8 +7019,8 @@ export const SpeakerNameFragmentDoc = `
   viewerHasFavorited
 }
     `;
-export const CardRecordingFragmentDoc = `
-    fragment cardRecording on Recording {
+export const CardSermonFragmentDoc = `
+    fragment cardSermon on Recording {
   title
   duration
   persons {
@@ -6951,27 +7040,20 @@ export const CardSongFragmentDoc = `
     fragment cardSong on Recording {
   title
   persons {
-    id
-    name
-    viewerHasFavorited
-    summary
-    website
-    imageWithFallback {
-      url(size: 100)
-    }
+    ...speakerName
   }
   duration
-  collection {
+  sequence {
     id
     title
   }
 }
-    `;
+    ${SpeakerNameFragmentDoc}`;
 export const CardStoryFragmentDoc = `
     fragment cardStory on Recording {
   title
   duration
-  persons {
+  persons(role: SPEAKER) {
     ...speakerName
   }
   sequence {
@@ -7781,13 +7863,13 @@ export const GetHomeStaticPropsDocument = `
       ...cardTopic
     }
   }
-  recordings(
+  sermons(
     language: $language
     first: 1
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {
-      ...cardRecording
+      ...cardSermon
     }
   }
 }
@@ -7795,7 +7877,7 @@ export const GetHomeStaticPropsDocument = `
 ${CardBibleChapterFragmentDoc}
 ${CardStoryFragmentDoc}
 ${CardTopicFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${CardSermonFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
       TData = GetHomeStaticPropsQuery,
       TError = unknown

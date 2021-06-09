@@ -10,10 +10,10 @@ interface CardSongProps {
 }
 
 export default function CardSong({ song }: CardSongProps): JSX.Element {
-	const container = song.collection
+	const container = song.sequence
 		? {
 				icon: <HatIcon width={12} height={12} />,
-				title: song.collection.title,
+				title: song.sequence.title,
 		  }
 		: undefined;
 
