@@ -418,6 +418,8 @@ describe('localization usage', () => {
 		[Login, {}],
 		[Reset, {}],
 		[Profile, {}],
+		// TODO: uncomment once the card components are wired up and not using placeholder data
+		// [Home, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

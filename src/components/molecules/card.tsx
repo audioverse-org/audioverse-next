@@ -33,6 +33,7 @@ export default function Card({
 	return (
 		<div className={`${styles.card} ${styles[theme]}`}>
 			{container && (
+				// TODO: Link the hat
 				<div className={styles.hat}>
 					<span className={styles.hatIcon}>{container.icon}</span>
 					<span className={styles.hatTitle}>{container.title}</span>
@@ -48,7 +49,7 @@ export default function Card({
 				<div className={styles.heading}>
 					<h1>{title}</h1> <PlayIcon width={24} height={24} />
 				</div>
-				<div>
+				<div className={styles.speakers}>
 					{persons.map((p) => (
 						<SpeakerName person={p} key={p.id} />
 					))}

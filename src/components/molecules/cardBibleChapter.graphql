@@ -1,0 +1,3 @@
+fragment cardBibleChapter on BibleChapter {
+	title
+}
