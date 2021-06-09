@@ -2,13 +2,21 @@ import _ from 'lodash';
 
 import Home from '@containers/home';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import { getHomeStaticProps, Language } from '@lib/generated/graphql';
+import {
+	getHomeStaticProps,
+	GetHomeStaticPropsQuery,
+	Language,
+} from '@lib/generated/graphql';
 
 export default Home;
 
-// TODO: Add a props interface to this file; import in home.tsx
+export interface HomeProps {
+	data: GetHomeStaticPropsQuery | undefined;
+	disableSidebar: true;
+}
+
 interface StaticProps {
-	props: any;
+	props: HomeProps;
 	revalidate: number;
 }
 
@@ -27,12 +35,11 @@ export async function getStaticProps({
 	if (!langKey) throw Error('Missing or invalid language');
 
 	// TODO: try/catch errors to ensure proper 404 page is displayed
-	const result = await getHomeStaticProps({ language: langKey });
-	const nodes = result?.sermons?.nodes || [];
+	const data = await getHomeStaticProps({ language: langKey });
 
 	return {
 		props: {
-			sermons: nodes,
+			data,
 			disableSidebar: true,
 		},
 		revalidate: REVALIDATE,

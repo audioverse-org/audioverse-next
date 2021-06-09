@@ -1,33 +1,28 @@
 import React from 'react';
 
 import Card from '@components/molecules/card';
+import { CardTopicFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../public/img/icon-layer-group-solid.svg';
 
-export default function CardTopic(): JSX.Element {
+interface CardTopicProps {
+	topicRecording: CardTopicFragment;
+}
+
+export default function CardTopic({
+	topicRecording,
+}: CardTopicProps): JSX.Element {
 	return (
 		<Card
 			theme={'topic'}
 			container={{
 				icon: <HatIcon width={12} height={12} />,
-				title: 'Marriage and the Family',
+				// TODO: Replace hard-coded tag name (also hard-coded in home.graphql)
+				title: 'Family',
 			}}
-			title={'Virtuous Valentine: The Love of Your Life'}
-			duration={2520}
+			// TODO: Set progress dynamically
 			progress={0.3}
-			persons={[
-				{
-					id: 'the_id',
-					name: 'Ron du Preez',
-					summary: 'This is his summary.',
-					website: 'the_website',
-					viewerHasFavorited: false,
-					imageWithFallback: {
-						url:
-							'https://s.audioverse.org/english/gallery/persons/_/150/150/dupreez_ron.jpg',
-					},
-				},
-			]}
+			{...topicRecording}
 		/>
 	);
 }

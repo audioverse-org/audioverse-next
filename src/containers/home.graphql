@@ -1,7 +1,50 @@
 query getHomeStaticProps($language: Language!) {
-	sermons(language: $language, first: 5) {
+	musicTracks(
+		language: $language
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
 		nodes {
-			...recordingList
+			...cardSong
+		}
+	}
+	audiobible(id: "ENGKJVC") {
+		id
+		title
+		book(id: "ENGKJVC-Gen") {
+			title
+			chapter(id: "ENGKJVC-Gen-1") {
+				...cardBibleChapter
+			}
+		}
+	}
+	stories(
+		language: $language
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardStory
+		}
+	}
+	# TODO: Replace with new topics entity when it's added
+	tag: recordings(
+		language: $language
+		tagName: "Family"
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardTopic
+		}
+	}
+	sermons(
+		language: $language
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardSermon
 		}
 	}
 }

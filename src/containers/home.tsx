@@ -2,19 +2,26 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
-import CardChapter from '@components/molecules/cardChapter';
+import CardBibleChapter from '@components/molecules/cardBibleChapter';
 import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
+import { HomeProps } from '@pages/[language]';
 
 import LanguageIcon from '../../public/img/icon-language-solid.svg';
 
 import styles from './home.module.scss';
 
-export default function Home(): JSX.Element {
+export default function Home({ data }: HomeProps): JSX.Element {
+	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];
+	const chapter = data?.audiobible?.book.chapter;
+	const story = data?.stories.nodes && data.stories.nodes[0];
+	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
+	const recording = data?.sermons.nodes && data.sermons.nodes[0];
+
 	return (
 		<div>
 			<header className={styles.header}>
@@ -135,11 +142,11 @@ export default function Home(): JSX.Element {
 				}
 				media={
 					<div className={styles.recent}>
-						<CardSong />
-						<CardChapter />
-						<CardStory />
-						<CardTopic />
-						<CardSermon />
+						{song && <CardSong song={song} />}
+						{chapter && <CardBibleChapter chapter={chapter} />}
+						{story && <CardStory story={story} />}
+						{topicRecording && <CardTopic topicRecording={topicRecording} />}
+						{recording && <CardSermon recording={recording} />}
 					</div>
 				}
 				center={true}

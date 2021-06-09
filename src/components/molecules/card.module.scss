@@ -58,6 +58,13 @@
 	}
 }
 
+.speakers {
+	& > * {
+		display: flex;
+		margin-bottom: 0.5em;
+	}
+}
+
 .controls {
 	display: flex;
 	align-items: center;
