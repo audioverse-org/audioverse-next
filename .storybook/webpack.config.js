@@ -1,10 +1,11 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-
 module.exports = ({ config }) => {
-	config.resolve.plugins = [new TsconfigPathsPlugin({
-		baseUrl: '../'
-	})];
+	config.resolve.plugins = [
+		new TsconfigPathsPlugin({
+			baseUrl: '../',
+		}),
+	];
 
 	// config.module.rules.push({
 	// 	test: /\.(s*)css$/,
