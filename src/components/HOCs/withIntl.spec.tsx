@@ -20,6 +20,7 @@ import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
+import Home from '@containers/home';
 import Playlists from '@containers/playlist/list';
 import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
@@ -47,7 +48,6 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
-import Home from '@containers/home';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
