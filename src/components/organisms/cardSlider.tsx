@@ -1,10 +1,10 @@
 import React, { ReactNode, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 
 import styles from './cardSlider.module.scss';
-import { useIntl } from 'react-intl';
 
 // TODO: improve children type
 interface CardSliderProps {
