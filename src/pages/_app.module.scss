@@ -1,0 +1,14 @@
+@import '../styles/common';
+
+.base {
+	display: flex;
+}
+
+.header {
+	flex: 0 0 200px;
+	border-right: 0.5px solid $gray-bleached;
+}
+
+.content {
+	flex: 1 0 100%;
+}

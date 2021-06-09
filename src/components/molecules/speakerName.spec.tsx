@@ -53,7 +53,7 @@ describe('speaker name component', () => {
 	});
 
 	it('renders speaker image', async () => {
-		const { getByAltText } = await renderComponent({
+		const { getAllByAltText } = await renderComponent({
 			id: 'the_id',
 			name: 'the_name',
 			imageWithFallback: {
@@ -61,9 +61,9 @@ describe('speaker name component', () => {
 			},
 		});
 
-		const image = getByAltText('the_name') as HTMLImageElement;
+		const images = getAllByAltText('the_name') as HTMLImageElement[];
 
-		expect(image.src).toContain('the_url');
+		expect(images[0]).toHaveAttribute('src', 'the_url');
 	});
 
 	it('has favorite toggle', async () => {

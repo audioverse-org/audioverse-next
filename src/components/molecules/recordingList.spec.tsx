@@ -69,17 +69,17 @@ describe('recording list', () => {
 	it('includes duration', async () => {
 		const { getByText } = await renderComponent();
 
-		expect(getByText('10:00')).toBeInTheDocument();
+		expect(getByText('10m')).toBeInTheDocument();
 	});
 
-	it('includes seconds in duration', async () => {
+	it('drops seconds in duration', async () => {
 		const { getByText } = await renderComponent({
 			sermonData: {
 				duration: 601,
 			},
 		});
 
-		expect(getByText('10:01')).toBeInTheDocument();
+		expect(getByText('10m')).toBeInTheDocument();
 	});
 
 	it('includes hours in duration', async () => {
@@ -89,27 +89,7 @@ describe('recording list', () => {
 			},
 		});
 
-		expect(getByText('1:00:00')).toBeInTheDocument();
-	});
-
-	it('pads seconds correctly', async () => {
-		const { getByText } = await renderComponent({
-			sermonData: {
-				duration: 610,
-			},
-		});
-
-		expect(getByText('10:10')).toBeInTheDocument();
-	});
-
-	it('rounds seconds', async () => {
-		const { getByText } = await renderComponent({
-			sermonData: {
-				duration: 0.7,
-			},
-		});
-
-		expect(getByText('0:01')).toBeInTheDocument();
+		expect(getByText('1h 0m')).toBeInTheDocument();
 	});
 
 	it('handles missing sermons', async () => {

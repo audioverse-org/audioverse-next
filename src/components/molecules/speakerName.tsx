@@ -32,14 +32,19 @@ export default function SpeakerName({
 	const isPersonFavorited =
 		queryIsFavorited === undefined ? initialIsFavorited : queryIsFavorited;
 	const intl = useIntl();
+	const img = image && (
+		<img width={100} height={100} alt={name} src={image.url} />
+	);
 
 	return (
 		<>
 			<a
+				className={styles.link}
 				href={makePersonRoute(lang, id)}
 				data-tip={true}
 				data-for={`person-${id}-speakerTip`}
 			>
+				{img}
 				{name}
 			</a>
 			<ReactTooltip
@@ -51,7 +56,7 @@ export default function SpeakerName({
 				delayHide={200}
 				delayShow={500}
 			>
-				{image && <img width={100} height={100} alt={name} src={image.url} />}
+				{img}
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
 				{website && (
 					<p>

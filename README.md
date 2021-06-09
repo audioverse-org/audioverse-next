@@ -35,7 +35,7 @@ npm run graphql:codegen
 
 Compiles to `src/lib/generated/graphql.ts`
 
-## Module shorthand
+## Module shorthand / aliases
 
-Module paths must be mapped in both `tsconfig.json` and `package.json`.
+Module paths must be mapped in `tsconfig.json`, `jest.config.js`, and `.storybook/webpack.config.js`.
 [More info](https://github.com/kulshekhar/ts-jest/issues/414#issuecomment-369876280)

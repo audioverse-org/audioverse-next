@@ -6,6 +6,7 @@
   $inter-font-display: swap,
   $inter-font-path: '~inter-ui/Inter (web)'
 );
+
 @include default.all;
 @include variable.all;
 
@@ -19,20 +20,38 @@ html {
 	}
 }
 
-@import 'common';
+@import './common.scss';
 
-p {
-	line-height: 1.3em;
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: serif;
+}
+
+a {
+	color: inherit;
+
+	&:hover {
+		text-decoration: none;
+	}
 }
 
 .template-base {
 	display: flex;
+
 	> *:first-child {
 		flex: 0 0 200px;
 		border-right: 0.5px solid $gray-bleached;
 	}
+
 	> * {
 		flex: 0 0 100%;
 		overflow: scroll;
 	}
+}
+
+p {
+	line-height: 1.3em;
 }

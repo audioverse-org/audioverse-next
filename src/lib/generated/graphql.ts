@@ -454,6 +454,7 @@ export type CollectionRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -607,6 +608,7 @@ export type DistributionAgreementRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -969,6 +971,22 @@ export enum MediaFileContainer {
   Wmv = 'WMV'
 }
 
+export type MediaFileResult = Attachment | AudioFile | VideoFile;
+
+export type MediaFileResultConnection = {
+  __typename?: 'MediaFileResultConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<MediaFileResultEdge>>;
+  nodes: Maybe<Array<MediaFileResult>>;
+  pageInfo: PageInfo;
+};
+
+export type MediaFileResultEdge = {
+  __typename?: 'MediaFileResultEdge';
+  cursor: Scalars['String'];
+  node: MediaFileResult;
+};
+
 /** The transcoding status of a media file upload. */
 export enum MediaFileTranscodingStatus {
   /** Transcoding completed. */
@@ -1046,6 +1064,18 @@ export type MediaFileUploadsOrder = {
 export enum MediaFileUploadsSortableField {
   CreatedAt = 'CREATED_AT',
   Filename = 'FILENAME'
+}
+
+export type MediaFilesOrder = {
+  direction: OrderByDirection;
+  field: MediaFilesSortableField;
+};
+
+/** Properties by which media files connections can be ordered. */
+export enum MediaFilesSortableField {
+  CreatedAt = 'CREATED_AT',
+  Filename = 'FILENAME',
+  Filesize = 'FILESIZE'
 }
 
 export type MediaRelease = Node & {
@@ -2128,6 +2158,7 @@ export type PersonRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -2289,11 +2320,13 @@ export type Query = {
   faqCategories: Maybe<FaqCategoryConnection>;
   faqs: FaqConnection;
   featuredBlogPosts: BlogPostConnection;
+  /** @deprecated `featuredRecordings` is replaced by `recordings(isFeatured: true)` */
   featuredRecordings: RecordingConnection;
   license: Maybe<License>;
   licenses: LicenseConnection;
   me: Maybe<AuthenticatedUser>;
   mediaFileUploads: MediaFileUploadConnection;
+  mediaFiles: MediaFileResultConnection;
   mediaRelease: Maybe<MediaRelease>;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   mediaReleaseFormTemplates: Array<MediaReleaseFormTemplate>;
@@ -2412,6 +2445,7 @@ export type QueryAudiobookTracksArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -2617,6 +2651,15 @@ export type QueryMediaFileUploadsArgs = {
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<MediaFileUploadsOrder>>;
   search: Maybe<Scalars['String']>;
+};
+
+
+export type QueryMediaFilesArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<MediaFilesOrder>>;
   transcodingStatuses: Maybe<Array<MediaFileTranscodingStatus>>;
 };
 
@@ -2738,6 +2781,7 @@ export type QueryMusicTracksArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -2815,6 +2859,7 @@ export type QueryPopularRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -2866,6 +2911,7 @@ export type QueryRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -2947,6 +2993,7 @@ export type QuerySermonsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -2997,6 +3044,7 @@ export type QueryStoriesArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   language: Language;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
@@ -3688,6 +3736,7 @@ export type SequenceRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -3864,6 +3913,7 @@ export type SponsorRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -4005,6 +4055,7 @@ export type TagRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -4720,6 +4771,7 @@ export type UserFavoriteRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;
@@ -4926,6 +4978,7 @@ export type UserPlaylistRecordingsArgs = {
   first: Maybe<Scalars['Int']>;
   hasVideo: Maybe<Scalars['Boolean']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
+  isFeatured: Maybe<Scalars['Boolean']>;
   legalScreeningStatus: Maybe<RecordingLegalScreeningStatus>;
   offset: Maybe<Scalars['Int']>;
   onlyArchived: Maybe<Scalars['Boolean']>;

@@ -4,6 +4,7 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
+	ignorePatterns: ['fileMock.js'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
 		'import',

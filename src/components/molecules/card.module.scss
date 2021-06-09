@@ -1,0 +1,127 @@
+@import '../../styles/common';
+
+.card {
+	text-align: left;
+	background: var(--cardBg, #ffffff);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	border-radius: 16px;
+}
+
+.hat {
+	border-radius: 16px 16px 0 0;
+	background-color: var(--hatBg, #efebeb);
+	color: var(--hatColor, #323e48);
+	padding: 16px;
+	width: 100%;
+	font-size: 0.9em;
+	display: flex;
+	align-items: center;
+}
+
+.hatIcon {
+	margin-right: 0.3em;
+	color: var(--iconColor, #ff224a);
+}
+
+.hatTitle {
+	flex-grow: 1;
+}
+
+.content {
+	padding: 16px;
+	color: var(--cardColor, #6b7680);
+}
+
+.part {
+	font-size: 0.7em;
+	font-weight: 600;
+	color: var(--partColor, #ff224a);
+}
+
+.heading {
+	display: flex;
+	justify-content: space-between;
+	color: var(--headingColor, #323e48);
+
+	h1 {
+		font-size: 1.5em;
+		margin: 0 0 0.5em 0;
+		flex-grow: 1;
+	}
+
+	svg {
+		flex: 0 0 auto;
+	}
+
+	path {
+		stroke: var(--headingColor, #323e48);
+	}
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	margin-top: 1em;
+	font-size: 0.9em;
+}
+
+.duration {
+	flex: 0 0 auto;
+}
+
+.progress {
+	border-bottom: 1px solid #cdd9e3;
+	flex: 1 1 100%;
+	margin-left: 1em;
+	margin-right: 1em;
+
+	span {
+		margin-bottom: -1px;
+		display: block;
+		border-bottom: 1px solid var(--progressColor, #ff224a);
+		width: var(--progress, 0);
+	}
+}
+
+.chapter {
+	--hatBg: black;
+	--hatColor: white;
+	--cardBg: #f1f2f4;
+}
+
+.sermon {
+	// base
+}
+
+.song {
+	--hatBg: #d7ebfb;
+	--hatColor: #{$ts-dark};
+	--cardBg: #ebf2f9;
+	--cardColor: #{$ts-midTone};
+	--headingColor: #{$ts-dark};
+	--progressColor: #{$ts-red};
+	--partColor: #{$ts-red};
+	--iconColor: #{$ts-red};
+}
+
+.story {
+	--hatBg: #003849;
+	--hatColor: white;
+	--cardBg: #325763;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
+}
+
+.topic {
+	--hatBg: #040253;
+	--hatColor: white;
+	--cardBg: #3e3d6d;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
+}
