@@ -396,7 +396,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 			/>
 			<div>
-				<span>footer</span>
 				<img src="/img/logo.svg" width={161} height={23} />
 				<h5>
 					<FormattedMessage

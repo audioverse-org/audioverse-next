@@ -47,6 +47,7 @@ import {
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
 import Logout from '@pages/[language]/account/logout';
+import Home from '@containers/home';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -418,8 +419,7 @@ describe('localization usage', () => {
 		[Login, {}],
 		[Reset, {}],
 		[Profile, {}],
-		// TODO: uncomment once the card components are wired up and not using placeholder data
-		// [Home, {}],
+		[Home, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

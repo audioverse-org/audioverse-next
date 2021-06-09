@@ -8,6 +8,7 @@
 		'. content media .'
 		'. . . .';
 	grid-gap: 6rem;
+	overflow: hidden;
 }
 
 .media {
@@ -64,6 +65,13 @@
 			'. content .'
 			'. media .'
 			'. . .';
+	}
+	&.center.bleed {
+		grid-template-areas:
+			'. . .'
+			'. content .'
+			'media media media'
+			'media media media';
 	}
 }
 

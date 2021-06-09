@@ -22,7 +22,7 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 	// TODO: Should the controls be made invisible to assistive technologies,
 	//  since the content is not being technically hidden, only shifted horizontally?
 	return (
-		<>
+		<div className={styles.slider}>
 			<div
 				data-testid={'card-window'}
 				className={styles.cards}
@@ -57,6 +57,6 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 					<ArrowRight />
 				</button>
 			</div>
-		</>
+		</div>
 	);
 }

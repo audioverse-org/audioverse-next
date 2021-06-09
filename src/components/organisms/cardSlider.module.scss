@@ -1,8 +1,11 @@
 @import '../../styles/common';
 
+.slider {
+}
+
 .cards {
 	display: flex;
-	align-items: start;
+	align-items: flex-start;
 	margin-bottom: 2rem;
 	position: relative;
 	transform: translateX(0);
