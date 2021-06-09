@@ -1,22 +1,47 @@
+// LEGACY
+
 $gray-night: #1c1c1d;
 $gray-dark: #242426;
-
 // taken from T&S Figma 5/19/2021, marketing home section bg
 $gray-mid: #323e48;
-
 $gray-light: #747474;
 $gray-lighter: #dbdbdb;
 $gray-lightest: #e5e5e5;
-
 // taken from T&S Figma 5/14/2021, sidebar border line
 $gray-bleached: #cdd9e3;
-
 $accent: #3da88e;
 
-// T&S named styles
-$ts-salmon: #ff6e6e;
+// END LEGACY
+
+// T&S Named Colors
+$ts-cream: #efebeb;
+$ts-dark: #323e48;
 $ts-lightTone: #cdd9e3;
 $ts-midTone: #6b7680;
-$ts-dark: #323e48;
 $ts-red: #ff224a;
-$ts-cream: #efebeb;
+$ts-salmon: #ff6e6e;
+
+.button {
+	border-radius: 4px;
+	border-color: $ts-dark;
+	border-width: 0.5px;
+	border-style: solid;
+	padding: 8px;
+	text-decoration: none;
+	display: inline-block;
+	background-color: white;
+	cursor: pointer;
+	&.primary {
+		background: #ff224a;
+		color: white;
+		box-shadow: 0 4px 10px 0 #00000026;
+		border-width: 0;
+	}
+	&.square {
+		aspect-ratio: 1/1;
+		display: block;
+		& > * {
+			display: block;
+		}
+	}
+}

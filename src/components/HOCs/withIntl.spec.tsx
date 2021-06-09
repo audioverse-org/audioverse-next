@@ -20,6 +20,7 @@ import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
 import ConferenceDetail from '@containers/conference/detail';
 import ConferenceList from '@containers/conference/list';
+import Home from '@containers/home';
 import Playlists from '@containers/playlist/list';
 import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
@@ -64,6 +65,7 @@ const expectNoUnlocalizedText = (
 		queryAllByText,
 		queryAllByAltText,
 		queryAllByPlaceholderText,
+		queryAllByLabelText,
 	} = screen;
 	const r = /[^z\d\W\s]+/;
 	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
@@ -71,6 +73,7 @@ const expectNoUnlocalizedText = (
 		...queryAllByText(m),
 		...queryAllByAltText(m),
 		...queryAllByPlaceholderText(m),
+		...queryAllByLabelText(m),
 	];
 
 	expect(hits).toHaveLength(0);
@@ -418,8 +421,7 @@ describe('localization usage', () => {
 		[Login, {}],
 		[Reset, {}],
 		[Profile, {}],
-		// TODO: uncomment once the card components are wired up and not using placeholder data
-		// [Home, {}],
+		[Home, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

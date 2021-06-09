@@ -1,0 +1,45 @@
+@import '../../styles/common';
+
+.slider {
+}
+
+.cards {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 2rem;
+	position: relative;
+	transform: translateX(0);
+	transition: transform 300ms;
+	> * {
+		flex: 0 0 30%;
+		margin-left: 1.66666667%;
+		margin-right: 1.66666667%;
+	}
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	button {
+		margin: 8.5px;
+	}
+}
+
+.dots {
+	padding-left: 0;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 100%;
+	background-color: $ts-lightTone;
+	display: inline-block;
+	list-style-type: none;
+	margin: 8.5px;
+}
+
+.active {
+	background-color: $ts-dark;
+}

@@ -7,6 +7,7 @@ import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
+import CardSlider from '@components/organisms/cardSlider';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
 import { HomeProps } from '@pages/[language]';
@@ -45,14 +46,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</span>
 						<Icon icon={'chevron-down'} />
 					</span>
-					<a href={'#'} className={styles.button}>
+					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
 						<FormattedMessage
 							id={'homePage__donateButtonLabel'}
 							defaultMessage={'Donate'}
 							description={'home page donate button label'}
 						/>
 					</a>
-					<a href={'#'} className={styles.button}>
+					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
 						<FormattedMessage
 							id={'homePage__downloadAppButtonLabel'}
 							defaultMessage={'Download App'}
@@ -95,7 +96,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page sound doctrine text'}
 							/>
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							<FormattedMessage
 								id={'homePage__joinAudioverseButtonLabel'}
 								defaultMessage={'Join AudioVerse'}
@@ -141,13 +142,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<div className={styles.recent}>
+					<CardSlider>
 						{song && <CardSong song={song} />}
 						{chapter && <CardBibleChapter chapter={chapter} />}
 						{story && <CardStory story={story} />}
 						{topicRecording && <CardTopic topicRecording={topicRecording} />}
 						{recording && <CardSermon recording={recording} />}
-					</div>
+					</CardSlider>
 				}
 				center={true}
 				reverse={true}
@@ -171,7 +172,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page download app section text'}
 							/>
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							<FormattedMessage
 								id={'homePage__downloadNowButtonLabel'}
 								defaultMessage={'Download Now'}
@@ -238,7 +239,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page recent posts section text'}
 							/>
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							<FormattedMessage
 								id={'homePage__recentPostsButtonLabel'}
 								defaultMessage={'View all blog posts'}
@@ -286,7 +287,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page create account section text'}
 							/>
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							<FormattedMessage
 								id={'homePage__createAccountSectionCTA'}
 								defaultMessage={'Sign up now'}
@@ -341,7 +342,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page support section text'}
 							/>
 						</p>
-						<a href="#" className={styles.button}>
+						<a href="#" className={`${styles.button} ${styles.primary}`}>
 							<FormattedMessage
 								id={'homePage__supportSectionCTA'}
 								defaultMessage={'Make a donation'}
@@ -395,7 +396,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 			/>
 			<div>
-				<span>footer</span>
 				<img src="/img/logo.svg" width={161} height={23} />
 				<h5>
 					<FormattedMessage

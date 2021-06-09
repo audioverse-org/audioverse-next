@@ -81,7 +81,7 @@ export function buildRenderer<
 		defaultParams?: P;
 	} = {}
 ): Renderer<P> {
-	const { getProps = () => ({}), defaultParams } = options;
+	const { getProps = (p) => p, defaultParams = {} } = options;
 	return async (params: Partial<P> = {}): Promise<RenderResult> => {
 		const p = { ...defaultParams, ...params };
 		const props = await getProps(p);
