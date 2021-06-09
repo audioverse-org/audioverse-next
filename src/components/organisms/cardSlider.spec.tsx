@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import CardRecording from '@components/molecules/cardRecording';
+import CardSermon from '@components/molecules/cardSermon';
 import CardSlider from '@components/organisms/cardSlider';
 import { buildRenderer } from '@lib/test/helpers';
 
@@ -27,7 +27,7 @@ describe('card slider', () => {
 	it('renders cards', async () => {
 		const { getByText } = await renderComponent({
 			children: (
-				<CardRecording
+				<CardSermon
 					recording={
 						{
 							title: 'the_recording_title',
