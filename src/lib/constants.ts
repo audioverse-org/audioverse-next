@@ -102,11 +102,3 @@ export const BIBLE_BOOKS = [
 	'Jude',
 	'Revelation',
 ];
-
-export const COLORS = {
-	salmon: '#FF6E6E',
-	lightTone: '#CDD9E3',
-	midTone: '#6B7680',
-	dark: '#323E48',
-	red: '#FF224A',
-};

@@ -6,7 +6,7 @@ interface SectionProps {
 	text: any;
 	media: any;
 	bleed?: boolean;
-	theme?: 'light' | 'dark' | 'grey' | 'sky';
+	theme?: 'dark' | 'grey' | 'lightTone' | 'cream';
 	center?: boolean;
 	reverse?: boolean;
 }

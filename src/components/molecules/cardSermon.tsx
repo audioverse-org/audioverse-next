@@ -15,7 +15,7 @@ interface CardRecordingProps {
 	recording: CardRecordingFragment;
 }
 
-export default function CardRecording({
+export default function CardSermon({
 	recording,
 }: CardRecordingProps): JSX.Element {
 	const container = recording.sequence
@@ -33,6 +33,7 @@ export default function CardRecording({
 			container={container}
 			// TODO: set progress dynamically
 			progress={0}
+			theme={'sermon'}
 			{...recording}
 		/>
 	);
