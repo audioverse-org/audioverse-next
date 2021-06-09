@@ -72,8 +72,12 @@
 	color: white;
 }
 
-.sky {
-	background-color: #cdd9e3;
+.lightTone {
+	background-color: $ts-lightTone;
+}
+
+.cream {
+	background-color: $ts-cream;
 }
 
 .grey {
