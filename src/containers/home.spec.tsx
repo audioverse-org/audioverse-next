@@ -22,7 +22,7 @@ const song = {
 	title: 'the_song_title',
 	persons: [{ id: 'the_song_person_id', name: 'the_song_person_name' }],
 	duration: 5 * 60,
-	collection: {
+	sequence: {
 		id: 'the_song_collection_id',
 		title: 'the_song_collection_title',
 	},
@@ -89,7 +89,7 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		tag: {
 			nodes: [taggedRecording],
 		},
-		recordings: {
+		sermons: {
 			nodes: [recording],
 		},
 	}

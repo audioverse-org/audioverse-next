@@ -1,3 +1,5 @@
+@import '../../styles/common';
+
 .card {
 	text-align: left;
 	background: var(--cardBg, #ffffff);
@@ -40,16 +42,26 @@
 	display: flex;
 	justify-content: space-between;
 	color: var(--headingColor, #323e48);
+
 	h1 {
 		font-size: 1.5em;
 		margin: 0 0 0.5em 0;
 		flex-grow: 1;
 	}
+
 	svg {
 		flex: 0 0 auto;
 	}
+
 	path {
 		stroke: var(--headingColor, #323e48);
+	}
+}
+
+.speakers {
+	& > * {
+		display: flex;
+		margin-bottom: 0.5em;
 	}
 }
 
@@ -69,10 +81,54 @@
 	flex: 1 1 100%;
 	margin-left: 1em;
 	margin-right: 1em;
+
 	span {
 		margin-bottom: -1px;
 		display: block;
 		border-bottom: 1px solid var(--progressColor, #ff224a);
 		width: var(--progress, 0);
 	}
+}
+
+.chapter {
+	--hatBg: black;
+	--hatColor: white;
+	--cardBg: #f1f2f4;
+}
+
+.sermon {
+	// base
+}
+
+.song {
+	--hatBg: #d7ebfb;
+	--hatColor: #{$ts-dark};
+	--cardBg: #ebf2f9;
+	--cardColor: #{$ts-midTone};
+	--headingColor: #{$ts-dark};
+	--progressColor: #{$ts-red};
+	--partColor: #{$ts-red};
+	--iconColor: #{$ts-red};
+}
+
+.story {
+	--hatBg: #003849;
+	--hatColor: white;
+	--cardBg: #325763;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
+}
+
+.topic {
+	--hatBg: #040253;
+	--hatColor: white;
+	--cardBg: #3e3d6d;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
 }

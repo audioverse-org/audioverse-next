@@ -38,13 +38,13 @@ query getHomeStaticProps($language: Language!) {
 			...cardTopic
 		}
 	}
-	recordings(
+	sermons(
 		language: $language
 		first: 1
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			...cardRecording
+			...cardSermon
 		}
 	}
 }

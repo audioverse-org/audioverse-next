@@ -1,7 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 import Card from '@components/molecules/card';
-import { COLORS } from '@lib/constants';
 import { CardSongFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../public/img/icon-music-solid.svg';
@@ -11,30 +10,12 @@ interface CardSongProps {
 }
 
 export default function CardSong({ song }: CardSongProps): JSX.Element {
-	const container = song.collection
+	const container = song.sequence
 		? {
 				icon: <HatIcon width={12} height={12} />,
-				title: song.collection.title,
+				title: song.sequence.title,
 		  }
 		: undefined;
 
-	return (
-		<Card
-			style={
-				{
-					'--hatBg': '#D7EBFB',
-					'--hatColor': COLORS.dark,
-					'--cardBg': '#EBF2F9',
-					'--cardColor': COLORS.midTone,
-					'--headingColor': COLORS.dark,
-					'--progressColor': COLORS.red,
-					'--partColor': COLORS.red,
-					'--iconColor': COLORS.red,
-				} as CSSProperties
-			}
-			container={container}
-			progress={0.3}
-			{...song}
-		/>
-	);
+	return <Card container={container} theme={'song'} progress={0.3} {...song} />;
 }
