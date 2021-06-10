@@ -10,10 +10,10 @@ import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import CardSlider from '@components/organisms/cardSlider';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import { HomeProps } from '@pages/[language]';
 
 import styles from './home.module.scss';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();

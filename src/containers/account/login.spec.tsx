@@ -1,6 +1,7 @@
+import { waitFor } from '@testing-library/react';
+
 import { buildRenderer, loadAuthGuardData } from '@lib/test/helpers';
 import Login from '@pages/[language]/account/login.ts';
-import { waitFor } from '@testing-library/react';
 
 const renderPage = buildRenderer(Login);
 
