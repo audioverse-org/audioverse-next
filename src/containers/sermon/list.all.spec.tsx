@@ -177,7 +177,9 @@ describe('sermons list page', () => {
 	it('calculates pages using items per page', async () => {
 		loadSermonListData({ count: 75 });
 
-		const { getByText } = await renderPage({ i: '3', language: 'en' });
+		const { getByText } = await renderPage({
+			params: { i: '3', language: 'en' },
+		});
 
 		expect(() => getByText('4')).toThrow();
 	});
@@ -185,7 +187,7 @@ describe('sermons list page', () => {
 	it('handles string page index', async () => {
 		loadSermonListData();
 
-		await renderPage({ i: '3', language: 'en' });
+		await renderPage({ params: { i: '3', language: 'en' } });
 	});
 
 	it('links pagination properly', async () => {
@@ -219,7 +221,7 @@ describe('sermons list page', () => {
 	it('links All button using lang', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage({ language: 'es' });
+		const { getByRole } = await renderPage({ params: { language: 'es' } });
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
@@ -273,7 +275,7 @@ describe('sermons list page', () => {
 		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
 	});
 
-	it('calls mikdirSync', async () => {
+	it('calls mkdirSync', async () => {
 		loadSermonListData();
 
 		await renderPage();
@@ -284,8 +286,8 @@ describe('sermons list page', () => {
 	it('only renders feed once per language', async () => {
 		loadSermonListData();
 
-		await renderPage({ i: '1', language: 'en' });
-		await renderPage({ i: '2', language: 'en' });
+		await renderPage({ params: { i: '1', language: 'en' } });
+		await renderPage({ params: { i: '2', language: 'en' } });
 
 		expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
 	});
@@ -293,7 +295,7 @@ describe('sermons list page', () => {
 	it('renders feeds for other languages', async () => {
 		loadSermonListData();
 
-		await renderPage({ i: '1', language: 'es' });
+		await renderPage({ params: { i: '1', language: 'es' } });
 
 		const { calls } = (fs.writeFileSync as any).mock;
 
@@ -344,7 +346,7 @@ describe('sermons list page', () => {
 		mockFeed();
 		loadSermonListData();
 
-		await renderPage({ i: '1', language: 'es' });
+		await renderPage({ params: { i: '1', language: 'es' } });
 
 		const calls = (feed.Feed as any).mock.calls;
 
@@ -386,7 +388,7 @@ describe('sermons list page', () => {
 	it('localizes pagination', async () => {
 		loadSermonListData();
 
-		const { getByText } = await renderPage({ language: 'es' }),
+		const { getByText } = await renderPage({ params: { language: 'es' } }),
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/es/sermons/all/page/1');
@@ -465,7 +467,7 @@ describe('sermons list page', () => {
 	it('skips feed creation if invalid language', async () => {
 		loadSermonListData();
 
-		await renderPage({ i: '1', language: 'bad' });
+		await renderPage({ params: { i: '1', language: 'bad' } });
 
 		expect(fs.writeFileSync).not.toBeCalled();
 	});

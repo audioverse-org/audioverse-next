@@ -126,7 +126,7 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		await renderPage({ language: 'es' });
+		await renderPage({ params: { language: 'es' } });
 
 		await waitFor(() =>
 			expect(mockedFetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {

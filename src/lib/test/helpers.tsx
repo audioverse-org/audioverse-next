@@ -68,7 +68,15 @@ export function buildLoader<T>(
 	};
 }
 
-type Renderer<P> = (params?: Partial<P>) => Promise<RenderResult>;
+// TODO: Only accept props if getProps not provided
+// TODO: Only accept params if getProps provided
+type RendererOptions<P> = {
+	params?: Partial<P>;
+	props?: any; // TODO: restrict to props component actually accepts
+	router?: Partial<NextRouter>;
+};
+
+type Renderer<P> = (options?: RendererOptions<P>) => Promise<RenderResult>;
 
 export function buildRenderer<
 	C extends ComponentType<any>,
@@ -81,12 +89,13 @@ export function buildRenderer<
 		defaultParams?: P;
 	} = {}
 ): Renderer<P> {
-	const { getProps = (p) => p, defaultParams = {} } = options;
-	return async (params: Partial<P> = {}): Promise<RenderResult> => {
+	const { getProps = undefined, defaultParams = {} } = options;
+	return async (options: RendererOptions<P> = {}): Promise<RenderResult> => {
+		const { params = {}, props = {}, router = {} } = options;
 		const p = { ...defaultParams, ...params };
-		const props = await getProps(p);
-		loadRouter({ query: p });
-		return renderWithIntl(Component, props);
+		const props_ = getProps ? await getProps(p) : props;
+		loadRouter({ query: p, ...router });
+		return renderWithIntl(Component, props_);
 	};
 }
 

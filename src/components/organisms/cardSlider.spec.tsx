@@ -26,15 +26,17 @@ describe('card slider', () => {
 
 	it('renders cards', async () => {
 		const { getByText } = await renderComponent({
-			children: (
-				<CardSermon
-					recording={
-						{
-							title: 'the_recording_title',
-						} as any
-					}
-				/>
-			),
+			props: {
+				children: (
+					<CardSermon
+						recording={
+							{
+								title: 'the_recording_title',
+							} as any
+						}
+					/>
+				),
+			},
 		});
 
 		expect(getByText('the_recording_title')).toBeInTheDocument();
@@ -42,7 +44,9 @@ describe('card slider', () => {
 
 	it('pages right', async () => {
 		const { getByLabelText, getByTestId } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		userEvent.click(getByLabelText('Next page'));
@@ -56,7 +60,9 @@ describe('card slider', () => {
 
 	it('tracks page position', async () => {
 		const { getByLabelText, getByTestId } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		userEvent.click(getByLabelText('Next page'));
@@ -71,7 +77,9 @@ describe('card slider', () => {
 
 	it('pages left', async () => {
 		const { getByLabelText, getByTestId } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		userEvent.click(getByLabelText('Next page'));
@@ -84,7 +92,9 @@ describe('card slider', () => {
 
 	it('does not page left past start', async () => {
 		const { getByLabelText, getByTestId } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		userEvent.click(getByLabelText('Previous page'));
@@ -99,7 +109,9 @@ describe('card slider', () => {
 
 	it('does not page right past end', async () => {
 		const { getByLabelText, getByTestId } = await renderComponent({
-			children: getEls(1),
+			props: {
+				children: getEls(1),
+			},
 		});
 
 		userEvent.click(getByLabelText('Next page'));
@@ -111,7 +123,9 @@ describe('card slider', () => {
 
 	it('displays pagination dots', async () => {
 		const { getByLabelText } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		expect(getByLabelText('Slider Pagination').childNodes).toHaveLength(3);
@@ -119,7 +133,9 @@ describe('card slider', () => {
 
 	it('highlights active dot', async () => {
 		const { getByLabelText } = await renderComponent({
-			children: getEls(7),
+			props: {
+				children: getEls(7),
+			},
 		});
 
 		expect(getByLabelText('Page 1')).toHaveClass('active');
@@ -127,7 +143,9 @@ describe('card slider', () => {
 
 	it('calculates dot count dynamically', async () => {
 		const { getByLabelText } = await renderComponent({
-			children: getEls(4),
+			props: {
+				children: getEls(4),
+			},
 		});
 
 		expect(getByLabelText('Slider Pagination').childNodes).toHaveLength(2);

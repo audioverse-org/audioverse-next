@@ -105,7 +105,7 @@ describe('playlists list page', () => {
 			},
 		});
 
-		const { getByTestId } = await renderPage({ i: '2' });
+		const { getByTestId } = await renderPage({ params: { i: '2' } });
 
 		expect(getByTestId('active')).toHaveTextContent('2');
 	});

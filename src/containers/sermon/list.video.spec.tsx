@@ -38,8 +38,10 @@ describe('sermon video list page', () => {
 		loadSermonListData();
 
 		await renderPage({
-			i: '1',
-			language: 'en',
+			params: {
+				i: '1',
+				language: 'en',
+			},
 		});
 
 		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {

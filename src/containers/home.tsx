@@ -13,8 +13,10 @@ import Testimonies from '@components/organisms/testimonies';
 import { HomeProps } from '@pages/[language]';
 
 import styles from './home.module.scss';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 export default function Home({ data }: HomeProps): JSX.Element {
+	const route = useLanguageRoute();
 	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];
 	const chapter = data?.audiobible?.book.chapter;
 	const story = data?.stories.nodes && data.stories.nodes[0];
@@ -27,14 +29,20 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				<img src="/img/logo.svg" width={161} height={23} />
 				<nav className={styles.nav}>
 					<LanguageSwitcher />
-					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
+					<a
+						href={`/${route}/give`}
+						className={`${styles.button} ${styles.primary}`}
+					>
 						<FormattedMessage
 							id={'homePage__donateButtonLabel'}
 							defaultMessage={'Donate'}
 							description={'home page donate button label'}
 						/>
 					</a>
-					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
+					<a
+						href={`${route}/app`}
+						className={`${styles.button} ${styles.primary}`}
+					>
 						<FormattedMessage
 							id={'homePage__downloadAppButtonLabel'}
 							defaultMessage={'Download App'}
@@ -42,14 +50,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						/>
 					</a>
 					<span>|</span>
-					<a href={'#'}>
+					<a href={`/${route}/account/login`}>
 						<FormattedMessage
 							id={'homePage__loginButtonLabel'}
 							defaultMessage={'Login'}
 							description={'home page login button label'}
 						/>
 					</a>
-					<a href={'#'}>
+					<a href={`/${route}/account/register`}>
 						<FormattedMessage
 							id={'srcContainersHomeTsx__signUp'}
 							defaultMessage={'Sign Up'}
@@ -423,7 +431,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				</h5>
 				<ul>
 					<li>
-						<a href="#">
+						<a href={`${route}/app`}>
 							<FormattedMessage
 								id={'homePage__footerDownloadAppButton'}
 								defaultMessage={'Download app'}
@@ -441,7 +449,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href={`/${route}/give`}>
 							<FormattedMessage
 								id={'homePage__footerDonateLink'}
 								defaultMessage={'Donate'}
