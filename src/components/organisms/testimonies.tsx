@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { TestimoniesFragment } from '@lib/generated/graphql';
+import Slider from '@components/organisms/slider';
+import styles from './testimonies.module.scss';
 
 interface TestimoniesProps {
 	testimonies: TestimoniesFragment[];
@@ -8,11 +10,16 @@ interface TestimoniesProps {
 
 const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
-		<>
+		<Slider>
 			{testimonies.map((t) => (
-				<p key={t.id}>{t.body}</p>
+				<blockquote className={styles.testimony} key={t.id}>
+					<p className={styles.body}>{t.body}</p>
+					<footer>
+						<cite className={styles.author}>{t.author}</cite>
+					</footer>
+				</blockquote>
 			))}
-		</>
+		</Slider>
 	);
 };
 

@@ -2,7 +2,6 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import _ from 'lodash';
 import Head from 'next/head';
 import React from 'react';
-import '../styles/globals.css';
 import '../styles/styles.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';

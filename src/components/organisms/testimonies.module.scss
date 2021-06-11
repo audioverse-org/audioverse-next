@@ -1,0 +1,20 @@
+.testimony {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.body {
+  font-size: 1.25rem;
+  color: black;
+  margin-top: 0;
+}
+
+.author {
+  // TODO: Update with specific serif font; DRY
+  font-family: serif;
+  font-style: normal;
+  font-weight: bold;
+}

@@ -87,13 +87,18 @@ export function buildRenderer<
 	options: {
 		getProps?: F;
 		defaultParams?: P;
+		defaultProps?: any; // TODO: restrict to props component actually accepts
 	} = {}
 ): Renderer<P> {
-	const { getProps = undefined, defaultParams = {} } = options;
+	const {
+		getProps = undefined,
+		defaultParams = {},
+		defaultProps = {},
+	} = options;
 	return async (options: RendererOptions<P> = {}): Promise<RenderResult> => {
-		const { params = {}, props = {}, router = {} } = options;
+		const { params = {}, props, router = {} } = options;
 		const p = { ...defaultParams, ...params };
-		const props_ = getProps ? await getProps(p) : props;
+		const props_ = getProps ? await getProps(p) : props || defaultProps;
 		loadRouter({ query: p, ...router });
 		return renderWithIntl(Component, props_);
 	};

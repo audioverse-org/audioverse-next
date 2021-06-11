@@ -2,10 +2,10 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import CardSermon from '@components/molecules/cardSermon';
-import CardSlider from '@components/organisms/cardSlider';
+import Slider from '@components/organisms/slider';
 import { buildRenderer } from '@lib/test/helpers';
 
-const renderComponent = buildRenderer(CardSlider);
+const renderComponent = buildRenderer(Slider);
 
 function getEls(n: number): JSX.Element[] {
 	return Array.from(new Array(n).keys()).map((i) => <i key={i} />);
@@ -124,6 +124,7 @@ describe('card slider', () => {
 	it('displays pagination dots', async () => {
 		const { getByLabelText } = await renderComponent({
 			props: {
+				perSlide: 3,
 				children: getEls(7),
 			},
 		});
@@ -144,10 +145,21 @@ describe('card slider', () => {
 	it('calculates dot count dynamically', async () => {
 		const { getByLabelText } = await renderComponent({
 			props: {
+				perSlide: 3,
 				children: getEls(4),
 			},
 		});
 
 		expect(getByLabelText('Slider Pagination').childNodes).toHaveLength(2);
+	});
+
+	it('defaults to one card per slide', async () => {
+		const { getByLabelText } = await renderComponent({
+			props: {
+				children: getEls(4),
+			},
+		});
+
+		expect(getByLabelText('Slider Pagination').childNodes).toHaveLength(4);
 	});
 });

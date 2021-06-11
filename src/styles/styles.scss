@@ -22,6 +22,20 @@ html {
 
 @import './common.scss';
 
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#__next,
+.template-base {
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+	color: $ts-dark;
+}
+
 h1,
 h2,
 h3,
@@ -54,4 +68,12 @@ a {
 
 p {
 	line-height: 1.3em;
+}
+
+/* Material UI Customizations */
+
+.MuiButton-root.MuiButton-text,
+.MuiButton-root.MuiButton-text:hover {
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }

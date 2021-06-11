@@ -7,7 +7,7 @@ import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
 import LanguageSwitcher from '@components/molecules/languageSwitcher';
-import CardSlider from '@components/organisms/cardSlider';
+import Slider from '@components/organisms/slider';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -135,13 +135,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<CardSlider>
+					<Slider perSlide={3} clip={false}>
 						{song && <CardSong song={song} />}
 						{chapter && <CardBibleChapter chapter={chapter} />}
 						{story && <CardStory story={story} />}
 						{topicRecording && <CardTopic topicRecording={topicRecording} />}
 						{recording && <CardSermon recording={recording} />}
-					</CardSlider>
+					</Slider>
 				}
 				center={true}
 				reverse={true}
@@ -201,18 +201,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 					</>
 				}
-				media={
-					<>
-						<Testimonies testimonies={testimonies} />
-						<div>
-							<FormattedMessage
-								id={'homePage__testimoniesPaginationPlaceholder'}
-								defaultMessage={'pagination'}
-								description={'home page testimonies pagination placeholder'}
-							/>
-						</div>
-					</>
-				}
+				media={<Testimonies testimonies={testimonies} />}
 				center={true}
 				reverse={true}
 			/>

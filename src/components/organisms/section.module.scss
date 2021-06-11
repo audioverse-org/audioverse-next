@@ -41,6 +41,7 @@
 
 .center {
 	text-align: center;
+	grid-gap: 3rem;
 	grid-template-columns: auto 1fr auto;
 	grid-template-areas:
 		'. . .'
