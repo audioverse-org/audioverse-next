@@ -1,0 +1,12 @@
+@import '../../styles/common';
+
+.languages {
+	svg {
+		fill: $ts-red;
+		color: $ts-red;
+	}
+
+	.adornment {
+		margin-right: 8px;
+	}
+}

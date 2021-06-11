@@ -40,6 +40,7 @@ import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
 import formatDuration from '@lib/formatDuration';
 import { GetWithAuthGuardDataDocument, Person } from '@lib/generated/graphql';
+import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
 import {
 	loadAuthGuardData,
@@ -68,7 +69,9 @@ const expectNoUnlocalizedText = (
 		queryAllByLabelText,
 	} = screen;
 	const r = /[^z\d\W\s]+/;
-	const m = (c: string) => !!c.match(r) && !whitelist.includes(c);
+	const languageNames = getLanguageDisplayNames();
+	const whitelist_ = [...languageNames, ...whitelist];
+	const m = (c: string) => !!c.match(r) && !whitelist_.includes(c);
 	const hits = [
 		...queryAllByText(m),
 		...queryAllByAltText(m),

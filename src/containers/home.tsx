@@ -1,18 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Icon from '@components/atoms/icon';
 import CardBibleChapter from '@components/molecules/cardBibleChapter';
 import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
+import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import CardSlider from '@components/organisms/cardSlider';
 import Section from '@components/organisms/section';
 import Testimonies from '@components/organisms/testimonies';
 import { HomeProps } from '@pages/[language]';
-
-import LanguageIcon from '../../public/img/icon-language-solid.svg';
 
 import styles from './home.module.scss';
 
@@ -28,24 +26,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			<header className={styles.header}>
 				<img src="/img/logo.svg" width={161} height={23} />
 				<nav className={styles.nav}>
-					{/* TODO: give FA attribution, or purchase a license */}
-					<span className={styles.languages}>
-						<LanguageIcon
-							width={16}
-							height={16}
-							style={{
-								color: '#FF6E6E',
-							}}
-						/>
-						<span>
-							<FormattedMessage
-								id={'srcContainersHomeTsx__english'}
-								defaultMessage={'English'}
-								description={'home: language selector English label'}
-							/>
-						</span>
-						<Icon icon={'chevron-down'} />
-					</span>
+					<LanguageSwitcher />
 					<a href={'#'} className={`${styles.button} ${styles.primary}`}>
 						<FormattedMessage
 							id={'homePage__donateButtonLabel'}

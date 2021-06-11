@@ -1,3 +1,4 @@
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import _ from 'lodash';
 import Head from 'next/head';
 import React from 'react';
@@ -12,12 +13,26 @@ import withIntl from '@components/HOCs/withIntl';
 import Header from '@components/organisms/header';
 
 import styles from './_app.module.scss';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			refetchOnWindowFocus: false,
+		},
+	},
+});
+
+const muiTheme = createMuiTheme({
+	typography: {
+		button: {
+			textTransform: 'none',
+		},
+	},
+	props: {
+		MuiButtonBase: {
+			disableRipple: true,
 		},
 	},
 });
@@ -40,16 +55,18 @@ function MyApp<P>({
 						<title>AudioVerse</title>
 					</Head>
 					<QueryClientProvider client={queryClient}>
-						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
-							{!disableSidebar && (
-								<div className={styles.header}>
-									<Header />
+						<ThemeProvider theme={muiTheme}>
+							<Hydrate state={_.get(pageProps, 'dehydratedState')}>
+								{!disableSidebar && (
+									<div className={styles.header}>
+										<Header />
+									</div>
+								)}
+								<div className={styles.content}>
+									<Component {...pageProps} />
 								</div>
-							)}
-							<div className={styles.content}>
-								<Component {...pageProps} />
-							</div>
-						</Hydrate>
+							</Hydrate>
+						</ThemeProvider>
 					</QueryClientProvider>
 				</React.StrictMode>
 			</div>
