@@ -5,10 +5,16 @@ body,
 	padding: 0;
 	margin: 0;
 	height: 100vh;
-	/*font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,*/
-	/*	Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;*/
 }
 
 * {
 	box-sizing: border-box;
+}
+
+/* Material UI Customizations */
+
+.MuiButton-root.MuiButton-text,
+.MuiButton-root.MuiButton-text:hover {
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }
