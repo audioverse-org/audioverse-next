@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { TestimoniesFragment } from '@lib/generated/graphql';
 import Slider from '@components/organisms/slider';
+import { TestimoniesFragment } from '@lib/generated/graphql';
+
 import styles from './testimonies.module.scss';
 
 interface TestimoniesProps {
