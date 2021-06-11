@@ -85,9 +85,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page sound doctrine text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						<a
+							href={`/${route}/account/register`}
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
-								id={'homePage__joinAudioverseButtonLabel'}
+								id={'homePage__joinAudioVerseButtonLabel'}
 								defaultMessage={'Join AudioVerse'}
 								description={'home page join audioverse button label'}
 							/>
