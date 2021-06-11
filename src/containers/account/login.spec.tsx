@@ -28,7 +28,3 @@ describe('login page', () => {
 		});
 	});
 });
-
-// TODO:
-// displays login page
-// redirects on successful login
