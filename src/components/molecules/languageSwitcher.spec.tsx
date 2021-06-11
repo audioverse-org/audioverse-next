@@ -23,7 +23,9 @@ describe('language switcher', () => {
 
 	it('displays different language name', async () => {
 		const { getByText } = await renderComponent({
-			language: 'es',
+			params: {
+				language: 'es',
+			},
 		});
 
 		expect(getByText('Español')).toBeInTheDocument();
