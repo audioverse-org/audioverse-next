@@ -164,7 +164,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page download app section text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						<a
+							href={`${route}/app`}
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
 								id={'homePage__downloadNowButtonLabel'}
 								defaultMessage={'Download Now'}
