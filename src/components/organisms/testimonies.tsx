@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TestimoniesFragment } from '@lib/generated/graphql';
 
 interface TestimoniesProps {
