@@ -1,14 +1,16 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { TestimoniesFragment } from '@lib/generated/graphql';
 
-const Testimonies = (): JSX.Element => {
+interface TestimoniesProps {
+	testimonies: TestimoniesFragment[];
+}
+
+const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
 		<>
-			<FormattedMessage
-				id={'testimoniesComponent__placeholder'}
-				defaultMessage={'testimonies-placeholder'}
-				description={'testimonies component placeholder'}
-			/>
+			{testimonies.map((t) => (
+				<p key={t.id}>{t.body}</p>
+			))}
 		</>
 	);
 };

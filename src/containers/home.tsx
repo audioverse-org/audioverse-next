@@ -22,6 +22,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const story = data?.stories.nodes && data.stories.nodes[0];
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const recording = data?.sermons.nodes && data.sermons.nodes[0];
+	const testimonies = data?.testimonies.nodes || [];
 
 	return (
 		<div>
@@ -202,7 +203,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					<>
-						<Testimonies />
+						<Testimonies testimonies={testimonies} />
 						<div>
 							<FormattedMessage
 								id={'homePage__testimoniesPaginationPlaceholder'}

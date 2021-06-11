@@ -1,12 +1,21 @@
 import Testimonies from '@components/organisms/testimonies';
-import { renderWithIntl } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/helpers';
 
-const renderTestimonies = async () => {
-	return renderWithIntl(Testimonies, {});
-};
+const renderComponent = buildRenderer(Testimonies);
 
 describe('testimonies', () => {
-	it('renders', async () => {
-		await renderTestimonies();
+	it('renders testimonies', async () => {
+		const { getByText } = await renderComponent({
+			props: {
+				testimonies: [
+					{
+						id: 'the_id',
+						body: 'the_body',
+					},
+				],
+			},
+		});
+
+		expect(getByText('the_body')).toBeInTheDocument();
 	});
 });

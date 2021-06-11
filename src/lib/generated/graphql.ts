@@ -51,6 +51,7 @@ export type AudioFile = Node & {
   bitrate: Scalars['Int'];
   /** Whether the current viewer may delete the file. */
   canDelete: Maybe<Scalars['Boolean']>;
+  /** The duration of the audio file in seconds. */
   duration: Scalars['Float'];
   filename: Scalars['String'];
   /** In bytes */
@@ -278,6 +279,8 @@ export type BlogPost = Node & {
   id: Scalars['ID'];
   image: Maybe<Image>;
   publishDate: Scalars['DateTime'];
+  /** The estimated number of seconds to read the blog post. */
+  readingDuration: Maybe<Scalars['Float']>;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['URL'];
   teaser: Scalars['String'];
@@ -410,6 +413,8 @@ export type Collection = Node & {
   canonicalUrl: Scalars['URL'];
   contentType: CollectionContentType;
   description: Scalars['String'];
+  /** The combined duration of the collection's recordings in seconds. */
+  duration: Scalars['Float'];
   endDate: Maybe<Scalars['Date']>;
   hidingReason: Maybe<Scalars['String']>;
   history: Maybe<CatalogHistoryItemConnection>;
@@ -3254,6 +3259,7 @@ export type Recording = Node & {
   distributionAgreement: Maybe<DistributionAgreement>;
   /** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
   downloadDisabled: Scalars['Boolean'];
+  /** In seconds. */
   duration: Scalars['Float'];
   hasAudio: Scalars['Boolean'];
   hasVideo: Scalars['Boolean'];
@@ -3761,6 +3767,9 @@ export type Sequence = Node & {
   collection: Maybe<Collection>;
   contentType: SequenceContentType;
   description: Scalars['String'];
+  /** The combined duration of the sequence's recordings in seconds. */
+  duration: Scalars['Float'];
+  endDate: Maybe<Scalars['Date']>;
   hidingReason: Maybe<Scalars['String']>;
   history: Maybe<CatalogHistoryItemConnection>;
   id: Scalars['ID'];
@@ -3780,6 +3789,7 @@ export type Sequence = Node & {
   /** Requires `ADMINISTRATION` role. */
   skipLegalScreening: Maybe<Scalars['Boolean']>;
   sponsor: Maybe<Sponsor>;
+  startDate: Maybe<Scalars['Date']>;
   summary: Scalars['String'];
   title: Scalars['String'];
   viewerHasFavorited: Scalars['Boolean'];
@@ -5222,6 +5232,7 @@ export type VideoFile = Node & {
   /** Whether the current viewer may delete the file. */
   canDelete: Maybe<Scalars['Boolean']>;
   container: Scalars['String'];
+  /** The duration of the video file in seconds. */
   duration: Scalars['Float'];
   filename: Scalars['String'];
   /** In bytes */
@@ -5495,6 +5506,11 @@ export type RecordingFragment = (
     & Pick<Transcript, 'text'>
   )> }
   & CopyrightInfoFragment
+);
+
+export type TestimoniesFragment = (
+  { __typename?: 'Testimony' }
+  & Pick<Testimony, 'id' | 'body' | 'author'>
 );
 
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
@@ -5977,6 +5993,12 @@ export type GetHomeStaticPropsQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Recording' }
       & CardSermonFragment
+    )>> }
+  ), testimonies: (
+    { __typename?: 'TestimonyConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'Testimony' }
+      & TestimoniesFragment
     )>> }
   ) }
 );
@@ -7124,6 +7146,13 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${SpeakerNameFragmentDoc}`;
+export const TestimoniesFragmentDoc = `
+    fragment testimonies on Testimony {
+  id
+  body
+  author
+}
+    `;
 export const ProfileFragmentDoc = `
     fragment profile on User {
   email
@@ -7872,12 +7901,18 @@ export const GetHomeStaticPropsDocument = `
       ...cardSermon
     }
   }
+  testimonies(language: $language, first: 3) {
+    nodes {
+      ...testimonies
+    }
+  }
 }
     ${CardSongFragmentDoc}
 ${CardBibleChapterFragmentDoc}
 ${CardStoryFragmentDoc}
 ${CardTopicFragmentDoc}
-${CardSermonFragmentDoc}`;
+${CardSermonFragmentDoc}
+${TestimoniesFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
       TData = GetHomeStaticPropsQuery,
       TError = unknown
@@ -9117,6 +9152,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetPlaylistButtonDataQuery> {
 								return fetchApi(GetPlaylistButtonDataDocument, { variables });
 							}
+
 
 
 
