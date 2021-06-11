@@ -19,6 +19,8 @@ $ts-midTone: #6b7680;
 $ts-red: #ff224a;
 $ts-salmon: #ff6e6e;
 
+// TODO: Switch to using Mui button, move all these styles to global
+//  theme or global.css Mui customizations
 .button {
 	border-radius: 4px;
 	border-color: $ts-dark;

@@ -1,12 +1,6 @@
 @import '../../styles/common';
 
 .languages {
-	text-decoration: underline;
-
-	button {
-		text-transform: none;
-	}
-
 	svg {
 		fill: $ts-red;
 		color: $ts-red;
