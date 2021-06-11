@@ -76,7 +76,7 @@
 }
 
 .dark {
-	background-color: $gray-mid;
+	background-color: $ts-dark;
 	color: white;
 }
 
@@ -86,9 +86,4 @@
 
 .cream {
 	background-color: $ts-cream;
-}
-
-.grey {
-	// TODO: move this to common.scss
-	background-color: #efebeb;
 }
