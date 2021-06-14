@@ -5293,6 +5293,15 @@ export type CardBibleChapterFragment = (
   & Pick<BibleChapter, 'title'>
 );
 
+export type CardPostFragment = (
+  { __typename?: 'BlogPost' }
+  & Pick<BlogPost, 'publishDate' | 'title' | 'teaser' | 'canonicalUrl' | 'readingDuration'>
+  & { image: Maybe<(
+    { __typename?: 'Image' }
+    & Pick<Image, 'url'>
+  )> }
+);
+
 export type CardSermonFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'title' | 'duration'>
@@ -5999,6 +6008,12 @@ export type GetHomeStaticPropsQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Testimony' }
       & TestimoniesFragment
+    )>> }
+  ), blogPosts: (
+    { __typename?: 'BlogPostConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'BlogPost' }
+      & CardPostFragment
     )>> }
   ) }
 );
@@ -7029,6 +7044,18 @@ export const CardBibleChapterFragmentDoc = `
   title
 }
     `;
+export const CardPostFragmentDoc = `
+    fragment cardPost on BlogPost {
+  image {
+    url(size: 500, cropMode: MAX_SIZE)
+  }
+  publishDate
+  title
+  teaser
+  canonicalUrl
+  readingDuration
+}
+    `;
 export const SpeakerNameFragmentDoc = `
     fragment speakerName on Person {
   id
@@ -7906,13 +7933,23 @@ export const GetHomeStaticPropsDocument = `
       ...testimonies
     }
   }
+  blogPosts(
+    language: $language
+    first: 2
+    orderBy: {field: PUBLISHED_AT, direction: DESC}
+  ) {
+    nodes {
+      ...cardPost
+    }
+  }
 }
     ${CardSongFragmentDoc}
 ${CardBibleChapterFragmentDoc}
 ${CardStoryFragmentDoc}
 ${CardTopicFragmentDoc}
 ${CardSermonFragmentDoc}
-${TestimoniesFragmentDoc}`;
+${TestimoniesFragmentDoc}
+${CardPostFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
       TData = GetHomeStaticPropsQuery,
       TError = unknown
@@ -9133,6 +9170,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
+
 
 
 

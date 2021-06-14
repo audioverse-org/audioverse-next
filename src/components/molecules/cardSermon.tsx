@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '@components/molecules/card';
+import CardPlayable from '@components/molecules/cardPlayable';
 import { CardSermonFragment } from '@lib/generated/graphql';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
@@ -29,7 +29,7 @@ export default function CardSermon({
 		: undefined;
 
 	return (
-		<Card
+		<CardPlayable
 			container={container}
 			// TODO: set progress dynamically
 			progress={0}

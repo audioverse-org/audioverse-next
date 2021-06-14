@@ -77,6 +77,17 @@ const testimony = {
 	body: 'the_testimony_body',
 };
 
+const post = {
+	image: {
+		url: 'the_post_image_url',
+	},
+	publishDate: '2019-12-03T09:54:33Z',
+	title: 'the_post_title',
+	teaser: 'the_post_teaser',
+	canonicalUrl: 'the_post_url',
+	readingDuration: 9 * 60,
+};
+
 const loadData = buildLoader<GetHomeStaticPropsQuery>(
 	GetHomeStaticPropsDocument,
 	{
@@ -99,6 +110,9 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		},
 		testimonies: {
 			nodes: [testimony],
+		},
+		blogPosts: {
+			nodes: [post],
 		},
 	}
 );
@@ -247,6 +261,45 @@ describe('home page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Part 1 of 15')).toBeInTheDocument();
+	});
+
+	it('renders post titles', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_post_title')).toBeInTheDocument();
+	});
+
+	it('renders post date', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('December 3, 2019')).toBeInTheDocument();
+	});
+
+	it('renders post teaser', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_post_teaser')).toBeInTheDocument();
+	});
+
+	it('renders read time', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('9m')).toBeInTheDocument();
+	});
+
+	it('renders post image', async () => {
+		const { getByAltText } = await renderPage();
+
+		expect(getByAltText('the_post_title')).toHaveAttribute(
+			'src',
+			'the_post_image_url'
+		);
+	});
+
+	it('links post title', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('the_post_title')).toHaveAttribute('href', 'the_post_url');
 	});
 });
 

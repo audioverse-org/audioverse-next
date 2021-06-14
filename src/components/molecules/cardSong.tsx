@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '@components/molecules/card';
+import CardPlayable from '@components/molecules/cardPlayable';
 import { CardSongFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../public/img/icon-music-solid.svg';
@@ -17,5 +17,12 @@ export default function CardSong({ song }: CardSongProps): JSX.Element {
 		  }
 		: undefined;
 
-	return <Card container={container} theme={'song'} progress={0.3} {...song} />;
+	return (
+		<CardPlayable
+			container={container}
+			theme={'song'}
+			progress={0.3}
+			{...song}
+		/>
+	);
 }

@@ -9,6 +9,7 @@ import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import { PartialDeep } from 'type-fest';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
@@ -59,7 +60,7 @@ export function buildLoader<T>(
 	// It will already accept the type manually:
 	// const loadData = buildLoader<GetHomeStaticPropsQuery>(GetHomeStaticPropsDocument, { .. })
 	// should disallow including data in defaults that isn't in type
-	return (data: PartialDeep<T> = {}) => {
+	return (data: PartialDeep<T> | Record<string, never> = {}) => {
 		const value = _.defaultsDeep(data, defaults);
 		when(mockedFetchApi)
 			.calledWith(document, expect.anything())

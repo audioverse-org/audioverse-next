@@ -12,15 +12,21 @@ interface Node {
 "Represents a type that can be retrieved by a URL."
 interface UniformResourceLocatable {
 	canonicalPath: String!
-	canonicalUrl: String!
-	shareUrl: String!
+	canonicalUrl: URL!
+	shareUrl: URL!
 }
+
+union FavoriteEntityUnion = Collection | Person | Recording | Sequence | Sponsor
+
+union MediaFileResult = Attachment | AudioFile | VideoFile
 
 type Aggregate {
 	count: Int!
 }
 
 type Attachment implements Node {
+	"Whether the current viewer may delete the file."
+	canDelete: Boolean
 	filename: String!
 	"In bytes"
 	filesize: String!
@@ -35,7 +41,11 @@ type Attachment implements Node {
 }
 
 type AudioFile implements Node {
+	"Bitrate of the audio file in kbps."
 	bitrate: Int!
+	"Whether the current viewer may delete the file."
+	canDelete: Boolean
+	"The duration of the audio file in seconds."
 	duration: Float!
 	filename: String!
 	"In bytes"
@@ -72,6 +82,7 @@ type Bible implements Node {
 }
 
 type BibleBook implements Node {
+	bible: Bible!
 	chapter(id: ID!): BibleChapter!
 	chapterCount: Int!
 	chapters: [BibleChapter!]!
@@ -83,6 +94,7 @@ type BibleBook implements Node {
 }
 
 type BibleChapter implements Node {
+	book: BibleBook!
 	id: ID!
 	text: String!
 	title: String!
@@ -142,11 +154,19 @@ type BibleVerse {
 
 type BlogPost implements Node {
 	body: String!
+	"The canonical HTML path to this resource."
+	canonicalPath: String!
+	"The canonical URL to this resource."
+	canonicalUrl: URL!
 	"The number of days to feature blog post."
 	featuredDuration: Int
 	id: ID!
 	image: Image
 	publishDate: DateTime!
+	"The estimated number of seconds to read the blog post."
+	readingDuration: Float
+	"A shareable short URL to this resource."
+	shareUrl: URL!
 	teaser: String!
 	title: String!
 }
@@ -204,9 +224,11 @@ type Collection implements Node {
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	"The canonical URL to this resource."
-	canonicalUrl: String!
+	canonicalUrl: URL!
 	contentType: CollectionContentType!
 	description: String!
+	"The combined duration of the collection's recordings in seconds."
+	duration: Float!
 	endDate: Date
 	hidingReason: String
 	history(
@@ -240,6 +262,7 @@ type Collection implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -288,11 +311,16 @@ type Collection implements Node {
 		sponsorIds: [ID!]
 	): SequenceConnection!
 	"A shareable short URL to this resource."
-	shareUrl: String!
+	shareUrl: URL!
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsor: Sponsor
 	startDate: Date
 	summary: String!
 	title: String!
+	viewerHasFavorited: Boolean!
 }
 
 type CollectionConnection {
@@ -341,6 +369,7 @@ type DistributionAgreement implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -391,6 +420,53 @@ type DistributionAgreementEdge {
 type DistributionAgreementPayload {
 	distributionAgreement: DistributionAgreement
 	errors: [InputValidationError!]!
+}
+
+type Faq implements Node {
+	body: String!
+	faqCategory: FaqCategory!
+	id: ID!
+	"The index of the FAQ within its category."
+	index: Int!
+	isHidden: Boolean!
+	publishDate: DateTime!
+	title: String!
+}
+
+type FaqCategory implements Node {
+	id: ID!
+	"The index of the category within all categories."
+	index: Int!
+	title: String!
+}
+
+type FaqCategoryConnection {
+	aggregate: Aggregate
+	edges: [FaqCategoryEdge!]
+	nodes: [FaqCategory!]
+	pageInfo: PageInfo!
+}
+
+type FaqCategoryEdge {
+	cursor: String!
+	node: FaqCategory!
+}
+
+type FaqConnection {
+	aggregate: Aggregate
+	edges: [FaqEdge!]
+	nodes: [Faq!]
+	pageInfo: PageInfo!
+}
+
+type FaqEdge {
+	cursor: String!
+	node: Faq!
+}
+
+type FaqPayload {
+	errors: [InputValidationError!]!
+	faq: Faq
 }
 
 type Image {
@@ -482,7 +558,21 @@ type LicensePayload {
 	license: License
 }
 
+type MediaFileResultConnection {
+	aggregate: Aggregate
+	edges: [MediaFileResultEdge!]
+	nodes: [MediaFileResult!]
+	pageInfo: PageInfo!
+}
+
+type MediaFileResultEdge {
+	cursor: String!
+	node: MediaFileResult!
+}
+
 type MediaFileUpload implements Node {
+	"Whether the current viewer may delete the file."
+	canDelete: Boolean
 	filename: String!
 	"In bytes"
 	filesize: String!
@@ -633,14 +723,19 @@ type Mutation {
 	catalogHistoryCommentUpdate(catalogHistoryCommentId: ID!, input: CatalogHistoryCommentUpdateInput!): CatalogHistoryItemPayload!
 	collectionCreate(input: CollectionCreateInput!): CollectionPayload!
 	collectionDelete(collectionId: ID!): SuccessPayload!
+	collectionFavorite(id: ID!): SuccessPayload!
 	collectionHistoryCommentCreate(collectionId: ID!, input: CatalogHistoryCommentCreateInput!): CatalogHistoryItemPayload!
 	"Approve all recordings in collection through legal screening."
 	collectionScreeningLegalOverride(collectionId: ID!): SuccessPayload!
+	collectionUnfavorite(id: ID!): SuccessPayload!
 	collectionUpdate(collectionId: ID!, input: CollectionUpdateInput!): CollectionPayload!
 	distributionAgreementCreate(input: DistributionAgreementCreateInput!): DistributionAgreementPayload!
 	distributionAgreementDelete(distributionAgreementId: ID!): SuccessPayload!
 	distributionAgreementHistoryCommentCreate(distributionAgreementId: ID!, input: CatalogHistoryCommentCreateInput!): CatalogHistoryItemPayload!
 	distributionAgreementUpdate(distributionAgreementId: ID!, input: DistributionAgreementUpdateInput!): DistributionAgreementPayload!
+	faqCreate(input: FaqCreateInput!): FaqPayload!
+	faqDelete(faqId: ID!): SuccessPayload!
+	faqUpdate(faqId: ID!, input: FaqUpdateInput!): FaqPayload!
 	favoriteRecording(id: ID!): Boolean! @deprecated(reason : "favoriteRecording is replaced with recordingFavorite")
 	"Upload an image to an image type container."
 	imageUpload(
@@ -667,6 +762,9 @@ type Mutation {
 	mediaReleaseFormTemplateUpdate(input: MediaReleaseFormUpdateInput!, language: Language!, type: MediaReleaseFormType!): SuccessPayload!
 	mediaReleaseFormUpdate(input: MediaReleaseFormUpdateInput!, mediaReleaseFormId: ID!): MediaReleaseFormPayload!
 	mediaReleaseUpdate(input: MediaReleaseUpdateInput!, mediaReleaseId: ID!): MediaReleasePayload!
+	pageCreate(input: PageCreateInput!): PagePayload!
+	pageDelete(pageId: ID!): SuccessPayload!
+	pageUpdate(input: PageUpdateInput!, pageId: ID!): PagePayload!
 	personCreate(input: PersonCreateInput!): PersonPayload!
 	personDelete(personId: ID!): SuccessPayload!
 	personFavorite(id: ID!): SuccessPayload!
@@ -714,14 +812,18 @@ type Mutation {
 	recordingUpdate(input: RecordingUpdateInput!, recordingId: ID!): RecordingPayload!
 	sequenceCreate(input: SequenceCreateInput!): SequencePayload!
 	sequenceDelete(sequenceId: ID!): SuccessPayload!
+	sequenceFavorite(id: ID!): SuccessPayload!
 	sequenceHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, sequenceId: ID!): CatalogHistoryItemPayload!
 	"Approve all recordings in sequence through legal screening."
 	sequenceScreeningLegalOverride(sequenceId: ID!): SuccessPayload!
+	sequenceUnfavorite(id: ID!): SuccessPayload!
 	sequenceUpdate(input: SequenceUpdateInput!, sequenceId: ID!): SequencePayload!
 	signup(input: UserSignupInput!): AuthenticatedUserPayload!
 	sponsorCreate(input: SponsorCreateInput!): SponsorPayload!
 	sponsorDelete(sponsorId: ID!): SuccessPayload!
+	sponsorFavorite(id: ID!): SuccessPayload!
 	sponsorHistoryCommentCreate(input: CatalogHistoryCommentCreateInput!, sponsorId: ID!): CatalogHistoryItemPayload!
+	sponsorUnfavorite(id: ID!): SuccessPayload!
 	sponsorUpdate(input: SponsorUpdateInput!, sponsorId: ID!): SponsorPayload!
 	testimonyCreate(input: TestimonyCreateInput!): TestimonyPayload!
 	testimonyDelete(testimonyId: ID!): SuccessPayload!
@@ -745,6 +847,34 @@ type Mutation {
 	userUpdate(input: UserUpdateInput!, userId: ID!): UserPayload!
 }
 
+type Page implements Node {
+	body: String!
+	"The canonical HTML path to this resource."
+	canonicalPath: String!
+	"The canonical URL to this resource."
+	canonicalUrl: URL!
+	id: ID!
+	isHidden: Boolean!
+	pageMenu: PageMenu
+	"A shareable short URL to this resource."
+	shareUrl: URL!
+	slug: String!
+	title: String!
+	type: PageType!
+}
+
+type PageConnection {
+	aggregate: Aggregate
+	edges: [PageEdge!]
+	nodes: [Page!]
+	pageInfo: PageInfo!
+}
+
+type PageEdge {
+	cursor: String!
+	node: Page!
+}
+
 type PageInfo {
 	endCursor: String
 	hasNextPage: Boolean!
@@ -752,12 +882,34 @@ type PageInfo {
 	startCursor: String
 }
 
+type PageMenu implements Node {
+	id: ID!
+	name: String!
+}
+
+type PageMenuConnection {
+	aggregate: Aggregate
+	edges: [PageMenuEdge!]
+	nodes: [PageMenu!]
+	pageInfo: PageInfo!
+}
+
+type PageMenuEdge {
+	cursor: String!
+	node: PageMenu!
+}
+
+type PagePayload {
+	errors: [InputValidationError!]!
+	page: Page
+}
+
 type Person implements Node {
 	address: String
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	"The canonical URL to this resource."
-	canonicalUrl: String!
+	canonicalUrl: URL!
 	description: String!
 	designations: String!
 	email: String
@@ -778,7 +930,7 @@ type Person implements Node {
 	imageWithFallback: Image!
 	internalContact: InternalContact
 	isHidden: Boolean!
-	isPreapproved: Boolean
+	isPreapproved: Boolean @deprecated(reason : "Person.isPreapproved is replaced with Person.skipContentScreening")
 	name: String!
 	phone: String
 	photo: Image @deprecated(reason : "Person.photo is replaced with Person.image")
@@ -798,6 +950,7 @@ type Person implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -829,7 +982,11 @@ type Person implements Node {
 		withRole: PersonsRoleField
 	): RecordingConnection!
 	"A shareable short URL to this resource."
-	shareUrl: String!
+	shareUrl: URL!
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	suffix: String!
 	summary: String!
 	surname: String!
@@ -888,6 +1045,7 @@ type Query {
 		imageType: ImageContainer!
 	): ImageConnectionSlim!
 	audiobible(id: ID!): Bible
+	audiobibleChapter(id: ID!): BibleChapter
 	audiobibles(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -934,6 +1092,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1055,6 +1214,29 @@ type Query {
 		sponsorId: ID,
 		sponsorIds: [ID!]
 	): DistributionAgreementConnection!
+	faq(id: ID!): Faq
+	faqCategories(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		language: Language!,
+		"Return the elements that come after the specified offset."
+		offset: Int
+	): FaqCategoryConnection
+	faqs(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		faqCategoryId: Int,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		"Whether to include unpublished FAQs. Requires `COMMUNICATIONS` role."
+		includeUnpublished: Boolean,
+		language: Language!,
+		"Return the elements that come after the specified offset."
+		offset: Int,
+		orderBy: [FaqsOrder!]
+	): FaqConnection!
 	featuredBlogPosts(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -1110,7 +1292,7 @@ type Query {
 		tagName: String,
 		technicalScreeningStatus: RecordingTechnicalScreeningStatus,
 		websiteIds: [ID!]
-	): RecordingConnection!
+	): RecordingConnection! @deprecated(reason : "`featuredRecordings` is replaced by `recordings(isFeatured: true)`")
 	license(id: ID!): License
 	licenses(
 		"Return the elements that come after the specified cursor."
@@ -1137,9 +1319,19 @@ type Query {
 		"Return the elements that come after the specified offset."
 		offset: Int,
 		orderBy: [MediaFileUploadsOrder!],
-		search: String,
-		transcodingStatuses: [MediaFileTranscodingStatus!]
+		search: String
 	): MediaFileUploadConnection!
+	mediaFiles(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		language: Language!,
+		"Return the elements that come after the specified offset."
+		offset: Int,
+		orderBy: [MediaFilesOrder!],
+		transcodingStatuses: [MediaFileTranscodingStatus!]
+	): MediaFileResultConnection!
 	mediaRelease(id: ID!): MediaRelease
 	mediaReleaseForm(id: ID!): MediaReleaseForm
 	mediaReleaseFormTemplates(language: Language!): [MediaReleaseFormTemplate!]!
@@ -1254,6 +1446,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1286,6 +1479,28 @@ type Query {
 		technicalScreeningStatus: RecordingTechnicalScreeningStatus,
 		websiteIds: [ID!]
 	): RecordingConnection!
+	page(id: ID!): Page
+	pageMenus(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		"Return the elements that come after the specified offset."
+		offset: Int
+	): PageMenuConnection
+	pages(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		"Whether to include unpublished pages. Requires `COMMUNICATIONS` role."
+		includeUnpublished: Boolean,
+		language: Language!,
+		"Return the elements that come after the specified offset."
+		offset: Int,
+		orderBy: [PagesOrder!],
+		pageMenuId: Int
+	): PageConnection!
 	person(id: ID!): Person
 	persons(
 		"Return the elements that come after the specified cursor."
@@ -1320,6 +1535,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1379,6 +1595,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1470,6 +1687,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1531,6 +1749,7 @@ type Query {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		language: Language!,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
@@ -1679,6 +1898,7 @@ type Recording implements Node {
 	canRequestTranscription: Boolean
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
+	"The canonical URL to this resource."
 	canonicalUrl: URL!
 	collection: Collection
 	contentScreeningCheckouts: [RecordingScreeningCheckout!]
@@ -1690,6 +1910,7 @@ type Recording implements Node {
 	description: String
 	distributionAgreement: DistributionAgreement
 	downloadDisabled: Boolean! @deprecated(reason : "Recording.downloadDisabled is replaced with Recording.isDownloadAllowed")
+	"In seconds."
 	duration: Float!
 	hasAudio: Boolean!
 	hasVideo: Boolean!
@@ -1746,7 +1967,8 @@ type Recording implements Node {
 	sequence: Sequence
 	"The index of the recording within its sequence."
 	sequenceIndex: Int
-	shareUrl: URL
+	"A shareable short URL to this resource."
+	shareUrl: URL!
 	sponsor: Sponsor
 	stage: RecordingStage!
 	technicalScreeningCheckouts: [RecordingScreeningCheckout!]
@@ -1887,10 +2109,13 @@ type Sequence implements Node {
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	"The canonical URL to this resource."
-	canonicalUrl: String!
+	canonicalUrl: URL!
 	collection: Collection
 	contentType: SequenceContentType!
 	description: String!
+	"The combined duration of the sequence's recordings in seconds."
+	duration: Float!
+	endDate: Date
 	hidingReason: String
 	history(
 		"Return the elements that come after the specified cursor."
@@ -1923,6 +2148,7 @@ type Sequence implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -1952,10 +2178,16 @@ type Sequence implements Node {
 		websiteIds: [ID!]
 	): RecordingConnection!
 	"A shareable short URL to this resource."
-	shareUrl: String!
+	shareUrl: URL!
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsor: Sponsor
+	startDate: Date
 	summary: String!
 	title: String!
+	viewerHasFavorited: Boolean!
 }
 
 type SequenceConnection {
@@ -1980,7 +2212,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 	"The canonical HTML path to this resource."
 	canonicalPath: String!
 	"The canonical URL to this resource."
-	canonicalUrl: String!
+	canonicalUrl: URL!
 	collections(
 		"Return the elements that come after the specified cursor."
 		after: String,
@@ -2050,6 +2282,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -2098,9 +2331,14 @@ type Sponsor implements Node & UniformResourceLocatable {
 		sponsorIds: [ID!]
 	): SequenceConnection!
 	"A shareable short URL to this resource."
-	shareUrl: String!
+	shareUrl: URL!
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	summary: String!
 	title: String!
+	viewerHasFavorited: Boolean!
 	website: URL
 }
 
@@ -2144,6 +2382,7 @@ type Tag implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -2260,6 +2499,7 @@ type User implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -2290,9 +2530,22 @@ type User implements Node {
 		technicalScreeningStatus: RecordingTechnicalScreeningStatus,
 		websiteIds: [ID!]
 	): RecordingConnection!
+	favorites(
+		"Return the elements that come after the specified cursor."
+		after: String,
+		"Return up to the first `n` elements from the list."
+		first: Int,
+		language: Language!,
+		"Return the elements that come after the specified offset."
+		offset: Int,
+		orderBy: [FavoritesOrder!],
+		types: [FavoritableCatalogEntityType!]
+	): UserFavoriteConnection!
 	"The user's first name."
 	givenName: String
 	id: ID!
+	"The user's avatar image."
+	image: Image
 	"Whether the user has permission to perform all administrative functions."
 	isSuperuser: Boolean!
 	"Whether the user has verified their email."
@@ -2340,6 +2593,23 @@ type UserEdge {
 	node: User!
 }
 
+type UserFavorite {
+	createdAt: DateTime!
+	entity: FavoriteEntityUnion!
+}
+
+type UserFavoriteConnection {
+	aggregate: Aggregate
+	edges: [UserFavoriteEdge!]
+	nodes: [UserFavorite!]
+	pageInfo: PageInfo!
+}
+
+type UserFavoriteEdge {
+	cursor: String!
+	node: UserFavorite!
+}
+
 type UserLanguageRole {
 	"The language scope for this role."
 	language: Language!
@@ -2372,6 +2642,7 @@ type UserPlaylist implements Node {
 		hasVideo: Boolean,
 		"Whether to include unpublished recordings. Requires `EDITOR` role."
 		includeUnpublished: Boolean,
+		isFeatured: Boolean,
 		legalScreeningStatus: RecordingLegalScreeningStatus,
 		"Return the elements that come after the specified offset."
 		offset: Int,
@@ -2419,8 +2690,12 @@ type UserPlaylistEdge {
 }
 
 type VideoFile implements Node {
+	"Bitrate of the video file in kbps."
 	bitrate: Int!
+	"Whether the current viewer may delete the file."
+	canDelete: Boolean
 	container: String!
+	"The duration of the video file in seconds."
 	duration: Float!
 	filename: String!
 	"In bytes"
@@ -2566,8 +2841,30 @@ enum DistributionAgreementsSortableField {
 	TITLE
 }
 
+"Properties by which FAQ connections can be ordered."
+enum FaqsSortableField {
+	CREATED_AT
+	INDEX
+	TITLE
+}
+
+"The types of catalog entities that may be favorited."
+enum FavoritableCatalogEntityType {
+	COLLECTION
+	PERSON
+	RECORDING
+	SEQUENCE
+	SPONSOR
+}
+
+"Properties by which user favorites connections can be ordered."
+enum FavoritesSortableField {
+	FAVORITED_AT
+}
+
 "The available image type containers."
 enum ImageContainer {
+	AVATAR
 	COLLECTION
 	LICENSE
 	NEWS
@@ -2649,6 +2946,13 @@ enum MediaFileUploadsSortableField {
 	FILENAME
 }
 
+"Properties by which media files connections can be ordered."
+enum MediaFilesSortableField {
+	CREATED_AT
+	FILENAME
+	FILESIZE
+}
+
 "Content types of the media release form entities with content types."
 enum MediaReleaseFormEntityContentType {
 	AUDIOBOOK
@@ -2694,6 +2998,26 @@ enum MediaReleaseSortableField {
 enum OrderByDirection {
 	ASC
 	DESC
+}
+
+"The available page types. Only the `CUSTOM` type may have more than one `Page` per language."
+enum PageType {
+	ABOUT
+	BLOG
+	CUSTOM
+	LEGAL
+	PRIVACY
+	SPIRIT_OF_AV
+	TEAM
+	TERMS_OF_USE
+	TESTIMONIALS
+}
+
+"Properties by which page connections can be ordered."
+enum PagesSortableField {
+	CREATED_AT
+	SLUG
+	TITLE
 }
 
 "The roles a Person can hold."
@@ -2761,6 +3085,7 @@ enum RecordingLegalScreeningStatus {
 	PENDING @deprecated(reason : "To be removed.")
 	"Awaiting re-evaluation"
 	PENDING_REEVALUATION @deprecated(reason : "To be removed.")
+	PREAPPROVED
 	REJECTED
 	"Not Yet Begun"
 	UNEVALUATED
@@ -2842,6 +3167,8 @@ enum RecordingTranscriptionStatus {
 	FAILED
 	"Transcription in process."
 	PROCESSING
+	"Transcription has been requested."
+	REQUESTED
 	"Not Yet Begun"
 	UNSTARTED
 }
@@ -2856,6 +3183,7 @@ enum RecordingsSortableField {
 	SEQUENCE_TITLE
 	SPONSOR_TITLE
 	TITLE
+	UPDATED_AT
 }
 
 "The available types of sequence."
@@ -3572,6 +3900,10 @@ input CollectionCreateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3583,6 +3915,10 @@ input CollectionUpdateInput {
 	image: ImageInput
 	isHidden: Boolean
 	location: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3628,6 +3964,37 @@ input DistributionAgreementUpdateInput {
 input DistributionAgreementsOrder {
 	direction: OrderByDirection!
 	field: DistributionAgreementsSortableField!
+}
+
+input FaqCreateInput {
+	body: String!
+	faqCategoryId: ID!
+	"The index of the FAQ within its category."
+	index: Int!
+	isHidden: Boolean
+	language: Language!
+	publishDate: DateTime
+	title: String!
+}
+
+input FaqUpdateInput {
+	body: String
+	faqCategoryId: ID
+	"The index of the FAQ within its category."
+	index: Int
+	isHidden: Boolean
+	publishDate: DateTime
+	title: String
+}
+
+input FaqsOrder {
+	direction: OrderByDirection!
+	field: FaqsSortableField!
+}
+
+input FavoritesOrder {
+	direction: OrderByDirection!
+	field: FavoritesSortableField!
 }
 
 input ImageInput {
@@ -3681,6 +4048,11 @@ input MediaFileUploadStartInput {
 input MediaFileUploadsOrder {
 	direction: OrderByDirection!
 	field: MediaFileUploadsSortableField!
+}
+
+input MediaFilesOrder {
+	direction: OrderByDirection!
+	field: MediaFilesSortableField!
 }
 
 input MediaReleaseCreateInput {
@@ -3787,6 +4159,29 @@ input MediaReleaseUpdateInput {
 	personId: ID
 }
 
+input PageCreateInput {
+	body: String!
+	isHidden: Boolean
+	language: Language!
+	pageMenuId: ID
+	slug: String!
+	title: String!
+	type: PageType!
+}
+
+input PageUpdateInput {
+	body: String
+	isHidden: Boolean
+	pageMenuId: ID
+	slug: String
+	title: String
+}
+
+input PagesOrder {
+	direction: OrderByDirection!
+	field: PagesSortableField!
+}
+
 input PersonCreateInput {
 	address: String
 	description: String
@@ -3797,9 +4192,14 @@ input PersonCreateInput {
 	image: ImageInput
 	internalContact: InternalContactInput
 	isHidden: Boolean
+	"Deprecated: isPreapproved is replaced with skipContentScreening."
 	isPreapproved: Boolean
 	language: Language!
 	phone: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	suffix: String
 	summary: String
 	surname: String!
@@ -3817,8 +4217,13 @@ input PersonUpdateInput {
 	image: ImageInput
 	internalContact: InternalContactInput
 	isHidden: Boolean
+	"Deprecated: isPreapproved is replaced with skipContentScreening."
 	isPreapproved: Boolean
 	phone: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	suffix: String
 	summary: String
 	surname: String
@@ -3944,6 +4349,10 @@ input SequenceCreateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsorId: ID!
 	summary: String
 	title: String!
@@ -3960,6 +4369,10 @@ input SequenceUpdateInput {
 	hidingReason: String
 	image: ImageInput
 	isHidden: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	sponsorId: ID
 	summary: String
 	title: String
@@ -3977,6 +4390,10 @@ input SponsorCreateInput {
 	language: Language!
 	location: String
 	phone: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	summary: String
 	title: String!
 	website: URL
@@ -4001,6 +4418,10 @@ input SponsorUpdateInput {
 	isHidden: Boolean
 	location: String
 	phone: String
+	"Requires `ADMINISTRATION` role."
+	skipContentScreening: Boolean
+	"Requires `ADMINISTRATION` role."
+	skipLegalScreening: Boolean
 	summary: String
 	title: String
 	website: URL
@@ -4055,6 +4476,8 @@ input UserCreateInput {
 	email: String!
 	"The user's first name."
 	givenName: String
+	"The user's avatar image."
+	image: Upload
 	"Whether the user has permission to perform all administrative functions."
 	isSuperuser: Boolean
 	"The user's preferred interface language."
@@ -4134,6 +4557,8 @@ input UserUpdateInput {
 	email: String
 	"The user's first name."
 	givenName: String
+	"The user's avatar image."
+	image: Upload
 	"Whether the user has permission to perform all administrative functions."
 	isSuperuser: Boolean
 	"The user's preferred interface language."

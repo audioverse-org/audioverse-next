@@ -2,6 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CardBibleChapter from '@components/molecules/cardBibleChapter';
+import CardPost from '@components/molecules/cardPost';
 import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
@@ -23,6 +24,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const recording = data?.sermons.nodes && data.sermons.nodes[0];
 	const testimonies = data?.testimonies.nodes || [];
+	const posts = data?.blogPosts.nodes || [];
 
 	return (
 		<div>
@@ -224,7 +226,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page recent posts section text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						<a
+							href="https://www.audioverse.org/english/blog"
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
 								id={'homePage__recentPostsButtonLabel'}
 								defaultMessage={'View all blog posts'}
@@ -234,22 +239,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<>
-						<div>
-							<FormattedMessage
-								id={'homePage__postOnePlaceholder'}
-								defaultMessage={'post 1'}
-								description={'home page post one placeholder'}
-							/>
-						</div>
-						<div>
-							<FormattedMessage
-								id={'homePage__postTwoPlaceholder'}
-								defaultMessage={'post 2'}
-								description={'post two placeholder'}
-							/>
-						</div>
-					</>
+					<div className={styles.posts}>
+						{posts.map((p) => (
+							<CardPost key={p.title} post={p} />
+						))}
+					</div>
 				}
 				theme={'lightTone'}
 			/>

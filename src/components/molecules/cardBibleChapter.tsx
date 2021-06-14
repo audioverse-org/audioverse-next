@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '@components/molecules/card';
+import CardPlayable from '@components/molecules/cardPlayable';
 import { CardBibleChapterFragment } from '@lib/generated/graphql';
 
 import BibleIcon from '../../../public/img/icon-bible-solid.svg';
@@ -13,7 +13,7 @@ export default function CardBibleChapter({
 	chapter,
 }: CardBibleChapterProps): JSX.Element {
 	return (
-		<Card
+		<CardPlayable
 			container={{
 				icon: <BibleIcon width={12} height={12} />,
 				title: 'Genesis (KJV)',

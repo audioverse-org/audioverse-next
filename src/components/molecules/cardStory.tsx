@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '@components/molecules/card';
+import CardPlayable from '@components/molecules/cardPlayable';
 import { CardStoryFragment } from '@lib/generated/graphql';
 
 import FeatherIcon from '../../../public/img/icon-feather-solid.svg';
@@ -22,6 +22,11 @@ export default function CardStory({ story }: CardStoryProps): JSX.Element {
 		: undefined;
 
 	return (
-		<Card container={container} theme={'story'} progress={0.3} {...story} />
+		<CardPlayable
+			container={container}
+			theme={'story'}
+			progress={0.3}
+			{...story}
+		/>
 	);
 }

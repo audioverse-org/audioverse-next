@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from '@components/molecules/card';
+import CardPlayable from '@components/molecules/cardPlayable';
 import { CardTopicFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../public/img/icon-layer-group-solid.svg';
@@ -13,7 +13,7 @@ export default function CardTopic({
 	topicRecording,
 }: CardTopicProps): JSX.Element {
 	return (
-		<Card
+		<CardPlayable
 			theme={'topic'}
 			container={{
 				icon: <HatIcon width={12} height={12} />,
