@@ -77,3 +77,11 @@ p {
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }
+
+.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+	border-radius: 4px;
+	padding: 8px;
+	background-color: #ff224a;
+	color: white;
+	box-shadow: 0 4px 10px 0 #00000026;
+}

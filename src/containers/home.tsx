@@ -15,6 +15,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import { HomeProps } from '@pages/[language]';
 
 import styles from './home.module.scss';
+import { Button } from '@material-ui/core';
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();
@@ -362,16 +363,21 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page newsletter section text'}
 							/>
 						</p>
+						<Button
+							href={
+								'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
+							}
+							target={'_blank'}
+							variant="contained"
+							color="primary"
+						>
+							<FormattedMessage
+								id={'homePage__emailSignupButton'}
+								defaultMessage={'Subscribe'}
+								description={'homePage__emailSignupButton'}
+							/>
+						</Button>
 					</>
-				}
-				media={
-					<div>
-						<FormattedMessage
-							id={'homePage__newsletterSectionFormPlaceholder'}
-							defaultMessage={'newsletter signup form'}
-							description={'home page newsletter section form placeholder'}
-						/>
-					</div>
 				}
 			/>
 			<div>

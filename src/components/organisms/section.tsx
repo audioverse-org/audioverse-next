@@ -4,7 +4,7 @@ import styles from './section.module.scss';
 
 interface SectionProps {
 	text: any;
-	media: any;
+	media?: any;
 	bleed?: boolean;
 	theme?: 'dark' | 'lightTone' | 'cream';
 	center?: boolean;
@@ -35,7 +35,7 @@ export default function Section({
 
 	return (
 		<div className={classes.join(' ')}>
-			<div className={styles.media}>{media}</div>
+			{media && <div className={styles.media}>{media}</div>}
 			<div className={styles.content}>{text}</div>
 		</div>
 	);
