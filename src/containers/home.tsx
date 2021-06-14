@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -15,7 +16,6 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import { HomeProps } from '@pages/[language]';
 
 import styles from './home.module.scss';
-import { Button } from '@material-ui/core';
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();
