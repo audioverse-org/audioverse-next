@@ -78,6 +78,8 @@ type RendererOptions<P> = {
 
 type Renderer<P> = (options?: RendererOptions<P>) => Promise<RenderResult>;
 
+// TODO: Consider how to simplify this function. Perhaps extract a simple
+//   version and rename this function to `buildPageRenderer` or similar.
 export function buildRenderer<
 	C extends ComponentType<any>,
 	F extends (params: any) => Promise<any>,
@@ -97,9 +99,11 @@ export function buildRenderer<
 	} = options;
 	return async (options: RendererOptions<P> = {}): Promise<RenderResult> => {
 		const { params = {}, props, router = {} } = options;
-		const p = { ...defaultParams, ...params };
-		const props_ = getProps ? await getProps(p) : props || defaultProps;
-		loadRouter({ query: p, ...router });
+		const fullParams = { ...defaultParams, ...params };
+		const props_ = getProps
+			? await getProps(fullParams)
+			: props || defaultProps;
+		loadRouter({ query: fullParams, ...router });
 		return renderWithIntl(Component, props_);
 	};
 }
