@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 
 import SpeakerName from '@components/molecules/speakerName';
 import TableList from '@components/organisms/tableList';
-import useFormattedDuration from '@lib/useFormattedDuration';
 import { RecordingListFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
+import useFormattedDuration from '@lib/useFormattedDuration';
 
 const columns = [
 	{

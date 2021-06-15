@@ -1,14 +1,14 @@
 import React, { CSSProperties } from 'react';
+import { useIntl } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
 import Card, { CardTheme } from '@components/molecules/card';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
-import useFormattedDuration from '@lib/useFormattedDuration';
 import { SpeakerNameFragment } from '@lib/generated/graphql';
+import useFormattedDuration from '@lib/useFormattedDuration';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
-import { useIntl } from 'react-intl';
 
 interface CardPlayableProps {
 	container?: {

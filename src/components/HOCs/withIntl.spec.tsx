@@ -5,6 +5,7 @@ import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
+import CardPlayable from '@components/molecules/cardPlayable';
 import Favorite from '@components/molecules/favorite';
 import Login from '@components/molecules/login';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -38,7 +39,6 @@ import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
-import useFormattedDuration from '@lib/useFormattedDuration';
 import { GetWithAuthGuardDataDocument, Person } from '@lib/generated/graphql';
 import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
@@ -48,8 +48,8 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import useFormattedDuration from '@lib/useFormattedDuration';
 import Logout from '@pages/[language]/account/logout';
-import CardPlayable from '@components/molecules/cardPlayable';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
