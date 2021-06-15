@@ -1,0 +1,10 @@
+query getDiscoverPageData($language: Language!) {
+	sermons(
+		language: $language
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardSermon
+		}
+	}
+}

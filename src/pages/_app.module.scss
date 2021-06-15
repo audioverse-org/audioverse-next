@@ -12,5 +12,6 @@
 }
 
 .content {
-	flex: 1 0 100%;
+	flex: 0 0 calc(100% - 200px);
+	padding: 2rem;
 }

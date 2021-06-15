@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -52,6 +53,39 @@ const Header = (): JSX.Element => {
 						defaultMessage="Collections"
 						description={`Header nav link name: Collections`}
 					/>
+				</li>
+				<li>
+					<Icon icon={'collections'} size={iconSize} />{' '}
+					<FormattedMessage
+						id={`header__navItemBlog`}
+						defaultMessage="Blog"
+						description={`Header nav link name: Blog`}
+					/>
+				</li>
+				<li>
+					<Icon icon={'collections'} size={iconSize} />{' '}
+					<FormattedMessage
+						id={`header__navItemSettings`}
+						defaultMessage="Settings"
+						description={`Header nav link name: Settings`}
+					/>
+				</li>
+				<li>
+					<Icon icon={'collections'} size={iconSize} />{' '}
+					<FormattedMessage
+						id={`header__navItemMore`}
+						defaultMessage="More"
+						description={`Header nav link name: More`}
+					/>
+				</li>
+				<li>
+					<Button variant={'contained'} color={'primary'}>
+						<FormattedMessage
+							id={`header__donateButtonLabel`}
+							defaultMessage="Donate"
+							description={`Header nav donate button label`}
+						/>
+					</Button>
 				</li>
 			</ul>
 			<div className={styles.user}>

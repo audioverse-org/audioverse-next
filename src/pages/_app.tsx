@@ -62,6 +62,7 @@ function MyApp<P>({
 									</div>
 								)}
 								<div className={styles.content}>
+									<p>Search</p>
 									<Component {...pageProps} />
 								</div>
 							</Hydrate>
