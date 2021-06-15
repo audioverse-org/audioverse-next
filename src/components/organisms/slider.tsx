@@ -42,7 +42,7 @@ export default function Slider({
 		>
 			<div
 				data-testid={'card-window'}
-				className={styles.cards}
+				className={styles.slides}
 				style={{
 					transform: `translateX(-${delta * 100}%)`,
 				}}
