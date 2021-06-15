@@ -345,6 +345,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			<Section
 				theme={'dark'}
 				reverse={true}
+				bleed={true}
 				text={
 					<>
 						<h2>
@@ -378,6 +379,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							/>
 						</Button>
 					</>
+				}
+				media={
+					// TODO: Replace with subscription widget
+					<img src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
 				}
 			/>
 			<div>
