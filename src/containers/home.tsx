@@ -1,7 +1,9 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CardBibleChapter from '@components/molecules/cardBibleChapter';
+import CardPost from '@components/molecules/cardPost';
 import CardSermon from '@components/molecules/cardSermon';
 import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
@@ -23,6 +25,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const recording = data?.sermons.nodes && data.sermons.nodes[0];
 	const testimonies = data?.testimonies.nodes || [];
+	const posts = data?.blogPosts.nodes || [];
 
 	return (
 		<div>
@@ -224,7 +227,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page recent posts section text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						{/* TODO: Replace with relative link when blog page added */}
+						<a
+							href="https://www.audioverse.org/english/blog"
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
 								id={'homePage__recentPostsButtonLabel'}
 								defaultMessage={'View all blog posts'}
@@ -234,22 +241,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<>
-						<div>
-							<FormattedMessage
-								id={'homePage__postOnePlaceholder'}
-								defaultMessage={'post 1'}
-								description={'home page post one placeholder'}
-							/>
-						</div>
-						<div>
-							<FormattedMessage
-								id={'homePage__postTwoPlaceholder'}
-								defaultMessage={'post 2'}
-								description={'post two placeholder'}
-							/>
-						</div>
-					</>
+					<div className={styles.posts}>
+						{posts.map((p) => (
+							<CardPost key={p.title} post={p} />
+						))}
+					</div>
 				}
 				theme={'lightTone'}
 			/>
@@ -350,6 +346,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			<Section
 				theme={'dark'}
 				reverse={true}
+				bleed={true}
 				text={
 					<>
 						<h2>
@@ -368,16 +365,25 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page newsletter section text'}
 							/>
 						</p>
+						<Button
+							href={
+								'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
+							}
+							target={'_blank'}
+							variant="contained"
+							color="primary"
+						>
+							<FormattedMessage
+								id={'homePage__emailSignupButton'}
+								defaultMessage={'Subscribe'}
+								description={'homePage__emailSignupButton'}
+							/>
+						</Button>
 					</>
 				}
 				media={
-					<div>
-						<FormattedMessage
-							id={'homePage__newsletterSectionFormPlaceholder'}
-							defaultMessage={'newsletter signup form'}
-							description={'home page newsletter section form placeholder'}
-						/>
-					</div>
+					// TODO: Replace with subscription widget
+					<img src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
 				}
 			/>
 			<div>

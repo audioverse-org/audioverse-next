@@ -1,0 +1,10 @@
+fragment cardPost on BlogPost {
+	image {
+		url(size: 500, cropMode: MAX_SIZE)
+	}
+	publishDate
+	title
+	teaser
+	canonicalUrl
+	readingDuration
+}

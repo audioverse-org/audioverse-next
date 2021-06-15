@@ -5,10 +5,12 @@
 	background: var(--cardBg, #ffffff);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 16px;
+	& > *:first-child {
+		border-radius: 16px 16px 0 0;
+	}
 }
 
 .hat {
-	border-radius: 16px 16px 0 0;
 	background-color: var(--hatBg, #efebeb);
 	color: var(--hatColor, #323e48);
 	padding: 16px;
@@ -25,6 +27,19 @@
 
 .hatTitle {
 	flex-grow: 1;
+}
+
+.hero {
+	width: 100%;
+	object-fit: cover;
+	aspect-ratio: 500/260;
+	height: auto;
+}
+
+.title {
+	a {
+		text-decoration: none;
+	}
 }
 
 .content {

@@ -1,71 +1,64 @@
-import React, { CSSProperties } from 'react';
+import React, { ReactNode } from 'react';
 
 import Icon from '@components/atoms/icon';
 import styles from '@components/molecules/card.module.scss';
-import SpeakerName from '@components/molecules/speakerName';
-import formatDuration from '@lib/formatDuration';
-import { SpeakerNameFragment } from '@lib/generated/graphql';
 
-import PlayIcon from '../../../public/img/icon-play.svg';
+export type CardTheme = 'chapter' | 'sermon' | 'song' | 'story' | 'topic';
 
 interface CardProps {
-	container?: {
+	hat?: {
 		icon?: any;
 		title: string;
-		length?: number;
-		index?: number;
 	};
+	hero?: string;
+	preTitle?: string;
 	title: string;
-	persons?: SpeakerNameFragment[];
-	duration?: number;
-	progress: number;
-	theme: 'chapter' | 'sermon' | 'song' | 'story' | 'topic';
+	url?: string;
+	titleAdornment?: ReactNode;
+	children?: ReactNode;
+	theme?: CardTheme;
 }
 
 export default function Card({
-	container,
+	hat,
+	hero,
+	preTitle,
 	title,
-	persons = [],
-	duration,
+	url,
+	titleAdornment,
+	children,
 	theme,
-	progress,
 }: CardProps): JSX.Element {
+	const heroImage = (
+		<img
+			className={styles.hero}
+			src={hero}
+			alt={title}
+			width={500}
+			height={260}
+		/>
+	);
+
 	return (
-		<div className={`${styles.card} ${styles[theme]}`}>
-			{container && (
+		<div className={`${styles.card} ${theme && styles[theme]}`}>
+			{hat && (
 				// TODO: Link the hat
 				<div className={styles.hat}>
-					<span className={styles.hatIcon}>{container.icon}</span>
-					<span className={styles.hatTitle}>{container.title}</span>
+					<span className={styles.hatIcon}>{hat.icon}</span>
+					<span className={styles.hatTitle}>{hat.title}</span>
 					<Icon icon={'chevron-down'} size={16} />
 				</div>
 			)}
+			{hero && (url ? <a href={url}>{heroImage}</a> : heroImage)}
 			<div className={styles.content}>
-				{container?.length && container?.index && (
-					<span className={styles.part}>
-						Part {container?.index} of {container?.length}
-					</span>
-				)}
+				{preTitle && <span className={styles.part}>{preTitle}</span>}
 				<div className={styles.heading}>
-					<h1>{title}</h1> <PlayIcon width={24} height={24} />
+					<h1 className={styles.title}>
+						{url ? <a href={url}>{title}</a> : title}
+					</h1>
+					{titleAdornment}
 				</div>
-				<div className={styles.speakers}>
-					{persons.map((p) => (
-						<SpeakerName person={p} key={p.id} />
-					))}
-				</div>
-				<div className={styles.controls}>
-					{duration && (
-						<span className={styles.duration}>{formatDuration(duration)}</span>
-					)}
-					<span
-						className={styles.progress}
-						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
-					>
-						<span />
-					</span>
-					<Icon icon={'bookmark'} size={24} />
-				</div>
+				{children}
 			</div>
 		</div>
 	);

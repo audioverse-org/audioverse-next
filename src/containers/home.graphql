@@ -52,4 +52,13 @@ query getHomeStaticProps($language: Language!) {
 			...testimonies
 		}
 	}
+	blogPosts(
+		language: $language
+		first: 2
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardPost
+		}
+	}
 }

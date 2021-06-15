@@ -60,6 +60,12 @@
 		'. . . .'
 		'. media content .'
 		'. . . .';
+	&.bleed {
+		grid-template-areas:
+			'media media . .'
+			'media media content .'
+			'media media . .';
+	}
 	&.center {
 		grid-template-areas:
 			'. . .'

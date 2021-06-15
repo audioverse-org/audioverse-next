@@ -5,6 +5,7 @@ import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
+import CardPlayable from '@components/molecules/cardPlayable';
 import Favorite from '@components/molecules/favorite';
 import Login from '@components/molecules/login';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -38,7 +39,6 @@ import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
-import formatDuration from '@lib/formatDuration';
 import { GetWithAuthGuardDataDocument, Person } from '@lib/generated/graphql';
 import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
@@ -48,6 +48,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
+import useFormattedDuration from '@lib/useFormattedDuration';
 import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
@@ -55,7 +56,7 @@ jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
-jest.mock('@lib/formatDuration');
+jest.mock('@lib/useFormattedDuration');
 jest.mock('@lib/api/logout');
 
 const expectNoUnlocalizedText = (
@@ -119,7 +120,7 @@ describe('localization usage', () => {
 		} as any);
 
 		(readableBytes as jest.Mock).mockReturnValue('z');
-		(formatDuration as jest.Mock).mockReturnValue('z');
+		(useFormattedDuration as jest.Mock).mockReturnValue('z');
 	});
 
 	beforeAll(() => {
@@ -425,6 +426,7 @@ describe('localization usage', () => {
 		[Reset, {}],
 		[Profile, {}],
 		[Home, {}],
+		[CardPlayable, { title: 'z', container: { length: 2, index: 1 } }],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
