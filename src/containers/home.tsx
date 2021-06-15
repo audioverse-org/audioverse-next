@@ -227,6 +227,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page recent posts section text'}
 							/>
 						</p>
+						{/* TODO: Replace with relative link when blog page added */}
 						<a
 							href="https://www.audioverse.org/english/blog"
 							className={`${styles.button} ${styles.primary}`}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '@components/molecules/card';
-import formatDuration from '@lib/formatDuration';
+import useFormattedDuration from '@lib/useFormattedDuration';
 import { CardPostFragment } from '@lib/generated/graphql';
 
 interface CardPostProps {
@@ -10,6 +10,7 @@ interface CardPostProps {
 
 export default function CardPost({ post }: CardPostProps): JSX.Element {
 	const d = new Date(post.publishDate);
+	const dur = post.readingDuration;
 	return (
 		<Card
 			hero={post.image?.url}
@@ -22,7 +23,7 @@ export default function CardPost({ post }: CardPostProps): JSX.Element {
 			})}
 		>
 			<p>{post.teaser}</p>
-			{post.readingDuration && <p>{formatDuration(post.readingDuration)}</p>}
+			{dur && dur > 30 && <p>{useFormattedDuration(dur)}</p>}
 		</Card>
 	);
 }

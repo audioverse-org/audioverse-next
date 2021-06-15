@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import SpeakerName from '@components/molecules/speakerName';
 import TableList from '@components/organisms/tableList';
-import formatDuration from '@lib/formatDuration';
+import useFormattedDuration from '@lib/useFormattedDuration';
 import { RecordingListFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 
@@ -27,7 +27,7 @@ const columns = [
 	{
 		name: 'duration',
 		View: function View({ node }: { node: RecordingListFragment }) {
-			return <>{formatDuration(node.duration)}</>;
+			return <>{useFormattedDuration(node.duration)}</>;
 		},
 	},
 	{

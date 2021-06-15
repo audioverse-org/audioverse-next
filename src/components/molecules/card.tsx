@@ -29,6 +29,16 @@ export default function Card({
 	children,
 	theme,
 }: CardProps): JSX.Element {
+	const heroImage = (
+		<img
+			className={styles.hero}
+			src={hero}
+			alt={title}
+			width={500}
+			height={260}
+		/>
+	);
+
 	return (
 		<div className={`${styles.card} ${theme && styles[theme]}`}>
 			{hat && (
@@ -39,15 +49,7 @@ export default function Card({
 					<Icon icon={'chevron-down'} size={16} />
 				</div>
 			)}
-			{hero && (
-				<img
-					className={styles.hero}
-					src={hero}
-					alt={title}
-					width={500}
-					height={260}
-				/>
-			)}
+			{hero && (url ? <a href={url}>{heroImage}</a> : heroImage)}
 			<div className={styles.content}>
 				{preTitle && <span className={styles.part}>{preTitle}</span>}
 				<div className={styles.heading}>

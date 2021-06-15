@@ -4,10 +4,11 @@ import Icon from '@components/atoms/icon';
 import Card, { CardTheme } from '@components/molecules/card';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
-import formatDuration from '@lib/formatDuration';
+import useFormattedDuration from '@lib/useFormattedDuration';
 import { SpeakerNameFragment } from '@lib/generated/graphql';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
+import { useIntl } from 'react-intl';
 
 interface CardPlayableProps {
 	container?: {
@@ -31,6 +32,18 @@ export default function CardPlayable({
 	theme,
 	progress,
 }: CardPlayableProps): JSX.Element {
+	const intl = useIntl();
+	const hasPartInfo = container?.length && container?.index;
+	const partString = hasPartInfo
+		? intl.formatMessage(
+				{
+					id: 'cardPlayable__partInfo',
+					defaultMessage: 'Part {index} of {length}',
+					description: '',
+				},
+				{ index: container?.index, length: container?.length }
+		  )
+		: undefined;
 	return (
 		<Card
 			hat={
@@ -41,12 +54,7 @@ export default function CardPlayable({
 					  }
 					: undefined
 			}
-			preTitle={
-				(container?.length &&
-					container?.index &&
-					`Part ${container?.index} of ${container?.length}`) ||
-				undefined
-			}
+			preTitle={partString}
 			title={title}
 			titleAdornment={<PlayIcon width={24} height={24} />}
 			theme={theme}
@@ -58,7 +66,9 @@ export default function CardPlayable({
 			</div>
 			<div className={styles.controls}>
 				{duration && (
-					<span className={styles.duration}>{formatDuration(duration)}</span>
+					<span className={styles.duration}>
+						{useFormattedDuration(duration)}
+					</span>
 				)}
 				{progress !== undefined && (
 					<span
