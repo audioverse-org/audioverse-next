@@ -41,6 +41,7 @@
 
 .center {
 	text-align: center;
+	grid-gap: 3rem;
 	grid-template-columns: auto 1fr auto;
 	grid-template-areas:
 		'. . .'
@@ -76,7 +77,7 @@
 }
 
 .dark {
-	background-color: $gray-mid;
+	background-color: $ts-dark;
 	color: white;
 }
 
@@ -86,9 +87,4 @@
 
 .cream {
 	background-color: $ts-cream;
-}
-
-.grey {
-	// TODO: move this to common.scss
-	background-color: #efebeb;
 }

@@ -1,3 +1,7 @@
+// START INTER FONT
+
+// TODO: Extract into separate file
+
 @use "~inter-ui/default" with (
   $inter-font-display: swap,
   $inter-font-path: '~inter-ui/Inter (web)'
@@ -20,14 +24,30 @@ html {
 	}
 }
 
+// END INTER FONT
+
 @import './common.scss';
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#__next,
+.template-base {
+	padding: 0;
+	margin: 0;
+	height: 100vh;
+	color: $ts-dark;
+}
 
 h1,
 h2,
 h3,
 h4,
 h5 {
-	font-family: serif;
+	font-family: $headingFont;
 }
 
 a {
@@ -54,4 +74,12 @@ a {
 
 p {
 	line-height: 1.3em;
+}
+
+/* Material UI Customizations */
+
+.MuiButton-root.MuiButton-text,
+.MuiButton-root.MuiButton-text:hover {
+	text-decoration: underline;
+	text-underline-offset: 2px;
 }

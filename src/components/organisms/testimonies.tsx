@@ -1,15 +1,26 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
-const Testimonies = (): JSX.Element => {
+import Slider from '@components/organisms/slider';
+import { TestimoniesFragment } from '@lib/generated/graphql';
+
+import styles from './testimonies.module.scss';
+
+interface TestimoniesProps {
+	testimonies: TestimoniesFragment[];
+}
+
+const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 	return (
-		<>
-			<FormattedMessage
-				id={'testimoniesComponent__placeholder'}
-				defaultMessage={'testimonies-placeholder'}
-				description={'testimonies component placeholder'}
-			/>
-		</>
+		<Slider>
+			{testimonies.map((t) => (
+				<blockquote className={styles.testimony} key={t.id}>
+					<p className={styles.body}>{t.body}</p>
+					<footer>
+						<cite className={styles.author}>{t.author}</cite>
+					</footer>
+				</blockquote>
+			))}
+		</Slider>
 	);
 };
 

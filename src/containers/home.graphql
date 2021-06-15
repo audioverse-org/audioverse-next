@@ -47,4 +47,9 @@ query getHomeStaticProps($language: Language!) {
 			...cardSermon
 		}
 	}
+	testimonies(language: $language, first: 3) {
+		nodes {
+			...testimonies
+		}
+	}
 }

@@ -1,0 +1,5 @@
+fragment testimonies on Testimony {
+	id
+	body
+	author
+}

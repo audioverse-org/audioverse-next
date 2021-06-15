@@ -1,21 +1,27 @@
-import React, { ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 
-import styles from './cardSlider.module.scss';
+import styles from './slider.module.scss';
 
 // TODO: improve children type
-interface CardSliderProps {
+interface SliderProps {
 	children: ReactNode;
+	perSlide?: number;
+	clip?: boolean;
 }
 
-export default function CardSlider({ children }: CardSliderProps): JSX.Element {
+export default function Slider({
+	children,
+	perSlide = 1,
+	clip = true,
+}: SliderProps): JSX.Element {
 	const [delta, setDelta] = useState<number>(0);
 
 	const array = React.Children.toArray(children);
-	const pages = Math.ceil(array.length / 3);
+	const pages = Math.ceil(array.length / perSlide);
 
 	const pageLeft = () => setDelta(Math.max(0, delta - 1));
 	const pageRight = () => setDelta(Math.min(pages - 1, delta + 1));
@@ -25,10 +31,18 @@ export default function CardSlider({ children }: CardSliderProps): JSX.Element {
 	// TODO: Should the controls be made invisible to assistive technologies,
 	//  since the content is not being technically hidden, only shifted horizontally?
 	return (
-		<div className={styles.slider}>
+		<div
+			className={styles.slider}
+			style={
+				{
+					'--perSlide': perSlide,
+					overflow: clip ? 'hidden' : 'visible',
+				} as CSSProperties
+			}
+		>
 			<div
 				data-testid={'card-window'}
-				className={styles.cards}
+				className={styles.slides}
 				style={{
 					transform: `translateX(-${delta * 100}%)`,
 				}}

@@ -72,6 +72,11 @@ const recording = {
 	},
 };
 
+const testimony = {
+	id: 'the_testimony_id',
+	body: 'the_testimony_body',
+};
+
 const loadData = buildLoader<GetHomeStaticPropsQuery>(
 	GetHomeStaticPropsDocument,
 	{
@@ -91,6 +96,9 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		},
 		sermons: {
 			nodes: [recording],
+		},
+		testimonies: {
+			nodes: [testimony],
 		},
 	}
 );

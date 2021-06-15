@@ -7,8 +7,8 @@ import CardSong from '@components/molecules/cardSong';
 import CardStory from '@components/molecules/cardStory';
 import CardTopic from '@components/molecules/cardTopic';
 import LanguageSwitcher from '@components/molecules/languageSwitcher';
-import CardSlider from '@components/organisms/cardSlider';
 import Section from '@components/organisms/section';
+import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { HomeProps } from '@pages/[language]';
@@ -22,6 +22,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const story = data?.stories.nodes && data.stories.nodes[0];
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const recording = data?.sermons.nodes && data.sermons.nodes[0];
+	const testimonies = data?.testimonies.nodes || [];
 
 	return (
 		<div>
@@ -85,9 +86,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page sound doctrine text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						<a
+							href={`/${route}/account/register`}
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
-								id={'homePage__joinAudioverseButtonLabel'}
+								id={'homePage__joinAudioVerseButtonLabel'}
 								defaultMessage={'Join AudioVerse'}
 								description={'home page join audioverse button label'}
 							/>
@@ -131,13 +135,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<CardSlider>
+					<Slider perSlide={3} clip={false}>
 						{song && <CardSong song={song} />}
 						{chapter && <CardBibleChapter chapter={chapter} />}
 						{story && <CardStory story={story} />}
 						{topicRecording && <CardTopic topicRecording={topicRecording} />}
 						{recording && <CardSermon recording={recording} />}
-					</CardSlider>
+					</Slider>
 				}
 				center={true}
 				reverse={true}
@@ -161,7 +165,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description={'home page download app section text'}
 							/>
 						</p>
-						<a href="#" className={`${styles.button} ${styles.primary}`}>
+						<a
+							href={`${route}/app`}
+							className={`${styles.button} ${styles.primary}`}
+						>
 							<FormattedMessage
 								id={'homePage__downloadNowButtonLabel'}
 								defaultMessage={'Download Now'}
@@ -194,18 +201,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 					</>
 				}
-				media={
-					<>
-						<Testimonies />
-						<div>
-							<FormattedMessage
-								id={'homePage__testimoniesPaginationPlaceholder'}
-								defaultMessage={'pagination'}
-								description={'home page testimonies pagination placeholder'}
-							/>
-						</div>
-					</>
-				}
+				media={<Testimonies testimonies={testimonies} />}
 				center={true}
 				reverse={true}
 			/>

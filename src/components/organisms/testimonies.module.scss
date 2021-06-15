@@ -1,0 +1,21 @@
+@import '../../styles/common';
+
+.testimony {
+	align-self: stretch;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 0;
+}
+
+.body {
+	font-size: 1.25rem;
+	color: black;
+	margin-top: 0;
+}
+
+.author {
+	font-family: $headingFont;
+	font-style: normal;
+	font-weight: bold;
+}
