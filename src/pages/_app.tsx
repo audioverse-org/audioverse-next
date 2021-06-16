@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
+
 import withIntl from '@components/HOCs/withIntl';
 import 'react-toastify/dist/ReactToastify.css';
 import AndSidebar from '@components/templates/andSidebar';
