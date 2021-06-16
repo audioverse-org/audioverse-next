@@ -1,4 +1,7 @@
 import { Button } from '@material-ui/core';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -386,80 +389,107 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<img src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
 				}
 			/>
-			<div>
+			<div className={styles.footer}>
 				<img src="/img/logo.svg" width={161} height={23} />
-				<h5>
-					<FormattedMessage
-						id={'homePage__footerSocialTitle'}
-						defaultMessage={'Social'}
-						description={'home page footer social title'}
-					/>
-				</h5>
-				<ul>
-					<li>
-						<a href="#">
+				<div className={styles.footerLinks}>
+					<div>
+						<h5>
 							<FormattedMessage
-								id={'homePage__footerFacebookLink'}
-								defaultMessage={'Facebook'}
-								description={'home page footer facebook link'}
+								id={'homePage__footerSocialTitle'}
+								defaultMessage={'Social'}
+								description={'home page footer social title'}
 							/>
-						</a>
-					</li>
-					<li>
-						<a href="#">
+						</h5>
+						<ul>
+							<li>
+								<a
+									href="https://www.facebook.com/AudioVerse"
+									target={'_blank'}
+									rel={'noreferrer noopener'}
+								>
+									<FacebookIcon fontSize={'small'} />
+									<FormattedMessage
+										id={'homePage__footerFacebookLink'}
+										defaultMessage={'Facebook'}
+										description={'home page footer facebook link'}
+									/>
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.instagram.com/audioverse/"
+									target={'_blank'}
+									rel={'noreferrer noopener'}
+								>
+									<InstagramIcon fontSize={'small'} />
+									<FormattedMessage
+										id={'homePage__footerInstagramLink'}
+										defaultMessage={'Instagram'}
+										description={'home page footer instagram link'}
+									/>
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://twitter.com/audioverse"
+									target={'_blank'}
+									rel={'noreferrer noopener'}
+								>
+									<TwitterIcon fontSize={'small'} />
+									<FormattedMessage
+										id={'homePage__footerTwitterLink'}
+										defaultMessage={'Twitter'}
+										description={'home page footer twitter link'}
+									/>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<h5>
 							<FormattedMessage
-								id={'homePage__footerInstagramLink'}
-								defaultMessage={'Instagram'}
-								description={'home page footer instagram link'}
+								id={'homePage__footerLinksTitle'}
+								defaultMessage={'Links'}
+								description={'home page footer links title'}
 							/>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<FormattedMessage
-								id={'homePage__footerTwitterLink'}
-								defaultMessage={'Twitter'}
-								description={'home page footer twitter link'}
-							/>
-						</a>
-					</li>
-				</ul>
-				<h5>
-					<FormattedMessage
-						id={'homePage__footerLinksTitle'}
-						defaultMessage={'Links'}
-						description={'home page footer links title'}
-					/>
-				</h5>
-				<ul>
-					<li>
-						<a href={`${route}/app`}>
-							<FormattedMessage
-								id={'homePage__footerDownloadAppButton'}
-								defaultMessage={'Download app'}
-								description={'home page footer download app button'}
-							/>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<FormattedMessage
-								id={'homePage__footerNewsletterSignup'}
-								defaultMessage={'Sign up for newsletter'}
-								description={'homePage__footerNewsletterSignup'}
-							/>
-						</a>
-					</li>
-					<li>
-						<a href={`/${route}/give`}>
-							<FormattedMessage
-								id={'homePage__footerDonateLink'}
-								defaultMessage={'Donate'}
-								description={'home page footer donate link'}
-							/>
-						</a>
-					</li>
-				</ul>
+						</h5>
+						<ul>
+							<li>
+								<a href={`${route}/app`}>
+									<FormattedMessage
+										id={'homePage__footerDownloadAppButton'}
+										defaultMessage={'Download app'}
+										description={'home page footer download app button'}
+									/>
+								</a>
+							</li>
+							<li>
+								<a
+									href={
+										'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
+									}
+									target={'_blank'}
+									rel={'noreferrer noopener'}
+								>
+									<FormattedMessage
+										id={'homePage__footerNewsletterSignup'}
+										defaultMessage={'Sign up for newsletter'}
+										description={'homePage__footerNewsletterSignup'}
+									/>
+								</a>
+							</li>
+							<li>
+								<a href={`/${route}/give`}>
+									<FormattedMessage
+										id={'homePage__footerDonateLink'}
+										defaultMessage={'Donate'}
+										description={'home page footer donate link'}
+									/>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

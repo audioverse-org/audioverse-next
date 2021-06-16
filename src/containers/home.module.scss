@@ -19,3 +19,39 @@
 	grid-template-columns: repeat(2, 1fr);
 	grid-gap: 2rem;
 }
+
+.footer {
+	padding: 3rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+.footerLinks {
+	display: flex;
+	& > div {
+		margin-left: 2rem;
+	}
+	h5 {
+		margin-top: 0;
+		margin-bottom: 0;
+		font-size: 18px;
+	}
+	ul {
+		padding-left: 0;
+		margin-top: 0.5rem;
+		margin-bottom: 0;
+	}
+	li {
+		list-style-type: none;
+		font-size: 14px;
+	}
+	a {
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		height: 2rem;
+	}
+	svg {
+		margin-right: 0.25em;
+	}
+}
