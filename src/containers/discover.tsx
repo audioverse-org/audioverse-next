@@ -4,6 +4,7 @@ import React from 'react';
 import LineHeading from '@components/atoms/lineHeading';
 import CardSermon from '@components/molecules/cardSermon';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
+
 import styles from './discover.module.scss';
 
 export default function discover({
