@@ -468,6 +468,8 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									href={
 										'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
 									}
+									target={'_blank'}
+									rel={'noreferrer noopener'}
 								>
 									<FormattedMessage
 										id={'homePage__footerNewsletterSignup'}

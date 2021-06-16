@@ -7,6 +7,8 @@
 	border-radius: 16px;
 	& > *:first-child {
 		border-radius: 16px 16px 0 0;
+		display: block;
+		overflow: hidden;
 	}
 }
 
