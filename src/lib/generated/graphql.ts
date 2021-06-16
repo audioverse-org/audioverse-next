@@ -479,6 +479,8 @@ export type Collection = Node & UniformResourceLocatable & {
   summary: Scalars['String'];
   title: Scalars['String'];
   viewerHasFavorited: Scalars['Boolean'];
+  /** The percentage of the associated recordings the viewer has finished playing. */
+  viewerPlaybackCompletedPercentage: Scalars['Float'];
 };
 
 
@@ -1484,6 +1486,9 @@ export type Mutation = {
   recordingDrafting: RecordingPayload;
   recordingFavorite: SuccessPayload;
   recordingHistoryCommentCreate: CatalogHistoryItemPayload;
+  recordingPlaybackSessionAdvance: RecordingPayload;
+  recordingPlaybackSessionBegin: RecordingPayload;
+  recordingPlaybackSessionFinish: RecordingPayload;
   recordingScreeningContentCheckoutCreate: RecordingScreeningCheckoutPayload;
   recordingScreeningContentCheckoutDelete: SuccessPayload;
   recordingScreeningContentEvaluate: RecordingPayload;
@@ -1856,6 +1861,22 @@ export type MutationRecordingFavoriteArgs = {
 
 export type MutationRecordingHistoryCommentCreateArgs = {
   input: CatalogHistoryCommentCreateInput;
+  recordingId: Scalars['ID'];
+};
+
+
+export type MutationRecordingPlaybackSessionAdvanceArgs = {
+  input: PlaybackSessionAdvanceInput;
+  recordingId: Scalars['ID'];
+};
+
+
+export type MutationRecordingPlaybackSessionBeginArgs = {
+  recordingId: Scalars['ID'];
+};
+
+
+export type MutationRecordingPlaybackSessionFinishArgs = {
   recordingId: Scalars['ID'];
 };
 
@@ -2451,6 +2472,11 @@ export enum PersonsSortableField {
   Name = 'NAME',
   RecordingPublishedAt = 'RECORDING_PUBLISHED_AT'
 }
+
+export type PlaybackSessionAdvanceInput = {
+  /** The playback position as a percentage of the recording duration. */
+  positionPercentage: Scalars['Float'];
+};
 
 export type PopularRecording = {
   __typename?: 'PopularRecording';
@@ -3426,6 +3452,7 @@ export type Recording = Node & UniformResourceLocatable & {
   transcriptionStatus: Maybe<RecordingTranscriptionStatus>;
   videoFiles: Array<VideoFile>;
   viewerHasFavorited: Scalars['Boolean'];
+  viewerPlaybackSession: Maybe<RecordingPlaybackSession>;
   websites: Array<Website>;
 };
 
@@ -3627,6 +3654,14 @@ export type RecordingPersonRoleInput = {
   personId: Scalars['ID'];
   /** The role a person has with the recording. */
   role: PersonsRoleField;
+};
+
+export type RecordingPlaybackSession = {
+  __typename?: 'RecordingPlaybackSession';
+  createdAt: Scalars['DateTime'];
+  /** The playback position as a percentage of the recording duration. */
+  positionPercentage: Scalars['Float'];
+  updatedAt: Scalars['DateTime'];
 };
 
 /** The available bitrates of recordings. */
@@ -3883,6 +3918,7 @@ export type RecordingsOrder = {
 export enum RecordingsSortableField {
   CollectionTitle = 'COLLECTION_TITLE',
   CreatedAt = 'CREATED_AT',
+  DownloadsAllTime = 'DOWNLOADS_ALL_TIME',
   Id = 'ID',
   PublishedAt = 'PUBLISHED_AT',
   RecordedAt = 'RECORDED_AT',
@@ -3927,6 +3963,8 @@ export type Sequence = Node & UniformResourceLocatable & {
   summary: Scalars['String'];
   title: Scalars['String'];
   viewerHasFavorited: Scalars['Boolean'];
+  /** The percentage of the associated recordings the viewer has finished playing. */
+  viewerPlaybackCompletedPercentage: Scalars['Float'];
 };
 
 
