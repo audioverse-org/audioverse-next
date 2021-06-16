@@ -362,24 +362,6 @@ describe('sermon detail page', () => {
 		expect(getAllByText('the_summary').length > 0).toBeTruthy();
 	});
 
-	it('includes donation banner', async () => {
-		loadSermonDetailData({});
-
-		const { getByText } = await renderPage();
-
-		expect(
-			getByText('Just a $10 donation will help us reach 300 more people!')
-		).toBeInTheDocument();
-	});
-
-	it('includes a donate button', async () => {
-		loadSermonDetailData({});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('Give Now!')).toBeInTheDocument();
-	});
-
 	it('includes tags', async () => {
 		loadSermonDetailData({
 			recordingTags: {
@@ -433,38 +415,6 @@ describe('sermon detail page', () => {
 		expect(getByText('the_location')).toBeInTheDocument();
 	});
 
-	it('includes presenters section', async () => {
-		loadSermonDetailData({
-			persons: [
-				{
-					id: 'the_id',
-					name: 'the_name',
-					summary: 'the_summary',
-				},
-			],
-		});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('Presenters')).toBeInTheDocument();
-	});
-
-	it('duplicates presenter list', async () => {
-		loadSermonDetailData({
-			persons: [
-				{
-					id: 'the_id',
-					name: 'the_name',
-					summary: 'the_summary',
-				},
-			],
-		});
-
-		const { getAllByText } = await renderPage();
-
-		expect(getAllByText('the_name').length).toEqual(2);
-	});
-
 	it('includes time recorded', async () => {
 		mockedFetchApi.mockResolvedValue({});
 
@@ -514,7 +464,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('series_title') as HTMLLinkElement;
+		const link = getByText('series_title').parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/series/series_id');
 	});
@@ -531,7 +481,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('series_title') as HTMLLinkElement;
+		const link = getByText('series_title').parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/es/series/series_id');
 	});

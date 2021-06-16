@@ -5523,7 +5523,7 @@ export type CardPostFragment = (
 
 export type CardSermonFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'title' | 'duration'>
+  & Pick<Recording, 'id' | 'title' | 'duration'>
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
@@ -7305,6 +7305,7 @@ export const SpeakerNameFragmentDoc = `
     `;
 export const CardSermonFragmentDoc = `
     fragment cardSermon on Recording {
+  id
   title
   duration
   persons {

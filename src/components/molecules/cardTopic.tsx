@@ -22,6 +22,8 @@ export default function CardTopic({
 			}}
 			// TODO: Set progress dynamically
 			progress={0.3}
+			// TODO: Generate URL
+			url={'#'}
 			{...topicRecording}
 		/>
 	);

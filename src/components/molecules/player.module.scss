@@ -1,0 +1,21 @@
+@import '../../styles/common';
+
+.waves {
+	position: relative;
+	display: table;
+	path {
+		stroke: $ts-red;
+	}
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: 150px;
+		z-index: 100;
+		backdrop-filter: grayscale(100%);
+		background-color: rgba(255, 255, 255, 0.85);
+	}
+}

@@ -1,4 +1,5 @@
 fragment cardSermon on Recording {
+	id
 	title
 	duration
 	persons {

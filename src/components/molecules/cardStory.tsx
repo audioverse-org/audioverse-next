@@ -26,6 +26,8 @@ export default function CardStory({ story }: CardStoryProps): JSX.Element {
 			container={container}
 			theme={'story'}
 			progress={0.3}
+			// TODO: Generate URL
+			url={'#'}
 			{...story}
 		/>
 	);

@@ -22,6 +22,8 @@ export default function CardSong({ song }: CardSongProps): JSX.Element {
 			container={container}
 			theme={'song'}
 			progress={0.3}
+			// TODO: Generate URL
+			url={'#'}
 			{...song}
 		/>
 	);

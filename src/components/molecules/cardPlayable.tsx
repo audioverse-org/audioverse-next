@@ -18,6 +18,7 @@ interface CardPlayableProps {
 		index?: number;
 	};
 	title: string;
+	url: string;
 	persons?: SpeakerNameFragment[];
 	duration?: number;
 	progress?: number;
@@ -27,6 +28,7 @@ interface CardPlayableProps {
 export default function CardPlayable({
 	container,
 	title,
+	url,
 	persons = [],
 	duration,
 	theme,
@@ -57,6 +59,7 @@ export default function CardPlayable({
 			preTitle={partString}
 			title={title}
 			titleAdornment={<PlayIcon width={24} height={24} />}
+			url={url}
 			theme={theme}
 		>
 			<div className={styles.speakers}>

@@ -21,6 +21,8 @@ export default function CardBibleChapter({
 			duration={2520}
 			progress={0.3}
 			theme={'chapter'}
+			// TODO: Generate URL
+			url={'#'}
 			{...chapter}
 		/>
 	);
