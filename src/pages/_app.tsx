@@ -9,11 +9,8 @@ import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
-import Header from '@components/organisms/header';
-
-import styles from './_app.module.scss';
-
 import 'react-toastify/dist/ReactToastify.css';
+import AndSidebar from '@components/templates/andSidebar';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -48,27 +45,24 @@ function MyApp<P>({
 	const disableSidebar = pageProps.disableSidebar;
 	return (
 		<>
-			<div className={styles.base}>
-				<React.StrictMode>
-					<Head>
-						<title>AudioVerse</title>
-					</Head>
-					<QueryClientProvider client={queryClient}>
-						<ThemeProvider theme={muiTheme}>
-							<Hydrate state={_.get(pageProps, 'dehydratedState')}>
-								{!disableSidebar && (
-									<div className={styles.header}>
-										<Header />
-									</div>
-								)}
-								<div className={styles.content}>
+			<React.StrictMode>
+				<Head>
+					<title>AudioVerse</title>
+				</Head>
+				<QueryClientProvider client={queryClient}>
+					<ThemeProvider theme={muiTheme}>
+						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
+							{disableSidebar ? (
+								<Component {...pageProps} />
+							) : (
+								<AndSidebar>
 									<Component {...pageProps} />
-								</div>
-							</Hydrate>
-						</ThemeProvider>
-					</QueryClientProvider>
-				</React.StrictMode>
-			</div>
+								</AndSidebar>
+							)}
+						</Hydrate>
+					</ThemeProvider>
+				</QueryClientProvider>
+			</React.StrictMode>
 			<ToastContainer />
 			{/* Go to www.addthis.com/dashboard to customize your tools */}
 			<script

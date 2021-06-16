@@ -1,0 +1,18 @@
+@import '../../styles/common';
+
+.heading {
+	color: $ts-red;
+	font-size: 16px;
+	text-transform: uppercase;
+	display: flex;
+	letter-spacing: 0.1em;
+	&:after {
+		display: block;
+		content: '';
+		position: relative;
+		border-bottom: 1px solid $ts-red;
+		flex-grow: 1;
+		top: -4px;
+		left: 2px;
+	}
+}

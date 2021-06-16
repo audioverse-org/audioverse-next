@@ -1,0 +1,7 @@
+.grid {
+	// TODO: Fix tabbed focus access and indication in Safari; currently can't
+	//  tab into the grid
+	&:focus {
+		outline: none;
+	}
+}

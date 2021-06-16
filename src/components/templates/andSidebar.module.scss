@@ -1,0 +1,17 @@
+@import '../../styles/common';
+
+.base {
+	display: flex;
+	min-height: 100vh;
+}
+
+.header {
+	flex: 0 0 200px;
+	border-right: 0.5px solid $gray-bleached;
+	display: flex;
+}
+
+.content {
+	flex: 0 0 calc(100% - 200px);
+	padding: 2rem;
+}
