@@ -1,13 +1,52 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import _ from 'lodash';
 import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
+import videojs, { VideoJsPlayer } from 'video.js';
 
 import Waves from '../../../public/img/waves.svg';
 
 import styles from './player.module.scss';
+import { PlayerFragment } from '@lib/generated/graphql';
+
+interface Playable {
+	url: string;
+	mimeType: string;
+}
+
+const getFiles = (
+	recording: PlayerFragment,
+	prefersAudio: boolean
+): Playable[] => {
+	if (!recording) return [];
+
+	const {
+		videoStreams = [],
+		playerVideoFiles = [],
+		playerAudioFiles = [],
+	} = recording;
+
+	if (prefersAudio) return playerAudioFiles;
+	if (videoStreams.length > 0) return videoStreams;
+	if (playerVideoFiles.length > 0) return playerVideoFiles;
+
+	return playerAudioFiles;
+};
+
+const getSources = (recording: PlayerFragment, prefersAudio: boolean) => {
+	const files = getFiles(recording, prefersAudio) || [];
+
+	return files.map((f) => ({
+		src: f.url,
+		type: f.mimeType,
+	}));
+};
+
+const hasVideo = (recording: PlayerFragment) => {
+	const { videoStreams = [], playerVideoFiles = [] } = recording;
+
+	return videoStreams.length > 0 || playerVideoFiles.length > 0;
+};
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -16,7 +55,24 @@ import styles from './player.module.scss';
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
-const Player = (props: VideoJsPlayerOptions): JSX.Element => {
+interface PlayerProps {
+	recording: PlayerFragment;
+}
+
+const Player = ({ recording }: PlayerProps): JSX.Element => {
+	const onVideo = useCallback((el) => setVideoEl(el), []);
+
+	const [prefersAudio, setPrefersAudio] = useState(false);
+	const [videoEl, setVideoEl] = useState(null);
+	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
+	const [isPaused, setIsPaused] = useState<boolean>(true);
+	const [time, setTime] = useState<number | undefined>();
+	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
+
+	const hasSources = sources && sources.length > 0;
+	const duration = player?.duration();
+	const progress = time && duration ? time / duration : 0;
+
 	// TODO: Fix poster disappearing after audio playback start
 	const options = {
 		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
@@ -25,18 +81,12 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 		// TODO: Should this be set back to `auto` once streaming urls are fixed?
 		// https://docs.videojs.com/docs/guides/options.html
 		preload: 'metadata',
-		...props,
+		sources,
 	};
 
-	const [videoEl, setVideoEl] = useState(null);
-	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
-	const [isPaused, setIsPaused] = useState<boolean>(true);
-	const [time, setTime] = useState<number | undefined>();
-	const onVideo = useCallback((el) => setVideoEl(el), []);
-	const sources = _.get(props, 'sources');
-	const hasSources = sources && sources.length > 0;
-	const duration = player?.duration();
-	const progress = time && duration ? time / duration : 0;
+	useEffect(() => {
+		setSources(getSources(recording, prefersAudio));
+	}, [recording, prefersAudio]);
 
 	useEffect(() => {
 		if (videoEl == null) return;
@@ -107,6 +157,11 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 					}}
 				/>
 			</div>
+			{hasVideo(recording) && (
+				<button onClick={() => setPrefersAudio(!prefersAudio)}>
+					Play {prefersAudio ? 'Video' : 'Audio'}
+				</button>
+			)}
 		</div>
 	) : (
 		<p>

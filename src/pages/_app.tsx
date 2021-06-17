@@ -65,11 +65,11 @@ function MyApp<P>({
 			</React.StrictMode>
 			<ToastContainer />
 			{/* Go to www.addthis.com/dashboard to customize your tools */}
-			<script
-				type="text/javascript"
-				src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"
-				defer
-			/>
+			{/*<script*/}
+			{/*	type="text/javascript"*/}
+			{/*	src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"*/}
+			{/*	defer*/}
+			{/*/>*/}
 		</>
 	);
 }

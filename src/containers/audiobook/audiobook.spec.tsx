@@ -43,7 +43,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 							sponsor: {
 								title: 'first_recording_sponsor_title',
 							},
-							audioFiles: [
+							playerAudioFiles: [
 								{
 									url: 'first_recording_url',
 								},
@@ -58,7 +58,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 						{
 							id: 'second_recording_id',
 							title: 'second_recording_title',
-							audioFiles: [
+							playerAudioFiles: [
 								{
 									url: 'second_recording_url',
 								},

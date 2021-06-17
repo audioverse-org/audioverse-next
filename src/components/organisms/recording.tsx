@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CopyrightInfo from '@components/molecules/copyrightInfo';
@@ -16,49 +16,13 @@ import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
 
-type RecordingType = NonNullable<RecordingFragment>;
-
-interface Playable {
-	url: string;
-	mimeType: string;
-}
-
-const getFiles = (
-	recording: RecordingType,
-	prefersAudio: boolean
-): Playable[] => {
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
-
-const getSources = (recording: RecordingType, prefersAudio: boolean) => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-	}));
-};
-
-const hasVideo = (recording: RecordingType) => {
-	const { videoStreams = [], videoFiles = [] } = recording;
-
-	return videoStreams.length > 0 || videoFiles.length > 0;
-};
-
 interface RecordingProps {
 	recording: RecordingFragment;
 }
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
-	const [prefersAudio, setPrefersAudio] = useState(false);
-	const sources = getSources(recording, prefersAudio);
+
 	const speakers = recording?.persons || [];
 	const tags = recording?.recordingTags?.nodes || [];
 	const { sponsor, videoDownloads = [], audioDownloads = [] } = recording;
@@ -114,13 +78,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				</div>
 				<Favorite id={recording.id} />
 				<PlaylistButton recordingId={recording.id} />
-				<Player sources={sources} />
-				{/*TODO: Hide toggle button if no video files*/}
-				{hasVideo(recording) && (
-					<button onClick={() => setPrefersAudio(!prefersAudio)}>
-						Play {prefersAudio ? 'Video' : 'Audio'}
-					</button>
-				)}
+				{/*<Player sources={sources} />*/}
+				<Player recording={recording} />
+
 				{recording.description && (
 					<>
 						<h6>

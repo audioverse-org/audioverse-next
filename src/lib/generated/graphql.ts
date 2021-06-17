@@ -5681,6 +5681,21 @@ export type SponsorInfoFragment = (
   & Pick<Sponsor, 'title' | 'location' | 'website'>
 );
 
+export type PlayerFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title'>
+  & { playerAudioFiles: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
+  )>, playerVideoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )>, videoStreams: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )> }
+);
+
 export type PlaylistFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title'>
@@ -5696,15 +5711,6 @@ export type RecordingFragment = (
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
-  )>, audioFiles: Array<(
-    { __typename?: 'AudioFile' }
-    & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
-  )>, videoFiles: Array<(
-    { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
-  )>, videoStreams: Array<(
-    { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
   )>, videoDownloads: Array<(
     { __typename?: 'VideoFile' }
     & Pick<VideoFile, 'id' | 'url' | 'filesize'>
@@ -5734,6 +5740,7 @@ export type RecordingFragment = (
     & Pick<Transcript, 'text'>
   )> }
   & CopyrightInfoFragment
+  & PlayerFragment
 );
 
 export type TestimoniesFragment = (
@@ -5928,15 +5935,10 @@ export type GetAudiobookDetailPageDataQuery = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & Pick<Recording, 'id' | 'title'>
-        & { audioFiles: Array<(
-          { __typename?: 'AudioFile' }
-          & Pick<AudioFile, 'url'>
-        )>, audioDownloads: Array<(
-          { __typename?: 'AudioFile' }
-          & Pick<AudioFile, 'url' | 'filesize'>
-        )> }
         & CopyrightInfosFragment
         & WriteFeedFileFragment
+        & PlayerFragment
+        & PlaylistFragment
       )>> }
     ) }
   )> }
@@ -7446,19 +7448,15 @@ export const SponsorInfoFragmentDoc = `
   website
 }
     `;
-export const RecordingFragmentDoc = `
-    fragment recording on Recording {
-  id
+export const PlayerFragmentDoc = `
+    fragment player on Recording {
   title
-  persons {
-    ...speakerName
-  }
-  audioFiles {
+  playerAudioFiles: audioFiles {
     url
     filesize
     mimeType
   }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+  playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
     url
     filesize
     mimeType
@@ -7467,6 +7465,15 @@ export const RecordingFragmentDoc = `
     url
     filesize
     mimeType
+  }
+}
+    `;
+export const RecordingFragmentDoc = `
+    fragment recording on Recording {
+  id
+  title
+  persons {
+    ...speakerName
   }
   videoDownloads: videoFiles(allowedContainers: MP4) {
     id
@@ -7503,10 +7510,12 @@ export const RecordingFragmentDoc = `
   }
   shareUrl
   ...copyrightInfo
+  ...player
 }
     ${SpeakerNameFragmentDoc}
 ${SponsorInfoFragmentDoc}
-${CopyrightInfoFragmentDoc}`;
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}`;
 export const SongFragmentDoc = `
     fragment song on Recording {
   ...playlist
@@ -7781,15 +7790,10 @@ export const GetAudiobookDetailPageDataDocument = `
       nodes {
         id
         title
-        audioFiles {
-          url
-        }
-        audioDownloads: audioFiles(allowedContainers: MP3) {
-          url
-          filesize
-        }
         ...copyrightInfos
         ...writeFeedFile
+        ...player
+        ...playlist
       }
     }
     shareUrl
@@ -7797,7 +7801,9 @@ export const GetAudiobookDetailPageDataDocument = `
 }
     ${SponsorInfoFragmentDoc}
 ${CopyrightInfosFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${WriteFeedFileFragmentDoc}
+${PlayerFragmentDoc}
+${PlaylistFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
       TData = GetAudiobookDetailPageDataQuery,
       TError = unknown
@@ -9447,6 +9453,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetPlaylistButtonDataQuery> {
 								return fetchApi(GetPlaylistButtonDataDocument, { variables });
 							}
+
 
 
 

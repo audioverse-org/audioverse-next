@@ -4,14 +4,25 @@ import videojs from 'video.js';
 
 import Player from '@components/molecules/player';
 import { buildRenderer } from '@lib/test/helpers';
+import { PlayerFragment } from '@lib/generated/graphql';
 
 jest.mock('video.js');
 
 const mockVideojs = (videojs as unknown) as jest.Mock;
 
+const recording: Partial<PlayerFragment> = {
+	playerAudioFiles: [
+		{
+			url: 'the_source_src',
+			mimeType: 'the_source_type',
+			filesize: 'the_source_size',
+		},
+	],
+};
+
 const renderComponent = buildRenderer(Player, {
 	defaultProps: {
-		sources: [{ src: 'the_source_src', type: 'the_source_type' }],
+		recording,
 	},
 });
 
@@ -34,6 +45,7 @@ function setPlayerMock(options: SetPlayerMockOptions = {}) {
 			return time;
 		}),
 		duration: jest.fn(() => duration),
+		src: jest.fn(),
 	};
 
 	mockVideojs.mockReturnValue(mockPlayer);
@@ -139,4 +151,17 @@ describe('player', () => {
 
 		expect(input).toHaveValue('50');
 	});
+
+	it('does not reload player on play', async () => {
+		const mockPlayer = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		expect(mockPlayer.src).not.toBeCalled();
+	});
 });
+
+// TODO:
+// Replaces play/pause with loading indicator when player in loading state

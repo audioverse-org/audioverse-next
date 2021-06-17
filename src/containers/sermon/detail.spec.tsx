@@ -41,8 +41,8 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		persons: [],
-		audioFiles: [],
-		videoFiles: [],
+		playerAudioFiles: [],
+		playerVideoFiles: [],
 		...sermon,
 	};
 
@@ -154,7 +154,7 @@ describe('sermon detail page', () => {
 
 	it('includes player', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			playerAudioFiles: ['the_source'],
 		});
 
 		await renderPage();
@@ -164,7 +164,7 @@ describe('sermon detail page', () => {
 
 	it('enables controls', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			playerAudioFiles: ['the_source'],
 		});
 
 		await renderPage();
@@ -177,7 +177,7 @@ describe('sermon detail page', () => {
 
 	it('makes fluid player', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			playerAudioFiles: ['the_source'],
 		});
 
 		await renderPage();
@@ -190,7 +190,7 @@ describe('sermon detail page', () => {
 
 	it('sets poster', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			playerAudioFiles: ['the_source'],
 		});
 
 		await renderPage();
@@ -205,7 +205,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
@@ -232,7 +232,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
@@ -247,8 +247,8 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			playerVideoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 			videoStreams: [],
 		});
 
@@ -273,8 +273,8 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			videoFiles: [],
+			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			playerVideoFiles: [],
 			videoStreams: [],
 		});
 
@@ -299,7 +299,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 		});
 
 		const { queryByText } = await renderPage();
