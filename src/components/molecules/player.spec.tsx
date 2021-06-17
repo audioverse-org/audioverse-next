@@ -3,8 +3,8 @@ import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import Player from '@components/molecules/player';
-import { buildRenderer } from '@lib/test/helpers';
 import { PlayerFragment } from '@lib/generated/graphql';
+import { buildRenderer } from '@lib/test/helpers';
 
 jest.mock('video.js');
 

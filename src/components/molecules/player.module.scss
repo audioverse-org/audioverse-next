@@ -2,7 +2,8 @@
 
 .waves {
 	position: relative;
-	display: table;
+	background-image: url('/img/waves.svg');
+	height: 50px;
 	input {
 		position: absolute;
 		top: 0;

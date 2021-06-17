@@ -4,10 +4,9 @@ import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import videojs, { VideoJsPlayer } from 'video.js';
 
-import Waves from '../../../public/img/waves.svg';
+import { PlayerFragment } from '@lib/generated/graphql';
 
 import styles from './player.module.scss';
-import { PlayerFragment } from '@lib/generated/graphql';
 
 interface Playable {
 	url: string;
@@ -143,7 +142,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						player.currentTime(newTime);
 					}}
 				/>
-				<Waves />
 			</div>
 			<div data-vjs-player={true}>
 				<video
