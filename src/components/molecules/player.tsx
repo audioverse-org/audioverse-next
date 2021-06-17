@@ -1,8 +1,7 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import _ from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
@@ -32,9 +31,12 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 	const [videoEl, setVideoEl] = useState(null);
 	const [player, setPlayer] = useState<VideoJsPlayer | null>(null);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
+	const [time, setTime] = useState<number | undefined>();
 	const onVideo = useCallback((el) => setVideoEl(el), []);
 	const sources = _.get(props, 'sources');
 	const hasSources = sources && sources.length > 0;
+	const duration = player?.duration();
+	const progress = time && duration ? time / duration : 0;
 
 	useEffect(() => {
 		if (videoEl == null) return;
@@ -47,7 +49,7 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 		}
 	}, [hasSources, sources, videoEl]);
 
-	const updateIsPaused = () => {
+	const update = () => {
 		if (!player) return;
 		setIsPaused(player.paused());
 	};
@@ -59,7 +61,7 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 					aria-label={'play'}
 					onClick={() => {
 						player?.play();
-						updateIsPaused();
+						update();
 					}}
 				>
 					<PlayArrowIcon />
@@ -69,17 +71,38 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 					aria-label={'pause'}
 					onClick={() => {
 						player?.pause();
-						updateIsPaused();
+						update();
 					}}
 				>
 					<PauseIcon />
 				</button>
 			)}
 			<div className={styles.waves}>
+				<input
+					type="range"
+					aria-label={'progress'}
+					value={progress * 100}
+					onChange={(e) => {
+						if (!player) return;
+						const percent = parseInt(e.target.value) / 100;
+						const newTime = percent * player.duration();
+						setTime(newTime);
+						player.currentTime(newTime);
+					}}
+				/>
 				<Waves />
 			</div>
 			<div data-vjs-player={true}>
-				<video ref={onVideo} className="video-js" playsInline />
+				<video
+					ref={onVideo}
+					className="video-js"
+					playsInline
+					data-testid={'video-element'}
+					onTimeUpdate={() => {
+						if (!player) return;
+						setTime(player.currentTime());
+					}}
+				/>
 			</div>
 		</div>
 	) : (
