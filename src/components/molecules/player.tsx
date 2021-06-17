@@ -1,7 +1,7 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
@@ -77,7 +77,10 @@ const Player = (props: VideoJsPlayerOptions): JSX.Element => {
 					<PauseIcon />
 				</button>
 			)}
-			<div className={styles.waves}>
+			<div
+				className={styles.waves}
+				style={{ '--progress': `${progress * 100}%` } as CSSProperties}
+			>
 				<input
 					type="range"
 					aria-label={'progress'}
