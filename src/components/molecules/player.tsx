@@ -1,12 +1,13 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import BackIcon from '../../../public/img/icon-nudge-left.svg';
-import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import videojs, { VideoJsPlayer } from 'video.js';
 
 import { PlayerFragment } from '@lib/generated/graphql';
+
+import BackIcon from '../../../public/img/icon-nudge-left.svg';
+import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 
 import styles from './player.module.scss';
 
