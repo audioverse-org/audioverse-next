@@ -122,8 +122,14 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 
 	return hasSources ? (
 		<div className={isShowingVideo ? styles.video : styles.audio}>
-			{!isShowingVideo && (
+			{hasVideo(recording) && (
 				<>
+					<button onClick={() => setPrefersAudio(true)}>Audio</button>
+					<button onClick={() => setPrefersAudio(false)}>Video</button>
+				</>
+			)}
+			{!isShowingVideo && (
+				<div className={styles.controls}>
 					{isPaused ? (
 						<button
 							aria-label={'play'}
@@ -161,7 +167,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 							}}
 						/>
 					</div>
-				</>
+				</div>
 			)}
 			<div
 				className={styles.player}
@@ -182,7 +188,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					/>
 				</div>
 			</div>
-			<div>
+			<div className={styles.skip}>
 				<button
 					aria-label={'back 15 seconds'}
 					onClick={() => {
@@ -202,12 +208,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					<ForwardIcon />
 				</button>
 			</div>
-			{hasVideo(recording) && (
-				<>
-					<button onClick={() => setPrefersAudio(true)}>Audio</button>
-					<button onClick={() => setPrefersAudio(false)}>Video</button>
-				</>
-			)}
 		</div>
 	) : (
 		<p>
