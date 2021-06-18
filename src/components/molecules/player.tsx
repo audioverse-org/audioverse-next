@@ -74,6 +74,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const hasSources = sources && sources.length > 0;
 	const duration = player?.duration();
 	const progress = time && duration ? time / duration : 0;
+	const isShowingVideo = hasVideo(recording) && !prefersAudio;
 
 	// TODO: Fix poster disappearing after audio playback start
 	const options = {
@@ -99,6 +100,8 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 		} else if (sources) {
 			player.src(sources);
 		}
+
+		setIsPaused(true);
 	}, [hasSources, sources, videoEl]);
 
 	useEffect(() => {
@@ -118,55 +121,66 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	}
 
 	return hasSources ? (
-		<div>
-			{isPaused ? (
-				<button
-					aria-label={'play'}
-					onClick={() => {
-						player?.play();
-						update();
-					}}
-				>
-					<PlayArrowIcon />
-				</button>
-			) : (
-				<button
-					aria-label={'pause'}
-					onClick={() => {
-						player?.pause();
-						update();
-					}}
-				>
-					<PauseIcon />
-				</button>
+		<div className={isShowingVideo ? styles.video : styles.audio}>
+			{!isShowingVideo && (
+				<>
+					{isPaused ? (
+						<button
+							aria-label={'play'}
+							onClick={() => {
+								player?.play();
+								update();
+							}}
+						>
+							<PlayArrowIcon />
+						</button>
+					) : (
+						<button
+							aria-label={'pause'}
+							onClick={() => {
+								player?.pause();
+								update();
+							}}
+						>
+							<PauseIcon />
+						</button>
+					)}
+					<div
+						className={styles.waves}
+						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
+					>
+						<input
+							type="range"
+							aria-label={'progress'}
+							value={progress * 100}
+							onChange={(e) => {
+								if (!player) return;
+								const percent = parseInt(e.target.value) / 100;
+								const newTime = percent * player.duration();
+								setPlayerTime(newTime);
+							}}
+						/>
+					</div>
+				</>
 			)}
 			<div
-				className={styles.waves}
-				style={{ '--progress': `${progress * 100}%` } as CSSProperties}
+				className={styles.player}
+				style={{
+					display: isShowingVideo ? 'block' : 'none',
+				}}
 			>
-				<input
-					type="range"
-					aria-label={'progress'}
-					value={progress * 100}
-					onChange={(e) => {
-						if (!player) return;
-						const percent = parseInt(e.target.value) / 100;
-						const newTime = percent * player.duration();
-						setPlayerTime(newTime);
-					}}
-				/>
-			</div>
-			<div data-vjs-player={true}>
-				<video
-					ref={onVideo}
-					className="video-js"
-					playsInline
-					data-testid={'video-element'}
-					onTimeUpdate={() => {
-						if (!player) return;
-						setTime(player.currentTime());
-					}}
-				/>
+				<div data-vjs-player={true}>
+					<video
+						ref={onVideo}
+						className="video-js"
+						playsInline
+						data-testid={'video-element'}
+						onTimeUpdate={() => {
+							if (!player) return;
+							setTime(player.currentTime());
+						}}
+					/>
+				</div>
 			</div>
 			<div>
 				<button
@@ -189,9 +203,10 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				</button>
 			</div>
 			{hasVideo(recording) && (
-				<button onClick={() => setPrefersAudio(!prefersAudio)}>
-					Play {prefersAudio ? 'Video' : 'Audio'}
-				</button>
+				<>
+					<button onClick={() => setPrefersAudio(true)}>Audio</button>
+					<button onClick={() => setPrefersAudio(false)}>Video</button>
+				</>
 			)}
 		</div>
 	) : (

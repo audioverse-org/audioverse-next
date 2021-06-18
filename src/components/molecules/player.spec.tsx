@@ -5,6 +5,7 @@ import videojs from 'video.js';
 import Player from '@components/molecules/player';
 import { PlayerFragment } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/helpers';
+import { waitFor } from '@testing-library/react';
 
 jest.mock('video.js');
 
@@ -56,13 +57,13 @@ function setPlayerMock(options: SetPlayerMockOptions = {}) {
 describe('player', () => {
 	beforeEach(() => setPlayerMock());
 
-	it('has play button', async () => {
+	it('has button', async () => {
 		const { getByLabelText } = await renderComponent();
 
 		expect(getByLabelText('play')).toBeInTheDocument();
 	});
 
-	it('plays when play clicked', async () => {
+	it('plays when clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
 		const { getByLabelText } = await renderComponent();
@@ -81,7 +82,7 @@ describe('player', () => {
 		expect(getByLabelText('pause')).toBeInTheDocument();
 	});
 
-	it('toggles back to play button', async () => {
+	it('toggles back to button', async () => {
 		const { getByLabelText } = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
@@ -180,6 +181,88 @@ describe('player', () => {
 		userEvent.click(getByLabelText('forward 15 seconds'));
 
 		expect(player.currentTime).toBeCalledWith(65);
+	});
+
+	it('hides player if no video files', async () => {
+		const { getByTestId } = await renderComponent();
+
+		await waitFor(() => {
+			expect(getByTestId('video-element')).not.toBeVisible();
+		});
+	});
+
+	it('hides scrubber when video shown', async () => {
+		const { queryByTestId } = await renderComponent({
+			props: {
+				recording: {
+					playerVideoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		expect(queryByTestId('progress')).not.toBeInTheDocument();
+	});
+
+	it('sets paused to true when switching formats', async () => {
+		const { getByLabelText, getByText } = await renderComponent({
+			props: {
+				recording: {
+					playerAudioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+					playerVideoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		userEvent.click(getByText('Audio'));
+		userEvent.click(getByLabelText('play'));
+		userEvent.click(getByText('Video'));
+		userEvent.click(getByText('Audio'));
+
+		expect(getByLabelText('play')).toBeInTheDocument();
+	});
+
+	it('displays both format buttons at the same time', async () => {
+		const { getByText } = await renderComponent({
+			props: {
+				recording: {
+					playerAudioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+					playerVideoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		expect(getByText('Audio')).toBeInTheDocument();
+		expect(getByText('Video')).toBeInTheDocument();
 	});
 });
 

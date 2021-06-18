@@ -121,7 +121,7 @@ describe('sermon detail page', () => {
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
-		expect(result.props.sermon).toBeUndefined();
+		expect(result.props.sermon).toBeNull();
 	});
 
 	it('renders 404 on missing sermon', async () => {
@@ -211,7 +211,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('Play Audio'));
+		userEvent.click(getByText('Audio'));
 
 		const calls = ((videojs as any) as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
@@ -226,21 +226,6 @@ describe('sermon detail page', () => {
 				],
 			])
 		);
-	});
-
-	it('toggles toggle button label', async () => {
-		loadSermonDetailData({
-			title: 'the_sermon_title',
-			persons: [],
-			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
-		});
-
-		const { getByText } = await renderPage();
-
-		userEvent.click(getByText('Play Audio'));
-
-		expect(getByText('Play Video')).toBeInTheDocument();
 	});
 
 	it('falls back to video files', async () => {
@@ -775,5 +760,13 @@ describe('sermon detail page', () => {
 		);
 	});
 
-	// TODO: Catch fetch error in getStaticProps and render 404
+	it('renders 404 on fetch error', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetSermonDetailDataDocument, expect.anything())
+			.mockRejectedValue('oops');
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('404')).toBeInTheDocument();
+	});
 });
