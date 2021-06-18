@@ -1,5 +1,7 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import BackIcon from '../../../public/img/icon-nudge-left.svg';
+import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 import React, { CSSProperties, useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import videojs, { VideoJsPlayer } from 'video.js';
@@ -98,10 +100,21 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 		}
 	}, [hasSources, sources, videoEl]);
 
+	useEffect(() => {
+		if (!player) return;
+		setTime(player.currentTime());
+	}, [player]);
+
 	const update = () => {
 		if (!player) return;
 		setIsPaused(player.paused());
 	};
+
+	function setPlayerTime(newTime: number) {
+		if (!player) return;
+		setTime(newTime);
+		player.currentTime(newTime);
+	}
 
 	return hasSources ? (
 		<div>
@@ -138,8 +151,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						if (!player) return;
 						const percent = parseInt(e.target.value) / 100;
 						const newTime = percent * player.duration();
-						setTime(newTime);
-						player.currentTime(newTime);
+						setPlayerTime(newTime);
 					}}
 				/>
 			</div>
@@ -154,6 +166,26 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						setTime(player.currentTime());
 					}}
 				/>
+			</div>
+			<div>
+				<button
+					aria-label={'back 15 seconds'}
+					onClick={() => {
+						if (!time) return;
+						setPlayerTime(time - 15);
+					}}
+				>
+					<BackIcon />
+				</button>
+				<button
+					aria-label={'forward 15 seconds'}
+					onClick={() => {
+						if (!time) return;
+						setPlayerTime(time + 15);
+					}}
+				>
+					<ForwardIcon />
+				</button>
 			</div>
 			{hasVideo(recording) && (
 				<button onClick={() => setPrefersAudio(!prefersAudio)}>

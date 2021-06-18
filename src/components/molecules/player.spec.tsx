@@ -161,6 +161,26 @@ describe('player', () => {
 
 		expect(mockPlayer.src).not.toBeCalled();
 	});
+
+	it('nudges back 15 seconds', async () => {
+		const player = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('back 15 seconds'));
+
+		expect(player.currentTime).toBeCalledWith(35);
+	});
+
+	it('nudges forward 15 seconds', async () => {
+		const player = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('forward 15 seconds'));
+
+		expect(player.currentTime).toBeCalledWith(65);
+	});
 });
 
 // TODO:
