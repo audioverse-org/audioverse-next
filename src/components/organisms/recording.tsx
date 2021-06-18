@@ -65,20 +65,20 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			)}
 			<div className={styles.content}>
 				<div className={styles.meta}>
-					<div>
-						<h1>{recording.title}</h1>
-						<ul className={styles.speakers}>
-							{speakers.map((speaker) => (
-								<li key={speaker.id}>
-									<SpeakerName person={speaker} />
-								</li>
-							))}
-						</ul>
-					</div>
+					{recording.sequenceIndex && (
+						<span className={styles.part}>Part {recording.sequenceIndex}</span>
+					)}
+					<h1>{recording.title}</h1>
+					<ul className={styles.speakers}>
+						{speakers.map((speaker) => (
+							<li key={speaker.id}>
+								<SpeakerName person={speaker} />
+							</li>
+						))}
+					</ul>
 				</div>
 				<Favorite id={recording.id} />
 				<PlaylistButton recordingId={recording.id} />
-				{/*<Player sources={sources} />*/}
 				<Player recording={recording} />
 
 				{recording.description && (

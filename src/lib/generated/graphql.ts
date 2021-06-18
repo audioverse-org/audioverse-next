@@ -5707,7 +5707,7 @@ export type PlaylistFragment = (
 
 export type RecordingFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'shareUrl'>
+  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'sequenceIndex' | 'shareUrl'>
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
@@ -7505,6 +7505,7 @@ export const RecordingFragmentDoc = `
     id
     title
   }
+  sequenceIndex
   transcript {
     text
   }

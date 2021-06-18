@@ -769,4 +769,18 @@ describe('sermon detail page', () => {
 
 		expect(getByText('404')).toBeInTheDocument();
 	});
+
+	it('renders part number', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+			sequenceIndex: 1,
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Part 1')).toBeInTheDocument();
+	});
 });
