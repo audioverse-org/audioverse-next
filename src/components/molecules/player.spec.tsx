@@ -5,7 +5,6 @@ import videojs from 'video.js';
 import Player from '@components/molecules/player';
 import { PlayerFragment } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/helpers';
-import { waitFor } from '@testing-library/react';
 
 jest.mock('video.js');
 
@@ -186,9 +185,7 @@ describe('player', () => {
 	it('hides player if no video files', async () => {
 		const { getByTestId } = await renderComponent();
 
-		await waitFor(() => {
-			expect(getByTestId('video-element')).not.toBeVisible();
-		});
+		expect(getByTestId('video-element')).not.toBeVisible();
 	});
 
 	it('hides scrubber when video shown', async () => {
