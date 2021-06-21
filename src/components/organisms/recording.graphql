@@ -33,6 +33,11 @@ fragment recording on Recording {
 	sequence {
 		id
 		title
+		recordings {
+			nodes {
+				id
+			}
+		}
 	}
 	sequenceIndex
 	transcript {

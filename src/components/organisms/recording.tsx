@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -9,15 +10,28 @@ import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import { RecordingFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
-import { makeSeriesDetailRoute } from '@lib/routes';
+import { makeSeriesDetailRoute, makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
+import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
+}
+
+function getSiblingByIndexOffset(recording: RecordingFragment, offset: number) {
+	const nodes = recording.sequence?.recordings?.nodes;
+
+	if (!nodes || recording.sequenceIndex === null) return;
+
+	const zeroBasedIndex = recording.sequenceIndex - 1;
+	const targetIndex = zeroBasedIndex + offset;
+
+	return nodes[targetIndex];
 }
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
@@ -39,6 +53,8 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const hasVideoDownloads = videoDownloads.length > 0;
 	const hasAudioDownloads = audioDownloads.length > 0;
 	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
+	const previousRecording = getSiblingByIndexOffset(recording, -1);
+	const nextRecording = getSiblingByIndexOffset(recording, 1);
 
 	// TODO: Switch embed link to new site when route is implemented
 	// language=HTML
@@ -76,6 +92,30 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							</li>
 						))}
 					</ul>
+				</div>
+				<div className={styles.sequenceNav}>
+					{previousRecording && (
+						<Button
+							href={makeSermonRoute(langRoute, previousRecording.id)}
+							aria-label={'Previous'}
+							className={styles.previous}
+							variant={'outlined'}
+							startIcon={<ArrowLeft />}
+						>
+							Previous
+						</Button>
+					)}
+					{nextRecording && (
+						<Button
+							href={makeSermonRoute(langRoute, nextRecording.id)}
+							aria-label={'Next'}
+							className={styles.next}
+							variant={'outlined'}
+							endIcon={<ArrowRight />}
+						>
+							Next
+						</Button>
+					)}
 				</div>
 				<Favorite id={recording.id} />
 				<PlaylistButton recordingId={recording.id} />

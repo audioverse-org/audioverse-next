@@ -5678,7 +5678,7 @@ export type SpeakerNameFragment = (
 
 export type SponsorInfoFragment = (
   { __typename?: 'Sponsor' }
-  & Pick<Sponsor, 'title' | 'location' | 'website'>
+  & Pick<Sponsor, 'id' | 'title'>
 );
 
 export type PlayerFragment = (
@@ -5735,6 +5735,13 @@ export type RecordingFragment = (
   )>, sequence: Maybe<(
     { __typename?: 'Sequence' }
     & Pick<Sequence, 'id' | 'title'>
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & Pick<Recording, 'id'>
+      )>> }
+    ) }
   )>, transcript: Maybe<(
     { __typename?: 'Transcript' }
     & Pick<Transcript, 'text'>
@@ -7443,9 +7450,8 @@ export const PlaylistFragmentDoc = `
     `;
 export const SponsorInfoFragmentDoc = `
     fragment sponsorInfo on Sponsor {
+  id
   title
-  location
-  website
 }
     `;
 export const PlayerFragmentDoc = `
@@ -7504,6 +7510,11 @@ export const RecordingFragmentDoc = `
   sequence {
     id
     title
+    recordings {
+      nodes {
+        id
+      }
+    }
   }
   sequenceIndex
   transcript {

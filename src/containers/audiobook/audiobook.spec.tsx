@@ -162,14 +162,6 @@ describe('audiobook detail page', () => {
 		expect(getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
-	it('displays sponsor website url', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sponsor_website')).toBeInTheDocument();
-	});
-
 	it('displays copyright', async () => {
 		loadData();
 

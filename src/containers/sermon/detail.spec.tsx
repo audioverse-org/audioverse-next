@@ -20,8 +20,6 @@ jest.mock('@lib/api/fetchApi');
 
 // TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
 function loadSermonDetailPathsData() {
-	// jest.spyOn(graphql, 'getSermonDetailStaticPaths')
-
 	when(mockedFetchApi)
 		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
 		.mockResolvedValue({
@@ -46,7 +44,6 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		...sermon,
 	};
 
-	// jest.spyOn(graphql, 'getSermonDetailData').mockResolvedValue({ sermon });
 	when(mockedFetchApi)
 		.calledWith(GetSermonDetailDataDocument, expect.anything())
 		.mockResolvedValue({ sermon });
@@ -385,19 +382,6 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_title')).toBeInTheDocument();
-	});
-
-	it('includes sponsor location', async () => {
-		loadSermonDetailData({
-			sponsor: {
-				title: 'the_title',
-				location: 'the_location',
-			},
-		});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_location')).toBeInTheDocument();
 	});
 
 	it('includes time recorded', async () => {
@@ -782,5 +766,75 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Part 1')).toBeInTheDocument();
+	});
+
+	it('links to previous recording', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+				recordings: {
+					nodes: [
+						{
+							id: 1,
+						},
+						{
+							id: 2,
+						},
+						{
+							id: 3,
+						},
+					],
+				},
+			},
+			sequenceIndex: 2,
+		});
+
+		const { getByLabelText } = await renderPage();
+
+		expect(getByLabelText('Previous')).toHaveAttribute('href', '/en/sermons/1');
+	});
+
+	it('links to next recording', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+				recordings: {
+					nodes: [
+						{
+							id: 1,
+						},
+						{
+							id: 2,
+						},
+						{
+							id: 3,
+						},
+					],
+				},
+			},
+			sequenceIndex: 2,
+		});
+
+		const { getByLabelText } = await renderPage();
+
+		expect(getByLabelText('Next')).toHaveAttribute('href', '/en/sermons/3');
+	});
+
+	it('links sponsor title', async () => {
+		loadSermonDetailData({
+			sponsor: {
+				id: 'sponsor_id',
+				title: 'sponsor_title',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('sponsor_title')).toHaveAttribute(
+			'href',
+			'/en/sponsors/sponsor_id'
+		);
 	});
 });

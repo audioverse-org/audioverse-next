@@ -40,3 +40,13 @@
 		margin-right: 1rem;
 	}
 }
+
+.sequenceNav {
+	overflow: hidden;
+	.previous {
+		float: left;
+	}
+	.next {
+		float: right;
+	}
+}
