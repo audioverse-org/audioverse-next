@@ -1,5 +1,5 @@
-import { buildRenderer } from '@lib/test/helpers';
 import Miniplayer from '@components/organisms/miniplayer';
+import { buildRenderer } from '@lib/test/helpers';
 
 const renderComponent = buildRenderer(Miniplayer);
 
