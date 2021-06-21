@@ -31,12 +31,14 @@ const Header = (): JSX.Element => {
 					/>
 				</li>
 				<li>
-					<Icon icon={'search'} size={iconSize} />{' '}
-					<FormattedMessage
-						id={`header__navItemDiscover`}
-						defaultMessage="Discover"
-						description={`Header nav link name: Discover`}
-					/>
+					<a href={`/${languageRoute}/discover`}>
+						<Icon icon={'search'} size={iconSize} />{' '}
+						<FormattedMessage
+							id={`header__navItemDiscover`}
+							defaultMessage="Discover"
+							description={`Header nav link name: Discover`}
+						/>
+					</a>
 				</li>
 				<li>
 					<Icon icon={'bible'} size={iconSize} />{' '}

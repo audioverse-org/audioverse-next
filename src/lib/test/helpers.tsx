@@ -10,6 +10,7 @@ import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { PartialDeep } from 'type-fest';
+import videojs from 'video.js';
 
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
@@ -205,3 +206,39 @@ export const makePlaylistButtonData = (
 
 	return _.set({} as any, 'me.user.playlists.nodes', value);
 };
+
+interface SetPlayerMockOptions {
+	isPaused?: boolean;
+	time?: number;
+	duration?: number;
+}
+
+export const mockVideojs = (videojs as unknown) as jest.Mock;
+
+export function setPlayerMock(
+	options: SetPlayerMockOptions = {}
+): videojs.Player {
+	let { isPaused = true, time = 50 } = options;
+	const { duration = 100 } = options;
+
+	const mockPlayer: Partial<videojs.Player> = {
+		play: jest.fn(async () => {
+			isPaused = false;
+		}),
+		pause: jest.fn(() => {
+			isPaused = true;
+			return mockPlayer as videojs.Player;
+		}),
+		paused: jest.fn(() => isPaused),
+		currentTime: jest.fn((newTime: number | null = null) => {
+			if (newTime !== null) time = newTime;
+			return time;
+		}),
+		duration: jest.fn(() => duration),
+		src: jest.fn(),
+	};
+
+	mockVideojs.mockReturnValue(mockPlayer);
+
+	return mockPlayer as videojs.Player;
+}

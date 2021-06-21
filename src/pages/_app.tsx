@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
 import 'react-toastify/dist/ReactToastify.css';
+import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndSidebar from '@components/templates/andSidebar';
 
 const queryClient = new QueryClient({
@@ -56,7 +57,9 @@ function MyApp<P>({
 								<Component {...pageProps} />
 							) : (
 								<AndSidebar>
-									<Component {...pageProps} />
+									<AndMiniplayer>
+										<Component {...pageProps} />
+									</AndMiniplayer>
 								</AndSidebar>
 							)}
 						</Hydrate>
@@ -64,12 +67,6 @@ function MyApp<P>({
 				</QueryClientProvider>
 			</React.StrictMode>
 			<ToastContainer />
-			{/* Go to www.addthis.com/dashboard to customize your tools */}
-			{/*<script*/}
-			{/*	type="text/javascript"*/}
-			{/*	src="//s7.addthis.com/js/300/addthis_widget.js#pubid=audioverse"*/}
-			{/*	defer*/}
-			{/*/>*/}
 		</>
 	);
 }

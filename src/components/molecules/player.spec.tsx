@@ -1,14 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import ReactTestUtils from 'react-dom/test-utils';
-import videojs from 'video.js';
 
 import Player from '@components/molecules/player';
 import { PlayerFragment } from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/helpers';
+import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
 
 jest.mock('video.js');
-
-const mockVideojs = (videojs as unknown) as jest.Mock;
 
 const recording: Partial<PlayerFragment> = {
 	playerAudioFiles: [
@@ -25,33 +22,6 @@ const renderComponent = buildRenderer(Player, {
 		recording,
 	},
 });
-
-interface SetPlayerMockOptions {
-	isPaused?: boolean;
-	time?: number;
-	duration?: number;
-}
-
-function setPlayerMock(options: SetPlayerMockOptions = {}) {
-	let { isPaused = true, time = 50 } = options;
-	const { duration = 100 } = options;
-
-	const mockPlayer = {
-		play: jest.fn(() => (isPaused = false)),
-		pause: jest.fn(() => (isPaused = true)),
-		paused: jest.fn(() => isPaused),
-		currentTime: jest.fn((newTime: number | null = null) => {
-			if (newTime !== null) time = newTime;
-			return time;
-		}),
-		duration: jest.fn(() => duration),
-		src: jest.fn(),
-	};
-
-	mockVideojs.mockReturnValue(mockPlayer);
-
-	return mockPlayer;
-}
 
 describe('player', () => {
 	beforeEach(() => setPlayerMock());

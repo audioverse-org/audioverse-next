@@ -5755,6 +5755,11 @@ export type TestimoniesFragment = (
   & Pick<Testimony, 'id' | 'body' | 'author'>
 );
 
+export type AndMiniplayerFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'title'>
+);
+
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
   language: Language;
 }>;
@@ -7423,6 +7428,11 @@ export const TestimoniesFragmentDoc = `
   id
   body
   author
+}
+    `;
+export const AndMiniplayerFragmentDoc = `
+    fragment andMiniplayer on Recording {
+  title
 }
     `;
 export const ProfileFragmentDoc = `
@@ -9465,6 +9475,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetPlaylistButtonDataQuery> {
 								return fetchApi(GetPlaylistButtonDataDocument, { variables });
 							}
+
 
 
 
