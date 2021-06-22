@@ -5758,6 +5758,16 @@ export type TestimoniesFragment = (
 export type AndMiniplayerFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'title'>
+  & { playerAudioFiles: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
+  )>, playerVideoFiles: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )>, videoStreams: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
+  )> }
 );
 
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
@@ -7433,6 +7443,21 @@ export const TestimoniesFragmentDoc = `
 export const AndMiniplayerFragmentDoc = `
     fragment andMiniplayer on Recording {
   title
+  playerAudioFiles: audioFiles {
+    url
+    filesize
+    mimeType
+  }
+  playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+    url
+    filesize
+    mimeType
+  }
+  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+    url
+    filesize
+    mimeType
+  }
 }
     `;
 export const ProfileFragmentDoc = `

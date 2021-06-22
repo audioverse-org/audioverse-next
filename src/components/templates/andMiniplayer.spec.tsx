@@ -44,7 +44,25 @@ describe('miniplayer template', () => {
 
 		await renderComponent({
 			props: {
-				children: <ContextUser func={(c) => c.play()} />,
+				children: (
+					<ContextUser
+						func={(c) => {
+							c.load({
+								title: 'the_recording_title',
+								playerVideoFiles: [
+									{
+										url: 'the_video_url',
+										filesize: 'the_video_size',
+										mimeType: 'the_video_type',
+									},
+								],
+								playerAudioFiles: [],
+								videoStreams: [],
+							});
+							c.play();
+						}}
+					/>
+				),
 			},
 		});
 
@@ -57,7 +75,7 @@ describe('miniplayer template', () => {
 				children: (
 					<ContextUser
 						func={(c) => {
-							c.load({ title: 'the_recording_title' });
+							c.load({ title: 'the_recording_title' } as any);
 						}}
 					/>
 				),
@@ -70,3 +88,5 @@ describe('miniplayer template', () => {
 
 // TODO:
 // does not show miniplayer if no recording loaded
+// displays recording in portal if matching portal provided
+// start using react-router so that media can continue playing while navigating

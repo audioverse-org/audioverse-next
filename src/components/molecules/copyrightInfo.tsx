@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import styles from './copyrightInfo.module.scss';
 
 import { CopyrightInfoFragment } from '@lib/generated/graphql';
 
@@ -20,6 +21,7 @@ export default function CopyrightInfo({
 			{/* TODO: Correct copyright image dimensions */}
 			{copyrightImageUrl && (
 				<img
+					className={styles.image}
 					alt={'copyright'}
 					src={copyrightImageUrl}
 					width={100}

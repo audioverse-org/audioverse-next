@@ -56,11 +56,11 @@ function MyApp<P>({
 							{disableSidebar ? (
 								<Component {...pageProps} />
 							) : (
-								<AndSidebar>
-									<AndMiniplayer>
+								<AndMiniplayer>
+									<AndSidebar>
 										<Component {...pageProps} />
-									</AndMiniplayer>
-								</AndSidebar>
+									</AndSidebar>
+								</AndMiniplayer>
 							)}
 						</Hydrate>
 					</ThemeProvider>

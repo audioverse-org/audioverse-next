@@ -1,7 +1,9 @@
 import userEvent from '@testing-library/user-event';
+import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import Player from '@components/molecules/player';
+import Player, { PlayerProps } from '@components/molecules/player';
+import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
 
@@ -17,11 +19,20 @@ const recording: Partial<PlayerFragment> = {
 	],
 };
 
-const renderComponent = buildRenderer(Player, {
-	defaultProps: {
-		recording,
+const renderComponent = buildRenderer(
+	(props: PlayerProps) => {
+		return (
+			<AndMiniplayer>
+				<Player {...props} />
+			</AndMiniplayer>
+		);
 	},
-});
+	{
+		defaultProps: {
+			recording,
+		},
+	}
+);
 
 describe('player', () => {
 	beforeEach(() => setPlayerMock());
@@ -51,7 +62,7 @@ describe('player', () => {
 		expect(getByLabelText('pause')).toBeInTheDocument();
 	});
 
-	it('toggles back to button', async () => {
+	it('toggles back to play button', async () => {
 		const { getByLabelText } = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));

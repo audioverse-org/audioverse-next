@@ -1,14 +1,22 @@
 import { waitFor } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import React from 'react';
 import videojs from 'video.js';
 
+import AndMiniplayer from '@components/templates/andMiniplayer';
+import { SermonDetailProps } from '@containers/sermon/detail';
 import {
 	GetSermonDetailDataDocument,
 	getSermonDetailStaticPaths,
 	GetSermonDetailStaticPathsDocument,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	loadRouter,
+	mockedFetchApi,
+	renderWithIntl,
+} from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -49,10 +57,20 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		.mockResolvedValue({ sermon });
 }
 
-async function renderPage() {
-	const { props } = await getStaticProps({ params: { id: 'the_sermon_id' } });
-	return renderWithIntl(SermonDetail, props);
-}
+const renderPage = buildStaticRenderer(
+	(props: SermonDetailProps) => {
+		return (
+			<AndMiniplayer>
+				<SermonDetail {...props} />
+			</AndMiniplayer>
+		);
+	},
+	getStaticProps,
+	{
+		language: 'en',
+		id: 'the_sermon_id',
+	}
+);
 
 describe('sermon detail page', () => {
 	beforeEach(() => {
@@ -170,19 +188,6 @@ describe('sermon detail page', () => {
 		const options = call[1];
 
 		expect(options.controls).toBeTruthy();
-	});
-
-	it('makes fluid player', async () => {
-		loadSermonDetailData({
-			playerAudioFiles: ['the_source'],
-		});
-
-		await renderPage();
-
-		const call = ((videojs as any) as jest.Mock).mock.calls[0];
-		const options = call[1];
-
-		expect(options.fluid).toBeTruthy();
 	});
 
 	it('sets poster', async () => {
@@ -439,8 +444,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('uses language base route in series link', async () => {
-		loadRouter({ query: { language: 'es' } });
-
 		loadSermonDetailData({
 			sequence: {
 				id: 'series_id',
@@ -448,7 +451,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		const { getByText } = await renderPage({
+			params: {
+				language: 'es',
+			},
+		});
 
 		const link = getByText('series_title').parentElement as HTMLLinkElement;
 

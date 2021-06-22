@@ -1,7 +1,10 @@
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import React from 'react';
 import videojs from 'video.js';
 
+import AndMiniplayer from '@components/templates/andMiniplayer';
+import { AudiobookProps } from '@containers/audiobook/audiobook';
 import {
 	GetAudiobookDetailPageDataDocument,
 	GetAudiobookDetailPageDataQuery,
@@ -17,10 +20,20 @@ import Audiobook, {
 jest.mock('video.js');
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildStaticRenderer(Audiobook, getStaticProps, {
-	language: 'en',
-	id: 'the_book_id',
-});
+const renderPage = buildStaticRenderer(
+	(props: AudiobookProps) => {
+		return (
+			<AndMiniplayer>
+				<Audiobook {...props} />
+			</AndMiniplayer>
+		);
+	},
+	getStaticProps,
+	{
+		language: 'en',
+		id: 'the_book_id',
+	}
+);
 
 function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 	when(mockedFetchApi)
@@ -118,7 +131,7 @@ describe('audiobook detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('first_recording_title')).toBeInTheDocument();
+		expect(getByText('second_recording_title')).toBeInTheDocument();
 	});
 
 	it('switches recording on click', async () => {
