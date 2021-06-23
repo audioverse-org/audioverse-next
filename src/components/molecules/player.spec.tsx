@@ -1,13 +1,13 @@
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
+import videojs from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
-import videojs from 'video.js';
-import { waitFor } from '@testing-library/react';
 
 jest.mock('video.js');
 

@@ -8,12 +8,12 @@ import {
 	PlaybackContextType,
 } from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
+import hasVideo from '@lib/hasVideo';
 
 import BackIcon from '../../../public/img/icon-nudge-left.svg';
 import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 
 import styles from './player.module.scss';
-import hasVideo from '@lib/hasVideo';
 
 export interface PlayerProps {
 	recording: PlayerFragment;

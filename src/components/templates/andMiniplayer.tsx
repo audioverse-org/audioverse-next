@@ -2,9 +2,9 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
-import hasVideo from '@lib/hasVideo';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js

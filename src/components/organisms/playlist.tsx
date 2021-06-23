@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { PlaybackContext } from '@components/templates/andMiniplayer';
 import { PlaylistFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
-import { PlaybackContext } from '@components/templates/andMiniplayer';
 
 type Recording<R> = R & PlaylistFragment;
 

@@ -7,7 +7,7 @@ fragment writeFeedFile on Recording {
 		url
 		filesize
 	}
-	feedVideoFiles:videoFiles {
+	feedVideoFiles: videoFiles {
 		url
 		filesize
 	}
