@@ -1,8 +1,9 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styles from './copyrightInfo.module.scss';
 
 import { CopyrightInfoFragment } from '@lib/generated/graphql';
+
+import styles from './copyrightInfo.module.scss';
 
 interface CopyrightInfoProps {
 	recording: CopyrightInfoFragment;

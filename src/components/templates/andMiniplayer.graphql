@@ -1,11 +1,12 @@
 fragment andMiniplayer on Recording {
+	id
 	title
-	playerAudioFiles: audioFiles {
+	audioFiles {
 		url
 		filesize
 		mimeType
 	}
-	playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
 		url
 		filesize
 		mimeType

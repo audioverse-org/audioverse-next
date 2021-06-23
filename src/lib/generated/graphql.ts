@@ -2582,6 +2582,7 @@ export type Query = {
   storySeasons: SequenceConnection;
   tags: TagConnection;
   testimonies: TestimonyConnection;
+  testimony: Maybe<Testimony>;
   user: Maybe<User>;
   users: UserConnection;
   websites: WebsiteConnection;
@@ -3358,6 +3359,11 @@ export type QueryTestimoniesArgs = {
   language: Language;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<TestimoniesOrder>>;
+};
+
+
+export type QueryTestimonyArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -5683,17 +5689,8 @@ export type SponsorInfoFragment = (
 
 export type PlayerFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'title'>
-  & { playerAudioFiles: Array<(
-    { __typename?: 'AudioFile' }
-    & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
-  )>, playerVideoFiles: Array<(
-    { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
-  )>, videoStreams: Array<(
-    { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
-  )> }
+  & Pick<Recording, 'id' | 'title'>
+  & AndMiniplayerFragment
 );
 
 export type PlaylistFragment = (
@@ -5703,6 +5700,7 @@ export type PlaylistFragment = (
     { __typename?: 'AudioFile' }
     & Pick<AudioFile, 'url' | 'filesize'>
   )> }
+  & AndMiniplayerFragment
 );
 
 export type RecordingFragment = (
@@ -5757,11 +5755,11 @@ export type TestimoniesFragment = (
 
 export type AndMiniplayerFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'title'>
-  & { playerAudioFiles: Array<(
+  & Pick<Recording, 'id' | 'title'>
+  & { audioFiles: Array<(
     { __typename?: 'AudioFile' }
     & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
-  )>, playerVideoFiles: Array<(
+  )>, videoFiles: Array<(
     { __typename?: 'VideoFile' }
     & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
   )>, videoStreams: Array<(
@@ -7292,7 +7290,7 @@ export type WriteFeedFileFragment = (
   & { audioFiles: Array<(
     { __typename?: 'AudioFile' }
     & Pick<AudioFile, 'url' | 'filesize'>
-  )>, videoFiles: Array<(
+  )>, feedVideoFiles: Array<(
     { __typename?: 'VideoFile' }
     & Pick<VideoFile, 'url' | 'filesize'>
   )> }
@@ -7440,26 +7438,6 @@ export const TestimoniesFragmentDoc = `
   author
 }
     `;
-export const AndMiniplayerFragmentDoc = `
-    fragment andMiniplayer on Recording {
-  title
-  playerAudioFiles: audioFiles {
-    url
-    filesize
-    mimeType
-  }
-  playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    url
-    filesize
-    mimeType
-  }
-  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-    url
-    filesize
-    mimeType
-  }
-}
-    `;
 export const ProfileFragmentDoc = `
     fragment profile on User {
   email
@@ -7473,31 +7451,16 @@ export const ProfileFragmentDoc = `
   country
 }
     `;
-export const PlaylistFragmentDoc = `
-    fragment playlist on Recording {
+export const AndMiniplayerFragmentDoc = `
+    fragment andMiniplayer on Recording {
   id
   title
-  audioDownloads: audioFiles(allowedContainers: MP3) {
-    url
-    filesize
-  }
-}
-    `;
-export const SponsorInfoFragmentDoc = `
-    fragment sponsorInfo on Sponsor {
-  id
-  title
-}
-    `;
-export const PlayerFragmentDoc = `
-    fragment player on Recording {
-  title
-  playerAudioFiles: audioFiles {
+  audioFiles {
     url
     filesize
     mimeType
   }
-  playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
     url
     filesize
     mimeType
@@ -7509,6 +7472,30 @@ export const PlayerFragmentDoc = `
   }
 }
     `;
+export const PlaylistFragmentDoc = `
+    fragment playlist on Recording {
+  id
+  title
+  audioDownloads: audioFiles(allowedContainers: MP3) {
+    url
+    filesize
+  }
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
+export const SponsorInfoFragmentDoc = `
+    fragment sponsorInfo on Sponsor {
+  id
+  title
+}
+    `;
+export const PlayerFragmentDoc = `
+    fragment player on Recording {
+  id
+  title
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -7580,7 +7567,7 @@ export const WriteFeedFileFragmentDoc = `
     url
     filesize
   }
-  videoFiles {
+  feedVideoFiles: videoFiles {
     url
     filesize
   }

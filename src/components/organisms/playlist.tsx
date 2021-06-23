@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlaylistFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
+import { PlaybackContext } from '@components/templates/andMiniplayer';
 
 type Recording<R> = R & PlaylistFragment;
 
@@ -17,6 +18,7 @@ export default function Playlist<R>({
 	recordings = [],
 	initial,
 }: PlaylistProps<R>): JSX.Element {
+	const playback = useContext(PlaybackContext);
 	const getInitialId = () => {
 		const ids = recordings.map((r) => r.id);
 		return initial && ids.includes(initial) ? initial : recordings[0]?.id;
@@ -46,7 +48,14 @@ export default function Playlist<R>({
 					<ul>
 						{recordings.map((r) => (
 							<li key={r.id}>
-								<button onClick={() => setId(r.id)}>{r.title}</button>
+								<button
+									onClick={() => {
+										setId(r.id);
+										playback.load(r);
+									}}
+								>
+									{r.title}
+								</button>
 								{r.audioDownloads?.map((d) => (
 									<a
 										key={d.url}

@@ -22,7 +22,7 @@ function Book({ data }: BookProps): JSX.Element {
 
 	// TODO: Remove this transformation when the API returns Recording type
 	const recording: Partial<PlayerFragment> = {
-		playerAudioFiles: [
+		audioFiles: [
 			{
 				url: chapter?.url,
 				mimeType: 'audio/mpeg',

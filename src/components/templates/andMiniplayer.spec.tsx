@@ -48,15 +48,16 @@ describe('miniplayer template', () => {
 					<ContextUser
 						func={(c) => {
 							c.load({
+								id: 'the_recording_id',
 								title: 'the_recording_title',
-								playerVideoFiles: [
+								videoFiles: [
 									{
 										url: 'the_video_url',
 										filesize: 'the_video_size',
 										mimeType: 'the_video_type',
 									},
 								],
-								playerAudioFiles: [],
+								audioFiles: [],
 								videoStreams: [],
 							});
 							c.play();

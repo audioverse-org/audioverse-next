@@ -47,8 +47,8 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		persons: [],
-		playerAudioFiles: [],
-		playerVideoFiles: [],
+		audioFiles: [],
+		videoFiles: [],
 		...sermon,
 	};
 
@@ -169,45 +169,55 @@ describe('sermon detail page', () => {
 
 	it('includes player', async () => {
 		loadSermonDetailData({
-			playerAudioFiles: ['the_source'],
+			audioFiles: ['the_source'],
 		});
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('play'));
 
 		expect(videojs).toBeCalled();
 	});
 
 	it('enables controls', async () => {
 		loadSermonDetailData({
-			playerAudioFiles: ['the_source'],
+			audioFiles: ['the_source'],
 		});
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
 
-		const call = ((videojs as any) as jest.Mock).mock.calls[0];
-		const options = call[1];
+		userEvent.click(getByLabelText('play'));
 
-		expect(options.controls).toBeTruthy();
+		expect(videojs).toBeCalledWith(
+			expect.anything(),
+			expect.objectContaining({
+				controls: true,
+			})
+		);
 	});
 
 	it('sets poster', async () => {
 		loadSermonDetailData({
-			playerAudioFiles: ['the_source'],
+			audioFiles: ['the_source'],
 		});
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
 
-		const call = ((videojs as any) as jest.Mock).mock.calls[0];
-		const options = call[1];
+		userEvent.click(getByLabelText('play'));
 
-		expect(options.poster).toBeDefined();
+		expect(videojs).toBeCalledWith(
+			expect.anything(),
+			expect.objectContaining({
+				poster: expect.anything(),
+			})
+		);
 	});
 
 	it('toggles sources', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
@@ -234,12 +244,16 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			playerVideoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 			videoStreams: [],
 		});
 
-		await renderPage();
+		const { getByAltText } = await renderPage();
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
 
 		const calls = ((videojs as any) as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
@@ -260,12 +274,14 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
-			playerVideoFiles: [],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			videoFiles: [],
 			videoStreams: [],
 		});
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('play'));
 
 		const calls = ((videojs as any) as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
@@ -286,7 +302,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [],
-			playerAudioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 		});
 
 		const { queryByText } = await renderPage();

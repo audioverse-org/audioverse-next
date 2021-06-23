@@ -41,12 +41,14 @@ const Header = (): JSX.Element => {
 					</a>
 				</li>
 				<li>
-					<Icon icon={'bible'} size={iconSize} />{' '}
-					<FormattedMessage
-						id={`header__naveItemBible`}
-						defaultMessage="Bible"
-						description={`Header nav link name: Bible`}
-					/>
+					<a href={`/${languageRoute}/bibles`}>
+						<Icon icon={'bible'} size={iconSize} />{' '}
+						<FormattedMessage
+							id={`header__naveItemBible`}
+							defaultMessage="Bible"
+							description={`Header nav link name: Bible`}
+						/>
+					</a>
 				</li>
 				<li>
 					<Icon icon={'collections'} size={iconSize} />{' '}

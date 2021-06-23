@@ -214,7 +214,9 @@ describe('Bible book detail page', () => {
 	it('includes player', async () => {
 		loadPageData();
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('play'));
 
 		expect(videojs).toBeCalled();
 	});

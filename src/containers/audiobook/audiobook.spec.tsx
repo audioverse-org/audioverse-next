@@ -56,7 +56,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 							sponsor: {
 								title: 'first_recording_sponsor_title',
 							},
-							playerAudioFiles: [
+							audioFiles: [
 								{
 									url: 'first_recording_url',
 								},
@@ -71,7 +71,7 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 						{
 							id: 'second_recording_id',
 							title: 'second_recording_title',
-							playerAudioFiles: [
+							audioFiles: [
 								{
 									url: 'second_recording_url',
 								},
@@ -98,7 +98,9 @@ describe('audiobook detail page', () => {
 	it('loads recording src', async () => {
 		loadData();
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('play'));
 
 		expect(videojs).toBeCalledWith(
 			expect.anything(),

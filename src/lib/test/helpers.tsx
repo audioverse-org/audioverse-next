@@ -211,6 +211,7 @@ interface SetPlayerMockOptions {
 	isPaused?: boolean;
 	time?: number;
 	duration?: number;
+	functions?: Partial<videojs.Player>;
 }
 
 export const mockVideojs = (videojs as unknown) as jest.Mock;
@@ -219,7 +220,7 @@ export function setPlayerMock(
 	options: SetPlayerMockOptions = {}
 ): videojs.Player {
 	let { isPaused = true, time = 50 } = options;
-	const { duration = 100 } = options;
+	const { duration = 100, functions = {} } = options;
 
 	const mockPlayer: Partial<videojs.Player> = {
 		play: jest.fn(async () => {
@@ -236,6 +237,7 @@ export function setPlayerMock(
 		}),
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
+		...functions,
 	};
 
 	mockVideojs.mockReturnValue(mockPlayer);

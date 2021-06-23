@@ -1,18 +1,5 @@
 fragment player on Recording {
+	id
 	title
-	playerAudioFiles: audioFiles {
-		url
-		filesize
-		mimeType
-	}
-	playerVideoFiles: videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-		url
-		filesize
-		mimeType
-	}
-	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-		url
-		filesize
-		mimeType
-	}
+	...andMiniplayer
 }

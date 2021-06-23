@@ -4,6 +4,14 @@ import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 
 import styles from './andMiniplayer.module.scss';
+import hasVideo from '@lib/hasVideo';
+
+// Source:
+// https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
+
+// If this solution becomes unviable, for instance, due to needing to
+// update more props than just sources, this alternative approach may work:
+// https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
 interface Playable {
 	url: string;
@@ -16,17 +24,13 @@ const getFiles = (
 ): Playable[] => {
 	if (!recording) return [];
 
-	const {
-		videoStreams = [],
-		playerVideoFiles = [],
-		playerAudioFiles = [],
-	} = recording;
+	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
 
-	if (prefersAudio) return playerAudioFiles;
+	if (prefersAudio) return audioFiles;
 	if (videoStreams.length > 0) return videoStreams;
-	if (playerVideoFiles.length > 0) return playerVideoFiles;
+	if (videoFiles.length > 0) return videoFiles;
 
-	return playerAudioFiles;
+	return audioFiles;
 };
 
 const getSources = (
@@ -41,12 +45,6 @@ const getSources = (
 	}));
 };
 
-const hasVideo = (recording: AndMiniplayerFragment) => {
-	const { videoStreams = [], playerVideoFiles = [] } = recording;
-
-	return videoStreams.length > 0 || playerVideoFiles.length > 0;
-};
-
 export type PlaybackContextType = {
 	play: () => void;
 	pause: () => void;
@@ -56,10 +54,14 @@ export type PlaybackContextType = {
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	getProgress: () => number;
 	setProgress: (p: number) => void;
-	load: (recording: AndMiniplayerFragment) => void;
+	load: (
+		recording: AndMiniplayerFragment,
+		onLoad?: (c: PlaybackContextType) => void
+	) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	isShowingVideo: () => boolean;
+	getRecording: () => AndMiniplayerFragment | undefined;
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
@@ -75,6 +77,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
+	getRecording: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -89,10 +92,12 @@ export default function AndMiniplayer({
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [videoEl, setVideoEl] = useState();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [time, setTime] = useState<number | undefined>();
+	const [time, setTime] = useState<number>();
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
+	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
+	const [fingerprint, setFingerprint] = useState<string>();
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -126,6 +131,7 @@ export default function AndMiniplayer({
 		}
 
 		setIsPaused(true);
+		setFingerprint(JSON.stringify(sources));
 	}, [hasSources, sources, videoEl]);
 
 	const playbackContext: PlaybackContextType = {
@@ -143,20 +149,33 @@ export default function AndMiniplayer({
 			setTime(t);
 			player?.currentTime(t);
 		},
-		setPrefersAudio,
+		setPrefersAudio: (prefersAudio: boolean) => {
+			if (!recording) return;
+			setPrefersAudio(prefersAudio);
+		},
 		getProgress: () => (time && duration ? time / duration : 0),
 		setProgress: (p: number) => {
 			if (!player) return;
 			const newTime = p * player.duration();
 			playbackContext.setTime(newTime);
 		},
-		load: (recording: AndMiniplayerFragment) => {
+		load: (
+			recording: AndMiniplayerFragment,
+			onLoad: ((c: PlaybackContextType) => void) | undefined = undefined
+		) => {
+			setOnLoad(() => onLoad);
 			setRecording(recording);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideo,
+		getRecording: () => recording,
 	};
+
+	useEffect(() => {
+		onLoad && onLoad(playbackContext);
+		setOnLoad(undefined);
+	}, [fingerprint]);
 
 	return (
 		<div className={styles.base}>

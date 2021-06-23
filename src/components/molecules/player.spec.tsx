@@ -6,11 +6,14 @@ import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
+import videojs from 'video.js';
+import { waitFor } from '@testing-library/react';
 
 jest.mock('video.js');
 
 const recording: Partial<PlayerFragment> = {
-	playerAudioFiles: [
+	title: 'the_sermon_title',
+	audioFiles: [
 		{
 			url: 'the_source_src',
 			mimeType: 'the_source_type',
@@ -84,7 +87,7 @@ describe('player', () => {
 			},
 		} as any);
 
-		expect(mockPlayer.currentTime).toBeCalledWith(50);
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(50));
 	});
 
 	it('treats range output as percentage', async () => {
@@ -92,15 +95,13 @@ describe('player', () => {
 
 		const { getByLabelText } = await renderComponent();
 
-		const input = getByLabelText('progress');
-
-		ReactTestUtils.Simulate.change(input, {
+		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
 			target: {
 				value: 50,
 			},
 		} as any);
 
-		expect(mockPlayer.currentTime).toBeCalledWith(150);
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
 
 	it('updates scrubber on time update', async () => {
@@ -108,13 +109,15 @@ describe('player', () => {
 
 		const { getByTestId, getByLabelText } = await renderComponent();
 
-		const target = getByTestId('video-element');
-
 		player.currentTime(75);
 
-		ReactTestUtils.Simulate.timeUpdate(target, {} as any);
+		userEvent.click(getByLabelText('play'));
 
-		expect(getByLabelText('progress')).toHaveValue('25');
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
+
+		await waitFor(() => expect(getByLabelText('progress')).toHaveValue('25'));
 	});
 
 	it('updates progress on scrub', async () => {
@@ -130,7 +133,7 @@ describe('player', () => {
 			},
 		} as any);
 
-		expect(input).toHaveValue('50');
+		await waitFor(() => expect(input).toHaveValue('50'));
 	});
 
 	it('does not reload player on play', async () => {
@@ -160,7 +163,9 @@ describe('player', () => {
 
 		userEvent.click(getByLabelText('forward 15 seconds'));
 
-		expect(player.currentTime).toBeCalledWith(65);
+		await waitFor(() => {
+			expect(player.currentTime).toBeCalledWith(65);
+		});
 	});
 
 	it('hides player if no video files', async () => {
@@ -173,7 +178,7 @@ describe('player', () => {
 		const { queryByTestId } = await renderComponent({
 			props: {
 				recording: {
-					playerVideoFiles: [
+					videoFiles: [
 						{
 							url: 'the_source_src',
 							mimeType: 'the_source_type',
@@ -191,14 +196,14 @@ describe('player', () => {
 		const { getByLabelText, getByText } = await renderComponent({
 			props: {
 				recording: {
-					playerAudioFiles: [
+					audioFiles: [
 						{
 							url: 'the_source_src',
 							mimeType: 'the_source_type',
 							filesize: 'the_source_size',
 						},
 					],
-					playerVideoFiles: [
+					videoFiles: [
 						{
 							url: 'the_source_src',
 							mimeType: 'the_source_type',
@@ -221,14 +226,14 @@ describe('player', () => {
 		const { getByText } = await renderComponent({
 			props: {
 				recording: {
-					playerAudioFiles: [
+					audioFiles: [
 						{
 							url: 'the_source_src',
 							mimeType: 'the_source_type',
 							filesize: 'the_source_size',
 						},
 					],
-					playerVideoFiles: [
+					videoFiles: [
 						{
 							url: 'the_source_src',
 							mimeType: 'the_source_type',
@@ -242,7 +247,58 @@ describe('player', () => {
 		expect(getByText('Audio')).toBeInTheDocument();
 		expect(getByText('Video')).toBeInTheDocument();
 	});
+
+	it('does not load recording if UI not clicked', async () => {
+		await renderComponent();
+
+		expect(videojs).not.toBeCalled();
+	});
+
+	it('handles scrubber update after initial recording load', async () => {
+		const mockPlayer = setPlayerMock({ duration: 300 });
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
+			target: {
+				value: 50,
+			},
+		} as any);
+
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
+	});
+
+	it('plays video on poster click', async () => {
+		const mockPlayer = setPlayerMock();
+
+		const { getByAltText } = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		expect(mockPlayer.play).toBeCalled();
+	});
 });
 
 // TODO:
+// Waits until detail UI clicked before loading recording into miniplayer
+// Does not re-load recording after first load
 // Replaces play/pause with loading indicator when player in loading state

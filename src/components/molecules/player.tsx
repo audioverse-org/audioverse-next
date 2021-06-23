@@ -1,68 +1,89 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import React, { CSSProperties, useContext, useEffect } from 'react';
+import React, { CSSProperties, useContext } from 'react';
 import { useIntl } from 'react-intl';
 
-import { PlaybackContext } from '@components/templates/andMiniplayer';
+import {
+	PlaybackContext,
+	PlaybackContextType,
+} from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 
 import BackIcon from '../../../public/img/icon-nudge-left.svg';
 import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 
 import styles from './player.module.scss';
-
-// Source:
-// https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
-
-// If this solution becomes unviable, for instance, due to needing to
-// update more props than just sources, this alternative approach may work:
-// https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
+import hasVideo from '@lib/hasVideo';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
 }
 
 const Player = ({ recording }: PlayerProps): JSX.Element => {
+	const intl = useIntl();
 	const playback = useContext(PlaybackContext);
 	const progress = playback.getProgress();
+	const loadedRecording = playback.getRecording();
+	const isLoaded = loadedRecording && loadedRecording.id === recording.id;
+	const shouldShowPoster =
+		(!isLoaded && hasVideo(recording)) || playback.isShowingVideo();
 
-	useEffect(() => {
-		playback.load(recording);
-	}, [recording]);
+	function andLoad(func: (c: PlaybackContextType, ...vars: any[]) => void) {
+		return (...vars: any[]) => {
+			// TODO: handle recording mismatch
+			if (playback.getRecording()) {
+				func(playback, ...vars);
+				return;
+			}
+
+			playback.load(recording, (c: PlaybackContextType) => {
+				func(c, ...vars);
+			});
+		};
+	}
 
 	return (
 		<div className={playback.isShowingVideo() ? styles.video : styles.audio}>
-			{playback.hasVideo() && (
+			{hasVideo(recording) && (
 				<>
-					<button onClick={() => playback.setPrefersAudio(true)}>Audio</button>
-					<button onClick={() => playback.setPrefersAudio(false)}>Video</button>
+					<button onClick={andLoad((c) => c.setPrefersAudio(true))}>
+						Audio
+					</button>
+					<button onClick={andLoad((c) => c.setPrefersAudio(false))}>
+						Video
+					</button>
 				</>
 			)}
-			{!playback.isShowingVideo() && (
+			{shouldShowPoster ? (
+				<button onClick={andLoad((c) => c.play())}>
+					<img
+						src="/img/poster.jpg"
+						alt={recording.title}
+						width={1500}
+						height={500}
+					/>
+				</button>
+			) : (
 				<div className={styles.controls}>
 					{playback.paused() ? (
 						<button
-							aria-label={useIntl().formatMessage({
+							aria-label={intl.formatMessage({
 								id: 'player__playButtonLabel',
 								defaultMessage: 'play',
 								description: 'player play button label',
 							})}
-							onClick={() => {
-								playback.play();
-							}}
+							onClick={andLoad((c) => c.play())}
 						>
 							<PlayArrowIcon />
 						</button>
 					) : (
 						<button
-							aria-label={useIntl().formatMessage({
+							aria-label={intl.formatMessage({
 								id: 'player__pauseButtonLabel',
 								defaultMessage: 'pause',
 								description: 'player pause button label',
 							})}
-							onClick={() => {
-								playback.pause();
-							}}
+							onClick={() => playback.pause()}
 						>
 							<PauseIcon />
 						</button>
@@ -73,44 +94,42 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					>
 						<input
 							type="range"
-							aria-label={useIntl().formatMessage({
+							aria-label={intl.formatMessage({
 								id: 'player__progressLabel',
 								defaultMessage: 'progress',
 								description: 'player progress label',
 							})}
 							value={progress * 100}
-							onChange={(e) => {
+							onChange={andLoad((c, e) => {
 								const percent = parseInt(e.target.value) / 100;
-								playback.setProgress(percent);
-							}}
+								c.setProgress(percent);
+							})}
 						/>
 					</div>
 				</div>
 			)}
 			<div className={styles.skip}>
 				<button
-					aria-label={useIntl().formatMessage({
+					aria-label={intl.formatMessage({
 						id: 'player__nudgeBack',
 						defaultMessage: 'back 15 seconds',
 						description: 'player nudge-back label',
 					})}
-					onClick={() => {
-						const time = playback.getTime();
-						playback.setTime(time - 15);
-					}}
+					onClick={andLoad((c) => {
+						c.setTime(c.getTime() - 15);
+					})}
 				>
 					<BackIcon />
 				</button>
 				<button
-					aria-label={useIntl().formatMessage({
+					aria-label={intl.formatMessage({
 						id: 'player__nudgeForward',
 						defaultMessage: 'forward 15 seconds',
 						description: 'player nudge-forward label',
 					})}
-					onClick={() => {
-						const time = playback.getTime();
-						playback.setTime(time + 15);
-					}}
+					onClick={andLoad((c) => {
+						c.setTime(c.getTime() + 15);
+					})}
 				>
 					<ForwardIcon />
 				</button>
