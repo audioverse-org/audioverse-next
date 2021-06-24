@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -57,14 +58,11 @@ export default function Playlist<R>({
 									{r.title}
 								</button>
 								{r.audioDownloads?.map((d) => (
-									<a
-										key={d.url}
-										href={d.url}
-										target={'_blank'}
-										rel={'noreferrer noopener'}
-									>
-										{readableBytes(d.filesize)}
-									</a>
+									<Link key={d.url} href={d.url}>
+										<a target={'_blank'} rel={'noreferrer noopener'}>
+											{readableBytes(d.filesize)}
+										</a>
+									</Link>
 								))}
 							</li>
 						))}

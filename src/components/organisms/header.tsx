@@ -1,5 +1,6 @@
 import { Button } from '@material-ui/core';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -18,9 +19,16 @@ const Header = (): JSX.Element => {
 	return (
 		<header className={styles.header}>
 			<h1 className={styles.logo}>
-				<a href={`/${languageRoute}`}>
-					<Image src="/img/logo.svg" alt="AudioVerse" width={161} height={23} />
-				</a>
+				<Link href={`/${languageRoute}`}>
+					<a>
+						<Image
+							src="/img/logo.svg"
+							alt="AudioVerse"
+							width={161}
+							height={23}
+						/>
+					</a>
+				</Link>
 			</h1>
 			<ul>
 				<li>
@@ -32,24 +40,28 @@ const Header = (): JSX.Element => {
 					/>
 				</li>
 				<li>
-					<a href={`/${languageRoute}/discover`}>
-						<Icon icon={'search'} size={iconSize} />{' '}
-						<FormattedMessage
-							id={`header__navItemDiscover`}
-							defaultMessage="Discover"
-							description={`Header nav link name: Discover`}
-						/>
-					</a>
+					<Link href={`/${languageRoute}/discover`}>
+						<a>
+							<Icon icon={'search'} size={iconSize} />{' '}
+							<FormattedMessage
+								id={`header__navItemDiscover`}
+								defaultMessage="Discover"
+								description={`Header nav link name: Discover`}
+							/>
+						</a>
+					</Link>
 				</li>
 				<li>
-					<a href={`/${languageRoute}/bibles`}>
-						<Icon icon={'bible'} size={iconSize} />{' '}
-						<FormattedMessage
-							id={`header__naveItemBible`}
-							defaultMessage="Bible"
-							description={`Header nav link name: Bible`}
-						/>
-					</a>
+					<Link href={`/${languageRoute}/bibles`}>
+						<a>
+							<Icon icon={'bible'} size={iconSize} />{' '}
+							<FormattedMessage
+								id={`header__naveItemBible`}
+								defaultMessage="Bible"
+								description={`Header nav link name: Bible`}
+							/>
+						</a>
+					</Link>
 				</li>
 				<li>
 					<Icon icon={'collections'} size={iconSize} />{' '}

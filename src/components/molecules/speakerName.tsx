@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { toast } from 'react-toastify';
@@ -39,15 +40,16 @@ export default function SpeakerName({
 
 	return (
 		<>
-			<a
-				className={styles.link}
-				href={makePersonRoute(lang, id)}
-				data-tip={true}
-				data-for={`person-${id}-speakerTip`}
-			>
-				{img}
-				{name}
-			</a>
+			<Link href={makePersonRoute(lang, id)}>
+				<a
+					className={styles.link}
+					data-tip={true}
+					data-for={`person-${id}-speakerTip`}
+				>
+					{img}
+					{name}
+				</a>
+			</Link>
 			<ReactTooltip
 				id={`person-${id}-speakerTip`}
 				uuid={`person-${id}-tooltipUuid`}
@@ -61,14 +63,15 @@ export default function SpeakerName({
 				<p dangerouslySetInnerHTML={{ __html: summary }} />
 				{website && (
 					<p>
-						<a
-							className={styles.speakerWebsite}
-							href={website}
-							target="_blank"
-							rel="nofollow noreferrer"
-						>
-							{website}
-						</a>
+						<Link href={website}>
+							<a
+								className={styles.speakerWebsite}
+								target="_blank"
+								rel="nofollow noreferrer"
+							>
+								{website}
+							</a>
+						</Link>
 					</p>
 				)}
 				<button

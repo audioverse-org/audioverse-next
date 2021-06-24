@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -146,7 +147,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							{tags.map((t) => (
 								<li key={t.tag.id}>
 									{/* TODO: link tags */}
-									<a href="#">{t.tag.name}</a>
+									<Link href="#">
+										<a>{t.tag.name}</a>
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -199,7 +202,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								<ul>
 									{audioDownloads.map((file) => (
 										<li key={file.id}>
-											<a href={file.url}>{readableBytes(file.filesize)}</a>
+											<Link href={file.url}>
+												<a>{readableBytes(file.filesize)}</a>
+											</Link>
 										</li>
 									))}
 								</ul>
@@ -217,7 +222,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								<ul>
 									{videoDownloads.map((file) => (
 										<li key={file.id}>
-											<a href={file.url}>{readableBytes(file.filesize)}</a>
+											<Link href={file.url}>
+												<a>{readableBytes(file.filesize)}</a>
+											</Link>
 										</li>
 									))}
 								</ul>

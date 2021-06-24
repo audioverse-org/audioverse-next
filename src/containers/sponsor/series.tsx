@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -31,7 +32,9 @@ function SponsorSeries({ data, nodes, pagination }: Props): JSX.Element {
 				/>
 			)}
 			<h1>
-				<a href={makeSponsorRoute(languageRoute, id)}>{data?.sponsor?.title}</a>
+				<Link href={makeSponsorRoute(languageRoute, id)}>
+					<a>{data?.sponsor?.title}</a>
+				</Link>
 			</h1>
 			<h2>
 				<FormattedMessage

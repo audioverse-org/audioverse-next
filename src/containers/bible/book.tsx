@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -78,14 +79,16 @@ function Book({ data }: BookProps): JSX.Element {
 					description="Bible book detail page downloads tab title"
 				/>
 			</h3>
-			<a href={chapter?.url}>
-				<FormattedMessage
-					id="bibleBook__mp3Label"
-					defaultMessage="mp3:"
-					description="Bible book detail page mp3 download link label"
-				/>{' '}
-				{chapter?.title}
-			</a>
+			<Link href={chapter?.url}>
+				<a>
+					<FormattedMessage
+						id="bibleBook__mp3Label"
+						defaultMessage="mp3:"
+						description="Bible book detail page mp3 download link label"
+					/>{' '}
+					{chapter?.title}
+				</a>
+			</Link>
 			<h3>
 				<FormattedMessage
 					id="bibleBook__tabTranscript"

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 // TODO: Ensure this page gets statically generated
@@ -32,24 +33,26 @@ export default function Give(): JSX.Element {
 
 			<p>
 				If you would like to donate using Apple Pay{' '}
-				<a href="https://donorbox.org/audioverse-give">
-					click here{' '}
-					<Image
-						src="/img/Apple_Pay.svg"
-						alt="Apple Pay"
-						width={166}
-						height={106}
-					/>
-				</a>
+				<Link href="https://donorbox.org/audioverse-give">
+					<a>
+						click here{' '}
+						<Image
+							src="/img/Apple_Pay.svg"
+							alt="Apple Pay"
+							width={166}
+							height={106}
+						/>
+					</a>
+				</Link>
 			</p>
 
 			{/* TODO: Port old donation page or delete this link: */}
 			<p>
 				If for any reason you would like to give using the old donation page,
 				please{' '}
-				<a href="https://www.audioverse.org/english/about/17/donation.html">
-					click here
-				</a>
+				<Link href="https://www.audioverse.org/english/about/17/donation.html">
+					<a>click here</a>
+				</Link>
 			</p>
 
 			<p>

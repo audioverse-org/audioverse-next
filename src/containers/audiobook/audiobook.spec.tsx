@@ -158,7 +158,7 @@ describe('audiobook detail page', () => {
 
 		const link = getByRole('link', { name: '5 MB' }) as HTMLLinkElement;
 
-		expect(link).toHaveAttribute('href', 'first_recording_download');
+		expect(link).toHaveAttribute('href', '/first_recording_download');
 	});
 
 	it('indicates currently-playing recording', async () => {

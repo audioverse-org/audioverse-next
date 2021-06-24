@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { ReactNode } from 'react';
 
 import Icon from '@components/atoms/icon';
@@ -50,12 +51,25 @@ export default function Card({
 					<Icon icon={'chevron-down'} size={16} />
 				</div>
 			)}
-			{hero && (url ? <a href={url}>{heroImage}</a> : heroImage)}
+			{hero &&
+				(url ? (
+					<Link href={url}>
+						<a>{heroImage}</a>
+					</Link>
+				) : (
+					heroImage
+				))}
 			<div className={styles.content}>
 				{preTitle && <span className={styles.part}>{preTitle}</span>}
 				<div className={styles.heading}>
 					<h1 className={styles.title}>
-						{url ? <a href={url}>{title}</a> : title}
+						{url ? (
+							<Link href={url}>
+								<a>{title}</a>
+							</Link>
+						) : (
+							title
+						)}
 					</h1>
 					{titleAdornment}
 				</div>

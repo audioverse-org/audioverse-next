@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import { SponsorInfoFragment } from '@lib/generated/graphql';
@@ -11,9 +12,9 @@ export default function SponsorInfo({
 }): JSX.Element {
 	return (
 		<p>
-			<a href={makeSponsorRoute(useLanguageRoute(), sponsor.id)}>
-				{sponsor.title}
-			</a>
+			<Link href={makeSponsorRoute(useLanguageRoute(), sponsor.id)}>
+				<a>{sponsor.title}</a>
+			</Link>
 		</p>
 	);
 }
