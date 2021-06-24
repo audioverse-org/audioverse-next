@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
+import ReactTestUtils from 'react-dom/test-utils';
 import { QueryClient } from 'react-query';
 import { hydrate } from 'react-query/hydration';
 
@@ -20,7 +21,7 @@ import {
 	renderWithIntl,
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
-import ReactTestUtils from 'react-dom/test-utils';
+
 import resetAllMocks = jest.resetAllMocks;
 
 jest.mock('@lib/api/login');
