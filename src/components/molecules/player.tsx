@@ -28,8 +28,11 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowPoster =
 		(!isLoaded && hasVideo(recording)) || playback.isShowingVideo();
 
-	function andLoad(func: (c: PlaybackContextType, ...vars: any[]) => void) {
-		return (...vars: any[]) => {
+	// TODO: Figure out how to make T properly pass `...vars` types through
+	function andLoad<T extends Array<any>>(
+		func: (c: PlaybackContextType, ...vars: T) => void
+	) {
+		return (...vars: T) => {
 			// TODO: handle recording mismatch
 			if (playback.getRecording()) {
 				func(playback, ...vars);
@@ -100,10 +103,13 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 								description: 'player progress label',
 							})}
 							value={progress * 100}
-							onChange={andLoad((c, e) => {
-								const percent = parseInt(e.target.value) / 100;
-								c.setProgress(percent);
-							})}
+							onChange={(e) => {
+								const val = e.target.value;
+								andLoad((c) => {
+									const percent = parseInt(val) / 100;
+									c.setProgress(percent);
+								})();
+							}}
 						/>
 					</div>
 				</div>

@@ -109,11 +109,11 @@ describe('player', () => {
 
 		const { getByTestId, getByLabelText } = await renderComponent();
 
-		player.currentTime(75);
-
 		userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
+
+		player.currentTime(75);
 
 		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
 
@@ -295,6 +295,34 @@ describe('player', () => {
 		userEvent.click(poster.parentElement as HTMLElement);
 
 		expect(mockPlayer.play).toBeCalled();
+	});
+
+	it('tracks scrubber click when duration not yet known', async () => {
+		const mockPlayer = setPlayerMock({
+			duration: NaN,
+			functions: {
+				play: jest.fn(async () => {
+					mockPlayer._updateOptions({
+						isPaused: false,
+						duration: 300,
+					});
+				}),
+			},
+		});
+
+		const { getByLabelText } = await renderComponent();
+
+		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
+			target: {
+				value: 50,
+			},
+		} as any);
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
 });
 

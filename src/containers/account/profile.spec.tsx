@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import _ from 'lodash';
@@ -20,7 +20,7 @@ import {
 	renderWithIntl,
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
-
+import ReactTestUtils from 'react-dom/test-utils';
 import resetAllMocks = jest.resetAllMocks;
 
 jest.mock('@lib/api/login');
@@ -166,14 +166,13 @@ describe('profile page', () => {
 	it('prevents default form submission', async () => {
 		const { getByTestId } = await renderPage();
 
-		const form = getByTestId('loginForm');
+		const event = {
+			preventDefault: jest.fn(),
+		};
 
-		const event = new Event('submit');
-		Object.assign(event, { preventDefault: jest.fn() });
+		ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
 
-		fireEvent(form, event);
-
-		expect(event.preventDefault).toHaveBeenCalled();
+		await waitFor(() => expect(event.preventDefault).toHaveBeenCalled());
 	});
 
 	it('invalidates cache on successful login', async () => {

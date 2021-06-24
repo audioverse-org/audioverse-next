@@ -92,7 +92,7 @@ export default function AndMiniplayer({
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [videoEl, setVideoEl] = useState();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [time, setTime] = useState<number>();
+	const [progress, setProgress] = useState<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
@@ -101,7 +101,6 @@ export default function AndMiniplayer({
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
-	const duration = player?.duration();
 
 	// TODO: Fix poster disappearing after audio playback start
 	const options: VideoJsPlayerOptions = {
@@ -138,6 +137,7 @@ export default function AndMiniplayer({
 		play: () => {
 			player?.play();
 			setIsPaused(false);
+			playbackContext.setProgress(progress);
 		},
 		pause: () => {
 			player?.pause();
@@ -146,18 +146,20 @@ export default function AndMiniplayer({
 		paused: () => isPaused,
 		getTime: () => player?.currentTime() || 0,
 		setTime: (t: number) => {
-			setTime(t);
-			player?.currentTime(t);
+			if (!player) return;
+			setProgress(t / player.duration());
+			player.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
 			if (!recording) return;
 			setPrefersAudio(prefersAudio);
 		},
-		getProgress: () => (time && duration ? time / duration : 0),
+		getProgress: () => progress,
 		setProgress: (p: number) => {
-			if (!player) return;
-			const newTime = p * player.duration();
-			playbackContext.setTime(newTime);
+			setProgress(p);
+			const duration = player?.duration();
+			if (!player || !duration || isNaN(duration)) return;
+			player.currentTime(p * duration);
 		},
 		load: (
 			recording: AndMiniplayerFragment,
@@ -199,7 +201,7 @@ export default function AndMiniplayer({
 							data-testid={'video-element'}
 							onTimeUpdate={() => {
 								if (!player) return;
-								setTime(player.currentTime());
+								setProgress(player.currentTime() / player.duration());
 							}}
 						/>
 					</div>
