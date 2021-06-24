@@ -327,6 +327,4 @@ describe('player', () => {
 });
 
 // TODO:
-// Waits until detail UI clicked before loading recording into miniplayer
-// Does not re-load recording after first load
 // Replaces play/pause with loading indicator when player in loading state

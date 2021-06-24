@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { ReactNode } from 'react';
 
 import Icon from '@components/atoms/icon';
@@ -29,8 +30,8 @@ export default function Card({
 	children,
 	theme,
 }: CardProps): JSX.Element {
-	const heroImage = (
-		<img
+	const heroImage = hero && (
+		<Image
 			className={styles.hero}
 			src={hero}
 			alt={title}

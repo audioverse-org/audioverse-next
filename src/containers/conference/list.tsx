@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -26,7 +27,7 @@ function ConferenceList({ nodes, pagination }: Props): JSX.Element {
 				{nodes.map((n) => (
 					<li key={n.id}>
 						<a href={makeConferenceRoute(languageRoute, n.id, 1)}>
-							<img
+							<Image
 								src={n.imageWithFallback?.url}
 								alt={n.title}
 								width={100}

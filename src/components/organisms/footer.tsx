@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -231,7 +232,7 @@ export default function Footer(): JSX.Element {
 				target={'_blank'}
 				rel={'noreferrer noopener'}
 			>
-				<img
+				<Image
 					src="/img/app-apple.png"
 					alt={intl.formatMessage({
 						id: 'footer__iosAppImageAlt',
@@ -248,7 +249,7 @@ export default function Footer(): JSX.Element {
 				target={'_blank'}
 				rel={'noreferrer noopener'}
 			>
-				<img
+				<Image
 					src="/img/app-android.png"
 					alt={intl.formatMessage({
 						id: 'footer__androidAppImageAlt',

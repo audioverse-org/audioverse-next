@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 import Section from '@components/organisms/section';
@@ -19,7 +20,7 @@ export const DarkBleed = (): JSX.Element => (
 			</>
 		}
 		media={
-			<img src={'/img/unsplash-headphones.jpg'} width={4724} height={3072} />
+			<Image src={'/img/unsplash-headphones.jpg'} width={4724} height={3072} />
 		}
 		theme={'dark'}
 	/>

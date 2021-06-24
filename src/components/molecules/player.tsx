@@ -1,5 +1,6 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Image from 'next/image';
 import React, { CSSProperties, useContext } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -59,7 +60,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 			)}
 			{shouldShowPoster ? (
 				<button onClick={andLoad((c) => c.play())}>
-					<img
+					<Image
 						src="/img/poster.jpg"
 						alt={recording.title}
 						width={1500}

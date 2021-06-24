@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,7 +23,7 @@ function SponsorSeries({ data, nodes, pagination }: Props): JSX.Element {
 	return (
 		<>
 			{imageSrc && (
-				<img
+				<Image
 					src={imageSrc}
 					alt={data?.sponsor?.title}
 					width={100}

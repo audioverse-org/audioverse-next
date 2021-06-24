@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { toast } from 'react-toastify';
@@ -33,7 +34,7 @@ export default function SpeakerName({
 		queryIsFavorited === undefined ? initialIsFavorited : queryIsFavorited;
 	const intl = useIntl();
 	const img = image && (
-		<img width={100} height={100} alt={name} src={image.url} />
+		<Image width={100} height={100} alt={name} src={image.url} />
 	);
 
 	return (

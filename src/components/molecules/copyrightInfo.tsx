@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -21,7 +22,7 @@ export default function CopyrightInfo({
 		<>
 			{/* TODO: Correct copyright image dimensions */}
 			{copyrightImageUrl && (
-				<img
+				<Image
 					className={styles.image}
 					alt={'copyright'}
 					src={copyrightImageUrl}

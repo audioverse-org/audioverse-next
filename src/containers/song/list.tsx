@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -633,7 +634,7 @@ function SongList({ data }: SongsProps): JSX.Element {
 				{data?.musicAlbums?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeAlbumRoute(languageRoute, n.id)}>
-							<img
+							<Image
 								src={n.imageWithFallback.url}
 								alt={n.title}
 								width={100}
@@ -656,7 +657,7 @@ function SongList({ data }: SongsProps): JSX.Element {
 				{data?.sponsors?.nodes?.map((n) => (
 					<li key={n.id}>
 						<a href={makeSponsorMusicRoute(languageRoute, n.id)}>
-							<img
+							<Image
 								src={n.imageWithFallback.url}
 								alt={n.title}
 								width={100}

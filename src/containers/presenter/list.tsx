@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,7 +26,7 @@ function Presenters({ nodes, pagination }: Props): JSX.Element {
 				{nodes.map((n) => (
 					<li key={n.id}>
 						<a href={makePersonRoute(languageRoute, n.id)}>
-							<img
+							<Image
 								src={n.imageWithFallback?.url}
 								alt={n.name}
 								width={100}

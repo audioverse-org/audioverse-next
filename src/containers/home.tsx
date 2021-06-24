@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -33,7 +34,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	return (
 		<div>
 			<header className={styles.header}>
-				<img src="/img/logo.svg" width={161} height={23} />
+				<Image src="/img/logo.svg" width={161} height={23} />
 				<nav className={styles.nav}>
 					<LanguageSwitcher />
 					<a
@@ -105,7 +106,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<img
+					<Image
 						src={'/img/unsplash-headphones.jpg'}
 						width={4724}
 						height={3072}
@@ -183,7 +184,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</a>
 					</>
 				}
-				media={<img src={'/img/players.jpeg'} width={3564} height={1724} />}
+				media={<Image src={'/img/players.jpeg'} width={3564} height={1724} />}
 				theme={'dark'}
 			/>
 			<Section
@@ -386,11 +387,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					// TODO: Replace with subscription widget
-					<img src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
+					<Image src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
 				}
 			/>
 			<div className={styles.footer}>
-				<img src="/img/logo.svg" width={161} height={23} />
+				<Image src="/img/logo.svg" width={161} height={23} />
 				<div className={styles.footerLinks}>
 					<div>
 						<h5>

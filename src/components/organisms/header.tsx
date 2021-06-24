@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -18,7 +19,7 @@ const Header = (): JSX.Element => {
 		<header className={styles.header}>
 			<h1 className={styles.logo}>
 				<a href={`/${languageRoute}`}>
-					<img src="/img/logo.svg" alt="AudioVerse" width={161} height={23} />
+					<Image src="/img/logo.svg" alt="AudioVerse" width={161} height={23} />
 				</a>
 			</h1>
 			<ul>
@@ -94,7 +95,7 @@ const Header = (): JSX.Element => {
 			</ul>
 			<div className={styles.user}>
 				{/* TODO: Make dynamic; hide when user not logged in */}
-				<img src="/img/ivan.png" width={16} height={16} />{' '}
+				<Image src="/img/ivan.png" width={16} height={16} />{' '}
 				<FormattedMessage
 					id={`header__userNamePlaceholder`}
 					defaultMessage="User Name"

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -44,7 +45,12 @@ export default function TableList<T extends Listable>({
 							<td>
 								{imageSrc && (
 									<a href={route}>
-										<img src={imageSrc} alt={title} width={100} height={100} />
+										<Image
+											src={imageSrc}
+											alt={title}
+											width={100}
+											height={100}
+										/>
 									</a>
 								)}
 							</td>
