@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { getByLabelText, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -7,11 +7,16 @@ import videojs from 'video.js';
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
-import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
+import {
+	buildRenderer,
+	renderWithIntl,
+	setPlayerMock,
+} from '@lib/test/helpers';
 
 jest.mock('video.js');
 
 const recording: Partial<PlayerFragment> = {
+	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	audioFiles: [
 		{
@@ -323,6 +328,161 @@ describe('player', () => {
 		userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
+	});
+
+	it('overloads different recording', async () => {
+		const mockPlayer = setPlayerMock();
+
+		const recording1: Partial<PlayerFragment> = {
+			id: 'first_sermon_id',
+			title: 'first_sermon_title',
+			audioFiles: [
+				{
+					url: 'first_source_src',
+					mimeType: 'first_source_type',
+					filesize: 'first_source_size',
+				},
+			],
+		};
+
+		const recording2: Partial<PlayerFragment> = {
+			id: 'second_sermon_id',
+			title: 'second_sermon_title',
+			audioFiles: [
+				{
+					url: 'second_source_src',
+					mimeType: 'second_source_type',
+					filesize: 'second_source_size',
+				},
+			],
+		};
+
+		const { getByTestId } = await renderWithIntl(
+			() => (
+				<AndMiniplayer>
+					<Player recording={recording1 as PlayerFragment} />
+					<Player recording={recording2 as PlayerFragment} />
+				</AndMiniplayer>
+			),
+			{}
+		);
+
+		const firstPlayer = getByTestId('first_sermon_id');
+		const secondPlayer = getByTestId('second_sermon_id');
+
+		userEvent.click(getByLabelText(firstPlayer, 'play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		userEvent.click(getByLabelText(secondPlayer, 'play'));
+
+		await waitFor(() =>
+			expect(mockPlayer.src).toBeCalledWith([
+				{
+					src: 'second_source_src',
+					type: 'second_source_type',
+				},
+			])
+		);
+	});
+
+	it('does not show poster when video playing', async () => {
+		const { getByAltText, queryByAltText } = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		expect(queryByAltText('the_sermon_title')).not.toBeInTheDocument();
+	});
+
+	it('does not show audio controls when video playing', async () => {
+		const { getByAltText, queryByLabelText } = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		expect(queryByLabelText('pause')).not.toBeInTheDocument();
+	});
+
+	it('isolates recording progress between recordings', async () => {
+		const recording1: Partial<PlayerFragment> = {
+			id: 'first_sermon_id',
+			title: 'first_sermon_title',
+			audioFiles: [
+				{
+					url: 'first_source_src',
+					mimeType: 'first_source_type',
+					filesize: 'first_source_size',
+				},
+			],
+		};
+
+		const recording2: Partial<PlayerFragment> = {
+			id: 'second_sermon_id',
+			title: 'second_sermon_title',
+			audioFiles: [
+				{
+					url: 'second_source_src',
+					mimeType: 'second_source_type',
+					filesize: 'second_source_size',
+				},
+			],
+		};
+
+		const { getByTestId } = await renderWithIntl(
+			() => (
+				<AndMiniplayer>
+					<Player recording={recording1 as PlayerFragment} />
+					<Player recording={recording2 as PlayerFragment} />
+				</AndMiniplayer>
+			),
+			{}
+		);
+
+		const firstPlayer = getByTestId('first_sermon_id');
+		const secondPlayer = getByTestId('second_sermon_id');
+
+		userEvent.click(getByLabelText(firstPlayer, 'play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		ReactTestUtils.Simulate.change(getByLabelText(firstPlayer, 'progress'), {
+			target: {
+				value: 50,
+			},
+		} as any);
+
+		expect(getByLabelText(secondPlayer, 'progress')).toHaveValue('0');
 	});
 });
 

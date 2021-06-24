@@ -23,19 +23,19 @@ export interface PlayerProps {
 const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const intl = useIntl();
 	const playback = useContext(PlaybackContext);
-	const progress = playback.getProgress();
 	const loadedRecording = playback.getRecording();
 	const isLoaded = loadedRecording && loadedRecording.id === recording.id;
-	const shouldShowPoster =
-		(!isLoaded && hasVideo(recording)) || playback.isShowingVideo();
+	const progress = isLoaded ? playback.getProgress() : 0;
+	const shouldShowPoster = !isLoaded && hasVideo(recording);
+	const shouldShowAudioControls =
+		!hasVideo(recording) || (isLoaded && !playback.isShowingVideo());
 
 	// TODO: Figure out how to make T properly pass `...vars` types through
 	function andLoad<T extends Array<any>>(
 		func: (c: PlaybackContextType, ...vars: T) => void
 	) {
 		return (...vars: T) => {
-			// TODO: handle recording mismatch
-			if (playback.getRecording()) {
+			if (isLoaded) {
 				func(playback, ...vars);
 				return;
 			}
@@ -47,7 +47,10 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	}
 
 	return (
-		<div className={playback.isShowingVideo() ? styles.video : styles.audio}>
+		<div
+			data-testid={recording.id}
+			className={playback.isShowingVideo() ? styles.video : styles.audio}
+		>
 			{hasVideo(recording) && (
 				<>
 					<button onClick={andLoad((c) => c.setPrefersAudio(true))}>
@@ -58,7 +61,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					</button>
 				</>
 			)}
-			{shouldShowPoster ? (
+			{shouldShowPoster && (
 				<button onClick={andLoad((c) => c.play())}>
 					<Image
 						src="/img/poster.jpg"
@@ -67,9 +70,10 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						height={500}
 					/>
 				</button>
-			) : (
+			)}
+			{shouldShowAudioControls && (
 				<div className={styles.controls}>
-					{playback.paused() ? (
+					{!isLoaded || playback.paused() ? (
 						<button
 							aria-label={intl.formatMessage({
 								id: 'player__playButtonLabel',
