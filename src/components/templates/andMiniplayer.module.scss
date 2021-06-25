@@ -18,6 +18,7 @@
 	flex: 0 0 90px;
 	background-color: white;
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid $ts-cream;
 }
@@ -29,4 +30,10 @@
 
 .meta {
 	padding: 2rem;
+}
+
+.volume {
+	display: flex;
+	align-items: center;
+	min-width: 150px;
 }

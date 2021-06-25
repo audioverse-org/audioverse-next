@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
@@ -9,6 +9,7 @@ import { SpeakerNameFragment } from '@lib/generated/graphql';
 import useFormattedDuration from '@lib/useFormattedDuration';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
+import ProgressBar from '@components/atoms/progressBar';
 
 interface CardPlayableProps {
 	container?: {
@@ -73,14 +74,7 @@ export default function CardPlayable({
 						{useFormattedDuration(duration)}
 					</span>
 				)}
-				{progress !== undefined && (
-					<span
-						className={styles.progress}
-						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
-					>
-						<span />
-					</span>
-				)}
+				{progress !== undefined && <ProgressBar progress={progress} />}
 				<Icon icon={'bookmark'} size={24} />
 			</div>
 		</Card>

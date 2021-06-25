@@ -216,7 +216,7 @@ export default function AndMiniplayer({
 						</div>
 					</div>
 					<div className={styles.meta}>{recording?.title}</div>
-					<div>
+					<div className={styles.volume}>
 						<VolumeDown />
 						{/*TODO: Localize*/}
 						<Slider
