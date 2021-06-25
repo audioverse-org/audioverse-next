@@ -1,15 +1,12 @@
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Image from 'next/image';
-import React, { CSSProperties, useContext } from 'react';
+import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
-import {
-	PlaybackContext,
-	PlaybackContextType,
-} from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import usePlaybackSession from '@lib/usePlaybackSession';
 
 import BackIcon from '../../../public/img/icon-nudge-left.svg';
 import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
@@ -22,47 +19,20 @@ export interface PlayerProps {
 
 const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const intl = useIntl();
-	const playback = useContext(PlaybackContext);
-	const loadedRecording = playback.getRecording();
-	const isLoaded = loadedRecording && loadedRecording.id === recording.id;
-	const progress = isLoaded ? playback.getProgress() : 0;
-	const shouldShowPoster = !isLoaded && hasVideo(recording);
-	const shouldShowAudioControls =
-		!hasVideo(recording) || (isLoaded && !playback.isShowingVideo());
-
-	// TODO: Figure out how to make T properly pass `...vars` types through
-	function andLoad<T extends Array<any>>(
-		func: (c: PlaybackContextType, ...vars: T) => void
-	) {
-		return (...vars: T) => {
-			if (isLoaded) {
-				func(playback, ...vars);
-				return;
-			}
-
-			playback.load(recording, (c: PlaybackContextType) => {
-				func(c, ...vars);
-			});
-		};
-	}
+	const session = usePlaybackSession(recording);
+	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
+	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 
 	return (
-		<div
-			data-testid={recording.id}
-			className={playback.isShowingVideo() ? styles.video : styles.audio}
-		>
+		<div data-testid={recording.id}>
 			{hasVideo(recording) && (
 				<>
-					<button onClick={andLoad((c) => c.setPrefersAudio(true))}>
-						Audio
-					</button>
-					<button onClick={andLoad((c) => c.setPrefersAudio(false))}>
-						Video
-					</button>
+					<button onClick={() => session.setPrefersAudio(true)}>Audio</button>
+					<button onClick={() => session.setPrefersAudio(false)}>Video</button>
 				</>
 			)}
 			{shouldShowPoster && (
-				<button onClick={andLoad((c) => c.play())}>
+				<button onClick={() => session.play()}>
 					<Image
 						src="/img/poster.jpg"
 						alt={recording.title}
@@ -73,14 +43,14 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 			)}
 			{shouldShowAudioControls && (
 				<div className={styles.controls}>
-					{!isLoaded || playback.paused() ? (
+					{session.isPaused ? (
 						<button
 							aria-label={intl.formatMessage({
 								id: 'player__playButtonLabel',
 								defaultMessage: 'play',
 								description: 'player play button label',
 							})}
-							onClick={andLoad((c) => c.play())}
+							onClick={() => session.play()}
 						>
 							<PlayArrowIcon />
 						</button>
@@ -91,14 +61,16 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 								defaultMessage: 'pause',
 								description: 'player pause button label',
 							})}
-							onClick={() => playback.pause()}
+							onClick={() => session.pause()}
 						>
 							<PauseIcon />
 						</button>
 					)}
 					<div
 						className={styles.waves}
-						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
+						style={
+							{ '--progress': `${session.progress * 100}%` } as CSSProperties
+						}
 					>
 						<input
 							type="range"
@@ -107,13 +79,10 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 								defaultMessage: 'progress',
 								description: 'player progress label',
 							})}
-							value={progress * 100}
+							value={session.progress * 100}
 							onChange={(e) => {
-								const val = e.target.value;
-								andLoad((c) => {
-									const percent = parseInt(val) / 100;
-									c.setProgress(percent);
-								})();
+								const percent = parseInt(e.target.value) / 100;
+								session.setProgress(percent);
 							}}
 						/>
 					</div>
@@ -126,9 +95,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						defaultMessage: 'back 15 seconds',
 						description: 'player nudge-back label',
 					})}
-					onClick={andLoad((c) => {
-						c.setTime(c.getTime() - 15);
-					})}
+					onClick={() => session.shiftTime(-15)}
 				>
 					<BackIcon />
 				</button>
@@ -138,9 +105,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 						defaultMessage: 'forward 15 seconds',
 						description: 'player nudge-forward label',
 					})}
-					onClick={andLoad((c) => {
-						c.setTime(c.getTime() + 15);
-					})}
+					onClick={() => session.shiftTime(15)}
 				>
 					<ForwardIcon />
 				</button>
