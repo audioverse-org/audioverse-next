@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
+import ProgressBar from '@components/atoms/progressBar';
 import Card, { CardTheme } from '@components/molecules/card';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
@@ -9,7 +10,6 @@ import { SpeakerNameFragment } from '@lib/generated/graphql';
 import useFormattedDuration from '@lib/useFormattedDuration';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
-import ProgressBar from '@components/atoms/progressBar';
 
 interface CardPlayableProps {
 	container?: {
