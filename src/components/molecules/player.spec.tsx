@@ -174,7 +174,9 @@ describe('player', () => {
 	});
 
 	it('hides player if no video files', async () => {
-		const { getByTestId } = await renderComponent();
+		const { getByTestId, getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
 
 		expect(getByTestId('video-element')).not.toBeVisible();
 	});
@@ -483,6 +485,42 @@ describe('player', () => {
 		} as any);
 
 		expect(getByLabelText(secondPlayer, 'progress')).toHaveValue('0');
+	});
+
+	it('has volume control', async () => {
+		setPlayerMock({ volume: 0.7 });
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		const control = getByLabelText('volume');
+
+		expect(control).toHaveValue('70');
+	});
+
+	it('sets volume', async () => {
+		const playerMock = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		const control = getByLabelText('volume');
+
+		ReactTestUtils.Simulate.change(control, {
+			target: {
+				value: 70,
+			},
+		} as any);
+
+		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
+	});
+
+	it('does not show miniplayer if no recording loaded', async () => {
+		const { queryByLabelText } = await renderComponent();
+
+		expect(queryByLabelText('volume')).not.toBeInTheDocument();
 	});
 });
 

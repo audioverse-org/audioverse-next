@@ -60,4 +60,14 @@ describe('app', () => {
 
 		expect(queryByText('Discover')).not.toBeInTheDocument();
 	});
+
+	it('sets title with props', async () => {
+		const { getByTestId } = await renderApp(() => <>h</>, {
+			title: 'the_prop_title',
+		});
+
+		const head = getByTestId('head');
+
+		expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
+	});
 });

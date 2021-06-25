@@ -22,6 +22,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			sermon,
+			title: sermon?.title,
 		},
 		revalidate: REVALIDATE,
 	};

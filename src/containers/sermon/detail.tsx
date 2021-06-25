@@ -9,6 +9,7 @@ export type Sermon = NonNullable<GetSermonDetailDataQuery['sermon']>;
 
 export interface SermonDetailProps {
 	sermon: Sermon | null | undefined;
+	title?: string;
 }
 
 function SermonDetail({ sermon }: SermonDetailProps) {

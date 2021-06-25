@@ -211,12 +211,13 @@ interface SetPlayerMockOptions {
 	isPaused?: boolean;
 	time?: number;
 	duration?: number;
+	volume?: number;
 	functions?: Partial<videojs.Player>;
 }
 
 type MockPlayer = Pick<
 	videojs.Player,
-	'play' | 'pause' | 'paused' | 'currentTime' | 'duration' | 'src'
+	'play' | 'pause' | 'paused' | 'currentTime' | 'duration' | 'src' | 'volume'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 };
@@ -224,7 +225,13 @@ type MockPlayer = Pick<
 export const mockVideojs = (videojs as unknown) as jest.Mock;
 
 export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
-	let { isPaused = true, time = 50, duration = 100, functions = {} } = options;
+	let {
+		isPaused = true,
+		time = 50,
+		duration = 100,
+		volume = 0.5,
+		functions = {},
+	} = options;
 
 	const mockPlayer: MockPlayer = {
 		_updateOptions: (options) => {
@@ -250,6 +257,10 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			if (newTime !== null) time = newTime;
 			return time;
 		}),
+		volume: jest.fn((newVolume: number | null = null) => {
+			if (newVolume !== null) volume = newVolume;
+			return volume;
+		}) as any,
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
 		...functions,

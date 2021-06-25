@@ -154,6 +154,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderWithIntl(SermonDetail, {
 			sermon: undefined,
+			title: undefined,
 		});
 
 		expect(getByText('Loading…')).toBeInTheDocument();
@@ -859,5 +860,13 @@ describe('sermon detail page', () => {
 			'href',
 			'/en/sponsors/sponsor_id'
 		);
+	});
+
+	it('sets head title', async () => {
+		loadSermonDetailData();
+
+		const result = await getStaticProps({ params: { id: 'the_id' } });
+
+		expect(result.props.title).toEqual('the_sermon_title');
 	});
 });

@@ -1,3 +1,6 @@
+import Slider from '@material-ui/core/Slider';
+import VolumeDown from '@material-ui/icons/VolumeDown';
+import VolumeUp from '@material-ui/icons/VolumeUp';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
@@ -93,6 +96,7 @@ export default function AndMiniplayer({
 	const [videoEl, setVideoEl] = useState();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, setProgress] = useState<number>(0);
+	const [volume, setVolume] = useState<number>(100);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
@@ -102,7 +106,6 @@ export default function AndMiniplayer({
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
-	// TODO: Fix poster disappearing after audio playback start
 	const options: VideoJsPlayerOptions = {
 		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
 		controls: true,
@@ -114,30 +117,11 @@ export default function AndMiniplayer({
 		sources,
 	};
 
-	useEffect(() => {
-		if (!recording) return;
-		setSources(getSources(recording, prefersAudio));
-	}, [recording, prefersAudio]);
-
-	useEffect(() => {
-		if (!videoEl) return;
-		if (!hasSources) return;
-
-		if (!player) {
-			setPlayer(videojs(videoEl, options));
-		} else if (sources) {
-			player.src(sources);
-		}
-
-		setIsPaused(true);
-		setFingerprint(JSON.stringify(sources));
-	}, [hasSources, sources, videoEl]);
-
-	const playbackContext: PlaybackContextType = {
+	const playback: PlaybackContextType = {
 		play: () => {
 			player?.play();
 			setIsPaused(false);
-			playbackContext.setProgress(progress);
+			playback.setProgress(progress);
 		},
 		pause: () => {
 			player?.pause();
@@ -175,39 +159,75 @@ export default function AndMiniplayer({
 	};
 
 	useEffect(() => {
-		onLoad && onLoad(playbackContext);
+		if (!recording) return;
+		setSources(getSources(recording, prefersAudio));
+	}, [recording, prefersAudio]);
+
+	useEffect(() => {
+		if (!videoEl) return;
+		if (!hasSources) return;
+
+		if (!player) {
+			setPlayer(videojs(videoEl, options));
+		} else if (sources) {
+			player.src(sources);
+		}
+
+		setIsPaused(true);
+		setFingerprint(JSON.stringify(sources));
+	}, [hasSources, sources, videoEl]);
+
+	useEffect(() => {
+		onLoad && onLoad(playback);
 		setOnLoad(undefined);
+		setVolume(player ? player.volume() * 100 : 100);
 	}, [fingerprint]);
+
+	useEffect(() => {
+		player?.volume(volume / 100);
+	}, [volume]);
 
 	return (
 		<div className={styles.base}>
 			<div className={styles.content}>
-				<PlaybackContext.Provider value={playbackContext}>
+				<PlaybackContext.Provider value={playback}>
 					{children}
 				</PlaybackContext.Provider>
 			</div>
-			<div className={styles.miniplayer}>
-				<div
-					className={styles.player}
-					style={{
-						display: isShowingVideo ? 'block' : 'none',
-					}}
-				>
-					<div data-vjs-player={true}>
-						<video
-							ref={onVideo}
-							className="video-js"
-							playsInline
-							data-testid={'video-element'}
-							onTimeUpdate={() => {
-								if (!player) return;
-								setProgress(player.currentTime() / player.duration());
-							}}
+			{recording && (
+				<div className={styles.miniplayer}>
+					<div
+						className={styles.player}
+						style={{
+							display: isShowingVideo ? 'block' : 'none',
+						}}
+					>
+						<div data-vjs-player={true}>
+							<video
+								ref={onVideo}
+								className="video-js"
+								playsInline
+								data-testid={'video-element'}
+								onTimeUpdate={() => {
+									if (!player) return;
+									setProgress(player.currentTime() / player.duration());
+								}}
+							/>
+						</div>
+					</div>
+					<div className={styles.meta}>{recording?.title}</div>
+					<div>
+						<VolumeDown />
+						{/*TODO: Localize*/}
+						<Slider
+							value={volume}
+							onChange={(e, val) => setVolume(val as number)}
+							aria-label={'volume'}
 						/>
+						<VolumeUp />
 					</div>
 				</div>
-				<div className={styles.meta}>{recording?.title}</div>
-			</div>
+			)}
 		</div>
 	);
 }

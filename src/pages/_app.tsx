@@ -41,14 +41,14 @@ function MyApp<P>({
 	pageProps,
 }: {
 	Component: typeof React.Component;
-	pageProps: P & { disableSidebar?: boolean };
+	pageProps: P & { disableSidebar?: boolean; title?: string };
 }): JSX.Element {
-	const disableSidebar = pageProps.disableSidebar;
+	const { disableSidebar, title } = pageProps;
 	return (
 		<>
 			<React.StrictMode>
 				<Head>
-					<title>AudioVerse</title>
+					<title>{title ? `${title} | ` : ''}AudioVerse</title>
 				</Head>
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
