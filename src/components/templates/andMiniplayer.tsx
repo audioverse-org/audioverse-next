@@ -8,6 +8,7 @@ import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
+import ReactDOM from 'react-dom';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -57,10 +58,13 @@ export type PlaybackContextType = {
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	getProgress: () => number;
 	setProgress: (p: number) => void;
-	load: (
+	loadRecording: (
 		recording: AndMiniplayerFragment,
-		onLoad?: (c: PlaybackContextType) => void
+		options?: {
+			onLoad?: (c: PlaybackContextType) => void;
+		}
 	) => void;
+	loadPortalContainer: (container: Element | null) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	isShowingVideo: () => boolean;
@@ -76,7 +80,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setPrefersAudio: () => undefined,
 	getProgress: () => 0,
 	setProgress: () => undefined,
-	load: () => undefined,
+	loadRecording: () => undefined,
+	loadPortalContainer: () => undefined,
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -102,6 +107,7 @@ export default function AndMiniplayer({
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
+	const [portalContainer, setPortalContainer] = useState<Element | null>(null);
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -145,12 +151,13 @@ export default function AndMiniplayer({
 			if (!player || !duration || isNaN(duration)) return;
 			player.currentTime(p * duration);
 		},
-		load: (
-			recording: AndMiniplayerFragment,
-			onLoad: ((c: PlaybackContextType) => void) | undefined = undefined
-		) => {
+		loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
+			const { onLoad } = options;
 			setOnLoad(() => onLoad);
 			setRecording(recording);
+		},
+		loadPortalContainer: (portalContainer: Element | null) => {
+			setPortalContainer(portalContainer);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -167,6 +174,8 @@ export default function AndMiniplayer({
 		if (!videoEl) return;
 		if (!hasSources) return;
 
+		console.log({ m: 'init videojs', portalContainer, player });
+
 		if (!player) {
 			setPlayer(videojs(videoEl, options));
 		} else if (sources) {
@@ -175,7 +184,7 @@ export default function AndMiniplayer({
 
 		setIsPaused(true);
 		setFingerprint(JSON.stringify(sources));
-	}, [hasSources, sources, videoEl]);
+	}, [hasSources, sources, videoEl, portalContainer]);
 
 	useEffect(() => {
 		onLoad && onLoad(playback);
@@ -187,6 +196,20 @@ export default function AndMiniplayer({
 		player?.volume(volume / 100);
 	}, [volume]);
 
+	const playerNode = (
+		<div data-vjs-player={true}>
+			<video
+				ref={onVideo}
+				className="video-js"
+				playsInline
+				data-testid={'video-element'}
+				onTimeUpdate={() => {
+					if (!player) return;
+					setProgress(player.currentTime() / player.duration());
+				}}
+			/>
+		</div>
+	);
 	return (
 		<div className={styles.base}>
 			<div className={styles.content}>
@@ -202,18 +225,16 @@ export default function AndMiniplayer({
 							display: isShowingVideo ? 'block' : 'none',
 						}}
 					>
-						<div data-vjs-player={true}>
-							<video
-								ref={onVideo}
-								className="video-js"
-								playsInline
-								data-testid={'video-element'}
-								onTimeUpdate={() => {
-									if (!player) return;
-									setProgress(player.currentTime() / player.duration());
-								}}
-							/>
-						</div>
+						{/*{playerNode}*/}
+						{portalContainer
+							? (() => {
+									console.log({ portalContainer });
+									return ReactDOM.createPortal(playerNode, portalContainer);
+							  })()
+							: (() => {
+									console.log('rendering directly');
+									return playerNode;
+							  })()}
 					</div>
 					<div className={styles.meta}>{recording?.title}</div>
 					<div className={styles.volume}>

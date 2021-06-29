@@ -1,4 +1,4 @@
-import { getByLabelText, waitFor } from '@testing-library/react';
+import { getByLabelText, getByTestId, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -522,7 +522,65 @@ describe('player', () => {
 
 		expect(queryByLabelText('volume')).not.toBeInTheDocument();
 	});
+
+	it('displays portal target when video is loaded', async () => {
+		const { getByAltText, getByTestId } = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		expect(getByTestId('portal')).toBeInTheDocument();
+	});
+
+	it('plays video through portal', async () => {
+		setPlayerMock();
+
+		const result = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		const portal = result.getByTestId('portal');
+
+		await waitFor(() =>
+			expect(getByTestId(portal, 'video-element')).toBeInTheDocument()
+		);
+	});
 });
 
 // TODO:
+// Display progress bar in mini player
+// Display sequence title in mini player
+// Display playback controls in mini player
+// Style volume controls
+
+// punt:
 // Replaces play/pause with loading indicator when player in loading state

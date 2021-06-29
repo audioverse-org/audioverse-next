@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import {
 	PlaybackContext,
@@ -15,7 +15,9 @@ interface PlaybackSessionInfo {
 	isLoaded: boolean;
 	progress: number;
 	isAudioLoaded: boolean;
+	isVideoLoaded: boolean;
 	isPaused: boolean;
+	video: JSX.Element;
 }
 
 export default function usePlaybackSession(
@@ -26,7 +28,20 @@ export default function usePlaybackSession(
 	const isLoaded = !!loadedRecording && loadedRecording.id === recording.id;
 	const progress = isLoaded ? context.getProgress() : 0;
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
+	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const isPaused = !isLoaded || context.paused();
+	const portalContainerRef = useRef<HTMLDivElement>(null);
+	const video = <div ref={portalContainerRef} data-testid={'portal'} />;
+
+	useEffect(() => {
+		if (!isLoaded) return;
+		// TODO: Only load portal if isLoaded
+		console.log({
+			m: 'loading portal container',
+			current: portalContainerRef.current,
+		});
+		context.loadPortalContainer(portalContainerRef.current);
+	}, [portalContainerRef.current, isLoaded]);
 
 	// TODO: What should function be named? `withContext`?
 	function act(func: (c: PlaybackContextType) => void) {
@@ -35,8 +50,10 @@ export default function usePlaybackSession(
 			return;
 		}
 
-		context.load(recording, (c: PlaybackContextType) => {
-			func(c);
+		context.loadRecording(recording, {
+			onLoad: (c: PlaybackContextType) => {
+				func(c);
+			},
 		});
 	}
 
@@ -52,6 +69,8 @@ export default function usePlaybackSession(
 
 	function pause() {
 		// TODO: Maybe only if `isLoaded` is true
+		// Or perhaps throw an exception, since the user should never be presented
+		// with a pause button for a recording that isn't loaded.
 		context.pause();
 	}
 
@@ -73,6 +92,8 @@ export default function usePlaybackSession(
 		isLoaded,
 		progress,
 		isAudioLoaded,
+		isVideoLoaded,
 		isPaused,
+		video,
 	};
 }

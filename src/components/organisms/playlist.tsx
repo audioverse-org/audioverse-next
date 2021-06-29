@@ -52,7 +52,7 @@ export default function Playlist<R>({
 								<button
 									onClick={() => {
 										setId(r.id);
-										playback.load(r);
+										playback.loadRecording(r);
 									}}
 								>
 									{r.title}

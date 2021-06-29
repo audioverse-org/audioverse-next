@@ -47,7 +47,7 @@ describe('miniplayer template', () => {
 				children: (
 					<ContextUser
 						func={(c) => {
-							c.load({
+							c.loadRecording({
 								id: 'the_recording_id',
 								title: 'the_recording_title',
 								videoFiles: [
@@ -76,7 +76,7 @@ describe('miniplayer template', () => {
 				children: (
 					<ContextUser
 						func={(c) => {
-							c.load({ title: 'the_recording_title' } as any);
+							c.loadRecording({ title: 'the_recording_title' } as any);
 						}}
 					/>
 				),
