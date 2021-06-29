@@ -1,6 +1,7 @@
 import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
+import { useRouter } from 'next/router';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
@@ -158,6 +159,9 @@ export default function AndMiniplayer({
 		},
 		loadPortalContainer: (portalContainer: Element | null) => {
 			setPortalContainer(portalContainer);
+			portalContainer?.appendChild(
+				document.getElementById('video-test') as any
+			);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -174,7 +178,7 @@ export default function AndMiniplayer({
 		if (!videoEl) return;
 		if (!hasSources) return;
 
-		console.log({ m: 'init videojs', portalContainer, player });
+		console.log({ m: 'init videojs', videoEl, portalContainer, player });
 
 		if (!player) {
 			setPlayer(videojs(videoEl, options));
@@ -204,14 +208,27 @@ export default function AndMiniplayer({
 				playsInline
 				data-testid={'video-element'}
 				onTimeUpdate={() => {
+					console.log('onTIme', player);
 					if (!player) return;
 					setProgress(player.currentTime() / player.duration());
 				}}
 			/>
 		</div>
 	);
+
+	const router = useRouter();
+
+	useEffect(() => {
+		router.events.on('routeChangeStart', () => {
+			document
+				.getElementById('mini-player')
+				?.appendChild(document.getElementById('video-test') as any);
+		});
+	}, []);
+
 	return (
 		<div className={styles.base}>
+			<div id="video-test">{playerNode}</div>
 			<div className={styles.content}>
 				<PlaybackContext.Provider value={playback}>
 					{children}
@@ -220,22 +237,12 @@ export default function AndMiniplayer({
 			{recording && (
 				<div className={styles.miniplayer}>
 					<div
+						id="mini-player"
 						className={styles.player}
 						style={{
 							display: isShowingVideo ? 'block' : 'none',
 						}}
-					>
-						{/*{playerNode}*/}
-						{portalContainer
-							? (() => {
-									console.log({ portalContainer });
-									return ReactDOM.createPortal(playerNode, portalContainer);
-							  })()
-							: (() => {
-									console.log('rendering directly');
-									return playerNode;
-							  })()}
-					</div>
+					></div>
 					<div className={styles.meta}>{recording?.title}</div>
 					<div className={styles.volume}>
 						<VolumeDown />
@@ -247,6 +254,13 @@ export default function AndMiniplayer({
 						/>
 						<VolumeUp />
 					</div>
+					<button
+						onClick={() =>
+							document
+								.getElementById('mini-player')
+								?.appendChild(document.getElementById('video-test') as any)
+						}
+					></button>
 				</div>
 			)}
 		</div>
