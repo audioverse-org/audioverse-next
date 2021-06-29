@@ -2,13 +2,13 @@ import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
-import ReactDOM from 'react-dom';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
