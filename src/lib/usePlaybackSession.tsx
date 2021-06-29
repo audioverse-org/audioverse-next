@@ -35,11 +35,6 @@ export default function usePlaybackSession(
 
 	useEffect(() => {
 		if (!isLoaded) return;
-		// TODO: Only load portal if isLoaded
-		console.log({
-			m: 'loading portal container',
-			current: portalContainerRef.current,
-		});
 		context.loadPortalContainer(portalContainerRef.current);
 	}, [portalContainerRef.current, isLoaded]);
 

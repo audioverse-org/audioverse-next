@@ -3,7 +3,6 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
@@ -108,7 +107,6 @@ export default function AndMiniplayer({
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
-	const [portalContainer, setPortalContainer] = useState<Element | null>(null);
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -119,8 +117,7 @@ export default function AndMiniplayer({
 		// TODO: Should this be set back to `auto` once streaming urls are fixed?
 		// https://docs.videojs.com/docs/guides/options.html
 		preload: 'metadata',
-		width: 212,
-		height: 90,
+		fluid: true,
 		sources,
 	};
 
@@ -158,10 +155,9 @@ export default function AndMiniplayer({
 			setRecording(recording);
 		},
 		loadPortalContainer: (portalContainer: Element | null) => {
-			setPortalContainer(portalContainer);
-			portalContainer?.appendChild(
-				document.getElementById('video-test') as any
-			);
+			const video = document.getElementById('video-test');
+			if (!video) return;
+			portalContainer?.appendChild(video);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -178,8 +174,6 @@ export default function AndMiniplayer({
 		if (!videoEl) return;
 		if (!hasSources) return;
 
-		console.log({ m: 'init videojs', videoEl, portalContainer, player });
-
 		if (!player) {
 			setPlayer(videojs(videoEl, options));
 		} else if (sources) {
@@ -188,7 +182,7 @@ export default function AndMiniplayer({
 
 		setIsPaused(true);
 		setFingerprint(JSON.stringify(sources));
-	}, [hasSources, sources, videoEl, portalContainer]);
+	}, [hasSources, sources, videoEl]);
 
 	useEffect(() => {
 		onLoad && onLoad(playback);
@@ -200,35 +194,35 @@ export default function AndMiniplayer({
 		player?.volume(volume / 100);
 	}, [volume]);
 
-	const playerNode = (
-		<div data-vjs-player={true}>
-			<video
-				ref={onVideo}
-				className="video-js"
-				playsInline
-				data-testid={'video-element'}
-				onTimeUpdate={() => {
-					console.log('onTIme', player);
-					if (!player) return;
-					setProgress(player.currentTime() / player.duration());
-				}}
-			/>
-		</div>
-	);
-
 	const router = useRouter();
 
 	useEffect(() => {
 		router.events.on('routeChangeStart', () => {
-			document
-				.getElementById('mini-player')
-				?.appendChild(document.getElementById('video-test') as any);
+			const miniplayer = document.getElementById('mini-player');
+			const video = document.getElementById('video-test') as any;
+			miniplayer?.appendChild(video);
 		});
 	}, []);
 
 	return (
 		<div className={styles.base}>
-			<div id="video-test">{playerNode}</div>
+			<div className={styles.videoOrigin}>
+				<div id="video-test" className={styles.playerElement}>
+					<div data-vjs-player={true}>
+						<video
+							ref={onVideo}
+							className="video-js"
+							playsInline
+							data-testid={'video-element'}
+							onTimeUpdate={() => {
+								if (!player) return;
+								setProgress(player.currentTime() / player.duration());
+							}}
+						/>
+					</div>
+				</div>
+			</div>
+
 			<div className={styles.content}>
 				<PlaybackContext.Provider value={playback}>
 					{children}
@@ -242,7 +236,7 @@ export default function AndMiniplayer({
 						style={{
 							display: isShowingVideo ? 'block' : 'none',
 						}}
-					></div>
+					/>
 					<div className={styles.meta}>{recording?.title}</div>
 					<div className={styles.volume}>
 						<VolumeDown />
@@ -254,13 +248,6 @@ export default function AndMiniplayer({
 						/>
 						<VolumeUp />
 					</div>
-					<button
-						onClick={() =>
-							document
-								.getElementById('mini-player')
-								?.appendChild(document.getElementById('video-test') as any)
-						}
-					></button>
 				</div>
 			)}
 		</div>

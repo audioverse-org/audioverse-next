@@ -3,6 +3,7 @@ import React from 'react';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
+import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 jest.mock('react-topbar-progress-indicator');
@@ -12,6 +13,10 @@ const renderApp = (component: any, props: any) => {
 };
 
 describe('app', () => {
+	beforeEach(() => {
+		loadRouter({});
+	});
+
 	it('sets title', async () => {
 		const { getByTestId } = await render(
 			<MyApp

@@ -36,7 +36,13 @@ export function loadQuery(query: ParsedUrlQuery = {}): void {
 }
 
 export function loadRouter(router_: Partial<NextRouter>): void {
-	jest.spyOn(router, 'useRouter').mockReturnValue(router_ as any);
+	const val = {
+		events: {
+			on: () => undefined,
+		},
+		...router_,
+	};
+	jest.spyOn(router, 'useRouter').mockReturnValue(val as any);
 }
 
 export function loadAuthGuardData(email: any = 'the_email'): void {

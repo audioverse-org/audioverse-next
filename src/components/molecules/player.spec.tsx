@@ -9,6 +9,7 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import {
 	buildRenderer,
+	loadRouter,
 	renderWithIntl,
 	setPlayerMock,
 } from '@lib/test/helpers';
@@ -43,7 +44,10 @@ const renderComponent = buildRenderer(
 );
 
 describe('player', () => {
-	beforeEach(() => setPlayerMock());
+	beforeEach(() => {
+		setPlayerMock();
+		loadRouter({});
+	});
 
 	it('has button', async () => {
 		const { getByLabelText } = await renderComponent();
@@ -171,14 +175,6 @@ describe('player', () => {
 		await waitFor(() => {
 			expect(player.currentTime).toBeCalledWith(65);
 		});
-	});
-
-	it('hides player if no video files', async () => {
-		const { getByTestId, getByLabelText } = await renderComponent();
-
-		userEvent.click(getByLabelText('play'));
-
-		expect(getByTestId('video-element')).not.toBeVisible();
 	});
 
 	it('hides scrubber when video shown', async () => {

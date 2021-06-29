@@ -26,6 +26,9 @@
 .player {
 	flex: 0 0 auto;
 	margin-right: 1rem;
+	.playerElement {
+		width: 212px;
+	}
 }
 
 .meta {
@@ -36,4 +39,9 @@
 	display: flex;
 	align-items: center;
 	min-width: 150px;
+}
+
+.videoOrigin {
+	visibility: hidden;
+	height: 0;
 }

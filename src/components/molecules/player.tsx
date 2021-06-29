@@ -23,12 +23,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 
-	console.log({
-		m: 'rendering player',
-		isVideoLoaded: session.isVideoLoaded,
-		video: session.video,
-	});
-
 	return (
 		<div data-testid={recording.id}>
 			{hasVideo(recording) && (
