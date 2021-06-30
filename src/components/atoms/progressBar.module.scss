@@ -1,12 +1,12 @@
-@import "../../styles/common";
+@import '../../styles/common';
 
 .progress {
 	display: grid;
-	grid-template-areas: "cell";
+	grid-template-areas: 'cell';
 
 	&:before {
 		grid-area: cell;
-		content: "";
+		content: '';
 		display: block;
 		background-color: #cdd9e3;
 		height: 2px;
@@ -16,7 +16,7 @@
 
 	&:after {
 		grid-area: cell;
-		content: "";
+		content: '';
 		display: block;
 		background-color: var(--progressColor, $ts-red);
 		height: 2px;

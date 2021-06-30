@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
+import ProgressBar from '@components/atoms/progressBar';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
-import ProgressBar from '@components/atoms/progressBar';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js

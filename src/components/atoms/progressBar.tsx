@@ -14,6 +14,7 @@ export default function ProgressBar({
 	const cssProps = { '--progress': `${progress * 100}%` } as CSSProperties;
 	return (
 		<span className={styles.progress} style={cssProps}>
+			{/* TODO: don't render input if onChange not provided */}
 			<input
 				type="range"
 				value={progress * 100}
