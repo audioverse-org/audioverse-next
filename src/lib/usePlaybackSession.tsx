@@ -36,6 +36,7 @@ export default function usePlaybackSession(
 	useEffect(() => {
 		if (!isLoaded) return;
 		context.loadPortalContainer(portalContainerRef.current);
+		// TODO: Add cleanup function to unload ref from andMiniplayer
 	}, [portalContainerRef.current, isLoaded]);
 
 	// TODO: What should function be named? `withContext`?

@@ -41,7 +41,7 @@
 	min-width: 150px;
 }
 
-.videoOrigin {
-	visibility: hidden;
+.videoOrigin, .videoOrigin * {
+	visibility: hidden !important;
 	height: 0;
 }

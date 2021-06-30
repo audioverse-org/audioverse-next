@@ -9,6 +9,7 @@ import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
+import ProgressBar from '@components/atoms/progressBar';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -125,7 +126,7 @@ export default function AndMiniplayer({
 		play: () => {
 			player?.play();
 			setIsPaused(false);
-			playback.setProgress(progress);
+			if (progress) playback.setProgress(progress);
 		},
 		pause: () => {
 			player?.pause();
@@ -187,7 +188,16 @@ export default function AndMiniplayer({
 	useEffect(() => {
 		onLoad && onLoad(playback);
 		setOnLoad(undefined);
-		setVolume(player ? player.volume() * 100 : 100);
+
+		if (!player) return;
+
+		setVolume(player.volume() * 100);
+
+		const duration = player.duration();
+
+		if (!duration || isNaN(duration)) return;
+
+		setProgress(player.currentTime() / duration);
 	}, [fingerprint]);
 
 	useEffect(() => {
@@ -229,7 +239,8 @@ export default function AndMiniplayer({
 				</PlaybackContext.Provider>
 			</div>
 			{recording && (
-				<div className={styles.miniplayer}>
+				<div className={styles.miniplayer} aria-label={'miniplayer'}>
+					{/*TODO: Get rid of ID; use ref instead*/}
 					<div
 						id="mini-player"
 						className={styles.player}
@@ -237,7 +248,13 @@ export default function AndMiniplayer({
 							display: isShowingVideo ? 'block' : 'none',
 						}}
 					/>
-					<div className={styles.meta}>{recording?.title}</div>
+					<div className={styles.meta}>
+						<div>{recording?.title}</div>
+						<ProgressBar
+							progress={progress}
+							onChange={(e) => playback.setProgress(+e.target.value / 100)}
+						/>
+					</div>
 					<div className={styles.volume}>
 						<VolumeDown />
 						{/*TODO: Localize*/}

@@ -116,7 +116,11 @@ describe('player', () => {
 	it('updates scrubber on time update', async () => {
 		const player = setPlayerMock({ duration: 300 });
 
-		const { getByTestId, getByLabelText } = await renderComponent();
+		const {
+			getByTestId,
+			getByLabelText,
+			getAllByLabelText,
+		} = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
 
@@ -126,7 +130,9 @@ describe('player', () => {
 
 		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
 
-		await waitFor(() => expect(getByLabelText('progress')).toHaveValue('25'));
+		await waitFor(() =>
+			expect(getAllByLabelText('progress')[0]).toHaveValue('25')
+		);
 	});
 
 	it('updates progress on scrub', async () => {
@@ -260,13 +266,13 @@ describe('player', () => {
 	it('handles scrubber update after initial recording load', async () => {
 		const mockPlayer = setPlayerMock({ duration: 300 });
 
-		const { getByLabelText } = await renderComponent();
+		const { getByLabelText, getAllByLabelText } = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
+		ReactTestUtils.Simulate.change(getAllByLabelText('progress')[0], {
 			target: {
 				value: 50,
 			},
@@ -570,6 +576,49 @@ describe('player', () => {
 			expect(getByTestId(portal, 'video-element')).toBeInTheDocument()
 		);
 	});
+
+	it('displays progress bar in miniplayer', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(getByLabelText(miniplayer, 'progress')).toBeInTheDocument();
+	});
+
+	it('sets miniplayer progress value', async () => {
+		setPlayerMock({ time: 25, duration: 100 });
+
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('25');
+		});
+	});
+
+	it('accepts progress change from miniplayer progress bar', async () => {
+		const mockPlayer = setPlayerMock({ time: 25, duration: 100 });
+
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+		const progressInput = getByLabelText(miniplayer, 'progress');
+
+		ReactTestUtils.Simulate.change(progressInput, {
+			target: {
+				value: 70,
+			},
+		} as any);
+
+		expect(mockPlayer.currentTime).toBeCalledWith(70);
+	});
 });
 
 // TODO:
@@ -577,6 +626,8 @@ describe('player', () => {
 // Display sequence title in mini player
 // Display playback controls in mini player
 // Style volume controls
+// Speed control button toggles between 1, 1.5, 1.75, 2x speeds
+// sets isPaused to true when recording reaches end
 
 // punt:
 // Replaces play/pause with loading indicator when player in loading state
