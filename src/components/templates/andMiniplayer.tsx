@@ -1,13 +1,18 @@
 import Slider from '@material-ui/core/Slider';
+import PauseIcon from '@material-ui/icons/Pause';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import { useIntl } from 'react-intl';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import ProgressBar from '@components/atoms/progressBar';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+
+import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './andMiniplayer.module.scss';
 
@@ -97,6 +102,7 @@ export default function AndMiniplayer({
 	children,
 }: AndMiniplayerProps): JSX.Element {
 	const onVideo = useCallback((el) => setVideoEl(el), []);
+	const intl = useIntl();
 
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [videoEl, setVideoEl] = useState();
@@ -240,16 +246,47 @@ export default function AndMiniplayer({
 			</div>
 			{recording && (
 				<div className={styles.miniplayer} aria-label={'miniplayer'}>
-					{/*TODO: Get rid of ID; use ref instead*/}
-					<div
-						id="mini-player"
-						className={styles.player}
-						style={{
-							display: isShowingVideo ? 'block' : 'none',
-						}}
-					/>
+					<div>
+						{/*TODO: Get rid of ID; use ref instead*/}
+						<div
+							id="mini-player"
+							className={styles.player}
+							style={{
+								display: isShowingVideo ? 'block' : 'none',
+							}}
+						/>
+						{playback.paused() ? (
+							<button
+								aria-label={intl.formatMessage({
+									id: 'andMiniplayer__playButtonLabel',
+									defaultMessage: 'play',
+									description: 'miniplayer play button label',
+								})}
+								onClick={() => playback.play()}
+							>
+								<PlayArrowIcon />
+							</button>
+						) : (
+							<button
+								aria-label={intl.formatMessage({
+									id: 'andMiniplayer__pauseButtonLabel',
+									defaultMessage: 'pause',
+									description: 'miniplayer pause button label',
+								})}
+								onClick={() => playback.pause()}
+							>
+								<PauseIcon />
+							</button>
+						)}
+					</div>
 					<div className={styles.meta}>
-						<div>{recording?.title}</div>
+						{recording.sequence && (
+							<div aria-label={'series'}>
+								<ListIcon width={16} height={16} />
+								{recording.sequence.title}
+							</div>
+						)}
+						<div>{recording.title}</div>
 						<ProgressBar
 							progress={progress}
 							onChange={(e) => playback.setProgress(+e.target.value / 100)}

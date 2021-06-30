@@ -1,4 +1,10 @@
-import { getByLabelText, getByTestId, waitFor } from '@testing-library/react';
+import {
+	getByLabelText,
+	getByTestId,
+	getByText,
+	queryByLabelText,
+	waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -19,6 +25,9 @@ jest.mock('video.js');
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	sequence: {
+		title: 'the_sequence_title',
+	},
 	audioFiles: [
 		{
 			url: 'the_source_src',
@@ -67,20 +76,24 @@ describe('player', () => {
 	});
 
 	it('toggles play/pause buttons', async () => {
-		const { getByLabelText } = await renderComponent();
+		const result = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		const player = result.getByLabelText('player');
 
-		expect(getByLabelText('pause')).toBeInTheDocument();
+		userEvent.click(getByLabelText(player, 'play'));
+
+		expect(getByLabelText(player, 'pause')).toBeInTheDocument();
 	});
 
 	it('toggles back to play button', async () => {
-		const { getByLabelText } = await renderComponent();
+		const result = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
-		userEvent.click(getByLabelText('pause'));
+		const player = result.getByLabelText('player');
 
-		expect(getByLabelText('play')).toBeInTheDocument();
+		userEvent.click(getByLabelText(player, 'play'));
+		userEvent.click(getByLabelText(player, 'pause'));
+
+		expect(getByLabelText(player, 'play')).toBeInTheDocument();
 	});
 
 	it('sets current time', async () => {
@@ -202,7 +215,7 @@ describe('player', () => {
 	});
 
 	it('sets paused to true when switching formats', async () => {
-		const { getByLabelText, getByText } = await renderComponent({
+		const result = await renderComponent({
 			props: {
 				recording: {
 					audioFiles: [
@@ -223,12 +236,14 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByText('Audio'));
-		userEvent.click(getByLabelText('play'));
-		userEvent.click(getByText('Video'));
-		userEvent.click(getByText('Audio'));
+		const player = result.getByLabelText('player');
 
-		expect(getByLabelText('play')).toBeInTheDocument();
+		userEvent.click(getByText(player, 'Audio'));
+		userEvent.click(getByLabelText(player, 'play'));
+		userEvent.click(getByText(player, 'Video'));
+		userEvent.click(getByText(player, 'Audio'));
+
+		expect(getByLabelText(player, 'play')).toBeInTheDocument();
 	});
 
 	it('displays both format buttons at the same time', async () => {
@@ -319,9 +334,9 @@ describe('player', () => {
 			},
 		});
 
-		const { getByLabelText } = await renderComponent();
+		const result = await renderComponent();
 
-		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
+		ReactTestUtils.Simulate.change(result.getByLabelText('progress'), {
 			target: {
 				value: 50,
 			},
@@ -329,7 +344,8 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		userEvent.click(getByLabelText('play'));
+		const player = result.getByLabelText('player');
+		userEvent.click(getByLabelText(player, 'play'));
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
@@ -414,7 +430,7 @@ describe('player', () => {
 	});
 
 	it('does not show audio controls when video playing', async () => {
-		const { getByAltText, queryByLabelText } = await renderComponent({
+		const { getByAltText, getByLabelText } = await renderComponent({
 			props: {
 				recording: {
 					title: 'the_sermon_title',
@@ -435,7 +451,9 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		expect(queryByLabelText('pause')).not.toBeInTheDocument();
+		const player = getByLabelText('player');
+
+		expect(queryByLabelText(player, 'pause')).not.toBeInTheDocument();
 	});
 
 	it('isolates recording progress between recordings', async () => {
@@ -618,6 +636,72 @@ describe('player', () => {
 		} as any);
 
 		expect(mockPlayer.currentTime).toBeCalledWith(70);
+	});
+
+	it('displays series in miniplayer', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(getByText(miniplayer, 'the_sequence_title')).toBeInTheDocument();
+	});
+
+	it('does not attempt series display if no series', async () => {
+		const result = await renderComponent({
+			props: {
+				recording: {
+					id: 'the_sermon_id',
+					title: 'the_sermon_title',
+					audioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(queryByLabelText(miniplayer, 'series')).not.toBeInTheDocument();
+	});
+
+	it('has pause button in miniplayer', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();
+	});
+
+	it('has play button in miniplayer', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		userEvent.click(getByLabelText(miniplayer, 'pause'));
+
+		expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument();
+	});
+
+	it('toggles between miniplayer play and pause buttons', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(queryByLabelText(miniplayer, 'play')).not.toBeInTheDocument();
 	});
 });
 

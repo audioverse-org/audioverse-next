@@ -24,7 +24,14 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 
 	return (
-		<div data-testid={recording.id}>
+		<div
+			data-testid={recording.id}
+			aria-label={intl.formatMessage({
+				id: 'player__playerLabel',
+				defaultMessage: 'player',
+				description: 'player label',
+			})}
+		>
 			{hasVideo(recording) && (
 				<>
 					<button onClick={() => session.setPrefersAudio(true)}>Audio</button>

@@ -524,6 +524,7 @@ export type CollectionRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -683,6 +684,7 @@ export type DistributionAgreementRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2375,6 +2377,7 @@ export type PersonRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
   withRole: Maybe<PersonsRoleField>;
@@ -2679,6 +2682,7 @@ export type QueryAudiobookTracksArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -2838,6 +2842,7 @@ export type QueryFeaturedRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3017,6 +3022,7 @@ export type QueryMusicTracksArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3102,6 +3108,7 @@ export type QueryPopularRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3156,6 +3163,7 @@ export type QueryRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3239,6 +3247,7 @@ export type QuerySermonsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -3291,6 +3300,7 @@ export type QueryStoriesArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -4013,6 +4023,7 @@ export type SequenceRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -4197,6 +4208,7 @@ export type SponsorRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -4340,6 +4352,7 @@ export type TagRecordingsArgs = {
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   stage: Maybe<RecordingStage>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -5064,6 +5077,7 @@ export type UserFavoriteRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -5330,6 +5344,7 @@ export type UserPlaylistRecordingsArgs = {
   stage: Maybe<RecordingStage>;
   tagName: Maybe<Scalars['String']>;
   technicalScreeningStatus: Maybe<RecordingTechnicalScreeningStatus>;
+  updatedDates: Maybe<Array<DateRangeInput>>;
   viewerHasFavorited: Maybe<Scalars['Boolean']>;
   websiteIds: Maybe<Array<Scalars['ID']>>;
 };
@@ -5756,7 +5771,10 @@ export type TestimoniesFragment = (
 export type AndMiniplayerFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title'>
-  & { audioFiles: Array<(
+  & { sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'title'>
+  )>, audioFiles: Array<(
     { __typename?: 'AudioFile' }
     & Pick<AudioFile, 'url' | 'filesize' | 'mimeType'>
   )>, videoFiles: Array<(
@@ -7455,6 +7473,9 @@ export const AndMiniplayerFragmentDoc = `
     fragment andMiniplayer on Recording {
   id
   title
+  sequence {
+    title
+  }
   audioFiles {
     url
     filesize

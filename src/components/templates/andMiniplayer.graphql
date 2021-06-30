@@ -1,6 +1,9 @@
 fragment andMiniplayer on Recording {
 	id
 	title
+	sequence {
+		title
+	}
 	audioFiles {
 		url
 		filesize
