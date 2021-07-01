@@ -1,14 +1,12 @@
 import Slider from '@material-ui/core/Slider';
-import PauseIcon from '@material-ui/icons/Pause';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
-import { useIntl } from 'react-intl';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import ProgressBar from '@components/atoms/progressBar';
+import ButtonPlay from '@components/molecules/buttonPlay';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
@@ -102,7 +100,6 @@ export default function AndMiniplayer({
 	children,
 }: AndMiniplayerProps): JSX.Element {
 	const onVideo = useCallback((el) => setVideoEl(el), []);
-	const intl = useIntl();
 
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [videoEl, setVideoEl] = useState();
@@ -222,88 +219,64 @@ export default function AndMiniplayer({
 
 	return (
 		<div className={styles.base}>
-			<div className={styles.videoOrigin}>
-				<div id="video-test" className={styles.playerElement}>
-					<div data-vjs-player={true}>
-						<video
-							ref={onVideo}
-							className="video-js"
-							playsInline
-							data-testid={'video-element'}
-							onTimeUpdate={() => {
-								if (!player) return;
-								setProgress(player.currentTime() / player.duration());
-							}}
-						/>
+			<PlaybackContext.Provider value={playback}>
+				<div className={styles.videoOrigin}>
+					<div id="video-test" className={styles.playerElement}>
+						<div data-vjs-player={true}>
+							<video
+								ref={onVideo}
+								className="video-js"
+								playsInline
+								data-testid={'video-element'}
+								onTimeUpdate={() => {
+									if (!player) return;
+									setProgress(player.currentTime() / player.duration());
+								}}
+							/>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div className={styles.content}>
-				<PlaybackContext.Provider value={playback}>
-					{children}
-				</PlaybackContext.Provider>
-			</div>
-			{recording && (
-				<div className={styles.miniplayer} aria-label={'miniplayer'}>
-					<div>
-						{/*TODO: Get rid of ID; use ref instead*/}
-						<div
-							id="mini-player"
-							className={styles.player}
-							style={{
-								display: isShowingVideo ? 'block' : 'none',
-							}}
-						/>
-						{playback.paused() ? (
-							<button
-								aria-label={intl.formatMessage({
-									id: 'andMiniplayer__playButtonLabel',
-									defaultMessage: 'play',
-									description: 'miniplayer play button label',
-								})}
-								onClick={() => playback.play()}
-							>
-								<PlayArrowIcon />
-							</button>
-						) : (
-							<button
-								aria-label={intl.formatMessage({
-									id: 'andMiniplayer__pauseButtonLabel',
-									defaultMessage: 'pause',
-									description: 'miniplayer pause button label',
-								})}
-								onClick={() => playback.pause()}
-							>
-								<PauseIcon />
-							</button>
-						)}
+				<div className={styles.content}>{children}</div>
+				{recording && (
+					<div className={styles.miniplayer} aria-label={'miniplayer'}>
+						<div>
+							{/*TODO: Get rid of ID; use ref instead*/}
+							<div
+								id="mini-player"
+								className={styles.player}
+								style={{
+									display: isShowingVideo ? 'block' : 'none',
+								}}
+							/>
+							<ButtonPlay recording={recording} />
+						</div>
+						<div className={styles.meta}>
+							{recording.sequence && (
+								<div aria-label={'series'}>
+									<ListIcon width={16} height={16} />
+									{recording.sequence.title}
+								</div>
+							)}
+							<div>{recording.title}</div>
+							<ProgressBar
+								progress={progress}
+								onChange={(e) => playback.setProgress(+e.target.value / 100)}
+							/>
+						</div>
+						<div className={styles.volume}>
+							<VolumeDown />
+							{/*TODO: Localize*/}
+							<Slider
+								value={volume}
+								onChange={(e, val) => setVolume(val as number)}
+								aria-label={'volume'}
+							/>
+							<VolumeUp />
+						</div>
 					</div>
-					<div className={styles.meta}>
-						{recording.sequence && (
-							<div aria-label={'series'}>
-								<ListIcon width={16} height={16} />
-								{recording.sequence.title}
-							</div>
-						)}
-						<div>{recording.title}</div>
-						<ProgressBar
-							progress={progress}
-							onChange={(e) => playback.setProgress(+e.target.value / 100)}
-						/>
-					</div>
-					<div className={styles.volume}>
-						<VolumeDown />
-						{/*TODO: Localize*/}
-						<Slider
-							value={volume}
-							onChange={(e, val) => setVolume(val as number)}
-							aria-label={'volume'}
-						/>
-						<VolumeUp />
-					</div>
-				</div>
-			)}
+				)}
+			</PlaybackContext.Provider>
 		</div>
 	);
 }

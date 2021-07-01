@@ -1,15 +1,12 @@
-import PauseIcon from '@material-ui/icons/Pause';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
+import ButtonNudge from '@components/molecules/buttonNudge';
+import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
-
-import BackIcon from '../../../public/img/icon-nudge-left.svg';
-import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
 
 import styles from './player.module.scss';
 
@@ -52,29 +49,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 			{session.isVideoLoaded && session.video}
 			{shouldShowAudioControls && (
 				<div className={styles.controls}>
-					{session.isPaused ? (
-						<button
-							aria-label={intl.formatMessage({
-								id: 'player__playButtonLabel',
-								defaultMessage: 'play',
-								description: 'player play button label',
-							})}
-							onClick={() => session.play()}
-						>
-							<PlayArrowIcon />
-						</button>
-					) : (
-						<button
-							aria-label={intl.formatMessage({
-								id: 'player__pauseButtonLabel',
-								defaultMessage: 'pause',
-								description: 'player pause button label',
-							})}
-							onClick={() => session.pause()}
-						>
-							<PauseIcon />
-						</button>
-					)}
+					<ButtonPlay recording={recording} />
 					<div
 						className={styles.waves}
 						style={
@@ -98,26 +73,8 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				</div>
 			)}
 			<div className={styles.skip}>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'player__nudgeBack',
-						defaultMessage: 'back 15 seconds',
-						description: 'player nudge-back label',
-					})}
-					onClick={() => session.shiftTime(-15)}
-				>
-					<BackIcon />
-				</button>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'player__nudgeForward',
-						defaultMessage: 'forward 15 seconds',
-						description: 'player nudge-forward label',
-					})}
-					onClick={() => session.shiftTime(15)}
-				>
-					<ForwardIcon />
-				</button>
+				<ButtonNudge recording={recording} reverse={true} />
+				<ButtonNudge recording={recording} />
 			</div>
 		</div>
 	);
