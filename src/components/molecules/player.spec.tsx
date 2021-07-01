@@ -703,6 +703,28 @@ describe('player', () => {
 
 		expect(queryByLabelText(miniplayer, 'play')).not.toBeInTheDocument();
 	});
+
+	it('has nudge back button', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(getByLabelText(miniplayer, 'back 15 seconds')).toBeInTheDocument();
+	});
+
+	it('has nudge forward button', async () => {
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		expect(
+			getByLabelText(miniplayer, 'forward 15 seconds')
+		).toBeInTheDocument();
+	});
 });
 
 // TODO:

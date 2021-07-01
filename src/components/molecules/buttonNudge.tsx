@@ -6,6 +6,7 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 
 import BackIcon from '../../../public/img/icon-nudge-left.svg';
 import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
+import styles from './buttonNudge.module.scss';
 
 export default function ButtonNudge({
 	recording,
@@ -31,6 +32,7 @@ export default function ButtonNudge({
 
 	return (
 		<button
+			className={styles.button}
 			aria-label={label}
 			onClick={() => session.shiftTime(reverse ? -15 : 15)}
 		>

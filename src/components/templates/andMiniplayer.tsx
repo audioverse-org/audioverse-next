@@ -13,6 +13,7 @@ import hasVideo from '@lib/hasVideo';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './andMiniplayer.module.scss';
+import ButtonNudge from '@components/molecules/buttonNudge';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -249,7 +250,9 @@ export default function AndMiniplayer({
 									display: isShowingVideo ? 'block' : 'none',
 								}}
 							/>
+							<ButtonNudge recording={recording} reverse={true} />
 							<ButtonPlay recording={recording} />
+							<ButtonNudge recording={recording} />
 						</div>
 						<div className={styles.meta}>
 							{recording.sequence && (
