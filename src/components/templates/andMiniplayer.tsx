@@ -6,6 +6,7 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import ProgressBar from '@components/atoms/progressBar';
+import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
@@ -13,7 +14,6 @@ import hasVideo from '@lib/hasVideo';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './andMiniplayer.module.scss';
-import ButtonNudge from '@components/molecules/buttonNudge';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
