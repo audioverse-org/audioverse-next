@@ -81,7 +81,7 @@ describe('app', () => {
 		expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
 	});
 
-	it('moves video to miniplayer', async () => {
+	it('moves video to and from miniplayer', async () => {
 		const recording: Partial<PlayerFragment> = {
 			id: 'the_sermon_id',
 			title: 'the_sermon_title',
@@ -103,7 +103,6 @@ describe('app', () => {
 			</AndMiniplayer>
 		);
 
-		// const resultOne = await renderApp(Page, { includePlayer: true });
 		const resultOne = await render(
 			<MyApp
 				Component={Page as any}
@@ -131,6 +130,20 @@ describe('app', () => {
 
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+		});
+
+		const resultThree = await render(
+			<MyApp
+				Component={Page as any}
+				pageProps={{ includePlayer: true } as any}
+			/>,
+			{ container: resultTwo.container }
+		);
+
+		const playerThree = resultThree.getByLabelText('player');
+
+		await waitFor(() => {
+			expect(getByTestId(playerThree, 'video-element')).toBeInTheDocument();
 		});
 	});
 });
