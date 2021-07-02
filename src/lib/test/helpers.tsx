@@ -224,7 +224,15 @@ interface SetPlayerMockOptions {
 
 type MockPlayer = Pick<
 	videojs.Player,
-	'play' | 'pause' | 'paused' | 'currentTime' | 'duration' | 'src' | 'volume'
+	| 'play'
+	| 'pause'
+	| 'paused'
+	| 'currentTime'
+	| 'duration'
+	| 'src'
+	| 'volume'
+	| 'options'
+	| 'controlBar'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 };
@@ -270,6 +278,11 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		}) as any,
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
+		options: jest.fn(),
+		controlBar: {
+			createEl: jest.fn(),
+			dispose: jest.fn(),
+		} as any,
 		...functions,
 	};
 

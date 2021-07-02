@@ -123,18 +123,12 @@ export default function AndMiniplayer({
 	const options: VideoJsPlayerOptions = {
 		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
 		controls: true,
+		controlBar: false,
 		// TODO: Should this be set back to `auto` once streaming urls are fixed?
 		// https://docs.videojs.com/docs/guides/options.html
 		preload: 'metadata',
 		fluid: true,
 		sources,
-	};
-
-	const moveVideo = (destination: Element) => {
-		const video = videoRef.current;
-		if (!video) return;
-		if (destination === video.parentElement) return;
-		destination.appendChild(video);
 	};
 
 	const playback: PlaybackContextType = {
@@ -174,7 +168,6 @@ export default function AndMiniplayer({
 		},
 		loadPortalContainer: (portalContainer: Element | null) => {
 			setPortal(portalContainer);
-			portalContainer && moveVideo(portalContainer);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -222,10 +215,13 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		if (portal === null) {
-			const miniplayer = document.getElementById('mini-player');
-			miniplayer && moveVideo(miniplayer);
-		}
+		const destination = portal || document.getElementById('mini-player');
+		const video = videoRef.current;
+
+		if (!destination || !video) return;
+		if (destination === video.parentElement) return;
+
+		destination.appendChild(video);
 	}, [portal]);
 
 	return (
