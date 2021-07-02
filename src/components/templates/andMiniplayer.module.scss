@@ -24,10 +24,33 @@
 }
 
 .player {
-	flex: 0 0 auto;
-	margin-right: 1rem;
-	.playerElement {
-		width: 212px;
+	display: grid;
+	grid-template-areas: 'cell';
+	.pane {
+		grid-area: cell;
+		flex: 0 0 auto;
+		.playerElement {
+			width: 212px;
+		}
+		.vjs-control-bar {
+			display: none !important;
+		}
+	}
+	.controls {
+		display: none;
+		grid-area: cell;
+		z-index: 100;
+		//display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-left: 30px;
+		padding-right: 30px;
+		background-color: rgba(255, 255, 255, 0.7);
+		opacity: 0;
+		transition: opacity 150ms;
+		&:hover {
+			opacity: 1;
+		}
 	}
 }
 

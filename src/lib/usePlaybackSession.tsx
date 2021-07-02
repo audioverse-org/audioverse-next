@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
 	PlaybackContext,
@@ -31,12 +31,17 @@ export default function usePlaybackSession(
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const isPaused = !isLoaded || context.paused();
 	const portalContainerRef = useRef<HTMLDivElement>(null);
-	const video = <div ref={portalContainerRef} data-testid={'portal'} />;
+	const [video] = useState<JSX.Element>(
+		<div ref={portalContainerRef} data-testid={'portal'} />
+	);
 
 	useEffect(() => {
+		// console.log({ isLoaded });
 		if (!isLoaded) return;
 		context.loadPortalContainer(portalContainerRef.current);
-		// TODO: Add cleanup function to unload ref from andMiniplayer
+		return () => {
+			context.loadPortalContainer(null);
+		};
 	}, [portalContainerRef.current, isLoaded]);
 
 	// TODO: What should function be named? `withContext`?

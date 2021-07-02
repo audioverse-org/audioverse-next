@@ -40,6 +40,7 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 		events: {
 			on: () => undefined,
 		},
+		prefetch: async () => undefined,
 		...router_,
 	};
 	jest.spyOn(router, 'useRouter').mockReturnValue(val as any);

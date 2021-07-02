@@ -1,17 +1,15 @@
-import Slider from '@material-ui/core/Slider';
-import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
-import { useRouter } from 'next/router';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, {
+	ReactNode,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
-import ProgressBar from '@components/atoms/progressBar';
-import ButtonNudge from '@components/molecules/buttonNudge';
-import ButtonPlay from '@components/molecules/buttonPlay';
+import Miniplayer from '@components/organisms/miniplayer';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
-
-import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './andMiniplayer.module.scss';
 
@@ -63,6 +61,7 @@ export type PlaybackContextType = {
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	getProgress: () => number;
 	setProgress: (p: number) => void;
+	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
 		recording: AndMiniplayerFragment,
 		options?: {
@@ -73,7 +72,8 @@ export type PlaybackContextType = {
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	isShowingVideo: () => boolean;
-	getRecording: () => AndMiniplayerFragment | undefined;
+	getVolume: () => number;
+	setVolume: (v: number) => void;
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
@@ -91,6 +91,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	hasVideo: () => false,
 	isShowingVideo: () => false,
 	getRecording: () => undefined,
+	getVolume: () => 100,
+	setVolume: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -104,6 +106,7 @@ export default function AndMiniplayer({
 
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [videoEl, setVideoEl] = useState();
+	const videoRef = useRef<HTMLDivElement>(null);
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, setProgress] = useState<number>(0);
 	const [volume, setVolume] = useState<number>(100);
@@ -112,6 +115,7 @@ export default function AndMiniplayer({
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
+	const [portal, setPortal] = useState<Element | null>(null);
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -124,6 +128,13 @@ export default function AndMiniplayer({
 		preload: 'metadata',
 		fluid: true,
 		sources,
+	};
+
+	const moveVideo = (destination: Element) => {
+		const video = videoRef.current;
+		if (!video) return;
+		if (destination === video.parentElement) return;
+		destination.appendChild(video);
 	};
 
 	const playback: PlaybackContextType = {
@@ -154,20 +165,22 @@ export default function AndMiniplayer({
 			if (!player || !duration || isNaN(duration)) return;
 			player.currentTime(p * duration);
 		},
+		getRecording: () => recording,
+		// TODO: Rename to setRecording
 		loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
 			const { onLoad } = options;
 			setOnLoad(() => onLoad);
 			setRecording(recording);
 		},
 		loadPortalContainer: (portalContainer: Element | null) => {
-			const video = document.getElementById('video-test');
-			if (!video) return;
-			portalContainer?.appendChild(video);
+			setPortal(portalContainer);
+			portalContainer && moveVideo(portalContainer);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideo,
-		getRecording: () => recording,
+		getVolume: () => volume,
+		setVolume,
 	};
 
 	useEffect(() => {
@@ -208,21 +221,18 @@ export default function AndMiniplayer({
 		player?.volume(volume / 100);
 	}, [volume]);
 
-	const router = useRouter();
-
 	useEffect(() => {
-		router.events.on('routeChangeStart', () => {
+		if (portal === null) {
 			const miniplayer = document.getElementById('mini-player');
-			const video = document.getElementById('video-test') as any;
-			miniplayer?.appendChild(video);
-		});
-	}, []);
+			miniplayer && moveVideo(miniplayer);
+		}
+	}, [portal]);
 
 	return (
 		<div className={styles.base}>
 			<PlaybackContext.Provider value={playback}>
 				<div className={styles.videoOrigin}>
-					<div id="video-test" className={styles.playerElement}>
+					<div ref={videoRef} className={styles.playerElement}>
 						<div data-vjs-player={true}>
 							<video
 								ref={onVideo}
@@ -239,46 +249,7 @@ export default function AndMiniplayer({
 				</div>
 
 				<div className={styles.content}>{children}</div>
-				{recording && (
-					<div className={styles.miniplayer} aria-label={'miniplayer'}>
-						<div>
-							{/*TODO: Get rid of ID; use ref instead*/}
-							<div
-								id="mini-player"
-								className={styles.player}
-								style={{
-									display: isShowingVideo ? 'block' : 'none',
-								}}
-							/>
-							<ButtonNudge recording={recording} reverse={true} />
-							<ButtonPlay recording={recording} />
-							<ButtonNudge recording={recording} />
-						</div>
-						<div className={styles.meta}>
-							{recording.sequence && (
-								<div aria-label={'series'}>
-									<ListIcon width={16} height={16} />
-									{recording.sequence.title}
-								</div>
-							)}
-							<div>{recording.title}</div>
-							<ProgressBar
-								progress={progress}
-								onChange={(e) => playback.setProgress(+e.target.value / 100)}
-							/>
-						</div>
-						<div className={styles.volume}>
-							<VolumeDown />
-							{/*TODO: Localize*/}
-							<Slider
-								value={volume}
-								onChange={(e, val) => setVolume(val as number)}
-								aria-label={'volume'}
-							/>
-							<VolumeUp />
-						</div>
-					</div>
-				)}
+				<Miniplayer />
 			</PlaybackContext.Provider>
 		</div>
 	);
