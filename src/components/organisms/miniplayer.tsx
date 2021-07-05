@@ -7,9 +7,10 @@ import ProgressBar from '@components/atoms/progressBar';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
-import styles from './miniplayer.module.scss';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
+
+import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {
 	const playback = useContext(PlaybackContext);
