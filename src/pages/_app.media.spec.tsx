@@ -1,5 +1,5 @@
 import { waitFor } from '@testing-library/dom';
-import { getByTestId, render } from '@testing-library/react';
+import { getByLabelText, getByTestId, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -65,5 +65,29 @@ describe('app media playback', () => {
 		await result.rerender(true);
 
 		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+	});
+
+	it('hides controls when video in miniplayer', async () => {
+		const result = await renderApp(true);
+
+		userEvent.click(result.getByAltText('the_sermon_title'));
+
+		await result.rerender(false);
+
+		const miniplayer = result.getByLabelText('miniplayer');
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+		expect(controls).toHaveClass('hidden');
+	});
+
+	it('shows controls when video not in miniplayer', async () => {
+		const result = await renderApp(true);
+
+		userEvent.click(result.getByAltText('the_sermon_title'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+		expect(controls).not.toHaveClass('hidden');
 	});
 });

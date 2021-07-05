@@ -1,4 +1,3 @@
-// TODO: Extract miniplayer-specific styles to its own sass file
 import Slider from '@material-ui/core/Slider';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
@@ -8,13 +7,14 @@ import ProgressBar from '@components/atoms/progressBar';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
-import styles from '@components/templates/andMiniplayer.module.scss';
+import styles from './miniplayer.module.scss';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 export default function Miniplayer(): JSX.Element | null {
 	const playback = useContext(PlaybackContext);
 	const recording = playback.getRecording();
+	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
 
 	if (!recording) return null;
 
@@ -22,14 +22,10 @@ export default function Miniplayer(): JSX.Element | null {
 		<div className={styles.miniplayer} aria-label={'miniplayer'}>
 			<div className={styles.player}>
 				{/*TODO: Get rid of ID; use ref instead*/}
+				<div id="mini-player" className={styles.pane} />
 				<div
-					id="mini-player"
-					className={styles.pane}
-					style={{
-						display: playback.isShowingVideo() ? 'block' : 'none',
-					}}
-				/>
-				<div className={styles.controls}>
+					className={`${styles.controls} ${isShowingVideo && styles.hidden}`}
+				>
 					<ButtonNudge recording={recording} reverse={true} />
 					<ButtonPlay recording={recording} />
 					<ButtonNudge recording={recording} />

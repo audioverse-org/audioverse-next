@@ -1,5 +1,5 @@
 import { waitFor } from '@testing-library/react';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer, {
 	PlaybackContext,
@@ -12,16 +12,17 @@ const renderComponent = buildRenderer(AndMiniplayer);
 function ContextUser({
 	func,
 }: {
-	func: (context: PlaybackContextType) => void;
+	func: (context: PlaybackContextType, setText: (t: string) => void) => void;
 }): JSX.Element {
 	const playbackContext = useContext(PlaybackContext);
 	const hasPlayer = playbackContext.hasPlayer();
+	const [text, setText] = useState<string>('child');
 
 	useEffect(() => {
-		func(playbackContext);
+		func(playbackContext, setText);
 	}, [hasPlayer]);
 
-	return <>child</>;
+	return <>{text}</>;
 }
 
 describe('miniplayer template', () => {
