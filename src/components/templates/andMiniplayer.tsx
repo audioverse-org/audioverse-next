@@ -75,6 +75,8 @@ export type PlaybackContextType = {
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	getVolume: () => number;
 	setVolume: (v: number) => void;
+	setSpeed: (s: number) => void;
+	getSpeed: () => number;
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
@@ -95,6 +97,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getRecording: () => undefined,
 	getVolume: () => 100,
 	setVolume: () => undefined,
+	setSpeed: () => undefined,
+	getSpeed: () => 1,
 });
 
 interface AndMiniplayerProps {
@@ -175,7 +179,7 @@ export default function AndMiniplayer({
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideo,
 		getVideoLocation: () => {
-			// TODO: return FALSE if video not being shown
+			if (!isShowingVideo) return null;
 
 			if (portal) return 'portal';
 
@@ -183,6 +187,8 @@ export default function AndMiniplayer({
 		},
 		getVolume: () => volume,
 		setVolume,
+		setSpeed: (s: number) => player?.playbackRate(s),
+		getSpeed: () => player?.playbackRate() || 1,
 	};
 
 	useEffect(() => {

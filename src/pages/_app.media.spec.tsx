@@ -8,7 +8,22 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
 
-const recording: Partial<PlayerFragment> = {
+const recordingAudio: Partial<PlayerFragment> = {
+	id: 'the_sermon_id',
+	title: 'the_sermon_title',
+	sequence: {
+		title: 'the_sequence_title',
+	},
+	audioFiles: [
+		{
+			url: 'the_source_src',
+			mimeType: 'the_source_type',
+			filesize: 'the_source_size',
+		},
+	],
+};
+
+const recordingVideo: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	sequence: {
@@ -23,7 +38,13 @@ const recording: Partial<PlayerFragment> = {
 	],
 };
 
-const Page = ({ includePlayer }: { includePlayer: boolean }) => (
+const Page = ({
+	includePlayer,
+	recording,
+}: {
+	includePlayer: boolean;
+	recording: Partial<PlayerFragment>;
+}) => (
 	<AndMiniplayer>
 		{includePlayer && <Player recording={recording as PlayerFragment} />}
 	</AndMiniplayer>
@@ -31,10 +52,14 @@ const Page = ({ includePlayer }: { includePlayer: boolean }) => (
 
 const renderApp = async (
 	includePlayer: boolean,
+	recording: Partial<PlayerFragment>,
 	container: any = undefined
 ) => {
 	const result = await render(
-		<MyApp Component={Page as any} pageProps={{ includePlayer } as any} />,
+		<MyApp
+			Component={Page as any}
+			pageProps={{ includePlayer, recording } as any}
+		/>,
 		{ container }
 	);
 
@@ -45,14 +70,14 @@ const renderApp = async (
 		expectVideoLocation: (location: HTMLElement) =>
 			expect(getByTestId(location, 'video-element')).toBeInTheDocument(),
 		rerender: (includePlayer: boolean) => {
-			return renderApp(includePlayer, result.container);
+			return renderApp(includePlayer, recording, result.container);
 		},
 	};
 };
 
 describe('app media playback', () => {
 	it('moves video to and from miniplayer', async () => {
-		const result = await renderApp(true);
+		const result = await renderApp(true, recordingVideo);
 
 		userEvent.click(result.getByAltText('the_sermon_title'));
 
@@ -68,7 +93,7 @@ describe('app media playback', () => {
 	});
 
 	it('hides controls when video in miniplayer', async () => {
-		const result = await renderApp(true);
+		const result = await renderApp(true, recordingVideo);
 
 		userEvent.click(result.getByAltText('the_sermon_title'));
 
@@ -81,9 +106,20 @@ describe('app media playback', () => {
 	});
 
 	it('shows controls when video not in miniplayer', async () => {
-		const result = await renderApp(true);
+		const result = await renderApp(true, recordingVideo);
 
 		userEvent.click(result.getByAltText('the_sermon_title'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+		expect(controls).not.toHaveClass('hidden');
+	});
+
+	it('shows controls when not playing video', async () => {
+		const result = await renderApp(true, recordingAudio);
+
+		userEvent.click(result.getByLabelText('play'));
 
 		const miniplayer = result.getByLabelText('miniplayer');
 		const controls = getByLabelText(miniplayer, 'pause').parentElement;

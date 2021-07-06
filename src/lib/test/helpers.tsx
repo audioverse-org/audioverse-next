@@ -219,6 +219,7 @@ interface SetPlayerMockOptions {
 	time?: number;
 	duration?: number;
 	volume?: number;
+	playbackRate?: number;
 	functions?: Partial<videojs.Player>;
 }
 
@@ -233,6 +234,7 @@ type MockPlayer = Pick<
 	| 'volume'
 	| 'options'
 	| 'controlBar'
+	| 'playbackRate'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 };
@@ -245,6 +247,7 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		time = 50,
 		duration = 100,
 		volume = 0.5,
+		playbackRate = 1,
 		functions = {},
 	} = options;
 
@@ -283,6 +286,10 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			createEl: jest.fn(),
 			dispose: jest.fn(),
 		} as any,
+		playbackRate: jest.fn((newRate?: number) => {
+			if (newRate) playbackRate = newRate;
+			return playbackRate;
+		}),
 		...functions,
 	};
 

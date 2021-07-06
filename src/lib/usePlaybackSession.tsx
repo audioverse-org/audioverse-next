@@ -12,11 +12,13 @@ interface PlaybackSessionInfo {
 	pause: () => void;
 	play: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
+	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
 	progress: number;
 	isAudioLoaded: boolean;
 	isVideoLoaded: boolean;
 	isPaused: boolean;
+	speed: number;
 	video: JSX.Element;
 }
 
@@ -29,6 +31,8 @@ export default function usePlaybackSession(
 	const progress = isLoaded ? context.getProgress() : 0;
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
+	const speed = context.getSpeed();
+	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
@@ -36,7 +40,6 @@ export default function usePlaybackSession(
 	);
 
 	useEffect(() => {
-		// console.log({ isLoaded });
 		if (!isLoaded) return;
 		context.loadPortalContainer(portalContainerRef.current);
 		return () => {
@@ -83,6 +86,11 @@ export default function usePlaybackSession(
 		act((c) => c.setPrefersAudio(prefersAudio));
 	}
 
+	function setSpeed(speed: number) {
+		act((c) => c.setSpeed(speed));
+		setSpeedFingerprint(speed);
+	}
+
 	// TODO: Consider not returning isLoaded
 	return {
 		shiftTime,
@@ -90,11 +98,13 @@ export default function usePlaybackSession(
 		pause,
 		play,
 		setPrefersAudio,
+		setSpeed,
 		isLoaded,
 		progress,
 		isAudioLoaded,
 		isVideoLoaded,
 		isPaused,
 		video,
+		speed,
 	};
 }

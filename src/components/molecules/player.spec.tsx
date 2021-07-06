@@ -725,9 +725,56 @@ describe('player', () => {
 			getByLabelText(miniplayer, 'forward 15 seconds')
 		).toBeInTheDocument();
 	});
+
+	it('has speed button', async () => {
+		const { getByText } = await renderComponent();
+
+		expect(getByText('1x')).toBeInTheDocument();
+	});
+
+	it('switches labels', async () => {
+		const { getByText } = await renderComponent();
+
+		userEvent.click(getByText('1x'));
+
+		await waitFor(() => expect(getByText('1.5x')).toBeInTheDocument());
+
+		userEvent.click(getByText('1.5x'));
+
+		await waitFor(() => expect(getByText('1.75x')).toBeInTheDocument());
+
+		userEvent.click(getByText('1.75x'));
+
+		await waitFor(() => expect(getByText('2x')).toBeInTheDocument());
+
+		userEvent.click(getByText('2x'));
+
+		await waitFor(() => expect(getByText('1x')).toBeInTheDocument());
+	});
+
+	it('changes speed', async () => {
+		const mockPlayer = setPlayerMock();
+
+		const { getByText } = await renderComponent();
+
+		userEvent.click(getByText('1x'));
+
+		expect(mockPlayer.playbackRate).toBeCalledWith(1.5);
+	});
+
+	it('loads videojs speed', async () => {
+		setPlayerMock({ playbackRate: 2 });
+
+		const { getByText, getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(getByText('2x')).toBeInTheDocument());
+	});
 });
 
 // TODO:
+// gets initial speed from player if isloaded
 // Display progress bar in mini player
 // Display sequence title in mini player
 // Display playback controls in mini player

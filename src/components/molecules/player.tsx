@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
+import ButtonSpeed from '@components/molecules/buttonSpeed';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -75,6 +76,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 			<div className={styles.skip}>
 				<ButtonNudge recording={recording} reverse={true} />
 				<ButtonNudge recording={recording} />
+				<ButtonSpeed recording={recording} />
 			</div>
 		</div>
 	);
