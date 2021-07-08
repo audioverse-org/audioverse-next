@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import Player from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -152,6 +153,62 @@ describe('app media playback', () => {
 			const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
 			expect(controls).not.toHaveClass('hidden');
+		});
+	});
+
+	it('handles pause event', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingVideo);
+
+			userEvent.click(result.getByAltText('the_sermon_title'));
+
+			const miniplayer = result.getByLabelText('miniplayer');
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
+			);
+
+			const portal = result.getByTestId('portal');
+
+			ReactTestUtils.Simulate.pause(
+				getByTestId(portal, 'video-element'),
+				{} as any
+			);
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
+			);
+		});
+	});
+
+	it('handles play event', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingVideo);
+
+			userEvent.click(result.getByAltText('the_sermon_title'));
+
+			const miniplayer = result.getByLabelText('miniplayer');
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
+			);
+
+			userEvent.click(getByLabelText(miniplayer, 'pause'));
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
+			);
+
+			const portal = result.getByTestId('portal');
+
+			ReactTestUtils.Simulate.play(
+				getByTestId(portal, 'video-element'),
+				{} as any
+			);
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
+			);
 		});
 	});
 });

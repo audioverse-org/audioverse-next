@@ -254,6 +254,8 @@ export default function AndMiniplayer({
 									if (!player) return;
 									setProgress(player.currentTime() / player.duration());
 								}}
+								onPause={() => setIsPaused(true)}
+								onPlay={() => setIsPaused(false)}
 							/>
 						</div>
 					</div>
