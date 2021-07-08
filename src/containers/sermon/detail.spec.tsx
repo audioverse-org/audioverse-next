@@ -49,6 +49,8 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		persons: [],
 		audioFiles: [],
 		videoFiles: [],
+		audioDownloads: [],
+		videoDownloads: [],
 		...sermon,
 	};
 
@@ -152,10 +154,9 @@ describe('sermon detail page', () => {
 	it('shows loading screen', async () => {
 		loadRouter({ isFallback: true });
 
-		const { getByText } = await renderWithIntl(SermonDetail, {
-			sermon: undefined,
-			title: undefined,
-		});
+		const { getByText } = await renderWithIntl(
+			<SermonDetail sermon={undefined} title={undefined} />
+		);
 
 		expect(getByText('Loading…')).toBeInTheDocument();
 	});
@@ -163,9 +164,9 @@ describe('sermon detail page', () => {
 	it('has favorite button', async () => {
 		loadSermonDetailData();
 
-		const { getByText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
-		expect(getByText('Favorite')).toBeInTheDocument();
+		expect(getByLabelText('Favorite')).toBeInTheDocument();
 	});
 
 	it('includes player', async () => {
@@ -565,17 +566,6 @@ describe('sermon detail page', () => {
 		expect(link.href).toContain('the_url');
 	});
 
-	it('does not display downloads if no downloads', async () => {
-		loadSermonDetailData({
-			videoDownloads: [],
-			audioDownloads: [],
-		});
-
-		const { queryByText } = await renderPage();
-
-		expect(queryByText('Downloads')).not.toBeInTheDocument();
-	});
-
 	it('links audio downloads', async () => {
 		loadSermonDetailData({
 			audioDownloads: [
@@ -592,38 +582,6 @@ describe('sermon detail page', () => {
 		const link = getByText('1 GB') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_url');
-	});
-
-	it('does not show audio downloads if none to show', async () => {
-		loadSermonDetailData({
-			videoDownloads: [
-				{
-					id: 'the_video_id',
-					url: 'the_url',
-					filesize: '1073741824',
-				},
-			],
-		});
-
-		const { queryByText } = await renderPage();
-
-		expect(queryByText('Audio Files')).not.toBeInTheDocument();
-	});
-
-	it('does not show video downloads if none to show', async () => {
-		loadSermonDetailData({
-			audioDownloads: [
-				{
-					id: 'the_audio_id',
-					url: 'the_url',
-					filesize: '1073741824',
-				},
-			],
-		});
-
-		const { queryByText } = await renderPage();
-
-		expect(queryByText('Video Files')).not.toBeInTheDocument();
 	});
 
 	it('displays recordings in series', async () => {

@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 
-import { render, RenderResult } from '@testing-library/react';
+import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import * as feed from 'feed';
 import { when } from 'jest-when';
 import _ from 'lodash';
@@ -85,7 +85,9 @@ type RendererOptions<P> = {
 	router?: Partial<NextRouter>;
 };
 
-type Renderer<P> = (options?: RendererOptions<P>) => Promise<RenderResult>;
+type Renderer<P> = (
+	options?: RendererOptions<P>
+) => Promise<RenderResult & { queryClient: QueryClient }>;
 
 // TODO: Consider how to simplify this function. Perhaps extract a simple
 //   version and rename this function to `buildPageRenderer` or similar.
@@ -106,14 +108,16 @@ export function buildRenderer<
 		defaultParams = {},
 		defaultProps = {},
 	} = options;
-	return async (options: RendererOptions<P> = {}): Promise<RenderResult> => {
+	return async (
+		options: RendererOptions<P> = {}
+	): Promise<RenderResult & { queryClient: QueryClient }> => {
 		const { params = {}, props, router = {} } = options;
 		const fullParams = { ...defaultParams, ...params };
 		const props_ = getProps
 			? await getProps(fullParams)
 			: props || defaultProps;
 		loadRouter({ query: fullParams, ...router });
-		return renderWithIntl(Component, props_);
+		return renderWithIntl(<Component {...props_} />);
 	};
 }
 
@@ -149,22 +153,24 @@ export function buildServerRenderer<
 }
 
 // TODO: Merge with buildRenderer, or just make it private
-export async function renderWithIntl<T>(
-	Component: React.ComponentType<T>,
-	props: T
-): Promise<RenderResult> {
-	const WithIntl = withIntl(Component);
+export async function renderWithIntl(
+	ui: ReactElement,
+	renderOptions?: RenderOptions
+): Promise<RenderResult & { queryClient: QueryClient }> {
+	const WithIntl = withIntl(() => ui);
 
-	return renderWithQueryProvider(<WithIntl {...props} />);
+	return renderWithQueryProvider(<WithIntl />, renderOptions);
 }
 
 // TODO: Merge with buildRenderer, or just make it private
 export async function renderWithQueryProvider(
-	ui: ReactElement
+	ui: ReactElement,
+	renderOptions?: RenderOptions
 ): Promise<RenderResult & { queryClient: QueryClient }> {
 	const queryClient = new QueryClient();
 	const result = await render(
-		<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
+		<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+		renderOptions
 	);
 
 	return {

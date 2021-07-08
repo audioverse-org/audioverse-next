@@ -1,5 +1,10 @@
 import { waitFor } from '@testing-library/dom';
-import { getByLabelText, getByTestId, render } from '@testing-library/react';
+import {
+	act,
+	getByLabelText,
+	getByTestId,
+	render,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -77,53 +82,76 @@ const renderApp = async (
 
 describe('app media playback', () => {
 	it('moves video to and from miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await act(async () => {
+			const result = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+			userEvent.click(result.getByAltText('the_sermon_title'));
 
-		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
-		await result.rerender(false);
+			await result.rerender(false);
 
-		await waitFor(() => result.expectVideoLocation(result.getMiniplayer()));
+			await waitFor(() => result.expectVideoLocation(result.getMiniplayer()));
 
-		await result.rerender(true);
+			await result.rerender(true);
 
-		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+		});
 	});
 
 	it('hides controls when video in miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await act(async () => {
+			const result = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+			userEvent.click(result.getByAltText('the_sermon_title'));
 
-		await result.rerender(false);
+			await result.rerender(false);
 
-		const miniplayer = result.getByLabelText('miniplayer');
-		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		expect(controls).toHaveClass('hidden');
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
+			);
+
+			const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+			expect(controls).toHaveClass('hidden');
+		});
 	});
 
 	it('shows controls when video not in miniplayer', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await act(async () => {
+			const result = await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+			userEvent.click(result.getByAltText('the_sermon_title'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
-		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		expect(controls).not.toHaveClass('hidden');
+			await waitFor(() => {
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();
+			});
+
+			const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+			expect(controls).not.toHaveClass('hidden');
+		});
 	});
 
 	it('shows controls when not playing video', async () => {
-		const result = await renderApp(true, recordingAudio);
+		await act(async () => {
+			const result = await renderApp(true, recordingAudio);
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
-		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		expect(controls).not.toHaveClass('hidden');
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
+			);
+
+			const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+			expect(controls).not.toHaveClass('hidden');
+		});
 	});
 });

@@ -17,6 +17,7 @@ export default function Miniplayer(): JSX.Element | null {
 	const recording = playback.getRecording();
 	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
 
+	// TODO: Move this guard into andMiniplayer
 	if (!recording) return null;
 
 	return (

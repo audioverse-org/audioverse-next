@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
+import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { QueryClient } from 'react-query';
 import { hydrate } from 'react-query/hydration';
@@ -23,7 +24,6 @@ import {
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
 import resetAllMocks = jest.resetAllMocks;
-
 jest.mock('@lib/api/login');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
@@ -207,7 +207,7 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
-		await renderWithIntl(Profile, {});
+		await renderWithIntl(<Profile />);
 
 		expect(mockedFetchApi).not.toBeCalledWith(
 			GetProfileDataDocument,

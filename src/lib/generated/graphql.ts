@@ -5528,6 +5528,17 @@ export type GetWithAuthGuardDataQuery = (
   )> }
 );
 
+export type ButtonDownloadFragment = (
+  { __typename?: 'Recording' }
+  & { videoDownloads: Array<(
+    { __typename?: 'VideoFile' }
+    & Pick<VideoFile, 'id' | 'url' | 'filesize'>
+  )>, audioDownloads: Array<(
+    { __typename?: 'AudioFile' }
+    & Pick<AudioFile, 'id' | 'url' | 'filesize'>
+  )> }
+);
+
 export type CardBibleChapterFragment = (
   { __typename?: 'BibleChapter' }
   & Pick<BibleChapter, 'title'>
@@ -5706,6 +5717,7 @@ export type PlayerFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title'>
   & AndMiniplayerFragment
+  & ButtonDownloadFragment
 );
 
 export type PlaylistFragment = (
@@ -7510,13 +7522,29 @@ export const SponsorInfoFragmentDoc = `
   title
 }
     `;
+export const ButtonDownloadFragmentDoc = `
+    fragment buttonDownload on Recording {
+  videoDownloads: videoFiles(allowedContainers: MP4) {
+    id
+    url
+    filesize
+  }
+  audioDownloads: audioFiles(allowedContainers: MP3) {
+    id
+    url
+    filesize
+  }
+}
+    `;
 export const PlayerFragmentDoc = `
     fragment player on Recording {
   id
   title
   ...andMiniplayer
+  ...buttonDownload
 }
-    ${AndMiniplayerFragmentDoc}`;
+    ${AndMiniplayerFragmentDoc}
+${ButtonDownloadFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -9488,6 +9516,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
+
 
 
 

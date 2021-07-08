@@ -378,13 +378,10 @@ describe('player', () => {
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			() => (
-				<AndMiniplayer>
-					<Player recording={recording1 as PlayerFragment} />
-					<Player recording={recording2 as PlayerFragment} />
-				</AndMiniplayer>
-			),
-			{}
+			<AndMiniplayer>
+				<Player recording={recording1 as PlayerFragment} />
+				<Player recording={recording2 as PlayerFragment} />
+			</AndMiniplayer>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -482,13 +479,10 @@ describe('player', () => {
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			() => (
-				<AndMiniplayer>
-					<Player recording={recording1 as PlayerFragment} />
-					<Player recording={recording2 as PlayerFragment} />
-				</AndMiniplayer>
-			),
-			{}
+			<AndMiniplayer>
+				<Player recording={recording1 as PlayerFragment} />
+				<Player recording={recording2 as PlayerFragment} />
+			</AndMiniplayer>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -771,9 +765,32 @@ describe('player', () => {
 
 		await waitFor(() => expect(getByText('2x')).toBeInTheDocument());
 	});
+
+	it('has download icon', async () => {
+		const { getByLabelText } = await renderComponent();
+
+		expect(getByLabelText('downloads')).toBeInTheDocument();
+	});
+
+	it('has share button', async () => {
+		const { getByLabelText } = await renderComponent();
+
+		expect(getByLabelText('share')).toBeInTheDocument();
+	});
+
+	it('has favorite button', async () => {
+		const { getByLabelText } = await renderComponent();
+
+		expect(getByLabelText('share')).toBeInTheDocument();
+	});
 });
 
 // TODO:
+// has favorite button
+// has unfavorite button if recording already favorited
+// uses react-query to update button
+// sets aria-pressed attribute appropriately
+// displays error if user not logged in
 // gets initial speed from player if isloaded
 // Display progress bar in mini player
 // Display sequence title in mini player

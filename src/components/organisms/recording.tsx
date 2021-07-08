@@ -4,13 +4,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CopyrightInfo from '@components/molecules/copyrightInfo';
-import Favorite from '@components/molecules/favorite';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import { RecordingFragment } from '@lib/generated/graphql';
-import { readableBytes } from '@lib/readableBytes';
 import { makeSeriesDetailRoute, makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -40,7 +38,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 	const speakers = recording?.persons || [];
 	const tags = recording?.recordingTags?.nodes || [];
-	const { sponsor, videoDownloads = [], audioDownloads = [] } = recording;
+	const { sponsor } = recording;
 	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
 		[],
 		{
@@ -51,9 +49,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			year: 'numeric',
 		}
 	);
-	const hasVideoDownloads = videoDownloads.length > 0;
-	const hasAudioDownloads = audioDownloads.length > 0;
-	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
 	const previousRecording = getSiblingByIndexOffset(recording, -1);
 	const nextRecording = getSiblingByIndexOffset(recording, 1);
 
@@ -118,7 +113,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						</Button>
 					)}
 				</div>
-				<Favorite id={recording.id} />
 				<PlaylistButton recordingId={recording.id} />
 				<Player recording={recording} />
 
@@ -181,57 +175,57 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					</>
 				) : null}
 				{/* TODO: Disable if downloads not allowed */}
-				{hasDownloads && (
-					<>
-						<h6>
-							<FormattedMessage
-								id="sermonDetailPage__downloadsTitle"
-								defaultMessage="Downloads"
-								description="Sermon detail downloads title"
-							/>
-						</h6>
-						{hasAudioDownloads && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="sermonDetailPage__downloadsAudioTitle"
-										defaultMessage="Audio Files"
-										description="Sermon detail audio downloads title"
-									/>
-								</h6>
-								<ul>
-									{audioDownloads.map((file) => (
-										<li key={file.id}>
-											<Link href={file.url}>
-												<a>{readableBytes(file.filesize)}</a>
-											</Link>
-										</li>
-									))}
-								</ul>
-							</>
-						)}
-						{hasVideoDownloads && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="sermonDetailPage__downloadsVideoTitle"
-										defaultMessage="Video Files"
-										description="Sermon detail video downloads title"
-									/>
-								</h6>
-								<ul>
-									{videoDownloads.map((file) => (
-										<li key={file.id}>
-											<Link href={file.url}>
-												<a>{readableBytes(file.filesize)}</a>
-											</Link>
-										</li>
-									))}
-								</ul>
-							</>
-						)}
-					</>
-				)}
+				{/*{hasDownloads && (*/}
+				{/*	<>*/}
+				{/*		<h6>*/}
+				{/*			<FormattedMessage*/}
+				{/*				id="sermonDetailPage__downloadsTitle"*/}
+				{/*				defaultMessage="Downloads"*/}
+				{/*				description="Sermon detail downloads title"*/}
+				{/*			/>*/}
+				{/*		</h6>*/}
+				{/*		{hasAudioDownloads && (*/}
+				{/*			<>*/}
+				{/*				<h6>*/}
+				{/*					<FormattedMessage*/}
+				{/*						id="sermonDetailPage__downloadsAudioTitle"*/}
+				{/*						defaultMessage="Audio Files"*/}
+				{/*						description="Sermon detail audio downloads title"*/}
+				{/*					/>*/}
+				{/*				</h6>*/}
+				{/*				<ul>*/}
+				{/*					{audioDownloads.map((file) => (*/}
+				{/*						<li key={file.id}>*/}
+				{/*							<Link href={file.url}>*/}
+				{/*								<a>{readableBytes(file.filesize)}</a>*/}
+				{/*							</Link>*/}
+				{/*						</li>*/}
+				{/*					))}*/}
+				{/*				</ul>*/}
+				{/*			</>*/}
+				{/*		)}*/}
+				{/*		{hasVideoDownloads && (*/}
+				{/*			<>*/}
+				{/*				<h6>*/}
+				{/*					<FormattedMessage*/}
+				{/*						id="sermonDetailPage__downloadsVideoTitle"*/}
+				{/*						defaultMessage="Video Files"*/}
+				{/*						description="Sermon detail video downloads title"*/}
+				{/*					/>*/}
+				{/*				</h6>*/}
+				{/*				<ul>*/}
+				{/*					{videoDownloads.map((file) => (*/}
+				{/*						<li key={file.id}>*/}
+				{/*							<Link href={file.url}>*/}
+				{/*								<a>{readableBytes(file.filesize)}</a>*/}
+				{/*							</Link>*/}
+				{/*						</li>*/}
+				{/*					))}*/}
+				{/*				</ul>*/}
+				{/*			</>*/}
+				{/*		)}*/}
+				{/*	</>*/}
+				{/*)}*/}
 				<h6>
 					<FormattedMessage
 						id="sermonDetailPage__shareTitle"

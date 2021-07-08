@@ -2,8 +2,11 @@ import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
+import ButtonDownload from '@components/molecules/buttonDownload';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
+import ButtonShare from '@components/molecules/buttonShare';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
@@ -77,6 +80,9 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				<ButtonNudge recording={recording} reverse={true} />
 				<ButtonNudge recording={recording} />
 				<ButtonSpeed recording={recording} />
+				<ButtonDownload recording={recording} />
+				<ButtonShare />
+				<ButtonFavorite id={recording.id} />
 			</div>
 		</div>
 	);
