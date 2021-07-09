@@ -3,7 +3,7 @@ query getSermonDetailData($id: ID!) {
 		...recording
 		sequence {
 			title
-			recordings {
+			recordings(first: 1000) {
 				nodes {
 					...recordingList
 				}

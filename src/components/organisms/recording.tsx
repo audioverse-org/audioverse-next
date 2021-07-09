@@ -59,6 +59,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 	return (
 		<div className={styles.base}>
+			{/*TODO: use next/link for sequence link*/}
 			{recording?.sequence && (
 				<a
 					href={makeSeriesDetailRoute(langRoute, recording?.sequence?.id)}
@@ -90,27 +91,33 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					</ul>
 				</div>
 				<div className={styles.sequenceNav}>
+					{/*TODO: use next/link for prev/next buttons*/}
 					{previousRecording && (
-						<Button
+						<Link
 							href={makeSermonRoute(langRoute, previousRecording.id)}
-							aria-label={'Previous'}
-							className={styles.previous}
-							variant={'outlined'}
-							startIcon={<ArrowLeft />}
+							passHref
 						>
-							Previous
-						</Button>
+							<Button
+								aria-label={'Previous'}
+								className={styles.previous}
+								variant={'outlined'}
+								startIcon={<ArrowLeft />}
+							>
+								Previous
+							</Button>
+						</Link>
 					)}
 					{nextRecording && (
-						<Button
-							href={makeSermonRoute(langRoute, nextRecording.id)}
-							aria-label={'Next'}
-							className={styles.next}
-							variant={'outlined'}
-							endIcon={<ArrowRight />}
-						>
-							Next
-						</Button>
+						<Link href={makeSermonRoute(langRoute, nextRecording.id)} passHref>
+							<Button
+								aria-label={'Next'}
+								className={styles.next}
+								variant={'outlined'}
+								endIcon={<ArrowRight />}
+							>
+								Next
+							</Button>
+						</Link>
 					)}
 				</div>
 				<PlaylistButton recordingId={recording.id} />
@@ -174,58 +181,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						<p>{recordingDateString}</p>
 					</>
 				) : null}
-				{/* TODO: Disable if downloads not allowed */}
-				{/*{hasDownloads && (*/}
-				{/*	<>*/}
-				{/*		<h6>*/}
-				{/*			<FormattedMessage*/}
-				{/*				id="sermonDetailPage__downloadsTitle"*/}
-				{/*				defaultMessage="Downloads"*/}
-				{/*				description="Sermon detail downloads title"*/}
-				{/*			/>*/}
-				{/*		</h6>*/}
-				{/*		{hasAudioDownloads && (*/}
-				{/*			<>*/}
-				{/*				<h6>*/}
-				{/*					<FormattedMessage*/}
-				{/*						id="sermonDetailPage__downloadsAudioTitle"*/}
-				{/*						defaultMessage="Audio Files"*/}
-				{/*						description="Sermon detail audio downloads title"*/}
-				{/*					/>*/}
-				{/*				</h6>*/}
-				{/*				<ul>*/}
-				{/*					{audioDownloads.map((file) => (*/}
-				{/*						<li key={file.id}>*/}
-				{/*							<Link href={file.url}>*/}
-				{/*								<a>{readableBytes(file.filesize)}</a>*/}
-				{/*							</Link>*/}
-				{/*						</li>*/}
-				{/*					))}*/}
-				{/*				</ul>*/}
-				{/*			</>*/}
-				{/*		)}*/}
-				{/*		{hasVideoDownloads && (*/}
-				{/*			<>*/}
-				{/*				<h6>*/}
-				{/*					<FormattedMessage*/}
-				{/*						id="sermonDetailPage__downloadsVideoTitle"*/}
-				{/*						defaultMessage="Video Files"*/}
-				{/*						description="Sermon detail video downloads title"*/}
-				{/*					/>*/}
-				{/*				</h6>*/}
-				{/*				<ul>*/}
-				{/*					{videoDownloads.map((file) => (*/}
-				{/*						<li key={file.id}>*/}
-				{/*							<Link href={file.url}>*/}
-				{/*								<a>{readableBytes(file.filesize)}</a>*/}
-				{/*							</Link>*/}
-				{/*						</li>*/}
-				{/*					))}*/}
-				{/*				</ul>*/}
-				{/*			</>*/}
-				{/*		)}*/}
-				{/*	</>*/}
-				{/*)}*/}
 				<h6>
 					<FormattedMessage
 						id="sermonDetailPage__shareTitle"

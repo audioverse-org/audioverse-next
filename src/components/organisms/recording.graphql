@@ -33,7 +33,7 @@ fragment recording on Recording {
 	sequence {
 		id
 		title
-		recordings {
+		recordings(first: 1000) {
 			nodes {
 				id
 			}

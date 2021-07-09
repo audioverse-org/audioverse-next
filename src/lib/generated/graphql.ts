@@ -5531,6 +5531,7 @@ export type GetWithAuthGuardDataQuery = (
 export type ProgressBarFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id'>
+  & AndMiniplayerFragment
 );
 
 export type ButtonDownloadFragment = (
@@ -5552,7 +5553,6 @@ export type CardBibleChapterFragment = (
 export type CardPlayableFragment = (
   { __typename?: 'Recording' }
   & ProgressBarFragment
-  & AndMiniplayerFragment
 );
 
 export type CardPostFragment = (
@@ -5812,7 +5812,6 @@ export type AndMiniplayerFragment = (
     { __typename?: 'VideoFile' }
     & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
   )> }
-  & ProgressBarFragment
 );
 
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
@@ -7374,11 +7373,6 @@ export const SpeakerNameFragmentDoc = `
   viewerHasFavorited
 }
     `;
-export const ProgressBarFragmentDoc = `
-    fragment progressBar on Recording {
-  id
-}
-    `;
 export const AndMiniplayerFragmentDoc = `
     fragment andMiniplayer on Recording {
   id
@@ -7401,16 +7395,19 @@ export const AndMiniplayerFragmentDoc = `
     filesize
     mimeType
   }
-  ...progressBar
 }
-    ${ProgressBarFragmentDoc}`;
+    `;
+export const ProgressBarFragmentDoc = `
+    fragment progressBar on Recording {
+  id
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
 export const CardPlayableFragmentDoc = `
     fragment cardPlayable on Recording {
   ...progressBar
-  ...andMiniplayer
 }
-    ${ProgressBarFragmentDoc}
-${AndMiniplayerFragmentDoc}`;
+    ${ProgressBarFragmentDoc}`;
 export const CardSermonFragmentDoc = `
     fragment cardSermon on Recording {
   id
@@ -7623,7 +7620,7 @@ export const RecordingFragmentDoc = `
   sequence {
     id
     title
-    recordings {
+    recordings(first: 1000) {
       nodes {
         id
       }
@@ -8632,7 +8629,7 @@ export const GetSermonDetailDataDocument = `
     ...recording
     sequence {
       title
-      recordings {
+      recordings(first: 1000) {
         nodes {
           ...recordingList
         }
