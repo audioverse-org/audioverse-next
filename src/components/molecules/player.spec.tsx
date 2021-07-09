@@ -196,64 +196,6 @@ describe('player', () => {
 		});
 	});
 
-	it('sets paused to true when switching formats', async () => {
-		const result = await renderComponent({
-			props: {
-				recording: {
-					audioFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
-					videoFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
-				},
-			},
-		});
-
-		const player = result.getByLabelText('player');
-
-		userEvent.click(getByText(player, 'Audio'));
-		userEvent.click(getByLabelText(player, 'play'));
-		userEvent.click(getByText(player, 'Video'));
-		userEvent.click(getByText(player, 'Audio'));
-
-		expect(getByLabelText(player, 'play')).toBeInTheDocument();
-	});
-
-	it('displays both format buttons at the same time', async () => {
-		const { getByText } = await renderComponent({
-			props: {
-				recording: {
-					audioFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
-					videoFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
-				},
-			},
-		});
-
-		expect(getByText('Audio')).toBeInTheDocument();
-		expect(getByText('Video')).toBeInTheDocument();
-	});
-
 	it('does not load recording if UI not clicked', async () => {
 		await renderComponent();
 

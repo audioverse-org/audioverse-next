@@ -36,12 +36,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				description: 'player label',
 			})}
 		>
-			{hasVideo(recording) && (
-				<>
-					<button onClick={() => session.setPrefersAudio(true)}>Audio</button>
-					<button onClick={() => session.setPrefersAudio(false)}>Video</button>
-				</>
-			)}
 			{shouldShowPoster && (
 				<button className={styles.poster} onClick={() => session.play()}>
 					<Image

@@ -35,7 +35,7 @@ export default function SpeakerName({
 		queryIsFavorited === undefined ? initialIsFavorited : queryIsFavorited;
 	const intl = useIntl();
 	const img = image && (
-		<Image width={100} height={100} alt={name} src={image.url} />
+		<Image width={32} height={32} alt={name} src={image.url} />
 	);
 
 	return (
@@ -47,7 +47,7 @@ export default function SpeakerName({
 					data-for={`person-${id}-speakerTip`}
 				>
 					{img}
-					{name}
+					<span className={styles.name}>{name}</span>
 				</a>
 			</Link>
 			<ReactTooltip

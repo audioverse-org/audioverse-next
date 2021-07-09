@@ -59,6 +59,7 @@ export type PlaybackContextType = {
 	getTime: () => number;
 	setTime: (t: number) => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
+	getPrefersAudio: () => boolean;
 	getProgress: () => number;
 	setProgress: (p: number) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
@@ -86,6 +87,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getTime: () => 0,
 	setTime: () => undefined,
 	setPrefersAudio: () => undefined,
+	getPrefersAudio: () => false,
 	getProgress: () => 0,
 	setProgress: () => undefined,
 	loadRecording: () => undefined,
@@ -158,6 +160,7 @@ export default function AndMiniplayer({
 			if (!recording) return;
 			setPrefersAudio(prefersAudio);
 		},
+		getPrefersAudio: () => prefersAudio,
 		getProgress: () => progress,
 		setProgress: (p: number) => {
 			setProgress(p);

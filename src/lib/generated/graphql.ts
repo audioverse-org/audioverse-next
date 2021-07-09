@@ -5679,6 +5679,11 @@ export type LoginForgotPasswordMutation = (
   ) }
 );
 
+export type MediaFormatSwitcherFragment = (
+  { __typename?: 'Recording' }
+  & AndMiniplayerFragment
+);
+
 export type GetPlaylistButtonDataQueryVariables = Exact<{
   language: Language;
   recordingId: Scalars['ID'];
@@ -7505,6 +7510,11 @@ export const CopyrightInfosFragmentDoc = `
   ...copyrightInfo
 }
     ${CopyrightInfoFragmentDoc}`;
+export const MediaFormatSwitcherFragmentDoc = `
+    fragment mediaFormatSwitcher on Recording {
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
 export const RecordingListFragmentDoc = `
     fragment recordingList on Recording {
   id
@@ -9572,6 +9582,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<LoginForgotPasswordMutation> {
 								return fetchApi(LoginForgotPasswordDocument, { variables });
 							}
+
 
 							export async function getPlaylistButtonData<T>(
 								variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>

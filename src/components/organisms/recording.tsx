@@ -4,6 +4,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CopyrightInfo from '@components/molecules/copyrightInfo';
+import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
@@ -90,6 +91,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						))}
 					</ul>
 				</div>
+				<MediaFormatSwitcher recording={recording} />
 				<div className={styles.sequenceNav}>
 					{/*TODO: use next/link for prev/next buttons*/}
 					{previousRecording && (

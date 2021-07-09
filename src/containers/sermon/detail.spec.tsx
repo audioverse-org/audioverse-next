@@ -1,4 +1,5 @@
 import { waitFor } from '@testing-library/dom';
+import { act, getByLabelText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
@@ -8,7 +9,6 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import { SermonDetailProps } from '@containers/sermon/detail';
 import {
 	GetSermonDetailDataDocument,
-	getSermonDetailStaticPaths,
 	GetSermonDetailStaticPathsDocument,
 } from '@lib/generated/graphql';
 import {
@@ -318,36 +318,6 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Add to Playlist')).toBeInTheDocument();
-	});
-
-	describe('with process.env', () => {
-		const oldEnv = process.env;
-
-		beforeEach(() => {
-			jest.resetModules();
-			process.env = { ...oldEnv };
-		});
-
-		afterEach(() => {
-			process.env = oldEnv;
-		});
-
-		it('loads fewer sermons in development', async () => {
-			jest.isolateModules(async () => {
-				(process.env as any).NODE_ENV = 'development';
-
-				loadSermonDetailPathsData();
-
-				await getStaticPaths();
-
-				await waitFor(() =>
-					expect(getSermonDetailStaticPaths).toBeCalledWith({
-						language: 'SPANISH',
-						first: 10,
-					})
-				);
-			});
-		});
 	});
 
 	it('uses speaker name widget', async () => {
@@ -826,5 +796,138 @@ describe('sermon detail page', () => {
 		const result = await getStaticProps({ params: { id: 'the_id' } });
 
 		expect(result.props.title).toEqual('the_sermon_title');
+	});
+
+	it('sets paused to true when switching formats', async () => {
+		await act(async () => {
+			loadSermonDetailData({
+				id: 'another_id',
+				audioFiles: [
+					{
+						url: 'the_source_src',
+						mimeType: 'the_source_type',
+						filesize: 'the_source_size',
+					},
+				],
+				videoFiles: [
+					{
+						url: 'the_source_src',
+						mimeType: 'the_source_type',
+						filesize: 'the_source_size',
+					},
+				],
+			});
+
+			const result = await renderPage();
+
+			const player = result.getByLabelText('player');
+
+			userEvent.click(result.getByText('Audio'));
+			await waitFor(() =>
+				expect(getByLabelText(player, 'play')).toBeInTheDocument()
+			);
+			userEvent.click(getByLabelText(player, 'play'));
+			userEvent.click(result.getByText('Video'));
+			userEvent.click(result.getByText('Audio'));
+			await waitFor(() =>
+				expect(getByLabelText(player, 'play')).toBeInTheDocument()
+			);
+			expect(getByLabelText(player, 'play')).toBeInTheDocument();
+		});
+	});
+
+	it('displays both format buttons at the same time', async () => {
+		loadSermonDetailData({
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Audio')).toBeInTheDocument();
+		expect(getByText('Video')).toBeInTheDocument();
+	});
+
+	it('marks video format as pressed', async () => {
+		loadSermonDetailData({
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Video')).toHaveAttribute('aria-pressed', 'true');
+	});
+
+	it('marks audio format as pressed', async () => {
+		loadSermonDetailData({
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Audio'));
+
+		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+	});
+
+	it('does not mark audio pressed when video selected', async () => {
+		loadSermonDetailData({
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
 	});
 });
