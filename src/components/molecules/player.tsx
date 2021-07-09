@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
+import ProgressBar from '@components/atoms/progressBar';
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
@@ -19,6 +20,8 @@ export interface PlayerProps {
 }
 
 const Player = ({ recording }: PlayerProps): JSX.Element => {
+	if (!recording) return <p>loading ...</p>;
+
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
@@ -40,7 +43,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				</>
 			)}
 			{shouldShowPoster && (
-				<button onClick={() => session.play()}>
+				<button className={styles.poster} onClick={() => session.play()}>
 					<Image
 						src="/img/poster.jpg"
 						alt={recording.title}
@@ -49,8 +52,15 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					/>
 				</button>
 			)}
-			{session.isVideoLoaded && <p>video right below</p>}
+
 			{session.isVideoLoaded && session.video}
+
+			{hasVideo(recording) && (
+				<div className={styles.videoProgress}>
+					<ProgressBar recording={recording} />
+				</div>
+			)}
+
 			{shouldShowAudioControls && (
 				<div className={styles.controls}>
 					<ButtonPlay recording={recording} />
@@ -76,13 +86,17 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					</div>
 				</div>
 			)}
-			<div className={styles.skip}>
-				<ButtonNudge recording={recording} reverse={true} />
-				<ButtonNudge recording={recording} />
-				<ButtonSpeed recording={recording} />
-				<ButtonDownload recording={recording} />
-				<ButtonShare />
-				<ButtonFavorite id={recording.id} />
+			<div className={styles.buttons}>
+				<div>
+					<ButtonNudge recording={recording} reverse={true} />
+					<ButtonNudge recording={recording} />
+					<ButtonSpeed recording={recording} />
+				</div>
+				<div>
+					<ButtonDownload recording={recording} />
+					<ButtonShare />
+					<ButtonFavorite id={recording.id} />
+				</div>
 			</div>
 		</div>
 	);

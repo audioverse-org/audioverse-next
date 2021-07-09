@@ -6,12 +6,16 @@ import ProgressBar from '@components/atoms/progressBar';
 import Card, { CardTheme } from '@components/molecules/card';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
-import { SpeakerNameFragment } from '@lib/generated/graphql';
+import {
+	CardPlayableFragment,
+	SpeakerNameFragment,
+} from '@lib/generated/graphql';
 import useFormattedDuration from '@lib/useFormattedDuration';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
 
 interface CardPlayableProps {
+	recording: CardPlayableFragment;
 	container?: {
 		icon?: any;
 		title: string;
@@ -27,6 +31,7 @@ interface CardPlayableProps {
 }
 
 export default function CardPlayable({
+	recording,
 	container,
 	title,
 	url,
@@ -74,7 +79,7 @@ export default function CardPlayable({
 						{useFormattedDuration(duration)}
 					</span>
 				)}
-				{progress !== undefined && <ProgressBar progress={progress} />}
+				{progress !== undefined && <ProgressBar recording={recording} />}
 				<Icon icon={'bookmark'} size={24} />
 			</div>
 		</Card>

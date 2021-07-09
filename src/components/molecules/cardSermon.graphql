@@ -13,4 +13,5 @@ fragment cardSermon on Recording {
 			}
 		}
 	}
+	...cardPlayable
 }

@@ -1,26 +1,37 @@
-import React, { ChangeEvent, CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
+import { useIntl } from 'react-intl';
+
+import {
+	AndMiniplayerFragment,
+	ProgressBarFragment,
+} from '@lib/generated/graphql';
+import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './progressBar.module.scss';
 
 interface ProgressBarProps {
-	progress: number;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	recording: ProgressBarFragment & AndMiniplayerFragment;
 }
 
 export default function ProgressBar({
-	progress,
-	onChange,
+	recording,
 }: ProgressBarProps): JSX.Element {
+	const intl = useIntl();
+	const session = usePlaybackSession(recording);
+	const progress = session.progress;
 	const cssProps = { '--progress': `${progress * 100}%` } as CSSProperties;
 	return (
 		<span className={styles.progress} style={cssProps}>
-			{/* TODO: don't render input if onChange not provided */}
 			<input
 				type="range"
 				value={progress * 100}
-				aria-label={'progress'}
+				aria-label={intl.formatMessage({
+					id: 'atom-progressBar__label',
+					defaultMessage: 'progress',
+					description: 'progress bar label',
+				})}
 				readOnly={true}
-				onChange={onChange}
+				onChange={(e) => session.setProgress(parseInt(e.target.value) / 100)}
 			/>
 		</span>
 	);

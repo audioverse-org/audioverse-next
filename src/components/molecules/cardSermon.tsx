@@ -33,6 +33,7 @@ export default function CardSermon({
 
 	return (
 		<CardPlayable
+			recording={recording}
 			url={makeSermonRoute(languageRoute, recording.id)}
 			container={container}
 			// TODO: set progress dynamically

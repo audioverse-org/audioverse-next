@@ -23,6 +23,7 @@ export default function CardStory({ story }: CardStoryProps): JSX.Element {
 
 	return (
 		<CardPlayable
+			recording={story}
 			container={container}
 			theme={'story'}
 			progress={0.3}

@@ -377,7 +377,7 @@ export type CatalogHistoryItem = Node & {
   createdAt: Scalars['DateTime'];
   entity: Maybe<CatalogHistoryEntityUnion>;
   id: Scalars['ID'];
-  performer: User;
+  performer: Maybe<User>;
   type: CatalogHistoryItemType;
 };
 
@@ -5528,6 +5528,11 @@ export type GetWithAuthGuardDataQuery = (
   )> }
 );
 
+export type ProgressBarFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id'>
+);
+
 export type ButtonDownloadFragment = (
   { __typename?: 'Recording' }
   & { videoDownloads: Array<(
@@ -5541,7 +5546,13 @@ export type ButtonDownloadFragment = (
 
 export type CardBibleChapterFragment = (
   { __typename?: 'BibleChapter' }
-  & Pick<BibleChapter, 'title'>
+  & Pick<BibleChapter, 'id' | 'title' | 'url'>
+);
+
+export type CardPlayableFragment = (
+  { __typename?: 'Recording' }
+  & ProgressBarFragment
+  & AndMiniplayerFragment
 );
 
 export type CardPostFragment = (
@@ -5570,6 +5581,7 @@ export type CardSermonFragment = (
       )> }
     ) }
   )> }
+  & CardPlayableFragment
 );
 
 export type CardSongFragment = (
@@ -5582,6 +5594,7 @@ export type CardSongFragment = (
     { __typename?: 'Sequence' }
     & Pick<Sequence, 'id' | 'title'>
   )> }
+  & CardPlayableFragment
 );
 
 export type CardStoryFragment = (
@@ -5601,6 +5614,7 @@ export type CardStoryFragment = (
       )> }
     ) }
   )> }
+  & CardPlayableFragment
 );
 
 export type CardTopicFragment = (
@@ -5610,6 +5624,7 @@ export type CardTopicFragment = (
     { __typename?: 'Person' }
     & SpeakerNameFragment
   )> }
+  & CardPlayableFragment
 );
 
 export type CopyrightInfoFragment = (
@@ -5718,6 +5733,7 @@ export type PlayerFragment = (
   & Pick<Recording, 'id' | 'title'>
   & AndMiniplayerFragment
   & ButtonDownloadFragment
+  & ProgressBarFragment
 );
 
 export type PlaylistFragment = (
@@ -5796,6 +5812,7 @@ export type AndMiniplayerFragment = (
     { __typename?: 'VideoFile' }
     & Pick<VideoFile, 'url' | 'filesize' | 'mimeType'>
   )> }
+  & ProgressBarFragment
 );
 
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
@@ -7328,7 +7345,9 @@ export type WriteFeedFileFragment = (
 
 export const CardBibleChapterFragmentDoc = `
     fragment cardBibleChapter on BibleChapter {
+  id
   title
+  url
 }
     `;
 export const CardPostFragmentDoc = `
@@ -7355,6 +7374,43 @@ export const SpeakerNameFragmentDoc = `
   viewerHasFavorited
 }
     `;
+export const ProgressBarFragmentDoc = `
+    fragment progressBar on Recording {
+  id
+}
+    `;
+export const AndMiniplayerFragmentDoc = `
+    fragment andMiniplayer on Recording {
+  id
+  title
+  sequence {
+    title
+  }
+  audioFiles {
+    url
+    filesize
+    mimeType
+  }
+  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+    url
+    filesize
+    mimeType
+  }
+  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+    url
+    filesize
+    mimeType
+  }
+  ...progressBar
+}
+    ${ProgressBarFragmentDoc}`;
+export const CardPlayableFragmentDoc = `
+    fragment cardPlayable on Recording {
+  ...progressBar
+  ...andMiniplayer
+}
+    ${ProgressBarFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const CardSermonFragmentDoc = `
     fragment cardSermon on Recording {
   id
@@ -7371,8 +7427,10 @@ export const CardSermonFragmentDoc = `
       }
     }
   }
+  ...cardPlayable
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${SpeakerNameFragmentDoc}
+${CardPlayableFragmentDoc}`;
 export const CardSongFragmentDoc = `
     fragment cardSong on Recording {
   title
@@ -7384,8 +7442,10 @@ export const CardSongFragmentDoc = `
     id
     title
   }
+  ...cardPlayable
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${SpeakerNameFragmentDoc}
+${CardPlayableFragmentDoc}`;
 export const CardStoryFragmentDoc = `
     fragment cardStory on Recording {
   title
@@ -7401,8 +7461,10 @@ export const CardStoryFragmentDoc = `
       }
     }
   }
+  ...cardPlayable
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${SpeakerNameFragmentDoc}
+${CardPlayableFragmentDoc}`;
 export const CardTopicFragmentDoc = `
     fragment cardTopic on Recording {
   title
@@ -7410,8 +7472,10 @@ export const CardTopicFragmentDoc = `
   persons {
     ...speakerName
   }
+  ...cardPlayable
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${SpeakerNameFragmentDoc}
+${CardPlayableFragmentDoc}`;
 export const CopyrightInfoFragmentDoc = `
     fragment copyrightInfo on Recording {
   copyrightYear
@@ -7481,30 +7545,6 @@ export const ProfileFragmentDoc = `
   country
 }
     `;
-export const AndMiniplayerFragmentDoc = `
-    fragment andMiniplayer on Recording {
-  id
-  title
-  sequence {
-    title
-  }
-  audioFiles {
-    url
-    filesize
-    mimeType
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    url
-    filesize
-    mimeType
-  }
-  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-    url
-    filesize
-    mimeType
-  }
-}
-    `;
 export const PlaylistFragmentDoc = `
     fragment playlist on Recording {
   id
@@ -7542,9 +7582,11 @@ export const PlayerFragmentDoc = `
   title
   ...andMiniplayer
   ...buttonDownload
+  ...progressBar
 }
     ${AndMiniplayerFragmentDoc}
-${ButtonDownloadFragmentDoc}`;
+${ButtonDownloadFragmentDoc}
+${ProgressBarFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -9516,6 +9558,8 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
+
+
 
 
 

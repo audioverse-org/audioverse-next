@@ -25,6 +25,10 @@ interface PlaybackSessionInfo {
 export default function usePlaybackSession(
 	recording: AndMiniplayerFragment
 ): PlaybackSessionInfo {
+	if (!recording) {
+		throw new Error('Missing recording');
+	}
+
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 	const isLoaded = !!loadedRecording && loadedRecording.id === recording.id;

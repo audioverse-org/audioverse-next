@@ -155,7 +155,7 @@ describe('sermon detail page', () => {
 		loadRouter({ isFallback: true });
 
 		const { getByText } = await renderWithIntl(
-			<SermonDetail sermon={undefined} title={undefined} />
+			<SermonDetail sermon={null} title={null} />
 		);
 
 		expect(getByText('Loading…')).toBeInTheDocument();

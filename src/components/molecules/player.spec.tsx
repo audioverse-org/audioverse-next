@@ -196,24 +196,6 @@ describe('player', () => {
 		});
 	});
 
-	it('hides scrubber when video shown', async () => {
-		const { queryByTestId } = await renderComponent({
-			props: {
-				recording: {
-					videoFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
-				},
-			},
-		});
-
-		expect(queryByTestId('progress')).not.toBeInTheDocument();
-	});
-
 	it('sets paused to true when switching formats', async () => {
 		const result = await renderComponent({
 			props: {
@@ -783,6 +765,55 @@ describe('player', () => {
 
 		expect(getByLabelText('share')).toBeInTheDocument();
 	});
+
+	it('shows progress when video shown', async () => {
+		const result = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		const player = result.getByLabelText('player');
+
+		await waitFor(() => {
+			expect(getByLabelText(player, 'progress')).toBeInTheDocument();
+		});
+	});
+
+	it('shows progress when video not loaded yet', async () => {
+		const result = await renderComponent({
+			props: {
+				recording: {
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const player = result.getByLabelText('player');
+
+		expect(getByLabelText(player, 'progress')).toBeInTheDocument();
+	});
+
+	// it('includes recording duration', async () => {});
 });
 
 // TODO:

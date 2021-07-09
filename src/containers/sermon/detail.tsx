@@ -8,8 +8,8 @@ import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
 export type Sermon = NonNullable<GetSermonDetailDataQuery['sermon']>;
 
 export interface SermonDetailProps {
-	sermon: Sermon | null | undefined;
-	title?: string;
+	sermon: Sermon | null;
+	title: string | null;
 }
 
 function SermonDetail({ sermon }: SermonDetailProps) {

@@ -1,5 +1,17 @@
 @import '../../styles/common';
 
+.poster {
+	background: none;
+	border: none;
+	margin: 1rem 0 0 0;
+	padding: 0;
+	cursor: pointer;
+	display: block;
+	div {
+		display: block !important;
+	}
+}
+
 .controls {
 	display: flex;
 	button {
@@ -48,11 +60,24 @@
 	}
 }
 
-.skip {
+.buttons {
 	display: flex;
+	justify-content: space-between;
 	align-items: center;
+	div {
+		display: flex;
+		align-items: center;
+	}
 	button {
 		background: none;
 		border: none;
 	}
+}
+
+.videoProgress {
+	--visualHeight: 4px;
+	--barColor: #{$ts-midTone};
+	--progressColor: #{$ts-salmon};
+	position: relative;
+	top: -14px;
 }

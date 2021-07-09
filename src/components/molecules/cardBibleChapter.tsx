@@ -14,6 +14,14 @@ export default function CardBibleChapter({
 }: CardBibleChapterProps): JSX.Element {
 	return (
 		<CardPlayable
+			recording={{
+				id: chapter.id,
+				title: chapter.title,
+				sequence: null,
+				audioFiles: [],
+				videoFiles: [],
+				videoStreams: [],
+			}}
 			container={{
 				icon: <BibleIcon width={12} height={12} />,
 				title: 'Genesis (KJV)',
@@ -23,7 +31,7 @@ export default function CardBibleChapter({
 			theme={'chapter'}
 			// TODO: Generate URL
 			url={'#'}
-			{...chapter}
+			title={chapter.title}
 		/>
 	);
 }

@@ -19,4 +19,5 @@ fragment andMiniplayer on Recording {
 		filesize
 		mimeType
 	}
+	...progressBar
 }

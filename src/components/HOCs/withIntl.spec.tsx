@@ -192,6 +192,7 @@ describe('localization usage', () => {
 						],
 					} as Sermon
 				}
+				title={null}
 			/>
 		);
 

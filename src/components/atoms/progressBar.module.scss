@@ -1,6 +1,9 @@
 @import '../../styles/common';
 
 .progress {
+	$margin: 14px;
+	$visualHeight: var(--visualHeight, 2px);
+
 	display: grid;
 	grid-template-areas: 'cell';
 
@@ -8,10 +11,10 @@
 		grid-area: cell;
 		content: '';
 		display: block;
-		background-color: #cdd9e3;
-		height: 2px;
-		margin-top: 1em;
-		margin-bottom: 1em;
+		background-color: var(--barColor, $ts-lightTone);
+		height: $visualHeight;
+		margin-top: $margin;
+		margin-bottom: $margin;
 	}
 
 	&:after {
@@ -19,12 +22,12 @@
 		content: '';
 		display: block;
 		background-color: var(--progressColor, $ts-red);
-		height: 2px;
+		height: $visualHeight;
 		width: var(--progress, 0%);
 		position: relative;
 		z-index: 10;
-		margin-top: 1em;
-		margin-bottom: 1em;
+		margin-top: $margin;
+		margin-bottom: $margin;
 	}
 
 	input {

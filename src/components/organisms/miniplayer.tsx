@@ -41,10 +41,7 @@ export default function Miniplayer(): JSX.Element | null {
 					</div>
 				)}
 				<div>{recording.title}</div>
-				<ProgressBar
-					progress={playback.getProgress()}
-					onChange={(e) => playback.setProgress(+e.target.value / 100)}
-				/>
+				<ProgressBar recording={recording} />
 			</div>
 			<div className={styles.volume}>
 				<VolumeDown />

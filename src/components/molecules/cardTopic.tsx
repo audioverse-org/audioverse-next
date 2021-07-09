@@ -14,6 +14,7 @@ export default function CardTopic({
 }: CardTopicProps): JSX.Element {
 	return (
 		<CardPlayable
+			recording={topicRecording}
 			theme={'topic'}
 			container={{
 				icon: <HatIcon width={12} height={12} />,
