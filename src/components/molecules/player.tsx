@@ -11,7 +11,10 @@ import ButtonShare from '@components/molecules/buttonShare';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import { useFormattedTime } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
+
+import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 
 import styles from './player.module.scss';
 
@@ -80,6 +83,9 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					</div>
 				</div>
 			)}
+
+			<p>{useFormattedTime(session.duration)}</p>
+
 			<div className={styles.buttons}>
 				<div>
 					<ButtonNudge recording={recording} reverse={true} />
@@ -90,6 +96,16 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					<ButtonDownload recording={recording} />
 					<ButtonShare />
 					<ButtonFavorite id={recording.id} />
+					<button
+						aria-label={intl.formatMessage({
+							id: 'player__fullscreenButtonLabel',
+							defaultMessage: 'fullscreen',
+							description: 'player fullscreen button label',
+						})}
+						onClick={() => session.requestFullscreen()}
+					>
+						<IconFullscreen />
+					</button>
 				</div>
 			</div>
 		</div>

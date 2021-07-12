@@ -17,6 +17,7 @@ export default function CardBibleChapter({
 			recording={{
 				id: chapter.id,
 				title: chapter.title,
+				duration: 0,
 				sequence: null,
 				audioFiles: [],
 				videoFiles: [],

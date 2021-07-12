@@ -51,6 +51,7 @@ describe('miniplayer template', () => {
 							c.loadRecording({
 								id: 'the_recording_id',
 								title: 'the_recording_title',
+								duration: 60,
 								sequence: {
 									title: 'the_sequence_title',
 								},

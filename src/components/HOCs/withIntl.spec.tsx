@@ -48,7 +48,7 @@ import {
 	mockedFetchApi,
 	renderWithQueryProvider,
 } from '@lib/test/helpers';
-import useFormattedDuration from '@lib/useFormattedDuration';
+import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
@@ -56,7 +56,7 @@ jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
-jest.mock('@lib/useFormattedDuration');
+jest.mock('@lib/time');
 jest.mock('@lib/api/logout');
 
 const expectNoUnlocalizedText = (

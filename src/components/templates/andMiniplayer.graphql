@@ -1,6 +1,7 @@
 fragment andMiniplayer on Recording {
 	id
 	title
+	duration
 	sequence {
 		title
 	}

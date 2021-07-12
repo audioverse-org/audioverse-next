@@ -16,6 +16,7 @@ import { PlayerFragment } from '@lib/generated/graphql';
 import {
 	buildRenderer,
 	loadRouter,
+	mockVideojs,
 	renderWithIntl,
 	setPlayerMock,
 } from '@lib/test/helpers';
@@ -755,15 +756,100 @@ describe('player', () => {
 		expect(getByLabelText(player, 'progress')).toBeInTheDocument();
 	});
 
-	// it('includes recording duration', async () => {});
+	it('includes recording duration', async () => {
+		const { getByText, getByAltText } = await renderComponent({
+			props: {
+				recording: {
+					title: 'the_sermon_title',
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		await waitFor(() => {
+			expect(getByText('1:40')).toBeInTheDocument();
+		});
+	});
+
+	it('defaults to api duration if recording not loaded', async () => {
+		mockVideojs.mockReturnValue(null);
+
+		const { getByText } = await renderComponent({
+			props: {
+				recording: {
+					duration: 60,
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		await waitFor(() => expect(getByText('1:00')).toBeInTheDocument());
+	});
+
+	it('has fullscreen button', async () => {
+		const { getByLabelText } = await renderComponent();
+
+		expect(getByLabelText('fullscreen')).toBeInTheDocument();
+	});
+
+	it('launches fullscreen when button clicked', async () => {
+		const mockPlayer = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('fullscreen'));
+
+		expect(mockPlayer.requestFullscreen).toBeCalled();
+	});
+
+	it('enables controls when launch fullscreen', async () => {
+		const mockPlayer = setPlayerMock({ isFullscreen: true });
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		mockPlayer._fire('fullscreenchange');
+
+		expect(mockPlayer.controls).toBeCalledWith(true);
+	});
+
+	it('disables controls when user exits fullscreen', async () => {
+		const mockPlayer = setPlayerMock({ isFullscreen: false });
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		mockPlayer._fire('fullscreenchange');
+
+		expect(mockPlayer.controls).toBeCalledWith(false);
+	});
 });
 
 // TODO:
-// has favorite button
-// has unfavorite button if recording already favorited
-// uses react-query to update button
-// sets aria-pressed attribute appropriately
-// displays error if user not logged in
+// does not show fullscreen button for audio
+// enables and disables player controls when entering and exiting fullscreen
 // gets initial speed from player if isloaded
 // Display progress bar in mini player
 // Display sequence title in mini player

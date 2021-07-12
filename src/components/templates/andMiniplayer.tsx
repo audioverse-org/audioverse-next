@@ -72,12 +72,15 @@ export type PlaybackContextType = {
 	loadPortalContainer: (container: Element | null) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
+	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	getVolume: () => number;
 	setVolume: (v: number) => void;
 	setSpeed: (s: number) => void;
 	getSpeed: () => number;
+	getDuration: () => number;
+	requestFullscreen: () => void;
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
@@ -90,6 +93,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getPrefersAudio: () => false,
 	getProgress: () => 0,
 	setProgress: () => undefined,
+	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
 	loadPortalContainer: () => undefined,
 	hasPlayer: () => false,
@@ -101,6 +105,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setVolume: () => undefined,
 	setSpeed: () => undefined,
 	getSpeed: () => 1,
+	getDuration: () => 0,
+	requestFullscreen: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -130,8 +136,7 @@ export default function AndMiniplayer({
 
 	const options: VideoJsPlayerOptions = {
 		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
-		controls: true,
-		controlBar: false,
+		controls: false,
 		// TODO: Should this be set back to `auto` once streaming urls are fixed?
 		// https://docs.videojs.com/docs/guides/options.html
 		preload: 'metadata',
@@ -161,6 +166,10 @@ export default function AndMiniplayer({
 			setPrefersAudio(prefersAudio);
 		},
 		getPrefersAudio: () => prefersAudio,
+		getDuration: () => {
+			// TODO: return duration according to current media file
+			return player?.duration() || recording?.duration || 0;
+		},
 		getProgress: () => progress,
 		setProgress: (p: number) => {
 			setProgress(p);
@@ -188,10 +197,14 @@ export default function AndMiniplayer({
 
 			return 'miniplayer';
 		},
+		supportsFullscreen: () => (player ? player.supportsFullScreen() : false),
 		getVolume: () => volume,
 		setVolume,
 		setSpeed: (s: number) => player?.playbackRate(s),
 		getSpeed: () => player?.playbackRate() || 1,
+		requestFullscreen: () => {
+			player?.requestFullscreen();
+		},
 	};
 
 	useEffect(() => {
@@ -241,6 +254,13 @@ export default function AndMiniplayer({
 
 		destination.appendChild(video);
 	}, [portal]);
+
+	useEffect(() => {
+		if (!player) return;
+		player.on('fullscreenchange', () => {
+			player.controls(player.isFullscreen());
+		});
+	}, [player]);
 
 	return (
 		<div className={styles.base}>

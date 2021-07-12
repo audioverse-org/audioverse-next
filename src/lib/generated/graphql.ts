@@ -5803,7 +5803,7 @@ export type TestimoniesFragment = (
 
 export type AndMiniplayerFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title'>
+  & Pick<Recording, 'id' | 'title' | 'duration'>
   & { sequence: Maybe<(
     { __typename?: 'Sequence' }
     & Pick<Sequence, 'title'>
@@ -7382,6 +7382,7 @@ export const AndMiniplayerFragmentDoc = `
     fragment andMiniplayer on Recording {
   id
   title
+  duration
   sequence {
     title
   }

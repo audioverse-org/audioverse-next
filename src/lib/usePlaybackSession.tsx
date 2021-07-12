@@ -11,6 +11,7 @@ interface PlaybackSessionInfo {
 	setProgress: (percent: number) => void;
 	pause: () => void;
 	play: () => void;
+	requestFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
@@ -20,7 +21,9 @@ interface PlaybackSessionInfo {
 	isVideoLoaded: boolean;
 	isPaused: boolean;
 	speed: number;
+	duration: number;
 	video: JSX.Element;
+	supportsFullscreen: boolean;
 }
 
 export default function usePlaybackSession(
@@ -37,7 +40,10 @@ export default function usePlaybackSession(
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
+	const supportsFullscreen = context.supportsFullscreen();
 	const speed = context.getSpeed();
+	// TODO: return duration according to current media file
+	const duration = isLoaded ? context.getDuration() : recording.duration;
 	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
 	const portalContainerRef = useRef<HTMLDivElement>(null);
@@ -97,6 +103,10 @@ export default function usePlaybackSession(
 		setSpeedFingerprint(speed);
 	}
 
+	function requestFullscreen() {
+		act((c) => c.requestFullscreen());
+	}
+
 	// TODO: Consider not returning isLoaded
 	return {
 		shiftTime,
@@ -105,13 +115,16 @@ export default function usePlaybackSession(
 		play,
 		setPrefersAudio,
 		setSpeed,
+		requestFullscreen,
 		isLoaded,
 		progress,
+		duration,
 		isAudioLoaded,
 		isVideoLoaded,
 		isPaused,
 		prefersAudio,
 		video,
 		speed,
+		supportsFullscreen,
 	};
 }

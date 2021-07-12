@@ -181,23 +181,6 @@ describe('sermon detail page', () => {
 		expect(videojs).toBeCalled();
 	});
 
-	it('enables controls', async () => {
-		loadSermonDetailData({
-			audioFiles: ['the_source'],
-		});
-
-		const { getByLabelText } = await renderPage();
-
-		userEvent.click(getByLabelText('play'));
-
-		expect(videojs).toBeCalledWith(
-			expect.anything(),
-			expect.objectContaining({
-				controls: true,
-			})
-		);
-	});
-
 	it('sets poster', async () => {
 		loadSermonDetailData({
 			audioFiles: ['the_source'],
@@ -931,3 +914,6 @@ describe('sermon detail page', () => {
 		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
 	});
 });
+
+// TODO: does not show video progress bar when audio selected
+// TODO: does not show video player in miniplayer when audio selected

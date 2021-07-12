@@ -10,7 +10,7 @@ import {
 	CardPlayableFragment,
 	SpeakerNameFragment,
 } from '@lib/generated/graphql';
-import useFormattedDuration from '@lib/useFormattedDuration';
+import { useFormattedDuration } from '@lib/time';
 
 import PlayIcon from '../../../public/img/icon-play.svg';
 

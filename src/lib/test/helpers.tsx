@@ -227,6 +227,8 @@ interface SetPlayerMockOptions {
 	volume?: number;
 	playbackRate?: number;
 	functions?: Partial<videojs.Player>;
+	supportsFullScreen?: boolean;
+	isFullscreen?: boolean;
 }
 
 type MockPlayer = Pick<
@@ -241,8 +243,13 @@ type MockPlayer = Pick<
 	| 'options'
 	| 'controlBar'
 	| 'playbackRate'
+	| 'requestFullscreen'
+	| 'controls'
+	| 'supportsFullScreen'
+	| 'on'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
+	_fire: (event: string, data?: any) => void;
 };
 
 export const mockVideojs = (videojs as unknown) as jest.Mock;
@@ -256,6 +263,9 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		playbackRate = 1,
 		functions = {},
 	} = options;
+	const { supportsFullScreen = true, isFullscreen = false } = options;
+
+	const handlers: Record<string, Array<(data: any) => any>> = {};
 
 	const mockPlayer: MockPlayer = {
 		_updateOptions: (options) => {
@@ -268,6 +278,9 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			time = update('time', time);
 			duration = update('duration', duration);
 			functions = update('functions', functions);
+		},
+		_fire: (event: string, data: any = null) => {
+			handlers[event]?.map((fn: (data: any) => any) => fn(data));
 		},
 		play: jest.fn(async () => {
 			isPaused = false;
@@ -296,6 +309,14 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;
 		}),
+		requestFullscreen: jest.fn(),
+		controls: jest.fn(),
+		supportsFullScreen: jest.fn(() => supportsFullScreen),
+		isFullscreen: jest.fn(() => isFullscreen),
+		on: jest.fn((event: string, fn: (data: any) => any) => {
+			if (!(event in handlers)) handlers[event] = [];
+			handlers[event].push(fn);
+		}) as any,
 		...functions,
 	};
 
