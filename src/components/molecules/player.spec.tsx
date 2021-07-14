@@ -803,7 +803,20 @@ describe('player', () => {
 	});
 
 	it('has fullscreen button', async () => {
-		const { getByLabelText } = await renderComponent();
+		const { getByLabelText } = await renderComponent({
+			props: {
+				recording: {
+					duration: 60,
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
 
 		expect(getByLabelText('fullscreen')).toBeInTheDocument();
 	});
@@ -811,7 +824,20 @@ describe('player', () => {
 	it('launches fullscreen when button clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		const { getByLabelText } = await renderComponent({
+			props: {
+				recording: {
+					duration: 60,
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
 
 		userEvent.click(getByLabelText('fullscreen'));
 
@@ -844,6 +870,47 @@ describe('player', () => {
 		mockPlayer._fire('fullscreenchange');
 
 		expect(mockPlayer.controls).toBeCalledWith(false);
+	});
+
+	it('displays current time', async () => {
+		const { getByLabelText, getByText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => {
+			expect(getByText('0:50')).toBeInTheDocument();
+		});
+	});
+
+	it('displays zero time if recording not loaded', async () => {
+		const { getByText } = await renderComponent();
+
+		expect(getByText('0:00')).toBeInTheDocument();
+	});
+
+	it('displays times for videos', async () => {
+		const { getByText } = await renderComponent({
+			props: {
+				recording: {
+					duration: 60,
+					videoFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+						},
+					],
+				},
+			},
+		});
+
+		expect(getByText('0:00')).toBeInTheDocument();
+	});
+
+	it('does not show fullscreen button for audio', async () => {
+		const { queryByLabelText } = await renderComponent();
+
+		expect(queryByLabelText('fullscreen')).not.toBeInTheDocument();
 	});
 });
 

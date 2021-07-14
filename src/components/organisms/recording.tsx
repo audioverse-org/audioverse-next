@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
-import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import { RecordingFragment } from '@lib/generated/graphql';
@@ -122,7 +121,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						</Link>
 					)}
 				</div>
-				<PlaylistButton recordingId={recording.id} />
+
 				<Player recording={recording} />
 
 				{recording.description && (

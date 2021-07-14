@@ -295,14 +295,6 @@ describe('sermon detail page', () => {
 		expect(queryByText('Play Audio')).not.toBeInTheDocument();
 	});
 
-	it('has playlist button', async () => {
-		loadSermonDetailData({});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('Add to Playlist')).toBeInTheDocument();
-	});
-
 	it('uses speaker name widget', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
@@ -912,6 +904,32 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
+	});
+
+	it('only displays time once when viewing audio for video', async () => {
+		loadSermonDetailData({
+			duration: 60,
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+		});
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Audio'));
+
+		expect(getByText('0:00')).toBeInTheDocument();
 	});
 });
 

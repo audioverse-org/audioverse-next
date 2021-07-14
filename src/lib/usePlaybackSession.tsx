@@ -21,6 +21,7 @@ interface PlaybackSessionInfo {
 	isVideoLoaded: boolean;
 	isPaused: boolean;
 	speed: number;
+	time: number;
 	duration: number;
 	video: JSX.Element;
 	supportsFullscreen: boolean;
@@ -42,6 +43,8 @@ export default function usePlaybackSession(
 	const prefersAudio = context.getPrefersAudio();
 	const supportsFullscreen = context.supportsFullscreen();
 	const speed = context.getSpeed();
+	// TODO: return 0 if !isLoaded
+	const time = context.getTime();
 	// TODO: return duration according to current media file
 	const duration = isLoaded ? context.getDuration() : recording.duration;
 	const [, setSpeedFingerprint] = useState<number>(speed);
@@ -118,6 +121,7 @@ export default function usePlaybackSession(
 		requestFullscreen,
 		isLoaded,
 		progress,
+		time,
 		duration,
 		isAudioLoaded,
 		isVideoLoaded,

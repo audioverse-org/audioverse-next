@@ -23,6 +23,9 @@
 			font-size: 4rem;
 		}
 	}
+	> div {
+		flex-grow: 1;
+	}
 }
 
 .waves {

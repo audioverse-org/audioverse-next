@@ -3432,7 +3432,7 @@ export type Recording = Node & UniformResourceLocatable & {
   distributionAgreement: Maybe<DistributionAgreement>;
   /** @deprecated Recording.downloadDisabled is replaced with Recording.isDownloadAllowed */
   downloadDisabled: Scalars['Boolean'];
-  /** In seconds. */
+  /** The duration of the primary audio source in seconds. */
   duration: Scalars['Float'];
   hasAudio: Scalars['Boolean'];
   hasVideo: Scalars['Boolean'];
@@ -3457,6 +3457,10 @@ export type Recording = Node & UniformResourceLocatable & {
   sequence: Maybe<Sequence>;
   /** The index of the recording within its sequence. */
   sequenceIndex: Maybe<Scalars['Int']>;
+  /** The next recording within this recording's sequence. */
+  sequenceNextRecording: Maybe<Recording>;
+  /** The previous recording within this recording's sequence. */
+  sequencePreviousRecording: Maybe<Recording>;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['URL'];
   sponsor: Maybe<Sponsor>;
@@ -5684,6 +5688,11 @@ export type MediaFormatSwitcherFragment = (
   & AndMiniplayerFragment
 );
 
+export type PlaybackTimesFragment = (
+  { __typename?: 'Recording' }
+  & AndMiniplayerFragment
+);
+
 export type GetPlaylistButtonDataQueryVariables = Exact<{
   language: Language;
   recordingId: Scalars['ID'];
@@ -7513,6 +7522,11 @@ export const CopyrightInfosFragmentDoc = `
     ${CopyrightInfoFragmentDoc}`;
 export const MediaFormatSwitcherFragmentDoc = `
     fragment mediaFormatSwitcher on Recording {
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
+export const PlaybackTimesFragmentDoc = `
+    fragment playbackTimes on Recording {
   ...andMiniplayer
 }
     ${AndMiniplayerFragmentDoc}`;
@@ -9583,6 +9597,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<LoginForgotPasswordMutation> {
 								return fetchApi(LoginForgotPasswordDocument, { variables });
 							}
+
 
 
 							export async function getPlaylistButtonData<T>(

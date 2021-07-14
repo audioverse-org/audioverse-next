@@ -11,12 +11,12 @@ import ButtonShare from '@components/molecules/buttonShare';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
-import { useFormattedTime } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 
 import styles from './player.module.scss';
+import PlaybackTimes from '@components/molecules/playbackTimes';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -29,6 +29,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const session = usePlaybackSession(recording);
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
+	const shouldShowVideoControls = !shouldShowAudioControls;
 
 	return (
 		<div
@@ -52,39 +53,41 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 
 			{session.isVideoLoaded && session.video}
 
-			{hasVideo(recording) && (
+			{shouldShowVideoControls && (
 				<div className={styles.videoProgress}>
 					<ProgressBar recording={recording} />
+					<PlaybackTimes recording={recording} />
 				</div>
 			)}
 
 			{shouldShowAudioControls && (
 				<div className={styles.controls}>
 					<ButtonPlay recording={recording} />
-					<div
-						className={styles.waves}
-						style={
-							{ '--progress': `${session.progress * 100}%` } as CSSProperties
-						}
-					>
-						<input
-							type="range"
-							aria-label={intl.formatMessage({
-								id: 'player__progressLabel',
-								defaultMessage: 'progress',
-								description: 'player progress label',
-							})}
-							value={session.progress * 100}
-							onChange={(e) => {
-								const percent = parseInt(e.target.value) / 100;
-								session.setProgress(percent);
-							}}
-						/>
+					<div>
+						<div
+							className={styles.waves}
+							style={
+								{ '--progress': `${session.progress * 100}%` } as CSSProperties
+							}
+						>
+							<input
+								type="range"
+								aria-label={intl.formatMessage({
+									id: 'player__progressLabel',
+									defaultMessage: 'progress',
+									description: 'player progress label',
+								})}
+								value={session.progress * 100}
+								onChange={(e) => {
+									const percent = parseInt(e.target.value) / 100;
+									session.setProgress(percent);
+								}}
+							/>
+						</div>
+						<PlaybackTimes recording={recording} />
 					</div>
 				</div>
 			)}
-
-			<p>{useFormattedTime(session.duration)}</p>
 
 			<div className={styles.buttons}>
 				<div>
@@ -96,16 +99,18 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					<ButtonDownload recording={recording} />
 					<ButtonShare />
 					<ButtonFavorite id={recording.id} />
-					<button
-						aria-label={intl.formatMessage({
-							id: 'player__fullscreenButtonLabel',
-							defaultMessage: 'fullscreen',
-							description: 'player fullscreen button label',
-						})}
-						onClick={() => session.requestFullscreen()}
-					>
-						<IconFullscreen />
-					</button>
+					{shouldShowVideoControls && (
+						<button
+							aria-label={intl.formatMessage({
+								id: 'player__fullscreenButtonLabel',
+								defaultMessage: 'fullscreen',
+								description: 'player fullscreen button label',
+							})}
+							onClick={() => session.requestFullscreen()}
+						>
+							<IconFullscreen />
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
