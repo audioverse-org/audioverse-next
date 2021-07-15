@@ -55,15 +55,26 @@ export default function usePlaybackSession(
 	);
 
 	useEffect(() => {
+		// console.log({
+		// 	m: 'portal load',
+		// 	isLoaded,
+		// 	portalId: recording.id,
+		// 	portal: !!portalContainerRef.current,
+		// });
 		if (!isLoaded) return;
-		context.loadPortalContainer(portalContainerRef.current);
-		return () => {
-			context.loadPortalContainer(null);
-		};
+		context.loadPortal(recording.id, portalContainerRef.current);
 	}, [portalContainerRef.current, isLoaded]);
 
-	// TODO: What should function be named? `withContext`?
-	function act(func: (c: PlaybackContextType) => void) {
+	useEffect(
+		() => () => {
+			// console.log('portal cleanup');
+			// TODO: provide recording ID when unloading?
+			context.unloadPortal();
+		},
+		[]
+	);
+
+	function afterLoad(func: (c: PlaybackContextType) => void) {
 		if (isLoaded) {
 			func(context);
 			return;
@@ -77,13 +88,13 @@ export default function usePlaybackSession(
 	}
 
 	function shiftTime(delta: number) {
-		act((c) => {
+		afterLoad((c) => {
 			c.setTime(c.getTime() + delta);
 		});
 	}
 
 	function setProgress(percent: number) {
-		act((c) => c.setProgress(percent));
+		afterLoad((c) => c.setProgress(percent));
 	}
 
 	function pause() {
@@ -94,20 +105,20 @@ export default function usePlaybackSession(
 	}
 
 	function play() {
-		act((c) => c.play());
+		afterLoad((c) => c.play());
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
-		act((c) => c.setPrefersAudio(prefersAudio));
+		afterLoad((c) => c.setPrefersAudio(prefersAudio));
 	}
 
 	function setSpeed(speed: number) {
-		act((c) => c.setSpeed(speed));
+		afterLoad((c) => c.setSpeed(speed));
 		setSpeedFingerprint(speed);
 	}
 
 	function requestFullscreen() {
-		act((c) => c.requestFullscreen());
+		afterLoad((c) => c.requestFullscreen());
 	}
 
 	// TODO: Consider not returning isLoaded

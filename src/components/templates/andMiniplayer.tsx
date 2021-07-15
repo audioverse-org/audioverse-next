@@ -69,7 +69,8 @@ export type PlaybackContextType = {
 			onLoad?: (c: PlaybackContextType) => void;
 		}
 	) => void;
-	loadPortalContainer: (container: Element | null) => void;
+	loadPortal: (id: string, container: Element | null) => void;
+	unloadPortal: () => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -95,7 +96,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setProgress: () => undefined,
 	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
-	loadPortalContainer: () => undefined,
+	loadPortal: () => undefined,
+	unloadPortal: () => undefined,
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -117,10 +119,12 @@ export default function AndMiniplayer({
 	children,
 }: AndMiniplayerProps): JSX.Element {
 	const onVideo = useCallback((el) => setVideoEl(el), []);
+	const [videoEl, setVideoEl] = useState();
+
+	const videoRef = useRef<HTMLDivElement>(null);
+	const originRef = useRef<HTMLDivElement>(null);
 
 	const [player, setPlayer] = useState<VideoJsPlayer>();
-	const [videoEl, setVideoEl] = useState();
-	const videoRef = useRef<HTMLDivElement>(null);
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, setProgress] = useState<number>(0);
 	const [volume, setVolume] = useState<number>(100);
@@ -130,6 +134,7 @@ export default function AndMiniplayer({
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
 	const [portal, setPortal] = useState<Element | null>(null);
+	const [portalId, setPortalId] = useState<string>();
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -184,8 +189,13 @@ export default function AndMiniplayer({
 			setOnLoad(() => onLoad);
 			setRecording(recording);
 		},
-		loadPortalContainer: (portalContainer: Element | null) => {
+		loadPortal: (id: string, portalContainer: Element | null) => {
+			setPortalId(id);
 			setPortal(portalContainer);
+		},
+		unloadPortal: () => {
+			setPortalId(undefined);
+			setPortal(null);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -246,14 +256,52 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		const destination = portal || document.getElementById('mini-player');
+		console.log({ portalId, portal: !!portal });
+
+		if (portalId && !portal) {
+			console.log('null portal registered');
+			return;
+		}
+
 		const video = videoRef.current;
 
-		if (!destination || !video) return;
-		if (destination === video.parentElement) return;
+		if (!video) {
+			// console.log('no video ref');
+			return;
+		}
 
+		function findDestination() {
+			// console.log('finding destination');
+
+			if (portal) {
+				// console.log('portal');
+				return portal;
+			}
+
+			if (isShowingVideo) {
+				// console.log('miniplayer');
+				return document.getElementById('mini-player');
+			}
+
+			// console.log('origin');
+			return originRef.current;
+		}
+
+		const destination = findDestination();
+
+		if (!destination) {
+			// console.log('no destination');
+			return;
+		}
+
+		if (destination === video.parentElement) {
+			// console.log('video already in destination');
+			return;
+		}
+
+		// console.log('moving to destination');
 		destination.appendChild(video);
-	}, [portal]);
+	}, [portalId, portal, isShowingVideo]);
 
 	useEffect(() => {
 		if (!player) return;
@@ -265,7 +313,7 @@ export default function AndMiniplayer({
 	return (
 		<div className={styles.base}>
 			<PlaybackContext.Provider value={playback}>
-				<div className={styles.videoOrigin}>
+				<div ref={originRef} className={styles.videoOrigin}>
 					<div ref={videoRef} className={styles.playerElement}>
 						<div data-vjs-player={true}>
 							<video

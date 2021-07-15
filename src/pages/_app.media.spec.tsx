@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/dom';
+import { queryByTestId, waitFor } from '@testing-library/dom';
 import {
 	act,
 	getByLabelText,
@@ -9,10 +9,10 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import Player from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import { PlayerFragment } from '@lib/generated/graphql';
+import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
+import { Recording } from '@components/organisms/recording';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -44,6 +44,28 @@ const recordingVideo: Partial<PlayerFragment> = {
 	],
 };
 
+const recordingAudioVideo: Partial<PlayerFragment> = {
+	id: 'the_sermon_id',
+	title: 'the_sermon_title',
+	sequence: {
+		title: 'the_sequence_title',
+	},
+	videoFiles: [
+		{
+			url: 'the_source_src',
+			mimeType: 'the_source_type',
+			filesize: 'the_source_size',
+		},
+	],
+	audioFiles: [
+		{
+			url: 'the_source_src',
+			mimeType: 'the_source_type',
+			filesize: 'the_source_size',
+		},
+	],
+};
+
 const Page = ({
 	includePlayer,
 	recording,
@@ -52,7 +74,7 @@ const Page = ({
 	recording: Partial<PlayerFragment>;
 }) => (
 	<AndMiniplayer>
-		{includePlayer && <Player recording={recording as PlayerFragment} />}
+		{includePlayer && <Recording recording={recording as RecordingFragment} />}
 	</AndMiniplayer>
 );
 
@@ -209,6 +231,61 @@ describe('app media playback', () => {
 			await waitFor(() =>
 				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
 			);
+		});
+	});
+
+	it('moves player out of miniplayer when not showing video', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingAudioVideo);
+
+			await waitFor(() => {
+				expect(result.getByText('Audio')).toBeInTheDocument();
+			});
+
+			userEvent.click(result.getByText('Audio'));
+
+			const miniplayer = result.getByLabelText('miniplayer');
+
+			await waitFor(() =>
+				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
+			);
+
+			expect(
+				queryByTestId(miniplayer, 'video-element')
+			).not.toBeInTheDocument();
+		});
+	});
+
+	it('never shows video in miniplayer when still on detail page', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingAudioVideo);
+
+			await waitFor(() => {
+				expect(result.getByText('Audio')).toBeInTheDocument();
+			});
+
+			userEvent.click(result.getByText('Audio'));
+
+			const player = result.getByLabelText('player');
+
+			await waitFor(() => {
+				expect(getByLabelText(player, 'play')).toBeInTheDocument();
+			});
+
+			userEvent.click(result.getByText('Video'));
+
+			const miniplayer = result.getByLabelText('miniplayer');
+
+			// result.debug();
+
+			await expect(async () => {
+				await waitFor(() => {
+					console.log('checking');
+					expect(
+						queryByTestId(miniplayer, 'video-element')
+					).toBeInTheDocument();
+				});
+			}).rejects.toEqual(expect.anything());
 		});
 	});
 });

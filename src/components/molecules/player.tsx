@@ -9,6 +9,7 @@ import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import ButtonShare from '@components/molecules/buttonShare';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
+import PlaybackTimes from '@components/molecules/playbackTimes';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -16,7 +17,6 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 
 import styles from './player.module.scss';
-import PlaybackTimes from '@components/molecules/playbackTimes';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
