@@ -13,6 +13,7 @@ import { Recording } from '@components/organisms/recording';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
+import videojs from 'video.js';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -52,16 +53,16 @@ const recordingAudioVideo: Partial<PlayerFragment> = {
 	},
 	videoFiles: [
 		{
-			url: 'the_source_src',
-			mimeType: 'the_source_type',
-			filesize: 'the_source_size',
+			url: 'video_source_src',
+			mimeType: 'video_source_type',
+			filesize: 'video_source_size',
 		},
 	],
 	audioFiles: [
 		{
-			url: 'the_source_src',
-			mimeType: 'the_source_type',
-			filesize: 'the_source_size',
+			url: 'audio_source_src',
+			mimeType: 'audio_source_type',
+			filesize: 'audio_source_size',
 		},
 	],
 };
@@ -276,16 +277,60 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			// result.debug();
-
 			await expect(async () => {
 				await waitFor(() => {
-					console.log('checking');
+					// console.log('checking');
 					expect(
 						queryByTestId(miniplayer, 'video-element')
 					).toBeInTheDocument();
 				});
 			}).rejects.toEqual(expect.anything());
+		});
+	});
+
+	it('never shows video in miniplayer when loading recording by audio select', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingAudioVideo);
+
+			await waitFor(() => {
+				expect(result.getByText('Audio')).toBeInTheDocument();
+			});
+
+			userEvent.click(result.getByText('Audio'));
+
+			const miniplayer = result.getByLabelText('miniplayer');
+			const pane = miniplayer.querySelector('#mini-player');
+
+			if (!pane) throw new Error('unable to find pane');
+
+			pane.appendChild = jest.fn();
+
+			const player = result.getByLabelText('player');
+
+			await waitFor(() =>
+				expect(getByLabelText(player, 'play')).toBeInTheDocument()
+			);
+
+			expect(pane.appendChild).not.toHaveBeenCalled();
+		});
+	});
+
+	it('does not load video when audio selected for recording with video', async () => {
+		await act(async () => {
+			const result = await renderApp(true, recordingAudioVideo);
+
+			await waitFor(() => {
+				expect(result.getByText('Audio')).toBeInTheDocument();
+			});
+
+			userEvent.click(result.getByText('Audio'));
+
+			expect(videojs).not.toBeCalledWith(
+				expect.anything(),
+				expect.objectContaining({
+					sources: [{ src: 'video_source_src' }],
+				})
+			);
 		});
 	});
 });

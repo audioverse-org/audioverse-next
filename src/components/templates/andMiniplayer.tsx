@@ -223,6 +223,7 @@ export default function AndMiniplayer({
 	}, [recording, prefersAudio]);
 
 	useEffect(() => {
+		// TODO: return if onLoad
 		if (!videoEl) return;
 		if (!hasSources) return;
 
@@ -256,7 +257,12 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		console.log({ portalId, portal: !!portal });
+		console.log({ portalId, portal: !!portal, isShowingVideo });
+
+		if (onLoad) {
+			console.log('onLoad defined');
+			return;
+		}
 
 		if (portalId && !portal) {
 			console.log('null portal registered');
@@ -266,42 +272,43 @@ export default function AndMiniplayer({
 		const video = videoRef.current;
 
 		if (!video) {
-			// console.log('no video ref');
+			console.log('no video ref');
 			return;
 		}
 
 		function findDestination() {
-			// console.log('finding destination');
+			console.log('finding destination');
 
 			if (portal) {
-				// console.log('portal');
+				console.log('portal');
 				return portal;
 			}
 
 			if (isShowingVideo) {
-				// console.log('miniplayer');
+				console.log('miniplayer');
+				// TODO: use ref instead of ID
 				return document.getElementById('mini-player');
 			}
 
-			// console.log('origin');
+			console.log('origin');
 			return originRef.current;
 		}
 
 		const destination = findDestination();
 
 		if (!destination) {
-			// console.log('no destination');
+			console.log('no destination');
 			return;
 		}
 
 		if (destination === video.parentElement) {
-			// console.log('video already in destination');
+			console.log('video already in destination');
 			return;
 		}
 
-		// console.log('moving to destination');
+		console.log('moving to destination');
 		destination.appendChild(video);
-	}, [portalId, portal, isShowingVideo]);
+	}, [portalId, portal, isShowingVideo, onLoad]);
 
 	useEffect(() => {
 		if (!player) return;
