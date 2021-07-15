@@ -8,12 +8,12 @@ import {
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
+import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
-import videojs from 'video.js';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
