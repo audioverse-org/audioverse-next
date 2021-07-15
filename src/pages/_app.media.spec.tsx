@@ -9,10 +9,10 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
+import { Recording } from '@components/organisms/recording';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
-import { Recording } from '@components/organisms/recording';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
