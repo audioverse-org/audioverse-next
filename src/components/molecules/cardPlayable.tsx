@@ -78,7 +78,9 @@ export default function CardPlayable({
 						{useFormattedDuration(duration)}
 					</span>
 				)}
-				{progress !== undefined && <ProgressBar recording={recording} />}
+				{progress !== undefined && (
+					<ProgressBar recording={recording} interactive={false} />
+				)}
 				<Icon icon={'bookmark'} size={24} />
 			</div>
 		</Card>

@@ -153,7 +153,6 @@ export default function AndMiniplayer({
 		play: () => {
 			player?.play();
 			setIsPaused(false);
-			console.log('play setProgress');
 			if (progress) playback.setProgress(progress);
 		},
 		pause: () => {
@@ -164,7 +163,6 @@ export default function AndMiniplayer({
 		getTime: () => player?.currentTime() || 0,
 		setTime: (t: number) => {
 			if (!player) return;
-			console.log('setTime setProgress');
 			setProgress(t / player.duration());
 			player.currentTime(t);
 		},
@@ -178,11 +176,9 @@ export default function AndMiniplayer({
 			return player?.duration() || recording?.duration || 0;
 		},
 		getProgress: () => {
-			console.log({ m: 'getProgress', progress });
 			return progress;
 		},
 		setProgress: (p: number) => {
-			console.log({ m: 'context setProgress', p });
 			setProgress(p);
 			const duration = player?.duration();
 			if (!player || !duration || isNaN(duration)) return;
@@ -257,8 +253,6 @@ export default function AndMiniplayer({
 
 		const p = player.currentTime() / duration;
 
-		console.log({ m: 'effect setProgress', p });
-
 		setProgress(p);
 	}, [fingerprint]);
 
@@ -267,56 +261,43 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		console.log({ portalId, portal: !!portal, isShowingVideo });
-
 		if (onLoad) {
-			console.log('onLoad defined');
 			return;
 		}
 
 		if (portalId && !portal) {
-			console.log('null portal registered');
 			return;
 		}
 
 		const video = videoRef.current;
 
 		if (!video) {
-			console.log('no video ref');
 			return;
 		}
 
 		function findDestination() {
-			console.log('finding destination');
-
 			if (portal) {
-				console.log('portal');
 				return portal;
 			}
 
 			if (isShowingVideo) {
-				console.log('miniplayer');
 				// TODO: use ref instead of ID
 				return document.getElementById('mini-player');
 			}
 
-			console.log('origin');
 			return originRef.current;
 		}
 
 		const destination = findDestination();
 
 		if (!destination) {
-			console.log('no destination');
 			return;
 		}
 
 		if (destination === video.parentElement) {
-			console.log('video already in destination');
 			return;
 		}
 
-		console.log('moving to destination');
 		destination.appendChild(video);
 	}, [portalId, portal, isShowingVideo, onLoad]);
 

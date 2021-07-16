@@ -19,6 +19,7 @@ const renderComponent = buildRenderer(Page, {
 		recording: {
 			id: 'the_sermon_id',
 		},
+		progress: 0.3,
 	},
 });
 
@@ -27,5 +28,11 @@ describe('card playable', () => {
 		const { getByLabelText } = await renderComponent();
 
 		expect(getByLabelText('play')).toBeInTheDocument();
+	});
+
+	it('disables progress bar interactivity', async () => {
+		const { getByLabelText } = await renderComponent();
+
+		expect(getByLabelText('progress')).toHaveAttribute('disabled');
 	});
 });

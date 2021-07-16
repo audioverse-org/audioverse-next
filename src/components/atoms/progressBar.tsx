@@ -11,10 +11,12 @@ import styles from './progressBar.module.scss';
 
 interface ProgressBarProps {
 	recording: ProgressBarFragment & AndMiniplayerFragment;
+	interactive?: boolean;
 }
 
 export default function ProgressBar({
 	recording,
+	interactive = true,
 }: ProgressBarProps): JSX.Element {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -32,6 +34,7 @@ export default function ProgressBar({
 				})}
 				readOnly={true}
 				onChange={(e) => session.setProgress(parseInt(e.target.value) / 100)}
+				disabled={!interactive}
 			/>
 		</span>
 	);
