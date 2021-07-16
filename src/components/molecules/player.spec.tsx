@@ -912,6 +912,26 @@ describe('player', () => {
 
 		expect(queryByLabelText('fullscreen')).not.toBeInTheDocument();
 	});
+
+	it('handles initial zero duration', async () => {
+		setPlayerMock({ time: 0, duration: 0 });
+
+		const {
+			getByTestId,
+			getByLabelText,
+			getAllByLabelText,
+		} = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
+		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
+
+		await waitFor(() =>
+			expect(getAllByLabelText('progress')[0]).toHaveValue('0')
+		);
+	});
 });
 
 // TODO:

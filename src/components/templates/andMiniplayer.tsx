@@ -153,6 +153,7 @@ export default function AndMiniplayer({
 		play: () => {
 			player?.play();
 			setIsPaused(false);
+			console.log('play setProgress');
 			if (progress) playback.setProgress(progress);
 		},
 		pause: () => {
@@ -163,6 +164,7 @@ export default function AndMiniplayer({
 		getTime: () => player?.currentTime() || 0,
 		setTime: (t: number) => {
 			if (!player) return;
+			console.log('setTime setProgress');
 			setProgress(t / player.duration());
 			player.currentTime(t);
 		},
@@ -175,8 +177,12 @@ export default function AndMiniplayer({
 			// TODO: return duration according to current media file
 			return player?.duration() || recording?.duration || 0;
 		},
-		getProgress: () => progress,
+		getProgress: () => {
+			console.log({ m: 'getProgress', progress });
+			return progress;
+		},
 		setProgress: (p: number) => {
+			console.log({ m: 'context setProgress', p });
 			setProgress(p);
 			const duration = player?.duration();
 			if (!player || !duration || isNaN(duration)) return;
@@ -249,7 +255,11 @@ export default function AndMiniplayer({
 
 		if (!duration || isNaN(duration)) return;
 
-		setProgress(player.currentTime() / duration);
+		const p = player.currentTime() / duration;
+
+		console.log({ m: 'effect setProgress', p });
+
+		setProgress(p);
 	}, [fingerprint]);
 
 	useEffect(() => {
@@ -330,7 +340,10 @@ export default function AndMiniplayer({
 								data-testid={'video-element'}
 								onTimeUpdate={() => {
 									if (!player) return;
-									setProgress(player.currentTime() / player.duration());
+									const t = player.currentTime();
+									const d = player.duration();
+									const p = d ? t / d : 0;
+									setProgress(p);
 								}}
 								onPause={() => setIsPaused(true)}
 								onPlay={() => setIsPaused(false)}
