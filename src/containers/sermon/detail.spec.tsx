@@ -965,5 +965,5 @@ describe('sermon detail page', () => {
 	});
 });
 
-// TODO: does not show video progress bar when audio selected
-// TODO: does not show video player in miniplayer when audio selected
+// TODO:
+// Does not show selected recording in sidebar

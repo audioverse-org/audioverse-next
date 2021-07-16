@@ -30,13 +30,20 @@
 }
 
 .content {
-	padding: 24px;
+	display: flex;
+	> * {
+		padding: 24px;
+	}
 	h1 {
 		margin-top: 0;
 		margin-bottom: 0.5rem;
 		font-weight: 700;
 		font-size: 44px;
 	}
+}
+
+.series {
+	border-left: 1px solid $ts-cream;
 }
 
 .part {

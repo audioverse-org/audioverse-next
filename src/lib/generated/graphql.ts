@@ -5795,6 +5795,7 @@ export type RecordingFragment = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & Pick<Recording, 'id'>
+        & RecordingListFragment
       )>> }
     ) }
   )>, transcript: Maybe<(
@@ -6582,17 +6583,6 @@ export type GetSermonDetailDataQuery = (
   { __typename?: 'Query' }
   & { sermon: Maybe<(
     { __typename?: 'Recording' }
-    & { sequence: Maybe<(
-      { __typename?: 'Sequence' }
-      & Pick<Sequence, 'title'>
-      & { recordings: (
-        { __typename?: 'RecordingConnection' }
-        & { nodes: Maybe<Array<(
-          { __typename?: 'Recording' }
-          & RecordingListFragment
-        )>> }
-      ) }
-    )> }
     & RecordingFragment
   )> }
 );
@@ -7530,23 +7520,6 @@ export const PlaybackTimesFragmentDoc = `
   ...andMiniplayer
 }
     ${AndMiniplayerFragmentDoc}`;
-export const RecordingListFragmentDoc = `
-    fragment recordingList on Recording {
-  id
-  title
-  description
-  duration
-  imageWithFallback {
-    url(size: 50)
-  }
-  persons {
-    ...speakerName
-  }
-  hasVideo
-  recordingDate
-  canonicalUrl
-}
-    ${SpeakerNameFragmentDoc}`;
 export const TestimoniesFragmentDoc = `
     fragment testimonies on Testimony {
   id
@@ -7584,6 +7557,23 @@ export const SponsorInfoFragmentDoc = `
   title
 }
     `;
+export const RecordingListFragmentDoc = `
+    fragment recordingList on Recording {
+  id
+  title
+  description
+  duration
+  imageWithFallback {
+    url(size: 50)
+  }
+  persons {
+    ...speakerName
+  }
+  hasVideo
+  recordingDate
+  canonicalUrl
+}
+    ${SpeakerNameFragmentDoc}`;
 export const ButtonDownloadFragmentDoc = `
     fragment buttonDownload on Recording {
   videoDownloads: videoFiles(allowedContainers: MP4) {
@@ -7648,6 +7638,7 @@ export const RecordingFragmentDoc = `
     recordings(first: 1000) {
       nodes {
         id
+        ...recordingList
       }
     }
   }
@@ -7661,6 +7652,7 @@ export const RecordingFragmentDoc = `
 }
     ${SpeakerNameFragmentDoc}
 ${SponsorInfoFragmentDoc}
+${RecordingListFragmentDoc}
 ${CopyrightInfoFragmentDoc}
 ${PlayerFragmentDoc}`;
 export const SongFragmentDoc = `
@@ -8652,18 +8644,9 @@ export const GetSermonDetailDataDocument = `
     query getSermonDetailData($id: ID!) {
   sermon(id: $id) {
     ...recording
-    sequence {
-      title
-      recordings(first: 1000) {
-        nodes {
-          ...recordingList
-        }
-      }
-    }
   }
 }
-    ${RecordingFragmentDoc}
-${RecordingListFragmentDoc}`;
+    ${RecordingFragmentDoc}`;
 export const useGetSermonDetailDataQuery = <
       TData = GetSermonDetailDataQuery,
       TError = unknown
