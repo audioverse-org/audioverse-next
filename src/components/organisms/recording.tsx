@@ -17,6 +17,7 @@ import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
+import Transcript from '@components/molecules/transcript';
 
 interface RecordingProps {
 	recording: RecordingFragment;
@@ -213,21 +214,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								description="Sermon detail transcript title"
 							/>
 						</h6>
-						<p>
-							<FormattedMessage
-								id="sermonDetailPage__transcriptDisclaimer"
-								defaultMessage="This transcript may be automatically generated."
-								description="Sermon detail transcript disclaimer"
-							/>
-						</p>
-						<p>
-							<FormattedMessage
-								id="sermonDetailPage__transcriptHelp"
-								defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-								description="Sermon detail transcript assistance request"
-							/>
-						</p>
-						<p>{recording.transcript?.text}</p>
+						<Transcript text={recording.transcript.text} />
 					</>
 				)}
 				<CopyrightInfo recording={recording} />

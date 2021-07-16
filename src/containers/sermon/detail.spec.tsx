@@ -564,6 +564,8 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
+		userEvent.click(getByText('Read Transcript'));
+
 		expect(getByText('the_transcript_text')).toBeInTheDocument();
 	});
 
@@ -588,6 +590,8 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
+		userEvent.click(getByText('Read Transcript'));
+
 		expect(
 			getByText('This transcript may be automatically generated.')
 		).toBeInTheDocument();
@@ -601,6 +605,8 @@ describe('sermon detail page', () => {
 		});
 
 		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Read Transcript'));
 
 		expect(
 			getByText(
@@ -930,6 +936,32 @@ describe('sermon detail page', () => {
 		userEvent.click(getByText('Audio'));
 
 		expect(getByText('0:00')).toBeInTheDocument();
+	});
+
+	it('hides transcript', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('the_transcript_text')).not.toBeInTheDocument();
+	});
+
+	it('uses hide verb for button', async () => {
+		loadSermonDetailData({
+			transcript: {
+				text: 'the_transcript_text',
+			},
+		});
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Read Transcript'));
+
+		expect(getByText('Hide Transcript')).toBeInTheDocument();
 	});
 });
 
