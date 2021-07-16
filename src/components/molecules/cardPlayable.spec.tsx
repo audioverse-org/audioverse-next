@@ -33,6 +33,6 @@ describe('card playable', () => {
 	it('disables progress bar interactivity', async () => {
 		const { getByLabelText } = await renderComponent();
 
-		expect(getByLabelText('progress')).toHaveAttribute('disabled');
+		expect(getByLabelText('progress')).toBeDisabled();
 	});
 });
