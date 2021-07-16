@@ -1,9 +1,10 @@
-import { FormattedMessage } from 'react-intl';
-import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
-import styles from './transcript.module.scss';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import IconChevron from '../../../public/img/icon-chevron-down.svg';
+
+import styles from './transcript.module.scss';
 
 export default function Transcript({ text }: { text: string }): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);

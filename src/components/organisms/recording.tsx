@@ -8,6 +8,7 @@ import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
+import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
 import { makeSeriesDetailRoute, makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -17,7 +18,6 @@ import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
-import Transcript from '@components/molecules/transcript';
 
 interface RecordingProps {
 	recording: RecordingFragment;
