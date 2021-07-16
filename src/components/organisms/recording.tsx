@@ -65,8 +65,8 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					href={makeSeriesDetailRoute(langRoute, recording?.sequence?.id)}
 					className={styles.hat}
 				>
-					<div>
-						<ListIcon width={16} height={16} />
+					<div className={styles.hatType}>
+						<ListIcon width={13} height={13} />
 						<FormattedMessage
 							id="sermonDetailPage__seriesTitle"
 							defaultMessage="Series"
@@ -92,7 +92,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				</div>
 				<MediaFormatSwitcher recording={recording} />
 				<div className={styles.sequenceNav}>
-					{/*TODO: use next/link for prev/next buttons*/}
 					{previousRecording && (
 						<Link
 							href={makeSermonRoute(langRoute, previousRecording.id)}
