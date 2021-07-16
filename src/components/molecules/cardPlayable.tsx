@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 
 import Icon from '@components/atoms/icon';
 import ProgressBar from '@components/atoms/progressBar';
+import ButtonPlay from '@components/molecules/buttonPlay';
 import Card, { CardTheme } from '@components/molecules/card';
 import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
@@ -12,9 +13,7 @@ import {
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
-import PlayIcon from '../../../public/img/icon-play.svg';
-
-interface CardPlayableProps {
+export interface CardPlayableProps {
 	recording: CardPlayableFragment;
 	container?: {
 		icon?: any;
@@ -64,7 +63,7 @@ export default function CardPlayable({
 			}
 			preTitle={partString}
 			title={title}
-			titleAdornment={<PlayIcon width={24} height={24} />}
+			titleAdornment={<ButtonPlay recording={recording} />}
 			url={url}
 			theme={theme}
 		>

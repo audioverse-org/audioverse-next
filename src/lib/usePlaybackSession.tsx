@@ -28,15 +28,12 @@ interface PlaybackSessionInfo {
 }
 
 export default function usePlaybackSession(
-	recording: AndMiniplayerFragment
+	recording: AndMiniplayerFragment | null
 ): PlaybackSessionInfo {
-	if (!recording) {
-		throw new Error('Missing recording');
-	}
-
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
-	const isLoaded = !!loadedRecording && loadedRecording.id === recording.id;
+	const isLoaded =
+		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
 	const progress = isLoaded ? context.getProgress() : 0;
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
@@ -46,7 +43,7 @@ export default function usePlaybackSession(
 	// TODO: return 0 if !isLoaded
 	const time = context.getTime();
 	// TODO: return duration according to current media file
-	const duration = isLoaded ? context.getDuration() : recording.duration;
+	const duration = isLoaded ? context.getDuration() : recording?.duration || 0;
 	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
 	const portalContainerRef = useRef<HTMLDivElement>(null);
@@ -55,19 +52,12 @@ export default function usePlaybackSession(
 	);
 
 	useEffect(() => {
-		// console.log({
-		// 	m: 'portal load',
-		// 	isLoaded,
-		// 	portalId: recording.id,
-		// 	portal: !!portalContainerRef.current,
-		// });
-		if (!isLoaded) return;
+		if (!recording || !isLoaded) return;
 		context.loadPortal(recording.id, portalContainerRef.current);
 	}, [portalContainerRef.current, isLoaded]);
 
 	useEffect(
 		() => () => {
-			// console.log('portal cleanup');
 			// TODO: provide recording ID when unloading?
 			context.unloadPortal();
 		},
@@ -75,6 +65,8 @@ export default function usePlaybackSession(
 	);
 
 	function afterLoad(func: (c: PlaybackContextType) => void) {
+		if (!recording) return;
+
 		if (isLoaded) {
 			func(context);
 			return;
