@@ -139,6 +139,7 @@ export default function AndMiniplayer({
 	const [fingerprint, setFingerprint] = useState<string>();
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<string>();
+	const videoHandlerIdRef = useRef<string>();
 
 	console.log({ m: 'render', videoHandlerId });
 
@@ -212,6 +213,7 @@ export default function AndMiniplayer({
 		setVideoHandler: (id: string, handler: (el: Element) => void) => {
 			console.log({ m: 'setVideoHandler', id });
 			setVideoHandlerId(id);
+			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
 		},
 		unsetVideoHandler: (id: string) => {
@@ -220,8 +222,9 @@ export default function AndMiniplayer({
 				id,
 				videoHandlerId,
 				handler: videoHandler,
+				videoHandlerIdRef,
 			});
-			if (id !== videoHandlerId) return;
+			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);
 		},
