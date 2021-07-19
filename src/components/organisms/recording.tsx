@@ -7,9 +7,9 @@ import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
-import RecordingList from '@components/molecules/recordingList';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
+import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
 import { makeSeriesDetailRoute, makeSermonRoute } from '@lib/routes';
@@ -231,9 +231,11 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					<CopyrightInfo recording={recording} />
 				</div>
 				{seriesItems && (
-					<div className={styles.series}>
+					<div className={styles.series} aria-label={'series list'}>
 						<LineHeading size={12}>Other Teachings in Series</LineHeading>
-						<RecordingList recordings={seriesItems} />
+						{seriesItems.map((r) => (
+							<TeaseRecording key={r.id} recording={r} />
+						))}
 					</div>
 				)}
 			</div>

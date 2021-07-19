@@ -466,6 +466,7 @@ export type Collection = Node & UniformResourceLocatable & {
   /** @deprecated Collection.logoImageWithFallback is replaced with Collection.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
+  persons: PersonConnection;
   recordings: RecordingConnection;
   sequences: SequenceConnection;
   /** A shareable short URL to this resource. */
@@ -493,6 +494,18 @@ export type CollectionHistoryArgs = {
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: Maybe<Array<CatalogHistoryItemViewFilter>>;
+};
+
+
+export type CollectionPersonsArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<PersonsOrder>>;
+  role: Maybe<PersonsRoleField>;
+  search: Maybe<Scalars['String']>;
+  sequenceId: Maybe<Scalars['ID']>;
 };
 
 
@@ -3065,6 +3078,7 @@ export type QueryPersonArgs = {
 
 export type QueryPersonsArgs = {
   after: Maybe<Scalars['String']>;
+  collectionId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   language: Language;
@@ -3072,6 +3086,7 @@ export type QueryPersonsArgs = {
   orderBy: Maybe<Array<PersonsOrder>>;
   role: Maybe<PersonsRoleField>;
   search: Maybe<Scalars['String']>;
+  sequenceId: Maybe<Scalars['ID']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   withContentTypes: Maybe<Array<RecordingContentType>>;
@@ -3971,6 +3986,7 @@ export type Sequence = Node & UniformResourceLocatable & {
   /** @deprecated Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback */
   logoImageWithFallback: Image;
   mediaReleaseForm: Maybe<MediaReleaseForm>;
+  persons: PersonConnection;
   recordings: RecordingConnection;
   /** A shareable short URL to this resource. */
   shareUrl: Scalars['URL'];
@@ -3997,6 +4013,17 @@ export type SequenceHistoryArgs = {
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<CatalogHistoryItemOrder>>;
   viewFilters: Maybe<Array<CatalogHistoryItemViewFilter>>;
+};
+
+
+export type SequencePersonsArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  includeUnpublished: Maybe<Scalars['Boolean']>;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<PersonsOrder>>;
+  role: Maybe<PersonsRoleField>;
+  search: Maybe<Scalars['String']>;
 };
 
 
@@ -5040,12 +5067,14 @@ export type User = Node & {
 
 export type UserFavoritePersonsArgs = {
   after: Maybe<Scalars['String']>;
+  collectionId: Maybe<Scalars['ID']>;
   first: Maybe<Scalars['Int']>;
   includeUnpublished: Maybe<Scalars['Boolean']>;
   offset: Maybe<Scalars['Int']>;
   orderBy: Maybe<Array<PersonsOrder>>;
   role: Maybe<PersonsRoleField>;
   search: Maybe<Scalars['String']>;
+  sequenceId: Maybe<Scalars['ID']>;
   sponsorId: Maybe<Scalars['ID']>;
   sponsorIds: Maybe<Array<Scalars['ID']>>;
   withContentTypes: Maybe<Array<RecordingContentType>>;
@@ -5549,6 +5578,11 @@ export type ButtonDownloadFragment = (
   )> }
 );
 
+export type ButtonPlayFragment = (
+  { __typename?: 'Recording' }
+  & AndMiniplayerFragment
+);
+
 export type CardBibleChapterFragment = (
   { __typename?: 'BibleChapter' }
   & Pick<BibleChapter, 'id' | 'title' | 'url'>
@@ -5742,6 +5776,11 @@ export type SponsorInfoFragment = (
   & Pick<Sponsor, 'id' | 'title'>
 );
 
+export type TeaseRecordingFragment = (
+  { __typename?: 'Recording' }
+  & ButtonPlayFragment
+);
+
 export type PlayerFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'title'>
@@ -5795,7 +5834,7 @@ export type RecordingFragment = (
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
         & Pick<Recording, 'id'>
-        & RecordingListFragment
+        & TeaseRecordingFragment
       )>> }
     ) }
   )>, transcript: Maybe<(
@@ -7520,6 +7559,23 @@ export const PlaybackTimesFragmentDoc = `
   ...andMiniplayer
 }
     ${AndMiniplayerFragmentDoc}`;
+export const RecordingListFragmentDoc = `
+    fragment recordingList on Recording {
+  id
+  title
+  description
+  duration
+  imageWithFallback {
+    url(size: 50)
+  }
+  persons {
+    ...speakerName
+  }
+  hasVideo
+  recordingDate
+  canonicalUrl
+}
+    ${SpeakerNameFragmentDoc}`;
 export const TestimoniesFragmentDoc = `
     fragment testimonies on Testimony {
   id
@@ -7557,23 +7613,16 @@ export const SponsorInfoFragmentDoc = `
   title
 }
     `;
-export const RecordingListFragmentDoc = `
-    fragment recordingList on Recording {
-  id
-  title
-  description
-  duration
-  imageWithFallback {
-    url(size: 50)
-  }
-  persons {
-    ...speakerName
-  }
-  hasVideo
-  recordingDate
-  canonicalUrl
+export const ButtonPlayFragmentDoc = `
+    fragment buttonPlay on Recording {
+  ...andMiniplayer
 }
-    ${SpeakerNameFragmentDoc}`;
+    ${AndMiniplayerFragmentDoc}`;
+export const TeaseRecordingFragmentDoc = `
+    fragment teaseRecording on Recording {
+  ...buttonPlay
+}
+    ${ButtonPlayFragmentDoc}`;
 export const ButtonDownloadFragmentDoc = `
     fragment buttonDownload on Recording {
   videoDownloads: videoFiles(allowedContainers: MP4) {
@@ -7638,7 +7687,7 @@ export const RecordingFragmentDoc = `
     recordings(first: 1000) {
       nodes {
         id
-        ...recordingList
+        ...teaseRecording
       }
     }
   }
@@ -7652,7 +7701,7 @@ export const RecordingFragmentDoc = `
 }
     ${SpeakerNameFragmentDoc}
 ${SponsorInfoFragmentDoc}
-${RecordingListFragmentDoc}
+${TeaseRecordingFragmentDoc}
 ${CopyrightInfoFragmentDoc}
 ${PlayerFragmentDoc}`;
 export const SongFragmentDoc = `
@@ -9575,6 +9624,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
+
 							export async function loginForgotPassword<T>(
 								variables: ExactAlt<T, LoginForgotPasswordMutationVariables>
 							): Promise<LoginForgotPasswordMutation> {
@@ -9588,6 +9638,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetPlaylistButtonDataQuery> {
 								return fetchApi(GetPlaylistButtonDataDocument, { variables });
 							}
+
 
 
 

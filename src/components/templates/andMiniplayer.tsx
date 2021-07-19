@@ -69,8 +69,8 @@ export type PlaybackContextType = {
 			onLoad?: (c: PlaybackContextType) => void;
 		}
 	) => void;
-	loadPortal: (id: string, container: Element | null) => void;
-	unloadPortal: () => void;
+	setVideoHandler: (id: string, handler: (el: Element) => void) => void;
+	unsetVideoHandler: (id: string) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -96,8 +96,12 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setProgress: () => undefined,
 	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
-	loadPortal: () => undefined,
-	unloadPortal: () => undefined,
+	setVideoHandler: () => {
+		console.log('setVideoHandler noop');
+	},
+	unsetVideoHandler: () => {
+		console.log('unsetVideoHandler noop');
+	},
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -133,8 +137,10 @@ export default function AndMiniplayer({
 	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
-	const [portal, setPortal] = useState<Element | null>(null);
-	const [portalId, setPortalId] = useState<string>();
+	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
+	const [videoHandlerId, setVideoHandlerId] = useState<string>();
+
+	console.log({ m: 'render', videoHandlerId });
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -148,6 +154,14 @@ export default function AndMiniplayer({
 		fluid: true,
 		sources,
 	};
+
+	useEffect(() => {
+		console.log('andMiniplayer on  mount');
+	}, []);
+
+	useEffect(() => {
+		console.log({ m: 'videoHandlerId change', videoHandlerId });
+	}, [videoHandlerId]);
 
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -190,14 +204,26 @@ export default function AndMiniplayer({
 			const { onLoad } = options;
 			setOnLoad(() => onLoad);
 			setRecording(recording);
+			if (videoHandlerId && recording.id !== videoHandlerId) {
+				console.log('loadRecording >> unsetVideoHandler');
+				playback.unsetVideoHandler(videoHandlerId);
+			}
 		},
-		loadPortal: (id: string, portalContainer: Element | null) => {
-			setPortalId(id);
-			setPortal(portalContainer);
+		setVideoHandler: (id: string, handler: (el: Element) => void) => {
+			console.log({ m: 'setVideoHandler', id });
+			setVideoHandlerId(id);
+			setVideoHandler(() => handler);
 		},
-		unloadPortal: () => {
-			setPortalId(undefined);
-			setPortal(null);
+		unsetVideoHandler: (id: string) => {
+			console.log({
+				m: 'unsetVideoHandler',
+				id,
+				videoHandlerId,
+				handler: videoHandler,
+			});
+			if (id !== videoHandlerId) return;
+			setVideoHandlerId(undefined);
+			setVideoHandler(undefined);
 		},
 		hasPlayer: () => !!player,
 		hasVideo: () => !!recording && hasVideo(recording),
@@ -205,7 +231,7 @@ export default function AndMiniplayer({
 		getVideoLocation: () => {
 			if (!isShowingVideo) return null;
 
-			if (portal) return 'portal';
+			if (videoHandler) return 'portal';
 
 			return 'miniplayer';
 		},
@@ -261,45 +287,57 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		if (onLoad) {
-			return;
-		}
+		console.log({
+			m: 'maybe move',
+			videoHandlerId,
+			videoHandler,
+			isShowingVideo,
+			onLoad,
+		});
 
-		if (portalId && !portal) {
+		if (onLoad) {
+			console.log('has onLoad');
 			return;
 		}
 
 		const video = videoRef.current;
 
 		if (!video) {
+			console.log('no video');
+			return;
+		}
+
+		if (videoHandler) {
+			videoHandler(video);
 			return;
 		}
 
 		function findDestination() {
-			if (portal) {
-				return portal;
-			}
-
 			if (isShowingVideo) {
+				console.log('miniplayer');
 				// TODO: use ref instead of ID
 				return document.getElementById('mini-player');
 			}
 
+			console.log('origin');
 			return originRef.current;
 		}
 
 		const destination = findDestination();
 
 		if (!destination) {
+			console.log('no video');
 			return;
 		}
 
 		if (destination === video.parentElement) {
+			console.log('already in destination');
 			return;
 		}
 
+		console.log('moving');
 		destination.appendChild(video);
-	}, [portalId, portal, isShowingVideo, onLoad]);
+	}, [videoHandlerId, videoHandler, isShowingVideo, onLoad]);
 
 	useEffect(() => {
 		if (!player) return;

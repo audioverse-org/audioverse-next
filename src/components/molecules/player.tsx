@@ -30,6 +30,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 	const shouldShowVideoControls = !shouldShowAudioControls;
+	const video = session.getVideo();
 
 	return (
 		<div
@@ -51,7 +52,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				</button>
 			)}
 
-			{session.isVideoLoaded && session.video}
+			{session.isVideoLoaded && video}
 
 			{shouldShowVideoControls && (
 				<div className={styles.videoProgress}>

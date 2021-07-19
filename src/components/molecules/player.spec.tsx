@@ -505,6 +505,7 @@ describe('player', () => {
 
 		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
 
+		console.log('click');
 		userEvent.click(poster.parentElement as HTMLElement);
 
 		const portal = result.getByTestId('portal');

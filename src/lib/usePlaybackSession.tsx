@@ -23,7 +23,7 @@ interface PlaybackSessionInfo {
 	speed: number;
 	time: number;
 	duration: number;
-	video: JSX.Element;
+	getVideo: () => JSX.Element;
 	supportsFullscreen: boolean;
 }
 
@@ -46,20 +46,30 @@ export default function usePlaybackSession(
 	const duration = isLoaded ? context.getDuration() : recording?.duration || 0;
 	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
+	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
 		<div ref={portalContainerRef} data-testid={'portal'} />
 	);
 
 	useEffect(() => {
-		if (!recording || !isLoaded) return;
-		context.loadPortal(recording.id, portalContainerRef.current);
-	}, [portalContainerRef.current, isLoaded]);
+		if (!recording || !isLoaded || !isPortalActive) return;
+
+		console.log({ m: 'usePlaybackSession effect', id: recording.id });
+
+		context.setVideoHandler(recording.id, (el) => {
+			console.log('running handler');
+			if (!el) return;
+			portalContainerRef.current?.appendChild(el);
+		});
+	}, [recording, isLoaded, isPortalActive]);
 
 	useEffect(
 		() => () => {
+			if (!isPortalActive || !recording) return;
+			console.log({ m: 'teardown', context });
 			// TODO: provide recording ID when unloading?
-			context.unloadPortal();
+			context.unsetVideoHandler(recording.id);
 		},
 		[]
 	);
@@ -113,6 +123,11 @@ export default function usePlaybackSession(
 		afterLoad((c) => c.requestFullscreen());
 	}
 
+	function getVideo() {
+		if (!isPortalActive) setIsPortalActive(true);
+		return video;
+	}
+
 	// TODO: Consider not returning isLoaded
 	return {
 		shiftTime,
@@ -130,7 +145,7 @@ export default function usePlaybackSession(
 		isVideoLoaded,
 		isPaused,
 		prefersAudio,
-		video,
+		getVideo,
 		speed,
 		supportsFullscreen,
 	};

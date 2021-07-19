@@ -11,7 +11,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
-import AndMiniplayer from '@components/templates/andMiniplayer';
+// import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
 
@@ -74,9 +74,9 @@ const Page = ({
 	includePlayer: boolean;
 	recording: Partial<PlayerFragment>;
 }) => (
-	<AndMiniplayer>
+	<div>
 		{includePlayer && <Recording recording={recording as RecordingFragment} />}
-	</AndMiniplayer>
+	</div>
 );
 
 const renderApp = async (
@@ -107,16 +107,22 @@ const renderApp = async (
 describe('app media playback', () => {
 	it('moves video to and from miniplayer', async () => {
 		await act(async () => {
+			console.log('render in');
 			const result = await renderApp(true, recordingVideo);
 
 			userEvent.click(result.getByAltText('the_sermon_title'));
 
 			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
+			console.log('render out');
 			await result.rerender(false);
 
-			await waitFor(() => result.expectVideoLocation(result.getMiniplayer()));
+			await waitFor(() => {
+				console.log('waiting');
+				result.expectVideoLocation(result.getMiniplayer());
+			});
 
+			console.log('render in');
 			await result.rerender(true);
 
 			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
@@ -277,9 +283,9 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
+			// expect video-element to never appear in miniplayer
 			await expect(async () => {
 				await waitFor(() => {
-					// console.log('checking');
 					expect(
 						queryByTestId(miniplayer, 'video-element')
 					).toBeInTheDocument();

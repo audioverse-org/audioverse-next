@@ -36,7 +36,7 @@ fragment recording on Recording {
 		recordings(first: 1000) {
 			nodes {
 				id
-				...recordingList
+				...teaseRecording
 			}
 		}
 	}

@@ -14,7 +14,7 @@
 
 .hat {
 	background-color: var(--hatBg, #efebeb);
-	color: var(--hatColor, #323e48);
+	color: var(--hatColor, $ts-dark);
 	padding: 16px;
 	width: 100%;
 	font-size: 0.9em;
@@ -58,7 +58,7 @@
 .heading {
 	display: flex;
 	justify-content: space-between;
-	color: var(--headingColor, #323e48);
+	color: var(--headingColor, $ts-dark);
 
 	h1 {
 		font-size: 1.5em;
@@ -71,7 +71,7 @@
 	}
 
 	path {
-		stroke: var(--headingColor, #323e48);
+		stroke: var(--headingColor, $ts-dark);
 		fill: none;
 	}
 }

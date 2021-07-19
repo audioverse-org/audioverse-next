@@ -3,7 +3,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
 
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import { ButtonPlayFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './buttonPlay.module.scss';
@@ -12,7 +12,7 @@ export default function ButtonPlay({
 	recording,
 	size,
 }: {
-	recording: AndMiniplayerFragment;
+	recording: ButtonPlayFragment;
 	size?: number;
 }): JSX.Element {
 	const { isPaused, play, pause } = usePlaybackSession(recording);

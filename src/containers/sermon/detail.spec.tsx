@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/dom';
+import { queryByTestId, waitFor } from '@testing-library/dom';
 import { act, getByLabelText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -962,6 +962,87 @@ describe('sermon detail page', () => {
 		userEvent.click(getByText('Read Transcript'));
 
 		expect(getByText('Hide Transcript')).toBeInTheDocument();
+	});
+
+	it('displays play buttons for sequence recordings', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		expect(getByLabelText(sidebar, 'play')).toBeInTheDocument();
+	});
+
+	it('loads series video into miniplayer on first click', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		userEvent.click(getByLabelText(sidebar, 'play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(queryByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+		});
+	});
+
+	it('loads series video into miniplayer after loading detail video into portal', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const player = result.getByLabelText('player');
+
+		userEvent.click(getByLabelText(player, 'play'));
+
+		const sidebar = result.getByLabelText('series list');
+
+		userEvent.click(getByLabelText(sidebar, 'play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(queryByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+		});
 	});
 });
 
