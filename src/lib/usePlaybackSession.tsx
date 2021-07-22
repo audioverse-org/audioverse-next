@@ -55,10 +55,7 @@ export default function usePlaybackSession(
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
 
-		console.log({ m: 'usePlaybackSession effect', id: recording.id });
-
 		context.setVideoHandler(recording.id, (el) => {
-			console.log('running handler');
 			if (!el) return;
 			portalContainerRef.current?.appendChild(el);
 		});
@@ -67,7 +64,6 @@ export default function usePlaybackSession(
 	useEffect(
 		() => () => {
 			if (!isPortalActive || !recording) return;
-			console.log({ m: 'teardown', context });
 			// TODO: provide recording ID when unloading?
 			context.unsetVideoHandler(recording.id);
 		},
@@ -111,7 +107,15 @@ export default function usePlaybackSession(
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
-		afterLoad((c) => c.setPrefersAudio(prefersAudio));
+		if (!recording) return;
+
+		if (isLoaded) {
+			context.setPrefersAudio(prefersAudio);
+		}
+
+		context.loadRecording(recording, {
+			prefersAudio,
+		});
 	}
 
 	function setSpeed(speed: number) {

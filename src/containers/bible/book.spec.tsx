@@ -9,7 +9,11 @@ import {
 	GetBibleBookDetailPageDataDocument,
 	GetBibleBookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	mockedFetchApi,
+	setPlayerMock,
+} from '@lib/test/helpers';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
@@ -70,6 +74,8 @@ function loadPageData() {
 }
 
 describe('Bible book detail page', () => {
+	beforeEach(() => setPlayerMock());
+
 	it('renders', async () => {
 		await renderPage();
 

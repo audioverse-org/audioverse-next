@@ -14,6 +14,7 @@ import { Recording } from '@components/organisms/recording';
 // import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
 import MyApp from '@pages/_app';
+import { setPlayerMock } from '@lib/test/helpers';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -105,24 +106,22 @@ const renderApp = async (
 };
 
 describe('app media playback', () => {
+	beforeEach(() => setPlayerMock());
+
 	it('moves video to and from miniplayer', async () => {
 		await act(async () => {
-			console.log('render in');
 			const result = await renderApp(true, recordingVideo);
 
 			userEvent.click(result.getByAltText('the_sermon_title'));
 
 			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
-			console.log('render out');
 			await result.rerender(false);
 
 			await waitFor(() => {
-				console.log('waiting');
 				result.expectVideoLocation(result.getMiniplayer());
 			});
 
-			console.log('render in');
 			await result.rerender(true);
 
 			await waitFor(() => result.expectVideoLocation(result.getPlayer()));

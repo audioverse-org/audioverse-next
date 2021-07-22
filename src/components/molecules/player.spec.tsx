@@ -176,24 +176,46 @@ describe('player', () => {
 	});
 
 	it('nudges back 15 seconds', async () => {
-		const player = setPlayerMock();
+		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		const result = await renderComponent();
 
-		userEvent.click(getByLabelText('back 15 seconds'));
+		userEvent.click(result.getByLabelText('play'));
 
-		expect(player.currentTime).toBeCalledWith(35);
+		mockPlayer.currentTime(50);
+
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
+
+		const player = result.getByLabelText('player');
+
+		userEvent.click(getByLabelText(player, 'back 15 seconds'));
+
+		expect(mockPlayer.currentTime).toBeCalledWith(35);
 	});
 
 	it('nudges forward 15 seconds', async () => {
-		const player = setPlayerMock();
+		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		const result = await renderComponent();
 
-		userEvent.click(getByLabelText('forward 15 seconds'));
+		userEvent.click(result.getByLabelText('play'));
+
+		mockPlayer.currentTime(50);
+
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
+
+		const player = result.getByLabelText('player');
+
+		userEvent.click(getByLabelText(player, 'forward 15 seconds'));
 
 		await waitFor(() => {
-			expect(player.currentTime).toBeCalledWith(65);
+			expect(mockPlayer.currentTime).toBeCalledWith(65);
 		});
 	});
 
@@ -505,7 +527,6 @@ describe('player', () => {
 
 		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
 
-		console.log('click');
 		userEvent.click(poster.parentElement as HTMLElement);
 
 		const portal = result.getByTestId('portal');
@@ -526,11 +547,18 @@ describe('player', () => {
 	});
 
 	it('sets miniplayer progress value', async () => {
-		setPlayerMock({ time: 25, duration: 100 });
+		const mockPlayer = setPlayerMock({ duration: 100 });
 
 		const result = await renderComponent();
 
 		userEvent.click(result.getByLabelText('play'));
+
+		mockPlayer.currentTime(25);
+
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -874,9 +902,24 @@ describe('player', () => {
 	});
 
 	it('displays current time', async () => {
-		const { getByLabelText, getByText } = await renderComponent();
+		const mockPlayer = setPlayerMock({ time: 50 });
+
+		const {
+			getByLabelText,
+			getAllByLabelText,
+			getByText,
+			getByTestId,
+		} = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => {
+			expect(getAllByLabelText('pause')).not.toHaveLength(0);
+		});
+
+		mockPlayer.currentTime(50);
+
+		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
 
 		await waitFor(() => {
 			expect(getByText('0:50')).toBeInTheDocument();
@@ -938,7 +981,6 @@ describe('player', () => {
 });
 
 // TODO:
-// does not show fullscreen button for audio
 // enables and disables player controls when entering and exiting fullscreen
 // gets initial speed from player if isloaded
 // Display progress bar in mini player

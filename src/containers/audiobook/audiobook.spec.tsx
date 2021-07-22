@@ -10,7 +10,11 @@ import {
 	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	mockedFetchApi,
+	setPlayerMock,
+} from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import Audiobook, {
 	getStaticPaths,
@@ -85,6 +89,8 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 }
 
 describe('audiobook detail page', () => {
+	beforeEach(() => setPlayerMock());
+
 	it('renders', async () => {
 		await renderPage();
 

@@ -67,6 +67,7 @@ export type PlaybackContextType = {
 		recording: AndMiniplayerFragment,
 		options?: {
 			onLoad?: (c: PlaybackContextType) => void;
+			prefersAudio?: boolean;
 		}
 	) => void;
 	setVideoHandler: (id: string, handler: (el: Element) => void) => void;
@@ -96,12 +97,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setProgress: () => undefined,
 	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
-	setVideoHandler: () => {
-		console.log('setVideoHandler noop');
-	},
-	unsetVideoHandler: () => {
-		console.log('unsetVideoHandler noop');
-	},
+	setVideoHandler: () => undefined,
+	unsetVideoHandler: () => undefined,
 	hasPlayer: () => false,
 	hasVideo: () => false,
 	isShowingVideo: () => false,
@@ -141,8 +138,6 @@ export default function AndMiniplayer({
 	const [videoHandlerId, setVideoHandlerId] = useState<string>();
 	const videoHandlerIdRef = useRef<string>();
 
-	console.log({ m: 'render', videoHandlerId });
-
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
@@ -156,14 +151,6 @@ export default function AndMiniplayer({
 		sources,
 	};
 
-	useEffect(() => {
-		console.log('andMiniplayer on  mount');
-	}, []);
-
-	useEffect(() => {
-		console.log({ m: 'videoHandlerId change', videoHandlerId });
-	}, [videoHandlerId]);
-
 	const playback: PlaybackContextType = {
 		play: () => {
 			player?.play();
@@ -175,7 +162,9 @@ export default function AndMiniplayer({
 			setIsPaused(true);
 		},
 		paused: () => isPaused,
-		getTime: () => player?.currentTime() || 0,
+		getTime: () => {
+			return player?.currentTime() || 0;
+		},
 		setTime: (t: number) => {
 			if (!player) return;
 			setProgress(t / player.duration());
@@ -202,28 +191,20 @@ export default function AndMiniplayer({
 		getRecording: () => recording,
 		// TODO: Rename to setRecording
 		loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
-			const { onLoad } = options;
+			const { onLoad, prefersAudio = false } = options;
+			setPrefersAudio(prefersAudio);
 			setOnLoad(() => onLoad);
 			setRecording(recording);
 			if (videoHandlerId && recording.id !== videoHandlerId) {
-				console.log('loadRecording >> unsetVideoHandler');
 				playback.unsetVideoHandler(videoHandlerId);
 			}
 		},
 		setVideoHandler: (id: string, handler: (el: Element) => void) => {
-			console.log({ m: 'setVideoHandler', id });
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
 		},
 		unsetVideoHandler: (id: string) => {
-			console.log({
-				m: 'unsetVideoHandler',
-				id,
-				videoHandlerId,
-				handler: videoHandler,
-				videoHandlerIdRef,
-			});
 			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);
@@ -258,31 +239,25 @@ export default function AndMiniplayer({
 		if (!videoEl) return;
 		if (!hasSources) return;
 
+		const p = player || videojs(videoEl, options);
+
 		if (!player) {
-			setPlayer(videojs(videoEl, options));
+			setPlayer(p);
 		} else if (sources) {
 			player.src(sources);
 		}
 
 		setIsPaused(true);
+		setProgress(0);
+		p.currentTime(0);
+		setVolume(p.volume() * 100);
+
 		setFingerprint(JSON.stringify(sources));
 	}, [hasSources, sources, videoEl]);
 
 	useEffect(() => {
 		onLoad && onLoad(playback);
 		setOnLoad(undefined);
-
-		if (!player) return;
-
-		setVolume(player.volume() * 100);
-
-		const duration = player.duration();
-
-		if (!duration || isNaN(duration)) return;
-
-		const p = player.currentTime() / duration;
-
-		setProgress(p);
 	}, [fingerprint]);
 
 	useEffect(() => {
@@ -290,23 +265,13 @@ export default function AndMiniplayer({
 	}, [volume]);
 
 	useEffect(() => {
-		console.log({
-			m: 'maybe move',
-			videoHandlerId,
-			videoHandler,
-			isShowingVideo,
-			onLoad,
-		});
-
 		if (onLoad) {
-			console.log('has onLoad');
 			return;
 		}
 
 		const video = videoRef.current;
 
 		if (!video) {
-			console.log('no video');
 			return;
 		}
 
@@ -317,28 +282,23 @@ export default function AndMiniplayer({
 
 		function findDestination() {
 			if (isShowingVideo) {
-				console.log('miniplayer');
 				// TODO: use ref instead of ID
 				return document.getElementById('mini-player');
 			}
 
-			console.log('origin');
 			return originRef.current;
 		}
 
 		const destination = findDestination();
 
 		if (!destination) {
-			console.log('no video');
 			return;
 		}
 
 		if (destination === video.parentElement) {
-			console.log('already in destination');
 			return;
 		}
 
-		console.log('moving');
 		destination.appendChild(video);
 	}, [videoHandlerId, videoHandler, isShowingVideo, onLoad]);
 

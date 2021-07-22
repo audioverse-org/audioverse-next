@@ -1,5 +1,5 @@
 import { queryByTestId, waitFor } from '@testing-library/dom';
-import { act, getByLabelText } from '@testing-library/react';
+import { act, getByLabelText, getByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
@@ -16,11 +16,13 @@ import {
 	loadRouter,
 	mockedFetchApi,
 	renderWithIntl,
+	setPlayerMock,
 } from '@lib/test/helpers';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sermons/[id]';
+import ReactTestUtils from 'react-dom/test-utils';
 
 jest.mock('next/router');
 jest.mock('video.js');
@@ -77,6 +79,7 @@ const renderPage = buildStaticRenderer(
 describe('sermon detail page', () => {
 	beforeEach(() => {
 		loadRouter({ isFallback: false });
+		setPlayerMock();
 	});
 
 	it('gets sermons', async () => {
@@ -1042,6 +1045,57 @@ describe('sermon detail page', () => {
 
 		await waitFor(() => {
 			expect(queryByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+		});
+	});
+
+	it('starts at beginning when playing series recording', async () => {
+		const mockPlayer = setPlayerMock();
+
+		loadSermonDetailData({
+			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+		const player = result.getByLabelText('player');
+
+		userEvent.click(getByLabelText(player, 'play'));
+
+		await waitFor(() => {
+			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
+		});
+
+		mockPlayer.currentTime(50);
+
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
+
+		await waitFor(() => {
+			expect(getByText(player, '0:50')).toBeInTheDocument();
+		});
+
+		const sidebar = result.getByLabelText('series list');
+
+		userEvent.click(getByLabelText(sidebar, 'play'));
+
+		expect(mockPlayer.currentTime).toBeCalledWith(0);
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
 		});
 	});
 });

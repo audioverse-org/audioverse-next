@@ -4,7 +4,11 @@ import {
 	GetSongSponsorPageDataDocument,
 	GetSongSponsorPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	mockedFetchApi,
+	setPlayerMock,
+} from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
@@ -16,6 +20,10 @@ const renderPage = buildStaticRenderer(Song, getStaticProps, {
 });
 
 describe('song sponsor detail page', () => {
+	beforeEach(() => {
+		setPlayerMock();
+	});
+
 	it('renders', async () => {
 		await renderPage();
 
