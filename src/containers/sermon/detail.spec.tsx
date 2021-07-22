@@ -3,6 +3,7 @@ import { act, getByLabelText, getByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -22,7 +23,6 @@ import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sermons/[id]';
-import ReactTestUtils from 'react-dom/test-utils';
 
 jest.mock('next/router');
 jest.mock('video.js');

@@ -13,8 +13,8 @@ import videojs from 'video.js';
 import { Recording } from '@components/organisms/recording';
 // import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
-import MyApp from '@pages/_app';
 import { setPlayerMock } from '@lib/test/helpers';
+import MyApp from '@pages/_app';
 
 const recordingAudio: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
