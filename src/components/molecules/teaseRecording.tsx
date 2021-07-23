@@ -3,10 +3,10 @@ import React from 'react';
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { TeaseRecordingFragment } from '@lib/generated/graphql';
+import { useFormattedDuration } from '@lib/time';
+import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './teaseRecording.module.scss';
-import usePlaybackSession from '@lib/usePlaybackSession';
-import { useFormattedDuration } from '@lib/time';
 
 export default function TeaseRecording({
 	recording,
