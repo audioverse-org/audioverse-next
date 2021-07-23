@@ -1,3 +1,11 @@
 fragment teaseRecording on Recording {
+	sequenceIndex
+	sequence {
+		recordings {
+			aggregate {
+				count
+			}
+		}
+	}
 	...buttonPlay
 }

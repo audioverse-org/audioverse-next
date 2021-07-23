@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProgressBar from '@components/atoms/progressBar';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { TeaseRecordingFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
@@ -14,8 +15,13 @@ export default function TeaseRecording({
 	recording: TeaseRecordingFragment;
 }): JSX.Element {
 	const session = usePlaybackSession(recording);
+	const index = recording.sequenceIndex;
+	const count = recording.sequence?.recordings.aggregate?.count;
 	return (
 		<div className={styles.base}>
+			<div className={styles.part}>
+				Part {index} of {count}
+			</div>
 			<div className={styles.title}>
 				<h4>{recording.title}</h4>
 				<ButtonPlay recording={recording} />
@@ -26,6 +32,9 @@ export default function TeaseRecording({
 				</span>
 				<span className={styles.progress}>
 					<ProgressBar recording={recording} interactive={false} />
+				</span>
+				<span>
+					<ButtonFavorite id={recording.id} />
 				</span>
 			</div>
 		</div>

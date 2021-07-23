@@ -230,11 +230,14 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					)}
 					<CopyrightInfo recording={recording} />
 				</div>
+				{/*TODO: use ul > li*/}
 				{seriesItems && (
 					<div className={styles.series} aria-label={'series list'}>
 						<LineHeading size={12}>Other Teachings in Series</LineHeading>
 						{seriesItems.map((r) => (
-							<TeaseRecording key={r.id} recording={r} />
+							<div className={styles.item} key={r.id}>
+								<TeaseRecording recording={r} />
+							</div>
 						))}
 					</div>
 				)}

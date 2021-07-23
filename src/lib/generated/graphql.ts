@@ -5778,6 +5778,17 @@ export type SponsorInfoFragment = (
 
 export type TeaseRecordingFragment = (
   { __typename?: 'Recording' }
+  & Pick<Recording, 'sequenceIndex'>
+  & { sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { aggregate: Maybe<(
+        { __typename?: 'Aggregate' }
+        & Pick<Aggregate, 'count'>
+      )> }
+    ) }
+  )> }
   & ButtonPlayFragment
 );
 
@@ -7620,6 +7631,14 @@ export const ButtonPlayFragmentDoc = `
     ${AndMiniplayerFragmentDoc}`;
 export const TeaseRecordingFragmentDoc = `
     fragment teaseRecording on Recording {
+  sequenceIndex
+  sequence {
+    recordings {
+      aggregate {
+        count
+      }
+    }
+  }
   ...buttonPlay
 }
     ${ButtonPlayFragmentDoc}`;

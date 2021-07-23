@@ -1164,6 +1164,58 @@ describe('sermon detail page', () => {
 			expect(getByText(sidebar, '5m')).toBeInTheDocument();
 		});
 	});
+
+	it('displays favorite button for sequence recordings', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		expect(getByLabelText(sidebar, 'Favorite')).toBeInTheDocument();
+	});
+
+	it('displays part info', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+							sequenceIndex: 1,
+							sequence: {
+								recordings: {
+									aggregate: {
+										count: 3,
+									},
+								},
+							},
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		await waitFor(() => {
+			expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
+		});
+	});
 });
 
 // TODO:
