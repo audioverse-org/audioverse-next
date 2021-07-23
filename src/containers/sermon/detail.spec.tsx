@@ -1098,7 +1098,51 @@ describe('sermon detail page', () => {
 			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
 		});
 	});
+
+	it('displays progress bar for sequence recordings', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		expect(getByLabelText(sidebar, 'progress')).toBeInTheDocument();
+	});
+
+	it('disables sidebar progress bar interactivity', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		expect(getByLabelText(sidebar, 'progress')).toBeDisabled();
+	});
 });
 
 // TODO:
-// Does not show selected recording in sidebar
+// sidebar progress bars are not interactive
+// sidebar titles are linked
+// Does not show selected recording in sidebar?
