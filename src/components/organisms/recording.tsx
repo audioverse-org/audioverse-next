@@ -217,16 +217,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						<input readOnly={true} value={embedCode} />
 					</label>
 					{recording.transcript?.text && (
-						<>
-							<h6>
-								<FormattedMessage
-									id="sermonDetailPage__transcriptTitle"
-									defaultMessage="Transcript"
-									description="Sermon detail transcript title"
-								/>
-							</h6>
-							<Transcript text={recording.transcript.text} />
-						</>
+						<Transcript text={recording.transcript.text} />
 					)}
 					<CopyrightInfo recording={recording} />
 				</div>

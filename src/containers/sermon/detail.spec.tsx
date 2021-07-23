@@ -572,18 +572,6 @@ describe('sermon detail page', () => {
 		expect(getByText('the_transcript_text')).toBeInTheDocument();
 	});
 
-	it('includes transcript title', async () => {
-		loadSermonDetailData({
-			transcript: {
-				text: 'the_transcript_text',
-			},
-		});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('Transcript')).toBeInTheDocument();
-	});
-
 	it('notes probable auto generation', async () => {
 		loadSermonDetailData({
 			transcript: {
