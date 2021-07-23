@@ -1140,6 +1140,30 @@ describe('sermon detail page', () => {
 
 		expect(getByLabelText(sidebar, 'progress')).toBeDisabled();
 	});
+
+	it('displays durations in sidebar', async () => {
+		loadSermonDetailData({
+			sequence: {
+				recordings: {
+					nodes: [
+						{
+							id: 'the_sibling_id',
+							title: 'sibling_title',
+							duration: 60 * 5,
+						},
+					],
+				},
+			},
+		});
+
+		const result = await renderPage();
+
+		const sidebar = result.getByLabelText('series list');
+
+		await waitFor(() => {
+			expect(getByText(sidebar, '5m')).toBeInTheDocument();
+		});
+	});
 });
 
 // TODO:

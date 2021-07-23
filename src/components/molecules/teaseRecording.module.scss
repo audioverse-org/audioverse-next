@@ -8,5 +8,27 @@
 }
 
 .title {
-	font-size: 22px;
+	display: flex;
+	align-items: flex-start;
+	h4 {
+		font-size: 22px;
+		flex-grow: 1;
+		margin-top: 0;
+	}
+}
+
+.progressLockup {
+	display: flex;
+	align-items: center;
+}
+
+.progress {
+	flex-grow: 1;
+}
+
+.duration {
+	margin-right: 16px;
+	flex: 0 0 auto;
+	color: $ts-midTone;
+	font-size: 14px;
 }
