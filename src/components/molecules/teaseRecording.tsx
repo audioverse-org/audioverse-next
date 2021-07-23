@@ -1,10 +1,10 @@
 import React from 'react';
 
+import ProgressBar from '@components/atoms/progressBar';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { TeaseRecordingFragment } from '@lib/generated/graphql';
 
 import styles from './teaseRecording.module.scss';
-import ProgressBar from '@components/atoms/progressBar';
 
 export default function TeaseRecording({
 	recording,
