@@ -94,9 +94,9 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				<div>
 					<ButtonNudge recording={recording} reverse={true} />
 					<ButtonNudge recording={recording} />
-					<ButtonSpeed recording={recording} />
 				</div>
 				<div>
+					<ButtonSpeed recording={recording} />
 					<ButtonDownload recording={recording} />
 					<ButtonShare recording={recording} />
 					<ButtonFavorite id={recording.id} />
