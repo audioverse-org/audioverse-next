@@ -354,9 +354,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('series_title')).toBeInTheDocument();
+		expect(getAllByText('series_title').length).toBeGreaterThanOrEqual(2);
 	});
 
 	it('does not include series heading if no series', async () => {
@@ -375,9 +375,10 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		const link = getByText('series_title').parentElement as HTMLLinkElement;
+		const link = getAllByText('series_title')[0]
+			.parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/series/series_id');
 	});
@@ -390,13 +391,14 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage({
+		const { getAllByText } = await renderPage({
 			params: {
 				language: 'es',
 			},
 		});
 
-		const link = getByText('series_title').parentElement as HTMLLinkElement;
+		const link = getAllByText('series_title')[0]
+			.parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/es/series/series_id');
 	});
@@ -1187,9 +1189,23 @@ describe('sermon detail page', () => {
 			expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
 		});
 	});
+
+	it('includes series title in metadata', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+		});
+
+		const result = await renderPage();
+
+		const metadata = result.getByLabelText('metadata');
+
+		expect(getByText(metadata, 'series_title')).toBeInTheDocument();
+	});
 });
 
 // TODO:
-// sidebar progress bars are not interactive
 // sidebar titles are linked
 // Does not show selected recording in sidebar?

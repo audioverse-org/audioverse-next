@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
@@ -38,7 +38,7 @@ function getSiblingByIndexOffset(recording: RecordingFragment, offset: number) {
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
-
+	const intl = useIntl();
 	const speakers = recording?.persons || [];
 	const { sponsor } = recording;
 	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
@@ -127,55 +127,77 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 					<Player recording={recording} />
 
-					{recording.description && (
-						<>
-							<h6>
-								<FormattedMessage
-									id="sermonDetailPage__descriptionTitle"
-									defaultMessage="Description"
-									description="Sermon detail description title"
+					<div
+						aria-label={intl.formatMessage({
+							id: 'organism-recording__metadataLabel',
+							defaultMessage: 'metadata',
+							description: 'recording metadata section label',
+						})}
+					>
+						{recording.description && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="sermonDetailPage__descriptionTitle"
+										defaultMessage="Description"
+										description="Sermon detail description title"
+									/>
+								</h6>
+								<div
+									dangerouslySetInnerHTML={{ __html: recording.description }}
 								/>
-							</h6>
-							<div
-								dangerouslySetInnerHTML={{ __html: recording.description }}
-							/>
-						</>
-					)}
+							</>
+						)}
 
-					{/*TODO: Series*/}
-					{/*TODO: Conference*/}
+						{/*TODO: Series*/}
 
-					{sponsor && (
-						<>
-							<h6>
-								<FormattedMessage
-									id="sermonDetailPage__sponsorInfoTitle"
-									defaultMessage="Sponsor"
-									description="Sermon detail sponsor info title"
-								/>
-							</h6>
-							<SponsorInfo sponsor={sponsor} />
-						</>
-					)}
+						{recording.sequence && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__seriesInfoTitle"
+										defaultMessage="Parent Series"
+										description="Recording series info title"
+									/>
+								</h6>
+								<div>{recording.sequence.title}</div>
+							</>
+						)}
 
-					{recording.recordingDate ? (
-						<>
-							<h6>
-								<FormattedMessage
-									id="sermonDetailPage__recordedTitle"
-									defaultMessage="Recorded"
-									description="Sermon detail recorded date title"
-								/>
-							</h6>
-							<p>{recordingDateString}</p>
-						</>
-					) : null}
+						{/*TODO: Conference*/}
 
-					{recording.transcript?.text && (
-						<Transcript text={recording.transcript.text} />
-					)}
+						{sponsor && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__sponsorInfoTitle"
+										defaultMessage="Sponsor"
+										description="recording sponsor info title"
+									/>
+								</h6>
+								<SponsorInfo sponsor={sponsor} />
+							</>
+						)}
 
-					<CopyrightInfo recording={recording} />
+						{recording.recordingDate ? (
+							<>
+								<h6>
+									<FormattedMessage
+										id="sermonDetailPage__recordedTitle"
+										defaultMessage="Recorded"
+										description="Sermon detail recorded date title"
+									/>
+								</h6>
+								<p>{recordingDateString}</p>
+							</>
+						) : null}
+
+						{recording.transcript?.text && (
+							<Transcript text={recording.transcript.text} />
+						)}
+
+						<CopyrightInfo recording={recording} />
+					</div>
 				</div>
 
 				{/*TODO: use ul > li*/}
