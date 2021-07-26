@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 
 import { GetSongBookPageDataDocument } from '@lib/generated/graphql';
@@ -56,7 +57,9 @@ describe('song book detail page', () => {
 	it('displays short url', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		const { getByText, getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		expect(getByText('first_song_shareurl')).toBeInTheDocument();
 	});

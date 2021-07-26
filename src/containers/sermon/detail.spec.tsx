@@ -315,33 +315,6 @@ describe('sermon detail page', () => {
 		expect(getAllByText('the_summary').length > 0).toBeTruthy();
 	});
 
-	it('includes tags', async () => {
-		loadSermonDetailData({
-			recordingTags: {
-				nodes: [
-					{
-						tag: {
-							id: 'the_id',
-							name: 'the_name',
-						},
-					},
-				],
-			},
-		});
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_name')).toBeInTheDocument();
-	});
-
-	it('excludes tag section if no tags', async () => {
-		loadSermonDetailData({});
-
-		const { queryByText } = await renderPage();
-
-		expect(queryByText('Tags')).not.toBeInTheDocument();
-	});
-
 	it('includes sponsor title', async () => {
 		loadSermonDetailData({
 			sponsor: {
@@ -623,7 +596,9 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText } = await renderPage();
+		const { getByText, getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		expect(getByText('the_share_url')).toBeInTheDocument();
 	});
@@ -633,7 +608,9 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText } = await renderPage();
+		const { getByText, getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		expect(getByText('Short URL')).toBeInTheDocument();
 	});
@@ -643,7 +620,9 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText } = await renderPage();
+		const { getByText, getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		expect(getByText('Share')).toBeInTheDocument();
 	});
@@ -653,6 +632,8 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
+		userEvent.click(getByLabelText('share'));
+
 		expect(getByLabelText('Embed Code')).toBeInTheDocument();
 	});
 
@@ -660,6 +641,8 @@ describe('sermon detail page', () => {
 		loadSermonDetailData();
 
 		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		const input = getByLabelText('Embed Code') as HTMLInputElement;
 

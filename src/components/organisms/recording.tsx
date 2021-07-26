@@ -40,7 +40,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
 
 	const speakers = recording?.persons || [];
-	const tags = recording?.recordingTags?.nodes || [];
 	const { sponsor } = recording;
 	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
 		[],
@@ -55,11 +54,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const previousRecording = getSiblingByIndexOffset(recording, -1);
 	const nextRecording = getSiblingByIndexOffset(recording, 1);
 	const seriesItems = recording?.sequence?.recordings?.nodes;
-
-	// TODO: Switch embed link to new site when route is implemented
-	// language=HTML
-	// noinspection HtmlDeprecatedAttribute
-	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
 
 	return (
 		<div className={styles.base}>
@@ -147,28 +141,10 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							/>
 						</>
 					)}
-					{tags.length > 0 && (
-						<>
-							<h6>
-								<FormattedMessage
-									id="sermonDetailPage__tagsTitle"
-									defaultMessage="Tags"
-									description="Sermon detail tags title"
-								/>
-							</h6>
-							<ul>
-								{tags.map((t) => (
-									<li key={t.tag.id}>
-										{/* TODO: link tags */}
-										<Link href="#">
-											<a>{t.tag.name}</a>
-										</Link>
-									</li>
-								))}
-							</ul>
-						</>
-					)}
-					{/*TODO: Add related sermons*/}
+
+					{/*TODO: Series*/}
+					{/*TODO: Conference*/}
+
 					{sponsor && (
 						<>
 							<h6>
@@ -181,6 +157,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							<SponsorInfo sponsor={sponsor} />
 						</>
 					)}
+
 					{recording.recordingDate ? (
 						<>
 							<h6>
@@ -193,35 +170,16 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							<p>{recordingDateString}</p>
 						</>
 					) : null}
-					<h6>
-						<FormattedMessage
-							id="sermonDetailPage__shareTitle"
-							defaultMessage="Share"
-							description="Sermon detail share section title"
-						/>
-					</h6>
-					<h6>
-						<FormattedMessage
-							id="sermonDetailPage__shortUrlLabel"
-							defaultMessage="Short URL"
-							description="Sermon detail short url label"
-						/>
-					</h6>
-					<p>{recording.shareUrl}</p>
-					<label>
-						<FormattedMessage
-							id="sermonDetailPage__embedCodeLabel"
-							defaultMessage="Embed Code"
-							description="Sermon detail embed code label"
-						/>{' '}
-						<input readOnly={true} value={embedCode} />
-					</label>
+
 					{recording.transcript?.text && (
 						<Transcript text={recording.transcript.text} />
 					)}
+
 					<CopyrightInfo recording={recording} />
 				</div>
+
 				{/*TODO: use ul > li*/}
+
 				{seriesItems && (
 					<div className={styles.series} aria-label={'series list'}>
 						<LineHeading size={12}>Other Teachings in Series</LineHeading>

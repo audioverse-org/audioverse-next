@@ -98,7 +98,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				</div>
 				<div>
 					<ButtonDownload recording={recording} />
-					<ButtonShare />
+					<ButtonShare recording={recording} />
 					<ButtonFavorite id={recording.id} />
 					{shouldShowVideoControls && (
 						<button

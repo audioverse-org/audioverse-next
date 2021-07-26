@@ -5583,6 +5583,11 @@ export type ButtonPlayFragment = (
   & AndMiniplayerFragment
 );
 
+export type ButtonShareFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'id' | 'shareUrl'>
+);
+
 export type CardBibleChapterFragment = (
   { __typename?: 'BibleChapter' }
   & Pick<BibleChapter, 'id' | 'title' | 'url'>
@@ -5798,6 +5803,7 @@ export type PlayerFragment = (
   & AndMiniplayerFragment
   & ButtonDownloadFragment
   & ProgressBarFragment
+  & ButtonShareFragment
 );
 
 export type PlaylistFragment = (
@@ -7656,6 +7662,12 @@ export const ButtonDownloadFragmentDoc = `
   }
 }
     `;
+export const ButtonShareFragmentDoc = `
+    fragment buttonShare on Recording {
+  id
+  shareUrl
+}
+    `;
 export const PlayerFragmentDoc = `
     fragment player on Recording {
   id
@@ -7663,10 +7675,12 @@ export const PlayerFragmentDoc = `
   ...andMiniplayer
   ...buttonDownload
   ...progressBar
+  ...buttonShare
 }
     ${AndMiniplayerFragmentDoc}
 ${ButtonDownloadFragmentDoc}
-${ProgressBarFragmentDoc}`;
+${ProgressBarFragmentDoc}
+${ButtonShareFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -9631,6 +9645,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
+
 
 
 
