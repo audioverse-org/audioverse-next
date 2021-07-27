@@ -44,6 +44,8 @@
 .series {
 	display: flex;
 	align-items: center;
+	font-weight: 400px;
+	font-size: 12px;
 	svg {
 		color: $ts-red;
 		margin-right: 4px;
