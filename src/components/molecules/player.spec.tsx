@@ -904,25 +904,25 @@ describe('player', () => {
 	it('displays current time', async () => {
 		const mockPlayer = setPlayerMock({ time: 50 });
 
-		const {
-			getByLabelText,
-			getAllByLabelText,
-			getByText,
-			getByTestId,
-		} = await renderComponent();
+		const result = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(result.getByLabelText('play'));
 
 		await waitFor(() => {
-			expect(getAllByLabelText('pause')).not.toHaveLength(0);
+			expect(result.getAllByLabelText('pause')).not.toHaveLength(0);
 		});
 
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
+
+		const player = result.getByLabelText('player');
 
 		await waitFor(() => {
-			expect(getByText('0:50')).toBeInTheDocument();
+			expect(getByText(player, '0:50')).toBeInTheDocument();
 		});
 	});
 
@@ -999,6 +999,31 @@ describe('player', () => {
 		userEvent.click(getByLabelText('increase volume'));
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
+	});
+
+	it('displays current time in miniplayer', async () => {
+		const mockPlayer = setPlayerMock({ time: 50 });
+
+		const result = await renderComponent();
+
+		userEvent.click(result.getByLabelText('play'));
+
+		await waitFor(() => {
+			expect(result.getAllByLabelText('pause')).not.toHaveLength(0);
+		});
+
+		mockPlayer.currentTime(50);
+
+		ReactTestUtils.Simulate.timeUpdate(
+			result.getByTestId('video-element'),
+			{} as any
+		);
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(getByText(miniplayer, '0:50')).toBeInTheDocument();
+		});
 	});
 });
 

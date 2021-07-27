@@ -11,12 +11,14 @@ import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 
 import styles from './miniplayer.module.scss';
+import { useFormattedTime } from '@lib/time';
 
 export default function Miniplayer(): JSX.Element | null {
 	const playback = useContext(PlaybackContext);
 	const volume = playback.getVolume();
 	const recording = playback.getRecording();
 	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
+	const timeString = useFormattedTime(playback.getTime());
 
 	// TODO: Move this guard into andMiniplayer
 	if (!recording) return null;
@@ -42,7 +44,12 @@ export default function Miniplayer(): JSX.Element | null {
 					</div>
 				)}
 				<h4 className={styles.title}>{recording.title}</h4>
-				<ProgressBar recording={recording} />
+				<div className={styles.progress}>
+					<span>{timeString}</span>
+					<span className={styles.bar}>
+						<ProgressBar recording={recording} />
+					</span>
+				</div>
 			</div>
 			<div className={styles.volume}>
 				<button

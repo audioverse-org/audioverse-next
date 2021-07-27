@@ -907,11 +907,13 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		const result = await renderPage();
 
-		userEvent.click(getByText('Audio'));
+		userEvent.click(result.getByText('Audio'));
 
-		expect(getByText('0:00')).toBeInTheDocument();
+		const player = result.getByLabelText('player');
+
+		expect(getByText(player, '0:00')).toBeInTheDocument();
 	});
 
 	it('hides transcript', async () => {
