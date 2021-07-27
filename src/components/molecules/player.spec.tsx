@@ -978,6 +978,28 @@ describe('player', () => {
 			expect(getAllByLabelText('progress')[0]).toHaveValue('0')
 		);
 	});
+
+	it('has working volume down button', async () => {
+		const playerMock = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+		userEvent.click(getByLabelText('reduce volume'));
+
+		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.4));
+	});
+
+	it('has working volume up button', async () => {
+		const playerMock = setPlayerMock();
+
+		const { getByLabelText } = await renderComponent();
+
+		userEvent.click(getByLabelText('play'));
+		userEvent.click(getByLabelText('increase volume'));
+
+		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
+	});
 });
 
 // TODO:

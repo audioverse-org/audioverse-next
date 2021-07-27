@@ -64,6 +64,13 @@
 	display: flex;
 	align-items: center;
 	min-width: 150px;
+	button {
+		padding: 0;
+		margin: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+	}
 	svg {
 		flex: 0 0 auto;
 		box-sizing: content-box;

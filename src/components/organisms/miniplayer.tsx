@@ -7,13 +7,14 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
-import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
+import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {
 	const playback = useContext(PlaybackContext);
+	const volume = playback.getVolume();
 	const recording = playback.getRecording();
 	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
 
@@ -44,14 +45,24 @@ export default function Miniplayer(): JSX.Element | null {
 				<ProgressBar recording={recording} />
 			</div>
 			<div className={styles.volume}>
-				<IconVolumeLow />
+				<button
+					aria-label={'reduce volume'}
+					onClick={() => playback.setVolume(volume - 10)}
+				>
+					<IconVolumeLow />
+				</button>
 				{/*TODO: Localize*/}
 				<Slider
-					value={playback.getVolume()}
+					value={volume}
 					onChange={(e, val) => playback.setVolume(val as number)}
 					aria-label={'volume'}
 				/>
-				<IconVolumeHigh />
+				<button
+					aria-label={'increase volume'}
+					onClick={() => playback.setVolume(volume + 10)}
+				>
+					<IconVolumeHigh />
+				</button>
 			</div>
 		</div>
 	);
