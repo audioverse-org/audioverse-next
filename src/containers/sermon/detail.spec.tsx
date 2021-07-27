@@ -1204,6 +1204,21 @@ describe('sermon detail page', () => {
 
 		expect(getByText(metadata, 'series_title')).toBeInTheDocument();
 	});
+
+	it('links series title in metadata', async () => {
+		loadSermonDetailData({
+			sequence: {
+				id: 'series_id',
+				title: 'series_title',
+			},
+		});
+
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
+		const link = getByText(metadata, 'series_title');
+
+		expect(link).toHaveAttribute('href', expect.stringContaining('series_id'));
+	});
 });
 
 // TODO:

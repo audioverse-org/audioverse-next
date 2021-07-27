@@ -35,12 +35,12 @@ export default function Miniplayer(): JSX.Element | null {
 			</div>
 			<div className={styles.meta}>
 				{recording.sequence && (
-					<div aria-label={'series'}>
-						<ListIcon width={16} height={16} />
+					<div className={styles.series} aria-label={'series'}>
+						<ListIcon width={13} height={13} />
 						{recording.sequence.title}
 					</div>
 				)}
-				<div>{recording.title}</div>
+				<h4 className={styles.title}>{recording.title}</h4>
 				<ProgressBar recording={recording} />
 			</div>
 			<div className={styles.volume}>

@@ -54,15 +54,15 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const previousRecording = getSiblingByIndexOffset(recording, -1);
 	const nextRecording = getSiblingByIndexOffset(recording, 1);
 	const seriesItems = recording?.sequence?.recordings?.nodes;
+	const seriesDetailRoute = recording.sequence
+		? makeSeriesDetailRoute(langRoute, recording.sequence.id)
+		: '';
 
 	return (
 		<div className={styles.base}>
 			{/*TODO: use next/link for sequence link*/}
 			{recording?.sequence && (
-				<a
-					href={makeSeriesDetailRoute(langRoute, recording?.sequence?.id)}
-					className={styles.hat}
-				>
+				<a href={seriesDetailRoute} className={styles.hat}>
 					<div className={styles.hatType}>
 						<ListIcon width={13} height={13} />
 						<FormattedMessage
@@ -149,8 +149,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							</>
 						)}
 
-						{/*TODO: Series*/}
-
 						{recording.sequence && (
 							<>
 								<h6>
@@ -160,7 +158,11 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 										description="Recording series info title"
 									/>
 								</h6>
-								<div>{recording.sequence.title}</div>
+								<p>
+									<Link href={seriesDetailRoute}>
+										<a>{recording.sequence.title}</a>
+									</Link>
+								</p>
 							</>
 						)}
 

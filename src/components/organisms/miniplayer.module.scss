@@ -2,6 +2,7 @@
 
 .miniplayer {
 	flex: 0 0 90px;
+	min-height: 0;
 	background-color: white;
 	display: flex;
 	justify-content: space-between;
@@ -12,15 +13,9 @@
 .player {
 	display: grid;
 	grid-template-areas: 'cell';
+	max-height: 100%;
 	.pane {
 		grid-area: cell;
-		flex: 0 0 auto;
-		.playerElement {
-			width: 212px;
-		}
-		.vjs-control-bar {
-			display: none !important;
-		}
 	}
 	.controls {
 		grid-area: cell;
@@ -43,6 +38,22 @@
 
 .meta {
 	padding: 2rem;
+}
+
+.series {
+	display: flex;
+	align-items: center;
+	svg {
+		color: $ts-red;
+		margin-right: 4px;
+	}
+}
+
+.title {
+	font-weight: 700;
+	font-size: 18px;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 .volume {
