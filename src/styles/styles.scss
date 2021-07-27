@@ -106,6 +106,18 @@ p {
 	box-shadow: 0 4px 10px 0 #00000026;
 }
 
+.MuiSlider-root.MuiSlider-colorPrimary {
+	color: $ts-dark;
+	.MuiSlider-thumb {
+		color: white;
+		box-shadow: 0 4px 10px 0 #00000026;
+		width: 16px;
+		height: 16px;
+		margin-top: -7px;
+		margin-left: -8px;
+	}
+}
+
 /* Video.js Customizations */
 
 .video-js {

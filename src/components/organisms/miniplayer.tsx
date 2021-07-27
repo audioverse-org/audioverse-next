@@ -1,6 +1,4 @@
 import Slider from '@material-ui/core/Slider';
-import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import React, { useContext } from 'react';
 
 import ProgressBar from '@components/atoms/progressBar';
@@ -9,6 +7,8 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
+import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
+import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
 
 import styles from './miniplayer.module.scss';
 
@@ -44,14 +44,14 @@ export default function Miniplayer(): JSX.Element | null {
 				<ProgressBar recording={recording} />
 			</div>
 			<div className={styles.volume}>
-				<VolumeDown />
+				<IconVolumeLow />
 				{/*TODO: Localize*/}
 				<Slider
 					value={playback.getVolume()}
 					onChange={(e, val) => playback.setVolume(val as number)}
 					aria-label={'volume'}
 				/>
-				<VolumeUp />
+				<IconVolumeHigh />
 			</div>
 		</div>
 	);
