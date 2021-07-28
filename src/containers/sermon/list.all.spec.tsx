@@ -5,7 +5,12 @@ import * as feed from 'feed';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
 
-import { ENTRIES_PER_PAGE, LANGUAGES, PROJECT_ROOT } from '@lib/constants';
+import {
+	ENTRIES_PER_PAGE,
+	LANGUAGES,
+	LIST_PRERENDER_LIMIT,
+	PROJECT_ROOT,
+} from '@lib/constants';
 import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
@@ -97,11 +102,11 @@ describe('sermons list page', () => {
 	});
 
 	it('generates all pages in language', async () => {
-		loadSermonListPagePathsData(50 * ENTRIES_PER_PAGE);
+		loadSermonListPagePathsData(LIST_PRERENDER_LIMIT * ENTRIES_PER_PAGE);
 
 		const result = await getStaticPaths();
 
-		const expected = 50 * Object.keys(LANGUAGES).length;
+		const expected = LIST_PRERENDER_LIMIT * Object.keys(LANGUAGES).length;
 		expect(result.paths.length).toBe(expected);
 	});
 

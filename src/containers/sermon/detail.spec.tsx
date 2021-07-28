@@ -93,7 +93,7 @@ describe('sermon detail page', () => {
 				{
 					variables: {
 						language: 'ENGLISH',
-						first: 250,
+						first: 200,
 					},
 				}
 			)
@@ -111,7 +111,7 @@ describe('sermon detail page', () => {
 				{
 					variables: {
 						language: 'SPANISH',
-						first: 250,
+						first: 200,
 					},
 				}
 			)
