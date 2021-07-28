@@ -1028,6 +1028,7 @@ describe('player', () => {
 });
 
 // TODO:
+// displays duration in miniplayer
 // enables and disables player controls when entering and exiting fullscreen
 // gets initial speed from player if isloaded
 // Display progress bar in mini player

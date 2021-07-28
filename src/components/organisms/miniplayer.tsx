@@ -5,13 +5,13 @@ import ProgressBar from '@components/atoms/progressBar';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
+import { useFormattedTime } from '@lib/time';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 
 import styles from './miniplayer.module.scss';
-import { useFormattedTime } from '@lib/time';
 
 export default function Miniplayer(): JSX.Element | null {
 	const playback = useContext(PlaybackContext);
