@@ -40,6 +40,10 @@ fragment recording on Recording {
 			}
 		}
 	}
+	collection {
+		id
+		title
+	}
 	sequenceIndex
 	transcript {
 		text

@@ -1221,6 +1221,38 @@ describe('sermon detail page', () => {
 
 		expect(link).toHaveAttribute('href', expect.stringContaining('series_id'));
 	});
+
+	it('includes collection title in metadata', async () => {
+		loadSermonDetailData({
+			collection: {
+				id: 'collection_id',
+				title: 'collection_title',
+			},
+		});
+
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
+
+		expect(getByText(metadata, 'collection_title')).toBeInTheDocument();
+	});
+
+	it('links conference title in metadata', async () => {
+		loadSermonDetailData({
+			collection: {
+				id: 'conference_id',
+				title: 'conference_title',
+			},
+		});
+
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
+		const link = getByText(metadata, 'conference_title');
+
+		expect(link).toHaveAttribute(
+			'href',
+			expect.stringContaining('conference_id')
+		);
+	});
 });
 
 // TODO:

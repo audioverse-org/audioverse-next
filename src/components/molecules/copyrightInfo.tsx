@@ -27,7 +27,7 @@ export default function CopyrightInfo({
 					alt={'copyright'}
 					src={copyrightImageUrl}
 					width={100}
-					height={100}
+					height={35}
 				/>
 			)}
 			<p>

@@ -862,8 +862,9 @@ export enum FavoritesSortableField {
   FavoritedAt = 'FAVORITED_AT'
 }
 
-export type Image = {
+export type Image = Node & {
   __typename?: 'Image';
+  id: Scalars['ID'];
   name: Scalars['String'];
   updatedAt: Maybe<Scalars['DateTime']>;
   url: Scalars['URL'];
@@ -2486,6 +2487,8 @@ export enum PersonsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
   Name = 'NAME',
+  RecordingCount = 'RECORDING_COUNT',
+  RecordingDownloadsAllTime = 'RECORDING_DOWNLOADS_ALL_TIME',
   RecordingPublishedAt = 'RECORDING_PUBLISHED_AT'
 }
 
@@ -4112,6 +4115,7 @@ export type SequencePayload = {
 export enum SequenceSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
+  RecordingCount = 'RECORDING_COUNT',
   RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
   Title = 'TITLE'
 }
@@ -5854,6 +5858,9 @@ export type RecordingFragment = (
         & TeaseRecordingFragment
       )>> }
     ) }
+  )>, collection: Maybe<(
+    { __typename?: 'Collection' }
+    & Pick<Collection, 'id' | 'title'>
   )>, transcript: Maybe<(
     { __typename?: 'Transcript' }
     & Pick<Transcript, 'text'>
@@ -7723,6 +7730,10 @@ export const RecordingFragmentDoc = `
         ...teaseRecording
       }
     }
+  }
+  collection {
+    id
+    title
   }
   sequenceIndex
   transcript {

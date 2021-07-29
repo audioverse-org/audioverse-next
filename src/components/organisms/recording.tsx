@@ -12,7 +12,11 @@ import SponsorInfo from '@components/molecules/sponsorInfo';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
-import { makeSeriesDetailRoute, makeSermonRoute } from '@lib/routes';
+import {
+	makeConferenceRoute,
+	makeSeriesDetailRoute,
+	makeSermonRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
@@ -166,7 +170,27 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							</>
 						)}
 
-						{/*TODO: Conference*/}
+						{recording.collection && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__conferenceInfoTitle"
+										defaultMessage="Parent Conference"
+										description="Recording conference info title"
+									/>
+								</h6>
+								<p>
+									<Link
+										href={makeConferenceRoute(
+											langRoute,
+											recording.collection.id
+										)}
+									>
+										<a>{recording.collection.title}</a>
+									</Link>
+								</p>
+							</>
+						)}
 
 						{sponsor && (
 							<>
