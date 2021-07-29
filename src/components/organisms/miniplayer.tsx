@@ -19,6 +19,7 @@ export default function Miniplayer(): JSX.Element | null {
 	const recording = playback.getRecording();
 	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
 	const timeString = useFormattedTime(playback.getTime());
+	const durationString = useFormattedTime(playback.getDuration());
 
 	// TODO: Move this guard into andMiniplayer
 	if (!recording) return null;
@@ -49,6 +50,7 @@ export default function Miniplayer(): JSX.Element | null {
 					<span className={styles.bar}>
 						<ProgressBar recording={recording} />
 					</span>
+					<span>{durationString}</span>
 				</div>
 			</div>
 			<div className={styles.volume}>

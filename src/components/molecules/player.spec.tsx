@@ -786,7 +786,7 @@ describe('player', () => {
 	});
 
 	it('includes recording duration', async () => {
-		const { getByText, getByAltText } = await renderComponent({
+		const result = await renderComponent({
 			props: {
 				recording: {
 					title: 'the_sermon_title',
@@ -801,12 +801,14 @@ describe('player', () => {
 			},
 		});
 
-		const poster = getByAltText('the_sermon_title') as HTMLElement;
+		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
 
 		userEvent.click(poster.parentElement as HTMLElement);
 
+		const player = result.getByLabelText('player');
+
 		await waitFor(() => {
-			expect(getByText('1:40')).toBeInTheDocument();
+			expect(getByText(player, '1:40')).toBeInTheDocument();
 		});
 	});
 
@@ -1023,6 +1025,26 @@ describe('player', () => {
 
 		await waitFor(() => {
 			expect(getByText(miniplayer, '0:50')).toBeInTheDocument();
+		});
+	});
+
+	it('displays duration in miniplayer', async () => {
+		setPlayerMock({ duration: 120 });
+
+		const result = await renderComponent({
+			props: {
+				recording: {
+					duration: 120,
+				},
+			},
+		});
+
+		userEvent.click(result.getByLabelText('play'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await waitFor(() => {
+			expect(getByText(miniplayer, '2:00')).toBeInTheDocument();
 		});
 	});
 });
