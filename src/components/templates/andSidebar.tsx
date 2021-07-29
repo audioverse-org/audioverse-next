@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 
+import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 
 import styles from './andSidebar.module.scss';
-import SearchBar from '@components/molecules/searchBar';
 
 export default function AndSidebar({
 	children,
