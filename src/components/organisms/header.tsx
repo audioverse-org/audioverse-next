@@ -29,6 +29,7 @@ const Header = (): JSX.Element => {
 		href?: string;
 		// TODO: Improve Icon type
 		Icon: any;
+		fill?: boolean;
 		label: string;
 	}[] = [
 		{
@@ -54,6 +55,7 @@ const Header = (): JSX.Element => {
 			key: 'bibles',
 			href: `/${languageRoute}/bibles`,
 			Icon: IconBible,
+			fill: true,
 			label: intl.formatMessage({
 				id: `header__naveItemBible`,
 				defaultMessage: 'Bible',
@@ -117,7 +119,7 @@ const Header = (): JSX.Element => {
 					const { Icon } = e;
 					const inner = (
 						<>
-							<span className={styles.icon}>
+							<span className={`${styles.icon} ${e.fill && styles.fill}`}>
 								<Icon width={iconSize} height={iconSize} />
 							</span>
 							{e.label}

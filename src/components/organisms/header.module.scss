@@ -25,6 +25,11 @@
 			* {
 				stroke: $ts-dark;
 			}
+			&.fill {
+				* {
+					fill: $ts-dark;
+				}
+			}
 		}
 		a {
 			text-decoration: none;
@@ -41,6 +46,11 @@
 		.icon {
 			* {
 				stroke: $ts-red;
+			}
+			&.fill {
+				* {
+					fill: $ts-red;
+				}
 			}
 		}
 	}
