@@ -22,12 +22,26 @@
 		.icon {
 			margin-right: 8px;
 			display: flex;
-			color: $ts-dark;
+			* {
+				stroke: $ts-dark;
+			}
 		}
 		a {
 			text-decoration: none;
 			display: flex;
 			align-items: center;
+		}
+	}
+	li:hover,
+	a.active {
+		&,
+		a {
+			color: $ts-red;
+		}
+		.icon {
+			* {
+				stroke: $ts-red;
+			}
 		}
 	}
 }

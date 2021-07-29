@@ -4,14 +4,21 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Icon from '@components/atoms/icon';
+import ActiveLink from '@components/atoms/activeLink';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import useLanguageRoute from '@lib/useLanguageRoute';
+
+import IconBible from '../../../public/img/icon-bible.svg';
+import IconBlog from '../../../public/img/icon-blog.svg';
+import IconCollections from '../../../public/img/icon-collections.svg';
+import IconMore from '../../../public/img/icon-more.svg';
+import IconPlaylist from '../../../public/img/icon-playlist.svg';
+import IconSearch from '../../../public/img/icon-search.svg';
+import IconSettings from '../../../public/img/icon-settings.svg';
 
 import styles from './header.module.scss';
 
 // TODO: rename component (sidebar?)
-
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const iconSize = 24;
@@ -20,13 +27,14 @@ const Header = (): JSX.Element => {
 	const entries: {
 		key: string;
 		href?: string;
-		icon: JSX.Element;
+		// TODO: Improve Icon type
+		Icon: any;
 		label: string;
 	}[] = [
 		{
 			key: 'discover',
 			href: `/${languageRoute}/discover`,
-			icon: <Icon icon={'search'} size={iconSize} />,
+			Icon: IconSearch,
 			label: intl.formatMessage({
 				id: `header__navItemDiscover`,
 				defaultMessage: 'Discover',
@@ -35,7 +43,7 @@ const Header = (): JSX.Element => {
 		},
 		{
 			key: 'playlist',
-			icon: <Icon icon={'playlist'} size={iconSize} />,
+			Icon: IconPlaylist,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
 				defaultMessage: 'Library',
@@ -45,7 +53,7 @@ const Header = (): JSX.Element => {
 		{
 			key: 'bibles',
 			href: `/${languageRoute}/bibles`,
-			icon: <Icon icon={'bible'} size={iconSize} />,
+			Icon: IconBible,
 			label: intl.formatMessage({
 				id: `header__naveItemBible`,
 				defaultMessage: 'Bible',
@@ -54,7 +62,7 @@ const Header = (): JSX.Element => {
 		},
 		{
 			key: 'collections',
-			icon: <Icon icon={'collections'} size={iconSize} />,
+			Icon: IconCollections,
 			label: intl.formatMessage({
 				id: `header__navItemCollections`,
 				defaultMessage: 'Collections',
@@ -63,7 +71,7 @@ const Header = (): JSX.Element => {
 		},
 		{
 			key: 'blog',
-			icon: <Icon icon={'blog'} size={iconSize} />,
+			Icon: IconBlog,
 			label: intl.formatMessage({
 				id: `header__navItemBlog`,
 				defaultMessage: 'Blog',
@@ -72,7 +80,7 @@ const Header = (): JSX.Element => {
 		},
 		{
 			key: 'settings',
-			icon: <Icon icon={'settings'} size={iconSize} />,
+			Icon: IconSettings,
 			label: intl.formatMessage({
 				id: `header__navItemSettings`,
 				defaultMessage: 'Settings',
@@ -81,7 +89,7 @@ const Header = (): JSX.Element => {
 		},
 		{
 			key: 'more',
-			icon: <Icon icon={'more'} size={iconSize} />,
+			Icon: IconMore,
 			label: intl.formatMessage({
 				id: `header__navItemMore`,
 				defaultMessage: 'More',
@@ -106,9 +114,12 @@ const Header = (): JSX.Element => {
 			</h1>
 			<ul>
 				{entries.map((e) => {
+					const { Icon } = e;
 					const inner = (
 						<>
-							<span className={styles.icon}>{e.icon}</span>
+							<span className={styles.icon}>
+								<Icon width={iconSize} height={iconSize} />
+							</span>
 							{e.label}
 						</>
 					);
@@ -117,9 +128,9 @@ const Header = (): JSX.Element => {
 
 					return (
 						<li key={e.key}>
-							<Link href={e.href}>
+							<ActiveLink href={e.href} activeClassName={styles.active}>
 								<a>{inner}</a>
-							</Link>
+							</ActiveLink>
 						</li>
 					);
 				})}

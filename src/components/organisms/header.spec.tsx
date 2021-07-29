@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Header from '@components/organisms/header';
-import { renderWithIntl } from '@lib/test/helpers';
+import { loadRouter, renderWithIntl } from '@lib/test/helpers';
 jest.mock('@lib/api/fetchApi');
 
 const renderHeader = async () => {
@@ -22,5 +22,15 @@ describe('header', () => {
 		const link = logo.parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/en');
+	});
+
+	it('sets active class on active link', async () => {
+		loadRouter({
+			asPath: '/en/discover',
+		});
+
+		const { getByText } = await renderHeader();
+
+		expect(getByText('Discover')).toHaveClass('active');
 	});
 });
