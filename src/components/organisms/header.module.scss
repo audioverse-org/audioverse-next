@@ -4,23 +4,25 @@
 	overflow: hidden;
 	float: left;
 	padding: 1.5rem;
-	display: flex;
 	flex-direction: column;
 	h1 {
 		margin-top: 0;
 	}
 	ul {
 		padding-left: 0;
-		flex-grow: 1;
 	}
 	li {
 		list-style-type: none;
-		margin-bottom: 2rem;
-		color: rgba(0, 0, 0, 0.5);
+		margin-bottom: 26px;
+		color: $ts-midTone;
+		font-size: 18px;
+		font-weight: 400;
 		display: flex;
 		align-items: center;
-		img {
-			margin-right: 0.25em;
+		.icon {
+			margin-right: 8px;
+			display: flex;
+			color: $ts-dark;
 		}
 		a {
 			text-decoration: none;
@@ -32,10 +34,4 @@
 
 .logo {
 	margin-bottom: 2rem;
-}
-
-.user {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
