@@ -18,11 +18,13 @@ const Header = (): JSX.Element => {
 	const intl = useIntl();
 
 	const entries: {
+		key: string;
 		href?: string;
 		icon: JSX.Element;
 		label: string;
 	}[] = [
 		{
+			key: 'discover',
 			href: `/${languageRoute}/discover`,
 			icon: <Icon icon={'search'} size={iconSize} />,
 			label: intl.formatMessage({
@@ -32,6 +34,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'playlist',
 			icon: <Icon icon={'playlist'} size={iconSize} />,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
@@ -40,6 +43,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'bibles',
 			href: `/${languageRoute}/bibles`,
 			icon: <Icon icon={'bible'} size={iconSize} />,
 			label: intl.formatMessage({
@@ -49,6 +53,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'collections',
 			icon: <Icon icon={'collections'} size={iconSize} />,
 			label: intl.formatMessage({
 				id: `header__navItemCollections`,
@@ -57,6 +62,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'blog',
 			icon: <Icon icon={'blog'} size={iconSize} />,
 			label: intl.formatMessage({
 				id: `header__navItemBlog`,
@@ -65,6 +71,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'settings',
 			icon: <Icon icon={'settings'} size={iconSize} />,
 			label: intl.formatMessage({
 				id: `header__navItemSettings`,
@@ -73,6 +80,7 @@ const Header = (): JSX.Element => {
 			}),
 		},
 		{
+			key: 'more',
 			icon: <Icon icon={'more'} size={iconSize} />,
 			label: intl.formatMessage({
 				id: `header__navItemMore`,
@@ -105,10 +113,10 @@ const Header = (): JSX.Element => {
 						</>
 					);
 
-					if (!e.href) return <li key={e.label}>{inner}</li>;
+					if (!e.href) return <li key={e.key}>{inner}</li>;
 
 					return (
-						<li key={e.label}>
+						<li key={e.key}>
 							<Link href={e.href}>
 								<a>{inner}</a>
 							</Link>
