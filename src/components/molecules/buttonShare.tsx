@@ -1,5 +1,5 @@
-import { Dialog } from '@material-ui/core';
-import React, { useState } from 'react';
+import { Menu } from '@material-ui/core';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ButtonShareFragment } from '@lib/generated/graphql';
@@ -13,7 +13,15 @@ export default function ButtonShare({
 }): JSX.Element {
 	const intl = useIntl();
 	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
-	const [open, setOpen] = useState<boolean>(false);
+	const [anchorEl, setAnchorEl] = React.useState(null);
+
+	const handleClick = (event: any) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
 
 	return (
 		<>
@@ -23,11 +31,18 @@ export default function ButtonShare({
 					defaultMessage: 'share',
 					description: 'share button label',
 				})}
-				onClick={() => setOpen(true)}
+				aria-controls={'shareMenu'}
+				onClick={handleClick}
 			>
 				<IconShare />
 			</button>
-			<Dialog open={open} onClose={() => setOpen(false)}>
+			<Menu
+				id={'shareMenu'}
+				open={Boolean(anchorEl)}
+				onClose={handleClose}
+				keepMounted
+				anchorEl={anchorEl}
+			>
 				<h6>
 					<FormattedMessage
 						id="sermonDetailPage__shareTitle"
@@ -51,7 +66,7 @@ export default function ButtonShare({
 					/>{' '}
 					<input readOnly={true} value={embedCode} />
 				</label>
-			</Dialog>
+			</Menu>
 		</>
 	);
 }

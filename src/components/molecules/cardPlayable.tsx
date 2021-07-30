@@ -69,7 +69,9 @@ export default function CardPlayable({
 		>
 			<div className={styles.speakers}>
 				{persons.map((p) => (
-					<SpeakerName person={p} key={p.id} />
+					<div>
+						<SpeakerName person={p} key={p.id} />
+					</div>
 				))}
 			</div>
 			<div className={styles.controls}>
