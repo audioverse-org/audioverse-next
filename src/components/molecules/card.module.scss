@@ -23,13 +23,25 @@
 }
 
 .hatIcon {
-	margin-right: 0.3em;
+	margin-right: 4px;
 	color: var(--iconColor, #ff224a);
 	display: flex;
 }
 
 .hatTitle {
 	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.hatCarrot {
+	margin-left: 4px;
+	flex: 0 0 auto;
+	svg {
+		width: 16px;
+		height: auto;
+	}
 }
 
 .hero {
@@ -59,6 +71,7 @@
 .heading {
 	display: flex;
 	justify-content: space-between;
+	align-items: flex-start;
 	color: var(--headingColor, $ts-dark);
 
 	h1 {
@@ -75,24 +88,6 @@
 		stroke: var(--headingColor, $ts-dark);
 		fill: none;
 	}
-}
-
-.speakers {
-	& > * {
-		display: flex;
-		margin-bottom: 0.5em;
-	}
-}
-
-.controls {
-	display: flex;
-	align-items: center;
-	margin-top: 1em;
-	font-size: 0.9em;
-}
-
-.duration {
-	flex: 0 0 auto;
 }
 
 .chapter {

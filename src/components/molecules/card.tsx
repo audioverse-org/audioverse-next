@@ -48,7 +48,9 @@ export default function Card({
 				<div className={styles.hat}>
 					<span className={styles.hatIcon}>{hat.icon}</span>
 					<span className={styles.hatTitle}>{hat.title}</span>
-					<Icon icon={'chevron-down'} size={16} />
+					<span className={styles.hatCarrot}>
+						<Icon icon={'chevron-down-custom'} size={16} />
+					</span>
 				</div>
 			)}
 			{hero &&

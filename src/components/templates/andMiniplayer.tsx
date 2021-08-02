@@ -153,6 +153,7 @@ export default function AndMiniplayer({
 
 	const playback: PlaybackContextType = {
 		play: () => {
+			console.log('context.play');
 			player?.play();
 			setIsPaused(false);
 			if (progress) playback.setProgress(progress);
@@ -161,7 +162,10 @@ export default function AndMiniplayer({
 			player?.pause();
 			setIsPaused(true);
 		},
-		paused: () => isPaused,
+		paused: () => {
+			console.log('context.paused');
+			return isPaused;
+		},
 		getTime: () => {
 			return player?.currentTime() || 0;
 		},

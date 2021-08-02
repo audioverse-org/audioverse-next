@@ -5599,6 +5599,7 @@ export type CardBibleChapterFragment = (
 
 export type CardPlayableFragment = (
   { __typename?: 'Recording' }
+  & Pick<Recording, 'id'>
   & ProgressBarFragment
 );
 
@@ -7473,6 +7474,7 @@ export const ProgressBarFragmentDoc = `
     ${AndMiniplayerFragmentDoc}`;
 export const CardPlayableFragmentDoc = `
     fragment cardPlayable on Recording {
+  id
   ...progressBar
 }
     ${ProgressBarFragmentDoc}`;

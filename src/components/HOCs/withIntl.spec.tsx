@@ -427,7 +427,14 @@ describe('localization usage', () => {
 		[Reset, {}],
 		[Profile, {}],
 		[Home, {}],
-		[CardPlayable, { title: 'z', container: { length: 2, index: 1 } }],
+		[
+			CardPlayable,
+			{
+				recording: { id: 'z' },
+				title: 'z',
+				container: { length: 2, index: 1 },
+			},
+		],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

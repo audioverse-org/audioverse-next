@@ -20,6 +20,7 @@ interface PlaybackSessionInfo {
 	isAudioLoaded: boolean;
 	isVideoLoaded: boolean;
 	isPaused: boolean;
+	isPlaying: boolean;
 	speed: number;
 	time: number;
 	duration: number;
@@ -46,11 +47,14 @@ export default function usePlaybackSession(
 	const duration = isLoaded ? context.getDuration() : recording?.duration || 0;
 	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
+	const isPlaying = isLoaded && !context.paused();
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
 		<div ref={portalContainerRef} data-testid={'portal'} />
 	);
+
+	console.log({ isPlaying, isLoaded, contextPaused: context.paused() });
 
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
@@ -148,6 +152,7 @@ export default function usePlaybackSession(
 		isAudioLoaded,
 		isVideoLoaded,
 		isPaused,
+		isPlaying,
 		prefersAudio,
 		getVideo,
 		speed,
