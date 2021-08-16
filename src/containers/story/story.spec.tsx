@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 
 import {
@@ -129,7 +130,9 @@ describe('story detail page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage();
+		const { getByText, getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('share'));
 
 		expect(getByText('second_story_shareurl')).toBeInTheDocument();
 	});

@@ -1,67 +1,50 @@
-import _ from 'lodash';
-import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { Button } from '@material-ui/core';
+import Link from 'next/link';
+import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
-import Favorite from '@components/molecules/favorite';
+import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
-import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
-import styles from '@containers/sermon/detail.module.scss';
+import TeaseRecording from '@components/molecules/teaseRecording';
+import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
-import { readableBytes } from '@lib/readableBytes';
-import { makeSeriesDetailRoute } from '@lib/routes';
+import {
+	makeConferenceRoute,
+	makeSeriesDetailRoute,
+	makeSermonRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-type RecordingType = NonNullable<RecordingFragment>;
+import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
+import ArrowRight from '../../../public/img/icon-arrow-right.svg';
+import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
-interface Playable {
-	url: string;
-	mimeType: string;
-}
-
-const getFiles = (
-	recording: RecordingType,
-	prefersAudio: boolean
-): Playable[] => {
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
-
-const getSources = (recording: RecordingType, prefersAudio: boolean) => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-	}));
-};
-
-const hasVideo = (recording: RecordingType) => {
-	const { videoStreams = [], videoFiles = [] } = recording;
-
-	return videoStreams.length > 0 || videoFiles.length > 0;
-};
+import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
 }
 
+function getSiblingByIndexOffset(recording: RecordingFragment, offset: number) {
+	const nodes = recording.sequence?.recordings?.nodes;
+
+	if (!nodes || recording.sequenceIndex === null) return;
+
+	const zeroBasedIndex = recording.sequenceIndex - 1;
+	const targetIndex = zeroBasedIndex + offset;
+
+	return nodes[targetIndex];
+}
+
 export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
-	const [prefersAudio, setPrefersAudio] = useState(false);
-	const imageSrc = _.get(recording, 'imageWithFallback.url');
-	const imageAlt = _.get(recording, 'title');
-	const sources = getSources(recording, prefersAudio);
+	const intl = useIntl();
 	const speakers = recording?.persons || [];
-	const tags = recording?.recordingTags?.nodes || [];
-	const { sponsor, videoDownloads = [], audioDownloads = [] } = recording;
+	const { sponsor } = recording;
 	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
 		[],
 		{
@@ -72,241 +55,190 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			year: 'numeric',
 		}
 	);
-	const hasVideoDownloads = videoDownloads.length > 0;
-	const hasAudioDownloads = audioDownloads.length > 0;
-	const hasDownloads = hasVideoDownloads || hasAudioDownloads;
-
-	// TODO: Switch embed link to new site when route is implemented
-	// language=HTML
-	// noinspection HtmlDeprecatedAttribute
-	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
+	const previousRecording = getSiblingByIndexOffset(recording, -1);
+	const nextRecording = getSiblingByIndexOffset(recording, 1);
+	const seriesItems = recording?.sequence?.recordings?.nodes;
+	const seriesDetailRoute = recording.sequence
+		? makeSeriesDetailRoute(langRoute, recording.sequence.id)
+		: '';
 
 	return (
-		<>
-			<div className={styles.meta}>
-				{imageSrc ? (
-					<img src={imageSrc} alt={imageAlt} width={100} height={100} />
-				) : null}
-				<div>
-					<h1>{recording.title}</h1>
-					<ul className={styles.speakers}>
-						{speakers.map((speaker) => (
-							<li key={speaker.id}>
-								<SpeakerName person={speaker} />
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
-			<Favorite id={recording.id} />
-			<PlaylistButton recordingId={recording.id} />
-			<Player sources={sources} />
-			{/*TODO: Hide toggle button if no video files*/}
-			{hasVideo(recording) && (
-				<button onClick={() => setPrefersAudio(!prefersAudio)}>
-					Play {prefersAudio ? 'Video' : 'Audio'}
-				</button>
-			)}
-			<div>
-				<p>
-					<FormattedMessage
-						id="sermonDetailPage__donationMessage"
-						defaultMessage="Just a $10 donation will help us reach 300 more people!"
-						description="Sermon detail page donation message"
-					/>
-					{/*TODO: Add CTA URL*/}
-					<a href="#">
-						<FormattedMessage
-							id="sermonDetailPage__donationCta"
-							defaultMessage="Give Now!"
-							description="Sermon detail page donation CTA"
-						/>
-					</a>
-				</p>
-			</div>
-			{recording.description && (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__descriptionTitle"
-							defaultMessage="Description"
-							description="Sermon detail description title"
-						/>
-					</h2>
-					<div dangerouslySetInnerHTML={{ __html: recording.description }} />
-				</>
-			)}
-			{tags.length > 0 && (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__tagsTitle"
-							defaultMessage="Tags"
-							description="Sermon detail tags title"
-						/>
-					</h2>
-					<ul>
-						{tags.map((t) => (
-							<li key={t.tag.id}>
-								{/* TODO: link tags */}
-								<a href="#">{t.tag.name}</a>
-							</li>
-						))}
-					</ul>
-				</>
-			)}
-			{/*TODO: Add related sermons*/}
-			{sponsor && (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__sponsorInfoTitle"
-							defaultMessage="Sponsor"
-							description="Sermon detail sponsor info title"
-						/>
-					</h2>
-					<SponsorInfo sponsor={sponsor} />
-				</>
-			)}
-			{/* TODO: If no presenters (see sermon 4689) don't show presenters section */}
-			<h2>
-				<FormattedMessage
-					id="sermonDetailPage__presenterInfoTitle"
-					defaultMessage="Presenters"
-					description="Sermon detail presenter info title"
-				/>
-			</h2>
-			<ul>
-				{speakers.map((s) => (
-					<li key={s.id}>
-						<SpeakerName person={s} />
-					</li>
-				))}
-			</ul>
-			{recording.recordingDate ? (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__recordedTitle"
-							defaultMessage="Recorded"
-							description="Sermon detail recorded date title"
-						/>
-					</h2>
-					<p>{recordingDateString}</p>
-				</>
-			) : null}
+		<div className={styles.base}>
+			{/*TODO: use next/link for sequence link*/}
 			{recording?.sequence && (
-				<>
-					<h2>
+				<a href={seriesDetailRoute} className={styles.hat}>
+					<div className={styles.hatType}>
+						<ListIcon width={13} height={13} />
 						<FormattedMessage
 							id="sermonDetailPage__seriesTitle"
 							defaultMessage="Series"
 							description="Sermon detail series title"
 						/>
-					</h2>
-					<a href={makeSeriesDetailRoute(langRoute, recording?.sequence?.id)}>
-						{recording?.sequence?.title}
-					</a>
-				</>
+					</div>
+					<h4>{recording?.sequence?.title}</h4>
+				</a>
 			)}
-			{/* TODO: Disable if downloads not allowed */}
-			{hasDownloads && (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__downloadsTitle"
-							defaultMessage="Downloads"
-							description="Sermon detail downloads title"
-						/>
-					</h2>
-					{hasAudioDownloads && (
-						<>
-							<h3>
-								<FormattedMessage
-									id="sermonDetailPage__downloadsAudioTitle"
-									defaultMessage="Audio Files"
-									description="Sermon detail audio downloads title"
+			<div className={styles.content}>
+				<div>
+					<div className={styles.meta}>
+						{recording.sequenceIndex && (
+							<span className={styles.part}>
+								Part {recording.sequenceIndex}
+							</span>
+						)}
+						<h1>{recording.title}</h1>
+						<ul className={styles.speakers}>
+							{speakers.map((speaker) => (
+								<li key={speaker.id}>
+									<SpeakerName person={speaker} />
+								</li>
+							))}
+						</ul>
+					</div>
+					<MediaFormatSwitcher recording={recording} />
+					<div className={styles.sequenceNav}>
+						{previousRecording && (
+							<Link
+								href={makeSermonRoute(langRoute, previousRecording.id)}
+								passHref
+							>
+								<Button
+									aria-label={'Previous'}
+									className={styles.previous}
+									variant={'outlined'}
+									startIcon={<ArrowLeft />}
+								>
+									Previous
+								</Button>
+							</Link>
+						)}
+						{nextRecording && (
+							<Link
+								href={makeSermonRoute(langRoute, nextRecording.id)}
+								passHref
+							>
+								<Button
+									aria-label={'Next'}
+									className={styles.next}
+									variant={'outlined'}
+									endIcon={<ArrowRight />}
+								>
+									Next
+								</Button>
+							</Link>
+						)}
+					</div>
+
+					<Player recording={recording} />
+
+					<div
+						aria-label={intl.formatMessage({
+							id: 'organism-recording__metadataLabel',
+							defaultMessage: 'metadata',
+							description: 'recording metadata section label',
+						})}
+					>
+						{recording.description && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="sermonDetailPage__descriptionTitle"
+										defaultMessage="Description"
+										description="Sermon detail description title"
+									/>
+								</h6>
+								<div
+									dangerouslySetInnerHTML={{ __html: recording.description }}
 								/>
-							</h3>
-							<ul>
-								{audioDownloads.map((file) => (
-									<li key={file.id}>
-										<a href={file.url}>{readableBytes(file.filesize)}</a>
-									</li>
-								))}
-							</ul>
-						</>
-					)}
-					{hasVideoDownloads && (
-						<>
-							<h3>
-								<FormattedMessage
-									id="sermonDetailPage__downloadsVideoTitle"
-									defaultMessage="Video Files"
-									description="Sermon detail video downloads title"
-								/>
-							</h3>
-							<ul>
-								{videoDownloads.map((file) => (
-									<li key={file.id}>
-										<a href={file.url}>{readableBytes(file.filesize)}</a>
-									</li>
-								))}
-							</ul>
-						</>
-					)}
-				</>
-			)}
-			<h2>
-				<FormattedMessage
-					id="sermonDetailPage__shareTitle"
-					defaultMessage="Share"
-					description="Sermon detail share section title"
-				/>
-			</h2>
-			<h3>
-				<FormattedMessage
-					id="sermonDetailPage__shortUrlLabel"
-					defaultMessage="Short URL"
-					description="Sermon detail short url label"
-				/>
-			</h3>
-			<p>{recording.shareUrl}</p>
-			<label>
-				<FormattedMessage
-					id="sermonDetailPage__embedCodeLabel"
-					defaultMessage="Embed Code"
-					description="Sermon detail embed code label"
-				/>{' '}
-				<input readOnly={true} value={embedCode} />
-			</label>
-			{recording.transcript?.text && (
-				<>
-					<h2>
-						<FormattedMessage
-							id="sermonDetailPage__transcriptTitle"
-							defaultMessage="Transcript"
-							description="Sermon detail transcript title"
-						/>
-					</h2>
-					<p>
-						<FormattedMessage
-							id="sermonDetailPage__transcriptDisclaimer"
-							defaultMessage="This transcript may be automatically generated."
-							description="Sermon detail transcript disclaimer"
-						/>
-					</p>
-					<p>
-						<FormattedMessage
-							id="sermonDetailPage__transcriptHelp"
-							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-							description="Sermon detail transcript assistance request"
-						/>
-					</p>
-					<p>{recording.transcript?.text}</p>
-				</>
-			)}
-			<CopyrightInfo recording={recording} />
-		</>
+							</>
+						)}
+
+						{recording.sequence && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__seriesInfoTitle"
+										defaultMessage="Parent Series"
+										description="Recording series info title"
+									/>
+								</h6>
+								<p>
+									<Link href={seriesDetailRoute}>
+										<a>{recording.sequence.title}</a>
+									</Link>
+								</p>
+							</>
+						)}
+
+						{recording.collection && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__conferenceInfoTitle"
+										defaultMessage="Parent Conference"
+										description="Recording conference info title"
+									/>
+								</h6>
+								<p>
+									<Link
+										href={makeConferenceRoute(
+											langRoute,
+											recording.collection.id
+										)}
+									>
+										<a>{recording.collection.title}</a>
+									</Link>
+								</p>
+							</>
+						)}
+
+						{sponsor && (
+							<>
+								<h6>
+									<FormattedMessage
+										id="organism-recording__sponsorInfoTitle"
+										defaultMessage="Sponsor"
+										description="recording sponsor info title"
+									/>
+								</h6>
+								<SponsorInfo sponsor={sponsor} />
+							</>
+						)}
+
+						{recording.recordingDate ? (
+							<>
+								<h6>
+									<FormattedMessage
+										id="sermonDetailPage__recordedTitle"
+										defaultMessage="Recorded"
+										description="Sermon detail recorded date title"
+									/>
+								</h6>
+								<p>{recordingDateString}</p>
+							</>
+						) : null}
+
+						{recording.transcript?.text && (
+							<Transcript text={recording.transcript.text} />
+						)}
+
+						<CopyrightInfo recording={recording} />
+					</div>
+				</div>
+
+				{/*TODO: use ul > li*/}
+
+				{seriesItems && (
+					<div className={styles.series} aria-label={'series list'}>
+						<LineHeading size={12}>Other Teachings in Series</LineHeading>
+						{seriesItems.map((r) => (
+							<div className={styles.item} key={r.id}>
+								<TeaseRecording recording={r} />
+							</div>
+						))}
+					</div>
+				)}
+			</div>
+		</div>
 	);
 }

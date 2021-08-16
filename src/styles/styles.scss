@@ -26,10 +26,20 @@ html {
 
 // END INTER FONT
 
+// START IVY JOURNAL FONT
+
+@import url('https://use.typekit.net/bgc2sqi.css');
+
+// END IVY JOURNAL FONT
+
 @import './common.scss';
 
 * {
 	box-sizing: border-box;
+}
+
+html {
+	font-size: 14px;
 }
 
 html,
@@ -49,14 +59,16 @@ h4 {
 	font-family: $headingFont;
 }
 
-h5 {
+h6 {
+	font-size: 10px;
+	text-transform: uppercase;
 }
 
 a {
 	color: inherit;
 
 	&:hover {
-		text-decoration: none;
+		color: $ts-red;
 	}
 }
 
@@ -92,4 +104,25 @@ p {
 	background-color: $ts-red;
 	color: white;
 	box-shadow: 0 4px 10px 0 #00000026;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.MuiSlider-root.MuiSlider-colorPrimary {
+	color: $ts-dark;
+	.MuiSlider-thumb {
+		color: white;
+		box-shadow: 0 4px 10px 0 #00000026;
+		width: 16px;
+		height: 16px;
+		margin-top: -7px;
+		margin-left: -8px;
+	}
+}
+
+/* Video.js Customizations */
+
+.video-js {
+	.vjs-poster {
+	}
 }

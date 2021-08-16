@@ -1,13 +1,20 @@
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import React from 'react';
 import videojs from 'video.js';
 
+import AndMiniplayer from '@components/templates/andMiniplayer';
+import { AudiobookProps } from '@containers/audiobook/audiobook';
 import {
 	GetAudiobookDetailPageDataDocument,
 	GetAudiobookDetailPageDataQuery,
 	GetAudiobookDetailPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	mockedFetchApi,
+	setPlayerMock,
+} from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
 import Audiobook, {
 	getStaticPaths,
@@ -17,10 +24,20 @@ import Audiobook, {
 jest.mock('video.js');
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildStaticRenderer(Audiobook, getStaticProps, {
-	language: 'en',
-	id: 'the_book_id',
-});
+const renderPage = buildStaticRenderer(
+	(props: AudiobookProps) => {
+		return (
+			<AndMiniplayer>
+				<Audiobook {...props} />
+			</AndMiniplayer>
+		);
+	},
+	getStaticProps,
+	{
+		language: 'en',
+		id: 'the_book_id',
+	}
+);
 
 function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 	when(mockedFetchApi)
@@ -72,6 +89,8 @@ function loadData(data: Partial<GetAudiobookDetailPageDataQuery> = {}) {
 }
 
 describe('audiobook detail page', () => {
+	beforeEach(() => setPlayerMock());
+
 	it('renders', async () => {
 		await renderPage();
 
@@ -85,7 +104,9 @@ describe('audiobook detail page', () => {
 	it('loads recording src', async () => {
 		loadData();
 
-		await renderPage();
+		const { getByLabelText } = await renderPage();
+
+		userEvent.click(getByLabelText('play'));
 
 		expect(videojs).toBeCalledWith(
 			expect.anything(),
@@ -118,7 +139,7 @@ describe('audiobook detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('first_recording_title')).toBeInTheDocument();
+		expect(getByText('second_recording_title')).toBeInTheDocument();
 	});
 
 	it('switches recording on click', async () => {
@@ -143,7 +164,7 @@ describe('audiobook detail page', () => {
 
 		const link = getByRole('link', { name: '5 MB' }) as HTMLLinkElement;
 
-		expect(link).toHaveAttribute('href', 'first_recording_download');
+		expect(link).toHaveAttribute('href', '/first_recording_download');
 	});
 
 	it('indicates currently-playing recording', async () => {
@@ -160,14 +181,6 @@ describe('audiobook detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_title')).toBeInTheDocument();
-	});
-
-	it('displays sponsor website url', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sponsor_website')).toBeInTheDocument();
 	});
 
 	it('displays copyright', async () => {

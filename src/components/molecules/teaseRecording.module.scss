@@ -1,0 +1,38 @@
+@import '../../styles/common';
+
+.part {
+	color: $ts-red;
+	font-weight: 600;
+	font-size: 10.5px;
+}
+
+.title {
+	display: flex;
+	align-items: flex-start;
+	h4 {
+		font-size: 22px;
+		flex-grow: 1;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	path {
+		stroke: $ts-dark;
+		fill: none;
+	}
+}
+
+.progressLockup {
+	display: flex;
+	align-items: center;
+}
+
+.progress {
+	flex-grow: 1;
+}
+
+.duration {
+	margin-right: 16px;
+	flex: 0 0 auto;
+	color: $ts-midTone;
+	font-size: 14px;
+}

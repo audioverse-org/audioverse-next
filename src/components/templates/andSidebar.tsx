@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 
+import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 
 import styles from './andSidebar.module.scss';
@@ -15,7 +16,7 @@ export default function AndSidebar({
 				<Header />
 			</div>
 			<div className={styles.content}>
-				<p>Search</p>
+				<SearchBar />
 				{children}
 			</div>
 		</div>

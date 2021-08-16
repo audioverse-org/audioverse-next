@@ -1,16 +1,22 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
-import Icon from '@components/atoms/icon';
+import ProgressBar from '@components/atoms/progressBar';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
+import ButtonPlay from '@components/molecules/buttonPlay';
 import Card, { CardTheme } from '@components/molecules/card';
-import styles from '@components/molecules/card.module.scss';
 import SpeakerName from '@components/molecules/speakerName';
-import { SpeakerNameFragment } from '@lib/generated/graphql';
-import useFormattedDuration from '@lib/useFormattedDuration';
+import {
+	CardPlayableFragment,
+	SpeakerNameFragment,
+} from '@lib/generated/graphql';
+import { useFormattedDuration } from '@lib/time';
+import usePlaybackSession from '@lib/usePlaybackSession';
 
-import PlayIcon from '../../../public/img/icon-play.svg';
+import styles from './cardPlayable.module.scss';
 
-interface CardPlayableProps {
+export interface CardPlayableProps {
+	recording: CardPlayableFragment;
 	container?: {
 		icon?: any;
 		title: string;
@@ -18,6 +24,7 @@ interface CardPlayableProps {
 		index?: number;
 	};
 	title: string;
+	url: string;
 	persons?: SpeakerNameFragment[];
 	duration?: number;
 	progress?: number;
@@ -25,15 +32,28 @@ interface CardPlayableProps {
 }
 
 export default function CardPlayable({
+	recording,
 	container,
 	title,
+	url,
 	persons = [],
 	duration,
 	theme,
 	progress,
 }: CardPlayableProps): JSX.Element {
 	const intl = useIntl();
+	const session = usePlaybackSession(recording);
 	const hasPartInfo = container?.length && container?.index;
+	const shouldShowProgress =
+		!!progress || !!session.progress || session.isPlaying;
+
+	console.log({
+		shouldShowProgress,
+		progress: !!progress,
+		sessionProgress: !!session.progress,
+		sessionIsPlaying: session.isPlaying,
+	});
+
 	const partString = hasPartInfo
 		? intl.formatMessage(
 				{
@@ -56,29 +76,33 @@ export default function CardPlayable({
 			}
 			preTitle={partString}
 			title={title}
-			titleAdornment={<PlayIcon width={24} height={24} />}
+			titleAdornment={
+				<div className={styles.play}>
+					<ButtonPlay recording={recording} />
+				</div>
+			}
+			url={url}
 			theme={theme}
 		>
 			<div className={styles.speakers}>
 				{persons.map((p) => (
-					<SpeakerName person={p} key={p.id} />
+					<div key={p.id}>
+						<SpeakerName person={p} />
+					</div>
 				))}
 			</div>
 			<div className={styles.controls}>
-				{duration && (
-					<span className={styles.duration}>
-						{useFormattedDuration(duration)}
-					</span>
+				{!!duration && (
+					<span className={styles.time}>{useFormattedDuration(duration)}</span>
 				)}
-				{progress !== undefined && (
-					<span
-						className={styles.progress}
-						style={{ '--progress': `${progress * 100}%` } as CSSProperties}
-					>
-						<span />
-					</span>
-				)}
-				<Icon icon={'bookmark'} size={24} />
+
+				<div className={styles.bar}>
+					{shouldShowProgress && (
+						<ProgressBar recording={recording} interactive={false} />
+					)}
+				</div>
+
+				<ButtonFavorite id={recording.id} />
 			</div>
 		</Card>
 	);

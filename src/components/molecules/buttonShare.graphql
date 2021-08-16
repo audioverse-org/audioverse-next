@@ -1,0 +1,4 @@
+fragment buttonShare on Recording {
+	id
+	shareUrl
+}
