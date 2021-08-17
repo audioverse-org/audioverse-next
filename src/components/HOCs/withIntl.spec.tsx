@@ -54,6 +54,7 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
+import SermonList from '@containers/sermon/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -463,6 +464,7 @@ describe('localization usage', () => {
 			},
 		],
 		[Transcript, {}],
+		[SermonList, { nodes: [{ id: 1 }], pagination: { current: 1, total: 10 } }],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
