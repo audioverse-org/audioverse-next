@@ -42,7 +42,7 @@ export default function Card({
 	);
 
 	return (
-		<div className={`${styles.card} ${theme && styles[theme]}`}>
+		<div className={`${styles.card} ${(theme && styles[theme]) || ''}`}>
 			{hat && (
 				// TODO: Link the hat
 				<div className={styles.hat}>
@@ -64,7 +64,7 @@ export default function Card({
 			<div className={styles.content}>
 				{preTitle && <span className={styles.part}>{preTitle}</span>}
 				<div className={styles.heading}>
-					<h1 className={styles.title}>
+					<h2 className={styles.title}>
 						{url ? (
 							<Link href={url}>
 								<a>{title}</a>
@@ -72,7 +72,7 @@ export default function Card({
 						) : (
 							title
 						)}
-					</h1>
+					</h2>
 					{titleAdornment}
 				</div>
 				{children}

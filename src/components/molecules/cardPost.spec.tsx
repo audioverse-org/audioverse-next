@@ -21,7 +21,7 @@ describe('card post', () => {
 			props: {
 				post: {
 					title: 'the_title',
-					canonicalUrl: 'the_url',
+					canonicalPath: 'the_path',
 					image: {
 						url: 'the_image_url',
 					},
@@ -31,7 +31,7 @@ describe('card post', () => {
 
 		expect(getByAltText('the_title').parentElement).toHaveAttribute(
 			'href',
-			'/the_url'
+			'/the_path'
 		);
 	});
 });

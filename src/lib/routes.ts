@@ -197,3 +197,13 @@ export const makePlaylistDetailRoute = (
 	playlistId: string,
 	page: number | string = 1
 ): string => `/${languageRoute}/playlists/${playlistId}/page/${page}`;
+
+export const makeBlogPostRoute = (
+	languageRoute: string,
+	blogPostId: string
+): string => `/${languageRoute}/blog/${blogPostId}`;
+
+export const makeBlogPostListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/blog/page/${page}`;
