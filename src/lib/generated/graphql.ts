@@ -5623,10 +5623,10 @@ export type ButtonDownloadFragment = (
   { __typename?: 'Recording' }
   & { videoDownloads: Array<(
     { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'id' | 'url' | 'filesize'>
+    & Pick<VideoFile, 'url' | 'filesize'>
   )>, audioDownloads: Array<(
     { __typename?: 'AudioFile' }
-    & Pick<AudioFile, 'id' | 'url' | 'filesize'>
+    & Pick<AudioFile, 'url' | 'filesize'>
   )> }
 );
 
@@ -7708,12 +7708,10 @@ export const TeaseRecordingFragmentDoc = `
 export const ButtonDownloadFragmentDoc = `
     fragment buttonDownload on Recording {
   videoDownloads: videoFiles(allowedContainers: MP4) {
-    id
     url
     filesize
   }
   audioDownloads: audioFiles(allowedContainers: MP3) {
-    id
     url
     filesize
   }
