@@ -28,9 +28,9 @@ export default function ButtonShareRecording({
 		<>
 			<button
 				aria-label={intl.formatMessage({
-					id: 'molecule-buttonShare__buttonLabel',
+					id: 'molecule-buttonShareRecording__buttonLabel',
 					defaultMessage: 'share',
-					description: 'share button label',
+					description: 'recording share button label',
 				})}
 				aria-controls={'shareMenu'}
 				onClick={handleClick}
@@ -46,24 +46,24 @@ export default function ButtonShareRecording({
 			>
 				<h6>
 					<FormattedMessage
-						id="sermonDetailPage__shareTitle"
+						id="molecule-buttonShareRecording__shareTitle"
 						defaultMessage="Share"
-						description="Sermon detail share section title"
+						description="recording share button section title"
 					/>
 				</h6>
 				<h6>
 					<FormattedMessage
-						id="sermonDetailPage__shortUrlLabel"
+						id="molecule-buttonShareRecording__shortUrlLabel"
 						defaultMessage="Short URL"
-						description="Sermon detail short url label"
+						description="recording share button url label"
 					/>
 				</h6>
 				<p>{recording.shareUrl}</p>
 				<label>
 					<FormattedMessage
-						id="sermonDetailPage__embedCodeLabel"
+						id="molecule-buttonShareRecording__embedCodeLabel"
 						defaultMessage="Embed Code"
-						description="Sermon detail embed code label"
+						description="recording share button embed code label"
 					/>{' '}
 					<input readOnly={true} value={embedCode} />
 				</label>
