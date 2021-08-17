@@ -55,6 +55,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			year: 'numeric',
 		}
 	);
+	const index = recording.sequenceIndex;
 	const previousRecording = getSiblingByIndexOffset(recording, -1);
 	const nextRecording = getSiblingByIndexOffset(recording, 1);
 	const seriesItems = recording?.sequence?.recordings?.nodes;
@@ -81,9 +82,14 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			<div className={styles.content}>
 				<div>
 					<div className={styles.meta}>
-						{recording.sequenceIndex && (
+						{index && (
 							<span className={styles.part}>
-								Part {recording.sequenceIndex}
+								<FormattedMessage
+									id={'organism-recording__partInfo'}
+									defaultMessage={'Part {index}'}
+									description={'recording part info'}
+									values={{ index }}
+								/>
 							</span>
 						)}
 						<h1>{recording.title}</h1>

@@ -175,6 +175,7 @@ describe('localization usage', () => {
 			<SermonDetail
 				sermon={
 					{
+						sequenceIndex: 1,
 						description: 'z',
 						recordingDate: '2003-03-01T09:30:00.000Z',
 						recordingTags: {
