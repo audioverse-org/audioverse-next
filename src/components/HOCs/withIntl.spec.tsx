@@ -175,7 +175,6 @@ describe('localization usage', () => {
 			<SermonDetail
 				sermon={
 					{
-						sequenceIndex: 1,
 						description: 'z',
 						recordingDate: '2003-03-01T09:30:00.000Z',
 						recordingTags: {
@@ -195,6 +194,12 @@ describe('localization usage', () => {
 								filesize: '100',
 							},
 						],
+						sequenceIndex: 1,
+						sequence: {
+							recordings: {
+								nodes: [{ id: 1 }, { id: 2 }, { id: 3 }] as any,
+							},
+						},
 					} as Sermon
 				}
 				title={null}
