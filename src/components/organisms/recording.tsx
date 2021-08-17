@@ -6,6 +6,7 @@ import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
+import SequenceNav from '@components/molecules/sequenceNav';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import TeaseRecording from '@components/molecules/teaseRecording';
@@ -17,7 +18,6 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
-import SequenceNav from '@components/molecules/sequenceNav';
 
 interface RecordingProps {
 	recording: RecordingFragment;

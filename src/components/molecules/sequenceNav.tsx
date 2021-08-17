@@ -1,13 +1,16 @@
-import styles from './sequenceNav.module.scss';
-import Link from 'next/link';
-import { makeSermonRoute } from '@lib/routes';
 import { Button } from '@material-ui/core';
-import { useIntl } from 'react-intl';
+import Link from 'next/link';
 import React from 'react';
+import { useIntl } from 'react-intl';
+
+import { SequenceNavFragment } from '@lib/generated/graphql';
+import { makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
-import { SequenceNavFragment } from '@lib/generated/graphql';
+
+import styles from './sequenceNav.module.scss';
 
 function getSiblingByIndexOffset(
 	recording: SequenceNavFragment,
