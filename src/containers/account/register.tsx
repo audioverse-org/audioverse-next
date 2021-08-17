@@ -13,10 +13,8 @@ function Register(): JSX.Element {
 	const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 	const [email, setEmail] = useState<string>('');
 
-	const {
-		data: dataLoggedIn,
-		isLoading: isLoadingLoggedIn,
-	} = useRegisterIsLoggedInQuery({}, { retry: false });
+	const { data: dataLoggedIn, isLoading: isLoadingLoggedIn } =
+		useRegisterIsLoggedInQuery({}, { retry: false });
 
 	const {
 		mutate,

@@ -8,9 +8,7 @@ import {
 import { isPersonFavorited as _isPersonFavorited } from '@lib/api/isPersonFavorited';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 
-export function useIsPersonFavorited(
-	id: string
-): {
+export function useIsPersonFavorited(id: string): {
 	isPersonFavorited: boolean | undefined;
 	toggleFavorited: UseMutateFunction;
 	isLoading: boolean;
