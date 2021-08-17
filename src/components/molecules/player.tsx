@@ -7,7 +7,7 @@ import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
-import ButtonShare from '@components/molecules/buttonShare';
+import ButtonShareRecording from '@components/molecules/buttonShareRecording';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import { PlayerFragment } from '@lib/generated/graphql';
@@ -98,7 +98,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				<div>
 					<ButtonSpeed recording={recording} />
 					<ButtonDownload recording={recording} />
-					<ButtonShare recording={recording} />
+					<ButtonShareRecording recording={recording} />
 					<ButtonFavorite id={recording.id} />
 					{shouldShowVideoControls && (
 						<button

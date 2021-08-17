@@ -5635,7 +5635,7 @@ export type ButtonPlayFragment = (
   & AndMiniplayerFragment
 );
 
-export type ButtonShareFragment = (
+export type ButtonShareRecordingFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'shareUrl'>
 );
@@ -5856,7 +5856,7 @@ export type PlayerFragment = (
   & AndMiniplayerFragment
   & ButtonDownloadFragment
   & ProgressBarFragment
-  & ButtonShareFragment
+  & ButtonShareRecordingFragment
 );
 
 export type PlaylistFragment = (
@@ -7717,8 +7717,8 @@ export const ButtonDownloadFragmentDoc = `
   }
 }
     `;
-export const ButtonShareFragmentDoc = `
-    fragment buttonShare on Recording {
+export const ButtonShareRecordingFragmentDoc = `
+    fragment buttonShareRecording on Recording {
   id
   shareUrl
 }
@@ -7730,12 +7730,12 @@ export const PlayerFragmentDoc = `
   ...andMiniplayer
   ...buttonDownload
   ...progressBar
-  ...buttonShare
+  ...buttonShareRecording
 }
     ${AndMiniplayerFragmentDoc}
 ${ButtonDownloadFragmentDoc}
 ${ProgressBarFragmentDoc}
-${ButtonShareFragmentDoc}`;
+${ButtonShareRecordingFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
