@@ -84,7 +84,7 @@ const expectNoUnlocalizedText = (
 };
 
 const expectNoUnlocalizedToasts = () => {
-	const calls = ((toast as any) as jest.Mock).mock.calls;
+	const calls = (toast as any as jest.Mock).mock.calls;
 	calls.forEach((c) => {
 		expect(c[0]).not.toMatch(/[^z]+/);
 	});

@@ -213,7 +213,7 @@ describe('sermon detail page', () => {
 
 		userEvent.click(getByText('Audio'));
 
-		const calls = ((videojs as any) as jest.Mock).mock.calls;
+		const calls = (videojs as any as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -243,7 +243,7 @@ describe('sermon detail page', () => {
 
 		userEvent.click(poster.parentElement as HTMLElement);
 
-		const calls = ((videojs as any) as jest.Mock).mock.calls;
+		const calls = (videojs as any as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -271,7 +271,7 @@ describe('sermon detail page', () => {
 
 		userEvent.click(getByLabelText('play'));
 
-		const calls = ((videojs as any) as jest.Mock).mock.calls;
+		const calls = (videojs as any as jest.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(

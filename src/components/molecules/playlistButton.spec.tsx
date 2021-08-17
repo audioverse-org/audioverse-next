@@ -138,12 +138,8 @@ describe('playlist button', () => {
 	it('toggles checkbox', async () => {
 		loadComponentData();
 
-		const {
-			getEntry,
-			getCheckbox,
-			getButton,
-			waitForDataCall,
-		} = await renderComponent();
+		const { getEntry, getCheckbox, getButton, waitForDataCall } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -161,12 +157,8 @@ describe('playlist button', () => {
 	it('toggles back and forth', async () => {
 		loadComponentData();
 
-		const {
-			getEntry,
-			getCheckbox,
-			getButton,
-			waitForDataCall,
-		} = await renderComponent();
+		const { getEntry, getCheckbox, getButton, waitForDataCall } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -307,11 +299,8 @@ describe('playlist button', () => {
 	it('resets new playlist input on create', async () => {
 		loadComponentData([]);
 
-		const {
-			getNewPlaylistInput,
-			userAddPlaylist,
-			waitForDataCall,
-		} = await renderComponent();
+		const { getNewPlaylistInput, userAddPlaylist, waitForDataCall } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -358,11 +347,8 @@ describe('playlist button', () => {
 	it('adds playlist optimistically', async () => {
 		loadComponentData([]);
 
-		const {
-			userAddPlaylist,
-			waitForDataCall,
-			getEntry,
-		} = await renderComponent();
+		const { userAddPlaylist, waitForDataCall, getEntry } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -374,11 +360,8 @@ describe('playlist button', () => {
 	it('defaults new playlist checkbox to checked', async () => {
 		loadComponentData([]);
 
-		const {
-			waitForDataCall,
-			getCheckbox,
-			userAddPlaylist,
-		} = await renderComponent();
+		const { waitForDataCall, getCheckbox, userAddPlaylist } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -397,11 +380,8 @@ describe('playlist button', () => {
 
 		loadComponentData([]);
 
-		const {
-			waitForDataCall,
-			userAddPlaylist,
-			getEntry,
-		} = await renderComponent();
+		const { waitForDataCall, userAddPlaylist, getEntry } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -463,11 +443,8 @@ describe('playlist button', () => {
 		await withMutedReactQueryLogger(async () => {
 			mockedFetchApi.mockResolvedValue(makePlaylistButtonData());
 
-			const {
-				waitForDataCall,
-				userAddPlaylist,
-				getEntry,
-			} = await renderComponent();
+			const { waitForDataCall, userAddPlaylist, getEntry } =
+				await renderComponent();
 
 			await waitForDataCall();
 
@@ -529,11 +506,8 @@ describe('playlist button', () => {
 	it('creates public playlist', async () => {
 		loadComponentData([]);
 
-		const {
-			getByLabelText,
-			waitForDataCall,
-			userAddPlaylist,
-		} = await renderComponent();
+		const { getByLabelText, waitForDataCall, userAddPlaylist } =
+			await renderComponent();
 
 		await waitForDataCall();
 
@@ -558,11 +532,8 @@ describe('playlist button', () => {
 	it('resets public checkbox on playlist creation', async () => {
 		loadComponentData([]);
 
-		const {
-			getByLabelText,
-			waitForDataCall,
-			userAddPlaylist,
-		} = await renderComponent();
+		const { getByLabelText, waitForDataCall, userAddPlaylist } =
+			await renderComponent();
 
 		await waitForDataCall();
 

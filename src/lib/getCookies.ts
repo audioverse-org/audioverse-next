@@ -4,9 +4,9 @@ import cookie from 'cookie';
 import _ from 'lodash';
 
 // TODO: Improve req type
-export default function getCookies(
-	req: IncomingMessage | null
-): { [key: string]: string } {
+export default function getCookies(req: IncomingMessage | null): {
+	[key: string]: string;
+} {
 	if (req) {
 		return cookie.parse(_.get(req.headers, 'cookie') || '');
 	}

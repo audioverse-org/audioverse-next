@@ -21,22 +21,20 @@ export default function SocialLogin({
 	const intl = useIntl();
 	const didUnmount = useDidUnmount();
 
-	const {
-		mutate: mutateSocial,
-		isSuccess: isSuccessSocial,
-	} = useRegisterSocialMutation({
-		onSuccess: (response) => {
-			const errors = response?.loginSocial.errors || [];
-			const token = response?.loginSocial.authenticatedUser?.sessionToken;
+	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
+		useRegisterSocialMutation({
+			onSuccess: (response) => {
+				const errors = response?.loginSocial.errors || [];
+				const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
-			if (token && !errors.length) {
-				Cookie.set('avSession', token);
-				onSuccess && onSuccess();
-			} else if (!didUnmount.current) {
-				setErrors(errors.map((e) => e.message));
-			}
-		},
-	});
+				if (token && !errors.length) {
+					Cookie.set('avSession', token);
+					onSuccess && onSuccess();
+				} else if (!didUnmount.current) {
+					setErrors(errors.map((e) => e.message));
+				}
+			},
+		});
 
 	const { signIn } = useGoogleLogin({
 		clientId: GOOGLE_CLIENT_ID,
