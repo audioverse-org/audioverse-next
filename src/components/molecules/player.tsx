@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { CSSProperties } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonDownload from '@components/molecules/buttonDownload';
@@ -23,7 +23,16 @@ export interface PlayerProps {
 }
 
 const Player = ({ recording }: PlayerProps): JSX.Element => {
-	if (!recording) return <p>loading ...</p>;
+	if (!recording)
+		return (
+			<p>
+				<FormattedMessage
+					id={'molecule-player__loading'}
+					defaultMessage={'loading ...'}
+					description={'player loading message'}
+				/>
+			</p>
+		);
 
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);

@@ -50,6 +50,7 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
+import Player from '@components/molecules/player';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -435,6 +436,7 @@ describe('localization usage', () => {
 				container: { length: 2, index: 1 },
 			},
 		],
+		[Player, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
