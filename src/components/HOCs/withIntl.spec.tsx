@@ -51,6 +51,7 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
+import SearchBar from '@components/molecules/searchBar';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -437,6 +438,7 @@ describe('localization usage', () => {
 			},
 		],
 		[Player, {}],
+		[SearchBar, {}],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
