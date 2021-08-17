@@ -16,22 +16,34 @@ export default function Transcript({ text }: { text: string }): JSX.Element {
 				startIcon={<IconChevron />}
 				onClick={() => setIsOpen(!isOpen)}
 			>
-				{isOpen ? 'Hide Transcript' : 'Read Transcript'}
+				{isOpen ? (
+					<FormattedMessage
+						id="molecule-transcript__labelClose"
+						defaultMessage="Hide Transcript"
+						description="transcript button label close"
+					/>
+				) : (
+					<FormattedMessage
+						id="molecule-transcript__labelOpen"
+						defaultMessage="Read Transcript"
+						description="transcript button label open"
+					/>
+				)}
 			</Button>
 			{isOpen && (
 				<>
 					<p>
 						<FormattedMessage
-							id="sermonDetailPage__transcriptDisclaimer"
+							id="molecule-transcript__disclaimer"
 							defaultMessage="This transcript may be automatically generated."
-							description="Sermon detail transcript disclaimer"
+							description="transcript disclaimer"
 						/>
 					</p>
 					<p>
 						<FormattedMessage
-							id="sermonDetailPage__transcriptHelp"
+							id="molecule-transcript__help"
 							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-							description="Sermon detail transcript assistance request"
+							description="transcript assistance request"
 						/>
 					</p>
 					<p>{text}</p>
