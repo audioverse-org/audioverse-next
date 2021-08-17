@@ -11,3 +11,8 @@ generates:
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
+      scalars:
+        Date: 'string'
+        DateTime: 'string'
+        RelativeDateTime: 'string'
+        URL: 'string'

@@ -15,7 +15,7 @@
     "test:watch": "TZ=UTC jest --watch",
     "extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts*' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang",
-    "precommit": "npm run format && npm run lint:fix && tsc --noEmit && TZ=UTC jest --config=jest.config.precommit.js",
+    "precommit": "npm run format && npm run lint:fix && npm run checkTs && TZ=UTC jest --config=jest.config.precommit.js",
     "postinstall": "husky install",
     "graphql:codegen": "graphql-codegen --config .graphqlrc.yml",
     "lighthouse": "npx lhci autorun",
@@ -25,7 +25,9 @@
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "clsx": "^1.1.1",
     "cookie": "^0.4.1",
+    "dayjs": "^1.10.6",
     "feed": "^4.2.1",
     "framer-motion": "^4.1.17",
     "full-icu": "^1.3.1",

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
-import Card, { CardTheme } from '@components/molecules/card';
+import { CardTheme } from '@components/molecules/cardHat';
 import SpeakerName from '@components/molecules/speakerName';
 import {
 	CardPlayableFragment,
@@ -13,6 +13,7 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import CardHat from './cardHat';
 import styles from './cardPlayable.module.scss';
 
 export interface CardPlayableProps {
@@ -65,7 +66,7 @@ export default function CardPlayable({
 		  )
 		: undefined;
 	return (
-		<Card
+		<CardHat
 			hat={
 				container?.title
 					? {
@@ -104,6 +105,6 @@ export default function CardPlayable({
 
 				<ButtonFavorite id={recording.id} />
 			</div>
-		</Card>
+		</CardHat>
 	);
 }

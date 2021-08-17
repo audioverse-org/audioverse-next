@@ -5,12 +5,12 @@ import {
 	GetSponsorDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-import Sponsor, {
+import SponsorDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]';
 
-const renderPage = buildStaticRenderer(Sponsor, getStaticProps, {
+const renderPage = buildStaticRenderer(SponsorDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_sponsor_id',
 });
@@ -29,6 +29,12 @@ function loadData() {
 				website: 'the_sponsor_website',
 				summary: 'the_sponsor_summary',
 				description: '<i>the</i> <b>description</b>',
+				collections: {
+					nodes: [],
+					aggregate: {
+						count: 0,
+					},
+				},
 			},
 		});
 }
@@ -67,28 +73,6 @@ describe('sponsor detail page', () => {
 		);
 	});
 
-	it('skips image display if sponsor has none', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetSponsorDetailPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsor: {
-					title: 'the_sponsor_title',
-					recordings: {
-						nodes: [
-							{
-								id: 'the_recording_id',
-								title: 'the_recording_title',
-							},
-						],
-					},
-				},
-			});
-
-		const { queryByAltText } = await renderPage();
-
-		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
-	});
-
 	it('renders 404', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetSponsorDetailPageDataDocument, expect.anything())
@@ -113,14 +97,6 @@ describe('sponsor detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_website')).toBeInTheDocument();
-	});
-
-	it('displays summary', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sponsor_summary')).toBeInTheDocument();
 	});
 
 	it('renders description html', async () => {

@@ -1,3 +1,19 @@
+@import '../../styles/common';
+
+.container {
+	height: 100%;
+	background: $ts-white;
+}
+
+.content {
+	padding: 16px;
+}
+
+.date {
+	color: $ts-red;
+	margin-bottom: 4px;
+}
+
 .teaser,
 .duration {
 	margin-top: 0;

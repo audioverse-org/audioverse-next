@@ -1,0 +1,30 @@
+@import '../../styles/common';
+
+.container {
+	max-width: 1027px;
+	background: $ts-lightTone;
+	border-radius: 24px;
+	overflow: hidden;
+	padding: 16px 24px;
+}
+
+.titleLockup {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.logo {
+	margin-right: 8px;
+}
+
+.countLabel {
+	color: $ts-midTone;
+}
+
+.cardSet {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 24px;
+	margin-bottom: 24px;
+}
