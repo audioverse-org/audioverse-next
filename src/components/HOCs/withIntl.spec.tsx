@@ -32,6 +32,7 @@ import Presenters from '@containers/presenter/list';
 import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import SermonList from '@containers/sermon/list';
 import SongList from '@containers/song/list';
 import SponsorAlbums from '@containers/sponsor/albums';
 import SponsorBooks from '@containers/sponsor/books';
@@ -54,7 +55,6 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
-import SermonList from '@containers/sermon/list';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
