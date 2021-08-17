@@ -233,15 +233,12 @@ describe('password reset page', () => {
 			errors: [],
 		});
 
-		const {
-			getByPlaceholderText,
-			getByText,
-			queryByPlaceholderText,
-		} = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByPlaceholderText, getByText, queryByPlaceholderText } =
+			await renderPage({
+				params: {
+					token: 'the_token',
+				},
+			});
 
 		userEvent.type(getByPlaceholderText('password'), 'new_pass');
 		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');

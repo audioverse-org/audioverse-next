@@ -17,10 +17,7 @@ interface Context {
 	};
 }
 
-export async function getServerSideProps({
-	req,
-	query,
-}: Context): Promise<
+export async function getServerSideProps({ req, query }: Context): Promise<
 	GetServerSidePropsResult<{
 		data: GetDiscoverPageDataQuery;
 	}>

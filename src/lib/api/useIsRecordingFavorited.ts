@@ -8,9 +8,7 @@ import {
 import { isRecordingFavorited as _isFavorited } from '@lib/api/isRecordingFavorited';
 import { setRecordingFavorited as _setFavorited } from '@lib/api/setRecordingFavorited';
 
-export function useIsRecordingFavorited(
-	id: string
-): {
+export function useIsRecordingFavorited(id: string): {
 	isRecordingFavorited: boolean | undefined;
 	toggleFavorited: UseMutateFunction;
 } {

@@ -84,11 +84,8 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const {
-			getByText,
-			getByPlaceholderText,
-			queryByText,
-		} = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText, queryByText } =
+			await renderWithIntl(<Login />);
 
 		userEvent.type(getByPlaceholderText('email'), 'the_email');
 		userEvent.click(getByText('forgot password'));

@@ -18,8 +18,6 @@ module.exports = {
 		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
-		'prettier',
-		'prettier/@typescript-eslint',
 		'plugin:prettier/recommended',
 		'plugin:testing-library/recommended',
 		'plugin:jest-dom/recommended',

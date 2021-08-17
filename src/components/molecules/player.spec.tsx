@@ -130,11 +130,8 @@ describe('player', () => {
 	it('updates scrubber on time update', async () => {
 		const player = setPlayerMock({ duration: 300 });
 
-		const {
-			getByTestId,
-			getByLabelText,
-			getAllByLabelText,
-		} = await renderComponent();
+		const { getByTestId, getByLabelText, getAllByLabelText } =
+			await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
 
@@ -964,11 +961,8 @@ describe('player', () => {
 	it('handles initial zero duration', async () => {
 		setPlayerMock({ time: 0, duration: 0 });
 
-		const {
-			getByTestId,
-			getByLabelText,
-			getAllByLabelText,
-		} = await renderComponent();
+		const { getByTestId, getByLabelText, getAllByLabelText } =
+			await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
 

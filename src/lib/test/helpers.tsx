@@ -252,7 +252,7 @@ type MockPlayer = Pick<
 	_fire: (event: string, data?: any) => void;
 };
 
-export const mockVideojs = (videojs as unknown) as jest.Mock;
+export const mockVideojs = videojs as unknown as jest.Mock;
 
 export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 	let {
@@ -287,7 +287,7 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		}),
 		pause: jest.fn(() => {
 			isPaused = true;
-			return (mockPlayer as unknown) as videojs.Player;
+			return mockPlayer as unknown as videojs.Player;
 		}),
 		paused: jest.fn(() => isPaused),
 		currentTime: jest.fn((newTime: number | null = null) => {

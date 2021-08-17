@@ -20,7 +20,7 @@ describe('app', () => {
 	it('sets title', async () => {
 		const { getByTestId } = await render(
 			<MyApp
-				Component={((() => null) as unknown) as typeof React.Component}
+				Component={(() => null) as unknown as typeof React.Component}
 				pageProps={{}}
 			/>
 		);
