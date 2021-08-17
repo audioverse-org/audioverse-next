@@ -15,6 +15,8 @@ export type Scalars = {
   Date: any;
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
+  /** A timezone-less date-time string in YYYY-MM-DD HH:mm:ss format. Example value: "2020-10-05 12:30:00". */
+  RelativeDateTime: any;
   /** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: any;
   /** The `Upload` scalar type represents a file upload. */
@@ -278,6 +280,7 @@ export type BlogPost = Node & UniformResourceLocatable & {
   featuredDuration: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   image: Maybe<Image>;
+  isHidden: Scalars['Boolean'];
   publishDate: Scalars['DateTime'];
   /** The estimated number of seconds to read the blog post. */
   readingDuration: Maybe<Scalars['Float']>;
@@ -300,6 +303,7 @@ export type BlogPostCreateInput = {
   /** The number of days to feature blog post. */
   featuredDuration: Maybe<Scalars['Int']>;
   image: Maybe<ImageInput>;
+  isHidden: Maybe<Scalars['Boolean']>;
   language: Language;
   publishDate: Maybe<Scalars['DateTime']>;
   teaser: Maybe<Scalars['String']>;
@@ -333,6 +337,7 @@ export type BlogPostUpdateInput = {
   /** The number of days to feature blog post. */
   featuredDuration: Maybe<Scalars['Int']>;
   image: Maybe<ImageInput>;
+  isHidden: Maybe<Scalars['Boolean']>;
   publishDate: Maybe<Scalars['DateTime']>;
   teaser: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
@@ -624,6 +629,7 @@ export type CollectionsOrder = {
 export enum CollectionsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
+  RecordingCount = 'RECORDING_COUNT',
   RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
   Title = 'TITLE'
 }
@@ -3468,7 +3474,7 @@ export type Recording = Node & UniformResourceLocatable & {
   mediaReleaseForm: Maybe<MediaReleaseForm>;
   persons: Array<Person>;
   publishDate: Maybe<Scalars['DateTime']>;
-  recordingDate: Maybe<Scalars['DateTime']>;
+  recordingDate: Maybe<Scalars['RelativeDateTime']>;
   recordingTagSuggestions: RecordingTagSuggestionConnection;
   recordingTags: RecordingTagConnection;
   screeningIssues: Maybe<RecordingScreeningIssueConnection>;
@@ -3639,7 +3645,7 @@ export type RecordingCreateInput = {
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
-  recordingDate: Maybe<Scalars['DateTime']>;
+  recordingDate: Maybe<Scalars['RelativeDateTime']>;
   recordingPersons: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags: Maybe<Array<RecordingTagInput>>;
   sequenceId: Maybe<Scalars['ID']>;
@@ -3931,7 +3937,7 @@ export type RecordingUpdateInput = {
   legalScreeningCheckouts: Maybe<Array<RecordingScreeningCheckoutInput>>;
   /** Requires `ADMINISTRATION` role. */
   publishDate: Maybe<Scalars['DateTime']>;
-  recordingDate: Maybe<Scalars['DateTime']>;
+  recordingDate: Maybe<Scalars['RelativeDateTime']>;
   recordingPersons: Maybe<Array<RecordingPersonRoleInput>>;
   recordingTags: Maybe<Array<RecordingTagInput>>;
   sequenceId: Maybe<Scalars['ID']>;
@@ -3965,6 +3971,7 @@ export enum RecordingsSortableField {
   Title = 'TITLE',
   UpdatedAt = 'UPDATED_AT'
 }
+
 
 export type Sequence = Node & UniformResourceLocatable & {
   __typename?: 'Sequence';
@@ -4341,6 +4348,7 @@ export type SponsorsOrder = {
 export enum SponsorsSortableField {
   CreatedAt = 'CREATED_AT',
   Id = 'ID',
+  RecordingCount = 'RECORDING_COUNT',
   RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
   Title = 'TITLE'
 }
@@ -5028,6 +5036,7 @@ export type User = Node & {
   /** The name of the country. */
   country: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  downloadHistory: UserDownloadHistoryConnection;
   /** The user's email address. */
   email: Scalars['String'];
   favoritePersons: PersonConnection;
@@ -5066,6 +5075,15 @@ export type User = Node & {
   surname: Maybe<Scalars['String']>;
   /** The user's timezone. */
   timezone: Timezone;
+};
+
+
+export type UserDownloadHistoryArgs = {
+  after: Maybe<Scalars['String']>;
+  first: Maybe<Scalars['Int']>;
+  language: Language;
+  offset: Maybe<Scalars['Int']>;
+  orderBy: Maybe<Array<UserDownloadHistoryOrder>>;
 };
 
 
@@ -5209,6 +5227,36 @@ export type UserCreateInput = {
   /** The user's timezone. */
   timezone: Maybe<Timezone>;
 };
+
+export type UserDownloadHistory = {
+  __typename?: 'UserDownloadHistory';
+  createdAt: Scalars['DateTime'];
+  recording: Recording;
+};
+
+export type UserDownloadHistoryConnection = {
+  __typename?: 'UserDownloadHistoryConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<UserDownloadHistoryEdge>>;
+  nodes: Maybe<Array<UserDownloadHistory>>;
+  pageInfo: PageInfo;
+};
+
+export type UserDownloadHistoryEdge = {
+  __typename?: 'UserDownloadHistoryEdge';
+  cursor: Scalars['String'];
+  node: UserDownloadHistory;
+};
+
+export type UserDownloadHistoryOrder = {
+  direction: OrderByDirection;
+  field: UserDownloadHistorySortableField;
+};
+
+/** Properties by which user history connections can be ordered. */
+export enum UserDownloadHistorySortableField {
+  CreatedAt = 'CREATED_AT'
+}
 
 export type UserEdge = {
   __typename?: 'UserEdge';
