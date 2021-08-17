@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import CardPlayable from '@components/molecules/cardPlayable';
 import Login from '@components/molecules/login';
+import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
@@ -50,7 +51,6 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
-import Player from '@components/molecules/player';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
