@@ -1,9 +1,9 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import IconSearch from '../../../public/img/icon-search.svg';
 
 import styles from './searchBar.module.scss';
-import { FormattedMessage } from 'react-intl';
 
 export default function SearchBar(): JSX.Element {
 	return (

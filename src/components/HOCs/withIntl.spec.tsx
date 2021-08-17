@@ -10,6 +10,7 @@ import CardPlayable from '@components/molecules/cardPlayable';
 import Login from '@components/molecules/login';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
+import SearchBar from '@components/molecules/searchBar';
 import SpeakerName from '@components/molecules/speakerName';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
@@ -51,7 +52,6 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
-import SearchBar from '@components/molecules/searchBar';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
