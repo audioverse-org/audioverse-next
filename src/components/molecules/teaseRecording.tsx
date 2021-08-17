@@ -8,6 +8,7 @@ import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './teaseRecording.module.scss';
+import { FormattedMessage } from 'react-intl';
 
 export default function TeaseRecording({
 	recording,
@@ -20,7 +21,12 @@ export default function TeaseRecording({
 	return (
 		<div className={styles.base}>
 			<div className={styles.part}>
-				Part {index} of {count}
+				<FormattedMessage
+					id={'molecule-teaseRecording__partInfo'}
+					defaultMessage={'Part {index} of {count}'}
+					description={'recording tease part info'}
+					values={{ index, count }}
+				/>
 			</div>
 			<div className={styles.title}>
 				<h4>{recording.title}</h4>

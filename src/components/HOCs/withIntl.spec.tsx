@@ -52,6 +52,7 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
+import TeaseRecording from '@components/molecules/teaseRecording';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');
@@ -439,6 +440,21 @@ describe('localization usage', () => {
 		],
 		[Player, {}],
 		[SearchBar, {}],
+		[
+			TeaseRecording,
+			{
+				recording: {
+					sequenceIndex: 1,
+					sequence: {
+						recordings: {
+							aggregate: {
+								count: 3,
+							},
+						},
+					},
+				},
+			},
+		],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
