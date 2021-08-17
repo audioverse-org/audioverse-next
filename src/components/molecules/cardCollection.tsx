@@ -77,21 +77,7 @@ export default function CardCollection({
 					/>
 				</Heading6>
 				<div className={styles.duration}>{useFormattedDuration(duration)}</div>
-				{/* {collection. ? (
-				<p className={styles.teaser}>{collection.teaser}</p>
-			) : null}
-			{dur && dur > 30 && (
-				<p className={styles.duration}>
-					<FormattedMessage
-						id="cardCollection__readingDuration"
-						defaultMessage="{duration} read"
-						description="Card collection reading duration"
-						values={{
-							duration: useFormattedDuration(dur),
-						}}
-					/>
-				</p>
-			)} */}
+				{/* TODO: hover/link?, conditional sponsor, has favorited, sub-sequences */}
 			</div>
 		</Card>
 	);
