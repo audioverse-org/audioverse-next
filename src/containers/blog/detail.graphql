@@ -5,10 +5,11 @@ query getBlogDetailData($id: ID!, $language: Language!) {
 		image {
 			url(size: 2100, cropMode: MAX_SIZE)
 		}
-		teaser
+		body
+		canonicalPath
 		publishDate
 		readingDuration
-		body
+		teaser
 	}
 	blogPosts(
 		language: $language

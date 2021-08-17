@@ -6295,7 +6295,7 @@ export type GetBlogDetailDataQuery = (
   { __typename?: 'Query' }
   & { blogPost: Maybe<(
     { __typename?: 'BlogPost' }
-    & Pick<BlogPost, 'id' | 'title' | 'teaser' | 'publishDate' | 'readingDuration' | 'body'>
+    & Pick<BlogPost, 'id' | 'title' | 'body' | 'canonicalPath' | 'publishDate' | 'readingDuration' | 'teaser'>
     & { image: Maybe<(
       { __typename?: 'Image' }
       & Pick<Image, 'url'>
@@ -8343,10 +8343,11 @@ export const GetBlogDetailDataDocument = `
     image {
       url(size: 2100, cropMode: MAX_SIZE)
     }
-    teaser
+    body
+    canonicalPath
     publishDate
     readingDuration
-    body
+    teaser
   }
   blogPosts(
     language: $language

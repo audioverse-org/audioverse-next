@@ -21,7 +21,15 @@ export interface BlogPostDetailProps {
 }
 
 function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
-	const { body, image, publishDate, readingDuration, teaser, title } = blogPost;
+	const {
+		body,
+		image,
+		publishDate,
+		readingDuration,
+		teaser,
+		title,
+		canonicalPath,
+	} = blogPost;
 	return (
 		<div className={styles.container}>
 			{image ? (
@@ -61,9 +69,11 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 						/>
 					</LineHeading>
 					<CardColumn
-						items={(blogPosts.nodes || [])?.map((post) => (
-							<CardPost post={post} key={post.canonicalPath} />
-						))}
+						items={(blogPosts.nodes || [])
+							.filter((p) => p.canonicalPath !== canonicalPath)
+							.map((post) => (
+								<CardPost post={post} key={post.canonicalPath} />
+							))}
 						className={styles.cards}
 					/>
 				</div>

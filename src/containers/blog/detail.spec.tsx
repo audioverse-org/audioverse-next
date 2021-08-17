@@ -4,7 +4,11 @@ import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildLoader,
+	buildStaticRenderer,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -17,21 +21,17 @@ const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps, {
 	id: 'the_blog_post_id',
 });
 
-function loadData() {
-	when(mockedFetchApi)
-		.calledWith(GetBlogDetailDataDocument, expect.anything())
-		.mockResolvedValue({
-			blogPost: {
-				id: 'the_blog_post_id',
-				title: 'the_blog_post_title',
-				teaser: 'the_blog_post_teaser',
-				readingDuration: 520,
-			},
-			blogPosts: {
-				nodes: [],
-			},
-		});
-}
+const loadData = buildLoader(GetBlogDetailDataDocument, {
+	blogPost: {
+		id: 'the_blog_post_id',
+		title: 'the_blog_post_title',
+		teaser: 'the_blog_post_teaser',
+		readingDuration: 520,
+	},
+	blogPosts: {
+		nodes: [],
+	},
+});
 
 describe('blog post detail page', () => {
 	it('renders post', async () => {
