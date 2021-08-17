@@ -1,0 +1,31 @@
+query getBlogDetailData($id: ID!, $language: Language!) {
+	blogPost(id: $id) {
+		id
+		title
+		image {
+			url(size: 2100, cropMode: MAX_SIZE)
+		}
+		teaser
+		publishDate
+		readingDuration
+		body
+	}
+	blogPosts(
+		language: $language
+		first: 5
+		orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardPost
+		}
+	}
+}
+
+query getBlogDetailStaticPaths($language: Language!, $first: Int) {
+	blogPosts(language: $language, first: $first) {
+		nodes {
+			id
+			canonicalPath
+		}
+	}
+}
