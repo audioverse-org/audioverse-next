@@ -12,6 +12,7 @@ import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SearchBar from '@components/molecules/searchBar';
 import SpeakerName from '@components/molecules/speakerName';
+import TeaseRecording from '@components/molecules/teaseRecording';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import AccountPlaylists from '@containers/account/playlists';
@@ -52,7 +53,6 @@ import {
 } from '@lib/test/helpers';
 import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
-import TeaseRecording from '@components/molecules/teaseRecording';
 
 jest.mock('react-intl');
 jest.mock('@lib/api/isRecordingFavorited');

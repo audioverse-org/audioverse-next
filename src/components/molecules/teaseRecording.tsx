@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
@@ -8,7 +9,6 @@ import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './teaseRecording.module.scss';
-import { FormattedMessage } from 'react-intl';
 
 export default function TeaseRecording({
 	recording,
