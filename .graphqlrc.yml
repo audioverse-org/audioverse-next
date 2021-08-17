@@ -11,3 +11,6 @@ generates:
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
+hooks:
+  afterAllFileWrite:
+    - prettier --write
