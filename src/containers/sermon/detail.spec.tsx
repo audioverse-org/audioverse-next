@@ -1253,6 +1253,14 @@ describe('sermon detail page', () => {
 			expect.stringContaining('conference_id')
 		);
 	});
+
+	it('does not show video downloads header in downloads menu if no video downloads', async () => {
+		loadSermonDetailData();
+
+		const { queryByText } = await renderPage();
+
+		expect(queryByText('Video Downloads')).not.toBeInTheDocument();
+	});
 });
 
 // TODO:

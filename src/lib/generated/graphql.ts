@@ -5623,10 +5623,10 @@ export type ButtonDownloadFragment = (
   { __typename?: 'Recording' }
   & { videoDownloads: Array<(
     { __typename?: 'VideoFile' }
-    & Pick<VideoFile, 'id' | 'url' | 'filesize'>
+    & Pick<VideoFile, 'url' | 'filesize'>
   )>, audioDownloads: Array<(
     { __typename?: 'AudioFile' }
-    & Pick<AudioFile, 'id' | 'url' | 'filesize'>
+    & Pick<AudioFile, 'url' | 'filesize'>
   )> }
 );
 
@@ -5635,7 +5635,7 @@ export type ButtonPlayFragment = (
   & AndMiniplayerFragment
 );
 
-export type ButtonShareFragment = (
+export type ButtonShareRecordingFragment = (
   { __typename?: 'Recording' }
   & Pick<Recording, 'id' | 'shareUrl'>
 );
@@ -5820,6 +5820,22 @@ export type RecordingListFragment = (
   )> }
 );
 
+export type SequenceNavFragment = (
+  { __typename?: 'Recording' }
+  & Pick<Recording, 'sequenceIndex'>
+  & { sequence: Maybe<(
+    { __typename?: 'Sequence' }
+    & Pick<Sequence, 'id' | 'title'>
+    & { recordings: (
+      { __typename?: 'RecordingConnection' }
+      & { nodes: Maybe<Array<(
+        { __typename?: 'Recording' }
+        & Pick<Recording, 'id'>
+      )>> }
+    ) }
+  )> }
+);
+
 export type SpeakerNameFragment = (
   { __typename?: 'Person' }
   & Pick<Person, 'id' | 'name' | 'summary' | 'website' | 'viewerHasFavorited'>
@@ -5856,7 +5872,7 @@ export type PlayerFragment = (
   & AndMiniplayerFragment
   & ButtonDownloadFragment
   & ProgressBarFragment
-  & ButtonShareFragment
+  & ButtonShareRecordingFragment
 );
 
 export type PlaylistFragment = (
@@ -5871,7 +5887,7 @@ export type PlaylistFragment = (
 
 export type RecordingFragment = (
   { __typename?: 'Recording' }
-  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'sequenceIndex' | 'shareUrl'>
+  & Pick<Recording, 'id' | 'title' | 'description' | 'recordingDate' | 'shareUrl'>
   & { persons: Array<(
     { __typename?: 'Person' }
     & SpeakerNameFragment
@@ -5903,7 +5919,6 @@ export type RecordingFragment = (
       { __typename?: 'RecordingConnection' }
       & { nodes: Maybe<Array<(
         { __typename?: 'Recording' }
-        & Pick<Recording, 'id'>
         & TeaseRecordingFragment
       )>> }
     ) }
@@ -5914,6 +5929,7 @@ export type RecordingFragment = (
     { __typename?: 'Transcript' }
     & Pick<Transcript, 'text'>
   )> }
+  & SequenceNavFragment
   & CopyrightInfoFragment
   & PlayerFragment
 );
@@ -7746,22 +7762,34 @@ export const TeaseRecordingFragmentDoc = `
   ...buttonPlay
 }
     ${ButtonPlayFragmentDoc}`;
+export const SequenceNavFragmentDoc = `
+    fragment sequenceNav on Recording {
+  sequenceIndex
+  sequence {
+    id
+    title
+    recordings(first: 1000) {
+      nodes {
+        id
+      }
+    }
+  }
+}
+    `;
 export const ButtonDownloadFragmentDoc = `
     fragment buttonDownload on Recording {
   videoDownloads: videoFiles(allowedContainers: MP4) {
-    id
     url
     filesize
   }
   audioDownloads: audioFiles(allowedContainers: MP3) {
-    id
     url
     filesize
   }
 }
     `;
-export const ButtonShareFragmentDoc = `
-    fragment buttonShare on Recording {
+export const ButtonShareRecordingFragmentDoc = `
+    fragment buttonShareRecording on Recording {
   id
   shareUrl
 }
@@ -7773,12 +7801,12 @@ export const PlayerFragmentDoc = `
   ...andMiniplayer
   ...buttonDownload
   ...progressBar
-  ...buttonShare
+  ...buttonShareRecording
 }
     ${AndMiniplayerFragmentDoc}
 ${ButtonDownloadFragmentDoc}
 ${ProgressBarFragmentDoc}
-${ButtonShareFragmentDoc}`;
+${ButtonShareRecordingFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
   id
@@ -7817,7 +7845,6 @@ export const RecordingFragmentDoc = `
     title
     recordings(first: 1000) {
       nodes {
-        id
         ...teaseRecording
       }
     }
@@ -7826,17 +7853,18 @@ export const RecordingFragmentDoc = `
     id
     title
   }
-  sequenceIndex
   transcript {
     text
   }
   shareUrl
+  ...sequenceNav
   ...copyrightInfo
   ...player
 }
     ${SpeakerNameFragmentDoc}
 ${SponsorInfoFragmentDoc}
 ${TeaseRecordingFragmentDoc}
+${SequenceNavFragmentDoc}
 ${CopyrightInfoFragmentDoc}
 ${PlayerFragmentDoc}`;
 export const SongFragmentDoc = `
@@ -9833,6 +9861,7 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetPlaylistButtonDataQuery> {
 								return fetchApi(GetPlaylistButtonDataDocument, { variables });
 							}
+
 
 
 

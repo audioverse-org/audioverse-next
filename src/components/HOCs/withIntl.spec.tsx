@@ -8,8 +8,12 @@ import { toast } from 'react-toastify';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import CardPlayable from '@components/molecules/cardPlayable';
 import Login from '@components/molecules/login';
+import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
+import SearchBar from '@components/molecules/searchBar';
 import SpeakerName from '@components/molecules/speakerName';
+import TeaseRecording from '@components/molecules/teaseRecording';
+import Transcript from '@components/molecules/transcript';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import AccountPlaylists from '@containers/account/playlists';
@@ -28,6 +32,7 @@ import Presenters from '@containers/presenter/list';
 import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import SermonList from '@containers/sermon/list';
 import SongList from '@containers/song/list';
 import SponsorAlbums from '@containers/sponsor/albums';
 import SponsorBooks from '@containers/sponsor/books';
@@ -190,6 +195,12 @@ describe('localization usage', () => {
 								filesize: '100',
 							},
 						],
+						sequenceIndex: 1,
+						sequence: {
+							recordings: {
+								nodes: [{ id: 1 }, { id: 2 }, { id: 3 }] as any,
+							},
+						},
 					} as Sermon
 				}
 				title={null}
@@ -435,6 +446,25 @@ describe('localization usage', () => {
 				container: { length: 2, index: 1 },
 			},
 		],
+		[Player, {}],
+		[SearchBar, {}],
+		[
+			TeaseRecording,
+			{
+				recording: {
+					sequenceIndex: 1,
+					sequence: {
+						recordings: {
+							aggregate: {
+								count: 3,
+							},
+						},
+					},
+				},
+			},
+		],
+		[Transcript, {}],
+		[SermonList, { nodes: [{ id: 1 }], pagination: { current: 1, total: 10 } }],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

@@ -54,8 +54,6 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid={'portal'} />
 	);
 
-	console.log({ isPlaying, isLoaded, contextPaused: context.paused() });
-
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
 
