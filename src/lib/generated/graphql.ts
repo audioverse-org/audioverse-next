@@ -5653,7 +5653,7 @@ export type CardPlayableFragment = (
 
 export type CardPostFragment = (
   { __typename?: 'BlogPost' }
-  & Pick<BlogPost, 'publishDate' | 'title' | 'teaser' | 'canonicalUrl' | 'readingDuration'>
+  & Pick<BlogPost, 'publishDate' | 'title' | 'teaser' | 'canonicalPath' | 'readingDuration'>
   & { image: Maybe<(
     { __typename?: 'Image' }
     & Pick<Image, 'url'>
@@ -6297,6 +6297,47 @@ export type GetBibleVersionsPageDataQuery = (
     & { nodes: Maybe<Array<(
       { __typename?: 'Bible' }
       & Pick<Bible, 'title' | 'id'>
+    )>> }
+  ) }
+);
+
+export type GetBlogDetailDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+  language: Language;
+}>;
+
+
+export type GetBlogDetailDataQuery = (
+  { __typename?: 'Query' }
+  & { blogPost: Maybe<(
+    { __typename?: 'BlogPost' }
+    & Pick<BlogPost, 'id' | 'title' | 'body' | 'canonicalPath' | 'publishDate' | 'readingDuration' | 'teaser'>
+    & { image: Maybe<(
+      { __typename?: 'Image' }
+      & Pick<Image, 'url'>
+    )> }
+  )>, blogPosts: (
+    { __typename?: 'BlogPostConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'BlogPost' }
+      & CardPostFragment
+    )>> }
+  ) }
+);
+
+export type GetBlogDetailStaticPathsQueryVariables = Exact<{
+  language: Language;
+  first: Maybe<Scalars['Int']>;
+}>;
+
+
+export type GetBlogDetailStaticPathsQuery = (
+  { __typename?: 'Query' }
+  & { blogPosts: (
+    { __typename?: 'BlogPostConnection' }
+    & { nodes: Maybe<Array<(
+      { __typename?: 'BlogPost' }
+      & Pick<BlogPost, 'id' | 'canonicalPath'>
     )>> }
   ) }
 );
@@ -7489,7 +7530,7 @@ export const CardPostFragmentDoc = `
   publishDate
   title
   teaser
-  canonicalUrl
+  canonicalPath
   readingDuration
 }
     `;
@@ -8320,6 +8361,65 @@ export const useGetBibleVersionsPageDataQuery = <
     useQuery<GetBibleVersionsPageDataQuery, TError, TData>(
       ['getBibleVersionsPageData', variables],
       graphqlFetcher<GetBibleVersionsPageDataQuery, GetBibleVersionsPageDataQueryVariables>(GetBibleVersionsPageDataDocument, variables),
+      options
+    );
+export const GetBlogDetailDataDocument = `
+    query getBlogDetailData($id: ID!, $language: Language!) {
+  blogPost(id: $id) {
+    id
+    title
+    image {
+      url(size: 2100, cropMode: MAX_SIZE)
+    }
+    body
+    canonicalPath
+    publishDate
+    readingDuration
+    teaser
+  }
+  blogPosts(
+    language: $language
+    first: 5
+    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
+  ) {
+    nodes {
+      ...cardPost
+    }
+  }
+}
+    ${CardPostFragmentDoc}`;
+export const useGetBlogDetailDataQuery = <
+      TData = GetBlogDetailDataQuery,
+      TError = unknown
+    >(
+      variables: GetBlogDetailDataQueryVariables, 
+      options?: UseQueryOptions<GetBlogDetailDataQuery, TError, TData>
+    ) => 
+    useQuery<GetBlogDetailDataQuery, TError, TData>(
+      ['getBlogDetailData', variables],
+      graphqlFetcher<GetBlogDetailDataQuery, GetBlogDetailDataQueryVariables>(GetBlogDetailDataDocument, variables),
+      options
+    );
+export const GetBlogDetailStaticPathsDocument = `
+    query getBlogDetailStaticPaths($language: Language!, $first: Int) {
+  blogPosts(language: $language, first: $first) {
+    nodes {
+      id
+      canonicalPath
+    }
+  }
+}
+    `;
+export const useGetBlogDetailStaticPathsQuery = <
+      TData = GetBlogDetailStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetBlogDetailStaticPathsQueryVariables, 
+      options?: UseQueryOptions<GetBlogDetailStaticPathsQuery, TError, TData>
+    ) => 
+    useQuery<GetBlogDetailStaticPathsQuery, TError, TData>(
+      ['getBlogDetailStaticPaths', variables],
+      graphqlFetcher<GetBlogDetailStaticPathsQuery, GetBlogDetailStaticPathsQueryVariables>(GetBlogDetailStaticPathsDocument, variables),
       options
     );
 export const GetConferenceDetailPageDataDocument = `
@@ -9872,6 +9972,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
 							): Promise<GetBibleVersionsPageDataQuery> {
 								return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+							}
+
+							export async function getBlogDetailData<T>(
+								variables: ExactAlt<T, GetBlogDetailDataQueryVariables>
+							): Promise<GetBlogDetailDataQuery> {
+								return fetchApi(GetBlogDetailDataDocument, { variables });
+							}
+
+							export async function getBlogDetailStaticPaths<T>(
+								variables: ExactAlt<T, GetBlogDetailStaticPathsQueryVariables>
+							): Promise<GetBlogDetailStaticPathsQuery> {
+								return fetchApi(GetBlogDetailStaticPathsDocument, { variables });
 							}
 
 							export async function getConferenceDetailPageData<T>(

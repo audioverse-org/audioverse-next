@@ -1,6 +1,8 @@
 @import '../../styles/common';
 
 .heading {
+	margin-top: 4px;
+	margin-bottom: 4px;
 	color: $ts-red;
 	font-size: var(--fontSize, 16px);
 	text-transform: uppercase;

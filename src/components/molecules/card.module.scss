@@ -52,6 +52,8 @@
 }
 
 .title {
+	margin-top: 0;
+	margin-bottom: 16px;
 	a {
 		text-decoration: none;
 	}
@@ -63,8 +65,9 @@
 }
 
 .part {
-	font-size: 0.7em;
+	font-size: 10.5px;
 	font-weight: 600;
+	line-height: 13px;
 	color: var(--partColor, #ff224a);
 }
 

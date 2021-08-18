@@ -11,7 +11,8 @@ $accent: #3da88e;
 
 // END LEGACY
 
-$headingFont: ivyjournal, serif;
+$serif: ivyjournal, serif;
+$headingFont: $serif;
 
 // T&S Named Colors
 $ts-cream: #efebeb;
@@ -20,6 +21,11 @@ $ts-lightTone: #cdd9e3;
 $ts-midTone: #6b7680;
 $ts-red: #ff224a;
 $ts-salmon: #ff6e6e;
+
+// $breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+// $breakpoint-lg: 992px;
+// $breakpoint-xl: 1200px;
 
 // TODO: Switch to using Mui button, move all these styles to global
 //  theme or global.css Mui customizations
