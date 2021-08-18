@@ -5,6 +5,7 @@ import React from 'react';
 import Section from '@components/organisms/section';
 import styles from '@containers/home.module.scss';
 
+// TODO: use this in Storybook or nix it
 export const DarkBleed = (): JSX.Element => (
 	<Section
 		text={

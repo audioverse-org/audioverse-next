@@ -229,7 +229,9 @@ describe('localization usage', () => {
 
 		await waitFor(() => expect(isPersonFavorited).toBeCalled());
 
-		const byRole = getByRole('button');
+		const byRole = getByRole('button', {
+			hidden: true,
+		});
 
 		userEvent.click(byRole);
 
