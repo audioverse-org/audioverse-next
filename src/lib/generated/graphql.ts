@@ -21,13 +21,13 @@ export type Scalars = {
 	Int: number;
 	Float: number;
 	/** A date value string in YYYY-MM-DD format. Example value: "2020-10-05". */
-	Date: any;
+	Date: string;
 	/** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-	DateTime: any;
+	DateTime: string;
 	/** A timezone-less date-time string in YYYY-MM-DD HH:mm:ss format. Example value: "2020-10-05 12:30:00". */
-	RelativeDateTime: any;
+	RelativeDateTime: string;
 	/** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
-	URL: any;
+	URL: string;
 	/** The `Upload` scalar type represents a file upload. */
 	Upload: any;
 };
@@ -5444,6 +5444,16 @@ export type CardBibleChapterFragment = { __typename?: 'BibleChapter' } & Pick<
 	'id' | 'title' | 'url'
 >;
 
+export type CardCollectionFragment = { __typename?: 'Collection' } & Pick<
+	Collection,
+	'canonicalPath' | 'title' | 'startDate' | 'endDate' | 'duration'
+> & {
+		image: Maybe<{ __typename?: 'Image' } & Pick<Image, 'id' | 'url'>>;
+		allSequences: { __typename?: 'SequenceConnection' } & {
+			aggregate: Maybe<{ __typename?: 'Aggregate' } & Pick<Aggregate, 'count'>>;
+		};
+	};
+
 export type CardPlayableFragment = { __typename?: 'Recording' } & Pick<
 	Recording,
 	'id'
@@ -6661,7 +6671,17 @@ export type GetSponsorDetailPageDataQuery = { __typename?: 'Query' } & {
 		{ __typename?: 'Sponsor' } & Pick<
 			Sponsor,
 			'id' | 'title' | 'location' | 'website' | 'summary' | 'description'
-		> & { imageWithFallback: { __typename?: 'Image' } & Pick<Image, 'url'> }
+		> & {
+				imageWithFallback: { __typename?: 'Image' } & Pick<Image, 'url'>;
+				collections: { __typename?: 'CollectionConnection' } & {
+					aggregate: Maybe<
+						{ __typename?: 'Aggregate' } & Pick<Aggregate, 'count'>
+					>;
+					nodes: Maybe<
+						Array<{ __typename?: 'Collection' } & CardCollectionFragment>
+					>;
+				};
+			}
 	>;
 };
 
@@ -6945,6 +6965,24 @@ export const CardBibleChapterFragmentDoc = `
   id
   title
   url
+}
+    `;
+export const CardCollectionFragmentDoc = `
+    fragment cardCollection on Collection {
+  canonicalPath
+  title
+  startDate
+  endDate
+  duration
+  image {
+    id
+    url(size: 740, cropMode: MAX_SIZE)
+  }
+  allSequences: sequences {
+    aggregate {
+      count
+    }
+  }
 }
     `;
 export const CardPostFragmentDoc = `
@@ -9029,9 +9067,17 @@ export const GetSponsorDetailPageDataDocument = `
     imageWithFallback {
       url(size: 100)
     }
+    collections(first: 6, orderBy: [{field: CREATED_AT, direction: DESC}]) {
+      aggregate {
+        count
+      }
+      nodes {
+        ...cardCollection
+      }
+    }
   }
 }
-    `;
+    ${CardCollectionFragmentDoc}`;
 export const useGetSponsorDetailPageDataQuery = <
 	TData = GetSponsorDetailPageDataQuery,
 	TError = unknown

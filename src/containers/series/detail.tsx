@@ -25,7 +25,7 @@ function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 	return (
 		<>
 			<PageHeader
-				imageUrl={data?.series?.imageWithFallback.url}
+				imageUrl={data?.series?.imageWithFallback.url || ''}
 				title={data?.series?.title || ''}
 				rssUrl={rssUrl}
 			/>

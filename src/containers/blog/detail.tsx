@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import HorizontalRule from '@components/atoms/horizontalRule';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardColumn from '@components/molecules/cardColumn';
@@ -54,7 +55,7 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 							/>
 						</div>
 					)}
-					<div className={styles.rule} />
+					<HorizontalRule color="lightTone" />
 					<div
 						className={styles.article}
 						dangerouslySetInnerHTML={{ __html: body }}

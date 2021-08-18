@@ -9,6 +9,7 @@ describe('card post', () => {
 			props: {
 				post: {
 					readingDuration: 10,
+					canonicalPath: 'the_path',
 				},
 			},
 		});

@@ -1,0 +1,26 @@
+@import '../../styles/common';
+
+.container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	> *:first-child {
+		margin-right: 4px;
+	}
+}
+
+.white {
+	color: $ts-white;
+}
+
+.dark {
+	color: $ts-dark;
+}
+
+.salmon {
+	color: $ts-salmon;
+}
+
+.red {
+	color: $ts-red;
+}

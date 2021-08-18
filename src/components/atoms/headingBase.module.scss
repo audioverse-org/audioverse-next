@@ -1,0 +1,15 @@
+@import '../../styles/common';
+
+.base {
+	font-family: $serif;
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.sans {
+	font-family: $sans;
+}
+
+.unpadded {
+	margin-bottom: 0;
+}
