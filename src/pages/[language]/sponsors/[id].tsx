@@ -1,4 +1,4 @@
-import Sponsor from '@containers/sponsor/detail';
+import SponsorDetail from '@containers/sponsor/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getSponsorDetailPageData,
@@ -8,7 +8,7 @@ import {
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeSponsorRoute } from '@lib/routes';
 
-export default Sponsor;
+export default SponsorDetail;
 
 export type SponsorStaticProps = StaticProps<GetSponsorDetailPageDataQuery>;
 

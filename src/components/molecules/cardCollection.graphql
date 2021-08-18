@@ -1,0 +1,16 @@
+fragment cardCollection on Collection {
+	canonicalPath
+	title
+	startDate
+	endDate
+	duration
+	image {
+		id
+		url(size: 740, cropMode: MAX_SIZE)
+	}
+	allSequences: sequences {
+		aggregate {
+			count
+		}
+	}
+}

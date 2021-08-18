@@ -55,7 +55,7 @@ export default async function writeFeedFile({
 			title: r.title,
 			description: r.description || undefined,
 			link: r.canonicalUrl,
-			date: new Date(r.recordingDate),
+			date: new Date(r.recordingDate || ''),
 			enclosure: { url, length },
 		});
 	});
