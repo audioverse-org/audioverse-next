@@ -48,13 +48,6 @@ export default function CardPlayable({
 	const shouldShowProgress =
 		!!progress || !!session.progress || session.isPlaying;
 
-	console.log({
-		shouldShowProgress,
-		progress: !!progress,
-		sessionProgress: !!session.progress,
-		sessionIsPlaying: session.isPlaying,
-	});
-
 	const partString = hasPartInfo
 		? intl.formatMessage(
 				{

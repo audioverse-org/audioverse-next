@@ -64,13 +64,15 @@ export default function ButtonDownload({
 						</Link>
 					</MenuItem>
 				))}
-				<MenuItem disabled>
-					<FormattedMessage
-						id={'molecule-buttonDownload__menuVideoHeading'}
-						defaultMessage={'Video Downloads'}
-						description={'download button menu video heading'}
-					/>
-				</MenuItem>
+				{videoDownloads.length > 0 && (
+					<MenuItem disabled>
+						<FormattedMessage
+							id={'molecule-buttonDownload__menuVideoHeading'}
+							defaultMessage={'Video Downloads'}
+							description={'download button menu video heading'}
+						/>
+					</MenuItem>
+				)}
 				{videoDownloads.map((file) => (
 					<MenuItem key={file.url} onClick={handleClose}>
 						<Link href={file.url}>

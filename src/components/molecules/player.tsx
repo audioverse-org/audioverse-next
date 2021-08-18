@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import React, { CSSProperties } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
-import ButtonShare from '@components/molecules/buttonShare';
+import ButtonShareRecording from '@components/molecules/buttonShareRecording';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import { PlayerFragment } from '@lib/generated/graphql';
@@ -23,7 +23,16 @@ export interface PlayerProps {
 }
 
 const Player = ({ recording }: PlayerProps): JSX.Element => {
-	if (!recording) return <p>loading ...</p>;
+	if (!recording)
+		return (
+			<p>
+				<FormattedMessage
+					id={'molecule-player__loading'}
+					defaultMessage={'loading ...'}
+					description={'player loading message'}
+				/>
+			</p>
+		);
 
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -98,7 +107,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				<div>
 					<ButtonSpeed recording={recording} />
 					<ButtonDownload recording={recording} />
-					<ButtonShare recording={recording} />
+					<ButtonShareRecording recording={recording} />
 					<ButtonFavorite id={recording.id} />
 					{shouldShowVideoControls && (
 						<button

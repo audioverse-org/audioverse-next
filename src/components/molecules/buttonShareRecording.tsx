@@ -2,14 +2,14 @@ import { Menu } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ButtonShareFragment } from '@lib/generated/graphql';
+import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import IconShare from '../../../public/img/icon-share.svg';
 
-export default function ButtonShare({
+export default function ButtonShareRecording({
 	recording,
 }: {
-	recording: ButtonShareFragment;
+	recording: ButtonShareRecordingFragment;
 }): JSX.Element {
 	const intl = useIntl();
 	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
@@ -23,13 +23,14 @@ export default function ButtonShare({
 		setAnchorEl(null);
 	};
 
+	// TODO: Extract icon button maybe?
 	return (
 		<>
 			<button
 				aria-label={intl.formatMessage({
-					id: 'molecule-buttonShare__buttonLabel',
+					id: 'molecule-buttonShareRecording__buttonLabel',
 					defaultMessage: 'share',
-					description: 'share button label',
+					description: 'recording share button label',
 				})}
 				aria-controls={'shareMenu'}
 				onClick={handleClick}
@@ -45,24 +46,24 @@ export default function ButtonShare({
 			>
 				<h6>
 					<FormattedMessage
-						id="sermonDetailPage__shareTitle"
+						id="molecule-buttonShareRecording__shareTitle"
 						defaultMessage="Share"
-						description="Sermon detail share section title"
+						description="recording share button section title"
 					/>
 				</h6>
 				<h6>
 					<FormattedMessage
-						id="sermonDetailPage__shortUrlLabel"
+						id="molecule-buttonShareRecording__shortUrlLabel"
 						defaultMessage="Short URL"
-						description="Sermon detail short url label"
+						description="recording share button url label"
 					/>
 				</h6>
 				<p>{recording.shareUrl}</p>
 				<label>
 					<FormattedMessage
-						id="sermonDetailPage__embedCodeLabel"
+						id="molecule-buttonShareRecording__embedCodeLabel"
 						defaultMessage="Embed Code"
-						description="Sermon detail embed code label"
+						description="recording share button embed code label"
 					/>{' '}
 					<input readOnly={true} value={embedCode} />
 				</label>

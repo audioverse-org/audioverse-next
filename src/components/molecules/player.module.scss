@@ -31,7 +31,7 @@
 .waves {
 	flex-grow: 1;
 	position: relative;
-	background-image: url('/img/waves.svg');
+	background-image: url('/img/waves-gray.svg');
 	height: 50px;
 	input {
 		position: absolute;
@@ -53,12 +53,12 @@
 		display: block;
 		position: absolute;
 		top: 0;
-		right: 0;
+		left: 0;
 		bottom: 0;
-		width: calc(100% - var(--progress, 0%));
+		width: var(--progress, 0%);
 		z-index: 100;
-		backdrop-filter: grayscale(100%);
-		background-color: rgba(255, 255, 255, 0.85);
+		background-color: white;
+		background-image: url('/img/waves.svg');
 		pointer-events: none;
 	}
 }

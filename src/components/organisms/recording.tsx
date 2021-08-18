@@ -1,4 +1,3 @@
-import { Button } from '@material-ui/core';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -7,37 +6,21 @@ import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import Player from '@components/molecules/player';
+import SequenceNav from '@components/molecules/sequenceNav';
 import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
-import {
-	makeConferenceRoute,
-	makeSeriesDetailRoute,
-	makeSermonRoute,
-} from '@lib/routes';
+import { makeConferenceRoute, makeSeriesDetailRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
-import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
-}
-
-function getSiblingByIndexOffset(recording: RecordingFragment, offset: number) {
-	const nodes = recording.sequence?.recordings?.nodes;
-
-	if (!nodes || recording.sequenceIndex === null) return;
-
-	const zeroBasedIndex = recording.sequenceIndex - 1;
-	const targetIndex = zeroBasedIndex + offset;
-
-	return nodes[targetIndex];
 }
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
@@ -54,8 +37,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		day: 'numeric',
 		year: 'numeric',
 	});
-	const previousRecording = getSiblingByIndexOffset(recording, -1);
-	const nextRecording = getSiblingByIndexOffset(recording, 1);
+	const index = recording.sequenceIndex;
 	const seriesItems = recording?.sequence?.recordings?.nodes;
 	const seriesDetailRoute = recording.sequence
 		? makeSeriesDetailRoute(langRoute, recording.sequence.id)
@@ -80,9 +62,14 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			<div className={styles.content}>
 				<div>
 					<div className={styles.meta}>
-						{recording.sequenceIndex && (
+						{index && (
 							<span className={styles.part}>
-								Part {recording.sequenceIndex}
+								<FormattedMessage
+									id={'organism-recording__partInfo'}
+									defaultMessage={'Part {index}'}
+									description={'recording part info'}
+									values={{ index }}
+								/>
 							</span>
 						)}
 						<h1>{recording.title}</h1>
@@ -94,40 +81,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							))}
 						</ul>
 					</div>
-					<MediaFormatSwitcher recording={recording} />
-					<div className={styles.sequenceNav}>
-						{previousRecording && (
-							<Link
-								href={makeSermonRoute(langRoute, previousRecording.id)}
-								passHref
-							>
-								<Button
-									aria-label={'Previous'}
-									className={styles.previous}
-									variant={'outlined'}
-									startIcon={<ArrowLeft />}
-								>
-									Previous
-								</Button>
-							</Link>
-						)}
-						{nextRecording && (
-							<Link
-								href={makeSermonRoute(langRoute, nextRecording.id)}
-								passHref
-							>
-								<Button
-									aria-label={'Next'}
-									className={styles.next}
-									variant={'outlined'}
-									endIcon={<ArrowRight />}
-								>
-									Next
-								</Button>
-							</Link>
-						)}
-					</div>
 
+					<MediaFormatSwitcher recording={recording} />
+					<SequenceNav recording={recording} />
 					<Player recording={recording} />
 
 					<div
@@ -228,8 +184,21 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				{/*TODO: use ul > li*/}
 
 				{seriesItems && (
-					<div className={styles.series} aria-label={'series list'}>
-						<LineHeading size={12}>Other Teachings in Series</LineHeading>
+					<div
+						className={styles.series}
+						aria-label={intl.formatMessage({
+							id: 'organism-recording__seriesListLabel',
+							defaultMessage: 'series list',
+							description: 'recording series list label',
+						})}
+					>
+						<LineHeading size={12}>
+							<FormattedMessage
+								id={'organism-recording__seriesListTitle'}
+								defaultMessage={'Other Teachings in Series'}
+								description={'recording series list title'}
+							/>
+						</LineHeading>
 						{seriesItems.map((r) => (
 							<div className={styles.item} key={r.id}>
 								<TeaseRecording recording={r} />

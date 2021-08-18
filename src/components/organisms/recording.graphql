@@ -35,7 +35,6 @@ fragment recording on Recording {
 		title
 		recordings(first: 1000) {
 			nodes {
-				id
 				...teaseRecording
 			}
 		}
@@ -44,11 +43,11 @@ fragment recording on Recording {
 		id
 		title
 	}
-	sequenceIndex
 	transcript {
 		text
 	}
 	shareUrl
+	...sequenceNav
 	...copyrightInfo
 	...player
 }
