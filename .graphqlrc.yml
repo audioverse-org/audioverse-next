@@ -16,3 +16,6 @@ generates:
         DateTime: 'string'
         RelativeDateTime: 'string'
         URL: 'string'
+hooks:
+  afterAllFileWrite:
+    - prettier --write
