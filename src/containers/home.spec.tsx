@@ -84,7 +84,7 @@ const post = {
 	publishDate: '2019-12-03T09:54:33Z',
 	title: 'the_post_title',
 	teaser: 'the_post_teaser',
-	canonicalUrl: 'the_post_url',
+	canonicalPath: 'the_post_path',
 	readingDuration: 9 * 60,
 };
 
@@ -284,7 +284,7 @@ describe('home page', () => {
 	it('renders read time', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('9m')).toBeInTheDocument();
+		expect(getByText('9m read')).toBeInTheDocument();
 	});
 
 	it('renders post image', async () => {
@@ -301,7 +301,7 @@ describe('home page', () => {
 
 		expect(getByText('the_post_title')).toHaveAttribute(
 			'href',
-			'/the_post_url'
+			'/the_post_path'
 		);
 	});
 });

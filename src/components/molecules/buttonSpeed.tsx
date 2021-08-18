@@ -18,7 +18,7 @@ export default function ButtonSpeed({
 		<button
 			className={styles.button}
 			onClick={() => {
-				const newSpeed = speeds.find((s) => s > (speed || 0)) || 1;
+				const newSpeed = speeds.find((s) => s > (speed || 0)) || speeds[0];
 				setSpeed(newSpeed);
 			}}
 		>

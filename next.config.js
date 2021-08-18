@@ -20,6 +20,11 @@ module.exports = withPWA({
 				destination: '/:lang/sermons/all/page/1',
 				permanent: true,
 			},
+			{
+				source: '/:lang/blog/:id/:slug',
+				destination: '/:lang/blog/:id',
+				permanent: true,
+			},
 		];
 	},
 	webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

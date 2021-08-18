@@ -44,7 +44,7 @@ jobs:
       - name: Build
         run: npm run build:dev
       - name: Run Lighthouse
-        # remove `|| true` when we're ready to get serious about lighthouse errors
+        # TODO: remove `|| true` when we're ready to get serious about lighthouse errors
         run: npm run lighthouse || true
   test:
     runs-on: ubuntu-latest
@@ -59,4 +59,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: npm test
+        run: npm run test:strict

@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import ProgressBar from '@components/atoms/progressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
@@ -20,7 +21,12 @@ export default function TeaseRecording({
 	return (
 		<div className={styles.base}>
 			<div className={styles.part}>
-				Part {index} of {count}
+				<FormattedMessage
+					id={'molecule-teaseRecording__partInfo'}
+					defaultMessage={'Part {index} of {count}'}
+					description={'recording tease part info'}
+					values={{ index, count }}
+				/>
 			</div>
 			<div className={styles.title}>
 				<h4>{recording.title}</h4>
