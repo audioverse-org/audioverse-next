@@ -9,6 +9,14 @@ query getSponsorDetailPageData($id: ID!) {
 		imageWithFallback {
 			url(size: 100)
 		}
+		collections(first: 6, orderBy: [{ field: CREATED_AT, direction: DESC }]) {
+			aggregate {
+				count
+			}
+			nodes {
+				...cardCollection
+			}
+		}
 	}
 }
 

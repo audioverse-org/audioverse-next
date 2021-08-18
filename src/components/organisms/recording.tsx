@@ -28,16 +28,15 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const speakers = recording?.persons || [];
 	const { sponsor } = recording;
-	const recordingDateString = new Date(recording.recordingDate).toLocaleString(
-		[],
-		{
-			hour: 'numeric',
-			minute: 'numeric',
-			month: 'long',
-			day: 'numeric',
-			year: 'numeric',
-		}
-	);
+	const recordingDateString = new Date(
+		recording.recordingDate || ''
+	).toLocaleString([], {
+		hour: 'numeric',
+		minute: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+	});
 	const index = recording.sequenceIndex;
 	const seriesItems = recording?.sequence?.recordings?.nodes;
 	const seriesDetailRoute = recording.sequence

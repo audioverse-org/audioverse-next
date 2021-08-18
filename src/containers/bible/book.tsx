@@ -25,7 +25,7 @@ function Book({ data }: BookProps): JSX.Element {
 	const recording: Partial<PlayerFragment> = {
 		audioFiles: [
 			{
-				url: chapter?.url,
+				url: chapter?.url || '',
 				mimeType: 'audio/mpeg',
 				filesize: 'unknown',
 			},
@@ -79,7 +79,7 @@ function Book({ data }: BookProps): JSX.Element {
 					description="Bible book detail page downloads tab title"
 				/>
 			</h3>
-			<Link href={chapter?.url}>
+			<Link href={chapter?.url || ''}>
 				<a>
 					<FormattedMessage
 						id="bibleBook__mp3Label"
