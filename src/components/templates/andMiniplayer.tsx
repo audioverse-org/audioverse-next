@@ -120,7 +120,7 @@ export default function AndMiniplayer({
 	children,
 }: AndMiniplayerProps): JSX.Element {
 	const onVideo = useCallback((el) => setVideoEl(el), []);
-	const [videoEl, setVideoEl] = useState();
+	const [videoEl, setVideoEl] = useState<any>();
 
 	const videoRef = useRef<HTMLDivElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
