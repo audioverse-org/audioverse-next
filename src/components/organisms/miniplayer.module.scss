@@ -1,7 +1,15 @@
 @import '../../styles/common';
 
 .miniplayer {
-	flex: 0 0 90px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-overflow-scrolling: touch;
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	height: $miniplayer-height;
 	min-height: 0;
 	background-color: white;
 	display: flex;

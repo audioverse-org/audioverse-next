@@ -10,14 +10,14 @@
 .imageContainer {
 	position: relative;
 	width: 100%;
-	height: calc((100vw - 200px) * 0.4533);
+	height: calc((100vw - #{$sidebar-width}) * 0.4533);
 	max-height: 465px;
 }
 
 .row {
 	display: flex;
 	flex-direction: column;
-	@media (min-width: $breakpoint-md) {
+	@media (min-width: $breakpoint-lg) {
 		flex-direction: row;
 		align-items: stretch;
 	}
@@ -73,7 +73,7 @@
 
 	border-left: 1px solid $ts-cream;
 
-	@media (min-width: $breakpoint-md) {
+	@media (min-width: $breakpoint-lg) {
 		flex: 0 0 33%;
 	}
 }
