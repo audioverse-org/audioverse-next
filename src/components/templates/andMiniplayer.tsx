@@ -312,33 +312,31 @@ export default function AndMiniplayer({
 	}, [player]);
 
 	return (
-		<div className={styles.base}>
-			<PlaybackContext.Provider value={playback}>
-				<div ref={originRef} className={styles.videoOrigin}>
-					<div ref={videoRef} className={styles.playerElement}>
-						<div data-vjs-player={true}>
-							<video
-								ref={onVideo}
-								className="video-js"
-								playsInline
-								data-testid={'video-element'}
-								onTimeUpdate={() => {
-									if (!player) return;
-									const t = player.currentTime();
-									const d = player.duration();
-									const p = d ? t / d : 0;
-									setProgress(p);
-								}}
-								onPause={() => setIsPaused(true)}
-								onPlay={() => setIsPaused(false)}
-							/>
-						</div>
+		<PlaybackContext.Provider value={playback}>
+			<div ref={originRef} className={styles.videoOrigin}>
+				<div ref={videoRef} className={styles.playerElement}>
+					<div data-vjs-player={true}>
+						<video
+							ref={onVideo}
+							className="video-js"
+							playsInline
+							data-testid={'video-element'}
+							onTimeUpdate={() => {
+								if (!player) return;
+								const t = player.currentTime();
+								const d = player.duration();
+								const p = d ? t / d : 0;
+								setProgress(p);
+							}}
+							onPause={() => setIsPaused(true)}
+							onPlay={() => setIsPaused(false)}
+						/>
 					</div>
 				</div>
+			</div>
 
-				<div className={styles.content}>{children}</div>
-				<Miniplayer />
-			</PlaybackContext.Provider>
-		</div>
+			<div className={recording && styles.contentWithPlayer}>{children}</div>
+			{recording && <Miniplayer />}
+		</PlaybackContext.Provider>
 	);
 }

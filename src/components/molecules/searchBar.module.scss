@@ -2,14 +2,34 @@
 
 .base {
 	display: flex;
-	align-items: center;
 	margin-bottom: 24px;
 	border-bottom: 0.5px solid $ts-lightTone;
+	font-family: $serif;
 	font-size: 22px;
 	font-weight: 400;
-	font-family: IvyJournal, serif;
+	line-height: 33px;
 	color: $ts-dark;
-	svg {
-		margin-right: 16px;
+	letter-spacing: unset;
+	> * {
+		flex-grow: 1;
+	}
+	input {
+		font-family: $serif;
+		font-size: 22px;
+		line-height: 33px;
+		color: $ts-dark;
+		&::placeholder {
+			opacity: 1;
+		}
+	}
+	a {
+		height: 24px;
+		cursor: pointer;
+	}
+}
+
+@media (min-width: $breakpoint-lg) {
+	.clearHidden.clearHidden {
+		display: none;
 	}
 }

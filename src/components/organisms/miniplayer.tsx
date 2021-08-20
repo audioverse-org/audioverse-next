@@ -21,7 +21,6 @@ export default function Miniplayer(): JSX.Element | null {
 	const timeString = useFormattedTime(playback.getTime());
 	const durationString = useFormattedTime(playback.getDuration());
 
-	// TODO: Move this guard into andMiniplayer
 	if (!recording) return null;
 
 	return (

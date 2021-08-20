@@ -10,7 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import withIntl from '@components/HOCs/withIntl';
 import 'react-toastify/dist/ReactToastify.css';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndSidebar from '@components/templates/andSidebar';
+import AndNavigation from '@components/templates/andNavigation';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -48,6 +48,10 @@ function Base<P>({
 			<React.StrictMode>
 				<Head>
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
+					<meta
+						name="viewport"
+						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0"
+					></meta>
 				</Head>
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
@@ -56,9 +60,9 @@ function Base<P>({
 								<Component {...pageProps} />
 							) : (
 								<AndMiniplayer>
-									<AndSidebar>
+									<AndNavigation>
 										<Component {...pageProps} />
-									</AndSidebar>
+									</AndNavigation>
 								</AndMiniplayer>
 							)}
 						</Hydrate>

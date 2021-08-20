@@ -16,6 +16,7 @@ import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
+import Navigation from '@components/organisms/navigation';
 import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
 import Register from '@containers/account/register';
@@ -258,6 +259,14 @@ describe('localization usage', () => {
 		const screen = await renderWithQueryProvider(<Header />);
 
 		expectNoUnlocalizedText(screen, ['AudioVerse']);
+	});
+
+	it('localizes navigation', async () => {
+		const screen = await renderWithQueryProvider(
+			<Navigation onExit={() => void 0} />
+		);
+
+		expectNoUnlocalizedText(screen);
 	});
 
 	it('localizes Bible book page', async () => {
