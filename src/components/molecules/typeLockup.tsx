@@ -1,16 +1,17 @@
 import React from 'react';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import Heading6 from '@components/atoms/heading6';
 
-import styles from './typeLockup.module.scss';
+import baseColorStyles from '../atoms/baseColors.module.scss';
 
-// TODO: move to global named colors
+import styles from './typeLockup.module.scss';
 
 type Props = {
 	Icon: React.ElementType;
 	label: string;
-	iconColor: 'red' | 'salmon';
-	textColor: 'dark' | 'white';
+	iconColor: BaseColors.RED | BaseColors.SALMON;
+	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
 };
 
 export default function TypeLockup({
@@ -21,13 +22,13 @@ export default function TypeLockup({
 }: Props): JSX.Element {
 	return (
 		<div className={styles.container}>
-			<Icon className={iconColor === 'salmon' ? styles.salmon : styles.red} />
+			<Icon className={baseColorStyles[iconColor]} />
 			<Heading6
 				sans
 				loose
 				unpadded
 				uppercase
-				className={textColor === 'white' ? styles.white : styles.dark}
+				className={baseColorStyles[textColor]}
 			>
 				{label}
 			</Heading6>

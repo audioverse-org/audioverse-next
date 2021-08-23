@@ -2,12 +2,13 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
-import CardCollection from '@components/molecules/cardCollection';
+import CardCollection from '@components/molecules/card/collection';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -41,13 +42,19 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
 		details.push({
-			term: 'Description',
+			term: intl.formatMessage({
+				id: `sponsorDetail__descriptionLabel`,
+				defaultMessage: 'Description',
+			}),
 			definition: <div dangerouslySetInnerHTML={{ __html: description }} />,
 		});
 	}
 	if (website) {
 		details.push({
-			term: 'Website',
+			term: intl.formatMessage({
+				id: `sponsorDetail__websiteLabel`,
+				defaultMessage: 'Website',
+			}),
 			definition: (
 				<Link href={website}>
 					<a target="_blank" rel="nofollow noreferrer">
@@ -59,7 +66,10 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 	}
 	if (location) {
 		details.push({
-			term: 'Location',
+			term: intl.formatMessage({
+				id: `sponsorDetail__locationLabel`,
+				defaultMessage: 'Location',
+			}),
 			definition: <div>{location}</div>,
 		});
 	}
@@ -74,8 +84,8 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 						defaultMessage: 'Sponsor',
 						description: `Sponsor Detail type label`,
 					})}
-					iconColor="salmon"
-					textColor="dark"
+					iconColor={BaseColors.SALMON}
+					textColor={BaseColors.DARK}
 				/>
 				<div className={styles.titleLockup}>
 					{image && (
@@ -101,7 +111,7 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 					<LikeIcon />
 				</div>
 				<HorizontalRule color="midTone" />
-				<DefinitionList terms={details} />
+				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</TeaseHeader>
 			{collections.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>

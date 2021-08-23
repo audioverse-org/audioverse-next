@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import CardSermon from '@components/molecules/cardSermon';
+import CardSermon from '@components/molecules/card/sermon';
 import Slider from '@components/organisms/slider';
 import { buildRenderer } from '@lib/test/helpers';
 

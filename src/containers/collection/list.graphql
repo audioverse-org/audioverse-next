@@ -1,0 +1,30 @@
+# TODO: Set sort method
+query getCollectionListPageData(
+	$language: Language!
+	$offset: Int
+	$first: Int
+) {
+	collections(language: $language, offset: $offset, first: $first) {
+		nodes {
+			id
+			title
+			imageWithFallback {
+				url(size: 100)
+			}
+			sponsor {
+				title
+			}
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getCollectionListPathsData($language: Language!) {
+	collections(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

@@ -1,5 +1,25 @@
 @import '../../styles/common';
 
+.white {
+	color: $ts-white;
+}
+
+.dark {
+	color: $ts-dark;
+}
+
+.salmon {
+	color: $ts-salmon;
+}
+
+.red {
+	color: $ts-red;
+}
+
+.lightTone {
+	color: $ts-lightTone;
+}
+
 .borderColor-lightTone {
 	border-color: $ts-lightTone;
 }

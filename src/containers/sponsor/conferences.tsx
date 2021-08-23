@@ -6,7 +6,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
 import {
-	makeConferenceRoute,
+	makeCollectionRoute,
 	makeSponsorConferencesRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
@@ -35,7 +35,7 @@ function SponsorConferences({ nodes, data, pagination }: Props): JSX.Element {
 			</h2>
 			<TableList
 				nodes={nodes}
-				makeEntryRoute={(l, n) => makeConferenceRoute(l, n.id)}
+				makeEntryRoute={(l, n) => makeCollectionRoute(l, n.id)}
 			/>
 			<Pagination
 				makeRoute={(l, i) => makeSponsorConferencesRoute(l, id, i)}

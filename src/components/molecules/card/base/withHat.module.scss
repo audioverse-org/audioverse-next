@@ -1,0 +1,127 @@
+@import '../../../../styles/common';
+
+.hat {
+	background-color: var(--hatBg, #efebeb);
+	color: var(--hatColor, $ts-dark);
+	padding: 16px;
+	width: 100%;
+	font-size: 0.9em;
+	display: flex !important;
+	align-items: center;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+}
+
+.hatIcon {
+	margin-right: 4px;
+	color: var(--iconColor, #ff224a);
+	display: flex;
+}
+
+.hatTitle {
+	flex-grow: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.hatCarrot {
+	margin-left: 4px;
+	flex: 0 0 auto;
+	svg {
+		width: 16px;
+		height: auto;
+	}
+}
+
+.hero {
+	width: 100%;
+	object-fit: cover;
+	aspect-ratio: 500/260;
+	height: auto;
+}
+
+.title {
+	margin-top: 0;
+	margin-bottom: 16px;
+	a {
+		text-decoration: none;
+	}
+}
+
+.content {
+	padding: 16px;
+	color: var(--cardColor, #6b7680);
+}
+
+.part {
+	font-size: 10.5px;
+	font-weight: 600;
+	line-height: 13px;
+	color: var(--partColor, #ff224a);
+}
+
+.heading {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	color: var(--headingColor, $ts-dark);
+
+	h1 {
+		font-size: 1.5em;
+		margin: 0 0 0.5em 0;
+		flex-grow: 1;
+	}
+
+	svg {
+		flex: 0 0 auto;
+	}
+
+	path {
+		stroke: var(--headingColor, $ts-dark);
+		fill: none;
+	}
+}
+
+.chapter {
+	--hatBg: black;
+	--hatColor: white;
+	background: #f1f2f4;
+}
+
+.sermon {
+	// base
+}
+
+.song {
+	--hatBg: #d7ebfb;
+	--hatColor: #{$ts-dark};
+	background: #ebf2f9;
+	--cardColor: #{$ts-midTone};
+	--headingColor: #{$ts-dark};
+	--progressColor: #{$ts-red};
+	--partColor: #{$ts-red};
+	--iconColor: #{$ts-red};
+}
+
+.story {
+	--hatBg: #003849;
+	--hatColor: white;
+	background: #325763;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
+}
+
+.topic {
+	--hatBg: #040253;
+	--hatColor: white;
+	background: #3e3d6d;
+	--cardColor: #{$ts-lightTone};
+	--headingColor: white;
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
+}

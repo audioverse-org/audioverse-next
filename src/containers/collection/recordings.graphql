@@ -1,0 +1,21 @@
+query getCollectionRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
+	collection(id: $id) {
+		id
+		title
+		startDate
+		endDate
+		sponsor {
+			id
+			title
+		}
+		recordings(offset: $offset, first: $first) {
+			nodes {
+				...recordingList
+				...writeFeedFile
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}

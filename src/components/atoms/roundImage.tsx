@@ -6,22 +6,25 @@ import styles from './roundImage.module.scss';
 
 type Props = {
 	image: any;
+	small?: boolean;
 	alt?: string;
 	className?: string;
 };
 
 export default function RoundImage({
 	image,
+	small,
 	alt,
 	className,
 }: Props): JSX.Element {
+	const size = small ? 24 : 32;
 	return (
 		<Image
 			alt={alt}
 			src={image}
-			width={32}
-			height={32}
-			className={clsx(styles.base, className)}
+			width={size}
+			height={size}
+			className={clsx(styles.base, small && styles.small, className)}
 		/>
 	);
 }

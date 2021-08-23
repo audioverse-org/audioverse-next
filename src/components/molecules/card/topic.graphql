@@ -1,0 +1,10 @@
+fragment cardTopic on Recording {
+	title
+	duration
+	persons {
+		...speakerName
+	}
+	# TODO: viewerProgress
+	# TODO: viewerHasFavorited
+	...cardWithPlayable
+}

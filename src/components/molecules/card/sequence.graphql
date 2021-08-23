@@ -1,0 +1,27 @@
+fragment cardSequence on Sequence {
+	id
+	title
+	canonicalPath
+	contentType
+	duration
+	description
+	summary
+	persons(role: SPEAKER, orderBy: [{ field: NAME, direction: ASC }]) {
+		nodes {
+			# TODO: ...PersonLockup
+			id
+			name
+		}
+	}
+	recordings(first: 3) {
+		aggregate {
+			count
+		}
+		# edges {
+		# 	cursor
+		# 	node {
+		# 		...RecordingCard
+		# 	}
+		# }
+	}
+}

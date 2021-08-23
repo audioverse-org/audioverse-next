@@ -12,7 +12,7 @@ import SponsorInfo from '@components/molecules/sponsorInfo';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
-import { makeConferenceRoute, makeSeriesDetailRoute } from '@lib/routes';
+import { makeCollectionRoute, makeSeriesDetailRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
@@ -136,7 +136,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								</h6>
 								<p>
 									<Link
-										href={makeConferenceRoute(
+										href={makeCollectionRoute(
 											langRoute,
 											recording.collection.id
 										)}

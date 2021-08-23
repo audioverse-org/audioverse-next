@@ -16,6 +16,11 @@ module.exports = withPWA({
 				permanent: false,
 			},
 			{
+				source: '/:lang/sermons/conferences/:id/:slug',
+				destination: '/:lang/collections/:id/:slug',
+				permanent: true,
+			},
+			{
 				source: '/:lang/sermons',
 				destination: '/:lang/sermons/all/page/1',
 				permanent: true,

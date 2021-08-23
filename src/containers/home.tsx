@@ -7,12 +7,12 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import CardBibleChapter from '@components/molecules/cardBibleChapter';
-import CardPost from '@components/molecules/cardPost';
-import CardSermon from '@components/molecules/cardSermon';
-import CardSong from '@components/molecules/cardSong';
-import CardStory from '@components/molecules/cardStory';
-import CardTopic from '@components/molecules/cardTopic';
+import CardBibleChapter from '@components/molecules/card/bibleChapter';
+import CardPost from '@components/molecules/card/post';
+import CardSermon from '@components/molecules/card/sermon';
+import CardSong from '@components/molecules/card/song';
+import CardStory from '@components/molecules/card/story';
+import CardTopic from '@components/molecules/card/topic';
 import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
