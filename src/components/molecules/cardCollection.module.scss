@@ -1,6 +1,8 @@
 @import '../../styles/common';
 
 .container {
+	display: flex;
+	flex-direction: column;
 	padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
@@ -21,6 +23,7 @@
 
 .title {
 	margin-bottom: 8px;
+	flex-grow: 1;
 }
 
 .sequencesLabel,

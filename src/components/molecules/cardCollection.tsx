@@ -68,7 +68,13 @@ export default function CardCollection({
 						<a>{title}</a>
 					</Link>
 				</Heading2>
-				<Heading6 sans unpadded uppercase className={styles.sequencesLabel}>
+				<Heading6
+					sans
+					unpadded
+					uppercase
+					loose
+					className={styles.sequencesLabel}
+				>
 					<FormattedMessage
 						id="cardCollection_sequenceLabel"
 						defaultMessage="{count} series"

@@ -1,10 +1,7 @@
 @import '../../styles/common';
 
 .container {
-	max-width: 1027px;
 	background: $ts-lightTone;
-	border-radius: 24px;
-	overflow: hidden;
 	padding: 16px 24px;
 }
 
@@ -22,9 +19,18 @@
 	color: $ts-midTone;
 }
 
-.cardSet {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 24px;
+.cardGroup {
 	margin-bottom: 24px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	> *:first-child {
+		flex-grow: 1;
+	}
+	svg {
+		margin-left: 16px;
+	}
 }

@@ -8,13 +8,18 @@ import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardCollection from '@components/molecules/cardCollection';
+import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
+import Tease from '@components/molecules/tease';
+import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]';
 
 import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
+import LikeIcon from '../../../public/img/icon-like-active.svg';
+import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -60,47 +65,55 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 	}
 
 	return (
-		<div className={styles.container}>
-			<TypeLockup
-				Icon={UserPlusIcon}
-				label={intl.formatMessage({
-					id: `sponsorDetail__type`,
-					defaultMessage: 'Sponsor',
-					description: `Sponsor Detail type label`,
-				})}
-				iconColor="salmon"
-				textColor="dark"
-			/>
-			<div className={styles.titleLockup}>
-				{image && (
-					<div className={styles.logo}>
-						<RoundImage image={image} alt={title} />
-					</div>
-				)}
-				<Heading2 sans unpadded>
-					{title}
-				</Heading2>
-			</div>
-			<Heading6 sans loose uppercase className={styles.countLabel}>
-				<FormattedMessage
-					id="sponsorDetail__collectionCountLabel"
-					defaultMessage="{count} Conferences"
-					description="Sponsor Detail collection count label"
-					values={{ count: collections.aggregate?.count }}
+		<Tease className={styles.container}>
+			<TeaseHeader>
+				<TypeLockup
+					Icon={UserPlusIcon}
+					label={intl.formatMessage({
+						id: `sponsorDetail__type`,
+						defaultMessage: 'Sponsor',
+						description: `Sponsor Detail type label`,
+					})}
+					iconColor="salmon"
+					textColor="dark"
 				/>
-			</Heading6>
-			<HorizontalRule color="midTone" />
-			<DefinitionList terms={details} />
-			{collections.nodes?.length ? (
-				<div className={styles.cardSet}>
-					{collections.nodes?.map((collection) => (
-						<div key={collection.canonicalPath}>
-							<CardCollection collection={collection} />
+				<div className={styles.titleLockup}>
+					{image && (
+						<div className={styles.logo}>
+							<RoundImage image={image} alt={title} />
 						</div>
-					))}
+					)}
+					<Heading2 sans unpadded>
+						{title}
+					</Heading2>
 				</div>
+				<div className={styles.row}>
+					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
+						<FormattedMessage
+							id="sponsorDetail__collectionCountLabel"
+							defaultMessage="{count} Conferences"
+							description="Sponsor Detail collection count label"
+							values={{ count: collections.aggregate?.count }}
+						/>
+					</Heading6>
+					{/* TODO: make icons functional */}
+					<ShareIcon />
+					<LikeIcon />
+				</div>
+				<HorizontalRule color="midTone" />
+				<DefinitionList terms={details} />
+			</TeaseHeader>
+			{collections.nodes?.length ? (
+				<CardGroup className={styles.cardGroup}>
+					{collections.nodes.map((collection) => (
+						<CardCollection
+							collection={collection}
+							key={collection.canonicalPath}
+						/>
+					))}
+				</CardGroup>
 			) : null}
-		</div>
+		</Tease>
 	);
 }
 
