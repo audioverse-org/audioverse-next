@@ -1,4 +1,3 @@
-import styles from '@components/molecules/cardHat.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
@@ -6,6 +5,8 @@ import React, { ReactNode } from 'react';
 import Icon from '@components/atoms/icon';
 
 import Card from '../';
+
+import styles from './withHat.module.scss';
 
 export type CardTheme =
 	| 'collection'

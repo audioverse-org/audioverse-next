@@ -3,7 +3,7 @@ import React from 'react';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardBibleChapterFragment } from '@lib/generated/graphql';
 
-import BibleIcon from '../../../public/img/icon-bible-solid.svg';
+import BibleIcon from '../../../../public/img/icon-bible-solid.svg';
 
 interface CardBibleChapterProps {
 	chapter: CardBibleChapterFragment;

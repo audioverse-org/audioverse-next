@@ -5,7 +5,7 @@ import { CardSermonFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
+import ListIcon from '../../../../public/img/icon-list-alt-solid.svg';
 
 // TODO:
 // Only show top hat of container exists

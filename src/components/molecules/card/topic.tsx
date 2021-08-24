@@ -3,7 +3,7 @@ import React from 'react';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardTopicFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../public/img/icon-layer-group-solid.svg';
+import HatIcon from '../../../../public/img/icon-layer-group-solid.svg';
 
 interface CardTopicProps {
 	topicRecording: CardTopicFragment;

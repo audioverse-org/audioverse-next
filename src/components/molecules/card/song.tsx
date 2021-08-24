@@ -3,7 +3,7 @@ import React from 'react';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardSongFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../public/img/icon-music-solid.svg';
+import HatIcon from '../../../../public/img/icon-music-solid.svg';
 
 interface CardSongProps {
 	song: CardSongFragment;

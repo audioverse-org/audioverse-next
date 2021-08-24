@@ -3,7 +3,7 @@ import React from 'react';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardStoryFragment } from '@lib/generated/graphql';
 
-import FeatherIcon from '../../../public/img/icon-feather-solid.svg';
+import FeatherIcon from '../../../../public/img/icon-feather-solid.svg';
 
 interface CardStoryProps {
 	story: CardStoryFragment;

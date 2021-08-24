@@ -139,8 +139,7 @@ export const makeConferenceRecordingsRoute = (
 	languageRoute: string,
 	conferenceId: string,
 	page: number | string = 1
-): string =>
-	`/${languageRoute}/collection/${conferenceId}/recordings/page/${page}`;
+): string => `/${languageRoute}/collections/${conferenceId}/page/${page}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,
