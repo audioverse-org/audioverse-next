@@ -5,7 +5,7 @@ import {
 	GetCollectionDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-import writeFeedFile from '@lib/writeFeedFile';
+// import writeFeedFile from '@lib/writeFeedFile';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -30,12 +30,25 @@ function loadData() {
 				sponsor: {
 					id: 'the_sponsor_id',
 					title: 'the_sponsor_title',
+					canonicalPath: 'the_sponsor_path',
+					imageWithFallback: {
+						url: 'the_sponsor_image_url',
+					},
 				},
 				sequences: {
+					aggregate: {
+						count: 1,
+					},
 					nodes: [
 						{
 							id: 'the_sequence_id',
 							title: 'the_sequence_title',
+							canonicalPath: 'the_sequence_path',
+							recordings: {
+								aggregate: {
+									count: 1,
+								},
+							},
 						},
 					],
 				},
@@ -81,30 +94,30 @@ describe('collection detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/conferences/the_collection_id/page/1');
+		expect(paths).toContain('/en/collections/the_collection_id');
 	});
 
 	it('renders sponsor link', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_sponsor_title')).toHaveAttribute(
+		expect(getAllByText('the_sponsor_title')[1]).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id'
+			'/the_sponsor_path'
 		);
 	});
 
-	it('renders pagination', async () => {
-		loadData();
+	// it('renders pagination', async () => {
+	// 	loadData();
 
-		const { getByText } = await renderPage();
+	// 	const { getByText } = await renderPage();
 
-		expect(getByText('1')).toHaveAttribute(
-			'href',
-			'/en/conferences/the_collection_id/page/1'
-		);
-	});
+	// 	expect(getByText('1')).toHaveAttribute(
+	// 		'href',
+	// 		'/en/conferences/the_collection_id/page/1'
+	// 	);
+	// });
 
 	it('renders 404', async () => {
 		when(mockedFetchApi)
@@ -121,31 +134,32 @@ describe('collection detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('2007-12-19 — 2007-12-23')).toBeInTheDocument();
+		expect(getByText('Dec 19 – 23, 2007')).toBeInTheDocument();
 	});
 
-	it('creates RSS feed', async () => {
-		loadData();
+	// TODO:
+	// it('creates RSS feed', async () => {
+	// 	loadData();
 
-		await getStaticProps({
-			params: { language: 'en', id: 'the_collection_id', i: '1' },
-		});
+	// 	await getStaticProps({
+	// 		params: { language: 'en', id: 'the_collection_id', i: '1' },
+	// 	});
 
-		expect(writeFeedFile).toBeCalledWith({
-			recordings: expect.any(Array),
-			projectRelativePath: 'public/en/conferences/the_collection_id.xml',
-			title: 'the_collection_title : AudioVerse',
-		});
-	});
+	// 	expect(writeFeedFile).toBeCalledWith({
+	// 		recordings: expect.any(Array),
+	// 		projectRelativePath: 'public/en/conferences/the_collection_id.xml',
+	// 		title: 'the_collection_title : AudioVerse',
+	// 	});
+	// });
 
-	it('links to RSS feed', async () => {
-		loadData();
+	// it('links to RSS feed', async () => {
+	// 	loadData();
 
-		const { getByText } = await renderPage();
+	// 	const { getByText } = await renderPage();
 
-		expect(getByText('RSS')).toHaveAttribute(
-			'href',
-			'/en/conferences/the_collection_id.xml'
-		);
-	});
+	// 	expect(getByText('RSS')).toHaveAttribute(
+	// 		'href',
+	// 		'/en/conferences/the_collection_id.xml'
+	// 	);
+	// });
 });

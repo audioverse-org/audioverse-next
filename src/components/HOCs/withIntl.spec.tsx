@@ -383,7 +383,7 @@ describe('localization usage', () => {
 			<CollectionDetail
 				collection={{
 					id: '123',
-					title: 'Churches and Choice',
+					title: 'z',
 					description: '',
 					duration: 123.4,
 					image: null,
@@ -398,7 +398,7 @@ describe('localization usage', () => {
 					},
 					sponsor: {
 						id: '234',
-						title: 'Generation. Youth. Christ.',
+						title: 'z',
 						canonicalPath: '...',
 						imageWithFallback: {
 							url: '',

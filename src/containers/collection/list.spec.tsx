@@ -19,7 +19,7 @@ function loadData() {
 	when(mockedFetchApi)
 		.calledWith(GetCollectionListPageDataDocument, expect.anything())
 		.mockResolvedValue({
-			conferences: {
+			collections: {
 				nodes: [
 					{
 						id: 'the_conference_id',
@@ -69,7 +69,7 @@ describe('conference list page', () => {
 		when(mockedFetchApi)
 			.calledWith(GetCollectionListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
-				conferences: {
+				collections: {
 					aggregate: {
 						count: 1,
 					},
@@ -78,7 +78,7 @@ describe('conference list page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/conferences/page/1');
+		expect(paths).toContain('/en/collections/page/1');
 	});
 
 	it('displays sponsor titles', async () => {
@@ -96,7 +96,7 @@ describe('conference list page', () => {
 
 		expect(getByAltText('the_conference_title').parentElement).toHaveAttribute(
 			'href',
-			'/en/conferences/the_conference_id/page/1'
+			'/en/collections/the_conference_id'
 		);
 	});
 
