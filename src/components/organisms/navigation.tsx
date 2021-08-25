@@ -141,6 +141,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 						description={`Header nav donate button label`}
 					/>
 				}
+				className={styles.donateButton}
 			/>
 
 			<LoadingIndicator />
