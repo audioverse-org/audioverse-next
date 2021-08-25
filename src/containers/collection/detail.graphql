@@ -1,0 +1,37 @@
+query getCollectionDetailPageData($id: ID!) {
+	collection(id: $id) {
+		id
+		title
+		startDate
+		endDate
+		duration
+		description
+		location
+		viewerHasFavorited
+		image {
+			url(size: 1400)
+		}
+		sponsor {
+			id
+			title
+			canonicalPath
+			...sponsorLockup
+		}
+		sequences(first: 6) {
+			nodes {
+				...cardSequence
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}
+
+query getCollectionDetailPathsData($language: Language!, $first: Int) {
+	collections(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

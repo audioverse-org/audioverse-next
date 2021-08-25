@@ -155,7 +155,7 @@ describe('series detail page', () => {
 
 		expect(getByText('Conference: the_conference_title')).toHaveAttribute(
 			'href',
-			'/en/conferences/the_conference_id/page/1'
+			'/en/collections/the_conference_id'
 		);
 	});
 

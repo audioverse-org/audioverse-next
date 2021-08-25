@@ -7,7 +7,7 @@ import PageHeader from '@components/molecules/pageHeader';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import {
-	makeConferenceRoute,
+	makeCollectionRoute,
 	makeSeriesDetailRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
@@ -45,7 +45,7 @@ function SeriesDetail({ data, nodes, pagination, rssUrl }: Props) {
 			</p>
 			{conferenceId && (
 				<p>
-					<Link href={makeConferenceRoute(languageRoute, conferenceId)}>
+					<Link href={makeCollectionRoute(languageRoute, conferenceId)}>
 						<a>
 							<FormattedMessage
 								id={'seriesDetail__conferenceLinkPrefix'}

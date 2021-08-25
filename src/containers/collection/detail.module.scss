@@ -1,0 +1,58 @@
+@import '../../styles/common';
+
+.container {
+	background: $ts-dark;
+	padding: 16px 24px;
+}
+
+.image {
+	position: relative;
+	width: 100%;
+	height: 242px;
+}
+
+.date {
+	margin-top: 16px;
+	margin-bottom: 8px;
+	color: $ts-salmon;
+}
+
+.title {
+	margin-bottom: 8px;
+	color: $ts-white;
+}
+
+.countLabel,
+.duration {
+	color: $ts-lightTone;
+}
+.countLabel {
+	margin-top: 16px;
+	margin-bottom: 3.5px;
+}
+
+.cardGroup {
+	margin-bottom: 24px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	> *:first-child {
+		flex-grow: 1;
+	}
+	svg {
+		margin-left: 16px;
+	}
+}
+
+.share > * {
+	stroke: $ts-white;
+}
+.like > * {
+	fill: $ts-white;
+}
+.likeActive > * {
+	fill: $ts-salmon;
+}

@@ -1,0 +1,16 @@
+fragment cardStory on Recording {
+	title
+	duration
+	persons(role: SPEAKER) {
+		...speakerName
+	}
+	sequence {
+		title
+		recordings {
+			aggregate {
+				count
+			}
+		}
+	}
+	...cardWithPlayable
+}

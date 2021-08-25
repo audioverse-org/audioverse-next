@@ -2,7 +2,7 @@ import { Masonry } from 'masonic';
 import React from 'react';
 
 import LineHeading from '@components/atoms/lineHeading';
-import CardSermon from '@components/molecules/cardSermon';
+import CardSermon from '@components/molecules/card/sermon';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './discover.module.scss';

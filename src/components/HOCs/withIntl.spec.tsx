@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 import ButtonFavorite from '@components/molecules/buttonFavorite';
-import CardPlayable from '@components/molecules/cardPlayable';
+import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import Login from '@components/molecules/login';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -24,8 +24,8 @@ import Reset from '@containers/account/reset';
 import Audiobook from '@containers/audiobook/audiobook';
 import Audiobooks from '@containers/audiobook/audiobooks';
 import Book from '@containers/bible/book';
-import ConferenceDetail from '@containers/conference/detail';
-import ConferenceList from '@containers/conference/list';
+import CollectionDetail from '@containers/collection/detail';
+import CollectionList from '@containers/collection/list';
 import Home from '@containers/home';
 import Playlists from '@containers/playlist/list';
 import Presenter from '@containers/presenter/detail';
@@ -368,7 +368,7 @@ describe('localization usage', () => {
 
 	it('localizes conferences list page', async () => {
 		const screen = await renderWithQueryProvider(
-			<ConferenceList
+			<CollectionList
 				nodes={[{ id: 'z' }] as any}
 				pagination={undefined as any}
 				data={undefined as any}
@@ -380,11 +380,33 @@ describe('localization usage', () => {
 
 	it('localizes conference detail page', async () => {
 		const screen = await renderWithQueryProvider(
-			<ConferenceDetail
-				nodes={[{ id: 'z' }] as any}
-				data={undefined as any}
-				pagination={undefined as any}
-				rssPath={''}
+			<CollectionDetail
+				collection={{
+					id: '123',
+					title: 'z',
+					description: '',
+					duration: 123.4,
+					image: null,
+					location: '',
+					startDate: null,
+					endDate: null,
+					viewerHasFavorited: false,
+					sequences: {
+						aggregate: {
+							count: 0,
+						},
+						nodes: [],
+					},
+					sponsor: {
+						id: '234',
+						title: 'z',
+						canonicalPath: '...',
+						imageWithFallback: {
+							url: '',
+						},
+					},
+				}}
+				__typename="Query"
 			/>
 		);
 
@@ -450,7 +472,7 @@ describe('localization usage', () => {
 		[Profile, {}],
 		[Home, {}],
 		[
-			CardPlayable,
+			CardWithPlayable,
 			{
 				recording: { id: 'z' },
 				title: 'z',

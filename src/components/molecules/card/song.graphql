@@ -1,0 +1,12 @@
+fragment cardSong on Recording {
+	title
+	persons {
+		...speakerName
+	}
+	duration
+	sequence {
+		id
+		title
+	}
+	...cardWithPlayable
+}

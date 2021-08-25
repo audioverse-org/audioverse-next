@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import ProgressBar from '@components/atoms/progressBar';
+import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { TeaseRecordingFragment } from '@lib/generated/graphql';
@@ -37,7 +37,7 @@ export default function TeaseRecording({
 					{useFormattedDuration(session.duration)}
 				</span>
 				<span className={styles.progress}>
-					<ProgressBar recording={recording} interactive={false} />
+					<RecordingProgressBar recording={recording} interactive={false} />
 				</span>
 				<span>
 					<ButtonFavorite id={recording.id} />

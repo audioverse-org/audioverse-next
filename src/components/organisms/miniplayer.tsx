@@ -1,7 +1,7 @@
 import Slider from '@material-ui/core/Slider';
 import React, { useContext } from 'react';
 
-import ProgressBar from '@components/atoms/progressBar';
+import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
@@ -47,7 +47,7 @@ export default function Miniplayer(): JSX.Element | null {
 				<div className={styles.progress}>
 					<span>{timeString}</span>
 					<span className={styles.bar}>
-						<ProgressBar recording={recording} />
+						<RecordingProgressBar recording={recording} />
 					</span>
 					<span>{durationString}</span>
 				</div>

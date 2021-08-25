@@ -130,11 +130,16 @@ export const makeTagMusicRoute = (
 	tagName: string
 ): string => `/${languageRoute}/songs/tag/${slug(tagName)}`;
 
-export const makeConferenceRoute = (
+export const makeCollectionRoute = (
+	languageRoute: string,
+	conferenceId: string
+): string => `/${languageRoute}/collections/${conferenceId}`;
+
+export const makeConferenceRecordingsRoute = (
 	languageRoute: string,
 	conferenceId: string,
 	page: number | string = 1
-): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
+): string => `/${languageRoute}/collections/${conferenceId}/page/${page}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,

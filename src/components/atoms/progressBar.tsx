@@ -1,29 +1,24 @@
+import clsx from 'clsx';
 import React, { CSSProperties } from 'react';
 import { useIntl } from 'react-intl';
-
-import {
-	AndMiniplayerFragment,
-	ProgressBarFragment,
-} from '@lib/generated/graphql';
-import usePlaybackSession from '@lib/usePlaybackSession';
 
 import styles from './progressBar.module.scss';
 
 interface ProgressBarProps {
-	recording: ProgressBarFragment & AndMiniplayerFragment;
-	interactive?: boolean;
+	progress: number;
+	setProgress?: (newProgress: number) => void;
+	className?: string;
 }
 
 export default function ProgressBar({
-	recording,
-	interactive = true,
+	progress,
+	setProgress,
+	className,
 }: ProgressBarProps): JSX.Element {
 	const intl = useIntl();
-	const session = usePlaybackSession(recording);
-	const progress = session.progress;
 	const cssProps = { '--progress': `${progress * 100}%` } as CSSProperties;
 	return (
-		<span className={styles.progress} style={cssProps}>
+		<span className={clsx(styles.progress, className)} style={cssProps}>
 			<input
 				type="range"
 				value={progress * 100}
@@ -33,8 +28,10 @@ export default function ProgressBar({
 					description: 'progress bar label',
 				})}
 				readOnly={true}
-				onChange={(e) => session.setProgress(parseInt(e.target.value) / 100)}
-				disabled={!interactive}
+				onChange={(e) =>
+					setProgress && setProgress(parseInt(e.target.value) / 100)
+				}
+				disabled={!setProgress}
 			/>
 		</span>
 	);

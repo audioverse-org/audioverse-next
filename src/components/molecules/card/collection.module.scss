@@ -1,0 +1,37 @@
+@import '../../../styles/common';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+	color: $ts-white;
+	background-color: $ts-dark;
+}
+
+.imageContainer {
+	height: 124px;
+	position: relative;
+}
+
+.date {
+	margin-top: 16px;
+	margin-bottom: 8px;
+	color: $ts-salmon;
+}
+
+.title {
+	margin-bottom: 8px;
+	flex-grow: 1;
+}
+
+.sequencesLabel,
+.duration {
+	color: $ts-lightTone;
+}
+
+.sequencesLabel {
+	margin-top: 16px;
+	margin-bottom: 3.5px;
+}
