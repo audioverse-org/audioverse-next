@@ -23,7 +23,8 @@ import { useFormattedDuration } from '@lib/time';
 import { CollectionStaticProps } from '@pages/[language]/collections/[id]/[[...slug]]';
 
 import FAListIcon from '../../../public/img/fa-list.svg';
-import LikeIcon from '../../../public/img/icon-like-active.svg';
+import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
+import LikeIcon from '../../../public/img/icon-like.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
@@ -43,6 +44,7 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 		endDate,
 		title,
 		sponsor,
+		viewerHasFavorited,
 	} = collection;
 
 	const details: IDefinitionListTerm[] = [];
@@ -114,29 +116,25 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 					<SponsorLockup sponsor={sponsor} textColor={BaseColors.LIGHT_TONE} />
 				)}
 
+				<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
+					<FormattedMessage
+						id="collectionDetail__sequenceCountLabel"
+						defaultMessage="{count} Series"
+						description="Collection Detail sequence count label"
+						values={{ count: sequences.aggregate?.count }}
+					/>
+				</Heading6>
 				<div className={styles.row}>
-					<div>
-						<Heading6
-							sans
-							loose
-							uppercase
-							unpadded
-							className={styles.countLabel}
-						>
-							<FormattedMessage
-								id="collectionDetail__sequenceCountLabel"
-								defaultMessage="{count} Series"
-								description="Collection Detail sequence count label"
-								values={{ count: sequences.aggregate?.count }}
-							/>
-						</Heading6>
-						<div className={styles.duration}>
-							{useFormattedDuration(duration)}
-						</div>
+					<div className={styles.duration}>
+						{useFormattedDuration(duration)}
 					</div>
 					{/* TODO: make icons functional */}
 					<ShareIcon className={styles.share} />
-					<LikeIcon className={styles.like} />
+					{viewerHasFavorited ? (
+						<LikeActiveIcon className={styles.likeActive} />
+					) : (
+						<LikeIcon className={styles.like} />
+					)}
 				</div>
 				<HorizontalRule color="midTone" />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />

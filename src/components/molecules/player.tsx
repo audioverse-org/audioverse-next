@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import ProgressBar from '@components/atoms/progressBar';
+import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
@@ -65,7 +65,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 
 			{shouldShowVideoControls && (
 				<div className={styles.videoProgress}>
-					<ProgressBar recording={recording} />
+					<RecordingProgressBar recording={recording} />
 					<PlaybackTimes recording={recording} />
 				</div>
 			)}

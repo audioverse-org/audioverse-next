@@ -1,4 +1,4 @@
 fragment cardWithPlayable on Recording {
 	id
-	...progressBar
+	...recordingProgressBar
 }

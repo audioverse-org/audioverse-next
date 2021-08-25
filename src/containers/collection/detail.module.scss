@@ -38,7 +38,6 @@
 .row {
 	display: flex;
 	align-items: center;
-	margin-top: 16px;
 	margin-bottom: 16px;
 	> *:first-child {
 		flex-grow: 1;
@@ -52,5 +51,8 @@
 	stroke: $ts-white;
 }
 .like > * {
+	fill: $ts-white;
+}
+.likeActive > * {
 	fill: $ts-salmon;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import ProgressBar from '@components/atoms/progressBar';
+import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { CardTheme } from '@components/molecules/card/base/withHat';
@@ -92,7 +92,7 @@ export default function CardWithPlayable({
 
 				<div className={styles.bar}>
 					{shouldShowProgress && (
-						<ProgressBar recording={recording} interactive={false} />
+						<RecordingProgressBar recording={recording} interactive={false} />
 					)}
 				</div>
 

@@ -5415,7 +5415,7 @@ export type GetWithAuthGuardDataQuery = {
 	}>;
 };
 
-export type ProgressBarFragment = {
+export type RecordingProgressBarFragment = {
 	__typename?: 'Recording';
 	id: string;
 	title: string;
@@ -5553,6 +5553,8 @@ export type CardSequenceFragment = {
 	duration: number;
 	description: string;
 	summary: string;
+	viewerHasFavorited: boolean;
+	viewerPlaybackCompletedPercentage: number;
 	persons: {
 		__typename?: 'PersonConnection';
 		nodes: Maybe<Array<{ __typename?: 'Person'; id: string; name: string }>>;
@@ -6594,6 +6596,7 @@ export type GetCollectionDetailPageDataQuery = {
 		duration: number;
 		description: string;
 		location: Maybe<string>;
+		viewerHasFavorited: boolean;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		sponsor: Maybe<{
 			__typename?: 'Sponsor';
@@ -6614,6 +6617,8 @@ export type GetCollectionDetailPageDataQuery = {
 					duration: number;
 					description: string;
 					summary: string;
+					viewerHasFavorited: boolean;
+					viewerPlaybackCompletedPercentage: number;
 					persons: {
 						__typename?: 'PersonConnection';
 						nodes: Maybe<
@@ -8920,6 +8925,8 @@ export const CardSequenceFragmentDoc = `
   duration
   description
   summary
+  viewerHasFavorited
+  viewerPlaybackCompletedPercentage
   persons(role: SPEAKER, orderBy: [{field: NAME, direction: ASC}]) {
     nodes {
       id
@@ -8970,8 +8977,8 @@ export const AndMiniplayerFragmentDoc = `
   }
 }
     `;
-export const ProgressBarFragmentDoc = `
-    fragment progressBar on Recording {
+export const RecordingProgressBarFragmentDoc = `
+    fragment recordingProgressBar on Recording {
   id
   ...andMiniplayer
 }
@@ -8979,9 +8986,9 @@ export const ProgressBarFragmentDoc = `
 export const CardWithPlayableFragmentDoc = `
     fragment cardWithPlayable on Recording {
   id
-  ...progressBar
+  ...recordingProgressBar
 }
-    ${ProgressBarFragmentDoc}`;
+    ${RecordingProgressBarFragmentDoc}`;
 export const CardSermonFragmentDoc = `
     fragment cardSermon on Recording {
   id
@@ -9208,12 +9215,12 @@ export const PlayerFragmentDoc = `
   title
   ...andMiniplayer
   ...buttonDownload
-  ...progressBar
+  ...recordingProgressBar
   ...buttonShareRecording
 }
     ${AndMiniplayerFragmentDoc}
 ${ButtonDownloadFragmentDoc}
-${ProgressBarFragmentDoc}
+${RecordingProgressBarFragmentDoc}
 ${ButtonShareRecordingFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
@@ -9970,6 +9977,7 @@ export const GetCollectionDetailPageDataDocument = `
     duration
     description
     location
+    viewerHasFavorited
     image {
       url(size: 1400)
     }

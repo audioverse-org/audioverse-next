@@ -390,6 +390,7 @@ describe('localization usage', () => {
 					location: '',
 					startDate: null,
 					endDate: null,
+					viewerHasFavorited: false,
 					sequences: {
 						aggregate: {
 							count: 0,

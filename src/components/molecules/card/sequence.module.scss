@@ -15,6 +15,10 @@
 	position: relative;
 }
 
+.stretch {
+	flex-grow: 1;
+}
+
 .date {
 	margin-top: 16px;
 	margin-bottom: 8px;
@@ -26,12 +30,50 @@
 	flex-grow: 1;
 }
 
+.kicker {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	line-clamp: 3;
+	overflow: hidden;
+	p {
+		margin-top: 0;
+	}
+}
+
 .partsLabel {
 	color: $ts-dark;
 	margin-top: 16px;
 	margin-bottom: 3.5px;
 }
 
+.details {
+	display: flex;
+	align-items: center;
+}
+
 .duration {
 	color: $ts-midTone;
+}
+
+.progress {
+	margin-left: 16px;
+	flex-grow: 1;
+}
+
+.like {
+	display: none;
+	@media (any-pointer: fine) {
+		display: block;
+	}
+	&Active {
+		display: block;
+		> * {
+			fill: $ts-red;
+		}
+	}
+}
+
+.progress + .like {
+	margin-left: 16px;
 }
