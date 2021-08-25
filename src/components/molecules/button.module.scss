@@ -1,0 +1,68 @@
+@import '../../styles/common';
+
+.base {
+	display: inline-flex;
+	align-items: center;
+	height: 31px;
+	padding: 3.5px 8px;
+	border-radius: 4px;
+
+	font-size: 12px;
+	line-height: 14.52px;
+	cursor: pointer;
+}
+
+.super {
+	font-weight: 700;
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	background: $ts-red;
+	border: 1px solid $ts-red;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	&:focus {
+		border: 1px solid $ts-dark;
+		outline: none;
+	}
+}
+
+.primary {
+}
+
+.secondary,
+.secondaryInverse {
+	border-width: 0.5px;
+	border-style: solid;
+}
+.secondary {
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+}
+.secondaryInverse {
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+}
+
+.tertiary {
+}
+
+.super,
+.secondary,
+.secondaryInverse {
+	&:hover {
+		box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+		text-decoration: none;
+	}
+}
+
+.iconLeft {
+	margin-right: 4px;
+}
+.iconRight {
+	margin-left: 4px;
+}

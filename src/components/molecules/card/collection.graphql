@@ -4,6 +4,8 @@ fragment cardCollection on Collection {
 	startDate
 	endDate
 	duration
+	viewerHasFavorited
+	viewerPlaybackCompletedPercentage
 	image {
 		id
 		url(size: 740, cropMode: MAX_SIZE)

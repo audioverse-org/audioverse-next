@@ -5,7 +5,7 @@ import React from 'react';
 import styles from './roundImage.module.scss';
 
 type Props = {
-	image: any;
+	image: string;
 	small?: boolean;
 	alt?: string;
 	className?: string;

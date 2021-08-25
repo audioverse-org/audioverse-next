@@ -8,7 +8,7 @@
 .titleLockup {
 	display: flex;
 	align-items: center;
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 }
 
 .logo {
@@ -26,11 +26,11 @@
 .row {
 	display: flex;
 	align-items: center;
-	margin-bottom: 16px;
+	margin-bottom: -4px;
 	> *:first-child {
 		flex-grow: 1;
 	}
-	svg {
-		margin-left: 16px;
-	}
+}
+.iconButton {
+	margin-left: 8px;
 }

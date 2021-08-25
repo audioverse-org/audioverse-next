@@ -47,6 +47,7 @@ html {
 html {
 	height: 100%;
 	font-size: 14px;
+	line-height: 1.1;
 }
 
 body {
@@ -86,6 +87,13 @@ h2 {
 	line-height: 24.2px;
 }
 
+h5 {
+	font-size: 16px;
+	line-height: 19.36px;
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
 h6 {
 	font-size: 10px;
 	line-height: 12px;
@@ -93,16 +101,35 @@ h6 {
 
 a {
 	color: inherit;
-	text-decoration: none;
+	cursor: pointer;
+	text-underline-offset: 2px;
+	&:not(.decorated) {
+		text-decoration: none;
+	}
 
 	&:hover {
 		color: $ts-red;
 		text-decoration: underline;
+		&.hover--salmon {
+			color: $ts-salmon;
+		}
+		&.hover-bg--darkened-white {
+			background-color: $ts-darkened-white;
+		}
+		&.hover-bg--darkened-cream {
+			background-color: $ts-darkened-cream;
+		}
+		&.hover-bg--darkened-dark {
+			background-color: $ts-darkened-dark;
+		}
+		&.hover-bg--darkened-lightTone {
+			background-color: $ts-darkened-lightTone;
+		}
 	}
 }
 
 p {
-	line-height: 1.3em;
+	line-height: 1.21;
 }
 
 /* Material UI Customizations */

@@ -6,12 +6,17 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
+import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
 import { formatDateRange } from '@lib/date';
 import { CardCollectionFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
 import ListIcon from '../../../../public/img/fa-list.svg';
+import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
+import LikeIcon from '../../../../public/img/icon-like.svg';
+import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import IconButton from '../iconButton';
 import TypeLockup from '../typeLockup';
 
 import styles from './collection.module.scss';
@@ -33,6 +38,8 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
+		viewerHasFavorited,
+		viewerPlaybackCompletedPercentage,
 	} = collection;
 	const heroImage = image?.url && (
 		<div className={styles.imageContainer}>
@@ -83,7 +90,24 @@ export default function CardCollection({
 						values={{ count: allSequences.aggregate?.count }}
 					/>
 				</Heading6>
-				<div className={styles.duration}>{useFormattedDuration(duration)}</div>
+				<div className={styles.details}>
+					<div className={styles.duration}>
+						{useFormattedDuration(duration)}
+					</div>
+					{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
+					<div className={styles.progress}>
+						{viewerPlaybackCompletedPercentage > 0 && (
+							<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+						)}
+					</div>
+					<IconButton
+						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => void 0}
+						color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						backgroundColor={BaseColors.DARK}
+						className={styles.like}
+					/>
+				</div>
 				{/* TODO: hover/link?, conditional sponsor, has favorited, sub-sequences */}
 			</div>
 		</Card>

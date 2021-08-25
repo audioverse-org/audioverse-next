@@ -135,6 +135,15 @@ export const makeCollectionRoute = (
 	conferenceId: string
 ): string => `/${languageRoute}/collections/${conferenceId}`;
 
+export const makeCollectionSequencesRoute = (
+	languageRoute: string,
+	conferenceId: string,
+	page = 1
+): string =>
+	`/${languageRoute}/collections/${conferenceId}/sequences${
+		page ? `/page/${page}` : ''
+	}`;
+
 export const makeConferenceRecordingsRoute = (
 	languageRoute: string,
 	conferenceId: string,

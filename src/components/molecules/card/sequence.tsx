@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -15,6 +14,8 @@ import ListIcon from '../../../../public/img/fa-list-alt.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import IconButton from '../iconButton';
+import PersonLockup from '../personLockup';
 import TypeLockup from '../typeLockup';
 
 import styles from './sequence.module.scss';
@@ -37,6 +38,7 @@ export default function CardSequence({
 		title,
 		viewerHasFavorited,
 		viewerPlaybackCompletedPercentage,
+		persons,
 	} = sequence;
 	return (
 		<Card>
@@ -63,6 +65,20 @@ export default function CardSequence({
 							className={styles.kicker}
 						></div>
 					)}
+
+					{persons.nodes?.length && (
+						<div className={styles.persons}>
+							{persons.nodes.map((person) => (
+								<PersonLockup
+									person={person}
+									textColor={BaseColors.DARK}
+									key={person.canonicalPath}
+									small
+								/>
+							))}
+						</div>
+					)}
+					{/* TODO: replace with "...and X more" format */}
 				</div>
 				<Heading6 sans unpadded uppercase loose className={styles.partsLabel}>
 					<FormattedMessage
@@ -82,11 +98,13 @@ export default function CardSequence({
 							<ProgressBar progress={viewerPlaybackCompletedPercentage} />
 						)}
 					</div>
-					{viewerHasFavorited ? (
-						<LikeActiveIcon className={clsx(styles.like, styles.likeActive)} />
-					) : (
-						<LikeIcon className={styles.like} />
-					)}
+					<IconButton
+						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => void 0}
+						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+						backgroundColor={BaseColors.CREAM}
+						className={styles.like}
+					/>
 				</div>
 				{/* TODO: hover/link?, conditional persons, sub-recordings */}
 			</div>

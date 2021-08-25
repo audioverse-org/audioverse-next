@@ -1,20 +1,29 @@
 @import '../../styles/common';
 
 .heading {
-	margin-top: 4px;
-	margin-bottom: 4px;
-	color: $ts-red;
-	font-size: var(--fontSize, 16px);
-	text-transform: uppercase;
 	display: flex;
+	color: $ts-red;
+	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	&:after {
-		display: block;
-		content: '';
-		position: relative;
-		border-bottom: 1px solid $ts-red;
 		flex-grow: 1;
+		content: '';
+		display: block;
+		position: relative;
 		top: -4px;
 		left: 2px;
+		border-bottom: 1px solid $ts-red;
+	}
+}
+
+.small {
+	font-size: 12px;
+	line-height: 14.52px;
+}
+
+.salmon {
+	color: $ts-salmon;
+	&:after {
+		border-color: $ts-salmon;
 	}
 }

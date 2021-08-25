@@ -1,5 +1,3 @@
-import { Button } from '@material-ui/core';
-import Link from 'next/link';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
@@ -10,6 +8,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 
+import Button from './button';
 import styles from './sequenceNav.module.scss';
 
 function getSiblingByIndexOffset(
@@ -51,28 +50,22 @@ export default function SequenceNav({
 	return (
 		<div className={styles.sequenceNav}>
 			{previousRecording && (
-				<Link href={makeSermonRoute(langRoute, previousRecording.id)} passHref>
-					<Button
-						aria-label={labelPrevious}
-						className={styles.previous}
-						variant={'outlined'}
-						startIcon={<ArrowLeft />}
-					>
-						{labelPrevious}
-					</Button>
-				</Link>
+				<Button
+					type="secondary"
+					href={makeSermonRoute(langRoute, previousRecording.id)}
+					text={labelPrevious}
+					Icon={ArrowLeft}
+					iconPosition="left"
+				/>
 			)}
 			{nextRecording && (
-				<Link href={makeSermonRoute(langRoute, nextRecording.id)} passHref>
-					<Button
-						aria-label={labelNext}
-						className={styles.next}
-						variant={'outlined'}
-						endIcon={<ArrowRight />}
-					>
-						{labelNext}
-					</Button>
-				</Link>
+				<Button
+					type="secondary"
+					href={makeSermonRoute(langRoute, nextRecording.id)}
+					text={labelNext}
+					Icon={ArrowRight}
+					iconPosition="right"
+				/>
 			)}
 		</div>
 	);

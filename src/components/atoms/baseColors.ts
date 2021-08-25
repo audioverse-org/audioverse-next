@@ -1,6 +1,7 @@
 export enum BaseColors {
-	RED = 'red',
 	WHITE = 'white',
+	CREAM = 'cream',
+	RED = 'red',
 	DARK = 'dark',
 	SALMON = 'salmon',
 	LIGHT_TONE = 'lightTone',

@@ -26,6 +26,11 @@
 	flex-grow: 1;
 }
 
+.details {
+	display: flex;
+	align-items: center;
+}
+
 .sequencesLabel,
 .duration {
 	color: $ts-lightTone;
@@ -34,4 +39,29 @@
 .sequencesLabel {
 	margin-top: 16px;
 	margin-bottom: 3.5px;
+}
+
+.duration {
+	line-height: 1.21;
+}
+
+.progress {
+	margin-left: 16px;
+	flex-grow: 1;
+	--progressColor: #{$ts-salmon};
+}
+
+.like {
+	display: none;
+	margin-top: -6px;
+	@media (any-pointer: fine) {
+		display: inherit;
+	}
+	&Active {
+		display: inherit;
+	}
+}
+
+.progress + .like {
+	margin-left: 16px;
 }

@@ -10,11 +10,6 @@
 	background-color: $ts-cream;
 }
 
-.imageContainer {
-	height: 124px;
-	position: relative;
-}
-
 .stretch {
 	flex-grow: 1;
 }
@@ -31,6 +26,7 @@
 }
 
 .kicker {
+	margin-bottom: 8px;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
@@ -41,10 +37,14 @@
 	}
 }
 
+.persons > * {
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
 .partsLabel {
 	color: $ts-dark;
 	margin-top: 16px;
-	margin-bottom: 3.5px;
 }
 
 .details {
@@ -54,6 +54,7 @@
 
 .duration {
 	color: $ts-midTone;
+	line-height: 1.21;
 }
 
 .progress {
@@ -63,14 +64,12 @@
 
 .like {
 	display: none;
+	margin-top: -6px;
 	@media (any-pointer: fine) {
-		display: block;
+		display: inherit;
 	}
 	&Active {
-		display: block;
-		> * {
-			fill: $ts-red;
-		}
+		display: inherit;
 	}
 }
 

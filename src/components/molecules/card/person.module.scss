@@ -1,0 +1,26 @@
+@import '../../../styles/common';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+	color: $ts-dark;
+	background-color: $ts-smartPlaylistH;
+}
+
+.stretch {
+	flex-grow: 1;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.image {
+	display: flex;
+	margin-right: 8px;
+}

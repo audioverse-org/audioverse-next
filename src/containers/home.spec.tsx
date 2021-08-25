@@ -20,7 +20,13 @@ const renderPage = buildStaticRenderer(Home, getStaticProps, {
 
 const song = {
 	title: 'the_song_title',
-	persons: [{ id: 'the_song_person_id', name: 'the_song_person_name' }],
+	persons: [
+		{
+			id: 'the_song_person_id',
+			name: 'the_song_person_name',
+			imageWithFallback: { url: 'the_song_image_path' },
+		},
+	],
 	duration: 5 * 60,
 	sequence: {
 		id: 'the_song_collection_id',
@@ -31,7 +37,13 @@ const song = {
 const story = {
 	title: 'the_story_title',
 	duration: 21 * 60,
-	persons: [{ id: 'the_story_person_id', name: 'the_story_person_name' }],
+	persons: [
+		{
+			id: 'the_story_person_id',
+			name: 'the_story_person_name',
+			imageWithFallback: { url: 'the_story_person_image_path' },
+		},
+	],
 	sequence: {
 		title: 'the_story_sequence_title',
 		recordings: {
@@ -48,6 +60,7 @@ const taggedRecording = {
 		{
 			id: 'the_tagged_recording_person_id',
 			name: 'the_tagged_recording_person_name',
+			imageWithFallback: { url: 'the_tagged_recording_person_path' },
 		},
 	],
 	duration: 27 * 60,
@@ -59,6 +72,7 @@ const recording = {
 		{
 			id: 'the_recording_person_id',
 			name: 'the_recording_person_name',
+			imageWithFallback: { url: 'the_recording_person_path' },
 		},
 	],
 	duration: 33 * 60,

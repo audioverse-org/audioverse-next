@@ -1,26 +1,26 @@
 import React from 'react';
 
 import { BaseColors } from '@components/atoms/baseColors';
-import { SponsorLockupFragment } from '@lib/generated/graphql';
+import { PersonLockupFragment } from '@lib/generated/graphql';
 
 import NamedAvatar from './namedAvatar';
 
 type Props = {
-	sponsor: SponsorLockupFragment;
+	person: PersonLockupFragment;
 	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
-	hoverColor: BaseColors.RED | BaseColors.SALMON;
+	hoverColor?: BaseColors.RED | BaseColors.SALMON;
 	isLinked?: boolean;
 	small?: boolean;
 };
 
-export default function SponsorLockup({
-	sponsor: { title, imageWithFallback, canonicalPath },
+export default function PersonLockup({
+	person: { name, imageWithFallback, canonicalPath },
 	isLinked,
 	...props
 }: Props): JSX.Element {
 	return (
 		<NamedAvatar
-			name={title}
+			name={name}
 			image={imageWithFallback.url}
 			href={isLinked ? canonicalPath : undefined}
 			{...props}

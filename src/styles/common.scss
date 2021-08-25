@@ -24,6 +24,12 @@ $ts-lightTone: #cdd9e3;
 $ts-midTone: #6b7680;
 $ts-red: #ff224a;
 $ts-salmon: #ff6e6e;
+$ts-smartPlaylistH: #f3f5fa;
+
+$ts-darkened-white: #f8f8f8;
+$ts-darkened-cream: #e8e3e3;
+$ts-darkened-lightTone: #b5c4d1;
+$ts-darkened-dark: #232b32;
 
 $breakpoint-sm: 516px;
 $breakpoint-md: 664px;
@@ -50,12 +56,6 @@ $grid-gap: 24px;
 	display: inline-block;
 	background-color: white;
 	cursor: pointer;
-	&.primary {
-		background: #ff224a;
-		color: white;
-		box-shadow: 0 4px 10px 0 #00000026;
-		border-width: 0;
-	}
 	&.square {
 		aspect-ratio: 1/1;
 		display: block;

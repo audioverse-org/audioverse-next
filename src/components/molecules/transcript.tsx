@@ -1,9 +1,9 @@
-import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import IconChevron from '../../../public/img/icon-chevron-down.svg';
 
+import Button from './button';
 import styles from './transcript.module.scss';
 
 export default function Transcript({ text }: { text: string }): JSX.Element {
@@ -12,24 +12,25 @@ export default function Transcript({ text }: { text: string }): JSX.Element {
 	return (
 		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
 			<Button
-				variant={'outlined'}
-				startIcon={<IconChevron />}
+				type="secondary"
 				onClick={() => setIsOpen(!isOpen)}
-			>
-				{isOpen ? (
-					<FormattedMessage
-						id="molecule-transcript__labelClose"
-						defaultMessage="Hide Transcript"
-						description="transcript button label close"
-					/>
-				) : (
-					<FormattedMessage
-						id="molecule-transcript__labelOpen"
-						defaultMessage="Read Transcript"
-						description="transcript button label open"
-					/>
-				)}
-			</Button>
+				text={
+					isOpen ? (
+						<FormattedMessage
+							id="molecule-transcript__labelClose"
+							defaultMessage="Hide Transcript"
+							description="transcript button label close"
+						/>
+					) : (
+						<FormattedMessage
+							id="molecule-transcript__labelOpen"
+							defaultMessage="Read Transcript"
+							description="transcript button label open"
+						/>
+					)
+				}
+				Icon={IconChevron}
+			/>
 			{isOpen && (
 				<>
 					<p>

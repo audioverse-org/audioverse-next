@@ -1,14 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { CardTheme } from '@components/molecules/card/base/withHat';
-import SpeakerName from '@components/molecules/speakerName';
+import PersonLockup from '@components/molecules/personLockup';
 import {
 	CardWithPlayableFragment,
-	SpeakerNameFragment,
+	PersonLockupFragment,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -26,7 +27,7 @@ export interface CardWithPlayableProps {
 	};
 	title: string;
 	url: string;
-	persons?: SpeakerNameFragment[];
+	persons?: PersonLockupFragment[];
 	duration?: number;
 	progress?: number;
 	theme?: CardTheme;
@@ -81,7 +82,7 @@ export default function CardWithPlayable({
 			<div className={styles.speakers}>
 				{persons.map((p) => (
 					<div key={p.id}>
-						<SpeakerName person={p} />
+						<PersonLockup person={p} textColor={BaseColors.DARK} />
 					</div>
 				))}
 			</div>

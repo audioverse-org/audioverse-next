@@ -1,6 +1,6 @@
-fragment sponsorLockup on Sponsor {
+fragment personLockup on Person {
 	id
-	title
+	name
 	canonicalPath
 	imageWithFallback {
 		url(size: 100)

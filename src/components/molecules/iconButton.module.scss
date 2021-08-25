@@ -1,0 +1,10 @@
+@import '../../styles/common';
+
+.base {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 32px;
+	width: 32px;
+	border-radius: 16px;
+}

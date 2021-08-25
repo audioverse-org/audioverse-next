@@ -10,9 +10,7 @@ fragment cardSequence on Sequence {
 	viewerPlaybackCompletedPercentage
 	persons(role: SPEAKER, orderBy: [{ field: NAME, direction: ASC }]) {
 		nodes {
-			# TODO: ...PersonLockup
-			id
-			name
+			...personLockup
 		}
 	}
 	recordings(first: 3) {
