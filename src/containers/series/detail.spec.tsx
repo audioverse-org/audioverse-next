@@ -1,5 +1,5 @@
 import {
-	GetSeriesDetailDataDocument,
+	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
 } from '@lib/generated/graphql';
 import {
@@ -11,29 +11,30 @@ import writeFeedFile from '@lib/writeFeedFile';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/series/[id]/page/[i]';
+} from '@pages/[language]/series/[id]/[[...slug]]';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_series_id',
-	i: '1',
 });
 
 jest.mock('@lib/writeFeedFile');
 
-const loadData = buildLoader(GetSeriesDetailDataDocument, {
-	series: {
+const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
+	sequence: {
 		title: 'the_series_title',
-		imageWithFallback: {
+		image: {
 			url: 'the_series_image',
 		},
 		sponsor: {
 			id: 'the_sponsor_id',
 			title: 'the_sponsor_title',
+			canonicalPath: 'the_sponsor_path',
 		},
 		collection: {
 			id: 'the_conference_id',
 			title: 'the_conference_title',
+			canonicalPath: 'the_conference_path',
 		},
 		recordings: {
 			nodes: [{ id: 'the_recording_id', title: 'the_recording_title' }],
@@ -46,11 +47,9 @@ describe('series detail page', () => {
 	it('gets series data', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailDataDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPageDataDocument, {
 			variables: {
 				id: 'the_series_id',
-				offset: 0,
-				first: 25,
 			},
 		});
 	});
@@ -93,7 +92,7 @@ describe('series detail page', () => {
 
 	it('returns static paths', async () => {
 		mockedFetchApi.mockResolvedValue({
-			serieses: {
+			sequences: {
 				nodes: [
 					{
 						id: 'the_series_id',
@@ -115,17 +114,6 @@ describe('series detail page', () => {
 		expect(getByText('the_recording_title')).toBeInTheDocument();
 	});
 
-	it('links pagination properly', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toHaveAttribute(
-			'href',
-			'/en/series/the_series_id/page/1'
-		);
-	});
-
 	it('renders series image', async () => {
 		loadData();
 
@@ -142,9 +130,9 @@ describe('series detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Sponsor: the_sponsor_title')).toHaveAttribute(
+		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id'
+			'/the_sponsor_path'
 		);
 	});
 
@@ -153,25 +141,29 @@ describe('series detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Conference: the_conference_title')).toHaveAttribute(
+		expect(getByText('the_conference_title')).toHaveAttribute(
 			'href',
-			'/en/collections/the_conference_id'
+			'/the_conference_path'
 		);
 	});
 
 	it('skips rendering conference link if no conference', async () => {
-		loadData({ series: { collection: { id: null as any, title: '' } } });
+		loadData({
+			sequence: {
+				collection: null as any,
+			},
+		});
 
 		const { queryByText } = await renderPage();
 
-		expect(queryByText('Conference:')).not.toBeInTheDocument();
+		expect(queryByText('Conference')).not.toBeInTheDocument();
 	});
 
 	it('generates rss', async () => {
 		loadData();
 
 		await getStaticProps({
-			params: { language: 'en', id: 'the_series_id', i: '1' },
+			params: { language: 'en', id: 'the_series_id' },
 		});
 
 		expect(writeFeedFile).toBeCalledWith({
@@ -181,28 +173,15 @@ describe('series detail page', () => {
 		});
 	});
 
-	it('does not generate rss on page 2', async () => {
-		loadData();
+	// TODO:
+	// it('links rss feed', async () => {
+	// 	loadData();
 
-		await getStaticProps({
-			params: { language: 'en', id: 'the_series_id', i: '2' },
-		});
+	// 	const { getByText } = await renderPage();
 
-		expect(writeFeedFile).not.toBeCalled();
-	});
-
-	it('links rss feed', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('RSS')).toHaveAttribute(
-			'href',
-			'/en/series/the_series_id.xml'
-		);
-	});
+	// 	expect(getByText('RSS')).toHaveAttribute(
+	// 		'href',
+	// 		'/en/series/the_series_id.xml'
+	// 	);
+	// });
 });
-
-// TODO: The way RSS gen is happening means it will never contain more than 25
-//  recordings. Is this wrong? If a playlist has more than 25 recordings, should
-//  the RSS file contain all of them?

@@ -1,31 +1,38 @@
-query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
-	series(id: $id) {
+query getSeriesDetailPageData($id: ID!) {
+	sequence(id: $id) {
+		id
 		title
-		imageWithFallback {
-			url(size: 100)
+		duration
+		description
+		startDate
+		endDate
+		collection {
+			title
+			canonicalPath
+		}
+		image {
+			url(size: 64)
 		}
 		sponsor {
-			id
 			title
+			canonicalPath
 		}
-		collection {
-			id
-			title
-		}
-		recordings(offset: $offset, first: $first) {
-			nodes {
-				...recordingList
-				...writeFeedFile
-			}
+		shareUrl
+		viewerHasFavorited
+		recordings(first: 250) {
 			aggregate {
 				count
+			}
+			nodes {
+				...cardSermon
+				...writeFeedFile
 			}
 		}
 	}
 }
 
 query getSeriesDetailPathsData($language: Language!, $first: Int) {
-	serieses(language: $language, first: $first) {
+	sequences(language: $language, first: $first) {
 		nodes {
 			id
 		}

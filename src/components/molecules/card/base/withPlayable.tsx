@@ -23,7 +23,7 @@ export interface CardWithPlayableProps {
 		icon?: any;
 		title: string;
 		length?: number;
-		index?: number;
+		index?: number | null;
 	};
 	title: string;
 	url: string;
@@ -31,6 +31,7 @@ export interface CardWithPlayableProps {
 	duration?: number;
 	progress?: number;
 	theme?: CardTheme;
+	hideHat?: boolean;
 }
 
 export default function CardWithPlayable({
@@ -42,6 +43,7 @@ export default function CardWithPlayable({
 	duration,
 	theme,
 	progress,
+	hideHat,
 }: CardWithPlayableProps): JSX.Element {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -62,7 +64,7 @@ export default function CardWithPlayable({
 	return (
 		<CardWithHat
 			hat={
-				container?.title
+				container?.title && !hideHat
 					? {
 							icon: container?.icon,
 							title: container?.title,

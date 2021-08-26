@@ -76,6 +76,7 @@ const recording = {
 		},
 	],
 	duration: 33 * 60,
+	sequenceIndex: 1,
 	sequence: {
 		title: 'the_recording_sequence_title',
 		recordings: {

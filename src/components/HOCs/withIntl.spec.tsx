@@ -456,7 +456,10 @@ describe('localization usage', () => {
 		[SponsorConferences, { nodes: [{ id: 'z' }] }],
 		[SponsorSeries, { nodes: [{ id: 'z' }] }],
 		[SeriesList, { nodes: [{ id: 'z' }] }],
-		[SeriesDetail, { nodes: [{ id: 'z' }] }],
+		[
+			SeriesDetail,
+			{ sequence: { id: 'z', recordings: { aggregate: { count: 0 } } } },
+		],
 		[Playlists, {}],
 		[Logout, {}],
 		[Register, {}],

@@ -5,6 +5,7 @@ fragment cardSermon on Recording {
 	persons {
 		...personLockup
 	}
+	sequenceIndex
 	sequence {
 		title
 		recordings {

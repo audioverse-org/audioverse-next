@@ -5592,6 +5592,7 @@ export type CardSermonFragment = {
 	id: string;
 	title: string;
 	duration: number;
+	sequenceIndex: Maybe<number>;
 	persons: Array<{
 		__typename?: 'Person';
 		id: string;
@@ -6782,6 +6783,7 @@ export type GetDiscoverPageDataQuery = {
 				id: string;
 				title: string;
 				duration: number;
+				sequenceIndex: Maybe<number>;
 				persons: Array<{
 					__typename?: 'Person';
 					id: string;
@@ -6967,6 +6969,7 @@ export type GetHomeStaticPropsQuery = {
 				id: string;
 				title: string;
 				duration: number;
+				sequenceIndex: Maybe<number>;
 				persons: Array<{
 					__typename?: 'Person';
 					id: string;
@@ -7136,6 +7139,7 @@ export type GetPresenterDetailPageDataQuery = {
 					id: string;
 					title: string;
 					duration: number;
+					sequenceIndex: Maybe<number>;
 					persons: Array<{
 						__typename?: 'Person';
 						id: string;
@@ -7181,6 +7185,7 @@ export type GetPresenterDetailPageDataQuery = {
 					id: string;
 					title: string;
 					duration: number;
+					sequenceIndex: Maybe<number>;
 					persons: Array<{
 						__typename?: 'Person';
 						id: string;
@@ -7226,6 +7231,7 @@ export type GetPresenterDetailPageDataQuery = {
 					id: string;
 					title: string;
 					duration: number;
+					sequenceIndex: Maybe<number>;
 					persons: Array<{
 						__typename?: 'Person';
 						id: string;
@@ -7454,33 +7460,46 @@ export type GetPresenterRecordingsPageDataQuery = {
 	}>;
 };
 
-export type GetSeriesDetailDataQueryVariables = Exact<{
+export type GetSeriesDetailPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
-	offset: Maybe<Scalars['Int']>;
-	first: Maybe<Scalars['Int']>;
 }>;
 
-export type GetSeriesDetailDataQuery = {
+export type GetSeriesDetailPageDataQuery = {
 	__typename?: 'Query';
-	series: Maybe<{
+	sequence: Maybe<{
 		__typename?: 'Sequence';
+		id: string;
 		title: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		sponsor: Maybe<{ __typename?: 'Sponsor'; id: string; title: string }>;
-		collection: Maybe<{ __typename?: 'Collection'; id: string; title: string }>;
+		duration: number;
+		description: string;
+		startDate: Maybe<string>;
+		endDate: Maybe<string>;
+		shareUrl: string;
+		viewerHasFavorited: boolean;
+		collection: Maybe<{
+			__typename?: 'Collection';
+			title: string;
+			canonicalPath: string;
+		}>;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		sponsor: Maybe<{
+			__typename?: 'Sponsor';
+			title: string;
+			canonicalPath: string;
+		}>;
 		recordings: {
 			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
 					id: string;
 					title: string;
-					description: Maybe<string>;
 					duration: number;
-					hasVideo: boolean;
-					recordingDate: Maybe<string>;
+					sequenceIndex: Maybe<number>;
+					description: Maybe<string>;
 					canonicalUrl: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
+					recordingDate: Maybe<string>;
 					persons: Array<{
 						__typename?: 'Person';
 						id: string;
@@ -7488,19 +7507,39 @@ export type GetSeriesDetailDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sequence: Maybe<{
+						__typename?: 'Sequence';
+						title: string;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
 						filesize: string;
+						mimeType: string;
 					}>;
 					feedVideoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
 				}>
 			>;
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
 	}>;
 };
@@ -7512,7 +7551,7 @@ export type GetSeriesDetailPathsDataQueryVariables = Exact<{
 
 export type GetSeriesDetailPathsDataQuery = {
 	__typename?: 'Query';
-	serieses: {
+	sequences: {
 		__typename?: 'SequenceConnection';
 		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string }>>;
 	};
@@ -9264,6 +9303,7 @@ export const CardSermonFragmentDoc = `
   persons {
     ...personLockup
   }
+  sequenceIndex
   sequence {
     title
     recordings {
@@ -10825,52 +10865,59 @@ export const useGetPresenterRecordingsPageDataQuery = <
 		>(GetPresenterRecordingsPageDataDocument, variables),
 		options
 	);
-export const GetSeriesDetailDataDocument = `
-    query getSeriesDetailData($id: ID!, $offset: Int, $first: Int) {
-  series(id: $id) {
+export const GetSeriesDetailPageDataDocument = `
+    query getSeriesDetailPageData($id: ID!) {
+  sequence(id: $id) {
+    id
     title
-    imageWithFallback {
-      url(size: 100)
+    duration
+    description
+    startDate
+    endDate
+    collection {
+      title
+      canonicalPath
+    }
+    image {
+      url(size: 64)
     }
     sponsor {
-      id
       title
+      canonicalPath
     }
-    collection {
-      id
-      title
-    }
-    recordings(offset: $offset, first: $first) {
-      nodes {
-        ...recordingList
-        ...writeFeedFile
-      }
+    shareUrl
+    viewerHasFavorited
+    recordings(first: 250) {
       aggregate {
         count
+      }
+      nodes {
+        ...cardSermon
+        ...writeFeedFile
       }
     }
   }
 }
-    ${RecordingListFragmentDoc}
+    ${CardSermonFragmentDoc}
 ${WriteFeedFileFragmentDoc}`;
-export const useGetSeriesDetailDataQuery = <
-	TData = GetSeriesDetailDataQuery,
+export const useGetSeriesDetailPageDataQuery = <
+	TData = GetSeriesDetailPageDataQuery,
 	TError = unknown
 >(
-	variables: GetSeriesDetailDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesDetailDataQuery, TError, TData>
+	variables: GetSeriesDetailPageDataQueryVariables,
+	options?: UseQueryOptions<GetSeriesDetailPageDataQuery, TError, TData>
 ) =>
-	useQuery<GetSeriesDetailDataQuery, TError, TData>(
-		['getSeriesDetailData', variables],
-		graphqlFetcher<GetSeriesDetailDataQuery, GetSeriesDetailDataQueryVariables>(
-			GetSeriesDetailDataDocument,
-			variables
-		),
+	useQuery<GetSeriesDetailPageDataQuery, TError, TData>(
+		['getSeriesDetailPageData', variables],
+		graphqlFetcher<
+			GetSeriesDetailPageDataQuery,
+			GetSeriesDetailPageDataQueryVariables
+		>(GetSeriesDetailPageDataDocument, variables),
 		options
 	);
 export const GetSeriesDetailPathsDataDocument = `
     query getSeriesDetailPathsData($language: Language!, $first: Int) {
-  serieses(language: $language, first: $first) {
+  sequences(language: $language, first: $first) {
     nodes {
       id
     }
@@ -12211,10 +12258,10 @@ export async function getPresenterRecordingsPageData<T>(
 	return fetchApi(GetPresenterRecordingsPageDataDocument, { variables });
 }
 
-export async function getSeriesDetailData<T>(
-	variables: ExactAlt<T, GetSeriesDetailDataQueryVariables>
-): Promise<GetSeriesDetailDataQuery> {
-	return fetchApi(GetSeriesDetailDataDocument, { variables });
+export async function getSeriesDetailPageData<T>(
+	variables: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>
+): Promise<GetSeriesDetailPageDataQuery> {
+	return fetchApi(GetSeriesDetailPageDataDocument, { variables });
 }
 
 export async function getSeriesDetailPathsData<T>(
