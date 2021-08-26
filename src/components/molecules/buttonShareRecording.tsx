@@ -26,7 +26,6 @@ export default function ButtonShareRecording({
 		setAnchorEl(null);
 	};
 
-	// TODO: Extract icon button maybe?
 	return (
 		<>
 			<IconButton
