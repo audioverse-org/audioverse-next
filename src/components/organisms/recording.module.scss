@@ -60,9 +60,16 @@
 .speakers {
 	padding-left: 0;
 	margin-top: 0;
-	margin-bottom: 16px;
 	li {
-		display: inline-block;
-		margin-right: 1rem;
+		display: block;
+		margin-right: 8px;
+		margin-bottom: 8px;
+		@media (min-width: $breakpoint-md) {
+			display: inline-block;
+		}
+		@media (min-width: $breakpoint-lg) {
+			margin-right: 16px;
+			margin-bottom: 16px;
+		}
 	}
 }
