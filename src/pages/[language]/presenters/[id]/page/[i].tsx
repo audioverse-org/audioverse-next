@@ -1,9 +1,9 @@
-import Presenter from '@containers/presenter/detail';
+import PresenterRecordings from '@containers/presenter/recordings';
 import { createFeed } from '@lib/createFeed';
 import {
-	getPresenterDetailPageData,
-	GetPresenterDetailPageDataQuery,
 	getPresenterDetailPathsData,
+	getPresenterRecordingsPageData,
+	GetPresenterRecordingsPageDataQuery,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import {
@@ -11,17 +11,17 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 
-export default Presenter;
+export default PresenterRecordings;
 
 type Recording = NonNullable<
 	NonNullable<
 		NonNullable<
-			GetPresenterDetailPageDataQuery['person']
+			GetPresenterRecordingsPageDataQuery['person']
 		>['recordings']['nodes']
 	>[0]
 >;
 export type PresenterStaticProps = PaginatedStaticProps<
-	GetPresenterDetailPageDataQuery,
+	GetPresenterRecordingsPageDataQuery,
 	Recording
 > & { props: { rssPath: string | null } };
 
@@ -34,7 +34,8 @@ export async function getStaticProps({
 
 	const response = await getPaginatedStaticProps(
 		params,
-		({ offset, first }) => getPresenterDetailPageData({ id, offset, first }),
+		({ offset, first }) =>
+			getPresenterRecordingsPageData({ id, offset, first }),
 		(d) => d.person?.recordings?.nodes,
 		(d) => d.person?.recordings?.aggregate?.count
 	);

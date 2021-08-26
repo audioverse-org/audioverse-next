@@ -170,7 +170,6 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 							id="collectionDetail__seriesLabel"
 							defaultMessage="Series"
 							description="Collection Detail series label"
-							values={{ count: sequences.aggregate?.count }}
 						/>
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
@@ -184,7 +183,7 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 							href={makeCollectionSequencesRoute(lang, id)}
 							text={intl.formatMessage({
 								id: 'collectionDetail__seriesAllLabel',
-								defaultMessage: 'See all Series',
+								defaultMessage: 'See All Series',
 							})}
 							Icon={ForwardIcon}
 							iconPosition="left"
@@ -200,7 +199,6 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 							id="collectionDetail__speakersLabel"
 							defaultMessage="Speakers"
 							description="Collection Detail speakers label"
-							values={{ count: persons.aggregate?.count }}
 						/>
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
@@ -214,7 +212,7 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 							href={makeCollectionSequencesRoute(lang, id)}
 							text={intl.formatMessage({
 								id: 'collectionDetail__speakersAllLabel',
-								defaultMessage: 'See all Speakers',
+								defaultMessage: 'See All Speakers',
 							})}
 							Icon={ForwardIcon}
 							iconPosition="left"

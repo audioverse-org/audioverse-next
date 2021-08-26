@@ -5,4 +5,5 @@ export enum BaseColors {
 	DARK = 'dark',
 	SALMON = 'salmon',
 	LIGHT_TONE = 'lightTone',
+	SMART_PLAYLIST_H = 'smartPlaylistH',
 }

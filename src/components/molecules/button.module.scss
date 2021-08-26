@@ -20,7 +20,7 @@
 	}
 	background: $ts-red;
 	border: 1px solid $ts-red;
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+	box-shadow: $ts-shadow-small-default;
 	&:focus {
 		border: 1px solid $ts-dark;
 		outline: none;
@@ -55,7 +55,7 @@
 .secondary,
 .secondaryInverse {
 	&:hover {
-		box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+		box-shadow: $ts-shadow-small-hover;
 		text-decoration: none;
 	}
 }

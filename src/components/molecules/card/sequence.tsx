@@ -73,6 +73,7 @@ export default function CardSequence({
 									person={person}
 									textColor={BaseColors.DARK}
 									key={person.canonicalPath}
+									isLinked
 									small
 								/>
 							))}

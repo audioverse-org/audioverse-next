@@ -24,6 +24,10 @@
 .title {
 	margin-bottom: 8px;
 	flex-grow: 1;
+	a:hover {
+		color: $ts-white;
+		text-decoration: none;
+	}
 }
 
 .details {

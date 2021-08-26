@@ -28,8 +28,8 @@ import CollectionDetail from '@containers/collection/detail';
 import CollectionList from '@containers/collection/list';
 import Home from '@containers/home';
 import Playlists from '@containers/playlist/list';
-import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
+import PresenterRecordings from '@containers/presenter/recordings';
 import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
@@ -418,9 +418,9 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes presenter detail page', async () => {
+	it('localizes presenter recordings page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Presenter
+			<PresenterRecordings
 				rssPath={'rssPath'}
 				nodes={[{ id: 'id' }] as any}
 				data={undefined as any}

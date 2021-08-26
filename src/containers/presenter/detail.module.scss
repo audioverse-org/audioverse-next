@@ -1,0 +1,41 @@
+@import '../../styles/common';
+
+.container {
+	padding: 16px 24px;
+	background-color: $ts-smartPlaylistH;
+}
+
+.titleLockup {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.image {
+	margin-right: 8px;
+}
+
+.detailsRow {
+	display: flex;
+	align-items: center;
+	margin-bottom: -4px;
+	> *:first-child {
+		flex-grow: 1;
+	}
+}
+
+.countLabel {
+	color: $ts-midTone;
+	> span {
+		margin-right: 16px;
+	}
+}
+
+.iconButton {
+	margin-left: 8px;
+}
+
+.cardGroup,
+.seeAllButton {
+	margin-bottom: 24px;
+}
