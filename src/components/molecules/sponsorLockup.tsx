@@ -1,17 +1,13 @@
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import { SponsorLockupFragment } from '@lib/generated/graphql';
 
-import NamedAvatar from './namedAvatar';
+import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 
 type Props = {
 	sponsor: SponsorLockupFragment;
-	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
-	hoverColor: BaseColors.RED | BaseColors.SALMON;
 	isLinked?: boolean;
-	small?: boolean;
-};
+} & Omit<INamedAvatarProps, 'name' | 'image' | 'href'>;
 
 export default function SponsorLockup({
 	sponsor: { title, imageWithFallback, canonicalPath },

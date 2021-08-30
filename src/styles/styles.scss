@@ -110,24 +110,27 @@ a {
 	&:hover {
 		color: $ts-red;
 		text-decoration: underline;
-		&.hover--salmon {
-			color: $ts-salmon;
-		}
-		&.hover-bg--darkened-white {
-			background-color: $ts-darkened-white;
-		}
-		&.hover-bg--darkened-cream {
-			background-color: $ts-darkened-cream;
-		}
-		&.hover-bg--darkened-dark {
-			background-color: $ts-darkened-dark;
-		}
-		&.hover-bg--darkened-lightTone {
-			background-color: $ts-darkened-lightTone;
-		}
-		&.hover-bg--darkened-smartPlaylistH {
-			background-color: $ts-darkened-smartPlaylistH;
-		}
+	}
+}
+
+*:hover {
+	&.hover--salmon {
+		color: $ts-salmon;
+	}
+	&.hover-bg--darkened-white {
+		background-color: $ts-darkened-white;
+	}
+	&.hover-bg--darkened-cream {
+		background-color: $ts-darkened-cream;
+	}
+	&.hover-bg--darkened-dark {
+		background-color: $ts-darkened-dark;
+	}
+	&.hover-bg--darkened-lightTone {
+		background-color: $ts-darkened-lightTone;
+	}
+	&.hover-bg--darkened-smartPlaylistH {
+		background-color: $ts-darkened-smartPlaylistH;
 	}
 }
 

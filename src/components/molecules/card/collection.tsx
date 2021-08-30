@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -54,62 +55,67 @@ export default function CardCollection({
 	);
 	return (
 		<Card>
-			<div className={styles.container}>
-				<TypeLockup
-					Icon={ListIcon}
-					label={intl.formatMessage({
-						id: 'cardCollection_hatTitle',
-						defaultMessage: 'Conference',
-						description: 'Card collection hat title',
-					})}
-					iconColor={BaseColors.SALMON}
-					textColor={BaseColors.WHITE}
-				/>
-				{heroImage}
-				{!!(startDate && endDate) && (
-					<Heading6 sans unpadded className={styles.date}>
-						{formatDateRange(startDate, endDate)}
+			<Link href={canonicalPath}>
+				<a className={styles.container}>
+					<TypeLockup
+						Icon={ListIcon}
+						label={intl.formatMessage({
+							id: 'cardCollection_hatTitle',
+							defaultMessage: 'Conference',
+							description: 'Card collection hat title',
+						})}
+						iconColor={BaseColors.SALMON}
+						textColor={BaseColors.WHITE}
+					/>
+					{heroImage}
+					{!!(startDate && endDate) && (
+						<Heading6 sans unpadded className={styles.date}>
+							{formatDateRange(startDate, endDate)}
+						</Heading6>
+					)}
+					<Heading2 unpadded className={styles.title}>
+						{title}
+					</Heading2>
+					<Heading6
+						sans
+						unpadded
+						uppercase
+						loose
+						className={styles.sequencesLabel}
+					>
+						<FormattedMessage
+							id="cardCollection_sequenceLabel"
+							defaultMessage="{count} series"
+							description="Card collection sequence count label"
+							values={{ count: allSequences.aggregate?.count }}
+						/>
 					</Heading6>
-				)}
-				<Heading2 unpadded className={styles.title}>
-					<Link href={canonicalPath}>
-						<a>{title}</a>
-					</Link>
-				</Heading2>
-				<Heading6
-					sans
-					unpadded
-					uppercase
-					loose
-					className={styles.sequencesLabel}
-				>
-					<FormattedMessage
-						id="cardCollection_sequenceLabel"
-						defaultMessage="{count} series"
-						description="Card collection sequence count label"
-						values={{ count: allSequences.aggregate?.count }}
-					/>
-				</Heading6>
-				<div className={styles.details}>
-					<div className={styles.duration}>
-						{useFormattedDuration(duration)}
-					</div>
-					{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
-					<div className={styles.progress}>
-						{viewerPlaybackCompletedPercentage > 0 && (
-							<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+					<div
+						className={clsx(
+							styles.details,
+							viewerHasFavorited && styles.detailsWithLike
 						)}
+					>
+						<div className={styles.duration}>
+							{useFormattedDuration(duration)}
+						</div>
+						{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
+						<div className={styles.progress}>
+							{viewerPlaybackCompletedPercentage > 0 && (
+								<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+							)}
+						</div>
 					</div>
-					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-						backgroundColor={BaseColors.DARK}
-						className={styles.like}
-					/>
-				</div>
-				{/* TODO: hover/link?, conditional sponsor, has favorited, sub-sequences */}
-			</div>
+					{/* TODO: conditional sponsor, has favorited, sub-sequences */}
+				</a>
+			</Link>
+			<IconButton
+				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+				onPress={() => alert('TODO')}
+				color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+				backgroundColor={BaseColors.DARK}
+				className={clsx(styles.like, viewerHasFavorited && styles.likeActive)}
+			/>
 		</Card>
 	);
 }

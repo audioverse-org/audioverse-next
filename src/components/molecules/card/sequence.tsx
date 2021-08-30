@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -42,73 +43,79 @@ export default function CardSequence({
 	} = sequence;
 	return (
 		<Card>
-			<div className={styles.container}>
-				<div className={styles.stretch}>
-					<TypeLockup
-						Icon={ListIcon}
-						label={intl.formatMessage({
-							id: 'cardSequence_hatTitle',
-							defaultMessage: 'Series',
-							description: 'Card sequence hat title',
-						})}
-						iconColor={BaseColors.RED}
-						textColor={BaseColors.DARK}
-					/>
-					<Heading2 unpadded className={styles.title}>
-						<Link href={canonicalPath}>
-							<a>{title}</a>
-						</Link>
-					</Heading2>
-					{!!(summary || description) && (
-						<div
-							dangerouslySetInnerHTML={{ __html: summary || description }}
-							className={styles.kicker}
-						></div>
-					)}
-
-					{persons.nodes?.length && (
-						<div className={styles.persons}>
-							{persons.nodes.map((person) => (
-								<PersonLockup
-									person={person}
-									textColor={BaseColors.DARK}
-									key={person.canonicalPath}
-									isLinked
-									small
-								/>
-							))}
-						</div>
-					)}
-					{/* TODO: replace with "...and X more" format */}
-				</div>
-				<Heading6 sans unpadded uppercase loose className={styles.partsLabel}>
-					<FormattedMessage
-						id="cardSequence_sequenceLabel"
-						defaultMessage="{count} parts"
-						description="Card sequence recording count label"
-						values={{ count: recordings.aggregate?.count }}
-					/>
-				</Heading6>
-				<div className={styles.details}>
-					<div className={styles.duration}>
-						{useFormattedDuration(duration)}
-					</div>
-					{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
-					<div className={styles.progress}>
-						{viewerPlaybackCompletedPercentage > 0 && (
-							<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+			<Link href={canonicalPath}>
+				<a className={styles.container}>
+					<div className={styles.stretch}>
+						<TypeLockup
+							Icon={ListIcon}
+							label={intl.formatMessage({
+								id: 'cardSequence_hatTitle',
+								defaultMessage: 'Series',
+								description: 'Card sequence hat title',
+							})}
+							iconColor={BaseColors.RED}
+							textColor={BaseColors.DARK}
+						/>
+						<Heading2 unpadded className={styles.title}>
+							{title}
+						</Heading2>
+						{!!(summary || description) && (
+							<div
+								dangerouslySetInnerHTML={{ __html: summary || description }}
+								className={styles.kicker}
+							></div>
 						)}
+
+						{persons.nodes?.length && (
+							<div className={styles.persons}>
+								{persons.nodes.map((person) => (
+									<PersonLockup
+										person={person}
+										textColor={BaseColors.DARK}
+										key={person.canonicalPath}
+										isLinked
+										isOptionalLink
+										small
+									/>
+								))}
+							</div>
+						)}
+						{/* TODO: replace with "...and X more" format */}
 					</div>
-					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
-						backgroundColor={BaseColors.CREAM}
-						className={styles.like}
-					/>
-				</div>
-				{/* TODO: hover/link?, conditional persons, sub-recordings */}
-			</div>
+					<Heading6 sans unpadded uppercase loose className={styles.partsLabel}>
+						<FormattedMessage
+							id="cardSequence_sequenceLabel"
+							defaultMessage="{count} parts"
+							description="Card sequence recording count label"
+							values={{ count: recordings.aggregate?.count }}
+						/>
+					</Heading6>
+					<div
+						className={clsx(
+							styles.details,
+							viewerHasFavorited && styles.detailsWithLike
+						)}
+					>
+						<div className={styles.duration}>
+							{useFormattedDuration(duration)}
+						</div>
+						{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
+						<div className={styles.progress}>
+							{viewerPlaybackCompletedPercentage > 0 && (
+								<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+							)}
+						</div>
+					</div>
+					{/* TODO: conditional persons, sub-recordings */}
+				</a>
+			</Link>
+			<IconButton
+				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+				onPress={() => alert('TODO')}
+				color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+				backgroundColor={BaseColors.CREAM}
+				className={styles.like}
+			/>
 		</Card>
 	);
 }

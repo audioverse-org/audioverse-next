@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { BaseColors } from '@components/atoms/baseColors';
 
@@ -9,7 +9,7 @@ import styles from './iconButton.module.scss';
 
 type Props = {
 	Icon: any;
-	onPress: (event: any) => void;
+	onPress: (event: MouseEvent) => void;
 	color: BaseColors;
 	backgroundColor: BaseColors;
 	className?: string;
@@ -26,7 +26,8 @@ export default function IconButton({
 	...props
 }: Props): JSX.Element {
 	return (
-		<a
+		<div
+			role="button"
 			onClick={onPress}
 			className={clsx(
 				styles.base,
@@ -36,6 +37,6 @@ export default function IconButton({
 			{...props}
 		>
 			<Icon className={baseColorsStyles[color]} />
-		</a>
+		</div>
 	);
 }

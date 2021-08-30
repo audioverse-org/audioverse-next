@@ -6,8 +6,14 @@
 	padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
-	color: $ts-dark;
 	background-color: $ts-smartPlaylistH;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-smartPlaylistH;
+	}
 }
 
 .stretch {

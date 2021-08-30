@@ -17,12 +17,17 @@
 		border-radius: 24px;
 	}
 	&:hover {
+		cursor: pointer;
+		color: $ts-red;
 		text-decoration: none;
 		img {
 			border-color: $ts-red !important;
 		}
 	}
 }
-.linkSalmon:hover img {
-	border-color: $ts-salmon !important;
+.linkSalmon:hover {
+	color: $ts-salmon;
+	img {
+		border-color: $ts-salmon !important;
+	}
 }

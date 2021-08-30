@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 
 import { BaseColors } from '@components/atoms/baseColors';
@@ -7,25 +6,27 @@ import RoundImage from '@components/atoms/roundImage';
 
 import baseColorStyles from '../atoms/baseColors.module.scss';
 
+import LinkButton, { ILinkButtonProps } from './linkButton';
 import styles from './namedAvatar.module.scss';
 
-type Props = {
+export type INamedAvatarProps = {
 	name: string;
 	image?: string;
 	href?: string;
 	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
 	hoverColor?: BaseColors.RED | BaseColors.SALMON;
 	small?: boolean;
-};
+} & Pick<ILinkButtonProps, 'isOptionalLink'>;
 
 export default function NamedAvatar({
 	name,
 	image,
 	href,
+	isOptionalLink,
 	textColor,
 	hoverColor,
 	small,
-}: Props): JSX.Element {
+}: INamedAvatarProps): JSX.Element {
 	const inner = (
 		<>
 			{image && <RoundImage image={image} small={small} />}
@@ -34,18 +35,19 @@ export default function NamedAvatar({
 	);
 	const containerClasses = clsx(styles.container, baseColorStyles[textColor]);
 	return href ? (
-		<Link href={href}>
-			<a
-				className={clsx(
+		<LinkButton
+			{...{
+				href,
+				isOptionalLink,
+				className: clsx(
 					containerClasses,
 					styles.link,
-					hoverColor === BaseColors.SALMON && 'hover--salmon',
 					hoverColor === BaseColors.SALMON && styles.linkSalmon
-				)}
-			>
-				{inner}
-			</a>
-		</Link>
+				),
+			}}
+		>
+			{inner}
+		</LinkButton>
 	) : (
 		<div className={containerClasses}>{inner}</div>
 	);
