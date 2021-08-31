@@ -22,7 +22,7 @@ import {
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/[id]';
+} from '@pages/[language]/sermons/[id]/[[...slug]]';
 
 jest.mock('next/router');
 jest.mock('video.js');
