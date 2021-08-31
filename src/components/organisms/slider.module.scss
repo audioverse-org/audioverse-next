@@ -9,7 +9,7 @@
 	margin-bottom: 2rem;
 	position: relative;
 	transform: translateX(0);
-	transition: transform 300ms;
+	transition: transform $transition-medium;
 	> * {
 		--cardWidth: calc((100% / var(--perSlide, 1)) - 2rem);
 		flex: 0 0 var(--cardWidth);

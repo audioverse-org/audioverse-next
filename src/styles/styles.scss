@@ -110,13 +110,13 @@ a {
 	&:hover {
 		color: $ts-red;
 		text-decoration: underline;
+		&.hover--salmon {
+			color: $ts-salmon;
+		}
 	}
 }
 
 *:hover {
-	&.hover--salmon {
-		color: $ts-salmon;
-	}
 	&.hover-bg--darkened-white {
 		background-color: $ts-darkened-white;
 	}

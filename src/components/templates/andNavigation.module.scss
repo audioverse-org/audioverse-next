@@ -28,13 +28,13 @@
 }
 
 .navigationShown {
-	animation: slide-in 300ms forwards;
-	-webkit-animation: slide-in 300ms forwards;
+	animation: slide-in $transition-medium forwards;
+	-webkit-animation: slide-in $transition-medium forwards;
 }
 
 .navigationHidden {
-	animation: slide-out 300ms forwards;
-	-webkit-animation: slide-out 300ms forwards;
+	animation: slide-out $transition-medium forwards;
+	-webkit-animation: slide-out $transition-medium forwards;
 }
 
 @keyframes slide-in {
