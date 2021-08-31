@@ -15,10 +15,12 @@ import ListIcon from '../../../../public/img/icon-list-alt-solid.svg';
 
 interface CardSermonProps {
 	recording: CardSermonFragment;
+	hideHat?: boolean;
 }
 
 export default function CardSermon({
 	recording,
+	hideHat,
 }: CardSermonProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const container = recording.sequence
@@ -26,8 +28,7 @@ export default function CardSermon({
 				icon: <ListIcon width={12} height={12} />,
 				title: recording.sequence.title,
 				length: recording.sequence.recordings.aggregate?.count,
-				// TODO: set index dynamically
-				index: 1,
+				index: recording.sequenceIndex,
 		  }
 		: undefined;
 
@@ -40,6 +41,7 @@ export default function CardSermon({
 			progress={0}
 			theme={'sermon'}
 			{...recording}
+			hideHat={hideHat}
 		/>
 	);
 }

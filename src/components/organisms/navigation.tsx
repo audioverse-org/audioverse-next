@@ -1,9 +1,9 @@
-import { Button } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import ActiveLink from '@components/atoms/activeLink';
 import Heading1 from '@components/atoms/heading1';
+import Button from '@components/molecules/button';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -131,13 +131,18 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 				})}
 			</ul>
 
-			<Button variant={'contained'} color={'primary'}>
-				<FormattedMessage
-					id={`header__donateButtonLabel`}
-					defaultMessage="Donate"
-					description={`Header nav donate button label`}
-				/>
-			</Button>
+			<Button
+				type="super"
+				href={`/${languageRoute}/give`}
+				text={
+					<FormattedMessage
+						id={`header__donateButtonLabel`}
+						defaultMessage="Donate"
+						description={`Header nav donate button label`}
+					/>
+				}
+				className={styles.donateButton}
+			/>
 
 			<LoadingIndicator />
 		</header>

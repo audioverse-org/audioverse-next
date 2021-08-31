@@ -35,6 +35,21 @@ function loadData() {
 						url: 'the_sponsor_image_url',
 					},
 				},
+				persons: {
+					aggregate: {
+						count: 1,
+					},
+					nodes: [
+						{
+							id: 'the_person_id',
+							name: 'the_person_name',
+							canonicalPath: 'the_person_url',
+							imageWithFallback: {
+								url: 'the_person_image_url',
+							},
+						},
+					],
+				},
 				sequences: {
 					aggregate: {
 						count: 1,
@@ -49,6 +64,7 @@ function loadData() {
 									count: 1,
 								},
 							},
+							persons: [],
 						},
 					],
 				},

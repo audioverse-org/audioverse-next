@@ -10,17 +10,41 @@ export const makeSermonRoute = (
 	sermonId: string
 ): string => `/${languageRoute}/sermons/${sermonId}`;
 
-// TODO: rename to makePresenterDetailRoute
-export const makePersonRoute = (
+export const makePresenterDetailRoute = (
 	languageRoute: string,
 	personId: string,
-	page: number | string = 1
-): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
+	page?: number | string
+): string =>
+	`/${languageRoute}/presenters/${personId}${page ? `/page/${page}` : ''}`;
 
 export const makePresenterListRoute = (
 	languageRoute: string,
 	page: number | string
 ): string => `/${languageRoute}/presenters/page/${page}`;
+
+export const makePresenterRecordingsRoute = (
+	languageRoute: string,
+	personId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
+
+export const makePresenterTopRecordingsRoute = (
+	languageRoute: string,
+	personId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/presenters/${personId}/top/page/${page}`;
+
+export const makePresenterSequencesRoute = (
+	languageRoute: string,
+	personId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/presenters/${personId}/sequences/page/${page}`;
+
+export const makePresenterAlsoAppearsInRoute = (
+	languageRoute: string,
+	personId: string,
+	page: number | string = 1
+): string => `/${languageRoute}/presenters/${personId}/appears/page/${page}`;
 
 export const makeSeriesDetailRoute = (
 	languageRoute: string,
@@ -134,6 +158,15 @@ export const makeCollectionRoute = (
 	languageRoute: string,
 	conferenceId: string
 ): string => `/${languageRoute}/collections/${conferenceId}`;
+
+export const makeCollectionSequencesRoute = (
+	languageRoute: string,
+	conferenceId: string,
+	page = 1
+): string =>
+	`/${languageRoute}/collections/${conferenceId}/sequences${
+		page ? `/page/${page}` : ''
+	}`;
 
 export const makeConferenceRecordingsRoute = (
 	languageRoute: string,

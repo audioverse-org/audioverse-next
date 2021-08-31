@@ -1,6 +1,7 @@
 fragment sponsorLockup on Sponsor {
 	id
 	title
+	canonicalPath
 	imageWithFallback {
 		url(size: 100)
 	}

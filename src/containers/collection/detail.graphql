@@ -17,12 +17,29 @@ query getCollectionDetailPageData($id: ID!) {
 			canonicalPath
 			...sponsorLockup
 		}
-		sequences(first: 6) {
-			nodes {
-				...cardSequence
-			}
+		persons(
+			first: 3
+			orderBy: [
+				{ field: RECORDING_COUNT, direction: DESC }
+				{ field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC }
+			]
+		) {
 			aggregate {
 				count
+			}
+			nodes {
+				...cardPerson
+			}
+		}
+		sequences(
+			first: 3
+			orderBy: [{ field: RECORDING_COUNT, direction: DESC }]
+		) {
+			aggregate {
+				count
+			}
+			nodes {
+				...cardSequence
 			}
 		}
 	}

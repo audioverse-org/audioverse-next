@@ -2,9 +2,12 @@ import { Menu } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import IconShare from '../../../public/img/icon-share.svg';
+
+import IconButton from './iconButton';
 
 export default function ButtonShareRecording({
 	recording,
@@ -23,20 +26,20 @@ export default function ButtonShareRecording({
 		setAnchorEl(null);
 	};
 
-	// TODO: Extract icon button maybe?
 	return (
 		<>
-			<button
+			<IconButton
+				Icon={IconShare}
+				onPress={handleClick}
+				color={BaseColors.DARK}
+				backgroundColor={BaseColors.WHITE}
 				aria-label={intl.formatMessage({
 					id: 'molecule-buttonShareRecording__buttonLabel',
 					defaultMessage: 'share',
 					description: 'recording share button label',
 				})}
 				aria-controls={'shareMenu'}
-				onClick={handleClick}
-			>
-				<IconShare />
-			</button>
+			/>
 			<Menu
 				id={'shareMenu'}
 				open={Boolean(anchorEl)}

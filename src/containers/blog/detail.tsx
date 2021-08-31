@@ -62,7 +62,7 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 					/>
 				</div>
 				<div className={styles.sidebar}>
-					<LineHeading size={16}>
+					<LineHeading>
 						<FormattedMessage
 							id="blogDetailPage__moreBlogPosts"
 							defaultMessage="More Blog Posts"

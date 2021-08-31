@@ -34,10 +34,6 @@
 	> * {
 		padding: 24px;
 	}
-	h1 {
-		margin-top: 0;
-		margin-bottom: 0.5rem;
-	}
 	h6 {
 		margin-top: 16px;
 		margin-bottom: 8px;
@@ -65,7 +61,15 @@
 	padding-left: 0;
 	margin-top: 0;
 	li {
-		display: inline-block;
-		margin-right: 1rem;
+		display: block;
+		margin-right: 8px;
+		margin-bottom: 8px;
+		@media (min-width: $breakpoint-md) {
+			display: inline-block;
+		}
+		@media (min-width: $breakpoint-lg) {
+			margin-right: 16px;
+			margin-bottom: 16px;
+		}
 	}
 }

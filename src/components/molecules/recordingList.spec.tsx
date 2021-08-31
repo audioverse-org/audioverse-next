@@ -20,7 +20,14 @@ async function renderComponent({
 					url: 'the_url',
 				},
 				title: 'the_title',
-				persons: [{ name: 'the_person_name', id: 'the_person_id' }],
+				persons: [
+					{
+						name: 'the_person_name',
+						id: 'the_person_id',
+						canonicalPath: 'the_person_canonical_path',
+						imageWithFallback: { url: 'the_person_image_url' },
+					},
+				],
 				duration: 600,
 				...sermonData,
 			} as any,
@@ -35,21 +42,21 @@ describe('recording list', () => {
 	});
 
 	it('has image', async () => {
-		const { getByRole } = await renderComponent();
+		const { getAllByRole } = await renderComponent();
 
-		expect(getByRole('img')).toBeInTheDocument();
+		expect(getAllByRole('img')[0]).toBeInTheDocument();
 	});
 
 	it('sets image src', async () => {
-		const { getByRole } = await renderComponent();
+		const { getAllByRole } = await renderComponent();
 
-		expect(getByRole('img')).toHaveAttribute('src', 'the_url');
+		expect(getAllByRole('img')[0]).toHaveAttribute('src', 'the_url');
 	});
 
 	it('sets alt', async () => {
-		const { getByRole } = await renderComponent();
+		const { getAllByRole } = await renderComponent();
 
-		expect(getByRole('img')).toHaveAttribute('alt', 'the_title');
+		expect(getAllByRole('img')[0]).toHaveAttribute('alt', 'the_title');
 	});
 
 	it('includes presenter names', async () => {
@@ -63,7 +70,7 @@ describe('recording list', () => {
 
 		expect(getByRole('link', { name: 'the_person_name' })).toHaveAttribute(
 			'href',
-			'/en/presenters/the_person_id/page/1'
+			'/the_person_canonical_path'
 		);
 	});
 

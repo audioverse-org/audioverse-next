@@ -1,11 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import SpeakerName from '@components/molecules/speakerName';
+import { BaseColors } from '@components/atoms/baseColors';
 import TableList from '@components/organisms/tableList';
 import { RecordingListFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
+
+import PersonLockup from './personLockup';
 
 const columns = [
 	{
@@ -16,7 +18,7 @@ const columns = [
 					{node.persons?.map(
 						(p): JSX.Element => (
 							<li key={p.id}>
-								<SpeakerName person={p} />
+								<PersonLockup person={p} textColor={BaseColors.DARK} isLinked />
 							</li>
 						)
 					)}

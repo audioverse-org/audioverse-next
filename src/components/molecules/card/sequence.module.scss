@@ -1,18 +1,20 @@
 @import '../../../styles/common';
 
+$container-padding: 16px;
 .container {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding: $container-padding;
 	border-radius: 16px;
 	overflow: hidden;
-	color: $ts-dark;
 	background-color: $ts-cream;
-}
-
-.imageContainer {
-	height: 124px;
-	position: relative;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-cream;
+	}
 }
 
 .stretch {
@@ -31,6 +33,7 @@
 }
 
 .kicker {
+	margin-bottom: 8px;
 	display: -webkit-box;
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
@@ -41,19 +44,32 @@
 	}
 }
 
+.persons > * {
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
 .partsLabel {
 	color: $ts-dark;
 	margin-top: 16px;
-	margin-bottom: 3.5px;
 }
 
+$like-icon-size: 32px;
+$like-icon-padding: 8px;
 .details {
 	display: flex;
 	align-items: center;
+	@media (any-pointer: fine) {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+	&.detailsWithLike {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
 }
 
 .duration {
 	color: $ts-midTone;
+	line-height: 1.21;
 }
 
 .progress {
@@ -63,17 +79,16 @@
 
 .like {
 	display: none;
+	position: absolute;
+	bottom: $container-padding;
+	right: $container-padding;
 	@media (any-pointer: fine) {
-		display: block;
+		display: inherit;
+	}
+	@media (pointer: coarse) {
+		pointer-events: none;
 	}
 	&Active {
-		display: block;
-		> * {
-			fill: $ts-red;
-		}
+		display: inherit;
 	}
-}
-
-.progress + .like {
-	margin-left: 16px;
 }

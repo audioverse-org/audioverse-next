@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
-import { makePersonRoute, makePresenterListRoute } from '@lib/routes';
+import { makePresenterDetailRoute, makePresenterListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { PresentersStaticProps } from '@pages/[language]/presenters/page/[i]';
 
@@ -26,7 +26,7 @@ function Presenters({ nodes, pagination }: Props): JSX.Element {
 			<ul>
 				{nodes.map((n) => (
 					<li key={n.id}>
-						<Link href={makePersonRoute(languageRoute, n.id)}>
+						<Link href={makePresenterDetailRoute(languageRoute, n.id)}>
 							<a>
 								<Image
 									src={n.imageWithFallback?.url}

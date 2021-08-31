@@ -2,12 +2,16 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
+import DefinitionList, {
+	IDefinitionListTerm,
+} from '@components/molecules/definitionList';
 import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
+import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import SequenceNav from '@components/molecules/sequenceNav';
-import SpeakerName from '@components/molecules/speakerName';
 import SponsorInfo from '@components/molecules/sponsorInfo';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
@@ -27,22 +31,102 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
 	const intl = useIntl();
 	const speakers = recording?.persons || [];
-	const { sponsor } = recording;
-	const recordingDateString = new Date(
-		recording.recordingDate || ''
-	).toLocaleString([], {
+	const {
+		collection,
+		description,
+		recordingDate,
+		sequence,
+		sequenceIndex,
+		sponsor,
+		title,
+		transcript,
+	} = recording;
+	const recordingDateString = new Date(recordingDate || '').toLocaleString([], {
 		hour: 'numeric',
 		minute: 'numeric',
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric',
 	});
-	const index = recording.sequenceIndex;
-	const seriesItems = recording?.sequence?.recordings?.nodes;
-	const seriesDetailRoute = recording.sequence
-		? makeSeriesDetailRoute(langRoute, recording.sequence.id)
+	const index = sequenceIndex;
+	const seriesItems = sequence?.recordings?.nodes;
+	const seriesDetailRoute = sequence
+		? makeSeriesDetailRoute(langRoute, sequence.id)
 		: '';
 
+	const details: IDefinitionListTerm[] = [];
+	if (description) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="sermonDetailPage__descriptionTitle"
+					defaultMessage="Description"
+					description="Sermon detail description title"
+				/>
+			),
+			definition: <div dangerouslySetInnerHTML={{ __html: description }} />,
+		});
+	}
+	if (sequence) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="organism-recording__seriesInfoTitle"
+					defaultMessage="Parent Series"
+					description="Recording series info title"
+				/>
+			),
+			definition: (
+				<p>
+					<Link href={seriesDetailRoute}>
+						<a className="decorated">{sequence.title}</a>
+					</Link>
+				</p>
+			),
+		});
+	}
+	if (collection) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="organism-recording__conferenceInfoTitle"
+					defaultMessage="Parent Conference"
+					description="Recording conference info title"
+				/>
+			),
+			definition: (
+				<p>
+					<Link href={makeCollectionRoute(langRoute, collection.id)}>
+						<a className="decorated">{collection.title}</a>
+					</Link>
+				</p>
+			),
+		});
+	}
+	if (sponsor) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="organism-recording__sponsorInfoTitle"
+					defaultMessage="Sponsor"
+					description="recording sponsor info title"
+				/>
+			),
+			definition: <SponsorInfo sponsor={sponsor} />,
+		});
+	}
+	if (recordingDate) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="sermonDetailPage__recordedTitle"
+					defaultMessage="Recorded"
+					description="Sermon detail recorded date title"
+				/>
+			),
+			definition: <p>{recordingDateString}</p>,
+		});
+	}
 	return (
 		<div className={styles.base}>
 			{/*TODO: use next/link for sequence link*/}
@@ -72,11 +156,16 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								/>
 							</span>
 						)}
-						<h1>{recording.title}</h1>
+						<h1>{title}</h1>
 						<ul className={styles.speakers}>
 							{speakers.map((speaker) => (
 								<li key={speaker.id}>
-									<SpeakerName person={speaker} />
+									<PersonLockup
+										person={speaker}
+										textColor={BaseColors.DARK}
+										hoverColor={BaseColors.RED}
+										isLinked
+									/>
 								</li>
 							))}
 						</ul>
@@ -93,89 +182,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							description: 'recording metadata section label',
 						})}
 					>
-						{recording.description && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="sermonDetailPage__descriptionTitle"
-										defaultMessage="Description"
-										description="Sermon detail description title"
-									/>
-								</h6>
-								<div
-									dangerouslySetInnerHTML={{ __html: recording.description }}
-								/>
-							</>
-						)}
+						<DefinitionList terms={details} textColor={BaseColors.DARK} />
 
-						{recording.sequence && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="organism-recording__seriesInfoTitle"
-										defaultMessage="Parent Series"
-										description="Recording series info title"
-									/>
-								</h6>
-								<p>
-									<Link href={seriesDetailRoute}>
-										<a>{recording.sequence.title}</a>
-									</Link>
-								</p>
-							</>
-						)}
-
-						{recording.collection && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="organism-recording__conferenceInfoTitle"
-										defaultMessage="Parent Conference"
-										description="Recording conference info title"
-									/>
-								</h6>
-								<p>
-									<Link
-										href={makeCollectionRoute(
-											langRoute,
-											recording.collection.id
-										)}
-									>
-										<a>{recording.collection.title}</a>
-									</Link>
-								</p>
-							</>
-						)}
-
-						{sponsor && (
-							<>
-								<h6>
-									<FormattedMessage
-										id="organism-recording__sponsorInfoTitle"
-										defaultMessage="Sponsor"
-										description="recording sponsor info title"
-									/>
-								</h6>
-								<SponsorInfo sponsor={sponsor} />
-							</>
-						)}
-
-						{recording.recordingDate ? (
-							<>
-								<h6>
-									<FormattedMessage
-										id="sermonDetailPage__recordedTitle"
-										defaultMessage="Recorded"
-										description="Sermon detail recorded date title"
-									/>
-								</h6>
-								<p>{recordingDateString}</p>
-							</>
-						) : null}
-
-						{recording.transcript?.text && (
-							<Transcript text={recording.transcript.text} />
-						)}
+						{transcript?.text && <Transcript text={transcript.text} />}
 
 						<CopyrightInfo recording={recording} />
 					</div>
@@ -192,7 +201,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							description: 'recording series list label',
 						})}
 					>
-						<LineHeading size={12}>
+						<LineHeading small>
 							<FormattedMessage
 								id={'organism-recording__seriesListTitle'}
 								defaultMessage={'Other Teachings in Series'}

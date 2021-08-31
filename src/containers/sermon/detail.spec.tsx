@@ -298,21 +298,23 @@ describe('sermon detail page', () => {
 		expect(queryByText('Play Audio')).not.toBeInTheDocument();
 	});
 
-	it('uses speaker name widget', async () => {
+	it('shows speaker name', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
 			persons: [
 				{
 					id: 'the_id',
 					name: 'the_name',
-					summary: 'the_summary',
+					imageWithFallback: {
+						url: 'the_image_url',
+					},
 				},
 			],
 		});
 
 		const { getAllByText } = await renderPage();
 
-		expect(getAllByText('the_summary').length > 0).toBeTruthy();
+		expect(getAllByText('the_name').length > 0).toBeTruthy();
 	});
 
 	it('includes sponsor title', async () => {
@@ -336,6 +338,9 @@ describe('sermon detail page', () => {
 				{
 					id: 'the_id',
 					name: 'the_name',
+					imageWithFallback: {
+						url: 'the_image_url',
+					},
 				},
 			],
 			recordingDate: '2003-03-01T09:30:00.000Z',
@@ -699,9 +704,9 @@ describe('sermon detail page', () => {
 			sequenceIndex: 2,
 		});
 
-		const { getByLabelText } = await renderPage();
+		const { getByText } = await renderPage();
 
-		expect(getByLabelText('Previous')).toHaveAttribute('href', '/en/sermons/1');
+		expect(getByText('Previous')).toHaveAttribute('href', '/en/sermons/1');
 	});
 
 	it('links to next recording', async () => {
@@ -726,9 +731,9 @@ describe('sermon detail page', () => {
 			sequenceIndex: 2,
 		});
 
-		const { getByLabelText } = await renderPage();
+		const { getByText } = await renderPage();
 
-		expect(getByLabelText('Next')).toHaveAttribute('href', '/en/sermons/3');
+		expect(getByText('Next')).toHaveAttribute('href', '/en/sermons/3');
 	});
 
 	it('links sponsor title', async () => {

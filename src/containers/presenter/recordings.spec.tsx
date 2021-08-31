@@ -1,19 +1,19 @@
 import { when } from 'jest-when';
 
 import {
-	GetPresenterDetailPageDataDocument,
 	GetPresenterDetailPathsDataDocument,
+	GetPresenterRecordingsPageDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
-import Presenter, {
+import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/page/[i]';
 
 jest.mock('@lib/writeFeedFile');
 
-const renderPage = buildStaticRenderer(Presenter, getStaticProps, {
+const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps, {
 	language: 'en',
 	id: 'the_presenter_id',
 	i: '1',
@@ -21,7 +21,7 @@ const renderPage = buildStaticRenderer(Presenter, getStaticProps, {
 
 function loadData() {
 	when(mockedFetchApi)
-		.calledWith(GetPresenterDetailPageDataDocument, expect.anything())
+		.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			person: {
 				id: 'the_presenter_id',
@@ -43,7 +43,7 @@ function loadData() {
 		});
 }
 
-describe('presenter detail page', () => {
+describe('presenter recordings page', () => {
 	// TODO: Delete test when covered by future tests
 	it('renders', async () => {
 		await renderPage();
@@ -83,7 +83,7 @@ describe('presenter detail page', () => {
 
 	it('skips rss generation if no entity name', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetPresenterDetailPageDataDocument, expect.anything())
+			.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 			.mockResolvedValue({
 				person: {
 					name: undefined,
@@ -171,7 +171,7 @@ describe('presenter detail page', () => {
 
 	it('renders 404', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetPresenterDetailPageDataDocument, expect.anything())
+			.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
 		const { getByText } = await renderPage();

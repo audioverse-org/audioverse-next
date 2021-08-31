@@ -1,13 +1,20 @@
 @import '../../../styles/common';
 
+$container-padding: 16px;
 .container {
 	display: flex;
 	flex-direction: column;
-	padding: 16px;
+	padding: $container-padding;
 	border-radius: 16px;
 	overflow: hidden;
-	color: $ts-white;
 	background-color: $ts-dark;
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	&:hover {
+		background-color: $ts-darkened-dark;
+	}
 }
 
 .imageContainer {
@@ -24,6 +31,23 @@
 .title {
 	margin-bottom: 8px;
 	flex-grow: 1;
+	a:hover {
+		color: $ts-white;
+		text-decoration: none;
+	}
+}
+
+$like-icon-size: 32px;
+$like-icon-padding: 8px;
+.details {
+	display: flex;
+	align-items: center;
+	@media (any-pointer: fine) {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+	&.detailsWithLike {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
 }
 
 .sequencesLabel,
@@ -34,4 +58,30 @@
 .sequencesLabel {
 	margin-top: 16px;
 	margin-bottom: 3.5px;
+}
+
+.duration {
+	line-height: 1.21;
+}
+
+.progress {
+	margin-left: 16px;
+	flex-grow: 1;
+	--progressColor: #{$ts-salmon};
+}
+
+.like {
+	display: none;
+	position: absolute;
+	bottom: $container-padding;
+	right: $container-padding;
+	@media (any-pointer: fine) {
+		display: inherit;
+	}
+	@media (pointer: coarse) {
+		pointer-events: none;
+	}
+	&Active {
+		display: inherit;
+	}
 }

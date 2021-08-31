@@ -1,29 +1,25 @@
-import clsx from 'clsx';
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
-import RoundImage from '@components/atoms/roundImage';
 import { SponsorLockupFragment } from '@lib/generated/graphql';
 
-import baseColorStyles from '../atoms/baseColors.module.scss';
-
-import styles from './sponsorLockup.module.scss';
+import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 
 type Props = {
 	sponsor: SponsorLockupFragment;
-	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
-};
+	isLinked?: boolean;
+} & Omit<INamedAvatarProps, 'name' | 'image' | 'href'>;
 
 export default function SponsorLockup({
-	sponsor: { title, imageWithFallback },
-	textColor,
+	sponsor: { title, imageWithFallback, canonicalPath },
+	isLinked,
+	...props
 }: Props): JSX.Element {
 	return (
-		<div className={styles.container}>
-			<RoundImage image={imageWithFallback.url} small />
-			<div className={clsx(styles.title, baseColorStyles[textColor])}>
-				{title}
-			</div>
-		</div>
+		<NamedAvatar
+			name={title}
+			image={imageWithFallback.url}
+			href={isLinked ? canonicalPath : undefined}
+			{...props}
+		/>
 	);
 }

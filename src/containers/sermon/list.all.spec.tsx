@@ -445,7 +445,7 @@ describe('sermons list page', () => {
 		expect(getAllByText('Video').length).toEqual(2);
 	});
 
-	it('uses speaker widgets', async () => {
+	it('includes speaker name', async () => {
 		mockedFetchApi.mockResolvedValue({
 			sermons: {
 				nodes: [
@@ -456,7 +456,9 @@ describe('sermons list page', () => {
 							{
 								id: 'the_id',
 								name: 'the_name',
-								summary: 'the_summary',
+								imageWithFallback: {
+									url: 'the_image_url',
+								},
 							},
 						],
 					},
@@ -466,7 +468,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_summary')).toBeInTheDocument();
+		expect(getByText('the_name')).toBeInTheDocument();
 	});
 
 	it('skips feed creation if invalid language', async () => {

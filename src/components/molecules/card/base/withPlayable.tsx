@@ -1,14 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import RecordingProgressBar from '@components/atoms/recordingProgressBar';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import { CardTheme } from '@components/molecules/card/base/withHat';
-import SpeakerName from '@components/molecules/speakerName';
+import PersonLockup from '@components/molecules/personLockup';
 import {
 	CardWithPlayableFragment,
-	SpeakerNameFragment,
+	PersonLockupFragment,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -22,14 +23,15 @@ export interface CardWithPlayableProps {
 		icon?: any;
 		title: string;
 		length?: number;
-		index?: number;
+		index?: number | null;
 	};
 	title: string;
 	url: string;
-	persons?: SpeakerNameFragment[];
+	persons?: PersonLockupFragment[];
 	duration?: number;
 	progress?: number;
 	theme?: CardTheme;
+	hideHat?: boolean;
 }
 
 export default function CardWithPlayable({
@@ -41,6 +43,7 @@ export default function CardWithPlayable({
 	duration,
 	theme,
 	progress,
+	hideHat,
 }: CardWithPlayableProps): JSX.Element {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -61,7 +64,7 @@ export default function CardWithPlayable({
 	return (
 		<CardWithHat
 			hat={
-				container?.title
+				container?.title && !hideHat
 					? {
 							icon: container?.icon,
 							title: container?.title,
@@ -81,7 +84,7 @@ export default function CardWithPlayable({
 			<div className={styles.speakers}>
 				{persons.map((p) => (
 					<div key={p.id}>
-						<SpeakerName person={p} />
+						<PersonLockup person={p} textColor={BaseColors.DARK} />
 					</div>
 				))}
 			</div>

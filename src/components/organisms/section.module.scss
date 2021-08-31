@@ -24,7 +24,13 @@
 .content {
 	grid-area: content;
 	h2 {
-		font-size: 3em;
+		font-size: 48px;
+		line-height: 48px;
+		margin-bottom: 8px;
+	}
+	p {
+		font-size: 18px;
+		line-height: 21.78px;
 	}
 	& > * {
 		margin-top: 0.5rem;

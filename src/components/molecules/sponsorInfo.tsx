@@ -13,7 +13,7 @@ export default function SponsorInfo({
 	return (
 		<p>
 			<Link href={makeSponsorRoute(useLanguageRoute(), sponsor.id)}>
-				<a>{sponsor.title}</a>
+				<a className="decorated">{sponsor.title}</a>
 			</Link>
 		</p>
 	);

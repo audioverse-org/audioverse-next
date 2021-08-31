@@ -3,8 +3,9 @@ fragment cardSermon on Recording {
 	title
 	duration
 	persons {
-		...speakerName
+		...personLockup
 	}
+	sequenceIndex
 	sequence {
 		title
 		recordings {

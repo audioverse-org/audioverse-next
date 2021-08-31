@@ -2,7 +2,7 @@ fragment cardTopic on Recording {
 	title
 	duration
 	persons {
-		...speakerName
+		...personLockup
 	}
 	# TODO: viewerProgress
 	# TODO: viewerHasFavorited

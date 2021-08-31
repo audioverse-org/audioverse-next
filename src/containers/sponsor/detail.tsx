@@ -13,13 +13,15 @@ import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
+import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]';
 
 import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
-import LikeIcon from '../../../public/img/icon-like-active.svg';
+import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
+import LikeIcon from '../../../public/img/icon-like.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
@@ -36,6 +38,7 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 		location,
 		title,
 		website,
+		viewerHasFavorited,
 	} = sponsor;
 	const image = imageWithFallback.url;
 
@@ -57,7 +60,7 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 			}),
 			definition: (
 				<Link href={website}>
-					<a target="_blank" rel="nofollow noreferrer">
+					<a className="decorated" target="_blank" rel="nofollow noreferrer">
 						{website}
 					</a>
 				</Link>
@@ -107,8 +110,20 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 						/>
 					</Heading6>
 					{/* TODO: make icons functional */}
-					<ShareIcon />
-					<LikeIcon />
+					<IconButton
+						Icon={ShareIcon}
+						onPress={() => void 0}
+						color={BaseColors.DARK}
+						backgroundColor={BaseColors.LIGHT_TONE}
+						className={styles.iconButton}
+					/>
+					<IconButton
+						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => void 0}
+						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+						backgroundColor={BaseColors.LIGHT_TONE}
+						className={styles.iconButton}
+					/>
 				</div>
 				<HorizontalRule color="midTone" />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />

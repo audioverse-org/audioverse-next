@@ -84,7 +84,7 @@ describe('presenter list page', () => {
 
 		expect(getByText('the_person_name').parentElement).toHaveAttribute(
 			'href',
-			'/en/presenters/the_person_id/page/1'
+			'/en/presenters/the_person_id'
 		);
 	});
 

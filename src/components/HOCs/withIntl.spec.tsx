@@ -1,17 +1,17 @@
 import { RenderResult, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
 import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import ButtonFavorite from '@components/molecules/buttonFavorite';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import Login from '@components/molecules/login';
+import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
 import SearchBar from '@components/molecules/searchBar';
-import SpeakerName from '@components/molecules/speakerName';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import Footer from '@components/organisms/footer';
@@ -28,8 +28,8 @@ import CollectionDetail from '@containers/collection/detail';
 import CollectionList from '@containers/collection/list';
 import Home from '@containers/home';
 import Playlists from '@containers/playlist/list';
-import Presenter from '@containers/presenter/detail';
 import Presenters from '@containers/presenter/list';
+import PresenterRecordings from '@containers/presenter/recordings';
 import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
 import SermonDetail, { Sermon } from '@containers/sermon/detail';
@@ -44,8 +44,8 @@ import SponsorTeachings from '@containers/sponsor/teachings';
 import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
-import { isPersonFavorited, isRecordingFavorited } from '@lib/api';
-import { GetWithAuthGuardDataDocument, Person } from '@lib/generated/graphql';
+import { isRecordingFavorited } from '@lib/api';
+import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
 import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
 import {
@@ -157,15 +157,18 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes speakerName', async () => {
+	it('localizes personLockup', async () => {
 		const screen = await renderWithQueryProvider(
-			<SpeakerName
-				person={
-					{
-						id: 'z',
-						name: 'z',
-					} as Person
-				}
+			<PersonLockup
+				person={{
+					id: 'z',
+					name: 'z',
+					canonicalPath: 'z',
+					imageWithFallback: {
+						url: 'z',
+					},
+				}}
+				textColor={BaseColors.DARK}
 			/>
 		);
 
@@ -221,22 +224,6 @@ describe('localization usage', () => {
 		await waitFor(() => expect(isRecordingFavorited).toBeCalled());
 
 		expectNoUnlocalizedText(screen);
-	});
-
-	it('localizes SpeakerName login error', async () => {
-		const { getByRole } = await renderWithQueryProvider(
-			<SpeakerName person={{} as Person} />
-		);
-
-		await waitFor(() => expect(isPersonFavorited).toBeCalled());
-
-		const byRole = getByRole('button', {
-			hidden: true,
-		});
-
-		userEvent.click(byRole);
-
-		expectNoUnlocalizedToasts();
 	});
 
 	it('localizes tag list page', async () => {
@@ -397,6 +384,12 @@ describe('localization usage', () => {
 						},
 						nodes: [],
 					},
+					persons: {
+						aggregate: {
+							count: 0,
+						},
+						nodes: [],
+					},
 					sponsor: {
 						id: '234',
 						title: 'z',
@@ -425,9 +418,9 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes presenter detail page', async () => {
+	it('localizes presenter recordings page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Presenter
+			<PresenterRecordings
 				rssPath={'rssPath'}
 				nodes={[{ id: 'id' }] as any}
 				data={undefined as any}
@@ -463,7 +456,10 @@ describe('localization usage', () => {
 		[SponsorConferences, { nodes: [{ id: 'z' }] }],
 		[SponsorSeries, { nodes: [{ id: 'z' }] }],
 		[SeriesList, { nodes: [{ id: 'z' }] }],
-		[SeriesDetail, { nodes: [{ id: 'z' }] }],
+		[
+			SeriesDetail,
+			{ sequence: { id: 'z', recordings: { aggregate: { count: 0 } } } },
+		],
 		[Playlists, {}],
 		[Logout, {}],
 		[Register, {}],

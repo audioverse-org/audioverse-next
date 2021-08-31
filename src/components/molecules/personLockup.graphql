@@ -1,0 +1,8 @@
+fragment personLockup on Person {
+	id
+	name
+	canonicalPath
+	imageWithFallback {
+		url(size: 100)
+	}
+}

@@ -1,0 +1,33 @@
+@import '../../styles/common';
+
+.container {
+	display: inline-flex;
+	align-items: center;
+}
+
+.title {
+	margin-left: 4px;
+	font-size: 16px;
+	line-height: 19.36px;
+}
+
+.link {
+	img {
+		border: 1px solid transparent !important;
+		border-radius: 24px;
+	}
+	&:hover {
+		cursor: pointer;
+		color: $ts-red;
+		text-decoration: none;
+		img {
+			border-color: $ts-red !important;
+		}
+	}
+}
+.linkSalmon:hover {
+	color: $ts-salmon;
+	img {
+		border-color: $ts-salmon !important;
+	}
+}

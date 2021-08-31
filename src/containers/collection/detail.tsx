@@ -7,22 +7,29 @@ import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
+import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
+import Button from '@components/molecules/button';
+import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 // TODO: import RssLink from '@components/molecules/rssLink';
+import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { formatDateRange } from '@lib/date';
+import { makeCollectionSequencesRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import { CollectionStaticProps } from '@pages/[language]/collections/[id]/[[...slug]]';
 
 import FAListIcon from '../../../public/img/fa-list.svg';
+import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
@@ -33,18 +40,21 @@ type Props = CollectionStaticProps['props'];
 
 function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 	const intl = useIntl();
+	const lang = useLanguageRoute();
 
 	const {
-		sequences,
+		id,
+		title,
 		description,
 		duration,
 		image,
 		location,
 		startDate,
 		endDate,
-		title,
-		sponsor,
 		viewerHasFavorited,
+		sponsor,
+		persons,
+		sequences,
 	} = collection;
 
 	const details: IDefinitionListTerm[] = [];
@@ -65,7 +75,7 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 			}),
 			definition: (
 				<Link href={sponsor.canonicalPath}>
-					<a>{sponsor.title}</a>
+					<a className="decorated hover--salmon">{sponsor.title}</a>
 				</Link>
 			),
 		});
@@ -113,7 +123,13 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 					{title}
 				</Heading2>
 				{sponsor && (
-					<SponsorLockup sponsor={sponsor} textColor={BaseColors.LIGHT_TONE} />
+					<SponsorLockup
+						sponsor={sponsor}
+						textColor={BaseColors.LIGHT_TONE}
+						hoverColor={BaseColors.SALMON}
+						isLinked
+						small
+					/>
 				)}
 
 				<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
@@ -129,22 +145,81 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 						{useFormattedDuration(duration)}
 					</div>
 					{/* TODO: make icons functional */}
-					<ShareIcon className={styles.share} />
-					{viewerHasFavorited ? (
-						<LikeActiveIcon className={styles.likeActive} />
-					) : (
-						<LikeIcon className={styles.like} />
-					)}
+					<IconButton
+						Icon={ShareIcon}
+						onPress={() => void 0}
+						color={BaseColors.WHITE}
+						backgroundColor={BaseColors.DARK}
+						className={styles.iconButton}
+					/>
+					<IconButton
+						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => void 0}
+						color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						backgroundColor={BaseColors.DARK}
+						className={styles.iconButton}
+					/>
 				</div>
 				<HorizontalRule color="midTone" />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 			</TeaseHeader>
 			{sequences.nodes?.length ? (
-				<CardGroup className={styles.cardGroup}>
-					{sequences.nodes.map((sequence) => (
-						<CardSequence sequence={sequence} key={sequence.canonicalPath} />
-					))}
-				</CardGroup>
+				<>
+					<LineHeading color={BaseColors.SALMON}>
+						<FormattedMessage
+							id="collectionDetail__seriesLabel"
+							defaultMessage="Series"
+							description="Collection Detail series label"
+						/>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{sequences.nodes.map((sequence) => (
+							<CardSequence sequence={sequence} key={sequence.canonicalPath} />
+						))}
+					</CardGroup>
+					{(sequences.aggregate?.count || 0) > sequences.nodes.length && (
+						<Button
+							type="secondaryInverse"
+							href={makeCollectionSequencesRoute(lang, id)}
+							text={intl.formatMessage({
+								id: 'collectionDetail__seriesAllLabel',
+								defaultMessage: 'See All Series',
+							})}
+							Icon={ForwardIcon}
+							iconPosition="left"
+							className={styles.seeAllButton}
+						/>
+					)}
+				</>
+			) : null}
+			{persons.nodes?.length ? (
+				<>
+					<LineHeading color={BaseColors.SALMON}>
+						<FormattedMessage
+							id="collectionDetail__speakersLabel"
+							defaultMessage="Speakers"
+							description="Collection Detail speakers label"
+						/>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{persons.nodes.map((person) => (
+							<CardPerson person={person} key={person.canonicalPath} />
+						))}
+					</CardGroup>
+					{(persons.aggregate?.count || 0) > persons.nodes.length && (
+						<Button
+							type="secondaryInverse"
+							href={makeCollectionSequencesRoute(lang, id)}
+							text={intl.formatMessage({
+								id: 'collectionDetail__speakersAllLabel',
+								defaultMessage: 'See All Speakers',
+							})}
+							Icon={ForwardIcon}
+							iconPosition="left"
+							className={styles.seeAllButton}
+						/>
+					)}
+				</>
 			) : null}
 		</Tease>
 	);

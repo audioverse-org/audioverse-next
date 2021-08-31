@@ -28,7 +28,7 @@
 }
 .countLabel {
 	margin-top: 16px;
-	margin-bottom: 3.5px;
+	margin-bottom: -4px;
 }
 
 .cardGroup {
@@ -38,21 +38,15 @@
 .row {
 	display: flex;
 	align-items: center;
-	margin-bottom: 16px;
+	margin-bottom: -4px;
 	> *:first-child {
 		flex-grow: 1;
 	}
-	svg {
-		margin-left: 16px;
-	}
+}
+.iconButton {
+	margin-left: 8px;
 }
 
-.share > * {
-	stroke: $ts-white;
-}
-.like > * {
-	fill: $ts-white;
-}
-.likeActive > * {
-	fill: $ts-salmon;
+.seeAllButton {
+	margin-bottom: 24px;
 }

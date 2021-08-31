@@ -1,20 +1,100 @@
-query getPresenterDetailPageData($id: ID!, $offset: Int, $first: Int) {
+query getPresenterDetailPageData($id: ID!, $language: Language!) {
 	person(id: $id) {
 		id
 		name
-		summary
 		description
 		imageWithFallback {
 			url(size: 100)
 		}
-		recordings(offset: $offset, first: $first) {
-			nodes {
-				...writeFeedFile
-				...recordingList
-			}
+		viewerHasFavorited
+		website
+		sermons: recordings(contentType: SERMON) {
 			aggregate {
 				count
 			}
+		}
+		audiobookTracks: recordings(contentType: AUDIOBOOK_TRACK) {
+			aggregate {
+				count
+			}
+		}
+		musicTracks: recordings(contentType: MUSIC_TRACK) {
+			aggregate {
+				count
+			}
+		}
+		stories: recordings(contentType: STORY) {
+			aggregate {
+				count
+			}
+		}
+		essentialRecordings: recordings(
+			first: 3
+			isFeatured: true
+			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
+		) {
+			nodes {
+				...cardSermon
+			}
+		}
+		recentRecordings: recordings(
+			first: 3
+			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+		) {
+			aggregate {
+				count
+			}
+			nodes {
+				...cardSermon
+			}
+			pageInfo {
+				hasNextPage
+			}
+		}
+		topRecordings: recordings(
+			first: 3
+			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
+		) {
+			nodes {
+				...cardSermon
+			}
+			pageInfo {
+				hasNextPage
+			}
+		}
+	}
+	sequences(
+		language: $language
+		persons: [{ personId: $id }]
+		first: 3
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+		}
+	}
+	collections(
+		language: $language
+		persons: [{ personId: $id }]
+		first: 3
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardCollection
+			sequences(
+				persons: [{ personId: $id }]
+				orderBy: [{ field: TITLE, direction: ASC }]
+			) {
+				nodes {
+					...cardSequence
+				}
+			}
+		}
+		pageInfo {
+			hasNextPage
 		}
 	}
 }

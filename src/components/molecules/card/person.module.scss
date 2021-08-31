@@ -1,0 +1,32 @@
+@import '../../../styles/common';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+	background-color: $ts-smartPlaylistH;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-smartPlaylistH;
+	}
+}
+
+.stretch {
+	flex-grow: 1;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.image {
+	display: flex;
+	margin-right: 8px;
+}

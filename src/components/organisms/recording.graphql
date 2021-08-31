@@ -2,7 +2,7 @@ fragment recording on Recording {
 	id
 	title
 	persons {
-		...speakerName
+		...personLockup
 	}
 	videoDownloads: videoFiles(allowedContainers: MP4) {
 		id

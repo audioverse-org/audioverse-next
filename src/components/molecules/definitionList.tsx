@@ -9,7 +9,7 @@ import baseColorStyles from '../atoms/baseColors.module.scss';
 import styles from './definitionList.module.scss';
 
 export type IDefinitionListTerm = {
-	term: string;
+	term: JSX.Element | string;
 	definition: JSX.Element | string;
 };
 

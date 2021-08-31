@@ -2,7 +2,7 @@ fragment cardStory on Recording {
 	title
 	duration
 	persons(role: SPEAKER) {
-		...speakerName
+		...personLockup
 	}
 	sequence {
 		title

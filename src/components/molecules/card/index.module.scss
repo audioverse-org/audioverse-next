@@ -1,10 +1,16 @@
+@import '../../../styles/common';
+
 .card {
+	position: relative;
 	display: flex;
 	border-radius: 16px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	box-shadow: $ts-shadow-small-default;
 	overflow: hidden;
 	text-align: left;
 	> * {
 		flex-grow: 1;
+	}
+	*:hover {
+		text-decoration: none;
 	}
 }
