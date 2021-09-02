@@ -55,6 +55,11 @@
 .content {
 	flex: 1 1 100%;
 	padding: 24px;
+	max-width: $content-maxWidth-sm;
+	margin: 0 auto;
+	@media (min-width: $breakpoint-md) {
+		max-width: $content-maxWidth;
+	}
 }
 
 .searchHidden {
