@@ -22,11 +22,16 @@ import {
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/[id]';
+} from '@pages/[language]/sermons/[id]/[[...slug]]';
 
 jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
+jest.mock(
+	'next/link',
+	() => (props: any) => React.cloneElement(props.children, { href: props.href })
+);
+// WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 // TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
 function loadSermonDetailPathsData() {
@@ -305,6 +310,7 @@ describe('sermon detail page', () => {
 				{
 					id: 'the_id',
 					name: 'the_name',
+					canonicalPath: 'the_path',
 					imageWithFallback: {
 						url: 'the_image_url',
 					},
@@ -338,6 +344,7 @@ describe('sermon detail page', () => {
 				{
 					id: 'the_id',
 					name: 'the_name',
+					canonicalPath: 'the_path',
 					imageWithFallback: {
 						url: 'the_image_url',
 					},
@@ -520,6 +527,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -691,12 +699,15 @@ describe('sermon detail page', () => {
 					nodes: [
 						{
 							id: 1,
+							canonicalPath: '',
 						},
 						{
 							id: 2,
+							canonicalPath: '',
 						},
 						{
 							id: 3,
+							canonicalPath: '',
 						},
 					],
 				},
@@ -718,12 +729,15 @@ describe('sermon detail page', () => {
 					nodes: [
 						{
 							id: 1,
+							canonicalPath: '',
 						},
 						{
 							id: 2,
+							canonicalPath: '',
 						},
 						{
 							id: 3,
+							canonicalPath: '',
 						},
 					],
 				},
@@ -741,6 +755,7 @@ describe('sermon detail page', () => {
 			sponsor: {
 				id: 'sponsor_id',
 				title: 'sponsor_title',
+				canonicalPath: 'sponsor_path',
 			},
 		});
 
@@ -955,6 +970,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -976,6 +992,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1004,6 +1021,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1039,6 +1057,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1079,47 +1098,50 @@ describe('sermon detail page', () => {
 		});
 	});
 
-	it('displays progress bar for sequence recordings', async () => {
-		loadSermonDetailData({
-			sequence: {
-				recordings: {
-					nodes: [
-						{
-							id: 'the_sibling_id',
-							title: 'sibling_title',
-						},
-					],
-				},
-			},
-		});
+	// it('displays progress bar for sequence recordings', async () => {
+	// 	loadSermonDetailData({
+	// 		sequence: {
+	// 			recordings: {
+	// 				nodes: [
+	// 					{
+	// 						id: 'the_sibling_id',
+	// 						title: 'sibling_title',
+	// 						canonicalPath: 'sibling_path',
+	// 					},
+	// 				],
+	// 			},
+	// 		},
+	// 	});
 
-		const result = await renderPage();
+	// 	const result = await renderPage();
 
-		const sidebar = result.getByLabelText('series list');
+	// 	const sidebar = result.getByLabelText('series list');
 
-		expect(getByLabelText(sidebar, 'progress')).toBeInTheDocument();
-	});
+	// 	expect(getByLabelText(sidebar, 'progress')).toBeInTheDocument();
+	// });
 
-	it('disables sidebar progress bar interactivity', async () => {
-		loadSermonDetailData({
-			sequence: {
-				recordings: {
-					nodes: [
-						{
-							id: 'the_sibling_id',
-							title: 'sibling_title',
-						},
-					],
-				},
-			},
-		});
+	// it('disables sidebar progress bar interactivity', async () => {
+	// 	loadSermonDetailData({
+	// 		sequence: {
+	// 			recordings: {
+	// 				nodes: [
+	// 					{
+	// 						id: 'the_sibling_id',
+	// 						title: 'sibling_title',
+	// 						canonicalPath: 'sibling_path',
+	// 					},
+	// 				],
+	// 			},
+	// 		},
+	// 	});
 
-		const result = await renderPage();
+	// 	const result = await renderPage();
 
-		const sidebar = result.getByLabelText('series list');
+	// 	const sidebar = result.getByLabelText('series list');
 
-		expect(getByLabelText(sidebar, 'progress')).toBeDisabled();
-	});
+	// 	expect(getByLabelText(sidebar, 'progress')).toBeDisabled();
+	// });
+	// TODO: reimplement when usePlaybackSession uses server-side progress
 
 	it('displays durations in sidebar', async () => {
 		loadSermonDetailData({
@@ -1129,6 +1151,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							duration: 60 * 5,
 						},
 					],
@@ -1153,6 +1176,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -1174,6 +1198,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							sequenceIndex: 1,
 							sequence: {
 								recordings: {

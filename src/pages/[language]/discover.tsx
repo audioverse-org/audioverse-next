@@ -1,4 +1,4 @@
-import { GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
 
 import Discover from '@containers/discover';
 import { storeRequest } from '@lib/api';
@@ -10,21 +10,18 @@ import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default Discover;
 
-interface Context {
+interface Context extends GetStaticPropsContext<{ language: string }> {
 	req: any;
-	query: {
-		language: string;
-	};
 }
 
-export async function getServerSideProps({ req, query }: Context): Promise<
+export async function getServerSideProps({ req, params }: Context): Promise<
 	GetServerSidePropsResult<{
 		data: GetDiscoverPageDataQuery;
 	}>
 > {
 	storeRequest(req);
 
-	const language = getLanguageIdByRoute(query.language);
+	const language = getLanguageIdByRoute(params?.language);
 
 	return {
 		props: {

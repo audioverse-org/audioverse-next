@@ -1,12 +1,3 @@
 fragment cardSong on Recording {
-	title
-	persons {
-		...personLockup
-	}
-	duration
-	sequence {
-		id
-		title
-	}
 	...cardWithPlayable
 }

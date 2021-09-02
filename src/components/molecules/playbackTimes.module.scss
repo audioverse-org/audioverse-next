@@ -1,4 +1,7 @@
+@import '../../styles/common';
+
 .base {
 	display: flex;
 	justify-content: space-between;
+	color: $ts-midTone;
 }

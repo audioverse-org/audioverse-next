@@ -8,6 +8,7 @@ $container-padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
 	background-color: $ts-cream;
+	transition: background-color $transition-medium;
 	&,
 	&:hover {
 		color: $ts-dark;

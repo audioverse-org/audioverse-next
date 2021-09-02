@@ -1,15 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { ReactNode } from 'react';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import React, { PropsWithChildren } from 'react';
+import { useState } from 'react';
 
-import Icon from '@components/atoms/icon';
+import Heading6 from '@components/atoms/heading6';
 
 import Card from '../';
+import DisclosureIcon from '../../../../../public/img/icon-disclosure-slim.svg';
 
 import styles from './withHat.module.scss';
 
 export type CardTheme =
-	| 'collection'
+	| 'audiobookTrack'
 	| 'chapter'
 	| 'sermon'
 	| 'song'
@@ -19,74 +21,59 @@ export type CardTheme =
 interface CardProps {
 	hat?: {
 		icon?: any;
+		label: string;
 		title: string | JSX.Element;
+		content: JSX.Element;
+		url: string;
 	};
-	hero?: string;
-	preTitle?: string;
-	title: string;
-	url?: string;
-	titleAdornment?: ReactNode;
-	children?: ReactNode;
-	theme?: CardTheme;
+	theme: CardTheme;
 }
 
 export default function CardWithHat({
 	hat,
-	hero,
-	preTitle,
-	title,
-	url,
-	titleAdornment,
-	children,
 	theme,
-}: CardProps): JSX.Element {
-	const heroImage = hero && (
-		<Image
-			className={styles.hero}
-			src={hero}
-			alt={title}
-			width={500}
-			height={260}
-		/>
-	);
-
+	children,
+}: PropsWithChildren<CardProps>): JSX.Element {
+	const [hatExpanded, setHatExpanded] = useState(false);
+	const router = useRouter();
+	const longHat = theme === 'audiobookTrack' || theme === 'story';
 	return (
 		<Card>
-			<div className={`${(theme && styles[theme]) || ''}`}>
+			<div className={clsx(styles.base, styles[theme])}>
 				{hat && (
-					// TODO: Link the hat
-					<div className={styles.hat}>
-						<span className={styles.hatIcon}>{hat.icon}</span>
-						<span className={styles.hatTitle}>{hat.title}</span>
-						<span className={styles.hatCarrot}>
-							<Icon icon={'chevron-down-custom'} size={16} />
-						</span>
+					<div
+						className={clsx(
+							styles.hat,
+							hatExpanded && styles.hatExpanded,
+							longHat && styles.longHat
+						)}
+						onClick={() => setHatExpanded(!hatExpanded)}
+					>
+						<div className={styles.hatBar}>
+							<span className={styles.hatIcon}>{hat.icon}</span>
+							<span className={styles.hatTitle}>{hat.title}</span>
+							<Heading6
+								loose
+								sans
+								unpadded
+								uppercase
+								className={styles.hatLabel}
+							>
+								{hat.label}
+							</Heading6>
+							<span className={styles.hatCaret}>
+								<DisclosureIcon />
+							</span>
+						</div>
+						<div
+							className={styles.hatContent}
+							onClick={() => router.push(hat.url)}
+						>
+							{hat.content}
+						</div>
 					</div>
 				)}
-				<div className={styles.content}>
-					{hero &&
-						(url ? (
-							<Link href={url}>
-								<a>{heroImage}</a>
-							</Link>
-						) : (
-							heroImage
-						))}
-					{preTitle && <span className={styles.part}>{preTitle}</span>}
-					<div className={styles.heading}>
-						<h2 className={styles.title}>
-							{url ? (
-								<Link href={url}>
-									<a>{title}</a>
-								</Link>
-							) : (
-								title
-							)}
-						</h2>
-						{titleAdornment}
-					</div>
-					{children}
-				</div>
+				{children}
 			</div>
 		</Card>
 	);

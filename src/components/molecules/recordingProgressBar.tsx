@@ -1,15 +1,12 @@
 import React from 'react';
 
-import {
-	AndMiniplayerFragment,
-	RecordingProgressBarFragment,
-} from '@lib/generated/graphql';
+import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import ProgressBar from './progressBar';
+import ProgressBar from '../atoms/progressBar';
 
 interface ProgressBarProps {
-	recording: RecordingProgressBarFragment & AndMiniplayerFragment;
+	recording: AndMiniplayerFragment;
 	interactive?: boolean;
 }
 

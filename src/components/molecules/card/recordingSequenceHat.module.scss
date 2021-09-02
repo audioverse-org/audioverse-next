@@ -1,0 +1,18 @@
+@import '../../../styles/common';
+
+.hatContent {
+	color: var(--hatColor);
+	background: var(--hatBg);
+	padding: 16px;
+	padding-top: 8px;
+	cursor: pointer;
+	&:hover {
+		background: var(--hatHoverColor);
+	}
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

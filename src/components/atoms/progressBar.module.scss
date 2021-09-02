@@ -28,7 +28,7 @@
 		z-index: 10;
 		margin-top: $margin;
 		margin-bottom: $margin;
-		transition: width 300ms;
+		transition: width $transition-medium;
 	}
 
 	input {

@@ -16,6 +16,9 @@
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid $ts-cream;
+	@media (min-width: $breakpoint-lg) {
+		z-index: 1001;
+	}
 }
 
 .player {
@@ -36,7 +39,7 @@
 		background-color: rgba(255, 255, 255, 0.7);
 		&.hidden {
 			opacity: 0;
-			transition: opacity 150ms;
+			transition: opacity $transition-quick;
 			&:hover {
 				opacity: 1;
 			}
@@ -45,6 +48,7 @@
 }
 
 .meta {
+	flex: 0 1 40%; // TODO: refine this
 	padding: 2rem;
 	min-width: 0;
 }

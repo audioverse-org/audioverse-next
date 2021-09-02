@@ -110,13 +110,13 @@ a {
 	&:hover {
 		color: $ts-red;
 		text-decoration: underline;
+		&.hover--salmon {
+			color: $ts-salmon;
+		}
 	}
 }
 
 *:hover {
-	&.hover--salmon {
-		color: $ts-salmon;
-	}
 	&.hover-bg--darkened-white {
 		background-color: $ts-darkened-white;
 	}
@@ -128,6 +128,21 @@ a {
 	}
 	&.hover-bg--darkened-lightTone {
 		background-color: $ts-darkened-lightTone;
+	}
+	&.hover-bg--darkened-bibleB {
+		background-color: $ts-darkened-bibleB;
+	}
+	&.hover-bg--darkened-bookB {
+		background-color: $ts-darkened-bookB;
+	}
+	&.hover-bg--darkened-songB {
+		background-color: $ts-darkened-songB;
+	}
+	&.hover-bg--darkened-storyB {
+		background-color: $ts-darkened-storyB;
+	}
+	&.hover-bg--darkened-topicB {
+		background-color: $ts-darkened-topicB;
 	}
 	&.hover-bg--darkened-smartPlaylistH {
 		background-color: $ts-darkened-smartPlaylistH;

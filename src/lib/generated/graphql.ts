@@ -964,6 +964,7 @@ export enum Language {
 	French = 'FRENCH',
 	German = 'GERMAN',
 	Japanese = 'JAPANESE',
+	Nordic = 'NORDIC',
 	Russian = 'RUSSIAN',
 	Spanish = 'SPANISH',
 }
@@ -1522,8 +1523,11 @@ export type Mutation = {
 	recordingScreeningContentCheckoutCreate: RecordingScreeningCheckoutPayload;
 	recordingScreeningContentCheckoutDelete: SuccessPayload;
 	recordingScreeningContentEvaluate: RecordingPayload;
+	recordingScreeningContentEvaluationsClear: RecordingPayload;
 	/** Sets the methods used in evaluating the recording. */
 	recordingScreeningContentMethodsSet: RecordingContentScreeningEvaluationPayload;
+	/** Requires `ADMINISTRATION` role. */
+	recordingScreeningContentUnevaluate: RecordingPayload;
 	recordingScreeningIssueCreate: RecordingScreeningIssuePayload;
 	recordingScreeningIssueDelete: SuccessPayload;
 	recordingScreeningIssueUpdate: RecordingScreeningIssuePayload;
@@ -1863,9 +1867,18 @@ export type MutationRecordingScreeningContentEvaluateArgs = {
 	recordingId: Scalars['ID'];
 };
 
+export type MutationRecordingScreeningContentEvaluationsClearArgs = {
+	recordingId: Scalars['ID'];
+};
+
 export type MutationRecordingScreeningContentMethodsSetArgs = {
 	methods: Array<RecordingScreeningMethod>;
 	recordingId: Scalars['ID'];
+};
+
+export type MutationRecordingScreeningContentUnevaluateArgs = {
+	recordingId: Scalars['ID'];
+	userId: Maybe<Scalars['ID']>;
 };
 
 export type MutationRecordingScreeningIssueCreateArgs = {
@@ -5415,32 +5428,6 @@ export type GetWithAuthGuardDataQuery = {
 	}>;
 };
 
-export type RecordingProgressBarFragment = {
-	__typename?: 'Recording';
-	id: string;
-	title: string;
-	duration: number;
-	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
-	audioFiles: Array<{
-		__typename?: 'AudioFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoFiles: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoStreams: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-};
-
 export type ButtonDownloadFragment = {
 	__typename?: 'Recording';
 	videoDownloads: Array<{
@@ -5487,12 +5474,100 @@ export type ButtonShareRecordingFragment = {
 	shareUrl: string;
 };
 
-export type CardWithPlayableFragment = {
+export type CardAudiobookTrackFragment = {
 	__typename?: 'Recording';
-	id: string;
+	canonicalPath: string;
 	title: string;
 	duration: number;
-	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
+	sequenceIndex: Maybe<number>;
+	id: string;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		canonicalPath: string;
+		id: string;
+		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	audioFiles: Array<{
+		__typename?: 'AudioFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoFiles: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoStreams: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+};
+
+export type CardWithPlayableFragment = {
+	__typename?: 'Recording';
+	canonicalPath: string;
+	title: string;
+	duration: number;
+	sequenceIndex: Maybe<number>;
+	id: string;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		canonicalPath: string;
+		id: string;
+		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -5558,6 +5633,64 @@ export type CardPostFragment = {
 	image: Maybe<{ __typename?: 'Image'; url: string }>;
 };
 
+export type CardRecordingFragment = {
+	__typename?: 'Recording';
+	contentType: RecordingContentType;
+	canonicalPath: string;
+	title: string;
+	duration: number;
+	sequenceIndex: Maybe<number>;
+	id: string;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		canonicalPath: string;
+		id: string;
+		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	audioFiles: Array<{
+		__typename?: 'AudioFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoFiles: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoStreams: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+};
+
 export type CardSequenceFragment = {
 	__typename?: 'Sequence';
 	id: string;
@@ -5574,7 +5707,6 @@ export type CardSequenceFragment = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Person';
-				id: string;
 				name: string;
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5589,24 +5721,40 @@ export type CardSequenceFragment = {
 
 export type CardSermonFragment = {
 	__typename?: 'Recording';
-	id: string;
+	canonicalPath: string;
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	persons: Array<{
-		__typename?: 'Person';
-		id: string;
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
+	id: string;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
+		canonicalPath: string;
+		id: string;
 		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
@@ -5630,17 +5778,41 @@ export type CardSermonFragment = {
 
 export type CardSongFragment = {
 	__typename?: 'Recording';
+	canonicalPath: string;
 	title: string;
 	duration: number;
+	sequenceIndex: Maybe<number>;
 	id: string;
-	persons: Array<{
-		__typename?: 'Person';
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		canonicalPath: string;
 		id: string;
+		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
-	sequence: Maybe<{ __typename?: 'Sequence'; id: string; title: string }>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -5663,23 +5835,40 @@ export type CardSongFragment = {
 
 export type CardStoryFragment = {
 	__typename?: 'Recording';
+	canonicalPath: string;
 	title: string;
 	duration: number;
+	sequenceIndex: Maybe<number>;
 	id: string;
-	persons: Array<{
-		__typename?: 'Person';
-		id: string;
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
+		canonicalPath: string;
+		id: string;
 		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
@@ -5703,17 +5892,41 @@ export type CardStoryFragment = {
 
 export type CardTopicFragment = {
 	__typename?: 'Recording';
+	canonicalPath: string;
 	title: string;
 	duration: number;
+	sequenceIndex: Maybe<number>;
 	id: string;
-	persons: Array<{
-		__typename?: 'Person';
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		canonicalPath: string;
 		id: string;
+		title: string;
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	writers: Array<{
+		__typename?: 'Person';
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
-	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -5807,7 +6020,6 @@ export type MediaFormatSwitcherFragment = {
 
 export type PersonLockupFragment = {
 	__typename?: 'Person';
-	id: string;
 	name: string;
 	canonicalPath: string;
 	imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5819,113 +6031,6 @@ export type PlaybackTimesFragment = {
 	title: string;
 	duration: number;
 	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
-	audioFiles: Array<{
-		__typename?: 'AudioFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoFiles: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoStreams: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-};
-
-export type GetPlaylistButtonDataQueryVariables = Exact<{
-	language: Language;
-	recordingId: Scalars['ID'];
-}>;
-
-export type GetPlaylistButtonDataQuery = {
-	__typename?: 'Query';
-	me: Maybe<{
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlists: {
-				__typename?: 'UserPlaylistConnection';
-				nodes: Maybe<
-					Array<{
-						__typename?: 'UserPlaylist';
-						id: string;
-						title: string;
-						hasRecording: boolean;
-					}>
-				>;
-			};
-		};
-	}>;
-};
-
-export type RecordingListFragment = {
-	__typename?: 'Recording';
-	id: string;
-	title: string;
-	description: Maybe<string>;
-	duration: number;
-	hasVideo: boolean;
-	recordingDate: Maybe<string>;
-	canonicalUrl: string;
-	imageWithFallback: { __typename?: 'Image'; url: string };
-	persons: Array<{
-		__typename?: 'Person';
-		id: string;
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
-};
-
-export type SequenceNavFragment = {
-	__typename?: 'Recording';
-	sequenceIndex: Maybe<number>;
-	sequence: Maybe<{
-		__typename?: 'Sequence';
-		id: string;
-		title: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
-		};
-	}>;
-};
-
-export type SponsorInfoFragment = {
-	__typename?: 'Sponsor';
-	id: string;
-	title: string;
-};
-
-export type SponsorLockupFragment = {
-	__typename?: 'Sponsor';
-	id: string;
-	title: string;
-	canonicalPath: string;
-	imageWithFallback: { __typename?: 'Image'; url: string };
-};
-
-export type TeaseRecordingFragment = {
-	__typename?: 'Recording';
-	sequenceIndex: Maybe<number>;
-	id: string;
-	title: string;
-	duration: number;
-	sequence: Maybe<{
-		__typename?: 'Sequence';
-		title: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-		};
-	}>;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -5983,6 +6088,120 @@ export type PlayerFragment = {
 	}>;
 };
 
+export type GetPlaylistButtonDataQueryVariables = Exact<{
+	language: Language;
+	recordingId: Scalars['ID'];
+}>;
+
+export type GetPlaylistButtonDataQuery = {
+	__typename?: 'Query';
+	me: Maybe<{
+		__typename?: 'AuthenticatedUser';
+		user: {
+			__typename?: 'User';
+			playlists: {
+				__typename?: 'UserPlaylistConnection';
+				nodes: Maybe<
+					Array<{
+						__typename?: 'UserPlaylist';
+						id: string;
+						title: string;
+						hasRecording: boolean;
+					}>
+				>;
+			};
+		};
+	}>;
+};
+
+export type RecordingListFragment = {
+	__typename?: 'Recording';
+	id: string;
+	title: string;
+	description: Maybe<string>;
+	duration: number;
+	hasVideo: boolean;
+	recordingDate: Maybe<string>;
+	canonicalUrl: string;
+	imageWithFallback: { __typename?: 'Image'; url: string };
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+};
+
+export type SequenceNavFragment = {
+	__typename?: 'Recording';
+	sequenceIndex: Maybe<number>;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		id: string;
+		title: string;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
+		};
+	}>;
+};
+
+export type SponsorInfoFragment = {
+	__typename?: 'Sponsor';
+	id: string;
+	title: string;
+};
+
+export type SponsorLockupFragment = {
+	__typename?: 'Sponsor';
+	id: string;
+	title: string;
+	canonicalPath: string;
+	imageWithFallback: { __typename?: 'Image'; url: string };
+};
+
+export type TeaseRecordingFragment = {
+	__typename?: 'Recording';
+	canonicalPath: string;
+	title: string;
+	duration: number;
+	sequenceIndex: Maybe<number>;
+	id: string;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		id: string;
+		title: string;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+	audioFiles: Array<{
+		__typename?: 'AudioFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoFiles: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+	videoStreams: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+	}>;
+};
+
 export type PlaylistFragment = {
 	__typename?: 'Recording';
 	id: string;
@@ -6026,7 +6245,6 @@ export type RecordingFragment = {
 	duration: number;
 	persons: Array<{
 		__typename?: 'Person';
-		id: string;
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6064,11 +6282,19 @@ export type RecordingFragment = {
 				Array<{
 					__typename?: 'Recording';
 					id: string;
-					sequenceIndex: Maybe<number>;
+					canonicalPath: string;
 					title: string;
 					duration: number;
+					sequenceIndex: Maybe<number>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						id: string;
 						title: string;
 						recordings: {
 							__typename?: 'RecordingConnection';
@@ -6652,7 +6878,6 @@ export type GetCollectionDetailPageDataQuery = {
 						nodes: Maybe<
 							Array<{
 								__typename?: 'Person';
-								id: string;
 								name: string;
 								canonicalPath: string;
 								imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6747,7 +6972,6 @@ export type GetCollectionRecordingsPageDataQuery = {
 					imageWithFallback: { __typename?: 'Image'; url: string };
 					persons: Array<{
 						__typename?: 'Person';
-						id: string;
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6780,24 +7004,40 @@ export type GetDiscoverPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
-				id: string;
+				canonicalPath: string;
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				persons: Array<{
-					__typename?: 'Person';
-					id: string;
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
+				id: string;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
+					canonicalPath: string;
+					id: string;
 					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
@@ -6833,17 +7073,41 @@ export type GetHomeStaticPropsQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
+				canonicalPath: string;
 				title: string;
 				duration: number;
+				sequenceIndex: Maybe<number>;
 				id: string;
-				persons: Array<{
-					__typename?: 'Person';
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					canonicalPath: string;
 					id: string;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
-				sequence: Maybe<{ __typename?: 'Sequence'; id: string; title: string }>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -6880,28 +7144,106 @@ export type GetHomeStaticPropsQuery = {
 			};
 		};
 	}>;
+	audiobookTracks: {
+		__typename?: 'RecordingConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				title: string;
+				duration: number;
+				sequenceIndex: Maybe<number>;
+				id: string;
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					canonicalPath: string;
+					id: string;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}>
+		>;
+	};
 	stories: {
 		__typename?: 'RecordingConnection';
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
+				canonicalPath: string;
 				title: string;
 				duration: number;
+				sequenceIndex: Maybe<number>;
 				id: string;
-				persons: Array<{
-					__typename?: 'Person';
-					id: string;
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
+					canonicalPath: string;
+					id: string;
 					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
@@ -6929,17 +7271,41 @@ export type GetHomeStaticPropsQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
+				canonicalPath: string;
 				title: string;
 				duration: number;
+				sequenceIndex: Maybe<number>;
 				id: string;
-				persons: Array<{
-					__typename?: 'Person';
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					canonicalPath: string;
 					id: string;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
-				sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -6966,24 +7332,40 @@ export type GetHomeStaticPropsQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
-				id: string;
+				canonicalPath: string;
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				persons: Array<{
-					__typename?: 'Person';
-					id: string;
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
+				id: string;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
+					canonicalPath: string;
+					id: string;
 					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
@@ -7063,7 +7445,6 @@ export type GetPlaylistPageDataQuery = {
 							imageWithFallback: { __typename?: 'Image'; url: string };
 							persons: Array<{
 								__typename?: 'Person';
-								id: string;
 								name: string;
 								canonicalPath: string;
 								imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7136,24 +7517,41 @@ export type GetPresenterDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
-					id: string;
+					contentType: RecordingContentType;
+					canonicalPath: string;
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					persons: Array<{
-						__typename?: 'Person';
-						id: string;
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
+					id: string;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
 						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -7182,24 +7580,41 @@ export type GetPresenterDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
-					id: string;
+					contentType: RecordingContentType;
+					canonicalPath: string;
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					persons: Array<{
-						__typename?: 'Person';
-						id: string;
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
+					id: string;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
 						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -7228,24 +7643,41 @@ export type GetPresenterDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
-					id: string;
+					contentType: RecordingContentType;
+					canonicalPath: string;
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					persons: Array<{
-						__typename?: 'Person';
-						id: string;
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
+					id: string;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
 						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -7289,7 +7721,6 @@ export type GetPresenterDetailPageDataQuery = {
 					nodes: Maybe<
 						Array<{
 							__typename?: 'Person';
-							id: string;
 							name: string;
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7335,7 +7766,6 @@ export type GetPresenterDetailPageDataQuery = {
 								nodes: Maybe<
 									Array<{
 										__typename?: 'Person';
-										id: string;
 										name: string;
 										canonicalPath: string;
 										imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7448,7 +7878,6 @@ export type GetPresenterRecordingsPageDataQuery = {
 					imageWithFallback: { __typename?: 'Image'; url: string };
 					persons: Array<{
 						__typename?: 'Person';
-						id: string;
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7493,28 +7922,15 @@ export type GetSeriesDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
-					id: string;
+					contentType: RecordingContentType;
 					title: string;
-					duration: number;
-					sequenceIndex: Maybe<number>;
 					description: Maybe<string>;
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
-					persons: Array<{
-						__typename?: 'Person';
-						id: string;
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sequence: Maybe<{
-						__typename?: 'Sequence';
-						title: string;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
-					}>;
+					canonicalPath: string;
+					duration: number;
+					sequenceIndex: Maybe<number>;
+					id: string;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -7525,6 +7941,36 @@ export type GetSeriesDetailPageDataQuery = {
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
+					}>;
+					sequence: Maybe<{
+						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
+						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
@@ -7609,7 +8055,6 @@ export type GetSermonDetailDataQuery = {
 		duration: number;
 		persons: Array<{
 			__typename?: 'Person';
-			id: string;
 			name: string;
 			canonicalPath: string;
 			imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7647,11 +8092,19 @@ export type GetSermonDetailDataQuery = {
 					Array<{
 						__typename?: 'Recording';
 						id: string;
-						sequenceIndex: Maybe<number>;
+						canonicalPath: string;
 						title: string;
 						duration: number;
+						sequenceIndex: Maybe<number>;
+						persons: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
+							id: string;
 							title: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
@@ -7749,7 +8202,6 @@ export type GetSermonListStaticPropsQuery = {
 				imageWithFallback: { __typename?: 'Image'; url: string };
 				persons: Array<{
 					__typename?: 'Person';
-					id: string;
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7812,7 +8264,6 @@ export type GetSongAlbumPageDataQuery = {
 					}>;
 					persons: Array<{
 						__typename?: 'Person';
-						id: string;
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7844,11 +8295,19 @@ export type GetSongAlbumPageDataQuery = {
 								Array<{
 									__typename?: 'Recording';
 									id: string;
-									sequenceIndex: Maybe<number>;
+									canonicalPath: string;
 									title: string;
 									duration: number;
+									sequenceIndex: Maybe<number>;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
 									sequence: Maybe<{
 										__typename?: 'Sequence';
+										id: string;
 										title: string;
 										recordings: {
 											__typename?: 'RecordingConnection';
@@ -7960,7 +8419,6 @@ export type GetSongBookPageDataQuery = {
 				}>;
 				persons: Array<{
 					__typename?: 'Person';
-					id: string;
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7992,11 +8450,19 @@ export type GetSongBookPageDataQuery = {
 							Array<{
 								__typename?: 'Recording';
 								id: string;
-								sequenceIndex: Maybe<number>;
+								canonicalPath: string;
 								title: string;
 								duration: number;
+								sequenceIndex: Maybe<number>;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
 								sequence: Maybe<{
 									__typename?: 'Sequence';
+									id: string;
 									title: string;
 									recordings: {
 										__typename?: 'RecordingConnection';
@@ -8084,7 +8550,6 @@ export type SongFragment = {
 	}>;
 	persons: Array<{
 		__typename?: 'Person';
-		id: string;
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8116,11 +8581,19 @@ export type SongFragment = {
 				Array<{
 					__typename?: 'Recording';
 					id: string;
-					sequenceIndex: Maybe<number>;
+					canonicalPath: string;
 					title: string;
 					duration: number;
+					sequenceIndex: Maybe<number>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						id: string;
 						title: string;
 						recordings: {
 							__typename?: 'RecordingConnection';
@@ -8209,7 +8682,6 @@ export type GetSongSponsorPageDataQuery = {
 					}>;
 					persons: Array<{
 						__typename?: 'Person';
-						id: string;
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8241,11 +8713,19 @@ export type GetSongSponsorPageDataQuery = {
 								Array<{
 									__typename?: 'Recording';
 									id: string;
-									sequenceIndex: Maybe<number>;
+									canonicalPath: string;
 									title: string;
 									duration: number;
+									sequenceIndex: Maybe<number>;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
 									sequence: Maybe<{
 										__typename?: 'Sequence';
+										id: string;
 										title: string;
 										recordings: {
 											__typename?: 'RecordingConnection';
@@ -8351,7 +8831,6 @@ export type GetSongDetailTagPageDataQuery = {
 				duration: number;
 				persons: Array<{
 					__typename?: 'Person';
-					id: string;
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8389,11 +8868,19 @@ export type GetSongDetailTagPageDataQuery = {
 							Array<{
 								__typename?: 'Recording';
 								id: string;
-								sequenceIndex: Maybe<number>;
+								canonicalPath: string;
 								title: string;
 								duration: number;
+								sequenceIndex: Maybe<number>;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
 								sequence: Maybe<{
 									__typename?: 'Sequence';
+									id: string;
 									title: string;
 									recordings: {
 										__typename?: 'RecordingConnection';
@@ -8783,7 +9270,6 @@ export type GetSponsorTeachingsPageDataQuery = {
 					imageWithFallback: { __typename?: 'Image'; url: string };
 					persons: Array<{
 						__typename?: 'Person';
-						id: string;
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8841,7 +9327,6 @@ export type GetStoriesPageDataQuery = {
 				imageWithFallback: { __typename?: 'Image'; url: string };
 				persons: Array<{
 					__typename?: 'Person';
-					id: string;
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8890,7 +9375,6 @@ export type GetStoryDetailPageDataQuery = {
 						duration: number;
 						persons: Array<{
 							__typename?: 'Person';
-							id: string;
 							name: string;
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8932,11 +9416,19 @@ export type GetStoryDetailPageDataQuery = {
 									Array<{
 										__typename?: 'Recording';
 										id: string;
-										sequenceIndex: Maybe<number>;
+										canonicalPath: string;
 										title: string;
 										duration: number;
+										sequenceIndex: Maybe<number>;
+										persons: Array<{
+											__typename?: 'Person';
+											name: string;
+											canonicalPath: string;
+											imageWithFallback: { __typename?: 'Image'; url: string };
+										}>;
 										sequence: Maybe<{
 											__typename?: 'Sequence';
+											id: string;
 											title: string;
 											recordings: {
 												__typename?: 'RecordingConnection';
@@ -9045,7 +9537,6 @@ export type GetTagDetailPageDataQuery = {
 				imageWithFallback: { __typename?: 'Image'; url: string };
 				persons: Array<{
 					__typename?: 'Person';
-					id: string;
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9170,6 +9661,101 @@ export type WriteFeedFileFragment = {
 	}>;
 };
 
+export const AndMiniplayerFragmentDoc = `
+    fragment andMiniplayer on Recording {
+  id
+  title
+  duration
+  sequence {
+    title
+  }
+  audioFiles {
+    url
+    filesize
+    mimeType
+  }
+  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+    url
+    filesize
+    mimeType
+  }
+  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
+    url
+    filesize
+    mimeType
+  }
+}
+    `;
+export const ButtonPlayFragmentDoc = `
+    fragment buttonPlay on Recording {
+  ...andMiniplayer
+}
+    ${AndMiniplayerFragmentDoc}`;
+export const PersonLockupFragmentDoc = `
+    fragment personLockup on Person {
+  name
+  canonicalPath
+  imageWithFallback {
+    url(size: 100)
+  }
+}
+    `;
+export const TeaseRecordingFragmentDoc = `
+    fragment teaseRecording on Recording {
+  ...andMiniplayer
+  canonicalPath
+  title
+  duration
+  persons(role: SPEAKER) {
+    ...personLockup
+  }
+  sequenceIndex
+  sequence {
+    id
+    title
+    recordings {
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${AndMiniplayerFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const SponsorLockupFragmentDoc = `
+    fragment sponsorLockup on Sponsor {
+  id
+  title
+  canonicalPath
+  imageWithFallback {
+    url(size: 100)
+  }
+}
+    `;
+export const CardWithPlayableFragmentDoc = `
+    fragment cardWithPlayable on Recording {
+  ...teaseRecording
+  sequence {
+    canonicalPath
+    image {
+      url(size: 1000)
+    }
+  }
+  sponsor {
+    ...sponsorLockup
+  }
+  writers: persons(role: WRITER) {
+    ...personLockup
+  }
+}
+    ${TeaseRecordingFragmentDoc}
+${SponsorLockupFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const CardAudiobookTrackFragmentDoc = `
+    fragment cardAudiobookTrack on Recording {
+  ...cardWithPlayable
+}
+    ${CardWithPlayableFragmentDoc}`;
 export const CardBibleChapterFragmentDoc = `
     fragment cardBibleChapter on BibleChapter {
   id
@@ -9225,16 +9811,12 @@ export const CardPostFragmentDoc = `
   readingDuration
 }
     `;
-export const PersonLockupFragmentDoc = `
-    fragment personLockup on Person {
-  id
-  name
-  canonicalPath
-  imageWithFallback {
-    url(size: 100)
-  }
+export const CardRecordingFragmentDoc = `
+    fragment cardRecording on Recording {
+  contentType
+  ...cardWithPlayable
 }
-    `;
+    ${CardWithPlayableFragmentDoc}`;
 export const CardSequenceFragmentDoc = `
     fragment cardSequence on Sequence {
   id
@@ -9258,109 +9840,26 @@ export const CardSequenceFragmentDoc = `
   }
 }
     ${PersonLockupFragmentDoc}`;
-export const AndMiniplayerFragmentDoc = `
-    fragment andMiniplayer on Recording {
-  id
-  title
-  duration
-  sequence {
-    title
-  }
-  audioFiles {
-    url
-    filesize
-    mimeType
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    url
-    filesize
-    mimeType
-  }
-  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-    url
-    filesize
-    mimeType
-  }
-}
-    `;
-export const RecordingProgressBarFragmentDoc = `
-    fragment recordingProgressBar on Recording {
-  id
-  ...andMiniplayer
-}
-    ${AndMiniplayerFragmentDoc}`;
-export const CardWithPlayableFragmentDoc = `
-    fragment cardWithPlayable on Recording {
-  id
-  ...recordingProgressBar
-}
-    ${RecordingProgressBarFragmentDoc}`;
 export const CardSermonFragmentDoc = `
     fragment cardSermon on Recording {
-  id
-  title
-  duration
-  persons {
-    ...personLockup
-  }
-  sequenceIndex
-  sequence {
-    title
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
   ...cardWithPlayable
 }
-    ${PersonLockupFragmentDoc}
-${CardWithPlayableFragmentDoc}`;
+    ${CardWithPlayableFragmentDoc}`;
 export const CardSongFragmentDoc = `
     fragment cardSong on Recording {
-  title
-  persons {
-    ...personLockup
-  }
-  duration
-  sequence {
-    id
-    title
-  }
   ...cardWithPlayable
 }
-    ${PersonLockupFragmentDoc}
-${CardWithPlayableFragmentDoc}`;
+    ${CardWithPlayableFragmentDoc}`;
 export const CardStoryFragmentDoc = `
     fragment cardStory on Recording {
-  title
-  duration
-  persons(role: SPEAKER) {
-    ...personLockup
-  }
-  sequence {
-    title
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
   ...cardWithPlayable
 }
-    ${PersonLockupFragmentDoc}
-${CardWithPlayableFragmentDoc}`;
+    ${CardWithPlayableFragmentDoc}`;
 export const CardTopicFragmentDoc = `
     fragment cardTopic on Recording {
-  title
-  duration
-  persons {
-    ...personLockup
-  }
   ...cardWithPlayable
 }
-    ${PersonLockupFragmentDoc}
-${CardWithPlayableFragmentDoc}`;
+    ${CardWithPlayableFragmentDoc}`;
 export const CopyrightInfoFragmentDoc = `
     fragment copyrightInfo on Recording {
   copyrightYear
@@ -9420,16 +9919,6 @@ export const RecordingListFragmentDoc = `
   canonicalUrl
 }
     ${PersonLockupFragmentDoc}`;
-export const SponsorLockupFragmentDoc = `
-    fragment sponsorLockup on Sponsor {
-  id
-  title
-  canonicalPath
-  imageWithFallback {
-    url(size: 100)
-  }
-}
-    `;
 export const TestimoniesFragmentDoc = `
     fragment testimonies on Testimony {
   id
@@ -9467,24 +9956,6 @@ export const SponsorInfoFragmentDoc = `
   title
 }
     `;
-export const ButtonPlayFragmentDoc = `
-    fragment buttonPlay on Recording {
-  ...andMiniplayer
-}
-    ${AndMiniplayerFragmentDoc}`;
-export const TeaseRecordingFragmentDoc = `
-    fragment teaseRecording on Recording {
-  sequenceIndex
-  sequence {
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
-  ...buttonPlay
-}
-    ${ButtonPlayFragmentDoc}`;
 export const SequenceNavFragmentDoc = `
     fragment sequenceNav on Recording {
   sequenceIndex
@@ -9523,12 +9994,10 @@ export const PlayerFragmentDoc = `
   title
   ...andMiniplayer
   ...buttonDownload
-  ...recordingProgressBar
   ...buttonShareRecording
 }
     ${AndMiniplayerFragmentDoc}
 ${ButtonDownloadFragmentDoc}
-${RecordingProgressBarFragmentDoc}
 ${ButtonShareRecordingFragmentDoc}`;
 export const RecordingFragmentDoc = `
     fragment recording on Recording {
@@ -10484,7 +10953,7 @@ export const GetHomeStaticPropsDocument = `
   musicTracks(
     language: $language
     first: 1
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
+    orderBy: {field: PUBLISHED_AT, direction: ASC}
   ) {
     nodes {
       ...cardSong
@@ -10500,10 +10969,19 @@ export const GetHomeStaticPropsDocument = `
       }
     }
   }
-  stories(
+  audiobookTracks(
     language: $language
     first: 1
     orderBy: {field: PUBLISHED_AT, direction: DESC}
+  ) {
+    nodes {
+      ...cardAudiobookTrack
+    }
+  }
+  stories(
+    language: $language
+    first: 1
+    orderBy: {field: PUBLISHED_AT, direction: ASC}
   ) {
     nodes {
       ...cardStory
@@ -10545,6 +11023,7 @@ export const GetHomeStaticPropsDocument = `
 }
     ${CardSongFragmentDoc}
 ${CardBibleChapterFragmentDoc}
+${CardAudiobookTrackFragmentDoc}
 ${CardStoryFragmentDoc}
 ${CardTopicFragmentDoc}
 ${CardSermonFragmentDoc}
@@ -10668,7 +11147,7 @@ export const GetPresenterDetailPageDataDocument = `
       orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
     ) {
       nodes {
-        ...cardSermon
+        ...cardRecording
       }
     }
     recentRecordings: recordings(
@@ -10679,7 +11158,7 @@ export const GetPresenterDetailPageDataDocument = `
         count
       }
       nodes {
-        ...cardSermon
+        ...cardRecording
       }
       pageInfo {
         hasNextPage
@@ -10690,7 +11169,7 @@ export const GetPresenterDetailPageDataDocument = `
       orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
     ) {
       nodes {
-        ...cardSermon
+        ...cardRecording
       }
       pageInfo {
         hasNextPage
@@ -10729,7 +11208,7 @@ export const GetPresenterDetailPageDataDocument = `
     }
   }
 }
-    ${CardSermonFragmentDoc}
+    ${CardRecordingFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetPresenterDetailPageDataQuery = <
@@ -10892,13 +11371,13 @@ export const GetSeriesDetailPageDataDocument = `
         count
       }
       nodes {
-        ...cardSermon
+        ...cardRecording
         ...writeFeedFile
       }
     }
   }
 }
-    ${CardSermonFragmentDoc}
+    ${CardRecordingFragmentDoc}
 ${WriteFeedFileFragmentDoc}`;
 export const useGetSeriesDetailPageDataQuery = <
 	TData = GetSeriesDetailPageDataQuery,

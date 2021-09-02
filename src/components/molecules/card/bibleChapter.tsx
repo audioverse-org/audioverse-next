@@ -16,9 +16,14 @@ export default function CardBibleChapter({
 		<CardWithPlayable
 			recording={{
 				id: chapter.id,
+				canonicalPath: chapter.url,
 				title: chapter.title,
-				duration: 0,
+				duration: 2520,
 				sequence: null,
+				sequenceIndex: null,
+				sponsor: null,
+				persons: [],
+				writers: [],
 				audioFiles: [],
 				videoFiles: [],
 				videoStreams: [],
@@ -26,13 +31,11 @@ export default function CardBibleChapter({
 			container={{
 				icon: <BibleIcon width={12} height={12} />,
 				title: 'Genesis (KJV)',
+				content: <h1>TODO</h1>,
+				label: 'TODO',
+				url: 'TODO',
 			}}
-			duration={2520}
-			progress={0.3}
 			theme={'chapter'}
-			// TODO: Generate URL
-			url={'#'}
-			title={chapter.title}
 		/>
 	);
 }

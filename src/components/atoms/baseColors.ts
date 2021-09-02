@@ -5,5 +5,11 @@ export enum BaseColors {
 	DARK = 'dark',
 	SALMON = 'salmon',
 	LIGHT_TONE = 'lightTone',
+	MID_TONE = 'midTone',
+	BIBLE_B = 'bibleB',
+	BOOK_B = 'bookB',
+	SONG_B = 'songB',
+	STORY_B = 'storyB',
+	TOPIC_B = 'topicB',
 	SMART_PLAYLIST_H = 'smartPlaylistH',
 }

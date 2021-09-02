@@ -2,14 +2,14 @@ import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import RecordingProgressBar from '@components/atoms/recordingProgressBar';
+import { BaseColors } from '@components/atoms/baseColors';
 import ButtonDownload from '@components/molecules/buttonDownload';
-import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import ButtonShareRecording from '@components/molecules/buttonShareRecording';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
+import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
@@ -17,6 +17,7 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 
 import styles from './player.module.scss';
+import RecordingButtonFavorite from './recordingButtonFavorite';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -40,6 +41,8 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
+
+	const backgroundColor = BaseColors.WHITE;
 
 	return (
 		<div
@@ -72,8 +75,15 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 
 			{shouldShowAudioControls && (
 				<div className={styles.controls}>
-					<ButtonPlay recording={recording} />
-					<div>
+					<ButtonPlay
+						{...{
+							recording,
+							backgroundColor,
+						}}
+						large
+						className={styles.play}
+					/>
+					<div className={styles.controlGrow}>
 						<div
 							className={styles.waves}
 							style={
@@ -100,15 +110,25 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 			)}
 
 			<div className={styles.buttons}>
-				<div>
-					<ButtonNudge recording={recording} reverse={true} />
-					<ButtonNudge recording={recording} />
+				<div className={styles.leftButtons}>
+					<ButtonNudge
+						recording={recording}
+						reverse={true}
+						backgroundColor={backgroundColor}
+					/>
+					<ButtonNudge
+						recording={recording}
+						backgroundColor={backgroundColor}
+					/>
 				</div>
-				<div>
+				<div className={styles.rightButtons}>
 					<ButtonSpeed recording={recording} />
 					<ButtonDownload recording={recording} />
 					<ButtonShareRecording recording={recording} />
-					<ButtonFavorite id={recording.id} />
+					<RecordingButtonFavorite
+						id={recording.id}
+						backgroundColor={backgroundColor}
+					/>
 					{shouldShowVideoControls && (
 						<button
 							aria-label={intl.formatMessage({

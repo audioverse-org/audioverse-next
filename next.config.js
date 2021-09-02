@@ -9,7 +9,21 @@ module.exports = withPWA({
 		dest: 'public',
 	},
 	async redirects() {
+		const languagePrefixMap = {
+			english: 'en',
+			deutsch: 'de',
+			german: 'de',
+			espanol: 'es',
+			francais: 'fr',
+			french: 'fr',
+			zhongwen: 'zh',
+		};
 		return [
+			...Object.keys(languagePrefixMap).map((prefix) => ({
+				source: `/${prefix}/:path*`,
+				destination: `/${languagePrefixMap[prefix]}/:path*`,
+				permanent: true,
+			})),
 			{
 				source: '/',
 				destination: '/en',
@@ -23,6 +37,11 @@ module.exports = withPWA({
 			{
 				source: '/:lang/sermons',
 				destination: '/:lang/sermons/all/page/1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sermons/recordings/:id/:slug',
+				destination: '/:lang/sermons/:id/:slug',
 				permanent: true,
 			},
 			{

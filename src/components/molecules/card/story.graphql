@@ -1,16 +1,3 @@
 fragment cardStory on Recording {
-	title
-	duration
-	persons(role: SPEAKER) {
-		...personLockup
-	}
-	sequence {
-		title
-		recordings {
-			aggregate {
-				count
-			}
-		}
-	}
 	...cardWithPlayable
 }

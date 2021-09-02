@@ -1,20 +1,29 @@
+import clsx from 'clsx';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import BackIcon from '../../../public/img/icon-nudge-left.svg';
-import ForwardIcon from '../../../public/img/icon-nudge-right.svg';
+import IconJumpBackMedium from '../../../public/img/icon-jump-back-medium.svg';
+import IconJumpBack from '../../../public/img/icon-jump-back.svg';
+import IconJumpForwardMedium from '../../../public/img/icon-jump-forward-medium.svg';
+import IconJumpForward from '../../../public/img/icon-jump-forward.svg';
 
 import styles from './buttonNudge.module.scss';
+import IconButton from './iconButton';
 
 export default function ButtonNudge({
 	recording,
+	backgroundColor,
 	reverse = false,
+	large,
 }: {
 	recording: AndMiniplayerFragment;
+	backgroundColor: BaseColors;
 	reverse?: boolean;
+	large?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -32,12 +41,21 @@ export default function ButtonNudge({
 		  });
 
 	return (
-		<button
-			className={styles.button}
+		<IconButton
+			Icon={
+				reverse
+					? large
+						? IconJumpBackMedium
+						: IconJumpBack
+					: large
+					? IconJumpForwardMedium
+					: IconJumpForward
+			}
+			onPress={() => session.shiftTime(reverse ? -15 : 15)}
 			aria-label={label}
-			onClick={() => session.shiftTime(reverse ? -15 : 15)}
-		>
-			{reverse ? <BackIcon /> : <ForwardIcon />}
-		</button>
+			color={BaseColors.DARK}
+			backgroundColor={backgroundColor}
+			className={clsx(styles.base, large && styles.large)}
+		/>
 	);
 }

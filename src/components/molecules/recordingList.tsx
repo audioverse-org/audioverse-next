@@ -17,7 +17,7 @@ const columns = [
 				<ul>
 					{node.persons?.map(
 						(p): JSX.Element => (
-							<li key={p.id}>
+							<li key={p.canonicalPath}>
 								<PersonLockup person={p} textColor={BaseColors.DARK} isLinked />
 							</li>
 						)
@@ -57,6 +57,7 @@ interface RecordingListProps {
 	makeRoute?: (languageRoute: string, entityId: string) => string;
 }
 
+// TODO: delete/rework this component
 export default function RecordingList({
 	recordings,
 	makeRoute = makeSermonRoute,

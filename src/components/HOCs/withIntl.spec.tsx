@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 import { BaseColors } from '@components/atoms/baseColors';
-import ButtonFavorite from '@components/molecules/buttonFavorite';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import Login from '@components/molecules/login';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
+import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
 import SearchBar from '@components/molecules/searchBar';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
@@ -161,7 +161,6 @@ describe('localization usage', () => {
 		const screen = await renderWithQueryProvider(
 			<PersonLockup
 				person={{
-					id: 'z',
 					name: 'z',
 					canonicalPath: 'z',
 					imageWithFallback: {
@@ -202,7 +201,11 @@ describe('localization usage', () => {
 						sequenceIndex: 1,
 						sequence: {
 							recordings: {
-								nodes: [{ id: 1 }, { id: 2 }, { id: 3 }] as any,
+								nodes: [
+									{ id: 1, canonicalPath: 'z', persons: [] },
+									{ id: 2, canonicalPath: 'z', persons: [] },
+									{ id: 3, canonicalPath: 'z', persons: [] },
+								] as any,
 							},
 						},
 					} as Sermon
@@ -218,7 +221,10 @@ describe('localization usage', () => {
 		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
 
 		const screen = await renderWithQueryProvider(
-			<ButtonFavorite id={'recording_id'} />
+			<RecordingButtonFavorite
+				id={'recording_id'}
+				backgroundColor={BaseColors.WHITE}
+			/>
 		);
 
 		await waitFor(() => expect(isRecordingFavorited).toBeCalled());
@@ -470,7 +476,7 @@ describe('localization usage', () => {
 		[
 			CardWithPlayable,
 			{
-				recording: { id: 'z' },
+				recording: { id: 'z', canonicalPath: '', persons: [] },
 				title: 'z',
 				container: { length: 2, index: 1 },
 			},
@@ -481,6 +487,8 @@ describe('localization usage', () => {
 			TeaseRecording,
 			{
 				recording: {
+					canonicalPath: '',
+					persons: [],
 					sequenceIndex: 1,
 					sequence: {
 						recordings: {

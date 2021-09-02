@@ -7,6 +7,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
+import CardAudiobookTrack from '@components/molecules/card/audiobookTrack';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardSermon from '@components/molecules/card/sermon';
@@ -29,6 +30,8 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const story = data?.stories.nodes && data.stories.nodes[0];
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const recording = data?.sermons.nodes && data.sermons.nodes[0];
+	const audiobookTrack =
+		data?.audiobookTracks.nodes && data.audiobookTracks.nodes[0];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
@@ -154,12 +157,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<Slider perSlide={3} clip={false}>
+					<Slider perSlide={4} clip={false}>
 						{song && <CardSong song={song} />}
 						{chapter && <CardBibleChapter chapter={chapter} />}
 						{story && <CardStory story={story} />}
 						{topicRecording && <CardTopic topicRecording={topicRecording} />}
 						{recording && <CardSermon recording={recording} />}
+						{audiobookTrack && <CardAudiobookTrack track={audiobookTrack} />}
 					</Slider>
 				}
 				center={true}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import IconChevron from '../../../public/img/icon-chevron-down.svg';
+import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
 
 import Button from './button';
 import styles from './transcript.module.scss';
@@ -29,7 +29,7 @@ export default function Transcript({ text }: { text: string }): JSX.Element {
 						/>
 					)
 				}
-				Icon={IconChevron}
+				Icon={IconDisclosure}
 			/>
 			{isOpen && (
 				<>

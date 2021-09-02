@@ -13,7 +13,11 @@ export type INamedAvatarProps = {
 	name: string;
 	image?: string;
 	href?: string;
-	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
+	textColor:
+		| BaseColors.DARK
+		| BaseColors.WHITE
+		| BaseColors.LIGHT_TONE
+		| BaseColors.MID_TONE;
 	hoverColor?: BaseColors.RED | BaseColors.SALMON;
 	small?: boolean;
 } & Pick<ILinkButtonProps, 'isOptionalLink'>;

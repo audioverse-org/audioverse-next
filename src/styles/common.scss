@@ -18,6 +18,10 @@ $sans: 'Inter', 'system-ui', sans-serif;
 
 // T&S Named Colors
 $ts-white: #ffffff;
+$ts-bibleB: #f1f2f4;
+$ts-bibleH: #000000;
+$ts-bookB: #5d4d4d;
+$ts-bookH: #483232;
 $ts-cream: #efebeb;
 $ts-dark: #323e48;
 $ts-lightTone: #cdd9e3;
@@ -25,12 +29,28 @@ $ts-midTone: #6b7680;
 $ts-red: #ff224a;
 $ts-salmon: #ff6e6e;
 $ts-smartPlaylistH: #f3f5fa;
+$ts-songB: #f2f9ff;
+$ts-songH: #d7ebfb;
+$ts-storyB: #325763;
+$ts-storyH: #003849;
+$ts-topicB: #3e3d6d;
+$ts-topicH: #040253;
 
 $ts-darkened-white: #f8f8f8;
+$ts-darkened-bibleB: #e4e7ea;
+$ts-darkened-bibleH: #292929;
+$ts-darkened-bookB: #534141;
+$ts-darkened-bookH: #382525;
 $ts-darkened-cream: #e8e3e3;
 $ts-darkened-lightTone: #b5c4d1;
 $ts-darkened-dark: #232b32;
 $ts-darkened-smartPlaylistH: #e7e9ee;
+$ts-darkened-songB: #e3effa;
+$ts-darkened-songH: #c9def0;
+$ts-darkened-storyB: #284d58;
+$ts-darkened-storyH: #002b38;
+$ts-darkened-topicB: #333262;
+$ts-darkened-topicH: #03013e;
 
 $ts-shadow-small-default: 0px 4px 10px rgba(0, 0, 0, 0.15);
 $ts-shadow-small-hover: 0px 4px 16px rgba(0, 0, 0, 0.3);
@@ -40,11 +60,14 @@ $breakpoint-md: 664px;
 $breakpoint-lg: 894px;
 $breakpoint-xl: 1230px;
 
+$transition-quick: 150ms;
+$transition-medium: 300ms;
+
 $sidebar-width: 230px;
 $miniplayer-height: 90px;
 
-$tease-maxWidth-sm: 520px;
-$tease-maxWidth: 1500px;
+$content-maxWidth-sm: 520px;
+$content-maxWidth: 1500px;
 
 $grid-gap: 24px;
 

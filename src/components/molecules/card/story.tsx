@@ -1,35 +1,62 @@
+import Image from 'next/image';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
+import Heading2 from '@components/atoms/heading2';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardStoryFragment } from '@lib/generated/graphql';
 
 import FeatherIcon from '../../../../public/img/icon-feather-solid.svg';
+import SponsorLockup from '../sponsorLockup';
+
+import CardRecordingSequenceHat from './recordingSequenceHat';
+import styles from './story.module.scss';
 
 interface CardStoryProps {
 	story: CardStoryFragment;
 }
 
 export default function CardStory({ story }: CardStoryProps): JSX.Element {
-	const container = story.sequence
+	const intl = useIntl();
+	const { sequence, sponsor } = story;
+	const container = sequence
 		? {
 				icon: <FeatherIcon width={12} height={12} />,
-				title: story.sequence.title,
-				length: story.sequence.recordings.aggregate?.count,
-				// TODO: set index to live data
-				// https://trello.com/c/DSJLqX29/238-add-parts-info-eg-part-1-of-7
-				index: 1,
+				title: sequence.title,
+				content: (
+					<CardRecordingSequenceHat sequence={sequence} inverse>
+						<Heading2 sans className={styles.heading}>
+							{sequence.title}
+						</Heading2>
+						{sponsor && (
+							<div className={styles.sponsor}>
+								<SponsorLockup
+									sponsor={sponsor}
+									textColor={BaseColors.LIGHT_TONE}
+									hoverColor={BaseColors.SALMON}
+									isLinked
+									isOptionalLink
+									small
+								/>
+							</div>
+						)}
+						{sequence.image && (
+							<div className={styles.imageContainer}>
+								<Image src={sequence.image.url} layout="fill" />
+							</div>
+						)}
+					</CardRecordingSequenceHat>
+				),
+				label: intl.formatMessage({
+					id: 'cardStory_sequenceLabel',
+					defaultMessage: 'Stories',
+				}),
+				url: sequence.canonicalPath,
 		  }
 		: undefined;
 
 	return (
-		<CardWithPlayable
-			recording={story}
-			container={container}
-			theme={'story'}
-			progress={0.3}
-			// TODO: Generate URL
-			url={'#'}
-			{...story}
-		/>
+		<CardWithPlayable recording={story} container={container} theme={'story'} />
 	);
 }

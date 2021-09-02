@@ -1,5 +1,11 @@
-.button {
-	background: none;
-	border: none;
-	cursor: pointer;
+// TODO: move into IconButton
+.base.base {
+	height: 40px;
+	width: 40px;
+	border-radius: 40px;
+}
+.large.large {
+	height: 56px;
+	width: 56px;
+	border-radius: 56px;
 }
