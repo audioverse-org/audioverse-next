@@ -25,6 +25,14 @@
 		margin: 0;
 		font-size: 16px;
 	}
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		text-decoration: none;
+		background: $ts-darkened-cream;
+	}
 }
 
 .content {

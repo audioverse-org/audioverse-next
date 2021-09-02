@@ -1,16 +1,3 @@
-// LEGACY
-
-$gray-dark: #242426;
-// taken from T&S Figma 5/19/2021, marketing home section bg
-$gray-mid: #323e48;
-$gray-light: #747474;
-$gray-lighter: #dbdbdb;
-// taken from T&S Figma 5/14/2021, sidebar border line
-$gray-bleached: #cdd9e3;
-$accent: #3da88e;
-
-// END LEGACY
-
 $serif: ivyjournal, serif;
 $headingFont: $serif;
 
@@ -83,11 +70,4 @@ $grid-gap: 24px;
 	display: inline-block;
 	background-color: white;
 	cursor: pointer;
-	&.square {
-		aspect-ratio: 1/1;
-		display: block;
-		& > * {
-			display: block;
-		}
-	}
 }

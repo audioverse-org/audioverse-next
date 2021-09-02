@@ -12,9 +12,9 @@ type Props = {
 		| 'secondary'
 		| 'secondaryInverse'
 		| 'tertiary';
-	text: JSX.Element | string;
+	text?: JSX.Element | string;
 	href?: string;
-	onClick?: (e: MouseEvent) => void;
+	onClick?: (e: MouseEvent<HTMLElement>) => void;
 	Icon?: any;
 	iconPosition?: 'left' | 'right';
 	target?: '_blank';
@@ -38,11 +38,11 @@ export default function Button({
 			target={target}
 		>
 			{Icon && iconPosition !== 'right' && (
-				<Icon className={clsx(styles.iconLeft)} />
+				<Icon className={clsx(text && styles.iconLeftOfText)} />
 			)}
 			{text}
 			{Icon && iconPosition === 'right' && (
-				<Icon className={clsx(styles.iconRight)} />
+				<Icon className={clsx(text && styles.iconRightOfText)} />
 			)}
 		</a>
 	);

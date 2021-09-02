@@ -11,7 +11,7 @@
 	margin-right: 0.2em;
 
 	a {
-		color: $gray-dark;
+		color: $ts-dark;
 		text-decoration: none;
 		display: block;
 		border-radius: 3px;
@@ -19,7 +19,7 @@
 	}
 
 	&:not(.active) a:hover {
-		background-color: $gray-lighter;
+		background-color: $ts-lightTone;
 	}
 }
 
@@ -27,6 +27,6 @@
 	a {
 		color: white;
 		font-weight: bold;
-		background-color: $accent;
+		background-color: $ts-red; // TODO: rework this
 	}
 }

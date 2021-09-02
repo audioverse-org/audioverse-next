@@ -130,19 +130,20 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	}
 	return (
 		<Tease className={styles.base}>
-			{/*TODO: use next/link for sequence link*/}
 			{recording?.sequence && (
-				<a href={seriesDetailRoute} className={styles.hat}>
-					<div className={styles.hatType}>
-						<ListIcon width={13} height={13} />
-						<FormattedMessage
-							id="sermonDetailPage__seriesTitle"
-							defaultMessage="Series"
-							description="Sermon detail series title"
-						/>
-					</div>
-					<h4>{recording?.sequence?.title}</h4>
-				</a>
+				<Link href={recording.sequence.canonicalPath}>
+					<a className={styles.hat}>
+						<div className={styles.hatType}>
+							<ListIcon width={13} height={13} />
+							<FormattedMessage
+								id="sermonDetailPage__seriesTitle"
+								defaultMessage="Series"
+								description="Sermon detail series title"
+							/>
+						</div>
+						<h4>{recording?.sequence?.title}</h4>
+					</a>
+				</Link>
 			)}
 			<div className={styles.content}>
 				<div className={styles.main}>

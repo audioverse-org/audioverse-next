@@ -1,6 +1,8 @@
 import React, { CSSProperties, ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
+import Button from '@components/molecules/button';
+
 import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
 import ArrowRight from '../../../public/img/icon-arrow-right.svg';
 
@@ -50,17 +52,17 @@ export default function Slider({
 				{children}
 			</div>
 			<div className={styles.controls}>
-				<button
+				<Button
+					type="secondary"
+					onClick={pageLeft}
+					Icon={ArrowLeft}
 					aria-label={intl.formatMessage({
 						id: 'cardSlider__previousPageLabel',
 						defaultMessage: 'Previous page',
 						description: 'card slider previous page label',
 					})}
-					onClick={pageLeft}
-					className={`${styles.button} ${styles.square}`}
-				>
-					<ArrowLeft />
-				</button>
+					className={styles.buttonSquare}
+				/>
 				<ul
 					aria-label={intl.formatMessage({
 						id: 'cardSlider__paginationLabel',
@@ -77,17 +79,17 @@ export default function Slider({
 						/>
 					))}
 				</ul>
-				<button
+				<Button
+					type="secondary"
+					onClick={pageRight}
+					Icon={ArrowRight}
 					aria-label={intl.formatMessage({
 						id: 'cardSlider__nextPageLabel',
 						defaultMessage: 'Next page',
 						description: 'card slider next page label',
 					})}
-					onClick={pageRight}
-					className={`${styles.button} ${styles.square}`}
-				>
-					<ArrowRight />
-				</button>
+					className={styles.buttonSquare}
+				/>
 			</div>
 		</div>
 	);

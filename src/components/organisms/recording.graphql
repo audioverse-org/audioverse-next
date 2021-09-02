@@ -33,6 +33,7 @@ fragment recording on Recording {
 	sequence {
 		id
 		title
+		canonicalPath
 		recordings(first: 1000) {
 			nodes {
 				...teaseRecording

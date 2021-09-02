@@ -122,8 +122,8 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					/>
 				</div>
 				<div className={styles.rightButtons}>
-					<ButtonSpeed recording={recording} />
-					<ButtonDownload recording={recording} />
+					<ButtonSpeed {...{ recording, backgroundColor }} />
+					<ButtonDownload {...{ recording, backgroundColor }} />
 					<ButtonShareRecording recording={recording} />
 					<RecordingButtonFavorite
 						id={recording.id}

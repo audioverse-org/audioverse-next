@@ -14,10 +14,13 @@ import IconPlay from '../../../public/img/icon-play-medium.svg';
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
 
-const isBackgroundColorDark = (backgroundColor: BaseColors) =>
-	[BaseColors.BOOK_B, BaseColors.STORY_B, BaseColors.TOPIC_B].includes(
-		backgroundColor
-	);
+export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
+	[
+		BaseColors.DARK,
+		BaseColors.BOOK_B,
+		BaseColors.STORY_B,
+		BaseColors.TOPIC_B,
+	].includes(backgroundColor);
 
 export default function ButtonPlay({
 	recording,

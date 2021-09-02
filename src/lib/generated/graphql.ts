@@ -6276,6 +6276,7 @@ export type RecordingFragment = {
 		__typename?: 'Sequence';
 		id: string;
 		title: string;
+		canonicalPath: string;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Maybe<
@@ -8086,6 +8087,7 @@ export type GetSermonDetailDataQuery = {
 			__typename?: 'Sequence';
 			id: string;
 			title: string;
+			canonicalPath: string;
 			recordings: {
 				__typename?: 'RecordingConnection';
 				nodes: Maybe<
@@ -8289,6 +8291,7 @@ export type GetSongAlbumPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string;
 						title: string;
+						canonicalPath: string;
 						recordings: {
 							__typename?: 'RecordingConnection';
 							nodes: Maybe<
@@ -8444,6 +8447,7 @@ export type GetSongBookPageDataQuery = {
 					__typename?: 'Sequence';
 					id: string;
 					title: string;
+					canonicalPath: string;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						nodes: Maybe<
@@ -8575,6 +8579,7 @@ export type SongFragment = {
 		__typename?: 'Sequence';
 		id: string;
 		title: string;
+		canonicalPath: string;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Maybe<
@@ -8707,6 +8712,7 @@ export type GetSongSponsorPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string;
 						title: string;
+						canonicalPath: string;
 						recordings: {
 							__typename?: 'RecordingConnection';
 							nodes: Maybe<
@@ -8862,6 +8868,7 @@ export type GetSongDetailTagPageDataQuery = {
 					__typename?: 'Sequence';
 					id: string;
 					title: string;
+					canonicalPath: string;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						nodes: Maybe<
@@ -9410,6 +9417,7 @@ export type GetStoryDetailPageDataQuery = {
 							__typename?: 'Sequence';
 							id: string;
 							title: string;
+							canonicalPath: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
 								nodes: Maybe<
@@ -10035,6 +10043,7 @@ export const RecordingFragmentDoc = `
   sequence {
     id
     title
+    canonicalPath
     recordings(first: 1000) {
       nodes {
         ...teaseRecording
