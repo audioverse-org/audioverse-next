@@ -48,7 +48,7 @@ describe('sermon video list page', () => {
 			variables: {
 				language: 'ENGLISH',
 				hasVideo: true,
-				first: 25,
+				first: 12,
 				offset: 0,
 			},
 		});

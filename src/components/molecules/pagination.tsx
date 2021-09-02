@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconBack from '../../../public/img/icon-back-light.svg';
+import IconForward from '../../../public/img/icon-forward-light.svg';
+
+import Button from './button';
 import styles from './pagination.module.scss';
 
 export function pagination(
 	current: number,
 	total: number
 ): (number | string)[] {
-	if (!current) throw Error('Current page number required');
-
 	if (total === 1) return [1];
 
 	const center = [current - 2, current - 1, current, current + 1, current + 2],
@@ -68,6 +71,8 @@ export default function Pagination({
 	total: number;
 	makeRoute: (languageRoute: string, pageIndex: number) => string;
 }): JSX.Element {
+	const language = useLanguageRoute();
+	const intl = useIntl();
 	current = current || 1;
 
 	const pagePrevious = current - 1;
@@ -77,7 +82,18 @@ export default function Pagination({
 	// TODO: Consider not rendering pagination if only one page
 	return (
 		<ul className={styles.base}>
-			{current > 1 ? <PaginationEntry page={pagePrevious} label={'<'} /> : null}
+			{current > 1 ? (
+				<Button
+					type="secondary"
+					href={makeRoute(language, pagePrevious)}
+					Icon={IconBack}
+					text={intl.formatMessage({
+						id: 'molecules-pagination__previousLabel',
+						defaultMessage: 'Previous',
+					})}
+					className={styles.previousButton}
+				/>
+			) : null}
 			{pages.map((p, i) => (
 				<PaginationEntry
 					page={p}
@@ -87,7 +103,16 @@ export default function Pagination({
 				/>
 			))}
 			{current < total ? (
-				<PaginationEntry page={pageNext} label={'>'} makeRoute={makeRoute} />
+				<Button
+					type="secondary"
+					href={makeRoute(language, pageNext)}
+					Icon={IconForward}
+					text={intl.formatMessage({
+						id: 'molecules-pagination__nextLabel',
+						defaultMessage: 'Next',
+					})}
+					className={styles.nextButton}
+				/>
 			) : null}
 		</ul>
 	);

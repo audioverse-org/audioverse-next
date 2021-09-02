@@ -70,6 +70,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 		},
 		{
 			key: 'blog',
+			href: `/${languageRoute}/blog`,
 			Icon: IconBlog,
 			label: intl.formatMessage({
 				id: `header__navItemBlog`,

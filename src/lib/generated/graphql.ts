@@ -6769,6 +6769,43 @@ export type GetBibleVersionsPageDataQuery = {
 	};
 };
 
+export type GetBlogPageDataQueryVariables = Exact<{
+	language: Language;
+	offset?: Maybe<Scalars['Int']>;
+	first?: Maybe<Scalars['Int']>;
+}>;
+
+export type GetBlogPageDataQuery = {
+	__typename?: 'Query';
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'BlogPost';
+				publishDate: string;
+				title: string;
+				teaser: string;
+				canonicalPath: string;
+				readingDuration: Maybe<number>;
+				image: Maybe<{ __typename?: 'Image'; url: string }>;
+			}>
+		>;
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
+};
+
+export type GetBlogPathsDataQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetBlogPathsDataQuery = {
+	__typename?: 'Query';
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
+};
+
 export type GetBlogDetailDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 	language: Language;
@@ -10688,6 +10725,62 @@ export const useGetBibleVersionsPageDataQuery = <
 		>(GetBibleVersionsPageDataDocument, variables),
 		options
 	);
+export const GetBlogPageDataDocument = `
+    query getBlogPageData($language: Language!, $offset: Int = 0, $first: Int = 12) {
+  blogPosts(
+    language: $language
+    orderBy: {field: PUBLISHED_AT, direction: DESC}
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      ...cardPost
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${CardPostFragmentDoc}`;
+export const useGetBlogPageDataQuery = <
+	TData = GetBlogPageDataQuery,
+	TError = unknown
+>(
+	variables: GetBlogPageDataQueryVariables,
+	options?: UseQueryOptions<GetBlogPageDataQuery, TError, TData>
+) =>
+	useQuery<GetBlogPageDataQuery, TError, TData>(
+		['getBlogPageData', variables],
+		graphqlFetcher<GetBlogPageDataQuery, GetBlogPageDataQueryVariables>(
+			GetBlogPageDataDocument,
+			variables
+		),
+		options
+	);
+export const GetBlogPathsDataDocument = `
+    query getBlogPathsData($language: Language!) {
+  blogPosts(language: $language) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+export const useGetBlogPathsDataQuery = <
+	TData = GetBlogPathsDataQuery,
+	TError = unknown
+>(
+	variables: GetBlogPathsDataQueryVariables,
+	options?: UseQueryOptions<GetBlogPathsDataQuery, TError, TData>
+) =>
+	useQuery<GetBlogPathsDataQuery, TError, TData>(
+		['getBlogPathsData', variables],
+		graphqlFetcher<GetBlogPathsDataQuery, GetBlogPathsDataQueryVariables>(
+			GetBlogPathsDataDocument,
+			variables
+		),
+		options
+	);
 export const GetBlogDetailDataDocument = `
     query getBlogDetailData($id: ID!, $language: Language!) {
   blogPost(id: $id) {
@@ -12648,6 +12741,18 @@ export async function getBibleVersionsPageData<T>(
 	variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
 ): Promise<GetBibleVersionsPageDataQuery> {
 	return fetchApi(GetBibleVersionsPageDataDocument, { variables });
+}
+
+export async function getBlogPageData<T>(
+	variables: ExactAlt<T, GetBlogPageDataQueryVariables>
+): Promise<GetBlogPageDataQuery> {
+	return fetchApi(GetBlogPageDataDocument, { variables });
+}
+
+export async function getBlogPathsData<T>(
+	variables: ExactAlt<T, GetBlogPathsDataQueryVariables>
+): Promise<GetBlogPathsDataQuery> {
+	return fetchApi(GetBlogPathsDataDocument, { variables });
 }
 
 export async function getBlogDetailData<T>(

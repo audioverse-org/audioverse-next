@@ -373,10 +373,9 @@ describe('home page', () => {
 	it('links post title', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_post_title')).toHaveAttribute(
-			'href',
-			'/the_post_path'
-		);
+		expect(
+			getByText('the_post_title').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_post_path');
 	});
 });
 

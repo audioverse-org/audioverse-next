@@ -1,6 +1,6 @@
 import { Language } from './generated/graphql';
 
-export const ENTRIES_PER_PAGE = 25;
+export const ENTRIES_PER_PAGE = 12;
 
 export interface LanguageConfiguration {
 	base_url: string;

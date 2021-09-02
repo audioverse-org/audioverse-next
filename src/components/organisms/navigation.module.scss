@@ -20,6 +20,7 @@
 		.icon {
 			margin-right: 8px;
 			display: flex;
+			color: $ts-dark;
 		}
 		a {
 			text-decoration: none;
@@ -30,18 +31,9 @@
 	li:hover,
 	a.active {
 		&,
-		a {
-			color: $ts-red;
-		}
+		a,
 		.icon {
-			* {
-				stroke: $ts-red;
-			}
-			&.fill {
-				* {
-					fill: $ts-red;
-				}
-			}
+			color: $ts-red;
 		}
 	}
 }

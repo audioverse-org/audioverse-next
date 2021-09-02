@@ -200,6 +200,7 @@ describe('localization usage', () => {
 						],
 						sequenceIndex: 1,
 						sequence: {
+							canonicalPath: 'z',
 							recordings: {
 								nodes: [
 									{ id: 1, canonicalPath: 'z', persons: [] },

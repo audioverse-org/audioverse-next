@@ -15,7 +15,7 @@ export default function discover({
 }): JSX.Element {
 	const sermons = data.sermons.nodes || [];
 	return (
-		<div className={styles.container}>
+		<div>
 			<LineHeading>
 				<FormattedMessage
 					id="discover_recentHeading"

@@ -19,24 +19,20 @@ type Props = {
 	iconPosition?: 'left' | 'right';
 	target?: '_blank';
 	className?: string;
+	'aria-label'?: string;
 };
 
 export default function Button({
 	type,
 	text,
 	href,
-	onClick,
 	Icon,
 	iconPosition,
-	target,
 	className,
+	...props
 }: Props): JSX.Element {
 	const inner = (
-		<a
-			className={clsx(styles.base, styles[type], className)}
-			onClick={onClick}
-			target={target}
-		>
+		<a className={clsx(styles.base, styles[type], className)} {...props}>
 			{Icon && iconPosition !== 'right' && (
 				<Icon className={clsx(text && styles.iconLeftOfText)} />
 			)}

@@ -244,4 +244,4 @@ export const makeBlogPostRoute = (
 export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: number | string
-): string => `/${languageRoute}/blog/page/${page}`;
+): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;

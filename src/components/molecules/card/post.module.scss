@@ -2,11 +2,24 @@
 
 .container {
 	height: 100%;
-	background: $ts-white;
+	display: flex;
+	flex-direction: column;
+	background-color: $ts-white;
+	transition: background-color $transition-medium;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-white;
+	}
 }
 
 .content {
+	flex-grow: 1;
 	padding: 16px;
+	display: flex;
+	flex-direction: column;
 }
 
 .date {
@@ -18,8 +31,15 @@
 .duration {
 	margin-top: 0;
 	margin-bottom: 0;
+	color: $ts-midTone;
 }
 
-.teaser + .duration {
+.teaser + .flexGrow {
 	margin-top: 16px;
+}
+
+.flexGrow {
+	flex-grow: 1;
+	display: flex;
+	align-items: flex-end;
 }

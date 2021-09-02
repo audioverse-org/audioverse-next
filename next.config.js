@@ -60,7 +60,7 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
-				source: '/:lang/blog/:id/:slug',
+				source: '/:lang/blog/:id(\\d{1,})/:slug',
 				destination: '/:lang/blog/:id',
 				permanent: true,
 			},

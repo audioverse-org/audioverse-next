@@ -384,6 +384,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				canonicalPath: 'series_path',
 			},
 		});
 
@@ -392,7 +393,7 @@ describe('sermon detail page', () => {
 		const link = getAllByText('series_title')[0]
 			.parentElement as HTMLLinkElement;
 
-		expect(link.href).toContain('/en/series/series_id');
+		expect(link.href).toContain('/series_path');
 	});
 
 	it('uses language base route in series link', async () => {
@@ -400,6 +401,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				canonicalPath: 'es/series_path',
 			},
 		});
 
@@ -412,7 +414,7 @@ describe('sermon detail page', () => {
 		const link = getAllByText('series_title')[0]
 			.parentElement as HTMLLinkElement;
 
-		expect(link.href).toContain('/es/series/series_id');
+		expect(link.href).toContain('/es/series_path');
 	});
 
 	it('shows copyright', async () => {
