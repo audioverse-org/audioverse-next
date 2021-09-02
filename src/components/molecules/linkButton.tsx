@@ -17,11 +17,10 @@ export type ILinkButtonProps = {
 export default function LinkButton({
 	href,
 	isOptionalLink,
-	className: classNameProp,
+	className,
 	children,
 }: PropsWithChildren<ILinkButtonProps>): JSX.Element {
 	const router = useRouter();
-	const className = clsx(styles.container, classNameProp);
 	return isOptionalLink ? (
 		<div
 			role="button"
@@ -29,7 +28,7 @@ export default function LinkButton({
 				e.preventDefault();
 				router.push(href);
 			}}
-			className={className}
+			className={clsx(styles.isOptionalLink, className)}
 		>
 			{children}
 		</div>

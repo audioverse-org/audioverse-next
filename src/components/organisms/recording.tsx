@@ -13,6 +13,7 @@ import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import SequenceNav from '@components/molecules/sequenceNav';
 import SponsorInfo from '@components/molecules/sponsorInfo';
+import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { RecordingFragment } from '@lib/generated/graphql';
@@ -128,7 +129,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		});
 	}
 	return (
-		<div className={styles.base}>
+		<Tease className={styles.base}>
 			{/*TODO: use next/link for sequence link*/}
 			{recording?.sequence && (
 				<a href={seriesDetailRoute} className={styles.hat}>
@@ -144,7 +145,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				</a>
 			)}
 			<div className={styles.content}>
-				<div>
+				<div className={styles.main}>
 					<div className={styles.meta}>
 						{index && (
 							<span className={styles.part}>
@@ -159,7 +160,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						<h1>{title}</h1>
 						<ul className={styles.speakers}>
 							{speakers.map((speaker) => (
-								<li key={speaker.id}>
+								<li key={speaker.canonicalPath}>
 									<PersonLockup
 										person={speaker}
 										textColor={BaseColors.DARK}
@@ -192,7 +193,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 				{/*TODO: use ul > li*/}
 
-				{seriesItems && (
+				{seriesItems?.length && (
 					<div
 						className={styles.series}
 						aria-label={intl.formatMessage({
@@ -208,14 +209,22 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								description={'recording series list title'}
 							/>
 						</LineHeading>
-						{seriesItems.map((r) => (
-							<div className={styles.item} key={r.id}>
-								<TeaseRecording recording={r} />
-							</div>
-						))}
+
+						<div className={styles.seriesItems}>
+							{seriesItems.map((r) => (
+								<div className={styles.item} key={r.id}>
+									<TeaseRecording
+										recording={r}
+										theme={'sermon'} // TODO: fix this
+										hideSpeakers
+										unpadded
+									/>
+								</div>
+							))}
+						</div>
 					</div>
 				)}
 			</div>
-		</div>
+		</Tease>
 	);
 }

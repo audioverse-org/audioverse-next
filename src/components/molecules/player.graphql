@@ -3,6 +3,5 @@ fragment player on Recording {
 	title
 	...andMiniplayer
 	...buttonDownload
-	...recordingProgressBar
 	...buttonShareRecording
 }

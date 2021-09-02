@@ -1,4 +1,15 @@
 fragment cardWithPlayable on Recording {
-	id
-	...recordingProgressBar
+	...teaseRecording
+	sequence {
+		canonicalPath
+		image {
+			url(size: 1000)
+		}
+	}
+	sponsor {
+		...sponsorLockup
+	}
+	writers: persons(role: WRITER) {
+		...personLockup
+	}
 }

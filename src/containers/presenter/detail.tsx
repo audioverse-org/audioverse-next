@@ -11,8 +11,8 @@ import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
 import CardCollection from '@components/molecules/card/collection';
+import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
-import CardSermon from '@components/molecules/card/sermon';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -33,7 +33,7 @@ import { PresenterStaticProps } from '@pages/[language]/presenters/[id]/[[...slu
 import UserIcon from '../../../public/img/fa-user.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like.svg';
+import LikeIcon from '../../../public/img/icon-like-light.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
@@ -199,7 +199,7 @@ function PresenterDetail({
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
 						{essentialRecordings.nodes.map((recording) => (
-							<CardSermon recording={recording} key={recording.id} />
+							<CardRecording recording={recording} key={recording.id} />
 						))}
 					</CardGroup>
 				</>
@@ -214,7 +214,7 @@ function PresenterDetail({
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
 						{recentRecordings.nodes.map((recording) => (
-							<CardSermon recording={recording} key={recording.id} />
+							<CardRecording recording={recording} key={recording.id} />
 						))}
 					</CardGroup>
 					{recentRecordings.pageInfo.hasNextPage && (
@@ -242,7 +242,7 @@ function PresenterDetail({
 					</LineHeading>
 					<CardGroup className={styles.cardGroup}>
 						{topRecordings.nodes.map((recording) => (
-							<CardSermon recording={recording} key={recording.id} />
+							<CardRecording recording={recording} key={recording.id} />
 						))}
 					</CardGroup>
 					{recentRecordings.pageInfo.hasNextPage && (

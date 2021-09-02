@@ -21,7 +21,7 @@ import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]';
 
 import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like.svg';
+import LikeIcon from '../../../public/img/icon-like-light.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';

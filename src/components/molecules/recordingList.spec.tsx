@@ -93,11 +93,11 @@ describe('recording list', () => {
 	it('includes hours in duration', async () => {
 		const { getByText } = await renderComponent({
 			sermonData: {
-				duration: 60 * 60,
+				duration: 61 * 60,
 			},
 		});
 
-		expect(getByText('1h 0m')).toBeInTheDocument();
+		expect(getByText('1h 1m')).toBeInTheDocument();
 	});
 
 	it('handles missing sermons', async () => {

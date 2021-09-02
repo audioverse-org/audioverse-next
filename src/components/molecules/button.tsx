@@ -1,14 +1,20 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import styles from './button.module.scss';
 
 type Props = {
-	type: 'super' | 'primary' | 'secondary' | 'secondaryInverse' | 'tertiary';
+	type:
+		| 'super'
+		| 'primary'
+		| 'primaryInverse'
+		| 'secondary'
+		| 'secondaryInverse'
+		| 'tertiary';
 	text: JSX.Element | string;
 	href?: string;
-	onClick?: () => void;
+	onClick?: (e: MouseEvent) => void;
 	Icon?: any;
 	iconPosition?: 'left' | 'right';
 	target?: '_blank';

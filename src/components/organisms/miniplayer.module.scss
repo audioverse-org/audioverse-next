@@ -16,6 +16,9 @@
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid $ts-cream;
+	@media (min-width: $breakpoint-lg) {
+		z-index: 1001;
+	}
 }
 
 .player {
@@ -45,6 +48,7 @@
 }
 
 .meta {
+	flex: 0 1 40%; // TODO: refine this
 	padding: 2rem;
 	min-width: 0;
 }

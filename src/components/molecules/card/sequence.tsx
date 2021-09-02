@@ -13,7 +13,7 @@ import { useFormattedDuration } from '@lib/time';
 
 import ListIcon from '../../../../public/img/fa-list-alt.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like.svg';
+import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
 import IconButton from '../iconButton';
 import PersonLockup from '../personLockup';

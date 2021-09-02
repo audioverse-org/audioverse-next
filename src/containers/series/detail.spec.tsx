@@ -37,7 +37,15 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 			canonicalPath: 'the_conference_path',
 		},
 		recordings: {
-			nodes: [{ id: 'the_recording_id', title: 'the_recording_title' }],
+			nodes: [
+				{
+					id: 'the_recording_id',
+					title: 'the_recording_title',
+					canonicalPath: 'the_recording_path',
+					contentType: 'SERMON',
+					persons: [],
+				},
+			],
 			aggregate: { count: 1 },
 		},
 	},

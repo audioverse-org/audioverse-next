@@ -1,5 +1,6 @@
 import { Masonry } from 'masonic';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '@components/atoms/lineHeading';
 import CardSermon from '@components/molecules/card/sermon';
@@ -14,8 +15,14 @@ export default function discover({
 }): JSX.Element {
 	const sermons = data.sermons.nodes || [];
 	return (
-		<>
-			<LineHeading>Recent Content</LineHeading>
+		<div className={styles.container}>
+			<LineHeading>
+				<FormattedMessage
+					id="discover_recentHeading"
+					defaultMessage="Recent Content"
+					description="Discover recent content heading"
+				/>
+			</LineHeading>
 			<Masonry
 				items={sermons}
 				render={({ data }) => <CardSermon recording={data} />}
@@ -23,6 +30,6 @@ export default function discover({
 				columnWidth={300}
 				className={styles.grid}
 			/>
-		</>
+		</div>
 	);
 }

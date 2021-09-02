@@ -8,7 +8,7 @@ import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
-import CardSermon from '@components/molecules/card/sermon';
+import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -23,7 +23,7 @@ import { SeriesStaticProps } from '@pages/[language]/series/[id]/[[...slug]]';
 
 import ListAltIcon from '../../../public/img/fa-list-alt.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like.svg';
+import LikeIcon from '../../../public/img/icon-like-light.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
@@ -157,7 +157,7 @@ function SeriesDetail({ sequence }: Must<Props>): JSX.Element {
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>
 					{recordings.nodes.map((recording) => (
-						<CardSermon recording={recording} key={recording.id} hideHat />
+						<CardRecording recording={recording} key={recording.id} hideHat />
 					))}
 				</CardGroup>
 			) : null}

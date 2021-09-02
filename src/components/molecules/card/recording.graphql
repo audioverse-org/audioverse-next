@@ -1,0 +1,4 @@
+fragment cardRecording on Recording {
+	contentType
+	...cardWithPlayable
+}

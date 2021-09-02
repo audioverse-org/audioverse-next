@@ -1,8 +1,6 @@
 @import '../../styles/common';
 
 .base {
-	border-radius: 24px;
-	overflow: hidden;
 	border: 1px solid $ts-cream;
 }
 
@@ -31,6 +29,7 @@
 
 .content {
 	display: flex;
+	flex-direction: column;
 	> * {
 		padding: 24px;
 	}
@@ -42,12 +41,52 @@
 		margin-top: 8px;
 		margin-bottom: 16px;
 	}
+	@media (min-width: $breakpoint-xl) {
+		flex-direction: row;
+	}
+}
+
+.main {
+	flex-grow: 1;
+
+	@media (min-width: $breakpoint-xl) {
+		max-width: 66.6666%;
+	}
 }
 
 .series {
-	border-left: 1px solid $ts-cream;
+	background-color: $ts-white; // TODO: adjust based on recording
 	.item {
 		margin-bottom: 32px;
+	}
+	@media (min-width: $breakpoint-xl) {
+		flex: 1 0 33.3333%;
+		min-width: 300px;
+		max-width: 468px;
+		border-left: 1px solid $ts-cream;
+	}
+}
+.seriesItems {
+	@media (min-width: $breakpoint-md) {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		> * {
+			flex: 1 0 calc(50% - 32px);
+			&:nth-child(odd) {
+				margin-right: 16px;
+			}
+			&:nth-child(even) {
+				margin-left: 16px;
+			}
+		}
+	}
+	@media (min-width: $breakpoint-xl) {
+		display: block;
+		> * {
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+		}
 	}
 }
 

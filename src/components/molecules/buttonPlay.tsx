@@ -1,19 +1,34 @@
-import PauseIcon from '@material-ui/icons/Pause';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import React, { CSSProperties } from 'react';
+import clsx from 'clsx';
+import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import { ButtonPlayFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import IconPauseLarge from '../../../public/img/icon-pause-large.svg';
+import IconPause from '../../../public/img/icon-pause-medium.svg';
+import IconPlayLarge from '../../../public/img/icon-play-large.svg';
+import IconPlay from '../../../public/img/icon-play-medium.svg';
+
 import styles from './buttonPlay.module.scss';
+import IconButton from './iconButton';
+
+const isBackgroundColorDark = (backgroundColor: BaseColors) =>
+	[BaseColors.BOOK_B, BaseColors.STORY_B, BaseColors.TOPIC_B].includes(
+		backgroundColor
+	);
 
 export default function ButtonPlay({
 	recording,
-	size,
+	backgroundColor,
+	large,
+	className,
 }: {
 	recording: ButtonPlayFragment;
-	size?: number;
+	backgroundColor: BaseColors;
+	large?: boolean;
+	className?: string;
 }): JSX.Element {
 	const { isPaused, play, pause } = usePlaybackSession(recording);
 	const intl = useIntl();
@@ -31,13 +46,25 @@ export default function ButtonPlay({
 		  });
 
 	return (
-		<button
-			className={styles.button}
-			style={{ '--size': size ? `${size}px` : undefined } as CSSProperties}
+		<IconButton
+			Icon={
+				isPaused
+					? large
+						? IconPlayLarge
+						: IconPlay
+					: large
+					? IconPauseLarge
+					: IconPause
+			}
+			onPress={() => (isPaused ? play() : pause())}
+			color={
+				isBackgroundColorDark(backgroundColor)
+					? BaseColors.WHITE
+					: BaseColors.DARK
+			}
+			backgroundColor={backgroundColor}
+			className={clsx(styles.base, large && styles.large, className)}
 			aria-label={label}
-			onClick={() => (isPaused ? play() : pause())}
-		>
-			{isPaused ? <PlayArrowIcon /> : <PauseIcon />}
-		</button>
+		/>
 	);
 }

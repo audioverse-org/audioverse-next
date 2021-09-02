@@ -14,18 +14,16 @@
 
 .controls {
 	display: flex;
-	button {
-		flex: 0 0 auto;
-		background: none;
-		border: none;
-		color: $ts-red;
-		svg {
-			font-size: 4rem;
-		}
-	}
-	> div {
+	align-items: flex-start;
+	margin-bottom: 16px;
+	.controlGrow {
 		flex-grow: 1;
+		margin-left: 8px;
 	}
+}
+.play {
+	margin-top: -8px;
+	margin-left: -8px;
 }
 
 .waves {
@@ -33,6 +31,7 @@
 	position: relative;
 	background-image: url('/img/waves-gray.svg');
 	height: 50px;
+	margin-bottom: 8px;
 	input {
 		position: absolute;
 		top: 0;
@@ -77,6 +76,14 @@
 		border: none;
 		cursor: pointer;
 	}
+}
+
+.leftButtons > * {
+	margin-right: 24px;
+}
+
+.rightButtons > * {
+	margin-left: 16px;
 }
 
 .videoProgress {

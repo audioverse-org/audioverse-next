@@ -24,7 +24,7 @@ query getSeriesDetailPageData($id: ID!) {
 				count
 			}
 			nodes {
-				...cardSermon
+				...cardRecording
 				...writeFeedFile
 			}
 		}

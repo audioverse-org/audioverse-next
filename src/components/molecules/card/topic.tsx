@@ -20,11 +20,10 @@ export default function CardTopic({
 				icon: <HatIcon width={12} height={12} />,
 				// TODO: Replace hard-coded tag name (also hard-coded in home.graphql)
 				title: 'Family',
+				content: <h1>TODO</h1>,
+				label: 'TODO',
+				url: topicRecording.sequence?.canonicalPath || '',
 			}}
-			// TODO: Set progress dynamically
-			progress={0.3}
-			// TODO: Generate URL
-			url={'#'}
 			{...topicRecording}
 		/>
 	);

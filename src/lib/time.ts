@@ -23,26 +23,37 @@ const divideWithRunoff = (
 
 export const useFormattedDuration = (seconds: number): string => {
 	const intl = useIntl();
-	const [h, m] = divideWithRunoff(Math.round(seconds), [3600, 60]);
+	const [hours, minutes] = divideWithRunoff(Math.round(seconds), [3600, 60]);
 
-	if (h) {
+	if (hours && minutes) {
 		return intl.formatMessage(
 			{
 				id: 'duration__hoursAndMinutes',
-				defaultMessage: '{h}h {m}m',
+				defaultMessage: '{hours}h {minutes}m',
 				description: 'duration hours and minutes',
 			},
-			{ h, m }
+			{ hours, minutes }
+		);
+	}
+
+	if (hours) {
+		return intl.formatMessage(
+			{
+				id: 'duration__hours',
+				defaultMessage: '{hours}h',
+				description: 'duration hours',
+			},
+			{ hours }
 		);
 	}
 
 	return intl.formatMessage(
 		{
 			id: 'duration__minutes',
-			defaultMessage: '{m}m',
+			defaultMessage: '{minutes}m',
 			description: 'duration minutes',
 		},
-		{ m }
+		{ minutes }
 	);
 };
 

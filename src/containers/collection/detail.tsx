@@ -31,7 +31,7 @@ import { CollectionStaticProps } from '@pages/[language]/collections/[id]/[[...s
 import FAListIcon from '../../../public/img/fa-list.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like.svg';
+import LikeIcon from '../../../public/img/icon-like-light.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';

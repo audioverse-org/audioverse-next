@@ -16,6 +16,8 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 			nodes: [
 				{
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
+					persons: [],
 				},
 			],
 		},

@@ -27,7 +27,33 @@
 	}
 }
 
+.primary,
+.primaryInverse {
+	box-shadow: $ts-shadow-small-default;
+	&:focus {
+		border: 1px solid $ts-red;
+		outline: none;
+	}
+}
 .primary {
+	background: $ts-dark;
+	border: 1px solid $ts-dark;
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	&:focus {
+		border: 1px solid $ts-red;
+		outline: none;
+	}
+}
+.primaryInverse {
+	background: $ts-white;
+	border: 1px solid $ts-white;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
 }
 
 .secondary,
@@ -52,6 +78,7 @@
 }
 
 .super,
+.primary,
 .secondary,
 .secondaryInverse {
 	&:hover {

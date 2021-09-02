@@ -1,9 +1,10 @@
 import Slider from '@material-ui/core/Slider';
 import React, { useContext } from 'react';
 
-import RecordingProgressBar from '@components/atoms/recordingProgressBar';
+import { BaseColors } from '@components/atoms/baseColors';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
+import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
 import { useFormattedTime } from '@lib/time';
 
@@ -31,9 +32,21 @@ export default function Miniplayer(): JSX.Element | null {
 				<div
 					className={`${styles.controls} ${isShowingVideo && styles.hidden}`}
 				>
-					<ButtonNudge recording={recording} reverse={true} />
-					<ButtonPlay recording={recording} />
-					<ButtonNudge recording={recording} />
+					<ButtonNudge
+						recording={recording}
+						reverse={true}
+						backgroundColor={BaseColors.WHITE}
+						large
+					/>
+					<ButtonPlay
+						recording={recording}
+						backgroundColor={BaseColors.WHITE}
+					/>
+					<ButtonNudge
+						recording={recording}
+						backgroundColor={BaseColors.WHITE}
+						large
+					/>
 				</div>
 			</div>
 			<div className={styles.meta}>

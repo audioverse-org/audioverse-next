@@ -520,6 +520,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -691,12 +692,15 @@ describe('sermon detail page', () => {
 					nodes: [
 						{
 							id: 1,
+							canonicalPath: '',
 						},
 						{
 							id: 2,
+							canonicalPath: '',
 						},
 						{
 							id: 3,
+							canonicalPath: '',
 						},
 					],
 				},
@@ -718,12 +722,15 @@ describe('sermon detail page', () => {
 					nodes: [
 						{
 							id: 1,
+							canonicalPath: '',
 						},
 						{
 							id: 2,
+							canonicalPath: '',
 						},
 						{
 							id: 3,
+							canonicalPath: '',
 						},
 					],
 				},
@@ -741,6 +748,7 @@ describe('sermon detail page', () => {
 			sponsor: {
 				id: 'sponsor_id',
 				title: 'sponsor_title',
+				canonicalPath: 'sponsor_path',
 			},
 		});
 
@@ -955,6 +963,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -976,6 +985,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1004,6 +1014,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1039,6 +1050,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 						},
 					],
@@ -1087,6 +1099,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -1108,6 +1121,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -1129,6 +1143,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							duration: 60 * 5,
 						},
 					],
@@ -1153,6 +1168,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 						},
 					],
 				},
@@ -1174,6 +1190,7 @@ describe('sermon detail page', () => {
 						{
 							id: 'the_sibling_id',
 							title: 'sibling_title',
+							canonicalPath: 'sibling_path',
 							sequenceIndex: 1,
 							sequence: {
 								recordings: {

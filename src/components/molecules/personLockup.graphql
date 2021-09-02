@@ -1,5 +1,4 @@
 fragment personLockup on Person {
-	id
 	name
 	canonicalPath
 	imageWithFallback {

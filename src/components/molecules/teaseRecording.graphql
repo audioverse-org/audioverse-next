@@ -1,11 +1,19 @@
 fragment teaseRecording on Recording {
+	...andMiniplayer
+	canonicalPath
+	title
+	duration
+	persons(role: SPEAKER) {
+		...personLockup
+	}
 	sequenceIndex
 	sequence {
+		id
+		title
 		recordings {
 			aggregate {
 				count
 			}
 		}
 	}
-	...buttonPlay
 }

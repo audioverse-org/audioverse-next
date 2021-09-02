@@ -2,7 +2,7 @@ query getHomeStaticProps($language: Language!) {
 	musicTracks(
 		language: $language
 		first: 1
-		orderBy: { field: PUBLISHED_AT, direction: DESC }
+		orderBy: { field: PUBLISHED_AT, direction: ASC }
 	) {
 		nodes {
 			...cardSong
@@ -18,10 +18,19 @@ query getHomeStaticProps($language: Language!) {
 			}
 		}
 	}
-	stories(
+	audiobookTracks(
 		language: $language
 		first: 1
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
+	) {
+		nodes {
+			...cardAudiobookTrack
+		}
+	}
+	stories(
+		language: $language
+		first: 1
+		orderBy: { field: PUBLISHED_AT, direction: ASC }
 	) {
 		nodes {
 			...cardStory

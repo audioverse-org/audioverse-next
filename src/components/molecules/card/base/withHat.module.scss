@@ -1,103 +1,106 @@
 @import '../../../../styles/common';
 
+.base {
+	display: flex;
+	flex-direction: column;
+}
+
 .hat {
-	background-color: var(--hatBg, #efebeb);
-	color: var(--hatColor, $ts-dark);
-	padding: 16px;
+	max-height: 49px;
+	overflow: hidden;
+	transition: max-height $transition-medium;
+}
+.hatExpanded {
+	max-height: 300px;
+	&.longHat {
+		max-height: 600px;
+	}
+	.hatTitle {
+		display: none;
+	}
+	.hatLabel {
+		display: inline;
+	}
+}
+
+.hatBar {
 	width: 100%;
-	font-size: 0.9em;
 	display: flex !important;
 	align-items: center;
 	border-top-left-radius: 16px;
 	border-top-right-radius: 16px;
+	color: var(--hatColor, $ts-dark);
+	padding: 16px;
+	cursor: pointer;
+	font-size: 0.9em;
+	background-color: var(--hatBg);
+	transition: background-color $transition-medium;
+	&:hover {
+		background-color: var(--hatHoverColor);
+	}
 }
 
 .hatIcon {
 	margin-right: 4px;
-	color: var(--iconColor, #ff224a);
+	color: var(--iconColor, $ts-red);
 	display: flex;
 }
 
 .hatTitle {
 	flex-grow: 1;
 	overflow: hidden;
+	font-size: 14px;
+	line-height: 16.8px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+.hatLabel {
+	display: none;
+	flex-grow: 1;
+}
 
-.hatCarrot {
+.hatCaret {
 	margin-left: 4px;
 	flex: 0 0 auto;
-	svg {
-		width: 16px;
-		height: auto;
-	}
 }
 
-.hero {
-	width: 100%;
-	object-fit: cover;
-	aspect-ratio: 500/260;
-	height: auto;
-}
-
-.title {
-	margin-top: 0;
-	margin-bottom: 16px;
-	a {
-		text-decoration: none;
-	}
-}
-
-.content {
-	padding: 16px;
-	color: var(--cardColor, #6b7680);
-}
-
-.part {
-	font-size: 10.5px;
-	font-weight: 600;
-	line-height: 13px;
-	color: var(--partColor, #ff224a);
-}
-
-.heading {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	color: var(--headingColor, $ts-dark);
-
-	h1 {
-		font-size: 1.5em;
-		margin: 0 0 0.5em 0;
-		flex-grow: 1;
-	}
-
-	svg {
-		flex: 0 0 auto;
-	}
-
-	path {
-		stroke: var(--headingColor, $ts-dark);
-		fill: none;
-	}
+.audiobookTrack {
+	--hatBg: #{$ts-bookH};
+	--hatColor: #{$ts-white};
+	--hatHoverColor: #{$ts-darkened-bookH};
+	--cardBg: #{$ts-bookB};
+	--cardColor: #{$ts-lightTone};
+	--cardHoverColor: #{$ts-darkened-bookB};
+	--headingColor: #{$ts-white};
+	--progressColor: #{$ts-salmon};
+	--partColor: #{$ts-salmon};
+	--iconColor: #{$ts-salmon};
 }
 
 .chapter {
-	--hatBg: black;
-	--hatColor: white;
-	background: #f1f2f4;
+	--hatBg: #{$ts-bibleH};
+	--hatColor: #{$ts-white};
+	--hatHoverColor: #{$ts-darkened-bibleH};
+	--cardBg: #{$ts-bibleB};
+	--cardColor: #{$ts-dark};
+	--cardHoverColor: #{$ts-darkened-bibleB};
+	--iconColor: #{$ts-salmon};
 }
 
 .sermon {
 	// base
-	background: $ts-white;
+	--hatBg: #{$ts-cream};
+	--hatHoverColor: #{$ts-darkened-cream};
+	--cardBg: #{$ts-white};
+	--cardHoverColor: #{$ts-darkened-white};
 }
 
 .song {
-	--hatBg: #d7ebfb;
+	--hatBg: #{$ts-songH};
 	--hatColor: #{$ts-dark};
-	background: #ebf2f9;
+	--hatHoverColor: #{$ts-darkened-songH};
+	--cardBg: #{$ts-songB};
+	--cardHoverColor: #{$ts-darkened-songB};
 	--cardColor: #{$ts-midTone};
 	--headingColor: #{$ts-dark};
 	--progressColor: #{$ts-red};
@@ -106,22 +109,26 @@
 }
 
 .story {
-	--hatBg: #003849;
-	--hatColor: white;
-	background: #325763;
+	--hatBg: #{$ts-storyH};
+	--hatColor: #{$ts-white};
+	--hatHoverColor: #{$ts-darkened-storyH};
+	--cardBg: #{$ts-storyB};
 	--cardColor: #{$ts-lightTone};
-	--headingColor: white;
+	--cardHoverColor: #{$ts-darkened-storyB};
+	--headingColor: #{$ts-white};
 	--progressColor: #{$ts-salmon};
 	--partColor: #{$ts-salmon};
 	--iconColor: #{$ts-salmon};
 }
 
 .topic {
-	--hatBg: #040253;
-	--hatColor: white;
-	background: #3e3d6d;
+	--hatBg: #{$ts-topicH};
+	--hatColor: #{$ts-white};
+	--hatHoverColor: #{$ts-darkened-topicH};
+	--cardBg: #{$ts-topicB};
 	--cardColor: #{$ts-lightTone};
-	--headingColor: white;
+	--cardHoverColor: #{$ts-darkened-topicB};
+	--headingColor: #{$ts-white};
 	--progressColor: #{$ts-salmon};
 	--partColor: #{$ts-salmon};
 	--iconColor: #{$ts-salmon};

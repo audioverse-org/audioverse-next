@@ -2,7 +2,8 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import ButtonFavorite from '@components/molecules/buttonFavorite';
+import { BaseColors } from '@components/atoms/baseColors';
+import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
 import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
 import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
@@ -11,7 +12,9 @@ jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
 
 const renderComponent = async () => {
-	const result = await renderWithIntl(<ButtonFavorite id={'-1'} />);
+	const result = await renderWithIntl(
+		<RecordingButtonFavorite id={'-1'} backgroundColor={BaseColors.WHITE} />
+	);
 	const button =
 		result.queryByLabelText('Favorite') ||
 		result.queryByLabelText('Unfavorite');
@@ -26,7 +29,7 @@ const renderComponent = async () => {
 	};
 };
 
-describe('favorite button', () => {
+describe('recording favorite button', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 	});
@@ -104,7 +107,10 @@ describe('favorite button', () => {
 	it('sets aria-pressed=false', async () => {
 		const { getByLabelText } = await renderComponent();
 
-		expect(getByLabelText('Favorite')).not.toHaveAttribute('aria-pressed');
+		expect(getByLabelText('Favorite')).not.toHaveAttribute(
+			'aria-pressed',
+			'true'
+		);
 	});
 
 	it('sets aria-pressed=true', async () => {

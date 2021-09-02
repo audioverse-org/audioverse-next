@@ -1,3 +1,13 @@
+@import '../styles/common';
+
+.container {
+	max-width: $content-maxWidth-sm;
+	margin: 0 auto;
+	@media (min-width: $breakpoint-md) {
+		max-width: $content-maxWidth;
+	}
+}
+
 .grid {
 	// TODO: Fix tabbed focus access and indication in Safari; currently can't
 	//  tab into the grid

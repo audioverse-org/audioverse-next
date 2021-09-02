@@ -1,17 +1,29 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { useIsRecordingFavorited } from '@lib/api';
+import { BaseColors } from '@components/atoms/baseColors';
 
-import IconUnavorite from '../../../public/img/icon-fav-filled.svg';
-import IconFavorite from '../../../public/img/icon-fav-outline.svg';
+import IconLikeActive from '../../../public/img/icon-like-active.svg';
+import IconLikeLight from '../../../public/img/icon-like-light.svg';
+import IconLike from '../../../public/img/icon-like.svg';
 
-import styles from './buttonFavorite.module.scss';
+import IconButton from './iconButton';
 
-export default function ButtonFavorite({ id }: { id: string }): JSX.Element {
-	const { isRecordingFavorited, toggleFavorited } = useIsRecordingFavorited(id);
+export default function ButtonFavorite({
+	isFavorited,
+	toggleFavorited,
+	light,
+	backgroundColor,
+	className,
+}: {
+	isFavorited: boolean;
+	toggleFavorited: () => void;
+	light?: boolean;
+	backgroundColor: BaseColors;
+	className?: string;
+}): JSX.Element {
 	const intl = useIntl();
-	const label = isRecordingFavorited
+	const label = isFavorited
 		? intl.formatMessage({
 				id: 'RecordingFavorite__unfavorite',
 				defaultMessage: 'Unfavorite',
@@ -23,18 +35,30 @@ export default function ButtonFavorite({ id }: { id: string }): JSX.Element {
 				description: 'Recording favorite button label',
 		  });
 
+	const IconUnavorite = light ? IconLikeLight : IconLike;
+	const isDarkTheme = ['dark', 'bookB', 'storyB', 'topic'].includes(
+		backgroundColor as any
+	);
+	const iconColor = isFavorited
+		? isDarkTheme
+			? BaseColors.SALMON
+			: BaseColors.RED
+		: isDarkTheme
+		? BaseColors.WHITE
+		: BaseColors.DARK;
+
 	return (
-		<button
-			className={styles.button}
-			aria-label={label}
-			aria-pressed={isRecordingFavorited}
-			onClick={() => toggleFavorited()}
-		>
-			{isRecordingFavorited ? (
-				<IconUnavorite alt={'Favorite'} data-testid={'unfavorite-icon'} />
-			) : (
-				<IconFavorite alt={'Favorite'} data-testid={'favorite-icon'} />
-			)}
-		</button>
+		<IconButton
+			Icon={isFavorited ? IconLikeActive : IconUnavorite}
+			onPress={() => toggleFavorited()}
+			color={iconColor}
+			{...{
+				backgroundColor,
+				className,
+				'aria-label': label,
+				'aria-pressed': isFavorited,
+				'data-testid': isFavorited ? 'unfavorite-icon' : 'favorite-icon',
+			}}
+		/>
 	);
 }

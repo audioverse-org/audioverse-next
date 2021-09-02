@@ -18,11 +18,39 @@ const renderPage = buildStaticRenderer(Home, getStaticProps, {
 	language: 'en',
 });
 
+const audiobookTrack = {
+	title: 'the_audiobook_track_title',
+	canonicalPath: 'the_audiobook_track_path',
+	persons: [
+		{
+			id: 'the_audiobook_track_person_id',
+			canonicalPath: 'the_person_path',
+			name: 'the_audiobook_track_person_name',
+			imageWithFallback: { url: 'the_audiobook_track_image_path' },
+		},
+	],
+	writers: [],
+	duration: 22 * 60,
+	sequence: {
+		id: 'the_audiobook_track_collection_id',
+		canonicalPath: 'the_sequence_path',
+		title: 'the_audiobook_track_collection_title',
+		recordings: {
+			aggregate: {
+				count: 7,
+			},
+			nodes: [],
+		},
+	},
+};
+
 const song = {
 	title: 'the_song_title',
+	canonicalPath: 'the_song_path',
 	persons: [
 		{
 			id: 'the_song_person_id',
+			canonicalPath: 'the_person_path',
 			name: 'the_song_person_name',
 			imageWithFallback: { url: 'the_song_image_path' },
 		},
@@ -31,46 +59,72 @@ const song = {
 	sequence: {
 		id: 'the_song_collection_id',
 		title: 'the_song_collection_title',
+		canonicalPath: 'the_sequence_path',
+		recordings: {
+			aggregate: {
+				count: 7,
+			},
+			nodes: [],
+		},
 	},
 };
 
 const story = {
 	title: 'the_story_title',
+	canonicalPath: 'the_story_path',
 	duration: 21 * 60,
 	persons: [
 		{
 			id: 'the_story_person_id',
+			canonicalPath: 'the_person_path',
 			name: 'the_story_person_name',
 			imageWithFallback: { url: 'the_story_person_image_path' },
 		},
 	],
+	sequenceIndex: 1,
 	sequence: {
 		title: 'the_story_sequence_title',
+		canonicalPath: 'the_sequence_path',
 		recordings: {
 			aggregate: {
 				count: 7,
 			},
+			nodes: [],
 		},
 	},
 };
 
 const taggedRecording = {
 	title: 'the_tagged_recording_title',
+	canonicalPath: 'the_tagged_recording_path',
 	persons: [
 		{
 			id: 'the_tagged_recording_person_id',
+			canonicalPath: 'the_person_path',
 			name: 'the_tagged_recording_person_name',
 			imageWithFallback: { url: 'the_tagged_recording_person_path' },
 		},
 	],
 	duration: 27 * 60,
+	sequence: {
+		title: 'the_sequence_title',
+		canonicalPath: 'the_sequence_path',
+		recordings: {
+			aggregate: {
+				count: 7,
+			},
+			nodes: [],
+		},
+	},
 };
 
 const recording = {
 	title: 'the_recording_title',
+	canonicalPath: 'the_recording_path',
 	persons: [
 		{
 			id: 'the_recording_person_id',
+			canonicalPath: 'the_person_path',
 			name: 'the_recording_person_name',
 			imageWithFallback: { url: 'the_recording_person_path' },
 		},
@@ -79,10 +133,12 @@ const recording = {
 	sequenceIndex: 1,
 	sequence: {
 		title: 'the_recording_sequence_title',
+		canonicalPath: 'the_sequence_path',
 		recordings: {
 			aggregate: {
 				count: 15,
 			},
+			nodes: [],
 		},
 	},
 };
@@ -112,10 +168,13 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		audiobible: {
 			book: {
 				chapter: {
+					id: 'the_chapter_id',
 					title: 'the_chapter_title',
+					url: 'the_chapter_url',
 				},
 			},
 		},
+		audiobookTracks: { nodes: [audiobookTrack] },
 		stories: { nodes: [story] },
 		tag: {
 			nodes: [taggedRecording],
@@ -219,9 +278,9 @@ describe('home page', () => {
 	});
 
 	it('renders song collection title', async () => {
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_song_collection_title')).toBeInTheDocument();
+		expect(getAllByText('the_song_collection_title')[1]).toBeInTheDocument();
 	});
 
 	it('renders chapter title', async () => {
@@ -249,9 +308,9 @@ describe('home page', () => {
 	});
 
 	it('renders story sequence title', async () => {
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_story_sequence_title')).toBeInTheDocument();
+		expect(getAllByText('the_story_sequence_title')[1]).toBeInTheDocument();
 	});
 
 	it('renders tagged recording title', async () => {
@@ -267,9 +326,9 @@ describe('home page', () => {
 	});
 
 	it('renders recording sequence title', async () => {
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_recording_sequence_title')).toBeInTheDocument();
+		expect(getAllByText('the_recording_sequence_title')[1]).toBeInTheDocument();
 	});
 
 	it('renders recording sequence part info', async () => {
