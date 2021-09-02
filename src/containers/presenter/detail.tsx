@@ -183,7 +183,7 @@ function PresenterDetail({
 						className={styles.iconButton}
 					/>
 				</div>
-				<HorizontalRule color="lightTone" />
+				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</TeaseHeader>
 			{essentialRecordings.nodes?.length ? (

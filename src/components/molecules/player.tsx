@@ -15,6 +15,7 @@ import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
+import IconPlay from '../../../public/img/icon-play-large.svg';
 
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
@@ -53,18 +54,26 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				description: 'player label',
 			})}
 		>
-			{shouldShowPoster && (
-				<button className={styles.poster} onClick={() => session.play()}>
-					<Image
-						src="/img/poster.jpg"
-						alt={recording.title}
-						width={1500}
-						height={500}
-					/>
-				</button>
-			)}
+			{shouldShowVideoControls && (
+				<div className={styles.videoWrapper}>
+					{shouldShowPoster && (
+						<button className={styles.poster} onClick={() => session.play()}>
+							<Image
+								src="/img/poster.jpg"
+								alt={recording.title}
+								layout="fill"
+								objectFit="cover"
+								objectPosition="left bottom"
+							/>
+							<span className={styles.posterPlay}>
+								<IconPlay />
+							</span>
+						</button>
+					)}
 
-			{session.isVideoLoaded && video}
+					{session.isVideoLoaded && video}
+				</div>
+			)}
 
 			{shouldShowVideoControls && (
 				<div className={styles.videoProgress}>
@@ -81,6 +90,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 							backgroundColor,
 						}}
 						large
+						active
 						className={styles.play}
 					/>
 					<div className={styles.controlGrow}>

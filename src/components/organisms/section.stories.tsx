@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 
+import { BaseColors } from '@components/atoms/baseColors';
+import Button from '@components/molecules/button';
 import Section from '@components/organisms/section';
-import styles from '@containers/home.module.scss';
 
 // TODO: use this in Storybook or nix it
 export const DarkBleed = (): JSX.Element => (
@@ -16,14 +16,12 @@ export const DarkBleed = (): JSX.Element => (
 					Be challenged and inspired to grow in your relationship with Jesus
 					through songs, sermons, audiobooks, and Bible readings.
 				</p>
-				<Link href="#">
-					<a className={styles.button}>Join AudioVerse</a>
-				</Link>
+				<Button type="super" text="Join AudioVerse" href="#" />
 			</>
 		}
 		media={
 			<Image src={'/img/unsplash-headphones.jpg'} width={4724} height={3072} />
 		}
-		theme={'dark'}
+		theme={BaseColors.DARK}
 	/>
 );

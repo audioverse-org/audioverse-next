@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import Button from '@components/molecules/button';
 import CardAudiobookTrack from '@components/molecules/card/audiobookTrack';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
@@ -123,7 +124,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						height={3072}
 					/>
 				}
-				theme={'dark'}
+				theme={BaseColors.DARK}
 				bleed={true}
 			/>
 			<Section
@@ -202,7 +203,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={<Image src={'/img/players.jpeg'} width={3564} height={1724} />}
-				theme={'dark'}
+				theme={BaseColors.DARK}
 			/>
 			<Section
 				text={
@@ -268,7 +269,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						))}
 					</div>
 				}
-				theme={'lightTone'}
+				theme={BaseColors.LIGHT_TONE}
 			/>
 			<Section
 				text={
@@ -370,10 +371,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						/>
 					</div>
 				}
-				theme={'cream'}
+				theme={BaseColors.CREAM}
 			/>
 			<Section
-				theme={'dark'}
+				theme={BaseColors.DARK}
 				reverse={true}
 				bleed={true}
 				text={

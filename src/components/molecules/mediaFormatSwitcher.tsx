@@ -16,7 +16,7 @@ export default function MediaFormatSwitcher({
 	if (!hasVideo(recording)) return null;
 
 	return (
-		<>
+		<div className={styles.container}>
 			<button
 				className={styles.button}
 				onClick={() => session.setPrefersAudio(true)}
@@ -31,6 +31,6 @@ export default function MediaFormatSwitcher({
 			>
 				Video
 			</button>
-		</>
+		</div>
 	);
 }

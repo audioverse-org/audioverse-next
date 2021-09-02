@@ -25,6 +25,7 @@ export default function ButtonSpeed({
 				setSpeed(newSpeed);
 			}}
 			backgroundColor={backgroundColor}
+			className={styles.base}
 		>
 			<div className={styles.speed}>
 				<FormattedMessage

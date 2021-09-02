@@ -125,7 +125,7 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 						className={styles.iconButton}
 					/>
 				</div>
-				<HorizontalRule color="midTone" />
+				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</TeaseHeader>
 			{collections.nodes?.length ? (

@@ -26,11 +26,13 @@ export default function ButtonPlay({
 	recording,
 	backgroundColor,
 	large,
+	active,
 	className,
 }: {
 	recording: ButtonPlayFragment;
 	backgroundColor: BaseColors;
 	large?: boolean;
+	active?: boolean;
 	className?: string;
 }): JSX.Element {
 	const { isPaused, play, pause } = usePlaybackSession(recording);
@@ -61,7 +63,9 @@ export default function ButtonPlay({
 			}
 			onPress={() => (isPaused ? play() : pause())}
 			color={
-				isBackgroundColorDark(backgroundColor)
+				active
+					? BaseColors.RED
+					: isBackgroundColorDark(backgroundColor)
 					? BaseColors.WHITE
 					: BaseColors.DARK
 			}

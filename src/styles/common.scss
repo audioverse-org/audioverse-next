@@ -57,17 +57,3 @@ $content-maxWidth-sm: 520px;
 $content-maxWidth: 1500px;
 
 $grid-gap: 24px;
-
-// TODO: Switch to using Mui button, move all these styles to global
-//  theme or global.css Mui customizations
-.button {
-	border-radius: 4px;
-	border-color: $ts-dark;
-	border-width: 0.5px;
-	border-style: solid;
-	padding: 8px;
-	text-decoration: none;
-	display: inline-block;
-	background-color: white;
-	cursor: pointer;
-}

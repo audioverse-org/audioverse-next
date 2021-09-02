@@ -3,6 +3,7 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BaseColors } from '@components/atoms/baseColors';
+import HorizontalRule from '@components/atoms/horizontalRule';
 import LineHeading from '@components/atoms/lineHeading';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import DefinitionList, {
@@ -164,7 +165,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								<li key={speaker.canonicalPath}>
 									<PersonLockup
 										person={speaker}
-										textColor={BaseColors.DARK}
+										textColor={BaseColors.MID_TONE}
 										hoverColor={BaseColors.RED}
 										isLinked
 									/>
@@ -176,6 +177,8 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					<MediaFormatSwitcher recording={recording} />
 					<SequenceNav recording={recording} />
 					<Player recording={recording} />
+
+					<HorizontalRule color={BaseColors.CREAM} />
 
 					<div
 						aria-label={intl.formatMessage({

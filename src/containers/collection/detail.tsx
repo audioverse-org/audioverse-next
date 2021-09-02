@@ -160,7 +160,7 @@ function CollectionDetail({ collection }: Must<Props>): JSX.Element {
 						className={styles.iconButton}
 					/>
 				</div>
-				<HorizontalRule color="midTone" />
+				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 			</TeaseHeader>
 			{sequences.nodes?.length ? (
