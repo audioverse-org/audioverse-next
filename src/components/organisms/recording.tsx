@@ -191,6 +191,8 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 						{transcript?.text && <Transcript text={transcript.text} />}
 
+						<HorizontalRule color={BaseColors.CREAM} />
+
 						<CopyrightInfo recording={recording} />
 					</div>
 				</div>

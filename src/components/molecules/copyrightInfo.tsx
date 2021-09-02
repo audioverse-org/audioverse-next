@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,37 +13,34 @@ export default function CopyrightInfo({
 	recording,
 }: CopyrightInfoProps): JSX.Element {
 	const copyrightOwner =
-		recording?.distributionAgreement?.sponsor?.title ||
-		recording?.sponsor?.title;
-	const copyrightImageUrl =
-		recording?.distributionAgreement?.license?.image?.url;
+		recording.distributionAgreement?.sponsor?.title || recording.sponsor?.title;
 	return (
-		<>
-			{/* TODO: Correct copyright image dimensions */}
-			{copyrightImageUrl && (
-				<Image
-					className={styles.image}
-					alt={'copyright'}
-					src={copyrightImageUrl}
-					width={100}
-					height={35}
+		<div className={styles.text}>
+			<span>
+				<FormattedMessage
+					id={'sermonDetailPage__copyright'}
+					defaultMessage={'Copyright ⓒ{year} {owner}.'}
+					description={'Copyright year and owner'}
+					values={{
+						year: recording?.copyrightYear,
+						owner: copyrightOwner,
+					}}
 				/>
-			)}
-			<p>
-				<span>
-					<FormattedMessage
-						id={'sermonDetailPage__copyright'}
-						defaultMessage={'Copyright ⓒ{year} {owner}'}
-						description={'Copyright year and owner'}
-						values={{
-							year: recording?.copyrightYear,
-							owner: copyrightOwner,
-						}}
-					/>
-				</span>
-				<br />
-				<span>{recording?.distributionAgreement?.license?.summary}</span>
-			</p>
-		</>
+			</span>
+			<br />
+			<div
+				dangerouslySetInnerHTML={{
+					__html: recording.distributionAgreement?.license?.summary || '',
+				}}
+			/>
+			<div>
+				<FormattedMessage
+					id={'sermonDetailPage__disclaimer'}
+					defaultMessage={
+						'The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse.'
+					}
+				/>
+			</div>
+		</div>
 	);
 }
