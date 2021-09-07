@@ -1,4 +1,4 @@
-import Audiobooks from '@containers/audiobook/audiobooks';
+import Audiobooks from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
 	GetAudiobookListPageDataQuery,

@@ -12,7 +12,10 @@ import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
 // import AndMiniplayer from '@components/templates/andMiniplayer';
-import { RecordingFragment } from '@lib/generated/graphql';
+import {
+	RecordingContentType,
+	RecordingFragment,
+} from '@lib/generated/graphql';
 import { setPlayerMock } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
@@ -28,6 +31,7 @@ const sequence = {
 const recordingAudio: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	contentType: RecordingContentType.Sermon,
 	sequence,
 	audioFiles: [
 		{
@@ -41,6 +45,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 const recordingVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	contentType: RecordingContentType.Sermon,
 	sequence,
 	videoFiles: [
 		{
@@ -54,6 +59,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 const recordingAudioVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	contentType: RecordingContentType.Sermon,
 	sequence,
 	videoFiles: [
 		{

@@ -10,6 +10,11 @@ export const makeSermonRoute = (
 	sermonId: string
 ): string => `/${languageRoute}/sermons/${sermonId}`;
 
+export const makeAudiobookTrackRoute = (
+	languageRoute: string,
+	recordingId: string
+): string => `/${languageRoute}/books/tracks/${recordingId}`;
+
 export const makePresenterDetailRoute = (
 	languageRoute: string,
 	personId: string,
@@ -120,11 +125,15 @@ export const makeAudiobookListRoute = (
 	page: number | string
 ): string => `/${languageRoute}/books/page/${page}`;
 
-// TODO: rename to makeStoryDetailPage
 export const makeStoryRoute = (
 	languageRoute: string,
 	storyId: string
 ): string => `/${languageRoute}/stories/${storyId}`;
+
+export const makeStoryAlbumRoute = (
+	languageRoute: string,
+	storyAlbumId: string
+): string => `/${languageRoute}/stories/albums/${storyAlbumId}`;
 
 export const makeStoryListPage = (
 	languageRoute: string,
@@ -137,7 +146,12 @@ export const makeSongsListRoute = (languageRoute: string): string =>
 export const makeAlbumRoute = (
 	languageRoute: string,
 	albumId: string
-): string => `/${languageRoute}/songs/album/${albumId}`;
+): string => `/${languageRoute}/songs/albums/${albumId}`;
+
+export const makeAlbumTrackRoute = (
+	languageRoute: string,
+	trackId: string
+): string => `/${languageRoute}/songs/tracks/${trackId}`;
 
 export const makeBibleMusicRoute = (
 	languageRoute: string,

@@ -1,30 +1,30 @@
-import Song, { SongDetailProps } from '@containers/song/detail';
+import SongBookDetail, {
+	SongBooksDetailProps,
+} from '@containers/song/books/detail';
 import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
-import { getSongBookPageData } from '@lib/generated/graphql';
+import { getSongBooksDetailPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeBibleMusicRoute } from '@lib/routes';
 
-export default Song;
+export default SongBookDetail;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; book: string };
-}): Promise<StaticProps<SongDetailProps>> {
+}): Promise<StaticProps<SongBooksDetailProps>> {
 	const { language: languageRoute, book } = params;
 	const language = getLanguageIdByRoute(languageRoute);
 
-	let response = undefined;
-	try {
-		response = await getSongBookPageData({ language, book });
-	} catch {
-		// do nothing
-	}
+	const { musicTracks } = await getSongBooksDetailPageData({
+		language,
+		book,
+	}).catch(() => ({ musicTracks: { nodes: [] } }));
 
 	return {
 		props: {
-			songs: response?.musicTracks.nodes || [],
+			musicTracks: musicTracks.nodes || [],
 		},
 		revalidate: REVALIDATE,
 	};

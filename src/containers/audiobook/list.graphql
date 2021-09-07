@@ -1,0 +1,27 @@
+query getAudiobookListPageData(
+	$language: Language!
+	$first: Int = 12
+	$offset: Int = 0
+) {
+	audiobooks(
+		language: $language
+		first: $first
+		offset: $offset
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			...cardSequence
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getAudiobookListPathsData($language: Language!) {
+	audiobooks(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

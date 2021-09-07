@@ -10,7 +10,9 @@ type Props = {
 		| BaseColors.DARK
 		| BaseColors.MID_TONE
 		| BaseColors.LIGHT_TONE
-		| BaseColors.CREAM;
+		| BaseColors.CREAM
+		| BaseColors.BOOK_H
+		| BaseColors.STORY_H;
 	className?: string;
 };
 

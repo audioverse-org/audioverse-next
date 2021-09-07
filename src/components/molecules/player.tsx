@@ -22,9 +22,10 @@ import RecordingButtonFavorite from './recordingButtonFavorite';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
+	backgroundColor: BaseColors;
 }
 
-const Player = ({ recording }: PlayerProps): JSX.Element => {
+const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 	if (!recording)
 		return (
 			<p>
@@ -42,8 +43,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
-
-	const backgroundColor = BaseColors.WHITE;
 
 	return (
 		<div
@@ -134,7 +133,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				<div className={styles.rightButtons}>
 					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />
-					<ButtonShareRecording recording={recording} />
+					<ButtonShareRecording {...{ recording, backgroundColor }} />
 					<RecordingButtonFavorite
 						id={recording.id}
 						backgroundColor={backgroundColor}

@@ -9,20 +9,26 @@ import { makeSermonRoute } from '@lib/routes';
 
 export default SermonDetail;
 
+export type SermonStaticProps = StaticProps<
+	SermonDetailProps & {
+		title?: string;
+	}
+>;
+
 export async function getStaticProps({
 	params,
 }: {
 	params: { id: string };
-}): Promise<StaticProps<SermonDetailProps>> {
+}): Promise<SermonStaticProps> {
 	const { id } = params;
-	const { sermon } = await getSermonDetailData({ id }).catch(() => ({
+	const { sermon: recording } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: null,
 	}));
 
 	return {
 		props: {
-			sermon,
-			title: sermon?.title || null,
+			recording,
+			title: recording?.title,
 		},
 		revalidate: REVALIDATE,
 	};

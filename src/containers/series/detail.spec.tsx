@@ -1,6 +1,7 @@
 import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -21,7 +22,7 @@ const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps, {
 jest.mock('@lib/writeFeedFile');
 
 const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
-	sequence: {
+	series: {
 		title: 'the_series_title',
 		image: {
 			url: 'the_series_image',
@@ -42,7 +43,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 					id: 'the_recording_id',
 					title: 'the_recording_title',
 					canonicalPath: 'the_recording_path',
-					contentType: 'SERMON',
+					contentType: RecordingContentType.Sermon,
 					persons: [],
 				},
 			],
@@ -100,7 +101,7 @@ describe('series detail page', () => {
 
 	it('returns static paths', async () => {
 		mockedFetchApi.mockResolvedValue({
-			sequences: {
+			serieses: {
 				nodes: [
 					{
 						id: 'the_series_id',
@@ -157,7 +158,7 @@ describe('series detail page', () => {
 
 	it('skips rendering conference link if no conference', async () => {
 		loadData({
-			sequence: {
+			series: {
 				collection: null as any,
 			},
 		});

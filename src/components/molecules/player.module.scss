@@ -49,8 +49,10 @@
 .waves {
 	flex-grow: 1;
 	position: relative;
-	background-image: url('/img/waves-gray.svg');
-	height: 50px;
+	background-color: var(--recordingWavesColor);
+	-webkit-mask-image: url('/img/waves.svg');
+	mask-image: url('/img/waves.svg');
+	height: 49px;
 	margin-bottom: 8px;
 	input {
 		position: absolute;
@@ -64,9 +66,6 @@
 		opacity: 0;
 		cursor: pointer;
 	}
-	path {
-		stroke: $ts-red;
-	}
 	&:after {
 		content: '';
 		display: block;
@@ -76,8 +75,9 @@
 		bottom: 0;
 		width: var(--progress, 0%);
 		z-index: 100;
-		background-color: white;
-		background-image: url('/img/waves.svg');
+		background-color: var(--recordingAccent);
+		-webkit-mask-image: url('/img/waves.svg');
+		mask-image: url('/img/waves.svg');
 		pointer-events: none;
 	}
 }

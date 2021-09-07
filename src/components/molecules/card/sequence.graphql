@@ -4,11 +4,15 @@ fragment cardSequence on Sequence {
 	canonicalPath
 	contentType
 	duration
-	description
 	summary
 	viewerHasFavorited
 	viewerPlaybackCompletedPercentage
-	persons(role: SPEAKER, orderBy: [{ field: NAME, direction: ASC }]) {
+	speakers: persons(role: SPEAKER, orderBy: [{ field: NAME, direction: ASC }]) {
+		nodes {
+			...personLockup
+		}
+	}
+	writers: persons(role: WRITER, orderBy: [{ field: NAME, direction: ASC }]) {
 		nodes {
 			...personLockup
 		}

@@ -11,9 +11,13 @@ import CardRecordingSequenceHat from './recordingSequenceHat';
 
 interface CardSongProps {
 	song: CardSongFragment;
+	hideHat?: boolean;
 }
 
-export default function CardSong({ song }: CardSongProps): JSX.Element {
+export default function CardSong({
+	song,
+	hideHat,
+}: CardSongProps): JSX.Element {
 	const intl = useIntl();
 	const { sequence } = song;
 	const container = sequence
@@ -34,6 +38,11 @@ export default function CardSong({ song }: CardSongProps): JSX.Element {
 		: undefined;
 
 	return (
-		<CardWithPlayable recording={song} container={container} theme={'song'} />
+		<CardWithPlayable
+			recording={song}
+			container={container}
+			theme={'song'}
+			hideHat={hideHat}
+		/>
 	);
 }

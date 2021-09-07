@@ -10,6 +10,7 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { PlayerFragment } from '@lib/generated/graphql';
@@ -323,8 +324,14 @@ describe('player', () => {
 
 		const { getByTestId } = await renderWithIntl(
 			<AndMiniplayer>
-				<Player recording={recording1 as PlayerFragment} />
-				<Player recording={recording2 as PlayerFragment} />
+				<Player
+					recording={recording1 as PlayerFragment}
+					backgroundColor={BaseColors.WHITE}
+				/>
+				<Player
+					recording={recording2 as PlayerFragment}
+					backgroundColor={BaseColors.WHITE}
+				/>
 			</AndMiniplayer>
 		);
 
@@ -424,8 +431,14 @@ describe('player', () => {
 
 		const { getByTestId } = await renderWithIntl(
 			<AndMiniplayer>
-				<Player recording={recording1 as PlayerFragment} />
-				<Player recording={recording2 as PlayerFragment} />
+				<Player
+					recording={recording1 as PlayerFragment}
+					backgroundColor={BaseColors.WHITE}
+				/>
+				<Player
+					recording={recording2 as PlayerFragment}
+					backgroundColor={BaseColors.WHITE}
+				/>
 			</AndMiniplayer>
 		);
 

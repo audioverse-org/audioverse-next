@@ -1,4 +1,0 @@
-fragment sponsorInfo on Sponsor {
-	id
-	title
-}

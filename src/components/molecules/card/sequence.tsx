@@ -8,7 +8,10 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
-import { CardSequenceFragment } from '@lib/generated/graphql';
+import {
+	CardSequenceFragment,
+	SequenceContentType,
+} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
 import ListIcon from '../../../../public/img/fa-list-alt.svg';
@@ -31,16 +34,19 @@ export default function CardSequence({
 	const intl = useIntl();
 
 	const {
+		contentType,
 		recordings,
 		canonicalPath,
 		duration,
-		description,
 		summary,
 		title,
 		viewerHasFavorited,
 		viewerPlaybackCompletedPercentage,
-		persons,
+		speakers,
+		writers,
 	} = sequence;
+	const persons =
+		contentType === SequenceContentType.Audiobook ? writers : speakers;
 	return (
 		<Card>
 			<Link href={canonicalPath}>
@@ -59,14 +65,13 @@ export default function CardSequence({
 						<Heading2 unpadded className={styles.title}>
 							{title}
 						</Heading2>
-						{!!(summary || description) && (
+						{summary && (
 							<div
-								dangerouslySetInnerHTML={{ __html: summary || description }}
+								dangerouslySetInnerHTML={{ __html: summary }}
 								className={styles.kicker}
 							></div>
 						)}
-
-						{persons.nodes?.length && (
+						{!!persons.nodes?.length && (
 							<div className={styles.persons}>
 								{persons.nodes.map((person) => (
 									<PersonLockup

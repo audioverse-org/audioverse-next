@@ -7,12 +7,15 @@ import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import IconShare from '../../../public/img/icon-share.svg';
 
+import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
 export default function ButtonShareRecording({
 	recording,
+	backgroundColor,
 }: {
 	recording: ButtonShareRecordingFragment;
+	backgroundColor: BaseColors;
 }): JSX.Element {
 	const intl = useIntl();
 	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
@@ -31,8 +34,12 @@ export default function ButtonShareRecording({
 			<IconButton
 				Icon={IconShare}
 				onPress={handleClick}
-				color={BaseColors.DARK}
-				backgroundColor={BaseColors.WHITE}
+				color={
+					isBackgroundColorDark(backgroundColor)
+						? BaseColors.WHITE
+						: BaseColors.DARK
+				}
+				backgroundColor={backgroundColor}
 				aria-label={intl.formatMessage({
 					id: 'molecule-buttonShareRecording__buttonLabel',
 					defaultMessage: 'share',

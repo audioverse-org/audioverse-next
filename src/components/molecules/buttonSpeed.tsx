@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -5,6 +6,7 @@ import { BaseColors } from '@components/atoms/baseColors';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';
 import CircleButton from './circleButton';
 
@@ -27,7 +29,12 @@ export default function ButtonSpeed({
 			backgroundColor={backgroundColor}
 			className={styles.base}
 		>
-			<div className={styles.speed}>
+			<div
+				className={clsx(
+					styles.speed,
+					isBackgroundColorDark(backgroundColor) && styles.light
+				)}
+			>
 				<FormattedMessage
 					id={'molecule-buttonSpeed__buttonLabel'}
 					defaultMessage={'{speed}x'}

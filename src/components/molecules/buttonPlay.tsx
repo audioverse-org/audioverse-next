@@ -64,7 +64,9 @@ export default function ButtonPlay({
 			onPress={() => (isPaused ? play() : pause())}
 			color={
 				active
-					? BaseColors.RED
+					? isBackgroundColorDark(backgroundColor)
+						? BaseColors.SALMON
+						: BaseColors.RED
 					: isBackgroundColorDark(backgroundColor)
 					? BaseColors.WHITE
 					: BaseColors.DARK

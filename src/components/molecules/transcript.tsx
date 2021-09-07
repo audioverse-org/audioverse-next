@@ -6,13 +6,19 @@ import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg'
 import Button from './button';
 import styles from './transcript.module.scss';
 
-export default function Transcript({ text }: { text: string }): JSX.Element {
+export default function Transcript({
+	text,
+	useInverse,
+}: {
+	text: string;
+	useInverse: boolean;
+}): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	return (
 		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
 			<Button
-				type="secondary"
+				type={useInverse ? 'secondaryInverse' : 'secondary'}
 				onClick={() => setIsOpen(!isOpen)}
 				text={
 					isOpen ? (
