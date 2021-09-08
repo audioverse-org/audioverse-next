@@ -24,6 +24,7 @@ function loadData() {
 				id: 'the_story_id',
 				title: 'the_story_title',
 				contentType: RecordingContentType.Story,
+				speakers: [],
 			},
 		});
 }

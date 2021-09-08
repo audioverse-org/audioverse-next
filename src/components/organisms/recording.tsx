@@ -41,7 +41,6 @@ interface RecordingProps {
 export function Recording({ recording }: RecordingProps): JSX.Element {
 	const langRoute = useLanguageRoute();
 	const intl = useIntl();
-	const speakers = recording?.speakers || [];
 	const {
 		contentType,
 		collection,
@@ -52,7 +51,11 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		sponsor,
 		title,
 		transcript,
+		speakers,
+		writers,
 	} = recording;
+	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
+	const persons = isAudiobook ? writers : speakers;
 	const recordingDateString = new Date(recordingDate || '').toLocaleString([], {
 		hour: 'numeric',
 		minute: 'numeric',
@@ -114,9 +117,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			},
 		} as const
 	)[contentType];
-	const audiobookHeadingStyle =
-		contentType === RecordingContentType.AudiobookTrack &&
-		styles.audiobookHeading;
+	const audiobookHeadingStyle = isAudiobook && styles.audiobookHeading;
 	const hatLabel = {
 		[RecordingContentType.AudiobookTrack]: (
 			<FormattedMessage
@@ -144,6 +145,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		),
 	}[contentType];
 	const linkClass = `decorated${useInverseButtons ? ' hover--salmon' : ''}`;
+	const hideSpeakers = isAudiobook;
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -257,7 +259,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						)}
 						<Heading1 className={clsx(audiobookHeadingStyle)}>{title}</Heading1>
 						<ul className={styles.speakers}>
-							{speakers.map((speaker) => (
+							{persons.map((speaker) => (
 								<li key={speaker.canonicalPath}>
 									<PersonLockup
 										person={speaker}
@@ -268,6 +270,17 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								</li>
 							))}
 						</ul>
+						{isAudiobook && !!speakers.length && (
+							<Heading6 loose sans uppercase>
+								<FormattedMessage
+									id="organism-recording__readByLabel"
+									defaultMessage="Read by {name}"
+									values={{
+										name: speakers[0].name,
+									}}
+								/>
+							</Heading6>
+						)}
 					</div>
 
 					<MediaFormatSwitcher recording={recording} />
@@ -323,7 +336,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 									<TeaseRecording
 										recording={r}
 										theme={theme}
-										hideSpeakers
+										hideSpeakers={hideSpeakers}
 										unpadded
 									/>
 								</div>

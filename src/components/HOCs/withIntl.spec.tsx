@@ -213,6 +213,7 @@ describe('localization usage', () => {
 								] as any,
 							},
 						},
+						speakers: [] as any,
 					} as SermonDetailProps['recording']
 				}
 				title={undefined}

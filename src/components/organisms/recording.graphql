@@ -5,6 +5,9 @@ fragment recording on Recording {
 	speakers: persons(role: SPEAKER) {
 		...personLockup
 	}
+	writers: persons(role: WRITER) {
+		...personLockup
+	}
 	videoDownloads: videoFiles(allowedContainers: MP4) {
 		id
 		url

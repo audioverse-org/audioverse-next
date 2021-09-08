@@ -40,6 +40,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 			filesize: 'the_source_size',
 		},
 	],
+	speakers: [],
 };
 
 const recordingVideo: Partial<RecordingFragment> = {
@@ -54,6 +55,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 			filesize: 'the_source_size',
 		},
 	],
+	speakers: [],
 };
 
 const recordingAudioVideo: Partial<RecordingFragment> = {
@@ -75,6 +77,7 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 			filesize: 'audio_source_size',
 		},
 	],
+	speakers: [],
 };
 
 const Page = ({

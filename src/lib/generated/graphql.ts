@@ -6252,6 +6252,12 @@ export type RecordingFragment = {
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
 	videoDownloads: Array<{
 		__typename?: 'VideoFile';
 		id: string;
@@ -6860,6 +6866,12 @@ export type GetAudiobookTrackDetailDataQuery = {
 		copyrightYear: Maybe<number>;
 		duration: number;
 		speakers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
+		writers: Array<{
 			__typename?: 'Person';
 			name: string;
 			canonicalPath: string;
@@ -8441,6 +8453,12 @@ export type GetSermonDetailDataQuery = {
 			canonicalPath: string;
 			imageWithFallback: { __typename?: 'Image'; url: string };
 		}>;
+		writers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
 		videoDownloads: Array<{
 			__typename?: 'VideoFile';
 			id: string;
@@ -8863,6 +8881,12 @@ export type GetSongDetailDataQuery = {
 		copyrightYear: Maybe<number>;
 		duration: number;
 		speakers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
+		writers: Array<{
 			__typename?: 'Person';
 			name: string;
 			canonicalPath: string;
@@ -9434,6 +9458,12 @@ export type GetStoryDetailDataQuery = {
 		copyrightYear: Maybe<number>;
 		duration: number;
 		speakers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
+		writers: Array<{
 			__typename?: 'Person';
 			name: string;
 			canonicalPath: string;
@@ -10072,6 +10102,9 @@ export const RecordingFragmentDoc = `
   title
   contentType
   speakers: persons(role: SPEAKER) {
+    ...personLockup
+  }
+  writers: persons(role: WRITER) {
     ...personLockup
   }
   videoDownloads: videoFiles(allowedContainers: MP4) {
