@@ -1,35 +1,21 @@
-import PresenterRecordings from '@containers/presenter/recordings';
+import PresenterRecordings, {
+	PresenterRecordingsProps,
+} from '@containers/presenter/recordings';
 import { createFeed } from '@lib/createFeed';
 import {
 	getPresenterDetailPathsData,
 	getPresenterRecordingsPageData,
-	GetPresenterRecordingsPageDataQuery,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default PresenterRecordings;
-
-type Recording = NonNullable<
-	NonNullable<
-		NonNullable<
-			GetPresenterRecordingsPageDataQuery['person']
-		>['recordings']['nodes']
-	>[0]
->;
-export type PresenterStaticProps = PaginatedStaticProps<
-	GetPresenterRecordingsPageDataQuery,
-	Recording
-> & { props: { rssPath: string | null } };
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<PresenterStaticProps> {
+}): Promise<StaticProps<PresenterRecordingsProps>> {
 	const { id } = params;
 
 	const response = await getPaginatedStaticProps(

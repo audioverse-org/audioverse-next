@@ -7,17 +7,21 @@ import Button from '@components/molecules/button';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeAudiobookListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { AudiobooksStaticProps } from '@pages/[language]/books/page/[i]';
 
 import IconBack from '../../../public/img/icon-back-light.svg';
 
 import styles from './list.module.scss';
 
-type Props = AudiobooksStaticProps['props'];
+export type AudiobooksProps = PaginatedProps<
+	NonNullable<GetAudiobookListPageDataQuery['audiobooks']['nodes']>[0],
+	any
+>;
 
-function Audiobooks({ nodes, pagination }: Props): JSX.Element {
+function Audiobooks({ nodes, pagination }: AudiobooksProps): JSX.Element {
 	const language = useLanguageRoute();
 	return (
 		<>

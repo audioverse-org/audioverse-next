@@ -1,31 +1,19 @@
-import SponsorAlbums from '@containers/sponsor/albums';
+import SponsorAlbums, { SponsorAlbumsProps } from '@containers/sponsor/albums';
 import {
 	getSponsorAlbumsPageData,
-	GetSponsorAlbumsPageDataQuery,
 	getSponsorAlbumsPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorAlbumsRoute } from '@lib/routes';
 
 export default SponsorAlbums;
-
-type Album = NonNullable<
-	GetSponsorAlbumsPageDataQuery['musicAlbums']['nodes']
->[0];
-export type SponsorSongsStaticProps = PaginatedStaticProps<
-	GetSponsorAlbumsPageDataQuery,
-	Album
->;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<SponsorSongsStaticProps> {
+}): Promise<StaticProps<SponsorAlbumsProps>> {
 	const { id } = params;
 	return getPaginatedStaticProps(
 		params,

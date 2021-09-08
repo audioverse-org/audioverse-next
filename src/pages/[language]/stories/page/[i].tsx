@@ -1,14 +1,7 @@
-import Stories from '@containers/story/stories';
-import {
-	getStoriesPageData,
-	GetStoriesPageDataQuery,
-	getStoriesPathData,
-} from '@lib/generated/graphql';
+import Stories, { StoriesProps } from '@containers/story/stories';
+import { getStoriesPageData, getStoriesPathData } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Stories;
 
@@ -19,15 +12,9 @@ export interface GetStaticPropsArgs {
 	};
 }
 
-type Story = NonNullable<GetStoriesPageDataQuery['stories']['nodes']>[0];
-export type StoriesStaticProps = PaginatedStaticProps<
-	GetStoriesPageDataQuery,
-	Story
->;
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StoriesStaticProps> {
+}: GetStaticPropsArgs): Promise<StaticProps<StoriesProps>> {
 	return getPaginatedStaticProps(
 		params,
 		getStoriesPageData,

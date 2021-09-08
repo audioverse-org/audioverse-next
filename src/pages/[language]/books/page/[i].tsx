@@ -1,24 +1,14 @@
 import Audiobooks from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
-	GetAudiobookListPageDataQuery,
 	getAudiobookListPathsData,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+
+import { AudiobooksStaticProps } from '../index';
 
 export default Audiobooks;
-
-type Audiobook = NonNullable<
-	GetAudiobookListPageDataQuery['audiobooks']['nodes']
->[0];
-export type AudiobooksStaticProps = PaginatedStaticProps<
-	GetAudiobookListPageDataQuery,
-	Audiobook
->;
 
 export interface GetStaticPropsArgs {
 	params: { i: string; language: string };

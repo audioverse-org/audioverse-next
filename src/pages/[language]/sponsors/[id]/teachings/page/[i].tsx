@@ -1,34 +1,22 @@
-import SponsorTeachings from '@containers/sponsor/teachings';
+import SponsorTeachings, {
+	SponsorTeachingsProps,
+} from '@containers/sponsor/teachings';
 import { createFeed } from '@lib/createFeed';
 import {
 	getSponsorTeachingsPageData,
-	GetSponsorTeachingsPageDataQuery,
 	getSponsorTeachingsPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorTeachingsRoute } from '@lib/routes';
 
 export default SponsorTeachings;
-
-type Teaching = NonNullable<
-	NonNullable<
-		GetSponsorTeachingsPageDataQuery['sponsor']
-	>['recordings']['nodes']
->[0];
-export type SponsorTeachingsStaticProps = PaginatedStaticProps<
-	GetSponsorTeachingsPageDataQuery,
-	Teaching
-> & { props: { rssPath: string } };
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<SponsorTeachingsStaticProps> {
+}): Promise<StaticProps<SponsorTeachingsProps>> {
 	const { language, id, i } = params;
 	const result = await getPaginatedStaticProps(
 		params,

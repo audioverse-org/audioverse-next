@@ -26,8 +26,8 @@ export const PROJECT_ROOT = process.cwd();
 export const IS_DEVELOPMENT =
 	process.env.NODE_ENV === 'development' ||
 	process.env.ENV_OVERRIDE === 'development';
-export const DETAIL_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 200;
-export const LIST_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 25;
+export const DETAIL_PRERENDER_LIMIT = IS_DEVELOPMENT ? 10 : 25;
+export const LIST_PRERENDER_LIMIT = IS_DEVELOPMENT ? 3 : 10;
 export const REVALIDATE = 10;
 export const FACEBOOK_APP_ID = IS_DEVELOPMENT
 	? '484026402743558'

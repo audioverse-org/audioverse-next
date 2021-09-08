@@ -9,12 +9,14 @@ export interface PaginationData {
 	current: number;
 }
 
+export interface PaginatedProps<N, T = null> {
+	nodes: N[];
+	pagination: PaginationData;
+	data: T | null;
+}
+
 export interface PaginatedStaticProps<T, N> {
-	props: {
-		nodes: N[];
-		pagination: PaginationData;
-		data: T | null;
-	};
+	props: PaginatedProps<N, T>;
 	revalidate: number;
 }
 

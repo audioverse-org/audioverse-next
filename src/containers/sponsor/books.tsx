@@ -6,17 +6,25 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
+import { GetSponsorBooksPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeAudiobookRoute,
 	makeSponsorBooksRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { SponsorBooksStaticProps } from '@pages/[language]/sponsors/[id]/books/page/[i]';
 
-type Props = SponsorBooksStaticProps['props'];
+export type SponsorBooksProps = PaginatedProps<
+	NonNullable<GetSponsorBooksPageDataQuery['audiobooks']['nodes']>[0],
+	GetSponsorBooksPageDataQuery
+>;
 
-function SponsorBooks({ nodes, data, pagination }: Props): JSX.Element {
+function SponsorBooks({
+	nodes,
+	data,
+	pagination,
+}: SponsorBooksProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const sponsorImage = data?.sponsor?.imageWithFallback?.url;
 	return (

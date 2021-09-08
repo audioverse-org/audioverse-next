@@ -4,14 +4,18 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import { GetStoriesPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeStoryAlbumRoute, makeStoryListPage } from '@lib/routes';
-import { StoriesStaticProps } from '@pages/[language]/stories/page/[i]';
 
-type Props = StoriesStaticProps['props'];
+export type StoriesProps = PaginatedProps<
+	NonNullable<GetStoriesPageDataQuery['stories']['nodes']>[0],
+	GetStoriesPageDataQuery
+>;
 
 // TODO: Rename file to list.tsx
 
-function Stories({ nodes, pagination }: Props): JSX.Element {
+function Stories({ nodes, pagination }: StoriesProps): JSX.Element {
 	// TODO: Use PaginatedList component
 	return (
 		<>

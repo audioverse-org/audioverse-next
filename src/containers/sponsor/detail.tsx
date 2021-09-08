@@ -17,7 +17,7 @@ import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
-import { SponsorStaticProps } from '@pages/[language]/sponsors/[id]';
+import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
 
 import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
@@ -26,9 +26,9 @@ import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
-type Props = SponsorStaticProps['props'];
+export type SponsorDetailProps = GetSponsorDetailPageDataQuery;
 
-function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
+function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	const intl = useIntl();
 
 	const {

@@ -19,10 +19,14 @@ import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
+import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { HomeProps } from '@pages/[language]';
 
 import styles from './home.module.scss';
+
+export type HomeProps = {
+	data: GetHomeStaticPropsQuery | undefined;
+};
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();

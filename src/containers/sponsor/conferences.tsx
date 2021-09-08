@@ -5,6 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
+import { GetSponsorConferencesPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeCollectionRoute,
 	makeSponsorConferencesRoute,
@@ -12,11 +14,17 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
-import { SponsorConferencesStaticProps } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 
-type Props = SponsorConferencesStaticProps['props'];
+export type SponsorConferencesProps = PaginatedProps<
+	NonNullable<GetSponsorConferencesPageDataQuery['conferences']['nodes']>[0],
+	GetSponsorConferencesPageDataQuery
+>;
 
-function SponsorConferences({ nodes, data, pagination }: Props): JSX.Element {
+function SponsorConferences({
+	nodes,
+	data,
+	pagination,
+}: SponsorConferencesProps): JSX.Element {
 	const id = useQueryString('id') || '';
 	const languageRoute = useLanguageRoute();
 	return (

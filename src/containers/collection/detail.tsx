@@ -23,10 +23,10 @@ import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { formatDateRange } from '@lib/date';
+import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import { makeCollectionSequencesRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { CollectionStaticProps } from '@pages/[language]/collections/[id]/[[...slug]]';
 
 import FAListIcon from '../../../public/img/fa-list.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
@@ -36,9 +36,11 @@ import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
-type Props = CollectionStaticProps['props'];
+export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
 
-function CollectionDetail({ collection }: Must<Props>): JSX.Element {
+function CollectionDetail({
+	collection,
+}: Must<CollectionDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 

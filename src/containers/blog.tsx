@@ -3,15 +3,17 @@ import React from 'react';
 import CardPost from '@components/molecules/card/post';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { GetBlogPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeBlogPostListRoute } from '@lib/routes';
-import { BlogStaticProps } from '@pages/[language]/blog/page/[i]';
+import withFailStates from '@components/HOCs/withFailStates';
 
-export type BlogProps = BlogStaticProps['props'];
+export type BlogProps = PaginatedProps<
+	NonNullable<GetBlogPageDataQuery['blogPosts']['nodes']>[0],
+	any
+>;
 
-export default function Blog({
-	nodes: blogPosts,
-	pagination,
-}: BlogProps): JSX.Element {
+function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {
 	return (
 		<>
 			<CardGroup>
@@ -27,3 +29,5 @@ export default function Blog({
 		</>
 	);
 }
+
+export default withFailStates(Blog, ({ nodes }) => !nodes.length);

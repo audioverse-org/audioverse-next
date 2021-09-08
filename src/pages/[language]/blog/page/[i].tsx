@@ -1,22 +1,9 @@
-import Blog from '@containers/blog';
-import {
-	getBlogPageData,
-	GetBlogPageDataQuery,
-	getBlogPathsData,
-} from '@lib/generated/graphql';
+import Blog, { BlogProps } from '@containers/blog';
+import { getBlogPageData, getBlogPathsData } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Blog;
-
-type BlogPost = NonNullable<GetBlogPageDataQuery['blogPosts']['nodes']>[0];
-export type BlogStaticProps = PaginatedStaticProps<
-	GetBlogPageDataQuery,
-	BlogPost
->;
 
 export interface GetStaticPropsArgs {
 	params: { i: string; language: string };
@@ -24,7 +11,7 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<BlogStaticProps> {
+}: GetStaticPropsArgs): Promise<StaticProps<BlogProps>> {
 	return getPaginatedStaticProps(
 		params,
 		getBlogPageData,

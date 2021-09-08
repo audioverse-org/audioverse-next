@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { values } from 'lodash';
 
 import Blog, { BlogProps } from '@containers/blog';
 import { LANGUAGES } from '@lib/constants';
@@ -8,13 +8,11 @@ import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Blog;
 
-export type BlogStaticProps = StaticProps<BlogProps>;
-
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: Language };
-}): Promise<BlogStaticProps> {
+}): Promise<StaticProps<BlogProps>> {
 	const language = getLanguageIdByRoute(params.language);
 	const { blogPosts } = await getBlogPageData({ language }).catch(() => ({
 		blogPosts: { nodes: [], aggregate: { count: 0 } },
@@ -28,7 +26,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: _.values(LANGUAGES).map((l) => `/${l.base_url}/blog`),
-		fallback: true,
+		paths: values(LANGUAGES).map(({ base_url }) => `/${base_url}/blog`),
+		fallback: false,
 	};
 }
