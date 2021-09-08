@@ -9,12 +9,14 @@ export interface PaginationData {
 	current: number;
 }
 
+export interface PaginatedProps<N, T = null> {
+	nodes: N[];
+	pagination: PaginationData;
+	data: T | null;
+}
+
 export interface PaginatedStaticProps<T, N> {
-	props: {
-		nodes: N[];
-		pagination: PaginationData;
-		data: T | null;
-	};
+	props: PaginatedProps<N, T>;
 	revalidate: number;
 }
 
@@ -33,6 +35,16 @@ export async function getPaginatedStaticProps<T, N>(
 	});
 	const nodes = (data && parseNodes(data)) || [];
 	const count = (data && parseCount(data)) || 0;
+
+	return formatPaginatedStaticProps(data, nodes, count, +pageIndex);
+}
+
+export function formatPaginatedStaticProps<T, N>(
+	data: T | null,
+	nodes: N[],
+	count: number,
+	current = 1
+): PaginatedStaticProps<T, N> {
 	const total = getPaginationPageCount(count);
 
 	return {
@@ -40,7 +52,7 @@ export async function getPaginatedStaticProps<T, N>(
 			nodes,
 			pagination: {
 				total,
-				current: +pageIndex,
+				current,
 			},
 			data,
 		},

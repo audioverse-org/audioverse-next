@@ -6,6 +6,8 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
+import { GetSponsorSeriesPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeSeriesDetailRoute,
 	makeSponsorRoute,
@@ -13,11 +15,17 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
-import { SponsorSeriesStaticProps } from '@pages/[language]/sponsors/[id]/series/page/[i]';
 
-type Props = SponsorSeriesStaticProps['props'];
+export type SponsorSeriesProps = PaginatedProps<
+	NonNullable<GetSponsorSeriesPageDataQuery['serieses']['nodes']>[0],
+	GetSponsorSeriesPageDataQuery
+>;
 
-function SponsorSeries({ data, nodes, pagination }: Props): JSX.Element {
+function SponsorSeries({
+	data,
+	nodes,
+	pagination,
+}: SponsorSeriesProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const id = useQueryString('id') || '';
 	const imageSrc = data?.sponsor?.imageWithFallback.url;

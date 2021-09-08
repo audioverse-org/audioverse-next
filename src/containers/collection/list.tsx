@@ -5,13 +5,20 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
+import { GetCollectionListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeCollectionRoute, makeConferenceListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { CollectionListStaticProps } from '@pages/[language]/collections/page/[i]';
 
-type Props = CollectionListStaticProps['props'];
+export type CollectionListProps = PaginatedProps<
+	NonNullable<GetCollectionListPageDataQuery['collections']['nodes']>[0],
+	any
+>;
 
-function CollectionList({ nodes, pagination }: Props): JSX.Element {
+function CollectionList({
+	nodes,
+	pagination,
+}: CollectionListProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	// TODO: Use PaginatedList component

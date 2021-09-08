@@ -180,7 +180,7 @@ describe('sermons list page', () => {
 	});
 
 	it('calculates pages using items per page', async () => {
-		loadSermonListData({ count: 75 });
+		loadSermonListData({ count: 36 });
 
 		const { getByText } = await renderPage({
 			params: { i: '3', language: 'en' },

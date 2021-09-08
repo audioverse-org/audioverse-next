@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { BaseColors } from '@components/atoms/baseColors';
+
 import styles from './section.module.scss';
 
 interface SectionProps {
 	text: any;
 	media?: any;
 	bleed?: boolean;
-	theme?: 'dark' | 'lightTone' | 'cream';
+	theme?: BaseColors.DARK | BaseColors.LIGHT_TONE | BaseColors.CREAM;
 	center?: boolean;
 	reverse?: boolean;
 }

@@ -7,18 +7,26 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
 import RssLink from '@components/molecules/rssLink';
+import { GetSponsorTeachingsPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorRoute, makeSponsorTeachingsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { SponsorTeachingsStaticProps } from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
 
-type Props = SponsorTeachingsStaticProps['props'];
+export type SponsorTeachingsProps = PaginatedProps<
+	NonNullable<
+		NonNullable<
+			GetSponsorTeachingsPageDataQuery['sponsor']
+		>['recordings']['nodes']
+	>[0],
+	GetSponsorTeachingsPageDataQuery
+> & { rssPath: string | null };
 
 function SponsorTeachings({
 	nodes,
 	data,
 	pagination,
 	rssPath,
-}: Props): JSX.Element {
+}: SponsorTeachingsProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const img = data?.sponsor?.imageWithFallback?.url;
 

@@ -21,6 +21,7 @@ import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
+import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterRecordingsRoute,
@@ -28,7 +29,6 @@ import {
 	makePresenterTopRecordingsRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { PresenterStaticProps } from '@pages/[language]/presenters/[id]/[[...slug]]';
 
 import UserIcon from '../../../public/img/fa-user.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
@@ -38,13 +38,13 @@ import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
-type Props = PresenterStaticProps['props'];
+export type PresenterDetailProps = GetPresenterDetailPageDataQuery;
 
 function PresenterDetail({
 	person,
 	collections,
 	sequences,
-}: Must<Props>): JSX.Element {
+}: Must<PresenterDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
 
@@ -183,7 +183,7 @@ function PresenterDetail({
 						className={styles.iconButton}
 					/>
 				</div>
-				<HorizontalRule color="lightTone" />
+				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</TeaseHeader>
 			{essentialRecordings.nodes?.length ? (

@@ -108,6 +108,6 @@ describe('stories list page', () => {
 
 		const link = getByText('the_story_title') as HTMLLinkElement;
 
-		expect(link).toHaveAttribute('href', '/en/stories/the_story_id');
+		expect(link).toHaveAttribute('href', '/en/stories/albums/the_story_id');
 	});
 });

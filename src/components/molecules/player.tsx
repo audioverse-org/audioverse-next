@@ -15,15 +15,17 @@ import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
+import IconPlay from '../../../public/img/icon-play-large.svg';
 
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
+	backgroundColor: BaseColors;
 }
 
-const Player = ({ recording }: PlayerProps): JSX.Element => {
+const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 	if (!recording)
 		return (
 			<p>
@@ -42,8 +44,6 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 
-	const backgroundColor = BaseColors.WHITE;
-
 	return (
 		<div
 			data-testid={recording.id}
@@ -53,18 +53,26 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 				description: 'player label',
 			})}
 		>
-			{shouldShowPoster && (
-				<button className={styles.poster} onClick={() => session.play()}>
-					<Image
-						src="/img/poster.jpg"
-						alt={recording.title}
-						width={1500}
-						height={500}
-					/>
-				</button>
-			)}
+			{shouldShowVideoControls && (
+				<div className={styles.videoWrapper}>
+					{shouldShowPoster && (
+						<button className={styles.poster} onClick={() => session.play()}>
+							<Image
+								src="/img/poster.jpg"
+								alt={recording.title}
+								layout="fill"
+								objectFit="cover"
+								objectPosition="left bottom"
+							/>
+							<span className={styles.posterPlay}>
+								<IconPlay />
+							</span>
+						</button>
+					)}
 
-			{session.isVideoLoaded && video}
+					{session.isVideoLoaded && video}
+				</div>
+			)}
 
 			{shouldShowVideoControls && (
 				<div className={styles.videoProgress}>
@@ -81,6 +89,7 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 							backgroundColor,
 						}}
 						large
+						active
 						className={styles.play}
 					/>
 					<div className={styles.controlGrow}>
@@ -122,9 +131,9 @@ const Player = ({ recording }: PlayerProps): JSX.Element => {
 					/>
 				</div>
 				<div className={styles.rightButtons}>
-					<ButtonSpeed recording={recording} />
-					<ButtonDownload recording={recording} />
-					<ButtonShareRecording recording={recording} />
+					<ButtonSpeed {...{ recording, backgroundColor }} />
+					<ButtonDownload {...{ recording, backgroundColor }} />
+					<ButtonShareRecording {...{ recording, backgroundColor }} />
 					<RecordingButtonFavorite
 						id={recording.id}
 						backgroundColor={backgroundColor}

@@ -1,0 +1,7 @@
+query getSongBooksDetailPageData($language: Language!, $book: String!) {
+	musicTracks(language: $language, tagName: $book, first: 1000) {
+		nodes {
+			...cardSong
+		}
+	}
+}

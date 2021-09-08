@@ -1,0 +1,27 @@
+query getBlogPageData(
+	$language: Language!
+	$offset: Int = 0
+	$first: Int = 12
+) {
+	blogPosts(
+		language: $language
+		orderBy: { field: PUBLISHED_AT, direction: DESC }
+		first: $first
+		offset: $offset
+	) {
+		nodes {
+			...cardPost
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getBlogPathsData($language: Language!) {
+	blogPosts(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

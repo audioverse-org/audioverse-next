@@ -1,0 +1,13 @@
+query getStoryAlbumDetailPageData($id: ID!) {
+	storySeason(id: $id) {
+		...sequence
+	}
+}
+
+query getStoryAlbumDetailPathsData($language: Language!, $first: Int) {
+	storySeasons(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

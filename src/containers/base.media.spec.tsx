@@ -12,16 +12,27 @@ import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
 // import AndMiniplayer from '@components/templates/andMiniplayer';
-import { PlayerFragment, RecordingFragment } from '@lib/generated/graphql';
+import {
+	RecordingContentType,
+	RecordingFragment,
+} from '@lib/generated/graphql';
 import { setPlayerMock } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
-const recordingAudio: Partial<PlayerFragment> = {
+const sequence = {
+	id: 'the_sequence_id',
+	title: 'the_sequence_title',
+	canonicalPath: 'the_sequence_path',
+	recordings: {
+		nodes: [],
+	},
+};
+
+const recordingAudio: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
-	sequence: {
-		title: 'the_sequence_title',
-	},
+	contentType: RecordingContentType.Sermon,
+	sequence,
 	audioFiles: [
 		{
 			url: 'the_source_src',
@@ -29,14 +40,14 @@ const recordingAudio: Partial<PlayerFragment> = {
 			filesize: 'the_source_size',
 		},
 	],
+	speakers: [],
 };
 
-const recordingVideo: Partial<PlayerFragment> = {
+const recordingVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
-	sequence: {
-		title: 'the_sequence_title',
-	},
+	contentType: RecordingContentType.Sermon,
+	sequence,
 	videoFiles: [
 		{
 			url: 'the_source_src',
@@ -44,14 +55,14 @@ const recordingVideo: Partial<PlayerFragment> = {
 			filesize: 'the_source_size',
 		},
 	],
+	speakers: [],
 };
 
-const recordingAudioVideo: Partial<PlayerFragment> = {
+const recordingAudioVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
-	sequence: {
-		title: 'the_sequence_title',
-	},
+	contentType: RecordingContentType.Sermon,
+	sequence,
 	videoFiles: [
 		{
 			url: 'video_source_src',
@@ -66,6 +77,7 @@ const recordingAudioVideo: Partial<PlayerFragment> = {
 			filesize: 'audio_source_size',
 		},
 	],
+	speakers: [],
 };
 
 const Page = ({
@@ -73,7 +85,7 @@ const Page = ({
 	recording,
 }: {
 	includePlayer: boolean;
-	recording: Partial<PlayerFragment>;
+	recording: Partial<RecordingFragment>;
 }) => (
 	<div>
 		{includePlayer && <Recording recording={recording as RecordingFragment} />}
@@ -82,7 +94,7 @@ const Page = ({
 
 const renderApp = async (
 	includePlayer: boolean,
-	recording: Partial<PlayerFragment>,
+	recording: Partial<RecordingFragment>,
 	container: any = undefined
 ) => {
 	const result = await render(

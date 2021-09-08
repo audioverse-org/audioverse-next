@@ -12,37 +12,33 @@ type Props = {
 		| 'secondary'
 		| 'secondaryInverse'
 		| 'tertiary';
-	text: JSX.Element | string;
+	text?: JSX.Element | string;
 	href?: string;
-	onClick?: (e: MouseEvent) => void;
+	onClick?: (e: MouseEvent<HTMLElement>) => void;
 	Icon?: any;
 	iconPosition?: 'left' | 'right';
 	target?: '_blank';
 	className?: string;
+	'aria-label'?: string;
 };
 
 export default function Button({
 	type,
 	text,
 	href,
-	onClick,
 	Icon,
 	iconPosition,
-	target,
 	className,
+	...props
 }: Props): JSX.Element {
 	const inner = (
-		<a
-			className={clsx(styles.base, styles[type], className)}
-			onClick={onClick}
-			target={target}
-		>
+		<a className={clsx(styles.base, styles[type], className)} {...props}>
 			{Icon && iconPosition !== 'right' && (
-				<Icon className={clsx(styles.iconLeft)} />
+				<Icon className={clsx(text && styles.iconLeftOfText)} />
 			)}
 			{text}
 			{Icon && iconPosition === 'right' && (
-				<Icon className={clsx(styles.iconRight)} />
+				<Icon className={clsx(text && styles.iconRightOfText)} />
 			)}
 		</a>
 	);

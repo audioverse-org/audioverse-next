@@ -1,30 +1,20 @@
-import CollectionList from '@containers/collection/list';
+import CollectionList, {
+	CollectionListProps,
+} from '@containers/collection/list';
 import {
 	getCollectionListPageData,
-	GetCollectionListPageDataQuery,
 	getCollectionListPathsData,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default CollectionList;
-
-type Collection = NonNullable<
-	GetCollectionListPageDataQuery['collections']['nodes']
->[0];
-export type CollectionListStaticProps = PaginatedStaticProps<
-	GetCollectionListPageDataQuery,
-	Collection
->;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; i: string };
-}): Promise<CollectionListStaticProps> {
+}): Promise<StaticProps<CollectionListProps>> {
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,

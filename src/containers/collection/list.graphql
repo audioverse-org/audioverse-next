@@ -1,10 +1,14 @@
-# TODO: Set sort method
 query getCollectionListPageData(
 	$language: Language!
 	$offset: Int
 	$first: Int
 ) {
-	collections(language: $language, offset: $offset, first: $first) {
+	collections(
+		language: $language
+		offset: $offset
+		first: $first
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
 		nodes {
 			id
 			title

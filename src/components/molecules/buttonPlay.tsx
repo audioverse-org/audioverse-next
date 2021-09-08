@@ -14,20 +14,25 @@ import IconPlay from '../../../public/img/icon-play-medium.svg';
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
 
-const isBackgroundColorDark = (backgroundColor: BaseColors) =>
-	[BaseColors.BOOK_B, BaseColors.STORY_B, BaseColors.TOPIC_B].includes(
-		backgroundColor
-	);
+export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
+	[
+		BaseColors.DARK,
+		BaseColors.BOOK_B,
+		BaseColors.STORY_B,
+		BaseColors.TOPIC_B,
+	].includes(backgroundColor);
 
 export default function ButtonPlay({
 	recording,
 	backgroundColor,
 	large,
+	active,
 	className,
 }: {
 	recording: ButtonPlayFragment;
 	backgroundColor: BaseColors;
 	large?: boolean;
+	active?: boolean;
 	className?: string;
 }): JSX.Element {
 	const { isPaused, play, pause } = usePlaybackSession(recording);
@@ -58,7 +63,11 @@ export default function ButtonPlay({
 			}
 			onPress={() => (isPaused ? play() : pause())}
 			color={
-				isBackgroundColorDark(backgroundColor)
+				active
+					? isBackgroundColorDark(backgroundColor)
+						? BaseColors.SALMON
+						: BaseColors.RED
+					: isBackgroundColorDark(backgroundColor)
 					? BaseColors.WHITE
 					: BaseColors.DARK
 			}

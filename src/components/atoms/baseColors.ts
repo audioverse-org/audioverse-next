@@ -8,8 +8,10 @@ export enum BaseColors {
 	MID_TONE = 'midTone',
 	BIBLE_B = 'bibleB',
 	BOOK_B = 'bookB',
+	BOOK_H = 'bookH',
 	SONG_B = 'songB',
 	STORY_B = 'storyB',
+	STORY_H = 'storyH',
 	TOPIC_B = 'topicB',
 	SMART_PLAYLIST_H = 'smartPlaylistH',
 }

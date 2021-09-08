@@ -41,7 +41,7 @@ describe('sermon audio list page', () => {
 			variables: {
 				language: 'ENGLISH',
 				hasVideo: false,
-				first: 25,
+				first: 12,
 				offset: 0,
 			},
 		});

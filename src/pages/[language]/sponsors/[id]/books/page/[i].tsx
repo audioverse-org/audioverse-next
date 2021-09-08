@@ -1,29 +1,19 @@
-import SponsorBooks from '@containers/sponsor/books';
+import SponsorBooks, { SponsorBooksProps } from '@containers/sponsor/books';
 import {
 	getSponsorBooksPageData,
-	GetSponsorBooksPageDataQuery,
 	getSponsorBooksPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorBooksRoute } from '@lib/routes';
 
 export default SponsorBooks;
-
-type Book = NonNullable<GetSponsorBooksPageDataQuery['audiobooks']['nodes']>[0];
-export type SponsorBooksStaticProps = PaginatedStaticProps<
-	GetSponsorBooksPageDataQuery,
-	Book
->;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<SponsorBooksStaticProps> {
+}): Promise<StaticProps<SponsorBooksProps>> {
 	const { id } = params;
 	return getPaginatedStaticProps(
 		params,

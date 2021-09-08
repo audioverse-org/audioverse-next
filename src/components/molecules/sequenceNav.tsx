@@ -2,38 +2,21 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { SequenceNavFragment } from '@lib/generated/graphql';
-import { makeSermonRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
-import ArrowRight from '../../../public/img/icon-arrow-right.svg';
+import IconBack from '../../../public/img/icon-back-light.svg';
+import IconForward from '../../../public/img/icon-forward-light.svg';
 
 import Button from './button';
 import styles from './sequenceNav.module.scss';
 
-function getSiblingByIndexOffset(
-	recording: SequenceNavFragment,
-	offset: number
-) {
-	const nodes = recording.sequence?.recordings?.nodes;
-
-	if (!nodes || recording.sequenceIndex === null) return;
-
-	const zeroBasedIndex = recording.sequenceIndex - 1;
-	const targetIndex = zeroBasedIndex + offset;
-
-	return nodes[targetIndex];
-}
-
 export default function SequenceNav({
-	recording,
+	recording: { sequencePreviousRecording, sequenceNextRecording },
+	useInverse,
 }: {
 	recording: SequenceNavFragment;
+	useInverse: boolean;
 }): JSX.Element {
-	const langRoute = useLanguageRoute();
 	const intl = useIntl();
-	const previousRecording = getSiblingByIndexOffset(recording, -1);
-	const nextRecording = getSiblingByIndexOffset(recording, 1);
 
 	const labelPrevious = intl.formatMessage({
 		id: 'organism-recording__buttonLabelPrevious',
@@ -47,23 +30,27 @@ export default function SequenceNav({
 		description: 'recording next button label',
 	});
 
+	const buttonType = useInverse ? 'secondaryInverse' : 'secondary';
+
 	return (
 		<div className={styles.sequenceNav}>
-			{previousRecording && (
+			{sequencePreviousRecording ? (
 				<Button
-					type="secondary"
-					href={makeSermonRoute(langRoute, previousRecording.id)}
+					type={buttonType}
+					href={sequencePreviousRecording.canonicalPath}
 					text={labelPrevious}
-					Icon={ArrowLeft}
+					Icon={IconBack}
 					iconPosition="left"
 				/>
+			) : (
+				<div />
 			)}
-			{nextRecording && (
+			{sequenceNextRecording && (
 				<Button
-					type="secondary"
-					href={makeSermonRoute(langRoute, nextRecording.id)}
+					type={buttonType}
+					href={sequenceNextRecording.canonicalPath}
 					text={labelNext}
-					Icon={ArrowRight}
+					Icon={IconForward}
 					iconPosition="right"
 				/>
 			)}

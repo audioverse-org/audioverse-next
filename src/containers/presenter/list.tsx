@@ -5,13 +5,17 @@ import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
+import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makePresenterDetailRoute, makePresenterListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import { PresentersStaticProps } from '@pages/[language]/presenters/page/[i]';
 
-type Props = PresentersStaticProps['props'];
+export type PresentersProps = PaginatedProps<
+	NonNullable<GetPresenterListPageDataQuery['persons']['nodes']>[0],
+	GetPresenterListPageDataQuery
+>;
 
-function Presenters({ nodes, pagination }: Props): JSX.Element {
+function Presenters({ nodes, pagination }: PresentersProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	// TODO: Use PaginatedList component
 	return (

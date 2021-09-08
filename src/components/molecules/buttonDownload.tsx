@@ -3,26 +3,26 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import { ButtonDownloadFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 
 import IconDownload from '../../../public/img/icon-download.svg';
 
-import styles from './buttonDownload.module.scss';
+import { isBackgroundColorDark } from './buttonPlay';
+import IconButton from './iconButton';
 
 /* TODO: Disable if downloads not allowed */
 export default function ButtonDownload({
 	recording,
+	backgroundColor,
 }: {
 	recording: ButtonDownloadFragment;
+	backgroundColor: BaseColors;
 }): JSX.Element {
 	const { audioDownloads = [], videoDownloads = [] } = recording;
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const intl = useIntl();
-
-	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget);
-	};
 
 	const handleClose = () => {
 		setAnchorEl(null);
@@ -30,19 +30,25 @@ export default function ButtonDownload({
 
 	return (
 		<>
-			<button
-				onClick={handleClick}
-				aria-label={intl.formatMessage({
-					id: 'molecule-buttonDownload__buttonLabel',
-					defaultMessage: 'downloads',
-					description: 'download button label',
-				})}
-				aria-controls="downloads"
-				aria-haspopup="true"
-				className={styles.button}
-			>
-				<IconDownload />
-			</button>
+			<IconButton
+				Icon={IconDownload}
+				onPress={({ currentTarget }) => setAnchorEl(currentTarget)}
+				color={
+					isBackgroundColorDark(backgroundColor)
+						? BaseColors.WHITE
+						: BaseColors.DARK
+				}
+				{...{
+					backgroundColor,
+					'aria-label': intl.formatMessage({
+						id: 'molecule-buttonDownload__buttonLabel',
+						defaultMessage: 'downloads',
+						description: 'download button label',
+					}),
+					'aria-controls': 'downloads',
+					'aria-haspopup': 'true',
+				}}
+			/>
 			<Menu
 				id="downloads"
 				anchorEl={anchorEl}

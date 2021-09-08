@@ -1,16 +1,3 @@
-// LEGACY
-
-$gray-dark: #242426;
-// taken from T&S Figma 5/19/2021, marketing home section bg
-$gray-mid: #323e48;
-$gray-light: #747474;
-$gray-lighter: #dbdbdb;
-// taken from T&S Figma 5/14/2021, sidebar border line
-$gray-bleached: #cdd9e3;
-$accent: #3da88e;
-
-// END LEGACY
-
 $serif: ivyjournal, serif;
 $headingFont: $serif;
 
@@ -70,24 +57,3 @@ $content-maxWidth-sm: 520px;
 $content-maxWidth: 1500px;
 
 $grid-gap: 24px;
-
-// TODO: Switch to using Mui button, move all these styles to global
-//  theme or global.css Mui customizations
-.button {
-	border-radius: 4px;
-	border-color: $ts-dark;
-	border-width: 0.5px;
-	border-style: solid;
-	padding: 8px;
-	text-decoration: none;
-	display: inline-block;
-	background-color: white;
-	cursor: pointer;
-	&.square {
-		aspect-ratio: 1/1;
-		display: block;
-		& > * {
-			display: block;
-		}
-	}
-}

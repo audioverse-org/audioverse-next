@@ -15,10 +15,12 @@ import CardRecordingSequenceHat from './recordingSequenceHat';
 
 interface CardAudiobookTrackProps {
 	track: CardAudiobookTrackFragment;
+	hideHat?: boolean;
 }
 
 export default function CardAudiobookTrack({
 	track,
+	hideHat,
 }: CardAudiobookTrackProps): JSX.Element {
 	const intl = useIntl();
 	const { sequence } = track;
@@ -68,6 +70,7 @@ export default function CardAudiobookTrack({
 			container={container}
 			theme={'audiobookTrack'}
 			hideSpeakers
+			hideHat={hideHat}
 		/>
 	);
 }

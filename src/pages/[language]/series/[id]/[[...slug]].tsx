@@ -1,9 +1,8 @@
-import SeriesDetail from '@containers/series/detail';
+import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
 import { REVALIDATE } from '@lib/constants';
 import { createFeed } from '@lib/createFeed';
 import {
 	getSeriesDetailPageData,
-	GetSeriesDetailPageDataQuery,
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
@@ -11,7 +10,7 @@ import { makeSeriesDetailRoute } from '@lib/routes';
 
 export default SeriesDetail;
 
-export type SeriesStaticProps = StaticProps<GetSeriesDetailPageDataQuery>;
+export type SeriesStaticProps = StaticProps<SeriesDetailProps>;
 
 export async function getStaticProps({
 	params,
@@ -21,19 +20,21 @@ export async function getStaticProps({
 	const { id } = params;
 
 	const result = await getSeriesDetailPageData({ id }).catch(() => ({
-		sequence: null,
+		series: null,
 	}));
 
 	if (result) {
 		await createFeed(
-			result.sequence?.title,
+			result.series?.title,
 			params,
-			result.sequence?.recordings.nodes || [],
+			result.series?.recordings.nodes || [],
 			`series/${id}.xml`
 		);
 	}
 	return {
-		props: result,
+		props: {
+			sequence: result?.series,
+		},
 		revalidate: REVALIDATE,
 	};
 }
@@ -41,7 +42,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
-		(d) => d.sequences.nodes,
+		(d) => d.serieses.nodes,
 		(l, n) => makeSeriesDetailRoute(l, n.id)
 	);
 }

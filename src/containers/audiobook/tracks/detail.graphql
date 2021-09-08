@@ -1,0 +1,13 @@
+query getAudiobookTrackDetailData($id: ID!) {
+	audiobookTrack(id: $id) {
+		...recording
+	}
+}
+
+query getAudiobookTrackDetailStaticPaths($language: Language!, $first: Int) {
+	audiobookTracks(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

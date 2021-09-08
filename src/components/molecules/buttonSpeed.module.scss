@@ -1,7 +1,16 @@
 @import '../../styles/common';
 
-.button {
-	cursor: pointer;
+.base {
+	width: auto;
+	min-width: 32px;
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.speed {
 	color: $ts-dark;
 	font-size: 20px;
+	&.light {
+		color: $ts-white;
+	}
 }

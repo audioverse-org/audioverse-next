@@ -19,46 +19,44 @@ interface CardPostProps {
 export default function CardPost({ post }: CardPostProps): JSX.Element {
 	const dur = post.readingDuration;
 	const heroImage = post.image?.url && (
-		<Link href={post.canonicalPath}>
-			<a>
-				<Image
-					className={styles.hero}
-					src={post.image.url}
-					alt={post.title}
-					width={500}
-					height={260}
-				/>
-			</a>
-		</Link>
+		<Image
+			className={styles.hero}
+			src={post.image.url}
+			alt={post.title}
+			width={500}
+			height={260}
+		/>
 	);
 	return (
 		<Card>
-			<div className={styles.container}>
-				{heroImage}
-				<div className={styles.content}>
-					<Heading6 sans unpadded className={styles.date}>
-						{formatLongDate(post.publishDate)}
-					</Heading6>
-					<Heading2>
-						<Link href={post.canonicalPath}>
-							<a>{post.title}</a>
-						</Link>
-					</Heading2>
-					{post.teaser ? <p className={styles.teaser}>{post.teaser}</p> : null}
-					{dur && dur > 30 && (
-						<p className={styles.duration}>
-							<FormattedMessage
-								id="cardPost__readingDuration"
-								defaultMessage="{duration} read"
-								description="Card post reading duration"
-								values={{
-									duration: useFormattedDuration(dur),
-								}}
-							/>
-						</p>
-					)}
-				</div>
-			</div>
+			<Link href={post.canonicalPath}>
+				<a className={styles.container}>
+					{heroImage}
+					<div className={styles.content}>
+						<Heading6 sans unpadded className={styles.date}>
+							{formatLongDate(post.publishDate)}
+						</Heading6>
+						<Heading2>{post.title}</Heading2>
+						{post.teaser ? (
+							<p className={styles.teaser}>{post.teaser}</p>
+						) : null}
+						{dur && dur >= 60 && (
+							<div className={styles.flexGrow}>
+								<p className={styles.duration}>
+									<FormattedMessage
+										id="cardPost__readingDuration"
+										defaultMessage="{duration} read"
+										description="Card post reading duration"
+										values={{
+											duration: useFormattedDuration(dur),
+										}}
+									/>
+								</p>
+							</div>
+						)}
+					</div>
+				</a>
+			</Link>
 		</Card>
 	);
 }

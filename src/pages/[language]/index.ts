@@ -1,24 +1,10 @@
 import _ from 'lodash';
 
-import Home from '@containers/home';
+import Home, { HomeProps } from '@containers/home';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import {
-	getHomeStaticProps,
-	GetHomeStaticPropsQuery,
-	Language,
-} from '@lib/generated/graphql';
+import { getHomeStaticProps, Language } from '@lib/generated/graphql';
 
 export default Home;
-
-export interface HomeProps {
-	data: GetHomeStaticPropsQuery | undefined;
-	disableSidebar: true;
-}
-
-interface StaticProps {
-	props: HomeProps;
-	revalidate: number;
-}
 
 interface GetStaticPropsArgs {
 	params: {
@@ -28,7 +14,9 @@ interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
+}: GetStaticPropsArgs): Promise<
+	StaticProps<HomeProps & { disableSidebar: true }>
+> {
 	const language = _.get(params, 'language'),
 		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language) as Language;
 

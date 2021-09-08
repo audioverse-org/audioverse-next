@@ -15,7 +15,7 @@ export type IDefinitionListTerm = {
 
 type Props = {
 	terms: IDefinitionListTerm[];
-	textColor: BaseColors.DARK | BaseColors.LIGHT_TONE;
+	textColor: BaseColors.DARK | BaseColors.LIGHT_TONE | BaseColors.WHITE;
 };
 
 export default function DefinitionList({

@@ -1,8 +1,7 @@
-import SponsorDetail from '@containers/sponsor/detail';
+import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getSponsorDetailPageData,
-	GetSponsorDetailPageDataQuery,
 	getSponsorDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
@@ -10,13 +9,11 @@ import { makeSponsorRoute } from '@lib/routes';
 
 export default SponsorDetail;
 
-export type SponsorStaticProps = StaticProps<GetSponsorDetailPageDataQuery>;
-
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<SponsorStaticProps> {
+}): Promise<StaticProps<SponsorDetailProps>> {
 	const { id } = params;
 	return {
 		props: await getSponsorDetailPageData({ id }).catch(() => ({

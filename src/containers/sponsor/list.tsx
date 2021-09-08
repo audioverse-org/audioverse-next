@@ -3,12 +3,16 @@ import { useIntl } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import PaginatedList from '@components/templates/paginatedList';
+import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorListRoute, makeSponsorRoute } from '@lib/routes';
-import { SponsorsStaticProps } from '@pages/[language]/sponsors/page/[i]';
 
-type Props = SponsorsStaticProps['props'];
+export type SponsorsProps = PaginatedProps<
+	NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>[0],
+	GetSponsorListPageDataQuery
+>;
 
-function Sponsors({ nodes, pagination }: Props): JSX.Element {
+function Sponsors({ nodes, pagination }: SponsorsProps): JSX.Element {
 	const intl = useIntl();
 	return (
 		<PaginatedList

@@ -1,5 +1,6 @@
-import { render } from '@testing-library/react';
 import React from 'react';
+
+import { renderWithIntl } from '@lib/test/helpers';
 
 import Pagination, { pagination } from './pagination';
 
@@ -9,64 +10,64 @@ const renderPagination = ({
 	makeRoute = (languageRoute: string, pageIndex: number): string =>
 		`${languageRoute}/the_route/page/${pageIndex}`,
 } = {}) => {
-	return render(
+	return renderWithIntl(
 		<Pagination current={current} total={total} makeRoute={makeRoute} />
 	);
 };
 
 describe('pagination component', () => {
-	it('has next button', () => {
-		const { getByText } = renderPagination({ total: 2 });
+	it('has next button', async () => {
+		const { getByText } = await renderPagination({ total: 2 });
 
-		expect(getByText('>')).toBeInTheDocument();
+		expect(getByText('Next')).toBeInTheDocument();
 	});
 
-	it('has previous button', () => {
-		const { getByText } = renderPagination({ current: 2, total: 2 });
+	it('has previous button', async () => {
+		const { getByText } = await renderPagination({ current: 2, total: 2 });
 
-		expect(getByText('<')).toBeInTheDocument();
+		expect(getByText('Previous')).toBeInTheDocument();
 	});
 
-	it('hides next when unneeded', () => {
-		const { getByText } = renderPagination();
+	it('hides next when unneeded', async () => {
+		const { getByText } = await renderPagination();
 
-		expect(() => getByText('>')).toThrow();
+		expect(() => getByText('Next')).toThrow();
 	});
 
-	it('hides previous when unneeded', () => {
-		const { getByText } = renderPagination();
+	it('hides previous when unneeded', async () => {
+		const { getByText } = await renderPagination();
 
-		expect(() => getByText('<')).toThrow();
+		expect(() => getByText('Previous')).toThrow();
 	});
 
-	it('sets next href', () => {
-		const { getByText } = renderPagination({
+	it('sets next href', async () => {
+		const { getByText } = await renderPagination({
 			total: 2,
 			makeRoute: (l, i) => `/${l}/sermons/page/${i}`,
 		});
-		const link = getByText('>') as HTMLAnchorElement;
+		const link = getByText('Next') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/sermons/page/2');
 	});
 
-	it('includes dots', () => {
-		const { getByText } = renderPagination({ total: 100 });
+	it('includes dots', async () => {
+		const { getByText } = await renderPagination({ total: 100 });
 
 		expect(getByText('...')).toBeInTheDocument();
 	});
 
-	it('unlinks dots', () => {
-		const { getByText } = renderPagination({ total: 100 });
+	it('unlinks dots', async () => {
+		const { getByText } = await renderPagination({ total: 100 });
 
 		expect(getByText('...')).not.toHaveAttribute('href');
 	});
 
-	it('uses url base', () => {
-		const { getByText } = renderPagination({
+	it('uses url base', async () => {
+		const { getByText } = await renderPagination({
 				total: 2,
 				makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
 			}),
-			link = getByText('>') as HTMLAnchorElement;
+			link = getByText('Next') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/presenters/page/2');
 	});
@@ -114,14 +115,22 @@ describe('pagination algorithm', () => {
 	});
 
 	it('handles missing current', async () => {
-		await render(<Pagination {...({ total: 3, base: 'base' } as any)} />);
+		await renderWithIntl(
+			<Pagination
+				{...({ total: 3, base: 'base', makeRoute: () => '' } as any)}
+			/>
+		);
 	});
 
 	it('handles missing total', async () => {
-		await render(<Pagination {...({ current: 1, base: 'base' } as any)} />);
+		await renderWithIntl(
+			<Pagination {...({ current: 1, base: 'base' } as any)} />
+		);
 	});
 
 	it('handles missing base', async () => {
-		await render(<Pagination {...({ current: 1, total: 3 } as any)} />);
+		await renderWithIntl(
+			<Pagination {...({ current: 1, total: 3, makeRoute: () => '' } as any)} />
+		);
 	});
 });

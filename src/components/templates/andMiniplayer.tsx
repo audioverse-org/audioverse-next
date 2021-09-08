@@ -142,7 +142,7 @@ export default function AndMiniplayer({
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
 	const options: VideoJsPlayerOptions = {
-		poster: 'https://s.audioverse.org/images/template/player-bg4.jpg',
+		poster: '/img/poster.jpg',
 		controls: false,
 		// TODO: Should this be set back to `auto` once streaming urls are fixed?
 		// https://docs.videojs.com/docs/guides/options.html

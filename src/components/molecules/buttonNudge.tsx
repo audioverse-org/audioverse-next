@@ -12,6 +12,7 @@ import IconJumpForwardMedium from '../../../public/img/icon-jump-forward-medium.
 import IconJumpForward from '../../../public/img/icon-jump-forward.svg';
 
 import styles from './buttonNudge.module.scss';
+import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
 export default function ButtonNudge({
@@ -53,9 +54,17 @@ export default function ButtonNudge({
 			}
 			onPress={() => session.shiftTime(reverse ? -15 : 15)}
 			aria-label={label}
-			color={BaseColors.DARK}
+			color={
+				isBackgroundColorDark(backgroundColor)
+					? BaseColors.SALMON
+					: BaseColors.RED
+			}
 			backgroundColor={backgroundColor}
-			className={clsx(styles.base, large && styles.large)}
+			className={clsx(
+				styles.base,
+				isBackgroundColorDark(backgroundColor) && styles.onDark,
+				large && styles.large
+			)}
 		/>
 	);
 }

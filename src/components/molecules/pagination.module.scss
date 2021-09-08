@@ -2,31 +2,43 @@
 
 .base {
 	margin-left: 0;
-	margin-top: 2em;
-	text-align: center;
+	margin-top: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.previousButton {
+	margin-right: 32px;
+}
+.nextButton {
+	margin-left: 32px;
 }
 
 .link {
 	display: inline-block;
-	margin-right: 0.2em;
+	padding-left: 3px;
+	padding-right: 3px;
 
 	a {
-		color: $gray-dark;
-		text-decoration: none;
 		display: block;
-		border-radius: 3px;
-		padding: 0.2em 0.5em;
+		line-height: 16px;
+		color: $ts-dark;
+		text-decoration: none;
+		&:hover {
+			color: $ts-red;
+			font-weight: 700;
+		}
 	}
-
-	&:not(.active) a:hover {
-		background-color: $gray-lighter;
+	&.active {
+		border-bottom: 2px solid $ts-red;
+		a {
+			color: $ts-red;
+			font-weight: 700;
+		}
 	}
 }
 
-.active {
-	a {
-		color: white;
-		font-weight: bold;
-		background-color: $accent;
-	}
+.link + .link {
+	margin-left: 20px;
 }

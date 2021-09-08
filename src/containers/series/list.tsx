@@ -3,12 +3,16 @@ import { useIntl } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
 import PaginatedList from '@components/templates/paginatedList';
+import { GetSeriesListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSeriesDetailRoute, makeSeriesListRoute } from '@lib/routes';
-import { SeriesListStaticProps } from '@pages/[language]/series/page/[i]';
 
-type Props = SeriesListStaticProps['props'];
+export type SeriesListProps = PaginatedProps<
+	NonNullable<GetSeriesListPageDataQuery['serieses']['nodes']>[0],
+	GetSeriesListPageDataQuery
+>;
 
-function SeriesList({ nodes, pagination }: Props): JSX.Element {
+function SeriesList({ nodes, pagination }: SeriesListProps): JSX.Element {
 	const intl = useIntl();
 	return (
 		<>

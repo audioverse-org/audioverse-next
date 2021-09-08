@@ -1,7 +1,11 @@
 fragment recording on Recording {
 	id
 	title
-	persons {
+	contentType
+	speakers: persons(role: SPEAKER) {
+		...personLockup
+	}
+	writers: persons(role: WRITER) {
 		...personLockup
 	}
 	videoDownloads: videoFiles(allowedContainers: MP4) {
@@ -28,11 +32,14 @@ fragment recording on Recording {
 		}
 	}
 	sponsor {
-		...sponsorInfo
+		id
+		title
 	}
+	sequenceIndex
 	sequence {
 		id
 		title
+		canonicalPath
 		recordings(first: 1000) {
 			nodes {
 				...teaseRecording

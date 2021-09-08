@@ -1,31 +1,21 @@
-import SponsorConferences from '@containers/sponsor/conferences';
+import SponsorConferences, {
+	SponsorConferencesProps,
+} from '@containers/sponsor/conferences';
 import {
 	getSponsorConferencesPageData,
-	GetSponsorConferencesPageDataQuery,
 	getSponsorConferencesPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import {
-	getPaginatedStaticProps,
-	PaginatedStaticProps,
-} from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorConferencesRoute } from '@lib/routes';
 
 export default SponsorConferences;
-
-type Conference = NonNullable<
-	GetSponsorConferencesPageDataQuery['conferences']['nodes']
->[0];
-export type SponsorConferencesStaticProps = PaginatedStaticProps<
-	GetSponsorConferencesPageDataQuery,
-	Conference
->;
 
 export async function getStaticProps({
 	params,
 }: {
 	params: { language: string; id: string; i: string };
-}): Promise<SponsorConferencesStaticProps> {
+}): Promise<StaticProps<SponsorConferencesProps>> {
 	const { id } = params;
 	return getPaginatedStaticProps(
 		params,

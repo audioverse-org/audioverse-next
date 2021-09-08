@@ -1,5 +1,9 @@
 @import '../../styles/common';
 
+.container {
+	margin-bottom: 16px;
+}
+
 .button {
 	border: none;
 	background: none;
@@ -7,9 +11,13 @@
 	font-size: 12px;
 	font-weight: 700;
 	color: $ts-midTone;
-	padding-left: 4px;
-	padding-right: 4px;
+	margin: 0;
+	padding: 0;
 	&[aria-pressed='true'] {
 		color: $ts-red;
 	}
+}
+
+.button + .button {
+	margin-left: 8px;
 }

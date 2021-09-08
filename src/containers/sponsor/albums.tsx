@@ -5,6 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
+import { GetSponsorAlbumsPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeAlbumRoute,
 	makeSponsorAlbumsRoute,
@@ -12,11 +14,17 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
-import { SponsorSongsStaticProps } from '@pages/[language]/sponsors/[id]/albums/page/[i]';
 
-type Props = SponsorSongsStaticProps['props'];
+export type SponsorAlbumsProps = PaginatedProps<
+	NonNullable<GetSponsorAlbumsPageDataQuery['musicAlbums']['nodes']>[0],
+	GetSponsorAlbumsPageDataQuery
+>;
 
-function SponsorAlbums({ nodes, pagination, data }: Props): JSX.Element {
+function SponsorAlbums({
+	nodes,
+	pagination,
+	data,
+}: SponsorAlbumsProps): JSX.Element {
 	const id = useQueryString('id') || '';
 	const languageRoute = useLanguageRoute();
 

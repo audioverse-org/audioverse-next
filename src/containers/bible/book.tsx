@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
 import withFailStates from '@components/HOCs/withFailStates';
 import Player from '@components/molecules/player';
 import {
@@ -36,7 +37,12 @@ function Book({ data }: BookProps): JSX.Element {
 		<>
 			<h1>{data.audiobible?.book.title}</h1>
 			<h2>{data.audiobible?.title}</h2>
-			{chapter?.url && <Player recording={recording as PlayerFragment} />}
+			{chapter?.url && (
+				<Player
+					recording={recording as PlayerFragment}
+					backgroundColor={BaseColors.WHITE}
+				/>
+			)}
 			<label>
 				<FormattedMessage
 					id="bibleBook__chapterSelectLabel"

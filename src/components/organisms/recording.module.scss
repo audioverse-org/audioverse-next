@@ -1,11 +1,51 @@
 @import '../../styles/common';
 
 .base {
-	border: 1px solid $ts-cream;
+	&.AUDIOBOOK_TRACK {
+		--recordingAccent: #{$ts-salmon};
+		--recordingBackground: #{$ts-bookB};
+		--recordingHatBackground: #{$ts-bookH};
+		--recordingHatHover: #{$ts-darkened-bookH};
+		--recordingTextColor: #{$ts-white};
+		--recordingTextSecondaryColor: #{$ts-lightTone};
+		--recordingWavesColor: #{$ts-bookH};
+	}
+	&.MUSIC_TRACK {
+		--recordingAccent: #{$ts-red};
+		--recordingBackground: #{$ts-songB};
+		--recordingHatBackground: #{$ts-songH};
+		--recordingHatHover: #{$ts-darkened-songH};
+		--recordingTextColor: #{$ts-dark};
+		--recordingTextSecondaryColor: #{$ts-midTone};
+		--recordingWavesColor: #{$ts-lightTone};
+	}
+	&.SERMON {
+		--recordingAccent: #{$ts-red};
+		border: 1px solid $ts-cream;
+		--recordingHatBackground: #{$ts-cream};
+		--recordingHatHover: #{$ts-darkened-cream};
+		--recordingTextColor: #{$ts-dark};
+		--recordingTextSecondaryColor: #{$ts-midTone};
+		--recordingWavesColor: #{$ts-lightTone};
+	}
+	&.STORY {
+		--recordingAccent: #{$ts-salmon};
+		--recordingBackground: #{$ts-storyB};
+		--recordingHatBackground: #{$ts-storyH};
+		--recordingHatHover: #{$ts-darkened-storyH};
+		--recordingTextColor: #{$ts-white};
+		--recordingTextSecondaryColor: #{$ts-lightTone};
+		--recordingWavesColor: #{$ts-storyH};
+	}
+	background: var(--recordingBackground, $ts-white);
+	color: var(--recordingTextColor);
+	--headingColor: var(--recordingTextColor);
+	--cardColor: var(--recordingTextSecondaryColor);
+	--partColor: var(--recordingAccent);
 }
 
 .hat {
-	background-color: $ts-cream;
+	background-color: var(--recordingHatBackground);
 	padding: 16px 24px;
 	display: block;
 	text-decoration: none;
@@ -18,12 +58,20 @@
 		align-items: center;
 		svg {
 			margin-right: 4px;
-			color: $ts-red;
+			color: var(--recordingAccent);
 		}
 	}
 	h4 {
 		margin: 0;
 		font-size: 16px;
+	}
+	&,
+	&:hover {
+		color: var(--recordingTextColor);
+	}
+	&:hover {
+		text-decoration: none;
+		background: var(--recordingHatHover);
 	}
 }
 
@@ -32,10 +80,6 @@
 	flex-direction: column;
 	> * {
 		padding: 24px;
-	}
-	h6 {
-		margin-top: 16px;
-		margin-bottom: 8px;
 	}
 	p {
 		margin-top: 8px;
@@ -55,7 +99,7 @@
 }
 
 .series {
-	background-color: $ts-white; // TODO: adjust based on recording
+	background-color: var(--recordingBackground);
 	.item {
 		margin-bottom: 32px;
 	}
@@ -63,7 +107,7 @@
 		flex: 1 0 33.3333%;
 		min-width: 300px;
 		max-width: 468px;
-		border-left: 1px solid $ts-cream;
+		border-left: 1px solid var(--recordingHatBackground);
 	}
 }
 .seriesItems {
@@ -91,7 +135,7 @@
 }
 
 .part {
-	color: $ts-red;
+	color: var(--recordingAccent);
 	font-weight: 600;
 	font-size: 16px;
 }
@@ -99,6 +143,8 @@
 .speakers {
 	padding-left: 0;
 	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
 	li {
 		display: block;
 		margin-right: 8px;
@@ -111,4 +157,8 @@
 			margin-bottom: 16px;
 		}
 	}
+}
+
+.audiobookHeading {
+	font-weight: 400;
 }

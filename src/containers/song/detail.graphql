@@ -1,4 +1,13 @@
-fragment song on Recording {
-	...playlist
-	...recording
+query getSongDetailData($id: ID!) {
+	musicTrack(id: $id) {
+		...recording
+	}
+}
+
+query getSongDetailStaticPaths($language: Language!, $first: Int) {
+	musicTracks(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
 }

@@ -7,6 +7,7 @@ import IconLikeActive from '../../../public/img/icon-like-active.svg';
 import IconLikeLight from '../../../public/img/icon-like-light.svg';
 import IconLike from '../../../public/img/icon-like.svg';
 
+import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
 export default function ButtonFavorite({
@@ -36,9 +37,8 @@ export default function ButtonFavorite({
 		  });
 
 	const IconUnavorite = light ? IconLikeLight : IconLike;
-	const isDarkTheme = ['dark', 'bookB', 'storyB', 'topic'].includes(
-		backgroundColor as any
-	);
+	const isDarkTheme = isBackgroundColorDark(backgroundColor);
+
 	const iconColor = isFavorited
 		? isDarkTheme
 			? BaseColors.SALMON

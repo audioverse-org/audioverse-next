@@ -1,0 +1,30 @@
+fragment sequence on Sequence {
+	id
+	title
+	duration
+	description
+	startDate
+	endDate
+	collection {
+		title
+		canonicalPath
+	}
+	image {
+		url(size: 64)
+	}
+	sponsor {
+		title
+		canonicalPath
+	}
+	shareUrl
+	viewerHasFavorited
+	recordings(first: 250) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+			...writeFeedFile
+		}
+	}
+}
