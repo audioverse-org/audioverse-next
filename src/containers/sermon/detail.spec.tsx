@@ -100,7 +100,7 @@ describe('sermon detail page', () => {
 				{
 					variables: {
 						language: 'ENGLISH',
-						first: 200,
+						first: 25,
 					},
 				}
 			)
@@ -118,7 +118,7 @@ describe('sermon detail page', () => {
 				{
 					variables: {
 						language: 'SPANISH',
-						first: 200,
+						first: 25,
 					},
 				}
 			)
@@ -352,12 +352,12 @@ describe('sermon detail page', () => {
 					},
 				},
 			],
-			recordingDate: '2003-03-01T09:30:00.000Z',
+			recordingDate: '253-03-01 09:30:00',
 		});
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('March 1, 2003, 9:30 AM')).toBeInTheDocument();
+		expect(getByText('March 1, 253, 9:30 AM')).toBeInTheDocument();
 	});
 
 	it('includes series title', async () => {
