@@ -10,4 +10,7 @@
 .speed {
 	color: $ts-dark;
 	font-size: 20px;
+	&.light {
+		color: $ts-white;
+	}
 }

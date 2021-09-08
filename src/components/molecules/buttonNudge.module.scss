@@ -1,10 +1,19 @@
+@import '../../styles/common';
+
 .base.base {
 	height: 40px;
 	width: 40px;
 	border-radius: 40px;
+	> svg {
+		fill: $ts-dark;
+	}
 }
 .large.large {
 	height: 56px;
 	width: 56px;
 	border-radius: 56px;
+}
+
+.onDark.onDark > svg {
+	fill: $ts-white;
 }

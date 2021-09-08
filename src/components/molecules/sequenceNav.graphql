@@ -1,12 +1,8 @@
 fragment sequenceNav on Recording {
-	sequenceIndex
-	sequence {
-		id
-		title
-		recordings(first: 1000) {
-			nodes {
-				id
-			}
-		}
+	sequencePreviousRecording {
+		canonicalPath
+	}
+	sequenceNextRecording {
+		canonicalPath
 	}
 }

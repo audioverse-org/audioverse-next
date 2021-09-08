@@ -1,38 +1,11 @@
 query getSeriesDetailPageData($id: ID!) {
-	sequence(id: $id) {
-		id
-		title
-		duration
-		description
-		startDate
-		endDate
-		collection {
-			title
-			canonicalPath
-		}
-		image {
-			url(size: 64)
-		}
-		sponsor {
-			title
-			canonicalPath
-		}
-		shareUrl
-		viewerHasFavorited
-		recordings(first: 250) {
-			aggregate {
-				count
-			}
-			nodes {
-				...cardRecording
-				...writeFeedFile
-			}
-		}
+	series(id: $id) {
+		...sequence
 	}
 }
 
 query getSeriesDetailPathsData($language: Language!, $first: Int) {
-	sequences(language: $language, first: $first) {
+	serieses(language: $language, first: $first) {
 		nodes {
 			id
 		}

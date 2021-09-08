@@ -138,6 +138,7 @@ function SponsorDetail({ sponsor }: Must<Props>): JSX.Element {
 					))}
 				</CardGroup>
 			) : null}
+			{/* TODO: add other types: recordings, etc. */}
 		</Tease>
 	);
 }

@@ -11,6 +11,7 @@ import { SermonDetailProps } from '@containers/sermon/detail';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import {
 	buildStaticRenderer,
@@ -53,7 +54,8 @@ function loadSermonDetailData(sermon: any = undefined): void {
 	sermon = {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
-		persons: [],
+		contentType: RecordingContentType.Sermon,
+		speakers: [],
 		audioFiles: [],
 		videoFiles: [],
 		audioDownloads: [],
@@ -146,7 +148,7 @@ describe('sermon detail page', () => {
 
 		const result = await getStaticProps({ params: { id: '1' } });
 
-		expect(result.props.sermon).toBeNull();
+		expect(result.props.recording).toBeNull();
 	});
 
 	it('renders 404 on missing sermon', async () => {
@@ -163,7 +165,7 @@ describe('sermon detail page', () => {
 		loadRouter({ isFallback: true });
 
 		const { getByText } = await renderWithIntl(
-			<SermonDetail sermon={null} title={null} />
+			<SermonDetail recording={null} title={undefined} />
 		);
 
 		expect(getByText('Loading…')).toBeInTheDocument();
@@ -209,7 +211,7 @@ describe('sermon detail page', () => {
 	it('toggles sources', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
-			persons: [],
+			speakers: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
@@ -236,7 +238,7 @@ describe('sermon detail page', () => {
 	it('falls back to video files', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
-			persons: [],
+			speakers: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoFiles: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 			videoStreams: [],
@@ -266,7 +268,7 @@ describe('sermon detail page', () => {
 	it('falls back to audio files', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
-			persons: [],
+			speakers: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			videoFiles: [],
 			videoStreams: [],
@@ -294,7 +296,7 @@ describe('sermon detail page', () => {
 	it('hides toggle if no video', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
-			persons: [],
+			speakers: [],
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 		});
 
@@ -306,7 +308,7 @@ describe('sermon detail page', () => {
 	it('shows speaker name', async () => {
 		loadSermonDetailData({
 			title: 'the_sermon_title',
-			persons: [
+			speakers: [
 				{
 					id: 'the_id',
 					name: 'the_name',
@@ -340,7 +342,7 @@ describe('sermon detail page', () => {
 		mockedFetchApi.mockResolvedValue({});
 
 		loadSermonDetailData({
-			persons: [
+			speakers: [
 				{
 					id: 'the_id',
 					name: 'the_name',
@@ -429,7 +431,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Copyright ⓒ1999 the_sponsor'));
+		expect(getByText('Copyright ⓒ1999 the_sponsor.'));
 	});
 
 	it('falls back to top-level sponsor', async () => {
@@ -442,7 +444,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Copyright ⓒ1999 the_sponsor')).toBeInTheDocument();
+		expect(getByText('Copyright ⓒ1999 the_sponsor.')).toBeInTheDocument();
 	});
 
 	it('displays license summary', async () => {
@@ -457,24 +459,6 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_license_summary')).toBeInTheDocument();
-	});
-
-	it('displays copyright image', async () => {
-		loadSermonDetailData({
-			distributionAgreement: {
-				license: {
-					image: {
-						url: 'the_license_image_url',
-					},
-				},
-			},
-		});
-
-		const { getByAltText } = await renderPage();
-
-		const image = getByAltText('copyright') as HTMLImageElement;
-
-		expect(image.src).toContain('the_license_image_url');
 	});
 
 	it('does not display missing copyright image', async () => {
@@ -697,24 +681,12 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
-				recordings: {
-					nodes: [
-						{
-							id: 1,
-							canonicalPath: '',
-						},
-						{
-							id: 2,
-							canonicalPath: '',
-						},
-						{
-							id: 3,
-							canonicalPath: '',
-						},
-					],
-				},
 			},
 			sequenceIndex: 2,
+			sequencePreviousRecording: {
+				id: 1,
+				canonicalPath: '/en/sermons/1',
+			},
 		});
 
 		const { getByText } = await renderPage();
@@ -727,24 +699,12 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
-				recordings: {
-					nodes: [
-						{
-							id: 1,
-							canonicalPath: '',
-						},
-						{
-							id: 2,
-							canonicalPath: '',
-						},
-						{
-							id: 3,
-							canonicalPath: '',
-						},
-					],
-				},
 			},
 			sequenceIndex: 2,
+			sequenceNextRecording: {
+				id: 3,
+				canonicalPath: '/en/sermons/3',
+			},
 		});
 
 		const { getByText } = await renderPage();

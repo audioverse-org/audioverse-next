@@ -11,7 +11,7 @@ export default function LineHeading({
 	small,
 }: {
 	children: ReactNode;
-	color?: BaseColors.SALMON;
+	color?: BaseColors.RED | BaseColors.SALMON;
 	className?: string;
 	small?: boolean;
 }): JSX.Element {

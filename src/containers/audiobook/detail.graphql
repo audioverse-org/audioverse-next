@@ -1,0 +1,13 @@
+query getAudiobookDetailPageData($id: ID!) {
+	audiobook(id: $id) {
+		...sequence
+	}
+}
+
+query getAudiobookDetailPathsData($language: Language!, $first: Int) {
+	audiobooks(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

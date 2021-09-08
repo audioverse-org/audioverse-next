@@ -64,7 +64,7 @@ function loadData() {
 									count: 1,
 								},
 							},
-							persons: [],
+							speakers: [],
 						},
 					],
 				},

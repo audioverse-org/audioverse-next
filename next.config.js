@@ -1,8 +1,6 @@
 const withPWA = require('next-pwa');
 
-// TODO: /en/books >> /en/books/page/1
 // TODO: /en/sermons/all >> /en/sermons/all/page/1 (also video, audio)
-// TODO: /en/stories >> /en/stories/page/1
 
 module.exports = withPWA({
 	pwa: {
@@ -28,6 +26,26 @@ module.exports = withPWA({
 				source: '/',
 				destination: '/en',
 				permanent: false,
+			},
+			{
+				source: '/:lang/audiobooks/books/:path*',
+				destination: '/:lang/books/:path*',
+				permanent: true,
+			},
+			{
+				source: '/:lang/music/browse/:id/:slug',
+				destination: '/:lang/songs/albums/:id',
+				permanent: true,
+			},
+			{
+				source: '/:lang/music/browse/sponsors/:id/:slug',
+				destination: '/:lang/sponsors/:id',
+				permanent: true,
+			},
+			{
+				source: '/:lang/music/browse/tag/:tagName/:slug',
+				destination: '/:lang/tags/:tagName/page/1',
+				permanent: true,
 			},
 			{
 				source: '/:lang/sermons/conferences/:id/:slug',

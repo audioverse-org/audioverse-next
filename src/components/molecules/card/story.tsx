@@ -15,9 +15,13 @@ import styles from './story.module.scss';
 
 interface CardStoryProps {
 	story: CardStoryFragment;
+	hideHat?: boolean;
 }
 
-export default function CardStory({ story }: CardStoryProps): JSX.Element {
+export default function CardStory({
+	story,
+	hideHat,
+}: CardStoryProps): JSX.Element {
 	const intl = useIntl();
 	const { sequence, sponsor } = story;
 	const container = sequence
@@ -57,6 +61,11 @@ export default function CardStory({ story }: CardStoryProps): JSX.Element {
 		: undefined;
 
 	return (
-		<CardWithPlayable recording={story} container={container} theme={'story'} />
+		<CardWithPlayable
+			recording={story}
+			container={container}
+			theme={'story'}
+			hideHat={hideHat}
+		/>
 	);
 }

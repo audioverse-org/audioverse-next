@@ -21,8 +21,7 @@ import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
 import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
-import Audiobook from '@containers/audiobook/audiobook';
-import Audiobooks from '@containers/audiobook/audiobooks';
+import Audiobooks from '@containers/audiobook/list';
 import Book from '@containers/bible/book';
 import CollectionDetail from '@containers/collection/detail';
 import CollectionList from '@containers/collection/list';
@@ -32,9 +31,9 @@ import Presenters from '@containers/presenter/list';
 import PresenterRecordings from '@containers/presenter/recordings';
 import SeriesDetail from '@containers/series/detail';
 import SeriesList from '@containers/series/list';
-import SermonDetail, { Sermon } from '@containers/sermon/detail';
+import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import SermonList from '@containers/sermon/list';
-import SongList from '@containers/song/list';
+import SongList from '@containers/song/albums/list';
 import SponsorAlbums from '@containers/sponsor/albums';
 import SponsorBooks from '@containers/sponsor/books';
 import SponsorConferences from '@containers/sponsor/conferences';
@@ -45,7 +44,11 @@ import Stories from '@containers/story/stories';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isRecordingFavorited } from '@lib/api';
-import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
+import {
+	GetWithAuthGuardDataDocument,
+	RecordingContentType,
+	SequenceContentType,
+} from '@lib/generated/graphql';
 import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
 import {
@@ -177,8 +180,9 @@ describe('localization usage', () => {
 	it('localizes sermon detail page', async () => {
 		const screen = await renderWithQueryProvider(
 			<SermonDetail
-				sermon={
+				recording={
 					{
+						contentType: RecordingContentType.Sermon,
 						description: 'z',
 						recordingDate: '2003-03-01T09:30:00.000Z',
 						recordingTags: {
@@ -209,9 +213,9 @@ describe('localization usage', () => {
 								] as any,
 							},
 						},
-					} as Sermon
+					} as SermonDetailProps['recording']
 				}
-				title={null}
+				title={undefined}
 			/>
 		);
 
@@ -314,22 +318,15 @@ describe('localization usage', () => {
 					{
 						id: 'z',
 						title: 'z',
-						imageWithFallback: {
-							url: 'z',
-						},
-					},
+						canonicalPath: 'z',
+						contentType: SequenceContentType.Audiobook,
+						writers: { nodes: [] },
+						recordings: {},
+					} as any,
 				]}
 				pagination={{ total: 1, current: 1 }}
 				data={undefined as any}
 			/>
-		);
-
-		expectNoUnlocalizedText(screen);
-	});
-
-	it('localizes audiobook detail page', async () => {
-		const screen = await renderWithQueryProvider(
-			<Audiobook audiobook={undefined as any} rssPath={''} />
 		);
 
 		expectNoUnlocalizedText(screen);

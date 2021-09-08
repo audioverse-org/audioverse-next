@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 
-import ArrowLeft from '../../../public/img/icon-arrow-left.svg';
-import ArrowRight from '../../../public/img/icon-arrow-right.svg';
+import ArrowLeft from '../../../public/img/icon-back-light.svg';
+import ArrowRight from '../../../public/img/icon-forward-light.svg';
 
 import styles from './slider.module.scss';
 

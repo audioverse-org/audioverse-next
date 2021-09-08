@@ -1,0 +1,13 @@
+query getStoryDetailData($id: ID!) {
+	story(id: $id) {
+		...recording
+	}
+}
+
+query getStoryDetailStaticPaths($language: Language!, $first: Int) {
+	stories(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}

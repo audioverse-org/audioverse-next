@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import { makeStoryListPage, makeStoryRoute } from '@lib/routes';
+import { makeStoryAlbumRoute, makeStoryListPage } from '@lib/routes';
 import { StoriesStaticProps } from '@pages/[language]/stories/page/[i]';
 
 type Props = StoriesStaticProps['props'];
@@ -22,7 +22,7 @@ function Stories({ nodes, pagination }: Props): JSX.Element {
 					description="Stories list page title"
 				/>
 			</h1>
-			<RecordingList recordings={nodes} makeRoute={makeStoryRoute} />
+			<RecordingList recordings={nodes} makeRoute={makeStoryAlbumRoute} />
 			<Pagination makeRoute={makeStoryListPage} {...pagination} />
 		</>
 	);

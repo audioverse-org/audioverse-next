@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const withFailStates = <P extends any>(
-	Component: React.ComponentType<P>,
+	Component: React.ComponentType<Must<P>>,
 	should404?: (props: P) => boolean
 ): React.ComponentType<P> => {
 	function WithFailStates(props: P) {
