@@ -15,12 +15,6 @@ export const makeAudiobookTrackRoute = (
 	recordingId: string
 ): string => `/${languageRoute}/books/tracks/${recordingId}`;
 
-export const makePresenterDetailRoute = (
-	languageRoute: string,
-	personId: string,
-	personName: string
-): string => `/${languageRoute}/presenters/${personId}/${slug(personName)}`;
-
 export const makePresenterListRoute = (
 	languageRoute: string,
 	page: number | string
@@ -183,11 +177,12 @@ export const makeCollectionSequencesRoute = (
 		page ? `/page/${page}` : ''
 	}`;
 
-export const makeConferenceRecordingsRoute = (
+export const makeCollectionPresentersRoute = (
 	languageRoute: string,
 	conferenceId: string,
 	page: number | string = 1
-): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
+): string =>
+	`/${languageRoute}/conferences/${conferenceId}/presenters/page/${page}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,

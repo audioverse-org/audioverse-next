@@ -8,7 +8,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makePresenterDetailRoute } from '@lib/routes';
 
 export default PresenterDetail;
 
@@ -45,6 +44,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
-		(l, n) => makePresenterDetailRoute(l, n.id, n.name)
+		(l, { canonicalPath }) => canonicalPath
 	);
 }

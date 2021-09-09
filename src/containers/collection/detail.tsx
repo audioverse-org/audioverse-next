@@ -13,6 +13,7 @@ import Button from '@components/molecules/button';
 import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
+import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
@@ -21,14 +22,15 @@ import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
-import TypeLockup from '@components/molecules/typeLockup';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import { makeCollectionSequencesRoute } from '@lib/routes';
+import {
+	makeCollectionPresentersRoute,
+	makeCollectionSequencesRoute,
+} from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import FAListIcon from '../../../public/img/fa-list.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
@@ -95,16 +97,7 @@ function CollectionDetail({
 	return (
 		<Tease className={styles.container}>
 			<TeaseHeader>
-				<TypeLockup
-					Icon={FAListIcon}
-					label={intl.formatMessage({
-						id: `collectionDetail__type`,
-						defaultMessage: 'Conference',
-						description: `Collection Detail type label`,
-					})}
-					iconColor={BaseColors.SALMON}
-					textColor={BaseColors.LIGHT_TONE}
-				/>
+				<CollectionTypeLockup />
 				{image && (
 					<div className={styles.image}>
 						<Image
@@ -211,7 +204,7 @@ function CollectionDetail({
 					{(persons.aggregate?.count || 0) > persons.nodes.length && (
 						<Button
 							type="secondaryInverse"
-							href={makeCollectionSequencesRoute(lang, id)}
+							href={makeCollectionPresentersRoute(lang, id)}
 							text={intl.formatMessage({
 								id: 'collectionDetail__speakersAllLabel',
 								defaultMessage: 'See All Speakers',

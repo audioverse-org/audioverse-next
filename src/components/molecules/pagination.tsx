@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -66,10 +67,12 @@ export default function Pagination({
 	current,
 	total,
 	makeRoute,
+	useInverse = false,
 }: {
 	current: number;
 	total: number;
 	makeRoute: (languageRoute: string, pageIndex: number) => string;
+	useInverse?: boolean;
 }): JSX.Element {
 	const language = useLanguageRoute();
 	const intl = useIntl();
@@ -78,13 +81,14 @@ export default function Pagination({
 	const pagePrevious = current - 1;
 	const pageNext = current + 1;
 	const pages = pagination(current, total);
+	const buttonType = useInverse ? 'secondaryInverse' : 'secondary';
 
 	// TODO: Consider not rendering pagination if only one page
 	return (
-		<ul className={styles.base}>
+		<ul className={clsx(styles.base, useInverse && styles.inverse)}>
 			{current > 1 ? (
 				<Button
-					type="secondary"
+					type={buttonType}
 					href={makeRoute(language, pagePrevious)}
 					Icon={IconBack}
 					text={intl.formatMessage({
@@ -104,7 +108,7 @@ export default function Pagination({
 			))}
 			{current < total ? (
 				<Button
-					type="secondary"
+					type={buttonType}
 					href={makeRoute(language, pageNext)}
 					Icon={IconForward}
 					text={intl.formatMessage({

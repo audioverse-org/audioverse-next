@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
@@ -13,12 +13,11 @@ import { formatDateRange } from '@lib/date';
 import { CardCollectionFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
-import ListIcon from '../../../../public/img/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import CollectionTypeLockup from '../collectionTypeLockup';
 import IconButton from '../iconButton';
-import TypeLockup from '../typeLockup';
 
 import styles from './collection.module.scss';
 
@@ -29,8 +28,6 @@ interface CardCollectionProps {
 export default function CardCollection({
 	collection,
 }: CardCollectionProps): JSX.Element {
-	const intl = useIntl();
-
 	const {
 		allSequences,
 		canonicalPath,
@@ -57,16 +54,7 @@ export default function CardCollection({
 		<Card>
 			<Link href={canonicalPath}>
 				<a className={styles.container}>
-					<TypeLockup
-						Icon={ListIcon}
-						label={intl.formatMessage({
-							id: 'cardCollection_hatTitle',
-							defaultMessage: 'Conference',
-							description: 'Card collection hat title',
-						})}
-						iconColor={BaseColors.SALMON}
-						textColor={BaseColors.WHITE}
-					/>
+					<CollectionTypeLockup />
 					{heroImage}
 					{!!(startDate && endDate) && (
 						<Heading6 sans unpadded className={styles.date}>

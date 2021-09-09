@@ -42,3 +42,18 @@
 .link + .link {
 	margin-left: 20px;
 }
+
+.inverse .link {
+	a {
+		color: $ts-white;
+		&:hover {
+			color: $ts-salmon;
+		}
+	}
+	&.active {
+		border-bottom-color: $ts-salmon;
+		a {
+			color: $ts-salmon;
+		}
+	}
+}

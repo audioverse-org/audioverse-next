@@ -2,8 +2,7 @@ query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
 	person(id: $id) {
 		id
 		name
-		summary
-		description
+		canonicalPath(useFuturePath: true)
 		imageWithFallback {
 			url(size: 100)
 		}

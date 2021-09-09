@@ -7340,50 +7340,91 @@ export type GetCollectionListPathsDataQuery = {
 	};
 };
 
-export type GetCollectionRecordingsPageDataQueryVariables = Exact<{
+export type GetCollectionPresentersPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 	offset: Maybe<Scalars['Int']>;
 	first: Maybe<Scalars['Int']>;
 }>;
 
-export type GetCollectionRecordingsPageDataQuery = {
+export type GetCollectionPresentersPageDataQuery = {
 	__typename?: 'Query';
 	collection: Maybe<{
 		__typename?: 'Collection';
 		id: string;
 		title: string;
-		startDate: Maybe<string>;
-		endDate: Maybe<string>;
-		sponsor: Maybe<{ __typename?: 'Sponsor'; id: string; title: string }>;
-		recordings: {
-			__typename?: 'RecordingConnection';
+		canonicalPath: string;
+		persons: {
+			__typename?: 'PersonConnection';
 			nodes: Maybe<
 				Array<{
-					__typename?: 'Recording';
+					__typename?: 'Person';
+					id: string;
+					name: string;
+					canonicalPath: string;
+					image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>
+			>;
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
+};
+
+export type GetCollectionSequencesPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetCollectionSequencesPageDataQuery = {
+	__typename?: 'Query';
+	collection: Maybe<{
+		__typename?: 'Collection';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		sequences: {
+			__typename?: 'SequenceConnection';
+			nodes: Maybe<
+				Array<{
+					__typename?: 'Sequence';
 					id: string;
 					title: string;
-					description: Maybe<string>;
+					canonicalPath: string;
+					contentType: SequenceContentType;
 					duration: number;
-					hasVideo: boolean;
-					recordingDate: Maybe<string>;
-					canonicalUrl: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-					}>;
-					feedVideoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-					}>;
+					summary: string;
+					viewerHasFavorited: boolean;
+					viewerPlaybackCompletedPercentage: number;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes: Maybe<
+							Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>
+						>;
+					};
+					writers: {
+						__typename?: 'PersonConnection';
+						nodes: Maybe<
+							Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>
+						>;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
 				}>
 			>;
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8482,7 +8523,9 @@ export type GetPresenterDetailPathsDataQuery = {
 	__typename?: 'Query';
 	persons: {
 		__typename?: 'PersonConnection';
-		nodes: Maybe<Array<{ __typename?: 'Person'; id: string; name: string }>>;
+		nodes: Maybe<
+			Array<{ __typename?: 'Person'; id: string; canonicalPath: string }>
+		>;
 	};
 };
 
@@ -8537,8 +8580,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 		__typename?: 'Person';
 		id: string;
 		name: string;
-		summary: string;
-		description: string;
+		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -8612,6 +8654,67 @@ export type GetPresenterRecordingsPageDataQuery = {
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
 	}>;
+};
+
+export type GetPresenterSequencesPageDataQueryVariables = Exact<{
+	language: Language;
+	id: Scalars['ID'];
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetPresenterSequencesPageDataQuery = {
+	__typename?: 'Query';
+	person: Maybe<{
+		__typename?: 'Person';
+		id: string;
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	sequences: {
+		__typename?: 'SequenceConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Sequence';
+				id: string;
+				title: string;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				writers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
 };
 
 export type GetSeriesDetailPageDataQueryVariables = Exact<{
@@ -11560,21 +11663,19 @@ export const useGetCollectionListPathsDataQuery = <
 		>(GetCollectionListPathsDataDocument, variables),
 		options
 	);
-export const GetCollectionRecordingsPageDataDocument = `
-    query getCollectionRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
+export const GetCollectionPresentersPageDataDocument = `
+    query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
   collection(id: $id) {
     id
     title
-    startDate
-    endDate
-    sponsor {
-      id
-      title
-    }
-    recordings(offset: $offset, first: $first) {
+    canonicalPath(useFuturePath: true)
+    persons(
+      offset: $offset
+      first: $first
+      orderBy: [{field: NAME, direction: ASC}]
+    ) {
       nodes {
-        ...recordingList
-        ...writeFeedFile
+        ...cardPerson
       }
       aggregate {
         count
@@ -11582,21 +11683,56 @@ export const GetCollectionRecordingsPageDataDocument = `
     }
   }
 }
-    ${RecordingListFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
-export const useGetCollectionRecordingsPageDataQuery = <
-	TData = GetCollectionRecordingsPageDataQuery,
+    ${CardPersonFragmentDoc}`;
+export const useGetCollectionPresentersPageDataQuery = <
+	TData = GetCollectionPresentersPageDataQuery,
 	TError = unknown
 >(
-	variables: GetCollectionRecordingsPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionRecordingsPageDataQuery, TError, TData>
+	variables: GetCollectionPresentersPageDataQueryVariables,
+	options?: UseQueryOptions<GetCollectionPresentersPageDataQuery, TError, TData>
 ) =>
-	useQuery<GetCollectionRecordingsPageDataQuery, TError, TData>(
-		['getCollectionRecordingsPageData', variables],
+	useQuery<GetCollectionPresentersPageDataQuery, TError, TData>(
+		['getCollectionPresentersPageData', variables],
 		graphqlFetcher<
-			GetCollectionRecordingsPageDataQuery,
-			GetCollectionRecordingsPageDataQueryVariables
-		>(GetCollectionRecordingsPageDataDocument, variables),
+			GetCollectionPresentersPageDataQuery,
+			GetCollectionPresentersPageDataQueryVariables
+		>(GetCollectionPresentersPageDataDocument, variables),
+		options
+	);
+export const GetCollectionSequencesPageDataDocument = `
+    query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
+  collection(id: $id) {
+    id
+    title
+    canonicalPath(useFuturePath: true)
+    sequences(
+      offset: $offset
+      first: $first
+      orderBy: [{field: TITLE, direction: ASC}]
+    ) {
+      nodes {
+        ...cardSequence
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${CardSequenceFragmentDoc}`;
+export const useGetCollectionSequencesPageDataQuery = <
+	TData = GetCollectionSequencesPageDataQuery,
+	TError = unknown
+>(
+	variables: GetCollectionSequencesPageDataQueryVariables,
+	options?: UseQueryOptions<GetCollectionSequencesPageDataQuery, TError, TData>
+) =>
+	useQuery<GetCollectionSequencesPageDataQuery, TError, TData>(
+		['getCollectionSequencesPageData', variables],
+		graphqlFetcher<
+			GetCollectionSequencesPageDataQuery,
+			GetCollectionSequencesPageDataQueryVariables
+		>(GetCollectionSequencesPageDataDocument, variables),
 		options
 	);
 export const GetDiscoverPageDataDocument = `
@@ -11994,7 +12130,7 @@ export const GetPresenterDetailPathsDataDocument = `
   persons(language: $language, first: $first) {
     nodes {
       id
-      name
+      canonicalPath(useFuturePath: true)
     }
   }
 }
@@ -12075,8 +12211,7 @@ export const GetPresenterRecordingsPageDataDocument = `
   person(id: $id) {
     id
     name
-    summary
-    description
+    canonicalPath(useFuturePath: true)
     imageWithFallback {
       url(size: 100)
     }
@@ -12110,6 +12245,47 @@ export const useGetPresenterRecordingsPageDataQuery = <
 			GetPresenterRecordingsPageDataQuery,
 			GetPresenterRecordingsPageDataQueryVariables
 		>(GetPresenterRecordingsPageDataDocument, variables),
+		options
+	);
+export const GetPresenterSequencesPageDataDocument = `
+    query getPresenterSequencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
+  person(id: $id) {
+    id
+    name
+    canonicalPath(useFuturePath: true)
+    imageWithFallback {
+      url(size: 100)
+    }
+  }
+  sequences(
+    language: $language
+    offset: $offset
+    first: $first
+    persons: [{personId: $id, role: SPEAKER}]
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
+  ) {
+    nodes {
+      ...cardSequence
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${CardSequenceFragmentDoc}`;
+export const useGetPresenterSequencesPageDataQuery = <
+	TData = GetPresenterSequencesPageDataQuery,
+	TError = unknown
+>(
+	variables: GetPresenterSequencesPageDataQueryVariables,
+	options?: UseQueryOptions<GetPresenterSequencesPageDataQuery, TError, TData>
+) =>
+	useQuery<GetPresenterSequencesPageDataQuery, TError, TData>(
+		['getPresenterSequencesPageData', variables],
+		graphqlFetcher<
+			GetPresenterSequencesPageDataQuery,
+			GetPresenterSequencesPageDataQueryVariables
+		>(GetPresenterSequencesPageDataDocument, variables),
 		options
 	);
 export const GetSeriesDetailPageDataDocument = `
@@ -13449,10 +13625,16 @@ export async function getCollectionListPathsData<T>(
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
 
-export async function getCollectionRecordingsPageData<T>(
-	variables: ExactAlt<T, GetCollectionRecordingsPageDataQueryVariables>
-): Promise<GetCollectionRecordingsPageDataQuery> {
-	return fetchApi(GetCollectionRecordingsPageDataDocument, { variables });
+export async function getCollectionPresentersPageData<T>(
+	variables: ExactAlt<T, GetCollectionPresentersPageDataQueryVariables>
+): Promise<GetCollectionPresentersPageDataQuery> {
+	return fetchApi(GetCollectionPresentersPageDataDocument, { variables });
+}
+
+export async function getCollectionSequencesPageData<T>(
+	variables: ExactAlt<T, GetCollectionSequencesPageDataQueryVariables>
+): Promise<GetCollectionSequencesPageDataQuery> {
+	return fetchApi(GetCollectionSequencesPageDataDocument, { variables });
 }
 
 export async function getDiscoverPageData<T>(
@@ -13513,6 +13695,12 @@ export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>
 ): Promise<GetPresenterRecordingsPageDataQuery> {
 	return fetchApi(GetPresenterRecordingsPageDataDocument, { variables });
+}
+
+export async function getPresenterSequencesPageData<T>(
+	variables: ExactAlt<T, GetPresenterSequencesPageDataQueryVariables>
+): Promise<GetPresenterSequencesPageDataQuery> {
+	return fetchApi(GetPresenterSequencesPageDataDocument, { variables });
 }
 
 export async function getSeriesDetailPageData<T>(

@@ -7,36 +7,32 @@ import LineHeading from '@components/atoms/lineHeading';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
-import CardRecording from '@components/molecules/card/recording';
+import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
-import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
+import { GetPresenterSequencesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterRecordingsRoute } from '@lib/routes';
+import { makePresenterSequencesRoute } from '@lib/routes';
 
 import UserIcon from '../../../public/img/fa-user.svg';
 
 import styles from './recordings.module.scss';
 
-export type PresenterRecordingsProps = PaginatedProps<
+export type PresenterSequencesProps = PaginatedProps<
 	NonNullable<
-		NonNullable<
-			NonNullable<
-				GetPresenterRecordingsPageDataQuery['person']
-			>['recordings']['nodes']
-		>[0]
+		NonNullable<GetPresenterSequencesPageDataQuery['sequences']['nodes']>[0]
 	>,
-	GetPresenterRecordingsPageDataQuery
-> & { rssPath: string | null };
+	GetPresenterSequencesPageDataQuery
+>;
 
-function PresenterRecordings({
+function PresenterSequences({
 	nodes,
 	data,
 	pagination,
-}: Must<PresenterRecordingsProps>): JSX.Element {
+}: Must<PresenterSequencesProps>): JSX.Element {
 	const { id, name, canonicalPath, imageWithFallback } = data.person as any;
 
 	return (
@@ -47,7 +43,7 @@ function PresenterRecordings({
 					Icon={UserIcon}
 					label={
 						<FormattedMessage
-							id="presenterRecordingsDetail__type"
+							id="presenterSequencesDetail__type"
 							defaultMessage="Speaker"
 						/>
 					}
@@ -65,26 +61,23 @@ function PresenterRecordings({
 			</TeaseHeader>
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
-					id="presenterRecordingsDetail__heading"
-					defaultMessage="All Recordings"
+					id="presenterSequencesDetail__heading"
+					defaultMessage="All Series"
 				/>
 			</LineHeading>
 			<CardGroup>
 				{nodes.map((node) => (
-					<CardRecording recording={node} key={node.canonicalPath} />
+					<CardSequence sequence={node} key={node.canonicalPath} />
 				))}
 			</CardGroup>
 			<Pagination
 				{...pagination}
 				makeRoute={(languageRoute, pageIndex) =>
-					makePresenterRecordingsRoute(languageRoute, id, pageIndex)
+					makePresenterSequencesRoute(languageRoute, id, pageIndex)
 				}
 			/>
 		</Tease>
 	);
 }
 
-export default withFailStates(
-	PresenterRecordings,
-	({ nodes }) => !nodes.length
-);
+export default withFailStates(PresenterSequences, ({ nodes }) => !nodes.length);
