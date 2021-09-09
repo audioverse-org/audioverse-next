@@ -8,7 +8,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/collections/page/[i]';
+} from '@pages/[language]/conferences/page/[i]';
 
 const renderPage = buildStaticRenderer(CollectionList, getStaticProps, {
 	language: 'en',
@@ -24,11 +24,17 @@ function loadData() {
 					{
 						id: 'the_conference_id',
 						title: 'the_conference_title',
+						canonicalPath: 'the_conference_path',
 						imageWithFallback: {
 							url: 'the_conference_image',
 						},
 						sponsor: {
 							title: 'the_conference_sponsor',
+						},
+						allSequences: {
+							aggregate: {
+								count: 0,
+							},
 						},
 					},
 				],
@@ -54,17 +60,6 @@ describe('conference list page', () => {
 		expect(getByText('the_conference_title')).toBeInTheDocument();
 	});
 
-	it('renders conference images', async () => {
-		loadData();
-
-		const { getByAltText } = await renderPage();
-
-		expect(getByAltText('the_conference_title')).toHaveAttribute(
-			'src',
-			'the_conference_image'
-		);
-	});
-
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetCollectionListPathsDataDocument, expect.anything())
@@ -78,25 +73,17 @@ describe('conference list page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/collections/page/1');
-	});
-
-	it('displays sponsor titles', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_conference_sponsor')).toBeInTheDocument();
+		expect(paths).toContain('/en/conferences/page/1');
 	});
 
 	it('links entries', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		const { getByText } = await renderPage();
 
-		expect(getByAltText('the_conference_title').parentElement).toHaveAttribute(
+		expect(getByText('the_conference_title').parentElement).toHaveAttribute(
 			'href',
-			'/en/collections/the_conference_id'
+			'/the_conference_path'
 		);
 	});
 

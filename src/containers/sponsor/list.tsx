@@ -1,33 +1,37 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import PaginatedList from '@components/templates/paginatedList';
+import CardSponsor from '@components/molecules/card/sponsor';
+import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorListRoute, makeSponsorRoute } from '@lib/routes';
+import { makeSponsorListRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SponsorsProps = PaginatedProps<
 	NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>[0],
 	GetSponsorListPageDataQuery
 >;
 
+// TODO: replace with sponsors landing page (featured, recent, trending, etc.)
+
 function Sponsors({ nodes, pagination }: SponsorsProps): JSX.Element {
-	const intl = useIntl();
+	const language = useLanguageRoute();
+
 	return (
-		<PaginatedList
-			pageTitle={intl.formatMessage({
-				id: 'sponsorsList__title',
-				defaultMessage: 'Sponsors',
-				description: 'Sponsors list page title',
-			})}
-			nodes={nodes}
-			makePageRoute={makeSponsorListRoute}
-			makeEntryRoute={(l, n) => makeSponsorRoute(l, n.id)}
-			parseEntryTitle={(n) => n.title}
-			parseEntryImageUrl={(n) => n.imageWithFallback.url}
+		<PaginatedCardList
 			pagination={pagination}
-		/>
+			backUrl={`/${language}/discover/collections`}
+			heading={
+				<FormattedMessage id="sponsorsList__title" defaultMessage="Sponsors" />
+			}
+			makeRoute={makeSponsorListRoute}
+		>
+			{nodes.map((node) => (
+				<CardSponsor sponsor={node} key={node.canonicalPath} />
+			))}
+		</PaginatedCardList>
 	);
 }
 

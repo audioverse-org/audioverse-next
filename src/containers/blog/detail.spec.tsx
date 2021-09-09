@@ -12,7 +12,7 @@ import {
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/blog/[id]';
+} from '@pages/[language]/blog/[id]/[[...slugs]]';
 
 jest.mock('@lib/writeFeedFile');
 

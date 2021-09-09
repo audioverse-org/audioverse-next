@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,15 +8,17 @@ import styles from './copyrightInfo.module.scss';
 
 interface CopyrightInfoProps {
 	recording: CopyrightInfoFragment;
+	useInverse?: boolean;
 }
 
 export default function CopyrightInfo({
 	recording,
+	useInverse,
 }: CopyrightInfoProps): JSX.Element {
 	const copyrightOwner =
 		recording.distributionAgreement?.sponsor?.title || recording.sponsor?.title;
 	return (
-		<div className={styles.text}>
+		<div className={clsx(styles.text, useInverse && styles.inverse)}>
 			<span>
 				<FormattedMessage
 					id={'sermonDetailPage__copyright'}

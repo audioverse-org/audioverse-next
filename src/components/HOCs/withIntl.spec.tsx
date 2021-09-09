@@ -21,7 +21,7 @@ import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
 import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
-import Audiobooks from '@containers/audiobook/list';
+import AudiobooksList from '@containers/audiobook/list';
 import Book from '@containers/bible/book';
 import CollectionDetail from '@containers/collection/detail';
 import CollectionList from '@containers/collection/list';
@@ -40,7 +40,7 @@ import SponsorConferences from '@containers/sponsor/conferences';
 import Sponsors from '@containers/sponsor/list';
 import SponsorSeries from '@containers/sponsor/series';
 import SponsorTeachings from '@containers/sponsor/teachings';
-import Stories from '@containers/story/stories';
+import StoryAlbumsList from '@containers/story/albums/list';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isRecordingFavorited } from '@lib/api';
@@ -314,7 +314,7 @@ describe('localization usage', () => {
 
 	it('localizes audiobooks list page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Audiobooks
+			<AudiobooksList
 				nodes={[
 					{
 						id: 'z',
@@ -333,13 +333,21 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes stories list page', async () => {
+	it('localizes story albums list page', async () => {
 		const screen = await renderWithQueryProvider(
-			<Stories
+			<StoryAlbumsList
 				nodes={[
 					{
 						id: 'the_story_id',
+						canonicalPath: '/the_story_path',
 						duration: 100,
+						contentType: SequenceContentType.StorySeason,
+						speakers: [],
+						recordings: {
+							aggregate: {
+								count: 0,
+							},
+						},
 					} as any,
 				]}
 				pagination={undefined as any}
@@ -361,7 +369,15 @@ describe('localization usage', () => {
 	it('localizes conferences list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<CollectionList
-				nodes={[{ id: 'z' }] as any}
+				nodes={
+					[
+						{
+							id: 'z',
+							canonicalPath: '/conference_path',
+							allSequences: { aggregate: { count: 0 } },
+						},
+					] as any
+				}
 				pagination={undefined as any}
 				data={undefined as any}
 			/>
@@ -414,7 +430,7 @@ describe('localization usage', () => {
 	it('localizes presenter list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<Presenters
-				nodes={[{ id: 'z' }] as any}
+				nodes={[{ id: 'z', canonicalPath: '/presenter_path' }] as any}
 				pagination={undefined as any}
 				data={undefined as any}
 			/>
@@ -427,8 +443,21 @@ describe('localization usage', () => {
 		const screen = await renderWithQueryProvider(
 			<PresenterRecordings
 				rssPath={'rssPath'}
-				nodes={[{ id: 'id' }] as any}
-				data={undefined as any}
+				nodes={
+					[
+						{
+							id: 'id',
+							canonicalPath: 'the_recording_path',
+							contentType: RecordingContentType.Sermon,
+							persons: [],
+						},
+					] as any
+				}
+				data={
+					{
+						person: { name: 'z', imageWithFallback: { url: '' } },
+					} as any
+				}
 				pagination={undefined as any}
 			/>
 		);
@@ -442,8 +471,14 @@ describe('localization usage', () => {
 				nodes={[
 					{
 						id: 'z',
+						canonicalPath: 'the_path',
 						imageWithFallback: {
 							url: 'z',
+						},
+						collections: {
+							aggregate: {
+								count: 0,
+							},
 						},
 					} as any,
 				]}
@@ -460,7 +495,20 @@ describe('localization usage', () => {
 		[SponsorAlbums, { nodes: [{ id: 'z' }] }],
 		[SponsorConferences, { nodes: [{ id: 'z' }] }],
 		[SponsorSeries, { nodes: [{ id: 'z' }] }],
-		[SeriesList, { nodes: [{ id: 'z' }] }],
+		[
+			SeriesList,
+			{
+				nodes: [
+					{
+						id: 'z',
+						canonicalPath: 'the_path',
+						contentType: SequenceContentType.Series,
+						speakers: [],
+						recordings: { aggregate: { count: 0 } },
+					},
+				],
+			},
+		],
 		[
 			SeriesDetail,
 			{ sequence: { id: 'z', recordings: { aggregate: { count: 0 } } } },

@@ -6,7 +6,7 @@ query getBlogDetailData($id: ID!, $language: Language!) {
 			url(size: 2100, cropMode: MAX_SIZE)
 		}
 		body
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 		publishDate
 		readingDuration
 		teaser
@@ -26,7 +26,7 @@ query getBlogDetailStaticPaths($language: Language!, $first: Int) {
 	blogPosts(language: $language, first: $first) {
 		nodes {
 			id
-			canonicalPath
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

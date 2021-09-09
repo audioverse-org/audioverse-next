@@ -7,7 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardStoryFragment } from '@lib/generated/graphql';
 
-import FeatherIcon from '../../../../public/img/icon-feather-solid.svg';
+import FeatherIcon from '../../../../public/img/fa-feather.svg';
 import SponsorLockup from '../sponsorLockup';
 
 import CardRecordingSequenceHat from './recordingSequenceHat';

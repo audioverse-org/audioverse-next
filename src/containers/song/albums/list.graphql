@@ -1,5 +1,9 @@
-query getSongsListPageData($language: Language!) {
-	musicAlbums(language: $language, first: 1000) {
+query getSongAlbumsListPageData(
+	$language: Language!
+	$first: Int
+	$offset: Int
+) {
+	musicAlbums(language: $language, first: $first, offset: $offset) {
 		nodes {
 			id
 			title
@@ -9,6 +13,9 @@ query getSongsListPageData($language: Language!) {
 			sponsor {
 				title
 			}
+		}
+		aggregate {
+			count
 		}
 	}
 	sponsors(language: $language, withMusic: true, first: 1000) {
@@ -24,6 +31,14 @@ query getSongsListPageData($language: Language!) {
 		nodes {
 			id
 			name
+		}
+	}
+}
+
+query getSongAlbumsListPathData($language: Language!) {
+	musicAlbums(language: $language) {
+		aggregate {
+			count
 		}
 	}
 }

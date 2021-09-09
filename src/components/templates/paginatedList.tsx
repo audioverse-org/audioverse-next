@@ -22,7 +22,7 @@ interface PaginatedListProps<T extends Listable> {
 }
 
 // TODO: Delete this component.
-export default function PaginatedList<T extends Listable>({
+export default function OldPaginatedList<T extends Listable>({
 	pageTitle,
 	pageImage,
 	children,

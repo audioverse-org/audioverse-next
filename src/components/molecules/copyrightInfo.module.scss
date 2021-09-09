@@ -1,7 +1,15 @@
+@import '../../styles/common';
+
 .text {
 	font-size: 11px;
 	line-height: 13.31px;
 	p {
 		margin: 0 !important;
+	}
+	a {
+		text-decoration: underline;
+	}
+	&.inverse a:hover {
+		color: $ts-salmon;
 	}
 }

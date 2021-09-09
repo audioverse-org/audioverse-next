@@ -8,7 +8,7 @@ import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './discover.module.scss';
 
-export default function discover({
+export default function Discover({
 	data,
 }: {
 	data: GetDiscoverPageDataQuery;

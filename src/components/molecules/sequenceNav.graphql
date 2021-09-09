@@ -1,8 +1,8 @@
 fragment sequenceNav on Recording {
 	sequencePreviousRecording {
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 	}
 	sequenceNextRecording {
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 	}
 }

@@ -45,6 +45,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
-		(l, n) => makePresenterDetailRoute(l, n.id)
+		(l, n) => makePresenterDetailRoute(l, n.id, n.name)
 	);
 }

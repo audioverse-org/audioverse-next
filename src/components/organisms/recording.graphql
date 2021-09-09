@@ -32,14 +32,14 @@ fragment recording on Recording {
 		}
 	}
 	sponsor {
-		id
 		title
+		canonicalPath(useFuturePath: true)
 	}
 	sequenceIndex
 	sequence {
 		id
 		title
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 		recordings(first: 1000) {
 			nodes {
 				...teaseRecording
@@ -47,8 +47,8 @@ fragment recording on Recording {
 		}
 	}
 	collection {
-		id
 		title
+		canonicalPath(useFuturePath: true)
 	}
 	transcript {
 		text

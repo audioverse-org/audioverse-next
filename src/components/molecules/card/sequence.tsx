@@ -14,7 +14,10 @@ import {
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
+import BookIcon from '../../../../public/img/fa-book.svg';
+import FeatherIcon from '../../../../public/img/fa-feather.svg';
 import ListIcon from '../../../../public/img/fa-list-alt.svg';
+import MusicIcon from '../../../../public/img/fa-music.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
@@ -45,24 +48,95 @@ export default function CardSequence({
 		speakers,
 		writers,
 	} = sequence;
+
+	const {
+		Icon,
+		accentColor,
+		backgroundColor,
+		iconColor,
+		textColor,
+		label,
+		labelColor,
+	} = (
+		{
+			[SequenceContentType.Audiobook]: {
+				Icon: BookIcon,
+				accentColor: BaseColors.SALMON,
+				backgroundColor: BaseColors.BOOK_B,
+				iconColor: BaseColors.WHITE,
+				textColor: BaseColors.LIGHT_TONE,
+				label: intl.formatMessage({
+					id: 'cardSequence_audiobookType',
+					defaultMessage: 'Book',
+				}),
+				labelColor: BaseColors.WHITE,
+			},
+			[SequenceContentType.MusicAlbum]: {
+				Icon: MusicIcon,
+				accentColor: BaseColors.RED,
+				backgroundColor: BaseColors.SONG_B,
+				iconColor: BaseColors.DARK,
+				textColor: BaseColors.MID_TONE,
+				label: intl.formatMessage({
+					id: 'cardSequence_scriptureSongsType',
+					defaultMessage: 'Scripture Songs',
+				}),
+				labelColor: BaseColors.DARK,
+			},
+			[SequenceContentType.Series]: {
+				Icon: ListIcon,
+				accentColor: BaseColors.RED,
+				backgroundColor: BaseColors.CREAM,
+				iconColor: BaseColors.DARK,
+				textColor: BaseColors.MID_TONE,
+				label: intl.formatMessage({
+					id: 'cardSequence_seriesType',
+					defaultMessage: 'Series',
+				}),
+				labelColor: BaseColors.DARK,
+			},
+			[SequenceContentType.StorySeason]: {
+				Icon: FeatherIcon,
+				accentColor: BaseColors.SALMON,
+				backgroundColor: BaseColors.STORY_B,
+				iconColor: BaseColors.WHITE,
+				textColor: BaseColors.LIGHT_TONE,
+				label: intl.formatMessage({
+					id: 'cardSequence_storiesType',
+					defaultMessage: 'Stories',
+				}),
+				labelColor: BaseColors.LIGHT_TONE,
+			},
+		} as const
+	)[contentType];
+
 	const persons =
 		contentType === SequenceContentType.Audiobook ? writers : speakers;
 	return (
 		<Card>
 			<Link href={canonicalPath}>
-				<a className={styles.container}>
+				<a className={clsx(styles.container, styles[contentType])}>
 					<div className={styles.stretch}>
 						<TypeLockup
-							Icon={ListIcon}
-							label={intl.formatMessage({
-								id: 'cardSequence_hatTitle',
-								defaultMessage: 'Series',
-								description: 'Card sequence hat title',
-							})}
-							iconColor={BaseColors.RED}
-							textColor={BaseColors.DARK}
+							Icon={Icon}
+							label={label}
+							iconColor={accentColor}
+							textColor={labelColor}
 						/>
-						<Heading2 unpadded className={styles.title}>
+						<Heading2
+							unpadded
+							sans={
+								contentType === SequenceContentType.MusicAlbum ||
+								contentType === SequenceContentType.StorySeason
+							}
+							className={clsx(
+								styles.title,
+								contentType === SequenceContentType.Audiobook &&
+									styles.audiobookTitle,
+								contentType === SequenceContentType.StorySeason &&
+									styles.storyTitle
+							)}
+						>
 							{title}
 						</Heading2>
 						{summary && (
@@ -76,7 +150,8 @@ export default function CardSequence({
 								{persons.nodes.map((person) => (
 									<PersonLockup
 										person={person}
-										textColor={BaseColors.DARK}
+										textColor={textColor}
+										hoverColor={accentColor}
 										key={person.canonicalPath}
 										isLinked
 										isOptionalLink
@@ -117,8 +192,8 @@ export default function CardSequence({
 			<IconButton
 				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
 				onPress={() => alert('TODO')}
-				color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
-				backgroundColor={BaseColors.CREAM}
+				color={viewerHasFavorited ? accentColor : iconColor}
+				backgroundColor={backgroundColor}
 				className={styles.like}
 			/>
 		</Card>

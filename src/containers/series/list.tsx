@@ -1,11 +1,13 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import PaginatedList from '@components/templates/paginatedList';
+import CardSequence from '@components/molecules/card/sequence';
+import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSeriesListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSeriesDetailRoute, makeSeriesListRoute } from '@lib/routes';
+import { makeSeriesListRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type SeriesListProps = PaginatedProps<
 	NonNullable<GetSeriesListPageDataQuery['serieses']['nodes']>[0],
@@ -13,21 +15,24 @@ export type SeriesListProps = PaginatedProps<
 >;
 
 function SeriesList({ nodes, pagination }: SeriesListProps): JSX.Element {
-	const intl = useIntl();
+	const language = useLanguageRoute();
+
 	return (
-		<>
-			<PaginatedList
-				pageTitle={intl.formatMessage({
-					id: 'seriesList__pageTitle',
-					defaultMessage: 'Series',
-					description: 'Series list page title',
-				})}
-				nodes={nodes}
-				makePageRoute={makeSeriesListRoute}
-				makeEntryRoute={(l, n) => makeSeriesDetailRoute(l, n.id)}
-				pagination={pagination}
-			/>
-		</>
+		<PaginatedCardList
+			pagination={pagination}
+			backUrl={`/${language}/discover/collections`}
+			heading={
+				<FormattedMessage
+					id="seriesList__heading"
+					defaultMessage="All Series"
+				/>
+			}
+			makeRoute={makeSeriesListRoute}
+		>
+			{nodes.map((node) => (
+				<CardSequence sequence={node} key={node.canonicalPath} />
+			))}
+		</PaginatedCardList>
 	);
 }
 

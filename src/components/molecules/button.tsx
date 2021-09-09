@@ -10,8 +10,8 @@ type Props = {
 		| 'primary'
 		| 'primaryInverse'
 		| 'secondary'
-		| 'secondaryInverse'
-		| 'tertiary';
+		| 'secondaryInverse';
+	// | 'tertiary' someday
 	text?: JSX.Element | string;
 	href?: string;
 	onClick?: (e: MouseEvent<HTMLElement>) => void;

@@ -25,7 +25,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getNumberedStaticPaths(
-		'collections',
+		'conferences',
 		getCollectionListPathsData,
 		(d) => d?.collections.aggregate?.count
 	);

@@ -5,6 +5,6 @@ fragment cardPost on BlogPost {
 	publishDate
 	title
 	teaser
-	canonicalPath
+	canonicalPath(useFuturePath: true)
 	readingDuration
 }

@@ -53,7 +53,7 @@ export async function getStaticProps({
 			}),
 			params,
 			response.props.nodes,
-			'sermons/all.xml'
+			'teachings/all.xml'
 		);
 	}
 
@@ -61,7 +61,7 @@ export async function getStaticProps({
 		...response,
 		props: {
 			...response.props,
-			rssPath: `/${base_url}/sermons/all.xml`,
+			rssPath: `/${base_url}/teachings/all.xml`,
 			filter: 'all',
 		},
 	};
@@ -69,7 +69,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getNumberedStaticPaths(
-		'sermons/all',
+		'teachings/all',
 		({ language }) => getSermonListPagePathsData({ language, hasVideo: null }),
 		(d) => d?.sermons.aggregate?.count
 	);

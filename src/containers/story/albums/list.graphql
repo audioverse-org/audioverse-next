@@ -1,0 +1,22 @@
+query getStoriesAlbumsPageData(
+	$language: Language!
+	$first: Int
+	$offset: Int
+) {
+	storySeasons(language: $language, first: $first, offset: $offset) {
+		nodes {
+			...cardSequence
+		}
+		aggregate {
+			count
+		}
+	}
+}
+
+query getStoriesAlbumsPathData($language: Language!) {
+	storySeasons(language: $language) {
+		aggregate {
+			count
+		}
+	}
+}

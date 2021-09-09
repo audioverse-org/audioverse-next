@@ -1,11 +1,12 @@
 query getSeriesListPageData($language: Language!, $offset: Int, $first: Int) {
-	serieses(language: $language, offset: $offset, first: $first) {
+	serieses(
+		language: $language
+		offset: $offset
+		first: $first
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
 		nodes {
-			id
-			title
-			imageWithFallback {
-				url(size: 100)
-			}
+			...cardSequence
 		}
 		aggregate {
 			count

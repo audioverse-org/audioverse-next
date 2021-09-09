@@ -39,7 +39,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/music/browse/sponsors/:id/:slug',
-				destination: '/:lang/sponsors/:id',
+				destination: '/:lang/sponsors/:id/:slug',
 				permanent: true,
 			},
 			{
@@ -59,7 +59,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/sermons/recordings/:id/:slug',
-				destination: '/:lang/sermons/:id/:slug',
+				destination: '/:lang/teachings/:id/:slug',
 				permanent: true,
 			},
 			{
@@ -70,11 +70,6 @@ module.exports = withPWA({
 			{
 				source: '/:lang/sermons/seriess/:id/:slug',
 				destination: '/:lang/series/:id/:slug',
-				permanent: true,
-			},
-			{
-				source: '/:lang/sponsors/:id/:slug',
-				destination: '/:lang/sponsors/:id',
 				permanent: true,
 			},
 			{

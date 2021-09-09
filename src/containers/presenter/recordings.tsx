@@ -1,11 +1,30 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
+import Heading2 from '@components/atoms/heading2';
+import LineHeading from '@components/atoms/lineHeading';
+import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
-import RssLink from '@components/molecules/rssLink';
-import PaginatedList from '@components/templates/paginatedList';
+import Button from '@components/molecules/button';
+import CardRecording from '@components/molecules/card/recording';
+import CardGroup from '@components/molecules/cardGroup';
+import Pagination from '@components/molecules/pagination';
+import Tease from '@components/molecules/tease';
+import TeaseHeader from '@components/molecules/teaseHeader';
+import TypeLockup from '@components/molecules/typeLockup';
 import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterDetailRoute, makeSermonRoute } from '@lib/routes';
+import {
+	makePresenterDetailRoute,
+	makePresenterRecordingsRoute,
+} from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
+
+import UserIcon from '../../../public/img/fa-user.svg';
+import IconBack from '../../../public/img/icon-back-light.svg';
+
+import styles from './recordings.module.scss';
 
 export type PresenterRecordingsProps = PaginatedProps<
 	NonNullable<
@@ -19,30 +38,63 @@ export type PresenterRecordingsProps = PaginatedProps<
 > & { rssPath: string | null };
 
 function PresenterRecordings({
-	rssPath,
 	nodes,
 	data,
 	pagination,
-}: PresenterRecordingsProps): JSX.Element {
+}: Must<PresenterRecordingsProps>): JSX.Element {
+	const language = useLanguageRoute();
+	const { id, name, imageWithFallback } = data.person as any;
+
 	return (
-		<PaginatedList
-			pageTitle={data?.person?.name || ''}
-			pageImage={data?.person?.imageWithFallback.url}
-			nodes={nodes}
-			makePageRoute={(l, i) =>
-				makePresenterDetailRoute(l, data?.person?.id || '', i)
-			}
-			makeEntryRoute={(l, n) => makeSermonRoute(l, n.id)}
-			parseEntryTitle={(n) => n.title}
-			parseEntryImageUrl={(n) => n.imageWithFallback?.url}
-			pagination={pagination}
-		>
-			<RssLink href={rssPath} />
-			<div>{data?.person?.summary}</div>
-			<div
-				dangerouslySetInnerHTML={{ __html: data?.person?.description || '' }}
+		<Tease className={styles.container}>
+			<TeaseHeader>
+				<Button
+					type="secondary"
+					text={
+						<FormattedMessage id="paginatedList__back" defaultMessage="Back" />
+					}
+					Icon={IconBack}
+					href={makePresenterDetailRoute(language, id, name)}
+					className={styles.back}
+				/>
+				<TypeLockup
+					Icon={UserIcon}
+					label={
+						<FormattedMessage
+							id="presenterRecordingsDetail__type"
+							defaultMessage="Speaker"
+						/>
+					}
+					iconColor={BaseColors.RED}
+					textColor={BaseColors.DARK}
+				/>
+				<div className={styles.titleLockup}>
+					<div className={styles.image}>
+						<RoundImage image={imageWithFallback.url} alt={name} />
+					</div>
+					<Heading2 sans unpadded>
+						{name}
+					</Heading2>
+				</div>
+			</TeaseHeader>
+			<LineHeading color={BaseColors.RED}>
+				<FormattedMessage
+					id="presenterRecordingsDetail__heading"
+					defaultMessage="All Recordings"
+				/>
+			</LineHeading>
+			<CardGroup>
+				{nodes.map((node) => (
+					<CardRecording recording={node} key={node.canonicalPath} />
+				))}
+			</CardGroup>
+			<Pagination
+				{...pagination}
+				makeRoute={(languageRoute, pageIndex) =>
+					makePresenterRecordingsRoute(languageRoute, id, pageIndex)
+				}
 			/>
-		</PaginatedList>
+		</Tease>
 	);
 }
 

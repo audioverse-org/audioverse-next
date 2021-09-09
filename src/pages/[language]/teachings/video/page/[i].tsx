@@ -24,12 +24,11 @@ export async function getStaticProps({
 
 	const response = await getPaginatedStaticProps(
 		params,
-		async (variables) => {
-			return getSermonListStaticProps({
+		async (variables) =>
+			getSermonListStaticProps({
 				...variables,
-				hasVideo: false,
-			});
-		},
+				hasVideo: true,
+			}),
 		(d) => d.sermons.nodes,
 		(d) => d.sermons.aggregate?.count
 	);
@@ -40,16 +39,16 @@ export async function getStaticProps({
 		...response,
 		props: {
 			...response.props,
-			rssPath: `/${language}/sermons/audio.xml`,
-			filter: 'audio',
+			rssPath: `/${language}/teachings/video.xml`,
+			filter: 'video',
 		},
 	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return getNumberedStaticPaths(
-		'sermons/audio',
-		({ language }) => getSermonListPagePathsData({ language, hasVideo: false }),
+		'teachings/video',
+		({ language }) => getSermonListPagePathsData({ language, hasVideo: true }),
 		(d) => d?.sermons.aggregate?.count
 	);
 }

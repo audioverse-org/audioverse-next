@@ -63,99 +63,97 @@ export default function TeaseRecording({
 		<div className={styles.container}>
 			<Link href={recording.canonicalPath}>
 				<a className={clsx(styles.content, unpadded && styles.unpadded)}>
-					<div className={styles.base}>
-						{index && count && (
-							<div className={styles.part}>
-								<FormattedMessage
-									id={'molecule-teaseRecording__partInfo'}
-									defaultMessage={'Part {index} of {count}'}
-									description={'recording tease part info'}
-									values={{ index, count }}
-								/>
-							</div>
-						)}
-						<div className={styles.title}>
-							<h2>{recording.title}</h2>
-							<div className={styles.play}>
-								<IconButton
-									Icon={IconPlay}
-									onPress={() => session.play()}
-									color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-									backgroundColor={backgroundColor}
-									aria-label={intl.formatMessage({
-										id: 'playButton__playLabel',
-										defaultMessage: 'play',
-										description: 'play button play label',
-									})}
-								/>
-							</div>
+					{index && count && (
+						<div className={styles.part}>
+							<FormattedMessage
+								id={'molecule-teaseRecording__partInfo'}
+								defaultMessage={'Part {index} of {count}'}
+								description={'recording tease part info'}
+								values={{ index, count }}
+							/>
 						</div>
-						{!hideSpeakers && (
-							<div className={styles.speakers}>
-								{(personsExpanded
-									? recording.persons
-									: recording.persons.slice(0, 2)
-								).map((p) => (
-									<div key={p.canonicalPath} className={styles.presenter}>
-										<PersonLockup
-											person={p}
-											textColor={personTextColor}
-											isLinked
-											isOptionalLink
-											hoverColor={
-												isDarkTheme ? BaseColors.SALMON : BaseColors.RED
-											}
-										/>
-									</div>
-								))}
-								{recording.persons.length > 2 && (
-									<div
-										className={clsx(
-											styles.morePersons,
-											isDarkTheme && styles.dark
+					)}
+					<div className={styles.title}>
+						<h2>{recording.title}</h2>
+						<div className={styles.play}>
+							<IconButton
+								Icon={IconPlay}
+								onPress={() => session.play()}
+								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
+								backgroundColor={backgroundColor}
+								aria-label={intl.formatMessage({
+									id: 'playButton__playLabel',
+									defaultMessage: 'play',
+									description: 'play button play label',
+								})}
+							/>
+						</div>
+					</div>
+					{!hideSpeakers && (
+						<div className={styles.speakers}>
+							{(personsExpanded
+								? recording.persons
+								: recording.persons.slice(0, 2)
+							).map((p) => (
+								<div key={p.canonicalPath} className={styles.presenter}>
+									<PersonLockup
+										person={p}
+										textColor={personTextColor}
+										isLinked
+										isOptionalLink
+										hoverColor={
+											isDarkTheme ? BaseColors.SALMON : BaseColors.RED
+										}
+									/>
+								</div>
+							))}
+							{recording.persons.length > 2 && (
+								<div
+									className={clsx(
+										styles.morePersons,
+										isDarkTheme && styles.dark
+									)}
+									onClick={(e) => {
+										e.preventDefault();
+										setPersonsExpanded(!personsExpanded);
+									}}
+								>
+									{personsExpanded ? <IconClosure /> : <IconDisclosure />}
+									<Heading6 sans loose unpadded uppercase>
+										{personsExpanded ? (
+											<FormattedMessage
+												id="molecule-teaseRecording__lessPersons"
+												defaultMessage="Show less"
+											/>
+										) : (
+											<FormattedMessage
+												id="molecule-teaseRecording__morePersons"
+												defaultMessage="{count} more"
+												values={{
+													count: recording.persons.length - 2,
+												}}
+											/>
 										)}
-										onClick={(e) => {
-											e.preventDefault();
-											setPersonsExpanded(!personsExpanded);
-										}}
-									>
-										{personsExpanded ? <IconClosure /> : <IconDisclosure />}
-										<Heading6 sans loose unpadded uppercase>
-											{personsExpanded ? (
-												<FormattedMessage
-													id="molecule-teaseRecording__lessPersons"
-													defaultMessage="Show less"
-												/>
-											) : (
-												<FormattedMessage
-													id="molecule-teaseRecording__morePersons"
-													defaultMessage="{count} more"
-													values={{
-														count: recording.persons.length - 2,
-													}}
-												/>
-											)}
-										</Heading6>
-									</div>
-								)}
-							</div>
-						)}
-						<div className={styles.flexGrow}>
-							<div
-								className={clsx(
-									styles.details,
-									isRecordingFavorited && styles.detailsWithLike
-								)}
-							>
-								<span className={styles.duration}>
-									{useFormattedDuration(session.duration)}
+									</Heading6>
+								</div>
+							)}
+						</div>
+					)}
+					<div className={styles.flexGrow}>
+						<div
+							className={clsx(
+								styles.details,
+								isRecordingFavorited && styles.detailsWithLike
+							)}
+						>
+							<span className={styles.duration}>
+								{useFormattedDuration(session.duration)}
+							</span>
+							{progress > 0 && (
+								<span className={styles.progress}>
+									<ProgressBar progress={progress} />
 								</span>
-								{progress > 0 && (
-									<span className={styles.progress}>
-										<ProgressBar progress={progress} />
-									</span>
-								)}
-							</div>
+							)}
 						</div>
 					</div>
 				</a>

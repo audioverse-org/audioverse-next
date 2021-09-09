@@ -7,10 +7,10 @@ import {
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-import { getStaticPaths } from '@pages/[language]/sermons/video/page/[i]';
+import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
 import SermonList, {
 	getStaticProps,
-} from '@pages/[language]/sermons/video/page/[i]';
+} from '@pages/[language]/teachings/video/page/[i]';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
 	i: '1',
@@ -31,7 +31,7 @@ describe('sermon video list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/video/page/1');
+		expect(result.paths).toContain('/es/teachings/video/page/1');
 	});
 
 	it('gets video filtered sermons', async () => {
@@ -61,7 +61,7 @@ describe('sermon video list page', () => {
 
 		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
 			'href',
-			'/en/sermons/video.xml'
+			'/en/teachings/video.xml'
 		);
 	});
 
@@ -71,6 +71,6 @@ describe('sermon video list page', () => {
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/sermons/video/page/1');
+		expect(link.href).toContain('/en/teachings/video/page/1');
 	});
 });

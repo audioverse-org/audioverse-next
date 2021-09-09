@@ -1,6 +1,8 @@
 import _ from 'lodash';
 
-import Audiobooks, { AudiobooksProps } from '@containers/audiobook/list';
+import AudiobooksList, {
+	AudiobooksListProps,
+} from '@containers/audiobook/list';
 import { LANGUAGES } from '@lib/constants';
 import {
 	getAudiobookListPageData,
@@ -9,9 +11,9 @@ import {
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
-export default Audiobooks;
+export default AudiobooksList;
 
-export type AudiobooksStaticProps = StaticProps<AudiobooksProps>;
+export type AudiobooksStaticProps = StaticProps<AudiobooksListProps>;
 
 export interface GetStaticPropsArgs {
 	params: { language: string };

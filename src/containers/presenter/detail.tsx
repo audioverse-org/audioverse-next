@@ -101,8 +101,8 @@ function PresenterDetail({
 					Icon={UserIcon}
 					label={intl.formatMessage({
 						id: `presenterDetail__type`,
-						defaultMessage: 'Conference',
-						description: `Collection Detail type label`,
+						defaultMessage: 'Speaker',
+						description: `Person Detail type label`,
 					})}
 					iconColor={BaseColors.RED}
 					textColor={BaseColors.DARK}

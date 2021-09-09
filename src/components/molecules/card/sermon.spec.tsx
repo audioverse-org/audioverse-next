@@ -16,8 +16,9 @@ describe('card sermon', () => {
 			},
 		});
 
-		expect(
-			getByText('the_title').parentElement?.parentElement?.parentElement
-		).toHaveAttribute('href', '/the_path');
+		expect(getByText('the_title').parentElement?.parentElement).toHaveAttribute(
+			'href',
+			'/the_path'
+		);
 	});
 });

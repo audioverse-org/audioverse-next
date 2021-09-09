@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -21,7 +22,20 @@ const renderPage = buildStaticRenderer(SeriesList, getStaticProps, {
 
 const loadData = buildLoader(GetSeriesListPageDataDocument, {
 	serieses: {
-		nodes: [{ id: 'the_series_id', title: 'the_series_title' }],
+		nodes: [
+			{
+				id: 'the_series_id',
+				title: 'the_series_title',
+				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
+				speakers: [],
+				recordings: {
+					aggregate: {
+						count: 0,
+					},
+				},
+			},
+		],
 	},
 	aggregate: {
 		count: 1,
@@ -54,10 +68,9 @@ describe('series list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_series_title')).toHaveAttribute(
-			'href',
-			'/en/series/the_series_id/page/1'
-		);
+		expect(
+			getByText('the_series_title').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_series_path');
 	});
 
 	it('renders page title', async () => {

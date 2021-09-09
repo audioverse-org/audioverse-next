@@ -10,6 +10,7 @@ export enum BaseColors {
 	BOOK_B = 'bookB',
 	BOOK_H = 'bookH',
 	SONG_B = 'songB',
+	SONG_H = 'songH',
 	STORY_B = 'storyB',
 	STORY_H = 'storyH',
 	TOPIC_B = 'topicB',

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import PaginatedList from '@components/templates/paginatedList';
+import OldPaginatedList from '@components/templates/paginatedList';
 import { renderWithIntl } from '@lib/test/helpers';
 
 describe('paginated list template', () => {
 	it('does not render image if none provided', async () => {
 		const { queryByAltText } = await renderWithIntl(
-			<PaginatedList
+			<OldPaginatedList
 				pageTitle={'the_title'}
 				nodes={[]}
 				makePageRoute={undefined as any}

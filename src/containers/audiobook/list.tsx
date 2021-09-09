@@ -1,57 +1,41 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
 import withFailStates from '@components/HOCs/withFailStates';
-import Button from '@components/molecules/button';
 import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
+import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeAudiobookListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-
-import styles from './list.module.scss';
-
-export type AudiobooksProps = PaginatedProps<
+export type AudiobooksListProps = PaginatedProps<
 	NonNullable<GetAudiobookListPageDataQuery['audiobooks']['nodes']>[0],
 	any
 >;
 
-function Audiobooks({ nodes, pagination }: AudiobooksProps): JSX.Element {
+export function AudiobooksList({
+	nodes,
+	pagination,
+}: AudiobooksListProps): JSX.Element {
 	const language = useLanguageRoute();
 	return (
-		<>
-			<Button
-				type="secondary"
-				text={
-					<FormattedMessage id="audiobookList__back" defaultMessage="Back" />
-				}
-				Icon={IconBack}
-				href={`/${language}/collections`}
-				className={styles.back}
-			/>
-			<Heading1 className={styles.heading}>
+		<PaginatedCardList
+			pagination={pagination}
+			backUrl={`/${language}/discover/collections`}
+			heading={
 				<FormattedMessage
 					id="audiobookList__heading"
 					defaultMessage="All Audiobooks"
 				/>
-			</Heading1>
-			<CardGroup>
-				{nodes.map((book) => (
-					<CardSequence sequence={book} key={book.canonicalPath} />
-				))}
-			</CardGroup>
-			<Pagination
-				current={pagination.current}
-				total={pagination.total}
-				makeRoute={makeAudiobookListRoute}
-			/>
-		</>
+			}
+			makeRoute={makeAudiobookListRoute}
+		>
+			{nodes.map((node) => (
+				<CardSequence sequence={node} key={node.canonicalPath} />
+			))}
+		</PaginatedCardList>
 	);
 }
 
-export default withFailStates(Audiobooks, ({ nodes }) => !nodes.length);
+export default withFailStates(AudiobooksList, ({ nodes }) => !nodes.length);

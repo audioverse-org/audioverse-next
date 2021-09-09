@@ -23,7 +23,7 @@ import {
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/all/page/[i]';
+} from '@pages/[language]/teachings/all/page/[i]';
 
 jest.mock('next/router');
 jest.mock('fs');
@@ -84,7 +84,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/all/page/1');
+		expect(result.paths).toContain('/en/teachings/all/page/1');
 	});
 
 	it('generates in all languages', async () => {
@@ -92,7 +92,7 @@ describe('sermons list page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/all/page/1');
+		expect(result.paths).toContain('/es/teachings/all/page/1');
 	});
 
 	it('sets proper fallback strategy', async () => {
@@ -201,7 +201,7 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/sermons/all/page/1');
+		expect(link.href).toContain('/en/teachings/all/page/1');
 	});
 
 	it('revalidates static pages', async () => {
@@ -219,7 +219,7 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
-			'/en/sermons/all/page/1'
+			'/en/teachings/all/page/1'
 		);
 	});
 
@@ -230,7 +230,7 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
-			'/es/sermons/all/page/1'
+			'/es/teachings/all/page/1'
 		);
 	});
 
@@ -241,7 +241,7 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
 			'href',
-			'/en/sermons/video/page/1'
+			'/en/teachings/video/page/1'
 		);
 	});
 
@@ -252,14 +252,14 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
 			'href',
-			'/en/sermons/audio/page/1'
+			'/en/teachings/audio/page/1'
 		);
 	});
 
 	it('does not include video paths', async () => {
 		const result = await getStaticPaths();
 
-		expect(result.paths).not.toContain('/en/sermons/video/page/1');
+		expect(result.paths).not.toContain('/en/teachings/video/page/1');
 	});
 
 	it('calls writeFeedFile', async () => {
@@ -277,7 +277,7 @@ describe('sermons list page', () => {
 
 		const { calls } = (fs.writeFileSync as any).mock;
 
-		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/sermons/all.xml`);
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/teachings/all.xml`);
 	});
 
 	it('calls mkdirSync', async () => {
@@ -304,7 +304,7 @@ describe('sermons list page', () => {
 
 		const { calls } = (fs.writeFileSync as any).mock;
 
-		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/sermons/all.xml`);
+		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/teachings/all.xml`);
 	});
 
 	it('adds sermons to feed', async () => {
@@ -375,7 +375,7 @@ describe('sermons list page', () => {
 
 		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
 			'href',
-			'/en/sermons/all.xml'
+			'/en/teachings/all.xml'
 		);
 	});
 
@@ -396,7 +396,7 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage({ params: { language: 'es' } }),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/es/sermons/all/page/1');
+		expect(link.href).toContain('/es/teachings/all/page/1');
 	});
 
 	it('sets rss head link', async () => {
@@ -406,7 +406,7 @@ describe('sermons list page', () => {
 
 		const head = getByTestId('head');
 
-		expect(head.innerHTML).toContain('/en/sermons/all.xml');
+		expect(head.innerHTML).toContain('/en/teachings/all.xml');
 	});
 
 	it('includes format indicators', async () => {

@@ -41,7 +41,7 @@ export default function CardPerson({
 						<Heading2 unpadded sans className={styles.title}>
 							{image && (
 								<div className={styles.image}>
-									<RoundImage image={image.url} />
+									<RoundImage image={image.url} alt={name} />
 								</div>
 							)}
 							{name}

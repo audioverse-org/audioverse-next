@@ -3,14 +3,14 @@ query getPresenterListPageData(
 	$offset: Int
 	$first: Int
 ) {
-	persons(language: $language, offset: $offset, first: $first) {
+	persons(
+		language: $language
+		offset: $offset
+		first: $first
+		orderBy: [{ field: NAME, direction: ASC }]
+	) {
 		nodes {
-			id
-			name
-			summary
-			imageWithFallback {
-				url(size: 100)
-			}
+			...cardPerson
 		}
 		aggregate {
 			count

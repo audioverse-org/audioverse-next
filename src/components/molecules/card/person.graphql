@@ -1,7 +1,7 @@
 fragment cardPerson on Person {
 	id
 	name
-	canonicalPath
+	canonicalPath(useFuturePath: true)
 	image {
 		id
 		url(size: 64)

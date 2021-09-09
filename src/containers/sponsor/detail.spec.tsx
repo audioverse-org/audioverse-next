@@ -8,7 +8,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SponsorDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]';
+} from '@pages/[language]/sponsors/[id]/[[...slugs]]';
 
 const renderPage = buildStaticRenderer(SponsorDetail, getStaticProps, {
 	language: 'en',

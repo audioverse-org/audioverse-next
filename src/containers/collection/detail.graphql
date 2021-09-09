@@ -14,7 +14,7 @@ query getCollectionDetailPageData($id: ID!) {
 		sponsor {
 			id
 			title
-			canonicalPath
+			canonicalPath(useFuturePath: true)
 			...sponsorLockup
 		}
 		persons(

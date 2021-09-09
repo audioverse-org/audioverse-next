@@ -23,12 +23,6 @@ import {
 	RecordingContentType,
 	RecordingFragment,
 } from '@lib/generated/graphql';
-import {
-	makeCollectionRoute,
-	makeSeriesDetailRoute,
-	makeSponsorRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
@@ -39,7 +33,6 @@ interface RecordingProps {
 }
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
-	const langRoute = useLanguageRoute();
 	const intl = useIntl();
 	const {
 		contentType,
@@ -65,9 +58,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	});
 	const index = sequenceIndex;
 	const seriesItems = sequence?.recordings?.nodes;
-	const seriesDetailRoute = sequence
-		? makeSeriesDetailRoute(langRoute, sequence.id)
-		: '';
 
 	const {
 		accentColor,
@@ -171,7 +161,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={seriesDetailRoute}>
+					<Link href={sequence.canonicalPath}>
 						<a className={linkClass}>{sequence.title}</a>
 					</Link>
 				</p>
@@ -189,7 +179,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={makeCollectionRoute(langRoute, collection.id)}>
+					<Link href={collection.canonicalPath}>
 						<a className={linkClass}>{collection.title}</a>
 					</Link>
 				</p>
@@ -207,7 +197,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={makeSponsorRoute(langRoute, sponsor.id)}>
+					<Link href={sponsor.canonicalPath}>
 						<a className={linkClass}>{sponsor.title}</a>
 					</Link>
 				</p>
@@ -307,7 +297,10 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 						<HorizontalRule color={textRuleColor} />
 
-						<CopyrightInfo recording={recording} />
+						<CopyrightInfo
+							recording={recording}
+							useInverse={useInverseButtons}
+						/>
 					</div>
 				</div>
 

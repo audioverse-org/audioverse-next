@@ -3,20 +3,20 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { GetSongsListPageDataQuery } from '@lib/generated/graphql';
+import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
 import {
-	makeAlbumRoute,
 	makeBibleMusicRoute,
+	makeSongAlbumDetailRoute,
 	makeSponsorMusicRoute,
 	makeTagMusicRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-export interface SongsProps {
-	data: GetSongsListPageDataQuery;
+export interface SongAlbumsListProps {
+	data: GetSongAlbumsListPageDataQuery | null;
 }
 
-function SongAlbumList({ data }: SongsProps): JSX.Element {
+function SongAlbumList({ data }: SongAlbumsListProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -766,7 +766,7 @@ function SongAlbumList({ data }: SongsProps): JSX.Element {
 			<ul>
 				{data?.musicAlbums?.nodes?.map((n) => (
 					<li key={n.id}>
-						<Link href={makeAlbumRoute(languageRoute, n.id)}>
+						<Link href={makeSongAlbumDetailRoute(languageRoute, n.id)}>
 							<a>
 								<Image
 									src={n.imageWithFallback.url}

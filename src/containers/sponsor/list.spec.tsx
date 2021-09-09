@@ -24,8 +24,14 @@ function loadData() {
 					{
 						id: 'the_sponsor_id',
 						title: 'the_sponsor_title',
+						canonicalPath: 'the_sponsor_path',
 						imageWithFallback: {
 							url: 'the_sponsor_image',
+						},
+						collections: {
+							aggregate: {
+								count: 0,
+							},
 						},
 					},
 				],
@@ -71,21 +77,9 @@ describe('sponsor list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sponsor_title')).toHaveAttribute(
-			'href',
-			'/en/sponsors/the_sponsor_id'
-		);
-	});
-
-	it('loads images', async () => {
-		loadData();
-
-		const { getByAltText } = await renderPage();
-
-		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
-			'src',
-			'the_sponsor_image'
-		);
+		expect(
+			getByText('the_sponsor_title').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_sponsor_path');
 	});
 
 	it('links pagination', async () => {

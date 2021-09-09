@@ -8,7 +8,7 @@ export const makePaginationRoute = (
 export const makeSermonRoute = (
 	languageRoute: string,
 	sermonId: string
-): string => `/${languageRoute}/sermons/${sermonId}`;
+): string => `/${languageRoute}/teachings/${sermonId}`;
 
 export const makeAudiobookTrackRoute = (
 	languageRoute: string,
@@ -18,9 +18,8 @@ export const makeAudiobookTrackRoute = (
 export const makePresenterDetailRoute = (
 	languageRoute: string,
 	personId: string,
-	page?: number | string
-): string =>
-	`/${languageRoute}/presenters/${personId}${page ? `/page/${page}` : ''}`;
+	personName: string
+): string => `/${languageRoute}/presenters/${personId}/${slug(personName)}`;
 
 export const makePresenterListRoute = (
 	languageRoute: string,
@@ -78,28 +77,28 @@ export const makeSermonListRoute = (
 	languageRoute: string,
 	filter: string,
 	page: number | string
-): string => `/${languageRoute}/sermons/${filter}/page/${page}`;
+): string => `/${languageRoute}/teachings/${filter}/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteAll = (
 	languageRoute: string,
 	page: number | string
-): string => `/${languageRoute}/sermons/all/page/${page}`;
+): string => `/${languageRoute}/teachings/all/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteVideo = (
 	languageRoute: string,
 	page: number | string
-): string => `/${languageRoute}/sermons/video/page/${page}`;
+): string => `/${languageRoute}/teachings/video/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteAudio = (
 	languageRoute: string,
 	page: number | string
-): string => `/${languageRoute}/sermons/audio/page/${page}`;
+): string => `/${languageRoute}/teachings/audio/page/${page}`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;
@@ -135,15 +134,17 @@ export const makeStoryAlbumRoute = (
 	storyAlbumId: string
 ): string => `/${languageRoute}/stories/albums/${storyAlbumId}`;
 
-export const makeStoryListPage = (
+export const makeStoryAlbumListPage = (
 	languageRoute: string,
 	page: number | string
-): string => `/${languageRoute}/stories/page/${page}`;
+): string => `/${languageRoute}/stories/albums/page/${page}`;
 
-export const makeSongsListRoute = (languageRoute: string): string =>
-	`/${languageRoute}/songs`;
+export const makeSongAlbumsListRoute = (
+	languageRoute: string,
+	page: number | string
+): string => `/${languageRoute}/songs/albums/page/${page}`;
 
-export const makeAlbumRoute = (
+export const makeSongAlbumDetailRoute = (
 	languageRoute: string,
 	albumId: string
 ): string => `/${languageRoute}/songs/albums/${albumId}`;
@@ -171,14 +172,14 @@ export const makeTagMusicRoute = (
 export const makeCollectionRoute = (
 	languageRoute: string,
 	conferenceId: string
-): string => `/${languageRoute}/collections/${conferenceId}`;
+): string => `/${languageRoute}/conferences/${conferenceId}`;
 
 export const makeCollectionSequencesRoute = (
 	languageRoute: string,
 	conferenceId: string,
 	page = 1
 ): string =>
-	`/${languageRoute}/collections/${conferenceId}/sequences${
+	`/${languageRoute}/conferences/${conferenceId}/sequences${
 		page ? `/page/${page}` : ''
 	}`;
 
@@ -186,7 +187,7 @@ export const makeConferenceRecordingsRoute = (
 	languageRoute: string,
 	conferenceId: string,
 	page: number | string = 1
-): string => `/${languageRoute}/collections/${conferenceId}/page/${page}`;
+): string => `/${languageRoute}/conferences/${conferenceId}/page/${page}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,

@@ -10,14 +10,7 @@ query getCollectionListPageData(
 		orderBy: [{ field: TITLE, direction: ASC }]
 	) {
 		nodes {
-			id
-			title
-			imageWithFallback {
-				url(size: 100)
-			}
-			sponsor {
-				title
-			}
+			...cardCollection
 		}
 		aggregate {
 			count

@@ -43,11 +43,11 @@ describe('pagination component', () => {
 	it('sets next href', async () => {
 		const { getByText } = await renderPagination({
 			total: 2,
-			makeRoute: (l, i) => `/${l}/sermons/page/${i}`,
+			makeRoute: (l, i) => `/${l}/teachings/page/${i}`,
 		});
 		const link = getByText('Next') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/sermons/page/2');
+		expect(link.href).toContain('/en/teachings/page/2');
 	});
 
 	it('includes dots', async () => {
