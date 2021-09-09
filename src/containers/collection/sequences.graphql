@@ -1,8 +1,7 @@
 query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
 	collection(id: $id) {
 		id
-		title
-		canonicalPath(useFuturePath: true)
+		...collectionPivot
 		sequences(
 			offset: $offset
 			first: $first

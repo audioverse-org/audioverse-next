@@ -18,9 +18,9 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
+import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
-import TypeLockup from '@components/molecules/typeLockup';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makePresenterAlsoAppearsInRoute,
@@ -30,7 +30,6 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import UserIcon from '../../../public/img/fa-user.svg';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
@@ -97,16 +96,7 @@ function PresenterDetail({
 	return (
 		<Tease className={styles.container}>
 			<TeaseHeader>
-				<TypeLockup
-					Icon={UserIcon}
-					label={intl.formatMessage({
-						id: `presenterDetail__type`,
-						defaultMessage: 'Speaker',
-						description: `Person Detail type label`,
-					})}
-					iconColor={BaseColors.RED}
-					textColor={BaseColors.DARK}
-				/>
+				<PersonTypeLockup />
 				<div className={styles.titleLockup}>
 					<div className={styles.image}>
 						<RoundImage image={imageWithFallback.url} alt={name} />

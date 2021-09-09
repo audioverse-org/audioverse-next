@@ -6,20 +6,30 @@ import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
+import LineHeading from '@components/atoms/lineHeading';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
+import Button from '@components/molecules/button';
 import CardCollection from '@components/molecules/card/collection';
+import CardRecording from '@components/molecules/card/recording';
+import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
+import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
-import TypeLockup from '@components/molecules/typeLockup';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
+import {
+	makeSponsorConferencesRoute,
+	makeSponsorSeriesRoute,
+	makeSponsorTeachingsRoute,
+} from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
-import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
+import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
 import ShareIcon from '../../../public/img/icon-share-light.svg';
@@ -30,8 +40,10 @@ export type SponsorDetailProps = GetSponsorDetailPageDataQuery;
 
 function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
 
 	const {
+		id,
 		collections,
 		description,
 		imageWithFallback,
@@ -39,6 +51,8 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 		title,
 		website,
 		viewerHasFavorited,
+		recordings,
+		sequences,
 	} = sponsor;
 	const image = imageWithFallback.url;
 
@@ -80,16 +94,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	return (
 		<Tease className={styles.container}>
 			<TeaseHeader>
-				<TypeLockup
-					Icon={UserPlusIcon}
-					label={intl.formatMessage({
-						id: `sponsorDetail__type`,
-						defaultMessage: 'Sponsor',
-						description: `Sponsor Detail type label`,
-					})}
-					iconColor={BaseColors.SALMON}
-					textColor={BaseColors.DARK}
-				/>
+				<SponsorTypeLockup />
 				<div className={styles.titleLockup}>
 					{image && (
 						<div className={styles.logo}>
@@ -102,12 +107,28 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				</div>
 				<div className={styles.row}>
 					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-						<FormattedMessage
-							id="sponsorDetail__collectionCountLabel"
-							defaultMessage="{count} Conferences"
-							description="Sponsor Detail collection count label"
-							values={{ count: collections.aggregate?.count }}
-						/>
+						{collections.nodes?.length ? (
+							<FormattedMessage
+								id="sponsorDetail__collectionCountLabel"
+								defaultMessage="{count} Conferences"
+								description="Sponsor Detail collection count label"
+								values={{ count: collections.aggregate?.count }}
+							/>
+						) : sequences.nodes?.length ? (
+							<FormattedMessage
+								id="sponsorDetail__sequencesCountLabel"
+								defaultMessage="{count} Series"
+								description="Sponsor Detail series count label"
+								values={{ count: sequences.aggregate?.count }}
+							/>
+						) : (
+							<FormattedMessage
+								id="sponsorDetail__recordingsCountLabel"
+								defaultMessage="{count} Teachings"
+								description="Sponsor Detail teachings count label"
+								values={{ count: recordings.aggregate?.count }}
+							/>
+						)}
 					</Heading6>
 					{/* TODO: make icons functional */}
 					<IconButton
@@ -128,17 +149,91 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
 			</TeaseHeader>
-			{collections.nodes?.length ? (
-				<CardGroup className={styles.cardGroup}>
-					{collections.nodes.map((collection) => (
-						<CardCollection
-							collection={collection}
-							key={collection.canonicalPath}
+			{recordings.nodes?.length ? (
+				<>
+					<LineHeading>
+						<FormattedMessage
+							id="sponsorDetail__recentLabel"
+							defaultMessage="Recent Teachings"
 						/>
-					))}
-				</CardGroup>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{recordings.nodes.map((recording) => (
+							<CardRecording
+								recording={recording}
+								key={recording.canonicalPath}
+							/>
+						))}
+					</CardGroup>
+					<Button
+						type="secondary"
+						href={makeSponsorTeachingsRoute(languageRoute, id)}
+						text={intl.formatMessage({
+							id: 'sponsorDetail__recentAllLabel',
+							defaultMessage: 'See All Recent Teachings',
+						})}
+						Icon={ForwardIcon}
+						iconPosition="left"
+						className={styles.seeAllButton}
+					/>
+				</>
 			) : null}
-			{/* TODO: add other types: recordings, etc. */}
+			{sequences.nodes?.length ? (
+				<>
+					<LineHeading>
+						<FormattedMessage
+							id="sponsorDetail__seriesLabel"
+							defaultMessage="Series"
+							description="Collection Detail series label"
+						/>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{sequences.nodes.map((sequence) => (
+							<CardSequence sequence={sequence} key={sequence.canonicalPath} />
+						))}
+					</CardGroup>
+					<Button
+						type="secondary"
+						href={makeSponsorSeriesRoute(languageRoute, id)}
+						text={intl.formatMessage({
+							id: 'sponsorDetail__seriesAllLabel',
+							defaultMessage: 'See All Series',
+						})}
+						Icon={ForwardIcon}
+						iconPosition="left"
+						className={styles.seeAllButton}
+					/>
+				</>
+			) : null}
+			{collections.nodes?.length ? (
+				<>
+					<LineHeading>
+						<FormattedMessage
+							id="sponsorDetail__conferencesLabel"
+							defaultMessage="Conferences"
+						/>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{collections.nodes.map((collection) => (
+							<CardCollection
+								collection={collection}
+								key={collection.canonicalPath}
+							/>
+						))}
+					</CardGroup>
+					<Button
+						type="secondary"
+						href={makeSponsorConferencesRoute(languageRoute, id)}
+						text={intl.formatMessage({
+							id: 'sponsorDetail__conferencesAllLabel',
+							defaultMessage: 'See All Conferences',
+						})}
+						Icon={ForwardIcon}
+						iconPosition="left"
+						className={styles.seeAllButton}
+					/>
+				</>
+			) : null}
 		</Tease>
 	);
 }

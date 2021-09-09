@@ -1,0 +1,24 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { BaseColors } from '@components/atoms/baseColors';
+
+import UserPlusIcon from '../../../public/img/fa-user-plus.svg';
+
+import TypeLockup from './typeLockup';
+
+export default function SponsorTypeLockup(): JSX.Element {
+	return (
+		<TypeLockup
+			Icon={UserPlusIcon}
+			label={
+				<FormattedMessage
+					id="sopnsorTypeLockup_type"
+					defaultMessage="Sponsor"
+				/>
+			}
+			iconColor={BaseColors.SALMON}
+			textColor={BaseColors.DARK}
+		/>
+	);
+}

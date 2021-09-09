@@ -2,8 +2,7 @@
 
 .container {
 	padding: 16px 24px;
-	background-color: $ts-dark;
-	color: $ts-white;
+	background-color: $ts-lightTone;
 }
 
 .back {
@@ -11,5 +10,11 @@
 }
 
 .titleLockup {
+	display: flex;
+	align-items: center;
 	margin-bottom: 16px;
+}
+
+.logo {
+	margin-right: 8px;
 }

@@ -1,0 +1,4 @@
+fragment collectionPivot on Collection {
+	title
+	canonicalPath(useFuturePath: true)
+}

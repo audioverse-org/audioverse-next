@@ -22,13 +22,23 @@ const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps, {
 
 const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 	sponsor: {
+		id: 'the_sponsor_id',
 		title: 'the_sponsor_title',
+		imageWithFallback: {
+			url: 'sponsor_image',
+		},
 	},
 	conferences: {
 		nodes: [
 			{
 				id: 'the_conference_id',
 				title: 'the_conference_title',
+				canonicalPath: 'the_conference_path',
+				allSequences: {
+					aggregate: {
+						count: 0,
+					},
+				},
 			},
 		],
 		aggregate: {
@@ -73,10 +83,7 @@ describe('sponsor conferences page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sponsor_title')).toHaveAttribute(
-			'href',
-			'/en/sponsors/the_sponsor_id'
-		);
+		expect(getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('renders page subtitle', async () => {
@@ -84,7 +91,7 @@ describe('sponsor conferences page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Conferences')).toBeInTheDocument();
+		expect(getByText('All Conferences')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {

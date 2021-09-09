@@ -1,16 +1,20 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { BaseColors } from '@components/atoms/baseColors';
+import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
+import CardRecording from '@components/molecules/card/recording';
+import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
-import RecordingList from '@components/molecules/recordingList';
-import RssLink from '@components/molecules/rssLink';
-import { GetSponsorTeachingsPageDataQuery } from '@lib/generated/graphql';
+import {
+	GetSponsorTeachingsPageDataQuery,
+	SponsorPivotFragment,
+} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorRoute, makeSponsorTeachingsRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSponsorTeachingsRoute } from '@lib/routes';
+
+import SponsorPivot from './pivot';
 
 export type SponsorTeachingsProps = PaginatedProps<
 	NonNullable<
@@ -23,40 +27,32 @@ export type SponsorTeachingsProps = PaginatedProps<
 
 function SponsorTeachings({
 	nodes,
-	data,
+	data: { sponsor },
 	pagination,
-	rssPath,
-}: SponsorTeachingsProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	const img = data?.sponsor?.imageWithFallback?.url;
-
+}: Must<SponsorTeachingsProps> & {
+	data: { sponsor: Must<SponsorPivotFragment> };
+}): JSX.Element {
 	return (
-		<>
-			{img && (
-				<Image alt={data?.sponsor?.title} src={img} width={100} height={100} />
-			)}
-			<h1>
-				<Link href={makeSponsorRoute(languageRoute, data?.sponsor?.id || '')}>
-					<a>{data?.sponsor?.title}</a>
-				</Link>
-			</h1>
-			<h2>
+		<SponsorPivot {...{ sponsor }}>
+			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
-					id="sponsorTeachingsPage__pageTitle"
-					defaultMessage="Teachings"
-					description="Sponsor teachings page title"
+					id="sponsorTeachingsDetail__heading"
+					defaultMessage="All Teachings"
 				/>
-			</h2>
-			<RssLink href={rssPath} />
-			<RecordingList recordings={nodes} />
+			</LineHeading>
+			<CardGroup>
+				{nodes.map((node) => (
+					<CardRecording recording={node} key={node.canonicalPath} />
+				))}
+			</CardGroup>
 			<Pagination
 				{...pagination}
-				makeRoute={(l, i) =>
-					makeSponsorTeachingsRoute(l, data?.sponsor?.id || '', i)
+				makeRoute={(languageRoute, pageIndex) =>
+					makeSponsorTeachingsRoute(languageRoute, sponsor.id, pageIndex)
 				}
 			/>
-		</>
+		</SponsorPivot>
 	);
 }
 
-export default withFailStates(SponsorTeachings, ({ nodes }) => !nodes.length);
+export default withFailStates(SponsorTeachings, ({ nodes }) => !nodes?.length);

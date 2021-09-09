@@ -490,11 +490,68 @@ describe('localization usage', () => {
 	});
 
 	const scenarios: [React.ComponentType<any>, any][] = [
-		[SponsorTeachings, { nodes: [{ id: 'z' }] }],
+		[
+			SponsorTeachings,
+			{
+				nodes: [
+					{
+						id: 'z',
+						canonicalPath: 'z',
+						contentType: RecordingContentType.Sermon,
+						persons: [],
+					},
+				],
+				data: {
+					sponsor: {
+						imageWithFallback: {
+							url: 'z',
+						},
+					},
+				},
+			},
+		],
 		[SponsorBooks, { nodes: [{ id: 'z' }] }],
 		[SponsorAlbums, { nodes: [{ id: 'z' }] }],
-		[SponsorConferences, { nodes: [{ id: 'z' }] }],
-		[SponsorSeries, { nodes: [{ id: 'z' }] }],
+		[
+			SponsorConferences,
+			{
+				nodes: [
+					{
+						id: 'z',
+						canonicalPath: 'z',
+						allSequences: { aggregate: { count: 0 } },
+					},
+				],
+				data: {
+					sponsor: {
+						imageWithFallback: {
+							url: 'z',
+						},
+					},
+				},
+			},
+		],
+		[
+			SponsorSeries,
+			{
+				nodes: [
+					{
+						id: 'z',
+						canonicalPath: 'z',
+						contentType: SequenceContentType.Series,
+						speakers: [],
+						recordings: { aggregate: { count: 0 } },
+					},
+				],
+				data: {
+					sponsor: {
+						imageWithFallback: {
+							url: 'z',
+						},
+					},
+				},
+			},
+		],
 		[
 			SeriesList,
 			{

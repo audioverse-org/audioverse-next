@@ -18,8 +18,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		(vars) => getSponsorSeriesPageData({ ...vars, id }),
-		(d) => d.serieses.nodes,
-		(d) => d.serieses.aggregate?.count
+		(d) => d.sequences.nodes,
+		(d) => d.sequences.aggregate?.count
 	);
 }
 

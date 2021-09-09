@@ -1,27 +1,21 @@
 query getSponsorSeriesPageData(
 	$language: Language!
 	$id: ID!
-	$first: Int
 	$offset: Int
+	$first: Int
 ) {
 	sponsor(id: $id) {
-		title
-		imageWithFallback {
-			url(size: 100)
-		}
+		...sponsorPivot
 	}
-	serieses(
+	sequences(
 		language: $language
 		sponsorId: $id
-		first: $first
 		offset: $offset
+		first: $first
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
 	) {
 		nodes {
-			id
-			title
-			imageWithFallback {
-				url(size: 100)
-			}
+			...cardSequence
 		}
 		aggregate {
 			count

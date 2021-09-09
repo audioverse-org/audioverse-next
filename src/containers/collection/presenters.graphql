@@ -1,8 +1,7 @@
 query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
 	collection(id: $id) {
 		id
-		title
-		canonicalPath(useFuturePath: true)
+		...collectionPivot
 		persons(
 			offset: $offset
 			first: $first

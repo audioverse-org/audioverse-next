@@ -7340,6 +7340,12 @@ export type GetCollectionListPathsDataQuery = {
 	};
 };
 
+export type CollectionPivotFragment = {
+	__typename?: 'Collection';
+	title: string;
+	canonicalPath: string;
+};
+
 export type GetCollectionPresentersPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 	offset: Maybe<Scalars['Int']>;
@@ -9605,15 +9611,30 @@ export type GetSponsorConferencesPageDataQueryVariables = Exact<{
 
 export type GetSponsorConferencesPageDataQuery = {
 	__typename?: 'Query';
-	sponsor: Maybe<{ __typename?: 'Sponsor'; title: string }>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string;
+		title: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
 	conferences: {
 		__typename?: 'CollectionConnection';
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Collection';
-				id: string;
+				canonicalPath: string;
 				title: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
+				startDate: Maybe<string>;
+				endDate: Maybe<string>;
+				duration: number;
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
 			}>
 		>;
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9645,7 +9666,6 @@ export type GetSponsorDetailPageDataQuery = {
 		title: string;
 		location: Maybe<string>;
 		website: Maybe<string>;
-		summary: string;
 		description: string;
 		viewerHasFavorited: boolean;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9667,6 +9687,112 @@ export type GetSponsorDetailPageDataQuery = {
 						__typename?: 'SequenceConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 					};
+				}>
+			>;
+		};
+		sequences: {
+			__typename?: 'SequenceConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+			nodes: Maybe<
+				Array<{
+					__typename?: 'Sequence';
+					id: string;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					viewerHasFavorited: boolean;
+					viewerPlaybackCompletedPercentage: number;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes: Maybe<
+							Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>
+						>;
+					};
+					writers: {
+						__typename?: 'PersonConnection';
+						nodes: Maybe<
+							Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>
+						>;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>
+			>;
+		};
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+			nodes: Maybe<
+				Array<{
+					__typename?: 'Recording';
+					contentType: RecordingContentType;
+					canonicalPath: string;
+					title: string;
+					duration: number;
+					sequenceIndex: Maybe<number>;
+					id: string;
+					sequence: Maybe<{
+						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
+						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
 				}>
 			>;
 		};
@@ -9725,28 +9851,69 @@ export type GetSponsorListPathsDataQuery = {
 	};
 };
 
+export type SponsorPivotFragment = {
+	__typename?: 'Sponsor';
+	id: string;
+	title: string;
+	canonicalPath: string;
+	imageWithFallback: { __typename?: 'Image'; url: string };
+};
+
 export type GetSponsorSeriesPageDataQueryVariables = Exact<{
 	language: Language;
 	id: Scalars['ID'];
-	first: Maybe<Scalars['Int']>;
 	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
 }>;
 
 export type GetSponsorSeriesPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
+		id: string;
 		title: string;
+		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
-	serieses: {
+	sequences: {
 		__typename?: 'SequenceConnection';
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
 				id: string;
 				title: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				writers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
 			}>
 		>;
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9778,40 +9945,79 @@ export type GetSponsorTeachingsPageDataQuery = {
 		__typename?: 'Sponsor';
 		id: string;
 		title: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		canonicalPath: string;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Recording';
-					id: string;
+					contentType: RecordingContentType;
 					title: string;
 					description: Maybe<string>;
-					duration: number;
-					hasVideo: boolean;
-					recordingDate: Maybe<string>;
 					canonicalUrl: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
+					recordingDate: Maybe<string>;
+					canonicalPath: string;
+					duration: number;
+					sequenceIndex: Maybe<number>;
+					id: string;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
 						filesize: string;
+						mimeType: string;
 					}>;
 					feedVideoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 					}>;
+					sequence: Maybe<{
+						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string;
+						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
 				}>
 			>;
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
+		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
 };
 
@@ -10774,6 +10980,22 @@ export const ProfileFragmentDoc = `
   country
 }
     `;
+export const CollectionPivotFragmentDoc = `
+    fragment collectionPivot on Collection {
+  title
+  canonicalPath(useFuturePath: true)
+}
+    `;
+export const SponsorPivotFragmentDoc = `
+    fragment sponsorPivot on Sponsor {
+  id
+  title
+  canonicalPath(useFuturePath: true)
+  imageWithFallback {
+    url(size: 100)
+  }
+}
+    `;
 export const GetWithAuthGuardDataDocument = `
     query getWithAuthGuardData {
   me {
@@ -11667,8 +11889,7 @@ export const GetCollectionPresentersPageDataDocument = `
     query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
   collection(id: $id) {
     id
-    title
-    canonicalPath(useFuturePath: true)
+    ...collectionPivot
     persons(
       offset: $offset
       first: $first
@@ -11683,7 +11904,8 @@ export const GetCollectionPresentersPageDataDocument = `
     }
   }
 }
-    ${CardPersonFragmentDoc}`;
+    ${CollectionPivotFragmentDoc}
+${CardPersonFragmentDoc}`;
 export const useGetCollectionPresentersPageDataQuery = <
 	TData = GetCollectionPresentersPageDataQuery,
 	TError = unknown
@@ -11703,8 +11925,7 @@ export const GetCollectionSequencesPageDataDocument = `
     query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
   collection(id: $id) {
     id
-    title
-    canonicalPath(useFuturePath: true)
+    ...collectionPivot
     sequences(
       offset: $offset
       first: $first
@@ -11719,7 +11940,8 @@ export const GetCollectionSequencesPageDataDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${CollectionPivotFragmentDoc}
+${CardSequenceFragmentDoc}`;
 export const useGetCollectionSequencesPageDataQuery = <
 	TData = GetCollectionSequencesPageDataQuery,
 	TError = unknown
@@ -12807,22 +13029,25 @@ export const useGetSponsorBooksPathsDataQuery = <
 export const GetSponsorConferencesPageDataDocument = `
     query getSponsorConferencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
   sponsor(id: $id) {
-    title
+    ...sponsorPivot
   }
-  conferences(language: $language, sponsorId: $id, offset: $offset, first: $first) {
+  conferences(
+    language: $language
+    sponsorId: $id
+    offset: $offset
+    first: $first
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
+  ) {
     nodes {
-      id
-      title
-      imageWithFallback {
-        url(size: 100)
-      }
+      ...cardCollection
     }
     aggregate {
       count
     }
   }
 }
-    `;
+    ${SponsorPivotFragmentDoc}
+${CardCollectionFragmentDoc}`;
 export const useGetSponsorConferencesPageDataQuery = <
 	TData = GetSponsorConferencesPageDataQuery,
 	TError = unknown
@@ -12869,13 +13094,12 @@ export const GetSponsorDetailPageDataDocument = `
     title
     location
     website
-    summary
     description
     viewerHasFavorited
     imageWithFallback {
       url(size: 100)
     }
-    collections(first: 6, orderBy: [{field: CREATED_AT, direction: DESC}]) {
+    collections(first: 3, orderBy: [{field: CREATED_AT, direction: DESC}]) {
       aggregate {
         count
       }
@@ -12883,9 +13107,32 @@ export const GetSponsorDetailPageDataDocument = `
         ...cardCollection
       }
     }
+    sequences(first: 3, orderBy: [{field: CREATED_AT, direction: DESC}]) {
+      aggregate {
+        count
+      }
+      nodes {
+        ...cardSequence
+      }
+    }
+    recordings(
+      first: 3
+      collectionId: 0
+      sequenceId: 0
+      orderBy: [{field: CREATED_AT, direction: DESC}]
+    ) {
+      aggregate {
+        count
+      }
+      nodes {
+        ...cardRecording
+      }
+    }
   }
 }
-    ${CardCollectionFragmentDoc}`;
+    ${CardCollectionFragmentDoc}
+${CardSequenceFragmentDoc}
+${CardRecordingFragmentDoc}`;
 export const useGetSponsorDetailPageDataQuery = <
 	TData = GetSponsorDetailPageDataQuery,
 	TError = unknown
@@ -12982,27 +13229,27 @@ export const useGetSponsorListPathsDataQuery = <
 		options
 	);
 export const GetSponsorSeriesPageDataDocument = `
-    query getSponsorSeriesPageData($language: Language!, $id: ID!, $first: Int, $offset: Int) {
+    query getSponsorSeriesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
   sponsor(id: $id) {
-    title
-    imageWithFallback {
-      url(size: 100)
-    }
+    ...sponsorPivot
   }
-  serieses(language: $language, sponsorId: $id, first: $first, offset: $offset) {
+  sequences(
+    language: $language
+    sponsorId: $id
+    offset: $offset
+    first: $first
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
+  ) {
     nodes {
-      id
-      title
-      imageWithFallback {
-        url(size: 100)
-      }
+      ...cardSequence
     }
     aggregate {
       count
     }
   }
 }
-    `;
+    ${SponsorPivotFragmentDoc}
+${CardSequenceFragmentDoc}`;
 export const useGetSponsorSeriesPageDataQuery = <
 	TData = GetSponsorSeriesPageDataQuery,
 	TError = unknown
@@ -13046,13 +13293,10 @@ export const GetSponsorTeachingsPageDataDocument = `
     query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
   sponsor(id: $id) {
     id
-    title
-    imageWithFallback {
-      url(size: 100)
-    }
+    ...sponsorPivot
     recordings(offset: $offset, first: $first) {
       nodes {
-        ...recordingList
+        ...cardRecording
         ...writeFeedFile
       }
       aggregate {
@@ -13061,7 +13305,8 @@ export const GetSponsorTeachingsPageDataDocument = `
     }
   }
 }
-    ${RecordingListFragmentDoc}
+    ${SponsorPivotFragmentDoc}
+${CardRecordingFragmentDoc}
 ${WriteFeedFileFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
 	TData = GetSponsorTeachingsPageDataQuery,

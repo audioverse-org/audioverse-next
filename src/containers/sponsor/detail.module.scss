@@ -19,10 +19,6 @@
 	color: $ts-midTone;
 }
 
-.cardGroup {
-	margin-bottom: 24px;
-}
-
 .row {
 	display: flex;
 	align-items: center;
@@ -33,4 +29,9 @@
 }
 .iconButton {
 	margin-left: 8px;
+}
+
+.cardGroup,
+.seeAllButton {
+	margin-bottom: 24px;
 }

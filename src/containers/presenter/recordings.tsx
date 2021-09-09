@@ -10,14 +10,12 @@ import ButtonBack from '@components/molecules/buttonBack';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
-import TypeLockup from '@components/molecules/typeLockup';
 import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makePresenterRecordingsRoute } from '@lib/routes';
-
-import UserIcon from '../../../public/img/fa-user.svg';
 
 import styles from './recordings.module.scss';
 
@@ -43,17 +41,7 @@ function PresenterRecordings({
 		<Tease className={styles.container}>
 			<TeaseHeader>
 				<ButtonBack backUrl={canonicalPath} className={styles.back} />
-				<TypeLockup
-					Icon={UserIcon}
-					label={
-						<FormattedMessage
-							id="presenterRecordingsDetail__type"
-							defaultMessage="Speaker"
-						/>
-					}
-					iconColor={BaseColors.RED}
-					textColor={BaseColors.DARK}
-				/>
+				<PersonTypeLockup />
 				<div className={styles.titleLockup}>
 					<div className={styles.image}>
 						<RoundImage image={imageWithFallback.url} alt={name} />
