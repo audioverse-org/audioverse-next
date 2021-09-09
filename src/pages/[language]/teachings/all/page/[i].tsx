@@ -48,8 +48,8 @@ export async function getStaticProps({
 		await createFeed(
 			intl.formatMessage({
 				id: 'sermons-all-rss-identifier',
-				defaultMessage: 'All Sermons',
-				description: 'All sermons RSS feed pretty identifier',
+				defaultMessage: 'All Teachings',
+				description: 'All teachings RSS feed pretty identifier',
 			}),
 			params,
 			response.props.nodes,

@@ -344,7 +344,7 @@ describe('sermons list page', () => {
 
 		const calls = (feed.Feed as any).mock.calls;
 
-		expect(calls[0][0].title).toEqual('All Sermons | AudioVerse English');
+		expect(calls[0][0].title).toEqual('All Teachings | AudioVerse English');
 	});
 
 	it('translates feed titles', async () => {
