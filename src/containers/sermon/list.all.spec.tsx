@@ -329,6 +329,7 @@ describe('sermons list page', () => {
 							{
 								id: 'the_id',
 								name: 'the_name',
+								canonicalPath: 'the_path',
 								imageWithFallback: {
 									url: 'the_image_url',
 								},
