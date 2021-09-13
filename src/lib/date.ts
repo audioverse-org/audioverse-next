@@ -1,7 +1,25 @@
 import dayjs from 'dayjs';
 
-export const formatLongDate = (date: string): string => {
+export const parseRelativeDate = (date: string): Date | undefined => {
+	const matches = date.match(/(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/);
+	if (matches) {
+		const [, year, month, day, hour, minute] = matches;
+		return new Date(+year, +month - 1, +day, +hour, +minute);
+	}
+};
+
+export const formatLongDate = (date: string | Date): string => {
 	return new Date(date).toLocaleString('default', {
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+	});
+};
+
+export const formatLongDateTime = (date: string | Date): string => {
+	return new Date(date).toLocaleString('default', {
+		hour: 'numeric',
+		minute: 'numeric',
 		month: 'long',
 		day: 'numeric',
 		year: 'numeric',
