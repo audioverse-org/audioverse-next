@@ -2250,6 +2250,7 @@ export type Person = Node &
 		canonicalPath: Scalars['String'];
 		/** The canonical URL to this resource. */
 		canonicalUrl: Scalars['URL'];
+		collections: CollectionConnection;
 		description: Scalars['String'];
 		designations: Scalars['String'];
 		email: Maybe<Scalars['String']>;
@@ -2270,6 +2271,7 @@ export type Person = Node &
 		/** @deprecated Person.photoWithFallback is replaced with Person.imageWithFallback */
 		photoWithFallback: Image;
 		recordings: RecordingConnection;
+		sequences: SequenceConnection;
 		/** A shareable short URL to this resource. */
 		shareUrl: Scalars['URL'];
 		/** Requires `ADMINISTRATION` role. */
@@ -2286,6 +2288,19 @@ export type Person = Node &
 
 export type PersonCanonicalPathArgs = {
 	useFuturePath?: Maybe<Scalars['Boolean']>;
+};
+
+export type PersonCollectionsArgs = {
+	after: Maybe<Scalars['String']>;
+	first: Maybe<Scalars['Int']>;
+	includeUnpublished: Maybe<Scalars['Boolean']>;
+	offset: Maybe<Scalars['Int']>;
+	orderBy: Maybe<Array<CollectionsOrder>>;
+	search: Maybe<Scalars['String']>;
+	sequenceIds: Maybe<Array<Scalars['ID']>>;
+	sponsorId: Maybe<Scalars['ID']>;
+	sponsorIds: Maybe<Array<Scalars['ID']>>;
+	withRole: Maybe<PersonsRoleField>;
 };
 
 export type PersonHistoryArgs = {
@@ -2331,6 +2346,20 @@ export type PersonRecordingsArgs = {
 	updatedDates: Maybe<Array<DateRangeInput>>;
 	viewerHasFavorited: Maybe<Scalars['Boolean']>;
 	websiteIds: Maybe<Array<Scalars['ID']>>;
+	withRole: Maybe<PersonsRoleField>;
+};
+
+export type PersonSequencesArgs = {
+	after: Maybe<Scalars['String']>;
+	collectionId: Maybe<Scalars['ID']>;
+	collectionIds: Maybe<Array<Scalars['ID']>>;
+	first: Maybe<Scalars['Int']>;
+	includeUnpublished: Maybe<Scalars['Boolean']>;
+	offset: Maybe<Scalars['Int']>;
+	orderBy: Maybe<Array<SequenceOrder>>;
+	search: Maybe<Scalars['String']>;
+	sponsorId: Maybe<Scalars['ID']>;
+	sponsorIds: Maybe<Array<Scalars['ID']>>;
 	withRole: Maybe<PersonsRoleField>;
 };
 
@@ -10508,7 +10537,7 @@ export type AddPlaylistMutation = {
 	playlistAdd: { __typename?: 'UserPlaylist'; id: string };
 };
 
-export type WriteFeedFileFragment = {
+export type GenerateFeedFragment = {
 	__typename?: 'Recording';
 	title: string;
 	description: Maybe<string>;
@@ -10911,8 +10940,8 @@ export const CardRecordingFragmentDoc = `
   ...cardWithPlayable
 }
     ${CardWithPlayableFragmentDoc}`;
-export const WriteFeedFileFragmentDoc = `
-    fragment writeFeedFile on Recording {
+export const GenerateFeedFragmentDoc = `
+    fragment generateFeed on Recording {
   title
   description
   canonicalUrl
@@ -10954,12 +10983,12 @@ export const SequenceFragmentDoc = `
     }
     nodes {
       ...cardRecording
-      ...writeFeedFile
+      ...generateFeed
     }
   }
 }
     ${CardRecordingFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${GenerateFeedFragmentDoc}`;
 export const TestimoniesFragmentDoc = `
     fragment testimonies on Testimony {
   id
@@ -12444,7 +12473,7 @@ export const GetPresenterRecordingsPageDataDocument = `
     ) {
       nodes {
         ...cardRecording
-        ...writeFeedFile
+        ...generateFeed
       }
       aggregate {
         count
@@ -12453,7 +12482,7 @@ export const GetPresenterRecordingsPageDataDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${GenerateFeedFragmentDoc}`;
 export const useGetPresenterRecordingsPageDataQuery = <
 	TData = GetPresenterRecordingsPageDataQuery,
 	TError = unknown
@@ -12669,7 +12698,7 @@ export const GetSermonListStaticPropsDocument = `
   ) {
     nodes {
       ...recordingList
-      ...writeFeedFile
+      ...generateFeed
     }
     aggregate {
       count
@@ -12677,7 +12706,7 @@ export const GetSermonListStaticPropsDocument = `
   }
 }
     ${RecordingListFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${GenerateFeedFragmentDoc}`;
 export const useGetSermonListStaticPropsQuery = <
 	TData = GetSermonListStaticPropsQuery,
 	TError = unknown
@@ -13294,10 +13323,14 @@ export const GetSponsorTeachingsPageDataDocument = `
   sponsor(id: $id) {
     id
     ...sponsorPivot
-    recordings(offset: $offset, first: $first) {
+    recordings(
+      offset: $offset
+      first: $first
+      orderBy: [{field: RECORDED_AT, direction: DESC}]
+    ) {
       nodes {
         ...cardRecording
-        ...writeFeedFile
+        ...generateFeed
       }
       aggregate {
         count
@@ -13307,7 +13340,7 @@ export const GetSponsorTeachingsPageDataDocument = `
 }
     ${SponsorPivotFragmentDoc}
 ${CardRecordingFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${GenerateFeedFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
 	TData = GetSponsorTeachingsPageDataQuery,
 	TError = unknown
@@ -13500,7 +13533,7 @@ export const GetTagDetailPageDataDocument = `
   ) {
     nodes {
       ...recordingList
-      ...writeFeedFile
+      ...generateFeed
     }
     aggregate {
       count
@@ -13508,7 +13541,7 @@ export const GetTagDetailPageDataDocument = `
   }
 }
     ${RecordingListFragmentDoc}
-${WriteFeedFileFragmentDoc}`;
+${GenerateFeedFragmentDoc}`;
 export const useGetTagDetailPageDataQuery = <
 	TData = GetTagDetailPageDataQuery,
 	TError = unknown

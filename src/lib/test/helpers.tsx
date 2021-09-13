@@ -1,7 +1,6 @@
 import { ParsedUrlQuery } from 'querystring';
 
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import * as feed from 'feed';
 import { when } from 'jest-when';
 import _ from 'lodash';
 import { GetServerSidePropsResult } from 'next';
@@ -21,15 +20,6 @@ import {
 import { sleep } from '@lib/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
-
-// TODO: Delete this and mock @lib/writeFeedFile instead, except in writeFeedFile.spec.ts
-export const mockFeed = (): { addItem: any; rss2: any } => {
-	const addItem = jest.fn();
-	const rss2 = jest.fn();
-	jest.spyOn(feed, 'Feed').mockImplementation(() => ({ addItem, rss2 } as any));
-
-	return { addItem, rss2 };
-};
 
 export function loadQuery(query: ParsedUrlQuery = {}): void {
 	loadRouter({ query });

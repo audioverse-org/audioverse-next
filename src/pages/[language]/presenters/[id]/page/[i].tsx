@@ -1,7 +1,6 @@
 import PresenterRecordings, {
 	PresenterRecordingsProps,
 } from '@containers/presenter/recordings';
-import { createFeed } from '@lib/createFeed';
 import {
 	getPresenterDetailPathsData,
 	getPresenterRecordingsPageData,
@@ -19,28 +18,13 @@ export async function getStaticProps({
 }): Promise<StaticProps<PresenterRecordingsProps>> {
 	const { id } = params;
 
-	const response = await getPaginatedStaticProps(
+	return await getPaginatedStaticProps(
 		params,
 		({ offset, first }) =>
 			getPresenterRecordingsPageData({ id, offset, first }),
 		(d) => d.person?.recordings?.nodes,
 		(d) => d.person?.recordings?.aggregate?.count
 	);
-
-	const rssPath = await createFeed(
-		response.props.data?.person?.name,
-		params,
-		response.props.nodes,
-		`presenters/${id}.xml`
-	);
-
-	return {
-		...response,
-		props: {
-			rssPath,
-			...response.props,
-		},
-	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

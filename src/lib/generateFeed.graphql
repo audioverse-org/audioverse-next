@@ -1,4 +1,4 @@
-fragment writeFeedFile on Recording {
+fragment generateFeed on Recording {
 	title
 	description
 	canonicalUrl

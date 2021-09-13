@@ -10,13 +10,10 @@ import {
 	buildStaticRenderer,
 	mockedFetchApi,
 } from '@lib/test/helpers';
-import writeFeedFile from '@lib/writeFeedFile';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
-
-jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps, {
 	language: 'en',
@@ -144,29 +141,6 @@ describe('sponsor teachings page', () => {
 		const { queryByAltText } = await renderPage();
 
 		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
-	});
-
-	it('generates rss feed', async () => {
-		const data = loadData();
-		const params = { language: 'en', id: 'the_sponsor_id', i: '1' };
-
-		await getStaticProps({ params });
-
-		expect(writeFeedFile).toBeCalledWith({
-			recordings: data.sponsor.recordings.nodes,
-			projectRelativePath: 'public/en/sponsors/the_sponsor_id/teachings.xml',
-			title: 'the_sponsor_title | AudioVerse English',
-		});
-	});
-
-	it('only generates rss on page 1', async () => {
-		loadData();
-
-		const params = { language: 'en', id: 'the_sponsor_id', i: '2' };
-
-		await getStaticProps({ params });
-
-		expect(writeFeedFile).not.toBeCalled();
 	});
 
 	// TODO

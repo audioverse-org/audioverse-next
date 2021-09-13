@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateFeed includes adds item 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<rss version=\\"2.0\\">
+    <channel>
+        <title>the_title | AudioVerse English</title>
+        <link>undefined</link>
+        <description>undefined</description>
+        <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[recording_title]]></title>
+            <link>the_url</link>
+            <guid>the_url</guid>
+            <pubDate>Mon, 05 Mar 2007 12:00:00 GMT</pubDate>
+            <description><![CDATA[recording_description]]></description>
+            <enclosure length=\\"3\\" type=\\"image//file_url\\" url=\\"https://www.example.com/file_url\\"/>
+        </item>
+    </channel>
+</rss>"
+`;
+
+exports[`generateFeed includes feed title 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<rss version=\\"2.0\\">
+    <channel>
+        <title>the_title | AudioVerse English</title>
+        <link>undefined</link>
+        <description>undefined</description>
+        <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+    </channel>
+</rss>"
+`;
+
+exports[`generateFeed makes feed 1`] = `
+"<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<rss version=\\"2.0\\">
+    <channel>
+        <title> | AudioVerse English</title>
+        <link>undefined</link>
+        <description>undefined</description>
+        <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+    </channel>
+</rss>"
+`;

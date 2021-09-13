@@ -8,7 +8,6 @@ import {
 	buildStaticRenderer,
 	mockedFetchApi,
 } from '@lib/test/helpers';
-import writeFeedFile from '@lib/writeFeedFile';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -18,8 +17,6 @@ const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_series_id',
 });
-
-jest.mock('@lib/writeFeedFile');
 
 const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 	series: {
@@ -54,6 +51,8 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 
 describe('series detail page', () => {
 	it('gets series data', async () => {
+		loadData();
+
 		await renderPage();
 
 		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPageDataDocument, {
@@ -72,6 +71,8 @@ describe('series detail page', () => {
 	});
 
 	it('renders 404', async () => {
+		mockedFetchApi.mockRejectedValue(undefined);
+
 		const { getByText } = await renderPage();
 
 		expect(getByText('404')).toBeInTheDocument();
@@ -83,7 +84,7 @@ describe('series detail page', () => {
 		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'ENGLISH',
-				first: 25,
+				first: 10,
 			},
 		});
 	});
@@ -94,7 +95,7 @@ describe('series detail page', () => {
 		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'SPANISH',
-				first: 25,
+				first: 10,
 			},
 		});
 	});
@@ -166,20 +167,6 @@ describe('series detail page', () => {
 		const { queryByText } = await renderPage();
 
 		expect(queryByText('Conference')).not.toBeInTheDocument();
-	});
-
-	it('generates rss', async () => {
-		loadData();
-
-		await getStaticProps({
-			params: { language: 'en', id: 'the_series_id' },
-		});
-
-		expect(writeFeedFile).toBeCalledWith({
-			recordings: expect.anything(),
-			title: 'the_series_title | AudioVerse English',
-			projectRelativePath: 'public/en/series/the_series_id.xml',
-		});
 	});
 
 	// TODO:

@@ -6,13 +6,10 @@ import {
 	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-import writeFeedFile from '@lib/writeFeedFile';
 import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/page/[i]';
-
-jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps, {
 	language: 'en',
@@ -74,43 +71,6 @@ describe('presenter recordings page', () => {
 		const { paths } = await getStaticPaths();
 
 		expect(paths).toContain('/en/presenters/the_presenter_id/page/1');
-	});
-
-	it('generates rss feeds', async () => {
-		loadData();
-
-		await getStaticProps({
-			params: { language: 'en', id: 'the_presenter_id', i: '1' },
-		});
-
-		expect(writeFeedFile).toBeCalledWith({
-			recordings: expect.any(Array),
-			projectRelativePath: 'public/en/presenters/the_presenter_id.xml',
-			title: 'the_presenter_name | AudioVerse English',
-		});
-	});
-
-	it('skips rss generation if no entity name', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				person: {
-					name: undefined,
-					recordings: {
-						nodes: [
-							{
-								id: 'the_recording_id',
-							},
-						],
-					},
-				},
-			});
-
-		await getStaticProps({
-			params: { language: 'en', id: 'the_presenter_id', i: '1' },
-		});
-
-		expect(writeFeedFile).not.toBeCalled();
 	});
 
 	// TODO: add?

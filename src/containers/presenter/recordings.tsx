@@ -28,7 +28,7 @@ export type PresenterRecordingsProps = PaginatedProps<
 		>[0]
 	>,
 	GetPresenterRecordingsPageDataQuery
-> & { rssPath: string | null };
+>;
 
 function PresenterRecordings({
 	nodes,

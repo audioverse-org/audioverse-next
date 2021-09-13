@@ -17,5 +17,6 @@ module.exports = {
 			tsconfig: 'tsconfig.test.json',
 		},
 	},
+	setupFiles: ['jest-date-mock'],
 	setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
 };

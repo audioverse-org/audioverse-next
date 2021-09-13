@@ -2,7 +2,6 @@ import AudiobookDetail, {
 	AudiobookDetailProps,
 } from '@containers/audiobook/detail';
 import { REVALIDATE } from '@lib/constants';
-import { createFeed } from '@lib/createFeed';
 import {
 	getAudiobookDetailPageData,
 	getAudiobookDetailPathsData,
@@ -12,21 +11,12 @@ import { makeAudiobookRoute } from '@lib/routes';
 
 export default AudiobookDetail;
 
-export interface GetStaticPropsArgs {
-	params: {
-		language: string;
-		id: string;
-	};
-}
-
-export type AudiobookStaticProps = StaticProps<
-	AudiobookDetailProps & { rssPath: string | null }
->;
+type AudiobookStaticProps = StaticProps<AudiobookDetailProps>;
 
 export async function getStaticProps(props: {
-	params: { language: string; id: string };
+	params: { id: string };
 }): Promise<AudiobookStaticProps> {
-	const { id, language } = props.params;
+	const { id } = props.params;
 
 	const { audiobook: sequence } = await getAudiobookDetailPageData({
 		id,
@@ -34,17 +24,9 @@ export async function getStaticProps(props: {
 		audiobook: null,
 	}));
 
-	const rssPath = await createFeed(
-		sequence?.title,
-		props.params,
-		sequence?.recordings.nodes || [],
-		`/${language}/books/${id}.xml`
-	);
-
 	return {
 		props: {
 			sequence,
-			rssPath,
 		},
 		revalidate: REVALIDATE,
 	};

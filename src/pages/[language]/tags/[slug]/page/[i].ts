@@ -1,13 +1,10 @@
 import TagDetail from '@containers/tag/detail';
-import { createFeed } from '@lib/createFeed';
 import {
 	getTagDetailPageData,
 	GetTagDetailPageDataQuery,
 	getTagDetailPathsQuery,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import {
 	getPaginatedStaticProps,
 	PaginatedStaticProps,
@@ -29,38 +26,6 @@ type GetStaticPropsArgs = {
 	params: { slug: string; language: string; i: string };
 };
 
-const generateRssFeed = async (
-	params: GetStaticPropsArgs['params'],
-	response: PaginatedProps
-) => {
-	const { i, language: languageRoute, slug } = params;
-	const { display_name } = getLanguageByBaseUrl(languageRoute) || {};
-
-	if (!display_name) return;
-
-	if (i === '1' && response.props.nodes) {
-		const intl = getIntl(languageRoute);
-
-		const title = intl.formatMessage(
-			{
-				id: 'tag-feed-title',
-				defaultMessage: 'Recordings Tagged {tag}',
-				description: 'Tag feed title',
-			},
-			{
-				tag: decodeURIComponent(slug),
-			}
-		);
-
-		await createFeed(
-			title,
-			params,
-			response.props.nodes,
-			`public/${languageRoute}/tags/${slug}.xml`
-		);
-	}
-};
-
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
@@ -76,9 +41,6 @@ export async function getStaticProps({
 		(d) => d.recordings.nodes,
 		(d) => d.recordings.aggregate?.count
 	);
-
-	// TODO: Switch to createFeed function
-	await generateRssFeed(params, response);
 
 	return {
 		...response,
