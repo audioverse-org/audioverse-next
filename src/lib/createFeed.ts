@@ -3,8 +3,6 @@ import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import writeFeedFile from '@lib/writeFeedFile';
 
-// TODO: Make all pages use this function for feed gen
-
 export async function createFeed(
 	prettyIdentifier: string | undefined,
 	params: { language: string },
@@ -36,7 +34,7 @@ export async function createFeed(
 
 	await writeFeedFile({
 		recordings,
-		projectRelativePath: `public${webPath}`,
+		projectRelativePath: webPath,
 		title,
 	});
 

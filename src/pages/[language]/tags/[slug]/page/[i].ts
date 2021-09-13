@@ -1,4 +1,5 @@
 import TagDetail from '@containers/tag/detail';
+import { createFeed } from '@lib/createFeed';
 import {
 	getTagDetailPageData,
 	GetTagDetailPageDataQuery,
@@ -12,7 +13,6 @@ import {
 	PaginatedStaticProps,
 } from '@lib/getPaginatedStaticProps';
 import { makeTagDetailRoute } from '@lib/routes';
-import writeFeedFile from '@lib/writeFeedFile';
 
 export default TagDetail;
 
@@ -38,26 +38,26 @@ const generateRssFeed = async (
 
 	if (!display_name) return;
 
-	const intl = getIntl(languageRoute);
-
-	const title = intl.formatMessage(
-		{
-			id: 'tag-feed-title',
-			defaultMessage: 'AudioVerse Recordings Tagged {tag} ({lang})',
-			description: 'Tag feed title',
-		},
-		{
-			lang: display_name,
-			tag: decodeURIComponent(slug),
-		}
-	);
-
 	if (i === '1' && response.props.nodes) {
-		await writeFeedFile({
-			recordings: response.props.nodes,
-			projectRelativePath: `public/${languageRoute}/tags/${slug}.xml`,
+		const intl = getIntl(languageRoute);
+
+		const title = intl.formatMessage(
+			{
+				id: 'tag-feed-title',
+				defaultMessage: 'Recordings Tagged {tag}',
+				description: 'Tag feed title',
+			},
+			{
+				tag: decodeURIComponent(slug),
+			}
+		);
+
+		await createFeed(
 			title,
-		});
+			params,
+			response.props.nodes,
+			`public/${languageRoute}/tags/${slug}.xml`
+		);
 	}
 };
 

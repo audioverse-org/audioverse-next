@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { dirname, resolve } from 'path';
+import { dirname, join } from 'path';
 
 import { Feed } from 'feed';
 
@@ -60,11 +60,7 @@ export default async function writeFeedFile({
 		});
 	});
 
-	const path = resolve(PROJECT_ROOT, projectRelativePath);
-
-	if (!path.startsWith(PROJECT_ROOT)) {
-		throw new Error('Path not within project');
-	}
+	const path = join(PROJECT_ROOT, projectRelativePath);
 
 	fs.mkdirSync(dirname(path), { recursive: true });
 

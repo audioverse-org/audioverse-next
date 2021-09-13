@@ -2,15 +2,13 @@ import AudiobookDetail, {
 	AudiobookDetailProps,
 } from '@containers/audiobook/detail';
 import { REVALIDATE } from '@lib/constants';
+import { createFeed } from '@lib/createFeed';
 import {
 	getAudiobookDetailPageData,
-	GetAudiobookDetailPageDataQuery,
 	getAudiobookDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
 import { makeAudiobookRoute } from '@lib/routes';
-import writeFeedFile from '@lib/writeFeedFile';
 
 export default AudiobookDetail;
 
@@ -22,13 +20,13 @@ export interface GetStaticPropsArgs {
 }
 
 export type AudiobookStaticProps = StaticProps<
-	AudiobookDetailProps & { rssPath: string }
+	AudiobookDetailProps & { rssPath: string | null }
 >;
 
 export async function getStaticProps(props: {
 	params: { language: string; id: string };
 }): Promise<AudiobookStaticProps> {
-	const { id } = props.params;
+	const { id, language } = props.params;
 
 	const { audiobook: sequence } = await getAudiobookDetailPageData({
 		id,
@@ -36,7 +34,12 @@ export async function getStaticProps(props: {
 		audiobook: null,
 	}));
 
-	const rssPath = await generateRssFeed(props.params, sequence);
+	const rssPath = await createFeed(
+		sequence?.title,
+		props.params,
+		sequence?.recordings.nodes || [],
+		`/${language}/books/${id}.xml`
+	);
 
 	return {
 		props: {
@@ -54,35 +57,3 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 		(l, n) => makeAudiobookRoute(l, n.id)
 	);
 }
-
-const generateRssFeed = async (
-	params: GetStaticPropsArgs['params'],
-	audiobook: GetAudiobookDetailPageDataQuery['audiobook']
-) => {
-	const { id, language: languageRoute } = params;
-
-	const intl = getIntl(languageRoute);
-
-	const title = intl.formatMessage(
-		{
-			id: 'audiobook-feed-title',
-			defaultMessage: '{title} : AudioVerse audiobook',
-			description: 'Audiobook feed title',
-		},
-		{
-			title: audiobook?.title,
-		}
-	);
-
-	const webPath = `/${languageRoute}/books/${id}.xml`;
-
-	if (audiobook?.recordings.nodes) {
-		await writeFeedFile({
-			recordings: audiobook?.recordings.nodes,
-			projectRelativePath: `public${webPath}`,
-			title,
-		});
-	}
-
-	return webPath;
-};
