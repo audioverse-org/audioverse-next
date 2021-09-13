@@ -2,7 +2,7 @@ import { Menu } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
+import { BaseColors } from '@lib/constants';
 import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import IconShare from '../../../public/img/icon-share.svg';

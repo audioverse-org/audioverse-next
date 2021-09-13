@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { MouseEvent } from 'react';
 import { PropsWithChildren } from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
+import { BaseColors } from '@lib/constants';
 
 import styles from './circleButton.module.scss';
 

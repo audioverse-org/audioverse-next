@@ -4,7 +4,6 @@ import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import Login from '@components/molecules/login';
 import PersonLockup from '@components/molecules/personLockup';
@@ -44,6 +43,7 @@ import StoryAlbumsList from '@containers/story/albums/list';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { isRecordingFavorited } from '@lib/api';
+import { BaseColors } from '@lib/constants';
 import {
 	GetWithAuthGuardDataDocument,
 	RecordingContentType,

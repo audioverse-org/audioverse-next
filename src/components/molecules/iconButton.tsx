@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
+import { BaseColors } from '@lib/constants';
 
 import baseColorsStyles from '../atoms/baseColors.module.scss';
 

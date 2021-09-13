@@ -76,9 +76,9 @@ export default function Footer(): JSX.Element {
 					<Link href={`/${languageRoute}/teachings/all/page/1`}>
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemPresentations`}
-								defaultMessage="Presentations"
-								description={`Footer nav link name: Presentations`}
+								id={`footer__NavItemTeachings`}
+								defaultMessage="Teachings"
+								description={`Footer nav link name: Teachings`}
 							/>
 						</a>
 					</Link>

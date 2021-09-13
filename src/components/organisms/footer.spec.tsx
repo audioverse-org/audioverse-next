@@ -10,7 +10,7 @@ describe('footer', () => {
 			'Spirit of AudioVerse',
 			'FAQ',
 			'Contact Us',
-			'Presentations',
+			'Teachings',
 			'Bibles',
 			'Books',
 			'Stories',

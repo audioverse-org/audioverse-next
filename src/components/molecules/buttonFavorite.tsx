@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
+import { BaseColors } from '@lib/constants';
 
 import IconLikeActive from '../../../public/img/icon-like-active.svg';
 import IconLikeLight from '../../../public/img/icon-like-light.svg';

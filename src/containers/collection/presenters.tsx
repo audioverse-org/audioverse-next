@@ -1,12 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardPerson from '@components/molecules/card/person';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { BaseColors } from '@lib/constants';
 import {
 	CollectionPivotFragment,
 	GetCollectionPresentersPageDataQuery,

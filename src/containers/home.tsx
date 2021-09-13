@@ -6,7 +6,6 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Button from '@components/molecules/button';
 import CardAudiobookTrack from '@components/molecules/card/audiobookTrack';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
@@ -19,6 +18,7 @@ import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
+import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

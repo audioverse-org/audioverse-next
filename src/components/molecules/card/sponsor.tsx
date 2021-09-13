@@ -3,11 +3,11 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
+import { BaseColors } from '@lib/constants';
 import { CardSponsorFragment } from '@lib/generated/graphql';
 
 import UserPlusIcon from '../../../../public/img/fa-user-plus.svg';

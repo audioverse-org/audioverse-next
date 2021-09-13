@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading1 from '@components/atoms/heading1';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
@@ -19,6 +18,7 @@ import SequenceNav from '@components/molecules/sequenceNav';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
+import { BaseColors } from '@lib/constants';
 import {
 	RecordingContentType,
 	RecordingFragment,

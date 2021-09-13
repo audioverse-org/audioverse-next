@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
+import { BaseColors } from '@lib/constants';
 import { ButtonDownloadFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 

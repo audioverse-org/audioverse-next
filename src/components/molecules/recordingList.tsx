@@ -1,8 +1,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import TableList from '@components/organisms/tableList';
+import { BaseColors } from '@lib/constants';
 import { RecordingListFragment } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';

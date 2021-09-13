@@ -10,9 +10,9 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
+import { BaseColors } from '@lib/constants';
 import { PlayerFragment } from '@lib/generated/graphql';
 import {
 	buildRenderer,

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import LineHeading from '@components/atoms/lineHeading';
 import RoundImage from '@components/atoms/roundImage';
@@ -13,6 +12,7 @@ import Pagination from '@components/molecules/pagination';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
+import { BaseColors } from '@lib/constants';
 import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makePresenterRecordingsRoute } from '@lib/routes';

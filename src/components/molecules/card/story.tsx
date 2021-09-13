@@ -2,9 +2,9 @@ import Image from 'next/image';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
+import { BaseColors } from '@lib/constants';
 import { CardStoryFragment } from '@lib/generated/graphql';
 
 import FeatherIcon from '../../../../public/img/fa-feather.svg';

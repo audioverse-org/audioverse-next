@@ -4,11 +4,11 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
+import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { CardCollectionFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';

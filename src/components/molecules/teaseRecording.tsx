@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import { useIsRecordingFavorited } from '@lib/api';
+import { BaseColors } from '@lib/constants';
 import { TeaseRecordingFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
