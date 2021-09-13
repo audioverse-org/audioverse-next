@@ -1,13 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import Pagination from '@components/molecules/pagination';
+import CardPerson from '@components/molecules/card/person';
+import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterDetailRoute, makePresenterListRoute } from '@lib/routes';
+import { makePresenterListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type PresentersProps = PaginatedProps<
@@ -15,38 +14,27 @@ export type PresentersProps = PaginatedProps<
 	GetPresenterListPageDataQuery
 >;
 
+// TODO: replace with presenters landing page (featured, recent, trending, etc.)
+
 function Presenters({ nodes, pagination }: PresentersProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	// TODO: Use PaginatedList component
+	const language = useLanguageRoute();
+
 	return (
-		<>
-			<h1>
+		<PaginatedCardList
+			pagination={pagination}
+			backUrl={`/${language}/discover/collections`}
+			heading={
 				<FormattedMessage
 					id="presenterListPage__title"
 					defaultMessage="Presenters"
-					description="Presenter list page main title"
 				/>
-			</h1>
-			<ul>
-				{nodes.map((n) => (
-					<li key={n.id}>
-						<Link href={makePresenterDetailRoute(languageRoute, n.id)}>
-							<a>
-								<Image
-									src={n.imageWithFallback?.url}
-									alt={n.name}
-									width={100}
-									height={100}
-								/>
-								<span>{n.name}</span>
-								<span>{n.summary}</span>
-							</a>
-						</Link>
-					</li>
-				))}
-			</ul>
-			<Pagination makeRoute={makePresenterListRoute} {...pagination} />
-		</>
+			}
+			makeRoute={makePresenterListRoute}
+		>
+			{nodes.map((node) => (
+				<CardPerson person={node} key={node.canonicalPath} />
+			))}
+		</PaginatedCardList>
 	);
 }
 

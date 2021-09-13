@@ -5,7 +5,7 @@ import Heading2 from '@components/atoms/heading2';
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardSongFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../public/img/icon-music-solid.svg';
+import HatIcon from '../../../../public/img/fa-music.svg';
 
 import CardRecordingSequenceHat from './recordingSequenceHat';
 

@@ -1,9 +1,0 @@
-fragment playlist on Recording {
-	id
-	title
-	audioDownloads: audioFiles(allowedContainers: MP3) {
-		url
-		filesize
-	}
-	...andMiniplayer
-}

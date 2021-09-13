@@ -1,0 +1,72 @@
+@import '../../../styles/common';
+
+$container-padding: 16px;
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: $container-padding;
+	border-radius: 16px;
+	overflow: hidden;
+	background-color: $ts-lightTone;
+	transition: background-color $transition-medium;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-lightTone;
+	}
+}
+
+.titleLockup {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.logo {
+	margin-right: 8px;
+}
+
+.title {
+	flex-grow: 1;
+	a:hover {
+		color: $ts-white;
+		text-decoration: none;
+	}
+}
+
+$like-icon-size: 32px;
+$like-icon-padding: 8px;
+.details {
+	flex-grow: 1;
+	display: flex;
+	align-items: flex-end;
+	@media (any-pointer: fine) {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+	&.detailsWithLike {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+}
+
+.conferencesLabel {
+	color: $ts-midTone;
+	margin-bottom: 8px;
+}
+
+.like {
+	display: none;
+	position: absolute;
+	bottom: $container-padding;
+	right: $container-padding;
+	@media (any-pointer: fine) {
+		display: inherit;
+	}
+	@media (pointer: coarse) {
+		pointer-events: none;
+	}
+	&Active {
+		display: inherit;
+	}
+}

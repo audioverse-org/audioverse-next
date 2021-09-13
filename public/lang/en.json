@@ -1291,8 +1291,8 @@
   },
   "presenterDetail__type": {
     "col": 31,
-    "defaultMessage": "Conference",
-    "description": "Collection Detail type label",
+    "defaultMessage": "Speaker",
+    "description": "Presenter Detail type label",
     "end": 3118,
     "file": "src/containers/presenter/detail.tsx",
     "line": 102,
@@ -1628,8 +1628,8 @@
   },
   "sermons-all-rss-identifier": {
     "col": 22,
-    "defaultMessage": "All Sermons",
-    "description": "All sermons RSS feed pretty identifier",
+    "defaultMessage": "All Teachings",
+    "description": "All teachings RSS feed pretty identifier",
     "end": 1383,
     "file": "src/pages/[language]/sermons/all/page/[i].tsx",
     "line": 49,

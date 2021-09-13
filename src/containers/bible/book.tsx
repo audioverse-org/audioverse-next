@@ -2,9 +2,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import withFailStates from '@components/HOCs/withFailStates';
 import Player from '@components/molecules/player';
+import { BaseColors } from '@lib/constants';
 import {
 	GetBibleBookDetailPageDataQuery,
 	PlayerFragment,

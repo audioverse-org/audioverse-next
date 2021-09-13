@@ -978,7 +978,7 @@
   "presenterDetail__type": [
     {
       "type": 0,
-      "value": "Conference"
+      "value": "Speaker"
     }
   ],
   "presenterDetail__websiteLabel": [
@@ -1210,7 +1210,7 @@
   "sermons-all-rss-identifier": [
     {
       "type": 0,
-      "value": "All Sermons"
+      "value": "All Teachings"
     }
   ],
   "socialLogin__facebookButton": [

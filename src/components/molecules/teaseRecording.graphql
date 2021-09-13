@@ -1,6 +1,6 @@
 fragment teaseRecording on Recording {
 	...andMiniplayer
-	canonicalPath
+	canonicalPath(useFuturePath: true)
 	title
 	duration
 	persons(role: SPEAKER) {

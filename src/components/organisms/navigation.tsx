@@ -61,6 +61,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 		},
 		{
 			key: 'collections',
+			href: `/${languageRoute}/discover/collections`,
 			Icon: IconCollections,
 			label: intl.formatMessage({
 				id: `header__navItemCollections`,

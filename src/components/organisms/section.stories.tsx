@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Button from '@components/molecules/button';
 import Section from '@components/organisms/section';
+import { BaseColors } from '@lib/constants';
 
 // TODO: use this in Storybook or nix it
 export const DarkBleed = (): JSX.Element => (

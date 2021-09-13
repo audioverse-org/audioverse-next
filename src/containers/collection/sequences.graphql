@@ -1,0 +1,18 @@
+query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
+	collection(id: $id) {
+		id
+		...collectionPivot
+		sequences(
+			offset: $offset
+			first: $first
+			orderBy: [{ field: TITLE, direction: ASC }]
+		) {
+			nodes {
+				...cardSequence
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}

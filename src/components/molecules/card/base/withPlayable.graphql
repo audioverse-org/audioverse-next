@@ -1,7 +1,7 @@
 fragment cardWithPlayable on Recording {
 	...teaseRecording
 	sequence {
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 		image {
 			url(size: 1000)
 		}

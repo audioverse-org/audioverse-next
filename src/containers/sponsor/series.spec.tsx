@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetSponsorSeriesPageDataDocument,
 	GetSponsorSeriesPathsDataDocument,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -22,18 +23,25 @@ const renderPage = buildStaticRenderer(SponsorSeries, getStaticProps, {
 
 const loadData = buildLoader(GetSponsorSeriesPageDataDocument, {
 	sponsor: {
+		id: 'the_sponsor_id',
 		title: 'the_sponsor_title',
+		canonicalPath: 'the_sponsor_path',
 		imageWithFallback: {
 			url: 'the_sponsor_image',
 		},
 	},
-	serieses: {
+	sequences: {
 		nodes: [
 			{
 				id: 'the_series_id',
 				title: 'the_series_title',
-				imageWithFallback: {
-					url: 'the_series_image',
+				canonicalPath: 'the_series_path',
+				contentType: SequenceContentType.Series,
+				speakers: [],
+				recordings: {
+					aggregate: {
+						count: 0,
+					},
 				},
 			},
 		],
@@ -97,17 +105,6 @@ describe('sponsor series page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_title')).toBeInTheDocument();
-	});
-
-	it('links sponsor title', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sponsor_title')).toHaveAttribute(
-			'href',
-			'/en/sponsors/the_sponsor_id'
-		);
 	});
 
 	it('renders page subtitle', async () => {

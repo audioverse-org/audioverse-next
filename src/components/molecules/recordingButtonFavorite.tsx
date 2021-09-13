@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import { useIsRecordingFavorited } from '@lib/api';
+import { BaseColors } from '@lib/constants';
 
 import ButtonFavorite from './buttonFavorite';
 

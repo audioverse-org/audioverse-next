@@ -1,0 +1,18 @@
+query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
+	collection(id: $id) {
+		id
+		...collectionPivot
+		persons(
+			offset: $offset
+			first: $first
+			orderBy: [{ field: NAME, direction: ASC }]
+		) {
+			nodes {
+				...cardPerson
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}

@@ -3,12 +3,13 @@ import { when } from 'jest-when';
 import {
 	GetSponsorDetailPageDataDocument,
 	GetSponsorDetailPathsDataDocument,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SponsorDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]';
+} from '@pages/[language]/sponsors/[id]/[[...slugs]]';
 
 const renderPage = buildStaticRenderer(SponsorDetail, getStaticProps, {
 	language: 'en',
@@ -34,6 +35,25 @@ function loadData() {
 					aggregate: {
 						count: 0,
 					},
+				},
+				sequences: {
+					nodes: [
+						{
+							id: 'the_sequence_id',
+							title: 'the_sequence_title',
+							contentType: SequenceContentType.Series,
+							canonicalPath: 'the_sequence_path',
+							recordings: {
+								aggregate: {
+									count: 1,
+								},
+							},
+							speakers: [],
+						},
+					],
+				},
+				recordings: {
+					nodes: [],
 				},
 			},
 		});

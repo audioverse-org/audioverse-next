@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading6 from '@components/atoms/heading6';
+import { BaseColors } from '@lib/constants';
 
 import baseColorStyles from '../atoms/baseColors.module.scss';
 
@@ -9,9 +9,13 @@ import styles from './typeLockup.module.scss';
 
 type Props = {
 	Icon: React.ElementType;
-	label: string;
+	label: string | JSX.Element;
 	iconColor: BaseColors.RED | BaseColors.SALMON;
-	textColor: BaseColors.DARK | BaseColors.WHITE | BaseColors.LIGHT_TONE;
+	textColor:
+		| BaseColors.DARK
+		| BaseColors.MID_TONE
+		| BaseColors.LIGHT_TONE
+		| BaseColors.WHITE;
 };
 
 export default function TypeLockup({

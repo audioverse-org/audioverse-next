@@ -1,11 +1,11 @@
 import Slider from '@material-ui/core/Slider';
 import React, { useContext } from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
+import { BaseColors } from '@lib/constants';
 import { useFormattedTime } from '@lib/time';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';

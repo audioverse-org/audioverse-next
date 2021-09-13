@@ -24,8 +24,9 @@ function loadData() {
 					{
 						id: 'the_person_id',
 						name: 'the_person_name',
+						canonicalPath: 'the_person_path',
 						summary: 'the_person_summary',
-						imageWithFallback: {
+						image: {
 							url: 'the_person_image',
 						},
 					},
@@ -82,10 +83,9 @@ describe('presenter list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_person_name').parentElement).toHaveAttribute(
-			'href',
-			'/en/presenters/the_person_id'
-		);
+		expect(
+			getByText('the_person_name').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_person_path');
 	});
 
 	it('includes presenter images', async () => {
@@ -97,14 +97,6 @@ describe('presenter list page', () => {
 			'src',
 			'the_person_image'
 		);
-	});
-
-	it('includes summaries', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_person_summary')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {

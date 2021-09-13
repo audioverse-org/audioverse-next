@@ -7,14 +7,14 @@ fragment sequence on Sequence {
 	endDate
 	collection {
 		title
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 	}
 	image {
 		url(size: 64)
 	}
 	sponsor {
 		title
-		canonicalPath
+		canonicalPath(useFuturePath: true)
 	}
 	shareUrl
 	viewerHasFavorited

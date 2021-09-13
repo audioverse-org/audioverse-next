@@ -1,4 +1,4 @@
-import Audiobooks from '@containers/audiobook/list';
+import AudiobooksList from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
 	getAudiobookListPathsData,
@@ -8,7 +8,7 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 import { AudiobooksStaticProps } from '../index';
 
-export default Audiobooks;
+export default AudiobooksList;
 
 export interface GetStaticPropsArgs {
 	params: { i: string; language: string };

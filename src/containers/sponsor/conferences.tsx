@@ -1,19 +1,20 @@
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
+import CardCollection from '@components/molecules/card/collection';
+import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
-import TableList from '@components/organisms/tableList';
-import { GetSponsorConferencesPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+import { BaseColors } from '@lib/constants';
 import {
-	makeCollectionRoute,
-	makeSponsorConferencesRoute,
-	makeSponsorRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useQueryString } from '@lib/useQueryString';
+	GetSponsorConferencesPageDataQuery,
+	SponsorPivotFragment,
+} from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+import { makeSponsorConferencesRoute } from '@lib/routes';
+
+import SponsorPivot from './pivot';
 
 export type SponsorConferencesProps = PaginatedProps<
 	NonNullable<GetSponsorConferencesPageDataQuery['conferences']['nodes']>[0],
@@ -22,34 +23,31 @@ export type SponsorConferencesProps = PaginatedProps<
 
 function SponsorConferences({
 	nodes,
-	data,
+	data: { sponsor },
 	pagination,
-}: SponsorConferencesProps): JSX.Element {
-	const id = useQueryString('id') || '';
-	const languageRoute = useLanguageRoute();
+}: Must<SponsorConferencesProps> & {
+	data: { sponsor: Must<SponsorPivotFragment> };
+}): JSX.Element {
 	return (
-		<>
-			<h1>
-				<Link href={makeSponsorRoute(languageRoute, id)}>
-					<a>{data?.sponsor?.title}</a>
-				</Link>
-			</h1>
-			<h2>
+		<SponsorPivot {...{ sponsor }}>
+			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
-					id={'sponsorConferencesPage__title'}
-					defaultMessage={'Conferences'}
-					description={'Sponsor conferences page title'}
+					id="sponsorConferencesDetail__heading"
+					defaultMessage="All Conferences"
 				/>
-			</h2>
-			<TableList
-				nodes={nodes}
-				makeEntryRoute={(l, n) => makeCollectionRoute(l, n.id)}
-			/>
+			</LineHeading>
+			<CardGroup>
+				{nodes.map((node) => (
+					<CardCollection collection={node} key={node.canonicalPath} />
+				))}
+			</CardGroup>
 			<Pagination
-				makeRoute={(l, i) => makeSponsorConferencesRoute(l, id, i)}
 				{...pagination}
+				makeRoute={(languageRoute, pageIndex) =>
+					makeSponsorConferencesRoute(languageRoute, sponsor.id, pageIndex)
+				}
 			/>
-		</>
+		</SponsorPivot>
 	);
 }
 

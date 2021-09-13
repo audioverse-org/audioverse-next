@@ -1,65 +1,53 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
+import CardSequence from '@components/molecules/card/sequence';
+import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
-import TableList from '@components/organisms/tableList';
-import { GetSponsorSeriesPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+import { BaseColors } from '@lib/constants';
 import {
-	makeSeriesDetailRoute,
-	makeSponsorRoute,
-	makeSponsorSeriesRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useQueryString } from '@lib/useQueryString';
+	GetSponsorSeriesPageDataQuery,
+	SponsorPivotFragment,
+} from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+import { makeSponsorSeriesRoute } from '@lib/routes';
+
+import SponsorPivot from './pivot';
 
 export type SponsorSeriesProps = PaginatedProps<
-	NonNullable<GetSponsorSeriesPageDataQuery['serieses']['nodes']>[0],
+	NonNullable<GetSponsorSeriesPageDataQuery['sequences']['nodes']>[0],
 	GetSponsorSeriesPageDataQuery
 >;
 
 function SponsorSeries({
-	data,
 	nodes,
+	data: { sponsor },
 	pagination,
-}: SponsorSeriesProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	const id = useQueryString('id') || '';
-	const imageSrc = data?.sponsor?.imageWithFallback.url;
+}: Must<SponsorSeriesProps> & {
+	data: { sponsor: Must<SponsorPivotFragment> };
+}): JSX.Element {
 	return (
-		<>
-			{imageSrc && (
-				<Image
-					src={imageSrc}
-					alt={data?.sponsor?.title}
-					width={100}
-					height={100}
-				/>
-			)}
-			<h1>
-				<Link href={makeSponsorRoute(languageRoute, id)}>
-					<a>{data?.sponsor?.title}</a>
-				</Link>
-			</h1>
-			<h2>
+		<SponsorPivot {...{ sponsor }}>
+			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
-					id={'sponsorSeriesPage__title'}
-					defaultMessage={'Series'}
-					description={'Sponsor series page title'}
+					id="sponsorSeriesDetail__heading"
+					defaultMessage="All Series"
 				/>
-			</h2>
-			<TableList
-				nodes={nodes}
-				makeEntryRoute={(l, n) => makeSeriesDetailRoute(l, n.id)}
-			/>
+			</LineHeading>
+			<CardGroup>
+				{nodes.map((node) => (
+					<CardSequence sequence={node} key={node.canonicalPath} />
+				))}
+			</CardGroup>
 			<Pagination
 				{...pagination}
-				makeRoute={(l, i) => makeSponsorSeriesRoute(l, id, i)}
+				makeRoute={(languageRoute, pageIndex) =>
+					makeSponsorSeriesRoute(languageRoute, sponsor.id, pageIndex)
+				}
 			/>
-		</>
+		</SponsorPivot>
 	);
 }
 

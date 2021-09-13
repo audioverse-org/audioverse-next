@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetPresenterDetailPathsDataDocument,
 	GetPresenterRecordingsPageDataDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import writeFeedFile from '@lib/writeFeedFile';
@@ -36,6 +37,14 @@ function loadData() {
 						{
 							id: 'the_recording_id',
 							title: 'the_recording_title',
+							canonicalPath: 'the_recording_path',
+							contentType: RecordingContentType.Sermon,
+							persons: [],
+							recordings: {
+								aggregate: {
+									count: 0,
+								},
+							},
 						},
 					],
 				},
@@ -104,16 +113,17 @@ describe('presenter recordings page', () => {
 		expect(writeFeedFile).not.toBeCalled();
 	});
 
-	it('links to rss feed', async () => {
-		loadData();
+	// TODO: add?
+	// it('links to rss feed', async () => {
+	// 	loadData();
 
-		const { getByText } = await renderPage();
+	// 	const { getByText } = await renderPage();
 
-		expect(getByText('RSS')).toHaveAttribute(
-			'href',
-			'/en/presenters/the_presenter_id.xml'
-		);
-	});
+	// 	expect(getByText('RSS')).toHaveAttribute(
+	// 		'href',
+	// 		'/en/presenters/the_presenter_id.xml'
+	// 	);
+	// });
 
 	it('lists presenter recordings', async () => {
 		loadData();
@@ -140,22 +150,6 @@ describe('presenter recordings page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_presenter_name')).toBeInTheDocument();
-	});
-
-	it('displays speaker summary', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_presenter_summary')).toBeInTheDocument();
-	});
-
-	it('renders description', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('description')).toBeInTheDocument();
 	});
 
 	it('displays person image', async () => {

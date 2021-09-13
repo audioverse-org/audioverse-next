@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
@@ -10,6 +9,7 @@ import ButtonShareRecording from '@components/molecules/buttonShareRecording';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
+import { BaseColors } from '@lib/constants';
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';

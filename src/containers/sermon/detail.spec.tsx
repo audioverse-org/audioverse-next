@@ -23,7 +23,7 @@ import {
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sermons/[id]/[[...slug]]';
+} from '@pages/[language]/teachings/[id]/[[...slug]]';
 
 jest.mock('next/router');
 jest.mock('video.js');
@@ -130,7 +130,7 @@ describe('sermon detail page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/sermons/sermon_id');
+		expect(result.paths).toContain('/en/teachings/sermon_id');
 	});
 
 	it('generates localized paths', async () => {
@@ -138,7 +138,7 @@ describe('sermon detail page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/es/sermons/sermon_id');
+		expect(result.paths).toContain('/es/teachings/sermon_id');
 	});
 
 	it('catches API errors', async () => {
@@ -686,13 +686,13 @@ describe('sermon detail page', () => {
 			sequenceIndex: 2,
 			sequencePreviousRecording: {
 				id: 1,
-				canonicalPath: '/en/sermons/1',
+				canonicalPath: '/en/teachings/1',
 			},
 		});
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Previous')).toHaveAttribute('href', '/en/sermons/1');
+		expect(getByText('Previous')).toHaveAttribute('href', '/en/teachings/1');
 	});
 
 	it('links to next recording', async () => {
@@ -704,13 +704,13 @@ describe('sermon detail page', () => {
 			sequenceIndex: 2,
 			sequenceNextRecording: {
 				id: 3,
-				canonicalPath: '/en/sermons/3',
+				canonicalPath: '/en/teachings/3',
 			},
 		});
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Next')).toHaveAttribute('href', '/en/sermons/3');
+		expect(getByText('Next')).toHaveAttribute('href', '/en/teachings/3');
 	});
 
 	it('links sponsor title', async () => {
@@ -718,16 +718,13 @@ describe('sermon detail page', () => {
 			sponsor: {
 				id: 'sponsor_id',
 				title: 'sponsor_title',
-				canonicalPath: 'sponsor_path',
+				canonicalPath: '/sponsor_path',
 			},
 		});
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('sponsor_title')).toHaveAttribute(
-			'href',
-			'/en/sponsors/sponsor_id'
-		);
+		expect(getByText('sponsor_title')).toHaveAttribute('href', '/sponsor_path');
 	});
 
 	it('sets head title', async () => {
@@ -1212,6 +1209,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				canonicalPath: '/series_path',
 			},
 		});
 
@@ -1219,7 +1217,10 @@ describe('sermon detail page', () => {
 		const metadata = result.getByLabelText('metadata');
 		const link = getByText(metadata, 'series_title');
 
-		expect(link).toHaveAttribute('href', expect.stringContaining('series_id'));
+		expect(link).toHaveAttribute(
+			'href',
+			expect.stringContaining('/series_path')
+		);
 	});
 
 	it('includes collection title in metadata', async () => {
@@ -1241,6 +1242,7 @@ describe('sermon detail page', () => {
 			collection: {
 				id: 'conference_id',
 				title: 'conference_title',
+				canonicalPath: '/conference_path',
 			},
 		});
 
@@ -1250,7 +1252,7 @@ describe('sermon detail page', () => {
 
 		expect(link).toHaveAttribute(
 			'href',
-			expect.stringContaining('conference_id')
+			expect.stringContaining('/conference_path')
 		);
 	});
 

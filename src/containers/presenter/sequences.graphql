@@ -1,0 +1,29 @@
+query getPresenterSequencesPageData(
+	$language: Language!
+	$id: ID!
+	$offset: Int
+	$first: Int
+) {
+	person(id: $id) {
+		id
+		name
+		canonicalPath(useFuturePath: true)
+		imageWithFallback {
+			url(size: 100)
+		}
+	}
+	sequences(
+		language: $language
+		offset: $offset
+		first: $first
+		persons: [{ personId: $id, role: SPEAKER }]
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardSequence
+		}
+		aggregate {
+			count
+		}
+	}
+}

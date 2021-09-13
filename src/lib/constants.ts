@@ -103,3 +103,22 @@ export const BIBLE_BOOKS = [
 	'Jude',
 	'Revelation',
 ];
+
+export enum BaseColors {
+	WHITE = 'white',
+	CREAM = 'cream',
+	RED = 'red',
+	DARK = 'dark',
+	SALMON = 'salmon',
+	LIGHT_TONE = 'lightTone',
+	MID_TONE = 'midTone',
+	BIBLE_B = 'bibleB',
+	BOOK_B = 'bookB',
+	BOOK_H = 'bookH',
+	SONG_B = 'songB',
+	SONG_H = 'songH',
+	STORY_B = 'storyB',
+	STORY_H = 'storyH',
+	TOPIC_B = 'topicB',
+	SMART_PLAYLIST_H = 'smartPlaylistH',
+}

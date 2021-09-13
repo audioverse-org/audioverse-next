@@ -73,12 +73,12 @@ export default function Footer(): JSX.Element {
 					</Link>
 				</li>
 				<li>
-					<Link href={`/${languageRoute}/sermons/all/page/1`}>
+					<Link href={`/${languageRoute}/teachings/all/page/1`}>
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemPresentations`}
-								defaultMessage="Presentations"
-								description={`Footer nav link name: Presentations`}
+								id={`footer__NavItemTeachings`}
+								defaultMessage="Teachings"
+								description={`Footer nav link name: Teachings`}
 							/>
 						</a>
 					</Link>

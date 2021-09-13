@@ -4,14 +4,16 @@ import React, { MouseEvent } from 'react';
 
 import styles from './button.module.scss';
 
+export type IButtonType =
+	| 'super'
+	| 'primary'
+	| 'primaryInverse'
+	| 'secondary'
+	| 'secondaryInverse';
+// | 'tertiary' someday
+
 type Props = {
-	type:
-		| 'super'
-		| 'primary'
-		| 'primaryInverse'
-		| 'secondary'
-		| 'secondaryInverse'
-		| 'tertiary';
+	type: IButtonType;
 	text?: JSX.Element | string;
 	href?: string;
 	onClick?: (e: MouseEvent<HTMLElement>) => void;

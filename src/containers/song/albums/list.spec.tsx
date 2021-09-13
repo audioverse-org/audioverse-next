@@ -1,16 +1,23 @@
 import { when } from 'jest-when';
 
-import { GetSongsListPageDataDocument } from '@lib/generated/graphql';
+import {
+	GetSongAlbumsListPageDataDocument,
+	GetSongAlbumsListPathDataDocument,
+} from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-import Songs, { getStaticPaths, getStaticProps } from '@pages/[language]/songs';
+import Songs, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/songs/albums/page/[i]';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps, {
 	language: 'en',
+	i: '1',
 });
 
 function loadData() {
 	when(mockedFetchApi)
-		.calledWith(GetSongsListPageDataDocument, expect.anything())
+		.calledWith(GetSongAlbumsListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			musicAlbums: {
 				nodes: [
@@ -52,9 +59,11 @@ describe('songs list page', () => {
 	it('renders', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSongsListPageDataDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetSongAlbumsListPageDataDocument, {
 			variables: {
+				first: 12,
 				language: 'ENGLISH',
+				offset: 0,
 			},
 		});
 	});
@@ -68,9 +77,19 @@ describe('songs list page', () => {
 	});
 
 	it('renders static paths', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetSongAlbumsListPathDataDocument, expect.anything())
+			.mockResolvedValue({
+				musicAlbums: {
+					aggregate: {
+						count: 100,
+					},
+				},
+			});
+
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/songs');
+		expect(paths).toContain('/en/songs/albums/page/1');
 	});
 
 	it('includes sponsor name', async () => {
@@ -192,8 +211,9 @@ describe('songs list page', () => {
 
 	it('slugifies tag routes', async () => {
 		when(mockedFetchApi)
-			.calledWith(GetSongsListPageDataDocument, expect.anything())
+			.calledWith(GetSongAlbumsListPageDataDocument, expect.anything())
 			.mockResolvedValue({
+				musicAlbums: {},
 				musicMoodTags: {
 					nodes: [
 						{

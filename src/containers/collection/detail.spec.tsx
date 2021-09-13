@@ -3,13 +3,14 @@ import { when } from 'jest-when';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 // import writeFeedFile from '@lib/writeFeedFile';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/collections/[id]/[[...slug]]';
+} from '@pages/[language]/conferences/[id]/[[...slug]]';
 
 jest.mock('@lib/writeFeedFile');
 
@@ -58,6 +59,7 @@ function loadData() {
 						{
 							id: 'the_sequence_id',
 							title: 'the_sequence_title',
+							contentType: SequenceContentType.Series,
 							canonicalPath: 'the_sequence_path',
 							recordings: {
 								aggregate: {
@@ -110,7 +112,7 @@ describe('collection detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/collections/the_collection_id');
+		expect(paths).toContain('/en/conferences/the_collection_id');
 	});
 
 	it('renders sponsor link', async () => {

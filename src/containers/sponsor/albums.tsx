@@ -8,7 +8,7 @@ import TableList from '@components/organisms/tableList';
 import { GetSponsorAlbumsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
-	makeAlbumRoute,
+	makeSongAlbumDetailRoute,
 	makeSponsorAlbumsRoute,
 	makeSponsorRoute,
 } from '@lib/routes';
@@ -44,7 +44,7 @@ function SponsorAlbums({
 			</h2>
 			<TableList
 				nodes={nodes}
-				makeEntryRoute={(l, n) => makeAlbumRoute(l, n.id)}
+				makeEntryRoute={(l, n) => makeSongAlbumDetailRoute(l, n.id)}
 			/>
 			<Pagination
 				makeRoute={(l, i) => makeSponsorAlbumsRoute(l, id, i)}

@@ -2,10 +2,10 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
 import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
+import { BaseColors } from '@lib/constants';
 import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
 jest.mock('@lib/api/isRecordingFavorited');
 jest.mock('@lib/api/setRecordingFavorited');

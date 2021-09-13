@@ -2,15 +2,18 @@ query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
 	person(id: $id) {
 		id
 		name
-		summary
-		description
+		canonicalPath(useFuturePath: true)
 		imageWithFallback {
 			url(size: 100)
 		}
-		recordings(offset: $offset, first: $first) {
+		recordings(
+			offset: $offset
+			first: $first
+			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+		) {
 			nodes {
+				...cardRecording
 				...writeFeedFile
-				...recordingList
 			}
 			aggregate {
 				count

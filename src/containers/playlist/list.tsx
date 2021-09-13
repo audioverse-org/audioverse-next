@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import PaginatedList from '@components/templates/paginatedList';
+import OldPaginatedList from '@components/templates/paginatedList';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import { useGetPlaylistsPageDataQuery } from '@lib/generated/graphql';
 import getPageOffset from '@lib/getPageOffset';
@@ -28,7 +28,7 @@ function Playlists(): JSX.Element {
 	};
 	const intl = useIntl();
 	return (
-		<PaginatedList
+		<OldPaginatedList
 			pageTitle={intl.formatMessage({
 				id: 'playlists__pageTitle',
 				defaultMessage: 'Playlists',

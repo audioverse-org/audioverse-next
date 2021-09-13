@@ -3,7 +3,6 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BaseColors } from '@components/atoms/baseColors';
 import Heading1 from '@components/atoms/heading1';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
@@ -19,16 +18,11 @@ import SequenceNav from '@components/molecules/sequenceNav';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
+import { BaseColors } from '@lib/constants';
 import {
 	RecordingContentType,
 	RecordingFragment,
 } from '@lib/generated/graphql';
-import {
-	makeCollectionRoute,
-	makeSeriesDetailRoute,
-	makeSponsorRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
@@ -39,7 +33,6 @@ interface RecordingProps {
 }
 
 export function Recording({ recording }: RecordingProps): JSX.Element {
-	const langRoute = useLanguageRoute();
 	const intl = useIntl();
 	const {
 		contentType,
@@ -65,9 +58,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	});
 	const index = sequenceIndex;
 	const seriesItems = sequence?.recordings?.nodes;
-	const seriesDetailRoute = sequence
-		? makeSeriesDetailRoute(langRoute, sequence.id)
-		: '';
 
 	const {
 		accentColor,
@@ -171,7 +161,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={seriesDetailRoute}>
+					<Link href={sequence.canonicalPath}>
 						<a className={linkClass}>{sequence.title}</a>
 					</Link>
 				</p>
@@ -189,7 +179,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={makeCollectionRoute(langRoute, collection.id)}>
+					<Link href={collection.canonicalPath}>
 						<a className={linkClass}>{collection.title}</a>
 					</Link>
 				</p>
@@ -207,7 +197,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 			definition: (
 				<p>
-					<Link href={makeSponsorRoute(langRoute, sponsor.id)}>
+					<Link href={sponsor.canonicalPath}>
 						<a className={linkClass}>{sponsor.title}</a>
 					</Link>
 				</p>
@@ -307,7 +297,10 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 						<HorizontalRule color={textRuleColor} />
 
-						<CopyrightInfo recording={recording} />
+						<CopyrightInfo
+							recording={recording}
+							useInverse={useInverseButtons}
+						/>
 					</div>
 				</div>
 

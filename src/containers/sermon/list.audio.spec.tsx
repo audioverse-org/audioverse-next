@@ -8,10 +8,10 @@ import {
 	loadRouter,
 	mockedFetchApi,
 } from '@lib/test/helpers';
-import { getStaticPaths } from '@pages/[language]/sermons/audio/page/[i]';
+import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
-} from '@pages/[language]/sermons/audio/page/[i]';
+} from '@pages/[language]/teachings/audio/page/[i]';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
 	i: '1',
@@ -63,13 +63,13 @@ describe('sermon audio list page', () => {
 			},
 		});
 
-		loadRouter({ pathname: '/[language]/sermons/audio/page/[i]' });
+		loadRouter({ pathname: '/[language]/teachings/audio/page/[i]' });
 
 		const { getByRole } = await renderPage();
 
 		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
 			'href',
-			'/en/sermons/audio.xml'
+			'/en/teachings/audio.xml'
 		);
 	});
 
@@ -79,6 +79,6 @@ describe('sermon audio list page', () => {
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/sermons/audio/page/1');
+		expect(link.href).toContain('/en/teachings/audio/page/1');
 	});
 });
