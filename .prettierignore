@@ -6,5 +6,4 @@ package.json
 package-lock.json
 seeds
 *.handlebars
-/schema.graphql
 /.lighthouseci

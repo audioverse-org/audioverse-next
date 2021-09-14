@@ -16,8 +16,13 @@ export async function getServerSideProps({
 	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
 		series: null,
 	}));
+	if (!series) {
+		return {
+			notFound: true,
+		};
+	}
 
-	if (res && series) {
+	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(

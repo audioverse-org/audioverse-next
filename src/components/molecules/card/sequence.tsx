@@ -7,6 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
+import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
 import {
 	CardSequenceFragment,
@@ -35,6 +36,7 @@ export default function CardSequence({
 	sequence,
 }: CardCollectionProps): JSX.Element {
 	const intl = useIntl();
+	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
 
 	const {
 		contentType,
@@ -43,7 +45,6 @@ export default function CardSequence({
 		duration,
 		summary,
 		title,
-		viewerHasFavorited,
 		viewerPlaybackCompletedPercentage,
 		speakers,
 		writers,
@@ -173,7 +174,7 @@ export default function CardSequence({
 					<div
 						className={clsx(
 							styles.details,
-							viewerHasFavorited && styles.detailsWithLike
+							isFavorited && styles.detailsWithLike
 						)}
 					>
 						<div className={styles.duration}>
@@ -190,9 +191,9 @@ export default function CardSequence({
 				</a>
 			</Link>
 			<IconButton
-				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => alert('TODO')}
-				color={viewerHasFavorited ? accentColor : iconColor}
+				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+				onPress={() => toggleFavorited()}
+				color={isFavorited ? accentColor : iconColor}
 				backgroundColor={backgroundColor}
 				className={styles.like}
 			/>

@@ -1,4 +1,5 @@
 import { fetchApi } from '@lib/api/fetchApi';
+import { Scalars } from '@lib/generated/graphql';
 
 const mutationAdd = `
 mutation($recordingId: ID!, $playlistId: ID!) {
@@ -19,8 +20,8 @@ mutation($recordingId: ID!, $playlistId: ID!) {
 `;
 
 export async function setPlaylistMembership(
-	recordingId: string,
-	playlistId: string,
+	recordingId: Scalars['ID'],
+	playlistId: Scalars['ID'],
 	add: boolean
 ): Promise<boolean> {
 	const mutation = add ? mutationAdd : mutationRemove;

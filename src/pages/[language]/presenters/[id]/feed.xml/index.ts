@@ -20,8 +20,13 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		person: null,
 	}));
+	if (!person) {
+		return {
+			notFound: true,
+		};
+	}
 
-	if (res && person) {
+	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(

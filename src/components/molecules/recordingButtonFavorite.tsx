@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
+import { Scalars } from '@lib/generated/graphql';
 
 import ButtonFavorite from './buttonFavorite';
 
@@ -9,16 +10,16 @@ export default function RecordingButtonFavorite({
 	id,
 	...props
 }: {
-	id: string;
+	id: Scalars['ID'];
 	backgroundColor: BaseColors;
 	light?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isRecordingFavorited, toggleFavorited } = useIsRecordingFavorited(id);
+	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(id);
 
 	return (
 		<ButtonFavorite
-			isFavorited={!!isRecordingFavorited}
+			isFavorited={!!isFavorited}
 			toggleFavorited={toggleFavorited}
 			{...props}
 		/>

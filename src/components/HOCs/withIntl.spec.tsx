@@ -42,7 +42,7 @@ import SponsorTeachings from '@containers/sponsor/teachings';
 import StoryAlbumsList from '@containers/story/albums/list';
 import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
-import { isRecordingFavorited } from '@lib/api';
+import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import {
 	GetWithAuthGuardDataDocument,
@@ -61,12 +61,11 @@ import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
-jest.mock('@lib/api/isRecordingFavorited');
-jest.mock('@lib/api/isPersonFavorited');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 jest.mock('@lib/time');
 jest.mock('@lib/api/logout');
+jest.mock('@lib/api/useIsRecordingFavorited');
 
 const expectNoUnlocalizedText = (
 	screen: RenderResult,
@@ -178,6 +177,11 @@ describe('localization usage', () => {
 	});
 
 	it('localizes sermon detail page', async () => {
+		jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+			isFavorited: false,
+			isLoading: false,
+			toggleFavorited: {} as any,
+		});
 		const screen = await renderWithQueryProvider(
 			<SermonDetail
 				recording={
@@ -224,7 +228,11 @@ describe('localization usage', () => {
 	});
 
 	it('localizes Unfavorite button', async () => {
-		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+			isFavorited: false,
+			isLoading: false,
+			toggleFavorited: {} as any,
+		});
 
 		const screen = await renderWithQueryProvider(
 			<RecordingButtonFavorite
@@ -233,7 +241,7 @@ describe('localization usage', () => {
 			/>
 		);
 
-		await waitFor(() => expect(isRecordingFavorited).toBeCalled());
+		await waitFor(() => expect(useIsRecordingFavorited).toBeCalled());
 
 		expectNoUnlocalizedText(screen);
 	});
@@ -398,7 +406,6 @@ describe('localization usage', () => {
 					location: '',
 					startDate: null,
 					endDate: null,
-					viewerHasFavorited: false,
 					sequences: {
 						aggregate: {
 							count: 0,
@@ -440,6 +447,11 @@ describe('localization usage', () => {
 	});
 
 	it('localizes presenter recordings page', async () => {
+		jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+			isFavorited: false,
+			isLoading: false,
+			toggleFavorited: {} as any,
+		});
 		const screen = await renderWithQueryProvider(
 			<PresenterRecordings
 				nodes={
@@ -609,6 +621,11 @@ describe('localization usage', () => {
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {
 		it(`Localizes scenario index ${i}`, async () => {
+			jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+				isFavorited: false,
+				isLoading: false,
+				toggleFavorited: {} as any,
+			});
 			await expectNoUnlocalizedMessages(...s);
 		});
 	});

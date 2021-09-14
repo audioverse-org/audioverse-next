@@ -1,7 +1,7 @@
 fragment cardSponsor on Sponsor {
+    id
 	title
 	canonicalPath(useFuturePath: true)
-	viewerHasFavorited
 	image {
 		url(size: 64)
 	}

@@ -1,0 +1,10 @@
+mutation collectionFavorite($id: ID!) {
+	favorited: collectionFavorite(id: $id) {
+		success
+	}
+}
+mutation collectionFavorite($id: ID!) {
+	favorited: collectionFavorite(id: $id) {
+		success
+	}
+}

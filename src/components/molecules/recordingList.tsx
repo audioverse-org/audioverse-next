@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import TableList from '@components/organisms/tableList';
 import { BaseColors } from '@lib/constants';
-import { RecordingListFragment } from '@lib/generated/graphql';
+import { RecordingListFragment, Scalars } from '@lib/generated/graphql';
 import { makeSermonRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 
@@ -54,7 +54,7 @@ const columns = [
 
 interface RecordingListProps {
 	recordings: RecordingListFragment[];
-	makeRoute?: (languageRoute: string, entityId: string) => string;
+	makeRoute?: (languageRoute: string, entityId: Scalars['ID']) => string;
 }
 
 // TODO: delete/rework this component

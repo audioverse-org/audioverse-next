@@ -1,44 +1,13 @@
-import {
-	UseMutateFunction,
-	useMutation,
-	useQuery,
-	useQueryClient,
-} from 'react-query';
-
-import { isPersonFavorited as _isPersonFavorited } from '@lib/api/isPersonFavorited';
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
+import { Scalars } from '@lib/generated/graphql';
 
-export function useIsPersonFavorited(id: string): {
-	isPersonFavorited: boolean | undefined;
-	toggleFavorited: UseMutateFunction;
-	isLoading: boolean;
-} {
-	const queryClient = useQueryClient();
-	const queryKey = ['isPersonFavorited', id];
+import { personIsFavorited } from './personIsFavorited';
+import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 
-	const { data: isPersonFavorited, isLoading } = useQuery(queryKey, () =>
-		_isPersonFavorited(id)
+export function useIsPersonFavorited(id: Scalars['ID']): IUseIsFavoritedResult {
+	return useIsFavorited(
+		['isPersonFavorited', id],
+		() => personIsFavorited(id),
+		(isFavorited) => setPersonFavorited(id, isFavorited)
 	);
-
-	const { mutate: toggleFavorited } = useMutation(
-		() => setPersonFavorited(id, !isPersonFavorited),
-		{
-			onMutate: async () => {
-				await queryClient.cancelQueries(queryKey);
-
-				const snapshot = isPersonFavorited;
-
-				queryClient.setQueryData(queryKey, !isPersonFavorited);
-
-				return () => queryClient.setQueryData(queryKey, snapshot);
-			},
-			onError: (err, variables, rollback) => {
-				if (rollback) {
-					rollback();
-				}
-			},
-		}
-	);
-
-	return { isPersonFavorited, toggleFavorited, isLoading };
 }

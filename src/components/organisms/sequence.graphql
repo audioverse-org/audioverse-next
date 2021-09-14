@@ -17,7 +17,6 @@ fragment sequence on Sequence {
 		canonicalPath(useFuturePath: true)
 	}
 	shareUrl
-	viewerHasFavorited
 	recordings(first: 250) {
 		aggregate {
 			count

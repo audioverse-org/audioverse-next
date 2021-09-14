@@ -1,0 +1,5 @@
+mutation personUnfavorite($id: ID!) {
+	favorited: personUnfavorite(id: $id) {
+		success
+	}
+}

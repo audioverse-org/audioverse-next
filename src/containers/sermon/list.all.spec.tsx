@@ -19,7 +19,6 @@ import SermonList, {
 
 jest.mock('next/router');
 jest.mock('next/head');
-jest.mock('@lib/api/isPersonFavorited');
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
 	language: 'en',

@@ -40,7 +40,7 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	const books = bibles.map((b) => b.books).flat();
 	const bookIds = books.map((b) => b.id);
 	const pathSets = languageRoutes.map((r) =>
-		bookIds.map((id) => makeBibleBookRoute(r, id))
+		bookIds.map((id) => makeBibleBookRoute(r, id + ''))
 	);
 
 	return {

@@ -13,12 +13,14 @@ interface GetStaticPropsArgs {
 }
 
 export async function getStaticProps({
-	params,
+	params: { language },
 }: GetStaticPropsArgs): Promise<
 	StaticProps<HomeProps & { disableSidebar: true }>
 > {
-	const language = _.get(params, 'language'),
-		langKey = _.findKey(LANGUAGES, (l) => l.base_url === language) as Language;
+	const langKey = _.findKey(
+		LANGUAGES,
+		(l) => l.base_url === language
+	) as Language;
 
 	if (!langKey) throw Error('Missing or invalid language');
 

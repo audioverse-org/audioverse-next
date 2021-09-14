@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
-import { isRecordingFavorited, setRecordingFavorited } from '@lib/api';
+import { recordingIsFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
-jest.mock('@lib/api/isRecordingFavorited');
+jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
 
@@ -41,7 +41,7 @@ describe('recording favorite button', () => {
 	});
 
 	it('shows unfavorite button', async () => {
-		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(true);
 
 		const { findByLabelText } = await renderComponent();
 
@@ -51,7 +51,7 @@ describe('recording favorite button', () => {
 	it('gets favorited status', async () => {
 		await renderComponent();
 
-		expect(isRecordingFavorited).toBeCalled();
+		expect(recordingIsFavorited).toBeCalled();
 	});
 
 	it('triggers mutation', async () => {
@@ -67,8 +67,8 @@ describe('recording favorite button', () => {
 	it('updates button when clicked', async () => {
 		const { findByLabelText, button } = await renderComponent();
 
-		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
-		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
+		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue(true);
 
 		userEvent.click(button);
 
@@ -89,8 +89,8 @@ describe('recording favorite button', () => {
 	});
 
 	it('does not roll back state if API succeeds', async () => {
-		const isFavoritedSpy = jest.spyOn(api, 'isRecordingFavorited');
-		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue('success');
+		const isFavoritedSpy = jest.spyOn(api, 'recordingIsFavorited');
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue(true);
 
 		isFavoritedSpy.mockResolvedValue(false);
 
@@ -114,7 +114,7 @@ describe('recording favorite button', () => {
 	});
 
 	it('sets aria-pressed=true', async () => {
-		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(true);
 
 		const { findByLabelText } = await renderComponent();
 
@@ -131,7 +131,7 @@ describe('recording favorite button', () => {
 	});
 
 	it('uses unfavorite icon', async () => {
-		jest.spyOn(api, 'isRecordingFavorited').mockResolvedValue(true);
+		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(true);
 
 		const { findByTestId } = await renderComponent();
 

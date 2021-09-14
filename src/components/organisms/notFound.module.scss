@@ -1,0 +1,17 @@
+@import '../../styles/common';
+
+.alert {
+	margin-bottom: 48px;
+	@media (min-width: $breakpoint-md) {
+		margin-bottom: 96px;
+		width: 50%;
+	}
+}
+
+.heading {
+	margin-bottom: 8px;
+}
+
+.copy {
+	margin-bottom: 32px;
+}

@@ -1369,7 +1369,7 @@
   },
   "presenterDetail__topAllLabel": {
     "col": 32,
-    "defaultMessage": "See All Most Listened",
+    "defaultMessage": "See More Most Listened",
     "end": 7285,
     "file": "src/containers/presenter/detail.tsx",
     "line": 242,

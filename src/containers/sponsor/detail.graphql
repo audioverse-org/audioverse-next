@@ -5,7 +5,6 @@ query getSponsorDetailPageData($id: ID!) {
 		location
 		website
 		description
-		viewerHasFavorited
 		imageWithFallback {
 			url(size: 100)
 		}

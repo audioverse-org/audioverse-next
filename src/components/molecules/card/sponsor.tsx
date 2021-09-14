@@ -7,6 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
+import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { CardSponsorFragment } from '@lib/generated/graphql';
 
@@ -26,9 +27,9 @@ export default function CardSponsor({
 	sponsor,
 }: CardSponsorProps): JSX.Element {
 	const intl = useIntl();
+	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const { canonicalPath, image, title, viewerHasFavorited, collections } =
-		sponsor;
+	const { canonicalPath, image, title, collections } = sponsor;
 
 	return (
 		<Card>
@@ -57,7 +58,7 @@ export default function CardSponsor({
 					<div
 						className={clsx(
 							styles.details,
-							viewerHasFavorited && styles.detailsWithLike
+							isFavorited && styles.detailsWithLike
 						)}
 					>
 						<Heading6
@@ -79,11 +80,11 @@ export default function CardSponsor({
 				</a>
 			</Link>
 			<IconButton
-				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => alert('TODO')}
-				color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+				onPress={() => toggleFavorited()}
+				color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 				backgroundColor={BaseColors.LIGHT_TONE}
-				className={clsx(styles.like, viewerHasFavorited && styles.likeActive)}
+				className={clsx(styles.like, isFavorited && styles.likeActive)}
 			/>
 		</Card>
 	);

@@ -20,6 +20,7 @@ import IconButton from '@components/molecules/iconButton';
 import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
+import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
 import {
@@ -41,6 +42,7 @@ export type SponsorDetailProps = GetSponsorDetailPageDataQuery;
 function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
+	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
 	const {
 		id,
@@ -50,7 +52,6 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 		location,
 		title,
 		website,
-		viewerHasFavorited,
 		recordings,
 		sequences,
 	} = sponsor;
@@ -139,9 +140,9 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}
 					/>

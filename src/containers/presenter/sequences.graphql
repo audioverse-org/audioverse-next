@@ -6,11 +6,7 @@ query getPresenterSequencesPageData(
 ) {
 	person(id: $id) {
 		id
-		name
-		canonicalPath(useFuturePath: true)
-		imageWithFallback {
-			url(size: 100)
-		}
+		...presenterPivot
 	}
 	sequences(
 		language: $language

@@ -3,10 +3,11 @@ import React from 'react';
 
 import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
+import { Scalars } from '@lib/generated/graphql';
 import { PaginationData } from '@lib/getPaginatedStaticProps';
 
 interface Listable {
-	id: string;
+	id: Scalars['ID'];
 }
 
 interface PaginatedListProps<T extends Listable> {

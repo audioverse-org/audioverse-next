@@ -1,0 +1,5 @@
+mutation sequenceUnfavorite($id: ID!) {
+	favorited: sequenceUnfavorite(id: $id) {
+		success
+	}
+}

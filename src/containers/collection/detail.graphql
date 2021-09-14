@@ -7,7 +7,6 @@ query getCollectionDetailPageData($id: ID!) {
 		duration
 		description
 		location
-		viewerHasFavorited
 		image {
 			url(size: 1400)
 		}
