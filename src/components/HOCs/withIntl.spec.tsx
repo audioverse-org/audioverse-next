@@ -442,7 +442,6 @@ describe('localization usage', () => {
 	it('localizes presenter recordings page', async () => {
 		const screen = await renderWithQueryProvider(
 			<PresenterRecordings
-				rssPath={'rssPath'}
 				nodes={
 					[
 						{

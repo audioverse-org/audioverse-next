@@ -1705,18 +1705,6 @@
     {
       "type": 1,
       "value": "tag"
-    },
-    {
-      "type": 0,
-      "value": " ("
-    },
-    {
-      "type": 1,
-      "value": "lang"
-    },
-    {
-      "type": 0,
-      "value": ")"
     }
   ],
   "tagListPage__title": [

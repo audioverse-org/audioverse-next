@@ -1,26 +1,16 @@
-import fs from 'fs';
-
-import * as feed from 'feed';
 import { when } from 'jest-when';
 import React from 'react';
 
-import { ENTRIES_PER_PAGE, PROJECT_ROOT } from '@lib/constants';
+import { ENTRIES_PER_PAGE } from '@lib/constants';
 import {
 	GetTagDetailPageDataDocument,
 	GetTagDetailPathsQueryDocument,
 } from '@lib/generated/graphql';
-import {
-	loadRouter,
-	mockedFetchApi,
-	mockFeed,
-	renderWithIntl,
-} from '@lib/test/helpers';
+import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import TagDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/tags/[slug]/page/[i]';
-
-jest.mock('fs');
 
 async function renderPage(parameters = {}) {
 	const params = { slug: 'the_tag', language: 'en', i: '1', ...parameters };
@@ -151,45 +141,5 @@ describe('tag detail page', () => {
 				offset: 0,
 			},
 		});
-	});
-
-	it('creates feed', async () => {
-		await renderPage();
-
-		const { calls } = (fs.writeFileSync as any).mock;
-
-		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/tags/the_tag.xml`);
-	});
-
-	it('sets feed title', async () => {
-		mockFeed();
-
-		await renderPage({ slug: 'my%20%3A%20tag' });
-
-		const calls = (feed.Feed as any).mock.calls;
-
-		expect(calls[0][0].title).toEqual(
-			'AudioVerse Recordings Tagged my : tag (English)'
-		);
-	});
-
-	it('includes rss feed link in page', async () => {
-		mockFeed();
-		loadPageData();
-
-		const { getByText } = await renderPage({ slug: 'my%20%3A%20tag' });
-
-		const link = getByText('RSS') as HTMLLinkElement;
-
-		expect(link.href).toContain('/en/tags/my%20%3A%20tag.xml');
-	});
-
-	it('includes tag title on page', async () => {
-		mockFeed();
-		loadPageData();
-
-		const { getByText } = await renderPage({ slug: 'my%20%3A%20tag' });
-
-		expect(getByText('my : tag')).toBeInTheDocument();
 	});
 });

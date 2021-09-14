@@ -14,8 +14,6 @@ import BlogPostDetail, {
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
 
-jest.mock('@lib/writeFeedFile');
-
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps, {
 	language: 'en',
 	id: 'the_blog_post_id',

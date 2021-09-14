@@ -3,19 +3,19 @@
     "col": 23,
     "defaultMessage": "Favorite",
     "description": "Recording favorite button label",
-    "end": 987,
+    "end": 1027,
     "file": "src/components/molecules/buttonFavorite.tsx",
-    "line": 32,
-    "start": 857
+    "line": 33,
+    "start": 897
   },
   "RecordingFavorite__unfavorite": {
     "col": 23,
     "defaultMessage": "Unfavorite",
     "description": "Recording unfavorite button label",
-    "end": 832,
+    "end": 872,
     "file": "src/components/molecules/buttonFavorite.tsx",
-    "line": 27,
-    "start": 696
+    "line": 28,
+    "start": 736
   },
   "accountPlaylists__errorMissingTitle": {
     "col": 23,
@@ -80,219 +80,186 @@
     "line": 25,
     "start": 658
   },
-  "audiobook-feed-title": {
-    "col": 34,
-    "defaultMessage": "{title} : AudioVerse audiobook",
-    "description": "Audiobook feed title",
-    "end": 986,
-    "file": "src/pages/[language]/books/[id].tsx",
-    "line": 34,
-    "start": 854
+  "audiobookList__heading": {
+    "col": 12,
+    "defaultMessage": "All Audiobooks",
+    "end": 997,
+    "file": "src/containers/audiobook/list.tsx",
+    "line": 26,
+    "start": 898
   },
-  "audiobookDetailPage__aboutTab": {
-    "col": 7,
-    "defaultMessage": "About",
-    "description": "Audiobook detail about tab",
-    "end": 1313,
-    "file": "src/containers/audiobook/audiobook.tsx",
-    "line": 37,
-    "start": 1163
-  },
-  "audiobookDetailPage__nowPlaying": {
-    "col": 7,
-    "defaultMessage": "Now playing:",
-    "description": "Audiobook detail now playing prefix",
-    "end": 1102,
-    "file": "src/containers/audiobook/audiobook.tsx",
-    "line": 29,
-    "start": 934
-  },
-  "audiobookDetailPage__shareTabTitle": {
-    "col": 7,
-    "defaultMessage": "Share",
-    "description": "Audiobook detail share tab",
-    "end": 1622,
-    "file": "src/containers/audiobook/audiobook.tsx",
-    "line": 46,
-    "start": 1467
-  },
-  "audiobookDetailPage__shortUrlLabel": {
-    "col": 7,
-    "defaultMessage": "Short URL",
-    "description": "Audiobook detail short url label",
-    "end": 1821,
-    "file": "src/containers/audiobook/audiobook.tsx",
-    "line": 53,
-    "start": 1656
-  },
-  "audiobookListPage__title": {
-    "col": 33,
-    "defaultMessage": "Audiobooks",
-    "description": "Audiobook list page title",
-    "end": 700,
-    "file": "src/containers/audiobook/audiobooks.tsx",
-    "line": 18,
-    "start": 578
+  "backButton__back": {
+    "col": 9,
+    "defaultMessage": "Back",
+    "end": 480,
+    "file": "src/components/molecules/buttonBack.tsx",
+    "line": 20,
+    "start": 416
   },
   "bibleBook__chapterSelectLabel": {
     "col": 4,
     "defaultMessage": "Chapter",
     "description": "Bible book detail page chapter select label",
-    "end": 1303,
+    "end": 1408,
     "file": "src/containers/bible/book.tsx",
-    "line": 41,
-    "start": 1146
+    "line": 47,
+    "start": 1251
   },
   "bibleBook__copyrightPrefix": {
     "col": 4,
     "defaultMessage": "Copyright ⓒ",
     "description": "Bible book detail page copyright prefix",
-    "end": 1964,
+    "end": 2069,
     "file": "src/containers/bible/book.tsx",
-    "line": 68,
-    "start": 1810
+    "line": 74,
+    "start": 1915
   },
   "bibleBook__mp3Label": {
     "col": 5,
     "defaultMessage": "mp3:",
     "description": "Bible book detail page mp3 download link label",
-    "end": 2402,
+    "end": 2507,
     "file": "src/containers/bible/book.tsx",
-    "line": 84,
-    "start": 2251
+    "line": 90,
+    "start": 2356
   },
   "bibleBook__shortUrlLabel": {
     "col": 4,
     "defaultMessage": "Short URL",
     "description": "Bible book detail page short url label",
-    "end": 3132,
+    "end": 3237,
     "file": "src/containers/bible/book.tsx",
-    "line": 115,
-    "start": 2983
+    "line": 121,
+    "start": 3088
   },
   "bibleBook__tabAbout": {
     "col": 4,
     "defaultMessage": "About",
     "description": "Bible book detail page about tab title",
-    "end": 1704,
+    "end": 1809,
     "file": "src/containers/bible/book.tsx",
-    "line": 59,
-    "start": 1564
+    "line": 65,
+    "start": 1669
   },
   "bibleBook__tabDownloads": {
     "col": 4,
     "defaultMessage": "Downloads",
     "description": "Bible book detail page downloads tab title",
-    "end": 2192,
+    "end": 2297,
     "file": "src/containers/bible/book.tsx",
-    "line": 76,
-    "start": 2040
+    "line": 82,
+    "start": 2145
   },
   "bibleBook__tabShare": {
     "col": 4,
     "defaultMessage": "Share",
     "description": "Bible book detail page share tab title",
-    "end": 2961,
+    "end": 3066,
     "file": "src/containers/bible/book.tsx",
-    "line": 108,
-    "start": 2821
+    "line": 114,
+    "start": 2926
   },
   "bibleBook__tabTranscript": {
     "col": 4,
     "defaultMessage": "Transcript",
     "description": "Bible book detail page transcript tab title",
-    "end": 2617,
+    "end": 2722,
     "file": "src/containers/bible/book.tsx",
-    "line": 93,
-    "start": 2462
+    "line": 99,
+    "start": 2567
   },
   "blogDetailPage__moreBlogPosts": {
     "col": 6,
     "defaultMessage": "More Blog Posts",
     "description": "Blog post detail more blog posts",
-    "end": 2192,
+    "end": 2249,
     "file": "src/containers/blog/detail.tsx",
-    "line": 66,
-    "start": 2030
+    "line": 67,
+    "start": 2087
   },
   "blogDetailPage__readingDuration": {
     "col": 7,
     "defaultMessage": "{duration} read",
     "description": "Blog post detail reading duration",
-    "end": 1793,
+    "end": 1838,
     "file": "src/containers/blog/detail.tsx",
-    "line": 48,
-    "start": 1537
+    "line": 49,
+    "start": 1582
   },
   "cardAudiobookTrack_readByLabel": {
     "col": 8,
     "defaultMessage": "Read by {name}",
-    "end": 1681,
+    "end": 1697,
     "file": "src/components/molecules/card/audiobookTrack.tsx",
-    "line": 46,
-    "start": 1497
+    "line": 48,
+    "start": 1513
   },
   "cardAudiobookTrack_sequenceLabel": {
     "col": 30,
     "defaultMessage": "Book",
-    "end": 1861,
+    "end": 1877,
     "file": "src/components/molecules/card/audiobookTrack.tsx",
-    "line": 57,
-    "start": 1780
-  },
-  "cardCollection_hatTitle": {
-    "col": 32,
-    "defaultMessage": "Conference",
-    "description": "Card collection hat title",
-    "end": 1864,
-    "file": "src/components/molecules/card/collection.tsx",
-    "line": 62,
-    "start": 1731
+    "line": 59,
+    "start": 1796
   },
   "cardCollection_sequenceLabel": {
     "col": 6,
     "defaultMessage": "{count} series",
     "description": "Card collection sequence count label",
-    "end": 2549,
+    "end": 2205,
     "file": "src/components/molecules/card/collection.tsx",
-    "line": 86,
-    "start": 2328
-  },
-  "cardPerson_hatTitle": {
-    "col": 33,
-    "defaultMessage": "Speaker",
-    "description": "Card person hat title",
-    "end": 1062,
-    "file": "src/components/molecules/card/person.tsx",
-    "line": 33,
-    "start": 936
+    "line": 74,
+    "start": 1984
   },
   "cardPost__readingDuration": {
-    "col": 7,
+    "col": 9,
     "defaultMessage": "{duration} read",
     "description": "Card post reading duration",
-    "end": 1591,
+    "end": 1563,
     "file": "src/components/molecules/card/post.tsx",
-    "line": 50,
-    "start": 1360
+    "line": 46,
+    "start": 1318
   },
-  "cardSequence_hatTitle": {
-    "col": 33,
-    "defaultMessage": "Series",
-    "description": "Card sequence hat title",
-    "end": 1649,
+  "cardSequence_audiobookType": {
+    "col": 30,
+    "defaultMessage": "Book",
+    "end": 1950,
     "file": "src/components/molecules/card/sequence.tsx",
-    "line": 51,
-    "start": 1520
+    "line": 68,
+    "start": 1875
+  },
+  "cardSequence_scriptureSongsType": {
+    "col": 30,
+    "defaultMessage": "Scripture Songs",
+    "end": 2315,
+    "file": "src/components/molecules/card/sequence.tsx",
+    "line": 80,
+    "start": 2224
   },
   "cardSequence_sequenceLabel": {
     "col": 6,
     "defaultMessage": "{count} parts",
     "description": "Card sequence recording count label",
-    "end": 2704,
+    "end": 4788,
     "file": "src/components/molecules/card/sequence.tsx",
-    "line": 86,
-    "start": 2489
+    "line": 166,
+    "start": 4573
+  },
+  "cardSequence_seriesType": {
+    "col": 30,
+    "defaultMessage": "Series",
+    "end": 2656,
+    "file": "src/components/molecules/card/sequence.tsx",
+    "line": 92,
+    "start": 2582
+  },
+  "cardSequence_storiesType": {
+    "col": 30,
+    "defaultMessage": "Stories",
+    "end": 3015,
+    "file": "src/components/molecules/card/sequence.tsx",
+    "line": 104,
+    "start": 2939
   },
   "cardSermon_sequenceLabel": {
     "col": 30,
@@ -306,129 +273,161 @@
     "col": 36,
     "defaultMessage": "Next page",
     "description": "card slider next page label",
-    "end": 2264,
+    "end": 2384,
     "file": "src/components/organisms/slider.tsx",
-    "line": 81,
-    "start": 2132
+    "line": 86,
+    "start": 2252
   },
   "cardSlider__paginationLabel": {
     "col": 36,
     "defaultMessage": "Slider Pagination",
     "description": "card slider pagination label",
-    "end": 1835,
+    "end": 1885,
     "file": "src/components/organisms/slider.tsx",
-    "line": 65,
-    "start": 1692
+    "line": 67,
+    "start": 1742
   },
   "cardSlider__previousPageLabel": {
     "col": 36,
     "defaultMessage": "Previous page",
     "description": "card slider previous page label",
-    "end": 1529,
+    "end": 1651,
     "file": "src/components/organisms/slider.tsx",
-    "line": 54,
-    "start": 1385
+    "line": 59,
+    "start": 1507
   },
   "cardSong_sequenceLabel": {
     "col": 30,
     "defaultMessage": "Scripture Songs",
-    "end": 941,
+    "end": 965,
     "file": "src/components/molecules/card/song.tsx",
-    "line": 28,
-    "start": 859
+    "line": 32,
+    "start": 883
+  },
+  "cardSponsor_conferencesLabel": {
+    "col": 7,
+    "defaultMessage": "{count} conferences",
+    "description": "Card sponsor conferences count label",
+    "end": 2169,
+    "file": "src/components/molecules/card/sponsor.tsx",
+    "line": 70,
+    "start": 1939
+  },
+  "cardSponsor_hatTitle": {
+    "col": 32,
+    "defaultMessage": "Sponsor",
+    "description": "Card sponsor hat title",
+    "end": 1331,
+    "file": "src/components/molecules/card/sponsor.tsx",
+    "line": 39,
+    "start": 1207
   },
   "cardStory_sequenceLabel": {
     "col": 30,
     "defaultMessage": "Stories",
-    "end": 1628,
+    "end": 1638,
     "file": "src/components/molecules/card/story.tsx",
-    "line": 51,
-    "start": 1553
+    "line": 55,
+    "start": 1563
   },
   "collectionDetail__descriptionLabel": {
     "col": 28,
     "defaultMessage": "Description",
-    "end": 2385,
+    "end": 2397,
     "file": "src/containers/collection/detail.tsx",
-    "line": 63,
-    "start": 2298
+    "line": 67,
+    "start": 2310
   },
   "collectionDetail__locationLabel": {
     "col": 28,
     "defaultMessage": "Location",
-    "end": 2905,
+    "end": 2917,
     "file": "src/containers/collection/detail.tsx",
-    "line": 85,
-    "start": 2824
+    "line": 89,
+    "start": 2836
   },
   "collectionDetail__sequenceCountLabel": {
     "col": 5,
     "defaultMessage": "{count} Series",
     "description": "Collection Detail sequence count label",
-    "end": 4209,
+    "end": 3965,
     "file": "src/containers/collection/detail.tsx",
-    "line": 136,
-    "start": 3986
+    "line": 131,
+    "start": 3742
   },
   "collectionDetail__seriesAllLabel": {
     "col": 32,
     "defaultMessage": "See All Series",
-    "end": 5729,
+    "end": 5497,
     "file": "src/containers/collection/detail.tsx",
-    "line": 184,
-    "start": 5629
+    "line": 179,
+    "start": 5397
   },
   "collectionDetail__seriesLabel": {
     "col": 6,
     "defaultMessage": "Series",
     "description": "Collection Detail series label",
-    "end": 5218,
+    "end": 4986,
     "file": "src/containers/collection/detail.tsx",
-    "line": 169,
-    "start": 5067
+    "line": 164,
+    "start": 4835
   },
   "collectionDetail__speakersAllLabel": {
     "col": 32,
     "defaultMessage": "See All Speakers",
-    "end": 6606,
+    "end": 6375,
     "file": "src/containers/collection/detail.tsx",
-    "line": 213,
-    "start": 6502
+    "line": 208,
+    "start": 6271
   },
   "collectionDetail__speakersLabel": {
     "col": 6,
     "defaultMessage": "Speakers",
     "description": "Collection Detail speakers label",
-    "end": 6107,
+    "end": 5875,
     "file": "src/containers/collection/detail.tsx",
-    "line": 198,
-    "start": 5950
+    "line": 193,
+    "start": 5718
   },
   "collectionDetail__sponsorLabel": {
     "col": 28,
     "defaultMessage": "Sponsor",
-    "end": 2611,
+    "end": 2623,
     "file": "src/containers/collection/detail.tsx",
-    "line": 72,
-    "start": 2532
+    "line": 76,
+    "start": 2544
   },
-  "collectionDetail__type": {
-    "col": 31,
+  "collectionPresenterssDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Speakers",
+    "end": 1315,
+    "file": "src/containers/collection/presenters.tsx",
+    "line": 40,
+    "start": 1209
+  },
+  "collectionSequencesDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Series",
+    "end": 1310,
+    "file": "src/containers/collection/sequences.tsx",
+    "line": 40,
+    "start": 1208
+  },
+  "collectionTypeLockup_type": {
+    "col": 10,
     "defaultMessage": "Conference",
-    "description": "Collection Detail type label",
-    "end": 3223,
-    "file": "src/containers/collection/detail.tsx",
-    "line": 98,
-    "start": 3092
+    "end": 431,
+    "file": "src/components/molecules/collectionTypeLockup.tsx",
+    "line": 14,
+    "start": 333
   },
   "conferenceListPage__title": {
-    "col": 4,
+    "col": 12,
     "defaultMessage": "Conferences",
-    "description": "Conference list page main title",
-    "end": 846,
+    "end": 1082,
     "file": "src/containers/collection/list.tsx",
-    "line": 21,
-    "start": 701
+    "line": 29,
+    "start": 983
   },
   "copyrightInfos__multipleCopyrightExplanation": {
     "col": 5,
@@ -439,14 +438,86 @@
     "line": 23,
     "start": 571
   },
+  "discoverCollections_audiobooksHeading": {
+    "col": 4,
+    "defaultMessage": "Audiobooks",
+    "end": 3400,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 122,
+    "start": 3295
+  },
+  "discoverCollections_conferencesHeading": {
+    "col": 4,
+    "defaultMessage": "Conferences",
+    "end": 2674,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 98,
+    "start": 2567
+  },
+  "discoverCollections_featuredCollectionHeading": {
+    "col": 6,
+    "defaultMessage": "Featured Collection",
+    "end": 1711,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 63,
+    "start": 1583
+  },
+  "discoverCollections_scriptureSongsHeading": {
+    "col": 4,
+    "defaultMessage": "Scripture Songs",
+    "end": 4135,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 146,
+    "start": 4021
+  },
+  "discoverCollections_seeAll": {
+    "col": 9,
+    "defaultMessage": "See All",
+    "end": 1420,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 47,
+    "start": 1324
+  },
+  "discoverCollections_seriesHeading": {
+    "col": 4,
+    "defaultMessage": "Series",
+    "end": 2312,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 86,
+    "start": 2215
+  },
+  "discoverCollections_speakersHeading": {
+    "col": 4,
+    "defaultMessage": "Speakers",
+    "end": 1962,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 74,
+    "start": 1861
+  },
+  "discoverCollections_sponsorsHeading": {
+    "col": 4,
+    "defaultMessage": "Sponsors",
+    "end": 3041,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 110,
+    "start": 2940
+  },
+  "discoverCollections_storiesHeading": {
+    "col": 4,
+    "defaultMessage": "Stories",
+    "end": 3759,
+    "file": "src/containers/discover/collections.tsx",
+    "line": 134,
+    "start": 3660
+  },
   "discover_recentHeading": {
     "col": 4,
     "defaultMessage": "Recent Content",
     "description": "Discover recent content heading",
-    "end": 695,
+    "end": 666,
     "file": "src/containers/discover.tsx",
     "line": 20,
-    "start": 550
+    "start": 521
   },
   "duration__hours": {
     "col": 28,
@@ -479,10 +550,10 @@
     "col": 34,
     "defaultMessage": "{identifier} | AudioVerse {lang}",
     "description": "Generic feed title",
-    "end": 985,
+    "end": 929,
     "file": "src/lib/createFeed.ts",
-    "line": 23,
-    "start": 863
+    "line": 21,
+    "start": 807
   },
   "footer__NavItemAboutUs": {
     "col": 7,
@@ -497,46 +568,46 @@
     "col": 6,
     "defaultMessage": "AudioVerse Store",
     "description": "Footer nav link name: AudioVerse Store",
-    "end": 5259,
+    "end": 5249,
     "file": "src/components/organisms/footer.tsx",
     "line": 224,
-    "start": 5085
+    "start": 5075
   },
   "footer__NavItemBibles": {
     "col": 7,
     "defaultMessage": "Bibles",
     "description": "Footer nav link name: Bibles",
-    "end": 2238,
+    "end": 2228,
     "file": "src/components/organisms/footer.tsx",
     "line": 89,
-    "start": 2089
+    "start": 2079
   },
   "footer__NavItemBlog": {
     "col": 7,
     "defaultMessage": "Blog",
     "description": "Footer nav link name: Blog",
-    "end": 4920,
+    "end": 4910,
     "file": "src/components/organisms/footer.tsx",
     "line": 210,
-    "start": 4777
+    "start": 4767
   },
   "footer__NavItemBooks": {
     "col": 7,
     "defaultMessage": "Books",
     "description": "Footer nav link name: Books",
-    "end": 2466,
+    "end": 2456,
     "file": "src/components/organisms/footer.tsx",
     "line": 100,
-    "start": 2320
+    "start": 2310
   },
   "footer__NavItemConferences": {
     "col": 7,
     "defaultMessage": "Conferences",
     "description": "Footer nav link name: Conferences",
-    "end": 3203,
+    "end": 3193,
     "file": "src/components/organisms/footer.tsx",
     "line": 133,
-    "start": 3039
+    "start": 3029
   },
   "footer__NavItemContactUs": {
     "col": 7,
@@ -560,10 +631,10 @@
     "col": 6,
     "defaultMessage": "Journeys Unscripted",
     "description": "Footer nav link name: Journeys Unscripted",
-    "end": 5600,
+    "end": 5590,
     "file": "src/components/organisms/footer.tsx",
     "line": 237,
-    "start": 5417
+    "start": 5407
   },
   "footer__NavItemMeetTheTeam": {
     "col": 7,
@@ -578,46 +649,37 @@
     "col": 7,
     "defaultMessage": "Playlists",
     "description": "Footer nav link name: Playlists",
-    "end": 4695,
+    "end": 4685,
     "file": "src/components/organisms/footer.tsx",
     "line": 199,
-    "start": 4537
-  },
-  "footer__NavItemPresentations": {
-    "col": 7,
-    "defaultMessage": "Presentations",
-    "description": "Footer nav link name: Presentations",
-    "end": 2007,
-    "file": "src/components/organisms/footer.tsx",
-    "line": 78,
-    "start": 1837
+    "start": 4527
   },
   "footer__NavItemPresenters": {
     "col": 7,
     "defaultMessage": "Presenters",
     "description": "Footer nav link name: Presenters",
-    "end": 3446,
+    "end": 3436,
     "file": "src/components/organisms/footer.tsx",
     "line": 144,
-    "start": 3285
+    "start": 3275
   },
   "footer__NavItemScriptureSongs": {
     "col": 7,
     "defaultMessage": "Scripture Songs",
     "description": "Footer nav link name: Scripture Songs",
-    "end": 2957,
+    "end": 2947,
     "file": "src/components/organisms/footer.tsx",
     "line": 122,
-    "start": 2782
+    "start": 2772
   },
   "footer__NavItemSeries": {
     "col": 7,
     "defaultMessage": "Series",
     "description": "Footer nav link name: Series",
-    "end": 4169,
+    "end": 4159,
     "file": "src/components/organisms/footer.tsx",
     "line": 177,
-    "start": 4020
+    "start": 4010
   },
   "footer__NavItemSpiritOfAudioVerse": {
     "col": 7,
@@ -632,127 +694,136 @@
     "col": 7,
     "defaultMessage": "Sponsors",
     "description": "Footer nav link name: Sponsors",
-    "end": 3938,
+    "end": 3928,
     "file": "src/components/organisms/footer.tsx",
     "line": 166,
-    "start": 3783
+    "start": 3773
   },
   "footer__NavItemStories": {
     "col": 7,
     "defaultMessage": "Stories",
     "description": "Footer nav link name: Stories",
-    "end": 2700,
+    "end": 2690,
     "file": "src/components/organisms/footer.tsx",
     "line": 111,
-    "start": 2548
+    "start": 2538
   },
   "footer__NavItemTags": {
     "col": 7,
     "defaultMessage": "Tags",
     "description": "Footer nav link name: Tags",
-    "end": 3701,
+    "end": 3691,
     "file": "src/components/organisms/footer.tsx",
     "line": 155,
-    "start": 3558
+    "start": 3548
+  },
+  "footer__NavItemTeachings": {
+    "col": 7,
+    "defaultMessage": "Teachings",
+    "description": "Footer nav link name: Teachings",
+    "end": 1997,
+    "file": "src/components/organisms/footer.tsx",
+    "line": 78,
+    "start": 1839
   },
   "footer__NavItemTestimonials": {
     "col": 7,
     "defaultMessage": "Testimonials",
     "description": "Footer nav link name: Testimonials",
-    "end": 4455,
+    "end": 4445,
     "file": "src/components/organisms/footer.tsx",
     "line": 188,
-    "start": 4288
+    "start": 4278
   },
   "footer__androidAppImageAlt": {
     "col": 30,
     "defaultMessage": "Android App",
     "description": "Android app link image alt text",
-    "end": 6915,
+    "end": 6905,
     "file": "src/components/organisms/footer.tsx",
     "line": 300,
-    "start": 6772
+    "start": 6762
   },
   "footer__copyright": {
     "col": 4,
     "defaultMessage": "AudioVerse © {year} All Rights Reserved.",
     "description": "Footer copyright",
-    "end": 7198,
+    "end": 7188,
     "file": "src/components/organisms/footer.tsx",
     "line": 312,
-    "start": 6994
+    "start": 6984
   },
   "footer__designedBy": {
     "col": 4,
     "defaultMessage": "Designed by",
     "description": "Footer designed by prefix",
-    "end": 8144,
+    "end": 8134,
     "file": "src/components/organisms/footer.tsx",
     "line": 350,
-    "start": 8008
+    "start": 7998
   },
   "footer__iosAppImageAlt": {
     "col": 30,
     "defaultMessage": "iOS App",
     "description": "iOS app link image alt text",
-    "end": 6490,
+    "end": 6480,
     "file": "src/components/organisms/footer.tsx",
     "line": 285,
-    "start": 6359
+    "start": 6349
   },
   "footer__legalInfoLink": {
     "col": 6,
     "defaultMessage": "Legal Info",
     "description": "Footer legal info link text",
-    "end": 7524,
+    "end": 7514,
     "file": "src/components/organisms/footer.tsx",
     "line": 322,
-    "start": 7376
+    "start": 7366
   },
   "footer__privacyPolicyLink": {
     "col": 6,
     "defaultMessage": "Privacy Policy",
     "description": "Footer privacy policy link text",
-    "end": 7970,
+    "end": 7960,
     "file": "src/components/organisms/footer.tsx",
     "line": 342,
-    "start": 7810
+    "start": 7800
   },
   "footer__termsLink": {
     "col": 6,
     "defaultMessage": "Terms of Use",
     "description": "Footer terms of use link text",
-    "end": 7741,
+    "end": 7731,
     "file": "src/components/organisms/footer.tsx",
     "line": 332,
-    "start": 7593
+    "start": 7583
   },
   "header__donateButtonLabel": {
     "col": 10,
     "defaultMessage": "Donate",
     "description": "Header nav donate button label",
-    "end": 3659,
+    "end": 3745,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 137,
-    "start": 3506
+    "line": 139,
+    "start": 3592
   },
   "header__navItemBlog": {
     "col": 29,
     "defaultMessage": "Blog",
     "description": "Header nav link name: Blog",
-    "end": 2284,
+    "end": 2370,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 74,
-    "start": 2172
+    "line": 76,
+    "start": 2258
   },
   "header__navItemCollections": {
     "col": 29,
     "defaultMessage": "Collections",
     "description": "Header nav link name: Collections",
-    "end": 2096,
+    "end": 2147,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 65,
-    "start": 1963
+    "line": 66,
+    "start": 2014
   },
   "header__navItemDiscover": {
     "col": 29,
@@ -776,19 +847,19 @@
     "col": 29,
     "defaultMessage": "More",
     "description": "Header nav link name: More",
-    "end": 2680,
+    "end": 2766,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 92,
-    "start": 2568
+    "line": 94,
+    "start": 2654
   },
   "header__navItemSettings": {
     "col": 29,
     "defaultMessage": "Settings",
     "description": "Header nav link name: Settings",
-    "end": 2492,
+    "end": 2578,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 83,
-    "start": 2368
+    "line": 85,
+    "start": 2454
   },
   "header__naveItemBible": {
     "col": 29,
@@ -803,10 +874,10 @@
     "col": 7,
     "defaultMessage": "Testimonies",
     "description": "Testimonies slider title",
-    "end": 6627,
+    "end": 6783,
     "file": "src/containers/home.tsx",
-    "line": 211,
-    "start": 6480
+    "line": 216,
+    "start": 6636
   },
   "loginForm__emailPlaceholder": {
     "col": 37,
@@ -854,49 +925,49 @@
     "start": 180
   },
   "molecule-buttonDownload__buttonLabel": {
-    "col": 35,
+    "col": 38,
     "defaultMessage": "downloads",
     "description": "download button label",
-    "end": 1113,
+    "end": 1352,
     "file": "src/components/molecules/buttonDownload.tsx",
-    "line": 35,
-    "start": 980
+    "line": 43,
+    "start": 1215
   },
   "molecule-buttonShareRecording__buttonLabel": {
     "col": 35,
     "defaultMessage": "share",
     "description": "recording share button label",
-    "end": 1185,
+    "end": 1355,
     "file": "src/components/molecules/buttonShareRecording.tsx",
-    "line": 36,
-    "start": 1043
+    "line": 43,
+    "start": 1213
   },
   "molecule-buttonShareRecording__embedCodeLabel": {
     "col": 5,
     "defaultMessage": "Embed Code",
     "description": "recording share button embed code label",
-    "end": 1962,
+    "end": 2132,
     "file": "src/components/molecules/buttonShareRecording.tsx",
-    "line": 66,
-    "start": 1786
+    "line": 73,
+    "start": 1956
   },
   "molecule-buttonShareRecording__shareTitle": {
     "col": 5,
     "defaultMessage": "Share",
     "description": "recording share button section title",
-    "end": 1534,
+    "end": 1704,
     "file": "src/components/molecules/buttonShareRecording.tsx",
-    "line": 51,
-    "start": 1370
+    "line": 58,
+    "start": 1540
   },
   "molecule-buttonShareRecording__shortUrlLabel": {
     "col": 5,
     "defaultMessage": "Short URL",
     "description": "recording share button url label",
-    "end": 1726,
+    "end": 1896,
     "file": "src/components/molecules/buttonShareRecording.tsx",
-    "line": 58,
-    "start": 1559
+    "line": 65,
+    "start": 1729
   },
   "molecule-cardRecordingSequenceHat__addAll": {
     "col": 11,
@@ -924,190 +995,222 @@
     "start": 907
   },
   "molecule-teaseRecording__lessPersons": {
-    "col": 31,
+    "col": 30,
     "defaultMessage": "Show less",
-    "end": 4141,
+    "end": 4030,
     "file": "src/components/molecules/teaseRecording.tsx",
-    "line": 124,
-    "start": 4001
+    "line": 123,
+    "start": 3894
   },
   "molecule-teaseRecording__morePersons": {
-    "col": 16,
+    "col": 15,
     "defaultMessage": "{count} more",
-    "end": 4391,
+    "end": 4272,
     "file": "src/components/molecules/teaseRecording.tsx",
-    "line": 129,
-    "start": 4158
+    "line": 128,
+    "start": 4046
   },
   "molecule-transcript__disclaimer": {
     "col": 6,
     "defaultMessage": "This transcript may be automatically generated.",
     "description": "transcript disclaimer",
-    "end": 1172,
+    "end": 1247,
     "file": "src/components/molecules/transcript.tsx",
-    "line": 37,
-    "start": 987
+    "line": 43,
+    "start": 1062
   },
   "molecule-transcript__help": {
     "col": 6,
     "defaultMessage": "Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org",
     "description": "transcript assistance request",
-    "end": 1493,
+    "end": 1568,
     "file": "src/components/molecules/transcript.tsx",
-    "line": 44,
-    "start": 1198
+    "line": 50,
+    "start": 1273
   },
   "molecule-transcript__labelClose": {
     "col": 15,
     "defaultMessage": "Hide Transcript",
     "description": "transcript button label close",
-    "end": 726,
+    "end": 801,
     "file": "src/components/molecules/transcript.tsx",
-    "line": 18,
-    "start": 558
+    "line": 24,
+    "start": 633
   },
   "molecule-transcript__labelOpen": {
     "col": 10,
     "defaultMessage": "Read Transcript",
     "description": "transcript button label open",
-    "end": 903,
+    "end": 978,
     "file": "src/components/molecules/transcript.tsx",
-    "line": 24,
-    "start": 737
+    "line": 30,
+    "start": 812
+  },
+  "molecules-pagination__nextLabel": {
+    "col": 30,
+    "defaultMessage": "Next",
+    "end": 2985,
+    "file": "src/components/molecules/pagination.tsx",
+    "line": 114,
+    "start": 2902
+  },
+  "molecules-pagination__previousLabel": {
+    "col": 30,
+    "defaultMessage": "Previous",
+    "end": 2540,
+    "file": "src/components/molecules/pagination.tsx",
+    "line": 94,
+    "start": 2449
   },
   "navigation_menuTitle": {
     "col": 5,
     "defaultMessage": "Menu",
-    "end": 2874,
+    "end": 2960,
     "file": "src/components/organisms/navigation.tsx",
-    "line": 104,
-    "start": 2806
+    "line": 106,
+    "start": 2892
   },
   "organism-recording__buttonLabelNext": {
     "col": 38,
     "defaultMessage": "Next",
     "description": "recording next button label",
-    "end": 1412,
+    "end": 903,
     "file": "src/components/molecules/sequenceNav.tsx",
-    "line": 44,
-    "start": 1291
+    "line": 27,
+    "start": 782
   },
   "organism-recording__buttonLabelPrevious": {
     "col": 42,
     "defaultMessage": "Previous",
     "description": "recording previous button label",
-    "end": 1249,
+    "end": 740,
     "file": "src/components/molecules/sequenceNav.tsx",
-    "line": 38,
-    "start": 1116
+    "line": 21,
+    "start": 607
   },
   "organism-recording__conferenceInfoTitle": {
     "col": 10,
     "defaultMessage": "Parent Conference",
     "description": "Recording conference info title",
-    "end": 2827,
+    "end": 4931,
     "file": "src/components/organisms/recording.tsx",
-    "line": 91,
-    "start": 2657
+    "line": 173,
+    "start": 4761
   },
   "organism-recording__metadataLabel": {
     "col": 37,
     "defaultMessage": "metadata",
     "description": "recording metadata section label",
-    "end": 5078,
+    "end": 7712,
     "file": "src/components/organisms/recording.tsx",
-    "line": 180,
-    "start": 4930
+    "line": 283,
+    "start": 7564
+  },
+  "organism-recording__readByLabel": {
+    "col": 8,
+    "defaultMessage": "Read by {name}",
+    "end": 7250,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 265,
+    "start": 7070
   },
   "organism-recording__seriesInfoTitle": {
     "col": 10,
     "defaultMessage": "Parent Series",
     "description": "Recording series info title",
-    "end": 2453,
+    "end": 4552,
     "file": "src/components/organisms/recording.tsx",
-    "line": 73,
-    "start": 2295
+    "line": 155,
+    "start": 4394
   },
   "organism-recording__seriesListLabel": {
     "col": 37,
     "defaultMessage": "series list",
     "description": "recording series list label",
-    "end": 5581,
+    "end": 8379,
     "file": "src/components/organisms/recording.tsx",
-    "line": 199,
-    "start": 5433
+    "line": 312,
+    "start": 8231
   },
   "organism-recording__sponsorInfoTitle": {
     "col": 10,
     "defaultMessage": "Sponsor",
     "description": "recording sponsor info title",
-    "end": 3212,
+    "end": 5295,
     "file": "src/components/organisms/recording.tsx",
-    "line": 109,
-    "start": 3058
+    "line": 191,
+    "start": 5141
+  },
+  "personTypeLockup_type": {
+    "col": 10,
+    "defaultMessage": "Speaker",
+    "end": 406,
+    "file": "src/components/molecules/personTypeLockup.tsx",
+    "line": 14,
+    "start": 329
   },
   "playButton__pauseLabel": {
     "col": 23,
     "defaultMessage": "pause",
     "description": "play button pause label",
-    "end": 1387,
+    "end": 1441,
     "file": "src/components/molecules/buttonPlay.tsx",
-    "line": 42,
-    "start": 1273
+    "line": 47,
+    "start": 1327
   },
   "playButton__playLabel": {
-    "col": 40,
+    "col": 39,
     "defaultMessage": "play",
     "description": "play button play label",
-    "end": 2991,
+    "end": 2919,
     "file": "src/components/molecules/teaseRecording.tsx",
-    "line": 85,
-    "start": 2857
+    "line": 84,
+    "start": 2789
   },
   "player__fullscreenButtonLabel": {
     "col": 38,
     "defaultMessage": "fullscreen",
     "description": "player fullscreen button label",
-    "end": 4014,
+    "end": 4359,
     "file": "src/components/molecules/player.tsx",
-    "line": 134,
-    "start": 3866
+    "line": 143,
+    "start": 4211
   },
   "player__nudgeBack": {
     "col": 23,
     "defaultMessage": "back 15 seconds",
     "description": "player nudge-back label",
-    "end": 1127,
+    "end": 1167,
     "file": "src/components/molecules/buttonNudge.tsx",
-    "line": 32,
-    "start": 1008
+    "line": 33,
+    "start": 1048
   },
   "player__nudgeForward": {
     "col": 23,
     "defaultMessage": "forward 15 seconds",
     "description": "player nudge-forward label",
-    "end": 1280,
+    "end": 1320,
     "file": "src/components/molecules/buttonNudge.tsx",
-    "line": 37,
-    "start": 1152
+    "line": 38,
+    "start": 1192
   },
   "player__playerLabel": {
     "col": 34,
     "defaultMessage": "player",
     "description": "player label",
-    "end": 1859,
+    "end": 1912,
     "file": "src/components/molecules/player.tsx",
     "line": 50,
-    "start": 1759
+    "start": 1812
   },
   "player__progressLabel": {
     "col": 39,
     "defaultMessage": "progress",
     "description": "player progress label",
-    "end": 2922,
+    "end": 3225,
     "file": "src/components/molecules/player.tsx",
-    "line": 95,
-    "start": 2789
+    "line": 104,
+    "start": 3092
   },
   "playlistButton__createButton": {
     "col": 7,
@@ -1154,166 +1257,163 @@
     "line": 143,
     "start": 3653
   },
-  "playlist__heading": {
-    "col": 6,
-    "defaultMessage": "Playlist",
-    "description": "Playlist item selector main heading",
-    "end": 1336,
-    "file": "src/components/organisms/playlist.tsx",
-    "line": 43,
-    "start": 1190
-  },
   "playlists__pageTitle": {
     "col": 33,
     "defaultMessage": "Playlists",
     "description": "Playlists list page title",
-    "end": 1304,
+    "end": 1310,
     "file": "src/containers/playlist/list.tsx",
     "line": 32,
-    "start": 1187
+    "start": 1193
   },
   "presenterDetail__alsoAppearsInLabel": {
     "col": 6,
     "defaultMessage": "Also Appears In",
-    "end": 8686,
+    "end": 8419,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 295,
-    "start": 8572
+    "line": 285,
+    "start": 8305
   },
   "presenterDetail__audiobookTracksCountLabel": {
     "col": 8,
     "defaultMessage": "{count} Audiobook Tracks",
     "description": "Presenter detail audiobook tracks count label",
-    "end": 4233,
+    "end": 3954,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 135,
-    "start": 3946
+    "line": 125,
+    "start": 3667
   },
   "presenterDetail__descriptionLabel": {
     "col": 28,
     "defaultMessage": "Description",
-    "end": 2428,
+    "end": 2397,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 70,
-    "start": 2342
+    "line": 69,
+    "start": 2311
   },
   "presenterDetail__essentialRecordingsLabel": {
     "col": 6,
     "defaultMessage": "Essential {name}",
-    "end": 5854,
+    "end": 5587,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 192,
-    "start": 5692
+    "line": 182,
+    "start": 5425
   },
   "presenterDetail__musicTracksCountLabel": {
     "col": 8,
     "defaultMessage": "{count} Music Tracks",
     "description": "Presenter detail music tracks count label",
-    "end": 4594,
+    "end": 4315,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 147,
-    "start": 4323
+    "line": 137,
+    "start": 4044
   },
   "presenterDetail__recentAllLabel": {
     "col": 32,
     "defaultMessage": "See All Recent",
-    "end": 6752,
+    "end": 6485,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 224,
-    "start": 6653
+    "line": 214,
+    "start": 6386
   },
   "presenterDetail__recentRecordingsLabel": {
     "col": 6,
     "defaultMessage": "Recent",
-    "end": 6269,
+    "end": 6002,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 210,
-    "start": 6161
+    "line": 200,
+    "start": 5894
   },
   "presenterDetail__seriesAllLabel": {
     "col": 32,
     "defaultMessage": "See All Series",
-    "end": 8373,
+    "end": 8106,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 281,
-    "start": 8274
+    "line": 271,
+    "start": 8007
   },
   "presenterDetail__seriesLabel": {
     "col": 6,
     "defaultMessage": "Series",
     "description": "Collection Detail series label",
-    "end": 7899,
+    "end": 7632,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 266,
-    "start": 7749
+    "line": 256,
+    "start": 7482
   },
   "presenterDetail__speakersAllLabel": {
     "col": 32,
     "defaultMessage": "See All Also Appears In",
-    "end": 9212,
+    "end": 8945,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 312,
-    "start": 9102
+    "line": 302,
+    "start": 8835
   },
   "presenterDetail__storiesCountLabel": {
     "col": 8,
     "defaultMessage": "{count} Stories",
     "description": "Presenter detail stories count label",
-    "end": 4933,
+    "end": 4654,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 159,
-    "start": 4680
+    "line": 149,
+    "start": 4401
   },
   "presenterDetail__teachingsCountLabel": {
     "col": 8,
     "defaultMessage": "{count} Teachings",
     "description": "Presenter detail teachings count label",
-    "end": 3852,
+    "end": 3573,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 123,
-    "start": 3593
+    "line": 113,
+    "start": 3314
   },
   "presenterDetail__topAllLabel": {
     "col": 32,
     "defaultMessage": "See All Most Listened",
-    "end": 7552,
+    "end": 7285,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 252,
-    "start": 7449
+    "line": 242,
+    "start": 7182
   },
   "presenterDetail__topRecordingsLabel": {
     "col": 6,
     "defaultMessage": "Most Listened",
-    "end": 7065,
+    "end": 6798,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 238,
-    "start": 6953
-  },
-  "presenterDetail__type": {
-    "col": 31,
-    "defaultMessage": "Speaker",
-    "description": "Presenter Detail type label",
-    "end": 3118,
-    "file": "src/containers/presenter/detail.tsx",
-    "line": 102,
-    "start": 2988
+    "line": 228,
+    "start": 6686
   },
   "presenterDetail__websiteLabel": {
     "col": 28,
     "defaultMessage": "Website",
-    "end": 2653,
+    "end": 2622,
     "file": "src/containers/presenter/detail.tsx",
-    "line": 79,
-    "start": 2575
+    "line": 78,
+    "start": 2544
   },
   "presenterListPage__title": {
-    "col": 4,
+    "col": 12,
     "defaultMessage": "Presenters",
-    "description": "Presenter list page main title",
-    "end": 833,
+    "end": 1075,
     "file": "src/containers/presenter/list.tsx",
-    "line": 20,
-    "start": 691
+    "line": 26,
+    "start": 978
+  },
+  "presenterRecordingsDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Recordings",
+    "end": 2010,
+    "file": "src/containers/presenter/recordings.tsx",
+    "line": 55,
+    "start": 1904
+  },
+  "presenterSequencesDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Series",
+    "end": 1927,
+    "file": "src/containers/presenter/sequences.tsx",
+    "line": 51,
+    "start": 1826
   },
   "profile__errorPasswordMismatch": {
     "col": 23,
@@ -1436,19 +1536,19 @@
     "col": 8,
     "defaultMessage": "Audio",
     "description": "Recording list entry audio label",
-    "end": 1307,
+    "end": 1293,
     "file": "src/components/molecules/recordingList.tsx",
     "line": 44,
-    "start": 1162
+    "start": 1148
   },
   "recordingList__videoLabel": {
     "col": 27,
     "defaultMessage": "Video",
     "description": "Recording list entry video label",
-    "end": 1153,
+    "end": 1139,
     "file": "src/components/molecules/recordingList.tsx",
     "line": 38,
-    "start": 1008
+    "start": 994
   },
   "register__confirmPasswordInputPlaceholder": {
     "col": 36,
@@ -1543,95 +1643,117 @@
   "seriesDetail__descriptionLabel": {
     "col": 28,
     "defaultMessage": "Description",
-    "end": 1878,
-    "file": "src/containers/series/detail.tsx",
-    "line": 53,
-    "start": 1795
+    "end": 1768,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 54,
+    "start": 1685
   },
   "seriesDetail__partsCountLabel": {
     "col": 5,
     "defaultMessage": "{count} Parts",
     "description": "Series Detail parts count label",
-    "end": 3654,
-    "file": "src/containers/series/detail.tsx",
-    "line": 127,
-    "start": 3445
+    "end": 3544,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 128,
+    "start": 3335
   },
   "seriesDetail__type": {
     "col": 31,
     "defaultMessage": "Series",
     "description": "Series Detail type label",
-    "end": 3067,
-    "file": "src/containers/series/detail.tsx",
-    "line": 109,
-    "start": 2948
+    "end": 2957,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 110,
+    "start": 2838
   },
   "seriesDetailg__conferenceLabel": {
     "col": 10,
     "defaultMessage": "Parent Conference",
-    "end": 2120,
-    "file": "src/containers/series/detail.tsx",
-    "line": 62,
-    "start": 2010
+    "end": 2010,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 63,
+    "start": 1900
   },
   "seriesDetailg__recordedLabel": {
     "col": 10,
     "defaultMessage": "Recorded",
-    "end": 2723,
-    "file": "src/containers/series/detail.tsx",
-    "line": 94,
-    "start": 2624
+    "end": 2613,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 95,
+    "start": 2514
   },
   "seriesDetailg__sponsorLabel": {
     "col": 10,
     "defaultMessage": "Sponsor",
-    "end": 2427,
-    "file": "src/containers/series/detail.tsx",
-    "line": 79,
-    "start": 2330
+    "end": 2317,
+    "file": "src/components/organisms/sequence.tsx",
+    "line": 80,
+    "start": 2220
   },
-  "seriesList__pageTitle": {
-    "col": 34,
-    "defaultMessage": "Series",
-    "description": "Series list page title",
-    "end": 662,
+  "seriesList__heading": {
+    "col": 12,
+    "defaultMessage": "All Series",
+    "end": 981,
     "file": "src/containers/series/list.tsx",
-    "line": 16,
-    "start": 546
+    "line": 24,
+    "start": 889
+  },
+  "sermonDetailPage__audiobookTitle": {
+    "col": 42,
+    "defaultMessage": "Book",
+    "end": 3457,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 112,
+    "start": 3362
   },
   "sermonDetailPage__descriptionTitle": {
     "col": 10,
     "defaultMessage": "Description",
     "description": "Sermon detail description title",
-    "end": 2161,
+    "end": 4260,
     "file": "src/components/organisms/recording.tsx",
-    "line": 61,
-    "start": 2002
+    "line": 143,
+    "start": 4101
+  },
+  "sermonDetailPage__musicTrackTitle": {
+    "col": 38,
+    "defaultMessage": "Scripture Songs",
+    "end": 3608,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 118,
+    "start": 3501
   },
   "sermonDetailPage__recordedTitle": {
     "col": 10,
     "defaultMessage": "Recorded",
     "description": "Sermon detail recorded date title",
-    "end": 3482,
+    "end": 5660,
     "file": "src/components/organisms/recording.tsx",
-    "line": 121,
-    "start": 3327
+    "line": 209,
+    "start": 5505
   },
   "sermonDetailPage__seriesTitle": {
-    "col": 6,
+    "col": 34,
     "defaultMessage": "Series",
-    "description": "Sermon detail series title",
-    "end": 3952,
+    "end": 3742,
     "file": "src/components/organisms/recording.tsx",
-    "line": 138,
-    "start": 3805
+    "line": 124,
+    "start": 3648
+  },
+  "sermonDetailPage__storyTitle": {
+    "col": 33,
+    "defaultMessage": "Stories",
+    "end": 3875,
+    "file": "src/components/organisms/recording.tsx",
+    "line": 130,
+    "start": 3781
   },
   "sermons-all-rss-identifier": {
     "col": 22,
     "defaultMessage": "All Teachings",
     "description": "All teachings RSS feed pretty identifier",
-    "end": 1383,
-    "file": "src/pages/[language]/sermons/all/page/[i].tsx",
+    "end": 1387,
+    "file": "src/pages/[language]/teachings/all/page/[i].tsx",
     "line": 49,
     "start": 1245
   },
@@ -1657,709 +1779,788 @@
     "col": 7,
     "defaultMessage": "1 Chronicles",
     "description": "Songs list page 1 Chronicles link label",
-    "end": 4405,
-    "file": "src/containers/song/list.tsx",
+    "end": 4455,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 167,
-    "start": 4233
+    "start": 4283
   },
   "songsListPage__1CorinthiansLabel": {
     "col": 7,
     "defaultMessage": "1 Corinthians",
     "description": "Songs list page 1 Corinthians link label",
-    "end": 13773,
-    "file": "src/containers/song/list.tsx",
+    "end": 13823,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 530,
-    "start": 13598
+    "start": 13648
   },
   "songsListPage__1JohnLabel": {
     "col": 7,
     "defaultMessage": "1 John",
     "description": "Songs list page 1 John link label",
-    "end": 18441,
-    "file": "src/containers/song/list.tsx",
+    "end": 18491,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 706,
-    "start": 18287
+    "start": 18337
   },
   "songsListPage__1KingsLabel": {
     "col": 7,
     "defaultMessage": "1 Kings",
     "description": "Songs list page 1 Kings link label",
-    "end": 3819,
-    "file": "src/containers/song/list.tsx",
+    "end": 3869,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 145,
-    "start": 3662
+    "start": 3712
   },
   "songsListPage__1PeterLabel": {
     "col": 7,
     "defaultMessage": "1 Peter",
     "description": "Songs list page 1 Peter link label",
-    "end": 17879,
-    "file": "src/containers/song/list.tsx",
+    "end": 17929,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 684,
-    "start": 17722
+    "start": 17772
   },
   "songsListPage__1SamuelLabel": {
     "col": 7,
     "defaultMessage": "1 Samuel",
     "description": "Songs list page 1 Samuel link label",
-    "end": 3249,
-    "file": "src/containers/song/list.tsx",
+    "end": 3299,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 123,
-    "start": 3089
+    "start": 3139
   },
   "songsListPage__1ThessaloniansLabel": {
     "col": 7,
     "defaultMessage": "1 Thessalonians",
     "description": "Songs list page 1 Thessalonians link label",
-    "end": 15575,
-    "file": "src/containers/song/list.tsx",
+    "end": 15625,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 596,
-    "start": 15394
+    "start": 15444
   },
   "songsListPage__1TimothyLabel": {
     "col": 7,
     "defaultMessage": "1 Timothy",
     "description": "Songs list page 1 Timothy link label",
-    "end": 16181,
-    "file": "src/containers/song/list.tsx",
+    "end": 16231,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 618,
-    "start": 16018
+    "start": 16068
   },
   "songsListPage__2ChroniclesLabel": {
     "col": 7,
     "defaultMessage": "2 Chronicles",
     "description": "Songs list page 2 Chronicles link label",
-    "end": 4708,
-    "file": "src/containers/song/list.tsx",
+    "end": 4758,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 178,
-    "start": 4536
+    "start": 4586
   },
   "songsListPage__2CorinthiansLabel": {
     "col": 7,
     "defaultMessage": "2 Corinthians",
     "description": "Songs list page 2 Corinthians link label",
-    "end": 14080,
-    "file": "src/containers/song/list.tsx",
+    "end": 14130,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 541,
-    "start": 13905
+    "start": 13955
   },
   "songsListPage__2JohnLabel": {
     "col": 7,
     "defaultMessage": "2 John",
     "description": "Songs list page 2 John link label",
-    "end": 18720,
-    "file": "src/containers/song/list.tsx",
+    "end": 18770,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 717,
-    "start": 18566
+    "start": 18616
   },
   "songsListPage__2KingsLabel": {
     "col": 7,
     "defaultMessage": "2 Kings",
     "description": "Songs list page 2 Kings link label",
-    "end": 4102,
-    "file": "src/containers/song/list.tsx",
+    "end": 4152,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 156,
-    "start": 3945
+    "start": 3995
   },
   "songsListPage__2PeterLabel": {
     "col": 7,
     "defaultMessage": "2 Peter",
     "description": "Songs list page 2 Peter link label",
-    "end": 18162,
-    "file": "src/containers/song/list.tsx",
+    "end": 18212,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 695,
-    "start": 18005
+    "start": 18055
   },
   "songsListPage__2SamuelLabel": {
     "col": 7,
     "defaultMessage": "2 Samuel",
     "description": "Songs list page 2 Samuel link label",
-    "end": 3536,
-    "file": "src/containers/song/list.tsx",
+    "end": 3586,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 134,
-    "start": 3376
+    "start": 3426
   },
   "songsListPage__2ThessaloniansLabel": {
     "col": 7,
     "defaultMessage": "2 Thessalonians",
     "description": "Songs list page 2 Thessalonians link label",
-    "end": 15890,
-    "file": "src/containers/song/list.tsx",
+    "end": 15940,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 607,
-    "start": 15709
+    "start": 15759
   },
   "songsListPage__2TimothyLabel": {
     "col": 7,
     "defaultMessage": "2 Timothy",
     "description": "Songs list page 2 Timothy link label",
-    "end": 16472,
-    "file": "src/containers/song/list.tsx",
+    "end": 16522,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 629,
-    "start": 16309
+    "start": 16359
   },
   "songsListPage__3JohnLabel": {
     "col": 7,
     "defaultMessage": "3 John",
     "description": "Songs list page 3 John link label",
-    "end": 18999,
-    "file": "src/containers/song/list.tsx",
+    "end": 19049,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 728,
-    "start": 18845
+    "start": 18895
   },
   "songsListPage__ActsLabel": {
     "col": 7,
     "defaultMessage": "Acts",
     "description": "Songs list page Acts link label",
-    "end": 13186,
-    "file": "src/containers/song/list.tsx",
+    "end": 13236,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 508,
-    "start": 13037
+    "start": 13087
   },
   "songsListPage__AmosLabel": {
     "col": 7,
     "defaultMessage": "Amos",
     "description": "Songs list page Amos link label",
-    "end": 9266,
-    "file": "src/containers/song/list.tsx",
+    "end": 9316,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 354,
-    "start": 9117
+    "start": 9167
   },
   "songsListPage__ColossiansLabel": {
     "col": 7,
     "defaultMessage": "Colossians",
     "description": "Songs list page Colossians link label",
-    "end": 15260,
-    "file": "src/containers/song/list.tsx",
+    "end": 15310,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 585,
-    "start": 15093
+    "start": 15143
   },
   "songsListPage__DanielLabel": {
     "col": 7,
     "defaultMessage": "Daniel",
     "description": "Songs list page Daniel link label",
-    "end": 8446,
-    "file": "src/containers/song/list.tsx",
+    "end": 8496,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 321,
-    "start": 8291
+    "start": 8341
   },
   "songsListPage__DeuteronomyLabel": {
     "col": 7,
     "defaultMessage": "Deuteronomy",
     "description": "Songs list page Deuteronomy link label",
-    "end": 2130,
-    "file": "src/containers/song/list.tsx",
+    "end": 2180,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 79,
-    "start": 1960
+    "start": 2010
   },
   "songsListPage__EcclesiastesLabel": {
     "col": 7,
     "defaultMessage": "Ecclesiastes",
     "description": "Songs list page Ecclesiastes link label",
-    "end": 6688,
-    "file": "src/containers/song/list.tsx",
+    "end": 6738,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 255,
-    "start": 6515
+    "start": 6565
   },
   "songsListPage__EphesiansLabel": {
     "col": 7,
     "defaultMessage": "Ephesians",
     "description": "Songs list page Ephesians link label",
-    "end": 14664,
-    "file": "src/containers/song/list.tsx",
+    "end": 14714,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 563,
-    "start": 14500
+    "start": 14550
   },
   "songsListPage__EstherLabel": {
     "col": 7,
     "defaultMessage": "Esther",
     "description": "Songs list page Esther link label",
-    "end": 5548,
-    "file": "src/containers/song/list.tsx",
+    "end": 5598,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 211,
-    "start": 5393
+    "start": 5443
   },
   "songsListPage__ExodusLabel": {
     "col": 7,
     "defaultMessage": "Exodus",
     "description": "Songs list page Exodus link label",
-    "end": 1254,
-    "file": "src/containers/song/list.tsx",
+    "end": 1304,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 46,
-    "start": 1099
+    "start": 1149
   },
   "songsListPage__EzekielLabel": {
     "col": 7,
     "defaultMessage": "Ezekiel",
     "description": "Songs list page Ezekiel link label",
-    "end": 8166,
-    "file": "src/containers/song/list.tsx",
+    "end": 8216,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 310,
-    "start": 8008
+    "start": 8058
   },
   "songsListPage__EzraLabel": {
     "col": 7,
     "defaultMessage": "Ezra",
     "description": "Songs list page Ezra link label",
-    "end": 4980,
-    "file": "src/containers/song/list.tsx",
+    "end": 5030,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 189,
-    "start": 4831
+    "start": 4881
   },
   "songsListPage__GalatiansLabel": {
     "col": 7,
     "defaultMessage": "Galatians",
     "description": "Songs list page Galatians link label",
-    "end": 14372,
-    "file": "src/containers/song/list.tsx",
+    "end": 14422,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 552,
-    "start": 14208
+    "start": 14258
   },
   "songsListPage__GenesisLabel": {
     "col": 7,
     "defaultMessage": "Genesis",
     "description": "Songs list page Genesis link label",
-    "end": 974,
-    "file": "src/containers/song/list.tsx",
+    "end": 1024,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 35,
-    "start": 816
+    "start": 866
   },
   "songsListPage__HabakkukLabel": {
     "col": 7,
     "defaultMessage": "Habakkuk",
     "description": "Songs list page Habakkuk link label",
-    "end": 10666,
-    "file": "src/containers/song/list.tsx",
+    "end": 10716,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 409,
-    "start": 10505
+    "start": 10555
   },
   "songsListPage__HaggaiLabel": {
     "col": 7,
     "defaultMessage": "Haggai",
     "description": "Songs list page Haggai link label",
-    "end": 11238,
-    "file": "src/containers/song/list.tsx",
+    "end": 11288,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 431,
-    "start": 11083
+    "start": 11133
   },
   "songsListPage__HebrewsLabel": {
     "col": 7,
     "defaultMessage": "Hebrews",
     "description": "Songs list page Hebrews link label",
-    "end": 17320,
-    "file": "src/containers/song/list.tsx",
+    "end": 17370,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 662,
-    "start": 17162
+    "start": 17212
   },
   "songsListPage__HoseaLabel": {
     "col": 7,
     "defaultMessage": "Hosea",
     "description": "Songs list page Hosea link label",
-    "end": 8722,
-    "file": "src/containers/song/list.tsx",
+    "end": 8772,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 332,
-    "start": 8570
+    "start": 8620
   },
   "songsListPage__IsaiahLabel": {
     "col": 7,
     "defaultMessage": "Isaiah",
     "description": "Songs list page Isaiah link label",
-    "end": 7290,
-    "file": "src/containers/song/list.tsx",
+    "end": 7340,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 277,
-    "start": 7135
+    "start": 7185
   },
   "songsListPage__JamesLabel": {
     "col": 7,
     "defaultMessage": "James",
     "description": "Songs list page James link label",
-    "end": 17596,
-    "file": "src/containers/song/list.tsx",
+    "end": 17646,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 673,
-    "start": 17444
+    "start": 17494
   },
   "songsListPage__JeremiahLabel": {
     "col": 7,
     "defaultMessage": "Jeremiah",
     "description": "Songs list page Jeremiah link label",
-    "end": 7578,
-    "file": "src/containers/song/list.tsx",
+    "end": 7628,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 288,
-    "start": 7417
+    "start": 7467
   },
   "songsListPage__JobLabel": {
     "col": 7,
     "defaultMessage": "Job",
     "description": "Songs list page Job link label",
-    "end": 5816,
-    "file": "src/containers/song/list.tsx",
+    "end": 5866,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 222,
-    "start": 5670
+    "start": 5720
   },
   "songsListPage__JoelLabel": {
     "col": 7,
     "defaultMessage": "Joel",
     "description": "Songs list page Joel link label",
-    "end": 8994,
-    "file": "src/containers/song/list.tsx",
+    "end": 9044,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 343,
-    "start": 8845
+    "start": 8895
   },
   "songsListPage__JohnLabel": {
     "col": 7,
     "defaultMessage": "John",
     "description": "Songs list page John link label",
-    "end": 12914,
-    "file": "src/containers/song/list.tsx",
+    "end": 12964,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 497,
-    "start": 12765
+    "start": 12815
   },
   "songsListPage__JonahLabel": {
     "col": 7,
     "defaultMessage": "Jonah",
     "description": "Songs list page Jonah link label",
-    "end": 9826,
-    "file": "src/containers/song/list.tsx",
+    "end": 9876,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 376,
-    "start": 9674
+    "start": 9724
   },
   "songsListPage__JoshuaLabel": {
     "col": 7,
     "defaultMessage": "Joshua",
     "description": "Songs list page Joshua link label",
-    "end": 2410,
-    "file": "src/containers/song/list.tsx",
+    "end": 2460,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 90,
-    "start": 2255
+    "start": 2305
   },
   "songsListPage__JudeLabel": {
     "col": 7,
     "defaultMessage": "Jude",
     "description": "Songs list page Jude link label",
-    "end": 19271,
-    "file": "src/containers/song/list.tsx",
+    "end": 19321,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 739,
-    "start": 19122
+    "start": 19172
   },
   "songsListPage__JudgesLabel": {
     "col": 7,
     "defaultMessage": "Judges",
     "description": "Songs list page Judges link label",
-    "end": 2690,
-    "file": "src/containers/song/list.tsx",
+    "end": 2740,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 101,
-    "start": 2535
+    "start": 2585
   },
   "songsListPage__LamentationsLabel": {
     "col": 7,
     "defaultMessage": "Lamentations",
     "description": "Songs list page Lamentations link label",
-    "end": 7882,
-    "file": "src/containers/song/list.tsx",
+    "end": 7932,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 299,
-    "start": 7709
+    "start": 7759
   },
   "songsListPage__LeviticusLabel": {
     "col": 7,
     "defaultMessage": "Leviticus",
     "description": "Songs list page Leviticus link label",
-    "end": 1546,
-    "file": "src/containers/song/list.tsx",
+    "end": 1596,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 57,
-    "start": 1382
+    "start": 1432
   },
   "songsListPage__LukeLabel": {
     "col": 7,
     "defaultMessage": "Luke",
     "description": "Songs list page Luke link label",
-    "end": 12642,
-    "file": "src/containers/song/list.tsx",
+    "end": 12692,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 486,
-    "start": 12493
+    "start": 12543
   },
   "songsListPage__MalachiLabel": {
     "col": 7,
     "defaultMessage": "Malachi",
     "description": "Songs list page Malachi link label",
-    "end": 11814,
-    "file": "src/containers/song/list.tsx",
+    "end": 11864,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 453,
-    "start": 11656
+    "start": 11706
   },
   "songsListPage__MarkLabel": {
     "col": 7,
     "defaultMessage": "Mark",
     "description": "Songs list page Mark link label",
-    "end": 12370,
-    "file": "src/containers/song/list.tsx",
+    "end": 12420,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 475,
-    "start": 12221
+    "start": 12271
   },
   "songsListPage__MatthewLabel": {
     "col": 7,
     "defaultMessage": "Matthew",
     "description": "Songs list page Matthew link label",
-    "end": 12098,
-    "file": "src/containers/song/list.tsx",
+    "end": 12148,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 464,
-    "start": 11940
+    "start": 11990
   },
   "songsListPage__MicahLabel": {
     "col": 7,
     "defaultMessage": "Micah",
     "description": "Songs list page Micah link label",
-    "end": 10102,
-    "file": "src/containers/song/list.tsx",
+    "end": 10152,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 387,
-    "start": 9950
+    "start": 10000
   },
   "songsListPage__NahumLabel": {
     "col": 7,
     "defaultMessage": "Nahum",
     "description": "Songs list page Nahum link label",
-    "end": 10378,
-    "file": "src/containers/song/list.tsx",
+    "end": 10428,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 398,
-    "start": 10226
+    "start": 10276
   },
   "songsListPage__NehemiahLabel": {
     "col": 7,
     "defaultMessage": "Nehemiah",
     "description": "Songs list page Nehemiah link label",
-    "end": 5268,
-    "file": "src/containers/song/list.tsx",
+    "end": 5318,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 200,
-    "start": 5107
+    "start": 5157
   },
   "songsListPage__NumbersLabel": {
     "col": 7,
     "defaultMessage": "Numbers",
     "description": "Songs list page Numbers link label",
-    "end": 1830,
-    "file": "src/containers/song/list.tsx",
+    "end": 1880,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 68,
-    "start": 1672
+    "start": 1722
   },
   "songsListPage__ObadiahLabel": {
     "col": 7,
     "defaultMessage": "Obadiah",
     "description": "Songs list page Obadiah link label",
-    "end": 9550,
-    "file": "src/containers/song/list.tsx",
+    "end": 9600,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 365,
-    "start": 9392
+    "start": 9442
   },
   "songsListPage__PhilemonLabel": {
     "col": 7,
     "defaultMessage": "Philemon",
     "description": "Songs list page Philemon link label",
-    "end": 17036,
-    "file": "src/containers/song/list.tsx",
+    "end": 17086,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 651,
-    "start": 16875
+    "start": 16925
   },
   "songsListPage__PhilippiansLabel": {
     "col": 7,
     "defaultMessage": "Philippians",
     "description": "Songs list page Philippians link label",
-    "end": 14964,
-    "file": "src/containers/song/list.tsx",
+    "end": 15014,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 574,
-    "start": 14794
+    "start": 14844
   },
   "songsListPage__ProverbsLabel": {
     "col": 7,
     "defaultMessage": "Proverbs",
     "description": "Songs list page Proverbs link label",
-    "end": 6384,
-    "file": "src/containers/song/list.tsx",
+    "end": 6434,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 244,
-    "start": 6223
+    "start": 6273
   },
   "songsListPage__PsalmsLabel": {
     "col": 7,
     "defaultMessage": "Psalms",
     "description": "Songs list page Psalms link label",
-    "end": 6096,
-    "file": "src/containers/song/list.tsx",
+    "end": 6146,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 233,
-    "start": 5941
+    "start": 5991
   },
   "songsListPage__RevelationLabel": {
     "col": 7,
     "defaultMessage": "Revelation",
     "description": "Songs list page Revelation link label",
-    "end": 19567,
-    "file": "src/containers/song/list.tsx",
+    "end": 19617,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 750,
-    "start": 19400
+    "start": 19450
   },
   "songsListPage__RomansLabel": {
     "col": 7,
     "defaultMessage": "Romans",
     "description": "Songs list page Romans link label",
-    "end": 13466,
-    "file": "src/containers/song/list.tsx",
+    "end": 13516,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 519,
-    "start": 13311
+    "start": 13361
   },
   "songsListPage__RuthLabel": {
     "col": 7,
     "defaultMessage": "Ruth",
     "description": "Songs list page Ruth link label",
-    "end": 2962,
-    "file": "src/containers/song/list.tsx",
+    "end": 3012,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 112,
-    "start": 2813
+    "start": 2863
   },
   "songsListPage__Song of SolomonLabel": {
     "col": 7,
     "defaultMessage": "Detail of Solomon",
     "description": "Songs list page Detail of Solomon link label",
-    "end": 7010,
-    "file": "src/containers/song/list.tsx",
+    "end": 7060,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 266,
-    "start": 6824
+    "start": 6874
   },
   "songsListPage__TitusLabel": {
     "col": 7,
     "defaultMessage": "Titus",
     "description": "Songs list page Titus link label",
-    "end": 16748,
-    "file": "src/containers/song/list.tsx",
+    "end": 16798,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 640,
-    "start": 16596
+    "start": 16646
   },
   "songsListPage__ZechariahLabel": {
     "col": 7,
     "defaultMessage": "Zechariah",
     "description": "Songs list page Zechariah link label",
-    "end": 11530,
-    "file": "src/containers/song/list.tsx",
+    "end": 11580,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 442,
-    "start": 11366
+    "start": 11416
   },
   "songsListPage__ZephaniahLabel": {
     "col": 7,
     "defaultMessage": "Zephaniah",
     "description": "Songs list page Zephaniah link label",
-    "end": 10958,
-    "file": "src/containers/song/list.tsx",
+    "end": 11008,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 420,
-    "start": 10794
+    "start": 10844
   },
   "songsListPage__albumTabLabel": {
     "col": 4,
     "defaultMessage": "Albums",
     "description": "Songs list page album tab label",
-    "end": 19766,
-    "file": "src/containers/song/list.tsx",
+    "end": 19816,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 760,
-    "start": 19623
+    "start": 19673
   },
   "songsListPage__bookTabLabel": {
     "col": 4,
     "defaultMessage": "Books",
     "description": "Songs list page book tab label",
-    "end": 707,
-    "file": "src/containers/song/list.tsx",
+    "end": 757,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 25,
-    "start": 567
+    "start": 617
   },
   "songsListPage__sponsorTabLabel": {
     "col": 4,
     "defaultMessage": "Sponsors",
     "description": "Songs list page sponsor tab label",
-    "end": 20333,
-    "file": "src/containers/song/list.tsx",
+    "end": 20393,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 785,
-    "start": 20184
+    "start": 20244
   },
   "songsListPage__tagTabLabel": {
     "col": 4,
     "defaultMessage": "Tags",
     "description": "Songs list page tag tab label",
-    "end": 20839,
-    "file": "src/containers/song/list.tsx",
+    "end": 20899,
+    "file": "src/containers/song/albums/list.tsx",
     "line": 809,
-    "start": 20702
+    "start": 20762
+  },
+  "sopnsorTypeLockup_type": {
+    "col": 10,
+    "defaultMessage": "Sponsor",
+    "end": 435,
+    "file": "src/components/molecules/sponsorTypeLockup.tsx",
+    "line": 14,
+    "start": 343
+  },
+  "sponsorConferencesDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Conferences",
+    "end": 1224,
+    "file": "src/containers/sponsor/conferences.tsx",
+    "line": 34,
+    "start": 1118
   },
   "sponsorDetail__collectionCountLabel": {
-    "col": 6,
+    "col": 36,
     "defaultMessage": "{count} Conferences",
     "description": "Sponsor Detail collection count label",
-    "end": 3284,
+    "end": 3605,
     "file": "src/containers/sponsor/detail.tsx",
-    "line": 105,
-    "start": 3051
+    "line": 110,
+    "start": 3359
+  },
+  "sponsorDetail__conferencesAllLabel": {
+    "col": 31,
+    "defaultMessage": "See All Conferences",
+    "end": 6969,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 227,
+    "start": 6865
+  },
+  "sponsorDetail__conferencesLabel": {
+    "col": 6,
+    "defaultMessage": "Conferences",
+    "end": 6492,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 211,
+    "start": 6386
   },
   "sponsorDetail__descriptionLabel": {
     "col": 28,
     "defaultMessage": "Description",
-    "end": 1777,
+    "end": 2301,
     "file": "src/containers/sponsor/detail.tsx",
-    "line": 48,
-    "start": 1693
+    "line": 62,
+    "start": 2217
   },
   "sponsorDetail__locationLabel": {
     "col": 28,
     "defaultMessage": "Location",
-    "end": 2312,
+    "end": 2836,
     "file": "src/containers/sponsor/detail.tsx",
-    "line": 72,
-    "start": 2234
+    "line": 86,
+    "start": 2758
   },
-  "sponsorDetail__type": {
+  "sponsorDetail__recentAllLabel": {
     "col": 31,
-    "defaultMessage": "Sponsor",
-    "description": "Sponsor Detail type label",
-    "end": 2623,
+    "defaultMessage": "See All Recent Teachings",
+    "end": 5439,
     "file": "src/containers/sponsor/detail.tsx",
-    "line": 85,
-    "start": 2501
+    "line": 171,
+    "start": 5335
+  },
+  "sponsorDetail__recentLabel": {
+    "col": 6,
+    "defaultMessage": "Recent Teachings",
+    "end": 4970,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 155,
+    "start": 4864
+  },
+  "sponsorDetail__recordingsCountLabel": {
+    "col": 11,
+    "defaultMessage": "{count} Teachings",
+    "description": "Sponsor Detail teachings count label",
+    "end": 4131,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 124,
+    "start": 3889
+  },
+  "sponsorDetail__sequencesCountLabel": {
+    "col": 37,
+    "defaultMessage": "{count} Series",
+    "description": "Sponsor Detail series count label",
+    "end": 3877,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 117,
+    "start": 3643
+  },
+  "sponsorDetail__seriesAllLabel": {
+    "col": 31,
+    "defaultMessage": "See All Series",
+    "end": 6199,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 198,
+    "start": 6105
+  },
+  "sponsorDetail__seriesLabel": {
+    "col": 6,
+    "defaultMessage": "Series",
+    "description": "Collection Detail series label",
+    "end": 5772,
+    "file": "src/containers/sponsor/detail.tsx",
+    "line": 184,
+    "start": 5624
   },
   "sponsorDetail__websiteLabel": {
     "col": 28,
     "defaultMessage": "Website",
-    "end": 2000,
+    "end": 2524,
     "file": "src/containers/sponsor/detail.tsx",
-    "line": 57,
-    "start": 1924
+    "line": 71,
+    "start": 2448
   },
-  "sponsorTeachingsPage__pageTitle": {
+  "sponsorSeriesDetail__heading": {
     "col": 4,
-    "defaultMessage": "Teachings",
-    "description": "Sponsor teachings page title",
-    "end": 1250,
+    "defaultMessage": "All Series",
+    "end": 1173,
+    "file": "src/containers/sponsor/series.tsx",
+    "line": 34,
+    "start": 1077
+  },
+  "sponsorTeachingsDetail__heading": {
+    "col": 4,
+    "defaultMessage": "All Teachings",
+    "end": 1268,
     "file": "src/containers/sponsor/teachings.tsx",
-    "line": 36,
-    "start": 1104
+    "line": 38,
+    "start": 1166
   },
   "sponsorsList__title": {
-    "col": 33,
+    "col": 12,
     "defaultMessage": "Sponsors",
-    "description": "Sponsors list page title",
-    "end": 645,
+    "end": 1041,
     "file": "src/containers/sponsor/list.tsx",
-    "line": 15,
-    "start": 531
+    "line": 26,
+    "start": 965
   },
-  "storiesListPage__pageTitle": {
-    "col": 4,
-    "defaultMessage": "Stories",
-    "description": "Stories list page title",
-    "end": 738,
-    "file": "src/containers/story/stories.tsx",
-    "line": 19,
-    "start": 604
+  "storyAlbumList__heading": {
+    "col": 12,
+    "defaultMessage": "All Stories",
+    "end": 1020,
+    "file": "src/containers/story/albums/list.tsx",
+    "line": 27,
+    "start": 923
   },
   "tag-feed-title": {
-    "col": 34,
-    "defaultMessage": "AudioVerse Recordings Tagged {tag} ({lang})",
+    "col": 35,
+    "defaultMessage": "Recordings Tagged {tag}",
     "description": "Tag feed title",
-    "end": 1345,
+    "end": 1372,
     "file": "src/pages/[language]/tags/[slug]/page/[i].ts",
-    "line": 43,
-    "start": 1212
+    "line": 44,
+    "start": 1254
   },
   "tagListPage__title": {
     "col": 4,

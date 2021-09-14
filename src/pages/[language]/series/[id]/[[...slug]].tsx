@@ -1,6 +1,5 @@
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
 import { REVALIDATE } from '@lib/constants';
-import { createFeed } from '@lib/createFeed';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
@@ -19,21 +18,13 @@ export async function getStaticProps({
 }): Promise<SeriesStaticProps> {
 	const { id } = params;
 
-	const result = await getSeriesDetailPageData({ id }).catch(() => ({
+	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
 		series: null,
 	}));
 
-	if (result) {
-		await createFeed(
-			result.series?.title,
-			params,
-			result.series?.recordings.nodes || [],
-			`series/${id}.xml`
-		);
-	}
 	return {
 		props: {
-			sequence: result?.series,
+			sequence: series,
 		},
 		revalidate: REVALIDATE,
 	};

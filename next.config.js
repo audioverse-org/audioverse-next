@@ -91,15 +91,6 @@ module.exports = withPWA({
 			use: ['@svgr/webpack'],
 		});
 
-		// WORKAROUND: "Error: Can't resolve 'fs'" during build
-		// https://github.com/vercel/next.js/issues/9866#issuecomment-881799911
-		// if (!isServer) {
-		// config.resolve.fallback = {
-		// 	fs: false,
-		// 	os: false,
-		// };
-		// }
-
 		return config;
 	},
 	images: {

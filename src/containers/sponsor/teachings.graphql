@@ -2,10 +2,14 @@ query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
 	sponsor(id: $id) {
 		id
 		...sponsorPivot
-		recordings(offset: $offset, first: $first) {
+		recordings(
+			offset: $offset
+			first: $first
+			orderBy: [{ field: RECORDED_AT, direction: DESC }]
+		) {
 			nodes {
 				...cardRecording
-				...writeFeedFile
+				...generateFeed
 			}
 			aggregate {
 				count

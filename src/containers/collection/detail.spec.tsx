@@ -6,13 +6,10 @@ import {
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
-// import writeFeedFile from '@lib/writeFeedFile';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
-
-jest.mock('@lib/writeFeedFile');
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps, {
 	language: 'en',
@@ -156,20 +153,6 @@ describe('collection detail page', () => {
 	});
 
 	// TODO:
-	// it('creates RSS feed', async () => {
-	// 	loadData();
-
-	// 	await getStaticProps({
-	// 		params: { language: 'en', id: 'the_collection_id', i: '1' },
-	// 	});
-
-	// 	expect(writeFeedFile).toBeCalledWith({
-	// 		recordings: expect.any(Array),
-	// 		projectRelativePath: 'public/en/conferences/the_collection_id.xml',
-	// 		title: 'the_collection_title : AudioVerse',
-	// 	});
-	// });
-
 	// it('links to RSS feed', async () => {
 	// 	loadData();
 

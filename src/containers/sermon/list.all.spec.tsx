@@ -1,7 +1,4 @@
-import fs from 'fs';
-
 import { waitFor } from '@testing-library/react';
-import * as feed from 'feed';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
 
@@ -9,24 +6,18 @@ import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
-	PROJECT_ROOT,
 } from '@lib/constants';
 import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	mockedFetchApi,
-	mockFeed,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
 
 jest.mock('next/router');
-jest.mock('fs');
 jest.mock('next/head');
 jest.mock('@lib/api/isPersonFavorited');
 
@@ -70,7 +61,6 @@ export function loadSermonListData({
 describe('sermons list page', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		mockFeed();
 	});
 
 	it('can be rendered', async () => {
@@ -262,123 +252,6 @@ describe('sermons list page', () => {
 		expect(result.paths).not.toContain('/en/teachings/video/page/1');
 	});
 
-	it('calls writeFeedFile', async () => {
-		loadSermonListData();
-
-		await renderPage();
-
-		expect(fs.writeFileSync).toBeCalled();
-	});
-
-	it('provides path', async () => {
-		loadSermonListData();
-
-		await renderPage();
-
-		const { calls } = (fs.writeFileSync as any).mock;
-
-		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/en/teachings/all.xml`);
-	});
-
-	it('calls mkdirSync', async () => {
-		loadSermonListData();
-
-		await renderPage();
-
-		expect(fs.mkdirSync).toBeCalled();
-	});
-
-	it('only renders feed once per language', async () => {
-		loadSermonListData();
-
-		await renderPage({ params: { i: '1', language: 'en' } });
-		await renderPage({ params: { i: '2', language: 'en' } });
-
-		expect(fs.mkdirSync).toHaveBeenCalledTimes(1);
-	});
-
-	it('renders feeds for other languages', async () => {
-		loadSermonListData();
-
-		await renderPage({ params: { i: '1', language: 'es' } });
-
-		const { calls } = (fs.writeFileSync as any).mock;
-
-		expect(calls[0][0]).toEqual(`${PROJECT_ROOT}/public/es/teachings/all.xml`);
-	});
-
-	it('adds sermons to feed', async () => {
-		const { addItem } = mockFeed();
-
-		loadSermonListData({
-			nodes: [
-				{
-					id: 'the_sermon_id_1',
-					audioFiles: [
-						{
-							url: 'file_url',
-						},
-					],
-				},
-				{
-					id: 'the_sermon_id_2',
-					audioFiles: [
-						{
-							url: 'file_url',
-						},
-					],
-				},
-			],
-		});
-
-		await renderPage();
-
-		expect(addItem).toBeCalledTimes(2);
-	});
-
-	it('titles feeds', async () => {
-		mockFeed();
-		loadSermonListData();
-
-		await renderPage();
-
-		const calls = (feed.Feed as any).mock.calls;
-
-		expect(calls[0][0].title).toEqual('All Teachings | AudioVerse English');
-	});
-
-	it('translates feed titles', async () => {
-		mockFeed();
-		loadSermonListData();
-
-		await renderPage({ params: { i: '1', language: 'es' } });
-
-		const calls = (feed.Feed as any).mock.calls;
-
-		expect(calls[0][0].title).toEqual(
-			'Grabaciones Recientes | AudioVerse Español'
-		);
-	});
-
-	it('includes feed link', async () => {
-		loadSermonListData();
-
-		const { getByRole } = await renderPage();
-
-		expect(getByRole('link', { name: 'RSS' })).toBeInTheDocument();
-	});
-
-	it('links to feed', async () => {
-		loadSermonListData();
-
-		const { getByRole } = await renderPage();
-
-		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-			'href',
-			'/en/teachings/all.xml'
-		);
-	});
-
 	it('targets blank', async () => {
 		loadSermonListData();
 
@@ -456,6 +329,7 @@ describe('sermons list page', () => {
 							{
 								id: 'the_id',
 								name: 'the_name',
+								canonicalPath: 'the_path',
 								imageWithFallback: {
 									url: 'the_image_url',
 								},
@@ -469,13 +343,5 @@ describe('sermons list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_name')).toBeInTheDocument();
-	});
-
-	it('skips feed creation if invalid language', async () => {
-		loadSermonListData();
-
-		await renderPage({ params: { i: '1', language: 'bad' } });
-
-		expect(fs.writeFileSync).not.toBeCalled();
 	});
 });

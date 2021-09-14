@@ -1,22 +1,32 @@
-import fs from 'fs';
-import { dirname, resolve } from 'path';
-
 import { Feed } from 'feed';
 
-import { PROJECT_ROOT } from '@lib/constants';
-import { WriteFeedFileFragment } from '@lib/generated/graphql';
+import { GenerateFeedFragment } from '@lib/generated/graphql';
 
-interface WriteFeedFileProps {
-	recordings: WriteFeedFileFragment[];
-	title: string;
-	projectRelativePath: string;
-}
+import getIntl from './getIntl';
+import getLanguageByBaseUrl from './getLanguageByBaseUrl';
 
-export default async function writeFeedFile({
-	recordings,
-	title,
-	projectRelativePath,
-}: WriteFeedFileProps): Promise<void> {
+export function generateFeed(
+	feedTitle: string,
+	recordings: GenerateFeedFragment[],
+	languageRoute: string
+): string {
+	const intl = getIntl(languageRoute);
+	const language = getLanguageByBaseUrl(languageRoute);
+
+	// TODO: Switch to automatic ID generation:
+	// https://formatjs.io/docs/getting-started/message-extraction/#automatic-id-generation
+	const title = intl.formatMessage(
+		{
+			id: 'feed-title',
+			defaultMessage: '{identifier} | AudioVerse {lang}',
+			description: 'Generic feed title',
+		},
+		{
+			identifier: feedTitle,
+			lang: language?.display_name,
+		}
+	);
+
 	// https://github.com/avorg/wp-avorg-plugin/blob/master/view/page-feed.twig
 	// TODO: copyright
 	// TODO: itunes:subtitle
@@ -60,13 +70,5 @@ export default async function writeFeedFile({
 		});
 	});
 
-	const path = resolve(PROJECT_ROOT, projectRelativePath);
-
-	if (!path.startsWith(PROJECT_ROOT)) {
-		throw new Error('Path not within project');
-	}
-
-	fs.mkdirSync(dirname(path), { recursive: true });
-
-	fs.writeFileSync(path, feed.rss2());
+	return feed.rss2();
 }

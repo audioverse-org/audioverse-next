@@ -1,7 +1,6 @@
 import SponsorTeachings, {
 	SponsorTeachingsProps,
 } from '@containers/sponsor/teachings';
-import { createFeed } from '@lib/createFeed';
 import {
 	getSponsorTeachingsPageData,
 	getSponsorTeachingsPathsData,
@@ -17,22 +16,13 @@ export async function getStaticProps({
 }: {
 	params: { language: string; id: string; i: string };
 }): Promise<StaticProps<SponsorTeachingsProps>> {
-	const { language, id, i } = params;
+	const { language, id } = params;
 	const result = await getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSponsorTeachingsPageData({ id, offset, first }),
 		(d) => d.sponsor?.recordings.nodes,
 		(d) => d.sponsor?.recordings.aggregate?.count
 	);
-
-	if (i === '1') {
-		await createFeed(
-			result.props.data?.sponsor?.title,
-			params,
-			result.props.nodes,
-			`sponsors/${id}/teachings.xml`
-		);
-	}
 
 	return {
 		...result,

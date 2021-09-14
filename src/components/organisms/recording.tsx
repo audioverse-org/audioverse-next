@@ -19,6 +19,7 @@ import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { BaseColors } from '@lib/constants';
+import { formatLongDateTime, parseRelativeDate } from '@lib/date';
 import {
 	RecordingContentType,
 	RecordingFragment,
@@ -49,13 +50,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	} = recording;
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
-	const recordingDateString = new Date(recordingDate || '').toLocaleString([], {
-		hour: 'numeric',
-		minute: 'numeric',
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-	});
+	const recordingDateString = formatLongDateTime(
+		parseRelativeDate(recordingDate || '') || ''
+	);
 	const index = sequenceIndex;
 	const seriesItems = sequence?.recordings?.nodes;
 
@@ -204,7 +201,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			),
 		});
 	}
-	if (recordingDate) {
+	if (recordingDateString) {
 		details.push({
 			term: (
 				<FormattedMessage

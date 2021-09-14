@@ -13,7 +13,7 @@ query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
 		) {
 			nodes {
 				...cardRecording
-				...writeFeedFile
+				...generateFeed
 			}
 			aggregate {
 				count
