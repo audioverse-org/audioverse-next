@@ -4,7 +4,7 @@ const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePaginationRoute = (
 	base: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `${base}/page/${page}`;
 
 export const makeSermonRoute = (
@@ -19,13 +19,13 @@ export const makeAudiobookTrackRoute = (
 
 export const makePresenterListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/presenters/page/${page}`;
 
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
 
 export const makePresenterTopRecordingsRoute = (
@@ -36,24 +36,24 @@ export const makePresenterTopRecordingsRoute = (
 export const makePresenterSequencesRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/presenters/${personId}/sequences/page/${page}`;
 
 export const makePresenterAlsoAppearsInRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/presenters/${personId}/appears/page/${page}`;
 
 export const makeSeriesDetailRoute = (
 	languageRoute: string,
 	seriesId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/series/${seriesId}/page/${page}`;
 
 export const makeSeriesListRoute = (
 	languageRoute: string,
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/series/page/${page}`;
 
 export const makeTagDetailRoute = (
@@ -71,28 +71,28 @@ export const makeTagListRoute = (
 export const makeSermonListRoute = (
 	languageRoute: string,
 	filter: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/teachings/${filter}/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteAll = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/teachings/all/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteVideo = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/teachings/video/page/${page}`;
 
 // TODO: use makeSermonListRoute
 // TODO: default page to 1
 export const makeSermonListRouteAudio = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/teachings/audio/page/${page}`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
@@ -116,7 +116,7 @@ export const makeAudiobookRoute = (
 
 export const makeAudiobookListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/books/page/${page}`;
 
 export const makeStoryRoute = (
@@ -131,12 +131,12 @@ export const makeStoryAlbumRoute = (
 
 export const makeStoryAlbumListPage = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/stories/albums/page/${page}`;
 
 export const makeSongAlbumsListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/songs/albums/page/${page}`;
 
 export const makeSongAlbumDetailRoute = (
@@ -181,13 +181,13 @@ export const makeCollectionSequencesRoute = (
 export const makeCollectionPresentersRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string =>
 	`/${languageRoute}/conferences/${conferenceId}/presenters/page/${page}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/conferences/page/${page}`;
 
 // TODO: rename makeSponsorDetailRoute
@@ -198,53 +198,53 @@ export const makeSponsorRoute = (
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/sponsors/page/${page}`;
 
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/teachings/page/${page}`;
 
 export const makeSponsorBooksRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/books/page/${page}`;
 
 export const makeSponsorAlbumsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/albums/page/${page}`;
 
 export const makeSponsorConferencesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/conferences/page/${page}`;
 
 export const makeSponsorSeriesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/${sponsorId}/series/page/${page}`;
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/testimonies/page/${page}`;
 
 export const makePlaylistListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/playlists/page/${page}`;
 
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
 	playlistId: Scalars['ID'],
-	page: Scalars['ID'] = 1
+	page: string | number = 1
 ): string => `/${languageRoute}/playlists/${playlistId}/page/${page}`;
 
 export const makeBlogPostRoute = (
@@ -254,5 +254,5 @@ export const makeBlogPostRoute = (
 
 export const makeBlogPostListRoute = (
 	languageRoute: string,
-	page: Scalars['ID']
+	page: string | number
 ): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
