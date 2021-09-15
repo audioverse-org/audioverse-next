@@ -14,10 +14,6 @@ interface SectionProps {
 }
 
 // TODO: vertical on mobile
-// TODO: horizontal on desktop
-// TODO: bleed mode
-// TODO: style all themes
-// TODO: reversed mode
 
 export default function Section({
 	text,

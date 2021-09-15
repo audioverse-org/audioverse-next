@@ -1,6 +1,7 @@
 fragment recordingList on Recording {
 	id
 	title
+	canonicalPath(useFuturePath: true)
 	description
 	duration
 	imageWithFallback {
@@ -11,5 +12,4 @@ fragment recordingList on Recording {
 	}
 	hasVideo
 	recordingDate
-	canonicalUrl
 }

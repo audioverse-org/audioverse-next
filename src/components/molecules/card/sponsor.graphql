@@ -1,5 +1,5 @@
 fragment cardSponsor on Sponsor {
-    id
+	id
 	title
 	canonicalPath(useFuturePath: true)
 	image {

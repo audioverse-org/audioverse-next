@@ -8,7 +8,6 @@ import ArrowRight from '../../../public/img/icon-forward-light.svg';
 
 import styles from './slider.module.scss';
 
-// TODO: improve children type
 interface SliderProps {
 	children: ReactNode;
 	perSlide?: number;

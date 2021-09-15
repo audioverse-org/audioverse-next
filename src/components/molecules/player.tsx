@@ -133,7 +133,13 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 				<div className={styles.rightButtons}>
 					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />
-					<ButtonShareRecording {...{ recording, backgroundColor }} />
+					<ButtonShareRecording
+						{...{
+							recording,
+							backgroundColor,
+							shareVideo: shouldShowVideoControls,
+						}}
+					/>
 					<RecordingButtonFavorite
 						id={recording.id}
 						backgroundColor={backgroundColor}

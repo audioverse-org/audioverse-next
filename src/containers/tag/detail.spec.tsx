@@ -31,6 +31,7 @@ function loadPageData() {
 					{
 						id: 'the_recording_id',
 						title: 'the_recording_title',
+						canonicalPath: 'the_recording_path',
 					},
 				],
 			},

@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import TableList from '@components/organisms/tableList';
 import { BaseColors } from '@lib/constants';
 import { RecordingListFragment, Scalars } from '@lib/generated/graphql';
-import { makeSermonRoute } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 
 import PersonLockup from './personLockup';
@@ -60,16 +59,13 @@ interface RecordingListProps {
 // TODO: delete/rework this component
 export default function RecordingList({
 	recordings,
-	makeRoute = makeSermonRoute,
 }: RecordingListProps): JSX.Element {
 	return (
 		<TableList
 			nodes={recordings}
 			parseTitle={(n) => n.title}
 			parseImageUrl={(n) => n.imageWithFallback?.url}
-			makeEntryRoute={(languageRoute, node) =>
-				makeRoute(languageRoute, node.id)
-			}
+			makeEntryRoute={(languageRoute, node) => node.canonicalPath}
 			columns={columns}
 		/>
 	);

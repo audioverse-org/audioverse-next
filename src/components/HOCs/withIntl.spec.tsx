@@ -616,7 +616,13 @@ describe('localization usage', () => {
 			},
 		],
 		[Transcript, {}],
-		[SermonList, { nodes: [{ id: 1 }], pagination: { current: 1, total: 10 } }],
+		[
+			SermonList,
+			{
+				nodes: [{ id: 1, canonicalPath: 'the_path' }],
+				pagination: { current: 1, total: 10 },
+			},
+		],
 	];
 
 	scenarios.map((s: [React.ComponentType, any], i: number) => {

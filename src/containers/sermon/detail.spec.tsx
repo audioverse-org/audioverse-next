@@ -34,7 +34,6 @@ jest.mock(
 );
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
-// TODO: Move getSermonDetailStaticPaths graphql query to detail.graphql
 function loadSermonDetailPathsData() {
 	when(mockedFetchApi)
 		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
@@ -43,6 +42,12 @@ function loadSermonDetailPathsData() {
 				nodes: [
 					{
 						id: 'sermon_id',
+						canonicalPath: '/en/teachings/sermon_id',
+						recordingDate: '2020-06-01T09:30:00.000Z',
+					},
+					{
+						id: 'sermon_id',
+						canonicalPath: '/es/teachings/sermon_id',
 						recordingDate: '2020-06-01T09:30:00.000Z',
 					},
 				],
@@ -602,7 +607,9 @@ describe('sermon detail page', () => {
 
 		userEvent.click(getByLabelText('share'));
 
-		expect(getByText('the_share_url')).toBeInTheDocument();
+		expect((getByText('Copy Link') as HTMLAnchorElement).href).toContain(
+			'the_share_url'
+		);
 	});
 
 	it('includes share url title', async () => {
@@ -614,7 +621,7 @@ describe('sermon detail page', () => {
 
 		userEvent.click(getByLabelText('share'));
 
-		expect(getByText('Short URL')).toBeInTheDocument();
+		expect(getByText('Copy Link')).toBeInTheDocument();
 	});
 
 	it('includes share title', async () => {
@@ -632,21 +639,21 @@ describe('sermon detail page', () => {
 	it('has embed input', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText } = await renderPage();
+		const { getByLabelText, getByText } = await renderPage();
 
 		userEvent.click(getByLabelText('share'));
 
-		expect(getByLabelText('Embed Code')).toBeInTheDocument();
+		expect(getByText('Audio Embed Code')).toBeInTheDocument();
 	});
 
 	it('populates embed input', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText } = await renderPage();
+		const { getByLabelText, getByText } = await renderPage();
 
 		userEvent.click(getByLabelText('share'));
 
-		const input = getByLabelText('Embed Code') as HTMLInputElement;
+		const input = getByText('Audio Embed Code').nextSibling as HTMLInputElement;
 
 		expect(input.value).toContain(
 			'https://www.audioverse.org/english/embed/media/the_sermon_id'

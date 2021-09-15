@@ -1,5 +1,5 @@
-import Cookie from 'js-cookie';
+import { clearSessionToken } from '@lib/cookies';
 
 export function logout(): void {
-	Cookie.remove('avSession');
+	clearSessionToken();
 }

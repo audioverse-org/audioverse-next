@@ -2,23 +2,33 @@ import { Menu } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
 import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import IconShare from '../../../public/img/icon-share.svg';
 
 import { isBackgroundColorDark } from './buttonPlay';
+import styles from './buttonShareRecording.module.scss';
 import IconButton from './iconButton';
 
 export default function ButtonShareRecording({
 	recording,
 	backgroundColor,
+	shareVideo,
 }: {
 	recording: ButtonShareRecordingFragment;
 	backgroundColor: BaseColors;
+	shareVideo: boolean;
 }): JSX.Element {
 	const intl = useIntl();
-	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${recording.id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
+	const { id, shareUrl } = recording;
+	// TODO: update embed code and links
+	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
+	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
+	const emailLink = `mailto:?subject=Enjoy%20this%20blessing&body=${shareUrl}`;
+	const copyLink = shareUrl;
+	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
 	const [anchorEl, setAnchorEl] = React.useState(null);
 
 	const handleClick = (event: any) => {
@@ -28,6 +38,39 @@ export default function ButtonShareRecording({
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const shareOptions = [
+		[
+			facebookLink, // eslint-disable-next-line react/jsx-key
+			<FormattedMessage
+				id="molecule-buttonShareRecording__facebook"
+				defaultMessage="Facebook"
+			/>,
+		],
+		[
+			twitterLink, // eslint-disable-next-line react/jsx-key
+			<FormattedMessage
+				id="molecule-buttonShareRecording__twitter"
+				defaultMessage="Twitter"
+			/>,
+		],
+		[
+			emailLink,
+			// eslint-disable-next-line react/jsx-key
+			<FormattedMessage
+				id="molecule-buttonShareRecording__email"
+				defaultMessage="Email"
+			/>,
+		],
+		[
+			copyLink,
+			// eslint-disable-next-line react/jsx-key
+			<FormattedMessage
+				id="molecule-buttonShareRecording__copyLink"
+				defaultMessage="Copy Link"
+			/>,
+		],
+	] as const;
 
 	return (
 		<>
@@ -53,30 +96,38 @@ export default function ButtonShareRecording({
 				onClose={handleClose}
 				keepMounted
 				anchorEl={anchorEl}
+				PaperProps={{
+					className: styles.paper,
+				}}
 			>
-				<h6>
+				<Heading6 sans loose uppercase className={styles.heading}>
 					<FormattedMessage
 						id="molecule-buttonShareRecording__shareTitle"
 						defaultMessage="Share"
 						description="recording share button section title"
 					/>
-				</h6>
-				<h6>
-					<FormattedMessage
-						id="molecule-buttonShareRecording__shortUrlLabel"
-						defaultMessage="Short URL"
-						description="recording share button url label"
-					/>
-				</h6>
-				<p>{recording.shareUrl}</p>
-				<label>
-					<FormattedMessage
-						id="molecule-buttonShareRecording__embedCodeLabel"
-						defaultMessage="Embed Code"
-						description="recording share button embed code label"
-					/>{' '}
-					<input readOnly={true} value={embedCode} />
-				</label>
+				</Heading6>
+				{shareOptions.map(([link, label], index) => (
+					<p className={styles.paragraph} key={index}>
+						<a href={link} target="_blank" rel="noreferrer">
+							{label}
+						</a>
+					</p>
+				))}
+				<Heading6 sans loose uppercase className={styles.heading}>
+					{shareVideo ? (
+						<FormattedMessage
+							id="molecule-buttonShareRecording__videoEmbedLabel"
+							defaultMessage="Video Embed Code"
+						/>
+					) : (
+						<FormattedMessage
+							id="molecule-buttonShareRecording__audioEmbedLabel"
+							defaultMessage="Audio Embed Code"
+						/>
+					)}
+				</Heading6>
+				<input className={styles.embedCode} readOnly={true} value={embedCode} />
 			</Menu>
 		</>
 	);

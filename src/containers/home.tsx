@@ -20,6 +20,7 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
+import { makeLoginRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './home.module.scss';
@@ -69,7 +70,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						}
 					/>
 					<div className={styles.divider} />
-					<Link href={`/${route}/account/login`}>
+					<Link href={makeLoginRoute(route)}>
 						<a>
 							<FormattedMessage
 								id={'homePage__loginButtonLabel'}
@@ -78,7 +79,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							/>
 						</a>
 					</Link>
-					<Link href={`/${route}/account/register`}>
+					<Link href={makeRegisterRoute(route)}>
 						<a>
 							<FormattedMessage
 								id={'srcContainersHomeTsx__signUp'}
@@ -110,7 +111,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={`/${route}/account/register`}
+							href={makeRegisterRoute(route)}
 							text={
 								<FormattedMessage
 									id={'homePage__joinAudioVerseButtonLabel'}

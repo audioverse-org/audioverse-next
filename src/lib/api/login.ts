@@ -1,24 +1,13 @@
-import Cookie from 'js-cookie';
-
-// TODO: use graphql codegen for this
-const query = `
-mutation($email: String!, $password: String!) {
-	login(input: { email: $email, password: $password }) {
-		authenticatedUser {
-			sessionToken
-		}
-	}
-}
-`;
-
-import { fetchApi } from '@lib/api/fetchApi';
+import { setSessionToken } from '@lib/cookies';
+import { login as _login } from '@lib/generated/graphql';
 
 export async function login(email: string, password: string): Promise<boolean> {
-	const variables = { email, password };
-	const data = await fetchApi(query, { variables });
-	const token = data.login.authenticatedUser.sessionToken;
-
-	Cookie.set('avSession', token);
-
-	return !!token;
+	const {
+		login: { authenticatedUser },
+	} = await _login({ email, password });
+	if (authenticatedUser) {
+		setSessionToken(authenticatedUser.sessionToken);
+		return true;
+	}
+	return false;
 }

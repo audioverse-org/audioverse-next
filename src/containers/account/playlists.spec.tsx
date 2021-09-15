@@ -270,7 +270,9 @@ describe('playlists page', () => {
 		loadData();
 
 		const result = await getServerSideProps({
-			req: 'the_request',
+			req: {} as any,
+			res: {} as any,
+			resolvedUrl: '',
 			query: { language: 'en' },
 		});
 

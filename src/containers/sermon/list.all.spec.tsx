@@ -47,6 +47,7 @@ export function loadSermonListData({
 				{
 					id: 'the_sermon_id',
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [],
 				},
 			],
@@ -288,6 +289,7 @@ describe('sermons list page', () => {
 					{
 						id: 'the_sermon_id',
 						title: 'the_sermon_title',
+						canonicalPath: 'the_sermon_path',
 						audioFiles: [{}],
 					},
 				],
@@ -306,6 +308,7 @@ describe('sermons list page', () => {
 					{
 						id: 'the_sermon_id',
 						title: 'the_sermon_title',
+						canonicalPath: 'the_sermon_path',
 						hasVideo: true,
 					},
 				],
@@ -324,6 +327,7 @@ describe('sermons list page', () => {
 					{
 						id: 'the_sermon_id',
 						title: 'the_sermon_title',
+						canonicalPath: 'the_sermon_path',
 						persons: [
 							{
 								id: 'the_id',

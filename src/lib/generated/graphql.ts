@@ -6192,11 +6192,11 @@ export type RecordingListFragment = {
 	__typename?: 'Recording';
 	id: string | number;
 	title: string;
+	canonicalPath: string;
 	description: Maybe<string>;
 	duration: number;
 	hasVideo: boolean;
 	recordingDate: Maybe<string>;
-	canonicalUrl: string;
 	imageWithFallback: { __typename?: 'Image'; url: string };
 	persons: Array<{
 		__typename?: 'Person';
@@ -8262,11 +8262,11 @@ export type GetPlaylistPageDataQuery = {
 							__typename?: 'Recording';
 							id: string | number;
 							title: string;
+							canonicalPath: string;
 							description: Maybe<string>;
 							duration: number;
 							hasVideo: boolean;
 							recordingDate: Maybe<string>;
-							canonicalUrl: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 							persons: Array<{
 								__typename?: 'Person';
@@ -9318,7 +9318,13 @@ export type GetSermonDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string | number }>>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				id: string | number;
+				canonicalPath: string;
+			}>
+		>;
 	};
 };
 
@@ -9338,6 +9344,7 @@ export type GetSermonListStaticPropsQuery = {
 				__typename?: 'Recording';
 				id: string | number;
 				title: string;
+				canonicalPath: string;
 				description: Maybe<string>;
 				duration: number;
 				hasVideo: boolean;
@@ -10653,6 +10660,7 @@ export type GetTagDetailPageDataQuery = {
 				__typename?: 'Recording';
 				id: string | number;
 				title: string;
+				canonicalPath: string;
 				description: Maybe<string>;
 				duration: number;
 				hasVideo: boolean;
@@ -10782,6 +10790,22 @@ export type CollectionUnfavoriteMutationVariables = Exact<{
 export type CollectionUnfavoriteMutation = {
 	__typename?: 'Mutation';
 	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type LoginMutationVariables = Exact<{
+	email: Scalars['String'];
+	password: Scalars['String'];
+}>;
+
+export type LoginMutation = {
+	__typename?: 'Mutation';
+	login: {
+		__typename?: 'AuthenticatedUserPayload';
+		authenticatedUser: Maybe<{
+			__typename?: 'AuthenticatedUser';
+			sessionToken: string;
+		}>;
+	};
 };
 
 export type PersonFavoriteMutationVariables = Exact<{
@@ -11182,6 +11206,7 @@ export const RecordingListFragmentDoc = `
     fragment recordingList on Recording {
   id
   title
+  canonicalPath(useFuturePath: true)
   description
   duration
   imageWithFallback {
@@ -11192,7 +11217,6 @@ export const RecordingListFragmentDoc = `
   }
   hasVideo
   recordingDate
-  canonicalUrl
 }
     ${PersonLockupFragmentDoc}`;
 export const SequenceNavFragmentDoc = `
@@ -13136,6 +13160,7 @@ export const GetSermonDetailStaticPathsDocument = `
   sermons(language: $language, first: $first) {
     nodes {
       id
+      canonicalPath(useFuturePath: true)
     }
   }
 }
@@ -14242,6 +14267,31 @@ export const useCollectionUnfavoriteMutation = <
 			>(CollectionUnfavoriteDocument, variables)(),
 		options
 	);
+export const LoginDocument = `
+    mutation login($email: String!, $password: String!) {
+  login(input: {email: $email, password: $password}) {
+    authenticatedUser {
+      sessionToken
+    }
+  }
+}
+    `;
+export const useLoginMutation = <TError = unknown, TContext = unknown>(
+	options?: UseMutationOptions<
+		LoginMutation,
+		TError,
+		LoginMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
+		(variables?: LoginMutationVariables) =>
+			graphqlFetcher<LoginMutation, LoginMutationVariables>(
+				LoginDocument,
+				variables
+			)(),
+		options
+	);
 export const PersonFavoriteDocument = `
     mutation personFavorite($id: ID!) {
   favorited: personFavorite(id: $id) {
@@ -15145,6 +15195,12 @@ export async function collectionUnfavorite<T>(
 	variables: ExactAlt<T, CollectionUnfavoriteMutationVariables>
 ): Promise<CollectionUnfavoriteMutation> {
 	return fetchApi(CollectionUnfavoriteDocument, { variables });
+}
+
+export async function login<T>(
+	variables: ExactAlt<T, LoginMutationVariables>
+): Promise<LoginMutation> {
+	return fetchApi(LoginDocument, { variables });
 }
 
 export async function personFavorite<T>(

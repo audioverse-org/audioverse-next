@@ -1,9 +1,13 @@
+import { useContext } from 'react';
 import {
 	UseMutateFunction,
 	useMutation,
 	useQuery,
 	useQueryClient,
 } from 'react-query';
+
+import { AuthBarrierContext } from '@components/templates/andAuthBarrier';
+import { getSessionToken } from '@lib/cookies';
 
 export type IUseIsFavoritedResult = {
 	isFavorited: boolean | undefined;
@@ -16,15 +20,23 @@ export function useIsFavorited(
 	isFavoritedQueryFn: () => Promise<boolean>,
 	setFavoritedQueryFn: (isFavorited: boolean) => Promise<boolean>
 ): IUseIsFavoritedResult {
+	const context = useContext(AuthBarrierContext);
 	const queryClient = useQueryClient();
 
-	const { data: isFavorited, isLoading } = useQuery(
-		queryKey,
-		isFavoritedQueryFn
-	);
+	const { data: isFavorited, isLoading } = useQuery(queryKey, () => {
+		if (getSessionToken()) {
+			return isFavoritedQueryFn();
+		}
+		return false;
+	});
 
 	const { mutate: toggleFavorited } = useMutation(
-		() => setFavoritedQueryFn(!isFavorited),
+		() => {
+			if (!getSessionToken()) {
+				context.challenge();
+			}
+			return setFavoritedQueryFn(!isFavorited);
+		},
 		{
 			onMutate: async () => {
 				await queryClient.cancelQueries(queryKey);
