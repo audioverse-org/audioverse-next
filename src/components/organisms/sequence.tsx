@@ -15,6 +15,7 @@ import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
+import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { SequenceFragment } from '@lib/generated/graphql';
@@ -33,6 +34,7 @@ export function Sequence({
 	sequence: SequenceFragment;
 }): JSX.Element {
 	const intl = useIntl();
+	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
 
 	const {
 		title,
@@ -45,7 +47,6 @@ export function Sequence({
 		startDate,
 		recordings,
 		description,
-		viewerHasFavorited,
 	} = sequence;
 
 	const details: IDefinitionListTerm[] = [];
@@ -145,9 +146,9 @@ export function Sequence({
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.CREAM}
 						className={styles.iconButton}
 					/>

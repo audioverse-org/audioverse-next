@@ -8,6 +8,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
+import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { CardCollectionFragment } from '@lib/generated/graphql';
@@ -28,6 +29,9 @@ interface CardCollectionProps {
 export default function CardCollection({
 	collection,
 }: CardCollectionProps): JSX.Element {
+	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
+		collection.id
+	);
 	const {
 		allSequences,
 		canonicalPath,
@@ -36,7 +40,6 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
-		viewerHasFavorited,
 		viewerPlaybackCompletedPercentage,
 	} = collection;
 	const heroImage = image?.url && (
@@ -81,7 +84,7 @@ export default function CardCollection({
 					<div
 						className={clsx(
 							styles.details,
-							viewerHasFavorited && styles.detailsWithLike
+							isFavorited && styles.detailsWithLike
 						)}
 					>
 						<div className={styles.duration}>
@@ -98,11 +101,11 @@ export default function CardCollection({
 				</a>
 			</Link>
 			<IconButton
-				Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => alert('TODO')}
-				color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+				onPress={() => toggleFavorited()}
+				color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 				backgroundColor={BaseColors.DARK}
-				className={clsx(styles.like, viewerHasFavorited && styles.likeActive)}
+				className={clsx(styles.like, isFavorited && styles.likeActive)}
 			/>
 		</Card>
 	);

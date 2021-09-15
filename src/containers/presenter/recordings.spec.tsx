@@ -50,11 +50,6 @@ function loadData() {
 }
 
 describe('presenter recordings page', () => {
-	// TODO: Delete test when covered by future tests
-	it('renders', async () => {
-		await renderPage();
-	});
-
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetPresenterDetailPathsDataDocument, expect.anything())

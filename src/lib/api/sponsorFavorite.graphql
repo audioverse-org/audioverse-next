@@ -1,0 +1,5 @@
+mutation sponsorFavorite($id: ID!) {
+	favorited: sponsorFavorite(id: $id) {
+		success
+	}
+}

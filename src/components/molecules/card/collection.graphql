@@ -1,10 +1,10 @@
 fragment cardCollection on Collection {
+	id
 	canonicalPath(useFuturePath: true)
 	title
 	startDate
 	endDate
 	duration
-	viewerHasFavorited
 	viewerPlaybackCompletedPercentage
 	image {
 		id

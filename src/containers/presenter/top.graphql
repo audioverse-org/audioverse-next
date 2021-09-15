@@ -1,0 +1,18 @@
+query getPresenterTopPageData($id: ID!, $offset: Int, $first: Int) {
+	person(id: $id) {
+		id
+		...presenterPivot
+		recordings(
+			offset: $offset
+			first: $first
+			orderBy: [{ field: DOWNLOADS_ALL_TIME, direction: DESC }]
+		) {
+			nodes {
+				...cardRecording
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}

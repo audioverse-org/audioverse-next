@@ -1,0 +1,11 @@
+query getNotFoundPageData {
+	recordings(
+		language: ENGLISH
+		first: 3
+		orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...cardRecording
+		}
+	}
+}

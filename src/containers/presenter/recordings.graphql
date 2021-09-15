@@ -1,11 +1,7 @@
 query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
 	person(id: $id) {
 		id
-		name
-		canonicalPath(useFuturePath: true)
-		imageWithFallback {
-			url(size: 100)
-		}
+		...presenterPivot
 		recordings(
 			offset: $offset
 			first: $first

@@ -69,22 +69,19 @@ h4 {
 	font-family: $headingFont;
 }
 
+h1,
+h2 {
+	line-height: 110%;
+}
+
 h1 {
 	font-size: 22px;
-	line-height: 24.2px;
 	margin-top: 0;
 	margin-bottom: 16px;
 }
-@media (min-width: $breakpoint-lg) {
-	h1 {
-		font-size: 44px;
-		line-height: 48.4px;
-	}
-}
 
 h2 {
-	font-size: 22px;
-	line-height: 24.2px;
+	font-size: 17px;
 }
 
 h5 {
@@ -97,6 +94,15 @@ h5 {
 h6 {
 	font-size: 10px;
 	line-height: 12px;
+}
+
+@media (min-width: $breakpoint-lg) {
+	h1 {
+		font-size: 44px;
+	}
+	h2 {
+		font-size: 22px;
+	}
 }
 
 a {

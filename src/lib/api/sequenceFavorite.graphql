@@ -1,0 +1,5 @@
+mutation sequenceFavorite($id: ID!) {
+	favorited: sequenceFavorite(id: $id) {
+		success
+	}
+}

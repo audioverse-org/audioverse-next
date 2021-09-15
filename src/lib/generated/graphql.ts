@@ -15,7 +15,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
 	{ [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-	ID: string;
+	ID: string | number;
 	String: string;
 	Boolean: boolean;
 	Int: number;
@@ -5493,7 +5493,7 @@ export type ButtonDownloadFragment = {
 
 export type ButtonPlayFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
@@ -5519,7 +5519,7 @@ export type ButtonPlayFragment = {
 
 export type ButtonShareRecordingFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	shareUrl: string;
 };
 
@@ -5529,11 +5529,11 @@ export type CardAudiobookTrackFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5543,7 +5543,7 @@ export type CardAudiobookTrackFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5586,11 +5586,11 @@ export type CardWithPlayableFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5600,7 +5600,7 @@ export type CardWithPlayableFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5639,21 +5639,21 @@ export type CardWithPlayableFragment = {
 
 export type CardBibleChapterFragment = {
 	__typename?: 'BibleChapter';
-	id: string;
+	id: string | number;
 	title: string;
 	url: string;
 };
 
 export type CardCollectionFragment = {
 	__typename?: 'Collection';
+	id: string | number;
 	canonicalPath: string;
 	title: string;
 	startDate: Maybe<string>;
 	endDate: Maybe<string>;
 	duration: number;
-	viewerHasFavorited: boolean;
 	viewerPlaybackCompletedPercentage: number;
-	image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+	image: Maybe<{ __typename?: 'Image'; id: string | number; url: string }>;
 	allSequences: {
 		__typename?: 'SequenceConnection';
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -5662,10 +5662,10 @@ export type CardCollectionFragment = {
 
 export type CardPersonFragment = {
 	__typename?: 'Person';
-	id: string;
+	id: string | number;
 	name: string;
 	canonicalPath: string;
-	image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+	image: Maybe<{ __typename?: 'Image'; id: string | number; url: string }>;
 	recordings: {
 		__typename?: 'RecordingConnection';
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -5689,11 +5689,11 @@ export type CardRecordingFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5703,7 +5703,7 @@ export type CardRecordingFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5742,13 +5742,12 @@ export type CardRecordingFragment = {
 
 export type CardSequenceFragment = {
 	__typename?: 'Sequence';
-	id: string;
+	id: string | number;
 	title: string;
 	canonicalPath: string;
 	contentType: SequenceContentType;
 	duration: number;
 	summary: string;
-	viewerHasFavorited: boolean;
 	viewerPlaybackCompletedPercentage: number;
 	speakers: {
 		__typename?: 'PersonConnection';
@@ -5784,11 +5783,11 @@ export type CardSermonFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5798,7 +5797,7 @@ export type CardSermonFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5841,11 +5840,11 @@ export type CardSongFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5855,7 +5854,7 @@ export type CardSongFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5894,9 +5893,9 @@ export type CardSongFragment = {
 
 export type CardSponsorFragment = {
 	__typename?: 'Sponsor';
+	id: string | number;
 	title: string;
 	canonicalPath: string;
-	viewerHasFavorited: boolean;
 	image: Maybe<{ __typename?: 'Image'; url: string }>;
 	collections: {
 		__typename?: 'CollectionConnection';
@@ -5910,11 +5909,11 @@ export type CardStoryFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5924,7 +5923,7 @@ export type CardStoryFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -5967,11 +5966,11 @@ export type CardTopicFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
 		canonicalPath: string;
-		id: string;
+		id: string | number;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		recordings: {
@@ -5981,7 +5980,7 @@ export type CardTopicFragment = {
 	}>;
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6035,11 +6034,11 @@ export type CopyrightInfoFragment = {
 
 export type CopyrightInfosFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	copyrightYear: Maybe<number>;
 	distributionAgreement: Maybe<{
 		__typename?: 'DistributionAgreement';
-		id: string;
+		id: string | number;
 		sponsor: Maybe<{ __typename?: 'Sponsor'; title: string }>;
 		license: Maybe<{
 			__typename?: 'License';
@@ -6047,7 +6046,11 @@ export type CopyrightInfosFragment = {
 			image: Maybe<{ __typename?: 'Image'; url: string }>;
 		}>;
 	}>;
-	sponsor: Maybe<{ __typename?: 'Sponsor'; id: string; title: string }>;
+	sponsor: Maybe<{
+		__typename?: 'Sponsor';
+		id: string | number;
+		title: string;
+	}>;
 };
 
 export type LoginForgotPasswordMutationVariables = Exact<{
@@ -6065,7 +6068,7 @@ export type LoginForgotPasswordMutation = {
 
 export type MediaFormatSwitcherFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
@@ -6098,7 +6101,7 @@ export type PersonLockupFragment = {
 
 export type PlaybackTimesFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
@@ -6124,7 +6127,7 @@ export type PlaybackTimesFragment = {
 
 export type PlayerFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	shareUrl: string;
@@ -6175,7 +6178,7 @@ export type GetPlaylistButtonDataQuery = {
 				nodes: Maybe<
 					Array<{
 						__typename?: 'UserPlaylist';
-						id: string;
+						id: string | number;
 						title: string;
 						hasRecording: boolean;
 					}>
@@ -6187,7 +6190,7 @@ export type GetPlaylistButtonDataQuery = {
 
 export type RecordingListFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	description: Maybe<string>;
 	duration: number;
@@ -6217,7 +6220,7 @@ export type SequenceNavFragment = {
 
 export type SponsorLockupFragment = {
 	__typename?: 'Sponsor';
-	id: string;
+	id: string | number;
 	title: string;
 	canonicalPath: string;
 	imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6229,7 +6232,7 @@ export type TeaseRecordingFragment = {
 	title: string;
 	duration: number;
 	sequenceIndex: Maybe<number>;
-	id: string;
+	id: string | number;
 	persons: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -6238,7 +6241,7 @@ export type TeaseRecordingFragment = {
 	}>;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -6265,9 +6268,77 @@ export type TeaseRecordingFragment = {
 	}>;
 };
 
+export type GetNotFoundPageDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetNotFoundPageDataQuery = {
+	__typename?: 'Query';
+	recordings: {
+		__typename?: 'RecordingConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				contentType: RecordingContentType;
+				canonicalPath: string;
+				title: string;
+				duration: number;
+				sequenceIndex: Maybe<number>;
+				id: string | number;
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					canonicalPath: string;
+					id: string | number;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}>
+		>;
+	};
+};
+
 export type RecordingFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	contentType: RecordingContentType;
 	description: Maybe<string>;
@@ -6290,13 +6361,13 @@ export type RecordingFragment = {
 	}>;
 	videoDownloads: Array<{
 		__typename?: 'VideoFile';
-		id: string;
+		id: string | number;
 		url: string;
 		filesize: string;
 	}>;
 	audioDownloads: Array<{
 		__typename?: 'AudioFile';
-		id: string;
+		id: string | number;
 		url: string;
 		filesize: string;
 	}>;
@@ -6306,7 +6377,7 @@ export type RecordingFragment = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string; name: string };
+				tag: { __typename?: 'Tag'; id: string | number; name: string };
 			}>
 		>;
 	};
@@ -6317,7 +6388,7 @@ export type RecordingFragment = {
 	}>;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		recordings: {
@@ -6329,7 +6400,7 @@ export type RecordingFragment = {
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -6338,7 +6409,7 @@ export type RecordingFragment = {
 					}>;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
-						id: string;
+						id: string | number;
 						title: string;
 						recordings: {
 							__typename?: 'RecordingConnection';
@@ -6412,14 +6483,13 @@ export type RecordingFragment = {
 
 export type SequenceFragment = {
 	__typename?: 'Sequence';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	description: string;
 	startDate: Maybe<string>;
 	endDate: Maybe<string>;
 	shareUrl: string;
-	viewerHasFavorited: boolean;
 	collection: Maybe<{
 		__typename?: 'Collection';
 		title: string;
@@ -6445,7 +6515,7 @@ export type SequenceFragment = {
 				canonicalPath: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -6460,7 +6530,7 @@ export type SequenceFragment = {
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -6470,7 +6540,7 @@ export type SequenceFragment = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6506,14 +6576,14 @@ export type SequenceFragment = {
 
 export type TestimoniesFragment = {
 	__typename?: 'Testimony';
-	id: string;
+	id: string | number;
 	body: string;
 	author: string;
 };
 
 export type AndMiniplayerFragment = {
 	__typename?: 'Recording';
-	id: string;
+	id: string | number;
 	title: string;
 	duration: number;
 	sequence: Maybe<{ __typename?: 'Sequence'; title: string }>;
@@ -6552,7 +6622,7 @@ export type GetAccountPlaylistsPageDataQuery = {
 				nodes: Maybe<
 					Array<{
 						__typename?: 'UserPlaylist';
-						id: string;
+						id: string | number;
 						title: string;
 						isPublic: boolean;
 						summary: string;
@@ -6577,7 +6647,7 @@ export type AddAccountPlaylistMutationVariables = Exact<{
 
 export type AddAccountPlaylistMutation = {
 	__typename?: 'Mutation';
-	playlistAdd: { __typename?: 'UserPlaylist'; id: string };
+	playlistAdd: { __typename?: 'UserPlaylist'; id: string | number };
 };
 
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never }>;
@@ -6715,14 +6785,13 @@ export type GetAudiobookDetailPageDataQuery = {
 	__typename?: 'Query';
 	audiobook: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		duration: number;
 		description: string;
 		startDate: Maybe<string>;
 		endDate: Maybe<string>;
 		shareUrl: string;
-		viewerHasFavorited: boolean;
 		collection: Maybe<{
 			__typename?: 'Collection';
 			title: string;
@@ -6748,7 +6817,7 @@ export type GetAudiobookDetailPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -6763,7 +6832,7 @@ export type GetAudiobookDetailPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -6773,7 +6842,7 @@ export type GetAudiobookDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -6817,7 +6886,7 @@ export type GetAudiobookDetailPathsDataQuery = {
 	__typename?: 'Query';
 	audiobooks: {
 		__typename?: 'SequenceConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string | number }>>;
 	};
 };
 
@@ -6834,13 +6903,12 @@ export type GetAudiobookListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -6894,7 +6962,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 	__typename?: 'Query';
 	audiobookTrack: Maybe<{
 		__typename?: 'Recording';
-		id: string;
+		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
 		description: Maybe<string>;
@@ -6917,13 +6985,13 @@ export type GetAudiobookTrackDetailDataQuery = {
 		}>;
 		videoDownloads: Array<{
 			__typename?: 'VideoFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
@@ -6933,7 +7001,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'RecordingTag';
-					tag: { __typename?: 'Tag'; id: string; name: string };
+					tag: { __typename?: 'Tag'; id: string | number; name: string };
 				}>
 			>;
 		};
@@ -6944,7 +7012,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 		}>;
 		sequence: Maybe<{
 			__typename?: 'Sequence';
-			id: string;
+			id: string | number;
 			title: string;
 			canonicalPath: string;
 			recordings: {
@@ -6956,7 +7024,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 						title: string;
 						duration: number;
 						sequenceIndex: Maybe<number>;
-						id: string;
+						id: string | number;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -6965,7 +7033,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string;
+							id: string | number;
 							title: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
@@ -7047,7 +7115,7 @@ export type GetAudiobookTrackDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	audiobookTracks: {
 		__typename?: 'RecordingConnection';
-		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string | number }>>;
 	};
 };
 
@@ -7068,7 +7136,7 @@ export type GetBibleBookDetailPageDataQuery = {
 			shareUrl: string;
 			chapters: Array<{
 				__typename?: 'BibleChapter';
-				id: string;
+				id: string | number;
 				title: string;
 				url: string;
 				verses: Array<{
@@ -7093,7 +7161,7 @@ export type GetBibleBookDetailPathsDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Bible';
-				books: Array<{ __typename?: 'BibleBook'; id: string }>;
+				books: Array<{ __typename?: 'BibleBook'; id: string | number }>;
 			}>
 		>;
 	};
@@ -7109,7 +7177,7 @@ export type GetVersionDetailPageDataQuery = {
 		__typename?: 'Bible';
 		books: Array<{
 			__typename?: 'BibleBook';
-			id: string;
+			id: string | number;
 			title: string;
 			chapterCount: number;
 		}>;
@@ -7124,7 +7192,7 @@ export type GetVersionDetailPathDataQuery = {
 	__typename?: 'Query';
 	audiobibles: {
 		__typename?: 'BibleConnection';
-		nodes: Maybe<Array<{ __typename?: 'Bible'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Bible'; id: string | number }>>;
 	};
 };
 
@@ -7136,7 +7204,9 @@ export type GetBibleVersionsPageDataQuery = {
 	__typename?: 'Query';
 	audiobibles: {
 		__typename?: 'BibleConnection';
-		nodes: Maybe<Array<{ __typename?: 'Bible'; title: string; id: string }>>;
+		nodes: Maybe<
+			Array<{ __typename?: 'Bible'; title: string; id: string | number }>
+		>;
 	};
 };
 
@@ -7186,7 +7256,7 @@ export type GetBlogDetailDataQuery = {
 	__typename?: 'Query';
 	blogPost: Maybe<{
 		__typename?: 'BlogPost';
-		id: string;
+		id: string | number;
 		title: string;
 		body: string;
 		canonicalPath: string;
@@ -7221,7 +7291,11 @@ export type GetBlogDetailStaticPathsQuery = {
 	blogPosts: {
 		__typename?: 'BlogPostConnection';
 		nodes: Maybe<
-			Array<{ __typename?: 'BlogPost'; id: string; canonicalPath: string }>
+			Array<{
+				__typename?: 'BlogPost';
+				id: string | number;
+				canonicalPath: string;
+			}>
 		>;
 	};
 };
@@ -7234,18 +7308,17 @@ export type GetCollectionDetailPageDataQuery = {
 	__typename?: 'Query';
 	collection: Maybe<{
 		__typename?: 'Collection';
-		id: string;
+		id: string | number;
 		title: string;
 		startDate: Maybe<string>;
 		endDate: Maybe<string>;
 		duration: number;
 		description: string;
 		location: Maybe<string>;
-		viewerHasFavorited: boolean;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		sponsor: Maybe<{
 			__typename?: 'Sponsor';
-			id: string;
+			id: string | number;
 			title: string;
 			canonicalPath: string;
 			imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7256,10 +7329,14 @@ export type GetCollectionDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Person';
-					id: string;
+					id: string | number;
 					name: string;
 					canonicalPath: string;
-					image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+					image: Maybe<{
+						__typename?: 'Image';
+						id: string | number;
+						url: string;
+					}>;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7273,13 +7350,12 @@ export type GetCollectionDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Sequence';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerHasFavorited: boolean;
 					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
@@ -7322,7 +7398,7 @@ export type GetCollectionDetailPathsDataQuery = {
 	__typename?: 'Query';
 	collections: {
 		__typename?: 'CollectionConnection';
-		nodes: Maybe<Array<{ __typename?: 'Collection'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Collection'; id: string | number }>>;
 	};
 };
 
@@ -7339,14 +7415,18 @@ export type GetCollectionListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Collection';
+				id: string | number;
 				canonicalPath: string;
 				title: string;
 				startDate: Maybe<string>;
 				endDate: Maybe<string>;
 				duration: number;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				allSequences: {
 					__typename?: 'SequenceConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7385,7 +7465,7 @@ export type GetCollectionPresentersPageDataQuery = {
 	__typename?: 'Query';
 	collection: Maybe<{
 		__typename?: 'Collection';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		persons: {
@@ -7393,10 +7473,14 @@ export type GetCollectionPresentersPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Person';
-					id: string;
+					id: string | number;
 					name: string;
 					canonicalPath: string;
-					image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+					image: Maybe<{
+						__typename?: 'Image';
+						id: string | number;
+						url: string;
+					}>;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7418,7 +7502,7 @@ export type GetCollectionSequencesPageDataQuery = {
 	__typename?: 'Query';
 	collection: Maybe<{
 		__typename?: 'Collection';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		sequences: {
@@ -7426,13 +7510,12 @@ export type GetCollectionSequencesPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Sequence';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerHasFavorited: boolean;
 					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
@@ -7482,11 +7565,11 @@ export type GetDiscoverPageDataQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -7496,7 +7579,7 @@ export type GetDiscoverPageDataQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7544,13 +7627,12 @@ export type GetDiscoverCollectionsPageDataQuery = {
 	__typename?: 'Query';
 	sequence: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		contentType: SequenceContentType;
 		duration: number;
 		summary: string;
-		viewerHasFavorited: boolean;
 		viewerPlaybackCompletedPercentage: number;
 		speakers: {
 			__typename?: 'PersonConnection';
@@ -7584,10 +7666,14 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Person';
-				id: string;
+				id: string | number;
 				name: string;
 				canonicalPath: string;
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7600,13 +7686,12 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -7642,14 +7727,18 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Collection';
+				id: string | number;
 				canonicalPath: string;
 				title: string;
 				startDate: Maybe<string>;
 				endDate: Maybe<string>;
 				duration: number;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				allSequences: {
 					__typename?: 'SequenceConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7662,9 +7751,9 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sponsor';
+				id: string | number;
 				title: string;
 				canonicalPath: string;
-				viewerHasFavorited: boolean;
 				image: Maybe<{ __typename?: 'Image'; url: string }>;
 				collections: {
 					__typename?: 'CollectionConnection';
@@ -7678,13 +7767,12 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -7720,13 +7808,12 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -7762,13 +7849,12 @@ export type GetDiscoverCollectionsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -7816,11 +7902,11 @@ export type GetHomeStaticPropsQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -7830,7 +7916,7 @@ export type GetHomeStaticPropsQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7870,14 +7956,14 @@ export type GetHomeStaticPropsQuery = {
 	};
 	audiobible: Maybe<{
 		__typename?: 'Bible';
-		id: string;
+		id: string | number;
 		title: string;
 		book: {
 			__typename?: 'BibleBook';
 			title: string;
 			chapter: {
 				__typename?: 'BibleChapter';
-				id: string;
+				id: string | number;
 				title: string;
 				url: string;
 			};
@@ -7892,11 +7978,11 @@ export type GetHomeStaticPropsQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -7906,7 +7992,7 @@ export type GetHomeStaticPropsQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -7953,11 +8039,11 @@ export type GetHomeStaticPropsQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -7967,7 +8053,7 @@ export type GetHomeStaticPropsQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8014,11 +8100,11 @@ export type GetHomeStaticPropsQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -8028,7 +8114,7 @@ export type GetHomeStaticPropsQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8075,11 +8161,11 @@ export type GetHomeStaticPropsQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -8089,7 +8175,7 @@ export type GetHomeStaticPropsQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8132,7 +8218,7 @@ export type GetHomeStaticPropsQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Testimony';
-				id: string;
+				id: string | number;
 				body: string;
 				author: string;
 			}>
@@ -8174,7 +8260,7 @@ export type GetPlaylistPageDataQuery = {
 					nodes: Maybe<
 						Array<{
 							__typename?: 'Recording';
-							id: string;
+							id: string | number;
 							title: string;
 							description: Maybe<string>;
 							duration: number;
@@ -8212,12 +8298,59 @@ export type GetPlaylistsPageDataQuery = {
 			playlists: {
 				__typename?: 'UserPlaylistConnection';
 				nodes: Maybe<
-					Array<{ __typename?: 'UserPlaylist'; id: string; title: string }>
+					Array<{
+						__typename?: 'UserPlaylist';
+						id: string | number;
+						title: string;
+					}>
 				>;
 				aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 			};
 		};
 	}>;
+};
+
+export type GetPresenterAppearsPageDataQueryVariables = Exact<{
+	language: Language;
+	id: Scalars['ID'];
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetPresenterAppearsPageDataQuery = {
+	__typename?: 'Query';
+	person: Maybe<{
+		__typename?: 'Person';
+		id: string | number;
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	collections: {
+		__typename?: 'CollectionConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Collection';
+				id: string | number;
+				canonicalPath: string;
+				title: string;
+				startDate: Maybe<string>;
+				endDate: Maybe<string>;
+				duration: number;
+				viewerPlaybackCompletedPercentage: number;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
 };
 
 export type GetPresenterDetailPageDataQueryVariables = Exact<{
@@ -8229,10 +8362,9 @@ export type GetPresenterDetailPageDataQuery = {
 	__typename?: 'Query';
 	person: Maybe<{
 		__typename?: 'Person';
-		id: string;
+		id: string | number;
 		name: string;
 		description: string;
-		viewerHasFavorited: boolean;
 		website: Maybe<string>;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		sermons: {
@@ -8261,11 +8393,11 @@ export type GetPresenterDetailPageDataQuery = {
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -8275,7 +8407,7 @@ export type GetPresenterDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8324,11 +8456,11 @@ export type GetPresenterDetailPageDataQuery = {
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -8338,7 +8470,7 @@ export type GetPresenterDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8387,11 +8519,11 @@ export type GetPresenterDetailPageDataQuery = {
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -8401,7 +8533,7 @@ export type GetPresenterDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8446,13 +8578,12 @@ export type GetPresenterDetailPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -8489,25 +8620,24 @@ export type GetPresenterDetailPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Collection';
+				id: string | number;
 				canonicalPath: string;
 				title: string;
 				startDate: Maybe<string>;
 				endDate: Maybe<string>;
 				duration: number;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				sequences: {
 					__typename?: 'SequenceConnection';
 					nodes: Maybe<
 						Array<{
 							__typename?: 'Sequence';
-							id: string;
+							id: string | number;
 							title: string;
 							canonicalPath: string;
 							contentType: SequenceContentType;
 							duration: number;
 							summary: string;
-							viewerHasFavorited: boolean;
 							viewerPlaybackCompletedPercentage: number;
 							speakers: {
 								__typename?: 'PersonConnection';
@@ -8538,7 +8668,11 @@ export type GetPresenterDetailPageDataQuery = {
 						}>
 					>;
 				};
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				allSequences: {
 					__typename?: 'SequenceConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8559,7 +8693,11 @@ export type GetPresenterDetailPathsDataQuery = {
 	persons: {
 		__typename?: 'PersonConnection';
 		nodes: Maybe<
-			Array<{ __typename?: 'Person'; id: string; canonicalPath: string }>
+			Array<{
+				__typename?: 'Person';
+				id: string | number;
+				canonicalPath: string;
+			}>
 		>;
 	};
 };
@@ -8577,10 +8715,14 @@ export type GetPresenterListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Person';
-				id: string;
+				id: string | number;
 				name: string;
 				canonicalPath: string;
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8603,6 +8745,13 @@ export type GetPresenterListPathsDataQuery = {
 	};
 };
 
+export type PresenterPivotFragment = {
+	__typename?: 'Person';
+	name: string;
+	canonicalPath: string;
+	imageWithFallback: { __typename?: 'Image'; url: string };
+};
+
 export type GetPresenterRecordingsPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 	offset: Maybe<Scalars['Int']>;
@@ -8613,10 +8762,9 @@ export type GetPresenterRecordingsPageDataQuery = {
 	__typename?: 'Query';
 	person: Maybe<{
 		__typename?: 'Person';
-		id: string;
+		id: string | number;
 		name: string;
 		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Maybe<
@@ -8630,7 +8778,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -8645,7 +8793,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -8655,7 +8803,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8688,6 +8836,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 			>;
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 		};
+		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
 };
 
@@ -8702,7 +8851,7 @@ export type GetPresenterSequencesPageDataQuery = {
 	__typename?: 'Query';
 	person: Maybe<{
 		__typename?: 'Person';
-		id: string;
+		id: string | number;
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8712,13 +8861,12 @@ export type GetPresenterSequencesPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -8752,6 +8900,86 @@ export type GetPresenterSequencesPageDataQuery = {
 	};
 };
 
+export type GetPresenterTopPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetPresenterTopPageDataQuery = {
+	__typename?: 'Query';
+	person: Maybe<{
+		__typename?: 'Person';
+		id: string | number;
+		name: string;
+		canonicalPath: string;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			nodes: Maybe<
+				Array<{
+					__typename?: 'Recording';
+					contentType: RecordingContentType;
+					canonicalPath: string;
+					title: string;
+					duration: number;
+					sequenceIndex: Maybe<number>;
+					id: string | number;
+					sequence: Maybe<{
+						__typename?: 'Sequence';
+						canonicalPath: string;
+						id: string | number;
+						title: string;
+						image: Maybe<{ __typename?: 'Image'; url: string }>;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>;
+					sponsor: Maybe<{
+						__typename?: 'Sponsor';
+						id: string | number;
+						title: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+				}>
+			>;
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+};
+
 export type GetSeriesDetailPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 }>;
@@ -8760,14 +8988,13 @@ export type GetSeriesDetailPageDataQuery = {
 	__typename?: 'Query';
 	series: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		duration: number;
 		description: string;
 		startDate: Maybe<string>;
 		endDate: Maybe<string>;
 		shareUrl: string;
-		viewerHasFavorited: boolean;
 		collection: Maybe<{
 			__typename?: 'Collection';
 			title: string;
@@ -8793,7 +9020,7 @@ export type GetSeriesDetailPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -8808,7 +9035,7 @@ export type GetSeriesDetailPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -8818,7 +9045,7 @@ export type GetSeriesDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -8862,7 +9089,7 @@ export type GetSeriesDetailPathsDataQuery = {
 	__typename?: 'Query';
 	serieses: {
 		__typename?: 'SequenceConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string | number }>>;
 	};
 };
 
@@ -8879,13 +9106,12 @@ export type GetSeriesListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -8939,7 +9165,7 @@ export type GetSermonDetailDataQuery = {
 	__typename?: 'Query';
 	sermon: Maybe<{
 		__typename?: 'Recording';
-		id: string;
+		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
 		description: Maybe<string>;
@@ -8962,13 +9188,13 @@ export type GetSermonDetailDataQuery = {
 		}>;
 		videoDownloads: Array<{
 			__typename?: 'VideoFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
@@ -8978,7 +9204,7 @@ export type GetSermonDetailDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'RecordingTag';
-					tag: { __typename?: 'Tag'; id: string; name: string };
+					tag: { __typename?: 'Tag'; id: string | number; name: string };
 				}>
 			>;
 		};
@@ -8989,7 +9215,7 @@ export type GetSermonDetailDataQuery = {
 		}>;
 		sequence: Maybe<{
 			__typename?: 'Sequence';
-			id: string;
+			id: string | number;
 			title: string;
 			canonicalPath: string;
 			recordings: {
@@ -9001,7 +9227,7 @@ export type GetSermonDetailDataQuery = {
 						title: string;
 						duration: number;
 						sequenceIndex: Maybe<number>;
-						id: string;
+						id: string | number;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -9010,7 +9236,7 @@ export type GetSermonDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string;
+							id: string | number;
 							title: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
@@ -9092,7 +9318,7 @@ export type GetSermonDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string | number }>>;
 	};
 };
 
@@ -9110,7 +9336,7 @@ export type GetSermonListStaticPropsQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
-				id: string;
+				id: string | number;
 				title: string;
 				description: Maybe<string>;
 				duration: number;
@@ -9161,14 +9387,13 @@ export type GetSongAlbumsDetailPageDataQuery = {
 	__typename?: 'Query';
 	musicAlbum: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		duration: number;
 		description: string;
 		startDate: Maybe<string>;
 		endDate: Maybe<string>;
 		shareUrl: string;
-		viewerHasFavorited: boolean;
 		collection: Maybe<{
 			__typename?: 'Collection';
 			title: string;
@@ -9194,7 +9419,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -9209,7 +9434,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -9219,7 +9444,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9263,7 +9488,7 @@ export type GetSongAlbumsDetailPathsDataQuery = {
 	__typename?: 'Query';
 	musicAlbums: {
 		__typename?: 'SequenceConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string | number }>>;
 	};
 };
 
@@ -9280,7 +9505,7 @@ export type GetSongAlbumsListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 				sponsor: Maybe<{ __typename?: 'Sponsor'; title: string }>;
@@ -9293,7 +9518,7 @@ export type GetSongAlbumsListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sponsor';
-				id: string;
+				id: string | number;
 				title: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>
@@ -9301,7 +9526,9 @@ export type GetSongAlbumsListPageDataQuery = {
 	};
 	musicMoodTags: {
 		__typename?: 'TagConnection';
-		nodes: Maybe<Array<{ __typename?: 'Tag'; id: string; name: string }>>;
+		nodes: Maybe<
+			Array<{ __typename?: 'Tag'; id: string | number; name: string }>
+		>;
 	};
 };
 
@@ -9333,11 +9560,11 @@ export type GetSongBooksDetailPageDataQuery = {
 				title: string;
 				duration: number;
 				sequenceIndex: Maybe<number>;
-				id: string;
+				id: string | number;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					canonicalPath: string;
-					id: string;
+					id: string | number;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					recordings: {
@@ -9347,7 +9574,7 @@ export type GetSongBooksDetailPageDataQuery = {
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9395,7 +9622,7 @@ export type GetSongDetailDataQuery = {
 	__typename?: 'Query';
 	musicTrack: Maybe<{
 		__typename?: 'Recording';
-		id: string;
+		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
 		description: Maybe<string>;
@@ -9418,13 +9645,13 @@ export type GetSongDetailDataQuery = {
 		}>;
 		videoDownloads: Array<{
 			__typename?: 'VideoFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
@@ -9434,7 +9661,7 @@ export type GetSongDetailDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'RecordingTag';
-					tag: { __typename?: 'Tag'; id: string; name: string };
+					tag: { __typename?: 'Tag'; id: string | number; name: string };
 				}>
 			>;
 		};
@@ -9445,7 +9672,7 @@ export type GetSongDetailDataQuery = {
 		}>;
 		sequence: Maybe<{
 			__typename?: 'Sequence';
-			id: string;
+			id: string | number;
 			title: string;
 			canonicalPath: string;
 			recordings: {
@@ -9457,7 +9684,7 @@ export type GetSongDetailDataQuery = {
 						title: string;
 						duration: number;
 						sequenceIndex: Maybe<number>;
-						id: string;
+						id: string | number;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -9466,7 +9693,7 @@ export type GetSongDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string;
+							id: string | number;
 							title: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
@@ -9548,7 +9775,7 @@ export type GetSongDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	musicTracks: {
 		__typename?: 'RecordingConnection';
-		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string | number }>>;
 	};
 };
 
@@ -9567,7 +9794,7 @@ export type GetSponsorAlbumsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>
@@ -9585,7 +9812,7 @@ export type GetSponsorAlbumsPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -9600,7 +9827,7 @@ export type GetSponsorBooksPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
@@ -9609,7 +9836,7 @@ export type GetSponsorBooksPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>
@@ -9627,7 +9854,7 @@ export type GetSponsorBooksPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -9642,7 +9869,7 @@ export type GetSponsorConferencesPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9652,14 +9879,18 @@ export type GetSponsorConferencesPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Collection';
+				id: string | number;
 				canonicalPath: string;
 				title: string;
 				startDate: Maybe<string>;
 				endDate: Maybe<string>;
 				duration: number;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
-				image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
 				allSequences: {
 					__typename?: 'SequenceConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9679,7 +9910,7 @@ export type GetSponsorConferencesPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -9691,12 +9922,11 @@ export type GetSponsorDetailPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		location: Maybe<string>;
 		website: Maybe<string>;
 		description: string;
-		viewerHasFavorited: boolean;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		collections: {
 			__typename?: 'CollectionConnection';
@@ -9704,14 +9934,18 @@ export type GetSponsorDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Collection';
+					id: string | number;
 					canonicalPath: string;
 					title: string;
 					startDate: Maybe<string>;
 					endDate: Maybe<string>;
 					duration: number;
-					viewerHasFavorited: boolean;
 					viewerPlaybackCompletedPercentage: number;
-					image: Maybe<{ __typename?: 'Image'; id: string; url: string }>;
+					image: Maybe<{
+						__typename?: 'Image';
+						id: string | number;
+						url: string;
+					}>;
 					allSequences: {
 						__typename?: 'SequenceConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9725,13 +9959,12 @@ export type GetSponsorDetailPageDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'Sequence';
-					id: string;
+					id: string | number;
 					title: string;
 					canonicalPath: string;
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerHasFavorited: boolean;
 					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
@@ -9773,11 +10006,11 @@ export type GetSponsorDetailPageDataQuery = {
 					title: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -9787,7 +10020,7 @@ export type GetSponsorDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9837,7 +10070,7 @@ export type GetSponsorDetailPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -9854,9 +10087,9 @@ export type GetSponsorListPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sponsor';
+				id: string | number;
 				title: string;
 				canonicalPath: string;
-				viewerHasFavorited: boolean;
 				image: Maybe<{ __typename?: 'Image'; url: string }>;
 				collections: {
 					__typename?: 'CollectionConnection';
@@ -9882,7 +10115,7 @@ export type GetSponsorListPathsDataQuery = {
 
 export type SponsorPivotFragment = {
 	__typename?: 'Sponsor';
-	id: string;
+	id: string | number;
 	title: string;
 	canonicalPath: string;
 	imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9899,7 +10132,7 @@ export type GetSponsorSeriesPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9909,13 +10142,12 @@ export type GetSponsorSeriesPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -9958,7 +10190,7 @@ export type GetSponsorSeriesPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -9972,7 +10204,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 	__typename?: 'Query';
 	sponsor: Maybe<{
 		__typename?: 'Sponsor';
-		id: string;
+		id: string | number;
 		title: string;
 		canonicalPath: string;
 		recordings: {
@@ -9988,7 +10220,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -10003,7 +10235,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -10013,7 +10245,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -10059,7 +10291,7 @@ export type GetSponsorTeachingsPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sponsor'; id: string | number }>>;
 	};
 };
 
@@ -10071,14 +10303,13 @@ export type GetStoryAlbumDetailPageDataQuery = {
 	__typename?: 'Query';
 	storySeason: Maybe<{
 		__typename?: 'Sequence';
-		id: string;
+		id: string | number;
 		title: string;
 		duration: number;
 		description: string;
 		startDate: Maybe<string>;
 		endDate: Maybe<string>;
 		shareUrl: string;
-		viewerHasFavorited: boolean;
 		collection: Maybe<{
 			__typename?: 'Collection';
 			title: string;
@@ -10104,7 +10335,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 					canonicalPath: string;
 					duration: number;
 					sequenceIndex: Maybe<number>;
-					id: string;
+					id: string | number;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -10119,7 +10350,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 					sequence: Maybe<{
 						__typename?: 'Sequence';
 						canonicalPath: string;
-						id: string;
+						id: string | number;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						recordings: {
@@ -10129,7 +10360,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 					}>;
 					sponsor: Maybe<{
 						__typename?: 'Sponsor';
-						id: string;
+						id: string | number;
 						title: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
@@ -10173,7 +10404,7 @@ export type GetStoryAlbumDetailPathsDataQuery = {
 	__typename?: 'Query';
 	storySeasons: {
 		__typename?: 'SequenceConnection';
-		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Sequence'; id: string | number }>>;
 	};
 };
 
@@ -10190,13 +10421,12 @@ export type GetStoriesAlbumsPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Sequence';
-				id: string;
+				id: string | number;
 				title: string;
 				canonicalPath: string;
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerHasFavorited: boolean;
 				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
@@ -10250,7 +10480,7 @@ export type GetStoryDetailDataQuery = {
 	__typename?: 'Query';
 	story: Maybe<{
 		__typename?: 'Recording';
-		id: string;
+		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
 		description: Maybe<string>;
@@ -10273,13 +10503,13 @@ export type GetStoryDetailDataQuery = {
 		}>;
 		videoDownloads: Array<{
 			__typename?: 'VideoFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
-			id: string;
+			id: string | number;
 			url: string;
 			filesize: string;
 		}>;
@@ -10289,7 +10519,7 @@ export type GetStoryDetailDataQuery = {
 			nodes: Maybe<
 				Array<{
 					__typename?: 'RecordingTag';
-					tag: { __typename?: 'Tag'; id: string; name: string };
+					tag: { __typename?: 'Tag'; id: string | number; name: string };
 				}>
 			>;
 		};
@@ -10300,7 +10530,7 @@ export type GetStoryDetailDataQuery = {
 		}>;
 		sequence: Maybe<{
 			__typename?: 'Sequence';
-			id: string;
+			id: string | number;
 			title: string;
 			canonicalPath: string;
 			recordings: {
@@ -10312,7 +10542,7 @@ export type GetStoryDetailDataQuery = {
 						title: string;
 						duration: number;
 						sequenceIndex: Maybe<number>;
-						id: string;
+						id: string | number;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -10321,7 +10551,7 @@ export type GetStoryDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string;
+							id: string | number;
 							title: string;
 							recordings: {
 								__typename?: 'RecordingConnection';
@@ -10403,7 +10633,7 @@ export type GetStoryDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	stories: {
 		__typename?: 'RecordingConnection';
-		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string }>>;
+		nodes: Maybe<Array<{ __typename?: 'Recording'; id: string | number }>>;
 	};
 };
 
@@ -10421,7 +10651,7 @@ export type GetTagDetailPageDataQuery = {
 		nodes: Maybe<
 			Array<{
 				__typename?: 'Recording';
-				id: string;
+				id: string | number;
 				title: string;
 				description: Maybe<string>;
 				duration: number;
@@ -10474,7 +10704,9 @@ export type GetTagListPageDataQuery = {
 	__typename?: 'Query';
 	tags: {
 		__typename?: 'TagConnection';
-		nodes: Maybe<Array<{ __typename?: 'Tag'; id: string; name: string }>>;
+		nodes: Maybe<
+			Array<{ __typename?: 'Tag'; id: string | number; name: string }>
+		>;
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 	};
 };
@@ -10525,6 +10757,141 @@ export type GetTestimoniesPathsDataQuery = {
 	};
 };
 
+export type CollectionFavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type CollectionFavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type CollectionIsFavoritedQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type CollectionIsFavoritedQuery = {
+	__typename?: 'Query';
+	collection: Maybe<{ __typename?: 'Collection'; viewerHasFavorited: boolean }>;
+};
+
+export type CollectionUnfavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type CollectionUnfavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type PersonFavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type PersonFavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type PersonIsFavoritedQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type PersonIsFavoritedQuery = {
+	__typename?: 'Query';
+	person: Maybe<{ __typename?: 'Person'; viewerHasFavorited: boolean }>;
+};
+
+export type PersonUnfavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type PersonUnfavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type RecordingFavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type RecordingFavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type RecordingIsFavoritedQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type RecordingIsFavoritedQuery = {
+	__typename?: 'Query';
+	recording: Maybe<{ __typename?: 'Recording'; viewerHasFavorited: boolean }>;
+};
+
+export type RecordingUnfavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type RecordingUnfavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type SequenceFavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SequenceFavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type SequenceIsFavoritedQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SequenceIsFavoritedQuery = {
+	__typename?: 'Query';
+	sequence: Maybe<{ __typename?: 'Sequence'; viewerHasFavorited: boolean }>;
+};
+
+export type SequenceUnfavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SequenceUnfavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type SponsorFavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SponsorFavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
+export type SponsorIsFavoritedQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SponsorIsFavoritedQuery = {
+	__typename?: 'Query';
+	sponsor: Maybe<{ __typename?: 'Sponsor'; viewerHasFavorited: boolean }>;
+};
+
+export type SponsorUnfavoriteMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type SponsorUnfavoriteMutation = {
+	__typename?: 'Mutation';
+	favorited: { __typename?: 'SuccessPayload'; success: boolean };
+};
+
 export type AddPlaylistMutationVariables = Exact<{
 	language: Language;
 	title: Scalars['String'];
@@ -10534,7 +10901,7 @@ export type AddPlaylistMutationVariables = Exact<{
 
 export type AddPlaylistMutation = {
 	__typename?: 'Mutation';
-	playlistAdd: { __typename?: 'UserPlaylist'; id: string };
+	playlistAdd: { __typename?: 'UserPlaylist'; id: string | number };
 };
 
 export type GenerateFeedFragment = {
@@ -10659,12 +11026,12 @@ export const CardBibleChapterFragmentDoc = `
     `;
 export const CardCollectionFragmentDoc = `
     fragment cardCollection on Collection {
+  id
   canonicalPath(useFuturePath: true)
   title
   startDate
   endDate
   duration
-  viewerHasFavorited
   viewerPlaybackCompletedPercentage
   image {
     id
@@ -10713,7 +11080,6 @@ export const CardSequenceFragmentDoc = `
   contentType
   duration
   summary
-  viewerHasFavorited
   viewerPlaybackCompletedPercentage
   speakers: persons(role: SPEAKER, orderBy: [{field: NAME, direction: ASC}]) {
     nodes {
@@ -10744,9 +11110,9 @@ export const CardSongFragmentDoc = `
     ${CardWithPlayableFragmentDoc}`;
 export const CardSponsorFragmentDoc = `
     fragment cardSponsor on Sponsor {
+  id
   title
   canonicalPath(useFuturePath: true)
-  viewerHasFavorited
   image {
     url(size: 64)
   }
@@ -10976,7 +11342,6 @@ export const SequenceFragmentDoc = `
     canonicalPath(useFuturePath: true)
   }
   shareUrl
-  viewerHasFavorited
   recordings(first: 250) {
     aggregate {
       count
@@ -11013,6 +11378,15 @@ export const CollectionPivotFragmentDoc = `
     fragment collectionPivot on Collection {
   title
   canonicalPath(useFuturePath: true)
+}
+    `;
+export const PresenterPivotFragmentDoc = `
+    fragment presenterPivot on Person {
+  name
+  canonicalPath(useFuturePath: true)
+  imageWithFallback {
+    url(size: 100)
+  }
 }
     `;
 export const SponsorPivotFragmentDoc = `
@@ -11111,6 +11485,34 @@ export const useGetPlaylistButtonDataQuery = <
 			GetPlaylistButtonDataQuery,
 			GetPlaylistButtonDataQueryVariables
 		>(GetPlaylistButtonDataDocument, variables),
+		options
+	);
+export const GetNotFoundPageDataDocument = `
+    query getNotFoundPageData {
+  recordings(
+    language: ENGLISH
+    first: 3
+    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
+  ) {
+    nodes {
+      ...cardRecording
+    }
+  }
+}
+    ${CardRecordingFragmentDoc}`;
+export const useGetNotFoundPageDataQuery = <
+	TData = GetNotFoundPageDataQuery,
+	TError = unknown
+>(
+	variables?: GetNotFoundPageDataQueryVariables,
+	options?: UseQueryOptions<GetNotFoundPageDataQuery, TError, TData>
+) =>
+	useQuery<GetNotFoundPageDataQuery, TError, TData>(
+		['getNotFoundPageData', variables],
+		graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(
+			GetNotFoundPageDataDocument,
+			variables
+		),
 		options
 	);
 export const GetAccountPlaylistsPageDataDocument = `
@@ -11785,7 +12187,6 @@ export const GetCollectionDetailPageDataDocument = `
     duration
     description
     location
-    viewerHasFavorited
     image {
       url(size: 1400)
     }
@@ -12260,6 +12661,44 @@ export const useGetPlaylistsPageDataQuery = <
 		>(GetPlaylistsPageDataDocument, variables),
 		options
 	);
+export const GetPresenterAppearsPageDataDocument = `
+    query getPresenterAppearsPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
+  person(id: $id) {
+    id
+    ...presenterPivot
+  }
+  collections(
+    language: $language
+    offset: $offset
+    first: $first
+    persons: [{personId: $id, role: SPEAKER}]
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
+  ) {
+    nodes {
+      ...cardCollection
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${PresenterPivotFragmentDoc}
+${CardCollectionFragmentDoc}`;
+export const useGetPresenterAppearsPageDataQuery = <
+	TData = GetPresenterAppearsPageDataQuery,
+	TError = unknown
+>(
+	variables: GetPresenterAppearsPageDataQueryVariables,
+	options?: UseQueryOptions<GetPresenterAppearsPageDataQuery, TError, TData>
+) =>
+	useQuery<GetPresenterAppearsPageDataQuery, TError, TData>(
+		['getPresenterAppearsPageData', variables],
+		graphqlFetcher<
+			GetPresenterAppearsPageDataQuery,
+			GetPresenterAppearsPageDataQueryVariables
+		>(GetPresenterAppearsPageDataDocument, variables),
+		options
+	);
 export const GetPresenterDetailPageDataDocument = `
     query getPresenterDetailPageData($id: ID!, $language: Language!) {
   person(id: $id) {
@@ -12269,7 +12708,6 @@ export const GetPresenterDetailPageDataDocument = `
     imageWithFallback {
       url(size: 100)
     }
-    viewerHasFavorited
     website
     sermons: recordings(contentType: SERMON) {
       aggregate {
@@ -12461,11 +12899,7 @@ export const GetPresenterRecordingsPageDataDocument = `
     query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
   person(id: $id) {
     id
-    name
-    canonicalPath(useFuturePath: true)
-    imageWithFallback {
-      url(size: 100)
-    }
+    ...presenterPivot
     recordings(
       offset: $offset
       first: $first
@@ -12481,7 +12915,8 @@ export const GetPresenterRecordingsPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}
+    ${PresenterPivotFragmentDoc}
+${CardRecordingFragmentDoc}
 ${GenerateFeedFragmentDoc}`;
 export const useGetPresenterRecordingsPageDataQuery = <
 	TData = GetPresenterRecordingsPageDataQuery,
@@ -12502,11 +12937,7 @@ export const GetPresenterSequencesPageDataDocument = `
     query getPresenterSequencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
   person(id: $id) {
     id
-    name
-    canonicalPath(useFuturePath: true)
-    imageWithFallback {
-      url(size: 100)
-    }
+    ...presenterPivot
   }
   sequences(
     language: $language
@@ -12523,7 +12954,8 @@ export const GetPresenterSequencesPageDataDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${PresenterPivotFragmentDoc}
+${CardSequenceFragmentDoc}`;
 export const useGetPresenterSequencesPageDataQuery = <
 	TData = GetPresenterSequencesPageDataQuery,
 	TError = unknown
@@ -12537,6 +12969,42 @@ export const useGetPresenterSequencesPageDataQuery = <
 			GetPresenterSequencesPageDataQuery,
 			GetPresenterSequencesPageDataQueryVariables
 		>(GetPresenterSequencesPageDataDocument, variables),
+		options
+	);
+export const GetPresenterTopPageDataDocument = `
+    query getPresenterTopPageData($id: ID!, $offset: Int, $first: Int) {
+  person(id: $id) {
+    id
+    ...presenterPivot
+    recordings(
+      offset: $offset
+      first: $first
+      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
+    ) {
+      nodes {
+        ...cardRecording
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${PresenterPivotFragmentDoc}
+${CardRecordingFragmentDoc}`;
+export const useGetPresenterTopPageDataQuery = <
+	TData = GetPresenterTopPageDataQuery,
+	TError = unknown
+>(
+	variables: GetPresenterTopPageDataQueryVariables,
+	options?: UseQueryOptions<GetPresenterTopPageDataQuery, TError, TData>
+) =>
+	useQuery<GetPresenterTopPageDataQuery, TError, TData>(
+		['getPresenterTopPageData', variables],
+		graphqlFetcher<
+			GetPresenterTopPageDataQuery,
+			GetPresenterTopPageDataQueryVariables
+		>(GetPresenterTopPageDataDocument, variables),
 		options
 	);
 export const GetSeriesDetailPageDataDocument = `
@@ -13124,7 +13592,6 @@ export const GetSponsorDetailPageDataDocument = `
     location
     website
     description
-    viewerHasFavorited
     imageWithFallback {
       url(size: 100)
     }
@@ -13691,6 +14158,423 @@ export const useGetTestimoniesPathsDataQuery = <
 		>(GetTestimoniesPathsDataDocument, variables),
 		options
 	);
+export const CollectionFavoriteDocument = `
+    mutation collectionFavorite($id: ID!) {
+  favorited: collectionFavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useCollectionFavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		CollectionFavoriteMutation,
+		TError,
+		CollectionFavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		CollectionFavoriteMutation,
+		TError,
+		CollectionFavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: CollectionFavoriteMutationVariables) =>
+			graphqlFetcher<
+				CollectionFavoriteMutation,
+				CollectionFavoriteMutationVariables
+			>(CollectionFavoriteDocument, variables)(),
+		options
+	);
+export const CollectionIsFavoritedDocument = `
+    query collectionIsFavorited($id: ID!) {
+  collection(id: $id) {
+    viewerHasFavorited
+  }
+}
+    `;
+export const useCollectionIsFavoritedQuery = <
+	TData = CollectionIsFavoritedQuery,
+	TError = unknown
+>(
+	variables: CollectionIsFavoritedQueryVariables,
+	options?: UseQueryOptions<CollectionIsFavoritedQuery, TError, TData>
+) =>
+	useQuery<CollectionIsFavoritedQuery, TError, TData>(
+		['collectionIsFavorited', variables],
+		graphqlFetcher<
+			CollectionIsFavoritedQuery,
+			CollectionIsFavoritedQueryVariables
+		>(CollectionIsFavoritedDocument, variables),
+		options
+	);
+export const CollectionUnfavoriteDocument = `
+    mutation collectionUnfavorite($id: ID!) {
+  favorited: collectionUnfavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useCollectionUnfavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		CollectionUnfavoriteMutation,
+		TError,
+		CollectionUnfavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		CollectionUnfavoriteMutation,
+		TError,
+		CollectionUnfavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: CollectionUnfavoriteMutationVariables) =>
+			graphqlFetcher<
+				CollectionUnfavoriteMutation,
+				CollectionUnfavoriteMutationVariables
+			>(CollectionUnfavoriteDocument, variables)(),
+		options
+	);
+export const PersonFavoriteDocument = `
+    mutation personFavorite($id: ID!) {
+  favorited: personFavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
+	options?: UseMutationOptions<
+		PersonFavoriteMutation,
+		TError,
+		PersonFavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		PersonFavoriteMutation,
+		TError,
+		PersonFavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: PersonFavoriteMutationVariables) =>
+			graphqlFetcher<PersonFavoriteMutation, PersonFavoriteMutationVariables>(
+				PersonFavoriteDocument,
+				variables
+			)(),
+		options
+	);
+export const PersonIsFavoritedDocument = `
+    query personIsFavorited($id: ID!) {
+  person(id: $id) {
+    viewerHasFavorited
+  }
+}
+    `;
+export const usePersonIsFavoritedQuery = <
+	TData = PersonIsFavoritedQuery,
+	TError = unknown
+>(
+	variables: PersonIsFavoritedQueryVariables,
+	options?: UseQueryOptions<PersonIsFavoritedQuery, TError, TData>
+) =>
+	useQuery<PersonIsFavoritedQuery, TError, TData>(
+		['personIsFavorited', variables],
+		graphqlFetcher<PersonIsFavoritedQuery, PersonIsFavoritedQueryVariables>(
+			PersonIsFavoritedDocument,
+			variables
+		),
+		options
+	);
+export const PersonUnfavoriteDocument = `
+    mutation personUnfavorite($id: ID!) {
+  favorited: personUnfavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const usePersonUnfavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		PersonUnfavoriteMutation,
+		TError,
+		PersonUnfavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		PersonUnfavoriteMutation,
+		TError,
+		PersonUnfavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: PersonUnfavoriteMutationVariables) =>
+			graphqlFetcher<
+				PersonUnfavoriteMutation,
+				PersonUnfavoriteMutationVariables
+			>(PersonUnfavoriteDocument, variables)(),
+		options
+	);
+export const RecordingFavoriteDocument = `
+    mutation recordingFavorite($id: ID!) {
+  favorited: recordingFavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useRecordingFavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		RecordingFavoriteMutation,
+		TError,
+		RecordingFavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		RecordingFavoriteMutation,
+		TError,
+		RecordingFavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: RecordingFavoriteMutationVariables) =>
+			graphqlFetcher<
+				RecordingFavoriteMutation,
+				RecordingFavoriteMutationVariables
+			>(RecordingFavoriteDocument, variables)(),
+		options
+	);
+export const RecordingIsFavoritedDocument = `
+    query recordingIsFavorited($id: ID!) {
+  recording(id: $id) {
+    viewerHasFavorited
+  }
+}
+    `;
+export const useRecordingIsFavoritedQuery = <
+	TData = RecordingIsFavoritedQuery,
+	TError = unknown
+>(
+	variables: RecordingIsFavoritedQueryVariables,
+	options?: UseQueryOptions<RecordingIsFavoritedQuery, TError, TData>
+) =>
+	useQuery<RecordingIsFavoritedQuery, TError, TData>(
+		['recordingIsFavorited', variables],
+		graphqlFetcher<
+			RecordingIsFavoritedQuery,
+			RecordingIsFavoritedQueryVariables
+		>(RecordingIsFavoritedDocument, variables),
+		options
+	);
+export const RecordingUnfavoriteDocument = `
+    mutation recordingUnfavorite($id: ID!) {
+  favorited: recordingUnfavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useRecordingUnfavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		RecordingUnfavoriteMutation,
+		TError,
+		RecordingUnfavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		RecordingUnfavoriteMutation,
+		TError,
+		RecordingUnfavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: RecordingUnfavoriteMutationVariables) =>
+			graphqlFetcher<
+				RecordingUnfavoriteMutation,
+				RecordingUnfavoriteMutationVariables
+			>(RecordingUnfavoriteDocument, variables)(),
+		options
+	);
+export const SequenceFavoriteDocument = `
+    mutation sequenceFavorite($id: ID!) {
+  favorited: sequenceFavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useSequenceFavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SequenceFavoriteMutation,
+		TError,
+		SequenceFavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SequenceFavoriteMutation,
+		TError,
+		SequenceFavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: SequenceFavoriteMutationVariables) =>
+			graphqlFetcher<
+				SequenceFavoriteMutation,
+				SequenceFavoriteMutationVariables
+			>(SequenceFavoriteDocument, variables)(),
+		options
+	);
+export const SequenceIsFavoritedDocument = `
+    query sequenceIsFavorited($id: ID!) {
+  sequence(id: $id) {
+    viewerHasFavorited
+  }
+}
+    `;
+export const useSequenceIsFavoritedQuery = <
+	TData = SequenceIsFavoritedQuery,
+	TError = unknown
+>(
+	variables: SequenceIsFavoritedQueryVariables,
+	options?: UseQueryOptions<SequenceIsFavoritedQuery, TError, TData>
+) =>
+	useQuery<SequenceIsFavoritedQuery, TError, TData>(
+		['sequenceIsFavorited', variables],
+		graphqlFetcher<SequenceIsFavoritedQuery, SequenceIsFavoritedQueryVariables>(
+			SequenceIsFavoritedDocument,
+			variables
+		),
+		options
+	);
+export const SequenceUnfavoriteDocument = `
+    mutation sequenceUnfavorite($id: ID!) {
+  favorited: sequenceUnfavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useSequenceUnfavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SequenceUnfavoriteMutation,
+		TError,
+		SequenceUnfavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SequenceUnfavoriteMutation,
+		TError,
+		SequenceUnfavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: SequenceUnfavoriteMutationVariables) =>
+			graphqlFetcher<
+				SequenceUnfavoriteMutation,
+				SequenceUnfavoriteMutationVariables
+			>(SequenceUnfavoriteDocument, variables)(),
+		options
+	);
+export const SponsorFavoriteDocument = `
+    mutation sponsorFavorite($id: ID!) {
+  favorited: sponsorFavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useSponsorFavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SponsorFavoriteMutation,
+		TError,
+		SponsorFavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SponsorFavoriteMutation,
+		TError,
+		SponsorFavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: SponsorFavoriteMutationVariables) =>
+			graphqlFetcher<SponsorFavoriteMutation, SponsorFavoriteMutationVariables>(
+				SponsorFavoriteDocument,
+				variables
+			)(),
+		options
+	);
+export const SponsorIsFavoritedDocument = `
+    query sponsorIsFavorited($id: ID!) {
+  sponsor(id: $id) {
+    viewerHasFavorited
+  }
+}
+    `;
+export const useSponsorIsFavoritedQuery = <
+	TData = SponsorIsFavoritedQuery,
+	TError = unknown
+>(
+	variables: SponsorIsFavoritedQueryVariables,
+	options?: UseQueryOptions<SponsorIsFavoritedQuery, TError, TData>
+) =>
+	useQuery<SponsorIsFavoritedQuery, TError, TData>(
+		['sponsorIsFavorited', variables],
+		graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(
+			SponsorIsFavoritedDocument,
+			variables
+		),
+		options
+	);
+export const SponsorUnfavoriteDocument = `
+    mutation sponsorUnfavorite($id: ID!) {
+  favorited: sponsorUnfavorite(id: $id) {
+    success
+  }
+}
+    `;
+export const useSponsorUnfavoriteMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SponsorUnfavoriteMutation,
+		TError,
+		SponsorUnfavoriteMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SponsorUnfavoriteMutation,
+		TError,
+		SponsorUnfavoriteMutationVariables,
+		TContext
+	>(
+		(variables?: SponsorUnfavoriteMutationVariables) =>
+			graphqlFetcher<
+				SponsorUnfavoriteMutation,
+				SponsorUnfavoriteMutationVariables
+			>(SponsorUnfavoriteDocument, variables)(),
+		options
+	);
 export const AddPlaylistDocument = `
     mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
   playlistAdd(
@@ -13739,6 +14623,12 @@ export async function getPlaylistButtonData<T>(
 	variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
 ): Promise<GetPlaylistButtonDataQuery> {
 	return fetchApi(GetPlaylistButtonDataDocument, { variables });
+}
+
+export async function getNotFoundPageData<T>(
+	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>
+): Promise<GetNotFoundPageDataQuery> {
+	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
 
 export async function getAccountPlaylistsPageData<T>(
@@ -13945,6 +14835,12 @@ export async function getPlaylistsPageData<T>(
 	return fetchApi(GetPlaylistsPageDataDocument, { variables });
 }
 
+export async function getPresenterAppearsPageData<T>(
+	variables: ExactAlt<T, GetPresenterAppearsPageDataQueryVariables>
+): Promise<GetPresenterAppearsPageDataQuery> {
+	return fetchApi(GetPresenterAppearsPageDataDocument, { variables });
+}
+
 export async function getPresenterDetailPageData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>
 ): Promise<GetPresenterDetailPageDataQuery> {
@@ -13979,6 +14875,12 @@ export async function getPresenterSequencesPageData<T>(
 	variables: ExactAlt<T, GetPresenterSequencesPageDataQueryVariables>
 ): Promise<GetPresenterSequencesPageDataQuery> {
 	return fetchApi(GetPresenterSequencesPageDataDocument, { variables });
+}
+
+export async function getPresenterTopPageData<T>(
+	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
+): Promise<GetPresenterTopPageDataQuery> {
+	return fetchApi(GetPresenterTopPageDataDocument, { variables });
 }
 
 export async function getSeriesDetailPageData<T>(
@@ -14225,6 +15127,96 @@ export async function getTestimoniesPathsData<T>(
 	variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
+}
+
+export async function collectionFavorite<T>(
+	variables: ExactAlt<T, CollectionFavoriteMutationVariables>
+): Promise<CollectionFavoriteMutation> {
+	return fetchApi(CollectionFavoriteDocument, { variables });
+}
+
+export async function collectionIsFavorited<T>(
+	variables: ExactAlt<T, CollectionIsFavoritedQueryVariables>
+): Promise<CollectionIsFavoritedQuery> {
+	return fetchApi(CollectionIsFavoritedDocument, { variables });
+}
+
+export async function collectionUnfavorite<T>(
+	variables: ExactAlt<T, CollectionUnfavoriteMutationVariables>
+): Promise<CollectionUnfavoriteMutation> {
+	return fetchApi(CollectionUnfavoriteDocument, { variables });
+}
+
+export async function personFavorite<T>(
+	variables: ExactAlt<T, PersonFavoriteMutationVariables>
+): Promise<PersonFavoriteMutation> {
+	return fetchApi(PersonFavoriteDocument, { variables });
+}
+
+export async function personIsFavorited<T>(
+	variables: ExactAlt<T, PersonIsFavoritedQueryVariables>
+): Promise<PersonIsFavoritedQuery> {
+	return fetchApi(PersonIsFavoritedDocument, { variables });
+}
+
+export async function personUnfavorite<T>(
+	variables: ExactAlt<T, PersonUnfavoriteMutationVariables>
+): Promise<PersonUnfavoriteMutation> {
+	return fetchApi(PersonUnfavoriteDocument, { variables });
+}
+
+export async function recordingFavorite<T>(
+	variables: ExactAlt<T, RecordingFavoriteMutationVariables>
+): Promise<RecordingFavoriteMutation> {
+	return fetchApi(RecordingFavoriteDocument, { variables });
+}
+
+export async function recordingIsFavorited<T>(
+	variables: ExactAlt<T, RecordingIsFavoritedQueryVariables>
+): Promise<RecordingIsFavoritedQuery> {
+	return fetchApi(RecordingIsFavoritedDocument, { variables });
+}
+
+export async function recordingUnfavorite<T>(
+	variables: ExactAlt<T, RecordingUnfavoriteMutationVariables>
+): Promise<RecordingUnfavoriteMutation> {
+	return fetchApi(RecordingUnfavoriteDocument, { variables });
+}
+
+export async function sequenceFavorite<T>(
+	variables: ExactAlt<T, SequenceFavoriteMutationVariables>
+): Promise<SequenceFavoriteMutation> {
+	return fetchApi(SequenceFavoriteDocument, { variables });
+}
+
+export async function sequenceIsFavorited<T>(
+	variables: ExactAlt<T, SequenceIsFavoritedQueryVariables>
+): Promise<SequenceIsFavoritedQuery> {
+	return fetchApi(SequenceIsFavoritedDocument, { variables });
+}
+
+export async function sequenceUnfavorite<T>(
+	variables: ExactAlt<T, SequenceUnfavoriteMutationVariables>
+): Promise<SequenceUnfavoriteMutation> {
+	return fetchApi(SequenceUnfavoriteDocument, { variables });
+}
+
+export async function sponsorFavorite<T>(
+	variables: ExactAlt<T, SponsorFavoriteMutationVariables>
+): Promise<SponsorFavoriteMutation> {
+	return fetchApi(SponsorFavoriteDocument, { variables });
+}
+
+export async function sponsorIsFavorited<T>(
+	variables: ExactAlt<T, SponsorIsFavoritedQueryVariables>
+): Promise<SponsorIsFavoritedQuery> {
+	return fetchApi(SponsorIsFavoritedDocument, { variables });
+}
+
+export async function sponsorUnfavorite<T>(
+	variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>
+): Promise<SponsorUnfavoriteMutation> {
+	return fetchApi(SponsorUnfavoriteDocument, { variables });
 }
 
 export async function addPlaylist<T>(

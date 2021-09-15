@@ -21,6 +21,7 @@ import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
+import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
@@ -45,6 +46,9 @@ function CollectionDetail({
 }: Must<CollectionDetailProps>): JSX.Element {
 	const intl = useIntl();
 	const lang = useLanguageRoute();
+	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
+		collection.id
+	);
 
 	const {
 		id,
@@ -55,7 +59,6 @@ function CollectionDetail({
 		location,
 		startDate,
 		endDate,
-		viewerHasFavorited,
 		sponsor,
 		persons,
 		sequences,
@@ -148,9 +151,9 @@ function CollectionDetail({
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}
 					/>

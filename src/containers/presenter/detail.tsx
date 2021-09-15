@@ -20,6 +20,7 @@ import IconButton from '@components/molecules/iconButton';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseHeader from '@components/molecules/teaseHeader';
+import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import {
@@ -52,7 +53,6 @@ function PresenterDetail({
 		name,
 		description,
 		imageWithFallback,
-		viewerHasFavorited,
 		website,
 		sermons,
 		audiobookTracks,
@@ -62,6 +62,7 @@ function PresenterDetail({
 		recentRecordings,
 		topRecordings,
 	} = person;
+	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -166,9 +167,9 @@ function PresenterDetail({
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={viewerHasFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => void 0}
-						color={viewerHasFavorited ? BaseColors.RED : BaseColors.DARK}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						className={styles.iconButton}
 					/>
@@ -241,7 +242,7 @@ function PresenterDetail({
 							href={makePresenterTopRecordingsRoute(lang, id)}
 							text={intl.formatMessage({
 								id: 'presenterDetail__topAllLabel',
-								defaultMessage: 'See All Most Listened',
+								defaultMessage: 'See More Most Listened',
 							})}
 							Icon={ForwardIcon}
 							iconPosition="left"

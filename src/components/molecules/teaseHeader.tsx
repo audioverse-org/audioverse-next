@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import styles from '@components/molecules/teaseHeader.module.scss';
+import styles from './teaseHeader.module.scss';
 
 interface TeaseHeaderProps {
 	children?: ReactNode;

@@ -2,10 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import { Scalars } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 interface Listable {
-	id: string;
+	id: Scalars['ID'];
 	title?: string;
 	imageWithFallback?: {
 		url?: string;

@@ -36,7 +36,7 @@ export default function TeaseRecording({
 	unpadded?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
-	const { isRecordingFavorited, toggleFavorited } = useIsRecordingFavorited(
+	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
 		recording.id
 	);
 	const session = usePlaybackSession(recording);
@@ -143,7 +143,7 @@ export default function TeaseRecording({
 						<div
 							className={clsx(
 								styles.details,
-								isRecordingFavorited && styles.detailsWithLike
+								isFavorited && styles.detailsWithLike
 							)}
 						>
 							<span className={styles.duration}>
@@ -159,13 +159,13 @@ export default function TeaseRecording({
 				</a>
 			</Link>
 			<ButtonFavorite
-				isFavorited={!!isRecordingFavorited}
+				isFavorited={!!isFavorited}
 				toggleFavorited={toggleFavorited}
 				backgroundColor={backgroundColor}
 				className={clsx(
 					styles.like,
 					unpadded && styles.likeUnpadded,
-					isRecordingFavorited && styles.likeActive
+					isFavorited && styles.likeActive
 				)}
 				light
 			/>

@@ -1,24 +1,9 @@
-import { fetchApi } from '@lib/api/fetchApi';
+import { recordingFavorite, recordingUnfavorite } from '@lib/generated/graphql';
 
-const favoriteQuery = `
-mutation favorite($id: ID!) {
-	favoriteRecording(id: $id)
-}
-`;
-
-const unfavoriteQuery = `
-mutation unfavorite($id: ID!) {
-	unfavoriteRecording(id: $id)
-}
-`;
-
-// TODO: Replace `any` in return type with something more specific
 export function setRecordingFavorited(
 	id: number | string,
 	favorite: boolean
-): Promise<any> {
-	const variables = { id },
-		query = favorite ? favoriteQuery : unfavoriteQuery;
-
-	return fetchApi(query, { variables });
+): Promise<boolean> {
+	const query = favorite ? recordingFavorite : recordingUnfavorite;
+	return query({ id }).then(({ favorited: { success } }) => success);
 }

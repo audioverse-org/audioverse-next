@@ -21,8 +21,13 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		sponsor: null,
 	}));
+	if (!sponsor) {
+		return {
+			notFound: true,
+		};
+	}
 
-	if (res && sponsor) {
+	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(

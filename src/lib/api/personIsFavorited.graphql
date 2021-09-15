@@ -1,0 +1,5 @@
+query personIsFavorited($id: ID!) {
+	person(id: $id) {
+		viewerHasFavorited
+	}
+}

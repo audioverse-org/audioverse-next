@@ -1,16 +1,17 @@
 import { QueryKey, useMutation, useQueryClient } from 'react-query';
 
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
+import { Scalars } from '@lib/generated/graphql';
 
 interface MutateVariables {
-	recordingId: string;
-	playlistId: string;
+	recordingId: Scalars['ID'];
+	playlistId: Scalars['ID'];
 	add: boolean;
 }
 
 type ReturnType = (
-	recordingId: string,
-	playlistId: string,
+	recordingId: Scalars['ID'],
+	playlistId: Scalars['ID'],
 	add: boolean
 ) => void;
 
@@ -30,6 +31,9 @@ export function useSetPlaylistMembership(
 		}
 	);
 
-	return (recordingId: string, playlistId: string, add: boolean) =>
-		mutate({ recordingId, playlistId, add });
+	return (
+		recordingId: Scalars['ID'],
+		playlistId: Scalars['ID'],
+		add: boolean
+	) => mutate({ recordingId, playlistId, add });
 }

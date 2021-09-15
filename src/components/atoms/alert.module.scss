@@ -1,0 +1,8 @@
+@import '../../styles/common';
+
+.base {
+	border: 1px solid $ts-salmon;
+	border-radius: 16px;
+	box-shadow: $ts-shadow-small-default;
+	padding: 24px 32px;
+}

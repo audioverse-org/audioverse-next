@@ -1,0 +1,5 @@
+query recordingIsFavorited($id: ID!) {
+	recording(id: $id) {
+		viewerHasFavorited
+	}
+}

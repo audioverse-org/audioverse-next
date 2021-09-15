@@ -8,6 +8,7 @@ import { BaseColors } from '@lib/constants';
 import {
 	GetBibleBookDetailPageDataQuery,
 	PlayerFragment,
+	Scalars,
 } from '@lib/generated/graphql';
 
 import styles from './book.module.scss';
@@ -18,7 +19,7 @@ export interface BookProps {
 
 function Book({ data }: BookProps): JSX.Element {
 	const chapters = data.audiobible?.book.chapters || [];
-	const [chapterId, setChapterId] = useState<string>(chapters[0].id);
+	const [chapterId, setChapterId] = useState<Scalars['ID']>(chapters[0].id);
 	const chapter = chapters.find((c) => c.id === chapterId);
 	const verses = chapter?.verses || [];
 

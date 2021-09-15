@@ -1,0 +1,5 @@
+mutation recordingUnfavorite($id: ID!) {
+	favorited: recordingUnfavorite(id: $id) {
+		success
+	}
+}

@@ -8,7 +8,7 @@ import React, {
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import Miniplayer from '@components/organisms/miniplayer';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import { AndMiniplayerFragment, Scalars } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
@@ -70,8 +70,8 @@ export type PlaybackContextType = {
 			prefersAudio?: boolean;
 		}
 	) => void;
-	setVideoHandler: (id: string, handler: (el: Element) => void) => void;
-	unsetVideoHandler: (id: string) => void;
+	setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => void;
+	unsetVideoHandler: (id: Scalars['ID']) => void;
 	hasPlayer: () => boolean;
 	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
@@ -135,8 +135,8 @@ export default function AndMiniplayer({
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
-	const [videoHandlerId, setVideoHandlerId] = useState<string>();
-	const videoHandlerIdRef = useRef<string>();
+	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
+	const videoHandlerIdRef = useRef<Scalars['ID']>();
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -201,12 +201,12 @@ export default function AndMiniplayer({
 				playback.unsetVideoHandler(videoHandlerId);
 			}
 		},
-		setVideoHandler: (id: string, handler: (el: Element) => void) => {
+		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
 			setVideoHandler(() => handler);
 		},
-		unsetVideoHandler: (id: string) => {
+		unsetVideoHandler: (id: Scalars['ID']) => {
 			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);

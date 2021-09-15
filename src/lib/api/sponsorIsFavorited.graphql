@@ -1,0 +1,5 @@
+query sponsorIsFavorited($id: ID!) {
+	sponsor(id: $id) {
+		viewerHasFavorited
+	}
+}

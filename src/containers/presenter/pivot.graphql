@@ -1,0 +1,7 @@
+fragment presenterPivot on Person {
+	name
+	canonicalPath(useFuturePath: true)
+	imageWithFallback {
+		url(size: 100)
+	}
+}

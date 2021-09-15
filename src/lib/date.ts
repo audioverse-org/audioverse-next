@@ -1,5 +1,8 @@
 import dayjs from 'dayjs';
 
+/**
+ * This takes a GraphQL `RelativeDateTime` and returns a JS Date
+ */
 export const parseRelativeDate = (date: string): Date | undefined => {
 	const matches = date.match(/(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/);
 	if (matches) {

@@ -19,8 +19,13 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		audiobook: null,
 	}));
+	if (!sequence) {
+		return {
+			notFound: true,
+		};
+	}
 
-	if (res && sequence) {
+	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(

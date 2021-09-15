@@ -2,6 +2,14 @@ overwrite: true
 schema: 'https://graphql-staging.audioverse.org/graphql'
 documents: 'src/**/*.graphql'
 generates:
+  ./schema.graphql:
+    plugins:
+      - add:
+          content:
+            - '# ------------------------------------------------------'
+            - '# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)'
+            - '# ------------------------------------------------------ '
+      - schema-ast
   src/lib/generated/graphql.ts:
     plugins:
       - 'typescript'
@@ -12,6 +20,7 @@ generates:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
       scalars:
+        ID: 'string | number'
         Date: 'string'
         DateTime: 'string'
         RelativeDateTime: 'string'

@@ -1,9 +1,12 @@
-import React from 'react';
+import { GetStaticPropsResult } from 'next';
 
-export default function Custom404(): JSX.Element {
-	return (
-		<h1>
-			404 - Page Not Found <small>(TODO)</small>
-		</h1>
-	);
+import NotFound, { NotFoundProps } from '@components/organisms/notFound';
+import { getNotFoundPageData } from '@lib/generated/graphql';
+
+export default NotFound;
+
+export async function getStaticProps(): Promise<
+	GetStaticPropsResult<NotFoundProps>
+> {
+	return { props: await getNotFoundPageData({}) };
 }

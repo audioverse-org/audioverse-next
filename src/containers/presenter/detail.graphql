@@ -6,7 +6,6 @@ query getPresenterDetailPageData($id: ID!, $language: Language!) {
 		imageWithFallback {
 			url(size: 100)
 		}
-		viewerHasFavorited
 		website
 		sermons: recordings(contentType: SERMON) {
 			aggregate {
