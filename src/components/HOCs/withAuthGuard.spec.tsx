@@ -29,13 +29,13 @@ describe('withAuthGuard', () => {
 
 		const { getByPlaceholderText } = await render();
 
-		expect(getByPlaceholderText('password')).toBeInTheDocument();
+		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('offers social login', async () => {
 		const { getByText } = await render();
 
-		expect(getByText('continue with Google')).toBeInTheDocument();
+		expect(getByText('Login with Google')).toBeInTheDocument();
 	});
 
 	it('displays content on successful social login', async () => {
@@ -64,7 +64,7 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		userEvent.click(getByText('continue with Google'));
+		userEvent.click(getByText('Login with Google'));
 
 		await waitFor(() => {
 			expect(getByText('hello world')).toBeInTheDocument();

@@ -6,6 +6,7 @@ import React from 'react';
 import SocialLogin from '@components/molecules/socialLogin';
 import { RegisterSocialDocument } from '@lib/generated/graphql';
 import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {
 		when(mockedFetchApi)
@@ -26,7 +27,7 @@ describe('social login', () => {
 			<SocialLogin onSuccess={() => (didCallbackRun = true)} />
 		);
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Login with Facebook'));
 
 		await waitFor(() => expect(mockedFetchApi).toBeCalled());
 

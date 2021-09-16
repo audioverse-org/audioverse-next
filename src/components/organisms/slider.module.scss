@@ -1,6 +1,15 @@
 @import '../../styles/common';
 
 .slider {
+	display: flex;
+	flex-direction: column;
+}
+
+.grow > .slides {
+	flex-grow: 1;
+	> * {
+		align-self: stretch;
+	}
 }
 
 .slides {
@@ -11,10 +20,10 @@
 	transform: translateX(0);
 	transition: transform $transition-medium;
 	> * {
-		--cardWidth: calc((100% / var(--perSlide, 1)) - 2rem);
+		--cardWidth: calc(
+			(100% / var(--perSlide, 1)) - 1px + 1px
+		); // Hack to turn 100% into pixels to avoid squishing to flex-basis: auto
 		flex: 0 0 var(--cardWidth);
-		margin-left: 1rem;
-		margin-right: 1rem;
 	}
 }
 
@@ -29,6 +38,8 @@
 
 .dots {
 	padding-left: 0;
+	margin-left: 8.5px;
+	margin-right: 8.5px;
 }
 
 .dot {
@@ -43,6 +54,15 @@
 
 .active {
 	background-color: $ts-dark;
+}
+
+.dark {
+	.dot {
+		background-color: $ts-midTone;
+	}
+	.active {
+		background-color: $ts-white;
+	}
 }
 
 .buttonSquare.buttonSquare {

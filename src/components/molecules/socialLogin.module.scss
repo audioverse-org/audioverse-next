@@ -1,0 +1,8 @@
+.buttonRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	> * {
+		flex: 0 1 calc(50% - 16px);
+	}
+}

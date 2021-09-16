@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 // @ts-ignore because this is a helper function in manual mock
-import { __setFacebookResponse } from 'react-facebook-login';
+import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
 import {
 	RegisterDocument,
@@ -27,61 +27,29 @@ describe('register page', () => {
 	it('renders email field', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('email')).toBeInTheDocument();
+		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('renders password field', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('password')).toBeInTheDocument();
-	});
-
-	it('renders confirm password field', async () => {
-		const { getByPlaceholderText } = await renderPage();
-
-		expect(getByPlaceholderText('confirm password')).toBeInTheDocument();
+		expect(getByPlaceholderText('*******')).toBeInTheDocument();
 	});
 
 	it('renders sign up button', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('sign up')).toBeInTheDocument();
-	});
-
-	it('renders password mismatch error', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage();
-
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.click(getByText('sign up'));
-
-		expect(getByText('passwords do not match')).toBeInTheDocument();
-	});
-
-	it('does not render mismatch error if no mismatch', async () => {
-		const { queryByText, getByText } = await renderPage();
-
-		userEvent.click(getByText('sign up'));
-
-		expect(queryByText('passwords do not match')).not.toBeInTheDocument();
-	});
-
-	it('renders missing passwords error', async () => {
-		const { getByText } = await renderPage();
-
-		userEvent.click(getByText('sign up'));
-
-		expect(getByText('please type password twice')).toBeInTheDocument();
+		expect(getByText('Sign up')).toBeInTheDocument();
 	});
 
 	it('resets errors on click', async () => {
 		const { getByText, getByPlaceholderText, queryByText } = await renderPage();
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass');
+		userEvent.type(getByPlaceholderText('*******'), 'pass');
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		expect(queryByText('please type password twice')).not.toBeInTheDocument();
 	});
@@ -89,7 +57,7 @@ describe('register page', () => {
 	it('renders missing email error', async () => {
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		expect(getByText('email is required')).toBeInTheDocument();
 	});
@@ -97,17 +65,20 @@ describe('register page', () => {
 	it('registers user', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('email'), 'email');
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass');
+		userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
+		userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
+		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(getByPlaceholderText('*******'), 'pass');
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(RegisterDocument, {
 				variables: {
 					email: 'email',
 					password: 'pass',
+					firstName: 'Matthew',
+					lastName: 'Leffler',
 				},
 			});
 		});
@@ -116,11 +87,10 @@ describe('register page', () => {
 	it('displays loading state', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('email'), 'email');
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass');
+		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(getByPlaceholderText('*******'), 'pass');
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(getByText('loading...')).toBeInTheDocument();
@@ -142,11 +112,10 @@ describe('register page', () => {
 
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('email'), 'email');
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass');
+		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(getByPlaceholderText('*******'), 'pass');
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -156,11 +125,10 @@ describe('register page', () => {
 	it('displays success message', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('email'), 'email');
-		userEvent.type(getByPlaceholderText('password'), 'pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass');
+		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(getByPlaceholderText('*******'), 'pass');
 
-		userEvent.click(getByText('sign up'));
+		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(getByText('success')).toBeInTheDocument();
@@ -170,13 +138,13 @@ describe('register page', () => {
 	it('renders continue with Facebook', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('continue with Facebook')).toBeInTheDocument();
+		expect(getByText('Sign up with Facebook')).toBeInTheDocument();
 	});
 
 	it('renders continue with Google', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('continue with Google')).toBeInTheDocument();
+		expect(getByText('Sign up with Google')).toBeInTheDocument();
 	});
 
 	it('renders google signon errors', async () => {
@@ -194,7 +162,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Google'));
+		userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -216,7 +184,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -226,7 +194,7 @@ describe('register page', () => {
 	it('renders social login success', async () => {
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('success')).toBeInTheDocument();
@@ -236,7 +204,7 @@ describe('register page', () => {
 	it('hits api with facebook registration', async () => {
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -264,7 +232,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(Cookie.set).toBeCalledWith('avSession', 'the_token');
@@ -278,7 +246,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await sleep();
 
@@ -295,7 +263,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Facebook'));
+		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('FAILED')).toBeInTheDocument();
@@ -321,7 +289,7 @@ describe('register page', () => {
 	it('sends Google login data to API', async () => {
 		const { getByText } = await renderPage();
 
-		userEvent.click(getByText('continue with Google'));
+		userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {

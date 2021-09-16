@@ -1,5 +1,17 @@
-mutation register($email: String!, $password: String!) {
-	signup(input: { email: $email, password: $password }) {
+mutation register(
+	$email: String!
+	$password: String!
+	$firstName: String!
+	$lastName: String!
+) {
+	signup(
+		input: {
+			email: $email
+			password: $password
+			givenName: $firstName
+			surname: $lastName
+		}
+	) {
 		errors {
 			message
 		}

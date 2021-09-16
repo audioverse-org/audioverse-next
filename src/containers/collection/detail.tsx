@@ -144,16 +144,16 @@ function CollectionDetail({
 					</div>
 					{/* TODO: make icons functional */}
 					<IconButton
-						Icon={ShareIcon}
-						onPress={() => void 0}
-						color={BaseColors.WHITE}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						Icon={ShareIcon}
+						onPress={() => void 0}
+						color={BaseColors.WHITE}
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}
 					/>

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { CSSProperties, ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -12,12 +13,16 @@ interface SliderProps {
 	children: ReactNode;
 	perSlide?: number;
 	clip?: boolean;
+	dark?: boolean;
+	grow?: boolean;
 }
 
 export default function Slider({
 	children,
 	perSlide = 1,
 	clip = true,
+	dark,
+	grow,
 }: SliderProps): JSX.Element {
 	const [delta, setDelta] = useState<number>(0);
 
@@ -29,11 +34,13 @@ export default function Slider({
 
 	const intl = useIntl();
 
+	const buttonType = dark ? 'secondaryInverse' : 'secondary';
+
 	// TODO: Should the controls be made invisible to assistive technologies,
 	//  since the content is not being technically hidden, only shifted horizontally?
 	return (
 		<div
-			className={styles.slider}
+			className={clsx(styles.slider, dark && styles.dark, grow && styles.grow)}
 			style={
 				{
 					'--perSlide': perSlide,
@@ -52,7 +59,7 @@ export default function Slider({
 			</div>
 			<div className={styles.controls}>
 				<Button
-					type="secondary"
+					type={buttonType}
 					onClick={pageLeft}
 					Icon={ArrowLeft}
 					aria-label={intl.formatMessage({
@@ -79,7 +86,7 @@ export default function Slider({
 					))}
 				</ul>
 				<Button
-					type="secondary"
+					type={buttonType}
 					onClick={pageRight}
 					Icon={ArrowRight}
 					aria-label={intl.formatMessage({

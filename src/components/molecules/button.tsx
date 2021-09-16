@@ -22,6 +22,7 @@ type Props = {
 	target?: '_blank';
 	className?: string;
 	'aria-label'?: string;
+	centered?: boolean;
 };
 
 export default function Button({
@@ -31,10 +32,19 @@ export default function Button({
 	Icon,
 	iconPosition,
 	className,
+	centered,
 	...props
 }: Props): JSX.Element {
 	const inner = (
-		<a className={clsx(styles.base, styles[type], className)} {...props}>
+		<a
+			className={clsx(
+				styles.base,
+				styles[type],
+				centered && styles.centered,
+				className
+			)}
+			{...props}
+		>
 			{Icon && iconPosition !== 'right' && (
 				<Icon className={clsx(text && styles.iconLeftOfText)} />
 			)}
