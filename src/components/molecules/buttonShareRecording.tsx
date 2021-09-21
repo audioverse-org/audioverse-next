@@ -41,33 +41,37 @@ export default function ButtonShareRecording({
 
 	const shareOptions = [
 		[
-			facebookLink, // eslint-disable-next-line react/jsx-key
+			facebookLink,
 			<FormattedMessage
 				id="molecule-buttonShareRecording__facebook"
 				defaultMessage="Facebook"
+				key="facebook"
 			/>,
 		],
 		[
-			twitterLink, // eslint-disable-next-line react/jsx-key
+			twitterLink,
 			<FormattedMessage
 				id="molecule-buttonShareRecording__twitter"
 				defaultMessage="Twitter"
+				key="twitter"
 			/>,
 		],
 		[
 			emailLink,
-			// eslint-disable-next-line react/jsx-key
+
 			<FormattedMessage
 				id="molecule-buttonShareRecording__email"
 				defaultMessage="Email"
+				key="email"
 			/>,
 		],
 		[
 			copyLink,
-			// eslint-disable-next-line react/jsx-key
+
 			<FormattedMessage
 				id="molecule-buttonShareRecording__copyLink"
 				defaultMessage="Copy Link"
+				key="copy"
 			/>,
 		],
 	] as const;
