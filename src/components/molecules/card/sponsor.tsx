@@ -29,7 +29,8 @@ export default function CardSponsor({
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSponsorFavorited(sponsor.id);
 
-	const { canonicalPath, image, title, collections } = sponsor;
+	const { canonicalPath, image, title, collections, sequences, recordings } =
+		sponsor;
 
 	return (
 		<Card>
@@ -68,12 +69,28 @@ export default function CardSponsor({
 							loose
 							className={styles.conferencesLabel}
 						>
-							<FormattedMessage
-								id="cardSponsor_conferencesLabel"
-								defaultMessage="{count} conferences"
-								description="Card sponsor conferences count label"
-								values={{ count: collections.aggregate?.count }}
-							/>
+							{collections.aggregate?.count ? (
+								<FormattedMessage
+									id="cardSponsor__collectionCountLabel"
+									defaultMessage="{count} Conferences"
+									description="Sponsor Detail collection count label"
+									values={{ count: collections.aggregate?.count }}
+								/>
+							) : sequences.aggregate?.count ? (
+								<FormattedMessage
+									id="cardSponsor__sequencesCountLabel"
+									defaultMessage="{count} Series"
+									description="Sponsor Detail series count label"
+									values={{ count: sequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="cardSponsor__recordingsCountLabel"
+									defaultMessage="{count} Teachings"
+									description="Sponsor Detail teachings count label"
+									values={{ count: recordings.aggregate?.count }}
+								/>
+							)}
 						</Heading6>
 					</div>
 					{/* TODO: has favorited, sub-conferences */}

@@ -164,12 +164,36 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					<Slider perSlide={4} clip={false}>
-						{song && <CardSong song={song} />}
-						{chapter && <CardBibleChapter chapter={chapter} />}
-						{story && <CardStory story={story} />}
-						{topicRecording && <CardTopic topicRecording={topicRecording} />}
-						{recording && <CardSermon recording={recording} />}
-						{audiobookTrack && <CardAudiobookTrack track={audiobookTrack} />}
+						{song && (
+							<div className={styles.slideCard}>
+								<CardSong song={song} />
+							</div>
+						)}
+						{chapter && (
+							<div className={styles.slideCard}>
+								<CardBibleChapter chapter={chapter} />
+							</div>
+						)}
+						{story && (
+							<div className={styles.slideCard}>
+								<CardStory story={story} />
+							</div>
+						)}
+						{topicRecording && (
+							<div className={styles.slideCard}>
+								<CardTopic topicRecording={topicRecording} />
+							</div>
+						)}
+						{recording && (
+							<div className={styles.slideCard}>
+								<CardSermon recording={recording} />
+							</div>
+						)}
+						{audiobookTrack && (
+							<div className={styles.slideCard}>
+								<CardAudiobookTrack track={audiobookTrack} />
+							</div>
+						)}
 					</Slider>
 				}
 				center={true}

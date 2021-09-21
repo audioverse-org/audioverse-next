@@ -881,7 +881,7 @@
   },
   "loginForm__emailPlaceholder": {
     "col": 37,
-    "defaultMessage": "email",
+    "defaultMessage": "jane@example.com",
     "description": "email input placeholder",
     "end": 2266,
     "file": "src/components/molecules/login.tsx",
@@ -890,7 +890,7 @@
   },
   "loginForm__passwordPlaceholder": {
     "col": 37,
-    "defaultMessage": "password",
+    "defaultMessage": "*******",
     "description": "password input placeholder",
     "end": 2546,
     "file": "src/components/molecules/login.tsx",

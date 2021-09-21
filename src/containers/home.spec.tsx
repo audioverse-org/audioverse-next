@@ -212,7 +212,7 @@ describe('home page', () => {
 	it('sets proper fallback strategy', async () => {
 		const { fallback } = await getStaticPaths();
 
-		expect(fallback).toBe(true);
+		expect(fallback).toBe(false);
 	});
 
 	it('generates static paths for all languages', async () => {

@@ -7254,7 +7254,9 @@ enum UserRole {
 
 input UserSignupInput {
 	email: String!
+	givenName: String
 	password: String!
+	surname: String
 }
 
 """

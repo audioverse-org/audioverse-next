@@ -21,6 +21,11 @@
 	border-left: 1px solid $ts-midTone;
 }
 
+.slideCard {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
 .posts {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

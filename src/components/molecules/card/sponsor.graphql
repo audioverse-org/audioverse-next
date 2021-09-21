@@ -16,4 +16,14 @@ fragment cardSponsor on Sponsor {
 		# 	...CollectionCard
 		# } TODO
 	}
+	sequences {
+		aggregate {
+			count
+		}
+	}
+	recordings {
+		aggregate {
+			count
+		}
+	}
 }

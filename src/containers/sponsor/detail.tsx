@@ -133,16 +133,16 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					</Heading6>
 					{/* TODO: make icons functional */}
 					<IconButton
-						Icon={ShareIcon}
-						onPress={() => void 0}
-						color={BaseColors.DARK}
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onPress={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}
 					/>
 					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+						Icon={ShareIcon}
+						onPress={() => void 0}
+						color={BaseColors.DARK}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}
 					/>

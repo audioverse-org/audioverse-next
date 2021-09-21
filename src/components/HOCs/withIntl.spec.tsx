@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 import CardWithPlayable from '@components/molecules/card/base/withPlayable';
-import Login from '@components/molecules/login';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -488,7 +487,7 @@ describe('localization usage', () => {
 						},
 						collections: {
 							aggregate: {
-								count: 0,
+								count: 1,
 							},
 						},
 					} as any,
@@ -584,9 +583,9 @@ describe('localization usage', () => {
 		[Playlists, {}],
 		[Logout, {}],
 		[Register, {}],
-		[Login, {}],
+		// TODO: [Login, {}],
 		[Reset, {}],
-		[Profile, {}],
+		// TODO: [Profile, {}],
 		[Home, {}],
 		[
 			CardWithPlayable,

@@ -117,13 +117,13 @@ describe('profile page', () => {
 	it('displays email field if unauthenticated', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('email')).toBeInTheDocument();
+		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('displays password field if unauthenticated', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('password')).toBeInTheDocument();
+		expect(getByPlaceholderText('*******')).toBeInTheDocument();
 	});
 
 	it('makes login request', async () => {
@@ -131,9 +131,9 @@ describe('profile page', () => {
 
 		const { getByPlaceholderText, getByText } = await renderPage();
 
-		const emailField = getByPlaceholderText('email');
-		const passwordField = getByPlaceholderText('password');
-		const loginButton = getByText('login');
+		const emailField = getByPlaceholderText('jane@example.com');
+		const passwordField = getByPlaceholderText('*******');
+		const loginButton = getByText('Login');
 
 		await userEvent.type(emailField, 'the_email');
 		await userEvent.type(passwordField, 'the_password');
@@ -157,7 +157,7 @@ describe('profile page', () => {
 
 		const { getByText } = await renderPage();
 
-		const loginButton = getByText('login');
+		const loginButton = getByText('Login');
 
 		loginButton.click();
 
@@ -190,7 +190,7 @@ describe('profile page', () => {
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('login'));
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
 	});
@@ -198,10 +198,10 @@ describe('profile page', () => {
 	it('logs in with email and password', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
-		await userEvent.type(getByPlaceholderText('email'), 'the_email');
-		await userEvent.type(getByPlaceholderText('password'), 'the_password');
+		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
+		await userEvent.type(getByPlaceholderText('*******'), 'the_password');
 
-		userEvent.click(getByText('login'));
+		userEvent.click(getByText('Login'));
 
 		expect(login).toBeCalledWith('the_email', 'the_password');
 	});

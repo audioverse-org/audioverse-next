@@ -5,6 +5,14 @@ import { resetAllWhenMocks } from 'jest-when';
 jest.mock('@lib/api/fetchApi');
 jest.mock('video.js');
 
+// WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
+beforeAll(() => {
+	const fbScript = document.createElement('script');
+	fbScript.id = 'facebook-jssdk';
+
+	document.body.appendChild(fbScript);
+});
+
 beforeEach(() => {
 	jest.resetAllMocks();
 	resetAllWhenMocks();

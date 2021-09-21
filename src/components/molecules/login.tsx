@@ -1,14 +1,23 @@
+import clsx from 'clsx';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import SocialLogin from '@components/molecules/socialLogin';
+import AndOnboarding from '@components/templates/andOnboarding';
 import { login } from '@lib/api';
 import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
+import { makeRegisterRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
+
+import Button from './button';
+import Input from './input';
+import styles from './login.module.scss';
 
 export default function Login(): JSX.Element {
 	const queryClient = useQueryClient();
 	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -42,7 +51,7 @@ export default function Login(): JSX.Element {
 		},
 	});
 
-	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const onSubmit = async (e: FormEvent<HTMLElement>) => {
 		e.preventDefault();
 		try {
 			await login(email, password);
@@ -52,72 +61,100 @@ export default function Login(): JSX.Element {
 		}
 	};
 
-	// TODO: Use a form element for accessibility
 	return (
-		<>
+		<AndOnboarding>
 			<SocialLogin
 				onSuccess={async () => {
 					await queryClient.invalidateQueries();
 				}}
 			/>
 
-			<p>
-				<FormattedMessage
-					id={'loginForm__orSeparator'}
-					defaultMessage={'or'}
-					description={'login form "or" separator'}
-				/>
-			</p>
-
-			<form onSubmit={onSubmit} data-testid={'loginForm'}>
-				<ul>
-					{errors.map((e) => (
-						<li key={e}>{e}</li>
-					))}
-				</ul>
+			<form
+				onSubmit={onSubmit}
+				data-testid={'loginForm'}
+				className={styles.form}
+			>
+				{!!errors.length && (
+					<ul>
+						{errors.map((e) => (
+							<li key={e}>{e}</li>
+						))}
+					</ul>
+				)}
 				{successMessage && <p>{successMessage}</p>}
 
-				<input
+				<Input
+					label={intl.formatMessage({
+						id: 'loginForm__emailLabel',
+						defaultMessage: 'Email',
+					})}
 					placeholder={intl.formatMessage({
 						id: 'loginForm__emailPlaceholder',
-						defaultMessage: 'email',
-						description: 'email input placeholder',
+						defaultMessage: 'jane@example.com',
 					})}
-					type={'email'}
+					type="email"
 					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					setValue={setEmail}
 				/>
-				<input
+				<Input
+					label={intl.formatMessage({
+						id: 'loginForm__passwordLabel',
+						defaultMessage: 'Password',
+					})}
 					placeholder={intl.formatMessage({
 						id: 'loginForm__passwordPlaceholder',
-						defaultMessage: 'password',
-						description: 'password input placeholder',
+						defaultMessage: '*******',
 					})}
-					type={'password'}
+					type="password"
 					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					setValue={setPassword}
 				/>
 
-				<button
-					onClick={(e) => {
-						e.preventDefault();
-						mutate({ email });
-					}}
-				>
-					<FormattedMessage
-						id={'loginForm__forgotPasswordButton'}
-						defaultMessage={'forgot password'}
-						description={'login form forgot password button'}
+				<div className={styles.actions}>
+					<Button
+						type="super"
+						onClick={onSubmit}
+						text={
+							<FormattedMessage
+								id={'loginForm__loginButton'}
+								defaultMessage={'Login'}
+								description={'login form login button'}
+							/>
+						}
+						centered
+						className={styles.submit}
 					/>
-				</button>
-				<button type={'submit'}>
+					<a
+						onClick={(e) => {
+							e.preventDefault();
+							mutate({ email });
+						}}
+						className={clsx(styles.resetPassword, 'decorated')}
+					>
+						<FormattedMessage
+							id={'loginForm__forgotPasswordButton'}
+							defaultMessage={'Forgot password?'}
+							description={'login form forgot password button'}
+						/>
+					</a>
 					<FormattedMessage
-						id={'loginForm__loginButton'}
-						defaultMessage={'login'}
-						description={'login form login button'}
+						id={'loginForm__signupIntro'}
+						defaultMessage={'Don’t have an account?'}
 					/>
-				</button>
+					<Button
+						type="secondary"
+						text={
+							<FormattedMessage
+								id={'loginForm__signup'}
+								defaultMessage={'Sign up'}
+							/>
+						}
+						href={makeRegisterRoute(languageRoute)}
+						centered
+						className={styles.signup}
+					/>
+				</div>
 			</form>
-		</>
+		</AndOnboarding>
 	);
 }

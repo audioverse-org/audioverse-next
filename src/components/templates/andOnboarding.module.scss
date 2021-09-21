@@ -1,0 +1,81 @@
+@import '../../styles/common';
+
+.page {
+	display: flex;
+	align-items: stretch;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.form {
+	flex: 1 1 auto;
+	padding: 32px;
+	display: flex;
+	flex-direction: column;
+}
+
+.logo,
+.kicker {
+	text-align: center;
+	margin-bottom: 32px;
+}
+
+.kicker {
+	font-size: 18px;
+	line-height: 21.78px;
+	color: $ts-black;
+	text-align: center;
+}
+
+.promos {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	padding: 32px 0;
+	background: $ts-dark;
+	color: $ts-white;
+	> * {
+		flex-grow: 1;
+	}
+}
+
+.slide {
+	display: flex;
+	flex-direction: column;
+	> *:first-child {
+		flex: 1 1 80%;
+	}
+}
+
+$onboarding-image-width: 3494px;
+.cards {
+	background: url('/img/onboarding.jpg');
+	background-size: #{$onboarding-image-width / 2} auto;
+	background-position: 67% top;
+	background-repeat: no-repeat;
+}
+
+.description {
+	width: 330px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 32px;
+}
+
+.heading {
+	line-height: 120%;
+}
+
+@media (min-width: $breakpoint-lg) {
+	.page {
+		flex-direction: row;
+	}
+	.form {
+		flex: 0 0 43.5%;
+		padding: 64px;
+	}
+	.promos {
+		flex: 1 1 56.5%;
+		padding: 56px 0;
+	}
+}

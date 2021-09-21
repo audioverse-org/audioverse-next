@@ -13,7 +13,7 @@ describe('login page', () => {
 	it('renders login form', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('password')).toBeInTheDocument();
+		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('redirects when user authenticated', async () => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 	ReactFacebookFailureResponse,
 	ReactFacebookLoginInfo,
@@ -21,10 +20,10 @@ export function __setFacebookResponse(response: Response): void {
 
 export default function FacebookLogin({
 	callback,
-	textButton,
+	render,
 }: {
 	callback: (response: any) => void;
-	textButton: string;
+	render: (renderProps: {onClick: () => void}) => JSX.Element;
 }): JSX.Element {
-	return <button onClick={() => callback(res)}>{textButton}</button>;
+	return render({onClick: () => callback(res)});
 }

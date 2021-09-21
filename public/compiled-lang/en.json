@@ -612,13 +612,13 @@
   "loginForm__emailPlaceholder": [
     {
       "type": 0,
-      "value": "email"
+      "value": "jane@example.com"
     }
   ],
   "loginForm__passwordPlaceholder": [
     {
       "type": 0,
-      "value": "password"
+      "value": "*******"
     }
   ],
   "loginForm__resetPasswordErrorMessage": [

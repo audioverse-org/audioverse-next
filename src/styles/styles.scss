@@ -109,6 +109,9 @@ a {
 	color: inherit;
 	cursor: pointer;
 	text-underline-offset: 2px;
+	&.decorated {
+		text-decoration: underline;
+	}
 	&:not(.decorated) {
 		text-decoration: none;
 	}

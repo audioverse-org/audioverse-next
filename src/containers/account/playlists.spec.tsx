@@ -116,7 +116,7 @@ describe('playlists page', () => {
 		const { getByPlaceholderText } = await renderPage();
 
 		await waitFor(() => {
-			expect(getByPlaceholderText('password'));
+			expect(getByPlaceholderText('jane@example.com'));
 		});
 	});
 

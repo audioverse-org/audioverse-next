@@ -132,18 +132,6 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 				</div>
 				<div className={styles.rightButtons}>
 					<ButtonSpeed {...{ recording, backgroundColor }} />
-					<ButtonDownload {...{ recording, backgroundColor }} />
-					<ButtonShareRecording
-						{...{
-							recording,
-							backgroundColor,
-							shareVideo: shouldShowVideoControls,
-						}}
-					/>
-					<RecordingButtonFavorite
-						id={recording.id}
-						backgroundColor={backgroundColor}
-					/>
 					{shouldShowVideoControls && (
 						<button
 							aria-label={intl.formatMessage({
@@ -156,6 +144,18 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 							<IconFullscreen />
 						</button>
 					)}
+					<RecordingButtonFavorite
+						id={recording.id}
+						backgroundColor={backgroundColor}
+					/>
+					<ButtonDownload {...{ recording, backgroundColor }} />
+					<ButtonShareRecording
+						{...{
+							recording,
+							backgroundColor,
+							shareVideo: shouldShowVideoControls,
+						}}
+					/>
 				</div>
 			</div>
 		</div>

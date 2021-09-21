@@ -5357,7 +5357,9 @@ export enum UserRole {
 
 export type UserSignupInput = {
 	email: Scalars['String'];
+	givenName: Maybe<Scalars['String']>;
 	password: Scalars['String'];
+	surname: Maybe<Scalars['String']>;
 };
 
 /** The supported social login services. */
@@ -5899,6 +5901,14 @@ export type CardSponsorFragment = {
 	image: Maybe<{ __typename?: 'Image'; url: string }>;
 	collections: {
 		__typename?: 'CollectionConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
+	sequences: {
+		__typename?: 'SequenceConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
+	recordings: {
+		__typename?: 'RecordingConnection';
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 	};
 };
@@ -6723,6 +6733,8 @@ export type ProfileFragment = {
 export type RegisterMutationVariables = Exact<{
 	email: Scalars['String'];
 	password: Scalars['String'];
+	firstName: Scalars['String'];
+	lastName: Scalars['String'];
 }>;
 
 export type RegisterMutation = {
@@ -7757,6 +7769,14 @@ export type GetDiscoverCollectionsPageDataQuery = {
 				image: Maybe<{ __typename?: 'Image'; url: string }>;
 				collections: {
 					__typename?: 'CollectionConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 				};
 			}>
@@ -10102,6 +10122,14 @@ export type GetSponsorListPageDataQuery = {
 					__typename?: 'CollectionConnection';
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
 			}>
 		>;
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -11148,6 +11176,16 @@ export const CardSponsorFragmentDoc = `
       count
     }
   }
+  sequences {
+    aggregate {
+      count
+    }
+  }
+  recordings {
+    aggregate {
+      count
+    }
+  }
 }
     `;
 export const CardStoryFragmentDoc = `
@@ -11673,8 +11711,10 @@ export const useUpdateProfileDataMutation = <
 		options
 	);
 export const RegisterDocument = `
-    mutation register($email: String!, $password: String!) {
-  signup(input: {email: $email, password: $password}) {
+    mutation register($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
+  signup(
+    input: {email: $email, password: $password, givenName: $firstName, surname: $lastName}
+  ) {
     errors {
       message
     }

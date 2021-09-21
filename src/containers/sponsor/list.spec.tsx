@@ -30,7 +30,7 @@ function loadData() {
 						},
 						collections: {
 							aggregate: {
-								count: 0,
+								count: 1,
 							},
 						},
 					},
