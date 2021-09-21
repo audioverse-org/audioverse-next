@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import withIntl from '@components/HOCs/withIntl';
 import 'react-toastify/dist/ReactToastify.css';
+import AndAuthBarrier from '@components/templates/andAuthBarrier';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 
@@ -56,15 +57,17 @@ function Base<P>({
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
 						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
-							{disableSidebar ? (
-								<Component {...pageProps} />
-							) : (
-								<AndMiniplayer>
-									<AndNavigation>
-										<Component {...pageProps} />
-									</AndNavigation>
-								</AndMiniplayer>
-							)}
+							<AndAuthBarrier>
+								{disableSidebar ? (
+									<Component {...pageProps} />
+								) : (
+									<AndMiniplayer>
+										<AndNavigation>
+											<Component {...pageProps} />
+										</AndNavigation>
+									</AndMiniplayer>
+								)}
+							</AndAuthBarrier>
 						</Hydrate>
 					</ThemeProvider>
 				</QueryClientProvider>

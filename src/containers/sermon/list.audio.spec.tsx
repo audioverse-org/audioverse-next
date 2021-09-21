@@ -54,6 +54,7 @@ describe('sermon audio list page', () => {
 					{
 						id: '1',
 						title: 'the_sermon_title',
+						canonicalPath: 'the_sermon_path',
 						videoFiles: [],
 					},
 				],

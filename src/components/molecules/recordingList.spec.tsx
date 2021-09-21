@@ -20,6 +20,7 @@ async function renderComponent({
 					url: 'the_url',
 				},
 				title: 'the_title',
+				canonicalPath: 'the_path',
 				persons: [
 					{
 						name: 'the_person_name',

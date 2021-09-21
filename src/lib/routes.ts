@@ -7,11 +7,6 @@ export const makePaginationRoute = (
 	page: string | number
 ): string => `${base}/page/${page}`;
 
-export const makeSermonRoute = (
-	languageRoute: string,
-	sermonId: Scalars['ID']
-): string => `/${languageRoute}/teachings/${sermonId}`;
-
 export const makeAudiobookTrackRoute = (
 	languageRoute: string,
 	recordingId: Scalars['ID']
@@ -147,7 +142,7 @@ export const makeSongAlbumDetailRoute = (
 export const makeAlbumTrackRoute = (
 	languageRoute: string,
 	trackId: Scalars['ID']
-): string => `/${languageRoute}/songs/tracks/${trackId}`;
+): string => `/${languageRoute}/songs/${trackId}`;
 
 export const makeBibleMusicRoute = (
 	languageRoute: string,
@@ -256,3 +251,9 @@ export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: string | number
 ): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
+
+export const makeLoginRoute = (languageRoute: string): string =>
+	`/${languageRoute}/account/login`;
+
+export const makeRegisterRoute = (languageRoute: string): string =>
+	`/${languageRoute}/account/register`;

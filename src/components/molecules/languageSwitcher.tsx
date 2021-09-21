@@ -24,7 +24,6 @@ export default function LanguageSwitcher(): JSX.Element {
 		setAnchorEl(null);
 	};
 
-	// TODO: give FA attribution, or purchase a license
 	return (
 		<span className={styles.languages}>
 			<Button onClick={handleClick}>

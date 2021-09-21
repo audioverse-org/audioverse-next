@@ -1,4 +1,3 @@
-import Cookie from 'js-cookie';
 import _ from 'lodash';
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login';
@@ -6,6 +5,7 @@ import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
+import { setSessionToken } from '@lib/cookies';
 import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
@@ -28,7 +28,7 @@ export default function SocialLogin({
 				const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
 				if (token && !errors.length) {
-					Cookie.set('avSession', token);
+					setSessionToken(token);
 					onSuccess && onSuccess();
 				} else if (!didUnmount.current) {
 					setErrors(errors.map((e) => e.message));

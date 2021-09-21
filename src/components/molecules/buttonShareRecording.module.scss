@@ -1,0 +1,27 @@
+@import '../../styles/common';
+
+.paper.paper {
+	padding: 16px;
+	border: 1px solid $ts-red;
+	box-shadow: none;
+	color: $ts-dark;
+}
+
+.heading {
+	font-size: 11px;
+	line-height: 13.31px;
+}
+
+.paragraph {
+	font-size: 12px;
+	line-height: 15px;
+	&:last-of-type {
+		margin-bottom: 32px;
+	}
+}
+
+.embedCode {
+	padding: 8px;
+	border: 1px solid $ts-lightTone;
+	color: $ts-dark;
+}

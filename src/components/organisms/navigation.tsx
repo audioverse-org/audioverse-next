@@ -26,7 +26,6 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 	const entries: {
 		key: string;
 		href?: string;
-		// TODO: Improve Icon type
 		Icon: any;
 		label: string;
 	}[] = [

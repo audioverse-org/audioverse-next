@@ -5,7 +5,6 @@ import {
 	getSermonDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeSermonRoute } from '@lib/routes';
 
 export default SermonDetail;
 
@@ -38,6 +37,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSermonDetailStaticPaths,
 		(d) => d.sermons.nodes,
-		(baseUrl, node) => makeSermonRoute(baseUrl, node.id)
+		(baseUrl, node) => node.canonicalPath
 	);
 }

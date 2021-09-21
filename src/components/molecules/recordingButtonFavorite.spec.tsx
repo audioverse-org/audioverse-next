@@ -1,5 +1,6 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Cookie from 'js-cookie';
 import React from 'react';
 
 import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
@@ -7,9 +8,11 @@ import { recordingIsFavorited, setRecordingFavorited } from '@lib/api';
 import * as api from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import { renderWithIntl, withMutedReactQueryLogger } from '@lib/test/helpers';
+
 jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('@lib/api/fetchApi');
+jest.mock('js-cookie');
 
 const renderComponent = async () => {
 	const result = await renderWithIntl(
@@ -32,6 +35,7 @@ const renderComponent = async () => {
 describe('recording favorite button', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
+		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 	});
 
 	it('shows favorite button', async () => {
