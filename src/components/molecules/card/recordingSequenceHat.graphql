@@ -1,0 +1,25 @@
+fragment cardRecordingSequenceHat on Recording {
+	sequence {
+		id
+		canonicalPath(useFuturePath: true)
+		image {
+			url(size: 1000)
+		}
+		favoritedRecordings: recordings(viewerHasFavorited: true) {
+			aggregate {
+				count
+			}
+		}
+		recordings {
+			aggregate {
+				count
+			}
+		}
+	}
+	sponsor {
+		...sponsorLockup
+	}
+	writers: persons(role: WRITER) {
+		...personLockup
+	}
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MediaFormatSwitcherFragment } from '@lib/generated/graphql';
+import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
@@ -9,7 +9,7 @@ import styles from './mediaFormatSwitcher.module.scss';
 export default function MediaFormatSwitcher({
 	recording,
 }: {
-	recording: MediaFormatSwitcherFragment;
+	recording: PlayerFragment;
 }): JSX.Element | null {
 	const session = usePlaybackSession(recording);
 

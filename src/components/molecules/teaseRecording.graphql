@@ -1,5 +1,6 @@
 fragment teaseRecording on Recording {
 	...andMiniplayer
+	recordingContentType: contentType
 	canonicalPath(useFuturePath: true)
 	title
 	duration

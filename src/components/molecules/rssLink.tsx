@@ -18,11 +18,11 @@ export default function RssLink({
 							type="application/rss+xml"
 							rel="alternate"
 							href={href}
-							title={'RSS feed'}
+							title="RSS feed"
 						/>
 					</Head>
 					<Link href={href}>
-						<a target={'_blank'} rel={'noreferrer noopener'}>
+						<a target="_blank" rel="noreferrer noopener">
 							<FormattedMessage
 								id="rssLink__label"
 								defaultMessage="RSS"

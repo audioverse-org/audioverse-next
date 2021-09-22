@@ -59,9 +59,9 @@ function Register(): JSX.Element {
 		return (
 			<p>
 				<FormattedMessage
-					id={'register__loadingMessage'}
-					defaultMessage={'loading...'}
-					description={'register loading message'}
+					id="register__loadingMessage"
+					defaultMessage="loading..."
+					description="register loading message"
 				/>
 			</p>
 		);
@@ -76,9 +76,9 @@ function Register(): JSX.Element {
 		return (
 			<p>
 				<FormattedMessage
-					id={'register__successMessage'}
-					defaultMessage={'success'}
-					description={'register success message'}
+					id="register__successMessage"
+					defaultMessage="success"
+					description="register success message"
 				/>
 			</p>
 		);
@@ -167,24 +167,21 @@ function Register(): JSX.Element {
 						onClick={onSubmit}
 						text={
 							<FormattedMessage
-								id={'register__submitButton'}
-								defaultMessage={'Sign up'}
+								id="register__submitButton"
+								defaultMessage="Sign up"
 							/>
 						}
 						centered
 						className={styles.submit}
 					/>
 					<FormattedMessage
-						id={'register__loginIntro'}
-						defaultMessage={'Already have an account?'}
+						id="register__loginIntro"
+						defaultMessage="Already have an account?"
 					/>
 					<Button
 						type="secondary"
 						text={
-							<FormattedMessage
-								id={'register__login'}
-								defaultMessage={'Login'}
-							/>
+							<FormattedMessage id="register__login" defaultMessage="Login" />
 						}
 						href={makeLoginRoute(languageRoute)}
 						centered

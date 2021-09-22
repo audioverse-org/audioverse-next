@@ -1,9 +1,8 @@
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import _ from 'lodash';
 import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Hydrate } from 'react-query/hydration';
+import { DehydratedState, Hydrate } from 'react-query';
 import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -12,6 +11,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import AndAuthBarrier from '@components/templates/andAuthBarrier';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
+
+export interface IBaseProps {
+	disableSidebar?: boolean;
+	title?: string;
+	dehydratedState?: DehydratedState;
+}
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -41,9 +46,9 @@ function Base<P>({
 	pageProps,
 }: {
 	Component: typeof React.Component;
-	pageProps: P & { disableSidebar?: boolean; title?: string };
+	pageProps: P & IBaseProps;
 }): JSX.Element {
-	const { disableSidebar, title } = pageProps;
+	const { disableSidebar, title, dehydratedState } = pageProps;
 	return (
 		<>
 			<React.StrictMode>
@@ -56,7 +61,7 @@ function Base<P>({
 				</Head>
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
-						<Hydrate state={_.get(pageProps, 'dehydratedState')}>
+						<Hydrate state={dehydratedState}>
 							<AndAuthBarrier>
 								{disableSidebar ? (
 									<Component {...pageProps} />

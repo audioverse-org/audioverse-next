@@ -3,6 +3,8 @@ import { waitFor } from '@testing-library/react';
 import {
 	GetHomeStaticPropsDocument,
 	GetHomeStaticPropsQuery,
+	RecordingContentType,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -21,6 +23,7 @@ const renderPage = buildStaticRenderer(Home, getStaticProps, {
 const audiobookTrack = {
 	title: 'the_audiobook_track_title',
 	canonicalPath: 'the_audiobook_track_path',
+	recordingContentType: RecordingContentType.AudiobookTrack,
 	persons: [
 		{
 			id: 'the_audiobook_track_person_id',
@@ -35,11 +38,17 @@ const audiobookTrack = {
 		id: 'the_audiobook_track_collection_id',
 		canonicalPath: 'the_sequence_path',
 		title: 'the_audiobook_track_collection_title',
+		contentType: SequenceContentType.Audiobook,
 		recordings: {
 			aggregate: {
 				count: 7,
 			},
 			nodes: [],
+		},
+		favoritedRecordings: {
+			aggregate: {
+				count: 0,
+			},
 		},
 	},
 };
@@ -47,6 +56,7 @@ const audiobookTrack = {
 const song = {
 	title: 'the_song_title',
 	canonicalPath: 'the_song_path',
+	recordingContentType: RecordingContentType.MusicTrack,
 	persons: [
 		{
 			id: 'the_song_person_id',
@@ -60,11 +70,17 @@ const song = {
 		id: 'the_song_collection_id',
 		title: 'the_song_collection_title',
 		canonicalPath: 'the_sequence_path',
+		contentType: SequenceContentType.MusicAlbum,
 		recordings: {
 			aggregate: {
 				count: 7,
 			},
 			nodes: [],
+		},
+		favoritedRecordings: {
+			aggregate: {
+				count: 0,
+			},
 		},
 	},
 };
@@ -72,6 +88,7 @@ const song = {
 const story = {
 	title: 'the_story_title',
 	canonicalPath: 'the_story_path',
+	recordingContentType: RecordingContentType.Story,
 	duration: 21 * 60,
 	persons: [
 		{
@@ -85,12 +102,23 @@ const story = {
 	sequence: {
 		title: 'the_story_sequence_title',
 		canonicalPath: 'the_sequence_path',
+		contentType: SequenceContentType.StorySeason,
 		recordings: {
 			aggregate: {
 				count: 7,
 			},
 			nodes: [],
 		},
+		favoritedRecordings: {
+			aggregate: {
+				count: 0,
+			},
+		},
+	},
+	sponsor: {
+		title: '',
+		imageWithFallback: { url: '' },
+		canonicalPath: '',
 	},
 };
 
@@ -121,6 +149,7 @@ const taggedRecording = {
 const recording = {
 	title: 'the_recording_title',
 	canonicalPath: 'the_recording_path',
+	recordingContentType: RecordingContentType.Sermon,
 	persons: [
 		{
 			id: 'the_recording_person_id',
@@ -134,11 +163,17 @@ const recording = {
 	sequence: {
 		title: 'the_recording_sequence_title',
 		canonicalPath: 'the_sequence_path',
+		contentType: SequenceContentType.Series,
 		recordings: {
 			aggregate: {
 				count: 15,
 			},
 			nodes: [],
+		},
+		favoritedRecordings: {
+			aggregate: {
+				count: 0,
+			},
 		},
 	},
 };

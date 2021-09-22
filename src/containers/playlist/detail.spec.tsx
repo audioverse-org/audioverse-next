@@ -1,5 +1,4 @@
-import { QueryClient } from 'react-query';
-import { hydrate } from 'react-query/hydration';
+import { hydrate, QueryClient } from 'react-query';
 
 import { storeRequest } from '@lib/api';
 import { ENTRIES_PER_PAGE } from '@lib/constants';

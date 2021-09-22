@@ -1,3 +1,0 @@
-fragment cardStory on Recording {
-	...cardWithPlayable
-}

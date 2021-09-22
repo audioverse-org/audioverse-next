@@ -47,7 +47,7 @@ export default function CardSequence({
 		title,
 		viewerPlaybackCompletedPercentage,
 		speakers,
-		writers,
+		sequenceWriters: writers,
 	} = sequence;
 
 	const {

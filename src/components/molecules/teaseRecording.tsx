@@ -3,6 +3,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Heading2 from '@components/atoms/heading2';
+import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import { useIsRecordingFavorited } from '@lib/api';
@@ -16,7 +18,7 @@ import IconDisclosure from '../../../public/img/icon-disclosure.svg';
 import IconPlay from '../../../public/img/icon-play.svg';
 
 import ButtonFavorite from './buttonFavorite';
-import { CardTheme } from './card/base/withHat';
+import { CardTheme } from './card/base/withTheme';
 import IconButton from './iconButton';
 import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
@@ -24,17 +26,19 @@ import styles from './teaseRecording.module.scss';
 const isThemeDark = (theme: CardTheme): boolean =>
 	['audiobookTrack', 'story', 'topic'].includes(theme);
 
+type Props = {
+	recording: TeaseRecordingFragment;
+	theme: CardTheme;
+	unpadded?: boolean;
+	small?: boolean;
+};
+
 export default function TeaseRecording({
 	recording,
 	theme,
-	hideSpeakers,
 	unpadded,
-}: {
-	recording: TeaseRecordingFragment;
-	theme: CardTheme;
-	hideSpeakers?: boolean;
-	unpadded?: boolean;
-}): JSX.Element {
+	small,
+}: Props): JSX.Element {
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
 		recording.id
@@ -58,23 +62,30 @@ export default function TeaseRecording({
 	const personTextColor = isDarkTheme
 		? BaseColors.LIGHT_TONE
 		: BaseColors.MID_TONE;
+	const hideSpeakers =
+		['audiobookTrack', 'chapter'].includes(theme) ||
+		(theme === 'song' && small);
 
 	return (
-		<div className={styles.container}>
+		<div className={clsx(styles.container, small && styles.small)}>
 			<Link href={recording.canonicalPath}>
 				<a className={clsx(styles.content, unpadded && styles.unpadded)}>
 					{index && count && (
 						<div className={styles.part}>
 							<FormattedMessage
-								id={'molecule-teaseRecording__partInfo'}
-								defaultMessage={'Part {index} of {count}'}
-								description={'recording tease part info'}
+								id="molecule-teaseRecording__partInfo"
+								defaultMessage="Part {index} of {count}"
+								description="recording tease part info"
 								values={{ index, count }}
 							/>
 						</div>
 					)}
 					<div className={styles.title}>
-						<h2>{recording.title}</h2>
+						{small ? (
+							<Heading3 unpadded>{recording.title}</Heading3>
+						) : (
+							<Heading2>{recording.title}</Heading2>
+						)}
 						<div className={styles.play}>
 							<IconButton
 								Icon={IconPlay}
@@ -90,7 +101,7 @@ export default function TeaseRecording({
 						</div>
 					</div>
 					{!hideSpeakers && (
-						<div className={styles.speakers}>
+						<div>
 							{(personsExpanded
 								? recording.persons
 								: recording.persons.slice(0, 2)
@@ -104,6 +115,7 @@ export default function TeaseRecording({
 										hoverColor={
 											isDarkTheme ? BaseColors.SALMON : BaseColors.RED
 										}
+										small={small}
 									/>
 								</div>
 							))}

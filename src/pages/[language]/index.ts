@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import { IBaseProps } from '@containers/base';
 import Home, { HomeProps } from '@containers/home';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { getHomeStaticProps } from '@lib/generated/graphql';
@@ -15,9 +16,7 @@ interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params: { language },
-}: GetStaticPropsArgs): Promise<
-	StaticProps<HomeProps & { disableSidebar: true }>
-> {
+}: GetStaticPropsArgs): Promise<StaticProps<HomeProps & IBaseProps>> {
 	const langKey = getValidLanguage(language);
 
 	// TODO: try/catch errors to ensure proper 404 page is displayed

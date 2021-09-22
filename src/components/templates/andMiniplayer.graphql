@@ -4,6 +4,7 @@ fragment andMiniplayer on Recording {
 	duration
 	sequence {
 		title
+		contentType
 	}
 	audioFiles {
 		url

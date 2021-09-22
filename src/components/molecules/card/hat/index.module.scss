@@ -1,0 +1,60 @@
+@import '../../../../styles/common';
+
+.hat {
+	max-height: 49px;
+	overflow: hidden;
+	transition: max-height $transition-medium;
+}
+.hatExpanded {
+	max-height: 300px;
+	&.longHat {
+		max-height: 600px;
+	}
+	.hatTitle {
+		display: none;
+	}
+	.hatLabel {
+		display: inline;
+	}
+}
+
+.hatBar {
+	width: 100%;
+	display: flex !important;
+	align-items: center;
+	border-top-left-radius: 16px;
+	border-top-right-radius: 16px;
+	color: var(--hatColor, $ts-dark);
+	padding: 16px;
+	cursor: pointer;
+	font-size: 0.9em;
+	background-color: var(--hatBg);
+	transition: background-color $transition-medium;
+	&:hover {
+		background-color: var(--hatHoverColor);
+	}
+}
+
+.hatIcon {
+	margin-right: 4px;
+	color: var(--iconColor, $ts-red);
+	display: flex;
+}
+
+.hatTitle {
+	flex-grow: 1;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 16.8px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.hatLabel {
+	display: none;
+	flex-grow: 1;
+}
+
+.hatCaret {
+	margin-left: 4px;
+	flex: 0 0 auto;
+}

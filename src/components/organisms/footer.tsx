@@ -218,8 +218,8 @@ export default function Footer(): JSX.Element {
 				<li>
 					<a
 						href="https://audioversestore.org/"
-						target={'_blank'}
-						rel={'noreferrer noopener'}
+						target="_blank"
+						rel="noreferrer noopener"
 					>
 						<FormattedMessage
 							id={`footer__NavItemAudioVerseStore`}
@@ -231,8 +231,8 @@ export default function Footer(): JSX.Element {
 				<li>
 					<a
 						href="https://www.journeysunscripted.com/"
-						target={'_blank'}
-						rel={'noreferrer noopener'}
+						target="_blank"
+						rel="noreferrer noopener"
 					>
 						<FormattedMessage
 							id={`footer__NavItemJourneysUnscripted`}
@@ -279,7 +279,7 @@ export default function Footer(): JSX.Element {
 			</ul>
 
 			<Link href="https://itunes.apple.com/us/app/audioverse/id726998810?mt=8">
-				<a target={'_blank'} rel={'noreferrer noopener'}>
+				<a target="_blank" rel="noreferrer noopener">
 					<Image
 						src="/img/app-apple.png"
 						alt={intl.formatMessage({
@@ -294,7 +294,7 @@ export default function Footer(): JSX.Element {
 			</Link>
 
 			<Link href="https://play.google.com/store/apps/details?id=org.audioverse.exodus">
-				<a target={'_blank'} rel={'noreferrer noopener'}>
+				<a target="_blank" rel="noreferrer noopener">
 					<Image
 						src="/img/app-android.png"
 						alt={intl.formatMessage({

@@ -37,9 +37,9 @@ function SponsorAlbums({
 			</h1>
 			<h2>
 				<FormattedMessage
-					id={'sponsorAlbumsPage__title'}
-					defaultMessage={'Albums'}
-					description={'Sponsor albums page title'}
+					id="sponsorAlbumsPage__title"
+					defaultMessage="Albums"
+					description="Sponsor albums page title"
 				/>
 			</h2>
 			<TableList

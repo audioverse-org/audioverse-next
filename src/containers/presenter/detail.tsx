@@ -82,11 +82,7 @@ function PresenterDetail({
 			}),
 			definition: (
 				<Link href={website}>
-					<a
-						target={'_blank'}
-						rel={'noreferrer noopener'}
-						className="decorated"
-					>
+					<a target="_blank" rel="noreferrer noopener" className="decorated">
 						{website}
 					</a>
 				</Link>

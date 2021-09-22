@@ -30,9 +30,9 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 		return (
 			<p>
 				<FormattedMessage
-					id={'molecule-player__loading'}
-					defaultMessage={'loading ...'}
-					description={'player loading message'}
+					id="molecule-player__loading"
+					defaultMessage="loading ..."
+					description="player loading message"
 				/>
 			</p>
 		);

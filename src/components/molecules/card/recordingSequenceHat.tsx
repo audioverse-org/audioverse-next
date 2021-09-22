@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { CardWithPlayableFragment } from '@lib/generated/graphql';
+import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
+import { CardRecordingSequenceHatFragment } from '@lib/generated/graphql';
 
 import IconLike from '../../../../public/img/icon-like-light.svg';
 import Button from '../button';
@@ -10,7 +11,7 @@ import Button from '../button';
 import styles from './recordingSequenceHat.module.scss';
 
 interface Props {
-	sequence: NonNullable<CardWithPlayableFragment['sequence']>;
+	sequence: NonNullable<CardRecordingSequenceHatFragment['sequence']>;
 	inverse?: boolean;
 }
 
@@ -24,16 +25,16 @@ export default function CardRecordingSequenceHat({
 	return (
 		<div
 			className={styles.hatContent}
-			onClick={() => router.push(sequence.canonicalPath)}
+			onClick={(e) => {
+				e.stopPropagation();
+				router.push(sequence.canonicalPath);
+			}}
 		>
 			{children}
 			<div className={styles.row}>
 				<Button
 					type={inverse ? 'primaryInverse' : 'primary'}
-					onClick={(e) => {
-						e.stopPropagation();
-						alert('TODO');
-					}}
+					onClick={() => setSequenceFavorited(sequence.id, true)}
 					text={
 						<FormattedMessage
 							id="molecule-cardRecordingSequenceHat__addAll"
@@ -46,7 +47,7 @@ export default function CardRecordingSequenceHat({
 					id="molecule-cardRecordingSequenceHat__inLibrary"
 					defaultMessage="{inLibraryCount} out of {totalCount} in your library"
 					values={{
-						inLibraryCount: 3, // TODO
+						inLibraryCount: sequence.favoritedRecordings.aggregate?.count || 0,
 						totalCount: sequence.recordings.aggregate?.count || 0,
 					}}
 				/>

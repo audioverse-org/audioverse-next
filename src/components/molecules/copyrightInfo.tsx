@@ -21,9 +21,9 @@ export default function CopyrightInfo({
 		<div className={clsx(styles.text, useInverse && styles.inverse)}>
 			<span>
 				<FormattedMessage
-					id={'sermonDetailPage__copyright'}
-					defaultMessage={'Copyright ⓒ{year} {owner}.'}
-					description={'Copyright year and owner'}
+					id="sermonDetailPage__copyright"
+					defaultMessage="Copyright ⓒ{year} {owner}."
+					description="Copyright year and owner"
 					values={{
 						year: recording?.copyrightYear,
 						owner: copyrightOwner,
@@ -38,7 +38,7 @@ export default function CopyrightInfo({
 			/>
 			<div>
 				<FormattedMessage
-					id={'sermonDetailPage__disclaimer'}
+					id="sermonDetailPage__disclaimer"
 					defaultMessage={
 						'The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse.'
 					}

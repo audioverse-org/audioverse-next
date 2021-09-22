@@ -125,3 +125,15 @@ $like-icon-padding: 8px;
 		right: $right-icon-offset;
 	}
 }
+
+.small {
+	.part {
+		margin-bottom: 0;
+	}
+	.title {
+		margin-bottom: 4px;
+	}
+	.presenter {
+		margin-bottom: 0;
+	}
+}

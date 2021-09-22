@@ -7,7 +7,7 @@ describe('paginated list template', () => {
 	it('does not render image if none provided', async () => {
 		const { queryByAltText } = await renderWithIntl(
 			<OldPaginatedList
-				pageTitle={'the_title'}
+				pageTitle="the_title"
 				nodes={[]}
 				makePageRoute={undefined as any}
 				makeEntryRoute={undefined as any}

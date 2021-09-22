@@ -1,0 +1,9 @@
+fragment cardRecordingStack on Sequence {
+	contentType
+	favoritedRecordings: recordings(viewerHasFavorited: true) {
+		nodes {
+			...teaseRecording
+			...cardRecordingSequenceHat
+		}
+	}
+}

@@ -44,9 +44,9 @@ function SponsorBooks({
 			</h1>
 			<h2>
 				<FormattedMessage
-					id={'sponsorBooksPage__title'}
-					defaultMessage={'Books'}
-					description={'Sponsor books page title'}
+					id="sponsorBooksPage__title"
+					defaultMessage="Books"
+					description="Sponsor books page title"
 				/>
 			</h2>
 			<TableList

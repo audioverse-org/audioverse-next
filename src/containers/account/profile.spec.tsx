@@ -5,8 +5,7 @@ import _ from 'lodash';
 import { GetServerSidePropsContext } from 'next';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import { QueryClient } from 'react-query';
-import { hydrate } from 'react-query/hydration';
+import { hydrate, QueryClient } from 'react-query';
 
 import * as api from '@lib/api';
 import { login } from '@lib/api';

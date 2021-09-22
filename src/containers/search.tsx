@@ -20,85 +20,84 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 				<h4>Type</h4>
 				<ul>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Sermon
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Bible
+						<input type="checkbox" checked={true} onChange={() => null} /> Bible
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Bible Book
+						<input type="checkbox" checked={true} onChange={() => null} /> Bible
+						Book
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Bible Chapter
+						<input type="checkbox" checked={true} onChange={() => null} /> Bible
+						Chapter
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Audiobook
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Story Album
+						<input type="checkbox" checked={true} onChange={() => null} /> Story
+						Album
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Music Album
+						<input type="checkbox" checked={true} onChange={() => null} /> Music
+						Album
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Scripture Song
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Conference
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Person
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} /> Tag
+						<input type="checkbox" checked={true} onChange={() => null} /> Tag
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Sponsor
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Series
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
+						<input type="checkbox" checked={true} onChange={() => null} />{' '}
 						Playlist
 					</li>
 				</ul>
 				<h4>Person</h4>
 				<ul>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Mark Finley
+						<input type="checkbox" checked={true} onChange={() => null} /> Mark
+						Finley
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Chad Kreuzer
+						<input type="checkbox" checked={true} onChange={() => null} /> Chad
+						Kreuzer
 					</li>
 					<li>
-						<input type={'checkbox'} checked={true} onChange={() => null} />{' '}
-						Jean Boonstra
+						<input type="checkbox" checked={true} onChange={() => null} /> Jean
+						Boonstra
 					</li>
 				</ul>
 				<h4>Date</h4>
 				<label>
-					Minimum <input placeholder={'mm/dd/yyyy'} />
+					Minimum <input placeholder="mm/dd/yyyy" />
 				</label>
 				<br />
 				<label>
 					Maximum{' '}
 					<input
-						placeholder={'mm/dd/yyyy'}
+						placeholder="mm/dd/yyyy"
 						checked={true}
 						onChange={() => null}
 					/>
@@ -109,102 +108,99 @@ export default function Search({ sermons = [] }: SearchProps): JSX.Element {
 				{sermons.map((s, i) => (
 					<li key={i}>sermon</li>
 				))}
-				<li key={'sermon'}>
+				<li key="sermon">
 					<SearchEntry
-						type={'Sermon'}
-						title={'What Is Faith?'}
+						type="Sermon"
+						title="What Is Faith?"
 						metaLines={['Mark Finley, Chad Kreuzer | 48:58']}
 					/>
 				</li>
-				<li key={'bible'}>
-					<SearchEntry
-						type={'Bible'}
-						title={'King James Version (Dramatized)'}
-					/>
+				<li key="bible">
+					<SearchEntry type="Bible" title="King James Version (Dramatized)" />
 				</li>
-				<li key={'bible book'}>
+				<li key="bible book">
 					<SearchEntry
-						type={'Bible Book'}
-						title={'Joshua'}
+						type="Bible Book"
+						title="Joshua"
 						metaLines={['King James Version (Dramatized)', '24 chapters']}
 					/>
 				</li>
-				<li key={'bible chapter'}>
+				<li key="bible chapter">
 					<SearchEntry
-						type={'Bible Chapter'}
-						title={'Joshua 7'}
+						type="Bible Chapter"
+						title="Joshua 7"
 						metaLines={['King James Version (Dramatized)']}
 					/>
 				</li>
-				<li key={'audiobook'}>
+				<li key="audiobook">
 					<SearchEntry
-						type={'Audiobook'}
+						type="Audiobook"
 						title={"Christ's Object Lessons"}
 						metaLines={['30 chapters']}
 					/>
 				</li>
-				<li key={'story album'}>
+				<li key="story album">
 					<SearchEntry
-						type={'Story Album'}
-						title={'Discovery Mountain, Season 10: Oshkosh or BUST!'}
+						type="Story Album"
+						title="Discovery Mountain, Season 10: Oshkosh or BUST!"
 						metaLines={['Jean Boonstra | Discovery Mountain']}
 					/>
 				</li>
-				<li key={'music album'}>
+				<li key="music album">
 					<SearchEntry
-						type={'Music Album'}
-						title={'His Song In My Heart'}
+						type="Music Album"
+						title="His Song In My Heart"
 						metaLines={['Young Disciple Ministries']}
 					/>
 				</li>
-				<li key={'song'}>
+				<li key="song">
 					<SearchEntry
-						type={'Scripture Song'}
-						title={'In That Day - Isaiah 26:1-4'}
+						type="Scripture Song"
+						title="In That Day - Isaiah 26:1-4"
 						metaLines={['His Song in My Heart', 'Young Disciple Ministries']}
 					/>
 				</li>
-				<li key={'conference'}>
+				<li key="conference">
 					<SearchEntry
-						type={'Conference'}
-						title={'Called to Serve'}
+						type="Conference"
+						title="Called to Serve"
 						metaLines={['March 4-16, 2019 | ASI Southwest']}
 					/>
 				</li>
-				<li key={'presenter'}>
+				<li key="presenter">
 					<SearchEntry
-						type={'Presenter'}
-						title={'Elvin Adams, MD, MPH, FACPM'}
+						type="Presenter"
+						title="Elvin Adams, MD, MPH, FACPM"
 						metaLines={['Specialist in Internal Medicine and Public Health']}
 					/>
 				</li>
-				<li key={'tag'}>
+				<li key="tag">
 					<SearchEntry
-						type={'Tag'}
-						title={'Bible Prophecy'}
+						type="Tag"
+						title="Bible Prophecy"
 						metaLines={['419 Recordings']}
 					/>
 				</li>
-				<li key={'sponsor'}>
+				<li key="sponsor">
 					<SearchEntry
-						type={'Sponsor'}
-						title={'A Loud and Clear Call Ministries'}
+						type="Sponsor"
+						title="A Loud and Clear Call Ministries"
 						metaLines={['Hilo, Hawaii, USA']}
 					/>
 				</li>
-				<li key={'series'}>
+				<li key="series">
 					<SearchEntry
-						type={'Series'}
-						title={'Soul Winning Hour'}
+						type="Series"
+						title="Soul Winning Hour"
 						metaLines={[
 							'Michigan Camp Meeting 2019: As a Witness, Matthew 24:14',
 						]}
 					/>
 				</li>
-				<li key={'playlist'}>
+				<li key="playlist">
 					<SearchEntry
-						type={'Playlist'}
-						title={'End Times'}
+						type="Playlist"
+						title="End Times"
 						metaLines={['15 items']}
 					/>
 				</li>

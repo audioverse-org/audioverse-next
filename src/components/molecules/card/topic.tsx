@@ -1,9 +1,12 @@
 import React from 'react';
 
-import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import { CardTopicFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../public/img/icon-layer-group-solid.svg';
+import HatIcon from '../../../../public/img/fa-layer-group.svg';
+import TeaseRecording from '../teaseRecording';
+
+import CardWithTheme from './base/withTheme';
+import CardHat from './hat';
 
 interface CardTopicProps {
 	topicRecording: CardTopicFragment;
@@ -12,19 +15,21 @@ interface CardTopicProps {
 export default function CardTopic({
 	topicRecording,
 }: CardTopicProps): JSX.Element {
+	const theme = 'topic';
+
+	// TODO: Replace hard-coded tag name (also hard-coded in home.graphql)
 	return (
-		<CardWithPlayable
-			recording={topicRecording}
-			theme={'topic'}
-			container={{
-				icon: <HatIcon width={12} height={12} />,
-				// TODO: Replace hard-coded tag name (also hard-coded in home.graphql)
-				title: 'Family',
-				content: <h1>TODO</h1>,
-				label: 'TODO',
-				url: topicRecording.sequence?.canonicalPath || '',
-			}}
-			{...topicRecording}
-		/>
+		<CardWithTheme {...{ theme }}>
+			<CardHat
+				title="Family"
+				label="TODO"
+				url={topicRecording.sequence?.canonicalPath || ''}
+				icon={<HatIcon />}
+				longHat
+			>
+				<h1>TODO</h1>
+			</CardHat>
+			<TeaseRecording {...{ recording: topicRecording, theme }} />
+		</CardWithTheme>
 	);
 }

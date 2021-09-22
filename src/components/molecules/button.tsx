@@ -22,6 +22,7 @@ type Props = {
 	target?: '_blank';
 	className?: string;
 	'aria-label'?: string;
+	disabled?: boolean;
 	centered?: boolean;
 };
 
@@ -33,6 +34,7 @@ export default function Button({
 	iconPosition,
 	className,
 	centered,
+	disabled,
 	...props
 }: Props): JSX.Element {
 	const inner = (
@@ -41,6 +43,7 @@ export default function Button({
 				styles.base,
 				styles[type],
 				centered && styles.centered,
+				disabled && styles.disabled,
 				className
 			)}
 			{...props}

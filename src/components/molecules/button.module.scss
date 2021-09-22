@@ -92,6 +92,18 @@
 	}
 }
 
+.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+	&.primary,
+	&.secondary {
+		color: $ts-dark;
+		background: $ts-cccccc;
+		border: none;
+		box-shadow: none;
+	}
+}
+
 .iconLeftOfText {
 	margin-right: 4px;
 }

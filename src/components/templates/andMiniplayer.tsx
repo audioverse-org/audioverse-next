@@ -320,7 +320,7 @@ export default function AndMiniplayer({
 							ref={onVideo}
 							className="video-js"
 							playsInline
-							data-testid={'video-element'}
+							data-testid="video-element"
 							onTimeUpdate={() => {
 								if (!player) return;
 								const t = player.currentTime();

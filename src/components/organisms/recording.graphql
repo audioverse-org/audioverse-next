@@ -39,6 +39,7 @@ fragment recording on Recording {
 	sequence {
 		id
 		title
+		contentType
 		canonicalPath(useFuturePath: true)
 		recordings(first: 1000) {
 			nodes {

@@ -28,7 +28,7 @@ export default function Give(): JSX.Element {
 				name="donorbox"
 				frameBorder="0"
 				scrolling="no"
-				allow={'payment'}
+				allow="payment"
 			/>
 
 			<p>

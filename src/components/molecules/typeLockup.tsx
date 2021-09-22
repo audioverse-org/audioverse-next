@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import Heading6 from '@components/atoms/heading6';
@@ -16,6 +17,7 @@ type Props = {
 		| BaseColors.MID_TONE
 		| BaseColors.LIGHT_TONE
 		| BaseColors.WHITE;
+	unpadded?: boolean;
 };
 
 export default function TypeLockup({
@@ -23,9 +25,10 @@ export default function TypeLockup({
 	label,
 	iconColor,
 	textColor,
+	unpadded,
 }: Props): JSX.Element {
 	return (
-		<div className={styles.container}>
+		<div className={clsx(styles.container, unpadded && styles.unpadded)}>
 			<Icon className={baseColorStyles[iconColor]} />
 			<Heading6
 				sans

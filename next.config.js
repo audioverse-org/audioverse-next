@@ -28,6 +28,16 @@ module.exports = withPWA({
 				permanent: false,
 			},
 			{
+				source: '/:lang/account',
+				destination: '/:lang/account/login',
+				permanent: true,
+			},
+			{
+				source: '/:lang/account/registrar',
+				destination: '/:lang/account/register',
+				permanent: true,
+			},
+			{
 				source: '/:lang/audiobooks/books/:path*',
 				destination: '/:lang/books/:path*',
 				permanent: true,

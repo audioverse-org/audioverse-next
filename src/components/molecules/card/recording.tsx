@@ -20,8 +20,8 @@ export default function CardRecording({
 	recording,
 	hideHat,
 }: CardSermonProps): JSX.Element {
-	const { contentType } = recording;
-	switch (contentType) {
+	const { recordingContentType } = recording;
+	switch (recordingContentType) {
 		case RecordingContentType.AudiobookTrack:
 			return <CardAudiobookTrack {...{ track: recording, hideHat }} />;
 		case RecordingContentType.MusicTrack:
@@ -32,6 +32,6 @@ export default function CardRecording({
 			return <CardStory {...{ story: recording, hideHat }} />;
 
 		default:
-			throw new UnreachableCaseError(contentType);
+			throw new UnreachableCaseError(recordingContentType);
 	}
 }

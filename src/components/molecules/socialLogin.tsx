@@ -68,9 +68,9 @@ export default function SocialLogin({
 		return (
 			<p>
 				<FormattedMessage
-					id={'socialLogin__successMessage'}
-					defaultMessage={'success'}
-					description={'social login success message'}
+					id="socialLogin__successMessage"
+					defaultMessage="success"
+					description="social login success message"
 				/>
 			</p>
 		);

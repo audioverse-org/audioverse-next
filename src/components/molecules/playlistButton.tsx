@@ -40,7 +40,7 @@ const Entry = ({
 		<li>
 			<label>
 				<input
-					type={'checkbox'}
+					type="checkbox"
 					checked={isChecked}
 					onChange={() => {
 						setPlaylistMembership(recordingId, playlist.id, !isChecked);
@@ -85,7 +85,7 @@ export default function PlaylistButton({
 
 	return (
 		<>
-			<button data-tip={true} data-for={'playlistButton'}>
+			<button data-tip={true} data-for="playlistButton">
 				<FormattedMessage
 					id="playlistButton__trigger"
 					defaultMessage="Add to Playlist"
@@ -93,10 +93,10 @@ export default function PlaylistButton({
 				/>
 			</button>
 			<ReactTooltip
-				id={'playlistButton'}
-				uuid={'tooltipUuid'}
-				event={'click'}
-				effect={'solid'}
+				id="playlistButton"
+				uuid="tooltipUuid"
+				event="click"
+				effect="solid"
 				clickable={true}
 			>
 				{lists ? (
@@ -113,7 +113,7 @@ export default function PlaylistButton({
 						/>
 						<label>
 							<input
-								type={'checkbox'}
+								type="checkbox"
 								checked={isPublic}
 								onChange={() => setIsPublic(!isPublic)}
 							/>{' '}

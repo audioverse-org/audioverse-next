@@ -1,8 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
-import { QueryClient } from 'react-query';
-import { hydrate } from 'react-query/hydration';
+import { hydrate, QueryClient } from 'react-query';
 
 import { storeRequest } from '@lib/api';
 import {

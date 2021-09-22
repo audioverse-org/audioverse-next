@@ -41,6 +41,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 		},
 		{
 			key: 'playlist',
+			href: `/${languageRoute}/library`,
 			Icon: IconPlaylist,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,

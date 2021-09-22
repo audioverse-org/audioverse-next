@@ -1,7 +1,6 @@
 import { act, render } from '@testing-library/react';
 import React from 'react';
-import { QueryClient, useQuery } from 'react-query';
-import { dehydrate } from 'react-query/hydration';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';

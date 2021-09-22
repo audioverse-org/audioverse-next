@@ -20,7 +20,7 @@ export const DarkBleed = (): JSX.Element => (
 			</>
 		}
 		media={
-			<Image src={'/img/unsplash-headphones.jpg'} width={4724} height={3072} />
+			<Image src="/img/unsplash-headphones.jpg" width={4724} height={3072} />
 		}
 		theme={BaseColors.DARK}
 	/>
