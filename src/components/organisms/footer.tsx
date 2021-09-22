@@ -21,9 +21,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemAboutUs`}
+								id="footer__NavItemAboutUs"
 								defaultMessage="About Us"
-								description={`Footer nav link name: About Us`}
+								description="Footer nav link name: About Us"
 							/>
 						</a>
 					</Link>
@@ -32,9 +32,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemMeetTheTeam`}
+								id="footer__NavItemMeetTheTeam"
 								defaultMessage="Meet the Team"
-								description={`Footer nav link name: Meet the Team`}
+								description="Footer nav link name: Meet the Team"
 							/>
 						</a>
 					</Link>
@@ -43,9 +43,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemSpiritOfAudioVerse`}
+								id="footer__NavItemSpiritOfAudioVerse"
 								defaultMessage="Spirit of AudioVerse"
-								description={`Footer nav link name: Spirit of AudioVerse`}
+								description="Footer nav link name: Spirit of AudioVerse"
 							/>
 						</a>
 					</Link>
@@ -54,9 +54,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemFAQ`}
+								id="footer__NavItemFAQ"
 								defaultMessage="FAQ"
-								description={`Footer nav link name: FAQ`}
+								description="Footer nav link name: FAQ"
 							/>
 						</a>
 					</Link>
@@ -65,9 +65,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemContactUs`}
+								id="footer__NavItemContactUs"
 								defaultMessage="Contact Us"
-								description={`Footer nav link name: Contact Us`}
+								description="Footer nav link name: Contact Us"
 							/>
 						</a>
 					</Link>
@@ -76,9 +76,9 @@ export default function Footer(): JSX.Element {
 					<Link href={`/${languageRoute}/teachings/all/page/1`}>
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemTeachings`}
+								id="footer__NavItemTeachings"
 								defaultMessage="Teachings"
-								description={`Footer nav link name: Teachings`}
+								description="Footer nav link name: Teachings"
 							/>
 						</a>
 					</Link>
@@ -87,9 +87,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemBibles`}
+								id="footer__NavItemBibles"
 								defaultMessage="Bibles"
-								description={`Footer nav link name: Bibles`}
+								description="Footer nav link name: Bibles"
 							/>
 						</a>
 					</Link>
@@ -98,9 +98,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemBooks`}
+								id="footer__NavItemBooks"
 								defaultMessage="Books"
-								description={`Footer nav link name: Books`}
+								description="Footer nav link name: Books"
 							/>
 						</a>
 					</Link>
@@ -109,9 +109,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemStories`}
+								id="footer__NavItemStories"
 								defaultMessage="Stories"
-								description={`Footer nav link name: Stories`}
+								description="Footer nav link name: Stories"
 							/>
 						</a>
 					</Link>
@@ -120,9 +120,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemScriptureSongs`}
+								id="footer__NavItemScriptureSongs"
 								defaultMessage="Scripture Songs"
-								description={`Footer nav link name: Scripture Songs`}
+								description="Footer nav link name: Scripture Songs"
 							/>
 						</a>
 					</Link>
@@ -131,9 +131,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemConferences`}
+								id="footer__NavItemConferences"
 								defaultMessage="Conferences"
-								description={`Footer nav link name: Conferences`}
+								description="Footer nav link name: Conferences"
 							/>
 						</a>
 					</Link>
@@ -142,9 +142,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemPresenters`}
+								id="footer__NavItemPresenters"
 								defaultMessage="Presenters"
-								description={`Footer nav link name: Presenters`}
+								description="Footer nav link name: Presenters"
 							/>
 						</a>
 					</Link>
@@ -153,9 +153,9 @@ export default function Footer(): JSX.Element {
 					<Link href={`/${languageRoute}/tags/page/1`}>
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemTags`}
+								id="footer__NavItemTags"
 								defaultMessage="Tags"
-								description={`Footer nav link name: Tags`}
+								description="Footer nav link name: Tags"
 							/>
 						</a>
 					</Link>
@@ -164,9 +164,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemSponsors`}
+								id="footer__NavItemSponsors"
 								defaultMessage="Sponsors"
-								description={`Footer nav link name: Sponsors`}
+								description="Footer nav link name: Sponsors"
 							/>
 						</a>
 					</Link>
@@ -175,9 +175,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemSeries`}
+								id="footer__NavItemSeries"
 								defaultMessage="Series"
-								description={`Footer nav link name: Series`}
+								description="Footer nav link name: Series"
 							/>
 						</a>
 					</Link>
@@ -186,9 +186,9 @@ export default function Footer(): JSX.Element {
 					<Link href={`/${languageRoute}/testimonies/page/1`}>
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemTestimonials`}
+								id="footer__NavItemTestimonials"
 								defaultMessage="Testimonials"
-								description={`Footer nav link name: Testimonials`}
+								description="Footer nav link name: Testimonials"
 							/>
 						</a>
 					</Link>
@@ -197,9 +197,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemPlaylists`}
+								id="footer__NavItemPlaylists"
 								defaultMessage="Playlists"
-								description={`Footer nav link name: Playlists`}
+								description="Footer nav link name: Playlists"
 							/>
 						</a>
 					</Link>
@@ -208,9 +208,9 @@ export default function Footer(): JSX.Element {
 					<Link href="#">
 						<a>
 							<FormattedMessage
-								id={`footer__NavItemBlog`}
+								id="footer__NavItemBlog"
 								defaultMessage="Blog"
-								description={`Footer nav link name: Blog`}
+								description="Footer nav link name: Blog"
 							/>
 						</a>
 					</Link>
@@ -222,9 +222,9 @@ export default function Footer(): JSX.Element {
 						rel="noreferrer noopener"
 					>
 						<FormattedMessage
-							id={`footer__NavItemAudioVerseStore`}
+							id="footer__NavItemAudioVerseStore"
 							defaultMessage="AudioVerse Store"
-							description={`Footer nav link name: AudioVerse Store`}
+							description="Footer nav link name: AudioVerse Store"
 						/>
 					</a>
 				</li>
@@ -235,9 +235,9 @@ export default function Footer(): JSX.Element {
 						rel="noreferrer noopener"
 					>
 						<FormattedMessage
-							id={`footer__NavItemJourneysUnscripted`}
+							id="footer__NavItemJourneysUnscripted"
 							defaultMessage="Journeys Unscripted"
-							description={`Footer nav link name: Journeys Unscripted`}
+							description="Footer nav link name: Journeys Unscripted"
 						/>
 					</a>
 				</li>
@@ -310,9 +310,9 @@ export default function Footer(): JSX.Element {
 
 			<p>
 				<FormattedMessage
-					id={`footer__copyright`}
+					id="footer__copyright"
 					defaultMessage="AudioVerse © {year} All Rights Reserved."
-					description={`Footer copyright`}
+					description="Footer copyright"
 					values={{ year: new Date().getFullYear() }}
 				/>
 				{/*<span>{`AudioVerse © ${new Date().getFullYear()} All Rights Reserved.`}</span>{' '}*/}
@@ -320,9 +320,9 @@ export default function Footer(): JSX.Element {
 				<Link href="#">
 					<a>
 						<FormattedMessage
-							id={`footer__legalInfoLink`}
+							id="footer__legalInfoLink"
 							defaultMessage="Legal Info"
-							description={`Footer legal info link text`}
+							description="Footer legal info link text"
 						/>
 					</a>
 				</Link>
@@ -330,9 +330,9 @@ export default function Footer(): JSX.Element {
 				<Link href="#">
 					<a>
 						<FormattedMessage
-							id={`footer__termsLink`}
+							id="footer__termsLink"
 							defaultMessage="Terms of Use"
-							description={`Footer terms of use link text`}
+							description="Footer terms of use link text"
 						/>
 					</a>
 				</Link>
@@ -340,17 +340,17 @@ export default function Footer(): JSX.Element {
 				<Link href="#">
 					<a>
 						<FormattedMessage
-							id={`footer__privacyPolicyLink`}
+							id="footer__privacyPolicyLink"
 							defaultMessage="Privacy Policy"
-							description={`Footer privacy policy link text`}
+							description="Footer privacy policy link text"
 						/>
 					</a>
 				</Link>
 				.{' '}
 				<FormattedMessage
-					id={`footer__designedBy`}
+					id="footer__designedBy"
 					defaultMessage="Designed by"
-					description={`Footer designed by prefix`}
+					description="Footer designed by prefix"
 				/>{' '}
 				<Link href="https://typesandsymbols.com/">
 					<a>Types & Symbols</a>

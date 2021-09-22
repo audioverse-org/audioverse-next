@@ -100,9 +100,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__soundDoctrineText"
-								defaultMessage={
-									'AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings.'
-								}
+								defaultMessage="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
 								description="home page sound doctrine text"
 							/>
 						</p>
@@ -142,9 +140,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__recentContentSectionText"
-								defaultMessage={
-									'Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more.'
-								}
+								defaultMessage="Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
 								description="home page recent content section text"
 								values={{
 									a: function a(chunks: string) {
@@ -209,9 +205,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__downloadAppSectionText"
-								defaultMessage={
-									'If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data.'
-								}
+								defaultMessage="If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data."
 								description="home page download app section text"
 							/>
 						</p>
@@ -244,9 +238,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__testimoniesSectionText"
-								defaultMessage={
-									'Hear from some of the people who use AudioVerse.'
-								}
+								defaultMessage="Hear from some of the people who use AudioVerse."
 								description="home page testimonies section text"
 							/>
 						</p>
@@ -269,9 +261,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__recentPostsSectionText"
-								defaultMessage={
-									'Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month.'
-								}
+								defaultMessage="Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month."
 								description="home page recent posts section text"
 							/>
 						</p>
@@ -310,9 +300,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__createAccountSectionText"
-								defaultMessage={
-									'Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest.'
-								}
+								defaultMessage="Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
 								description="home page create account section text"
 							/>
 						</p>
@@ -369,9 +357,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__supportSectionText"
-								defaultMessage={
-									'AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine.'
-								}
+								defaultMessage="AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
 								description="home page support section text"
 							/>
 						</p>
@@ -415,9 +401,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						<p>
 							<FormattedMessage
 								id="homePage__newsletterSectionText"
-								defaultMessage={
-									'Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates.'
-								}
+								defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
 								description="home page newsletter section text"
 							/>
 						</p>
@@ -511,11 +495,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								</Link>
 							</li>
 							<li>
-								<Link
-									href={
-										'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
-									}
-								>
+								<Link href="https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5">
 									<a target="_blank" rel="noreferrer noopener">
 										<FormattedMessage
 											id="homePage__footerNewsletterSignup"

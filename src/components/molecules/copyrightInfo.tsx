@@ -39,9 +39,7 @@ export default function CopyrightInfo({
 			<div>
 				<FormattedMessage
 					id="sermonDetailPage__disclaimer"
-					defaultMessage={
-						'The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse.'
-					}
+					defaultMessage="The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
 				/>
 			</div>
 		</div>

@@ -70,6 +70,7 @@ export default function LibraryNav({
 					</Heading6>
 				))}
 			</div>
+			{/* TODO: make button functional */}
 			<Button
 				type="secondary"
 				text={

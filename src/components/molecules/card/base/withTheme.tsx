@@ -13,22 +13,14 @@ export type CardTheme =
 	| 'story'
 	| 'topic';
 
-interface CardProps {
+interface Props {
 	theme: CardTheme;
-}
-
-export interface ICardHat {
-	icon?: any;
-	label: string | JSX.Element;
-	title: string | JSX.Element;
-	content: JSX.Element;
-	url: string;
 }
 
 export default function CardWithTheme({
 	theme,
 	children,
-}: PropsWithChildren<CardProps>): JSX.Element {
+}: PropsWithChildren<Props>): JSX.Element {
 	return (
 		<Card>
 			<div className={clsx(styles.base, styles[theme])}>{children}</div>

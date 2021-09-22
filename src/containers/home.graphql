@@ -9,10 +9,7 @@ query getHomeStaticProps($language: Language!) {
 		}
 	}
 	audiobible(id: "ENGKJVC") {
-		id
-		title
 		book(id: "ENGKJVC-Gen") {
-			title
 			chapter(id: "ENGKJVC-Gen-1") {
 				...cardBibleChapter
 			}
@@ -44,7 +41,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			...cardTopic
+			...cardRecording
 		}
 	}
 	sermons(

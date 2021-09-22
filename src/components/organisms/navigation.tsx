@@ -5,6 +5,7 @@ import ActiveLink from '@components/atoms/activeLink';
 import Heading1 from '@components/atoms/heading1';
 import Button from '@components/molecules/button';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
+import { makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBible from '../../../public/img/icon-bible.svg';
@@ -41,7 +42,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 		},
 		{
 			key: 'playlist',
-			href: `/${languageRoute}/library`,
+			href: makeLibraryRoute(languageRoute),
 			Icon: IconPlaylist,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
@@ -138,9 +139,9 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 				href={`/${languageRoute}/give`}
 				text={
 					<FormattedMessage
-						id={`header__donateButtonLabel`}
+						id="header__donateButtonLabel"
 						defaultMessage="Donate"
-						description={`Header nav donate button label`}
+						description="Header nav donate button label"
 					/>
 				}
 				className={styles.donateButton}

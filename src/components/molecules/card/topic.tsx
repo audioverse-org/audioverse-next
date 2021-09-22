@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardTopicFragment } from '@lib/generated/graphql';
+import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../public/img/fa-layer-group.svg';
 import TeaseRecording from '../teaseRecording';
@@ -9,7 +9,7 @@ import CardWithTheme from './base/withTheme';
 import CardHat from './hat';
 
 interface CardTopicProps {
-	topicRecording: CardTopicFragment;
+	topicRecording: CardRecordingFragment;
 }
 
 export default function CardTopic({

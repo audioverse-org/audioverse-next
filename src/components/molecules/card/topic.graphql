@@ -1,4 +1,0 @@
-fragment cardTopic on Recording {
-	...cardRecordingSequenceHat
-	...teaseRecording
-}

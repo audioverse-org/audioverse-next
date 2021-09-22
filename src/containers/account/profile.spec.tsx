@@ -176,7 +176,13 @@ describe('profile page', () => {
 	});
 
 	it('invalidates cache on successful login', async () => {
-		mockedFetchApi.mockResolvedValue({
+		jest.spyOn(api, 'login').mockResolvedValue(true);
+
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Login'));
+
+		mockedFetchApi.mockResolvedValueOnce({
 			me: {
 				user: {
 					givenName: 'first',
@@ -185,13 +191,7 @@ describe('profile page', () => {
 			},
 		});
 
-		jest.spyOn(api, 'login').mockResolvedValue(true);
-
-		const { getByText, getByDisplayValue } = await renderPage();
-
-		userEvent.click(getByText('Login'));
-
-		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
+		await waitFor(() => expect(getByText('first name')).toBeInTheDocument());
 	});
 
 	it('logs in with email and password', async () => {

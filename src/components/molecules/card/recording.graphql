@@ -1,5 +1,4 @@
 fragment cardRecording on Recording {
-	recordingContentType: contentType
 	...cardRecordingSequenceHat
 	...teaseRecording
 }

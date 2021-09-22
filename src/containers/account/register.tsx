@@ -47,12 +47,14 @@ function Register(): JSX.Element {
 			newErrors.push('email is required');
 		}
 		setErrors(newErrors);
-		mutate({
-			email,
-			password,
-			firstName,
-			lastName,
-		});
+		if (!newErrors.length) {
+			mutate({
+				email,
+				password,
+				firstName,
+				lastName,
+			});
+		}
 	};
 
 	if (isLoading || isLoadingLoggedIn) {

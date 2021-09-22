@@ -257,3 +257,6 @@ export const makeLoginRoute = (languageRoute: string): string =>
 
 export const makeRegisterRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/register`;
+
+export const makeLibraryRoute = (languageRoute: string): string =>
+	`/${languageRoute}/library`;

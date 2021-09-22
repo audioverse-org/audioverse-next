@@ -5563,10 +5563,10 @@ export type CardFavoriteFragment = {
 		| {
 				__typename: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -5664,10 +5664,10 @@ export type CardFavoriteFragment = {
 						Array<{
 							__typename?: 'Recording';
 							canonicalPath: string;
-							title: string;
-							duration: number;
 							sequenceIndex: Maybe<number>;
 							id: string | number;
+							title: string;
+							duration: number;
 							recordingContentType: RecordingContentType;
 							persons: Array<{
 								__typename?: 'Person';
@@ -5678,8 +5678,8 @@ export type CardFavoriteFragment = {
 							sequence: Maybe<{
 								__typename?: 'Sequence';
 								id: string | number;
-								title: string;
 								canonicalPath: string;
+								title: string;
 								contentType: SequenceContentType;
 								recordings: {
 									__typename?: 'RecordingConnection';
@@ -5772,10 +5772,10 @@ export type CardPostFragment = {
 export type CardRecordingFragment = {
 	__typename?: 'Recording';
 	canonicalPath: string;
-	title: string;
-	duration: number;
 	sequenceIndex: Maybe<number>;
 	id: string | number;
+	title: string;
+	duration: number;
 	recordingContentType: RecordingContentType;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
@@ -5872,10 +5872,10 @@ export type CardRecordingStackFragment = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				persons: Array<{
 					__typename?: 'Person';
@@ -5886,8 +5886,8 @@ export type CardRecordingStackFragment = {
 				sequence: Maybe<{
 					__typename?: 'Sequence';
 					id: string | number;
-					title: string;
 					canonicalPath: string;
+					title: string;
 					contentType: SequenceContentType;
 					recordings: {
 						__typename?: 'RecordingConnection';
@@ -5990,69 +5990,6 @@ export type CardSponsorFragment = {
 		__typename?: 'RecordingConnection';
 		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 	};
-};
-
-export type CardTopicFragment = {
-	__typename?: 'Recording';
-	canonicalPath: string;
-	title: string;
-	duration: number;
-	sequenceIndex: Maybe<number>;
-	id: string | number;
-	recordingContentType: RecordingContentType;
-	sequence: Maybe<{
-		__typename?: 'Sequence';
-		id: string | number;
-		canonicalPath: string;
-		title: string;
-		contentType: SequenceContentType;
-		image: Maybe<{ __typename?: 'Image'; url: string }>;
-		favoritedRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-		};
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-		};
-	}>;
-	sponsor: Maybe<{
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
-	writers: Array<{
-		__typename?: 'Person';
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
-	persons: Array<{
-		__typename?: 'Person';
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	}>;
-	audioFiles: Array<{
-		__typename?: 'AudioFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoFiles: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
-	videoStreams: Array<{
-		__typename?: 'VideoFile';
-		url: string;
-		filesize: string;
-		mimeType: string;
-	}>;
 };
 
 export type CopyrightInfoFragment = {
@@ -6219,10 +6156,10 @@ export type SponsorLockupFragment = {
 export type TeaseRecordingFragment = {
 	__typename?: 'Recording';
 	canonicalPath: string;
-	title: string;
-	duration: number;
 	sequenceIndex: Maybe<number>;
 	id: string | number;
+	title: string;
+	duration: number;
 	recordingContentType: RecordingContentType;
 	persons: Array<{
 		__typename?: 'Person';
@@ -6232,7 +6169,6 @@ export type TeaseRecordingFragment = {
 	}>;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
-		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
 		recordings: {
@@ -6270,10 +6206,10 @@ export type GetNotFoundPageDataQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -6395,10 +6331,10 @@ export type RecordingFragment = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					persons: Array<{
 						__typename?: 'Person';
@@ -6408,7 +6344,6 @@ export type RecordingFragment = {
 					}>;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
-						id: string | number;
 						title: string;
 						contentType: SequenceContentType;
 						recordings: {
@@ -6512,9 +6447,9 @@ export type SequenceFragment = {
 				canonicalUrl: string;
 				recordingDate: Maybe<string>;
 				canonicalPath: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
@@ -6825,9 +6760,9 @@ export type GetAudiobookDetailPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -7038,10 +6973,10 @@ export type GetAudiobookTrackDetailDataQuery = {
 					Array<{
 						__typename?: 'Recording';
 						canonicalPath: string;
-						title: string;
-						duration: number;
 						sequenceIndex: Maybe<number>;
 						id: string | number;
+						title: string;
+						duration: number;
 						recordingContentType: RecordingContentType;
 						persons: Array<{
 							__typename?: 'Person';
@@ -7051,7 +6986,6 @@ export type GetAudiobookTrackDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -7581,10 +7515,10 @@ export type GetDiscoverPageDataQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -7932,10 +7866,10 @@ export type GetHomeStaticPropsQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -7995,11 +7929,8 @@ export type GetHomeStaticPropsQuery = {
 	};
 	audiobible: Maybe<{
 		__typename?: 'Bible';
-		id: string | number;
-		title: string;
 		book: {
 			__typename?: 'BibleBook';
-			title: string;
 			chapter: {
 				__typename?: 'BibleChapter';
 				id: string | number;
@@ -8014,10 +7945,10 @@ export type GetHomeStaticPropsQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -8081,10 +8012,10 @@ export type GetHomeStaticPropsQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -8148,10 +8079,10 @@ export type GetHomeStaticPropsQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -8215,10 +8146,10 @@ export type GetHomeStaticPropsQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -8367,10 +8298,10 @@ export type GetLibraryDataQuery = {
 							| {
 									__typename: 'Recording';
 									canonicalPath: string;
-									title: string;
-									duration: number;
 									sequenceIndex: Maybe<number>;
 									id: string | number;
+									title: string;
+									duration: number;
 									recordingContentType: RecordingContentType;
 									sequence: Maybe<{
 										__typename?: 'Sequence';
@@ -8483,10 +8414,10 @@ export type GetLibraryDataQuery = {
 											Array<{
 												__typename?: 'Recording';
 												canonicalPath: string;
-												title: string;
-												duration: number;
 												sequenceIndex: Maybe<number>;
 												id: string | number;
+												title: string;
+												duration: number;
 												recordingContentType: RecordingContentType;
 												persons: Array<{
 													__typename?: 'Person';
@@ -8500,8 +8431,8 @@ export type GetLibraryDataQuery = {
 												sequence: Maybe<{
 													__typename?: 'Sequence';
 													id: string | number;
-													title: string;
 													canonicalPath: string;
+													title: string;
 													contentType: SequenceContentType;
 													recordings: {
 														__typename?: 'RecordingConnection';
@@ -8744,10 +8675,10 @@ export type GetPresenterDetailPageDataQuery = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
@@ -8812,10 +8743,10 @@ export type GetPresenterDetailPageDataQuery = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
@@ -8880,10 +8811,10 @@ export type GetPresenterDetailPageDataQuery = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
@@ -9145,9 +9076,9 @@ export type GetPresenterRecordingsPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -9294,10 +9225,10 @@ export type GetPresenterTopPageDataQuery = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
@@ -9397,9 +9328,9 @@ export type GetSeriesDetailPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -9610,10 +9541,10 @@ export type GetSermonDetailDataQuery = {
 					Array<{
 						__typename?: 'Recording';
 						canonicalPath: string;
-						title: string;
-						duration: number;
 						sequenceIndex: Maybe<number>;
 						id: string | number;
+						title: string;
+						duration: number;
 						recordingContentType: RecordingContentType;
 						persons: Array<{
 							__typename?: 'Person';
@@ -9623,7 +9554,6 @@ export type GetSermonDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -9811,9 +9741,9 @@ export type GetSongAlbumsDetailPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -9957,10 +9887,10 @@ export type GetSongBooksDetailPageDataQuery = {
 			Array<{
 				__typename?: 'Recording';
 				canonicalPath: string;
-				title: string;
-				duration: number;
 				sequenceIndex: Maybe<number>;
 				id: string | number;
+				title: string;
+				duration: number;
 				recordingContentType: RecordingContentType;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
@@ -10088,10 +10018,10 @@ export type GetSongDetailDataQuery = {
 					Array<{
 						__typename?: 'Recording';
 						canonicalPath: string;
-						title: string;
-						duration: number;
 						sequenceIndex: Maybe<number>;
 						id: string | number;
+						title: string;
+						duration: number;
 						recordingContentType: RecordingContentType;
 						persons: Array<{
 							__typename?: 'Person';
@@ -10101,7 +10031,6 @@ export type GetSongDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -10411,10 +10340,10 @@ export type GetSponsorDetailPageDataQuery = {
 				Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					title: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					title: string;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
@@ -10639,9 +10568,9 @@ export type GetSponsorTeachingsPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -10759,9 +10688,9 @@ export type GetStoryAlbumDetailPageDataQuery = {
 					canonicalUrl: string;
 					recordingDate: Maybe<string>;
 					canonicalPath: string;
-					duration: number;
 					sequenceIndex: Maybe<number>;
 					id: string | number;
+					duration: number;
 					recordingContentType: RecordingContentType;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
@@ -10972,10 +10901,10 @@ export type GetStoryDetailDataQuery = {
 					Array<{
 						__typename?: 'Recording';
 						canonicalPath: string;
-						title: string;
-						duration: number;
 						sequenceIndex: Maybe<number>;
 						id: string | number;
+						title: string;
+						duration: number;
 						recordingContentType: RecordingContentType;
 						persons: Array<{
 							__typename?: 'Person';
@@ -10985,7 +10914,6 @@ export type GetStoryDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
-							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -11459,15 +11387,11 @@ export const TeaseRecordingFragmentDoc = `
   ...andMiniplayer
   recordingContentType: contentType
   canonicalPath(useFuturePath: true)
-  title
-  duration
   persons(role: SPEAKER) {
     ...personLockup
   }
   sequenceIndex
   sequence {
-    id
-    title
     recordings {
       aggregate {
         count
@@ -11479,7 +11403,6 @@ export const TeaseRecordingFragmentDoc = `
 ${PersonLockupFragmentDoc}`;
 export const CardRecordingFragmentDoc = `
     fragment cardRecording on Recording {
-  recordingContentType: contentType
   ...cardRecordingSequenceHat
   ...teaseRecording
 }
@@ -11629,13 +11552,6 @@ export const CardPostFragmentDoc = `
   readingDuration
 }
     `;
-export const CardTopicFragmentDoc = `
-    fragment cardTopic on Recording {
-  ...cardRecordingSequenceHat
-  ...teaseRecording
-}
-    ${CardRecordingSequenceHatFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
 export const CopyrightInfoFragmentDoc = `
     fragment copyrightInfo on Recording {
   copyrightYear
@@ -12998,10 +12914,7 @@ export const GetHomeStaticPropsDocument = `
     }
   }
   audiobible(id: "ENGKJVC") {
-    id
-    title
     book(id: "ENGKJVC-Gen") {
-      title
       chapter(id: "ENGKJVC-Gen-1") {
         ...cardBibleChapter
       }
@@ -13032,7 +12945,7 @@ export const GetHomeStaticPropsDocument = `
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {
-      ...cardTopic
+      ...cardRecording
     }
   }
   sermons(
@@ -13061,7 +12974,6 @@ export const GetHomeStaticPropsDocument = `
 }
     ${CardRecordingFragmentDoc}
 ${CardBibleChapterFragmentDoc}
-${CardTopicFragmentDoc}
 ${TestimoniesFragmentDoc}
 ${CardPostFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
