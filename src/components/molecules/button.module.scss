@@ -42,7 +42,7 @@
 }
 .primary {
 	background: $ts-dark;
-	border: 1px solid $ts-dark;
+	border: 1px solid rgba($ts-dark, 0.5);
 	&,
 	&:hover {
 		color: $ts-white;
@@ -61,21 +61,24 @@
 	}
 }
 
-.secondary,
-.secondaryInverse {
-	border-width: 0.5px;
-	border-style: solid;
-}
 .secondary {
+	border: 1px solid rgba($ts-dark, 0.5);
 	&,
 	&:hover {
 		color: $ts-dark;
 	}
+	&:hover {
+		border-color: $ts-dark;
+	}
 }
 .secondaryInverse {
+	border: 1px solid rgba($ts-white, 0.5);
 	&,
 	&:hover {
 		color: $ts-white;
+	}
+	&:hover {
+		border-color: $ts-white;
 	}
 }
 
@@ -89,6 +92,18 @@
 	&:hover {
 		box-shadow: $ts-shadow-small-hover;
 		text-decoration: none;
+	}
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+	&.primary,
+	&.secondary {
+		color: $ts-dark;
+		background: $ts-cccccc;
+		border: none;
+		box-shadow: none;
 	}
 }
 

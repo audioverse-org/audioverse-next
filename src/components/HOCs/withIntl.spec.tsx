@@ -4,7 +4,6 @@ import * as intl from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
-import CardWithPlayable from '@components/molecules/card/base/withPlayable';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -17,7 +16,6 @@ import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
-import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
 import AudiobooksList from '@containers/audiobook/list';
 import Book from '@containers/bible/book';
@@ -140,7 +138,7 @@ describe('localization usage', () => {
 
 	it('localizes playlistButton logged out', async () => {
 		const screen = await renderWithQueryProvider(
-			<PlaylistButton recordingId={'recording_id'} />
+			<PlaylistButton recordingId="recording_id" />
 		);
 
 		expectNoUnlocalizedText(screen);
@@ -150,7 +148,7 @@ describe('localization usage', () => {
 		mockedFetchApi.mockResolvedValue(makePlaylistButtonData([]));
 
 		const screen = await renderWithQueryProvider(
-			<PlaylistButton recordingId={'recording_id'} />
+			<PlaylistButton recordingId="recording_id" />
 		);
 
 		await waitFor(() => expect(mockedFetchApi).toHaveBeenCalled());
@@ -207,6 +205,7 @@ describe('localization usage', () => {
 						],
 						sequenceIndex: 1,
 						sequence: {
+							contentType: SequenceContentType.Series,
 							canonicalPath: 'z',
 							recordings: {
 								nodes: [
@@ -235,7 +234,7 @@ describe('localization usage', () => {
 
 		const screen = await renderWithQueryProvider(
 			<RecordingButtonFavorite
-				id={'recording_id'}
+				id="recording_id"
 				backgroundColor={BaseColors.WHITE}
 			/>
 		);
@@ -328,7 +327,7 @@ describe('localization usage', () => {
 						title: 'z',
 						canonicalPath: 'z',
 						contentType: SequenceContentType.Audiobook,
-						writers: { nodes: [] },
+						sequenceWriters: { nodes: [] },
 						recordings: {},
 					} as any,
 				]}
@@ -458,7 +457,7 @@ describe('localization usage', () => {
 						{
 							id: 'id',
 							canonicalPath: 'the_recording_path',
-							contentType: RecordingContentType.Sermon,
+							recordingContentType: RecordingContentType.Sermon,
 							persons: [],
 						},
 					] as any
@@ -507,7 +506,7 @@ describe('localization usage', () => {
 					{
 						id: 'z',
 						canonicalPath: 'z',
-						contentType: RecordingContentType.Sermon,
+						recordingContentType: RecordingContentType.Sermon,
 						persons: [],
 					},
 				],
@@ -582,19 +581,11 @@ describe('localization usage', () => {
 		],
 		[Playlists, {}],
 		[Logout, {}],
-		[Register, {}],
+		// TODO [Register, {}],
 		// TODO: [Login, {}],
 		[Reset, {}],
 		// TODO: [Profile, {}],
 		[Home, {}],
-		[
-			CardWithPlayable,
-			{
-				recording: { id: 'z', canonicalPath: '', persons: [] },
-				title: 'z',
-				container: { length: 2, index: 1 },
-			},
-		],
 		[Player, {}],
 		[SearchBar, {}],
 		[

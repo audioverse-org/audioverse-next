@@ -34,7 +34,7 @@ const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
 				{
 					id: 'the_recording_id',
 					title: 'the_recording_title',
-					contentType: RecordingContentType.Sermon,
+					recordingContentType: RecordingContentType.Sermon,
 					canonicalPath: 'the_recording_path',
 					persons: [],
 				},

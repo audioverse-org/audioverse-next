@@ -3,7 +3,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
-import { ButtonPlayFragment } from '@lib/generated/graphql';
+import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icon-pause-large.svg';
@@ -29,7 +29,7 @@ export default function ButtonPlay({
 	active,
 	className,
 }: {
-	recording: ButtonPlayFragment;
+	recording: AndMiniplayerFragment;
 	backgroundColor: BaseColors;
 	large?: boolean;
 	active?: boolean;

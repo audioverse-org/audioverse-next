@@ -5,14 +5,11 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: ASC }
 	) {
 		nodes {
-			...cardSong
+			...cardRecording
 		}
 	}
 	audiobible(id: "ENGKJVC") {
-		id
-		title
 		book(id: "ENGKJVC-Gen") {
-			title
 			chapter(id: "ENGKJVC-Gen-1") {
 				...cardBibleChapter
 			}
@@ -24,7 +21,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			...cardAudiobookTrack
+			...cardRecording
 		}
 	}
 	stories(
@@ -33,7 +30,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: ASC }
 	) {
 		nodes {
-			...cardStory
+			...cardRecording
 		}
 	}
 	# TODO: Replace with new topics entity when it's added
@@ -44,7 +41,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			...cardTopic
+			...cardRecording
 		}
 	}
 	sermons(
@@ -53,7 +50,7 @@ query getHomeStaticProps($language: Language!) {
 		orderBy: { field: PUBLISHED_AT, direction: DESC }
 	) {
 		nodes {
-			...cardSermon
+			...cardRecording
 		}
 	}
 	testimonies(language: $language, first: 3) {

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { GetStaticPropsContext } from 'next';
 
 import Login from '@containers/account/login';
+import { IBaseProps } from '@containers/base';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { getValidLanguage } from '@lib/getValidLanguage';
 import { makeLoginRoute } from '@lib/routes';
@@ -11,7 +12,7 @@ export default Login;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	StaticProps<{ disableSidebar: true }>
+	StaticProps<IBaseProps>
 > {
 	getValidLanguage(params?.language);
 

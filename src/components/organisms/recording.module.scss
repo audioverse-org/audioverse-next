@@ -49,18 +49,6 @@
 	padding: 16px 24px;
 	display: block;
 	text-decoration: none;
-	.hatType {
-		font-size: 10px;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		font-weight: 700;
-		display: flex;
-		align-items: center;
-		svg {
-			margin-right: 4px;
-			color: var(--recordingAccent);
-		}
-	}
 	h4 {
 		margin: 0;
 		font-size: 16px;
@@ -99,6 +87,7 @@
 }
 
 .series {
+	position: relative;
 	background-color: var(--recordingBackground);
 	.item {
 		margin-bottom: 32px;
@@ -108,6 +97,17 @@
 		min-width: 300px;
 		max-width: 468px;
 		border-left: 1px solid var(--recordingHatBackground);
+	}
+}
+.seriesScroller {
+	@media (min-width: $breakpoint-xl) {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		overflow: auto;
+		padding: 24px;
 	}
 }
 .seriesItems {

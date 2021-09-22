@@ -14,7 +14,7 @@ import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import * as api from '@lib/api';
 import { BaseColors } from '@lib/constants';
-import { PlayerFragment } from '@lib/generated/graphql';
+import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import {
 	buildRenderer,
 	loadRouter,
@@ -30,6 +30,7 @@ const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	sequence: {
+		contentType: SequenceContentType.Series,
 		title: 'the_sequence_title',
 	},
 	audioFiles: [

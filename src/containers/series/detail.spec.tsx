@@ -40,7 +40,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 					id: 'the_recording_id',
 					title: 'the_recording_title',
 					canonicalPath: 'the_recording_path',
-					contentType: RecordingContentType.Sermon,
+					recordingContentType: RecordingContentType.Sermon,
 					persons: [],
 				},
 			],

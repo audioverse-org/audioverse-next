@@ -1,0 +1,25 @@
+query getLibraryData(
+	$language: Language!
+	$first: Int!
+	$offset: Int!
+	$groupSequences: Boolean!
+) {
+	me {
+		user {
+			favorites(
+				language: $language
+				first: $first
+				offset: $offset
+				groupSequences: $groupSequences
+				orderBy: [{ field: FAVORITED_AT, direction: DESC }]
+			) {
+				aggregate {
+					count
+				}
+				nodes {
+					...cardFavorite
+				}
+			}
+		}
+	}
+}

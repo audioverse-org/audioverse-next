@@ -12,6 +12,7 @@ import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
 	RecordingContentType,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import {
 	buildStaticRenderer,
@@ -370,6 +371,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				contentType: SequenceContentType.Series,
 			},
 		});
 
@@ -392,6 +394,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				canonicalPath: 'series_path',
+				contentType: SequenceContentType.Series,
 			},
 		});
 
@@ -409,6 +412,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				canonicalPath: 'es/series_path',
+				contentType: SequenceContentType.Series,
 			},
 		});
 
@@ -513,6 +517,7 @@ describe('sermon detail page', () => {
 	it('displays recordings in series', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -675,6 +680,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				contentType: SequenceContentType.Series,
 			},
 			sequenceIndex: 1,
 		});
@@ -689,6 +695,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				contentType: SequenceContentType.Series,
 			},
 			sequenceIndex: 2,
 			sequencePreviousRecording: {
@@ -707,6 +714,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				contentType: SequenceContentType.Series,
 			},
 			sequenceIndex: 2,
 			sequenceNextRecording: {
@@ -932,6 +940,7 @@ describe('sermon detail page', () => {
 	it('displays play buttons for sequence recordings', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -955,6 +964,7 @@ describe('sermon detail page', () => {
 	it('loads series video into miniplayer on first click', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -985,6 +995,7 @@ describe('sermon detail page', () => {
 	it('loads series video into miniplayer after loading detail video into portal', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -1022,6 +1033,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -1117,6 +1129,7 @@ describe('sermon detail page', () => {
 	it('displays durations in sidebar', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -1143,6 +1156,7 @@ describe('sermon detail page', () => {
 	it('displays favorite button for sequence recordings', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -1166,6 +1180,7 @@ describe('sermon detail page', () => {
 	it('displays part info', async () => {
 		loadSermonDetailData({
 			sequence: {
+				contentType: SequenceContentType.Series,
 				recordings: {
 					nodes: [
 						{
@@ -1201,6 +1216,7 @@ describe('sermon detail page', () => {
 			sequence: {
 				id: 'series_id',
 				title: 'series_title',
+				contentType: SequenceContentType.Series,
 			},
 		});
 
@@ -1217,6 +1233,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				canonicalPath: '/series_path',
+				contentType: SequenceContentType.Series,
 			},
 		});
 

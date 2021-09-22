@@ -1,16 +1,14 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import CardWithPlayable from '@components/molecules/card/base/withPlayable';
-import { CardSermonFragment } from '@lib/generated/graphql';
+import { CardRecordingFragment } from '@lib/generated/graphql';
 
-import ListIcon from '../../../../public/img/icon-list-alt-solid.svg';
+import TeaseRecording from '../teaseRecording';
 
-import CardRecordingSequenceHat from './recordingSequenceHat';
+import CardWithTheme from './base/withTheme';
+import CardHatSermon from './hat/sermon';
 
-interface CardSermonProps {
-	recording: CardSermonFragment;
+export interface CardSermonProps {
+	recording: CardRecordingFragment;
 	hideHat?: boolean;
 }
 
@@ -18,31 +16,13 @@ export default function CardSermon({
 	recording,
 	hideHat,
 }: CardSermonProps): JSX.Element {
-	const intl = useIntl();
-	const sequence = recording.sequence;
-	const container = sequence
-		? {
-				icon: <ListIcon width={12} height={12} />,
-				title: sequence.title,
-				content: (
-					<CardRecordingSequenceHat sequence={sequence}>
-						<Heading2>{sequence.title}</Heading2>
-					</CardRecordingSequenceHat>
-				),
-				label: intl.formatMessage({
-					id: 'cardSermon_sequenceLabel',
-					defaultMessage: 'series',
-				}),
-				url: sequence.canonicalPath,
-		  }
-		: undefined;
+	const { sequence } = recording;
+	const theme = 'sermon';
 
 	return (
-		<CardWithPlayable
-			recording={recording}
-			container={container}
-			theme={'sermon'}
-			hideHat={hideHat}
-		/>
+		<CardWithTheme {...{ theme }}>
+			{sequence && !hideHat && <CardHatSermon sequence={sequence} />}
+			<TeaseRecording {...{ recording, theme }} />
+		</CardWithTheme>
 	);
 }

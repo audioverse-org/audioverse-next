@@ -58,9 +58,9 @@ export default function ButtonDownload({
 			>
 				<MenuItem disabled>
 					<FormattedMessage
-						id={'molecule-buttonDownload__menuAudioHeading'}
-						defaultMessage={'Audio Downloads'}
-						description={'download button menu audio heading'}
+						id="molecule-buttonDownload__menuAudioHeading"
+						defaultMessage="Audio Downloads"
+						description="download button menu audio heading"
 					/>
 				</MenuItem>
 				{audioDownloads.map((file) => (
@@ -73,9 +73,9 @@ export default function ButtonDownload({
 				{videoDownloads.length > 0 && (
 					<MenuItem disabled>
 						<FormattedMessage
-							id={'molecule-buttonDownload__menuVideoHeading'}
-							defaultMessage={'Video Downloads'}
-							description={'download button menu video heading'}
+							id="molecule-buttonDownload__menuVideoHeading"
+							defaultMessage="Video Downloads"
+							description="download button menu video heading"
 						/>
 					</MenuItem>
 				)}

@@ -112,11 +112,11 @@ function Playlists(): JSX.Element {
 					checked={isPublic}
 					setChecked={setIsPublic}
 				/>
-				<button type={'submit'}>
+				<button type="submit">
 					<FormattedMessage
-						id={'accountPlaylists__buttonLabelSubmit'}
-						defaultMessage={'Add Playlist'}
-						description={'account playlists page submit button label'}
+						id="accountPlaylists__buttonLabelSubmit"
+						defaultMessage="Add Playlist"
+						description="account playlists page submit button label"
 					/>
 				</button>
 			</form>

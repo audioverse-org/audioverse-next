@@ -7,12 +7,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
-import CardAudiobookTrack from '@components/molecules/card/audiobookTrack';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
-import CardSermon from '@components/molecules/card/sermon';
-import CardSong from '@components/molecules/card/song';
-import CardStory from '@components/molecules/card/story';
+import CardRecording from '@components/molecules/card/recording';
 import CardTopic from '@components/molecules/card/topic';
 import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
@@ -52,9 +49,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						href={`/${route}/give`}
 						text={
 							<FormattedMessage
-								id={'homePage__donateButtonLabel'}
-								defaultMessage={'Donate'}
-								description={'home page donate button label'}
+								id="homePage__donateButtonLabel"
+								defaultMessage="Donate"
+								description="home page donate button label"
 							/>
 						}
 					/>
@@ -63,9 +60,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						href={`/${route}/app`}
 						text={
 							<FormattedMessage
-								id={'homePage__downloadAppButtonLabel'}
-								defaultMessage={'Download App'}
-								description={'home page download app button label'}
+								id="homePage__downloadAppButtonLabel"
+								defaultMessage="Download App"
+								description="home page download app button label"
 							/>
 						}
 					/>
@@ -73,18 +70,18 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<Link href={makeLoginRoute(route)}>
 						<a>
 							<FormattedMessage
-								id={'homePage__loginButtonLabel'}
-								defaultMessage={'Login'}
-								description={'home page login button label'}
+								id="homePage__loginButtonLabel"
+								defaultMessage="Login"
+								description="home page login button label"
 							/>
 						</a>
 					</Link>
 					<Link href={makeRegisterRoute(route)}>
 						<a>
 							<FormattedMessage
-								id={'srcContainersHomeTsx__signUp'}
-								defaultMessage={'Sign Up'}
-								description={'home: Sign up button label'}
+								id="srcContainersHomeTsx__signUp"
+								defaultMessage="Sign Up"
+								description="home: Sign up button label"
 							/>
 						</a>
 					</Link>
@@ -95,18 +92,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__soundDoctrineTitle'}
-								defaultMessage={'Sound Doctrine'}
-								description={'home: Sound Doctrine section title'}
+								id="homePage__soundDoctrineTitle"
+								defaultMessage="Sound Doctrine"
+								description="home: Sound Doctrine section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__soundDoctrineText'}
-								defaultMessage={
-									'AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings.'
-								}
-								description={'home page sound doctrine text'}
+								id="homePage__soundDoctrineText"
+								defaultMessage="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
+								description="home page sound doctrine text"
 							/>
 						</p>
 						<Button
@@ -114,9 +109,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href={makeRegisterRoute(route)}
 							text={
 								<FormattedMessage
-									id={'homePage__joinAudioVerseButtonLabel'}
-									defaultMessage={'Join AudioVerse'}
-									description={'home page join audioverse button label'}
+									id="homePage__joinAudioVerseButtonLabel"
+									defaultMessage="Join AudioVerse"
+									description="home page join audioverse button label"
 								/>
 							}
 						/>
@@ -124,7 +119,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					<Image
-						src={'/img/unsplash-headphones.jpg'}
+						src="/img/unsplash-headphones.jpg"
 						width={4724}
 						height={3072}
 					/>
@@ -137,18 +132,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__recentContentSectionTitle'}
-								defaultMessage={'Recent content'}
-								description={'home page recent content section title'}
+								id="homePage__recentContentSectionTitle"
+								defaultMessage="Recent content"
+								description="home page recent content section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__recentContentSectionText'}
-								defaultMessage={
-									'Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more.'
-								}
-								description={'home page recent content section text'}
+								id="homePage__recentContentSectionText"
+								defaultMessage="Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
+								description="home page recent content section text"
 								values={{
 									a: function a(chunks: string) {
 										return (
@@ -166,7 +159,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<Slider perSlide={4} clip={false}>
 						{song && (
 							<div className={styles.slideCard}>
-								<CardSong song={song} />
+								<CardRecording recording={song} />
 							</div>
 						)}
 						{chapter && (
@@ -176,7 +169,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						)}
 						{story && (
 							<div className={styles.slideCard}>
-								<CardStory story={story} />
+								<CardRecording recording={story} />
 							</div>
 						)}
 						{topicRecording && (
@@ -186,12 +179,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						)}
 						{recording && (
 							<div className={styles.slideCard}>
-								<CardSermon recording={recording} />
+								<CardRecording recording={recording} />
 							</div>
 						)}
 						{audiobookTrack && (
 							<div className={styles.slideCard}>
-								<CardAudiobookTrack track={audiobookTrack} />
+								<CardRecording recording={audiobookTrack} />
 							</div>
 						)}
 					</Slider>
@@ -204,18 +197,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__downloadAppSectionTitle'}
-								defaultMessage={'Download the App'}
-								description={'home page download app section title'}
+								id="homePage__downloadAppSectionTitle"
+								defaultMessage="Download the App"
+								description="home page download app section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__downloadAppSectionText'}
-								defaultMessage={
-									'If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data.'
-								}
-								description={'home page download app section text'}
+								id="homePage__downloadAppSectionText"
+								defaultMessage="If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data."
+								description="home page download app section text"
 							/>
 						</p>
 						<Button
@@ -223,15 +214,15 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href={`/${route}/app`}
 							text={
 								<FormattedMessage
-									id={'homePage__downloadNowButtonLabel'}
-									defaultMessage={'Download Now'}
-									description={'home page download now button label'}
+									id="homePage__downloadNowButtonLabel"
+									defaultMessage="Download Now"
+									description="home page download now button label"
 								/>
 							}
 						/>
 					</>
 				}
-				media={<Image src={'/img/players.jpeg'} width={3564} height={1724} />}
+				media={<Image src="/img/players.jpeg" width={3564} height={1724} />}
 				theme={BaseColors.DARK}
 			/>
 			<Section
@@ -246,11 +237,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__testimoniesSectionText'}
-								defaultMessage={
-									'Hear from some of the people who use AudioVerse.'
-								}
-								description={'home page testimonies section text'}
+								id="homePage__testimoniesSectionText"
+								defaultMessage="Hear from some of the people who use AudioVerse."
+								description="home page testimonies section text"
 							/>
 						</p>
 					</>
@@ -264,18 +253,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__recentPostsSectionTitle'}
-								defaultMessage={'Recent blog posts'}
-								description={'home page recent posts section title'}
+								id="homePage__recentPostsSectionTitle"
+								defaultMessage="Recent blog posts"
+								description="home page recent posts section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__recentPostsSectionText'}
-								defaultMessage={
-									'Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month.'
-								}
-								description={'home page recent posts section text'}
+								id="homePage__recentPostsSectionText"
+								defaultMessage="Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month."
+								description="home page recent posts section text"
 							/>
 						</p>
 						<Button
@@ -283,9 +270,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href={`/${route}/blog`}
 							text={
 								<FormattedMessage
-									id={'homePage__recentPostsButtonLabel'}
-									defaultMessage={'View all blog posts'}
-									description={'home page recent posts button label'}
+									id="homePage__recentPostsButtonLabel"
+									defaultMessage="View all blog posts"
+									description="home page recent posts button label"
 								/>
 							}
 						/>
@@ -305,18 +292,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__createAccountSectionTitle'}
-								defaultMessage={'Create an account'}
-								description={'home page create account section title'}
+								id="homePage__createAccountSectionTitle"
+								defaultMessage="Create an account"
+								description="home page create account section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__createAccountSectionText'}
-								defaultMessage={
-									'Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest.'
-								}
-								description={'home page create account section text'}
+								id="homePage__createAccountSectionText"
+								defaultMessage="Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+								description="home page create account section text"
 							/>
 						</p>
 						<Button
@@ -324,9 +309,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href="#"
 							text={
 								<FormattedMessage
-									id={'homePage__createAccountSectionCTA'}
-									defaultMessage={'Sign up now'}
-									description={'home page create account section cta'}
+									id="homePage__createAccountSectionCTA"
+									defaultMessage="Sign up now"
+									description="home page create account section cta"
 								/>
 							}
 						/>
@@ -336,23 +321,23 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<div>
 							<FormattedMessage
-								id={'homePage__addToLibraryPlaceholder'}
-								defaultMessage={'Add to Library'}
-								description={'home page add to library placeholder'}
+								id="homePage__addToLibraryPlaceholder"
+								defaultMessage="Add to Library"
+								description="home page add to library placeholder"
 							/>
 						</div>
 						<div>
 							<FormattedMessage
-								id={'homePage__downloadQueuePlaceholder'}
-								defaultMessage={'Download Queue'}
-								description={'home page downloaed queue placeholder'}
+								id="homePage__downloadQueuePlaceholder"
+								defaultMessage="Download Queue"
+								description="home page downloaed queue placeholder"
 							/>
 						</div>
 						<div>
 							<FormattedMessage
-								id={'homePage__followFunctionalityPlaceholder'}
-								defaultMessage={'Follow Functionality'}
-								description={'home page follow functionality placeholder'}
+								id="homePage__followFunctionalityPlaceholder"
+								defaultMessage="Follow Functionality"
+								description="home page follow functionality placeholder"
 							/>
 						</div>
 					</>
@@ -364,18 +349,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__supportSectionTitle'}
-								defaultMessage={'Support free audio'}
-								description={'home page support section title'}
+								id="homePage__supportSectionTitle"
+								defaultMessage="Support free audio"
+								description="home page support section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__supportSectionText'}
-								defaultMessage={
-									'AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine.'
-								}
-								description={'home page support section text'}
+								id="homePage__supportSectionText"
+								defaultMessage="AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
+								description="home page support section text"
 							/>
 						</p>
 						<Button
@@ -383,9 +366,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href="#"
 							text={
 								<FormattedMessage
-									id={'homePage__supportSectionCTA'}
-									defaultMessage={'Make a donation'}
-									description={'home page support section cta'}
+									id="homePage__supportSectionCTA"
+									defaultMessage="Make a donation"
+									description="home page support section cta"
 								/>
 							}
 						/>
@@ -394,9 +377,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				media={
 					<div>
 						<FormattedMessage
-							id={'homePage__supportSectionImagePlaceholder'}
-							defaultMessage={'image'}
-							description={'home page support section image placeholder'}
+							id="homePage__supportSectionImagePlaceholder"
+							defaultMessage="image"
+							description="home page support section image placeholder"
 						/>
 					</div>
 				}
@@ -410,18 +393,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<>
 						<h2>
 							<FormattedMessage
-								id={'homePage__newsletterSectionTitle'}
-								defaultMessage={'Subscribe to Updates'}
-								description={'home page newsletter section title'}
+								id="homePage__newsletterSectionTitle"
+								defaultMessage="Subscribe to Updates"
+								description="home page newsletter section title"
 							/>
 						</h2>
 						<p>
 							<FormattedMessage
-								id={'homePage__newsletterSectionText'}
-								defaultMessage={
-									'Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates.'
-								}
-								description={'home page newsletter section text'}
+								id="homePage__newsletterSectionText"
+								defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
+								description="home page newsletter section text"
 							/>
 						</p>
 						<Button
@@ -429,9 +410,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							href="https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5"
 							text={
 								<FormattedMessage
-									id={'homePage__emailSignupButton'}
-									defaultMessage={'Subscribe'}
-									description={'homePage__emailSignupButton'}
+									id="homePage__emailSignupButton"
+									defaultMessage="Subscribe"
+									description="homePage__emailSignupButton"
 								/>
 							}
 							target="_blank"
@@ -440,7 +421,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					// TODO: Replace with subscription widget
-					<Image src={'/img/unsplash-notes.jpg'} width={5472} height={3648} />
+					<Image src="/img/unsplash-notes.jpg" width={5472} height={3648} />
 				}
 			/>
 			<div className={styles.footer}>
@@ -449,44 +430,44 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<div>
 						<h5>
 							<FormattedMessage
-								id={'homePage__footerSocialTitle'}
-								defaultMessage={'Social'}
-								description={'home page footer social title'}
+								id="homePage__footerSocialTitle"
+								defaultMessage="Social"
+								description="home page footer social title"
 							/>
 						</h5>
 						<ul>
 							<li>
 								<Link href="https://www.facebook.com/AudioVerse">
-									<a target={'_blank'} rel={'noreferrer noopener'}>
-										<FacebookIcon fontSize={'small'} />
+									<a target="_blank" rel="noreferrer noopener">
+										<FacebookIcon fontSize="small" />
 										<FormattedMessage
-											id={'homePage__footerFacebookLink'}
-											defaultMessage={'Facebook'}
-											description={'home page footer facebook link'}
+											id="homePage__footerFacebookLink"
+											defaultMessage="Facebook"
+											description="home page footer facebook link"
 										/>
 									</a>
 								</Link>
 							</li>
 							<li>
 								<Link href="https://www.instagram.com/audioverse/">
-									<a target={'_blank'} rel={'noreferrer noopener'}>
-										<InstagramIcon fontSize={'small'} />
+									<a target="_blank" rel="noreferrer noopener">
+										<InstagramIcon fontSize="small" />
 										<FormattedMessage
-											id={'homePage__footerInstagramLink'}
-											defaultMessage={'Instagram'}
-											description={'home page footer instagram link'}
+											id="homePage__footerInstagramLink"
+											defaultMessage="Instagram"
+											description="home page footer instagram link"
 										/>
 									</a>
 								</Link>
 							</li>
 							<li>
 								<Link href="https://twitter.com/audioverse">
-									<a target={'_blank'} rel={'noreferrer noopener'}>
-										<TwitterIcon fontSize={'small'} />
+									<a target="_blank" rel="noreferrer noopener">
+										<TwitterIcon fontSize="small" />
 										<FormattedMessage
-											id={'homePage__footerTwitterLink'}
-											defaultMessage={'Twitter'}
-											description={'home page footer twitter link'}
+											id="homePage__footerTwitterLink"
+											defaultMessage="Twitter"
+											description="home page footer twitter link"
 										/>
 									</a>
 								</Link>
@@ -496,9 +477,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					<div>
 						<h5>
 							<FormattedMessage
-								id={'homePage__footerLinksTitle'}
-								defaultMessage={'Links'}
-								description={'home page footer links title'}
+								id="homePage__footerLinksTitle"
+								defaultMessage="Links"
+								description="home page footer links title"
 							/>
 						</h5>
 						<ul>
@@ -506,24 +487,20 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								<Link href={`${route}/app`}>
 									<a>
 										<FormattedMessage
-											id={'homePage__footerDownloadAppButton'}
-											defaultMessage={'Download app'}
-											description={'home page footer download app button'}
+											id="homePage__footerDownloadAppButton"
+											defaultMessage="Download app"
+											description="home page footer download app button"
 										/>
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link
-									href={
-										'https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5'
-									}
-								>
-									<a target={'_blank'} rel={'noreferrer noopener'}>
+								<Link href="https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5">
+									<a target="_blank" rel="noreferrer noopener">
 										<FormattedMessage
-											id={'homePage__footerNewsletterSignup'}
-											defaultMessage={'Sign up for newsletter'}
-											description={'homePage__footerNewsletterSignup'}
+											id="homePage__footerNewsletterSignup"
+											defaultMessage="Sign up for newsletter"
+											description="homePage__footerNewsletterSignup"
 										/>
 									</a>
 								</Link>
@@ -532,9 +509,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								<Link href={`/${route}/give`}>
 									<a>
 										<FormattedMessage
-											id={'homePage__footerDonateLink'}
-											defaultMessage={'Donate'}
-											description={'home page footer donate link'}
+											id="homePage__footerDonateLink"
+											defaultMessage="Donate"
+											description="home page footer donate link"
 										/>
 									</a>
 								</Link>

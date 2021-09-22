@@ -15,6 +15,7 @@ import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import SequenceNav from '@components/molecules/sequenceNav';
+import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
@@ -24,8 +25,6 @@ import {
 	RecordingContentType,
 	RecordingFragment,
 } from '@lib/generated/graphql';
-
-import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 
 import styles from './recording.module.scss';
 
@@ -105,34 +104,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		} as const
 	)[contentType];
 	const audiobookHeadingStyle = isAudiobook && styles.audiobookHeading;
-	const hatLabel = {
-		[RecordingContentType.AudiobookTrack]: (
-			<FormattedMessage
-				id="sermonDetailPage__audiobookTitle"
-				defaultMessage="Book"
-			/>
-		),
-		[RecordingContentType.MusicTrack]: (
-			<FormattedMessage
-				id="sermonDetailPage__musicTrackTitle"
-				defaultMessage="Scripture Songs"
-			/>
-		),
-		[RecordingContentType.Sermon]: (
-			<FormattedMessage
-				id="sermonDetailPage__seriesTitle"
-				defaultMessage="Series"
-			/>
-		),
-		[RecordingContentType.Story]: (
-			<FormattedMessage
-				id="sermonDetailPage__storyTitle"
-				defaultMessage="Stories"
-			/>
-		),
-	}[contentType];
 	const linkClass = `decorated${useInverseButtons ? ' hover--salmon' : ''}`;
-	const hideSpeakers = isAudiobook;
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -219,12 +191,10 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			{recording?.sequence && (
 				<Link href={recording.sequence.canonicalPath}>
 					<a className={styles.hat}>
-						<div className={styles.hatType}>
-							<ListIcon width={13} height={13} />
-							<Heading6 sans uppercase loose unpadded>
-								{hatLabel}
-							</Heading6>
-						</div>
+						<SequenceTypeLockup
+							contentType={recording.sequence.contentType}
+							unpadded
+						/>
 						<h4 className={clsx(audiobookHeadingStyle)}>
 							{recording?.sequence?.title}
 						</h4>
@@ -237,9 +207,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 						{index && (
 							<span className={styles.part}>
 								<FormattedMessage
-									id={'organism-recording__partInfo'}
-									defaultMessage={'Part {index}'}
-									description={'recording part info'}
+									id="organism-recording__partInfo"
+									defaultMessage="Part {index}"
+									description="recording part info"
 									values={{ index }}
 								/>
 							</span>
@@ -312,25 +282,22 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							description: 'recording series list label',
 						})}
 					>
-						<LineHeading small color={accentColor}>
-							<FormattedMessage
-								id={'organism-recording__seriesListTitle'}
-								defaultMessage={'Other Teachings in Series'}
-								description={'recording series list title'}
-							/>
-						</LineHeading>
+						<div className={styles.seriesScroller}>
+							<LineHeading small color={accentColor}>
+								<FormattedMessage
+									id="organism-recording__seriesListTitle"
+									defaultMessage="Other Teachings in Series"
+									description="recording series list title"
+								/>
+							</LineHeading>
 
-						<div className={styles.seriesItems}>
-							{seriesItems.map((r) => (
-								<div className={styles.item} key={r.id}>
-									<TeaseRecording
-										recording={r}
-										theme={theme}
-										hideSpeakers={hideSpeakers}
-										unpadded
-									/>
-								</div>
-							))}
+							<div className={styles.seriesItems}>
+								{seriesItems.map((r) => (
+									<div className={styles.item} key={r.id}>
+										<TeaseRecording recording={r} theme={theme} unpadded />
+									</div>
+								))}
+							</div>
 						</div>
 					</div>
 				)}

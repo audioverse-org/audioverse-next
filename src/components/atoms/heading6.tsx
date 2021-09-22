@@ -5,6 +5,7 @@ import styles from './heading6.module.scss';
 import baseStyles from './headingBase.module.scss';
 
 type Props = {
+	large?: boolean;
 	loose?: boolean;
 	sans?: boolean;
 	unpadded?: boolean;
@@ -14,6 +15,7 @@ type Props = {
 
 export default function Heading6({
 	children,
+	large,
 	loose,
 	sans,
 	unpadded,
@@ -27,6 +29,7 @@ export default function Heading6({
 				sans && baseStyles.sans,
 				unpadded && baseStyles.unpadded,
 				loose && styles.loose,
+				large && styles.large,
 				uppercase && styles.uppercase,
 				className
 			)}

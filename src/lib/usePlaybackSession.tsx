@@ -51,7 +51,7 @@ export default function usePlaybackSession(
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
-		<div ref={portalContainerRef} data-testid={'portal'} />
+		<div ref={portalContainerRef} data-testid="portal" />
 	);
 
 	useEffect(() => {

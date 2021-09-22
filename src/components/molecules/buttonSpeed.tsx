@@ -36,9 +36,9 @@ export default function ButtonSpeed({
 				)}
 			>
 				<FormattedMessage
-					id={'molecule-buttonSpeed__buttonLabel'}
-					defaultMessage={'{speed}x'}
-					description={'button speed button label'}
+					id="molecule-buttonSpeed__buttonLabel"
+					defaultMessage="{speed}x"
+					description="button speed button label"
 					values={{ speed }}
 				/>
 			</div>

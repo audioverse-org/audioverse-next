@@ -66,6 +66,7 @@ module.exports = {
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'formatjs/no-offset': 'error',
 		'@mizdra/layout-shift/require-size-attributes': 2,
+		'react/jsx-curly-brace-presence': ['error', 'never'],
 	},
 	settings: {
 		react: {

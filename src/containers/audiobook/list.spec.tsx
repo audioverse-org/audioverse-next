@@ -36,7 +36,7 @@ function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
 						title: 'the_book_title',
 						canonicalPath: 'the_book_path',
 						contentType: SequenceContentType.Audiobook,
-						writers: [],
+						sequenceWriters: [],
 						recordings: {},
 					},
 				],

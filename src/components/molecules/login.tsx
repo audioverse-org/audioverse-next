@@ -69,11 +69,7 @@ export default function Login(): JSX.Element {
 				}}
 			/>
 
-			<form
-				onSubmit={onSubmit}
-				data-testid={'loginForm'}
-				className={styles.form}
-			>
+			<form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
 				{!!errors.length && (
 					<ul>
 						{errors.map((e) => (
@@ -116,9 +112,9 @@ export default function Login(): JSX.Element {
 						onClick={onSubmit}
 						text={
 							<FormattedMessage
-								id={'loginForm__loginButton'}
-								defaultMessage={'Login'}
-								description={'login form login button'}
+								id="loginForm__loginButton"
+								defaultMessage="Login"
+								description="login form login button"
 							/>
 						}
 						centered
@@ -132,21 +128,21 @@ export default function Login(): JSX.Element {
 						className={clsx(styles.resetPassword, 'decorated')}
 					>
 						<FormattedMessage
-							id={'loginForm__forgotPasswordButton'}
-							defaultMessage={'Forgot password?'}
-							description={'login form forgot password button'}
+							id="loginForm__forgotPasswordButton"
+							defaultMessage="Forgot password?"
+							description="login form forgot password button"
 						/>
 					</a>
 					<FormattedMessage
-						id={'loginForm__signupIntro'}
-						defaultMessage={'Don’t have an account?'}
+						id="loginForm__signupIntro"
+						defaultMessage="Don’t have an account?"
 					/>
 					<Button
 						type="secondary"
 						text={
 							<FormattedMessage
-								id={'loginForm__signup'}
-								defaultMessage={'Sign up'}
+								id="loginForm__signup"
+								defaultMessage="Sign up"
 							/>
 						}
 						href={makeRegisterRoute(languageRoute)}

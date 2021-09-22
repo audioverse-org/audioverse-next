@@ -1,3 +1,0 @@
-fragment cardSong on Recording {
-	...cardWithPlayable
-}

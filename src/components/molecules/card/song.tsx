@@ -1,16 +1,14 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import CardWithPlayable from '@components/molecules/card/base/withPlayable';
-import { CardSongFragment } from '@lib/generated/graphql';
+import { CardRecordingFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../public/img/fa-music.svg';
+import TeaseRecording from '../teaseRecording';
 
-import CardRecordingSequenceHat from './recordingSequenceHat';
+import CardWithTheme from './base/withTheme';
+import CardHatSong from './hat/song';
 
 interface CardSongProps {
-	song: CardSongFragment;
+	song: CardRecordingFragment;
 	hideHat?: boolean;
 }
 
@@ -18,31 +16,13 @@ export default function CardSong({
 	song,
 	hideHat,
 }: CardSongProps): JSX.Element {
-	const intl = useIntl();
 	const { sequence } = song;
-	const container = sequence
-		? {
-				icon: <HatIcon width={12} height={12} />,
-				title: sequence.title,
-				content: (
-					<CardRecordingSequenceHat sequence={sequence}>
-						<Heading2 sans>{sequence.title}</Heading2>
-					</CardRecordingSequenceHat>
-				),
-				label: intl.formatMessage({
-					id: 'cardSong_sequenceLabel',
-					defaultMessage: 'Scripture Songs',
-				}),
-				url: sequence.canonicalPath,
-		  }
-		: undefined;
+	const theme = 'song';
 
 	return (
-		<CardWithPlayable
-			recording={song}
-			container={container}
-			theme={'song'}
-			hideHat={hideHat}
-		/>
+		<CardWithTheme {...{ theme }}>
+			{sequence && !hideHat && <CardHatSong sequence={sequence} />}
+			<TeaseRecording {...{ recording: song, theme }} />
+		</CardWithTheme>
 	);
 }

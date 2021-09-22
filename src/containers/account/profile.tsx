@@ -100,7 +100,7 @@ function Profile(): JSX.Element {
 					defaultMessage: 'email',
 					description: 'input label for email',
 				})}
-				type={'email'}
+				type="email"
 				value={email}
 				setValue={setEmail}
 			/>
@@ -111,7 +111,7 @@ function Profile(): JSX.Element {
 					defaultMessage: 'password',
 					description: 'input label for password',
 				})}
-				type={'password'}
+				type="password"
 				value={password}
 				setValue={setPassword}
 			/>
@@ -122,7 +122,7 @@ function Profile(): JSX.Element {
 					defaultMessage: 'confirm password',
 					description: 'input label for confirm password',
 				})}
-				type={'password'}
+				type="password"
 				value={passwordConfirm}
 				setValue={setPasswordConfirm}
 			/>
@@ -206,11 +206,11 @@ function Profile(): JSX.Element {
 				setValue={setCountry}
 			/>
 
-			<button type={'submit'}>
+			<button type="submit">
 				<FormattedMessage
-					id={'profile__buttonLabelSave'}
-					defaultMessage={'save'}
-					description={'save button label'}
+					id="profile__buttonLabelSave"
+					defaultMessage="save"
+					description="save button label"
 				/>
 			</button>
 		</form>

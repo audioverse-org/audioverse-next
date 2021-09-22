@@ -82,7 +82,7 @@ function Reset(): JSX.Element {
 					defaultMessage: 'password',
 					description: 'password reset page password field placeholder',
 				})}
-				type={'password'}
+				type="password"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
 			/>
@@ -92,15 +92,15 @@ function Reset(): JSX.Element {
 					defaultMessage: 'confirm password',
 					description: 'password reset page confirm password field placeholder',
 				})}
-				type={'password'}
+				type="password"
 				value={passwordConfirm}
 				onChange={(e) => setPasswordConfirm(e.target.value)}
 			/>
 			<button type="submit">
 				<FormattedMessage
-					id={'reset__submitButton'}
-					defaultMessage={'submit'}
-					description={'password reset page submit button'}
+					id="reset__submitButton"
+					defaultMessage="submit"
+					description="password reset page submit button"
 				/>
 			</button>
 		</form>

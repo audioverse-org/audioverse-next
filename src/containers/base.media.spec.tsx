@@ -15,12 +15,14 @@ import { Recording } from '@components/organisms/recording';
 import {
 	RecordingContentType,
 	RecordingFragment,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { setPlayerMock } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 const sequence = {
 	id: 'the_sequence_id',
+	contentType: SequenceContentType.Series,
 	title: 'the_sequence_title',
 	canonicalPath: 'the_sequence_path',
 	recordings: {

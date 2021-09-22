@@ -92,10 +92,10 @@ export default function ButtonShareRecording({
 					defaultMessage: 'share',
 					description: 'recording share button label',
 				})}
-				aria-controls={'shareMenu'}
+				aria-controls="shareMenu"
 			/>
 			<Menu
-				id={'shareMenu'}
+				id="shareMenu"
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 				keepMounted
@@ -104,7 +104,7 @@ export default function ButtonShareRecording({
 					className: styles.paper,
 				}}
 			>
-				<Heading6 sans loose uppercase className={styles.heading}>
+				<Heading6 sans loose uppercase large>
 					<FormattedMessage
 						id="molecule-buttonShareRecording__shareTitle"
 						defaultMessage="Share"
@@ -118,7 +118,7 @@ export default function ButtonShareRecording({
 						</a>
 					</p>
 				))}
-				<Heading6 sans loose uppercase className={styles.heading}>
+				<Heading6 sans loose uppercase large>
 					{shareVideo ? (
 						<FormattedMessage
 							id="molecule-buttonShareRecording__videoEmbedLabel"

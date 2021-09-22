@@ -6,9 +6,9 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andMiniplayer';
 import { BaseColors } from '@lib/constants';
+import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 
-import ListIcon from '../../../public/img/icon-list-alt-solid.svg';
 import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 
@@ -24,8 +24,19 @@ export default function Miniplayer(): JSX.Element | null {
 
 	if (!recording) return null;
 
+	let sequenceLine = null;
+	if (recording.sequence) {
+		const { Icon } = getSequenceTypeTheme(recording.sequence.contentType);
+		sequenceLine = (
+			<div className={styles.series} aria-label="series">
+				<Icon width={13} height={13} />
+				{recording.sequence.title}
+			</div>
+		);
+	}
+
 	return (
-		<div className={styles.miniplayer} aria-label={'miniplayer'}>
+		<div className={styles.miniplayer} aria-label="miniplayer">
 			<div className={styles.player}>
 				{/*TODO: Get rid of ID; use ref instead*/}
 				<div id="mini-player" className={styles.pane} />
@@ -50,12 +61,7 @@ export default function Miniplayer(): JSX.Element | null {
 				</div>
 			</div>
 			<div className={styles.meta}>
-				{recording.sequence && (
-					<div className={styles.series} aria-label={'series'}>
-						<ListIcon width={13} height={13} />
-						{recording.sequence.title}
-					</div>
-				)}
+				{sequenceLine}
 				<h4 className={styles.title}>{recording.title}</h4>
 				<div className={styles.progress}>
 					<span>{timeString}</span>
@@ -67,7 +73,7 @@ export default function Miniplayer(): JSX.Element | null {
 			</div>
 			<div className={styles.volume}>
 				<button
-					aria-label={'reduce volume'}
+					aria-label="reduce volume"
 					onClick={() => playback.setVolume(volume - 10)}
 				>
 					<IconVolumeLow />
@@ -76,10 +82,10 @@ export default function Miniplayer(): JSX.Element | null {
 				<Slider
 					value={volume}
 					onChange={(e, val) => playback.setVolume(val as number)}
-					aria-label={'volume'}
+					aria-label="volume"
 				/>
 				<button
-					aria-label={'increase volume'}
+					aria-label="increase volume"
 					onClick={() => playback.setVolume(volume + 10)}
 				>
 					<IconVolumeHigh />

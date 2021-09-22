@@ -37,27 +37,27 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 				<Link href={makeSermonListRouteAll(lang, 1)}>
 					<a>
 						<FormattedMessage
-							id={'container-sermonList__filterLabelAll'}
-							defaultMessage={'All'}
-							description={'sermon list page filter all'}
+							id="container-sermonList__filterLabelAll"
+							defaultMessage="All"
+							description="sermon list page filter all"
 						/>
 					</a>
 				</Link>
 				<Link href={makeSermonListRouteVideo(lang, 1)}>
 					<a>
 						<FormattedMessage
-							id={'container-sermonList__filterLabelVideo'}
-							defaultMessage={'Video'}
-							description={'sermon list page filter video'}
+							id="container-sermonList__filterLabelVideo"
+							defaultMessage="Video"
+							description="sermon list page filter video"
 						/>
 					</a>
 				</Link>
 				<Link href={makeSermonListRouteAudio(lang, 1)}>
 					<a>
 						<FormattedMessage
-							id={'container-sermonList__filterLabelAudio'}
-							defaultMessage={'Audio'}
-							description={'sermon list page filter audio'}
+							id="container-sermonList__filterLabelAudio"
+							defaultMessage="Audio"
+							description="sermon list page filter audio"
 						/>
 					</a>
 				</Link>

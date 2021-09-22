@@ -5,6 +5,7 @@ import AndMiniplayer, {
 	PlaybackContext,
 	PlaybackContextType,
 } from '@components/templates/andMiniplayer';
+import { SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
 
 const renderComponent = buildRenderer(AndMiniplayer);
@@ -53,6 +54,7 @@ describe('miniplayer template', () => {
 								title: 'the_recording_title',
 								duration: 60,
 								sequence: {
+									contentType: SequenceContentType.Series,
 									title: 'the_sequence_title',
 								},
 								videoFiles: [

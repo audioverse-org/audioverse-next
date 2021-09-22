@@ -16,7 +16,7 @@ jest.mock('js-cookie');
 
 const renderComponent = async () => {
 	const result = await renderWithIntl(
-		<RecordingButtonFavorite id={'-1'} backgroundColor={BaseColors.WHITE} />
+		<RecordingButtonFavorite id="-1" backgroundColor={BaseColors.WHITE} />
 	);
 	const button =
 		result.queryByLabelText('Favorite') ||
