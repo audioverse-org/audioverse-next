@@ -886,6 +886,7 @@ export type FavoritesOrder = {
 
 /** Properties by which user favorites connections can be ordered. */
 export enum FavoritesSortableField {
+	EntityTitle = 'ENTITY_TITLE',
 	FavoritedAt = 'FAVORITED_AT',
 }
 
@@ -2562,6 +2563,7 @@ export type Query = {
 	testimony: Maybe<Testimony>;
 	user: Maybe<User>;
 	users: UserConnection;
+	websiteRecentRecordings: RecordingConnection;
 	websites: WebsiteConnection;
 };
 
@@ -3299,6 +3301,13 @@ export type QueryUsersArgs = {
 	withRole: Maybe<UserLanguageRoleInput>;
 };
 
+export type QueryWebsiteRecentRecordingsArgs = {
+	after: Maybe<Scalars['String']>;
+	first: Maybe<Scalars['Int']>;
+	language: Language;
+	offset: Maybe<Scalars['Int']>;
+};
+
 export type QueryWebsitesArgs = {
 	after: Maybe<Scalars['String']>;
 	first: Maybe<Scalars['Int']>;
@@ -3831,6 +3840,13 @@ export type RecordingUpdateInput = {
 	title: Maybe<Scalars['String']>;
 	websiteIds: Maybe<Array<Scalars['ID']>>;
 };
+
+/** Whether a viewer has played a recording or sequence. */
+export enum RecordingViewerPlaybackStatus {
+	Finished = 'FINISHED',
+	Started = 'STARTED',
+	Unstarted = 'UNSTARTED',
+}
 
 export type RecordingsOrder = {
 	direction: OrderByDirection;
@@ -5019,6 +5035,7 @@ export type UserFavoritesArgs = {
 	offset: Maybe<Scalars['Int']>;
 	orderBy: Maybe<Array<FavoritesOrder>>;
 	types: Maybe<Array<FavoritableCatalogEntityType>>;
+	viewerPlaybackStatus: Maybe<RecordingViewerPlaybackStatus>;
 };
 
 export type UserNotificationSubscriptionsArgs = {
@@ -5572,8 +5589,8 @@ export type CardFavoriteFragment = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -5679,8 +5696,8 @@ export type CardFavoriteFragment = {
 								__typename?: 'Sequence';
 								id: string | number;
 								canonicalPath: string;
-								title: string;
 								contentType: SequenceContentType;
+								title: string;
 								recordings: {
 									__typename?: 'RecordingConnection';
 									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -5781,8 +5798,8 @@ export type CardRecordingFragment = {
 		__typename?: 'Sequence';
 		id: string | number;
 		canonicalPath: string;
-		title: string;
 		contentType: SequenceContentType;
+		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		favoritedRecordings: {
 			__typename?: 'RecordingConnection';
@@ -5838,6 +5855,7 @@ export type CardRecordingSequenceHatFragment = {
 		__typename?: 'Sequence';
 		id: string | number;
 		canonicalPath: string;
+		contentType: SequenceContentType;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		favoritedRecordings: {
 			__typename?: 'RecordingConnection';
@@ -5887,8 +5905,8 @@ export type CardRecordingStackFragment = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -6215,8 +6233,8 @@ export type GetNotFoundPageDataQuery = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -6303,6 +6321,11 @@ export type RecordingFragment = {
 		id: string | number;
 		url: string;
 		filesize: string;
+	}>;
+	attachments: Array<{
+		__typename?: 'Attachment';
+		filename: string;
+		url: string;
 	}>;
 	imageWithFallback: { __typename?: 'Image'; url: string };
 	recordingTags: {
@@ -6466,8 +6489,8 @@ export type SequenceFragment = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -6779,8 +6802,8 @@ export type GetAudiobookDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -6945,6 +6968,11 @@ export type GetAudiobookTrackDetailDataQuery = {
 			id: string | number;
 			url: string;
 			filesize: string;
+		}>;
+		attachments: Array<{
+			__typename?: 'Attachment';
+			filename: string;
+			url: string;
 		}>;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordingTags: {
@@ -7524,8 +7552,8 @@ export type GetDiscoverPageDataQuery = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -7860,7 +7888,7 @@ export type GetHomeStaticPropsQueryVariables = Exact<{
 
 export type GetHomeStaticPropsQuery = {
 	__typename?: 'Query';
-	musicTracks: {
+	websiteRecentRecordings: {
 		__typename?: 'RecordingConnection';
 		nodes: Maybe<
 			Array<{
@@ -7875,8 +7903,8 @@ export type GetHomeStaticPropsQuery = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -7939,140 +7967,6 @@ export type GetHomeStaticPropsQuery = {
 			};
 		};
 	}>;
-	audiobookTracks: {
-		__typename?: 'RecordingConnection';
-		nodes: Maybe<
-			Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: Maybe<number>;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: Maybe<{
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					title: string;
-					contentType: SequenceContentType;
-					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-				}>;
-				sponsor: Maybe<{
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-			}>
-		>;
-	};
-	stories: {
-		__typename?: 'RecordingConnection';
-		nodes: Maybe<
-			Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: Maybe<number>;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: Maybe<{
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					title: string;
-					contentType: SequenceContentType;
-					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-				}>;
-				sponsor: Maybe<{
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-			}>
-		>;
-	};
 	tag: {
 		__typename?: 'RecordingConnection';
 		nodes: Maybe<
@@ -8088,75 +7982,8 @@ export type GetHomeStaticPropsQuery = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
-					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
-				}>;
-				sponsor: Maybe<{
-					__typename?: 'Sponsor';
-					id: string | number;
 					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-				}>;
-			}>
-		>;
-	};
-	sermons: {
-		__typename?: 'RecordingConnection';
-		nodes: Maybe<
-			Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: Maybe<number>;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: Maybe<{
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					title: string;
-					contentType: SequenceContentType;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -8234,11 +8061,102 @@ export type GetHomeStaticPropsQuery = {
 	};
 };
 
+export type GetLibraryHistoryDataQueryVariables = Exact<{
+	language: Language;
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetLibraryHistoryDataQuery = {
+	__typename?: 'Query';
+	me: Maybe<{
+		__typename?: 'AuthenticatedUser';
+		user: {
+			__typename?: 'User';
+			downloadHistory: {
+				__typename?: 'UserDownloadHistoryConnection';
+				aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				nodes: Maybe<
+					Array<{
+						__typename?: 'UserDownloadHistory';
+						recording: {
+							__typename?: 'Recording';
+							canonicalPath: string;
+							sequenceIndex: Maybe<number>;
+							id: string | number;
+							title: string;
+							duration: number;
+							recordingContentType: RecordingContentType;
+							sequence: Maybe<{
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: Maybe<{ __typename?: 'Image'; url: string }>;
+								favoritedRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+								};
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+								};
+							}>;
+							sponsor: Maybe<{
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
+							writers: Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
+							persons: Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
+							audioFiles: Array<{
+								__typename?: 'AudioFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
+							}>;
+							videoFiles: Array<{
+								__typename?: 'VideoFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
+							}>;
+							videoStreams: Array<{
+								__typename?: 'VideoFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
+							}>;
+						};
+					}>
+				>;
+			};
+		};
+	}>;
+};
+
 export type GetLibraryDataQueryVariables = Exact<{
 	language: Language;
 	first: Scalars['Int'];
 	offset: Scalars['Int'];
 	groupSequences: Scalars['Boolean'];
+	types: Maybe<
+		Array<FavoritableCatalogEntityType> | FavoritableCatalogEntityType
+	>;
+	viewerPlaybackStatus: Maybe<RecordingViewerPlaybackStatus>;
 }>;
 
 export type GetLibraryDataQuery = {
@@ -8307,8 +8225,8 @@ export type GetLibraryDataQuery = {
 										__typename?: 'Sequence';
 										id: string | number;
 										canonicalPath: string;
-										title: string;
 										contentType: SequenceContentType;
+										title: string;
 										image: Maybe<{ __typename?: 'Image'; url: string }>;
 										favoritedRecordings: {
 											__typename?: 'RecordingConnection';
@@ -8432,8 +8350,8 @@ export type GetLibraryDataQuery = {
 													__typename?: 'Sequence';
 													id: string | number;
 													canonicalPath: string;
-													title: string;
 													contentType: SequenceContentType;
+													title: string;
 													recordings: {
 														__typename?: 'RecordingConnection';
 														aggregate: Maybe<{
@@ -8684,8 +8602,8 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -8752,8 +8670,8 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -8820,8 +8738,8 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -9095,8 +9013,8 @@ export type GetPresenterRecordingsPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -9234,8 +9152,8 @@ export type GetPresenterTopPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -9347,8 +9265,8 @@ export type GetSeriesDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -9513,6 +9431,11 @@ export type GetSermonDetailDataQuery = {
 			id: string | number;
 			url: string;
 			filesize: string;
+		}>;
+		attachments: Array<{
+			__typename?: 'Attachment';
+			filename: string;
+			url: string;
 		}>;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordingTags: {
@@ -9760,8 +9683,8 @@ export type GetSongAlbumsDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -9896,8 +9819,8 @@ export type GetSongBooksDetailPageDataQuery = {
 					__typename?: 'Sequence';
 					id: string | number;
 					canonicalPath: string;
-					title: string;
 					contentType: SequenceContentType;
+					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
 					favoritedRecordings: {
 						__typename?: 'RecordingConnection';
@@ -9990,6 +9913,11 @@ export type GetSongDetailDataQuery = {
 			id: string | number;
 			url: string;
 			filesize: string;
+		}>;
+		attachments: Array<{
+			__typename?: 'Attachment';
+			filename: string;
+			url: string;
 		}>;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordingTags: {
@@ -10265,7 +10193,7 @@ export type GetSponsorDetailPageDataQuery = {
 		location: Maybe<string>;
 		website: Maybe<string>;
 		description: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: Maybe<{ __typename?: 'Image'; url: string }>;
 		collections: {
 			__typename?: 'CollectionConnection';
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10349,8 +10277,8 @@ export type GetSponsorDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -10587,8 +10515,8 @@ export type GetSponsorTeachingsPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -10707,8 +10635,8 @@ export type GetStoryAlbumDetailPageDataQuery = {
 						__typename?: 'Sequence';
 						id: string | number;
 						canonicalPath: string;
-						title: string;
 						contentType: SequenceContentType;
+						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
 						favoritedRecordings: {
 							__typename?: 'RecordingConnection';
@@ -10873,6 +10801,11 @@ export type GetStoryDetailDataQuery = {
 			id: string | number;
 			url: string;
 			filesize: string;
+		}>;
+		attachments: Array<{
+			__typename?: 'Attachment';
+			filename: string;
+			url: string;
 		}>;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 		recordingTags: {
@@ -11333,6 +11266,7 @@ export const CardRecordingSequenceHatFragmentDoc = `
   sequence {
     id
     canonicalPath(useFuturePath: true)
+    contentType
     image {
       url(size: 1000)
     }
@@ -11660,6 +11594,10 @@ export const RecordingFragmentDoc = `
     id
     url
     filesize
+  }
+  attachments {
+    filename
+    url
   }
   description
   imageWithFallback {
@@ -12904,11 +12842,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 	);
 export const GetHomeStaticPropsDocument = `
     query getHomeStaticProps($language: Language!) {
-  musicTracks(
-    language: $language
-    first: 1
-    orderBy: {field: PUBLISHED_AT, direction: ASC}
-  ) {
+  websiteRecentRecordings(language: $language) {
     nodes {
       ...cardRecording
     }
@@ -12920,36 +12854,9 @@ export const GetHomeStaticPropsDocument = `
       }
     }
   }
-  audiobookTracks(
-    language: $language
-    first: 1
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  stories(
-    language: $language
-    first: 1
-    orderBy: {field: PUBLISHED_AT, direction: ASC}
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
   tag: recordings(
     language: $language
     tagName: "Family"
-    first: 1
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  sermons(
-    language: $language
     first: 1
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
@@ -12991,8 +12898,46 @@ export const useGetHomeStaticPropsQuery = <
 		),
 		options
 	);
+export const GetLibraryHistoryDataDocument = `
+    query getLibraryHistoryData($language: Language!, $first: Int!, $offset: Int!) {
+  me {
+    user {
+      downloadHistory(
+        language: $language
+        first: $first
+        offset: $offset
+        orderBy: [{field: CREATED_AT, direction: DESC}]
+      ) {
+        aggregate {
+          count
+        }
+        nodes {
+          recording {
+            ...cardRecording
+          }
+        }
+      }
+    }
+  }
+}
+    ${CardRecordingFragmentDoc}`;
+export const useGetLibraryHistoryDataQuery = <
+	TData = GetLibraryHistoryDataQuery,
+	TError = unknown
+>(
+	variables: GetLibraryHistoryDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryHistoryDataQuery, TError, TData>
+) =>
+	useQuery<GetLibraryHistoryDataQuery, TError, TData>(
+		['getLibraryHistoryData', variables],
+		graphqlFetcher<
+			GetLibraryHistoryDataQuery,
+			GetLibraryHistoryDataQueryVariables
+		>(GetLibraryHistoryDataDocument, variables),
+		options
+	);
 export const GetLibraryDataDocument = `
-    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!) {
+    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus) {
   me {
     user {
       favorites(
@@ -13000,6 +12945,8 @@ export const GetLibraryDataDocument = `
         first: $first
         offset: $offset
         groupSequences: $groupSequences
+        types: $types
+        viewerPlaybackStatus: $viewerPlaybackStatus
         orderBy: [{field: FAVORITED_AT, direction: DESC}]
       ) {
         aggregate {
@@ -14026,7 +13973,7 @@ export const GetSponsorDetailPageDataDocument = `
     location
     website
     description
-    imageWithFallback {
+    image {
       url(size: 100)
     }
     collections(first: 3, orderBy: [{field: CREATED_AT, direction: DESC}]) {
@@ -15280,6 +15227,12 @@ export async function getHomeStaticProps<T>(
 	variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
+}
+
+export async function getLibraryHistoryData<T>(
+	variables: ExactAlt<T, GetLibraryHistoryDataQueryVariables>
+): Promise<GetLibraryHistoryDataQuery> {
+	return fetchApi(GetLibraryHistoryDataDocument, { variables });
 }
 
 export async function getLibraryData<T>(

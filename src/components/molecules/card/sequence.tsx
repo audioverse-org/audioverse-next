@@ -192,7 +192,7 @@ export default function CardSequence({
 			</Link>
 			<IconButton
 				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => toggleFavorited()}
+				onClick={() => toggleFavorited()}
 				color={isFavorited ? accentColor : iconColor}
 				backgroundColor={backgroundColor}
 				className={styles.like}

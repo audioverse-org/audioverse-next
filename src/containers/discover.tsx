@@ -1,9 +1,9 @@
-import { Masonry } from 'masonic';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import LineHeading from '@components/atoms/lineHeading';
 import CardSermon from '@components/molecules/card/sermon';
+import CardMasonry from '@components/molecules/cardMasonry';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './discover.module.scss';
@@ -23,11 +23,9 @@ export default function Discover({
 					description="Discover recent content heading"
 				/>
 			</LineHeading>
-			<Masonry
+			<CardMasonry
 				items={sermons}
 				render={({ data }) => <CardSermon recording={data} />}
-				columnGutter={20}
-				columnWidth={300}
 				className={styles.grid}
 			/>
 		</div>

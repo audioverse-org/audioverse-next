@@ -1,0 +1,8 @@
+@import '../../styles/common';
+
+.paper.paper {
+	margin-top: 2px;
+	border: 1px solid $ts-red;
+	box-shadow: none;
+	color: $ts-dark;
+}

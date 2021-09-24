@@ -22,7 +22,7 @@ export default function ButtonSpeed({
 
 	return (
 		<CircleButton
-			onPress={() => {
+			onClick={() => {
 				const newSpeed = speeds.find((s) => s > (speed || 0)) || speeds[0];
 				setSpeed(newSpeed);
 			}}

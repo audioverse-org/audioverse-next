@@ -52,7 +52,7 @@ export default function ButtonNudge({
 					? IconJumpForwardMedium
 					: IconJumpForward
 			}
-			onPress={() => session.shiftTime(reverse ? -15 : 15)}
+			onClick={() => session.shiftTime(reverse ? -15 : 15)}
 			aria-label={label}
 			color={
 				isBackgroundColorDark(backgroundColor)

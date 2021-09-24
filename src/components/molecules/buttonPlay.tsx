@@ -61,7 +61,7 @@ export default function ButtonPlay({
 					? IconPauseLarge
 					: IconPause
 			}
-			onPress={() => (isPaused ? play() : pause())}
+			onClick={() => (isPaused ? play() : pause())}
 			color={
 				active
 					? isBackgroundColorDark(backgroundColor)

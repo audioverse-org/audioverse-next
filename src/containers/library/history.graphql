@@ -1,0 +1,21 @@
+query getLibraryHistoryData($language: Language!, $first: Int!, $offset: Int!) {
+	me {
+		user {
+			downloadHistory(
+				language: $language
+				first: $first
+				offset: $offset
+				orderBy: [{ field: CREATED_AT, direction: DESC }]
+			) {
+				aggregate {
+					count
+				}
+				nodes {
+					recording {
+						...cardRecording
+					}
+				}
+			}
+		}
+	}
+}

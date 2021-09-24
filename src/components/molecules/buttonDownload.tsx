@@ -32,7 +32,7 @@ export default function ButtonDownload({
 		<>
 			<IconButton
 				Icon={IconDownload}
-				onPress={({ currentTarget }) => setAnchorEl(currentTarget)}
+				onClick={({ currentTarget }) => setAnchorEl(currentTarget)}
 				color={
 					isBackgroundColorDark(backgroundColor)
 						? BaseColors.WHITE

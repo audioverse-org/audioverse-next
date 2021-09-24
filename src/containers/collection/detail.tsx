@@ -145,14 +145,14 @@ function CollectionDetail({
 					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
+						onClick={() => toggleFavorited()}
 						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}
 					/>
 					<IconButton
 						Icon={ShareIcon}
-						onPress={() => void 0}
+						onClick={() => void 0}
 						color={BaseColors.WHITE}
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}

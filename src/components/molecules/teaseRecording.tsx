@@ -82,14 +82,16 @@ export default function TeaseRecording({
 					)}
 					<div className={styles.title}>
 						{small ? (
-							<Heading3 unpadded>{recording.title}</Heading3>
+							<Heading3 unpadded className={styles.heading}>
+								{recording.title}
+							</Heading3>
 						) : (
 							<Heading2>{recording.title}</Heading2>
 						)}
 						<div className={styles.play}>
 							<IconButton
 								Icon={IconPlay}
-								onPress={() => session.play()}
+								onClick={() => session.play()}
 								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 								backgroundColor={backgroundColor}
 								aria-label={intl.formatMessage({

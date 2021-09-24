@@ -3,7 +3,11 @@ import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
-import { CardRecordingSequenceHatFragment } from '@lib/generated/graphql';
+import {
+	CardRecordingSequenceHatFragment,
+	SequenceContentType,
+} from '@lib/generated/graphql';
+import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import IconLike from '../../../../public/img/icon-like-light.svg';
 import Button from '../button';
@@ -14,6 +18,42 @@ interface Props {
 	sequence: NonNullable<CardRecordingSequenceHatFragment['sequence']>;
 	inverse?: boolean;
 }
+
+const addSequenceLabel = (contentType: SequenceContentType) => {
+	switch (contentType) {
+		case SequenceContentType.Audiobook:
+			return (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__addBook"
+					defaultMessage="Add Book"
+				/>
+			);
+		case SequenceContentType.MusicAlbum:
+			return (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__addAlbum"
+					defaultMessage="Add Album"
+				/>
+			);
+		case SequenceContentType.Series:
+			return (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__addSeries"
+					defaultMessage="Add Series"
+				/>
+			);
+		case SequenceContentType.StorySeason:
+			return (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__addStoryAlbum"
+					defaultMessage="Add Album"
+				/>
+			);
+
+		default:
+			throw new UnreachableCaseError(contentType);
+	}
+};
 
 export default function CardRecordingSequenceHat({
 	sequence,
@@ -35,12 +75,7 @@ export default function CardRecordingSequenceHat({
 				<Button
 					type={inverse ? 'primaryInverse' : 'primary'}
 					onClick={() => setSequenceFavorited(sequence.id, true)}
-					text={
-						<FormattedMessage
-							id="molecule-cardRecordingSequenceHat__addAll"
-							defaultMessage="Add All"
-						/>
-					}
+					text={addSequenceLabel(sequence.contentType)}
 					Icon={IconLike}
 				/>
 				<FormattedMessage

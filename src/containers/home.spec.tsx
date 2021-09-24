@@ -197,8 +197,8 @@ const post = {
 const loadData = buildLoader<GetHomeStaticPropsQuery>(
 	GetHomeStaticPropsDocument,
 	{
-		musicTracks: {
-			nodes: [song],
+		websiteRecentRecordings: {
+			nodes: [audiobookTrack, recording, song, story],
 		},
 		audiobible: {
 			book: {
@@ -209,13 +209,8 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 				},
 			},
 		},
-		audiobookTracks: { nodes: [audiobookTrack] },
-		stories: { nodes: [story] },
 		tag: {
 			nodes: [taggedRecording],
-		},
-		sermons: {
-			nodes: [recording],
 		},
 		testimonies: {
 			nodes: [testimony],

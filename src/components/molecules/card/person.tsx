@@ -1,11 +1,19 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
+import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
+import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
+import { BaseColors } from '@lib/constants';
 import { CardPersonFragment } from '@lib/generated/graphql';
 
+import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
+import LikeIcon from '../../../../public/img/icon-like-light.svg';
+import IconButton from '../iconButton';
 import PersonTypeLockup from '../personTypeLockup';
 
 import styles from './person.module.scss';
@@ -17,7 +25,8 @@ interface CardCollectionProps {
 export default function CardPerson({
 	person,
 }: CardCollectionProps): JSX.Element {
-	const { canonicalPath, image, name } = person;
+	const { isFavorited, toggleFavorited } = useIsPersonFavorited(person.id);
+	const { canonicalPath, image, name, recordings } = person;
 	return (
 		<Card>
 			<Link href={canonicalPath}>
@@ -33,9 +42,37 @@ export default function CardPerson({
 							{name}
 						</Heading2>
 					</div>
+					<div
+						className={clsx(
+							styles.details,
+							isFavorited && styles.detailsWithLike
+						)}
+					>
+						<Heading6
+							sans
+							unpadded
+							uppercase
+							loose
+							className={styles.teachingsLabel}
+						>
+							<FormattedMessage
+								id="cardPerson_teachingsLabel"
+								defaultMessage="{count} teachings"
+								description="Card person teachings count label"
+								values={{ count: recordings.aggregate?.count }}
+							/>
+						</Heading6>
+					</div>
 					{/* TODO: sub-recordings */}
 				</a>
 			</Link>
+			<IconButton
+				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+				onClick={() => toggleFavorited()}
+				color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+				backgroundColor={BaseColors.SMART_PLAYLIST_H}
+				className={clsx(styles.like, isFavorited && styles.likeActive)}
+			/>
 		</Card>
 	);
 }

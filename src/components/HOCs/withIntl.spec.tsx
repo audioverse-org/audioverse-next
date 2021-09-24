@@ -203,6 +203,12 @@ describe('localization usage', () => {
 								filesize: '100',
 							},
 						],
+						attachments: [
+							{
+								filename: 'z',
+								url: 'z',
+							},
+						],
 						sequenceIndex: 1,
 						sequence: {
 							contentType: SequenceContentType.Series,
@@ -435,7 +441,19 @@ describe('localization usage', () => {
 	it('localizes presenter list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<Presenters
-				nodes={[{ id: 'z', canonicalPath: '/presenter_path' }] as any}
+				nodes={
+					[
+						{
+							id: 'z',
+							canonicalPath: '/presenter_path',
+							recordings: {
+								aggregate: {
+									count: 0,
+								},
+							},
+						},
+					] as any
+				}
 				pagination={undefined as any}
 				data={undefined as any}
 			/>

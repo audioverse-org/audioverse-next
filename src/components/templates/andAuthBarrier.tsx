@@ -63,7 +63,7 @@ export default function AndAuthBarrier({
 					<div className={styles.modal}>
 						<IconButton
 							Icon={IconClose}
-							onPress={handleClose}
+							onClick={handleClose}
 							color={BaseColors.DARK}
 							backgroundColor={BaseColors.WHITE}
 							className={styles.close}
