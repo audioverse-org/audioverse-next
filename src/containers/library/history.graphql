@@ -1,4 +1,8 @@
-query getLibraryHistoryData($language: Language!, $first: Int!, $offset: Int!) {
+query getLibraryHistoryPageData(
+	$language: Language!
+	$first: Int!
+	$offset: Int!
+) {
 	me {
 		user {
 			downloadHistory(

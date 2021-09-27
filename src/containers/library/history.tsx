@@ -5,17 +5,17 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
-	GetLibraryHistoryDataQueryVariables,
+	GetLibraryHistoryPageDataQueryVariables,
 	Language,
-	useGetLibraryHistoryDataQuery,
+	useGetLibraryHistoryPageDataQuery,
 } from '@lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';
 
-export const getLibraryHistoryDataDefaultVariables = (
+export const getLibraryHistoryPageDataDefaultVariables = (
 	language: Language
-): GetLibraryHistoryDataQueryVariables => {
+): GetLibraryHistoryPageDataQueryVariables => {
 	return {
 		language,
 		first: 25,
@@ -28,8 +28,8 @@ type Props = {
 };
 
 function LibraryHistory({ language }: Props): JSX.Element {
-	const { data } = useGetLibraryHistoryDataQuery(
-		getLibraryHistoryDataDefaultVariables(language)
+	const { data } = useGetLibraryHistoryPageDataQuery(
+		getLibraryHistoryPageDataDefaultVariables(language)
 	);
 
 	return (

@@ -19,7 +19,7 @@ interface Props {
 	inverse?: boolean;
 }
 
-const addSequenceLabel = (contentType: SequenceContentType) => {
+const getSequenceLabel = (contentType: SequenceContentType) => {
 	switch (contentType) {
 		case SequenceContentType.Audiobook:
 			return (
@@ -75,7 +75,7 @@ export default function CardRecordingSequenceHat({
 				<Button
 					type={inverse ? 'primaryInverse' : 'primary'}
 					onClick={() => setSequenceFavorited(sequence.id, true)}
-					text={addSequenceLabel(sequence.contentType)}
+					text={getSequenceLabel(sequence.contentType)}
 					Icon={IconLike}
 				/>
 				<FormattedMessage

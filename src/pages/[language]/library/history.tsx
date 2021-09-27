@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext } from 'next';
 
 import LibraryHistory, {
-	getLibraryHistoryDataDefaultVariables,
+	getLibraryHistoryPageDataDefaultVariables,
 } from '@containers/library/history';
 import { storeRequest } from '@lib/api/fetchApi';
-import { getLibraryHistoryData } from '@lib/generated/graphql';
+import { getLibraryHistoryPageData } from '@lib/generated/graphql';
 import getDehydratedProps, { DehydratedProps } from '@lib/getDehydratedProps';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
@@ -22,8 +22,8 @@ export async function getServerSideProps({
 			[
 				'getLibraryData',
 				() =>
-					getLibraryHistoryData(
-						getLibraryHistoryDataDefaultVariables(language)
+					getLibraryHistoryPageData(
+						getLibraryHistoryPageDataDefaultVariables(language)
 					),
 			],
 		],

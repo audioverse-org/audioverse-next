@@ -8061,13 +8061,13 @@ export type GetHomeStaticPropsQuery = {
 	};
 };
 
-export type GetLibraryHistoryDataQueryVariables = Exact<{
+export type GetLibraryHistoryPageDataQueryVariables = Exact<{
 	language: Language;
 	first: Scalars['Int'];
 	offset: Scalars['Int'];
 }>;
 
-export type GetLibraryHistoryDataQuery = {
+export type GetLibraryHistoryPageDataQuery = {
 	__typename?: 'Query';
 	me: Maybe<{
 		__typename?: 'AuthenticatedUser';
@@ -12898,8 +12898,8 @@ export const useGetHomeStaticPropsQuery = <
 		),
 		options
 	);
-export const GetLibraryHistoryDataDocument = `
-    query getLibraryHistoryData($language: Language!, $first: Int!, $offset: Int!) {
+export const GetLibraryHistoryPageDataDocument = `
+    query getLibraryHistoryPageData($language: Language!, $first: Int!, $offset: Int!) {
   me {
     user {
       downloadHistory(
@@ -12921,19 +12921,19 @@ export const GetLibraryHistoryDataDocument = `
   }
 }
     ${CardRecordingFragmentDoc}`;
-export const useGetLibraryHistoryDataQuery = <
-	TData = GetLibraryHistoryDataQuery,
+export const useGetLibraryHistoryPageDataQuery = <
+	TData = GetLibraryHistoryPageDataQuery,
 	TError = unknown
 >(
-	variables: GetLibraryHistoryDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryHistoryDataQuery, TError, TData>
+	variables: GetLibraryHistoryPageDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryHistoryPageDataQuery, TError, TData>
 ) =>
-	useQuery<GetLibraryHistoryDataQuery, TError, TData>(
-		['getLibraryHistoryData', variables],
+	useQuery<GetLibraryHistoryPageDataQuery, TError, TData>(
+		['getLibraryHistoryPageData', variables],
 		graphqlFetcher<
-			GetLibraryHistoryDataQuery,
-			GetLibraryHistoryDataQueryVariables
-		>(GetLibraryHistoryDataDocument, variables),
+			GetLibraryHistoryPageDataQuery,
+			GetLibraryHistoryPageDataQueryVariables
+		>(GetLibraryHistoryPageDataDocument, variables),
 		options
 	);
 export const GetLibraryDataDocument = `
@@ -15229,10 +15229,10 @@ export async function getHomeStaticProps<T>(
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
 
-export async function getLibraryHistoryData<T>(
-	variables: ExactAlt<T, GetLibraryHistoryDataQueryVariables>
-): Promise<GetLibraryHistoryDataQuery> {
-	return fetchApi(GetLibraryHistoryDataDocument, { variables });
+export async function getLibraryHistoryPageData<T>(
+	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
+): Promise<GetLibraryHistoryPageDataQuery> {
+	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
 
 export async function getLibraryData<T>(
