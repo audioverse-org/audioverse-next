@@ -43,6 +43,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	attachments: [],
 };
 
 const recordingVideo: Partial<RecordingFragment> = {
@@ -58,6 +59,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	attachments: [],
 };
 
 const recordingAudioVideo: Partial<RecordingFragment> = {
@@ -80,6 +82,7 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	attachments: [],
 };
 
 const Page = ({

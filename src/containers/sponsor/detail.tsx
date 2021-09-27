@@ -48,14 +48,13 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 		id,
 		collections,
 		description,
-		imageWithFallback,
+		image,
 		location,
 		title,
 		website,
 		recordings,
 		sequences,
 	} = sponsor;
-	const image = imageWithFallback.url;
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -99,7 +98,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				<div className={styles.titleLockup}>
 					{image && (
 						<div className={styles.logo}>
-							<RoundImage image={image} alt={title} />
+							<RoundImage image={image.url} alt={title} />
 						</div>
 					)}
 					<Heading2 sans unpadded>
@@ -134,14 +133,14 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
+						onClick={() => toggleFavorited()}
 						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}
 					/>
 					<IconButton
 						Icon={ShareIcon}
-						onPress={() => void 0}
+						onClick={() => void 0}
 						color={BaseColors.DARK}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}

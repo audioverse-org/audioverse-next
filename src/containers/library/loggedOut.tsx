@@ -1,0 +1,46 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import Alert from '@components/atoms/alert';
+import Heading2 from '@components/atoms/heading2';
+import Button from '@components/molecules/button';
+import LibraryNav from '@components/organisms/libraryNav';
+import { makeRegisterRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
+
+import baseStyles from './base.module.scss';
+import styles from './loggedOut.module.scss';
+
+export default function LibraryLoggedOut(): JSX.Element {
+	const languageRoute = useLanguageRoute();
+
+	return (
+		<div className={baseStyles.wrapper}>
+			<LibraryNav currentNavHref={null} disabled />
+			<Alert className={styles.membersOnlyAlert}>
+				<Heading2 className={styles.membersOnlyHeading}>
+					<FormattedMessage
+						id="library__membersOnlyHeading"
+						defaultMessage="Member-only feature"
+					/>
+				</Heading2>
+				<p className={styles.membersOnlyCopy}>
+					<FormattedMessage
+						id="library__membersOnlyCopy"
+						defaultMessage="Login or create an account to access the Library features."
+					/>
+				</p>
+				<Button
+					type="super"
+					text={
+						<FormattedMessage
+							id="library__membersOnlyCta"
+							defaultMessage="Create account or Login"
+						/>
+					}
+					href={makeRegisterRoute(languageRoute)}
+				/>
+			</Alert>
+		</div>
+	);
+}

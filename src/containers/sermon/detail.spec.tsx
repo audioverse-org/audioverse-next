@@ -64,6 +64,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		speakers: [],
 		audioFiles: [],
 		videoFiles: [],
+		attachments: [],
 		audioDownloads: [],
 		videoDownloads: [],
 		...sermon,

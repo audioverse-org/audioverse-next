@@ -1130,6 +1130,7 @@ input FavoritesOrder {
 Properties by which user favorites connections can be ordered.
 """
 enum FavoritesSortableField {
+	ENTITY_TITLE
 	FAVORITED_AT
 }
 
@@ -4350,6 +4351,23 @@ type Query {
 		"""
 		withRole: UserLanguageRoleInput
 	): UserConnection!
+	websiteRecentRecordings(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+	): RecordingConnection!
 	websites(
 		"""
 		Return the elements that come after the specified cursor.
@@ -5106,6 +5124,15 @@ input RecordingUpdateInput {
 	technicalScreeningCheckouts: [RecordingScreeningCheckoutInput!]
 	title: String
 	websiteIds: [ID!]
+}
+
+"""
+Whether a viewer has played a recording or sequence.
+"""
+enum RecordingViewerPlaybackStatus {
+	FINISHED
+	STARTED
+	UNSTARTED
 }
 
 input RecordingsOrder {
@@ -6691,6 +6718,7 @@ type User implements Node {
 		offset: Int
 		orderBy: [FavoritesOrder!]
 		types: [FavoritableCatalogEntityType!]
+		viewerPlaybackStatus: RecordingViewerPlaybackStatus
 	): UserFavoriteConnection!
 
 	"""

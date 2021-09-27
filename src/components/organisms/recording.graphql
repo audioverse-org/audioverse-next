@@ -18,6 +18,10 @@ fragment recording on Recording {
 		url
 		filesize
 	}
+	attachments {
+		filename
+		url
+	}
 	description
 	imageWithFallback {
 		url(size: 50)

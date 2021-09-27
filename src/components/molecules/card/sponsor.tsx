@@ -98,7 +98,7 @@ export default function CardSponsor({
 			</Link>
 			<IconButton
 				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => toggleFavorited()}
+				onClick={() => toggleFavorited()}
 				color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 				backgroundColor={BaseColors.LIGHT_TONE}
 				className={clsx(styles.like, isFavorited && styles.likeActive)}

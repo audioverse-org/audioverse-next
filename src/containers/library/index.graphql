@@ -3,6 +3,8 @@ query getLibraryData(
 	$first: Int!
 	$offset: Int!
 	$groupSequences: Boolean!
+	$types: [FavoritableCatalogEntityType!]
+	$viewerPlaybackStatus: RecordingViewerPlaybackStatus
 ) {
 	me {
 		user {
@@ -11,6 +13,8 @@ query getLibraryData(
 				first: $first
 				offset: $offset
 				groupSequences: $groupSequences
+				types: $types
+				viewerPlaybackStatus: $viewerPlaybackStatus
 				orderBy: [{ field: FAVORITED_AT, direction: DESC }]
 			) {
 				aggregate {

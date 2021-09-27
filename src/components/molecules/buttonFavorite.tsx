@@ -50,7 +50,7 @@ export default function ButtonFavorite({
 	return (
 		<IconButton
 			Icon={isFavorited ? IconLikeActive : IconUnavorite}
-			onPress={() => toggleFavorited()}
+			onClick={() => toggleFavorited()}
 			color={iconColor}
 			{...{
 				backgroundColor,

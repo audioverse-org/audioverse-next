@@ -127,13 +127,12 @@ $like-icon-padding: 8px;
 }
 
 .small {
-	.part {
-		margin-bottom: 0;
-	}
-	.title {
-		margin-bottom: 4px;
-	}
+	.part,
+	.title,
 	.presenter {
 		margin-bottom: 0;
+	}
+	.heading {
+		margin-bottom: 4px;
 	}
 }

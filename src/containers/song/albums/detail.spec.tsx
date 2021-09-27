@@ -8,7 +8,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/albums/[id]';
+} from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps, {
 	language: 'en',

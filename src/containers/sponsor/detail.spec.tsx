@@ -23,7 +23,7 @@ function loadData() {
 			sponsor: {
 				id: 'the_sponsor_id',
 				title: 'the_sponsor_title',
-				imageWithFallback: {
+				image: {
 					url: 'the_sponsor_image',
 				},
 				location: 'the_sponsor_location',

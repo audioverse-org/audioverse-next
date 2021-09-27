@@ -3,15 +3,21 @@
 .subnav {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	margin-bottom: 24px;
+	flex-wrap: wrap;
+	margin-bottom: 8px;
 }
 
 .miniNav {
 	display: flex;
 	align-items: center;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	margin-top: 8px;
+	margin-bottom: 8px;
 	> * {
 		margin-right: 24px;
+		margin-top: 8px;
+		margin-bottom: 8px;
 		padding-top: 3px; // Compensate for border-bottom
 		padding-bottom: 2px;
 		border-bottom: 1px solid transparent;
@@ -28,4 +34,27 @@
 }
 .miniNavActive {
 	border-bottom-color: $ts-red;
+}
+
+.toggleButtons {
+	display: flex;
+	align-items: center;
+	> .button:not(:last-child) {
+		margin-right: 16px;
+	}
+}
+
+.buttonOpen {
+	border-color: $ts-red;
+}
+
+.dropdownWrapper {
+	margin: 0 8px;
+}
+.paragraph {
+	margin: 0;
+	line-height: 28px;
+	a:hover {
+		text-decoration: none;
+	}
 }

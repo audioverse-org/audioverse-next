@@ -26,6 +26,8 @@ import {
 	RecordingFragment,
 } from '@lib/generated/graphql';
 
+import IconDownload from '../../../public/img/icon-download.svg';
+
 import styles from './recording.module.scss';
 
 interface RecordingProps {
@@ -46,6 +48,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		transcript,
 		speakers,
 		writers,
+		attachments,
 	} = recording;
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
@@ -183,6 +186,35 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				/>
 			),
 			definition: <p>{recordingDateString}</p>,
+		});
+	}
+	if (attachments.length) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="sermonDetailPage__attachments"
+					defaultMessage="Attachments"
+					description="Sermon detail attachments label"
+				/>
+			),
+			definition: (
+				<div>
+					{attachments.map(({ filename, url }) => (
+						<a
+							href={url}
+							target="_blank"
+							className={styles.attachment}
+							key={url}
+							rel="noreferrer"
+						>
+							{filename}
+							<div className={styles.attachmentIcon}>
+								<IconDownload />
+							</div>
+						</a>
+					))}
+				</div>
+			),
 		});
 	}
 

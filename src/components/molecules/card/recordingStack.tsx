@@ -51,7 +51,10 @@ export default function CardRecordingStack({
 			{hat}
 			{favoritedNodes.map((recording, index) => (
 				<React.Fragment key={recording.canonicalPath}>
-					<TeaseRecording {...{ recording, theme }} small />
+					<TeaseRecording
+						{...{ recording, theme }}
+						small={favoritedNodes.length > 1}
+					/>
 					{index + 1 < favoritedNodes.length && (
 						<div className={styles.separator} />
 					)}

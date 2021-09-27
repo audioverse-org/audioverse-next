@@ -7,7 +7,7 @@ import { BaseColors } from '@lib/constants';
 import styles from './circleButton.module.scss';
 
 export type ICircleButtonProps = {
-	onPress: (event: MouseEvent<HTMLElement>) => void;
+	onClick: (event: MouseEvent<HTMLElement>) => void;
 	backgroundColor: BaseColors;
 	className?: string;
 	'aria-label'?: string;
@@ -15,7 +15,7 @@ export type ICircleButtonProps = {
 };
 
 export default function CircleButton({
-	onPress,
+	onClick,
 	backgroundColor,
 	className,
 	children,
@@ -24,7 +24,7 @@ export default function CircleButton({
 	return (
 		<div
 			role="button"
-			onClick={onPress}
+			onClick={onClick}
 			className={clsx(
 				styles.base,
 				className,

@@ -1,4 +1,3 @@
-import { Menu } from '@material-ui/core';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -10,6 +9,7 @@ import IconShare from '../../../public/img/icon-share.svg';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShareRecording.module.scss';
+import Dropdown from './dropdown';
 import IconButton from './iconButton';
 
 export default function ButtonShareRecording({
@@ -29,15 +29,6 @@ export default function ButtonShareRecording({
 	const emailLink = `mailto:?subject=Enjoy%20this%20blessing&body=${shareUrl}`;
 	const copyLink = shareUrl;
 	const embedCode = `<iframe src="https://www.audioverse.org/english/embed/media/${id}" width="500" height="309" scrolling="no" frameBorder="0" ></iframe>`;
-	const [anchorEl, setAnchorEl] = React.useState(null);
-
-	const handleClick = (event: any) => {
-		setAnchorEl(event.currentTarget);
-	};
-
-	const handleClose = () => {
-		setAnchorEl(null);
-	};
 
 	const shareOptions = [
 		[
@@ -77,33 +68,31 @@ export default function ButtonShareRecording({
 	] as const;
 
 	return (
-		<>
-			<IconButton
-				Icon={IconShare}
-				onPress={handleClick}
-				color={
-					isBackgroundColorDark(backgroundColor)
-						? BaseColors.WHITE
-						: BaseColors.DARK
-				}
-				backgroundColor={backgroundColor}
-				aria-label={intl.formatMessage({
-					id: 'molecule-buttonShareRecording__buttonLabel',
-					defaultMessage: 'share',
-					description: 'recording share button label',
-				})}
-				aria-controls="shareMenu"
-			/>
-			<Menu
-				id="shareMenu"
-				open={Boolean(anchorEl)}
-				onClose={handleClose}
-				keepMounted
-				anchorEl={anchorEl}
-				PaperProps={{
-					className: styles.paper,
-				}}
-			>
+		<Dropdown
+			id="shareMenu"
+			trigger={({ isOpen, ...props }) => (
+				<IconButton
+					Icon={IconShare}
+					color={
+						isBackgroundColorDark(backgroundColor)
+							? isOpen
+								? BaseColors.SALMON
+								: BaseColors.WHITE
+							: isOpen
+							? BaseColors.RED
+							: BaseColors.DARK
+					}
+					backgroundColor={backgroundColor}
+					aria-label={intl.formatMessage({
+						id: 'molecule-buttonShareRecording__buttonLabel',
+						defaultMessage: 'share',
+						description: 'recording share button label',
+					})}
+					{...props}
+				/>
+			)}
+		>
+			<div className={styles.container}>
 				<Heading6 sans loose uppercase large>
 					<FormattedMessage
 						id="molecule-buttonShareRecording__shareTitle"
@@ -132,7 +121,7 @@ export default function ButtonShareRecording({
 					)}
 				</Heading6>
 				<input className={styles.embedCode} readOnly={true} value={embedCode} />
-			</Menu>
-		</>
+			</div>
+		</Dropdown>
 	);
 }

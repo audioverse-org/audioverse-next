@@ -157,14 +157,14 @@ function PresenterDetail({
 					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
+						onClick={() => toggleFavorited()}
 						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						className={styles.iconButton}
 					/>
 					<IconButton
 						Icon={ShareIcon}
-						onPress={() => void 0}
+						onClick={() => void 0}
 						color={BaseColors.DARK}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						className={styles.iconButton}

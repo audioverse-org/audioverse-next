@@ -29,6 +29,11 @@ function loadData() {
 						image: {
 							url: 'the_person_image',
 						},
+						recordings: {
+							aggregate: {
+								count: 0,
+							},
+						},
 					},
 				],
 			},

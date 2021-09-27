@@ -2,6 +2,7 @@ fragment cardRecordingSequenceHat on Recording {
 	sequence {
 		id
 		canonicalPath(useFuturePath: true)
+		contentType
 		image {
 			url(size: 1000)
 		}

@@ -1,8 +1,10 @@
 @import '../../../styles/common';
 
+$container-padding: 16px;
 .container {
 	display: flex;
 	flex-direction: column;
+	padding: $container-padding;
 	padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
@@ -30,4 +32,38 @@
 .image {
 	display: flex;
 	margin-right: 8px;
+}
+
+$like-icon-size: 32px;
+$like-icon-padding: 8px;
+.details {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+	@media (any-pointer: fine) {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+	&.detailsWithLike {
+		margin-right: #{$like-icon-size + $like-icon-padding};
+	}
+}
+
+.teachingsLabel {
+	line-height: 32px;
+}
+
+.like {
+	display: none;
+	position: absolute;
+	bottom: $container-padding;
+	right: $container-padding;
+	@media (any-pointer: fine) {
+		display: inherit;
+	}
+	@media (pointer: coarse) {
+		pointer-events: none;
+	}
+	&Active {
+		display: inherit;
+	}
 }

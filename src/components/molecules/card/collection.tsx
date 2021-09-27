@@ -102,7 +102,7 @@ export default function CardCollection({
 			</Link>
 			<IconButton
 				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onPress={() => toggleFavorited()}
+				onClick={() => toggleFavorited()}
 				color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 				backgroundColor={BaseColors.DARK}
 				className={clsx(styles.like, isFavorited && styles.likeActive)}

@@ -45,6 +45,11 @@ function loadData() {
 							imageWithFallback: {
 								url: 'the_person_image_url',
 							},
+							recordings: {
+								aggregate: {
+									count: 0,
+								},
+							},
 						},
 					],
 				},

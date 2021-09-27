@@ -140,14 +140,14 @@ export function Sequence({
 					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onPress={() => toggleFavorited()}
+						onClick={() => toggleFavorited()}
 						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
 						backgroundColor={BaseColors.CREAM}
 						className={styles.iconButton}
 					/>
 					<IconButton
 						Icon={ShareIcon}
-						onPress={() => void 0}
+						onClick={() => void 0}
 						color={BaseColors.DARK}
 						backgroundColor={BaseColors.CREAM}
 						className={styles.iconButton}

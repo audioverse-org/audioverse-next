@@ -28,13 +28,9 @@ export type HomeProps = {
 
 export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();
-	const song = data?.musicTracks.nodes && data.musicTracks.nodes[0];
+	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const chapter = data?.audiobible?.book.chapter;
-	const story = data?.stories.nodes && data.stories.nodes[0];
 	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
-	const recording = data?.sermons.nodes && data.sermons.nodes[0];
-	const audiobookTrack =
-		data?.audiobookTracks.nodes && data.audiobookTracks.nodes[0];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
@@ -157,34 +153,24 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					<Slider perSlide={4} clip={false}>
-						{song && (
-							<div className={styles.slideCard}>
-								<CardRecording recording={song} />
+						{recentRecordings.slice(0, 2).map((recording) => (
+							<div className={styles.slideCard} key={recording.canonicalPath}>
+								<CardRecording recording={recording} />
 							</div>
-						)}
+						))}
 						{chapter && (
 							<div className={styles.slideCard}>
 								<CardBibleChapter chapter={chapter} />
 							</div>
 						)}
-						{story && (
-							<div className={styles.slideCard}>
-								<CardRecording recording={story} />
+						{recentRecordings.slice(2).map((recording) => (
+							<div className={styles.slideCard} key={recording.canonicalPath}>
+								<CardRecording recording={recording} />
 							</div>
-						)}
+						))}
 						{topicRecording && (
 							<div className={styles.slideCard}>
 								<CardTopic topicRecording={topicRecording} />
-							</div>
-						)}
-						{recording && (
-							<div className={styles.slideCard}>
-								<CardRecording recording={recording} />
-							</div>
-						)}
-						{audiobookTrack && (
-							<div className={styles.slideCard}>
-								<CardRecording recording={audiobookTrack} />
 							</div>
 						)}
 					</Slider>

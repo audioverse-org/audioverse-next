@@ -5,7 +5,7 @@ query getSponsorDetailPageData($id: ID!) {
 		location
 		website
 		description
-		imageWithFallback {
+		image {
 			url(size: 100)
 		}
 		collections(first: 3, orderBy: [{ field: CREATED_AT, direction: DESC }]) {
