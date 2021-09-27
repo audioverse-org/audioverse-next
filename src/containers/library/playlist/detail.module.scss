@@ -1,0 +1,35 @@
+@import '../../../styles/common';
+
+.container {
+	padding: 16px 24px;
+	background-color: $ts-playlistH;
+}
+
+.title {
+	color: $ts-white;
+	margin-bottom: 8px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: -4px;
+	> *:first-child {
+		flex-grow: 1;
+	}
+}
+
+.countLabel {
+	color: $ts-lightTone;
+	> span {
+		margin-right: 16px;
+	}
+}
+
+.iconButton {
+	margin-left: 8px;
+}
+
+.cardGroup {
+	margin-bottom: 24px;
+}

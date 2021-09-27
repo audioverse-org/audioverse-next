@@ -1,0 +1,51 @@
+@import '../../../styles/common';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+	background-color: $ts-playlistH;
+	transition: background-color $transition-medium;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		background-color: $ts-darkened-playlistH;
+	}
+}
+
+.stretch {
+	flex-grow: 1;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	color: $ts-white;
+}
+
+.details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 4px;
+}
+
+.teachingsLabel {
+	line-height: 32px;
+	color: $ts-lightTone;
+}
+
+.like {
+	pointer-events: none; // Until we implement playlist management
+}
+
+.subRecordingsList {
+	margin-top: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+}

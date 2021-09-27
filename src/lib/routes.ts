@@ -231,16 +231,10 @@ export const makeTestimoniesRoute = (
 	page: string | number
 ): string => `/${languageRoute}/testimonies/page/${page}`;
 
-export const makePlaylistListRoute = (
-	languageRoute: string,
-	page: string | number
-): string => `/${languageRoute}/playlists/page/${page}`;
-
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
-	playlistId: Scalars['ID'],
-	page: string | number = 1
-): string => `/${languageRoute}/playlists/${playlistId}/page/${page}`;
+	playlistId: Scalars['ID']
+): string => `/${languageRoute}/library/playlist/${playlistId}`;
 
 export const makeBlogPostRoute = (
 	languageRoute: string,
@@ -260,3 +254,6 @@ export const makeRegisterRoute = (languageRoute: string): string =>
 
 export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 	`/${languageRoute}/library${subpath ? `/${subpath}` : ''}`;
+
+export const makeDiscoverRoute = (languageRoute: string): string =>
+	`/${languageRoute}/discover`;

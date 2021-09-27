@@ -1,0 +1,21 @@
+import React from 'react';
+
+import { CardRecordingFragment } from '@lib/generated/graphql';
+
+import TeaseRecording from '../teaseRecording';
+
+import CardWithTheme from './base/withTheme';
+
+interface Props {
+	recording: CardRecordingFragment;
+}
+
+export default function CardPlaylistItem({ recording }: Props): JSX.Element {
+	const theme = 'playlist';
+
+	return (
+		<CardWithTheme {...{ theme }}>
+			<TeaseRecording {...{ recording, theme }} />
+		</CardWithTheme>
+	);
+}

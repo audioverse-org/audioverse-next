@@ -120,5 +120,7 @@ export enum BaseColors {
 	STORY_B = 'storyB',
 	STORY_H = 'storyH',
 	TOPIC_B = 'topicB',
+	PLAYLIST_H = 'playlistH',
+	PLAYLIST_B = 'playlistB',
 	SMART_PLAYLIST_H = 'smartPlaylistH',
 }

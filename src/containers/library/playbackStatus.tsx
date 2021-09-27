@@ -1,8 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardMasonry from '@components/molecules/cardMasonry';
+import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
 	GetLibraryDataQueryVariables,
@@ -43,15 +45,47 @@ function LibraryPlaybackStatus({
 		getLibraryPlaybackStatusDataVariables(language, viewerPlaybackStatus)
 	);
 
+	const items = data?.me?.user.favorites.nodes || [];
+
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref={path} />
 
-			<CardMasonry
-				items={data?.me?.user.favorites.nodes || []}
-				render={({ data }) => <CardFavorite favorite={data} />}
-				key={viewerPlaybackStatus}
-			/>
+			{items.length ? (
+				<CardMasonry
+					items={items}
+					render={({ data }) => <CardFavorite favorite={data} />}
+					key={viewerPlaybackStatus}
+				/>
+			) : (
+				<LibraryError
+					title={
+						viewerPlaybackStatus === RecordingViewerPlaybackStatus.Finished ? (
+							<FormattedMessage
+								id="libraryPlaybackStatus__finishedEmptyHeading"
+								defaultMessage="You haven’t finished any items yet"
+							/>
+						) : viewerPlaybackStatus ===
+						  RecordingViewerPlaybackStatus.Started ? (
+							<FormattedMessage
+								id="libraryPlaybackStatus__startedEmptyHeading"
+								defaultMessage="You haven’t started any items yet"
+							/>
+						) : (
+							<FormattedMessage
+								id="libraryPlaybackStatus__unstartedEmptyHeading"
+								defaultMessage="You don’t have any items saved yet"
+							/>
+						)
+					}
+					message={
+						<FormattedMessage
+							id="libraryPlaybackStatus__emptyCopy"
+							defaultMessage="Find something to listen to on the Discover page."
+						/>
+					}
+				/>
+			)}
 		</div>
 	);
 }

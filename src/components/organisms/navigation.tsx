@@ -5,7 +5,7 @@ import ActiveLink from '@components/atoms/activeLink';
 import Heading1 from '@components/atoms/heading1';
 import Button from '@components/molecules/button';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
-import { makeLibraryRoute } from '@lib/routes';
+import { makeDiscoverRoute, makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBible from '../../../public/img/icon-bible.svg';
@@ -32,7 +32,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 	}[] = [
 		{
 			key: 'discover',
-			href: `/${languageRoute}/discover`,
+			href: makeDiscoverRoute(languageRoute),
 			Icon: IconSearch,
 			label: intl.formatMessage({
 				id: `header__navItemDiscover`,

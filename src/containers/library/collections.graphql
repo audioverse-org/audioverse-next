@@ -1,0 +1,19 @@
+query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
+	me {
+		user {
+			playlists(
+				language: $language
+				offset: $offset
+				first: $first
+				orderBy: [{ field: CREATED_AT, direction: DESC }]
+			) {
+				nodes {
+					...cardPlaylist
+				}
+				aggregate {
+					count
+				}
+			}
+		}
+	}
+}

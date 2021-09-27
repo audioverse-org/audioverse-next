@@ -1,8 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
+import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
 	GetLibraryHistoryPageDataQueryVariables,
@@ -32,15 +34,37 @@ function LibraryHistory({ language }: Props): JSX.Element {
 		getLibraryHistoryPageDataDefaultVariables(language)
 	);
 
+	const historyItems = data?.me?.user.downloadHistory.nodes || [];
+
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref="history" />
 
-			<CardGroup>
-				{(data?.me?.user.downloadHistory.nodes || []).map(({ recording }) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
-				))}
-			</CardGroup>
+			{historyItems.length ? (
+				<CardGroup>
+					{historyItems.map(({ recording }) => (
+						<CardRecording
+							recording={recording}
+							key={recording.canonicalPath}
+						/>
+					))}
+				</CardGroup>
+			) : (
+				<LibraryError
+					title={
+						<FormattedMessage
+							id="libraryHistory__emptyHeading"
+							defaultMessage="You haven’t listened to any items yet"
+						/>
+					}
+					message={
+						<FormattedMessage
+							id="libraryHistory__emptyCopy"
+							defaultMessage="Find something to listen to on the Discover page."
+						/>
+					}
+				/>
+			)}
 		</div>
 	);
 }
