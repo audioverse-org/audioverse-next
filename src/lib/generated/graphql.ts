@@ -92,6 +92,7 @@ export type AuthenticatedUserPayload = {
 
 export type Bible = Node & {
 	__typename?: 'Bible';
+	abbreviation: Scalars['String'];
 	book: BibleBook;
 	books: Array<BibleBook>;
 	copyrightText: Scalars['String'];
@@ -5516,11 +5517,32 @@ export type ButtonShareRecordingFragment = {
 	shareUrl: string;
 };
 
+export type CardBibleBookFragment = {
+	__typename?: 'BibleBook';
+	id: string | number;
+	title: string;
+	chapterCount: number;
+	bible: { __typename?: 'Bible'; abbreviation: string };
+};
+
 export type CardBibleChapterFragment = {
 	__typename?: 'BibleChapter';
 	id: string | number;
 	title: string;
 	url: string;
+};
+
+export type CardBibleVersionFragment = {
+	__typename?: 'Bible';
+	id: string | number;
+	title: string;
+	books: Array<{
+		__typename?: 'BibleBook';
+		id: string | number;
+		title: string;
+		chapterCount: number;
+		bible: { __typename?: 'Bible'; abbreviation: string };
+	}>;
 };
 
 export type CardCollectionFragment = {
@@ -7163,10 +7185,12 @@ export type GetBibleBookDetailPageDataQuery = {
 	__typename?: 'Query';
 	audiobible: Maybe<{
 		__typename?: 'Bible';
+		id: string | number;
 		title: string;
 		copyrightText: string;
 		book: {
 			__typename?: 'BibleBook';
+			id: string | number;
 			title: string;
 			shareUrl: string;
 			chapters: Array<{
@@ -7210,11 +7234,15 @@ export type GetVersionDetailPageDataQuery = {
 	__typename?: 'Query';
 	audiobible: Maybe<{
 		__typename?: 'Bible';
+		title: string;
+		copyrightText: string;
+		sponsor: { __typename?: 'BibleSponsor'; name: string; url: string };
 		books: Array<{
 			__typename?: 'BibleBook';
 			id: string | number;
 			title: string;
 			chapterCount: number;
+			bible: { __typename?: 'Bible'; abbreviation: string };
 		}>;
 	}>;
 };
@@ -7240,7 +7268,18 @@ export type GetBibleVersionsPageDataQuery = {
 	audiobibles: {
 		__typename?: 'BibleConnection';
 		nodes: Maybe<
-			Array<{ __typename?: 'Bible'; title: string; id: string | number }>
+			Array<{
+				__typename?: 'Bible';
+				id: string | number;
+				title: string;
+				books: Array<{
+					__typename?: 'BibleBook';
+					id: string | number;
+					title: string;
+					chapterCount: number;
+					bible: { __typename?: 'Bible'; abbreviation: string };
+				}>;
+			}>
 		>;
 	};
 };
@@ -8115,6 +8154,84 @@ export type GetHomeStaticPropsQuery = {
 	};
 };
 
+export type GetLibraryPlaylistsDataQueryVariables = Exact<{
+	language: Language;
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetLibraryPlaylistsDataQuery = {
+	__typename?: 'Query';
+	me: Maybe<{
+		__typename?: 'AuthenticatedUser';
+		user: {
+			__typename?: 'User';
+			playlists: {
+				__typename?: 'UserPlaylistConnection';
+				nodes: Maybe<
+					Array<{
+						__typename?: 'UserPlaylist';
+						id: string | number;
+						title: string;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							nodes: Maybe<
+								Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: Maybe<number>;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sequence: Maybe<{
+										__typename?: 'Sequence';
+										title: string;
+										contentType: SequenceContentType;
+										recordings: {
+											__typename?: 'RecordingConnection';
+											aggregate: Maybe<{
+												__typename?: 'Aggregate';
+												count: number;
+											}>;
+										};
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+								}>
+							>;
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
+					}>
+				>;
+				aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+			};
+		};
+	}>;
+};
+
 export type GetLibraryHistoryPageDataQueryVariables = Exact<{
 	language: Language;
 	first: Scalars['Int'];
@@ -8582,84 +8699,6 @@ export type GetLibraryPlaylistPageDataQuery = {
 					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 				};
 			}>;
-		};
-	}>;
-};
-
-export type GetLibraryPlaylistsDataQueryVariables = Exact<{
-	language: Language;
-	offset: Maybe<Scalars['Int']>;
-	first: Maybe<Scalars['Int']>;
-}>;
-
-export type GetLibraryPlaylistsDataQuery = {
-	__typename?: 'Query';
-	me: Maybe<{
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlists: {
-				__typename?: 'UserPlaylistConnection';
-				nodes: Maybe<
-					Array<{
-						__typename?: 'UserPlaylist';
-						id: string | number;
-						title: string;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							nodes: Maybe<
-								Array<{
-									__typename?: 'Recording';
-									canonicalPath: string;
-									sequenceIndex: Maybe<number>;
-									id: string | number;
-									title: string;
-									duration: number;
-									recordingContentType: RecordingContentType;
-									persons: Array<{
-										__typename?: 'Person';
-										name: string;
-										canonicalPath: string;
-										imageWithFallback: { __typename?: 'Image'; url: string };
-									}>;
-									sequence: Maybe<{
-										__typename?: 'Sequence';
-										title: string;
-										contentType: SequenceContentType;
-										recordings: {
-											__typename?: 'RecordingConnection';
-											aggregate: Maybe<{
-												__typename?: 'Aggregate';
-												count: number;
-											}>;
-										};
-									}>;
-									audioFiles: Array<{
-										__typename?: 'AudioFile';
-										url: string;
-										filesize: string;
-										mimeType: string;
-									}>;
-									videoFiles: Array<{
-										__typename?: 'VideoFile';
-										url: string;
-										filesize: string;
-										mimeType: string;
-									}>;
-									videoStreams: Array<{
-										__typename?: 'VideoFile';
-										url: string;
-										filesize: string;
-										mimeType: string;
-									}>;
-								}>
-							>;
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
-					}>
-				>;
-				aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-			};
 		};
 	}>;
 };
@@ -11392,6 +11431,25 @@ export const CardBibleChapterFragmentDoc = `
   url
 }
     `;
+export const CardBibleBookFragmentDoc = `
+    fragment cardBibleBook on BibleBook {
+  id
+  title
+  chapterCount
+  bible {
+    abbreviation
+  }
+}
+    `;
+export const CardBibleVersionFragmentDoc = `
+    fragment cardBibleVersion on Bible {
+  id
+  title
+  books {
+    ...cardBibleBook
+  }
+}
+    ${CardBibleBookFragmentDoc}`;
 export const SponsorLockupFragmentDoc = `
     fragment sponsorLockup on Sponsor {
   id
@@ -12423,8 +12481,10 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
 export const GetBibleBookDetailPageDataDocument = `
     query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
   audiobible(id: $versionId) {
+    id
     title
     book(id: $bookId) {
+      id
       title
       shareUrl
       chapters {
@@ -12489,14 +12549,18 @@ export const useGetBibleBookDetailPathsDataQuery = <
 export const GetVersionDetailPageDataDocument = `
     query getVersionDetailPageData($id: ID!) {
   audiobible(id: $id) {
+    title
+    copyrightText
+    sponsor {
+      name
+      url
+    }
     books {
-      id
-      title
-      chapterCount
+      ...cardBibleBook
     }
   }
 }
-    `;
+    ${CardBibleBookFragmentDoc}`;
 export const useGetVersionDetailPageDataQuery = <
 	TData = GetVersionDetailPageDataQuery,
 	TError = unknown
@@ -12540,12 +12604,11 @@ export const GetBibleVersionsPageDataDocument = `
     query getBibleVersionsPageData {
   audiobibles {
     nodes {
-      title
-      id
+      ...cardBibleVersion
     }
   }
 }
-    `;
+    ${CardBibleVersionFragmentDoc}`;
 export const useGetBibleVersionsPageDataQuery = <
 	TData = GetBibleVersionsPageDataQuery,
 	TError = unknown
@@ -13062,6 +13125,42 @@ export const useGetHomeStaticPropsQuery = <
 		),
 		options
 	);
+export const GetLibraryPlaylistsDataDocument = `
+    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
+  me {
+    user {
+      playlists(
+        language: $language
+        offset: $offset
+        first: $first
+        orderBy: [{field: CREATED_AT, direction: DESC}]
+      ) {
+        nodes {
+          ...cardPlaylist
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}
+    ${CardPlaylistFragmentDoc}`;
+export const useGetLibraryPlaylistsDataQuery = <
+	TData = GetLibraryPlaylistsDataQuery,
+	TError = unknown
+>(
+	variables: GetLibraryPlaylistsDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
+) =>
+	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
+		['getLibraryPlaylistsData', variables],
+		graphqlFetcher<
+			GetLibraryPlaylistsDataQuery,
+			GetLibraryPlaylistsDataQueryVariables
+		>(GetLibraryPlaylistsDataDocument, variables),
+		options
+	);
 export const GetLibraryHistoryPageDataDocument = `
     query getLibraryHistoryPageData($language: Language!, $first: Int!, $offset: Int!) {
   me {
@@ -13173,42 +13272,6 @@ export const useGetLibraryPlaylistPageDataQuery = <
 			GetLibraryPlaylistPageDataQuery,
 			GetLibraryPlaylistPageDataQueryVariables
 		>(GetLibraryPlaylistPageDataDocument, variables),
-		options
-	);
-export const GetLibraryPlaylistsDataDocument = `
-    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
-  me {
-    user {
-      playlists(
-        language: $language
-        offset: $offset
-        first: $first
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardPlaylist
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardPlaylistFragmentDoc}`;
-export const useGetLibraryPlaylistsDataQuery = <
-	TData = GetLibraryPlaylistsDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryPlaylistsDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
-		['getLibraryPlaylistsData', variables],
-		graphqlFetcher<
-			GetLibraryPlaylistsDataQuery,
-			GetLibraryPlaylistsDataQueryVariables
-		>(GetLibraryPlaylistsDataDocument, variables),
 		options
 	);
 export const GetPresenterAppearsPageDataDocument = `
@@ -15399,6 +15462,12 @@ export async function getHomeStaticProps<T>(
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
 
+export async function getLibraryPlaylistsData<T>(
+	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
+): Promise<GetLibraryPlaylistsDataQuery> {
+	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
+}
+
 export async function getLibraryHistoryPageData<T>(
 	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
 ): Promise<GetLibraryHistoryPageDataQuery> {
@@ -15415,12 +15484,6 @@ export async function getLibraryPlaylistPageData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
 ): Promise<GetLibraryPlaylistPageDataQuery> {
 	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
-}
-
-export async function getLibraryPlaylistsData<T>(
-	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
-): Promise<GetLibraryPlaylistsDataQuery> {
-	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
 
 export async function getPresenterAppearsPageData<T>(

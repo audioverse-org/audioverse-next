@@ -1,9 +1,13 @@
 query getVersionDetailPageData($id: ID!) {
 	audiobible(id: $id) {
+		title
+		copyrightText
+		sponsor {
+			name
+			url
+		}
 		books {
-			id
-			title
-			chapterCount
+			...cardBibleBook
 		}
 	}
 }

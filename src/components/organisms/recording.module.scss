@@ -172,13 +172,13 @@
 	border: 1px solid $ts-lightTone;
 	border-radius: 16px;
 	&:hover {
-		border-color: $ts-midTone;
+		box-shadow: $ts-shadow-small-hover;
 		color: $ts-dark;
 		text-decoration: none;
-		.attachmentIcon {
-			color: $ts-white;
-			background-color: $ts-midTone;
-		}
+	}
+	&:focus {
+		box-shadow: $ts-shadow-small-hover;
+		border-color: $ts-midTone;
 	}
 }
 .attachmentIcon {

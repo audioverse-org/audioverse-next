@@ -1,0 +1,25 @@
+@import '../../../styles/common';
+
+.card.card {
+	box-shadow: none;
+}
+
+.container {
+	padding: 16px;
+	background: $ts-bibleH;
+	transition: background-color $transition-medium;
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	&:hover {
+		background-color: $ts-darkened-bibleH;
+	}
+}
+
+.title {
+	font-weight: 400;
+	letter-spacing: 3.8px;
+	text-align: center;
+	text-transform: uppercase;
+}

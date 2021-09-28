@@ -4,13 +4,9 @@ import { getBibleVersionsPageData } from '@lib/generated/graphql';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeBibleListRoute } from '@lib/routes';
 
-// TODO: If we ever add a load of Bibles, we may need to
-//  add support for pagination.
-
 export default Versions;
 
 export async function getStaticProps(): Promise<StaticProps<VersionsProps>> {
-	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const response = await getBibleVersionsPageData({});
 
 	return {
@@ -26,6 +22,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	return {
 		paths: baseRoutes.map(makeBibleListRoute),
-		fallback: true,
+		fallback: false,
 	};
 }

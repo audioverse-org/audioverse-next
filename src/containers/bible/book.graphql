@@ -1,7 +1,9 @@
 query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
 	audiobible(id: $versionId) {
+		id
 		title
 		book(id: $bookId) {
+			id
 			title
 			shareUrl
 			chapters {

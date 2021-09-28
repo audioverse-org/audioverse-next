@@ -1,20 +1,4 @@
-// START INTER FONT
-
-// TODO: Extract into separate file
-
-@use "~inter-ui/default" with (
-  $inter-font-display: swap,
-  $inter-font-path: '~inter-ui/Inter (web)'
-);
-@use "~inter-ui/variable" with (
-  $inter-font-display: swap,
-  $inter-font-path: '~inter-ui/Inter (web)'
-);
-
-@include default.all;
-@include variable.all;
-
-// END INTER FONT
+@import 'inter.scss';
 
 // START IVY JOURNAL FONT
 

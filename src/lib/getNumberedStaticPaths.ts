@@ -22,7 +22,6 @@ const makeLanguagePaths = async <T>(
 	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT) + 1;
 	const base = LANGUAGES[language].base_url;
 
-	// TODO: Extract route generation
 	return _.range(1, limit).map((x) => `/${base}/${innerSegment}/page/${x}`);
 };
 

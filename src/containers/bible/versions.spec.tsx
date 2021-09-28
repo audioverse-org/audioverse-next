@@ -22,6 +22,7 @@ function loadPageData() {
 					{
 						title: 'the_version_title',
 						id: 'the_version_id',
+						books: [],
 					},
 				],
 			},
@@ -57,7 +58,8 @@ describe('versions list', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('the_version_title') as HTMLLinkElement;
+		const link = getByText('the_version_title')
+			.parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/bibles/the_version_id');
 	});
