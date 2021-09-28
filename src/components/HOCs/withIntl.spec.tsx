@@ -22,7 +22,6 @@ import Book from '@containers/bible/book';
 import CollectionDetail from '@containers/collection/detail';
 import CollectionList from '@containers/collection/list';
 import Home from '@containers/home';
-import Playlists from '@containers/playlist/list';
 import Presenters from '@containers/presenter/list';
 import PresenterRecordings from '@containers/presenter/recordings';
 import SeriesDetail from '@containers/series/detail';
@@ -597,7 +596,6 @@ describe('localization usage', () => {
 			SeriesDetail,
 			{ sequence: { id: 'z', recordings: { aggregate: { count: 0 } } } },
 		],
-		[Playlists, {}],
 		[Logout, {}],
 		// TODO [Register, {}],
 		// TODO: [Login, {}],

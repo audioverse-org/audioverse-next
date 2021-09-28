@@ -33,6 +33,16 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/account/playlists',
+				destination: '/:lang/library/collections',
+				permanent: true,
+			},
+			{
+				source: '/:lang/account/playlist/:id',
+				destination: '/:lang/library/playlist/:id',
+				permanent: true,
+			},
+			{
 				source: '/:lang/account/registrar',
 				destination: '/:lang/account/register',
 				permanent: true,

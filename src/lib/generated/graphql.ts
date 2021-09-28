@@ -5776,6 +5776,60 @@ export type CardPersonFragment = {
 	};
 };
 
+export type CardPlaylistFragment = {
+	__typename?: 'UserPlaylist';
+	id: string | number;
+	title: string;
+	recordings: {
+		__typename?: 'RecordingConnection';
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: Maybe<number>;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					title: string;
+					contentType: SequenceContentType;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}>
+		>;
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+	};
+};
+
 export type CardPostFragment = {
 	__typename?: 'BlogPost';
 	publishDate: string;
@@ -8444,13 +8498,11 @@ export type GetLibraryDataQuery = {
 	}>;
 };
 
-export type GetPlaylistPageDataQueryVariables = Exact<{
+export type GetLibraryPlaylistPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
-	offset: Maybe<Scalars['Int']>;
-	first: Maybe<Scalars['Int']>;
 }>;
 
-export type GetPlaylistPageDataQuery = {
+export type GetLibraryPlaylistPageDataQuery = {
 	__typename?: 'Query';
 	me: Maybe<{
 		__typename?: 'AuthenticatedUser';
@@ -8459,24 +8511,71 @@ export type GetPlaylistPageDataQuery = {
 			playlist: Maybe<{
 				__typename?: 'UserPlaylist';
 				title: string;
+				createdAt: string;
+				summary: string;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					nodes: Maybe<
 						Array<{
 							__typename?: 'Recording';
+							canonicalPath: string;
+							sequenceIndex: Maybe<number>;
 							id: string | number;
 							title: string;
-							canonicalPath: string;
-							description: Maybe<string>;
 							duration: number;
-							hasVideo: boolean;
-							recordingDate: Maybe<string>;
-							imageWithFallback: { __typename?: 'Image'; url: string };
+							recordingContentType: RecordingContentType;
+							sequence: Maybe<{
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: Maybe<{ __typename?: 'Image'; url: string }>;
+								favoritedRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+								};
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+								};
+							}>;
+							sponsor: Maybe<{
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
+							writers: Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
 							persons: Array<{
 								__typename?: 'Person';
 								name: string;
 								canonicalPath: string;
 								imageWithFallback: { __typename?: 'Image'; url: string };
+							}>;
+							audioFiles: Array<{
+								__typename?: 'AudioFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
+							}>;
+							videoFiles: Array<{
+								__typename?: 'VideoFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
+							}>;
+							videoStreams: Array<{
+								__typename?: 'VideoFile';
+								url: string;
+								filesize: string;
+								mimeType: string;
 							}>;
 						}>
 					>;
@@ -8487,13 +8586,13 @@ export type GetPlaylistPageDataQuery = {
 	}>;
 };
 
-export type GetPlaylistsPageDataQueryVariables = Exact<{
+export type GetLibraryPlaylistsDataQueryVariables = Exact<{
 	language: Language;
 	offset: Maybe<Scalars['Int']>;
 	first: Maybe<Scalars['Int']>;
 }>;
 
-export type GetPlaylistsPageDataQuery = {
+export type GetLibraryPlaylistsDataQuery = {
 	__typename?: 'Query';
 	me: Maybe<{
 		__typename?: 'AuthenticatedUser';
@@ -8506,6 +8605,57 @@ export type GetPlaylistsPageDataQuery = {
 						__typename?: 'UserPlaylist';
 						id: string | number;
 						title: string;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							nodes: Maybe<
+								Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: Maybe<number>;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sequence: Maybe<{
+										__typename?: 'Sequence';
+										title: string;
+										contentType: SequenceContentType;
+										recordings: {
+											__typename?: 'RecordingConnection';
+											aggregate: Maybe<{
+												__typename?: 'Aggregate';
+												count: number;
+											}>;
+										};
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+								}>
+							>;
+							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+						};
 					}>
 				>;
 				aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -11474,6 +11624,20 @@ ${CardRecordingStackFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}
 ${CardPersonFragmentDoc}`;
+export const CardPlaylistFragmentDoc = `
+    fragment cardPlaylist on UserPlaylist {
+  id
+  title
+  recordings(first: 2) {
+    nodes {
+      ...teaseRecording
+    }
+    aggregate {
+      count
+    }
+  }
+}
+    ${TeaseRecordingFragmentDoc}`;
 export const CardPostFragmentDoc = `
     fragment cardPost on BlogPost {
   image {
@@ -12975,15 +13139,17 @@ export const useGetLibraryDataQuery = <
 		),
 		options
 	);
-export const GetPlaylistPageDataDocument = `
-    query getPlaylistPageData($id: ID!, $offset: Int, $first: Int) {
+export const GetLibraryPlaylistPageDataDocument = `
+    query getLibraryPlaylistPageData($id: ID!) {
   me {
     user {
       playlist(id: $id) {
         title
-        recordings(offset: $offset, first: $first) {
+        createdAt
+        summary
+        recordings(offset: 0, first: 1500) {
           nodes {
-            ...recordingList
+            ...cardRecording
           }
           aggregate {
             count
@@ -12993,30 +13159,34 @@ export const GetPlaylistPageDataDocument = `
     }
   }
 }
-    ${RecordingListFragmentDoc}`;
-export const useGetPlaylistPageDataQuery = <
-	TData = GetPlaylistPageDataQuery,
+    ${CardRecordingFragmentDoc}`;
+export const useGetLibraryPlaylistPageDataQuery = <
+	TData = GetLibraryPlaylistPageDataQuery,
 	TError = unknown
 >(
-	variables: GetPlaylistPageDataQueryVariables,
-	options?: UseQueryOptions<GetPlaylistPageDataQuery, TError, TData>
+	variables: GetLibraryPlaylistPageDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryPlaylistPageDataQuery, TError, TData>
 ) =>
-	useQuery<GetPlaylistPageDataQuery, TError, TData>(
-		['getPlaylistPageData', variables],
-		graphqlFetcher<GetPlaylistPageDataQuery, GetPlaylistPageDataQueryVariables>(
-			GetPlaylistPageDataDocument,
-			variables
-		),
+	useQuery<GetLibraryPlaylistPageDataQuery, TError, TData>(
+		['getLibraryPlaylistPageData', variables],
+		graphqlFetcher<
+			GetLibraryPlaylistPageDataQuery,
+			GetLibraryPlaylistPageDataQueryVariables
+		>(GetLibraryPlaylistPageDataDocument, variables),
 		options
 	);
-export const GetPlaylistsPageDataDocument = `
-    query getPlaylistsPageData($language: Language!, $offset: Int, $first: Int) {
+export const GetLibraryPlaylistsDataDocument = `
+    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
   me {
     user {
-      playlists(language: $language, offset: $offset, first: $first) {
+      playlists(
+        language: $language
+        offset: $offset
+        first: $first
+        orderBy: [{field: CREATED_AT, direction: DESC}]
+      ) {
         nodes {
-          id
-          title
+          ...cardPlaylist
         }
         aggregate {
           count
@@ -13025,20 +13195,20 @@ export const GetPlaylistsPageDataDocument = `
     }
   }
 }
-    `;
-export const useGetPlaylistsPageDataQuery = <
-	TData = GetPlaylistsPageDataQuery,
+    ${CardPlaylistFragmentDoc}`;
+export const useGetLibraryPlaylistsDataQuery = <
+	TData = GetLibraryPlaylistsDataQuery,
 	TError = unknown
 >(
-	variables: GetPlaylistsPageDataQueryVariables,
-	options?: UseQueryOptions<GetPlaylistsPageDataQuery, TError, TData>
+	variables: GetLibraryPlaylistsDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
 ) =>
-	useQuery<GetPlaylistsPageDataQuery, TError, TData>(
-		['getPlaylistsPageData', variables],
+	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
+		['getLibraryPlaylistsData', variables],
 		graphqlFetcher<
-			GetPlaylistsPageDataQuery,
-			GetPlaylistsPageDataQueryVariables
-		>(GetPlaylistsPageDataDocument, variables),
+			GetLibraryPlaylistsDataQuery,
+			GetLibraryPlaylistsDataQueryVariables
+		>(GetLibraryPlaylistsDataDocument, variables),
 		options
 	);
 export const GetPresenterAppearsPageDataDocument = `
@@ -15241,16 +15411,16 @@ export async function getLibraryData<T>(
 	return fetchApi(GetLibraryDataDocument, { variables });
 }
 
-export async function getPlaylistPageData<T>(
-	variables: ExactAlt<T, GetPlaylistPageDataQueryVariables>
-): Promise<GetPlaylistPageDataQuery> {
-	return fetchApi(GetPlaylistPageDataDocument, { variables });
+export async function getLibraryPlaylistPageData<T>(
+	variables: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
+): Promise<GetLibraryPlaylistPageDataQuery> {
+	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
 }
 
-export async function getPlaylistsPageData<T>(
-	variables: ExactAlt<T, GetPlaylistsPageDataQueryVariables>
-): Promise<GetPlaylistsPageDataQuery> {
-	return fetchApi(GetPlaylistsPageDataDocument, { variables });
+export async function getLibraryPlaylistsData<T>(
+	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
+): Promise<GetLibraryPlaylistsDataQuery> {
+	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
 
 export async function getPresenterAppearsPageData<T>(

@@ -1,0 +1,19 @@
+query getLibraryPlaylistPageData($id: ID!) {
+	me {
+		user {
+			playlist(id: $id) {
+				title
+				createdAt
+				summary
+				recordings(offset: 0, first: 1500) {
+					nodes {
+						...cardRecording
+					}
+					aggregate {
+						count
+					}
+				}
+			}
+		}
+	}
+}

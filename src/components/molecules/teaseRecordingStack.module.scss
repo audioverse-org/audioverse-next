@@ -1,0 +1,16 @@
+@import '../../styles/common';
+
+.base {
+	background: var(--cardBg);
+}
+
+.separator {
+	border-bottom: 1px solid var(--textRuleColor);
+	margin: 0 16px;
+	opacity: 0.5;
+}
+
+.paddedSeparator {
+	margin-left: 16px;
+	margin-right: 16px;
+}

@@ -81,3 +81,17 @@
 	--iconColor: #{$ts-salmon};
 	--textRuleColor: #{$ts-topicH};
 }
+
+.playlist {
+	--hatBg: #{$ts-playlistH};
+	--hatColor: #{$ts-white};
+	--hatHoverColor: #{$ts-darkened-playlistH};
+	--cardBg: #{$ts-playlistB};
+	--cardColor: #{$ts-midTone};
+	--cardHoverColor: #{$ts-darkened-playlistB};
+	--headingColor: #{$ts-dark};
+	--progressColor: #{$ts-red};
+	--partColor: #{$ts-red};
+	--iconColor: #{$ts-red};
+	--textRuleColor: #{$ts-lightTone};
+}

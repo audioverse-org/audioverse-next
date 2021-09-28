@@ -11,7 +11,8 @@ export type CardTheme =
 	| 'sermon'
 	| 'song'
 	| 'story'
-	| 'topic';
+	| 'topic'
+	| 'playlist';
 
 interface Props {
 	theme: CardTheme;

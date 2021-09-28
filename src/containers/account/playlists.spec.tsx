@@ -1,25 +1,21 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import _ from 'lodash';
-import { hydrate, QueryClient } from 'react-query';
 
-import { storeRequest } from '@lib/api';
 import {
 	AddAccountPlaylistDocument,
 	GetAccountPlaylistsPageDataDocument,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
-	buildServerRenderer,
+	buildRenderer,
 	loadAuthGuardData,
 	mockedFetchApi,
 } from '@lib/test/helpers';
-import Playlists from '@pages/[language]/account/playlists';
-import { getServerSideProps } from '@pages/[language]/account/playlists';
 
-const renderPage = buildServerRenderer(Playlists, getServerSideProps, {
-	language: 'en',
-});
+import Playlists from './playlists';
+
+const renderPage = buildRenderer(Playlists);
 
 const defaults = {
 	me: {
@@ -263,38 +259,6 @@ describe('playlists page', () => {
 			AddAccountPlaylistDocument,
 			expect.anything()
 		);
-	});
-
-	it('dehydrates state', async () => {
-		loadData();
-
-		const result = await getServerSideProps({
-			req: {} as any,
-			res: {} as any,
-			resolvedUrl: '',
-			query: { language: 'en' },
-		});
-
-		if (!('props' in result)) {
-			throw new Error('Failed to get props');
-		}
-
-		const queryClient = new QueryClient();
-
-		hydrate(queryClient, result.props.dehydratedState);
-
-		const data: any = queryClient.getQueryData('getAccountPlaylistsPageData');
-
-		expect(data.me.user.playlists.nodes[0].title).toEqual('the_playlist_title');
-	});
-
-	it('stores request', async () => {
-		await getServerSideProps({
-			req: 'the_request',
-			query: { language: 'en' },
-		} as any);
-
-		expect(storeRequest).toBeCalledWith('the_request');
 	});
 });
 

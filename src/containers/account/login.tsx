@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
+import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 function Login(): JSX.Element {
@@ -9,7 +10,7 @@ function Login(): JSX.Element {
 	const route = useLanguageRoute();
 
 	useEffect(() => {
-		router.push(`/${route}/discover`);
+		router.push(makeDiscoverRoute(route));
 	}, []);
 
 	return <>redirecting...</>;

@@ -13,6 +13,7 @@ type Props = {
 		| BaseColors.LIGHT_TONE
 		| BaseColors.CREAM
 		| BaseColors.BOOK_H
+		| BaseColors.PLAYLIST_B
 		| BaseColors.STORY_H;
 	className?: string;
 };

@@ -1,17 +1,17 @@
 import React from 'react';
 
-import TeaseRecording from '@components/molecules/teaseRecording';
 import {
 	CardRecordingStackFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
+
+import TeaseRecordingStack from '../teaseRecordingStack';
 
 import CardWithTheme from './base/withTheme';
 import CardHatAudiobook from './hat/audiobook';
 import CardHatSermon from './hat/sermon';
 import CardHatSong from './hat/song';
 import CardHatStory from './hat/story';
-import styles from './recordingStack.module.scss';
 
 export interface Props {
 	sequence: CardRecordingStackFragment;
@@ -45,21 +45,10 @@ export default function CardRecordingStack({
 			},
 		} as const
 	)[contentType];
-	// TODO: add expand/contract
 	return (
 		<CardWithTheme theme={theme}>
 			{hat}
-			{favoritedNodes.map((recording, index) => (
-				<React.Fragment key={recording.canonicalPath}>
-					<TeaseRecording
-						{...{ recording, theme }}
-						small={favoritedNodes.length > 1}
-					/>
-					{index + 1 < favoritedNodes.length && (
-						<div className={styles.separator} />
-					)}
-				</React.Fragment>
-			))}
+			<TeaseRecordingStack recordings={favoritedNodes} theme={theme} />
 		</CardWithTheme>
 	);
 }
