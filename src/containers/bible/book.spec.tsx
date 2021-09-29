@@ -17,7 +17,7 @@ import {
 import Book, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles/[id]/[book]';
+} from '@pages/[language]/bibles/[id]/[book]/[chapter]';
 
 jest.mock('video.js');
 
@@ -33,6 +33,7 @@ const renderPage = buildStaticRenderer(
 	{
 		id: 'the_version_id',
 		book: 'the_book_shortname',
+		chapter: '1',
 	}
 );
 
@@ -43,11 +44,12 @@ function loadPageData() {
 			audiobible: {
 				title: 'the_version_title',
 				book: {
+					id: 'the_book_id',
 					title: 'the_book_title',
 					shareUrl: 'the_book_share_url',
 					chapters: [
 						{
-							id: 'the_chapter_id',
+							id: 'the_book_id-1',
 							title: 'the_chapter_title',
 							url: 'the_chapter_url',
 							verses: [
@@ -58,7 +60,7 @@ function loadPageData() {
 							],
 						},
 						{
-							id: 'second_chapter_id',
+							id: 'the_book_id-2',
 							title: 'second_chapter_title',
 							url: 'second_chapter_url',
 						},
@@ -77,6 +79,8 @@ describe('Bible book detail page', () => {
 	beforeEach(() => setPlayerMock());
 
 	it('renders', async () => {
+		loadPageData();
+
 		await renderPage();
 
 		expect(mockedFetchApi).toBeCalledWith(GetBibleBookDetailPageDataDocument, {
@@ -106,23 +110,23 @@ describe('Bible book detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/bibles/ENGESVC/Gen');
+		expect(paths).toContain('/en/bibles/ENGESVC/Gen/1');
 	});
 
-	it('displays book title', async () => {
+	it('displays chapter title', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_book_title')).toBeInTheDocument();
+		expect(getAllByText('the_chapter_title')[0]).toBeInTheDocument();
 	});
 
 	it('displays version title', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
-		expect(getByText('the_version_title')).toBeInTheDocument();
+		expect(getAllByText('the_version_title')[0]).toBeInTheDocument();
 	});
 
 	it('includes chapter selector', async () => {
@@ -144,7 +148,7 @@ describe('Bible book detail page', () => {
 		const select = getByLabelText('Chapter') as HTMLSelectElement;
 		const optionLabels = Array.from(select.options).map((opt) => opt.value);
 
-		expect(optionLabels).toContain('the_chapter_id');
+		expect(optionLabels).toContain('the_book_id-1');
 	});
 
 	it('has download link', async () => {
@@ -162,7 +166,7 @@ describe('Bible book detail page', () => {
 
 		const input = getByLabelText('Chapter');
 
-		userEvent.selectOptions(input, 'second_chapter_id');
+		userEvent.selectOptions(input, 'the_book_id-2');
 
 		expect(getByText('mp3: second_chapter_title')).toBeInTheDocument();
 	});
@@ -220,9 +224,9 @@ describe('Bible book detail page', () => {
 	it('includes player', async () => {
 		loadPageData();
 
-		const { getByLabelText } = await renderPage();
+		const { getAllByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(getAllByLabelText('play')[0]);
 
 		expect(videojs).toBeCalled();
 	});

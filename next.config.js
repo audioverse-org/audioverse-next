@@ -48,6 +48,51 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
+				destination: '/:lang/bibles/ENGKJVC/:bookCode/1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/2',
+				destination: '/:lang/bibles/ENGKJVC2/:bookCode/1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGESV/:testamentCode/:bookCode/2',
+				destination: '/:lang/bibles/ENGESVC/:bookCode/1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/volumes',
+				destination: '/:lang/bibles',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGKJV/1',
+				destination: '/:lang/bibles/ENGKJVC',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGKJV/2',
+				destination: '/:lang/bibles/ENGKJVC2',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGESV/2',
+				destination: '/:lang/bibles/ENGESVC',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobibles/books/ENGESV/2',
+				destination: '/:lang/bibles/ENGKJV1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/bibles/:bibleCode/:bookCode',
+				destination: '/:lang/bibles/:bibleCode/:bookCode/1',
+				permanent: false,
+			},
+			{
 				source: '/:lang/audiobooks/books/:path*',
 				destination: '/:lang/books/:path*',
 				permanent: true,

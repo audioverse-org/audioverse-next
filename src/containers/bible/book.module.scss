@@ -1,3 +1,97 @@
+@import '../../styles/common';
+
+.hat {
+	background-color: $ts-bibleH;
+	padding: 16px 24px;
+	display: block;
+	text-decoration: none;
+	h4 {
+		margin: 0;
+		font-size: 16px;
+	}
+	&,
+	&:hover {
+		color: $ts-white;
+	}
+	&:hover {
+		text-decoration: none;
+		background: $ts-darkened-bibleH;
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	background: $ts-bibleB;
+	> * {
+		padding: 16px 24px;
+	}
+	p {
+		margin-top: 8px;
+		margin-bottom: 16px;
+	}
+	@media (min-width: $breakpoint-xl) {
+		flex-direction: row;
+	}
+}
+
+.main {
+	flex-grow: 1;
+
+	@media (min-width: $breakpoint-xl) {
+		max-width: 66.6666%;
+	}
+}
+
+.chapters {
+	position: relative;
+	.item {
+		margin-bottom: 32px;
+	}
+	@media (min-width: $breakpoint-xl) {
+		flex: 1 0 33.3333%;
+		min-width: 300px;
+		max-width: 468px;
+		border-left: 1px solid $ts-bibleH;
+	}
+}
+.chaptersScroller {
+	@media (min-width: $breakpoint-xl) {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		overflow: auto;
+		padding: 24px;
+	}
+}
+.chaptersItems {
+	@media (min-width: $breakpoint-md) {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		> * {
+			flex: 1 0 calc(50% - 32px);
+			&:nth-child(odd) {
+				margin-right: 16px;
+			}
+			&:nth-child(even) {
+				margin-left: 16px;
+			}
+		}
+	}
+	@media (min-width: $breakpoint-xl) {
+		display: block;
+		> * {
+			margin-left: 0 !important;
+			margin-right: 0 !important;
+		}
+	}
+}
+
+// TODO: remove old
+
 .verse {
 	line-height: 1.4em;
 	& > * {

@@ -18,8 +18,6 @@ export async function getStaticProps({
 	params: { language },
 }: GetStaticPropsArgs): Promise<StaticProps<HomeProps & IBaseProps>> {
 	const langKey = getValidLanguage(language);
-
-	// TODO: try/catch errors to ensure proper 404 page is displayed
 	const data = await getHomeStaticProps({ language: langKey });
 
 	return {

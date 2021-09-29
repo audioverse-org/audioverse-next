@@ -1,0 +1,7 @@
+fragment cardBibleVersion on Bible {
+	id
+	title
+	books {
+		...cardBibleBook
+	}
+}

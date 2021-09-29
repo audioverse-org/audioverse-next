@@ -73,6 +73,7 @@ type AuthenticatedUserPayload {
 }
 
 type Bible implements Node {
+	abbreviation: String!
 	book(id: ID!): BibleBook!
 	books: [BibleBook!]!
 	copyrightText: String!

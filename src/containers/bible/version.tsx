@@ -1,37 +1,86 @@
-import Link from 'next/link';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import Heading1 from '@components/atoms/heading1';
+import Heading6 from '@components/atoms/heading6';
+import HorizontalRule from '@components/atoms/horizontalRule';
 import withFailStates from '@components/HOCs/withFailStates';
+import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
+import CardBibleBook from '@components/molecules/card/bibleBook';
+import CardGroup from '@components/molecules/cardGroup';
+import DefinitionList, {
+	IDefinitionListTerm,
+} from '@components/molecules/definitionList';
+import Tease from '@components/molecules/tease';
+import TeaseHeader from '@components/molecules/teaseHeader';
+import { BaseColors } from '@lib/constants';
 import { GetVersionDetailPageDataQuery } from '@lib/generated/graphql';
-import { makeBibleBookRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
-type Books = NonNullable<
-	NonNullable<GetVersionDetailPageDataQuery['audiobible']>['books']
->;
+import styles from './version.module.scss';
 
 export interface VersionProps {
-	books: Books;
+	version: GetVersionDetailPageDataQuery['audiobible'];
 }
 
-// TODO: ADD VERSION TITLE
+function Version({ version }: Must<VersionProps>): JSX.Element {
+	const { books, copyrightText, sponsor, title } = version;
 
-function Version({ books }: VersionProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
+	const details: IDefinitionListTerm[] = [];
+	if (copyrightText) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="bibleVersion__copyrightText"
+					defaultMessage="Copyright"
+				/>
+			),
+			definition: <div dangerouslySetInnerHTML={{ __html: copyrightText }} />,
+		});
+	}
+	if (sponsor) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="bibleVersion__sponsorLabel"
+					defaultMessage="Sponsor"
+				/>
+			),
+			definition: (
+				<p>
+					<a
+						href={sponsor.url}
+						target="_blank"
+						className="decorated hover--salmon"
+						rel="noreferrer"
+					>
+						{sponsor.name}
+					</a>
+				</p>
+			),
+		});
+	}
 
 	return (
-		<>
-			<ul>
-				{books.map((b) => (
-					<li key={b.id}>
-						<Link href={makeBibleBookRoute(languageRoute, b.id)}>
-							<a>{b.title}</a>
-						</Link>
-					</li>
+		<Tease className={styles.container}>
+			<TeaseHeader>
+				<BibleVersionTypeLockup />
+				<Heading1 className={styles.title}>{title}</Heading1>
+				<Heading6 sans uppercase loose className={styles.booksLabel}>
+					<FormattedMessage
+						id="bibleVersion__booksLabel"
+						defaultMessage="66 Books"
+					/>
+				</Heading6>
+				<HorizontalRule color={BaseColors.LIGHT_TONE} />
+				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
+			</TeaseHeader>
+			<CardGroup>
+				{books.map((book) => (
+					<CardBibleBook book={book} key={book.id} />
 				))}
-			</ul>
-		</>
+			</CardGroup>
+		</Tease>
 	);
 }
 
-export default withFailStates(Version, (props) => !props.books.length);
+export default withFailStates(Version, ({ version }) => !version);

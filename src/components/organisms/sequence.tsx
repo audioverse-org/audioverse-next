@@ -63,7 +63,7 @@ export function Sequence({
 		details.push({
 			term: (
 				<FormattedMessage
-					id="seriesDetailg__conferenceLabel"
+					id="seriesDetail__conferenceLabel"
 					defaultMessage="Parent Conference"
 				/>
 			),
@@ -80,7 +80,7 @@ export function Sequence({
 		details.push({
 			term: (
 				<FormattedMessage
-					id="seriesDetailg__sponsorLabel"
+					id="seriesDetail__sponsorLabel"
 					defaultMessage="Sponsor"
 				/>
 			),
@@ -95,7 +95,7 @@ export function Sequence({
 		details.push({
 			term: (
 				<FormattedMessage
-					id="seriesDetailg__recordedLabel"
+					id="seriesDetail__recordedLabel"
 					defaultMessage="Recorded"
 				/>
 			),

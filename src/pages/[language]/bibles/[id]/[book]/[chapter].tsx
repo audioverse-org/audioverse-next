@@ -17,18 +17,17 @@ interface StaticProps {
 export async function getStaticProps({
 	params,
 }: {
-	params: { id: string; book: string };
+	params: { id: string; book: string; chapter: string };
 }): Promise<StaticProps> {
-	const { id, book } = params;
+	const { id, book, chapter } = params;
 
-	// TODO: try/catch errors to ensure proper 404 page is displayed
-	const data = await getBibleBookDetailPageData({
+	const { audiobible } = await getBibleBookDetailPageData({
 		versionId: id,
 		bookId: `${id}-${book}`,
-	});
+	}).catch(() => ({ audiobible: null }));
 
 	return {
-		props: { data },
+		props: { audiobible, chapterNumber: chapter },
 		revalidate: REVALIDATE,
 	};
 }

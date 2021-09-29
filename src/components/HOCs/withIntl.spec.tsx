@@ -280,30 +280,37 @@ describe('localization usage', () => {
 	});
 
 	it('localizes Bible book page', async () => {
+		jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+			isFavorited: false,
+			isLoading: false,
+			toggleFavorited: {} as any,
+		});
+
 		const screen = await renderWithQueryProvider(
 			<Book
-				data={{
-					audiobible: {
+				audiobible={{
+					id: 'z',
+					title: 'z',
+					book: {
+						id: 'z',
 						title: 'z',
-						book: {
-							title: 'z',
-							shareUrl: 'z',
-							chapters: [
-								{
-									title: 'z',
-									url: '',
-									id: 'z',
-									verses: [],
-								},
-							],
-						},
-						sponsor: {
-							name: 'z',
-							url: 'z',
-						},
-						copyrightText: 'z',
+						shareUrl: 'z',
+						chapters: [
+							{
+								id: 'z',
+								title: 'z',
+								url: '',
+								verses: [],
+							},
+						],
 					},
+					sponsor: {
+						name: 'z',
+						url: 'z',
+					},
+					copyrightText: 'z',
 				}}
+				chapterNumber="1"
 			/>
 		);
 

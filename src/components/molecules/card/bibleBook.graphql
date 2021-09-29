@@ -1,0 +1,8 @@
+fragment cardBibleBook on BibleBook {
+	id
+	title
+	chapterCount
+	bible {
+		abbreviation
+	}
+}

@@ -12,7 +12,9 @@ import Version, {
 } from '@pages/[language]/bibles/[id]';
 
 async function renderPage() {
-	const { props } = await getStaticProps({ params: { id: 'the_version_id' } });
+	const { props } = (await getStaticProps({
+		params: { id: 'the_version_id' },
+	})) as any;
 	return renderWithIntl(<Version {...props} />);
 }
 
@@ -26,6 +28,9 @@ function loadPageData() {
 						id: 'ENGESVC-Gen',
 						title: 'Genesis',
 						chapterCount: 50,
+						bible: {
+							abbreviation: 'ESV',
+						},
 					},
 				],
 			},
@@ -34,6 +39,8 @@ function loadPageData() {
 
 describe('version detail page', () => {
 	it('renders', async () => {
+		loadPageData();
+
 		await renderPage();
 
 		expect(mockedFetchApi).toBeCalledWith(GetVersionDetailPageDataDocument, {
@@ -74,12 +81,18 @@ describe('version detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('Genesis') as HTMLLinkElement;
+		const link = getByText('Genesis').parentElement as HTMLLinkElement;
 
 		expect(link.href).toContain('/en/bibles/ENGESVC/Gen');
 	});
 
 	it('renders 404', async () => {
+		when(mockedFetchApi)
+			.calledWith(GetVersionDetailPageDataDocument, expect.anything())
+			.mockResolvedValue({
+				audiobible: null,
+			});
+
 		const { getByText } = await renderPage();
 
 		expect(getByText('404')).toBeInTheDocument();
