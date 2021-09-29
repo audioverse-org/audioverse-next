@@ -7,7 +7,7 @@ query getStoryDetailData($id: ID!) {
 query getStoryDetailStaticPaths($language: Language!, $first: Int) {
 	stories(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

@@ -26,7 +26,7 @@ function Presenters({ nodes, pagination }: PresentersProps): JSX.Element {
 			heading={
 				<FormattedMessage
 					id="presenterListPage__title"
-					defaultMessage="Presenters"
+					defaultMessage="All Speakers"
 				/>
 			}
 			makeRoute={makePresenterListRoute}

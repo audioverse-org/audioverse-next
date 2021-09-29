@@ -5,14 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import RssLink from '@components/molecules/rssLink';
 import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
-import {
-	makeSermonListRoute,
-	makeSermonListRouteAll,
-	makeSermonListRouteAudio,
-	makeSermonListRouteVideo,
-} from '@lib/routes';
+import { makeSermonListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
@@ -27,14 +21,18 @@ export interface SermonListProps {
 	};
 }
 
-function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
+function SermonList({
+	nodes,
+	pagination,
+	filter /*rssPath*/,
+}: SermonListProps) {
 	const lang = useLanguageRoute();
 
 	return (
 		<div>
-			<RssLink href={rssPath} />
+			{/* <RssLink href={rssPath} /> */}
 			<div>
-				<Link href={makeSermonListRouteAll(lang, 1)}>
+				<Link href={makeSermonListRoute(lang, 'all', 1)}>
 					<a>
 						<FormattedMessage
 							id="container-sermonList__filterLabelAll"
@@ -43,7 +41,7 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 						/>
 					</a>
 				</Link>
-				<Link href={makeSermonListRouteVideo(lang, 1)}>
+				<Link href={makeSermonListRoute(lang, 'video', 1)}>
 					<a>
 						<FormattedMessage
 							id="container-sermonList__filterLabelVideo"
@@ -52,7 +50,7 @@ function SermonList({ nodes, pagination, rssPath, filter }: SermonListProps) {
 						/>
 					</a>
 				</Link>
-				<Link href={makeSermonListRouteAudio(lang, 1)}>
+				<Link href={makeSermonListRoute(lang, 'audio', 1)}>
 					<a>
 						<FormattedMessage
 							id="container-sermonList__filterLabelAudio"

@@ -5,8 +5,8 @@ query getSongAlbumsListPageData(
 ) {
 	musicAlbums(language: $language, first: $first, offset: $offset) {
 		nodes {
-			id
 			title
+			canonicalPath(useFuturePath: true)
 			imageWithFallback {
 				url(size: 100)
 			}

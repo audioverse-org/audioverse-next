@@ -1,0 +1,13 @@
+fragment bookFeedDescription on Sequence {
+	title
+	recordings(first: 25) {
+		nodes {
+			authors: persons(role: WRITER) {
+				name
+			}
+			narrators: persons(role: SPEAKER) {
+				name
+			}
+		}
+	}
+}

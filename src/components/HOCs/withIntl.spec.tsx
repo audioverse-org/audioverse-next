@@ -195,13 +195,6 @@ describe('localization usage', () => {
 								},
 							],
 						},
-						videoDownloads: [
-							{
-								id: 'z',
-								url: 'z',
-								filesize: '100',
-							},
-						],
 						attachments: [
 							{
 								filename: 'z',
@@ -416,6 +409,7 @@ describe('localization usage', () => {
 					location: '',
 					startDate: null,
 					endDate: null,
+					shareUrl: '',
 					sequences: {
 						aggregate: {
 							count: 0,
@@ -543,8 +537,20 @@ describe('localization usage', () => {
 				},
 			},
 		],
-		[SponsorBooks, { nodes: [{ id: 'z' }] }],
-		[SponsorAlbums, { nodes: [{ id: 'z' }] }],
+		[
+			SponsorBooks,
+			{
+				data: { sponsor: { canonicalPath: 'z' } },
+				nodes: [{ id: 'z', canonicalPath: 'z' }],
+			},
+		],
+		[
+			SponsorAlbums,
+			{
+				data: { sponsor: { canonicalPath: 'z' } },
+				nodes: [{ id: 'z', canonicalPath: 'z' }],
+			},
+		],
 		[
 			SponsorConferences,
 			{
@@ -601,7 +607,14 @@ describe('localization usage', () => {
 		],
 		[
 			SeriesDetail,
-			{ sequence: { id: 'z', recordings: { aggregate: { count: 0 } } } },
+			{
+				sequence: {
+					id: 'z',
+					canonicalPath: 'z',
+					contentType: SequenceContentType.Series,
+					recordings: { aggregate: { count: 0 } },
+				},
+			},
 		],
 		[Logout, {}],
 		// TODO [Register, {}],

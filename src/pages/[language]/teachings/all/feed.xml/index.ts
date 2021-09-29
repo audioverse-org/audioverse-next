@@ -3,7 +3,9 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { getSermonListStaticProps } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
+import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { makeSermonListRoute } from '@lib/routes';
 
 export default (): void => void 0;
 
@@ -23,16 +25,28 @@ export async function getServerSideProps({
 
 	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
-
 		const intl = getIntl(languageRoute);
+		const language = getLanguageByBaseUrl(languageRoute, 'en')?.display_name;
 		const feed = generateFeed(
-			intl.formatMessage({
-				id: 'sermons-all-rss-identifier',
-				defaultMessage: 'All Teachings',
-				description: 'All teachings RSS feed pretty identifier',
-			}),
-			sermons.nodes || [],
-			languageRoute
+			languageRoute,
+			{
+				link: `https://www.audioverse.org${makeSermonListRoute(languageRoute)}`,
+				title: intl.formatMessage(
+					{
+						id: 'teachingsFeed__title',
+						defaultMessage: 'AudioVerse Presentations ({language})',
+					},
+					{ language }
+				),
+				description: intl.formatMessage(
+					{
+						id: 'teachingsFeed__description',
+						defaultMessage: 'AudioVerse Presentation in {language}',
+					},
+					{ language }
+				),
+			},
+			sermons.nodes || []
 		);
 		res.write(feed);
 

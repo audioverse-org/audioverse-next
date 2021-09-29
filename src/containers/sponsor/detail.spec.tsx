@@ -65,13 +65,13 @@ describe('sponsor detail page', () => {
 			.calledWith(GetSponsorDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				sponsors: {
-					nodes: [{ id: 'the_sponsor_id' }],
+					nodes: [{ canonicalPath: '/the_sponsor_path' }],
 				},
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/sponsors/the_sponsor_id');
+		expect(paths).toContain('/the_sponsor_path');
 	});
 
 	it('displays sponsor title', async () => {

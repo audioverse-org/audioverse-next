@@ -68,18 +68,6 @@ describe('presenter recordings page', () => {
 		expect(paths).toContain('/en/presenters/the_presenter_id/page/1');
 	});
 
-	// TODO: add?
-	// it('links to rss feed', async () => {
-	// 	loadData();
-
-	// 	const { getByText } = await renderPage();
-
-	// 	expect(getByText('RSS')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/presenters/the_presenter_id.xml'
-	// 	);
-	// });
-
 	it('lists presenter recordings', async () => {
 		loadData();
 

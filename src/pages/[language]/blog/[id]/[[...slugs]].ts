@@ -6,7 +6,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makeBlogPostRoute } from '@lib/routes';
 
 export default BlogPostDetail;
 
@@ -38,6 +37,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getBlogDetailStaticPaths,
 		(d) => d.blogPosts.nodes,
-		(baseUrl, node) => makeBlogPostRoute(baseUrl, node.id)
+		(baseUrl, { canonicalPath }) => canonicalPath
 	);
 }

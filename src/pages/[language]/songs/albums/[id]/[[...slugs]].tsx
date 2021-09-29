@@ -5,7 +5,6 @@ import {
 	getSongAlbumsDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeSongAlbumDetailRoute } from '@lib/routes';
 
 export default Song;
 
@@ -34,6 +33,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getSongAlbumsDetailPathsData,
 		(d) => d.musicAlbums.nodes,
-		(languageRoute, node) => makeSongAlbumDetailRoute(languageRoute, node.id)
+		(languageRoute, { canonicalPath }) => canonicalPath
 	);
 }

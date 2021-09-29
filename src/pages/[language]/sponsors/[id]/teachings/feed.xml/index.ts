@@ -1,7 +1,8 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getSponsorTeachingsPageData } from '@lib/generated/graphql';
+import { getSponsorTeachingsFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
+import getIntl from '@lib/getIntl';
 
 export default (): void => void 0;
 
@@ -14,10 +15,8 @@ export async function getServerSideProps({
 	const id = params?.id as string;
 	const languageRoute = params?.language as string;
 
-	const { sponsor } = await getSponsorTeachingsPageData({
+	const { sponsor } = await getSponsorTeachingsFeedData({
 		id,
-		offset: 0,
-		first: 25,
 	}).catch(() => ({
 		sponsor: null,
 	}));
@@ -30,10 +29,27 @@ export async function getServerSideProps({
 	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
+		const intl = getIntl(languageRoute);
 		const feed = generateFeed(
-			sponsor.title,
-			sponsor.recordings.nodes || [],
-			languageRoute
+			languageRoute,
+			{
+				link: sponsor.canonicalUrl,
+				title: intl.formatMessage(
+					{
+						id: 'sponsorTeachingsFeed__title',
+						defaultMessage: 'Sermons by {name}',
+					},
+					{ name: sponsor.title }
+				),
+				description: intl.formatMessage(
+					{
+						id: 'sponsorTeachingsFeed__description',
+						defaultMessage: 'The latest recordings from {title} at AudioVerse',
+					},
+					{ title: sponsor.title }
+				),
+			},
+			sponsor.recordings.nodes || []
 		);
 		res.write(feed);
 

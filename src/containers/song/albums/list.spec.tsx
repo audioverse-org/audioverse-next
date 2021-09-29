@@ -24,6 +24,7 @@ function loadData() {
 					{
 						id: 'the_album_id',
 						title: 'the_album_title',
+						canonicalPath: '/the_album_path',
 						imageWithFallback: {
 							url: 'the_album_cover',
 						},
@@ -117,7 +118,7 @@ describe('songs list page', () => {
 
 		const link = getByText('the_album_title').parentElement;
 
-		expect(link).toHaveAttribute('href', '/en/songs/albums/the_album_id');
+		expect(link).toHaveAttribute('href', '/the_album_path');
 	});
 
 	it('renders album list title', async () => {

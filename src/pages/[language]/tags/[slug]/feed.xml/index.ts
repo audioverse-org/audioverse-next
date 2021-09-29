@@ -4,6 +4,7 @@ import { getTagDetailPageData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { makeTagListRoute } from '@lib/routes';
 
 export default (): void => void 0;
 
@@ -39,7 +40,14 @@ export async function getServerSideProps({
 		);
 		res.setHeader('Content-Type', 'text/xml');
 
-		const feed = generateFeed(title, recordings.nodes || [], languageRoute);
+		const feed = generateFeed(
+			languageRoute,
+			{
+				link: `https://www.audioverse.org${makeTagListRoute(languageRoute)}`,
+				title,
+			},
+			recordings.nodes || []
+		);
 		res.write(feed);
 
 		res.end();

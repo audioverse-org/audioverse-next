@@ -4,6 +4,21 @@ query getSeriesDetailPageData($id: ID!) {
 	}
 }
 
+query getSeriesFeedData($id: ID!) {
+	series(id: $id) {
+		title
+		canonicalUrl(useFuturePath: true)
+		recordings(first: 25) {
+			aggregate {
+				count
+			}
+			nodes {
+				...generateFeed
+			}
+		}
+	}
+}
+
 query getSeriesDetailPathsData($language: Language!, $first: Int) {
 	serieses(language: $language, first: $first) {
 		nodes {

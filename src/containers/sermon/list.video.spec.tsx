@@ -54,16 +54,16 @@ describe('sermon video list page', () => {
 		});
 	});
 
-	it('links to feed', async () => {
-		loadSermonListData();
+	// it('links to feed', async () => {
+	// 	loadSermonListData();
 
-		const { getByRole } = await renderPage();
+	// 	const { getByRole } = await renderPage();
 
-		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-			'href',
-			'/en/teachings/video.xml'
-		);
-	});
+	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+	// 		'href',
+	// 		'/en/teachings/video.xml'
+	// 	);
+	// });
 
 	it('includes filter in pagination', async () => {
 		loadSermonListData();

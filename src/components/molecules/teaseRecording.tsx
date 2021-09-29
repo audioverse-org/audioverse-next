@@ -56,7 +56,7 @@ export default function TeaseRecording({
 		sermon: BaseColors.WHITE,
 		song: BaseColors.SONG_B,
 		story: BaseColors.STORY_B,
-		playlist: BaseColors.PLAYLIST_B,
+		playlistItem: BaseColors.PLAYLIST_B,
 		topic: BaseColors.TOPIC_B,
 	}[theme];
 	const isDarkTheme = isThemeDark(theme);

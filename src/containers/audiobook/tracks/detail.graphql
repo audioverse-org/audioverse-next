@@ -7,7 +7,7 @@ query getAudiobookTrackDetailData($id: ID!) {
 query getAudiobookTrackDetailStaticPaths($language: Language!, $first: Int) {
 	audiobookTracks(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

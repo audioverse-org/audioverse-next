@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function CardPlaylistItem({ recording }: Props): JSX.Element {
-	const theme = 'playlist';
+	const theme = 'playlistItem';
 
 	return (
 		<CardWithTheme {...{ theme }}>

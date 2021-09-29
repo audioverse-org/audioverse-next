@@ -252,16 +252,16 @@ describe('sermons list page', () => {
 		expect(result.paths).not.toContain('/en/teachings/video/page/1');
 	});
 
-	it('targets blank', async () => {
-		loadSermonListData();
+	// it('targets blank', async () => {
+	// 	loadSermonListData();
 
-		const { getByRole } = await renderPage();
+	// 	const { getByRole } = await renderPage();
 
-		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-			'target',
-			'_blank'
-		);
-	});
+	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+	// 		'target',
+	// 		'_blank'
+	// 	);
+	// });
 
 	it('localizes pagination', async () => {
 		loadSermonListData();
@@ -272,15 +272,15 @@ describe('sermons list page', () => {
 		expect(link.href).toContain('/es/teachings/all/page/1');
 	});
 
-	it('sets rss head link', async () => {
-		loadSermonListData();
+	// it('sets rss head link', async () => {
+	// 	loadSermonListData();
 
-		const { getByTestId } = await renderPage();
+	// 	const { getByTestId } = await renderPage();
 
-		const head = getByTestId('head');
+	// 	const head = getByTestId('head');
 
-		expect(head.innerHTML).toContain('/en/teachings/all.xml');
-	});
+	// 	expect(head.innerHTML).toContain('/en/teachings/all.xml');
+	// });
 
 	it('includes format indicators', async () => {
 		mockedFetchApi.mockResolvedValue({

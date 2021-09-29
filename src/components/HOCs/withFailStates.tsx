@@ -2,6 +2,8 @@ import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import LoadingCards from '@components/molecules/loadingCards';
+
 const withFailStates = <P extends any>(
 	Component: React.ComponentType<Must<P>>,
 	should404?: (props: P) => boolean
@@ -14,7 +16,7 @@ const withFailStates = <P extends any>(
 		}
 
 		if (isFallback) {
-			return <h1>Loading…</h1>;
+			return <LoadingCards />;
 		}
 
 		return <Component {...(props as any)} />;

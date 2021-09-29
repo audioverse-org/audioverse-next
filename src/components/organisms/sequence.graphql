@@ -1,6 +1,7 @@
 fragment sequence on Sequence {
 	id
 	title
+	contentType
 	duration
 	description
 	startDate
@@ -23,7 +24,6 @@ fragment sequence on Sequence {
 		}
 		nodes {
 			...cardRecording
-			...generateFeed
 		}
 	}
 }

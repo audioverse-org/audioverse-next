@@ -23,12 +23,14 @@ const renderPage = buildStaticRenderer(SponsorAlbums, getStaticProps, {
 const loadData = buildLoader(GetSponsorAlbumsPageDataDocument, {
 	sponsor: {
 		title: 'the_sponsor_title',
+		canonicalPath: '/the_sponsor_path',
 	},
 	musicAlbums: {
 		nodes: [
 			{
 				id: 'the_album_id',
 				title: 'the_album_title',
+				canonicalPath: '/the_album_path',
 			},
 		],
 	},
@@ -109,7 +111,7 @@ describe('sponsor albums page', () => {
 
 		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id'
+			'/the_sponsor_path'
 		);
 	});
 });

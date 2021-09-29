@@ -7,7 +7,7 @@ query getSongDetailData($id: ID!) {
 query getSongDetailStaticPaths($language: Language!, $first: Int) {
 	musicTracks(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

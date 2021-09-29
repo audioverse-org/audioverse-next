@@ -1,0 +1,22 @@
+.card {
+	height: 200px;
+	animation: pulse 2s infinite;
+}
+.card-offset-1 {
+	animation-delay: -0.5s;
+}
+.card-offset-2 {
+	animation-delay: -1s;
+}
+
+@keyframes pulse {
+	0% {
+		background-color: var(--cardBg);
+	}
+	50% {
+		background-color: var(--cardHoverColor);
+	}
+	100% {
+		background-color: var(--cardBg);
+	}
+}

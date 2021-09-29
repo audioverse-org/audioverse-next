@@ -171,11 +171,11 @@ describe('sermon detail page', () => {
 	it('shows loading screen', async () => {
 		loadRouter({ isFallback: true });
 
-		const { getByText } = await renderWithIntl(
+		const { getByLabelText } = await renderWithIntl(
 			<SermonDetail recording={null} title={undefined} />
 		);
 
-		expect(getByText('Loading…')).toBeInTheDocument();
+		expect(getByLabelText('Loading…')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {

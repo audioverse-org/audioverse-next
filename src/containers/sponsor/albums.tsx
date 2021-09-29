@@ -7,12 +7,7 @@ import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
 import { GetSponsorAlbumsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeSongAlbumDetailRoute,
-	makeSponsorAlbumsRoute,
-	makeSponsorRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSponsorAlbumsRoute } from '@lib/routes';
 import { useQueryString } from '@lib/useQueryString';
 
 export type SponsorAlbumsProps = PaginatedProps<
@@ -26,12 +21,11 @@ function SponsorAlbums({
 	data,
 }: SponsorAlbumsProps): JSX.Element {
 	const id = useQueryString('id') || '';
-	const languageRoute = useLanguageRoute();
 
 	return (
 		<>
 			<h1>
-				<Link href={makeSponsorRoute(languageRoute, id)}>
+				<Link href={data?.sponsor?.canonicalPath as string}>
 					<a>{data?.sponsor?.title}</a>
 				</Link>
 			</h1>
@@ -42,10 +36,7 @@ function SponsorAlbums({
 					description="Sponsor albums page title"
 				/>
 			</h2>
-			<TableList
-				nodes={nodes}
-				makeEntryRoute={(l, n) => makeSongAlbumDetailRoute(l, n.id)}
-			/>
+			<TableList nodes={nodes} makeEntryRoute={(l, n) => n.canonicalPath} />
 			<Pagination
 				makeRoute={(l, i) => makeSponsorAlbumsRoute(l, id, i)}
 				{...pagination}

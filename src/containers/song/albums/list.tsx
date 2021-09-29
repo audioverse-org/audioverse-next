@@ -6,7 +6,6 @@ import { FormattedMessage } from 'react-intl';
 import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeBibleMusicRoute,
-	makeSongAlbumDetailRoute,
 	makeSponsorMusicRoute,
 	makeTagMusicRoute,
 } from '@lib/routes';
@@ -765,8 +764,8 @@ function SongAlbumList({ data }: SongAlbumsListProps): JSX.Element {
 			</h2>
 			<ul>
 				{data?.musicAlbums?.nodes?.map((n) => (
-					<li key={n.id}>
-						<Link href={makeSongAlbumDetailRoute(languageRoute, n.id)}>
+					<li key={n.canonicalPath}>
+						<Link href={n.canonicalPath}>
 							<a>
 								<Image
 									src={n.imageWithFallback.url}

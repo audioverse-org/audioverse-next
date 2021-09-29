@@ -268,7 +268,7 @@ type BlogPost implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 
 	"""
 	The number of days to feature blog post.
@@ -485,7 +485,7 @@ type Collection implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	contentType: CollectionContentType!
 	description: String!
 
@@ -2297,7 +2297,7 @@ type Page implements Node {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	id: ID!
 	isHidden: Boolean!
 	pageMenu: PageMenu
@@ -2410,7 +2410,7 @@ type Person implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	collections(
 		"""
 		Return the elements that come after the specified cursor.
@@ -4447,7 +4447,7 @@ type Recording implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	collection: Collection
 	contentScreeningCheckouts: [RecordingScreeningCheckout!]
 	contentScreeningEvaluations: [RecordingContentScreeningEvaluation!]
@@ -5171,7 +5171,7 @@ type Sequence implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	collection: Collection
 	contentType: SequenceContentType!
 	description: String!
@@ -5460,7 +5460,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 	"""
 	The canonical URL to this resource.
 	"""
-	canonicalUrl: URL!
+	canonicalUrl(useFuturePath: Boolean = false): URL!
 	collections(
 		"""
 		Return the elements that come after the specified cursor.

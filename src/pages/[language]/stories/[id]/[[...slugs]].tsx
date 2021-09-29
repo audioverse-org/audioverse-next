@@ -5,7 +5,6 @@ import {
 	getStoryDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeStoryRoute } from '@lib/routes';
 
 export default Story;
 
@@ -37,6 +36,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getStoryDetailStaticPaths,
 		(d) => d.stories.nodes,
-		(languageRoute, node) => makeStoryRoute(languageRoute, node.id)
+		(languageRoute, { canonicalPath }) => canonicalPath
 	);
 }

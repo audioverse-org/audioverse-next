@@ -8,16 +8,6 @@ fragment recording on Recording {
 	writers: persons(role: WRITER) {
 		...personLockup
 	}
-	videoDownloads: videoFiles(allowedContainers: MP4) {
-		id
-		url
-		filesize
-	}
-	audioDownloads: audioFiles(allowedContainers: MP3) {
-		id
-		url
-		filesize
-	}
 	attachments {
 		filename
 		url

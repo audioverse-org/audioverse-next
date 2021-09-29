@@ -25,7 +25,6 @@ query getBlogDetailData($id: ID!, $language: Language!) {
 query getBlogDetailStaticPaths($language: Language!, $first: Int) {
 	blogPosts(language: $language, first: $first) {
 		nodes {
-			id
 			canonicalPath(useFuturePath: true)
 		}
 	}

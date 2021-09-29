@@ -1,14 +1,33 @@
 fragment generateFeed on Recording {
+	id
 	title
+	contentType
 	description
-	canonicalUrl
-	recordingDate
+	publishDate
 	audioFiles {
+		id
 		url
 		filesize
+		duration
+		mimeType
+		bitrate
 	}
-	feedVideoFiles: videoFiles {
+	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
+		id
 		url
 		filesize
+		duration
+		mimeType
+		bitrate
+		container
+	}
+	persons(role: SPEAKER) {
+		name
+	}
+	sequence {
+		title
+	}
+	sponsor {
+		title
 	}
 }

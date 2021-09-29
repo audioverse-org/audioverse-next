@@ -10,6 +10,7 @@ query getSponsorBooksPageData(
 		imageWithFallback {
 			url(size: 100)
 		}
+		canonicalPath(useFuturePath: true)
 	}
 	audiobooks(
 		language: $language
@@ -19,6 +20,7 @@ query getSponsorBooksPageData(
 	) {
 		nodes {
 			id
+			canonicalPath(useFuturePath: true)
 			title
 			imageWithFallback {
 				url(size: 100)

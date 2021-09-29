@@ -7,11 +7,6 @@ export const makePaginationRoute = (
 	page: string | number
 ): string => `${base}/page/${page}`;
 
-export const makeAudiobookTrackRoute = (
-	languageRoute: string,
-	recordingId: Scalars['ID']
-): string => `/${languageRoute}/books/tracks/${recordingId}`;
-
 export const makePresenterListRoute = (
 	languageRoute: string,
 	page: string | number
@@ -22,6 +17,11 @@ export const makePresenterRecordingsRoute = (
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
+
+export const makePresenterFeedRoute = (
+	languageRoute: string,
+	personId: Scalars['ID']
+): string => `/${languageRoute}/presenters/${personId}/feed.xml`;
 
 export const makePresenterTopRecordingsRoute = (
 	languageRoute: string,
@@ -46,6 +46,11 @@ export const makeSeriesDetailRoute = (
 	page: string | number = 1
 ): string => `/${languageRoute}/series/${seriesId}/page/${page}`;
 
+export const makeSeriesFeedRoute = (
+	languageRoute: string,
+	seriesId: Scalars['ID']
+): string => `/${languageRoute}/series/${seriesId}/feed.xml`;
+
 export const makeSeriesListRoute = (
 	languageRoute: string,
 	page: string | number = 1
@@ -65,30 +70,9 @@ export const makeTagListRoute = (
 
 export const makeSermonListRoute = (
 	languageRoute: string,
-	filter: string,
-	page: string | number
+	filter = 'all',
+	page: string | number = 1
 ): string => `/${languageRoute}/teachings/${filter}/page/${page}`;
-
-// TODO: use makeSermonListRoute
-// TODO: default page to 1
-export const makeSermonListRouteAll = (
-	languageRoute: string,
-	page: string | number
-): string => `/${languageRoute}/teachings/all/page/${page}`;
-
-// TODO: use makeSermonListRoute
-// TODO: default page to 1
-export const makeSermonListRouteVideo = (
-	languageRoute: string,
-	page: string | number
-): string => `/${languageRoute}/teachings/video/page/${page}`;
-
-// TODO: use makeSermonListRoute
-// TODO: default page to 1
-export const makeSermonListRouteAudio = (
-	languageRoute: string,
-	page: string | number
-): string => `/${languageRoute}/teachings/audio/page/${page}`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;
@@ -108,26 +92,20 @@ export const makeBibleBookRoute = (
 		'/'
 	)}/${chapterNumber}`;
 
-// TODO: rename to makeAudiobookDetailRoute
-export const makeAudiobookRoute = (
+export const makeAudiobookFeedRoute = (
 	languageRoute: string,
 	bookId: Scalars['ID']
-): string => `/${languageRoute}/books/${bookId}`;
+): string => `/${languageRoute}/books/${bookId}/feed.xml`;
 
 export const makeAudiobookListRoute = (
 	languageRoute: string,
 	page: string | number
 ): string => `/${languageRoute}/books/page/${page}`;
 
-export const makeStoryRoute = (
-	languageRoute: string,
-	storyId: Scalars['ID']
-): string => `/${languageRoute}/stories/${storyId}`;
-
-export const makeStoryAlbumRoute = (
+export const makeStoryAlbumFeedRoute = (
 	languageRoute: string,
 	storyAlbumId: Scalars['ID']
-): string => `/${languageRoute}/stories/albums/${storyAlbumId}`;
+): string => `/${languageRoute}/stories/albums/${storyAlbumId}/feed.xml`;
 
 export const makeStoryAlbumListPage = (
 	languageRoute: string,
@@ -139,15 +117,10 @@ export const makeSongAlbumsListRoute = (
 	page: string | number
 ): string => `/${languageRoute}/songs/albums/page/${page}`;
 
-export const makeSongAlbumDetailRoute = (
+export const makeSongAlbumFeedRoute = (
 	languageRoute: string,
 	albumId: Scalars['ID']
-): string => `/${languageRoute}/songs/albums/${albumId}`;
-
-export const makeAlbumTrackRoute = (
-	languageRoute: string,
-	trackId: Scalars['ID']
-): string => `/${languageRoute}/songs/${trackId}`;
+): string => `/${languageRoute}/songs/albums/${albumId}/feed.xml`;
 
 export const makeBibleMusicRoute = (
 	languageRoute: string,
@@ -164,10 +137,10 @@ export const makeTagMusicRoute = (
 	tagName: string
 ): string => `/${languageRoute}/songs/tag/${slug(tagName)}`;
 
-export const makeCollectionRoute = (
+export const makeCollectionFeedRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID']
-): string => `/${languageRoute}/conferences/${conferenceId}`;
+): string => `/${languageRoute}/conferences/${conferenceId}/feed.xml`;
 
 export const makeCollectionSequencesRoute = (
 	languageRoute: string,
@@ -190,11 +163,10 @@ export const makeConferenceListRoute = (
 	page: string | number
 ): string => `/${languageRoute}/conferences/page/${page}`;
 
-// TODO: rename makeSponsorDetailRoute
-export const makeSponsorRoute = (
+export const makeSponsorFeedRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID']
-): string => `/${languageRoute}/sponsors/${sponsorId}`;
+): string => `/${languageRoute}/sponsors/${sponsorId}/feed.xml`;
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
@@ -240,11 +212,6 @@ export const makePlaylistDetailRoute = (
 	languageRoute: string,
 	playlistId: Scalars['ID']
 ): string => `/${languageRoute}/library/playlist/${playlistId}`;
-
-export const makeBlogPostRoute = (
-	languageRoute: string,
-	blogPostId: Scalars['ID']
-): string => `/${languageRoute}/blog/${blogPostId}`;
 
 export const makeBlogPostListRoute = (
 	languageRoute: string,

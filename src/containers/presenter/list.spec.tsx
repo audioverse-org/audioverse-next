@@ -109,7 +109,7 @@ describe('presenter list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Presenters')).toBeInTheDocument();
+		expect(getByText('All Speakers')).toBeInTheDocument();
 	});
 
 	// TODO: Consider adding RSS feed

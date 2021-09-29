@@ -3,11 +3,7 @@ import {
 	GetSermonListPagePathsDataDocument,
 	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadRouter,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
@@ -47,32 +43,32 @@ describe('sermon audio list page', () => {
 		});
 	});
 
-	it('links to feed in audio list page', async () => {
-		mockedFetchApi.mockResolvedValue({
-			sermons: {
-				nodes: [
-					{
-						id: '1',
-						title: 'the_sermon_title',
-						canonicalPath: 'the_sermon_path',
-						videoFiles: [],
-					},
-				],
-				aggregate: {
-					count: 1,
-				},
-			},
-		});
+	// it('links to feed in audio list page', async () => {
+	// 	mockedFetchApi.mockResolvedValue({
+	// 		sermons: {
+	// 			nodes: [
+	// 				{
+	// 					id: '1',
+	// 					title: 'the_sermon_title',
+	// 					canonicalPath: 'the_sermon_path',
+	// 					videoFiles: [],
+	// 				},
+	// 			],
+	// 			aggregate: {
+	// 				count: 1,
+	// 			},
+	// 		},
+	// 	});
 
-		loadRouter({ pathname: '/[language]/teachings/audio/page/[i]' });
+	// 	loadRouter({ pathname: '/[language]/teachings/audio/page/[i]' });
 
-		const { getByRole } = await renderPage();
+	// 	const { getByRole } = await renderPage();
 
-		expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-			'href',
-			'/en/teachings/audio.xml'
-		);
-	});
+	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
+	// 		'href',
+	// 		'/en/teachings/audio.xml'
+	// 	);
+	// });
 
 	it('includes filter in pagination', async () => {
 		loadSermonListData();

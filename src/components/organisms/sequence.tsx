@@ -6,6 +6,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
+import ButtonShare from '@components/molecules/buttonShare';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import DefinitionList, {
@@ -18,13 +19,20 @@ import TypeLockup from '@components/molecules/typeLockup';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import { SequenceFragment } from '@lib/generated/graphql';
+import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
+import {
+	makeAudiobookFeedRoute,
+	makeSeriesFeedRoute,
+	makeSongAlbumFeedRoute,
+	makeStoryAlbumFeedRoute,
+} from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
+import { UnreachableCaseError } from '@lib/typeHelpers';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListAltIcon from '../../../public/img/fa-list-alt.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
-import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './sequence.module.scss';
 
@@ -34,20 +42,38 @@ export function Sequence({
 	sequence: SequenceFragment;
 }): JSX.Element {
 	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
 	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
 
 	const {
+		id,
 		title,
 		collection,
+		contentType,
 		duration,
 		endDate,
 		image,
-		// shareUrl,
+		shareUrl,
 		sponsor,
 		startDate,
 		recordings,
 		description,
 	} = sequence;
+
+	const rssUrl = (() => {
+		switch (contentType) {
+			case SequenceContentType.Audiobook:
+				return makeAudiobookFeedRoute;
+			case SequenceContentType.MusicAlbum:
+				return makeSongAlbumFeedRoute;
+			case SequenceContentType.Series:
+				return makeSeriesFeedRoute;
+			case SequenceContentType.StorySeason:
+				return makeStoryAlbumFeedRoute;
+			default:
+				throw new UnreachableCaseError(contentType);
+		}
+	})()(languageRoute, id);
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -137,7 +163,6 @@ export function Sequence({
 					<div className={styles.duration}>
 						{useFormattedDuration(duration)}
 					</div>
-					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
 						onClick={() => toggleFavorited()}
@@ -145,12 +170,12 @@ export function Sequence({
 						backgroundColor={BaseColors.CREAM}
 						className={styles.iconButton}
 					/>
-					<IconButton
-						Icon={ShareIcon}
-						onClick={() => void 0}
-						color={BaseColors.DARK}
+					<ButtonShare
+						shareUrl={shareUrl}
 						backgroundColor={BaseColors.CREAM}
-						className={styles.iconButton}
+						light
+						triggerClassName={styles.iconButton}
+						rssUrl={rssUrl}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

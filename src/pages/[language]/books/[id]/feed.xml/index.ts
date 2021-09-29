@@ -1,9 +1,45 @@
+import { uniq } from 'lodash';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getAudiobookDetailPageData } from '@lib/generated/graphql';
+import {
+	BookFeedDescriptionFragment,
+	getAudiobookFeedData,
+} from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
+import getIntl from '@lib/getIntl';
 
 export default (): void => void 0;
+
+export const formatBooksDescription = (
+	languageRoute: string,
+	sequence: BookFeedDescriptionFragment
+): string => {
+	const intl = getIntl(languageRoute);
+	const getPersonNameString = (persons: { name: string }[]) => {
+		return uniq(persons.map(({ name }) => name)).join(', ');
+	};
+	return intl.formatMessage(
+		{
+			id: 'storyAlbumsFeed__description',
+			defaultMessage: '{title}, by {authors}, narrated by {narrators}',
+		},
+		{
+			title: sequence.title,
+			authors: getPersonNameString(
+				(sequence.recordings.nodes || []).reduce(
+					(carry, { authors }) => [...carry, ...authors],
+					[] as { name: string }[]
+				)
+			),
+			narrators: getPersonNameString(
+				(sequence.recordings.nodes || []).reduce(
+					(carry, { narrators }) => [...carry, ...narrators],
+					[] as { name: string }[]
+				)
+			),
+		}
+	);
+};
 
 export async function getServerSideProps({
 	params,
@@ -14,7 +50,7 @@ export async function getServerSideProps({
 	const id = params?.id as string;
 	const languageRoute = params?.language as string;
 
-	const { audiobook: sequence } = await getAudiobookDetailPageData({
+	const { audiobook: sequence } = await getAudiobookFeedData({
 		id,
 	}).catch(() => ({
 		audiobook: null,
@@ -29,9 +65,14 @@ export async function getServerSideProps({
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(
-			sequence.title,
-			sequence.recordings.nodes || [],
-			languageRoute
+			languageRoute,
+			{
+				link: sequence.canonicalUrl,
+				title: sequence.title,
+				description: formatBooksDescription(languageRoute, sequence),
+				image: sequence.image?.url,
+			},
+			sequence.recordings.nodes || []
 		);
 		res.write(feed);
 

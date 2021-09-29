@@ -108,13 +108,13 @@ describe('collection detail page', () => {
 			.calledWith(GetCollectionDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				collections: {
-					nodes: [{ id: 'the_collection_id' }],
+					nodes: [{ canonicalPath: '/the_collection_path' }],
 				},
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/conferences/the_collection_id');
+		expect(paths).toContain('/the_collection_path');
 	});
 
 	it('renders sponsor link', async () => {
@@ -127,17 +127,6 @@ describe('collection detail page', () => {
 			'/the_sponsor_path'
 		);
 	});
-
-	// it('renders pagination', async () => {
-	// 	loadData();
-
-	// 	const { getByText } = await renderPage();
-
-	// 	expect(getByText('1')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/conferences/the_collection_id/page/1'
-	// 	);
-	// });
 
 	it('renders 404', async () => {
 		when(mockedFetchApi)
@@ -157,15 +146,14 @@ describe('collection detail page', () => {
 		expect(getByText('Dec 19 – 23, 2007')).toBeInTheDocument();
 	});
 
-	// TODO:
-	// it('links to RSS feed', async () => {
-	// 	loadData();
+	it('links to RSS feed', async () => {
+		loadData();
 
-	// 	const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-	// 	expect(getByText('RSS')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/conferences/the_collection_id.xml'
-	// 	);
-	// });
+		expect(getByText('Copy RSS Link')).toHaveAttribute(
+			'href',
+			'/en/conferences/the_collection_id/feed.xml'
+		);
+	});
 });

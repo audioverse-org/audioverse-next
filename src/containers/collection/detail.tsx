@@ -9,6 +9,7 @@ import HorizontalRule from '@components/atoms/horizontalRule';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
+import ButtonShare from '@components/molecules/buttonShare';
 import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
@@ -16,7 +17,6 @@ import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
-// TODO: import RssLink from '@components/molecules/rssLink';
 import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
@@ -26,6 +26,7 @@ import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import {
+	makeCollectionFeedRoute,
 	makeCollectionPresentersRoute,
 	makeCollectionSequencesRoute,
 } from '@lib/routes';
@@ -35,7 +36,6 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
-import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -59,6 +59,7 @@ function CollectionDetail({
 		location,
 		startDate,
 		endDate,
+		shareUrl,
 		sponsor,
 		persons,
 		sequences,
@@ -142,7 +143,6 @@ function CollectionDetail({
 					<div className={styles.duration}>
 						{useFormattedDuration(duration)}
 					</div>
-					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
 						onClick={() => toggleFavorited()}
@@ -150,12 +150,12 @@ function CollectionDetail({
 						backgroundColor={BaseColors.DARK}
 						className={styles.iconButton}
 					/>
-					<IconButton
-						Icon={ShareIcon}
-						onClick={() => void 0}
-						color={BaseColors.WHITE}
+					<ButtonShare
+						shareUrl={shareUrl}
 						backgroundColor={BaseColors.DARK}
-						className={styles.iconButton}
+						light
+						triggerClassName={styles.iconButton}
+						rssUrl={makeCollectionFeedRoute(lang, id)}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

@@ -2,6 +2,7 @@ import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
 	RecordingContentType,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -20,7 +21,9 @@ const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps, {
 
 const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 	series: {
+		id: 'the_series_id',
 		title: 'the_series_title',
+		contentType: SequenceContentType.Series,
 		image: {
 			url: 'the_series_image',
 		},
@@ -169,15 +172,14 @@ describe('series detail page', () => {
 		expect(queryByText('Conference')).not.toBeInTheDocument();
 	});
 
-	// TODO:
-	// it('links rss feed', async () => {
-	// 	loadData();
+	it('links rss feed', async () => {
+		loadData();
 
-	// 	const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-	// 	expect(getByText('RSS')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/series/the_series_id.xml'
-	// 	);
-	// });
+		expect(getByText('Copy RSS Link')).toHaveAttribute(
+			'href',
+			'/en/series/the_series_id/feed.xml'
+		);
+	});
 });

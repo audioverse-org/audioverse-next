@@ -4,10 +4,22 @@ query getSongAlbumsDetailPageData($id: ID!) {
 	}
 }
 
+query getSongAlbumFeedData($id: ID!) {
+	musicAlbum(id: $id) {
+		title
+		canonicalUrl(useFuturePath: true)
+		recordings(first: 25) {
+			nodes {
+				...generateFeed
+			}
+		}
+	}
+}
+
 query getSongAlbumsDetailPathsData($language: Language!, $first: Int) {
 	musicAlbums(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

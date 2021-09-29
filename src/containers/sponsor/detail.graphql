@@ -5,6 +5,7 @@ query getSponsorDetailPageData($id: ID!) {
 		location
 		website
 		description
+		shareUrl
 		image {
 			url(size: 100)
 		}
@@ -43,7 +44,7 @@ query getSponsorDetailPageData($id: ID!) {
 query getSponsorDetailPathsData($language: Language!, $first: Int) {
 	sponsors(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }
