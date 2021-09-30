@@ -5,7 +5,6 @@ import React from 'react';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
-import RssLink from '@components/molecules/rssLink';
 import { GetTagDetailPageDataQuery } from '@lib/generated/graphql';
 import { makeTagDetailRoute } from '@lib/routes';
 
@@ -23,8 +22,8 @@ export interface TagDetailProps {
 function TagDetail({
 	pagination,
 	nodes,
-	rssPath,
-}: TagDetailProps): JSX.Element {
+}: // rssPath,
+TagDetailProps): JSX.Element {
 	const router = useRouter();
 	const slug = _.get(router, 'query.slug');
 	const title = decodeURIComponent(slug);
@@ -34,7 +33,7 @@ function TagDetail({
 	return (
 		<>
 			<h1>{title}</h1>
-			<RssLink href={rssPath} />
+			{/* <RssLink href={rssPath} /> */}
 			<RecordingList recordings={nodes} />
 			<Pagination
 				current={pagination.current}

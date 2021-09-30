@@ -7,7 +7,6 @@ import {
 	getCollectionDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeCollectionRoute } from '@lib/routes';
 
 export default CollectionDetail;
 
@@ -29,6 +28,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,
-		(l, n) => makeCollectionRoute(l, n.id)
+		(l, { canonicalPath }) => canonicalPath
 	);
 }

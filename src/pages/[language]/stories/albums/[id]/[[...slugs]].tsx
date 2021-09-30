@@ -7,7 +7,6 @@ import {
 	getStoryAlbumDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeStoryAlbumRoute } from '@lib/routes';
 
 export default StoryAlbumDetail;
 
@@ -41,6 +40,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getStoryAlbumDetailPathsData,
 		(d) => d.storySeasons.nodes,
-		(languageRoute, node) => makeStoryAlbumRoute(languageRoute, node.id)
+		(languageRoute, { canonicalPath }) => canonicalPath
 	);
 }

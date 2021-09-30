@@ -25,7 +25,7 @@ interface Props {
 export default function CardPlaylist({ playlist }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const { id, title, recordings } = playlist;
-	const theme = 'playlist';
+	const theme = 'playlistItem';
 	return (
 		<CardWithTheme {...{ theme }}>
 			<Link href={makePlaylistDetailRoute(languageRoute, id)}>

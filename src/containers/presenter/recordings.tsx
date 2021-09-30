@@ -6,13 +6,18 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
 import {
 	GetPresenterRecordingsPageDataQuery,
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterRecordingsRoute } from '@lib/routes';
+import {
+	makePresenterFeedRoute,
+	makePresenterRecordingsRoute,
+} from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import PresenterPivot from './pivot';
 
@@ -34,8 +39,10 @@ function PresenterRecordings({
 }: Must<PresenterRecordingsProps> & {
 	data: { person: Must<PresenterPivotFragment> };
 }): JSX.Element {
+	const languageRoute = useLanguageRoute();
 	return (
 		<PresenterPivot {...{ person }}>
+			<RssAlternate url={makePresenterFeedRoute(languageRoute, person.id)} />
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
 					id="presenterRecordingsDetail__heading"

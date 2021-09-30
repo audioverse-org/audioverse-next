@@ -1393,7 +1393,7 @@
   },
   "presenterListPage__title": {
     "col": 12,
-    "defaultMessage": "Presenters",
+    "defaultMessage": "All Speakers",
     "end": 1075,
     "file": "src/containers/presenter/list.tsx",
     "line": 26,

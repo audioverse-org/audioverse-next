@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetSongAlbumsDetailPageDataDocument,
 	GetSongAlbumsDetailPathsDataDocument,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
@@ -23,6 +24,7 @@ describe('song album detail page', () => {
 				musicAlbum: {
 					id: 'the_album_id',
 					title: 'the_album_title',
+					contentType: SequenceContentType.MusicAlbum,
 					canonicalPath: 'the_album_path',
 					imageWithFallback: {
 						url: 'the_album_cover',
@@ -55,7 +57,7 @@ describe('song album detail page', () => {
 				musicAlbums: {
 					nodes: [
 						{
-							id: 'the_album_id',
+							canonicalPath: '/the_album_path',
 						},
 					],
 				},
@@ -63,7 +65,7 @@ describe('song album detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/songs/albums/the_album_id');
+		expect(paths).toContain('/the_album_path');
 	});
 
 	it('renders 404', async () => {

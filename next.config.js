@@ -28,6 +28,41 @@ module.exports = withPWA({
 				permanent: false,
 			},
 			{
+				source: '/:lang/sermons/podcasts/latest',
+				destination: '/:lang/teachings/all/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sermons/seriess/podcast/:seriesId/latest/:slug',
+				destination: '/:lang/series/:seriesId/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/audiobooks/books/podcast/:seriesId/latest/:slug',
+				destination: '/:lang/books/:seriesId/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/music/browse/podcast/:seriesId/latest/:slug',
+				destination: '/:lang/songs/albums/:seriesId/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sermons/conferences/podcast/:conferenceId/latest/:slug',
+				destination: '/:lang/conferences/:conferenceId/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sponsors/podcast/:sponsorId/latest/:slug',
+				destination: '/:lang/sponsors/:sponsorId/teachings/feed.xml',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sermons/presenters/podcast/:presenterId/latest/:slug',
+				destination: '/:lang/presenters/:presenterId/feed.xml',
+				permanent: true,
+			},
+			{
 				source: '/:lang/account',
 				destination: '/:lang/account/login',
 				permanent: true,

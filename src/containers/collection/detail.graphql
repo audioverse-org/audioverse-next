@@ -6,6 +6,7 @@ query getCollectionDetailPageData($id: ID!) {
 		endDate
 		duration
 		description
+		shareUrl
 		location
 		image {
 			url(size: 1400)
@@ -44,10 +45,29 @@ query getCollectionDetailPageData($id: ID!) {
 	}
 }
 
+query getCollectionFeedData($id: ID!) {
+	collection(id: $id) {
+		title
+		canonicalUrl(useFuturePath: true)
+		image {
+			url(size: 600)
+		}
+		recordings(first: 25, orderBy: [{ field: RECORDED_AT, direction: ASC }]) {
+			aggregate {
+				count
+			}
+			nodes {
+				...generateFeed
+			}
+		}
+	}
+}
+
 query getCollectionDetailPathsData($language: Language!, $first: Int) {
 	collections(language: $language, first: $first) {
 		nodes {
 			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

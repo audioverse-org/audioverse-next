@@ -9,10 +9,25 @@ query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
 		) {
 			nodes {
 				...cardRecording
-				...generateFeed
 			}
 			aggregate {
 				count
+			}
+		}
+	}
+}
+
+query getPresenterRecordingsFeedData($id: ID!) {
+	person(id: $id) {
+		id
+		name
+		image {
+			url(size: 600)
+		}
+		canonicalUrl(useFuturePath: true)
+		recordings(first: 25, orderBy: [{ field: PUBLISHED_AT, direction: DESC }]) {
+			nodes {
+				...generateFeed
 			}
 		}
 	}

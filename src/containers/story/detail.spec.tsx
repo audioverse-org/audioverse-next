@@ -56,7 +56,7 @@ describe('story detail page', () => {
 				stories: {
 					nodes: [
 						{
-							id: 'the_story_id',
+							canonicalPath: '/the_story_path',
 						},
 					],
 				},
@@ -64,7 +64,7 @@ describe('story detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/stories/the_story_id');
+		expect(paths).toContain('/the_story_path');
 	});
 
 	it('catches fetch error and renders 404', async () => {

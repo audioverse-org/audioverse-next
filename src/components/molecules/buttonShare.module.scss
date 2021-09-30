@@ -1,0 +1,17 @@
+@import '../../styles/common';
+
+.container {
+	min-width: 160px;
+	padding: 8px 16px;
+}
+
+.paragraph {
+	font-size: 12px;
+	line-height: 15px;
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+	> a:hover {
+		text-decoration: none;
+	}
+}

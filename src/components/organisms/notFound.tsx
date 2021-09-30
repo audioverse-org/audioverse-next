@@ -15,7 +15,9 @@ import styles from './notFound.module.scss';
 
 export type NotFoundProps = GetNotFoundPageDataQuery;
 
-export default function NotFound({ recordings }: NotFoundProps): JSX.Element {
+export default function NotFound({
+	websiteRecentRecordings: recordings,
+}: NotFoundProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	return (
 		<>

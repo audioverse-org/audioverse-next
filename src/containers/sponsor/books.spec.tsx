@@ -24,6 +24,7 @@ const loadData = buildLoader(GetSponsorBooksPageDataDocument, {
 	sponsor: {
 		id: 'the_sponsor_id',
 		title: 'the_sponsor_title',
+		canonicalPath: '/the_sponsor_path',
 		imageWithFallback: {
 			url: 'the_sponsor_image',
 		},
@@ -33,6 +34,7 @@ const loadData = buildLoader(GetSponsorBooksPageDataDocument, {
 			{
 				id: 'the_book_id',
 				title: 'the_book_title',
+				canonicalPath: '/the_book_path',
 				imageWithFallback: {
 					url: 'the_book_image',
 				},
@@ -101,7 +103,7 @@ describe('sponsor books list', () => {
 
 		expect(getByText('the_book_title')).toHaveAttribute(
 			'href',
-			'/en/books/the_book_id'
+			'/the_book_path'
 		);
 	});
 
@@ -120,7 +122,7 @@ describe('sponsor books list', () => {
 
 		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id'
+			'/the_sponsor_path'
 		);
 	});
 

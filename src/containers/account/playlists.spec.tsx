@@ -261,7 +261,3 @@ describe('playlists page', () => {
 		);
 	});
 });
-
-// stores request
-
-// TODO: punt: include date created or time since creation

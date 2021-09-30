@@ -20,8 +20,6 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { language } = params;
-
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) =>
@@ -39,7 +37,6 @@ export async function getStaticProps({
 		...response,
 		props: {
 			...response.props,
-			rssPath: `/${language}/teachings/video.xml`,
 			filter: 'video',
 		},
 	};

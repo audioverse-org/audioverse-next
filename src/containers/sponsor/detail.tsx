@@ -9,6 +9,7 @@ import LineHeading from '@components/atoms/lineHeading';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
+import ButtonShare from '@components/molecules/buttonShare';
 import CardCollection from '@components/molecules/card/collection';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
@@ -25,6 +26,7 @@ import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeSponsorConferencesRoute,
+	makeSponsorFeedRoute,
 	makeSponsorSeriesRoute,
 	makeSponsorTeachingsRoute,
 } from '@lib/routes';
@@ -33,7 +35,6 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
-import ShareIcon from '../../../public/img/icon-share-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -52,6 +53,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 		location,
 		title,
 		website,
+		shareUrl,
 		recordings,
 		sequences,
 	} = sponsor;
@@ -130,7 +132,6 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							/>
 						)}
 					</Heading6>
-					{/* TODO: make icons functional */}
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
 						onClick={() => toggleFavorited()}
@@ -138,12 +139,12 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 						backgroundColor={BaseColors.LIGHT_TONE}
 						className={styles.iconButton}
 					/>
-					<IconButton
-						Icon={ShareIcon}
-						onClick={() => void 0}
-						color={BaseColors.DARK}
+					<ButtonShare
+						shareUrl={shareUrl}
 						backgroundColor={BaseColors.LIGHT_TONE}
-						className={styles.iconButton}
+						light
+						triggerClassName={styles.iconButton}
+						rssUrl={makeSponsorFeedRoute(languageRoute, id)}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

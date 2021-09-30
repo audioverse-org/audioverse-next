@@ -7,7 +7,6 @@ import {
 	getAudiobookTrackDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeAudiobookTrackRoute } from '@lib/routes';
 
 export default AudiobookTrackDetail;
 
@@ -42,6 +41,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 	return getDetailStaticPaths(
 		getAudiobookTrackDetailStaticPaths,
 		(d) => d.audiobookTracks.nodes,
-		(baseUrl, node) => makeAudiobookTrackRoute(baseUrl, node.id)
+		(baseUrl, { canonicalPath }) => canonicalPath
 	);
 }

@@ -8,12 +8,7 @@ import Pagination from '@components/molecules/pagination';
 import TableList from '@components/organisms/tableList';
 import { GetSponsorBooksPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeAudiobookRoute,
-	makeSponsorBooksRoute,
-	makeSponsorRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSponsorBooksRoute } from '@lib/routes';
 
 export type SponsorBooksProps = PaginatedProps<
 	NonNullable<GetSponsorBooksPageDataQuery['audiobooks']['nodes']>[0],
@@ -25,7 +20,6 @@ function SponsorBooks({
 	data,
 	pagination,
 }: SponsorBooksProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
 	const sponsorImage = data?.sponsor?.imageWithFallback?.url;
 	return (
 		<>
@@ -38,7 +32,7 @@ function SponsorBooks({
 				/>
 			)}
 			<h1>
-				<Link href={makeSponsorRoute(languageRoute, data?.sponsor?.id || '')}>
+				<Link href={data?.sponsor?.canonicalPath as string}>
 					<a>{data?.sponsor?.title}</a>
 				</Link>
 			</h1>
@@ -52,7 +46,7 @@ function SponsorBooks({
 			<TableList
 				nodes={nodes}
 				parseTitle={(n) => n.title}
-				makeEntryRoute={(l, n) => makeAudiobookRoute(l, n.id)}
+				makeEntryRoute={(l, n) => n.canonicalPath}
 			/>
 			<Pagination
 				makeRoute={(l, i) =>

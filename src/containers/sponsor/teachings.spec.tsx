@@ -142,16 +142,4 @@ describe('sponsor teachings page', () => {
 
 		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
 	});
-
-	// TODO
-	// it('links to rss feed', async () => {
-	// 	loadData();
-
-	// 	const { getByText } = await renderPage();
-
-	// 	expect(getByText('RSS')).toHaveAttribute(
-	// 		'href',
-	// 		'/en/sponsors/the_sponsor_id/teachings.xml'
-	// 	);
-	// });
 });

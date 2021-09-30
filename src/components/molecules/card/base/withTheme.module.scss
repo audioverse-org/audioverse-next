@@ -82,7 +82,7 @@
 	--textRuleColor: #{$ts-topicH};
 }
 
-.playlist {
+.playlistItem {
 	--hatBg: #{$ts-playlistH};
 	--hatColor: #{$ts-white};
 	--hatHoverColor: #{$ts-darkened-playlistH};
@@ -94,4 +94,20 @@
 	--partColor: #{$ts-red};
 	--iconColor: #{$ts-red};
 	--textRuleColor: #{$ts-lightTone};
+}
+
+// These are partially implemented
+.collection {
+	--cardBg: #{$ts-dark};
+	--cardHoverColor: #{$ts-darkened-dark};
+}
+
+.sequence {
+	--cardBg: #{$ts-cream};
+	--cardHoverColor: #{$ts-darkened-cream};
+}
+
+.playlist {
+	--cardBg: #{$ts-playlistH};
+	--cardHoverColor: #{$ts-darkened-playlistH};
 }

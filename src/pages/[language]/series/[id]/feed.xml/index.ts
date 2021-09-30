@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getSeriesDetailPageData } from '@lib/generated/graphql';
+import { getSeriesFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 
 export default (): void => void 0;
@@ -13,7 +13,7 @@ export async function getServerSideProps({
 > {
 	const id = params?.id as string;
 	const languageRoute = params?.language as string;
-	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
+	const { series } = await getSeriesFeedData({ id }).catch(() => ({
 		series: null,
 	}));
 	if (!series) {
@@ -26,9 +26,12 @@ export async function getServerSideProps({
 		res.setHeader('Content-Type', 'text/xml');
 
 		const feed = generateFeed(
-			series.title,
-			series.recordings.nodes || [],
-			languageRoute
+			languageRoute,
+			{
+				link: series.canonicalUrl,
+				title: series.title,
+			},
+			series.recordings.nodes || []
 		);
 		res.write(feed);
 

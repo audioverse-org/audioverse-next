@@ -303,8 +303,6 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 					</div>
 				</div>
 
-				{/*TODO: use ul > li*/}
-
 				{seriesItems?.length && (
 					<div
 						className={styles.series}
@@ -323,13 +321,13 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								/>
 							</LineHeading>
 
-							<div className={styles.seriesItems}>
+							<ol className={styles.seriesItems}>
 								{seriesItems.map((r) => (
-									<div className={styles.item} key={r.id}>
+									<li className={styles.item} key={r.id}>
 										<TeaseRecording recording={r} theme={theme} unpadded />
-									</div>
+									</li>
 								))}
-							</div>
+							</ol>
 						</div>
 					</div>
 				)}

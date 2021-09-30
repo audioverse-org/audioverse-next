@@ -8,7 +8,6 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Presenters;
 
-// TODO: Consider adding RSS feed for new presenters w/ presenter names and descs
 export async function getStaticProps({
 	params,
 }: {

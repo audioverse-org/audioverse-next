@@ -9,10 +9,21 @@ query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
 		) {
 			nodes {
 				...cardRecording
-				...generateFeed
 			}
 			aggregate {
 				count
+			}
+		}
+	}
+}
+
+query getSponsorTeachingsFeedData($id: ID!) {
+	sponsor(id: $id) {
+		title
+		canonicalUrl(useFuturePath: true)
+		recordings(first: 25, orderBy: [{ field: RECORDED_AT, direction: DESC }]) {
+			nodes {
+				...generateFeed
 			}
 		}
 	}

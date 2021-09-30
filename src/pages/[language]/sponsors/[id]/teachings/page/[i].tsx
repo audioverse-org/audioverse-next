@@ -16,21 +16,13 @@ export async function getStaticProps({
 }: {
 	params: { language: string; id: string; i: string };
 }): Promise<StaticProps<SponsorTeachingsProps>> {
-	const { language, id } = params;
-	const result = await getPaginatedStaticProps(
+	const { id } = params;
+	return getPaginatedStaticProps(
 		params,
 		({ offset, first }) => getSponsorTeachingsPageData({ id, offset, first }),
 		(d) => d.sponsor?.recordings.nodes,
 		(d) => d.sponsor?.recordings.aggregate?.count
 	);
-
-	return {
-		...result,
-		props: {
-			rssPath: `/${language}/sponsors/${id}/teachings.xml`,
-			...result.props,
-		},
-	};
 }
 
 export async function getStaticPaths(): Promise<StaticPaths> {

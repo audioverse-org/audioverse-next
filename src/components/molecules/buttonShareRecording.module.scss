@@ -1,20 +1,7 @@
 @import '../../styles/common';
 
 .container {
-	padding: 16px;
-}
-
-.heading {
-	font-size: 11px;
-	line-height: 13.31px;
-}
-
-.paragraph {
-	font-size: 12px;
-	line-height: 15px;
-	&:last-of-type {
-		margin-bottom: 32px;
-	}
+	margin-top: 32px;
 }
 
 .embedCode {

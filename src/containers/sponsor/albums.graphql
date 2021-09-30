@@ -6,6 +6,7 @@ query getSponsorAlbumsPageData(
 ) {
 	sponsor(id: $id) {
 		title
+		canonicalPath(useFuturePath: true)
 	}
 	musicAlbums(
 		language: $language
@@ -16,6 +17,7 @@ query getSponsorAlbumsPageData(
 		nodes {
 			id
 			title
+			canonicalPath(useFuturePath: true)
 			imageWithFallback {
 				url(size: 100)
 			}
