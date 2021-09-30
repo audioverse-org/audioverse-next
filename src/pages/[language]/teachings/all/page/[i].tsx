@@ -1,4 +1,4 @@
-import SermonList from '@containers/sermon/list';
+import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
 	getSermonListPagePathsData,
 	getSermonListStaticProps,
@@ -18,7 +18,7 @@ type PaginatedProps = PaginatedStaticProps<
 	Sermon
 >;
 type StaticProps = PaginatedProps & {
-	props: { rssPath: string; filter: string };
+	props: SermonListProps;
 };
 
 interface GetStaticPropsArgs {
@@ -28,8 +28,6 @@ interface GetStaticPropsArgs {
 export async function getStaticProps({
 	params,
 }: GetStaticPropsArgs): Promise<StaticProps> {
-	const { language: base_url } = params;
-
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) =>
@@ -45,7 +43,6 @@ export async function getStaticProps({
 		...response,
 		props: {
 			...response.props,
-			rssPath: `/${base_url}/teachings/all.xml`,
 			filter: 'all',
 		},
 	};

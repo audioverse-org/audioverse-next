@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { PropsWithChildren } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -12,6 +11,7 @@ import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonShare.module.scss';
 import Dropdown from './dropdown';
 import IconButton from './iconButton';
+import RssAlternate from './rssAlternate';
 
 type Props = {
 	shareUrl: string;
@@ -85,18 +85,7 @@ export default function ButtonShare({
 
 	return (
 		<>
-			{rssUrl && (
-				<>
-					<Head>
-						<link
-							type="application/rss+xml"
-							rel="alternate"
-							href={rssUrl}
-							title="RSS feed"
-						/>
-					</Head>
-				</>
-			)}
+			{rssUrl && <RssAlternate url={rssUrl} />}
 			<Dropdown
 				id="shareMenu"
 				trigger={({ isOpen, ...props }) => (

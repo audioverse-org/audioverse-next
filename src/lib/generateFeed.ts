@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { Feed } from 'feed';
+// Using https://github.com/jpmonette/feed/pull/126
 import { ExtraItem } from 'feed/lib/typings';
 import he from 'he';
 import striptags from 'striptags';

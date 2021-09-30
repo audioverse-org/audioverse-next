@@ -6,13 +6,15 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
 import {
 	GetSponsorTeachingsPageDataQuery,
 	SponsorPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorTeachingsRoute } from '@lib/routes';
+import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
 
@@ -23,7 +25,7 @@ export type SponsorTeachingsProps = PaginatedProps<
 		>['recordings']['nodes']
 	>[0],
 	GetSponsorTeachingsPageDataQuery
-> & { rssPath: string | null };
+>;
 
 function SponsorTeachings({
 	nodes,
@@ -32,8 +34,10 @@ function SponsorTeachings({
 }: Must<SponsorTeachingsProps> & {
 	data: { sponsor: Must<SponsorPivotFragment> };
 }): JSX.Element {
+	const languageRoute = useLanguageRoute();
 	return (
 		<SponsorPivot {...{ sponsor }}>
+			<RssAlternate url={makeSponsorFeedRoute(languageRoute, sponsor.id)} />
 			<LineHeading color={BaseColors.RED}>
 				<FormattedMessage
 					id="sponsorTeachingsDetail__heading"

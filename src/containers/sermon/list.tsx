@@ -5,15 +5,15 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import Pagination from '@components/molecules/pagination';
 import RecordingList from '@components/molecules/recordingList';
+import RssAlternate from '@components/molecules/rssAlternate';
 import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
-import { makeSermonListRoute } from '@lib/routes';
+import { makeSermonListRoute, makeSermonsFeedRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
 
 export interface SermonListProps {
 	nodes: Sermons;
-	rssPath: string;
 	filter: string;
 	pagination: {
 		current: number;
@@ -21,16 +21,12 @@ export interface SermonListProps {
 	};
 }
 
-function SermonList({
-	nodes,
-	pagination,
-	filter /*rssPath*/,
-}: SermonListProps) {
+function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	const lang = useLanguageRoute();
 
 	return (
 		<div>
-			{/* <RssLink href={rssPath} /> */}
+			<RssAlternate url={makeSermonsFeedRoute(lang)} />
 			<div>
 				<Link href={makeSermonListRoute(lang, 'all', 1)}>
 					<a>

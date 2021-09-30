@@ -74,6 +74,9 @@ export const makeSermonListRoute = (
 	page: string | number = 1
 ): string => `/${languageRoute}/teachings/${filter}/page/${page}`;
 
+export const makeSermonsFeedRoute = (languageRoute: string): string =>
+	`/${languageRoute}/teachings/all/feed.xml`;
+
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;
 
