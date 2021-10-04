@@ -9712,6 +9712,437 @@ export type GetPresenterTopPageDataQuery = {
 	}>;
 };
 
+export type GetSearchResultsCollectionsQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetSearchResultsCollectionsQuery = {
+	__typename?: 'Query';
+	collections: {
+		__typename?: 'CollectionConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Collection';
+				id: string | number;
+				canonicalPath: string;
+				title: string;
+				startDate: Maybe<string>;
+				endDate: Maybe<string>;
+				duration: number;
+				viewerPlaybackCompletedPercentage: number;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+	};
+};
+
+export type GetSearchResultsPageDataQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+}>;
+
+export type GetSearchResultsPageDataQuery = {
+	__typename?: 'Query';
+	recordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: Maybe<number>;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					id: string | number;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					favoritedRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}>
+		>;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+	sequences: {
+		__typename?: 'SequenceConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Sequence';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				viewerPlaybackCompletedPercentage: number;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				sequenceWriters: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+	collections: {
+		__typename?: 'CollectionConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Collection';
+				id: string | number;
+				canonicalPath: string;
+				title: string;
+				startDate: Maybe<string>;
+				endDate: Maybe<string>;
+				duration: number;
+				viewerPlaybackCompletedPercentage: number;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+	sponsors: {
+		__typename?: 'SponsorConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: Maybe<{ __typename?: 'Image'; url: string }>;
+				collections: {
+					__typename?: 'CollectionConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+	persons: {
+		__typename?: 'PersonConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Person';
+				id: string | number;
+				name: string;
+				canonicalPath: string;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+};
+
+export type GetSearchResultsPersonsQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetSearchResultsPersonsQuery = {
+	__typename?: 'Query';
+	persons: {
+		__typename?: 'PersonConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Person';
+				id: string | number;
+				name: string;
+				canonicalPath: string;
+				image: Maybe<{
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				}>;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+	};
+};
+
+export type GetSearchResultsSequencesQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetSearchResultsSequencesQuery = {
+	__typename?: 'Query';
+	sequences: {
+		__typename?: 'SequenceConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Sequence';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				viewerPlaybackCompletedPercentage: number;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				sequenceWriters: {
+					__typename?: 'PersonConnection';
+					nodes: Maybe<
+						Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>
+					>;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+	};
+};
+
+export type GetSearchResultsSponsorsQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetSearchResultsSponsorsQuery = {
+	__typename?: 'Query';
+	sponsors: {
+		__typename?: 'SponsorConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: Maybe<{ __typename?: 'Image'; url: string }>;
+				collections: {
+					__typename?: 'CollectionConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+				};
+			}>
+		>;
+	};
+};
+
+export type GetSearchResultsRecordingsQueryVariables = Exact<{
+	language: Language;
+	term: Scalars['String'];
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetSearchResultsRecordingsQuery = {
+	__typename?: 'Query';
+	recordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		nodes: Maybe<
+			Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: Maybe<number>;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				sequence: Maybe<{
+					__typename?: 'Sequence';
+					id: string | number;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					title: string;
+					image: Maybe<{ __typename?: 'Image'; url: string }>;
+					favoritedRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+					};
+				}>;
+				sponsor: Maybe<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}>
+		>;
+	};
+};
+
 export type GetSeriesDetailPageDataQueryVariables = Exact<{
 	id: Scalars['ID'];
 }>;
@@ -14247,6 +14678,219 @@ export const useGetPresenterTopPageDataQuery = <
 		>(GetPresenterTopPageDataDocument, variables),
 		options
 	);
+export const GetSearchResultsCollectionsDocument = `
+    query getSearchResultsCollections($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
+  collections(language: $language, search: $term, first: $first, offset: $offset) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardCollection
+    }
+  }
+}
+    ${CardCollectionFragmentDoc}`;
+export const useGetSearchResultsCollectionsQuery = <
+	TData = GetSearchResultsCollectionsQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsCollectionsQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsCollectionsQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsCollectionsQuery, TError, TData>(
+		['getSearchResultsCollections', variables],
+		graphqlFetcher<
+			GetSearchResultsCollectionsQuery,
+			GetSearchResultsCollectionsQueryVariables
+		>(GetSearchResultsCollectionsDocument, variables),
+		options
+	);
+export const GetSearchResultsPageDataDocument = `
+    query getSearchResultsPageData($language: Language!, $term: String!) {
+  recordings(language: $language, search: $term, first: 6) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardRecording
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  sequences(language: $language, search: $term, first: 3) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardSequence
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  collections(language: $language, search: $term, first: 3) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardCollection
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  sponsors(language: $language, search: $term, first: 3) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardSponsor
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+  persons(language: $language, search: $term, first: 3) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardPerson
+    }
+    pageInfo {
+      hasNextPage
+    }
+  }
+}
+    ${CardRecordingFragmentDoc}
+${CardSequenceFragmentDoc}
+${CardCollectionFragmentDoc}
+${CardSponsorFragmentDoc}
+${CardPersonFragmentDoc}`;
+export const useGetSearchResultsPageDataQuery = <
+	TData = GetSearchResultsPageDataQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsPageDataQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsPageDataQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsPageDataQuery, TError, TData>(
+		['getSearchResultsPageData', variables],
+		graphqlFetcher<
+			GetSearchResultsPageDataQuery,
+			GetSearchResultsPageDataQueryVariables
+		>(GetSearchResultsPageDataDocument, variables),
+		options
+	);
+export const GetSearchResultsPersonsDocument = `
+    query getSearchResultsPersons($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
+  persons(language: $language, search: $term, first: $first, offset: $offset) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardPerson
+    }
+  }
+}
+    ${CardPersonFragmentDoc}`;
+export const useGetSearchResultsPersonsQuery = <
+	TData = GetSearchResultsPersonsQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsPersonsQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsPersonsQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsPersonsQuery, TError, TData>(
+		['getSearchResultsPersons', variables],
+		graphqlFetcher<
+			GetSearchResultsPersonsQuery,
+			GetSearchResultsPersonsQueryVariables
+		>(GetSearchResultsPersonsDocument, variables),
+		options
+	);
+export const GetSearchResultsSequencesDocument = `
+    query getSearchResultsSequences($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
+  sequences(language: $language, search: $term, first: $first, offset: $offset) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardSequence
+    }
+  }
+}
+    ${CardSequenceFragmentDoc}`;
+export const useGetSearchResultsSequencesQuery = <
+	TData = GetSearchResultsSequencesQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsSequencesQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsSequencesQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsSequencesQuery, TError, TData>(
+		['getSearchResultsSequences', variables],
+		graphqlFetcher<
+			GetSearchResultsSequencesQuery,
+			GetSearchResultsSequencesQueryVariables
+		>(GetSearchResultsSequencesDocument, variables),
+		options
+	);
+export const GetSearchResultsSponsorsDocument = `
+    query getSearchResultsSponsors($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
+  sponsors(language: $language, search: $term, first: $first, offset: $offset) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardSponsor
+    }
+  }
+}
+    ${CardSponsorFragmentDoc}`;
+export const useGetSearchResultsSponsorsQuery = <
+	TData = GetSearchResultsSponsorsQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsSponsorsQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsSponsorsQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsSponsorsQuery, TError, TData>(
+		['getSearchResultsSponsors', variables],
+		graphqlFetcher<
+			GetSearchResultsSponsorsQuery,
+			GetSearchResultsSponsorsQueryVariables
+		>(GetSearchResultsSponsorsDocument, variables),
+		options
+	);
+export const GetSearchResultsRecordingsDocument = `
+    query getSearchResultsRecordings($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
+  recordings(language: $language, search: $term, first: $first, offset: $offset) {
+    aggregate {
+      count
+    }
+    nodes {
+      ...cardRecording
+    }
+  }
+}
+    ${CardRecordingFragmentDoc}`;
+export const useGetSearchResultsRecordingsQuery = <
+	TData = GetSearchResultsRecordingsQuery,
+	TError = unknown
+>(
+	variables: GetSearchResultsRecordingsQueryVariables,
+	options?: UseQueryOptions<GetSearchResultsRecordingsQuery, TError, TData>
+) =>
+	useQuery<GetSearchResultsRecordingsQuery, TError, TData>(
+		['getSearchResultsRecordings', variables],
+		graphqlFetcher<
+			GetSearchResultsRecordingsQuery,
+			GetSearchResultsRecordingsQueryVariables
+		>(GetSearchResultsRecordingsDocument, variables),
+		options
+	);
 export const GetSeriesDetailPageDataDocument = `
     query getSeriesDetailPageData($id: ID!) {
   series(id: $id) {
@@ -16127,6 +16771,42 @@ export async function getPresenterTopPageData<T>(
 	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
 ): Promise<GetPresenterTopPageDataQuery> {
 	return fetchApi(GetPresenterTopPageDataDocument, { variables });
+}
+
+export async function getSearchResultsCollections<T>(
+	variables: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>
+): Promise<GetSearchResultsCollectionsQuery> {
+	return fetchApi(GetSearchResultsCollectionsDocument, { variables });
+}
+
+export async function getSearchResultsPageData<T>(
+	variables: ExactAlt<T, GetSearchResultsPageDataQueryVariables>
+): Promise<GetSearchResultsPageDataQuery> {
+	return fetchApi(GetSearchResultsPageDataDocument, { variables });
+}
+
+export async function getSearchResultsPersons<T>(
+	variables: ExactAlt<T, GetSearchResultsPersonsQueryVariables>
+): Promise<GetSearchResultsPersonsQuery> {
+	return fetchApi(GetSearchResultsPersonsDocument, { variables });
+}
+
+export async function getSearchResultsSequences<T>(
+	variables: ExactAlt<T, GetSearchResultsSequencesQueryVariables>
+): Promise<GetSearchResultsSequencesQuery> {
+	return fetchApi(GetSearchResultsSequencesDocument, { variables });
+}
+
+export async function getSearchResultsSponsors<T>(
+	variables: ExactAlt<T, GetSearchResultsSponsorsQueryVariables>
+): Promise<GetSearchResultsSponsorsQuery> {
+	return fetchApi(GetSearchResultsSponsorsDocument, { variables });
+}
+
+export async function getSearchResultsRecordings<T>(
+	variables: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
+): Promise<GetSearchResultsRecordingsQuery> {
+	return fetchApi(GetSearchResultsRecordingsDocument, { variables });
 }
 
 export async function getSeriesDetailPageData<T>(

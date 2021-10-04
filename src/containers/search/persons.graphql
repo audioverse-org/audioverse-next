@@ -1,0 +1,15 @@
+query getSearchResultsPersons(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$offset: Int!
+) {
+	persons(language: $language, search: $term, first: $first, offset: $offset) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardPerson
+		}
+	}
+}

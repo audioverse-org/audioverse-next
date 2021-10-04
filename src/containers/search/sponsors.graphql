@@ -1,0 +1,15 @@
+query getSearchResultsSponsors(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$offset: Int!
+) {
+	sponsors(language: $language, search: $term, first: $first, offset: $offset) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSponsor
+		}
+	}
+}

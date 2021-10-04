@@ -1,14 +1,12 @@
-import _ from 'lodash';
-
 import AudiobooksList, {
 	AudiobooksListProps,
 } from '@containers/audiobook/list';
-import { LANGUAGES } from '@lib/constants';
 import {
 	getAudiobookListPageData,
 	GetAudiobookListPageDataQuery,
 } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default AudiobooksList;
@@ -39,7 +37,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: _.values(LANGUAGES).map((l) => `/${l.base_url}/books`),
+		paths: getLanguageRoutes().map((base_url) => `/${base_url}/books`),
 		fallback: true,
 	};
 }

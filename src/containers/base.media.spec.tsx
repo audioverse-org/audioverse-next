@@ -17,7 +17,7 @@ import {
 	RecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { setPlayerMock } from '@lib/test/helpers';
+import { loadQuery, setPlayerMock } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 const sequence = {
@@ -102,6 +102,8 @@ const renderApp = async (
 	recording: Partial<RecordingFragment>,
 	container: any = undefined
 ) => {
+	loadQuery({});
+
 	const result = await render(
 		<MyApp
 			Component={Page as any}

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import SearchBar from '@components/molecules/searchBar';
@@ -16,9 +16,17 @@ export default function AndNavigation({
 }: {
 	children: ReactNode;
 }): JSX.Element {
+	const {
+		query: { q },
+	} = useRouter();
 	const [showingMenu, setShowingMenu] = useState(false);
 	const [showingSearch, setShowingSearch] = useState(false);
-	const [term, setTerm] = useState(''); // TODO: grab from search param
+	const [term, setTerm] = useState((q as string) || '');
+	useEffect(() => {
+		if (q) {
+			setTerm(q as string);
+		}
+	}, [q]);
 	useEffect(() => {
 		const onRouteChange = () => setShowingMenu(false);
 		Router.events.on('routeChangeStart', onRouteChange);

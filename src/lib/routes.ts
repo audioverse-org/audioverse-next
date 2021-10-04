@@ -223,3 +223,36 @@ export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 
 export const makeDiscoverRoute = (languageRoute: string): string =>
 	`/${languageRoute}/discover`;
+
+export const makeSearchRoute = (languageRoute: string, term = ''): string =>
+	`/${languageRoute}/search${term ? `?q=${term}` : ''}`;
+
+export const makeSearchCollectionsRoute = (
+	languageRoute: string,
+	term: string,
+	page: string | number = 1
+): string => `/${languageRoute}/search/collections/page/${page}?q=${term}`;
+
+export const makeSearchPersonsRoute = (
+	languageRoute: string,
+	term: string,
+	page: string | number = 1
+): string => `/${languageRoute}/search/persons/page/${page}?q=${term}`;
+
+export const makeSearchSequencesRoute = (
+	languageRoute: string,
+	term: string,
+	page: string | number = 1
+): string => `/${languageRoute}/search/sequences/page/${page}?q=${term}`;
+
+export const makeSearchSponsorsRoute = (
+	languageRoute: string,
+	term: string,
+	page: string | number = 1
+): string => `/${languageRoute}/search/sponsors/page/${page}?q=${term}`;
+
+export const makeSearchTeachingsRoute = (
+	languageRoute: string,
+	term: string,
+	page: string | number = 1
+): string => `/${languageRoute}/search/teachings/page/${page}?q=${term}`;

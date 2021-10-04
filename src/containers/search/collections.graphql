@@ -1,0 +1,20 @@
+query getSearchResultsCollections(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$offset: Int!
+) {
+	collections(
+		language: $language
+		search: $term
+		first: $first
+		offset: $offset
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardCollection
+		}
+	}
+}

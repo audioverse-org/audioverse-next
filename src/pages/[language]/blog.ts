@@ -1,9 +1,7 @@
-import { values } from 'lodash';
-
 import Blog, { BlogProps } from '@containers/blog';
-import { LANGUAGES } from '@lib/constants';
 import { getBlogPageData, Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Blog;
@@ -26,7 +24,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: values(LANGUAGES).map(({ base_url }) => `/${base_url}/blog`),
+		paths: getLanguageRoutes().map((base_url) => `/${base_url}/blog`),
 		fallback: false,
 	};
 }

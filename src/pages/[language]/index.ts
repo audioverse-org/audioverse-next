@@ -1,9 +1,8 @@
-import _ from 'lodash';
-
 import { IBaseProps } from '@containers/base';
 import Home, { HomeProps } from '@containers/home';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { REVALIDATE } from '@lib/constants';
 import { getHomeStaticProps } from '@lib/generated/graphql';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { getValidLanguage } from '@lib/getValidLanguage';
 
 export default Home;
@@ -31,7 +30,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		paths: _.values(LANGUAGES).map((l) => `/${l.base_url}`),
+		paths: getLanguageRoutes().map((base_url) => `/${base_url}`),
 		fallback: false,
 	};
 }
