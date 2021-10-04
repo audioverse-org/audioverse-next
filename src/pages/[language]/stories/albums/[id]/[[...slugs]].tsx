@@ -10,11 +10,6 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default StoryAlbumDetail;
 
-interface StaticProps {
-	props: StoryAlbumDetailProps;
-	revalidate: number;
-}
-
 export interface GetStaticPropsArgs {
 	params: {
 		language: string;
@@ -24,7 +19,7 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
+}: GetStaticPropsArgs): Promise<StaticProps<StoryAlbumDetailProps>> {
 	const { id } = params;
 
 	const { storySeason: sequence } = await getStoryAlbumDetailPageData({

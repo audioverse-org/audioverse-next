@@ -1,17 +1,12 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
+	getSermonListPageData,
 	getSermonListPagePathsData,
-	getSermonListStaticProps,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default SermonList;
-
-interface StaticProps {
-	props: SermonListProps;
-	revalidate: number;
-}
 
 interface GetStaticPropsArgs {
 	params: { i: string; language: string };
@@ -19,19 +14,17 @@ interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
+}: GetStaticPropsArgs): Promise<StaticProps<SermonListProps>> {
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) =>
-			getSermonListStaticProps({
+			getSermonListPageData({
 				...variables,
 				hasVideo: true,
 			}),
 		(d) => d.sermons.nodes,
 		(d) => d.sermons.aggregate?.count
 	);
-
-	// TODO: generate rss
 
 	return {
 		...response,

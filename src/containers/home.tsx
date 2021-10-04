@@ -10,7 +10,6 @@ import Button from '@components/molecules/button';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
-import CardTopic from '@components/molecules/card/topic';
 import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
@@ -30,7 +29,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const route = useLanguageRoute();
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const chapter = data?.audiobible?.book.chapter;
-	const topicRecording = data?.tag.nodes && data.tag.nodes[0];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
@@ -168,11 +166,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								<CardRecording recording={recording} />
 							</div>
 						))}
-						{topicRecording && (
-							<div className={styles.slideCard}>
-								<CardTopic topicRecording={topicRecording} />
-							</div>
-						)}
 					</Slider>
 				}
 				center={true}

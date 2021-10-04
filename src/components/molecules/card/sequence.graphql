@@ -19,15 +19,9 @@ fragment cardSequence on Sequence {
 			...personLockup
 		}
 	}
-	recordings(first: 3) {
+	allRecordings: recordings(first: 3) {
 		aggregate {
 			count
 		}
-		# edges {
-		# 	cursor
-		# 	node {
-		# 		...RecordingCard
-		# 	}
-		# }
 	}
 }

@@ -1,0 +1,39 @@
+@import '../../styles/common';
+
+.buttonOpen {
+	border-color: $ts-red;
+}
+
+.dropdownContainer {
+	padding: 12px 16px;
+}
+
+.segmentedControlWrapper {
+	display: flex;
+	align-items: center;
+}
+
+.segmentedControl {
+	padding: 8px;
+	border: 1px solid rgba($ts-dark, 0.5);
+	&:not(:last-of-type) {
+		border-right: none;
+	}
+	&:first-of-type {
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+	}
+	&:last-of-type {
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+	}
+	&:hover,
+	&.segmentedControlActive {
+		background: $ts-red;
+		color: $ts-white;
+		text-decoration: none;
+	}
+	&.segmentedControlActive {
+		font-weight: 700;
+	}
+}

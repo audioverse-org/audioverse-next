@@ -1,7 +1,7 @@
 import { loadSermonListData } from '@containers/sermon/list.all.spec';
 import {
+	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
-	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
@@ -33,7 +33,7 @@ describe('sermon audio list page', () => {
 			},
 		});
 
-		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				hasVideo: false,
@@ -42,33 +42,6 @@ describe('sermon audio list page', () => {
 			},
 		});
 	});
-
-	// it('links to feed in audio list page', async () => {
-	// 	mockedFetchApi.mockResolvedValue({
-	// 		sermons: {
-	// 			nodes: [
-	// 				{
-	// 					id: '1',
-	// 					title: 'the_sermon_title',
-	// 					canonicalPath: 'the_sermon_path',
-	// 					videoFiles: [],
-	// 				},
-	// 			],
-	// 			aggregate: {
-	// 				count: 1,
-	// 			},
-	// 		},
-	// 	});
-
-	// 	loadRouter({ pathname: '/[language]/teachings/audio/page/[i]' });
-
-	// 	const { getByRole } = await renderPage();
-
-	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-	// 		'href',
-	// 		'/en/teachings/audio.xml'
-	// 	);
-	// });
 
 	it('includes filter in pagination', async () => {
 		loadSermonListData();

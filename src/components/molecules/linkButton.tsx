@@ -26,6 +26,7 @@ export default function LinkButton({
 			role="button"
 			onClick={(e) => {
 				e.preventDefault();
+				e.stopPropagation();
 				router.push(href);
 			}}
 			className={clsx(styles.isOptionalLink, className)}

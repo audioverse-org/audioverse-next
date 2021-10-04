@@ -35,13 +35,22 @@ $container-padding: 16px;
 		--sequenceTextSecondaryColor: #{$ts-lightTone};
 		background-color: $ts-storyH;
 		--sequenceBackgroundColorHover: #{$ts-darkened-storyH};
+		.subRecordings {
+			--cardBg: #{$ts-darkened-storyB};
+		}
 	}
 	&,
 	&:hover {
 		color: var(--sequenceTextColor);
 	}
-	&:hover {
+	&:hover:not(.bookmarkHovered) {
 		background-color: var(--sequenceBackgroundColorHover);
+	}
+}
+
+.containerSlim {
+	@media (pointer: coarse) {
+		pointer-events: none;
 	}
 }
 
@@ -80,21 +89,14 @@ $container-padding: 16px;
 
 .partsLabel {
 	color: var(--sequenceTextColor);
-	margin-top: 16px;
+	margin-top: 8px;
 }
 
-$like-icon-size: 32px;
-$like-icon-padding: 8px;
 .details {
 	display: flex;
 	align-items: center;
-	@media (any-pointer: fine) {
-		margin-bottom: 8px;
-		margin-right: #{$like-icon-size + $like-icon-padding};
-	}
-	&.detailsWithLike {
-		margin-right: #{$like-icon-size + $like-icon-padding};
-	}
+	margin-top: -8px;
+	height: 32px;
 }
 
 .duration {
@@ -109,9 +111,6 @@ $like-icon-padding: 8px;
 
 .like {
 	display: none;
-	position: absolute;
-	bottom: $container-padding;
-	right: $container-padding;
 	@media (any-pointer: fine) {
 		display: inherit;
 	}
@@ -121,4 +120,10 @@ $like-icon-padding: 8px;
 	&Active {
 		display: inherit;
 	}
+}
+
+.subRecordings {
+	margin-top: 16px;
+	border-radius: 16px;
+	overflow: hidden;
 }

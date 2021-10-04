@@ -128,9 +128,26 @@ module.exports = withPWA({
 				permanent: false,
 			},
 			{
+				source: '/:lang/audiobooks/books',
+				has: [
+					{
+						type: 'query',
+						key: 'stories',
+						value: '1',
+					},
+				],
+				permanent: false,
+				destination: '/:lang/stories/albums/page/1',
+			},
+			{
 				source: '/:lang/audiobooks/books/:path*',
 				destination: '/:lang/books/:path*',
 				permanent: true,
+			},
+			{
+				source: '/:lang/music/browse',
+				destination: '/:lang/songs/albums/page/1',
+				permanent: false,
 			},
 			{
 				source: '/:lang/music/browse/:id/:slug',
@@ -144,7 +161,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/music/browse/tag/:tagName/:slug',
-				destination: '/:lang/tags/:tagName/page/1',
+				destination: '/:lang/songs/albums/page/1',
 				permanent: true,
 			},
 			{
@@ -153,8 +170,42 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/recordings/arrivals',
+				destination: '/:lang/teachings/all/page/1',
+				permanent: true,
+			},
+			{
 				source: '/:lang/sermons',
-				destination: '/:lang/sermons/all/page/1',
+				has: [
+					{
+						type: 'query',
+						key: 'filter-media',
+						value: 'video',
+					},
+				],
+				permanent: false,
+				destination: '/:lang/teachings/video/page/1',
+			},
+			{
+				source: '/:lang/sermons',
+				has: [
+					{
+						type: 'query',
+						key: 'filter-media',
+						value: 'audio',
+					},
+				],
+				permanent: false,
+				destination: '/:lang/teachings/audio/page/1',
+			},
+			{
+				source: '/:lang/sermons',
+				destination: '/:lang/teachings/all/page/1',
+				permanent: true,
+			},
+			{
+				source: '/:lang/trending/index',
+				destination: '/:lang/teachings/trending',
 				permanent: true,
 			},
 			{
@@ -175,6 +226,16 @@ module.exports = withPWA({
 			{
 				source: '/:lang/blog/:id(\\d{1,})/:slug',
 				destination: '/:lang/blog/:id',
+				permanent: true,
+			},
+			{
+				source: '/:lang/playlists/lists',
+				destination: '/:lang/discover/collections',
+				permanent: true,
+			},
+			{
+				source: '/:lang/topics',
+				destination: '/:lang/discover/collections',
 				permanent: true,
 			},
 		];

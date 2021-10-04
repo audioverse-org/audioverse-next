@@ -11,14 +11,15 @@ type Props = {
 	color: BaseColors;
 } & ICircleButtonProps;
 
-export default function IconButton({
-	Icon,
-	color,
-	...props
-}: Props): JSX.Element {
+const IconButton: React.FC<Props> = React.forwardRef(function IconButton(
+	{ Icon, color, ...props }: Props,
+	ref: any
+) {
 	return (
-		<CircleButton {...props}>
+		<CircleButton {...props} ref={ref}>
 			<Icon className={baseColorsStyles[color]} />
 		</CircleButton>
 	);
-}
+});
+
+export default IconButton;

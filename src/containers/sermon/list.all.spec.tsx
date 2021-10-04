@@ -1,4 +1,5 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
 
@@ -8,8 +9,9 @@ import {
 	LIST_PRERENDER_LIMIT,
 } from '@lib/constants';
 import {
+	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
-	GetSermonListStaticPropsDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SermonList, {
@@ -48,7 +50,9 @@ export function loadSermonListData({
 					id: 'the_sermon_id',
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
+					recordingContentType: RecordingContentType.Sermon,
 					videoFiles: [],
+					persons: [],
 				},
 			],
 			aggregate: {
@@ -114,7 +118,7 @@ describe('sermons list page', () => {
 		await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
+			expect(mockedFetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 				variables: {
 					language: 'ENGLISH',
 					hasVideo: null,
@@ -136,7 +140,7 @@ describe('sermons list page', () => {
 	it('renders 404 on api error', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
 		when(mockedFetchApi)
-			.calledWith(GetSermonListStaticPropsDocument, expect.anything())
+			.calledWith(GetSermonListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
 		const { getByText } = await renderPage();
@@ -205,7 +209,9 @@ describe('sermons list page', () => {
 	it('links All button', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage();
+		const { getByRole, getByText } = await renderPage();
+
+		userEvent.click(getByText('Filter'));
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
@@ -216,7 +222,11 @@ describe('sermons list page', () => {
 	it('links All button using lang', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage({ params: { language: 'es' } });
+		const { getByRole, getByText } = await renderPage({
+			params: { language: 'es' },
+		});
+
+		userEvent.click(getByText('Filter'));
 
 		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
@@ -227,7 +237,9 @@ describe('sermons list page', () => {
 	it('links Video button', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage();
+		const { getByRole, getByText } = await renderPage();
+
+		userEvent.click(getByText('Filter'));
 
 		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
 			'href',
@@ -238,9 +250,11 @@ describe('sermons list page', () => {
 	it('links Audio button', async () => {
 		loadSermonListData();
 
-		const { getByRole } = await renderPage();
+		const { getByRole, getByText } = await renderPage();
 
-		expect(getByRole('link', { name: 'Audio' })).toHaveAttribute(
+		userEvent.click(getByText('Filter'));
+
+		expect(getByRole('link', { name: 'Audio only' })).toHaveAttribute(
 			'href',
 			'/en/teachings/audio/page/1'
 		);
@@ -252,17 +266,6 @@ describe('sermons list page', () => {
 		expect(result.paths).not.toContain('/en/teachings/video/page/1');
 	});
 
-	// it('targets blank', async () => {
-	// 	loadSermonListData();
-
-	// 	const { getByRole } = await renderPage();
-
-	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-	// 		'target',
-	// 		'_blank'
-	// 	);
-	// });
-
 	it('localizes pagination', async () => {
 		loadSermonListData();
 
@@ -272,52 +275,14 @@ describe('sermons list page', () => {
 		expect(link.href).toContain('/es/teachings/all/page/1');
 	});
 
-	// it('sets rss head link', async () => {
-	// 	loadSermonListData();
+	it('sets rss head link', async () => {
+		loadSermonListData();
 
-	// 	const { getByTestId } = await renderPage();
+		const { getByTestId } = await renderPage();
 
-	// 	const head = getByTestId('head');
+		const head = getByTestId('head');
 
-	// 	expect(head.innerHTML).toContain('/en/teachings/all.xml');
-	// });
-
-	it('includes format indicators', async () => {
-		mockedFetchApi.mockResolvedValue({
-			sermons: {
-				nodes: [
-					{
-						id: 'the_sermon_id',
-						title: 'the_sermon_title',
-						canonicalPath: 'the_sermon_path',
-						audioFiles: [{}],
-					},
-				],
-			},
-		});
-
-		const { getAllByText } = await renderPage();
-
-		expect(getAllByText('Audio').length).toEqual(2);
-	});
-
-	it('includes video format indicator', async () => {
-		mockedFetchApi.mockResolvedValue({
-			sermons: {
-				nodes: [
-					{
-						id: 'the_sermon_id',
-						title: 'the_sermon_title',
-						canonicalPath: 'the_sermon_path',
-						hasVideo: true,
-					},
-				],
-			},
-		});
-
-		const { getAllByText } = await renderPage();
-
-		expect(getAllByText('Video').length).toEqual(2);
+		expect(head.innerHTML).toContain('/en/teachings/all/feed.xml');
 	});
 
 	it('includes speaker name', async () => {
@@ -328,6 +293,7 @@ describe('sermons list page', () => {
 						id: 'the_sermon_id',
 						title: 'the_sermon_title',
 						canonicalPath: 'the_sermon_path',
+						recordingContentType: RecordingContentType.Sermon,
 						persons: [
 							{
 								id: 'the_id',

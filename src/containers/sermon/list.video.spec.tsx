@@ -3,8 +3,8 @@ import {
 	loadSermonListPagePathsData,
 } from '@containers/sermon/list.all.spec';
 import {
+	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
-	GetSermonListStaticPropsDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
@@ -44,7 +44,7 @@ describe('sermon video list page', () => {
 			},
 		});
 
-		expect(mockedFetchApi).toBeCalledWith(GetSermonListStaticPropsDocument, {
+		expect(mockedFetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				hasVideo: true,
@@ -53,17 +53,6 @@ describe('sermon video list page', () => {
 			},
 		});
 	});
-
-	// it('links to feed', async () => {
-	// 	loadSermonListData();
-
-	// 	const { getByRole } = await renderPage();
-
-	// 	expect(getByRole('link', { name: 'RSS' })).toHaveAttribute(
-	// 		'href',
-	// 		'/en/teachings/video.xml'
-	// 	);
-	// });
 
 	it('includes filter in pagination', async () => {
 		loadSermonListData();

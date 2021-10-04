@@ -11,7 +11,6 @@ import RecordingButtonFavorite from '@components/molecules/recordingButtonFavori
 import SearchBar from '@components/molecules/searchBar';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
-import Footer from '@components/organisms/footer';
 import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 import AccountPlaylists from '@containers/account/playlists';
@@ -29,14 +28,11 @@ import SeriesList from '@containers/series/list';
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import SermonList from '@containers/sermon/list';
 import SongList from '@containers/song/albums/list';
-import SponsorAlbums from '@containers/sponsor/albums';
-import SponsorBooks from '@containers/sponsor/books';
 import SponsorConferences from '@containers/sponsor/conferences';
 import Sponsors from '@containers/sponsor/list';
 import SponsorSeries from '@containers/sponsor/series';
 import SponsorTeachings from '@containers/sponsor/teachings';
 import StoryAlbumsList from '@containers/story/albums/list';
-import TagList from '@containers/tag/list';
 import * as api from '@lib/api';
 import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
@@ -242,22 +238,6 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes tag list page', async () => {
-		const screen = await renderWithQueryProvider(
-			<TagList
-				nodes={[
-					{
-						id: 'z',
-						name: 'z',
-					},
-				]}
-				pagination={{ current: 0, total: 0 }}
-			/>
-		);
-
-		expectNoUnlocalizedText(screen);
-	});
-
 	it('localizes header', async () => {
 		const screen = await renderWithQueryProvider(<Header />);
 
@@ -310,19 +290,6 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	it('localizes footer', async () => {
-		const screen = await renderWithQueryProvider(<Footer />);
-
-		expectNoUnlocalizedText(screen, [
-			'Types & Symbols',
-			'Русский',
-			'Français',
-			'Español',
-			'English',
-			'Deutsch',
-		]);
-	});
-
 	it('localizes audiobooks list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<AudiobooksList
@@ -333,7 +300,7 @@ describe('localization usage', () => {
 						canonicalPath: 'z',
 						contentType: SequenceContentType.Audiobook,
 						sequenceWriters: { nodes: [] },
-						recordings: {},
+						allRecordings: {},
 					} as any,
 				]}
 				pagination={{ total: 1, current: 1 }}
@@ -354,7 +321,7 @@ describe('localization usage', () => {
 						duration: 100,
 						contentType: SequenceContentType.StorySeason,
 						speakers: [],
-						recordings: {
+						allRecordings: {
 							aggregate: {
 								count: 0,
 							},
@@ -538,20 +505,6 @@ describe('localization usage', () => {
 			},
 		],
 		[
-			SponsorBooks,
-			{
-				data: { sponsor: { canonicalPath: 'z' } },
-				nodes: [{ id: 'z', canonicalPath: 'z' }],
-			},
-		],
-		[
-			SponsorAlbums,
-			{
-				data: { sponsor: { canonicalPath: 'z' } },
-				nodes: [{ id: 'z', canonicalPath: 'z' }],
-			},
-		],
-		[
 			SponsorConferences,
 			{
 				nodes: [
@@ -579,7 +532,7 @@ describe('localization usage', () => {
 						canonicalPath: 'z',
 						contentType: SequenceContentType.Series,
 						speakers: [],
-						recordings: { aggregate: { count: 0 } },
+						allRecordings: { aggregate: { count: 0 } },
 					},
 				],
 				data: {
@@ -600,7 +553,7 @@ describe('localization usage', () => {
 						canonicalPath: 'the_path',
 						contentType: SequenceContentType.Series,
 						speakers: [],
-						recordings: { aggregate: { count: 0 } },
+						allRecordings: { aggregate: { count: 0 } },
 					},
 				],
 			},
@@ -645,7 +598,14 @@ describe('localization usage', () => {
 		[
 			SermonList,
 			{
-				nodes: [{ id: 1, canonicalPath: 'the_path' }],
+				nodes: [
+					{
+						id: 1,
+						canonicalPath: 'the_path',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+					},
+				],
 				pagination: { current: 1, total: 10 },
 			},
 		],

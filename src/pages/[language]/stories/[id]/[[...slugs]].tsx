@@ -8,11 +8,6 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default Story;
 
-interface StaticProps {
-	props: StoryDetailProps;
-	revalidate: number;
-}
-
 export interface GetStaticPropsArgs {
 	params: {
 		language: string;
@@ -22,7 +17,7 @@ export interface GetStaticPropsArgs {
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps> {
+}: GetStaticPropsArgs): Promise<StaticProps<StoryDetailProps>> {
 	const { id } = params;
 
 	const { story: recording } = await getStoryDetailData({ id }).catch(() => ({

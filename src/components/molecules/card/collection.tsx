@@ -11,8 +11,12 @@ import Card from '@components/molecules/card';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import { CardCollectionFragment } from '@lib/generated/graphql';
+import {
+	CardCollectionFragment,
+	CardSequenceFragment,
+} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
+import useHover from '@lib/useHover';
 
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';
@@ -21,17 +25,21 @@ import CollectionTypeLockup from '../collectionTypeLockup';
 import IconButton from '../iconButton';
 
 import styles from './collection.module.scss';
+import CardSequence from './sequence';
 
 interface CardCollectionProps {
 	collection: CardCollectionFragment;
+	sequences?: CardSequenceFragment[] | null;
 }
 
 export default function CardCollection({
 	collection,
+	sequences,
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
 		collection.id
 	);
+	const [ref, isHovered] = useHover();
 	const {
 		allSequences,
 		canonicalPath,
@@ -56,7 +64,12 @@ export default function CardCollection({
 	return (
 		<Card>
 			<Link href={canonicalPath}>
-				<a className={styles.container}>
+				<a
+					className={clsx(
+						styles.container,
+						isHovered && styles.bookmarkHovered
+					)}
+				>
 					<CollectionTypeLockup />
 					{heroImage}
 					{!!(startDate && endDate) && (
@@ -96,17 +109,31 @@ export default function CardCollection({
 								<ProgressBar progress={viewerPlaybackCompletedPercentage} />
 							)}
 						</div>
+						<IconButton
+							ref={ref}
+							Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+							onClick={(e) => {
+								e.preventDefault();
+								toggleFavorited();
+							}}
+							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+							backgroundColor={BaseColors.DARK}
+							className={clsx(styles.like, isFavorited && styles.likeActive)}
+						/>
 					</div>
-					{/* TODO: conditional sponsor, has favorited, sub-sequences */}
+					{sequences?.length ? (
+						<div className={styles.subSequences}>
+							{sequences.map((sequence) => (
+								<CardSequence
+									sequence={sequence}
+									key={sequence.canonicalPath}
+									slim
+								/>
+							))}
+						</div>
+					) : null}
 				</a>
 			</Link>
-			<IconButton
-				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onClick={() => toggleFavorited()}
-				color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-				backgroundColor={BaseColors.DARK}
-				className={clsx(styles.like, isFavorited && styles.likeActive)}
-			/>
 		</Card>
 	);
 }

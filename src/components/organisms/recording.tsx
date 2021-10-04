@@ -19,12 +19,12 @@ import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
-import { BaseColors } from '@lib/constants';
 import { formatLongDateTime, parseRelativeDate } from '@lib/date';
 import {
 	RecordingContentType,
 	RecordingFragment,
 } from '@lib/generated/graphql';
+import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 
 import IconDownload from '../../../public/img/icon-download.svg';
 
@@ -66,46 +66,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		textRuleColor,
 		theme,
 		useInverseButtons,
-	} = (
-		{
-			[RecordingContentType.AudiobookTrack]: {
-				accentColor: BaseColors.SALMON,
-				backgroundColor: BaseColors.BOOK_B,
-				textColor: BaseColors.WHITE,
-				textSecondaryColor: BaseColors.LIGHT_TONE,
-				textRuleColor: BaseColors.BOOK_H,
-				theme: 'audiobookTrack',
-				useInverseButtons: true,
-			},
-			[RecordingContentType.MusicTrack]: {
-				accentColor: BaseColors.RED,
-				backgroundColor: BaseColors.SONG_B,
-				textColor: BaseColors.DARK,
-				textSecondaryColor: BaseColors.MID_TONE,
-				textRuleColor: BaseColors.LIGHT_TONE,
-				theme: 'song',
-				useInverseButtons: false,
-			},
-			[RecordingContentType.Sermon]: {
-				accentColor: BaseColors.RED,
-				backgroundColor: BaseColors.WHITE,
-				textColor: BaseColors.DARK,
-				textSecondaryColor: BaseColors.MID_TONE,
-				textRuleColor: BaseColors.CREAM,
-				theme: 'sermon',
-				useInverseButtons: false,
-			},
-			[RecordingContentType.Story]: {
-				accentColor: BaseColors.SALMON,
-				backgroundColor: BaseColors.STORY_B,
-				textColor: BaseColors.WHITE,
-				textSecondaryColor: BaseColors.LIGHT_TONE,
-				textRuleColor: BaseColors.STORY_H,
-				theme: 'story',
-				useInverseButtons: true,
-			},
-		} as const
-	)[contentType];
+	} = getRecordingTypeTheme(contentType);
 	const audiobookHeadingStyle = isAudiobook && styles.audiobookHeading;
 	const linkClass = `decorated${useInverseButtons ? ' hover--salmon' : ''}`;
 

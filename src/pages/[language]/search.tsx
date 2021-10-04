@@ -5,12 +5,7 @@ import { LANGUAGES, REVALIDATE } from '@lib/constants';
 
 export default Search;
 
-interface StaticProps {
-	props: SearchProps;
-	revalidate: number;
-}
-
-export async function getStaticProps(): Promise<StaticProps> {
+export async function getStaticProps(): Promise<StaticProps<SearchProps>> {
 	return {
 		props: {},
 		revalidate: REVALIDATE,

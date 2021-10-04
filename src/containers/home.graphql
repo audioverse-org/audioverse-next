@@ -11,17 +11,6 @@ query getHomeStaticProps($language: Language!) {
 			}
 		}
 	}
-	# TODO: Replace with new topics entity when it's added
-	tag: recordings(
-		language: $language
-		tagName: "Family"
-		first: 1
-		orderBy: { field: PUBLISHED_AT, direction: DESC }
-	) {
-		nodes {
-			...cardRecording
-		}
-	}
 	testimonies(language: $language, first: 3) {
 		nodes {
 			...testimonies

@@ -9,16 +9,11 @@ import { makeBibleBookRoute } from '@lib/routes';
 
 export default Book;
 
-interface StaticProps {
-	props: BookProps;
-	revalidate: number;
-}
-
 export async function getStaticProps({
 	params,
 }: {
 	params: { id: string; book: string; chapter: string };
-}): Promise<StaticProps> {
+}): Promise<StaticProps<BookProps>> {
 	const { id, book, chapter } = params;
 
 	const { audiobible } = await getBibleBookDetailPageData({
