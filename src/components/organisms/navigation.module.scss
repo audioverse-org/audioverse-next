@@ -23,15 +23,15 @@
 			color: $ts-dark;
 		}
 		a {
+			flex-grow: 1;
 			text-decoration: none;
 			display: flex;
 			align-items: center;
 		}
 	}
-	li:hover,
+	a:hover,
 	a.active {
 		&,
-		a,
 		.icon {
 			color: $ts-red;
 		}

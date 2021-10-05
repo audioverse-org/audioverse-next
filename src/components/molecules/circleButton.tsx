@@ -1,6 +1,5 @@
 import clsx from 'clsx';
-import React, { MouseEvent } from 'react';
-import { PropsWithChildren } from 'react';
+import React, { MouseEvent, PropsWithChildren } from 'react';
 
 import { BaseColors } from '@lib/constants';
 
@@ -12,27 +11,36 @@ export type ICircleButtonProps = {
 	className?: string;
 	'aria-label'?: string;
 	'aria-controls'?: string;
+	ref?: any;
 };
 
-export default function CircleButton({
-	onClick,
-	backgroundColor,
-	className,
-	children,
-	...props
-}: PropsWithChildren<ICircleButtonProps>): JSX.Element {
-	return (
-		<div
-			role="button"
-			onClick={onClick}
-			className={clsx(
-				styles.base,
-				className,
-				`hover-bg--darkened-${backgroundColor}`
-			)}
-			{...props}
-		>
-			{children}
-		</div>
-	);
-}
+const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
+	function CircleButton(
+		{
+			onClick,
+			backgroundColor,
+			className,
+			children,
+			...props
+		}: PropsWithChildren<ICircleButtonProps>,
+		ref: any
+	): JSX.Element {
+		return (
+			<div
+				role="button"
+				onClick={onClick}
+				className={clsx(
+					styles.base,
+					className,
+					`hover-bg--darkened-${backgroundColor}`
+				)}
+				{...props}
+				ref={ref}
+			>
+				{children}
+			</div>
+		);
+	}
+);
+
+export default CircleButton;

@@ -4,6 +4,8 @@ import { storeRequest } from '@lib/api';
 import {
 	GetDiscoverPageDataDocument,
 	GetDiscoverPageDataQuery,
+	RecordingContentType,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader, buildServerRenderer } from '@lib/test/helpers';
 import Discover, { getServerSideProps } from '@pages/[language]/discover';
@@ -12,12 +14,61 @@ const renderPage = buildServerRenderer(Discover, getServerSideProps);
 const loadData = buildLoader<GetDiscoverPageDataQuery>(
 	GetDiscoverPageDataDocument,
 	{
-		sermons: {
+		recentTeachings: {
 			nodes: [
 				{
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
+					recordingContentType: RecordingContentType.Sermon,
 					persons: [],
+				},
+			],
+		},
+		trendingTeachings: {
+			nodes: [
+				{
+					recording: {
+						title: 'the_sermon_title2',
+						canonicalPath: 'the_sermon_path',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+					},
+				},
+			],
+		},
+		storySeasons: {
+			nodes: [
+				{
+					title: 'the_story_title',
+					canonicalPath: 'the_story_path',
+					contentType: SequenceContentType.StorySeason,
+					speakers: {
+						nodes: [],
+					},
+					recordings: {
+						nodes: [],
+					},
+					allRecordings: {
+						aggregate: {
+							count: 0,
+						},
+					},
+				},
+			],
+		},
+		conferences: {
+			nodes: [
+				{
+					title: 'the_conference_title',
+					canonicalPath: 'the_conference_path',
+					sequences: {
+						nodes: [],
+					},
+					allSequences: {
+						aggregate: {
+							count: 0,
+						},
+					},
 				},
 			],
 		},

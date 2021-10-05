@@ -1,71 +1,119 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withFailStates from '@components/HOCs/withFailStates';
-import Pagination from '@components/molecules/pagination';
-import RecordingList from '@components/molecules/recordingList';
+import Button from '@components/molecules/button';
+import CardRecording from '@components/molecules/card/recording';
+import Dropdown from '@components/molecules/dropdown';
 import RssAlternate from '@components/molecules/rssAlternate';
-import { GetSermonListStaticPropsQuery } from '@lib/generated/graphql';
+import PaginatedCardList from '@components/organisms/paginatedCardList';
+import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
+import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSermonListRoute, makeSermonsFeedRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-type Sermons = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>;
+import IconFilter from '../../../public/img/icon-filter-light.svg';
 
-export interface SermonListProps {
-	nodes: Sermons;
-	filter: string;
-	pagination: {
-		current: number;
-		total: number;
-	};
-}
+import styles from './list.module.scss';
+
+export type SermonListProps = PaginatedProps<
+	NonNullable<GetSermonListPageDataQuery['sermons']['nodes']>[0],
+	GetSermonListPageDataQuery
+> & { filter: string };
 
 function SermonList({ nodes, pagination, filter }: SermonListProps) {
-	const lang = useLanguageRoute();
+	const language = useLanguageRoute();
 
 	return (
-		<div>
-			<RssAlternate url={makeSermonsFeedRoute(lang)} />
-			<div>
-				<Link href={makeSermonListRoute(lang, 'all', 1)}>
-					<a>
-						<FormattedMessage
-							id="container-sermonList__filterLabelAll"
-							defaultMessage="All"
-							description="sermon list page filter all"
+		<PaginatedCardList
+			pagination={pagination}
+			backUrl={`/${language}/discover`}
+			heading={
+				<FormattedMessage
+					id="sermonList__heading"
+					defaultMessage="All Teachings"
+				/>
+			}
+			makeRoute={(lang, page) => makeSermonListRoute(lang, filter, page)}
+			filter={
+				<Dropdown
+					id="filterMenu"
+					trigger={({ isOpen, ...props }) => (
+						<Button
+							type="secondary"
+							text={
+								<FormattedMessage
+									id="sermonsList__filter"
+									defaultMessage="Filter"
+								/>
+							}
+							Icon={IconFilter}
+							className={clsx(isOpen && styles.buttonOpen)}
+							{...props}
 						/>
-					</a>
-				</Link>
-				<Link href={makeSermonListRoute(lang, 'video', 1)}>
-					<a>
-						<FormattedMessage
-							id="container-sermonList__filterLabelVideo"
-							defaultMessage="Video"
-							description="sermon list page filter video"
-						/>
-					</a>
-				</Link>
-				<Link href={makeSermonListRoute(lang, 'audio', 1)}>
-					<a>
-						<FormattedMessage
-							id="container-sermonList__filterLabelAudio"
-							defaultMessage="Audio"
-							description="sermon list page filter audio"
-						/>
-					</a>
-				</Link>
-			</div>
-			<RecordingList recordings={nodes} />
-			<Pagination
-				current={pagination.current}
-				total={pagination.total}
-				makeRoute={(l, i) => makeSermonListRoute(l, filter, i)}
-			/>
-		</div>
+					)}
+					alignment="right"
+				>
+					<div className={styles.dropdownContainer}>
+						<div className={styles.segmentedControlWrapper}>
+							<Link href={makeSermonListRoute(language, 'all', 1)}>
+								<a
+									className={clsx(
+										styles.segmentedControl,
+										filter === 'all' && styles.segmentedControlActive
+									)}
+								>
+									<FormattedMessage
+										id="container-sermonList__filterLabelAll"
+										defaultMessage="All"
+										description="sermon list page filter all"
+									/>
+								</a>
+							</Link>
+							<Link href={makeSermonListRoute(language, 'video', 1)}>
+								<a
+									className={clsx(
+										styles.segmentedControl,
+										filter === 'filter' && styles.segmentedControlActive
+									)}
+								>
+									<FormattedMessage
+										id="container-sermonList__filterLabelVideo"
+										defaultMessage="Video"
+										description="sermon list page filter video"
+									/>
+								</a>
+							</Link>
+							<Link href={makeSermonListRoute(language, 'audio', 1)}>
+								<a
+									className={clsx(
+										styles.segmentedControl,
+										filter === 'audio' && styles.segmentedControlActive
+									)}
+								>
+									<FormattedMessage
+										id="container-sermonList__filterLabelAudio"
+										defaultMessage="Audio only"
+										description="sermon list page filter audio"
+									/>
+								</a>
+							</Link>
+						</div>
+					</div>
+				</Dropdown>
+			}
+		>
+			<RssAlternate url={makeSermonsFeedRoute(language)} />
+			{nodes.map((node) => (
+				<CardRecording recording={node} key={node.canonicalPath} />
+			))}
+		</PaginatedCardList>
 	);
 }
 
-const should404 = (props: SermonListProps) => !props.nodes?.length;
-
-export default withFailStates(SermonList, should404);
+export default withFailStates(
+	SermonList,
+	(props: SermonListProps) => !props.nodes?.length
+);

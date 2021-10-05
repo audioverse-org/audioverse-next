@@ -15,6 +15,7 @@ export interface SongAlbumsListProps {
 	data: GetSongAlbumsListPageDataQuery | null;
 }
 
+// TODO: finish or remove this view
 function SongAlbumList({ data }: SongAlbumsListProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 

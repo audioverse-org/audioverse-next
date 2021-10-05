@@ -13,7 +13,7 @@ $container-padding: 16px;
 	&:hover {
 		color: $ts-white;
 	}
-	&:hover {
+	&:hover:not(.bookmarkHovered) {
 		background-color: $ts-darkened-dark;
 	}
 }
@@ -21,10 +21,10 @@ $container-padding: 16px;
 .imageContainer {
 	height: 124px;
 	position: relative;
+	margin-bottom: 16px;
 }
 
 .date {
-	margin-top: 16px;
 	margin-bottom: 8px;
 	color: $ts-salmon;
 }
@@ -38,17 +38,11 @@ $container-padding: 16px;
 	}
 }
 
-$like-icon-size: 32px;
-$like-icon-padding: 8px;
 .details {
 	display: flex;
 	align-items: center;
-	@media (any-pointer: fine) {
-		margin-right: #{$like-icon-size + $like-icon-padding};
-	}
-	&.detailsWithLike {
-		margin-right: #{$like-icon-size + $like-icon-padding};
-	}
+	margin-top: -8px;
+	height: 32px;
 }
 
 .sequencesLabel,
@@ -73,9 +67,6 @@ $like-icon-padding: 8px;
 
 .like {
 	display: none;
-	position: absolute;
-	bottom: $container-padding;
-	right: $container-padding;
 	@media (any-pointer: fine) {
 		display: inherit;
 	}
@@ -85,4 +76,8 @@ $like-icon-padding: 8px;
 	&Active {
 		display: inherit;
 	}
+}
+
+.subSequences {
+	margin-top: 16px;
 }

@@ -25,7 +25,7 @@ function loadData() {
 						canonicalPath: 'the_story_path',
 						contentType: SequenceContentType.StorySeason,
 						speakers: [],
-						recordings: {
+						allRecordings: {
 							aggregate: {
 								count: 0,
 							},

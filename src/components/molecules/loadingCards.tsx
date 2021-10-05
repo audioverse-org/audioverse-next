@@ -2,7 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import CardWithTheme, { ExtendedCardTheme } from './card/base/withTheme';
+import { ExtendedCardTheme } from './card/base/withCardTheme';
+import CardWithTheme from './card/base/withTheme';
 import CardGroup from './cardGroup';
 import styles from './loadingCards.module.scss';
 

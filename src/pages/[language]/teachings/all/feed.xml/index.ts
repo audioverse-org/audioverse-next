@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getSermonListStaticProps } from '@lib/generated/graphql';
+import { getSermonListFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
@@ -16,11 +16,8 @@ export async function getServerSideProps({
 	GetServerSidePropsResult<any>
 > {
 	const languageRoute = params?.language as string;
-	const { sermons } = await getSermonListStaticProps({
-		offset: 0,
-		first: 25,
+	const { sermons } = await getSermonListFeedData({
 		language: getLanguageIdByRoute(languageRoute),
-		hasVideo: null,
 	});
 
 	if (res) {

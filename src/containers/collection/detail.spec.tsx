@@ -63,7 +63,7 @@ function loadData() {
 							title: 'the_sequence_title',
 							contentType: SequenceContentType.Series,
 							canonicalPath: 'the_sequence_path',
-							recordings: {
+							allRecordings: {
 								aggregate: {
 									count: 1,
 								},

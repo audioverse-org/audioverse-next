@@ -122,30 +122,6 @@ const story = {
 	},
 };
 
-const taggedRecording = {
-	title: 'the_tagged_recording_title',
-	canonicalPath: 'the_tagged_recording_path',
-	persons: [
-		{
-			id: 'the_tagged_recording_person_id',
-			canonicalPath: 'the_person_path',
-			name: 'the_tagged_recording_person_name',
-			imageWithFallback: { url: 'the_tagged_recording_person_path' },
-		},
-	],
-	duration: 27 * 60,
-	sequence: {
-		title: 'the_sequence_title',
-		canonicalPath: 'the_sequence_path',
-		recordings: {
-			aggregate: {
-				count: 7,
-			},
-			nodes: [],
-		},
-	},
-};
-
 const recording = {
 	title: 'the_recording_title',
 	canonicalPath: 'the_recording_path',
@@ -208,9 +184,6 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 					url: 'the_chapter_url',
 				},
 			},
-		},
-		tag: {
-			nodes: [taggedRecording],
 		},
 		testimonies: {
 			nodes: [testimony],
@@ -341,12 +314,6 @@ describe('home page', () => {
 		const { getAllByText } = await renderPage();
 
 		expect(getAllByText('the_story_sequence_title')[1]).toBeInTheDocument();
-	});
-
-	it('renders tagged recording title', async () => {
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_tagged_recording_title')).toBeInTheDocument();
 	});
 
 	it('renders recording title', async () => {

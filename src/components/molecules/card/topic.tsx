@@ -12,12 +12,13 @@ interface CardTopicProps {
 	topicRecording: CardRecordingFragment;
 }
 
+// TODO: finish this component when replacing tags
 export default function CardTopic({
 	topicRecording,
 }: CardTopicProps): JSX.Element {
 	const theme = 'topic';
 
-	// TODO: Replace hard-coded tag name (also hard-coded in home.graphql)
+	// Replace hard-coded tag name (also hard-coded in home.graphql)
 	return (
 		<CardWithTheme {...{ theme }}>
 			<CardHat

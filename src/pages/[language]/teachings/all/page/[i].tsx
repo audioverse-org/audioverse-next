@@ -1,8 +1,8 @@
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
+	getSermonListPageData,
+	GetSermonListPageDataQuery,
 	getSermonListPagePathsData,
-	getSermonListStaticProps,
-	GetSermonListStaticPropsQuery,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import {
@@ -12,11 +12,8 @@ import {
 
 export default SermonList;
 
-type Sermon = NonNullable<GetSermonListStaticPropsQuery['sermons']['nodes']>[0];
-type PaginatedProps = PaginatedStaticProps<
-	GetSermonListStaticPropsQuery,
-	Sermon
->;
+type Sermon = NonNullable<GetSermonListPageDataQuery['sermons']['nodes']>[0];
+type PaginatedProps = PaginatedStaticProps<GetSermonListPageDataQuery, Sermon>;
 type StaticProps = PaginatedProps & {
 	props: SermonListProps;
 };
@@ -31,7 +28,7 @@ export async function getStaticProps({
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) =>
-			getSermonListStaticProps({
+			getSermonListPageData({
 				...variables,
 				hasVideo: null,
 			}),

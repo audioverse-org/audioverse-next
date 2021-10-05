@@ -1,4 +1,4 @@
-query getSermonListStaticProps(
+query getSermonListPageData(
 	$language: Language!
 	$hasVideo: Boolean
 	$first: Int
@@ -9,14 +9,25 @@ query getSermonListStaticProps(
 		hasVideo: $hasVideo
 		first: $first
 		offset: $offset
-		orderBy: { direction: DESC, field: CREATED_AT }
+		orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
 	) {
 		nodes {
-			...recordingList
-			...generateFeed
+			...cardRecording
 		}
 		aggregate {
 			count
+		}
+	}
+}
+
+query getSermonListFeedData($language: Language!) {
+	sermons(
+		language: $language
+		first: 25
+		orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+	) {
+		nodes {
+			...generateFeed
 		}
 	}
 }

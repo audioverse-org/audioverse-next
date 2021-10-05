@@ -13,6 +13,7 @@ export interface PaginatedCardListProps {
 	backUrl: string;
 	heading: string | JSX.Element;
 	makeRoute: (languageRoute: string, pageIndex: number) => string;
+	filter?: JSX.Element;
 }
 
 export default function PaginatedCardList({
@@ -21,11 +22,17 @@ export default function PaginatedCardList({
 	children,
 	makeRoute,
 	pagination,
+	filter,
 }: PropsWithChildren<PaginatedCardListProps>): JSX.Element {
 	return (
 		<>
 			<ButtonBack backUrl={backUrl} className={styles.back} />
-			<Heading1 className={styles.heading}>{heading}</Heading1>
+			<div className={styles.headingRow}>
+				<Heading1 unpadded className={styles.heading}>
+					{heading}
+				</Heading1>
+				{filter}
+			</div>
 			<CardGroup>{children}</CardGroup>
 			<Pagination {...{ makeRoute, ...pagination }} />
 		</>

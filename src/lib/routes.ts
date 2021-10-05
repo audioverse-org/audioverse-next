@@ -56,18 +56,6 @@ export const makeSeriesListRoute = (
 	page: string | number = 1
 ): string => `/${languageRoute}/series/page/${page}`;
 
-export const makeTagDetailRoute = (
-	languageRoute: string,
-	tagName: string,
-	pageIndex = 1
-): string =>
-	`/${languageRoute}/tags/${encodeURIComponent(tagName)}/page/${pageIndex}`;
-
-export const makeTagListRoute = (
-	languageRoute: string,
-	pageIndex = 1
-): string => `/${languageRoute}/tags/page/${pageIndex}`;
-
 export const makeSermonListRoute = (
 	languageRoute: string,
 	filter = 'all',
@@ -76,6 +64,9 @@ export const makeSermonListRoute = (
 
 export const makeSermonsFeedRoute = (languageRoute: string): string =>
 	`/${languageRoute}/teachings/all/feed.xml`;
+
+export const makeTrendingSermonRoute = (languageRoute: string): string =>
+	`/${languageRoute}/teachings/trending`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;
@@ -112,7 +103,7 @@ export const makeStoryAlbumFeedRoute = (
 
 export const makeStoryAlbumListPage = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/stories/albums/page/${page}`;
 
 export const makeSongAlbumsListRoute = (
@@ -163,7 +154,7 @@ export const makeCollectionPresentersRoute = (
 
 export const makeConferenceListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/conferences/page/${page}`;
 
 export const makeSponsorFeedRoute = (
