@@ -127,7 +127,7 @@ const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
 					return (
 						<li key={e.key}>
 							<ActiveLink href={e.href} activeClassName={styles.active}>
-								<a>{inner}</a>
+								<a className={styles.navLink}>{inner}</a>
 							</ActiveLink>
 						</li>
 					);

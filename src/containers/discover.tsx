@@ -20,11 +20,14 @@ import ForwardIcon from '../../public/img/icon-forward-light.svg';
 
 import styles from './discover.module.scss';
 
+export type DiscoverProps = GetDiscoverPageDataQuery;
+
 export default function Discover({
-	data: { recentTeachings, trendingTeachings, storySeasons, conferences },
-}: {
-	data: GetDiscoverPageDataQuery;
-}): JSX.Element {
+	recentTeachings,
+	trendingTeachings,
+	storySeasons,
+	conferences,
+}: DiscoverProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const sections = [
 		{

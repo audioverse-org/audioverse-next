@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import Heading6 from '@components/atoms/heading6';
 
+import ClosureIcon from '../../../../../public/img/icon-closure-slim.svg';
 import DisclosureIcon from '../../../../../public/img/icon-disclosure-slim.svg';
 
 import styles from './index.module.scss';
@@ -43,7 +44,7 @@ export default function CardHat({
 					{label}
 				</Heading6>
 				<span className={styles.hatCaret}>
-					<DisclosureIcon />
+					{hatExpanded ? <ClosureIcon /> : <DisclosureIcon />}
 				</span>
 			</div>
 			<div className={styles.hatContent} onClick={() => router.push(url)}>
