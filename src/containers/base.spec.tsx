@@ -2,12 +2,14 @@ import { act, render } from '@testing-library/react';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import { loadRouter } from '@lib/test/helpers';
+import { loadQuery, loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 jest.mock('react-topbar-progress-indicator');
 
 const renderApp = (component: any, props: any) => {
+	loadQuery({});
+
 	return render(<MyApp Component={component} pageProps={props} />);
 };
 
@@ -17,6 +19,8 @@ describe('app', () => {
 	});
 
 	it('sets title', async () => {
+		loadQuery({});
+
 		const { getByTestId } = await render(
 			<MyApp
 				Component={(() => null) as unknown as typeof React.Component}

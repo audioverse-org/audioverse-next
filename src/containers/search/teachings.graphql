@@ -1,0 +1,20 @@
+query getSearchResultsRecordings(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$offset: Int!
+) {
+	recordings(
+		language: $language
+		search: $term
+		first: $first
+		offset: $offset
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+		}
+	}
+}

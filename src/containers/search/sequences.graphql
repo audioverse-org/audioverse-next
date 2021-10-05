@@ -1,0 +1,20 @@
+query getSearchResultsSequences(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$offset: Int!
+) {
+	sequences(
+		language: $language
+		search: $term
+		first: $first
+		offset: $offset
+	) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+	}
+}

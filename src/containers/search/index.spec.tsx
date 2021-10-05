@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { Language } from '@lib/generated/graphql';
 import { loadQuery, renderWithIntl } from '@lib/test/helpers';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/search';
+
 const renderPage = async () => {
-	return renderWithIntl(<Search sermons={[]} />);
+	return renderWithIntl(<Search language={Language.English} />);
 };
 
 describe('search', () => {
@@ -23,16 +25,12 @@ describe('search', () => {
 	});
 
 	it('includes props', async () => {
-		const { props } = await getStaticProps();
+		const { props } = await getStaticProps({
+			params: {
+				language: 'en',
+			},
+		});
 
 		expect(props).toBeDefined();
-	});
-
-	it('displays search term', async () => {
-		loadQuery({ q: 'search_term' });
-
-		const { getByRole } = await renderPage();
-
-		expect(getByRole('heading', { name: /search_term/i })).toBeInTheDocument();
 	});
 });

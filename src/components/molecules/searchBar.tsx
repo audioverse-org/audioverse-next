@@ -1,7 +1,11 @@
 import { Input, InputAdornment } from '@material-ui/core';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useIntl } from 'react-intl';
+
+import { makeSearchRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconExit from '../../../public/img/icon-exit.svg';
 import IconSearch from '../../../public/img/icon-search.svg';
@@ -20,10 +24,21 @@ export default function SearchBar({
 	className?: string;
 }): JSX.Element {
 	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
+	const router = useRouter();
+
 	return (
 		<div className={clsx(styles.base, className)}>
-			<div className={styles.inner}>
+			<form
+				action={makeSearchRoute(languageRoute)}
+				onSubmit={(e) => {
+					e.preventDefault();
+					router.push(makeSearchRoute(languageRoute, term));
+				}}
+				className={styles.inner}
+			>
 				<Input
+					name="q"
 					value={term}
 					onChange={({ target }) => onChange(target.value)}
 					disableUnderline
@@ -53,7 +68,7 @@ export default function SearchBar({
 						</InputAdornment>
 					}
 				/>
-			</div>
+			</form>
 		</div>
 	);
 }
