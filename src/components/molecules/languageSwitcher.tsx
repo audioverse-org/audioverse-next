@@ -6,7 +6,7 @@ import { LANGUAGES } from '@lib/constants';
 import getLanguageIds from '@lib/getLanguageIds';
 import { useLanguageId } from '@lib/useLanguageId';
 
-import LanguageIcon from '../../../public/img/icon-language-solid.svg';
+import LanguageIcon from '../../../public/img/fa-language.svg';
 
 import styles from './languageSwitcher.module.scss';
 
