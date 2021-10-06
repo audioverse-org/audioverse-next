@@ -191,7 +191,7 @@ function Register(): JSX.Element {
 					/>
 				</div>
 			</form>
-			<Button type={'secondary'} text={'Continue as guest'} />
+			<Button type="secondary" text="Continue as guest" />
 		</AndOnboarding>
 	);
 }
