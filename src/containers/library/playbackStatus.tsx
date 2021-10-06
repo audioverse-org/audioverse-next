@@ -55,7 +55,7 @@ function LibraryPlaybackStatus({
 				<CardMasonry
 					items={items}
 					render={({ data }) => <CardFavorite favorite={data} />}
-					key={viewerPlaybackStatus}
+					key={`${viewerPlaybackStatus}-${items.length}`}
 				/>
 			) : (
 				<LibraryError

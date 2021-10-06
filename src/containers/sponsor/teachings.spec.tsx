@@ -40,7 +40,7 @@ const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
 				},
 			],
 			aggregate: {
-				count: 1,
+				count: 100,
 			},
 		},
 	},

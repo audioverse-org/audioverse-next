@@ -5642,10 +5642,6 @@ export type CardFavoriteFragment = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -5753,10 +5749,6 @@ export type CardFavoriteFragment = {
 									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 								};
 								image: Maybe<{ __typename?: 'Image'; url: string }>;
-								favoritedRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-								};
 							}>;
 							sponsor: Maybe<{
 								__typename?: 'Sponsor';
@@ -5849,6 +5841,7 @@ export type CardPlaylistFragment = {
 				}>;
 				sequence: Maybe<{
 					__typename?: 'Sequence';
+					id: string | number;
 					title: string;
 					contentType: SequenceContentType;
 					recordings: {
@@ -5905,10 +5898,6 @@ export type CardRecordingFragment = {
 		contentType: SequenceContentType;
 		title: string;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
-		favoritedRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-		};
 		recordings: {
 			__typename?: 'RecordingConnection';
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -5961,10 +5950,6 @@ export type CardRecordingSequenceHatFragment = {
 		canonicalPath: string;
 		contentType: SequenceContentType;
 		image: Maybe<{ __typename?: 'Image'; url: string }>;
-		favoritedRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-		};
 		recordings: {
 			__typename?: 'RecordingConnection';
 			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -6016,10 +6001,6 @@ export type CardRecordingStackFragment = {
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
 					};
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 				}>;
 				sponsor: Maybe<{
 					__typename?: 'Sponsor';
@@ -6273,6 +6254,7 @@ export type TeaseRecordingFragment = {
 	}>;
 	sequence: Maybe<{
 		__typename?: 'Sequence';
+		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
 		recordings: {
@@ -6322,10 +6304,6 @@ export type GetNotFoundPageDataQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -6441,6 +6419,7 @@ export type RecordingFragment = {
 					}>;
 					sequence: Maybe<{
 						__typename?: 'Sequence';
+						id: string | number;
 						title: string;
 						contentType: SequenceContentType;
 						recordings: {
@@ -6563,10 +6542,6 @@ export type SequenceFragment = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -6869,10 +6844,6 @@ export type GetAudiobookDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7124,6 +7095,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
+							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -7743,10 +7715,6 @@ export type GetDiscoverPageDataQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7812,10 +7780,6 @@ export type GetDiscoverPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -7892,10 +7856,6 @@ export type GetDiscoverPageDataQuery = {
 								contentType: SequenceContentType;
 								title: string;
 								image: Maybe<{ __typename?: 'Image'; url: string }>;
-								favoritedRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-								};
 								recordings: {
 									__typename?: 'RecordingConnection';
 									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8337,10 +8297,6 @@ export type GetHomeStaticPropsQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8463,6 +8419,7 @@ export type GetLibraryPlaylistsDataQuery = {
 									}>;
 									sequence: Maybe<{
 										__typename?: 'Sequence';
+										id: string | number;
 										title: string;
 										contentType: SequenceContentType;
 										recordings: {
@@ -8536,10 +8493,6 @@ export type GetLibraryHistoryPageDataQuery = {
 								contentType: SequenceContentType;
 								title: string;
 								image: Maybe<{ __typename?: 'Image'; url: string }>;
-								favoritedRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-								};
 								recordings: {
 									__typename?: 'RecordingConnection';
 									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -8670,13 +8623,6 @@ export type GetLibraryDataQuery = {
 										contentType: SequenceContentType;
 										title: string;
 										image: Maybe<{ __typename?: 'Image'; url: string }>;
-										favoritedRecordings: {
-											__typename?: 'RecordingConnection';
-											aggregate: Maybe<{
-												__typename?: 'Aggregate';
-												count: number;
-											}>;
-										};
 										recordings: {
 											__typename?: 'RecordingConnection';
 											aggregate: Maybe<{
@@ -8802,13 +8748,6 @@ export type GetLibraryDataQuery = {
 														}>;
 													};
 													image: Maybe<{ __typename?: 'Image'; url: string }>;
-													favoritedRecordings: {
-														__typename?: 'RecordingConnection';
-														aggregate: Maybe<{
-															__typename?: 'Aggregate';
-															count: number;
-														}>;
-													};
 												}>;
 												sponsor: Maybe<{
 													__typename?: 'Sponsor';
@@ -8919,10 +8858,6 @@ export type GetLibraryPlaylistPageDataQuery = {
 								contentType: SequenceContentType;
 								title: string;
 								image: Maybe<{ __typename?: 'Image'; url: string }>;
-								favoritedRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-								};
 								recordings: {
 									__typename?: 'RecordingConnection';
 									aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9066,10 +9001,6 @@ export type GetPresenterDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9134,10 +9065,6 @@ export type GetPresenterDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9202,10 +9129,6 @@ export type GetPresenterDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9463,10 +9386,6 @@ export type GetPresenterRecordingsPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9658,10 +9577,6 @@ export type GetPresenterTopPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -9774,10 +9689,6 @@ export type GetSearchResultsPageDataQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10092,10 +10003,6 @@ export type GetSearchResultsRecordingsQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10189,10 +10096,6 @@ export type GetSeriesDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10441,6 +10344,7 @@ export type GetSermonDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
+							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -10570,10 +10474,6 @@ export type GetSermonListPageDataQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10704,10 +10604,6 @@ export type GetTrendingTeachingsPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10802,10 +10698,6 @@ export type GetSongAlbumsDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -10992,10 +10884,6 @@ export type GetSongBooksDetailPageDataQuery = {
 					contentType: SequenceContentType;
 					title: string;
 					image: Maybe<{ __typename?: 'Image'; url: string }>;
-					favoritedRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-					};
 					recordings: {
 						__typename?: 'RecordingConnection';
 						aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -11117,6 +11005,7 @@ export type GetSongDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
+							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -11370,10 +11259,6 @@ export type GetSponsorDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -11594,10 +11479,6 @@ export type GetSponsorTeachingsPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -11755,10 +11636,6 @@ export type GetStoryAlbumDetailPageDataQuery = {
 						contentType: SequenceContentType;
 						title: string;
 						image: Maybe<{ __typename?: 'Image'; url: string }>;
-						favoritedRecordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
-						};
 						recordings: {
 							__typename?: 'RecordingConnection';
 							aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
@@ -12010,6 +11887,7 @@ export type GetStoryDetailDataQuery = {
 						}>;
 						sequence: Maybe<{
 							__typename?: 'Sequence';
+							id: string | number;
 							title: string;
 							contentType: SequenceContentType;
 							recordings: {
@@ -12252,7 +12130,14 @@ export type SequenceIsFavoritedQueryVariables = Exact<{
 
 export type SequenceIsFavoritedQuery = {
 	__typename?: 'Query';
-	sequence: Maybe<{ __typename?: 'Sequence'; viewerHasFavorited: boolean }>;
+	sequence: Maybe<{
+		__typename?: 'Sequence';
+		viewerHasFavorited: boolean;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: Maybe<{ __typename?: 'Aggregate'; count: number }>;
+		};
+	}>;
 };
 
 export type SequenceUnfavoriteMutationVariables = Exact<{
@@ -12403,11 +12288,6 @@ export const CardRecordingSequenceHatFragmentDoc = `
     image {
       url(size: 1000)
     }
-    favoritedRecordings: recordings(viewerHasFavorited: true) {
-      aggregate {
-        count
-      }
-    }
     recordings {
       aggregate {
         count
@@ -12459,6 +12339,7 @@ export const TeaseRecordingFragmentDoc = `
   }
   sequenceIndex
   sequence {
+    id
     recordings {
       aggregate {
         count
@@ -16302,6 +16183,11 @@ export const SequenceIsFavoritedDocument = `
     query sequenceIsFavorited($id: ID!) {
   sequence(id: $id) {
     viewerHasFavorited
+    recordings(viewerHasFavorited: true) {
+      aggregate {
+        count
+      }
+    }
   }
 }
     `;

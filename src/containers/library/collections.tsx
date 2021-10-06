@@ -136,6 +136,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={collectionItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`collectionItems-${collectionItems.length}`}
 					/>
 				</>
 			) : null}
@@ -151,6 +152,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={personItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`personItems-${personItems.length}`}
 					/>
 				</>
 			) : null}
@@ -166,6 +168,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={sponsorItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`sponsorItems-${sponsorItems.length}`}
 					/>
 				</>
 			) : null}

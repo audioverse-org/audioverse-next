@@ -41,7 +41,7 @@ function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
 					},
 				],
 				aggregate: {
-					count: 1,
+					count: 100,
 				},
 			},
 			...data,

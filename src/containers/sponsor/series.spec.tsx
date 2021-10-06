@@ -46,7 +46,7 @@ const loadData = buildLoader(GetSponsorSeriesPageDataDocument, {
 			},
 		],
 		aggregate: {
-			count: 1,
+			count: 100,
 		},
 	},
 });

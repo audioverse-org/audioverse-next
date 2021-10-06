@@ -6,11 +6,6 @@ fragment cardRecordingSequenceHat on Recording {
 		image {
 			url(size: 1000)
 		}
-		favoritedRecordings: recordings(viewerHasFavorited: true) {
-			aggregate {
-				count
-			}
-		}
 		recordings {
 			aggregate {
 				count

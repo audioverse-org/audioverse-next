@@ -1,8 +1,8 @@
 @import '../../styles/common';
 
 .container {
+	padding: $tease-padding;
 	background: $ts-dark;
-	padding: 16px 24px;
 }
 
 .image {
