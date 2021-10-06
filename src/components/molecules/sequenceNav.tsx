@@ -39,8 +39,7 @@ export default function SequenceNav({
 					type={buttonType}
 					href={sequencePreviousRecording.canonicalPath}
 					text={labelPrevious}
-					Icon={IconBack}
-					iconPosition="left"
+					IconLeft={IconBack}
 				/>
 			) : (
 				<div />
@@ -50,8 +49,7 @@ export default function SequenceNav({
 					type={buttonType}
 					href={sequenceNextRecording.canonicalPath}
 					text={labelNext}
-					Icon={IconForward}
-					iconPosition="right"
+					IconRight={IconForward}
 				/>
 			)}
 		</div>

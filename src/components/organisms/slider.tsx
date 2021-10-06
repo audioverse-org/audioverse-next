@@ -61,7 +61,7 @@ export default function Slider({
 				<Button
 					type={buttonType}
 					onClick={pageLeft}
-					Icon={ArrowLeft}
+					IconLeft={ArrowLeft}
 					aria-label={intl.formatMessage({
 						id: 'cardSlider__previousPageLabel',
 						defaultMessage: 'Previous page',
@@ -88,7 +88,7 @@ export default function Slider({
 				<Button
 					type={buttonType}
 					onClick={pageRight}
-					Icon={ArrowRight}
+					IconLeft={ArrowRight}
 					aria-label={intl.formatMessage({
 						id: 'cardSlider__nextPageLabel',
 						defaultMessage: 'Next page',

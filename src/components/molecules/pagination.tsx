@@ -90,7 +90,7 @@ export default function Pagination({
 				<Button
 					type={buttonType}
 					href={makeRoute(language, pagePrevious)}
-					Icon={IconBack}
+					IconLeft={IconBack}
 					text={intl.formatMessage({
 						id: 'molecules-pagination__previousLabel',
 						defaultMessage: 'Previous',
@@ -110,7 +110,7 @@ export default function Pagination({
 				<Button
 					type={buttonType}
 					href={makeRoute(language, pageNext)}
-					Icon={IconForward}
+					IconLeft={IconForward}
 					text={intl.formatMessage({
 						id: 'molecules-pagination__nextLabel',
 						defaultMessage: 'Next',

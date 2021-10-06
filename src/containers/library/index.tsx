@@ -96,8 +96,7 @@ function Library({ language }: Props): JSX.Element {
 				type="secondary"
 				href={makeLibraryRoute(languageRoute, routeSlug)}
 				text={label}
-				Icon={ForwardIcon}
-				iconPosition="left"
+				IconLeft={ForwardIcon}
 			/>
 		</div>
 	);

@@ -112,7 +112,7 @@ export default function LibraryNav({
 									defaultMessage="Newest to Oldest"
 								/>
 							}
-							Icon={IconDisclosure}
+							IconLeft={IconDisclosure}
 							disabled={disabled}
 							className={clsx(styles.button, isOpen && styles.buttonOpen)}
 							{...props}
@@ -141,7 +141,7 @@ export default function LibraryNav({
 									defaultMessage="Filter"
 								/>
 							}
-							Icon={IconFilter}
+							IconLeft={IconFilter}
 							disabled={disabled}
 							className={clsx(styles.button, isOpen && styles.buttonOpen)}
 							{...props}

@@ -1,0 +1,18 @@
+@import '../../styles/common';
+
+.base {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 0 auto 16px;
+	padding: 16px;
+	background: $ts-dark;
+	color: $ts-white;
+	border-radius: 8px;
+	line-height: 1.2;
+	@media (min-width: $breakpoint-md) {
+		flex-direction: row;
+		align-items: center;
+		max-width: 740px;
+	}
+}

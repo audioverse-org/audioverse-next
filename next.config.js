@@ -22,6 +22,18 @@ module.exports = withPWA({
 				destination: `/${languagePrefixMap[prefix]}/:path*`,
 				permanent: true,
 			})),
+			...Object.keys(languagePrefixMap).map((prefix) => ({
+				source: '/',
+				destination: `/${languagePrefixMap[prefix]}`,
+				has: [
+					{
+						type: 'cookie',
+						key: 'lang',
+						value: languagePrefixMap[prefix],
+					},
+				],
+				permanent: false,
+			})),
 			{
 				source: '/',
 				destination: '/en',

@@ -213,8 +213,7 @@ function PresenterDetail({
 								id: 'presenterDetail__recentAllLabel',
 								defaultMessage: 'See All Recent',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}
@@ -241,8 +240,7 @@ function PresenterDetail({
 								id: 'presenterDetail__topAllLabel',
 								defaultMessage: 'See More Most Listened',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}
@@ -270,8 +268,7 @@ function PresenterDetail({
 								id: 'presenterDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}
@@ -301,8 +298,7 @@ function PresenterDetail({
 								id: 'presenterDetail__speakersAllLabel',
 								defaultMessage: 'See All Also Appears In',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}
