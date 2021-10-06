@@ -79,7 +79,7 @@ export default function CardRecordingSequenceHat({
 						setSequenceFavorited(sequence.id, true);
 					}}
 					text={getSequenceLabel(sequence.contentType)}
-					Icon={IconLike}
+					IconLeft={IconLike}
 					className={styles.addAllButton}
 				/>
 				<FormattedMessage

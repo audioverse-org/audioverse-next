@@ -18,7 +18,7 @@ export default function ButtonBack({
 		<Button
 			type={type}
 			text={<FormattedMessage id="backButton__back" defaultMessage="Back" />}
-			Icon={IconBack}
+			IconLeft={IconBack}
 			href={backUrl}
 			className={className}
 		/>

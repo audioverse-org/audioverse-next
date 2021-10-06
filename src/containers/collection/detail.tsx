@@ -183,8 +183,7 @@ function CollectionDetail({
 								id: 'collectionDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}
@@ -212,8 +211,7 @@ function CollectionDetail({
 								id: 'collectionDetail__speakersAllLabel',
 								defaultMessage: 'See All Speakers',
 							})}
-							Icon={ForwardIcon}
-							iconPosition="left"
+							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
 						/>
 					)}

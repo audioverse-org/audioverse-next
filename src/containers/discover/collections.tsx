@@ -50,8 +50,7 @@ export default function DiscoverCollections({
 					defaultMessage="See All"
 				/>
 			}
-			Icon={ForwardIcon}
-			iconPosition="left"
+			IconLeft={ForwardIcon}
 			className={styles.seeAllButton}
 		/>
 	);

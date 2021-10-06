@@ -173,8 +173,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							id: 'sponsorDetail__recentAllLabel',
 							defaultMessage: 'See All Recent Teachings',
 						})}
-						Icon={ForwardIcon}
-						iconPosition="left"
+						IconLeft={ForwardIcon}
 						className={styles.seeAllButton}
 					/>
 				</>
@@ -200,8 +199,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							id: 'sponsorDetail__seriesAllLabel',
 							defaultMessage: 'See All Series',
 						})}
-						Icon={ForwardIcon}
-						iconPosition="left"
+						IconLeft={ForwardIcon}
 						className={styles.seeAllButton}
 					/>
 				</>
@@ -229,8 +227,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							id: 'sponsorDetail__conferencesAllLabel',
 							defaultMessage: 'See All Conferences',
 						})}
-						Icon={ForwardIcon}
-						iconPosition="left"
+						IconLeft={ForwardIcon}
 						className={styles.seeAllButton}
 					/>
 				</>

@@ -122,8 +122,7 @@ export default function Discover({
 						type="secondary"
 						text={seeAll}
 						href={url}
-						Icon={ForwardIcon}
-						iconPosition="right"
+						IconRight={ForwardIcon}
 						className={styles.seeAllButton}
 					/>
 				</div>

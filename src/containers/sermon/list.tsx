@@ -49,7 +49,7 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 									defaultMessage="Filter"
 								/>
 							}
-							Icon={IconFilter}
+							IconLeft={IconFilter}
 							className={clsx(isOpen && styles.buttonOpen)}
 							{...props}
 						/>

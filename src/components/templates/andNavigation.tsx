@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { Router, useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useState } from 'react';
 
+import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
@@ -70,6 +71,7 @@ export default function AndNavigation({
 					<Navigation onExit={() => setShowingMenu(false)} />
 				</div>
 				<div className={styles.content}>
+					<LanguageAlternativesAlert />
 					<SearchBar
 						term={term}
 						onChange={(value) => {
