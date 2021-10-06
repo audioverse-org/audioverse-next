@@ -74,9 +74,13 @@ export default function CardRecordingSequenceHat({
 			<div className={styles.row}>
 				<Button
 					type={inverse ? 'primaryInverse' : 'primary'}
-					onClick={() => setSequenceFavorited(sequence.id, true)}
+					onClick={(e) => {
+						e.stopPropagation();
+						setSequenceFavorited(sequence.id, true);
+					}}
 					text={getSequenceLabel(sequence.contentType)}
 					Icon={IconLike}
+					className={styles.addAllButton}
 				/>
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__inLibrary"

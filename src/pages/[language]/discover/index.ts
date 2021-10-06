@@ -1,31 +1,39 @@
-import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
-
-import Discover from '@containers/discover';
-import { storeRequest } from '@lib/api';
-import {
-	getDiscoverPageData,
-	GetDiscoverPageDataQuery,
-} from '@lib/generated/graphql';
+import Discover, { DiscoverProps } from '@containers/discover';
+import { REVALIDATE } from '@lib/constants';
+import { getDiscoverPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 
 export default Discover;
 
-interface Context extends GetStaticPropsContext<{ language: string }> {
-	req: any;
+export async function getStaticProps({
+	params,
+}: {
+	params: { language: string };
+}): Promise<StaticProps<DiscoverProps>> {
+	const language = getLanguageIdByRoute(params?.language);
+	return {
+		props: await getDiscoverPageData({ language }).catch(() => ({
+			conferences: {
+				nodes: [],
+			},
+			recentTeachings: {
+				nodes: [],
+			},
+			storySeasons: {
+				nodes: [],
+			},
+			trendingTeachings: {
+				nodes: [],
+			},
+		})),
+		revalidate: REVALIDATE,
+	};
 }
 
-export async function getServerSideProps({ req, params }: Context): Promise<
-	GetServerSidePropsResult<{
-		data: GetDiscoverPageDataQuery;
-	}>
-> {
-	storeRequest(req);
-
-	const language = getLanguageIdByRoute(params?.language);
-
+export async function getStaticPaths(): Promise<StaticPaths> {
 	return {
-		props: {
-			data: await getDiscoverPageData({ language }),
-		},
+		paths: getLanguageRoutes().map((base_url) => `/${base_url}/discover`),
+		fallback: false,
 	};
 }

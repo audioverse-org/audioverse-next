@@ -1,16 +1,17 @@
 import { waitFor } from '@testing-library/react';
 
-import { storeRequest } from '@lib/api';
 import {
 	GetDiscoverPageDataDocument,
 	GetDiscoverPageDataQuery,
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildLoader, buildServerRenderer } from '@lib/test/helpers';
-import Discover, { getServerSideProps } from '@pages/[language]/discover';
+import { buildLoader, buildStaticRenderer } from '@lib/test/helpers';
+import Discover, { getStaticProps } from '@pages/[language]/discover';
 
-const renderPage = buildServerRenderer(Discover, getServerSideProps);
+const renderPage = buildStaticRenderer(Discover, getStaticProps, {
+	language: 'en',
+});
 const loadData = buildLoader<GetDiscoverPageDataQuery>(
 	GetDiscoverPageDataDocument,
 	{
@@ -76,15 +77,6 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 );
 
 describe('discover page', () => {
-	it('stores request', async () => {
-		await getServerSideProps({
-			req: 'the_request',
-			query: { language: 'en' },
-		} as any);
-
-		expect(storeRequest).toBeCalledWith('the_request');
-	});
-
 	it('renders titles', async () => {
 		loadData();
 

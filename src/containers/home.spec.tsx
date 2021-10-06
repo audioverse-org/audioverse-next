@@ -200,10 +200,10 @@ describe('home page', () => {
 		loadData();
 	});
 
-	it('revalidates static copy every 10s', async () => {
+	it('revalidates static copy frequently', async () => {
 		const { revalidate } = await getStaticProps({ params: { language: 'en' } });
 
-		expect(revalidate).toBe(10);
+		expect(revalidate).toBe(60);
 	});
 
 	it('generates static paths', async () => {
