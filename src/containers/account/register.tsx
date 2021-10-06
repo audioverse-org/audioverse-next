@@ -201,7 +201,19 @@ function Register(): JSX.Element {
 				onClose={() => setIsGuestModalOpen(false)}
 				title="Continue as guest?"
 			>
-				Content
+				<p>
+					You&apos;ll be missing out on some key features without an account,
+					like:
+				</p>
+				{/*TODO: Update list contents*/}
+				<ul>
+					<li>Lorem ipsum dolor</li>
+					<li>Et exictur purim multatim</li>
+					<li>Dulipscum erudis fesin</li>
+				</ul>
+				<a className="decorated">Continue as guest</a>
+				<Button type="primary" text="Log in" />
+				<Button type="super" text="Create account" />
 			</Modal>
 		</AndOnboarding>
 	);
