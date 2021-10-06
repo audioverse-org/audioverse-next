@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
 import { makeLoginRoute, makeRegisterRoute } from '@lib/routes';
@@ -42,13 +41,16 @@ export default function AndAuthBarrier({
 	return (
 		<AuthBarrierContext.Provider value={authBarrierContext}>
 			{children}
-			<Modal open={isOpen} onClose={handleClose}>
-				<Heading2>
+			<Modal
+				open={isOpen}
+				onClose={handleClose}
+				title={
 					<FormattedMessage
 						id="andAuthBarrier__heading"
 						defaultMessage="Member Only Feature"
 					/>
-				</Heading2>
+				}
+			>
 				<p>
 					<FormattedMessage
 						id="andAuthBarrier__copy"

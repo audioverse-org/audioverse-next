@@ -196,8 +196,12 @@ function Register(): JSX.Element {
 			<a className="decorated" onClick={() => setIsGuestModalOpen(true)}>
 				Continue as guest
 			</a>
-			<Modal open={isGuestModalOpen} onClose={() => setIsGuestModalOpen(false)}>
-				<h1>Continue as guest?</h1>
+			<Modal
+				open={isGuestModalOpen}
+				onClose={() => setIsGuestModalOpen(false)}
+				title={'Continue as guest?'}
+			>
+				Content
 			</Modal>
 		</AndOnboarding>
 	);

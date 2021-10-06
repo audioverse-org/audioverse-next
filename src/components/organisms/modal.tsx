@@ -3,6 +3,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
+import Heading2 from '@components/atoms/heading2';
 
 import IconButton from '@components/molecules/iconButton';
 import { BaseColors } from '@lib/constants';
@@ -12,6 +13,7 @@ import IconClose from '../../../public/img/fa-times.svg';
 import styles from './modal.module.scss';
 
 interface ModalProps {
+	title: string | JSX.Element;
 	children: ReactNode;
 	onClose: () => void;
 	open: boolean;
@@ -21,6 +23,7 @@ export default function Modal({
 	children,
 	onClose,
 	open,
+	title,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
 
@@ -50,6 +53,7 @@ export default function Modal({
 							}),
 						}}
 					/>
+					<Heading2>{title}</Heading2>
 					{children}
 				</div>
 			</Fade>
