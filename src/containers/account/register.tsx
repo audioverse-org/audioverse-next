@@ -199,7 +199,7 @@ function Register(): JSX.Element {
 			<Modal
 				open={isGuestModalOpen}
 				onClose={() => setIsGuestModalOpen(false)}
-				title={'Continue as guest?'}
+				title="Continue as guest?"
 			>
 				Content
 			</Modal>

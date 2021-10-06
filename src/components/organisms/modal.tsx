@@ -3,8 +3,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
-import Heading2 from '@components/atoms/heading2';
 
+import Heading2 from '@components/atoms/heading2';
 import IconButton from '@components/molecules/iconButton';
 import { BaseColors } from '@lib/constants';
 
