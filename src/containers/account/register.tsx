@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/input';
 import SocialLogin from '@components/molecules/socialLogin';
+import Modal from '@components/organisms/modal';
 import AndOnboarding from '@components/templates/andOnboarding';
 import {
 	useRegisterIsLoggedInQuery,
@@ -21,6 +22,7 @@ function Register(): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [newsletter, setNewsletter] = useState(true);
+	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 
 	const { data: dataLoggedIn, isLoading: isLoadingLoggedIn } =
 		useRegisterIsLoggedInQuery({}, { retry: false });
@@ -191,7 +193,12 @@ function Register(): JSX.Element {
 					/>
 				</div>
 			</form>
-			<Button type="secondary" text="Continue as guest" />
+			<a className="decorated" onClick={() => setIsGuestModalOpen(true)}>
+				Continue as guest
+			</a>
+			<Modal open={isGuestModalOpen} onClose={() => setIsGuestModalOpen(false)}>
+				<h1>Continue as guest?</h1>
+			</Modal>
 		</AndOnboarding>
 	);
 }

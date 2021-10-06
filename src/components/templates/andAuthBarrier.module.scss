@@ -1,29 +1,5 @@
 @import '../../styles/common';
 
-.backdrop {
-	background-color: $ts-dark;
-	opacity: 0.8;
-}
-
-.modal {
-	position: absolute;
-	left: 50%;
-	top: 80px;
-	transform: translate(-50%, 0%);
-	width: 500px;
-	max-width: calc(100% - 48px);
-	outline: none;
-	padding: 24px;
-	background-color: $ts-white;
-	border-radius: 16px;
-}
-
-.close {
-	position: absolute;
-	right: 16px;
-	top: 16px;
-}
-
 .buttonRow {
 	display: flex;
 	align-items: center;

@@ -314,6 +314,8 @@ describe('register page', () => {
 		const { getByText } = await renderPage();
 
 		userEvent.click(getByText('Continue as guest'));
+
+		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});
 });
 
