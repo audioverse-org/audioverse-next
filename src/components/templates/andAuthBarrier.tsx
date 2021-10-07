@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,8 +5,6 @@ import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
 import { makeLoginRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-
-import styles from './andAuthBarrier.module.scss';
 
 export type AuthBarrierContextType = {
 	challenge: () => void;
@@ -50,6 +47,38 @@ export default function AndAuthBarrier({
 						defaultMessage="Member Only Feature"
 					/>
 				}
+				actions={
+					<>
+						<a onClick={handleClose} className="decorated">
+							<FormattedMessage
+								id="andAuthBarrier__continueAsGuest"
+								defaultMessage="Continue as guest"
+							/>
+						</a>
+						<Button
+							type="primary"
+							href={makeLoginRoute(languageRoute)}
+							onClick={handleClose}
+							text={
+								<FormattedMessage
+									id="andAuthBarrier__logIn"
+									defaultMessage="Log in"
+								/>
+							}
+						/>
+						<Button
+							type="super"
+							href={makeRegisterRoute(languageRoute)}
+							onClick={handleClose}
+							text={
+								<FormattedMessage
+									id="andAuthBarrier__createAccount"
+									defaultMessage="Create Account"
+								/>
+							}
+						/>
+					</>
+				}
 			>
 				<p>
 					<FormattedMessage
@@ -57,39 +86,6 @@ export default function AndAuthBarrier({
 						defaultMessage="You can bookmark audio to access later on your account. Other features include adding audio to your library."
 					/>
 				</p>
-				<div className={styles.buttonRow}>
-					<Button
-						type="super"
-						href={makeRegisterRoute(languageRoute)}
-						onClick={handleClose}
-						text={
-							<FormattedMessage
-								id="andAuthBarrier__createAccount"
-								defaultMessage="Create Account"
-							/>
-						}
-					/>
-					<Button
-						type="primary"
-						href={makeLoginRoute(languageRoute)}
-						onClick={handleClose}
-						text={
-							<FormattedMessage
-								id="andAuthBarrier__logIn"
-								defaultMessage="Log in"
-							/>
-						}
-					/>
-					<a
-						onClick={handleClose}
-						className={clsx(styles.continueAsGuest, 'decorated')}
-					>
-						<FormattedMessage
-							id="andAuthBarrier__continueAsGuest"
-							defaultMessage="Continue as guest"
-						/>
-					</a>
-				</div>
 			</Modal>
 		</AuthBarrierContext.Provider>
 	);

@@ -17,6 +17,7 @@ interface ModalProps {
 	children: ReactNode;
 	onClose: () => void;
 	open: boolean;
+	actions?: ReactNode;
 }
 
 export default function Modal({
@@ -24,6 +25,7 @@ export default function Modal({
 	onClose,
 	open,
 	title,
+	actions,
 }: ModalProps): JSX.Element {
 	const intl = useIntl();
 
@@ -55,6 +57,7 @@ export default function Modal({
 					/>
 					<Heading2>{title}</Heading2>
 					{children}
+					{actions && <div className={styles.buttonRow}>{actions}</div>}
 				</div>
 			</Fade>
 		</MuiModal>
