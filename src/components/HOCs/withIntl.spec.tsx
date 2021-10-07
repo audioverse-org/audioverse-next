@@ -1,7 +1,6 @@
 import { RenderResult, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as intl from 'react-intl';
-import { FormattedMessage } from 'react-intl';
 import { toast } from 'react-toastify';
 
 import PersonLockup from '@components/molecules/personLockup';
@@ -108,10 +107,7 @@ describe('localization usage', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
 
-		jest.spyOn(intl, 'FormattedMessage').mockImplementation((() => 'z') as any);
-		jest
-			.spyOn(FormattedMessage.prototype, 'shouldComponentUpdate')
-			.mockImplementation(() => true);
+		(intl.FormattedMessage as any) = jest.fn().mockReturnValue('z');
 
 		const formatter = jest.fn();
 		formatter.mockReturnValue('z');

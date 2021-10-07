@@ -1,6 +1,6 @@
 import {
+	findByTestId,
 	getByLabelText,
-	getByTestId,
 	getByText,
 	queryByLabelText,
 	waitFor,
@@ -545,9 +545,7 @@ describe('player', () => {
 
 		const portal = result.getByTestId('portal');
 
-		await waitFor(() =>
-			expect(getByTestId(portal, 'video-element')).toBeInTheDocument()
-		);
+		await findByTestId(portal, 'video-element');
 	});
 
 	it('displays progress bar in miniplayer', async () => {
@@ -695,23 +693,23 @@ describe('player', () => {
 	});
 
 	it('switches labels', async () => {
-		const { getByText } = await renderComponent();
+		const { getByText, findByText } = await renderComponent();
 
 		userEvent.click(getByText('1x'));
 
-		await waitFor(() => expect(getByText('1.5x')).toBeInTheDocument());
+		await findByText('1.5x');
 
 		userEvent.click(getByText('1.5x'));
 
-		await waitFor(() => expect(getByText('1.75x')).toBeInTheDocument());
+		await findByText('1.75x');
 
 		userEvent.click(getByText('1.75x'));
 
-		await waitFor(() => expect(getByText('2x')).toBeInTheDocument());
+		await findByText('2x');
 
 		userEvent.click(getByText('2x'));
 
-		await waitFor(() => expect(getByText('1x')).toBeInTheDocument());
+		await findByText('1x');
 	});
 
 	it('changes speed', async () => {
@@ -727,11 +725,11 @@ describe('player', () => {
 	it('loads videojs speed', async () => {
 		setPlayerMock({ playbackRate: 2 });
 
-		const { getByText, getByLabelText } = await renderComponent();
+		const { getByLabelText, findByText } = await renderComponent();
 
 		userEvent.click(getByLabelText('play'));
 
-		await waitFor(() => expect(getByText('2x')).toBeInTheDocument());
+		await findByText('2x');
 	});
 
 	it('has download icon', async () => {
@@ -829,7 +827,7 @@ describe('player', () => {
 	it('defaults to api duration if recording not loaded', async () => {
 		mockVideojs.mockReturnValue(null);
 
-		const { getByText } = await renderComponent({
+		const { findByText } = await renderComponent({
 			props: {
 				recording: {
 					duration: 60,
@@ -844,7 +842,7 @@ describe('player', () => {
 			},
 		});
 
-		await waitFor(() => expect(getByText('1:00')).toBeInTheDocument());
+		await findByText('1:00');
 	});
 
 	it('has fullscreen button', async () => {

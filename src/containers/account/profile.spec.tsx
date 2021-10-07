@@ -108,9 +108,9 @@ describe('profile page', () => {
 			},
 		});
 
-		const { getByDisplayValue } = await renderPage();
+		const { findByDisplayValue } = await renderPage();
 
-		await waitFor(() => expect(getByDisplayValue('first')).toBeInTheDocument());
+		await findByDisplayValue('first');
 	});
 
 	it('displays email field if unauthenticated', async () => {
@@ -178,7 +178,7 @@ describe('profile page', () => {
 	it('invalidates cache on successful login', async () => {
 		jest.spyOn(api, 'login').mockResolvedValue(true);
 
-		const { getByText } = await renderPage();
+		const { getByText, findByText } = await renderPage();
 
 		userEvent.click(getByText('Login'));
 
@@ -191,7 +191,7 @@ describe('profile page', () => {
 			},
 		});
 
-		await waitFor(() => expect(getByText('first name')).toBeInTheDocument());
+		await findByText('first name');
 	});
 
 	it('logs in with email and password', async () => {
