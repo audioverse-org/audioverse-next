@@ -1,4 +1,4 @@
-import { queryByTestId, waitFor } from '@testing-library/dom';
+import { findByLabelText, queryByTestId, waitFor } from '@testing-library/dom';
 import {
 	act,
 	getByLabelText,
@@ -157,9 +157,7 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'pause');
 
 			const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
@@ -193,9 +191,7 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'pause');
 
 			const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
@@ -211,9 +207,7 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'pause');
 
 			const portal = result.getByTestId('portal');
 
@@ -222,9 +216,7 @@ describe('app media playback', () => {
 				{} as any
 			);
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'play');
 		});
 	});
 
@@ -236,15 +228,11 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'pause');
 
 			userEvent.click(getByLabelText(miniplayer, 'pause'));
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'play');
 
 			const portal = result.getByTestId('portal');
 
@@ -253,9 +241,7 @@ describe('app media playback', () => {
 				{} as any
 			);
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'pause');
 		});
 	});
 
@@ -271,9 +257,7 @@ describe('app media playback', () => {
 
 			const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() =>
-				expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(miniplayer, 'play');
 
 			expect(
 				queryByTestId(miniplayer, 'video-element')
@@ -331,9 +315,7 @@ describe('app media playback', () => {
 
 			const player = result.getByLabelText('player');
 
-			await waitFor(() =>
-				expect(getByLabelText(player, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(player, 'play');
 
 			expect(pane.appendChild).not.toHaveBeenCalled();
 		});

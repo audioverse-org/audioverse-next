@@ -1,4 +1,5 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
+import { createTheme } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
 	},
 });
 
-const muiTheme = createMuiTheme({
+const muiTheme = createTheme({
 	typography: {
 		button: {
 			textTransform: 'none',
