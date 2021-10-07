@@ -52,6 +52,7 @@ describe('miniplayer template', () => {
 							c.loadRecording({
 								id: 'the_recording_id',
 								title: 'the_recording_title',
+								canonicalPath: 'the_recording_path',
 								duration: 60,
 								sequence: {
 									contentType: SequenceContentType.Series,

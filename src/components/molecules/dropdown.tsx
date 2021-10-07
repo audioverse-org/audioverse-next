@@ -1,5 +1,5 @@
 import { Menu } from '@material-ui/core';
-import React, { MouseEvent, PropsWithChildren } from 'react';
+import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
 
 import styles from './dropdown.module.scss';
 
@@ -11,6 +11,7 @@ type Props = {
 		isOpen: boolean;
 	}) => JSX.Element;
 	alignment?: 'left' | 'right';
+	children?: ReactNode | ((handleClose: () => void) => ReactNode);
 };
 
 export default function Dropdown({
@@ -55,7 +56,7 @@ export default function Dropdown({
 					className: styles.paper,
 				}}
 			>
-				{children}
+				{typeof children === 'function' ? children(handleClose) : children}
 			</Menu>
 		</>
 	);

@@ -1,6 +1,7 @@
 fragment andMiniplayer on Recording {
 	id
 	title
+	canonicalPath(useFuturePath: true)
 	duration
 	sequence {
 		title

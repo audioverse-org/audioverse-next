@@ -8,9 +8,48 @@
 
 .mobileHeader {
 	display: flex;
+	flex-direction: column;
+	padding: 24px 24px 8px;
+	background: $ts-cream;
+}
+.mobileHeaderTitle {
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 32px 24px 0;
+	margin-bottom: 22px;
+	> :first-child {
+		flex-grow: 1;
+	}
+	> :nth-child(n + 2) {
+		margin-left: 16px;
+	}
+}
+.mobileSubnav {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+.mobileSubnavItems {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	overflow: hidden;
+	height: 24px;
+	margin-right: 32px;
+	> h6 {
+		line-height: 24px;
+		&:not(:first-of-type) {
+			margin-left: 14.5px;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+	}
+}
+.mobileHeaderMore {
+	position: absolute;
+	right: 0;
+	height: 24px;
 }
 
 .navigation {
@@ -18,10 +57,12 @@
 	height: 100vh;
 	width: 100vw;
 	top: 0;
+	display: flex;
+	flex-direction: column;
 	padding: 32px 24px;
-	background: $ts-white;
+	background: $ts-cream;
 	z-index: 1000;
-	transform: translateX(-100%);
+	transform: translateX(100%);
 }
 .header {
 	display: none;
@@ -48,7 +89,7 @@
 		transform: translateX(0%);
 	}
 	100% {
-		transform: translateX(-100%);
+		transform: translateX(100%);
 	}
 }
 
@@ -62,8 +103,23 @@
 	}
 }
 
-.searchHidden {
+@mixin search-row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 24px;
+}
+.searchRow {
 	display: none;
+}
+.searchShown {
+	@include search-row();
+	> *:not(.searchBox) {
+		display: none;
+	}
+}
+.searchBox {
+	flex-grow: 1;
+	margin-right: 16px;
 }
 
 @media (min-width: $breakpoint-lg) {
@@ -72,22 +128,25 @@
 	}
 	.header {
 		display: block;
-		margin-bottom: 24px;
+		margin: 32px;
 	}
 	.navigation {
-		position: static;
-		flex: 0 0 $sidebar-width;
-		padding: 32px;
+		position: fixed;
+		width: $sidebar-width;
+		padding: 0;
 		overflow: scroll;
 		transform: translate(0px);
 		animation: none;
+		background: $ts-white;
 	}
 	.content {
-		flex: 0 0 calc(100% - #{$sidebar-width});
+		flex: 0 0 100vw;
+		padding-left: $sidebar-width;
 		display: flex;
 		flex-direction: column;
+		overflow: hidden;
 	}
-	.searchHidden {
-		display: inherit;
+	.searchRow {
+		@include search-row();
 	}
 }
