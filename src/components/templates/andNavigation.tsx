@@ -51,7 +51,7 @@ export default function AndNavigation({
 
 	const navigationItems = getNavigationItems(languageRoute);
 	return (
-		<>
+		<div className={styles.wrapper}>
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileHeaderTitle}>
 					<Header />
@@ -142,6 +142,6 @@ export default function AndNavigation({
 					<div>{children}</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

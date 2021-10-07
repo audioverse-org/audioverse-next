@@ -1,5 +1,10 @@
 @import '../../styles/common';
 
+.wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
 .base {
 	display: flex;
 	align-items: stretch;
