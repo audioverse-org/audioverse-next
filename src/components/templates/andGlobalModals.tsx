@@ -40,7 +40,7 @@ export default function AndGlobalModals({
 		setIsOpen(false);
 	};
 
-	const authBarrierContext: GlobalModalsContextType = {
+	const globalModalsContext: GlobalModalsContextType = {
 		challengeAuth: () => {
 			setWhichModal('auth');
 			setIsOpen(true);
@@ -154,7 +154,7 @@ export default function AndGlobalModals({
 	}
 
 	return (
-		<GlobalModalsContext.Provider value={authBarrierContext}>
+		<GlobalModalsContext.Provider value={globalModalsContext}>
 			{children}
 			<Modal open={isOpen} onClose={handleClose} title={title}>
 				{content}
