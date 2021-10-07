@@ -26,7 +26,7 @@ function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 					},
 				],
 				aggregate: {
-					count: 1,
+					count: 100,
 				},
 			},
 		});

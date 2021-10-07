@@ -8,14 +8,19 @@ import ButtonFavorite from './buttonFavorite';
 
 export default function RecordingButtonFavorite({
 	id,
+	sequenceId,
 	...props
 }: {
 	id: Scalars['ID'];
+	sequenceId?: Scalars['ID'];
 	backgroundColor: BaseColors;
 	light?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(id);
+	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
+		id,
+		sequenceId
+	);
 
 	return (
 		<ButtonFavorite

@@ -73,7 +73,7 @@ export default function Pagination({
 	total: number;
 	makeRoute: (languageRoute: string, pageIndex: number) => string;
 	useInverse?: boolean;
-}): JSX.Element {
+}): JSX.Element | null {
 	const language = useLanguageRoute();
 	const intl = useIntl();
 	current = current || 1;
@@ -83,7 +83,10 @@ export default function Pagination({
 	const pages = pagination(current, total);
 	const buttonType = useInverse ? 'secondaryInverse' : 'secondary';
 
-	// TODO: Consider not rendering pagination if only one page
+	if (pages.length <= 1) {
+		return null;
+	}
+
 	return (
 		<ul className={clsx(styles.base, useInverse && styles.inverse)}>
 			{current > 1 ? (

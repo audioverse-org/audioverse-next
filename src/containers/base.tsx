@@ -5,10 +5,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { DehydratedState, Hydrate } from 'react-query';
 import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import withIntl from '@components/HOCs/withIntl';
-import 'react-toastify/dist/ReactToastify.css';
-import AndAuthBarrier from '@components/templates/andAuthBarrier';
+import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 
@@ -65,7 +65,7 @@ function Base<P>({
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
 						<Hydrate state={dehydratedState}>
-							<AndAuthBarrier>
+							<AndGlobalModals>
 								{disableSidebar ? (
 									<Component {...pageProps} />
 								) : (
@@ -75,7 +75,7 @@ function Base<P>({
 										</AndNavigation>
 									</AndMiniplayer>
 								)}
-							</AndAuthBarrier>
+							</AndGlobalModals>
 						</Hydrate>
 					</ThemeProvider>
 				</QueryClientProvider>

@@ -1,0 +1,12 @@
+@import '../../styles/common';
+
+.buttonRow {
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+	> * {
+		margin-top: 16px;
+		margin-left: 16px;
+	}
+}
