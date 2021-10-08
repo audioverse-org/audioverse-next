@@ -22,7 +22,7 @@ export default function ButtonGuest({
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 	const language = useLanguageRoute();
 
-	// TODO: Use <button> element for semantics
+	// TODO: Use <button> element for semantics and accessibility
 	return (
 		<>
 			<a
