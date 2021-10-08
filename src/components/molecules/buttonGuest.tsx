@@ -2,13 +2,29 @@ import React, { useState } from 'react';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
+import clsx from 'clsx';
+import Link from 'next/link';
+import {
+	makeDiscoverRoute,
+	makeLoginRoute,
+	makeRegisterRoute,
+} from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
-export default function ButtonGuest(): JSX.Element {
+export default function ButtonGuest({
+	className,
+}: {
+	className?: string;
+}): JSX.Element {
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+	const language = useLanguageRoute();
 
 	return (
 		<>
-			<a className="decorated" onClick={() => setIsGuestModalOpen(true)}>
+			<a
+				className={clsx('decorated', className)}
+				onClick={() => setIsGuestModalOpen(true)}
+			>
 				Continue as guest
 			</a>
 			<Modal
@@ -17,9 +33,19 @@ export default function ButtonGuest(): JSX.Element {
 				title="Continue as guest?"
 				actions={
 					<>
-						<a className="decorated">Continue as guest</a>
-						<Button type="primary" text="Log in" />
-						<Button type="super" text="Create account" />
+						<Link href={makeDiscoverRoute(language)}>
+							<a className="decorated">Continue as guest</a>
+						</Link>
+						<Button
+							href={makeLoginRoute(language)}
+							type="primary"
+							text="Log in"
+						/>
+						<Button
+							href={makeRegisterRoute(language)}
+							type="super"
+							text="Create account"
+						/>
 					</>
 				}
 			>

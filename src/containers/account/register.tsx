@@ -191,7 +191,7 @@ function Register(): JSX.Element {
 						centered
 						className={styles.login}
 					/>
-					<ButtonGuest />
+					<ButtonGuest className={styles.guestLink} />
 				</div>
 			</form>
 		</AndOnboarding>
