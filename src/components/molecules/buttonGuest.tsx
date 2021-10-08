@@ -10,6 +10,7 @@ import {
 	makeRegisterRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import Icon from '../../../public/img/icon-info.svg';
 
 import styles from './buttonGuest.module.scss';
 
@@ -21,6 +22,7 @@ export default function ButtonGuest({
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 	const language = useLanguageRoute();
 
+	// TODO: Use <button> element for semantics
 	return (
 		<>
 			<a
@@ -28,6 +30,7 @@ export default function ButtonGuest({
 				onClick={() => setIsGuestModalOpen(true)}
 			>
 				Continue as guest
+				<Icon />
 			</a>
 			<Modal
 				open={isGuestModalOpen}
