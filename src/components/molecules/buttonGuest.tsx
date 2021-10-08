@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import styles from './buttonGuest.module.scss';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
@@ -11,6 +10,8 @@ import {
 	makeRegisterRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+
+import styles from './buttonGuest.module.scss';
 
 export default function ButtonGuest({
 	className,
