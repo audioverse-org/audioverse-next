@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
+import ButtonGuest from '@components/molecules/buttonGuest';
 import Input from '@components/molecules/input';
 import SocialLogin from '@components/molecules/socialLogin';
-import Modal from '@components/organisms/modal';
 import AndOnboarding from '@components/templates/andOnboarding';
 import {
 	useRegisterIsLoggedInQuery,
@@ -22,7 +22,6 @@ function Register(): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [newsletter, setNewsletter] = useState(true);
-	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 
 	const { data: dataLoggedIn, isLoading: isLoadingLoggedIn } =
 		useRegisterIsLoggedInQuery({}, { retry: false });
@@ -192,34 +191,9 @@ function Register(): JSX.Element {
 						centered
 						className={styles.login}
 					/>
+					<ButtonGuest />
 				</div>
 			</form>
-			<a className="decorated" onClick={() => setIsGuestModalOpen(true)}>
-				Continue as guest
-			</a>
-			<Modal
-				open={isGuestModalOpen}
-				onClose={() => setIsGuestModalOpen(false)}
-				title="Continue as guest?"
-				actions={
-					<>
-						<a className="decorated">Continue as guest</a>
-						<Button type="primary" text="Log in" />
-						<Button type="super" text="Create account" />
-					</>
-				}
-			>
-				<p>
-					You&apos;ll be missing out on some key features without an account,
-					like:
-				</p>
-				{/*TODO: Update list contents*/}
-				<ul>
-					<li>Lorem ipsum dolor</li>
-					<li>Et exictur purim multatim</li>
-					<li>Dulipscum erudis fesin</li>
-				</ul>
-			</Modal>
 		</AndOnboarding>
 	);
 }
