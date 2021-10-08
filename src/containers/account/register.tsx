@@ -43,7 +43,8 @@ function Register(): JSX.Element {
 		}
 	}, [dataRegister]);
 
-	const onSubmit = () => {
+	const onSubmit = (e: any) => {
+		e.preventDefault();
 		const newErrors = [];
 		if (!email.length) {
 			newErrors.push('email is required');

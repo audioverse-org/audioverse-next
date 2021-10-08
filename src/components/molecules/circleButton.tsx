@@ -26,8 +26,7 @@ const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 		ref: any
 	): JSX.Element {
 		return (
-			<div
-				role="button"
+			<button
 				onClick={onClick}
 				className={clsx(
 					styles.base,
@@ -38,7 +37,7 @@ const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 				ref={ref}
 			>
 				{children}
-			</div>
+			</button>
 		);
 	}
 );

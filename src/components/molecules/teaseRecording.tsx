@@ -94,7 +94,10 @@ export default function TeaseRecording({
 				<div className={styles.play}>
 					<IconButton
 						Icon={IconPlay}
-						onClick={() => session.play()}
+						onClick={(e) => {
+							e.preventDefault();
+							session.play();
+						}}
 						color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
 						backgroundColor={backgroundColor}
 						aria-label={intl.formatMessage({
