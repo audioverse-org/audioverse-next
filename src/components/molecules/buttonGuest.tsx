@@ -10,6 +10,7 @@ import {
 	makeRegisterRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+
 import Icon from '../../../public/img/icon-info.svg';
 
 import styles from './buttonGuest.module.scss';
