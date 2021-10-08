@@ -24,7 +24,7 @@
 	flex-direction: column;
 	background: $ts-bibleB;
 	> * {
-		padding: 16px 24px;
+		padding: $tease-padding;
 	}
 	p {
 		margin-top: 8px;

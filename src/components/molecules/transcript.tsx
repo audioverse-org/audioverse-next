@@ -35,7 +35,7 @@ export default function Transcript({
 						/>
 					)
 				}
-				Icon={IconDisclosure}
+				IconLeft={IconDisclosure}
 			/>
 			{isOpen && (
 				<>

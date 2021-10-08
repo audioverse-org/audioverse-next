@@ -17,8 +17,8 @@ type Props = {
 	text?: JSX.Element | string;
 	href?: string;
 	onClick?: (e: MouseEvent<HTMLElement>) => void;
-	Icon?: any;
-	iconPosition?: 'left' | 'right';
+	IconLeft?: any;
+	IconRight?: any;
 	target?: '_blank';
 	className?: string;
 	'aria-label'?: string;
@@ -30,8 +30,8 @@ export default function Button({
 	type,
 	text,
 	href,
-	Icon,
-	iconPosition,
+	IconLeft,
+	IconRight,
 	className,
 	centered,
 	disabled,
@@ -50,12 +50,10 @@ export default function Button({
 
 	const inner = (
 		<>
-			{Icon && iconPosition !== 'right' && (
-				<Icon className={clsx(text && styles.iconLeftOfText)} />
-			)}
+			{IconLeft && <IconLeft className={clsx(text && styles.iconLeftOfText)} />}
 			{text}
-			{Icon && iconPosition === 'right' && (
-				<Icon className={clsx(text && styles.iconRightOfText)} />
+			{IconRight && (
+				<IconRight className={clsx(text && styles.iconRightOfText)} />
 			)}
 		</>
 	);

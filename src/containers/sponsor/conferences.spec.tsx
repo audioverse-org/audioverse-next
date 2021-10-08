@@ -42,7 +42,7 @@ const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 			},
 		],
 		aggregate: {
-			count: 1,
+			count: 100,
 		},
 	},
 });

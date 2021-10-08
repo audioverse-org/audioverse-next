@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import InfoBox from '@components/atoms/infoBox';
 import LineHeading from '@components/atoms/lineHeading';
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
@@ -86,7 +88,7 @@ function LibraryCollections({
 			{playlistItems.length ? (
 				<>
 					{showingPlaylistsAlert && (
-						<div className={styles.playlistsAlert}>
+						<InfoBox className={styles.playlistsAlert}>
 							<div>
 								<FormattedMessage
 									id="libraryCollections__playlistsAlert"
@@ -98,14 +100,17 @@ function LibraryCollections({
 									e.preventDefault();
 									setShowingPlaylistsAlert(false);
 								}}
-								className="decorated hover--salmon"
+								className={clsx(
+									styles.playlistsAlertDismiss,
+									'decorated hover--salmon'
+								)}
 							>
 								<FormattedMessage
-									id="libraryCollections__playlistsAlertDismiss"
+									id="libraryCollections__dismiss"
 									defaultMessage="Dismiss"
 								/>
 							</a>
-						</div>
+						</InfoBox>
 					)}
 					<LineHeading>
 						<FormattedMessage
@@ -131,6 +136,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={collectionItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`collectionItems-${collectionItems.length}`}
 					/>
 				</>
 			) : null}
@@ -146,6 +152,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={personItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`personItems-${personItems.length}`}
 					/>
 				</>
 			) : null}
@@ -161,6 +168,7 @@ function LibraryCollections({
 					<CardMasonry
 						items={sponsorItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`sponsorItems-${sponsorItems.length}`}
 					/>
 				</>
 			) : null}

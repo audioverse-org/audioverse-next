@@ -1,4 +1,4 @@
-import { queryByTestId, waitFor } from '@testing-library/dom';
+import { findByLabelText, queryByTestId, waitFor } from '@testing-library/dom';
 import { act, getByLabelText, getByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -776,15 +776,11 @@ describe('sermon detail page', () => {
 			const player = result.getByLabelText('player');
 
 			userEvent.click(result.getByText('Audio'));
-			await waitFor(() =>
-				expect(getByLabelText(player, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(player, 'play');
 			userEvent.click(getByLabelText(player, 'play'));
 			userEvent.click(result.getByText('Video'));
 			userEvent.click(result.getByText('Audio'));
-			await waitFor(() =>
-				expect(getByLabelText(player, 'play')).toBeInTheDocument()
-			);
+			await findByLabelText(player, 'play');
 			expect(getByLabelText(player, 'play')).toBeInTheDocument();
 		});
 	});

@@ -56,7 +56,7 @@ export function loadSermonListData({
 				},
 			],
 			aggregate: {
-				count: count || 1,
+				count: count || 100,
 			},
 		},
 	});
@@ -203,7 +203,7 @@ describe('sermons list page', () => {
 
 		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
 
-		expect(props.revalidate).toBe(10);
+		expect(props.revalidate).toBe(60);
 	});
 
 	it('links All button', async () => {

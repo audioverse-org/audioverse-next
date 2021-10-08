@@ -1,14 +1,15 @@
-import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
+import { createTheme } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { DehydratedState, Hydrate } from 'react-query';
 import 'video.js/dist/video-js.css';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import withIntl from '@components/HOCs/withIntl';
-import 'react-toastify/dist/ReactToastify.css';
-import AndAuthBarrier from '@components/templates/andAuthBarrier';
+import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
 	},
 });
 
-const muiTheme = createMuiTheme({
+const muiTheme = createTheme({
 	typography: {
 		button: {
 			textTransform: 'none',
@@ -57,12 +58,15 @@ function Base<P>({
 					<meta
 						name="viewport"
 						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0"
-					></meta>
+					/>
+					<link rel="icon" href="/favicon.ico" sizes="any" />
+					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 				</Head>
 				<QueryClientProvider client={queryClient}>
 					<ThemeProvider theme={muiTheme}>
 						<Hydrate state={dehydratedState}>
-							<AndAuthBarrier>
+							<AndGlobalModals>
 								{disableSidebar ? (
 									<Component {...pageProps} />
 								) : (
@@ -72,7 +76,7 @@ function Base<P>({
 										</AndNavigation>
 									</AndMiniplayer>
 								)}
-							</AndAuthBarrier>
+							</AndGlobalModals>
 						</Hydrate>
 					</ThemeProvider>
 				</QueryClientProvider>

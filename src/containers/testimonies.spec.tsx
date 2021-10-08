@@ -26,7 +26,7 @@ function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 					},
 				],
 				aggregate: {
-					count: 1,
+					count: 100,
 				},
 			},
 		});
@@ -65,7 +65,7 @@ describe('testimonies pages', () => {
 			params: { i: '1', language: 'en' },
 		});
 
-		expect(revalidate).toBe(10);
+		expect(revalidate).toBe(60);
 	});
 
 	it('gets testimony count', async () => {

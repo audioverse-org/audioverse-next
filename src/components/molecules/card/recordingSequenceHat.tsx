@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
+import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import {
 	CardRecordingSequenceHatFragment,
 	SequenceContentType,
@@ -19,31 +19,54 @@ interface Props {
 	inverse?: boolean;
 }
 
-const getSequenceLabel = (contentType: SequenceContentType) => {
+const getSequenceLabel = (
+	contentType: SequenceContentType,
+	isFavorited: boolean
+) => {
 	switch (contentType) {
 		case SequenceContentType.Audiobook:
-			return (
+			return isFavorited ? (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__removeBook"
+					defaultMessage="Remove Book"
+				/>
+			) : (
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__addBook"
 					defaultMessage="Add Book"
 				/>
 			);
 		case SequenceContentType.MusicAlbum:
-			return (
+			return isFavorited ? (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__removeAlbum"
+					defaultMessage="Remove Album"
+				/>
+			) : (
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__addAlbum"
 					defaultMessage="Add Album"
 				/>
 			);
 		case SequenceContentType.Series:
-			return (
+			return isFavorited ? (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__removeSeries"
+					defaultMessage="Remove Series"
+				/>
+			) : (
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__addSeries"
 					defaultMessage="Add Series"
 				/>
 			);
 		case SequenceContentType.StorySeason:
-			return (
+			return isFavorited ? (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__removeStoryAlbum"
+					defaultMessage="Remove Album"
+				/>
+			) : (
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__addStoryAlbum"
 					defaultMessage="Add Album"
@@ -61,6 +84,8 @@ export default function CardRecordingSequenceHat({
 	inverse,
 }: PropsWithChildren<Props>): JSX.Element {
 	const router = useRouter();
+	const { isFavorited, toggleFavorited, recordingsFavoritedCount } =
+		useIsSequenceFavorited(sequence.id);
 
 	return (
 		<div
@@ -74,15 +99,19 @@ export default function CardRecordingSequenceHat({
 			<div className={styles.row}>
 				<Button
 					type={inverse ? 'primaryInverse' : 'primary'}
-					onClick={() => setSequenceFavorited(sequence.id, true)}
-					text={getSequenceLabel(sequence.contentType)}
-					Icon={IconLike}
+					onClick={(e) => {
+						e.stopPropagation();
+						toggleFavorited();
+					}}
+					text={getSequenceLabel(sequence.contentType, !!isFavorited)}
+					IconLeft={IconLike}
+					className={styles.favoriteSequenceButton}
 				/>
 				<FormattedMessage
 					id="molecule-cardRecordingSequenceHat__inLibrary"
 					defaultMessage="{inLibraryCount} out of {totalCount} in your library"
 					values={{
-						inLibraryCount: sequence.favoritedRecordings.aggregate?.count || 0,
+						inLibraryCount: recordingsFavoritedCount || 0,
 						totalCount: sequence.recordings.aggregate?.count || 0,
 					}}
 				/>

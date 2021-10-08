@@ -1,0 +1,39 @@
+@import '../../styles/common';
+
+.box {
+	flex-wrap: wrap;
+	flex-direction: row;
+	@media (min-width: $breakpoint-md) {
+		flex-wrap: nowrap;
+	}
+}
+
+.button {
+	margin-top: 16px;
+	@media (min-width: $breakpoint-md) {
+		margin-top: 0;
+		margin-left: 8px;
+	}
+}
+
+.buttonOpen {
+	border-color: $ts-red;
+}
+
+.dismiss {
+	align-self: flex-end;
+	margin-bottom: 8px;
+	font-size: 12px;
+	@media (min-width: $breakpoint-md) {
+		align-self: auto;
+		margin-left: 32px;
+		margin-bottom: 0;
+	}
+}
+
+.languageAlternative {
+	margin: 8px 16px;
+	> a:hover {
+		text-decoration: none;
+	}
+}

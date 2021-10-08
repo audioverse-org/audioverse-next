@@ -22,15 +22,15 @@
 			display: flex;
 			color: $ts-dark;
 		}
-		a {
+		.navLink {
 			flex-grow: 1;
 			text-decoration: none;
 			display: flex;
 			align-items: center;
 		}
 	}
-	a:hover,
-	a.active {
+	.navLink:hover,
+	.navLink.active {
 		&,
 		.icon {
 			color: $ts-red;

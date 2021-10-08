@@ -96,8 +96,7 @@ function Library({ language }: Props): JSX.Element {
 				type="secondary"
 				href={makeLibraryRoute(languageRoute, routeSlug)}
 				text={label}
-				Icon={ForwardIcon}
-				iconPosition="left"
+				IconLeft={ForwardIcon}
 			/>
 		</div>
 	);
@@ -137,6 +136,7 @@ function Library({ language }: Props): JSX.Element {
 					<CardMasonry
 						items={collectionsItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`collectionItems-${collectionsItems.length}`}
 					/>
 					{makeSeeAllButton(
 						'collections',
@@ -158,6 +158,7 @@ function Library({ language }: Props): JSX.Element {
 					<CardMasonry
 						items={startedItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`startedItems-${startedItems.length}`}
 					/>
 					{makeSeeAllButton(
 						'started',
@@ -179,6 +180,7 @@ function Library({ language }: Props): JSX.Element {
 					<CardMasonry
 						items={unstartedItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`unstartedItems-${unstartedItems.length}`}
 					/>
 					{makeSeeAllButton(
 						'unstarted',
@@ -200,6 +202,7 @@ function Library({ language }: Props): JSX.Element {
 					<CardMasonry
 						items={finishedItems}
 						render={({ data }) => <CardFavorite favorite={data} />}
+						key={`finishedItems-${finishedItems.length}`}
 					/>
 					{makeSeeAllButton(
 						'finished',
@@ -221,6 +224,7 @@ function Library({ language }: Props): JSX.Element {
 					<CardMasonry
 						items={historyItems}
 						render={({ data }) => <CardRecording recording={data.recording} />}
+						key={`historyItems-${historyItems.length}`}
 					/>
 					{makeSeeAllButton(
 						'history',

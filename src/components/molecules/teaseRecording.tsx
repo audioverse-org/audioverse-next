@@ -44,7 +44,8 @@ export default function TeaseRecording({
 }: Props): JSX.Element {
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
-		recording.id
+		recording.id,
+		recording.sequence?.id
 	);
 	const router = useRouter();
 	const session = usePlaybackSession(recording);
