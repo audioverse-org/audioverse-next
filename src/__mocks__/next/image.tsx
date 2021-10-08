@@ -1,6 +1,6 @@
+import _ from 'lodash';
 import { ImageProps } from 'next/image';
 import React from 'react';
-import _ from 'lodash';
 
 function Image(props: ImageProps): JSX.Element {
 	const { width, height, className, ...rest } = props;
