@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import styles from './buttonGuest.module.scss';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
@@ -22,7 +23,7 @@ export default function ButtonGuest({
 	return (
 		<>
 			<a
-				className={clsx('decorated', className)}
+				className={clsx('decorated', className, styles.link)}
 				onClick={() => setIsGuestModalOpen(true)}
 			>
 				Continue as guest
