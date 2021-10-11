@@ -1,151 +1,176 @@
-import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import ActiveLink from '@components/atoms/activeLink';
-import Heading1 from '@components/atoms/heading1';
+import Heading3 from '@components/atoms/heading3';
+import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
+import LanguageButton from '@components/molecules/languageButton';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
-import { makeDiscoverRoute, makeLibraryRoute } from '@lib/routes';
+import SearchBar from '@components/molecules/searchBar';
+import Header from '@components/organisms/header';
+import { getNavigationItems } from '@lib/getNavigationItems';
+import { makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBible from '../../../public/img/icon-bible.svg';
-import IconBlog from '../../../public/img/icon-blog.svg';
-import IconCollections from '../../../public/img/icon-collections.svg';
+import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
+import IconDownload from '../../../public/img/icon-download-light.svg';
 import IconExit from '../../../public/img/icon-exit.svg';
-import IconMore from '../../../public/img/icon-more.svg';
-import IconPlaylist from '../../../public/img/icon-playlist.svg';
-import IconSearch from '../../../public/img/icon-search.svg';
-import IconSettings from '../../../public/img/icon-settings.svg';
 
 import styles from './navigation.module.scss';
 
-const Navigation = ({ onExit }: { onExit: () => void }): JSX.Element => {
+const Navigation = ({
+	onExit,
+	searchTerm,
+	onSearchChange,
+}: {
+	onExit: () => void;
+	searchTerm: string;
+	onSearchChange: (term: string) => void;
+}): JSX.Element => {
 	const languageRoute = useLanguageRoute();
-	const iconSize = 24;
-	const intl = useIntl();
+	const router = useRouter();
+	const [submenu, setSubmenu] = useState('');
 
-	const entries: {
-		key: string;
-		href?: string;
-		Icon: any;
-		label: string;
-	}[] = [
-		{
-			key: 'discover',
-			href: makeDiscoverRoute(languageRoute),
-			Icon: IconSearch,
-			label: intl.formatMessage({
-				id: `header__navItemDiscover`,
-				defaultMessage: 'Discover',
-				description: `Header nav link name: Discover`,
-			}),
-		},
-		{
-			key: 'playlist',
-			href: makeLibraryRoute(languageRoute),
-			Icon: IconPlaylist,
-			label: intl.formatMessage({
-				id: `header__navItemLibrary`,
-				defaultMessage: 'Library',
-				description: `Header nav link name: Library`,
-			}),
-		},
-		{
-			key: 'bibles',
-			href: `/${languageRoute}/bibles`,
-			Icon: IconBible,
-			label: intl.formatMessage({
-				id: `header__naveItemBible`,
-				defaultMessage: 'Bible',
-				description: `Header nav link name: Bible`,
-			}),
-		},
-		{
-			key: 'collections',
-			href: `/${languageRoute}/discover/collections`,
-			Icon: IconCollections,
-			label: intl.formatMessage({
-				id: `header__navItemCollections`,
-				defaultMessage: 'Collections',
-				description: `Header nav link name: Collections`,
-			}),
-		},
-		{
-			key: 'blog',
-			href: `/${languageRoute}/blog`,
-			Icon: IconBlog,
-			label: intl.formatMessage({
-				id: `header__navItemBlog`,
-				defaultMessage: 'Blog',
-				description: `Header nav link name: Blog`,
-			}),
-		},
-		{
-			key: 'settings',
-			Icon: IconSettings,
-			label: intl.formatMessage({
-				id: `header__navItemSettings`,
-				defaultMessage: 'Settings',
-				description: `Header nav link name: Settings`,
-			}),
-		},
-		{
-			key: 'more',
-			Icon: IconMore,
-			label: intl.formatMessage({
-				id: `header__navItemMore`,
-				defaultMessage: 'More',
-				description: `Header nav link name: More`,
-			}),
-		},
-	];
+	const iconSize = 24;
+	const navigationItems = getNavigationItems(languageRoute);
+	const submenuItem = navigationItems.find(({ key }) => submenu === key);
 
 	return (
 		<header className={styles.header}>
-			<div className={styles.titleRow}>
-				<Heading1 unpadded>
-					<FormattedMessage id="navigation_menuTitle" defaultMessage="Menu" />
-				</Heading1>
-				<a onClick={() => onExit()}>
-					<IconExit />
-				</a>
+			<div className={styles.mobileHeader}>
+				<div className={styles.mobileRow}>
+					<Header />
+					<a onClick={() => onExit()}>
+						<IconExit />
+					</a>
+				</div>
+				<div className={styles.mobileRow}>
+					<SearchBar term={searchTerm} onChange={onSearchChange} />
+				</div>
+				<div className={styles.mobileRow}>
+					<LanguageButton
+						buttonType="secondary"
+						onClick={(baseUrl) => {
+							router.push(`/${baseUrl}/`);
+						}}
+					/>
+					<Button
+						type="secondary"
+						text={
+							<FormattedMessage
+								id="navigation__downloadApp"
+								defaultMessage="Download App"
+							/>
+						}
+						IconLeft={IconDownload}
+						IconRight={IconDisclosure}
+						className={styles.downloadButton}
+					/>
+				</div>
 			</div>
 			<ul>
-				{entries.map((e) => {
-					const { Icon } = e;
+				{navigationItems.map(({ Icon, key, label, href, children }) => {
 					const inner = (
 						<>
 							<span className={styles.icon}>
 								<Icon width={iconSize} height={iconSize} />
 							</span>
-							{e.label}
+							{label}
+							{children && (
+								<span className={styles.iconDisclosure}>
+									<IconDisclosure />
+								</span>
+							)}
 						</>
 					);
 
-					if (!e.href) return <li key={e.key}>{inner}</li>;
+					if (!href) {
+						return (
+							<li key={key}>
+								<a className={styles.navLink} onClick={() => setSubmenu(key)}>
+									{inner}
+								</a>
+							</li>
+						);
+					}
 
 					return (
-						<li key={e.key}>
-							<ActiveLink href={e.href} activeClassName={styles.active}>
-								<a className={styles.navLink}>{inner}</a>
+						<li key={key}>
+							<ActiveLink href={href} activeClassName={styles.active}>
+								<a
+									className={styles.navLink}
+									onClick={
+										children
+											? (e) => {
+													e.preventDefault();
+													setSubmenu(key);
+											  }
+											: undefined
+									}
+								>
+									{inner}
+								</a>
 							</ActiveLink>
 						</li>
 					);
 				})}
 			</ul>
 
-			<Button
-				type="super"
-				href={`/${languageRoute}/give`}
-				text={
-					<FormattedMessage
-						id="header__donateButtonLabel"
-						defaultMessage="Donate"
-						description="Header nav donate button label"
-					/>
-				}
-				className={styles.donateButton}
-			/>
+			<div
+				className={clsx(
+					styles.submenu,
+					submenu ? styles.submenuShown : styles.submenuHidden
+				)}
+			>
+				<a
+					className={styles.backToMenu}
+					onClick={(e) => {
+						e.preventDefault();
+						setSubmenu('');
+					}}
+				>
+					<IconDisclosure />
+					<Heading6 sans uppercase unpadded>
+						<FormattedMessage
+							id="navigation__backToMenu"
+							defaultMessage="Back to Menu"
+						/>
+					</Heading6>
+				</a>
+				<Heading3 sans className={styles.submenuHeading}>
+					{submenuItem?.label}
+				</Heading3>
+				<ul className={styles.submenuItems}>
+					{submenuItem?.children?.map(({ key, Icon, label, href }) => (
+						<li key={key}>
+							<Link href={href as string}>
+								<a className={styles.navLink}>
+									<span className={styles.icon}>
+										<Icon />
+									</span>
+									{label}
+								</a>
+							</Link>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<div className={styles.account}>
+				{/* TODO: handle logged-in state */}
+				<Link href={makeLoginRoute(languageRoute)}>
+					<a className="decorated">
+						<FormattedMessage
+							id="navigation__loginSignupCta"
+							defaultMessage="Login/Sign up"
+						/>
+					</a>
+				</Link>
+			</div>
 
 			<LoadingIndicator />
 		</header>

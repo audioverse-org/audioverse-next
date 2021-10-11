@@ -16,10 +16,6 @@
 	}
 }
 
-.buttonOpen {
-	border-color: $ts-red;
-}
-
 .dismiss {
 	align-self: flex-end;
 	margin-bottom: 8px;
@@ -28,12 +24,5 @@
 		align-self: auto;
 		margin-left: 32px;
 		margin-bottom: 0;
-	}
-}
-
-.languageAlternative {
-	margin: 8px 16px;
-	> a:hover {
-		text-decoration: none;
 	}
 }

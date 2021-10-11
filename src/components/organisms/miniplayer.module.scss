@@ -12,11 +12,12 @@
 	height: $miniplayer-height;
 	min-height: 0;
 	background-color: white;
-	display: flex;
+	display: none;
 	justify-content: space-between;
 	align-items: center;
 	border-top: 1px solid $ts-cream;
 	@media (min-width: $breakpoint-lg) {
+		display: flex;
 		z-index: 1001;
 	}
 }

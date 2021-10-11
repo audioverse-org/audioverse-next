@@ -250,16 +250,6 @@ describe('home page', () => {
 		expect(getByText('Testimonies')).toBeInTheDocument();
 	});
 
-	it('disables sidebar', async () => {
-		const { props } = await getStaticProps({
-			params: {
-				language: 'en',
-			},
-		});
-
-		expect(props.disableSidebar).toBeTruthy();
-	});
-
 	it('renders song title', async () => {
 		const { getByText } = await renderPage();
 

@@ -17,7 +17,7 @@ import {
 	RecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { loadQuery, setPlayerMock } from '@lib/test/helpers';
+import { loadRouter, setPlayerMock } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 const sequence = {
@@ -102,7 +102,10 @@ const renderApp = async (
 	recording: Partial<RecordingFragment>,
 	container: any = undefined
 ) => {
-	loadQuery({});
+	loadRouter({
+		pathname: '/[language]/discover',
+		query: {},
+	});
 
 	const result = await render(
 		<MyApp

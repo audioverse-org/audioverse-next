@@ -114,6 +114,9 @@ describe('localization usage', () => {
 		jest.spyOn(intl, 'useIntl').mockReturnValue({
 			formatMessage: formatter,
 		} as any);
+		jest.spyOn(intl, 'createIntl').mockReturnValue({
+			formatMessage: formatter,
+		} as any);
 
 		(readableBytes as jest.Mock).mockReturnValue('z');
 		(useFormattedDuration as jest.Mock).mockReturnValue('z');
@@ -242,10 +245,14 @@ describe('localization usage', () => {
 
 	it('localizes navigation', async () => {
 		const screen = await renderWithQueryProvider(
-			<Navigation onExit={() => void 0} />
+			<Navigation
+				onExit={() => void 0}
+				searchTerm=""
+				onSearchChange={() => void 0}
+			/>
 		);
 
-		expectNoUnlocalizedText(screen);
+		expectNoUnlocalizedText(screen, ['AudioVerse']);
 	});
 
 	it('localizes Bible book page', async () => {

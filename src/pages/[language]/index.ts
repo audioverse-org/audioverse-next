@@ -22,7 +22,6 @@ export async function getStaticProps({
 	return {
 		props: {
 			data,
-			disableSidebar: true,
 		},
 		revalidate: REVALIDATE,
 	};

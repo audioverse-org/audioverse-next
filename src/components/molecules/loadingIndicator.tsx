@@ -6,8 +6,8 @@ import useRouterLoading from '@lib/useRouterLoading';
 
 TopBarProgress.config({
 	barColors: {
-		'0': '#760279',
-		'1.0': '#ff001e',
+		'0': '#ff6e6e',
+		'1.0': '#ff224a',
 	},
 	barThickness: 7,
 });

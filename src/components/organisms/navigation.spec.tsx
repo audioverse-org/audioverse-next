@@ -5,7 +5,13 @@ import { loadRouter, renderWithIntl } from '@lib/test/helpers';
 jest.mock('@lib/api/fetchApi');
 
 const renderNavigation = async () => {
-	return renderWithIntl(<Navigation onExit={() => void 0} />);
+	return renderWithIntl(
+		<Navigation
+			onExit={() => void 0}
+			searchTerm=""
+			onSearchChange={() => void 0}
+		/>
+	);
 };
 
 describe('navigation', () => {

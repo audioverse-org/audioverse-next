@@ -10,7 +10,7 @@ import {
 	SponsorLockupFragment,
 } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../../public/img/fa-feather.svg';
+import HatIcon from '../../../../../public/img/fa-feather-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 
 import styles from './story.module.scss';

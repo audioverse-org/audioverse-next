@@ -10,13 +10,12 @@ import Button from '@components/molecules/button';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
-import LanguageSwitcher from '@components/molecules/languageSwitcher';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { makeLoginRoute, makeRegisterRoute } from '@lib/routes';
+import { makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './home.module.scss';
@@ -34,53 +33,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 
 	return (
 		<div>
-			<header className={styles.header}>
-				<Image src="/img/logo.svg" width={161} height={23} />
-				<nav className={styles.nav}>
-					<LanguageSwitcher />
-					<Button
-						type="super"
-						href={`/${route}/give`}
-						text={
-							<FormattedMessage
-								id="homePage__donateButtonLabel"
-								defaultMessage="Donate"
-								description="home page donate button label"
-							/>
-						}
-					/>
-					<Button
-						type="super"
-						href={`/${route}/app`}
-						text={
-							<FormattedMessage
-								id="homePage__downloadAppButtonLabel"
-								defaultMessage="Download App"
-								description="home page download app button label"
-							/>
-						}
-					/>
-					<div className={styles.divider} />
-					<Link href={makeLoginRoute(route)}>
-						<a>
-							<FormattedMessage
-								id="homePage__loginButtonLabel"
-								defaultMessage="Login"
-								description="home page login button label"
-							/>
-						</a>
-					</Link>
-					<Link href={makeRegisterRoute(route)}>
-						<a>
-							<FormattedMessage
-								id="srcContainersHomeTsx__signUp"
-								defaultMessage="Sign Up"
-								description="home: Sign up button label"
-							/>
-						</a>
-					</Link>
-				</nav>
-			</header>
 			<Section
 				text={
 					<>

@@ -1,23 +1,17 @@
 import clsx from 'clsx';
 import { Router, useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import InfoBox from '@components/atoms/infoBox';
-import { LANGUAGES } from '@lib/constants';
 import { getLanguageId, setLanguageId } from '@lib/cookies';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import getLanguageIds from '@lib/getLanguageIds';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconLanguage from '../../../public/img/icon-language-light.svg';
-
-import Button from './button';
-import Dropdown from './dropdown';
 import styles from './languageAlternativesAlert.module.scss';
+import LanguageButton from './languageButton';
 
 const SUPPORTED_ROUTES = [
+	'/[language]',
 	'/[language]/blog',
 	'/[language]/discover',
 	'/[language]/discover/collections',
@@ -26,14 +20,16 @@ const SUPPORTED_ROUTES = [
 export default function LanguageAlternativesAlert(): JSX.Element | null {
 	const [showingAlert, setShowingAlert] = React.useState(false);
 	const languageRoute = useLanguageRoute();
-	const languageId = getLanguageIdByRoute(languageRoute);
 
 	const router = useRouter();
 
-	const setCurrentRouteToCookie = () => {
-		setLanguageId(languageRoute);
-		setShowingAlert(false);
-	};
+	const setCurrentRouteToCookie = useMemo(
+		() => () => {
+			setLanguageId(languageRoute);
+			setShowingAlert(false);
+		},
+		[languageRoute]
+	);
 
 	useEffect(() => {
 		Router.events.on('routeChangeStart', setCurrentRouteToCookie);
@@ -46,8 +42,6 @@ export default function LanguageAlternativesAlert(): JSX.Element | null {
 	const isServerSide = typeof window === 'undefined';
 	const referrer = isServerSide ? null : document.referrer;
 	const cookieLanguageId = getLanguageId();
-
-	const languageIds = getLanguageIds();
 
 	if (
 		referrer ||
@@ -66,45 +60,15 @@ export default function LanguageAlternativesAlert(): JSX.Element | null {
 					defaultMessage="Thanks to our supporters and international partners, AudioVerse exists in many language sites available. Change your language here or in the menu."
 				/>
 			</div>
-			<Dropdown
-				id="languagesMenu"
-				trigger={({ isOpen, ...props }) => (
-					<Button
-						type="primaryInverse"
-						text={LANGUAGES[languageId].display_name}
-						IconLeft={IconLanguage}
-						IconRight={IconDisclosure}
-						className={clsx(styles.button, isOpen && styles.buttonOpen)}
-						{...props}
-					/>
-				)}
-				alignment="left"
-			>
-				<div className={styles.dropdownContainer}>
-					{languageIds.map((id) => (
-						<p className={styles.languageAlternative} key={id}>
-							<a
-								onClick={(e) => {
-									e.preventDefault();
-									Router.events.off(
-										'routeChangeStart',
-										setCurrentRouteToCookie
-									);
-									setLanguageId(LANGUAGES[id].base_url);
-									router.push(
-										router.pathname.replace(
-											'[language]',
-											LANGUAGES[id].base_url
-										)
-									);
-								}}
-							>
-								{LANGUAGES[id].display_name}
-							</a>
-						</p>
-					))}
-				</div>
-			</Dropdown>
+			<LanguageButton
+				buttonType="primaryInverse"
+				onClick={(baseUrl) => {
+					Router.events.off('routeChangeStart', setCurrentRouteToCookie);
+					setLanguageId(baseUrl);
+					router.push(router.pathname.replace('[language]', baseUrl));
+				}}
+				className={styles.button}
+			/>
 
 			<a
 				onClick={(e) => {
