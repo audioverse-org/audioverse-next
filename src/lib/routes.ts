@@ -9,7 +9,7 @@ export const makePaginationRoute = (
 
 export const makePresenterListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/presenters/page/${page}`;
 
 export const makePresenterRecordingsRoute = (
@@ -93,7 +93,7 @@ export const makeAudiobookFeedRoute = (
 
 export const makeAudiobookListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/books/page/${page}`;
 
 export const makeStoryAlbumFeedRoute = (
@@ -108,7 +108,7 @@ export const makeStoryAlbumListPage = (
 
 export const makeSongAlbumsListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/songs/albums/page/${page}`;
 
 export const makeSongAlbumFeedRoute = (
@@ -164,7 +164,7 @@ export const makeSponsorFeedRoute = (
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/sponsors/page/${page}`;
 
 export const makeSponsorTeachingsRoute = (
@@ -209,7 +209,7 @@ export const makePlaylistDetailRoute = (
 
 export const makeBlogPostListRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
 
 export const makeLoginRoute = (languageRoute: string): string =>

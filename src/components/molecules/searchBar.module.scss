@@ -1,6 +1,7 @@
 @import '../../styles/common';
 
 .base {
+	flex-grow: 1;
 	display: flex;
 }
 
@@ -9,8 +10,7 @@
 	display: flex;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 24px;
-	border-bottom: 0.5px solid $ts-lightTone;
+	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
 	font-family: $serif;
 	font-size: 22px;
 	font-weight: 400;
@@ -19,6 +19,7 @@
 	letter-spacing: unset;
 	> * {
 		flex-grow: 1;
+		color: $ts-dark !important;
 	}
 	input {
 		font-family: $serif;

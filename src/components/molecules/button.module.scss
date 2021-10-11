@@ -62,6 +62,7 @@
 }
 
 .secondary {
+	background: $ts-white;
 	border: 1px solid rgba($ts-dark, 0.5);
 	&,
 	&:hover {

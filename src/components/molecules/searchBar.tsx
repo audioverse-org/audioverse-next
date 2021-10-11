@@ -16,11 +16,9 @@ export default function SearchBar({
 	className,
 	term,
 	onChange,
-	onExit,
 }: {
 	term: string;
 	onChange: (term: string) => void;
-	onExit: () => void;
 	className?: string;
 }): JSX.Element {
 	const intl = useIntl();
@@ -53,19 +51,21 @@ export default function SearchBar({
 						description: 'search bar label',
 					})}
 					endAdornment={
-						<InputAdornment
-							className={term ? '' : styles.clearHidden}
-							position="end"
-						>
-							<a
-								onClick={(e) => {
-									e.preventDefault();
-									onExit();
-								}}
+						term && (
+							<InputAdornment
+								className={term ? '' : styles.clearHidden}
+								position="end"
 							>
-								<IconExit width={24} height={24} />
-							</a>
-						</InputAdornment>
+								<a
+									onClick={(e) => {
+										e.preventDefault();
+										onChange('');
+									}}
+								>
+									<IconExit width={24} height={24} />
+								</a>
+							</InputAdornment>
+						)
 					}
 				/>
 			</form>

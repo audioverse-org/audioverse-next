@@ -1,0 +1,12 @@
+@import '../../styles/common';
+
+.buttonOpen.buttonOpen {
+	border-color: $ts-red;
+}
+
+.languageAlternative {
+	margin: 8px 16px;
+	> a:hover {
+		text-decoration: none;
+	}
+}

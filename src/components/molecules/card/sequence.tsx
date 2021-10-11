@@ -19,10 +19,10 @@ import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
-import BookIcon from '../../../../public/img/fa-book.svg';
-import FeatherIcon from '../../../../public/img/fa-feather.svg';
+import BookIcon from '../../../../public/img/fa-book-light.svg';
+import FeatherIcon from '../../../../public/img/fa-feather-light.svg';
 import ListIcon from '../../../../public/img/fa-list-alt.svg';
-import MusicIcon from '../../../../public/img/fa-music.svg';
+import MusicIcon from '../../../../public/img/fa-music-light.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';

@@ -2,25 +2,24 @@ import { act, render } from '@testing-library/react';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import { loadQuery, loadRouter } from '@lib/test/helpers';
+import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 jest.mock('react-topbar-progress-indicator');
 
 const renderApp = (component: any, props: any) => {
-	loadQuery({});
-
 	return render(<MyApp Component={component} pageProps={props} />);
 };
 
 describe('app', () => {
 	beforeEach(() => {
-		loadRouter({});
+		loadRouter({
+			pathname: '/[language]/discover',
+			query: {},
+		});
 	});
 
 	it('sets title', async () => {
-		loadQuery({});
-
 		const { getByTestId } = await render(
 			<MyApp
 				Component={(() => null) as unknown as typeof React.Component}
@@ -58,7 +57,7 @@ describe('app', () => {
 	it('includes sidebar', async () => {
 		const { getByText } = await renderApp(() => <>h</>, {});
 
-		expect(getByText('Discover')).toBeInTheDocument();
+		expect(getByText('More')).toBeInTheDocument();
 	});
 
 	it('disables sidebar', async () => {
@@ -66,7 +65,7 @@ describe('app', () => {
 			disableSidebar: true,
 		});
 
-		expect(queryByText('Discover')).not.toBeInTheDocument();
+		expect(queryByText('More')).not.toBeInTheDocument();
 	});
 
 	it('sets title with props', async () => {
