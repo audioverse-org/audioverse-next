@@ -14,6 +14,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import Icon from '../../../public/img/icon-info.svg';
 
 import styles from './buttonGuest.module.scss';
+import { FormattedMessage } from 'react-intl';
 
 export default function ButtonGuest({
 	className,
@@ -30,13 +31,21 @@ export default function ButtonGuest({
 				className={clsx('decorated', className, styles.link)}
 				onClick={() => setIsGuestModalOpen(true)}
 			>
-				Continue as guest
+				<FormattedMessage
+					id={'molecule-buttonGuest__label'}
+					defaultMessage={'Continue as guest'}
+				/>
 				<Icon />
 			</a>
 			<Modal
 				open={isGuestModalOpen}
 				onClose={() => setIsGuestModalOpen(false)}
-				title="Continue as guest?"
+				title={
+					<FormattedMessage
+						id={'molecule-buttonGuest__modalTitle'}
+						defaultMessage={'Continue as guest?'}
+					/>
+				}
 				actions={
 					<>
 						<Link href={makeDiscoverRoute(language)}>
