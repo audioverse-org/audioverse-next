@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
@@ -14,7 +15,6 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import Icon from '../../../public/img/icon-info.svg';
 
 import styles from './buttonGuest.module.scss';
-import { FormattedMessage } from 'react-intl';
 
 export default function ButtonGuest({
 	className,
@@ -32,8 +32,8 @@ export default function ButtonGuest({
 				onClick={() => setIsGuestModalOpen(true)}
 			>
 				<FormattedMessage
-					id={'molecule-buttonGuest__label'}
-					defaultMessage={'Continue as guest'}
+					id="molecule-buttonGuest__label"
+					defaultMessage="Continue as guest"
 				/>
 				<Icon />
 			</a>
@@ -42,8 +42,8 @@ export default function ButtonGuest({
 				onClose={() => setIsGuestModalOpen(false)}
 				title={
 					<FormattedMessage
-						id={'molecule-buttonGuest__modalTitle'}
-						defaultMessage={'Continue as guest?'}
+						id="molecule-buttonGuest__modalTitle"
+						defaultMessage="Continue as guest?"
 					/>
 				}
 				actions={
