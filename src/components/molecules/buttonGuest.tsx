@@ -49,30 +49,62 @@ export default function ButtonGuest({
 				actions={
 					<>
 						<Link href={makeDiscoverRoute(language)}>
-							<a className="decorated">Continue as guest</a>
+							<a className="decorated">
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelGuest"
+									defaultMessage="Continue as guest"
+								/>
+							</a>
 						</Link>
 						<Button
 							href={makeLoginRoute(language)}
 							type="primary"
-							text="Log in"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelLogIn"
+									defaultMessage="Log in"
+								/>
+							}
 						/>
 						<Button
 							href={makeRegisterRoute(language)}
 							type="super"
-							text="Create account"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelCreateAccount"
+									defaultMessage="Create account"
+								/>
+							}
 						/>
 					</>
 				}
 			>
 				<p>
-					You&apos;ll be missing out on some key features without an account,
-					like:
+					<FormattedMessage
+						id="molecule-buttonGuest__modalParagraph"
+						defaultMessage="You'll be missing out on some key features without an account, like:"
+					/>
 				</p>
 				{/*TODO: Update list contents*/}
 				<ul>
-					<li>Lorem ipsum dolor</li>
-					<li>Et exictur purim multatim</li>
-					<li>Dulipscum erudis fesin</li>
+					<li>
+						<FormattedMessage
+							id="molecule-buttonGuest__feature1"
+							defaultMessage="Lorem ipsum dolor"
+						/>
+					</li>
+					<li>
+						<FormattedMessage
+							id="molecule-buttonGuest__feature2"
+							defaultMessage="Et exictur purim multatim"
+						/>
+					</li>
+					<li>
+						<FormattedMessage
+							id="molecule-buttonGuest__feature3"
+							defaultMessage="Dulipscum erudis fesin"
+						/>
+					</li>
 				</ul>
 			</Modal>
 		</>
