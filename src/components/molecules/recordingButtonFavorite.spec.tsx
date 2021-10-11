@@ -66,6 +66,8 @@ describe('recording favorite button', () => {
 	});
 
 	it('triggers mutation', async () => {
+		jest.spyOn(api, 'setRecordingFavorited').mockResolvedValue(true);
+
 		const { button } = await renderComponent();
 
 		userEvent.click(button);

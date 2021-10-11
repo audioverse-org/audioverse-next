@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
+import ButtonGuest from '@components/molecules/buttonGuest';
 import Input from '@components/molecules/input';
 import SocialLogin from '@components/molecules/socialLogin';
 import AndOnboarding from '@components/templates/andOnboarding';
@@ -41,7 +42,8 @@ function Register(): JSX.Element {
 		}
 	}, [dataRegister]);
 
-	const onSubmit = () => {
+	const onSubmit = (e: any) => {
+		e.preventDefault();
 		const newErrors = [];
 		if (!email.length) {
 			newErrors.push('email is required');
@@ -189,6 +191,7 @@ function Register(): JSX.Element {
 						centered
 						className={styles.login}
 					/>
+					<ButtonGuest className={styles.guestLink} />
 				</div>
 			</form>
 		</AndOnboarding>

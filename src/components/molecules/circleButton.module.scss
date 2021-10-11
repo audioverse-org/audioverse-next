@@ -7,6 +7,8 @@
 	height: 32px;
 	width: 32px;
 	border-radius: 16px;
+	border: none;
+	background: transparent;
 	transition: background-color $transition-medium;
 	&:hover {
 		cursor: pointer;

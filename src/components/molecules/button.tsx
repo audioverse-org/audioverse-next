@@ -37,23 +37,31 @@ export default function Button({
 	disabled,
 	...props
 }: Props): JSX.Element {
+	const _props = {
+		className: clsx(
+			styles.base,
+			styles[type],
+			centered && styles.centered,
+			disabled && styles.disabled,
+			className
+		),
+		...props,
+	};
+
 	const inner = (
-		<a
-			className={clsx(
-				styles.base,
-				styles[type],
-				centered && styles.centered,
-				disabled && styles.disabled,
-				className
-			)}
-			{...props}
-		>
+		<>
 			{IconLeft && <IconLeft className={clsx(text && styles.iconLeftOfText)} />}
 			{text}
 			{IconRight && (
 				<IconRight className={clsx(text && styles.iconRightOfText)} />
 			)}
-		</a>
+		</>
 	);
-	return href ? <Link href={href}>{inner}</Link> : inner;
+	return href ? (
+		<Link href={href}>
+			<a {..._props}>{inner}</a>
+		</Link>
+	) : (
+		<button {..._props}>{inner}</button>
+	);
 }

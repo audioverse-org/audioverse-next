@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
@@ -240,20 +240,26 @@ describe('register page', () => {
 	});
 
 	it('does not register failed login', async () => {
-		__setFacebookResponse({
-			status: 'FAILED',
+		await act(async () => {
+			__setFacebookResponse({
+				status: 'FAILED',
+			});
+
+			const { getByText } = await renderPage();
+
+			await waitFor(() => {
+				expect(getByText('Sign up with Facebook')).toBeInTheDocument();
+			});
+
+			userEvent.click(getByText('Sign up with Facebook'));
+
+			await sleep();
+
+			expect(mockedFetchApi).not.toBeCalledWith(
+				RegisterSocialDocument,
+				expect.anything()
+			);
 		});
-
-		const { getByText } = await renderPage();
-
-		userEvent.click(getByText('Sign up with Facebook'));
-
-		await sleep();
-
-		expect(mockedFetchApi).not.toBeCalledWith(
-			RegisterSocialDocument,
-			expect.anything()
-		);
 	});
 
 	it('displays facebook login error', async () => {
@@ -302,6 +308,14 @@ describe('register page', () => {
 				},
 			});
 		});
+	});
+
+	it('pops modal on guest click', async () => {
+		const { getByText } = await renderPage();
+
+		userEvent.click(getByText('Continue as guest'));
+
+		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});
 });
 

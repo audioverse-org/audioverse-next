@@ -23,3 +23,14 @@
 	right: 16px;
 	top: 16px;
 }
+
+.buttonRow {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	> * {
+		margin-top: 16px;
+		margin-left: 16px;
+	}
+}
