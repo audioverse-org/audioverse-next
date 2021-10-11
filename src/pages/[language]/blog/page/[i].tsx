@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Blog, { BlogProps } from '@containers/blog';
 import { getBlogPageData, getBlogPathsData } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
@@ -20,7 +22,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'blog',
 		getBlogPathsData,

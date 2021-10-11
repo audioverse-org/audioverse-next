@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Login from '@containers/account/login';
 import { IBaseProps } from '@containers/base';
 import { REVALIDATE } from '@lib/constants';
@@ -15,7 +17,7 @@ export async function getStaticProps(): Promise<StaticProps<IBaseProps>> {
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) => makeLoginRoute(base_url)),
 		fallback: false,

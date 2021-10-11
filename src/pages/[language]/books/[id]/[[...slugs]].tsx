@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import AudiobookDetail, {
 	AudiobookDetailProps,
 } from '@containers/audiobook/detail';
@@ -31,7 +33,7 @@ export async function getStaticProps(props: {
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getAudiobookDetailPathsData,
 		(d) => d.audiobooks.nodes,

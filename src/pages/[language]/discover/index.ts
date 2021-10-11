@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Discover, { DiscoverProps } from '@containers/discover';
 import { REVALIDATE } from '@lib/constants';
 import { getDiscoverPageData } from '@lib/generated/graphql';
@@ -31,7 +33,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) => `/${base_url}/discover`),
 		fallback: false,

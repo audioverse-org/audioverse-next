@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Book, { BookProps } from '@containers/bible/book';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -27,7 +29,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const languageRoutes = getLanguageRoutes();
 	const data = await getBibleBookDetailPathsData({});
 	const bibles = data?.audiobibles.nodes || [];
@@ -39,6 +41,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	return {
 		paths: pathSets.flat(),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

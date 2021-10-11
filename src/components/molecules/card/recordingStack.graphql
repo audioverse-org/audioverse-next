@@ -2,6 +2,9 @@ fragment cardRecordingStack on Sequence {
 	contentType
 	favoritedRecordings: recordings(viewerHasFavorited: true) {
 		nodes {
+			sponsor {
+				...sponsorLockup
+			}
 			...teaseRecording
 			...cardRecordingSequenceHat
 		}

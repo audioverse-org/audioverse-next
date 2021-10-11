@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Blog, { BlogProps } from '@containers/blog';
 import { getBlogPageData, Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -22,7 +24,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) => `/${base_url}/blog`),
 		fallback: false,

@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import PresenterAppears, {
 	PresenterAppearsProps,
 } from '@containers/presenter/appears';
@@ -26,7 +28,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,

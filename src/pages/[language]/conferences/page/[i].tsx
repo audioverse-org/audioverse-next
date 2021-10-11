@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import CollectionList, {
 	CollectionListProps,
 } from '@containers/collection/list';
@@ -23,7 +25,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'conferences',
 		getCollectionListPathsData,

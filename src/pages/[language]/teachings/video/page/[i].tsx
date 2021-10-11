@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
 	getSermonListPageData,
@@ -35,7 +37,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'teachings/video',
 		({ language }) => getSermonListPagePathsData({ language, hasVideo: true }),

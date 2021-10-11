@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import SongBookDetail, {
 	SongBooksDetailProps,
 } from '@containers/song/books/detail';
@@ -30,7 +32,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const routes = getLanguageRoutes();
 	const sets = routes.map((r) =>
 		BIBLE_BOOKS.map((b) => makeBibleMusicRoute(r, b))
@@ -38,6 +40,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	return {
 		paths: sets.flat(),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

@@ -1,8 +1,8 @@
-import ErrorPage from 'next/error';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import LoadingCards from '@components/molecules/loadingCards';
+import NotFound from '@components/organisms/notFound';
 
 const withFailStates = <P extends any>(
 	Component: React.ComponentType<Must<P>>,
@@ -12,7 +12,7 @@ const withFailStates = <P extends any>(
 		const { isFallback = false } = useRouter() || {};
 
 		if (!isFallback && should404 && should404(props)) {
-			return <ErrorPage statusCode={404} />;
+			return <NotFound />;
 		}
 
 		if (isFallback) {

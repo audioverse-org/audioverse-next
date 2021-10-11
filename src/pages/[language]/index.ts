@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import { IBaseProps } from '@containers/base';
 import Home, { HomeProps } from '@containers/home';
 import { REVALIDATE } from '@lib/constants';
@@ -27,7 +29,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) => `/${base_url}`),
 		fallback: false,

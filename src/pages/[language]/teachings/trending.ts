@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import TrendingTeachings from '@containers/sermon/trending';
 import { TrendingTeachingsProps } from '@containers/sermon/trending';
 import { REVALIDATE } from '@lib/constants';
@@ -26,7 +28,7 @@ export async function getStaticProps({
 	return { props: recordings, revalidate: REVALIDATE };
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 	return {
 		paths: baseRoutes.map(makeTrendingSermonRoute),

@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Versions, { VersionsProps } from '@containers/bible/versions';
 import { REVALIDATE } from '@lib/constants';
 import { getBibleVersionsPageData } from '@lib/generated/graphql';
@@ -17,7 +19,7 @@ export async function getStaticProps(): Promise<StaticProps<VersionsProps>> {
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 
 	return {

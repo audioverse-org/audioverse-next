@@ -1,4 +1,4 @@
-import { GetStaticPropsResult } from 'next';
+import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 
 import Version, { VersionProps } from '@containers/bible/version';
 import { REVALIDATE } from '@lib/constants';
@@ -30,7 +30,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const response = await getVersionDetailPathData({});
 	const nodes = response.audiobibles.nodes || [];
 	const versionIds = nodes.map((n) => n.id);

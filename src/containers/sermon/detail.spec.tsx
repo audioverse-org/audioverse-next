@@ -165,7 +165,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('shows loading screen', async () => {
@@ -673,7 +673,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('renders part number', async () => {

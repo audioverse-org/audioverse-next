@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
@@ -31,7 +33,7 @@ export async function getStaticProps({
 	return { props: { sequence }, revalidate: REVALIDATE };
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getStoryAlbumDetailPathsData,
 		(d) => d.storySeasons.nodes,

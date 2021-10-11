@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { GetStaticPathsResult } from 'next';
 
 import {
 	ENTRIES_PER_PAGE,
@@ -29,7 +30,7 @@ export const getNumberedStaticPaths = async <T>(
 	innerSegment: string,
 	getter: Getter<T>,
 	parseCount: Parser<T>
-): Promise<StaticPaths> => {
+): Promise<GetStaticPathsResult> => {
 	const keys = _.keys(LANGUAGES) as Language[];
 	const pathSetPromises = keys.map((k) =>
 		makeLanguagePaths(k, innerSegment, getter, parseCount)
@@ -39,6 +40,6 @@ export const getNumberedStaticPaths = async <T>(
 
 	return {
 		paths,
-		fallback: true,
+		fallback: 'blocking',
 	};
 };

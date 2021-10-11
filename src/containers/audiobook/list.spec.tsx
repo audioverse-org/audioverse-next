@@ -116,7 +116,7 @@ describe('audiobook list page', () => {
 	it('renders 404', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('calculates page count correctly', async () => {

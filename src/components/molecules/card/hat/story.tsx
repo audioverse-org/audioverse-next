@@ -1,14 +1,9 @@
-import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
-import SponsorLockup from '@components/molecules/sponsorLockup';
-import { BaseColors } from '@lib/constants';
-import {
-	CardRecordingFragment,
-	SponsorLockupFragment,
-} from '@lib/generated/graphql';
+import RoundImage from '@components/atoms/roundImage';
+import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/fa-feather-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
@@ -19,13 +14,9 @@ import CardHat from '.';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;
-	sponsor: SponsorLockupFragment | null;
 }
 
-export default function CardHatStory({
-	sequence,
-	sponsor,
-}: Props): JSX.Element {
+export default function CardHatStory({ sequence }: Props): JSX.Element {
 	return (
 		<CardHat
 			title={sequence.title}
@@ -40,26 +31,14 @@ export default function CardHatStory({
 			longHat
 		>
 			<CardRecordingSequenceHat sequence={sequence} inverse>
-				<Heading2 sans className={styles.heading}>
+				<Heading2 sans className={styles.title}>
+					{sequence.image && (
+						<div className={styles.image}>
+							<RoundImage image={sequence.image.url} alt={sequence.title} />
+						</div>
+					)}
 					{sequence.title}
 				</Heading2>
-				{sponsor && (
-					<div className={styles.sponsor}>
-						<SponsorLockup
-							sponsor={sponsor}
-							textColor={BaseColors.LIGHT_TONE}
-							hoverColor={BaseColors.SALMON}
-							isLinked
-							isOptionalLink
-							small
-						/>
-					</div>
-				)}
-				{sequence.image && (
-					<div className={styles.imageContainer}>
-						<Image src={sequence.image.url} layout="fill" />
-					</div>
-				)}
 			</CardRecordingSequenceHat>
 		</CardHat>
 	);

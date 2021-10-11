@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Story, { StoryDetailProps } from '@containers/story/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -27,7 +29,7 @@ export async function getStaticProps({
 	return { props: { recording }, revalidate: REVALIDATE };
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getStoryDetailStaticPaths,
 		(d) => d.stories.nodes,

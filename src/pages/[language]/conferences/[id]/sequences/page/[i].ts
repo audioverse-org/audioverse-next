@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import CollectionSequences, {
 	CollectionSequencesProps,
 } from '@containers/collection/sequences';
@@ -26,7 +28,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,

@@ -102,7 +102,7 @@ describe('conference list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {

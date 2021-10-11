@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Search, { SearchProps } from '@containers/search';
 import { REVALIDATE } from '@lib/constants';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -19,10 +21,10 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const baseRoutes = getLanguageRoutes();
 	return {
 		paths: baseRoutes.map((l) => makeSearchRoute(l)),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

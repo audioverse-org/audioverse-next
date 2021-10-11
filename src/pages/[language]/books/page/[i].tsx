@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import AudiobooksList from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
@@ -25,7 +27,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'books',
 		getAudiobookListPathsData,

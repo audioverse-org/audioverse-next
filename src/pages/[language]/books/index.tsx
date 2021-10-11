@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import AudiobooksList, {
 	AudiobooksListProps,
 } from '@containers/audiobook/list';
@@ -35,9 +37,9 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
 		paths: getLanguageRoutes().map((base_url) => `/${base_url}/books`),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

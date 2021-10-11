@@ -92,7 +92,7 @@ describe('sermons list page', () => {
 	it('sets proper fallback strategy', async () => {
 		const { fallback } = await getStaticPaths();
 
-		expect(fallback).toBe(true);
+		expect(fallback).toBe('blocking');
 	});
 
 	it('generates all pages in language', async () => {
@@ -145,7 +145,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('returns 404 on empty data', async () => {
@@ -154,7 +154,7 @@ describe('sermons list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {

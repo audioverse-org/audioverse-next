@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Testimonies from '@containers/testimonies';
 import {
 	getTestimoniesPageData,
@@ -32,7 +34,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return await getNumberedStaticPaths(
 		'testimonies',
 		getTestimoniesPathsData,

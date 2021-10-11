@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import SongDetail, { SongDetailProps } from '@containers/song/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -35,7 +37,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSongDetailStaticPaths,
 		(d) => d.musicTracks.nodes,

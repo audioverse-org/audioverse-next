@@ -67,6 +67,6 @@ describe('versions list', () => {
 	it('renders 404', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 });

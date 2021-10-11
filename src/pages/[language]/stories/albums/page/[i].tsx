@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import StoryAlbumsList, {
 	StoryAlbumsListProps,
 } from '@containers/story/albums/list';
@@ -28,7 +30,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'stories/albums',
 		getStoriesAlbumsPathData,

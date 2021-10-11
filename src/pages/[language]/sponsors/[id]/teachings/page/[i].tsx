@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import SponsorTeachings, {
 	SponsorTeachingsProps,
 } from '@containers/sponsor/teachings';
@@ -25,7 +27,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorTeachingsPathsData,
 		(d) => d.sponsors.nodes,

@@ -16,14 +16,12 @@ export default function CardStory({
 	story,
 	hideHat,
 }: CardStoryProps): JSX.Element {
-	const { sequence, sponsor } = story;
+	const { sequence } = story;
 	const theme = 'story';
 
 	return (
 		<CardWithTheme {...{ theme }}>
-			{sequence && sponsor && !hideHat && (
-				<CardHatStory sequence={sequence} sponsor={sponsor} />
-			)}
+			{sequence && !hideHat && <CardHatStory sequence={sequence} />}
 			<TeaseRecording {...{ recording: story, theme }} />
 		</CardWithTheme>
 	);

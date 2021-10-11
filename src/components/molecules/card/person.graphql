@@ -4,7 +4,7 @@ fragment cardPerson on Person {
 	canonicalPath(useFuturePath: true)
 	image {
 		id
-		url(size: 64)
+		url(size: 100)
 	}
 	recordings(first: 2, orderBy: [{ field: PUBLISHED_AT, direction: DESC }]) {
 		aggregate {

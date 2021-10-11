@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -33,7 +35,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSermonDetailStaticPaths,
 		(d) => d.sermons.nodes,

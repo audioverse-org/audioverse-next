@@ -1,3 +1,5 @@
+import { GetStaticPathsResult } from 'next';
+
 import Presenters, { PresentersProps } from '@containers/presenter/list';
 import {
 	getPresenterListPageData,
@@ -21,7 +23,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'presenters',
 		getPresenterListPathsData,
