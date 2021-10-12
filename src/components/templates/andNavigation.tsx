@@ -33,7 +33,7 @@ export default function AndNavigation({
 	} = useRouter();
 	const languageRoute = useLanguageRoute();
 	const playbackContext = useContext(PlaybackContext);
-	const [showingMenu, setShowingMenu] = useState<boolean | null>(null);
+	const [showingMenu, setShowingMenu] = useState(false);
 	const [term, setTerm] = useState((q as string) || '');
 	useEffect(() => {
 		if (q) {
@@ -100,7 +100,6 @@ export default function AndNavigation({
 				<div
 					className={clsx(
 						styles.navigation,
-						showingMenu === false && styles.navigationHidden,
 						showingMenu && styles.navigationShown
 					)}
 				>

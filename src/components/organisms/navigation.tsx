@@ -33,7 +33,7 @@ const Navigation = ({
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
-	const [submenu, setSubmenu] = useState<string | null>(null);
+	const [submenu, setSubmenu] = useState('');
 
 	const iconSize = 24;
 	const navigationItems = getNavigationItems(languageRoute);
@@ -120,13 +120,7 @@ const Navigation = ({
 				})}
 			</ul>
 
-			<div
-				className={clsx(
-					styles.submenu,
-					typeof submenu === 'string' && !submenu && styles.submenuHidden,
-					submenu && styles.submenuShown
-				)}
-			>
+			<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
 				<a
 					className={styles.backToMenu}
 					onClick={(e) => {
