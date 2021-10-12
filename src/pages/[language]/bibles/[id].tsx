@@ -1,4 +1,8 @@
-import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import Version, { VersionProps } from '@containers/bible/version';
 import { REVALIDATE } from '@lib/constants';
@@ -13,11 +17,11 @@ export default Version;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { id: string };
-}): Promise<GetStaticPropsResult<VersionProps>> {
+}: GetStaticPropsContext<{ id: string }>): Promise<
+	GetStaticPropsResult<VersionProps>
+> {
 	const { audiobible } = await getVersionDetailPageData({
-		id: params.id,
+		id: params?.id as string,
 	}).catch(() => ({
 		audiobible: null,
 	}));

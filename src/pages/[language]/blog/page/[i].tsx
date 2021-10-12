@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import Blog, { BlogProps } from '@containers/blog';
 import { getBlogPageData, getBlogPathsData } from '@lib/generated/graphql';
@@ -7,13 +11,11 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default Blog;
 
-export interface GetStaticPropsArgs {
-	params: { i: string; language: string };
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<BlogProps>> {
+}: GetStaticPropsContext<{ i: string; language: string }>): Promise<
+	GetStaticPropsResult<BlogProps>
+> {
 	return getPaginatedStaticProps(
 		params,
 		getBlogPageData,

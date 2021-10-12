@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import CollectionList, {
 	CollectionListProps,
@@ -14,9 +18,9 @@ export default CollectionList;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; i: string };
-}): Promise<StaticProps<CollectionListProps>> {
+}: GetStaticPropsContext<{ language: string; i: string }>): Promise<
+	GetStaticPropsResult<CollectionListProps>
+> {
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,

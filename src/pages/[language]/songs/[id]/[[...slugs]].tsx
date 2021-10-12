@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SongDetail, { SongDetailProps } from '@containers/song/detail';
 import { REVALIDATE } from '@lib/constants';
@@ -10,7 +14,7 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default SongDetail;
 
-export type SongTrackStaticProps = StaticProps<
+export type SongTrackStaticProps = GetStaticPropsResult<
 	SongDetailProps & {
 		title?: string;
 	}
@@ -18,10 +22,8 @@ export type SongTrackStaticProps = StaticProps<
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { id: string };
-}): Promise<SongTrackStaticProps> {
-	const { id } = params;
+}: GetStaticPropsContext<{ id: string }>): Promise<SongTrackStaticProps> {
+	const id = params?.id as string;
 	const { musicTrack: recording } = await getSongDetailData({
 		id,
 	}).catch(() => ({

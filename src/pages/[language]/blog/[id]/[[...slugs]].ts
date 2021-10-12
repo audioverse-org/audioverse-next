@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
 import { REVALIDATE } from '@lib/constants';
@@ -13,13 +17,12 @@ export default BlogPostDetail;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { id: string; language: string };
-}): Promise<StaticProps<BlogPostDetailProps>> {
-	const { id, language } = params;
+}: GetStaticPropsContext<{ id: string; language: string }>): Promise<
+	GetStaticPropsResult<BlogPostDetailProps>
+> {
 	const { blogPost, blogPosts } = await getBlogDetailData({
-		id,
-		language: getLanguageIdByRoute(language),
+		id: params?.id as string,
+		language: getLanguageIdByRoute(params?.language),
 	}).catch(() => ({
 		blogPost: null,
 		blogPosts: { nodes: [] },

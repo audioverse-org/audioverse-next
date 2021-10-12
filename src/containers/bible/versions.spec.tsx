@@ -9,7 +9,7 @@ import Versions, {
 } from '@pages/[language]/bibles';
 
 async function renderPage() {
-	const { props } = await getStaticProps();
+	const { props } = (await getStaticProps()) as any;
 	return renderWithIntl(<Versions {...props} />);
 }
 

@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import CollectionDetail, {
 	CollectionDetailProps,
@@ -14,10 +18,10 @@ export default CollectionDetail;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<CollectionDetailProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<CollectionDetailProps>
+> {
+	const id = params?.id as string;
 	return {
 		props: await getCollectionDetailPageData({ id }).catch(() => ({
 			collection: null,

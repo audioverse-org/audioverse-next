@@ -1,4 +1,4 @@
-import { GetStaticPathsResult } from 'next';
+import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 
 import Register from '@containers/account/register';
 import { IBaseProps } from '@containers/base';
@@ -8,7 +8,9 @@ import { makeRegisterRoute } from '@lib/routes';
 
 export default Register;
 
-export async function getStaticProps(): Promise<StaticProps<IBaseProps>> {
+export async function getStaticProps(): Promise<
+	GetStaticPropsResult<IBaseProps>
+> {
 	return {
 		props: {
 			disableSidebar: true,

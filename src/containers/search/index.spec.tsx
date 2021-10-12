@@ -25,11 +25,11 @@ describe('search', () => {
 	});
 
 	it('includes props', async () => {
-		const { props } = await getStaticProps({
+		const { props } = (await getStaticProps({
 			params: {
 				language: 'en',
 			},
-		});
+		})) as any;
 
 		expect(props).toBeDefined();
 	});

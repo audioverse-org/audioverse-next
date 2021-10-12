@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
@@ -12,17 +16,12 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default StoryAlbumDetail;
 
-export interface GetStaticPropsArgs {
-	params: {
-		language: string;
-		id: string;
-	};
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<StoryAlbumDetailProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ id: string; language: string }>): Promise<
+	GetStaticPropsResult<StoryAlbumDetailProps>
+> {
+	const id = params?.id as string;
 
 	const { storySeason: sequence } = await getStoryAlbumDetailPageData({
 		id,

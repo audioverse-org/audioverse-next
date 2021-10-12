@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import Search, { SearchProps } from '@containers/search';
 import { REVALIDATE } from '@lib/constants';
@@ -10,12 +14,12 @@ export default Search;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string };
-}): Promise<StaticProps<SearchProps>> {
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<SearchProps>
+> {
 	return {
 		props: {
-			language: getLanguageIdByRoute(params.language),
+			language: getLanguageIdByRoute(params?.language),
 		},
 		revalidate: REVALIDATE,
 	};

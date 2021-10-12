@@ -201,7 +201,9 @@ describe('sermons list page', () => {
 	it('revalidates static pages', async () => {
 		loadSermonListData();
 
-		const props = await getStaticProps({ params: { i: '2', language: 'en' } });
+		const props = (await getStaticProps({
+			params: { i: '2', language: 'en' },
+		})) as any;
 
 		expect(props.revalidate).toBe(60);
 	});

@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import CollectionSequences, {
 	CollectionSequencesProps,
@@ -15,10 +19,10 @@ export default CollectionSequences;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<CollectionSequencesProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<CollectionSequencesProps>
+> {
+	const id = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
 		({ first, offset }) =>

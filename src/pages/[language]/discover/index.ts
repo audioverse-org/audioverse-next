@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import Discover, { DiscoverProps } from '@containers/discover';
 import { REVALIDATE } from '@lib/constants';
@@ -10,9 +14,9 @@ export default Discover;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string };
-}): Promise<StaticProps<DiscoverProps>> {
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<DiscoverProps>
+> {
 	const language = getLanguageIdByRoute(params?.language);
 	return {
 		props: await getDiscoverPageData({ language }).catch(() => ({

@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { REVALIDATE } from '@lib/constants';
@@ -10,7 +14,7 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default SermonDetail;
 
-export type SermonStaticProps = StaticProps<
+export type SermonStaticProps = GetStaticPropsResult<
 	SermonDetailProps & {
 		title?: string;
 	}
@@ -18,10 +22,8 @@ export type SermonStaticProps = StaticProps<
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { id: string };
-}): Promise<SermonStaticProps> {
-	const { id } = params;
+}: GetStaticPropsContext<{ id: string }>): Promise<SermonStaticProps> {
+	const id = params?.id as string;
 	const { sermon: recording } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: null,
 	}));

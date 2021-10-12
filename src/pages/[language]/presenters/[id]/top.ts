@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import PresenterTop, { PresenterTopProps } from '@containers/presenter/top';
 import { REVALIDATE } from '@lib/constants';
@@ -13,10 +17,10 @@ export default PresenterTop;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string };
-}): Promise<StaticProps<PresenterTopProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
+	GetStaticPropsResult<PresenterTopProps>
+> {
+	const id = params?.id as string;
 	return {
 		props: await getPresenterTopPageData({
 			id,

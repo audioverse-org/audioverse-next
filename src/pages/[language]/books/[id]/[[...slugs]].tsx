@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import AudiobookDetail, {
 	AudiobookDetailProps,
@@ -12,12 +16,12 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default AudiobookDetail;
 
-type AudiobookStaticProps = StaticProps<AudiobookDetailProps>;
+type AudiobookStaticProps = GetStaticPropsResult<AudiobookDetailProps>;
 
-export async function getStaticProps(props: {
-	params: { id: string };
-}): Promise<AudiobookStaticProps> {
-	const { id } = props.params;
+export async function getStaticProps({
+	params,
+}: GetStaticPropsContext<{ id: string }>): Promise<AudiobookStaticProps> {
+	const id = params?.id as string;
 
 	const { audiobook: sequence } = await getAudiobookDetailPageData({
 		id,

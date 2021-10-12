@@ -12,15 +12,16 @@ import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
-	GetStaticPropsArgs,
 } from '@pages/[language]/books/page/[i]';
 
-async function renderPage(params: Partial<GetStaticPropsArgs['params']> = {}) {
+async function renderPage(
+	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
+) {
 	loadRouter({ query: params });
 
-	const { props } = await getStaticProps({
+	const { props } = (await getStaticProps({
 		params: { language: 'en', i: '1', ...params },
-	});
+	})) as any;
 
 	return renderWithIntl(<AudiobooksList {...props} />);
 }

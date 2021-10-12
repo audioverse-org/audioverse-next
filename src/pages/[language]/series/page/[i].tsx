@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SeriesList, { SeriesListProps } from '@containers/series/list';
 import {
@@ -12,9 +16,9 @@ export default SeriesList;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; i: string };
-}): Promise<StaticProps<SeriesListProps>> {
+}: GetStaticPropsContext<{ language: string; i: string }>): Promise<
+	GetStaticPropsResult<SeriesListProps>
+> {
 	return getPaginatedStaticProps(
 		params,
 		getSeriesListPageData,

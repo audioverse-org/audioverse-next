@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SongBookDetail, {
 	SongBooksDetailProps,
@@ -13,11 +17,11 @@ export default SongBookDetail;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; book: string };
-}): Promise<StaticProps<SongBooksDetailProps>> {
-	const { language: languageRoute, book } = params;
-	const language = getLanguageIdByRoute(languageRoute);
+}: GetStaticPropsContext<{ language: string; book: string }>): Promise<
+	GetStaticPropsResult<SongBooksDetailProps>
+> {
+	const book = params?.book as string;
+	const language = getLanguageIdByRoute(params?.language);
 
 	const { musicTracks } = await getSongBooksDetailPageData({
 		language,

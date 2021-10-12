@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import StoryAlbumsList, {
 	StoryAlbumsListProps,
@@ -12,16 +16,12 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default StoryAlbumsList;
 
-export interface GetStaticPropsArgs {
-	params: {
-		language: string;
-		i: string;
-	};
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<StoryAlbumsListProps>> {
+}: GetStaticPropsContext<{
+	language: string;
+	i: string;
+}>): Promise<GetStaticPropsResult<StoryAlbumsListProps>> {
 	return getPaginatedStaticProps(
 		params,
 		getStoriesAlbumsPageData,

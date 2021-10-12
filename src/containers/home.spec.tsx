@@ -201,7 +201,9 @@ describe('home page', () => {
 	});
 
 	it('revalidates static copy frequently', async () => {
-		const { revalidate } = await getStaticProps({ params: { language: 'en' } });
+		const { revalidate } = (await getStaticProps({
+			params: { language: 'en' },
+		})) as any;
 
 		expect(revalidate).toBe(60);
 	});

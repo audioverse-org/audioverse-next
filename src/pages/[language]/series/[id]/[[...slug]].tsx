@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
 import { REVALIDATE } from '@lib/constants';
@@ -11,14 +15,15 @@ import { makeSeriesDetailRoute } from '@lib/routes';
 
 export default SeriesDetail;
 
-export type SeriesStaticProps = StaticProps<SeriesDetailProps>;
+export type SeriesStaticProps = GetStaticPropsResult<SeriesDetailProps>;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string };
-}): Promise<SeriesStaticProps> {
-	const { id } = params;
+}: GetStaticPropsContext<{
+	language: string;
+	id: string;
+}>): Promise<SeriesStaticProps> {
+	const id = params?.id as string;
 
 	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
 		series: null,

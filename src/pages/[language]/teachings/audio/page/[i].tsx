@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
@@ -10,13 +14,11 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default SermonList;
 
-interface GetStaticPropsArgs {
-	params: { i: string; language: string };
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<SermonListProps>> {
+}: GetStaticPropsContext<{ i: string; language: string }>): Promise<
+	GetStaticPropsResult<SermonListProps>
+> {
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) => {

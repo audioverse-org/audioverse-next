@@ -153,7 +153,7 @@ describe('sermon detail page', () => {
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
-		const result = await getStaticProps({ params: { id: '1' } });
+		const result = (await getStaticProps({ params: { id: '1' } })) as any;
 
 		expect(result.props.recording).toBeNull();
 	});
@@ -746,7 +746,7 @@ describe('sermon detail page', () => {
 	it('sets head title', async () => {
 		loadSermonDetailData();
 
-		const result = await getStaticProps({ params: { id: 'the_id' } });
+		const result = (await getStaticProps({ params: { id: 'the_id' } })) as any;
 
 		expect(result.props.title).toEqual('the_sermon_title');
 	});

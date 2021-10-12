@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import Presenters, { PresentersProps } from '@containers/presenter/list';
 import {
@@ -12,9 +16,9 @@ export default Presenters;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; i: string };
-}): Promise<StaticProps<PresentersProps>> {
+}: GetStaticPropsContext<{ language: string; i: string }>): Promise<
+	GetStaticPropsResult<PresentersProps>
+> {
 	return getPaginatedStaticProps(
 		params,
 		getPresenterListPageData,

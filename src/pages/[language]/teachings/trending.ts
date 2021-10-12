@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import TrendingTeachings from '@containers/sermon/trending';
 import { TrendingTeachingsProps } from '@containers/sermon/trending';
@@ -10,14 +14,12 @@ import { makeTrendingSermonRoute } from '@lib/routes';
 
 export default TrendingTeachings;
 
-interface GetStaticPropsArgs {
-	params: { language: string };
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<TrendingTeachingsProps>> {
-	const language = getLanguageIdByRoute(params.language);
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<TrendingTeachingsProps>
+> {
+	const language = getLanguageIdByRoute(params?.language);
 
 	const { recordings } = await getTrendingTeachingsPageData({
 		language,

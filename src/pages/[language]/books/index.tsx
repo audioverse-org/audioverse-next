@@ -1,4 +1,8 @@
-import { GetStaticPathsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 import AudiobooksList, {
 	AudiobooksListProps,
@@ -13,16 +17,14 @@ import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default AudiobooksList;
 
-export type AudiobooksStaticProps = StaticProps<AudiobooksListProps>;
-
-export interface GetStaticPropsArgs {
-	params: { language: string };
-}
+export type AudiobooksStaticProps = GetStaticPropsResult<AudiobooksListProps>;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<AudiobooksStaticProps> {
-	const language = getLanguageIdByRoute(params.language);
+}: GetStaticPropsContext<{
+	language: string;
+}>): Promise<AudiobooksStaticProps> {
+	const language = getLanguageIdByRoute(params?.language);
 	const result = await getAudiobookListPageData({ language }).catch(
 		() =>
 			({
