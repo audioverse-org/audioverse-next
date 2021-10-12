@@ -36,6 +36,7 @@ html {
 
 body {
 	min-height: 100%;
+	background: $ts-cream;
 }
 
 html,
@@ -86,6 +87,9 @@ h6 {
 }
 
 @media (min-width: $breakpoint-lg) {
+	body {
+		background: $ts-white;
+	}
 	h1 {
 		font-size: 44px;
 	}

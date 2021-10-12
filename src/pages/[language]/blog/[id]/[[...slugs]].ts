@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -18,7 +19,7 @@ export default BlogPostDetail;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ id: string; language: string }>): Promise<
-	GetStaticPropsResult<BlogPostDetailProps>
+	GetStaticPropsResult<BlogPostDetailProps & IBaseProps>
 > {
 	const { blogPost, blogPosts } = await getBlogDetailData({
 		id: params?.id as string,
@@ -32,7 +33,7 @@ export async function getStaticProps({
 		props: {
 			blogPost,
 			blogPosts,
-			title: blogPost?.title || null,
+			title: blogPost?.title,
 		},
 		revalidate: REVALIDATE,
 	};

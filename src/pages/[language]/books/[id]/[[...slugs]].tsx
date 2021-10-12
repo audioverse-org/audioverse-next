@@ -32,6 +32,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			sequence,
+			title: sequence?.title,
 		},
 		revalidate: REVALIDATE,
 	};

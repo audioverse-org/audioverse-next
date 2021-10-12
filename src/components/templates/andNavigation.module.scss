@@ -3,6 +3,7 @@
 .wrapper {
 	position: relative;
 	overflow: hidden;
+	background: $ts-white;
 }
 
 .base {
@@ -14,7 +15,8 @@
 .mobileHeader {
 	display: flex;
 	flex-direction: column;
-	padding: 24px 24px 8px;
+	padding: 24px calc(24px + env(safe-area-inset-right)) 8px
+		calc(24px + env(safe-area-inset-left));
 	background: $ts-cream;
 }
 .mobileHeaderTitle {
@@ -64,7 +66,7 @@
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	padding: 32px 24px;
+	padding: 24px 24px 32px;
 	background: $ts-cream;
 	z-index: 1000;
 	transition: transform $transition-medium;
@@ -80,7 +82,8 @@
 
 .content {
 	flex: 1 1 100%;
-	padding: 24px;
+	padding: 24px calc(24px + env(safe-area-inset-right)) 24px
+		calc(24px + env(safe-area-inset-left));
 	max-width: $content-maxWidth-sm;
 	margin: 0 auto;
 	@media (min-width: $breakpoint-md) {

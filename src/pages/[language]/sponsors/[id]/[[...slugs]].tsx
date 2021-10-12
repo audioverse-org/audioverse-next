@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -17,13 +18,17 @@ export default SponsorDetail;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
-	GetStaticPropsResult<SponsorDetailProps>
+	GetStaticPropsResult<SponsorDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
+	const { sponsor } = await getSponsorDetailPageData({ id }).catch(() => ({
+		sponsor: null,
+	}));
 	return {
-		props: await getSponsorDetailPageData({ id }).catch(() => ({
-			sponsor: null,
-		})),
+		props: {
+			sponsor,
+			title: sponsor?.title,
+		},
 		revalidate: REVALIDATE,
 	};
 }

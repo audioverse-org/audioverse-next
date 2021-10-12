@@ -5529,6 +5529,7 @@ export type GetWithAuthGuardDataQuery = {
 
 export type ButtonDownloadFragment = {
 	__typename?: 'Recording';
+	isDownloadAllowed: boolean;
 	videoDownloads: Array<{
 		__typename?: 'VideoFile';
 		url: string;
@@ -6124,6 +6125,7 @@ export type PlayerFragment = {
 	title: string;
 	canonicalPath: string;
 	duration: number;
+	isDownloadAllowed: boolean;
 	shareUrl: string;
 	sequence: {
 		__typename?: 'Sequence';
@@ -6320,6 +6322,7 @@ export type RecordingFragment = {
 	copyrightYear: number | null;
 	canonicalPath: string;
 	duration: number;
+	isDownloadAllowed: boolean;
 	speakers: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -6966,6 +6969,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 		copyrightYear: number | null;
 		canonicalPath: string;
 		duration: number;
+		isDownloadAllowed: boolean;
 		speakers: Array<{
 			__typename?: 'Person';
 			name: string;
@@ -9845,6 +9849,7 @@ export type GetSermonDetailDataQuery = {
 		copyrightYear: number | null;
 		canonicalPath: string;
 		duration: number;
+		isDownloadAllowed: boolean;
 		speakers: Array<{
 			__typename?: 'Person';
 			name: string;
@@ -10459,6 +10464,7 @@ export type GetSongDetailDataQuery = {
 		copyrightYear: number | null;
 		canonicalPath: string;
 		duration: number;
+		isDownloadAllowed: boolean;
 		speakers: Array<{
 			__typename?: 'Person';
 			name: string;
@@ -11279,6 +11285,7 @@ export type GetStoryDetailDataQuery = {
 		copyrightYear: number | null;
 		canonicalPath: string;
 		duration: number;
+		isDownloadAllowed: boolean;
 		speakers: Array<{
 			__typename?: 'Person';
 			name: string;
@@ -12000,6 +12007,7 @@ export const SequenceNavFragmentDoc = `
     `;
 export const ButtonDownloadFragmentDoc = `
     fragment buttonDownload on Recording {
+  isDownloadAllowed
   videoDownloads: videoFiles(allowedContainers: MP4) {
     url
     filesize
@@ -12044,7 +12052,7 @@ export const RecordingFragmentDoc = `
   }
   description
   imageWithFallback {
-    url(size: 100)
+    url(size: 1200)
   }
   recordingDate
   recordingTags {

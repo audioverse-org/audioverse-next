@@ -1,9 +1,9 @@
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { Children, ReactNode } from 'react';
+import React, { Children, ReactElement } from 'react';
 
 type ActiveLinkProps = LinkProps & {
-	children: ReactNode;
+	children: ReactElement;
 	activeClassName: string;
 };
 
@@ -16,8 +16,7 @@ const ActiveLink = ({
 }: ActiveLinkProps): JSX.Element => {
 	const { asPath } = useRouter() || {};
 
-	// TODO: Improve type
-	const child: any = Children.only(children);
+	const child = Children.only(children);
 
 	if (!child) throw new Error('Could not find child');
 

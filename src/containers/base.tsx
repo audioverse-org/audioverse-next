@@ -16,6 +16,7 @@ import AndNavigation from '@components/templates/andNavigation';
 export interface IBaseProps {
 	disableSidebar?: boolean;
 	title?: string;
+	description?: string | null;
 	dehydratedState?: DehydratedState;
 }
 
@@ -49,16 +50,18 @@ function Base<P>({
 	Component: typeof React.Component;
 	pageProps: P & IBaseProps;
 }): JSX.Element {
-	const { disableSidebar, title, dehydratedState } = pageProps;
+	const { description, disableSidebar, title, dehydratedState } = pageProps;
 	return (
 		<>
 			<React.StrictMode>
 				<Head>
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
+					{description && <meta name="description" content={description} />}
 					<meta
 						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0"
+						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0, viewport-fit=cover"
 					/>
+					<meta name="theme-color" content="#efebeb" />
 					<link rel="icon" href="/favicon.ico" sizes="any" />
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />

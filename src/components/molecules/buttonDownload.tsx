@@ -12,17 +12,20 @@ import IconDownload from '../../../public/img/icon-download.svg';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
-/* TODO: Disable if downloads not allowed */
 export default function ButtonDownload({
 	recording,
 	backgroundColor,
 }: {
 	recording: ButtonDownloadFragment;
 	backgroundColor: BaseColors;
-}): JSX.Element {
-	const { audioDownloads = [], videoDownloads = [] } = recording;
+}): JSX.Element | null {
+	const { audioDownloads, videoDownloads, isDownloadAllowed } = recording;
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const intl = useIntl();
+
+	if (!isDownloadAllowed) {
+		return null;
+	}
 
 	const handleClose = () => {
 		setAnchorEl(null);

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -37,9 +38,11 @@ interface RecordingProps {
 export function Recording({ recording }: RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const {
+		id,
 		contentType,
 		collection,
 		description,
+		imageWithFallback,
 		recordingDate,
 		sequence,
 		sequenceIndex,
@@ -181,6 +184,13 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
+			<Head>
+				<meta
+					name="apple-itunes-app"
+					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
+				/>
+				<link href={imageWithFallback.url} rel="image_src" />
+			</Head>
 			{recording?.sequence && (
 				<Link href={recording.sequence.canonicalPath}>
 					<a className={styles.hat}>

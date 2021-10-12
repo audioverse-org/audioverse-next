@@ -1,7 +1,9 @@
 @import '../../styles/common';
 
 .contentWithPlayer {
-	padding-bottom: $miniplayer-height;
+	@media (min-width: $breakpoint-lg) {
+		padding-bottom: $miniplayer-height;
+	}
 }
 
 .videoOrigin,

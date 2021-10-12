@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Song, { SongAlbumDetailProps } from '@containers/song/albums/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -17,7 +18,7 @@ export default Song;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string }>): Promise<
-	GetStaticPropsResult<SongAlbumDetailProps>
+	GetStaticPropsResult<SongAlbumDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
 
@@ -30,6 +31,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			sequence: musicAlbum,
+			title: musicAlbum?.title,
 		},
 		revalidate: REVALIDATE,
 	};

@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import PresenterDetail, {
 	PresenterDetailProps,
 } from '@containers/presenter/detail';
@@ -20,28 +21,32 @@ export default PresenterDetail;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string }>): Promise<
-	GetStaticPropsResult<PresenterDetailProps>
+	GetStaticPropsResult<PresenterDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
+	const result = await getPresenterDetailPageData({
+		id,
+		language: getLanguageIdByRoute(params?.language),
+	}).catch(() => ({
+		person: null,
+		sequences: {
+			nodes: [],
+			pageInfo: {
+				hasNextPage: false,
+			},
+		},
+		collections: {
+			nodes: [],
+			pageInfo: {
+				hasNextPage: false,
+			},
+		},
+	}));
 	return {
-		props: await getPresenterDetailPageData({
-			id,
-			language: getLanguageIdByRoute(params?.language),
-		}).catch(() => ({
-			person: null,
-			sequences: {
-				nodes: [],
-				pageInfo: {
-					hasNextPage: false,
-				},
-			},
-			collections: {
-				nodes: [],
-				pageInfo: {
-					hasNextPage: false,
-				},
-			},
-		})),
+		props: {
+			...result,
+			title: result.person?.name,
+		},
 		revalidate: REVALIDATE,
 	};
 }

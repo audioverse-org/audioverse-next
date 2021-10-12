@@ -3,7 +3,9 @@ import {
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
+import striptags from 'striptags';
 
+import { IBaseProps } from '@containers/base';
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -15,9 +17,7 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 export default SermonDetail;
 
 export type SermonStaticProps = GetStaticPropsResult<
-	SermonDetailProps & {
-		title?: string;
-	}
+	SermonDetailProps & IBaseProps
 >;
 
 export async function getStaticProps({
@@ -32,6 +32,7 @@ export async function getStaticProps({
 		props: {
 			recording,
 			title: recording?.title,
+			description: striptags(recording?.description || ''),
 		},
 		revalidate: REVALIDATE,
 	};
