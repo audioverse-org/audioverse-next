@@ -4,6 +4,17 @@ module.exports = withPWA({
 	pwa: {
 		dest: 'public',
 	},
+	headers: [
+		{
+			source: '/(.*)',
+			headers: [
+				{
+					key: 'Permissions-Policy',
+					value: 'interest-cohort=()',
+				},
+			],
+		},
+	],
 	async redirects() {
 		const languagePrefixMap = {
 			english: 'en',
