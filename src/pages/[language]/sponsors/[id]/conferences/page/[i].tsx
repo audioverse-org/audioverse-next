@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import SponsorConferences, {
 	SponsorConferencesProps,
 } from '@containers/sponsor/conferences';
@@ -13,10 +19,10 @@ export default SponsorConferences;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<SponsorConferencesProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<SponsorConferencesProps>
+> {
+	const id = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
 		(vars) => getSponsorConferencesPageData({ id, ...vars }),
@@ -25,7 +31,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorConferencesPathsData,
 		(d) => d.sponsors.nodes,

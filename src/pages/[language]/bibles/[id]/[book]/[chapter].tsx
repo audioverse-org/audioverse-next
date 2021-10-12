@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import Book, { BookProps } from '@containers/bible/book';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -11,10 +17,14 @@ export default Book;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { id: string; book: string; chapter: string };
-}): Promise<StaticProps<BookProps>> {
-	const { id, book, chapter } = params;
+}: GetStaticPropsContext<{
+	id: string;
+	book: string;
+	chapter: string;
+}>): Promise<GetStaticPropsResult<BookProps>> {
+	const id = params?.id as string;
+	const book = params?.book as string;
+	const chapter = params?.chapter as string;
 
 	const { audiobible } = await getBibleBookDetailPageData({
 		versionId: id,
@@ -27,7 +37,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const languageRoutes = getLanguageRoutes();
 	const data = await getBibleBookDetailPathsData({});
 	const bibles = data?.audiobibles.nodes || [];
@@ -39,6 +49,6 @@ export async function getStaticPaths(): Promise<StaticPaths> {
 
 	return {
 		paths: pathSets.flat(),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

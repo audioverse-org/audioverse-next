@@ -120,12 +120,7 @@ const Navigation = ({
 				})}
 			</ul>
 
-			<div
-				className={clsx(
-					styles.submenu,
-					submenu ? styles.submenuShown : styles.submenuHidden
-				)}
-			>
+			<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
 				<a
 					className={styles.backToMenu}
 					onClick={(e) => {

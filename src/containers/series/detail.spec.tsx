@@ -78,7 +78,7 @@ describe('series detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('gets static path data', async () => {

@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
@@ -10,17 +16,12 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default StoryAlbumDetail;
 
-export interface GetStaticPropsArgs {
-	params: {
-		language: string;
-		id: string;
-	};
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<StoryAlbumDetailProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ id: string; language: string }>): Promise<
+	GetStaticPropsResult<StoryAlbumDetailProps>
+> {
+	const id = params?.id as string;
 
 	const { storySeason: sequence } = await getStoryAlbumDetailPageData({
 		id,
@@ -31,7 +32,7 @@ export async function getStaticProps({
 	return { props: { sequence }, revalidate: REVALIDATE };
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getStoryAlbumDetailPathsData,
 		(d) => d.storySeasons.nodes,

@@ -13,11 +13,9 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './notFound.module.scss';
 
-export type NotFoundProps = GetNotFoundPageDataQuery;
+export type NotFoundProps = Partial<GetNotFoundPageDataQuery>;
 
-export default function NotFound({
-	websiteRecentRecordings: recordings,
-}: NotFoundProps): JSX.Element {
+export default function NotFound(props: NotFoundProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	return (
 		<>
@@ -48,17 +46,24 @@ export default function NotFound({
 					href={makeDiscoverRoute(languageRoute)}
 				/>
 			</Alert>
-			<Heading2>
-				<FormattedMessage
-					id="notFound__suggestionsHeader"
-					defaultMessage="Take a listen to one of these instead"
-				/>
-			</Heading2>
-			<CardGroup>
-				{recordings.nodes?.map((recording) => (
-					<CardRecording recording={recording} key={recording.canonicalPath} />
-				))}
-			</CardGroup>
+			{props?.websiteRecentRecordings && (
+				<>
+					<Heading2>
+						<FormattedMessage
+							id="notFound__suggestionsHeader"
+							defaultMessage="Take a listen to one of these instead"
+						/>
+					</Heading2>
+					<CardGroup>
+						{props.websiteRecentRecordings.nodes?.map((recording) => (
+							<CardRecording
+								recording={recording}
+								key={recording.canonicalPath}
+							/>
+						))}
+					</CardGroup>
+				</>
+			)}
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { when } from 'jest-when';
 import _ from 'lodash';
-import { GetServerSidePropsResult } from 'next';
+import { GetServerSidePropsResult, GetStaticProps } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
@@ -113,11 +113,11 @@ export function buildRenderer<
 
 export function buildStaticRenderer<
 	C extends ComponentType<any>,
-	F extends ({ params }: { params: any }) => Promise<{ props: any }>,
+	F extends GetStaticProps<any, any>,
 	P extends Partial<Parameters<F>[0]['params']>
 >(Component: C, getStaticProps: F, defaultParams: P = {} as P): Renderer<P> {
 	const getProps = async (p: any) =>
-		(await getStaticProps({ params: p })).props;
+		((await getStaticProps({ params: p })) as any).props;
 
 	return buildRenderer(Component, { getProps, defaultParams });
 }

@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import PresenterDetail, {
 	PresenterDetailProps,
 } from '@containers/presenter/detail';
@@ -13,14 +19,14 @@ export default PresenterDetail;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string };
-}): Promise<StaticProps<PresenterDetailProps>> {
-	const { id, language } = params;
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
+	GetStaticPropsResult<PresenterDetailProps>
+> {
+	const id = params?.id as string;
 	return {
 		props: await getPresenterDetailPageData({
 			id,
-			language: getLanguageIdByRoute(language),
+			language: getLanguageIdByRoute(params?.language),
 		}).catch(() => ({
 			person: null,
 			sequences: {
@@ -40,7 +46,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,

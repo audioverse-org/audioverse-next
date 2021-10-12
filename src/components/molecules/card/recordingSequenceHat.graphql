@@ -4,16 +4,13 @@ fragment cardRecordingSequenceHat on Recording {
 		canonicalPath(useFuturePath: true)
 		contentType
 		image {
-			url(size: 1000)
+			url(size: 100)
 		}
 		recordings {
 			aggregate {
 				count
 			}
 		}
-	}
-	sponsor {
-		...sponsorLockup
 	}
 	writers: persons(role: WRITER) {
 		...personLockup

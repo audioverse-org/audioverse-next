@@ -113,6 +113,6 @@ describe('presenter recordings page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 });

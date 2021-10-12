@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import CollectionPresenters, {
 	CollectionPresentersProps,
 } from '@containers/collection/presenters';
@@ -13,10 +19,10 @@ export default CollectionPresenters;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<CollectionPresentersProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<CollectionPresentersProps>
+> {
+	const id = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
 		({ first, offset }) =>
@@ -26,7 +32,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,

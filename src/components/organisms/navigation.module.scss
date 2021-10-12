@@ -86,32 +86,12 @@
 	bottom: 0;
 	margin: 0 24px 24px;
 	background: $ts-cream;
+	transition: transform $transition-medium;
 	transform: translateX(110%);
 }
 
 .submenuShown {
-	animation: slide-in $transition-medium forwards;
-	-webkit-animation: slide-in $transition-medium forwards;
-}
-
-.submenuHidden {
-	animation: slide-out $transition-medium forwards;
-	-webkit-animation: slide-out $transition-medium forwards;
-}
-
-@keyframes slide-in {
-	100% {
-		transform: translateX(0%);
-	}
-}
-
-@keyframes slide-out {
-	0% {
-		transform: translateX(0%);
-	}
-	100% {
-		transform: translateX(110%);
-	}
+	transform: translateX(0%);
 }
 
 .backToMenu {
@@ -153,13 +133,8 @@
 		background: $ts-white;
 		transform: translateX($sidebar-width);
 	}
-	@keyframes slide-out {
-		0% {
-			transform: translateX(0%);
-		}
-		100% {
-			transform: translateX($sidebar-width);
-		}
+	.submenuShown {
+		transform: translateX(0%);
 	}
 	.account {
 		margin: 16px 32px 34px;

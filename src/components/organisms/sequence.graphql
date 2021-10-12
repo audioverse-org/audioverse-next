@@ -11,7 +11,7 @@ fragment sequence on Sequence {
 		canonicalPath(useFuturePath: true)
 	}
 	image {
-		url(size: 64)
+		url(size: 100)
 	}
 	sponsor {
 		title

@@ -5649,13 +5649,6 @@ export type CardFavoriteFragment = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -5729,6 +5722,13 @@ export type CardFavoriteFragment = {
 						title: string;
 						duration: number;
 						recordingContentType: RecordingContentType;
+						sponsor: {
+							__typename?: 'Sponsor';
+							id: string | number;
+							title: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						} | null;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -5746,13 +5746,6 @@ export type CardFavoriteFragment = {
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
 							image: { __typename?: 'Image'; url: string } | null;
-						} | null;
-						sponsor: {
-							__typename?: 'Sponsor';
-							id: string | number;
-							title: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
 						} | null;
 						writers: Array<{
 							__typename?: 'Person';
@@ -5897,13 +5890,6 @@ export type CardRecordingFragment = {
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
 	} | null;
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
 	writers: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -5949,13 +5935,6 @@ export type CardRecordingSequenceHatFragment = {
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
 	} | null;
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
 	writers: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -5977,6 +5956,13 @@ export type CardRecordingStackFragment = {
 			title: string;
 			duration: number;
 			recordingContentType: RecordingContentType;
+			sponsor: {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+			} | null;
 			persons: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -5994,13 +5980,6 @@ export type CardRecordingStackFragment = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -6295,13 +6274,6 @@ export type GetNotFoundPageDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			} | null;
 			writers: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -6527,13 +6499,6 @@ export type SequenceFragment = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
-			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -6826,13 +6791,6 @@ export type GetAudiobookDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -7651,13 +7609,6 @@ export type GetDiscoverPageDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			} | null;
 			writers: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -7713,13 +7664,6 @@ export type GetDiscoverPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -7786,13 +7730,6 @@ export type GetDiscoverPageDataQuery = {
 							__typename?: 'RecordingConnection';
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
-					} | null;
-					sponsor: {
-						__typename?: 'Sponsor';
-						id: string | number;
-						title: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
 					} | null;
 					writers: Array<{
 						__typename?: 'Person';
@@ -8167,13 +8104,6 @@ export type GetHomeStaticPropsQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			} | null;
 			writers: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -8350,13 +8280,6 @@ export type GetLibraryHistoryPageDataQuery = {
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
 						} | null;
-						sponsor: {
-							__typename?: 'Sponsor';
-							id: string | number;
-							title: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						} | null;
 						writers: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -8475,13 +8398,6 @@ export type GetLibraryDataQuery = {
 										} | null;
 									};
 								} | null;
-								sponsor: {
-									__typename?: 'Sponsor';
-									id: string | number;
-									title: string;
-									canonicalPath: string;
-									imageWithFallback: { __typename?: 'Image'; url: string };
-								} | null;
 								writers: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -8555,6 +8471,13 @@ export type GetLibraryDataQuery = {
 										title: string;
 										duration: number;
 										recordingContentType: RecordingContentType;
+										sponsor: {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											imageWithFallback: { __typename?: 'Image'; url: string };
+										} | null;
 										persons: Array<{
 											__typename?: 'Person';
 											name: string;
@@ -8575,13 +8498,6 @@ export type GetLibraryDataQuery = {
 												} | null;
 											};
 											image: { __typename?: 'Image'; url: string } | null;
-										} | null;
-										sponsor: {
-											__typename?: 'Sponsor';
-											id: string | number;
-											title: string;
-											canonicalPath: string;
-											imageWithFallback: { __typename?: 'Image'; url: string };
 										} | null;
 										writers: Array<{
 											__typename?: 'Person';
@@ -8671,13 +8587,6 @@ export type GetLibraryPlaylistPageDataQuery = {
 								__typename?: 'RecordingConnection';
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
-						} | null;
-						sponsor: {
-							__typename?: 'Sponsor';
-							id: string | number;
-							title: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
 						} | null;
 						writers: Array<{
 							__typename?: 'Person';
@@ -8807,13 +8716,6 @@ export type GetPresenterDetailPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -8869,13 +8771,6 @@ export type GetPresenterDetailPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -8930,13 +8825,6 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9160,13 +9048,6 @@ export type GetPresenterRecordingsPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -9341,13 +9222,6 @@ export type GetPresenterTopPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -9444,13 +9318,6 @@ export type GetSearchResultsPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
-			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -9723,13 +9590,6 @@ export type GetSearchResultsRecordingsQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			} | null;
 			writers: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -9813,13 +9673,6 @@ export type GetSeriesDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -10177,13 +10030,6 @@ export type GetSermonListPageDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			} | null;
 			writers: Array<{
 				__typename?: 'Person';
 				name: string;
@@ -10303,13 +10149,6 @@ export type GetTrendingTeachingsPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -10394,13 +10233,6 @@ export type GetSongAlbumsDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -10574,13 +10406,6 @@ export type GetSongBooksDetailPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
-			} | null;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -10931,13 +10756,6 @@ export type GetSponsorDetailPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -11141,13 +10959,6 @@ export type GetSponsorTeachingsPageDataQuery = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				} | null;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -11293,13 +11104,6 @@ export type GetStoryAlbumDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
-				} | null;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -11897,16 +11701,6 @@ export const CardBibleVersionFragmentDoc = `
   }
 }
     ${CardBibleBookFragmentDoc}`;
-export const SponsorLockupFragmentDoc = `
-    fragment sponsorLockup on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 100)
-  }
-}
-    `;
 export const PersonLockupFragmentDoc = `
     fragment personLockup on Person {
   name
@@ -11923,7 +11717,7 @@ export const CardRecordingSequenceHatFragmentDoc = `
     canonicalPath(useFuturePath: true)
     contentType
     image {
-      url(size: 1000)
+      url(size: 100)
     }
     recordings {
       aggregate {
@@ -11931,15 +11725,11 @@ export const CardRecordingSequenceHatFragmentDoc = `
       }
     }
   }
-  sponsor {
-    ...sponsorLockup
-  }
   writers: persons(role: WRITER) {
     ...personLockup
   }
 }
-    ${SponsorLockupFragmentDoc}
-${PersonLockupFragmentDoc}`;
+    ${PersonLockupFragmentDoc}`;
 export const AndMiniplayerFragmentDoc = `
     fragment andMiniplayer on Recording {
   id
@@ -12020,17 +11810,31 @@ export const CardSequenceFragmentDoc = `
   }
 }
     ${PersonLockupFragmentDoc}`;
+export const SponsorLockupFragmentDoc = `
+    fragment sponsorLockup on Sponsor {
+  id
+  title
+  canonicalPath(useFuturePath: true)
+  imageWithFallback {
+    url(size: 100)
+  }
+}
+    `;
 export const CardRecordingStackFragmentDoc = `
     fragment cardRecordingStack on Sequence {
   contentType
   favoritedRecordings: recordings(viewerHasFavorited: true) {
     nodes {
+      sponsor {
+        ...sponsorLockup
+      }
       ...teaseRecording
       ...cardRecordingSequenceHat
     }
   }
 }
-    ${TeaseRecordingFragmentDoc}
+    ${SponsorLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}`;
 export const CardCollectionFragmentDoc = `
     fragment cardCollection on Collection {
@@ -12058,7 +11862,7 @@ export const CardSponsorFragmentDoc = `
   title
   canonicalPath(useFuturePath: true)
   image {
-    url(size: 64)
+    url(size: 100)
   }
   collections(
     first: 2
@@ -12087,7 +11891,7 @@ export const CardPersonFragmentDoc = `
   canonicalPath(useFuturePath: true)
   image {
     id
-    url(size: 64)
+    url(size: 100)
   }
   recordings(first: 2, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
     aggregate {
@@ -12240,7 +12044,7 @@ export const RecordingFragmentDoc = `
   }
   description
   imageWithFallback {
-    url(size: 50)
+    url(size: 100)
   }
   recordingDate
   recordingTags {
@@ -12298,7 +12102,7 @@ export const SequenceFragmentDoc = `
     canonicalPath(useFuturePath: true)
   }
   image {
-    url(size: 64)
+    url(size: 100)
   }
   sponsor {
     title

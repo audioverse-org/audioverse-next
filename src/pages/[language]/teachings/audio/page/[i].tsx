@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
 	getSermonListPageData,
@@ -8,13 +14,11 @@ import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default SermonList;
 
-interface GetStaticPropsArgs {
-	params: { i: string; language: string };
-}
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsArgs): Promise<StaticProps<SermonListProps>> {
+}: GetStaticPropsContext<{ i: string; language: string }>): Promise<
+	GetStaticPropsResult<SermonListProps>
+> {
 	const response = await getPaginatedStaticProps(
 		params,
 		async (variables) => {
@@ -36,7 +40,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'teachings/audio',
 		({ language }) => getSermonListPagePathsData({ language, hasVideo: false }),

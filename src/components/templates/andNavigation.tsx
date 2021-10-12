@@ -100,7 +100,7 @@ export default function AndNavigation({
 				<div
 					className={clsx(
 						styles.navigation,
-						showingMenu ? styles.navigationShown : styles.navigationHidden
+						showingMenu && styles.navigationShown
 					)}
 				>
 					<div className={styles.header}>

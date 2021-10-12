@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { GetStaticPathsResult } from 'next';
 
 import { DETAIL_PRERENDER_LIMIT, LANGUAGES } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
@@ -12,7 +13,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	getter: Getter<DATA>,
 	parseNodes: (data: DATA) => NODE[] | null | undefined,
 	pathMapper: (languageRoute: string, node: NODE) => string
-): Promise<StaticPaths> {
+): Promise<GetStaticPathsResult> {
 	const languages = _.values(Language);
 
 	const pathSetPromises = languages.map(async (l: Language) => {
@@ -30,6 +31,6 @@ export async function getDetailStaticPaths<DATA, NODE>(
 
 	return {
 		paths: _.flatten(pathSets),
-		fallback: true,
+		fallback: 'blocking',
 	};
 }

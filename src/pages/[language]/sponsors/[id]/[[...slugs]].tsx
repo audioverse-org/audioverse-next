@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -10,10 +16,10 @@ export default SponsorDetail;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<SponsorDetailProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<SponsorDetailProps>
+> {
+	const id = params?.id as string;
 	return {
 		props: await getSponsorDetailPageData({ id }).catch(() => ({
 			sponsor: null,
@@ -22,7 +28,7 @@ export async function getStaticProps({
 	};
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorDetailPathsData,
 		(d) => d.sponsors.nodes,

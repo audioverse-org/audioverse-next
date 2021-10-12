@@ -46,7 +46,7 @@ function setEntityCount(count: number) {
 
 async function renderPage() {
 	const params = { i: '1', language: 'en' };
-	const { props } = await getStaticProps({ params });
+	const { props } = (await getStaticProps({ params })) as any;
 
 	return renderWithIntl(<Testimonies {...props} />);
 }
@@ -61,9 +61,9 @@ describe('testimonies pages', () => {
 	it('revalidates', async () => {
 		loadTestimonies();
 
-		const { revalidate } = await getStaticProps({
+		const { revalidate } = (await getStaticProps({
 			params: { i: '1', language: 'en' },
-		});
+		})) as any;
 
 		expect(revalidate).toBe(60);
 	});
@@ -91,7 +91,7 @@ describe('testimonies pages', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.fallback).toBe(true);
+		expect(result.fallback).toBe('blocking');
 	});
 
 	it('gets page of testimonies', async () => {

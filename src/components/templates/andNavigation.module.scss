@@ -67,6 +67,7 @@
 	padding: 32px 24px;
 	background: $ts-cream;
 	z-index: 1000;
+	transition: transform $transition-medium;
 	transform: translateX(100%);
 }
 .header {
@@ -74,28 +75,7 @@
 }
 
 .navigationShown {
-	animation: slide-in $transition-medium forwards;
-	-webkit-animation: slide-in $transition-medium forwards;
-}
-
-.navigationHidden {
-	animation: slide-out $transition-medium forwards;
-	-webkit-animation: slide-out $transition-medium forwards;
-}
-
-@keyframes slide-in {
-	100% {
-		transform: translateX(0%);
-	}
-}
-
-@keyframes slide-out {
-	0% {
-		transform: translateX(0%);
-	}
-	100% {
-		transform: translateX(100%);
-	}
+	transform: translateX(0%);
 }
 
 .content {
@@ -140,7 +120,7 @@
 		width: $sidebar-width;
 		padding: 0;
 		overflow: scroll;
-		transform: translate(0px);
+		transform: translate(0);
 		animation: none;
 		background: $ts-white;
 	}

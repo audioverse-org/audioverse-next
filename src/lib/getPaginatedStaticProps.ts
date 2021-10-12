@@ -21,15 +21,20 @@ export interface PaginatedStaticProps<T, N> {
 }
 
 export async function getPaginatedStaticProps<T, N>(
-	params: {
-		language: string;
-		i: number | string;
-	},
+	params:
+		| {
+				language: string;
+				i: number | string;
+		  }
+		| undefined,
 	getter: PaginatedGetter<T, { language: Language }>,
 	parseNodes: (data: T) => N[] | null | undefined,
 	parseCount: (count: T) => number | null | undefined
 ): Promise<PaginatedStaticProps<T, N>> {
-	const { i: pageIndex, language: languageRoute } = params;
+	const { i: pageIndex, language: languageRoute } = params || {
+		language: Language.English,
+		i: '1',
+	};
 	const data = await getPaginatedData(pageIndex, getter, {
 		language: getLanguageIdByRoute(languageRoute),
 	});

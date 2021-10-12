@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import Sponsors, { SponsorsProps } from '@containers/sponsor/list';
 import {
 	getSponsorListPageData,
@@ -10,9 +16,9 @@ export default Sponsors;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; i: string };
-}): Promise<StaticProps<SponsorsProps>> {
+}: GetStaticPropsContext<{ language: string; i: string }>): Promise<
+	GetStaticPropsResult<SponsorsProps>
+> {
 	return getPaginatedStaticProps(
 		params,
 		getSponsorListPageData,
@@ -21,7 +27,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'sponsors',
 		getSponsorListPathsData,

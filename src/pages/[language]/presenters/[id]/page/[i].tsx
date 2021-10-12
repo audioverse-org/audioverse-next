@@ -1,3 +1,9 @@
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
 import PresenterRecordings, {
 	PresenterRecordingsProps,
 } from '@containers/presenter/recordings';
@@ -13,10 +19,10 @@ export default PresenterRecordings;
 
 export async function getStaticProps({
 	params,
-}: {
-	params: { language: string; id: string; i: string };
-}): Promise<StaticProps<PresenterRecordingsProps>> {
-	const { id } = params;
+}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+	GetStaticPropsResult<PresenterRecordingsProps>
+> {
+	const id = params?.id as string;
 
 	return await getPaginatedStaticProps(
 		params,
@@ -27,7 +33,7 @@ export async function getStaticProps({
 	);
 }
 
-export async function getStaticPaths(): Promise<StaticPaths> {
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,

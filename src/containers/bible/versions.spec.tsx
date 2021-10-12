@@ -9,7 +9,7 @@ import Versions, {
 } from '@pages/[language]/bibles';
 
 async function renderPage() {
-	const { props } = await getStaticProps();
+	const { props } = (await getStaticProps()) as any;
 	return renderWithIntl(<Versions {...props} />);
 }
 
@@ -67,6 +67,6 @@ describe('versions list', () => {
 	it('renders 404', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('404')).toBeInTheDocument();
+		expect(getByText('Sorry!')).toBeInTheDocument();
 	});
 });
