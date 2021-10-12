@@ -33,7 +33,7 @@ const Navigation = ({
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
-	const [submenu, setSubmenu] = useState('');
+	const [submenu, setSubmenu] = useState<string | null>(null);
 
 	const iconSize = 24;
 	const navigationItems = getNavigationItems(languageRoute);
@@ -123,7 +123,8 @@ const Navigation = ({
 			<div
 				className={clsx(
 					styles.submenu,
-					submenu ? styles.submenuShown : styles.submenuHidden
+					typeof submenu === 'string' && !submenu && styles.submenuHidden,
+					submenu && styles.submenuShown
 				)}
 			>
 				<a
