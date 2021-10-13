@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 import React, { CSSProperties } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -15,6 +16,7 @@ import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
+import IconPause from '../../../public/img/icon-pause-large.svg';
 import IconPlay from '../../../public/img/icon-play-large.svg';
 
 import styles from './player.module.scss';
@@ -56,8 +58,18 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 			{shouldShowVideoControls && (
 				<div className={styles.videoWrapper}>
 					<div>
-						{shouldShowPoster && (
-							<button className={styles.poster} onClick={() => session.play()}>
+						<button
+							className={clsx(
+								styles.poster,
+								shouldShowPoster && styles.posterPlayShown
+							)}
+							onClick={() =>
+								session.isPaused ? session.play() : session.pause()
+							}
+						>
+							{session.isVideoLoaded ? (
+								video
+							) : (
 								<Image
 									src="/img/poster.jpg"
 									alt={recording.title}
@@ -65,13 +77,11 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 									objectFit="cover"
 									objectPosition="left bottom"
 								/>
-								<span className={styles.posterPlay}>
-									<IconPlay />
-								</span>
-							</button>
-						)}
-
-						{session.isVideoLoaded && video}
+							)}
+							<span className={styles.posterPlay}>
+								{session.isPaused ? <IconPlay /> : <IconPause />}
+							</span>
+						</button>
 					</div>
 				</div>
 			)}
