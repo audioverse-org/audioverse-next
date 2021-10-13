@@ -1,4 +1,5 @@
 import Slider from '@material-ui/core/Slider';
+import Link from 'next/link';
 import React, { useContext } from 'react';
 
 import ButtonNudge from '@components/molecules/buttonNudge';
@@ -61,8 +62,12 @@ export default function Miniplayer(): JSX.Element | null {
 				</div>
 			</div>
 			<div className={styles.meta}>
-				{sequenceLine}
-				<h4 className={styles.title}>{recording.title}</h4>
+				<Link href={recording.canonicalPath}>
+					<a className={styles.link}>
+						{sequenceLine}
+						<h4 className={styles.title}>{recording.title}</h4>
+					</a>
+				</Link>
 				<div className={styles.progress}>
 					<span>{timeString}</span>
 					<span className={styles.bar}>

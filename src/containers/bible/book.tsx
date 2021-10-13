@@ -38,6 +38,7 @@ function Book({ audiobible, chapterNumber }: Must<BookProps>): JSX.Element {
 
 	// TODO: Remove this transformation when the API returns Recording type
 	const recording: Partial<PlayerFragment> = {
+		canonicalPath: '',
 		audioFiles: [
 			{
 				url: chapter?.url || '',

@@ -15,6 +15,7 @@ import { BaseColors } from '@lib/constants';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
 import IconListening from '../../../public/img/icon-listening.svg';
 import MoreIcon from '../../../public/img/icon-more.svg';
 
@@ -66,7 +67,9 @@ export default function AndNavigation({
 					/>
 					{playbackContext.getRecording() && (
 						<IconButton
-							Icon={IconListening}
+							Icon={
+								playbackContext.paused() ? IconListening : IconListeningAnimated
+							}
 							onClick={() =>
 								push(playbackContext.getRecording()?.canonicalPath || '')
 							}

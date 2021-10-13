@@ -55,22 +55,24 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 		>
 			{shouldShowVideoControls && (
 				<div className={styles.videoWrapper}>
-					{shouldShowPoster && (
-						<button className={styles.poster} onClick={() => session.play()}>
-							<Image
-								src="/img/poster.jpg"
-								alt={recording.title}
-								layout="fill"
-								objectFit="cover"
-								objectPosition="left bottom"
-							/>
-							<span className={styles.posterPlay}>
-								<IconPlay />
-							</span>
-						</button>
-					)}
+					<div>
+						{shouldShowPoster && (
+							<button className={styles.poster} onClick={() => session.play()}>
+								<Image
+									src="/img/poster.jpg"
+									alt={recording.title}
+									layout="fill"
+									objectFit="cover"
+									objectPosition="left bottom"
+								/>
+								<span className={styles.posterPlay}>
+									<IconPlay />
+								</span>
+							</button>
+						)}
 
-					{session.isVideoLoaded && video}
+						{session.isVideoLoaded && video}
+					</div>
 				</div>
 			)}
 

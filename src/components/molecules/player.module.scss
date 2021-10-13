@@ -1,9 +1,17 @@
 @import '../../styles/common';
 
 .videoWrapper {
+	position: relative;
 	width: 100%;
-	aspect-ratio: 722/404;
+	padding-top: 55.95%;
 	background: $ts-dark;
+	> * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
 }
 
 .poster {
@@ -111,5 +119,4 @@
 	--barColor: #{$ts-midTone};
 	--progressColor: #{$ts-salmon};
 	position: relative;
-	top: -14px;
 }

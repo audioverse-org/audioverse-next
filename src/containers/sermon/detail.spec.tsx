@@ -61,6 +61,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		contentType: RecordingContentType.Sermon,
+		canonicalPath: '',
 		speakers: [],
 		audioFiles: [],
 		videoFiles: [],
@@ -494,7 +495,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('1 GB') as HTMLLinkElement;
+		const link = getByText('High Quality (1 GB)') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_url');
 	});
@@ -512,7 +513,7 @@ describe('sermon detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		const link = getByText('1 GB') as HTMLLinkElement;
+		const link = getByText('High Quality (1 GB)') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_url');
 	});

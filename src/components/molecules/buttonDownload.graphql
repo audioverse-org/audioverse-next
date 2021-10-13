@@ -3,9 +3,12 @@ fragment buttonDownload on Recording {
 	videoDownloads: videoFiles(allowedContainers: MP4) {
 		url
 		filesize
+		height
+		width
 	}
 	audioDownloads: audioFiles(allowedContainers: MP3) {
 		url
 		filesize
+		bitrate
 	}
 }

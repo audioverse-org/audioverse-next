@@ -34,6 +34,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	contentType: RecordingContentType.Sermon,
+	canonicalPath: 'the_sermon_path',
 	sequence,
 	audioFiles: [
 		{
@@ -51,6 +52,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	contentType: RecordingContentType.Sermon,
+	canonicalPath: 'the_sermon_path',
 	sequence,
 	videoFiles: [
 		{
@@ -68,6 +70,7 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
 	contentType: RecordingContentType.Sermon,
+	canonicalPath: 'the_sermon_path',
 	sequence,
 	videoFiles: [
 		{

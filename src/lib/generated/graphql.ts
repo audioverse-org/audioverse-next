@@ -5534,11 +5534,14 @@ export type ButtonDownloadFragment = {
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
+		height: number;
+		width: number;
 	}>;
 	audioDownloads: Array<{
 		__typename?: 'AudioFile';
 		url: string;
 		filesize: string;
+		bitrate: number;
 	}>;
 };
 
@@ -6154,11 +6157,14 @@ export type PlayerFragment = {
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
+		height: number;
+		width: number;
 	}>;
 	audioDownloads: Array<{
 		__typename?: 'AudioFile';
 		url: string;
 		filesize: string;
+		bitrate: number;
 	}>;
 };
 
@@ -6451,11 +6457,14 @@ export type RecordingFragment = {
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
+		height: number;
+		width: number;
 	}>;
 	audioDownloads: Array<{
 		__typename?: 'AudioFile';
 		url: string;
 		filesize: string;
+		bitrate: number;
 	}>;
 };
 
@@ -7098,11 +7107,14 @@ export type GetAudiobookTrackDetailDataQuery = {
 			__typename?: 'VideoFile';
 			url: string;
 			filesize: string;
+			height: number;
+			width: number;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
 			url: string;
 			filesize: string;
+			bitrate: number;
 		}>;
 	} | null;
 };
@@ -9978,11 +9990,14 @@ export type GetSermonDetailDataQuery = {
 			__typename?: 'VideoFile';
 			url: string;
 			filesize: string;
+			height: number;
+			width: number;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
 			url: string;
 			filesize: string;
+			bitrate: number;
 		}>;
 	} | null;
 };
@@ -10593,11 +10608,14 @@ export type GetSongDetailDataQuery = {
 			__typename?: 'VideoFile';
 			url: string;
 			filesize: string;
+			height: number;
+			width: number;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
 			url: string;
 			filesize: string;
+			bitrate: number;
 		}>;
 	} | null;
 };
@@ -11414,11 +11432,14 @@ export type GetStoryDetailDataQuery = {
 			__typename?: 'VideoFile';
 			url: string;
 			filesize: string;
+			height: number;
+			width: number;
 		}>;
 		audioDownloads: Array<{
 			__typename?: 'AudioFile';
 			url: string;
 			filesize: string;
+			bitrate: number;
 		}>;
 	} | null;
 };
@@ -12011,10 +12032,13 @@ export const ButtonDownloadFragmentDoc = `
   videoDownloads: videoFiles(allowedContainers: MP4) {
     url
     filesize
+    height
+    width
   }
   audioDownloads: audioFiles(allowedContainers: MP3) {
     url
     filesize
+    bitrate
   }
 }
     `;
