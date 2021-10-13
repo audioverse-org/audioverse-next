@@ -5523,7 +5523,12 @@ export type GetWithAuthGuardDataQuery = {
 	__typename?: 'Query';
 	me: {
 		__typename?: 'AuthenticatedUser';
-		user: { __typename?: 'User'; email: string };
+		user: {
+			__typename?: 'User';
+			email: string;
+			name: string;
+			image: { __typename?: 'Image'; url: string } | null;
+		};
 	} | null;
 };
 
@@ -12251,6 +12256,10 @@ export const GetWithAuthGuardDataDocument = `
   me {
     user {
       email
+      name
+      image {
+        url(size: 100)
+      }
     }
   }
 }

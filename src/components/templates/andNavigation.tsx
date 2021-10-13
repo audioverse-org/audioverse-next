@@ -27,11 +27,12 @@ export default function AndNavigation({
 }: {
 	children: ReactNode;
 }): JSX.Element {
+	const router = useRouter();
 	const {
 		push,
 		query: { q },
 		pathname,
-	} = useRouter();
+	} = router;
 	const languageRoute = useLanguageRoute();
 	const playbackContext = useContext(PlaybackContext);
 	const [showingMenu, setShowingMenu] = useState(false);
@@ -50,7 +51,7 @@ export default function AndNavigation({
 	}, []);
 	const onSearchPage = pathname.includes('/[language]/search');
 
-	const navigationItems = getNavigationItems(languageRoute);
+	const navigationItems = getNavigationItems(router, languageRoute);
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.mobileHeader}>
@@ -80,7 +81,7 @@ export default function AndNavigation({
 				</div>
 				<div className={styles.mobileSubnav}>
 					<div className={styles.mobileSubnavItems}>
-						{navigationItems.slice(0, -1).map((item) => (
+						{navigationItems.slice(0, -2).map((item) => (
 							<Heading6 sans large loose unpadded uppercase key={item.key}>
 								<Link href={item.href as string}>
 									<a>{item.label}</a>

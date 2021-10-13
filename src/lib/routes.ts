@@ -215,6 +215,9 @@ export const makeBlogPostListRoute = (
 export const makeLoginRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/login`;
 
+export const makeLogoutRoute = (languageRoute: string): string =>
+	`/${languageRoute}/account/logout`;
+
 export const makeRegisterRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/register`;
 

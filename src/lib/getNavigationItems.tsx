@@ -1,9 +1,15 @@
+import { NextRouter } from 'next/router';
+import React from 'react';
+
+import DownloadAppButton from '@components/molecules/downloadAppButton';
+import LanguageButton from '@components/molecules/languageButton';
 import {
 	makeAudiobookListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeDiscoverRoute,
 	makeLibraryRoute,
+	makeLogoutRoute,
 	makePresenterListRoute,
 	makeSeriesListRoute,
 	makeSongAlbumsListRoute,
@@ -17,6 +23,8 @@ import IconListAltLight from '../../public/img/fa-list-alt-light.svg';
 import IconListAlt from '../../public/img/fa-list-alt.svg';
 import IconList from '../../public/img/fa-list-light.svg';
 import IconMusic from '../../public/img/fa-music.svg';
+import IconSignOut from '../../public/img/fa-sign-out.svg';
+import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserLight from '../../public/img/fa-user-light.svg';
 import IconUserPlus from '../../public/img/fa-user-plus-light.svg';
 import IconBible from '../../public/img/icon-bible.svg';
@@ -32,12 +40,16 @@ import getIntl from './getIntl';
 type INavigationItem = {
 	key: string;
 	href?: string;
+	onClick?: (props: { popSubmenu: () => void }) => void;
 	Icon: any;
 	label: string;
-	children?: INavigationItem[];
+	children?: INavigationItem[] | JSX.Element;
 };
 
-export function getNavigationItems(languageRoute: string): INavigationItem[] {
+export function getNavigationItems(
+	router: NextRouter,
+	languageRoute: string
+): INavigationItem[] {
 	const intl = getIntl(languageRoute);
 
 	return [
@@ -184,7 +196,51 @@ export function getNavigationItems(languageRoute: string): INavigationItem[] {
 				defaultMessage: 'More',
 				description: `Header nav link name: More`,
 			}),
-			children: [],
+			children: (
+				<>
+					<li>
+						<LanguageButton
+							buttonType="secondary"
+							onClick={(baseUrl) => {
+								router.push(`/${baseUrl}/`);
+							}}
+						/>
+					</li>
+					<li>
+						<DownloadAppButton />
+					</li>
+				</>
+			),
+		},
+		{
+			key: 'account',
+			Icon: null,
+			label: intl.formatMessage({
+				id: `header__navItemUser`,
+				defaultMessage: 'User Settings',
+				description: `Header nav link name: User Settings`,
+			}),
+			children: [
+				{
+					key: 'profile',
+					href: `/${languageRoute}/account/profile`,
+					Icon: IconUser,
+					label: intl.formatMessage({
+						id: `header__naveItemUser-profile`,
+						defaultMessage: 'Profile',
+					}),
+				},
+				{
+					key: 'logout',
+					href: makeLogoutRoute(languageRoute),
+					onClick: ({ popSubmenu }) => popSubmenu(),
+					Icon: IconSignOut,
+					label: intl.formatMessage({
+						id: `header__naveItemUser-logout`,
+						defaultMessage: 'Log Out',
+					}),
+				},
+			],
 		},
 	];
 }

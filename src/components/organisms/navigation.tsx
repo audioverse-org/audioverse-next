@@ -7,17 +7,18 @@ import { FormattedMessage } from 'react-intl';
 import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
-import Button from '@components/molecules/button';
+import RoundImage from '@components/atoms/roundImage';
+import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
+import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconDownload from '../../../public/img/icon-download-light.svg';
 import IconExit from '../../../public/img/icon-exit.svg';
 
 import styles from './navigation.module.scss';
@@ -34,9 +35,11 @@ const Navigation = ({
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
+	const authResult = useGetWithAuthGuardDataQuery({}, { retry: false });
+	const user = authResult.data?.me?.user;
 
 	const iconSize = 24;
-	const navigationItems = getNavigationItems(languageRoute);
+	const navigationItems = getNavigationItems(router, languageRoute);
 	const submenuItem = navigationItems.find(({ key }) => submenu === key);
 
 	return (
@@ -58,67 +61,89 @@ const Navigation = ({
 							router.push(`/${baseUrl}/`);
 						}}
 					/>
-					<Button
-						type="secondary"
-						text={
-							<FormattedMessage
-								id="navigation__downloadApp"
-								defaultMessage="Download App"
-							/>
-						}
-						IconLeft={IconDownload}
-						IconRight={IconDisclosure}
-						className={styles.downloadButton}
-					/>
+					<DownloadAppButton />
 				</div>
 			</div>
 			<ul>
-				{navigationItems.map(({ Icon, key, label, href, children }) => {
-					const inner = (
-						<>
-							<span className={styles.icon}>
-								<Icon width={iconSize} height={iconSize} />
-							</span>
-							{label}
-							{children && (
-								<span className={styles.iconDisclosure}>
-									<IconDisclosure />
+				{navigationItems
+					.slice(0, -1)
+					.map(({ Icon, key, label, href, children }) => {
+						const inner = (
+							<>
+								<span className={styles.icon}>
+									<Icon width={iconSize} height={iconSize} />
 								</span>
-							)}
-						</>
-					);
+								{label}
+								{children && (
+									<span className={styles.iconDisclosure}>
+										<IconDisclosure />
+									</span>
+								)}
+							</>
+						);
 
-					if (!href) {
+						if (!href) {
+							return (
+								<li key={key}>
+									<a className={styles.navLink} onClick={() => setSubmenu(key)}>
+										{inner}
+									</a>
+								</li>
+							);
+						}
+
 						return (
 							<li key={key}>
-								<a className={styles.navLink} onClick={() => setSubmenu(key)}>
-									{inner}
-								</a>
+								<ActiveLink href={href} activeClassName={styles.active}>
+									<a
+										className={styles.navLink}
+										onClick={
+											children
+												? (e) => {
+														e.preventDefault();
+														setSubmenu(key);
+												  }
+												: undefined
+										}
+									>
+										{inner}
+									</a>
+								</ActiveLink>
 							</li>
 						);
-					}
-
-					return (
-						<li key={key}>
-							<ActiveLink href={href} activeClassName={styles.active}>
-								<a
-									className={styles.navLink}
-									onClick={
-										children
-											? (e) => {
-													e.preventDefault();
-													setSubmenu(key);
-											  }
-											: undefined
-									}
-								>
-									{inner}
-								</a>
-							</ActiveLink>
-						</li>
-					);
-				})}
+					})}
 			</ul>
+
+			<div className={styles.account}>
+				{user ? (
+					<a
+						className={clsx(styles.accountWithAvatar, 'decorated')}
+						onClick={(e) => {
+							e.preventDefault();
+							setSubmenu('account');
+						}}
+					>
+						{user.image && (
+							<div className={styles.accountAvatar}>
+								<RoundImage image={user.image.url} small />
+							</div>
+						)}
+						{user.name}
+						<span className={styles.iconDisclosure}>
+							<IconDisclosure />
+						</span>
+					</a>
+				) : (
+					<Link href={makeLoginRoute(languageRoute)}>
+						<a className="decorated">
+							<FormattedMessage
+								id="navigation__loginSignupCta"
+								defaultMessage="Login/Sign up"
+							/>
+						</a>
+					</Link>
+				)}
+			</div>
 
 			<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
 				<a
@@ -140,31 +165,31 @@ const Navigation = ({
 					{submenuItem?.label}
 				</Heading3>
 				<ul className={styles.submenuItems}>
-					{submenuItem?.children?.map(({ key, Icon, label, href }) => (
-						<li key={key}>
-							<Link href={href as string}>
-								<a className={styles.navLink}>
-									<span className={styles.icon}>
-										<Icon />
-									</span>
-									{label}
-								</a>
-							</Link>
-						</li>
-					))}
+					{Array.isArray(submenuItem?.children)
+						? submenuItem?.children?.map(
+								({ key, Icon, label, href, onClick }) => (
+									<li key={key}>
+										<Link href={href as string}>
+											<a
+												className={styles.navLink}
+												onClick={
+													onClick
+														? () =>
+																onClick({ popSubmenu: () => setSubmenu('') })
+														: undefined
+												}
+											>
+												<span className={styles.icon}>
+													<Icon />
+												</span>
+												{label}
+											</a>
+										</Link>
+									</li>
+								)
+						  )
+						: submenuItem?.children}
 				</ul>
-			</div>
-
-			<div className={styles.account}>
-				{/* TODO: handle logged-in state */}
-				<Link href={makeLoginRoute(languageRoute)}>
-					<a className="decorated">
-						<FormattedMessage
-							id="navigation__loginSignupCta"
-							defaultMessage="Login/Sign up"
-						/>
-					</a>
-				</Link>
 			</div>
 
 			<LoadingIndicator />

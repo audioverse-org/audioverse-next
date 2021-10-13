@@ -2,6 +2,10 @@ query getWithAuthGuardData {
 	me {
 		user {
 			email
+			name
+			image {
+				url(size: 100)
+			}
 		}
 	}
 }
