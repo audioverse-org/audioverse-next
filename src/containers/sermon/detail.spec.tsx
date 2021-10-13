@@ -67,6 +67,8 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		attachments: [],
 		audioDownloads: [],
 		videoDownloads: [],
+		isDownloadAllowed: true,
+		imageWithFallback: { url: '' },
 		...sermon,
 	};
 

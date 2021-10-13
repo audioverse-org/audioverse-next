@@ -29,6 +29,9 @@ jest.mock('@lib/api/recordingIsFavorited');
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	isDownloadAllowed: true,
+	audioDownloads: [],
+	videoDownloads: [],
 	sequence: {
 		contentType: SequenceContentType.Series,
 		title: 'the_sequence_title',

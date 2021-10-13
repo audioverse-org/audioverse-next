@@ -209,6 +209,7 @@ describe('localization usage', () => {
 							},
 						},
 						speakers: [] as any,
+						imageWithFallback: { url: '' },
 					} as SermonDetailProps['recording']
 				}
 				title={undefined}

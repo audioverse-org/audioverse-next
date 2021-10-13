@@ -26,7 +26,10 @@ export async function getStaticProps({
 		story: null,
 	}));
 
-	return { props: { recording }, revalidate: REVALIDATE };
+	return {
+		props: { recording, title: recording?.title },
+		revalidate: REVALIDATE,
+	};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {

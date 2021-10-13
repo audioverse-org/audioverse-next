@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
@@ -19,7 +20,7 @@ export default StoryAlbumDetail;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ id: string; language: string }>): Promise<
-	GetStaticPropsResult<StoryAlbumDetailProps>
+	GetStaticPropsResult<StoryAlbumDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
 
@@ -29,7 +30,10 @@ export async function getStaticProps({
 		storySeason: null,
 	}));
 
-	return { props: { sequence }, revalidate: REVALIDATE };
+	return {
+		props: { sequence, title: sequence?.title },
+		revalidate: REVALIDATE,
+	};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {

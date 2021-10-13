@@ -26,6 +26,7 @@ function loadData() {
 				contentType: RecordingContentType.Story,
 				speakers: [],
 				attachments: [],
+				imageWithFallback: { url: '' },
 			},
 		});
 }

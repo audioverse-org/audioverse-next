@@ -44,6 +44,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 	],
 	speakers: [],
 	attachments: [],
+	imageWithFallback: { url: '' },
 };
 
 const recordingVideo: Partial<RecordingFragment> = {
@@ -60,6 +61,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 	],
 	speakers: [],
 	attachments: [],
+	imageWithFallback: { url: '' },
 };
 
 const recordingAudioVideo: Partial<RecordingFragment> = {
@@ -83,6 +85,7 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 	],
 	speakers: [],
 	attachments: [],
+	imageWithFallback: { url: '' },
 };
 
 const Page = ({

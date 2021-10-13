@@ -1,4 +1,5 @@
 fragment buttonDownload on Recording {
+	isDownloadAllowed
 	videoDownloads: videoFiles(allowedContainers: MP4) {
 		url
 		filesize

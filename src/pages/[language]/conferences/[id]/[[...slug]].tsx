@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import CollectionDetail, {
 	CollectionDetailProps,
 } from '@containers/collection/detail';
@@ -19,13 +20,19 @@ export default CollectionDetail;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
-	GetStaticPropsResult<CollectionDetailProps>
+	GetStaticPropsResult<CollectionDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
-	return {
-		props: await getCollectionDetailPageData({ id }).catch(() => ({
+	const { collection } = await getCollectionDetailPageData({ id }).catch(
+		() => ({
 			collection: null,
-		})),
+		})
+	);
+	return {
+		props: {
+			collection,
+			title: collection?.title,
+		},
 		revalidate: REVALIDATE,
 	};
 }

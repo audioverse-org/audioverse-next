@@ -78,6 +78,8 @@ function loadData() {
 
 describe('collection detail page', () => {
 	it('renders', async () => {
+		loadData();
+
 		await renderPage();
 
 		expect(mockedFetchApi).toBeCalledWith(GetCollectionDetailPageDataDocument, {

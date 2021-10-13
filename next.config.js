@@ -1,11 +1,20 @@
 const withPWA = require('next-pwa');
 
-// TODO: /en/sermons/all >> /en/sermons/all/page/1 (also video, audio)
-
 module.exports = withPWA({
 	pwa: {
 		dest: 'public',
 	},
+	headers: [
+		{
+			source: '/(.*)',
+			headers: [
+				{
+					key: 'Permissions-Policy',
+					value: 'interest-cohort=()',
+				},
+			],
+		},
+	],
 	async redirects() {
 		const languagePrefixMap = {
 			english: 'en',
@@ -77,6 +86,16 @@ module.exports = withPWA({
 			{
 				source: '/:lang/account',
 				destination: '/:lang/account/login',
+				permanent: true,
+			},
+			{
+				source: '/:lang/account/history',
+				destination: '/:lang/library/history',
+				permanent: true,
+			},
+			{
+				source: '/:lang/account/favorite',
+				destination: '/:lang/library',
 				permanent: true,
 			},
 			{
@@ -172,13 +191,23 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/sponsors',
+				destination: '/:lang/sponsors/page/1',
+				permanent: true,
+			},
+			{
 				source: '/:lang/music/browse/tag/:tagName/:slug',
 				destination: '/:lang/songs/albums/page/1',
 				permanent: true,
 			},
 			{
+				source: '/:lang/sermons/conferences',
+				destination: '/:lang/conferences/page/1',
+				permanent: true,
+			},
+			{
 				source: '/:lang/sermons/conferences/:id/:slug',
-				destination: '/:lang/collections/:id/:slug',
+				destination: '/:lang/conferences/:id/:slug',
 				permanent: true,
 			},
 			{
@@ -226,6 +255,11 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/sermons/presenters',
+				destination: '/:lang/presenters/page/1',
+				permanent: true,
+			},
+			{
 				source: '/:lang/sermons/presenters/:id/:slug',
 				destination: '/:lang/presenters/:id/:slug',
 				permanent: true,
@@ -236,8 +270,8 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
-				source: '/:lang/blog/:id(\\d{1,})/:slug',
-				destination: '/:lang/blog/:id',
+				source: '/:lang/sermons/seriess',
+				destination: '/:lang/series/page/1',
 				permanent: true,
 			},
 			{
@@ -246,7 +280,17 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/playlists/lists/:id/:slugs',
+				destination: '/:lang/discover/collections',
+				permanent: true,
+			},
+			{
 				source: '/:lang/topics',
+				destination: '/:lang/discover/collections',
+				permanent: true,
+			},
+			{
+				source: '/:lang/topics/:topicId/:slugs',
 				destination: '/:lang/discover/collections',
 				permanent: true,
 			},

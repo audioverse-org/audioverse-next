@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -22,7 +23,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{
 	language: string;
 	id: string;
-}>): Promise<SeriesStaticProps> {
+}>): Promise<SeriesStaticProps & IBaseProps> {
 	const id = params?.id as string;
 
 	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
@@ -32,6 +33,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			sequence: series,
+			title: series?.title,
 		},
 		revalidate: REVALIDATE,
 	};

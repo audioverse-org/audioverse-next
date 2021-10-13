@@ -93,7 +93,7 @@ export default function CardSponsor({
 							)}
 						</Heading6>
 					</div>
-					{/* TODO: has favorited, sub-conferences */}
+					{/* TODO: sub-conferences */}
 				</a>
 			</Link>
 			<IconButton

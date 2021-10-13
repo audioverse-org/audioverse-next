@@ -19,7 +19,6 @@ export type BlogPost = NonNullable<GetBlogDetailDataQuery['blogPost']>;
 export interface BlogPostDetailProps {
 	blogPost: BlogPost | null;
 	blogPosts: NonNullable<GetBlogDetailDataQuery['blogPosts']>;
-	title: string | null;
 }
 
 function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
