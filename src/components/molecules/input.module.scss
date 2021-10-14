@@ -15,9 +15,12 @@
 	padding: 8px;
 	border: 1px solid rgba($ts-midTone, 0.5);
 	border-radius: 4px;
-	font-size: 14px;
-	line-height: 16.8px;
 	color: $ts-dark;
+	&,
+	&::placeholder {
+		font-size: 14px;
+		line-height: 16.8px;
+	}
 	&::placeholder {
 		color: $ts-midTone;
 		font-style: italic;

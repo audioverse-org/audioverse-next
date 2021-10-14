@@ -146,7 +146,7 @@ function Register(): JSX.Element {
 					})}
 					placeholder={intl.formatMessage({
 						id: 'register__passwordPlaceholder',
-						defaultMessage: '*******',
+						defaultMessage: '∗∗∗∗∗∗∗',
 					})}
 					type="password"
 					value={password}

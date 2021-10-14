@@ -33,7 +33,7 @@ describe('register page', () => {
 	it('renders password field', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('*******')).toBeInTheDocument();
+		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
 	});
 
 	it('renders sign up button', async () => {
@@ -47,7 +47,7 @@ describe('register page', () => {
 
 		userEvent.click(getByText('Sign up'));
 
-		userEvent.type(getByPlaceholderText('*******'), 'pass');
+		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
 		userEvent.click(getByText('Sign up'));
 
@@ -68,7 +68,7 @@ describe('register page', () => {
 		userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
 		userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('*******'), 'pass');
+		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
 		userEvent.click(getByText('Sign up'));
 
@@ -88,7 +88,7 @@ describe('register page', () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('*******'), 'pass');
+		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
 		userEvent.click(getByText('Sign up'));
 
@@ -113,7 +113,7 @@ describe('register page', () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('*******'), 'pass');
+		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
 		userEvent.click(getByText('Sign up'));
 
@@ -126,7 +126,7 @@ describe('register page', () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('*******'), 'pass');
+		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
 		userEvent.click(getByText('Sign up'));
 
