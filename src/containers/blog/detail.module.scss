@@ -66,6 +66,11 @@
 		border-left: 0.5px solid $ts-red;
 		padding-left: 16px;
 	}
+	img {
+		display: inline-block;
+		max-width: 100%;
+		height: auto;
+	}
 }
 
 .sidebar {
