@@ -47,6 +47,15 @@ body,
 	color: $ts-dark;
 }
 
+body.scrollDisabledMobile {
+	height: 100%;
+	overflow: hidden;
+	@media (min-width: $breakpoint-lg) {
+		height: auto;
+		overflow: auto;
+	}
+}
+
 h1,
 h2,
 h3,
