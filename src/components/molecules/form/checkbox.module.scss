@@ -1,0 +1,25 @@
+@import '../../../styles/common';
+
+.label {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.checkbox {
+	-webkit-appearance: none;
+	appearance: none;
+	position: relative;
+	padding: 10px;
+	border: 2px solid $ts-cream;
+	border-radius: 4px;
+	margin-right: 8px;
+	&:checked:after {
+		content: url('/img/icon-success.svg');
+		font-size: 14px;
+		position: absolute;
+		top: -2px;
+		left: -2px;
+		color: $ts-dark;
+	}
+}

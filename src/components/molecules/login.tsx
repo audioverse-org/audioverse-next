@@ -11,7 +11,7 @@ import { makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import Button from './button';
-import Input from './input';
+import Input from './form/input';
 import styles from './login.module.scss';
 
 export default function Login(): JSX.Element {

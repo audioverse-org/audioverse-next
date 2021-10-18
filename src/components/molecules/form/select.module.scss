@@ -1,0 +1,43 @@
+@import '../../../styles/common';
+
+.container {
+	margin-bottom: 16px;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.select {
+	appearance: none;
+	margin-top: 4px;
+
+	display: inline-flex;
+	align-items: center;
+	height: 31px;
+	padding: 3.5px 8px;
+	padding-right: 24px;
+	border-radius: 4px;
+	background: transparent;
+	font-size: 12px;
+	line-height: 14.52px;
+	cursor: pointer;
+	white-space: nowrap;
+
+	background: $ts-white;
+	border: 1px solid rgba($ts-dark, 0.5);
+	outline: none;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover {
+		border-color: $ts-dark;
+	}
+
+	background: url('/img/icon-disclosure-light-small.svg');
+	background-repeat: no-repeat;
+	background-position: right 4px top 50%;
+}

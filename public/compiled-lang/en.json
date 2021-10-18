@@ -1038,25 +1038,25 @@
   "profile__inputLabelForEmail": [
     {
       "type": 0,
-      "value": "email"
+      "value": "Email"
     }
   ],
   "profile__inputLabelForFirstName": [
     {
       "type": 0,
-      "value": "first name"
+      "value": "First name"
     }
   ],
   "profile__inputLabelForLastName": [
     {
       "type": 0,
-      "value": "last name"
+      "value": "Last name"
     }
   ],
   "profile__inputLabelForPassword": [
     {
       "type": 0,
-      "value": "password"
+      "value": "Password"
     }
   ],
   "profile__inputLabelForPostalCode": [

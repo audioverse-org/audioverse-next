@@ -6,3 +6,4 @@ export * from '@lib/api/fetchApi';
 export * from '@lib/api/personIsFavorited';
 export * from '@lib/api/setPersonFavorited';
 export * from '@lib/api/logout';
+export * from '@lib/api/storeRequest';

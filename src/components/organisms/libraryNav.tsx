@@ -1,11 +1,10 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
 import Dropdown from '@components/molecules/dropdown';
+import Mininav from '@components/molecules/mininav';
 import { makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -82,23 +81,14 @@ export default function LibraryNav({
 
 	return (
 		<div className={styles.subnav}>
-			<div className={clsx(styles.miniNav, disabled && styles.miniNavDisabled)}>
-				{navItems.map(([label, slug]) => (
-					<Heading6
-						sans
-						uppercase
-						loose
-						large
-						unpadded
-						key={slug}
-						className={clsx(slug === currentNavHref && styles.miniNavActive)}
-					>
-						<Link href={makeLibraryRoute(languageRoute, slug)}>
-							<a>{label}</a>
-						</Link>
-					</Heading6>
-				))}
-			</div>
+			<Mininav
+				items={navItems.map(([label, slug]) => ({
+					label,
+					url: makeLibraryRoute(languageRoute, slug),
+					isActive: slug === currentNavHref,
+				}))}
+				disabled={disabled}
+			/>
 			<div className={styles.toggleButtons}>
 				{/* TODO: make buttons functional */}
 				<Dropdown

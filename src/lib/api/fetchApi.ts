@@ -1,18 +1,11 @@
-import { IncomingMessage } from 'http';
-
 import { parse } from 'graphql';
 import { print } from 'graphql/language/printer';
 
+import { getCurrentRequest } from '@lib/api/storeRequest';
 import { getSessionToken } from '@lib/cookies';
 import { sleep } from '@lib/sleep';
 
 const API_URL = 'https://graphql-staging.audioverse.org/graphql';
-
-let _request: IncomingMessage | null = null;
-
-export function storeRequest(request: IncomingMessage): void {
-	_request = request;
-}
 
 // WORKAROUND
 // Graphql Code Generator duplicates fragment definitions
@@ -69,7 +62,7 @@ export async function fetchApi(
 		'Content-Type': 'application/json',
 	};
 
-	const sessionToken = getSessionToken(_request);
+	const sessionToken = getSessionToken(getCurrentRequest());
 	if (sessionToken) {
 		headers['x-av-session'] = sessionToken;
 	}

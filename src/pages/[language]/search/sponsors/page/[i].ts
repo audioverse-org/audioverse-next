@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import SearchSponsors, {
 	SearchSponsorsProps,
 } from '@containers/search/sponsors';
-import { storeRequest } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api';
 import { getSearchResultsSponsors } from '@lib/generated/graphql';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 

@@ -1,0 +1,39 @@
+query getAccountPreferencesData {
+	me {
+		user {
+			...preferences
+		}
+	}
+}
+
+mutation updateAccountPreferences(
+	$autoplay: Boolean!
+	$language: Language!
+	$preferredAudioQuality: RecordingQuality!
+	$timezone: Timezone!
+) {
+	updateMyProfile(
+		input: {
+			autoplay: $autoplay
+			language: $language
+			preferredAudioQuality: $preferredAudioQuality
+			timezone: $timezone
+		}
+	) {
+		errors {
+			message
+		}
+		authenticatedUser {
+			user {
+				...preferences
+			}
+		}
+	}
+}
+
+fragment preferences on User {
+	autoplay
+	language
+	preferredAudioQuality
+	timezone
+}

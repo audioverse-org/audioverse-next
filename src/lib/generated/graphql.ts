@@ -6630,6 +6630,57 @@ export type AddAccountPlaylistMutation = {
 	playlistAdd: { __typename?: 'UserPlaylist'; id: string | number };
 };
 
+export type GetAccountPreferencesDataQueryVariables = Exact<{
+	[key: string]: never;
+}>;
+
+export type GetAccountPreferencesDataQuery = {
+	__typename?: 'Query';
+	me: {
+		__typename?: 'AuthenticatedUser';
+		user: {
+			__typename?: 'User';
+			autoplay: boolean;
+			language: UserLanguage;
+			preferredAudioQuality: RecordingQuality;
+			timezone: Timezone;
+		};
+	} | null;
+};
+
+export type UpdateAccountPreferencesMutationVariables = Exact<{
+	autoplay: Scalars['Boolean'];
+	language: Language;
+	preferredAudioQuality: RecordingQuality;
+	timezone: Timezone;
+}>;
+
+export type UpdateAccountPreferencesMutation = {
+	__typename?: 'Mutation';
+	updateMyProfile: {
+		__typename?: 'AuthenticatedUserPayload';
+		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
+		authenticatedUser: {
+			__typename?: 'AuthenticatedUser';
+			user: {
+				__typename?: 'User';
+				autoplay: boolean;
+				language: UserLanguage;
+				preferredAudioQuality: RecordingQuality;
+				timezone: Timezone;
+			};
+		} | null;
+	};
+};
+
+export type PreferencesFragment = {
+	__typename?: 'User';
+	autoplay: boolean;
+	language: UserLanguage;
+	preferredAudioQuality: RecordingQuality;
+	timezone: Timezone;
+};
+
 export type GetProfileDataQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetProfileDataQuery = {
@@ -6656,12 +6707,6 @@ export type UpdateProfileDataMutationVariables = Exact<{
 	password: Maybe<Scalars['String']>;
 	givenName: Maybe<Scalars['String']>;
 	surname: Maybe<Scalars['String']>;
-	address1: Maybe<Scalars['String']>;
-	address2: Maybe<Scalars['String']>;
-	city: Maybe<Scalars['String']>;
-	province: Maybe<Scalars['String']>;
-	postalCode: Maybe<Scalars['String']>;
-	country: Maybe<Scalars['String']>;
 }>;
 
 export type UpdateProfileDataMutation = {
@@ -12163,6 +12208,14 @@ export const TestimoniesFragmentDoc = `
   author
 }
     `;
+export const PreferencesFragmentDoc = `
+    fragment preferences on User {
+  autoplay
+  language
+  preferredAudioQuality
+  timezone
+}
+    `;
 export const ProfileFragmentDoc = `
     fragment profile on User {
   email
@@ -12436,6 +12489,70 @@ export const useAddAccountPlaylistMutation = <
 			>(AddAccountPlaylistDocument, variables)(),
 		options
 	);
+export const GetAccountPreferencesDataDocument = `
+    query getAccountPreferencesData {
+  me {
+    user {
+      ...preferences
+    }
+  }
+}
+    ${PreferencesFragmentDoc}`;
+export const useGetAccountPreferencesDataQuery = <
+	TData = GetAccountPreferencesDataQuery,
+	TError = unknown
+>(
+	variables?: GetAccountPreferencesDataQueryVariables,
+	options?: UseQueryOptions<GetAccountPreferencesDataQuery, TError, TData>
+) =>
+	useQuery<GetAccountPreferencesDataQuery, TError, TData>(
+		['getAccountPreferencesData', variables],
+		graphqlFetcher<
+			GetAccountPreferencesDataQuery,
+			GetAccountPreferencesDataQueryVariables
+		>(GetAccountPreferencesDataDocument, variables),
+		options
+	);
+export const UpdateAccountPreferencesDocument = `
+    mutation updateAccountPreferences($autoplay: Boolean!, $language: Language!, $preferredAudioQuality: RecordingQuality!, $timezone: Timezone!) {
+  updateMyProfile(
+    input: {autoplay: $autoplay, language: $language, preferredAudioQuality: $preferredAudioQuality, timezone: $timezone}
+  ) {
+    errors {
+      message
+    }
+    authenticatedUser {
+      user {
+        ...preferences
+      }
+    }
+  }
+}
+    ${PreferencesFragmentDoc}`;
+export const useUpdateAccountPreferencesMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		UpdateAccountPreferencesMutation,
+		TError,
+		UpdateAccountPreferencesMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		UpdateAccountPreferencesMutation,
+		TError,
+		UpdateAccountPreferencesMutationVariables,
+		TContext
+	>(
+		(variables?: UpdateAccountPreferencesMutationVariables) =>
+			graphqlFetcher<
+				UpdateAccountPreferencesMutation,
+				UpdateAccountPreferencesMutationVariables
+			>(UpdateAccountPreferencesDocument, variables)(),
+		options
+	);
 export const GetProfileDataDocument = `
     query getProfileData {
   me {
@@ -12461,9 +12578,9 @@ export const useGetProfileDataQuery = <
 		options
 	);
 export const UpdateProfileDataDocument = `
-    mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String, $address1: String, $address2: String, $city: String, $province: String, $postalCode: String, $country: String) {
+    mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String) {
   updateMyProfile(
-    input: {email: $email, password: $password, givenName: $givenName, surname: $surname, address1: $address1, address2: $address2, city: $city, province: $province, postalCode: $postalCode, country: $country}
+    input: {email: $email, password: $password, givenName: $givenName, surname: $surname}
   ) {
     errors {
       message
@@ -15870,6 +15987,18 @@ export async function addAccountPlaylist<T>(
 	variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
 ): Promise<AddAccountPlaylistMutation> {
 	return fetchApi(AddAccountPlaylistDocument, { variables });
+}
+
+export async function getAccountPreferencesData<T>(
+	variables: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
+): Promise<GetAccountPreferencesDataQuery> {
+	return fetchApi(GetAccountPreferencesDataDocument, { variables });
+}
+
+export async function updateAccountPreferences<T>(
+	variables: ExactAlt<T, UpdateAccountPreferencesMutationVariables>
+): Promise<UpdateAccountPreferencesMutation> {
+	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
 
 export async function getProfileData<T>(

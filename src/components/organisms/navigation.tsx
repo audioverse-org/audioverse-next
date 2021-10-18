@@ -117,7 +117,7 @@ const Navigation = ({
 			<div className={styles.account}>
 				{user ? (
 					<a
-						className={clsx(styles.accountWithAvatar, 'decorated')}
+						className={styles.accountWithAvatar}
 						onClick={(e) => {
 							e.preventDefault();
 							setSubmenu('account');
@@ -128,7 +128,7 @@ const Navigation = ({
 								<RoundImage image={user.image.url} small />
 							</div>
 						)}
-						{user.name}
+						<span className={styles.accountName}>{user.name}</span>
 						<span className={styles.iconDisclosure}>
 							<IconDisclosure />
 						</span>

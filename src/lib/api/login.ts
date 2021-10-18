@@ -1,5 +1,22 @@
+import { QueryClient } from 'react-query';
+
 import { setSessionToken } from '@lib/cookies';
 import { login as _login } from '@lib/generated/graphql';
+
+export const USER_SESSION_QUERY_KEYS = [
+	['getWithAuthGuardData'],
+	['getProfileData'],
+];
+
+export function invalidateAndResetUserQueries(
+	queryClient: QueryClient
+): Promise<any> {
+	return Promise.all(
+		USER_SESSION_QUERY_KEYS.map((key) => queryClient.invalidateQueries(key))
+	).then(() =>
+		USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key))
+	);
+}
 
 export async function login(email: string, password: string): Promise<boolean> {
 	const {
