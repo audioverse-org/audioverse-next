@@ -890,7 +890,7 @@
   },
   "loginForm__passwordPlaceholder": {
     "col": 37,
-    "defaultMessage": "*******",
+    "defaultMessage": "∗∗∗∗∗∗∗",
     "description": "password input placeholder",
     "end": 2546,
     "file": "src/components/molecules/login.tsx",

@@ -13,6 +13,7 @@
 	color: $ts-midTone;
 	margin: 0;
 	padding: 0;
+	cursor: pointer;
 	&[aria-pressed='true'] {
 		color: $ts-red;
 	}

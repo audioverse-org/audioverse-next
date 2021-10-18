@@ -29,6 +29,7 @@ jest.mock('@lib/api/recordingIsFavorited');
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
 	title: 'the_sermon_title',
+	canonicalPath: 'the_sermon_path',
 	isDownloadAllowed: true,
 	audioDownloads: [],
 	videoDownloads: [],
@@ -255,6 +256,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -308,6 +310,7 @@ describe('player', () => {
 		const recording1: Partial<PlayerFragment> = {
 			id: 'first_sermon_id',
 			title: 'first_sermon_title',
+			canonicalPath: 'the_sermon_path',
 			audioFiles: [
 				{
 					url: 'first_source_src',
@@ -320,6 +323,7 @@ describe('player', () => {
 		const recording2: Partial<PlayerFragment> = {
 			id: 'second_sermon_id',
 			title: 'second_sermon_title',
+			canonicalPath: 'the_sermon_path',
 			audioFiles: [
 				{
 					url: 'second_source_src',
@@ -366,6 +370,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -389,6 +394,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -415,6 +421,7 @@ describe('player', () => {
 		const recording1: Partial<PlayerFragment> = {
 			id: 'first_sermon_id',
 			title: 'first_sermon_title',
+			canonicalPath: 'the_sermon_path',
 			audioFiles: [
 				{
 					url: 'first_source_src',
@@ -427,6 +434,7 @@ describe('player', () => {
 		const recording2: Partial<PlayerFragment> = {
 			id: 'second_sermon_id',
 			title: 'second_sermon_title',
+			canonicalPath: 'the_sermon_path',
 			audioFiles: [
 				{
 					url: 'second_source_src',
@@ -506,6 +514,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -531,6 +540,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -617,6 +627,7 @@ describe('player', () => {
 				recording: {
 					id: 'the_sermon_id',
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					audioFiles: [
 						{
 							url: 'the_source_src',
@@ -758,6 +769,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -805,6 +817,7 @@ describe('player', () => {
 			props: {
 				recording: {
 					title: 'the_sermon_title',
+					canonicalPath: 'the_sermon_path',
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -873,6 +886,7 @@ describe('player', () => {
 		const { getByLabelText } = await renderComponent({
 			props: {
 				recording: {
+					canonicalPath: 'the_sermon_path',
 					duration: 60,
 					videoFiles: [
 						{
@@ -1046,6 +1060,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					canonicalPath: 'the_sermon_path',
 					duration: 120,
 				},
 			},

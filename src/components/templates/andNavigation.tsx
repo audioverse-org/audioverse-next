@@ -15,6 +15,7 @@ import { BaseColors } from '@lib/constants';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
 import IconListening from '../../../public/img/icon-listening.svg';
 import MoreIcon from '../../../public/img/icon-more.svg';
 
@@ -26,11 +27,12 @@ export default function AndNavigation({
 }: {
 	children: ReactNode;
 }): JSX.Element {
+	const router = useRouter();
 	const {
 		push,
 		query: { q },
 		pathname,
-	} = useRouter();
+	} = router;
 	const languageRoute = useLanguageRoute();
 	const playbackContext = useContext(PlaybackContext);
 	const [showingMenu, setShowingMenu] = useState(false);
@@ -47,11 +49,15 @@ export default function AndNavigation({
 			Router.events.off('routeChangeStart', onRouteChange);
 		};
 	}, []);
+	useEffect(() => {
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.toggle('scrollDisabledMobile', showingMenu);
+	}, [showingMenu]);
 	const onSearchPage = pathname.includes('/[language]/search');
 
-	const navigationItems = getNavigationItems(languageRoute);
+	const navigationItems = getNavigationItems(router, languageRoute);
 	return (
-		<div className={styles.wrapper}>
+		<>
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileHeaderTitle}>
 					<Header />
@@ -66,7 +72,9 @@ export default function AndNavigation({
 					/>
 					{playbackContext.getRecording() && (
 						<IconButton
-							Icon={IconListening}
+							Icon={
+								playbackContext.paused() ? IconListening : IconListeningAnimated
+							}
 							onClick={() =>
 								push(playbackContext.getRecording()?.canonicalPath || '')
 							}
@@ -77,7 +85,7 @@ export default function AndNavigation({
 				</div>
 				<div className={styles.mobileSubnav}>
 					<div className={styles.mobileSubnavItems}>
-						{navigationItems.slice(0, -1).map((item) => (
+						{navigationItems.slice(0, -2).map((item) => (
 							<Heading6 sans large loose unpadded uppercase key={item.key}>
 								<Link href={item.href as string}>
 									<a>{item.label}</a>
@@ -96,52 +104,54 @@ export default function AndNavigation({
 					</a>
 				</div>
 			</div>
-			<div className={styles.base}>
-				<div
-					className={clsx(
-						styles.navigation,
-						showingMenu && styles.navigationShown
-					)}
-				>
-					<div className={styles.header}>
-						<Header />
-					</div>
-					<Navigation
-						onExit={() => setShowingMenu(false)}
-						searchTerm={term}
-						onSearchChange={(value) => {
-							setTerm(value);
-						}}
-					/>
-				</div>
-				<div className={styles.content}>
-					<LanguageAlternativesAlert />
+			<div className={styles.wrapper}>
+				<div className={styles.base}>
 					<div
 						className={clsx(
-							styles.searchRow,
-							onSearchPage && styles.searchShown
+							styles.navigation,
+							showingMenu && styles.navigationShown
 						)}
 					>
-						<SearchBar
-							term={term}
-							onChange={(value) => {
+						<div className={styles.header}>
+							<Header />
+						</div>
+						<Navigation
+							onExit={() => setShowingMenu(false)}
+							searchTerm={term}
+							onSearchChange={(value) => {
 								setTerm(value);
 							}}
-							className={styles.searchBox}
-						/>
-						<Button
-							type="super"
-							text={
-								<FormattedMessage
-									id="andNavigation__donate"
-									defaultMessage="Donate"
-								/>
-							}
 						/>
 					</div>
-					<div>{children}</div>
+					<div className={styles.content}>
+						<LanguageAlternativesAlert />
+						<div
+							className={clsx(
+								styles.searchRow,
+								onSearchPage && styles.searchShown
+							)}
+						>
+							<SearchBar
+								term={term}
+								onChange={(value) => {
+									setTerm(value);
+								}}
+								className={styles.searchBox}
+							/>
+							<Button
+								type="super"
+								text={
+									<FormattedMessage
+										id="andNavigation__donate"
+										defaultMessage="Donate"
+									/>
+								}
+							/>
+						</div>
+						<div>{children}</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }

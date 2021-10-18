@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, {
 	ReactNode,
 	useCallback,
@@ -335,7 +336,14 @@ export default function AndMiniplayer({
 				</div>
 			</div>
 
-			<div className={recording && styles.contentWithPlayer}>{children}</div>
+			<div
+				className={
+					recording &&
+					clsx(styles.contentWithPlayer, 'andMiniplayer--withPlayer')
+				}
+			>
+				{children}
+			</div>
 			{recording && <Miniplayer />}
 		</PlaybackContext.Provider>
 	);

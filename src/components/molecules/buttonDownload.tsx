@@ -1,15 +1,16 @@
-import { Menu, MenuItem } from '@material-ui/core';
-import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, MessageDescriptor, useIntl } from 'react-intl';
 
+import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
 import { ButtonDownloadFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 
 import IconDownload from '../../../public/img/icon-download.svg';
 
+import styles from './buttonDownload.module.scss';
 import { isBackgroundColorDark } from './buttonPlay';
+import Dropdown from './dropdown';
 import IconButton from './iconButton';
 
 export default function ButtonDownload({
@@ -20,76 +21,114 @@ export default function ButtonDownload({
 	backgroundColor: BaseColors;
 }): JSX.Element | null {
 	const { audioDownloads, videoDownloads, isDownloadAllowed } = recording;
-	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const intl = useIntl();
 
 	if (!isDownloadAllowed) {
 		return null;
 	}
 
-	const handleClose = () => {
-		setAnchorEl(null);
+	const formatLabel = (
+		quality: 'high' | 'medium' | 'low',
+		filesize: string
+	) => {
+		const message: MessageDescriptor = {
+			high: {
+				id: 'molecule-buttonDownload__linkLabelHigh',
+				defaultMessage: 'High Quality ({size})',
+			},
+			medium: {
+				id: 'molecule-buttonDownload__linkLabelMedium',
+				defaultMessage: 'Medium Quality ({size})',
+			},
+			low: {
+				id: 'molecule-buttonDownload__linkLabelLow',
+				defaultMessage: 'Low Quality ({size})',
+			},
+		}[quality];
+
+		return intl.formatMessage(message, {
+			size: readableBytes(filesize),
+		});
 	};
 
 	return (
-		<>
-			<IconButton
-				Icon={IconDownload}
-				onClick={({ currentTarget }) => setAnchorEl(currentTarget)}
-				color={
-					isBackgroundColorDark(backgroundColor)
-						? BaseColors.WHITE
-						: BaseColors.DARK
-				}
-				{...{
-					backgroundColor,
-					'aria-label': intl.formatMessage({
+		<Dropdown
+			id="downloadMenu"
+			trigger={({ isOpen, ...props }) => (
+				<IconButton
+					Icon={IconDownload}
+					color={
+						isBackgroundColorDark(backgroundColor)
+							? isOpen
+								? BaseColors.SALMON
+								: BaseColors.WHITE
+							: isOpen
+							? BaseColors.RED
+							: BaseColors.DARK
+					}
+					backgroundColor={backgroundColor}
+					aria-label={intl.formatMessage({
 						id: 'molecule-buttonDownload__buttonLabel',
 						defaultMessage: 'downloads',
 						description: 'download button label',
-					}),
-					'aria-controls': 'downloads',
-					'aria-haspopup': 'true',
-				}}
-			/>
-			<Menu
-				id="downloads"
-				anchorEl={anchorEl}
-				keepMounted
-				open={Boolean(anchorEl)}
-				onClose={handleClose}
-			>
-				<MenuItem disabled>
-					<FormattedMessage
-						id="molecule-buttonDownload__menuAudioHeading"
-						defaultMessage="Audio Downloads"
-						description="download button menu audio heading"
-					/>
-				</MenuItem>
-				{audioDownloads.map((file) => (
-					<MenuItem key={file.url} onClick={handleClose}>
-						<Link href={file.url}>
-							<a>{readableBytes(file.filesize)}</a>
-						</Link>
-					</MenuItem>
-				))}
-				{videoDownloads.length > 0 && (
-					<MenuItem disabled>
+					})}
+					{...props}
+				/>
+			)}
+		>
+			{(handleClose) => (
+				<div className={styles.container}>
+					<Heading6 sans loose uppercase large>
 						<FormattedMessage
-							id="molecule-buttonDownload__menuVideoHeading"
-							defaultMessage="Video Downloads"
-							description="download button menu video heading"
+							id="molecule-buttonDownload__menuAudioHeading"
+							defaultMessage="Audio Downloads"
+							description="download button menu audio heading"
 						/>
-					</MenuItem>
-				)}
-				{videoDownloads.map((file) => (
-					<MenuItem key={file.url} onClick={handleClose}>
-						<Link href={file.url}>
-							<a>{readableBytes(file.filesize)}</a>
-						</Link>
-					</MenuItem>
-				))}
-			</Menu>
-		</>
+					</Heading6>
+					{audioDownloads.map(({ url, filesize, bitrate }, index) => (
+						<p className={styles.paragraph} key={index} onClick={handleClose}>
+							<a href={url} target="_blank" rel="noreferrer noopener">
+								{formatLabel(
+									bitrate <= 24 ? 'low' : bitrate <= 48 ? 'medium' : 'high',
+									filesize
+								)}
+							</a>
+						</p>
+					))}
+					{videoDownloads.length > 0 && (
+						<>
+							<Heading6 sans loose uppercase large>
+								<FormattedMessage
+									id="molecule-buttonDownload__menuVideoHeading"
+									defaultMessage="Video Downloads"
+									description="download button menu video heading"
+								/>
+							</Heading6>
+							{videoDownloads.map(({ url, filesize, height, width }, index) => {
+								const frameSize = height * width;
+								return (
+									<p
+										className={styles.paragraph}
+										key={index}
+										onClick={handleClose}
+									>
+										<a href={url} target="_blank" rel="noreferrer noopener">
+											{formatLabel(
+												frameSize <= 200000
+													? 'low'
+													: frameSize <= 400000
+													? 'medium'
+													: 'high',
+												filesize
+											)}
+										</a>
+									</p>
+								);
+							})}
+						</>
+					)}
+				</div>
+			)}
+		</Dropdown>
 	);
 }

@@ -618,7 +618,7 @@
   "loginForm__passwordPlaceholder": [
     {
       "type": 0,
-      "value": "*******"
+      "value": "∗∗∗∗∗∗∗"
     }
   ],
   "loginForm__resetPasswordErrorMessage": [

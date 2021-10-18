@@ -1,11 +1,5 @@
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="4" y1="4" x2="4" y2="20" stroke="#FF224A" stroke-width="2" stroke-linecap="round">
-  <animate dur="1s" attributeType="XML" attributeName="d" repeatCount="indefinite" values="M4 4v16;M4 9v11;M4 4v16" />
-</line>
-<line x1="12" y1="10" x2="12" y2="20" stroke="#FF224A" stroke-width="2" stroke-linecap="round">
-  <animate dur="1s" attributeType="XML" attributeName="d" repeatCount="indefinite" values="M12 10v10;M12 6v14;M12 10v10" />
-</line>
-<line x1="20" y1="8" x2="20" y2="20" stroke="#FF224A" stroke-width="2" stroke-linecap="round">
-  <animate dur="1s" attributeType="XML" attributeName="d" repeatCount="indefinite" values="M20 7v13;M20 10v10;M20 7v13" />
-</line>
+<line x1="4" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+<line x1="12" y1="10" x2="12" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+<line x1="20" y1="8" x2="20" y2="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 </svg>

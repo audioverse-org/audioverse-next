@@ -26,6 +26,7 @@
 	display: grid;
 	grid-template-areas: 'cell';
 	max-height: 100%;
+	flex-grow: 0;
 	.pane {
 		grid-area: cell;
 	}
@@ -49,9 +50,15 @@
 }
 
 .meta {
-	flex: 0 1 40%; // TODO: refine this
-	padding: 2rem;
-	min-width: 0;
+	flex: 1 1 auto;
+	max-width: 636px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.link:hover {
+	color: $ts-dark;
+	text-decoration: none;
 }
 
 .series {
@@ -59,6 +66,9 @@
 	align-items: center;
 	font-weight: 400;
 	font-size: 12px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	svg {
 		color: $ts-red;
 		margin-right: 4px;

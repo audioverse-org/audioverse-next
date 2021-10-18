@@ -122,7 +122,7 @@ describe('profile page', () => {
 	it('displays password field if unauthenticated', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
-		expect(getByPlaceholderText('*******')).toBeInTheDocument();
+		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
 	});
 
 	it('makes login request', async () => {
@@ -131,7 +131,7 @@ describe('profile page', () => {
 		const { getByPlaceholderText, getByText } = await renderPage();
 
 		const emailField = getByPlaceholderText('jane@example.com');
-		const passwordField = getByPlaceholderText('*******');
+		const passwordField = getByPlaceholderText('∗∗∗∗∗∗∗');
 		const loginButton = getByText('Login');
 
 		await userEvent.type(emailField, 'the_email');
@@ -198,7 +198,7 @@ describe('profile page', () => {
 		const { getByText, getByPlaceholderText } = await renderPage();
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
-		await userEvent.type(getByPlaceholderText('*******'), 'the_password');
+		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'the_password');
 
 		userEvent.click(getByText('Login'));
 

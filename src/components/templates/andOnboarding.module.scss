@@ -50,8 +50,8 @@
 
 $onboarding-image-width: 3494px;
 .cards {
-	background-size: #{math.div($onboarding-image-width, 2)} auto;
 	background: url('/img/onboarding.jpg') no-repeat 67% top;
+	background-size: #{math.div($onboarding-image-width, 2)} auto;
 }
 
 .description {

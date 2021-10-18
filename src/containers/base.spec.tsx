@@ -20,16 +20,18 @@ describe('app', () => {
 	});
 
 	it('sets title', async () => {
-		const { getByTestId } = await render(
-			<MyApp
-				Component={(() => null) as unknown as typeof React.Component}
-				pageProps={{}}
-			/>
-		);
+		await act(async () => {
+			const { getByTestId } = await render(
+				<MyApp
+					Component={(() => null) as unknown as typeof React.Component}
+					pageProps={{}}
+				/>
+			);
 
-		const head = getByTestId('head');
+			const head = getByTestId('head');
 
-		expect(head.innerHTML).toContain('AudioVerse');
+			expect(head.innerHTML).toContain('AudioVerse');
+		});
 	});
 
 	it('rehydrates react-query', async () => {
@@ -55,9 +57,11 @@ describe('app', () => {
 	});
 
 	it('includes sidebar', async () => {
-		const { getByText } = await renderApp(() => <>h</>, {});
+		await act(async () => {
+			const { getByText } = await renderApp(() => <>h</>, {});
 
-		expect(getByText('More')).toBeInTheDocument();
+			expect(getByText('More')).toBeInTheDocument();
+		});
 	});
 
 	it('disables sidebar', async () => {
@@ -69,12 +73,14 @@ describe('app', () => {
 	});
 
 	it('sets title with props', async () => {
-		const { getByTestId } = await renderApp(() => <>h</>, {
-			title: 'the_prop_title',
+		await act(async () => {
+			const { getByTestId } = await renderApp(() => <>h</>, {
+				title: 'the_prop_title',
+			});
+
+			const head = getByTestId('head');
+
+			expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
 		});
-
-		const head = getByTestId('head');
-
-		expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
 	});
 });

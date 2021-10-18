@@ -16,6 +16,7 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconClosure from '../../../public/img/icon-closure.svg';
 import IconDisclosure from '../../../public/img/icon-disclosure.svg';
+import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
 import IconPlay from '../../../public/img/icon-play.svg';
 
 import ButtonFavorite from './buttonFavorite';
@@ -93,20 +94,31 @@ export default function TeaseRecording({
 					<Heading2>{recording.title}</Heading2>
 				)}
 				<div className={styles.play}>
-					<IconButton
-						Icon={IconPlay}
-						onClick={(e) => {
-							e.preventDefault();
-							session.play();
-						}}
-						color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-						backgroundColor={backgroundColor}
-						aria-label={intl.formatMessage({
-							id: 'playButton__playLabel',
-							defaultMessage: 'play',
-							description: 'play button play label',
-						})}
-					/>
+					{session.isPlaying ? (
+						<IconButton
+							Icon={IconListeningAnimated}
+							onClick={() => {
+								// let propagate to recording push
+							}}
+							color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
+							backgroundColor={backgroundColor}
+						/>
+					) : (
+						<IconButton
+							Icon={IconPlay}
+							onClick={(e) => {
+								e.preventDefault();
+								session.play();
+							}}
+							color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
+							backgroundColor={backgroundColor}
+							aria-label={intl.formatMessage({
+								id: 'playButton__playLabel',
+								defaultMessage: 'play',
+								description: 'play button play label',
+							})}
+						/>
+					)}
 				</div>
 			</div>
 			{!hideSpeakers && (

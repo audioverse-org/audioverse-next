@@ -53,7 +53,10 @@ export default function Transcript({
 							description="transcript assistance request"
 						/>
 					</p>
-					<p>{text}</p>
+					<div
+						className={styles.text}
+						dangerouslySetInnerHTML={{ __html: text }}
+					/>
 				</>
 			)}
 		</div>

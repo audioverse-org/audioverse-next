@@ -99,7 +99,7 @@ export default function Login(): JSX.Element {
 					})}
 					placeholder={intl.formatMessage({
 						id: 'loginForm__passwordPlaceholder',
-						defaultMessage: '*******',
+						defaultMessage: '∗∗∗∗∗∗∗',
 					})}
 					type="password"
 					value={password}

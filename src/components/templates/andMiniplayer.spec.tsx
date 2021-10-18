@@ -84,7 +84,10 @@ describe('miniplayer template', () => {
 				children: (
 					<ContextUser
 						func={(c) => {
-							c.loadRecording({ title: 'the_recording_title' } as any);
+							c.loadRecording({
+								title: 'the_recording_title',
+								canonicalPath: 'the_recording_path',
+							} as any);
 						}}
 					/>
 				),
