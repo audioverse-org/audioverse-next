@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 
 import Profile from '@containers/account/profile';
-import { storeRequest } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api';
 import { getProfileData } from '@lib/generated/graphql';
 import getDehydratedProps, { DehydratedProps } from '@lib/getDehydratedProps';
 

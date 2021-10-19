@@ -15,6 +15,6 @@ export default function useHover(): [MutableRefObject<any>, boolean] {
 				node.removeEventListener('mouseout', handleMouseOut);
 			};
 		}
-	}, [ref.current]);
+	}, [ref]);
 	return [ref, value];
 }

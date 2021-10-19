@@ -11,7 +11,7 @@ function Login(): JSX.Element {
 
 	useEffect(() => {
 		router.push(makeDiscoverRoute(route));
-	}, []);
+	}, [router, route]);
 
 	return <>redirecting...</>;
 }

@@ -3,7 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import ButtonGuest from '@components/molecules/buttonGuest';
-import Input from '@components/molecules/input';
+import Checkbox from '@components/molecules/form/checkbox';
+import Input from '@components/molecules/form/input';
 import SocialLogin from '@components/molecules/socialLogin';
 import AndOnboarding from '@components/templates/andOnboarding';
 import {
@@ -152,18 +153,14 @@ function Register(): JSX.Element {
 					value={password}
 					setValue={setPassword}
 				/>
-				<label className={styles.checkboxLabel}>
-					<input
-						type="checkbox"
-						className={styles.checkbox}
-						checked={newsletter}
-						onChange={() => setNewsletter(!newsletter)}
-					/>
-					<FormattedMessage
-						id="register__newsletterSubscribe"
-						defaultMessage="Subscribe to Newsletter"
-					/>
-				</label>
+				<Checkbox
+					label={intl.formatMessage({
+						id: 'register__newsletterSubscribe',
+						defaultMessage: 'Subscribe to Newsletter',
+					})}
+					checked={newsletter}
+					toggleChecked={() => setNewsletter(!newsletter)}
+				/>
 
 				<div className={styles.actions}>
 					<Button

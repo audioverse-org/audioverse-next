@@ -4,7 +4,7 @@ import LibraryPlaybackStatus, {
 	getLibraryPlaybackStatusDataVariables,
 	ILibraryPlaybackStatusProps,
 } from '@containers/library/playbackStatus';
-import { storeRequest } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api';
 import {
 	getLibraryData,
 	RecordingViewerPlaybackStatus,

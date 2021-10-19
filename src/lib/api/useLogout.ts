@@ -2,11 +2,11 @@ import { useQueryClient } from 'react-query';
 
 import { clearSessionToken } from '@lib/cookies';
 
-export function logout(): void {
+import { invalidateAndResetUserQueries } from '.';
+
+export function useLogout(): void {
 	const queryClient = useQueryClient();
 
 	clearSessionToken();
-	queryClient
-		.invalidateQueries(['getWithAuthGuardData'])
-		.then(() => queryClient.resetQueries(['getWithAuthGuardData']));
+	invalidateAndResetUserQueries(queryClient);
 }

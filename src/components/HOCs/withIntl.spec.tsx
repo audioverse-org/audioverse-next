@@ -55,7 +55,7 @@ jest.mock('react-intl');
 jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 jest.mock('@lib/time');
-jest.mock('@lib/api/logout');
+jest.mock('@lib/api/useLogout');
 jest.mock('@lib/api/useIsRecordingFavorited');
 
 const expectNoUnlocalizedText = (
@@ -579,7 +579,12 @@ describe('localization usage', () => {
 		[Reset, {}],
 		// TODO: [Profile, {}],
 		[Home, {}],
-		[Player, {}],
+		[
+			Player,
+			{
+				recording: {},
+			},
+		],
 		[SearchBar, {}],
 		[
 			TeaseRecording,

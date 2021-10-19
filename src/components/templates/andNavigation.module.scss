@@ -1,8 +1,12 @@
 @import '../../styles/common';
 
+.overflower {
+	position: relative;
+	overflow: hidden;
+}
+
 .wrapper {
 	background: $ts-white;
-	overflow: hidden;
 }
 
 .base {

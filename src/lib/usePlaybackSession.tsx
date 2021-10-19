@@ -61,6 +61,7 @@ export default function usePlaybackSession(
 			if (!el) return;
 			portalContainerRef.current?.appendChild(el);
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [recording, isLoaded, isPortalActive]);
 
 	useEffect(
@@ -69,6 +70,7 @@ export default function usePlaybackSession(
 			// TODO: provide recording ID when unloading?
 			context.unsetVideoHandler(recording.id);
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]
 	);
 

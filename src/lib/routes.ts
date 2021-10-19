@@ -221,6 +221,12 @@ export const makeLogoutRoute = (languageRoute: string): string =>
 export const makeRegisterRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/register`;
 
+export const makeAccountProfileRoute = (languageRoute: string): string =>
+	`/${languageRoute}/account/profile`;
+
+export const makeAccountPreferencesRoute = (languageRoute: string): string =>
+	`/${languageRoute}/account/preferences`;
+
 export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 	`/${languageRoute}/library${subpath ? `/${subpath}` : ''}`;
 

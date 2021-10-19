@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { logout } from '@lib/api';
+import { useLogout } from '@lib/api';
 
 export default function Logout(): JSX.Element {
-	logout();
+	useLogout();
 
 	return (
 		<FormattedMessage

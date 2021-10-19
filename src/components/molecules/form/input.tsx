@@ -12,7 +12,7 @@ type InputOptions = {
 
 export default function Input({
 	label,
-	type,
+	type = 'text',
 	value,
 	setValue,
 	placeholder,

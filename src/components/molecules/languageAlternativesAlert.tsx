@@ -37,7 +37,7 @@ export default function LanguageAlternativesAlert(): JSX.Element | null {
 		return () => {
 			Router.events.off('routeChangeStart', setCurrentRouteToCookie);
 		};
-	}, []);
+	}, [setCurrentRouteToCookie]);
 
 	const isServerSide = typeof window === 'undefined';
 	const referrer = isServerSide ? null : document.referrer;

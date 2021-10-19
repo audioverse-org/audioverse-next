@@ -9,7 +9,7 @@ import { hydrate, QueryClient } from 'react-query';
 
 import * as api from '@lib/api';
 import { login } from '@lib/api';
-import { storeRequest } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api';
 import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
@@ -31,24 +31,12 @@ const userBefore = {
 	givenName: 'the_given_name',
 	surname: 'the_surname',
 	email: 'the_email',
-	address1: 'the_address_1',
-	address2: 'the_address_2',
-	city: 'the_city',
-	province: 'the_province',
-	postalCode: 'the_postal_code',
-	country: 'the_country',
 };
 
 const userAfter = {
 	givenName: 'the_new_given_name',
 	surname: 'the_new_surname',
 	email: 'the_new_email',
-	address1: 'the_new_address_1',
-	address2: 'the_new_address_2',
-	city: 'the_new_city',
-	province: 'the_new_province',
-	postalCode: 'the_new_postal_code',
-	country: 'the_new_country',
 };
 
 function loadData() {
@@ -191,7 +179,7 @@ describe('profile page', () => {
 			},
 		});
 
-		await findByText('first name');
+		await findByText('First name');
 	});
 
 	it('logs in with email and password', async () => {
@@ -219,7 +207,7 @@ describe('profile page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		expect(getByLabelText('email')).toBeInTheDocument();
+		expect(getByLabelText('Email')).toBeInTheDocument();
 	});
 
 	it('loads user email', async () => {
@@ -237,15 +225,7 @@ describe('profile page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		expect(getByLabelText('password')).toBeInTheDocument();
-	});
-
-	it('renders password confirm field', async () => {
-		loadData();
-
-		const { getByLabelText } = await renderPage();
-
-		expect(getByLabelText('confirm password')).toBeInTheDocument();
+		expect(getByLabelText('Password')).toBeInTheDocument();
 	});
 
 	it('submits email change', async () => {
@@ -257,8 +237,8 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('email'), '123');
-		userEvent.click(getByText('save'));
+		userEvent.type(getByLabelText('Email'), '123');
+		userEvent.click(getByText('Submit'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -271,56 +251,7 @@ describe('profile page', () => {
 		});
 	});
 
-	it('requires password field two', async () => {
-		loadData();
-
-		const { getByLabelText, getByText } = await renderPage();
-
-		userEvent.type(getByLabelText('password'), 'the_password');
-		userEvent.click(getByText('save'));
-
-		await waitFor(() => {
-			expect(
-				getByText('please type your new password twice')
-			).toBeInTheDocument();
-		});
-	});
-
-	it('requires password field one', async () => {
-		loadData();
-
-		const { getByLabelText, getByText } = await renderPage();
-
-		userEvent.type(getByLabelText('confirm password'), 'the_password');
-		userEvent.click(getByText('save'));
-
-		await waitFor(() => {
-			expect(
-				getByText('please type your new password twice')
-			).toBeInTheDocument();
-		});
-	});
-
-	it('does not submit mismatched password', async () => {
-		loadData();
-
-		const { getByLabelText, getByText } = await renderPage();
-
-		userEvent.type(getByLabelText('password'), 'pass_one');
-		userEvent.type(getByLabelText('confirm password'), 'pass_two');
-		userEvent.click(getByText('save'));
-
-		await waitFor(() => {
-			expect(getByText('passwords do not match')).toBeInTheDocument();
-		});
-
-		expect(mockedFetchApi).not.toBeCalledWith(
-			UpdateProfileDataDocument,
-			expect.anything()
-		);
-	});
-
-	it('submits matching password', async () => {
+	it('submits password', async () => {
 		loadData();
 
 		const { getByLabelText, getByText, getByDisplayValue } = await renderPage();
@@ -329,9 +260,8 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('password'), 'the_password');
-		userEvent.type(getByLabelText('confirm password'), 'the_password');
-		userEvent.click(getByText('save'));
+		userEvent.type(getByLabelText('Password'), 'the_password');
+		userEvent.click(getByText('Submit'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -347,22 +277,20 @@ describe('profile page', () => {
 		loadData();
 
 		when(mockedFetchApi)
-			.calledWith(UpdateProfileDataDocument, expect.anything())
+			.calledWith(GetProfileDataDocument, expect.anything())
 			.mockResolvedValue({
-				updateMyProfile: {
-					authenticatedUser: {
-						user: {
-							givenName: 'the_new_given_name',
-							surname: 'the_new_surname',
-							email: 'the_new_email',
-						},
+				me: {
+					user: {
+						givenName: 'the_new_given_name',
+						surname: 'the_new_surname',
+						email: 'the_new_email',
 					},
 				},
 			});
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('save'));
+		userEvent.click(getByText('Submit'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
@@ -372,9 +300,21 @@ describe('profile page', () => {
 	it('loads mutated name on success', async () => {
 		loadData();
 
+		when(mockedFetchApi)
+			.calledWith(GetProfileDataDocument, expect.anything())
+			.mockResolvedValue({
+				me: {
+					user: {
+						givenName: 'the_new_given_name',
+						surname: 'the_new_surname',
+						email: 'the_new_email',
+					},
+				},
+			});
+
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('save'));
+		userEvent.click(getByText('Submit'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
@@ -422,7 +362,7 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.click(getByText('save'));
+		userEvent.click(getByText('Submit'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {

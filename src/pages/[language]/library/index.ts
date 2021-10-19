@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext } from 'next';
 
 import Library, { getLibraryDataDefaultVariables } from '@containers/library';
-import { storeRequest } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api';
 import { getLibraryData } from '@lib/generated/graphql';
 import getDehydratedProps, { DehydratedProps } from '@lib/getDehydratedProps';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';

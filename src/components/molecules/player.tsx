@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import React, { CSSProperties } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonNudge from '@components/molecules/buttonNudge';
@@ -28,17 +28,6 @@ export interface PlayerProps {
 }
 
 const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
-	if (!recording)
-		return (
-			<p>
-				<FormattedMessage
-					id="molecule-player__loading"
-					defaultMessage="loading ..."
-					description="player loading message"
-				/>
-			</p>
-		);
-
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);

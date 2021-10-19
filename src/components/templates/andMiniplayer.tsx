@@ -3,6 +3,7 @@ import React, {
 	ReactNode,
 	useCallback,
 	useEffect,
+	useMemo,
 	useRef,
 	useState,
 } from 'react';
@@ -142,15 +143,18 @@ export default function AndMiniplayer({
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
-	const options: VideoJsPlayerOptions = {
-		poster: '/img/poster.jpg',
-		controls: false,
-		// TODO: Should this be set back to `auto` once streaming urls are fixed?
-		// https://docs.videojs.com/docs/guides/options.html
-		preload: 'metadata',
-		fluid: true,
-		sources,
-	};
+	const options: VideoJsPlayerOptions = useMemo(
+		() => ({
+			poster: '/img/poster.jpg',
+			controls: false,
+			// TODO: Should this be set back to `auto` once streaming urls are fixed?
+			// https://docs.videojs.com/docs/guides/options.html
+			preload: 'metadata',
+			fluid: true,
+			sources,
+		}),
+		[sources]
+	);
 
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -256,16 +260,18 @@ export default function AndMiniplayer({
 		setVolume(p.volume() * 100);
 
 		setFingerprint(JSON.stringify(sources));
-	}, [hasSources, sources, videoEl]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [options, hasSources, sources, videoEl]);
 
 	useEffect(() => {
 		onLoad && onLoad(playback);
 		setOnLoad(undefined);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [fingerprint]);
 
 	useEffect(() => {
 		player?.volume(volume / 100);
-	}, [volume]);
+	}, [player, volume]);
 
 	useEffect(() => {
 		if (onLoad) {

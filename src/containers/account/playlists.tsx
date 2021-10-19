@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Checkbox from '@components/molecules/checkbox';
-import Input from '@components/molecules/input';
+import Checkbox from '@components/molecules/form/checkbox';
+import Input from '@components/molecules/form/input';
 import {
 	useAddAccountPlaylistMutation,
 	useGetAccountPlaylistsPageDataQuery,
@@ -111,7 +111,7 @@ function Playlists(): JSX.Element {
 						description: 'account playlists page input label public',
 					})}
 					checked={isPublic}
-					setChecked={setIsPublic}
+					toggleChecked={() => setIsPublic(!isPublic)}
 				/>
 				<button type="submit">
 					<FormattedMessage

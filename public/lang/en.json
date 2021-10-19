@@ -1480,7 +1480,7 @@
   },
   "profile__inputLabelForEmail": {
     "col": 30,
-    "defaultMessage": "email",
+    "defaultMessage": "Email",
     "description": "input label for email",
     "end": 2728,
     "file": "src/containers/account/profile.tsx",
@@ -1489,7 +1489,7 @@
   },
   "profile__inputLabelForFirstName": {
     "col": 30,
-    "defaultMessage": "first name",
+    "defaultMessage": "First name",
     "description": "input label for first name",
     "end": 3508,
     "file": "src/containers/account/profile.tsx",
@@ -1498,7 +1498,7 @@
   },
   "profile__inputLabelForLastName": {
     "col": 30,
-    "defaultMessage": "last name",
+    "defaultMessage": "Last name",
     "description": "input label for last name",
     "end": 3739,
     "file": "src/containers/account/profile.tsx",
@@ -1507,7 +1507,7 @@
   },
   "profile__inputLabelForPassword": {
     "col": 30,
-    "defaultMessage": "password",
+    "defaultMessage": "Password",
     "description": "input label for password",
     "end": 2968,
     "file": "src/containers/account/profile.tsx",

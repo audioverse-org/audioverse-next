@@ -47,6 +47,11 @@
 			}
 		}
 	}
+	:global(.video-js.vjs-fluid) {
+		// handle responsive manually
+		height: $miniplayer-height;
+		padding-top: 0;
+	}
 }
 
 .meta {
