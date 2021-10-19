@@ -32,10 +32,13 @@ function Profile(): JSX.Element {
 
 	useEffect(() => {
 		const d = data?.me?.user;
+		if (!d) {
+			return;
+		}
 
-		setEmail(d ? d.email : email);
-		setGivenName(d ? d.givenName || '' : givenName);
-		setSurname(d ? d.surname || '' : surname);
+		setEmail(d.email);
+		setGivenName(d.givenName || '');
+		setSurname(d.surname || '');
 	}, [data]);
 
 	function submit(e?: FormEvent<HTMLFormElement>) {

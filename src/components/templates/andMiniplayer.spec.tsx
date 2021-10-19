@@ -21,7 +21,7 @@ function ContextUser({
 
 	useEffect(() => {
 		func(playbackContext, setText);
-	}, [hasPlayer]);
+	}, [func, playbackContext, hasPlayer]);
 
 	return <>{text}</>;
 }

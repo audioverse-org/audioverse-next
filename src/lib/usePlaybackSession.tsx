@@ -61,7 +61,7 @@ export default function usePlaybackSession(
 			if (!el) return;
 			portalContainerRef.current?.appendChild(el);
 		});
-	}, [recording, isLoaded, isPortalActive]);
+	}, [context, recording, isLoaded, isPortalActive]);
 
 	useEffect(
 		() => () => {
@@ -69,7 +69,7 @@ export default function usePlaybackSession(
 			// TODO: provide recording ID when unloading?
 			context.unsetVideoHandler(recording.id);
 		},
-		[]
+		[context, recording, isPortalActive]
 	);
 
 	function afterLoad(func: (c: PlaybackContextType) => void) {

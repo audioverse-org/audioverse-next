@@ -31,6 +31,7 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 		title,
 		canonicalPath,
 	} = blogPost;
+	const duration = useFormattedDuration(readingDuration || 0);
 	return (
 		<div className={styles.container}>
 			{image ? (
@@ -50,7 +51,7 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 								defaultMessage="{duration} read"
 								description="Blog post detail reading duration"
 								values={{
-									duration: useFormattedDuration(readingDuration),
+									duration,
 								}}
 							/>
 						</div>

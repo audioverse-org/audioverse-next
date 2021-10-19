@@ -17,7 +17,8 @@ interface CardPostProps {
 }
 
 export default function CardPost({ post }: CardPostProps): JSX.Element {
-	const dur = post.readingDuration;
+	const dur = post.readingDuration || 0;
+	const duration = useFormattedDuration(dur);
 	const heroImage = post.image?.url && (
 		<Image
 			className={styles.hero}
@@ -48,7 +49,7 @@ export default function CardPost({ post }: CardPostProps): JSX.Element {
 										defaultMessage="{duration} read"
 										description="Card post reading duration"
 										values={{
-											duration: useFormattedDuration(dur),
+											duration,
 										}}
 									/>
 								</p>

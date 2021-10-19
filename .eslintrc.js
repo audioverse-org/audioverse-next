@@ -12,6 +12,7 @@ module.exports = {
 		'testing-library',
 		'jest-dom',
 		'@mizdra/layout-shift',
+		'react-hooks',
 	],
 	extends: [
 		'eslint:recommended',
@@ -69,6 +70,8 @@ module.exports = {
 		'formatjs/no-offset': 'error',
 		'@mizdra/layout-shift/require-size-attributes': 2,
 		'react/jsx-curly-brace-presence': ['error', 'never'],
+		'react-hooks/rules-of-hooks': 'error',
+		'react-hooks/exhaustive-deps': 'warn',
 	},
 	settings: {
 		react: {

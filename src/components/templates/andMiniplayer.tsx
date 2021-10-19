@@ -3,6 +3,7 @@ import React, {
 	ReactNode,
 	useCallback,
 	useEffect,
+	useMemo,
 	useRef,
 	useState,
 } from 'react';
@@ -142,95 +143,111 @@ export default function AndMiniplayer({
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
-	const options: VideoJsPlayerOptions = {
-		poster: '/img/poster.jpg',
-		controls: false,
-		// TODO: Should this be set back to `auto` once streaming urls are fixed?
-		// https://docs.videojs.com/docs/guides/options.html
-		preload: 'metadata',
-		fluid: true,
-		sources,
-	};
+	const options: VideoJsPlayerOptions = useMemo(
+		() => ({
+			poster: '/img/poster.jpg',
+			controls: false,
+			// TODO: Should this be set back to `auto` once streaming urls are fixed?
+			// https://docs.videojs.com/docs/guides/options.html
+			preload: 'metadata',
+			fluid: true,
+			sources,
+		}),
+		[sources]
+	);
 
-	const playback: PlaybackContextType = {
-		play: () => {
-			player?.play();
-			setIsPaused(false);
-			if (progress) playback.setProgress(progress);
-		},
-		pause: () => {
-			player?.pause();
-			setIsPaused(true);
-		},
-		paused: () => {
-			return isPaused;
-		},
-		getTime: () => {
-			return player?.currentTime() || 0;
-		},
-		setTime: (t: number) => {
-			if (!player) return;
-			setProgress(t / player.duration());
-			player.currentTime(t);
-		},
-		setPrefersAudio: (prefersAudio: boolean) => {
-			if (!recording) return;
-			setPrefersAudio(prefersAudio);
-		},
-		getPrefersAudio: () => prefersAudio,
-		getDuration: () => {
-			// TODO: return duration according to current media file
-			return player?.duration() || recording?.duration || 0;
-		},
-		getProgress: () => {
-			return progress;
-		},
-		setProgress: (p: number) => {
-			setProgress(p);
-			const duration = player?.duration();
-			if (!player || !duration || isNaN(duration)) return;
-			player.currentTime(p * duration);
-		},
-		getRecording: () => recording,
-		// TODO: Rename to setRecording
-		loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
-			const { onLoad, prefersAudio = false } = options;
-			setPrefersAudio(prefersAudio);
-			setOnLoad(() => onLoad);
-			setRecording(recording);
-			if (videoHandlerId && recording.id !== videoHandlerId) {
-				playback.unsetVideoHandler(videoHandlerId);
-			}
-		},
-		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
-			setVideoHandlerId(id);
-			videoHandlerIdRef.current = id;
-			setVideoHandler(() => handler);
-		},
-		unsetVideoHandler: (id: Scalars['ID']) => {
-			if (id !== videoHandlerIdRef.current) return;
-			setVideoHandlerId(undefined);
-			setVideoHandler(undefined);
-		},
-		hasPlayer: () => !!player,
-		hasVideo: () => !!recording && hasVideo(recording),
-		isShowingVideo: () => isShowingVideo,
-		getVideoLocation: () => {
-			if (!isShowingVideo) return null;
+	const playback: PlaybackContextType = useMemo(
+		() => ({
+			play: () => {
+				player?.play();
+				setIsPaused(false);
+				if (progress) playback.setProgress(progress);
+			},
+			pause: () => {
+				player?.pause();
+				setIsPaused(true);
+			},
+			paused: () => {
+				return isPaused;
+			},
+			getTime: () => {
+				return player?.currentTime() || 0;
+			},
+			setTime: (t: number) => {
+				if (!player) return;
+				setProgress(t / player.duration());
+				player.currentTime(t);
+			},
+			setPrefersAudio: (prefersAudio: boolean) => {
+				if (!recording) return;
+				setPrefersAudio(prefersAudio);
+			},
+			getPrefersAudio: () => prefersAudio,
+			getDuration: () => {
+				// TODO: return duration according to current media file
+				return player?.duration() || recording?.duration || 0;
+			},
+			getProgress: () => {
+				return progress;
+			},
+			setProgress: (p: number) => {
+				setProgress(p);
+				const duration = player?.duration();
+				if (!player || !duration || isNaN(duration)) return;
+				player.currentTime(p * duration);
+			},
+			getRecording: () => recording,
+			// TODO: Rename to setRecording
+			loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
+				const { onLoad, prefersAudio = false } = options;
+				setPrefersAudio(prefersAudio);
+				setOnLoad(() => onLoad);
+				setRecording(recording);
+				if (videoHandlerId && recording.id !== videoHandlerId) {
+					playback.unsetVideoHandler(videoHandlerId);
+				}
+			},
+			setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
+				setVideoHandlerId(id);
+				videoHandlerIdRef.current = id;
+				setVideoHandler(() => handler);
+			},
+			unsetVideoHandler: (id: Scalars['ID']) => {
+				if (id !== videoHandlerIdRef.current) return;
+				setVideoHandlerId(undefined);
+				setVideoHandler(undefined);
+			},
+			hasPlayer: () => !!player,
+			hasVideo: () => !!recording && hasVideo(recording),
+			isShowingVideo: () => isShowingVideo,
+			getVideoLocation: () => {
+				if (!isShowingVideo) return null;
 
-			if (videoHandler) return 'portal';
+				if (videoHandler) return 'portal';
 
-			return 'miniplayer';
-		},
-		supportsFullscreen: () => (player ? player.supportsFullScreen() : false),
-		getVolume: () => volume,
-		setVolume,
-		setSpeed: (s: number) => player?.playbackRate(s),
-		getSpeed: () => player?.playbackRate() || 1,
-		requestFullscreen: () => {
-			player?.requestFullscreen();
-		},
-	};
+				return 'miniplayer';
+			},
+			supportsFullscreen: () => (player ? player.supportsFullScreen() : false),
+			getVolume: () => volume,
+			setVolume,
+			setSpeed: (s: number) => player?.playbackRate(s),
+			getSpeed: () => player?.playbackRate() || 1,
+			requestFullscreen: () => {
+				player?.requestFullscreen();
+			},
+		}),
+		[
+			isPaused,
+			isShowingVideo,
+			player,
+			prefersAudio,
+			progress,
+			recording,
+			videoHandler,
+			videoHandlerId,
+			volume,
+		]
+	);
 
 	useEffect(() => {
 		if (!recording) return;
@@ -256,16 +273,16 @@ export default function AndMiniplayer({
 		setVolume(p.volume() * 100);
 
 		setFingerprint(JSON.stringify(sources));
-	}, [hasSources, sources, videoEl]);
+	}, [player, options, hasSources, sources, videoEl]);
 
 	useEffect(() => {
 		onLoad && onLoad(playback);
 		setOnLoad(undefined);
-	}, [fingerprint]);
+	}, [onLoad, playback, fingerprint]);
 
 	useEffect(() => {
 		player?.volume(volume / 100);
-	}, [volume]);
+	}, [player, volume]);
 
 	useEffect(() => {
 		if (onLoad) {

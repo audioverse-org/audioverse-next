@@ -40,15 +40,14 @@ function Profile(): JSX.Element {
 
 	useEffect(() => {
 		const d = data?.me?.user;
+		if (!d) {
+			return;
+		}
 
-		setAutoplay(d ? d.autoplay || false : autoplay);
-		setLanguage(d ? d.language : language);
-		setPreferredAudioQuality(
-			d
-				? d.preferredAudioQuality || RecordingQuality.Low
-				: preferredAudioQuality
-		);
-		setTimezone(d ? d.timezone || Timezone.AmericaNewYork : timezone);
+		setAutoplay(d.autoplay);
+		setLanguage(d.language);
+		setPreferredAudioQuality(d.preferredAudioQuality);
+		setTimezone(d.timezone);
 	}, [data]);
 
 	function submit(e?: FormEvent<HTMLFormElement>) {
