@@ -21,7 +21,8 @@ function ContextUser({
 
 	useEffect(() => {
 		func(playbackContext, setText);
-	}, [func, playbackContext, hasPlayer]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [hasPlayer]);
 
 	return <>{text}</>;
 }
