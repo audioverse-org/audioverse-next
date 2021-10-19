@@ -2,10 +2,13 @@ import { parse } from 'graphql';
 import { print } from 'graphql/language/printer';
 
 import { getCurrentRequest } from '@lib/api/storeRequest';
+import { IS_PRODUCTION_DEPLOYMENT } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { sleep } from '@lib/sleep';
 
-const API_URL = 'https://graphql-staging.audioverse.org/graphql';
+const API_URL = IS_PRODUCTION_DEPLOYMENT
+	? 'https://graphql.audioverse.org/graphql'
+	: 'https://graphql-staging.audioverse.org/graphql';
 
 // WORKAROUND
 // Graphql Code Generator duplicates fragment definitions
