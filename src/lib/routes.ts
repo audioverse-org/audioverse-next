@@ -233,6 +233,9 @@ export const makeAccountPreferencesRoute = (languageRoute: string): string =>
 export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 	`/${languageRoute}/library${subpath ? `/${subpath}` : ''}`;
 
+export const makeDonateRoute = (languageRoute: string): string =>
+	`/${languageRoute}/give`;
+
 export const makeDiscoverRoute = (languageRoute: string): string =>
 	`/${languageRoute}/discover`;
 
