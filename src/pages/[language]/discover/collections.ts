@@ -1,31 +1,60 @@
-import { GetServerSidePropsResult, GetStaticPropsContext } from 'next';
-
-import DiscoverCollections from '@containers/discover/collections';
-import { storeRequest } from '@lib/api';
 import {
-	getDiscoverCollectionsPageData,
-	GetDiscoverCollectionsPageDataQuery,
-} from '@lib/generated/graphql';
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
+
+import DiscoverCollections, {
+	IDiscoverCollectionsProps,
+} from '@containers/discover/collections';
+import { REVALIDATE } from '@lib/constants';
+import { getDiscoverCollectionsPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { makeDiscoverCollectionsRoute } from '@lib/routes';
 
 export default DiscoverCollections;
 
-interface Context extends GetStaticPropsContext<{ language: string }> {
-	req: any;
+export async function getStaticProps({
+	params,
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<IDiscoverCollectionsProps>
+> {
+	const language = getLanguageIdByRoute(params?.language);
+	return {
+		props: await getDiscoverCollectionsPageData({ language }).catch(() => ({
+			audiobooks: {
+				nodes: [],
+			},
+			conferences: {
+				nodes: [],
+			},
+			musicAlbums: {
+				nodes: [],
+			},
+			persons: {
+				nodes: [],
+			},
+			sequence: null,
+			serieses: {
+				nodes: [],
+			},
+			sponsors: {
+				nodes: [],
+			},
+			storySeasons: {
+				nodes: [],
+			},
+		})),
+		revalidate: REVALIDATE,
+	};
 }
 
-export async function getServerSideProps({ req, params }: Context): Promise<
-	GetServerSidePropsResult<{
-		data: GetDiscoverCollectionsPageDataQuery;
-	}>
-> {
-	storeRequest(req);
-
-	const language = getLanguageIdByRoute(params?.language);
-
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		props: {
-			data: await getDiscoverCollectionsPageData({ language }),
-		},
+		paths: getLanguageRoutes().map((base_url) =>
+			makeDiscoverCollectionsRoute(base_url)
+		),
+		fallback: false,
 	};
 }

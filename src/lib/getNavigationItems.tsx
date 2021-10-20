@@ -7,6 +7,7 @@ import {
 	makeAudiobookListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
+	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
@@ -85,7 +86,7 @@ export function getNavigationItems(
 		},
 		{
 			key: 'collections',
-			href: `/${languageRoute}/discover/collections`,
+			href: makeDiscoverCollectionsRoute(languageRoute),
 			Icon: IconCollections,
 			label: intl.formatMessage({
 				id: `header__navItemCollections`,
@@ -95,7 +96,7 @@ export function getNavigationItems(
 			children: [
 				{
 					key: 'all',
-					href: `/${languageRoute}/discover/collections`,
+					href: makeDiscoverCollectionsRoute(languageRoute),
 					Icon: IconListAltLight,
 					label: intl.formatMessage({
 						id: `header__naveItemCollections-all`,

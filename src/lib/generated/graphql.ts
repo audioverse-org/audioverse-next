@@ -989,6 +989,12 @@ export enum Language {
 	Spanish = 'SPANISH',
 }
 
+export type LetterCount = {
+	__typename?: 'LetterCount';
+	count: Scalars['Int'];
+	letter: Scalars['String'];
+};
+
 export type License = Node & {
 	__typename?: 'License';
 	description: Scalars['String'];
@@ -2555,6 +2561,8 @@ export type Query = {
 	pageMenus: Maybe<PageMenuConnection>;
 	pages: PageConnection;
 	person: Maybe<Person>;
+	/** Returns the number of persons beginning with each letter. */
+	personLetterCounts: Array<LetterCount>;
 	persons: PersonConnection;
 	popularRecordings: PopularRecordingConnection;
 	recording: Maybe<Recording>;
@@ -2569,6 +2577,8 @@ export type Query = {
 	sermon: Maybe<Recording>;
 	sermons: RecordingConnection;
 	sponsor: Maybe<Sponsor>;
+	/** Returns the number of sponsors beginning with each letter. */
+	sponsorLetterCounts: Array<LetterCount>;
 	sponsors: SponsorConnection;
 	stories: RecordingConnection;
 	story: Maybe<Recording>;
@@ -3012,6 +3022,10 @@ export type QueryPersonArgs = {
 	id: Scalars['ID'];
 };
 
+export type QueryPersonLetterCountsArgs = {
+	language: Language;
+};
+
 export type QueryPersonsArgs = {
 	after: Maybe<Scalars['String']>;
 	collectionId: Maybe<Scalars['ID']>;
@@ -3194,6 +3208,10 @@ export type QuerySermonsArgs = {
 
 export type QuerySponsorArgs = {
 	id: Scalars['ID'];
+};
+
+export type QuerySponsorLetterCountsArgs = {
+	language: Language;
 };
 
 export type QuerySponsorsArgs = {
@@ -9047,17 +9065,19 @@ export type GetPresenterListPageDataQuery = {
 		__typename?: 'PersonConnection';
 		nodes: Array<{
 			__typename?: 'Person';
-			id: string | number;
-			name: string;
 			canonicalPath: string;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
+			givenName: string;
+			surname: string;
+			summary: string;
+			image: { __typename?: 'Image'; url: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
+	personLetterCounts: Array<{
+		__typename?: 'LetterCount';
+		letter: string;
+		count: number;
+	}>;
 };
 
 export type GetPresenterListPathsDataQueryVariables = Exact<{
@@ -10890,25 +10910,17 @@ export type GetSponsorListPageDataQuery = {
 		__typename?: 'SponsorConnection';
 		nodes: Array<{
 			__typename?: 'Sponsor';
-			id: string | number;
-			title: string;
 			canonicalPath: string;
+			title: string;
 			image: { __typename?: 'Image'; url: string } | null;
-			collections: {
-				__typename?: 'CollectionConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			sequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
+	sponsorLetterCounts: Array<{
+		__typename?: 'LetterCount';
+		letter: string;
+		count: number;
+	}>;
 };
 
 export type GetSponsorListPathsDataQueryVariables = Exact<{
@@ -13970,14 +13982,24 @@ export const GetPresenterListPageDataDocument = `
     orderBy: [{field: NAME, direction: ASC}]
   ) {
     nodes {
-      ...cardPerson
+      canonicalPath(useFuturePath: true)
+      givenName
+      surname
+      image {
+        url(size: 100)
+      }
+      summary
     }
     aggregate {
       count
     }
   }
+  personLetterCounts(language: $language) {
+    letter
+    count
+  }
 }
-    ${CardPersonFragmentDoc}`;
+    `;
 export const useGetPresenterListPageDataQuery = <
 	TData = GetPresenterListPageDataQuery,
 	TError = unknown
@@ -15043,14 +15065,22 @@ export const GetSponsorListPageDataDocument = `
     orderBy: [{field: TITLE, direction: ASC}]
   ) {
     nodes {
-      ...cardSponsor
+      canonicalPath(useFuturePath: true)
+      title
+      image {
+        url(size: 100)
+      }
     }
     aggregate {
       count
     }
   }
+  sponsorLetterCounts(language: $language) {
+    letter
+    count
+  }
 }
-    ${CardSponsorFragmentDoc}`;
+    `;
 export const useGetSponsorListPageDataQuery = <
 	TData = GetSponsorListPageDataQuery,
 	TError = unknown

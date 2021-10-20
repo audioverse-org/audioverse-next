@@ -233,6 +233,9 @@ export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 export const makeDiscoverRoute = (languageRoute: string): string =>
 	`/${languageRoute}/discover`;
 
+export const makeDiscoverCollectionsRoute = (languageRoute: string): string =>
+	`/${languageRoute}/discover/collections`;
+
 export const makeSearchRoute = (languageRoute: string, term = ''): string =>
 	`/${languageRoute}/search${term ? `?q=${term}` : ''}`;
 

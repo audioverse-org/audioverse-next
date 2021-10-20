@@ -1232,6 +1232,11 @@ enum Language {
 	SPANISH
 }
 
+type LetterCount {
+	count: Int!
+	letter: String!
+}
+
 type License implements Node {
 	description: String!
 	distributionAgreements(
@@ -3660,6 +3665,11 @@ type Query {
 		pageMenuId: Int
 	): PageConnection!
 	person(id: ID!): Person
+
+	"""
+	Returns the number of persons beginning with each letter.
+	"""
+	personLetterCounts(language: Language!): [LetterCount!]!
 	persons(
 		"""
 		Return the elements that come after the specified cursor.
@@ -4081,6 +4091,11 @@ type Query {
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sponsor(id: ID!): Sponsor
+
+	"""
+	Returns the number of sponsors beginning with each letter.
+	"""
+	sponsorLetterCounts(language: Language!): [LetterCount!]!
 	sponsors(
 		"""
 		Return the elements that come after the specified cursor.

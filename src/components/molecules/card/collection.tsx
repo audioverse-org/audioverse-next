@@ -124,11 +124,12 @@ export default function CardCollection({
 					{sequences?.length ? (
 						<div className={styles.subSequences}>
 							{sequences.map((sequence) => (
-								<CardSequence
-									sequence={sequence}
+								<div
+									className={styles.subSequence}
 									key={sequence.canonicalPath}
-									slim
-								/>
+								>
+									<CardSequence sequence={sequence} slim />
+								</div>
 							))}
 						</div>
 					) : null}

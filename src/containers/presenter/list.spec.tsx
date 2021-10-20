@@ -23,7 +23,8 @@ function loadData() {
 				nodes: [
 					{
 						id: 'the_person_id',
-						name: 'the_person_name',
+						surname: 'the_person_surname',
+						givenName: 'the_person_givenName',
 						canonicalPath: 'the_person_path',
 						summary: 'the_person_summary',
 						image: {
@@ -56,7 +57,9 @@ describe('presenter list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_person_name')).toBeInTheDocument();
+		expect(
+			getByText('the_person_surname, the_person_givenName')
+		).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
@@ -89,7 +92,8 @@ describe('presenter list page', () => {
 		const { getByText } = await renderPage();
 
 		expect(
-			getByText('the_person_name').parentElement?.parentElement
+			getByText('the_person_surname, the_person_givenName').parentElement
+				?.parentElement
 		).toHaveAttribute('href', '/the_person_path');
 	});
 
@@ -98,10 +102,9 @@ describe('presenter list page', () => {
 
 		const { getByAltText } = await renderPage();
 
-		expect(getByAltText('the_person_name')).toHaveAttribute(
-			'src',
-			'the_person_image'
-		);
+		expect(
+			getByAltText('the_person_surname, the_person_givenName')
+		).toHaveAttribute('src', 'the_person_image');
 	});
 
 	it('renders page title', async () => {

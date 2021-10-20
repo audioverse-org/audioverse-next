@@ -6,11 +6,19 @@ query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
 		orderBy: [{ field: TITLE, direction: ASC }]
 	) {
 		nodes {
-			...cardSponsor
+			canonicalPath(useFuturePath: true)
+			title
+			image {
+				url(size: 100)
+			}
 		}
 		aggregate {
 			count
 		}
+	}
+	sponsorLetterCounts(language: $language) {
+		letter
+		count
 	}
 }
 

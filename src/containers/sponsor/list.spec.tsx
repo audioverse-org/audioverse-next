@@ -45,7 +45,7 @@ describe('sponsor list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Sponsors')).toBeInTheDocument();
+		expect(getByText('All Sponsors')).toBeInTheDocument();
 	});
 
 	it('lists sponsors', async () => {
@@ -77,9 +77,10 @@ describe('sponsor list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(
-			getByText('the_sponsor_title').parentElement?.parentElement
-		).toHaveAttribute('href', '/the_sponsor_path');
+		expect(getByText('the_sponsor_title').parentElement).toHaveAttribute(
+			'href',
+			'/the_sponsor_path'
+		);
 	});
 
 	it('links pagination', async () => {

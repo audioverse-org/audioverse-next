@@ -10,11 +10,21 @@ query getPresenterListPageData(
 		orderBy: [{ field: NAME, direction: ASC }]
 	) {
 		nodes {
-			...cardPerson
+			canonicalPath(useFuturePath: true)
+			givenName
+			surname
+			image {
+				url(size: 100)
+			}
+			summary
 		}
 		aggregate {
 			count
 		}
+	}
+	personLetterCounts(language: $language) {
+		letter
+		count
 	}
 }
 

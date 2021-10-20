@@ -78,6 +78,7 @@ $container-padding: 16px;
 	}
 }
 
-.subSequences {
+.subSequences,
+.subSequence:nth-of-type(n + 2) {
 	margin-top: 16px;
 }

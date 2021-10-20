@@ -416,6 +416,7 @@ describe('localization usage', () => {
 					[
 						{
 							id: 'z',
+							surname: 'z',
 							canonicalPath: '/presenter_path',
 							recordings: {
 								aggregate: {
@@ -426,7 +427,7 @@ describe('localization usage', () => {
 					] as any
 				}
 				pagination={undefined as any}
-				data={undefined as any}
+				data={{ personLetterCounts: [] } as any}
 			/>
 		);
 
@@ -469,6 +470,7 @@ describe('localization usage', () => {
 				nodes={[
 					{
 						id: 'z',
+						title: 'z',
 						canonicalPath: 'the_path',
 						imageWithFallback: {
 							url: 'z',
@@ -480,7 +482,7 @@ describe('localization usage', () => {
 						},
 					} as any,
 				]}
-				{...({} as any)}
+				{...({ sponsorLetterCounts: [] } as any)}
 			/>
 		);
 
