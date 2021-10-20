@@ -26,6 +26,10 @@ html {
 
 * {
 	box-sizing: border-box;
+	&::selection {
+		color: $ts-cream;
+		background: $ts-dark;
+	}
 }
 
 html {

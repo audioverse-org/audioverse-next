@@ -1,11 +1,42 @@
 @import '../styles/common';
 
+.wrapper {
+	&,
+	& p {
+		font-size: 15px;
+		line-height: 1.5;
+	}
+}
+
+.intro {
+	font-family: $serif;
+	margin-bottom: 8px;
+}
+
+.heading {
+	margin-bottom: 32px;
+}
+
+.rule {
+	margin: 32px 0;
+	border: none;
+	border-top: 1px solid $ts-cream;
+}
+
 .list {
 	padding: 0;
 }
 
 .entry {
+	font-family: $serif;
 	list-style-type: none;
+	margin-bottom: 32px;
+	p {
+		margin: 0 0 16px;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
 }
 
 .figure {
@@ -13,35 +44,9 @@
 }
 
 .quotation {
-	color: $ts-dark;
-	padding: 1em;
-	background-color: $ts-lightTone;
-	border-radius: 10px;
-	position: relative;
-	margin: 0;
-	&:after {
-		content: '';
-		display: block;
-		position: absolute;
-		bottom: -20px;
-		width: 0;
-		height: 0;
-		border-top: 10px solid $ts-lightTone;
-		border-right: 10px solid transparent;
-		border-left: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-	}
-	& > *:first-child {
-		margin-top: 0;
-	}
-	& > *:last-child {
-		margin-bottom: 0;
-	}
+	margin: 0 0 8px;
 }
 
 .source {
-	margin-top: 1em;
-	margin-bottom: 2em;
-	font-style: italic;
-	color: $ts-midTone;
+	font-weight: 700;
 }

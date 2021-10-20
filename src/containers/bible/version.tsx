@@ -8,11 +8,11 @@ import withFailStates from '@components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
 import CardBibleBook from '@components/molecules/card/bibleBook';
 import CardGroup from '@components/molecules/cardGroup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import { BaseColors } from '@lib/constants';
 import { GetVersionDetailPageDataQuery } from '@lib/generated/graphql';
 
@@ -62,7 +62,7 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<BibleVersionTypeLockup />
 				<Heading1 className={styles.title}>{title}</Heading1>
 				<Heading6 sans uppercase loose className={styles.booksLabel}>
@@ -73,7 +73,7 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 				</Heading6>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			<CardGroup>
 				{books.map((book) => (
 					<CardBibleBook book={book} key={book.id} />

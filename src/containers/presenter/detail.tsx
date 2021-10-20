@@ -14,13 +14,13 @@ import CardCollection from '@components/molecules/card/collection';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
@@ -94,7 +94,7 @@ function PresenterDetail({
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<PersonTypeLockup />
 				<div className={styles.titleLockup}>
 					<div className={styles.image}>
@@ -173,7 +173,7 @@ function PresenterDetail({
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			{essentialRecordings.nodes?.length ? (
 				<>
 					<LineHeading>

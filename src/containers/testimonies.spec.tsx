@@ -22,7 +22,7 @@ function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 					{
 						author: 'the_testimony_author',
 						body: 'the_testimony_body',
-						writtenDate: 'the_testimony_date',
+						writtenDate: '2021-10-20 14:38:20',
 					},
 				],
 				aggregate: {
@@ -152,29 +152,10 @@ describe('testimonies pages', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_testimony_author')).toBeInTheDocument();
+		expect(getByText('the_testimony_author, 10/20/21')).toBeInTheDocument();
 	});
 
 	it('renders without testimonies', async () => {
 		await renderPage();
-	});
-
-	it('does not error if no nodes', async () => {
-		const _p = {
-			nodes: undefined,
-			pagination: {
-				current: 1,
-				total: 1,
-			},
-		} as any;
-		await renderWithIntl(<Testimonies {..._p} />);
-	});
-
-	it('does not error if no pagination', async () => {
-		const _p = {
-			nodes: undefined,
-			pagination: undefined,
-		} as any;
-		await renderWithIntl(<Testimonies {..._p} />);
 	});
 });

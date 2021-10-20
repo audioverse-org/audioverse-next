@@ -199,7 +199,7 @@ export const makeSponsorSeriesRoute = (
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/testimonies/page/${page}`;
 
 export const makePlaylistDetailRoute = (
@@ -211,6 +211,9 @@ export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: string | number = 1
 ): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
+
+export const makeAboutPage = (languageRoute: string, pageId: number): string =>
+	`/${languageRoute}/about/${pageId}`;
 
 export const makeLoginRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/login`;

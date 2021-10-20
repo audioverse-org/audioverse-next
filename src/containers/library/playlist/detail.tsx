@@ -7,12 +7,12 @@ import HorizontalRule from '@components/atoms/horizontalRule';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardPlaylistItem from '@components/molecules/card/playlistItem';
 import CardGroup from '@components/molecules/cardGroup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { BaseColors } from '@lib/constants';
 import { formatLongDateTime } from '@lib/date';
@@ -60,7 +60,7 @@ function LibraryPlaylistDetail({
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<TypeLockup
 					Icon={ListIcon}
 					label={
@@ -93,7 +93,7 @@ function LibraryPlaylistDetail({
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>
 					{recordings.nodes.map((recording) => (

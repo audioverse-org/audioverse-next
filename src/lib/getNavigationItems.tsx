@@ -4,6 +4,7 @@ import React from 'react';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import {
+	makeAboutPage,
 	makeAudiobookListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
@@ -16,6 +17,7 @@ import {
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 	makeStoryAlbumListPage,
+	makeTestimoniesRoute,
 } from '@lib/routes';
 
 import IconBook from '../../public/img/fa-book.svg';
@@ -38,7 +40,7 @@ import IconSearch from '../../public/img/icon-search.svg';
 
 import getIntl from './getIntl';
 
-type INavigationItem = {
+export type INavigationItem = {
 	key: string;
 	href?: string;
 	onClick?: (props: { popSubmenu: () => void }) => void;
@@ -175,9 +177,55 @@ export function getNavigationItems(
 			label: intl.formatMessage({
 				id: `header__navItemStory`,
 				defaultMessage: 'Our Story',
-				description: `Header nav link name: Our Story`,
 			}),
-			children: [],
+			children: [
+				// TODO: update icons
+				{
+					key: 'about',
+					href: makeAboutPage(languageRoute, 1),
+					Icon: IconListAltLight,
+					label: intl.formatMessage({
+						id: `header__navItemStory`,
+						defaultMessage: 'Our Story',
+					}),
+				},
+				{
+					key: 'meettheteam',
+					href: makeAboutPage(languageRoute, 13),
+					Icon: IconListAltLight,
+					label: intl.formatMessage({
+						id: `header__navItemStory-team`,
+						defaultMessage: 'The Team',
+					}),
+				},
+				{
+					key: 'purpose',
+					href: makeAboutPage(languageRoute, 123), // TODO
+					Icon: IconListAltLight,
+					label: intl.formatMessage({
+						id: `header__navItemStory-purpose`,
+						defaultMessage: 'Our Purpose',
+					}),
+				},
+				{
+					key: 'spiritofav',
+					href: makeAboutPage(languageRoute, 12),
+					Icon: IconListAltLight,
+					label: intl.formatMessage({
+						id: `header__navItemStory-spiritOfAudioVerse`,
+						defaultMessage: 'Spirit of AudioVerse',
+					}),
+				},
+				{
+					key: 'testimonials',
+					href: makeTestimoniesRoute(languageRoute),
+					Icon: IconListAltLight,
+					label: intl.formatMessage({
+						id: `header__navItemStory-testimonials`,
+						defaultMessage: 'Testimonials',
+					}),
+				},
+			],
 		},
 		{
 			key: 'blog',
