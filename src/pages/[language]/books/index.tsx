@@ -14,6 +14,7 @@ import {
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { makeAudiobookListRoute } from '@lib/routes';
 
 export default AudiobooksList;
 
@@ -41,7 +42,9 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: getLanguageRoutes().map((base_url) => `/${base_url}/books`),
+		paths: getLanguageRoutes().map((base_url) =>
+			makeAudiobookListRoute(base_url)
+		),
 		fallback: 'blocking',
 	};
 }

@@ -5,7 +5,9 @@ import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import {
 	makeAboutPage,
+	makeAccountProfileRoute,
 	makeAudiobookListRoute,
+	makeBibleListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeDiscoverCollectionsRoute,
@@ -78,7 +80,7 @@ export function getNavigationItems(
 		},
 		{
 			key: 'bibles',
-			href: `/${languageRoute}/bibles`,
+			href: makeBibleListRoute(languageRoute),
 			Icon: IconBible,
 			label: intl.formatMessage({
 				id: `header__naveItemBible`,
@@ -172,7 +174,7 @@ export function getNavigationItems(
 		},
 		{
 			key: 'story',
-			href: `/${languageRoute}/story`,
+			href: makeAboutPage(languageRoute, 1),
 			Icon: IconOurStory,
 			label: intl.formatMessage({
 				id: `header__navItemStory`,
@@ -272,7 +274,7 @@ export function getNavigationItems(
 			children: [
 				{
 					key: 'profile',
-					href: `/${languageRoute}/account/profile`,
+					href: makeAccountProfileRoute(languageRoute),
 					Icon: IconUser,
 					label: intl.formatMessage({
 						id: `header__naveItemUser-profile`,

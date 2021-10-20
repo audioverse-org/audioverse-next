@@ -11,7 +11,11 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSermonListRoute, makeSermonsFeedRoute } from '@lib/routes';
+import {
+	makeDiscoverRoute,
+	makeSermonListRoute,
+	makeSermonsFeedRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconFilter from '../../../public/img/icon-filter-light.svg';
@@ -29,7 +33,7 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	return (
 		<PaginatedCardList
 			pagination={pagination}
-			backUrl={`/${language}/discover`}
+			backUrl={makeDiscoverRoute(language)}
 			heading={
 				<FormattedMessage
 					id="sermonList__heading"

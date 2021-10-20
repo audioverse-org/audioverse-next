@@ -15,7 +15,11 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { makeDonateRoute, makeRegisterRoute } from '@lib/routes';
+import {
+	makeBlogPostListRoute,
+	makeDonateRoute,
+	makeRegisterRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './home.module.scss';
@@ -198,7 +202,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={`/${languageRoute}/blog`}
+							href={makeBlogPostListRoute(languageRoute)}
 							text={
 								<FormattedMessage
 									id="homePage__recentPostsButtonLabel"
