@@ -11,7 +11,7 @@ import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
 import Pagination from '@components/molecules/pagination';
 import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
-import { getLetterCountsWithPage } from '@lib/getPaginatedData';
+import { getLetterCountsWithPage } from '@lib/getLetterCountsWithPage';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeDiscoverCollectionsRoute,
