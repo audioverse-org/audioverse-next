@@ -52,6 +52,9 @@ function loadData() {
 							},
 						},
 					],
+					pageInfo: {
+						hasNextPage: false,
+					},
 				},
 				sequences: {
 					aggregate: {
@@ -71,6 +74,15 @@ function loadData() {
 							speakers: [],
 						},
 					],
+					pageInfo: {
+						hasNextPage: false,
+					},
+				},
+				recordings: {
+					nodes: [],
+					pageInfo: {
+						hasNextPage: false,
+					},
 				},
 			},
 		});

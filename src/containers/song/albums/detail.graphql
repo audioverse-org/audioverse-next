@@ -1,6 +1,7 @@
 query getSongAlbumsDetailPageData($id: ID!) {
 	musicAlbum(id: $id) {
 		...sequence
+		canonicalUrl(useFuturePath: true)
 	}
 }
 

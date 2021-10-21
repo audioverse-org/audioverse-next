@@ -33,6 +33,7 @@ export async function getStaticProps({
 			recording,
 			title: recording?.title,
 			description: striptags(recording?.description || ''),
+			canonicalUrl: recording?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

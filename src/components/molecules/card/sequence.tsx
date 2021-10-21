@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
@@ -23,6 +23,8 @@ import BookIcon from '../../../../public/img/fa-book-light.svg';
 import FeatherIcon from '../../../../public/img/fa-feather-light.svg';
 import ListIcon from '../../../../public/img/fa-list-alt.svg';
 import MusicIcon from '../../../../public/img/fa-music-light.svg';
+import IconClosure from '../../../../public/img/icon-closure.svg';
+import IconDisclosure from '../../../../public/img/icon-disclosure.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
@@ -45,8 +47,10 @@ export default function CardSequence({
 	slim,
 }: CardCollectionProps): JSX.Element {
 	const [ref, isHovered] = useHover();
+	const [subRef, isSubHovered] = useHover();
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
+	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const router = useRouter();
 
 	const {
@@ -123,7 +127,9 @@ export default function CardSequence({
 	)[contentType];
 
 	const persons =
-		contentType === SequenceContentType.Audiobook ? writers : speakers;
+		(contentType === SequenceContentType.Audiobook
+			? writers.nodes
+			: speakers.nodes) || [];
 
 	const inner = (
 		<>
@@ -155,22 +161,49 @@ export default function CardSequence({
 						className={styles.kicker}
 					></div>
 				)}
-				{!!persons.nodes?.length && (
+				{!!persons.length && (
 					<div className={styles.persons}>
-						{persons.nodes.map((person) => (
+						{(personsExpanded ? persons : persons.slice(0, 2)).map((p) => (
 							<PersonLockup
-								person={person}
+								person={p}
 								textColor={textColor}
 								hoverColor={accentColor}
-								key={person.canonicalPath}
+								key={p.canonicalPath}
 								isLinked
 								isOptionalLink
 								small
 							/>
 						))}
+						{persons.length > 2 && (
+							<div
+								className={styles.morePersons}
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									setPersonsExpanded(!personsExpanded);
+								}}
+							>
+								{personsExpanded ? <IconClosure /> : <IconDisclosure />}
+								<Heading6 sans loose unpadded uppercase>
+									{personsExpanded ? (
+										<FormattedMessage
+											id="molecule-teaseRecording__lessPersons"
+											defaultMessage="Show less"
+										/>
+									) : (
+										<FormattedMessage
+											id="molecule-teaseRecording__morePersons"
+											defaultMessage="{count} more"
+											values={{
+												count: persons.length - 2,
+											}}
+										/>
+									)}
+								</Heading6>
+							</div>
+						)}
 					</div>
 				)}
-				{/* TODO: replace with "...and X more" format */}
 			</div>
 			<Heading6 sans unpadded uppercase loose className={styles.partsLabel}>
 				<FormattedMessage
@@ -195,6 +228,7 @@ export default function CardSequence({
 					Icon={isFavorited ? LikeActiveIcon : LikeIcon}
 					onClick={(e) => {
 						e.preventDefault();
+						e.stopPropagation();
 						toggleFavorited();
 					}}
 					color={isFavorited ? accentColor : iconColor}
@@ -203,7 +237,7 @@ export default function CardSequence({
 				/>
 			</div>
 			{recordings?.length ? (
-				<div className={styles.subRecordings}>
+				<div className={styles.subRecordings} ref={subRef}>
 					<TeaseRecordingStack
 						recordings={recordings}
 						theme={
@@ -218,15 +252,16 @@ export default function CardSequence({
 
 	const className = clsx(
 		styles.container,
-		isHovered && styles.bookmarkHovered,
+		(isHovered || isSubHovered) && styles.otherHovered,
 		styles[contentType]
 	);
 	return (
 		<Card>
 			{slim ? (
 				<div
-					className={clsx(className, isHovered && styles.bookmarkHovered)}
+					className={className}
 					onClick={(e) => {
+						e.preventDefault();
 						e.stopPropagation();
 						router.push(canonicalPath);
 					}}

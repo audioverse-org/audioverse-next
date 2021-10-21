@@ -3,6 +3,7 @@ query getPresenterDetailPageData($id: ID!, $language: Language!) {
 		id
 		name
 		description
+		canonicalUrl(useFuturePath: true)
 		shareUrl
 		imageWithFallback {
 			url(size: 100)

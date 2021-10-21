@@ -6,7 +6,6 @@ export type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
 
 export interface SongDetailProps {
 	recording: SongTrack | null;
-	title?: string;
 }
 
 export default withFailStates<SongDetailProps>(

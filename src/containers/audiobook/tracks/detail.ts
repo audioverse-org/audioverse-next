@@ -4,7 +4,6 @@ import { GetAudiobookTrackDetailDataQuery } from '@lib/generated/graphql';
 
 export interface AudiobookTrackDetailProps {
 	recording: GetAudiobookTrackDetailDataQuery['audiobookTrack'];
-	title?: string;
 }
 
 export default withFailStates<AudiobookTrackDetailProps>(

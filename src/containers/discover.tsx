@@ -99,6 +99,11 @@ export default function Discover({
 				<CardCollection
 					collection={conference}
 					sequences={conference.sequences.nodes}
+					recordings={
+						!conference.sequences.nodes?.length
+							? conference.recordings.nodes
+							: null
+					}
 					key={conference.canonicalPath}
 				/>
 			)),

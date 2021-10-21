@@ -17,7 +17,7 @@ export default SponsorDetail;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<SponsorDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
@@ -28,6 +28,7 @@ export async function getStaticProps({
 		props: {
 			sponsor,
 			title: sponsor?.title,
+			canonicalUrl: sponsor?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

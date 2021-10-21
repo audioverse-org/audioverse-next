@@ -32,6 +32,7 @@ export async function getStaticProps({
 		props: {
 			sequence: musicAlbum,
 			title: musicAlbum?.title,
+			canonicalUrl: musicAlbum?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

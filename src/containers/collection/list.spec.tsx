@@ -36,6 +36,11 @@ function loadData() {
 								count: 0,
 							},
 						},
+						allRecordings: {
+							aggregate: {
+								count: 0,
+							},
+						},
 					},
 				],
 			},
@@ -92,7 +97,7 @@ describe('conference list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/conferences/page/1');
+		expect(getByText('1')).toHaveAttribute('href', '/en/conferences');
 	});
 
 	it('renders 404', async () => {

@@ -43,7 +43,7 @@ $container-padding: 16px;
 	&:hover {
 		color: var(--sequenceTextColor);
 	}
-	&:hover:not(.bookmarkHovered) {
+	&:hover:not(.otherHovered) {
 		background-color: var(--sequenceBackgroundColorHover);
 	}
 }
@@ -85,6 +85,17 @@ $container-padding: 16px;
 .persons > * {
 	margin-right: 8px;
 	margin-bottom: 8px;
+}
+
+.morePersons {
+	display: flex;
+	align-items: center;
+	> svg {
+		margin-right: 12px;
+	}
+	&:hover {
+		color: $ts-red;
+	}
 }
 
 .partsLabel {

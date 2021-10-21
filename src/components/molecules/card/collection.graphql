@@ -15,4 +15,9 @@ fragment cardCollection on Collection {
 			count
 		}
 	}
+	allRecordings: recordings(sequenceId: 0) {
+		aggregate {
+			count
+		}
+	}
 }

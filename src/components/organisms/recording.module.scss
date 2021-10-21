@@ -22,6 +22,7 @@
 	&.SERMON {
 		--recordingAccent: #{$ts-red};
 		border: 1px solid $ts-cream;
+		--recordingBackground: #{$ts-white};
 		--recordingHatBackground: #{$ts-cream};
 		--recordingHatHover: #{$ts-darkened-cream};
 		--recordingTextColor: #{$ts-dark};
@@ -99,15 +100,26 @@
 		border-left: 1px solid var(--recordingHatBackground);
 	}
 }
-.seriesScroller {
-	@media (min-width: $breakpoint-xl) {
+@media (min-width: $breakpoint-xl) {
+	.seriesScroller {
 		position: absolute;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
 		overflow: auto;
-		padding: 24px;
+		margin: 24px 0;
+		> * {
+			padding: 0 24px;
+		}
+	}
+	.seriesHeading {
+		position: sticky;
+		top: 0;
+		margin-bottom: 0;
+		padding-bottom: 16px;
+		background: var(--recordingBackground);
+		z-index: 1;
 	}
 }
 .seriesItems {

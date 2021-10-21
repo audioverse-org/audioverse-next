@@ -39,6 +39,11 @@ const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 						count: 0,
 					},
 				},
+				allRecordings: {
+					aggregate: {
+						count: 0,
+					},
+				},
 			},
 		],
 		aggregate: {

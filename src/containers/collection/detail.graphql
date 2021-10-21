@@ -6,6 +6,7 @@ query getCollectionDetailPageData($id: ID!) {
 		endDate
 		duration
 		description
+		canonicalUrl(useFuturePath: true)
 		shareUrl
 		location
 		image {
@@ -30,6 +31,9 @@ query getCollectionDetailPageData($id: ID!) {
 			nodes {
 				...cardPerson
 			}
+			pageInfo {
+				hasNextPage
+			}
 		}
 		sequences(
 			first: 3
@@ -40,6 +44,24 @@ query getCollectionDetailPageData($id: ID!) {
 			}
 			nodes {
 				...cardSequence
+			}
+			pageInfo {
+				hasNextPage
+			}
+		}
+		recordings(
+			first: 3
+			sequenceId: 0
+			orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+		) {
+			aggregate {
+				count
+			}
+			nodes {
+				...cardRecording
+			}
+			pageInfo {
+				hasNextPage
 			}
 		}
 	}

@@ -88,7 +88,7 @@ describe('sponsor list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/sponsors/page/1');
+		expect(getByText('1')).toHaveAttribute('href', '/en/sponsors');
 	});
 
 	it('renders 404', async () => {

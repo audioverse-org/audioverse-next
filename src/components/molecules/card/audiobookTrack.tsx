@@ -10,11 +10,13 @@ import CardHatAudiobook from './hat/audiobook';
 interface CardAudiobookTrackProps {
 	track: CardRecordingFragment;
 	hideHat?: boolean;
+	isOptionalLink?: boolean;
 }
 
 export default function CardAudiobookTrack({
 	track,
 	hideHat,
+	isOptionalLink,
 }: CardAudiobookTrackProps): JSX.Element {
 	const { sequence } = track;
 	const theme = 'audiobookTrack';
@@ -24,7 +26,7 @@ export default function CardAudiobookTrack({
 			{sequence && !hideHat && (
 				<CardHatAudiobook sequence={sequence} recording={track} />
 			)}
-			<TeaseRecording {...{ recording: track, theme }} />
+			<TeaseRecording {...{ recording: track, theme, isOptionalLink }} />
 		</CardWithTheme>
 	);
 }

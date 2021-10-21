@@ -10,11 +10,13 @@ import CardHatSermon from './hat/sermon';
 export interface CardSermonProps {
 	recording: CardRecordingFragment;
 	hideHat?: boolean;
+	isOptionalLink?: boolean;
 }
 
 export default function CardSermon({
 	recording,
 	hideHat,
+	isOptionalLink,
 }: CardSermonProps): JSX.Element {
 	const { sequence } = recording;
 	const theme = 'sermon';
@@ -22,7 +24,7 @@ export default function CardSermon({
 	return (
 		<CardWithTheme {...{ theme }}>
 			{sequence && !hideHat && <CardHatSermon sequence={sequence} />}
-			<TeaseRecording {...{ recording, theme }} />
+			<TeaseRecording {...{ recording, theme, isOptionalLink }} />
 		</CardWithTheme>
 	);
 }

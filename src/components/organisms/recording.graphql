@@ -48,6 +48,7 @@ fragment recording on Recording {
 	transcript {
 		text
 	}
+	canonicalUrl(useFuturePath: true)
 	shareUrl
 	...sequenceNav
 	...copyrightInfo

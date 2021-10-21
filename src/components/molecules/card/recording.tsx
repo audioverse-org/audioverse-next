@@ -14,22 +14,28 @@ import CardStory from './story';
 interface CardSermonProps {
 	recording: CardRecordingFragment;
 	hideHat?: boolean;
+	isOptionalLink?: boolean;
 }
 
 export default function CardRecording({
 	recording,
 	hideHat,
+	isOptionalLink,
 }: CardSermonProps): JSX.Element {
 	const { recordingContentType } = recording;
 	switch (recordingContentType) {
 		case RecordingContentType.AudiobookTrack:
-			return <CardAudiobookTrack {...{ track: recording, hideHat }} />;
+			return (
+				<CardAudiobookTrack
+					{...{ track: recording, hideHat, isOptionalLink }}
+				/>
+			);
 		case RecordingContentType.MusicTrack:
-			return <CardSong {...{ song: recording, hideHat }} />;
+			return <CardSong {...{ song: recording, hideHat, isOptionalLink }} />;
 		case RecordingContentType.Sermon:
-			return <CardSermon {...{ recording, hideHat }} />;
+			return <CardSermon {...{ recording, hideHat, isOptionalLink }} />;
 		case RecordingContentType.Story:
-			return <CardStory {...{ story: recording, hideHat }} />;
+			return <CardStory {...{ story: recording, hideHat, isOptionalLink }} />;
 
 		default:
 			throw new UnreachableCaseError(recordingContentType);

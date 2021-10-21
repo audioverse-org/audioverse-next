@@ -130,7 +130,7 @@ describe('testimonies pages', () => {
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
-		expect(link.href).toContain('/en/testimonies/page/1');
+		expect(link.href).toContain('/en/testimonies');
 	});
 
 	it('renders testimony html', async () => {

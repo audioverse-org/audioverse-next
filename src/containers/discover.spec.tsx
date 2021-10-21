@@ -65,7 +65,15 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 					sequences: {
 						nodes: [],
 					},
+					recordings: {
+						nodes: [],
+					},
 					allSequences: {
+						aggregate: {
+							count: 0,
+						},
+					},
+					allRecordings: {
 						aggregate: {
 							count: 0,
 						},

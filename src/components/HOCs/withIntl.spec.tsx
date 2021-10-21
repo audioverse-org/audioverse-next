@@ -212,7 +212,6 @@ describe('localization usage', () => {
 						imageWithFallback: { url: '' },
 					} as SermonDetailProps['recording']
 				}
-				title={undefined}
 			/>
 		);
 
@@ -357,6 +356,7 @@ describe('localization usage', () => {
 							id: 'z',
 							canonicalPath: '/conference_path',
 							allSequences: { aggregate: { count: 0 } },
+							allRecordings: { aggregate: { count: 0 } },
 						},
 					] as any
 				}
@@ -380,18 +380,25 @@ describe('localization usage', () => {
 					location: '',
 					startDate: null,
 					endDate: null,
+					canonicalUrl: '',
 					shareUrl: '',
 					sequences: {
 						aggregate: {
 							count: 0,
 						},
 						nodes: [],
+						pageInfo: {
+							hasNextPage: false,
+						},
 					},
 					persons: {
 						aggregate: {
 							count: 0,
 						},
 						nodes: [],
+						pageInfo: {
+							hasNextPage: false,
+						},
 					},
 					sponsor: {
 						id: '234',
@@ -399,6 +406,15 @@ describe('localization usage', () => {
 						canonicalPath: '...',
 						imageWithFallback: {
 							url: '',
+						},
+					},
+					recordings: {
+						aggregate: {
+							count: 0,
+						},
+						nodes: [],
+						pageInfo: {
+							hasNextPage: false,
 						},
 					},
 				}}
@@ -518,6 +534,7 @@ describe('localization usage', () => {
 						id: 'z',
 						canonicalPath: 'z',
 						allSequences: { aggregate: { count: 0 } },
+						allRecordings: { aggregate: { count: 0 } },
 					},
 				],
 				data: {
