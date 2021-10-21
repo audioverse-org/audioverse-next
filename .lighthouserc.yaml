@@ -4,7 +4,7 @@ ci:
     startServerCommand: npm run start
     url:
       - http://localhost:3000
-      - http://localhost:3000/en/sermons/all/page/1
+      - http://localhost:3000/en/teachings/all/page/1
 
   assert:
   # assert options here

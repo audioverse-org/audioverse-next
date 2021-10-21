@@ -9,6 +9,7 @@ import { getBlogPageData, Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { formatPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { makeBlogPostListRoute } from '@lib/routes';
 
 export default Blog;
 
@@ -30,7 +31,9 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: getLanguageRoutes().map((base_url) => `/${base_url}/blog`),
+		paths: getLanguageRoutes().map((base_url) =>
+			makeBlogPostListRoute(base_url)
+		),
 		fallback: false,
 	};
 }

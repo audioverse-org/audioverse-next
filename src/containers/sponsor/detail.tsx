@@ -14,13 +14,13 @@ import CardCollection from '@components/molecules/card/collection';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
 import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
@@ -95,7 +95,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<SponsorTypeLockup />
 				<div className={styles.titleLockup}>
 					{image && (
@@ -149,7 +149,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			{recordings.nodes?.length ? (
 				<>
 					<LineHeading>

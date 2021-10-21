@@ -15,7 +15,11 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { makeRegisterRoute } from '@lib/routes';
+import {
+	makeBlogPostListRoute,
+	makeDonateRoute,
+	makeRegisterRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './home.module.scss';
@@ -25,7 +29,7 @@ export type HomeProps = {
 };
 
 export default function Home({ data }: HomeProps): JSX.Element {
-	const route = useLanguageRoute();
+	const languageRoute = useLanguageRoute();
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const chapter = data?.audiobible?.book.chapter;
 	const testimonies = data?.testimonies.nodes || [];
@@ -52,7 +56,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={makeRegisterRoute(route)}
+							href={makeRegisterRoute(languageRoute)}
 							text={
 								<FormattedMessage
 									id="homePage__joinAudioVerseButtonLabel"
@@ -91,7 +95,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								values={{
 									a: function a(chunks: string) {
 										return (
-											<Link href="#">
+											<Link href={makeRegisterRoute(languageRoute)}>
 												<a>{chunks}</a>
 											</Link>
 										);
@@ -142,7 +146,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={`/${route}/app`}
+							href={`/${languageRoute}/app`}
 							text={
 								<FormattedMessage
 									id="homePage__downloadNowButtonLabel"
@@ -198,7 +202,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={`/${route}/blog`}
+							href={makeBlogPostListRoute(languageRoute)}
 							text={
 								<FormattedMessage
 									id="homePage__recentPostsButtonLabel"
@@ -237,7 +241,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href="#"
+							href={makeRegisterRoute(languageRoute)}
 							text={
 								<FormattedMessage
 									id="homePage__createAccountSectionCTA"
@@ -294,7 +298,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href="#"
+							href={makeDonateRoute(languageRoute)}
 							text={
 								<FormattedMessage
 									id="homePage__supportSectionCTA"
@@ -415,7 +419,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</h5>
 						<ul>
 							<li>
-								<Link href={`${route}/app`}>
+								<Link href={`${languageRoute}/app`}>
 									<a>
 										<FormattedMessage
 											id="homePage__footerDownloadAppButton"
@@ -437,7 +441,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								</Link>
 							</li>
 							<li>
-								<Link href={`/${route}/give`}>
+								<Link href={makeDonateRoute(languageRoute)}>
 									<a>
 										<FormattedMessage
 											id="homePage__footerDonateLink"

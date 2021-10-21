@@ -14,13 +14,13 @@ import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
@@ -100,7 +100,7 @@ function CollectionDetail({
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<CollectionTypeLockup />
 				{image && (
 					<div className={styles.image}>
@@ -160,7 +160,7 @@ function CollectionDetail({
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			{sequences.nodes?.length ? (
 				<>
 					<LineHeading color={BaseColors.SALMON}>

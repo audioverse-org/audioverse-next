@@ -5,8 +5,8 @@ import Heading1 from '@components/atoms/heading1';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardBibleVersion from '@components/molecules/card/bibleVersion';
 import CardMasonry from '@components/molecules/cardMasonry';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import { GetBibleVersionsPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './versions.module.scss';
@@ -22,7 +22,7 @@ export interface VersionsProps {
 function Versions({ versions }: VersionsProps): JSX.Element {
 	return (
 		<Tease className={styles.tease}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<Heading1>
 					<FormattedMessage
 						id="bibleVersions__heading"
@@ -35,7 +35,7 @@ function Versions({ versions }: VersionsProps): JSX.Element {
 						defaultMessage="The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
 					/>
 				</div>
-			</TeaseHeader>
+			</ContentWidthLimiter>
 
 			<CardMasonry
 				items={versions}

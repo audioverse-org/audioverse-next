@@ -94,7 +94,7 @@ export const makeAudiobookFeedRoute = (
 export const makeAudiobookListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/books/page/${page}`;
+): string => `/${languageRoute}/books${page > 1 ? `/page/${page}` : ''}`;
 
 export const makeStoryAlbumFeedRoute = (
 	languageRoute: string,
@@ -199,7 +199,7 @@ export const makeSponsorSeriesRoute = (
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,
-	page: string | number
+	page: string | number = 1
 ): string => `/${languageRoute}/testimonies/page/${page}`;
 
 export const makePlaylistDetailRoute = (
@@ -211,6 +211,9 @@ export const makeBlogPostListRoute = (
 	languageRoute: string,
 	page: string | number = 1
 ): string => `/${languageRoute}/blog${page > 1 ? `/page/${page}` : ''}`;
+
+export const makeAboutPage = (languageRoute: string, pageId: number): string =>
+	`/${languageRoute}/about/${pageId}`;
 
 export const makeLoginRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/login`;
@@ -229,6 +232,9 @@ export const makeAccountPreferencesRoute = (languageRoute: string): string =>
 
 export const makeLibraryRoute = (languageRoute: string, subpath = ''): string =>
 	`/${languageRoute}/library${subpath ? `/${subpath}` : ''}`;
+
+export const makeDonateRoute = (languageRoute: string): string =>
+	`/${languageRoute}/give`;
 
 export const makeDiscoverRoute = (languageRoute: string): string =>
 	`/${languageRoute}/discover`;

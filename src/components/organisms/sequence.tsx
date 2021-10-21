@@ -9,12 +9,12 @@ import RoundImage from '@components/atoms/roundImage';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
-import TeaseHeader from '@components/molecules/teaseHeader';
 import TypeLockup from '@components/molecules/typeLockup';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
@@ -131,7 +131,7 @@ export function Sequence({
 
 	return (
 		<Tease className={styles.container}>
-			<TeaseHeader>
+			<ContentWidthLimiter>
 				<TypeLockup
 					Icon={ListAltIcon}
 					label={intl.formatMessage({
@@ -180,7 +180,7 @@ export function Sequence({
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />
 				<DefinitionList terms={details} textColor={BaseColors.DARK} />
-			</TeaseHeader>
+			</ContentWidthLimiter>
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>
 					{recordings.nodes.map((recording) => (

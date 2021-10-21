@@ -294,6 +294,11 @@ module.exports = withPWA({
 				destination: '/:lang/discover/collections',
 				permanent: true,
 			},
+			{
+				source: '/:lang/testimonials',
+				destination: '/:lang/testimonies/page/1',
+				permanent: true,
+			},
 		];
 	},
 	webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {

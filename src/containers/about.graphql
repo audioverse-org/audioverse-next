@@ -1,0 +1,16 @@
+query getAboutPageData($id: ID!) {
+	page(id: $id) {
+		title
+		body
+		type
+		slug
+	}
+}
+
+query getAboutStaticPaths($language: Language!, $first: Int!) {
+	pages(language: $language, first: $first) {
+		nodes {
+			canonicalPath(useFuturePath: true)
+		}
+	}
+}

@@ -101,7 +101,7 @@ describe('audiobook list page', () => {
 
 		const link = getByText('1') as HTMLLinkElement;
 
-		expect(link.href).toContain('/en/books/page/1');
+		expect(link.href).toContain('/en/books');
 	});
 
 	it('localizes pagination links', async () => {
@@ -111,7 +111,7 @@ describe('audiobook list page', () => {
 
 		const link = getByText('1') as HTMLLinkElement;
 
-		expect(link.href).toContain('/es/books/page/1');
+		expect(link.href).toContain('/es/books');
 	});
 
 	it('renders 404', async () => {
