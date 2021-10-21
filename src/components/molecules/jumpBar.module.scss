@@ -1,0 +1,18 @@
+@import '../../styles/common';
+
+.jumpBar {
+	margin-bottom: 16px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	color: $ts-midTone;
+	font-weight: 700;
+	> a {
+		width: 26px;
+		margin-right: 8px;
+		line-height: 32px;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

@@ -2539,7 +2539,7 @@
   },
   "sponsorsList__title": {
     "col": 12,
-    "defaultMessage": "Sponsors",
+    "defaultMessage": "All Sponsors",
     "end": 1041,
     "file": "src/containers/sponsor/list.tsx",
     "line": 26,

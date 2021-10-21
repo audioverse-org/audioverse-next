@@ -1,0 +1,57 @@
+@import '../../styles/common';
+
+.back {
+	margin-top: 8px;
+	margin-bottom: 16px;
+}
+
+.card {
+	margin-bottom: 16px;
+}
+
+.container {
+	padding: 16px;
+	background-color: $ts-smartPlaylistH;
+	transition: background-color $transition-medium;
+	&:hover {
+		background-color: $ts-darkened-smartPlaylistH;
+	}
+	display: flex;
+	flex-direction: column;
+	&:hover {
+		color: $ts-dark;
+	}
+	@media (min-width: $breakpoint-lg) {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+.image {
+	flex: 0 0 32px;
+	margin-right: 8px;
+}
+
+.nameLockup {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+}
+
+.name {
+	flex-grow: 1;
+	font-size: 20px;
+}
+
+.summary {
+	margin-top: 8px;
+	color: $ts-midTone;
+	font-size: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	@media (min-width: $breakpoint-lg) {
+		margin-top: 0;
+		flex: 0 0 67%;
+	}
+}

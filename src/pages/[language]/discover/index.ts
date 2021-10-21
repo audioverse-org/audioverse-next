@@ -9,6 +9,7 @@ import { REVALIDATE } from '@lib/constants';
 import { getDiscoverPageData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { makeDiscoverRoute } from '@lib/routes';
 
 export default Discover;
 
@@ -39,7 +40,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return {
-		paths: getLanguageRoutes().map((base_url) => `/${base_url}/discover`),
+		paths: getLanguageRoutes().map((base_url) => makeDiscoverRoute(base_url)),
 		fallback: false,
 	};
 }

@@ -1,0 +1,33 @@
+@import '../../styles/common';
+
+.back {
+	margin-top: 8px;
+	margin-bottom: 16px;
+}
+
+.card {
+	margin-bottom: 16px;
+}
+
+.container {
+	padding: 16px;
+	background-color: $ts-lightTone;
+	transition: background-color $transition-medium;
+	&:hover {
+		background-color: $ts-darkened-lightTone;
+	}
+	display: flex;
+	align-items: center;
+	&:hover {
+		color: $ts-dark;
+	}
+}
+
+.image {
+	flex: 0 0 32px;
+	margin-right: 8px;
+}
+
+.sponsorName {
+	font-size: 20px;
+}

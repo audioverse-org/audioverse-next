@@ -24,20 +24,18 @@ import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 
 import styles from './collections.module.scss';
 
+export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
+
 export default function DiscoverCollections({
-	data: {
-		sequence,
-		persons,
-		serieses,
-		conferences,
-		sponsors,
-		audiobooks,
-		storySeasons,
-		musicAlbums,
-	},
-}: {
-	data: GetDiscoverCollectionsPageDataQuery;
-}): JSX.Element {
+	sequence,
+	persons,
+	serieses,
+	conferences,
+	sponsors,
+	audiobooks,
+	storySeasons,
+	musicAlbums,
+}: IDiscoverCollectionsProps): JSX.Element {
 	const language = useLanguageRoute();
 
 	const makeSeeAllButton = (route: string) => (
