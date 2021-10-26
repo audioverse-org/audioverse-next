@@ -114,6 +114,91 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
+				source: '/:lang/blog/page/1',
+				destination: '/:lang/blog',
+				permanent: true,
+			},
+			{
+				source: '/:lang/books/page/1',
+				destination: '/:lang/books',
+				permanent: true,
+			},
+			{
+				source: '/:lang/conferences/page/1',
+				destination: '/:lang/conferences',
+				permanent: true,
+			},
+			{
+				source: '/:lang/conferences/:id/presenters/page/1',
+				destination: '/:lang/conferences/:id/presenters',
+				permanent: true,
+			},
+			{
+				source: '/:lang/conferences/:id/sequences/page/1',
+				destination: '/:lang/conferences/:id/sequences',
+				permanent: true,
+			},
+			{
+				source: '/:lang/conferences/:id/teachings/page/1',
+				destination: '/:lang/conferences/:id/teachings',
+				permanent: true,
+			},
+			{
+				source: '/:lang/series/page/1',
+				destination: '/:lang/series',
+				permanent: true,
+			},
+			{
+				source: '/:lang/songs/albums/page/1',
+				destination: '/:lang/songs/albums',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sponsors/page/1',
+				destination: '/:lang/sponsors',
+				permanent: true,
+			},
+			{
+				source: '/:lang/stories/albums/page/1',
+				destination: '/:lang/stories/albums',
+				permanent: true,
+			},
+			{
+				source: '/:lang/presenters/:id/appears/page/1',
+				destination: '/:lang/presenters/:id/appears',
+				permanent: true,
+			},
+			{
+				source: '/:lang/presenters/:id/sequences/page/1',
+				destination: '/:lang/presenters/:id/sequences',
+				permanent: true,
+			},
+			{
+				source: '/:lang/presenters/:id/teachings/page/1',
+				destination: '/:lang/presenters/:id/teachings',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sponsors/:id/conferences/page/1',
+				destination: '/:lang/sponsors/:id/conferences',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sponsors/:id/series/page/1',
+				destination: '/:lang/sponsors/:id/series',
+				permanent: true,
+			},
+			{
+				source: '/:lang/sponsors/:id/teachings/page/1',
+				destination: '/:lang/sponsors/:id/teachings',
+				permanent: true,
+			},
+			{
+				source: '/:lang/testimonies/page/1',
+				destination: '/:lang/testimonies',
+				permanent: true,
+			},
+			{
 				source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
 				destination: '/:lang/bibles/ENGKJVC/:bookCode/1',
 				permanent: true,
@@ -188,11 +273,6 @@ module.exports = withPWA({
 			{
 				source: '/:lang/music/browse/sponsors/:id/:slug',
 				destination: '/:lang/sponsors/:id/:slug',
-				permanent: true,
-			},
-			{
-				source: '/:lang/sponsors',
-				destination: '/:lang/sponsors/page/1',
 				permanent: true,
 			},
 			{
@@ -298,6 +378,78 @@ module.exports = withPWA({
 				source: '/:lang/testimonials',
 				destination: '/:lang/testimonies/page/1',
 				permanent: true,
+			},
+		];
+	},
+	async rewrites() {
+		return [
+			{
+				source: '/:lang/blog',
+				destination: '/:lang/blog/page/1',
+			},
+			{
+				source: '/:lang/books',
+				destination: '/:lang/books/page/1',
+			},
+			{
+				source: '/:lang/conferences',
+				destination: '/:lang/conferences/page/1',
+			},
+			{
+				source: '/:lang/conferences/:id/presenters',
+				destination: '/:lang/conferences/:id/presenters/page/1',
+			},
+			{
+				source: '/:lang/conferences/:id/sequences',
+				destination: '/:lang/conferences/:id/sequences/page/1',
+			},
+			{
+				source: '/:lang/conferences/:id/teachings',
+				destination: '/:lang/conferences/:id/teachings/page/1',
+			},
+			{
+				source: '/:lang/presenters/:id/appears',
+				destination: '/:lang/presenters/:id/appears/page/1',
+			},
+			{
+				source: '/:lang/presenters/:id/sequences',
+				destination: '/:lang/presenters/:id/sequences/page/1',
+			},
+			{
+				source: '/:lang/presenters/:id/teachings',
+				destination: '/:lang/presenters/:id/teachings/page/1',
+			},
+			{
+				source: '/:lang/series',
+				destination: '/:lang/series/page/1',
+			},
+			{
+				source: '/:lang/songs/albums',
+				destination: '/:lang/songs/albums/page/1',
+			},
+			{
+				source: '/:lang/sponsors',
+				destination: '/:lang/sponsors/page/1',
+			},
+			{
+				source: '/:lang/sponsors/:id/conferences',
+				destination: '/:lang/sponsors/:id/conferences/page/1',
+			},
+			{
+				source: '/:lang/sponsors/:id/series',
+				destination: '/:lang/sponsors/:id/series/page/1',
+			},
+			{
+				source: '/:lang/sponsors/:id/teachings',
+				destination: '/:lang/sponsors/:id/teachings/page/1',
+			},
+			{
+				source: '/:lang/stories/albums',
+				destination: '/:lang/stories/albums/page/1',
+			},
+			{
+				source: '/:lang/testimonies',
+				destination: '/:lang/testimonies/page/1',
 			},
 		];
 	},

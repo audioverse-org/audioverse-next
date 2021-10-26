@@ -1,14 +1,18 @@
-import { GetStaticPathsResult, GetStaticPropsContext } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
-import AudiobooksList from '@containers/audiobook/list';
+import AudiobooksList, {
+	AudiobooksListProps,
+} from '@containers/audiobook/list';
 import {
 	getAudiobookListPageData,
 	getAudiobookListPathsData,
 } from '@lib/generated/graphql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-
-import { AudiobooksStaticProps } from '../index';
 
 export default AudiobooksList;
 
@@ -17,7 +21,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{
 	i: string;
 	language: string;
-}>): Promise<AudiobooksStaticProps> {
+}>): Promise<GetStaticPropsResult<AudiobooksListProps>> {
 	return getPaginatedStaticProps(
 		params,
 		getAudiobookListPageData,

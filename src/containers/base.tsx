@@ -17,6 +17,7 @@ export interface IBaseProps {
 	disableSidebar?: boolean;
 	title?: string;
 	description?: string | null;
+	canonicalUrl?: string | null;
 	dehydratedState?: DehydratedState;
 }
 
@@ -50,13 +51,15 @@ function Base<P>({
 	Component: typeof React.Component;
 	pageProps: P & IBaseProps;
 }): JSX.Element {
-	const { description, disableSidebar, title, dehydratedState } = pageProps;
+	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
+		pageProps;
 	return (
 		<>
 			<React.StrictMode>
 				<Head>
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
 					{description && <meta name="description" content={description} />}
+					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 					<meta
 						name="viewport"
 						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0, viewport-fit=cover"

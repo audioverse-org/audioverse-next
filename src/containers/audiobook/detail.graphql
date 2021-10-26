@@ -1,6 +1,7 @@
 query getAudiobookDetailPageData($id: ID!) {
 	audiobook(id: $id) {
 		...sequence
+		canonicalUrl(useFuturePath: true)
 	}
 }
 

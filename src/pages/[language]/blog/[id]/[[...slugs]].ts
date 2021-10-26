@@ -34,6 +34,7 @@ export async function getStaticProps({
 			blogPost,
 			blogPosts,
 			title: blogPost?.title,
+			canonicalUrl: blogPost?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

@@ -93,7 +93,7 @@ describe('stories list page', () => {
 
 		const link = getByText('1') as HTMLLinkElement;
 
-		expect(link).toHaveAttribute('href', '/en/stories/albums/page/1');
+		expect(link).toHaveAttribute('href', '/en/stories/albums');
 	});
 
 	it('renders 404', async () => {

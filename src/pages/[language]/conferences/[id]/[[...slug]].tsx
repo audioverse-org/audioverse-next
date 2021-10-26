@@ -19,7 +19,7 @@ export default CollectionDetail;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<CollectionDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
@@ -32,6 +32,7 @@ export async function getStaticProps({
 		props: {
 			collection,
 			title: collection?.title,
+			canonicalUrl: collection?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

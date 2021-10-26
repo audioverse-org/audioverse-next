@@ -104,7 +104,7 @@ describe('sponsor teachings page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id/teachings/page/1'
+			'/en/sponsors/the_sponsor_id/teachings'
 		);
 	});
 

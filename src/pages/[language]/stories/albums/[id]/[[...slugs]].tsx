@@ -31,7 +31,11 @@ export async function getStaticProps({
 	}));
 
 	return {
-		props: { sequence, title: sequence?.title },
+		props: {
+			sequence,
+			title: sequence?.title,
+			canonicalUrl: sequence?.canonicalUrl,
+		},
 		revalidate: REVALIDATE,
 	};
 }

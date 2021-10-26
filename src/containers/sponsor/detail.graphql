@@ -5,6 +5,7 @@ query getSponsorDetailPageData($id: ID!) {
 		location
 		website
 		description
+		canonicalUrl(useFuturePath: true)
 		shareUrl
 		image {
 			url(size: 100)

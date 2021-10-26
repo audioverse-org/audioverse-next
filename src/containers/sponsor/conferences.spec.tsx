@@ -39,6 +39,11 @@ const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 						count: 0,
 					},
 				},
+				allRecordings: {
+					aggregate: {
+						count: 0,
+					},
+				},
 			},
 		],
 		aggregate: {
@@ -101,7 +106,7 @@ describe('sponsor conferences page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id/conferences/page/1'
+			'/en/sponsors/the_sponsor_id/conferences'
 		);
 	});
 

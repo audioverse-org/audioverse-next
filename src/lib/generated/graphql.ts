@@ -5616,6 +5616,10 @@ export type CardCollectionFragment = {
 		__typename?: 'SequenceConnection';
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
+	allRecordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
 };
 
 export type CardFavoriteFragment = {
@@ -5638,6 +5642,10 @@ export type CardFavoriteFragment = {
 				} | null;
 				allSequences: {
 					__typename?: 'SequenceConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 		  }
@@ -6347,6 +6355,7 @@ export type RecordingFragment = {
 	description: string | null;
 	recordingDate: string | null;
 	sequenceIndex: number | null;
+	canonicalUrl: string;
 	shareUrl: string;
 	copyrightYear: number | null;
 	canonicalPath: string;
@@ -6858,6 +6867,7 @@ export type GetAudiobookDetailPageDataQuery = {
 	__typename?: 'Query';
 	audiobook: {
 		__typename?: 'Sequence';
+		canonicalUrl: string;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -7070,6 +7080,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 		description: string | null;
 		recordingDate: string | null;
 		sequenceIndex: number | null;
+		canonicalUrl: string;
 		shareUrl: string;
 		copyrightYear: number | null;
 		canonicalPath: string;
@@ -7380,6 +7391,7 @@ export type GetBlogDetailDataQuery = {
 		title: string;
 		body: string;
 		canonicalPath: string;
+		canonicalUrl: string;
 		publishDate: string;
 		readingDuration: number | null;
 		teaser: string;
@@ -7426,6 +7438,7 @@ export type GetCollectionDetailPageDataQuery = {
 		endDate: string | null;
 		duration: number;
 		description: string;
+		canonicalUrl: string;
 		shareUrl: string;
 		location: string | null;
 		image: { __typename?: 'Image'; url: string } | null;
@@ -7454,6 +7467,7 @@ export type GetCollectionDetailPageDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			}> | null;
+			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 		};
 		sequences: {
 			__typename?: 'SequenceConnection';
@@ -7490,6 +7504,63 @@ export type GetCollectionDetailPageDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			}> | null;
+			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+		};
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			nodes: Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: number | null;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				sequence: {
+					__typename?: 'Sequence';
+					id: string | number;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					title: string;
+					image: { __typename?: 'Image'; url: string } | null;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					};
+				} | null;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+			}> | null;
+			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 		};
 	} | null;
 };
@@ -7581,6 +7652,10 @@ export type GetCollectionListPageDataQuery = {
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
 			allSequences: {
 				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
 		}> | null;
@@ -7687,6 +7762,77 @@ export type GetCollectionSequencesPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+			}> | null;
+			aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		};
+	} | null;
+};
+
+export type GetCollectionTeachingsPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+	offset: Maybe<Scalars['Int']>;
+	first: Maybe<Scalars['Int']>;
+}>;
+
+export type GetCollectionTeachingsPageDataQuery = {
+	__typename?: 'Query';
+	collection: {
+		__typename?: 'Collection';
+		id: string | number;
+		title: string;
+		canonicalPath: string;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			nodes: Array<{
+				__typename?: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: number | null;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				sequence: {
+					__typename?: 'Sequence';
+					id: string | number;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					title: string;
+					image: { __typename?: 'Image'; url: string } | null;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					};
+				} | null;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
 			}> | null;
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
@@ -7945,9 +8091,67 @@ export type GetDiscoverPageDataQuery = {
 					};
 				}> | null;
 			};
+			recordings: {
+				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence: {
+						__typename?: 'Sequence';
+						id: string | number;
+						canonicalPath: string;
+						contentType: SequenceContentType;
+						title: string;
+						image: { __typename?: 'Image'; url: string } | null;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: { __typename?: 'Aggregate'; count: number } | null;
+						};
+					} | null;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+				}> | null;
+			};
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
 			allSequences: {
 				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
 		}> | null;
@@ -8055,6 +8259,10 @@ export type GetDiscoverCollectionsPageDataQuery = {
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
 			allSequences: {
 				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
 		}> | null;
@@ -8471,6 +8679,10 @@ export type GetLibraryDataQuery = {
 									__typename?: 'SequenceConnection';
 									aggregate: { __typename?: 'Aggregate'; count: number } | null;
 								};
+								allRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate: { __typename?: 'Aggregate'; count: number } | null;
+								};
 						  }
 						| {
 								__typename: 'Person';
@@ -8770,6 +8982,10 @@ export type GetPresenterAppearsPageDataQuery = {
 				__typename?: 'SequenceConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -8787,6 +9003,7 @@ export type GetPresenterDetailPageDataQuery = {
 		id: string | number;
 		name: string;
 		description: string;
+		canonicalUrl: string;
 		shareUrl: string;
 		website: string | null;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9057,6 +9274,10 @@ export type GetPresenterDetailPageDataQuery = {
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
 			allSequences: {
 				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
 		}> | null;
@@ -9399,6 +9620,10 @@ export type GetSearchResultsCollectionsQuery = {
 				__typename?: 'SequenceConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
 		}> | null;
 	};
 };
@@ -9518,6 +9743,10 @@ export type GetSearchResultsPageDataQuery = {
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
 			allSequences: {
 				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
 		}> | null;
@@ -9746,6 +9975,7 @@ export type GetSeriesDetailPageDataQuery = {
 	__typename?: 'Query';
 	series: {
 		__typename?: 'Sequence';
+		canonicalUrl: string;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -9879,7 +10109,7 @@ export type GetSeriesDetailPathsDataQuery = {
 	__typename?: 'Query';
 	serieses: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{ __typename?: 'Sequence'; id: string | number }> | null;
+		nodes: Array<{ __typename?: 'Sequence'; canonicalPath: string }> | null;
 	};
 };
 
@@ -9955,6 +10185,7 @@ export type GetSermonDetailDataQuery = {
 		description: string | null;
 		recordingDate: string | null;
 		sequenceIndex: number | null;
+		canonicalUrl: string;
 		shareUrl: string;
 		copyrightYear: number | null;
 		canonicalPath: string;
@@ -10310,6 +10541,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 	__typename?: 'Query';
 	musicAlbum: {
 		__typename?: 'Sequence';
+		canonicalUrl: string;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -10573,6 +10805,7 @@ export type GetSongDetailDataQuery = {
 		description: string | null;
 		recordingDate: string | null;
 		sequenceIndex: number | null;
+		canonicalUrl: string;
 		shareUrl: string;
 		copyrightYear: number | null;
 		canonicalPath: string;
@@ -10763,6 +10996,10 @@ export type GetSponsorConferencesPageDataQuery = {
 				__typename?: 'SequenceConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -10794,6 +11031,7 @@ export type GetSponsorDetailPageDataQuery = {
 		location: string | null;
 		website: string | null;
 		description: string;
+		canonicalUrl: string;
 		shareUrl: string;
 		image: { __typename?: 'Image'; url: string } | null;
 		collections: {
@@ -10815,6 +11053,10 @@ export type GetSponsorDetailPageDataQuery = {
 				} | null;
 				allSequences: {
 					__typename?: 'SequenceConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			}> | null;
@@ -11177,6 +11419,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 	__typename?: 'Query';
 	storySeason: {
 		__typename?: 'Sequence';
+		canonicalUrl: string;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -11389,6 +11632,7 @@ export type GetStoryDetailDataQuery = {
 		description: string | null;
 		recordingDate: string | null;
 		sequenceIndex: number | null;
+		canonicalUrl: string;
 		shareUrl: string;
 		copyrightYear: number | null;
 		canonicalPath: string;
@@ -11972,6 +12216,11 @@ export const CardCollectionFragmentDoc = `
       count
     }
   }
+  allRecordings: recordings(sequenceId: 0) {
+    aggregate {
+      count
+    }
+  }
 }
     `;
 export const CardSponsorFragmentDoc = `
@@ -12200,6 +12449,7 @@ export const RecordingFragmentDoc = `
   transcript {
     text
   }
+  canonicalUrl(useFuturePath: true)
   shareUrl
   ...sequenceNav
   ...copyrightInfo
@@ -12827,6 +13077,7 @@ export const GetAudiobookDetailPageDataDocument = `
     query getAudiobookDetailPageData($id: ID!) {
   audiobook(id: $id) {
     ...sequence
+    canonicalUrl(useFuturePath: true)
   }
 }
     ${SequenceFragmentDoc}`;
@@ -13221,6 +13472,7 @@ export const GetBlogDetailDataDocument = `
     }
     body
     canonicalPath(useFuturePath: true)
+    canonicalUrl(useFuturePath: true)
     publishDate
     readingDuration
     teaser
@@ -13284,6 +13536,7 @@ export const GetCollectionDetailPageDataDocument = `
     endDate
     duration
     description
+    canonicalUrl(useFuturePath: true)
     shareUrl
     location
     image {
@@ -13305,6 +13558,9 @@ export const GetCollectionDetailPageDataDocument = `
       nodes {
         ...cardPerson
       }
+      pageInfo {
+        hasNextPage
+      }
     }
     sequences(first: 3, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
       aggregate {
@@ -13313,12 +13569,31 @@ export const GetCollectionDetailPageDataDocument = `
       nodes {
         ...cardSequence
       }
+      pageInfo {
+        hasNextPage
+      }
+    }
+    recordings(
+      first: 3
+      sequenceId: 0
+      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
+    ) {
+      aggregate {
+        count
+      }
+      nodes {
+        ...cardRecording
+      }
+      pageInfo {
+        hasNextPage
+      }
     }
   }
 }
     ${SponsorLockupFragmentDoc}
 ${CardPersonFragmentDoc}
-${CardSequenceFragmentDoc}`;
+${CardSequenceFragmentDoc}
+${CardRecordingFragmentDoc}`;
 export const useGetCollectionDetailPageDataQuery = <
 	TData = GetCollectionDetailPageDataQuery,
 	TError = unknown
@@ -13521,6 +13796,43 @@ export const useGetCollectionSequencesPageDataQuery = <
 		>(GetCollectionSequencesPageDataDocument, variables),
 		options
 	);
+export const GetCollectionTeachingsPageDataDocument = `
+    query getCollectionTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
+  collection(id: $id) {
+    id
+    ...collectionPivot
+    recordings(
+      offset: $offset
+      first: $first
+      sequenceId: 0
+      orderBy: [{field: TITLE, direction: ASC}]
+    ) {
+      nodes {
+        ...cardRecording
+      }
+      aggregate {
+        count
+      }
+    }
+  }
+}
+    ${CollectionPivotFragmentDoc}
+${CardRecordingFragmentDoc}`;
+export const useGetCollectionTeachingsPageDataQuery = <
+	TData = GetCollectionTeachingsPageDataQuery,
+	TError = unknown
+>(
+	variables: GetCollectionTeachingsPageDataQueryVariables,
+	options?: UseQueryOptions<GetCollectionTeachingsPageDataQuery, TError, TData>
+) =>
+	useQuery<GetCollectionTeachingsPageDataQuery, TError, TData>(
+		['getCollectionTeachingsPageData', variables],
+		graphqlFetcher<
+			GetCollectionTeachingsPageDataQuery,
+			GetCollectionTeachingsPageDataQueryVariables
+		>(GetCollectionTeachingsPageDataDocument, variables),
+		options
+	);
 export const GetDiscoverPageDataDocument = `
     query getDiscoverPageData($language: Language!) {
   recentTeachings: sermons(
@@ -13563,6 +13875,15 @@ export const GetDiscoverPageDataDocument = `
       sequences(first: 2, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
         nodes {
           ...cardSequence
+        }
+      }
+      recordings(
+        first: 2
+        sequenceId: 0
+        orderBy: [{field: PUBLISHED_AT, direction: DESC}]
+      ) {
+        nodes {
+          ...cardRecording
         }
       }
     }
@@ -13915,6 +14236,7 @@ export const GetPresenterDetailPageDataDocument = `
     id
     name
     description
+    canonicalUrl(useFuturePath: true)
     shareUrl
     imageWithFallback {
       url(size: 100)
@@ -14475,6 +14797,7 @@ export const GetSeriesDetailPageDataDocument = `
     query getSeriesDetailPageData($id: ID!) {
   series(id: $id) {
     ...sequence
+    canonicalUrl(useFuturePath: true)
   }
 }
     ${SequenceFragmentDoc}`;
@@ -14528,7 +14851,7 @@ export const GetSeriesDetailPathsDataDocument = `
     query getSeriesDetailPathsData($language: Language!, $first: Int) {
   serieses(language: $language, first: $first) {
     nodes {
-      id
+      canonicalPath(useFuturePath: true)
     }
   }
 }
@@ -14766,6 +15089,7 @@ export const GetSongAlbumsDetailPageDataDocument = `
     query getSongAlbumsDetailPageData($id: ID!) {
   musicAlbum(id: $id) {
     ...sequence
+    canonicalUrl(useFuturePath: true)
   }
 }
     ${SequenceFragmentDoc}`;
@@ -15048,6 +15372,7 @@ export const GetSponsorDetailPageDataDocument = `
     location
     website
     description
+    canonicalUrl(useFuturePath: true)
     shareUrl
     image {
       url(size: 100)
@@ -15350,6 +15675,7 @@ export const GetStoryAlbumDetailPageDataDocument = `
     query getStoryAlbumDetailPageData($id: ID!) {
   storySeason(id: $id) {
     ...sequence
+    canonicalUrl(useFuturePath: true)
   }
 }
     ${SequenceFragmentDoc}`;
@@ -16292,6 +16618,12 @@ export async function getCollectionSequencesPageData<T>(
 	variables: ExactAlt<T, GetCollectionSequencesPageDataQueryVariables>
 ): Promise<GetCollectionSequencesPageDataQuery> {
 	return fetchApi(GetCollectionSequencesPageDataDocument, { variables });
+}
+
+export async function getCollectionTeachingsPageData<T>(
+	variables: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>
+): Promise<GetCollectionTeachingsPageDataQuery> {
+	return fetchApi(GetCollectionTeachingsPageDataDocument, { variables });
 }
 
 export async function getDiscoverPageData<T>(

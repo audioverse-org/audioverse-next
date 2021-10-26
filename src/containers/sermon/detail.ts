@@ -4,7 +4,6 @@ import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
 
 export interface SermonDetailProps {
 	recording: GetSermonDetailDataQuery['sermon'];
-	title?: string;
 }
 
 export default withFailStates<SermonDetailProps>(

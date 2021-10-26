@@ -108,7 +108,7 @@ describe('series detail page', () => {
 			serieses: {
 				nodes: [
 					{
-						id: 'the_series_id',
+						canonicalPath: '/en/series/the_series_path',
 					},
 				],
 			},
@@ -116,7 +116,7 @@ describe('series detail page', () => {
 
 		const result = await getStaticPaths();
 
-		expect(result.paths).toContain('/en/series/the_series_id/page/1');
+		expect(result.paths).toContain('/en/series/the_series_path');
 	});
 
 	it('lists recordings', async () => {

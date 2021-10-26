@@ -130,7 +130,7 @@ describe('sponsor series page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/sponsors/the_sponsor_id/series/page/1'
+			'/en/sponsors/the_sponsor_id/series'
 		);
 	});
 

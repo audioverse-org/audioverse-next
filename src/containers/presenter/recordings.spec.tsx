@@ -9,7 +9,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/[id]/page/[i]';
+} from '@pages/[language]/presenters/[id]/teachings/page/[i]';
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps, {
 	language: 'en',
@@ -65,7 +65,7 @@ describe('presenter recordings page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/presenters/the_presenter_id/page/1');
+		expect(paths).toContain('/en/presenters/the_presenter_id/teachings/page/1');
 	});
 
 	it('lists presenter recordings', async () => {
@@ -83,7 +83,7 @@ describe('presenter recordings page', () => {
 
 		expect(getByText('1')).toHaveAttribute(
 			'href',
-			'/en/presenters/the_presenter_id/page/1'
+			'/en/presenters/the_presenter_id/teachings'
 		);
 	});
 

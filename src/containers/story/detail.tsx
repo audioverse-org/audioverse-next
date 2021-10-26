@@ -4,7 +4,6 @@ import { GetStoryDetailDataQuery } from '@lib/generated/graphql';
 
 export interface StoryDetailProps {
 	recording: GetStoryDetailDataQuery['story'];
-	title?: string;
 }
 
 export default withFailStates<StoryDetailProps>(

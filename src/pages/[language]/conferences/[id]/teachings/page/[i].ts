@@ -4,36 +4,38 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SponsorTeachings, {
-	SponsorTeachingsProps,
-} from '@containers/sponsor/teachings';
+import CollectionTeachings, {
+	CollectionTeachingsProps,
+} from '@containers/collection/teachings';
 import {
-	getSponsorTeachingsPageData,
-	getSponsorTeachingsPathsData,
+	getCollectionDetailPathsData,
+	getCollectionTeachingsPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
-export default SponsorTeachings;
+export default CollectionTeachings;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
-	GetStaticPropsResult<SponsorTeachingsProps>
+	GetStaticPropsResult<CollectionTeachingsProps>
 > {
 	const id = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
-		({ offset, first }) => getSponsorTeachingsPageData({ id, offset, first }),
-		(d) => d.sponsor?.recordings.nodes,
-		(d) => d.sponsor?.recordings.aggregate?.count
+		({ first, offset }) =>
+			getCollectionTeachingsPageData({ id, first, offset }),
+		(d) => d.collection?.recordings.nodes,
+		(d) => d.collection?.recordings.aggregate?.count
 	);
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
-		getSponsorTeachingsPathsData,
-		(d) => d.sponsors.nodes,
-		(l, n) => `/${l}/sponsors/${n.id}/teachings/page/1`
+		getCollectionDetailPathsData,
+		(d) => d.collections.nodes,
+		(languageRoute, node) =>
+			`/${languageRoute}/conferences/${node.id}/teachings/page/1`
 	);
 }

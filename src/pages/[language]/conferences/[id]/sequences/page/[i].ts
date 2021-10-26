@@ -13,7 +13,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { makeCollectionSequencesRoute } from '@lib/routes';
 
 export default CollectionSequences;
 
@@ -37,6 +36,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getCollectionDetailPathsData,
 		(d) => d.collections.nodes,
 		(languageRoute, node) =>
-			makeCollectionSequencesRoute(languageRoute, node.id, 1)
+			`/${languageRoute}/conferences/${node.id}/sequences/page/1`
 	);
 }

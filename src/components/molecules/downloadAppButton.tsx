@@ -10,10 +10,12 @@ import styles from './downloadAppButton.module.scss';
 import Dropdown from './dropdown';
 
 type Props = {
+	menuAlignment: 'left' | 'right';
 	className?: string;
 };
 
 export default function DownloadAppButton({
+	menuAlignment,
 	className,
 }: Props): JSX.Element | null {
 	const downloadOptions = [
@@ -55,7 +57,7 @@ export default function DownloadAppButton({
 					{...props}
 				/>
 			)}
-			alignment="right"
+			alignment={menuAlignment}
 		>
 			{(handleClose) => (
 				<div className={styles.container}>

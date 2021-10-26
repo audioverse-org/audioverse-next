@@ -7,6 +7,7 @@ import {
 import AudiobookDetail, {
 	AudiobookDetailProps,
 } from '@containers/audiobook/detail';
+import { IBaseProps } from '@containers/base';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getAudiobookDetailPageData,
@@ -16,11 +17,11 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default AudiobookDetail;
 
-type AudiobookStaticProps = GetStaticPropsResult<AudiobookDetailProps>;
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<AudiobookStaticProps> {
+}: GetStaticPropsContext<{ id: string }>): Promise<
+	GetStaticPropsResult<AudiobookDetailProps & IBaseProps>
+> {
 	const id = params?.id as string;
 
 	const { audiobook: sequence } = await getAudiobookDetailPageData({
@@ -33,6 +34,7 @@ export async function getStaticProps({
 		props: {
 			sequence,
 			title: sequence?.title,
+			canonicalUrl: sequence?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

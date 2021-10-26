@@ -1,6 +1,7 @@
 query getSeriesDetailPageData($id: ID!) {
 	series(id: $id) {
 		...sequence
+		canonicalUrl(useFuturePath: true)
 	}
 }
 
@@ -22,7 +23,7 @@ query getSeriesFeedData($id: ID!) {
 query getSeriesDetailPathsData($language: Language!, $first: Int) {
 	serieses(language: $language, first: $first) {
 		nodes {
-			id
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }

@@ -13,7 +13,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterAlsoAppearsInRoute } from '@lib/routes';
 
 export default PresenterAppears;
 
@@ -37,6 +36,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
 		(languageRoute, node) =>
-			makePresenterAlsoAppearsInRoute(languageRoute, node.id)
+			`/${languageRoute}/presenters/${node.id}/appears/page/1`
 	);
 }

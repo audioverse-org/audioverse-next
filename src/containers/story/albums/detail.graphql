@@ -1,6 +1,7 @@
 query getStoryAlbumDetailPageData($id: ID!) {
 	storySeason(id: $id) {
 		...sequence
+		canonicalUrl(useFuturePath: true)
 	}
 }
 

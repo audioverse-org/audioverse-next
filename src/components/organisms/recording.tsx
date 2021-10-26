@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
@@ -53,6 +53,15 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		writers,
 		attachments,
 	} = recording;
+	const scrollRef = useRef<HTMLDivElement>(null);
+	const currentRef = useRef<HTMLLIElement>(null);
+	useEffect(() => {
+		if (!scrollRef.current || !currentRef.current) {
+			return;
+		}
+		scrollRef.current.scrollTo({ top: currentRef.current.offsetTop - 32 });
+	}, [recording.id]);
+
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
 	const recordingDateString = formatLongDateTime(
@@ -283,22 +292,32 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 							description: 'recording series list label',
 						})}
 					>
-						<div className={styles.seriesScroller}>
-							<LineHeading small color={accentColor}>
-								<FormattedMessage
-									id="organism-recording__seriesListTitle"
-									defaultMessage="Other Teachings in Series"
-									description="recording series list title"
-								/>
-							</LineHeading>
+						<div className={styles.seriesScroller} ref={scrollRef}>
+							<div>
+								<LineHeading
+									small
+									color={accentColor}
+									className={styles.seriesHeading}
+								>
+									<FormattedMessage
+										id="organism-recording__seriesListTitle"
+										defaultMessage="Other Teachings in Series"
+										description="recording series list title"
+									/>
+								</LineHeading>
 
-							<ol className={styles.seriesItems}>
-								{seriesItems.map((r) => (
-									<li className={styles.item} key={r.id}>
-										<TeaseRecording recording={r} theme={theme} unpadded />
-									</li>
-								))}
-							</ol>
+								<ol className={styles.seriesItems}>
+									{seriesItems.map((r) => (
+										<li
+											className={styles.item}
+											key={r.id}
+											ref={r.id === recording.id ? currentRef : undefined}
+										>
+											<TeaseRecording recording={r} theme={theme} unpadded />
+										</li>
+									))}
+								</ol>
+							</div>
 						</div>
 					</div>
 				)}

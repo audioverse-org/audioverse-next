@@ -1,0 +1,19 @@
+query getCollectionTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
+	collection(id: $id) {
+		id
+		...collectionPivot
+		recordings(
+			offset: $offset
+			first: $first
+			sequenceId: 0
+			orderBy: [{ field: TITLE, direction: ASC }]
+		) {
+			nodes {
+				...cardRecording
+			}
+			aggregate {
+				count
+			}
+		}
+	}
+}

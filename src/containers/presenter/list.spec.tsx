@@ -67,7 +67,7 @@ describe('presenter list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/presenters/page/1');
+		expect(getByText('1')).toHaveAttribute('href', '/en/presenters');
 	});
 
 	it('generates static paths', async () => {

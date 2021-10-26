@@ -12,18 +12,15 @@ import {
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeSeriesDetailRoute } from '@lib/routes';
 
 export default SeriesDetail;
-
-export type SeriesStaticProps = GetStaticPropsResult<SeriesDetailProps>;
 
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{
 	language: string;
 	id: string;
-}>): Promise<SeriesStaticProps & IBaseProps> {
+}>): Promise<GetStaticPropsResult<SeriesDetailProps & IBaseProps>> {
 	const id = params?.id as string;
 
 	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
@@ -34,6 +31,7 @@ export async function getStaticProps({
 		props: {
 			sequence: series,
 			title: series?.title,
+			canonicalUrl: series?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};
@@ -43,6 +41,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSeriesDetailPathsData,
 		(d) => d.serieses.nodes,
-		(l, n) => makeSeriesDetailRoute(l, n.id)
+		(_, n) => n.canonicalPath
 	);
 }

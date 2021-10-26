@@ -54,142 +54,153 @@ const Navigation = ({
 				<div className={styles.mobileRow}>
 					<SearchBar term={searchTerm} onChange={onSearchChange} />
 				</div>
-				<div className={styles.mobileRow}>
-					<LanguageButton
-						buttonType="secondary"
-						onClick={(baseUrl) => {
-							router.push(`/${baseUrl}/`);
-						}}
-					/>
-					<DownloadAppButton />
-				</div>
 			</div>
-			<ul>
-				{navigationItems
-					.slice(0, -1)
-					.map(({ Icon, key, label, href, children }) => {
-						const inner = (
-							<>
-								<span className={styles.icon}>
-									<Icon width={iconSize} height={iconSize} />
-								</span>
-								{label}
-								{children && (
+			<div className={styles.slider}>
+				<div className={clsx(styles.sliderColumns, submenu && styles.in)}>
+					<div>
+						<div className={styles.mobileRow}>
+							<LanguageButton
+								buttonType="secondary"
+								onClick={(baseUrl) => {
+									router.push(`/${baseUrl}/`);
+								}}
+							/>
+							<DownloadAppButton menuAlignment="right" />
+						</div>
+
+						<ul>
+							{navigationItems
+								.slice(0, -1)
+								.map(({ Icon, key, label, href, children }) => {
+									const inner = (
+										<>
+											<span className={styles.icon}>
+												<Icon width={iconSize} height={iconSize} />
+											</span>
+											{label}
+											{children && (
+												<span className={styles.iconDisclosure}>
+													<IconDisclosure />
+												</span>
+											)}
+										</>
+									);
+
+									if (!href) {
+										return (
+											<li key={key}>
+												<a
+													className={styles.navLink}
+													onClick={() => setSubmenu(key)}
+												>
+													{inner}
+												</a>
+											</li>
+										);
+									}
+
+									return (
+										<li key={key}>
+											<ActiveLink href={href} activeClassName={styles.active}>
+												<a
+													className={styles.navLink}
+													onClick={
+														children
+															? (e) => {
+																	e.preventDefault();
+																	setSubmenu(key);
+															  }
+															: undefined
+													}
+												>
+													{inner}
+												</a>
+											</ActiveLink>
+										</li>
+									);
+								})}
+						</ul>
+
+						<div className={styles.account}>
+							{user ? (
+								<a
+									className={styles.accountWithAvatar}
+									onClick={(e) => {
+										e.preventDefault();
+										setSubmenu('account');
+									}}
+								>
+									{user.image && (
+										<div className={styles.accountAvatar}>
+											<RoundImage image={user.image.url} small />
+										</div>
+									)}
+									<span className={styles.accountName}>{user.name}</span>
 									<span className={styles.iconDisclosure}>
 										<IconDisclosure />
 									</span>
-								)}
-							</>
-						);
-
-						if (!href) {
-							return (
-								<li key={key}>
-									<a className={styles.navLink} onClick={() => setSubmenu(key)}>
-										{inner}
+								</a>
+							) : (
+								<Link href={makeLoginRoute(languageRoute)}>
+									<a className="decorated">
+										<FormattedMessage
+											id="navigation__loginSignupCta"
+											defaultMessage="Login/Sign up"
+										/>
 									</a>
-								</li>
-							);
-						}
-
-						return (
-							<li key={key}>
-								<ActiveLink href={href} activeClassName={styles.active}>
-									<a
-										className={styles.navLink}
-										onClick={
-											children
-												? (e) => {
-														e.preventDefault();
-														setSubmenu(key);
-												  }
-												: undefined
-										}
-									>
-										{inner}
-									</a>
-								</ActiveLink>
-							</li>
-						);
-					})}
-			</ul>
-
-			<div className={styles.account}>
-				{user ? (
-					<a
-						className={styles.accountWithAvatar}
-						onClick={(e) => {
-							e.preventDefault();
-							setSubmenu('account');
-						}}
-					>
-						{user.image && (
-							<div className={styles.accountAvatar}>
-								<RoundImage image={user.image.url} small />
-							</div>
-						)}
-						<span className={styles.accountName}>{user.name}</span>
-						<span className={styles.iconDisclosure}>
+								</Link>
+							)}
+						</div>
+					</div>
+					<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
+						<a
+							className={styles.backToMenu}
+							onClick={(e) => {
+								e.preventDefault();
+								setSubmenu('');
+							}}
+						>
 							<IconDisclosure />
-						</span>
-					</a>
-				) : (
-					<Link href={makeLoginRoute(languageRoute)}>
-						<a className="decorated">
-							<FormattedMessage
-								id="navigation__loginSignupCta"
-								defaultMessage="Login/Sign up"
-							/>
+							<Heading6 sans uppercase unpadded>
+								<FormattedMessage
+									id="navigation__backToMenu"
+									defaultMessage="Back to Menu"
+								/>
+							</Heading6>
 						</a>
-					</Link>
-				)}
-			</div>
-
-			<div className={clsx(styles.submenu, submenu && styles.submenuShown)}>
-				<a
-					className={styles.backToMenu}
-					onClick={(e) => {
-						e.preventDefault();
-						setSubmenu('');
-					}}
-				>
-					<IconDisclosure />
-					<Heading6 sans uppercase unpadded>
-						<FormattedMessage
-							id="navigation__backToMenu"
-							defaultMessage="Back to Menu"
-						/>
-					</Heading6>
-				</a>
-				<Heading3 sans className={styles.submenuHeading}>
-					{submenuItem?.label}
-				</Heading3>
-				<ul className={styles.submenuItems}>
-					{Array.isArray(submenuItem?.children)
-						? submenuItem?.children?.map(
-								({ key, Icon, label, href, onClick }) => (
-									<li key={key}>
-										<Link href={href as string}>
-											<a
-												className={styles.navLink}
-												onClick={
-													onClick
-														? () =>
-																onClick({ popSubmenu: () => setSubmenu('') })
-														: undefined
-												}
-											>
-												<span className={styles.icon}>
-													<Icon />
-												</span>
-												{label}
-											</a>
-										</Link>
-									</li>
-								)
-						  )
-						: submenuItem?.children}
-				</ul>
+						<Heading3 sans className={styles.submenuHeading}>
+							{submenuItem?.label}
+						</Heading3>
+						<ul className={styles.submenuItems}>
+							{Array.isArray(submenuItem?.children)
+								? submenuItem?.children?.map(
+										({ key, Icon, label, href, onClick }) => (
+											<li key={key}>
+												<Link href={href as string}>
+													<a
+														className={styles.navLink}
+														onClick={
+															onClick
+																? () =>
+																		onClick({
+																			popSubmenu: () => setSubmenu(''),
+																		})
+																: undefined
+														}
+													>
+														<span className={styles.icon}>
+															<Icon />
+														</span>
+														{label}
+													</a>
+												</Link>
+											</li>
+										)
+								  )
+								: submenuItem?.children}
+						</ul>
+					</div>
+				</div>
 			</div>
 
 			<LoadingIndicator />

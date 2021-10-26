@@ -4,7 +4,6 @@ import { GetSeriesDetailPageDataQuery } from '@lib/generated/graphql';
 
 export interface SeriesDetailProps {
 	sequence: GetSeriesDetailPageDataQuery['series'];
-	title?: string;
 }
 
 export default withFailStates<SeriesDetailProps>(

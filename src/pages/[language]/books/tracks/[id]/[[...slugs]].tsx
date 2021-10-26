@@ -7,6 +7,7 @@ import {
 import AudiobookTrackDetail, {
 	AudiobookTrackDetailProps,
 } from '@containers/audiobook/tracks/detail';
+import { IBaseProps } from '@containers/base';
 import { REVALIDATE } from '@lib/constants';
 import {
 	getAudiobookTrackDetailData,
@@ -16,15 +17,11 @@ import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default AudiobookTrackDetail;
 
-export type AudiobookTrackStaticProps = GetStaticPropsResult<
-	AudiobookTrackDetailProps & {
-		title?: string;
-	}
->;
-
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<AudiobookTrackStaticProps> {
+}: GetStaticPropsContext<{ id: string }>): Promise<
+	GetStaticPropsResult<AudiobookTrackDetailProps & IBaseProps>
+> {
 	const id = params?.id as string;
 	const { audiobookTrack: recording } = await getAudiobookTrackDetailData({
 		id,
@@ -36,6 +33,7 @@ export async function getStaticProps({
 		props: {
 			recording,
 			title: recording?.title,
+			canonicalUrl: recording?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};

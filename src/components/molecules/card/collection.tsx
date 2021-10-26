@@ -13,6 +13,7 @@ import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import {
 	CardCollectionFragment,
+	CardRecordingFragment,
 	CardSequenceFragment,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
@@ -25,23 +26,28 @@ import CollectionTypeLockup from '../collectionTypeLockup';
 import IconButton from '../iconButton';
 
 import styles from './collection.module.scss';
+import CardRecording from './recording';
 import CardSequence from './sequence';
 
 interface CardCollectionProps {
 	collection: CardCollectionFragment;
 	sequences?: CardSequenceFragment[] | null;
+	recordings?: CardRecordingFragment[] | null;
 }
 
 export default function CardCollection({
 	collection,
 	sequences,
+	recordings,
 }: CardCollectionProps): JSX.Element {
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
 		collection.id
 	);
 	const [ref, isHovered] = useHover();
+	const [subRef, isSubHovered] = useHover();
 	const {
 		allSequences,
+		allRecordings,
 		canonicalPath,
 		duration,
 		endDate,
@@ -67,7 +73,7 @@ export default function CardCollection({
 				<a
 					className={clsx(
 						styles.container,
-						isHovered && styles.bookmarkHovered
+						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 				>
 					<CollectionTypeLockup />
@@ -87,12 +93,21 @@ export default function CardCollection({
 						loose
 						className={styles.sequencesLabel}
 					>
-						<FormattedMessage
-							id="cardCollection_sequenceLabel"
-							defaultMessage="{count} series"
-							description="Card collection sequence count label"
-							values={{ count: allSequences.aggregate?.count }}
-						/>
+						{allSequences.aggregate?.count ? (
+							<FormattedMessage
+								id="cardCollection_sequenceLabel"
+								defaultMessage="{count} series"
+								description="Card collection sequence count label"
+								values={{ count: allSequences.aggregate?.count }}
+							/>
+						) : (
+							<FormattedMessage
+								id="cardCollection__teachingsCountLabel"
+								defaultMessage="{count} teachings"
+								description="Card collection teachings count label"
+								values={{ count: allRecordings.aggregate?.count }}
+							/>
+						)}
 					</Heading6>
 					<div
 						className={clsx(
@@ -121,16 +136,19 @@ export default function CardCollection({
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
 						/>
 					</div>
-					{sequences?.length ? (
-						<div className={styles.subSequences}>
-							{sequences.map((sequence) => (
-								<div
-									className={styles.subSequence}
-									key={sequence.canonicalPath}
-								>
+					{sequences?.length || recordings?.length ? (
+						<div className={styles.subItems} ref={subRef}>
+							{sequences?.map((sequence) => (
+								<div className={styles.subItem} key={sequence.canonicalPath}>
 									<CardSequence sequence={sequence} slim />
 								</div>
 							))}
+							{!sequences?.length &&
+								recordings?.map((recording) => (
+									<div className={styles.subItem} key={recording.canonicalPath}>
+										<CardRecording recording={recording} isOptionalLink />
+									</div>
+								))}
 						</div>
 					) : null}
 				</a>

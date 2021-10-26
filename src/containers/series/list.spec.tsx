@@ -86,7 +86,7 @@ describe('series list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/series/page/1');
+		expect(getByText('1')).toHaveAttribute('href', '/en/series');
 	});
 
 	it('renders 404', async () => {

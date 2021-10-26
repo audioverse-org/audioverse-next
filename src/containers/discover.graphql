@@ -44,6 +44,15 @@ query getDiscoverPageData($language: Language!) {
 					...cardSequence
 				}
 			}
+			recordings(
+				first: 2
+				sequenceId: 0
+				orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+			) {
+				nodes {
+					...cardRecording
+				}
+			}
 		}
 	}
 }

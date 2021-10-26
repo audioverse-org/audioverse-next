@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Story, { StoryDetailProps } from '@containers/story/detail';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -19,7 +20,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{
 	language: string;
 	id: string;
-}>): Promise<GetStaticPropsResult<StoryDetailProps>> {
+}>): Promise<GetStaticPropsResult<StoryDetailProps & IBaseProps>> {
 	const id = params?.id as string;
 
 	const { story: recording } = await getStoryDetailData({ id }).catch(() => ({
@@ -27,7 +28,11 @@ export async function getStaticProps({
 	}));
 
 	return {
-		props: { recording, title: recording?.title },
+		props: {
+			recording,
+			title: recording?.title,
+			canonicalUrl: recording?.canonicalUrl,
+		},
 		revalidate: REVALIDATE,
 	};
 }

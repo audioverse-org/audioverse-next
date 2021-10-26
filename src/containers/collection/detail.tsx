@@ -11,6 +11,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardPerson from '@components/molecules/card/person';
+import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
@@ -29,6 +30,7 @@ import {
 	makeCollectionFeedRoute,
 	makeCollectionPresentersRoute,
 	makeCollectionSequencesRoute,
+	makeCollectionTeachingsRoute,
 } from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -62,6 +64,7 @@ function CollectionDetail({
 		shareUrl,
 		sponsor,
 		persons,
+		recordings,
 		sequences,
 	} = collection;
 
@@ -132,12 +135,21 @@ function CollectionDetail({
 				)}
 
 				<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-					<FormattedMessage
-						id="collectionDetail__sequenceCountLabel"
-						defaultMessage="{count} Series"
-						description="Collection Detail sequence count label"
-						values={{ count: sequences.aggregate?.count }}
-					/>
+					{sequences.aggregate?.count ? (
+						<FormattedMessage
+							id="collectionDetail__sequenceCountLabel"
+							defaultMessage="{count} Series"
+							description="Collection Detail sequence count label"
+							values={{ count: sequences.aggregate?.count }}
+						/>
+					) : (
+						<FormattedMessage
+							id="collectionDetail__teachingsCountLabel"
+							defaultMessage="{count} Teachings"
+							description="Collection Detail teachings count label"
+							values={{ count: recordings.aggregate?.count }}
+						/>
+					)}
 				</Heading6>
 				<div className={styles.row}>
 					<div className={styles.duration}>
@@ -175,13 +187,44 @@ function CollectionDetail({
 							<CardSequence sequence={sequence} key={sequence.canonicalPath} />
 						))}
 					</CardGroup>
-					{(sequences.aggregate?.count || 0) > sequences.nodes.length && (
+					{sequences.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
 							href={makeCollectionSequencesRoute(lang, id)}
 							text={intl.formatMessage({
 								id: 'collectionDetail__seriesAllLabel',
 								defaultMessage: 'See All Series',
+							})}
+							IconLeft={ForwardIcon}
+							className={styles.seeAllButton}
+						/>
+					)}
+				</>
+			) : null}
+			{recordings.nodes?.length ? (
+				<>
+					<LineHeading color={BaseColors.SALMON}>
+						<FormattedMessage
+							id="collectionDetail__teachingsLabel"
+							defaultMessage="Individual Teachings"
+							description="Collection Detail teachings label"
+						/>
+					</LineHeading>
+					<CardGroup className={styles.cardGroup}>
+						{recordings.nodes.map((recording) => (
+							<CardRecording
+								recording={recording}
+								key={recording.canonicalPath}
+							/>
+						))}
+					</CardGroup>
+					{recordings.pageInfo.hasNextPage && (
+						<Button
+							type="secondaryInverse"
+							href={makeCollectionTeachingsRoute(lang, id)}
+							text={intl.formatMessage({
+								id: 'collectionDetail__teachingsAllLabel',
+								defaultMessage: 'See All Individual Teachings',
 							})}
 							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}
@@ -203,7 +246,7 @@ function CollectionDetail({
 							<CardPerson person={person} key={person.canonicalPath} />
 						))}
 					</CardGroup>
-					{(persons.aggregate?.count || 0) > persons.nodes.length && (
+					{persons.pageInfo.hasNextPage && (
 						<Button
 							type="secondaryInverse"
 							href={makeCollectionPresentersRoute(lang, id)}

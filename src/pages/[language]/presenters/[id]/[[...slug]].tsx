@@ -46,6 +46,7 @@ export async function getStaticProps({
 		props: {
 			...result,
 			title: result.person?.name,
+			canonicalUrl: result.person?.canonicalUrl,
 		},
 		revalidate: REVALIDATE,
 	};
