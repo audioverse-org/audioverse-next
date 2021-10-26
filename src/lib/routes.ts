@@ -11,7 +11,10 @@ export const makePresenterRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/presenters/${personId}/page/${page}`;
+): string =>
+	`/${languageRoute}/presenters/${personId}/teachings${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makePresenterFeedRoute = (
 	languageRoute: string,
@@ -27,13 +30,19 @@ export const makePresenterSequencesRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/presenters/${personId}/sequences/page/${page}`;
+): string =>
+	`/${languageRoute}/presenters/${personId}/sequences${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makePresenterAlsoAppearsInRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/presenters/${personId}/appears/page/${page}`;
+): string =>
+	`/${languageRoute}/presenters/${personId}/appears${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeSeriesFeedRoute = (
 	languageRoute: string,
@@ -129,10 +138,10 @@ export const makeCollectionFeedRoute = (
 export const makeCollectionSequencesRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
-	page = 1
+	page: string | number = 1
 ): string =>
 	`/${languageRoute}/conferences/${conferenceId}/sequences${
-		page ? `/page/${page}` : ''
+		page > 1 ? `/page/${page}` : ''
 	}`;
 
 export const makeCollectionPresentersRoute = (
@@ -140,14 +149,18 @@ export const makeCollectionPresentersRoute = (
 	conferenceId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/conferences/${conferenceId}/presenters/page/${page}`;
+	`/${languageRoute}/conferences/${conferenceId}/presenters${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeCollectionTeachingsRoute = (
 	languageRoute: string,
 	conferenceId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/conferences/${conferenceId}/teachings/page/${page}`;
+	`/${languageRoute}/conferences/${conferenceId}/teachings${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeConferenceListRoute = (
 	languageRoute: string,
@@ -168,31 +181,28 @@ export const makeSponsorTeachingsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/teachings/page/${page}`;
-
-export const makeSponsorBooksRoute = (
-	languageRoute: string,
-	sponsorId: Scalars['ID'],
-	page: string | number = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/books/page/${page}`;
-
-export const makeSponsorAlbumsRoute = (
-	languageRoute: string,
-	sponsorId: Scalars['ID'],
-	page: string | number = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/albums/page/${page}`;
+): string =>
+	`/${languageRoute}/sponsors/${sponsorId}/teachings${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeSponsorConferencesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/conferences/page/${page}`;
+): string =>
+	`/${languageRoute}/sponsors/${sponsorId}/conferences${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeSponsorSeriesRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
 	page: string | number = 1
-): string => `/${languageRoute}/sponsors/${sponsorId}/series/page/${page}`;
+): string =>
+	`/${languageRoute}/sponsors/${sponsorId}/series${
+		page > 1 ? `/page/${page}` : ''
+	}`;
 
 export const makeTestimoniesRoute = (
 	languageRoute: string,

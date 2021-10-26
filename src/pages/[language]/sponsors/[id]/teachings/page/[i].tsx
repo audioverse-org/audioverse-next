@@ -13,7 +13,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorTeachingsRoute } from '@lib/routes';
 
 export default SponsorTeachings;
 
@@ -35,6 +34,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorTeachingsPathsData,
 		(d) => d.sponsors.nodes,
-		(l, n) => makeSponsorTeachingsRoute(l, n.id)
+		(l, n) => `/${l}/sponsors/${n.id}/teachings/page/1`
 	);
 }

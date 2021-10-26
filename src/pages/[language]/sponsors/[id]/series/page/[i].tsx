@@ -11,7 +11,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorSeriesRoute } from '@lib/routes';
 
 export default SponsorSeries;
 
@@ -33,6 +32,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSponsorSeriesPathsData,
 		(d) => d.sponsors.nodes,
-		(l, n) => makeSponsorSeriesRoute(l, n.id)
+		(l, n) => `/${l}/sponsors/${n.id}/series/page/1`
 	);
 }

@@ -13,7 +13,6 @@ import {
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterRecordingsRoute } from '@lib/routes';
 
 export default PresenterRecordings;
 
@@ -38,6 +37,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 		getPresenterDetailPathsData,
 		(d) => d.persons.nodes,
 		(languageRoute, node) =>
-			makePresenterRecordingsRoute(languageRoute, node.id)
+			`/${languageRoute}/presenters/${node.id}/teachings/page/1`
 	);
 }
