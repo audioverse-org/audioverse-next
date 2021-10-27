@@ -192,17 +192,18 @@ function Profile(): JSX.Element {
 						]}
 					/>
 
-					<Button
-						type="super"
-						text={
-							<FormattedMessage
-								id="preferences__buttonLabelSubmit"
-								defaultMessage="Submit"
-								description="save button label"
-							/>
-						}
-						onClick={() => submit()}
-					/>
+					<div className={styles.buttonRow}>
+						<Button
+							type="super"
+							text={
+								<FormattedMessage
+									id="preferences__buttonLabelSaveChanges"
+									defaultMessage="Save changes"
+								/>
+							}
+							onClick={() => submit()}
+						/>
+					</div>
 				</form>
 			</div>
 		</>

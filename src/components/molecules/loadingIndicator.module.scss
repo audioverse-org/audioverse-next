@@ -1,0 +1,35 @@
+@import '../../styles/common';
+
+.bar {
+	position: sticky;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 4px;
+	margin-bottom: -4px;
+	display: none;
+	background: $ts-lightTone;
+	z-index: 1000;
+	> * {
+		background: $ts-bufferTone;
+		height: 4px;
+	}
+	&.visible {
+		display: block;
+	}
+	&.loading {
+		> * {
+			width: 90%;
+			animation: run $loading-animation-duration ease-out;
+		}
+	}
+}
+
+@keyframes run {
+	0% {
+		width: 10%;
+	}
+	100% {
+		width: 90%;
+	}
+}

@@ -336,7 +336,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/sermons/presenters',
-				destination: '/:lang/presenters/page/1',
+				destination: '/:lang/presenters',
 				permanent: true,
 			},
 			{
@@ -406,6 +406,10 @@ module.exports = withPWA({
 			{
 				source: '/:lang/conferences/:id/teachings',
 				destination: '/:lang/conferences/:id/teachings/page/1',
+			},
+			{
+				source: '/:lang/presenters',
+				destination: '/:lang/presenters/page/1',
 			},
 			{
 				source: '/:lang/presenters/:id/appears',

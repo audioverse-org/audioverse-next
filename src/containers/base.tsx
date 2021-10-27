@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import withIntl from '@components/HOCs/withIntl';
+import LoadingIndicator from '@components/molecules/loadingIndicator';
 import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
@@ -73,6 +74,7 @@ function Base<P>({
 					<ThemeProvider theme={muiTheme}>
 						<Hydrate state={dehydratedState}>
 							<AndGlobalModals>
+								<LoadingIndicator />
 								{disableSidebar ? (
 									<Component {...pageProps} />
 								) : (

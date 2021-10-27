@@ -17,11 +17,12 @@
 
 .buttonRow {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	flex-direction: row-reverse;
 }
 
 .deleteButton {
+	margin-top: 8px;
+	margin-bottom: 24px;
 	&,
 	&:hover {
 		border-color: $ts-red;

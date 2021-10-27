@@ -113,28 +113,27 @@ function Profile(): JSX.Element {
 						value={password}
 						setValue={setPassword}
 					/>
+					<Button
+						type="secondary"
+						text={
+							<FormattedMessage
+								id="profile__buttonLabelDeleteAccount"
+								defaultMessage="Delete Account"
+							/>
+						}
+						className={styles.deleteButton}
+					/>
 
 					<div className={styles.buttonRow}>
 						<Button
 							type="super"
 							text={
 								<FormattedMessage
-									id="profile__buttonLabelSubmit"
-									defaultMessage="Submit"
-									description="save button label"
+									id="profile__buttonLabelSaveChanges"
+									defaultMessage="Save changes"
 								/>
 							}
 							onClick={() => submit()}
-						/>
-						<Button
-							type="secondary"
-							text={
-								<FormattedMessage
-									id="profile__buttonLabelDeleteAccount"
-									defaultMessage="Delete Account"
-								/>
-							}
-							className={styles.deleteButton}
 						/>
 					</div>
 				</form>

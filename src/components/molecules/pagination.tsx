@@ -40,16 +40,22 @@ const PaginationEntry = ({
 	label,
 	makeRoute,
 	isActive,
+	isOptional,
 }: {
 	page: number | string;
 	label?: string;
 	makeRoute?: (languageRoute: string, pageIndex: number) => string;
 	isActive?: boolean;
+	isOptional?: boolean;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	return (
 		<li
-			className={`${isActive ? styles.active : ''} ${styles.link}`}
+			className={clsx(
+				styles.link,
+				isActive && styles.active,
+				isOptional && styles.optional
+			)}
 			data-testid={isActive ? 'active' : ''}
 		>
 			{Number.isInteger(page) && makeRoute ? (
@@ -82,6 +88,7 @@ export default function Pagination({
 	const pageNext = current + 1;
 	const pages = pagination(current, total);
 	const buttonType = useInverse ? 'secondaryInverse' : 'secondary';
+	const currentIndex = pages.findIndex((p) => p === current);
 
 	if (pages.length <= 1) {
 		return null;
@@ -90,16 +97,24 @@ export default function Pagination({
 	return (
 		<ul className={clsx(styles.base, useInverse && styles.inverse)}>
 			{current > 1 ? (
-				<Button
-					type={buttonType}
-					href={makeRoute(language, pagePrevious)}
-					IconLeft={IconBack}
-					text={intl.formatMessage({
-						id: 'molecules-pagination__previousLabel',
-						defaultMessage: 'Previous',
-					})}
-					className={styles.previousButton}
-				/>
+				<>
+					<Button
+						type={buttonType}
+						href={makeRoute(language, pagePrevious)}
+						IconLeft={IconBack}
+						className={clsx(styles.previousButton, styles.mobileButton)}
+					/>
+					<Button
+						type={buttonType}
+						href={makeRoute(language, pagePrevious)}
+						IconLeft={IconBack}
+						text={intl.formatMessage({
+							id: 'molecules-pagination__previousLabel',
+							defaultMessage: 'Previous',
+						})}
+						className={styles.previousButton}
+					/>
+				</>
 			) : null}
 			{pages.map((p, i) => (
 				<PaginationEntry
@@ -107,19 +122,31 @@ export default function Pagination({
 					key={i}
 					makeRoute={makeRoute}
 					isActive={p === current}
+					isOptional={
+						currentIndex - i > 2 ||
+						(i - currentIndex > 0 && i > 2 && i < pages.length - 4)
+					}
 				/>
 			))}
 			{current < total ? (
-				<Button
-					type={buttonType}
-					href={makeRoute(language, pageNext)}
-					IconLeft={IconForward}
-					text={intl.formatMessage({
-						id: 'molecules-pagination__nextLabel',
-						defaultMessage: 'Next',
-					})}
-					className={styles.nextButton}
-				/>
+				<>
+					<Button
+						type={buttonType}
+						href={makeRoute(language, pageNext)}
+						IconLeft={IconForward}
+						className={clsx(styles.nextButton, styles.mobileButton)}
+					/>
+					<Button
+						type={buttonType}
+						href={makeRoute(language, pageNext)}
+						IconLeft={IconForward}
+						text={intl.formatMessage({
+							id: 'molecules-pagination__nextLabel',
+							defaultMessage: 'Next',
+						})}
+						className={styles.nextButton}
+					/>
+				</>
 			) : null}
 		</ul>
 	);

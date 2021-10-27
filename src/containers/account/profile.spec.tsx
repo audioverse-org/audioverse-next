@@ -238,7 +238,7 @@ describe('profile page', () => {
 		});
 
 		userEvent.type(getByLabelText('Email'), '123');
-		userEvent.click(getByText('Submit'));
+		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -261,7 +261,7 @@ describe('profile page', () => {
 		});
 
 		userEvent.type(getByLabelText('Password'), 'the_password');
-		userEvent.click(getByText('Submit'));
+		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -290,7 +290,7 @@ describe('profile page', () => {
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('Submit'));
+		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
@@ -314,7 +314,7 @@ describe('profile page', () => {
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
-		userEvent.click(getByText('Submit'));
+		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
@@ -362,7 +362,7 @@ describe('profile page', () => {
 			expect(getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.click(getByText('Submit'));
+		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
