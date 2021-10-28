@@ -12,8 +12,8 @@ describe('loading indicator', () => {
 	it('shows indicator when router loading', async () => {
 		mockUseRouterLoading.mockReturnValue(true);
 
-		const { getByText } = await renderWithQueryProvider(<LoadingIndicator />);
+		const { getByTestId } = await renderWithQueryProvider(<LoadingIndicator />);
 
-		expect(getByText('top_bar_progress')).toBeInTheDocument();
+		expect(getByTestId('loading-indicator')).toHaveClass('visible', 'loading');
 	});
 });

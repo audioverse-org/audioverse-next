@@ -5,8 +5,6 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
-jest.mock('react-topbar-progress-indicator');
-
 const renderApp = (component: any, props: any) => {
 	return render(<MyApp Component={component} pageProps={props} />);
 };

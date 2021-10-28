@@ -48,7 +48,6 @@
     "react-query": "^3.25.1",
     "react-toastify": "^6.2.0",
     "react-tooltip": "^4.2.21",
-    "react-topbar-progress-indicator": "^4.1.0",
     "sass": "^1.42.1",
     "striptags": "^3.2.0",
     "video.js": "^7.15.4"

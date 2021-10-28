@@ -12,6 +12,7 @@ import {
 	makeConferenceListRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
+	makeDonateRoute,
 	makeLibraryRoute,
 	makeLogoutRoute,
 	makePresenterListRoute,
@@ -23,15 +24,24 @@ import {
 } from '@lib/routes';
 
 import IconBook from '../../public/img/fa-book.svg';
+import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
+import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
 import IconFeather from '../../public/img/fa-feather.svg';
+import IconFireHeavy from '../../public/img/fa-fire-heavy.svg';
+import IconHeartHeavy from '../../public/img/fa-heart-heavy.svg';
+import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
 import IconListAltLight from '../../public/img/fa-list-alt-light.svg';
 import IconListAlt from '../../public/img/fa-list-alt.svg';
 import IconList from '../../public/img/fa-list-light.svg';
+import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
+import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
 import IconSignOut from '../../public/img/fa-sign-out.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserLight from '../../public/img/fa-user-light.svg';
+import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
 import IconUserPlus from '../../public/img/fa-user-plus-light.svg';
+import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
 import IconBible from '../../public/img/icon-bible.svg';
 import IconBlog from '../../public/img/icon-blog.svg';
 import IconBooks from '../../public/img/icon-books.svg';
@@ -48,7 +58,8 @@ export type INavigationItem = {
 	onClick?: (props: { popSubmenu: () => void }) => void;
 	Icon: any;
 	label: string;
-	children?: INavigationItem[] | JSX.Element;
+	children?: INavigationItem[];
+	childNode?: JSX.Element;
 };
 
 export function getNavigationItems(
@@ -181,11 +192,10 @@ export function getNavigationItems(
 				defaultMessage: 'Our Story',
 			}),
 			children: [
-				// TODO: update icons
 				{
 					key: 'about',
 					href: makeAboutPage(languageRoute, 1),
-					Icon: IconListAltLight,
+					Icon: IconUserPlusHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
 						defaultMessage: 'Our Story',
@@ -194,7 +204,7 @@ export function getNavigationItems(
 				{
 					key: 'meettheteam',
 					href: makeAboutPage(languageRoute, 13),
-					Icon: IconListAltLight,
+					Icon: IconUsersHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-team`,
 						defaultMessage: 'The Team',
@@ -203,7 +213,7 @@ export function getNavigationItems(
 				{
 					key: 'purpose',
 					href: makeAboutPage(languageRoute, 123), // TODO
-					Icon: IconListAltLight,
+					Icon: IconBullseyeHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-purpose`,
 						defaultMessage: 'Our Purpose',
@@ -212,7 +222,7 @@ export function getNavigationItems(
 				{
 					key: 'spiritofav',
 					href: makeAboutPage(languageRoute, 12),
-					Icon: IconListAltLight,
+					Icon: IconFireHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-spiritOfAudioVerse`,
 						defaultMessage: 'Spirit of AudioVerse',
@@ -221,10 +231,19 @@ export function getNavigationItems(
 				{
 					key: 'testimonials',
 					href: makeTestimoniesRoute(languageRoute),
-					Icon: IconListAltLight,
+					Icon: IconCommentHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-testimonials`,
 						defaultMessage: 'Testimonials',
+					}),
+				},
+				{
+					key: 'donate',
+					href: makeDonateRoute(languageRoute),
+					Icon: IconHeartHeavy,
+					label: intl.formatMessage({
+						id: `header__navItemStory-donate`,
+						defaultMessage: 'Donate',
 					}),
 				},
 			],
@@ -247,7 +266,36 @@ export function getNavigationItems(
 				defaultMessage: 'More',
 				description: `Header nav link name: More`,
 			}),
-			children: (
+			children: [
+				{
+					key: 'legal',
+					href: makeAboutPage(languageRoute, 3),
+					Icon: IconLandmark,
+					label: intl.formatMessage({
+						id: `header__naveItemMore-legal`,
+						defaultMessage: 'Legal',
+					}),
+				},
+				{
+					key: 'privacy',
+					href: makeAboutPage(languageRoute, 4),
+					Icon: IconLock,
+					label: intl.formatMessage({
+						id: `header__naveItemMore-privacy`,
+						defaultMessage: 'Privacy',
+					}),
+				},
+				{
+					key: 'terms',
+					href: makeAboutPage(languageRoute, 5),
+					Icon: IconNewpaper,
+					label: intl.formatMessage({
+						id: `header__naveItemMore-terms`,
+						defaultMessage: 'Terms of Use',
+					}),
+				},
+			],
+			childNode: (
 				<>
 					<li>
 						<LanguageButton

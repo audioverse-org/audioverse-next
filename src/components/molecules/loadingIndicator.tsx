@@ -1,26 +1,40 @@
-import React from 'react';
+import clsx from 'clsx';
+import React, { useEffect } from 'react';
 import { useIsFetching } from 'react-query';
-import TopBarProgress from 'react-topbar-progress-indicator';
 
 import useRouterLoading from '@lib/useRouterLoading';
 
-TopBarProgress.config({
-	barColors: {
-		'0': '#ff6e6e',
-		'1.0': '#ff224a',
-	},
-	barThickness: 7,
-});
+import styles from './loadingIndicator.module.scss';
 
-const LoadingIndicator = (): JSX.Element | null => {
+const HIDE_DELAY = 1000; //ms
+
+const LoadingIndicator: React.FC = () => {
 	const isFetching = useIsFetching();
 	const isLoading = useRouterLoading();
+	const isAnyLoading = !!(isFetching || isLoading);
+	const [visible, setVisible] = React.useState(false);
 
-	if (isFetching || isLoading) {
-		return <TopBarProgress />;
-	}
+	useEffect(() => {
+		if (isAnyLoading) {
+			setVisible(true);
+		} else {
+			const timer = setTimeout(() => setVisible(false), HIDE_DELAY);
+			return () => clearTimeout(timer);
+		}
+	}, [isAnyLoading]);
 
-	return null;
+	return (
+		<div
+			className={clsx(
+				styles.bar,
+				visible && styles.visible,
+				isAnyLoading && styles.loading
+			)}
+			data-testid="loading-indicator"
+		>
+			<div />
+		</div>
+	);
 };
 
 export default LoadingIndicator;

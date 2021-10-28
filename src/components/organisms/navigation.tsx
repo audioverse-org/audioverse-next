@@ -10,7 +10,6 @@ import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import LoadingIndicator from '@components/molecules/loadingIndicator';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
@@ -197,13 +196,12 @@ const Navigation = ({
 											</li>
 										)
 								  )
-								: submenuItem?.children}
+								: null}
+							{submenuItem?.childNode}
 						</ul>
 					</div>
 				</div>
 			</div>
-
-			<LoadingIndicator />
 		</header>
 	);
 };
