@@ -1615,7 +1615,7 @@
   },
   "reset__passwordPlaceholder": {
     "col": 36,
-    "defaultMessage": "password",
+    "defaultMessage": "New password",
     "description": "password reset page password field placeholder",
     "end": 2266,
     "file": "src/containers/account/reset.tsx",

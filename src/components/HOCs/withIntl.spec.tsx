@@ -1,4 +1,4 @@
-import { RenderResult, waitFor } from '@testing-library/react';
+import { act, RenderResult, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as intl from 'react-intl';
 import { toast } from 'react-toastify';
@@ -44,6 +44,7 @@ import { getLanguageDisplayNames } from '@lib/getLanguageDisplayNames';
 import { readableBytes } from '@lib/readableBytes';
 import {
 	loadAuthGuardData,
+	loadRouter,
 	makePlaylistButtonData,
 	mockedFetchApi,
 	renderWithQueryProvider,
@@ -592,7 +593,6 @@ describe('localization usage', () => {
 				},
 			},
 		],
-		[Logout, {}],
 		// TODO [Register, {}],
 		// TODO: [Login, {}],
 		[Reset, {}],
@@ -680,5 +680,18 @@ describe('localization usage', () => {
 
 		expectNoUnlocalizedText(screen);
 		expectNoUnlocalizedToasts();
+	});
+
+	it('localizes logout page', async () => {
+		loadRouter({
+			push: () => Promise.resolve(true),
+		});
+		loadAuthGuardData();
+		jest.spyOn(api, 'useLogout').mockResolvedValue(true);
+
+		await act(async () => {
+			const screen = await renderWithQueryProvider(<Logout />);
+			expectNoUnlocalizedText(screen);
+		});
 	});
 });

@@ -37,9 +37,10 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		userEvent.click(getByText('Forgot password?'));
 
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
@@ -54,11 +55,17 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		userEvent.click(getByText('Forgot password?'));
 
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
+
 		await waitFor(() => {
-			expect(getByText('Check your email for a password reset link'));
+			expect(
+				getByText(
+					'Reset link sent. Check your email and use the link to reset your password.'
+				)
+			);
 		});
 	});
 
@@ -70,8 +77,10 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		userEvent.click(getByText('Forgot password?'));
+
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('the_error'));
@@ -87,8 +96,10 @@ describe('login form', () => {
 		const { getByText, getByPlaceholderText, queryByText } =
 			await renderWithIntl(<Login />);
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		userEvent.click(getByText('Forgot password?'));
+
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('the_error'));
@@ -109,8 +120,10 @@ describe('login form', () => {
 				<Login />
 			);
 
-			userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 			userEvent.click(getByText('Forgot password?'));
+
+			userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+			userEvent.click(getByText('Send reset link'));
 
 			await waitFor(() => {
 				expect(
@@ -130,8 +143,10 @@ describe('login form', () => {
 
 		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		userEvent.click(getByText('Forgot password?'));
+
+		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
 			expect(getByText('error_two'));

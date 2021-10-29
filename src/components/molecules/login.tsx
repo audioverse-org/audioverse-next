@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import SocialLogin from '@components/molecules/socialLogin';
+import Modal from '@components/organisms/modal';
 import AndOnboarding from '@components/templates/andOnboarding';
 import { login } from '@lib/api';
 import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
@@ -11,6 +12,7 @@ import { makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import Button from './button';
+import ButtonGuest from './buttonGuest';
 import Input from './form/input';
 import styles from './login.module.scss';
 
@@ -19,8 +21,12 @@ export default function Login(): JSX.Element {
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
 
+	const [isResetPasswordModalOpen, setIsResetPasswordModalOpen] =
+		useState(false);
+	const [hasSentPasswordReset, setHasSentPasswordReset] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [resetEmail, setResetEmail] = useState('');
 	const [errors, setErrors] = useState<string[]>([]);
 	const [successMessage, setSuccessMessage] = useState('');
 
@@ -123,7 +129,7 @@ export default function Login(): JSX.Element {
 					<a
 						onClick={(e) => {
 							e.preventDefault();
-							mutate({ email });
+							setIsResetPasswordModalOpen(true);
 						}}
 						className={clsx(styles.resetPassword, 'decorated')}
 					>
@@ -149,8 +155,79 @@ export default function Login(): JSX.Element {
 						centered
 						className={styles.signup}
 					/>
+					<ButtonGuest className={styles.guestLink} />
 				</div>
 			</form>
+			<Modal
+				open={isResetPasswordModalOpen}
+				onClose={() => setIsResetPasswordModalOpen(false)}
+				title={
+					<FormattedMessage
+						id="loginForm-reset__modalTitle"
+						defaultMessage="Reset password"
+					/>
+				}
+				actions={
+					hasSentPasswordReset ? (
+						<Button
+							onClick={() => {
+								setIsResetPasswordModalOpen(false);
+								setHasSentPasswordReset(false);
+							}}
+							type="super"
+							text={
+								<FormattedMessage
+									id="loginForm-reset__doneButton"
+									defaultMessage="Done"
+								/>
+							}
+						/>
+					) : (
+						<Button
+							onClick={() => {
+								mutate({ email: resetEmail });
+								setHasSentPasswordReset(true);
+							}}
+							type="super"
+							text={
+								<FormattedMessage
+									id="loginForm-reset__sendLinkButton"
+									defaultMessage="Send reset link"
+								/>
+							}
+						/>
+					)
+				}
+			>
+				<p>
+					{hasSentPasswordReset ? (
+						<FormattedMessage
+							id="loginForm-reset__modalParagraphSent"
+							defaultMessage="Reset link sent. Check your email and use the link to reset your password."
+						/>
+					) : (
+						<FormattedMessage
+							id="loginForm-reset__modalParagraph"
+							defaultMessage="Enter the email address associated with your account and we’ll send you a password reset link."
+						/>
+					)}
+				</p>
+				{!hasSentPasswordReset && (
+					<Input
+						label={intl.formatMessage({
+							id: 'loginForm-reset__emailLabel',
+							defaultMessage: 'Email address',
+						})}
+						placeholder={intl.formatMessage({
+							id: 'loginForm-reset__emailPlaceholder',
+							defaultMessage: 'Email address',
+						})}
+						type="email"
+						value={resetEmail}
+						setValue={setResetEmail}
+					/>
+				)}
+			</Modal>
 		</AndOnboarding>
 	);
 }

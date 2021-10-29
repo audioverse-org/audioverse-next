@@ -8,13 +8,14 @@ import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
+import Button from '@components/molecules/button';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import { getNavigationItems } from '@lib/getNavigationItems';
-import { makeLoginRoute } from '@lib/routes';
+import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
@@ -119,6 +120,18 @@ const Navigation = ({
 									);
 								})}
 						</ul>
+
+						<Button
+							type="super"
+							text={
+								<FormattedMessage
+									id="andNavigation__donate"
+									defaultMessage="Donate"
+								/>
+							}
+							href={makeDonateRoute(languageRoute)}
+							className={styles.desktopDonate}
+						/>
 
 						<div className={styles.account}>
 							{user ? (

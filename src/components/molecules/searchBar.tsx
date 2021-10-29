@@ -1,7 +1,7 @@
 import { Input, InputAdornment } from '@material-ui/core';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { makeSearchRoute } from '@lib/routes';
@@ -24,6 +24,7 @@ export default function SearchBar({
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
+	const [isFocused, setIsFocused] = useState(false);
 
 	return (
 		<div className={clsx(styles.base, className)}>
@@ -33,23 +34,31 @@ export default function SearchBar({
 					e.preventDefault();
 					router.push(makeSearchRoute(languageRoute, term));
 				}}
-				className={styles.inner}
+				className={clsx(styles.inner, isFocused && styles.focused)}
 			>
 				<Input
 					name="q"
+					type="search"
+					autoComplete="off"
 					value={term}
 					onChange={({ target }) => onChange(target.value)}
+					onFocus={() => setIsFocused(true)}
+					onBlur={() => setIsFocused(false)}
 					disableUnderline
 					startAdornment={
-						<InputAdornment position="start">
+						<InputAdornment position="start" className={styles.icon}>
 							<IconSearch width={24} height={24} />
 						</InputAdornment>
 					}
-					placeholder={intl.formatMessage({
-						id: 'molecule-searchBar__label',
-						defaultMessage: 'Search',
-						description: 'search bar label',
-					})}
+					placeholder={
+						isFocused
+							? ''
+							: intl.formatMessage({
+									id: 'molecule-searchBar__label',
+									defaultMessage: 'Search',
+									description: 'search bar label',
+							  })
+					}
 					endAdornment={
 						term && (
 							<InputAdornment

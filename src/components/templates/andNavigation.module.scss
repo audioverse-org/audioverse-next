@@ -103,23 +103,11 @@
 	}
 }
 
-@mixin search-row {
-	display: flex;
-	align-items: center;
+.searchBox {
 	margin-bottom: 24px;
-}
-.searchRow {
-	display: none;
-}
-.searchShown {
-	@include search-row();
-	> *:not(.searchBox) {
+	&:not(.searchShown) {
 		display: none;
 	}
-}
-.searchBox {
-	flex-grow: 1;
-	margin-right: 16px;
 }
 
 @media (min-width: $breakpoint-lg) {
@@ -150,7 +138,7 @@
 		flex-direction: column;
 		overflow: hidden;
 	}
-	.searchRow {
-		@include search-row();
+	.searchBox.searchBox {
+		display: inherit;
 	}
 }

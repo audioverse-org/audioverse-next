@@ -97,6 +97,7 @@
 	display: flex;
 	align-items: flex-end;
 	margin-top: 16px;
+	padding-bottom: 2px;
 	color: $ts-midTone;
 }
 .accountWithAvatar {
@@ -158,6 +159,10 @@
 	margin-bottom: 16px;
 }
 
+.desktopDonate {
+	display: none;
+}
+
 @media (min-width: $breakpoint-lg) {
 	.mobileRow {
 		display: none;
@@ -172,5 +177,9 @@
 	}
 	.account {
 		margin-bottom: 32px;
+	}
+	.desktopDonate {
+		display: inherit;
+		align-self: flex-start;
 	}
 }
