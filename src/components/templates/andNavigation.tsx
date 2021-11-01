@@ -38,19 +38,13 @@ export default function AndNavigation({
 	const [showingMenu, setShowingMenu] = useState(false);
 	const [term, setTerm] = useState((q as string) || '');
 	useEffect(() => {
-		if (q) {
-			setTerm(q as string);
-		}
-	}, [q]);
-	useEffect(() => {
 		const onRouteChange = () => setShowingMenu(false);
 		Router.events.on('routeChangeStart', onRouteChange);
 		return () => {
 			Router.events.off('routeChangeStart', onRouteChange);
 		};
 	}, []);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => setTerm((q as string) || ''), [pathname]);
+	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
 	useEffect(() => {
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.toggle('scrollDisabledMobile', showingMenu);
