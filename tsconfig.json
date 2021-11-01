@@ -27,7 +27,8 @@
 			"@components/*": ["src/components/*"],
 			"@containers/*": ["src/containers/*"],
 			"@pages/*": ["src/pages/*"]
-		}
+		},
+		"incremental": true
 	},
 	"exclude": ["./*.js"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
