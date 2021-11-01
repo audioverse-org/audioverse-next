@@ -4,9 +4,9 @@ import { clearSessionToken } from '@lib/cookies';
 
 import { invalidateAndResetUserQueries } from '.';
 
-export function useLogout(): void {
+export function useLogout(): Promise<any> {
 	const queryClient = useQueryClient();
 
 	clearSessionToken();
-	invalidateAndResetUserQueries(queryClient);
+	return invalidateAndResetUserQueries(queryClient);
 }

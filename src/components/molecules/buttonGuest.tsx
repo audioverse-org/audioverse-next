@@ -57,6 +57,7 @@ export default function ButtonGuest({
 							</a>
 						</Link>
 						<Button
+							onClick={() => setIsGuestModalOpen(false)}
 							href={makeLoginRoute(language)}
 							type="primary"
 							text={
@@ -67,6 +68,7 @@ export default function ButtonGuest({
 							}
 						/>
 						<Button
+							onClick={() => setIsGuestModalOpen(false)}
 							href={makeRegisterRoute(language)}
 							type="super"
 							text={

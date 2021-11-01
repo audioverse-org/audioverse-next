@@ -2,7 +2,7 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 
-import { ResetPasswordDocument } from '@lib/generated/graphql';
+import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import {
 	buildRenderer,
@@ -25,7 +25,16 @@ function loadResetPasswordResponse({
 				errors,
 			},
 		});
+	when(mockedFetchApi)
+		.calledWith(LoginDocument, expect.anything())
+		.mockResolvedValue({
+			login: {
+				authenticatedUser: {},
+			},
+		});
 }
+
+const router = { push: () => Promise.resolve(true) };
 
 describe('password reset page', () => {
 	beforeEach(() => {
@@ -33,25 +42,25 @@ describe('password reset page', () => {
 	});
 
 	it('renders', async () => {
-		await renderPage();
+		await renderPage({ router });
 	});
 
 	it('renders password field', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		const { getByPlaceholderText } = await renderPage({ router });
 
-		expect(getByPlaceholderText('password')).toBeInTheDocument();
+		expect(getByPlaceholderText('New password')).toBeInTheDocument();
 	});
 
 	it('renders password confirm field', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		const { getByPlaceholderText } = await renderPage({ router });
 
-		expect(getByPlaceholderText('confirm password')).toBeInTheDocument();
+		expect(getByPlaceholderText('Confirm new password')).toBeInTheDocument();
 	});
 
 	it('renders submit button', async () => {
-		const { getByText } = await renderPage();
+		const { getByText } = await renderPage({ router });
 
-		expect(getByText('submit'));
+		expect(getByText('Login'));
 	});
 
 	it('submits password change', async () => {
@@ -59,11 +68,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(mockedFetchApi).toBeCalledWith(ResetPasswordDocument, {
@@ -80,11 +90,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'pass_one');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass_two');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
+		userEvent.click(getByText('Login'));
 
 		await sleep();
 
@@ -96,11 +107,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'pass_one');
-		userEvent.type(getByPlaceholderText('confirm password'), 'pass_two');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Passwords must match')).toBeInTheDocument();
@@ -112,9 +124,10 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.click(getByText('submit'));
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Please type password twice')).toBeInTheDocument();
@@ -126,10 +139,11 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'the_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'the_pass');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('Please type password twice')).toBeInTheDocument();
@@ -146,11 +160,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(getByText('the_error')).toBeInTheDocument();
@@ -167,11 +182,12 @@ describe('password reset page', () => {
 				params: {
 					token: 'the_token',
 				},
+				router,
 			});
 
-			userEvent.type(getByPlaceholderText('password'), 'new_pass');
-			userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-			userEvent.click(getByText('submit'));
+			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+			userEvent.click(getByText('Login'));
 
 			await waitFor(() => {
 				expect(
@@ -191,11 +207,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(
@@ -214,11 +231,12 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
+			router,
 		});
 
-		userEvent.type(getByPlaceholderText('password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
 		await sleep();
 
@@ -238,11 +256,12 @@ describe('password reset page', () => {
 				params: {
 					token: 'the_token',
 				},
+				router,
 			});
 
-		userEvent.type(getByPlaceholderText('password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('confirm password'), 'new_pass');
-		userEvent.click(getByText('submit'));
+		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
 			expect(
@@ -250,6 +269,6 @@ describe('password reset page', () => {
 			).toBeInTheDocument();
 		});
 
-		expect(queryByPlaceholderText('password')).not.toBeInTheDocument();
+		expect(queryByPlaceholderText('New password')).not.toBeInTheDocument();
 	});
 });

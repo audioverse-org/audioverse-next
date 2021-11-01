@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Head from 'next/head';
 import Link from 'next/link';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
@@ -55,11 +55,18 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 	} = recording;
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLLIElement>(null);
+	const [scrollPosition, setScrollPosition] = useState(0);
 	useEffect(() => {
 		if (!scrollRef.current || !currentRef.current) {
 			return;
 		}
-		scrollRef.current.scrollTo({ top: currentRef.current.offsetTop - 32 });
+		const scroller = scrollRef.current;
+		scroller.scrollTo({ top: currentRef.current.offsetTop - 32 });
+		const saveScrollPosition = (e: any) => {
+			setScrollPosition(e.target.scrollTop);
+		};
+		scroller.addEventListener('scroll', saveScrollPosition);
+		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [recording.id]);
 
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
@@ -299,11 +306,18 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 									color={accentColor}
 									className={styles.seriesHeading}
 								>
-									<FormattedMessage
-										id="organism-recording__seriesListTitle"
-										defaultMessage="Other Teachings in Series"
-										description="recording series list title"
-									/>
+									{contentType === RecordingContentType.MusicTrack ? (
+										<FormattedMessage
+											id="organism-recording__albumListTitle"
+											defaultMessage="Other Songs in Album"
+										/>
+									) : (
+										<FormattedMessage
+											id="organism-recording__seriesListTitle"
+											defaultMessage="Other Teachings in Series"
+											description="recording series list title"
+										/>
+									)}
 								</LineHeading>
 
 								<ol className={styles.seriesItems}>
@@ -319,6 +333,10 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 								</ol>
 							</div>
 						</div>
+						<div
+							className={styles.overflowShadow}
+							style={{ opacity: Math.min(1, scrollPosition / 100) }}
+						/>
 					</div>
 				)}
 			</div>

@@ -1,11 +1,24 @@
+import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Button from '@components/molecules/button';
+import Input from '@components/molecules/form/input';
+import { login } from '@lib/api';
 import { useResetPasswordMutation } from '@lib/generated/graphql';
+import { makeDiscoverRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 
+import LogoLarge from '../../../public/img/logo-large.svg';
+
+import styles from './reset.module.scss';
+
 function Reset(): JSX.Element {
+	const router = useRouter();
+	const languageRoute = useLanguageRoute();
 	const token = useQueryString('token') || '';
+	const email = useQueryString('email') || '';
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [errors, setErrors] = useState<string[]>([]);
@@ -39,8 +52,8 @@ function Reset(): JSX.Element {
 		},
 	});
 
-	const submit = (e: FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const submit = (e?: FormEvent<HTMLFormElement>) => {
+		e?.preventDefault();
 
 		if (!password || !passwordConfirm) {
 			setErrors([
@@ -62,7 +75,15 @@ function Reset(): JSX.Element {
 			]);
 			return;
 		}
-		mutate({ token, password });
+		mutate(
+			{ token, password },
+			{
+				onSuccess: () =>
+					login(email, password).then(() =>
+						router.push(makeDiscoverRoute(languageRoute))
+					),
+			}
+		);
 	};
 
 	if (successMessage) {
@@ -70,40 +91,62 @@ function Reset(): JSX.Element {
 	}
 
 	return (
-		<form onSubmit={submit}>
-			<ul>
-				{errors.map((e) => (
-					<li key={e}>{e}</li>
-				))}
-			</ul>
-			<input
-				placeholder={intl.formatMessage({
-					id: 'reset__passwordPlaceholder',
-					defaultMessage: 'password',
-					description: 'password reset page password field placeholder',
-				})}
-				type="password"
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-			/>
-			<input
-				placeholder={intl.formatMessage({
-					id: 'reset__passwordConfirmPlaceholder',
-					defaultMessage: 'confirm password',
-					description: 'password reset page confirm password field placeholder',
-				})}
-				type="password"
-				value={passwordConfirm}
-				onChange={(e) => setPasswordConfirm(e.target.value)}
-			/>
-			<button type="submit">
-				<FormattedMessage
-					id="reset__submitButton"
-					defaultMessage="submit"
-					description="password reset page submit button"
+		<div className={styles.wrapper}>
+			<form onSubmit={submit}>
+				<div className={styles.header}>
+					<LogoLarge />
+				</div>
+				<p className={styles.intro}>
+					<FormattedMessage
+						id="reset__intro"
+						defaultMessage="Create a new password for {email}."
+						values={{ email: <strong>{email}</strong> }}
+					/>
+				</p>
+				{!!errors.length && (
+					<ul>
+						{errors.map((e) => (
+							<li key={e}>{e}</li>
+						))}
+					</ul>
+				)}
+
+				<Input
+					label={intl.formatMessage({
+						id: 'reset__passwordLabel',
+						defaultMessage: 'New password',
+					})}
+					placeholder={intl.formatMessage({
+						id: 'reset__passwordPlaceholder',
+						defaultMessage: 'New password',
+					})}
+					type="password"
+					value={password}
+					setValue={setPassword}
 				/>
-			</button>
-		</form>
+				<Input
+					label={intl.formatMessage({
+						id: 'reset__confirmPasswordLabel',
+						defaultMessage: 'Confirm new password',
+					})}
+					placeholder={intl.formatMessage({
+						id: 'reset__confirmPasswordPlaceholder',
+						defaultMessage: 'Confirm new password',
+					})}
+					type="password"
+					value={passwordConfirm}
+					setValue={setPasswordConfirm}
+				/>
+				<Button
+					type="super"
+					text={
+						<FormattedMessage id="reset__submitButton" defaultMessage="Login" />
+					}
+					onClick={() => submit()}
+					className={styles.submit}
+				/>
+			</form>
+		</div>
 	);
 }
 

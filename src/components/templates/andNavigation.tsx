@@ -38,17 +38,13 @@ export default function AndNavigation({
 	const [showingMenu, setShowingMenu] = useState(false);
 	const [term, setTerm] = useState((q as string) || '');
 	useEffect(() => {
-		if (q) {
-			setTerm(q as string);
-		}
-	}, [q]);
-	useEffect(() => {
 		const onRouteChange = () => setShowingMenu(false);
 		Router.events.on('routeChangeStart', onRouteChange);
 		return () => {
 			Router.events.off('routeChangeStart', onRouteChange);
 		};
 	}, []);
+	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
 	useEffect(() => {
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.toggle('scrollDisabledMobile', showingMenu);
@@ -125,29 +121,16 @@ export default function AndNavigation({
 					</div>
 					<div className={styles.content}>
 						<LanguageAlternativesAlert />
-						<div
+						<SearchBar
+							term={term}
+							onChange={(value) => {
+								setTerm(value);
+							}}
 							className={clsx(
-								styles.searchRow,
+								styles.searchBox,
 								onSearchPage && styles.searchShown
 							)}
-						>
-							<SearchBar
-								term={term}
-								onChange={(value) => {
-									setTerm(value);
-								}}
-								className={styles.searchBox}
-							/>
-							<Button
-								type="super"
-								text={
-									<FormattedMessage
-										id="andNavigation__donate"
-										defaultMessage="Donate"
-									/>
-								}
-							/>
-						</div>
+						/>
 						<div>{children}</div>
 					</div>
 				</div>

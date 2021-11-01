@@ -204,3 +204,23 @@
 	border-top-right-radius: 16px;
 	border-bottom-right-radius: 16px;
 }
+
+.overflowShadow {
+	display: none;
+	@media (min-width: $breakpoint-xl) {
+		display: block;
+		position: absolute;
+		height: 82px;
+		top: 54px;
+		left: 0;
+		right: 0;
+
+		background: linear-gradient(
+			0deg,
+			rgba($ts-smartPlaylistH, 0) 0%,
+			rgba($ts-smartPlaylistH, 0.75) 49.48%,
+			$ts-smartPlaylistH 100%
+		);
+		pointer-events: none;
+	}
+}

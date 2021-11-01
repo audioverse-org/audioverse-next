@@ -29,10 +29,19 @@
 		&::placeholder {
 			opacity: 1;
 		}
+		&::-webkit-search-cancel-button {
+			appearance: none;
+		}
 	}
 	a {
 		height: 24px;
 		cursor: pointer;
+	}
+	&.focused {
+		border-bottom-color: rgba($ts-dark, 0.5);
+		.icon {
+			color: $ts-red;
+		}
 	}
 }
 

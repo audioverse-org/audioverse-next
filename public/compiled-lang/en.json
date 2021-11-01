@@ -1128,7 +1128,7 @@
   "reset__passwordPlaceholder": [
     {
       "type": 0,
-      "value": "password"
+      "value": "New password"
     }
   ],
   "reset__successMessage": [

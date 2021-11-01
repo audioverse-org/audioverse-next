@@ -7,7 +7,7 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 0;
+	min-height: 100vh;
 	z-index: 1000;
 	display: flex;
 	align-items: stretch;
@@ -36,15 +36,7 @@
 }
 
 .promos {
-	flex: 1 1 auto;
-	display: flex;
-	flex-direction: column;
-	padding: 32px 0;
-	background: $ts-dark;
-	color: $ts-white;
-	> * {
-		flex-grow: 1;
-	}
+	display: none;
 }
 
 .slide {
@@ -74,6 +66,7 @@ $onboarding-image-width: 3494px;
 @media (min-width: $breakpoint-lg) {
 	.page {
 		flex-direction: row;
+		bottom: 0;
 	}
 	.form {
 		flex: 0 0 43.5%;
@@ -81,6 +74,13 @@ $onboarding-image-width: 3494px;
 	}
 	.promos {
 		flex: 1 1 56.5%;
+		display: flex;
+		flex-direction: column;
 		padding: 56px 0;
+		background: $ts-dark;
+		color: $ts-white;
+		> * {
+			flex-grow: 1;
+		}
 	}
 }
