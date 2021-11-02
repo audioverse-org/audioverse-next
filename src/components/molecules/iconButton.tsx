@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Ref } from 'react';
 
 import { BaseColors } from '@lib/constants';
 
@@ -7,13 +7,13 @@ import baseColorsStyles from '../atoms/baseColors.module.scss';
 import CircleButton, { ICircleButtonProps } from './circleButton';
 
 type Props = {
-	Icon: any;
+	Icon: React.ElementType;
 	color: BaseColors;
 } & ICircleButtonProps;
 
 const IconButton: React.FC<Props> = React.forwardRef(function IconButton(
 	{ Icon, color, ...props }: Props,
-	ref: any
+	ref: Ref<HTMLButtonElement>
 ) {
 	return (
 		<CircleButton {...props} ref={ref}>

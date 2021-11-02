@@ -43,8 +43,8 @@ export default function CardCollection({
 	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
 		collection.id
 	);
-	const [ref, isHovered] = useHover();
-	const [subRef, isSubHovered] = useHover();
+	const [ref, isHovered] = useHover<HTMLButtonElement>();
+	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const {
 		allSequences,
 		allRecordings,

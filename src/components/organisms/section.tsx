@@ -5,8 +5,8 @@ import { BaseColors } from '@lib/constants';
 import styles from './section.module.scss';
 
 interface SectionProps {
-	text: any;
-	media?: any;
+	text: React.ReactNode;
+	media?: React.ReactNode;
 	bleed?: boolean;
 	theme?: BaseColors.DARK | BaseColors.LIGHT_TONE | BaseColors.CREAM;
 	center?: boolean;

@@ -6,7 +6,7 @@ import styles from './dropdown.module.scss';
 type Props = {
 	id: string;
 	trigger: (props: {
-		onClick: (event: MouseEvent<any>) => void;
+		onClick: (event: MouseEvent) => void;
 		['aria-controls']: string;
 		isOpen: boolean;
 	}) => JSX.Element;
@@ -20,7 +20,7 @@ export default function Dropdown({
 	children,
 	alignment = 'right',
 }: PropsWithChildren<Props>): JSX.Element {
-	const [anchorEl, setAnchorEl] = React.useState<any>(null);
+	const [anchorEl, setAnchorEl] = React.useState<Element | null>(null);
 
 	const handleClick = (event: MouseEvent) => {
 		setAnchorEl(event.currentTarget);

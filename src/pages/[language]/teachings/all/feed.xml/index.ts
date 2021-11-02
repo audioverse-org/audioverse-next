@@ -13,7 +13,7 @@ export async function getServerSideProps({
 	params,
 	res,
 }: GetServerSidePropsContext<{ language: string }>): Promise<
-	GetServerSidePropsResult<any>
+	GetServerSidePropsResult<Record<string, unknown>>
 > {
 	const languageRoute = params?.language as string;
 	const { sermons } = await getSermonListFeedData({

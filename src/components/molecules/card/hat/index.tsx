@@ -11,7 +11,7 @@ import DisclosureIcon from '../../../../../public/img/icon-disclosure-slim.svg';
 import styles from './index.module.scss';
 
 interface Props {
-	icon?: any;
+	icon?: React.ReactElement;
 	label: string | JSX.Element;
 	title: string | JSX.Element;
 	url: string;

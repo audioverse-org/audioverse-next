@@ -26,7 +26,7 @@ export async function setPlaylistMembership(
 ): Promise<boolean> {
 	const mutation = add ? mutationAdd : mutationRemove;
 	const variables = { recordingId, playlistId };
-	const result = await fetchApi(mutation, { variables });
+	const result = await fetchApi<{ ok: boolean }>(mutation, { variables });
 
 	return result.ok;
 }

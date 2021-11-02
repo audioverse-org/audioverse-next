@@ -56,7 +56,7 @@ export type INavigationItem = {
 	key: string;
 	href?: string;
 	onClick?: (props: { popSubmenu: () => void }) => void;
-	Icon: any;
+	Icon: React.ElementType | null;
 	label: string;
 	children?: INavigationItem[];
 	childNode?: JSX.Element;

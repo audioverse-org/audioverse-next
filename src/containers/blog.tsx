@@ -10,7 +10,7 @@ import { makeBlogPostListRoute } from '@lib/routes';
 
 export type BlogProps = PaginatedProps<
 	NonNullable<GetBlogPageDataQuery['blogPosts']['nodes']>[0],
-	any
+	GetBlogPageDataQuery
 >;
 
 function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {

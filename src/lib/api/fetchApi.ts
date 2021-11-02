@@ -55,10 +55,10 @@ async function getResponse(
 	});
 }
 
-export async function fetchApi(
+export async function fetchApi<TData>(
 	query: string,
 	{ variables = {} } = {}
-): Promise<any> {
+): Promise<TData> {
 	query = removeDuplicateFragments(query);
 
 	const headers: HeadersInit = {

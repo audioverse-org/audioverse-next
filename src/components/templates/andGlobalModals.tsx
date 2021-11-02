@@ -12,7 +12,7 @@ import styles from './andGlobalModals.module.scss';
 
 export type GlobalModalsContextType = {
 	challengeAuth: () => void;
-	confirmRemoveFavorite: (onConfirm: () => any) => void;
+	confirmRemoveFavorite: (onConfirm: () => unknown) => void;
 };
 
 export const GlobalModalsContext = React.createContext<GlobalModalsContextType>(
@@ -34,7 +34,9 @@ export default function AndGlobalModals({
 	const [whichModal, setWhichModal] = useState<
 		'auth' | 'confirmRemoveFavorite'
 	>('auth');
-	const [onConfirm, setOnConfirm] = useState<any>(undefined);
+	const [onConfirm, setOnConfirm] = useState<undefined | (() => unknown)>(
+		undefined
+	);
 
 	const handleClose = () => {
 		setIsOpen(false);
@@ -125,7 +127,7 @@ export default function AndGlobalModals({
 						<Button
 							type="super"
 							onClick={() => {
-								onConfirm();
+								onConfirm && onConfirm();
 								handleClose();
 							}}
 							text={

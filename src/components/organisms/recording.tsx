@@ -62,8 +62,8 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		}
 		const scroller = scrollRef.current;
 		scroller.scrollTo({ top: currentRef.current.offsetTop - 32 });
-		const saveScrollPosition = (e: any) => {
-			setScrollPosition(e.target.scrollTop);
+		const saveScrollPosition = (e: Event) => {
+			setScrollPosition((e.target as HTMLElement).scrollTop);
 		};
 		scroller.addEventListener('scroll', saveScrollPosition);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);

@@ -16,7 +16,7 @@ export type IUseIsFavoritedResult = {
 	isLoading: boolean;
 };
 
-type IQueryKey = Array<string | number | Record<string, any>>;
+type IQueryKey = Array<string | number | Record<string, unknown>>;
 
 export function useIsFavorited(
 	queryKey: IQueryKey,

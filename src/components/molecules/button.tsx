@@ -17,8 +17,8 @@ type Props = {
 	text?: JSX.Element | string;
 	href?: string;
 	onClick?: (e: MouseEvent<HTMLElement>) => void;
-	IconLeft?: any;
-	IconRight?: any;
+	IconLeft?: React.ElementType;
+	IconRight?: React.ElementType;
 	target?: '_blank';
 	className?: string;
 	'aria-label'?: string;

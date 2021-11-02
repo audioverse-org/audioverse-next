@@ -62,10 +62,8 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/interface-name-prefix': 'off',
-		'@typescript-eslint/explicit-function-return-type': 'off',
 		'testing-library/prefer-screen-queries': 'off',
 		'testing-library/await-async-utils': 'off',
-		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'formatjs/no-offset': 'error',
 		'@mizdra/layout-shift/require-size-attributes': 2,
@@ -86,4 +84,12 @@ module.exports = {
 			},
 		},
 	},
+	overrides: [
+		{
+			files: ['*.spec.ts', '*.spec.tsx', 'src/__mocks__/**/*'],
+			rules: {
+				'@typescript-eslint/no-explicit-any': 'off',
+			},
+		},
+	],
 };

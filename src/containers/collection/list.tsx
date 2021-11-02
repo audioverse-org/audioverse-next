@@ -14,7 +14,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type CollectionListProps = PaginatedProps<
 	NonNullable<GetCollectionListPageDataQuery['collections']['nodes']>[0],
-	any
+	GetCollectionListPageDataQuery
 >;
 
 // TODO: replace with collections landing page (featured, recent, trending, etc.)

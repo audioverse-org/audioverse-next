@@ -43,7 +43,7 @@ function Register(): JSX.Element {
 		}
 	}, [dataRegister]);
 
-	const onSubmit = (e: any) => {
+	const onSubmit = (e: React.MouseEvent) => {
 		e.preventDefault();
 		const newErrors = [];
 		if (!email.length) {

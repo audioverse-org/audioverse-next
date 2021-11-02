@@ -11,7 +11,7 @@ const renderPage = buildRenderer(Logout);
 
 describe('logout route', () => {
 	it('logs out', async () => {
-		jest.spyOn(api, 'useLogout').mockResolvedValue(true);
+		jest.spyOn(api, 'useLogout').mockResolvedValue();
 
 		await act(async () => {
 			await renderPage({ router: { push: () => Promise.resolve(true) } });

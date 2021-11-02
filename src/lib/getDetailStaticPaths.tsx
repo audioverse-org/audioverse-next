@@ -24,7 +24,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 		const nodes = (data && parseNodes(data)) || [];
 		const languageRoute = LANGUAGES[l].base_url;
 
-		return nodes.map((n: any) => pathMapper(languageRoute, n));
+		return nodes.map((n) => pathMapper(languageRoute, n));
 	});
 
 	const pathSets = await Promise.all(pathSetPromises);

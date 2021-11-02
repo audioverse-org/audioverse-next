@@ -12,7 +12,7 @@ import { SequenceContentType } from './generated/graphql';
 type ISequenceTypeTheme = {
 	iconColor: BaseColors.RED | BaseColors.SALMON;
 	textColor: BaseColors.WHITE | BaseColors.DARK;
-	Icon: any;
+	Icon: React.ElementType;
 	label: JSX.Element;
 };
 

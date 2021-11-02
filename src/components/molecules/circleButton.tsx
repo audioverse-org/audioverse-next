@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { MouseEvent, PropsWithChildren } from 'react';
+import React, { MouseEvent, PropsWithChildren, Ref } from 'react';
 
 import { BaseColors } from '@lib/constants';
 
@@ -11,7 +11,7 @@ export type ICircleButtonProps = {
 	className?: string;
 	'aria-label'?: string;
 	'aria-controls'?: string;
-	ref?: any;
+	ref?: Ref<HTMLButtonElement>;
 };
 
 const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
@@ -23,7 +23,7 @@ const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 			children,
 			...props
 		}: PropsWithChildren<ICircleButtonProps>,
-		ref: any
+		ref: Ref<HTMLButtonElement>
 	): JSX.Element {
 		return (
 			<button

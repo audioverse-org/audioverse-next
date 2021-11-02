@@ -14,7 +14,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type AudiobooksListProps = PaginatedProps<
 	NonNullable<GetAudiobookListPageDataQuery['audiobooks']['nodes']>[0],
-	any
+	GetAudiobookListPageDataQuery
 >;
 
 export function AudiobooksList({

@@ -22,7 +22,7 @@ type AddPlaylist = (
 
 interface Context {
 	key?: QueryKey;
-	snapshot?: any;
+	snapshot?: unknown;
 }
 
 export function useAddPlaylist(
