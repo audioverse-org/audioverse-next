@@ -10,12 +10,12 @@ export const USER_SESSION_QUERY_KEYS = [
 
 export function invalidateAndResetUserQueries(
 	queryClient: QueryClient
-): Promise<any> {
+): Promise<void> {
 	return Promise.all(
 		USER_SESSION_QUERY_KEYS.map((key) => queryClient.invalidateQueries(key))
-	).then(() =>
-		USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key))
-	);
+	).then(async () => {
+		await USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key));
+	});
 }
 
 export async function login(email: string, password: string): Promise<boolean> {

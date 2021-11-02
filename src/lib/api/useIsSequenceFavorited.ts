@@ -1,6 +1,7 @@
 import { useQueryClient } from 'react-query';
 
 import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
+import { getSessionToken } from '@lib/cookies';
 import {
 	Scalars,
 	SequenceIsFavoritedQuery,
@@ -19,7 +20,12 @@ export function useIsSequenceFavorited(
 	id: Scalars['ID']
 ): IUseIsSequenceFavoritedResult {
 	const queryClient = useQueryClient();
-	const { data } = useSequenceIsFavoritedQuery({ id });
+	const { data } = useSequenceIsFavoritedQuery(
+		{ id },
+		{
+			enabled: !!getSessionToken(),
+		}
+	);
 	const generatedQueryKey = ['sequenceIsFavorited', { id }];
 
 	const result = useIsFavorited(

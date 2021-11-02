@@ -45,7 +45,7 @@ export async function getServerSideProps({
 	params,
 	res,
 }: GetServerSidePropsContext<{ language: string; id: string }>): Promise<
-	GetServerSidePropsResult<any>
+	GetServerSidePropsResult<Record<string, unknown>>
 > {
 	const id = params?.id as string;
 	const languageRoute = params?.language as string;

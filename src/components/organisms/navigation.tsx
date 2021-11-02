@@ -74,9 +74,11 @@ const Navigation = ({
 								.map(({ Icon, key, label, href, children }) => {
 									const inner = (
 										<>
-											<span className={styles.icon}>
-												<Icon width={iconSize} height={iconSize} />
-											</span>
+											{Icon && (
+												<span className={styles.icon}>
+													<Icon width={iconSize} height={iconSize} />
+												</span>
+											)}
 											{label}
 											{children && (
 												<span className={styles.iconDisclosure}>
@@ -200,9 +202,11 @@ const Navigation = ({
 																: undefined
 														}
 													>
-														<span className={styles.icon}>
-															<Icon />
-														</span>
+														{Icon && (
+															<span className={styles.icon}>
+																<Icon />
+															</span>
+														)}
 														{label}
 													</a>
 												</Link>

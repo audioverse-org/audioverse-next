@@ -2,14 +2,17 @@ import { GetServerSidePropsResult } from 'next';
 import { QueryClient } from 'react-query';
 import { dehydrate, DehydratedState } from 'react-query';
 
-export type DehydratedProps<T = any> = GetServerSidePropsResult<
-	T & {
-		dehydratedState: DehydratedState;
-	}
->;
+export type DehydratedProps<T = Record<string, unknown>> =
+	GetServerSidePropsResult<
+		T & {
+			dehydratedState: DehydratedState;
+		}
+	>;
 
-export default async function getDehydratedProps<T extends Record<any, any>>(
-	queryPairs: [string, () => Promise<any>][],
+export default async function getDehydratedProps<
+	T extends Record<string, unknown>
+>(
+	queryPairs: [string, () => Promise<unknown>][],
 	otherProps?: T
 ): Promise<DehydratedProps<T>> {
 	const queryClient = new QueryClient();

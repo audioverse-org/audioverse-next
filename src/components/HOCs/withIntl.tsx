@@ -12,7 +12,7 @@ const useTranslation = () => {
 	return { language, messages };
 };
 
-const withIntl = <P extends any>(
+const withIntl = <P extends Record<string, unknown>>(
 	Component: React.ComponentType<P>
 ): React.ComponentType<P> => {
 	function WithIntl(props: P) {
@@ -25,7 +25,7 @@ const withIntl = <P extends any>(
 				defaultLocale="en"
 				onError={handleIntlError}
 			>
-				<Component {...(props as any)} />
+				<Component {...(props as P)} />
 			</IntlProvider>
 		);
 	}

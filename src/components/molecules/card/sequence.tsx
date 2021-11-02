@@ -46,8 +46,8 @@ export default function CardSequence({
 	recordings,
 	slim,
 }: CardCollectionProps): JSX.Element {
-	const [ref, isHovered] = useHover();
-	const [subRef, isSubHovered] = useHover();
+	const [ref, isHovered] = useHover<HTMLButtonElement>();
+	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);

@@ -356,7 +356,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					// TODO: Replace with subscription widget
-					<Image src="/img/unsplash-notes.jpg" width={5472} height={3648} />
+					<Image src="/img/unsplash-notes.jpg" width={1200} height={800} />
 				}
 			/>
 			<div className={styles.footer}>

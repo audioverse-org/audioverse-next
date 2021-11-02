@@ -26,11 +26,11 @@ function Profile(): JSX.Element {
 	const { data } = useGetAccountPreferencesDataQuery() || {};
 
 	const [autoplay, setAutoplay] = useState(false);
-	const [language, setLanguage] = useState<any>(Language.English);
-	const [preferredAudioQuality, setPreferredAudioQuality] = useState<any>(
+	const [language, setLanguage] = useState<string>(Language.English);
+	const [preferredAudioQuality, setPreferredAudioQuality] = useState<string>(
 		RecordingQuality.Low
 	);
-	const [timezone, setTimezone] = useState<any>(Timezone.AmericaNewYork);
+	const [timezone, setTimezone] = useState<string>(Timezone.AmericaNewYork);
 
 	const { mutate } = useUpdateAccountPreferencesMutation({
 		onSuccess: () =>
@@ -96,10 +96,12 @@ function Profile(): JSX.Element {
 						})}
 						value={language}
 						setValue={setLanguage}
-						options={Object.keys(Language).map((key: any) => {
-							const value = (Language as any)[key];
+						options={(
+							Object.keys(Language) as Array<keyof typeof Language>
+						).map((key) => {
+							const value = Language[key];
 							return {
-								label: (languageMap as any)[value],
+								label: languageMap[value],
 								value,
 							};
 						})}
@@ -112,8 +114,10 @@ function Profile(): JSX.Element {
 						})}
 						value={timezone}
 						setValue={setTimezone}
-						options={Object.keys(Timezone).map((key: any) => {
-							const value = (Timezone as any)[key];
+						options={(
+							Object.keys(Timezone) as Array<keyof typeof Timezone>
+						).map((key) => {
+							const value = Timezone[key];
 							const [prefix, ...slugs] = value.split('_');
 							const label = `${capitalize(prefix)}/${slugs
 								.map(capitalize)

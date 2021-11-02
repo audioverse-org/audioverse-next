@@ -687,7 +687,7 @@ describe('localization usage', () => {
 			push: () => Promise.resolve(true),
 		});
 		loadAuthGuardData();
-		jest.spyOn(api, 'useLogout').mockResolvedValue(true);
+		jest.spyOn(api, 'useLogout').mockResolvedValue();
 
 		await act(async () => {
 			const screen = await renderWithQueryProvider(<Logout />);
