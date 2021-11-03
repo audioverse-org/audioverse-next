@@ -15,7 +15,6 @@
 	li {
 		list-style-type: none;
 		margin-bottom: 24px;
-		color: $ts-midTone;
 		font-size: 18px;
 		font-weight: 400;
 		display: flex;
@@ -35,6 +34,11 @@
 			text-decoration: none;
 			display: flex;
 			align-items: center;
+			color: $ts-midTone;
+		}
+		.icon,
+		.iconDisclosure {
+			transition: none; // FIX: https://stackoverflow.com/a/40512935
 		}
 	}
 	.navLink:hover {

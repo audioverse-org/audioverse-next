@@ -14,7 +14,7 @@ $container-padding: 16px;
 	padding: $container-padding;
 	cursor: pointer;
 	background-color: var(--cardBg);
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&,
 	&:hover {
 		color: var(--cardColor, $ts-midTone);

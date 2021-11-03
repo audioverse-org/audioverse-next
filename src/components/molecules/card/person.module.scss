@@ -8,7 +8,7 @@ $container-padding: 16px;
 	border-radius: 16px;
 	overflow: hidden;
 	background-color: $ts-smartPlaylistH;
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&,
 	&:hover {
 		color: $ts-dark;

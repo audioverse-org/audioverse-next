@@ -12,7 +12,7 @@
 .container {
 	padding: 16px;
 	background-color: $ts-smartPlaylistH;
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&:hover {
 		background-color: $ts-darkened-smartPlaylistH;
 	}

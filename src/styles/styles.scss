@@ -1,11 +1,5 @@
 @import 'inter.scss';
 
-// START IVY JOURNAL FONT
-
-@import url('https://use.typekit.net/bgc2sqi.css');
-
-// END IVY JOURNAL FONT
-
 // START normalize.css
 
 @import '../../node_modules/normalize.css/normalize.css';
@@ -30,6 +24,9 @@ html {
 		color: $ts-cream;
 		background: $ts-dark;
 	}
+	transition-property: color, border-color, background-color;
+	transition-duration: $transition-quick;
+	transition-timing-function: linear;
 }
 
 html {
