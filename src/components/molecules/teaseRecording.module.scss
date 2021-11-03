@@ -70,6 +70,7 @@ $right-icon-offset: -4px;
 	align-items: center;
 	> svg {
 		margin-right: 12px;
+		transition: none;
 	}
 	&:hover {
 		color: $ts-red;

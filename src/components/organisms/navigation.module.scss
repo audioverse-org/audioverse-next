@@ -51,7 +51,8 @@
 	@media (min-width: $breakpoint-lg) {
 		.navLink.active {
 			&,
-			.icon {
+			.icon,
+			.iconDisclosure {
 				color: $ts-red;
 			}
 		}
@@ -175,9 +176,10 @@
 		position: relative;
 		overflow: hidden;
 	}
-	.slider {
+	.sliderColumns > * {
 		margin-left: 32px;
 		margin-right: 22px;
+		flex-basis: calc(100% - 54px);
 	}
 	.account {
 		margin-bottom: 32px;

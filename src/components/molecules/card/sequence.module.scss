@@ -92,6 +92,7 @@ $container-padding: 16px;
 	align-items: center;
 	> svg {
 		margin-right: 12px;
+		transition: none;
 	}
 	&:hover {
 		color: $ts-red;

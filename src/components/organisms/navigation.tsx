@@ -79,7 +79,7 @@ const Navigation = ({
 													<Icon width={iconSize} height={iconSize} />
 												</span>
 											)}
-											{label}
+											<span>{label}</span>
 											{children && (
 												<span className={styles.iconDisclosure}>
 													<IconDisclosure />
@@ -207,7 +207,7 @@ const Navigation = ({
 																<Icon />
 															</span>
 														)}
-														{label}
+														<span>{label}</span>
 													</a>
 												</Link>
 											</li>
