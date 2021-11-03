@@ -2,6 +2,7 @@ query getAudiobookDetailPageData($id: ID!) {
 	audiobook(id: $id) {
 		...sequence
 		canonicalUrl(useFuturePath: true)
+		language
 	}
 }
 
@@ -13,6 +14,7 @@ query getAudiobookFeedData($id: ID!) {
 			url(size: 600)
 		}
 		canonicalUrl(useFuturePath: true)
+		language
 		recordings(first: 25) {
 			nodes {
 				...generateFeed

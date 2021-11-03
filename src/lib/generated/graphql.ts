@@ -290,6 +290,7 @@ export type BlogPost = Node &
 		id: Scalars['ID'];
 		image: Maybe<Image>;
 		isHidden: Scalars['Boolean'];
+		language: Language;
 		publishDate: Scalars['DateTime'];
 		/** The estimated number of seconds to read the blog post. */
 		readingDuration: Maybe<Scalars['Float']>;
@@ -492,6 +493,7 @@ export type Collection = Node &
 		image: Maybe<Image>;
 		imageWithFallback: Image;
 		isHidden: Maybe<Scalars['Boolean']>;
+		language: Language;
 		location: Maybe<Scalars['String']>;
 		/** @deprecated Collection.logoImage is replaced with Collection.image */
 		logoImage: Maybe<Image>;
@@ -2286,6 +2288,7 @@ export type Person = Node &
 		isHidden: Scalars['Boolean'];
 		/** @deprecated Person.isPreapproved is replaced with Person.skipContentScreening */
 		isPreapproved: Maybe<Scalars['Boolean']>;
+		language: Language;
 		name: Scalars['String'];
 		phone: Maybe<Scalars['String']>;
 		/** @deprecated Person.photo is replaced with Person.image */
@@ -3927,6 +3930,7 @@ export type Sequence = Node &
 		image: Maybe<Image>;
 		imageWithFallback: Image;
 		isHidden: Maybe<Scalars['Boolean']>;
+		language: Language;
 		/** @deprecated Sequence.logoImage is replaced with Sequence.image */
 		logoImage: Maybe<Image>;
 		/** @deprecated Sequence.logoImageWithFallback is replaced with Sequence.imageWithFallback */
@@ -4103,6 +4107,7 @@ export type Sponsor = Node &
 		imageWithFallback: Image;
 		internalContact: Maybe<InternalContact>;
 		isHidden: Scalars['Boolean'];
+		language: Language;
 		location: Maybe<Scalars['String']>;
 		/** @deprecated Sponsor.logoImage is replaced with Sponsor.image */
 		logoImage: Maybe<Image>;
@@ -6868,6 +6873,7 @@ export type GetAudiobookDetailPageDataQuery = {
 	audiobook: {
 		__typename?: 'Sequence';
 		canonicalUrl: string;
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -6956,6 +6962,7 @@ export type GetAudiobookFeedDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		image: { __typename?: 'Image'; url: string } | null;
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -7074,6 +7081,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 	__typename?: 'Query';
 	audiobookTrack: {
 		__typename?: 'Recording';
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
@@ -7392,6 +7400,7 @@ export type GetBlogDetailDataQuery = {
 		body: string;
 		canonicalPath: string;
 		canonicalUrl: string;
+		language: Language;
 		publishDate: string;
 		readingDuration: number | null;
 		teaser: string;
@@ -7439,6 +7448,7 @@ export type GetCollectionDetailPageDataQuery = {
 		duration: number;
 		description: string;
 		canonicalUrl: string;
+		language: Language;
 		shareUrl: string;
 		location: string | null;
 		image: { __typename?: 'Image'; url: string } | null;
@@ -7575,6 +7585,7 @@ export type GetCollectionFeedDataQuery = {
 		__typename?: 'Collection';
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		image: { __typename?: 'Image'; url: string } | null;
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -9005,6 +9016,7 @@ export type GetPresenterDetailPageDataQuery = {
 		name: string;
 		description: string;
 		canonicalUrl: string;
+		language: Language;
 		shareUrl: string;
 		website: string | null;
 		imageWithFallback: { __typename?: 'Image'; url: string };
@@ -9432,6 +9444,7 @@ export type GetPresenterRecordingsFeedDataQuery = {
 		id: string | number;
 		name: string;
 		canonicalUrl: string;
+		language: Language;
 		image: { __typename?: 'Image'; url: string } | null;
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -9534,6 +9547,7 @@ export type GetPresenterTopPageDataQuery = {
 	person: {
 		__typename?: 'Person';
 		id: string | number;
+		language: Language;
 		name: string;
 		canonicalPath: string;
 		recordings: {
@@ -9977,6 +9991,7 @@ export type GetSeriesDetailPageDataQuery = {
 	series: {
 		__typename?: 'Sequence';
 		canonicalUrl: string;
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -10064,6 +10079,7 @@ export type GetSeriesFeedDataQuery = {
 		__typename?: 'Sequence';
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
@@ -10180,6 +10196,7 @@ export type GetSermonDetailDataQuery = {
 	__typename?: 'Query';
 	sermon: {
 		__typename?: 'Recording';
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
@@ -10543,6 +10560,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 	musicAlbum: {
 		__typename?: 'Sequence';
 		canonicalUrl: string;
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -10630,6 +10648,7 @@ export type GetSongAlbumFeedDataQuery = {
 		__typename?: 'Sequence';
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Array<{
@@ -10800,6 +10819,7 @@ export type GetSongDetailDataQuery = {
 	__typename?: 'Query';
 	musicTrack: {
 		__typename?: 'Recording';
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
@@ -11033,6 +11053,7 @@ export type GetSponsorDetailPageDataQuery = {
 		website: string | null;
 		description: string;
 		canonicalUrl: string;
+		language: Language;
 		shareUrl: string;
 		image: { __typename?: 'Image'; url: string } | null;
 		collections: {
@@ -11363,6 +11384,7 @@ export type GetSponsorTeachingsFeedDataQuery = {
 		__typename?: 'Sponsor';
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		recordings: {
 			__typename?: 'RecordingConnection';
 			nodes: Array<{
@@ -11421,6 +11443,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 	storySeason: {
 		__typename?: 'Sequence';
 		canonicalUrl: string;
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: SequenceContentType;
@@ -11509,6 +11532,7 @@ export type GetStoryAlbumFeedDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalUrl: string;
+		language: Language;
 		image: { __typename?: 'Image'; url: string } | null;
 		recordings: {
 			__typename?: 'RecordingConnection';
@@ -11627,6 +11651,7 @@ export type GetStoryDetailDataQuery = {
 	__typename?: 'Query';
 	story: {
 		__typename?: 'Recording';
+		language: Language;
 		id: string | number;
 		title: string;
 		contentType: RecordingContentType;
@@ -13079,6 +13104,7 @@ export const GetAudiobookDetailPageDataDocument = `
   audiobook(id: $id) {
     ...sequence
     canonicalUrl(useFuturePath: true)
+    language
   }
 }
     ${SequenceFragmentDoc}`;
@@ -13106,6 +13132,7 @@ export const GetAudiobookFeedDataDocument = `
       url(size: 600)
     }
     canonicalUrl(useFuturePath: true)
+    language
     recordings(first: 25) {
       nodes {
         ...generateFeed
@@ -13215,6 +13242,7 @@ export const GetAudiobookTrackDetailDataDocument = `
     query getAudiobookTrackDetailData($id: ID!) {
   audiobookTrack(id: $id) {
     ...recording
+    language
   }
 }
     ${RecordingFragmentDoc}`;
@@ -13474,6 +13502,7 @@ export const GetBlogDetailDataDocument = `
     body
     canonicalPath(useFuturePath: true)
     canonicalUrl(useFuturePath: true)
+    language
     publishDate
     readingDuration
     teaser
@@ -13538,6 +13567,7 @@ export const GetCollectionDetailPageDataDocument = `
     duration
     description
     canonicalUrl(useFuturePath: true)
+    language
     shareUrl
     location
     image {
@@ -13615,6 +13645,7 @@ export const GetCollectionFeedDataDocument = `
   collection(id: $id) {
     title
     canonicalUrl(useFuturePath: true)
+    language
     image {
       url(size: 600)
     }
@@ -14241,6 +14272,7 @@ export const GetPresenterDetailPageDataDocument = `
     name
     description
     canonicalUrl(useFuturePath: true)
+    language
     shareUrl
     imageWithFallback {
       url(size: 100)
@@ -14487,6 +14519,7 @@ export const GetPresenterRecordingsFeedDataDocument = `
       url(size: 600)
     }
     canonicalUrl(useFuturePath: true)
+    language
     recordings(first: 25, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
       nodes {
         ...generateFeed
@@ -14552,6 +14585,7 @@ export const GetPresenterTopPageDataDocument = `
     query getPresenterTopPageData($id: ID!, $offset: Int, $first: Int) {
   person(id: $id) {
     id
+    language
     ...presenterPivot
     recordings(
       offset: $offset
@@ -14802,6 +14836,7 @@ export const GetSeriesDetailPageDataDocument = `
   series(id: $id) {
     ...sequence
     canonicalUrl(useFuturePath: true)
+    language
   }
 }
     ${SequenceFragmentDoc}`;
@@ -14825,6 +14860,7 @@ export const GetSeriesFeedDataDocument = `
   series(id: $id) {
     title
     canonicalUrl(useFuturePath: true)
+    language
     recordings(first: 25) {
       aggregate {
         count
@@ -14935,6 +14971,7 @@ export const GetSermonDetailDataDocument = `
     query getSermonDetailData($id: ID!) {
   sermon(id: $id) {
     ...recording
+    language
   }
 }
     ${RecordingFragmentDoc}`;
@@ -15094,6 +15131,7 @@ export const GetSongAlbumsDetailPageDataDocument = `
   musicAlbum(id: $id) {
     ...sequence
     canonicalUrl(useFuturePath: true)
+    language
   }
 }
     ${SequenceFragmentDoc}`;
@@ -15117,6 +15155,7 @@ export const GetSongAlbumFeedDataDocument = `
   musicAlbum(id: $id) {
     title
     canonicalUrl(useFuturePath: true)
+    language
     recordings(first: 25) {
       nodes {
         ...generateFeed
@@ -15265,6 +15304,7 @@ export const GetSongDetailDataDocument = `
     query getSongDetailData($id: ID!) {
   musicTrack(id: $id) {
     ...recording
+    language
   }
 }
     ${RecordingFragmentDoc}`;
@@ -15377,6 +15417,7 @@ export const GetSponsorDetailPageDataDocument = `
     website
     description
     canonicalUrl(useFuturePath: true)
+    language
     shareUrl
     image {
       url(size: 100)
@@ -15628,6 +15669,7 @@ export const GetSponsorTeachingsFeedDataDocument = `
   sponsor(id: $id) {
     title
     canonicalUrl(useFuturePath: true)
+    language
     recordings(first: 25, orderBy: [{field: RECORDED_AT, direction: DESC}]) {
       nodes {
         ...generateFeed
@@ -15680,6 +15722,7 @@ export const GetStoryAlbumDetailPageDataDocument = `
   storySeason(id: $id) {
     ...sequence
     canonicalUrl(useFuturePath: true)
+    language
   }
 }
     ${SequenceFragmentDoc}`;
@@ -15712,6 +15755,7 @@ export const GetStoryAlbumFeedDataDocument = `
         ...generateFeed
       }
     }
+    language
     ...bookFeedDescription
   }
 }
@@ -15811,6 +15855,7 @@ export const GetStoryDetailDataDocument = `
     query getStoryDetailData($id: ID!) {
   story(id: $id) {
     ...recording
+    language
   }
 }
     ${RecordingFragmentDoc}`;

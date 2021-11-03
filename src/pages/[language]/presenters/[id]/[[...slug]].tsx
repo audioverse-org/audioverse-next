@@ -24,9 +24,10 @@ export async function getStaticProps({
 	GetStaticPropsResult<PresenterDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
+	const routeLanguage = getLanguageIdByRoute(params?.language);
 	const result = await getPresenterDetailPageData({
 		id,
-		language: getLanguageIdByRoute(params?.language),
+		language: routeLanguage,
 	}).catch(() => ({
 		person: null,
 		sequences: {
@@ -42,6 +43,13 @@ export async function getStaticProps({
 			},
 		},
 	}));
+
+	if (result.person?.language !== routeLanguage) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			...result,

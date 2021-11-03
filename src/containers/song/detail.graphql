@@ -1,6 +1,7 @@
 query getSongDetailData($id: ID!) {
 	musicTrack(id: $id) {
 		...recording
+		language
 	}
 }
 

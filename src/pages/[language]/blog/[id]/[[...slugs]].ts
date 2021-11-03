@@ -21,13 +21,19 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ id: string; language: string }>): Promise<
 	GetStaticPropsResult<BlogPostDetailProps & IBaseProps>
 > {
+	const routeLanguage = getLanguageIdByRoute(params?.language);
 	const { blogPost, blogPosts } = await getBlogDetailData({
 		id: params?.id as string,
-		language: getLanguageIdByRoute(params?.language),
+		language: routeLanguage,
 	}).catch(() => ({
 		blogPost: null,
 		blogPosts: { nodes: [] },
 	}));
+	if (blogPost?.language !== routeLanguage) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {

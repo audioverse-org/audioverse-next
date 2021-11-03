@@ -12,12 +12,13 @@ import {
 	getSongDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default SongDetail;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<SongDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
@@ -26,6 +27,11 @@ export async function getStaticProps({
 	}).catch(() => ({
 		musicTrack: null,
 	}));
+	if (recording?.language !== getLanguageIdByRoute(params?.language)) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {

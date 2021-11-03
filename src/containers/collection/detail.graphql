@@ -7,6 +7,7 @@ query getCollectionDetailPageData($id: ID!) {
 		duration
 		description
 		canonicalUrl(useFuturePath: true)
+		language
 		shareUrl
 		location
 		image {
@@ -71,6 +72,7 @@ query getCollectionFeedData($id: ID!) {
 	collection(id: $id) {
 		title
 		canonicalUrl(useFuturePath: true)
+		language
 		image {
 			url(size: 600)
 		}

@@ -1,6 +1,7 @@
 import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
+	Language,
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
@@ -24,6 +25,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 		id: 'the_series_id',
 		title: 'the_series_title',
 		contentType: SequenceContentType.Series,
+		language: Language.English,
 		image: {
 			url: 'the_series_image',
 		},

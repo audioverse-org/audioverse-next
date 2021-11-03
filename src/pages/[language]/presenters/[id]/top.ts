@@ -11,6 +11,7 @@ import {
 	getPresenterTopPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { makePresenterTopRecordingsRoute } from '@lib/routes';
 
 export default PresenterTop;
@@ -21,14 +22,22 @@ export async function getStaticProps({
 	GetStaticPropsResult<PresenterTopProps>
 > {
 	const id = params?.id as string;
+	const { person } = await getPresenterTopPageData({
+		id,
+		offset: 0,
+		first: 24,
+	}).catch(() => ({
+		person: null,
+	}));
+
+	if (person?.language !== getLanguageIdByRoute(params?.language)) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
-		props: await getPresenterTopPageData({
-			id,
-			offset: 0,
-			first: 24,
-		}).catch(() => ({
-			person: null,
-		})),
+		props: { person },
 		revalidate: REVALIDATE,
 	};
 }

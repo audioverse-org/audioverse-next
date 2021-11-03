@@ -1,6 +1,7 @@
 query getStoryDetailData($id: ID!) {
 	story(id: $id) {
 		...recording
+		language
 	}
 }
 

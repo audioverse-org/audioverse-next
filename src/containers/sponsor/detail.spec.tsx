@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetSponsorDetailPageDataDocument,
 	GetSponsorDetailPathsDataDocument,
+	Language,
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
@@ -30,6 +31,7 @@ function loadData() {
 				website: 'the_sponsor_website',
 				summary: 'the_sponsor_summary',
 				description: '<i>the</i> <b>description</b>',
+				language: Language.English,
 				collections: {
 					nodes: [],
 					aggregate: {

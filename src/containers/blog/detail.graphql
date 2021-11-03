@@ -8,6 +8,7 @@ query getBlogDetailData($id: ID!, $language: Language!) {
 		body
 		canonicalPath(useFuturePath: true)
 		canonicalUrl(useFuturePath: true)
+		language
 		publishDate
 		readingDuration
 		teaser

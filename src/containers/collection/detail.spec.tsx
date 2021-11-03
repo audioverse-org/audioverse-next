@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
+	Language,
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
@@ -25,6 +26,7 @@ function loadData() {
 				title: 'the_collection_title',
 				startDate: '2007-12-19',
 				endDate: '2007-12-23',
+				language: Language.English,
 				sponsor: {
 					id: 'the_sponsor_id',
 					title: 'the_sponsor_title',
