@@ -55,7 +55,6 @@ function LibraryHistory({ language }: Props): JSX.Element {
 			}
 		);
 
-	console.log(hasNextPage, isFetchingNextPage);
 	const showLoadMore = hasNextPage || isFetchingNextPage;
 	return (
 		<div className={baseStyles.wrapper}>
