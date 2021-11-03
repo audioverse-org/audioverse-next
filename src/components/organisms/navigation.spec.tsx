@@ -22,6 +22,6 @@ describe('navigation', () => {
 
 		const { getByText } = await renderNavigation();
 
-		expect(getByText('Discover')).toHaveClass('active');
+		expect(getByText('Discover').parentElement).toHaveClass('active');
 	});
 });

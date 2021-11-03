@@ -10,7 +10,7 @@
 	border-radius: 16px;
 	border: none;
 	background: transparent;
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&:hover {
 		cursor: pointer;
 	}

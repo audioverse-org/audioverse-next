@@ -15,7 +15,6 @@
 	li {
 		list-style-type: none;
 		margin-bottom: 24px;
-		color: $ts-midTone;
 		font-size: 18px;
 		font-weight: 400;
 		display: flex;
@@ -35,6 +34,11 @@
 			text-decoration: none;
 			display: flex;
 			align-items: center;
+			color: $ts-midTone;
+		}
+		.icon,
+		.iconDisclosure {
+			transition: none; // FIX: https://stackoverflow.com/a/40512935
 		}
 	}
 	.navLink:hover {
@@ -47,7 +51,8 @@
 	@media (min-width: $breakpoint-lg) {
 		.navLink.active {
 			&,
-			.icon {
+			.icon,
+			.iconDisclosure {
 				color: $ts-red;
 			}
 		}
@@ -171,9 +176,10 @@
 		position: relative;
 		overflow: hidden;
 	}
-	.slider {
+	.sliderColumns > * {
 		margin-left: 32px;
 		margin-right: 22px;
+		flex-basis: calc(100% - 54px);
 	}
 	.account {
 		margin-bottom: 32px;

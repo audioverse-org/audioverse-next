@@ -19,6 +19,9 @@ query getLibraryHistoryPageData(
 						...cardRecording
 					}
 				}
+				pageInfo {
+					hasNextPage
+				}
 			}
 		}
 	}

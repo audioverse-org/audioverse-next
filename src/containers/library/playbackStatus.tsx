@@ -28,7 +28,7 @@ export function getLibraryPlaybackStatusDataVariables(
 ): GetLibraryDataQueryVariables {
 	return {
 		language,
-		first: 25,
+		first: 1500,
 		offset: 0,
 		groupSequences: true,
 		types: null,

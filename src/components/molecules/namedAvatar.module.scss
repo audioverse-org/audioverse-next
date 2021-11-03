@@ -13,20 +13,24 @@
 
 .link {
 	img {
-		border: 1px solid transparent !important;
+		border: 1px solid rgba($ts-red, 0) !important;
 		border-radius: 24px;
 	}
 	&:hover {
 		cursor: pointer;
-		color: $ts-red;
 		text-decoration: none;
+		.title {
+			color: $ts-red;
+		}
 		img {
 			border-color: $ts-red !important;
 		}
 	}
 }
 .linkSalmon:hover {
-	color: $ts-salmon;
+	.title {
+		color: $ts-salmon;
+	}
 	img {
 		border-color: $ts-salmon !important;
 	}

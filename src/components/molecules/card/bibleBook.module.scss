@@ -7,7 +7,7 @@
 .container {
 	padding: 16px;
 	background: $ts-bibleH;
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&,
 	&:hover {
 		color: $ts-white;

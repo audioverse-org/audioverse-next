@@ -14,7 +14,7 @@ $container-padding: 16px;
 	padding: $container-padding;
 	cursor: pointer;
 	background-color: var(--cardBg);
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&,
 	&:hover {
 		color: var(--cardColor, $ts-midTone);
@@ -70,6 +70,7 @@ $right-icon-offset: -4px;
 	align-items: center;
 	> svg {
 		margin-right: 12px;
+		transition: none;
 	}
 	&:hover {
 		color: $ts-red;

@@ -7,7 +7,7 @@ $container-padding: 16px;
 	padding: $container-padding;
 	border-radius: 16px;
 	overflow: hidden;
-	transition: background-color $transition-medium;
+	transition-duration: $transition-medium;
 	&.AUDIOBOOK {
 		--sequenceHeadingColor: #{$ts-white};
 		--sequenceTextColor: #{$ts-white};
@@ -92,6 +92,7 @@ $container-padding: 16px;
 	align-items: center;
 	> svg {
 		margin-right: 12px;
+		transition: none;
 	}
 	&:hover {
 		color: $ts-red;

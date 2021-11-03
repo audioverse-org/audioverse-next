@@ -8632,6 +8632,7 @@ export type GetLibraryHistoryPageDataQuery = {
 						}>;
 					};
 				}> | null;
+				pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 			};
 		};
 	} | null;
@@ -14096,6 +14097,9 @@ export const GetLibraryHistoryPageDataDocument = `
           recording {
             ...cardRecording
           }
+        }
+        pageInfo {
+          hasNextPage
         }
       }
     }
