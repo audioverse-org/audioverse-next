@@ -21,5 +21,6 @@ module.exports = {
 				ast: true,
 			},
 		],
+		'./babel/disable-nextjs-link-prefetching',
 	],
 };
