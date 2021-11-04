@@ -71,9 +71,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
-	const recordingDateString = formatLongDateTime(
-		parseRelativeDate(recordingDate || '') || ''
-	);
+	const recordingDateString = recordingDate
+		? formatLongDateTime(parseRelativeDate(recordingDate) || '')
+		: undefined;
 	const index = sequenceIndex;
 	const seriesItems = sequence?.recordings?.nodes;
 
