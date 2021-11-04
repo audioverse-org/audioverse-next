@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { getSponsorTeachingsFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default (): void => void 0;
 
@@ -20,7 +21,7 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		sponsor: null,
 	}));
-	if (!sponsor) {
+	if (!sponsor || sponsor.language !== getLanguageIdByRoute(params?.language)) {
 		return {
 			notFound: true,
 		};

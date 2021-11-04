@@ -25,6 +25,7 @@ query getPresenterRecordingsFeedData($id: ID!) {
 			url(size: 600)
 		}
 		canonicalUrl(useFuturePath: true)
+		language
 		recordings(first: 25, orderBy: [{ field: PUBLISHED_AT, direction: DESC }]) {
 			nodes {
 				...generateFeed

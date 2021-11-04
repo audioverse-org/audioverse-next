@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetStoryDetailDataDocument,
 	GetStoryDetailStaticPathsDocument,
+	Language,
 	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
@@ -24,6 +25,7 @@ function loadData() {
 				id: 'the_story_id',
 				title: 'the_story_title',
 				contentType: RecordingContentType.Story,
+				language: Language.English,
 				speakers: [],
 				attachments: [],
 				imageWithFallback: { url: '' },

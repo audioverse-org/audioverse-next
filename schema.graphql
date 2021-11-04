@@ -277,6 +277,7 @@ type BlogPost implements Node & UniformResourceLocatable {
 	id: ID!
 	image: Image
 	isHidden: Boolean!
+	language: Language!
 	publishDate: DateTime!
 
 	"""
@@ -528,6 +529,7 @@ type Collection implements Node & UniformResourceLocatable {
 	image: Image
 	imageWithFallback: Image!
 	isHidden: Boolean
+	language: Language!
 	location: String
 	logoImage: Image
 		@deprecated(
@@ -2490,6 +2492,7 @@ type Person implements Node & UniformResourceLocatable {
 		@deprecated(
 			reason: "Person.isPreapproved is replaced with Person.skipContentScreening"
 		)
+	language: Language!
 	name: String!
 	phone: String
 	photo: Image @deprecated(reason: "Person.photo is replaced with Person.image")
@@ -5230,6 +5233,7 @@ type Sequence implements Node & UniformResourceLocatable {
 	image: Image
 	imageWithFallback: Image!
 	isHidden: Boolean
+	language: Language!
 	logoImage: Image
 		@deprecated(reason: "Sequence.logoImage is replaced with Sequence.image")
 	logoImageWithFallback: Image!
@@ -5566,6 +5570,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 	imageWithFallback: Image!
 	internalContact: InternalContact
 	isHidden: Boolean!
+	language: Language!
 	location: String
 	logoImage: Image
 		@deprecated(reason: "Sponsor.logoImage is replaced with Sponsor.image")

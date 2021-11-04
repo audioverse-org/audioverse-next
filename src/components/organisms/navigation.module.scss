@@ -35,10 +35,9 @@
 			display: flex;
 			align-items: center;
 			color: $ts-midTone;
-		}
-		.icon,
-		.iconDisclosure {
-			transition: none; // FIX: https://stackoverflow.com/a/40512935
+			*:not(svg) {
+				transition: none; // FIX: https://stackoverflow.com/a/40512935
+			}
 		}
 	}
 	.navLink:hover {

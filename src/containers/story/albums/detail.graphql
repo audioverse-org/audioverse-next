@@ -2,6 +2,7 @@ query getStoryAlbumDetailPageData($id: ID!) {
 	storySeason(id: $id) {
 		...sequence
 		canonicalUrl(useFuturePath: true)
+		language
 	}
 }
 
@@ -18,6 +19,7 @@ query getStoryAlbumFeedData($id: ID!) {
 				...generateFeed
 			}
 		}
+		language
 		...bookFeedDescription
 	}
 }

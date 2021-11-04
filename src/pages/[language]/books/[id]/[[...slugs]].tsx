@@ -14,12 +14,13 @@ import {
 	getAudiobookDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default AudiobookDetail;
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<
+}: GetStaticPropsContext<{ language: string; id: string }>): Promise<
 	GetStaticPropsResult<AudiobookDetailProps & IBaseProps>
 > {
 	const id = params?.id as string;
@@ -29,6 +30,11 @@ export async function getStaticProps({
 	}).catch(() => ({
 		audiobook: null,
 	}));
+	if (sequence?.language !== getLanguageIdByRoute(params?.language)) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {

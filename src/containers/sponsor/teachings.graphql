@@ -21,6 +21,7 @@ query getSponsorTeachingsFeedData($id: ID!) {
 	sponsor(id: $id) {
 		title
 		canonicalUrl(useFuturePath: true)
+		language
 		recordings(first: 25, orderBy: [{ field: RECORDED_AT, direction: DESC }]) {
 			nodes {
 				...generateFeed

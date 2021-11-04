@@ -3,6 +3,7 @@ import { when } from 'jest-when';
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
+	Language,
 } from '@lib/generated/graphql';
 import {
 	buildLoader,
@@ -25,6 +26,7 @@ const loadData = buildLoader(GetBlogDetailDataDocument, {
 		title: 'the_blog_post_title',
 		teaser: 'the_blog_post_teaser',
 		readingDuration: 520,
+		language: Language.English,
 	},
 	blogPosts: {
 		nodes: [],

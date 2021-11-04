@@ -2,6 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getSeriesFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default (): void => void 0;
 
@@ -16,7 +17,7 @@ export async function getServerSideProps({
 	const { series } = await getSeriesFeedData({ id }).catch(() => ({
 		series: null,
 	}));
-	if (!series) {
+	if (!series || series.language !== getLanguageIdByRoute(params?.language)) {
 		return {
 			notFound: true,
 		};

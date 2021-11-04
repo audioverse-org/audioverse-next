@@ -1,6 +1,7 @@
 query getAudiobookTrackDetailData($id: ID!) {
 	audiobookTrack(id: $id) {
 		...recording
+		language
 	}
 }
 

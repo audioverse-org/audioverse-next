@@ -1,6 +1,7 @@
 query getSermonDetailData($id: ID!) {
 	sermon(id: $id) {
 		...recording
+		language
 	}
 }
 

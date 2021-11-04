@@ -37,6 +37,7 @@ import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import {
 	GetWithAuthGuardDataDocument,
+	Language,
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
@@ -382,6 +383,7 @@ describe('localization usage', () => {
 					startDate: null,
 					endDate: null,
 					canonicalUrl: '',
+					language: Language.English,
 					shareUrl: '',
 					sequences: {
 						aggregate: {

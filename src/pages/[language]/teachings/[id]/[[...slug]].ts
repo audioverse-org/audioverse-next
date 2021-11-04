@@ -13,6 +13,7 @@ import {
 	getSermonDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default SermonDetail;
 
@@ -22,11 +23,19 @@ export type SermonStaticProps = GetStaticPropsResult<
 
 export async function getStaticProps({
 	params,
-}: GetStaticPropsContext<{ id: string }>): Promise<SermonStaticProps> {
+}: GetStaticPropsContext<{
+	language: string;
+	id: string;
+}>): Promise<SermonStaticProps> {
 	const id = params?.id as string;
 	const { sermon: recording } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: null,
 	}));
+	if (recording?.language !== getLanguageIdByRoute(params?.language)) {
+		return {
+			notFound: true,
+		};
+	}
 
 	return {
 		props: {

@@ -7,6 +7,7 @@ import {
 } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default (): void => void 0;
 
@@ -55,7 +56,7 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		audiobook: null,
 	}));
-	if (!sequence) {
+	if (!sequence || sequence.language !== getLanguageIdByRoute(languageRoute)) {
 		return {
 			notFound: true,
 		};

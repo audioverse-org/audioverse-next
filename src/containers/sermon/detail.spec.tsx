@@ -11,6 +11,7 @@ import { SermonDetailProps } from '@containers/sermon/detail';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
+	Language,
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
@@ -62,6 +63,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		title: 'the_sermon_title',
 		contentType: RecordingContentType.Sermon,
 		canonicalPath: '',
+		language: Language.English,
 		speakers: [],
 		audioFiles: [],
 		videoFiles: [],
@@ -156,9 +158,11 @@ describe('sermon detail page', () => {
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
-		const result = (await getStaticProps({ params: { id: '1' } })) as any;
+		const result = (await getStaticProps({
+			params: { language: 'en', id: '1' },
+		})) as any;
 
-		expect(result.props.recording).toBeNull();
+		expect(result.notFound).toBe(true);
 	});
 
 	it('renders 404 on missing sermon', async () => {
@@ -418,6 +422,7 @@ describe('sermon detail page', () => {
 				canonicalPath: 'es/series_path',
 				contentType: SequenceContentType.Series,
 			},
+			language: Language.Spanish,
 		});
 
 		const { getAllByText } = await renderPage({
@@ -749,7 +754,9 @@ describe('sermon detail page', () => {
 	it('sets head title', async () => {
 		loadSermonDetailData();
 
-		const result = (await getStaticProps({ params: { id: 'the_id' } })) as any;
+		const result = (await getStaticProps({
+			params: { language: 'en', id: 'the_id' },
+		})) as any;
 
 		expect(result.props.title).toEqual('the_sermon_title');
 	});

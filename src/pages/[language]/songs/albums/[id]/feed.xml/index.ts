@@ -2,6 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getSongAlbumFeedData } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default (): void => void 0;
 
@@ -18,7 +19,7 @@ export async function getServerSideProps({
 			musicAlbum: null,
 		})
 	);
-	if (!series) {
+	if (!series || series.language !== getLanguageIdByRoute(params?.language)) {
 		return {
 			notFound: true,
 		};
