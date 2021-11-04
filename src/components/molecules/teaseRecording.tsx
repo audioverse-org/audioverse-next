@@ -34,6 +34,7 @@ type Props = {
 	unpadded?: boolean;
 	small?: boolean;
 	isOptionalLink?: boolean;
+	disableUserFeatures?: boolean;
 };
 
 export default function TeaseRecording({
@@ -42,6 +43,7 @@ export default function TeaseRecording({
 	unpadded,
 	small,
 	isOptionalLink,
+	disableUserFeatures,
 }: Props): JSX.Element {
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
@@ -211,17 +213,19 @@ export default function TeaseRecording({
 				</Link>
 			)}
 
-			<ButtonFavorite
-				isFavorited={!!isFavorited}
-				toggleFavorited={toggleFavorited}
-				backgroundColor={backgroundColor}
-				className={clsx(
-					styles.like,
-					unpadded && styles.likeUnpadded,
-					isFavorited && styles.likeActive
-				)}
-				light
-			/>
+			{!disableUserFeatures && (
+				<ButtonFavorite
+					isFavorited={!!isFavorited}
+					toggleFavorited={toggleFavorited}
+					backgroundColor={backgroundColor}
+					className={clsx(
+						styles.like,
+						unpadded && styles.likeUnpadded,
+						isFavorited && styles.likeActive
+					)}
+					light
+				/>
+			)}
 		</div>
 	);
 }

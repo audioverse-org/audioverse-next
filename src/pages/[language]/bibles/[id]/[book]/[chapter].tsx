@@ -5,12 +5,8 @@ import {
 } from 'next';
 
 import Book, { BookProps } from '@containers/bible/book';
-import { REVALIDATE } from '@lib/constants';
-import {
-	getBibleBookDetailPageData,
-	getBibleBookDetailPathsData,
-} from '@lib/generated/graphql';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { makeBibleBookRoute } from '@lib/routes';
 
 export default Book;
@@ -24,31 +20,48 @@ export async function getStaticProps({
 }>): Promise<GetStaticPropsResult<BookProps>> {
 	const id = params?.id as string;
 	const book = params?.book as string;
-	const chapter = params?.chapter as string;
+	const chapterNumber = params?.chapter as string;
+	const version = await getBible(id).catch((e) => {
+		console.log(e);
+		return null;
+	});
+	if (!version) {
+		return {
+			notFound: true,
+		};
+	}
 
-	const { audiobible } = await getBibleBookDetailPageData({
-		versionId: id,
-		bookId: `${id}-${book}`,
-	}).catch(() => ({ audiobible: null }));
+	const bibleBook = version.books.find(
+		({ book_id }) => `${id}/${book}` === book_id
+	);
+	if (!bibleBook) {
+		return {
+			notFound: true,
+		};
+	}
+	const chapters = await getBibleBookChapters(id, bibleBook.testament, book);
 
 	return {
-		props: { audiobible, chapterNumber: chapter },
+		props: {
+			version,
+			book: bibleBook,
+			chapters,
+			chapterNumber,
+		},
 		revalidate: REVALIDATE,
 	};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const languageRoutes = getLanguageRoutes();
-	const data = await getBibleBookDetailPathsData({});
-	const bibles = data?.audiobibles.nodes || [];
-	const books = bibles.map((b) => b.books).flat();
-	const bookIds = books.map((b) => b.id);
-	const pathSets = languageRoutes.map((r) =>
-		bookIds.map((id) => makeBibleBookRoute(r, id))
-	);
-
+	const response = await getBibles();
 	return {
-		paths: pathSets.flat(),
+		paths: (response || [])
+			.map(({ books }) =>
+				books.map(({ book_id }) =>
+					makeBibleBookRoute(LANGUAGES.ENGLISH.base_url, book_id)
+				)
+			)
+			.flat(2),
 		fallback: 'blocking',
 	};
 }

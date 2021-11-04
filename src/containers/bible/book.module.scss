@@ -6,7 +6,7 @@
 	display: block;
 	text-decoration: none;
 	h4 {
-		margin: 0;
+		margin: 2px 0 0;
 		font-size: 16px;
 	}
 	&,
@@ -37,14 +37,25 @@
 
 .main {
 	flex-grow: 1;
+	--recordingAccent: #{$ts-red};
+	--recordingWavesColor: #{$ts-lightTone};
 
 	@media (min-width: $breakpoint-xl) {
 		max-width: 66.6666%;
 	}
 }
 
+.sequenceNav a {
+	background-color: transparent;
+}
+
+.definitions {
+	margin: 64px 0;
+}
+
 .chapters {
 	position: relative;
+	background-color: $ts-bibleB;
 	.item {
 		margin-bottom: 32px;
 	}
@@ -55,15 +66,26 @@
 		border-left: 1px solid $ts-bibleH;
 	}
 }
-.chaptersScroller {
-	@media (min-width: $breakpoint-xl) {
+@media (min-width: $breakpoint-xl) {
+	.chaptersScroller {
 		position: absolute;
 		left: 0;
 		right: 0;
 		top: 0;
 		bottom: 0;
 		overflow: auto;
-		padding: 24px;
+		margin: 24px 0;
+		> * {
+			padding: 0 24px;
+		}
+	}
+	.chapterHeading {
+		position: sticky;
+		top: 0;
+		margin-bottom: 0;
+		padding-bottom: 16px;
+		background: $ts-bibleB;
+		z-index: 1;
 	}
 }
 .chaptersItems {
@@ -90,15 +112,21 @@
 	}
 }
 
-// TODO: remove old
-
-.verse {
-	line-height: 1.4em;
-	& > * {
-		margin-right: 0.2em;
-	}
-	sup {
-		font-weight: bold;
-		line-height: 0;
+.overflowShadow {
+	display: none;
+	@media (min-width: $breakpoint-xl) {
+		display: block;
+		position: absolute;
+		height: 82px;
+		top: 54px;
+		left: 0;
+		right: 0;
+		pointer-events: none;
+		background: linear-gradient(
+			0deg,
+			rgba($ts-bibleB, 0) 0%,
+			rgba($ts-bibleB, 0.75) 49.48%,
+			$ts-bibleB 100%
+		);
 	}
 }

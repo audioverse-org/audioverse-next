@@ -205,6 +205,14 @@
 	border-bottom-right-radius: 16px;
 }
 
+@mixin shadowBackground($color) {
+	background: linear-gradient(
+		0deg,
+		rgba($color, 0) 0%,
+		rgba($color, 0.75) 49.48%,
+		$color 100%
+	);
+}
 .overflowShadow {
 	display: none;
 	@media (min-width: $breakpoint-xl) {
@@ -214,13 +222,18 @@
 		top: 54px;
 		left: 0;
 		right: 0;
-
-		background: linear-gradient(
-			0deg,
-			rgba($ts-smartPlaylistH, 0) 0%,
-			rgba($ts-smartPlaylistH, 0.75) 49.48%,
-			$ts-smartPlaylistH 100%
-		);
 		pointer-events: none;
+		.AUDIOBOOK_TRACK & {
+			@include shadowBackground($ts-bookB);
+		}
+		.MUSIC_TRACK & {
+			@include shadowBackground($ts-songB);
+		}
+		.SERMON & {
+			@include shadowBackground($ts-white);
+		}
+		.STORY & {
+			@include shadowBackground($ts-storyB);
+		}
 	}
 }

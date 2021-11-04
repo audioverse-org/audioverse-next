@@ -25,9 +25,14 @@ import RecordingButtonFavorite from './recordingButtonFavorite';
 export interface PlayerProps {
 	recording: PlayerFragment;
 	backgroundColor: BaseColors;
+	disableUserFeatures?: boolean;
 }
 
-const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
+const Player = ({
+	recording,
+	backgroundColor,
+	disableUserFeatures,
+}: PlayerProps): JSX.Element => {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
@@ -145,16 +150,19 @@ const Player = ({ recording, backgroundColor }: PlayerProps): JSX.Element => {
 							<IconFullscreen />
 						</button>
 					)}
-					<RecordingButtonFavorite
-						id={recording.id}
-						backgroundColor={backgroundColor}
-					/>
+					{!disableUserFeatures && (
+						<RecordingButtonFavorite
+							id={recording.id}
+							backgroundColor={backgroundColor}
+						/>
+					)}
 					<ButtonDownload {...{ recording, backgroundColor }} />
 					<ButtonShareRecording
 						{...{
 							recording,
 							backgroundColor,
 							shareVideo: shouldShowVideoControls,
+							disableEmbedCode: disableUserFeatures,
 						}}
 					/>
 				</div>

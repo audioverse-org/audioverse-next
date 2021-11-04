@@ -1,15 +1,13 @@
-import { when } from 'jest-when';
 import React from 'react';
 
-import {
-	GetVersionDetailPageDataDocument,
-	GetVersionDetailPathDataDocument,
-} from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import * as bibleBrain from '@lib/api/bibleBrain';
+import { renderWithIntl } from '@lib/test/helpers';
 import Version, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]';
+
+jest.mock('@lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps({
@@ -19,22 +17,25 @@ async function renderPage() {
 }
 
 function loadPageData() {
-	when(mockedFetchApi)
-		.calledWith(GetVersionDetailPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			audiobible: {
-				books: [
-					{
-						id: 'ENGESVC-Gen',
-						title: 'Genesis',
-						chapterCount: 50,
-						bible: {
-							abbreviation: 'ESV',
-						},
-					},
-				],
+	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
+		id: 'the_version_id',
+		abbreviation: 'KJV',
+		title: 'the_version_title',
+		sponsor: {
+			title: 'FCBH',
+			url: '',
+		},
+		books: [
+			{
+				book_id: 'ENGESVC/Gen',
+				name: 'Genesis',
+				chapters: [50],
+				bible: {
+					abbreviation: 'ESV',
+				},
 			},
-		});
+		],
+	} as bibleBrain.IBibleVersion);
 }
 
 describe('version detail page', () => {
@@ -42,12 +43,6 @@ describe('version detail page', () => {
 		loadPageData();
 
 		await renderPage();
-
-		expect(mockedFetchApi).toBeCalledWith(GetVersionDetailPageDataDocument, {
-			variables: {
-				id: 'the_version_id',
-			},
-		});
 	});
 
 	it('lists books', async () => {
@@ -59,17 +54,18 @@ describe('version detail page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetVersionDetailPathDataDocument, expect.anything())
-			.mockResolvedValue({
-				audiobibles: {
-					nodes: [
-						{
-							id: 'the_version_id',
-						},
-					],
+		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+			{
+				id: 'the_version_id',
+				abbreviation: 'KJV',
+				title: 'the_version_title',
+				sponsor: {
+					title: 'FCBH',
+					url: '',
 				},
-			});
+				books: [],
+			} as bibleBrain.IBibleVersion,
+		]);
 
 		const { paths } = await getStaticPaths();
 
@@ -87,11 +83,7 @@ describe('version detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetVersionDetailPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				audiobible: null,
-			});
+		jest.spyOn(bibleBrain, 'getBible').mockResolvedValue(null);
 
 		const { getByText } = await renderPage();
 
