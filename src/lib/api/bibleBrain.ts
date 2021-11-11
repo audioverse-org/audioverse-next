@@ -73,7 +73,7 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 		},
 	].map((v) => ({
 		...response.data,
-		books: response.data?.books.map((b) => ({
+		books: (response.data?.books || []).map((b) => ({
 			...b,
 			book_id: `${v.id}/${b.book_id}`,
 			bible: { abbreviation: v.abbreviation },

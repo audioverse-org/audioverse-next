@@ -56,8 +56,8 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const response = await getBibles();
 	return {
 		paths: (response || [])
-			.map(({ books }) =>
-				books.map(({ book_id }) =>
+			.map((version) =>
+				(version.books || []).map(({ book_id }) =>
 					makeBibleBookRoute(LANGUAGES.ENGLISH.base_url, book_id)
 				)
 			)
