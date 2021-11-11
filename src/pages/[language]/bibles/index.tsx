@@ -1,9 +1,8 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 
 import Versions, { VersionsProps } from '@containers/bible/versions';
-import { REVALIDATE } from '@lib/constants';
-import { getBibleVersionsPageData } from '@lib/generated/graphql';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
+import { getBibles } from '@lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { makeBibleListRoute } from '@lib/routes';
 
 export default Versions;
@@ -11,21 +10,22 @@ export default Versions;
 export async function getStaticProps(): Promise<
 	GetStaticPropsResult<VersionsProps>
 > {
-	const response = await getBibleVersionsPageData({});
+	const response = await getBibles().catch((e) => {
+		console.log(e);
+		return null;
+	});
 
 	return {
 		props: {
-			versions: response?.audiobibles.nodes || [],
+			versions: response || [],
 		},
 		revalidate: REVALIDATE,
 	};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-	const baseRoutes = getLanguageRoutes();
-
 	return {
-		paths: baseRoutes.map(makeBibleListRoute),
+		paths: [makeBibleListRoute(LANGUAGES.ENGLISH.base_url)],
 		fallback: false,
 	};
 }

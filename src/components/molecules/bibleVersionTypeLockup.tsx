@@ -27,7 +27,7 @@ export default function BibleVersionTypeLockup({
 			iconColor={BaseColors.SALMON}
 			label={label}
 			textColor={BaseColors.WHITE}
-			{...{ props }}
+			{...props}
 		/>
 	);
 }

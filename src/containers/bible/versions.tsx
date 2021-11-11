@@ -7,16 +7,12 @@ import CardBibleVersion from '@components/molecules/card/bibleVersion';
 import CardMasonry from '@components/molecules/cardMasonry';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Tease from '@components/molecules/tease';
-import { GetBibleVersionsPageDataQuery } from '@lib/generated/graphql';
+import { IBibleVersion } from '@lib/api/bibleBrain';
 
 import styles from './versions.module.scss';
 
-type Versions = NonNullable<
-	GetBibleVersionsPageDataQuery['audiobibles']['nodes']
->;
-
 export interface VersionsProps {
-	versions: Versions;
+	versions: IBibleVersion[];
 }
 
 function Versions({ versions }: VersionsProps): JSX.Element {

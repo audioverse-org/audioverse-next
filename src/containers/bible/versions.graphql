@@ -1,7 +1,0 @@
-query getBibleVersionsPageData {
-	audiobibles {
-		nodes {
-			...cardBibleVersion
-		}
-	}
-}

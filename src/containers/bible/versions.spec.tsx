@@ -1,12 +1,13 @@
-import { when } from 'jest-when';
 import React from 'react';
 
-import { GetBibleVersionsPageDataDocument } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import * as bibleBrain from '@lib/api/bibleBrain';
+import { renderWithIntl } from '@lib/test/helpers';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles';
+
+jest.mock('@lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps()) as any;
@@ -14,29 +15,25 @@ async function renderPage() {
 }
 
 function loadPageData() {
-	when(mockedFetchApi)
-		.calledWith(GetBibleVersionsPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			audiobibles: {
-				nodes: [
-					{
-						title: 'the_version_title',
-						id: 'the_version_id',
-						books: [],
-					},
-				],
+	jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+		{
+			id: 'the_version_id',
+			abbreviation: 'KJV',
+			title: 'the_version_title',
+			sponsor: {
+				title: 'FCBH',
+				url: '',
 			},
-		});
+			books: [],
+		} as bibleBrain.IBibleVersion,
+	]);
 }
 
 describe('versions list', () => {
 	it('renders', async () => {
-		await renderPage();
+		loadPageData();
 
-		expect(mockedFetchApi).toBeCalledWith(
-			GetBibleVersionsPageDataDocument,
-			expect.anything()
-		);
+		await renderPage();
 	});
 
 	it('renders versions', async () => {
@@ -65,6 +62,8 @@ describe('versions list', () => {
 	});
 
 	it('renders 404', async () => {
+		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
+
 		const { getByText } = await renderPage();
 
 		expect(getByText('Sorry!')).toBeInTheDocument();

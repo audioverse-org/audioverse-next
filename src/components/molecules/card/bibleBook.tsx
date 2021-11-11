@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
-import { CardBibleBookFragment } from '@lib/generated/graphql';
+import { IBibleBook } from '@lib/api/bibleBrain';
 import { makeBibleBookRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -15,17 +15,17 @@ import styles from './bibleBook.module.scss';
 import Card from '.';
 
 interface Props {
-	book: CardBibleBookFragment;
+	book: IBibleBook;
 }
 
 export default function CardBibleBook({ book }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const {
-		id,
-		title,
-		chapterCount,
+		book_id: id,
+		name: title,
 		bible: { abbreviation },
 	} = book;
+	const chapterCount = book.chapters.length;
 
 	return (
 		<Card className={styles.card}>

@@ -13,52 +13,50 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import Tease from '@components/molecules/tease';
+import { IBibleVersion } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import { GetVersionDetailPageDataQuery } from '@lib/generated/graphql';
 
 import styles from './version.module.scss';
 
 export interface VersionProps {
-	version: GetVersionDetailPageDataQuery['audiobible'];
+	version: IBibleVersion;
 }
 
 function Version({ version }: Must<VersionProps>): JSX.Element {
-	const { books, copyrightText, sponsor, title } = version;
+	const { books, title, description, sponsor } = version;
 
 	const details: IDefinitionListTerm[] = [];
-	if (copyrightText) {
+	if (description) {
 		details.push({
 			term: (
 				<FormattedMessage
-					id="bibleVersion__copyrightText"
-					defaultMessage="Copyright"
+					id="bibleVersion__description"
+					defaultMessage="Description"
 				/>
 			),
-			definition: <div dangerouslySetInnerHTML={{ __html: copyrightText }} />,
+			definition: <p>{description}</p>,
 		});
 	}
-	if (sponsor) {
-		details.push({
-			term: (
-				<FormattedMessage
-					id="bibleVersion__sponsorLabel"
-					defaultMessage="Sponsor"
-				/>
-			),
-			definition: (
-				<p>
-					<a
-						href={sponsor.url}
-						target="_blank"
-						className="decorated hover--salmon"
-						rel="noreferrer"
-					>
-						{sponsor.name}
-					</a>
-				</p>
-			),
-		});
-	}
+	details.push({
+		term: (
+			<FormattedMessage
+				id="bibleVersion__sponsorLabel"
+				defaultMessage="Sponsor"
+			/>
+		),
+		definition: (
+			<p>
+				<a
+					href={sponsor.url}
+					target="_blank"
+					className="decorated hover--salmon"
+					rel="noreferrer"
+				>
+					{sponsor.title}
+				</a>
+			</p>
+		),
+	});
 
 	return (
 		<Tease className={styles.container}>
@@ -76,7 +74,7 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 			</ContentWidthLimiter>
 			<CardGroup>
 				{books.map((book) => (
-					<CardBibleBook book={book} key={book.id} />
+					<CardBibleBook book={book} key={book.book_id} />
 				))}
 			</CardGroup>
 		</Tease>

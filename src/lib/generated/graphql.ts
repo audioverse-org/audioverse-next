@@ -5579,32 +5579,11 @@ export type ButtonShareRecordingFragment = {
 	shareUrl: string;
 };
 
-export type CardBibleBookFragment = {
-	__typename?: 'BibleBook';
-	id: string | number;
-	title: string;
-	chapterCount: number;
-	bible: { __typename?: 'Bible'; abbreviation: string };
-};
-
 export type CardBibleChapterFragment = {
 	__typename?: 'BibleChapter';
 	id: string | number;
 	title: string;
 	url: string;
-};
-
-export type CardBibleVersionFragment = {
-	__typename?: 'Bible';
-	id: string | number;
-	title: string;
-	books: Array<{
-		__typename?: 'BibleBook';
-		id: string | number;
-		title: string;
-		chapterCount: number;
-		bible: { __typename?: 'Bible'; abbreviation: string };
-	}>;
 };
 
 export type CardCollectionFragment = {
@@ -7244,110 +7223,6 @@ export type GetAudiobookTrackDetailStaticPathsQuery = {
 	audiobookTracks: {
 		__typename?: 'RecordingConnection';
 		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
-	};
-};
-
-export type GetBibleBookDetailPageDataQueryVariables = Exact<{
-	versionId: Scalars['ID'];
-	bookId: Scalars['ID'];
-}>;
-
-export type GetBibleBookDetailPageDataQuery = {
-	__typename?: 'Query';
-	audiobible: {
-		__typename?: 'Bible';
-		id: string | number;
-		title: string;
-		copyrightText: string;
-		book: {
-			__typename?: 'BibleBook';
-			id: string | number;
-			title: string;
-			shareUrl: string;
-			chapters: Array<{
-				__typename?: 'BibleChapter';
-				id: string | number;
-				title: string;
-				url: string;
-				verses: Array<{
-					__typename?: 'BibleVerse';
-					number: number;
-					text: string;
-				}>;
-			}>;
-		};
-		sponsor: { __typename?: 'BibleSponsor'; name: string; url: string };
-	} | null;
-};
-
-export type GetBibleBookDetailPathsDataQueryVariables = Exact<{
-	[key: string]: never;
-}>;
-
-export type GetBibleBookDetailPathsDataQuery = {
-	__typename?: 'Query';
-	audiobibles: {
-		__typename?: 'BibleConnection';
-		nodes: Array<{
-			__typename?: 'Bible';
-			books: Array<{ __typename?: 'BibleBook'; id: string | number }>;
-		}> | null;
-	};
-};
-
-export type GetVersionDetailPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetVersionDetailPageDataQuery = {
-	__typename?: 'Query';
-	audiobible: {
-		__typename?: 'Bible';
-		title: string;
-		copyrightText: string;
-		sponsor: { __typename?: 'BibleSponsor'; name: string; url: string };
-		books: Array<{
-			__typename?: 'BibleBook';
-			id: string | number;
-			title: string;
-			chapterCount: number;
-			bible: { __typename?: 'Bible'; abbreviation: string };
-		}>;
-	} | null;
-};
-
-export type GetVersionDetailPathDataQueryVariables = Exact<{
-	[key: string]: never;
-}>;
-
-export type GetVersionDetailPathDataQuery = {
-	__typename?: 'Query';
-	audiobibles: {
-		__typename?: 'BibleConnection';
-		nodes: Array<{ __typename?: 'Bible'; id: string | number }> | null;
-	};
-};
-
-export type GetBibleVersionsPageDataQueryVariables = Exact<{
-	[key: string]: never;
-}>;
-
-export type GetBibleVersionsPageDataQuery = {
-	__typename?: 'Query';
-	audiobibles: {
-		__typename?: 'BibleConnection';
-		nodes: Array<{
-			__typename?: 'Bible';
-			id: string | number;
-			title: string;
-			books: Array<{
-				__typename?: 'BibleBook';
-				id: string | number;
-				title: string;
-				chapterCount: number;
-				bible: { __typename?: 'Bible'; abbreviation: string };
-			}>;
-		}> | null;
 	};
 };
 
@@ -12070,25 +11945,6 @@ export const CardBibleChapterFragmentDoc = `
   url
 }
     `;
-export const CardBibleBookFragmentDoc = `
-    fragment cardBibleBook on BibleBook {
-  id
-  title
-  chapterCount
-  bible {
-    abbreviation
-  }
-}
-    `;
-export const CardBibleVersionFragmentDoc = `
-    fragment cardBibleVersion on Bible {
-  id
-  title
-  books {
-    ...cardBibleBook
-  }
-}
-    ${CardBibleBookFragmentDoc}`;
 export const PersonLockupFragmentDoc = `
     fragment personLockup on Person {
   name
@@ -13287,152 +13143,6 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
 			GetAudiobookTrackDetailStaticPathsQuery,
 			GetAudiobookTrackDetailStaticPathsQueryVariables
 		>(GetAudiobookTrackDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetBibleBookDetailPageDataDocument = `
-    query getBibleBookDetailPageData($versionId: ID!, $bookId: ID!) {
-  audiobible(id: $versionId) {
-    id
-    title
-    book(id: $bookId) {
-      id
-      title
-      shareUrl
-      chapters {
-        id
-        title
-        url
-        verses {
-          number
-          text
-        }
-      }
-    }
-    sponsor {
-      name
-      url
-    }
-    copyrightText
-  }
-}
-    `;
-export const useGetBibleBookDetailPageDataQuery = <
-	TData = GetBibleBookDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetBibleBookDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetBibleBookDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetBibleBookDetailPageDataQuery, TError, TData>(
-		['getBibleBookDetailPageData', variables],
-		graphqlFetcher<
-			GetBibleBookDetailPageDataQuery,
-			GetBibleBookDetailPageDataQueryVariables
-		>(GetBibleBookDetailPageDataDocument, variables),
-		options
-	);
-export const GetBibleBookDetailPathsDataDocument = `
-    query getBibleBookDetailPathsData {
-  audiobibles {
-    nodes {
-      books {
-        id
-      }
-    }
-  }
-}
-    `;
-export const useGetBibleBookDetailPathsDataQuery = <
-	TData = GetBibleBookDetailPathsDataQuery,
-	TError = unknown
->(
-	variables?: GetBibleBookDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetBibleBookDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetBibleBookDetailPathsDataQuery, TError, TData>(
-		['getBibleBookDetailPathsData', variables],
-		graphqlFetcher<
-			GetBibleBookDetailPathsDataQuery,
-			GetBibleBookDetailPathsDataQueryVariables
-		>(GetBibleBookDetailPathsDataDocument, variables),
-		options
-	);
-export const GetVersionDetailPageDataDocument = `
-    query getVersionDetailPageData($id: ID!) {
-  audiobible(id: $id) {
-    title
-    copyrightText
-    sponsor {
-      name
-      url
-    }
-    books {
-      ...cardBibleBook
-    }
-  }
-}
-    ${CardBibleBookFragmentDoc}`;
-export const useGetVersionDetailPageDataQuery = <
-	TData = GetVersionDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetVersionDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetVersionDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetVersionDetailPageDataQuery, TError, TData>(
-		['getVersionDetailPageData', variables],
-		graphqlFetcher<
-			GetVersionDetailPageDataQuery,
-			GetVersionDetailPageDataQueryVariables
-		>(GetVersionDetailPageDataDocument, variables),
-		options
-	);
-export const GetVersionDetailPathDataDocument = `
-    query getVersionDetailPathData {
-  audiobibles {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-export const useGetVersionDetailPathDataQuery = <
-	TData = GetVersionDetailPathDataQuery,
-	TError = unknown
->(
-	variables?: GetVersionDetailPathDataQueryVariables,
-	options?: UseQueryOptions<GetVersionDetailPathDataQuery, TError, TData>
-) =>
-	useQuery<GetVersionDetailPathDataQuery, TError, TData>(
-		['getVersionDetailPathData', variables],
-		graphqlFetcher<
-			GetVersionDetailPathDataQuery,
-			GetVersionDetailPathDataQueryVariables
-		>(GetVersionDetailPathDataDocument, variables),
-		options
-	);
-export const GetBibleVersionsPageDataDocument = `
-    query getBibleVersionsPageData {
-  audiobibles {
-    nodes {
-      ...cardBibleVersion
-    }
-  }
-}
-    ${CardBibleVersionFragmentDoc}`;
-export const useGetBibleVersionsPageDataQuery = <
-	TData = GetBibleVersionsPageDataQuery,
-	TError = unknown
->(
-	variables?: GetBibleVersionsPageDataQueryVariables,
-	options?: UseQueryOptions<GetBibleVersionsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetBibleVersionsPageDataQuery, TError, TData>(
-		['getBibleVersionsPageData', variables],
-		graphqlFetcher<
-			GetBibleVersionsPageDataQuery,
-			GetBibleVersionsPageDataQueryVariables
-		>(GetBibleVersionsPageDataDocument, variables),
 		options
 	);
 export const GetBlogPageDataDocument = `
@@ -16571,36 +16281,6 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailStaticPathsQueryVariables>
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
-}
-
-export async function getBibleBookDetailPageData<T>(
-	variables: ExactAlt<T, GetBibleBookDetailPageDataQueryVariables>
-): Promise<GetBibleBookDetailPageDataQuery> {
-	return fetchApi(GetBibleBookDetailPageDataDocument, { variables });
-}
-
-export async function getBibleBookDetailPathsData<T>(
-	variables: ExactAlt<T, GetBibleBookDetailPathsDataQueryVariables>
-): Promise<GetBibleBookDetailPathsDataQuery> {
-	return fetchApi(GetBibleBookDetailPathsDataDocument, { variables });
-}
-
-export async function getVersionDetailPageData<T>(
-	variables: ExactAlt<T, GetVersionDetailPageDataQueryVariables>
-): Promise<GetVersionDetailPageDataQuery> {
-	return fetchApi(GetVersionDetailPageDataDocument, { variables });
-}
-
-export async function getVersionDetailPathData<T>(
-	variables: ExactAlt<T, GetVersionDetailPathDataQueryVariables>
-): Promise<GetVersionDetailPathDataQuery> {
-	return fetchApi(GetVersionDetailPathDataDocument, { variables });
-}
-
-export async function getBibleVersionsPageData<T>(
-	variables: ExactAlt<T, GetBibleVersionsPageDataQueryVariables>
-): Promise<GetBibleVersionsPageDataQuery> {
-	return fetchApi(GetBibleVersionsPageDataDocument, { variables });
 }
 
 export async function getBlogPageData<T>(

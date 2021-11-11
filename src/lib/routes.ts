@@ -78,11 +78,7 @@ export const makeBibleBookRoute = (
 	languageRoute: string,
 	bookId: Scalars['ID'],
 	chapterNumber: Scalars['ID'] = 1
-): string =>
-	`/${languageRoute}/bibles/${(bookId + '').replace(
-		'-',
-		'/'
-	)}/${chapterNumber}`;
+): string => `/${languageRoute}/bibles/${bookId + ''}/${chapterNumber}`;
 
 export const makeAudiobookFeedRoute = (
 	languageRoute: string,

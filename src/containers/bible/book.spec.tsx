@@ -1,24 +1,17 @@
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import React from 'react';
 import videojs from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { BookProps } from '@containers/bible/book';
-import {
-	GetBibleBookDetailPageDataDocument,
-	GetBibleBookDetailPathsDataDocument,
-} from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	mockedFetchApi,
-	setPlayerMock,
-} from '@lib/test/helpers';
+import * as bibleBrain from '@lib/api/bibleBrain';
+import { buildStaticRenderer, setPlayerMock } from '@lib/test/helpers';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
 
+jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
 
 const renderPage = buildStaticRenderer(
@@ -38,75 +31,72 @@ const renderPage = buildStaticRenderer(
 );
 
 function loadPageData() {
-	when(mockedFetchApi)
-		.calledWith(GetBibleBookDetailPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			audiobible: {
-				title: 'the_version_title',
-				book: {
-					id: 'the_book_id',
-					title: 'the_book_title',
-					shareUrl: 'the_book_share_url',
-					chapters: [
-						{
-							id: 'the_book_id-1',
-							title: 'the_chapter_title',
-							url: 'the_chapter_url',
-							verses: [
-								{
-									number: 1,
-									text: 'the_verse_text',
-								},
-							],
-						},
-						{
-							id: 'the_book_id-2',
-							title: 'second_chapter_title',
-							url: 'second_chapter_url',
-						},
-					],
+	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
+		id: 'the_version_id',
+		abbreviation: 'KJV',
+		title: 'the_version_title',
+		sponsor: {
+			title: 'the_sponsor_name',
+			url: 'the_sponsor_url',
+		},
+		books: [
+			{
+				book_id: 'the_version_id/the_book_shortname',
+				name: 'Genesis',
+				chapters: [50],
+				bible: {
+					abbreviation: 'ESV',
 				},
-				sponsor: {
-					name: 'the_sponsor_name',
-					url: 'the_sponsor_url',
-				},
-				copyrightText: 'the_sponsor_copyright',
 			},
-		});
+		],
+	} as bibleBrain.IBibleVersion);
+	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
+		{
+			id: 'test',
+			duration: 123,
+			number: 1,
+			title: 'the_chapter_title',
+			url: 'someurl',
+		},
+	] as bibleBrain.IBibleBookChapter[]);
 }
 
 describe('Bible book detail page', () => {
+	let scrollToProto: any;
+	beforeAll(() => {
+		scrollToProto = Element.prototype.scrollTo;
+		Element.prototype.scrollTo = () => void 0;
+	});
+	afterAll(() => {
+		Element.prototype.scrollTo = scrollToProto;
+	});
+
 	beforeEach(() => setPlayerMock());
 
 	it('renders', async () => {
 		loadPageData();
 
 		await renderPage();
-
-		expect(mockedFetchApi).toBeCalledWith(GetBibleBookDetailPageDataDocument, {
-			variables: {
-				versionId: 'the_version_id',
-				bookId: 'the_version_id-the_book_shortname',
-			},
-		});
 	});
 
 	it('generates paths', async () => {
-		when(mockedFetchApi)
-			.calledWith(GetBibleBookDetailPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				audiobibles: {
-					nodes: [
-						{
-							books: [
-								{
-									id: 'ENGESVC-Gen',
-								},
-							],
-						},
-					],
+		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+			{
+				id: 'the_version_id',
+				abbreviation: 'KJV',
+				title: 'the_version_title',
+				sponsor: {
+					title: 'FCBH',
+					url: '',
 				},
-			});
+				books: [
+					{
+						book_id: 'ENGESVC/Gen',
+						chapters: [1],
+					},
+				],
+			} as bibleBrain.IBibleVersion,
+		]);
 
 		const { paths } = await getStaticPaths();
 
@@ -121,64 +111,12 @@ describe('Bible book detail page', () => {
 		expect(getAllByText('the_chapter_title')[0]).toBeInTheDocument();
 	});
 
-	it('displays version title', async () => {
+	it('displays version abbreviation', async () => {
 		loadPageData();
 
 		const { getAllByText } = await renderPage();
 
-		expect(getAllByText('the_version_title')[0]).toBeInTheDocument();
-	});
-
-	it('includes chapter selector', async () => {
-		loadPageData();
-
-		const { getByLabelText } = await renderPage();
-
-		const select = getByLabelText('Chapter') as HTMLSelectElement;
-		const optionLabels = Array.from(select.options).map((opt) => opt.text);
-
-		expect(optionLabels).toContain('the_chapter_title');
-	});
-
-	it('sets option value to chapter id', async () => {
-		loadPageData();
-
-		const { getByLabelText } = await renderPage();
-
-		const select = getByLabelText('Chapter') as HTMLSelectElement;
-		const optionLabels = Array.from(select.options).map((opt) => opt.value);
-
-		expect(optionLabels).toContain('the_book_id-1');
-	});
-
-	it('has download link', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('mp3: the_chapter_title')).toBeInTheDocument();
-	});
-
-	it('updates download link', async () => {
-		loadPageData();
-
-		const { getByLabelText, getByText } = await renderPage();
-
-		const input = getByLabelText('Chapter');
-
-		userEvent.selectOptions(input, 'the_book_id-2');
-
-		expect(getByText('mp3: second_chapter_title')).toBeInTheDocument();
-	});
-
-	it('sets download link href', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		const link = getByText('mp3: the_chapter_title') as HTMLLinkElement;
-
-		expect(link.href).toContain('the_chapter_url');
+		expect(getAllByText('KJV Bible')[0]).toBeInTheDocument();
 	});
 
 	it('displays sponsor name', async () => {
@@ -194,31 +132,10 @@ describe('Bible book detail page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_sponsor_url')).toBeInTheDocument();
-	});
-
-	it('displays copyright text', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_sponsor_copyright')).toBeInTheDocument();
-	});
-
-	it('displays verse number', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toBeInTheDocument();
-	});
-
-	it('displays verse text', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_verse_text')).toBeInTheDocument();
+		expect(getByText('the_sponsor_name')).toHaveAttribute(
+			'href',
+			'the_sponsor_url'
+		);
 	});
 
 	it('includes player', async () => {
@@ -229,13 +146,5 @@ describe('Bible book detail page', () => {
 		userEvent.click(getAllByLabelText('play')[0]);
 
 		expect(videojs).toBeCalled();
-	});
-
-	it('includes share url', async () => {
-		loadPageData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('the_book_share_url')).toBeInTheDocument();
 	});
 });

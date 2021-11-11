@@ -266,28 +266,9 @@ describe('localization usage', () => {
 
 		const screen = await renderWithQueryProvider(
 			<Book
-				audiobible={{
-					id: 'z',
-					title: 'z',
-					book: {
-						id: 'z',
-						title: 'z',
-						shareUrl: 'z',
-						chapters: [
-							{
-								id: 'z',
-								title: 'z',
-								url: '',
-								verses: [],
-							},
-						],
-					},
-					sponsor: {
-						name: 'z',
-						url: 'z',
-					},
-					copyrightText: 'z',
-				}}
+				version={{} as any}
+				book={{} as any}
+				chapters={{} as any}
 				chapterNumber="1"
 			/>
 		);

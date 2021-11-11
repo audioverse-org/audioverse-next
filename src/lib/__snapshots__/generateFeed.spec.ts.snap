@@ -10,7 +10,7 @@ exports[`generateFeed matches handles no recordings 1`] = `
         <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>AudioVerse</generator>
-        <copyright>This feed Copyright 2021 AudioVerse.  Individual recordings are copyrighted by their respective owners.</copyright>
+        <copyright>This feed Copyright 2021 AudioVerse. Individual recordings are copyrighted by their respective owners.</copyright>
         <language>en</language>
         <itunes:explicit>no</itunes:explicit>
         <itunes:author>AudioVerse</itunes:author>
@@ -35,7 +35,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
         <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>AudioVerse</generator>
-        <copyright>This feed Copyright 2021 AudioVerse.  Individual recordings are copyrighted by their respective owners.</copyright>
+        <copyright>This feed Copyright 2021 AudioVerse. Individual recordings are copyrighted by their respective owners.</copyright>
         <itunes:subtitle>GYC 2019: By Many Or By Few</itunes:subtitle>
         <language>en</language>
         <itunes:explicit>no</itunes:explicit>
@@ -711,7 +711,7 @@ exports[`generateFeed matches prior story season feed 1`] = `
         <lastBuildDate>Mon, 13 Sep 2021 12:34:56 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>AudioVerse</generator>
-        <copyright>This feed Copyright 2021 AudioVerse.  Individual recordings are copyrighted by their respective owners.</copyright>
+        <copyright>This feed Copyright 2021 AudioVerse. Individual recordings are copyrighted by their respective owners.</copyright>
         <itunes:subtitle>Acts of the Apostles, by , narrated by Uncle Dan, Aunt Sue</itunes:subtitle>
         <language>en</language>
         <itunes:explicit>no</itunes:explicit>

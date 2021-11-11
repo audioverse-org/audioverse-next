@@ -41,8 +41,7 @@ export default function usePlaybackSession(
 	const prefersAudio = context.getPrefersAudio();
 	const supportsFullscreen = context.supportsFullscreen();
 	const speed = context.getSpeed();
-	// TODO: return 0 if !isLoaded
-	const time = context.getTime();
+	const time = isLoaded ? context.getTime() : 0;
 	// TODO: return duration according to current media file
 	const duration = isLoaded ? context.getDuration() : recording?.duration || 0;
 	const [, setSpeedFingerprint] = useState<number>(speed);
