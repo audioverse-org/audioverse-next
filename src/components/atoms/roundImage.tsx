@@ -25,6 +25,7 @@ export default function RoundImage({
 			width={size}
 			height={size}
 			className={clsx(styles.base, small && styles.small, className)}
+			unoptimized
 		/>
 	);
 }

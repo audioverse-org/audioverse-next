@@ -3,7 +3,8 @@ import { ImageProps } from 'next/image';
 import React from 'react';
 
 function Image(props: ImageProps): JSX.Element {
-	const { width, height, className, ...rest } = props;
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { width, height, className, unoptimized, ...rest } = props;
 	const atts = _.transform(rest, (result: any, val, key) => {
 		result[key.toLowerCase()] = val;
 	});
