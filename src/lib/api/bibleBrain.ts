@@ -73,7 +73,7 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 		},
 	].map((v) => ({
 		...response.data,
-		books: response.data.books.map((b) => ({
+		books: response.data?.books.map((b) => ({
 			...b,
 			book_id: `${v.id}/${b.book_id}`,
 			bible: { abbreviation: v.abbreviation },
@@ -108,7 +108,7 @@ export async function getBibleBookChapters(
 	}
 
 	return sortBy(
-		response.data.filter(({ book_id }) => book_id === bookId),
+		response.data?.filter(({ book_id }) => book_id === bookId),
 		['chapter_start']
 	).map(({ book_id, book_name, chapter_start, path, duration }) => ({
 		id: `${book_id}/${chapter_start}`,
