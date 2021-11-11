@@ -11,6 +11,24 @@
       "value": "Unfavorite"
     }
   ],
+  "accountNav__audiopreferences": [
+    {
+      "type": 0,
+      "value": "Preferences"
+    }
+  ],
+  "accountNav__profile": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "accountPlaylists__buttonLabelSubmit": [
+    {
+      "type": 0,
+      "value": "Add Playlist"
+    }
+  ],
   "accountPlaylists__errorMissingTitle": [
     {
       "type": 0,
@@ -47,98 +65,124 @@
       "value": "public"
     }
   ],
+  "andGlobalModals__confirmRemoveFavorite-confirm": [
+    {
+      "type": 0,
+      "value": "Remove item"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-copy": [
+    {
+      "type": 0,
+      "value": "Do you want to remove this item from your library?"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-heading": [
+    {
+      "type": 0,
+      "value": "Are you sure?"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-keep": [
+    {
+      "type": 0,
+      "value": "Keep item"
+    }
+  ],
+  "andGlobalModals__continueAsGuest": [
+    {
+      "type": 0,
+      "value": "Continue as guest"
+    }
+  ],
+  "andGlobalModals__copy": [
+    {
+      "type": 0,
+      "value": "You can bookmark audio to access later on your account. Other features include adding audio to your library."
+    }
+  ],
+  "andGlobalModals__createAccount": [
+    {
+      "type": 0,
+      "value": "Create Account"
+    }
+  ],
+  "andGlobalModals__heading": [
+    {
+      "type": 0,
+      "value": "Member Only Feature"
+    }
+  ],
+  "andGlobalModals__logIn": [
+    {
+      "type": 0,
+      "value": "Log in"
+    }
+  ],
+  "andNavigation__donate": [
+    {
+      "type": 0,
+      "value": "Donate"
+    }
+  ],
   "atom-progressBar__label": [
     {
       "type": 0,
       "value": "progress"
     }
   ],
-  "audiobook-feed-title": [
-    {
-      "type": 1,
-      "value": "title"
-    },
+  "audiobookList__heading": [
     {
       "type": 0,
-      "value": " : AudioVerse audiobook"
+      "value": "All Audiobooks"
     }
   ],
-  "audiobookDetailPage__aboutTab": [
+  "backButton__back": [
     {
       "type": 0,
-      "value": "About"
+      "value": "Back"
     }
   ],
-  "audiobookDetailPage__nowPlaying": [
+  "bibleBook__chapterListTitle": [
     {
       "type": 0,
-      "value": "Now playing:"
+      "value": "Other Chapters in Book"
     }
   ],
-  "audiobookDetailPage__shareTabTitle": [
+  "bibleVersionTypeLockup__type": [
     {
       "type": 0,
-      "value": "Share"
+      "value": "Bible Version"
     }
   ],
-  "audiobookDetailPage__shortUrlLabel": [
+  "bibleVersion__booksLabel": [
     {
       "type": 0,
-      "value": "Short URL"
+      "value": "66 Books"
     }
   ],
-  "audiobookListPage__title": [
+  "bibleVersion__description": [
     {
       "type": 0,
-      "value": "Audiobooks"
+      "value": "Description"
     }
   ],
-  "bibleBook__chapterSelectLabel": [
+  "bibleVersion__sponsorLabel": [
     {
       "type": 0,
-      "value": "Chapter"
+      "value": "Sponsor"
     }
   ],
-  "bibleBook__copyrightPrefix": [
+  "bibleVersions__heading": [
     {
       "type": 0,
-      "value": "Copyright ⓒ"
+      "value": "Bible"
     }
   ],
-  "bibleBook__mp3Label": [
+  "bibleVersions__intro": [
     {
       "type": 0,
-      "value": "mp3:"
-    }
-  ],
-  "bibleBook__shortUrlLabel": [
-    {
-      "type": 0,
-      "value": "Short URL"
-    }
-  ],
-  "bibleBook__tabAbout": [
-    {
-      "type": 0,
-      "value": "About"
-    }
-  ],
-  "bibleBook__tabDownloads": [
-    {
-      "type": 0,
-      "value": "Downloads"
-    }
-  ],
-  "bibleBook__tabShare": [
-    {
-      "type": 0,
-      "value": "Share"
-    }
-  ],
-  "bibleBook__tabTranscript": [
-    {
-      "type": 0,
-      "value": "Transcript"
+      "value": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
     }
   ],
   "blogDetailPage__moreBlogPosts": [
@@ -173,10 +217,40 @@
       "value": "Book"
     }
   ],
-  "cardCollection_hatTitle": [
+  "cardBibleBook__chaptersLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
     {
       "type": 0,
-      "value": "Conference"
+      "value": " chapters"
+    }
+  ],
+  "cardBibleBook__typeLabel": [
+    {
+      "type": 1,
+      "value": "abbreviation"
+    },
+    {
+      "type": 0,
+      "value": " Bible"
+    }
+  ],
+  "cardBibleVersion__booksLabel": [
+    {
+      "type": 0,
+      "value": "66 Books"
+    }
+  ],
+  "cardCollection__teachingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " teachings"
     }
   ],
   "cardCollection_sequenceLabel": [
@@ -189,10 +263,20 @@
       "value": " series"
     }
   ],
-  "cardPerson_hatTitle": [
+  "cardPerson_teachingsLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
     {
       "type": 0,
-      "value": "Speaker"
+      "value": " teachings"
+    }
+  ],
+  "cardPlaylist__typeLabel": [
+    {
+      "type": 0,
+      "value": "Playlist"
     }
   ],
   "cardPost__readingDuration": [
@@ -205,10 +289,16 @@
       "value": " read"
     }
   ],
-  "cardSequence_hatTitle": [
+  "cardSequence_audiobookType": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Book"
+    }
+  ],
+  "cardSequence_scriptureSongsType": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
     }
   ],
   "cardSequence_sequenceLabel": [
@@ -221,10 +311,22 @@
       "value": " parts"
     }
   ],
+  "cardSequence_seriesType": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "cardSequence_storiesType": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
   "cardSermon_sequenceLabel": [
     {
       "type": 0,
-      "value": "series"
+      "value": "Series"
     }
   ],
   "cardSlider__nextPageLabel": [
@@ -251,10 +353,52 @@
       "value": "Scripture Songs"
     }
   ],
+  "cardSponsor__collectionCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Conferences"
+    }
+  ],
+  "cardSponsor__recordingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Teachings"
+    }
+  ],
+  "cardSponsor__sequencesCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Series"
+    }
+  ],
+  "cardSponsor_hatTitle": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
   "cardStory_sequenceLabel": [
     {
       "type": 0,
       "value": "Stories"
+    }
+  ],
+  "ccollectionTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Individual Teachings"
     }
   ],
   "collectionDetail__descriptionLabel": [
@@ -309,7 +453,41 @@
       "value": "Sponsor"
     }
   ],
-  "collectionDetail__type": [
+  "collectionDetail__teachingsAllLabel": [
+    {
+      "type": 0,
+      "value": "See All Individual Teachings"
+    }
+  ],
+  "collectionDetail__teachingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Teachings"
+    }
+  ],
+  "collectionDetail__teachingsLabel": [
+    {
+      "type": 0,
+      "value": "Individual Teachings"
+    }
+  ],
+  "collectionPresenterssDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Speakers"
+    }
+  ],
+  "collectionSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Series"
+    }
+  ],
+  "collectionTypeLockup_type": [
     {
       "type": 0,
       "value": "Conference"
@@ -321,16 +499,148 @@
       "value": "Conferences"
     }
   ],
+  "container-sermonList__filterLabelAll": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "container-sermonList__filterLabelAudio": [
+    {
+      "type": 0,
+      "value": "Audio only"
+    }
+  ],
+  "container-sermonList__filterLabelVideo": [
+    {
+      "type": 0,
+      "value": "Video"
+    }
+  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
       "value": "Portions of this production are covered under the following license terms:"
     }
   ],
-  "discover_recentHeading": [
+  "discoverCollections_audiobooksHeading": [
     {
       "type": 0,
-      "value": "Recent Content"
+      "value": "Audiobooks"
+    }
+  ],
+  "discoverCollections_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "discoverCollections_featuredCollectionHeading": [
+    {
+      "type": 0,
+      "value": "Featured Collection"
+    }
+  ],
+  "discoverCollections_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "discoverCollections_seeAll": [
+    {
+      "type": 0,
+      "value": "See All"
+    }
+  ],
+  "discoverCollections_seriesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "discoverCollections_speakersHeading": [
+    {
+      "type": 0,
+      "value": "Speakers"
+    }
+  ],
+  "discoverCollections_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "discoverCollections_storiesHeading": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "discover__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Recent Conferences"
+    }
+  ],
+  "discover__recentTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Recent Teachings"
+    }
+  ],
+  "discover__storiesHeading": [
+    {
+      "type": 0,
+      "value": "Recent Stories"
+    }
+  ],
+  "discover__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Recent Stories"
+    }
+  ],
+  "discover__trendingTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Trending Teachings"
+    }
+  ],
+  "discover_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Recent Conferences"
+    }
+  ],
+  "discover_recentTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Recent Teachings"
+    }
+  ],
+  "discover_trendingTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Trending Teachings"
+    }
+  ],
+  "downloadAppButton__android": [
+    {
+      "type": 0,
+      "value": "Android App"
+    }
+  ],
+  "downloadAppButton__ios": [
+    {
+      "type": 0,
+      "value": "iOS App"
+    }
+  ],
+  "downloadAppButton__label": [
+    {
+      "type": 0,
+      "value": "Download App"
     }
   ],
   "duration__hours": [
@@ -371,150 +681,48 @@
       "value": "m"
     }
   ],
-  "feed-title": [
+  "generateFeed__audio": [
+    {
+      "type": 0,
+      "value": "Audio"
+    }
+  ],
+  "generateFeed__subtitle": [
     {
       "type": 1,
-      "value": "identifier"
+      "value": "container"
     },
     {
       "type": 0,
-      "value": " | AudioVerse "
+      "value": " "
     },
     {
       "type": 1,
-      "value": "lang"
-    }
-  ],
-  "footer__NavItemAboutUs": [
+      "value": "format"
+    },
     {
       "type": 0,
-      "value": "About Us"
-    }
-  ],
-  "footer__NavItemAudioVerseStore": [
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "bitrate"
+    },
     {
       "type": 0,
-      "value": "AudioVerse Store"
+      "value": " kbps"
     }
   ],
-  "footer__NavItemBibles": [
+  "generateFeed__video": [
     {
       "type": 0,
-      "value": "Bibles"
+      "value": "Video"
     }
   ],
-  "footer__NavItemBlog": [
+  "generatedFeed__copyright": [
     {
       "type": 0,
-      "value": "Blog"
-    }
-  ],
-  "footer__NavItemBooks": [
-    {
-      "type": 0,
-      "value": "Books"
-    }
-  ],
-  "footer__NavItemConferences": [
-    {
-      "type": 0,
-      "value": "Conferences"
-    }
-  ],
-  "footer__NavItemContactUs": [
-    {
-      "type": 0,
-      "value": "Contact Us"
-    }
-  ],
-  "footer__NavItemFAQ": [
-    {
-      "type": 0,
-      "value": "FAQ"
-    }
-  ],
-  "footer__NavItemJourneysUnscripted": [
-    {
-      "type": 0,
-      "value": "Journeys Unscripted"
-    }
-  ],
-  "footer__NavItemMeetTheTeam": [
-    {
-      "type": 0,
-      "value": "Meet the Team"
-    }
-  ],
-  "footer__NavItemPlaylists": [
-    {
-      "type": 0,
-      "value": "Playlists"
-    }
-  ],
-  "footer__NavItemPresentations": [
-    {
-      "type": 0,
-      "value": "Presentations"
-    }
-  ],
-  "footer__NavItemPresenters": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
-  "footer__NavItemScriptureSongs": [
-    {
-      "type": 0,
-      "value": "Scripture Songs"
-    }
-  ],
-  "footer__NavItemSeries": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
-  "footer__NavItemSpiritOfAudioVerse": [
-    {
-      "type": 0,
-      "value": "Spirit of AudioVerse"
-    }
-  ],
-  "footer__NavItemSponsors": [
-    {
-      "type": 0,
-      "value": "Sponsors"
-    }
-  ],
-  "footer__NavItemStories": [
-    {
-      "type": 0,
-      "value": "Stories"
-    }
-  ],
-  "footer__NavItemTags": [
-    {
-      "type": 0,
-      "value": "Tags"
-    }
-  ],
-  "footer__NavItemTestimonials": [
-    {
-      "type": 0,
-      "value": "Testimonials"
-    }
-  ],
-  "footer__androidAppImageAlt": [
-    {
-      "type": 0,
-      "value": "Android App"
-    }
-  ],
-  "footer__copyright": [
-    {
-      "type": 0,
-      "value": "AudioVerse © "
+      "value": "This feed Copyright "
     },
     {
       "type": 1,
@@ -522,43 +730,7 @@
     },
     {
       "type": 0,
-      "value": " All Rights Reserved."
-    }
-  ],
-  "footer__designedBy": [
-    {
-      "type": 0,
-      "value": "Designed by"
-    }
-  ],
-  "footer__iosAppImageAlt": [
-    {
-      "type": 0,
-      "value": "iOS App"
-    }
-  ],
-  "footer__legalInfoLink": [
-    {
-      "type": 0,
-      "value": "Legal Info"
-    }
-  ],
-  "footer__privacyPolicyLink": [
-    {
-      "type": 0,
-      "value": "Privacy Policy"
-    }
-  ],
-  "footer__termsLink": [
-    {
-      "type": 0,
-      "value": "Terms of Use"
-    }
-  ],
-  "header__donateButtonLabel": [
-    {
-      "type": 0,
-      "value": "Donate"
+      "value": " AudioVerse. Individual recordings are copyrighted by their respective owners."
     }
   ],
   "header__navItemBlog": [
@@ -591,10 +763,46 @@
       "value": "More"
     }
   ],
-  "header__navItemSettings": [
+  "header__navItemStory": [
     {
       "type": 0,
-      "value": "Settings"
+      "value": "Our Story"
+    }
+  ],
+  "header__navItemStory-donate": [
+    {
+      "type": 0,
+      "value": "Donate"
+    }
+  ],
+  "header__navItemStory-purpose": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "header__navItemStory-spiritOfAudioVerse": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "header__navItemStory-team": [
+    {
+      "type": 0,
+      "value": "The Team"
+    }
+  ],
+  "header__navItemStory-testimonials": [
+    {
+      "type": 0,
+      "value": "Testimonials"
+    }
+  ],
+  "header__navItemUser": [
+    {
+      "type": 0,
+      "value": "User Settings"
     }
   ],
   "header__naveItemBible": [
@@ -603,16 +811,636 @@
       "value": "Bible"
     }
   ],
+  "header__naveItemCollections-all": [
+    {
+      "type": 0,
+      "value": "All Collections"
+    }
+  ],
+  "header__naveItemCollections-book": [
+    {
+      "type": 0,
+      "value": "Book"
+    }
+  ],
+  "header__naveItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "Conference"
+    }
+  ],
+  "header__naveItemCollections-series": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "header__naveItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "header__naveItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "Speaker"
+    }
+  ],
+  "header__naveItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
+  "header__naveItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "header__naveItemMore-legal": [
+    {
+      "type": 0,
+      "value": "Legal"
+    }
+  ],
+  "header__naveItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "header__naveItemMore-terms": [
+    {
+      "type": 0,
+      "value": "Terms of Use"
+    }
+  ],
+  "header__naveItemUser-logout": [
+    {
+      "type": 0,
+      "value": "Log Out"
+    }
+  ],
+  "header__naveItemUser-profile": [
+    {
+      "type": 0,
+      "value": "Profile"
+    }
+  ],
+  "homePage__addToLibraryPlaceholder": [
+    {
+      "type": 0,
+      "value": "Add to Library"
+    }
+  ],
+  "homePage__createAccountSectionCTA": [
+    {
+      "type": 0,
+      "value": "Sign up now"
+    }
+  ],
+  "homePage__createAccountSectionText": [
+    {
+      "type": 0,
+      "value": "Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+    }
+  ],
+  "homePage__createAccountSectionTitle": [
+    {
+      "type": 0,
+      "value": "Create an account"
+    }
+  ],
+  "homePage__downloadAppSectionText": [
+    {
+      "type": 0,
+      "value": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data."
+    }
+  ],
+  "homePage__downloadAppSectionTitle": [
+    {
+      "type": 0,
+      "value": "Download the App"
+    }
+  ],
+  "homePage__downloadNowButtonLabel": [
+    {
+      "type": 0,
+      "value": "Download Now"
+    }
+  ],
+  "homePage__downloadQueuePlaceholder": [
+    {
+      "type": 0,
+      "value": "Download Queue"
+    }
+  ],
+  "homePage__emailSignupButton": [
+    {
+      "type": 0,
+      "value": "Subscribe"
+    }
+  ],
+  "homePage__followFunctionalityPlaceholder": [
+    {
+      "type": 0,
+      "value": "Follow Functionality"
+    }
+  ],
+  "homePage__footerDonateLink": [
+    {
+      "type": 0,
+      "value": "Donate"
+    }
+  ],
+  "homePage__footerDownloadAppButton": [
+    {
+      "type": 0,
+      "value": "Download app"
+    }
+  ],
+  "homePage__footerFacebookLink": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "homePage__footerInstagramLink": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "homePage__footerLinksTitle": [
+    {
+      "type": 0,
+      "value": "Links"
+    }
+  ],
+  "homePage__footerNewsletterSignup": [
+    {
+      "type": 0,
+      "value": "Sign up for newsletter"
+    }
+  ],
+  "homePage__footerSocialTitle": [
+    {
+      "type": 0,
+      "value": "Social"
+    }
+  ],
+  "homePage__footerTwitterLink": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "homePage__joinAudioVerseButtonLabel": [
+    {
+      "type": 0,
+      "value": "Join AudioVerse"
+    }
+  ],
+  "homePage__newsletterSectionText": [
+    {
+      "type": 0,
+      "value": "Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
+    }
+  ],
+  "homePage__newsletterSectionTitle": [
+    {
+      "type": 0,
+      "value": "Subscribe to Updates"
+    }
+  ],
+  "homePage__recentContentSectionText": [
+    {
+      "type": 0,
+      "value": "Explore a select few of our audio pieces. Then when you’re ready, "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "create an account"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " to view even more."
+    }
+  ],
+  "homePage__recentContentSectionTitle": [
+    {
+      "type": 0,
+      "value": "Recent content"
+    }
+  ],
+  "homePage__recentPostsButtonLabel": [
+    {
+      "type": 0,
+      "value": "View all blog posts"
+    }
+  ],
+  "homePage__recentPostsSectionText": [
+    {
+      "type": 0,
+      "value": "Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month."
+    }
+  ],
+  "homePage__recentPostsSectionTitle": [
+    {
+      "type": 0,
+      "value": "Recent blog posts"
+    }
+  ],
+  "homePage__soundDoctrineText": [
+    {
+      "type": 0,
+      "value": "AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
+    }
+  ],
+  "homePage__soundDoctrineTitle": [
+    {
+      "type": 0,
+      "value": "Sound Doctrine"
+    }
+  ],
+  "homePage__supportSectionCTA": [
+    {
+      "type": 0,
+      "value": "Make a donation"
+    }
+  ],
+  "homePage__supportSectionImagePlaceholder": [
+    {
+      "type": 0,
+      "value": "image"
+    }
+  ],
+  "homePage__supportSectionText": [
+    {
+      "type": 0,
+      "value": "AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
+    }
+  ],
+  "homePage__supportSectionTitle": [
+    {
+      "type": 0,
+      "value": "Support free audio"
+    }
+  ],
+  "homePage__testimoniesSectionText": [
+    {
+      "type": 0,
+      "value": "Hear from some of the people who use AudioVerse."
+    }
+  ],
   "home__testimoniesTitle": [
     {
       "type": 0,
       "value": "Testimonies"
     }
   ],
+  "languageAlternativesAlert__dismiss": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
+  "languageAlternativesAlert__message": [
+    {
+      "type": 0,
+      "value": "Thanks to our supporters and international partners, AudioVerse exists in many language sites available. Change your language here or in the menu."
+    }
+  ],
+  "libraryCollections__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "Collections"
+    }
+  ],
+  "libraryCollections__dismiss": [
+    {
+      "type": 0,
+      "value": "Dismiss"
+    }
+  ],
+  "libraryCollections__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Bookmark items or listen to audio from the Discover page."
+    }
+  ],
+  "libraryCollections__emptyHeading": [
+    {
+      "type": 0,
+      "value": "You don’t have any collections items saved yet"
+    }
+  ],
+  "libraryCollections__personsHeading": [
+    {
+      "type": 0,
+      "value": "Speakers"
+    }
+  ],
+  "libraryCollections__playlistsAlert": [
+    {
+      "type": 0,
+      "value": "At the moment, we’re reimagining the playlist experience. You can still manage your playlists using the mobile app."
+    }
+  ],
+  "libraryCollections__playlistsHeading": [
+    {
+      "type": 0,
+      "value": "Playlists"
+    }
+  ],
+  "libraryCollections__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "libraryError__cta": [
+    {
+      "type": 0,
+      "value": "Go to Discover"
+    }
+  ],
+  "libraryHistory__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Find something to listen to on the Discover page."
+    }
+  ],
+  "libraryHistory__emptyHeading": [
+    {
+      "type": 0,
+      "value": "You haven’t listened to any items yet"
+    }
+  ],
+  "libraryHistory__loadMore": [
+    {
+      "type": 0,
+      "value": "Load more"
+    }
+  ],
+  "libraryNav__all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "libraryNav__collections": [
+    {
+      "type": 0,
+      "value": "Collections"
+    }
+  ],
+  "libraryNav__filter": [
+    {
+      "type": 0,
+      "value": "Filter"
+    }
+  ],
+  "libraryNav__finished": [
+    {
+      "type": 0,
+      "value": "Finished"
+    }
+  ],
+  "libraryNav__history": [
+    {
+      "type": 0,
+      "value": "History"
+    }
+  ],
+  "libraryNav__sortAtoZ": [
+    {
+      "type": 0,
+      "value": "A to Z"
+    }
+  ],
+  "libraryNav__sortNewest": [
+    {
+      "type": 0,
+      "value": "Newest to Oldest"
+    }
+  ],
+  "libraryNav__sortOldest": [
+    {
+      "type": 0,
+      "value": "Oldest to Newest"
+    }
+  ],
+  "libraryNav__sortZtoA": [
+    {
+      "type": 0,
+      "value": "Z to A"
+    }
+  ],
+  "libraryNav__started": [
+    {
+      "type": 0,
+      "value": "Started"
+    }
+  ],
+  "libraryNav__unstarted": [
+    {
+      "type": 0,
+      "value": "Not started"
+    }
+  ],
+  "libraryPlaybackStatus__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Find something to listen to on the Discover page."
+    }
+  ],
+  "libraryPlaybackStatus__finishedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "You haven’t finished any items yet"
+    }
+  ],
+  "libraryPlaybackStatus__startedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "You haven’t started any items yet"
+    }
+  ],
+  "libraryPlaybackStatus__unstartedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "You don’t have any items saved yet"
+    }
+  ],
+  "library__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "Collections"
+    }
+  ],
+  "library__collectionsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Collections"
+    }
+  ],
+  "library__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Bookmark items or listen to items from the Discover page."
+    }
+  ],
+  "library__emptyHeading": [
+    {
+      "type": 0,
+      "value": "You don’t have any items saved yet"
+    }
+  ],
+  "library__finishedHeading": [
+    {
+      "type": 0,
+      "value": "Finished"
+    }
+  ],
+  "library__finishedSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Finished"
+    }
+  ],
+  "library__historyHeading": [
+    {
+      "type": 0,
+      "value": "History"
+    }
+  ],
+  "library__historySeeAll": [
+    {
+      "type": 0,
+      "value": "See All History"
+    }
+  ],
+  "library__membersOnlyCopy": [
+    {
+      "type": 0,
+      "value": "Login or create an account to access the Library features."
+    }
+  ],
+  "library__membersOnlyCta": [
+    {
+      "type": 0,
+      "value": "Create account or Login"
+    }
+  ],
+  "library__membersOnlyHeading": [
+    {
+      "type": 0,
+      "value": "Member-only feature"
+    }
+  ],
+  "library__startedHeading": [
+    {
+      "type": 0,
+      "value": "Started"
+    }
+  ],
+  "library__startedSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Started"
+    }
+  ],
+  "library__unstartedHeading": [
+    {
+      "type": 0,
+      "value": "Not Started"
+    }
+  ],
+  "loadingCards-ariaLabel": [
+    {
+      "type": 0,
+      "value": "Loading…"
+    }
+  ],
+  "loginForm-reset__doneButton": [
+    {
+      "type": 0,
+      "value": "Done"
+    }
+  ],
+  "loginForm-reset__emailLabel": [
+    {
+      "type": 0,
+      "value": "Email address"
+    }
+  ],
+  "loginForm-reset__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "Email address"
+    }
+  ],
+  "loginForm-reset__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Enter the email address associated with your account and we’ll send you a password reset link."
+    }
+  ],
+  "loginForm-reset__modalParagraphSent": [
+    {
+      "type": 0,
+      "value": "Reset link sent. Check your email and use the link to reset your password."
+    }
+  ],
+  "loginForm-reset__modalTitle": [
+    {
+      "type": 0,
+      "value": "Reset password"
+    }
+  ],
+  "loginForm-reset__sendLinkButton": [
+    {
+      "type": 0,
+      "value": "Send reset link"
+    }
+  ],
+  "loginForm__emailLabel": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
   "loginForm__emailPlaceholder": [
     {
       "type": 0,
       "value": "jane@example.com"
+    }
+  ],
+  "loginForm__forgotPasswordButton": [
+    {
+      "type": 0,
+      "value": "Forgot password?"
+    }
+  ],
+  "loginForm__loginButton": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "loginForm__passwordLabel": [
+    {
+      "type": 0,
+      "value": "Password"
     }
   ],
   "loginForm__passwordPlaceholder": [
@@ -633,10 +1461,22 @@
       "value": "Check your email for a password reset link"
     }
   ],
-  "logout__successMessage": [
+  "loginForm__signup": [
     {
       "type": 0,
-      "value": "Logged out"
+      "value": "Sign up"
+    }
+  ],
+  "loginForm__signupIntro": [
+    {
+      "type": 0,
+      "value": "Don’t have an account?"
+    }
+  ],
+  "logout__inProcess": [
+    {
+      "type": 0,
+      "value": "Logging out..."
     }
   ],
   "molecule-buttonDownload__buttonLabel": [
@@ -645,34 +1485,158 @@
       "value": "downloads"
     }
   ],
-  "molecule-buttonShareRecording__buttonLabel": [
+  "molecule-buttonDownload__menuAudioHeading": [
+    {
+      "type": 0,
+      "value": "Audio Downloads"
+    }
+  ],
+  "molecule-buttonDownload__menuVideoHeading": [
+    {
+      "type": 0,
+      "value": "Video Downloads"
+    }
+  ],
+  "molecule-buttonGuest__feature1": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor"
+    }
+  ],
+  "molecule-buttonGuest__feature2": [
+    {
+      "type": 0,
+      "value": "Et exictur purim multatim"
+    }
+  ],
+  "molecule-buttonGuest__feature3": [
+    {
+      "type": 0,
+      "value": "Dulipscum erudis fesin"
+    }
+  ],
+  "molecule-buttonGuest__label": [
+    {
+      "type": 0,
+      "value": "Continue as guest"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelCreateAccount": [
+    {
+      "type": 0,
+      "value": "Create account"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelGuest": [
+    {
+      "type": 0,
+      "value": "Continue as guest"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelLogIn": [
+    {
+      "type": 0,
+      "value": "Log in"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph": [
+    {
+      "type": 0,
+      "value": "You'll be missing out on some key features without an account, like:"
+    }
+  ],
+  "molecule-buttonGuest__modalTitle": [
+    {
+      "type": 0,
+      "value": "Continue as guest?"
+    }
+  ],
+  "molecule-buttonShareRecording__audioEmbedLabel": [
+    {
+      "type": 0,
+      "value": "Audio Embed Code"
+    }
+  ],
+  "molecule-buttonShareRecording__videoEmbedLabel": [
+    {
+      "type": 0,
+      "value": "Video Embed Code"
+    }
+  ],
+  "molecule-buttonShare__buttonLabel": [
     {
       "type": 0,
       "value": "share"
     }
   ],
-  "molecule-buttonShareRecording__embedCodeLabel": [
+  "molecule-buttonShare__copyLink": [
     {
       "type": 0,
-      "value": "Embed Code"
+      "value": "Copy Link"
     }
   ],
-  "molecule-buttonShareRecording__shareTitle": [
+  "molecule-buttonShare__copyRSSLink": [
+    {
+      "type": 0,
+      "value": "Copy RSS Link"
+    }
+  ],
+  "molecule-buttonShare__email": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "molecule-buttonShare__facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "molecule-buttonShare__shareTitle": [
     {
       "type": 0,
       "value": "Share"
     }
   ],
-  "molecule-buttonShareRecording__shortUrlLabel": [
+  "molecule-buttonShare__twitter": [
     {
       "type": 0,
-      "value": "Short URL"
+      "value": "Twitter"
     }
   ],
-  "molecule-cardRecordingSequenceHat__addAll": [
+  "molecule-buttonSpeed__buttonLabel": [
+    {
+      "type": 1,
+      "value": "speed"
+    },
     {
       "type": 0,
-      "value": "Add All"
+      "value": "x"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addAlbum": [
+    {
+      "type": 0,
+      "value": "Add Album"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addBook": [
+    {
+      "type": 0,
+      "value": "Add Book"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addSeries": [
+    {
+      "type": 0,
+      "value": "Add Series"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
+    {
+      "type": 0,
+      "value": "Add Album"
     }
   ],
   "molecule-cardRecordingSequenceHat__inLibrary": [
@@ -691,6 +1655,30 @@
     {
       "type": 0,
       "value": " in your library"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeAlbum": [
+    {
+      "type": 0,
+      "value": "Remove Album"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeBook": [
+    {
+      "type": 0,
+      "value": "Remove Book"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeSeries": [
+    {
+      "type": 0,
+      "value": "Remove Series"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
+    {
+      "type": 0,
+      "value": "Remove Album"
     }
   ],
   "molecule-searchBar__label": [
@@ -713,6 +1701,24 @@
     {
       "type": 0,
       "value": " more"
+    }
+  ],
+  "molecule-teaseRecording__partInfo": [
+    {
+      "type": 0,
+      "value": "Part "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": " of "
+    },
+    {
+      "type": 1,
+      "value": "count"
     }
   ],
   "molecule-transcript__disclaimer": [
@@ -739,10 +1745,70 @@
       "value": "Read Transcript"
     }
   ],
-  "navigation_menuTitle": [
+  "molecules-pagination__nextLabel": [
     {
       "type": 0,
-      "value": "Menu"
+      "value": "Next"
+    }
+  ],
+  "molecules-pagination__previousLabel": [
+    {
+      "type": 0,
+      "value": "Previous"
+    }
+  ],
+  "navigation__backToMenu": [
+    {
+      "type": 0,
+      "value": "Back to Menu"
+    }
+  ],
+  "navigation__loginSignupCta": [
+    {
+      "type": 0,
+      "value": "Login/Sign up"
+    }
+  ],
+  "notFound__header": [
+    {
+      "type": 0,
+      "value": "Sorry!"
+    }
+  ],
+  "notFound__message": [
+    {
+      "type": 0,
+      "value": "The link might be broken, non-existent, or typed incorrectly."
+    }
+  ],
+  "notFound__subheader": [
+    {
+      "type": 0,
+      "value": "We couldn’t find that page"
+    }
+  ],
+  "notFound__suggestionsHeader": [
+    {
+      "type": 0,
+      "value": "Take a listen to one of these instead"
+    }
+  ],
+  "notFound__toDiscover": [
+    {
+      "type": 0,
+      "value": "Go back to Discover"
+    }
+  ],
+  "organism-modal__close": [
+    {
+      "type": 0,
+      "value": "Close"
+    }
+  ],
+  "organism-recording__albumListTitle": [
+    {
+      "type": 0,
+      "value": "Other Songs in Album"
     }
   ],
   "organism-recording__buttonLabelNext": [
@@ -769,6 +1835,26 @@
       "value": "metadata"
     }
   ],
+  "organism-recording__partInfo": [
+    {
+      "type": 0,
+      "value": "Part "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    }
+  ],
+  "organism-recording__readByLabel": [
+    {
+      "type": 0,
+      "value": "Read by "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
   "organism-recording__seriesInfoTitle": [
     {
       "type": 0,
@@ -781,10 +1867,22 @@
       "value": "series list"
     }
   ],
+  "organism-recording__seriesListTitle": [
+    {
+      "type": 0,
+      "value": "Other Teachings in Series"
+    }
+  ],
   "organism-recording__sponsorInfoTitle": [
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "personTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "Speaker"
     }
   ],
   "playButton__pauseLabel": [
@@ -859,16 +1957,122 @@
       "value": "You must be logged in to perform this action"
     }
   ],
-  "playlist__heading": [
+  "playlistDetail__createdLabel": [
+    {
+      "type": 0,
+      "value": "Created"
+    }
+  ],
+  "playlistDetail__partsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Teachings"
+    }
+  ],
+  "playlistDetail__summaryLabel": [
+    {
+      "type": 0,
+      "value": "Summary"
+    }
+  ],
+  "playlistDetail__type": [
     {
       "type": 0,
       "value": "Playlist"
     }
   ],
-  "playlists__pageTitle": [
+  "preferences__buttonLabelSaveChanges": [
     {
       "type": 0,
-      "value": "Playlists"
+      "value": "Save changes"
+    }
+  ],
+  "preferences__downloadSettings": [
+    {
+      "type": 0,
+      "value": "Download Settings"
+    }
+  ],
+  "preferences__downloadSettingsIntro": [
+    {
+      "type": 0,
+      "value": "Choose how you want to download audio."
+    }
+  ],
+  "preferences__heading": [
+    {
+      "type": 0,
+      "value": "Account Settings"
+    }
+  ],
+  "preferences__inputAutoplay": [
+    {
+      "type": 0,
+      "value": "Autoplay recordings"
+    }
+  ],
+  "preferences__language": [
+    {
+      "type": 0,
+      "value": "Language"
+    }
+  ],
+  "preferences__playbackSettings": [
+    {
+      "type": 0,
+      "value": "Playback Settings"
+    }
+  ],
+  "preferences__playbackSettingsIntro": [
+    {
+      "type": 0,
+      "value": "Choose whether recordings should autoplay by default."
+    }
+  ],
+  "preferences__preferredAudioQuality": [
+    {
+      "type": 0,
+      "value": "Preferred Audio Quality"
+    }
+  ],
+  "preferences__preferredAudioQuality-high": [
+    {
+      "type": 0,
+      "value": "High"
+    }
+  ],
+  "preferences__preferredAudioQuality-low": [
+    {
+      "type": 0,
+      "value": "Low"
+    }
+  ],
+  "preferences__preferredAudioQuality-medium": [
+    {
+      "type": 0,
+      "value": "Medium"
+    }
+  ],
+  "preferences__subheading": [
+    {
+      "type": 0,
+      "value": "Preferences"
+    }
+  ],
+  "preferences__timezone": [
+    {
+      "type": 0,
+      "value": "Timezone"
+    }
+  ],
+  "presenterAppearsDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Also Appears In"
     }
   ],
   "presenterDetail__alsoAppearsInLabel": [
@@ -975,64 +2179,72 @@
       "value": "Most Listened"
     }
   ],
-  "presenterDetail__type": [
-    {
-      "type": 0,
-      "value": "Speaker"
-    }
-  ],
   "presenterDetail__websiteLabel": [
     {
       "type": 0,
       "value": "Website"
     }
   ],
-  "presenterListPage__title": [
+  "presenterRecordingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Recordings"
+    }
+  ],
+  "presenterSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Series"
+    }
+  ],
+  "presenterTopDetail__heading": [
+    {
+      "type": 0,
+      "value": "Most Listened"
+    }
+  ],
+  "presentersFeed__description": [
+    {
+      "type": 0,
+      "value": "The latest AudioVerse sermons by "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presentersFeed__title": [
+    {
+      "type": 0,
+      "value": "Sermons by "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presentersList__title": [
     {
       "type": 0,
       "value": "All Speakers"
     }
   ],
-  "profile__errorPasswordMismatch": [
+  "profile__buttonLabelDeleteAccount": [
     {
       "type": 0,
-      "value": "passwords do not match"
+      "value": "Delete Account"
     }
   ],
-  "profile__errorUnconfirmedPassword": [
+  "profile__buttonLabelSaveChanges": [
     {
       "type": 0,
-      "value": "please type your new password twice"
+      "value": "Save changes"
     }
   ],
-  "profile__inputLabelForAddressLine1": [
+  "profile__heading": [
     {
       "type": 0,
-      "value": "address line 1"
-    }
-  ],
-  "profile__inputLabelForAddressLine2": [
-    {
-      "type": 0,
-      "value": "address line 2"
-    }
-  ],
-  "profile__inputLabelForCity": [
-    {
-      "type": 0,
-      "value": "city"
-    }
-  ],
-  "profile__inputLabelForConfirmPassword": [
-    {
-      "type": 0,
-      "value": "confirm password"
-    }
-  ],
-  "profile__inputLabelForCountry": [
-    {
-      "type": 0,
-      "value": "country"
+      "value": "Account Settings"
     }
   ],
   "profile__inputLabelForEmail": [
@@ -1059,46 +2271,112 @@
       "value": "Password"
     }
   ],
-  "profile__inputLabelForPostalCode": [
+  "profile__intro": [
     {
       "type": 0,
-      "value": "postal code"
+      "value": "Add your account information to customize your experience and manage your login information."
     }
   ],
-  "profile__inputLabelForProvince": [
+  "profile__subheading": [
     {
       "type": 0,
-      "value": "province"
+      "value": "Profile"
     }
   ],
-  "recordingList__audioLabel": [
+  "register__emailLabel": [
     {
       "type": 0,
-      "value": "Audio"
+      "value": "Email"
     }
   ],
-  "recordingList__videoLabel": [
+  "register__emailPlaceholder": [
     {
       "type": 0,
-      "value": "Video"
+      "value": "jane@example.com"
     }
   ],
-  "register__confirmPasswordInputPlaceholder": [
+  "register__firstNameLabel": [
     {
       "type": 0,
-      "value": "confirm password"
+      "value": "First name"
     }
   ],
-  "register__emailInputPlaceholder": [
+  "register__firstNamePlaceholder": [
     {
       "type": 0,
-      "value": "email"
+      "value": "Jane"
     }
   ],
-  "register__passwordInputPlaceholder": [
+  "register__lastNameLabel": [
     {
       "type": 0,
-      "value": "password"
+      "value": "Last name"
+    }
+  ],
+  "register__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "register__loadingMessage": [
+    {
+      "type": 0,
+      "value": "loading..."
+    }
+  ],
+  "register__login": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "register__loginIntro": [
+    {
+      "type": 0,
+      "value": "Already have an account?"
+    }
+  ],
+  "register__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe to Newsletter"
+    }
+  ],
+  "register__passwordLabel": [
+    {
+      "type": 0,
+      "value": "Password"
+    }
+  ],
+  "register__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "∗∗∗∗∗∗∗"
+    }
+  ],
+  "register__submitButton": [
+    {
+      "type": 0,
+      "value": "Sign up"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "success"
+    }
+  ],
+  "reset__confirmPasswordLabel": [
+    {
+      "type": 0,
+      "value": "Confirm new password"
+    }
+  ],
+  "reset__confirmPasswordPlaceholder": [
+    {
+      "type": 0,
+      "value": "Confirm new password"
     }
   ],
   "reset__errorGeneral": [
@@ -1119,10 +2397,24 @@
       "value": "Please type password twice"
     }
   ],
-  "reset__passwordConfirmPlaceholder": [
+  "reset__intro": [
     {
       "type": 0,
-      "value": "confirm password"
+      "value": "Create a new password for "
+    },
+    {
+      "type": 1,
+      "value": "email"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "reset__passwordLabel": [
+    {
+      "type": 0,
+      "value": "New password"
     }
   ],
   "reset__passwordPlaceholder": [
@@ -1131,16 +2423,152 @@
       "value": "New password"
     }
   ],
+  "reset__submitButton": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
   "reset__successMessage": [
     {
       "type": 0,
       "value": "Your password was successfully changed"
     }
   ],
-  "rssLink__label": [
+  "rssAlternate__title": [
     {
       "type": 0,
-      "value": "RSS"
+      "value": "RSS feed"
+    }
+  ],
+  "searchCollections__heading": [
+    {
+      "type": 0,
+      "value": "All Matching Collections"
+    }
+  ],
+  "searchPersons__heading": [
+    {
+      "type": 0,
+      "value": "All Matching Persons"
+    }
+  ],
+  "searchSequences__heading": [
+    {
+      "type": 0,
+      "value": "All Matching Sequences"
+    }
+  ],
+  "searchSponsors__heading": [
+    {
+      "type": 0,
+      "value": "All Matching Sponsors"
+    }
+  ],
+  "searchTeachings__heading": [
+    {
+      "type": 0,
+      "value": "All Matching Teachings"
+    }
+  ],
+  "search__conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "search__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Conferences"
+    }
+  ],
+  "search__personsHeading": [
+    {
+      "type": 0,
+      "value": "Speakers"
+    }
+  ],
+  "search__personsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Speakers"
+    }
+  ],
+  "search__resultsCount": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Results"
+    }
+  ],
+  "search__sequencesHeading": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "search__sequencesSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Series"
+    }
+  ],
+  "search__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "search__sponsorsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Sponsors"
+    }
+  ],
+  "search__teachingsHeading": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "search__teachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Teachings"
+    }
+  ],
+  "sequenceType__audiobookTitle": [
+    {
+      "type": 0,
+      "value": "Book"
+    }
+  ],
+  "sequenceType__musicTrackTitle": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "sequenceType__seriesTitle": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "sequenceType__storyTitle": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "seriesDetail__conferenceLabel": [
+    {
+      "type": 0,
+      "value": "Parent Conference"
     }
   ],
   "seriesDetail__descriptionLabel": [
@@ -1159,34 +2587,56 @@
       "value": " Parts"
     }
   ],
+  "seriesDetail__recordedLabel": [
+    {
+      "type": 0,
+      "value": "Recorded"
+    }
+  ],
+  "seriesDetail__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
   "seriesDetail__type": [
     {
       "type": 0,
       "value": "Series"
     }
   ],
-  "seriesDetailg__conferenceLabel": [
+  "seriesList__heading": [
     {
       "type": 0,
-      "value": "Parent Conference"
+      "value": "All Series"
     }
   ],
-  "seriesDetailg__recordedLabel": [
+  "sermonDetailPage__attachments": [
     {
       "type": 0,
-      "value": "Recorded"
+      "value": "Attachments"
     }
   ],
-  "seriesDetailg__sponsorLabel": [
+  "sermonDetailPage__copyright": [
     {
       "type": 0,
-      "value": "Sponsor"
-    }
-  ],
-  "seriesList__pageTitle": [
+      "value": "Copyright ⓒ"
+    },
+    {
+      "type": 1,
+      "value": "year"
+    },
     {
       "type": 0,
-      "value": "Series"
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "owner"
+    },
+    {
+      "type": 0,
+      "value": "."
     }
   ],
   "sermonDetailPage__descriptionTitle": [
@@ -1195,34 +2645,58 @@
       "value": "Description"
     }
   ],
+  "sermonDetailPage__disclaimer": [
+    {
+      "type": 0,
+      "value": "The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
+    }
+  ],
   "sermonDetailPage__recordedTitle": [
     {
       "type": 0,
       "value": "Recorded"
     }
   ],
-  "sermonDetailPage__seriesTitle": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
-  "sermons-all-rss-identifier": [
+  "sermonList__heading": [
     {
       "type": 0,
       "value": "All Teachings"
     }
   ],
-  "socialLogin__facebookButton": [
+  "sermonsList__filter": [
     {
       "type": 0,
-      "value": "continue with Facebook"
+      "value": "Filter"
     }
   ],
-  "socialLogin__googleButton": [
+  "socialLogin__loginFacebookButton": [
     {
       "type": 0,
-      "value": "continue with Google"
+      "value": "Login with Facebook"
+    }
+  ],
+  "socialLogin__loginGoogleButton": [
+    {
+      "type": 0,
+      "value": "Login with Google"
+    }
+  ],
+  "socialLogin__registerFacebookButton": [
+    {
+      "type": 0,
+      "value": "Sign up with Facebook"
+    }
+  ],
+  "socialLogin__registerGoogleButton": [
+    {
+      "type": 0,
+      "value": "Sign up with Google"
+    }
+  ],
+  "socialLogin__successMessage": [
+    {
+      "type": 0,
+      "value": "success"
     }
   ],
   "songsListPage__1ChroniclesLabel": [
@@ -1645,6 +3119,18 @@
       "value": "Tags"
     }
   ],
+  "sopnsorTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
+  "sponsorConferencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Conferences"
+    }
+  ],
   "sponsorDetail__collectionCountLabel": [
     {
       "type": 1,
@@ -1653,6 +3139,18 @@
     {
       "type": 0,
       "value": " Conferences"
+    }
+  ],
+  "sponsorDetail__conferencesAllLabel": [
+    {
+      "type": 0,
+      "value": "See All Conferences"
+    }
+  ],
+  "sponsorDetail__conferencesLabel": [
+    {
+      "type": 0,
+      "value": "Conferences"
     }
   ],
   "sponsorDetail__descriptionLabel": [
@@ -1667,10 +3165,48 @@
       "value": "Location"
     }
   ],
-  "sponsorDetail__type": [
+  "sponsorDetail__recentAllLabel": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "See All Recent Teachings"
+    }
+  ],
+  "sponsorDetail__recentLabel": [
+    {
+      "type": 0,
+      "value": "Recent Teachings"
+    }
+  ],
+  "sponsorDetail__recordingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Teachings"
+    }
+  ],
+  "sponsorDetail__sequencesCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Series"
+    }
+  ],
+  "sponsorDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "See All Series"
+    }
+  ],
+  "sponsorDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "Series"
     }
   ],
   "sponsorDetail__websiteLabel": [
@@ -1679,10 +3215,40 @@
       "value": "Website"
     }
   ],
-  "sponsorTeachingsPage__pageTitle": [
+  "sponsorSeriesDetail__heading": [
     {
       "type": 0,
-      "value": "Teachings"
+      "value": "All Series"
+    }
+  ],
+  "sponsorTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "All Teachings"
+    }
+  ],
+  "sponsorTeachingsFeed__description": [
+    {
+      "type": 0,
+      "value": "The latest recordings from "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " at AudioVerse"
+    }
+  ],
+  "sponsorTeachingsFeed__title": [
+    {
+      "type": 0,
+      "value": "Sermons by "
+    },
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "sponsorsList__title": [
@@ -1691,26 +3257,74 @@
       "value": "All Sponsors"
     }
   ],
-  "storiesListPage__pageTitle": [
+  "storyAlbumList__heading": [
     {
       "type": 0,
-      "value": "Stories"
+      "value": "All Stories"
     }
   ],
-  "tag-feed-title": [
+  "storyAlbumsFeed__description": [
+    {
+      "type": 1,
+      "value": "title"
+    },
     {
       "type": 0,
-      "value": "AudioVerse Recordings Tagged "
+      "value": ", by "
     },
     {
       "type": 1,
-      "value": "tag"
-    }
-  ],
-  "tagListPage__title": [
+      "value": "authors"
+    },
     {
       "type": 0,
-      "value": "Tags"
+      "value": ", narrated by "
+    },
+    {
+      "type": 1,
+      "value": "narrators"
+    }
+  ],
+  "teachingsFeed__description": [
+    {
+      "type": 0,
+      "value": "AudioVerse Presentation in "
+    },
+    {
+      "type": 1,
+      "value": "language"
+    }
+  ],
+  "teachingsFeed__title": [
+    {
+      "type": 0,
+      "value": "AudioVerse Presentations ("
+    },
+    {
+      "type": 1,
+      "value": "language"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "testimonies__heading": [
+    {
+      "type": 0,
+      "value": "Testimonials"
+    }
+  ],
+  "testimonies__intro": [
+    {
+      "type": 0,
+      "value": "Have a great testimony? Tell us your story!"
+    }
+  ],
+  "testimonies__shareYourStory": [
+    {
+      "type": 0,
+      "value": "Share your story"
     }
   ],
   "time__minutesAndSeconds": [
@@ -1725,6 +3339,18 @@
     {
       "type": 1,
       "value": "s"
+    }
+  ],
+  "trendingTeachings__heading": [
+    {
+      "type": 0,
+      "value": "Trending Teachings"
+    }
+  ],
+  "unstartedSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Not Started"
     }
   ]
 }
