@@ -379,6 +379,31 @@ module.exports = withPWA({
 				destination: '/:lang/testimonies/page/1',
 				permanent: true,
 			},
+			{
+				source: '/:lang/feedback',
+				destination: '/:lang/contact/general',
+				permanent: false,
+			},
+			{
+				source: '/:lang/feedback/media',
+				destination: '/:lang/contact/support',
+				permanent: false,
+			},
+			{
+				source: '/:lang/feedback/technical',
+				destination: '/:lang/contact/support',
+				permanent: false,
+			},
+			{
+				source: '/:lang/feedback/testimonial',
+				destination: '/:lang/contact/testimonies',
+				permanent: false,
+			},
+			{
+				source: '/:lang/feedback/contact',
+				destination: '/:lang/contact/general',
+				permanent: false,
+			},
 		];
 	},
 	async rewrites() {

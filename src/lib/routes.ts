@@ -205,6 +205,9 @@ export const makeTestimoniesRoute = (
 	page: string | number = 1
 ): string => `/${languageRoute}/testimonies${page > 1 ? `/page/${page}` : ''}`;
 
+export const makeTestimonySubmitRoute = (languageRoute: string): string =>
+	`/${languageRoute}/contact/testimonies`;
+
 export const makePlaylistDetailRoute = (
 	languageRoute: string,
 	playlistId: Scalars['ID']
@@ -217,6 +220,9 @@ export const makeBlogPostListRoute = (
 
 export const makeAboutPage = (languageRoute: string, pageId: number): string =>
 	`/${languageRoute}/about/${pageId}`;
+
+export const makeContactRoute = (languageRoute: string, subpath = ''): string =>
+	`/${languageRoute}/contact${subpath}`;
 
 export const makeLoginRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/login`;

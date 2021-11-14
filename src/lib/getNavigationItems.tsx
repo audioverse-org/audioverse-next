@@ -10,6 +10,7 @@ import {
 	makeBibleListRoute,
 	makeBlogPostListRoute,
 	makeConferenceListRoute,
+	makeContactRoute,
 	makeDiscoverCollectionsRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
@@ -21,31 +22,36 @@ import {
 	makeSponsorListRoute,
 	makeStoryAlbumListPage,
 	makeTestimoniesRoute,
+	makeTestimonySubmitRoute,
 } from '@lib/routes';
 
+import IconAlignLeft from '../../public/img/fa-align-left.svg';
 import IconBook from '../../public/img/fa-book.svg';
 import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
 import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
+import IconFacebook from '../../public/img/fa-facebook.svg';
 import IconFeather from '../../public/img/fa-feather.svg';
 import IconFireHeavy from '../../public/img/fa-fire-heavy.svg';
 import IconHeartHeavy from '../../public/img/fa-heart-heavy.svg';
+import IconInbox from '../../public/img/fa-inbox.svg';
+import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
-import IconListAltLight from '../../public/img/fa-list-alt-light.svg';
 import IconListAlt from '../../public/img/fa-list-alt.svg';
+import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
 import IconList from '../../public/img/fa-list-light.svg';
 import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
 import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
 import IconSignOut from '../../public/img/fa-sign-out.svg';
+import IconTwitter from '../../public/img/fa-twitter.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
-import IconUserLight from '../../public/img/fa-user-light.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
-import IconUserPlus from '../../public/img/fa-user-plus-light.svg';
 import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
+import IconYouTube from '../../public/img/fa-youtube.svg';
 import IconBible from '../../public/img/icon-bible.svg';
-import IconBlog from '../../public/img/icon-blog.svg';
 import IconBooks from '../../public/img/icon-books.svg';
 import IconCollections from '../../public/img/icon-collections.svg';
+import IconContact from '../../public/img/icon-contact.svg';
 import IconMore from '../../public/img/icon-more.svg';
 import IconOurStory from '../../public/img/icon-our-story.svg';
 import IconSearch from '../../public/img/icon-search.svg';
@@ -56,6 +62,8 @@ export type INavigationItem = {
 	key: string;
 	href?: string;
 	onClick?: (props: { popSubmenu: () => void }) => void;
+	isDivider?: true;
+	isTargetBlank?: true;
 	Icon: React.ElementType | null;
 	label: string;
 	children?: INavigationItem[];
@@ -112,7 +120,7 @@ export function getNavigationItems(
 				{
 					key: 'all',
 					href: makeDiscoverCollectionsRoute(languageRoute),
-					Icon: IconListAltLight,
+					Icon: IconListAltHeavy,
 					label: intl.formatMessage({
 						id: `header__naveItemCollections-all`,
 						defaultMessage: 'All Collections',
@@ -121,7 +129,7 @@ export function getNavigationItems(
 				{
 					key: 'sponsors',
 					href: makeSponsorListRoute(languageRoute),
-					Icon: IconUserPlus,
+					Icon: IconUserPlusHeavy,
 					label: intl.formatMessage({
 						id: `header__naveItemCollections-sponsor`,
 						defaultMessage: 'Sponsor',
@@ -148,7 +156,7 @@ export function getNavigationItems(
 				{
 					key: 'presenter',
 					href: makePresenterListRoute(languageRoute),
-					Icon: IconUserLight,
+					Icon: IconUser,
 					label: intl.formatMessage({
 						id: `header__naveItemCollections-speaker`,
 						defaultMessage: 'Speaker',
@@ -212,7 +220,7 @@ export function getNavigationItems(
 				},
 				{
 					key: 'purpose',
-					href: makeAboutPage(languageRoute, 123), // TODO
+					href: makeAboutPage(languageRoute, 7),
 					Icon: IconBullseyeHeavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-purpose`,
@@ -226,6 +234,15 @@ export function getNavigationItems(
 					label: intl.formatMessage({
 						id: `header__navItemStory-spiritOfAudioVerse`,
 						defaultMessage: 'Spirit of AudioVerse',
+					}),
+				},
+				{
+					key: 'blog',
+					href: makeBlogPostListRoute(languageRoute),
+					Icon: IconAlignLeft,
+					label: intl.formatMessage({
+						id: `header__navItemStory-blog`,
+						defaultMessage: 'Blog',
 					}),
 				},
 				{
@@ -249,14 +266,88 @@ export function getNavigationItems(
 			],
 		},
 		{
-			key: 'blog',
-			href: makeBlogPostListRoute(languageRoute),
-			Icon: IconBlog,
+			key: 'contact',
+			href: makeContactRoute(languageRoute),
+			Icon: IconContact,
 			label: intl.formatMessage({
-				id: `header__navItemBlog`,
-				defaultMessage: 'Blog',
-				description: `Header nav link name: Blog`,
+				id: `header__navItemContact`,
+				defaultMessage: 'Contact',
 			}),
+			children: [
+				{
+					key: 'general',
+					href: makeContactRoute(languageRoute, '/general'),
+					Icon: IconInbox,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-general`,
+						defaultMessage: 'General Contact',
+					}),
+				},
+				{
+					key: 'support',
+					href: makeContactRoute(languageRoute, '/support'),
+					Icon: IconCommentHeavy,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-support`,
+						defaultMessage: 'Request Support',
+					}),
+				},
+				{
+					key: 'testimony',
+					href: makeTestimonySubmitRoute(languageRoute),
+					Icon: IconCommentHeavy,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-testimony`,
+						defaultMessage: 'Share Testimony',
+					}),
+				},
+				{
+					key: 'divider',
+					Icon: null,
+					label: '',
+					isDivider: true,
+				},
+				{
+					key: 'facebook',
+					href: 'https://www.facebook.com/AudioVerse',
+					Icon: IconFacebook,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-facebook`,
+						defaultMessage: 'Facebook',
+					}),
+					isTargetBlank: true,
+				},
+				{
+					key: 'instagram',
+					href: 'https://www.instagram.com/audioverse/',
+					Icon: IconInstagram,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-instagram`,
+						defaultMessage: 'Instagram',
+					}),
+					isTargetBlank: true,
+				},
+				{
+					key: 'twitter',
+					href: 'https://www.twitter.com/audioverse/',
+					Icon: IconTwitter,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-twitter`,
+						defaultMessage: 'Twitter',
+					}),
+					isTargetBlank: true,
+				},
+				{
+					key: 'youtube',
+					href: 'https://www.youtube.com/user/AudioVerseMinistry',
+					Icon: IconYouTube,
+					label: intl.formatMessage({
+						id: `header__naveItemContact-youtube`,
+						defaultMessage: 'YouTube',
+					}),
+					isTargetBlank: true,
+				},
+			],
 		},
 		{
 			key: 'more',

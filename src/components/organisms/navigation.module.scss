@@ -58,6 +58,11 @@
 	}
 }
 
+.divider {
+	width: 100%;
+	border-bottom: 1px solid rgba($ts-lightTone, 0.5);
+}
+
 .mobileHeader {
 	display: flex;
 	flex-direction: column;
@@ -154,6 +159,9 @@
 		margin-bottom: 16px;
 		font-size: 17px;
 		.icon {
+			width: 16px;
+			display: flex;
+			justify-content: center;
 			color: $ts-red;
 		}
 	}

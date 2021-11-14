@@ -875,220 +875,283 @@
     "line": 40,
     "start": 799
   },
-  "header__navItemBlog": {
-    "col": 29,
-    "defaultMessage": "Blog",
-    "description": "Header nav link name: Blog",
-    "end": 7401,
-    "file": "src/lib/getNavigationItems.tsx",
-    "line": 255,
-    "start": 7289
-  },
   "header__navItemCollections": {
     "col": 29,
     "defaultMessage": "Collections",
     "description": "Header nav link name: Collections",
-    "end": 3674,
+    "end": 3991,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 106,
-    "start": 3541
+    "line": 114,
+    "start": 3858
+  },
+  "header__navItemContact": {
+    "col": 29,
+    "defaultMessage": "Contact",
+    "end": 7885,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 272,
+    "start": 7814
   },
   "header__navItemDiscover": {
     "col": 29,
     "defaultMessage": "Discover",
     "description": "Header nav link name: Discover",
-    "end": 2915,
+    "end": 3232,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 76,
-    "start": 2791
+    "line": 84,
+    "start": 3108
   },
   "header__navItemLibrary": {
     "col": 29,
     "defaultMessage": "Library",
     "description": "Header nav link name: Library",
-    "end": 3158,
+    "end": 3475,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 86,
-    "start": 3037
+    "line": 94,
+    "start": 3354
   },
   "header__navItemMore": {
     "col": 29,
     "defaultMessage": "More",
     "description": "Header nav link name: More",
-    "end": 7589,
+    "end": 9959,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 264,
-    "start": 7477
+    "line": 355,
+    "start": 9847
   },
   "header__navItemStory": {
     "col": 31,
     "defaultMessage": "Our Story",
-    "end": 5979,
+    "end": 6296,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 199,
-    "start": 5902
+    "line": 207,
+    "start": 6219
+  },
+  "header__navItemStory-blog": {
+    "col": 31,
+    "defaultMessage": "Blog",
+    "end": 7216,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 243,
+    "start": 7139
   },
   "header__navItemStory-donate": {
     "col": 31,
     "defaultMessage": "Donate",
-    "end": 7153,
+    "end": 7677,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 244,
-    "start": 7072
+    "line": 261,
+    "start": 7596
   },
   "header__navItemStory-purpose": {
     "col": 31,
     "defaultMessage": "Our Purpose",
-    "end": 6443,
+    "end": 6750,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 217,
-    "start": 6356
+    "line": 225,
+    "start": 6663
   },
   "header__navItemStory-spiritOfAudioVerse": {
     "col": 31,
     "defaultMessage": "Spirit of AudioVerse",
-    "end": 6692,
+    "end": 6999,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 226,
-    "start": 6585
+    "line": 234,
+    "start": 6892
   },
   "header__navItemStory-team": {
     "col": 31,
     "defaultMessage": "The Team",
-    "end": 6204,
+    "end": 6521,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 208,
-    "start": 6123
+    "line": 216,
+    "start": 6440
   },
   "header__navItemStory-testimonials": {
     "col": 31,
     "defaultMessage": "Testimonials",
-    "end": 6935,
+    "end": 7459,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 235,
-    "start": 6842
+    "line": 252,
+    "start": 7366
   },
   "header__navItemUser": {
     "col": 29,
     "defaultMessage": "User Settings",
     "description": "Header nav link name: User Settings",
-    "end": 8733,
+    "end": 11103,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 317,
-    "start": 8603
+    "line": 408,
+    "start": 10973
   },
   "header__naveItemBible": {
     "col": 29,
     "defaultMessage": "Bible",
     "description": "Header nav link name: Bible",
-    "end": 3397,
+    "end": 3714,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 96,
-    "start": 3281
+    "line": 104,
+    "start": 3598
   },
   "header__naveItemCollections-all": {
     "col": 31,
     "defaultMessage": "All Collections",
-    "end": 3925,
+    "end": 4242,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 116,
-    "start": 3831
+    "line": 124,
+    "start": 4148
   },
   "header__naveItemCollections-book": {
     "col": 31,
     "defaultMessage": "Book",
-    "end": 5312,
+    "end": 5629,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 170,
-    "start": 5228
+    "line": 178,
+    "start": 5545
   },
   "header__naveItemCollections-conference": {
     "col": 31,
     "defaultMessage": "Conference",
-    "end": 4397,
+    "end": 4719,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 134,
-    "start": 4301
+    "line": 142,
+    "start": 4623
   },
   "header__naveItemCollections-series": {
     "col": 31,
     "defaultMessage": "Series",
-    "end": 4623,
+    "end": 4945,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 143,
-    "start": 4535
+    "line": 151,
+    "start": 4857
   },
   "header__naveItemCollections-songs": {
     "col": 31,
     "defaultMessage": "Scripture Songs",
-    "end": 5547,
+    "end": 5864,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 179,
-    "start": 5451
+    "line": 187,
+    "start": 5768
   },
   "header__naveItemCollections-speaker": {
     "col": 31,
     "defaultMessage": "Speaker",
-    "end": 4859,
+    "end": 5176,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 152,
-    "start": 4769
+    "line": 160,
+    "start": 5086
   },
   "header__naveItemCollections-sponsor": {
     "col": 31,
     "defaultMessage": "Sponsor",
-    "end": 4157,
+    "end": 4479,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 125,
-    "start": 4067
+    "line": 133,
+    "start": 4389
   },
   "header__naveItemCollections-stories": {
     "col": 31,
     "defaultMessage": "Stories",
-    "end": 5091,
+    "end": 5408,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 161,
-    "start": 5001
+    "line": 169,
+    "start": 5318
+  },
+  "header__naveItemContact-facebook": {
+    "col": 31,
+    "defaultMessage": "Facebook",
+    "end": 8948,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 314,
+    "start": 8860
+  },
+  "header__naveItemContact-general": {
+    "col": 31,
+    "defaultMessage": "General Contact",
+    "end": 8133,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 281,
+    "start": 8039
+  },
+  "header__naveItemContact-instagram": {
+    "col": 31,
+    "defaultMessage": "Instagram",
+    "end": 9212,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 324,
+    "start": 9122
+  },
+  "header__naveItemContact-support": {
+    "col": 31,
+    "defaultMessage": "Request Support",
+    "end": 8380,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 290,
+    "start": 8286
+  },
+  "header__naveItemContact-testimony": {
+    "col": 31,
+    "defaultMessage": "Share Testimony",
+    "end": 8627,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 299,
+    "start": 8531
+  },
+  "header__naveItemContact-twitter": {
+    "col": 31,
+    "defaultMessage": "Twitter",
+    "end": 9466,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 334,
+    "start": 9380
+  },
+  "header__naveItemContact-youtube": {
+    "col": 31,
+    "defaultMessage": "YouTube",
+    "end": 9732,
+    "file": "src/lib/getNavigationItems.tsx",
+    "line": 344,
+    "start": 9646
   },
   "header__naveItemMore-legal": {
     "col": 31,
     "defaultMessage": "Legal",
-    "end": 7811,
+    "end": 10181,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 274,
-    "start": 7732
+    "line": 365,
+    "start": 10102
   },
   "header__naveItemMore-privacy": {
     "col": 31,
     "defaultMessage": "Privacy",
-    "end": 8027,
+    "end": 10397,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 283,
-    "start": 7944
+    "line": 374,
+    "start": 10314
   },
   "header__naveItemMore-terms": {
     "col": 31,
     "defaultMessage": "Terms of Use",
-    "end": 8248,
+    "end": 10618,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 292,
-    "start": 8162
+    "line": 383,
+    "start": 10532
   },
   "header__naveItemUser-logout": {
     "col": 31,
     "defaultMessage": "Log Out",
-    "end": 9228,
+    "end": 11598,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 337,
-    "start": 9146
+    "line": 428,
+    "start": 11516
   },
   "header__naveItemUser-profile": {
     "col": 31,
     "defaultMessage": "Profile",
-    "end": 8964,
+    "end": 11334,
     "file": "src/lib/getNavigationItems.tsx",
-    "line": 327,
-    "start": 8881
+    "line": 418,
+    "start": 11251
   },
   "homePage__addToLibraryPlaceholder": {
     "col": 7,
