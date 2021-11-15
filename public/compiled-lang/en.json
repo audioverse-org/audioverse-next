@@ -733,16 +733,16 @@
       "value": " AudioVerse. Individual recordings are copyrighted by their respective owners."
     }
   ],
-  "header__navItemBlog": [
-    {
-      "type": 0,
-      "value": "Blog"
-    }
-  ],
   "header__navItemCollections": [
     {
       "type": 0,
       "value": "Collections"
+    }
+  ],
+  "header__navItemContact": [
+    {
+      "type": 0,
+      "value": "Contact"
     }
   ],
   "header__navItemDiscover": [
@@ -767,6 +767,12 @@
     {
       "type": 0,
       "value": "Our Story"
+    }
+  ],
+  "header__navItemStory-blog": [
+    {
+      "type": 0,
+      "value": "Blog"
     }
   ],
   "header__navItemStory-donate": [
@@ -857,6 +863,48 @@
     {
       "type": 0,
       "value": "Stories"
+    }
+  ],
+  "header__naveItemContact-facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "header__naveItemContact-general": [
+    {
+      "type": 0,
+      "value": "General Contact"
+    }
+  ],
+  "header__naveItemContact-instagram": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "header__naveItemContact-support": [
+    {
+      "type": 0,
+      "value": "Request Support"
+    }
+  ],
+  "header__naveItemContact-testimony": [
+    {
+      "type": 0,
+      "value": "Share Testimony"
+    }
+  ],
+  "header__naveItemContact-twitter": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "header__naveItemContact-youtube": [
+    {
+      "type": 0,
+      "value": "YouTube"
     }
   ],
   "header__naveItemMore-legal": [

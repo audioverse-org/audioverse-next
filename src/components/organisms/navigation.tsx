@@ -188,28 +188,41 @@ const Navigation = ({
 						<ul className={styles.submenuItems}>
 							{Array.isArray(submenuItem?.children)
 								? submenuItem?.children?.map(
-										({ key, Icon, label, href, onClick }) => (
+										({
+											key,
+											Icon,
+											label,
+											href,
+											onClick,
+											isDivider,
+											isTargetBlank,
+										}) => (
 											<li key={key}>
-												<Link href={href as string}>
-													<a
-														className={styles.navLink}
-														onClick={
-															onClick
-																? () =>
-																		onClick({
-																			popSubmenu: () => setSubmenu(''),
-																		})
-																: undefined
-														}
-													>
-														{Icon && (
-															<span className={styles.icon}>
-																<Icon />
-															</span>
-														)}
-														<span>{label}</span>
-													</a>
-												</Link>
+												{isDivider ? (
+													<div className={styles.divider} />
+												) : (
+													<Link href={href as string}>
+														<a
+															className={styles.navLink}
+															onClick={
+																onClick
+																	? () =>
+																			onClick({
+																				popSubmenu: () => setSubmenu(''),
+																			})
+																	: undefined
+															}
+															target={isTargetBlank ? '_blank' : '_self'}
+														>
+															{Icon && (
+																<span className={styles.icon}>
+																	<Icon />
+																</span>
+															)}
+															<span>{label}</span>
+														</a>
+													</Link>
+												)}
 											</li>
 										)
 								  )
