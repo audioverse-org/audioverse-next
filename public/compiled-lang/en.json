@@ -964,7 +964,7 @@
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
-      "value": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data."
+      "value": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
     }
   ],
   "homePage__downloadAppSectionTitle": [
@@ -1086,7 +1086,7 @@
   "homePage__recentContentSectionTitle": [
     {
       "type": 0,
-      "value": "Recent content"
+      "value": "Recent Content"
     }
   ],
   "homePage__recentPostsButtonLabel": [
@@ -1098,13 +1098,13 @@
   "homePage__recentPostsSectionText": [
     {
       "type": 0,
-      "value": "Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month."
+      "value": "Read through our blog to find articles about recent events, sermons, and conferences."
     }
   ],
   "homePage__recentPostsSectionTitle": [
     {
       "type": 0,
-      "value": "Recent blog posts"
+      "value": "Recent Blog Posts"
     }
   ],
   "homePage__soundDoctrineText": [

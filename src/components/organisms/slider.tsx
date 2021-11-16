@@ -15,6 +15,7 @@ interface SliderProps {
 	clip?: boolean;
 	dark?: boolean;
 	grow?: boolean;
+	floatingControls?: boolean;
 }
 
 export default function Slider({
@@ -23,6 +24,7 @@ export default function Slider({
 	clip = true,
 	dark,
 	grow,
+	floatingControls,
 }: SliderProps): JSX.Element {
 	const [delta, setDelta] = useState<number>(0);
 
@@ -40,7 +42,12 @@ export default function Slider({
 	//  since the content is not being technically hidden, only shifted horizontally?
 	return (
 		<div
-			className={clsx(styles.slider, dark && styles.dark, grow && styles.grow)}
+			className={clsx(
+				styles.slider,
+				dark && styles.dark,
+				grow && styles.grow,
+				floatingControls && styles.floatingControls
+			)}
 			style={
 				{
 					'--perSlide': perSlide,
@@ -81,7 +88,15 @@ export default function Slider({
 						<li
 							key={i}
 							className={`${styles.dot} ${i === delta && styles.active}`}
-							aria-label={`Page ${i + 1}`}
+							aria-label={intl.formatMessage(
+								{
+									id: 'cardSlider__pageNumberLabel',
+									defaultMessage: 'Page {number}',
+								},
+								{
+									number: i + 1,
+								}
+							)}
 						/>
 					))}
 				</ul>

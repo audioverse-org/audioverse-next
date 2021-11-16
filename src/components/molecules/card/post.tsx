@@ -41,20 +41,18 @@ export default function CardPost({ post }: CardPostProps): JSX.Element {
 						{post.teaser ? (
 							<p className={styles.teaser}>{post.teaser}</p>
 						) : null}
-						{dur && dur >= 60 && (
-							<div className={styles.flexGrow}>
-								<p className={styles.duration}>
-									<FormattedMessage
-										id="cardPost__readingDuration"
-										defaultMessage="{duration} read"
-										description="Card post reading duration"
-										values={{
-											duration,
-										}}
-									/>
-								</p>
-							</div>
-						)}
+						<div className={styles.flexGrow}>
+							<p className={styles.duration}>
+								<FormattedMessage
+									id="cardPost__readingDuration"
+									defaultMessage="{duration} read"
+									description="Card post reading duration"
+									values={{
+										duration,
+									}}
+								/>
+							</p>
+						</div>
 					</div>
 				</a>
 			</Link>

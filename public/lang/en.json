@@ -1191,7 +1191,7 @@
   },
   "homePage__downloadAppSectionText": {
     "col": 7,
-    "defaultMessage": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data.",
+    "defaultMessage": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022.",
     "description": "home page download app section text",
     "end": 4561,
     "file": "src/containers/home.tsx",
@@ -1353,7 +1353,7 @@
   },
   "homePage__recentContentSectionTitle": {
     "col": 7,
-    "defaultMessage": "Recent content",
+    "defaultMessage": "Recent Content",
     "description": "home page recent content section title",
     "end": 2741,
     "file": "src/containers/home.tsx",
@@ -1371,7 +1371,7 @@
   },
   "homePage__recentPostsSectionText": {
     "col": 7,
-    "defaultMessage": "Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month.",
+    "defaultMessage": "Read through our blog to find articles about recent events, sermons, and conferences.",
     "description": "home page recent posts section text",
     "end": 6083,
     "file": "src/containers/home.tsx",
@@ -1380,7 +1380,7 @@
   },
   "homePage__recentPostsSectionTitle": {
     "col": 7,
-    "defaultMessage": "Recent blog posts",
+    "defaultMessage": "Recent Blog Posts",
     "description": "home page recent posts section title",
     "end": 5760,
     "file": "src/containers/home.tsx",

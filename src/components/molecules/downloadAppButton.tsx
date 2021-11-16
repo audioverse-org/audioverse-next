@@ -5,17 +5,21 @@ import { FormattedMessage } from 'react-intl';
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
 import IconDownload from '../../../public/img/icon-download-light.svg';
 
-import Button from './button';
+import Button, { IButtonType } from './button';
 import styles from './downloadAppButton.module.scss';
 import Dropdown from './dropdown';
 
 type Props = {
 	menuAlignment: 'left' | 'right';
+	buttonType: IButtonType;
+	alternateCta?: boolean;
 	className?: string;
 };
 
 export default function DownloadAppButton({
 	menuAlignment,
+	buttonType,
+	alternateCta,
 	className,
 }: Props): JSX.Element | null {
 	const downloadOptions = [
@@ -44,14 +48,21 @@ export default function DownloadAppButton({
 			id="downloadAppMenu"
 			trigger={({ isOpen, ...props }) => (
 				<Button
-					type="secondary"
+					type={buttonType}
 					text={
-						<FormattedMessage
-							id="downloadAppButton__label"
-							defaultMessage="Download App"
-						/>
+						alternateCta ? (
+							<FormattedMessage
+								id="downloadAppButton__altLabel"
+								defaultMessage="Download Now"
+							/>
+						) : (
+							<FormattedMessage
+								id="downloadAppButton__label"
+								defaultMessage="Download App"
+							/>
+						)
 					}
-					IconLeft={IconDownload}
+					IconLeft={alternateCta ? undefined : IconDownload}
 					IconRight={IconDisclosure}
 					className={clsx(className, isOpen && styles.buttonOpen)}
 					{...props}

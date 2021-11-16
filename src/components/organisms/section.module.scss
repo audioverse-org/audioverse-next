@@ -7,12 +7,25 @@
 		'. . . .'
 		'. content media .'
 		'. . . .';
-	grid-gap: 6rem;
 	overflow: hidden;
+	margin-bottom: 48px;
+	border-radius: 16px;
+	&:not(.center) {
+		.media + .content {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			margin: 48px;
+			min-height: 400px;
+		}
+	}
 }
 
 .media {
+	position: relative;
 	grid-area: media;
+	display: flex;
 	& > img {
 		object-fit: cover;
 		width: 100%;
@@ -23,18 +36,9 @@
 
 .content {
 	grid-area: content;
-	h2 {
-		font-size: 48px;
-		line-height: 48px;
-		margin-bottom: 8px;
-	}
 	p {
 		font-size: 18px;
 		line-height: 21.78px;
-	}
-	& > * {
-		margin-top: 0.5rem;
-		margin-bottom: 0.5rem;
 	}
 }
 
@@ -47,7 +51,6 @@
 
 .center {
 	text-align: center;
-	grid-gap: 3rem;
 	grid-template-columns: auto 1fr auto;
 	grid-template-areas:
 		'. . .'

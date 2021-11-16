@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import { BaseColors } from '@lib/constants';
@@ -11,6 +12,7 @@ interface SectionProps {
 	theme?: BaseColors.DARK | BaseColors.LIGHT_TONE | BaseColors.CREAM;
 	center?: boolean;
 	reverse?: boolean;
+	className?: string;
 }
 
 // TODO: vertical on mobile
@@ -22,17 +24,19 @@ export default function Section({
 	center,
 	reverse,
 	bleed,
+	className,
 }: SectionProps): JSX.Element {
-	const classes = [
-		styles.base,
-		theme && styles[theme],
-		center && styles.center,
-		reverse && styles.reverse,
-		bleed && styles.bleed,
-	];
-
 	return (
-		<div className={classes.join(' ')}>
+		<div
+			className={clsx(
+				styles.base,
+				theme && styles[theme],
+				center && styles.center,
+				reverse && styles.reverse,
+				bleed && styles.bleed,
+				className
+			)}
+		>
 			{media && <div className={styles.media}>{media}</div>}
 			<div className={styles.content}>{text}</div>
 		</div>

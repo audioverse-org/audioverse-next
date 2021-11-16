@@ -1,24 +1,29 @@
-import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import Heading1 from '@components/atoms/heading1';
+import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
+import DownloadAppButton from '@components/molecules/downloadAppButton';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import {
-	makeBlogPostListRoute,
+	makeAboutPage,
+	makeDiscoverCollectionsRoute,
+	makeDiscoverRoute,
 	makeDonateRoute,
+	makeLibraryRoute,
 	makeRegisterRoute,
+	makeSermonListRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -35,18 +40,131 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
+	const features: {
+		heading: JSX.Element;
+		kicker: JSX.Element;
+		cta: JSX.Element;
+		url: string;
+	}[] = [
+		{
+			heading: (
+				<FormattedMessage
+					id="homePage__feature1Heading"
+					defaultMessage="Treasures New and Old"
+				/>
+			),
+			kicker: (
+				<FormattedMessage
+					id="homePage__feature1Kicker"
+					defaultMessage="Easily discover inspiring content from a rich storehouse of spiritual content."
+				/>
+			),
+			cta: (
+				<FormattedMessage
+					id="homePage__feature1Cta"
+					defaultMessage="Discover Audio"
+				/>
+			),
+			url: makeDiscoverRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="homePage__feature2Heading"
+					defaultMessage="Present Truth"
+				/>
+			),
+			kicker: (
+				<FormattedMessage
+					id="homePage__feature2Kicker"
+					defaultMessage="AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
+				/>
+			),
+			cta: (
+				<FormattedMessage
+					id="homePage__feature2Cta"
+					defaultMessage="View Recent Content"
+				/>
+			),
+			url: makeSermonListRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="homePage__feature3Heading"
+					defaultMessage="Connected and Harmonious"
+				/>
+			),
+			kicker: (
+				<FormattedMessage
+					id="homePage__feature3Kicker"
+					defaultMessage="Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
+				/>
+			),
+			cta: (
+				<FormattedMessage
+					id="homePage__feature3Cta"
+					defaultMessage="Explore Cards"
+				/>
+			),
+			url: makeDiscoverCollectionsRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="homePage__feature4Heading"
+					defaultMessage="Save the Ones You Love"
+				/>
+			),
+			kicker: (
+				<FormattedMessage
+					id="homePage__feature4Kicker"
+					defaultMessage="Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
+				/>
+			),
+			cta: (
+				<FormattedMessage
+					id="homePage__feature4Cta"
+					defaultMessage="Explore Library"
+				/>
+			),
+			url: makeLibraryRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="homePage__feature5Heading"
+					defaultMessage="Lay Up for Yourselves…"
+				/>
+			),
+			kicker: (
+				<FormattedMessage
+					id="homePage__feature5Kicker"
+					defaultMessage="Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
+				/>
+			),
+			cta: (
+				<FormattedMessage
+					id="homePage__feature5Cta"
+					defaultMessage="Find Content to Download"
+				/>
+			),
+			url: makeSermonListRoute(languageRoute),
+		},
+	];
+
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<Section
 				text={
 					<>
-						<h2>
+						<Heading1 className={styles.tagline}>
 							<FormattedMessage
 								id="homePage__soundDoctrineTitle"
 								defaultMessage="Sound Doctrine"
 								description="home: Sound Doctrine section title"
 							/>
-						</h2>
+						</Heading1>
 						<p>
 							<FormattedMessage
 								id="homePage__soundDoctrineText"
@@ -56,12 +174,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</p>
 						<Button
 							type="super"
-							href={makeRegisterRoute(languageRoute)}
+							href={makeAboutPage(languageRoute, 1)}
 							text={
 								<FormattedMessage
-									id="homePage__joinAudioVerseButtonLabel"
-									defaultMessage="Join AudioVerse"
-									description="home page join audioverse button label"
+									id="homePage__learnStoryButtonLabel"
+									defaultMessage="Learn about our story"
 								/>
 							}
 						/>
@@ -70,24 +187,24 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				media={
 					<Image
 						src="/img/unsplash-headphones.jpg"
-						width={4724}
-						height={3072}
+						layout="fill"
+						objectFit="cover"
 					/>
 				}
 				theme={BaseColors.DARK}
-				bleed={true}
+				bleed
 			/>
 			<Section
 				text={
 					<>
-						<h2>
+						<Heading1>
 							<FormattedMessage
 								id="homePage__recentContentSectionTitle"
-								defaultMessage="Recent content"
+								defaultMessage="Recent Content"
 								description="home page recent content section title"
 							/>
-						</h2>
-						<p>
+						</Heading1>
+						<p className={styles.narrow}>
 							<FormattedMessage
 								id="homePage__recentContentSectionText"
 								defaultMessage="Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
@@ -106,7 +223,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					<Slider perSlide={4} clip={false}>
+					<Slider perSlide={3} clip={false}>
 						{recentRecordings.slice(0, 2).map((recording) => (
 							<div className={styles.slideCard} key={recording.canonicalPath}>
 								<CardRecording recording={recording} />
@@ -124,215 +241,123 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						))}
 					</Slider>
 				}
-				center={true}
-				reverse={true}
+				center
+				reverse
+			/>
+			<Section
+				text={
+					<div className={styles.blogSection}>
+						<Heading1>
+							<FormattedMessage
+								id="homePage__recentPostsSectionTitle"
+								defaultMessage="Recent Blog Posts"
+								description="home page recent posts section title"
+							/>
+						</Heading1>
+						<p className={styles.narrow}>
+							<FormattedMessage
+								id="homePage__recentPostsSectionText"
+								defaultMessage="Read through our blog to find articles about recent events, sermons, and conferences."
+								description="home page recent posts section text"
+							/>
+						</p>
+						<div
+							className={clsx(
+								styles.posts,
+								posts.length === 4 && styles.postsSquare
+							)}
+						>
+							{posts.map((p) => (
+								<CardPost key={p.title} post={p} />
+							))}
+						</div>
+					</div>
+				}
+				theme={BaseColors.CREAM}
+				center
+			/>
+			<div className={styles.featuresWrapper}>
+				<Slider perSlide={1} floatingControls dark>
+					{features.map(({ heading, kicker, cta, url }, index) => (
+						<Section
+							key={index}
+							text={
+								<>
+									<Heading1>{heading}</Heading1>
+									<p>{kicker}</p>
+									<Button type="super" href={url} text={cta} />
+								</>
+							}
+							media={
+								<Image
+									src={`/img/features/${index + 1}.png`}
+									layout="fill"
+									objectFit="cover"
+								/>
+							}
+							theme={BaseColors.DARK}
+							className={styles.unpaddedSlide}
+						/>
+					))}
+				</Slider>
+			</div>
+			<Section
+				text={
+					<Heading1 className={styles.testimoniesHeading}>
+						<FormattedMessage
+							id="home__testimoniesTitle"
+							defaultMessage="Testimonies"
+							description="Testimonies slider title"
+						/>
+					</Heading1>
+				}
+				media={<Testimonies testimonies={testimonies} />}
+				center
+				reverse
 			/>
 			<Section
 				text={
 					<>
-						<h2>
+						<Heading1>
 							<FormattedMessage
 								id="homePage__downloadAppSectionTitle"
 								defaultMessage="Download the App"
 								description="home page download app section title"
 							/>
-						</h2>
+						</Heading1>
 						<p>
 							<FormattedMessage
 								id="homePage__downloadAppSectionText"
-								defaultMessage="If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere over your network connection or download before-hand to listen on-the-go without using your data."
+								defaultMessage="If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
 								description="home page download app section text"
 							/>
 						</p>
-						<Button
-							type="super"
-							href={`/${languageRoute}/app`}
-							text={
-								<FormattedMessage
-									id="homePage__downloadNowButtonLabel"
-									defaultMessage="Download Now"
-									description="home page download now button label"
-								/>
-							}
-						/>
-					</>
-				}
-				media={<Image src="/img/players.jpeg" width={3564} height={1724} />}
-				theme={BaseColors.DARK}
-			/>
-			<Section
-				text={
-					<>
-						<h2>
-							<FormattedMessage
-								id="home__testimoniesTitle"
-								defaultMessage="Testimonies"
-								description="Testimonies slider title"
-							/>
-						</h2>
-						<p>
-							<FormattedMessage
-								id="homePage__testimoniesSectionText"
-								defaultMessage="Hear from some of the people who use AudioVerse."
-								description="home page testimonies section text"
-							/>
-						</p>
-					</>
-				}
-				media={<Testimonies testimonies={testimonies} />}
-				center={true}
-				reverse={true}
-			/>
-			<Section
-				text={
-					<>
-						<h2>
-							<FormattedMessage
-								id="homePage__recentPostsSectionTitle"
-								defaultMessage="Recent blog posts"
-								description="home page recent posts section title"
-							/>
-						</h2>
-						<p>
-							<FormattedMessage
-								id="homePage__recentPostsSectionText"
-								defaultMessage="Read through our blog to find articles about recent events, sermons, and conferences. It’s updated semi-regularly at least once a month."
-								description="home page recent posts section text"
-							/>
-						</p>
-						<Button
-							type="super"
-							href={makeBlogPostListRoute(languageRoute)}
-							text={
-								<FormattedMessage
-									id="homePage__recentPostsButtonLabel"
-									defaultMessage="View all blog posts"
-									description="home page recent posts button label"
-								/>
-							}
+						<DownloadAppButton
+							buttonType="super"
+							menuAlignment="left"
+							alternateCta
 						/>
 					</>
 				}
 				media={
-					<div className={styles.posts}>
-						{posts.map((p) => (
-							<CardPost key={p.title} post={p} />
-						))}
-					</div>
-				}
-				theme={BaseColors.LIGHT_TONE}
-			/>
-			<Section
-				text={
-					<>
-						<h2>
-							<FormattedMessage
-								id="homePage__createAccountSectionTitle"
-								defaultMessage="Create an account"
-								description="home page create account section title"
-							/>
-						</h2>
-						<p>
-							<FormattedMessage
-								id="homePage__createAccountSectionText"
-								defaultMessage="Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
-								description="home page create account section text"
-							/>
-						</p>
-						<Button
-							type="super"
-							href={makeRegisterRoute(languageRoute)}
-							text={
-								<FormattedMessage
-									id="homePage__createAccountSectionCTA"
-									defaultMessage="Sign up now"
-									description="home page create account section cta"
-								/>
-							}
-						/>
-					</>
-				}
-				media={
-					<>
-						<div>
-							<FormattedMessage
-								id="homePage__addToLibraryPlaceholder"
-								defaultMessage="Add to Library"
-								description="home page add to library placeholder"
-							/>
-						</div>
-						<div>
-							<FormattedMessage
-								id="homePage__downloadQueuePlaceholder"
-								defaultMessage="Download Queue"
-								description="home page downloaed queue placeholder"
-							/>
-						</div>
-						<div>
-							<FormattedMessage
-								id="homePage__followFunctionalityPlaceholder"
-								defaultMessage="Follow Functionality"
-								description="home page follow functionality placeholder"
-							/>
-						</div>
-					</>
-				}
-				reverse={true}
-			/>
-			<Section
-				text={
-					<>
-						<h2>
-							<FormattedMessage
-								id="homePage__supportSectionTitle"
-								defaultMessage="Support free audio"
-								description="home page support section title"
-							/>
-						</h2>
-						<p>
-							<FormattedMessage
-								id="homePage__supportSectionText"
-								defaultMessage="AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
-								description="home page support section text"
-							/>
-						</p>
-						<Button
-							type="super"
-							href={makeDonateRoute(languageRoute)}
-							text={
-								<FormattedMessage
-									id="homePage__supportSectionCTA"
-									defaultMessage="Make a donation"
-									description="home page support section cta"
-								/>
-							}
-						/>
-					</>
-				}
-				media={
-					<div>
-						<FormattedMessage
-							id="homePage__supportSectionImagePlaceholder"
-							defaultMessage="image"
-							description="home page support section image placeholder"
-						/>
-					</div>
+					<Image src="/img/players.jpeg" layout="fill" objectFit="cover" />
 				}
 				theme={BaseColors.CREAM}
+				reverse
 			/>
 			<Section
 				theme={BaseColors.DARK}
-				reverse={true}
-				bleed={true}
+				reverse
+				bleed
 				text={
 					<>
-						<h2>
+						<Heading1>
 							<FormattedMessage
 								id="homePage__newsletterSectionTitle"
 								defaultMessage="Subscribe to Updates"
 								description="home page newsletter section title"
 							/>
-						</h2>
+						</Heading1>
 						<p>
 							<FormattedMessage
 								id="homePage__newsletterSectionText"
@@ -356,104 +381,57 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				}
 				media={
 					// TODO: Replace with subscription widget
-					<Image src="/img/unsplash-notes.jpg" width={1200} height={800} />
+					<div />
 				}
+			/>
+			<Section
+				text={
+					<>
+						<Heading1>
+							<FormattedMessage
+								id="homePage__supportSectionTitle"
+								defaultMessage="Support free audio"
+								description="home page support section title"
+							/>
+						</Heading1>
+						<p>
+							<FormattedMessage
+								id="homePage__supportSectionText"
+								defaultMessage="AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
+								description="home page support section text"
+							/>
+						</p>
+						<Button
+							type="super"
+							href={makeDonateRoute(languageRoute)}
+							text={
+								<FormattedMessage
+									id="homePage__supportSectionCTA"
+									defaultMessage="Make a donation"
+									description="home page support section cta"
+								/>
+							}
+						/>
+					</>
+				}
+				media={
+					<Image
+						src="/img/unsplash-support.jpg"
+						layout="fill"
+						objectFit="cover"
+					/>
+				}
+				theme={BaseColors.LIGHT_TONE}
+				bleed
 			/>
 			<div className={styles.footer}>
 				<Image src="/img/logo.svg" width={161} height={23} />
-				<div className={styles.footerLinks}>
-					<div>
-						<h5>
-							<FormattedMessage
-								id="homePage__footerSocialTitle"
-								defaultMessage="Social"
-								description="home page footer social title"
-							/>
-						</h5>
-						<ul>
-							<li>
-								<Link href="https://www.facebook.com/AudioVerse">
-									<a target="_blank" rel="noreferrer noopener">
-										<FacebookIcon fontSize="small" />
-										<FormattedMessage
-											id="homePage__footerFacebookLink"
-											defaultMessage="Facebook"
-											description="home page footer facebook link"
-										/>
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="https://www.instagram.com/audioverse/">
-									<a target="_blank" rel="noreferrer noopener">
-										<InstagramIcon fontSize="small" />
-										<FormattedMessage
-											id="homePage__footerInstagramLink"
-											defaultMessage="Instagram"
-											description="home page footer instagram link"
-										/>
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="https://twitter.com/audioverse">
-									<a target="_blank" rel="noreferrer noopener">
-										<TwitterIcon fontSize="small" />
-										<FormattedMessage
-											id="homePage__footerTwitterLink"
-											defaultMessage="Twitter"
-											description="home page footer twitter link"
-										/>
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div>
-						<h5>
-							<FormattedMessage
-								id="homePage__footerLinksTitle"
-								defaultMessage="Links"
-								description="home page footer links title"
-							/>
-						</h5>
-						<ul>
-							<li>
-								<Link href={`${languageRoute}/app`}>
-									<a>
-										<FormattedMessage
-											id="homePage__footerDownloadAppButton"
-											defaultMessage="Download app"
-											description="home page footer download app button"
-										/>
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5">
-									<a target="_blank" rel="noreferrer noopener">
-										<FormattedMessage
-											id="homePage__footerNewsletterSignup"
-											defaultMessage="Sign up for newsletter"
-											description="homePage__footerNewsletterSignup"
-										/>
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href={makeDonateRoute(languageRoute)}>
-									<a>
-										<FormattedMessage
-											id="homePage__footerDonateLink"
-											defaultMessage="Donate"
-											description="home page footer donate link"
-										/>
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<Heading3 sans unpadded>
+					<FormattedMessage
+						id="homePage__tagline"
+						defaultMessage="Sound Doctrine"
+					/>
+				</Heading3>
 			</div>
 		</div>
 	);

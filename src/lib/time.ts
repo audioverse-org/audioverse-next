@@ -53,7 +53,7 @@ export const useFormattedDuration = (seconds: number): string => {
 			defaultMessage: '{minutes}m',
 			description: 'duration minutes',
 		},
-		{ minutes }
+		{ minutes: minutes || 1 }
 	);
 };
 

@@ -1,69 +1,59 @@
 @import '../styles/common';
 
-.header {
-	display: flex;
-	align-items: center;
-	padding: 2rem;
-	justify-content: space-between;
-	color: $ts-dark;
-}
+.wrapper {
+	max-width: 1042px;
 
-.nav {
-	display: flex;
-	align-items: center;
-	& > * {
-		margin-left: 39px;
+	p {
+		margin: 0 0 16px;
 	}
 }
 
-.divider {
-	align-self: stretch;
-	border-left: 1px solid $ts-midTone;
+.tagline {
+	font-size: 48px;
+	margin-bottom: 8px;
+}
+
+.narrow.narrow {
+	max-width: 560px;
+	margin: 0 auto 32px;
+}
+
+.testimoniesHeading {
+	margin-bottom: 32px;
 }
 
 .slideCard {
-	margin-left: 1rem;
-	margin-right: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.blogSection {
+	margin: 48px;
 }
 
 .posts {
 	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 16px;
+}
+.postsSquare {
 	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 2rem;
+}
+
+.featuresWrapper {
+	margin-bottom: 48px;
+}
+.unpaddedSlide {
+	margin: 0;
 }
 
 .footer {
-	padding: 3rem;
+	margin-bottom: 8px;
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
-}
 
-.footerLinks {
-	display: flex;
-	& > div {
-		margin-left: 2rem;
-	}
-	h5 {
-		margin-top: 0;
-		margin-bottom: 0;
+	h3 {
 		font-size: 18px;
-	}
-	ul {
-		padding-left: 0;
-		margin-top: 0.5rem;
-		margin-bottom: 0;
-	}
-	li {
-		list-style-type: none;
-		font-size: 14px;
-	}
-	a {
-		text-decoration: none;
-		display: flex;
-		align-items: center;
-		height: 2rem;
-	}
-	svg {
-		margin-right: 0.25em;
 	}
 }
