@@ -17,7 +17,6 @@ import {
 	makeLibraryRoute,
 	makeLogoutRoute,
 	makePresenterListRoute,
-	makeSeriesListRoute,
 	makeSongAlbumsListRoute,
 	makeSponsorListRoute,
 	makeStoryAlbumListPage,
@@ -36,7 +35,6 @@ import IconHeartHeavy from '../../public/img/fa-heart-heavy.svg';
 import IconInbox from '../../public/img/fa-inbox.svg';
 import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
-import IconListAlt from '../../public/img/fa-list-alt.svg';
 import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
 import IconList from '../../public/img/fa-list-light.svg';
 import IconLock from '../../public/img/fa-lock-heavy.svg';
