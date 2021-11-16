@@ -11,13 +11,13 @@
 }
 
 .body {
-	font-size: 1.25rem;
-	color: black;
-	margin-top: 0;
+	margin: 0 0 32px;
+	font-family: $serif;
+	font-size: 28px;
+	line-height: 42px;
 }
 
 .author {
-	font-family: $headingFont;
+	font-size: 24px;
 	font-style: normal;
-	font-weight: bold;
 }

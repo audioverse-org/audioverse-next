@@ -3,6 +3,7 @@
 .slider {
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .grow > .slides {
@@ -15,7 +16,7 @@
 .slides {
 	display: flex;
 	align-items: flex-start;
-	margin-bottom: 2rem;
+	margin-bottom: 24px;
 	position: relative;
 	transform: translateX(0);
 	transition: transform $transition-medium;
@@ -24,6 +25,7 @@
 			(100% / var(--perSlide, 1)) - 1px + 1px
 		); // Hack to turn 100% into pixels to avoid squishing to flex-basis: auto
 		flex: 0 0 var(--cardWidth);
+		width: calc(100% / var(--perSlide));
 	}
 }
 
@@ -68,4 +70,12 @@
 .buttonSquare.buttonSquare {
 	height: 40px;
 	width: 40px;
+}
+
+.floatingControls {
+	.controls {
+		position: absolute;
+		left: 48px;
+		bottom: 48px;
+	}
 }
