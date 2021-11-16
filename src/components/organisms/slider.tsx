@@ -91,7 +91,7 @@ export default function Slider({
 							aria-label={intl.formatMessage(
 								{
 									id: 'cardSlider__pageNumberLabel',
-									defaultMessage: 'Page {nuber}',
+									defaultMessage: 'Page {number}',
 								},
 								{
 									number: i + 1,
