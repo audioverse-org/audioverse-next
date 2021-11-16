@@ -14627,7 +14627,7 @@ export const GetSeriesListPageDataDocument = `
     language: $language
     offset: $offset
     first: $first
-    orderBy: [{field: TITLE, direction: ASC}]
+    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: ASC}]
   ) {
     nodes {
       ...cardSequence

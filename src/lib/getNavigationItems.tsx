@@ -145,15 +145,6 @@ export function getNavigationItems(
 					}),
 				},
 				{
-					key: 'series',
-					href: makeSeriesListRoute(languageRoute),
-					Icon: IconListAlt,
-					label: intl.formatMessage({
-						id: `header__naveItemCollections-series`,
-						defaultMessage: 'Series',
-					}),
-				},
-				{
 					key: 'presenter',
 					href: makePresenterListRoute(languageRoute),
 					Icon: IconUser,
