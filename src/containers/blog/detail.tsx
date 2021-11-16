@@ -44,18 +44,16 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 					<div className={styles.date}>{formatLongDate(publishDate)}</div>
 					<h1>{title}</h1>
 					<div className={styles.teaser}>{teaser}</div>
-					{readingDuration && readingDuration > 30 && (
-						<div className={styles.duration}>
-							<FormattedMessage
-								id="blogDetailPage__readingDuration"
-								defaultMessage="{duration} read"
-								description="Blog post detail reading duration"
-								values={{
-									duration,
-								}}
-							/>
-						</div>
-					)}
+					<div className={styles.duration}>
+						<FormattedMessage
+							id="blogDetailPage__readingDuration"
+							defaultMessage="{duration} read"
+							description="Blog post detail reading duration"
+							values={{
+								duration,
+							}}
+						/>
+					</div>
 					<HorizontalRule color={BaseColors.LIGHT_TONE} />
 					<div
 						className={styles.article}
