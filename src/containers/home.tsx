@@ -10,6 +10,7 @@ import Button from '@components/molecules/button';
 import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
+import DownloadAppButton from '@components/molecules/downloadAppButton';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
@@ -331,16 +332,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page download app section text"
 							/>
 						</p>
-						<Button
-							type="super"
-							href={`/${languageRoute}/app`}
-							text={
-								<FormattedMessage
-									id="homePage__downloadNowButtonLabel"
-									defaultMessage="Download Now"
-									description="home page download now button label"
-								/>
-							}
+						<DownloadAppButton
+							buttonType="super"
+							menuAlignment="left"
+							alternateCta
 						/>
 					</>
 				}

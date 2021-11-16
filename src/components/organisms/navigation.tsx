@@ -65,7 +65,7 @@ const Navigation = ({
 									router.push(`/${baseUrl}/`);
 								}}
 							/>
-							<DownloadAppButton menuAlignment="right" />
+							<DownloadAppButton buttonType="secondary" menuAlignment="right" />
 						</div>
 
 						<ul>

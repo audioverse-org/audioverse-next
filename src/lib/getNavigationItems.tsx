@@ -397,7 +397,7 @@ export function getNavigationItems(
 						/>
 					</li>
 					<li>
-						<DownloadAppButton menuAlignment="left" />
+						<DownloadAppButton buttonType="secondary" menuAlignment="left" />
 					</li>
 				</>
 			),
