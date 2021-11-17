@@ -73,9 +73,36 @@
 }
 
 .floatingControls {
+	.slides {
+		align-items: stretch;
+		margin: 0;
+	}
+	$button-margin: 8.5px;
 	.controls {
 		position: absolute;
-		left: 48px;
-		bottom: 48px;
+		left: #{16px - $button-margin};
+		bottom: #{16px - $button-margin};
+		@media (min-width: $breakpoint-lg) {
+			left: #{48px - $button-margin};
+			bottom: #{48px - $button-margin};
+		}
+	}
+}
+
+.disabledOnMobile {
+	@media (max-width: #{$breakpoint-lg - 1px}) {
+		width: 100%;
+
+		.slides {
+			display: block;
+			margin-bottom: 0;
+
+			> * {
+				width: auto;
+			}
+		}
+		.controls {
+			display: none;
+		}
 	}
 }

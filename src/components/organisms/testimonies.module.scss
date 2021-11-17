@@ -10,11 +10,21 @@
 	margin-right: 0;
 }
 
-.body {
+.body.body {
 	margin: 0 0 32px;
 	font-family: $serif;
-	font-size: 28px;
-	line-height: 42px;
+	font-size: 20px;
+	line-height: 30px;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 12;
+	-webkit-box-orient: vertical;
+	@media (min-width: $breakpoint-lg) {
+		font-size: 28px;
+		line-height: 42px;
+	}
 }
 
 .author {

@@ -1,12 +1,8 @@
 @import '../../styles/common';
 
 .base {
-	display: grid;
-	grid-template-columns: auto 1fr 1fr auto;
-	grid-template-areas:
-		'. . . .'
-		'. content media .'
-		'. . . .';
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
 	margin-bottom: 48px;
 	border-radius: 16px;
@@ -16,15 +12,26 @@
 			flex-direction: column;
 			align-items: flex-start;
 			justify-content: center;
-			margin: 48px;
-			min-height: 400px;
+			margin: 16px;
+			@media (min-width: $breakpoint-lg) {
+				margin: 48px;
+				min-height: 400px;
+			}
 		}
+	}
+	@media (min-width: $breakpoint-lg) {
+		display: grid;
+		grid-template-columns: auto 1fr 1fr auto;
+		grid-template-areas:
+			'. . . .'
+			'. content media .'
+			'. . . .';
 	}
 }
 
 .media {
+	height: calc(100vw - 48px);
 	position: relative;
-	grid-area: media;
 	display: flex;
 	& > img {
 		object-fit: cover;
@@ -32,13 +39,22 @@
 		height: 100%;
 		display: block;
 	}
+	@media (min-width: $breakpoint-lg) {
+		grid-area: media;
+		height: auto;
+	}
 }
 
 .content {
-	grid-area: content;
 	p {
-		font-size: 18px;
+		font-size: 17px;
 		line-height: 21.78px;
+	}
+	@media (min-width: $breakpoint-lg) {
+		grid-area: content;
+		p {
+			font-size: 18px;
+		}
 	}
 }
 
@@ -65,29 +81,31 @@
 }
 
 .reverse {
-	grid-template-areas:
-		'. . . .'
-		'. media content .'
-		'. . . .';
-	&.bleed {
+	@media (min-width: $breakpoint-lg) {
 		grid-template-areas:
-			'media media . .'
-			'media media content .'
-			'media media . .';
-	}
-	&.center {
-		grid-template-areas:
-			'. . .'
-			'. content .'
-			'. media .'
-			'. . .';
-	}
-	&.center.bleed {
-		grid-template-areas:
-			'. . .'
-			'. content .'
-			'media media media'
-			'media media media';
+			'. . . .'
+			'. media content .'
+			'. . . .';
+		&.bleed {
+			grid-template-areas:
+				'media media . .'
+				'media media content .'
+				'media media . .';
+		}
+		&.center {
+			grid-template-areas:
+				'. . .'
+				'. content .'
+				'. media .'
+				'. . .';
+		}
+		&.center.bleed {
+			grid-template-areas:
+				'. . .'
+				'. content .'
+				'media media media'
+				'media media media';
+		}
 	}
 }
 

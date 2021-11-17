@@ -15,8 +15,6 @@ interface SectionProps {
 	className?: string;
 }
 
-// TODO: vertical on mobile
-
 export default function Section({
 	text,
 	media,

@@ -165,7 +165,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home: Sound Doctrine section title"
 							/>
 						</Heading1>
-						<p>
+						<p className={styles.paragraph}>
 							<FormattedMessage
 								id="homePage__soundDoctrineText"
 								defaultMessage="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
@@ -195,6 +195,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				bleed
 			/>
 			<Section
+				className={styles.recentSection}
 				text={
 					<>
 						<Heading1>
@@ -204,7 +205,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page recent content section title"
 							/>
 						</Heading1>
-						<p className={styles.narrow}>
+						<p className={clsx(styles.paragraph, styles.narrow)}>
 							<FormattedMessage
 								id="homePage__recentContentSectionText"
 								defaultMessage="Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
@@ -220,26 +221,24 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								}}
 							/>
 						</p>
+						<Slider perSlide={3} clip={false} disabledOnMobile>
+							{recentRecordings.slice(0, 2).map((recording) => (
+								<div className={styles.slideCard} key={recording.canonicalPath}>
+									<CardRecording recording={recording} />
+								</div>
+							))}
+							{chapter && (
+								<div className={styles.slideCard}>
+									<CardBibleChapter chapter={chapter} />
+								</div>
+							)}
+							{recentRecordings.slice(2).map((recording) => (
+								<div className={styles.slideCard} key={recording.canonicalPath}>
+									<CardRecording recording={recording} />
+								</div>
+							))}
+						</Slider>
 					</>
-				}
-				media={
-					<Slider perSlide={3} clip={false}>
-						{recentRecordings.slice(0, 2).map((recording) => (
-							<div className={styles.slideCard} key={recording.canonicalPath}>
-								<CardRecording recording={recording} />
-							</div>
-						))}
-						{chapter && (
-							<div className={styles.slideCard}>
-								<CardBibleChapter chapter={chapter} />
-							</div>
-						)}
-						{recentRecordings.slice(2).map((recording) => (
-							<div className={styles.slideCard} key={recording.canonicalPath}>
-								<CardRecording recording={recording} />
-							</div>
-						))}
-					</Slider>
 				}
 				center
 				reverse
@@ -254,7 +253,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page recent posts section title"
 							/>
 						</Heading1>
-						<p className={styles.narrow}>
+						<p className={clsx(styles.paragraph, styles.narrow)}>
 							<FormattedMessage
 								id="homePage__recentPostsSectionText"
 								defaultMessage="Read through our blog to find articles about recent events, sermons, and conferences."
@@ -268,7 +267,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							)}
 						>
 							{posts.map((p) => (
-								<CardPost key={p.title} post={p} />
+								<CardPost key={p.title} post={p} alternate />
 							))}
 						</div>
 					</div>
@@ -284,7 +283,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							text={
 								<>
 									<Heading1>{heading}</Heading1>
-									<p>{kicker}</p>
+									<p className={styles.paragraph}>{kicker}</p>
 									<Button type="super" href={url} text={cta} />
 								</>
 							}
@@ -296,22 +295,24 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								/>
 							}
 							theme={BaseColors.DARK}
-							className={styles.unpaddedSlide}
+							className={styles.featureSlide}
 						/>
 					))}
 				</Slider>
 			</div>
 			<Section
 				text={
-					<Heading1 className={styles.testimoniesHeading}>
-						<FormattedMessage
-							id="home__testimoniesTitle"
-							defaultMessage="Testimonies"
-							description="Testimonies slider title"
-						/>
-					</Heading1>
+					<>
+						<Heading1 className={styles.testimoniesHeading}>
+							<FormattedMessage
+								id="home__testimoniesTitle"
+								defaultMessage="Testimonies"
+								description="Testimonies slider title"
+							/>
+						</Heading1>
+						<Testimonies testimonies={testimonies} />
+					</>
 				}
-				media={<Testimonies testimonies={testimonies} />}
 				center
 				reverse
 			/>
@@ -325,7 +326,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page download app section title"
 							/>
 						</Heading1>
-						<p>
+						<p className={styles.paragraph}>
 							<FormattedMessage
 								id="homePage__downloadAppSectionText"
 								defaultMessage="If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
@@ -358,25 +359,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page newsletter section title"
 							/>
 						</Heading1>
-						<p>
+						<p className={styles.paragraph}>
 							<FormattedMessage
 								id="homePage__newsletterSectionText"
 								defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
 								description="home page newsletter section text"
 							/>
 						</p>
-						<Button
-							type="super"
-							href="https://audioverse.z2systems.com/np/clients/audioverse/subscribe.jsp?subscription=5"
-							text={
-								<FormattedMessage
-									id="homePage__emailSignupButton"
-									defaultMessage="Subscribe"
-									description="homePage__emailSignupButton"
-								/>
-							}
-							target="_blank"
-						/>
 					</>
 				}
 				media={
@@ -394,7 +383,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								description="home page support section title"
 							/>
 						</Heading1>
-						<p>
+						<p className={styles.paragraph}>
 							<FormattedMessage
 								id="homePage__supportSectionText"
 								defaultMessage="AudioVerse is a non-profit ministry that exists because of our supporters. Creating, maintaining, and improving a technology platform takes a lot of resources and we’re grateful to our generous group of donors. Consider contributing today, even if it’s just 5 dollars a month, and help ensure that we can continue providing sound doctrine."
