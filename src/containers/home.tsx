@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
@@ -11,6 +11,7 @@ import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
+import Input from '@components/molecules/form/input';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
@@ -27,6 +28,8 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconBell from '../../public/img/fa-bell.svg';
+
 import styles from './home.module.scss';
 
 export type HomeProps = {
@@ -34,7 +37,11 @@ export type HomeProps = {
 };
 
 export default function Home({ data }: HomeProps): JSX.Element {
+	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const chapter = data?.audiobible?.book.chapter;
 	const testimonies = data?.testimonies.nodes || [];
@@ -350,16 +357,17 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				theme={BaseColors.DARK}
 				reverse
 				bleed
+				short
 				text={
 					<>
-						<Heading1>
+						<Heading1 className={styles.newsletterPromoTitle}>
 							<FormattedMessage
 								id="homePage__newsletterSectionTitle"
 								defaultMessage="Subscribe to Updates"
 								description="home page newsletter section title"
 							/>
 						</Heading1>
-						<p className={styles.paragraph}>
+						<p className={styles.newsletterPromoKicker}>
 							<FormattedMessage
 								id="homePage__newsletterSectionText"
 								defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
@@ -369,8 +377,73 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					</>
 				}
 				media={
-					// TODO: Replace with subscription widget
-					<div />
+					<div className={styles.newsletterWrapper}>
+						<div className={styles.newsletterBox}>
+							<div className={styles.newsletterHat}>
+								<IconBell />
+								<FormattedMessage
+									id="homePage__newsletterHatTitle"
+									defaultMessage="Sign up for our Newsletter"
+								/>
+							</div>
+							<form
+								className={styles.newsletterBody}
+								action="https://audioverse.z2systems.com/np/clients/audioverse/submitSubscription.jsp"
+								method="POST"
+								target="_blank"
+							>
+								<input type="hidden" name="subscription" value="5" />
+								<input
+									type="hidden"
+									name="skipDuplicateRequestCheck"
+									value="1"
+								/>
+								<div className={styles.newsletterFieldRow}>
+									<Input
+										name="subscriber.name"
+										type="text"
+										label={
+											<FormattedMessage
+												id="homePage__newsletterName"
+												defaultMessage="Name"
+											/>
+										}
+										placeholder={intl.formatMessage({
+											id: 'homePage__newsletterNamePlaceholder',
+											defaultMessage: 'Joseph Bates',
+										})}
+										value={name}
+										setValue={setName}
+									/>
+									<Input
+										name="subscriber.email1"
+										type="text"
+										label={
+											<FormattedMessage
+												id="homePage__newsletterEmail"
+												defaultMessage="Email Address"
+											/>
+										}
+										placeholder={intl.formatMessage({
+											id: 'homePage__newsletterEmailPlaceholder',
+											defaultMessage: 'josephbates@email.com',
+										})}
+										value={email}
+										setValue={setEmail}
+									/>
+								</div>
+								<Button
+									type="secondary"
+									text={
+										<FormattedMessage
+											id="homePage__newsletterSubscribe"
+											defaultMessage="Subscribe"
+										/>
+									}
+								/>
+							</form>
+						</div>
+					</div>
 				}
 			/>
 			<Section

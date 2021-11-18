@@ -12,6 +12,7 @@ interface SectionProps {
 	theme?: BaseColors.DARK | BaseColors.LIGHT_TONE | BaseColors.CREAM;
 	center?: boolean;
 	reverse?: boolean;
+	short?: boolean;
 	className?: string;
 }
 
@@ -22,6 +23,7 @@ export default function Section({
 	center,
 	reverse,
 	bleed,
+	short,
 	className,
 }: SectionProps): JSX.Element {
 	return (
@@ -32,6 +34,7 @@ export default function Section({
 				center && styles.center,
 				reverse && styles.reverse,
 				bleed && styles.bleed,
+				short && styles.short,
 				className
 			)}
 		>
