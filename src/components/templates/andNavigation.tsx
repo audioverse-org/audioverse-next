@@ -53,7 +53,7 @@ export default function AndNavigation({
 
 	const navigationItems = getNavigationItems(router, languageRoute);
 	return (
-		<div className={styles.overflower}>
+		<div className={styles.positioner}>
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileHeaderTitle}>
 					<Header />
