@@ -4,7 +4,7 @@ import { buildRenderer } from '@lib/test/helpers';
 const renderComponent = buildRenderer(CardPost);
 
 describe('card post', () => {
-	it('does not display zero rounded down duration', async () => {
+	it('does not display zero rounded duration', async () => {
 		const { queryByText } = await renderComponent({
 			props: {
 				post: {
@@ -14,7 +14,7 @@ describe('card post', () => {
 			},
 		});
 
-		expect(queryByText('0m')).not.toBeInTheDocument();
+		expect(queryByText('1m read')).toBeInTheDocument();
 	});
 
 	it('links hero', async () => {
@@ -30,9 +30,8 @@ describe('card post', () => {
 			},
 		});
 
-		expect(getByAltText('the_title').parentElement).toHaveAttribute(
-			'href',
-			'/the_path'
-		);
+		expect(
+			getByAltText('the_title').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_path');
 	});
 });

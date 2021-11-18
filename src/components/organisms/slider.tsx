@@ -16,6 +16,7 @@ interface SliderProps {
 	dark?: boolean;
 	grow?: boolean;
 	floatingControls?: boolean;
+	disabledOnMobile?: boolean;
 }
 
 export default function Slider({
@@ -25,6 +26,7 @@ export default function Slider({
 	dark,
 	grow,
 	floatingControls,
+	disabledOnMobile,
 }: SliderProps): JSX.Element {
 	const [delta, setDelta] = useState<number>(0);
 
@@ -46,7 +48,8 @@ export default function Slider({
 				styles.slider,
 				dark && styles.dark,
 				grow && styles.grow,
-				floatingControls && styles.floatingControls
+				floatingControls && styles.floatingControls,
+				disabledOnMobile && styles.disabledOnMobile
 			)}
 			style={
 				{

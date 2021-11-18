@@ -2,39 +2,71 @@
 
 .wrapper {
 	max-width: 1042px;
+	margin-top: 8px;
 
-	p {
-		margin: 0 0 16px;
+	@media (min-width: $breakpoint-lg) {
+		margin-top: 0;
 	}
+}
+.paragraph {
+	margin: 0 0 16px;
 }
 
 .tagline {
-	font-size: 48px;
 	margin-bottom: 8px;
+	@media (min-width: $breakpoint-lg) {
+		font-size: 48px;
+	}
 }
 
 .narrow.narrow {
 	max-width: 560px;
-	margin: 0 auto 32px;
+	margin: 0 auto 16px;
+	@media (min-width: $breakpoint-lg) {
+		margin-bottom: 32px;
+	}
 }
 
 .testimoniesHeading {
 	margin-bottom: 32px;
 }
 
+.recentSection {
+	@media (max-width: #{$breakpoint-lg - 1px}) {
+		overflow: visible;
+		> *:first-child {
+			height: auto;
+		}
+	}
+}
+
 .slideCard {
-	padding-left: 1rem;
-	padding-right: 1rem;
+	&:not(:last-child) {
+		margin-bottom: 16px;
+	}
+	@media (min-width: $breakpoint-lg) {
+		padding-left: 1rem;
+		padding-right: 1rem;
+		margin-bottom: 0;
+	}
 }
 
 .blogSection {
-	margin: 48px;
+	margin: 16px 11px;
+	@media (min-width: $breakpoint-lg) {
+		margin: 48px 48px 32px;
+	}
 }
 
 .posts {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 16px;
+	> * {
+		margin-bottom: 16px;
+	}
+	@media (min-width: $breakpoint-lg) {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 16px;
+	}
 }
 .postsSquare {
 	grid-template-columns: repeat(2, 1fr);
@@ -43,8 +75,11 @@
 .featuresWrapper {
 	margin-bottom: 48px;
 }
-.unpaddedSlide {
+.featureSlide {
 	margin: 0;
+	> *:last-child {
+		padding-bottom: 56px;
+	}
 }
 
 .footer {

@@ -2,9 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import Todo from '@components/molecules/todo';
+
+export default Todo;
+
 // TODO: Ensure this page gets statically generated
 // TODO: How will we translate this page?
-export default function Give(): JSX.Element {
+export function Give(): JSX.Element {
 	return (
 		<>
 			<h1>Donate Now</h1>
