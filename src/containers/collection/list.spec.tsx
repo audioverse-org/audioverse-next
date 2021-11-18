@@ -115,6 +115,6 @@ describe('conference list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Conferences')).toBeInTheDocument();
+		expect(getByText('All Conferences')).toBeInTheDocument();
 	});
 });
