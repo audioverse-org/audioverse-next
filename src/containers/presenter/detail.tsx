@@ -156,19 +156,19 @@ function PresenterDetail({
 							</span>
 						)}
 					</Heading6>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
-						backgroundColor={BaseColors.SMART_PLAYLIST_H}
-						className={styles.iconButton}
-					/>
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={makePresenterFeedRoute(lang, id)}
+					/>
+					<IconButton
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onClick={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+						backgroundColor={BaseColors.SMART_PLAYLIST_H}
+						className={styles.iconButton}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.LIGHT_TONE} />

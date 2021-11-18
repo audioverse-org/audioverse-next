@@ -132,19 +132,19 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							/>
 						)}
 					</Heading6>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
-						backgroundColor={BaseColors.LIGHT_TONE}
-						className={styles.iconButton}
-					/>
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.LIGHT_TONE}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={makeSponsorFeedRoute(languageRoute, id)}
+					/>
+					<IconButton
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onClick={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+						backgroundColor={BaseColors.LIGHT_TONE}
+						className={styles.iconButton}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

@@ -32,7 +32,7 @@ function CollectionList({
 			heading={
 				<FormattedMessage
 					id="conferenceListPage__title"
-					defaultMessage="Conferences"
+					defaultMessage="All Conferences"
 				/>
 			}
 			makeRoute={makeConferenceListRoute}

@@ -614,7 +614,7 @@
   },
   "conferenceListPage__title": {
     "col": 12,
-    "defaultMessage": "Conferences",
+    "defaultMessage": "All Conferences",
     "end": 1145,
     "file": "src/containers/collection/list.tsx",
     "line": 32,

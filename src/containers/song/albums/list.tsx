@@ -265,7 +265,7 @@ function SongAlbumList({ data }: SongAlbumsListProps): JSX.Element {
 						<a>
 							<FormattedMessage
 								id="songsListPage__Song of SolomonLabel"
-								defaultMessage="Detail of Solomon"
+								defaultMessage="Song of Solomon"
 								description="Songs list page Detail of Solomon link label"
 							/>
 						</a>
