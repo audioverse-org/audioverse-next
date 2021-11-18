@@ -23,12 +23,12 @@
 }
 
 .logo,
-.kicker {
+.intro {
 	text-align: center;
 	margin-bottom: 32px;
 }
 
-.kicker {
+.intro {
 	font-size: 18px;
 	line-height: 21.78px;
 	color: $ts-black;
@@ -47,16 +47,19 @@
 	}
 }
 
-$onboarding-image-width: 3494px;
 .cards {
-	background: url('/img/onboarding.jpg') no-repeat 67% top;
-	background-size: #{math.div($onboarding-image-width, 2)} auto;
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
 }
 
 .description {
-	width: 330px;
-	text-align: center;
-	margin: 32px auto 0;
+	margin: 32px 48px 88px;
+}
+
+.kicker {
+	margin: 0 0 48px;
+	font-size: 18px;
 }
 
 .heading {
@@ -73,10 +76,10 @@ $onboarding-image-width: 3494px;
 		padding: 64px;
 	}
 	.promos {
+		min-width: 0;
 		flex: 1 1 56.5%;
 		display: flex;
 		flex-direction: column;
-		padding: 56px 0;
 		background: $ts-dark;
 		color: $ts-white;
 		> * {

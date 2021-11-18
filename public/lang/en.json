@@ -1195,7 +1195,7 @@
     "line": 330,
     "start": 9086
   },
-  "homePage__feature1Cta": {
+  "app__features1Cta": {
     "col": 9,
     "defaultMessage": "Discover Audio",
     "end": 2300,
@@ -1203,7 +1203,7 @@
     "line": 69,
     "start": 2202
   },
-  "homePage__feature1Heading": {
+  "app__features1Heading": {
     "col": 13,
     "defaultMessage": "Treasures New and Old",
     "end": 2002,
@@ -1211,7 +1211,7 @@
     "line": 57,
     "start": 1893
   },
-  "homePage__feature1Kicker": {
+  "app__features1Kicker": {
     "col": 12,
     "defaultMessage": "Easily discover inspiring content from a rich storehouse of spiritual content.",
     "end": 2186,
@@ -1219,7 +1219,7 @@
     "line": 63,
     "start": 2021
   },
-  "homePage__feature2Cta": {
+  "app__features2Cta": {
     "col": 9,
     "defaultMessage": "View Recent Content",
     "end": 2800,
@@ -1227,7 +1227,7 @@
     "line": 90,
     "start": 2697
   },
-  "homePage__feature2Heading": {
+  "app__features2Heading": {
     "col": 13,
     "defaultMessage": "Present Truth",
     "end": 2472,
@@ -1235,7 +1235,7 @@
     "line": 78,
     "start": 2371
   },
-  "homePage__feature2Kicker": {
+  "app__features2Kicker": {
     "col": 12,
     "defaultMessage": "AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors.",
     "end": 2681,
@@ -1243,7 +1243,7 @@
     "line": 84,
     "start": 2491
   },
-  "homePage__feature3Cta": {
+  "app__features3Cta": {
     "col": 9,
     "defaultMessage": "Explore Cards",
     "end": 3365,
@@ -1251,7 +1251,7 @@
     "line": 111,
     "start": 3268
   },
-  "homePage__feature3Heading": {
+  "app__features3Heading": {
     "col": 13,
     "defaultMessage": "Connected and Harmonious",
     "end": 2985,
@@ -1259,7 +1259,7 @@
     "line": 99,
     "start": 2873
   },
-  "homePage__feature3Kicker": {
+  "app__features3Kicker": {
     "col": 12,
     "defaultMessage": "Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections.",
     "end": 3252,
@@ -1267,7 +1267,7 @@
     "line": 105,
     "start": 3004
   },
-  "homePage__feature4Cta": {
+  "app__features4Cta": {
     "col": 9,
     "defaultMessage": "Explore Library",
     "end": 3896,
@@ -1275,7 +1275,7 @@
     "line": 132,
     "start": 3797
   },
-  "homePage__feature4Heading": {
+  "app__features4Heading": {
     "col": 13,
     "defaultMessage": "Save the Ones You Love",
     "end": 3557,
@@ -1283,7 +1283,7 @@
     "line": 120,
     "start": 3447
   },
-  "homePage__feature4Kicker": {
+  "app__features4Kicker": {
     "col": 12,
     "defaultMessage": "Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices.",
     "end": 3781,
@@ -1291,7 +1291,7 @@
     "line": 126,
     "start": 3576
   },
-  "homePage__feature5Cta": {
+  "app__features5Cta": {
     "col": 9,
     "defaultMessage": "Find Content to Download",
     "end": 4423,
@@ -1299,7 +1299,7 @@
     "line": 153,
     "start": 4315
   },
-  "homePage__feature5Heading": {
+  "app__features5Heading": {
     "col": 13,
     "defaultMessage": "Lay Up for Yourselves…",
     "end": 4076,
@@ -1307,7 +1307,7 @@
     "line": 141,
     "start": 3966
   },
-  "homePage__feature5Kicker": {
+  "app__features5Kicker": {
     "col": 12,
     "defaultMessage": "Download content to your devices for moments when you have no signal, or simply want to avoid your data running over.",
     "end": 4299,

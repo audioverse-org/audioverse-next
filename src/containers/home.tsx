@@ -17,15 +17,8 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import {
-	makeAboutPage,
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeLibraryRoute,
-	makeRegisterRoute,
-	makeSermonListRoute,
-} from '@lib/routes';
+import { getAppFeatures } from '@lib/getAppFeatures';
+import { makeAboutPage, makeDonateRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/fa-bell.svg';
@@ -47,118 +40,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
-	const features: {
-		heading: JSX.Element;
-		kicker: JSX.Element;
-		cta: JSX.Element;
-		url: string;
-	}[] = [
-		{
-			heading: (
-				<FormattedMessage
-					id="homePage__feature1Heading"
-					defaultMessage="Treasures New and Old"
-				/>
-			),
-			kicker: (
-				<FormattedMessage
-					id="homePage__feature1Kicker"
-					defaultMessage="Easily discover inspiring content from a rich storehouse of spiritual content."
-				/>
-			),
-			cta: (
-				<FormattedMessage
-					id="homePage__feature1Cta"
-					defaultMessage="Discover Audio"
-				/>
-			),
-			url: makeDiscoverRoute(languageRoute),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="homePage__feature2Heading"
-					defaultMessage="Present Truth"
-				/>
-			),
-			kicker: (
-				<FormattedMessage
-					id="homePage__feature2Kicker"
-					defaultMessage="AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
-				/>
-			),
-			cta: (
-				<FormattedMessage
-					id="homePage__feature2Cta"
-					defaultMessage="View Recent Content"
-				/>
-			),
-			url: makeSermonListRoute(languageRoute),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="homePage__feature3Heading"
-					defaultMessage="Connected and Harmonious"
-				/>
-			),
-			kicker: (
-				<FormattedMessage
-					id="homePage__feature3Kicker"
-					defaultMessage="Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
-				/>
-			),
-			cta: (
-				<FormattedMessage
-					id="homePage__feature3Cta"
-					defaultMessage="Explore Cards"
-				/>
-			),
-			url: makeDiscoverCollectionsRoute(languageRoute),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="homePage__feature4Heading"
-					defaultMessage="Save the Ones You Love"
-				/>
-			),
-			kicker: (
-				<FormattedMessage
-					id="homePage__feature4Kicker"
-					defaultMessage="Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
-				/>
-			),
-			cta: (
-				<FormattedMessage
-					id="homePage__feature4Cta"
-					defaultMessage="Explore Library"
-				/>
-			),
-			url: makeLibraryRoute(languageRoute),
-		},
-		{
-			heading: (
-				<FormattedMessage
-					id="homePage__feature5Heading"
-					defaultMessage="Lay Up for Yourselves…"
-				/>
-			),
-			kicker: (
-				<FormattedMessage
-					id="homePage__feature5Kicker"
-					defaultMessage="Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
-				/>
-			),
-			cta: (
-				<FormattedMessage
-					id="homePage__feature5Cta"
-					defaultMessage="Find Content to Download"
-				/>
-			),
-			url: makeSermonListRoute(languageRoute),
-		},
-	];
+	const features = getAppFeatures(languageRoute);
 
 	return (
 		<div className={styles.wrapper}>
@@ -284,7 +166,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			/>
 			<div className={styles.featuresWrapper}>
 				<Slider perSlide={1} floatingControls dark>
-					{features.map(({ heading, kicker, cta, url }, index) => (
+					{features.map(({ heading, kicker, cta, url, image }, index) => (
 						<Section
 							key={index}
 							text={
@@ -294,13 +176,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									<Button type="super" href={url} text={cta} />
 								</>
 							}
-							media={
-								<Image
-									src={`/img/features/${index + 1}.png`}
-									layout="fill"
-									objectFit="cover"
-								/>
-							}
+							media={<Image src={image} layout="fill" objectFit="cover" />}
 							theme={BaseColors.DARK}
 							className={styles.featureSlide}
 						/>
