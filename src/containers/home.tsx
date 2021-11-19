@@ -165,7 +165,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				center
 			/>
 			<div className={styles.featuresWrapper}>
-				<Slider perSlide={1} floatingControls dark>
+				<Slider perSlide={1} floatingControls dark grow>
 					{features.map(({ heading, kicker, cta, url, image }, index) => (
 						<Section
 							key={index}

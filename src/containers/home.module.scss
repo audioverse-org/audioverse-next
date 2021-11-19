@@ -74,6 +74,22 @@
 
 .featuresWrapper {
 	margin-bottom: 48px;
+	position: relative;
+	overflow: hidden;
+	padding-top: 150%;
+	> * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	@media (min-width: $breakpoint-md) {
+		padding-top: 100%;
+	}
+	@media (min-width: $breakpoint-lg) {
+		padding-top: 490px;
+	}
 }
 .featureSlide {
 	margin: 0;

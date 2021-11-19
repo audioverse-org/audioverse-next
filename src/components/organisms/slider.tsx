@@ -49,22 +49,18 @@ export default function Slider({
 				dark && styles.dark,
 				grow && styles.grow,
 				floatingControls && styles.floatingControls,
-				disabledOnMobile && styles.disabledOnMobile
+				disabledOnMobile && styles.disabledOnMobile,
+				styles[`slideActive${delta}`]
 			)}
 			style={
 				{
 					'--perSlide': perSlide,
+					'--activeSlide': delta,
 					overflow: clip ? 'hidden' : 'visible',
 				} as CSSProperties
 			}
 		>
-			<div
-				data-testid="card-window"
-				className={styles.slides}
-				style={{
-					transform: `translateX(-${delta * 100}%)`,
-				}}
-			>
+			<div data-testid="card-window" className={styles.slides}>
 				{children}
 			</div>
 			<div className={styles.controls}>

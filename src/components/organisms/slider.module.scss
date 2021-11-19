@@ -18,7 +18,7 @@
 	align-items: flex-start;
 	margin-bottom: 24px;
 	position: relative;
-	transform: translateX(0);
+	transform: translateX(calc(var(--activeSlide, 0) * -100%));
 	transition: transform $transition-medium;
 	> * {
 		--cardWidth: calc(
@@ -59,6 +59,9 @@
 }
 
 .dark {
+	.slides > * {
+		background-color: $ts-dark;
+	}
 	.dot {
 		background-color: $ts-midTone;
 	}
@@ -76,6 +79,23 @@
 	.slides {
 		align-items: stretch;
 		margin: 0;
+		position: relative;
+		transform: initial;
+		> * {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			transition: opacity $transition-medium;
+			opacity: 0;
+		}
+	}
+	$slideNums: 0, 1, 2, 3, 4;
+	@each $i in $slideNums {
+		&.slideActive#{$i} .slides > *:nth-child(#{$i + 1}) {
+			opacity: 1;
+		}
 	}
 	$button-margin: 8.5px;
 	.controls {
