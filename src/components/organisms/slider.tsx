@@ -52,6 +52,7 @@ export default function Slider({
 				disabledOnMobile && styles.disabledOnMobile,
 				styles[`slideActive${delta}`]
 			)}
+			data-testid="slider"
 			style={
 				{
 					'--perSlide': perSlide,
@@ -60,9 +61,7 @@ export default function Slider({
 				} as CSSProperties
 			}
 		>
-			<div data-testid="card-window" className={styles.slides}>
-				{children}
-			</div>
+			<div className={styles.slides}>{children}</div>
 			<div className={styles.controls}>
 				<Button
 					type={buttonType}

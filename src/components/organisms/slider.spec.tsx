@@ -53,11 +53,9 @@ describe('card slider', () => {
 
 		userEvent.click(getByLabelText('Next page'));
 
-		const pane = getByTestId('card-window');
+		const pane = getByTestId('slider');
 
-		expect(pane.style.getPropertyValue('transform')).toEqual(
-			'translateX(-100%)'
-		);
+		expect(pane.style.getPropertyValue('--activeSlide')).toEqual('1');
 	});
 
 	it('tracks page position', async () => {
@@ -70,11 +68,9 @@ describe('card slider', () => {
 		userEvent.click(getByLabelText('Next page'));
 		userEvent.click(getByLabelText('Next page'));
 
-		const pane = getByTestId('card-window');
+		const pane = getByTestId('slider');
 
-		expect(pane.style.getPropertyValue('transform')).toEqual(
-			'translateX(-200%)'
-		);
+		expect(pane.style.getPropertyValue('--activeSlide')).toEqual('2');
 	});
 
 	it('pages left', async () => {
@@ -87,9 +83,9 @@ describe('card slider', () => {
 		userEvent.click(getByLabelText('Next page'));
 		userEvent.click(getByLabelText('Previous page'));
 
-		const pane = getByTestId('card-window');
+		const pane = getByTestId('slider');
 
-		expect(pane.style.getPropertyValue('transform')).toEqual('translateX(-0%)');
+		expect(pane.style.getPropertyValue('--activeSlide')).toEqual('0');
 	});
 
 	it('does not page left past start', async () => {
@@ -102,11 +98,9 @@ describe('card slider', () => {
 		userEvent.click(getByLabelText('Previous page'));
 		userEvent.click(getByLabelText('Next page'));
 
-		const pane = getByTestId('card-window');
+		const pane = getByTestId('slider');
 
-		expect(pane.style.getPropertyValue('transform')).toEqual(
-			'translateX(-100%)'
-		);
+		expect(pane.style.getPropertyValue('--activeSlide')).toEqual('1');
 	});
 
 	it('does not page right past end', async () => {
@@ -118,9 +112,9 @@ describe('card slider', () => {
 
 		userEvent.click(getByLabelText('Next page'));
 
-		const pane = getByTestId('card-window');
+		const pane = getByTestId('slider');
 
-		expect(pane.style.getPropertyValue('transform')).toEqual('translateX(-0%)');
+		expect(pane.style.getPropertyValue('--activeSlide')).toEqual('0');
 	});
 
 	it('displays pagination dots', async () => {
