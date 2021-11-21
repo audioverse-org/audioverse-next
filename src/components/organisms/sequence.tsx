@@ -163,19 +163,19 @@ export function Sequence({
 					<div className={styles.duration}>
 						{useFormattedDuration(duration)}
 					</div>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
-						backgroundColor={BaseColors.CREAM}
-						className={styles.iconButton}
-					/>
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.CREAM}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={rssUrl}
+					/>
+					<IconButton
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onClick={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+						backgroundColor={BaseColors.CREAM}
+						className={styles.iconButton}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />

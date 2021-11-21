@@ -129,8 +129,8 @@ export function getNavigationItems(
 					href: makeSponsorListRoute(languageRoute),
 					Icon: IconUserPlusHeavy,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-sponsor`,
-						defaultMessage: 'Sponsor',
+						id: `header__naveItemCollections-sponsors`,
+						defaultMessage: 'Sponsors',
 					}),
 				},
 				{
@@ -138,8 +138,8 @@ export function getNavigationItems(
 					href: makeConferenceListRoute(languageRoute),
 					Icon: IconList,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-conference`,
-						defaultMessage: 'Conference',
+						id: `header__naveItemCollections-conferences`,
+						defaultMessage: 'Conferences',
 					}),
 				},
 				{
@@ -147,8 +147,8 @@ export function getNavigationItems(
 					href: makePresenterListRoute(languageRoute),
 					Icon: IconUser,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-speaker`,
-						defaultMessage: 'Speaker',
+						id: `header__naveItemCollections-speakers`,
+						defaultMessage: 'Speakers',
 					}),
 				},
 				{
@@ -165,8 +165,8 @@ export function getNavigationItems(
 					href: makeAudiobookListRoute(languageRoute),
 					Icon: IconBook,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-book`,
-						defaultMessage: 'Book',
+						id: `header__naveItemCollections-books`,
+						defaultMessage: 'Books',
 					}),
 				},
 				{

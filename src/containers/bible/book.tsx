@@ -165,6 +165,12 @@ function Book({
 					<div className={styles.definitions}>
 						<DefinitionList terms={details} textColor={BaseColors.DARK} />
 					</div>
+					<div className={styles.disclaimer}>
+						<FormattedMessage
+							id="bibleBook__disclaimer"
+							defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+						/>
+					</div>
 				</div>
 
 				<div className={styles.chapters}>

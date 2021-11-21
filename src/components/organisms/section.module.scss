@@ -15,6 +15,12 @@
 			margin: 16px;
 			@media (min-width: $breakpoint-lg) {
 				margin: 48px;
+			}
+		}
+	}
+	&:not(.short) {
+		.media + .content {
+			@media (min-width: $breakpoint-lg) {
 				min-height: 400px;
 			}
 		}
@@ -30,7 +36,6 @@
 }
 
 .media {
-	height: calc(100vw - 48px);
 	position: relative;
 	display: flex;
 	& > img {
@@ -41,8 +46,11 @@
 	}
 	@media (min-width: $breakpoint-lg) {
 		grid-area: media;
-		height: auto;
+		height: auto !important;
 	}
+}
+.base:not(.short) .media {
+	height: calc(100vw - 48px);
 }
 
 .content {

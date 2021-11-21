@@ -1,8 +1,7 @@
 @import '../../styles/common';
 
-.overflower {
+.positioner {
 	position: relative;
-	overflow: hidden;
 }
 
 .wrapper {
@@ -66,13 +65,13 @@
 }
 
 .navigation {
-	position: absolute;
-	height: 100vh;
+	position: fixed;
+	height: 100%;
 	width: 100vw;
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	padding: 24px 24px calc(32px + env(safe-area-inset-bottom));
+	padding: 24px 24px calc(24px + env(safe-area-inset-bottom));
 	background: $ts-cream;
 	z-index: 1000;
 	transition: transform $transition-medium;

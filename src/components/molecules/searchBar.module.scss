@@ -26,6 +26,7 @@
 		font-size: 22px;
 		line-height: 33px;
 		color: $ts-dark;
+		appearance: none;
 		&::placeholder {
 			opacity: 1;
 		}

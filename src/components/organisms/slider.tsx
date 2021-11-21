@@ -28,15 +28,18 @@ export default function Slider({
 	floatingControls,
 	disabledOnMobile,
 }: SliderProps): JSX.Element {
+	const intl = useIntl();
 	const [delta, setDelta] = useState<number>(0);
+
+	if (React.Children.count(children) > 5) {
+		throw new Error('Unsupported number of children');
+	}
 
 	const array = React.Children.toArray(children);
 	const pages = Math.ceil(array.length / perSlide);
 
 	const pageLeft = () => setDelta(Math.max(0, delta - 1));
 	const pageRight = () => setDelta(Math.min(pages - 1, delta + 1));
-
-	const intl = useIntl();
 
 	const buttonType = dark ? 'secondaryInverse' : 'secondary';
 
@@ -49,24 +52,19 @@ export default function Slider({
 				dark && styles.dark,
 				grow && styles.grow,
 				floatingControls && styles.floatingControls,
-				disabledOnMobile && styles.disabledOnMobile
+				disabledOnMobile && styles.disabledOnMobile,
+				styles[`slideActive${delta}`]
 			)}
+			data-testid="slider"
 			style={
 				{
 					'--perSlide': perSlide,
+					'--activeSlide': delta,
 					overflow: clip ? 'hidden' : 'visible',
 				} as CSSProperties
 			}
 		>
-			<div
-				data-testid="card-window"
-				className={styles.slides}
-				style={{
-					transform: `translateX(-${delta * 100}%)`,
-				}}
-			>
-				{children}
-			</div>
+			<div className={styles.slides}>{children}</div>
 			<div className={styles.controls}>
 				<Button
 					type={buttonType}

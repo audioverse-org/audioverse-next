@@ -137,7 +137,6 @@ const Player = ({
 					/>
 				</div>
 				<div className={styles.rightButtons}>
-					<ButtonSpeed {...{ recording, backgroundColor }} />
 					{shouldShowVideoControls && (
 						<button
 							aria-label={intl.formatMessage({
@@ -150,12 +149,7 @@ const Player = ({
 							<IconFullscreen />
 						</button>
 					)}
-					{!disableUserFeatures && (
-						<RecordingButtonFavorite
-							id={recording.id}
-							backgroundColor={backgroundColor}
-						/>
-					)}
+					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />
 					<ButtonShareRecording
 						{...{
@@ -165,6 +159,12 @@ const Player = ({
 							disableEmbedCode: disableUserFeatures,
 						}}
 					/>
+					{!disableUserFeatures && (
+						<RecordingButtonFavorite
+							id={recording.id}
+							backgroundColor={backgroundColor}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

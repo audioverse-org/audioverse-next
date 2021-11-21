@@ -3,9 +3,10 @@ import React from 'react';
 import styles from './input.module.scss';
 
 type InputOptions = {
-	label: string;
+	label: string | JSX.Element;
 	value: string;
 	setValue: (value: string) => void;
+	name?: string;
 	type?: string;
 	placeholder?: string;
 };
@@ -14,6 +15,7 @@ export default function Input({
 	label,
 	type = 'text',
 	value,
+	name,
 	setValue,
 	placeholder,
 }: InputOptions): JSX.Element {
@@ -22,6 +24,7 @@ export default function Input({
 			<label className={styles.label}>
 				{label}
 				<input
+					name={name}
 					className={styles.input}
 					type={type}
 					value={value}

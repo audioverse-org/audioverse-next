@@ -13758,7 +13758,7 @@ export const GetHomeStaticPropsDocument = `
   }
   blogPosts(
     language: $language
-    first: 2
+    first: 6
     orderBy: {field: PUBLISHED_AT, direction: DESC}
   ) {
     nodes {

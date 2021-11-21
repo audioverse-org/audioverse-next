@@ -149,6 +149,12 @@
       "value": "Other Chapters in Book"
     }
   ],
+  "bibleBook__disclaimer": [
+    {
+      "type": 0,
+      "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    }
+  ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
@@ -289,6 +295,12 @@
       "value": " read"
     }
   ],
+  "cardPost__typeLabel": [
+    {
+      "type": 0,
+      "value": "Blog"
+    }
+  ],
   "cardSequence_audiobookType": [
     {
       "type": 0,
@@ -333,6 +345,16 @@
     {
       "type": 0,
       "value": "Next page"
+    }
+  ],
+  "cardSlider__pageNumberLabel": [
+    {
+      "type": 0,
+      "value": "Page "
+    },
+    {
+      "type": 1,
+      "value": "number"
     }
   ],
   "cardSlider__paginationLabel": [
@@ -496,7 +518,7 @@
   "conferenceListPage__title": [
     {
       "type": 0,
-      "value": "Conferences"
+      "value": "All Conferences"
     }
   ],
   "container-sermonList__filterLabelAll": [
@@ -623,6 +645,12 @@
     {
       "type": 0,
       "value": "Trending Teachings"
+    }
+  ],
+  "downloadAppButton__altLabel": [
+    {
+      "type": 0,
+      "value": "Download Now"
     }
   ],
   "downloadAppButton__android": [
@@ -823,22 +851,16 @@
       "value": "All Collections"
     }
   ],
-  "header__naveItemCollections-book": [
+  "header__naveItemCollections-books": [
     {
       "type": 0,
-      "value": "Book"
+      "value": "Books"
     }
   ],
-  "header__naveItemCollections-conference": [
+  "header__naveItemCollections-conferences": [
     {
       "type": 0,
-      "value": "Conference"
-    }
-  ],
-  "header__naveItemCollections-series": [
-    {
-      "type": 0,
-      "value": "Series"
+      "value": "Conferences"
     }
   ],
   "header__naveItemCollections-songs": [
@@ -847,16 +869,16 @@
       "value": "Scripture Songs"
     }
   ],
-  "header__naveItemCollections-speaker": [
+  "header__naveItemCollections-speakers": [
     {
       "type": 0,
-      "value": "Speaker"
+      "value": "Speakers"
     }
   ],
-  "header__naveItemCollections-sponsor": [
+  "header__naveItemCollections-sponsors": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "Sponsors"
     }
   ],
   "header__naveItemCollections-stories": [
@@ -937,30 +959,6 @@
       "value": "Profile"
     }
   ],
-  "homePage__addToLibraryPlaceholder": [
-    {
-      "type": 0,
-      "value": "Add to Library"
-    }
-  ],
-  "homePage__createAccountSectionCTA": [
-    {
-      "type": 0,
-      "value": "Sign up now"
-    }
-  ],
-  "homePage__createAccountSectionText": [
-    {
-      "type": 0,
-      "value": "Create an account to get the most of Audioverse. Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
-    }
-  ],
-  "homePage__createAccountSectionTitle": [
-    {
-      "type": 0,
-      "value": "Create an account"
-    }
-  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -973,82 +971,130 @@
       "value": "Download the App"
     }
   ],
-  "homePage__downloadNowButtonLabel": [
+  "app__features1Cta": [
     {
       "type": 0,
-      "value": "Download Now"
+      "value": "Discover Audio"
     }
   ],
-  "homePage__downloadQueuePlaceholder": [
+  "app__features1Heading": [
     {
       "type": 0,
-      "value": "Download Queue"
+      "value": "Treasures New and Old"
     }
   ],
-  "homePage__emailSignupButton": [
+  "app__features1Kicker": [
     {
       "type": 0,
-      "value": "Subscribe"
+      "value": "Easily discover inspiring content from a rich storehouse of spiritual content."
     }
   ],
-  "homePage__followFunctionalityPlaceholder": [
+  "app__features2Cta": [
     {
       "type": 0,
-      "value": "Follow Functionality"
+      "value": "View Recent Content"
     }
   ],
-  "homePage__footerDonateLink": [
+  "app__features2Heading": [
     {
       "type": 0,
-      "value": "Donate"
+      "value": "Present Truth"
     }
   ],
-  "homePage__footerDownloadAppButton": [
+  "app__features2Kicker": [
     {
       "type": 0,
-      "value": "Download app"
+      "value": "AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
     }
   ],
-  "homePage__footerFacebookLink": [
+  "app__features3Cta": [
     {
       "type": 0,
-      "value": "Facebook"
+      "value": "Explore Cards"
     }
   ],
-  "homePage__footerInstagramLink": [
+  "app__features3Heading": [
     {
       "type": 0,
-      "value": "Instagram"
+      "value": "Connected and Harmonious"
     }
   ],
-  "homePage__footerLinksTitle": [
+  "app__features3Kicker": [
     {
       "type": 0,
-      "value": "Links"
+      "value": "Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
     }
   ],
-  "homePage__footerNewsletterSignup": [
+  "app__features4Cta": [
     {
       "type": 0,
-      "value": "Sign up for newsletter"
+      "value": "Explore Library"
     }
   ],
-  "homePage__footerSocialTitle": [
+  "app__features4Heading": [
     {
       "type": 0,
-      "value": "Social"
+      "value": "Save the Ones You Love"
     }
   ],
-  "homePage__footerTwitterLink": [
+  "app__features4Kicker": [
     {
       "type": 0,
-      "value": "Twitter"
+      "value": "Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
     }
   ],
-  "homePage__joinAudioVerseButtonLabel": [
+  "app__features5Cta": [
     {
       "type": 0,
-      "value": "Join AudioVerse"
+      "value": "Find Content to Download"
+    }
+  ],
+  "app__features5Heading": [
+    {
+      "type": 0,
+      "value": "Lay Up for Yourselves…"
+    }
+  ],
+  "app__features5Kicker": [
+    {
+      "type": 0,
+      "value": "Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
+    }
+  ],
+  "homePage__learnStoryButtonLabel": [
+    {
+      "type": 0,
+      "value": "Learn about our story"
+    }
+  ],
+  "homePage__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Email Address"
+    }
+  ],
+  "homePage__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "homePage__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Sign up for our Newsletter"
+    }
+  ],
+  "homePage__newsletterName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "homePage__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
     }
   ],
   "homePage__newsletterSectionText": [
@@ -1061,6 +1107,12 @@
     {
       "type": 0,
       "value": "Subscribe to Updates"
+    }
+  ],
+  "homePage__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Subscribe"
     }
   ],
   "homePage__recentContentSectionText": [
@@ -1087,12 +1139,6 @@
     {
       "type": 0,
       "value": "Recent Content"
-    }
-  ],
-  "homePage__recentPostsButtonLabel": [
-    {
-      "type": 0,
-      "value": "View all blog posts"
     }
   ],
   "homePage__recentPostsSectionText": [
@@ -1125,12 +1171,6 @@
       "value": "Make a donation"
     }
   ],
-  "homePage__supportSectionImagePlaceholder": [
-    {
-      "type": 0,
-      "value": "image"
-    }
-  ],
   "homePage__supportSectionText": [
     {
       "type": 0,
@@ -1143,10 +1183,10 @@
       "value": "Support free audio"
     }
   ],
-  "homePage__testimoniesSectionText": [
+  "homePage__tagline": [
     {
       "type": 0,
-      "value": "Hear from some of the people who use AudioVerse."
+      "value": "Sound Doctrine"
     }
   ],
   "home__testimoniesTitle": [
@@ -3122,7 +3162,7 @@
   "songsListPage__Song of SolomonLabel": [
     {
       "type": 0,
-      "value": "Detail of Solomon"
+      "value": "Song of Solomon"
     }
   ],
   "songsListPage__TitusLabel": [

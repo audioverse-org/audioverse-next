@@ -155,19 +155,19 @@ function CollectionDetail({
 					<div className={styles.duration}>
 						{useFormattedDuration(duration)}
 					</div>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-						backgroundColor={BaseColors.DARK}
-						className={styles.iconButton}
-					/>
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.DARK}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={makeCollectionFeedRoute(lang, id)}
+					/>
+					<IconButton
+						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+						onClick={() => toggleFavorited()}
+						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						backgroundColor={BaseColors.DARK}
+						className={styles.iconButton}
 					/>
 				</div>
 				<HorizontalRule color={BaseColors.MID_TONE} />
