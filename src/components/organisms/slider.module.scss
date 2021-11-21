@@ -91,8 +91,7 @@
 			opacity: 0;
 		}
 	}
-	$slideNums: 0, 1, 2, 3, 4;
-	@each $i in $slideNums {
+	@for $i from 0 through 4 {
 		&.slideActive#{$i} .slides > *:nth-child(#{$i + 1}) {
 			opacity: 1;
 		}

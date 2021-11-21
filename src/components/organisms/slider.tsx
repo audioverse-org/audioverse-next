@@ -28,15 +28,18 @@ export default function Slider({
 	floatingControls,
 	disabledOnMobile,
 }: SliderProps): JSX.Element {
+	const intl = useIntl();
 	const [delta, setDelta] = useState<number>(0);
+
+	if (React.Children.count(children) > 5) {
+		throw new Error('Unsupported number of children');
+	}
 
 	const array = React.Children.toArray(children);
 	const pages = Math.ceil(array.length / perSlide);
 
 	const pageLeft = () => setDelta(Math.max(0, delta - 1));
 	const pageRight = () => setDelta(Math.min(pages - 1, delta + 1));
-
-	const intl = useIntl();
 
 	const buttonType = dark ? 'secondaryInverse' : 'secondary';
 

@@ -130,7 +130,7 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			backgroundColor: '#CDD9E3',
 		},
 	].map((item, index) => ({
-		...item,
 		image: `/img/features/${index + 1}.png`,
+		...item,
 	}));
 }
