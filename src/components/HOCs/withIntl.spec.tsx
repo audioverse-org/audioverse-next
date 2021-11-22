@@ -91,7 +91,7 @@ const expectNoUnlocalizedToasts = () => {
 	});
 };
 
-const expectNoUnlocalizedMessages = async <T extends unknown>(
+const expectNoUnlocalizedMessages = async <T,>(
 	Component: React.ComponentType<T>,
 	data: { [key: string]: any }
 ) => {

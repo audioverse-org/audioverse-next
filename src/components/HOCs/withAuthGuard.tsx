@@ -9,7 +9,7 @@ function withAuthGuard<P>(
 	Component: React.ComponentType<P>,
 	LoggedOutComponent: React.ComponentType = Login
 ): React.ComponentType<P> {
-	return (props: P) => {
+	function WithAuthGuard(props: P) {
 		const sessionToken = getSessionToken(getCurrentRequest());
 		const { data, isLoading } = useGetWithAuthGuardDataQuery(
 			{},
@@ -22,7 +22,8 @@ function withAuthGuard<P>(
 		) : (
 			<LoggedOutComponent />
 		);
-	};
+	}
+	return WithAuthGuard;
 }
 
 export default withAuthGuard;

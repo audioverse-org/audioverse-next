@@ -297,9 +297,7 @@ describe('app media playback', () => {
 			// expect video-element to never appear in miniplayer
 			await expect(async () => {
 				await waitFor(() => {
-					expect(
-						queryByTestId(miniplayer, 'video-element')
-					).toBeInTheDocument();
+					expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 				});
 			}).rejects.toEqual(expect.anything());
 		});
