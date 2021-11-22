@@ -31,7 +31,7 @@ export default function Slider({
 	const intl = useIntl();
 	const [delta, setDelta] = useState<number>(0);
 
-	if (React.Children.count(children) > 5) {
+	if (floatingControls && React.Children.count(children) > 5) {
 		throw new Error('Unsupported number of children');
 	}
 
