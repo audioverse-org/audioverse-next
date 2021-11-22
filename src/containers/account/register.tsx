@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -11,7 +12,7 @@ import {
 	useRegisterIsLoggedInQuery,
 	useRegisterMutation,
 } from '@lib/generated/graphql';
-import { makeLoginRoute } from '@lib/routes';
+import { makeDiscoverRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './register.module.scss';
@@ -36,6 +37,7 @@ function Register(): JSX.Element {
 
 	const intl = useIntl();
 	const languageRoute = useLanguageRoute();
+	const router = useRouter();
 
 	useEffect(() => {
 		if (dataRegister?.signup.errors.length) {
@@ -60,30 +62,19 @@ function Register(): JSX.Element {
 		}
 	};
 
-	if (isLoading || isLoadingLoggedIn) {
+	let isLoadingDiscover = false;
+	if (dataLoggedIn?.me?.user.email || (isSuccess && !errors.length)) {
+		router.push(makeDiscoverRoute(languageRoute));
+		isLoadingDiscover = true;
+	}
+
+	if (isLoading || isLoadingLoggedIn || isLoadingDiscover) {
 		return (
 			<p>
 				<FormattedMessage
 					id="register__loadingMessage"
 					defaultMessage="loading..."
 					description="register loading message"
-				/>
-			</p>
-		);
-	}
-
-	if (dataLoggedIn?.me?.user.email) {
-		return <p>You are already logged in</p>;
-	}
-
-	if (isSuccess && !errors.length) {
-		// TODO: Consider doing a redirect.
-		return (
-			<p>
-				<FormattedMessage
-					id="register__successMessage"
-					defaultMessage="success"
-					description="register success message"
 				/>
 			</p>
 		);
