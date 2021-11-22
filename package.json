@@ -28,7 +28,6 @@
     "cookie": "^0.4.1",
     "dayjs": "^1.10.7",
     "feed": "git+https://mattleff@github.com/mattleff/feed.git#custome-elements-build",
-    "framer-motion": "^4.1.17",
     "full-icu": "^1.4.0",
     "graphql": "^15.6.1",
     "he": "^1.2.0",
