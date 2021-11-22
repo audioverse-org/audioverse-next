@@ -60,6 +60,7 @@
 	}
 	@media (min-width: $breakpoint-lg) {
 		grid-area: content;
+		min-width: 0;
 		p {
 			font-size: 18px;
 		}
