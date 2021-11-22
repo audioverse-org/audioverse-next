@@ -18,7 +18,14 @@ export default function ProgressBar({
 	const intl = useIntl();
 	const cssProps = { '--progress': `${progress * 100}%` } as CSSProperties;
 	return (
-		<span className={clsx(styles.progress, className)} style={cssProps}>
+		<span
+			className={clsx(
+				styles.progress,
+				className,
+				!setProgress && styles.pointerDisabled
+			)}
+			style={cssProps}
+		>
 			<input
 				type="range"
 				value={progress * 100}
