@@ -5,7 +5,7 @@ const renderComponent = buildRenderer(CardPost);
 
 describe('card post', () => {
 	it('does not display zero rounded duration', async () => {
-		const { queryByText } = await renderComponent({
+		const { getByText } = await renderComponent({
 			props: {
 				post: {
 					readingDuration: 10,
@@ -14,7 +14,7 @@ describe('card post', () => {
 			},
 		});
 
-		expect(queryByText('1m read')).toBeInTheDocument();
+		expect(getByText('1m read')).toBeInTheDocument();
 	});
 
 	it('links hero', async () => {

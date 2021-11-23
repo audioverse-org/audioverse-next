@@ -4,7 +4,7 @@ import React from 'react';
 import LoadingCards from '@components/molecules/loadingCards';
 import NotFound from '@components/organisms/notFound';
 
-const withFailStates = <P extends unknown>(
+const withFailStates = <P,>(
 	Component: React.ComponentType<Must<P>>,
 	should404?: (props: P) => boolean
 ): React.ComponentType<P> => {

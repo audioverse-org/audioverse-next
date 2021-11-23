@@ -1,5 +1,10 @@
-import { findByLabelText, queryByTestId, waitFor } from '@testing-library/dom';
-import { act, getByLabelText, getByText } from '@testing-library/react';
+import { findByLabelText, waitFor } from '@testing-library/dom';
+import {
+	act,
+	getByLabelText,
+	getByTestId,
+	getByText,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import React from 'react';
@@ -995,7 +1000,7 @@ describe('sermon detail page', () => {
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		await waitFor(() => {
-			expect(queryByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 	});
 
@@ -1030,7 +1035,7 @@ describe('sermon detail page', () => {
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		await waitFor(() => {
-			expect(queryByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
 	});
 
