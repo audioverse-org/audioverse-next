@@ -1,17 +1,25 @@
-import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
-import Todo from '@components/molecules/todo';
+import Contact, { ContactProps } from '@containers/contact';
 import { REVALIDATE } from '@lib/constants';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeContactRoute, makeTestimonySubmitRoute } from '@lib/routes';
 
-export default Todo;
+export default Contact;
 
-export async function getStaticProps(): Promise<
-	GetStaticPropsResult<Record<string, unknown>>
+export async function getStaticProps({
+	params,
+}: GetStaticPropsContext<{ language: string; type: string }>): Promise<
+	GetStaticPropsResult<ContactProps>
 > {
 	return {
-		props: {},
+		props: {
+			type: params?.type as string,
+		},
 		revalidate: REVALIDATE,
 	};
 }

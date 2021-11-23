@@ -1,0 +1,21 @@
+mutation submitContactPage(
+	$language: Language!
+	$recipient: PageContactRecipient!
+	$firstName: String!
+	$lastName: String!
+	$email: String!
+	$body: String!
+) {
+	pageContactSubmit(
+		input: {
+			language: $language
+			recipient: $recipient
+			givenName: $firstName
+			surname: $lastName
+			email: $email
+			body: $body
+		}
+	) {
+		success
+	}
+}

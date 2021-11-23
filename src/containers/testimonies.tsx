@@ -8,7 +8,8 @@ import Pagination from '@components/molecules/pagination';
 import AboutNav from '@components/organisms/aboutNav';
 import { GetTestimoniesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeTestimoniesRoute } from '@lib/routes';
+import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
 
@@ -21,6 +22,8 @@ export default function Testimonies({
 	nodes,
 	pagination,
 }: TestimoniesProps): JSX.Element {
+	const languageRoute = useLanguageRoute();
+
 	// Semantic quotations:
 	// https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/#hey-what-about-the-figure-element
 	return (
@@ -46,6 +49,7 @@ export default function Testimonies({
 						defaultMessage="Share your story"
 					/>
 				}
+				href={makeTestimonySubmitRoute(languageRoute)}
 			/>
 			<ContentWidthLimiter>
 				<hr className={styles.rule} />
