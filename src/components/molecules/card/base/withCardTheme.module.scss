@@ -111,3 +111,8 @@
 	--cardBg: #{$ts-playlistH};
 	--cardHoverColor: #{$ts-darkened-playlistH};
 }
+
+.songBook {
+	--cardBg: #{$ts-songH};
+	--cardHoverColor: #{$ts-darkened-songH};
+}

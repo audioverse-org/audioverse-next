@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { startCase } from 'lodash';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -24,8 +25,12 @@ import { formatLongDateTime, parseRelativeDate } from '@lib/date';
 import {
 	RecordingContentType,
 	RecordingFragment,
+	SequenceContentType,
+	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
+import { makeBibleMusicRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconDownload from '../../../public/img/icon-download.svg';
 
@@ -33,9 +38,16 @@ import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
+	overrideSequence?: {
+		book: string;
+		seriesItems: TeaseRecordingFragment[];
+	};
 }
 
-export function Recording({ recording }: RecordingProps): JSX.Element {
+export function Recording({
+	recording,
+	overrideSequence,
+}: RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const {
 		id,
@@ -68,6 +80,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		scroller.addEventListener('scroll', saveScrollPosition);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [recording.id]);
+	const languageRoute = useLanguageRoute();
 
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
@@ -75,7 +88,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		? formatLongDateTime(parseRelativeDate(recordingDate) || '')
 		: undefined;
 	const index = sequenceIndex;
-	const seriesItems = sequence?.recordings?.nodes;
+	const seriesItems = overrideSequence
+		? overrideSequence.seriesItems
+		: sequence?.recordings?.nodes;
 
 	const {
 		accentColor,
@@ -207,23 +222,37 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				/>
 				<link href={imageWithFallback.url} rel="image_src" />
 			</Head>
-			{recording?.sequence && (
-				<Link href={recording.sequence.canonicalPath}>
+			{overrideSequence ? (
+				<Link href={makeBibleMusicRoute(languageRoute, overrideSequence.book)}>
 					<a className={styles.hat}>
 						<SequenceTypeLockup
-							contentType={recording.sequence.contentType}
+							contentType={SequenceContentType.MusicAlbum}
 							unpadded
 						/>
 						<h4 className={clsx(audiobookHeadingStyle)}>
-							{recording?.sequence?.title}
+							{startCase(overrideSequence.book)}
 						</h4>
 					</a>
 				</Link>
+			) : (
+				recording?.sequence && (
+					<Link href={recording.sequence.canonicalPath}>
+						<a className={styles.hat}>
+							<SequenceTypeLockup
+								contentType={recording.sequence.contentType}
+								unpadded
+							/>
+							<h4 className={clsx(audiobookHeadingStyle)}>
+								{recording?.sequence?.title}
+							</h4>
+						</a>
+					</Link>
+				)
 			)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					<div className={styles.meta}>
-						{index && (
+						{index && !overrideSequence && (
 							<span className={styles.part}>
 								<FormattedMessage
 									id="organism-recording__partInfo"

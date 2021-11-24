@@ -20,6 +20,7 @@ const EXTENDED_CARD_THEMES = [
 	'collection',
 	'sequence',
 	'playlist',
+	'songBook',
 ] as const;
 
 export type CardTheme = typeof CARD_THEMES[number];

@@ -20,7 +20,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; book: string }>): Promise<
 	GetStaticPropsResult<SongBooksDetailProps>
 > {
-	const book = params?.book as string;
+	const book = (params?.book as string).replace(/-/g, ' ');
 	const language = getLanguageIdByRoute(params?.language);
 
 	const { musicTracks } = await getSongBooksDetailPageData({
@@ -30,6 +30,7 @@ export async function getStaticProps({
 
 	return {
 		props: {
+			book,
 			musicTracks: musicTracks.nodes || [],
 		},
 		revalidate: REVALIDATE,

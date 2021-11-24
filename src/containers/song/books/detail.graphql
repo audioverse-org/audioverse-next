@@ -1,5 +1,10 @@
 query getSongBooksDetailPageData($language: Language!, $book: String!) {
-	musicTracks(language: $language, tagName: $book, first: 1000) {
+	musicTracks(
+		language: $language
+		tagName: $book
+		first: 1000
+		orderBy: [{ field: PUBLISHED_AT, direction: ASC }]
+	) {
 		nodes {
 			...cardRecording
 		}
