@@ -10,12 +10,13 @@ export const RECORDING_FAVORITED_QUERY_KEY_PREFIX = 'isRecordingFavorited';
 
 export function useIsRecordingFavorited(
 	recordingId: Scalars['ID'],
-	sequenceId?: Scalars['ID']
+	sequenceId?: Scalars['ID'],
+	disabled?: boolean
 ): IUseIsFavoritedResult {
 	const queryClient = useQueryClient();
 	return useIsFavorited(
 		[RECORDING_FAVORITED_QUERY_KEY_PREFIX, { recordingId, sequenceId }],
-		() => recordingIsFavorited(recordingId),
+		() => (disabled ? false : recordingIsFavorited(recordingId)),
 		(isFavorited) =>
 			setRecordingFavorited(recordingId, isFavorited).then((result) => {
 				if (!isFavorited && sequenceId) {

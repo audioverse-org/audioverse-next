@@ -107,6 +107,7 @@ function Book({
 	}
 
 	const recording = chapterToRecording(chapter);
+	const recordings = chapters.map((c) => chapterToRecording(c));
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -158,6 +159,9 @@ function Book({
 					{chapter?.url && (
 						<Player
 							recording={recording as PlayerFragment}
+							playlistRecordings={recordings.slice(
+								chapters.findIndex((c) => c.id === chapter?.id)
+							)}
 							backgroundColor={BaseColors.BIBLE_B}
 							disableUserFeatures
 						/>
@@ -204,6 +208,9 @@ function Book({
 											sequenceIndex: null,
 											persons: [],
 										}}
+										playlistRecordings={recordings.slice(
+											chapters.findIndex((c) => c.id === chapter.id)
+										)}
 										theme="chapter"
 										unpadded
 										disableUserFeatures
