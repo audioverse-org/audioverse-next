@@ -20,7 +20,7 @@ type IQueryKey = Array<string | number | Record<string, unknown>>;
 
 export function useIsFavorited(
 	queryKey: IQueryKey,
-	isFavoritedQueryFn: () => Promise<boolean>,
+	isFavoritedQueryFn: () => boolean | Promise<boolean>,
 	setFavoritedQueryFn: (isFavorited: boolean) => Promise<boolean>,
 	invalidateQueryKeys?: IQueryKey[]
 ): IUseIsFavoritedResult {

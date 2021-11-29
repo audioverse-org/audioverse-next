@@ -24,6 +24,7 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 
 export default function ButtonPlay({
 	recording,
+	playlistRecordings,
 	backgroundColor,
 	large,
 	active,
@@ -31,11 +32,15 @@ export default function ButtonPlay({
 }: {
 	recording: AndMiniplayerFragment;
 	backgroundColor: BaseColors;
+	playlistRecordings?: AndMiniplayerFragment[];
 	large?: boolean;
 	active?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(recording);
+	const { isPaused, play, pause } = usePlaybackSession(
+		recording,
+		playlistRecordings
+	);
 	const intl = useIntl();
 
 	const label = isPaused
