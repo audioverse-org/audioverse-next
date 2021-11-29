@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { startCase } from 'lodash';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -24,8 +25,12 @@ import { formatLongDateTime, parseRelativeDate } from '@lib/date';
 import {
 	RecordingContentType,
 	RecordingFragment,
+	SequenceContentType,
+	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
+import { makeBibleMusicRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconDownload from '../../../public/img/icon-download.svg';
 
@@ -33,9 +38,16 @@ import styles from './recording.module.scss';
 
 interface RecordingProps {
 	recording: RecordingFragment;
+	overrideSequence?: {
+		book: string;
+		seriesItems: TeaseRecordingFragment[];
+	};
 }
 
-export function Recording({ recording }: RecordingProps): JSX.Element {
+export function Recording({
+	recording,
+	overrideSequence,
+}: RecordingProps): JSX.Element {
 	const intl = useIntl();
 	const {
 		id,
@@ -68,6 +80,7 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		scroller.addEventListener('scroll', saveScrollPosition);
 		return () => scroller.removeEventListener('scroll', saveScrollPosition);
 	}, [recording.id]);
+	const languageRoute = useLanguageRoute();
 
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const persons = isAudiobook ? writers : speakers;
@@ -75,7 +88,9 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 		? formatLongDateTime(parseRelativeDate(recordingDate) || '')
 		: undefined;
 	const index = sequenceIndex;
-	const seriesItems = sequence?.recordings?.nodes;
+	const seriesItems = overrideSequence
+		? overrideSequence.seriesItems
+		: sequence?.recordings?.nodes;
 
 	const {
 		accentColor,
@@ -203,6 +218,18 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 			? recording.sequence?.recordings.nodes
 			: undefined;
 
+	const makeHat = (title: string, href: string) => (
+		<Link href={href}>
+			<a className={styles.hat}>
+				<SequenceTypeLockup
+					contentType={SequenceContentType.MusicAlbum}
+					unpadded
+				/>
+				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
+			</a>
+		</Link>
+	);
+
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
 			<Head>
@@ -212,23 +239,17 @@ export function Recording({ recording }: RecordingProps): JSX.Element {
 				/>
 				<link href={imageWithFallback.url} rel="image_src" />
 			</Head>
-			{recording?.sequence && (
-				<Link href={recording.sequence.canonicalPath}>
-					<a className={styles.hat}>
-						<SequenceTypeLockup
-							contentType={recording.sequence.contentType}
-							unpadded
-						/>
-						<h4 className={clsx(audiobookHeadingStyle)}>
-							{recording?.sequence?.title}
-						</h4>
-					</a>
-				</Link>
-			)}
+			{overrideSequence
+				? makeHat(
+						startCase(overrideSequence.book),
+						makeBibleMusicRoute(languageRoute, overrideSequence.book)
+				  )
+				: recording.sequence &&
+				  makeHat(recording.sequence.title, recording.sequence.canonicalPath)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					<div className={styles.meta}>
-						{index && (
+						{index && !overrideSequence && (
 							<span className={styles.part}>
 								<FormattedMessage
 									id="organism-recording__partInfo"

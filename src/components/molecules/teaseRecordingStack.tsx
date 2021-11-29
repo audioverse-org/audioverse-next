@@ -12,11 +12,13 @@ interface Props {
 	theme: CardTheme;
 	paddedSeparator?: boolean;
 	isOptionalLink?: boolean;
+	allSmall?: boolean;
 }
 
 export default function TeaseRecordingStack({
 	recordings,
 	theme,
+	allSmall,
 	...props
 }: Props): JSX.Element | null {
 	// TODO: add expand/contract?
@@ -26,7 +28,7 @@ export default function TeaseRecordingStack({
 				<React.Fragment key={recording.canonicalPath}>
 					<TeaseRecording
 						{...{ recording, theme, ...props }}
-						small={recordings.length > 1}
+						small={recordings.length > 1 || allSmall}
 					/>
 					{index + 1 < recordings.length && (
 						<div className={clsx(styles.separator, styles.paddedSeparator)} />

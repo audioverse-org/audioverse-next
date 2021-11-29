@@ -48,6 +48,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getSongAlbumsDetailPathsData,
 		(d) => d.musicAlbums.nodes,
-		(languageRoute, { canonicalPath }) => canonicalPath
+		(_, { canonicalPath }) => canonicalPath
 	);
 }

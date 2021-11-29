@@ -1,44 +1,36 @@
-query getSongAlbumsListPageData(
-	$language: Language!
-	$first: Int
-	$offset: Int
-) {
-	musicAlbums(language: $language, first: $first, offset: $offset) {
+query getSongAlbumsListPageData($language: Language!) {
+	musicAlbums(
+		language: $language
+		first: 1000
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
 		nodes {
-			title
-			canonicalPath(useFuturePath: true)
-			imageWithFallback {
-				url(size: 100)
-			}
-			sponsor {
-				title
+			...cardSequence
+			recordings(first: 2) {
+				nodes {
+					...cardRecording
+				}
 			}
 		}
 		aggregate {
 			count
 		}
 	}
-	sponsors(language: $language, withMusic: true, first: 1000) {
-		nodes {
-			id
-			title
-			imageWithFallback {
-				url(size: 100)
-			}
-		}
-	}
-	musicMoodTags(language: ENGLISH, first: 1000) {
+	musicBookTags(language: $language, first: 1000) {
 		nodes {
 			id
 			name
-		}
-	}
-}
-
-query getSongAlbumsListPathData($language: Language!) {
-	musicAlbums(language: $language) {
-		aggregate {
-			count
+			recordings(
+				first: 1
+				orderBy: [{ field: PUBLISHED_AT, direction: DESC }]
+			) {
+				nodes {
+					...cardRecording
+				}
+				aggregate {
+					count
+				}
+			}
 		}
 	}
 }

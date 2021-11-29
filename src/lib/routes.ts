@@ -101,10 +101,8 @@ export const makeStoryAlbumListPage = (
 ): string =>
 	`/${languageRoute}/stories/albums${page > 1 ? `/page/${page}` : ''}`;
 
-export const makeSongAlbumsListRoute = (
-	languageRoute: string,
-	page: string | number = 1
-): string => `/${languageRoute}/songs/albums${page > 1 ? `/page/${page}` : ''}`;
+export const makeSongAlbumsListRoute = (languageRoute: string): string =>
+	`/${languageRoute}/songs/albums`;
 
 export const makeSongAlbumFeedRoute = (
 	languageRoute: string,
@@ -116,15 +114,15 @@ export const makeBibleMusicRoute = (
 	bookName: string
 ): string => `/${languageRoute}/songs/book/${slug(bookName)}`;
 
-export const makeSponsorMusicRoute = (
+export const makeBibleMusicTrackRoute = (
 	languageRoute: string,
-	sponsorId: Scalars['ID']
-): string => `/${languageRoute}/songs/sponsor/${sponsorId}`;
-
-export const makeTagMusicRoute = (
-	languageRoute: string,
-	tagName: string
-): string => `/${languageRoute}/songs/tag/${slug(tagName)}`;
+	bookName: string,
+	trackCanonicalPath: string
+): string =>
+	`/${languageRoute}/songs/book/${slug(bookName)}/${trackCanonicalPath
+		.split('/')
+		.slice(3)
+		.join('/')}`;
 
 export const makeCollectionFeedRoute = (
 	languageRoute: string,

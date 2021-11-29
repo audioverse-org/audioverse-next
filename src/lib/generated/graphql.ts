@@ -11815,8 +11815,6 @@ export type GetSongAlbumsDetailPathsDataQuery = {
 
 export type GetSongAlbumsListPageDataQueryVariables = Exact<{
 	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-	offset: InputMaybe<Scalars['Int']>;
 }>;
 
 export type GetSongAlbumsListPageDataQuery = {
@@ -11826,45 +11824,195 @@ export type GetSongAlbumsListPageDataQuery = {
 		nodes:
 			| Array<{
 					__typename?: 'Sequence';
-					title: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-					sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
-			  }>
-			| null
-			| undefined;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
-	};
-	sponsors: {
-		__typename?: 'SponsorConnection';
-		nodes:
-			| Array<{
-					__typename?: 'Sponsor';
 					id: string | number;
 					title: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					viewerPlaybackCompletedPercentage: number;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+							  }>
+							| null
+							| undefined;
+					};
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
 			  }>
 			| null
 			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
-	musicMoodTags: {
+	musicBookTags: {
 		__typename?: 'TagConnection';
 		nodes:
-			| Array<{ __typename?: 'Tag'; id: string | number; name: string }>
+			| Array<{
+					__typename?: 'Tag';
+					id: string | number;
+					name: string;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+									}>;
+							  }>
+							| null
+							| undefined;
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
 			| null
 			| undefined;
-	};
-};
-
-export type GetSongAlbumsListPathDataQueryVariables = Exact<{
-	language: Language;
-}>;
-
-export type GetSongAlbumsListPathDataQuery = {
-	__typename?: 'Query';
-	musicAlbums: {
-		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -11916,6 +12064,258 @@ export type GetSongBooksDetailPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+					}>;
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetBookSongDetailDataQueryVariables = Exact<{
+	language: Language;
+	id: Scalars['ID'];
+	book: Scalars['String'];
+}>;
+
+export type GetBookSongDetailDataQuery = {
+	__typename?: 'Query';
+	musicTrack:
+		| {
+				__typename?: 'Recording';
+				language: Language;
+				id: string | number;
+				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
+				duration: number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
+				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+											}>;
+									  }>
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+				}>;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
+	recordings: {
+		__typename?: 'RecordingConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								contentType: SequenceContentType;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -16467,39 +16867,41 @@ export const useGetSongAlbumsDetailPathsDataQuery = <
 		options
 	);
 export const GetSongAlbumsListPageDataDocument = `
-    query getSongAlbumsListPageData($language: Language!, $first: Int, $offset: Int) {
-  musicAlbums(language: $language, first: $first, offset: $offset) {
+    query getSongAlbumsListPageData($language: Language!) {
+  musicAlbums(
+    language: $language
+    first: 1000
+    orderBy: [{field: TITLE, direction: ASC}]
+  ) {
     nodes {
-      title
-      canonicalPath(useFuturePath: true)
-      imageWithFallback {
-        url(size: 100)
-      }
-      sponsor {
-        title
+      ...cardSequence
+      recordings(first: 2) {
+        nodes {
+          ...cardRecording
+        }
       }
     }
     aggregate {
       count
     }
   }
-  sponsors(language: $language, withMusic: true, first: 1000) {
-    nodes {
-      id
-      title
-      imageWithFallback {
-        url(size: 100)
-      }
-    }
-  }
-  musicMoodTags(language: ENGLISH, first: 1000) {
+  musicBookTags(language: $language, first: 1000) {
     nodes {
       id
       name
+      recordings(first: 1, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
+        nodes {
+          ...cardRecording
+        }
+        aggregate {
+          count
+        }
+      }
     }
   }
 }
-    `;
+    ${CardSequenceFragmentDoc}
+${CardRecordingFragmentDoc}`;
 export const useGetSongAlbumsListPageDataQuery = <
 	TData = GetSongAlbumsListPageDataQuery,
 	TError = unknown
@@ -16515,33 +16917,14 @@ export const useGetSongAlbumsListPageDataQuery = <
 		>(GetSongAlbumsListPageDataDocument, variables),
 		options
 	);
-export const GetSongAlbumsListPathDataDocument = `
-    query getSongAlbumsListPathData($language: Language!) {
-  musicAlbums(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetSongAlbumsListPathDataQuery = <
-	TData = GetSongAlbumsListPathDataQuery,
-	TError = unknown
->(
-	variables: GetSongAlbumsListPathDataQueryVariables,
-	options?: UseQueryOptions<GetSongAlbumsListPathDataQuery, TError, TData>
-) =>
-	useQuery<GetSongAlbumsListPathDataQuery, TError, TData>(
-		['getSongAlbumsListPathData', variables],
-		graphqlFetcher<
-			GetSongAlbumsListPathDataQuery,
-			GetSongAlbumsListPathDataQueryVariables
-		>(GetSongAlbumsListPathDataDocument, variables),
-		options
-	);
 export const GetSongBooksDetailPageDataDocument = `
     query getSongBooksDetailPageData($language: Language!, $book: String!) {
-  musicTracks(language: $language, tagName: $book, first: 1000) {
+  musicTracks(
+    language: $language
+    tagName: $book
+    first: 1000
+    orderBy: [{field: PUBLISHED_AT, direction: ASC}]
+  ) {
     nodes {
       ...cardRecording
     }
@@ -16561,6 +16944,40 @@ export const useGetSongBooksDetailPageDataQuery = <
 			GetSongBooksDetailPageDataQuery,
 			GetSongBooksDetailPageDataQueryVariables
 		>(GetSongBooksDetailPageDataDocument, variables),
+		options
+	);
+export const GetBookSongDetailDataDocument = `
+    query getBookSongDetailData($language: Language!, $id: ID!, $book: String!) {
+  musicTrack(id: $id) {
+    ...recording
+    language
+  }
+  recordings(
+    language: $language
+    tagName: $book
+    first: 1000
+    orderBy: [{field: TITLE, direction: ASC}]
+  ) {
+    nodes {
+      ...teaseRecording
+    }
+  }
+}
+    ${RecordingFragmentDoc}
+${TeaseRecordingFragmentDoc}`;
+export const useGetBookSongDetailDataQuery = <
+	TData = GetBookSongDetailDataQuery,
+	TError = unknown
+>(
+	variables: GetBookSongDetailDataQueryVariables,
+	options?: UseQueryOptions<GetBookSongDetailDataQuery, TError, TData>
+) =>
+	useQuery<GetBookSongDetailDataQuery, TError, TData>(
+		['getBookSongDetailData', variables],
+		graphqlFetcher<
+			GetBookSongDetailDataQuery,
+			GetBookSongDetailDataQueryVariables
+		>(GetBookSongDetailDataDocument, variables),
 		options
 	);
 export const GetSongDetailDataDocument = `
@@ -18136,16 +18553,16 @@ export async function getSongAlbumsListPageData<T>(
 	return fetchApi(GetSongAlbumsListPageDataDocument, { variables });
 }
 
-export async function getSongAlbumsListPathData<T>(
-	variables: ExactAlt<T, GetSongAlbumsListPathDataQueryVariables>
-): Promise<GetSongAlbumsListPathDataQuery> {
-	return fetchApi(GetSongAlbumsListPathDataDocument, { variables });
-}
-
 export async function getSongBooksDetailPageData<T>(
 	variables: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
 ): Promise<GetSongBooksDetailPageDataQuery> {
 	return fetchApi(GetSongBooksDetailPageDataDocument, { variables });
+}
+
+export async function getBookSongDetailData<T>(
+	variables: ExactAlt<T, GetBookSongDetailDataQueryVariables>
+): Promise<GetBookSongDetailDataQuery> {
+	return fetchApi(GetBookSongDetailDataDocument, { variables });
 }
 
 export async function getSongDetailData<T>(

@@ -1,0 +1,16 @@
+query getBookSongDetailData($language: Language!, $id: ID!, $book: String!) {
+	musicTrack(id: $id) {
+		...recording
+		language
+	}
+	recordings(
+		language: $language
+		tagName: $book
+		first: 1000
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			...teaseRecording
+		}
+	}
+}

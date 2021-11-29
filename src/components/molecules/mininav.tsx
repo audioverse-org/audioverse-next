@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import Heading6 from '@components/atoms/heading6';
 
@@ -9,8 +9,9 @@ import styles from './mininav.module.scss';
 type Props = {
 	items: {
 		label: JSX.Element | string;
-		url: string;
 		isActive?: boolean;
+		url?: string;
+		onClick?: (e: MouseEvent) => void;
 	}[];
 	disabled?: boolean;
 };
@@ -18,21 +19,30 @@ type Props = {
 export default function Mininav({ items, disabled }: Props): JSX.Element {
 	return (
 		<div className={clsx(styles.miniNav, disabled && styles.miniNavDisabled)}>
-			{items.map(({ label, url, isActive }) => (
-				<Heading6
-					sans
-					uppercase
-					loose
-					large
-					unpadded
-					key={url}
-					className={clsx(isActive && styles.miniNavActive)}
-				>
-					<Link href={url}>
-						<a>{label}</a>
-					</Link>
-				</Heading6>
-			))}
+			{items.map(({ label, url, onClick, isActive }) => {
+				return url ? (
+					<Heading6
+						sans
+						uppercase
+						loose
+						large
+						unpadded
+						key={url}
+						className={clsx(isActive && styles.miniNavActive)}
+					>
+						<Link href={url}>
+							<a onClick={onClick}>{label}</a>
+						</Link>
+					</Heading6>
+				) : (
+					<button
+						className={clsx(styles.button, isActive && styles.miniNavActive)}
+						onClick={onClick}
+					>
+						{label}
+					</button>
+				);
+			})}
 		</div>
 	);
 }
