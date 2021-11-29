@@ -15,6 +15,7 @@ interface CardBibleChapterProps {
 	chapter: CardBibleChapterFragment;
 }
 
+// TODO: Pull in data from FCBH API
 export default function CardBibleChapter({
 	chapter,
 }: CardBibleChapterProps): JSX.Element {
