@@ -1,5 +1,3 @@
-import { ThemeProvider } from '@material-ui/core';
-import { createTheme } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -26,19 +24,6 @@ const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			refetchOnWindowFocus: false,
-		},
-	},
-});
-
-const muiTheme = createTheme({
-	typography: {
-		button: {
-			textTransform: 'none',
-		},
-	},
-	props: {
-		MuiButtonBase: {
-			disableRipple: true,
 		},
 	},
 });
@@ -72,22 +57,20 @@ function Base<P>({
 					<link rel="stylesheet" href="https://use.typekit.net/bgc2sqi.css" />
 				</Head>
 				<QueryClientProvider client={queryClient}>
-					<ThemeProvider theme={muiTheme}>
-						<Hydrate state={dehydratedState}>
-							<AndGlobalModals>
-								<LoadingIndicator />
-								{disableSidebar ? (
-									<Component {...pageProps} />
-								) : (
-									<AndMiniplayer>
-										<AndNavigation>
-											<Component {...pageProps} />
-										</AndNavigation>
-									</AndMiniplayer>
-								)}
-							</AndGlobalModals>
-						</Hydrate>
-					</ThemeProvider>
+					<Hydrate state={dehydratedState}>
+						<AndGlobalModals>
+							<LoadingIndicator />
+							{disableSidebar ? (
+								<Component {...pageProps} />
+							) : (
+								<AndMiniplayer>
+									<AndNavigation>
+										<Component {...pageProps} />
+									</AndNavigation>
+								</AndMiniplayer>
+							)}
+						</AndGlobalModals>
+					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
 			<ToastContainer />

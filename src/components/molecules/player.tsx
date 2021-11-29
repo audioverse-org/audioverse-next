@@ -11,7 +11,7 @@ import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { BaseColors } from '@lib/constants';
-import { PlayerFragment } from '@lib/generated/graphql';
+import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
@@ -25,6 +25,7 @@ import RecordingButtonFavorite from './recordingButtonFavorite';
 export interface PlayerProps {
 	recording: PlayerFragment;
 	backgroundColor: BaseColors;
+	playlistRecordings?: AndMiniplayerFragment[];
 	disableUserFeatures?: boolean;
 }
 
@@ -32,9 +33,10 @@ const Player = ({
 	recording,
 	backgroundColor,
 	disableUserFeatures,
+	playlistRecordings,
 }: PlayerProps): JSX.Element => {
 	const intl = useIntl();
-	const session = usePlaybackSession(recording);
+	const session = usePlaybackSession(recording, playlistRecordings);
 	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
 	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
 	const shouldShowVideoControls = !shouldShowAudioControls;
@@ -92,6 +94,7 @@ const Player = ({
 					<ButtonPlay
 						{...{
 							recording,
+							playlistRecordings,
 							backgroundColor,
 						}}
 						large

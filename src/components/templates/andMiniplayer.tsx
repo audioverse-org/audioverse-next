@@ -66,7 +66,7 @@ export type PlaybackContextType = {
 	setProgress: (p: number) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
-		recording: AndMiniplayerFragment,
+		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 		options?: {
 			onLoad?: (c: PlaybackContextType) => void;
 			prefersAudio?: boolean;
@@ -128,8 +128,11 @@ export default function AndMiniplayer({
 	const originRef = useRef<HTMLDivElement>(null);
 
 	const [player, setPlayer] = useState<VideoJsPlayer>();
+	const [sourceRecordings, setSourceRecordings] =
+		useState<AndMiniplayerFragment[]>();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, setProgress] = useState<number>(0);
+	const progressRef = useRef<number>(0);
 	const [volume, setVolume] = useState<number>(100);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
@@ -156,11 +159,15 @@ export default function AndMiniplayer({
 		[sources]
 	);
 
+	useEffect(() => {
+		progressRef.current = progress;
+	}, [progress]);
+
 	const playback: PlaybackContextType = {
 		play: () => {
 			player?.play();
 			setIsPaused(false);
-			if (progress) playback.setProgress(progress);
+			if (progressRef.current) playback.setProgress(progressRef.current);
 		},
 		pause: () => {
 			player?.pause();
@@ -196,13 +203,19 @@ export default function AndMiniplayer({
 			player.currentTime(p * duration);
 		},
 		getRecording: () => recording,
-		// TODO: Rename to setRecording
-		loadRecording: (recording: AndMiniplayerFragment, options = {}) => {
+		loadRecording: (
+			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
+			options = {}
+		) => {
 			const { onLoad, prefersAudio = false } = options;
 			setPrefersAudio(prefersAudio);
 			setOnLoad(() => onLoad);
-			setRecording(recording);
-			if (videoHandlerId && recording.id !== videoHandlerId) {
+			const recordingsArray = Array.isArray(recordingOrRecordings)
+				? recordingOrRecordings
+				: [recordingOrRecordings];
+			setSourceRecordings(recordingsArray);
+			setRecording(recordingsArray[0]);
+			if (videoHandlerId && recordingsArray[0].id !== videoHandlerId) {
 				playback.unsetVideoHandler(videoHandlerId);
 			}
 		},
@@ -337,6 +350,13 @@ export default function AndMiniplayer({
 							}}
 							onPause={() => setIsPaused(true)}
 							onPlay={() => setIsPaused(false)}
+							onEnded={() => {
+								if (sourceRecordings && sourceRecordings.length > 1) {
+									setRecording(sourceRecordings[1]);
+									setSourceRecordings(sourceRecordings?.slice(1));
+									setOnLoad(() => () => playback.play());
+								}
+							}}
 						/>
 					</div>
 				</div>
