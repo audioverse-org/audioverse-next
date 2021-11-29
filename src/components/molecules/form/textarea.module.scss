@@ -1,0 +1,29 @@
+@import '../../../styles/common';
+
+.container {
+	margin-bottom: 16px;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+}
+
+.textarea {
+	display: block;
+	margin-top: 4px;
+	padding: 8px;
+	border: 1px solid rgba($ts-midTone, 0.5);
+	border-radius: 4px;
+	color: $ts-dark;
+	min-height: 208px;
+	&,
+	&::placeholder {
+		font-size: 14px;
+		line-height: 16.8px;
+	}
+	&::placeholder {
+		color: $ts-midTone;
+		font-style: italic;
+	}
+}

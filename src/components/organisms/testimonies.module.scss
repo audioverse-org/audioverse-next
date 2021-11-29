@@ -31,3 +31,14 @@
 	font-size: 24px;
 	font-style: normal;
 }
+
+.ctas {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-self: stretch;
+	> *:first-child {
+		margin-bottom: 16px;
+	}
+}

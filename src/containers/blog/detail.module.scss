@@ -10,8 +10,11 @@
 .imageContainer {
 	position: relative;
 	width: 100%;
-	height: calc((100vw - #{$sidebar-width}) * 0.4533);
+	height: calc(100vw * 0.4533);
 	max-height: 465px;
+	@media (min-width: $breakpoint-lg) {
+		height: calc((100vw - #{$sidebar-width}) * 0.4533);
+	}
 }
 
 .row {

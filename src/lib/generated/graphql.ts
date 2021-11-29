@@ -1525,6 +1525,7 @@ export type Mutation = {
 	mediaReleaseFormTemplateUpdate: SuccessPayload;
 	mediaReleaseFormUpdate: MediaReleaseFormPayload;
 	mediaReleaseUpdate: MediaReleasePayload;
+	pageContactSubmit: SuccessPayload;
 	pageCreate: PagePayload;
 	pageDelete: SuccessPayload;
 	pageUpdate: PagePayload;
@@ -1777,6 +1778,10 @@ export type MutationMediaReleaseFormUpdateArgs = {
 export type MutationMediaReleaseUpdateArgs = {
 	input: MediaReleaseUpdateInput;
 	mediaReleaseId: Scalars['ID'];
+};
+
+export type MutationPageContactSubmitArgs = {
+	input: PageContactSubmitInput;
 };
 
 export type MutationPageCreateArgs = {
@@ -2182,6 +2187,22 @@ export type PageConnection = {
 	edges: Maybe<Array<PageEdge>>;
 	nodes: Maybe<Array<Page>>;
 	pageInfo: PageInfo;
+};
+
+/** The available contact page recipients. */
+export enum PageContactRecipient {
+	General = 'GENERAL',
+	Technical = 'TECHNICAL',
+	Testimony = 'TESTIMONY',
+}
+
+export type PageContactSubmitInput = {
+	body: Scalars['String'];
+	email: Scalars['String'];
+	givenName: Scalars['String'];
+	language: Language;
+	recipient: PageContactRecipient;
+	surname: Scalars['String'];
 };
 
 export type PageCreateInput = {
@@ -4918,6 +4939,7 @@ export enum Timezone {
 	PacificGuam = 'PACIFIC_GUAM',
 	PacificHonolulu = 'PACIFIC_HONOLULU',
 	PacificJohnston = 'PACIFIC_JOHNSTON',
+	PacificKanton = 'PACIFIC_KANTON',
 	PacificKiritimati = 'PACIFIC_KIRITIMATI',
 	PacificKosrae = 'PACIFIC_KOSRAE',
 	PacificKwajalein = 'PACIFIC_KWAJALEIN',
@@ -8141,6 +8163,20 @@ export type GetCollectionTeachingsPageDataQuery = {
 		  }
 		| null
 		| undefined;
+};
+
+export type SubmitContactPageMutationVariables = Exact<{
+	language: Language;
+	recipient: PageContactRecipient;
+	firstName: Scalars['String'];
+	lastName: Scalars['String'];
+	email: Scalars['String'];
+	body: Scalars['String'];
+}>;
+
+export type SubmitContactPageMutation = {
+	__typename?: 'Mutation';
+	pageContactSubmit: { __typename?: 'SuccessPayload'; success: boolean };
 };
 
 export type GetDiscoverPageDataQueryVariables = Exact<{
@@ -15059,6 +15095,39 @@ export const useGetCollectionTeachingsPageDataQuery = <
 		>(GetCollectionTeachingsPageDataDocument, variables),
 		options
 	);
+export const SubmitContactPageDocument = `
+    mutation submitContactPage($language: Language!, $recipient: PageContactRecipient!, $firstName: String!, $lastName: String!, $email: String!, $body: String!) {
+  pageContactSubmit(
+    input: {language: $language, recipient: $recipient, givenName: $firstName, surname: $lastName, email: $email, body: $body}
+  ) {
+    success
+  }
+}
+    `;
+export const useSubmitContactPageMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SubmitContactPageMutation,
+		TError,
+		SubmitContactPageMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SubmitContactPageMutation,
+		TError,
+		SubmitContactPageMutationVariables,
+		TContext
+	>(
+		(variables?: SubmitContactPageMutationVariables) =>
+			graphqlFetcher<
+				SubmitContactPageMutation,
+				SubmitContactPageMutationVariables
+			>(SubmitContactPageDocument, variables)(),
+		options
+	);
 export const GetDiscoverPageDataDocument = `
     query getDiscoverPageData($language: Language!) {
   recentTeachings: sermons(
@@ -17837,6 +17906,12 @@ export async function getCollectionTeachingsPageData<T>(
 	variables: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>
 ): Promise<GetCollectionTeachingsPageDataQuery> {
 	return fetchApi(GetCollectionTeachingsPageDataDocument, { variables });
+}
+
+export async function submitContactPage<T>(
+	variables: ExactAlt<T, SubmitContactPageMutationVariables>
+): Promise<SubmitContactPageMutation> {
+	return fetchApi(SubmitContactPageDocument, { variables });
 }
 
 export async function getDiscoverPageData<T>(
