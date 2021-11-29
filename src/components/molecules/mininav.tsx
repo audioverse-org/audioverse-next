@@ -8,6 +8,7 @@ import styles from './mininav.module.scss';
 
 type Props = {
 	items: {
+		id: string;
 		label: JSX.Element | string;
 		isActive?: boolean;
 		url?: string;
@@ -19,7 +20,7 @@ type Props = {
 export default function Mininav({ items, disabled }: Props): JSX.Element {
 	return (
 		<div className={clsx(styles.miniNav, disabled && styles.miniNavDisabled)}>
-			{items.map(({ label, url, onClick, isActive }) => {
+			{items.map(({ label, url, onClick, isActive, id }) => {
 				return url ? (
 					<Heading6
 						sans
@@ -27,7 +28,7 @@ export default function Mininav({ items, disabled }: Props): JSX.Element {
 						loose
 						large
 						unpadded
-						key={url}
+						key={id}
 						className={clsx(isActive && styles.miniNavActive)}
 					>
 						<Link href={url}>
@@ -36,6 +37,7 @@ export default function Mininav({ items, disabled }: Props): JSX.Element {
 					</Heading6>
 				) : (
 					<button
+						key={id}
 						className={clsx(styles.button, isActive && styles.miniNavActive)}
 						onClick={onClick}
 					>

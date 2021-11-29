@@ -83,6 +83,7 @@ export default function LibraryNav({
 		<div className={styles.subnav}>
 			<Mininav
 				items={navItems.map(([label, slug]) => ({
+					id: slug,
 					label,
 					url: makeLibraryRoute(languageRoute, slug),
 					isActive: slug === currentNavHref,

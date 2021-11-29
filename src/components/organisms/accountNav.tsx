@@ -18,6 +18,7 @@ export default function AccountNav({ current }: Props): JSX.Element {
 		<Mininav
 			items={[
 				{
+					id: 'profile',
 					label: (
 						<FormattedMessage
 							id="accountNav__profile"
@@ -28,6 +29,7 @@ export default function AccountNav({ current }: Props): JSX.Element {
 					isActive: current === 'profile',
 				},
 				{
+					id: 'preferences',
 					label: (
 						<FormattedMessage
 							id="accountNav__audiopreferences"
