@@ -1,0 +1,32 @@
+@import '../../../styles/common';
+
+.container {
+	flex-grow: 1;
+	padding: 16px;
+	transition-duration: $transition-medium;
+	&,
+	&:hover {
+		color: $ts-dark;
+	}
+	&:hover:not(.otherHovered) {
+		background-color: $ts-darkened-songH;
+	}
+}
+
+.header {
+	margin-bottom: 8px;
+}
+
+.contributors {
+	margin-bottom: 24px;
+}
+
+.songCount {
+	color: $ts-midTone;
+}
+
+.subRecordings {
+	margin-top: 16px;
+	border-radius: 16px;
+	overflow: hidden;
+}

@@ -149,11 +149,6 @@ module.exports = withPWA({
 				permanent: true,
 			},
 			{
-				source: '/:lang/songs/albums/page/1',
-				destination: '/:lang/songs/albums',
-				permanent: true,
-			},
-			{
 				source: '/:lang/sponsors/page/1',
 				destination: '/:lang/sponsors',
 				permanent: true,
@@ -262,7 +257,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/music/browse',
-				destination: '/:lang/songs/albums/page/1',
+				destination: '/:lang/songs/albums',
 				permanent: false,
 			},
 			{
@@ -277,7 +272,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/music/browse/tag/:tagName/:slug',
-				destination: '/:lang/songs/albums/page/1',
+				destination: '/:lang/songs/albums',
 				permanent: true,
 			},
 			{
@@ -451,10 +446,6 @@ module.exports = withPWA({
 			{
 				source: '/:lang/series',
 				destination: '/:lang/series/page/1',
-			},
-			{
-				source: '/:lang/songs/albums',
-				destination: '/:lang/songs/albums/page/1',
 			},
 			{
 				source: '/:lang/sponsors',

@@ -324,7 +324,10 @@ describe('localization usage', () => {
 
 	it('localizes songs list page', async () => {
 		const screen = await renderWithQueryProvider(
-			<SongList data={undefined as any} />
+			<SongList
+				musicAlbums={{ nodes: [], aggregate: { count: 0 } }}
+				musicBookTags={{ nodes: [] }}
+			/>
 		);
 
 		expectNoUnlocalizedText(screen);

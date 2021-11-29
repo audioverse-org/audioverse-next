@@ -1,0 +1,44 @@
+@import '../../../styles/common';
+
+.container {
+	padding: $tease-padding;
+	background: $ts-songH;
+}
+
+.back {
+	margin-bottom: 16px;
+}
+
+.header {
+	margin-bottom: 8px;
+}
+
+.contributors {
+	margin-bottom: 24px;
+}
+
+.songCount {
+	color: $ts-midTone;
+	margin-bottom: -3.5px;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+	> *:first-child {
+		flex-grow: 1;
+	}
+}
+
+.duration {
+	color: $ts-midTone;
+}
+
+.iconButton {
+	margin-left: 8px;
+}
+
+.cardGroup {
+	margin-bottom: 16px;
+}

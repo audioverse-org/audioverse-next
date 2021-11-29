@@ -150,7 +150,7 @@ export default function DiscoverCollections({
 					<CardSequence sequence={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeSongAlbumsListRoute(language, 1))}
+			{makeSeeAllButton(makeSongAlbumsListRoute(language))}
 		</div>
 	);
 }
