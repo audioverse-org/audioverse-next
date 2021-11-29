@@ -120,17 +120,15 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									<CardRecording recording={recording} />
 								</div>
 							))}
-							{
-								<div className={styles.slideCard}>
-									<CardBibleChapter
-										chapter={{
-											id: 'ENGKJV1/GEN',
-											title: 'Genesis 1',
-											url: makeBibleBookRoute(languageRoute, 'ENGKJV1/GEN'),
-										}}
-									/>
-								</div>
-							}
+							<div className={styles.slideCard}>
+								<CardBibleChapter
+									chapter={{
+										id: 'ENGKJV1/GEN',
+										title: 'Genesis 1',
+										url: makeBibleBookRoute(languageRoute, 'ENGKJV1/GEN'),
+									}}
+								/>
+							</div>
 							{recentRecordings.slice(2).map((recording) => (
 								<div className={styles.slideCard} key={recording.canonicalPath}>
 									<CardRecording recording={recording} />
