@@ -218,6 +218,18 @@ export function Recording({
 			? recording.sequence?.recordings.nodes
 			: undefined;
 
+	const makeHat = (title: string, href: string) => (
+		<Link href={href}>
+			<a className={styles.hat}>
+				<SequenceTypeLockup
+					contentType={SequenceContentType.MusicAlbum}
+					unpadded
+				/>
+				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
+			</a>
+		</Link>
+	);
+
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
 			<Head>
@@ -227,33 +239,13 @@ export function Recording({
 				/>
 				<link href={imageWithFallback.url} rel="image_src" />
 			</Head>
-			{overrideSequence ? (
-				<Link href={makeBibleMusicRoute(languageRoute, overrideSequence.book)}>
-					<a className={styles.hat}>
-						<SequenceTypeLockup
-							contentType={SequenceContentType.MusicAlbum}
-							unpadded
-						/>
-						<h4 className={clsx(audiobookHeadingStyle)}>
-							{startCase(overrideSequence.book)}
-						</h4>
-					</a>
-				</Link>
-			) : (
-				recording?.sequence && (
-					<Link href={recording.sequence.canonicalPath}>
-						<a className={styles.hat}>
-							<SequenceTypeLockup
-								contentType={recording.sequence.contentType}
-								unpadded
-							/>
-							<h4 className={clsx(audiobookHeadingStyle)}>
-								{recording?.sequence?.title}
-							</h4>
-						</a>
-					</Link>
-				)
-			)}
+			{overrideSequence
+				? makeHat(
+						startCase(overrideSequence.book),
+						makeBibleMusicRoute(languageRoute, overrideSequence.book)
+				  )
+				: recording.sequence &&
+				  makeHat(recording.sequence.title, recording.sequence.canonicalPath)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					<div className={styles.meta}>

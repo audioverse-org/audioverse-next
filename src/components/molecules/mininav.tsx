@@ -20,8 +20,7 @@ export default function Mininav({ items, disabled }: Props): JSX.Element {
 	return (
 		<div className={clsx(styles.miniNav, disabled && styles.miniNavDisabled)}>
 			{items.map(({ label, url, onClick, isActive }) => {
-				const inner = <a onClick={onClick}>{label}</a>;
-				return (
+				return url ? (
 					<Heading6
 						sans
 						uppercase
@@ -31,8 +30,17 @@ export default function Mininav({ items, disabled }: Props): JSX.Element {
 						key={url}
 						className={clsx(isActive && styles.miniNavActive)}
 					>
-						{url ? <Link href={url}>{inner}</Link> : inner}
+						<Link href={url}>
+							<a onClick={onClick}>{label}</a>
+						</Link>
 					</Heading6>
+				) : (
+					<button
+						className={clsx(styles.button, isActive && styles.miniNavActive)}
+						onClick={onClick}
+					>
+						{label}
+					</button>
 				);
 			})}
 		</div>

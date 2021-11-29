@@ -1,5 +1,23 @@
 @import '../../styles/common';
 
+.button {
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	background: none;
+	color: $ts-dark;
+	font-family: $sans;
+	font-weight: 700;
+	font-size: 11px;
+	line-height: 13.31px;
+	letter-spacing: 1.1px;
+	text-transform: uppercase;
+	cursor: pointer;
+	&:hover {
+		color: $ts-red;
+	}
+}
 .miniNav {
 	display: flex;
 	align-items: center;
@@ -25,6 +43,7 @@
 		}
 	}
 }
-.miniNavActive {
+
+.miniNavActive.miniNavActive {
 	border-bottom-color: $ts-red;
 }
