@@ -5,7 +5,6 @@ import {
 } from 'next';
 
 import Contact, { ContactProps } from '@containers/contact';
-import { REVALIDATE } from '@lib/constants';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeContactRoute, makeTestimonySubmitRoute } from '@lib/routes';
 
@@ -20,7 +19,6 @@ export async function getStaticProps({
 		props: {
 			type: params?.type as string,
 		},
-		revalidate: REVALIDATE,
 	};
 }
 
