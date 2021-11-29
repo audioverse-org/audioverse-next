@@ -213,6 +213,11 @@ export function Recording({
 		});
 	}
 
+	const playlistRecordings =
+		isAudiobook || contentType === RecordingContentType.MusicTrack
+			? recording.sequence?.recordings.nodes
+			: undefined;
+
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
 			<Head>
@@ -290,7 +295,15 @@ export function Recording({
 
 					<MediaFormatSwitcher recording={recording} />
 					<SequenceNav recording={recording} useInverse={useInverseButtons} />
-					<Player {...{ recording, backgroundColor }} />
+					<Player
+						{...{
+							recording,
+							playlistRecordings: playlistRecordings?.slice(
+								Math.max((recording.sequenceIndex || 0) - 1, 0)
+							),
+							backgroundColor,
+						}}
+					/>
 
 					<HorizontalRule color={textRuleColor} />
 
@@ -356,7 +369,14 @@ export function Recording({
 											key={r.id}
 											ref={r.id === recording.id ? currentRef : undefined}
 										>
-											<TeaseRecording recording={r} theme={theme} unpadded />
+											<TeaseRecording
+												recording={r}
+												playlistRecordings={playlistRecordings?.slice(
+													Math.max((r.sequenceIndex || 0) - 1, 0)
+												)}
+												theme={theme}
+												unpadded
+											/>
 										</li>
 									))}
 								</ol>

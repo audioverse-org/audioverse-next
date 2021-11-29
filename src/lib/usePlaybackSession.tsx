@@ -29,7 +29,8 @@ interface PlaybackSessionInfo {
 }
 
 export default function usePlaybackSession(
-	recording: AndMiniplayerFragment | null
+	recording: AndMiniplayerFragment | null,
+	playlistRecordings?: AndMiniplayerFragment[]
 ): PlaybackSessionInfo {
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
@@ -81,7 +82,7 @@ export default function usePlaybackSession(
 			return;
 		}
 
-		context.loadRecording(recording, {
+		context.loadRecording(playlistRecordings || recording, {
 			onLoad: (c: PlaybackContextType) => {
 				func(c);
 			},

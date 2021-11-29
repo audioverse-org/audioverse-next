@@ -10,7 +10,10 @@ import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
-import { TeaseRecordingFragment } from '@lib/generated/graphql';
+import {
+	AndMiniplayerFragment,
+	TeaseRecordingFragment,
+} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
@@ -32,6 +35,7 @@ type Props = {
 	recording: TeaseRecordingFragment;
 	theme: CardTheme;
 	unpadded?: boolean;
+	playlistRecordings?: AndMiniplayerFragment[];
 	small?: boolean;
 	isOptionalLink?: boolean;
 	disableUserFeatures?: boolean;
@@ -41,6 +45,7 @@ export default function TeaseRecording({
 	recording,
 	theme,
 	unpadded,
+	playlistRecordings,
 	small,
 	isOptionalLink,
 	disableUserFeatures,
@@ -48,10 +53,11 @@ export default function TeaseRecording({
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
 		recording.id,
-		recording.sequence?.id
+		recording.sequence?.id,
+		disableUserFeatures
 	);
 	const router = useRouter();
-	const session = usePlaybackSession(recording);
+	const session = usePlaybackSession(recording, playlistRecordings);
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 
