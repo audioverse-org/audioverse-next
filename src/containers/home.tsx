@@ -7,6 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
+import CardBibleChapter from '@components/molecules/card/bibleChapter';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
@@ -35,6 +36,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const [email, setEmail] = useState('');
 
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
+	const chapter = data?.audiobible?.book.chapter;
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
@@ -114,12 +116,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									<CardRecording recording={recording} />
 								</div>
 							))}
-							{/*TODO: Reactivate once card is powered by FCBH API*/}
-							{/*{chapter && (*/}
-							{/*	<div className={styles.slideCard}>*/}
-							{/*		<CardBibleChapter chapter={chapter} />*/}
-							{/*	</div>*/}
-							{/*)}*/}
+							{chapter && (
+								<div className={styles.slideCard}>
+									<CardBibleChapter chapter={chapter} />
+								</div>
+							)}
 							{recentRecordings.slice(2).map((recording) => (
 								<div className={styles.slideCard} key={recording.canonicalPath}>
 									<CardRecording recording={recording} />

@@ -2015,7 +2015,6 @@ type Mutation {
 		input: MediaReleaseUpdateInput!
 		mediaReleaseId: ID!
 	): MediaReleasePayload!
-	pageContactSubmit(input: PageContactSubmitInput!): SuccessPayload!
 	pageCreate(input: PageCreateInput!): PagePayload!
 	pageDelete(pageId: ID!): SuccessPayload!
 	pageUpdate(input: PageUpdateInput!, pageId: ID!): PagePayload!
@@ -2324,24 +2323,6 @@ type PageConnection {
 	edges: [PageEdge!]
 	nodes: [Page!]
 	pageInfo: PageInfo!
-}
-
-"""
-The available contact page recipients.
-"""
-enum PageContactRecipient {
-	GENERAL
-	TECHNICAL
-	TESTIMONY
-}
-
-input PageContactSubmitInput {
-	body: String!
-	email: String!
-	givenName: String!
-	language: Language!
-	recipient: PageContactRecipient!
-	surname: String!
 }
 
 input PageCreateInput {
@@ -6497,7 +6478,6 @@ enum Timezone {
 	PACIFIC_GUAM
 	PACIFIC_HONOLULU
 	PACIFIC_JOHNSTON
-	PACIFIC_KANTON
 	PACIFIC_KIRITIMATI
 	PACIFIC_KOSRAE
 	PACIFIC_KWAJALEIN
