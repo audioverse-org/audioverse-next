@@ -39,6 +39,7 @@ type Props = {
 	small?: boolean;
 	isOptionalLink?: boolean;
 	disableUserFeatures?: boolean;
+	disablePlayback?: boolean;
 };
 
 export default function TeaseRecording({
@@ -49,6 +50,7 @@ export default function TeaseRecording({
 	small,
 	isOptionalLink,
 	disableUserFeatures,
+	disablePlayback = false,
 }: Props): JSX.Element {
 	const intl = useIntl();
 	const { isFavorited, toggleFavorited } = useIsRecordingFavorited(
@@ -101,33 +103,35 @@ export default function TeaseRecording({
 				) : (
 					<Heading2>{recording.title}</Heading2>
 				)}
-				<div className={styles.play}>
-					{session.isPlaying ? (
-						<IconButton
-							Icon={IconListeningAnimated}
-							onClick={() => {
-								// let propagate to recording push
-							}}
-							color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-							backgroundColor={backgroundColor}
-						/>
-					) : (
-						<IconButton
-							Icon={IconPlay}
-							onClick={(e) => {
-								e.preventDefault();
-								session.play();
-							}}
-							color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
-							backgroundColor={backgroundColor}
-							aria-label={intl.formatMessage({
-								id: 'playButton__playLabel',
-								defaultMessage: 'play',
-								description: 'play button play label',
-							})}
-						/>
-					)}
-				</div>
+				{!disablePlayback && (
+					<div className={styles.play}>
+						{session.isPlaying ? (
+							<IconButton
+								Icon={IconListeningAnimated}
+								onClick={() => {
+									// let propagate to recording push
+								}}
+								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
+								backgroundColor={backgroundColor}
+							/>
+						) : (
+							<IconButton
+								Icon={IconPlay}
+								onClick={(e) => {
+									e.preventDefault();
+									session.play();
+								}}
+								color={isDarkTheme ? BaseColors.WHITE : BaseColors.DARK}
+								backgroundColor={backgroundColor}
+								aria-label={intl.formatMessage({
+									id: 'playButton__playLabel',
+									defaultMessage: 'play',
+									description: 'play button play label',
+								})}
+							/>
+						)}
+					</div>
+				)}
 			</div>
 			{!hideSpeakers && (
 				<div>

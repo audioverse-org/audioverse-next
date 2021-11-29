@@ -18,7 +18,12 @@ import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import { makeAboutPage, makeDonateRoute, makeRegisterRoute } from '@lib/routes';
+import {
+	makeAboutPage,
+	makeBibleBookRoute,
+	makeDonateRoute,
+	makeRegisterRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/fa-bell.svg';
@@ -36,7 +41,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const [email, setEmail] = useState('');
 
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
-	const chapter = data?.audiobible?.book.chapter;
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
 
@@ -116,11 +120,17 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									<CardRecording recording={recording} />
 								</div>
 							))}
-							{chapter && (
+							{
 								<div className={styles.slideCard}>
-									<CardBibleChapter chapter={chapter} />
+									<CardBibleChapter
+										chapter={{
+											id: 'ENGKJV1/GEN',
+											title: 'Genesis 1',
+											url: makeBibleBookRoute(languageRoute, 'ENGKJV1/GEN'),
+										}}
+									/>
 								</div>
-							)}
+							}
 							{recentRecordings.slice(2).map((recording) => (
 								<div className={styles.slideCard} key={recording.canonicalPath}>
 									<CardRecording recording={recording} />

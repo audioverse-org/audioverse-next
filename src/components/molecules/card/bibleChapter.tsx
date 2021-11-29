@@ -46,7 +46,14 @@ export default function CardBibleChapter({
 			>
 				<h1>TODO</h1>
 			</CardHat>
-			<TeaseRecording {...{ recording, theme }} />
+			<TeaseRecording
+				{...{
+					recording,
+					theme,
+					disablePlayback: true,
+					disableUserFeatures: true,
+				}}
+			/>
 		</CardWithTheme>
 	);
 }
