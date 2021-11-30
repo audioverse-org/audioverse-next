@@ -65,7 +65,7 @@
 	@media (min-width: $breakpoint-lg) {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 16px;
+		grid-gap: 0 16px;
 	}
 }
 .postsSquare {

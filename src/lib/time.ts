@@ -57,17 +57,29 @@ export const useFormattedDuration = (seconds: number): string => {
 	);
 };
 
-// TODO: support hours
 export const useFormattedTime = (seconds: number): string => {
 	const intl = useIntl();
-	const [, m, s] = divideWithRunoff(Math.round(seconds), [3600, 60]);
+	const [h, m, s] = divideWithRunoff(Math.round(seconds), [3600, 60]);
 
-	return intl.formatMessage(
-		{
-			id: 'time__minutesAndSeconds',
-			defaultMessage: '{m}:{s}',
-			description: 'time minutes and seconds',
-		},
-		{ m, s: _.padStart(s.toString(), 2, '0') }
-	);
+	return h
+		? intl.formatMessage(
+				{
+					id: 'time__hoursMinutesAndSeconds',
+					defaultMessage: '{h}:{m}:{s}',
+					description: 'time hours, minutes and seconds',
+				},
+				{
+					h,
+					m: _.padStart(m.toString(), 2, '0'),
+					s: _.padStart(s.toString(), 2, '0'),
+				}
+		  )
+		: intl.formatMessage(
+				{
+					id: 'time__minutesAndSeconds',
+					defaultMessage: '{m}:{s}',
+					description: 'time minutes and seconds',
+				},
+				{ h, m, s: _.padStart(s.toString(), 2, '0') }
+		  );
 };

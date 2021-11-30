@@ -64,6 +64,7 @@ describe('miniplayer template', () => {
 										url: 'the_video_url',
 										filesize: 'the_video_size',
 										mimeType: 'the_video_type',
+										duration: 1234,
 									},
 								],
 								audioFiles: [],
