@@ -6,17 +6,22 @@ import styles from './progressBar.module.scss';
 
 interface ProgressBarProps {
 	progress: number;
+	bufferedProgress?: number;
 	setProgress?: (newProgress: number) => void;
 	className?: string;
 }
 
 export default function ProgressBar({
 	progress,
+	bufferedProgress,
 	setProgress,
 	className,
 }: ProgressBarProps): JSX.Element {
 	const intl = useIntl();
-	const cssProps = { '--progress': `${progress * 100}%` } as CSSProperties;
+	const cssProps = {
+		'--progress': `${progress * 100}%`,
+		'--buffered': `${(bufferedProgress || 0) * 100}%`,
+	} as CSSProperties;
 	return (
 		<span
 			className={clsx(

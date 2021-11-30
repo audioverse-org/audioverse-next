@@ -22,6 +22,7 @@ interface PlaybackSessionInfo {
 	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
 	progress: number;
+	bufferedProgress: number;
 	prefersAudio: boolean;
 	isAudioLoaded: boolean;
 	isVideoLoaded: boolean;
@@ -54,6 +55,7 @@ export default function usePlaybackSession(
 		  0;
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;
+	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
 	const time = isLoaded ? context.getTime() : duration * progress;
 	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
@@ -176,6 +178,7 @@ export default function usePlaybackSession(
 		requestFullscreen,
 		isLoaded,
 		progress,
+		bufferedProgress,
 		time,
 		duration,
 		isAudioLoaded,

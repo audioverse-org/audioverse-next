@@ -105,7 +105,10 @@ const Player = ({
 						<div
 							className={styles.waves}
 							style={
-								{ '--progress': `${session.progress * 100}%` } as CSSProperties
+								{
+									'--progress': `${session.progress * 100}%`,
+									'--buffered': `${session.bufferedProgress * 100}%`,
+								} as CSSProperties
 							}
 						>
 							<input

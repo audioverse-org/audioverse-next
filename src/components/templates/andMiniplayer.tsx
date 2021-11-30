@@ -74,6 +74,7 @@ export type PlaybackContextType = {
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	getPrefersAudio: () => boolean;
 	getProgress: () => number;
+	getBufferedProgress: () => number;
 	setProgress: (p: number) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
@@ -107,6 +108,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setPrefersAudio: () => undefined,
 	getPrefersAudio: () => false,
 	getProgress: () => 0,
+	getBufferedProgress: () => 0,
 	setProgress: () => undefined,
 	supportsFullscreen: () => false,
 	loadRecording: () => undefined,
@@ -145,6 +147,7 @@ export default function AndMiniplayer({
 		useState<AndMiniplayerFragment[]>();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, _setProgress] = useState<number>(0);
+	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const [serverProgress, setServerProgress] = useState<number>(0);
 	const progressRef = useRef<number>(0);
 	const [volume, setVolume] = useState<number>(100);
@@ -190,16 +193,31 @@ export default function AndMiniplayer({
 		}
 	);
 
+	const playerBufferedEnd = player?.bufferedEnd();
+	const duration = sources[0]?.duration || recording?.duration || 0;
+	useEffect(() => {
+		let newBufferedProgress = +Math.max(
+			bufferedProgress, // Don't ever reduce the buffered amount
+			progress, // We've always buffered as much as we're playing
+			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
+		).toFixed(2);
+		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
+		setBufferedProgress(newBufferedProgress);
+	}, [bufferedProgress, playerBufferedEnd, progress, duration, sources]);
+
 	const throttledUpdateProgress = useMemo(
 		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
 		[updateProgress]
 	);
-	const setProgress = (p: number) => {
-		throttledUpdateProgress({
-			percentage: p,
-		});
-		_setProgress(p);
-	};
+	const setProgress = useCallback(
+		(p: number) => {
+			throttledUpdateProgress({
+				percentage: p,
+			});
+			_setProgress(p);
+		},
+		[throttledUpdateProgress]
+	);
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -208,9 +226,7 @@ export default function AndMiniplayer({
 		() => ({
 			poster: '/img/poster.jpg',
 			controls: false,
-			// TODO: Should this be set back to `auto` once streaming urls are fixed?
-			// https://docs.videojs.com/docs/guides/options.html
-			preload: 'metadata',
+			preload: 'auto',
 			fluid: true,
 			sources,
 		}),
@@ -251,15 +267,13 @@ export default function AndMiniplayer({
 		},
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
-			return (
-				(!onLoad && player?.duration()) ||
-				sources[0]?.duration ||
-				recording?.duration ||
-				0
-			);
+			return (!onLoad && player?.duration()) || duration;
 		},
 		getProgress: () => {
 			return progress;
+		},
+		getBufferedProgress: () => {
+			return bufferedProgress;
 		},
 		setProgress: (p: number) => {
 			setProgress(p);
@@ -338,7 +352,8 @@ export default function AndMiniplayer({
 		const progress = serverProgress || 0;
 		_setProgress(progress);
 
-		const duration = sources[0]?.duration || recording?.duration || 0;
+		setBufferedProgress(0);
+
 		p.currentTime(progress * duration);
 		setVolume(p.volume() * 100);
 
