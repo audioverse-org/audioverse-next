@@ -2,7 +2,28 @@
 
 .container {
 	padding: $tease-padding;
-	background: $ts-cream;
+	&.AUDIOBOOK {
+		--sequenceBackground: #{$ts-bookH};
+		--sequenceTextColor: #{$ts-white};
+		--sequenceTextSecondaryColor: #{$ts-lightTone};
+	}
+	&.MUSIC_ALBUM {
+		--sequenceBackground: #{$ts-songH};
+		--sequenceTextColor: #{$ts-dark};
+		--sequenceTextSecondaryColor: #{$ts-midTone};
+	}
+	&.SERIES {
+		--sequenceBackground: #{$ts-cream};
+		--sequenceTextColor: #{$ts-dark};
+		--sequenceTextSecondaryColor: #{$ts-midTone};
+	}
+	&.STORY_SEASON {
+		--sequenceBackground: #{$ts-storyH};
+		--sequenceTextColor: #{$ts-white};
+		--sequenceTextSecondaryColor: #{$ts-lightTone};
+	}
+	background: var(--sequenceBackground);
+	color: var(--sequenceTextColor);
 }
 
 .titleLockup {
@@ -30,7 +51,7 @@
 }
 
 .duration {
-	color: $ts-midTone;
+	color: var(--sequenceTextSecondaryColor);
 }
 
 .iconButton {

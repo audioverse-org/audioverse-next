@@ -17,7 +17,7 @@ export default function CollectionPivot({
 	collection,
 	children,
 }: PropsWithChildren<Props>): JSX.Element {
-	const { title, canonicalPath } = collection;
+	const { title, canonicalPath, contentType } = collection;
 
 	return (
 		<Tease className={styles.container}>
@@ -27,7 +27,7 @@ export default function CollectionPivot({
 					backUrl={canonicalPath}
 					className={styles.back}
 				/>
-				<CollectionTypeLockup />
+				<CollectionTypeLockup contentType={contentType} />
 				<Heading2>{title}</Heading2>
 			</ContentWidthLimiter>
 			{children}

@@ -5625,6 +5625,7 @@ export type CardCollectionFragment = {
 	endDate: string | null | undefined;
 	duration: number;
 	viewerPlaybackCompletedPercentage: number;
+	collectionContentType: CollectionContentType;
 	image:
 		| { __typename?: 'Image'; id: string | number; url: string }
 		| null
@@ -5652,6 +5653,7 @@ export type CardFavoriteFragment = {
 				endDate: string | null | undefined;
 				duration: number;
 				viewerPlaybackCompletedPercentage: number;
+				collectionContentType: CollectionContentType;
 				image:
 					| { __typename?: 'Image'; id: string | number; url: string }
 					| null
@@ -5731,18 +5733,21 @@ export type CardFavoriteFragment = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 		  }
 		| {
@@ -5845,18 +5850,21 @@ export type CardFavoriteFragment = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -5950,18 +5958,21 @@ export type CardPlaylistFragment = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -6023,18 +6034,21 @@ export type CardRecordingFragment = {
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoFiles: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 };
 
@@ -6124,18 +6138,21 @@ export type CardRecordingStackFragment = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -6290,18 +6307,21 @@ export type PlayerFragment = {
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoFiles: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoDownloads: Array<{
 		__typename?: 'VideoFile';
@@ -6403,18 +6423,21 @@ export type TeaseRecordingFragment = {
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoFiles: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 };
 
@@ -6468,18 +6491,21 @@ export type GetNotFoundPageDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -6578,18 +6604,21 @@ export type RecordingFragment = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -6631,18 +6660,21 @@ export type RecordingFragment = {
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoFiles: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoDownloads: Array<{
 		__typename?: 'VideoFile';
@@ -6725,18 +6757,21 @@ export type SequenceFragment = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -6770,19 +6805,68 @@ export type AndMiniplayerFragment = {
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoFiles: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
 		filesize: string;
 		mimeType: string;
+		duration: number;
 	}>;
+};
+
+export type GetRecordingPlaybackProgressQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetRecordingPlaybackProgressQuery = {
+	__typename?: 'Query';
+	recording:
+		| {
+				__typename?: 'Recording';
+				viewerPlaybackSession:
+					| {
+							__typename?: 'RecordingPlaybackSession';
+							positionPercentage: number;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+};
+
+export type RecordingPlaybackProgressSetMutationVariables = Exact<{
+	id: Scalars['ID'];
+	percentage: Scalars['Float'];
+}>;
+
+export type RecordingPlaybackProgressSetMutation = {
+	__typename?: 'Mutation';
+	recordingPlaybackSessionAdvance: {
+		__typename?: 'RecordingPayload';
+		recording:
+			| {
+					__typename?: 'Recording';
+					viewerPlaybackSession:
+						| {
+								__typename?: 'RecordingPlaybackSession';
+								positionPercentage: number;
+						  }
+						| null
+						| undefined;
+			  }
+			| null
+			| undefined;
+	};
 };
 
 export type GetAboutPageDataQueryVariables = Exact<{
@@ -7139,18 +7223,21 @@ export type GetAudiobookDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -7412,18 +7499,21 @@ export type GetAudiobookTrackDetailDataQuery = {
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoFiles: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 									  }>
 									| null
@@ -7474,18 +7564,21 @@ export type GetAudiobookTrackDetailDataQuery = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoDownloads: Array<{
 					__typename?: 'VideoFile';
@@ -7626,6 +7719,7 @@ export type GetCollectionDetailPageDataQuery = {
 				__typename?: 'Collection';
 				id: string | number;
 				title: string;
+				contentType: CollectionContentType;
 				startDate: string | null | undefined;
 				endDate: string | null | undefined;
 				duration: number;
@@ -7784,18 +7878,21 @@ export type GetCollectionDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -7911,6 +8008,7 @@ export type GetCollectionListPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -7952,6 +8050,7 @@ export type CollectionPivotFragment = {
 	__typename?: 'Collection';
 	title: string;
 	canonicalPath: string;
+	contentType: CollectionContentType;
 };
 
 export type GetCollectionPresentersPageDataQueryVariables = Exact<{
@@ -7968,6 +8067,7 @@ export type GetCollectionPresentersPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				persons: {
 					__typename?: 'PersonConnection';
 					nodes:
@@ -8014,6 +8114,7 @@ export type GetCollectionSequencesPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				sequences: {
 					__typename?: 'SequenceConnection';
 					nodes:
@@ -8090,6 +8191,7 @@ export type GetCollectionTeachingsPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					nodes:
@@ -8139,18 +8241,21 @@ export type GetCollectionTeachingsPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -8231,18 +8336,21 @@ export type GetDiscoverPageDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -8299,18 +8407,21 @@ export type GetDiscoverPageDataQuery = {
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 						videoFiles: Array<{
 							__typename?: 'VideoFile';
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 						videoStreams: Array<{
 							__typename?: 'VideoFile';
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 					};
 			  }>
@@ -8378,18 +8489,21 @@ export type GetDiscoverPageDataQuery = {
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoFiles: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 							  }>
 							| null
@@ -8442,6 +8556,7 @@ export type GetDiscoverPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
 						nodes:
@@ -8544,18 +8659,21 @@ export type GetDiscoverPageDataQuery = {
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoFiles: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 							  }>
 							| null
@@ -8717,6 +8835,7 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -8968,18 +9087,21 @@ export type GetHomeStaticPropsQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -9093,18 +9215,21 @@ export type GetLibraryPlaylistsDataQuery = {
 														url: string;
 														filesize: string;
 														mimeType: string;
+														duration: number;
 													}>;
 													videoFiles: Array<{
 														__typename?: 'VideoFile';
 														url: string;
 														filesize: string;
 														mimeType: string;
+														duration: number;
 													}>;
 													videoStreams: Array<{
 														__typename?: 'VideoFile';
 														url: string;
 														filesize: string;
 														mimeType: string;
+														duration: number;
 													}>;
 											  }>
 											| null
@@ -9196,18 +9321,21 @@ export type GetLibraryHistoryPageDataQuery = {
 											url: string;
 											filesize: string;
 											mimeType: string;
+											duration: number;
 										}>;
 										videoFiles: Array<{
 											__typename?: 'VideoFile';
 											url: string;
 											filesize: string;
 											mimeType: string;
+											duration: number;
 										}>;
 										videoStreams: Array<{
 											__typename?: 'VideoFile';
 											url: string;
 											filesize: string;
 											mimeType: string;
+											duration: number;
 										}>;
 									};
 							  }>
@@ -9259,6 +9387,7 @@ export type GetLibraryDataQuery = {
 												endDate: string | null | undefined;
 												duration: number;
 												viewerPlaybackCompletedPercentage: number;
+												collectionContentType: CollectionContentType;
 												image:
 													| {
 															__typename?: 'Image';
@@ -9355,18 +9484,21 @@ export type GetLibraryDataQuery = {
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 												videoFiles: Array<{
 													__typename?: 'VideoFile';
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 												videoStreams: Array<{
 													__typename?: 'VideoFile';
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 										  }
 										| {
@@ -9487,18 +9619,21 @@ export type GetLibraryDataQuery = {
 																	url: string;
 																	filesize: string;
 																	mimeType: string;
+																	duration: number;
 																}>;
 																videoFiles: Array<{
 																	__typename?: 'VideoFile';
 																	url: string;
 																	filesize: string;
 																	mimeType: string;
+																	duration: number;
 																}>;
 																videoStreams: Array<{
 																	__typename?: 'VideoFile';
 																	url: string;
 																	filesize: string;
 																	mimeType: string;
+																	duration: number;
 																}>;
 														  }>
 														| null
@@ -9618,18 +9753,21 @@ export type GetLibraryPlaylistPageDataQuery = {
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 												videoFiles: Array<{
 													__typename?: 'VideoFile';
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 												videoStreams: Array<{
 													__typename?: 'VideoFile';
 													url: string;
 													filesize: string;
 													mimeType: string;
+													duration: number;
 												}>;
 										  }>
 										| null
@@ -9679,6 +9817,7 @@ export type GetPresenterAppearsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -9799,18 +9938,21 @@ export type GetPresenterDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -9869,18 +10011,21 @@ export type GetPresenterDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -9936,18 +10081,21 @@ export type GetPresenterDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -10017,6 +10165,7 @@ export type GetPresenterDetailPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
 						nodes:
@@ -10227,18 +10376,21 @@ export type GetPresenterRecordingsPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -10448,18 +10600,21 @@ export type GetPresenterTopPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -10497,6 +10652,7 @@ export type GetSearchResultsCollectionsQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -10575,18 +10731,21 @@ export type GetSearchResultsPageDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -10655,6 +10814,7 @@ export type GetSearchResultsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -10937,18 +11097,21 @@ export type GetSearchResultsRecordingsQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -11037,18 +11200,21 @@ export type GetSeriesDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -11310,18 +11476,21 @@ export type GetSermonDetailDataQuery = {
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoFiles: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 									  }>
 									| null
@@ -11372,18 +11541,21 @@ export type GetSermonDetailDataQuery = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoDownloads: Array<{
 					__typename?: 'VideoFile';
@@ -11478,18 +11650,21 @@ export type GetSermonListPageDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -11615,18 +11790,21 @@ export type GetTrendingTeachingsPageDataQuery = {
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 						videoFiles: Array<{
 							__typename?: 'VideoFile';
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 						videoStreams: Array<{
 							__typename?: 'VideoFile';
 							url: string;
 							filesize: string;
 							mimeType: string;
+							duration: number;
 						}>;
 					};
 			  }>
@@ -11716,18 +11894,21 @@ export type GetSongAlbumsDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -11880,18 +12061,21 @@ export type GetSongAlbumsListPageDataQuery = {
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoFiles: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 							  }>
 							| null
@@ -11989,18 +12173,21 @@ export type GetSongAlbumsListPageDataQuery = {
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoFiles: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
 										filesize: string;
 										mimeType: string;
+										duration: number;
 									}>;
 							  }>
 							| null
@@ -12069,18 +12256,21 @@ export type GetSongBooksDetailPageDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -12192,18 +12382,21 @@ export type GetBookSongDetailDataQuery = {
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoFiles: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 									  }>
 									| null
@@ -12254,18 +12447,21 @@ export type GetBookSongDetailDataQuery = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoDownloads: Array<{
 					__typename?: 'VideoFile';
@@ -12321,18 +12517,21 @@ export type GetBookSongDetailDataQuery = {
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoFiles: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
 						filesize: string;
 						mimeType: string;
+						duration: number;
 					}>;
 			  }>
 			| null
@@ -12442,18 +12641,21 @@ export type GetSongDetailDataQuery = {
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoFiles: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 									  }>
 									| null
@@ -12504,18 +12706,21 @@ export type GetSongDetailDataQuery = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoDownloads: Array<{
 					__typename?: 'VideoFile';
@@ -12582,6 +12787,7 @@ export type GetSponsorConferencesPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -12657,6 +12863,7 @@ export type GetSponsorDetailPageDataQuery = {
 								endDate: string | null | undefined;
 								duration: number;
 								viewerPlaybackCompletedPercentage: number;
+								collectionContentType: CollectionContentType;
 								image:
 									| { __typename?: 'Image'; id: string | number; url: string }
 									| null
@@ -12789,18 +12996,21 @@ export type GetSponsorDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -13023,18 +13233,21 @@ export type GetSponsorTeachingsPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -13206,18 +13419,21 @@ export type GetStoryAlbumDetailPageDataQuery = {
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoFiles: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
 									filesize: string;
 									mimeType: string;
+									duration: number;
 								}>;
 						  }>
 						| null
@@ -13479,18 +13695,21 @@ export type GetStoryDetailDataQuery = {
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoFiles: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
 												filesize: string;
 												mimeType: string;
+												duration: number;
 											}>;
 									  }>
 									| null
@@ -13541,18 +13760,21 @@ export type GetStoryDetailDataQuery = {
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoFiles: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
 					filesize: string;
 					mimeType: string;
+					duration: number;
 				}>;
 				videoDownloads: Array<{
 					__typename?: 'VideoFile';
@@ -13908,16 +14130,19 @@ export const AndMiniplayerFragmentDoc = `
     url
     filesize
     mimeType
+    duration
   }
   videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
     url
     filesize
     mimeType
+    duration
   }
   videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
     url
     filesize
     mimeType
+    duration
   }
 }
     `;
@@ -14004,6 +14229,7 @@ export const CardCollectionFragmentDoc = `
     fragment cardCollection on Collection {
   id
   canonicalPath(useFuturePath: true)
+  collectionContentType: contentType
   title
   startDate
   endDate
@@ -14325,6 +14551,7 @@ export const CollectionPivotFragmentDoc = `
     fragment collectionPivot on Collection {
   title
   canonicalPath(useFuturePath: true)
+  contentType
 }
     `;
 export const PresenterPivotFragmentDoc = `
@@ -14510,6 +14737,68 @@ export const useGetNotFoundPageDataQuery = <
 			GetNotFoundPageDataDocument,
 			variables
 		),
+		options
+	);
+export const GetRecordingPlaybackProgressDocument = `
+    query getRecordingPlaybackProgress($id: ID!) {
+  recording(id: $id) {
+    viewerPlaybackSession {
+      positionPercentage
+    }
+  }
+}
+    `;
+export const useGetRecordingPlaybackProgressQuery = <
+	TData = GetRecordingPlaybackProgressQuery,
+	TError = unknown
+>(
+	variables: GetRecordingPlaybackProgressQueryVariables,
+	options?: UseQueryOptions<GetRecordingPlaybackProgressQuery, TError, TData>
+) =>
+	useQuery<GetRecordingPlaybackProgressQuery, TError, TData>(
+		['getRecordingPlaybackProgress', variables],
+		graphqlFetcher<
+			GetRecordingPlaybackProgressQuery,
+			GetRecordingPlaybackProgressQueryVariables
+		>(GetRecordingPlaybackProgressDocument, variables),
+		options
+	);
+export const RecordingPlaybackProgressSetDocument = `
+    mutation recordingPlaybackProgressSet($id: ID!, $percentage: Float!) {
+  recordingPlaybackSessionAdvance(
+    recordingId: $id
+    input: {positionPercentage: $percentage}
+  ) {
+    recording {
+      viewerPlaybackSession {
+        positionPercentage
+      }
+    }
+  }
+}
+    `;
+export const useRecordingPlaybackProgressSetMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		RecordingPlaybackProgressSetMutation,
+		TError,
+		RecordingPlaybackProgressSetMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		RecordingPlaybackProgressSetMutation,
+		TError,
+		RecordingPlaybackProgressSetMutationVariables,
+		TContext
+	>(
+		(variables?: RecordingPlaybackProgressSetMutationVariables) =>
+			graphqlFetcher<
+				RecordingPlaybackProgressSetMutation,
+				RecordingPlaybackProgressSetMutationVariables
+			>(RecordingPlaybackProgressSetDocument, variables)(),
 		options
 	);
 export const GetAboutPageDataDocument = `
@@ -15192,6 +15481,7 @@ export const GetCollectionDetailPageDataDocument = `
   collection(id: $id) {
     id
     title
+    contentType
     startDate
     endDate
     duration
@@ -18137,6 +18427,18 @@ export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>
 ): Promise<GetNotFoundPageDataQuery> {
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
+}
+
+export async function getRecordingPlaybackProgress<T>(
+	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
+): Promise<GetRecordingPlaybackProgressQuery> {
+	return fetchApi(GetRecordingPlaybackProgressDocument, { variables });
+}
+
+export async function recordingPlaybackProgressSet<T>(
+	variables: ExactAlt<T, RecordingPlaybackProgressSetMutationVariables>
+): Promise<RecordingPlaybackProgressSetMutation> {
+	return fetchApi(RecordingPlaybackProgressSetDocument, { variables });
 }
 
 export async function getAboutPageData<T>(

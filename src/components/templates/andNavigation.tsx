@@ -52,6 +52,7 @@ export default function AndNavigation({
 	const onSearchPage = pathname.includes('/[language]/search');
 
 	const navigationItems = getNavigationItems(router, languageRoute);
+	const playbackRecording = playbackContext.getRecording();
 	return (
 		<div className={styles.positioner}>
 			<div className={styles.mobileHeader}>
@@ -66,14 +67,12 @@ export default function AndNavigation({
 							/>
 						}
 					/>
-					{playbackContext.getRecording() && (
+					{playbackRecording && (
 						<IconButton
 							Icon={
 								playbackContext.paused() ? IconListening : IconListeningAnimated
 							}
-							onClick={() =>
-								push(playbackContext.getRecording()?.canonicalPath || '')
-							}
+							onClick={() => push(playbackRecording.canonicalPath || '')}
 							color={BaseColors.RED}
 							backgroundColor={BaseColors.CREAM}
 						/>

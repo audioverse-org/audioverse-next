@@ -16,12 +16,12 @@ import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {
-	const playback = useContext(PlaybackContext);
-	const volume = playback.getVolume();
-	const recording = playback.getRecording();
-	const isShowingVideo = playback.getVideoLocation() === 'miniplayer';
-	const timeString = useFormattedTime(playback.getTime());
-	const durationString = useFormattedTime(playback.getDuration());
+	const playbackContext = useContext(PlaybackContext);
+	const volume = playbackContext.getVolume();
+	const recording = playbackContext.getRecording();
+	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
+	const timeString = useFormattedTime(playbackContext.getTime());
+	const durationString = useFormattedTime(playbackContext.getDuration());
 
 	if (!recording) return null;
 
@@ -79,19 +79,19 @@ export default function Miniplayer(): JSX.Element | null {
 			<div className={styles.volume}>
 				<button
 					aria-label="reduce volume"
-					onClick={() => playback.setVolume(volume - 10)}
+					onClick={() => playbackContext.setVolume(volume - 10)}
 				>
 					<IconVolumeLow />
 				</button>
 				{/*TODO: Localize*/}
 				<Slider
 					value={volume}
-					onChange={(e, val) => playback.setVolume(val as number)}
+					onChange={(e, val) => playbackContext.setVolume(val as number)}
 					aria-label="volume"
 				/>
 				<button
 					aria-label="increase volume"
-					onClick={() => playback.setVolume(volume + 10)}
+					onClick={() => playbackContext.setVolume(volume + 10)}
 				>
 					<IconVolumeHigh />
 				</button>

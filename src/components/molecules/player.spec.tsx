@@ -42,6 +42,7 @@ const recording: Partial<PlayerFragment> = {
 			url: 'the_source_src',
 			mimeType: 'the_source_type',
 			filesize: 'the_source_size',
+			duration: 1234,
 		},
 	],
 };
@@ -119,13 +120,27 @@ describe('player', () => {
 			},
 		} as any);
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(50));
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(617));
 	});
 
 	it('treats range output as percentage', async () => {
 		const mockPlayer = setPlayerMock({ duration: 300 });
 
-		const { getByLabelText } = await renderComponent();
+		const { getByLabelText } = await renderComponent({
+			props: {
+				recording: {
+					...recording,
+					audioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+							duration: 300,
+						},
+					],
+				},
+			},
+		});
 
 		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
 			target: {
@@ -288,7 +303,21 @@ describe('player', () => {
 			},
 		});
 
-		const result = await renderComponent();
+		const result = await renderComponent({
+			props: {
+				recording: {
+					...recording,
+					audioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+							duration: 300,
+						},
+					],
+				},
+			},
+		});
 
 		ReactTestUtils.Simulate.change(result.getByLabelText('progress'), {
 			target: {
@@ -316,6 +345,7 @@ describe('player', () => {
 					url: 'first_source_src',
 					mimeType: 'first_source_type',
 					filesize: 'first_source_size',
+					duration: 1234,
 				},
 			],
 		};
@@ -329,6 +359,7 @@ describe('player', () => {
 					url: 'second_source_src',
 					mimeType: 'second_source_type',
 					filesize: 'second_source_size',
+					duration: 2345,
 				},
 			],
 		};
@@ -358,6 +389,7 @@ describe('player', () => {
 		await waitFor(() =>
 			expect(mockPlayer.src).toBeCalledWith([
 				{
+					duration: 2345,
 					src: 'second_source_src',
 					type: 'second_source_type',
 				},
@@ -427,6 +459,7 @@ describe('player', () => {
 					url: 'first_source_src',
 					mimeType: 'first_source_type',
 					filesize: 'first_source_size',
+					duration: 1234,
 				},
 			],
 		};
@@ -440,6 +473,7 @@ describe('player', () => {
 					url: 'second_source_src',
 					mimeType: 'second_source_type',
 					filesize: 'second_source_size',
+					duration: 2345,
 				},
 			],
 		};
@@ -958,10 +992,10 @@ describe('player', () => {
 	});
 
 	it('displays zero time if recording not loaded', async () => {
-		const { getAllByText } = await renderComponent();
+		const { getByText } = await renderComponent();
 
 		await waitFor(() => {
-			expect(getAllByText('0:00')).toHaveLength(2);
+			expect(getByText('0:00')).toBeInTheDocument();
 		});
 	});
 

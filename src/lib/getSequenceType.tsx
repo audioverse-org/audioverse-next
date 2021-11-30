@@ -10,8 +10,14 @@ import { BaseColors } from './constants';
 import { SequenceContentType } from './generated/graphql';
 
 type ISequenceTypeTheme = {
+	backgroundColor:
+		| BaseColors.BOOK_H
+		| BaseColors.SONG_H
+		| BaseColors.CREAM
+		| BaseColors.STORY_H;
 	iconColor: BaseColors.RED | BaseColors.SALMON;
 	textColor: BaseColors.WHITE | BaseColors.DARK;
+	ruleColor: BaseColors.LIGHT_TONE | BaseColors.MID_TONE;
 	Icon: React.ElementType;
 	label: JSX.Element;
 };
@@ -22,7 +28,9 @@ export function getSequenceTypeTheme(
 	return (
 		{
 			[SequenceContentType.Audiobook]: {
+				backgroundColor: BaseColors.BOOK_H,
 				iconColor: BaseColors.SALMON,
+				ruleColor: BaseColors.MID_TONE,
 				textColor: BaseColors.WHITE,
 				Icon: AudiobookIcon,
 				label: (
@@ -33,7 +41,9 @@ export function getSequenceTypeTheme(
 				),
 			},
 			[SequenceContentType.MusicAlbum]: {
+				backgroundColor: BaseColors.SONG_H,
 				iconColor: BaseColors.RED,
+				ruleColor: BaseColors.LIGHT_TONE,
 				textColor: BaseColors.DARK,
 				Icon: SongIcon,
 				label: (
@@ -44,7 +54,9 @@ export function getSequenceTypeTheme(
 				),
 			},
 			[SequenceContentType.Series]: {
+				backgroundColor: BaseColors.CREAM,
 				iconColor: BaseColors.RED,
+				ruleColor: BaseColors.MID_TONE,
 				textColor: BaseColors.DARK,
 				Icon: ListIcon,
 				label: (
@@ -55,7 +67,9 @@ export function getSequenceTypeTheme(
 				),
 			},
 			[SequenceContentType.StorySeason]: {
+				backgroundColor: BaseColors.STORY_H,
 				iconColor: BaseColors.SALMON,
+				ruleColor: BaseColors.LIGHT_TONE,
 				textColor: BaseColors.WHITE,
 				Icon: StoryIcon,
 				label: (

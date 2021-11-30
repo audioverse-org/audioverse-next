@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { throttle } from 'lodash';
 import React, {
 	ReactNode,
 	useCallback,
@@ -7,10 +8,18 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
+import { useMutation } from 'react-query';
 import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
 import Miniplayer from '@components/organisms/miniplayer';
-import { AndMiniplayerFragment, Scalars } from '@lib/generated/graphql';
+import { getSessionToken } from '@lib/cookies';
+import {
+	AndMiniplayerFragment,
+	recordingPlaybackProgressSet,
+	RecordingPlaybackProgressSetMutationVariables,
+	Scalars,
+	useGetRecordingPlaybackProgressQuery,
+} from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 import styles from './andMiniplayer.module.scss';
@@ -25,6 +34,7 @@ import styles from './andMiniplayer.module.scss';
 interface Playable {
 	url: string;
 	mimeType: string;
+	duration: number;
 }
 
 const getFiles = (
@@ -42,7 +52,7 @@ const getFiles = (
 	return audioFiles;
 };
 
-const getSources = (
+export const getSources = (
 	recording: AndMiniplayerFragment,
 	prefersAudio: boolean
 ) => {
@@ -51,6 +61,7 @@ const getSources = (
 	return files.map((f) => ({
 		src: f.url,
 		type: f.mimeType,
+		duration: f.duration,
 	}));
 };
 
@@ -118,6 +129,8 @@ interface AndMiniplayerProps {
 	children: ReactNode;
 }
 
+const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
+
 export default function AndMiniplayer({
 	children,
 }: AndMiniplayerProps): JSX.Element {
@@ -131,17 +144,62 @@ export default function AndMiniplayer({
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
-	const [progress, setProgress] = useState<number>(0);
+	const [progress, _setProgress] = useState<number>(0);
+	const [serverProgress, setServerProgress] = useState<number>(0);
 	const progressRef = useRef<number>(0);
 	const [volume, setVolume] = useState<number>(100);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
-	const [sources, setSources] = useState<{ src: string; type: string }[]>([]);
+	const [sources, setSources] = useState<
+		{ src: string; type: string; duration: number }[]
+	>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
+
+	const { data, isLoading } = useGetRecordingPlaybackProgressQuery(
+		{
+			id: recording?.id || 0,
+		},
+		{
+			enabled: !!recording?.id && !!getSessionToken(),
+		}
+	);
+	useEffect(() => {
+		if (data?.recording?.viewerPlaybackSession) {
+			const p = data.recording.viewerPlaybackSession.positionPercentage;
+			setServerProgress(p);
+		} else {
+			setServerProgress(0);
+		}
+	}, [recording?.id, data, isLoading]);
+
+	const { mutate: updateProgress } = useMutation(
+		({
+			percentage,
+		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
+			if (!getSessionToken() || !recording) {
+				return Promise.resolve() as Promise<unknown>;
+			}
+			return recordingPlaybackProgressSet({
+				id: recording.id,
+				percentage,
+			});
+		}
+	);
+
+	const throttledUpdateProgress = useMemo(
+		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
+		[updateProgress]
+	);
+	const setProgress = (p: number) => {
+		throttledUpdateProgress({
+			percentage: p,
+		});
+		_setProgress(p);
+	};
 
 	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
@@ -167,7 +225,6 @@ export default function AndMiniplayer({
 		play: () => {
 			player?.play();
 			setIsPaused(false);
-			if (progressRef.current) playback.setProgress(progressRef.current);
 		},
 		pause: () => {
 			player?.pause();
@@ -177,7 +234,11 @@ export default function AndMiniplayer({
 			return isPaused;
 		},
 		getTime: () => {
-			return player?.currentTime() || 0;
+			return (
+				(!onLoad && player?.currentTime()) ||
+				serverProgress * playback.getDuration() ||
+				0
+			);
 		},
 		setTime: (t: number) => {
 			if (!player) return;
@@ -190,15 +251,19 @@ export default function AndMiniplayer({
 		},
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
-			// TODO: return duration according to current media file
-			return player?.duration() || recording?.duration || 0;
+			return (
+				(!onLoad && player?.duration()) ||
+				sources[0]?.duration ||
+				recording?.duration ||
+				0
+			);
 		},
 		getProgress: () => {
 			return progress;
 		},
 		setProgress: (p: number) => {
 			setProgress(p);
-			const duration = player?.duration();
+			const duration = playback.getDuration();
 			if (!player || !duration || isNaN(duration)) return;
 			player.currentTime(p * duration);
 		},
@@ -207,8 +272,10 @@ export default function AndMiniplayer({
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			options = {}
 		) => {
-			const { onLoad, prefersAudio = false } = options;
-			setPrefersAudio(prefersAudio);
+			const { onLoad, prefersAudio } = options;
+			if (typeof prefersAudio === 'boolean') {
+				setPrefersAudio(prefersAudio);
+			}
 			setOnLoad(() => onLoad);
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
@@ -268,8 +335,11 @@ export default function AndMiniplayer({
 		}
 
 		setIsPaused(true);
-		setProgress(0);
-		p.currentTime(0);
+		const progress = serverProgress || 0;
+		_setProgress(progress);
+
+		const duration = sources[0]?.duration || recording?.duration || 0;
+		p.currentTime(progress * duration);
 		setVolume(p.volume() * 100);
 
 		setFingerprint(JSON.stringify(sources));

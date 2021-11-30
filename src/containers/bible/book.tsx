@@ -84,6 +84,7 @@ function Book({
 					url: chapter?.url || '',
 					mimeType: 'audio/mpeg',
 					filesize: 'unknown',
+					duration: chapter?.duration || 0,
 				},
 			],
 			sequencePreviousRecording:

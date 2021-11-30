@@ -218,13 +218,14 @@ export function Recording({
 			? recording.sequence?.recordings.nodes
 			: undefined;
 
-	const makeHat = (title: string, href: string) => (
+	const makeHat = (
+		sequenceContentType: SequenceContentType,
+		title: string,
+		href: string
+	) => (
 		<Link href={href}>
 			<a className={styles.hat}>
-				<SequenceTypeLockup
-					contentType={SequenceContentType.MusicAlbum}
-					unpadded
-				/>
+				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
 				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
 			</a>
 		</Link>
@@ -241,11 +242,16 @@ export function Recording({
 			</Head>
 			{overrideSequence
 				? makeHat(
+						SequenceContentType.MusicAlbum,
 						startCase(overrideSequence.book),
 						makeBibleMusicRoute(languageRoute, overrideSequence.book)
 				  )
 				: recording.sequence &&
-				  makeHat(recording.sequence.title, recording.sequence.canonicalPath)}
+				  makeHat(
+						recording.sequence.contentType,
+						recording.sequence.title,
+						recording.sequence.canonicalPath
+				  )}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					<div className={styles.meta}>

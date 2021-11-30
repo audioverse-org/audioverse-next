@@ -183,7 +183,7 @@ export default function TeaseRecording({
 					)}
 				>
 					<span className={styles.duration}>
-						{useFormattedDuration(session.duration)}
+						{useFormattedDuration(recording.duration)}
 					</span>
 					{progress > 0 && (
 						<span className={styles.progress}>

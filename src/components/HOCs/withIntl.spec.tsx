@@ -36,6 +36,7 @@ import * as api from '@lib/api';
 import { useIsRecordingFavorited } from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import {
+	CollectionContentType,
 	GetWithAuthGuardDataDocument,
 	Language,
 	RecordingContentType,
@@ -360,6 +361,7 @@ describe('localization usage', () => {
 				collection={{
 					id: '123',
 					title: 'z',
+					contentType: CollectionContentType.Conference,
 					description: '',
 					duration: 123.4,
 					image: null,
