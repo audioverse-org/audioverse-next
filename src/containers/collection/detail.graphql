@@ -2,6 +2,7 @@ query getCollectionDetailPageData($id: ID!) {
 	collection(id: $id) {
 		id
 		title
+		contentType
 		startDate
 		endDate
 		duration

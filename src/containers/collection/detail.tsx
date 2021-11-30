@@ -55,6 +55,7 @@ function CollectionDetail({
 	const {
 		id,
 		title,
+		contentType,
 		description,
 		duration,
 		image,
@@ -104,7 +105,7 @@ function CollectionDetail({
 	return (
 		<Tease className={styles.container}>
 			<ContentWidthLimiter>
-				<CollectionTypeLockup />
+				<CollectionTypeLockup contentType={contentType} />
 				{image && (
 					<div className={styles.image}>
 						<Image

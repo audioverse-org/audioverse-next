@@ -1,6 +1,7 @@
 fragment cardCollection on Collection {
 	id
 	canonicalPath(useFuturePath: true)
+	collectionContentType: contentType
 	title
 	startDate
 	endDate

@@ -5625,6 +5625,7 @@ export type CardCollectionFragment = {
 	endDate: string | null | undefined;
 	duration: number;
 	viewerPlaybackCompletedPercentage: number;
+	collectionContentType: CollectionContentType;
 	image:
 		| { __typename?: 'Image'; id: string | number; url: string }
 		| null
@@ -5652,6 +5653,7 @@ export type CardFavoriteFragment = {
 				endDate: string | null | undefined;
 				duration: number;
 				viewerPlaybackCompletedPercentage: number;
+				collectionContentType: CollectionContentType;
 				image:
 					| { __typename?: 'Image'; id: string | number; url: string }
 					| null
@@ -7717,6 +7719,7 @@ export type GetCollectionDetailPageDataQuery = {
 				__typename?: 'Collection';
 				id: string | number;
 				title: string;
+				contentType: CollectionContentType;
 				startDate: string | null | undefined;
 				endDate: string | null | undefined;
 				duration: number;
@@ -8005,6 +8008,7 @@ export type GetCollectionListPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -8046,6 +8050,7 @@ export type CollectionPivotFragment = {
 	__typename?: 'Collection';
 	title: string;
 	canonicalPath: string;
+	contentType: CollectionContentType;
 };
 
 export type GetCollectionPresentersPageDataQueryVariables = Exact<{
@@ -8062,6 +8067,7 @@ export type GetCollectionPresentersPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				persons: {
 					__typename?: 'PersonConnection';
 					nodes:
@@ -8108,6 +8114,7 @@ export type GetCollectionSequencesPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				sequences: {
 					__typename?: 'SequenceConnection';
 					nodes:
@@ -8184,6 +8191,7 @@ export type GetCollectionTeachingsPageDataQuery = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
+				contentType: CollectionContentType;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					nodes:
@@ -8548,6 +8556,7 @@ export type GetDiscoverPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
 						nodes:
@@ -8826,6 +8835,7 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -9377,6 +9387,7 @@ export type GetLibraryDataQuery = {
 												endDate: string | null | undefined;
 												duration: number;
 												viewerPlaybackCompletedPercentage: number;
+												collectionContentType: CollectionContentType;
 												image:
 													| {
 															__typename?: 'Image';
@@ -9806,6 +9817,7 @@ export type GetPresenterAppearsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -10153,6 +10165,7 @@ export type GetPresenterDetailPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
 						nodes:
@@ -10639,6 +10652,7 @@ export type GetSearchResultsCollectionsQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -10800,6 +10814,7 @@ export type GetSearchResultsPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -12772,6 +12787,7 @@ export type GetSponsorConferencesPageDataQuery = {
 					endDate: string | null | undefined;
 					duration: number;
 					viewerPlaybackCompletedPercentage: number;
+					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
 						| null
@@ -12847,6 +12863,7 @@ export type GetSponsorDetailPageDataQuery = {
 								endDate: string | null | undefined;
 								duration: number;
 								viewerPlaybackCompletedPercentage: number;
+								collectionContentType: CollectionContentType;
 								image:
 									| { __typename?: 'Image'; id: string | number; url: string }
 									| null
@@ -14212,6 +14229,7 @@ export const CardCollectionFragmentDoc = `
     fragment cardCollection on Collection {
   id
   canonicalPath(useFuturePath: true)
+  collectionContentType: contentType
   title
   startDate
   endDate
@@ -14533,6 +14551,7 @@ export const CollectionPivotFragmentDoc = `
     fragment collectionPivot on Collection {
   title
   canonicalPath(useFuturePath: true)
+  contentType
 }
     `;
 export const PresenterPivotFragmentDoc = `
@@ -15462,6 +15481,7 @@ export const GetCollectionDetailPageDataDocument = `
   collection(id: $id) {
     id
     title
+    contentType
     startDate
     endDate
     duration

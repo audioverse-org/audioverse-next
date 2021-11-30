@@ -147,11 +147,20 @@ a {
 	&.hover-bg--darkened-bookB {
 		background-color: $ts-darkened-bookB;
 	}
+	&.hover-bg--darkened-bookH {
+		background-color: $ts-darkened-bookH;
+	}
 	&.hover-bg--darkened-songB {
 		background-color: $ts-darkened-songB;
 	}
+	&.hover-bg--darkened-songH {
+		background-color: $ts-darkened-songH;
+	}
 	&.hover-bg--darkened-storyB {
 		background-color: $ts-darkened-storyB;
+	}
+	&.hover-bg--darkened-storyH {
+		background-color: $ts-darkened-storyH;
 	}
 	&.hover-bg--darkened-topicB {
 		background-color: $ts-darkened-topicB;

@@ -18,7 +18,9 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 	[
 		BaseColors.DARK,
 		BaseColors.BOOK_B,
+		BaseColors.BOOK_H,
 		BaseColors.STORY_B,
+		BaseColors.STORY_H,
 		BaseColors.TOPIC_B,
 	].includes(backgroundColor);
 

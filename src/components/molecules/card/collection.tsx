@@ -49,6 +49,7 @@ export default function CardCollection({
 		allSequences,
 		allRecordings,
 		canonicalPath,
+		collectionContentType: contentType,
 		duration,
 		endDate,
 		image,
@@ -76,7 +77,7 @@ export default function CardCollection({
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 				>
-					<CollectionTypeLockup />
+					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
 					{!!(startDate && endDate) && (
 						<Heading6 sans unpadded className={styles.date}>
