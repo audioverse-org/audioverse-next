@@ -80,6 +80,6 @@ export const useFormattedTime = (seconds: number): string => {
 					defaultMessage: '{m}:{s}',
 					description: 'time minutes and seconds',
 				},
-				{ h, m, s: _.padStart(s.toString(), 2, '0') }
+				{ m, s: _.padStart(s.toString(), 2, '0') }
 		  );
 };
