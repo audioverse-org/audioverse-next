@@ -228,9 +228,9 @@ describe('sermons list page', () => {
 			params: { language: 'es' },
 		});
 
-		userEvent.click(getByText('Filter'));
+		userEvent.click(getByText('Filtro'));
 
-		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+		expect(getByRole('link', { name: 'Todo' })).toHaveAttribute(
 			'href',
 			'/es/teachings/all/page/1'
 		);
