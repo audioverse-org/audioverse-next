@@ -20,6 +20,7 @@ import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 import { BaseColors } from '@lib/constants';
 import { getNavigationItems } from '@lib/getNavigationItems';
+import isServerSide from '@lib/isServerSide';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
@@ -72,8 +73,7 @@ export default function AndNavigation({
 	const [headerSlideOffset, setHeaderSlideOffset] = useState<number>(0);
 
 	const listener = useCallback(() => {
-		const isServerSide = typeof window === 'undefined';
-		if (isServerSide || !subnavRef.current || !headerTitleRef.current) {
+		if (isServerSide() || !subnavRef.current || !headerTitleRef.current) {
 			return;
 		}
 

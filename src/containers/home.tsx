@@ -18,6 +18,7 @@ import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
+import isServerSide from '@lib/isServerSide';
 import { makeAboutPage, makeDonateRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -39,7 +40,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const footerRef = React.useRef<HTMLDivElement>(null);
 	React.useEffect(() => {
 		const currentFooterRef = footerRef.current;
-		if (!currentFooterRef) {
+		if (
+			!currentFooterRef ||
+			isServerSide() ||
+			typeof IntersectionObserver === 'undefined'
+		) {
 			return;
 		}
 		const observer = new IntersectionObserver((entries) => {
