@@ -125,6 +125,96 @@
       "value": "Donate"
     }
   ],
+  "app__features1Cta": [
+    {
+      "type": 0,
+      "value": "Discover Audio"
+    }
+  ],
+  "app__features1Heading": [
+    {
+      "type": 0,
+      "value": "Treasures New and Old"
+    }
+  ],
+  "app__features1Kicker": [
+    {
+      "type": 0,
+      "value": "Easily discover inspiring content from a rich storehouse of spiritual content."
+    }
+  ],
+  "app__features2Cta": [
+    {
+      "type": 0,
+      "value": "View Recent Content"
+    }
+  ],
+  "app__features2Heading": [
+    {
+      "type": 0,
+      "value": "Present Truth"
+    }
+  ],
+  "app__features2Kicker": [
+    {
+      "type": 0,
+      "value": "AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
+    }
+  ],
+  "app__features3Cta": [
+    {
+      "type": 0,
+      "value": "Explore Cards"
+    }
+  ],
+  "app__features3Heading": [
+    {
+      "type": 0,
+      "value": "Connected and Harmonious"
+    }
+  ],
+  "app__features3Kicker": [
+    {
+      "type": 0,
+      "value": "Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
+    }
+  ],
+  "app__features4Cta": [
+    {
+      "type": 0,
+      "value": "Explore Library"
+    }
+  ],
+  "app__features4Heading": [
+    {
+      "type": 0,
+      "value": "Save the Ones You Love"
+    }
+  ],
+  "app__features4Kicker": [
+    {
+      "type": 0,
+      "value": "Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
+    }
+  ],
+  "app__features5Cta": [
+    {
+      "type": 0,
+      "value": "Find Content to Download"
+    }
+  ],
+  "app__features5Heading": [
+    {
+      "type": 0,
+      "value": "Lay Up for Yourselves…"
+    }
+  ],
+  "app__features5Kicker": [
+    {
+      "type": 0,
+      "value": "Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
+    }
+  ],
   "atom-progressBar__label": [
     {
       "type": 0,
@@ -369,6 +459,22 @@
       "value": "Previous page"
     }
   ],
+  "cardSongBook__contributors": [
+    {
+      "type": 0,
+      "value": "Various Contributors"
+    }
+  ],
+  "cardSongBook__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " songs"
+    }
+  ],
   "cardSong_sequenceLabel": [
     {
       "type": 0,
@@ -509,16 +615,130 @@
       "value": "All Series"
     }
   ],
-  "collectionTypeLockup_type": [
+  "collectionType__audiobookSeries": [
+    {
+      "type": 0,
+      "value": "Book Series"
+    }
+  ],
+  "collectionType__conference": [
     {
       "type": 0,
       "value": "Conference"
+    }
+  ],
+  "collectionType__musicSeries": [
+    {
+      "type": 0,
+      "value": "Music Series"
+    }
+  ],
+  "collectionType__storyProgram": [
+    {
+      "type": 0,
+      "value": "Story Program"
     }
   ],
   "conferenceListPage__title": [
     {
       "type": 0,
       "value": "All Conferences"
+    }
+  ],
+  "contact__bodyLabel": [
+    {
+      "type": 0,
+      "value": "Body"
+    }
+  ],
+  "contact__emailLabel": [
+    {
+      "type": 0,
+      "value": "Email address"
+    }
+  ],
+  "contact__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "contact__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "First name"
+    }
+  ],
+  "contact__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "contact__intro": [
+    {
+      "type": 0,
+      "value": "We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, please use the form with us and we’ll get back to you as quickly as possible."
+    }
+  ],
+  "contact__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "Last name"
+    }
+  ],
+  "contact__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "contact__recipient": [
+    {
+      "type": 0,
+      "value": "Contact Type"
+    }
+  ],
+  "contact__recipient-general": [
+    {
+      "type": 0,
+      "value": "General Contact"
+    }
+  ],
+  "contact__recipient-technical": [
+    {
+      "type": 0,
+      "value": "Request Support"
+    }
+  ],
+  "contact__recipient-testimonials": [
+    {
+      "type": 0,
+      "value": "Share Testimony"
+    }
+  ],
+  "contact__submitLabel": [
+    {
+      "type": 0,
+      "value": "Submit"
+    }
+  ],
+  "contact__success": [
+    {
+      "type": 0,
+      "value": "Successfully submitted!"
+    }
+  ],
+  "contact__testimonyLabel": [
+    {
+      "type": 0,
+      "value": "Testimony"
+    }
+  ],
+  "contact__title": [
+    {
+      "type": 0,
+      "value": "Contact"
     }
   ],
   "container-sermonList__filterLabelAll": [
@@ -969,96 +1189,6 @@
     {
       "type": 0,
       "value": "Download the App"
-    }
-  ],
-  "app__features1Cta": [
-    {
-      "type": 0,
-      "value": "Discover Audio"
-    }
-  ],
-  "app__features1Heading": [
-    {
-      "type": 0,
-      "value": "Treasures New and Old"
-    }
-  ],
-  "app__features1Kicker": [
-    {
-      "type": 0,
-      "value": "Easily discover inspiring content from a rich storehouse of spiritual content."
-    }
-  ],
-  "app__features2Cta": [
-    {
-      "type": 0,
-      "value": "View Recent Content"
-    }
-  ],
-  "app__features2Heading": [
-    {
-      "type": 0,
-      "value": "Present Truth"
-    }
-  ],
-  "app__features2Kicker": [
-    {
-      "type": 0,
-      "value": "AudioVerse makes it easy to find recent content from your favorite speakers, conferences, and sponsors."
-    }
-  ],
-  "app__features3Cta": [
-    {
-      "type": 0,
-      "value": "Explore Cards"
-    }
-  ],
-  "app__features3Heading": [
-    {
-      "type": 0,
-      "value": "Connected and Harmonious"
-    }
-  ],
-  "app__features3Kicker": [
-    {
-      "type": 0,
-      "value": "Cards include relevant information like parent series so you can always see what’s truly important, with detail pages showing additional context and connections."
-    }
-  ],
-  "app__features4Cta": [
-    {
-      "type": 0,
-      "value": "Explore Library"
-    }
-  ],
-  "app__features4Heading": [
-    {
-      "type": 0,
-      "value": "Save the Ones You Love"
-    }
-  ],
-  "app__features4Kicker": [
-    {
-      "type": 0,
-      "value": "Build a library of teachings to listen to later, and never be lost again with progress that syncs across your devices."
-    }
-  ],
-  "app__features5Cta": [
-    {
-      "type": 0,
-      "value": "Find Content to Download"
-    }
-  ],
-  "app__features5Heading": [
-    {
-      "type": 0,
-      "value": "Lay Up for Yourselves…"
-    }
-  ],
-  "app__features5Kicker": [
-    {
-      "type": 0,
-      "value": "Download content to your devices for moments when you have no signal, or simply want to avoid your data running over."
     }
   ],
   "homePage__learnStoryButtonLabel": [
@@ -2449,12 +2579,6 @@
       "value": "Sign up"
     }
   ],
-  "register__successMessage": [
-    {
-      "type": 0,
-      "value": "success"
-    }
-  ],
   "reset__confirmPasswordLabel": [
     {
       "type": 0,
@@ -2687,12 +2811,6 @@
       "value": "Sponsor"
     }
   ],
-  "seriesDetail__type": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
   "seriesList__heading": [
     {
       "type": 0,
@@ -2787,424 +2905,44 @@
       "value": "success"
     }
   ],
-  "songsListPage__1ChroniclesLabel": [
+  "songsBooksDetail__contributors": [
     {
       "type": 0,
-      "value": "1 Chronicles"
+      "value": "Various Contributors"
     }
   ],
-  "songsListPage__1CorinthiansLabel": [
+  "songsBooksDetail__numSongs": [
     {
-      "type": 0,
-      "value": "1 Corinthians"
-    }
-  ],
-  "songsListPage__1JohnLabel": [
-    {
-      "type": 0,
-      "value": "1 John"
-    }
-  ],
-  "songsListPage__1KingsLabel": [
-    {
-      "type": 0,
-      "value": "1 Kings"
-    }
-  ],
-  "songsListPage__1PeterLabel": [
-    {
-      "type": 0,
-      "value": "1 Peter"
-    }
-  ],
-  "songsListPage__1SamuelLabel": [
-    {
-      "type": 0,
-      "value": "1 Samuel"
-    }
-  ],
-  "songsListPage__1ThessaloniansLabel": [
-    {
-      "type": 0,
-      "value": "1 Thessalonians"
-    }
-  ],
-  "songsListPage__1TimothyLabel": [
-    {
-      "type": 0,
-      "value": "1 Timothy"
-    }
-  ],
-  "songsListPage__2ChroniclesLabel": [
-    {
-      "type": 0,
-      "value": "2 Chronicles"
-    }
-  ],
-  "songsListPage__2CorinthiansLabel": [
-    {
-      "type": 0,
-      "value": "2 Corinthians"
-    }
-  ],
-  "songsListPage__2JohnLabel": [
-    {
-      "type": 0,
-      "value": "2 John"
-    }
-  ],
-  "songsListPage__2KingsLabel": [
-    {
-      "type": 0,
-      "value": "2 Kings"
-    }
-  ],
-  "songsListPage__2PeterLabel": [
-    {
-      "type": 0,
-      "value": "2 Peter"
-    }
-  ],
-  "songsListPage__2SamuelLabel": [
-    {
-      "type": 0,
-      "value": "2 Samuel"
-    }
-  ],
-  "songsListPage__2ThessaloniansLabel": [
-    {
-      "type": 0,
-      "value": "2 Thessalonians"
-    }
-  ],
-  "songsListPage__2TimothyLabel": [
-    {
-      "type": 0,
-      "value": "2 Timothy"
-    }
-  ],
-  "songsListPage__3JohnLabel": [
-    {
-      "type": 0,
-      "value": "3 John"
-    }
-  ],
-  "songsListPage__ActsLabel": [
-    {
-      "type": 0,
-      "value": "Acts"
-    }
-  ],
-  "songsListPage__AmosLabel": [
-    {
-      "type": 0,
-      "value": "Amos"
-    }
-  ],
-  "songsListPage__ColossiansLabel": [
-    {
-      "type": 0,
-      "value": "Colossians"
-    }
-  ],
-  "songsListPage__DanielLabel": [
-    {
-      "type": 0,
-      "value": "Daniel"
-    }
-  ],
-  "songsListPage__DeuteronomyLabel": [
-    {
-      "type": 0,
-      "value": "Deuteronomy"
-    }
-  ],
-  "songsListPage__EcclesiastesLabel": [
-    {
-      "type": 0,
-      "value": "Ecclesiastes"
-    }
-  ],
-  "songsListPage__EphesiansLabel": [
-    {
-      "type": 0,
-      "value": "Ephesians"
-    }
-  ],
-  "songsListPage__EstherLabel": [
-    {
-      "type": 0,
-      "value": "Esther"
-    }
-  ],
-  "songsListPage__ExodusLabel": [
-    {
-      "type": 0,
-      "value": "Exodus"
-    }
-  ],
-  "songsListPage__EzekielLabel": [
-    {
-      "type": 0,
-      "value": "Ezekiel"
-    }
-  ],
-  "songsListPage__EzraLabel": [
-    {
-      "type": 0,
-      "value": "Ezra"
-    }
-  ],
-  "songsListPage__GalatiansLabel": [
-    {
-      "type": 0,
-      "value": "Galatians"
-    }
-  ],
-  "songsListPage__GenesisLabel": [
-    {
-      "type": 0,
-      "value": "Genesis"
-    }
-  ],
-  "songsListPage__HabakkukLabel": [
-    {
-      "type": 0,
-      "value": "Habakkuk"
-    }
-  ],
-  "songsListPage__HaggaiLabel": [
-    {
-      "type": 0,
-      "value": "Haggai"
-    }
-  ],
-  "songsListPage__HebrewsLabel": [
-    {
-      "type": 0,
-      "value": "Hebrews"
-    }
-  ],
-  "songsListPage__HoseaLabel": [
-    {
-      "type": 0,
-      "value": "Hosea"
-    }
-  ],
-  "songsListPage__IsaiahLabel": [
-    {
-      "type": 0,
-      "value": "Isaiah"
-    }
-  ],
-  "songsListPage__JamesLabel": [
-    {
-      "type": 0,
-      "value": "James"
-    }
-  ],
-  "songsListPage__JeremiahLabel": [
-    {
-      "type": 0,
-      "value": "Jeremiah"
-    }
-  ],
-  "songsListPage__JobLabel": [
-    {
-      "type": 0,
-      "value": "Job"
-    }
-  ],
-  "songsListPage__JoelLabel": [
-    {
-      "type": 0,
-      "value": "Joel"
-    }
-  ],
-  "songsListPage__JohnLabel": [
-    {
-      "type": 0,
-      "value": "John"
-    }
-  ],
-  "songsListPage__JonahLabel": [
-    {
-      "type": 0,
-      "value": "Jonah"
-    }
-  ],
-  "songsListPage__JoshuaLabel": [
-    {
-      "type": 0,
-      "value": "Joshua"
-    }
-  ],
-  "songsListPage__JudeLabel": [
-    {
-      "type": 0,
-      "value": "Jude"
-    }
-  ],
-  "songsListPage__JudgesLabel": [
-    {
-      "type": 0,
-      "value": "Judges"
-    }
-  ],
-  "songsListPage__LamentationsLabel": [
-    {
-      "type": 0,
-      "value": "Lamentations"
-    }
-  ],
-  "songsListPage__LeviticusLabel": [
-    {
-      "type": 0,
-      "value": "Leviticus"
-    }
-  ],
-  "songsListPage__LukeLabel": [
-    {
-      "type": 0,
-      "value": "Luke"
-    }
-  ],
-  "songsListPage__MalachiLabel": [
-    {
-      "type": 0,
-      "value": "Malachi"
-    }
-  ],
-  "songsListPage__MarkLabel": [
-    {
-      "type": 0,
-      "value": "Mark"
-    }
-  ],
-  "songsListPage__MatthewLabel": [
-    {
-      "type": 0,
-      "value": "Matthew"
-    }
-  ],
-  "songsListPage__MicahLabel": [
-    {
-      "type": 0,
-      "value": "Micah"
-    }
-  ],
-  "songsListPage__NahumLabel": [
-    {
-      "type": 0,
-      "value": "Nahum"
-    }
-  ],
-  "songsListPage__NehemiahLabel": [
-    {
-      "type": 0,
-      "value": "Nehemiah"
-    }
-  ],
-  "songsListPage__NumbersLabel": [
-    {
-      "type": 0,
-      "value": "Numbers"
-    }
-  ],
-  "songsListPage__ObadiahLabel": [
-    {
-      "type": 0,
-      "value": "Obadiah"
-    }
-  ],
-  "songsListPage__PhilemonLabel": [
-    {
-      "type": 0,
-      "value": "Philemon"
-    }
-  ],
-  "songsListPage__PhilippiansLabel": [
-    {
-      "type": 0,
-      "value": "Philippians"
-    }
-  ],
-  "songsListPage__ProverbsLabel": [
-    {
-      "type": 0,
-      "value": "Proverbs"
-    }
-  ],
-  "songsListPage__PsalmsLabel": [
-    {
-      "type": 0,
-      "value": "Psalms"
-    }
-  ],
-  "songsListPage__RevelationLabel": [
-    {
-      "type": 0,
-      "value": "Revelation"
-    }
-  ],
-  "songsListPage__RomansLabel": [
-    {
-      "type": 0,
-      "value": "Romans"
-    }
-  ],
-  "songsListPage__RuthLabel": [
-    {
-      "type": 0,
-      "value": "Ruth"
-    }
-  ],
-  "songsListPage__Song of SolomonLabel": [
-    {
-      "type": 0,
-      "value": "Song of Solomon"
-    }
-  ],
-  "songsListPage__TitusLabel": [
-    {
-      "type": 0,
-      "value": "Titus"
-    }
-  ],
-  "songsListPage__ZechariahLabel": [
+      "type": 1,
+      "value": "count"
+    },
     {
       "type": 0,
-      "value": "Zechariah"
+      "value": " songs"
     }
   ],
-  "songsListPage__ZephaniahLabel": [
+  "songsListPage__intro": [
     {
       "type": 0,
-      "value": "Zephaniah"
+      "value": "Listening to to the Word of God in musical form is a great way to commit the passages of scripture to memory. Listen by album or by book of the Bible."
     }
   ],
-  "songsListPage__albumTabLabel": [
+  "songsListPage__tabAlbums": [
     {
       "type": 0,
       "value": "Albums"
     }
   ],
-  "songsListPage__bookTabLabel": [
+  "songsListPage__tabPassage": [
     {
       "type": 0,
-      "value": "Books"
+      "value": "Passage"
     }
   ],
-  "songsListPage__sponsorTabLabel": [
+  "songsListPage__title": [
     {
       "type": 0,
-      "value": "Sponsors"
-    }
-  ],
-  "songsListPage__tagTabLabel": [
-    {
-      "type": 0,
-      "value": "Tags"
+      "value": "Scripture Songs"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -3409,10 +3147,44 @@
       "value": "Have a great testimony? Tell us your story!"
     }
   ],
+  "testimonies__seeAll": [
+    {
+      "type": 0,
+      "value": "See all Testimonies"
+    }
+  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "Share your story"
+    }
+  ],
+  "testimonies__submitTestimony": [
+    {
+      "type": 0,
+      "value": "Submit a Testimony"
+    }
+  ],
+  "time__hoursMinutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "h"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "s"
     }
   ],
   "time__minutesAndSeconds": [
