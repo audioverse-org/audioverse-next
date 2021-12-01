@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { MouseEvent, PropsWithChildren, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '@components/atoms/heading6';
@@ -30,11 +30,25 @@ export default function ButtonShare({
 	triggerClassName,
 }: PropsWithChildren<Props>): JSX.Element {
 	const intl = useIntl();
+	const [justCopied, setJustCopied] = useState(false);
+
 	// TODO: update embed code and links
 	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
 	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
 	const emailLink = `mailto:?subject=Enjoy%20this%20blessing&body=${shareUrl}`;
 	const copyLink = shareUrl;
+
+	const onCopyLink = (e: MouseEvent) => {
+		e.preventDefault();
+		if (navigator.clipboard) {
+			navigator.clipboard.writeText(shareUrl).then(() => {
+				setJustCopied(true);
+				setTimeout(() => setJustCopied(false), 2500);
+			});
+		} else {
+			window.open(shareUrl);
+		}
+	};
 
 	const shareOptions = [
 		[
@@ -63,11 +77,20 @@ export default function ButtonShare({
 		],
 		[
 			copyLink,
-			<FormattedMessage
-				id="molecule-buttonShare__copyLink"
-				defaultMessage="Copy Link"
-				key="copy"
-			/>,
+			justCopied ? (
+				<FormattedMessage
+					id="molecule-buttonShare__copied"
+					defaultMessage="Copied!"
+					key="copy"
+				/>
+			) : (
+				<FormattedMessage
+					id="molecule-buttonShare__copyLink"
+					defaultMessage="Copy Link"
+					key="copy"
+				/>
+			),
+			onCopyLink,
 		],
 		...(rssUrl
 			? ([
@@ -119,9 +142,14 @@ export default function ButtonShare({
 							description="share button section title"
 						/>
 					</Heading6>
-					{shareOptions.map(([link, label], index) => (
+					{shareOptions.map(([link, label, onClick], index) => (
 						<p className={styles.paragraph} key={index}>
-							<a href={link} target="_blank" rel="noreferrer noopener">
+							<a
+								href={link}
+								onClick={onClick}
+								target="_blank"
+								rel="noreferrer noopener"
+							>
 								{label}
 							</a>
 						</p>
