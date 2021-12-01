@@ -19,16 +19,21 @@
 	top: 0;
 	display: flex;
 	flex-direction: column;
-	padding: 24px calc(24px + env(safe-area-inset-right)) 8px
-		calc(24px + env(safe-area-inset-left));
-	background: $ts-cream;
+	margin-bottom: 32px;
 	z-index: 1;
+}
+.mobileHeader,
+.mobileHeaderTitle,
+.mobileSubnavWrapper {
+	background: $ts-cream;
 }
 .mobileHeaderTitle {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 22px;
+	padding: 24px calc(24px + env(safe-area-inset-right)) 22px
+		calc(24px + env(safe-area-inset-left));
+	z-index: 1;
 	> :first-child {
 		flex-grow: 1;
 	}
@@ -36,10 +41,18 @@
 		margin-left: 16px;
 	}
 }
+.mobileSubnavWrapper {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+}
 .mobileSubnav {
 	display: flex;
 	align-items: center;
 	position: relative;
+	margin: 0 calc(24px + env(safe-area-inset-right)) 8px
+		calc(24px + env(safe-area-inset-left));
 }
 .mobileSubnavItems {
 	display: flex;

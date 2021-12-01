@@ -18,6 +18,7 @@ import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
+import isServerSide from '@lib/isServerSide';
 import { makeAboutPage, makeDonateRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -34,6 +35,28 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+
+	const [isFooterVisible, setIsFooterVisible] = React.useState(false);
+	const footerRef = React.useRef<HTMLDivElement>(null);
+	React.useEffect(() => {
+		const currentFooterRef = footerRef.current;
+		if (
+			!currentFooterRef ||
+			isServerSide() ||
+			typeof IntersectionObserver === 'undefined'
+		) {
+			return;
+		}
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) =>
+				setIsFooterVisible(
+					(isFooterVisible) => entry.isIntersecting || isFooterVisible
+				)
+			);
+		});
+		observer.observe(currentFooterRef);
+		return () => observer.unobserve(currentFooterRef);
+	}, []);
 
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const chapter = data?.audiobible?.book.chapter;
@@ -362,7 +385,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				theme={BaseColors.LIGHT_TONE}
 				bleed
 			/>
-			<div className={styles.footer}>
+			<div
+				className={clsx(styles.footer, isFooterVisible && styles.footerVisible)}
+				ref={footerRef}
+			>
 				<Image src="/img/logo.svg" width={161} height={23} />
 				<Heading3 sans unpadded>
 					<FormattedMessage
