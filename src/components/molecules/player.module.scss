@@ -66,7 +66,11 @@
 .waves {
 	flex-grow: 1;
 	position: relative;
-	background-color: var(--recordingWavesColor);
+	background: linear-gradient(
+		90deg,
+		var(--recordingWavesColor) var(--buffered),
+		transparent var(--buffered)
+	);
 	-webkit-mask-image: url('/img/waves.svg');
 	mask-image: url('/img/waves.svg');
 	height: 49px;
@@ -83,6 +87,7 @@
 		opacity: 0;
 		cursor: pointer;
 	}
+	&:before,
 	&:after {
 		content: '';
 		display: block;
@@ -90,12 +95,22 @@
 		top: 0;
 		left: 0;
 		bottom: 0;
-		width: var(--progress, 0%);
 		z-index: 100;
-		background-color: var(--recordingAccent);
 		-webkit-mask-image: url('/img/waves.svg');
 		mask-image: url('/img/waves.svg');
 		pointer-events: none;
+	}
+	&:before {
+		right: 0;
+		background: linear-gradient(
+			180deg,
+			transparent 92%,
+			var(--recordingWavesColor) 92%
+		);
+	}
+	&:after {
+		width: var(--progress, 0%);
+		background-color: var(--recordingAccent);
 	}
 }
 
