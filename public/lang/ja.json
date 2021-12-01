@@ -1,0 +1,1750 @@
+{
+  "RecordingFavorite__favorite": {
+    "comment": "Recording favorite button label",
+    "string": "お気に入り"
+  },
+  "RecordingFavorite__unfavorite": {
+    "comment": "Recording unfavorite button label",
+    "string": "お気に入りから削除"
+  },
+  "accountNav__audiopreferences": {
+    "string": "好み"
+  },
+  "accountNav__profile": {
+    "string": "プロフィール"
+  },
+  "accountPlaylists__buttonLabelSubmit": {
+    "comment": "account playlists page submit button label",
+    "string": "プレイリストを新規作成"
+  },
+  "accountPlaylists__errorMissingTitle": {
+    "comment": "account playlists page missing title error message",
+    "string": "タイトル欄が入力されていません。"
+  },
+  "accountPlaylists__inputLabelPublic": {
+    "comment": "account playlists page input label public",
+    "string": "公開"
+  },
+  "accountPlaylists__inputLabelSummary": {
+    "comment": "account playlists page input label summary",
+    "string": "概要"
+  },
+  "accountPlaylists__inputLabelTitle": {
+    "comment": "account playlists page input label title",
+    "string": "タイトル"
+  },
+  "accountPlaylists__labelPrivate": {
+    "comment": "account playlists page playlist private label",
+    "string": "非公開"
+  },
+  "accountPlaylists__labelPublic": {
+    "comment": "account playlists page playlist public label",
+    "string": "公開"
+  },
+  "andGlobalModals__confirmRemoveFavorite-confirm": {
+    "string": "アイテムを削除"
+  },
+  "andGlobalModals__confirmRemoveFavorite-copy": {
+    "string": "このアイテムをライブラリーから削除しますか？"
+  },
+  "andGlobalModals__confirmRemoveFavorite-heading": {
+    "string": "削除されます。よろしいですか？"
+  },
+  "andGlobalModals__confirmRemoveFavorite-keep": {
+    "string": "アイテムを保存"
+  },
+  "andGlobalModals__continueAsGuest": {
+    "string": "ゲストとして続行"
+  },
+  "andGlobalModals__copy": {
+    "string": "オーディオをブックマークして、後でマイアカウントからアクセスできます。他の機能としては、ライブラリーにオーディオの追加が出来ます。"
+  },
+  "andGlobalModals__createAccount": {
+    "string": "アカウントを作成"
+  },
+  "andGlobalModals__heading": {
+    "string": "メンバー限定機能"
+  },
+  "andGlobalModals__logIn": {
+    "string": "ログイン"
+  },
+  "andNavigation__donate": {
+    "string": "ご支援"
+  },
+  "atom-progressBar__label": {
+    "comment": "progress bar label",
+    "string": "経過"
+  },
+  "audiobookList__heading": {
+    "string": "全てのオーディオブック"
+  },
+  "backButton__back": {
+    "string": "戻る"
+  },
+  "bibleBook__chapterListTitle": {
+    "string": "この本の中の他の章"
+  },
+  "bibleVersionTypeLockup__type": {
+    "string": "聖書バージョン"
+  },
+  "bibleVersion__booksLabel": {
+    "string": "66巻"
+  },
+  "bibleVersion__description": {
+    "string": "内容詳細"
+  },
+  "bibleVersion__sponsorLabel": {
+    "string": "主催者"
+  },
+  "bibleVersions__heading": {
+    "string": "聖書"
+  },
+  "bibleVersions__intro": {
+    "string": "確実な教理を学ぶ方法は、神の御言葉を聞くのがベスト。オーディオバイブルを通して最も偉大な教師から最も大切な教え聞くことができます。"
+  },
+  "blogDetailPage__moreBlogPosts": {
+    "comment": "Blog post detail more blog posts",
+    "string": "その他のブログ投稿"
+  },
+  "blogDetailPage__readingDuration": {
+    "comment": "Blog post detail reading duration",
+    "string": "{duration}分"
+  },
+  "cardAudiobookTrack_readByLabel": {
+    "string": "語り手{name}"
+  },
+  "cardAudiobookTrack_sequenceLabel": {
+    "string": "巻"
+  },
+  "cardBibleBook__chaptersLabel": {
+    "string": "{count}章"
+  },
+  "cardBibleBook__typeLabel": {
+    "string": "{abbreviation}聖書"
+  },
+  "cardBibleVersion__booksLabel": {
+    "string": "66巻"
+  },
+  "cardCollection__teachingsCountLabel": {
+    "comment": "Card collection teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "cardCollection_sequenceLabel": {
+    "comment": "Card collection sequence count label",
+    "string": "{count}シリーズ"
+  },
+  "cardPerson_teachingsLabel": {
+    "comment": "Card person teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "cardPlaylist__typeLabel": {
+    "string": "プレイリスト"
+  },
+  "cardPost__readingDuration": {
+    "comment": "Card post reading duration",
+    "string": "{duration}分"
+  },
+  "cardSequence_audiobookType": {
+    "string": "巻"
+  },
+  "cardSequence_scriptureSongsType": {
+    "string": "聖句ソング"
+  },
+  "cardSequence_sequenceLabel": {
+    "comment": "Card sequence recording count label",
+    "string": "{count}個の部分を表示"
+  },
+  "cardSequence_seriesType": {
+    "string": "シリーズ"
+  },
+  "cardSequence_storiesType": {
+    "string": "ストーリー"
+  },
+  "cardSermon_sequenceLabel": {
+    "string": "シリーズ"
+  },
+  "cardSlider__nextPageLabel": {
+    "comment": "card slider next page label",
+    "string": "次のページ"
+  },
+  "cardSlider__paginationLabel": {
+    "comment": "card slider pagination label",
+    "string": "ページスライダー付"
+  },
+  "cardSlider__previousPageLabel": {
+    "comment": "card slider previous page label",
+    "string": "前のページ"
+  },
+  "cardSong_sequenceLabel": {
+    "string": "聖句ソング"
+  },
+  "cardSponsor__collectionCountLabel": {
+    "comment": "Sponsor Detail collection count label",
+    "string": "{count}大会・総会"
+  },
+  "cardSponsor__recordingsCountLabel": {
+    "comment": "Sponsor Detail teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "cardSponsor__sequencesCountLabel": {
+    "comment": "Sponsor Detail series count label",
+    "string": "{count}シリーズ"
+  },
+  "cardSponsor_hatTitle": {
+    "comment": "Card sponsor hat title",
+    "string": "主催者"
+  },
+  "cardStory_sequenceLabel": {
+    "string": "ストーリー"
+  },
+  "ccollectionTeachingsDetail__heading": {
+    "string": "レッスンの全ての個々のセクション"
+  },
+  "collectionDetail__descriptionLabel": {
+    "string": "内容詳細"
+  },
+  "collectionDetail__locationLabel": {
+    "string": "現在地"
+  },
+  "collectionDetail__sequenceCountLabel": {
+    "comment": "Collection Detail sequence count label",
+    "string": "{count}シリーズ"
+  },
+  "collectionDetail__seriesAllLabel": {
+    "string": "全てのシリーズを表示"
+  },
+  "collectionDetail__seriesLabel": {
+    "comment": "Collection Detail series label",
+    "string": "シリーズ"
+  },
+  "collectionDetail__speakersAllLabel": {
+    "string": "全てのスピーカーを表示"
+  },
+  "collectionDetail__speakersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "スピーカー"
+  },
+  "collectionDetail__sponsorLabel": {
+    "string": "主催者"
+  },
+  "collectionDetail__teachingsAllLabel": {
+    "string": "レッスンの全ての個々のセクションを表示"
+  },
+  "collectionDetail__teachingsCountLabel": {
+    "comment": "Collection Detail teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "collectionDetail__teachingsLabel": {
+    "comment": "Collection Detail teachings label",
+    "string": "レッスンの個々のセクション"
+  },
+  "collectionPresenterssDetail__heading": {
+    "string": "全てのスピーカー"
+  },
+  "collectionSequencesDetail__heading": {
+    "string": "全てのシリーズ"
+  },
+  "collectionTypeLockup_type": {
+    "string": "大会・総会"
+  },
+  "conferenceListPage__title": {
+    "string": "大会・総会"
+  },
+  "container-sermonList__filterLabelAll": {
+    "comment": "sermon list page filter all",
+    "string": "全て"
+  },
+  "container-sermonList__filterLabelAudio": {
+    "comment": "sermon list page filter audio",
+    "string": "オーディオのみ"
+  },
+  "container-sermonList__filterLabelVideo": {
+    "comment": "sermon list page filter video",
+    "string": "動画"
+  },
+  "copyrightInfos__multipleCopyrightExplanation": {
+    "comment": "Copyright infos component multiple copyright explanation",
+    "string": "この製品の一部は下記の許諾条項下の対象となります。"
+  },
+  "discoverCollections_audiobooksHeading": {
+    "string": "オーディオブック"
+  },
+  "discoverCollections_conferencesHeading": {
+    "string": "大会・総会"
+  },
+  "discoverCollections_featuredCollectionHeading": {
+    "string": "お勧めのコレクション"
+  },
+  "discoverCollections_scriptureSongsHeading": {
+    "string": "聖句ソング"
+  },
+  "discoverCollections_seeAll": {
+    "string": "全てを表示"
+  },
+  "discoverCollections_seriesHeading": {
+    "string": "シリーズ"
+  },
+  "discoverCollections_speakersHeading": {
+    "string": "スピーカー"
+  },
+  "discoverCollections_sponsorsHeading": {
+    "string": "主催者"
+  },
+  "discoverCollections_storiesHeading": {
+    "string": "ストーリー"
+  },
+  "discover__conferencesSeeAll": {
+    "string": "最近の大会・総会を全て表示"
+  },
+  "discover__recentTeachingsSeeAll": {
+    "string": "最近のレッスンを全て表示"
+  },
+  "discover__storiesHeading": {
+    "string": "最近のストーリー"
+  },
+  "discover__storiesSeeAll": {
+    "string": "最近のストーリーを全て表示"
+  },
+  "discover__trendingTeachingsSeeAll": {
+    "string": "人気のレッスンを全て表示"
+  },
+  "discover_conferencesHeading": {
+    "string": "最近の大会・総会"
+  },
+  "discover_recentTeachingsHeading": {
+    "string": "最近のレッスン"
+  },
+  "discover_trendingTeachingsHeading": {
+    "string": "最近人気のレッスン"
+  },
+  "downloadAppButton__android": {
+    "string": "アンドロイド用アプリ"
+  },
+  "downloadAppButton__ios": {
+    "string": "iOS用アプリ"
+  },
+  "downloadAppButton__label": {
+    "string": "今すぐアプリをダウンロード"
+  },
+  "duration__hours": {
+    "comment": "duration hours",
+    "string": "{hours}時間"
+  },
+  "duration__hoursAndMinutes": {
+    "comment": "duration hours and minutes",
+    "string": "{hours}時間{minutes}分"
+  },
+  "duration__minutes": {
+    "comment": "duration minutes",
+    "string": "{minutes}分"
+  },
+  "generateFeed__audio": {
+    "string": "オーディオ"
+  },
+  "generateFeed__subtitle": {
+    "string": "{container}{format}{bitrate}kbps"
+  },
+  "generateFeed__video": {
+    "string": "動画"
+  },
+  "generatedFeed__copyright": {
+    "string": "アイテムの著作権が{year}年のもの個々の動画またはオーディオは所有者によって著作権で保護されています。"
+  },
+  "header__navItemBlog": {
+    "comment": "Header nav link name: Blog",
+    "string": "ブログ"
+  },
+  "header__navItemCollections": {
+    "comment": "Header nav link name: Collections",
+    "string": "コレクション"
+  },
+  "header__navItemDiscover": {
+    "comment": "Header nav link name: Discover",
+    "string": "ディスカバー"
+  },
+  "header__navItemLibrary": {
+    "comment": "Header nav link name: Library",
+    "string": "ライブラリー"
+  },
+  "header__navItemMore": {
+    "comment": "Header nav link name: More",
+    "string": "もっと表示・・・"
+  },
+  "header__navItemStory": {
+    "string": "私たちのストーリー"
+  },
+  "header__navItemStory-donate": {
+    "string": "ご支援"
+  },
+  "header__navItemStory-purpose": {
+    "string": "AudioVerseの理念"
+  },
+  "header__navItemStory-spiritOfAudioVerse": {
+    "string": "AudioVerseの心"
+  },
+  "header__navItemStory-team": {
+    "string": "AudioVerseチーム紹介"
+  },
+  "header__navItemStory-testimonials": {
+    "string": "証し"
+  },
+  "header__navItemUser": {
+    "comment": "Header nav link name: User Settings",
+    "string": "ユーザー設定"
+  },
+  "header__naveItemBible": {
+    "comment": "Header nav link name: Bible",
+    "string": "聖書"
+  },
+  "header__naveItemCollections-all": {
+    "string": "全てのコレクション"
+  },
+  "header__naveItemCollections-book": {
+    "string": "巻"
+  },
+  "header__naveItemCollections-conference": {
+    "string": "大会・総会"
+  },
+  "header__naveItemCollections-series": {
+    "string": "シリーズ"
+  },
+  "header__naveItemCollections-songs": {
+    "string": "聖句ソング"
+  },
+  "header__naveItemCollections-speaker": {
+    "string": "スピーカー"
+  },
+  "header__naveItemCollections-sponsor": {
+    "string": "主催者"
+  },
+  "header__naveItemCollections-stories": {
+    "string": "ストーリー"
+  },
+  "header__naveItemMore-legal": {
+    "string": "法律情報"
+  },
+  "header__naveItemMore-privacy": {
+    "string": "プライバシー"
+  },
+  "header__naveItemMore-terms": {
+    "string": "利用規約"
+  },
+  "header__naveItemUser-logout": {
+    "string": "ログアウト"
+  },
+  "header__naveItemUser-profile": {
+    "string": "プロフィール"
+  },
+  "homePage__addToLibraryPlaceholder": {
+    "comment": "home page add to library placeholder",
+    "string": "ライブラリーに追加"
+  },
+  "homePage__createAccountSectionCTA": {
+    "comment": "home page create account section cta",
+    "string": "今すぐマイアカウントを登録する"
+  },
+  "homePage__createAccountSectionText": {
+    "comment": "home page create account section text",
+    "string": "AudioVerseを最大限に活用するために今すぐアカウントを作成する Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+  },
+  "homePage__createAccountSectionTitle": {
+    "comment": "home page create account section title",
+    "string": "今すぐマイアカウントを作成する"
+  },
+  "homePage__downloadAppSectionText": {
+    "comment": "home page download app section text",
+    "string": "スマホでAudioVerseのアプリをダウンロードして、どこででも聞けるどのレッスンもネットワーク環境内でストリーミングが可能。事前にダウンロードすれば、データを使用せずに外出先でも聴ける。"
+  },
+  "homePage__downloadAppSectionTitle": {
+    "comment": "home page download app section title",
+    "string": "アプリをダウンロードする"
+  },
+  "homePage__downloadNowButtonLabel": {
+    "comment": "home page download now button label",
+    "string": "今すぐダウンロード"
+  },
+  "homePage__downloadQueuePlaceholder": {
+    "comment": "home page downloaed queue placeholder",
+    "string": "ダウンロードの順番"
+  },
+  "homePage__emailSignupButton": {
+    "comment": "homePage__emailSignupButton",
+    "string": "今、購読に登録する"
+  },
+  "homePage__followFunctionalityPlaceholder": {
+    "comment": "home page follow functionality placeholder",
+    "string": "Follow Functionality"
+  },
+  "homePage__footerDonateLink": {
+    "comment": "home page footer donate link",
+    "string": "ご支援"
+  },
+  "homePage__footerDownloadAppButton": {
+    "comment": "home page footer download app button",
+    "string": "今すぐアプリをダウンロード"
+  },
+  "homePage__footerFacebookLink": {
+    "comment": "home page footer facebook link",
+    "string": "Facebook"
+  },
+  "homePage__footerInstagramLink": {
+    "comment": "home page footer instagram link",
+    "string": "Instagram"
+  },
+  "homePage__footerLinksTitle": {
+    "comment": "home page footer links title",
+    "string": "リンク"
+  },
+  "homePage__footerNewsletterSignup": {
+    "comment": "homePage__footerNewsletterSignup",
+    "string": "ニュスレターが定期的に届くように今すぐ登録"
+  },
+  "homePage__footerSocialTitle": {
+    "comment": "home page footer social title",
+    "string": "AudioVerse SNSサービス"
+  },
+  "homePage__footerTwitterLink": {
+    "comment": "home page footer twitter link",
+    "string": "Twitter"
+  },
+  "homePage__joinAudioVerseButtonLabel": {
+    "comment": "home page join audioverse button label",
+    "string": "今すぐAudioVerse会員になる"
+  },
+  "homePage__newsletterSectionText": {
+    "comment": "home page newsletter section text",
+    "string": "AudioVerseの新機能のリリース、総会への参加、または新しいAudioVerse グッズについて知りたいですか？ニュスレター購読者になって、更新情報のお知らせをいち早く見る"
+  },
+  "homePage__newsletterSectionTitle": {
+    "comment": "home page newsletter section title",
+    "string": "更新情報のお知らせを購読する"
+  },
+  "homePage__recentContentSectionText": {
+    "comment": "home page recent content section text",
+    "string": "厳選されたオーディオセレクションを聴いてみる。もっと聴きたい、観たいときに<a>アカウントを作成</a>"
+  },
+  "homePage__recentContentSectionTitle": {
+    "comment": "home page recent content section title",
+    "string": "最近のレッスンと内容"
+  },
+  "homePage__recentPostsButtonLabel": {
+    "comment": "home page recent posts button label",
+    "string": "全てのブログ投稿を表示"
+  },
+  "homePage__recentPostsSectionText": {
+    "comment": "home page recent posts section text",
+    "string": "ブログ読んで最近のイベント、説教または総会に関する記事を見つけ出す不定期ですが、月一度は更新されています"
+  },
+  "homePage__recentPostsSectionTitle": {
+    "comment": "home page recent posts section title",
+    "string": "最近のブログ投稿"
+  },
+  "homePage__soundDoctrineText": {
+    "comment": "home page sound doctrine text",
+    "string": "AudioVerseはセブンスデー アドベンチストのとっておきのオーディオコンテンツを提供するサイトです。歌、説教、オーディオブックス、聖書の朗読を通して、イエスとの関係を深めるために挑戦され、刺激を受けてください。"
+  },
+  "homePage__soundDoctrineTitle": {
+    "comment": "home: Sound Doctrine section title",
+    "string": "確実な教理"
+  },
+  "homePage__supportSectionCTA": {
+    "comment": "home page support section cta",
+    "string": "支援をする"
+  },
+  "homePage__supportSectionImagePlaceholder": {
+    "comment": "home page support section image placeholder",
+    "string": "イメージ"
+  },
+  "homePage__supportSectionText": {
+    "comment": "home page support section text",
+    "string": "AudioVerseは、私たちの支援者のお陰で存在する非営利のミニストリーです。テクノロジーのサイトの作成、維持、改善には多くのリソースが必要であり、寛大な支援者に感謝しています。確実な教理を提供続けるために月々500円でも大いに役立ちます。是非、ご支援を検討ください。"
+  },
+  "homePage__supportSectionTitle": {
+    "comment": "home page support section title",
+    "string": "無料オーディオをご支援ください"
+  },
+  "homePage__testimoniesSectionText": {
+    "comment": "home page testimonies section text",
+    "string": "AudioVerseを利用している方々の声"
+  },
+  "home__testimoniesTitle": {
+    "comment": "Testimonies slider title",
+    "string": "証し"
+  },
+  "languageAlternativesAlert__dismiss": {
+    "string": "取り消し"
+  },
+  "languageAlternativesAlert__message": {
+    "string": "支援者と国際パートナーのお陰様でAudioVerseは複数の言語で提供することが可能となっています。ありがとうございます。言語をメニューで変えても、ここで変えることができます。"
+  },
+  "libraryCollections__collectionsHeading": {
+    "string": "コレクション"
+  },
+  "libraryCollections__dismiss": {
+    "string": "取り消し"
+  },
+  "libraryCollections__emptyCopy": {
+    "string": "ディスカバーページからアイテムをブックマークする、オーディオを聴くなどが出来ます。"
+  },
+  "libraryCollections__emptyHeading": {
+    "string": "あなたはまだコレクションに何も保存していません。"
+  },
+  "libraryCollections__personsHeading": {
+    "string": "スピーカー"
+  },
+  "libraryCollections__playlistsAlert": {
+    "string": "只今、プレイリストの使い方を新しくデザインしています。プレイリストはスマホのアプリを使ってでも管理できます。"
+  },
+  "libraryCollections__playlistsHeading": {
+    "string": "プレイリスト"
+  },
+  "libraryCollections__sponsorsHeading": {
+    "string": "主催者"
+  },
+  "libraryError__cta": {
+    "string": "ディスカバーに行く"
+  },
+  "libraryHistory__emptyCopy": {
+    "string": "ディスカバーページで聴きたいものを見つけよう"
+  },
+  "libraryHistory__emptyHeading": {
+    "string": "アイテムのどれもまだ聴かれていないですよ。"
+  },
+  "libraryHistory__loadMore": {
+    "string": "もっと読み込む"
+  },
+  "libraryNav__all": {
+    "string": "全て"
+  },
+  "libraryNav__collections": {
+    "string": "コレクション"
+  },
+  "libraryNav__filter": {
+    "string": "絞る"
+  },
+  "libraryNav__finished": {
+    "string": "終了"
+  },
+  "libraryNav__history": {
+    "string": "履歴"
+  },
+  "libraryNav__sortAtoZ": {
+    "string": "A〜Z"
+  },
+  "libraryNav__sortNewest": {
+    "string": "新しい順"
+  },
+  "libraryNav__sortOldest": {
+    "string": "古い順"
+  },
+  "libraryNav__sortZtoA": {
+    "string": "Z〜A"
+  },
+  "libraryNav__started": {
+    "string": "途中まで聴いたアイテム"
+  },
+  "libraryNav__unstarted": {
+    "string": "まだ聴き始めていない"
+  },
+  "libraryPlaybackStatus__emptyCopy": {
+    "string": "ディスカバーページで聴きたいものを見つけよう"
+  },
+  "libraryPlaybackStatus__finishedEmptyHeading": {
+    "string": "聴き終わっているレッスンはないです"
+  },
+  "libraryPlaybackStatus__startedEmptyHeading": {
+    "string": "まだアイテムのどれもまだ聴き終えてないですよ。"
+  },
+  "libraryPlaybackStatus__unstartedEmptyHeading": {
+    "string": "保存されているアイテムがないです"
+  },
+  "library__collectionsHeading": {
+    "string": "コレクション"
+  },
+  "library__collectionsSeeAll": {
+    "string": "全てのコレクションを見る"
+  },
+  "library__emptyCopy": {
+    "string": "ディスカバーページからのアイテムをブックマークしたり、聴いたりする"
+  },
+  "library__emptyHeading": {
+    "string": "保存されているアイテムがないです"
+  },
+  "library__finishedHeading": {
+    "string": "終了"
+  },
+  "library__finishedSeeAll": {
+    "string": "終了したアイテムを全て見る"
+  },
+  "library__historyHeading": {
+    "string": "履歴"
+  },
+  "library__historySeeAll": {
+    "string": "履歴を全て見る"
+  },
+  "library__membersOnlyCopy": {
+    "string": "ライブラリーの機能にアクセするにはログインされるか、アカウントを作成してください。"
+  },
+  "library__membersOnlyCta": {
+    "string": "アカウントを作成・ログイン"
+  },
+  "library__membersOnlyHeading": {
+    "string": "会員限定内容"
+  },
+  "library__startedHeading": {
+    "string": "途中まで聴いたアイテム"
+  },
+  "library__startedSeeAll": {
+    "string": "全ての途中まで聴いたアイテム"
+  },
+  "library__unstartedHeading": {
+    "string": "まだ聴き始めていない"
+  },
+  "loadingCards-ariaLabel": {
+    "string": "読み込み中"
+  },
+  "loginForm-reset__doneButton": {
+    "string": "終了"
+  },
+  "loginForm-reset__emailLabel": {
+    "string": "メールアドレス"
+  },
+  "loginForm-reset__emailPlaceholder": {
+    "string": "メールアドレス"
+  },
+  "loginForm-reset__modalParagraph": {
+    "string": "アカウントに関連付けられているメールアドレスを入力すると、パスワードリセットリンクが送信されます。"
+  },
+  "loginForm-reset__modalParagraphSent": {
+    "string": "パスワードリセットリンクが送信されました。メールを確認し、リンクを使用してパスワードをリセットしてください。"
+  },
+  "loginForm-reset__modalTitle": {
+    "string": "パスワードをリセットしてください。"
+  },
+  "loginForm-reset__sendLinkButton": {
+    "string": "リセットリンクを送信する"
+  },
+  "loginForm__emailLabel": {
+    "string": "メールアドレス"
+  },
+  "loginForm__emailPlaceholder": {
+    "string": "taro@example.com"
+  },
+  "loginForm__forgotPasswordButton": {
+    "comment": "login form forgot password button",
+    "string": "パスワードを忘れましたか？"
+  },
+  "loginForm__loginButton": {
+    "comment": "login form login button",
+    "string": "ログイン"
+  },
+  "loginForm__passwordLabel": {
+    "string": "パスワード"
+  },
+  "loginForm__passwordPlaceholder": {
+    "string": "∗∗∗∗∗∗∗"
+  },
+  "loginForm__resetPasswordErrorMessage": {
+    "comment": "reset password error message",
+    "string": "パスワードリセットリンクを送信しようとしたときにエラーが発生しました。"
+  },
+  "loginForm__resetPasswordSuccessMessage": {
+    "comment": "reset password success message",
+    "string": "会員付属の電子メールでパスワードリセットリンクを確認してください。"
+  },
+  "loginForm__signup": {
+    "string": "ログイン・会員登録"
+  },
+  "loginForm__signupIntro": {
+    "string": "アカウントを作成されていいないですか？"
+  },
+  "logout__inProcess": {
+    "string": "ログアウト中・・・"
+  },
+  "molecule-buttonDownload__buttonLabel": {
+    "comment": "download button label",
+    "string": "様々なダウンロード"
+  },
+  "molecule-buttonDownload__menuAudioHeading": {
+    "comment": "download button menu audio heading",
+    "string": "オーディオダウンロード"
+  },
+  "molecule-buttonDownload__menuVideoHeading": {
+    "comment": "download button menu video heading",
+    "string": "動画ダウンロード"
+  },
+  "molecule-buttonGuest__feature1": {
+    "string": "Lorem ipsum dolor"
+  },
+  "molecule-buttonGuest__feature2": {
+    "string": "Et exictur purim multatim"
+  },
+  "molecule-buttonGuest__feature3": {
+    "string": "Dulipscum erudis fesin"
+  },
+  "molecule-buttonGuest__label": {
+    "string": "ゲストとして続行"
+  },
+  "molecule-buttonGuest__modalButtonLabelCreateAccount": {
+    "string": "アカウントを作成"
+  },
+  "molecule-buttonGuest__modalButtonLabelGuest": {
+    "string": "ゲストとして続行"
+  },
+  "molecule-buttonGuest__modalButtonLabelLogIn": {
+    "string": "ログイン"
+  },
+  "molecule-buttonGuest__modalParagraph": {
+    "string": "アカウントがないと、次のようないくつかの重要な機能を見逃してしまいます。"
+  },
+  "molecule-buttonGuest__modalTitle": {
+    "string": "ゲストとしてこのまま続ける"
+  },
+  "molecule-buttonShareRecording__audioEmbedLabel": {
+    "string": "オーディオ埋め込みコード"
+  },
+  "molecule-buttonShareRecording__videoEmbedLabel": {
+    "string": "録画埋め込みコード"
+  },
+  "molecule-buttonShare__buttonLabel": {
+    "comment": "share button label",
+    "string": "シェア"
+  },
+  "molecule-buttonShare__copyLink": {
+    "string": "リンクをコピー"
+  },
+  "molecule-buttonShare__copyRSSLink": {
+    "string": "RSSリンクをコピーする"
+  },
+  "molecule-buttonShare__email": {
+    "string": "メールアドレス"
+  },
+  "molecule-buttonShare__facebook": {
+    "string": "Facebook"
+  },
+  "molecule-buttonShare__shareTitle": {
+    "comment": "share button section title",
+    "string": "シェア"
+  },
+  "molecule-buttonShare__twitter": {
+    "string": "Twitter"
+  },
+  "molecule-buttonSpeed__buttonLabel": {
+    "comment": "button speed button label",
+    "string": "{speed}x倍速"
+  },
+  "molecule-cardRecordingSequenceHat__addAlbum": {
+    "string": "アルバムを追加"
+  },
+  "molecule-cardRecordingSequenceHat__addBook": {
+    "string": "本を追加"
+  },
+  "molecule-cardRecordingSequenceHat__addSeries": {
+    "string": "シリーズを追加"
+  },
+  "molecule-cardRecordingSequenceHat__addStoryAlbum": {
+    "string": "アルバムを追加"
+  },
+  "molecule-cardRecordingSequenceHat__inLibrary": {
+    "string": "{totalCount}の内{inLibraryCount}がライブラリーに入れられています"
+  },
+  "molecule-cardRecordingSequenceHat__removeAlbum": {
+    "string": "アルバムをライブラリーから削除する"
+  },
+  "molecule-cardRecordingSequenceHat__removeBook": {
+    "string": "本をライブラリーから削除する"
+  },
+  "molecule-cardRecordingSequenceHat__removeSeries": {
+    "string": "シリーズをライブラリーから除去する"
+  },
+  "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
+    "string": "アルバムをライブラリーから削除する"
+  },
+  "molecule-searchBar__label": {
+    "comment": "search bar label",
+    "string": "検索"
+  },
+  "molecule-teaseRecording__lessPersons": {
+    "string": "表示を減らす"
+  },
+  "molecule-teaseRecording__morePersons": {
+    "string": "{count}個を表示"
+  },
+  "molecule-teaseRecording__partInfo": {
+    "comment": "recording tease part info",
+    "string": "{count}個の内の{index}部分を表示"
+  },
+  "molecule-transcript__disclaimer": {
+    "comment": "transcript disclaimer",
+    "string": "このトランスクリプト(原稿)はコンピュータ自動生成されている場合もございます"
+  },
+  "molecule-transcript__help": {
+    "comment": "transcript assistance request",
+    "string": "コンピューター自動生成されているトランスクリプト(原稿)に手を加えて編集して下さっても結構です。他の人のために、このトランスクリプト(原稿)の編集して下さったテキストがあれば、AudioVerseに電子メールで送ってくださると光栄です。 media@audioverse.org"
+  },
+  "molecule-transcript__labelClose": {
+    "comment": "transcript button label close",
+    "string": "トランスクリプト(原稿)を表示しない"
+  },
+  "molecule-transcript__labelOpen": {
+    "comment": "transcript button label open",
+    "string": "トランスクリプト(原稿)を読む"
+  },
+  "molecules-pagination__nextLabel": {
+    "string": "つぎ"
+  },
+  "molecules-pagination__previousLabel": {
+    "string": "前のに戻る"
+  },
+  "navigation__backToMenu": {
+    "string": "メニューに戻る"
+  },
+  "navigation__loginSignupCta": {
+    "string": "ログイン・会員登録"
+  },
+  "notFound__header": {
+    "string": "すみません。エラーが発生しました。"
+  },
+  "notFound__message": {
+    "string": "リンクが壊れているか、存在しないか、入力が間違っている可能性があります。"
+  },
+  "notFound__subheader": {
+    "string": "ページが見つかりませんでした。"
+  },
+  "notFound__suggestionsHeader": {
+    "string": "これらのものを代わりにお勧めします。"
+  },
+  "notFound__toDiscover": {
+    "string": "ディスカバーに戻る"
+  },
+  "organism-modal__close": {
+    "string": "閉じる"
+  },
+  "organism-recording__albumListTitle": {
+    "string": "このアルバムにあるの他の歌を表示"
+  },
+  "organism-recording__buttonLabelNext": {
+    "comment": "recording next button label",
+    "string": "つぎ"
+  },
+  "organism-recording__buttonLabelPrevious": {
+    "comment": "recording previous button label",
+    "string": "前のに戻る"
+  },
+  "organism-recording__conferenceInfoTitle": {
+    "comment": "Recording conference info title",
+    "string": "親としての成長と子育て総会"
+  },
+  "organism-recording__metadataLabel": {
+    "comment": "recording metadata section label",
+    "string": "メタデータ"
+  },
+  "organism-recording__partInfo": {
+    "comment": "recording part info",
+    "string": "パート{index}"
+  },
+  "organism-recording__readByLabel": {
+    "string": "語り手{name}"
+  },
+  "organism-recording__seriesInfoTitle": {
+    "comment": "Recording series info title",
+    "string": "親としての成長と子育てシリーズ"
+  },
+  "organism-recording__seriesListLabel": {
+    "comment": "recording series list label",
+    "string": "シリーズの一覧"
+  },
+  "organism-recording__seriesListTitle": {
+    "comment": "recording series list title",
+    "string": "このシリーズの中の他のレッスン"
+  },
+  "organism-recording__sponsorInfoTitle": {
+    "comment": "recording sponsor info title",
+    "string": "主催者"
+  },
+  "personTypeLockup_type": {
+    "string": "スピーカー"
+  },
+  "playButton__pauseLabel": {
+    "comment": "play button pause label",
+    "string": "保留"
+  },
+  "playButton__playLabel": {
+    "comment": "play button play label",
+    "string": "再生"
+  },
+  "player__fullscreenButtonLabel": {
+    "comment": "player fullscreen button label",
+    "string": "全画面表示"
+  },
+  "player__nudgeBack": {
+    "comment": "player nudge-back label",
+    "string": "15秒前"
+  },
+  "player__nudgeForward": {
+    "comment": "player nudge-forward label",
+    "string": "15秒先"
+  },
+  "player__playerLabel": {
+    "comment": "player label",
+    "string": "プレーヤー"
+  },
+  "player__progressLabel": {
+    "comment": "player progress label",
+    "string": "経過"
+  },
+  "playlistButton__createButton": {
+    "comment": "PlaylistButton create button label",
+    "string": "作成する"
+  },
+  "playlistButton__newPlaylistInputPlaceholder": {
+    "comment": "playlist button new playlist input placeholder",
+    "string": "新規プレイリストを作成"
+  },
+  "playlistButton__publicToggle": {
+    "comment": "PlaylistButton public toggle label",
+    "string": "公開"
+  },
+  "playlistButton__trigger": {
+    "comment": "PlaylistButton button text",
+    "string": "プレイリストに追加"
+  },
+  "playlistButton__unauthenticated": {
+    "comment": "PlaylistButton not authenticated error",
+    "string": "この機能を利用するにはログインする必要があります。"
+  },
+  "playlistDetail__createdLabel": {
+    "string": "作成されました"
+  },
+  "playlistDetail__partsCountLabel": {
+    "comment": "Playlist Detail teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "playlistDetail__summaryLabel": {
+    "string": "概要"
+  },
+  "playlistDetail__type": {
+    "string": "プレイリスト"
+  },
+  "preferences__buttonLabelSaveChanges": {
+    "string": "編集したものを保存"
+  },
+  "preferences__downloadSettings": {
+    "string": "ダウンロードの設定"
+  },
+  "preferences__downloadSettingsIntro": {
+    "string": "オーディオファイルのダウンロード方法の好みを設定。"
+  },
+  "preferences__heading": {
+    "string": "アカウントの設定"
+  },
+  "preferences__inputAutoplay": {
+    "string": "自動再生開始する"
+  },
+  "preferences__language": {
+    "string": "言語"
+  },
+  "preferences__playbackSettings": {
+    "string": "再生設定"
+  },
+  "preferences__playbackSettingsIntro": {
+    "string": "次の動画・オーディオ録音を自動再生するかどうかを選択します。"
+  },
+  "preferences__preferredAudioQuality": {
+    "string": "好みの音質"
+  },
+  "preferences__preferredAudioQuality-high": {
+    "string": "最高音質"
+  },
+  "preferences__preferredAudioQuality-low": {
+    "string": "低音質"
+  },
+  "preferences__preferredAudioQuality-medium": {
+    "string": "高音質"
+  },
+  "preferences__subheading": {
+    "string": "好み"
+  },
+  "preferences__timezone": {
+    "string": "タイムゾーン"
+  },
+  "presenterAppearsDetail__heading": {
+    "string": "他にも登場"
+  },
+  "presenterDetail__alsoAppearsInLabel": {
+    "string": "他にも登場"
+  },
+  "presenterDetail__audiobookTracksCountLabel": {
+    "comment": "Presenter detail audiobook tracks count label",
+    "string": "{count}電子本のトラック"
+  },
+  "presenterDetail__descriptionLabel": {
+    "string": "内容詳細"
+  },
+  "presenterDetail__essentialRecordingsLabel": {
+    "string": "エッセンシャル{name}名"
+  },
+  "presenterDetail__musicTracksCountLabel": {
+    "comment": "Presenter detail music tracks count label",
+    "string": "音楽のトラック{count}個"
+  },
+  "presenterDetail__recentAllLabel": {
+    "string": "最新のものを全て表示"
+  },
+  "presenterDetail__recentRecordingsLabel": {
+    "string": "最新"
+  },
+  "presenterDetail__seriesAllLabel": {
+    "string": "全てのシリーズを表示"
+  },
+  "presenterDetail__seriesLabel": {
+    "comment": "Collection Detail series label",
+    "string": "シリーズ"
+  },
+  "presenterDetail__speakersAllLabel": {
+    "string": "他にも登場"
+  },
+  "presenterDetail__storiesCountLabel": {
+    "comment": "Presenter detail stories count label",
+    "string": "ストーリー{count}個"
+  },
+  "presenterDetail__teachingsCountLabel": {
+    "comment": "Presenter detail teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "presenterDetail__topAllLabel": {
+    "string": "最も人気のをもっと表示する"
+  },
+  "presenterDetail__topRecordingsLabel": {
+    "string": "最も人気"
+  },
+  "presenterDetail__websiteLabel": {
+    "string": "ウエブサイト"
+  },
+  "presenterRecordingsDetail__heading": {
+    "string": "全ての動画・オーディオ"
+  },
+  "presenterSequencesDetail__heading": {
+    "string": "全てのシリーズ"
+  },
+  "presenterTopDetail__heading": {
+    "string": "最も人気"
+  },
+  "presentersFeed__description": {
+    "string": "{name}による最近のAudioVerseの説教"
+  },
+  "presentersFeed__title": {
+    "string": "{name}による説教"
+  },
+  "presentersList__title": {
+    "string": "全てのスピーカー"
+  },
+  "profile__buttonLabelDeleteAccount": {
+    "string": "アカウントを削除する"
+  },
+  "profile__buttonLabelSaveChanges": {
+    "string": "編集したものを保存"
+  },
+  "profile__heading": {
+    "string": "アカウントの設定"
+  },
+  "profile__inputLabelForEmail": {
+    "comment": "input label for email",
+    "string": "メールアドレス"
+  },
+  "profile__inputLabelForFirstName": {
+    "comment": "input label for first name",
+    "string": "名"
+  },
+  "profile__inputLabelForLastName": {
+    "comment": "input label for last name",
+    "string": "姓"
+  },
+  "profile__inputLabelForPassword": {
+    "comment": "input label for password",
+    "string": "パスワード"
+  },
+  "profile__intro": {
+    "string": "アカウント情報を追加することによってログイン設定の管理ができ、このサイトをカスタマイズできます。"
+  },
+  "profile__subheading": {
+    "string": "プロフィール"
+  },
+  "register__emailLabel": {
+    "string": "メールアドレス"
+  },
+  "register__emailPlaceholder": {
+    "string": "taro@example.com"
+  },
+  "register__firstNameLabel": {
+    "string": "名"
+  },
+  "register__firstNamePlaceholder": {
+    "string": "Jane"
+  },
+  "register__lastNameLabel": {
+    "string": "姓"
+  },
+  "register__lastNamePlaceholder": {
+    "string": "Doe"
+  },
+  "register__loadingMessage": {
+    "comment": "register loading message",
+    "string": "読み込み中・・・"
+  },
+  "register__login": {
+    "string": "ログイン"
+  },
+  "register__loginIntro": {
+    "string": "すでにアカウントをお持ちですか？"
+  },
+  "register__newsletterSubscribe": {
+    "string": "ニュースレターを購読する"
+  },
+  "register__passwordLabel": {
+    "string": "パスワード"
+  },
+  "register__passwordPlaceholder": {
+    "string": "∗∗∗∗∗∗∗"
+  },
+  "register__submitButton": {
+    "string": "ログイン・会員登録"
+  },
+  "register__successMessage": {
+    "comment": "register success message",
+    "string": "完成しました。"
+  },
+  "reset__confirmPasswordLabel": {
+    "string": "新しいパスワードを確認"
+  },
+  "reset__confirmPasswordPlaceholder": {
+    "string": "新しいパスワードを確認"
+  },
+  "reset__errorGeneral": {
+    "comment": "password reset general submission error",
+    "string": "パスワードをリセットしようとしたときに問題がありました。"
+  },
+  "reset__errorMismatch": {
+    "comment": "password reset page password mismatch error",
+    "string": "パスワードが一致していなければなりません"
+  },
+  "reset__errorRepeatPassword": {
+    "comment": "password reset page password not repeated error",
+    "string": "パスワードを２回入力して下さい"
+  },
+  "reset__intro": {
+    "string": "{email}にための新しいパスワードを作成する"
+  },
+  "reset__passwordLabel": {
+    "string": "新しいパスワード"
+  },
+  "reset__passwordPlaceholder": {
+    "string": "新しいパスワード"
+  },
+  "reset__submitButton": {
+    "string": "ログイン"
+  },
+  "reset__successMessage": {
+    "comment": "password reset success message",
+    "string": "パスワードの変更が成功しました"
+  },
+  "rssAlternate__title": {
+    "string": "RSSフィード"
+  },
+  "searchCollections__heading": {
+    "string": "一致するコレクションを全て表示"
+  },
+  "searchPersons__heading": {
+    "string": "一致する人を全て表示"
+  },
+  "searchSequences__heading": {
+    "string": "一致するシーケンスを全て表示"
+  },
+  "searchSponsors__heading": {
+    "string": "一致する全ての主催者を表示"
+  },
+  "searchTeachings__heading": {
+    "string": "一致するレッスンを全て表示"
+  },
+  "search__conferencesHeading": {
+    "string": "大会・総会"
+  },
+  "search__conferencesSeeAll": {
+    "string": "全ての大会・総会を表示"
+  },
+  "search__personsHeading": {
+    "string": "スピーカー"
+  },
+  "search__personsSeeAll": {
+    "string": "全てのスピーカーを表示"
+  },
+  "search__resultsCount": {
+    "string": "{count}個の結果"
+  },
+  "search__sequencesHeading": {
+    "string": "シリーズ"
+  },
+  "search__sequencesSeeAll": {
+    "string": "全てのシリーズを表示"
+  },
+  "search__sponsorsHeading": {
+    "string": "主催者"
+  },
+  "search__sponsorsSeeAll": {
+    "string": "全ての主催者を表示"
+  },
+  "search__teachingsHeading": {
+    "string": "レッスン"
+  },
+  "search__teachingsSeeAll": {
+    "string": "全てのレッスンを表示"
+  },
+  "sequenceType__audiobookTitle": {
+    "string": "巻"
+  },
+  "sequenceType__musicTrackTitle": {
+    "string": "聖句ソング"
+  },
+  "sequenceType__seriesTitle": {
+    "string": "シリーズ"
+  },
+  "sequenceType__storyTitle": {
+    "string": "ストーリー"
+  },
+  "seriesDetail__conferenceLabel": {
+    "string": "親としての成長と子育て総会"
+  },
+  "seriesDetail__descriptionLabel": {
+    "string": "内容詳細"
+  },
+  "seriesDetail__partsCountLabel": {
+    "comment": "Series Detail parts count label",
+    "string": "{count}個の部分を表示"
+  },
+  "seriesDetail__recordedLabel": {
+    "string": "録音された"
+  },
+  "seriesDetail__sponsorLabel": {
+    "string": "主催者"
+  },
+  "seriesDetail__type": {
+    "comment": "Series Detail type label",
+    "string": "シリーズ"
+  },
+  "seriesList__heading": {
+    "string": "全てのシリーズ"
+  },
+  "sermonDetailPage__attachments": {
+    "comment": "Sermon detail attachments label",
+    "string": "添付ファイル"
+  },
+  "sermonDetailPage__copyright": {
+    "comment": "Copyright year and owner",
+    "string": "{owner}の著作権ⓒ{year}年"
+  },
+  "sermonDetailPage__descriptionTitle": {
+    "comment": "Sermon detail description title",
+    "string": "内容詳細"
+  },
+  "sermonDetailPage__disclaimer": {
+    "string": "この動画・オーディオ録の内容は寄稿者の見解であり、必ずしもAudioVerseの見解を反映しているとは限りません。"
+  },
+  "sermonDetailPage__recordedTitle": {
+    "comment": "Sermon detail recorded date title",
+    "string": "録音された"
+  },
+  "sermonList__heading": {
+    "string": "全てのレッスン"
+  },
+  "sermonsList__filter": {
+    "string": "絞る"
+  },
+  "socialLogin__loginFacebookButton": {
+    "string": "Facebookでログイン"
+  },
+  "socialLogin__loginGoogleButton": {
+    "string": "Googleでログイン"
+  },
+  "socialLogin__registerFacebookButton": {
+    "string": "Facebookで会員登録"
+  },
+  "socialLogin__registerGoogleButton": {
+    "string": "Googleで会員登録"
+  },
+  "socialLogin__successMessage": {
+    "comment": "social login success message",
+    "string": "完成しました。"
+  },
+  "songsListPage__1ChroniclesLabel": {
+    "comment": "Songs list page 1 Chronicles link label",
+    "string": "歴代誌上"
+  },
+  "songsListPage__1CorinthiansLabel": {
+    "comment": "Songs list page 1 Corinthians link label",
+    "string": "コリント人への第1の手紙"
+  },
+  "songsListPage__1JohnLabel": {
+    "comment": "Songs list page 1 John link label",
+    "string": "ヨハネの第1の手紙"
+  },
+  "songsListPage__1KingsLabel": {
+    "comment": "Songs list page 1 Kings link label",
+    "string": "列王記上"
+  },
+  "songsListPage__1PeterLabel": {
+    "comment": "Songs list page 1 Peter link label",
+    "string": "ペテロの第1の手紙"
+  },
+  "songsListPage__1SamuelLabel": {
+    "comment": "Songs list page 1 Samuel link label",
+    "string": "サムエル記上"
+  },
+  "songsListPage__1ThessaloniansLabel": {
+    "comment": "Songs list page 1 Thessalonians link label",
+    "string": "テサロニケ人への第1の手紙"
+  },
+  "songsListPage__1TimothyLabel": {
+    "comment": "Songs list page 1 Timothy link label",
+    "string": "テモテへの第1の手紙"
+  },
+  "songsListPage__2ChroniclesLabel": {
+    "comment": "Songs list page 2 Chronicles link label",
+    "string": "歴代誌下"
+  },
+  "songsListPage__2CorinthiansLabel": {
+    "comment": "Songs list page 2 Corinthians link label",
+    "string": "コリント人への第2の手紙"
+  },
+  "songsListPage__2JohnLabel": {
+    "comment": "Songs list page 2 John link label",
+    "string": "ヨハネの第2の手紙"
+  },
+  "songsListPage__2KingsLabel": {
+    "comment": "Songs list page 2 Kings link label",
+    "string": "列王記下"
+  },
+  "songsListPage__2PeterLabel": {
+    "comment": "Songs list page 2 Peter link label",
+    "string": "ペテロの第2の手紙"
+  },
+  "songsListPage__2SamuelLabel": {
+    "comment": "Songs list page 2 Samuel link label",
+    "string": "サムエル記下"
+  },
+  "songsListPage__2ThessaloniansLabel": {
+    "comment": "Songs list page 2 Thessalonians link label",
+    "string": "テサロニケ人への第2の手紙"
+  },
+  "songsListPage__2TimothyLabel": {
+    "comment": "Songs list page 2 Timothy link label",
+    "string": "テモテへの第2の手紙"
+  },
+  "songsListPage__3JohnLabel": {
+    "comment": "Songs list page 3 John link label",
+    "string": "ヨハネの第3の手紙"
+  },
+  "songsListPage__ActsLabel": {
+    "comment": "Songs list page Acts link label",
+    "string": "使徒行伝"
+  },
+  "songsListPage__AmosLabel": {
+    "comment": "Songs list page Amos link label",
+    "string": "アモス書"
+  },
+  "songsListPage__ColossiansLabel": {
+    "comment": "Songs list page Colossians link label",
+    "string": "コロサイ人への手紙"
+  },
+  "songsListPage__DanielLabel": {
+    "comment": "Songs list page Daniel link label",
+    "string": "ダニエル書"
+  },
+  "songsListPage__DeuteronomyLabel": {
+    "comment": "Songs list page Deuteronomy link label",
+    "string": "申命記"
+  },
+  "songsListPage__EcclesiastesLabel": {
+    "comment": "Songs list page Ecclesiastes link label",
+    "string": "伝道の書"
+  },
+  "songsListPage__EphesiansLabel": {
+    "comment": "Songs list page Ephesians link label",
+    "string": "エペソ人への手紙"
+  },
+  "songsListPage__EstherLabel": {
+    "comment": "Songs list page Esther link label",
+    "string": "エステル記"
+  },
+  "songsListPage__ExodusLabel": {
+    "comment": "Songs list page Exodus link label",
+    "string": "出エジプト記"
+  },
+  "songsListPage__EzekielLabel": {
+    "comment": "Songs list page Ezekiel link label",
+    "string": "エゼキエル書"
+  },
+  "songsListPage__EzraLabel": {
+    "comment": "Songs list page Ezra link label",
+    "string": "エズラ記"
+  },
+  "songsListPage__GalatiansLabel": {
+    "comment": "Songs list page Galatians link label",
+    "string": "ガラテヤ人への手紙"
+  },
+  "songsListPage__GenesisLabel": {
+    "comment": "Songs list page Genesis link label",
+    "string": "創世記"
+  },
+  "songsListPage__HabakkukLabel": {
+    "comment": "Songs list page Habakkuk link label",
+    "string": "ハバクク書"
+  },
+  "songsListPage__HaggaiLabel": {
+    "comment": "Songs list page Haggai link label",
+    "string": "ハガイ書"
+  },
+  "songsListPage__HebrewsLabel": {
+    "comment": "Songs list page Hebrews link label",
+    "string": "ヘブル人への手紙"
+  },
+  "songsListPage__HoseaLabel": {
+    "comment": "Songs list page Hosea link label",
+    "string": "ホセア書"
+  },
+  "songsListPage__IsaiahLabel": {
+    "comment": "Songs list page Isaiah link label",
+    "string": "イザヤ書"
+  },
+  "songsListPage__JamesLabel": {
+    "comment": "Songs list page James link label",
+    "string": "ヤコブ書"
+  },
+  "songsListPage__JeremiahLabel": {
+    "comment": "Songs list page Jeremiah link label",
+    "string": "エレミヤ書"
+  },
+  "songsListPage__JobLabel": {
+    "comment": "Songs list page Job link label",
+    "string": "ヨブ記"
+  },
+  "songsListPage__JoelLabel": {
+    "comment": "Songs list page Joel link label",
+    "string": "ヨエル書"
+  },
+  "songsListPage__JohnLabel": {
+    "comment": "Songs list page John link label",
+    "string": "ヨハネの福音書"
+  },
+  "songsListPage__JonahLabel": {
+    "comment": "Songs list page Jonah link label",
+    "string": "ヨナ書"
+  },
+  "songsListPage__JoshuaLabel": {
+    "comment": "Songs list page Joshua link label",
+    "string": "ヨシュア記"
+  },
+  "songsListPage__JudeLabel": {
+    "comment": "Songs list page Jude link label",
+    "string": "ユダの手紙"
+  },
+  "songsListPage__JudgesLabel": {
+    "comment": "Songs list page Judges link label",
+    "string": "士師記"
+  },
+  "songsListPage__LamentationsLabel": {
+    "comment": "Songs list page Lamentations link label",
+    "string": "哀歌"
+  },
+  "songsListPage__LeviticusLabel": {
+    "comment": "Songs list page Leviticus link label",
+    "string": "レビ記"
+  },
+  "songsListPage__LukeLabel": {
+    "comment": "Songs list page Luke link label",
+    "string": "ルカの福音書"
+  },
+  "songsListPage__MalachiLabel": {
+    "comment": "Songs list page Malachi link label",
+    "string": "マラキ書"
+  },
+  "songsListPage__MarkLabel": {
+    "comment": "Songs list page Mark link label",
+    "string": "マルコの福音書"
+  },
+  "songsListPage__MatthewLabel": {
+    "comment": "Songs list page Matthew link label",
+    "string": "マタイの福音書"
+  },
+  "songsListPage__MicahLabel": {
+    "comment": "Songs list page Micah link label",
+    "string": "ミカ書"
+  },
+  "songsListPage__NahumLabel": {
+    "comment": "Songs list page Nahum link label",
+    "string": "ナホム書"
+  },
+  "songsListPage__NehemiahLabel": {
+    "comment": "Songs list page Nehemiah link label",
+    "string": "ネヘミヤ書"
+  },
+  "songsListPage__NumbersLabel": {
+    "comment": "Songs list page Numbers link label",
+    "string": "民数記"
+  },
+  "songsListPage__ObadiahLabel": {
+    "comment": "Songs list page Obadiah link label",
+    "string": "オバデヤ書"
+  },
+  "songsListPage__PhilemonLabel": {
+    "comment": "Songs list page Philemon link label",
+    "string": "ピレモンへの手紙"
+  },
+  "songsListPage__PhilippiansLabel": {
+    "comment": "Songs list page Philippians link label",
+    "string": "ピリピ人への手紙"
+  },
+  "songsListPage__ProverbsLabel": {
+    "comment": "Songs list page Proverbs link label",
+    "string": "箴言"
+  },
+  "songsListPage__PsalmsLabel": {
+    "comment": "Songs list page Psalms link label",
+    "string": "詩篇"
+  },
+  "songsListPage__RevelationLabel": {
+    "comment": "Songs list page Revelation link label",
+    "string": "ヨハネの黙示録"
+  },
+  "songsListPage__RomansLabel": {
+    "comment": "Songs list page Romans link label",
+    "string": "ローマ人への手紙"
+  },
+  "songsListPage__RuthLabel": {
+    "comment": "Songs list page Ruth link label",
+    "string": "ルツ記"
+  },
+  "songsListPage__Song of SolomonLabel": {
+    "comment": "Songs list page Detail of Solomon link label",
+    "string": "雅歌"
+  },
+  "songsListPage__TitusLabel": {
+    "comment": "Songs list page Titus link label",
+    "string": "テトスへの手紙"
+  },
+  "songsListPage__ZechariahLabel": {
+    "comment": "Songs list page Zechariah link label",
+    "string": "ゼカリヤ書"
+  },
+  "songsListPage__ZephaniahLabel": {
+    "comment": "Songs list page Zephaniah link label",
+    "string": "ゼパニヤ書"
+  },
+  "songsListPage__albumTabLabel": {
+    "comment": "Songs list page album tab label",
+    "string": "アルバム"
+  },
+  "songsListPage__bookTabLabel": {
+    "comment": "Songs list page book tab label",
+    "string": "図書"
+  },
+  "songsListPage__sponsorTabLabel": {
+    "comment": "Songs list page sponsor tab label",
+    "string": "主催者"
+  },
+  "songsListPage__tagTabLabel": {
+    "comment": "Songs list page tag tab label",
+    "string": "タッグ"
+  },
+  "sopnsorTypeLockup_type": {
+    "string": "主催者"
+  },
+  "sponsorConferencesDetail__heading": {
+    "string": "全ての大会・総会"
+  },
+  "sponsorDetail__collectionCountLabel": {
+    "comment": "Sponsor Detail collection count label",
+    "string": "{count}大会・総会"
+  },
+  "sponsorDetail__conferencesAllLabel": {
+    "string": "全ての大会・総会を表示"
+  },
+  "sponsorDetail__conferencesLabel": {
+    "string": "大会・総会"
+  },
+  "sponsorDetail__descriptionLabel": {
+    "string": "内容詳細"
+  },
+  "sponsorDetail__locationLabel": {
+    "string": "現在地"
+  },
+  "sponsorDetail__recentAllLabel": {
+    "string": "最近のレッスンを全て表示"
+  },
+  "sponsorDetail__recentLabel": {
+    "string": "最近のレッスン"
+  },
+  "sponsorDetail__recordingsCountLabel": {
+    "comment": "Sponsor Detail teachings count label",
+    "string": "レッスン{count}個"
+  },
+  "sponsorDetail__sequencesCountLabel": {
+    "comment": "Sponsor Detail series count label",
+    "string": "{count}シリーズ"
+  },
+  "sponsorDetail__seriesAllLabel": {
+    "string": "全てのシリーズを表示"
+  },
+  "sponsorDetail__seriesLabel": {
+    "comment": "Collection Detail series label",
+    "string": "シリーズ"
+  },
+  "sponsorDetail__websiteLabel": {
+    "string": "ウエブサイト"
+  },
+  "sponsorSeriesDetail__heading": {
+    "string": "全てのシリーズ"
+  },
+  "sponsorTeachingsDetail__heading": {
+    "string": "全てのレッスン"
+  },
+  "sponsorTeachingsFeed__description": {
+    "string": "{title}の本での最新のAudioVerse録"
+  },
+  "sponsorTeachingsFeed__title": {
+    "string": "{name}による説教"
+  },
+  "sponsorsList__title": {
+    "string": "全ての主催者"
+  },
+  "storyAlbumList__heading": {
+    "string": "全てのストーリー"
+  },
+  "storyAlbumsFeed__description": {
+    "string": "著者が{authors}で、本の題名が{title}で、{narrators}のナレーション"
+  },
+  "teachingsFeed__description": {
+    "string": "{language}語でのAudioVerseのプレゼンテーション"
+  },
+  "teachingsFeed__title": {
+    "string": "AudioVerseのプレゼンテーション({language})語"
+  },
+  "testimonies__heading": {
+    "string": "証し"
+  },
+  "testimonies__intro": {
+    "string": "いい証がありますかあなたのストーリーを共有して下さい！"
+  },
+  "testimonies__shareYourStory": {
+    "string": "あなたのストーリーをシェアして下さい！"
+  },
+  "time__minutesAndSeconds": {
+    "comment": "time minutes and seconds",
+    "string": "{m}分:{s}秒"
+  },
+  "trendingTeachings__heading": {
+    "string": "最近人気のレッスン"
+  },
+  "unstartedSeeAll": {
+    "string": "始められていないものを全部表示"
+  }
+}

@@ -1,3 +1,3388 @@
 {
-
+  "RecordingFavorite__favorite": [
+    {
+      "type": 0,
+      "value": "喜欢"
+    }
+  ],
+  "RecordingFavorite__unfavorite": [
+    {
+      "type": 0,
+      "value": "不喜欢"
+    }
+  ],
+  "accountNav__audiopreferences": [
+    {
+      "type": 0,
+      "value": "偏好"
+    }
+  ],
+  "accountNav__profile": [
+    {
+      "type": 0,
+      "value": "档案"
+    }
+  ],
+  "accountPlaylists__buttonLabelSubmit": [
+    {
+      "type": 0,
+      "value": "添加播放清单"
+    }
+  ],
+  "accountPlaylists__errorMissingTitle": [
+    {
+      "type": 0,
+      "value": "标题缺失"
+    }
+  ],
+  "accountPlaylists__inputLabelPublic": [
+    {
+      "type": 0,
+      "value": "公共"
+    }
+  ],
+  "accountPlaylists__inputLabelSummary": [
+    {
+      "type": 0,
+      "value": "摘要"
+    }
+  ],
+  "accountPlaylists__inputLabelTitle": [
+    {
+      "type": 0,
+      "value": "标题"
+    }
+  ],
+  "accountPlaylists__labelPrivate": [
+    {
+      "type": 0,
+      "value": "私人"
+    }
+  ],
+  "accountPlaylists__labelPublic": [
+    {
+      "type": 0,
+      "value": "公共"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-confirm": [
+    {
+      "type": 0,
+      "value": "删除条目"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-copy": [
+    {
+      "type": 0,
+      "value": "是否要将此条目从收藏中删除？"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-heading": [
+    {
+      "type": 0,
+      "value": "确定吗？"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-keep": [
+    {
+      "type": 0,
+      "value": "保留条目"
+    }
+  ],
+  "andGlobalModals__continueAsGuest": [
+    {
+      "type": 0,
+      "value": "以游客身份继续"
+    }
+  ],
+  "andGlobalModals__copy": [
+    {
+      "type": 0,
+      "value": "给音频添加书签，下次进入账户访问。其它功能包括添加音频到你的收藏。"
+    }
+  ],
+  "andGlobalModals__createAccount": [
+    {
+      "type": 0,
+      "value": "创建账户"
+    }
+  ],
+  "andGlobalModals__heading": [
+    {
+      "type": 0,
+      "value": "会员专属功能"
+    }
+  ],
+  "andGlobalModals__logIn": [
+    {
+      "type": 0,
+      "value": "登录"
+    }
+  ],
+  "andNavigation__donate": [
+    {
+      "type": 0,
+      "value": "捐赠"
+    }
+  ],
+  "atom-progressBar__label": [
+    {
+      "type": 0,
+      "value": "进度"
+    }
+  ],
+  "audiobookList__heading": [
+    {
+      "type": 0,
+      "value": "全部有声书"
+    }
+  ],
+  "backButton__back": [
+    {
+      "type": 0,
+      "value": "返回"
+    }
+  ],
+  "bibleBook__chapterListTitle": [
+    {
+      "type": 0,
+      "value": "本书其它章节"
+    }
+  ],
+  "bibleVersionTypeLockup__type": [
+    {
+      "type": 0,
+      "value": "圣经版本"
+    }
+  ],
+  "bibleVersion__booksLabel": [
+    {
+      "type": 0,
+      "value": "66本书"
+    }
+  ],
+  "bibleVersion__description": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "bibleVersion__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "bibleVersions__heading": [
+    {
+      "type": 0,
+      "value": "圣经"
+    }
+  ],
+  "bibleVersions__intro": [
+    {
+      "type": 0,
+      "value": "学习纯正教义的最佳方式是聆听“上帝的道”。我们的音频圣经让您能够聆听最伟大之教师的重要教导。"
+    }
+  ],
+  "blogDetailPage__moreBlogPosts": [
+    {
+      "type": 0,
+      "value": "更多博客文章"
+    }
+  ],
+  "blogDetailPage__readingDuration": [
+    {
+      "type": 1,
+      "value": "duration"
+    },
+    {
+      "type": 0,
+      "value": " 朗读"
+    }
+  ],
+  "cardAudiobookTrack_readByLabel": [
+    {
+      "type": 0,
+      "value": "由"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "朗读"
+    }
+  ],
+  "cardAudiobookTrack_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "书"
+    }
+  ],
+  "cardBibleBook__chaptersLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 章"
+    }
+  ],
+  "cardBibleBook__typeLabel": [
+    {
+      "type": 1,
+      "value": "abbreviation"
+    },
+    {
+      "type": 0,
+      "value": " 圣经"
+    }
+  ],
+  "cardBibleVersion__booksLabel": [
+    {
+      "type": 0,
+      "value": "66本书"
+    }
+  ],
+  "cardCollection__teachingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "cardCollection_sequenceLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个系列"
+    }
+  ],
+  "cardPerson_teachingsLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "cardPlaylist__typeLabel": [
+    {
+      "type": 0,
+      "value": "播放清单"
+    }
+  ],
+  "cardPost__readingDuration": [
+    {
+      "type": 1,
+      "value": "duration"
+    },
+    {
+      "type": 0,
+      "value": " 朗读"
+    }
+  ],
+  "cardSequence_audiobookType": [
+    {
+      "type": 0,
+      "value": "书"
+    }
+  ],
+  "cardSequence_scriptureSongsType": [
+    {
+      "type": 0,
+      "value": "经文歌曲"
+    }
+  ],
+  "cardSequence_sequenceLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 部分"
+    }
+  ],
+  "cardSequence_seriesType": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "cardSequence_storiesType": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "cardSermon_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "cardSlider__nextPageLabel": [
+    {
+      "type": 0,
+      "value": "下一页"
+    }
+  ],
+  "cardSlider__paginationLabel": [
+    {
+      "type": 0,
+      "value": "滑块分页"
+    }
+  ],
+  "cardSlider__previousPageLabel": [
+    {
+      "type": 0,
+      "value": "上一页"
+    }
+  ],
+  "cardSong_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "经文歌曲"
+    }
+  ],
+  "cardSponsor__collectionCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "场大会"
+    }
+  ],
+  "cardSponsor__recordingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "cardSponsor__sequencesCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个系列"
+    }
+  ],
+  "cardSponsor_hatTitle": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "cardStory_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "ccollectionTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有个别证道"
+    }
+  ],
+  "collectionDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "collectionDetail__locationLabel": [
+    {
+      "type": 0,
+      "value": "位置"
+    }
+  ],
+  "collectionDetail__sequenceCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个系列"
+    }
+  ],
+  "collectionDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有系列"
+    }
+  ],
+  "collectionDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "collectionDetail__speakersAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有讲员"
+    }
+  ],
+  "collectionDetail__speakersLabel": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "collectionDetail__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "collectionDetail__teachingsAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有个别证道"
+    }
+  ],
+  "collectionDetail__teachingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "collectionDetail__teachingsLabel": [
+    {
+      "type": 0,
+      "value": "个别证道"
+    }
+  ],
+  "collectionPresenterssDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有讲员"
+    }
+  ],
+  "collectionSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有系列"
+    }
+  ],
+  "collectionTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "conferenceListPage__title": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "container-sermonList__filterLabelAll": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "container-sermonList__filterLabelAudio": [
+    {
+      "type": 0,
+      "value": "仅音频"
+    }
+  ],
+  "container-sermonList__filterLabelVideo": [
+    {
+      "type": 0,
+      "value": "视频"
+    }
+  ],
+  "copyrightInfos__multipleCopyrightExplanation": [
+    {
+      "type": 0,
+      "value": "本产品的部分内容受以下许可条款约束："
+    }
+  ],
+  "discoverCollections_audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "音频书籍"
+    }
+  ],
+  "discoverCollections_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "discoverCollections_featuredCollectionHeading": [
+    {
+      "type": 0,
+      "value": "专题合集"
+    }
+  ],
+  "discoverCollections_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "经文歌曲"
+    }
+  ],
+  "discoverCollections_seeAll": [
+    {
+      "type": 0,
+      "value": "查看所有"
+    }
+  ],
+  "discoverCollections_seriesHeading": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "discoverCollections_speakersHeading": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "discoverCollections_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "discoverCollections_storiesHeading": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "discover__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有最新大会"
+    }
+  ],
+  "discover__recentTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有最新证道"
+    }
+  ],
+  "discover__storiesHeading": [
+    {
+      "type": 0,
+      "value": "最新故事"
+    }
+  ],
+  "discover__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有最新故事"
+    }
+  ],
+  "discover__trendingTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有热门证道"
+    }
+  ],
+  "discover_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "最新大会"
+    }
+  ],
+  "discover_recentTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "最新证道"
+    }
+  ],
+  "discover_trendingTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "热门证道"
+    }
+  ],
+  "downloadAppButton__android": [
+    {
+      "type": 0,
+      "value": "安卓应用"
+    }
+  ],
+  "downloadAppButton__ios": [
+    {
+      "type": 0,
+      "value": "iOS应用"
+    }
+  ],
+  "downloadAppButton__label": [
+    {
+      "type": 0,
+      "value": "下载应用"
+    }
+  ],
+  "duration__hours": [
+    {
+      "type": 1,
+      "value": "hours"
+    },
+    {
+      "type": 0,
+      "value": "小时"
+    }
+  ],
+  "duration__hoursAndMinutes": [
+    {
+      "type": 1,
+      "value": "hours"
+    },
+    {
+      "type": 0,
+      "value": "小时 "
+    },
+    {
+      "type": 1,
+      "value": "minutes"
+    },
+    {
+      "type": 0,
+      "value": "分钟"
+    }
+  ],
+  "duration__minutes": [
+    {
+      "type": 1,
+      "value": "minutes"
+    },
+    {
+      "type": 0,
+      "value": "分钟"
+    }
+  ],
+  "generateFeed__audio": [
+    {
+      "type": 0,
+      "value": "音频"
+    }
+  ],
+  "generateFeed__subtitle": [
+    {
+      "type": 1,
+      "value": "container"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "format"
+    },
+    {
+      "type": 0,
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "bitrate"
+    },
+    {
+      "type": 0,
+      "value": " 千字节/秒"
+    }
+  ],
+  "generateFeed__video": [
+    {
+      "type": 0,
+      "value": "视频"
+    }
+  ],
+  "generatedFeed__copyright": [
+    {
+      "type": 0,
+      "value": "该订阅内容版权属于AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "year"
+    },
+    {
+      "type": 0,
+      "value": "。各录音版权归属其各自所有者。"
+    }
+  ],
+  "header__navItemBlog": [
+    {
+      "type": 0,
+      "value": "博客"
+    }
+  ],
+  "header__navItemCollections": [
+    {
+      "type": 0,
+      "value": "合集"
+    }
+  ],
+  "header__navItemDiscover": [
+    {
+      "type": 0,
+      "value": "发现"
+    }
+  ],
+  "header__navItemLibrary": [
+    {
+      "type": 0,
+      "value": "收藏"
+    }
+  ],
+  "header__navItemMore": [
+    {
+      "type": 0,
+      "value": "更多"
+    }
+  ],
+  "header__navItemStory": [
+    {
+      "type": 0,
+      "value": "我们的故事"
+    }
+  ],
+  "header__navItemStory-donate": [
+    {
+      "type": 0,
+      "value": "捐赠"
+    }
+  ],
+  "header__navItemStory-purpose": [
+    {
+      "type": 0,
+      "value": "我们的宗旨"
+    }
+  ],
+  "header__navItemStory-spiritOfAudioVerse": [
+    {
+      "type": 0,
+      "value": "AudioVerse的精神"
+    }
+  ],
+  "header__navItemStory-team": [
+    {
+      "type": 0,
+      "value": "团队"
+    }
+  ],
+  "header__navItemStory-testimonials": [
+    {
+      "type": 0,
+      "value": "见证感言"
+    }
+  ],
+  "header__navItemUser": [
+    {
+      "type": 0,
+      "value": "用户设置"
+    }
+  ],
+  "header__naveItemBible": [
+    {
+      "type": 0,
+      "value": "圣经"
+    }
+  ],
+  "header__naveItemCollections-all": [
+    {
+      "type": 0,
+      "value": "所有合集"
+    }
+  ],
+  "header__naveItemCollections-book": [
+    {
+      "type": 0,
+      "value": "书"
+    }
+  ],
+  "header__naveItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "header__naveItemCollections-series": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "header__naveItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "经文歌曲"
+    }
+  ],
+  "header__naveItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "header__naveItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "header__naveItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "header__naveItemMore-legal": [
+    {
+      "type": 0,
+      "value": "法律相关"
+    }
+  ],
+  "header__naveItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "隐私"
+    }
+  ],
+  "header__naveItemMore-terms": [
+    {
+      "type": 0,
+      "value": "使用条款"
+    }
+  ],
+  "header__naveItemUser-logout": [
+    {
+      "type": 0,
+      "value": "登出"
+    }
+  ],
+  "header__naveItemUser-profile": [
+    {
+      "type": 0,
+      "value": "档案"
+    }
+  ],
+  "homePage__addToLibraryPlaceholder": [
+    {
+      "type": 0,
+      "value": "添加到收藏"
+    }
+  ],
+  "homePage__createAccountSectionCTA": [
+    {
+      "type": 0,
+      "value": "马上注册"
+    }
+  ],
+  "homePage__createAccountSectionText": [
+    {
+      "type": 0,
+      "value": "创建账户以充分使用AudioVerse。下载证道，保存系列证道到曲库，并订阅赞助者和讲员，以始终获得最新内容。"
+    }
+  ],
+  "homePage__createAccountSectionTitle": [
+    {
+      "type": 0,
+      "value": "创建账户"
+    }
+  ],
+  "homePage__downloadAppSectionText": [
+    {
+      "type": 0,
+      "value": "在智能手机上下载这款应用，就可以随处使用AudioVerse。在任何地方通过网络在线收听或收看证道，也可以预先下载证道，随时聆听，无需消耗流量。"
+    }
+  ],
+  "homePage__downloadAppSectionTitle": [
+    {
+      "type": 0,
+      "value": "下载应用"
+    }
+  ],
+  "homePage__downloadNowButtonLabel": [
+    {
+      "type": 0,
+      "value": "立即下载"
+    }
+  ],
+  "homePage__downloadQueuePlaceholder": [
+    {
+      "type": 0,
+      "value": "下载队列"
+    }
+  ],
+  "homePage__emailSignupButton": [
+    {
+      "type": 0,
+      "value": "订阅"
+    }
+  ],
+  "homePage__followFunctionalityPlaceholder": [
+    {
+      "type": 0,
+      "value": "Follow Functionality"
+    }
+  ],
+  "homePage__footerDonateLink": [
+    {
+      "type": 0,
+      "value": "捐赠"
+    }
+  ],
+  "homePage__footerDownloadAppButton": [
+    {
+      "type": 0,
+      "value": "下载应用"
+    }
+  ],
+  "homePage__footerFacebookLink": [
+    {
+      "type": 0,
+      "value": "脸书  Facebook"
+    }
+  ],
+  "homePage__footerInstagramLink": [
+    {
+      "type": 0,
+      "value": "照片墙  Instagram"
+    }
+  ],
+  "homePage__footerLinksTitle": [
+    {
+      "type": 0,
+      "value": "链接"
+    }
+  ],
+  "homePage__footerNewsletterSignup": [
+    {
+      "type": 0,
+      "value": "订阅新闻邮件"
+    }
+  ],
+  "homePage__footerSocialTitle": [
+    {
+      "type": 0,
+      "value": "社交媒体"
+    }
+  ],
+  "homePage__footerTwitterLink": [
+    {
+      "type": 0,
+      "value": "推特  Twitter"
+    }
+  ],
+  "homePage__joinAudioVerseButtonLabel": [
+    {
+      "type": 0,
+      "value": "加入AudioVerse"
+    }
+  ],
+  "homePage__newsletterSectionText": [
+    {
+      "type": 0,
+      "value": "想知道我们什么时候发布新专题、参加大会或发布新的AudioVerse周边？订阅我们的新闻邮件以获得最新消息。"
+    }
+  ],
+  "homePage__newsletterSectionTitle": [
+    {
+      "type": 0,
+      "value": "订阅更新"
+    }
+  ],
+  "homePage__recentContentSectionText": [
+    {
+      "type": 0,
+      "value": "探索我们的一些音频片段选集。准备好之后，"
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "创建账户"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": "来查看更多内容。"
+    }
+  ],
+  "homePage__recentContentSectionTitle": [
+    {
+      "type": 0,
+      "value": "最新内容"
+    }
+  ],
+  "homePage__recentPostsButtonLabel": [
+    {
+      "type": 0,
+      "value": "查看所有博客文章"
+    }
+  ],
+  "homePage__recentPostsSectionText": [
+    {
+      "type": 0,
+      "value": "浏览我们的博客，发现关于最新活动、讲道和大会的文章。至少每月半定期更新一次。"
+    }
+  ],
+  "homePage__recentPostsSectionTitle": [
+    {
+      "type": 0,
+      "value": "最新博客文章"
+    }
+  ],
+  "homePage__soundDoctrineText": [
+    {
+      "type": 0,
+      "value": "AudioVerse是一个策划发布复临信徒最佳音频内容的平台。通过歌曲、讲道、有声书和圣经阅读，接受挑战与启迪，增进你与耶稣的关系。"
+    }
+  ],
+  "homePage__soundDoctrineTitle": [
+    {
+      "type": 0,
+      "value": "纯正教义"
+    }
+  ],
+  "homePage__supportSectionCTA": [
+    {
+      "type": 0,
+      "value": "捐赠"
+    }
+  ],
+  "homePage__supportSectionImagePlaceholder": [
+    {
+      "type": 0,
+      "value": "图片"
+    }
+  ],
+  "homePage__supportSectionText": [
+    {
+      "type": 0,
+      "value": "AudioVerse是一个因为我们的支持者而存在的非营利宣教组织。创建、维护和改进一个技术平台需要大量资源，我们由衷感谢慷慨解囊的捐赠者。欢迎从现在开始捐助，即使每个月只捐出5美元，依然有助于我们继续提供纯正的教义。"
+    }
+  ],
+  "homePage__supportSectionTitle": [
+    {
+      "type": 0,
+      "value": "支持免费音频"
+    }
+  ],
+  "homePage__testimoniesSectionText": [
+    {
+      "type": 0,
+      "value": "听听一些AudioVerse使用者的看法。"
+    }
+  ],
+  "home__testimoniesTitle": [
+    {
+      "type": 0,
+      "value": "见证"
+    }
+  ],
+  "languageAlternativesAlert__dismiss": [
+    {
+      "type": 0,
+      "value": "消除"
+    }
+  ],
+  "languageAlternativesAlert__message": [
+    {
+      "type": 0,
+      "value": "感谢我们的支持者和国际合作伙伴，使得AudioVerse拥有多种语言的网站。在这里或菜单中可以更改适合您的语言。"
+    }
+  ],
+  "libraryCollections__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "合集"
+    }
+  ],
+  "libraryCollections__dismiss": [
+    {
+      "type": 0,
+      "value": "消除"
+    }
+  ],
+  "libraryCollections__emptyCopy": [
+    {
+      "type": 0,
+      "value": "给条目添加书签或从“发现”页面收听音频。"
+    }
+  ],
+  "libraryCollections__emptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未保存任何合集条目"
+    }
+  ],
+  "libraryCollections__personsHeading": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "libraryCollections__playlistsAlert": [
+    {
+      "type": 0,
+      "value": "现在我们正在重新构思播放清单的使用方式。您仍然可以使用移动应用管理您的播放清单。"
+    }
+  ],
+  "libraryCollections__playlistsHeading": [
+    {
+      "type": 0,
+      "value": "播放清单"
+    }
+  ],
+  "libraryCollections__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "libraryError__cta": [
+    {
+      "type": 0,
+      "value": "前往“发现”页面"
+    }
+  ],
+  "libraryHistory__emptyCopy": [
+    {
+      "type": 0,
+      "value": "在“发现”页面查找一些内容来收听。"
+    }
+  ],
+  "libraryHistory__emptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未收听过任何条目"
+    }
+  ],
+  "libraryHistory__loadMore": [
+    {
+      "type": 0,
+      "value": "加载更多"
+    }
+  ],
+  "libraryNav__all": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "libraryNav__collections": [
+    {
+      "type": 0,
+      "value": "合集"
+    }
+  ],
+  "libraryNav__filter": [
+    {
+      "type": 0,
+      "value": "筛选"
+    }
+  ],
+  "libraryNav__finished": [
+    {
+      "type": 0,
+      "value": "已完成"
+    }
+  ],
+  "libraryNav__history": [
+    {
+      "type": 0,
+      "value": "历史记录"
+    }
+  ],
+  "libraryNav__sortAtoZ": [
+    {
+      "type": 0,
+      "value": "首字母升序"
+    }
+  ],
+  "libraryNav__sortNewest": [
+    {
+      "type": 0,
+      "value": "时间降序"
+    }
+  ],
+  "libraryNav__sortOldest": [
+    {
+      "type": 0,
+      "value": "时间升序"
+    }
+  ],
+  "libraryNav__sortZtoA": [
+    {
+      "type": 0,
+      "value": "首字母降序"
+    }
+  ],
+  "libraryNav__started": [
+    {
+      "type": 0,
+      "value": "已开始的"
+    }
+  ],
+  "libraryNav__unstarted": [
+    {
+      "type": 0,
+      "value": "未开始的"
+    }
+  ],
+  "libraryPlaybackStatus__emptyCopy": [
+    {
+      "type": 0,
+      "value": "在“发现”页面查找一些内容来收听。"
+    }
+  ],
+  "libraryPlaybackStatus__finishedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未完成任何条目"
+    }
+  ],
+  "libraryPlaybackStatus__startedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未开始任何条目"
+    }
+  ],
+  "libraryPlaybackStatus__unstartedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未保存任何条目"
+    }
+  ],
+  "library__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "合集"
+    }
+  ],
+  "library__collectionsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有合集"
+    }
+  ],
+  "library__emptyCopy": [
+    {
+      "type": 0,
+      "value": "给条目添加书签或从“发现”页面收听条目。"
+    }
+  ],
+  "library__emptyHeading": [
+    {
+      "type": 0,
+      "value": "您尚未保存任何条目"
+    }
+  ],
+  "library__finishedHeading": [
+    {
+      "type": 0,
+      "value": "已完成"
+    }
+  ],
+  "library__finishedSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有已完成条目"
+    }
+  ],
+  "library__historyHeading": [
+    {
+      "type": 0,
+      "value": "历史记录"
+    }
+  ],
+  "library__historySeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有历史记录"
+    }
+  ],
+  "library__membersOnlyCopy": [
+    {
+      "type": 0,
+      "value": "登录或创建账户来使用收藏功能。"
+    }
+  ],
+  "library__membersOnlyCta": [
+    {
+      "type": 0,
+      "value": "创建账户或登录"
+    }
+  ],
+  "library__membersOnlyHeading": [
+    {
+      "type": 0,
+      "value": "会员专属功能"
+    }
+  ],
+  "library__startedHeading": [
+    {
+      "type": 0,
+      "value": "已开始的"
+    }
+  ],
+  "library__startedSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有已开始的内容"
+    }
+  ],
+  "library__unstartedHeading": [
+    {
+      "type": 0,
+      "value": "未开始的"
+    }
+  ],
+  "loadingCards-ariaLabel": [
+    {
+      "type": 0,
+      "value": "正在加载……"
+    }
+  ],
+  "loginForm-reset__doneButton": [
+    {
+      "type": 0,
+      "value": "已完成的"
+    }
+  ],
+  "loginForm-reset__emailLabel": [
+    {
+      "type": 0,
+      "value": "电邮地址"
+    }
+  ],
+  "loginForm-reset__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "电邮地址"
+    }
+  ],
+  "loginForm-reset__modalParagraph": [
+    {
+      "type": 0,
+      "value": "输入与您的账户关联的电邮地址，我们将给您发送一个密码重置链接。"
+    }
+  ],
+  "loginForm-reset__modalParagraphSent": [
+    {
+      "type": 0,
+      "value": "重置链接已发送。请查阅您的电邮，通过链接来重置您的密码。"
+    }
+  ],
+  "loginForm-reset__modalTitle": [
+    {
+      "type": 0,
+      "value": "重置密码"
+    }
+  ],
+  "loginForm-reset__sendLinkButton": [
+    {
+      "type": 0,
+      "value": "发送重置链接"
+    }
+  ],
+  "loginForm__emailLabel": [
+    {
+      "type": 0,
+      "value": "电邮"
+    }
+  ],
+  "loginForm__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "loginForm__forgotPasswordButton": [
+    {
+      "type": 0,
+      "value": "忘记密码了？"
+    }
+  ],
+  "loginForm__loginButton": [
+    {
+      "type": 0,
+      "value": "登录"
+    }
+  ],
+  "loginForm__passwordLabel": [
+    {
+      "type": 0,
+      "value": "密码"
+    }
+  ],
+  "loginForm__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "∗∗∗∗∗∗∗"
+    }
+  ],
+  "loginForm__resetPasswordErrorMessage": [
+    {
+      "type": 0,
+      "value": "发送密码重置链接时出错"
+    }
+  ],
+  "loginForm__resetPasswordSuccessMessage": [
+    {
+      "type": 0,
+      "value": "请查阅您的电邮以接收密码重置链接"
+    }
+  ],
+  "loginForm__signup": [
+    {
+      "type": 0,
+      "value": "注册"
+    }
+  ],
+  "loginForm__signupIntro": [
+    {
+      "type": 0,
+      "value": "没有账户吗？"
+    }
+  ],
+  "logout__inProcess": [
+    {
+      "type": 0,
+      "value": "登出中……"
+    }
+  ],
+  "molecule-buttonDownload__buttonLabel": [
+    {
+      "type": 0,
+      "value": "下载"
+    }
+  ],
+  "molecule-buttonDownload__menuAudioHeading": [
+    {
+      "type": 0,
+      "value": "音频下载"
+    }
+  ],
+  "molecule-buttonDownload__menuVideoHeading": [
+    {
+      "type": 0,
+      "value": "视频下载"
+    }
+  ],
+  "molecule-buttonGuest__feature1": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor"
+    }
+  ],
+  "molecule-buttonGuest__feature2": [
+    {
+      "type": 0,
+      "value": "Et exictur purim multatim"
+    }
+  ],
+  "molecule-buttonGuest__feature3": [
+    {
+      "type": 0,
+      "value": "Dulipscum erudis fesin"
+    }
+  ],
+  "molecule-buttonGuest__label": [
+    {
+      "type": 0,
+      "value": "以游客身份继续"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelCreateAccount": [
+    {
+      "type": 0,
+      "value": "创建账户"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelGuest": [
+    {
+      "type": 0,
+      "value": "以游客身份继续"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelLogIn": [
+    {
+      "type": 0,
+      "value": "登录"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph": [
+    {
+      "type": 0,
+      "value": "如果没有账户，您将错过一些重要功能，如："
+    }
+  ],
+  "molecule-buttonGuest__modalTitle": [
+    {
+      "type": 0,
+      "value": "以游客身份继续吗？"
+    }
+  ],
+  "molecule-buttonShareRecording__audioEmbedLabel": [
+    {
+      "type": 0,
+      "value": "音频嵌入代码"
+    }
+  ],
+  "molecule-buttonShareRecording__videoEmbedLabel": [
+    {
+      "type": 0,
+      "value": "视频嵌入代码"
+    }
+  ],
+  "molecule-buttonShare__buttonLabel": [
+    {
+      "type": 0,
+      "value": "分享"
+    }
+  ],
+  "molecule-buttonShare__copyLink": [
+    {
+      "type": 0,
+      "value": "复制链接"
+    }
+  ],
+  "molecule-buttonShare__copyRSSLink": [
+    {
+      "type": 0,
+      "value": "复制RSS链接"
+    }
+  ],
+  "molecule-buttonShare__email": [
+    {
+      "type": 0,
+      "value": "电邮"
+    }
+  ],
+  "molecule-buttonShare__facebook": [
+    {
+      "type": 0,
+      "value": "脸书  Facebook"
+    }
+  ],
+  "molecule-buttonShare__shareTitle": [
+    {
+      "type": 0,
+      "value": "分享"
+    }
+  ],
+  "molecule-buttonShare__twitter": [
+    {
+      "type": 0,
+      "value": "推特  Twitter"
+    }
+  ],
+  "molecule-buttonSpeed__buttonLabel": [
+    {
+      "type": 1,
+      "value": "speed"
+    },
+    {
+      "type": 0,
+      "value": "倍速"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addAlbum": [
+    {
+      "type": 0,
+      "value": "添加专辑"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addBook": [
+    {
+      "type": 0,
+      "value": "添加书籍"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addSeries": [
+    {
+      "type": 0,
+      "value": "添加系列"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
+    {
+      "type": 0,
+      "value": "添加专辑"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__inLibrary": [
+    {
+      "type": 0,
+      "value": "您收藏中的第"
+    },
+    {
+      "type": 1,
+      "value": "inLibraryCount"
+    },
+    {
+      "type": 0,
+      "value": "个条目，共"
+    },
+    {
+      "type": 1,
+      "value": "totalCount"
+    },
+    {
+      "type": 0,
+      "value": "个条目"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeAlbum": [
+    {
+      "type": 0,
+      "value": "删除专辑"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeBook": [
+    {
+      "type": 0,
+      "value": "删除书籍"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeSeries": [
+    {
+      "type": 0,
+      "value": "删除系列"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
+    {
+      "type": 0,
+      "value": "删除专辑"
+    }
+  ],
+  "molecule-searchBar__label": [
+    {
+      "type": 0,
+      "value": "搜索"
+    }
+  ],
+  "molecule-teaseRecording__lessPersons": [
+    {
+      "type": 0,
+      "value": "显示更少"
+    }
+  ],
+  "molecule-teaseRecording__morePersons": [
+    {
+      "type": 0,
+      "value": "多"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个"
+    }
+  ],
+  "molecule-teaseRecording__partInfo": [
+    {
+      "type": 0,
+      "value": "第"
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": "部分，共"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "部分"
+    }
+  ],
+  "molecule-transcript__disclaimer": [
+    {
+      "type": 0,
+      "value": "该文字本可能是自动生成。"
+    }
+  ],
+  "molecule-transcript__help": [
+    {
+      "type": 0,
+      "value": "我们的文字本自动生成需要您的帮助。请将您编辑后的文字本通过电邮发送给我们，以保障您及他人的权益。media@audioverse.org"
+    }
+  ],
+  "molecule-transcript__labelClose": [
+    {
+      "type": 0,
+      "value": "隐藏文字本"
+    }
+  ],
+  "molecule-transcript__labelOpen": [
+    {
+      "type": 0,
+      "value": "阅读文字本"
+    }
+  ],
+  "molecules-pagination__nextLabel": [
+    {
+      "type": 0,
+      "value": "下一项"
+    }
+  ],
+  "molecules-pagination__previousLabel": [
+    {
+      "type": 0,
+      "value": "上一项"
+    }
+  ],
+  "navigation__backToMenu": [
+    {
+      "type": 0,
+      "value": "返回菜单"
+    }
+  ],
+  "navigation__loginSignupCta": [
+    {
+      "type": 0,
+      "value": "登录/注册"
+    }
+  ],
+  "notFound__header": [
+    {
+      "type": 0,
+      "value": "抱歉！"
+    }
+  ],
+  "notFound__message": [
+    {
+      "type": 0,
+      "value": "链接可能损坏、不存在或输入错误。"
+    }
+  ],
+  "notFound__subheader": [
+    {
+      "type": 0,
+      "value": "我们找不到该页面"
+    }
+  ],
+  "notFound__suggestionsHeader": [
+    {
+      "type": 0,
+      "value": "听一下其它这些内容"
+    }
+  ],
+  "notFound__toDiscover": [
+    {
+      "type": 0,
+      "value": "返回“发现”页面"
+    }
+  ],
+  "organism-modal__close": [
+    {
+      "type": 0,
+      "value": "关闭"
+    }
+  ],
+  "organism-recording__albumListTitle": [
+    {
+      "type": 0,
+      "value": "专辑中的其它歌曲"
+    }
+  ],
+  "organism-recording__buttonLabelNext": [
+    {
+      "type": 0,
+      "value": "下一项"
+    }
+  ],
+  "organism-recording__buttonLabelPrevious": [
+    {
+      "type": 0,
+      "value": "上一项"
+    }
+  ],
+  "organism-recording__conferenceInfoTitle": [
+    {
+      "type": 0,
+      "value": "育儿会议"
+    }
+  ],
+  "organism-recording__metadataLabel": [
+    {
+      "type": 0,
+      "value": "元数据"
+    }
+  ],
+  "organism-recording__partInfo": [
+    {
+      "type": 0,
+      "value": "第 "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": "部分"
+    }
+  ],
+  "organism-recording__readByLabel": [
+    {
+      "type": 0,
+      "value": "由"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "朗读"
+    }
+  ],
+  "organism-recording__seriesInfoTitle": [
+    {
+      "type": 0,
+      "value": "育儿系列"
+    }
+  ],
+  "organism-recording__seriesListLabel": [
+    {
+      "type": 0,
+      "value": "系列清单"
+    }
+  ],
+  "organism-recording__seriesListTitle": [
+    {
+      "type": 0,
+      "value": "系列中的其它证道"
+    }
+  ],
+  "organism-recording__sponsorInfoTitle": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "personTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "playButton__pauseLabel": [
+    {
+      "type": 0,
+      "value": "暂停"
+    }
+  ],
+  "playButton__playLabel": [
+    {
+      "type": 0,
+      "value": "播放"
+    }
+  ],
+  "player__fullscreenButtonLabel": [
+    {
+      "type": 0,
+      "value": "全屏"
+    }
+  ],
+  "player__nudgeBack": [
+    {
+      "type": 0,
+      "value": "后退15秒"
+    }
+  ],
+  "player__nudgeForward": [
+    {
+      "type": 0,
+      "value": "快进15秒"
+    }
+  ],
+  "player__playerLabel": [
+    {
+      "type": 0,
+      "value": "播放器"
+    }
+  ],
+  "player__progressLabel": [
+    {
+      "type": 0,
+      "value": "进度"
+    }
+  ],
+  "playlistButton__createButton": [
+    {
+      "type": 0,
+      "value": "创建"
+    }
+  ],
+  "playlistButton__newPlaylistInputPlaceholder": [
+    {
+      "type": 0,
+      "value": "新播放清单"
+    }
+  ],
+  "playlistButton__publicToggle": [
+    {
+      "type": 0,
+      "value": "公共"
+    }
+  ],
+  "playlistButton__trigger": [
+    {
+      "type": 0,
+      "value": "加入播放清单"
+    }
+  ],
+  "playlistButton__unauthenticated": [
+    {
+      "type": 0,
+      "value": "您必须登录才能执行该操作"
+    }
+  ],
+  "playlistDetail__createdLabel": [
+    {
+      "type": 0,
+      "value": "已创建的"
+    }
+  ],
+  "playlistDetail__partsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "playlistDetail__summaryLabel": [
+    {
+      "type": 0,
+      "value": "摘要"
+    }
+  ],
+  "playlistDetail__type": [
+    {
+      "type": 0,
+      "value": "播放清单"
+    }
+  ],
+  "preferences__buttonLabelSaveChanges": [
+    {
+      "type": 0,
+      "value": "保存更改"
+    }
+  ],
+  "preferences__downloadSettings": [
+    {
+      "type": 0,
+      "value": "下载设置"
+    }
+  ],
+  "preferences__downloadSettingsIntro": [
+    {
+      "type": 0,
+      "value": "选择您想下载音频的方式。"
+    }
+  ],
+  "preferences__heading": [
+    {
+      "type": 0,
+      "value": "账户设置"
+    }
+  ],
+  "preferences__inputAutoplay": [
+    {
+      "type": 0,
+      "value": "自动播放录音"
+    }
+  ],
+  "preferences__language": [
+    {
+      "type": 0,
+      "value": "语言"
+    }
+  ],
+  "preferences__playbackSettings": [
+    {
+      "type": 0,
+      "value": "重放设置"
+    }
+  ],
+  "preferences__playbackSettingsIntro": [
+    {
+      "type": 0,
+      "value": "选择是否默认自动播放录音。"
+    }
+  ],
+  "preferences__preferredAudioQuality": [
+    {
+      "type": 0,
+      "value": "首选音频质量"
+    }
+  ],
+  "preferences__preferredAudioQuality-high": [
+    {
+      "type": 0,
+      "value": "高"
+    }
+  ],
+  "preferences__preferredAudioQuality-low": [
+    {
+      "type": 0,
+      "value": "低"
+    }
+  ],
+  "preferences__preferredAudioQuality-medium": [
+    {
+      "type": 0,
+      "value": "中"
+    }
+  ],
+  "preferences__subheading": [
+    {
+      "type": 0,
+      "value": "偏好"
+    }
+  ],
+  "preferences__timezone": [
+    {
+      "type": 0,
+      "value": "时区"
+    }
+  ],
+  "presenterAppearsDetail__heading": [
+    {
+      "type": 0,
+      "value": "全部也出现在"
+    }
+  ],
+  "presenterDetail__alsoAppearsInLabel": [
+    {
+      "type": 0,
+      "value": "也出现在"
+    }
+  ],
+  "presenterDetail__audiobookTracksCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 部有声书"
+    }
+  ],
+  "presenterDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "presenterDetail__essentialRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "非常重要的"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presenterDetail__musicTracksCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 首音乐"
+    }
+  ],
+  "presenterDetail__recentAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有最新内容"
+    }
+  ],
+  "presenterDetail__recentRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "最新内容"
+    }
+  ],
+  "presenterDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有系列"
+    }
+  ],
+  "presenterDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "presenterDetail__speakersAllLabel": [
+    {
+      "type": 0,
+      "value": "查看全部也出现在"
+    }
+  ],
+  "presenterDetail__storiesCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个故事"
+    }
+  ],
+  "presenterDetail__teachingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "presenterDetail__topAllLabel": [
+    {
+      "type": 0,
+      "value": "查看更多被人收听最多的内容"
+    }
+  ],
+  "presenterDetail__topRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "被人收听最多的内容"
+    }
+  ],
+  "presenterDetail__websiteLabel": [
+    {
+      "type": 0,
+      "value": "网站"
+    }
+  ],
+  "presenterRecordingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有录音"
+    }
+  ],
+  "presenterSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有系列"
+    }
+  ],
+  "presenterTopDetail__heading": [
+    {
+      "type": 0,
+      "value": "被人收听最多的内容"
+    }
+  ],
+  "presentersFeed__description": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "的最新AudioVerse证道"
+    }
+  ],
+  "presentersFeed__title": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "的证道"
+    }
+  ],
+  "presentersList__title": [
+    {
+      "type": 0,
+      "value": "所有讲员"
+    }
+  ],
+  "profile__buttonLabelDeleteAccount": [
+    {
+      "type": 0,
+      "value": "删除账户"
+    }
+  ],
+  "profile__buttonLabelSaveChanges": [
+    {
+      "type": 0,
+      "value": "保存更改"
+    }
+  ],
+  "profile__heading": [
+    {
+      "type": 0,
+      "value": "账户设置"
+    }
+  ],
+  "profile__inputLabelForEmail": [
+    {
+      "type": 0,
+      "value": "电邮"
+    }
+  ],
+  "profile__inputLabelForFirstName": [
+    {
+      "type": 0,
+      "value": "名字"
+    }
+  ],
+  "profile__inputLabelForLastName": [
+    {
+      "type": 0,
+      "value": "姓氏"
+    }
+  ],
+  "profile__inputLabelForPassword": [
+    {
+      "type": 0,
+      "value": "密码"
+    }
+  ],
+  "profile__intro": [
+    {
+      "type": 0,
+      "value": "添加您的账户信息，以定制您的体验并管理您的登录信息。"
+    }
+  ],
+  "profile__subheading": [
+    {
+      "type": 0,
+      "value": "档案"
+    }
+  ],
+  "register__emailLabel": [
+    {
+      "type": 0,
+      "value": "电邮"
+    }
+  ],
+  "register__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "register__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "名字"
+    }
+  ],
+  "register__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "register__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "姓氏"
+    }
+  ],
+  "register__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "register__loadingMessage": [
+    {
+      "type": 0,
+      "value": "正在加载……"
+    }
+  ],
+  "register__login": [
+    {
+      "type": 0,
+      "value": "登录"
+    }
+  ],
+  "register__loginIntro": [
+    {
+      "type": 0,
+      "value": "已经有账户了？"
+    }
+  ],
+  "register__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "订阅新闻邮件"
+    }
+  ],
+  "register__passwordLabel": [
+    {
+      "type": 0,
+      "value": "密码"
+    }
+  ],
+  "register__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "∗∗∗∗∗∗∗"
+    }
+  ],
+  "register__submitButton": [
+    {
+      "type": 0,
+      "value": "注册"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "成功"
+    }
+  ],
+  "reset__confirmPasswordLabel": [
+    {
+      "type": 0,
+      "value": "确认新密码"
+    }
+  ],
+  "reset__confirmPasswordPlaceholder": [
+    {
+      "type": 0,
+      "value": "确认新密码"
+    }
+  ],
+  "reset__errorGeneral": [
+    {
+      "type": 0,
+      "value": "密码重置时出错"
+    }
+  ],
+  "reset__errorMismatch": [
+    {
+      "type": 0,
+      "value": "密码必须匹配"
+    }
+  ],
+  "reset__errorRepeatPassword": [
+    {
+      "type": 0,
+      "value": "请输入两次密码"
+    }
+  ],
+  "reset__intro": [
+    {
+      "type": 0,
+      "value": "为"
+    },
+    {
+      "type": 1,
+      "value": "email"
+    },
+    {
+      "type": 0,
+      "value": "创建一个新密码。"
+    }
+  ],
+  "reset__passwordLabel": [
+    {
+      "type": 0,
+      "value": "新密码"
+    }
+  ],
+  "reset__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "新密码"
+    }
+  ],
+  "reset__submitButton": [
+    {
+      "type": 0,
+      "value": "登录"
+    }
+  ],
+  "reset__successMessage": [
+    {
+      "type": 0,
+      "value": "密码修改成功"
+    }
+  ],
+  "rssAlternate__title": [
+    {
+      "type": 0,
+      "value": "RSS订阅"
+    }
+  ],
+  "searchCollections__heading": [
+    {
+      "type": 0,
+      "value": "所有匹配的合集"
+    }
+  ],
+  "searchPersons__heading": [
+    {
+      "type": 0,
+      "value": "所有匹配的人员"
+    }
+  ],
+  "searchSequences__heading": [
+    {
+      "type": 0,
+      "value": "所有匹配的序列"
+    }
+  ],
+  "searchSponsors__heading": [
+    {
+      "type": 0,
+      "value": "所有匹配的赞助者"
+    }
+  ],
+  "searchTeachings__heading": [
+    {
+      "type": 0,
+      "value": "所有匹配的证道"
+    }
+  ],
+  "search__conferencesHeading": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "search__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有大会"
+    }
+  ],
+  "search__personsHeading": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
+  "search__personsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有讲员"
+    }
+  ],
+  "search__resultsCount": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 条结果"
+    }
+  ],
+  "search__sequencesHeading": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "search__sequencesSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有系列"
+    }
+  ],
+  "search__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "search__sponsorsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有赞助者"
+    }
+  ],
+  "search__teachingsHeading": [
+    {
+      "type": 0,
+      "value": "证道"
+    }
+  ],
+  "search__teachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有证道"
+    }
+  ],
+  "sequenceType__audiobookTitle": [
+    {
+      "type": 0,
+      "value": "书"
+    }
+  ],
+  "sequenceType__musicTrackTitle": [
+    {
+      "type": 0,
+      "value": "经文歌曲"
+    }
+  ],
+  "sequenceType__seriesTitle": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "sequenceType__storyTitle": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "seriesDetail__conferenceLabel": [
+    {
+      "type": 0,
+      "value": "育儿会议"
+    }
+  ],
+  "seriesDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "seriesDetail__partsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " 部分"
+    }
+  ],
+  "seriesDetail__recordedLabel": [
+    {
+      "type": 0,
+      "value": "已录制"
+    }
+  ],
+  "seriesDetail__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "seriesDetail__type": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "seriesList__heading": [
+    {
+      "type": 0,
+      "value": "所有系列"
+    }
+  ],
+  "sermonDetailPage__attachments": [
+    {
+      "type": 0,
+      "value": "附件"
+    }
+  ],
+  "sermonDetailPage__copyright": [
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "year"
+    },
+    {
+      "type": 0,
+      "value": "年"
+    },
+    {
+      "type": 1,
+      "value": "owner"
+    },
+    {
+      "type": 0,
+      "value": "版权所有ⓒ"
+    }
+  ],
+  "sermonDetailPage__descriptionTitle": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "sermonDetailPage__disclaimer": [
+    {
+      "type": 0,
+      "value": "该录音中的看法源自投稿者，并不一定与AudioVerse的观点相符。"
+    }
+  ],
+  "sermonDetailPage__recordedTitle": [
+    {
+      "type": 0,
+      "value": "已录制"
+    }
+  ],
+  "sermonList__heading": [
+    {
+      "type": 0,
+      "value": "所有证道"
+    }
+  ],
+  "sermonsList__filter": [
+    {
+      "type": 0,
+      "value": "筛选"
+    }
+  ],
+  "socialLogin__loginFacebookButton": [
+    {
+      "type": 0,
+      "value": "用脸书（Facebook）账户登录"
+    }
+  ],
+  "socialLogin__loginGoogleButton": [
+    {
+      "type": 0,
+      "value": "用谷歌（Google）账户登录"
+    }
+  ],
+  "socialLogin__registerFacebookButton": [
+    {
+      "type": 0,
+      "value": "用脸书（Facebook）账户注册"
+    }
+  ],
+  "socialLogin__registerGoogleButton": [
+    {
+      "type": 0,
+      "value": "用谷歌（Google）账户注册"
+    }
+  ],
+  "socialLogin__successMessage": [
+    {
+      "type": 0,
+      "value": "成功"
+    }
+  ],
+  "songsListPage__1ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "历代志上"
+    }
+  ],
+  "songsListPage__1CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "哥林多前书"
+    }
+  ],
+  "songsListPage__1JohnLabel": [
+    {
+      "type": 0,
+      "value": "约翰一书"
+    }
+  ],
+  "songsListPage__1KingsLabel": [
+    {
+      "type": 0,
+      "value": "列王纪上"
+    }
+  ],
+  "songsListPage__1PeterLabel": [
+    {
+      "type": 0,
+      "value": "彼得前书"
+    }
+  ],
+  "songsListPage__1SamuelLabel": [
+    {
+      "type": 0,
+      "value": "撒母耳记上"
+    }
+  ],
+  "songsListPage__1ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "帖撒罗尼迦前书"
+    }
+  ],
+  "songsListPage__1TimothyLabel": [
+    {
+      "type": 0,
+      "value": "提摩太前书"
+    }
+  ],
+  "songsListPage__2ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "历代志下"
+    }
+  ],
+  "songsListPage__2CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "哥林多后书"
+    }
+  ],
+  "songsListPage__2JohnLabel": [
+    {
+      "type": 0,
+      "value": "约翰二书"
+    }
+  ],
+  "songsListPage__2KingsLabel": [
+    {
+      "type": 0,
+      "value": "列王纪下"
+    }
+  ],
+  "songsListPage__2PeterLabel": [
+    {
+      "type": 0,
+      "value": "彼得后书"
+    }
+  ],
+  "songsListPage__2SamuelLabel": [
+    {
+      "type": 0,
+      "value": "撒母耳记下"
+    }
+  ],
+  "songsListPage__2ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "帖撒罗尼迦后书"
+    }
+  ],
+  "songsListPage__2TimothyLabel": [
+    {
+      "type": 0,
+      "value": "提摩太后书"
+    }
+  ],
+  "songsListPage__3JohnLabel": [
+    {
+      "type": 0,
+      "value": "约翰三书"
+    }
+  ],
+  "songsListPage__ActsLabel": [
+    {
+      "type": 0,
+      "value": "使徒行传"
+    }
+  ],
+  "songsListPage__AmosLabel": [
+    {
+      "type": 0,
+      "value": "阿摩司书"
+    }
+  ],
+  "songsListPage__ColossiansLabel": [
+    {
+      "type": 0,
+      "value": "歌罗西书"
+    }
+  ],
+  "songsListPage__DanielLabel": [
+    {
+      "type": 0,
+      "value": "但以理书"
+    }
+  ],
+  "songsListPage__DeuteronomyLabel": [
+    {
+      "type": 0,
+      "value": "申命记"
+    }
+  ],
+  "songsListPage__EcclesiastesLabel": [
+    {
+      "type": 0,
+      "value": "传道书"
+    }
+  ],
+  "songsListPage__EphesiansLabel": [
+    {
+      "type": 0,
+      "value": "以弗所书"
+    }
+  ],
+  "songsListPage__EstherLabel": [
+    {
+      "type": 0,
+      "value": "以斯帖记"
+    }
+  ],
+  "songsListPage__ExodusLabel": [
+    {
+      "type": 0,
+      "value": "出埃及记"
+    }
+  ],
+  "songsListPage__EzekielLabel": [
+    {
+      "type": 0,
+      "value": "以西结书"
+    }
+  ],
+  "songsListPage__EzraLabel": [
+    {
+      "type": 0,
+      "value": "以斯拉记"
+    }
+  ],
+  "songsListPage__GalatiansLabel": [
+    {
+      "type": 0,
+      "value": "迦拉太书"
+    }
+  ],
+  "songsListPage__GenesisLabel": [
+    {
+      "type": 0,
+      "value": "创世纪"
+    }
+  ],
+  "songsListPage__HabakkukLabel": [
+    {
+      "type": 0,
+      "value": "哈巴谷书"
+    }
+  ],
+  "songsListPage__HaggaiLabel": [
+    {
+      "type": 0,
+      "value": "哈该书"
+    }
+  ],
+  "songsListPage__HebrewsLabel": [
+    {
+      "type": 0,
+      "value": "希伯来书"
+    }
+  ],
+  "songsListPage__HoseaLabel": [
+    {
+      "type": 0,
+      "value": "何西阿书"
+    }
+  ],
+  "songsListPage__IsaiahLabel": [
+    {
+      "type": 0,
+      "value": "以赛亚书"
+    }
+  ],
+  "songsListPage__JamesLabel": [
+    {
+      "type": 0,
+      "value": "雅各书"
+    }
+  ],
+  "songsListPage__JeremiahLabel": [
+    {
+      "type": 0,
+      "value": "耶利米书"
+    }
+  ],
+  "songsListPage__JobLabel": [
+    {
+      "type": 0,
+      "value": "约伯记"
+    }
+  ],
+  "songsListPage__JoelLabel": [
+    {
+      "type": 0,
+      "value": "约珥书"
+    }
+  ],
+  "songsListPage__JohnLabel": [
+    {
+      "type": 0,
+      "value": "约翰福音"
+    }
+  ],
+  "songsListPage__JonahLabel": [
+    {
+      "type": 0,
+      "value": "约拿书"
+    }
+  ],
+  "songsListPage__JoshuaLabel": [
+    {
+      "type": 0,
+      "value": "约书亚记"
+    }
+  ],
+  "songsListPage__JudeLabel": [
+    {
+      "type": 0,
+      "value": "犹大书"
+    }
+  ],
+  "songsListPage__JudgesLabel": [
+    {
+      "type": 0,
+      "value": "士师记"
+    }
+  ],
+  "songsListPage__LamentationsLabel": [
+    {
+      "type": 0,
+      "value": "耶利米哀歌"
+    }
+  ],
+  "songsListPage__LeviticusLabel": [
+    {
+      "type": 0,
+      "value": "利未记"
+    }
+  ],
+  "songsListPage__LukeLabel": [
+    {
+      "type": 0,
+      "value": "路加福音"
+    }
+  ],
+  "songsListPage__MalachiLabel": [
+    {
+      "type": 0,
+      "value": "玛拉基书"
+    }
+  ],
+  "songsListPage__MarkLabel": [
+    {
+      "type": 0,
+      "value": "马可福音"
+    }
+  ],
+  "songsListPage__MatthewLabel": [
+    {
+      "type": 0,
+      "value": "马太福音"
+    }
+  ],
+  "songsListPage__MicahLabel": [
+    {
+      "type": 0,
+      "value": "弥迦书"
+    }
+  ],
+  "songsListPage__NahumLabel": [
+    {
+      "type": 0,
+      "value": "那鸿书"
+    }
+  ],
+  "songsListPage__NehemiahLabel": [
+    {
+      "type": 0,
+      "value": "尼希米记"
+    }
+  ],
+  "songsListPage__NumbersLabel": [
+    {
+      "type": 0,
+      "value": "民数记"
+    }
+  ],
+  "songsListPage__ObadiahLabel": [
+    {
+      "type": 0,
+      "value": "俄巴底亚书"
+    }
+  ],
+  "songsListPage__PhilemonLabel": [
+    {
+      "type": 0,
+      "value": "腓利门书"
+    }
+  ],
+  "songsListPage__PhilippiansLabel": [
+    {
+      "type": 0,
+      "value": "腓立比书"
+    }
+  ],
+  "songsListPage__ProverbsLabel": [
+    {
+      "type": 0,
+      "value": "箴言"
+    }
+  ],
+  "songsListPage__PsalmsLabel": [
+    {
+      "type": 0,
+      "value": "诗篇"
+    }
+  ],
+  "songsListPage__RevelationLabel": [
+    {
+      "type": 0,
+      "value": "启示录"
+    }
+  ],
+  "songsListPage__RomansLabel": [
+    {
+      "type": 0,
+      "value": "罗马书"
+    }
+  ],
+  "songsListPage__RuthLabel": [
+    {
+      "type": 0,
+      "value": "路得记"
+    }
+  ],
+  "songsListPage__Song of SolomonLabel": [
+    {
+      "type": 0,
+      "value": "雅歌"
+    }
+  ],
+  "songsListPage__TitusLabel": [
+    {
+      "type": 0,
+      "value": "提多书"
+    }
+  ],
+  "songsListPage__ZechariahLabel": [
+    {
+      "type": 0,
+      "value": "撒迦利亚书"
+    }
+  ],
+  "songsListPage__ZephaniahLabel": [
+    {
+      "type": 0,
+      "value": "西番雅书"
+    }
+  ],
+  "songsListPage__albumTabLabel": [
+    {
+      "type": 0,
+      "value": "专辑"
+    }
+  ],
+  "songsListPage__bookTabLabel": [
+    {
+      "type": 0,
+      "value": "书"
+    }
+  ],
+  "songsListPage__sponsorTabLabel": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "songsListPage__tagTabLabel": [
+    {
+      "type": 0,
+      "value": "标签"
+    }
+  ],
+  "sopnsorTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "sponsorConferencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有大会"
+    }
+  ],
+  "sponsorDetail__collectionCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "场大会"
+    }
+  ],
+  "sponsorDetail__conferencesAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有大会"
+    }
+  ],
+  "sponsorDetail__conferencesLabel": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "sponsorDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "描述"
+    }
+  ],
+  "sponsorDetail__locationLabel": [
+    {
+      "type": 0,
+      "value": "位置"
+    }
+  ],
+  "sponsorDetail__recentAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有最新证道"
+    }
+  ],
+  "sponsorDetail__recentLabel": [
+    {
+      "type": 0,
+      "value": "最新证道"
+    }
+  ],
+  "sponsorDetail__recordingsCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "篇证道"
+    }
+  ],
+  "sponsorDetail__sequencesCountLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "个系列"
+    }
+  ],
+  "sponsorDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有系列"
+    }
+  ],
+  "sponsorDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "sponsorDetail__websiteLabel": [
+    {
+      "type": 0,
+      "value": "网站"
+    }
+  ],
+  "sponsorSeriesDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有系列"
+    }
+  ],
+  "sponsorTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "所有证道"
+    }
+  ],
+  "sponsorTeachingsFeed__description": [
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": "在AudioVerse上的最新录音"
+    }
+  ],
+  "sponsorTeachingsFeed__title": [
+    {
+      "type": 1,
+      "value": "name"
+    },
+    {
+      "type": 0,
+      "value": "的证道"
+    }
+  ],
+  "sponsorsList__title": [
+    {
+      "type": 0,
+      "value": "所有赞助者"
+    }
+  ],
+  "storyAlbumList__heading": [
+    {
+      "type": 0,
+      "value": "所有故事"
+    }
+  ],
+  "storyAlbumsFeed__description": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": "，作者"
+    },
+    {
+      "type": 1,
+      "value": "authors"
+    },
+    {
+      "type": 0,
+      "value": "，叙述者"
+    },
+    {
+      "type": 1,
+      "value": "narrators"
+    }
+  ],
+  "teachingsFeed__description": [
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "language"
+    },
+    {
+      "type": 0,
+      "value": "的证道"
+    }
+  ],
+  "teachingsFeed__title": [
+    {
+      "type": 0,
+      "value": "AudioVerse证道（"
+    },
+    {
+      "type": 1,
+      "value": "language"
+    },
+    {
+      "type": 0,
+      "value": "）"
+    }
+  ],
+  "testimonies__heading": [
+    {
+      "type": 0,
+      "value": "见证感言"
+    }
+  ],
+  "testimonies__intro": [
+    {
+      "type": 0,
+      "value": "您有很棒的见证吗？告诉我们您的故事！"
+    }
+  ],
+  "testimonies__shareYourStory": [
+    {
+      "type": 0,
+      "value": "分享您的故事"
+    }
+  ],
+  "time__minutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": "分"
+    },
+    {
+      "type": 1,
+      "value": "s"
+    },
+    {
+      "type": 0,
+      "value": "秒"
+    }
+  ],
+  "trendingTeachings__heading": [
+    {
+      "type": 0,
+      "value": "热门证道"
+    }
+  ],
+  "unstartedSeeAll": [
+    {
+      "type": 0,
+      "value": "查看所有未开始的内容"
+    }
+  ]
 }
