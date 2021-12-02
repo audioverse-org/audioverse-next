@@ -42,9 +42,7 @@ function Base<P>({
 		pageProps;
 
 	useEffect(() => {
-		document.body.classList[disableSidebar ? 'add' : 'remove'](
-			'body--no-sidebar'
-		);
+		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
 	return (
 		<>

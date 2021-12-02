@@ -1,15 +1,15 @@
 @import '../../styles/common';
 
 .base {
-	// redefine these by content type in the future
+	// FUTURE: redefine these by content type
 	--recordingAccent: #{$ts-red};
-	border: 1px solid $ts-cream;
 	--recordingBackground: #{$ts-white};
 	--recordingHatBackground: #{$ts-cream};
 	--recordingHatHover: #{$ts-darkened-cream};
 	--recordingTextColor: #{$ts-dark};
 	--recordingTextSecondaryColor: #{$ts-midTone};
 	--recordingWavesColor: #{$ts-lightTone};
+	border: 1px solid $ts-cream;
 
 	min-height: 100vh;
 	border-radius: 16px;
