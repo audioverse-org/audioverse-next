@@ -65,6 +65,8 @@ export default function Home({ data }: HomeProps): JSX.Element {
 
 	const features = getAppFeatures(languageRoute);
 
+	const isEnglish = languageRoute === 'en';
+
 	return (
 		<div className={styles.wrapper}>
 			<Section
@@ -206,22 +208,24 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					))}
 				</Slider>
 			</div>
-			<Section
-				text={
-					<>
-						<Heading1 className={styles.testimoniesHeading}>
-							<FormattedMessage
-								id="home__testimoniesTitle"
-								defaultMessage="Testimonies"
-								description="Testimonies slider title"
-							/>
-						</Heading1>
-						<Testimonies testimonies={testimonies} />
-					</>
-				}
-				center
-				reverse
-			/>
+			{!!testimonies.length && (
+				<Section
+					text={
+						<>
+							<Heading1 className={styles.testimoniesHeading}>
+								<FormattedMessage
+									id="home__testimoniesTitle"
+									defaultMessage="Testimonies"
+									description="Testimonies slider title"
+								/>
+							</Heading1>
+							<Testimonies testimonies={testimonies} />
+						</>
+					}
+					center
+					reverse
+				/>
+			)}
 			<Section
 				text={
 					<>
@@ -252,99 +256,101 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				theme={BaseColors.CREAM}
 				reverse
 			/>
-			<Section
-				theme={BaseColors.DARK}
-				reverse
-				bleed
-				short
-				text={
-					<>
-						<Heading1 className={styles.newsletterPromoTitle}>
-							<FormattedMessage
-								id="homePage__newsletterSectionTitle"
-								defaultMessage="Subscribe to Updates"
-								description="home page newsletter section title"
-							/>
-						</Heading1>
-						<p className={styles.newsletterPromoKicker}>
-							<FormattedMessage
-								id="homePage__newsletterSectionText"
-								defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
-								description="home page newsletter section text"
-							/>
-						</p>
-					</>
-				}
-				media={
-					<div className={styles.newsletterWrapper}>
-						<div className={styles.newsletterBox}>
-							<div className={styles.newsletterHat}>
-								<IconBell />
+			{isEnglish && (
+				<Section
+					theme={BaseColors.DARK}
+					reverse
+					bleed
+					short
+					text={
+						<>
+							<Heading1 className={styles.newsletterPromoTitle}>
 								<FormattedMessage
-									id="homePage__newsletterHatTitle"
-									defaultMessage="Sign up for our Newsletter"
+									id="homePage__newsletterSectionTitle"
+									defaultMessage="Subscribe to Updates"
+									description="home page newsletter section title"
 								/>
-							</div>
-							<form
-								className={styles.newsletterBody}
-								action="https://audioverse.z2systems.com/np/clients/audioverse/submitSubscription.jsp"
-								method="POST"
-								target="_blank"
-							>
-								<input type="hidden" name="subscription" value="5" />
-								<input
-									type="hidden"
-									name="skipDuplicateRequestCheck"
-									value="1"
+							</Heading1>
+							<p className={styles.newsletterPromoKicker}>
+								<FormattedMessage
+									id="homePage__newsletterSectionText"
+									defaultMessage="Want to hear when we’re releasing new features, going to conferences, or releasing new AudioVerse Swag? Subscribe to our newsletter to get updates."
+									description="home page newsletter section text"
 								/>
-								<div className={styles.newsletterFieldRow}>
-									<Input
-										name="subscriber.name"
-										type="text"
-										label={
-											<FormattedMessage
-												id="homePage__newsletterName"
-												defaultMessage="Name"
-											/>
-										}
-										placeholder={intl.formatMessage({
-											id: 'homePage__newsletterNamePlaceholder',
-											defaultMessage: 'Joseph Bates',
-										})}
-										value={name}
-										setValue={setName}
-									/>
-									<Input
-										name="subscriber.email1"
-										type="text"
-										label={
-											<FormattedMessage
-												id="homePage__newsletterEmail"
-												defaultMessage="Email Address"
-											/>
-										}
-										placeholder={intl.formatMessage({
-											id: 'homePage__newsletterEmailPlaceholder',
-											defaultMessage: 'josephbates@email.com',
-										})}
-										value={email}
-										setValue={setEmail}
+							</p>
+						</>
+					}
+					media={
+						<div className={styles.newsletterWrapper}>
+							<div className={styles.newsletterBox}>
+								<div className={styles.newsletterHat}>
+									<IconBell />
+									<FormattedMessage
+										id="homePage__newsletterHatTitle"
+										defaultMessage="Sign up for our Newsletter"
 									/>
 								</div>
-								<Button
-									type="secondary"
-									text={
-										<FormattedMessage
-											id="homePage__newsletterSubscribe"
-											defaultMessage="Subscribe"
+								<form
+									className={styles.newsletterBody}
+									action="https://audioverse.z2systems.com/np/clients/audioverse/submitSubscription.jsp"
+									method="POST"
+									target="_blank"
+								>
+									<input type="hidden" name="subscription" value="5" />
+									<input
+										type="hidden"
+										name="skipDuplicateRequestCheck"
+										value="1"
+									/>
+									<div className={styles.newsletterFieldRow}>
+										<Input
+											name="subscriber.name"
+											type="text"
+											label={
+												<FormattedMessage
+													id="homePage__newsletterName"
+													defaultMessage="Name"
+												/>
+											}
+											placeholder={intl.formatMessage({
+												id: 'homePage__newsletterNamePlaceholder',
+												defaultMessage: 'Joseph Bates',
+											})}
+											value={name}
+											setValue={setName}
 										/>
-									}
-								/>
-							</form>
+										<Input
+											name="subscriber.email1"
+											type="text"
+											label={
+												<FormattedMessage
+													id="homePage__newsletterEmail"
+													defaultMessage="Email Address"
+												/>
+											}
+											placeholder={intl.formatMessage({
+												id: 'homePage__newsletterEmailPlaceholder',
+												defaultMessage: 'josephbates@email.com',
+											})}
+											value={email}
+											setValue={setEmail}
+										/>
+									</div>
+									<Button
+										type="secondary"
+										text={
+											<FormattedMessage
+												id="homePage__newsletterSubscribe"
+												defaultMessage="Subscribe"
+											/>
+										}
+									/>
+								</form>
+							</div>
 						</div>
-					</div>
-				}
-			/>
+					}
+				/>
+			)}
 			<Section
 				text={
 					<>
