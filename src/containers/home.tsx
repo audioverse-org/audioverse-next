@@ -128,7 +128,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									a: function a(chunks: string) {
 										return (
 											<Link href={makeRegisterRoute(languageRoute)}>
-												<a>{chunks}</a>
+												<a className="decorated">{chunks}</a>
 											</Link>
 										);
 									},
