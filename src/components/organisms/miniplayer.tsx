@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
-import { PlaybackContext } from '@components/templates/andMiniplayer';
+import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { BaseColors } from '@lib/constants';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';

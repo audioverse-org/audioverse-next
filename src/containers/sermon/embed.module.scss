@@ -1,0 +1,92 @@
+@import '../../styles/common';
+
+.base {
+	// redefine these by content type in the future
+	--recordingAccent: #{$ts-red};
+	border: 1px solid $ts-cream;
+	--recordingBackground: #{$ts-white};
+	--recordingHatBackground: #{$ts-cream};
+	--recordingHatHover: #{$ts-darkened-cream};
+	--recordingTextColor: #{$ts-dark};
+	--recordingTextSecondaryColor: #{$ts-midTone};
+	--recordingWavesColor: #{$ts-lightTone};
+
+	min-height: 100vh;
+	border-radius: 16px;
+	overflow: hidden;
+
+	background: var(--recordingBackground);
+	color: var(--recordingTextColor);
+}
+
+.hat {
+	display: block;
+	padding: 16px;
+	background-color: var(--recordingHatBackground);
+	text-decoration: none;
+	> span {
+		display: inline-block;
+		margin-left: 4px;
+	}
+	&,
+	&:hover {
+		color: var(--recordingTextColor);
+	}
+	&:hover {
+		text-decoration: none;
+		background: var(--recordingHatHover);
+	}
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	padding: 16px 16px 8px;
+}
+
+.part {
+	margin-bottom: 4px;
+	color: var(--recordingAccent);
+	font-weight: 600;
+}
+
+.title {
+	width: 416px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.titleLink {
+	&,
+	&:hover {
+		text-decoration: none;
+		color: $ts-dark;
+	}
+}
+
+.titleRow {
+	display: flex;
+	align-items: center;
+	> *:first-child {
+		flex-grow: 1;
+	}
+}
+
+.speakers {
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	li {
+		display: block;
+		margin-right: 8px;
+		margin-bottom: 8px;
+		@media (min-width: $breakpoint-md) {
+			display: inline-block;
+		}
+		@media (min-width: $breakpoint-lg) {
+			margin-right: 16px;
+			margin-bottom: 16px;
+		}
+	}
+}

@@ -57,7 +57,7 @@ export default function TeaseRecording({
 		disableUserFeatures
 	);
 	const router = useRouter();
-	const session = usePlaybackSession(recording, playlistRecordings);
+	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 

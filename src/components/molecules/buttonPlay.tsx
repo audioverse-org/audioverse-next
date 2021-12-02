@@ -30,6 +30,7 @@ export default function ButtonPlay({
 	backgroundColor,
 	large,
 	active,
+	prefersAudio,
 	className,
 }: {
 	recording: AndMiniplayerFragment;
@@ -37,12 +38,13 @@ export default function ButtonPlay({
 	playlistRecordings?: AndMiniplayerFragment[];
 	large?: boolean;
 	active?: boolean;
+	prefersAudio?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(
-		recording,
-		playlistRecordings
-	);
+	const { isPaused, play, pause } = usePlaybackSession(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
 	const intl = useIntl();
 
 	const label = isPaused

@@ -6623,6 +6623,10 @@ export type RecordingFragment = {
 						  }>
 						| null
 						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 		  }
 		| null
@@ -7516,6 +7520,10 @@ export type GetAudiobookTrackDetailDataQuery = {
 												duration: number;
 											}>;
 									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
 									| null
 									| undefined;
 							};
@@ -11495,6 +11503,10 @@ export type GetSermonDetailDataQuery = {
 									  }>
 									| null
 									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
 							};
 					  }
 					| null
@@ -12401,6 +12413,10 @@ export type GetBookSongDetailDataQuery = {
 									  }>
 									| null
 									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
 							};
 					  }
 					| null
@@ -12658,6 +12674,10 @@ export type GetSongDetailDataQuery = {
 												duration: number;
 											}>;
 									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
 									| null
 									| undefined;
 							};
@@ -13714,6 +13734,10 @@ export type GetStoryDetailDataQuery = {
 									  }>
 									| null
 									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
 							};
 					  }
 					| null
@@ -14467,6 +14491,9 @@ export const RecordingFragmentDoc = `
     recordings(first: 1000) {
       nodes {
         ...teaseRecording
+      }
+      aggregate {
+        count
       }
     }
   }

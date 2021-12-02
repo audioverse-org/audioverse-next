@@ -27,8 +27,8 @@ import IconListeningAnimated from '../../../public/img/icon-listening-animated.s
 import IconListening from '../../../public/img/icon-listening.svg';
 import MoreIcon from '../../../public/img/icon-more.svg';
 
-import { PlaybackContext } from './andMiniplayer';
 import styles from './andNavigation.module.scss';
+import { PlaybackContext } from './andPlaybackContext';
 
 const SUBNAV_HEIGHT = 32;
 const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;
