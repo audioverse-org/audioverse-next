@@ -12,6 +12,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
 import {
 	GetSermonDetailDataDocument,
@@ -88,9 +89,11 @@ function loadSermonDetailData(sermon: any = undefined): void {
 const renderPage = buildStaticRenderer(
 	(props: SermonDetailProps) => {
 		return (
-			<AndMiniplayer>
-				<SermonDetail {...props} />
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<SermonDetail {...props} />
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 	},
 	getStaticProps,

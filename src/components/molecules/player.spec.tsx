@@ -12,6 +12,7 @@ import videojs from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import * as api from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
@@ -50,9 +51,11 @@ const recording: Partial<PlayerFragment> = {
 const renderComponent = buildRenderer(
 	(props: PlayerProps) => {
 		return (
-			<AndMiniplayer>
-				<Player {...props} />
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player {...props} />
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 	},
 	{
@@ -365,16 +368,18 @@ describe('player', () => {
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			<AndMiniplayer>
-				<Player
-					recording={recording1 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-				<Player
-					recording={recording2 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player
+						recording={recording1 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+					<Player
+						recording={recording2 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -479,16 +484,18 @@ describe('player', () => {
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			<AndMiniplayer>
-				<Player
-					recording={recording1 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-				<Player
-					recording={recording2 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player
+						recording={recording1 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+					<Player
+						recording={recording2 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');

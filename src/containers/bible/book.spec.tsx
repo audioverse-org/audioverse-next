@@ -3,6 +3,7 @@ import React from 'react';
 import videojs from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { BookProps } from '@containers/bible/book';
 import * as bibleBrain from '@lib/api/bibleBrain';
 import { buildStaticRenderer, setPlayerMock } from '@lib/test/helpers';
@@ -17,9 +18,11 @@ jest.mock('video.js');
 const renderPage = buildStaticRenderer(
 	(props: BookProps) => {
 		return (
-			<AndMiniplayer>
-				<Book {...props} />
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Book {...props} />
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 	},
 	getStaticProps,

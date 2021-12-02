@@ -4,7 +4,7 @@ import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
-} from '@components/templates/andMiniplayer';
+} from '@components/templates/andPlaybackContext';
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
@@ -37,8 +37,12 @@ interface PlaybackSessionInfo {
 
 export default function usePlaybackSession(
 	recording: AndMiniplayerFragment | null,
-	playlistRecordings?: AndMiniplayerFragment[]
+	options: {
+		playlistRecordings?: AndMiniplayerFragment[];
+		prefersAudio?: boolean;
+	} = {}
 ): PlaybackSessionInfo {
+	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 	const isLoaded =
@@ -118,6 +122,7 @@ export default function usePlaybackSession(
 			onLoad: (c: PlaybackContextType) => {
 				func(c);
 			},
+			prefersAudio: options.prefersAudio,
 		});
 	}
 

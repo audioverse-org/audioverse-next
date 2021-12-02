@@ -27,6 +27,9 @@ const sequence = {
 	canonicalPath: 'the_sequence_path',
 	recordings: {
 		nodes: [],
+		aggregate: {
+			count: 0,
+		},
 	},
 };
 

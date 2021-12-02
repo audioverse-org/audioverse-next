@@ -39,6 +39,9 @@ fragment recording on Recording {
 			nodes {
 				...teaseRecording
 			}
+			aggregate {
+				count
+			}
 		}
 	}
 	collection {

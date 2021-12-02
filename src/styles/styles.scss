@@ -38,6 +38,9 @@ html {
 body {
 	min-height: 100%;
 	background: $ts-cream;
+	&.body--no-sidebar {
+		background: $ts-white;
+	}
 }
 
 html,

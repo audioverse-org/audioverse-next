@@ -27,6 +27,8 @@ export interface PlayerProps {
 	backgroundColor: BaseColors;
 	playlistRecordings?: AndMiniplayerFragment[];
 	disableUserFeatures?: boolean;
+	prefersAudio?: boolean;
+	compact?: boolean;
 }
 
 const Player = ({
@@ -34,11 +36,18 @@ const Player = ({
 	backgroundColor,
 	disableUserFeatures,
 	playlistRecordings,
+	prefersAudio,
+	compact,
 }: PlayerProps): JSX.Element => {
 	const intl = useIntl();
-	const session = usePlaybackSession(recording, playlistRecordings);
-	const shouldShowPoster = !session.isLoaded && hasVideo(recording);
-	const shouldShowAudioControls = !hasVideo(recording) || session.isAudioLoaded;
+	const session = usePlaybackSession(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
+	const shouldShowPoster =
+		!session.isLoaded && hasVideo(recording) && !prefersAudio;
+	const shouldShowAudioControls =
+		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 
@@ -96,8 +105,9 @@ const Player = ({
 							recording,
 							playlistRecordings,
 							backgroundColor,
+							prefersAudio,
 						}}
-						large
+						large={!compact}
 						active
 						className={styles.play}
 					/>
@@ -131,7 +141,12 @@ const Player = ({
 			)}
 
 			<div className={styles.buttons}>
-				<div className={styles.leftButtons}>
+				<div
+					className={clsx(
+						styles.leftButtons,
+						compact && styles.leftButtonsCompact
+					)}
+				>
 					<ButtonNudge
 						recording={recording}
 						reverse={true}
