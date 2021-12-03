@@ -18,7 +18,7 @@ export default function ButtonSpeed({
 	backgroundColor: BaseColors;
 }): JSX.Element {
 	const { setSpeed, speed } = usePlaybackSession(recording);
-	const speeds = [1, 1.5, 1.75, 2];
+	const speeds = [1, 1.25, 1.5, 1.75, 2];
 
 	return (
 		<CircleButton

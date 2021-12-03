@@ -752,6 +752,10 @@ describe('player', () => {
 
 		userEvent.click(getByText('1x'));
 
+		await findByText('1.25x');
+
+		userEvent.click(getByText('1.25x'));
+
 		await findByText('1.5x');
 
 		userEvent.click(getByText('1.5x'));
@@ -774,7 +778,7 @@ describe('player', () => {
 
 		userEvent.click(getByText('1x'));
 
-		expect(mockPlayer.playbackRate).toBeCalledWith(1.5);
+		expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
 	});
 
 	it('loads videojs speed', async () => {
