@@ -10,12 +10,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 		`${
 			new URL(process.env.NEXT_PUBLIC_API_URL as string).origin
 		}/media/download/${path}${
-			sessionCookie ? `?sessionToken=${encryptSessionToken(sessionCookie)}` : ''
+			sessionCookie ? `?${encryptedSessionTokenParameters(sessionCookie)}` : ''
 		}`
 	);
 }
 
-const encryptSessionToken = (token: string) => {
+const encryptedSessionTokenParameters = (token: string) => {
 	const { SESSION_TOKEN_TRANSPORT_KEY, SESSION_TOKEN_TRANSPORT_IV } =
 		process.env;
 	if (!SESSION_TOKEN_TRANSPORT_KEY || !SESSION_TOKEN_TRANSPORT_IV) {
@@ -30,5 +30,5 @@ const encryptSessionToken = (token: string) => {
 	});
 	cipher.update(forge.util.createBuffer(token));
 	cipher.finish();
-	return cipher.output.toHex();
+	return `sessionToken=${cipher.output.toHex()}&sessionTag=${cipher.mode.tag.toHex()}`;
 };
