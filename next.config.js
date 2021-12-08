@@ -473,7 +473,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/download/:path*',
-				destination: '/api/download/:lang/:path*'
+				destination: '/api/download/:lang/:path*',
 			},
 		];
 	},
