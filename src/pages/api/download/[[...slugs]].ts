@@ -10,7 +10,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 		`${
 			new URL(process.env.NEXT_PUBLIC_API_URL as string).origin
 		}/media/download/${path}${
-			sessionCookie ? `?${encryptedSessionTokenParameters(sessionCookie)}` : ''
+			sessionCookie
+				? `?${
+						req.query.logonly ? `logOnly=${req.query.logonly}&` : ''
+				  }${encryptedSessionTokenParameters(sessionCookie)}`
+				: ''
 		}`
 	);
 }
