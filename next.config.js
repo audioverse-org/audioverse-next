@@ -471,6 +471,10 @@ module.exports = withPWA({
 				source: '/:lang/testimonies',
 				destination: '/:lang/testimonies/page/1',
 			},
+			{
+				source: '/:lang/download/:path*',
+				destination: '/api/download/:lang/:path*',
+			},
 		];
 	},
 	webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
