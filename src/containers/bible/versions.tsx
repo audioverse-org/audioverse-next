@@ -17,7 +17,7 @@ export interface VersionsProps {
 
 function Versions({ versions }: VersionsProps): JSX.Element {
 	return (
-		<Tease className={styles.tease}>
+		<Tease className={styles.tease} fullBleed={false}>
 			<ContentWidthLimiter>
 				<Heading1>
 					<FormattedMessage
