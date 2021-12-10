@@ -9,7 +9,7 @@ fragment cardCollection on Collection {
 	viewerPlaybackCompletedPercentage
 	image {
 		id
-		url(size: 740, cropMode: MAX_SIZE)
+		url(size: 240, cropMode: DEFAULT)
 	}
 	allSequences: sequences {
 		aggregate {

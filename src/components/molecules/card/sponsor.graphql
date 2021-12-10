@@ -3,7 +3,7 @@ fragment cardSponsor on Sponsor {
 	title
 	canonicalPath(useFuturePath: true)
 	image {
-		url(size: 100)
+		url(size: 128)
 	}
 	collections(
 		first: 2

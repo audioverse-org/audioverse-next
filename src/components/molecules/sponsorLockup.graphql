@@ -3,6 +3,6 @@ fragment sponsorLockup on Sponsor {
 	title
 	canonicalPath(useFuturePath: true)
 	imageWithFallback {
-		url(size: 100)
+		url(size: 128)
 	}
 }
