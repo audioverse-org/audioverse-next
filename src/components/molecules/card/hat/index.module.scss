@@ -4,6 +4,9 @@
 	max-height: 49px;
 	overflow: hidden;
 	transition: max-height $transition-medium;
+	&:hover {
+		text-decoration: none;
+	}
 }
 .hatExpanded {
 	max-height: 300px;

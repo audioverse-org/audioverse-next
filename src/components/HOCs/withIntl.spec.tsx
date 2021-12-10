@@ -586,7 +586,7 @@ describe('localization usage', () => {
 		// TODO: [Login, {}],
 		[Reset, {}],
 		// TODO: [Profile, {}],
-		[Home, {}, ['Genesis 1', 'Genesis (KJV)', 'TODO']],
+		[Home, {}, ['Genesis 1', 'King James Version']],
 		[
 			Player,
 			{

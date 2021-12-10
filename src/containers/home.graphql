@@ -4,13 +4,6 @@ query getHomeStaticProps($language: Language!) {
 			...cardRecording
 		}
 	}
-	audiobible(id: "ENGKJVC") {
-		book(id: "ENGKJVC-Gen") {
-			chapter(id: "ENGKJVC-Gen-1") {
-				...cardBibleChapter
-			}
-		}
-	}
 	testimonies(language: $language, first: 3) {
 		nodes {
 			...testimonies
