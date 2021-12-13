@@ -243,8 +243,8 @@ function CollectionDetail({
 				<>
 					<LineHeading color={BaseColors.SALMON}>
 						<FormattedMessage
-							id="collectionDetail__speakersLabel"
-							defaultMessage="Speakers"
+							id="collectionDetail__presentersLabel"
+							defaultMessage="Presenters"
 							description="Collection Detail speakers label"
 						/>
 					</LineHeading>
@@ -258,8 +258,8 @@ function CollectionDetail({
 							type="secondaryInverse"
 							href={makeCollectionPresentersRoute(lang, id)}
 							text={intl.formatMessage({
-								id: 'collectionDetail__speakersAllLabel',
-								defaultMessage: 'See All Speakers',
+								id: 'collectionDetail__presentersAllLabel',
+								defaultMessage: 'See All Presenters',
 							})}
 							IconLeft={ForwardIcon}
 							className={styles.seeAllButton}

@@ -43,6 +43,14 @@
 		}
 	}
 }
+.compact {
+	margin: 0;
+	> * {
+		margin-right: 14.5px;
+		margin-top: 4px;
+		margin-bottom: 4px;
+	}
+}
 
 .miniNavActive.miniNavActive {
 	border-bottom-color: $ts-red;

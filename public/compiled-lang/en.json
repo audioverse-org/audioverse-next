@@ -606,7 +606,7 @@
   "collectionPresenterssDetail__heading": [
     {
       "type": 0,
-      "value": "All Speakers"
+      "value": "All Presenters"
     }
   ],
   "collectionSequencesDetail__heading": [
@@ -1364,7 +1364,7 @@
   "libraryCollections__personsHeading": [
     {
       "type": 0,
-      "value": "Speakers"
+      "value": "Presenters"
     }
   ],
   "libraryCollections__playlistsAlert": [
@@ -2100,7 +2100,7 @@
   "personTypeLockup_type": [
     {
       "type": 0,
-      "value": "Speaker"
+      "value": "Presenter"
     }
   ],
   "playButton__pauseLabel": [
@@ -2444,7 +2444,7 @@
   "presentersList__title": [
     {
       "type": 0,
-      "value": "All Speakers"
+      "value": "All Presenters"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -2698,13 +2698,13 @@
   "search__personsHeading": [
     {
       "type": 0,
-      "value": "Speakers"
+      "value": "Presenters"
     }
   ],
   "search__personsSeeAll": [
     {
       "type": 0,
-      "value": "See All Speakers"
+      "value": "See All Presenters"
     }
   ],
   "search__resultsCount": [

@@ -14,12 +14,26 @@ type Props = {
 		url?: string;
 		onClick?: (e: MouseEvent) => void;
 	}[];
+	compact?: boolean;
 	disabled?: boolean;
+	className?: string;
 };
 
-export default function Mininav({ items, disabled }: Props): JSX.Element {
+export default function Mininav({
+	items,
+	compact,
+	disabled,
+	className,
+}: Props): JSX.Element {
 	return (
-		<div className={clsx(styles.miniNav, disabled && styles.miniNavDisabled)}>
+		<div
+			className={clsx(
+				styles.miniNav,
+				compact && styles.compact,
+				disabled && styles.miniNavDisabled,
+				className
+			)}
+		>
 			{items.map(({ label, url, onClick, isActive, id }) => {
 				return url ? (
 					<Heading6

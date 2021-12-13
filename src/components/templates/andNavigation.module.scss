@@ -55,21 +55,9 @@
 		calc(24px + env(safe-area-inset-left));
 }
 .mobileSubnavItems {
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
 	overflow: hidden;
 	height: 24px;
-	margin-right: 32px;
-	> h6 {
-		line-height: 24px;
-		&:not(:first-of-type) {
-			margin-left: 14.5px;
-		}
-		a:hover {
-			text-decoration: none;
-		}
-	}
+	margin-right: 16px;
 }
 .mobileHeaderMore {
 	position: absolute;

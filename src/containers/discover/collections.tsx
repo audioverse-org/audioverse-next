@@ -69,8 +69,8 @@ export default function DiscoverCollections({
 			)}
 			<LineHeading>
 				<FormattedMessage
-					id="discoverCollections_speakersHeading"
-					defaultMessage="Speakers"
+					id="discoverCollections_presentersHeading"
+					defaultMessage="Presenters"
 				/>
 			</LineHeading>
 			<CardGroup className={styles.cardGroup}>

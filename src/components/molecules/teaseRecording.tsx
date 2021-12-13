@@ -79,7 +79,7 @@ export default function TeaseRecording({
 	const personTextColor = isDarkTheme
 		? BaseColors.LIGHT_TONE
 		: BaseColors.MID_TONE;
-	const hideSpeakers =
+	const hidePresenters =
 		['audiobookTrack', 'chapter'].includes(theme) ||
 		(theme === 'song' && small);
 
@@ -133,7 +133,7 @@ export default function TeaseRecording({
 					</div>
 				)}
 			</div>
-			{!hideSpeakers && (
+			{!hidePresenters && (
 				<div>
 					{(personsExpanded
 						? recording.persons

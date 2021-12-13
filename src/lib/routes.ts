@@ -219,8 +219,10 @@ export const makeBlogPostListRoute = (
 export const makeAboutPage = (languageRoute: string, pageId: number): string =>
 	`/${languageRoute}/about/${pageId}`;
 
-export const makeContactRoute = (languageRoute: string, subpath = ''): string =>
-	`/${languageRoute}/contact${subpath}`;
+export const makeContactRoute = (
+	languageRoute: string,
+	subpath = '/general'
+): string => `/${languageRoute}/contact${subpath}`;
 
 export const makeLoginRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/login`;

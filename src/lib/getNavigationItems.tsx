@@ -95,16 +95,20 @@ export function getNavigationItems(
 				description: `Header nav link name: Library`,
 			}),
 		},
-		{
-			key: 'bibles',
-			href: makeBibleListRoute(languageRoute),
-			Icon: IconBible,
-			label: intl.formatMessage({
-				id: `header__naveItemBible`,
-				defaultMessage: 'Bible',
-				description: `Header nav link name: Bible`,
-			}),
-		},
+		...(languageRoute === 'en'
+			? [
+					{
+						key: 'bibles',
+						href: makeBibleListRoute(languageRoute),
+						Icon: IconBible,
+						label: intl.formatMessage({
+							id: `header__naveItemBible`,
+							defaultMessage: 'Bible',
+							description: `Header nav link name: Bible`,
+						}),
+					},
+			  ]
+			: []),
 		{
 			key: 'collections',
 			href: makeDiscoverCollectionsRoute(languageRoute),
@@ -147,8 +151,8 @@ export function getNavigationItems(
 					href: makePresenterListRoute(languageRoute),
 					Icon: IconUser,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-speakers`,
-						defaultMessage: 'Speakers',
+						id: `header__naveItemCollections-presenters`,
+						defaultMessage: 'Presenters',
 					}),
 				},
 				{

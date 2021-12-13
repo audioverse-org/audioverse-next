@@ -146,7 +146,7 @@ function LibraryCollections({
 					<LineHeading>
 						<FormattedMessage
 							id="libraryCollections__personsHeading"
-							defaultMessage="Speakers"
+							defaultMessage="Presenters"
 						/>
 					</LineHeading>
 					<CardMasonry
