@@ -14,12 +14,12 @@ export default function RecordingProgressBar({
 	recording,
 	interactive = true,
 }: ProgressBarProps): JSX.Element {
-	const session = usePlaybackSession(recording);
-	const progress = session.progress;
+	const { progress, bufferedProgress, setProgress } =
+		usePlaybackSession(recording);
 	return (
 		<ProgressBar
-			progress={progress}
-			setProgress={interactive ? session.setProgress : undefined}
+			{...{ progress, bufferedProgress }}
+			setProgress={interactive ? setProgress : undefined}
 		/>
 	);
 }

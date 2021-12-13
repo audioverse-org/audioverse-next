@@ -22,6 +22,12 @@ $container-padding: 16px;
 	height: 124px;
 	position: relative;
 	margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	> * {
+		border-radius: 8px;
+	}
 }
 
 .date {

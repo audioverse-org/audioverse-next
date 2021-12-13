@@ -100,7 +100,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				<div className={styles.titleLockup}>
 					{image && (
 						<div className={styles.logo}>
-							<RoundImage image={image.url} alt={title} />
+							<RoundImage image={image.url} alt={title} large />
 						</div>
 					)}
 					<Heading2 sans unpadded>

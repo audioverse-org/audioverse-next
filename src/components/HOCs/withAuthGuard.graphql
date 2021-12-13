@@ -3,9 +3,6 @@ query getWithAuthGuardData {
 		user {
 			email
 			name
-			image {
-				url(size: 100)
-			}
 		}
 	}
 }

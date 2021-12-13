@@ -9,7 +9,7 @@ query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
 			canonicalPath(useFuturePath: true)
 			title
 			image {
-				url(size: 100)
+				url(size: 128)
 			}
 		}
 		aggregate {

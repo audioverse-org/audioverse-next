@@ -98,7 +98,7 @@ function PresenterDetail({
 				<PersonTypeLockup />
 				<div className={styles.titleLockup}>
 					<div className={styles.image}>
-						<RoundImage image={imageWithFallback.url} alt={name} />
+						<RoundImage image={imageWithFallback.url} alt={name} large />
 					</div>
 					<Heading2 sans unpadded>
 						{name}

@@ -1,8 +1,12 @@
 @import '../styles/common';
 
+$max-width: 1042px;
 .wrapper {
-	max-width: 1042px;
+	max-width: $max-width;
 	margin-top: 8px;
+	z-index: 2;
+	margin-bottom: 88px;
+	position: relative;
 
 	@media (min-width: $breakpoint-lg) {
 		margin-top: 0;
@@ -65,7 +69,7 @@
 	@media (min-width: $breakpoint-lg) {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 16px;
+		grid-gap: 0 16px;
 	}
 }
 .postsSquare {
@@ -153,11 +157,39 @@
 	}
 }
 
+.footerWrapper {
+	position: fixed;
+	bottom: 32px;
+	left: 0;
+	right: 0;
+	padding-left: 24px;
+	padding-right: 24px;
+	margin: 0 auto;
+	opacity: 0.2;
+
+	max-width: 100vw;
+	@media (min-width: $content-maxWidth-sm) {
+		max-width: $content-maxWidth-sm;
+	}
+	@media (min-width: $breakpoint-md) {
+		max-width: 100vw;
+	}
+	@media (min-width: $content-maxWidth) {
+		max-width: $content-maxWidth;
+	}
+	@media (min-width: $breakpoint-lg) {
+		padding-left: #{$sidebar-width + 24px};
+	}
+	@media (min-width: $breakpoint-xl) {
+		padding-left: #{$sidebar-width + 35px};
+	}
+}
 .footer {
 	margin-bottom: 8px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	max-width: $max-width;
 
 	h3 {
 		font-size: 18px;

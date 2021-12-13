@@ -12,6 +12,7 @@ import videojs from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import * as api from '@lib/api';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
@@ -42,6 +43,7 @@ const recording: Partial<PlayerFragment> = {
 			url: 'the_source_src',
 			mimeType: 'the_source_type',
 			filesize: 'the_source_size',
+			duration: 1234,
 		},
 	],
 };
@@ -49,9 +51,11 @@ const recording: Partial<PlayerFragment> = {
 const renderComponent = buildRenderer(
 	(props: PlayerProps) => {
 		return (
-			<AndMiniplayer>
-				<Player {...props} />
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player {...props} />
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 	},
 	{
@@ -119,13 +123,27 @@ describe('player', () => {
 			},
 		} as any);
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(50));
+		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(617));
 	});
 
 	it('treats range output as percentage', async () => {
 		const mockPlayer = setPlayerMock({ duration: 300 });
 
-		const { getByLabelText } = await renderComponent();
+		const { getByLabelText } = await renderComponent({
+			props: {
+				recording: {
+					...recording,
+					audioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+							duration: 300,
+						},
+					],
+				},
+			},
+		});
 
 		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
 			target: {
@@ -288,7 +306,21 @@ describe('player', () => {
 			},
 		});
 
-		const result = await renderComponent();
+		const result = await renderComponent({
+			props: {
+				recording: {
+					...recording,
+					audioFiles: [
+						{
+							url: 'the_source_src',
+							mimeType: 'the_source_type',
+							filesize: 'the_source_size',
+							duration: 300,
+						},
+					],
+				},
+			},
+		});
 
 		ReactTestUtils.Simulate.change(result.getByLabelText('progress'), {
 			target: {
@@ -316,6 +348,7 @@ describe('player', () => {
 					url: 'first_source_src',
 					mimeType: 'first_source_type',
 					filesize: 'first_source_size',
+					duration: 1234,
 				},
 			],
 		};
@@ -329,21 +362,24 @@ describe('player', () => {
 					url: 'second_source_src',
 					mimeType: 'second_source_type',
 					filesize: 'second_source_size',
+					duration: 2345,
 				},
 			],
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			<AndMiniplayer>
-				<Player
-					recording={recording1 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-				<Player
-					recording={recording2 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player
+						recording={recording1 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+					<Player
+						recording={recording2 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -358,6 +394,7 @@ describe('player', () => {
 		await waitFor(() =>
 			expect(mockPlayer.src).toBeCalledWith([
 				{
+					duration: 2345,
 					src: 'second_source_src',
 					type: 'second_source_type',
 				},
@@ -427,6 +464,7 @@ describe('player', () => {
 					url: 'first_source_src',
 					mimeType: 'first_source_type',
 					filesize: 'first_source_size',
+					duration: 1234,
 				},
 			],
 		};
@@ -440,21 +478,24 @@ describe('player', () => {
 					url: 'second_source_src',
 					mimeType: 'second_source_type',
 					filesize: 'second_source_size',
+					duration: 2345,
 				},
 			],
 		};
 
 		const { getByTestId } = await renderWithIntl(
-			<AndMiniplayer>
-				<Player
-					recording={recording1 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-				<Player
-					recording={recording2 as PlayerFragment}
-					backgroundColor={BaseColors.WHITE}
-				/>
-			</AndMiniplayer>
+			<AndPlaybackContext>
+				<AndMiniplayer>
+					<Player
+						recording={recording1 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+					<Player
+						recording={recording2 as PlayerFragment}
+						backgroundColor={BaseColors.WHITE}
+					/>
+				</AndMiniplayer>
+			</AndPlaybackContext>
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -711,6 +752,10 @@ describe('player', () => {
 
 		userEvent.click(getByText('1x'));
 
+		await findByText('1.25x');
+
+		userEvent.click(getByText('1.25x'));
+
 		await findByText('1.5x');
 
 		userEvent.click(getByText('1.5x'));
@@ -733,7 +778,7 @@ describe('player', () => {
 
 		userEvent.click(getByText('1x'));
 
-		expect(mockPlayer.playbackRate).toBeCalledWith(1.5);
+		expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
 	});
 
 	it('loads videojs speed', async () => {
@@ -958,10 +1003,10 @@ describe('player', () => {
 	});
 
 	it('displays zero time if recording not loaded', async () => {
-		const { getAllByText } = await renderComponent();
+		const { getByText } = await renderComponent();
 
 		await waitFor(() => {
-			expect(getAllByText('0:00')).toHaveLength(2);
+			expect(getByText('0:00')).toBeInTheDocument();
 		});
 	});
 

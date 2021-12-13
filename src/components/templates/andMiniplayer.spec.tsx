@@ -1,14 +1,15 @@
 import { waitFor } from '@testing-library/react';
 import React, { useContext, useEffect, useState } from 'react';
 
-import AndMiniplayer, {
+import AndMiniplayer from '@components/templates/andMiniplayer';
+import AndPlaybackContext, {
 	PlaybackContext,
 	PlaybackContextType,
-} from '@components/templates/andMiniplayer';
+} from '@components/templates/andPlaybackContext';
 import { SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
 
-const renderComponent = buildRenderer(AndMiniplayer);
+const renderComponent = buildRenderer(AndPlaybackContext);
 
 function ContextUser({
 	func,
@@ -48,30 +49,33 @@ describe('miniplayer template', () => {
 		await renderComponent({
 			props: {
 				children: (
-					<ContextUser
-						func={(c) => {
-							c.loadRecording({
-								id: 'the_recording_id',
-								title: 'the_recording_title',
-								canonicalPath: 'the_recording_path',
-								duration: 60,
-								sequence: {
-									contentType: SequenceContentType.Series,
-									title: 'the_sequence_title',
-								},
-								videoFiles: [
-									{
-										url: 'the_video_url',
-										filesize: 'the_video_size',
-										mimeType: 'the_video_type',
+					<AndMiniplayer>
+						<ContextUser
+							func={(c) => {
+								c.loadRecording({
+									id: 'the_recording_id',
+									title: 'the_recording_title',
+									canonicalPath: 'the_recording_path',
+									duration: 60,
+									sequence: {
+										contentType: SequenceContentType.Series,
+										title: 'the_sequence_title',
 									},
-								],
-								audioFiles: [],
-								videoStreams: [],
-							});
-							c.play();
-						}}
-					/>
+									videoFiles: [
+										{
+											url: 'the_video_url',
+											filesize: 'the_video_size',
+											mimeType: 'the_video_type',
+											duration: 1234,
+										},
+									],
+									audioFiles: [],
+									videoStreams: [],
+								});
+								c.play();
+							}}
+						/>
+					</AndMiniplayer>
 				),
 			},
 		});
@@ -80,22 +84,24 @@ describe('miniplayer template', () => {
 	});
 
 	it('loads recording', async () => {
-		const { getByText } = await renderComponent({
+		const { findByText } = await renderComponent({
 			props: {
 				children: (
-					<ContextUser
-						func={(c) => {
-							c.loadRecording({
-								title: 'the_recording_title',
-								canonicalPath: 'the_recording_path',
-							} as any);
-						}}
-					/>
+					<AndMiniplayer>
+						<ContextUser
+							func={(c) => {
+								c.loadRecording({
+									title: 'the_recording_title',
+									canonicalPath: 'the_recording_path',
+								} as any);
+							}}
+						/>
+					</AndMiniplayer>
 				),
 			},
 		});
 
-		expect(getByText('the_recording_title')).toBeInTheDocument();
+		await findByText('the_recording_title');
 	});
 });
 

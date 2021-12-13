@@ -15,7 +15,6 @@ import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
@@ -55,6 +54,7 @@ function CollectionDetail({
 	const {
 		id,
 		title,
+		contentType,
 		description,
 		duration,
 		image,
@@ -103,76 +103,83 @@ function CollectionDetail({
 
 	return (
 		<Tease className={styles.container}>
-			<ContentWidthLimiter>
-				<CollectionTypeLockup />
+			<div className={styles.imageRow}>
 				{image && (
 					<div className={styles.image}>
-						<Image
-							alt={title}
-							src={image.url}
-							layout="fill"
-							objectFit="cover"
-						/>
+						<div className={styles.imageBackdrop}>
+							<Image
+								alt={title}
+								src={image.url}
+								height="500"
+								width="500"
+								objectFit="cover"
+							/>
+						</div>
+						{/* eslint-disable-next-line @next/next/no-img-element, @mizdra/layout-shift/require-size-attributes */}
+						<img alt={title} src={image.url} />
 					</div>
 				)}
+				<div>
+					<CollectionTypeLockup contentType={contentType} />
 
-				{!!(startDate && endDate) && (
-					<Heading6 sans unpadded className={styles.date}>
-						{formatDateRange(startDate, endDate)}
-					</Heading6>
-				)}
-				<Heading2 unpadded className={styles.title}>
-					{title}
-				</Heading2>
-				{sponsor && (
-					<SponsorLockup
-						sponsor={sponsor}
-						textColor={BaseColors.LIGHT_TONE}
-						hoverColor={BaseColors.SALMON}
-						isLinked
-						small
-					/>
-				)}
-
-				<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
-					{sequences.aggregate?.count ? (
-						<FormattedMessage
-							id="collectionDetail__sequenceCountLabel"
-							defaultMessage="{count} Series"
-							description="Collection Detail sequence count label"
-							values={{ count: sequences.aggregate?.count }}
-						/>
-					) : (
-						<FormattedMessage
-							id="collectionDetail__teachingsCountLabel"
-							defaultMessage="{count} Teachings"
-							description="Collection Detail teachings count label"
-							values={{ count: recordings.aggregate?.count }}
+					{!!(startDate && endDate) && (
+						<Heading6 sans unpadded className={styles.date}>
+							{formatDateRange(startDate, endDate)}
+						</Heading6>
+					)}
+					<Heading2 unpadded className={styles.title}>
+						{title}
+					</Heading2>
+					{sponsor && (
+						<SponsorLockup
+							sponsor={sponsor}
+							textColor={BaseColors.LIGHT_TONE}
+							hoverColor={BaseColors.SALMON}
+							isLinked
+							small
 						/>
 					)}
-				</Heading6>
-				<div className={styles.row}>
-					<div className={styles.duration}>
-						{useFormattedDuration(duration)}
+
+					<Heading6 sans loose uppercase unpadded className={styles.countLabel}>
+						{sequences.aggregate?.count ? (
+							<FormattedMessage
+								id="collectionDetail__sequenceCountLabel"
+								defaultMessage="{count} Series"
+								description="Collection Detail sequence count label"
+								values={{ count: sequences.aggregate?.count }}
+							/>
+						) : (
+							<FormattedMessage
+								id="collectionDetail__teachingsCountLabel"
+								defaultMessage="{count} Teachings"
+								description="Collection Detail teachings count label"
+								values={{ count: recordings.aggregate?.count }}
+							/>
+						)}
+					</Heading6>
+					<div className={styles.row}>
+						<div className={styles.duration}>
+							{useFormattedDuration(duration)}
+						</div>
+						<ButtonShare
+							shareUrl={shareUrl}
+							backgroundColor={BaseColors.DARK}
+							light
+							triggerClassName={styles.iconButton}
+							rssUrl={makeCollectionFeedRoute(lang, id)}
+						/>
+						<IconButton
+							Icon={isFavorited ? LikeActiveIcon : LikeIcon}
+							onClick={() => toggleFavorited()}
+							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+							backgroundColor={BaseColors.DARK}
+							className={styles.iconButton}
+						/>
 					</div>
-					<ButtonShare
-						shareUrl={shareUrl}
-						backgroundColor={BaseColors.DARK}
-						light
-						triggerClassName={styles.iconButton}
-						rssUrl={makeCollectionFeedRoute(lang, id)}
-					/>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-						backgroundColor={BaseColors.DARK}
-						className={styles.iconButton}
-					/>
+					<HorizontalRule color={BaseColors.MID_TONE} />
+					<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 				</div>
-				<HorizontalRule color={BaseColors.MID_TONE} />
-				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
-			</ContentWidthLimiter>
+			</div>
 			{sequences.nodes?.length ? (
 				<>
 					<LineHeading color={BaseColors.SALMON}>

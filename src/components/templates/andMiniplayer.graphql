@@ -11,15 +11,39 @@ fragment andMiniplayer on Recording {
 		url
 		filesize
 		mimeType
+		duration
 	}
 	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
 		url
 		filesize
 		mimeType
+		duration
 	}
 	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
 		url
 		filesize
 		mimeType
+		duration
+	}
+}
+
+query getRecordingPlaybackProgress($id: ID!) {
+	recording(id: $id) {
+		viewerPlaybackSession {
+			positionPercentage
+		}
+	}
+}
+
+mutation recordingPlaybackProgressSet($id: ID!, $percentage: Float!) {
+	recordingPlaybackSessionAdvance(
+		recordingId: $id
+		input: { positionPercentage: $percentage }
+	) {
+		recording {
+			viewerPlaybackSession {
+				positionPercentage
+			}
+		}
 	}
 }

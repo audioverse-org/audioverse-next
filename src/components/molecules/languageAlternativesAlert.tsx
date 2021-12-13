@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import InfoBox from '@components/atoms/infoBox';
 import { getLanguageId, setLanguageId } from '@lib/cookies';
+import isServerSide from '@lib/isServerSide';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './languageAlternativesAlert.module.scss';
@@ -39,8 +40,7 @@ export default function LanguageAlternativesAlert(): JSX.Element | null {
 		};
 	}, [setCurrentRouteToCookie]);
 
-	const isServerSide = typeof window === 'undefined';
-	const referrer = isServerSide ? null : document.referrer;
+	const referrer = isServerSide() ? null : document.referrer;
 	const cookieLanguageId = getLanguageId();
 
 	if (

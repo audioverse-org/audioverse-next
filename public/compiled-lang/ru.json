@@ -1,3 +1,3452 @@
 {
-
+  "RecordingFavorite__favorite": [
+    {
+      "type": 0,
+      "value": "Избранный (single). Избранные (plural)."
+    }
+  ],
+  "RecordingFavorite__unfavorite": [
+    {
+      "type": 0,
+      "value": "Неизбранный (single). Неизбранные (plural)."
+    }
+  ],
+  "accountNav__audiopreferences": [
+    {
+      "type": 0,
+      "value": "Предпочтения"
+    }
+  ],
+  "accountNav__profile": [
+    {
+      "type": 0,
+      "value": "Профиль"
+    }
+  ],
+  "accountPlaylists__buttonLabelSubmit": [
+    {
+      "type": 0,
+      "value": "Добавить список воспроизведения"
+    }
+  ],
+  "accountPlaylists__errorMissingTitle": [
+    {
+      "type": 0,
+      "value": "Недостающее название"
+    }
+  ],
+  "accountPlaylists__inputLabelPublic": [
+    {
+      "type": 0,
+      "value": "Публичный"
+    }
+  ],
+  "accountPlaylists__inputLabelSummary": [
+    {
+      "type": 0,
+      "value": "резюме/краткий обзор"
+    }
+  ],
+  "accountPlaylists__inputLabelTitle": [
+    {
+      "type": 0,
+      "value": "название"
+    }
+  ],
+  "accountPlaylists__labelPrivate": [
+    {
+      "type": 0,
+      "value": "частный / личный"
+    }
+  ],
+  "accountPlaylists__labelPublic": [
+    {
+      "type": 0,
+      "value": "Публичный"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-confirm": [
+    {
+      "type": 0,
+      "value": "Удалить наименование"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-copy": [
+    {
+      "type": 0,
+      "value": "Хотите ли Вы удалить наименование из Вашей библиотеки?"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-heading": [
+    {
+      "type": 0,
+      "value": "Вы уверены?"
+    }
+  ],
+  "andGlobalModals__confirmRemoveFavorite-keep": [
+    {
+      "type": 0,
+      "value": "Сохранить наименование"
+    }
+  ],
+  "andGlobalModals__continueAsGuest": [
+    {
+      "type": 0,
+      "value": "Продолжить как гость"
+    }
+  ],
+  "andGlobalModals__copy": [
+    {
+      "type": 0,
+      "value": "Можете добавить аудио в закладку, чтобы иметь доступ в своей учетной записи. Другие функции, которые включают добавление аудио в Вашу библиотеку."
+    }
+  ],
+  "andGlobalModals__createAccount": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись"
+    }
+  ],
+  "andGlobalModals__heading": [
+    {
+      "type": 0,
+      "value": "Функция только для участников"
+    }
+  ],
+  "andGlobalModals__logIn": [
+    {
+      "type": 0,
+      "value": "Войти"
+    }
+  ],
+  "andNavigation__donate": [
+    {
+      "type": 0,
+      "value": "Пожертвовать"
+    }
+  ],
+  "atom-progressBar__label": [
+    {
+      "type": 0,
+      "value": "Прогресс"
+    }
+  ],
+  "audiobookList__heading": [
+    {
+      "type": 0,
+      "value": "Все аудиокниги"
+    }
+  ],
+  "backButton__back": [
+    {
+      "type": 0,
+      "value": "Назад"
+    }
+  ],
+  "bibleBook__chapterListTitle": [
+    {
+      "type": 0,
+      "value": "Другие главы в книге"
+    }
+  ],
+  "bibleVersionTypeLockup__type": [
+    {
+      "type": 0,
+      "value": "Версия Библии"
+    }
+  ],
+  "bibleVersion__booksLabel": [
+    {
+      "type": 0,
+      "value": "66 книг"
+    }
+  ],
+  "bibleVersion__description": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "bibleVersion__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "bibleVersions__heading": [
+    {
+      "type": 0,
+      "value": "Библия"
+    }
+  ],
+  "bibleVersions__intro": [
+    {
+      "type": 0,
+      "value": "Лучший способ выучить разумную доктрину -слушать Слово Божье. Наш аудио Библии дадут Вам возможность слушать великие поучения от величайшего Учителя из всех."
+    }
+  ],
+  "blogDetailPage__moreBlogPosts": [
+    {
+      "type": 0,
+      "value": "Другие блогерские записи"
+    }
+  ],
+  "blogDetailPage__readingDuration": [
+    {
+      "type": 1,
+      "value": "duration"
+    },
+    {
+      "type": 0,
+      "value": " прочитано"
+    }
+  ],
+  "cardAudiobookTrack_readByLabel": [
+    {
+      "type": 0,
+      "value": "Прочитано (кем-то) 1 "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "cardAudiobookTrack_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "Книга"
+    }
+  ],
+  "cardBibleBook__chaptersLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " главы"
+    }
+  ],
+  "cardBibleBook__typeLabel": [
+    {
+      "type": 1,
+      "value": "abbreviation"
+    },
+    {
+      "type": 0,
+      "value": " Библия"
+    }
+  ],
+  "cardBibleVersion__booksLabel": [
+    {
+      "type": 0,
+      "value": "66 книг"
+    }
+  ],
+  "cardCollection__teachingsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "cardCollection_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " серия"
+    }
+  ],
+  "cardPerson_teachingsLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "cardPlaylist__typeLabel": [
+    {
+      "type": 0,
+      "value": "Список воспроизведений"
+    }
+  ],
+  "cardPost__readingDuration": [
+    {
+      "type": 1,
+      "value": "duration"
+    },
+    {
+      "type": 0,
+      "value": " прочитано"
+    }
+  ],
+  "cardSequence_audiobookType": [
+    {
+      "type": 0,
+      "value": "Книга"
+    }
+  ],
+  "cardSequence_scriptureSongsType": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "cardSequence_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " части"
+    }
+  ],
+  "cardSequence_seriesType": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "cardSequence_storiesType": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "cardSermon_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "cardSlider__nextPageLabel": [
+    {
+      "type": 0,
+      "value": "Следующая страница"
+    }
+  ],
+  "cardSlider__paginationLabel": [
+    {
+      "type": 0,
+      "value": "Порядковая нумерация слайдеров"
+    }
+  ],
+  "cardSlider__previousPageLabel": [
+    {
+      "type": 0,
+      "value": "Предыдущая страница"
+    }
+  ],
+  "cardSong_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "cardSponsor__collectionCountLabel": [
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Конференции"
+    }
+  ],
+  "cardSponsor__recordingsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "cardSponsor__sequencesCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " серия"
+    }
+  ],
+  "cardSponsor_hatTitle": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "cardStory_sequenceLabel": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "ccollectionTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все индивидуальные поучения"
+    }
+  ],
+  "collectionDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "collectionDetail__locationLabel": [
+    {
+      "type": 0,
+      "value": "Местонахождение"
+    }
+  ],
+  "collectionDetail__sequenceCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " серия"
+    }
+  ],
+  "collectionDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "Смотреть все серии"
+    }
+  ],
+  "collectionDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "collectionDetail__speakersAllLabel": [
+    {
+      "type": 0,
+      "value": "Смотреть всех проповедующих"
+    }
+  ],
+  "collectionDetail__speakersLabel": [
+    {
+      "type": 0,
+      "value": "Проповедующие"
+    }
+  ],
+  "collectionDetail__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "collectionDetail__teachingsAllLabel": [
+    {
+      "type": 0,
+      "value": "Смотреть все индивидуальные поучения"
+    }
+  ],
+  "collectionDetail__teachingsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "collectionDetail__teachingsLabel": [
+    {
+      "type": 0,
+      "value": "Индивидуальные поучения"
+    }
+  ],
+  "collectionPresenterssDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все проповедующие"
+    }
+  ],
+  "collectionSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все серии"
+    }
+  ],
+  "collectionTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "Конференция"
+    }
+  ],
+  "conferenceListPage__title": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "container-sermonList__filterLabelAll": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "container-sermonList__filterLabelAudio": [
+    {
+      "type": 0,
+      "value": "Только аудио"
+    }
+  ],
+  "container-sermonList__filterLabelVideo": [
+    {
+      "type": 0,
+      "value": "Видео"
+    }
+  ],
+  "copyrightInfos__multipleCopyrightExplanation": [
+    {
+      "type": 0,
+      "value": "Части этого материала подлежат следующим лицензионным условиям:"
+    }
+  ],
+  "discoverCollections_audiobooksHeading": [
+    {
+      "type": 0,
+      "value": "Аудиокниги"
+    }
+  ],
+  "discoverCollections_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "discoverCollections_featuredCollectionHeading": [
+    {
+      "type": 0,
+      "value": "Рекомендуемая коллекция"
+    }
+  ],
+  "discoverCollections_scriptureSongsHeading": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "discoverCollections_seeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть все"
+    }
+  ],
+  "discoverCollections_seriesHeading": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "discoverCollections_speakersHeading": [
+    {
+      "type": 0,
+      "value": "Проповедующие"
+    }
+  ],
+  "discoverCollections_sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
+  "discoverCollections_storiesHeading": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "discover__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть все недавние конференции"
+    }
+  ],
+  "discover__recentTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все недавние поучения"
+    }
+  ],
+  "discover__storiesHeading": [
+    {
+      "type": 0,
+      "value": "Недавние истории"
+    }
+  ],
+  "discover__storiesSeeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть все недавние истории"
+    }
+  ],
+  "discover__trendingTeachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть все поучения, которые находятся в тренде"
+    }
+  ],
+  "discover_conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Недавние конференции"
+    }
+  ],
+  "discover_recentTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Недавние поучения"
+    }
+  ],
+  "discover_trendingTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Поучения, которые в тренде"
+    }
+  ],
+  "downloadAppButton__android": [
+    {
+      "type": 0,
+      "value": "Приложение Android"
+    }
+  ],
+  "downloadAppButton__ios": [
+    {
+      "type": 0,
+      "value": "Приложение iOS"
+    }
+  ],
+  "downloadAppButton__label": [
+    {
+      "type": 0,
+      "value": "Скачать приложение"
+    }
+  ],
+  "duration__hours": [
+    {
+      "type": 0,
+      "value": " 1 "
+    },
+    {
+      "type": 1,
+      "value": "hours"
+    },
+    {
+      "type": 0,
+      "value": " час"
+    }
+  ],
+  "duration__hoursAndMinutes": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "hours"
+    },
+    {
+      "type": 0,
+      "value": " 2"
+    },
+    {
+      "type": 1,
+      "value": "minutes"
+    }
+  ],
+  "duration__minutes": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "minutes"
+    },
+    {
+      "type": 0,
+      "value": "m"
+    }
+  ],
+  "generateFeed__audio": [
+    {
+      "type": 0,
+      "value": "Аудио"
+    }
+  ],
+  "generateFeed__subtitle": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "container"
+    },
+    {
+      "type": 1,
+      "value": "format"
+    },
+    {
+      "type": 0,
+      "value": " 3"
+    },
+    {
+      "type": 1,
+      "value": "bitrate"
+    },
+    {
+      "type": 0,
+      "value": " kbps"
+    }
+  ],
+  "generateFeed__video": [
+    {
+      "type": 0,
+      "value": "Видео"
+    }
+  ],
+  "generatedFeed__copyright": [
+    {
+      "type": 0,
+      "value": "Эта лента Авторского Права 1 "
+    },
+    {
+      "type": 1,
+      "value": "year"
+    },
+    {
+      "type": 0,
+      "value": " AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
+    }
+  ],
+  "header__navItemBlog": [
+    {
+      "type": 0,
+      "value": "Блог"
+    }
+  ],
+  "header__navItemCollections": [
+    {
+      "type": 0,
+      "value": "Подборки"
+    }
+  ],
+  "header__navItemDiscover": [
+    {
+      "type": 0,
+      "value": "Открыть"
+    }
+  ],
+  "header__navItemLibrary": [
+    {
+      "type": 0,
+      "value": "Библиотека"
+    }
+  ],
+  "header__navItemMore": [
+    {
+      "type": 0,
+      "value": "Подробнее"
+    }
+  ],
+  "header__navItemStory": [
+    {
+      "type": 0,
+      "value": "Наша история"
+    }
+  ],
+  "header__navItemStory-donate": [
+    {
+      "type": 0,
+      "value": "Пожертвовать"
+    }
+  ],
+  "header__navItemStory-purpose": [
+    {
+      "type": 0,
+      "value": "Наша цель"
+    }
+  ],
+  "header__navItemStory-spiritOfAudioVerse": [
+    {
+      "type": 0,
+      "value": "Дух AudioVerse"
+    }
+  ],
+  "header__navItemStory-team": [
+    {
+      "type": 0,
+      "value": "Команда"
+    }
+  ],
+  "header__navItemStory-testimonials": [
+    {
+      "type": 0,
+      "value": "Свидетельства"
+    }
+  ],
+  "header__navItemUser": [
+    {
+      "type": 0,
+      "value": "Пользовательские настройки"
+    }
+  ],
+  "header__naveItemBible": [
+    {
+      "type": 0,
+      "value": "Библия"
+    }
+  ],
+  "header__naveItemCollections-all": [
+    {
+      "type": 0,
+      "value": "Все сборники"
+    }
+  ],
+  "header__naveItemCollections-book": [
+    {
+      "type": 0,
+      "value": "Книга"
+    }
+  ],
+  "header__naveItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "Конференция"
+    }
+  ],
+  "header__naveItemCollections-series": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "header__naveItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "header__naveItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "Проповедующий"
+    }
+  ],
+  "header__naveItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "header__naveItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "header__naveItemMore-legal": [
+    {
+      "type": 0,
+      "value": "Законный"
+    }
+  ],
+  "header__naveItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "Конфиденциальность"
+    }
+  ],
+  "header__naveItemMore-terms": [
+    {
+      "type": 0,
+      "value": "Условия использования"
+    }
+  ],
+  "header__naveItemUser-logout": [
+    {
+      "type": 0,
+      "value": "Выйти из системы"
+    }
+  ],
+  "header__naveItemUser-profile": [
+    {
+      "type": 0,
+      "value": "Профиль"
+    }
+  ],
+  "homePage__addToLibraryPlaceholder": [
+    {
+      "type": 0,
+      "value": "Добавить в библиотеку"
+    }
+  ],
+  "homePage__createAccountSectionCTA": [
+    {
+      "type": 0,
+      "value": "Зарегистрироваться сейчас"
+    }
+  ],
+  "homePage__createAccountSectionText": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись, чтобы получить больше Audioverse (Аудио стихов). Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+    }
+  ],
+  "homePage__createAccountSectionTitle": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись"
+    }
+  ],
+  "homePage__downloadAppSectionText": [
+    {
+      "type": 0,
+      "value": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Транслируйте поучения из любого места через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге без использования данных."
+    }
+  ],
+  "homePage__downloadAppSectionTitle": [
+    {
+      "type": 0,
+      "value": "Скачать приложение"
+    }
+  ],
+  "homePage__downloadNowButtonLabel": [
+    {
+      "type": 0,
+      "value": "Скачать сейчас"
+    }
+  ],
+  "homePage__downloadQueuePlaceholder": [
+    {
+      "type": 0,
+      "value": "Очередь для скачивания"
+    }
+  ],
+  "homePage__emailSignupButton": [
+    {
+      "type": 0,
+      "value": "Подписаться"
+    }
+  ],
+  "homePage__followFunctionalityPlaceholder": [
+    {
+      "type": 0,
+      "value": "Follow Functionality"
+    }
+  ],
+  "homePage__footerDonateLink": [
+    {
+      "type": 0,
+      "value": "Пожертвовать"
+    }
+  ],
+  "homePage__footerDownloadAppButton": [
+    {
+      "type": 0,
+      "value": "Скачать приложение"
+    }
+  ],
+  "homePage__footerFacebookLink": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "homePage__footerInstagramLink": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "homePage__footerLinksTitle": [
+    {
+      "type": 0,
+      "value": "Ссылки"
+    }
+  ],
+  "homePage__footerNewsletterSignup": [
+    {
+      "type": 0,
+      "value": "Подписаться на рассылку новостей"
+    }
+  ],
+  "homePage__footerSocialTitle": [
+    {
+      "type": 0,
+      "value": "Социальный"
+    }
+  ],
+  "homePage__footerTwitterLink": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "homePage__joinAudioVerseButtonLabel": [
+    {
+      "type": 0,
+      "value": "Вступить в AudioVerse"
+    }
+  ],
+  "homePage__newsletterSectionText": [
+    {
+      "type": 0,
+      "value": "Хотите ли узнавать о том, когда мы выпускаем новые функции, участвуем в конференциях или выпускаем новую продукцию AudioVerse Swag? Подпишитесь на нашу рассылку новостей, чтобы быть в курсе последних событий."
+    }
+  ],
+  "homePage__newsletterSectionTitle": [
+    {
+      "type": 0,
+      "value": "Подписаться на Новости"
+    }
+  ],
+  "homePage__recentContentSectionText": [
+    {
+      "type": 0,
+      "value": "Ознакомьтесь с некоторыми из наших аудиозаписей. Затем, когда будете готовы,&nbsp;"
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "создайте учетную запись"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": ", чтобы получить доступ к большему объему информации."
+    }
+  ],
+  "homePage__recentContentSectionTitle": [
+    {
+      "type": 0,
+      "value": "Последнее содержание"
+    }
+  ],
+  "homePage__recentPostsButtonLabel": [
+    {
+      "type": 0,
+      "value": "Просмотреть все записи блога"
+    }
+  ],
+  "homePage__recentPostsSectionText": [
+    {
+      "type": 0,
+      "value": "Прочтите наш блог, чтобы найти статьи о недавних мероприятиях, проповедях и конференциях. Обновление происходит не реже одного раза в месяц."
+    }
+  ],
+  "homePage__recentPostsSectionTitle": [
+    {
+      "type": 0,
+      "value": "Недавние сообщения в блоге"
+    }
+  ],
+  "homePage__soundDoctrineText": [
+    {
+      "type": 0,
+      "value": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Задавайтесь вопросами и вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
+    }
+  ],
+  "homePage__soundDoctrineTitle": [
+    {
+      "type": 0,
+      "value": "Здравая доктрина"
+    }
+  ],
+  "homePage__supportSectionCTA": [
+    {
+      "type": 0,
+      "value": "Внести пожертвование"
+    }
+  ],
+  "homePage__supportSectionImagePlaceholder": [
+    {
+      "type": 0,
+      "value": "Фото"
+    }
+  ],
+  "homePage__supportSectionText": [
+    {
+      "type": 0,
+      "value": "AudioVerse - это некоммерческое служение, существующее благодаря нашим жертвователям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны группе наших щедрых жертвователей. Подумайте, не готовы ли вы внести пожертвование сегодня, даже если это всего лишь 5 долларов в месяц, и помогите нам гарантировать дальнейшее распространение разумного учения."
+    }
+  ],
+  "homePage__supportSectionTitle": [
+    {
+      "type": 0,
+      "value": "Поддержать бесплатные аудио файлы"
+    }
+  ],
+  "homePage__testimoniesSectionText": [
+    {
+      "type": 0,
+      "value": "Услышать от кого-то, кто пользуется AudioVerse."
+    }
+  ],
+  "home__testimoniesTitle": [
+    {
+      "type": 0,
+      "value": "Свидетельства"
+    }
+  ],
+  "languageAlternativesAlert__dismiss": [
+    {
+      "type": 0,
+      "value": "Отклонить"
+    }
+  ],
+  "languageAlternativesAlert__message": [
+    {
+      "type": 0,
+      "value": "Благодаря нашим жертвователям, а также международным партнерам, AudioVerse сегодня доступна на многих сайтах на разных языках. Поменяйте язык здесь или в меню."
+    }
+  ],
+  "libraryCollections__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "Подборки"
+    }
+  ],
+  "libraryCollections__dismiss": [
+    {
+      "type": 0,
+      "value": "Отклонить"
+    }
+  ],
+  "libraryCollections__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Добавить в закладки наименования, или прослушивайте аудио на странице Discover."
+    }
+  ],
+  "libraryCollections__emptyHeading": [
+    {
+      "type": 0,
+      "value": "У вас еще нет сохраненных элементов сборников"
+    }
+  ],
+  "libraryCollections__personsHeading": [
+    {
+      "type": 0,
+      "value": "Проповедующие"
+    }
+  ],
+  "libraryCollections__playlistsAlert": [
+    {
+      "type": 0,
+      "value": "В данный момент проводится повторное изображение опыта со списком воспроизведений. Вы можете управлять списком воспроизведений, используя мобильное приложение."
+    }
+  ],
+  "libraryCollections__playlistsHeading": [
+    {
+      "type": 0,
+      "value": "Списки воспроизведений"
+    }
+  ],
+  "libraryCollections__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
+  "libraryError__cta": [
+    {
+      "type": 0,
+      "value": "Перейти к разделу Discover"
+    }
+  ],
+  "libraryHistory__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Найти файл для прослушивания на странице Discover."
+    }
+  ],
+  "libraryHistory__emptyHeading": [
+    {
+      "type": 0,
+      "value": "Нет прослушанных файлов"
+    }
+  ],
+  "libraryHistory__loadMore": [
+    {
+      "type": 0,
+      "value": "Загрузить еще"
+    }
+  ],
+  "libraryNav__all": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "libraryNav__collections": [
+    {
+      "type": 0,
+      "value": "Подборки"
+    }
+  ],
+  "libraryNav__filter": [
+    {
+      "type": 0,
+      "value": "Фильтр"
+    }
+  ],
+  "libraryNav__finished": [
+    {
+      "type": 0,
+      "value": "Завершено"
+    }
+  ],
+  "libraryNav__history": [
+    {
+      "type": 0,
+      "value": "История"
+    }
+  ],
+  "libraryNav__sortAtoZ": [
+    {
+      "type": 0,
+      "value": "От А до Я (Russian alphabet) От А до Z (English alphabet)"
+    }
+  ],
+  "libraryNav__sortNewest": [
+    {
+      "type": 0,
+      "value": "От самых новых до самых старых"
+    }
+  ],
+  "libraryNav__sortOldest": [
+    {
+      "type": 0,
+      "value": "От самых старых до самых новых"
+    }
+  ],
+  "libraryNav__sortZtoA": [
+    {
+      "type": 0,
+      "value": "От Z до А"
+    }
+  ],
+  "libraryNav__started": [
+    {
+      "type": 0,
+      "value": "Начатые"
+    }
+  ],
+  "libraryNav__unstarted": [
+    {
+      "type": 0,
+      "value": "Не начатые"
+    }
+  ],
+  "libraryPlaybackStatus__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Найти файл для прослушивания на странице Discover."
+    }
+  ],
+  "libraryPlaybackStatus__finishedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "Ни один элемент еще не был завершен"
+    }
+  ],
+  "libraryPlaybackStatus__startedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "Ни один элемент еще не был начатым"
+    }
+  ],
+  "libraryPlaybackStatus__unstartedEmptyHeading": [
+    {
+      "type": 0,
+      "value": "Нет ни одного сохраненного наименования"
+    }
+  ],
+  "library__collectionsHeading": [
+    {
+      "type": 0,
+      "value": "Подборки"
+    }
+  ],
+  "library__collectionsSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все сборники"
+    }
+  ],
+  "library__emptyCopy": [
+    {
+      "type": 0,
+      "value": "Добавить в закладки файлы или слушать файлы на странице Discover."
+    }
+  ],
+  "library__emptyHeading": [
+    {
+      "type": 0,
+      "value": "Нет ни одного сохраненного наименования"
+    }
+  ],
+  "library__finishedHeading": [
+    {
+      "type": 0,
+      "value": "Завершено"
+    }
+  ],
+  "library__finishedSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все завершенные"
+    }
+  ],
+  "library__historyHeading": [
+    {
+      "type": 0,
+      "value": "История"
+    }
+  ],
+  "library__historySeeAll": [
+    {
+      "type": 0,
+      "value": "Просмотреть всю историю"
+    }
+  ],
+  "library__membersOnlyCopy": [
+    {
+      "type": 0,
+      "value": "Войти в систему или создать учетную запись чтобы войти в библиотеку настроек."
+    }
+  ],
+  "library__membersOnlyCta": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись или войти в систему"
+    }
+  ],
+  "library__membersOnlyHeading": [
+    {
+      "type": 0,
+      "value": "Функция только для участников"
+    }
+  ],
+  "library__startedHeading": [
+    {
+      "type": 0,
+      "value": "Начатые"
+    }
+  ],
+  "library__startedSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все начатые"
+    }
+  ],
+  "library__unstartedHeading": [
+    {
+      "type": 0,
+      "value": "Не начатые"
+    }
+  ],
+  "loadingCards-ariaLabel": [
+    {
+      "type": 0,
+      "value": "Загрузка...."
+    }
+  ],
+  "loginForm-reset__doneButton": [
+    {
+      "type": 0,
+      "value": "Выполнено"
+    }
+  ],
+  "loginForm-reset__emailLabel": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "loginForm-reset__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "loginForm-reset__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Введите адрес электронной почты, связанный с вашей учетной записью, и мы отправим Вам ссылку для восстановления пароля."
+    }
+  ],
+  "loginForm-reset__modalParagraphSent": [
+    {
+      "type": 0,
+      "value": "Ссылка на восстановление пароля отправлена. Проверьте свою электронную почту и перейдите по ссылке чтобы восстановить пароль."
+    }
+  ],
+  "loginForm-reset__modalTitle": [
+    {
+      "type": 0,
+      "value": "Восстановить пароль"
+    }
+  ],
+  "loginForm-reset__sendLinkButton": [
+    {
+      "type": 0,
+      "value": "Отправить ссылку на восстановление пароля"
+    }
+  ],
+  "loginForm__emailLabel": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "loginForm__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "loginForm__forgotPasswordButton": [
+    {
+      "type": 0,
+      "value": "Забыли пароль?"
+    }
+  ],
+  "loginForm__loginButton": [
+    {
+      "type": 0,
+      "value": "Логин"
+    }
+  ],
+  "loginForm__passwordLabel": [
+    {
+      "type": 0,
+      "value": "Пароль"
+    }
+  ],
+  "loginForm__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "∗∗∗∗∗∗∗"
+    }
+  ],
+  "loginForm__resetPasswordErrorMessage": [
+    {
+      "type": 0,
+      "value": "Что-то пошло не так во время попытки отправить ссылку на восстановление пароля"
+    }
+  ],
+  "loginForm__resetPasswordSuccessMessage": [
+    {
+      "type": 0,
+      "value": "Проверьте пришло ли на Вашу электронную почту сообщение с ссылкой на восстановление пароля"
+    }
+  ],
+  "loginForm__signup": [
+    {
+      "type": 0,
+      "value": "Зарегистрироваться"
+    }
+  ],
+  "loginForm__signupIntro": [
+    {
+      "type": 0,
+      "value": "У Вас нет учетной записи?"
+    }
+  ],
+  "logout__inProcess": [
+    {
+      "type": 0,
+      "value": "Выход из системы..."
+    }
+  ],
+  "molecule-buttonDownload__buttonLabel": [
+    {
+      "type": 0,
+      "value": "Загрузки"
+    }
+  ],
+  "molecule-buttonDownload__menuAudioHeading": [
+    {
+      "type": 0,
+      "value": "Загрузки аудио файлов"
+    }
+  ],
+  "molecule-buttonDownload__menuVideoHeading": [
+    {
+      "type": 0,
+      "value": "Загрузки видео файлов"
+    }
+  ],
+  "molecule-buttonGuest__feature1": [
+    {
+      "type": 0,
+      "value": "Lorem ipsum dolor"
+    }
+  ],
+  "molecule-buttonGuest__feature2": [
+    {
+      "type": 0,
+      "value": "Et exictur purim multatim"
+    }
+  ],
+  "molecule-buttonGuest__feature3": [
+    {
+      "type": 0,
+      "value": "Dulipscum erudis fesin"
+    }
+  ],
+  "molecule-buttonGuest__label": [
+    {
+      "type": 0,
+      "value": "Продолжить как гость"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelCreateAccount": [
+    {
+      "type": 0,
+      "value": "Создать учетную запись"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelGuest": [
+    {
+      "type": 0,
+      "value": "Продолжить как гость"
+    }
+  ],
+  "molecule-buttonGuest__modalButtonLabelLogIn": [
+    {
+      "type": 0,
+      "value": "Войти"
+    }
+  ],
+  "molecule-buttonGuest__modalParagraph": [
+    {
+      "type": 0,
+      "value": "Без учетной записи вы не сможете воспользоваться некоторыми ключевыми функциями, например:"
+    }
+  ],
+  "molecule-buttonGuest__modalTitle": [
+    {
+      "type": 0,
+      "value": "Продолжить как гость?"
+    }
+  ],
+  "molecule-buttonShareRecording__audioEmbedLabel": [
+    {
+      "type": 0,
+      "value": "Код для встраивания аудио"
+    }
+  ],
+  "molecule-buttonShareRecording__videoEmbedLabel": [
+    {
+      "type": 0,
+      "value": "Код для встраивания видео"
+    }
+  ],
+  "molecule-buttonShare__buttonLabel": [
+    {
+      "type": 0,
+      "value": "поделиться"
+    }
+  ],
+  "molecule-buttonShare__copyLink": [
+    {
+      "type": 0,
+      "value": "Скопировать ссылку"
+    }
+  ],
+  "molecule-buttonShare__copyRSSLink": [
+    {
+      "type": 0,
+      "value": "Скопировать RSS ссылку"
+    }
+  ],
+  "molecule-buttonShare__email": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "molecule-buttonShare__facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "molecule-buttonShare__shareTitle": [
+    {
+      "type": 0,
+      "value": "Поделиться"
+    }
+  ],
+  "molecule-buttonShare__twitter": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "molecule-buttonSpeed__buttonLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "speed"
+    },
+    {
+      "type": 0,
+      "value": "X"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addAlbum": [
+    {
+      "type": 0,
+      "value": "Добавить альбом"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addBook": [
+    {
+      "type": 0,
+      "value": "Добавить книгу"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addSeries": [
+    {
+      "type": 0,
+      "value": "Добавить серию"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__addStoryAlbum": [
+    {
+      "type": 0,
+      "value": "Добавить альбом"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__inLibrary": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "inLibraryCount"
+    },
+    {
+      "type": 0,
+      "value": " из 2"
+    },
+    {
+      "type": 1,
+      "value": "totalCount"
+    },
+    {
+      "type": 0,
+      "value": " в Вашей библиотеке"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeAlbum": [
+    {
+      "type": 0,
+      "value": "Удалить альбом"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeBook": [
+    {
+      "type": 0,
+      "value": "Удалить книгу"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeSeries": [
+    {
+      "type": 0,
+      "value": "Удалить серию"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeStoryAlbum": [
+    {
+      "type": 0,
+      "value": "Удалить альбом"
+    }
+  ],
+  "molecule-searchBar__label": [
+    {
+      "type": 0,
+      "value": "Поиск"
+    }
+  ],
+  "molecule-teaseRecording__lessPersons": [
+    {
+      "type": 0,
+      "value": "Показать меньше"
+    }
+  ],
+  "molecule-teaseRecording__morePersons": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " больше"
+    }
+  ],
+  "molecule-teaseRecording__partInfo": [
+    {
+      "type": 0,
+      "value": "Часть 1 "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": " из 2 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    }
+  ],
+  "molecule-transcript__disclaimer": [
+    {
+      "type": 0,
+      "value": "Данная транскрипция может быть автоматически выработана."
+    }
+  ],
+  "molecule-transcript__help": [
+    {
+      "type": 0,
+      "value": "Наша автоматически выработанная копия текста нуждается в Вашей помощи. Можете обращаться к нам по электронной почте с предложениями по редакции данного текста для блага Вас и других. Адрес: media@audioverse.org"
+    }
+  ],
+  "molecule-transcript__labelClose": [
+    {
+      "type": 0,
+      "value": "Скрыть копию текста"
+    }
+  ],
+  "molecule-transcript__labelOpen": [
+    {
+      "type": 0,
+      "value": "Читать копию текста"
+    }
+  ],
+  "molecules-pagination__nextLabel": [
+    {
+      "type": 0,
+      "value": "Следующее"
+    }
+  ],
+  "molecules-pagination__previousLabel": [
+    {
+      "type": 0,
+      "value": "Предыдущее"
+    }
+  ],
+  "navigation__backToMenu": [
+    {
+      "type": 0,
+      "value": "Назад в меню"
+    }
+  ],
+  "navigation__loginSignupCta": [
+    {
+      "type": 0,
+      "value": "Войти в систему/зарегистрироваться"
+    }
+  ],
+  "notFound__header": [
+    {
+      "type": 0,
+      "value": "Приносим извинения!"
+    }
+  ],
+  "notFound__message": [
+    {
+      "type": 0,
+      "value": "Ссылка может быть взломана, либо не существует, либо же неверно напечатана."
+    }
+  ],
+  "notFound__subheader": [
+    {
+      "type": 0,
+      "value": "Не удалось найти данную страницу"
+    }
+  ],
+  "notFound__suggestionsHeader": [
+    {
+      "type": 0,
+      "value": "Послушайте один из предложенных файлов"
+    }
+  ],
+  "notFound__toDiscover": [
+    {
+      "type": 0,
+      "value": "Назад на страницу Discover"
+    }
+  ],
+  "organism-modal__close": [
+    {
+      "type": 0,
+      "value": "Закрыть"
+    }
+  ],
+  "organism-recording__albumListTitle": [
+    {
+      "type": 0,
+      "value": "Другие песни в альбоме"
+    }
+  ],
+  "organism-recording__buttonLabelNext": [
+    {
+      "type": 0,
+      "value": "Следующее"
+    }
+  ],
+  "organism-recording__buttonLabelPrevious": [
+    {
+      "type": 0,
+      "value": "Предыдущее"
+    }
+  ],
+  "organism-recording__conferenceInfoTitle": [
+    {
+      "type": 0,
+      "value": "Конференция родителей"
+    }
+  ],
+  "organism-recording__metadataLabel": [
+    {
+      "type": 0,
+      "value": "метаданные"
+    }
+  ],
+  "organism-recording__partInfo": [
+    {
+      "type": 0,
+      "value": "Часть 1 "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    }
+  ],
+  "organism-recording__readByLabel": [
+    {
+      "type": 0,
+      "value": "Прочитано (кем-то) 1 "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "organism-recording__seriesInfoTitle": [
+    {
+      "type": 0,
+      "value": "Родительская серия"
+    }
+  ],
+  "organism-recording__seriesListLabel": [
+    {
+      "type": 0,
+      "value": "Список серий"
+    }
+  ],
+  "organism-recording__seriesListTitle": [
+    {
+      "type": 0,
+      "value": "Другие поучения из этой серии"
+    }
+  ],
+  "organism-recording__sponsorInfoTitle": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "personTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "Проповедующий"
+    }
+  ],
+  "playButton__pauseLabel": [
+    {
+      "type": 0,
+      "value": "Нажать на паузу"
+    }
+  ],
+  "playButton__playLabel": [
+    {
+      "type": 0,
+      "value": "Воспроизвести"
+    }
+  ],
+  "player__fullscreenButtonLabel": [
+    {
+      "type": 0,
+      "value": "Режим полного экрана"
+    }
+  ],
+  "player__nudgeBack": [
+    {
+      "type": 0,
+      "value": "Перемотать назад на 15 секунд"
+    }
+  ],
+  "player__nudgeForward": [
+    {
+      "type": 0,
+      "value": "Перемотать вперед на 15 секунд"
+    }
+  ],
+  "player__playerLabel": [
+    {
+      "type": 0,
+      "value": "Проигрыватель"
+    }
+  ],
+  "player__progressLabel": [
+    {
+      "type": 0,
+      "value": "Прогресс"
+    }
+  ],
+  "playlistButton__createButton": [
+    {
+      "type": 0,
+      "value": "Создать"
+    }
+  ],
+  "playlistButton__newPlaylistInputPlaceholder": [
+    {
+      "type": 0,
+      "value": "Новый список воспроизведений"
+    }
+  ],
+  "playlistButton__publicToggle": [
+    {
+      "type": 0,
+      "value": "Публичный"
+    }
+  ],
+  "playlistButton__trigger": [
+    {
+      "type": 0,
+      "value": "Добавить в список воспроизведения"
+    }
+  ],
+  "playlistButton__unauthenticated": [
+    {
+      "type": 0,
+      "value": "Вам нужно зайти в учётную запись, чтобы выполнить это действие "
+    }
+  ],
+  "playlistDetail__createdLabel": [
+    {
+      "type": 0,
+      "value": "Создано"
+    }
+  ],
+  "playlistDetail__partsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "playlistDetail__summaryLabel": [
+    {
+      "type": 0,
+      "value": "Резюме/краткий обзор"
+    }
+  ],
+  "playlistDetail__type": [
+    {
+      "type": 0,
+      "value": "Список воспроизведений"
+    }
+  ],
+  "preferences__buttonLabelSaveChanges": [
+    {
+      "type": 0,
+      "value": "Сохранить изменения"
+    }
+  ],
+  "preferences__downloadSettings": [
+    {
+      "type": 0,
+      "value": "Скачать настройки"
+    }
+  ],
+  "preferences__downloadSettingsIntro": [
+    {
+      "type": 0,
+      "value": "Выбрать, как Вы хотите скачать аудио файл."
+    }
+  ],
+  "preferences__heading": [
+    {
+      "type": 0,
+      "value": "Настройки учетной записи"
+    }
+  ],
+  "preferences__inputAutoplay": [
+    {
+      "type": 0,
+      "value": "Записи с автовоспроизведением"
+    }
+  ],
+  "preferences__language": [
+    {
+      "type": 0,
+      "value": "Язык"
+    }
+  ],
+  "preferences__playbackSettings": [
+    {
+      "type": 0,
+      "value": "Настройки воспроизведения"
+    }
+  ],
+  "preferences__playbackSettingsIntro": [
+    {
+      "type": 0,
+      "value": "Выберите должны ли записи по умолчанию воспроизводиться в автоматическом режиме."
+    }
+  ],
+  "preferences__preferredAudioQuality": [
+    {
+      "type": 0,
+      "value": "Предпочтительное качество звука"
+    }
+  ],
+  "preferences__preferredAudioQuality-high": [
+    {
+      "type": 0,
+      "value": "Высоко"
+    }
+  ],
+  "preferences__preferredAudioQuality-low": [
+    {
+      "type": 0,
+      "value": "Низко"
+    }
+  ],
+  "preferences__preferredAudioQuality-medium": [
+    {
+      "type": 0,
+      "value": "Средний"
+    }
+  ],
+  "preferences__subheading": [
+    {
+      "type": 0,
+      "value": "Предпочтения"
+    }
+  ],
+  "preferences__timezone": [
+    {
+      "type": 0,
+      "value": "Часовой пояс"
+    }
+  ],
+  "presenterAppearsDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все также появляется в...."
+    }
+  ],
+  "presenterDetail__alsoAppearsInLabel": [
+    {
+      "type": 0,
+      "value": "Также появляется в...."
+    }
+  ],
+  "presenterDetail__audiobookTracksCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Дорожка аудиокниги"
+    }
+  ],
+  "presenterDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "presenterDetail__essentialRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "Существенное "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presenterDetail__musicTracksCountLabel": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Музыкальные дорожки"
+    }
+  ],
+  "presenterDetail__recentAllLabel": [
+    {
+      "type": 0,
+      "value": "Просмотреть все недавние"
+    }
+  ],
+  "presenterDetail__recentRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "Недавние"
+    }
+  ],
+  "presenterDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "Смотреть все серии"
+    }
+  ],
+  "presenterDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "presenterDetail__speakersAllLabel": [
+    {
+      "type": 0,
+      "value": "Просмотреть все также появляется в...."
+    }
+  ],
+  "presenterDetail__storiesCountLabel": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Истории"
+    }
+  ],
+  "presenterDetail__teachingsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "presenterDetail__topAllLabel": [
+    {
+      "type": 0,
+      "value": "Просмотреть большее количество часто прослушиваемых"
+    }
+  ],
+  "presenterDetail__topRecordingsLabel": [
+    {
+      "type": 0,
+      "value": "Часто прослушиваемые"
+    }
+  ],
+  "presenterDetail__websiteLabel": [
+    {
+      "type": 0,
+      "value": "Веб-страница"
+    }
+  ],
+  "presenterRecordingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все записи"
+    }
+  ],
+  "presenterSequencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все серии"
+    }
+  ],
+  "presenterTopDetail__heading": [
+    {
+      "type": 0,
+      "value": "Часто прослушиваемые"
+    }
+  ],
+  "presentersFeed__description": [
+    {
+      "type": 0,
+      "value": "Последние проповеди AudioVerse 1"
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presentersFeed__title": [
+    {
+      "type": 0,
+      "value": "Проповеди "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "presentersList__title": [
+    {
+      "type": 0,
+      "value": "Все проповедующие"
+    }
+  ],
+  "profile__buttonLabelDeleteAccount": [
+    {
+      "type": 0,
+      "value": "Удалить учетную запись"
+    }
+  ],
+  "profile__buttonLabelSaveChanges": [
+    {
+      "type": 0,
+      "value": "Сохранить изменения"
+    }
+  ],
+  "profile__heading": [
+    {
+      "type": 0,
+      "value": "Настройки учетной записи"
+    }
+  ],
+  "profile__inputLabelForEmail": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "profile__inputLabelForFirstName": [
+    {
+      "type": 0,
+      "value": "Имя"
+    }
+  ],
+  "profile__inputLabelForLastName": [
+    {
+      "type": 0,
+      "value": "Фамилия"
+    }
+  ],
+  "profile__inputLabelForPassword": [
+    {
+      "type": 0,
+      "value": "Пароль"
+    }
+  ],
+  "profile__intro": [
+    {
+      "type": 0,
+      "value": "Добавьте информацию о своей учетной записи для настройки своего опыта работы и управления информацией для входа в систему."
+    }
+  ],
+  "profile__subheading": [
+    {
+      "type": 0,
+      "value": "Профиль"
+    }
+  ],
+  "register__emailLabel": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "register__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "register__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "Имя"
+    }
+  ],
+  "register__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "register__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "Фамилия"
+    }
+  ],
+  "register__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "register__loadingMessage": [
+    {
+      "type": 0,
+      "value": "Загрузка..."
+    }
+  ],
+  "register__login": [
+    {
+      "type": 0,
+      "value": "Логин"
+    }
+  ],
+  "register__loginIntro": [
+    {
+      "type": 0,
+      "value": "У Вас уже есть учетная запись?"
+    }
+  ],
+  "register__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Подписаться на рассылку бюллетеня"
+    }
+  ],
+  "register__passwordLabel": [
+    {
+      "type": 0,
+      "value": "Пароль"
+    }
+  ],
+  "register__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "∗∗∗∗∗∗∗"
+    }
+  ],
+  "register__submitButton": [
+    {
+      "type": 0,
+      "value": "Зарегистрироваться"
+    }
+  ],
+  "register__successMessage": [
+    {
+      "type": 0,
+      "value": "Успешно"
+    }
+  ],
+  "reset__confirmPasswordLabel": [
+    {
+      "type": 0,
+      "value": "Подтвердите Ваш новый пароль"
+    }
+  ],
+  "reset__confirmPasswordPlaceholder": [
+    {
+      "type": 0,
+      "value": "Подтвердите Ваш новый пароль"
+    }
+  ],
+  "reset__errorGeneral": [
+    {
+      "type": 0,
+      "value": "Что-то пошло не так во время попытки переустановить Ваш пароль"
+    }
+  ],
+  "reset__errorMismatch": [
+    {
+      "type": 0,
+      "value": "Пароли должны совпадать"
+    }
+  ],
+  "reset__errorRepeatPassword": [
+    {
+      "type": 0,
+      "value": "Пожалуйста, введите пароль 2 раза"
+    }
+  ],
+  "reset__intro": [
+    {
+      "type": 0,
+      "value": "Создайте новый пароль для 1"
+    },
+    {
+      "type": 1,
+      "value": "email"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "reset__passwordLabel": [
+    {
+      "type": 0,
+      "value": "Новый пароль"
+    }
+  ],
+  "reset__passwordPlaceholder": [
+    {
+      "type": 0,
+      "value": "Новый пароль"
+    }
+  ],
+  "reset__submitButton": [
+    {
+      "type": 0,
+      "value": "Логин"
+    }
+  ],
+  "reset__successMessage": [
+    {
+      "type": 0,
+      "value": "Пароль успешно изменен"
+    }
+  ],
+  "rssAlternate__title": [
+    {
+      "type": 0,
+      "value": "Канал RSS"
+    }
+  ],
+  "searchCollections__heading": [
+    {
+      "type": 0,
+      "value": "Все подходящие сборники"
+    }
+  ],
+  "searchPersons__heading": [
+    {
+      "type": 0,
+      "value": "Все подходящие лица"
+    }
+  ],
+  "searchSequences__heading": [
+    {
+      "type": 0,
+      "value": "Все подходящие последовательности"
+    }
+  ],
+  "searchSponsors__heading": [
+    {
+      "type": 0,
+      "value": "Все соответствующие спонсоры"
+    }
+  ],
+  "searchTeachings__heading": [
+    {
+      "type": 0,
+      "value": "Все подходящие поучения"
+    }
+  ],
+  "search__conferencesHeading": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "search__conferencesSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все конференции"
+    }
+  ],
+  "search__personsHeading": [
+    {
+      "type": 0,
+      "value": "Проповедующие"
+    }
+  ],
+  "search__personsSeeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть всех проповедующих"
+    }
+  ],
+  "search__resultsCount": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Результаты"
+    }
+  ],
+  "search__sequencesHeading": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "search__sequencesSeeAll": [
+    {
+      "type": 0,
+      "value": "Смотреть все серии"
+    }
+  ],
+  "search__sponsorsHeading": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
+  "search__sponsorsSeeAll": [
+    {
+      "type": 0,
+      "value": "Просмотреть список всех спонсоров"
+    }
+  ],
+  "search__teachingsHeading": [
+    {
+      "type": 0,
+      "value": "Поучения"
+    }
+  ],
+  "search__teachingsSeeAll": [
+    {
+      "type": 0,
+      "value": "Увидеть все поучения"
+    }
+  ],
+  "sequenceType__audiobookTitle": [
+    {
+      "type": 0,
+      "value": "Книга"
+    }
+  ],
+  "sequenceType__musicTrackTitle": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "sequenceType__seriesTitle": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "sequenceType__storyTitle": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "seriesDetail__conferenceLabel": [
+    {
+      "type": 0,
+      "value": "Конференция родителей"
+    }
+  ],
+  "seriesDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "seriesDetail__partsCountLabel": [
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " части"
+    }
+  ],
+  "seriesDetail__recordedLabel": [
+    {
+      "type": 0,
+      "value": "Записано"
+    }
+  ],
+  "seriesDetail__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "seriesDetail__type": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "seriesList__heading": [
+    {
+      "type": 0,
+      "value": "Все серии"
+    }
+  ],
+  "sermonDetailPage__attachments": [
+    {
+      "type": 0,
+      "value": "Приложения"
+    }
+  ],
+  "sermonDetailPage__copyright": [
+    {
+      "type": 0,
+      "value": "Авторское право ⓒ 1"
+    },
+    {
+      "type": 1,
+      "value": "year"
+    },
+    {
+      "type": 0,
+      "value": " 2"
+    },
+    {
+      "type": 1,
+      "value": "owner"
+    },
+    {
+      "type": 0,
+      "value": "."
+    }
+  ],
+  "sermonDetailPage__descriptionTitle": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "sermonDetailPage__disclaimer": [
+    {
+      "type": 0,
+      "value": "Идеи, изложенные в этой записи, принадлежат ее авторам и могут не совпадать с мнением AudioVerse."
+    }
+  ],
+  "sermonDetailPage__recordedTitle": [
+    {
+      "type": 0,
+      "value": "Записано"
+    }
+  ],
+  "sermonList__heading": [
+    {
+      "type": 0,
+      "value": "Все поучения"
+    }
+  ],
+  "sermonsList__filter": [
+    {
+      "type": 0,
+      "value": "Фильтр"
+    }
+  ],
+  "socialLogin__loginFacebookButton": [
+    {
+      "type": 0,
+      "value": "Войти с помощью Facebook"
+    }
+  ],
+  "socialLogin__loginGoogleButton": [
+    {
+      "type": 0,
+      "value": "Войти с помощью Google"
+    }
+  ],
+  "socialLogin__registerFacebookButton": [
+    {
+      "type": 0,
+      "value": "Зарегистрируйтесь в Facebook"
+    }
+  ],
+  "socialLogin__registerGoogleButton": [
+    {
+      "type": 0,
+      "value": "Зарегистрируйтесь в Google"
+    }
+  ],
+  "socialLogin__successMessage": [
+    {
+      "type": 0,
+      "value": "Успешно"
+    }
+  ],
+  "songsListPage__1ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "1-я книга Паралипоменон"
+    }
+  ],
+  "songsListPage__1CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "1-е послание к Коринфянам"
+    }
+  ],
+  "songsListPage__1JohnLabel": [
+    {
+      "type": 0,
+      "value": "1-е послание Иоанна"
+    }
+  ],
+  "songsListPage__1KingsLabel": [
+    {
+      "type": 0,
+      "value": "3-я книга Царств"
+    }
+  ],
+  "songsListPage__1PeterLabel": [
+    {
+      "type": 0,
+      "value": "1-е послание Петра"
+    }
+  ],
+  "songsListPage__1SamuelLabel": [
+    {
+      "type": 0,
+      "value": "1-я книга Царств"
+    }
+  ],
+  "songsListPage__1ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "1-е послание к Фессалоникийцам"
+    }
+  ],
+  "songsListPage__1TimothyLabel": [
+    {
+      "type": 0,
+      "value": "1-е послание к Тимофею"
+    }
+  ],
+  "songsListPage__2ChroniclesLabel": [
+    {
+      "type": 0,
+      "value": "2-я книга Паралипоменон"
+    }
+  ],
+  "songsListPage__2CorinthiansLabel": [
+    {
+      "type": 0,
+      "value": "2-е послание к Коринфянам"
+    }
+  ],
+  "songsListPage__2JohnLabel": [
+    {
+      "type": 0,
+      "value": "2-е послание Иоанна"
+    }
+  ],
+  "songsListPage__2KingsLabel": [
+    {
+      "type": 0,
+      "value": "4-я книга Царств"
+    }
+  ],
+  "songsListPage__2PeterLabel": [
+    {
+      "type": 0,
+      "value": "2-е послание Петра"
+    }
+  ],
+  "songsListPage__2SamuelLabel": [
+    {
+      "type": 0,
+      "value": "2-я книга Царств"
+    }
+  ],
+  "songsListPage__2ThessaloniansLabel": [
+    {
+      "type": 0,
+      "value": "2-е послание к Фессалоникийцам"
+    }
+  ],
+  "songsListPage__2TimothyLabel": [
+    {
+      "type": 0,
+      "value": "2-е послание к Тимофею"
+    }
+  ],
+  "songsListPage__3JohnLabel": [
+    {
+      "type": 0,
+      "value": "3-е послание Иоанна"
+    }
+  ],
+  "songsListPage__ActsLabel": [
+    {
+      "type": 0,
+      "value": "Деяния Апостолов"
+    }
+  ],
+  "songsListPage__AmosLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Амоса"
+    }
+  ],
+  "songsListPage__ColossiansLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Колоссянам"
+    }
+  ],
+  "songsListPage__DanielLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Даниила"
+    }
+  ],
+  "songsListPage__DeuteronomyLabel": [
+    {
+      "type": 0,
+      "value": "Второзаконие"
+    }
+  ],
+  "songsListPage__EcclesiastesLabel": [
+    {
+      "type": 0,
+      "value": "Книга Екклесиаста"
+    }
+  ],
+  "songsListPage__EphesiansLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Ефесянам"
+    }
+  ],
+  "songsListPage__EstherLabel": [
+    {
+      "type": 0,
+      "value": "Книга Есфирь"
+    }
+  ],
+  "songsListPage__ExodusLabel": [
+    {
+      "type": 0,
+      "value": "Исход"
+    }
+  ],
+  "songsListPage__EzekielLabel": [
+    {
+      "type": 0,
+      "value": "Иезекииль"
+    }
+  ],
+  "songsListPage__EzraLabel": [
+    {
+      "type": 0,
+      "value": "Ездра"
+    }
+  ],
+  "songsListPage__GalatiansLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Галатам"
+    }
+  ],
+  "songsListPage__GenesisLabel": [
+    {
+      "type": 0,
+      "value": "Бытие"
+    }
+  ],
+  "songsListPage__HabakkukLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Аввакума"
+    }
+  ],
+  "songsListPage__HaggaiLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Аггея"
+    }
+  ],
+  "songsListPage__HebrewsLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Евреям"
+    }
+  ],
+  "songsListPage__HoseaLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Осии"
+    }
+  ],
+  "songsListPage__IsaiahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Исаии"
+    }
+  ],
+  "songsListPage__JamesLabel": [
+    {
+      "type": 0,
+      "value": "Послание Иакова"
+    }
+  ],
+  "songsListPage__JeremiahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Иеремии"
+    }
+  ],
+  "songsListPage__JobLabel": [
+    {
+      "type": 0,
+      "value": "Книга Иова"
+    }
+  ],
+  "songsListPage__JoelLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Иоиля"
+    }
+  ],
+  "songsListPage__JohnLabel": [
+    {
+      "type": 0,
+      "value": "Евангелие от Иоанна"
+    }
+  ],
+  "songsListPage__JonahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Ионы"
+    }
+  ],
+  "songsListPage__JoshuaLabel": [
+    {
+      "type": 0,
+      "value": "Книга Иисуса Навина"
+    }
+  ],
+  "songsListPage__JudeLabel": [
+    {
+      "type": 0,
+      "value": "Послание Иуды"
+    }
+  ],
+  "songsListPage__JudgesLabel": [
+    {
+      "type": 0,
+      "value": "Книга судей Израилевых"
+    }
+  ],
+  "songsListPage__LamentationsLabel": [
+    {
+      "type": 0,
+      "value": "Книга Плач Иеремии"
+    }
+  ],
+  "songsListPage__LeviticusLabel": [
+    {
+      "type": 0,
+      "value": "Левит"
+    }
+  ],
+  "songsListPage__LukeLabel": [
+    {
+      "type": 0,
+      "value": "Евангелие от Луки"
+    }
+  ],
+  "songsListPage__MalachiLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Малахии"
+    }
+  ],
+  "songsListPage__MarkLabel": [
+    {
+      "type": 0,
+      "value": "Евангелие от Марка"
+    }
+  ],
+  "songsListPage__MatthewLabel": [
+    {
+      "type": 0,
+      "value": "Евангелие от Матфея"
+    }
+  ],
+  "songsListPage__MicahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Михея"
+    }
+  ],
+  "songsListPage__NahumLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Наума"
+    }
+  ],
+  "songsListPage__NehemiahLabel": [
+    {
+      "type": 0,
+      "value": "Книга Неемии"
+    }
+  ],
+  "songsListPage__NumbersLabel": [
+    {
+      "type": 0,
+      "value": "Книга Чисел"
+    }
+  ],
+  "songsListPage__ObadiahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Авдия"
+    }
+  ],
+  "songsListPage__PhilemonLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Филимону"
+    }
+  ],
+  "songsListPage__PhilippiansLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Филиппийцам"
+    }
+  ],
+  "songsListPage__ProverbsLabel": [
+    {
+      "type": 0,
+      "value": "Книга Притчей Соломоновых"
+    }
+  ],
+  "songsListPage__PsalmsLabel": [
+    {
+      "type": 0,
+      "value": "Псалтирь"
+    }
+  ],
+  "songsListPage__RevelationLabel": [
+    {
+      "type": 0,
+      "value": "Откровение"
+    }
+  ],
+  "songsListPage__RomansLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Римлянам"
+    }
+  ],
+  "songsListPage__RuthLabel": [
+    {
+      "type": 0,
+      "value": "Книга Руфь"
+    }
+  ],
+  "songsListPage__Song of SolomonLabel": [
+    {
+      "type": 0,
+      "value": "Книга Песни Песней Соломона"
+    }
+  ],
+  "songsListPage__TitusLabel": [
+    {
+      "type": 0,
+      "value": "Послание к Титу"
+    }
+  ],
+  "songsListPage__ZechariahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Захарии"
+    }
+  ],
+  "songsListPage__ZephaniahLabel": [
+    {
+      "type": 0,
+      "value": "Книга пророка Софонии"
+    }
+  ],
+  "songsListPage__albumTabLabel": [
+    {
+      "type": 0,
+      "value": "Альбомы"
+    }
+  ],
+  "songsListPage__bookTabLabel": [
+    {
+      "type": 0,
+      "value": "Книги"
+    }
+  ],
+  "songsListPage__sponsorTabLabel": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
+  "songsListPage__tagTabLabel": [
+    {
+      "type": 0,
+      "value": "Теги / метки"
+    }
+  ],
+  "sopnsorTypeLockup_type": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "sponsorConferencesDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все конференции"
+    }
+  ],
+  "sponsorDetail__collectionCountLabel": [
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Конференции"
+    }
+  ],
+  "sponsorDetail__conferencesAllLabel": [
+    {
+      "type": 0,
+      "value": "Посмотреть все конференции"
+    }
+  ],
+  "sponsorDetail__conferencesLabel": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "sponsorDetail__descriptionLabel": [
+    {
+      "type": 0,
+      "value": "Описание"
+    }
+  ],
+  "sponsorDetail__locationLabel": [
+    {
+      "type": 0,
+      "value": "Местонахождение"
+    }
+  ],
+  "sponsorDetail__recentAllLabel": [
+    {
+      "type": 0,
+      "value": "Посмотреть все недавние поучения"
+    }
+  ],
+  "sponsorDetail__recentLabel": [
+    {
+      "type": 0,
+      "value": "Недавние поучения"
+    }
+  ],
+  "sponsorDetail__recordingsCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " поучения"
+    }
+  ],
+  "sponsorDetail__sequencesCountLabel": [
+    {
+      "type": 0,
+      "value": "1 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " серия"
+    }
+  ],
+  "sponsorDetail__seriesAllLabel": [
+    {
+      "type": 0,
+      "value": "Смотреть все серии"
+    }
+  ],
+  "sponsorDetail__seriesLabel": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "sponsorDetail__websiteLabel": [
+    {
+      "type": 0,
+      "value": "Веб-страница"
+    }
+  ],
+  "sponsorSeriesDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все серии"
+    }
+  ],
+  "sponsorTeachingsDetail__heading": [
+    {
+      "type": 0,
+      "value": "Все поучения"
+    }
+  ],
+  "sponsorTeachingsFeed__description": [
+    {
+      "type": 0,
+      "value": "Самые последние записи из "
+    },
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": " на AudioVerse"
+    }
+  ],
+  "sponsorTeachingsFeed__title": [
+    {
+      "type": 0,
+      "value": "Проповеди "
+    },
+    {
+      "type": 1,
+      "value": "name"
+    }
+  ],
+  "sponsorsList__title": [
+    {
+      "type": 0,
+      "value": "Все спонсоры"
+    }
+  ],
+  "storyAlbumList__heading": [
+    {
+      "type": 0,
+      "value": "Все истории"
+    }
+  ],
+  "storyAlbumsFeed__description": [
+    {
+      "type": 1,
+      "value": "title"
+    },
+    {
+      "type": 0,
+      "value": ", "
+    },
+    {
+      "type": 1,
+      "value": "authors"
+    },
+    {
+      "type": 0,
+      "value": ", рассказано "
+    },
+    {
+      "type": 1,
+      "value": "narrators"
+    }
+  ],
+  "teachingsFeed__description": [
+    {
+      "type": 0,
+      "value": "Презентация AudioVerse на "
+    },
+    {
+      "type": 1,
+      "value": "language"
+    }
+  ],
+  "teachingsFeed__title": [
+    {
+      "type": 0,
+      "value": "Презентации AudioVerse ("
+    },
+    {
+      "type": 1,
+      "value": "language"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "testimonies__heading": [
+    {
+      "type": 0,
+      "value": "Свидетельства"
+    }
+  ],
+  "testimonies__intro": [
+    {
+      "type": 0,
+      "value": "Есть ли положительные свидетельства? Расскажите нам свою историю!"
+    }
+  ],
+  "testimonies__shareYourStory": [
+    {
+      "type": 0,
+      "value": "Поделитесь своей историей"
+    }
+  ],
+  "time__minutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "s"
+    }
+  ],
+  "trendingTeachings__heading": [
+    {
+      "type": 0,
+      "value": "Поучения, которые в тренде"
+    }
+  ],
+  "unstartedSeeAll": [
+    {
+      "type": 0,
+      "value": "Посмотреть все не начатые"
+    }
+  ]
 }

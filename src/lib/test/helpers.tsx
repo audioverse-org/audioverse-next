@@ -308,6 +308,7 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			if (!(event in handlers)) handlers[event] = [];
 			handlers[event].push(fn);
 		}) as any,
+		bufferedEnd: jest.fn(),
 		...functions,
 	};
 

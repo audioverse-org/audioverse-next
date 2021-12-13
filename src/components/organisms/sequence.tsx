@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -6,6 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
+import { isBackgroundColorDark } from '@components/molecules/buttonPlay';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
@@ -14,12 +16,12 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import IconButton from '@components/molecules/iconButton';
+import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
-import TypeLockup from '@components/molecules/typeLockup';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
+import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import {
 	makeAudiobookFeedRoute,
 	makeSeriesFeedRoute,
@@ -30,7 +32,6 @@ import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ListAltIcon from '../../../public/img/fa-list-alt.svg';
 import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../public/img/icon-like-light.svg';
 
@@ -75,6 +76,13 @@ export function Sequence({
 		}
 	})()(languageRoute, id);
 
+	const { textColor, ruleColor, iconColor, backgroundColor } =
+		getSequenceTypeTheme(contentType);
+	const linkClasses = clsx(
+		'decorated',
+		isBackgroundColorDark(backgroundColor) && 'hover--salmon'
+	);
+
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
 		details.push({
@@ -96,7 +104,7 @@ export function Sequence({
 			definition: (
 				<p>
 					<Link href={collection.canonicalPath}>
-						<a className="decorated">{collection.title}</a>
+						<a className={linkClasses}>{collection.title}</a>
 					</Link>
 				</p>
 			),
@@ -112,7 +120,7 @@ export function Sequence({
 			),
 			definition: (
 				<Link href={sponsor.canonicalPath}>
-					<a className="decorated">{sponsor.title}</a>
+					<a className={linkClasses}>{sponsor.title}</a>
 				</Link>
 			),
 		});
@@ -130,19 +138,9 @@ export function Sequence({
 	}
 
 	return (
-		<Tease className={styles.container}>
+		<Tease className={clsx(styles.container, styles[contentType])}>
 			<ContentWidthLimiter>
-				<TypeLockup
-					Icon={ListAltIcon}
-					label={intl.formatMessage({
-						id: `seriesDetail__type`,
-						defaultMessage: 'Series',
-						description: `Series Detail type label`,
-					})}
-					iconColor={BaseColors.RED}
-					textColor={BaseColors.DARK}
-				/>
-
+				<SequenceTypeLockup contentType={contentType} />
 				<div className={styles.titleLockup}>
 					{image && (
 						<div className={styles.image}>
@@ -165,7 +163,7 @@ export function Sequence({
 					</div>
 					<ButtonShare
 						shareUrl={shareUrl}
-						backgroundColor={BaseColors.CREAM}
+						backgroundColor={backgroundColor}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={rssUrl}
@@ -173,13 +171,13 @@ export function Sequence({
 					<IconButton
 						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
 						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
-						backgroundColor={BaseColors.CREAM}
+						color={isFavorited ? iconColor : textColor}
+						backgroundColor={backgroundColor}
 						className={styles.iconButton}
 					/>
 				</div>
-				<HorizontalRule color={BaseColors.MID_TONE} />
-				<DefinitionList terms={details} textColor={BaseColors.DARK} />
+				<HorizontalRule color={ruleColor} />
+				<DefinitionList terms={details} textColor={textColor} />
 			</ContentWidthLimiter>
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>

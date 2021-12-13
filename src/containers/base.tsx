@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { DehydratedState, Hydrate } from 'react-query';
 import 'video.js/dist/video-js.css';
@@ -11,6 +11,7 @@ import LoadingIndicator from '@components/molecules/loadingIndicator';
 import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
+import AndPlaybackContext from '@components/templates/andPlaybackContext';
 
 export interface IBaseProps {
 	disableSidebar?: boolean;
@@ -39,6 +40,10 @@ function Base<P>({
 }): JSX.Element {
 	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
 		pageProps;
+
+	useEffect(() => {
+		document.body.classList.toggle('body--no-sidebar', disableSidebar);
+	}, [disableSidebar]);
 	return (
 		<>
 			<React.StrictMode>
@@ -60,15 +65,17 @@ function Base<P>({
 					<Hydrate state={dehydratedState}>
 						<AndGlobalModals>
 							<LoadingIndicator />
-							{disableSidebar ? (
-								<Component {...pageProps} />
-							) : (
-								<AndMiniplayer>
-									<AndNavigation>
-										<Component {...pageProps} />
-									</AndNavigation>
-								</AndMiniplayer>
-							)}
+							<AndPlaybackContext>
+								{disableSidebar ? (
+									<Component {...pageProps} />
+								) : (
+									<AndMiniplayer>
+										<AndNavigation>
+											<Component {...pageProps} />
+										</AndNavigation>
+									</AndMiniplayer>
+								)}
+							</AndPlaybackContext>
 						</AndGlobalModals>
 					</Hydrate>
 				</QueryClientProvider>

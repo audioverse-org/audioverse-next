@@ -2,6 +2,7 @@ query getCollectionDetailPageData($id: ID!) {
 	collection(id: $id) {
 		id
 		title
+		contentType
 		startDate
 		endDate
 		duration
@@ -11,7 +12,7 @@ query getCollectionDetailPageData($id: ID!) {
 		shareUrl
 		location
 		image {
-			url(size: 1400)
+			url(size: 1000, cropMode: MAX_SIZE)
 		}
 		sponsor {
 			id

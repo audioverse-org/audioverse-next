@@ -11,7 +11,11 @@
 		grid-area: cell;
 		content: '';
 		display: block;
-		background-color: var(--barColor, $ts-lightTone);
+		background: linear-gradient(
+			90deg,
+			#{$ts-bufferTone} var(--buffered),
+			var(--barColor, $ts-lightTone) var(--buffered)
+		);
 		height: $visualHeight;
 		margin-top: $margin;
 		margin-bottom: $margin;

@@ -18,7 +18,9 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 	[
 		BaseColors.DARK,
 		BaseColors.BOOK_B,
+		BaseColors.BOOK_H,
 		BaseColors.STORY_B,
+		BaseColors.STORY_H,
 		BaseColors.TOPIC_B,
 	].includes(backgroundColor);
 
@@ -28,6 +30,7 @@ export default function ButtonPlay({
 	backgroundColor,
 	large,
 	active,
+	prefersAudio,
 	className,
 }: {
 	recording: AndMiniplayerFragment;
@@ -35,12 +38,13 @@ export default function ButtonPlay({
 	playlistRecordings?: AndMiniplayerFragment[];
 	large?: boolean;
 	active?: boolean;
+	prefersAudio?: boolean;
 	className?: string;
 }): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(
-		recording,
-		playlistRecordings
-	);
+	const { isPaused, play, pause } = usePlaybackSession(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
 	const intl = useIntl();
 
 	const label = isPaused

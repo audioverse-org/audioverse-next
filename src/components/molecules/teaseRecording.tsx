@@ -59,7 +59,7 @@ export default function TeaseRecording({
 		disableUserFeatures
 	);
 	const router = useRouter();
-	const session = usePlaybackSession(recording, playlistRecordings);
+	const session = usePlaybackSession(recording, { playlistRecordings });
 	const progress = session.progress;
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 
@@ -187,7 +187,7 @@ export default function TeaseRecording({
 					)}
 				>
 					<span className={styles.duration}>
-						{useFormattedDuration(session.duration)}
+						{useFormattedDuration(recording.duration)}
 					</span>
 					{progress > 0 && (
 						<span className={styles.progress}>

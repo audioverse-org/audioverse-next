@@ -14,7 +14,7 @@ query getPresenterListPageData(
 			givenName
 			surname
 			image {
-				url(size: 100)
+				url(size: 128)
 			}
 			summary
 		}
