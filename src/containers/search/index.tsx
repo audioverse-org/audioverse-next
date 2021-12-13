@@ -80,7 +80,7 @@ function Search({ language }: SearchProps): JSX.Element {
 			heading: (
 				<FormattedMessage
 					id="search__personsHeading"
-					defaultMessage="Speakers"
+					defaultMessage="Presenters"
 				/>
 			),
 			cards: persons.nodes?.map((person) => (
@@ -89,7 +89,7 @@ function Search({ language }: SearchProps): JSX.Element {
 			seeAll: persons.pageInfo.hasNextPage && (
 				<FormattedMessage
 					id="search__personsSeeAll"
-					defaultMessage="See All Speakers"
+					defaultMessage="See All Presenters"
 				/>
 			),
 			url: makeSearchPersonsRoute(languageRoute, term),

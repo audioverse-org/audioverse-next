@@ -13,6 +13,7 @@ interface SectionProps {
 	center?: boolean;
 	reverse?: boolean;
 	short?: boolean;
+	tall?: boolean;
 	className?: string;
 }
 
@@ -24,6 +25,7 @@ export default function Section({
 	reverse,
 	bleed,
 	short,
+	tall,
 	className,
 }: SectionProps): JSX.Element {
 	return (
@@ -35,6 +37,7 @@ export default function Section({
 				reverse && styles.reverse,
 				bleed && styles.bleed,
 				short && styles.short,
+				tall && styles.tall,
 				className
 			)}
 		>

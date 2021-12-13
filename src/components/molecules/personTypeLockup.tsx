@@ -12,7 +12,10 @@ export default function PersonTypeLockup(): JSX.Element {
 		<TypeLockup
 			Icon={UserIcon}
 			label={
-				<FormattedMessage id="personTypeLockup_type" defaultMessage="Speaker" />
+				<FormattedMessage
+					id="personTypeLockup_type"
+					defaultMessage="Presenter"
+				/>
 			}
 			iconColor={BaseColors.RED}
 			textColor={BaseColors.DARK}

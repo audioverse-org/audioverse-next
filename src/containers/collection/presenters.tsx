@@ -39,7 +39,7 @@ function CollectionPresenters({
 			<LineHeading color={BaseColors.SALMON}>
 				<FormattedMessage
 					id="collectionPresenterssDetail__heading"
-					defaultMessage="All Speakers"
+					defaultMessage="All Presenters"
 				/>
 			</LineHeading>
 			<CardGroup>

@@ -140,7 +140,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									}}
 								/>
 							</p>
-							<Slider perSlide={3} clip={false} disabledOnMobile>
+							<Slider perSlide={3} responsiveOnMobile>
 								{recentRecordings.slice(0, 2).map((recording) => (
 									<div
 										className={styles.slideCard}
@@ -407,6 +407,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					}
 					theme={BaseColors.LIGHT_TONE}
 					bleed
+					tall
 				/>
 			</div>
 			<div className={styles.footerWrapper} ref={footerRef}>

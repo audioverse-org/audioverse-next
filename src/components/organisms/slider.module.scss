@@ -101,15 +101,19 @@
 		position: absolute;
 		left: #{16px - $button-margin};
 		bottom: #{16px - $button-margin};
-		@media (min-width: $breakpoint-lg) {
+		@media (min-width: $breakpoint-md) {
+			left: #{16px - $button-margin};
+			bottom: #{16px - $button-margin};
+		}
+		@media (min-width: $breakpoint-xl) {
 			left: #{48px - $button-margin};
 			bottom: #{48px - $button-margin};
 		}
 	}
 }
 
-.disabledOnMobile {
-	@media (max-width: #{$breakpoint-lg - 1px}) {
+.responsiveOnMobile {
+	@media (max-width: #{$breakpoint-md - 1px}) {
 		width: 100%;
 
 		.slides {
@@ -123,5 +127,9 @@
 		.controls {
 			display: none;
 		}
+	}
+	@media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-xl - 1px}) {
+		--perSlide: 2 !important;
+		overflow: hidden;
 	}
 }

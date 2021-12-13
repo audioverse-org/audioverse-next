@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 import React, {
 	ReactNode,
@@ -11,10 +10,10 @@ import React, {
 } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
 import IconButton from '@components/molecules/iconButton';
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
+import Mininav from '@components/molecules/mininav';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
@@ -48,6 +47,7 @@ export default function AndNavigation({
 		push,
 		query: { q },
 		pathname,
+		asPath,
 	} = router;
 	const languageRoute = useLanguageRoute();
 	const playbackContext = useContext(PlaybackContext);
@@ -65,7 +65,9 @@ export default function AndNavigation({
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.toggle('scrollDisabledMobile', showingMenu);
 	}, [showingMenu]);
-	const onSearchPage = pathname.includes('/[language]/search');
+	const onPageWithSearchBox =
+		pathname.includes('/[language]/discover') ||
+		pathname.includes('/[language]/search');
 
 	const headerTitleRef = useRef<HTMLDivElement>(null);
 	const subnavRef = useRef<HTMLDivElement>(null);
@@ -138,15 +140,16 @@ export default function AndNavigation({
 				</div>
 				<div className={styles.mobileSubnavWrapper} ref={subnavRef}>
 					<div className={styles.mobileSubnav}>
-						<div className={styles.mobileSubnavItems}>
-							{navigationItems.slice(0, -2).map((item) => (
-								<Heading6 sans large loose unpadded uppercase key={item.key}>
-									<Link href={item.href as string}>
-										<a>{item.label}</a>
-									</Link>
-								</Heading6>
-							))}
-						</div>
+						<Mininav
+							items={navigationItems.slice(0, -2).map((item) => ({
+								id: item.key,
+								label: item.label,
+								url: item.href,
+								isActive: item.href === asPath,
+							}))}
+							compact
+							className={styles.mobileSubnavItems}
+						/>
 						<a
 							className={styles.mobileHeaderMore}
 							onClick={(e) => {
@@ -187,7 +190,7 @@ export default function AndNavigation({
 							}}
 							className={clsx(
 								styles.searchBox,
-								onSearchPage && styles.searchShown
+								onPageWithSearchBox && styles.searchShown
 							)}
 						/>
 						<div>{children}</div>

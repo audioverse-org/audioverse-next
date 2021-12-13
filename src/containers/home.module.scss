@@ -45,19 +45,22 @@ $max-width: 1042px;
 }
 
 .slideCard {
+	padding-left: 8px;
+	padding-right: 8px;
 	&:not(:last-child) {
 		margin-bottom: 16px;
 	}
-	@media (min-width: $breakpoint-lg) {
-		padding-left: 1rem;
-		padding-right: 1rem;
+	@media (min-width: $breakpoint-md) {
 		margin-bottom: 0;
 	}
 }
 
 .blogSection {
 	margin: 16px 11px;
-	@media (min-width: $breakpoint-lg) {
+	@media (min-width: $breakpoint-md) {
+		margin: 16px 16px 0;
+	}
+	@media (min-width: $breakpoint-xl) {
 		margin: 48px 48px 32px;
 	}
 }
@@ -66,10 +69,13 @@ $max-width: 1042px;
 	> * {
 		margin-bottom: 16px;
 	}
-	@media (min-width: $breakpoint-lg) {
+	@media (min-width: $breakpoint-md) {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 		grid-gap: 0 16px;
+	}
+	@media (min-width: $breakpoint-xl) {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 .postsSquare {
@@ -91,14 +97,17 @@ $max-width: 1042px;
 		bottom: 0;
 	}
 	@media (min-width: $breakpoint-md) {
-		padding-top: 100%;
+		padding-top: 50%;
 	}
 	@media (min-width: $breakpoint-lg) {
-		padding-top: 490px;
+		padding-top: calc((100vw - 300px) / 2);
+	}
+	@media (min-width: #{$max-width + $sidebar-width + (32px * 2)}) {
+		padding-top: #{$max-width / 2};
 	}
 }
 .featureSlide {
-	margin: 0;
+	margin: 0 !important;
 	> *:last-child {
 		padding-bottom: 56px;
 	}
@@ -119,11 +128,12 @@ $max-width: 1042px;
 	}
 }
 .newsletterBox {
-	margin: 16px 16px 0;
+	margin: 16px;
 	background: $ts-white;
 	border-radius: 16px;
 	overflow: hidden;
-	@media (min-width: $breakpoint-lg) {
+	flex: 1;
+	@media (min-width: $breakpoint-xl) {
 		margin: 48px;
 	}
 }
@@ -143,7 +153,7 @@ $max-width: 1042px;
 	color: $ts-dark;
 }
 .newsletterFieldRow {
-	@media (min-width: $breakpoint-lg) {
+	@media (min-width: $breakpoint-xl) {
 		display: flex;
 		> * {
 			max-width: 50%;
@@ -193,5 +203,6 @@ $max-width: 1042px;
 
 	h3 {
 		font-size: 18px;
+		text-align: right;
 	}
 }
