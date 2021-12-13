@@ -47,7 +47,7 @@ function Presenters({ nodes, pagination, data }: PresentersProps): JSX.Element {
 			<Heading1>
 				<FormattedMessage
 					id="presentersList__title"
-					defaultMessage="All Speakers"
+					defaultMessage="All Presenters"
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />

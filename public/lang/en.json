@@ -299,7 +299,7 @@
     "string": "Individual Teachings"
   },
   "collectionPresenterssDetail__heading": {
-    "string": "All Speakers"
+    "string": "All Presenters"
   },
   "collectionSequencesDetail__heading": {
     "string": "All Series"
@@ -674,7 +674,7 @@
     "string": "You don’t have any collections items saved yet"
   },
   "libraryCollections__personsHeading": {
-    "string": "Speakers"
+    "string": "Presenters"
   },
   "libraryCollections__playlistsAlert": {
     "string": "At the moment, we’re reimagining the playlist experience. You can still manage your playlists using the mobile app."
@@ -1047,7 +1047,7 @@
     "string": "Sponsor"
   },
   "personTypeLockup_type": {
-    "string": "Speaker"
+    "string": "Presenter"
   },
   "playButton__pauseLabel": {
     "comment": "play button pause label",
@@ -1221,7 +1221,7 @@
     "string": "Sermons by {name}"
   },
   "presentersList__title": {
-    "string": "All Speakers"
+    "string": "All Presenters"
   },
   "profile__buttonLabelDeleteAccount": {
     "string": "Delete Account"
@@ -1353,10 +1353,10 @@
     "string": "See All Conferences"
   },
   "search__personsHeading": {
-    "string": "Speakers"
+    "string": "Presenters"
   },
   "search__personsSeeAll": {
-    "string": "See All Speakers"
+    "string": "See All Presenters"
   },
   "search__resultsCount": {
     "string": "{count} Results"
