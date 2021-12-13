@@ -5574,12 +5574,7 @@ export type GetWithAuthGuardDataQuery = {
 	me:
 		| {
 				__typename?: 'AuthenticatedUser';
-				user: {
-					__typename?: 'User';
-					email: string;
-					name: string;
-					image: { __typename?: 'Image'; url: string } | null | undefined;
-				};
+				user: { __typename?: 'User'; email: string; name: string };
 		  }
 		| null
 		| undefined;
@@ -14116,7 +14111,7 @@ export const PersonLockupFragmentDoc = `
   name
   canonicalPath(useFuturePath: true)
   imageWithFallback {
-    url(size: 100)
+    url(size: 128)
   }
 }
     `;
@@ -14229,7 +14224,7 @@ export const SponsorLockupFragmentDoc = `
   title
   canonicalPath(useFuturePath: true)
   imageWithFallback {
-    url(size: 100)
+    url(size: 128)
   }
 }
     `;
@@ -14261,7 +14256,7 @@ export const CardCollectionFragmentDoc = `
   viewerPlaybackCompletedPercentage
   image {
     id
-    url(size: 740, cropMode: MAX_SIZE)
+    url(size: 240, cropMode: DEFAULT)
   }
   allSequences: sequences {
     aggregate {
@@ -14281,7 +14276,7 @@ export const CardSponsorFragmentDoc = `
   title
   canonicalPath(useFuturePath: true)
   image {
-    url(size: 100)
+    url(size: 128)
   }
   collections(
     first: 2
@@ -14310,7 +14305,7 @@ export const CardPersonFragmentDoc = `
   canonicalPath(useFuturePath: true)
   image {
     id
-    url(size: 100)
+    url(size: 128)
   }
   recordings(first: 2, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
     aggregate {
@@ -14586,7 +14581,7 @@ export const PresenterPivotFragmentDoc = `
   name
   canonicalPath(useFuturePath: true)
   imageWithFallback {
-    url(size: 100)
+    url(size: 128)
   }
 }
     `;
@@ -14596,7 +14591,7 @@ export const SponsorPivotFragmentDoc = `
   title
   canonicalPath(useFuturePath: true)
   imageWithFallback {
-    url(size: 100)
+    url(size: 128)
   }
 }
     `;
@@ -14656,9 +14651,6 @@ export const GetWithAuthGuardDataDocument = `
     user {
       email
       name
-      image {
-        url(size: 100)
-      }
     }
   }
 }
@@ -15518,7 +15510,7 @@ export const GetCollectionDetailPageDataDocument = `
     shareUrl
     location
     image {
-      url(size: 1400)
+      url(size: 1000, cropMode: MAX_SIZE)
     }
     sponsor {
       id
@@ -16255,7 +16247,7 @@ export const GetPresenterDetailPageDataDocument = `
     language
     shareUrl
     imageWithFallback {
-      url(size: 100)
+      url(size: 128)
     }
     website
     sermons: recordings(contentType: SERMON) {
@@ -16401,7 +16393,7 @@ export const GetPresenterListPageDataDocument = `
       givenName
       surname
       image {
-        url(size: 100)
+        url(size: 128)
       }
       summary
     }
@@ -17417,7 +17409,7 @@ export const GetSponsorDetailPageDataDocument = `
     language
     shareUrl
     image {
-      url(size: 100)
+      url(size: 128)
     }
     collections(
       first: 3
@@ -17512,7 +17504,7 @@ export const GetSponsorListPageDataDocument = `
       canonicalPath(useFuturePath: true)
       title
       image {
-        url(size: 100)
+        url(size: 128)
       }
     }
     aggregate {

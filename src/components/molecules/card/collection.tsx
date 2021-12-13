@@ -63,7 +63,8 @@ export default function CardCollection({
 				className={styles.hero}
 				src={image?.url}
 				alt={title}
-				layout="fill"
+				height={120}
+				width={120}
 				objectFit="cover"
 			/>
 		</div>

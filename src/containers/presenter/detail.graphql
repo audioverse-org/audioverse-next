@@ -7,7 +7,7 @@ query getPresenterDetailPageData($id: ID!, $language: Language!) {
 		language
 		shareUrl
 		imageWithFallback {
-			url(size: 100)
+			url(size: 128)
 		}
 		website
 		sermons: recordings(contentType: SERMON) {

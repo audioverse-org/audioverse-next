@@ -5,12 +5,20 @@ import styles from '@components/molecules/tease.module.scss';
 
 interface TeaseProps {
 	children?: ReactNode;
+	fullBleed?: boolean;
 	className?: string;
 }
 
 export default function Tease({
 	children,
+	fullBleed = true,
 	className,
 }: TeaseProps): JSX.Element {
-	return <div className={clsx(styles.tease, className)}>{children}</div>;
+	return (
+		<div
+			className={clsx(styles.tease, fullBleed && styles.fullBleed, className)}
+		>
+			{children}
+		</div>
+	);
 }

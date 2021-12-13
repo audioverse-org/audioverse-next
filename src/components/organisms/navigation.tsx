@@ -7,7 +7,6 @@ import { FormattedMessage } from 'react-intl';
 import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
-import RoundImage from '@components/atoms/roundImage';
 import Button from '@components/molecules/button';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
@@ -18,6 +17,7 @@ import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconUser from '../../../public/img/fa-user-heavy.svg';
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
 import IconExit from '../../../public/img/icon-exit.svg';
 
@@ -144,11 +144,9 @@ const Navigation = ({
 										setSubmenu('account');
 									}}
 								>
-									{user.image && (
-										<div className={styles.accountAvatar}>
-											<RoundImage image={user.image.url} small />
-										</div>
-									)}
+									<span className={styles.accountAvatar}>
+										<IconUser />
+									</span>
 									<span className={styles.accountName}>{user.name}</span>
 									<span className={styles.iconDisclosure}>
 										<IconDisclosure />
@@ -157,6 +155,9 @@ const Navigation = ({
 							) : (
 								<Link href={makeLoginRoute(languageRoute)}>
 									<a className="decorated">
+										<span className={styles.accountAvatar}>
+											<IconUser />
+										</span>
 										<FormattedMessage
 											id="navigation__loginSignupCta"
 											defaultMessage="Login/Sign up"
