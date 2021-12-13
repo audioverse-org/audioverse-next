@@ -94,13 +94,14 @@ const expectNoUnlocalizedToasts = () => {
 
 const expectNoUnlocalizedMessages = async <T,>(
 	Component: React.ComponentType<T>,
-	data: { [key: string]: any }
+	data: { [key: string]: any },
+	whitelist: string[] = []
 ) => {
 	const screen = await renderWithQueryProvider(
 		<Component {...(data as any)} />
 	);
 
-	expectNoUnlocalizedText(screen);
+	expectNoUnlocalizedText(screen, whitelist);
 	expectNoUnlocalizedToasts();
 };
 
@@ -494,7 +495,9 @@ describe('localization usage', () => {
 		expectNoUnlocalizedText(screen);
 	});
 
-	const scenarios: [React.ComponentType<any>, any][] = [
+	type Scenario = [React.ComponentType<any>, any, string[]?];
+
+	const scenarios: Scenario[] = [
 		[
 			SponsorTeachings,
 			{
@@ -585,7 +588,7 @@ describe('localization usage', () => {
 		// TODO: [Login, {}],
 		[Reset, {}],
 		// TODO: [Profile, {}],
-		[Home, {}],
+		[Home, {}, ['Genesis 1', 'King James Version']],
 		[
 			Player,
 			{
@@ -627,7 +630,7 @@ describe('localization usage', () => {
 		],
 	];
 
-	scenarios.map((s: [React.ComponentType, any], i: number) => {
+	scenarios.map((s: Scenario, i: number) => {
 		it(`Localizes scenario index ${i}`, async () => {
 			jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
 				isFavorited: false,

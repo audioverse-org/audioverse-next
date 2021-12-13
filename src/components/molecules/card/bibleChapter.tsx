@@ -4,6 +4,8 @@ import {
 	CardBibleChapterFragment,
 	RecordingContentType,
 } from '@lib/generated/graphql';
+import { makeBibleVersionRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import HatIcon from '../../../../public/img/fa-bible.svg';
 import TeaseRecording from '../teaseRecording';
@@ -34,19 +36,25 @@ export default function CardBibleChapter({
 		videoStreams: [],
 	};
 	const theme = 'chapter';
+	const language = useLanguageRoute();
 
 	return (
 		<CardWithTheme {...{ theme }}>
+			{/*TODO: Make hat dynamic*/}
 			<CardHat
-				title="Genesis (KJV)"
-				label="TODO"
-				url="TODO"
+				title="King James Version"
+				url={makeBibleVersionRoute(language, 'ENGKJV1')}
 				icon={<HatIcon />}
 				longHat
-			>
-				<h1>TODO</h1>
-			</CardHat>
-			<TeaseRecording {...{ recording, theme }} />
+			/>
+			<TeaseRecording
+				{...{
+					recording,
+					theme,
+					disablePlayback: true,
+					disableUserFeatures: true,
+				}}
+			/>
 		</CardWithTheme>
 	);
 }

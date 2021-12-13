@@ -42,6 +42,7 @@ function SongAlbumList({
 			<Mininav
 				items={[
 					{
+						id: 'albums',
 						label: (
 							<FormattedMessage
 								id="songsListPage__tabAlbums"
@@ -55,6 +56,7 @@ function SongAlbumList({
 						isActive: currentTab === 'albums',
 					},
 					{
+						id: 'passage',
 						label: (
 							<FormattedMessage
 								id="songsListPage__tabPassage"

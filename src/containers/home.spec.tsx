@@ -176,15 +176,6 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		websiteRecentRecordings: {
 			nodes: [audiobookTrack, recording, song, story],
 		},
-		audiobible: {
-			book: {
-				chapter: {
-					id: 'the_chapter_id',
-					title: 'the_chapter_title',
-					url: 'the_chapter_url',
-				},
-			},
-		},
 		testimonies: {
 			nodes: [testimony],
 		},
@@ -281,7 +272,7 @@ describe('home page', () => {
 	it('renders chapter title', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('the_chapter_title')).toBeInTheDocument();
+		expect(getByText('Genesis 1')).toBeInTheDocument();
 	});
 
 	it('renders story title', async () => {

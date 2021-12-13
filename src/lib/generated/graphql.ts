@@ -9110,21 +9110,6 @@ export type GetHomeStaticPropsQuery = {
 			| null
 			| undefined;
 	};
-	audiobible:
-		| {
-				__typename?: 'Bible';
-				book: {
-					__typename?: 'BibleBook';
-					chapter: {
-						__typename?: 'BibleChapter';
-						id: string | number;
-						title: string;
-						url: string;
-					};
-				};
-		  }
-		| null
-		| undefined;
 	testimonies: {
 		__typename?: 'TestimonyConnection';
 		nodes:
@@ -16006,13 +15991,6 @@ export const GetHomeStaticPropsDocument = `
       ...cardRecording
     }
   }
-  audiobible(id: "ENGKJVC") {
-    book(id: "ENGKJVC-Gen") {
-      chapter(id: "ENGKJVC-Gen-1") {
-        ...cardBibleChapter
-      }
-    }
-  }
   testimonies(language: $language, first: 3) {
     nodes {
       ...testimonies
@@ -16029,7 +16007,6 @@ export const GetHomeStaticPropsDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
-${CardBibleChapterFragmentDoc}
 ${TestimoniesFragmentDoc}
 ${CardPostFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <

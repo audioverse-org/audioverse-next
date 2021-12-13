@@ -21,6 +21,7 @@ export default function AboutNav({ current }: Props): JSX.Element {
 		<div className={styles.wrapper}>
 			<Mininav
 				items={(item?.children || []).map(({ label, href, key }) => ({
+					id: label,
 					label,
 					url: href as string,
 					isActive: current === key,

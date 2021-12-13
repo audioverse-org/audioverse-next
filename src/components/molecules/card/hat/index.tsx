@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { PropsWithChildren } from 'react';
 import { useState } from 'react';
@@ -10,24 +11,45 @@ import DisclosureIcon from '../../../../../public/img/icon-disclosure-slim.svg';
 
 import styles from './index.module.scss';
 
-interface Props {
+type SimpleProps = {
 	icon?: React.ReactElement;
-	label: string | JSX.Element;
 	title: string | JSX.Element;
 	url: string;
-	longHat?: true;
-}
+};
 
-export default function CardHat({
-	label,
-	title,
-	url,
-	icon,
-	longHat,
-	children,
-}: PropsWithChildren<Props>): JSX.Element {
-	const [hatExpanded, setHatExpanded] = useState(false);
+type ExpandableProps = PropsWithChildren<
+	{
+		label: string | JSX.Element;
+		longHat?: true;
+	} & SimpleProps
+>;
+
+const isSimple = (p: SimpleProps | ExpandableProps): p is SimpleProps => {
+	return (p as ExpandableProps).label === undefined;
+};
+
+export default function CardHat(
+	props: SimpleProps | ExpandableProps
+): JSX.Element {
 	const router = useRouter();
+	const [hatExpanded, setHatExpanded] = useState(false);
+	const { title, url, icon } = props;
+
+	if (isSimple(props)) {
+		return (
+			<Link href={url}>
+				<a className={clsx(styles.hat)}>
+					<div className={styles.hatBar}>
+						<span className={styles.hatIcon}>{icon}</span>
+						<span className={styles.hatTitle}>{title}</span>
+					</div>
+				</a>
+			</Link>
+		);
+	}
+
+	const { label, longHat, children } = props;
+
 	return (
 		<div
 			className={clsx(
