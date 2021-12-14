@@ -418,7 +418,7 @@ describe('localization usage', () => {
 	it('localizes presenter list page', async () => {
 		const screen = await renderWithQueryProvider(
 			<Presenters
-				nodes={
+				persons={
 					[
 						{
 							id: 'z',
@@ -432,8 +432,7 @@ describe('localization usage', () => {
 						},
 					] as any
 				}
-				pagination={undefined as any}
-				data={{ personLetterCounts: [] } as any}
+				personLetterCounts={[]}
 			/>
 		);
 

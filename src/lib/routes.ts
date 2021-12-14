@@ -4,8 +4,8 @@ const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePresenterListRoute = (
 	languageRoute: string,
-	letter: string
-): string => `/${languageRoute}/presenters${letter ? `/${letter}` : ''}`;
+	letter?: string
+): string => `/${languageRoute}/presenters${letter ? `/letter/${letter}` : ''}`;
 
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
@@ -168,8 +168,8 @@ export const makeSponsorFeedRoute = (
 
 export const makeSponsorListRoute = (
 	languageRoute: string,
-	page: string | number = 1
-): string => `/${languageRoute}/sponsors${page > 1 ? `/page/${page}` : ''}`;
+	letter?: string
+): string => `/${languageRoute}/sponsors${letter ? `/letter/${letter}` : ''}`;
 
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,

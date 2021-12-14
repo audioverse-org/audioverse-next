@@ -1,12 +1,8 @@
-query getPresenterListPageData(
-	$language: Language!
-	$offset: Int
-	$first: Int
-) {
+query getPresenterListPageData($language: Language!, $startsWith: String) {
 	persons(
 		language: $language
-		offset: $offset
-		first: $first
+		startsWith: $startsWith
+		first: 1500
 		orderBy: [{ field: NAME, direction: ASC }]
 	) {
 		nodes {
@@ -18,9 +14,6 @@ query getPresenterListPageData(
 			}
 			summary
 		}
-		aggregate {
-			count
-		}
 	}
 	personLetterCounts(language: $language) {
 		letter
@@ -29,9 +22,8 @@ query getPresenterListPageData(
 }
 
 query getPresenterListPathsData($language: Language!) {
-	persons(language: $language) {
-		aggregate {
-			count
-		}
+	personLetterCounts(language: $language) {
+		letter
+		count
 	}
 }

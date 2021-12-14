@@ -8,7 +8,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/page/[i]';
+} from '@pages/[language]/sponsors/letter/[letter]';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps, {
 	language: 'en',
@@ -36,6 +36,11 @@ function loadData() {
 					},
 				],
 			},
+			sponsorLetterCounts: [
+				{
+					letter: 'A',
+				},
+			],
 		});
 }
 
@@ -60,16 +65,16 @@ describe('sponsor list page', () => {
 		when(mockedFetchApi)
 			.calledWith(GetSponsorListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
-				sponsors: {
-					aggregate: {
-						count: 1,
+				sponsorLetterCounts: [
+					{
+						letter: 'A',
 					},
-				},
+				],
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/sponsors/page/1');
+		expect(paths).toContain('/en/sponsors/letter/A');
 	});
 
 	it('links entries', async () => {
@@ -81,14 +86,6 @@ describe('sponsor list page', () => {
 			'href',
 			'/the_sponsor_path'
 		);
-	});
-
-	it('links pagination', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toHaveAttribute('href', '/en/sponsors');
 	});
 
 	it('renders 404', async () => {

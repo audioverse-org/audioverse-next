@@ -429,7 +429,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/presenters',
-				destination: '/:lang/presenters/page/1',
+				destination: '/:lang/presenters/letter/A',
 			},
 			{
 				source: '/:lang/presenters/:id/appears',
@@ -449,7 +449,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/sponsors',
-				destination: '/:lang/sponsors/page/1',
+				destination: '/:lang/sponsors/letter/A',
 			},
 			{
 				source: '/:lang/sponsors/:id/conferences',

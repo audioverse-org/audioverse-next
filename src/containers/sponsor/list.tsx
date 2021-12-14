@@ -9,10 +9,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import Pagination from '@components/molecules/pagination';
 import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
-import { getLetterCountsWithPage } from '@lib/getLetterCountsWithPage';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeDiscoverCollectionsRoute,
 	makeSponsorListRoute,
@@ -21,20 +18,23 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
 
-export type SponsorsProps = PaginatedProps<
-	NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>[0],
-	GetSponsorListPageDataQuery
->;
+export type SponsorsProps = {
+	sponsors: NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>;
+	sponsorLetterCounts: NonNullable<
+		GetSponsorListPageDataQuery['sponsorLetterCounts']
+	>;
+};
 
 // TODO: replace with sponsors landing page (featured, recent, trending, etc.)
 
-function Sponsors({ nodes, pagination, data }: SponsorsProps): JSX.Element {
+function Sponsors({
+	sponsors,
+	sponsorLetterCounts,
+}: SponsorsProps): JSX.Element {
 	const language = useLanguageRoute();
-	const jumpLinks = getLetterCountsWithPage(
-		data?.sponsorLetterCounts || []
-	).map(({ letter, page }) => ({
+	const jumpLinks = sponsorLetterCounts.map(({ letter }) => ({
 		text: letter,
-		url: makeSponsorListRoute(language, page),
+		url: makeSponsorListRoute(language, letter),
 	}));
 
 	let currentFirstLetter = '';
@@ -44,7 +44,7 @@ function Sponsors({ nodes, pagination, data }: SponsorsProps): JSX.Element {
 				backUrl={makeDiscoverCollectionsRoute(language)}
 				className={styles.back}
 			/>
-			<Heading1>
+			<Heading1 className={styles.heading}>
 				<FormattedMessage
 					id="sponsorsList__title"
 					defaultMessage="All Sponsors"
@@ -52,7 +52,7 @@ function Sponsors({ nodes, pagination, data }: SponsorsProps): JSX.Element {
 			</Heading1>
 			<JumpBar links={jumpLinks} />
 			<div>
-				{nodes.map(({ canonicalPath, image, title }) => {
+				{sponsors.map(({ canonicalPath, image, title }) => {
 					const nodeFirstLetter = title.substring(0, 1);
 					const letterHeading =
 						currentFirstLetter !== nodeFirstLetter ? (
@@ -79,9 +79,8 @@ function Sponsors({ nodes, pagination, data }: SponsorsProps): JSX.Element {
 					);
 				})}
 			</div>
-			<Pagination makeRoute={makeSponsorListRoute} {...pagination} />
 		</>
 	);
 }
 
-export default withFailStates(Sponsors, ({ nodes }) => !nodes?.length);
+export default withFailStates(Sponsors, ({ sponsors }) => !sponsors?.length);

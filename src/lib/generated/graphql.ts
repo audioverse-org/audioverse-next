@@ -547,6 +547,7 @@ export type CollectionPersonsArgs = {
 	role: InputMaybe<PersonsRoleField>;
 	search: InputMaybe<Scalars['String']>;
 	sequenceId: InputMaybe<Scalars['ID']>;
+	startsWith: InputMaybe<Scalars['String']>;
 };
 
 export type CollectionRecordingsArgs = {
@@ -3064,6 +3065,7 @@ export type QueryPersonsArgs = {
 	sequenceId: InputMaybe<Scalars['ID']>;
 	sponsorId: InputMaybe<Scalars['ID']>;
 	sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+	startsWith: InputMaybe<Scalars['String']>;
 	withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
@@ -3247,6 +3249,7 @@ export type QuerySponsorsArgs = {
 	offset: InputMaybe<Scalars['Int']>;
 	orderBy: InputMaybe<Array<SponsorsOrder>>;
 	search: InputMaybe<Scalars['String']>;
+	startsWith: InputMaybe<Scalars['String']>;
 	withMusic: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -4006,6 +4009,7 @@ export type SequencePersonsArgs = {
 	orderBy: InputMaybe<Array<PersonsOrder>>;
 	role: InputMaybe<PersonsRoleField>;
 	search: InputMaybe<Scalars['String']>;
+	startsWith: InputMaybe<Scalars['String']>;
 };
 
 export type SequenceRecordingsArgs = {
@@ -5071,6 +5075,7 @@ export type UserFavoritePersonsArgs = {
 	sequenceId: InputMaybe<Scalars['ID']>;
 	sponsorId: InputMaybe<Scalars['ID']>;
 	sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+	startsWith: InputMaybe<Scalars['String']>;
 	withContentTypes: InputMaybe<Array<RecordingContentType>>;
 };
 
@@ -10254,8 +10259,7 @@ export type GetPresenterDetailPathsDataQuery = {
 
 export type GetPresenterListPageDataQueryVariables = Exact<{
 	language: Language;
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
+	startsWith: InputMaybe<Scalars['String']>;
 }>;
 
 export type GetPresenterListPageDataQuery = {
@@ -10273,7 +10277,6 @@ export type GetPresenterListPageDataQuery = {
 			  }>
 			| null
 			| undefined;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	personLetterCounts: Array<{
 		__typename?: 'LetterCount';
@@ -10288,10 +10291,11 @@ export type GetPresenterListPathsDataQueryVariables = Exact<{
 
 export type GetPresenterListPathsDataQuery = {
 	__typename?: 'Query';
-	persons: {
-		__typename?: 'PersonConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
-	};
+	personLetterCounts: Array<{
+		__typename?: 'LetterCount';
+		letter: string;
+		count: number;
+	}>;
 };
 
 export type PresenterPivotFragment = {
@@ -13039,8 +13043,7 @@ export type GetSponsorDetailPathsDataQuery = {
 
 export type GetSponsorListPageDataQueryVariables = Exact<{
 	language: Language;
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
+	startsWith: InputMaybe<Scalars['String']>;
 }>;
 
 export type GetSponsorListPageDataQuery = {
@@ -13056,7 +13059,6 @@ export type GetSponsorListPageDataQuery = {
 			  }>
 			| null
 			| undefined;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	sponsorLetterCounts: Array<{
 		__typename?: 'LetterCount';
@@ -13071,10 +13073,11 @@ export type GetSponsorListPathsDataQueryVariables = Exact<{
 
 export type GetSponsorListPathsDataQuery = {
 	__typename?: 'Query';
-	sponsors: {
-		__typename?: 'SponsorConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
-	};
+	sponsorLetterCounts: Array<{
+		__typename?: 'LetterCount';
+		letter: string;
+		count: number;
+	}>;
 };
 
 export type SponsorPivotFragment = {
@@ -16358,11 +16361,11 @@ export const useGetPresenterDetailPathsDataQuery = <
 		options
 	);
 export const GetPresenterListPageDataDocument = `
-    query getPresenterListPageData($language: Language!, $offset: Int, $first: Int) {
+    query getPresenterListPageData($language: Language!, $startsWith: String) {
   persons(
     language: $language
-    offset: $offset
-    first: $first
+    startsWith: $startsWith
+    first: 1500
     orderBy: [{field: NAME, direction: ASC}]
   ) {
     nodes {
@@ -16373,9 +16376,6 @@ export const GetPresenterListPageDataDocument = `
         url(size: 128)
       }
       summary
-    }
-    aggregate {
-      count
     }
   }
   personLetterCounts(language: $language) {
@@ -16401,10 +16401,9 @@ export const useGetPresenterListPageDataQuery = <
 	);
 export const GetPresenterListPathsDataDocument = `
     query getPresenterListPathsData($language: Language!) {
-  persons(language: $language) {
-    aggregate {
-      count
-    }
+  personLetterCounts(language: $language) {
+    letter
+    count
   }
 }
     `;
@@ -17470,11 +17469,11 @@ export const useGetSponsorDetailPathsDataQuery = <
 		options
 	);
 export const GetSponsorListPageDataDocument = `
-    query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
+    query getSponsorListPageData($language: Language!, $startsWith: String) {
   sponsors(
     language: $language
-    offset: $offset
-    first: $first
+    startsWith: $startsWith
+    first: 1500
     orderBy: [{field: TITLE, direction: ASC}]
   ) {
     nodes {
@@ -17483,9 +17482,6 @@ export const GetSponsorListPageDataDocument = `
       image {
         url(size: 128)
       }
-    }
-    aggregate {
-      count
     }
   }
   sponsorLetterCounts(language: $language) {
@@ -17511,10 +17507,9 @@ export const useGetSponsorListPageDataQuery = <
 	);
 export const GetSponsorListPathsDataDocument = `
     query getSponsorListPathsData($language: Language!) {
-  sponsors(language: $language) {
-    aggregate {
-      count
-    }
+  sponsorLetterCounts(language: $language) {
+    letter
+    count
   }
 }
     `;

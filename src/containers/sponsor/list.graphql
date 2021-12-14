@@ -1,8 +1,8 @@
-query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
+query getSponsorListPageData($language: Language!, $startsWith: String) {
 	sponsors(
 		language: $language
-		offset: $offset
-		first: $first
+		startsWith: $startsWith
+		first: 1500
 		orderBy: [{ field: TITLE, direction: ASC }]
 	) {
 		nodes {
@@ -12,9 +12,6 @@ query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
 				url(size: 128)
 			}
 		}
-		aggregate {
-			count
-		}
 	}
 	sponsorLetterCounts(language: $language) {
 		letter
@@ -23,9 +20,8 @@ query getSponsorListPageData($language: Language!, $offset: Int, $first: Int) {
 }
 
 query getSponsorListPathsData($language: Language!) {
-	sponsors(language: $language) {
-		aggregate {
-			count
-		}
+	sponsorLetterCounts(language: $language) {
+		letter
+		count
 	}
 }

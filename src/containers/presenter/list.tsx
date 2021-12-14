@@ -9,10 +9,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import Pagination from '@components/molecules/pagination';
 import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
-import { getLetterCountsWithPage } from '@lib/getLetterCountsWithPage';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeDiscoverCollectionsRoute,
 	makePresenterListRoute,
@@ -21,21 +18,23 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
 
-export type PresentersProps = PaginatedProps<
-	NonNullable<GetPresenterListPageDataQuery['persons']['nodes']>[0],
-	GetPresenterListPageDataQuery
->;
-
+export type PresentersProps = {
+	persons: NonNullable<GetPresenterListPageDataQuery['persons']['nodes']>;
+	personLetterCounts: NonNullable<
+		GetPresenterListPageDataQuery['personLetterCounts']
+	>;
+};
 // TODO: replace with presenters landing page (featured, recent, trending, etc.)
 
-function Presenters({ nodes, pagination, data }: PresentersProps): JSX.Element {
+function Presenters({
+	persons,
+	personLetterCounts,
+}: PresentersProps): JSX.Element {
 	const language = useLanguageRoute();
-	const jumpLinks = getLetterCountsWithPage(data?.personLetterCounts || []).map(
-		({ letter, page }) => ({
-			text: letter,
-			url: makePresenterListRoute(language, page),
-		})
-	);
+	const jumpLinks = personLetterCounts.map(({ letter }) => ({
+		text: letter,
+		url: makePresenterListRoute(language, letter),
+	}));
 
 	let currentFirstLetter = '';
 	return (
@@ -44,7 +43,7 @@ function Presenters({ nodes, pagination, data }: PresentersProps): JSX.Element {
 				backUrl={makeDiscoverCollectionsRoute(language)}
 				className={styles.back}
 			/>
-			<Heading1>
+			<Heading1 className={styles.heading}>
 				<FormattedMessage
 					id="presentersList__title"
 					defaultMessage="All Presenters"
@@ -52,49 +51,50 @@ function Presenters({ nodes, pagination, data }: PresentersProps): JSX.Element {
 			</Heading1>
 			<JumpBar links={jumpLinks} />
 			<div>
-				{nodes.map(({ canonicalPath, image, givenName, surname, summary }) => {
-					const nodeFirstLetter = surname.substring(0, 1);
-					const letterHeading =
-						currentFirstLetter !== nodeFirstLetter ? (
-							<Heading2>{nodeFirstLetter}</Heading2>
-						) : null;
-					currentFirstLetter = nodeFirstLetter;
+				{persons.map(
+					({ canonicalPath, image, givenName, surname, summary }) => {
+						const nodeFirstLetter = surname.substring(0, 1);
+						const letterHeading =
+							currentFirstLetter !== nodeFirstLetter ? (
+								<Heading2>{nodeFirstLetter}</Heading2>
+							) : null;
+						currentFirstLetter = nodeFirstLetter;
 
-					return (
-						<React.Fragment key={canonicalPath}>
-							{letterHeading}
-							<Card className={styles.card}>
-								<Link href={canonicalPath}>
-									<a className={styles.container}>
-										<div className={styles.nameLockup}>
-											{image && (
-												<div className={styles.image}>
-													<RoundImage
-														image={image.url}
-														alt={`${surname}, ${givenName}`}
-													/>
-												</div>
+						return (
+							<React.Fragment key={canonicalPath}>
+								{letterHeading}
+								<Card className={styles.card}>
+									<Link href={canonicalPath}>
+										<a className={styles.container}>
+											<div className={styles.nameLockup}>
+												{image && (
+													<div className={styles.image}>
+														<RoundImage
+															image={image.url}
+															alt={`${surname}, ${givenName}`}
+														/>
+													</div>
+												)}
+												<span className={styles.name}>
+													{surname}, {givenName}
+												</span>
+											</div>
+											{summary && (
+												<span
+													className={styles.summary}
+													dangerouslySetInnerHTML={{ __html: summary }}
+												/>
 											)}
-											<span className={styles.name}>
-												{surname}, {givenName}
-											</span>
-										</div>
-										{summary && (
-											<span
-												className={styles.summary}
-												dangerouslySetInnerHTML={{ __html: summary }}
-											/>
-										)}
-									</a>
-								</Link>
-							</Card>
-						</React.Fragment>
-					);
-				})}
+										</a>
+									</Link>
+								</Card>
+							</React.Fragment>
+						);
+					}
+				)}
 			</div>
-			<Pagination makeRoute={makePresenterListRoute} {...pagination} />
 		</>
 	);
 }
 
-export default withFailStates(Presenters, ({ nodes }) => !nodes?.length);
+export default withFailStates(Presenters, ({ persons }) => !persons?.length);
