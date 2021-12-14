@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
+import InherentSizeImage from '@components/atoms/inherentSizeImage';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
@@ -115,8 +116,7 @@ function CollectionDetail({
 								objectFit="cover"
 							/>
 						</div>
-						{/* eslint-disable-next-line @next/next/no-img-element, @mizdra/layout-shift/require-size-attributes */}
-						<img alt={title} src={image.url} />
+						<InherentSizeImage src={image.url} title={title} />
 					</div>
 				)}
 				<div>

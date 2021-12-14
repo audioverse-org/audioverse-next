@@ -78,7 +78,7 @@ export default function DiscoverCollections({
 					<CardPerson person={s} key={s.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makePresenterListRoute(language, 1))}
+			{makeSeeAllButton(makePresenterListRoute(language))}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_seriesHeading"
@@ -114,7 +114,7 @@ export default function DiscoverCollections({
 					<CardSponsor sponsor={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeSponsorListRoute(language, 1))}
+			{makeSeeAllButton(makeSponsorListRoute(language))}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_audiobooksHeading"

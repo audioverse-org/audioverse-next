@@ -44,6 +44,66 @@
 		opacity: 0;
 		&:enabled {
 			cursor: pointer;
+
+			opacity: 1;
+			background: transparent;
+			-webkit-appearance: none;
+			&::-webkit-slider-thumb {
+				-webkit-appearance: none;
+			}
+			@mixin bar-thumb-active {
+				height: 16px;
+				width: 16px;
+				border-radius: 16px;
+			}
+			@mixin bar-thumb {
+				height: 4px;
+				width: 4px;
+				background-color: $ts-red;
+				border: none;
+				border-radius: 4px;
+				transition: width $transition-quick, height $transition-quick,
+					border-radius $transition-quick;
+				cursor: pointer;
+				@media (pointer: coarse) {
+					@include bar-thumb-active;
+				}
+			}
+			&::-webkit-slider-thumb {
+				@include bar-thumb;
+			}
+			&::-moz-range-thumb {
+				@include bar-thumb;
+			}
+			&::-ms-thumb {
+				@include bar-thumb;
+			}
+			&:hover {
+				&::-webkit-slider-thumb {
+					@include bar-thumb-active;
+				}
+				&::-moz-range-thumb {
+					@include bar-thumb-active;
+				}
+				&::-ms-thumb {
+					@include bar-thumb-active;
+				}
+			}
+			&:hover::-webkit-slider-thumb {
+				@include bar-thumb-active;
+			}
+			@mixin bar-track {
+				background: transparent;
+			}
+			&::-webkit-slider-runnable-track {
+				@include bar-track;
+			}
+			&::-moz-range-track {
+				@include bar-track;
+			}
+			&::-ms-track {
+				@include bar-track;
+			}
 		}
 	}
 }

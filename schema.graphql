@@ -564,6 +564,7 @@ type Collection implements Node & UniformResourceLocatable {
 		role: PersonsRoleField
 		search: String
 		sequenceId: ID
+		startsWith: String
 	): PersonConnection!
 	recordings(
 		"""
@@ -3720,6 +3721,7 @@ type Query {
 		sequenceId: ID
 		sponsorId: ID
 		sponsorIds: [ID!]
+		startsWith: String
 
 		"""
 		Filters persons by those with published recordings of any of the provided content types.
@@ -4141,6 +4143,7 @@ type Query {
 		offset: Int
 		orderBy: [SponsorsOrder!]
 		search: String
+		startsWith: String
 		withMusic: Boolean
 	): SponsorConnection!
 	stories(
@@ -5283,6 +5286,7 @@ type Sequence implements Node & UniformResourceLocatable {
 		orderBy: [PersonsOrder!]
 		role: PersonsRoleField
 		search: String
+		startsWith: String
 	): PersonConnection!
 	recordings(
 		"""
@@ -6642,6 +6646,7 @@ type User implements Node {
 		sequenceId: ID
 		sponsorId: ID
 		sponsorIds: [ID!]
+		startsWith: String
 
 		"""
 		Filters persons by those with published recordings of any of the provided content types.

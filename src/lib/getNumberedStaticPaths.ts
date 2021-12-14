@@ -7,6 +7,7 @@ import {
 	LIST_PRERENDER_LIMIT,
 } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
+import getLanguageIds from '@lib/getLanguageIds';
 
 type Getter<T> = (variables: { language: Language }) => Promise<T>;
 type Parser<T> = (data: T) => number | null | undefined;
@@ -31,7 +32,7 @@ export const getNumberedStaticPaths = async <T>(
 	getter: Getter<T>,
 	parseCount: Parser<T>
 ): Promise<GetStaticPathsResult> => {
-	const keys = _.keys(LANGUAGES) as Language[];
+	const keys = getLanguageIds();
 	const pathSetPromises = keys.map((k) =>
 		makeLanguagePaths(k, innerSegment, getter, parseCount)
 	);

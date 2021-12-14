@@ -1,10 +1,13 @@
 import Head from 'next/head';
+import Script from 'next/script';
 import React, { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { DehydratedState, Hydrate } from 'react-query';
+import {
+	DehydratedState,
+	Hydrate,
+	QueryClient,
+	QueryClientProvider,
+} from 'react-query';
 import 'video.js/dist/video-js.css';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import withIntl from '@components/HOCs/withIntl';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
@@ -29,7 +32,7 @@ const queryClient = new QueryClient({
 	},
 });
 
-toast.configure();
+export const GA_TRACKING_ID = 'GTM-5HNWR6';
 
 function Base<P>({
 	Component,
@@ -61,6 +64,19 @@ function Base<P>({
 					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 					<link rel="stylesheet" href="https://use.typekit.net/bgc2sqi.css" />
 				</Head>
+				<Script
+					id="google-analytics"
+					strategy="afterInteractive"
+					dangerouslySetInnerHTML={{
+						__html: `
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer', '${GA_TRACKING_ID}');
+  `,
+					}}
+				/>
 				<QueryClientProvider client={queryClient}>
 					<Hydrate state={dehydratedState}>
 						<AndGlobalModals>
@@ -80,7 +96,6 @@ function Base<P>({
 					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
-			<ToastContainer />
 		</>
 	);
 }

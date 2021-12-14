@@ -8,7 +8,7 @@ import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/page/[i]';
+} from '@pages/[language]/presenters/letter/[letter]';
 
 const renderPage = buildStaticRenderer(Presenters, getStaticProps, {
 	language: 'en',
@@ -38,6 +38,11 @@ function loadData() {
 					},
 				],
 			},
+			personLetterCounts: [
+				{
+					letter: 'A',
+				},
+			],
 		});
 }
 
@@ -62,28 +67,20 @@ describe('presenter list page', () => {
 		).toBeInTheDocument();
 	});
 
-	it('links pagination properly', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
-
-		expect(getByText('1')).toHaveAttribute('href', '/en/presenters');
-	});
-
 	it('generates static paths', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetPresenterListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
-				persons: {
-					aggregate: {
-						count: 1,
+				personLetterCounts: [
+					{
+						letter: 'A',
 					},
-				},
+				],
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/presenters/page/1');
+		expect(paths).toContain('/en/presenters/letter/A');
 	});
 
 	it('links presenters', async () => {

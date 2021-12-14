@@ -27,6 +27,11 @@
 	}
 }
 
+.heading {
+	position: relative;
+	z-index: 2;
+}
+
 .image {
 	flex: 0 0 32px;
 	margin-right: 8px;
