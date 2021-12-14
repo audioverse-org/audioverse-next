@@ -4,8 +4,8 @@ const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePresenterListRoute = (
 	languageRoute: string,
-	page: string | number = 1
-): string => `/${languageRoute}/presenters${page > 1 ? `/page/${page}` : ''}`;
+	letter: string
+): string => `/${languageRoute}/presenters${letter ? `/${letter}` : ''}`;
 
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,

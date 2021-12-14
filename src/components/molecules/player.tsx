@@ -45,7 +45,9 @@ const Player = ({
 		prefersAudio,
 	});
 	const shouldShowPoster =
-		!session.isLoaded && hasVideo(recording) && !prefersAudio;
+		hasVideo(recording) &&
+		!prefersAudio &&
+		(!session.isLoaded || session.isPaused);
 	const shouldShowAudioControls =
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
