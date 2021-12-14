@@ -28,7 +28,40 @@
 .paragraph {
 	margin: 0;
 	line-height: 28px;
-	a:hover {
-		text-decoration: none;
+	a {
+		display: flex;
+		align-items: center;
+		&:hover {
+			color: $ts-dark;
+			text-decoration: none;
+		}
+		input {
+			appearance: none;
+			background-color: $ts-white;
+			margin: 0;
+			margin-right: 8px;
+			height: 16px;
+			width: 16px;
+			border: 1px solid $ts-dark;
+			border-radius: 50%;
+			cursor: pointer;
+			display: grid;
+			place-content: center;
+			&::before {
+				content: '';
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				transform: scale(0);
+				transition: $transition-quick transform ease-in-out;
+				box-shadow: inset 16px 16px $ts-red;
+			}
+			&:checked {
+				border-color: $ts-red;
+				&::before {
+					transform: scale(1);
+				}
+			}
+		}
 	}
 }

@@ -5,6 +5,8 @@ query getLibraryData(
 	$groupSequences: Boolean!
 	$types: [FavoritableCatalogEntityType!]
 	$viewerPlaybackStatus: RecordingViewerPlaybackStatus
+	$sortField: FavoritesSortableField!
+	$sortDirection: OrderByDirection!
 ) {
 	me {
 		user {
@@ -15,7 +17,7 @@ query getLibraryData(
 				groupSequences: $groupSequences
 				types: $types
 				viewerPlaybackStatus: $viewerPlaybackStatus
-				orderBy: [{ field: FAVORITED_AT, direction: DESC }]
+				orderBy: [{ field: $sortField, direction: $sortDirection }]
 			) {
 				aggregate {
 					count

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,6 +9,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardPlaylist from '@components/molecules/card/playlist';
 import CardMasonry from '@components/molecules/cardMasonry';
+import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
@@ -30,42 +32,57 @@ export type ILibraryCollectionsProps = {
 function LibraryCollections({
 	language,
 }: ILibraryCollectionsProps): JSX.Element {
-	const { data: playlistsData } = useGetLibraryPlaylistsDataQuery({
-		language,
-		first: 1500,
-		offset: 0,
-	});
+	const router = useRouter();
+
+	const { data: playlistsData, isLoading: isLoadingPlaylists } =
+		useGetLibraryPlaylistsDataQuery({
+			language,
+			first: 1500,
+			offset: 0,
+		});
 	const playlistItems = playlistsData?.me?.user.playlists.nodes || [];
 
 	const variables = {
-		...getLibraryDataDefaultVariables(language),
+		...getLibraryDataDefaultVariables(language, router.query.sort as string),
 		first: 1500,
 	};
-	const { data: collectionData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Collection],
-	});
+	const { data: collectionData, isLoading: isLoadingCollections } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Collection],
+		});
 	const collectionItems = collectionData?.me?.user.favorites.nodes || [];
 
-	const { data: personData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Person],
-	});
+	const { data: personData, isLoading: isLoadingPersons } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Person],
+		});
 	const personItems = personData?.me?.user.favorites.nodes || [];
 
-	const { data: sponsorData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Sponsor],
-	});
+	const { data: sponsorData, isLoading: isLoadingSponsors } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Sponsor],
+		});
 	const sponsorItems = sponsorData?.me?.user.favorites.nodes || [];
 
 	const [showingPlaylistsAlert, setShowingPlaylistsAlert] = useState(true);
+
+	const isLoading =
+		isLoadingPlaylists ||
+		isLoadingCollections ||
+		isLoadingPersons ||
+		isLoadingSponsors;
 
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref="collections" />
 
-			{!playlistItems.length &&
+			{isLoading ? (
+				<LoadingCards />
+			) : (
+				!playlistItems.length &&
 				!collectionItems.length &&
 				!personItems.length &&
 				!sponsorItems.length && (
@@ -83,7 +100,8 @@ function LibraryCollections({
 							/>
 						}
 					/>
-				)}
+				)
+			)}
 
 			{playlistItems.length ? (
 				<>

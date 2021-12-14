@@ -1,5 +1,6 @@
 query collectionIsFavorited($id: ID!) {
 	collection(id: $id) {
 		viewerHasFavorited
+		viewerPlaybackCompletedPercentage
 	}
 }

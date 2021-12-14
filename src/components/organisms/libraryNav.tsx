@@ -1,29 +1,36 @@
 import clsx from 'clsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Dropdown from '@components/molecules/dropdown';
 import Mininav from '@components/molecules/mininav';
+import { SORT_MAP } from '@containers/library';
 import { makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
 import IconFilter from '../../../public/img/icon-filter-light.svg';
+import IconSort from '../../../public/img/icon-sort-light.svg';
 
 import styles from './libraryNav.module.scss';
 
 type Props = {
 	currentNavHref: string | null;
 	disabled?: boolean;
+	disableFiltersAndSorts?: boolean;
 };
 
 export default function LibraryNav({
 	currentNavHref,
 	disabled,
+	disableFiltersAndSorts,
 }: Props): JSX.Element {
-	/* eslint-disable react/jsx-key */
 	const languageRoute = useLanguageRoute();
+	const router = useRouter();
+
+	/* eslint-disable react/jsx-key */
 	const navItems: [JSX.Element, string][] = [
 		[<FormattedMessage id="libraryNav__all" defaultMessage="All" />, ''],
 		[
@@ -59,25 +66,31 @@ export default function LibraryNav({
 				id="libraryNav__sortNewest"
 				defaultMessage="Newest to Oldest"
 			/>,
-			'',
+			'new',
 		],
 		[
 			<FormattedMessage
 				id="libraryNav__sortOldest"
 				defaultMessage="Oldest to Newest"
 			/>,
-			'',
+			'old',
 		],
 		[
 			<FormattedMessage id="libraryNav__sortAtoZ" defaultMessage="A to Z" />,
-			'',
+			'a',
 		],
 		[
 			<FormattedMessage id="libraryNav__sortZtoA" defaultMessage="Z to A" />,
-			'',
+			'z',
 		],
 	];
 	/* eslint-enable react/jsx-key */
+
+	const querySort = (SORT_MAP as Record<string, unknown>)[
+		router.query.sort as string
+	]
+		? (router.query.sort as keyof typeof SORT_MAP)
+		: 'new';
 
 	return (
 		<div className={styles.subnav}>
@@ -90,60 +103,77 @@ export default function LibraryNav({
 				}))}
 				disabled={disabled}
 			/>
-			<div className={styles.toggleButtons}>
-				{/* TODO: make buttons functional */}
-				<Dropdown
-					id="sortMenu"
-					trigger={({ isOpen, ...props }) => (
-						<Button
-							type="secondary"
-							text={
-								<FormattedMessage
-									id="libraryNav__sortNewest"
-									defaultMessage="Newest to Oldest"
-								/>
-							}
-							IconLeft={IconDisclosure}
-							disabled={disabled}
-							className={clsx(styles.button, isOpen && styles.buttonOpen)}
-							{...props}
-						/>
-					)}
-					alignment="left"
-				>
-					<div className={styles.dropdownWrapper}>
-						{sortOptions.map(([label, link]) => (
-							<p className={styles.paragraph} key={link}>
-								<a href={link} target="_blank" rel="noreferrer">
-									{label}
-								</a>
-							</p>
-						))}
-					</div>
-				</Dropdown>
-				<Dropdown
-					id="filterMenu"
-					trigger={({ isOpen, ...props }) => (
-						<Button
-							type="secondary"
-							text={
-								<FormattedMessage
-									id="libraryNav__filter"
-									defaultMessage="Filter"
-								/>
-							}
-							IconLeft={IconFilter}
-							disabled={disabled}
-							className={clsx(styles.button, isOpen && styles.buttonOpen)}
-							{...props}
-						/>
-					)}
-					alignment="right"
-				>
-					{/* TODO: use filter options */}
-					TODO
-				</Dropdown>
-			</div>
+			{!disableFiltersAndSorts && (
+				<div className={styles.toggleButtons}>
+					<Dropdown
+						id="sortMenu"
+						trigger={({ isOpen, ...props }) => (
+							<Button
+								type="secondary"
+								text={
+									<FormattedMessage
+										id="libraryNav__sort"
+										defaultMessage="Sort"
+									/>
+								}
+								IconLeft={IconSort}
+								disabled={disabled}
+								className={clsx(styles.button, isOpen && styles.buttonOpen)}
+								{...props}
+							/>
+						)}
+						alignment="right"
+					>
+						<div className={styles.dropdownWrapper}>
+							{sortOptions.map(([label, sort]) => (
+								<p className={styles.paragraph} key={sort}>
+									<Link
+										href={{
+											pathname: router.pathname,
+											query: {
+												...router.query,
+												sort,
+											},
+										}}
+									>
+										<a>
+											<input
+												type="radio"
+												name="library-sort"
+												value={sort}
+												checked={querySort === sort}
+											/>
+											{label}
+										</a>
+									</Link>
+								</p>
+							))}
+						</div>
+					</Dropdown>
+					<Dropdown
+						id="filterMenu"
+						trigger={({ isOpen, ...props }) => (
+							<Button
+								type="secondary"
+								text={
+									<FormattedMessage
+										id="libraryNav__filter"
+										defaultMessage="Filter"
+									/>
+								}
+								IconLeft={IconFilter}
+								disabled={disabled}
+								className={clsx(styles.button, isOpen && styles.buttonOpen)}
+								{...props}
+							/>
+						)}
+						alignment="right"
+					>
+						{/* TODO: use filter options */}
+						TODO
+					</Dropdown>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardMasonry from '@components/molecules/cardMasonry';
+import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
@@ -16,6 +18,8 @@ import {
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';
 
+import { getLibraryDataDefaultVariables } from '.';
+
 export type ILibraryPlaybackStatusProps = {
 	language: Language;
 	path: string;
@@ -24,8 +28,13 @@ export type ILibraryPlaybackStatusProps = {
 
 export function getLibraryPlaybackStatusDataVariables(
 	language: Language,
-	viewerPlaybackStatus: RecordingViewerPlaybackStatus
+	viewerPlaybackStatus: RecordingViewerPlaybackStatus,
+	sort: string
 ): GetLibraryDataQueryVariables {
+	const { sortField, sortDirection } = getLibraryDataDefaultVariables(
+		language,
+		sort
+	);
 	return {
 		language,
 		first: 1500,
@@ -33,6 +42,8 @@ export function getLibraryPlaybackStatusDataVariables(
 		groupSequences: true,
 		types: null,
 		viewerPlaybackStatus,
+		sortField,
+		sortDirection,
 	};
 }
 
@@ -41,8 +52,14 @@ function LibraryPlaybackStatus({
 	viewerPlaybackStatus,
 	path,
 }: ILibraryPlaybackStatusProps): JSX.Element {
-	const { data } = useGetLibraryDataQuery(
-		getLibraryPlaybackStatusDataVariables(language, viewerPlaybackStatus)
+	const router = useRouter();
+
+	const { data, isLoading } = useGetLibraryDataQuery(
+		getLibraryPlaybackStatusDataVariables(
+			language,
+			viewerPlaybackStatus,
+			router.query.sort as string
+		)
 	);
 
 	const items = data?.me?.user.favorites.nodes || [];
@@ -51,7 +68,9 @@ function LibraryPlaybackStatus({
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref={path} />
 
-			{items.length ? (
+			{isLoading ? (
+				<LoadingCards />
+			) : items.length ? (
 				<CardMasonry
 					items={items}
 					render={({ data }) => <CardFavorite favorite={data} />}

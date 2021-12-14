@@ -40,9 +40,8 @@ export default function CardCollection({
 	sequences,
 	recordings,
 }: CardCollectionProps): JSX.Element {
-	const { isFavorited, toggleFavorited } = useIsCollectionFavorited(
-		collection.id
-	);
+	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
+		useIsCollectionFavorited(collection.id);
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const {
@@ -55,7 +54,6 @@ export default function CardCollection({
 		image,
 		startDate,
 		title,
-		viewerPlaybackCompletedPercentage,
 	} = collection;
 	const heroImage = image?.url && (
 		<div className={styles.imageContainer}>
@@ -120,10 +118,10 @@ export default function CardCollection({
 						<div className={styles.duration}>
 							{useFormattedDuration(duration)}
 						</div>
-						{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
+						{playbackCompletedPercentage >= 1 && <SuccessIcon />}
 						<div className={styles.progress}>
-							{viewerPlaybackCompletedPercentage > 0 && (
-								<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+							{playbackCompletedPercentage > 0 && (
+								<ProgressBar progress={playbackCompletedPercentage} />
 							)}
 						</div>
 						<IconButton

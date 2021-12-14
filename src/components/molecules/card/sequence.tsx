@@ -49,7 +49,8 @@ export default function CardSequence({
 	const [ref, isHovered] = useHover<HTMLButtonElement>();
 	const [subRef, isSubHovered] = useHover<HTMLDivElement>();
 	const intl = useIntl();
-	const { isFavorited, toggleFavorited } = useIsSequenceFavorited(sequence.id);
+	const { isFavorited, toggleFavorited, playbackCompletedPercentage } =
+		useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const router = useRouter();
 
@@ -60,7 +61,6 @@ export default function CardSequence({
 		duration,
 		summary,
 		title,
-		viewerPlaybackCompletedPercentage,
 		speakers,
 		sequenceWriters: writers,
 	} = sequence;
@@ -217,10 +217,10 @@ export default function CardSequence({
 				className={clsx(styles.details, isFavorited && styles.detailsWithLike)}
 			>
 				<div className={styles.duration}>{useFormattedDuration(duration)}</div>
-				{viewerPlaybackCompletedPercentage >= 1 && <SuccessIcon />}
+				{playbackCompletedPercentage >= 1 && <SuccessIcon />}
 				<div className={styles.progress}>
-					{viewerPlaybackCompletedPercentage > 0 && (
-						<ProgressBar progress={viewerPlaybackCompletedPercentage} />
+					{playbackCompletedPercentage > 0 && (
+						<ProgressBar progress={playbackCompletedPercentage} />
 					)}
 				</div>
 				<IconButton
