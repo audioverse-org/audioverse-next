@@ -1,11 +1,13 @@
 import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { DehydratedState, Hydrate } from 'react-query';
+import {
+	DehydratedState,
+	Hydrate,
+	QueryClient,
+	QueryClientProvider,
+} from 'react-query';
 import 'video.js/dist/video-js.css';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import withIntl from '@components/HOCs/withIntl';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
@@ -29,8 +31,6 @@ const queryClient = new QueryClient({
 		},
 	},
 });
-
-toast.configure();
 
 export const GA_TRACKING_ID = 'GTM-5HNWR6';
 
@@ -96,7 +96,6 @@ function Base<P>({
 					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
-			<ToastContainer />
 		</>
 	);
 }

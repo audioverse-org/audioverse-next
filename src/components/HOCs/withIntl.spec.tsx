@@ -1,7 +1,6 @@
 import { act, RenderResult, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as intl from 'react-intl';
-import { toast } from 'react-toastify';
 
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
@@ -55,7 +54,6 @@ import { useFormattedDuration } from '@lib/time';
 import Logout from '@pages/[language]/account/logout';
 
 jest.mock('react-intl');
-jest.mock('react-toastify');
 jest.mock('@lib/readableBytes');
 jest.mock('@lib/time');
 jest.mock('@lib/api/useLogout');
@@ -85,13 +83,6 @@ const expectNoUnlocalizedText = (
 	expect(hits).toHaveLength(0);
 };
 
-const expectNoUnlocalizedToasts = () => {
-	const calls = (toast as any as jest.Mock).mock.calls;
-	calls.forEach((c) => {
-		expect(c[0]).not.toMatch(/[^z]+/);
-	});
-};
-
 const expectNoUnlocalizedMessages = async <T,>(
 	Component: React.ComponentType<T>,
 	data: { [key: string]: any },
@@ -102,7 +93,6 @@ const expectNoUnlocalizedMessages = async <T,>(
 	);
 
 	expectNoUnlocalizedText(screen, whitelist);
-	expectNoUnlocalizedToasts();
 };
 
 const toLocaleStringBackup = global.Date.prototype.toLocaleString;
@@ -653,7 +643,6 @@ describe('localization usage', () => {
 		});
 
 		expectNoUnlocalizedText(screen);
-		expectNoUnlocalizedToasts();
 	});
 
 	it('localizes playlists page', async () => {
@@ -669,7 +658,6 @@ describe('localization usage', () => {
 		});
 
 		expectNoUnlocalizedText(screen);
-		expectNoUnlocalizedToasts();
 	});
 
 	it('localizes logout page', async () => {
