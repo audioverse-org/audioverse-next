@@ -38,20 +38,39 @@ export const SORT_MAP = {
 	z: [FavoritesSortableField.EntityTitle, OrderByDirection.Desc],
 } as const;
 
+export const CONTENT_TYPE_MAP = {
+	people: [FavoritableCatalogEntityType.Person],
+	conferences: [FavoritableCatalogEntityType.Collection],
+	series: [FavoritableCatalogEntityType.Sequence],
+	sponsors: [FavoritableCatalogEntityType.Sponsor],
+};
+
 export const getLibraryDataDefaultVariables = (
 	language: Language,
-	sort: string
+	sort: string,
+	contentType: string
 ): GetLibraryDataQueryVariables => {
 	if (!(SORT_MAP as Record<string, unknown>)[sort]) {
 		sort = 'new';
 	}
 	const [sortField, sortDirection] = SORT_MAP[sort as keyof typeof SORT_MAP];
+	if (!(CONTENT_TYPE_MAP as Record<string, unknown>)[contentType]) {
+		contentType = '';
+	}
+	const types = contentType
+		? (CONTENT_TYPE_MAP as Record<string, FavoritableCatalogEntityType[]>)[
+				contentType
+		  ]
+		: null;
 	return {
 		language,
 		first: 3,
 		offset: 0,
 		groupSequences: true,
-		types: null,
+		hasVideo: null,
+		recordingContentType: null,
+		recordingDuration: null,
+		types,
 		viewerPlaybackStatus: null,
 		sortField,
 		sortDirection,
@@ -66,15 +85,11 @@ function Library({ language }: ILibraryProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
 	const querySort = router.query.sort as string;
+	const queryContentType = router.query.contentType as string;
 	const { data: collectionsData, isLoading: isLoadingCollections } =
-		useGetLibraryDataQuery({
-			...getLibraryDataDefaultVariables(language, querySort),
-			types: [
-				FavoritableCatalogEntityType.Collection,
-				FavoritableCatalogEntityType.Person,
-				FavoritableCatalogEntityType.Sponsor,
-			],
-		});
+		useGetLibraryDataQuery(
+			getLibraryDataDefaultVariables(language, querySort, queryContentType)
+		);
 	const collectionsItems = collectionsData?.me?.user.favorites.nodes || [];
 
 	const { data: startedData, isLoading: isLoadingStarted } =

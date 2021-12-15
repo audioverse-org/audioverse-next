@@ -966,6 +966,18 @@ export type InputValidationError = {
 	message: Scalars['String'];
 };
 
+/** The range the items must fall in to be applicable. */
+export type IntegerRangeInput = {
+	/** The lower bound of the range. */
+	greaterThan: InputMaybe<Scalars['Int']>;
+	/** The lower or equal bound of the range. */
+	greaterThanOrEqualTo: InputMaybe<Scalars['Int']>;
+	/** The upper bound of the range. */
+	lessThan: InputMaybe<Scalars['Int']>;
+	/** The upper or equal bound of the range. */
+	lessThanOrEqualTo: InputMaybe<Scalars['Int']>;
+};
+
 export type InternalContact = {
 	__typename?: 'InternalContact';
 	address: Scalars['String'];
@@ -5117,9 +5129,12 @@ export type UserFavoritesArgs = {
 	after: InputMaybe<Scalars['String']>;
 	first: InputMaybe<Scalars['Int']>;
 	groupSequences: InputMaybe<Scalars['Boolean']>;
+	hasVideo: InputMaybe<Scalars['Boolean']>;
 	language: Language;
 	offset: InputMaybe<Scalars['Int']>;
 	orderBy: InputMaybe<Array<FavoritesOrder>>;
+	recordingContentType: InputMaybe<RecordingContentType>;
+	recordingDuration: InputMaybe<IntegerRangeInput>;
 	types: InputMaybe<Array<FavoritableCatalogEntityType>>;
 	viewerPlaybackStatus: InputMaybe<RecordingViewerPlaybackStatus>;
 };
@@ -9330,6 +9345,9 @@ export type GetLibraryDataQueryVariables = Exact<{
 	first: Scalars['Int'];
 	offset: Scalars['Int'];
 	groupSequences: Scalars['Boolean'];
+	hasVideo: InputMaybe<Scalars['Boolean']>;
+	recordingDuration: InputMaybe<IntegerRangeInput>;
+	recordingContentType: InputMaybe<RecordingContentType>;
 	types: InputMaybe<
 		Array<FavoritableCatalogEntityType> | FavoritableCatalogEntityType
 	>;
@@ -16075,7 +16093,7 @@ export const useGetLibraryHistoryPageDataQuery = <
 		options
 	);
 export const GetLibraryDataDocument = `
-    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus, $sortField: FavoritesSortableField!, $sortDirection: OrderByDirection!) {
+    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $hasVideo: Boolean, $recordingDuration: IntegerRangeInput, $recordingContentType: RecordingContentType, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus, $sortField: FavoritesSortableField!, $sortDirection: OrderByDirection!) {
   me {
     user {
       favorites(
@@ -16083,6 +16101,9 @@ export const GetLibraryDataDocument = `
         first: $first
         offset: $offset
         groupSequences: $groupSequences
+        recordingDuration: $recordingDuration
+        recordingContentType: $recordingContentType
+        hasVideo: $hasVideo
         types: $types
         viewerPlaybackStatus: $viewerPlaybackStatus
         orderBy: [{field: $sortField, direction: $sortDirection}]

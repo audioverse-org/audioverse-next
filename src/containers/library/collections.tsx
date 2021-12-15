@@ -34,38 +34,56 @@ function LibraryCollections({
 }: ILibraryCollectionsProps): JSX.Element {
 	const router = useRouter();
 
+	const variables = {
+		...getLibraryDataDefaultVariables(
+			language,
+			router.query.sort as string,
+			router.query.contentType as string
+		),
+		first: 1500,
+	};
+
 	const { data: playlistsData, isLoading: isLoadingPlaylists } =
 		useGetLibraryPlaylistsDataQuery({
 			language,
 			first: 1500,
 			offset: 0,
 		});
-	const playlistItems = playlistsData?.me?.user.playlists.nodes || [];
+	const playlistItems =
+		(!variables.types && playlistsData?.me?.user.playlists.nodes) || [];
 
-	const variables = {
-		...getLibraryDataDefaultVariables(language, router.query.sort as string),
-		first: 1500,
-	};
 	const { data: collectionData, isLoading: isLoadingCollections } =
 		useGetLibraryDataQuery({
 			...variables,
 			types: [FavoritableCatalogEntityType.Collection],
 		});
-	const collectionItems = collectionData?.me?.user.favorites.nodes || [];
+	const collectionItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Collection)) &&
+			collectionData?.me?.user.favorites.nodes) ||
+		[];
 
 	const { data: personData, isLoading: isLoadingPersons } =
 		useGetLibraryDataQuery({
 			...variables,
 			types: [FavoritableCatalogEntityType.Person],
 		});
-	const personItems = personData?.me?.user.favorites.nodes || [];
+	const personItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Person)) &&
+			personData?.me?.user.favorites.nodes) ||
+		[];
 
 	const { data: sponsorData, isLoading: isLoadingSponsors } =
 		useGetLibraryDataQuery({
 			...variables,
 			types: [FavoritableCatalogEntityType.Sponsor],
 		});
-	const sponsorItems = sponsorData?.me?.user.favorites.nodes || [];
+	const sponsorItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Sponsor)) &&
+			sponsorData?.me?.user.favorites.nodes) ||
+		[];
 
 	const [showingPlaylistsAlert, setShowingPlaylistsAlert] = useState(true);
 
@@ -81,11 +99,26 @@ function LibraryCollections({
 
 			{isLoading ? (
 				<LoadingCards />
-			) : (
-				!playlistItems.length &&
-				!collectionItems.length &&
-				!personItems.length &&
-				!sponsorItems.length && (
+			) : !playlistItems.length &&
+			  !collectionItems.length &&
+			  !personItems.length &&
+			  !sponsorItems.length ? (
+				variables.types ? (
+					<LibraryError
+						title={
+							<FormattedMessage
+								id="libraryCollections__noMatchingHeading"
+								defaultMessage="You don’t have any matching collections items saved yet"
+							/>
+						}
+						message={
+							<FormattedMessage
+								id="libraryCollections__emptyCopy"
+								defaultMessage="Bookmark items or listen to audio from the Discover page."
+							/>
+						}
+					/>
+				) : (
 					<LibraryError
 						title={
 							<FormattedMessage
@@ -101,7 +134,7 @@ function LibraryCollections({
 						}
 					/>
 				)
-			)}
+			) : null}
 
 			{playlistItems.length ? (
 				<>

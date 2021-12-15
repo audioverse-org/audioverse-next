@@ -72,6 +72,7 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 						<TeaseRecordingStack
 							{...{ recordings: recordings.nodes || [], theme }}
 							paddedSeparator
+							isOptionalLink
 						/>
 					</div>
 				</a>
