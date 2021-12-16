@@ -31,6 +31,9 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 	const [email, setEmail] = useState('');
 	const [body, setBody] = useState('');
 
+	const { mutate, isLoading, isSuccess, reset } =
+		useSubmitContactPageMutation();
+
 	useEffect(() => {
 		setRecipient(
 			{
@@ -39,10 +42,8 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 				testimonies: PageContactRecipient.Testimony,
 			}[type] || PageContactRecipient.General
 		);
-	}, [type]);
-
-	const { mutate, isLoading, isSuccess, reset } =
-		useSubmitContactPageMutation();
+		reset();
+	}, [type, reset]);
 
 	const formFilled = firstName && lastName && email && body;
 
