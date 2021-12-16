@@ -3,8 +3,13 @@ query getLibraryData(
 	$first: Int!
 	$offset: Int!
 	$groupSequences: Boolean!
+	$hasVideo: Boolean
+	$recordingDuration: IntegerRangeInput
+	$recordingContentType: RecordingContentType
 	$types: [FavoritableCatalogEntityType!]
 	$viewerPlaybackStatus: RecordingViewerPlaybackStatus
+	$sortField: FavoritesSortableField!
+	$sortDirection: OrderByDirection!
 ) {
 	me {
 		user {
@@ -13,9 +18,12 @@ query getLibraryData(
 				first: $first
 				offset: $offset
 				groupSequences: $groupSequences
+				recordingDuration: $recordingDuration
+				recordingContentType: $recordingContentType
+				hasVideo: $hasVideo
 				types: $types
 				viewerPlaybackStatus: $viewerPlaybackStatus
-				orderBy: [{ field: FAVORITED_AT, direction: DESC }]
+				orderBy: [{ field: $sortField, direction: $sortDirection }]
 			) {
 				aggregate {
 					count

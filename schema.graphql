@@ -1207,6 +1207,31 @@ type InputValidationError {
 	message: String!
 }
 
+"""
+The range the items must fall in to be applicable.
+"""
+input IntegerRangeInput {
+	"""
+	The lower bound of the range.
+	"""
+	greaterThan: Int
+
+	"""
+	The lower or equal bound of the range.
+	"""
+	greaterThanOrEqualTo: Int
+
+	"""
+	The upper bound of the range.
+	"""
+	lessThan: Int
+
+	"""
+	The upper or equal bound of the range.
+	"""
+	lessThanOrEqualTo: Int
+}
+
 type InternalContact {
 	address: String!
 	email: String!
@@ -6756,6 +6781,11 @@ type User implements Node {
 		"""
 		first: Int
 		groupSequences: Boolean
+
+		"""
+		Limit favorites to recordings with video media files.
+		"""
+		hasVideo: Boolean
 		language: Language!
 
 		"""
@@ -6763,6 +6793,16 @@ type User implements Node {
 		"""
 		offset: Int
 		orderBy: [FavoritesOrder!]
+
+		"""
+		Limit favorites to recordings of content type.
+		"""
+		recordingContentType: RecordingContentType
+
+		"""
+		Limit favorites to recordings having a duration within the range in seconds.
+		"""
+		recordingDuration: IntegerRangeInput
 		types: [FavoritableCatalogEntityType!]
 		viewerPlaybackStatus: RecordingViewerPlaybackStatus
 	): UserFavoriteConnection!

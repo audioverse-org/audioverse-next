@@ -966,6 +966,18 @@ export type InputValidationError = {
 	message: Scalars['String'];
 };
 
+/** The range the items must fall in to be applicable. */
+export type IntegerRangeInput = {
+	/** The lower bound of the range. */
+	greaterThan: InputMaybe<Scalars['Int']>;
+	/** The lower or equal bound of the range. */
+	greaterThanOrEqualTo: InputMaybe<Scalars['Int']>;
+	/** The upper bound of the range. */
+	lessThan: InputMaybe<Scalars['Int']>;
+	/** The upper or equal bound of the range. */
+	lessThanOrEqualTo: InputMaybe<Scalars['Int']>;
+};
+
 export type InternalContact = {
 	__typename?: 'InternalContact';
 	address: Scalars['String'];
@@ -5117,9 +5129,12 @@ export type UserFavoritesArgs = {
 	after: InputMaybe<Scalars['String']>;
 	first: InputMaybe<Scalars['Int']>;
 	groupSequences: InputMaybe<Scalars['Boolean']>;
+	hasVideo: InputMaybe<Scalars['Boolean']>;
 	language: Language;
 	offset: InputMaybe<Scalars['Int']>;
 	orderBy: InputMaybe<Array<FavoritesOrder>>;
+	recordingContentType: InputMaybe<RecordingContentType>;
+	recordingDuration: InputMaybe<IntegerRangeInput>;
 	types: InputMaybe<Array<FavoritableCatalogEntityType>>;
 	viewerPlaybackStatus: InputMaybe<RecordingViewerPlaybackStatus>;
 };
@@ -5624,7 +5639,6 @@ export type CardCollectionFragment = {
 	startDate: string | null | undefined;
 	endDate: string | null | undefined;
 	duration: number;
-	viewerPlaybackCompletedPercentage: number;
 	collectionContentType: CollectionContentType;
 	image:
 		| { __typename?: 'Image'; id: string | number; url: string }
@@ -5652,7 +5666,6 @@ export type CardFavoriteFragment = {
 				startDate: string | null | undefined;
 				endDate: string | null | undefined;
 				duration: number;
-				viewerPlaybackCompletedPercentage: number;
 				collectionContentType: CollectionContentType;
 				image:
 					| { __typename?: 'Image'; id: string | number; url: string }
@@ -5759,7 +5772,6 @@ export type CardFavoriteFragment = {
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
 					nodes:
@@ -6168,7 +6180,6 @@ export type CardSequenceFragment = {
 	contentType: SequenceContentType;
 	duration: number;
 	summary: string;
-	viewerPlaybackCompletedPercentage: number;
 	speakers: {
 		__typename?: 'PersonConnection';
 		nodes:
@@ -7350,7 +7361,6 @@ export type GetAudiobookListPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -7790,7 +7800,6 @@ export type GetCollectionDetailPageDataQuery = {
 								contentType: SequenceContentType;
 								duration: number;
 								summary: string;
-								viewerPlaybackCompletedPercentage: number;
 								speakers: {
 									__typename?: 'PersonConnection';
 									nodes:
@@ -8015,7 +8024,6 @@ export type GetCollectionListPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -8134,7 +8142,6 @@ export type GetCollectionSequencesPageDataQuery = {
 								contentType: SequenceContentType;
 								duration: number;
 								summary: string;
-								viewerPlaybackCompletedPercentage: number;
 								speakers: {
 									__typename?: 'PersonConnection';
 									nodes:
@@ -8447,7 +8454,6 @@ export type GetDiscoverPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						nodes:
@@ -8563,7 +8569,6 @@ export type GetDiscoverPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
@@ -8576,7 +8581,6 @@ export type GetDiscoverPageDataQuery = {
 									contentType: SequenceContentType;
 									duration: number;
 									summary: string;
-									viewerPlaybackCompletedPercentage: number;
 									speakers: {
 										__typename?: 'PersonConnection';
 										nodes:
@@ -8726,7 +8730,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 				contentType: SequenceContentType;
 				duration: number;
 				summary: string;
-				viewerPlaybackCompletedPercentage: number;
 				speakers: {
 					__typename?: 'PersonConnection';
 					nodes:
@@ -8795,7 +8798,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -8842,7 +8844,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -8911,7 +8912,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -8958,7 +8958,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -9005,7 +9004,6 @@ export type GetDiscoverCollectionsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -9347,10 +9345,15 @@ export type GetLibraryDataQueryVariables = Exact<{
 	first: Scalars['Int'];
 	offset: Scalars['Int'];
 	groupSequences: Scalars['Boolean'];
+	hasVideo: InputMaybe<Scalars['Boolean']>;
+	recordingDuration: InputMaybe<IntegerRangeInput>;
+	recordingContentType: InputMaybe<RecordingContentType>;
 	types: InputMaybe<
 		Array<FavoritableCatalogEntityType> | FavoritableCatalogEntityType
 	>;
 	viewerPlaybackStatus: InputMaybe<RecordingViewerPlaybackStatus>;
+	sortField: FavoritesSortableField;
+	sortDirection: OrderByDirection;
 }>;
 
 export type GetLibraryDataQuery = {
@@ -9379,7 +9382,6 @@ export type GetLibraryDataQuery = {
 												startDate: string | null | undefined;
 												endDate: string | null | undefined;
 												duration: number;
-												viewerPlaybackCompletedPercentage: number;
 												collectionContentType: CollectionContentType;
 												image:
 													| {
@@ -9503,7 +9505,6 @@ export type GetLibraryDataQuery = {
 												contentType: SequenceContentType;
 												duration: number;
 												summary: string;
-												viewerPlaybackCompletedPercentage: number;
 												speakers: {
 													__typename?: 'PersonConnection';
 													nodes:
@@ -9809,7 +9810,6 @@ export type GetPresenterAppearsPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -10109,7 +10109,6 @@ export type GetPresenterDetailPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -10157,7 +10156,6 @@ export type GetPresenterDetailPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					sequences: {
 						__typename?: 'SequenceConnection';
@@ -10170,7 +10168,6 @@ export type GetPresenterDetailPageDataQuery = {
 									contentType: SequenceContentType;
 									duration: number;
 									summary: string;
-									viewerPlaybackCompletedPercentage: number;
 									speakers: {
 										__typename?: 'PersonConnection';
 										nodes:
@@ -10489,7 +10486,6 @@ export type GetPresenterSequencesPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -10643,7 +10639,6 @@ export type GetSearchResultsCollectionsQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -10756,7 +10751,6 @@ export type GetSearchResultsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -10805,7 +10799,6 @@ export type GetSearchResultsPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -10949,7 +10942,6 @@ export type GetSearchResultsSequencesQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -11315,7 +11307,6 @@ export type GetSeriesListPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -12007,7 +11998,6 @@ export type GetSongAlbumsListPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					recordings: {
 						__typename?: 'RecordingConnection';
 						nodes:
@@ -12790,7 +12780,6 @@ export type GetSponsorConferencesPageDataQuery = {
 					startDate: string | null | undefined;
 					endDate: string | null | undefined;
 					duration: number;
-					viewerPlaybackCompletedPercentage: number;
 					collectionContentType: CollectionContentType;
 					image:
 						| { __typename?: 'Image'; id: string | number; url: string }
@@ -12866,7 +12855,6 @@ export type GetSponsorDetailPageDataQuery = {
 								startDate: string | null | undefined;
 								endDate: string | null | undefined;
 								duration: number;
-								viewerPlaybackCompletedPercentage: number;
 								collectionContentType: CollectionContentType;
 								image:
 									| { __typename?: 'Image'; id: string | number; url: string }
@@ -12905,7 +12893,6 @@ export type GetSponsorDetailPageDataQuery = {
 								contentType: SequenceContentType;
 								duration: number;
 								summary: string;
-								viewerPlaybackCompletedPercentage: number;
 								speakers: {
 									__typename?: 'PersonConnection';
 									nodes:
@@ -13118,7 +13105,6 @@ export type GetSponsorSeriesPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -13545,7 +13531,6 @@ export type GetStoriesAlbumsPageDataQuery = {
 					contentType: SequenceContentType;
 					duration: number;
 					summary: string;
-					viewerPlaybackCompletedPercentage: number;
 					speakers: {
 						__typename?: 'PersonConnection';
 						nodes:
@@ -13868,7 +13853,11 @@ export type CollectionIsFavoritedQueryVariables = Exact<{
 export type CollectionIsFavoritedQuery = {
 	__typename?: 'Query';
 	collection:
-		| { __typename?: 'Collection'; viewerHasFavorited: boolean }
+		| {
+				__typename?: 'Collection';
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+		  }
 		| null
 		| undefined;
 };
@@ -13977,6 +13966,7 @@ export type SequenceIsFavoritedQuery = {
 		| {
 				__typename?: 'Sequence';
 				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
 				recordings: {
 					__typename?: 'RecordingConnection';
 					aggregate:
@@ -14188,7 +14178,6 @@ export const CardSequenceFragmentDoc = `
   contentType
   duration
   summary
-  viewerPlaybackCompletedPercentage
   speakers: persons(role: SPEAKER, orderBy: [{field: NAME, direction: ASC}]) {
     nodes {
       ...personLockup
@@ -14241,7 +14230,6 @@ export const CardCollectionFragmentDoc = `
   startDate
   endDate
   duration
-  viewerPlaybackCompletedPercentage
   image {
     id
     url(size: 240, cropMode: DEFAULT)
@@ -16105,7 +16093,7 @@ export const useGetLibraryHistoryPageDataQuery = <
 		options
 	);
 export const GetLibraryDataDocument = `
-    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus) {
+    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $hasVideo: Boolean, $recordingDuration: IntegerRangeInput, $recordingContentType: RecordingContentType, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus, $sortField: FavoritesSortableField!, $sortDirection: OrderByDirection!) {
   me {
     user {
       favorites(
@@ -16113,9 +16101,12 @@ export const GetLibraryDataDocument = `
         first: $first
         offset: $offset
         groupSequences: $groupSequences
+        recordingDuration: $recordingDuration
+        recordingContentType: $recordingContentType
+        hasVideo: $hasVideo
         types: $types
         viewerPlaybackStatus: $viewerPlaybackStatus
-        orderBy: [{field: FAVORITED_AT, direction: DESC}]
+        orderBy: [{field: $sortField, direction: $sortDirection}]
       ) {
         aggregate {
           count
@@ -17952,6 +17943,7 @@ export const CollectionIsFavoritedDocument = `
     query collectionIsFavorited($id: ID!) {
   collection(id: $id) {
     viewerHasFavorited
+    viewerPlaybackCompletedPercentage
   }
 }
     `;
@@ -18226,6 +18218,7 @@ export const SequenceIsFavoritedDocument = `
     query sequenceIsFavorited($id: ID!) {
   sequence(id: $id) {
     viewerHasFavorited
+    viewerPlaybackCompletedPercentage
     recordings(viewerHasFavorited: true) {
       aggregate {
         count

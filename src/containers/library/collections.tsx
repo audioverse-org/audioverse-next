@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,6 +9,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardPlaylist from '@components/molecules/card/playlist';
 import CardMasonry from '@components/molecules/cardMasonry';
+import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
@@ -30,45 +32,93 @@ export type ILibraryCollectionsProps = {
 function LibraryCollections({
 	language,
 }: ILibraryCollectionsProps): JSX.Element {
-	const { data: playlistsData } = useGetLibraryPlaylistsDataQuery({
-		language,
-		first: 1500,
-		offset: 0,
-	});
-	const playlistItems = playlistsData?.me?.user.playlists.nodes || [];
+	const router = useRouter();
 
 	const variables = {
-		...getLibraryDataDefaultVariables(language),
+		...getLibraryDataDefaultVariables(
+			language,
+			router.query.sort as string,
+			router.query.contentType as string
+		),
 		first: 1500,
 	};
-	const { data: collectionData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Collection],
-	});
-	const collectionItems = collectionData?.me?.user.favorites.nodes || [];
 
-	const { data: personData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Person],
-	});
-	const personItems = personData?.me?.user.favorites.nodes || [];
+	const { data: playlistsData, isLoading: isLoadingPlaylists } =
+		useGetLibraryPlaylistsDataQuery({
+			language,
+			first: 1500,
+			offset: 0,
+		});
+	const playlistItems =
+		(!variables.types && playlistsData?.me?.user.playlists.nodes) || [];
 
-	const { data: sponsorData } = useGetLibraryDataQuery({
-		...variables,
-		types: [FavoritableCatalogEntityType.Sponsor],
-	});
-	const sponsorItems = sponsorData?.me?.user.favorites.nodes || [];
+	const { data: collectionData, isLoading: isLoadingCollections } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Collection],
+		});
+	const collectionItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Collection)) &&
+			collectionData?.me?.user.favorites.nodes) ||
+		[];
+
+	const { data: personData, isLoading: isLoadingPersons } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Person],
+		});
+	const personItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Person)) &&
+			personData?.me?.user.favorites.nodes) ||
+		[];
+
+	const { data: sponsorData, isLoading: isLoadingSponsors } =
+		useGetLibraryDataQuery({
+			...variables,
+			types: [FavoritableCatalogEntityType.Sponsor],
+		});
+	const sponsorItems =
+		((!variables.types ||
+			variables.types.includes(FavoritableCatalogEntityType.Sponsor)) &&
+			sponsorData?.me?.user.favorites.nodes) ||
+		[];
 
 	const [showingPlaylistsAlert, setShowingPlaylistsAlert] = useState(true);
+
+	const isLoading =
+		isLoadingPlaylists ||
+		isLoadingCollections ||
+		isLoadingPersons ||
+		isLoadingSponsors;
 
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref="collections" />
 
-			{!playlistItems.length &&
-				!collectionItems.length &&
-				!personItems.length &&
-				!sponsorItems.length && (
+			{isLoading ? (
+				<LoadingCards />
+			) : !playlistItems.length &&
+			  !collectionItems.length &&
+			  !personItems.length &&
+			  !sponsorItems.length ? (
+				variables.types ? (
+					<LibraryError
+						title={
+							<FormattedMessage
+								id="libraryCollections__noMatchingHeading"
+								defaultMessage="You don’t have any matching collections items saved yet"
+							/>
+						}
+						message={
+							<FormattedMessage
+								id="libraryCollections__emptyCopy"
+								defaultMessage="Bookmark items or listen to audio from the Discover page."
+							/>
+						}
+					/>
+				) : (
 					<LibraryError
 						title={
 							<FormattedMessage
@@ -83,7 +133,8 @@ function LibraryCollections({
 							/>
 						}
 					/>
-				)}
+				)
+			) : null}
 
 			{playlistItems.length ? (
 				<>

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,12 +8,15 @@ import Button from '@components/molecules/button';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardRecording from '@components/molecules/card/recording';
 import CardMasonry from '@components/molecules/cardMasonry';
+import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
 	FavoritableCatalogEntityType,
+	FavoritesSortableField,
 	GetLibraryDataQueryVariables,
 	Language,
+	OrderByDirection,
 	RecordingViewerPlaybackStatus,
 	useGetLibraryDataQuery,
 	useGetLibraryHistoryPageDataQuery,
@@ -27,67 +31,106 @@ import styles from './index.module.scss';
 import LibraryLoggedOut from './loggedOut';
 import { getLibraryPlaybackStatusDataVariables } from './playbackStatus';
 
+export const SORT_MAP = {
+	new: [FavoritesSortableField.FavoritedAt, OrderByDirection.Desc],
+	old: [FavoritesSortableField.FavoritedAt, OrderByDirection.Asc],
+	a: [FavoritesSortableField.EntityTitle, OrderByDirection.Asc],
+	z: [FavoritesSortableField.EntityTitle, OrderByDirection.Desc],
+} as const;
+
+export const CONTENT_TYPE_MAP = {
+	people: [FavoritableCatalogEntityType.Person],
+	conferences: [FavoritableCatalogEntityType.Collection],
+	series: [FavoritableCatalogEntityType.Sequence],
+	sponsors: [FavoritableCatalogEntityType.Sponsor],
+};
+
 export const getLibraryDataDefaultVariables = (
-	language: Language
+	language: Language,
+	sort: string,
+	contentType: string
 ): GetLibraryDataQueryVariables => {
+	if (!(SORT_MAP as Record<string, unknown>)[sort]) {
+		sort = 'new';
+	}
+	const [sortField, sortDirection] = SORT_MAP[sort as keyof typeof SORT_MAP];
+	if (!(CONTENT_TYPE_MAP as Record<string, unknown>)[contentType]) {
+		contentType = '';
+	}
+	const types = contentType
+		? (CONTENT_TYPE_MAP as Record<string, FavoritableCatalogEntityType[]>)[
+				contentType
+		  ]
+		: null;
 	return {
 		language,
 		first: 3,
 		offset: 0,
 		groupSequences: true,
-		types: null,
+		hasVideo: null,
+		recordingContentType: null,
+		recordingDuration: null,
+		types,
 		viewerPlaybackStatus: null,
+		sortField,
+		sortDirection,
 	};
 };
 
-type Props = {
+export type ILibraryProps = {
 	language: Language;
 };
 
-function Library({ language }: Props): JSX.Element {
+function Library({ language }: ILibraryProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const { data: collectionsData } = useGetLibraryDataQuery({
-		...getLibraryDataDefaultVariables(language),
-		types: [
-			FavoritableCatalogEntityType.Collection,
-			FavoritableCatalogEntityType.Person,
-			FavoritableCatalogEntityType.Sponsor,
-		],
-	});
+	const router = useRouter();
+	const querySort = router.query.sort as string;
+	const queryContentType = router.query.contentType as string;
+	const { data: collectionsData, isLoading: isLoadingCollections } =
+		useGetLibraryDataQuery(
+			getLibraryDataDefaultVariables(language, querySort, queryContentType)
+		);
 	const collectionsItems = collectionsData?.me?.user.favorites.nodes || [];
 
-	const { data: startedData } = useGetLibraryDataQuery({
-		...getLibraryPlaybackStatusDataVariables(
-			language,
-			RecordingViewerPlaybackStatus.Started
-		),
-		first: 3,
-	});
+	const { data: startedData, isLoading: isLoadingStarted } =
+		useGetLibraryDataQuery({
+			...getLibraryPlaybackStatusDataVariables(
+				language,
+				RecordingViewerPlaybackStatus.Started,
+				querySort
+			),
+			first: 3,
+		});
 	const startedItems = startedData?.me?.user.favorites.nodes || [];
 
-	const { data: unstartedData } = useGetLibraryDataQuery({
-		...getLibraryPlaybackStatusDataVariables(
-			language,
-			RecordingViewerPlaybackStatus.Unstarted
-		),
-		first: 3,
-	});
+	const { data: unstartedData, isLoading: isLoadingUnstarted } =
+		useGetLibraryDataQuery({
+			...getLibraryPlaybackStatusDataVariables(
+				language,
+				RecordingViewerPlaybackStatus.Unstarted,
+				querySort
+			),
+			first: 3,
+		});
 	const unstartedItems = unstartedData?.me?.user.favorites.nodes || [];
 
-	const { data: finishedData } = useGetLibraryDataQuery({
-		...getLibraryPlaybackStatusDataVariables(
-			language,
-			RecordingViewerPlaybackStatus.Finished
-		),
-		first: 3,
-	});
+	const { data: finishedData, isLoading: isLoadingFinished } =
+		useGetLibraryDataQuery({
+			...getLibraryPlaybackStatusDataVariables(
+				language,
+				RecordingViewerPlaybackStatus.Finished,
+				querySort
+			),
+			first: 3,
+		});
 	const finishedItems = finishedData?.me?.user.favorites.nodes || [];
 
-	const { data: historyData } = useGetLibraryHistoryPageDataQuery({
-		first: 3,
-		language,
-		offset: 0,
-	});
+	const { data: historyData, isLoading: isLoadingHistory } =
+		useGetLibraryHistoryPageDataQuery({
+			first: 3,
+			language,
+			offset: 0,
+		});
 	const historyItems = historyData?.me?.user.downloadHistory.nodes || [];
 
 	const makeSeeAllButton = (routeSlug: string, label: JSX.Element) => (
@@ -101,11 +144,21 @@ function Library({ language }: Props): JSX.Element {
 		</div>
 	);
 
+	const isLoading =
+		isLoadingCollections ||
+		isLoadingStarted ||
+		isLoadingUnstarted ||
+		isLoadingFinished ||
+		isLoadingHistory;
+
 	return (
 		<div className={baseStyles.wrapper}>
 			<LibraryNav currentNavHref="" />
 
-			{!collectionsItems.length &&
+			{isLoading ? (
+				<LoadingCards />
+			) : (
+				!collectionsItems.length &&
 				!startedItems.length &&
 				!unstartedItems.length &&
 				!finishedItems.length &&
@@ -124,7 +177,8 @@ function Library({ language }: Props): JSX.Element {
 							/>
 						}
 					/>
-				)}
+				)
+			)}
 			{collectionsItems.length ? (
 				<>
 					<LineHeading>

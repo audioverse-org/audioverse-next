@@ -6,6 +6,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import Button from '@components/molecules/button';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
+import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import { graphqlFetcher } from '@lib/api';
@@ -30,13 +31,13 @@ export const getLibraryHistoryPageDataDefaultVariables = (
 	};
 };
 
-type Props = {
+export type ILibraryHistoryProps = {
 	language: Language;
 };
 
-function LibraryHistory({ language }: Props): JSX.Element {
+function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 	const variables = getLibraryHistoryPageDataDefaultVariables(language);
-	const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+	const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
 		useInfiniteQuery(
 			['getLibraryHistoryPageData', variables],
 			({ pageParam }) =>
@@ -58,9 +59,11 @@ function LibraryHistory({ language }: Props): JSX.Element {
 	const showLoadMore = hasNextPage || isFetchingNextPage;
 	return (
 		<div className={baseStyles.wrapper}>
-			<LibraryNav currentNavHref="history" />
+			<LibraryNav currentNavHref="history" disableFiltersAndSorts />
 
-			{data?.pages.length ? (
+			{isLoading && !isFetchingNextPage ? (
+				<LoadingCards />
+			) : data?.pages.length ? (
 				<>
 					<CardGroup>
 						{data?.pages?.map((group, i) => (
@@ -82,11 +85,19 @@ function LibraryHistory({ language }: Props): JSX.Element {
 								type="secondary"
 								onClick={() => fetchNextPage()}
 								text={
-									<FormattedMessage
-										id="libraryHistory__loadMore"
-										defaultMessage="Load more"
-									/>
+									isFetchingNextPage ? (
+										<FormattedMessage
+											id="libraryHistory__loadingMore"
+											defaultMessage="Loading more..."
+										/>
+									) : (
+										<FormattedMessage
+											id="libraryHistory__loadMore"
+											defaultMessage="Load more"
+										/>
+									)
 								}
+								disabled={isFetchingNextPage}
 							/>
 						</div>
 					)}

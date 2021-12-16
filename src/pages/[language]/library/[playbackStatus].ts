@@ -1,26 +1,21 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import LibraryPlaybackStatus, {
-	getLibraryPlaybackStatusDataVariables,
 	ILibraryPlaybackStatusProps,
 } from '@containers/library/playbackStatus';
 import { storeRequest } from '@lib/api';
-import {
-	getLibraryData,
-	RecordingViewerPlaybackStatus,
-} from '@lib/generated/graphql';
-import getDehydratedProps, { DehydratedProps } from '@lib/getDehydratedProps';
+import { RecordingViewerPlaybackStatus } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default LibraryPlaybackStatus;
 
-export async function getServerSideProps({
+export function getServerSideProps({
 	req,
 	params,
 }: GetServerSidePropsContext<{
 	language: string;
 	playbackStatus: string;
-}>): Promise<DehydratedProps<ILibraryPlaybackStatusProps>> {
+}>): GetServerSidePropsResult<ILibraryPlaybackStatusProps> {
 	storeRequest(req);
 	const language = getLanguageIdByRoute(params?.language);
 	const playbackStatusMap = {
@@ -43,23 +38,11 @@ export async function getServerSideProps({
 		};
 	}
 
-	return getDehydratedProps(
-		[
-			[
-				'getLibraryData',
-				() =>
-					getLibraryData(
-						getLibraryPlaybackStatusDataVariables(
-							language,
-							viewerPlaybackStatus
-						)
-					),
-			],
-		],
-		{
+	return {
+		props: {
 			language,
 			path: params?.playbackStatus as string,
 			viewerPlaybackStatus,
-		}
-	);
+		},
+	};
 }
