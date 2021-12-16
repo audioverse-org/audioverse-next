@@ -19,14 +19,12 @@ import styles from './libraryNav.module.scss';
 
 type Props = {
 	currentNavHref: string | null;
-	useRecordingFilters?: boolean;
 	disabled?: boolean;
 	disableFiltersAndSorts?: boolean;
 };
 
 export default function LibraryNav({
 	currentNavHref,
-	useRecordingFilters,
 	disabled,
 	disableFiltersAndSorts,
 }: Props): JSX.Element {
@@ -35,28 +33,13 @@ export default function LibraryNav({
 
 	/* eslint-disable react/jsx-key */
 	const navItems: [JSX.Element, string][] = [
-		[<FormattedMessage id="libraryNav__all" defaultMessage="All" />, ''],
+		[<FormattedMessage id="libraryNav__saved" defaultMessage="Saved" />, ''],
 		[
 			<FormattedMessage
-				id="libraryNav__collections"
-				defaultMessage="Collections"
+				id="libraryNav__playlists"
+				defaultMessage="Playlists"
 			/>,
-			'collections',
-		],
-		[
-			<FormattedMessage id="libraryNav__started" defaultMessage="Started" />,
-			'started',
-		],
-		[
-			<FormattedMessage
-				id="libraryNav__unstarted"
-				defaultMessage="Not started"
-			/>,
-			'unstarted',
-		],
-		[
-			<FormattedMessage id="libraryNav__finished" defaultMessage="Finished" />,
-			'finished',
+			'playlists',
 		],
 		[
 			<FormattedMessage id="libraryNav__history" defaultMessage="History" />,
@@ -95,67 +78,62 @@ export default function LibraryNav({
 			/>,
 			'',
 		],
-		...(useRecordingFilters
-			? ([
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-teachings"
-							defaultMessage="Teachings"
-						/>,
-						'teachings',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-music"
-							defaultMessage="Music"
-						/>,
-						'music',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-audiobooks"
-							defaultMessage="Audiobooks"
-						/>,
-						'audiobooks',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-stories"
-							defaultMessage="Stories"
-						/>,
-						'stories',
-					],
-			  ] as [JSX.Element, string][])
-			: ([
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-people"
-							defaultMessage="People"
-						/>,
-						'people',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-conferences"
-							defaultMessage="Conferences"
-						/>,
-						'conferences',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-series"
-							defaultMessage="Series"
-						/>,
-						'series',
-					],
-					[
-						<FormattedMessage
-							id="libraryNav__contentType-sponsors"
-							defaultMessage="Sponsors"
-						/>,
-						'sponsors',
-					],
-			  ] as [JSX.Element, string][])),
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-people"
+				defaultMessage="People"
+			/>,
+			'people',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-conferences"
+				defaultMessage="Conferences"
+			/>,
+			'conferences',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-series"
+				defaultMessage="Series"
+			/>,
+			'series',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-sponsors"
+				defaultMessage="Sponsors"
+			/>,
+			'sponsors',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-teachings"
+				defaultMessage="Teachings"
+			/>,
+			'teachings',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-music"
+				defaultMessage="Music"
+			/>,
+			'music',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-audiobooks"
+				defaultMessage="Audiobooks"
+			/>,
+			'audiobooks',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__contentType-stories"
+				defaultMessage="Stories"
+			/>,
+			'stories',
+		],
 	];
 	const mediaTypeOptions: [JSX.Element, string][] = [
 		[
@@ -175,6 +153,36 @@ export default function LibraryNav({
 				defaultMessage="Audio only"
 			/>,
 			'audio',
+		],
+	];
+	const playbackStatusOptions: [JSX.Element, string][] = [
+		[
+			<FormattedMessage
+				id="libraryNav__playbackStatus-all"
+				defaultMessage="All"
+			/>,
+			'',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__playbackStatus-unstarted"
+				defaultMessage="Unstarted"
+			/>,
+			'unstarted',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__playbackStatus-started"
+				defaultMessage="Started"
+			/>,
+			'started',
+		],
+		[
+			<FormattedMessage
+				id="libraryNav__playbackStatus-finished"
+				defaultMessage="Finished"
+			/>,
+			'finished',
 		],
 	];
 	const durationOptions: [JSX.Element, string][] = [
@@ -233,6 +241,13 @@ export default function LibraryNav({
 		? queryMediaType
 		: '';
 
+	const queryPlaybackStatus = router.query.playbackStatus as string;
+	const playbackStatus = playbackStatusOptions
+		.map(([, value]) => value)
+		.includes(queryPlaybackStatus)
+		? queryPlaybackStatus
+		: '';
+
 	const queryDuration = router.query.duration as string;
 	const duration = durationOptions
 		.map(([, value]) => value)
@@ -248,7 +263,7 @@ export default function LibraryNav({
 		currentOption: string,
 		queryKey: string
 	) => (
-		<>
+		<div className={styles.optionGroupWrapper}>
 			<Heading6 sans uppercase loose large>
 				{title}
 			</Heading6>
@@ -275,7 +290,7 @@ export default function LibraryNav({
 					</Link>
 				))}
 			</div>
-		</>
+		</div>
 	);
 
 	return (
@@ -377,29 +392,36 @@ export default function LibraryNav({
 									contentType,
 									'contentType'
 								)}
+								{makeOptionGroup(
+									<FormattedMessage
+										id="libraryNav__playbackStatus"
+										defaultMessage="Playback Status"
+									/>,
+									playbackStatusOptions,
+									playbackStatus,
+									'playbackStatus'
+								)}
 							</div>
-							{useRecordingFilters && (
-								<div>
-									{makeOptionGroup(
-										<FormattedMessage
-											id="libraryNav__mediaType"
-											defaultMessage="Media Type"
-										/>,
-										mediaTypeOptions,
-										mediaType,
-										'mediaType'
-									)}
-									{makeOptionGroup(
-										<FormattedMessage
-											id="libraryNav__duration"
-											defaultMessage="Duration"
-										/>,
-										durationOptions,
-										duration,
-										'duration'
-									)}
-								</div>
-							)}
+							<div>
+								{makeOptionGroup(
+									<FormattedMessage
+										id="libraryNav__mediaType"
+										defaultMessage="Media Type"
+									/>,
+									mediaTypeOptions,
+									mediaType,
+									'mediaType'
+								)}
+								{makeOptionGroup(
+									<FormattedMessage
+										id="libraryNav__duration"
+										defaultMessage="Duration"
+									/>,
+									durationOptions,
+									duration,
+									'duration'
+								)}
+							</div>
 						</div>
 					</Dropdown>
 				</div>

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import React, { Children, ReactElement } from 'react';
@@ -14,7 +15,8 @@ const ActiveLink = ({
 	activeClassName,
 	...props
 }: ActiveLinkProps): JSX.Element => {
-	const { asPath } = useRouter() || {};
+	const router = useRouter();
+	const asPath = router.asPath.replace(/\?.*/, '');
 
 	const child = Children.only(children);
 
@@ -24,7 +26,7 @@ const ActiveLink = ({
 
 	const className =
 		asPath === props.href || asPath === props.as
-			? `${childClassName} ${activeClassName}`.trim()
+			? clsx(childClassName, activeClassName)
 			: childClassName;
 
 	return (

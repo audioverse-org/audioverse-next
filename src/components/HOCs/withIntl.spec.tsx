@@ -241,6 +241,9 @@ describe('localization usage', () => {
 	});
 
 	it('localizes navigation', async () => {
+		loadRouter({
+			asPath: '',
+		});
 		const screen = await renderWithQueryProvider(
 			<Navigation
 				onExit={() => void 0}

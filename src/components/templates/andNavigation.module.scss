@@ -55,9 +55,10 @@
 		calc(24px + env(safe-area-inset-left));
 }
 .mobileSubnavItems {
-	overflow: hidden;
 	height: 24px;
 	margin-right: 16px;
+	flex-wrap: wrap;
+	overflow: hidden;
 }
 .mobileHeaderMore {
 	position: absolute;

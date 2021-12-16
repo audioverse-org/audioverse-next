@@ -2,11 +2,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
 import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Button from '@components/molecules/button';
 import CardFavorite from '@components/molecules/card/favorite';
-import CardRecording from '@components/molecules/card/recording';
 import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
@@ -17,139 +14,121 @@ import {
 	GetLibraryDataQueryVariables,
 	Language,
 	OrderByDirection,
+	RecordingContentType,
 	RecordingViewerPlaybackStatus,
 	useGetLibraryDataQuery,
-	useGetLibraryHistoryPageDataQuery,
 } from '@lib/generated/graphql';
-import { makeLibraryRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-
-import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 
 import baseStyles from './base.module.scss';
-import styles from './index.module.scss';
 import LibraryLoggedOut from './loggedOut';
-import { getLibraryPlaybackStatusDataVariables } from './playbackStatus';
 
 export const SORT_MAP = {
 	new: [FavoritesSortableField.FavoritedAt, OrderByDirection.Desc],
 	old: [FavoritesSortableField.FavoritedAt, OrderByDirection.Asc],
 	a: [FavoritesSortableField.EntityTitle, OrderByDirection.Asc],
 	z: [FavoritesSortableField.EntityTitle, OrderByDirection.Desc],
-} as const;
+} as Record<string, [FavoritesSortableField, OrderByDirection]>;
 
 export const CONTENT_TYPE_MAP = {
 	people: [FavoritableCatalogEntityType.Person],
 	conferences: [FavoritableCatalogEntityType.Collection],
 	series: [FavoritableCatalogEntityType.Sequence],
 	sponsors: [FavoritableCatalogEntityType.Sponsor],
-};
+} as Record<string, FavoritableCatalogEntityType[]>;
 
-export const getLibraryDataDefaultVariables = (
-	language: Language,
-	sort: string,
-	contentType: string
-): GetLibraryDataQueryVariables => {
-	if (!(SORT_MAP as Record<string, unknown>)[sort]) {
-		sort = 'new';
-	}
-	const [sortField, sortDirection] = SORT_MAP[sort as keyof typeof SORT_MAP];
-	if (!(CONTENT_TYPE_MAP as Record<string, unknown>)[contentType]) {
-		contentType = '';
-	}
-	const types = contentType
-		? (CONTENT_TYPE_MAP as Record<string, FavoritableCatalogEntityType[]>)[
-				contentType
-		  ]
-		: null;
-	return {
-		language,
-		first: 3,
-		offset: 0,
-		groupSequences: true,
-		hasVideo: null,
-		recordingContentType: null,
-		recordingDuration: null,
-		types,
-		viewerPlaybackStatus: null,
-		sortField,
-		sortDirection,
-	};
-};
+export const RECORDING_CONTENT_TYPE_MAP = {
+	teachings: RecordingContentType.Sermon,
+	music: RecordingContentType.MusicTrack,
+	audiobooks: RecordingContentType.AudiobookTrack,
+	stories: RecordingContentType.Story,
+} as Record<string, RecordingContentType>;
+
+const MEDIA_TYPE_MAP = {
+	video: true,
+	audio: false,
+} as Record<string, boolean>;
+
+const DURATION_MAP = {
+	'15': [900, 1800],
+	'30': [1800, 2700],
+	'45': [2700, 3600],
+	'60': [3600, null],
+} as Record<string, [number, number | null]>;
+
+const PLAYBACK_STATUS_MAP = {
+	unstarted: RecordingViewerPlaybackStatus.Unstarted,
+	started: RecordingViewerPlaybackStatus.Started,
+	finished: RecordingViewerPlaybackStatus.Finished,
+} as Record<string, RecordingViewerPlaybackStatus>;
 
 export type ILibraryProps = {
 	language: Language;
 };
 
 function Library({ language }: ILibraryProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
 	const router = useRouter();
-	const querySort = router.query.sort as string;
+	let querySort = router.query.sort as string;
 	const queryContentType = router.query.contentType as string;
-	const { data: collectionsData, isLoading: isLoadingCollections } =
-		useGetLibraryDataQuery(
-			getLibraryDataDefaultVariables(language, querySort, queryContentType)
-		);
-	const collectionsItems = collectionsData?.me?.user.favorites.nodes || [];
 
-	const { data: startedData, isLoading: isLoadingStarted } =
-		useGetLibraryDataQuery({
-			...getLibraryPlaybackStatusDataVariables(
-				language,
-				RecordingViewerPlaybackStatus.Started,
-				querySort
-			),
-			first: 3,
-		});
-	const startedItems = startedData?.me?.user.favorites.nodes || [];
+	if (!(SORT_MAP as Record<string, unknown>)[querySort]) {
+		querySort = 'new';
+	}
+	const [sortField, sortDirection] =
+		SORT_MAP[querySort as keyof typeof SORT_MAP];
 
-	const { data: unstartedData, isLoading: isLoadingUnstarted } =
-		useGetLibraryDataQuery({
-			...getLibraryPlaybackStatusDataVariables(
-				language,
-				RecordingViewerPlaybackStatus.Unstarted,
-				querySort
-			),
-			first: 3,
-		});
-	const unstartedItems = unstartedData?.me?.user.favorites.nodes || [];
+	let types = null;
+	if (CONTENT_TYPE_MAP[queryContentType]) {
+		types = CONTENT_TYPE_MAP[queryContentType];
+	}
 
-	const { data: finishedData, isLoading: isLoadingFinished } =
-		useGetLibraryDataQuery({
-			...getLibraryPlaybackStatusDataVariables(
-				language,
-				RecordingViewerPlaybackStatus.Finished,
-				querySort
-			),
-			first: 3,
-		});
-	const finishedItems = finishedData?.me?.user.favorites.nodes || [];
+	let recordingContentType = null;
+	if (RECORDING_CONTENT_TYPE_MAP[queryContentType]) {
+		recordingContentType = RECORDING_CONTENT_TYPE_MAP[queryContentType];
+	}
 
-	const { data: historyData, isLoading: isLoadingHistory } =
-		useGetLibraryHistoryPageDataQuery({
-			first: 3,
-			language,
-			offset: 0,
-		});
-	const historyItems = historyData?.me?.user.downloadHistory.nodes || [];
+	const queryMediaType = router.query.mediaType + '';
+	let hasVideo = null;
+	if (typeof MEDIA_TYPE_MAP[queryMediaType] === 'boolean') {
+		hasVideo = MEDIA_TYPE_MAP[queryMediaType];
+	}
 
-	const makeSeeAllButton = (routeSlug: string, label: JSX.Element) => (
-		<div className={styles.seeAll}>
-			<Button
-				type="secondary"
-				href={makeLibraryRoute(languageRoute, routeSlug)}
-				text={label}
-				IconLeft={ForwardIcon}
-			/>
-		</div>
-	);
+	const queryDuration = router.query.duration + '';
+	let recordingDuration = null;
+	if (DURATION_MAP[queryDuration]) {
+		const [min, max] = DURATION_MAP[queryDuration];
+		recordingDuration = {
+			greaterThan: min,
+			lessThan: max,
+			greaterThanOrEqualTo: null,
+			lessThanOrEqualTo: null,
+		};
+	}
 
-	const isLoading =
-		isLoadingCollections ||
-		isLoadingStarted ||
-		isLoadingUnstarted ||
-		isLoadingFinished ||
-		isLoadingHistory;
+	const queryPlaybackStatus = router.query.playbackStatus + '';
+	let viewerPlaybackStatus = null;
+	if (PLAYBACK_STATUS_MAP[queryPlaybackStatus]) {
+		viewerPlaybackStatus = PLAYBACK_STATUS_MAP[queryPlaybackStatus];
+	}
+
+	const variables: GetLibraryDataQueryVariables = {
+		language,
+		first: 1500,
+		offset: 0,
+		groupSequences: true,
+		hasVideo,
+		recordingContentType,
+		recordingDuration,
+		types,
+		viewerPlaybackStatus,
+		sortField,
+		sortDirection,
+	};
+
+	const { data, isLoading } = useGetLibraryDataQuery(variables);
+	const items = data?.me?.user.favorites.nodes || [];
+
+	const filtersApplied =
+		Object.keys(router.query).filter((k) => router.query[k]).length > 0;
 
 	return (
 		<div className={baseStyles.wrapper}>
@@ -157,138 +136,43 @@ function Library({ language }: ILibraryProps): JSX.Element {
 
 			{isLoading ? (
 				<LoadingCards />
+			) : items.length ? (
+				<CardMasonry
+					items={items}
+					render={({ data }) => <CardFavorite favorite={data} />}
+					key={`item-${items.length}`}
+				/>
+			) : filtersApplied ? (
+				<LibraryError
+					title={
+						<FormattedMessage
+							id="library__noMatchingHeading"
+							defaultMessage="You don’t have any matching items saved yet"
+						/>
+					}
+					message={
+						<FormattedMessage
+							id="library__noMatchingCopy"
+							defaultMessage="Bookmark items or listen to items from the Discover page."
+						/>
+					}
+				/>
 			) : (
-				!collectionsItems.length &&
-				!startedItems.length &&
-				!unstartedItems.length &&
-				!finishedItems.length &&
-				!historyItems.length && (
-					<LibraryError
-						title={
-							<FormattedMessage
-								id="library__emptyHeading"
-								defaultMessage="You don’t have any items saved yet"
-							/>
-						}
-						message={
-							<FormattedMessage
-								id="library__emptyCopy"
-								defaultMessage="Bookmark items or listen to items from the Discover page."
-							/>
-						}
-					/>
-				)
+				<LibraryError
+					title={
+						<FormattedMessage
+							id="library__emptyHeading"
+							defaultMessage="You don’t have any items saved yet"
+						/>
+					}
+					message={
+						<FormattedMessage
+							id="library__emptyCopy"
+							defaultMessage="Bookmark items or listen to items from the Discover page."
+						/>
+					}
+				/>
 			)}
-			{collectionsItems.length ? (
-				<>
-					<LineHeading>
-						<FormattedMessage
-							id="library__collectionsHeading"
-							defaultMessage="Collections"
-						/>
-					</LineHeading>
-					<CardMasonry
-						items={collectionsItems}
-						render={({ data }) => <CardFavorite favorite={data} />}
-						key={`collectionItems-${collectionsItems.length}`}
-					/>
-					{makeSeeAllButton(
-						'collections',
-						<FormattedMessage
-							id="library__collectionsSeeAll"
-							defaultMessage="See All Collections"
-						/>
-					)}
-				</>
-			) : null}
-			{startedItems.length ? (
-				<>
-					<LineHeading>
-						<FormattedMessage
-							id="library__startedHeading"
-							defaultMessage="Started"
-						/>
-					</LineHeading>
-					<CardMasonry
-						items={startedItems}
-						render={({ data }) => <CardFavorite favorite={data} />}
-						key={`startedItems-${startedItems.length}`}
-					/>
-					{makeSeeAllButton(
-						'started',
-						<FormattedMessage
-							id="library__startedSeeAll"
-							defaultMessage="See All Started"
-						/>
-					)}
-				</>
-			) : null}
-			{unstartedItems.length ? (
-				<>
-					<LineHeading>
-						<FormattedMessage
-							id="library__unstartedHeading"
-							defaultMessage="Not Started"
-						/>
-					</LineHeading>
-					<CardMasonry
-						items={unstartedItems}
-						render={({ data }) => <CardFavorite favorite={data} />}
-						key={`unstartedItems-${unstartedItems.length}`}
-					/>
-					{makeSeeAllButton(
-						'unstarted',
-						<FormattedMessage
-							id="unstartedSeeAll"
-							defaultMessage="See All Not Started"
-						/>
-					)}
-				</>
-			) : null}
-			{finishedItems.length ? (
-				<>
-					<LineHeading>
-						<FormattedMessage
-							id="library__finishedHeading"
-							defaultMessage="Finished"
-						/>
-					</LineHeading>
-					<CardMasonry
-						items={finishedItems}
-						render={({ data }) => <CardFavorite favorite={data} />}
-						key={`finishedItems-${finishedItems.length}`}
-					/>
-					{makeSeeAllButton(
-						'finished',
-						<FormattedMessage
-							id="library__finishedSeeAll"
-							defaultMessage="See All Finished"
-						/>
-					)}
-				</>
-			) : null}
-			{historyItems.length ? (
-				<>
-					<LineHeading>
-						<FormattedMessage
-							id="library__historyHeading"
-							defaultMessage="History"
-						/>
-					</LineHeading>
-					<CardMasonry
-						items={historyItems}
-						render={({ data }) => <CardRecording recording={data.recording} />}
-						key={`historyItems-${historyItems.length}`}
-					/>
-					{makeSeeAllButton(
-						'history',
-						<FormattedMessage
-							id="library__historySeeAll"
-							defaultMessage="See All History"
-						/>
-					)}
-				</>
-			) : null}
 		</div>
 	);
 }

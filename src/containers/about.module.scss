@@ -20,4 +20,8 @@
 		border-top: 1px solid $ts-cream;
 		margin: 32px 0;
 	}
+	iframe {
+		max-width: 100%;
+		height: auto;
+	}
 }

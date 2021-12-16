@@ -118,6 +118,7 @@ const renderApp = async (
 	loadRouter({
 		pathname: '/[language]/discover',
 		query: {},
+		asPath: '',
 	});
 
 	const result = await render(
