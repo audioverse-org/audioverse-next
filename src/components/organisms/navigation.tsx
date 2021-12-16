@@ -79,45 +79,35 @@ const Navigation = ({
 													<Icon width={iconSize} height={iconSize} />
 												</span>
 											)}
-											<span>{label}</span>
-											{children && (
-												<span className={styles.iconDisclosure}>
-													<IconDisclosure />
-												</span>
-											)}
+											<span className={styles.label}>{label}</span>
 										</>
 									);
 
-									if (!href) {
-										return (
-											<li key={key}>
+									return (
+										<li key={key}>
+											{href ? (
+												<ActiveLink href={href} activeClassName={styles.active}>
+													<a className={styles.navLink}>{inner}</a>
+												</ActiveLink>
+											) : (
 												<a
 													className={styles.navLink}
 													onClick={() => setSubmenu(key)}
 												>
 													{inner}
 												</a>
-											</li>
-										);
-									}
-
-									return (
-										<li key={key}>
-											<ActiveLink href={href} activeClassName={styles.active}>
-												<a
-													className={styles.navLink}
-													onClick={
-														children
-															? (e) => {
-																	e.preventDefault();
-																	setSubmenu(key);
-															  }
-															: undefined
-													}
+											)}
+											{children && (
+												<span
+													className={styles.iconDisclosure}
+													onClick={(e) => {
+														e.preventDefault();
+														setSubmenu(key);
+													}}
 												>
-													{inner}
-												</a>
-											</ActiveLink>
+													<IconDisclosure />
+												</span>
+											)}
 										</li>
 									);
 								})}
