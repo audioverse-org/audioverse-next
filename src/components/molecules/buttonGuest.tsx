@@ -24,19 +24,21 @@ export default function ButtonGuest({
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 	const language = useLanguageRoute();
 
-	// TODO: Use <button> element for semantics and accessibility
 	return (
 		<>
-			<a
-				className={clsx('decorated', className, styles.link)}
-				onClick={() => setIsGuestModalOpen(true)}
+			<button
+				className={clsx(styles.link, className)}
+				onClick={(e) => {
+					e.preventDefault();
+					setIsGuestModalOpen(true);
+				}}
 			>
 				<FormattedMessage
 					id="molecule-buttonGuest__label"
 					defaultMessage="Continue as guest"
 				/>
 				<Icon />
-			</a>
+			</button>
 			<Modal
 				open={isGuestModalOpen}
 				onClose={() => setIsGuestModalOpen(false)}
@@ -48,25 +50,6 @@ export default function ButtonGuest({
 				}
 				actions={
 					<>
-						<Link href={makeDiscoverRoute(language)}>
-							<a className="decorated">
-								<FormattedMessage
-									id="molecule-buttonGuest__modalButtonLabelGuest"
-									defaultMessage="Continue as guest"
-								/>
-							</a>
-						</Link>
-						<Button
-							onClick={() => setIsGuestModalOpen(false)}
-							href={makeLoginRoute(language)}
-							type="primary"
-							text={
-								<FormattedMessage
-									id="molecule-buttonGuest__modalButtonLabelLogIn"
-									defaultMessage="Log in"
-								/>
-							}
-						/>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
 							href={makeRegisterRoute(language)}
@@ -78,33 +61,51 @@ export default function ButtonGuest({
 								/>
 							}
 						/>
+						<Button
+							onClick={() => setIsGuestModalOpen(false)}
+							href={makeLoginRoute(language)}
+							type="primary"
+							text={
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelLogIn"
+									defaultMessage="Log in"
+								/>
+							}
+						/>
+						<Link href={makeDiscoverRoute(language)}>
+							<a className="decorated">
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelGuest"
+									defaultMessage="Continue as guest"
+								/>
+							</a>
+						</Link>
 					</>
 				}
 			>
-				<p>
+				<p className={styles.intro}>
 					<FormattedMessage
 						id="molecule-buttonGuest__modalParagraph"
 						defaultMessage="You'll be missing out on some key features without an account, like:"
 					/>
 				</p>
-				{/*TODO: Update list contents*/}
-				<ul>
+				<ul className={styles.featuresList}>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__feature1"
-							defaultMessage="Lorem ipsum dolor"
+							id="molecule-buttonGuest__saving"
+							defaultMessage="Saving to your library"
 						/>
 					</li>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__feature2"
-							defaultMessage="Et exictur purim multatim"
+							id="molecule-buttonGuest__syncing"
+							defaultMessage="Syncing across your devices"
 						/>
 					</li>
 					<li>
 						<FormattedMessage
-							id="molecule-buttonGuest__feature3"
-							defaultMessage="Dulipscum erudis fesin"
+							id="molecule-buttonGuest__downloadQuality"
+							defaultMessage="Adjusting download quality"
 						/>
 					</li>
 				</ul>

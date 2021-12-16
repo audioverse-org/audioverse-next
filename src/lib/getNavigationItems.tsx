@@ -46,6 +46,7 @@ import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
 import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
 import IconYouTube from '../../public/img/fa-youtube.svg';
+import IconAccount from '../../public/img/icon-account.svg';
 import IconBible from '../../public/img/icon-bible.svg';
 import IconBooks from '../../public/img/icon-books.svg';
 import IconCollections from '../../public/img/icon-collections.svg';
@@ -183,6 +184,15 @@ export function getNavigationItems(
 					}),
 				},
 			],
+		},
+		{
+			key: 'presenters',
+			href: makePresenterListRoute(languageRoute),
+			Icon: IconAccount,
+			label: intl.formatMessage({
+				id: `header__navItemPresenters`,
+				defaultMessage: 'Presenters',
+			}),
 		},
 		{
 			key: 'story',

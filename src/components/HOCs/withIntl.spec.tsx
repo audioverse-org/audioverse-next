@@ -2,6 +2,7 @@ import { act, RenderResult, waitFor } from '@testing-library/react';
 import React from 'react';
 import * as intl from 'react-intl';
 
+import Login from '@components/molecules/login';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -13,6 +14,8 @@ import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 import AccountPlaylists from '@containers/account/playlists';
 import Profile from '@containers/account/profile';
+import profile from '@containers/account/profile';
+import Register from '@containers/account/register';
 import Reset from '@containers/account/reset';
 import AudiobooksList from '@containers/audiobook/list';
 import Book from '@containers/bible/book';
@@ -573,10 +576,10 @@ describe('localization usage', () => {
 				},
 			},
 		],
-		// TODO [Register, {}],
-		// TODO: [Login, {}],
+		[Register, {}],
+		[Login, {}],
 		[Reset, {}],
-		// TODO: [Profile, {}],
+		[profile, {}],
 		[Home, {}, ['Genesis 1', 'King James Version']],
 		[
 			Player,

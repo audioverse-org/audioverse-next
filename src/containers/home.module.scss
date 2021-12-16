@@ -1,9 +1,7 @@
 @use 'sass:math';
 @import '../styles/common';
 
-$max-width: 1042px;
 .wrapper {
-	max-width: $max-width;
 	margin-top: 8px;
 	z-index: 2;
 	margin-bottom: 88px;
@@ -87,7 +85,7 @@ $max-width: 1042px;
 	margin-bottom: 48px;
 	position: relative;
 	overflow: hidden;
-	padding-top: 150%;
+	padding-top: 200%;
 	background: $ts-dark;
 	border-radius: 16px;
 	> * {
@@ -97,14 +95,23 @@ $max-width: 1042px;
 		right: 0;
 		bottom: 0;
 	}
+	@media (min-width: 425px) {
+		padding-top: 175%;
+	}
+	@media (min-width: 475px) {
+		padding-top: 160%;
+	}
+	@media (min-width: $breakpoint-sm) {
+		padding-top: 150%;
+	}
 	@media (min-width: $breakpoint-md) {
 		padding-top: 50%;
 	}
 	@media (min-width: $breakpoint-lg) {
 		padding-top: calc((100vw - 300px) / 2);
 	}
-	@media (min-width: #{$max-width + $sidebar-width + (32px * 2)}) {
-		padding-top: #{math.div($max-width, 2)};
+	@media (min-width: $content-maxWidth) {
+		padding-top: calc(#{$content-maxWidth - $sidebar-width - 35px - 24px} / 2);
 	}
 }
 .featureSlide {
@@ -200,7 +207,6 @@ $max-width: 1042px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	max-width: $max-width;
 
 	h3 {
 		font-size: 18px;

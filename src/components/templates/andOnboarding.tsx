@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Slider from '@components/organisms/slider';
@@ -18,15 +19,16 @@ export default function AndOnboarding({
 	const features = getAppFeatures(languageRoute);
 
 	return (
-		// TODO: replace Lipsum
 		<div className={styles.page}>
 			<div className={styles.form}>
 				<div className={styles.logo}>
 					<LogoLarge />
 				</div>
 				<div className={styles.intro}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at
-					imperdiet purus, sed sagittis dui.
+					<FormattedMessage
+						id="andOnboarding__intro"
+						defaultMessage="Create or login to an account and access a growing set of features to help you explore sound doctrine."
+					/>
 				</div>
 				{children}
 			</div>

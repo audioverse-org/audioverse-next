@@ -1,5 +1,8 @@
 @import '../../styles/common';
 
 .wrapper {
-	margin-top: 32px;
+	margin-top: -16px;
+	@media (min-width: $breakpoint-lg) {
+		margin-top: -8px;
+	}
 }

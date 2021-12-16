@@ -35,7 +35,12 @@ export default function ButtonShare({
 	// TODO: update embed code and links
 	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
 	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
-	const emailLink = `mailto:?subject=Enjoy%20this%20blessing&body=${shareUrl}`;
+	const emailLink = `mailto:?subject=${encodeURIComponent(
+		intl.formatMessage({
+			id: 'buttonShare__emailSubject',
+			defaultMessage: 'Enjoy this blessing',
+		})
+	)}&body=${shareUrl}`;
 	const copyLink = shareUrl;
 
 	const onCopyLink = (e: MouseEvent) => {
