@@ -14,7 +14,7 @@
 	}
 	li {
 		list-style-type: none;
-		margin-bottom: 24px;
+		margin-bottom: 20px;
 		font-size: 18px;
 		font-weight: 400;
 		display: flex;
@@ -24,10 +24,8 @@
 			display: flex;
 			color: $ts-dark;
 		}
-		.iconDisclosure {
-			margin-left: 4px;
-			color: $ts-dark;
-			transform: rotate(-90deg);
+		.label {
+			flex-grow: 1;
 		}
 		.navLink {
 			flex-grow: 1;
@@ -39,11 +37,25 @@
 				transition: none; // FIX: https://stackoverflow.com/a/40512935
 			}
 		}
+		.iconDisclosure {
+			height: 32px;
+			width: 32px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-left: 4px;
+			color: $ts-dark;
+			transform: rotate(-90deg);
+			cursor: pointer;
+			&:hover {
+				background: $ts-darkened-white;
+				border-radius: 16px;
+			}
+		}
 	}
 	.navLink:hover {
 		&,
-		.icon,
-		.iconDisclosure {
+		.icon {
 			color: $ts-red;
 		}
 	}

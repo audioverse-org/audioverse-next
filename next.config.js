@@ -100,7 +100,7 @@ module.exports = withPWA({
 			},
 			{
 				source: '/:lang/account/playlists',
-				destination: '/:lang/library/collections',
+				destination: '/:lang/library/playlists',
 				permanent: true,
 			},
 			{

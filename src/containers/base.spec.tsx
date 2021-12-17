@@ -14,6 +14,7 @@ describe('app', () => {
 		loadRouter({
 			pathname: '/[language]/discover',
 			query: {},
+			asPath: '',
 		});
 	});
 

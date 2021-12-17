@@ -81,10 +81,10 @@
 	}
 }
 
+.optionGroupWrapper + .optionGroupWrapper {
+	margin-top: 32px;
+}
 .optionGroup {
-	+ .optionGroup {
-		margin-top: 24px;
-	}
 	> * {
 		min-width: 140px;
 		margin-bottom: 16px;

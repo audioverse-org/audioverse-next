@@ -26,12 +26,14 @@ import {
 
 import IconAlignLeft from '../../public/img/fa-align-left.svg';
 import IconBook from '../../public/img/fa-book.svg';
+import IconBookmark from '../../public/img/fa-bookmark.svg';
 import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
 import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
 import IconFacebook from '../../public/img/fa-facebook.svg';
 import IconFeather from '../../public/img/fa-feather.svg';
 import IconFireHeavy from '../../public/img/fa-fire-heavy.svg';
 import IconHeartHeavy from '../../public/img/fa-heart-heavy.svg';
+import IconHistory from '../../public/img/fa-history.svg';
 import IconInbox from '../../public/img/fa-inbox.svg';
 import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
@@ -46,6 +48,7 @@ import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
 import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
 import IconYouTube from '../../public/img/fa-youtube.svg';
+import IconAccount from '../../public/img/icon-account.svg';
 import IconBible from '../../public/img/icon-bible.svg';
 import IconBooks from '../../public/img/icon-books.svg';
 import IconCollections from '../../public/img/icon-collections.svg';
@@ -94,6 +97,35 @@ export function getNavigationItems(
 				defaultMessage: 'Library',
 				description: `Header nav link name: Library`,
 			}),
+			children: [
+				{
+					key: 'saved',
+					href: makeLibraryRoute(languageRoute),
+					Icon: IconBookmark,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-saved`,
+						defaultMessage: 'Saved',
+					}),
+				},
+				{
+					key: 'playlists',
+					href: makeLibraryRoute(languageRoute, 'playlists'),
+					Icon: IconList,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-playlists`,
+						defaultMessage: 'Playlists',
+					}),
+				},
+				{
+					key: 'saved',
+					href: makeLibraryRoute(languageRoute, 'history'),
+					Icon: IconHistory,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-history`,
+						defaultMessage: 'History',
+					}),
+				},
+			],
 		},
 		...(languageRoute === 'en'
 			? [
@@ -183,6 +215,15 @@ export function getNavigationItems(
 					}),
 				},
 			],
+		},
+		{
+			key: 'presenters',
+			href: makePresenterListRoute(languageRoute),
+			Icon: IconAccount,
+			label: intl.formatMessage({
+				id: `header__navItemPresenters`,
+				defaultMessage: 'Presenters',
+			}),
 		},
 		{
 			key: 'story',

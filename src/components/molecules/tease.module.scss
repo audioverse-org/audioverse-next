@@ -8,8 +8,9 @@
 		border-radius: 24px;
 	}
 	&.fullBleed {
-		@media (max-width: #{$breakpoint-md - 1px}) {
-			margin: 0 -24px -24px;
+		@media (max-width: #{$content-maxWidth-sm - 1px}) {
+			margin: -24px;
+			border-radius: 0;
 		}
 	}
 }

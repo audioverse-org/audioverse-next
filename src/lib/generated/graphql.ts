@@ -9142,108 +9142,6 @@ export type GetHomeStaticPropsQuery = {
 	};
 };
 
-export type GetLibraryPlaylistsDataQueryVariables = Exact<{
-	language: Language;
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetLibraryPlaylistsDataQuery = {
-	__typename?: 'Query';
-	me:
-		| {
-				__typename?: 'AuthenticatedUser';
-				user: {
-					__typename?: 'User';
-					playlists: {
-						__typename?: 'UserPlaylistConnection';
-						nodes:
-							| Array<{
-									__typename?: 'UserPlaylist';
-									id: string | number;
-									title: string;
-									recordings: {
-										__typename?: 'RecordingConnection';
-										nodes:
-											| Array<{
-													__typename?: 'Recording';
-													canonicalPath: string;
-													sequenceIndex: number | null | undefined;
-													id: string | number;
-													title: string;
-													duration: number;
-													recordingContentType: RecordingContentType;
-													persons: Array<{
-														__typename?: 'Person';
-														name: string;
-														canonicalPath: string;
-														imageWithFallback: {
-															__typename?: 'Image';
-															url: string;
-														};
-													}>;
-													sequence:
-														| {
-																__typename?: 'Sequence';
-																id: string | number;
-																title: string;
-																contentType: SequenceContentType;
-																recordings: {
-																	__typename?: 'RecordingConnection';
-																	aggregate:
-																		| {
-																				__typename?: 'Aggregate';
-																				count: number;
-																		  }
-																		| null
-																		| undefined;
-																};
-														  }
-														| null
-														| undefined;
-													audioFiles: Array<{
-														__typename?: 'AudioFile';
-														url: string;
-														filesize: string;
-														mimeType: string;
-														duration: number;
-													}>;
-													videoFiles: Array<{
-														__typename?: 'VideoFile';
-														url: string;
-														filesize: string;
-														mimeType: string;
-														duration: number;
-													}>;
-													videoStreams: Array<{
-														__typename?: 'VideoFile';
-														url: string;
-														filesize: string;
-														mimeType: string;
-														duration: number;
-													}>;
-											  }>
-											| null
-											| undefined;
-										aggregate:
-											| { __typename?: 'Aggregate'; count: number }
-											| null
-											| undefined;
-									};
-							  }>
-							| null
-							| undefined;
-						aggregate:
-							| { __typename?: 'Aggregate'; count: number }
-							| null
-							| undefined;
-					};
-				};
-		  }
-		| null
-		| undefined;
-};
-
 export type GetLibraryHistoryPageDataQueryVariables = Exact<{
 	language: Language;
 	first: Scalars['Int'];
@@ -9774,6 +9672,108 @@ export type GetLibraryPlaylistPageDataQuery = {
 						  }
 						| null
 						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetLibraryPlaylistsDataQueryVariables = Exact<{
+	language: Language;
+	offset: InputMaybe<Scalars['Int']>;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetLibraryPlaylistsDataQuery = {
+	__typename?: 'Query';
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					playlists: {
+						__typename?: 'UserPlaylistConnection';
+						nodes:
+							| Array<{
+									__typename?: 'UserPlaylist';
+									id: string | number;
+									title: string;
+									recordings: {
+										__typename?: 'RecordingConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Recording';
+													canonicalPath: string;
+													sequenceIndex: number | null | undefined;
+													id: string | number;
+													title: string;
+													duration: number;
+													recordingContentType: RecordingContentType;
+													persons: Array<{
+														__typename?: 'Person';
+														name: string;
+														canonicalPath: string;
+														imageWithFallback: {
+															__typename?: 'Image';
+															url: string;
+														};
+													}>;
+													sequence:
+														| {
+																__typename?: 'Sequence';
+																id: string | number;
+																title: string;
+																contentType: SequenceContentType;
+																recordings: {
+																	__typename?: 'RecordingConnection';
+																	aggregate:
+																		| {
+																				__typename?: 'Aggregate';
+																				count: number;
+																		  }
+																		| null
+																		| undefined;
+																};
+														  }
+														| null
+														| undefined;
+													audioFiles: Array<{
+														__typename?: 'AudioFile';
+														url: string;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+													videoFiles: Array<{
+														__typename?: 'VideoFile';
+														url: string;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+													videoStreams: Array<{
+														__typename?: 'VideoFile';
+														url: string;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+											  }>
+											| null
+											| undefined;
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }>
+							| null
+							| undefined;
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
 				};
 		  }
 		| null
@@ -16015,42 +16015,6 @@ export const useGetHomeStaticPropsQuery = <
 		),
 		options
 	);
-export const GetLibraryPlaylistsDataDocument = `
-    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
-  me {
-    user {
-      playlists(
-        language: $language
-        offset: $offset
-        first: $first
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardPlaylist
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardPlaylistFragmentDoc}`;
-export const useGetLibraryPlaylistsDataQuery = <
-	TData = GetLibraryPlaylistsDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryPlaylistsDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
-		['getLibraryPlaylistsData', variables],
-		graphqlFetcher<
-			GetLibraryPlaylistsDataQuery,
-			GetLibraryPlaylistsDataQueryVariables
-		>(GetLibraryPlaylistsDataDocument, variables),
-		options
-	);
 export const GetLibraryHistoryPageDataDocument = `
     query getLibraryHistoryPageData($language: Language!, $first: Int!, $offset: Int!) {
   me {
@@ -16168,6 +16132,42 @@ export const useGetLibraryPlaylistPageDataQuery = <
 			GetLibraryPlaylistPageDataQuery,
 			GetLibraryPlaylistPageDataQueryVariables
 		>(GetLibraryPlaylistPageDataDocument, variables),
+		options
+	);
+export const GetLibraryPlaylistsDataDocument = `
+    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
+  me {
+    user {
+      playlists(
+        language: $language
+        offset: $offset
+        first: $first
+        orderBy: [{field: CREATED_AT, direction: DESC}]
+      ) {
+        nodes {
+          ...cardPlaylist
+        }
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}
+    ${CardPlaylistFragmentDoc}`;
+export const useGetLibraryPlaylistsDataQuery = <
+	TData = GetLibraryPlaylistsDataQuery,
+	TError = unknown
+>(
+	variables: GetLibraryPlaylistsDataQueryVariables,
+	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
+) =>
+	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
+		['getLibraryPlaylistsData', variables],
+		graphqlFetcher<
+			GetLibraryPlaylistsDataQuery,
+			GetLibraryPlaylistsDataQueryVariables
+		>(GetLibraryPlaylistsDataDocument, variables),
 		options
 	);
 export const GetPresenterAppearsPageDataDocument = `
@@ -18635,12 +18635,6 @@ export async function getHomeStaticProps<T>(
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
 
-export async function getLibraryPlaylistsData<T>(
-	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
-): Promise<GetLibraryPlaylistsDataQuery> {
-	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
-}
-
 export async function getLibraryHistoryPageData<T>(
 	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
 ): Promise<GetLibraryHistoryPageDataQuery> {
@@ -18657,6 +18651,12 @@ export async function getLibraryPlaylistPageData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
 ): Promise<GetLibraryPlaylistPageDataQuery> {
 	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
+}
+
+export async function getLibraryPlaylistsData<T>(
+	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
+): Promise<GetLibraryPlaylistsDataQuery> {
+	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
 
 export async function getPresenterAppearsPageData<T>(

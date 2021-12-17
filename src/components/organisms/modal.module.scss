@@ -26,9 +26,10 @@
 
 .buttonRow {
 	display: flex;
+	flex-direction: row-reverse;
 	align-items: center;
-	justify-content: flex-end;
-	flex-wrap: wrap;
+	justify-content: flex-start;
+	flex-wrap: wrap-reverse;
 	> * {
 		margin-top: 16px;
 		margin-left: 16px;
