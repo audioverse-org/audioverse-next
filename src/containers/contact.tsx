@@ -1,7 +1,9 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Alert from '@components/atoms/alert';
 import Heading1 from '@components/atoms/heading1';
+import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Input from '@components/molecules/form/input';
@@ -61,6 +63,32 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 			body,
 		});
 	};
+
+	if (isSuccess) {
+		return (
+			<>
+				<Heading1>
+					<FormattedMessage id="contact__title" defaultMessage="Contact" />
+				</Heading1>
+				<ContentWidthLimiter>
+					<Alert className={styles.successAlert}>
+						<Heading2 className={styles.successHeading}>
+							<FormattedMessage
+								id="contact__thankYou"
+								defaultMessage="Thank you!"
+							/>
+						</Heading2>
+						<p className={styles.successCopy}>
+							<FormattedMessage
+								id="contact__messageSubmitted"
+								defaultMessage="Your message has been submitted."
+							/>
+						</p>
+					</Alert>
+				</ContentWidthLimiter>
+			</>
+		);
+	}
 
 	return (
 		<>
@@ -161,46 +189,29 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 						</div>
 						<div>
 							<Textarea
-								label={
-									recipient === PageContactRecipient.Testimony
-										? intl.formatMessage({
-												id: 'contact__testimonyLabel',
-												defaultMessage: 'Testimony',
-										  })
-										: intl.formatMessage({
-												id: 'contact__bodyLabel',
-												defaultMessage: 'Body',
-										  })
-								}
+								label={intl.formatMessage({
+									id: 'contact__messageLabel',
+									defaultMessage: 'Message',
+								})}
 								value={body}
 								setValue={setBody}
 							/>
 						</div>
 					</div>
 					<div className={styles.actions}>
-						{!isSuccess && (
-							<Button
-								type="super"
-								onClick={onSubmit}
-								text={
-									<FormattedMessage
-										id="contact__submitLabel"
-										defaultMessage="Submit"
-									/>
-								}
-								centered
-								className={styles.submit}
-								disabled={!formFilled || isLoading}
-							/>
-						)}
-						{isSuccess && (
-							<div className={styles.success}>
+						<Button
+							type="super"
+							onClick={onSubmit}
+							text={
 								<FormattedMessage
-									id="contact__success"
-									defaultMessage="Successfully submitted!"
+									id="contact__submitLabel"
+									defaultMessage="Submit"
 								/>
-							</div>
-						)}
+							}
+							centered
+							className={styles.submit}
+							disabled={!formFilled || isLoading}
+						/>
 					</div>
 				</form>
 			</ContentWidthLimiter>

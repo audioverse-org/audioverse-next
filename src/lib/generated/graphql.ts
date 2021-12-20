@@ -5621,7 +5621,9 @@ export type ButtonDownloadFragment = {
 export type ButtonShareRecordingFragment = {
 	__typename?: 'Recording';
 	id: string | number;
+	title: string;
 	shareUrl: string;
+	speakers: Array<{ __typename?: 'Person'; name: string }>;
 };
 
 export type CardBibleChapterFragment = {
@@ -6347,6 +6349,7 @@ export type PlayerFragment = {
 		filesize: string;
 		bitrate: number;
 	}>;
+	speakers: Array<{ __typename?: 'Person'; name: string }>;
 };
 
 export type GetPlaylistButtonDataQueryVariables = Exact<{
@@ -14459,7 +14462,11 @@ export const ButtonDownloadFragmentDoc = `
 export const ButtonShareRecordingFragmentDoc = `
     fragment buttonShareRecording on Recording {
   id
+  title
   shareUrl
+  speakers: persons(role: SPEAKER) {
+    name
+  }
 }
     `;
 export const PlayerFragmentDoc = `
@@ -15548,6 +15555,7 @@ export const GetCollectionDetailPageDataDocument = `
     }
     persons(
       first: 3
+      role: SPEAKER
       orderBy: [{field: RECORDING_COUNT, direction: DESC}, {field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC}]
     ) {
       aggregate {
@@ -15729,6 +15737,7 @@ export const GetCollectionPresentersPageDataDocument = `
     id
     ...collectionPivot
     persons(
+      role: SPEAKER
       offset: $offset
       first: $first
       orderBy: [{field: NAME, direction: ASC}]

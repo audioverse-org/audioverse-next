@@ -96,6 +96,7 @@ function Book({
 					? { canonicalPath: makeCanonicalPath(toRecordingChapterNumber + 1) }
 					: null,
 			isDownloadAllowed: false,
+			speakers: [],
 			videoDownloads: [],
 			videoFiles: [],
 			videoStreams: [],

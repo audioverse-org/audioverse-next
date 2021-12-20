@@ -392,47 +392,47 @@
     "comment": "Header nav link name: User Settings",
     "string": "ユーザー設定"
   },
-  "header__naveItemBible": {
+  "header__navItemBible": {
     "comment": "Header nav link name: Bible",
     "string": "聖書"
   },
-  "header__naveItemCollections-all": {
+  "header__navItemCollections-all": {
     "string": "全てのコレクション"
   },
-  "header__naveItemCollections-book": {
+  "header__navItemCollections-book": {
     "string": "巻"
   },
-  "header__naveItemCollections-conference": {
+  "header__navItemCollections-conference": {
     "string": "大会・総会"
   },
-  "header__naveItemCollections-series": {
+  "header__navItemCollections-series": {
     "string": "シリーズ"
   },
-  "header__naveItemCollections-songs": {
+  "header__navItemCollections-songs": {
     "string": "聖句ソング"
   },
-  "header__naveItemCollections-speaker": {
+  "header__navItemCollections-speaker": {
     "string": "スピーカー"
   },
-  "header__naveItemCollections-sponsor": {
+  "header__navItemCollections-sponsor": {
     "string": "主催者"
   },
-  "header__naveItemCollections-stories": {
+  "header__navItemCollections-stories": {
     "string": "ストーリー"
   },
-  "header__naveItemMore-legal": {
+  "header__navItemMore-legal": {
     "string": "法律情報"
   },
-  "header__naveItemMore-privacy": {
+  "header__navItemMore-privacy": {
     "string": "プライバシー"
   },
-  "header__naveItemMore-terms": {
+  "header__navItemMore-terms": {
     "string": "利用規約"
   },
-  "header__naveItemUser-logout": {
+  "header__navItemUser-logout": {
     "string": "ログアウト"
   },
-  "header__naveItemUser-profile": {
+  "header__navItemUser-profile": {
     "string": "プロフィール"
   },
   "homePage__addToLibraryPlaceholder": {

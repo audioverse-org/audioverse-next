@@ -1,4 +1,8 @@
 fragment buttonShareRecording on Recording {
 	id
+	title
 	shareUrl
+	speakers: persons(role: SPEAKER) {
+		name
+	}
 }

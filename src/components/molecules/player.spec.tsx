@@ -34,6 +34,7 @@ const recording: Partial<PlayerFragment> = {
 	isDownloadAllowed: true,
 	audioDownloads: [],
 	videoDownloads: [],
+	speakers: [],
 	sequence: {
 		contentType: SequenceContentType.Series,
 		title: 'the_sequence_title',
@@ -273,6 +274,7 @@ describe('player', () => {
 		const { getByAltText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -351,6 +353,7 @@ describe('player', () => {
 					duration: 1234,
 				},
 			],
+			speakers: [],
 		};
 
 		const recording2: Partial<PlayerFragment> = {
@@ -365,6 +368,7 @@ describe('player', () => {
 					duration: 2345,
 				},
 			],
+			speakers: [],
 		};
 
 		const { getByTestId } = await renderWithIntl(
@@ -406,6 +410,7 @@ describe('player', () => {
 		const { getByAltText, queryByAltText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -430,6 +435,7 @@ describe('player', () => {
 		const { getByAltText, getByLabelText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -467,6 +473,7 @@ describe('player', () => {
 					duration: 1234,
 				},
 			],
+			speakers: [],
 		};
 
 		const recording2: Partial<PlayerFragment> = {
@@ -481,6 +488,7 @@ describe('player', () => {
 					duration: 2345,
 				},
 			],
+			speakers: [],
 		};
 
 		const { getByTestId } = await renderWithIntl(
@@ -554,6 +562,7 @@ describe('player', () => {
 		const { getByAltText, getByTestId } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -580,6 +589,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -666,6 +676,8 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
+					sequence: null,
 					id: 'the_sermon_id',
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
@@ -813,6 +825,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -841,6 +854,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -861,6 +875,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					title: 'the_sermon_title',
 					canonicalPath: 'the_sermon_path',
 					videoFiles: [
@@ -891,6 +906,7 @@ describe('player', () => {
 		const { findByText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					duration: 60,
 					videoFiles: [
 						{
@@ -910,6 +926,7 @@ describe('player', () => {
 		const { getByLabelText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					duration: 60,
 					videoFiles: [
 						{
@@ -931,8 +948,10 @@ describe('player', () => {
 		const { getByLabelText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					canonicalPath: 'the_sermon_path',
 					duration: 60,
+					speakers: [],
 					videoFiles: [
 						{
 							url: 'the_source_src',
@@ -1014,6 +1033,7 @@ describe('player', () => {
 		const { getByText } = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					duration: 60,
 					videoFiles: [
 						{
@@ -1105,6 +1125,7 @@ describe('player', () => {
 		const result = await renderComponent({
 			props: {
 				recording: {
+					...recording,
 					canonicalPath: 'the_sermon_path',
 					duration: 120,
 				},

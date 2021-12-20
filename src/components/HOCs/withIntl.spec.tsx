@@ -587,7 +587,9 @@ describe('localization usage', () => {
 		[
 			Player,
 			{
-				recording: {},
+				recording: {
+					speakers: [],
+				},
 			},
 		],
 		[SearchBar, {}],

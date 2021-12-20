@@ -392,47 +392,47 @@
     "comment": "Header nav link name: User Settings",
     "string": "Пользовательские настройки"
   },
-  "header__naveItemBible": {
+  "header__navItemBible": {
     "comment": "Header nav link name: Bible",
     "string": "Библия"
   },
-  "header__naveItemCollections-all": {
+  "header__navItemCollections-all": {
     "string": "Все сборники"
   },
-  "header__naveItemCollections-book": {
+  "header__navItemCollections-book": {
     "string": "Книга"
   },
-  "header__naveItemCollections-conference": {
+  "header__navItemCollections-conference": {
     "string": "Конференция"
   },
-  "header__naveItemCollections-series": {
+  "header__navItemCollections-series": {
     "string": "Серия"
   },
-  "header__naveItemCollections-songs": {
+  "header__navItemCollections-songs": {
     "string": "Песни из Писания"
   },
-  "header__naveItemCollections-speaker": {
+  "header__navItemCollections-speaker": {
     "string": "Проповедующий"
   },
-  "header__naveItemCollections-sponsor": {
+  "header__navItemCollections-sponsor": {
     "string": "Спонсор"
   },
-  "header__naveItemCollections-stories": {
+  "header__navItemCollections-stories": {
     "string": "Истории"
   },
-  "header__naveItemMore-legal": {
+  "header__navItemMore-legal": {
     "string": "Законный"
   },
-  "header__naveItemMore-privacy": {
+  "header__navItemMore-privacy": {
     "string": "Конфиденциальность"
   },
-  "header__naveItemMore-terms": {
+  "header__navItemMore-terms": {
     "string": "Условия использования"
   },
-  "header__naveItemUser-logout": {
+  "header__navItemUser-logout": {
     "string": "Выйти из системы"
   },
-  "header__naveItemUser-profile": {
+  "header__navItemUser-profile": {
     "string": "Профиль"
   },
   "homePage__addToLibraryPlaceholder": {
