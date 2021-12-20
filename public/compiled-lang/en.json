@@ -125,6 +125,12 @@
       "value": "Donate"
     }
   ],
+  "andOnboarding__intro": [
+    {
+      "type": 0,
+      "value": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
+    }
+  ],
   "app__features1Cta": [
     {
       "type": 0,
@@ -295,6 +301,12 @@
     {
       "type": 0,
       "value": " read"
+    }
+  ],
+  "buttonShare__emailSubject": [
+    {
+      "type": 0,
+      "value": "Enjoy this blessing"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -541,6 +553,18 @@
       "value": "Location"
     }
   ],
+  "collectionDetail__presentersAllLabel": [
+    {
+      "type": 0,
+      "value": "See All Presenters"
+    }
+  ],
+  "collectionDetail__presentersLabel": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
   "collectionDetail__sequenceCountLabel": [
     {
       "type": 1,
@@ -561,18 +585,6 @@
     {
       "type": 0,
       "value": "Series"
-    }
-  ],
-  "collectionDetail__speakersAllLabel": [
-    {
-      "type": 0,
-      "value": "See All Speakers"
-    }
-  ],
-  "collectionDetail__speakersLabel": [
-    {
-      "type": 0,
-      "value": "Speakers"
     }
   ],
   "collectionDetail__sponsorLabel": [
@@ -783,6 +795,12 @@
       "value": "Featured Collection"
     }
   ],
+  "discoverCollections_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
   "discoverCollections_scriptureSongsHeading": [
     {
       "type": 0,
@@ -799,12 +817,6 @@
     {
       "type": 0,
       "value": "Series"
-    }
-  ],
-  "discoverCollections_speakersHeading": [
-    {
-      "type": 0,
-      "value": "Speakers"
     }
   ],
   "discoverCollections_sponsorsHeading": [
@@ -929,6 +941,24 @@
       "value": "m"
     }
   ],
+  "embed__partInfo": [
+    {
+      "type": 0,
+      "value": "Part "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": " of "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    }
+  ],
   "generateFeed__audio": [
     {
       "type": 0,
@@ -981,16 +1011,298 @@
       "value": " AudioVerse. Individual recordings are copyrighted by their respective owners."
     }
   ],
+  "give__amazonCta": [
+    {
+      "type": 0,
+      "value": "Shop Now"
+    }
+  ],
+  "give__amazonDescription": [
+    {
+      "type": 0,
+      "value": "With every purchase on AmazonSmile, AudioVerse receives 0.5%."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "How? Just click on the button."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "That's all there is to it! Just be sure to bookmark the new AmazonSmile website or else your browser will likely default back to the regular Amazon site."
+    }
+  ],
+  "give__amazonTitle": [
+    {
+      "type": 0,
+      "value": "Amazon Smile"
+    }
+  ],
+  "give__checkDescription": [
+    {
+      "type": 0,
+      "value": "Please make checks payable to AudioVerse."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Our mailing address is:"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
+    }
+  ],
+  "give__checkTitle": [
+    {
+      "type": 0,
+      "value": "Check By Mail"
+    }
+  ],
+  "give__estateCta": [
+    {
+      "type": 0,
+      "value": "Give Now"
+    }
+  ],
+  "give__estateDescription": [
+    {
+      "type": 0,
+      "value": "You can make an impact on AudioVerse today and tomorrow by making AudioVerse a recipient in your estate plan. The easiest way to do this is by making AudioVerse a beneficiary in your financial accounts or by including the ministry in your will or trust."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "For those who wish to leave a lasting legacy by giving to the Lord's work but still need the benefit of their assets, a charitable gift annuity may be a good option. This method of giving is designed to be beneficial for both the donor and recipient. AudioVerse is working with Western Adventist Foundation (WAF) to provide this option of giving to our supporters."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "If you wish to leave a gift via a charitable gift annuity to AudioVerse, please contact WAF directly either through their website or by phone."
+    }
+  ],
+  "give__estateDisclaimer": [
+    {
+      "type": 0,
+      "value": "Charitable gift annuities are NOT AVAILABLE in the following states: AL, MD and WA; Annuities for CA and IL residents are provided by the Pacific Union Conference of Seventh-day Adventists; Annuities for HI residents are provided by the Hawaii Conference of Seventh-day Adventists; and Charitable gift annuities to benefit AudioVerse in all other states are provided by Western Adventist Foundation. Western Adventist Foundation provides no legal advice. Individuals should seek the advice of their own legal counsel."
+    }
+  ],
+  "give__estateTitle": [
+    {
+      "type": 0,
+      "value": "Remember AudioVerse in Your Estate Plan"
+    }
+  ],
+  "give__givingAssistantCta": [
+    {
+      "type": 0,
+      "value": "Shop Now"
+    }
+  ],
+  "give__givingAssistantDescription": [
+    {
+      "type": 0,
+      "value": "Donate up to 30% of your purchase price to AudioVerse when you shop at 1800+ popular online retailers using Giving Assistant! It’s easy. Giving Assistant pays you cash back, and you choose how much of it you’d like to donate to us. Try it now and find great deals like Macy's Coupons, as well as savings at great places like Home Depot and JC Penney!"
+    }
+  ],
+  "give__givingAssistantTitle": [
+    {
+      "type": 0,
+      "value": "Giving Assistant"
+    }
+  ],
+  "give__heading": [
+    {
+      "type": 0,
+      "value": "Donate"
+    }
+  ],
+  "give__paypalCta": [
+    {
+      "type": 0,
+      "value": "Give Now"
+    }
+  ],
+  "give__paypalDescription": [
+    {
+      "type": 0,
+      "value": "Visit the AudioVerse PayPal Giving Fund page to initiate your donation to AudioVerse. 100% of your gift will go to the ministry with no processing fee. By giving through this channel, you will receive a tax-deductible receipt from Paypal Giving Fund and not from AudioVerse."
+    }
+  ],
+  "give__paypalTitle": [
+    {
+      "type": 0,
+      "value": "PayPal Giving Fund"
+    }
+  ],
+  "header__navItemBible": [
+    {
+      "type": 0,
+      "value": "Bible"
+    }
+  ],
   "header__navItemCollections": [
     {
       "type": 0,
       "value": "Collections"
     }
   ],
+  "header__navItemCollections-all": [
+    {
+      "type": 0,
+      "value": "All Collections"
+    }
+  ],
+  "header__navItemCollections-books": [
+    {
+      "type": 0,
+      "value": "Books"
+    }
+  ],
+  "header__navItemCollections-conferences": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "header__navItemCollections-presenters": [
+    {
+      "type": 0,
+      "value": "Presenters"
+    }
+  ],
+  "header__navItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
+  "header__navItemCollections-sponsors": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "header__navItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
   "header__navItemContact": [
     {
       "type": 0,
       "value": "Contact"
+    }
+  ],
+  "header__navItemContact-facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "header__navItemContact-general": [
+    {
+      "type": 0,
+      "value": "General Contact"
+    }
+  ],
+  "header__navItemContact-instagram": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "header__navItemContact-support": [
+    {
+      "type": 0,
+      "value": "Request Support"
+    }
+  ],
+  "header__navItemContact-testimony": [
+    {
+      "type": 0,
+      "value": "Share Testimony"
+    }
+  ],
+  "header__navItemContact-twitter": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "header__navItemContact-youtube": [
+    {
+      "type": 0,
+      "value": "YouTube"
     }
   ],
   "header__navItemDiscover": [
@@ -1005,10 +1317,52 @@
       "value": "Library"
     }
   ],
+  "header__navItemLibrary-history": [
+    {
+      "type": 0,
+      "value": "History"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "Playlists"
+    }
+  ],
+  "header__navItemLibrary-saved": [
+    {
+      "type": 0,
+      "value": "Saved"
+    }
+  ],
   "header__navItemMore": [
     {
       "type": 0,
       "value": "More"
+    }
+  ],
+  "header__navItemMore-legal": [
+    {
+      "type": 0,
+      "value": "Legal"
+    }
+  ],
+  "header__navItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "Privacy"
+    }
+  ],
+  "header__navItemMore-terms": [
+    {
+      "type": 0,
+      "value": "Terms of Use"
+    }
+  ],
+  "header__navItemPresenters": [
+    {
+      "type": 0,
+      "value": "Presenters"
     }
   ],
   "header__navItemStory": [
@@ -1059,121 +1413,13 @@
       "value": "User Settings"
     }
   ],
-  "header__naveItemBible": [
-    {
-      "type": 0,
-      "value": "Bible"
-    }
-  ],
-  "header__naveItemCollections-all": [
-    {
-      "type": 0,
-      "value": "All Collections"
-    }
-  ],
-  "header__naveItemCollections-books": [
-    {
-      "type": 0,
-      "value": "Books"
-    }
-  ],
-  "header__naveItemCollections-conferences": [
-    {
-      "type": 0,
-      "value": "Conferences"
-    }
-  ],
-  "header__naveItemCollections-songs": [
-    {
-      "type": 0,
-      "value": "Scripture Songs"
-    }
-  ],
-  "header__naveItemCollections-speakers": [
-    {
-      "type": 0,
-      "value": "Speakers"
-    }
-  ],
-  "header__naveItemCollections-sponsors": [
-    {
-      "type": 0,
-      "value": "Sponsors"
-    }
-  ],
-  "header__naveItemCollections-stories": [
-    {
-      "type": 0,
-      "value": "Stories"
-    }
-  ],
-  "header__naveItemContact-facebook": [
-    {
-      "type": 0,
-      "value": "Facebook"
-    }
-  ],
-  "header__naveItemContact-general": [
-    {
-      "type": 0,
-      "value": "General Contact"
-    }
-  ],
-  "header__naveItemContact-instagram": [
-    {
-      "type": 0,
-      "value": "Instagram"
-    }
-  ],
-  "header__naveItemContact-support": [
-    {
-      "type": 0,
-      "value": "Request Support"
-    }
-  ],
-  "header__naveItemContact-testimony": [
-    {
-      "type": 0,
-      "value": "Share Testimony"
-    }
-  ],
-  "header__naveItemContact-twitter": [
-    {
-      "type": 0,
-      "value": "Twitter"
-    }
-  ],
-  "header__naveItemContact-youtube": [
-    {
-      "type": 0,
-      "value": "YouTube"
-    }
-  ],
-  "header__naveItemMore-legal": [
-    {
-      "type": 0,
-      "value": "Legal"
-    }
-  ],
-  "header__naveItemMore-privacy": [
-    {
-      "type": 0,
-      "value": "Privacy"
-    }
-  ],
-  "header__naveItemMore-terms": [
-    {
-      "type": 0,
-      "value": "Terms of Use"
-    }
-  ],
-  "header__naveItemUser-logout": [
+  "header__navItemUser-logout": [
     {
       "type": 0,
       "value": "Log Out"
     }
   ],
-  "header__naveItemUser-profile": [
+  "header__navItemUser-profile": [
     {
       "type": 0,
       "value": "Profile"
@@ -1337,12 +1583,6 @@
       "value": "Thanks to our supporters and international partners, AudioVerse exists in many language sites available. Change your language here or in the menu."
     }
   ],
-  "libraryCollections__collectionsHeading": [
-    {
-      "type": 0,
-      "value": "Collections"
-    }
-  ],
   "libraryCollections__dismiss": [
     {
       "type": 0,
@@ -1361,28 +1601,10 @@
       "value": "You don’t have any collections items saved yet"
     }
   ],
-  "libraryCollections__personsHeading": [
-    {
-      "type": 0,
-      "value": "Presenters"
-    }
-  ],
   "libraryCollections__playlistsAlert": [
     {
       "type": 0,
       "value": "At the moment, we’re reimagining the playlist experience. You can still manage your playlists using the mobile app."
-    }
-  ],
-  "libraryCollections__playlistsHeading": [
-    {
-      "type": 0,
-      "value": "Playlists"
-    }
-  ],
-  "libraryCollections__sponsorsHeading": [
-    {
-      "type": 0,
-      "value": "Sponsors"
     }
   ],
   "libraryError__cta": [
@@ -1409,16 +1631,106 @@
       "value": "Load more"
     }
   ],
-  "libraryNav__all": [
+  "libraryHistory__loadingMore": [
+    {
+      "type": 0,
+      "value": "Loading more..."
+    }
+  ],
+  "libraryNav__contentType": [
+    {
+      "type": 0,
+      "value": "Content Type"
+    }
+  ],
+  "libraryNav__contentType-all": [
     {
       "type": 0,
       "value": "All"
     }
   ],
-  "libraryNav__collections": [
+  "libraryNav__contentType-audiobooks": [
     {
       "type": 0,
-      "value": "Collections"
+      "value": "Audiobooks"
+    }
+  ],
+  "libraryNav__contentType-conferences": [
+    {
+      "type": 0,
+      "value": "Conferences"
+    }
+  ],
+  "libraryNav__contentType-music": [
+    {
+      "type": 0,
+      "value": "Music"
+    }
+  ],
+  "libraryNav__contentType-people": [
+    {
+      "type": 0,
+      "value": "People"
+    }
+  ],
+  "libraryNav__contentType-series": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "libraryNav__contentType-sponsors": [
+    {
+      "type": 0,
+      "value": "Sponsors"
+    }
+  ],
+  "libraryNav__contentType-stories": [
+    {
+      "type": 0,
+      "value": "Stories"
+    }
+  ],
+  "libraryNav__contentType-teachings": [
+    {
+      "type": 0,
+      "value": "Teachings"
+    }
+  ],
+  "libraryNav__duration": [
+    {
+      "type": 0,
+      "value": "Duration"
+    }
+  ],
+  "libraryNav__duration-all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "libraryNav__duration-long": [
+    {
+      "type": 0,
+      "value": "45-60 Minutes"
+    }
+  ],
+  "libraryNav__duration-medium": [
+    {
+      "type": 0,
+      "value": "30-45 Minutes"
+    }
+  ],
+  "libraryNav__duration-short": [
+    {
+      "type": 0,
+      "value": "15-30 Minutes"
+    }
+  ],
+  "libraryNav__duration-xlong": [
+    {
+      "type": 0,
+      "value": "Over 60 Minutes"
     }
   ],
   "libraryNav__filter": [
@@ -1427,16 +1739,88 @@
       "value": "Filter"
     }
   ],
-  "libraryNav__finished": [
+  "libraryNav__filtersApplied": [
     {
       "type": 0,
-      "value": "Finished"
+      "value": "Filters applied"
     }
   ],
   "libraryNav__history": [
     {
       "type": 0,
       "value": "History"
+    }
+  ],
+  "libraryNav__mediaType": [
+    {
+      "type": 0,
+      "value": "Media Type"
+    }
+  ],
+  "libraryNav__mediaType-all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "libraryNav__mediaType-audio": [
+    {
+      "type": 0,
+      "value": "Audio only"
+    }
+  ],
+  "libraryNav__mediaType-video": [
+    {
+      "type": 0,
+      "value": "Video"
+    }
+  ],
+  "libraryNav__playbackStatus": [
+    {
+      "type": 0,
+      "value": "Playback Status"
+    }
+  ],
+  "libraryNav__playbackStatus-all": [
+    {
+      "type": 0,
+      "value": "All"
+    }
+  ],
+  "libraryNav__playbackStatus-finished": [
+    {
+      "type": 0,
+      "value": "Finished"
+    }
+  ],
+  "libraryNav__playbackStatus-started": [
+    {
+      "type": 0,
+      "value": "Started"
+    }
+  ],
+  "libraryNav__playbackStatus-unstarted": [
+    {
+      "type": 0,
+      "value": "Unstarted"
+    }
+  ],
+  "libraryNav__playlists": [
+    {
+      "type": 0,
+      "value": "Playlists"
+    }
+  ],
+  "libraryNav__saved": [
+    {
+      "type": 0,
+      "value": "Saved"
+    }
+  ],
+  "libraryNav__sort": [
+    {
+      "type": 0,
+      "value": "Sort"
     }
   ],
   "libraryNav__sortAtoZ": [
@@ -1463,54 +1847,6 @@
       "value": "Z to A"
     }
   ],
-  "libraryNav__started": [
-    {
-      "type": 0,
-      "value": "Started"
-    }
-  ],
-  "libraryNav__unstarted": [
-    {
-      "type": 0,
-      "value": "Not started"
-    }
-  ],
-  "libraryPlaybackStatus__emptyCopy": [
-    {
-      "type": 0,
-      "value": "Find something to listen to on the Discover page."
-    }
-  ],
-  "libraryPlaybackStatus__finishedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "You haven’t finished any items yet"
-    }
-  ],
-  "libraryPlaybackStatus__startedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "You haven’t started any items yet"
-    }
-  ],
-  "libraryPlaybackStatus__unstartedEmptyHeading": [
-    {
-      "type": 0,
-      "value": "You don’t have any items saved yet"
-    }
-  ],
-  "library__collectionsHeading": [
-    {
-      "type": 0,
-      "value": "Collections"
-    }
-  ],
-  "library__collectionsSeeAll": [
-    {
-      "type": 0,
-      "value": "See All Collections"
-    }
-  ],
   "library__emptyCopy": [
     {
       "type": 0,
@@ -1521,30 +1857,6 @@
     {
       "type": 0,
       "value": "You don’t have any items saved yet"
-    }
-  ],
-  "library__finishedHeading": [
-    {
-      "type": 0,
-      "value": "Finished"
-    }
-  ],
-  "library__finishedSeeAll": [
-    {
-      "type": 0,
-      "value": "See All Finished"
-    }
-  ],
-  "library__historyHeading": [
-    {
-      "type": 0,
-      "value": "History"
-    }
-  ],
-  "library__historySeeAll": [
-    {
-      "type": 0,
-      "value": "See All History"
     }
   ],
   "library__membersOnlyCopy": [
@@ -1565,22 +1877,16 @@
       "value": "Member-only feature"
     }
   ],
-  "library__startedHeading": [
+  "library__noMatchingCopy": [
     {
       "type": 0,
-      "value": "Started"
+      "value": "Bookmark items or listen to items from the Discover page."
     }
   ],
-  "library__startedSeeAll": [
+  "library__noMatchingHeading": [
     {
       "type": 0,
-      "value": "See All Started"
-    }
-  ],
-  "library__unstartedHeading": [
-    {
-      "type": 0,
-      "value": "Not Started"
+      "value": "You don’t have any matching items saved yet"
     }
   ],
   "loadingCards-ariaLabel": [
@@ -1715,22 +2021,10 @@
       "value": "Video Downloads"
     }
   ],
-  "molecule-buttonGuest__feature1": [
+  "molecule-buttonGuest__downloadQuality": [
     {
       "type": 0,
-      "value": "Lorem ipsum dolor"
-    }
-  ],
-  "molecule-buttonGuest__feature2": [
-    {
-      "type": 0,
-      "value": "Et exictur purim multatim"
-    }
-  ],
-  "molecule-buttonGuest__feature3": [
-    {
-      "type": 0,
-      "value": "Dulipscum erudis fesin"
+      "value": "Adjusting download quality"
     }
   ],
   "molecule-buttonGuest__label": [
@@ -1769,6 +2063,18 @@
       "value": "Continue as guest?"
     }
   ],
+  "molecule-buttonGuest__saving": [
+    {
+      "type": 0,
+      "value": "Saving to your library"
+    }
+  ],
+  "molecule-buttonGuest__syncing": [
+    {
+      "type": 0,
+      "value": "Syncing across your devices"
+    }
+  ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
     {
       "type": 0,
@@ -1785,6 +2091,12 @@
     {
       "type": 0,
       "value": "share"
+    }
+  ],
+  "molecule-buttonShare__copied": [
+    {
+      "type": 0,
+      "value": "Copied!"
     }
   ],
   "molecule-buttonShare__copyLink": [
@@ -3205,12 +3517,6 @@
     {
       "type": 0,
       "value": "Trending Teachings"
-    }
-  ],
-  "unstartedSeeAll": [
-    {
-      "type": 0,
-      "value": "See All Not Started"
     }
   ]
 }

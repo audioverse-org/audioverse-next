@@ -777,6 +777,12 @@
       "value": " AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
     }
   ],
+  "header__navItemBible": [
+    {
+      "type": 0,
+      "value": "Библия"
+    }
+  ],
   "header__navItemBlog": [
     {
       "type": 0,
@@ -787,6 +793,54 @@
     {
       "type": 0,
       "value": "Подборки"
+    }
+  ],
+  "header__navItemCollections-all": [
+    {
+      "type": 0,
+      "value": "Все сборники"
+    }
+  ],
+  "header__navItemCollections-book": [
+    {
+      "type": 0,
+      "value": "Книга"
+    }
+  ],
+  "header__navItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "Конференция"
+    }
+  ],
+  "header__navItemCollections-series": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "header__navItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
+    }
+  ],
+  "header__navItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "Проповедующий"
+    }
+  ],
+  "header__navItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "Спонсор"
+    }
+  ],
+  "header__navItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "Истории"
     }
   ],
   "header__navItemDiscover": [
@@ -805,6 +859,24 @@
     {
       "type": 0,
       "value": "Подробнее"
+    }
+  ],
+  "header__navItemMore-legal": [
+    {
+      "type": 0,
+      "value": "Законный"
+    }
+  ],
+  "header__navItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "Конфиденциальность"
+    }
+  ],
+  "header__navItemMore-terms": [
+    {
+      "type": 0,
+      "value": "Условия использования"
     }
   ],
   "header__navItemStory": [
@@ -849,85 +921,13 @@
       "value": "Пользовательские настройки"
     }
   ],
-  "header__naveItemBible": [
-    {
-      "type": 0,
-      "value": "Библия"
-    }
-  ],
-  "header__naveItemCollections-all": [
-    {
-      "type": 0,
-      "value": "Все сборники"
-    }
-  ],
-  "header__naveItemCollections-book": [
-    {
-      "type": 0,
-      "value": "Книга"
-    }
-  ],
-  "header__naveItemCollections-conference": [
-    {
-      "type": 0,
-      "value": "Конференция"
-    }
-  ],
-  "header__naveItemCollections-series": [
-    {
-      "type": 0,
-      "value": "Серия"
-    }
-  ],
-  "header__naveItemCollections-songs": [
-    {
-      "type": 0,
-      "value": "Песни из Писания"
-    }
-  ],
-  "header__naveItemCollections-speaker": [
-    {
-      "type": 0,
-      "value": "Проповедующий"
-    }
-  ],
-  "header__naveItemCollections-sponsor": [
-    {
-      "type": 0,
-      "value": "Спонсор"
-    }
-  ],
-  "header__naveItemCollections-stories": [
-    {
-      "type": 0,
-      "value": "Истории"
-    }
-  ],
-  "header__naveItemMore-legal": [
-    {
-      "type": 0,
-      "value": "Законный"
-    }
-  ],
-  "header__naveItemMore-privacy": [
-    {
-      "type": 0,
-      "value": "Конфиденциальность"
-    }
-  ],
-  "header__naveItemMore-terms": [
-    {
-      "type": 0,
-      "value": "Условия использования"
-    }
-  ],
-  "header__naveItemUser-logout": [
+  "header__navItemUser-logout": [
     {
       "type": 0,
       "value": "Выйти из системы"
     }
   ],
-  "header__naveItemUser-profile": [
+  "header__navItemUser-profile": [
     {
       "type": 0,
       "value": "Профиль"
