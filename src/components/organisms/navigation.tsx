@@ -51,7 +51,7 @@ const Navigation = ({
 						<IconExit />
 					</a>
 				</div>
-				<div className={styles.mobileRow}>
+				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
 					<SearchBar term={searchTerm} onChange={onSearchChange} />
 				</div>
 			</div>
@@ -127,21 +127,26 @@ const Navigation = ({
 
 						<div className={styles.account}>
 							{user ? (
-								<a
-									className={styles.accountWithAvatar}
-									onClick={(e) => {
-										e.preventDefault();
-										setSubmenu('account');
-									}}
-								>
-									<span className={styles.accountAvatar}>
-										<IconUser />
-									</span>
-									<span className={styles.accountName}>{user.name}</span>
-									<span className={styles.iconDisclosure}>
+								<>
+									<a
+										className={styles.accountWithAvatar}
+										onClick={(e) => {
+											e.preventDefault();
+											setSubmenu('account');
+										}}
+									>
+										<span className={styles.accountAvatar}>
+											<IconUser />
+										</span>
+										<span className={styles.accountName}>{user.name}</span>
+									</a>
+									<span
+										className={styles.iconDisclosure}
+										onClick={() => setSubmenu('account')}
+									>
 										<IconDisclosure />
 									</span>
-								</a>
+								</>
 							) : (
 								<Link href={makeLoginRoute(languageRoute)}>
 									<a className="decorated">

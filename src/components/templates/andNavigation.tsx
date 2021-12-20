@@ -20,6 +20,7 @@ import Navigation from '@components/organisms/navigation';
 import { BaseColors } from '@lib/constants';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import isServerSide from '@lib/isServerSide';
+import { makeDonateRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
@@ -126,6 +127,7 @@ export default function AndNavigation({
 								defaultMessage="Donate"
 							/>
 						}
+						href={makeDonateRoute(languageRoute)}
 					/>
 					{playbackRecording && (
 						<IconButton

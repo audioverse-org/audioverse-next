@@ -28,6 +28,7 @@ import IconAlignLeft from '../../public/img/fa-align-left.svg';
 import IconBook from '../../public/img/fa-book.svg';
 import IconBookmark from '../../public/img/fa-bookmark.svg';
 import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
+import IconCalendar from '../../public/img/fa-calendar.svg';
 import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
 import IconFacebook from '../../public/img/fa-facebook.svg';
 import IconFeather from '../../public/img/fa-feather.svg';
@@ -38,11 +39,12 @@ import IconInbox from '../../public/img/fa-inbox.svg';
 import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
 import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
-import IconList from '../../public/img/fa-list-light.svg';
 import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
 import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
+import IconSeedling from '../../public/img/fa-seedling.svg';
 import IconSignOut from '../../public/img/fa-sign-out.svg';
+import IconStream from '../../public/img/fa-stream.svg';
 import IconTwitter from '../../public/img/fa-twitter.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
@@ -110,7 +112,7 @@ export function getNavigationItems(
 				{
 					key: 'playlists',
 					href: makeLibraryRoute(languageRoute, 'playlists'),
-					Icon: IconList,
+					Icon: IconStream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
 						defaultMessage: 'Playlists',
@@ -172,7 +174,7 @@ export function getNavigationItems(
 				{
 					key: 'conferences',
 					href: makeConferenceListRoute(languageRoute),
-					Icon: IconList,
+					Icon: IconCalendar,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-conferences`,
 						defaultMessage: 'Conferences',
@@ -237,7 +239,7 @@ export function getNavigationItems(
 				{
 					key: 'about',
 					href: makeAboutPage(languageRoute, 1),
-					Icon: IconUserPlusHeavy,
+					Icon: IconSeedling,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
 						defaultMessage: 'Our Story',
