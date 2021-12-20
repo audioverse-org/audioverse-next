@@ -392,47 +392,47 @@
     "comment": "Header nav link name: User Settings",
     "string": "Paramètres utilisateur"
   },
-  "header__naveItemBible": {
+  "header__navItemBible": {
     "comment": "Header nav link name: Bible",
     "string": "Bible"
   },
-  "header__naveItemCollections-all": {
+  "header__navItemCollections-all": {
     "string": "Toutes les collections"
   },
-  "header__naveItemCollections-book": {
+  "header__navItemCollections-book": {
     "string": "Livre"
   },
-  "header__naveItemCollections-conference": {
+  "header__navItemCollections-conference": {
     "string": "Conférence"
   },
-  "header__naveItemCollections-series": {
+  "header__navItemCollections-series": {
     "string": "Séries"
   },
-  "header__naveItemCollections-songs": {
+  "header__navItemCollections-songs": {
     "string": "Chants bibliques"
   },
-  "header__naveItemCollections-speaker": {
+  "header__navItemCollections-speaker": {
     "string": "Orateur"
   },
-  "header__naveItemCollections-sponsor": {
+  "header__navItemCollections-sponsor": {
     "string": "Sponsor"
   },
-  "header__naveItemCollections-stories": {
+  "header__navItemCollections-stories": {
     "string": "Histoires"
   },
-  "header__naveItemMore-legal": {
+  "header__navItemMore-legal": {
     "string": "Mentions légales"
   },
-  "header__naveItemMore-privacy": {
+  "header__navItemMore-privacy": {
     "string": "Confidentialité"
   },
-  "header__naveItemMore-terms": {
+  "header__navItemMore-terms": {
     "string": "Conditions d'utilisation"
   },
-  "header__naveItemUser-logout": {
+  "header__navItemUser-logout": {
     "string": "Déconnexion"
   },
-  "header__naveItemUser-profile": {
+  "header__navItemUser-profile": {
     "string": "Profil"
   },
   "homePage__addToLibraryPlaceholder": {
