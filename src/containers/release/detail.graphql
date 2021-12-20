@@ -1,0 +1,37 @@
+query getMediaReleaseFormsPageData($id: ID!) {
+	mediaReleaseForm(id: $id) {
+		id
+		title
+		summary
+		isClosed
+	}
+}
+
+query getMediaReleaseFormsPathsData($language: Language!, $first: Int!) {
+	mediaReleaseForms(language: $language, first: $first) {
+		nodes {
+			id
+		}
+	}
+}
+
+mutation submitMediaReleaseForm(
+	$mediaReleaseFormId: ID!
+	$mediaReleasePerson: MediaReleasePersonCreateInput!
+	$comments: String!
+) {
+	mediaReleaseCreate(
+		input: {
+			mediaReleaseFormId: $mediaReleaseFormId
+			mediaReleasePerson: $mediaReleasePerson
+			notes: $comments
+		}
+	) {
+		errors {
+			message
+		}
+		mediaRelease {
+			id
+		}
+	}
+}

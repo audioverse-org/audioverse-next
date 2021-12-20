@@ -10621,6 +10621,58 @@ export type GetPresenterTopPageDataQuery = {
 		| undefined;
 };
 
+export type GetMediaReleaseFormsPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetMediaReleaseFormsPageDataQuery = {
+	__typename?: 'Query';
+	mediaReleaseForm:
+		| {
+				__typename?: 'MediaReleaseForm';
+				id: string | number;
+				title: string;
+				summary: string;
+				isClosed: boolean;
+		  }
+		| null
+		| undefined;
+};
+
+export type GetMediaReleaseFormsPathsDataQueryVariables = Exact<{
+	language: Language;
+	first: Scalars['Int'];
+}>;
+
+export type GetMediaReleaseFormsPathsDataQuery = {
+	__typename?: 'Query';
+	mediaReleaseForms: {
+		__typename?: 'MediaReleaseFormConnection';
+		nodes:
+			| Array<{ __typename?: 'MediaReleaseForm'; id: string | number }>
+			| null
+			| undefined;
+	};
+};
+
+export type SubmitMediaReleaseFormMutationVariables = Exact<{
+	mediaReleaseFormId: Scalars['ID'];
+	mediaReleasePerson: MediaReleasePersonCreateInput;
+	comments: Scalars['String'];
+}>;
+
+export type SubmitMediaReleaseFormMutation = {
+	__typename?: 'Mutation';
+	mediaReleaseCreate: {
+		__typename?: 'MediaReleasePayload';
+		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
+		mediaRelease:
+			| { __typename?: 'MediaRelease'; id: string | number }
+			| null
+			| undefined;
+	};
+};
+
 export type GetSearchResultsCollectionsQueryVariables = Exact<{
 	language: Language;
 	term: Scalars['String'];
@@ -16566,6 +16618,93 @@ export const useGetPresenterTopPageDataQuery = <
 		>(GetPresenterTopPageDataDocument, variables),
 		options
 	);
+export const GetMediaReleaseFormsPageDataDocument = `
+    query getMediaReleaseFormsPageData($id: ID!) {
+  mediaReleaseForm(id: $id) {
+    id
+    title
+    summary
+    isClosed
+  }
+}
+    `;
+export const useGetMediaReleaseFormsPageDataQuery = <
+	TData = GetMediaReleaseFormsPageDataQuery,
+	TError = unknown
+>(
+	variables: GetMediaReleaseFormsPageDataQueryVariables,
+	options?: UseQueryOptions<GetMediaReleaseFormsPageDataQuery, TError, TData>
+) =>
+	useQuery<GetMediaReleaseFormsPageDataQuery, TError, TData>(
+		['getMediaReleaseFormsPageData', variables],
+		graphqlFetcher<
+			GetMediaReleaseFormsPageDataQuery,
+			GetMediaReleaseFormsPageDataQueryVariables
+		>(GetMediaReleaseFormsPageDataDocument, variables),
+		options
+	);
+export const GetMediaReleaseFormsPathsDataDocument = `
+    query getMediaReleaseFormsPathsData($language: Language!, $first: Int!) {
+  mediaReleaseForms(language: $language, first: $first) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+export const useGetMediaReleaseFormsPathsDataQuery = <
+	TData = GetMediaReleaseFormsPathsDataQuery,
+	TError = unknown
+>(
+	variables: GetMediaReleaseFormsPathsDataQueryVariables,
+	options?: UseQueryOptions<GetMediaReleaseFormsPathsDataQuery, TError, TData>
+) =>
+	useQuery<GetMediaReleaseFormsPathsDataQuery, TError, TData>(
+		['getMediaReleaseFormsPathsData', variables],
+		graphqlFetcher<
+			GetMediaReleaseFormsPathsDataQuery,
+			GetMediaReleaseFormsPathsDataQueryVariables
+		>(GetMediaReleaseFormsPathsDataDocument, variables),
+		options
+	);
+export const SubmitMediaReleaseFormDocument = `
+    mutation submitMediaReleaseForm($mediaReleaseFormId: ID!, $mediaReleasePerson: MediaReleasePersonCreateInput!, $comments: String!) {
+  mediaReleaseCreate(
+    input: {mediaReleaseFormId: $mediaReleaseFormId, mediaReleasePerson: $mediaReleasePerson, notes: $comments}
+  ) {
+    errors {
+      message
+    }
+    mediaRelease {
+      id
+    }
+  }
+}
+    `;
+export const useSubmitMediaReleaseFormMutation = <
+	TError = unknown,
+	TContext = unknown
+>(
+	options?: UseMutationOptions<
+		SubmitMediaReleaseFormMutation,
+		TError,
+		SubmitMediaReleaseFormMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		SubmitMediaReleaseFormMutation,
+		TError,
+		SubmitMediaReleaseFormMutationVariables,
+		TContext
+	>(
+		(variables?: SubmitMediaReleaseFormMutationVariables) =>
+			graphqlFetcher<
+				SubmitMediaReleaseFormMutation,
+				SubmitMediaReleaseFormMutationVariables
+			>(SubmitMediaReleaseFormDocument, variables)(),
+		options
+	);
 export const GetSearchResultsCollectionsDocument = `
     query getSearchResultsCollections($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
   collections(language: $language, search: $term, first: $first, offset: $offset) {
@@ -18720,6 +18859,24 @@ export async function getPresenterTopPageData<T>(
 	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
 ): Promise<GetPresenterTopPageDataQuery> {
 	return fetchApi(GetPresenterTopPageDataDocument, { variables });
+}
+
+export async function getMediaReleaseFormsPageData<T>(
+	variables: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>
+): Promise<GetMediaReleaseFormsPageDataQuery> {
+	return fetchApi(GetMediaReleaseFormsPageDataDocument, { variables });
+}
+
+export async function getMediaReleaseFormsPathsData<T>(
+	variables: ExactAlt<T, GetMediaReleaseFormsPathsDataQueryVariables>
+): Promise<GetMediaReleaseFormsPathsDataQuery> {
+	return fetchApi(GetMediaReleaseFormsPathsDataDocument, { variables });
+}
+
+export async function submitMediaReleaseForm<T>(
+	variables: ExactAlt<T, SubmitMediaReleaseFormMutationVariables>
+): Promise<SubmitMediaReleaseFormMutation> {
+	return fetchApi(SubmitMediaReleaseFormDocument, { variables });
 }
 
 export async function getSearchResultsCollections<T>(

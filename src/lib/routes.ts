@@ -283,3 +283,8 @@ export const makeSearchTeachingsRoute = (
 	term: string,
 	page: string | number = 1
 ): string => `/${languageRoute}/search/teachings/page/${page}?q=${term}`;
+
+export const makeReleaseRoute = (
+	languageRoute: string,
+	releaseId: Scalars['ID']
+): string => `/${languageRoute}/releases/${releaseId}`;
