@@ -164,6 +164,7 @@ export function Sequence({
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={backgroundColor}
+						emailSubject={title}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={rssUrl}

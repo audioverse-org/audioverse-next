@@ -16,6 +16,7 @@ import RssAlternate from './rssAlternate';
 type Props = {
 	shareUrl: string;
 	backgroundColor: BaseColors;
+	emailSubject?: string;
 	rssUrl?: string;
 	light?: boolean;
 	triggerClassName?: string;
@@ -24,6 +25,7 @@ type Props = {
 export default function ButtonShare({
 	shareUrl,
 	backgroundColor,
+	emailSubject,
 	rssUrl,
 	children,
 	light,
@@ -32,15 +34,24 @@ export default function ButtonShare({
 	const intl = useIntl();
 	const [justCopied, setJustCopied] = useState(false);
 
-	// TODO: update embed code and links
+	// FUTURE: update sharing links
 	const facebookLink = `https://facebook.com/share.php?u=${shareUrl}`;
 	const twitterLink = `https://twitter.com/intent/tweet?url=${shareUrl}`;
-	const emailLink = `mailto:?subject=${encodeURIComponent(
-		intl.formatMessage({
-			id: 'buttonShare__emailSubject',
-			defaultMessage: 'Enjoy this blessing',
-		})
-	)}&body=${shareUrl}`;
+	const emailLink = `mailto:?body=${shareUrl}${
+		emailSubject
+			? `&subject=${encodeURIComponent(
+					intl.formatMessage(
+						{
+							id: 'buttonShare__emailSubjectSuffix',
+							defaultMessage: '{subject} on AudioVerse',
+						},
+						{
+							subject: emailSubject,
+						}
+					)
+			  )}`
+			: ''
+	}`;
 	const copyLink = shareUrl;
 
 	const onCopyLink = (e: MouseEvent) => {

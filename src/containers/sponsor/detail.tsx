@@ -135,6 +135,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.LIGHT_TONE}
+						emailSubject={title}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={makeSponsorFeedRoute(languageRoute, id)}

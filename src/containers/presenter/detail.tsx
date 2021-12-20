@@ -159,6 +159,7 @@ function PresenterDetail({
 					<ButtonShare
 						shareUrl={shareUrl}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
+						emailSubject={name}
 						light
 						triggerClassName={styles.iconButton}
 						rssUrl={makePresenterFeedRoute(lang, id)}
