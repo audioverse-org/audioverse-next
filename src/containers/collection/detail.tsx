@@ -164,6 +164,7 @@ function CollectionDetail({
 						<ButtonShare
 							shareUrl={shareUrl}
 							backgroundColor={BaseColors.DARK}
+							emailSubject={title}
 							light
 							triggerClassName={styles.iconButton}
 							rssUrl={makeCollectionFeedRoute(lang, id)}
