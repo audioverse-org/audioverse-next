@@ -37,21 +37,6 @@
 				transition: none; // FIX: https://stackoverflow.com/a/40512935
 			}
 		}
-		.iconDisclosure {
-			height: 32px;
-			width: 32px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-left: 4px;
-			color: $ts-dark;
-			transform: rotate(-90deg);
-			cursor: pointer;
-			&:hover {
-				background: $ts-darkened-white;
-				border-radius: 16px;
-			}
-		}
 	}
 	.navLink:hover {
 		&,
@@ -67,6 +52,22 @@
 				color: $ts-red;
 			}
 		}
+	}
+}
+
+.iconDisclosure {
+	height: 32px;
+	width: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 4px;
+	border-radius: 16px;
+	color: $ts-dark;
+	transform: rotate(-90deg);
+	cursor: pointer;
+	&:hover {
+		background: $ts-darkened-white;
 	}
 }
 
@@ -131,6 +132,7 @@
 	flex-grow: 1;
 	display: flex;
 	align-items: center;
+	margin-bottom: 8px;
 	.iconDisclosure {
 		display: inline-block;
 		margin-left: 8px;
@@ -147,6 +149,12 @@
 		.accountName {
 			border-color: $ts-red;
 		}
+	}
+}
+.account,
+.accountWithAvatar {
+	*:not(svg) {
+		transition: none; // FIX: https://stackoverflow.com/a/40512935
 	}
 }
 .accountAvatar {
