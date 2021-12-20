@@ -15496,6 +15496,7 @@ export const GetCollectionDetailPageDataDocument = `
     }
     persons(
       first: 3
+      role: SPEAKER
       orderBy: [{field: RECORDING_COUNT, direction: DESC}, {field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC}]
     ) {
       aggregate {
@@ -15677,6 +15678,7 @@ export const GetCollectionPresentersPageDataDocument = `
     id
     ...collectionPivot
     persons(
+      role: SPEAKER
       offset: $offset
       first: $first
       orderBy: [{field: NAME, direction: ASC}]
