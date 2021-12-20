@@ -392,47 +392,47 @@
     "comment": "Header nav link name: User Settings",
     "string": "用户设置"
   },
-  "header__naveItemBible": {
+  "header__navItemBible": {
     "comment": "Header nav link name: Bible",
     "string": "圣经"
   },
-  "header__naveItemCollections-all": {
+  "header__navItemCollections-all": {
     "string": "所有合集"
   },
-  "header__naveItemCollections-book": {
+  "header__navItemCollections-book": {
     "string": "书"
   },
-  "header__naveItemCollections-conference": {
+  "header__navItemCollections-conference": {
     "string": "大会"
   },
-  "header__naveItemCollections-series": {
+  "header__navItemCollections-series": {
     "string": "系列"
   },
-  "header__naveItemCollections-songs": {
+  "header__navItemCollections-songs": {
     "string": "经文歌曲"
   },
-  "header__naveItemCollections-speaker": {
+  "header__navItemCollections-speaker": {
     "string": "讲员"
   },
-  "header__naveItemCollections-sponsor": {
+  "header__navItemCollections-sponsor": {
     "string": "赞助者"
   },
-  "header__naveItemCollections-stories": {
+  "header__navItemCollections-stories": {
     "string": "故事"
   },
-  "header__naveItemMore-legal": {
+  "header__navItemMore-legal": {
     "string": "法律相关"
   },
-  "header__naveItemMore-privacy": {
+  "header__navItemMore-privacy": {
     "string": "隐私"
   },
-  "header__naveItemMore-terms": {
+  "header__navItemMore-terms": {
     "string": "使用条款"
   },
-  "header__naveItemUser-logout": {
+  "header__navItemUser-logout": {
     "string": "登出"
   },
-  "header__naveItemUser-profile": {
+  "header__navItemUser-profile": {
     "string": "档案"
   },
   "homePage__addToLibraryPlaceholder": {

@@ -733,6 +733,12 @@
       "value": " AudioVerse. Las grabaciones individuales están protegidas por los derechos de autor de sus respectivos propietarios."
     }
   ],
+  "header__navItemBible": [
+    {
+      "type": 0,
+      "value": "Biblia"
+    }
+  ],
   "header__navItemBlog": [
     {
       "type": 0,
@@ -743,6 +749,54 @@
     {
       "type": 0,
       "value": "Compilaciones"
+    }
+  ],
+  "header__navItemCollections-all": [
+    {
+      "type": 0,
+      "value": "Todas las compilaciones"
+    }
+  ],
+  "header__navItemCollections-book": [
+    {
+      "type": 0,
+      "value": "Libro"
+    }
+  ],
+  "header__navItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "Conferencia"
+    }
+  ],
+  "header__navItemCollections-series": [
+    {
+      "type": 0,
+      "value": "Series"
+    }
+  ],
+  "header__navItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "Canciones basadas en las Escrituras"
+    }
+  ],
+  "header__navItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "Altavoz"
+    }
+  ],
+  "header__navItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "Patrocinador"
+    }
+  ],
+  "header__navItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "Historias"
     }
   ],
   "header__navItemDiscover": [
@@ -761,6 +815,24 @@
     {
       "type": 0,
       "value": "Más"
+    }
+  ],
+  "header__navItemMore-legal": [
+    {
+      "type": 0,
+      "value": "Legales"
+    }
+  ],
+  "header__navItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "Privacidad"
+    }
+  ],
+  "header__navItemMore-terms": [
+    {
+      "type": 0,
+      "value": "Condiciones de uso"
     }
   ],
   "header__navItemStory": [
@@ -805,85 +877,13 @@
       "value": "Configuración del usuario"
     }
   ],
-  "header__naveItemBible": [
-    {
-      "type": 0,
-      "value": "Biblia"
-    }
-  ],
-  "header__naveItemCollections-all": [
-    {
-      "type": 0,
-      "value": "Todas las compilaciones"
-    }
-  ],
-  "header__naveItemCollections-book": [
-    {
-      "type": 0,
-      "value": "Libro"
-    }
-  ],
-  "header__naveItemCollections-conference": [
-    {
-      "type": 0,
-      "value": "Conferencia"
-    }
-  ],
-  "header__naveItemCollections-series": [
-    {
-      "type": 0,
-      "value": "Series"
-    }
-  ],
-  "header__naveItemCollections-songs": [
-    {
-      "type": 0,
-      "value": "Canciones basadas en las Escrituras"
-    }
-  ],
-  "header__naveItemCollections-speaker": [
-    {
-      "type": 0,
-      "value": "Altavoz"
-    }
-  ],
-  "header__naveItemCollections-sponsor": [
-    {
-      "type": 0,
-      "value": "Patrocinador"
-    }
-  ],
-  "header__naveItemCollections-stories": [
-    {
-      "type": 0,
-      "value": "Historias"
-    }
-  ],
-  "header__naveItemMore-legal": [
-    {
-      "type": 0,
-      "value": "Legales"
-    }
-  ],
-  "header__naveItemMore-privacy": [
-    {
-      "type": 0,
-      "value": "Privacidad"
-    }
-  ],
-  "header__naveItemMore-terms": [
-    {
-      "type": 0,
-      "value": "Condiciones de uso"
-    }
-  ],
-  "header__naveItemUser-logout": [
+  "header__navItemUser-logout": [
     {
       "type": 0,
       "value": "Cerrar sesión"
     }
   ],
-  "header__naveItemUser-profile": [
+  "header__navItemUser-profile": [
     {
       "type": 0,
       "value": "Perfil"
