@@ -741,6 +741,12 @@
       "value": "年のもの個々の動画またはオーディオは所有者によって著作権で保護されています。"
     }
   ],
+  "header__navItemBible": [
+    {
+      "type": 0,
+      "value": "聖書"
+    }
+  ],
   "header__navItemBlog": [
     {
       "type": 0,
@@ -751,6 +757,54 @@
     {
       "type": 0,
       "value": "コレクション"
+    }
+  ],
+  "header__navItemCollections-all": [
+    {
+      "type": 0,
+      "value": "全てのコレクション"
+    }
+  ],
+  "header__navItemCollections-book": [
+    {
+      "type": 0,
+      "value": "巻"
+    }
+  ],
+  "header__navItemCollections-conference": [
+    {
+      "type": 0,
+      "value": "大会・総会"
+    }
+  ],
+  "header__navItemCollections-series": [
+    {
+      "type": 0,
+      "value": "シリーズ"
+    }
+  ],
+  "header__navItemCollections-songs": [
+    {
+      "type": 0,
+      "value": "聖句ソング"
+    }
+  ],
+  "header__navItemCollections-speaker": [
+    {
+      "type": 0,
+      "value": "スピーカー"
+    }
+  ],
+  "header__navItemCollections-sponsor": [
+    {
+      "type": 0,
+      "value": "主催者"
+    }
+  ],
+  "header__navItemCollections-stories": [
+    {
+      "type": 0,
+      "value": "ストーリー"
     }
   ],
   "header__navItemDiscover": [
@@ -769,6 +823,24 @@
     {
       "type": 0,
       "value": "もっと表示・・・"
+    }
+  ],
+  "header__navItemMore-legal": [
+    {
+      "type": 0,
+      "value": "法律情報"
+    }
+  ],
+  "header__navItemMore-privacy": [
+    {
+      "type": 0,
+      "value": "プライバシー"
+    }
+  ],
+  "header__navItemMore-terms": [
+    {
+      "type": 0,
+      "value": "利用規約"
     }
   ],
   "header__navItemStory": [
@@ -813,85 +885,13 @@
       "value": "ユーザー設定"
     }
   ],
-  "header__naveItemBible": [
-    {
-      "type": 0,
-      "value": "聖書"
-    }
-  ],
-  "header__naveItemCollections-all": [
-    {
-      "type": 0,
-      "value": "全てのコレクション"
-    }
-  ],
-  "header__naveItemCollections-book": [
-    {
-      "type": 0,
-      "value": "巻"
-    }
-  ],
-  "header__naveItemCollections-conference": [
-    {
-      "type": 0,
-      "value": "大会・総会"
-    }
-  ],
-  "header__naveItemCollections-series": [
-    {
-      "type": 0,
-      "value": "シリーズ"
-    }
-  ],
-  "header__naveItemCollections-songs": [
-    {
-      "type": 0,
-      "value": "聖句ソング"
-    }
-  ],
-  "header__naveItemCollections-speaker": [
-    {
-      "type": 0,
-      "value": "スピーカー"
-    }
-  ],
-  "header__naveItemCollections-sponsor": [
-    {
-      "type": 0,
-      "value": "主催者"
-    }
-  ],
-  "header__naveItemCollections-stories": [
-    {
-      "type": 0,
-      "value": "ストーリー"
-    }
-  ],
-  "header__naveItemMore-legal": [
-    {
-      "type": 0,
-      "value": "法律情報"
-    }
-  ],
-  "header__naveItemMore-privacy": [
-    {
-      "type": 0,
-      "value": "プライバシー"
-    }
-  ],
-  "header__naveItemMore-terms": [
-    {
-      "type": 0,
-      "value": "利用規約"
-    }
-  ],
-  "header__naveItemUser-logout": [
+  "header__navItemUser-logout": [
     {
       "type": 0,
       "value": "ログアウト"
     }
   ],
-  "header__naveItemUser-profile": [
+  "header__navItemUser-profile": [
     {
       "type": 0,
       "value": "プロフィール"

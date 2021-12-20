@@ -37,21 +37,6 @@
 				transition: none; // FIX: https://stackoverflow.com/a/40512935
 			}
 		}
-		.iconDisclosure {
-			height: 32px;
-			width: 32px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin-left: 4px;
-			color: $ts-dark;
-			transform: rotate(-90deg);
-			cursor: pointer;
-			&:hover {
-				background: $ts-darkened-white;
-				border-radius: 16px;
-			}
-		}
 	}
 	.navLink:hover {
 		&,
@@ -70,6 +55,22 @@
 	}
 }
 
+.iconDisclosure {
+	height: 32px;
+	width: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 4px;
+	border-radius: 16px;
+	color: $ts-dark;
+	transform: rotate(-90deg);
+	cursor: pointer;
+	&:hover {
+		background: $ts-darkened-white;
+	}
+}
+
 .divider {
 	width: 100%;
 	border-bottom: 1px solid rgba($ts-lightTone, 0.5);
@@ -78,12 +79,17 @@
 .mobileHeader {
 	display: flex;
 	flex-direction: column;
+	padding-left: 24px;
+	padding-right: 24px;
 }
 .mobileRow {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 24px;
+}
+.mobileSearch {
+	margin-bottom: 0;
 }
 
 .downloadButton svg:first-of-type {
@@ -106,6 +112,7 @@
 		flex: 0 0 100%;
 		display: flex;
 		flex-direction: column;
+		padding: 24px 24px 0;
 	}
 	transition: left $transition-medium;
 	&.in {
@@ -125,6 +132,7 @@
 	flex-grow: 1;
 	display: flex;
 	align-items: center;
+	margin-bottom: 8px;
 	.iconDisclosure {
 		display: inline-block;
 		margin-left: 8px;
@@ -141,6 +149,12 @@
 		.accountName {
 			border-color: $ts-red;
 		}
+	}
+}
+.account,
+.accountWithAvatar {
+	*:not(svg) {
+		transition: none; // FIX: https://stackoverflow.com/a/40512935
 	}
 }
 .accountAvatar {
@@ -187,6 +201,7 @@
 }
 
 @media (min-width: $breakpoint-lg) {
+	.mobileHeader,
 	.mobileRow {
 		display: none;
 	}
@@ -195,9 +210,10 @@
 		overflow: hidden;
 	}
 	.sliderColumns > * {
-		margin-left: 32px;
-		margin-right: 22px;
-		flex-basis: calc(100% - 54px);
+		padding-top: 0;
+		padding-left: 32px;
+		padding-right: 22px;
+		flex-basis: 100%;
 	}
 	.account {
 		margin-bottom: 32px;

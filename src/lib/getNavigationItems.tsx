@@ -28,6 +28,7 @@ import IconAlignLeft from '../../public/img/fa-align-left.svg';
 import IconBook from '../../public/img/fa-book.svg';
 import IconBookmark from '../../public/img/fa-bookmark.svg';
 import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
+import IconCalendar from '../../public/img/fa-calendar.svg';
 import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
 import IconFacebook from '../../public/img/fa-facebook.svg';
 import IconFeather from '../../public/img/fa-feather.svg';
@@ -38,11 +39,12 @@ import IconInbox from '../../public/img/fa-inbox.svg';
 import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
 import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
-import IconList from '../../public/img/fa-list-light.svg';
 import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
 import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
+import IconSeedling from '../../public/img/fa-seedling.svg';
 import IconSignOut from '../../public/img/fa-sign-out.svg';
+import IconStream from '../../public/img/fa-stream.svg';
 import IconTwitter from '../../public/img/fa-twitter.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
@@ -110,7 +112,7 @@ export function getNavigationItems(
 				{
 					key: 'playlists',
 					href: makeLibraryRoute(languageRoute, 'playlists'),
-					Icon: IconList,
+					Icon: IconStream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
 						defaultMessage: 'Playlists',
@@ -134,7 +136,7 @@ export function getNavigationItems(
 						href: makeBibleListRoute(languageRoute),
 						Icon: IconBible,
 						label: intl.formatMessage({
-							id: `header__naveItemBible`,
+							id: `header__navItemBible`,
 							defaultMessage: 'Bible',
 							description: `Header nav link name: Bible`,
 						}),
@@ -156,7 +158,7 @@ export function getNavigationItems(
 					href: makeDiscoverCollectionsRoute(languageRoute),
 					Icon: IconListAltHeavy,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-all`,
+						id: `header__navItemCollections-all`,
 						defaultMessage: 'All Collections',
 					}),
 				},
@@ -165,16 +167,16 @@ export function getNavigationItems(
 					href: makeSponsorListRoute(languageRoute),
 					Icon: IconUserPlusHeavy,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-sponsors`,
+						id: `header__navItemCollections-sponsors`,
 						defaultMessage: 'Sponsors',
 					}),
 				},
 				{
 					key: 'conferences',
 					href: makeConferenceListRoute(languageRoute),
-					Icon: IconList,
+					Icon: IconCalendar,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-conferences`,
+						id: `header__navItemCollections-conferences`,
 						defaultMessage: 'Conferences',
 					}),
 				},
@@ -183,7 +185,7 @@ export function getNavigationItems(
 					href: makePresenterListRoute(languageRoute),
 					Icon: IconUser,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-presenters`,
+						id: `header__navItemCollections-presenters`,
 						defaultMessage: 'Presenters',
 					}),
 				},
@@ -192,7 +194,7 @@ export function getNavigationItems(
 					href: makeStoryAlbumListPage(languageRoute),
 					Icon: IconFeather,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-stories`,
+						id: `header__navItemCollections-stories`,
 						defaultMessage: 'Stories',
 					}),
 				},
@@ -201,7 +203,7 @@ export function getNavigationItems(
 					href: makeAudiobookListRoute(languageRoute),
 					Icon: IconBook,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-books`,
+						id: `header__navItemCollections-books`,
 						defaultMessage: 'Books',
 					}),
 				},
@@ -210,7 +212,7 @@ export function getNavigationItems(
 					href: makeSongAlbumsListRoute(languageRoute),
 					Icon: IconMusic,
 					label: intl.formatMessage({
-						id: `header__naveItemCollections-songs`,
+						id: `header__navItemCollections-songs`,
 						defaultMessage: 'Scripture Songs',
 					}),
 				},
@@ -237,7 +239,7 @@ export function getNavigationItems(
 				{
 					key: 'about',
 					href: makeAboutPage(languageRoute, 1),
-					Icon: IconUserPlusHeavy,
+					Icon: IconSeedling,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
 						defaultMessage: 'Our Story',
@@ -313,7 +315,7 @@ export function getNavigationItems(
 					href: makeContactRoute(languageRoute, '/general'),
 					Icon: IconInbox,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-general`,
+						id: `header__navItemContact-general`,
 						defaultMessage: 'General Contact',
 					}),
 				},
@@ -322,7 +324,7 @@ export function getNavigationItems(
 					href: makeContactRoute(languageRoute, '/support'),
 					Icon: IconCommentHeavy,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-support`,
+						id: `header__navItemContact-support`,
 						defaultMessage: 'Request Support',
 					}),
 				},
@@ -331,7 +333,7 @@ export function getNavigationItems(
 					href: makeTestimonySubmitRoute(languageRoute),
 					Icon: IconCommentHeavy,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-testimony`,
+						id: `header__navItemContact-testimony`,
 						defaultMessage: 'Share Testimony',
 					}),
 				},
@@ -346,7 +348,7 @@ export function getNavigationItems(
 					href: 'https://www.facebook.com/AudioVerse',
 					Icon: IconFacebook,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-facebook`,
+						id: `header__navItemContact-facebook`,
 						defaultMessage: 'Facebook',
 					}),
 					isTargetBlank: true,
@@ -356,7 +358,7 @@ export function getNavigationItems(
 					href: 'https://www.instagram.com/audioverse/',
 					Icon: IconInstagram,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-instagram`,
+						id: `header__navItemContact-instagram`,
 						defaultMessage: 'Instagram',
 					}),
 					isTargetBlank: true,
@@ -366,7 +368,7 @@ export function getNavigationItems(
 					href: 'https://www.twitter.com/audioverse/',
 					Icon: IconTwitter,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-twitter`,
+						id: `header__navItemContact-twitter`,
 						defaultMessage: 'Twitter',
 					}),
 					isTargetBlank: true,
@@ -376,7 +378,7 @@ export function getNavigationItems(
 					href: 'https://www.youtube.com/user/AudioVerseMinistry',
 					Icon: IconYouTube,
 					label: intl.formatMessage({
-						id: `header__naveItemContact-youtube`,
+						id: `header__navItemContact-youtube`,
 						defaultMessage: 'YouTube',
 					}),
 					isTargetBlank: true,
@@ -397,7 +399,7 @@ export function getNavigationItems(
 					href: makeAboutPage(languageRoute, 3),
 					Icon: IconLandmark,
 					label: intl.formatMessage({
-						id: `header__naveItemMore-legal`,
+						id: `header__navItemMore-legal`,
 						defaultMessage: 'Legal',
 					}),
 				},
@@ -406,7 +408,7 @@ export function getNavigationItems(
 					href: makeAboutPage(languageRoute, 4),
 					Icon: IconLock,
 					label: intl.formatMessage({
-						id: `header__naveItemMore-privacy`,
+						id: `header__navItemMore-privacy`,
 						defaultMessage: 'Privacy',
 					}),
 				},
@@ -415,7 +417,7 @@ export function getNavigationItems(
 					href: makeAboutPage(languageRoute, 5),
 					Icon: IconNewpaper,
 					label: intl.formatMessage({
-						id: `header__naveItemMore-terms`,
+						id: `header__navItemMore-terms`,
 						defaultMessage: 'Terms of Use',
 					}),
 				},
@@ -450,7 +452,7 @@ export function getNavigationItems(
 					href: makeAccountProfileRoute(languageRoute),
 					Icon: IconUser,
 					label: intl.formatMessage({
-						id: `header__naveItemUser-profile`,
+						id: `header__navItemUser-profile`,
 						defaultMessage: 'Profile',
 					}),
 				},
@@ -460,7 +462,7 @@ export function getNavigationItems(
 					onClick: ({ popSubmenu }) => popSubmenu(),
 					Icon: IconSignOut,
 					label: intl.formatMessage({
-						id: `header__naveItemUser-logout`,
+						id: `header__navItemUser-logout`,
 						defaultMessage: 'Log Out',
 					}),
 				},

@@ -22,6 +22,7 @@ query getCollectionDetailPageData($id: ID!) {
 		}
 		persons(
 			first: 3
+			role: SPEAKER
 			orderBy: [
 				{ field: RECORDING_COUNT, direction: DESC }
 				{ field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC }
