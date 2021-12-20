@@ -51,7 +51,7 @@ const Navigation = ({
 						<IconExit />
 					</a>
 				</div>
-				<div className={styles.mobileRow}>
+				<div className={clsx(styles.mobileRow, styles.mobileSearch)}>
 					<SearchBar term={searchTerm} onChange={onSearchChange} />
 				</div>
 			</div>

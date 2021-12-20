@@ -78,12 +78,17 @@
 .mobileHeader {
 	display: flex;
 	flex-direction: column;
+	padding-left: 24px;
+	padding-right: 24px;
 }
 .mobileRow {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 24px;
+}
+.mobileSearch {
+	margin-bottom: 0;
 }
 
 .downloadButton svg:first-of-type {
@@ -106,6 +111,7 @@
 		flex: 0 0 100%;
 		display: flex;
 		flex-direction: column;
+		padding: 24px 24px 0;
 	}
 	transition: left $transition-medium;
 	&.in {
@@ -187,6 +193,7 @@
 }
 
 @media (min-width: $breakpoint-lg) {
+	.mobileHeader,
 	.mobileRow {
 		display: none;
 	}
@@ -195,9 +202,10 @@
 		overflow: hidden;
 	}
 	.sliderColumns > * {
-		margin-left: 32px;
-		margin-right: 22px;
-		flex-basis: calc(100% - 54px);
+		padding-top: 0;
+		padding-left: 32px;
+		padding-right: 22px;
+		flex-basis: 100%;
 	}
 	.account {
 		margin-bottom: 32px;
