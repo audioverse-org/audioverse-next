@@ -3,6 +3,7 @@ query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
 		id
 		...collectionPivot
 		persons(
+			role: SPEAKER
 			offset: $offset
 			first: $first
 			orderBy: [{ field: NAME, direction: ASC }]
