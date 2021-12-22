@@ -108,6 +108,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							src="/img/unsplash-headphones.jpg"
 							layout="fill"
 							objectFit="cover"
+							priority
 						/>
 					}
 					theme={BaseColors.DARK}
