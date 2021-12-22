@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import set from 'lodash/set';
 
 import { storeRequest } from '@lib/api';
 import { fetchApi } from '@lib/api/fetchApi';
@@ -16,7 +16,7 @@ const mockFetchResponse = () => {
 };
 
 const setRequest = (cookie = '') => {
-	const req = _.set({}, 'headers.cookie', cookie);
+	const req = set({}, 'headers.cookie', cookie);
 
 	storeRequest(req as any);
 };

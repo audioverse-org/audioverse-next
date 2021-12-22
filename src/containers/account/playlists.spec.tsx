@@ -1,6 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
 
 import {
 	AddAccountPlaylistDocument,
@@ -80,8 +81,8 @@ describe('playlists page', () => {
 	});
 
 	it('says if it is public', async () => {
-		const testData = _.set(
-			_.cloneDeep(defaults),
+		const testData = set(
+			cloneDeep(defaults),
 			'me.user.playlists.nodes[0].isPublic',
 			true
 		);
@@ -209,8 +210,8 @@ describe('playlists page', () => {
 
 		userEvent.click(getByText('Add Playlist'));
 
-		const newData = _.set(
-			_.cloneDeep(defaults),
+		const newData = set(
+			cloneDeep(defaults),
 			'me.user.playlists.nodes[0].title',
 			'new_playlist_title'
 		);

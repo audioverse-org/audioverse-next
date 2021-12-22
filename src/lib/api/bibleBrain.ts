@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import sortBy from 'lodash/sortBy';
 
 const API_URL = 'https://4.dbt.io/api';
 const API_KEY = process.env.BIBLE_BRAIN_KEY;

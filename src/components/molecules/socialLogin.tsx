@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import get from 'lodash/get';
 import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useGoogleLogin } from 'react-google-login';
@@ -49,10 +49,10 @@ export default function SocialLogin({
 			// TODO: Figure out error format and display it
 		},
 		onSuccess: (response) => {
-			const socialId = _.get(response, 'googleId');
-			const socialToken = _.get(response, 'accessToken');
-			const givenName = _.get(response, 'profileObj.givenName');
-			const surname = _.get(response, 'profileObj.familyName');
+			const socialId = get(response, 'googleId');
+			const socialToken = get(response, 'accessToken');
+			const givenName = get(response, 'profileObj.givenName');
+			const surname = get(response, 'profileObj.familyName');
 
 			mutateSocial({
 				socialName: UserSocialServiceName.Google,
@@ -108,11 +108,11 @@ export default function SocialLogin({
 						/>
 					)}
 					callback={(response) => {
-						const name = _.get(response, 'name', '');
+						const name = get(response, 'name', '');
 						const [givenName, surname] = name.split(' ');
-						const socialId = _.get(response, 'userID');
-						const socialToken = _.get(response, 'accessToken');
-						const status = _.get(response, 'status');
+						const socialId = get(response, 'userID');
+						const socialToken = get(response, 'accessToken');
+						const status = get(response, 'status');
 
 						if (!socialToken) {
 							if (status) {

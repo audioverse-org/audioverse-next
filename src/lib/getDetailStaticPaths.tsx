@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import flatten from 'lodash/flatten';
+import values from 'lodash/values';
 import { GetStaticPathsResult } from 'next';
 
 import { DETAIL_PRERENDER_LIMIT, LANGUAGES } from '@lib/constants';
@@ -14,7 +15,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	parseNodes: (data: DATA) => NODE[] | null | undefined,
 	pathMapper: (languageRoute: string, node: NODE) => string
 ): Promise<GetStaticPathsResult> {
-	const languages = _.values(Language);
+	const languages = values(Language);
 
 	const pathSetPromises = languages.map(async (l: Language) => {
 		const data = await getter({
@@ -30,7 +31,7 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	const pathSets = await Promise.all(pathSetPromises);
 
 	return {
-		paths: _.flatten(pathSets),
+		paths: flatten(pathSets),
 		fallback: 'blocking',
 	};
 }

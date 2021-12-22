@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -10,7 +10,7 @@ export default function CopyrightInfos({
 }: {
 	recordings: CopyrightInfosFragment[];
 }): JSX.Element {
-	const uniques = _.uniqBy(
+	const uniques = uniqBy(
 		recordings,
 		({ copyrightYear, distributionAgreement, sponsor }) =>
 			`${copyrightYear}-${distributionAgreement?.id}-${sponsor?.id}`

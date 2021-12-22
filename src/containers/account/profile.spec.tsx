@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
-import _ from 'lodash';
+import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -83,7 +83,7 @@ describe('profile page', () => {
 
 		const data = queryClient.getQueryData('getProfileData');
 
-		expect(_.get(data, 'me.user.givenName')).toEqual('the_name');
+		expect(get(data, 'me.user.givenName')).toEqual('the_name');
 	});
 
 	it('includes first name', async () => {

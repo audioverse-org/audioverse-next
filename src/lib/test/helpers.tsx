@@ -8,7 +8,8 @@ import {
 	RenderResult,
 } from '@testing-library/react';
 import { when } from 'jest-when';
-import _ from 'lodash';
+import defaultsDeep from 'lodash/defaultsDeep';
+import set from 'lodash/set';
 import { GetServerSidePropsResult, GetStaticProps } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
@@ -65,7 +66,7 @@ export function buildLoader<T>(
 	// const loadData = buildLoader<GetHomeStaticPropsQuery>(GetHomeStaticPropsDocument, { .. })
 	// should disallow including data in defaults that isn't in type
 	return (data: PartialDeep<T> | Record<string, never> = {}) => {
-		const value = _.defaultsDeep(data, defaults);
+		const value = defaultsDeep(data, defaults);
 		when(mockedFetchApi)
 			.calledWith(document, expect.anything())
 			.mockResolvedValue(value);
@@ -217,7 +218,7 @@ export const makePlaylistButtonData = (
 		},
 	];
 
-	return _.set({} as any, 'me.user.playlists.nodes', value);
+	return set({} as any, 'me.user.playlists.nodes', value);
 };
 
 interface SetPlayerMockOptions {
