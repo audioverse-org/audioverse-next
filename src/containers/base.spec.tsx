@@ -64,11 +64,13 @@ describe('app', () => {
 	});
 
 	it('disables sidebar', async () => {
-		const { queryByText } = await renderApp(() => <>h</>, {
-			disableSidebar: true,
-		});
+		await act(async () => {
+			const { queryByText } = await renderApp(() => <>h</>, {
+				disableSidebar: true,
+			});
 
-		expect(queryByText('More')).not.toBeInTheDocument();
+			expect(queryByText('More')).not.toBeInTheDocument();
+		});
 	});
 
 	it('sets title with props', async () => {

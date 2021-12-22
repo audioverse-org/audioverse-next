@@ -8,8 +8,8 @@ describe('generateFeed', () => {
 		advanceTo(new Date(2021, 8, 13, 12, 34, 56));
 	});
 
-	it('matches handles no recordings', () => {
-		const result = generateFeed(
+	it('matches handles no recordings', async () => {
+		const result = await generateFeed(
 			'en',
 			{
 				link: 'https://www.audioverse.org/en/conferences/378/gyc-2019-by-many-or-by-few.html',
@@ -20,8 +20,8 @@ describe('generateFeed', () => {
 		expect(result).toMatchSnapshot();
 	});
 
-	it('matches prior story season feed', () => {
-		const result = generateFeed(
+	it('matches prior story season feed', async () => {
+		const result = await generateFeed(
 			'en',
 			{
 				link: 'https://www.audioverse.org/english/audiobooks/books/1167/acts-of-the-apostles.html',
@@ -87,8 +87,8 @@ describe('generateFeed', () => {
 		expect(result).toMatchSnapshot();
 	});
 
-	it('matches prior conference feed', () => {
-		const result = generateFeed(
+	it('matches prior conference feed', async () => {
+		const result = await generateFeed(
 			'en',
 			{
 				link: 'https://www.audioverse.org/en/conferences/378/gyc-2019-by-many-or-by-few.html',

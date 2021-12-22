@@ -89,10 +89,10 @@ describe('playlists page', () => {
 		loadData(testData);
 		loadAuthGuardData();
 
-		const { getByText } = await renderPage();
+		const { getAllByText } = await renderPage();
 
 		await waitFor(() => {
-			expect(getByText('public')).toBeInTheDocument();
+			expect(getAllByText('public').length).toBe(2);
 		});
 	});
 

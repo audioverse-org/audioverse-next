@@ -8,7 +8,7 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import IconButton from '@components/molecules/iconButton';
@@ -44,6 +44,7 @@ export default function AndNavigation({
 	children: ReactNode;
 }): JSX.Element {
 	const router = useRouter();
+	const intl = useIntl();
 	const {
 		push,
 		query: { q },
@@ -112,7 +113,7 @@ export default function AndNavigation({
 		};
 	}, [listener]);
 
-	const navigationItems = getNavigationItems(router, languageRoute);
+	const navigationItems = getNavigationItems(router, intl, languageRoute);
 	const playbackRecording = playbackContext.getRecording();
 	return (
 		<div className={styles.positioner}>

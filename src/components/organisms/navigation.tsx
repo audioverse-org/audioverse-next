@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
@@ -33,13 +33,14 @@ const Navigation = ({
 	onSearchChange: (term: string) => void;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
+	const intl = useIntl();
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
 	const authResult = useGetWithAuthGuardDataQuery({}, { retry: false });
 	const user = authResult.data?.me?.user;
 
 	const iconSize = 24;
-	const navigationItems = getNavigationItems(router, languageRoute);
+	const navigationItems = getNavigationItems(router, intl, languageRoute);
 	const submenuItem = navigationItems.find(({ key }) => submenu === key);
 
 	return (

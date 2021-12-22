@@ -35,7 +35,7 @@ export async function getServerSideProps({
 			{
 				link: sequence.canonicalUrl,
 				title: sequence.title,
-				description: formatBooksDescription(languageRoute, sequence),
+				description: await formatBooksDescription(languageRoute, sequence),
 				image: sequence.image?.url,
 			},
 			sequence.recordings.nodes || []
