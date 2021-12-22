@@ -1,3 +1,4 @@
+import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import videojs from 'video.js';
@@ -144,10 +145,10 @@ describe('Bible book detail page', () => {
 	it('includes player', async () => {
 		loadPageData();
 
-		const { getAllByLabelText } = await renderPage();
-
-		userEvent.click(getAllByLabelText('play')[0]);
-
+		await act(async () => {
+			const { getAllByLabelText } = await renderPage();
+			userEvent.click(getAllByLabelText('play')[0]);
+		});
 		expect(videojs).toBeCalled();
 	});
 });

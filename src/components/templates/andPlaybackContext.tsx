@@ -8,6 +8,7 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
+import { unstable_batchedUpdates } from 'react-dom';
 import { useMutation } from 'react-query';
 import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 
@@ -366,22 +367,24 @@ export default function AndPlaybackContext({
 				player ||
 				(await import('video.js')).default(videoElRef.current, options);
 
-			if (!player) {
-				setPlayer(p);
-			} else if (sources) {
-				player.src(sources);
-			}
+			unstable_batchedUpdates(() => {
+				if (!player) {
+					setPlayer(p);
+				} else if (sources) {
+					player.src(sources);
+				}
 
-			setIsPaused(true);
-			const progress = serverProgress || 0;
-			_setProgress(progress);
+				setIsPaused(true);
+				const progress = serverProgress || 0;
+				_setProgress(progress);
 
-			setBufferedProgress(0);
+				setBufferedProgress(0);
 
-			p.currentTime(progress * duration);
-			setVolume(p.volume() * 100);
+				p.currentTime(progress * duration);
+				setVolume(p.volume() * 100);
 
-			setFingerprint(JSON.stringify(sources));
+				setFingerprint(JSON.stringify(sources));
+			});
 		};
 		loadPlayer();
 

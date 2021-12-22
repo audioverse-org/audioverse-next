@@ -1,4 +1,5 @@
 import Slider from '@material-ui/core/Slider';
+import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useContext } from 'react';
 
@@ -41,9 +42,7 @@ export default function Miniplayer(): JSX.Element | null {
 			<div className={styles.player}>
 				{/*TODO: Get rid of ID; use ref instead*/}
 				<div id="mini-player" className={styles.pane} />
-				<div
-					className={`${styles.controls} ${isShowingVideo && styles.hidden}`}
-				>
+				<div className={clsx(styles.controls, isShowingVideo && styles.hidden)}>
 					<ButtonNudge
 						recording={recording}
 						reverse={true}

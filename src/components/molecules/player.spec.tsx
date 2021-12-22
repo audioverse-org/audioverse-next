@@ -1,4 +1,6 @@
 import {
+	act,
+	findByLabelText,
 	findByTestId,
 	getByLabelText,
 	getByText,
@@ -82,33 +84,41 @@ describe('player', () => {
 	it('plays when clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await act(async () => {
+			const { getByLabelText } = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+			userEvent.click(getByLabelText('play'));
+		});
 
 		// to be called with nothing
 		expect(mockPlayer.play).toBeCalledWith();
 	});
 
 	it('toggles play/pause buttons', async () => {
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		const player = result.getByLabelText('player');
+			const player = result.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
+			userEvent.click(getByLabelText(player, 'play'));
 
-		expect(getByLabelText(player, 'pause')).toBeInTheDocument();
+			expect(await findByLabelText(player, 'pause')).toBeInTheDocument();
+		});
 	});
 
 	it('toggles back to play button', async () => {
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		const player = result.getByLabelText('player');
+			const player = result.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
-		userEvent.click(getByLabelText(player, 'pause'));
+			userEvent.click(getByLabelText(player, 'play'));
+			await findByLabelText(player, 'pause');
 
-		expect(getByLabelText(player, 'play')).toBeInTheDocument();
+			userEvent.click(getByLabelText(player, 'pause'));
+
+			expect(await findByLabelText(player, 'play')).toBeInTheDocument();
+		});
 	});
 
 	it('sets current time', async () => {
@@ -203,44 +213,50 @@ describe('player', () => {
 	it('nudges back 15 seconds', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		mockPlayer.currentTime(50);
+			const player = result.getByLabelText('player');
+			await findByLabelText(player, 'pause');
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+			mockPlayer.currentTime(50);
 
-		const player = result.getByLabelText('player');
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
 
-		userEvent.click(getByLabelText(player, 'back 15 seconds'));
+			userEvent.click(getByLabelText(player, 'back 15 seconds'));
 
-		expect(mockPlayer.currentTime).toBeCalledWith(35);
+			expect(mockPlayer.currentTime).toBeCalledWith(35);
+		});
 	});
 
 	it('nudges forward 15 seconds', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		mockPlayer.currentTime(50);
+			const player = result.getByLabelText('player');
+			await findByLabelText(player, 'pause');
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+			mockPlayer.currentTime(50);
 
-		const player = result.getByLabelText('player');
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
 
-		userEvent.click(getByLabelText(player, 'forward 15 seconds'));
+			userEvent.click(getByLabelText(player, 'forward 15 seconds'));
 
-		await waitFor(() => {
-			expect(mockPlayer.currentTime).toBeCalledWith(65);
+			await waitFor(() => {
+				expect(mockPlayer.currentTime).toBeCalledWith(65);
+			});
 		});
 	});
 
@@ -271,28 +287,30 @@ describe('player', () => {
 	it('plays video on poster click', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByAltText } = await renderComponent({
-			props: {
-				recording: {
-					...recording,
-					title: 'the_sermon_title',
-					canonicalPath: 'the_sermon_path',
-					videoFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
+		await act(async () => {
+			const { getByAltText } = await renderComponent({
+				props: {
+					recording: {
+						...recording,
+						title: 'the_sermon_title',
+						canonicalPath: 'the_sermon_path',
+						videoFiles: [
+							{
+								url: 'the_source_src',
+								mimeType: 'the_source_type',
+								filesize: 'the_source_size',
+							},
+						],
+					},
 				},
-			},
+			});
+
+			const poster = getByAltText('the_sermon_title') as HTMLElement;
+
+			userEvent.click(poster.parentElement as HTMLElement);
+
+			await waitFor(() => expect(mockPlayer.play).toBeCalled());
 		});
-
-		const poster = getByAltText('the_sermon_title') as HTMLElement;
-
-		userEvent.click(poster.parentElement as HTMLElement);
-
-		expect(mockPlayer.play).toBeCalled();
 	});
 
 	it('tracks scrubber click when duration not yet known', async () => {
@@ -525,31 +543,38 @@ describe('player', () => {
 	it('has volume control', async () => {
 		setPlayerMock({ volume: 0.7 });
 
-		const { getByLabelText } = await renderComponent();
+		await act(async () => {
+			const { getByLabelText, findAllByLabelText } = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+			userEvent.click(getByLabelText('play'));
 
-		const control = getByLabelText('volume');
+			await findAllByLabelText('pause');
 
-		expect(control).toHaveValue('70');
+			const control = getByLabelText('volume');
+			expect(control).toHaveValue('70');
+		});
 	});
 
 	it('sets volume', async () => {
 		const playerMock = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await act(async () => {
+			const { getByLabelText, findAllByLabelText } = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+			userEvent.click(getByLabelText('play'));
 
-		const control = getByLabelText('volume');
+			await findAllByLabelText('pause');
 
-		ReactTestUtils.Simulate.change(control, {
-			target: {
-				value: 70,
-			},
-		} as any);
+			const control = getByLabelText('volume');
 
-		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
+			ReactTestUtils.Simulate.change(control, {
+				target: {
+					value: 70,
+				},
+			} as any);
+
+			await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
+		});
 	});
 
 	it('does not show miniplayer if no recording loaded', async () => {
@@ -625,41 +650,48 @@ describe('player', () => {
 	it('sets miniplayer progress value', async () => {
 		const mockPlayer = setPlayerMock({ duration: 100 });
 
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		mockPlayer.currentTime(25);
+			const miniplayer = result.getByLabelText('miniplayer');
+			await findByLabelText(miniplayer, 'pause');
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+			mockPlayer.currentTime(25);
 
-		const miniplayer = result.getByLabelText('miniplayer');
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
 
-		await waitFor(() => {
-			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('25');
+			await waitFor(() => {
+				expect(getByLabelText(miniplayer, 'progress')).toHaveValue('25');
+			});
 		});
 	});
 
 	it('accepts progress change from miniplayer progress bar', async () => {
 		const mockPlayer = setPlayerMock({ time: 25, duration: 100 });
 
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
-		const progressInput = getByLabelText(miniplayer, 'progress');
+			const miniplayer = result.getByLabelText('miniplayer');
+			const progressInput = getByLabelText(miniplayer, 'progress');
 
-		ReactTestUtils.Simulate.change(progressInput, {
-			target: {
-				value: 70,
-			},
-		} as any);
+			await findByLabelText(miniplayer, 'pause');
 
-		expect(mockPlayer.currentTime).toBeCalledWith(70);
+			ReactTestUtils.Simulate.change(progressInput, {
+				target: {
+					value: 70,
+				},
+			} as any);
+
+			expect(mockPlayer.currentTime).toBeCalledWith(70);
+		});
 	});
 
 	it('displays series in miniplayer', async () => {
@@ -700,35 +732,43 @@ describe('player', () => {
 	});
 
 	it('has pause button in miniplayer', async () => {
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();
+			expect(await findByLabelText(miniplayer, 'pause')).toBeInTheDocument();
+		});
 	});
 
 	it('has play button in miniplayer', async () => {
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		userEvent.click(getByLabelText(miniplayer, 'pause'));
+			userEvent.click(await findByLabelText(miniplayer, 'pause'));
 
-		expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument();
+			expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument();
+		});
 	});
 
 	it('toggles between miniplayer play and pause buttons', async () => {
-		const result = await renderComponent();
+		await act(async () => {
+			const result = await renderComponent();
 
-		userEvent.click(result.getByLabelText('play'));
+			userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+			const miniplayer = result.getByLabelText('miniplayer');
 
-		expect(queryByLabelText(miniplayer, 'play')).not.toBeInTheDocument();
+			await findByLabelText(miniplayer, 'pause');
+
+			expect(queryByLabelText(miniplayer, 'play')).not.toBeInTheDocument();
+		});
 	});
 
 	it('has nudge back button', async () => {
@@ -786,10 +826,11 @@ describe('player', () => {
 	it('changes speed', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByText } = await renderComponent();
+		await act(async () => {
+			const { getByText } = await renderComponent();
 
-		userEvent.click(getByText('1x'));
-
+			userEvent.click(getByText('1x'));
+		});
 		expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
 	});
 
@@ -945,25 +986,27 @@ describe('player', () => {
 	it('launches fullscreen when button clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent({
-			props: {
-				recording: {
-					...recording,
-					canonicalPath: 'the_sermon_path',
-					duration: 60,
-					speakers: [],
-					videoFiles: [
-						{
-							url: 'the_source_src',
-							mimeType: 'the_source_type',
-							filesize: 'the_source_size',
-						},
-					],
+		await act(async () => {
+			const { getByLabelText } = await renderComponent({
+				props: {
+					recording: {
+						...recording,
+						canonicalPath: 'the_sermon_path',
+						duration: 60,
+						speakers: [],
+						videoFiles: [
+							{
+								url: 'the_source_src',
+								mimeType: 'the_source_type',
+								filesize: 'the_source_size',
+							},
+						],
+					},
 				},
-			},
-		});
+			});
 
-		userEvent.click(getByLabelText('fullscreen'));
+			userEvent.click(getByLabelText('fullscreen'));
+		});
 
 		expect(mockPlayer.requestFullscreen).toBeCalled();
 	});
@@ -1075,10 +1118,16 @@ describe('player', () => {
 	it('has working volume down button', async () => {
 		const playerMock = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await act(async () => {
+			const { getByLabelText } = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
-		userEvent.click(getByLabelText('reduce volume'));
+			userEvent.click(getByLabelText('play'));
+
+			const player = getByLabelText('player');
+			await findByLabelText(player, 'pause');
+
+			userEvent.click(getByLabelText('reduce volume'));
+		});
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.4));
 	});
@@ -1086,12 +1135,18 @@ describe('player', () => {
 	it('has working volume up button', async () => {
 		const playerMock = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await act(async () => {
+			const { getByLabelText } = await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
-		userEvent.click(getByLabelText('increase volume'));
+			userEvent.click(getByLabelText('play'));
 
-		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
+			const player = getByLabelText('player');
+			await findByLabelText(player, 'pause');
+
+			userEvent.click(getByLabelText('increase volume'));
+
+			await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
+		});
 	});
 
 	it('displays current time in miniplayer', async () => {
