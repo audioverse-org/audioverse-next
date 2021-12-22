@@ -1,4 +1,5 @@
-import { omit, reduce } from 'lodash';
+import omit from 'lodash/omit';
+import reduce from 'lodash/reduce';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';

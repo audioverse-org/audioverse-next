@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const lodash = require('lodash');
+const reduce = require('lodash/reduce');
 
 const enLangs = JSON.parse(fs.readFileSync('./public/lang/en.json'));
 
@@ -12,7 +12,7 @@ langs
 	.map((file) => {
 		const langLangs = JSON.parse(fs.readFileSync(`./public/lang/${file}`));
 
-		const newLangs = lodash.reduce(
+		const newLangs = reduce(
 			enLangs,
 			(carry, value, key) => {
 				if (!langLangs[key]) {

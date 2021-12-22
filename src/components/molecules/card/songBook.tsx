@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';

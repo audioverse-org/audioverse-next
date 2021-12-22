@@ -13,6 +13,7 @@ module.exports = {
 		'jest-dom',
 		'@mizdra/layout-shift',
 		'react-hooks',
+		'lodash',
 	],
 	extends: [
 		'eslint:recommended',
@@ -70,6 +71,7 @@ module.exports = {
 		'react/jsx-curly-brace-presence': ['error', 'never'],
 		'react-hooks/rules-of-hooks': 'error',
 		'react-hooks/exhaustive-deps': 'warn',
+		'lodash/import-scope': ['error', 'method'],
 	},
 	settings: {
 		react: {

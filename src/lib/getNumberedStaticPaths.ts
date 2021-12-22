@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import flatten from 'lodash/flatten';
+import range from 'lodash/range';
 import { GetStaticPathsResult } from 'next';
 
 import {
@@ -24,7 +25,7 @@ const makeLanguagePaths = async <T>(
 	const limit = Math.min(pageCount, LIST_PRERENDER_LIMIT) + 1;
 	const base = LANGUAGES[language].base_url;
 
-	return _.range(1, limit).map((x) => `/${base}/${innerSegment}/page/${x}`);
+	return range(1, limit).map((x) => `/${base}/${innerSegment}/page/${x}`);
 };
 
 export const getNumberedStaticPaths = async <T>(
@@ -37,7 +38,7 @@ export const getNumberedStaticPaths = async <T>(
 		makeLanguagePaths(k, innerSegment, getter, parseCount)
 	);
 	const pathSets = await Promise.all(pathSetPromises);
-	const paths = _.flatten(pathSets);
+	const paths = flatten(pathSets);
 
 	return {
 		paths,

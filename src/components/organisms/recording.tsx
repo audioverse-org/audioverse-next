@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';

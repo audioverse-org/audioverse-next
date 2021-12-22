@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import set from 'lodash/set';
 import { QueryKey, useQueryClient } from 'react-query';
 
 import { useAddPlaylistMutation } from '@lib/generated/graphql';
@@ -43,11 +45,11 @@ export function useAddPlaylist(
 
 			if (!updatePath) return {};
 
-			const snapshot = _.cloneDeep(queryClient.getQueryData(cacheKey));
+			const snapshot = cloneDeep(queryClient.getQueryData(cacheKey));
 
 			queryClient.setQueryData(cacheKey, (old) => {
 				old = old || {};
-				const prev = _.get(old, updatePath) || [];
+				const prev = get(old, updatePath) || [];
 				const newPlaylist = {
 					id: '',
 					title: variables.title,
@@ -55,8 +57,7 @@ export function useAddPlaylist(
 				};
 				const value = [...prev, newPlaylist];
 
-				// TODO: Does `as [type]` introduce errors?
-				return _.set(old as Record<string, unknown>, updatePath, value);
+				return set(old as Record<string, unknown>, updatePath, value);
 			});
 
 			// TODO: optimistically add playlist to base playlists cache, too, once
