@@ -1,5 +1,6 @@
 import { NextRouter } from 'next/router';
 import React from 'react';
+import { IntlShape } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
@@ -59,8 +60,6 @@ import IconMore from '../../public/img/icon-more.svg';
 import IconOurStory from '../../public/img/icon-our-story.svg';
 import IconSearch from '../../public/img/icon-search.svg';
 
-import getIntl from './getIntl';
-
 export type INavigationItem = {
 	key: string;
 	href?: string;
@@ -75,10 +74,9 @@ export type INavigationItem = {
 
 export function getNavigationItems(
 	router: NextRouter,
+	intl: IntlShape,
 	languageRoute: string
 ): INavigationItem[] {
-	const intl = getIntl(languageRoute);
-
 	return [
 		{
 			key: 'discover',

@@ -1,4 +1,9 @@
-import { findByLabelText, queryByTestId, waitFor } from '@testing-library/dom';
+import {
+	findByLabelText,
+	findByTestId,
+	queryByTestId,
+	waitFor,
+} from '@testing-library/dom';
 import {
 	act,
 	getByLabelText,
@@ -229,7 +234,7 @@ describe('app media playback', () => {
 			const portal = result.getByTestId('portal');
 
 			ReactTestUtils.Simulate.pause(
-				getByTestId(portal, 'video-element'),
+				await findByTestId(portal, 'video-element'),
 				{} as any
 			);
 

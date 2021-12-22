@@ -12,7 +12,7 @@ import {
 
 import getIntl from './getIntl';
 
-export function generateFeed(
+export async function generateFeed(
 	languageRoute: string,
 	{
 		title,
@@ -28,8 +28,8 @@ export function generateFeed(
 		image?: string;
 	},
 	recordings: GenerateFeedFragment[]
-): string {
-	const intl = getIntl(languageRoute);
+): Promise<string> {
+	const intl = await getIntl(languageRoute);
 
 	const feed = new Feed({
 		id: '',

@@ -30,7 +30,7 @@ export async function getServerSideProps({
 	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
-		const intl = getIntl(languageRoute);
+		const intl = await getIntl(languageRoute);
 		const feed = generateFeed(
 			languageRoute,
 			{

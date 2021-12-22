@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import Mininav from '@components/molecules/mininav';
 import { getNavigationItems } from '@lib/getNavigationItems';
@@ -14,7 +15,8 @@ type Props = {
 export default function AboutNav({ current }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
-	const item = getNavigationItems(router, languageRoute).find(
+	const intl = useIntl();
+	const item = getNavigationItems(router, intl, languageRoute).find(
 		({ key }) => key === 'story'
 	);
 	return (

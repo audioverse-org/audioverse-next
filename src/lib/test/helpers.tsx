@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParsedUrlQuery } from 'querystring';
 
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
+import {
+	act,
+	render,
+	RenderOptions,
+	RenderResult,
+} from '@testing-library/react';
 import { when } from 'jest-when';
 import _ from 'lodash';
 import { GetServerSidePropsResult, GetStaticProps } from 'next';
@@ -150,7 +155,11 @@ export async function renderWithIntl(
 ): Promise<RenderResult & { queryClient: QueryClient }> {
 	const WithIntl = withIntl(() => ui);
 
-	return renderWithQueryProvider(<WithIntl />, renderOptions);
+	let result = {} as RenderResult & { queryClient: QueryClient };
+	await act(async () => {
+		result = await renderWithQueryProvider(<WithIntl />, renderOptions);
+	});
+	return result;
 }
 
 // TODO: Merge with buildRenderer, or just make it private

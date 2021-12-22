@@ -11,11 +11,11 @@ import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default (): void => void 0;
 
-export const formatBooksDescription = (
+export const formatBooksDescription = async (
 	languageRoute: string,
 	sequence: BookFeedDescriptionFragment
-): string => {
-	const intl = getIntl(languageRoute);
+): Promise<string> => {
+	const intl = await getIntl(languageRoute);
 	const getPersonNameString = (persons: { name: string }[]) => {
 		return uniq(persons.map(({ name }) => name)).join(', ');
 	};
@@ -70,7 +70,7 @@ export async function getServerSideProps({
 			{
 				link: sequence.canonicalUrl,
 				title: sequence.title,
-				description: formatBooksDescription(languageRoute, sequence),
+				description: await formatBooksDescription(languageRoute, sequence),
 				image: sequence.image?.url,
 			},
 			sequence.recordings.nodes || []
