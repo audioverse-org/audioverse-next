@@ -431,7 +431,11 @@ export function getNavigationItems(
 						/>
 					</li>
 					<li>
-						<DownloadAppButton buttonType="secondary" menuAlignment="left" />
+						<DownloadAppButton
+							buttonType="secondary"
+							menuAlignment="left"
+							id="getNavigationItems-downloadApp"
+						/>
 					</li>
 				</>
 			),

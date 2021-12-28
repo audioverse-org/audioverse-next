@@ -56,7 +56,7 @@ function Base<P>({
 					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 					<meta
 						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0, viewport-fit=cover"
+						content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0, viewport-fit=cover"
 					/>
 					<meta name="theme-color" content="#efebeb" />
 					<link rel="icon" href="/favicon.ico" sizes="any" />

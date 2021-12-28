@@ -92,6 +92,11 @@
 	margin-bottom: 0;
 }
 
+.languageButton,
+.downloadButton {
+	background: $ts-white;
+}
+
 .downloadButton svg:first-of-type {
 	color: $ts-midTone;
 }

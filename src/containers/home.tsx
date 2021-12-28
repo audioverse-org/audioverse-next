@@ -265,6 +265,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								buttonType="super"
 								menuAlignment="left"
 								alternateCta
+								id="home-downloadApp"
 							/>
 						</>
 					}

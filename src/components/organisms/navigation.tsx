@@ -65,8 +65,14 @@ const Navigation = ({
 								onClick={(baseUrl) => {
 									router.push(`/${baseUrl}/`);
 								}}
+								className={styles.languageButton}
 							/>
-							<DownloadAppButton buttonType="secondary" menuAlignment="right" />
+							<DownloadAppButton
+								buttonType="secondary"
+								menuAlignment="right"
+								id="navigation-downloadApp"
+								className={styles.downloadButton}
+							/>
 						</div>
 
 						<ul>
