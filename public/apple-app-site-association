@@ -1,0 +1,18 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "T636GPF37H.org.audioverse.mobile",
+                "paths": [
+                  "/*/sermons/*",
+                  "/*/audiobibles/*",
+                  "/*/audiobooks/*",
+                  "/*/music/*",
+                  "/*/topics/*",
+                  "/*/sponsors/*"
+                ]
+            }
+        ]
+    }
+}

@@ -131,14 +131,19 @@
 }
 
 .leftButtons > * {
-	margin-right: 24px;
+	@media (min-width: $breakpoint-sm) {
+		margin-right: 24px;
+	}
 }
 .leftButtonsCompact > * {
 	margin-right: 8px;
 }
 
-.rightButtons > * {
-	margin-left: 16px;
+.rightButtons > *:not(:first-child) {
+	margin-left: 8px;
+	@media (min-width: $breakpoint-sm) {
+		margin-left: 16px;
+	}
 }
 
 .videoProgress {
