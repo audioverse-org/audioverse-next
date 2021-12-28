@@ -19,6 +19,7 @@ import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 import IconPause from '../../../public/img/icon-pause-large.svg';
 import IconPlay from '../../../public/img/icon-play-large.svg';
 
+import CircleButton from './circleButton';
 import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
 
@@ -161,16 +162,17 @@ const Player = ({
 				</div>
 				<div className={styles.rightButtons}>
 					{shouldShowVideoControls && (
-						<button
+						<CircleButton
+							onClick={() => session.requestFullscreen()}
+							backgroundColor={backgroundColor}
 							aria-label={intl.formatMessage({
 								id: 'player__fullscreenButtonLabel',
 								defaultMessage: 'fullscreen',
 								description: 'player fullscreen button label',
 							})}
-							onClick={() => session.requestFullscreen()}
 						>
 							<IconFullscreen />
-						</button>
+						</CircleButton>
 					)}
 					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />

@@ -12,6 +12,7 @@ import Dropdown from './dropdown';
 type Props = {
 	menuAlignment: 'left' | 'right';
 	buttonType: IButtonType;
+	id: string;
 	alternateCta?: boolean;
 	className?: string;
 };
@@ -19,6 +20,7 @@ type Props = {
 export default function DownloadAppButton({
 	menuAlignment,
 	buttonType,
+	id,
 	alternateCta,
 	className,
 }: Props): JSX.Element | null {
@@ -45,7 +47,7 @@ export default function DownloadAppButton({
 
 	return (
 		<Dropdown
-			id="downloadAppMenu"
+			id={id}
 			trigger={({ isOpen, ...props }) => (
 				<Button
 					type={buttonType}
