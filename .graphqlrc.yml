@@ -14,7 +14,7 @@ generates:
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - 'typescript-react-query'
+      - 'graphql-plugin-react-query.js'
       - 'graphql-plugin-getters.js'
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'

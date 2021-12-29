@@ -1,6 +1,3 @@
-import { parse } from 'graphql';
-import { print } from 'graphql/language/printer';
-
 import { getCurrentRequest } from '@lib/api/storeRequest';
 import { getSessionToken } from '@lib/cookies';
 import { sleep } from '@lib/sleep';
@@ -8,36 +5,6 @@ import { sleep } from '@lib/sleep';
 const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
 	'https://graphql-staging.audioverse.org/graphql';
-
-// WORKAROUND
-// Graphql Code Generator duplicates fragment definitions
-// for fragments that get referenced multiple times.
-// https://github.com/dotansimha/graphql-code-generator/issues/3063
-const removeDuplicateFragments = (query: string): string => {
-	const ast = parse(query);
-
-	const seen: string[] = [];
-
-	const newDefinitions = ast.definitions.filter((def) => {
-		if (def.kind !== 'FragmentDefinition') {
-			return true;
-		}
-
-		const id = `${def.name.value}-${def.typeCondition.name.value}`;
-		const haveSeen = seen.includes(id);
-
-		seen.push(id);
-
-		return !haveSeen;
-	});
-
-	const newAst = {
-		...ast,
-		definitions: newDefinitions,
-	};
-
-	return print(newAst);
-};
 
 async function getResponse(
 	headers: HeadersInit,
@@ -58,8 +25,6 @@ export async function fetchApi<TData>(
 	query: string,
 	{ variables = {} } = {}
 ): Promise<TData> {
-	query = removeDuplicateFragments(query);
-
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',
 	};
