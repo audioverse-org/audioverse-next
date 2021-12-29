@@ -6,10 +6,8 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
-import {
-	CardRecordingFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import type { CardRecordingFragment } from '@lib/generated/graphql';
+import { SequenceContentType } from '@lib/generated/graphql';
 import { makeBibleMusicRoute, makeBibleMusicTrackRoute } from '@lib/routes';
 import useHover from '@lib/useHover';
 import useLanguageRoute from '@lib/useLanguageRoute';

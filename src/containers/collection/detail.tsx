@@ -25,7 +25,7 @@ import Tease from '@components/molecules/tease';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
+import type { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeCollectionFeedRoute,
 	makeCollectionPresentersRoute,

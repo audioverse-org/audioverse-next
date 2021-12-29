@@ -14,10 +14,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
-import {
-	Language,
-	useGetSearchResultsPageDataQuery,
-} from '@lib/generated/graphql';
+import type { Language } from '@lib/generated/graphql';
 import {
 	makeSearchCollectionsRoute,
 	makeSearchPersonsRoute,
@@ -29,6 +26,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
 
+import { useGetSearchResultsPageDataQuery } from './index.generated';
 import styles from './index.module.scss';
 
 export type SearchProps = {

@@ -11,14 +11,12 @@ import Button from '@components/molecules/button';
 import Checkbox from '@components/molecules/form/checkbox';
 import Select from '@components/molecules/form/select';
 import AccountNav from '@components/organisms/accountNav';
+import { Language, RecordingQuality, Timezone } from '@lib/generated/graphql';
+
 import {
-	Language,
-	RecordingQuality,
-	Timezone,
 	useGetAccountPreferencesDataQuery,
 	useUpdateAccountPreferencesMutation,
-} from '@lib/generated/graphql';
-
+} from './preferences.generated';
 import styles from './preferences.module.scss';
 
 function Profile(): JSX.Element {

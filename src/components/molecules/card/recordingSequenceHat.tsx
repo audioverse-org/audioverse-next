@@ -3,10 +3,8 @@ import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import {
-	CardRecordingSequenceHatFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import type { CardRecordingSequenceHatFragment } from '@lib/generated/graphql';
+import { SequenceContentType } from '@lib/generated/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import IconLike from '../../../../public/img/icon-like-light.svg';

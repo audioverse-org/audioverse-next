@@ -16,7 +16,7 @@ import Tease from '@components/molecules/tease';
 import TypeLockup from '@components/molecules/typeLockup';
 import { BaseColors } from '@lib/constants';
 import { formatLongDateTime } from '@lib/date';
-import { GetLibraryPlaylistPageDataQuery } from '@lib/generated/graphql';
+import type { GetLibraryPlaylistPageDataQuery } from '@lib/generated/graphql';
 
 import ListIcon from '../../../../public/img/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';

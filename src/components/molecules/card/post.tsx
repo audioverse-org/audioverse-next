@@ -9,7 +9,7 @@ import Heading6 from '@components/atoms/heading6';
 import Card from '@components/molecules/card';
 import { BaseColors } from '@lib/constants';
 import { formatLongDate } from '@lib/date';
-import { CardPostFragment } from '@lib/generated/graphql';
+import type { CardPostFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
 import IconAlignLeft from '../../../../public/img/fa-align-left.svg';

@@ -4,7 +4,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardPost from '@components/molecules/card/post';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
-import { GetBlogPageDataQuery } from '@lib/generated/graphql';
+import type { GetBlogPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeBlogPostListRoute } from '@lib/routes';
 

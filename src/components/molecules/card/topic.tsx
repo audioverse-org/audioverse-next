@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
+import type { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../public/img/fa-layer-group.svg';
 import TeaseRecording from '../teaseRecording';

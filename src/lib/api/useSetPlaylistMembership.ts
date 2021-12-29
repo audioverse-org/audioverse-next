@@ -1,7 +1,7 @@
 import { QueryKey, useMutation, useQueryClient } from 'react-query';
 
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
-import { Scalars } from '@lib/generated/graphql';
+import type { Scalars } from '@lib/generated/graphql';
 
 interface MutateVariables {
 	recordingId: Scalars['ID'];

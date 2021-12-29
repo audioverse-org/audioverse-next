@@ -16,7 +16,7 @@ import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
-import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
+import type { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {

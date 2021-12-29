@@ -7,7 +7,7 @@ import CardCollection from '@components/molecules/card/collection';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	GetSponsorConferencesPageDataQuery,
 	SponsorPivotFragment,
 } from '@lib/generated/graphql';

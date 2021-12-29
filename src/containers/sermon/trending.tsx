@@ -5,7 +5,7 @@ import Heading1 from '@components/atoms/heading1';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
+import type { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
 
 export type TrendingTeachingsProps = NonNullable<
 	GetTrendingTeachingsPageDataQuery['recordings']

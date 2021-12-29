@@ -3,7 +3,7 @@ import { FormattedMessage, MessageDescriptor, useIntl } from 'react-intl';
 
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
-import { ButtonDownloadFragment } from '@lib/generated/graphql';
+import type { ButtonDownloadFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 
 import IconDownload from '../../../public/img/icon-download.svg';

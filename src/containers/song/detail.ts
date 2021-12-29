@@ -1,6 +1,6 @@
 import withFailStates from '@components/HOCs/withFailStates';
 import { Recording } from '@components/organisms/recording';
-import { GetSongDetailDataQuery } from '@lib/generated/graphql';
+import type { GetSongDetailDataQuery } from '@lib/generated/graphql';
 
 export type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
 

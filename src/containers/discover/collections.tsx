@@ -8,7 +8,7 @@ import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
+import type { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeAudiobookListRoute,
 	makeConferenceListRoute,

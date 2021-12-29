@@ -9,7 +9,7 @@ import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
-import { CardSponsorFragment } from '@lib/generated/graphql';
+import type { CardSponsorFragment } from '@lib/generated/graphql';
 
 import UserPlusIcon from '../../../../public/img/fa-user-plus.svg';
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';

@@ -6,14 +6,14 @@ import { useQueryClient } from 'react-query';
 import SocialLogin from '@components/molecules/socialLogin';
 import Modal from '@components/organisms/modal';
 import AndOnboarding from '@components/templates/andOnboarding';
-import { login } from '@lib/api';
-import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
+import { login } from '@lib/api/login';
 import { makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import Button from './button';
 import ButtonGuest from './buttonGuest';
 import Input from './form/input';
+import { useLoginForgotPasswordMutation } from './login.generated';
 import styles from './login.module.scss';
 
 export default function Login(): JSX.Element {

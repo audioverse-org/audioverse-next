@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardFavoriteFragment } from '@lib/generated/graphql';
+import type { CardFavoriteFragment } from '@lib/generated/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import CardCollection from './collection';

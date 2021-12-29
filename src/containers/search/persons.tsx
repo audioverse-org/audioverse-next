@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardPerson from '@components/molecules/card/person';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSearchResultsPersonsQuery } from '@lib/generated/graphql';
+import type { GetSearchResultsPersonsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSearchPersonsRoute, makeSearchRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';

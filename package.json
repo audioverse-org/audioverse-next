@@ -20,7 +20,7 @@
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
     "precommit": "npm run format && npm run lint:fix && npm run checkTs",
     "postinstall": "husky install",
-    "graphql:codegen": "graphql-codegen --config .graphqlrc.yml",
+    "graphql:codegen": "graphql-codegen --config .graphqlrc.yml && echo \"import * as Types from '../../../lib/generated/graphql';\" >> src/components/molecules/card/recording.generated.ts",
     "lighthouse": "npx lhci autorun"
   },
   "dependencies": {
@@ -60,6 +60,7 @@
     "@formatjs/cli": "^2.12.0",
     "@graphql-codegen/add": "^3.1.0",
     "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.2",
     "@graphql-codegen/schema-ast": "^2.4.0",
     "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-codegen/typescript-operations": "^2.2.1",

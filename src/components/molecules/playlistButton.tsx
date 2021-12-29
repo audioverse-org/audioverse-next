@@ -5,12 +5,10 @@ import ReactTooltip from 'react-tooltip';
 
 import { useAddPlaylist } from '@lib/api/useAddPlaylist';
 import { useSetPlaylistMembership } from '@lib/api/useSetPlaylistMembership';
-import {
-	useGetPlaylistButtonDataQuery,
-	UserPlaylist,
-} from '@lib/generated/graphql';
+import type { UserPlaylist } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 
+import { useGetPlaylistButtonDataQuery } from './playlistButton.generated';
 import styles from './playlistButton.module.scss';
 
 type Playlist = Pick<UserPlaylist, 'id' | 'title' | 'hasRecording'>;

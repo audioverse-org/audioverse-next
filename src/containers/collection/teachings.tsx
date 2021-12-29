@@ -7,7 +7,7 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	CollectionPivotFragment,
 	GetCollectionTeachingsPageDataQuery,
 } from '@lib/generated/graphql';

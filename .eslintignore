@@ -1,1 +1,2 @@
 /src/lib/generated/graphql.ts
+*.generated.ts

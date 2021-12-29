@@ -19,6 +19,25 @@ generates:
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
+      enumsAsConst: true
+      scalars:
+        ID: 'string | number'
+        Date: 'string'
+        DateTime: 'string'
+        RelativeDateTime: 'string'
+        URL: 'string'
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: lib/generated/graphql.ts
+    plugins:
+      - 'typescript-operations'
+      - 'typescript-react-query'
+      - 'graphql-plugin-getters.js'
+    config:
+      fetcher: '@lib/api/fetchApi#graphqlFetcher'
+      avoidOptionals: true
       scalars:
         ID: 'string | number'
         Date: 'string'

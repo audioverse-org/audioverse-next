@@ -9,7 +9,7 @@ import CardRecording from '@components/molecules/card/recording';
 import Dropdown from '@components/molecules/dropdown';
 import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
+import type { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeDiscoverRoute,

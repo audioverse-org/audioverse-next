@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
-import { ButtonShareRecordingFragment } from '@lib/generated/graphql';
+import type { ButtonShareRecordingFragment } from '@lib/generated/graphql';
 
 import ButtonShare from './buttonShare';
 import styles from './buttonShareRecording.module.scss';

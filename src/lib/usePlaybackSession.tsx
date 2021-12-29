@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
+import { useGetRecordingPlaybackProgressQuery } from '@components/templates/andMiniplayer.generated';
 import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
 } from '@components/templates/andPlaybackContext';
-import {
-	AndMiniplayerFragment,
-	useGetRecordingPlaybackProgressQuery,
-} from '@lib/generated/graphql';
+import type { AndMiniplayerFragment } from '@lib/generated/graphql';
 
 import { getSessionToken } from './cookies';
 

@@ -13,10 +13,8 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSongBooksDetailPageDataQuery,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import type { GetSongBooksDetailPageDataQuery } from '@lib/generated/graphql';
+import { SequenceContentType } from '@lib/generated/graphql';
 import {
 	makeBibleMusicRoute,
 	makeBibleMusicTrackRoute,

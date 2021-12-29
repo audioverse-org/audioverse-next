@@ -7,7 +7,7 @@ import CardCollection from '@components/molecules/card/collection';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
+import type { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeConferenceListRoute,
 	makeSermonListRoute,

@@ -9,11 +9,9 @@ import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Input from '@components/molecules/form/input';
 import Textarea from '@components/molecules/form/textarea';
-import {
-	GetMediaReleaseFormsPageDataQuery,
-	useSubmitMediaReleaseFormMutation,
-} from '@lib/generated/graphql';
+import type { GetMediaReleaseFormsPageDataQuery } from '@lib/generated/graphql';
 
+import { useSubmitMediaReleaseFormMutation } from './detail.generated';
 import styles from './detail.module.scss';
 
 export type ReleaseDetailProps = GetMediaReleaseFormsPageDataQuery;

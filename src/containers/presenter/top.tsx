@@ -6,7 +6,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	GetPresenterTopPageDataQuery,
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';

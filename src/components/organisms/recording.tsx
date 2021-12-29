@@ -22,11 +22,13 @@ import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
 import { formatLongDateTime, parseRelativeDate } from '@lib/date';
+import type {
+	RecordingFragment,
+	TeaseRecordingFragment,
+} from '@lib/generated/graphql';
 import {
 	RecordingContentType,
-	RecordingFragment,
 	SequenceContentType,
-	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { makeBibleMusicRoute } from '@lib/routes';

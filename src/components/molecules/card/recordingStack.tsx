@@ -1,9 +1,7 @@
 import React from 'react';
 
-import {
-	CardRecordingStackFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import type { CardRecordingStackFragment } from '@lib/generated/graphql';
+import { SequenceContentType } from '@lib/generated/graphql';
 
 import TeaseRecordingStack from '../teaseRecordingStack';
 

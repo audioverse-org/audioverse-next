@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Slider from '@components/organisms/slider';
-import { TestimoniesFragment } from '@lib/generated/graphql';
+import type { TestimoniesFragment } from '@lib/generated/graphql';
 import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

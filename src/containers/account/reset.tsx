@@ -4,14 +4,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
-import { login } from '@lib/api';
-import { useResetPasswordMutation } from '@lib/generated/graphql';
+import { login } from '@lib/api/login';
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
 
+import { useResetPasswordMutation } from './reset.generated';
 import styles from './reset.module.scss';
 
 function Reset(): JSX.Element {

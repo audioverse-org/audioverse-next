@@ -30,6 +30,8 @@ module.exports = {
 			}
 		);
 
-		return `import { fetchApi } from '@lib/api/fetchApi' \n${result}`;
+		return result
+			? `import { fetchApi } from '@lib/api/fetchApi' \n${result}`
+			: '';
 	},
 };

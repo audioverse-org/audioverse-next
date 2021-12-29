@@ -1,4 +1,5 @@
-import { personFavorite, personUnfavorite } from '@lib/generated/graphql';
+import { personFavorite } from './personFavorite.generated';
+import { personUnfavorite } from './personUnfavorite.generated';
 
 export async function setPersonFavorited(
 	id: number | string,

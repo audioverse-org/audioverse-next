@@ -9,7 +9,7 @@ import { hydrate, QueryClient } from 'react-query';
 
 import * as api from '@lib/api';
 import { login } from '@lib/api';
-import { storeRequest } from '@lib/api';
+import { storeRequest } from '@lib/api/storeRequest';
 import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
@@ -24,6 +24,7 @@ import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
 import resetAllMocks = jest.resetAllMocks;
 jest.mock('@lib/api/login');
+jest.mock('@lib/api/storeRequest');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
 

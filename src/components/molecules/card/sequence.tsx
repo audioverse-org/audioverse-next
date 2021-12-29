@@ -10,11 +10,11 @@ import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	CardRecordingFragment,
 	CardSequenceFragment,
-	SequenceContentType,
 } from '@lib/generated/graphql';
+import { SequenceContentType } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';

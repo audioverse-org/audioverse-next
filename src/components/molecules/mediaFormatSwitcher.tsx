@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PlayerFragment } from '@lib/generated/graphql';
+import type { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 

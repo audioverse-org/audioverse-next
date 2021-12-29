@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import LibraryPlaylistDetail, {
 	ILibraryPlaylistDetailProps,
 } from '@containers/library/playlist/detail';
-import { storeRequest } from '@lib/api';
+import { storeRequest } from '@lib/api/storeRequest';
 import { getLibraryPlaylistPageData } from '@lib/generated/graphql';
 
 export default LibraryPlaylistDetail;

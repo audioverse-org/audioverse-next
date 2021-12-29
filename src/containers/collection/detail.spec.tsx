@@ -1,7 +1,6 @@
 import { when } from 'jest-when';
 
 import {
-	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
 	Language,
 	SequenceContentType,
@@ -11,6 +10,8 @@ import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
+
+import { GetCollectionDetailPageDataDocument } from './detail.generated';
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps, {
 	language: 'en',

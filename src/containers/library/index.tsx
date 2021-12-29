@@ -8,18 +8,20 @@ import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
+import type {
+	GetLibraryDataQueryVariables,
+	Language,
+} from '@lib/generated/graphql';
 import {
 	FavoritableCatalogEntityType,
 	FavoritesSortableField,
-	GetLibraryDataQueryVariables,
-	Language,
 	OrderByDirection,
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
-	useGetLibraryDataQuery,
 } from '@lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
+import { useGetLibraryDataQuery } from './index.generated';
 import LibraryLoggedOut from './loggedOut';
 
 export const SORT_MAP = {

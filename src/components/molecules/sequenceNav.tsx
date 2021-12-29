@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { SequenceNavFragment } from '@lib/generated/graphql';
+import type { SequenceNavFragment } from '@lib/generated/graphql';
 
 import IconBack from '../../../public/img/icon-back-light.svg';
 import IconForward from '../../../public/img/icon-forward-light.svg';

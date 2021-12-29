@@ -9,7 +9,7 @@ import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { CardPersonFragment } from '@lib/generated/graphql';
+import type { CardPersonFragment } from '@lib/generated/graphql';
 
 import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
 import LikeIcon from '../../../../public/img/icon-like-light.svg';

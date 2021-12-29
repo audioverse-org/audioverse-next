@@ -5,10 +5,8 @@ import { ExtraItem } from 'feed/lib/typings';
 import he from 'he';
 import striptags from 'striptags';
 
-import {
-	GenerateFeedFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import type { GenerateFeedFragment } from '@lib/generated/graphql';
+import { RecordingContentType } from '@lib/generated/graphql';
 
 import getIntl from './getIntl';
 

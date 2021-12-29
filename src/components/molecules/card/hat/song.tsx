@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
-import { CardRecordingFragment } from '@lib/generated/graphql';
+import type { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/fa-music-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';

@@ -11,7 +11,10 @@ import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
+import type {
+	AndMiniplayerFragment,
+	PlayerFragment,
+} from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 

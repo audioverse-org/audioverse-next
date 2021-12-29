@@ -3,7 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import CopyrightInfo from '@components/molecules/copyrightInfo';
-import { CopyrightInfosFragment } from '@lib/generated/graphql';
+import type { CopyrightInfosFragment } from '@lib/generated/graphql';
 
 export default function CopyrightInfos({
 	recordings,

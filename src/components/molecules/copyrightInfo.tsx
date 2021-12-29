@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { CopyrightInfoFragment } from '@lib/generated/graphql';
+import type { CopyrightInfoFragment } from '@lib/generated/graphql';
 
 import styles from './copyrightInfo.module.scss';
 

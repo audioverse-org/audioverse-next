@@ -1,5 +1,5 @@
 import { LANGUAGES } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import type { Language } from '@lib/generated/graphql';
 
 import getLanguageIds from './getLanguageIds';
 

@@ -9,12 +9,10 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Input from '@components/molecules/form/input';
 import Select from '@components/molecules/form/select';
 import Textarea from '@components/molecules/form/textarea';
-import {
-	PageContactRecipient,
-	useSubmitContactPageMutation,
-} from '@lib/generated/graphql';
+import { PageContactRecipient } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 
+import { useSubmitContactPageMutation } from './contact.generated';
 import styles from './contact.module.scss';
 
 export type ContactProps = {

@@ -8,7 +8,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	GetSponsorTeachingsPageDataQuery,
 	SponsorPivotFragment,
 } from '@lib/generated/graphql';

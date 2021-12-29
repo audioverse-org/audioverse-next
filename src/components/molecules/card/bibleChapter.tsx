@@ -1,9 +1,7 @@
 import React from 'react';
 
-import {
-	CardBibleChapterFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import type { CardBibleChapterFragment } from '@lib/generated/graphql';
+import { RecordingContentType } from '@lib/generated/graphql';
 import { makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

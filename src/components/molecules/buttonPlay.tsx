@@ -3,7 +3,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import type { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icon-pause-large.svg';

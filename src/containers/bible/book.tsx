@@ -19,11 +19,11 @@ import {
 	IBibleVersion,
 } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import {
+import type {
 	PlayerFragment,
-	RecordingContentType,
 	SequenceNavFragment,
 } from '@lib/generated/graphql';
+import { RecordingContentType } from '@lib/generated/graphql';
 import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

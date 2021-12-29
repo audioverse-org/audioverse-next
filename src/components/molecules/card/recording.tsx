@@ -1,9 +1,7 @@
 import React from 'react';
 
-import {
-	CardRecordingFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import type { CardRecordingFragment } from '@lib/generated/graphql';
+import { RecordingContentType } from '@lib/generated/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import CardAudiobookTrack from './audiobookTrack';

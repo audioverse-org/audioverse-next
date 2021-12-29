@@ -8,13 +8,13 @@ import Checkbox from '@components/molecules/form/checkbox';
 import Input from '@components/molecules/form/input';
 import SocialLogin from '@components/molecules/socialLogin';
 import AndOnboarding from '@components/templates/andOnboarding';
-import {
-	useRegisterIsLoggedInQuery,
-	useRegisterMutation,
-} from '@lib/generated/graphql';
 import { makeDiscoverRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import {
+	useRegisterIsLoggedInQuery,
+	useRegisterMutation,
+} from './register.generated';
 import styles from './register.module.scss';
 
 function Register(): JSX.Element {

@@ -23,7 +23,7 @@ import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
+import type { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterFeedRoute,

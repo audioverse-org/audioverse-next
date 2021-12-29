@@ -9,15 +9,17 @@ import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
-import { graphqlFetcher } from '@lib/api';
-import {
-	GetLibraryHistoryPageDataDocument,
-	GetLibraryHistoryPageDataQuery,
+import { graphqlFetcher } from '@lib/api/fetchApi';
+import type {
 	GetLibraryHistoryPageDataQueryVariables,
 	Language,
 } from '@lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
+import {
+	GetLibraryHistoryPageDataDocument,
+	GetLibraryHistoryPageDataQuery,
+} from './history.generated';
 import styles from './history.module.scss';
 import LibraryLoggedOut from './loggedOut';
 

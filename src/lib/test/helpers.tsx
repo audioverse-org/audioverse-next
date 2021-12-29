@@ -18,12 +18,10 @@ import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { PartialDeep } from 'type-fest';
 import videojs from 'video.js';
 
+import { GetWithAuthGuardDataDocument } from '@components/HOCs/withAuthGuard.generated';
 import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api';
-import {
-	GetPlaylistButtonDataQuery,
-	GetWithAuthGuardDataDocument,
-} from '@lib/generated/graphql';
+import type { GetPlaylistButtonDataQuery } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;

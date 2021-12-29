@@ -11,7 +11,7 @@ import Card from '@components/molecules/card';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import {
+import type {
 	CardCollectionFragment,
 	CardRecordingFragment,
 	CardSequenceFragment,

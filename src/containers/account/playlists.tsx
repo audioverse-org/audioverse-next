@@ -5,11 +5,12 @@ import { useQueryClient } from 'react-query';
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import Checkbox from '@components/molecules/form/checkbox';
 import Input from '@components/molecules/form/input';
+import { useLanguageId } from '@lib/useLanguageId';
+
 import {
 	useAddAccountPlaylistMutation,
 	useGetAccountPlaylistsPageDataQuery,
-} from '@lib/generated/graphql';
-import { useLanguageId } from '@lib/useLanguageId';
+} from './playlists.generated';
 
 // TODO: use this code when building out playlist management
 function Playlists(): JSX.Element {
