@@ -1,4 +1,3 @@
-import { Input, InputAdornment } from '@material-ui/core';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -36,47 +35,41 @@ export default function SearchBar({
 				}}
 				className={clsx(styles.inner, isFocused && styles.focused)}
 			>
-				<Input
-					name="q"
-					type="search"
-					autoComplete="off"
-					value={term}
-					onChange={({ target }) => onChange(target.value)}
-					onFocus={() => setIsFocused(true)}
-					onBlur={() => setIsFocused(false)}
-					disableUnderline
-					startAdornment={
-						<InputAdornment position="start" className={styles.icon}>
-							<IconSearch width={24} height={24} />
-						</InputAdornment>
-					}
-					placeholder={
-						isFocused
-							? ''
-							: intl.formatMessage({
-									id: 'molecule-searchBar__label',
-									defaultMessage: 'Search',
-									description: 'search bar label',
-							  })
-					}
-					endAdornment={
-						term && (
-							<InputAdornment
-								className={term ? '' : styles.clearHidden}
-								position="end"
+				<div className={styles.inputWrapper}>
+					<div className={styles.icon}>
+						<IconSearch width={24} height={24} />
+					</div>
+					<input
+						name="q"
+						type="search"
+						autoComplete="off"
+						value={term}
+						onChange={({ target }) => onChange(target.value)}
+						onFocus={() => setIsFocused(true)}
+						onBlur={() => setIsFocused(false)}
+						placeholder={
+							isFocused
+								? ''
+								: intl.formatMessage({
+										id: 'molecule-searchBar__label',
+										defaultMessage: 'Search',
+										description: 'search bar label',
+								  })
+						}
+					/>
+					{term && (
+						<div className={clsx(styles.clear, term ? '' : styles.clearHidden)}>
+							<a
+								onClick={(e) => {
+									e.preventDefault();
+									onChange('');
+								}}
 							>
-								<a
-									onClick={(e) => {
-										e.preventDefault();
-										onChange('');
-									}}
-								>
-									<IconExit width={24} height={24} />
-								</a>
-							</InputAdornment>
-						)
-					}
-				/>
+								<IconExit width={24} height={24} />
+							</a>
+						</div>
+					)}
+				</div>
 			</form>
 		</div>
 	);

@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
-import { login } from '@lib/api';
+import { login } from '@lib/api/login';
 import { useResetPasswordMutation } from '@lib/generated/graphql';
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';

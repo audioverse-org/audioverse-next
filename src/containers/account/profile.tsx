@@ -8,7 +8,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
 import AccountNav from '@components/organisms/accountNav';
-import { invalidateAndResetUserQueries } from '@lib/api';
+import { invalidateAndResetUserQueries } from '@lib/api/login';
 import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,

@@ -182,22 +182,6 @@ p {
 
 /* Material UI Customizations */
 
-.MuiButton-root.MuiButton-text,
-.MuiButton-root.MuiButton-text:hover {
-	text-decoration: underline;
-	text-underline-offset: 2px;
-}
-
-.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
-	border-radius: 4px;
-	padding: 8px;
-	background-color: $ts-red;
-	color: white;
-	box-shadow: 0 4px 10px 0 #00000026;
-	font-size: 12px;
-	font-weight: 700;
-}
-
 .MuiSlider-root.MuiSlider-colorPrimary {
 	color: $ts-dark;
 	.MuiSlider-thumb {

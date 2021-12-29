@@ -1,4 +1,4 @@
-import { SliderTypeMap } from '@material-ui/core';
+import type { SliderTypeMap } from '@material-ui/core';
 import React from 'react';
 
 // https://material-ui.com/components/slider/#range-slider

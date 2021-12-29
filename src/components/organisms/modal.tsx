@@ -1,6 +1,6 @@
-import { Modal as MuiModal } from '@material-ui/core';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import MuiModal from '@material-ui/core/Modal';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
