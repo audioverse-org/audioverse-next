@@ -14133,563 +14133,101 @@ export type BookFeedDescriptionFragment = {
 };
 
 export const CardBibleChapterFragmentDoc = `
-    fragment cardBibleChapter on BibleChapter {
-  id
-  title
-  url
-}
-    `;
+fragment cardBibleChapter on BibleChapter{id title url}
+`;
 export const PersonLockupFragmentDoc = `
-    fragment personLockup on Person {
-  name
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
+fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+`;
 export const CardRecordingSequenceHatFragmentDoc = `
-    fragment cardRecordingSequenceHat on Recording {
-  sequence {
-    id
-    canonicalPath(useFuturePath: true)
-    contentType
-    image {
-      url(size: 100)
-    }
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
-  writers: persons(role: WRITER) {
-    ...personLockup
-  }
-}
-    ${PersonLockupFragmentDoc}`;
+fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}
+`;
 export const AndMiniplayerFragmentDoc = `
-    fragment andMiniplayer on Recording {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  duration
-  sequence {
-    title
-    contentType
-  }
-  audioFiles {
-    url
-    filesize
-    mimeType
-    duration
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    url
-    filesize
-    mimeType
-    duration
-  }
-  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-    url
-    filesize
-    mimeType
-    duration
-  }
-}
-    `;
+fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}
+`;
 export const TeaseRecordingFragmentDoc = `
-    fragment teaseRecording on Recording {
-  ...andMiniplayer
-  recordingContentType: contentType
-  canonicalPath(useFuturePath: true)
-  persons(role: SPEAKER) {
-    ...personLockup
-  }
-  sequenceIndex
-  sequence {
-    id
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${AndMiniplayerFragmentDoc}
-${PersonLockupFragmentDoc}`;
+fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}
+`;
 export const CardRecordingFragmentDoc = `
-    fragment cardRecording on Recording {
-  ...cardRecordingSequenceHat
-  ...teaseRecording
-}
-    ${CardRecordingSequenceHatFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
+fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}
+`;
 export const CardSequenceFragmentDoc = `
-    fragment cardSequence on Sequence {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  contentType
-  duration
-  summary
-  speakers: persons(role: SPEAKER, orderBy: [{field: NAME, direction: ASC}]) {
-    nodes {
-      ...personLockup
-    }
-  }
-  sequenceWriters: persons(role: WRITER, orderBy: [{field: NAME, direction: ASC}]) {
-    nodes {
-      ...personLockup
-    }
-  }
-  allRecordings: recordings(first: 3) {
-    aggregate {
-      count
-    }
-  }
-}
-    ${PersonLockupFragmentDoc}`;
+fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}
+`;
 export const SponsorLockupFragmentDoc = `
-    fragment sponsorLockup on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
+fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+`;
 export const CardRecordingStackFragmentDoc = `
-    fragment cardRecordingStack on Sequence {
-  contentType
-  favoritedRecordings: recordings(viewerHasFavorited: true) {
-    nodes {
-      sponsor {
-        ...sponsorLockup
-      }
-      ...teaseRecording
-      ...cardRecordingSequenceHat
-    }
-  }
-}
-    ${SponsorLockupFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${CardRecordingSequenceHatFragmentDoc}`;
+fragment cardRecordingStack on Sequence{contentType favoritedRecordings:recordings(viewerHasFavorited:true){nodes{sponsor{...sponsorLockup}...teaseRecording ...cardRecordingSequenceHat}}}
+`;
 export const CardCollectionFragmentDoc = `
-    fragment cardCollection on Collection {
-  id
-  canonicalPath(useFuturePath: true)
-  collectionContentType: contentType
-  title
-  startDate
-  endDate
-  duration
-  image {
-    id
-    url(size: 240, cropMode: DEFAULT)
-  }
-  allSequences: sequences {
-    aggregate {
-      count
-    }
-  }
-  allRecordings: recordings(sequenceId: 0) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}
+`;
 export const CardSponsorFragmentDoc = `
-    fragment cardSponsor on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  image {
-    url(size: 128)
-  }
-  collections(
-    first: 2
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    aggregate {
-      count
-    }
-  }
-  sequences {
-    aggregate {
-      count
-    }
-  }
-  recordings {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}
+`;
 export const CardPersonFragmentDoc = `
-    fragment cardPerson on Person {
-  id
-  name
-  canonicalPath(useFuturePath: true)
-  image {
-    id
-    url(size: 128)
-  }
-  recordings(first: 2, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}
+`;
 export const CardFavoriteFragmentDoc = `
-    fragment cardFavorite on UserFavorite {
-  createdAt
-  entity {
-    __typename
-    ... on Recording {
-      ...cardRecording
-    }
-    ... on Sequence {
-      viewerHasFavorited
-      ...cardSequence
-      ...cardRecordingStack
-    }
-    ... on Collection {
-      ...cardCollection
-    }
-    ... on Sponsor {
-      ...cardSponsor
-    }
-    ... on Person {
-      ...cardPerson
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardRecordingStackFragmentDoc}
-${CardCollectionFragmentDoc}
-${CardSponsorFragmentDoc}
-${CardPersonFragmentDoc}`;
+fragment cardFavorite on UserFavorite{createdAt entity{__typename ...on Recording{...cardRecording}...on Sequence{viewerHasFavorited ...cardSequence ...cardRecordingStack}...on Collection{...cardCollection}...on Sponsor{...cardSponsor}...on Person{...cardPerson}}}
+`;
 export const CardPlaylistFragmentDoc = `
-    fragment cardPlaylist on UserPlaylist {
-  id
-  title
-  recordings(first: 2) {
-    nodes {
-      ...teaseRecording
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${TeaseRecordingFragmentDoc}`;
+fragment cardPlaylist on UserPlaylist{id title recordings(first:2){nodes{...teaseRecording}aggregate{count}}}
+`;
 export const CardPostFragmentDoc = `
-    fragment cardPost on BlogPost {
-  image {
-    url(size: 500, cropMode: MAX_SIZE)
-  }
-  publishDate
-  title
-  teaser
-  canonicalPath(useFuturePath: true)
-  readingDuration
-}
-    `;
+fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}
+`;
 export const CopyrightInfoFragmentDoc = `
-    fragment copyrightInfo on Recording {
-  copyrightYear
-  distributionAgreement {
-    sponsor {
-      title
-    }
-    license {
-      summary
-      image {
-        url(size: 100, cropMode: MAX_SIZE)
-      }
-    }
-  }
-  sponsor {
-    title
-  }
-}
-    `;
+fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}
+`;
 export const CopyrightInfosFragmentDoc = `
-    fragment copyrightInfos on Recording {
-  id
-  copyrightYear
-  distributionAgreement {
-    id
-  }
-  sponsor {
-    id
-  }
-  ...copyrightInfo
-}
-    ${CopyrightInfoFragmentDoc}`;
+fragment copyrightInfos on Recording{id copyrightYear distributionAgreement{id}sponsor{id}...copyrightInfo}
+`;
 export const SequenceNavFragmentDoc = `
-    fragment sequenceNav on Recording {
-  sequencePreviousRecording {
-    canonicalPath(useFuturePath: true)
-  }
-  sequenceNextRecording {
-    canonicalPath(useFuturePath: true)
-  }
-}
-    `;
+fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}
+`;
 export const ButtonDownloadFragmentDoc = `
-    fragment buttonDownload on Recording {
-  isDownloadAllowed
-  videoDownloads: videoFiles(allowedContainers: MP4) {
-    url
-    filesize
-    height
-    width
-  }
-  audioDownloads: audioFiles(allowedContainers: MP3) {
-    url
-    filesize
-    bitrate
-  }
-}
-    `;
+fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}
+`;
 export const ButtonShareRecordingFragmentDoc = `
-    fragment buttonShareRecording on Recording {
-  id
-  title
-  shareUrl
-  speakers: persons(role: SPEAKER) {
-    name
-  }
-}
-    `;
+fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}
+`;
 export const PlayerFragmentDoc = `
-    fragment player on Recording {
-  id
-  title
-  ...andMiniplayer
-  ...buttonDownload
-  ...buttonShareRecording
-}
-    ${AndMiniplayerFragmentDoc}
-${ButtonDownloadFragmentDoc}
-${ButtonShareRecordingFragmentDoc}`;
+fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}
+`;
 export const RecordingFragmentDoc = `
-    fragment recording on Recording {
-  id
-  title
-  contentType
-  speakers: persons(role: SPEAKER) {
-    ...personLockup
-  }
-  writers: persons(role: WRITER) {
-    ...personLockup
-  }
-  attachments {
-    filename
-    url
-  }
-  description
-  imageWithFallback {
-    url(size: 1200)
-  }
-  recordingDate
-  recordingTags {
-    nodes {
-      tag {
-        id
-        name
-      }
-    }
-  }
-  sponsor {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  sequenceIndex
-  sequence {
-    id
-    title
-    contentType
-    canonicalPath(useFuturePath: true)
-    recordings(first: 1000) {
-      nodes {
-        ...teaseRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-  collection {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  transcript {
-    text
-  }
-  canonicalUrl(useFuturePath: true)
-  shareUrl
-  ...sequenceNav
-  ...copyrightInfo
-  ...player
-}
-    ${PersonLockupFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${SequenceNavFragmentDoc}
-${CopyrightInfoFragmentDoc}
-${PlayerFragmentDoc}`;
+fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}
+`;
 export const SequenceFragmentDoc = `
-    fragment sequence on Sequence {
-  id
-  title
-  contentType
-  duration
-  description
-  startDate
-  endDate
-  collection {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  image {
-    url(size: 100)
-  }
-  sponsor {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  shareUrl
-  recordings(first: 250) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}
+`;
 export const TestimoniesFragmentDoc = `
-    fragment testimonies on Testimony {
-  id
-  body
-  author
-}
-    `;
+fragment testimonies on Testimony{id body author}
+`;
 export const PreferencesFragmentDoc = `
-    fragment preferences on User {
-  autoplay
-  language
-  preferredAudioQuality
-  timezone
-}
-    `;
+fragment preferences on User{autoplay language preferredAudioQuality timezone}
+`;
 export const ProfileFragmentDoc = `
-    fragment profile on User {
-  email
-  givenName
-  surname
-  address1
-  address2
-  city
-  province
-  postalCode
-  country
-}
-    `;
+fragment profile on User{email givenName surname address1 address2 city province postalCode country}
+`;
 export const CollectionPivotFragmentDoc = `
-    fragment collectionPivot on Collection {
-  title
-  canonicalPath(useFuturePath: true)
-  contentType
-}
-    `;
+fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}
+`;
 export const PresenterPivotFragmentDoc = `
-    fragment presenterPivot on Person {
-  name
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
+fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+`;
 export const SponsorPivotFragmentDoc = `
-    fragment sponsorPivot on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
+fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+`;
 export const GenerateFeedFragmentDoc = `
-    fragment generateFeed on Recording {
-  id
-  title
-  contentType
-  description
-  publishDate
-  audioFiles {
-    id
-    url
-    filesize
-    duration
-    mimeType
-    bitrate
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    id
-    url
-    filesize
-    duration
-    mimeType
-    bitrate
-    container
-  }
-  persons(role: SPEAKER) {
-    name
-  }
-  sequence {
-    title
-  }
-  sponsor {
-    title
-  }
-}
-    `;
+fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}
+`;
 export const BookFeedDescriptionFragmentDoc = `
-    fragment bookFeedDescription on Sequence {
-  title
-  recordings(first: 25) {
-    nodes {
-      authors: persons(role: WRITER) {
-        name
-      }
-      narrators: persons(role: SPEAKER) {
-        name
-      }
-    }
-  }
-}
-    `;
+fragment bookFeedDescription on Sequence{title recordings(first:25){nodes{authors:persons(role:WRITER){name}narrators:persons(role:SPEAKER){name}}}}
+`;
 export const GetWithAuthGuardDataDocument = `
-    query getWithAuthGuardData {
-  me {
-    user {
-      email
-      name
-    }
-  }
-}
-    `;
+query getWithAuthGuardData{me{user{email name}}}
+`;
 export const useGetWithAuthGuardDataQuery = <
 	TData = GetWithAuthGuardDataQuery,
 	TError = unknown
@@ -14706,15 +14244,8 @@ export const useGetWithAuthGuardDataQuery = <
 		options
 	);
 export const LoginForgotPasswordDocument = `
-    mutation loginForgotPassword($email: String!) {
-  userRecover(email: $email) {
-    errors {
-      message
-    }
-    success
-  }
-}
-    `;
+mutation loginForgotPassword($email:String!){userRecover(email:$email){errors{message}success}}
+`;
 export const useLoginForgotPasswordMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -14740,20 +14271,8 @@ export const useLoginForgotPasswordMutation = <
 		options
 	);
 export const GetPlaylistButtonDataDocument = `
-    query getPlaylistButtonData($language: Language!, $recordingId: ID!) {
-  me {
-    user {
-      playlists(language: $language) {
-        nodes {
-          id
-          title
-          hasRecording(id: $recordingId)
-        }
-      }
-    }
-  }
-}
-    `;
+query getPlaylistButtonData($language:Language!$recordingId:ID!){me{user{playlists(language:$language){nodes{id title hasRecording(id:$recordingId)}}}}}
+`;
 export const useGetPlaylistButtonDataQuery = <
 	TData = GetPlaylistButtonDataQuery,
 	TError = unknown
@@ -14770,14 +14289,12 @@ export const useGetPlaylistButtonDataQuery = <
 		options
 	);
 export const GetNotFoundPageDataDocument = `
-    query getNotFoundPageData {
-  websiteRecentRecordings(language: ENGLISH, first: 3) {
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getNotFoundPageData{websiteRecentRecordings(language:ENGLISH first:3){nodes{...cardRecording}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetNotFoundPageDataQuery = <
 	TData = GetNotFoundPageDataQuery,
 	TError = unknown
@@ -14794,14 +14311,8 @@ export const useGetNotFoundPageDataQuery = <
 		options
 	);
 export const GetRecordingPlaybackProgressDocument = `
-    query getRecordingPlaybackProgress($id: ID!) {
-  recording(id: $id) {
-    viewerPlaybackSession {
-      positionPercentage
-    }
-  }
-}
-    `;
+query getRecordingPlaybackProgress($id:ID!){recording(id:$id){viewerPlaybackSession{positionPercentage}}}
+`;
 export const useGetRecordingPlaybackProgressQuery = <
 	TData = GetRecordingPlaybackProgressQuery,
 	TError = unknown
@@ -14818,19 +14329,8 @@ export const useGetRecordingPlaybackProgressQuery = <
 		options
 	);
 export const RecordingPlaybackProgressSetDocument = `
-    mutation recordingPlaybackProgressSet($id: ID!, $percentage: Float!) {
-  recordingPlaybackSessionAdvance(
-    recordingId: $id
-    input: {positionPercentage: $percentage}
-  ) {
-    recording {
-      viewerPlaybackSession {
-        positionPercentage
-      }
-    }
-  }
-}
-    `;
+mutation recordingPlaybackProgressSet($id:ID!$percentage:Float!){recordingPlaybackSessionAdvance(recordingId:$id input:{positionPercentage:$percentage}){recording{viewerPlaybackSession{positionPercentage}}}}
+`;
 export const useRecordingPlaybackProgressSetMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -14856,15 +14356,8 @@ export const useRecordingPlaybackProgressSetMutation = <
 		options
 	);
 export const GetAboutPageDataDocument = `
-    query getAboutPageData($id: ID!) {
-  page(id: $id) {
-    title
-    body
-    type
-    slug
-  }
-}
-    `;
+query getAboutPageData($id:ID!){page(id:$id){title body type slug}}
+`;
 export const useGetAboutPageDataQuery = <
 	TData = GetAboutPageDataQuery,
 	TError = unknown
@@ -14881,14 +14374,8 @@ export const useGetAboutPageDataQuery = <
 		options
 	);
 export const GetAboutStaticPathsDocument = `
-    query getAboutStaticPaths($language: Language!, $first: Int!) {
-  pages(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getAboutStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetAboutStaticPathsQuery = <
 	TData = GetAboutStaticPathsQuery,
 	TError = unknown
@@ -14905,26 +14392,8 @@ export const useGetAboutStaticPathsQuery = <
 		options
 	);
 export const GetAccountPlaylistsPageDataDocument = `
-    query getAccountPlaylistsPageData($language: Language!) {
-  me {
-    user {
-      playlists(language: $language) {
-        nodes {
-          id
-          title
-          isPublic
-          summary
-          recordings {
-            aggregate {
-              count
-            }
-          }
-        }
-      }
-    }
-  }
-}
-    `;
+query getAccountPlaylistsPageData($language:Language!){me{user{playlists(language:$language){nodes{id title isPublic summary recordings{aggregate{count}}}}}}}
+`;
 export const useGetAccountPlaylistsPageDataQuery = <
 	TData = GetAccountPlaylistsPageDataQuery,
 	TError = unknown
@@ -14941,14 +14410,8 @@ export const useGetAccountPlaylistsPageDataQuery = <
 		options
 	);
 export const AddAccountPlaylistDocument = `
-    mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
-  playlistAdd(
-    input: {isPublic: $isPublic, language: $language, recordingIds: $recordingIds, summary: $summary, title: $title}
-  ) {
-    id
-  }
-}
-    `;
+mutation addAccountPlaylist($isPublic:Boolean!$language:Language!$recordingIds:[ID!]$summary:String$title:String!){playlistAdd(input:{isPublic:$isPublic language:$language recordingIds:$recordingIds summary:$summary title:$title}){id}}
+`;
 export const useAddAccountPlaylistMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -14974,14 +14437,8 @@ export const useAddAccountPlaylistMutation = <
 		options
 	);
 export const GetAccountPreferencesDataDocument = `
-    query getAccountPreferencesData {
-  me {
-    user {
-      ...preferences
-    }
-  }
-}
-    ${PreferencesFragmentDoc}`;
+query getAccountPreferencesData{me{user{...preferences}}}
+${PreferencesFragmentDoc}`;
 export const useGetAccountPreferencesDataQuery = <
 	TData = GetAccountPreferencesDataQuery,
 	TError = unknown
@@ -14998,21 +14455,8 @@ export const useGetAccountPreferencesDataQuery = <
 		options
 	);
 export const UpdateAccountPreferencesDocument = `
-    mutation updateAccountPreferences($autoplay: Boolean!, $language: Language!, $preferredAudioQuality: RecordingQuality!, $timezone: Timezone!) {
-  updateMyProfile(
-    input: {autoplay: $autoplay, language: $language, preferredAudioQuality: $preferredAudioQuality, timezone: $timezone}
-  ) {
-    errors {
-      message
-    }
-    authenticatedUser {
-      user {
-        ...preferences
-      }
-    }
-  }
-}
-    ${PreferencesFragmentDoc}`;
+mutation updateAccountPreferences($autoplay:Boolean!$language:Language!$preferredAudioQuality:RecordingQuality!$timezone:Timezone!){updateMyProfile(input:{autoplay:$autoplay language:$language preferredAudioQuality:$preferredAudioQuality timezone:$timezone}){errors{message}authenticatedUser{user{...preferences}}}}
+${PreferencesFragmentDoc}`;
 export const useUpdateAccountPreferencesMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -15038,14 +14482,8 @@ export const useUpdateAccountPreferencesMutation = <
 		options
 	);
 export const GetProfileDataDocument = `
-    query getProfileData {
-  me {
-    user {
-      ...profile
-    }
-  }
-}
-    ${ProfileFragmentDoc}`;
+query getProfileData{me{user{...profile}}}
+${ProfileFragmentDoc}`;
 export const useGetProfileDataQuery = <
 	TData = GetProfileDataQuery,
 	TError = unknown
@@ -15062,21 +14500,8 @@ export const useGetProfileDataQuery = <
 		options
 	);
 export const UpdateProfileDataDocument = `
-    mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String) {
-  updateMyProfile(
-    input: {email: $email, password: $password, givenName: $givenName, surname: $surname}
-  ) {
-    errors {
-      message
-    }
-    authenticatedUser {
-      user {
-        ...profile
-      }
-    }
-  }
-}
-    ${ProfileFragmentDoc}`;
+mutation updateProfileData($email:String$password:String$givenName:String$surname:String){updateMyProfile(input:{email:$email password:$password givenName:$givenName surname:$surname}){errors{message}authenticatedUser{user{...profile}}}}
+${ProfileFragmentDoc}`;
 export const useUpdateProfileDataMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -15102,16 +14527,8 @@ export const useUpdateProfileDataMutation = <
 		options
 	);
 export const RegisterDocument = `
-    mutation register($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
-  signup(
-    input: {email: $email, password: $password, givenName: $firstName, surname: $lastName}
-  ) {
-    errors {
-      message
-    }
-  }
-}
-    `;
+mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){errors{message}}}
+`;
 export const useRegisterMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		RegisterMutation,
@@ -15129,19 +14546,8 @@ export const useRegisterMutation = <TError = unknown, TContext = unknown>(
 		options
 	);
 export const RegisterSocialDocument = `
-    mutation registerSocial($socialId: String!, $socialName: UserSocialServiceName!, $socialToken: String!, $givenName: String, $surname: String) {
-  loginSocial(
-    input: {socialId: $socialId, socialName: $socialName, socialToken: $socialToken, givenName: $givenName, surname: $surname}
-  ) {
-    authenticatedUser {
-      sessionToken
-    }
-    errors {
-      message
-    }
-  }
-}
-    `;
+mutation registerSocial($socialId:String!$socialName:UserSocialServiceName!$socialToken:String!$givenName:String$surname:String){loginSocial(input:{socialId:$socialId socialName:$socialName socialToken:$socialToken givenName:$givenName surname:$surname}){authenticatedUser{sessionToken}errors{message}}}
+`;
 export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		RegisterSocialMutation,
@@ -15164,14 +14570,8 @@ export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
 		options
 	);
 export const RegisterIsLoggedInDocument = `
-    query registerIsLoggedIn {
-  me {
-    user {
-      email
-    }
-  }
-}
-    `;
+query registerIsLoggedIn{me{user{email}}}
+`;
 export const useRegisterIsLoggedInQuery = <
 	TData = RegisterIsLoggedInQuery,
 	TError = unknown
@@ -15188,15 +14588,8 @@ export const useRegisterIsLoggedInQuery = <
 		options
 	);
 export const ResetPasswordDocument = `
-    mutation resetPassword($token: String!, $password: String!) {
-  userReset(password: $password, token: $token) {
-    errors {
-      message
-    }
-    success
-  }
-}
-    `;
+mutation resetPassword($token:String!$password:String!){userReset(password:$password token:$token){errors{message}success}}
+`;
 export const useResetPasswordMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		ResetPasswordMutation,
@@ -15219,14 +14612,13 @@ export const useResetPasswordMutation = <TError = unknown, TContext = unknown>(
 		options
 	);
 export const GetAudiobookDetailPageDataDocument = `
-    query getAudiobookDetailPageData($id: ID!) {
-  audiobook(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
+query getAudiobookDetailPageData($id:ID!){audiobook(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}
+${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
 	TData = GetAudiobookDetailPageDataQuery,
 	TError = unknown
@@ -15243,24 +14635,8 @@ export const useGetAudiobookDetailPageDataQuery = <
 		options
 	);
 export const GetAudiobookFeedDataDocument = `
-    query getAudiobookFeedData($id: ID!) {
-  audiobook(id: $id) {
-    id
-    title
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-    ...bookFeedDescription
-  }
-}
-    ${GenerateFeedFragmentDoc}
+query getAudiobookFeedData($id:ID!){audiobook(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}...bookFeedDescription}}
+${GenerateFeedFragmentDoc}
 ${BookFeedDescriptionFragmentDoc}`;
 export const useGetAudiobookFeedDataQuery = <
 	TData = GetAudiobookFeedDataQuery,
@@ -15278,14 +14654,8 @@ export const useGetAudiobookFeedDataQuery = <
 		options
 	);
 export const GetAudiobookDetailPathsDataDocument = `
-    query getAudiobookDetailPathsData($language: Language!, $first: Int) {
-  audiobooks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getAudiobookDetailPathsData($language:Language!$first:Int){audiobooks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetAudiobookDetailPathsDataQuery = <
 	TData = GetAudiobookDetailPathsDataQuery,
 	TError = unknown
@@ -15302,22 +14672,9 @@ export const useGetAudiobookDetailPathsDataQuery = <
 		options
 	);
 export const GetAudiobookListPageDataDocument = `
-    query getAudiobookListPageData($language: Language!, $first: Int = 12, $offset: Int = 0) {
-  audiobooks(
-    language: $language
-    first: $first
-    offset: $offset
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
+query getAudiobookListPageData($language:Language!$first:Int=12$offset:Int=0){audiobooks(language:$language first:$first offset:$offset orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetAudiobookListPageDataQuery = <
 	TData = GetAudiobookListPageDataQuery,
 	TError = unknown
@@ -15334,14 +14691,8 @@ export const useGetAudiobookListPageDataQuery = <
 		options
 	);
 export const GetAudiobookListPathsDataDocument = `
-    query getAudiobookListPathsData($language: Language!) {
-  audiobooks(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getAudiobookListPathsData($language:Language!){audiobooks(language:$language){aggregate{count}}}
+`;
 export const useGetAudiobookListPathsDataQuery = <
 	TData = GetAudiobookListPathsDataQuery,
 	TError = unknown
@@ -15358,13 +14709,16 @@ export const useGetAudiobookListPathsDataQuery = <
 		options
 	);
 export const GetAudiobookTrackDetailDataDocument = `
-    query getAudiobookTrackDetailData($id: ID!) {
-  audiobookTrack(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
+query getAudiobookTrackDetailData($id:ID!){audiobookTrack(id:$id){...recording language}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetAudiobookTrackDetailDataQuery = <
 	TData = GetAudiobookTrackDetailDataQuery,
 	TError = unknown
@@ -15381,14 +14735,8 @@ export const useGetAudiobookTrackDetailDataQuery = <
 		options
 	);
 export const GetAudiobookTrackDetailStaticPathsDocument = `
-    query getAudiobookTrackDetailStaticPaths($language: Language!, $first: Int) {
-  audiobookTracks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getAudiobookTrackDetailStaticPaths($language:Language!$first:Int){audiobookTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetAudiobookTrackDetailStaticPathsQuery = <
 	TData = GetAudiobookTrackDetailStaticPathsQuery,
 	TError = unknown
@@ -15409,22 +14757,8 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
 		options
 	);
 export const GetBlogPageDataDocument = `
-    query getBlogPageData($language: Language!, $offset: Int = 0, $first: Int = 12) {
-  blogPosts(
-    language: $language
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-    first: $first
-    offset: $offset
-  ) {
-    nodes {
-      ...cardPost
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardPostFragmentDoc}`;
+query getBlogPageData($language:Language!$offset:Int=0$first:Int=12){blogPosts(language:$language orderBy:{field:PUBLISHED_AT direction:DESC}first:$first offset:$offset){nodes{...cardPost}aggregate{count}}}
+${CardPostFragmentDoc}`;
 export const useGetBlogPageDataQuery = <
 	TData = GetBlogPageDataQuery,
 	TError = unknown
@@ -15441,14 +14775,8 @@ export const useGetBlogPageDataQuery = <
 		options
 	);
 export const GetBlogPathsDataDocument = `
-    query getBlogPathsData($language: Language!) {
-  blogPosts(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getBlogPathsData($language:Language!){blogPosts(language:$language){aggregate{count}}}
+`;
 export const useGetBlogPathsDataQuery = <
 	TData = GetBlogPathsDataQuery,
 	TError = unknown
@@ -15465,32 +14793,8 @@ export const useGetBlogPathsDataQuery = <
 		options
 	);
 export const GetBlogDetailDataDocument = `
-    query getBlogDetailData($id: ID!, $language: Language!) {
-  blogPost(id: $id) {
-    id
-    title
-    image {
-      url(size: 2100, cropMode: MAX_SIZE)
-    }
-    body
-    canonicalPath(useFuturePath: true)
-    canonicalUrl(useFuturePath: true)
-    language
-    publishDate
-    readingDuration
-    teaser
-  }
-  blogPosts(
-    language: $language
-    first: 5
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardPost
-    }
-  }
-}
-    ${CardPostFragmentDoc}`;
+query getBlogDetailData($id:ID!$language:Language!){blogPost(id:$id){id title image{url(size:2100 cropMode:MAX_SIZE)}body canonicalPath(useFuturePath:true)canonicalUrl(useFuturePath:true)language publishDate readingDuration teaser}blogPosts(language:$language first:5 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardPost}}}
+${CardPostFragmentDoc}`;
 export const useGetBlogDetailDataQuery = <
 	TData = GetBlogDetailDataQuery,
 	TError = unknown
@@ -15507,14 +14811,8 @@ export const useGetBlogDetailDataQuery = <
 		options
 	);
 export const GetBlogDetailStaticPathsDocument = `
-    query getBlogDetailStaticPaths($language: Language!, $first: Int) {
-  blogPosts(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getBlogDetailStaticPaths($language:Language!$first:Int){blogPosts(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetBlogDetailStaticPathsQuery = <
 	TData = GetBlogDetailStaticPathsQuery,
 	TError = unknown
@@ -15531,75 +14829,15 @@ export const useGetBlogDetailStaticPathsQuery = <
 		options
 	);
 export const GetCollectionDetailPageDataDocument = `
-    query getCollectionDetailPageData($id: ID!) {
-  collection(id: $id) {
-    id
-    title
-    contentType
-    startDate
-    endDate
-    duration
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    location
-    image {
-      url(size: 1000, cropMode: MAX_SIZE)
-    }
-    sponsor {
-      id
-      title
-      canonicalPath(useFuturePath: true)
-      ...sponsorLockup
-    }
-    persons(
-      first: 3
-      role: SPEAKER
-      orderBy: [{field: RECORDING_COUNT, direction: DESC}, {field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardPerson
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    sequences(first: 3, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardSequence
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    recordings(
-      first: 3
-      sequenceId: 0
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-}
-    ${SponsorLockupFragmentDoc}
+query getCollectionDetailPageData($id:ID!){collection(id:$id){id title contentType startDate endDate duration description canonicalUrl(useFuturePath:true)language shareUrl location image{url(size:1000 cropMode:MAX_SIZE)}sponsor{id title canonicalPath(useFuturePath:true)...sponsorLockup}persons(first:3 role:SPEAKER orderBy:[{field:RECORDING_COUNT direction:DESC}{field:RECORDING_DOWNLOADS_ALL_TIME direction:DESC}]){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}sequences(first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}recordings(first:3 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}}}
+${SponsorLockupFragmentDoc}
 ${CardPersonFragmentDoc}
 ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionDetailPageDataQuery = <
 	TData = GetCollectionDetailPageDataQuery,
 	TError = unknown
@@ -15616,25 +14854,8 @@ export const useGetCollectionDetailPageDataQuery = <
 		options
 	);
 export const GetCollectionFeedDataDocument = `
-    query getCollectionFeedData($id: ID!) {
-  collection(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    image {
-      url(size: 600)
-    }
-    recordings(first: 25, orderBy: [{field: RECORDED_AT, direction: ASC}]) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getCollectionFeedData($id:ID!){collection(id:$id){title canonicalUrl(useFuturePath:true)language image{url(size:600)}recordings(first:25 orderBy:[{field:RECORDED_AT direction:ASC}]){aggregate{count}nodes{...generateFeed}}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetCollectionFeedDataQuery = <
 	TData = GetCollectionFeedDataQuery,
 	TError = unknown
@@ -15651,15 +14872,8 @@ export const useGetCollectionFeedDataQuery = <
 		options
 	);
 export const GetCollectionDetailPathsDataDocument = `
-    query getCollectionDetailPathsData($language: Language!, $first: Int) {
-  collections(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getCollectionDetailPathsData($language:Language!$first:Int){collections(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetCollectionDetailPathsDataQuery = <
 	TData = GetCollectionDetailPathsDataQuery,
 	TError = unknown
@@ -15676,22 +14890,8 @@ export const useGetCollectionDetailPathsDataQuery = <
 		options
 	);
 export const GetCollectionListPageDataDocument = `
-    query getCollectionListPageData($language: Language!, $offset: Int, $first: Int) {
-  collections(
-    language: $language
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}`;
+query getCollectionListPageData($language:Language!$offset:Int$first:Int){collections(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+${CardCollectionFragmentDoc}`;
 export const useGetCollectionListPageDataQuery = <
 	TData = GetCollectionListPageDataQuery,
 	TError = unknown
@@ -15708,14 +14908,8 @@ export const useGetCollectionListPageDataQuery = <
 		options
 	);
 export const GetCollectionListPathsDataDocument = `
-    query getCollectionListPathsData($language: Language!) {
-  collections(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getCollectionListPathsData($language:Language!){collections(language:$language){aggregate{count}}}
+`;
 export const useGetCollectionListPathsDataQuery = <
 	TData = GetCollectionListPathsDataQuery,
 	TError = unknown
@@ -15732,26 +14926,8 @@ export const useGetCollectionListPathsDataQuery = <
 		options
 	);
 export const GetCollectionPresentersPageDataDocument = `
-    query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    persons(
-      role: SPEAKER
-      offset: $offset
-      first: $first
-      orderBy: [{field: NAME, direction: ASC}]
-    ) {
-      nodes {
-        ...cardPerson
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
+query getCollectionPresentersPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot persons(role:SPEAKER offset:$offset first:$first orderBy:[{field:NAME direction:ASC}]){nodes{...cardPerson}aggregate{count}}}}
+${CollectionPivotFragmentDoc}
 ${CardPersonFragmentDoc}`;
 export const useGetCollectionPresentersPageDataQuery = <
 	TData = GetCollectionPresentersPageDataQuery,
@@ -15769,26 +14945,10 @@ export const useGetCollectionPresentersPageDataQuery = <
 		options
 	);
 export const GetCollectionSequencesPageDataDocument = `
-    query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    sequences(
-      offset: $offset
-      first: $first
-      orderBy: [{field: TITLE, direction: ASC}]
-    ) {
-      nodes {
-        ...cardSequence
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+query getCollectionSequencesPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot sequences(offset:$offset first:$first orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}}
+${CollectionPivotFragmentDoc}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetCollectionSequencesPageDataQuery = <
 	TData = GetCollectionSequencesPageDataQuery,
 	TError = unknown
@@ -15805,27 +14965,13 @@ export const useGetCollectionSequencesPageDataQuery = <
 		options
 	);
 export const GetCollectionTeachingsPageDataDocument = `
-    query getCollectionTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    recordings(
-      offset: $offset
-      first: $first
-      sequenceId: 0
-      orderBy: [{field: TITLE, direction: ASC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+query getCollectionTeachingsPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot recordings(offset:$offset first:$first sequenceId:0 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardRecording}aggregate{count}}}}
+${CollectionPivotFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionTeachingsPageDataQuery = <
 	TData = GetCollectionTeachingsPageDataQuery,
 	TError = unknown
@@ -15842,14 +14988,8 @@ export const useGetCollectionTeachingsPageDataQuery = <
 		options
 	);
 export const SubmitContactPageDocument = `
-    mutation submitContactPage($language: Language!, $recipient: PageContactRecipient!, $firstName: String!, $lastName: String!, $email: String!, $body: String!) {
-  pageContactSubmit(
-    input: {language: $language, recipient: $recipient, givenName: $firstName, surname: $lastName, email: $email, body: $body}
-  ) {
-    success
-  }
-}
-    `;
+mutation submitContactPage($language:Language!$recipient:PageContactRecipient!$firstName:String!$lastName:String!$email:String!$body:String!){pageContactSubmit(input:{language:$language recipient:$recipient givenName:$firstName surname:$lastName email:$email body:$body}){success}}
+`;
 export const useSubmitContactPageMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -15875,62 +15015,12 @@ export const useSubmitContactPageMutation = <
 		options
 	);
 export const GetDiscoverPageDataDocument = `
-    query getDiscoverPageData($language: Language!) {
-  recentTeachings: sermons(
-    language: $language
-    first: 6
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  trendingTeachings: popularRecordings(language: $language, first: 6) {
-    nodes {
-      recording {
-        ...cardRecording
-      }
-    }
-  }
-  storySeasons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-      recordings(first: 2) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-  }
-  conferences(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-      sequences(first: 2, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
-        nodes {
-          ...cardSequence
-        }
-      }
-      recordings(
-        first: 2
-        sequenceId: 0
-        orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
+query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetDiscoverPageDataQuery = <
@@ -15949,75 +15039,9 @@ export const useGetDiscoverPageDataQuery = <
 		options
 	);
 export const GetDiscoverCollectionsPageDataDocument = `
-    query getDiscoverCollectionsPageData($language: Language!) {
-  sequence(id: 175) {
-    ...cardSequence
-  }
-  persons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_COUNT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardPerson
-    }
-  }
-  serieses(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  conferences(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-  }
-  sponsors(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_COUNT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSponsor
-    }
-  }
-  audiobooks(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  storySeasons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  musicAlbums(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}
+query getDiscoverCollectionsPageData($language:Language!){sequence(id:175){...cardSequence}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}
 ${CardPersonFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}`;
@@ -16037,28 +15061,12 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 		options
 	);
 export const GetHomeStaticPropsDocument = `
-    query getHomeStaticProps($language: Language!) {
-  websiteRecentRecordings(language: $language) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  testimonies(language: $language, first: 3) {
-    nodes {
-      ...testimonies
-    }
-  }
-  blogPosts(
-    language: $language
-    first: 6
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardPost
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
+query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${TestimoniesFragmentDoc}
 ${CardPostFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
@@ -16077,31 +15085,12 @@ export const useGetHomeStaticPropsQuery = <
 		options
 	);
 export const GetLibraryHistoryPageDataDocument = `
-    query getLibraryHistoryPageData($language: Language!, $first: Int!, $offset: Int!) {
-  me {
-    user {
-      downloadHistory(
-        language: $language
-        first: $first
-        offset: $offset
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          recording {
-            ...cardRecording
-          }
-        }
-        pageInfo {
-          hasNextPage
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getLibraryHistoryPageData($language:Language!$first:Int!$offset:Int!){me{user{downloadHistory(language:$language first:$first offset:$offset orderBy:[{field:CREATED_AT direction:DESC}]){aggregate{count}nodes{recording{...cardRecording}}pageInfo{hasNextPage}}}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryHistoryPageDataQuery = <
 	TData = GetLibraryHistoryPageDataQuery,
 	TError = unknown
@@ -16118,32 +15107,19 @@ export const useGetLibraryHistoryPageDataQuery = <
 		options
 	);
 export const GetLibraryDataDocument = `
-    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $hasVideo: Boolean, $recordingDuration: IntegerRangeInput, $recordingContentType: RecordingContentType, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus, $sortField: FavoritesSortableField!, $sortDirection: OrderByDirection!) {
-  me {
-    user {
-      favorites(
-        language: $language
-        first: $first
-        offset: $offset
-        groupSequences: $groupSequences
-        recordingDuration: $recordingDuration
-        recordingContentType: $recordingContentType
-        hasVideo: $hasVideo
-        types: $types
-        viewerPlaybackStatus: $viewerPlaybackStatus
-        orderBy: [{field: $sortField, direction: $sortDirection}]
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          ...cardFavorite
-        }
-      }
-    }
-  }
-}
-    ${CardFavoriteFragmentDoc}`;
+query getLibraryData($language:Language!$first:Int!$offset:Int!$groupSequences:Boolean!$hasVideo:Boolean$recordingDuration:IntegerRangeInput$recordingContentType:RecordingContentType$types:[FavoritableCatalogEntityType!]$viewerPlaybackStatus:RecordingViewerPlaybackStatus$sortField:FavoritesSortableField!$sortDirection:OrderByDirection!){me{user{favorites(language:$language first:$first offset:$offset groupSequences:$groupSequences recordingDuration:$recordingDuration recordingContentType:$recordingContentType hasVideo:$hasVideo types:$types viewerPlaybackStatus:$viewerPlaybackStatus orderBy:[{field:$sortField direction:$sortDirection}]){aggregate{count}nodes{...cardFavorite}}}}}
+${CardFavoriteFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${CardSequenceFragmentDoc}
+${CardRecordingStackFragmentDoc}
+${SponsorLockupFragmentDoc}
+${CardCollectionFragmentDoc}
+${CardSponsorFragmentDoc}
+${CardPersonFragmentDoc}`;
 export const useGetLibraryDataQuery = <
 	TData = GetLibraryDataQuery,
 	TError = unknown
@@ -16160,26 +15136,12 @@ export const useGetLibraryDataQuery = <
 		options
 	);
 export const GetLibraryPlaylistPageDataDocument = `
-    query getLibraryPlaylistPageData($id: ID!) {
-  me {
-    user {
-      playlist(id: $id) {
-        title
-        createdAt
-        summary
-        recordings(offset: 0, first: 1500) {
-          nodes {
-            ...cardRecording
-          }
-          aggregate {
-            count
-          }
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getLibraryPlaylistPageData($id:ID!){me{user{playlist(id:$id){title createdAt summary recordings(offset:0 first:1500){nodes{...cardRecording}aggregate{count}}}}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryPlaylistPageDataQuery = <
 	TData = GetLibraryPlaylistPageDataQuery,
 	TError = unknown
@@ -16196,26 +15158,11 @@ export const useGetLibraryPlaylistPageDataQuery = <
 		options
 	);
 export const GetLibraryPlaylistsDataDocument = `
-    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
-  me {
-    user {
-      playlists(
-        language: $language
-        offset: $offset
-        first: $first
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardPlaylist
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardPlaylistFragmentDoc}`;
+query getLibraryPlaylistsData($language:Language!$offset:Int$first:Int){me{user{playlists(language:$language offset:$offset first:$first orderBy:[{field:CREATED_AT direction:DESC}]){nodes{...cardPlaylist}aggregate{count}}}}}
+${CardPlaylistFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetLibraryPlaylistsDataQuery = <
 	TData = GetLibraryPlaylistsDataQuery,
 	TError = unknown
@@ -16232,27 +15179,8 @@ export const useGetLibraryPlaylistsDataQuery = <
 		options
 	);
 export const GetPresenterAppearsPageDataDocument = `
-    query getPresenterAppearsPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-  }
-  collections(
-    language: $language
-    offset: $offset
-    first: $first
-    persons: [{personId: $id, role: SPEAKER}]
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
+query getPresenterAppearsPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}collections(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+${PresenterPivotFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetPresenterAppearsPageDataQuery = <
 	TData = GetPresenterAppearsPageDataQuery,
@@ -16270,106 +15198,12 @@ export const useGetPresenterAppearsPageDataQuery = <
 		options
 	);
 export const GetPresenterDetailPageDataDocument = `
-    query getPresenterDetailPageData($id: ID!, $language: Language!) {
-  person(id: $id) {
-    id
-    name
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    imageWithFallback {
-      url(size: 128)
-    }
-    website
-    sermons: recordings(contentType: SERMON) {
-      aggregate {
-        count
-      }
-    }
-    audiobookTracks: recordings(contentType: AUDIOBOOK_TRACK) {
-      aggregate {
-        count
-      }
-    }
-    musicTracks: recordings(contentType: MUSIC_TRACK) {
-      aggregate {
-        count
-      }
-    }
-    stories: recordings(contentType: STORY) {
-      aggregate {
-        count
-      }
-    }
-    essentialRecordings: recordings(
-      first: 3
-      isFeatured: true
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-    }
-    recentRecordings: recordings(
-      first: 3
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    topRecordings: recordings(
-      first: 3
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-  sequences(
-    language: $language
-    persons: [{personId: $id}]
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  collections(
-    language: $language
-    persons: [{personId: $id}]
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-      sequences(persons: [{personId: $id}], orderBy: [{field: TITLE, direction: ASC}]) {
-        nodes {
-          ...cardSequence
-        }
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
+query getPresenterDetailPageData($id:ID!$language:Language!){person(id:$id){id name description canonicalUrl(useFuturePath:true)language shareUrl imageWithFallback{url(size:128)}website sermons:recordings(contentType:SERMON){aggregate{count}}audiobookTracks:recordings(contentType:AUDIOBOOK_TRACK){aggregate{count}}musicTracks:recordings(contentType:MUSIC_TRACK){aggregate{count}}stories:recordings(contentType:STORY){aggregate{count}}essentialRecordings:recordings(first:3 isFeatured:true orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}}recentRecordings:recordings(first:3 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}topRecordings:recordings(first:3 orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}pageInfo{hasNextPage}}}sequences(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(persons:[{personId:$id}]orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}}}pageInfo{hasNextPage}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetPresenterDetailPageDataQuery = <
@@ -16388,15 +15222,8 @@ export const useGetPresenterDetailPageDataQuery = <
 		options
 	);
 export const GetPresenterDetailPathsDataDocument = `
-    query getPresenterDetailPathsData($language: Language!, $first: Int) {
-  persons(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getPresenterDetailPathsData($language:Language!$first:Int){persons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetPresenterDetailPathsDataQuery = <
 	TData = GetPresenterDetailPathsDataQuery,
 	TError = unknown
@@ -16413,29 +15240,8 @@ export const useGetPresenterDetailPathsDataQuery = <
 		options
 	);
 export const GetPresenterListPageDataDocument = `
-    query getPresenterListPageData($language: Language!, $startsWith: String) {
-  persons(
-    language: $language
-    startsWith: $startsWith
-    first: 1500
-    orderBy: [{field: NAME, direction: ASC}]
-  ) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-      givenName
-      surname
-      image {
-        url(size: 128)
-      }
-      summary
-    }
-  }
-  personLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
+query getPresenterListPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}}personLetterCounts(language:$language){letter count}}
+`;
 export const useGetPresenterListPageDataQuery = <
 	TData = GetPresenterListPageDataQuery,
 	TError = unknown
@@ -16452,13 +15258,8 @@ export const useGetPresenterListPageDataQuery = <
 		options
 	);
 export const GetPresenterListPathsDataDocument = `
-    query getPresenterListPathsData($language: Language!) {
-  personLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
+query getPresenterListPathsData($language:Language!){personLetterCounts(language:$language){letter count}}
+`;
 export const useGetPresenterListPathsDataQuery = <
 	TData = GetPresenterListPathsDataQuery,
 	TError = unknown
@@ -16475,26 +15276,13 @@ export const useGetPresenterListPathsDataQuery = <
 		options
 	);
 export const GetPresenterRecordingsPageDataDocument = `
-    query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+query getPresenterRecordingsPageData($id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}
+${PresenterPivotFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterRecordingsPageDataQuery = <
 	TData = GetPresenterRecordingsPageDataQuery,
 	TError = unknown
@@ -16511,23 +15299,8 @@ export const useGetPresenterRecordingsPageDataQuery = <
 		options
 	);
 export const GetPresenterRecordingsFeedDataDocument = `
-    query getPresenterRecordingsFeedData($id: ID!) {
-  person(id: $id) {
-    id
-    name
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getPresenterRecordingsFeedData($id:ID!){person(id:$id){id name image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetPresenterRecordingsFeedDataQuery = <
 	TData = GetPresenterRecordingsFeedDataQuery,
 	TError = unknown
@@ -16544,28 +15317,10 @@ export const useGetPresenterRecordingsFeedDataQuery = <
 		options
 	);
 export const GetPresenterSequencesPageDataDocument = `
-    query getPresenterSequencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-  }
-  sequences(
-    language: $language
-    offset: $offset
-    first: $first
-    persons: [{personId: $id, role: SPEAKER}]
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
+${PresenterPivotFragmentDoc}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetPresenterSequencesPageDataQuery = <
 	TData = GetPresenterSequencesPageDataQuery,
 	TError = unknown
@@ -16582,27 +15337,13 @@ export const useGetPresenterSequencesPageDataQuery = <
 		options
 	);
 export const GetPresenterTopPageDataDocument = `
-    query getPresenterTopPageData($id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    language
-    ...presenterPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+query getPresenterTopPageData($id:ID!$offset:Int$first:Int){person(id:$id){id language ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}
+${PresenterPivotFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterTopPageDataQuery = <
 	TData = GetPresenterTopPageDataQuery,
 	TError = unknown
@@ -16619,15 +15360,8 @@ export const useGetPresenterTopPageDataQuery = <
 		options
 	);
 export const GetMediaReleaseFormsPageDataDocument = `
-    query getMediaReleaseFormsPageData($id: ID!) {
-  mediaReleaseForm(id: $id) {
-    id
-    title
-    summary
-    isClosed
-  }
-}
-    `;
+query getMediaReleaseFormsPageData($id:ID!){mediaReleaseForm(id:$id){id title summary isClosed}}
+`;
 export const useGetMediaReleaseFormsPageDataQuery = <
 	TData = GetMediaReleaseFormsPageDataQuery,
 	TError = unknown
@@ -16644,14 +15378,8 @@ export const useGetMediaReleaseFormsPageDataQuery = <
 		options
 	);
 export const GetMediaReleaseFormsPathsDataDocument = `
-    query getMediaReleaseFormsPathsData($language: Language!, $first: Int!) {
-  mediaReleaseForms(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
+query getMediaReleaseFormsPathsData($language:Language!$first:Int!){mediaReleaseForms(language:$language first:$first){nodes{id}}}
+`;
 export const useGetMediaReleaseFormsPathsDataQuery = <
 	TData = GetMediaReleaseFormsPathsDataQuery,
 	TError = unknown
@@ -16668,19 +15396,8 @@ export const useGetMediaReleaseFormsPathsDataQuery = <
 		options
 	);
 export const SubmitMediaReleaseFormDocument = `
-    mutation submitMediaReleaseForm($mediaReleaseFormId: ID!, $mediaReleasePerson: MediaReleasePersonCreateInput!, $comments: String!) {
-  mediaReleaseCreate(
-    input: {mediaReleaseFormId: $mediaReleaseFormId, mediaReleasePerson: $mediaReleasePerson, notes: $comments}
-  ) {
-    errors {
-      message
-    }
-    mediaRelease {
-      id
-    }
-  }
-}
-    `;
+mutation submitMediaReleaseForm($mediaReleaseFormId:ID!$mediaReleasePerson:MediaReleasePersonCreateInput!$comments:String!){mediaReleaseCreate(input:{mediaReleaseFormId:$mediaReleaseFormId mediaReleasePerson:$mediaReleasePerson notes:$comments}){errors{message}mediaRelease{id}}}
+`;
 export const useSubmitMediaReleaseFormMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -16706,17 +15423,8 @@ export const useSubmitMediaReleaseFormMutation = <
 		options
 	);
 export const GetSearchResultsCollectionsDocument = `
-    query getSearchResultsCollections($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  collections(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardCollection
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}`;
+query getSearchResultsCollections($language:Language!$term:String!$first:Int!$offset:Int!){collections(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardCollection}}}
+${CardCollectionFragmentDoc}`;
 export const useGetSearchResultsCollectionsQuery = <
 	TData = GetSearchResultsCollectionsQuery,
 	TError = unknown
@@ -16733,64 +15441,12 @@ export const useGetSearchResultsCollectionsQuery = <
 		options
 	);
 export const GetSearchResultsPageDataDocument = `
-    query getSearchResultsPageData($language: Language!, $term: String!) {
-  recordings(language: $language, search: $term, first: 6) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  sequences(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSequence
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  collections(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardCollection
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  sponsors(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSponsor
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  persons(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardPerson
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
+query getSearchResultsPageData($language:Language!$term:String!){recordings(language:$language search:$term first:6){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}sequences(language:$language search:$term first:3){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language search:$term first:3){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage}}sponsors(language:$language search:$term first:3){aggregate{count}nodes{...cardSponsor}pageInfo{hasNextPage}}persons(language:$language search:$term first:3){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}
@@ -16811,17 +15467,8 @@ export const useGetSearchResultsPageDataQuery = <
 		options
 	);
 export const GetSearchResultsPersonsDocument = `
-    query getSearchResultsPersons($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  persons(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardPerson
-    }
-  }
-}
-    ${CardPersonFragmentDoc}`;
+query getSearchResultsPersons($language:Language!$term:String!$first:Int!$offset:Int!){persons(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardPerson}}}
+${CardPersonFragmentDoc}`;
 export const useGetSearchResultsPersonsQuery = <
 	TData = GetSearchResultsPersonsQuery,
 	TError = unknown
@@ -16838,17 +15485,9 @@ export const useGetSearchResultsPersonsQuery = <
 		options
 	);
 export const GetSearchResultsSequencesDocument = `
-    query getSearchResultsSequences($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  sequences(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSequence
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
+query getSearchResultsSequences($language:Language!$term:String!$first:Int!$offset:Int!){sequences(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSequence}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSearchResultsSequencesQuery = <
 	TData = GetSearchResultsSequencesQuery,
 	TError = unknown
@@ -16865,17 +15504,8 @@ export const useGetSearchResultsSequencesQuery = <
 		options
 	);
 export const GetSearchResultsSponsorsDocument = `
-    query getSearchResultsSponsors($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  sponsors(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSponsor
-    }
-  }
-}
-    ${CardSponsorFragmentDoc}`;
+query getSearchResultsSponsors($language:Language!$term:String!$first:Int!$offset:Int!){sponsors(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSponsor}}}
+${CardSponsorFragmentDoc}`;
 export const useGetSearchResultsSponsorsQuery = <
 	TData = GetSearchResultsSponsorsQuery,
 	TError = unknown
@@ -16892,17 +15522,12 @@ export const useGetSearchResultsSponsorsQuery = <
 		options
 	);
 export const GetSearchResultsRecordingsDocument = `
-    query getSearchResultsRecordings($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  recordings(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getSearchResultsRecordings($language:Language!$term:String!$first:Int!$offset:Int!){recordings(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardRecording}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSearchResultsRecordingsQuery = <
 	TData = GetSearchResultsRecordingsQuery,
 	TError = unknown
@@ -16919,14 +15544,13 @@ export const useGetSearchResultsRecordingsQuery = <
 		options
 	);
 export const GetSeriesDetailPageDataDocument = `
-    query getSeriesDetailPageData($id: ID!) {
-  series(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
+query getSeriesDetailPageData($id:ID!){series(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}
+${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSeriesDetailPageDataQuery = <
 	TData = GetSeriesDetailPageDataQuery,
 	TError = unknown
@@ -16943,22 +15567,8 @@ export const useGetSeriesDetailPageDataQuery = <
 		options
 	);
 export const GetSeriesFeedDataDocument = `
-    query getSeriesFeedData($id: ID!) {
-  series(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getSeriesFeedData($id:ID!){series(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){aggregate{count}nodes{...generateFeed}}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetSeriesFeedDataQuery = <
 	TData = GetSeriesFeedDataQuery,
 	TError = unknown
@@ -16975,14 +15585,8 @@ export const useGetSeriesFeedDataQuery = <
 		options
 	);
 export const GetSeriesDetailPathsDataDocument = `
-    query getSeriesDetailPathsData($language: Language!, $first: Int) {
-  serieses(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getSeriesDetailPathsData($language:Language!$first:Int){serieses(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetSeriesDetailPathsDataQuery = <
 	TData = GetSeriesDetailPathsDataQuery,
 	TError = unknown
@@ -16999,22 +15603,9 @@ export const useGetSeriesDetailPathsDataQuery = <
 		options
 	);
 export const GetSeriesListPageDataDocument = `
-    query getSeriesListPageData($language: Language!, $offset: Int, $first: Int) {
-  serieses(
-    language: $language
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
+query getSeriesListPageData($language:Language!$offset:Int$first:Int){serieses(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:ASC}]){nodes{...cardSequence}aggregate{count}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSeriesListPageDataQuery = <
 	TData = GetSeriesListPageDataQuery,
 	TError = unknown
@@ -17031,14 +15622,8 @@ export const useGetSeriesListPageDataQuery = <
 		options
 	);
 export const GetSeriesListPathsDataDocument = `
-    query getSeriesListPathsData($language: Language!) {
-  serieses(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getSeriesListPathsData($language:Language!){serieses(language:$language){aggregate{count}}}
+`;
 export const useGetSeriesListPathsDataQuery = <
 	TData = GetSeriesListPathsDataQuery,
 	TError = unknown
@@ -17055,13 +15640,16 @@ export const useGetSeriesListPathsDataQuery = <
 		options
 	);
 export const GetSermonDetailDataDocument = `
-    query getSermonDetailData($id: ID!) {
-  sermon(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
+query getSermonDetailData($id:ID!){sermon(id:$id){...recording language}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetSermonDetailDataQuery = <
 	TData = GetSermonDetailDataQuery,
 	TError = unknown
@@ -17078,15 +15666,8 @@ export const useGetSermonDetailDataQuery = <
 		options
 	);
 export const GetSermonDetailStaticPathsDocument = `
-    query getSermonDetailStaticPaths($language: Language!, $first: Int) {
-  sermons(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getSermonDetailStaticPaths($language:Language!$first:Int){sermons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetSermonDetailStaticPathsQuery = <
 	TData = GetSermonDetailStaticPathsQuery,
 	TError = unknown
@@ -17103,23 +15684,12 @@ export const useGetSermonDetailStaticPathsQuery = <
 		options
 	);
 export const GetSermonListPageDataDocument = `
-    query getSermonListPageData($language: Language!, $hasVideo: Boolean, $first: Int, $offset: Int) {
-  sermons(
-    language: $language
-    hasVideo: $hasVideo
-    first: $first
-    offset: $offset
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardRecording
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getSermonListPageData($language:Language!$hasVideo:Boolean$first:Int$offset:Int){sermons(language:$language hasVideo:$hasVideo first:$first offset:$offset orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSermonListPageDataQuery = <
 	TData = GetSermonListPageDataQuery,
 	TError = unknown
@@ -17136,18 +15706,8 @@ export const useGetSermonListPageDataQuery = <
 		options
 	);
 export const GetSermonListFeedDataDocument = `
-    query getSermonListFeedData($language: Language!) {
-  sermons(
-    language: $language
-    first: 25
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...generateFeed
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getSermonListFeedData($language:Language!){sermons(language:$language first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetSermonListFeedDataQuery = <
 	TData = GetSermonListFeedDataQuery,
 	TError = unknown
@@ -17164,14 +15724,8 @@ export const useGetSermonListFeedDataQuery = <
 		options
 	);
 export const GetSermonListPagePathsDataDocument = `
-    query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
-  sermons(language: $language, hasVideo: $hasVideo) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getSermonListPagePathsData($language:Language!$hasVideo:Boolean){sermons(language:$language hasVideo:$hasVideo){aggregate{count}}}
+`;
 export const useGetSermonListPagePathsDataQuery = <
 	TData = GetSermonListPagePathsDataQuery,
 	TError = unknown
@@ -17188,16 +15742,12 @@ export const useGetSermonListPagePathsDataQuery = <
 		options
 	);
 export const GetTrendingTeachingsPageDataDocument = `
-    query getTrendingTeachingsPageData($language: Language!) {
-  recordings: popularRecordings(language: $language, first: 24) {
-    nodes {
-      recording {
-        ...cardRecording
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language first:24){nodes{recording{...cardRecording}}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetTrendingTeachingsPageDataQuery = <
 	TData = GetTrendingTeachingsPageDataQuery,
 	TError = unknown
@@ -17214,14 +15764,13 @@ export const useGetTrendingTeachingsPageDataQuery = <
 		options
 	);
 export const GetSongAlbumsDetailPageDataDocument = `
-    query getSongAlbumsDetailPageData($id: ID!) {
-  musicAlbum(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
+query getSongAlbumsDetailPageData($id:ID!){musicAlbum(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}
+${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsDetailPageDataQuery = <
 	TData = GetSongAlbumsDetailPageDataQuery,
 	TError = unknown
@@ -17238,19 +15787,8 @@ export const useGetSongAlbumsDetailPageDataQuery = <
 		options
 	);
 export const GetSongAlbumFeedDataDocument = `
-    query getSongAlbumFeedData($id: ID!) {
-  musicAlbum(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getSongAlbumFeedData($id:ID!){musicAlbum(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetSongAlbumFeedDataQuery = <
 	TData = GetSongAlbumFeedDataQuery,
 	TError = unknown
@@ -17267,14 +15805,8 @@ export const useGetSongAlbumFeedDataQuery = <
 		options
 	);
 export const GetSongAlbumsDetailPathsDataDocument = `
-    query getSongAlbumsDetailPathsData($language: Language!, $first: Int) {
-  musicAlbums(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getSongAlbumsDetailPathsData($language:Language!$first:Int){musicAlbums(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetSongAlbumsDetailPathsDataQuery = <
 	TData = GetSongAlbumsDetailPathsDataQuery,
 	TError = unknown
@@ -17291,41 +15823,13 @@ export const useGetSongAlbumsDetailPathsDataQuery = <
 		options
 	);
 export const GetSongAlbumsListPageDataDocument = `
-    query getSongAlbumsListPageData($language: Language!) {
-  musicAlbums(
-    language: $language
-    first: 1000
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-      recordings(first: 2) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-    aggregate {
-      count
-    }
-  }
-  musicBookTags(language: $language, first: 1000) {
-    nodes {
-      id
-      name
-      recordings(first: 1, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-        nodes {
-          ...cardRecording
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+query getSongAlbumsListPageData($language:Language!){musicAlbums(language:$language first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}aggregate{count}}musicBookTags(language:$language first:1000){nodes{id name recordings(first:1 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsListPageDataQuery = <
 	TData = GetSongAlbumsListPageDataQuery,
 	TError = unknown
@@ -17342,19 +15846,12 @@ export const useGetSongAlbumsListPageDataQuery = <
 		options
 	);
 export const GetSongBooksDetailPageDataDocument = `
-    query getSongBooksDetailPageData($language: Language!, $book: String!) {
-  musicTracks(
-    language: $language
-    tagName: $book
-    first: 1000
-    orderBy: [{field: PUBLISHED_AT, direction: ASC}]
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
+query getSongBooksDetailPageData($language:Language!$book:String!){musicTracks(language:$language tagName:$book first:1000 orderBy:[{field:PUBLISHED_AT direction:ASC}]){nodes{...cardRecording}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongBooksDetailPageDataQuery = <
 	TData = GetSongBooksDetailPageDataQuery,
 	TError = unknown
@@ -17371,24 +15868,16 @@ export const useGetSongBooksDetailPageDataQuery = <
 		options
 	);
 export const GetBookSongDetailDataDocument = `
-    query getBookSongDetailData($language: Language!, $id: ID!, $book: String!) {
-  musicTrack(id: $id) {
-    ...recording
-    language
-  }
-  recordings(
-    language: $language
-    tagName: $book
-    first: 1000
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...teaseRecording
-    }
-  }
-}
-    ${RecordingFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
+query getBookSongDetailData($language:Language!$id:ID!$book:String!){musicTrack(id:$id){...recording language}recordings(language:$language tagName:$book first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...teaseRecording}}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetBookSongDetailDataQuery = <
 	TData = GetBookSongDetailDataQuery,
 	TError = unknown
@@ -17405,13 +15894,16 @@ export const useGetBookSongDetailDataQuery = <
 		options
 	);
 export const GetSongDetailDataDocument = `
-    query getSongDetailData($id: ID!) {
-  musicTrack(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
+query getSongDetailData($id:ID!){musicTrack(id:$id){...recording language}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetSongDetailDataQuery = <
 	TData = GetSongDetailDataQuery,
 	TError = unknown
@@ -17428,14 +15920,8 @@ export const useGetSongDetailDataQuery = <
 		options
 	);
 export const GetSongDetailStaticPathsDocument = `
-    query getSongDetailStaticPaths($language: Language!, $first: Int) {
-  musicTracks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getSongDetailStaticPaths($language:Language!$first:Int){musicTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetSongDetailStaticPathsQuery = <
 	TData = GetSongDetailStaticPathsQuery,
 	TError = unknown
@@ -17452,26 +15938,8 @@ export const useGetSongDetailStaticPathsQuery = <
 		options
 	);
 export const GetSponsorConferencesPageDataDocument = `
-    query getSponsorConferencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    ...sponsorPivot
-  }
-  conferences(
-    language: $language
-    sponsorId: $id
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
+query getSponsorConferencesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}conferences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+${SponsorPivotFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetSponsorConferencesPageDataQuery = <
 	TData = GetSponsorConferencesPageDataQuery,
@@ -17489,14 +15957,8 @@ export const useGetSponsorConferencesPageDataQuery = <
 		options
 	);
 export const GetSponsorConferencesPathsDataDocument = `
-    query getSponsorConferencesPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
+query getSponsorConferencesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}
+`;
 export const useGetSponsorConferencesPathsDataQuery = <
 	TData = GetSponsorConferencesPathsDataQuery,
 	TError = unknown
@@ -17513,61 +15975,14 @@ export const useGetSponsorConferencesPathsDataQuery = <
 		options
 	);
 export const GetSponsorDetailPageDataDocument = `
-    query getSponsorDetailPageData($id: ID!) {
-  sponsor(id: $id) {
-    id
-    title
-    location
-    website
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    image {
-      url(size: 128)
-    }
-    collections(
-      first: 3
-      contentType: null
-      orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardCollection
-      }
-    }
-    sequences(
-      first: 3
-      contentType: null
-      orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardSequence
-      }
-    }
-    recordings(
-      first: 3
-      collectionId: 0
-      sequenceId: 0
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}
+query getSponsorDetailPageData($id:ID!){sponsor(id:$id){id title location website description canonicalUrl(useFuturePath:true)language shareUrl image{url(size:128)}collections(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardCollection}}sequences(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardSequence}}recordings(first:3 collectionId:0 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}}}}
+${CardCollectionFragmentDoc}
 ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorDetailPageDataQuery = <
 	TData = GetSponsorDetailPageDataQuery,
 	TError = unknown
@@ -17584,14 +15999,8 @@ export const useGetSponsorDetailPageDataQuery = <
 		options
 	);
 export const GetSponsorDetailPathsDataDocument = `
-    query getSponsorDetailPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getSponsorDetailPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetSponsorDetailPathsDataQuery = <
 	TData = GetSponsorDetailPathsDataQuery,
 	TError = unknown
@@ -17608,27 +16017,8 @@ export const useGetSponsorDetailPathsDataQuery = <
 		options
 	);
 export const GetSponsorListPageDataDocument = `
-    query getSponsorListPageData($language: Language!, $startsWith: String) {
-  sponsors(
-    language: $language
-    startsWith: $startsWith
-    first: 1500
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-      title
-      image {
-        url(size: 128)
-      }
-    }
-  }
-  sponsorLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
+query getSponsorListPageData($language:Language!$startsWith:String){sponsors(language:$language startsWith:$startsWith first:1500 orderBy:[{field:TITLE direction:ASC}]){nodes{canonicalPath(useFuturePath:true)title image{url(size:128)}}}sponsorLetterCounts(language:$language){letter count}}
+`;
 export const useGetSponsorListPageDataQuery = <
 	TData = GetSponsorListPageDataQuery,
 	TError = unknown
@@ -17645,13 +16035,8 @@ export const useGetSponsorListPageDataQuery = <
 		options
 	);
 export const GetSponsorListPathsDataDocument = `
-    query getSponsorListPathsData($language: Language!) {
-  sponsorLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
+query getSponsorListPathsData($language:Language!){sponsorLetterCounts(language:$language){letter count}}
+`;
 export const useGetSponsorListPathsDataQuery = <
 	TData = GetSponsorListPathsDataQuery,
 	TError = unknown
@@ -17668,27 +16053,10 @@ export const useGetSponsorListPathsDataQuery = <
 		options
 	);
 export const GetSponsorSeriesPageDataDocument = `
-    query getSponsorSeriesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    ...sponsorPivot
-  }
-  sequences(
-    language: $language
-    sponsorId: $id
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+query getSponsorSeriesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}sequences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
+${SponsorPivotFragmentDoc}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSponsorSeriesPageDataQuery = <
 	TData = GetSponsorSeriesPageDataQuery,
 	TError = unknown
@@ -17705,14 +16073,8 @@ export const useGetSponsorSeriesPageDataQuery = <
 		options
 	);
 export const GetSponsorSeriesPathsDataDocument = `
-    query getSponsorSeriesPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
+query getSponsorSeriesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}
+`;
 export const useGetSponsorSeriesPathsDataQuery = <
 	TData = GetSponsorSeriesPathsDataQuery,
 	TError = unknown
@@ -17729,26 +16091,13 @@ export const useGetSponsorSeriesPathsDataQuery = <
 		options
 	);
 export const GetSponsorTeachingsPageDataDocument = `
-    query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    id
-    ...sponsorPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: RECORDED_AT, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+query getSponsorTeachingsPageData($id:ID!$offset:Int$first:Int){sponsor(id:$id){id ...sponsorPivot recordings(offset:$offset first:$first orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}
+${SponsorPivotFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
 	TData = GetSponsorTeachingsPageDataQuery,
 	TError = unknown
@@ -17765,19 +16114,8 @@ export const useGetSponsorTeachingsPageDataQuery = <
 		options
 	);
 export const GetSponsorTeachingsFeedDataDocument = `
-    query getSponsorTeachingsFeedData($id: ID!) {
-  sponsor(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25, orderBy: [{field: RECORDED_AT, direction: DESC}]) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
+query getSponsorTeachingsFeedData($id:ID!){sponsor(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...generateFeed}}}}
+${GenerateFeedFragmentDoc}`;
 export const useGetSponsorTeachingsFeedDataQuery = <
 	TData = GetSponsorTeachingsFeedDataQuery,
 	TError = unknown
@@ -17794,14 +16132,8 @@ export const useGetSponsorTeachingsFeedDataQuery = <
 		options
 	);
 export const GetSponsorTeachingsPathsDataDocument = `
-    query getSponsorTeachingsPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
+query getSponsorTeachingsPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}
+`;
 export const useGetSponsorTeachingsPathsDataQuery = <
 	TData = GetSponsorTeachingsPathsDataQuery,
 	TError = unknown
@@ -17818,14 +16150,13 @@ export const useGetSponsorTeachingsPathsDataQuery = <
 		options
 	);
 export const GetStoryAlbumDetailPageDataDocument = `
-    query getStoryAlbumDetailPageData($id: ID!) {
-  storySeason(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
+query getStoryAlbumDetailPageData($id:ID!){storySeason(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}
+${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetStoryAlbumDetailPageDataQuery = <
 	TData = GetStoryAlbumDetailPageDataQuery,
 	TError = unknown
@@ -17842,24 +16173,8 @@ export const useGetStoryAlbumDetailPageDataQuery = <
 		options
 	);
 export const GetStoryAlbumFeedDataDocument = `
-    query getStoryAlbumFeedData($id: ID!) {
-  storySeason(id: $id) {
-    id
-    title
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-    language
-    ...bookFeedDescription
-  }
-}
-    ${GenerateFeedFragmentDoc}
+query getStoryAlbumFeedData($id:ID!){storySeason(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)recordings(first:25){nodes{...generateFeed}}language ...bookFeedDescription}}
+${GenerateFeedFragmentDoc}
 ${BookFeedDescriptionFragmentDoc}`;
 export const useGetStoryAlbumFeedDataQuery = <
 	TData = GetStoryAlbumFeedDataQuery,
@@ -17877,14 +16192,8 @@ export const useGetStoryAlbumFeedDataQuery = <
 		options
 	);
 export const GetStoryAlbumDetailPathsDataDocument = `
-    query getStoryAlbumDetailPathsData($language: Language!, $first: Int) {
-  storySeasons(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getStoryAlbumDetailPathsData($language:Language!$first:Int){storySeasons(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetStoryAlbumDetailPathsDataQuery = <
 	TData = GetStoryAlbumDetailPathsDataQuery,
 	TError = unknown
@@ -17901,17 +16210,9 @@ export const useGetStoryAlbumDetailPathsDataQuery = <
 		options
 	);
 export const GetStoriesAlbumsPageDataDocument = `
-    query getStoriesAlbumsPageData($language: Language!, $first: Int, $offset: Int) {
-  storySeasons(language: $language, first: $first, offset: $offset) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
+query getStoriesAlbumsPageData($language:Language!$first:Int$offset:Int){storySeasons(language:$language first:$first offset:$offset){nodes{...cardSequence}aggregate{count}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetStoriesAlbumsPageDataQuery = <
 	TData = GetStoriesAlbumsPageDataQuery,
 	TError = unknown
@@ -17928,14 +16229,8 @@ export const useGetStoriesAlbumsPageDataQuery = <
 		options
 	);
 export const GetStoriesAlbumsPathDataDocument = `
-    query getStoriesAlbumsPathData($language: Language!) {
-  storySeasons(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getStoriesAlbumsPathData($language:Language!){storySeasons(language:$language){aggregate{count}}}
+`;
 export const useGetStoriesAlbumsPathDataQuery = <
 	TData = GetStoriesAlbumsPathDataQuery,
 	TError = unknown
@@ -17952,13 +16247,16 @@ export const useGetStoriesAlbumsPathDataQuery = <
 		options
 	);
 export const GetStoryDetailDataDocument = `
-    query getStoryDetailData($id: ID!) {
-  story(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
+query getStoryDetailData($id:ID!){story(id:$id){...recording language}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetStoryDetailDataQuery = <
 	TData = GetStoryDetailDataQuery,
 	TError = unknown
@@ -17975,14 +16273,8 @@ export const useGetStoryDetailDataQuery = <
 		options
 	);
 export const GetStoryDetailStaticPathsDocument = `
-    query getStoryDetailStaticPaths($language: Language!, $first: Int) {
-  stories(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
+query getStoryDetailStaticPaths($language:Language!$first:Int){stories(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+`;
 export const useGetStoryDetailStaticPathsQuery = <
 	TData = GetStoryDetailStaticPathsQuery,
 	TError = unknown
@@ -17999,24 +16291,8 @@ export const useGetStoryDetailStaticPathsQuery = <
 		options
 	);
 export const GetTestimoniesPageDataDocument = `
-    query getTestimoniesPageData($language: Language!, $offset: Int, $first: Int) {
-  testimonies(
-    language: $language
-    first: $first
-    offset: $offset
-    orderBy: {direction: DESC, field: WRITTEN_DATE}
-  ) {
-    nodes {
-      author
-      body
-      writtenDate
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getTestimoniesPageData($language:Language!$offset:Int$first:Int){testimonies(language:$language first:$first offset:$offset orderBy:{direction:DESC field:WRITTEN_DATE}){nodes{author body writtenDate}aggregate{count}}}
+`;
 export const useGetTestimoniesPageDataQuery = <
 	TData = GetTestimoniesPageDataQuery,
 	TError = unknown
@@ -18033,14 +16309,8 @@ export const useGetTestimoniesPageDataQuery = <
 		options
 	);
 export const GetTestimoniesPathsDataDocument = `
-    query getTestimoniesPathsData($language: Language!) {
-  testimonies(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
+query getTestimoniesPathsData($language:Language!){testimonies(language:$language){aggregate{count}}}
+`;
 export const useGetTestimoniesPathsDataQuery = <
 	TData = GetTestimoniesPathsDataQuery,
 	TError = unknown
@@ -18057,12 +16327,8 @@ export const useGetTestimoniesPathsDataQuery = <
 		options
 	);
 export const CollectionFavoriteDocument = `
-    mutation collectionFavorite($id: ID!) {
-  favorited: collectionFavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation collectionFavorite($id:ID!){favorited:collectionFavorite(id:$id){success}}
+`;
 export const useCollectionFavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18088,13 +16354,8 @@ export const useCollectionFavoriteMutation = <
 		options
 	);
 export const CollectionIsFavoritedDocument = `
-    query collectionIsFavorited($id: ID!) {
-  collection(id: $id) {
-    viewerHasFavorited
-    viewerPlaybackCompletedPercentage
-  }
-}
-    `;
+query collectionIsFavorited($id:ID!){collection(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage}}
+`;
 export const useCollectionIsFavoritedQuery = <
 	TData = CollectionIsFavoritedQuery,
 	TError = unknown
@@ -18111,12 +16372,8 @@ export const useCollectionIsFavoritedQuery = <
 		options
 	);
 export const CollectionUnfavoriteDocument = `
-    mutation collectionUnfavorite($id: ID!) {
-  favorited: collectionUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation collectionUnfavorite($id:ID!){favorited:collectionUnfavorite(id:$id){success}}
+`;
 export const useCollectionUnfavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18142,14 +16399,8 @@ export const useCollectionUnfavoriteMutation = <
 		options
 	);
 export const LoginDocument = `
-    mutation login($email: String!, $password: String!) {
-  login(input: {email: $email, password: $password}) {
-    authenticatedUser {
-      sessionToken
-    }
-  }
-}
-    `;
+mutation login($email:String!$password:String!){login(input:{email:$email password:$password}){authenticatedUser{sessionToken}}}
+`;
 export const useLoginMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		LoginMutation,
@@ -18167,12 +16418,8 @@ export const useLoginMutation = <TError = unknown, TContext = unknown>(
 		options
 	);
 export const PersonFavoriteDocument = `
-    mutation personFavorite($id: ID!) {
-  favorited: personFavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation personFavorite($id:ID!){favorited:personFavorite(id:$id){success}}
+`;
 export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		PersonFavoriteMutation,
@@ -18195,12 +16442,8 @@ export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
 		options
 	);
 export const PersonIsFavoritedDocument = `
-    query personIsFavorited($id: ID!) {
-  person(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
+query personIsFavorited($id:ID!){person(id:$id){viewerHasFavorited}}
+`;
 export const usePersonIsFavoritedQuery = <
 	TData = PersonIsFavoritedQuery,
 	TError = unknown
@@ -18217,12 +16460,8 @@ export const usePersonIsFavoritedQuery = <
 		options
 	);
 export const PersonUnfavoriteDocument = `
-    mutation personUnfavorite($id: ID!) {
-  favorited: personUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation personUnfavorite($id:ID!){favorited:personUnfavorite(id:$id){success}}
+`;
 export const usePersonUnfavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18248,12 +16487,8 @@ export const usePersonUnfavoriteMutation = <
 		options
 	);
 export const RecordingFavoriteDocument = `
-    mutation recordingFavorite($id: ID!) {
-  favorited: recordingFavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation recordingFavorite($id:ID!){favorited:recordingFavorite(id:$id){success}}
+`;
 export const useRecordingFavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18279,12 +16514,8 @@ export const useRecordingFavoriteMutation = <
 		options
 	);
 export const RecordingIsFavoritedDocument = `
-    query recordingIsFavorited($id: ID!) {
-  recording(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
+query recordingIsFavorited($id:ID!){recording(id:$id){viewerHasFavorited}}
+`;
 export const useRecordingIsFavoritedQuery = <
 	TData = RecordingIsFavoritedQuery,
 	TError = unknown
@@ -18301,12 +16532,8 @@ export const useRecordingIsFavoritedQuery = <
 		options
 	);
 export const RecordingUnfavoriteDocument = `
-    mutation recordingUnfavorite($id: ID!) {
-  favorited: recordingUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation recordingUnfavorite($id:ID!){favorited:recordingUnfavorite(id:$id){success}}
+`;
 export const useRecordingUnfavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18332,12 +16559,8 @@ export const useRecordingUnfavoriteMutation = <
 		options
 	);
 export const SequenceFavoriteDocument = `
-    mutation sequenceFavorite($id: ID!) {
-  favorited: sequenceFavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation sequenceFavorite($id:ID!){favorited:sequenceFavorite(id:$id){success}}
+`;
 export const useSequenceFavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18363,18 +16586,8 @@ export const useSequenceFavoriteMutation = <
 		options
 	);
 export const SequenceIsFavoritedDocument = `
-    query sequenceIsFavorited($id: ID!) {
-  sequence(id: $id) {
-    viewerHasFavorited
-    viewerPlaybackCompletedPercentage
-    recordings(viewerHasFavorited: true) {
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    `;
+query sequenceIsFavorited($id:ID!){sequence(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage recordings(viewerHasFavorited:true){aggregate{count}}}}
+`;
 export const useSequenceIsFavoritedQuery = <
 	TData = SequenceIsFavoritedQuery,
 	TError = unknown
@@ -18391,12 +16604,8 @@ export const useSequenceIsFavoritedQuery = <
 		options
 	);
 export const SequenceUnfavoriteDocument = `
-    mutation sequenceUnfavorite($id: ID!) {
-  favorited: sequenceUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation sequenceUnfavorite($id:ID!){favorited:sequenceUnfavorite(id:$id){success}}
+`;
 export const useSequenceUnfavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18422,12 +16631,8 @@ export const useSequenceUnfavoriteMutation = <
 		options
 	);
 export const SponsorFavoriteDocument = `
-    mutation sponsorFavorite($id: ID!) {
-  favorited: sponsorFavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation sponsorFavorite($id:ID!){favorited:sponsorFavorite(id:$id){success}}
+`;
 export const useSponsorFavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18453,12 +16658,8 @@ export const useSponsorFavoriteMutation = <
 		options
 	);
 export const SponsorIsFavoritedDocument = `
-    query sponsorIsFavorited($id: ID!) {
-  sponsor(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
+query sponsorIsFavorited($id:ID!){sponsor(id:$id){viewerHasFavorited}}
+`;
 export const useSponsorIsFavoritedQuery = <
 	TData = SponsorIsFavoritedQuery,
 	TError = unknown
@@ -18475,12 +16676,8 @@ export const useSponsorIsFavoritedQuery = <
 		options
 	);
 export const SponsorUnfavoriteDocument = `
-    mutation sponsorUnfavorite($id: ID!) {
-  favorited: sponsorUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
+mutation sponsorUnfavorite($id:ID!){favorited:sponsorUnfavorite(id:$id){success}}
+`;
 export const useSponsorUnfavoriteMutation = <
 	TError = unknown,
 	TContext = unknown
@@ -18506,14 +16703,8 @@ export const useSponsorUnfavoriteMutation = <
 		options
 	);
 export const AddPlaylistDocument = `
-    mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
-  playlistAdd(
-    input: {language: $language, title: $title, isPublic: $isPublic, recordingIds: $recordingIds}
-  ) {
-    id
-  }
-}
-    `;
+mutation addPlaylist($language:Language!$title:String!$isPublic:Boolean!$recordingIds:[ID!]){playlistAdd(input:{language:$language title:$title isPublic:$isPublic recordingIds:$recordingIds}){id}}
+`;
 export const useAddPlaylistMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
 		AddPlaylistMutation,
