@@ -1,6 +1,10 @@
 import * as Types from '../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../components/templates/andMiniplayer.generated';
 import { TestimoniesFragmentDoc } from '../components/organisms/testimonies.generated';
 import { CardPostFragmentDoc } from '../components/molecules/card/post.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -129,6 +133,10 @@ export const GetHomeStaticPropsDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${TestimoniesFragmentDoc}
 ${CardPostFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
@@ -148,6 +156,7 @@ export const useGetHomeStaticPropsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetHomeStaticPropsDocument = `query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}`;
 export async function getHomeStaticProps<T>(
 	variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 ): Promise<GetHomeStaticPropsQuery> {

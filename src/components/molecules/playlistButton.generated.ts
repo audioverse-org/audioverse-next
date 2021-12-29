@@ -64,6 +64,7 @@ export const useGetPlaylistButtonDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPlaylistButtonDataDocument = `query getPlaylistButtonData($language:Language!$recordingId:ID!){me{user{playlists(language:$language){nodes{id title hasRecording(id:$recordingId)}}}}}`;
 export async function getPlaylistButtonData<T>(
 	variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
 ): Promise<GetPlaylistButtonDataQuery> {

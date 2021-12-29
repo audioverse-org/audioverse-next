@@ -1,7 +1,14 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { RecordingFragmentDoc } from '../../../components/organisms/recording.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
 import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
+import { SequenceNavFragmentDoc } from '../../../components/molecules/sequenceNav.generated';
+import { CopyrightInfoFragmentDoc } from '../../../components/molecules/copyrightInfo.generated';
+import { PlayerFragmentDoc } from '../../../components/molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../../../components/molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/buttonShareRecording.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetBookSongDetailDataQueryVariables = Types.Exact<{
@@ -287,7 +294,14 @@ export const GetBookSongDetailDataDocument = `
   }
 }
     ${RecordingFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetBookSongDetailDataQuery = <
 	TData = GetBookSongDetailDataQuery,
 	TError = unknown
@@ -305,6 +319,7 @@ export const useGetBookSongDetailDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetBookSongDetailDataDocument = `query getBookSongDetailData($language:Language!$id:ID!$book:String!){musicTrack(id:$id){...recording language}recordings(language:$language tagName:$book first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...teaseRecording}}}`;
 export async function getBookSongDetailData<T>(
 	variables: ExactAlt<T, GetBookSongDetailDataQueryVariables>
 ): Promise<GetBookSongDetailDataQuery> {

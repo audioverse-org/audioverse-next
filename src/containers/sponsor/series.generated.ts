@@ -2,6 +2,7 @@ import * as Types from '../../lib/generated/graphql';
 
 import { SponsorPivotFragmentDoc } from './pivot.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSponsorSeriesPageDataQueryVariables = Types.Exact<{
@@ -109,7 +110,8 @@ export const GetSponsorSeriesPageDataDocument = `
   }
 }
     ${SponsorPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSponsorSeriesPageDataQuery = <
 	TData = GetSponsorSeriesPageDataQuery,
 	TError = unknown
@@ -151,12 +153,14 @@ export const useGetSponsorSeriesPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSponsorSeriesPageDataDocument = `query getSponsorSeriesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}sequences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}`;
 export async function getSponsorSeriesPageData<T>(
 	variables: ExactAlt<T, GetSponsorSeriesPageDataQueryVariables>
 ): Promise<GetSponsorSeriesPageDataQuery> {
 	return fetchApi(GetSponsorSeriesPageDataDocument, { variables });
 }
 
+export const GetSponsorSeriesPathsDataDocument = `query getSponsorSeriesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorSeriesPathsData<T>(
 	variables: ExactAlt<T, GetSponsorSeriesPathsDataQueryVariables>
 ): Promise<GetSponsorSeriesPathsDataQuery> {

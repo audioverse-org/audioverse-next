@@ -2,6 +2,8 @@ import * as Types from '../../../lib/generated/graphql';
 
 import { SponsorLockupFragmentDoc } from '../sponsorLockup.generated';
 import { TeaseRecordingFragmentDoc } from '../teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../templates/andMiniplayer.generated';
+import { PersonLockupFragmentDoc } from '../personLockup.generated';
 import { CardRecordingSequenceHatFragmentDoc } from './recordingSequenceHat.generated';
 export type CardRecordingStackFragment = {
 	__typename?: 'Sequence';

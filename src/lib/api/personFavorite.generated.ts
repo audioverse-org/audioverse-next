@@ -41,6 +41,7 @@ export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const PersonFavoriteDocument = `mutation personFavorite($id:ID!){favorited:personFavorite(id:$id){success}}`;
 export async function personFavorite<T>(
 	variables: ExactAlt<T, PersonFavoriteMutationVariables>
 ): Promise<PersonFavoriteMutation> {

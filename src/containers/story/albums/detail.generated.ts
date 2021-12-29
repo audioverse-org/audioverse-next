@@ -1,6 +1,11 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { SequenceFragmentDoc } from '../../../components/organisms/sequence.generated';
+import { CardRecordingFragmentDoc } from '../../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../../lib/generateFeed.generated';
 import { BookFeedDescriptionFragmentDoc } from '../../audiobook/bookFeedDescription.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -198,7 +203,12 @@ export const GetStoryAlbumDetailPageDataDocument = `
     language
   }
 }
-    ${SequenceFragmentDoc}`;
+    ${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetStoryAlbumDetailPageDataQuery = <
 	TData = GetStoryAlbumDetailPageDataQuery,
 	TError = unknown
@@ -275,18 +285,21 @@ export const useGetStoryAlbumDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetStoryAlbumDetailPageDataDocument = `query getStoryAlbumDetailPageData($id:ID!){storySeason(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}`;
 export async function getStoryAlbumDetailPageData<T>(
 	variables: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>
 ): Promise<GetStoryAlbumDetailPageDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPageDataDocument, { variables });
 }
 
+export const GetStoryAlbumFeedDataDocument = `query getStoryAlbumFeedData($id:ID!){storySeason(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)recordings(first:25){nodes{...generateFeed}}language ...bookFeedDescription}}`;
 export async function getStoryAlbumFeedData<T>(
 	variables: ExactAlt<T, GetStoryAlbumFeedDataQueryVariables>
 ): Promise<GetStoryAlbumFeedDataQuery> {
 	return fetchApi(GetStoryAlbumFeedDataDocument, { variables });
 }
 
+export const GetStoryAlbumDetailPathsDataDocument = `query getStoryAlbumDetailPathsData($language:Language!$first:Int){storySeasons(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getStoryAlbumDetailPathsData<T>(
 	variables: ExactAlt<T, GetStoryAlbumDetailPathsDataQueryVariables>
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {

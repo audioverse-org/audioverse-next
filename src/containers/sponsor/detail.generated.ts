@@ -2,7 +2,11 @@ import * as Types from '../../lib/generated/graphql';
 
 import { CardCollectionFragmentDoc } from '../../components/molecules/card/collection.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSponsorDetailPageDataQueryVariables = Types.Exact<{
@@ -266,7 +270,11 @@ export const GetSponsorDetailPageDataDocument = `
 }
     ${CardCollectionFragmentDoc}
 ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorDetailPageDataQuery = <
 	TData = GetSponsorDetailPageDataQuery,
 	TError = unknown
@@ -308,12 +316,14 @@ export const useGetSponsorDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSponsorDetailPageDataDocument = `query getSponsorDetailPageData($id:ID!){sponsor(id:$id){id title location website description canonicalUrl(useFuturePath:true)language shareUrl image{url(size:128)}collections(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardCollection}}sequences(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardSequence}}recordings(first:3 collectionId:0 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}}}}`;
 export async function getSponsorDetailPageData<T>(
 	variables: ExactAlt<T, GetSponsorDetailPageDataQueryVariables>
 ): Promise<GetSponsorDetailPageDataQuery> {
 	return fetchApi(GetSponsorDetailPageDataDocument, { variables });
 }
 
+export const GetSponsorDetailPathsDataDocument = `query getSponsorDetailPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSponsorDetailPathsData<T>(
 	variables: ExactAlt<T, GetSponsorDetailPathsDataQueryVariables>
 ): Promise<GetSponsorDetailPathsDataQuery> {

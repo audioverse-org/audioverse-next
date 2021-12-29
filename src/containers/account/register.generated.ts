@@ -145,18 +145,21 @@ export const useRegisterIsLoggedInQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const RegisterDocument = `mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){errors{message}}}`;
 export async function register<T>(
 	variables: ExactAlt<T, RegisterMutationVariables>
 ): Promise<RegisterMutation> {
 	return fetchApi(RegisterDocument, { variables });
 }
 
+export const RegisterSocialDocument = `mutation registerSocial($socialId:String!$socialName:UserSocialServiceName!$socialToken:String!$givenName:String$surname:String){loginSocial(input:{socialId:$socialId socialName:$socialName socialToken:$socialToken givenName:$givenName surname:$surname}){authenticatedUser{sessionToken}errors{message}}}`;
 export async function registerSocial<T>(
 	variables: ExactAlt<T, RegisterSocialMutationVariables>
 ): Promise<RegisterSocialMutation> {
 	return fetchApi(RegisterSocialDocument, { variables });
 }
 
+export const RegisterIsLoggedInDocument = `query registerIsLoggedIn{me{user{email}}}`;
 export async function registerIsLoggedIn<T>(
 	variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
 ): Promise<RegisterIsLoggedInQuery> {

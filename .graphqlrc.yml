@@ -14,10 +14,8 @@ generates:
     plugins:
       - 'typescript'
       - 'typescript-operations'
-      - 'typescript-react-query'
       - 'graphql-plugin-getters.js'
     config:
-      fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
       enumsAsConst: true
       scalars:
@@ -38,6 +36,8 @@ generates:
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
+      documentMode: 'documentNodeImportFragments'
+      dedupeFragments: true
       scalars:
         ID: 'string | number'
         Date: 'string'

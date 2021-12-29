@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetTrendingTeachingsPageDataQueryVariables = Types.Exact<{
@@ -93,7 +97,11 @@ export const GetTrendingTeachingsPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetTrendingTeachingsPageDataQuery = <
 	TData = GetTrendingTeachingsPageDataQuery,
 	TError = unknown
@@ -111,6 +119,7 @@ export const useGetTrendingTeachingsPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetTrendingTeachingsPageDataDocument = `query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language first:24){nodes{recording{...cardRecording}}}}`;
 export async function getTrendingTeachingsPageData<T>(
 	variables: ExactAlt<T, GetTrendingTeachingsPageDataQueryVariables>
 ): Promise<GetTrendingTeachingsPageDataQuery> {

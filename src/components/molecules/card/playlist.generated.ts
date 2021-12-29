@@ -1,6 +1,8 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { TeaseRecordingFragmentDoc } from '../teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../templates/andMiniplayer.generated';
+import { PersonLockupFragmentDoc } from '../personLockup.generated';
 export type CardPlaylistFragment = {
 	__typename?: 'UserPlaylist';
 	id: string | number;

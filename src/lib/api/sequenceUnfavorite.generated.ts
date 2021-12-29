@@ -44,6 +44,7 @@ export const useSequenceUnfavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SequenceUnfavoriteDocument = `mutation sequenceUnfavorite($id:ID!){favorited:sequenceUnfavorite(id:$id){success}}`;
 export async function sequenceUnfavorite<T>(
 	variables: ExactAlt<T, SequenceUnfavoriteMutationVariables>
 ): Promise<SequenceUnfavoriteMutation> {

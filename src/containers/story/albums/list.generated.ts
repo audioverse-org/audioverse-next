@@ -1,6 +1,7 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetStoriesAlbumsPageDataQueryVariables = Types.Exact<{
@@ -83,7 +84,8 @@ export const GetStoriesAlbumsPageDataDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetStoriesAlbumsPageDataQuery = <
 	TData = GetStoriesAlbumsPageDataQuery,
 	TError = unknown
@@ -125,12 +127,14 @@ export const useGetStoriesAlbumsPathDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetStoriesAlbumsPageDataDocument = `query getStoriesAlbumsPageData($language:Language!$first:Int$offset:Int){storySeasons(language:$language first:$first offset:$offset){nodes{...cardSequence}aggregate{count}}}`;
 export async function getStoriesAlbumsPageData<T>(
 	variables: ExactAlt<T, GetStoriesAlbumsPageDataQueryVariables>
 ): Promise<GetStoriesAlbumsPageDataQuery> {
 	return fetchApi(GetStoriesAlbumsPageDataDocument, { variables });
 }
 
+export const GetStoriesAlbumsPathDataDocument = `query getStoriesAlbumsPathData($language:Language!){storySeasons(language:$language){aggregate{count}}}`;
 export async function getStoriesAlbumsPathData<T>(
 	variables: ExactAlt<T, GetStoriesAlbumsPathDataQueryVariables>
 ): Promise<GetStoriesAlbumsPathDataQuery> {

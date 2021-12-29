@@ -2,6 +2,10 @@ import * as Types from '../../lib/generated/graphql';
 
 import { PresenterPivotFragmentDoc } from './pivot.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -179,7 +183,11 @@ export const GetPresenterRecordingsPageDataDocument = `
   }
 }
     ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterRecordingsPageDataQuery = <
 	TData = GetPresenterRecordingsPageDataQuery,
 	TError = unknown
@@ -230,12 +238,14 @@ export const useGetPresenterRecordingsFeedDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterRecordingsPageDataDocument = `query getPresenterRecordingsPageData($id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}`;
 export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>
 ): Promise<GetPresenterRecordingsPageDataQuery> {
 	return fetchApi(GetPresenterRecordingsPageDataDocument, { variables });
 }
 
+export const GetPresenterRecordingsFeedDataDocument = `query getPresenterRecordingsFeedData($id:ID!){person(id:$id){id name image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}}`;
 export async function getPresenterRecordingsFeedData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsFeedDataQueryVariables>
 ): Promise<GetPresenterRecordingsFeedDataQuery> {

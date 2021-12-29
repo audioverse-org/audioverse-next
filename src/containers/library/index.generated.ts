@@ -1,6 +1,17 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardFavoriteFragmentDoc } from '../../components/molecules/card/favorite.generated';
+import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
+import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { CardRecordingStackFragmentDoc } from '../../components/molecules/card/recordingStack.generated';
+import { SponsorLockupFragmentDoc } from '../../components/molecules/sponsorLockup.generated';
+import { CardCollectionFragmentDoc } from '../../components/molecules/card/collection.generated';
+import { CardSponsorFragmentDoc } from '../../components/molecules/card/sponsor.generated';
+import { CardPersonFragmentDoc } from '../../components/molecules/card/person.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetLibraryDataQueryVariables = Types.Exact<{
@@ -365,7 +376,18 @@ export const GetLibraryDataDocument = `
     }
   }
 }
-    ${CardFavoriteFragmentDoc}`;
+    ${CardFavoriteFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${CardSequenceFragmentDoc}
+${CardRecordingStackFragmentDoc}
+${SponsorLockupFragmentDoc}
+${CardCollectionFragmentDoc}
+${CardSponsorFragmentDoc}
+${CardPersonFragmentDoc}`;
 export const useGetLibraryDataQuery = <
 	TData = GetLibraryDataQuery,
 	TError = unknown
@@ -383,6 +405,7 @@ export const useGetLibraryDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetLibraryDataDocument = `query getLibraryData($language:Language!$first:Int!$offset:Int!$groupSequences:Boolean!$hasVideo:Boolean$recordingDuration:IntegerRangeInput$recordingContentType:RecordingContentType$types:[FavoritableCatalogEntityType!]$viewerPlaybackStatus:RecordingViewerPlaybackStatus$sortField:FavoritesSortableField!$sortDirection:OrderByDirection!){me{user{favorites(language:$language first:$first offset:$offset groupSequences:$groupSequences recordingDuration:$recordingDuration recordingContentType:$recordingContentType hasVideo:$hasVideo types:$types viewerPlaybackStatus:$viewerPlaybackStatus orderBy:[{field:$sortField direction:$sortDirection}]){aggregate{count}nodes{...cardFavorite}}}}}`;
 export async function getLibraryData<T>(
 	variables: ExactAlt<T, GetLibraryDataQueryVariables>
 ): Promise<GetLibraryDataQuery> {

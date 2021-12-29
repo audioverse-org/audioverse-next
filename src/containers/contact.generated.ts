@@ -51,6 +51,7 @@ export const useSubmitContactPageMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SubmitContactPageDocument = `mutation submitContactPage($language:Language!$recipient:PageContactRecipient!$firstName:String!$lastName:String!$email:String!$body:String!){pageContactSubmit(input:{language:$language recipient:$recipient givenName:$firstName surname:$lastName email:$email body:$body}){success}}`;
 export async function submitContactPage<T>(
 	variables: ExactAlt<T, SubmitContactPageMutationVariables>
 ): Promise<SubmitContactPageMutation> {

@@ -1,6 +1,10 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetLibraryPlaylistPageDataQueryVariables = Types.Exact<{
@@ -128,7 +132,11 @@ export const GetLibraryPlaylistPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryPlaylistPageDataQuery = <
 	TData = GetLibraryPlaylistPageDataQuery,
 	TError = unknown
@@ -146,6 +154,7 @@ export const useGetLibraryPlaylistPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetLibraryPlaylistPageDataDocument = `query getLibraryPlaylistPageData($id:ID!){me{user{playlist(id:$id){title createdAt summary recordings(offset:0 first:1500){nodes{...cardRecording}aggregate{count}}}}}}`;
 export async function getLibraryPlaylistPageData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
 ): Promise<GetLibraryPlaylistPageDataQuery> {

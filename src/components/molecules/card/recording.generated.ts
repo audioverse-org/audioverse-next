@@ -1,5 +1,7 @@
 import { CardRecordingSequenceHatFragmentDoc } from './recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../personLockup.generated';
 import { TeaseRecordingFragmentDoc } from '../teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../templates/andMiniplayer.generated';
 export type CardRecordingFragment = {
 	__typename?: 'Recording';
 	canonicalPath: string;

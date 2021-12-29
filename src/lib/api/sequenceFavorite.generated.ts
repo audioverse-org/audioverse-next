@@ -44,6 +44,7 @@ export const useSequenceFavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SequenceFavoriteDocument = `mutation sequenceFavorite($id:ID!){favorited:sequenceFavorite(id:$id){success}}`;
 export async function sequenceFavorite<T>(
 	variables: ExactAlt<T, SequenceFavoriteMutationVariables>
 ): Promise<SequenceFavoriteMutation> {

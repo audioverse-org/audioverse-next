@@ -44,6 +44,7 @@ export const useCollectionUnfavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const CollectionUnfavoriteDocument = `mutation collectionUnfavorite($id:ID!){favorited:collectionUnfavorite(id:$id){success}}`;
 export async function collectionUnfavorite<T>(
 	variables: ExactAlt<T, CollectionUnfavoriteMutationVariables>
 ): Promise<CollectionUnfavoriteMutation> {

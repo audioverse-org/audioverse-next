@@ -1,6 +1,14 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { RecordingFragmentDoc } from '../../components/organisms/recording.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
+import { SequenceNavFragmentDoc } from '../../components/molecules/sequenceNav.generated';
+import { CopyrightInfoFragmentDoc } from '../../components/molecules/copyrightInfo.generated';
+import { PlayerFragmentDoc } from '../../components/molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../../components/molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../../components/molecules/buttonShareRecording.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSongDetailDataQueryVariables = Types.Exact<{
@@ -231,7 +239,15 @@ export const GetSongDetailDataDocument = `
     language
   }
 }
-    ${RecordingFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetSongDetailDataQuery = <
 	TData = GetSongDetailDataQuery,
 	TError = unknown
@@ -273,12 +289,14 @@ export const useGetSongDetailStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSongDetailDataDocument = `query getSongDetailData($id:ID!){musicTrack(id:$id){...recording language}}`;
 export async function getSongDetailData<T>(
 	variables: ExactAlt<T, GetSongDetailDataQueryVariables>
 ): Promise<GetSongDetailDataQuery> {
 	return fetchApi(GetSongDetailDataDocument, { variables });
 }
 
+export const GetSongDetailStaticPathsDocument = `query getSongDetailStaticPaths($language:Language!$first:Int){musicTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSongDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetSongDetailStaticPathsQueryVariables>
 ): Promise<GetSongDetailStaticPathsQuery> {

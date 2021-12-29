@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetNotFoundPageDataQueryVariables = Types.Exact<{
@@ -85,7 +89,11 @@ export const GetNotFoundPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetNotFoundPageDataQuery = <
 	TData = GetNotFoundPageDataQuery,
 	TError = unknown
@@ -103,6 +111,7 @@ export const useGetNotFoundPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetNotFoundPageDataDocument = `query getNotFoundPageData{websiteRecentRecordings(language:ENGLISH first:3){nodes{...cardRecording}}}`;
 export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>
 ): Promise<GetNotFoundPageDataQuery> {

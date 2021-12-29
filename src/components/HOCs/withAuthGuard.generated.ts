@@ -44,6 +44,7 @@ export const useGetWithAuthGuardDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetWithAuthGuardDataDocument = `query getWithAuthGuardData{me{user{email name}}}`;
 export async function getWithAuthGuardData<T>(
 	variables: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
 ): Promise<GetWithAuthGuardDataQuery> {

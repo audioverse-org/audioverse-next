@@ -1,6 +1,11 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { SequenceFragmentDoc } from '../../components/organisms/sequence.generated';
+import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -197,7 +202,12 @@ export const GetSeriesDetailPageDataDocument = `
     language
   }
 }
-    ${SequenceFragmentDoc}`;
+    ${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSeriesDetailPageDataQuery = <
 	TData = GetSeriesDetailPageDataQuery,
 	TError = unknown
@@ -271,18 +281,21 @@ export const useGetSeriesDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSeriesDetailPageDataDocument = `query getSeriesDetailPageData($id:ID!){series(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}`;
 export async function getSeriesDetailPageData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>
 ): Promise<GetSeriesDetailPageDataQuery> {
 	return fetchApi(GetSeriesDetailPageDataDocument, { variables });
 }
 
+export const GetSeriesFeedDataDocument = `query getSeriesFeedData($id:ID!){series(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){aggregate{count}nodes{...generateFeed}}}}`;
 export async function getSeriesFeedData<T>(
 	variables: ExactAlt<T, GetSeriesFeedDataQueryVariables>
 ): Promise<GetSeriesFeedDataQuery> {
 	return fetchApi(GetSeriesFeedDataDocument, { variables });
 }
 
+export const GetSeriesDetailPathsDataDocument = `query getSeriesDetailPathsData($language:Language!$first:Int){serieses(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSeriesDetailPathsData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPathsDataQueryVariables>
 ): Promise<GetSeriesDetailPathsDataQuery> {

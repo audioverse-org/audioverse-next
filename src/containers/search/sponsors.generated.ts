@@ -78,6 +78,7 @@ export const useGetSearchResultsSponsorsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsSponsorsDocument = `query getSearchResultsSponsors($language:Language!$term:String!$first:Int!$offset:Int!){sponsors(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSponsor}}}`;
 export async function getSearchResultsSponsors<T>(
 	variables: ExactAlt<T, GetSearchResultsSponsorsQueryVariables>
 ): Promise<GetSearchResultsSponsorsQuery> {

@@ -107,12 +107,14 @@ export const useGetPresenterListPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterListPageDataDocument = `query getPresenterListPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}}personLetterCounts(language:$language){letter count}}`;
 export async function getPresenterListPageData<T>(
 	variables: ExactAlt<T, GetPresenterListPageDataQueryVariables>
 ): Promise<GetPresenterListPageDataQuery> {
 	return fetchApi(GetPresenterListPageDataDocument, { variables });
 }
 
+export const GetPresenterListPathsDataDocument = `query getPresenterListPathsData($language:Language!){personLetterCounts(language:$language){letter count}}`;
 export async function getPresenterListPathsData<T>(
 	variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
 ): Promise<GetPresenterListPathsDataQuery> {

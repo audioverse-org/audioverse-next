@@ -184,12 +184,14 @@ export const useRecordingPlaybackProgressSetMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetRecordingPlaybackProgressDocument = `query getRecordingPlaybackProgress($id:ID!){recording(id:$id){viewerPlaybackSession{positionPercentage}}}`;
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
 ): Promise<GetRecordingPlaybackProgressQuery> {
 	return fetchApi(GetRecordingPlaybackProgressDocument, { variables });
 }
 
+export const RecordingPlaybackProgressSetDocument = `mutation recordingPlaybackProgressSet($id:ID!$percentage:Float!){recordingPlaybackSessionAdvance(recordingId:$id input:{positionPercentage:$percentage}){recording{viewerPlaybackSession{positionPercentage}}}}`;
 export async function recordingPlaybackProgressSet<T>(
 	variables: ExactAlt<T, RecordingPlaybackProgressSetMutationVariables>
 ): Promise<RecordingPlaybackProgressSetMutation> {

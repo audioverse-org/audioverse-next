@@ -1,6 +1,10 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSongBooksDetailPageDataQueryVariables = Types.Exact<{
@@ -91,7 +95,11 @@ export const GetSongBooksDetailPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongBooksDetailPageDataQuery = <
 	TData = GetSongBooksDetailPageDataQuery,
 	TError = unknown
@@ -109,6 +117,7 @@ export const useGetSongBooksDetailPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSongBooksDetailPageDataDocument = `query getSongBooksDetailPageData($language:Language!$book:String!){musicTracks(language:$language tagName:$book first:1000 orderBy:[{field:PUBLISHED_AT direction:ASC}]){nodes{...cardRecording}}}`;
 export async function getSongBooksDetailPageData<T>(
 	variables: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
 ): Promise<GetSongBooksDetailPageDataQuery> {

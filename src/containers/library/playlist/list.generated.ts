@@ -1,6 +1,9 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardPlaylistFragmentDoc } from '../../../components/molecules/card/playlist.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetLibraryPlaylistsDataQueryVariables = Types.Exact<{
@@ -125,7 +128,10 @@ export const GetLibraryPlaylistsDataDocument = `
     }
   }
 }
-    ${CardPlaylistFragmentDoc}`;
+    ${CardPlaylistFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetLibraryPlaylistsDataQuery = <
 	TData = GetLibraryPlaylistsDataQuery,
 	TError = unknown
@@ -143,6 +149,7 @@ export const useGetLibraryPlaylistsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetLibraryPlaylistsDataDocument = `query getLibraryPlaylistsData($language:Language!$offset:Int$first:Int){me{user{playlists(language:$language offset:$offset first:$first orderBy:[{field:CREATED_AT direction:DESC}]){nodes{...cardPlaylist}aggregate{count}}}}}`;
 export async function getLibraryPlaylistsData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
 ): Promise<GetLibraryPlaylistsDataQuery> {

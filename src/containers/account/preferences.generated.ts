@@ -138,12 +138,14 @@ export const useUpdateAccountPreferencesMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAccountPreferencesDataDocument = `query getAccountPreferencesData{me{user{...preferences}}}fragment preferences on User{autoplay language preferredAudioQuality timezone}`;
 export async function getAccountPreferencesData<T>(
 	variables: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
 ): Promise<GetAccountPreferencesDataQuery> {
 	return fetchApi(GetAccountPreferencesDataDocument, { variables });
 }
 
+export const UpdateAccountPreferencesDocument = `mutation updateAccountPreferences($autoplay:Boolean!$language:Language!$preferredAudioQuality:RecordingQuality!$timezone:Timezone!){updateMyProfile(input:{autoplay:$autoplay language:$language preferredAudioQuality:$preferredAudioQuality timezone:$timezone}){errors{message}authenticatedUser{user{...preferences}}}}fragment preferences on User{autoplay language preferredAudioQuality timezone}`;
 export async function updateAccountPreferences<T>(
 	variables: ExactAlt<T, UpdateAccountPreferencesMutationVariables>
 ): Promise<UpdateAccountPreferencesMutation> {

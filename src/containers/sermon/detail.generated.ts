@@ -1,6 +1,14 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { RecordingFragmentDoc } from '../../components/organisms/recording.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
+import { SequenceNavFragmentDoc } from '../../components/molecules/sequenceNav.generated';
+import { CopyrightInfoFragmentDoc } from '../../components/molecules/copyrightInfo.generated';
+import { PlayerFragmentDoc } from '../../components/molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../../components/molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../../components/molecules/buttonShareRecording.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSermonDetailDataQueryVariables = Types.Exact<{
@@ -235,7 +243,15 @@ export const GetSermonDetailDataDocument = `
     language
   }
 }
-    ${RecordingFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetSermonDetailDataQuery = <
 	TData = GetSermonDetailDataQuery,
 	TError = unknown
@@ -278,12 +294,14 @@ export const useGetSermonDetailStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSermonDetailDataDocument = `query getSermonDetailData($id:ID!){sermon(id:$id){...recording language}}`;
 export async function getSermonDetailData<T>(
 	variables: ExactAlt<T, GetSermonDetailDataQueryVariables>
 ): Promise<GetSermonDetailDataQuery> {
 	return fetchApi(GetSermonDetailDataDocument, { variables });
 }
 
+export const GetSermonDetailStaticPathsDocument = `query getSermonDetailStaticPaths($language:Language!$first:Int){sermons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getSermonDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetSermonDetailStaticPathsQueryVariables>
 ): Promise<GetSermonDetailStaticPathsQuery> {

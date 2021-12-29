@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetLibraryHistoryPageDataQueryVariables = Types.Exact<{
@@ -124,7 +128,11 @@ export const GetLibraryHistoryPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryHistoryPageDataQuery = <
 	TData = GetLibraryHistoryPageDataQuery,
 	TError = unknown
@@ -142,6 +150,7 @@ export const useGetLibraryHistoryPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetLibraryHistoryPageDataDocument = `query getLibraryHistoryPageData($language:Language!$first:Int!$offset:Int!){me{user{downloadHistory(language:$language first:$first offset:$offset orderBy:[{field:CREATED_AT direction:DESC}]){aggregate{count}nodes{recording{...cardRecording}}pageInfo{hasNextPage}}}}}`;
 export async function getLibraryHistoryPageData<T>(
 	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
 ): Promise<GetLibraryHistoryPageDataQuery> {

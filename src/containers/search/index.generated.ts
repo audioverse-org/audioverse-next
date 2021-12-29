@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
 import { CardCollectionFragmentDoc } from '../../components/molecules/card/collection.generated';
 import { CardSponsorFragmentDoc } from '../../components/molecules/card/sponsor.generated';
@@ -288,6 +292,10 @@ export const GetSearchResultsPageDataDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}
@@ -309,6 +317,7 @@ export const useGetSearchResultsPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsPageDataDocument = `query getSearchResultsPageData($language:Language!$term:String!){recordings(language:$language search:$term first:6){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}sequences(language:$language search:$term first:3){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language search:$term first:3){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage}}sponsors(language:$language search:$term first:3){aggregate{count}nodes{...cardSponsor}pageInfo{hasNextPage}}persons(language:$language search:$term first:3){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}}`;
 export async function getSearchResultsPageData<T>(
 	variables: ExactAlt<T, GetSearchResultsPageDataQueryVariables>
 ): Promise<GetSearchResultsPageDataQuery> {

@@ -1,7 +1,11 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
 import { CardRecordingFragmentDoc } from '../../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecules/card/recordingSequenceHat.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSongAlbumsListPageDataQueryVariables = Types.Exact<{
@@ -247,7 +251,11 @@ export const GetSongAlbumsListPageDataDocument = `
   }
 }
     ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsListPageDataQuery = <
 	TData = GetSongAlbumsListPageDataQuery,
 	TError = unknown
@@ -265,6 +273,7 @@ export const useGetSongAlbumsListPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSongAlbumsListPageDataDocument = `query getSongAlbumsListPageData($language:Language!){musicAlbums(language:$language first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}aggregate{count}}musicBookTags(language:$language first:1000){nodes{id name recordings(first:1 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}}`;
 export async function getSongAlbumsListPageData<T>(
 	variables: ExactAlt<T, GetSongAlbumsListPageDataQueryVariables>
 ): Promise<GetSongAlbumsListPageDataQuery> {

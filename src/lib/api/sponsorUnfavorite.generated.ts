@@ -44,6 +44,7 @@ export const useSponsorUnfavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SponsorUnfavoriteDocument = `mutation sponsorUnfavorite($id:ID!){favorited:sponsorUnfavorite(id:$id){success}}`;
 export async function sponsorUnfavorite<T>(
 	variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>
 ): Promise<SponsorUnfavoriteMutation> {

@@ -45,6 +45,7 @@ export const useLoginMutation = <TError = unknown, TContext = unknown>(
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const LoginDocument = `mutation login($email:String!$password:String!){login(input:{email:$email password:$password}){authenticatedUser{sessionToken}}}`;
 export async function login<T>(
 	variables: ExactAlt<T, LoginMutationVariables>
 ): Promise<LoginMutation> {

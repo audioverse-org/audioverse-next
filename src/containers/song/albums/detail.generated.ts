@@ -1,6 +1,11 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { SequenceFragmentDoc } from '../../../components/organisms/sequence.generated';
+import { CardRecordingFragmentDoc } from '../../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -193,7 +198,12 @@ export const GetSongAlbumsDetailPageDataDocument = `
     language
   }
 }
-    ${SequenceFragmentDoc}`;
+    ${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsDetailPageDataQuery = <
 	TData = GetSongAlbumsDetailPageDataQuery,
 	TError = unknown
@@ -264,18 +274,21 @@ export const useGetSongAlbumsDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSongAlbumsDetailPageDataDocument = `query getSongAlbumsDetailPageData($id:ID!){musicAlbum(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}`;
 export async function getSongAlbumsDetailPageData<T>(
 	variables: ExactAlt<T, GetSongAlbumsDetailPageDataQueryVariables>
 ): Promise<GetSongAlbumsDetailPageDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPageDataDocument, { variables });
 }
 
+export const GetSongAlbumFeedDataDocument = `query getSongAlbumFeedData($id:ID!){musicAlbum(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}}}`;
 export async function getSongAlbumFeedData<T>(
 	variables: ExactAlt<T, GetSongAlbumFeedDataQueryVariables>
 ): Promise<GetSongAlbumFeedDataQuery> {
 	return fetchApi(GetSongAlbumFeedDataDocument, { variables });
 }
 
+export const GetSongAlbumsDetailPathsDataDocument = `query getSongAlbumsDetailPathsData($language:Language!$first:Int){musicAlbums(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSongAlbumsDetailPathsData<T>(
 	variables: ExactAlt<T, GetSongAlbumsDetailPathsDataQueryVariables>
 ): Promise<GetSongAlbumsDetailPathsDataQuery> {

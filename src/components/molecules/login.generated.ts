@@ -51,6 +51,7 @@ export const useLoginForgotPasswordMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const LoginForgotPasswordDocument = `mutation loginForgotPassword($email:String!){userRecover(email:$email){errors{message}success}}`;
 export async function loginForgotPassword<T>(
 	variables: ExactAlt<T, LoginForgotPasswordMutationVariables>
 ): Promise<LoginForgotPasswordMutation> {

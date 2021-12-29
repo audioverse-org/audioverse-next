@@ -2,6 +2,10 @@ import * as Types from '../../lib/generated/graphql';
 
 import { SponsorPivotFragmentDoc } from './pivot.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -193,7 +197,11 @@ export const GetSponsorTeachingsPageDataDocument = `
   }
 }
     ${SponsorPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
 	TData = GetSponsorTeachingsPageDataQuery,
 	TError = unknown
@@ -264,18 +272,21 @@ export const useGetSponsorTeachingsPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSponsorTeachingsPageDataDocument = `query getSponsorTeachingsPageData($id:ID!$offset:Int$first:Int){sponsor(id:$id){id ...sponsorPivot recordings(offset:$offset first:$first orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}`;
 export async function getSponsorTeachingsPageData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>
 ): Promise<GetSponsorTeachingsPageDataQuery> {
 	return fetchApi(GetSponsorTeachingsPageDataDocument, { variables });
 }
 
+export const GetSponsorTeachingsFeedDataDocument = `query getSponsorTeachingsFeedData($id:ID!){sponsor(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...generateFeed}}}}`;
 export async function getSponsorTeachingsFeedData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsFeedDataQueryVariables>
 ): Promise<GetSponsorTeachingsFeedDataQuery> {
 	return fetchApi(GetSponsorTeachingsFeedDataDocument, { variables });
 }
 
+export const GetSponsorTeachingsPathsDataDocument = `query getSponsorTeachingsPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorTeachingsPathsData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsPathsDataQueryVariables>
 ): Promise<GetSponsorTeachingsPathsDataQuery> {

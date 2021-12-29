@@ -49,6 +49,7 @@ export const useResetPasswordMutation = <TError = unknown, TContext = unknown>(
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const ResetPasswordDocument = `mutation resetPassword($token:String!$password:String!){userReset(password:$password token:$token){errors{message}success}}`;
 export async function resetPassword<T>(
 	variables: ExactAlt<T, ResetPasswordMutationVariables>
 ): Promise<ResetPasswordMutation> {

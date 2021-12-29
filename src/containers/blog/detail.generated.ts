@@ -127,12 +127,14 @@ export const useGetBlogDetailStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetBlogDetailDataDocument = `query getBlogDetailData($id:ID!$language:Language!){blogPost(id:$id){id title image{url(size:2100 cropMode:MAX_SIZE)}body canonicalPath(useFuturePath:true)canonicalUrl(useFuturePath:true)language publishDate readingDuration teaser}blogPosts(language:$language first:5 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardPost}}}`;
 export async function getBlogDetailData<T>(
 	variables: ExactAlt<T, GetBlogDetailDataQueryVariables>
 ): Promise<GetBlogDetailDataQuery> {
 	return fetchApi(GetBlogDetailDataDocument, { variables });
 }
 
+export const GetBlogDetailStaticPathsDocument = `query getBlogDetailStaticPaths($language:Language!$first:Int){blogPosts(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getBlogDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetBlogDetailStaticPathsQueryVariables>
 ): Promise<GetBlogDetailStaticPathsQuery> {

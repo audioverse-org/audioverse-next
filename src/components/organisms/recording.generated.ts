@@ -2,9 +2,12 @@ import * as Types from '../../lib/generated/graphql';
 
 import { PersonLockupFragmentDoc } from '../molecules/personLockup.generated';
 import { TeaseRecordingFragmentDoc } from '../molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../templates/andMiniplayer.generated';
 import { SequenceNavFragmentDoc } from '../molecules/sequenceNav.generated';
 import { CopyrightInfoFragmentDoc } from '../molecules/copyrightInfo.generated';
 import { PlayerFragmentDoc } from '../molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../molecules/buttonShareRecording.generated';
 export type RecordingFragment = {
 	__typename?: 'Recording';
 	id: string | number;

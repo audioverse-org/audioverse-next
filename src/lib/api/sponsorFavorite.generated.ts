@@ -44,6 +44,7 @@ export const useSponsorFavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SponsorFavoriteDocument = `mutation sponsorFavorite($id:ID!){favorited:sponsorFavorite(id:$id){success}}`;
 export async function sponsorFavorite<T>(
 	variables: ExactAlt<T, SponsorFavoriteMutationVariables>
 ): Promise<SponsorFavoriteMutation> {

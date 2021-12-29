@@ -48,6 +48,7 @@ export const useAddPlaylistMutation = <TError = unknown, TContext = unknown>(
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const AddPlaylistDocument = `mutation addPlaylist($language:Language!$title:String!$isPublic:Boolean!$recordingIds:[ID!]){playlistAdd(input:{language:$language title:$title isPublic:$isPublic recordingIds:$recordingIds}){id}}`;
 export async function addPlaylist<T>(
 	variables: ExactAlt<T, AddPlaylistMutationVariables>
 ): Promise<AddPlaylistMutation> {

@@ -43,6 +43,7 @@ export const useCollectionIsFavoritedQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const CollectionIsFavoritedDocument = `query collectionIsFavorited($id:ID!){collection(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage}}`;
 export async function collectionIsFavorited<T>(
 	variables: ExactAlt<T, CollectionIsFavoritedQueryVariables>
 ): Promise<CollectionIsFavoritedQuery> {

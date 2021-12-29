@@ -44,6 +44,7 @@ export const useCollectionFavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const CollectionFavoriteDocument = `mutation collectionFavorite($id:ID!){favorited:collectionFavorite(id:$id){success}}`;
 export async function collectionFavorite<T>(
 	variables: ExactAlt<T, CollectionFavoriteMutationVariables>
 ): Promise<CollectionFavoriteMutation> {

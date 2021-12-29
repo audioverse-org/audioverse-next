@@ -1,6 +1,7 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSearchResultsSequencesQueryVariables = Types.Exact<{
@@ -72,7 +73,8 @@ export const GetSearchResultsSequencesDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSearchResultsSequencesQuery = <
 	TData = GetSearchResultsSequencesQuery,
 	TError = unknown
@@ -90,6 +92,7 @@ export const useGetSearchResultsSequencesQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsSequencesDocument = `query getSearchResultsSequences($language:Language!$term:String!$first:Int!$offset:Int!){sequences(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSequence}}}`;
 export async function getSearchResultsSequences<T>(
 	variables: ExactAlt<T, GetSearchResultsSequencesQueryVariables>
 ): Promise<GetSearchResultsSequencesQuery> {

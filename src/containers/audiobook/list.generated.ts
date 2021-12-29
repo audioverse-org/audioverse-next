@@ -1,6 +1,7 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetAudiobookListPageDataQueryVariables = Types.Exact<{
@@ -88,7 +89,8 @@ export const GetAudiobookListPageDataDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetAudiobookListPageDataQuery = <
 	TData = GetAudiobookListPageDataQuery,
 	TError = unknown
@@ -130,12 +132,14 @@ export const useGetAudiobookListPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAudiobookListPageDataDocument = `query getAudiobookListPageData($language:Language!$first:Int=12$offset:Int=0){audiobooks(language:$language first:$first offset:$offset orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}`;
 export async function getAudiobookListPageData<T>(
 	variables: ExactAlt<T, GetAudiobookListPageDataQueryVariables>
 ): Promise<GetAudiobookListPageDataQuery> {
 	return fetchApi(GetAudiobookListPageDataDocument, { variables });
 }
 
+export const GetAudiobookListPathsDataDocument = `query getAudiobookListPathsData($language:Language!){audiobooks(language:$language){aggregate{count}}}`;
 export async function getAudiobookListPathsData<T>(
 	variables: ExactAlt<T, GetAudiobookListPathsDataQueryVariables>
 ): Promise<GetAudiobookListPathsDataQuery> {

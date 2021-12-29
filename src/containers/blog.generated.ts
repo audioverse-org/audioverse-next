@@ -99,12 +99,14 @@ export const useGetBlogPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetBlogPageDataDocument = `query getBlogPageData($language:Language!$offset:Int=0$first:Int=12){blogPosts(language:$language orderBy:{field:PUBLISHED_AT direction:DESC}first:$first offset:$offset){nodes{...cardPost}aggregate{count}}}`;
 export async function getBlogPageData<T>(
 	variables: ExactAlt<T, GetBlogPageDataQueryVariables>
 ): Promise<GetBlogPageDataQuery> {
 	return fetchApi(GetBlogPageDataDocument, { variables });
 }
 
+export const GetBlogPathsDataDocument = `query getBlogPathsData($language:Language!){blogPosts(language:$language){aggregate{count}}}`;
 export async function getBlogPathsData<T>(
 	variables: ExactAlt<T, GetBlogPathsDataQueryVariables>
 ): Promise<GetBlogPathsDataQuery> {

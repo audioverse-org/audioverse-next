@@ -100,6 +100,7 @@ export const useGetPresenterAppearsPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterAppearsPageDataDocument = `query getPresenterAppearsPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}collections(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}`;
 export async function getPresenterAppearsPageData<T>(
 	variables: ExactAlt<T, GetPresenterAppearsPageDataQueryVariables>
 ): Promise<GetPresenterAppearsPageDataQuery> {

@@ -139,12 +139,14 @@ export const useGetSponsorConferencesPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSponsorConferencesPageDataDocument = `query getSponsorConferencesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}conferences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}`;
 export async function getSponsorConferencesPageData<T>(
 	variables: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>
 ): Promise<GetSponsorConferencesPageDataQuery> {
 	return fetchApi(GetSponsorConferencesPageDataDocument, { variables });
 }
 
+export const GetSponsorConferencesPathsDataDocument = `query getSponsorConferencesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorConferencesPathsData<T>(
 	variables: ExactAlt<T, GetSponsorConferencesPathsDataQueryVariables>
 ): Promise<GetSponsorConferencesPathsDataQuery> {

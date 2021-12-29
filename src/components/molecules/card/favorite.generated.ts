@@ -1,8 +1,13 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from './recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from './recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../templates/andMiniplayer.generated';
 import { CardSequenceFragmentDoc } from './sequence.generated';
 import { CardRecordingStackFragmentDoc } from './recordingStack.generated';
+import { SponsorLockupFragmentDoc } from '../sponsorLockup.generated';
 import { CardCollectionFragmentDoc } from './collection.generated';
 import { CardSponsorFragmentDoc } from './sponsor.generated';
 import { CardPersonFragmentDoc } from './person.generated';

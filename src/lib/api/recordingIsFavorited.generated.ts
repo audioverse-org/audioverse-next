@@ -38,6 +38,7 @@ export const useRecordingIsFavoritedQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const RecordingIsFavoritedDocument = `query recordingIsFavorited($id:ID!){recording(id:$id){viewerHasFavorited}}`;
 export async function recordingIsFavorited<T>(
 	variables: ExactAlt<T, RecordingIsFavoritedQueryVariables>
 ): Promise<RecordingIsFavoritedQuery> {

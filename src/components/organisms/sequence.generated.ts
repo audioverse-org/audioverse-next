@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../templates/andMiniplayer.generated';
 export type SequenceFragment = {
 	__typename?: 'Sequence';
 	id: string | number;

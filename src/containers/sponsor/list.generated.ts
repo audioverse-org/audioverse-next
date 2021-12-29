@@ -103,12 +103,14 @@ export const useGetSponsorListPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSponsorListPageDataDocument = `query getSponsorListPageData($language:Language!$startsWith:String){sponsors(language:$language startsWith:$startsWith first:1500 orderBy:[{field:TITLE direction:ASC}]){nodes{canonicalPath(useFuturePath:true)title image{url(size:128)}}}sponsorLetterCounts(language:$language){letter count}}`;
 export async function getSponsorListPageData<T>(
 	variables: ExactAlt<T, GetSponsorListPageDataQueryVariables>
 ): Promise<GetSponsorListPageDataQuery> {
 	return fetchApi(GetSponsorListPageDataDocument, { variables });
 }
 
+export const GetSponsorListPathsDataDocument = `query getSponsorListPathsData($language:Language!){sponsorLetterCounts(language:$language){letter count}}`;
 export async function getSponsorListPathsData<T>(
 	variables: ExactAlt<T, GetSponsorListPathsDataQueryVariables>
 ): Promise<GetSponsorListPathsDataQuery> {

@@ -158,12 +158,14 @@ export const useUpdateProfileDataMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetProfileDataDocument = `query getProfileData{me{user{...profile}}}fragment profile on User{email givenName surname address1 address2 city province postalCode country}`;
 export async function getProfileData<T>(
 	variables: ExactAlt<T, GetProfileDataQueryVariables>
 ): Promise<GetProfileDataQuery> {
 	return fetchApi(GetProfileDataDocument, { variables });
 }
 
+export const UpdateProfileDataDocument = `mutation updateProfileData($email:String$password:String$givenName:String$surname:String){updateMyProfile(input:{email:$email password:$password givenName:$givenName surname:$surname}){errors{message}authenticatedUser{user{...profile}}}}fragment profile on User{email givenName surname address1 address2 city province postalCode country}`;
 export async function updateProfileData<T>(
 	variables: ExactAlt<T, UpdateProfileDataMutationVariables>
 ): Promise<UpdateProfileDataMutation> {

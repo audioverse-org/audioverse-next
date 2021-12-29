@@ -44,6 +44,7 @@ export const useRecordingUnfavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const RecordingUnfavoriteDocument = `mutation recordingUnfavorite($id:ID!){favorited:recordingUnfavorite(id:$id){success}}`;
 export async function recordingUnfavorite<T>(
 	variables: ExactAlt<T, RecordingUnfavoriteMutationVariables>
 ): Promise<RecordingUnfavoriteMutation> {

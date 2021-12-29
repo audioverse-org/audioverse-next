@@ -78,6 +78,7 @@ export const useGetSearchResultsCollectionsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsCollectionsDocument = `query getSearchResultsCollections($language:Language!$term:String!$first:Int!$offset:Int!){collections(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardCollection}}}`;
 export async function getSearchResultsCollections<T>(
 	variables: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>
 ): Promise<GetSearchResultsCollectionsQuery> {

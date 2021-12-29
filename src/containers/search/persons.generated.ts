@@ -67,6 +67,7 @@ export const useGetSearchResultsPersonsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsPersonsDocument = `query getSearchResultsPersons($language:Language!$term:String!$first:Int!$offset:Int!){persons(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardPerson}}}`;
 export async function getSearchResultsPersons<T>(
 	variables: ExactAlt<T, GetSearchResultsPersonsQueryVariables>
 ): Promise<GetSearchResultsPersonsQuery> {

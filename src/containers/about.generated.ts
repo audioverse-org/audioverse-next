@@ -87,12 +87,14 @@ export const useGetAboutStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAboutPageDataDocument = `query getAboutPageData($id:ID!){page(id:$id){title body type slug}}`;
 export async function getAboutPageData<T>(
 	variables: ExactAlt<T, GetAboutPageDataQueryVariables>
 ): Promise<GetAboutPageDataQuery> {
 	return fetchApi(GetAboutPageDataDocument, { variables });
 }
 
+export const GetAboutStaticPathsDocument = `query getAboutStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAboutStaticPaths<T>(
 	variables: ExactAlt<T, GetAboutStaticPathsQueryVariables>
 ): Promise<GetAboutStaticPathsQuery> {

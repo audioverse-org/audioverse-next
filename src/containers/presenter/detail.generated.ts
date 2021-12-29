@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
 import { CardCollectionFragmentDoc } from '../../components/molecules/card/collection.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -524,6 +528,10 @@ export const GetPresenterDetailPageDataDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetPresenterDetailPageDataQuery = <
@@ -568,12 +576,14 @@ export const useGetPresenterDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterDetailPageDataDocument = `query getPresenterDetailPageData($id:ID!$language:Language!){person(id:$id){id name description canonicalUrl(useFuturePath:true)language shareUrl imageWithFallback{url(size:128)}website sermons:recordings(contentType:SERMON){aggregate{count}}audiobookTracks:recordings(contentType:AUDIOBOOK_TRACK){aggregate{count}}musicTracks:recordings(contentType:MUSIC_TRACK){aggregate{count}}stories:recordings(contentType:STORY){aggregate{count}}essentialRecordings:recordings(first:3 isFeatured:true orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}}recentRecordings:recordings(first:3 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}topRecordings:recordings(first:3 orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}pageInfo{hasNextPage}}}sequences(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(persons:[{personId:$id}]orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}}}pageInfo{hasNextPage}}}`;
 export async function getPresenterDetailPageData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>
 ): Promise<GetPresenterDetailPageDataQuery> {
 	return fetchApi(GetPresenterDetailPageDataDocument, { variables });
 }
 
+export const GetPresenterDetailPathsDataDocument = `query getPresenterDetailPathsData($language:Language!$first:Int){persons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getPresenterDetailPathsData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPathsDataQueryVariables>
 ): Promise<GetPresenterDetailPathsDataQuery> {

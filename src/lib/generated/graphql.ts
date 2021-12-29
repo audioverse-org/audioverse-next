@@ -1,10 +1,3 @@
-import {
-	useQuery,
-	UseQueryOptions,
-	useMutation,
-	UseMutationOptions,
-} from 'react-query';
-import { graphqlFetcher } from '@lib/api/fetchApi';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -14240,5119 +14233,835 @@ export type GenerateFeedFragment = {
 	sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
 };
 
-export const CardBibleChapterFragmentDoc = `
-    fragment cardBibleChapter on BibleChapter {
-  id
-  title
-  url
-}
-    `;
-export const PersonLockupFragmentDoc = `
-    fragment personLockup on Person {
-  name
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
-export const CardRecordingSequenceHatFragmentDoc = `
-    fragment cardRecordingSequenceHat on Recording {
-  sequence {
-    id
-    canonicalPath(useFuturePath: true)
-    contentType
-    image {
-      url(size: 100)
-    }
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
-  writers: persons(role: WRITER) {
-    ...personLockup
-  }
-}
-    ${PersonLockupFragmentDoc}`;
-export const AndMiniplayerFragmentDoc = `
-    fragment andMiniplayer on Recording {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  duration
-  sequence {
-    title
-    contentType
-  }
-  audioFiles {
-    url
-    filesize
-    mimeType
-    duration
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    url
-    filesize
-    mimeType
-    duration
-  }
-  videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-    url
-    filesize
-    mimeType
-    duration
-  }
-}
-    `;
-export const TeaseRecordingFragmentDoc = `
-    fragment teaseRecording on Recording {
-  ...andMiniplayer
-  recordingContentType: contentType
-  canonicalPath(useFuturePath: true)
-  persons(role: SPEAKER) {
-    ...personLockup
-  }
-  sequenceIndex
-  sequence {
-    id
-    recordings {
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${AndMiniplayerFragmentDoc}
-${PersonLockupFragmentDoc}`;
-export const CardRecordingFragmentDoc = `
-    fragment cardRecording on Recording {
-  ...cardRecordingSequenceHat
-  ...teaseRecording
-}
-    ${CardRecordingSequenceHatFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
-export const CardSequenceFragmentDoc = `
-    fragment cardSequence on Sequence {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  contentType
-  duration
-  summary
-  speakers: persons(role: SPEAKER, orderBy: [{field: NAME, direction: ASC}]) {
-    nodes {
-      ...personLockup
-    }
-  }
-  sequenceWriters: persons(role: WRITER, orderBy: [{field: NAME, direction: ASC}]) {
-    nodes {
-      ...personLockup
-    }
-  }
-  allRecordings: recordings(first: 3) {
-    aggregate {
-      count
-    }
-  }
-}
-    ${PersonLockupFragmentDoc}`;
-export const SponsorLockupFragmentDoc = `
-    fragment sponsorLockup on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
-export const CardRecordingStackFragmentDoc = `
-    fragment cardRecordingStack on Sequence {
-  contentType
-  favoritedRecordings: recordings(viewerHasFavorited: true) {
-    nodes {
-      sponsor {
-        ...sponsorLockup
-      }
-      ...teaseRecording
-      ...cardRecordingSequenceHat
-    }
-  }
-}
-    ${SponsorLockupFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${CardRecordingSequenceHatFragmentDoc}`;
-export const CardCollectionFragmentDoc = `
-    fragment cardCollection on Collection {
-  id
-  canonicalPath(useFuturePath: true)
-  collectionContentType: contentType
-  title
-  startDate
-  endDate
-  duration
-  image {
-    id
-    url(size: 240, cropMode: DEFAULT)
-  }
-  allSequences: sequences {
-    aggregate {
-      count
-    }
-  }
-  allRecordings: recordings(sequenceId: 0) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const CardSponsorFragmentDoc = `
-    fragment cardSponsor on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  image {
-    url(size: 128)
-  }
-  collections(
-    first: 2
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    aggregate {
-      count
-    }
-  }
-  sequences {
-    aggregate {
-      count
-    }
-  }
-  recordings {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const CardPersonFragmentDoc = `
-    fragment cardPerson on Person {
-  id
-  name
-  canonicalPath(useFuturePath: true)
-  image {
-    id
-    url(size: 128)
-  }
-  recordings(first: 2, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const CardFavoriteFragmentDoc = `
-    fragment cardFavorite on UserFavorite {
-  createdAt
-  entity {
-    __typename
-    ... on Recording {
-      ...cardRecording
-    }
-    ... on Sequence {
-      viewerHasFavorited
-      ...cardSequence
-      ...cardRecordingStack
-    }
-    ... on Collection {
-      ...cardCollection
-    }
-    ... on Sponsor {
-      ...cardSponsor
-    }
-    ... on Person {
-      ...cardPerson
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardRecordingStackFragmentDoc}
-${CardCollectionFragmentDoc}
-${CardSponsorFragmentDoc}
-${CardPersonFragmentDoc}`;
-export const CardPlaylistFragmentDoc = `
-    fragment cardPlaylist on UserPlaylist {
-  id
-  title
-  recordings(first: 2) {
-    nodes {
-      ...teaseRecording
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${TeaseRecordingFragmentDoc}`;
-export const CardPostFragmentDoc = `
-    fragment cardPost on BlogPost {
-  image {
-    url(size: 500, cropMode: MAX_SIZE)
-  }
-  publishDate
-  title
-  teaser
-  canonicalPath(useFuturePath: true)
-  readingDuration
-}
-    `;
-export const CopyrightInfoFragmentDoc = `
-    fragment copyrightInfo on Recording {
-  copyrightYear
-  distributionAgreement {
-    sponsor {
-      title
-    }
-    license {
-      summary
-      image {
-        url(size: 100, cropMode: MAX_SIZE)
-      }
-    }
-  }
-  sponsor {
-    title
-  }
-}
-    `;
-export const CopyrightInfosFragmentDoc = `
-    fragment copyrightInfos on Recording {
-  id
-  copyrightYear
-  distributionAgreement {
-    id
-  }
-  sponsor {
-    id
-  }
-  ...copyrightInfo
-}
-    ${CopyrightInfoFragmentDoc}`;
-export const SequenceNavFragmentDoc = `
-    fragment sequenceNav on Recording {
-  sequencePreviousRecording {
-    canonicalPath(useFuturePath: true)
-  }
-  sequenceNextRecording {
-    canonicalPath(useFuturePath: true)
-  }
-}
-    `;
-export const ButtonDownloadFragmentDoc = `
-    fragment buttonDownload on Recording {
-  isDownloadAllowed
-  videoDownloads: videoFiles(allowedContainers: MP4) {
-    url
-    filesize
-    height
-    width
-  }
-  audioDownloads: audioFiles(allowedContainers: MP3) {
-    url
-    filesize
-    bitrate
-  }
-}
-    `;
-export const ButtonShareRecordingFragmentDoc = `
-    fragment buttonShareRecording on Recording {
-  id
-  title
-  shareUrl
-  speakers: persons(role: SPEAKER) {
-    name
-  }
-}
-    `;
-export const PlayerFragmentDoc = `
-    fragment player on Recording {
-  id
-  title
-  ...andMiniplayer
-  ...buttonDownload
-  ...buttonShareRecording
-}
-    ${AndMiniplayerFragmentDoc}
-${ButtonDownloadFragmentDoc}
-${ButtonShareRecordingFragmentDoc}`;
-export const RecordingFragmentDoc = `
-    fragment recording on Recording {
-  id
-  title
-  contentType
-  speakers: persons(role: SPEAKER) {
-    ...personLockup
-  }
-  writers: persons(role: WRITER) {
-    ...personLockup
-  }
-  attachments {
-    filename
-    url
-  }
-  description
-  imageWithFallback {
-    url(size: 1200)
-  }
-  recordingDate
-  recordingTags {
-    nodes {
-      tag {
-        id
-        name
-      }
-    }
-  }
-  sponsor {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  sequenceIndex
-  sequence {
-    id
-    title
-    contentType
-    canonicalPath(useFuturePath: true)
-    recordings(first: 1000) {
-      nodes {
-        ...teaseRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-  collection {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  transcript {
-    text
-  }
-  canonicalUrl(useFuturePath: true)
-  shareUrl
-  ...sequenceNav
-  ...copyrightInfo
-  ...player
-}
-    ${PersonLockupFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${SequenceNavFragmentDoc}
-${CopyrightInfoFragmentDoc}
-${PlayerFragmentDoc}`;
-export const SequenceFragmentDoc = `
-    fragment sequence on Sequence {
-  id
-  title
-  contentType
-  duration
-  description
-  startDate
-  endDate
-  collection {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  image {
-    url(size: 100)
-  }
-  sponsor {
-    title
-    canonicalPath(useFuturePath: true)
-  }
-  shareUrl
-  recordings(first: 250) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const TestimoniesFragmentDoc = `
-    fragment testimonies on Testimony {
-  id
-  body
-  author
-}
-    `;
-export const PreferencesFragmentDoc = `
-    fragment preferences on User {
-  autoplay
-  language
-  preferredAudioQuality
-  timezone
-}
-    `;
-export const ProfileFragmentDoc = `
-    fragment profile on User {
-  email
-  givenName
-  surname
-  address1
-  address2
-  city
-  province
-  postalCode
-  country
-}
-    `;
-export const BookFeedDescriptionFragmentDoc = `
-    fragment bookFeedDescription on Sequence {
-  title
-  recordings(first: 25) {
-    nodes {
-      authors: persons(role: WRITER) {
-        name
-      }
-      narrators: persons(role: SPEAKER) {
-        name
-      }
-    }
-  }
-}
-    `;
-export const CollectionPivotFragmentDoc = `
-    fragment collectionPivot on Collection {
-  title
-  canonicalPath(useFuturePath: true)
-  contentType
-}
-    `;
-export const PresenterPivotFragmentDoc = `
-    fragment presenterPivot on Person {
-  name
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
-export const SponsorPivotFragmentDoc = `
-    fragment sponsorPivot on Sponsor {
-  id
-  title
-  canonicalPath(useFuturePath: true)
-  imageWithFallback {
-    url(size: 128)
-  }
-}
-    `;
-export const GenerateFeedFragmentDoc = `
-    fragment generateFeed on Recording {
-  id
-  title
-  contentType
-  description
-  publishDate
-  audioFiles {
-    id
-    url
-    filesize
-    duration
-    mimeType
-    bitrate
-  }
-  videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-    id
-    url
-    filesize
-    duration
-    mimeType
-    bitrate
-    container
-  }
-  persons(role: SPEAKER) {
-    name
-  }
-  sequence {
-    title
-  }
-  sponsor {
-    title
-  }
-}
-    `;
-export const GetWithAuthGuardDataDocument = `
-    query getWithAuthGuardData {
-  me {
-    user {
-      email
-      name
-    }
-  }
-}
-    `;
-export const useGetWithAuthGuardDataQuery = <
-	TData = GetWithAuthGuardDataQuery,
-	TError = unknown
->(
-	variables?: GetWithAuthGuardDataQueryVariables,
-	options?: UseQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
-) =>
-	useQuery<GetWithAuthGuardDataQuery, TError, TData>(
-		['getWithAuthGuardData', variables],
-		graphqlFetcher<
-			GetWithAuthGuardDataQuery,
-			GetWithAuthGuardDataQueryVariables
-		>(GetWithAuthGuardDataDocument, variables),
-		options
-	);
-export const LoginForgotPasswordDocument = `
-    mutation loginForgotPassword($email: String!) {
-  userRecover(email: $email) {
-    errors {
-      message
-    }
-    success
-  }
-}
-    `;
-export const useLoginForgotPasswordMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		LoginForgotPasswordMutation,
-		TError,
-		LoginForgotPasswordMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		LoginForgotPasswordMutation,
-		TError,
-		LoginForgotPasswordMutationVariables,
-		TContext
-	>(
-		(variables?: LoginForgotPasswordMutationVariables) =>
-			graphqlFetcher<
-				LoginForgotPasswordMutation,
-				LoginForgotPasswordMutationVariables
-			>(LoginForgotPasswordDocument, variables)(),
-		options
-	);
-export const GetPlaylistButtonDataDocument = `
-    query getPlaylistButtonData($language: Language!, $recordingId: ID!) {
-  me {
-    user {
-      playlists(language: $language) {
-        nodes {
-          id
-          title
-          hasRecording(id: $recordingId)
-        }
-      }
-    }
-  }
-}
-    `;
-export const useGetPlaylistButtonDataQuery = <
-	TData = GetPlaylistButtonDataQuery,
-	TError = unknown
->(
-	variables: GetPlaylistButtonDataQueryVariables,
-	options?: UseQueryOptions<GetPlaylistButtonDataQuery, TError, TData>
-) =>
-	useQuery<GetPlaylistButtonDataQuery, TError, TData>(
-		['getPlaylistButtonData', variables],
-		graphqlFetcher<
-			GetPlaylistButtonDataQuery,
-			GetPlaylistButtonDataQueryVariables
-		>(GetPlaylistButtonDataDocument, variables),
-		options
-	);
-export const GetNotFoundPageDataDocument = `
-    query getNotFoundPageData {
-  websiteRecentRecordings(language: ENGLISH, first: 3) {
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetNotFoundPageDataQuery = <
-	TData = GetNotFoundPageDataQuery,
-	TError = unknown
->(
-	variables?: GetNotFoundPageDataQueryVariables,
-	options?: UseQueryOptions<GetNotFoundPageDataQuery, TError, TData>
-) =>
-	useQuery<GetNotFoundPageDataQuery, TError, TData>(
-		['getNotFoundPageData', variables],
-		graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(
-			GetNotFoundPageDataDocument,
-			variables
-		),
-		options
-	);
-export const GetRecordingPlaybackProgressDocument = `
-    query getRecordingPlaybackProgress($id: ID!) {
-  recording(id: $id) {
-    viewerPlaybackSession {
-      positionPercentage
-    }
-  }
-}
-    `;
-export const useGetRecordingPlaybackProgressQuery = <
-	TData = GetRecordingPlaybackProgressQuery,
-	TError = unknown
->(
-	variables: GetRecordingPlaybackProgressQueryVariables,
-	options?: UseQueryOptions<GetRecordingPlaybackProgressQuery, TError, TData>
-) =>
-	useQuery<GetRecordingPlaybackProgressQuery, TError, TData>(
-		['getRecordingPlaybackProgress', variables],
-		graphqlFetcher<
-			GetRecordingPlaybackProgressQuery,
-			GetRecordingPlaybackProgressQueryVariables
-		>(GetRecordingPlaybackProgressDocument, variables),
-		options
-	);
-export const RecordingPlaybackProgressSetDocument = `
-    mutation recordingPlaybackProgressSet($id: ID!, $percentage: Float!) {
-  recordingPlaybackSessionAdvance(
-    recordingId: $id
-    input: {positionPercentage: $percentage}
-  ) {
-    recording {
-      viewerPlaybackSession {
-        positionPercentage
-      }
-    }
-  }
-}
-    `;
-export const useRecordingPlaybackProgressSetMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		RecordingPlaybackProgressSetMutation,
-		TError,
-		RecordingPlaybackProgressSetMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		RecordingPlaybackProgressSetMutation,
-		TError,
-		RecordingPlaybackProgressSetMutationVariables,
-		TContext
-	>(
-		(variables?: RecordingPlaybackProgressSetMutationVariables) =>
-			graphqlFetcher<
-				RecordingPlaybackProgressSetMutation,
-				RecordingPlaybackProgressSetMutationVariables
-			>(RecordingPlaybackProgressSetDocument, variables)(),
-		options
-	);
-export const GetAboutPageDataDocument = `
-    query getAboutPageData($id: ID!) {
-  page(id: $id) {
-    title
-    body
-    type
-    slug
-  }
-}
-    `;
-export const useGetAboutPageDataQuery = <
-	TData = GetAboutPageDataQuery,
-	TError = unknown
->(
-	variables: GetAboutPageDataQueryVariables,
-	options?: UseQueryOptions<GetAboutPageDataQuery, TError, TData>
-) =>
-	useQuery<GetAboutPageDataQuery, TError, TData>(
-		['getAboutPageData', variables],
-		graphqlFetcher<GetAboutPageDataQuery, GetAboutPageDataQueryVariables>(
-			GetAboutPageDataDocument,
-			variables
-		),
-		options
-	);
-export const GetAboutStaticPathsDocument = `
-    query getAboutStaticPaths($language: Language!, $first: Int!) {
-  pages(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetAboutStaticPathsQuery = <
-	TData = GetAboutStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetAboutStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetAboutStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetAboutStaticPathsQuery, TError, TData>(
-		['getAboutStaticPaths', variables],
-		graphqlFetcher<GetAboutStaticPathsQuery, GetAboutStaticPathsQueryVariables>(
-			GetAboutStaticPathsDocument,
-			variables
-		),
-		options
-	);
-export const GetAccountPlaylistsPageDataDocument = `
-    query getAccountPlaylistsPageData($language: Language!) {
-  me {
-    user {
-      playlists(language: $language) {
-        nodes {
-          id
-          title
-          isPublic
-          summary
-          recordings {
-            aggregate {
-              count
-            }
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const useGetAccountPlaylistsPageDataQuery = <
-	TData = GetAccountPlaylistsPageDataQuery,
-	TError = unknown
->(
-	variables: GetAccountPlaylistsPageDataQueryVariables,
-	options?: UseQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
-		['getAccountPlaylistsPageData', variables],
-		graphqlFetcher<
-			GetAccountPlaylistsPageDataQuery,
-			GetAccountPlaylistsPageDataQueryVariables
-		>(GetAccountPlaylistsPageDataDocument, variables),
-		options
-	);
-export const AddAccountPlaylistDocument = `
-    mutation addAccountPlaylist($isPublic: Boolean!, $language: Language!, $recordingIds: [ID!], $summary: String, $title: String!) {
-  playlistAdd(
-    input: {isPublic: $isPublic, language: $language, recordingIds: $recordingIds, summary: $summary, title: $title}
-  ) {
-    id
-  }
-}
-    `;
-export const useAddAccountPlaylistMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		AddAccountPlaylistMutation,
-		TError,
-		AddAccountPlaylistMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		AddAccountPlaylistMutation,
-		TError,
-		AddAccountPlaylistMutationVariables,
-		TContext
-	>(
-		(variables?: AddAccountPlaylistMutationVariables) =>
-			graphqlFetcher<
-				AddAccountPlaylistMutation,
-				AddAccountPlaylistMutationVariables
-			>(AddAccountPlaylistDocument, variables)(),
-		options
-	);
-export const GetAccountPreferencesDataDocument = `
-    query getAccountPreferencesData {
-  me {
-    user {
-      ...preferences
-    }
-  }
-}
-    ${PreferencesFragmentDoc}`;
-export const useGetAccountPreferencesDataQuery = <
-	TData = GetAccountPreferencesDataQuery,
-	TError = unknown
->(
-	variables?: GetAccountPreferencesDataQueryVariables,
-	options?: UseQueryOptions<GetAccountPreferencesDataQuery, TError, TData>
-) =>
-	useQuery<GetAccountPreferencesDataQuery, TError, TData>(
-		['getAccountPreferencesData', variables],
-		graphqlFetcher<
-			GetAccountPreferencesDataQuery,
-			GetAccountPreferencesDataQueryVariables
-		>(GetAccountPreferencesDataDocument, variables),
-		options
-	);
-export const UpdateAccountPreferencesDocument = `
-    mutation updateAccountPreferences($autoplay: Boolean!, $language: Language!, $preferredAudioQuality: RecordingQuality!, $timezone: Timezone!) {
-  updateMyProfile(
-    input: {autoplay: $autoplay, language: $language, preferredAudioQuality: $preferredAudioQuality, timezone: $timezone}
-  ) {
-    errors {
-      message
-    }
-    authenticatedUser {
-      user {
-        ...preferences
-      }
-    }
-  }
-}
-    ${PreferencesFragmentDoc}`;
-export const useUpdateAccountPreferencesMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		UpdateAccountPreferencesMutation,
-		TError,
-		UpdateAccountPreferencesMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		UpdateAccountPreferencesMutation,
-		TError,
-		UpdateAccountPreferencesMutationVariables,
-		TContext
-	>(
-		(variables?: UpdateAccountPreferencesMutationVariables) =>
-			graphqlFetcher<
-				UpdateAccountPreferencesMutation,
-				UpdateAccountPreferencesMutationVariables
-			>(UpdateAccountPreferencesDocument, variables)(),
-		options
-	);
-export const GetProfileDataDocument = `
-    query getProfileData {
-  me {
-    user {
-      ...profile
-    }
-  }
-}
-    ${ProfileFragmentDoc}`;
-export const useGetProfileDataQuery = <
-	TData = GetProfileDataQuery,
-	TError = unknown
->(
-	variables?: GetProfileDataQueryVariables,
-	options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
-) =>
-	useQuery<GetProfileDataQuery, TError, TData>(
-		['getProfileData', variables],
-		graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(
-			GetProfileDataDocument,
-			variables
-		),
-		options
-	);
-export const UpdateProfileDataDocument = `
-    mutation updateProfileData($email: String, $password: String, $givenName: String, $surname: String) {
-  updateMyProfile(
-    input: {email: $email, password: $password, givenName: $givenName, surname: $surname}
-  ) {
-    errors {
-      message
-    }
-    authenticatedUser {
-      user {
-        ...profile
-      }
-    }
-  }
-}
-    ${ProfileFragmentDoc}`;
-export const useUpdateProfileDataMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		UpdateProfileDataMutation,
-		TError,
-		UpdateProfileDataMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		UpdateProfileDataMutation,
-		TError,
-		UpdateProfileDataMutationVariables,
-		TContext
-	>(
-		(variables?: UpdateProfileDataMutationVariables) =>
-			graphqlFetcher<
-				UpdateProfileDataMutation,
-				UpdateProfileDataMutationVariables
-			>(UpdateProfileDataDocument, variables)(),
-		options
-	);
-export const RegisterDocument = `
-    mutation register($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
-  signup(
-    input: {email: $email, password: $password, givenName: $firstName, surname: $lastName}
-  ) {
-    errors {
-      message
-    }
-  }
-}
-    `;
-export const useRegisterMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		RegisterMutation,
-		TError,
-		RegisterMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<RegisterMutation, TError, RegisterMutationVariables, TContext>(
-		(variables?: RegisterMutationVariables) =>
-			graphqlFetcher<RegisterMutation, RegisterMutationVariables>(
-				RegisterDocument,
-				variables
-			)(),
-		options
-	);
-export const RegisterSocialDocument = `
-    mutation registerSocial($socialId: String!, $socialName: UserSocialServiceName!, $socialToken: String!, $givenName: String, $surname: String) {
-  loginSocial(
-    input: {socialId: $socialId, socialName: $socialName, socialToken: $socialToken, givenName: $givenName, surname: $surname}
-  ) {
-    authenticatedUser {
-      sessionToken
-    }
-    errors {
-      message
-    }
-  }
-}
-    `;
-export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		RegisterSocialMutation,
-		TError,
-		RegisterSocialMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		RegisterSocialMutation,
-		TError,
-		RegisterSocialMutationVariables,
-		TContext
-	>(
-		(variables?: RegisterSocialMutationVariables) =>
-			graphqlFetcher<RegisterSocialMutation, RegisterSocialMutationVariables>(
-				RegisterSocialDocument,
-				variables
-			)(),
-		options
-	);
-export const RegisterIsLoggedInDocument = `
-    query registerIsLoggedIn {
-  me {
-    user {
-      email
-    }
-  }
-}
-    `;
-export const useRegisterIsLoggedInQuery = <
-	TData = RegisterIsLoggedInQuery,
-	TError = unknown
->(
-	variables?: RegisterIsLoggedInQueryVariables,
-	options?: UseQueryOptions<RegisterIsLoggedInQuery, TError, TData>
-) =>
-	useQuery<RegisterIsLoggedInQuery, TError, TData>(
-		['registerIsLoggedIn', variables],
-		graphqlFetcher<RegisterIsLoggedInQuery, RegisterIsLoggedInQueryVariables>(
-			RegisterIsLoggedInDocument,
-			variables
-		),
-		options
-	);
-export const ResetPasswordDocument = `
-    mutation resetPassword($token: String!, $password: String!) {
-  userReset(password: $password, token: $token) {
-    errors {
-      message
-    }
-    success
-  }
-}
-    `;
-export const useResetPasswordMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		ResetPasswordMutation,
-		TError,
-		ResetPasswordMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		ResetPasswordMutation,
-		TError,
-		ResetPasswordMutationVariables,
-		TContext
-	>(
-		(variables?: ResetPasswordMutationVariables) =>
-			graphqlFetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(
-				ResetPasswordDocument,
-				variables
-			)(),
-		options
-	);
-export const GetAudiobookDetailPageDataDocument = `
-    query getAudiobookDetailPageData($id: ID!) {
-  audiobook(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
-export const useGetAudiobookDetailPageDataQuery = <
-	TData = GetAudiobookDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookDetailPageDataQuery, TError, TData>(
-		['getAudiobookDetailPageData', variables],
-		graphqlFetcher<
-			GetAudiobookDetailPageDataQuery,
-			GetAudiobookDetailPageDataQueryVariables
-		>(GetAudiobookDetailPageDataDocument, variables),
-		options
-	);
-export const GetAudiobookFeedDataDocument = `
-    query getAudiobookFeedData($id: ID!) {
-  audiobook(id: $id) {
-    id
-    title
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-    ...bookFeedDescription
-  }
-}
-    ${GenerateFeedFragmentDoc}
-${BookFeedDescriptionFragmentDoc}`;
-export const useGetAudiobookFeedDataQuery = <
-	TData = GetAudiobookFeedDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookFeedDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookFeedDataQuery, TError, TData>(
-		['getAudiobookFeedData', variables],
-		graphqlFetcher<
-			GetAudiobookFeedDataQuery,
-			GetAudiobookFeedDataQueryVariables
-		>(GetAudiobookFeedDataDocument, variables),
-		options
-	);
-export const GetAudiobookDetailPathsDataDocument = `
-    query getAudiobookDetailPathsData($language: Language!, $first: Int) {
-  audiobooks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetAudiobookDetailPathsDataQuery = <
-	TData = GetAudiobookDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookDetailPathsDataQuery, TError, TData>(
-		['getAudiobookDetailPathsData', variables],
-		graphqlFetcher<
-			GetAudiobookDetailPathsDataQuery,
-			GetAudiobookDetailPathsDataQueryVariables
-		>(GetAudiobookDetailPathsDataDocument, variables),
-		options
-	);
-export const GetAudiobookListPageDataDocument = `
-    query getAudiobookListPageData($language: Language!, $first: Int = 12, $offset: Int = 0) {
-  audiobooks(
-    language: $language
-    first: $first
-    offset: $offset
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
-export const useGetAudiobookListPageDataQuery = <
-	TData = GetAudiobookListPageDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookListPageDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookListPageDataQuery, TError, TData>(
-		['getAudiobookListPageData', variables],
-		graphqlFetcher<
-			GetAudiobookListPageDataQuery,
-			GetAudiobookListPageDataQueryVariables
-		>(GetAudiobookListPageDataDocument, variables),
-		options
-	);
-export const GetAudiobookListPathsDataDocument = `
-    query getAudiobookListPathsData($language: Language!) {
-  audiobooks(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetAudiobookListPathsDataQuery = <
-	TData = GetAudiobookListPathsDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookListPathsDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookListPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookListPathsDataQuery, TError, TData>(
-		['getAudiobookListPathsData', variables],
-		graphqlFetcher<
-			GetAudiobookListPathsDataQuery,
-			GetAudiobookListPathsDataQueryVariables
-		>(GetAudiobookListPathsDataDocument, variables),
-		options
-	);
-export const GetAudiobookTrackDetailDataDocument = `
-    query getAudiobookTrackDetailData($id: ID!) {
-  audiobookTrack(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
-export const useGetAudiobookTrackDetailDataQuery = <
-	TData = GetAudiobookTrackDetailDataQuery,
-	TError = unknown
->(
-	variables: GetAudiobookTrackDetailDataQueryVariables,
-	options?: UseQueryOptions<GetAudiobookTrackDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetAudiobookTrackDetailDataQuery, TError, TData>(
-		['getAudiobookTrackDetailData', variables],
-		graphqlFetcher<
-			GetAudiobookTrackDetailDataQuery,
-			GetAudiobookTrackDetailDataQueryVariables
-		>(GetAudiobookTrackDetailDataDocument, variables),
-		options
-	);
-export const GetAudiobookTrackDetailStaticPathsDocument = `
-    query getAudiobookTrackDetailStaticPaths($language: Language!, $first: Int) {
-  audiobookTracks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetAudiobookTrackDetailStaticPathsQuery = <
-	TData = GetAudiobookTrackDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetAudiobookTrackDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<
-		GetAudiobookTrackDetailStaticPathsQuery,
-		TError,
-		TData
-	>
-) =>
-	useQuery<GetAudiobookTrackDetailStaticPathsQuery, TError, TData>(
-		['getAudiobookTrackDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetAudiobookTrackDetailStaticPathsQuery,
-			GetAudiobookTrackDetailStaticPathsQueryVariables
-		>(GetAudiobookTrackDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetBlogPageDataDocument = `
-    query getBlogPageData($language: Language!, $offset: Int = 0, $first: Int = 12) {
-  blogPosts(
-    language: $language
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-    first: $first
-    offset: $offset
-  ) {
-    nodes {
-      ...cardPost
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardPostFragmentDoc}`;
-export const useGetBlogPageDataQuery = <
-	TData = GetBlogPageDataQuery,
-	TError = unknown
->(
-	variables: GetBlogPageDataQueryVariables,
-	options?: UseQueryOptions<GetBlogPageDataQuery, TError, TData>
-) =>
-	useQuery<GetBlogPageDataQuery, TError, TData>(
-		['getBlogPageData', variables],
-		graphqlFetcher<GetBlogPageDataQuery, GetBlogPageDataQueryVariables>(
-			GetBlogPageDataDocument,
-			variables
-		),
-		options
-	);
-export const GetBlogPathsDataDocument = `
-    query getBlogPathsData($language: Language!) {
-  blogPosts(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetBlogPathsDataQuery = <
-	TData = GetBlogPathsDataQuery,
-	TError = unknown
->(
-	variables: GetBlogPathsDataQueryVariables,
-	options?: UseQueryOptions<GetBlogPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetBlogPathsDataQuery, TError, TData>(
-		['getBlogPathsData', variables],
-		graphqlFetcher<GetBlogPathsDataQuery, GetBlogPathsDataQueryVariables>(
-			GetBlogPathsDataDocument,
-			variables
-		),
-		options
-	);
-export const GetBlogDetailDataDocument = `
-    query getBlogDetailData($id: ID!, $language: Language!) {
-  blogPost(id: $id) {
-    id
-    title
-    image {
-      url(size: 2100, cropMode: MAX_SIZE)
-    }
-    body
-    canonicalPath(useFuturePath: true)
-    canonicalUrl(useFuturePath: true)
-    language
-    publishDate
-    readingDuration
-    teaser
-  }
-  blogPosts(
-    language: $language
-    first: 5
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardPost
-    }
-  }
-}
-    ${CardPostFragmentDoc}`;
-export const useGetBlogDetailDataQuery = <
-	TData = GetBlogDetailDataQuery,
-	TError = unknown
->(
-	variables: GetBlogDetailDataQueryVariables,
-	options?: UseQueryOptions<GetBlogDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetBlogDetailDataQuery, TError, TData>(
-		['getBlogDetailData', variables],
-		graphqlFetcher<GetBlogDetailDataQuery, GetBlogDetailDataQueryVariables>(
-			GetBlogDetailDataDocument,
-			variables
-		),
-		options
-	);
-export const GetBlogDetailStaticPathsDocument = `
-    query getBlogDetailStaticPaths($language: Language!, $first: Int) {
-  blogPosts(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetBlogDetailStaticPathsQuery = <
-	TData = GetBlogDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetBlogDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetBlogDetailStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetBlogDetailStaticPathsQuery, TError, TData>(
-		['getBlogDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetBlogDetailStaticPathsQuery,
-			GetBlogDetailStaticPathsQueryVariables
-		>(GetBlogDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetCollectionDetailPageDataDocument = `
-    query getCollectionDetailPageData($id: ID!) {
-  collection(id: $id) {
-    id
-    title
-    contentType
-    startDate
-    endDate
-    duration
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    location
-    image {
-      url(size: 1000, cropMode: MAX_SIZE)
-    }
-    sponsor {
-      id
-      title
-      canonicalPath(useFuturePath: true)
-      ...sponsorLockup
-    }
-    persons(
-      first: 3
-      role: SPEAKER
-      orderBy: [{field: RECORDING_COUNT, direction: DESC}, {field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardPerson
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    sequences(first: 3, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardSequence
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    recordings(
-      first: 3
-      sequenceId: 0
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-}
-    ${SponsorLockupFragmentDoc}
-${CardPersonFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetCollectionDetailPageDataQuery = <
-	TData = GetCollectionDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionDetailPageDataQuery, TError, TData>(
-		['getCollectionDetailPageData', variables],
-		graphqlFetcher<
-			GetCollectionDetailPageDataQuery,
-			GetCollectionDetailPageDataQueryVariables
-		>(GetCollectionDetailPageDataDocument, variables),
-		options
-	);
-export const GetCollectionFeedDataDocument = `
-    query getCollectionFeedData($id: ID!) {
-  collection(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    image {
-      url(size: 600)
-    }
-    recordings(first: 25, orderBy: [{field: RECORDED_AT, direction: ASC}]) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetCollectionFeedDataQuery = <
-	TData = GetCollectionFeedDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionFeedDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionFeedDataQuery, TError, TData>(
-		['getCollectionFeedData', variables],
-		graphqlFetcher<
-			GetCollectionFeedDataQuery,
-			GetCollectionFeedDataQueryVariables
-		>(GetCollectionFeedDataDocument, variables),
-		options
-	);
-export const GetCollectionDetailPathsDataDocument = `
-    query getCollectionDetailPathsData($language: Language!, $first: Int) {
-  collections(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetCollectionDetailPathsDataQuery = <
-	TData = GetCollectionDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionDetailPathsDataQuery, TError, TData>(
-		['getCollectionDetailPathsData', variables],
-		graphqlFetcher<
-			GetCollectionDetailPathsDataQuery,
-			GetCollectionDetailPathsDataQueryVariables
-		>(GetCollectionDetailPathsDataDocument, variables),
-		options
-	);
-export const GetCollectionListPageDataDocument = `
-    query getCollectionListPageData($language: Language!, $offset: Int, $first: Int) {
-  collections(
-    language: $language
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}`;
-export const useGetCollectionListPageDataQuery = <
-	TData = GetCollectionListPageDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionListPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionListPageDataQuery, TError, TData>(
-		['getCollectionListPageData', variables],
-		graphqlFetcher<
-			GetCollectionListPageDataQuery,
-			GetCollectionListPageDataQueryVariables
-		>(GetCollectionListPageDataDocument, variables),
-		options
-	);
-export const GetCollectionListPathsDataDocument = `
-    query getCollectionListPathsData($language: Language!) {
-  collections(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetCollectionListPathsDataQuery = <
-	TData = GetCollectionListPathsDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionListPathsDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionListPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionListPathsDataQuery, TError, TData>(
-		['getCollectionListPathsData', variables],
-		graphqlFetcher<
-			GetCollectionListPathsDataQuery,
-			GetCollectionListPathsDataQueryVariables
-		>(GetCollectionListPathsDataDocument, variables),
-		options
-	);
-export const GetCollectionPresentersPageDataDocument = `
-    query getCollectionPresentersPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    persons(
-      role: SPEAKER
-      offset: $offset
-      first: $first
-      orderBy: [{field: NAME, direction: ASC}]
-    ) {
-      nodes {
-        ...cardPerson
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
-${CardPersonFragmentDoc}`;
-export const useGetCollectionPresentersPageDataQuery = <
-	TData = GetCollectionPresentersPageDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionPresentersPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionPresentersPageDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionPresentersPageDataQuery, TError, TData>(
-		['getCollectionPresentersPageData', variables],
-		graphqlFetcher<
-			GetCollectionPresentersPageDataQuery,
-			GetCollectionPresentersPageDataQueryVariables
-		>(GetCollectionPresentersPageDataDocument, variables),
-		options
-	);
-export const GetCollectionSequencesPageDataDocument = `
-    query getCollectionSequencesPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    sequences(
-      offset: $offset
-      first: $first
-      orderBy: [{field: TITLE, direction: ASC}]
-    ) {
-      nodes {
-        ...cardSequence
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
-export const useGetCollectionSequencesPageDataQuery = <
-	TData = GetCollectionSequencesPageDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionSequencesPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionSequencesPageDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionSequencesPageDataQuery, TError, TData>(
-		['getCollectionSequencesPageData', variables],
-		graphqlFetcher<
-			GetCollectionSequencesPageDataQuery,
-			GetCollectionSequencesPageDataQueryVariables
-		>(GetCollectionSequencesPageDataDocument, variables),
-		options
-	);
-export const GetCollectionTeachingsPageDataDocument = `
-    query getCollectionTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
-  collection(id: $id) {
-    id
-    ...collectionPivot
-    recordings(
-      offset: $offset
-      first: $first
-      sequenceId: 0
-      orderBy: [{field: TITLE, direction: ASC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${CollectionPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetCollectionTeachingsPageDataQuery = <
-	TData = GetCollectionTeachingsPageDataQuery,
-	TError = unknown
->(
-	variables: GetCollectionTeachingsPageDataQueryVariables,
-	options?: UseQueryOptions<GetCollectionTeachingsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetCollectionTeachingsPageDataQuery, TError, TData>(
-		['getCollectionTeachingsPageData', variables],
-		graphqlFetcher<
-			GetCollectionTeachingsPageDataQuery,
-			GetCollectionTeachingsPageDataQueryVariables
-		>(GetCollectionTeachingsPageDataDocument, variables),
-		options
-	);
-export const SubmitContactPageDocument = `
-    mutation submitContactPage($language: Language!, $recipient: PageContactRecipient!, $firstName: String!, $lastName: String!, $email: String!, $body: String!) {
-  pageContactSubmit(
-    input: {language: $language, recipient: $recipient, givenName: $firstName, surname: $lastName, email: $email, body: $body}
-  ) {
-    success
-  }
-}
-    `;
-export const useSubmitContactPageMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SubmitContactPageMutation,
-		TError,
-		SubmitContactPageMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SubmitContactPageMutation,
-		TError,
-		SubmitContactPageMutationVariables,
-		TContext
-	>(
-		(variables?: SubmitContactPageMutationVariables) =>
-			graphqlFetcher<
-				SubmitContactPageMutation,
-				SubmitContactPageMutationVariables
-			>(SubmitContactPageDocument, variables)(),
-		options
-	);
-export const GetDiscoverPageDataDocument = `
-    query getDiscoverPageData($language: Language!) {
-  recentTeachings: sermons(
-    language: $language
-    first: 6
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  trendingTeachings: popularRecordings(language: $language, first: 6) {
-    nodes {
-      recording {
-        ...cardRecording
-      }
-    }
-  }
-  storySeasons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-      recordings(first: 2) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-  }
-  conferences(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-      sequences(first: 2, orderBy: [{field: RECORDING_COUNT, direction: DESC}]) {
-        nodes {
-          ...cardSequence
-        }
-      }
-      recordings(
-        first: 2
-        sequenceId: 0
-        orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardCollectionFragmentDoc}`;
-export const useGetDiscoverPageDataQuery = <
-	TData = GetDiscoverPageDataQuery,
-	TError = unknown
->(
-	variables: GetDiscoverPageDataQueryVariables,
-	options?: UseQueryOptions<GetDiscoverPageDataQuery, TError, TData>
-) =>
-	useQuery<GetDiscoverPageDataQuery, TError, TData>(
-		['getDiscoverPageData', variables],
-		graphqlFetcher<GetDiscoverPageDataQuery, GetDiscoverPageDataQueryVariables>(
-			GetDiscoverPageDataDocument,
-			variables
-		),
-		options
-	);
-export const GetDiscoverCollectionsPageDataDocument = `
-    query getDiscoverCollectionsPageData($language: Language!) {
-  sequence(id: 175) {
-    ...cardSequence
-  }
-  persons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_COUNT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardPerson
-    }
-  }
-  serieses(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  conferences(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-  }
-  sponsors(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_COUNT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSponsor
-    }
-  }
-  audiobooks(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  storySeasons(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-  musicAlbums(
-    language: $language
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}
-${CardPersonFragmentDoc}
-${CardCollectionFragmentDoc}
-${CardSponsorFragmentDoc}`;
-export const useGetDiscoverCollectionsPageDataQuery = <
-	TData = GetDiscoverCollectionsPageDataQuery,
-	TError = unknown
->(
-	variables: GetDiscoverCollectionsPageDataQueryVariables,
-	options?: UseQueryOptions<GetDiscoverCollectionsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetDiscoverCollectionsPageDataQuery, TError, TData>(
-		['getDiscoverCollectionsPageData', variables],
-		graphqlFetcher<
-			GetDiscoverCollectionsPageDataQuery,
-			GetDiscoverCollectionsPageDataQueryVariables
-		>(GetDiscoverCollectionsPageDataDocument, variables),
-		options
-	);
-export const GetHomeStaticPropsDocument = `
-    query getHomeStaticProps($language: Language!) {
-  websiteRecentRecordings(language: $language) {
-    nodes {
-      ...cardRecording
-    }
-  }
-  testimonies(language: $language, first: 3) {
-    nodes {
-      ...testimonies
-    }
-  }
-  blogPosts(
-    language: $language
-    first: 6
-    orderBy: {field: PUBLISHED_AT, direction: DESC}
-  ) {
-    nodes {
-      ...cardPost
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${TestimoniesFragmentDoc}
-${CardPostFragmentDoc}`;
-export const useGetHomeStaticPropsQuery = <
-	TData = GetHomeStaticPropsQuery,
-	TError = unknown
->(
-	variables: GetHomeStaticPropsQueryVariables,
-	options?: UseQueryOptions<GetHomeStaticPropsQuery, TError, TData>
-) =>
-	useQuery<GetHomeStaticPropsQuery, TError, TData>(
-		['getHomeStaticProps', variables],
-		graphqlFetcher<GetHomeStaticPropsQuery, GetHomeStaticPropsQueryVariables>(
-			GetHomeStaticPropsDocument,
-			variables
-		),
-		options
-	);
-export const GetLibraryHistoryPageDataDocument = `
-    query getLibraryHistoryPageData($language: Language!, $first: Int!, $offset: Int!) {
-  me {
-    user {
-      downloadHistory(
-        language: $language
-        first: $first
-        offset: $offset
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          recording {
-            ...cardRecording
-          }
-        }
-        pageInfo {
-          hasNextPage
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetLibraryHistoryPageDataQuery = <
-	TData = GetLibraryHistoryPageDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryHistoryPageDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryHistoryPageDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryHistoryPageDataQuery, TError, TData>(
-		['getLibraryHistoryPageData', variables],
-		graphqlFetcher<
-			GetLibraryHistoryPageDataQuery,
-			GetLibraryHistoryPageDataQueryVariables
-		>(GetLibraryHistoryPageDataDocument, variables),
-		options
-	);
-export const GetLibraryDataDocument = `
-    query getLibraryData($language: Language!, $first: Int!, $offset: Int!, $groupSequences: Boolean!, $hasVideo: Boolean, $recordingDuration: IntegerRangeInput, $recordingContentType: RecordingContentType, $types: [FavoritableCatalogEntityType!], $viewerPlaybackStatus: RecordingViewerPlaybackStatus, $sortField: FavoritesSortableField!, $sortDirection: OrderByDirection!) {
-  me {
-    user {
-      favorites(
-        language: $language
-        first: $first
-        offset: $offset
-        groupSequences: $groupSequences
-        recordingDuration: $recordingDuration
-        recordingContentType: $recordingContentType
-        hasVideo: $hasVideo
-        types: $types
-        viewerPlaybackStatus: $viewerPlaybackStatus
-        orderBy: [{field: $sortField, direction: $sortDirection}]
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          ...cardFavorite
-        }
-      }
-    }
-  }
-}
-    ${CardFavoriteFragmentDoc}`;
-export const useGetLibraryDataQuery = <
-	TData = GetLibraryDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryDataQuery, TError, TData>(
-		['getLibraryData', variables],
-		graphqlFetcher<GetLibraryDataQuery, GetLibraryDataQueryVariables>(
-			GetLibraryDataDocument,
-			variables
-		),
-		options
-	);
-export const GetLibraryPlaylistPageDataDocument = `
-    query getLibraryPlaylistPageData($id: ID!) {
-  me {
-    user {
-      playlist(id: $id) {
-        title
-        createdAt
-        summary
-        recordings(offset: 0, first: 1500) {
-          nodes {
-            ...cardRecording
-          }
-          aggregate {
-            count
-          }
-        }
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetLibraryPlaylistPageDataQuery = <
-	TData = GetLibraryPlaylistPageDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryPlaylistPageDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryPlaylistPageDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryPlaylistPageDataQuery, TError, TData>(
-		['getLibraryPlaylistPageData', variables],
-		graphqlFetcher<
-			GetLibraryPlaylistPageDataQuery,
-			GetLibraryPlaylistPageDataQueryVariables
-		>(GetLibraryPlaylistPageDataDocument, variables),
-		options
-	);
-export const GetLibraryPlaylistsDataDocument = `
-    query getLibraryPlaylistsData($language: Language!, $offset: Int, $first: Int) {
-  me {
-    user {
-      playlists(
-        language: $language
-        offset: $offset
-        first: $first
-        orderBy: [{field: CREATED_AT, direction: DESC}]
-      ) {
-        nodes {
-          ...cardPlaylist
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardPlaylistFragmentDoc}`;
-export const useGetLibraryPlaylistsDataQuery = <
-	TData = GetLibraryPlaylistsDataQuery,
-	TError = unknown
->(
-	variables: GetLibraryPlaylistsDataQueryVariables,
-	options?: UseQueryOptions<GetLibraryPlaylistsDataQuery, TError, TData>
-) =>
-	useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
-		['getLibraryPlaylistsData', variables],
-		graphqlFetcher<
-			GetLibraryPlaylistsDataQuery,
-			GetLibraryPlaylistsDataQueryVariables
-		>(GetLibraryPlaylistsDataDocument, variables),
-		options
-	);
-export const GetPresenterAppearsPageDataDocument = `
-    query getPresenterAppearsPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-  }
-  collections(
-    language: $language
-    offset: $offset
-    first: $first
-    persons: [{personId: $id, role: SPEAKER}]
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardCollectionFragmentDoc}`;
-export const useGetPresenterAppearsPageDataQuery = <
-	TData = GetPresenterAppearsPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterAppearsPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterAppearsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterAppearsPageDataQuery, TError, TData>(
-		['getPresenterAppearsPageData', variables],
-		graphqlFetcher<
-			GetPresenterAppearsPageDataQuery,
-			GetPresenterAppearsPageDataQueryVariables
-		>(GetPresenterAppearsPageDataDocument, variables),
-		options
-	);
-export const GetPresenterDetailPageDataDocument = `
-    query getPresenterDetailPageData($id: ID!, $language: Language!) {
-  person(id: $id) {
-    id
-    name
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    imageWithFallback {
-      url(size: 128)
-    }
-    website
-    sermons: recordings(contentType: SERMON) {
-      aggregate {
-        count
-      }
-    }
-    audiobookTracks: recordings(contentType: AUDIOBOOK_TRACK) {
-      aggregate {
-        count
-      }
-    }
-    musicTracks: recordings(contentType: MUSIC_TRACK) {
-      aggregate {
-        count
-      }
-    }
-    stories: recordings(contentType: STORY) {
-      aggregate {
-        count
-      }
-    }
-    essentialRecordings: recordings(
-      first: 3
-      isFeatured: true
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-    }
-    recentRecordings: recordings(
-      first: 3
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-    topRecordings: recordings(
-      first: 3
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      pageInfo {
-        hasNextPage
-      }
-    }
-  }
-  sequences(
-    language: $language
-    persons: [{personId: $id}]
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  collections(
-    language: $language
-    persons: [{personId: $id}]
-    first: 3
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-      sequences(persons: [{personId: $id}], orderBy: [{field: TITLE, direction: ASC}]) {
-        nodes {
-          ...cardSequence
-        }
-      }
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardCollectionFragmentDoc}`;
-export const useGetPresenterDetailPageDataQuery = <
-	TData = GetPresenterDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterDetailPageDataQuery, TError, TData>(
-		['getPresenterDetailPageData', variables],
-		graphqlFetcher<
-			GetPresenterDetailPageDataQuery,
-			GetPresenterDetailPageDataQueryVariables
-		>(GetPresenterDetailPageDataDocument, variables),
-		options
-	);
-export const GetPresenterDetailPathsDataDocument = `
-    query getPresenterDetailPathsData($language: Language!, $first: Int) {
-  persons(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetPresenterDetailPathsDataQuery = <
-	TData = GetPresenterDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterDetailPathsDataQuery, TError, TData>(
-		['getPresenterDetailPathsData', variables],
-		graphqlFetcher<
-			GetPresenterDetailPathsDataQuery,
-			GetPresenterDetailPathsDataQueryVariables
-		>(GetPresenterDetailPathsDataDocument, variables),
-		options
-	);
-export const GetPresenterListPageDataDocument = `
-    query getPresenterListPageData($language: Language!, $startsWith: String) {
-  persons(
-    language: $language
-    startsWith: $startsWith
-    first: 1500
-    orderBy: [{field: NAME, direction: ASC}]
-  ) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-      givenName
-      surname
-      image {
-        url(size: 128)
-      }
-      summary
-    }
-  }
-  personLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
-export const useGetPresenterListPageDataQuery = <
-	TData = GetPresenterListPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterListPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterListPageDataQuery, TError, TData>(
-		['getPresenterListPageData', variables],
-		graphqlFetcher<
-			GetPresenterListPageDataQuery,
-			GetPresenterListPageDataQueryVariables
-		>(GetPresenterListPageDataDocument, variables),
-		options
-	);
-export const GetPresenterListPathsDataDocument = `
-    query getPresenterListPathsData($language: Language!) {
-  personLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
-export const useGetPresenterListPathsDataQuery = <
-	TData = GetPresenterListPathsDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterListPathsDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterListPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterListPathsDataQuery, TError, TData>(
-		['getPresenterListPathsData', variables],
-		graphqlFetcher<
-			GetPresenterListPathsDataQuery,
-			GetPresenterListPathsDataQueryVariables
-		>(GetPresenterListPathsDataDocument, variables),
-		options
-	);
-export const GetPresenterRecordingsPageDataDocument = `
-    query getPresenterRecordingsPageData($id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetPresenterRecordingsPageDataQuery = <
-	TData = GetPresenterRecordingsPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterRecordingsPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterRecordingsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterRecordingsPageDataQuery, TError, TData>(
-		['getPresenterRecordingsPageData', variables],
-		graphqlFetcher<
-			GetPresenterRecordingsPageDataQuery,
-			GetPresenterRecordingsPageDataQueryVariables
-		>(GetPresenterRecordingsPageDataDocument, variables),
-		options
-	);
-export const GetPresenterRecordingsFeedDataDocument = `
-    query getPresenterRecordingsFeedData($id: ID!) {
-  person(id: $id) {
-    id
-    name
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetPresenterRecordingsFeedDataQuery = <
-	TData = GetPresenterRecordingsFeedDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterRecordingsFeedDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterRecordingsFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterRecordingsFeedDataQuery, TError, TData>(
-		['getPresenterRecordingsFeedData', variables],
-		graphqlFetcher<
-			GetPresenterRecordingsFeedDataQuery,
-			GetPresenterRecordingsFeedDataQueryVariables
-		>(GetPresenterRecordingsFeedDataDocument, variables),
-		options
-	);
-export const GetPresenterSequencesPageDataDocument = `
-    query getPresenterSequencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    ...presenterPivot
-  }
-  sequences(
-    language: $language
-    offset: $offset
-    first: $first
-    persons: [{personId: $id, role: SPEAKER}]
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
-export const useGetPresenterSequencesPageDataQuery = <
-	TData = GetPresenterSequencesPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterSequencesPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterSequencesPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterSequencesPageDataQuery, TError, TData>(
-		['getPresenterSequencesPageData', variables],
-		graphqlFetcher<
-			GetPresenterSequencesPageDataQuery,
-			GetPresenterSequencesPageDataQueryVariables
-		>(GetPresenterSequencesPageDataDocument, variables),
-		options
-	);
-export const GetPresenterTopPageDataDocument = `
-    query getPresenterTopPageData($id: ID!, $offset: Int, $first: Int) {
-  person(id: $id) {
-    id
-    language
-    ...presenterPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: DOWNLOADS_ALL_TIME, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetPresenterTopPageDataQuery = <
-	TData = GetPresenterTopPageDataQuery,
-	TError = unknown
->(
-	variables: GetPresenterTopPageDataQueryVariables,
-	options?: UseQueryOptions<GetPresenterTopPageDataQuery, TError, TData>
-) =>
-	useQuery<GetPresenterTopPageDataQuery, TError, TData>(
-		['getPresenterTopPageData', variables],
-		graphqlFetcher<
-			GetPresenterTopPageDataQuery,
-			GetPresenterTopPageDataQueryVariables
-		>(GetPresenterTopPageDataDocument, variables),
-		options
-	);
-export const GetMediaReleaseFormsPageDataDocument = `
-    query getMediaReleaseFormsPageData($id: ID!) {
-  mediaReleaseForm(id: $id) {
-    id
-    title
-    summary
-    isClosed
-  }
-}
-    `;
-export const useGetMediaReleaseFormsPageDataQuery = <
-	TData = GetMediaReleaseFormsPageDataQuery,
-	TError = unknown
->(
-	variables: GetMediaReleaseFormsPageDataQueryVariables,
-	options?: UseQueryOptions<GetMediaReleaseFormsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetMediaReleaseFormsPageDataQuery, TError, TData>(
-		['getMediaReleaseFormsPageData', variables],
-		graphqlFetcher<
-			GetMediaReleaseFormsPageDataQuery,
-			GetMediaReleaseFormsPageDataQueryVariables
-		>(GetMediaReleaseFormsPageDataDocument, variables),
-		options
-	);
-export const GetMediaReleaseFormsPathsDataDocument = `
-    query getMediaReleaseFormsPathsData($language: Language!, $first: Int!) {
-  mediaReleaseForms(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-export const useGetMediaReleaseFormsPathsDataQuery = <
-	TData = GetMediaReleaseFormsPathsDataQuery,
-	TError = unknown
->(
-	variables: GetMediaReleaseFormsPathsDataQueryVariables,
-	options?: UseQueryOptions<GetMediaReleaseFormsPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetMediaReleaseFormsPathsDataQuery, TError, TData>(
-		['getMediaReleaseFormsPathsData', variables],
-		graphqlFetcher<
-			GetMediaReleaseFormsPathsDataQuery,
-			GetMediaReleaseFormsPathsDataQueryVariables
-		>(GetMediaReleaseFormsPathsDataDocument, variables),
-		options
-	);
-export const SubmitMediaReleaseFormDocument = `
-    mutation submitMediaReleaseForm($mediaReleaseFormId: ID!, $mediaReleasePerson: MediaReleasePersonCreateInput!, $comments: String!) {
-  mediaReleaseCreate(
-    input: {mediaReleaseFormId: $mediaReleaseFormId, mediaReleasePerson: $mediaReleasePerson, notes: $comments}
-  ) {
-    errors {
-      message
-    }
-    mediaRelease {
-      id
-    }
-  }
-}
-    `;
-export const useSubmitMediaReleaseFormMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SubmitMediaReleaseFormMutation,
-		TError,
-		SubmitMediaReleaseFormMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SubmitMediaReleaseFormMutation,
-		TError,
-		SubmitMediaReleaseFormMutationVariables,
-		TContext
-	>(
-		(variables?: SubmitMediaReleaseFormMutationVariables) =>
-			graphqlFetcher<
-				SubmitMediaReleaseFormMutation,
-				SubmitMediaReleaseFormMutationVariables
-			>(SubmitMediaReleaseFormDocument, variables)(),
-		options
-	);
-export const GetSearchResultsCollectionsDocument = `
-    query getSearchResultsCollections($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  collections(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardCollection
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}`;
-export const useGetSearchResultsCollectionsQuery = <
-	TData = GetSearchResultsCollectionsQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsCollectionsQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsCollectionsQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsCollectionsQuery, TError, TData>(
-		['getSearchResultsCollections', variables],
-		graphqlFetcher<
-			GetSearchResultsCollectionsQuery,
-			GetSearchResultsCollectionsQueryVariables
-		>(GetSearchResultsCollectionsDocument, variables),
-		options
-	);
-export const GetSearchResultsPageDataDocument = `
-    query getSearchResultsPageData($language: Language!, $term: String!) {
-  recordings(language: $language, search: $term, first: 6) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  sequences(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSequence
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  collections(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardCollection
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  sponsors(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSponsor
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-  persons(language: $language, search: $term, first: 3) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardPerson
-    }
-    pageInfo {
-      hasNextPage
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardCollectionFragmentDoc}
-${CardSponsorFragmentDoc}
-${CardPersonFragmentDoc}`;
-export const useGetSearchResultsPageDataQuery = <
-	TData = GetSearchResultsPageDataQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsPageDataQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsPageDataQuery, TError, TData>(
-		['getSearchResultsPageData', variables],
-		graphqlFetcher<
-			GetSearchResultsPageDataQuery,
-			GetSearchResultsPageDataQueryVariables
-		>(GetSearchResultsPageDataDocument, variables),
-		options
-	);
-export const GetSearchResultsPersonsDocument = `
-    query getSearchResultsPersons($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  persons(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardPerson
-    }
-  }
-}
-    ${CardPersonFragmentDoc}`;
-export const useGetSearchResultsPersonsQuery = <
-	TData = GetSearchResultsPersonsQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsPersonsQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsPersonsQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsPersonsQuery, TError, TData>(
-		['getSearchResultsPersons', variables],
-		graphqlFetcher<
-			GetSearchResultsPersonsQuery,
-			GetSearchResultsPersonsQueryVariables
-		>(GetSearchResultsPersonsDocument, variables),
-		options
-	);
-export const GetSearchResultsSequencesDocument = `
-    query getSearchResultsSequences($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  sequences(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSequence
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
-export const useGetSearchResultsSequencesQuery = <
-	TData = GetSearchResultsSequencesQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsSequencesQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsSequencesQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsSequencesQuery, TError, TData>(
-		['getSearchResultsSequences', variables],
-		graphqlFetcher<
-			GetSearchResultsSequencesQuery,
-			GetSearchResultsSequencesQueryVariables
-		>(GetSearchResultsSequencesDocument, variables),
-		options
-	);
-export const GetSearchResultsSponsorsDocument = `
-    query getSearchResultsSponsors($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  sponsors(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardSponsor
-    }
-  }
-}
-    ${CardSponsorFragmentDoc}`;
-export const useGetSearchResultsSponsorsQuery = <
-	TData = GetSearchResultsSponsorsQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsSponsorsQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsSponsorsQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsSponsorsQuery, TError, TData>(
-		['getSearchResultsSponsors', variables],
-		graphqlFetcher<
-			GetSearchResultsSponsorsQuery,
-			GetSearchResultsSponsorsQueryVariables
-		>(GetSearchResultsSponsorsDocument, variables),
-		options
-	);
-export const GetSearchResultsRecordingsDocument = `
-    query getSearchResultsRecordings($language: Language!, $term: String!, $first: Int!, $offset: Int!) {
-  recordings(language: $language, search: $term, first: $first, offset: $offset) {
-    aggregate {
-      count
-    }
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetSearchResultsRecordingsQuery = <
-	TData = GetSearchResultsRecordingsQuery,
-	TError = unknown
->(
-	variables: GetSearchResultsRecordingsQueryVariables,
-	options?: UseQueryOptions<GetSearchResultsRecordingsQuery, TError, TData>
-) =>
-	useQuery<GetSearchResultsRecordingsQuery, TError, TData>(
-		['getSearchResultsRecordings', variables],
-		graphqlFetcher<
-			GetSearchResultsRecordingsQuery,
-			GetSearchResultsRecordingsQueryVariables
-		>(GetSearchResultsRecordingsDocument, variables),
-		options
-	);
-export const GetSeriesDetailPageDataDocument = `
-    query getSeriesDetailPageData($id: ID!) {
-  series(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
-export const useGetSeriesDetailPageDataQuery = <
-	TData = GetSeriesDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetSeriesDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSeriesDetailPageDataQuery, TError, TData>(
-		['getSeriesDetailPageData', variables],
-		graphqlFetcher<
-			GetSeriesDetailPageDataQuery,
-			GetSeriesDetailPageDataQueryVariables
-		>(GetSeriesDetailPageDataDocument, variables),
-		options
-	);
-export const GetSeriesFeedDataDocument = `
-    query getSeriesFeedData($id: ID!) {
-  series(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetSeriesFeedDataQuery = <
-	TData = GetSeriesFeedDataQuery,
-	TError = unknown
->(
-	variables: GetSeriesFeedDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetSeriesFeedDataQuery, TError, TData>(
-		['getSeriesFeedData', variables],
-		graphqlFetcher<GetSeriesFeedDataQuery, GetSeriesFeedDataQueryVariables>(
-			GetSeriesFeedDataDocument,
-			variables
-		),
-		options
-	);
-export const GetSeriesDetailPathsDataDocument = `
-    query getSeriesDetailPathsData($language: Language!, $first: Int) {
-  serieses(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetSeriesDetailPathsDataQuery = <
-	TData = GetSeriesDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSeriesDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSeriesDetailPathsDataQuery, TError, TData>(
-		['getSeriesDetailPathsData', variables],
-		graphqlFetcher<
-			GetSeriesDetailPathsDataQuery,
-			GetSeriesDetailPathsDataQueryVariables
-		>(GetSeriesDetailPathsDataDocument, variables),
-		options
-	);
-export const GetSeriesListPageDataDocument = `
-    query getSeriesListPageData($language: Language!, $offset: Int, $first: Int) {
-  serieses(
-    language: $language
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
-export const useGetSeriesListPageDataQuery = <
-	TData = GetSeriesListPageDataQuery,
-	TError = unknown
->(
-	variables: GetSeriesListPageDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSeriesListPageDataQuery, TError, TData>(
-		['getSeriesListPageData', variables],
-		graphqlFetcher<
-			GetSeriesListPageDataQuery,
-			GetSeriesListPageDataQueryVariables
-		>(GetSeriesListPageDataDocument, variables),
-		options
-	);
-export const GetSeriesListPathsDataDocument = `
-    query getSeriesListPathsData($language: Language!) {
-  serieses(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetSeriesListPathsDataQuery = <
-	TData = GetSeriesListPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSeriesListPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSeriesListPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSeriesListPathsDataQuery, TError, TData>(
-		['getSeriesListPathsData', variables],
-		graphqlFetcher<
-			GetSeriesListPathsDataQuery,
-			GetSeriesListPathsDataQueryVariables
-		>(GetSeriesListPathsDataDocument, variables),
-		options
-	);
-export const GetSermonDetailDataDocument = `
-    query getSermonDetailData($id: ID!) {
-  sermon(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
-export const useGetSermonDetailDataQuery = <
-	TData = GetSermonDetailDataQuery,
-	TError = unknown
->(
-	variables: GetSermonDetailDataQueryVariables,
-	options?: UseQueryOptions<GetSermonDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetSermonDetailDataQuery, TError, TData>(
-		['getSermonDetailData', variables],
-		graphqlFetcher<GetSermonDetailDataQuery, GetSermonDetailDataQueryVariables>(
-			GetSermonDetailDataDocument,
-			variables
-		),
-		options
-	);
-export const GetSermonDetailStaticPathsDocument = `
-    query getSermonDetailStaticPaths($language: Language!, $first: Int) {
-  sermons(language: $language, first: $first) {
-    nodes {
-      id
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetSermonDetailStaticPathsQuery = <
-	TData = GetSermonDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetSermonDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetSermonDetailStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetSermonDetailStaticPathsQuery, TError, TData>(
-		['getSermonDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetSermonDetailStaticPathsQuery,
-			GetSermonDetailStaticPathsQueryVariables
-		>(GetSermonDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetSermonListPageDataDocument = `
-    query getSermonListPageData($language: Language!, $hasVideo: Boolean, $first: Int, $offset: Int) {
-  sermons(
-    language: $language
-    hasVideo: $hasVideo
-    first: $first
-    offset: $offset
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardRecording
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetSermonListPageDataQuery = <
-	TData = GetSermonListPageDataQuery,
-	TError = unknown
->(
-	variables: GetSermonListPageDataQueryVariables,
-	options?: UseQueryOptions<GetSermonListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSermonListPageDataQuery, TError, TData>(
-		['getSermonListPageData', variables],
-		graphqlFetcher<
-			GetSermonListPageDataQuery,
-			GetSermonListPageDataQueryVariables
-		>(GetSermonListPageDataDocument, variables),
-		options
-	);
-export const GetSermonListFeedDataDocument = `
-    query getSermonListFeedData($language: Language!) {
-  sermons(
-    language: $language
-    first: 25
-    orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...generateFeed
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetSermonListFeedDataQuery = <
-	TData = GetSermonListFeedDataQuery,
-	TError = unknown
->(
-	variables: GetSermonListFeedDataQueryVariables,
-	options?: UseQueryOptions<GetSermonListFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetSermonListFeedDataQuery, TError, TData>(
-		['getSermonListFeedData', variables],
-		graphqlFetcher<
-			GetSermonListFeedDataQuery,
-			GetSermonListFeedDataQueryVariables
-		>(GetSermonListFeedDataDocument, variables),
-		options
-	);
-export const GetSermonListPagePathsDataDocument = `
-    query getSermonListPagePathsData($language: Language!, $hasVideo: Boolean) {
-  sermons(language: $language, hasVideo: $hasVideo) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetSermonListPagePathsDataQuery = <
-	TData = GetSermonListPagePathsDataQuery,
-	TError = unknown
->(
-	variables: GetSermonListPagePathsDataQueryVariables,
-	options?: UseQueryOptions<GetSermonListPagePathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSermonListPagePathsDataQuery, TError, TData>(
-		['getSermonListPagePathsData', variables],
-		graphqlFetcher<
-			GetSermonListPagePathsDataQuery,
-			GetSermonListPagePathsDataQueryVariables
-		>(GetSermonListPagePathsDataDocument, variables),
-		options
-	);
-export const GetTrendingTeachingsPageDataDocument = `
-    query getTrendingTeachingsPageData($language: Language!) {
-  recordings: popularRecordings(language: $language, first: 24) {
-    nodes {
-      recording {
-        ...cardRecording
-      }
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetTrendingTeachingsPageDataQuery = <
-	TData = GetTrendingTeachingsPageDataQuery,
-	TError = unknown
->(
-	variables: GetTrendingTeachingsPageDataQueryVariables,
-	options?: UseQueryOptions<GetTrendingTeachingsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetTrendingTeachingsPageDataQuery, TError, TData>(
-		['getTrendingTeachingsPageData', variables],
-		graphqlFetcher<
-			GetTrendingTeachingsPageDataQuery,
-			GetTrendingTeachingsPageDataQueryVariables
-		>(GetTrendingTeachingsPageDataDocument, variables),
-		options
-	);
-export const GetSongAlbumsDetailPageDataDocument = `
-    query getSongAlbumsDetailPageData($id: ID!) {
-  musicAlbum(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
-export const useGetSongAlbumsDetailPageDataQuery = <
-	TData = GetSongAlbumsDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetSongAlbumsDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetSongAlbumsDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSongAlbumsDetailPageDataQuery, TError, TData>(
-		['getSongAlbumsDetailPageData', variables],
-		graphqlFetcher<
-			GetSongAlbumsDetailPageDataQuery,
-			GetSongAlbumsDetailPageDataQueryVariables
-		>(GetSongAlbumsDetailPageDataDocument, variables),
-		options
-	);
-export const GetSongAlbumFeedDataDocument = `
-    query getSongAlbumFeedData($id: ID!) {
-  musicAlbum(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetSongAlbumFeedDataQuery = <
-	TData = GetSongAlbumFeedDataQuery,
-	TError = unknown
->(
-	variables: GetSongAlbumFeedDataQueryVariables,
-	options?: UseQueryOptions<GetSongAlbumFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetSongAlbumFeedDataQuery, TError, TData>(
-		['getSongAlbumFeedData', variables],
-		graphqlFetcher<
-			GetSongAlbumFeedDataQuery,
-			GetSongAlbumFeedDataQueryVariables
-		>(GetSongAlbumFeedDataDocument, variables),
-		options
-	);
-export const GetSongAlbumsDetailPathsDataDocument = `
-    query getSongAlbumsDetailPathsData($language: Language!, $first: Int) {
-  musicAlbums(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetSongAlbumsDetailPathsDataQuery = <
-	TData = GetSongAlbumsDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSongAlbumsDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSongAlbumsDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSongAlbumsDetailPathsDataQuery, TError, TData>(
-		['getSongAlbumsDetailPathsData', variables],
-		graphqlFetcher<
-			GetSongAlbumsDetailPathsDataQuery,
-			GetSongAlbumsDetailPathsDataQueryVariables
-		>(GetSongAlbumsDetailPathsDataDocument, variables),
-		options
-	);
-export const GetSongAlbumsListPageDataDocument = `
-    query getSongAlbumsListPageData($language: Language!) {
-  musicAlbums(
-    language: $language
-    first: 1000
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...cardSequence
-      recordings(first: 2) {
-        nodes {
-          ...cardRecording
-        }
-      }
-    }
-    aggregate {
-      count
-    }
-  }
-  musicBookTags(language: $language, first: 1000) {
-    nodes {
-      id
-      name
-      recordings(first: 1, orderBy: [{field: PUBLISHED_AT, direction: DESC}]) {
-        nodes {
-          ...cardRecording
-        }
-        aggregate {
-          count
-        }
-      }
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetSongAlbumsListPageDataQuery = <
-	TData = GetSongAlbumsListPageDataQuery,
-	TError = unknown
->(
-	variables: GetSongAlbumsListPageDataQueryVariables,
-	options?: UseQueryOptions<GetSongAlbumsListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSongAlbumsListPageDataQuery, TError, TData>(
-		['getSongAlbumsListPageData', variables],
-		graphqlFetcher<
-			GetSongAlbumsListPageDataQuery,
-			GetSongAlbumsListPageDataQueryVariables
-		>(GetSongAlbumsListPageDataDocument, variables),
-		options
-	);
-export const GetSongBooksDetailPageDataDocument = `
-    query getSongBooksDetailPageData($language: Language!, $book: String!) {
-  musicTracks(
-    language: $language
-    tagName: $book
-    first: 1000
-    orderBy: [{field: PUBLISHED_AT, direction: ASC}]
-  ) {
-    nodes {
-      ...cardRecording
-    }
-  }
-}
-    ${CardRecordingFragmentDoc}`;
-export const useGetSongBooksDetailPageDataQuery = <
-	TData = GetSongBooksDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetSongBooksDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetSongBooksDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSongBooksDetailPageDataQuery, TError, TData>(
-		['getSongBooksDetailPageData', variables],
-		graphqlFetcher<
-			GetSongBooksDetailPageDataQuery,
-			GetSongBooksDetailPageDataQueryVariables
-		>(GetSongBooksDetailPageDataDocument, variables),
-		options
-	);
-export const GetBookSongDetailDataDocument = `
-    query getBookSongDetailData($language: Language!, $id: ID!, $book: String!) {
-  musicTrack(id: $id) {
-    ...recording
-    language
-  }
-  recordings(
-    language: $language
-    tagName: $book
-    first: 1000
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      ...teaseRecording
-    }
-  }
-}
-    ${RecordingFragmentDoc}
-${TeaseRecordingFragmentDoc}`;
-export const useGetBookSongDetailDataQuery = <
-	TData = GetBookSongDetailDataQuery,
-	TError = unknown
->(
-	variables: GetBookSongDetailDataQueryVariables,
-	options?: UseQueryOptions<GetBookSongDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetBookSongDetailDataQuery, TError, TData>(
-		['getBookSongDetailData', variables],
-		graphqlFetcher<
-			GetBookSongDetailDataQuery,
-			GetBookSongDetailDataQueryVariables
-		>(GetBookSongDetailDataDocument, variables),
-		options
-	);
-export const GetSongDetailDataDocument = `
-    query getSongDetailData($id: ID!) {
-  musicTrack(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
-export const useGetSongDetailDataQuery = <
-	TData = GetSongDetailDataQuery,
-	TError = unknown
->(
-	variables: GetSongDetailDataQueryVariables,
-	options?: UseQueryOptions<GetSongDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetSongDetailDataQuery, TError, TData>(
-		['getSongDetailData', variables],
-		graphqlFetcher<GetSongDetailDataQuery, GetSongDetailDataQueryVariables>(
-			GetSongDetailDataDocument,
-			variables
-		),
-		options
-	);
-export const GetSongDetailStaticPathsDocument = `
-    query getSongDetailStaticPaths($language: Language!, $first: Int) {
-  musicTracks(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetSongDetailStaticPathsQuery = <
-	TData = GetSongDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetSongDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetSongDetailStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetSongDetailStaticPathsQuery, TError, TData>(
-		['getSongDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetSongDetailStaticPathsQuery,
-			GetSongDetailStaticPathsQueryVariables
-		>(GetSongDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetSponsorConferencesPageDataDocument = `
-    query getSponsorConferencesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    ...sponsorPivot
-  }
-  conferences(
-    language: $language
-    sponsorId: $id
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardCollection
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
-${CardCollectionFragmentDoc}`;
-export const useGetSponsorConferencesPageDataQuery = <
-	TData = GetSponsorConferencesPageDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorConferencesPageDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorConferencesPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorConferencesPageDataQuery, TError, TData>(
-		['getSponsorConferencesPageData', variables],
-		graphqlFetcher<
-			GetSponsorConferencesPageDataQuery,
-			GetSponsorConferencesPageDataQueryVariables
-		>(GetSponsorConferencesPageDataDocument, variables),
-		options
-	);
-export const GetSponsorConferencesPathsDataDocument = `
-    query getSponsorConferencesPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-export const useGetSponsorConferencesPathsDataQuery = <
-	TData = GetSponsorConferencesPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorConferencesPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorConferencesPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorConferencesPathsDataQuery, TError, TData>(
-		['getSponsorConferencesPathsData', variables],
-		graphqlFetcher<
-			GetSponsorConferencesPathsDataQuery,
-			GetSponsorConferencesPathsDataQueryVariables
-		>(GetSponsorConferencesPathsDataDocument, variables),
-		options
-	);
-export const GetSponsorDetailPageDataDocument = `
-    query getSponsorDetailPageData($id: ID!) {
-  sponsor(id: $id) {
-    id
-    title
-    location
-    website
-    description
-    canonicalUrl(useFuturePath: true)
-    language
-    shareUrl
-    image {
-      url(size: 128)
-    }
-    collections(
-      first: 3
-      contentType: null
-      orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardCollection
-      }
-    }
-    sequences(
-      first: 3
-      contentType: null
-      orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardSequence
-      }
-    }
-    recordings(
-      first: 3
-      collectionId: 0
-      sequenceId: 0
-      orderBy: [{field: PUBLISHED_AT, direction: DESC}]
-    ) {
-      aggregate {
-        count
-      }
-      nodes {
-        ...cardRecording
-      }
-    }
-  }
-}
-    ${CardCollectionFragmentDoc}
-${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetSponsorDetailPageDataQuery = <
-	TData = GetSponsorDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorDetailPageDataQuery, TError, TData>(
-		['getSponsorDetailPageData', variables],
-		graphqlFetcher<
-			GetSponsorDetailPageDataQuery,
-			GetSponsorDetailPageDataQueryVariables
-		>(GetSponsorDetailPageDataDocument, variables),
-		options
-	);
-export const GetSponsorDetailPathsDataDocument = `
-    query getSponsorDetailPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetSponsorDetailPathsDataQuery = <
-	TData = GetSponsorDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorDetailPathsDataQuery, TError, TData>(
-		['getSponsorDetailPathsData', variables],
-		graphqlFetcher<
-			GetSponsorDetailPathsDataQuery,
-			GetSponsorDetailPathsDataQueryVariables
-		>(GetSponsorDetailPathsDataDocument, variables),
-		options
-	);
-export const GetSponsorListPageDataDocument = `
-    query getSponsorListPageData($language: Language!, $startsWith: String) {
-  sponsors(
-    language: $language
-    startsWith: $startsWith
-    first: 1500
-    orderBy: [{field: TITLE, direction: ASC}]
-  ) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-      title
-      image {
-        url(size: 128)
-      }
-    }
-  }
-  sponsorLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
-export const useGetSponsorListPageDataQuery = <
-	TData = GetSponsorListPageDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorListPageDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorListPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorListPageDataQuery, TError, TData>(
-		['getSponsorListPageData', variables],
-		graphqlFetcher<
-			GetSponsorListPageDataQuery,
-			GetSponsorListPageDataQueryVariables
-		>(GetSponsorListPageDataDocument, variables),
-		options
-	);
-export const GetSponsorListPathsDataDocument = `
-    query getSponsorListPathsData($language: Language!) {
-  sponsorLetterCounts(language: $language) {
-    letter
-    count
-  }
-}
-    `;
-export const useGetSponsorListPathsDataQuery = <
-	TData = GetSponsorListPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorListPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorListPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorListPathsDataQuery, TError, TData>(
-		['getSponsorListPathsData', variables],
-		graphqlFetcher<
-			GetSponsorListPathsDataQuery,
-			GetSponsorListPathsDataQueryVariables
-		>(GetSponsorListPathsDataDocument, variables),
-		options
-	);
-export const GetSponsorSeriesPageDataDocument = `
-    query getSponsorSeriesPageData($language: Language!, $id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    ...sponsorPivot
-  }
-  sequences(
-    language: $language
-    sponsorId: $id
-    offset: $offset
-    first: $first
-    orderBy: [{field: RECORDING_PUBLISHED_AT, direction: DESC}]
-  ) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
-export const useGetSponsorSeriesPageDataQuery = <
-	TData = GetSponsorSeriesPageDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorSeriesPageDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorSeriesPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorSeriesPageDataQuery, TError, TData>(
-		['getSponsorSeriesPageData', variables],
-		graphqlFetcher<
-			GetSponsorSeriesPageDataQuery,
-			GetSponsorSeriesPageDataQueryVariables
-		>(GetSponsorSeriesPageDataDocument, variables),
-		options
-	);
-export const GetSponsorSeriesPathsDataDocument = `
-    query getSponsorSeriesPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-export const useGetSponsorSeriesPathsDataQuery = <
-	TData = GetSponsorSeriesPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorSeriesPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorSeriesPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorSeriesPathsDataQuery, TError, TData>(
-		['getSponsorSeriesPathsData', variables],
-		graphqlFetcher<
-			GetSponsorSeriesPathsDataQuery,
-			GetSponsorSeriesPathsDataQueryVariables
-		>(GetSponsorSeriesPathsDataDocument, variables),
-		options
-	);
-export const GetSponsorTeachingsPageDataDocument = `
-    query getSponsorTeachingsPageData($id: ID!, $offset: Int, $first: Int) {
-  sponsor(id: $id) {
-    id
-    ...sponsorPivot
-    recordings(
-      offset: $offset
-      first: $first
-      orderBy: [{field: RECORDED_AT, direction: DESC}]
-    ) {
-      nodes {
-        ...cardRecording
-      }
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    ${SponsorPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
-export const useGetSponsorTeachingsPageDataQuery = <
-	TData = GetSponsorTeachingsPageDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorTeachingsPageDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorTeachingsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorTeachingsPageDataQuery, TError, TData>(
-		['getSponsorTeachingsPageData', variables],
-		graphqlFetcher<
-			GetSponsorTeachingsPageDataQuery,
-			GetSponsorTeachingsPageDataQueryVariables
-		>(GetSponsorTeachingsPageDataDocument, variables),
-		options
-	);
-export const GetSponsorTeachingsFeedDataDocument = `
-    query getSponsorTeachingsFeedData($id: ID!) {
-  sponsor(id: $id) {
-    title
-    canonicalUrl(useFuturePath: true)
-    language
-    recordings(first: 25, orderBy: [{field: RECORDED_AT, direction: DESC}]) {
-      nodes {
-        ...generateFeed
-      }
-    }
-  }
-}
-    ${GenerateFeedFragmentDoc}`;
-export const useGetSponsorTeachingsFeedDataQuery = <
-	TData = GetSponsorTeachingsFeedDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorTeachingsFeedDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorTeachingsFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorTeachingsFeedDataQuery, TError, TData>(
-		['getSponsorTeachingsFeedData', variables],
-		graphqlFetcher<
-			GetSponsorTeachingsFeedDataQuery,
-			GetSponsorTeachingsFeedDataQueryVariables
-		>(GetSponsorTeachingsFeedDataDocument, variables),
-		options
-	);
-export const GetSponsorTeachingsPathsDataDocument = `
-    query getSponsorTeachingsPathsData($language: Language!, $first: Int) {
-  sponsors(language: $language, first: $first) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-export const useGetSponsorTeachingsPathsDataQuery = <
-	TData = GetSponsorTeachingsPathsDataQuery,
-	TError = unknown
->(
-	variables: GetSponsorTeachingsPathsDataQueryVariables,
-	options?: UseQueryOptions<GetSponsorTeachingsPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetSponsorTeachingsPathsDataQuery, TError, TData>(
-		['getSponsorTeachingsPathsData', variables],
-		graphqlFetcher<
-			GetSponsorTeachingsPathsDataQuery,
-			GetSponsorTeachingsPathsDataQueryVariables
-		>(GetSponsorTeachingsPathsDataDocument, variables),
-		options
-	);
-export const GetStoryAlbumDetailPageDataDocument = `
-    query getStoryAlbumDetailPageData($id: ID!) {
-  storySeason(id: $id) {
-    ...sequence
-    canonicalUrl(useFuturePath: true)
-    language
-  }
-}
-    ${SequenceFragmentDoc}`;
-export const useGetStoryAlbumDetailPageDataQuery = <
-	TData = GetStoryAlbumDetailPageDataQuery,
-	TError = unknown
->(
-	variables: GetStoryAlbumDetailPageDataQueryVariables,
-	options?: UseQueryOptions<GetStoryAlbumDetailPageDataQuery, TError, TData>
-) =>
-	useQuery<GetStoryAlbumDetailPageDataQuery, TError, TData>(
-		['getStoryAlbumDetailPageData', variables],
-		graphqlFetcher<
-			GetStoryAlbumDetailPageDataQuery,
-			GetStoryAlbumDetailPageDataQueryVariables
-		>(GetStoryAlbumDetailPageDataDocument, variables),
-		options
-	);
-export const GetStoryAlbumFeedDataDocument = `
-    query getStoryAlbumFeedData($id: ID!) {
-  storySeason(id: $id) {
-    id
-    title
-    image {
-      url(size: 600)
-    }
-    canonicalUrl(useFuturePath: true)
-    recordings(first: 25) {
-      nodes {
-        ...generateFeed
-      }
-    }
-    language
-    ...bookFeedDescription
-  }
-}
-    ${GenerateFeedFragmentDoc}
-${BookFeedDescriptionFragmentDoc}`;
-export const useGetStoryAlbumFeedDataQuery = <
-	TData = GetStoryAlbumFeedDataQuery,
-	TError = unknown
->(
-	variables: GetStoryAlbumFeedDataQueryVariables,
-	options?: UseQueryOptions<GetStoryAlbumFeedDataQuery, TError, TData>
-) =>
-	useQuery<GetStoryAlbumFeedDataQuery, TError, TData>(
-		['getStoryAlbumFeedData', variables],
-		graphqlFetcher<
-			GetStoryAlbumFeedDataQuery,
-			GetStoryAlbumFeedDataQueryVariables
-		>(GetStoryAlbumFeedDataDocument, variables),
-		options
-	);
-export const GetStoryAlbumDetailPathsDataDocument = `
-    query getStoryAlbumDetailPathsData($language: Language!, $first: Int) {
-  storySeasons(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetStoryAlbumDetailPathsDataQuery = <
-	TData = GetStoryAlbumDetailPathsDataQuery,
-	TError = unknown
->(
-	variables: GetStoryAlbumDetailPathsDataQueryVariables,
-	options?: UseQueryOptions<GetStoryAlbumDetailPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetStoryAlbumDetailPathsDataQuery, TError, TData>(
-		['getStoryAlbumDetailPathsData', variables],
-		graphqlFetcher<
-			GetStoryAlbumDetailPathsDataQuery,
-			GetStoryAlbumDetailPathsDataQueryVariables
-		>(GetStoryAlbumDetailPathsDataDocument, variables),
-		options
-	);
-export const GetStoriesAlbumsPageDataDocument = `
-    query getStoriesAlbumsPageData($language: Language!, $first: Int, $offset: Int) {
-  storySeasons(language: $language, first: $first, offset: $offset) {
-    nodes {
-      ...cardSequence
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    ${CardSequenceFragmentDoc}`;
-export const useGetStoriesAlbumsPageDataQuery = <
-	TData = GetStoriesAlbumsPageDataQuery,
-	TError = unknown
->(
-	variables: GetStoriesAlbumsPageDataQueryVariables,
-	options?: UseQueryOptions<GetStoriesAlbumsPageDataQuery, TError, TData>
-) =>
-	useQuery<GetStoriesAlbumsPageDataQuery, TError, TData>(
-		['getStoriesAlbumsPageData', variables],
-		graphqlFetcher<
-			GetStoriesAlbumsPageDataQuery,
-			GetStoriesAlbumsPageDataQueryVariables
-		>(GetStoriesAlbumsPageDataDocument, variables),
-		options
-	);
-export const GetStoriesAlbumsPathDataDocument = `
-    query getStoriesAlbumsPathData($language: Language!) {
-  storySeasons(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetStoriesAlbumsPathDataQuery = <
-	TData = GetStoriesAlbumsPathDataQuery,
-	TError = unknown
->(
-	variables: GetStoriesAlbumsPathDataQueryVariables,
-	options?: UseQueryOptions<GetStoriesAlbumsPathDataQuery, TError, TData>
-) =>
-	useQuery<GetStoriesAlbumsPathDataQuery, TError, TData>(
-		['getStoriesAlbumsPathData', variables],
-		graphqlFetcher<
-			GetStoriesAlbumsPathDataQuery,
-			GetStoriesAlbumsPathDataQueryVariables
-		>(GetStoriesAlbumsPathDataDocument, variables),
-		options
-	);
-export const GetStoryDetailDataDocument = `
-    query getStoryDetailData($id: ID!) {
-  story(id: $id) {
-    ...recording
-    language
-  }
-}
-    ${RecordingFragmentDoc}`;
-export const useGetStoryDetailDataQuery = <
-	TData = GetStoryDetailDataQuery,
-	TError = unknown
->(
-	variables: GetStoryDetailDataQueryVariables,
-	options?: UseQueryOptions<GetStoryDetailDataQuery, TError, TData>
-) =>
-	useQuery<GetStoryDetailDataQuery, TError, TData>(
-		['getStoryDetailData', variables],
-		graphqlFetcher<GetStoryDetailDataQuery, GetStoryDetailDataQueryVariables>(
-			GetStoryDetailDataDocument,
-			variables
-		),
-		options
-	);
-export const GetStoryDetailStaticPathsDocument = `
-    query getStoryDetailStaticPaths($language: Language!, $first: Int) {
-  stories(language: $language, first: $first) {
-    nodes {
-      canonicalPath(useFuturePath: true)
-    }
-  }
-}
-    `;
-export const useGetStoryDetailStaticPathsQuery = <
-	TData = GetStoryDetailStaticPathsQuery,
-	TError = unknown
->(
-	variables: GetStoryDetailStaticPathsQueryVariables,
-	options?: UseQueryOptions<GetStoryDetailStaticPathsQuery, TError, TData>
-) =>
-	useQuery<GetStoryDetailStaticPathsQuery, TError, TData>(
-		['getStoryDetailStaticPaths', variables],
-		graphqlFetcher<
-			GetStoryDetailStaticPathsQuery,
-			GetStoryDetailStaticPathsQueryVariables
-		>(GetStoryDetailStaticPathsDocument, variables),
-		options
-	);
-export const GetTestimoniesPageDataDocument = `
-    query getTestimoniesPageData($language: Language!, $offset: Int, $first: Int) {
-  testimonies(
-    language: $language
-    first: $first
-    offset: $offset
-    orderBy: {direction: DESC, field: WRITTEN_DATE}
-  ) {
-    nodes {
-      author
-      body
-      writtenDate
-    }
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetTestimoniesPageDataQuery = <
-	TData = GetTestimoniesPageDataQuery,
-	TError = unknown
->(
-	variables: GetTestimoniesPageDataQueryVariables,
-	options?: UseQueryOptions<GetTestimoniesPageDataQuery, TError, TData>
-) =>
-	useQuery<GetTestimoniesPageDataQuery, TError, TData>(
-		['getTestimoniesPageData', variables],
-		graphqlFetcher<
-			GetTestimoniesPageDataQuery,
-			GetTestimoniesPageDataQueryVariables
-		>(GetTestimoniesPageDataDocument, variables),
-		options
-	);
-export const GetTestimoniesPathsDataDocument = `
-    query getTestimoniesPathsData($language: Language!) {
-  testimonies(language: $language) {
-    aggregate {
-      count
-    }
-  }
-}
-    `;
-export const useGetTestimoniesPathsDataQuery = <
-	TData = GetTestimoniesPathsDataQuery,
-	TError = unknown
->(
-	variables: GetTestimoniesPathsDataQueryVariables,
-	options?: UseQueryOptions<GetTestimoniesPathsDataQuery, TError, TData>
-) =>
-	useQuery<GetTestimoniesPathsDataQuery, TError, TData>(
-		['getTestimoniesPathsData', variables],
-		graphqlFetcher<
-			GetTestimoniesPathsDataQuery,
-			GetTestimoniesPathsDataQueryVariables
-		>(GetTestimoniesPathsDataDocument, variables),
-		options
-	);
-export const CollectionFavoriteDocument = `
-    mutation collectionFavorite($id: ID!) {
-  favorited: collectionFavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useCollectionFavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		CollectionFavoriteMutation,
-		TError,
-		CollectionFavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		CollectionFavoriteMutation,
-		TError,
-		CollectionFavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: CollectionFavoriteMutationVariables) =>
-			graphqlFetcher<
-				CollectionFavoriteMutation,
-				CollectionFavoriteMutationVariables
-			>(CollectionFavoriteDocument, variables)(),
-		options
-	);
-export const CollectionIsFavoritedDocument = `
-    query collectionIsFavorited($id: ID!) {
-  collection(id: $id) {
-    viewerHasFavorited
-    viewerPlaybackCompletedPercentage
-  }
-}
-    `;
-export const useCollectionIsFavoritedQuery = <
-	TData = CollectionIsFavoritedQuery,
-	TError = unknown
->(
-	variables: CollectionIsFavoritedQueryVariables,
-	options?: UseQueryOptions<CollectionIsFavoritedQuery, TError, TData>
-) =>
-	useQuery<CollectionIsFavoritedQuery, TError, TData>(
-		['collectionIsFavorited', variables],
-		graphqlFetcher<
-			CollectionIsFavoritedQuery,
-			CollectionIsFavoritedQueryVariables
-		>(CollectionIsFavoritedDocument, variables),
-		options
-	);
-export const CollectionUnfavoriteDocument = `
-    mutation collectionUnfavorite($id: ID!) {
-  favorited: collectionUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useCollectionUnfavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		CollectionUnfavoriteMutation,
-		TError,
-		CollectionUnfavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		CollectionUnfavoriteMutation,
-		TError,
-		CollectionUnfavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: CollectionUnfavoriteMutationVariables) =>
-			graphqlFetcher<
-				CollectionUnfavoriteMutation,
-				CollectionUnfavoriteMutationVariables
-			>(CollectionUnfavoriteDocument, variables)(),
-		options
-	);
-export const LoginDocument = `
-    mutation login($email: String!, $password: String!) {
-  login(input: {email: $email, password: $password}) {
-    authenticatedUser {
-      sessionToken
-    }
-  }
-}
-    `;
-export const useLoginMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		LoginMutation,
-		TError,
-		LoginMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
-		(variables?: LoginMutationVariables) =>
-			graphqlFetcher<LoginMutation, LoginMutationVariables>(
-				LoginDocument,
-				variables
-			)(),
-		options
-	);
-export const PersonFavoriteDocument = `
-    mutation personFavorite($id: ID!) {
-  favorited: personFavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		PersonFavoriteMutation,
-		TError,
-		PersonFavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		PersonFavoriteMutation,
-		TError,
-		PersonFavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: PersonFavoriteMutationVariables) =>
-			graphqlFetcher<PersonFavoriteMutation, PersonFavoriteMutationVariables>(
-				PersonFavoriteDocument,
-				variables
-			)(),
-		options
-	);
-export const PersonIsFavoritedDocument = `
-    query personIsFavorited($id: ID!) {
-  person(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
-export const usePersonIsFavoritedQuery = <
-	TData = PersonIsFavoritedQuery,
-	TError = unknown
->(
-	variables: PersonIsFavoritedQueryVariables,
-	options?: UseQueryOptions<PersonIsFavoritedQuery, TError, TData>
-) =>
-	useQuery<PersonIsFavoritedQuery, TError, TData>(
-		['personIsFavorited', variables],
-		graphqlFetcher<PersonIsFavoritedQuery, PersonIsFavoritedQueryVariables>(
-			PersonIsFavoritedDocument,
-			variables
-		),
-		options
-	);
-export const PersonUnfavoriteDocument = `
-    mutation personUnfavorite($id: ID!) {
-  favorited: personUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const usePersonUnfavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		PersonUnfavoriteMutation,
-		TError,
-		PersonUnfavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		PersonUnfavoriteMutation,
-		TError,
-		PersonUnfavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: PersonUnfavoriteMutationVariables) =>
-			graphqlFetcher<
-				PersonUnfavoriteMutation,
-				PersonUnfavoriteMutationVariables
-			>(PersonUnfavoriteDocument, variables)(),
-		options
-	);
-export const RecordingFavoriteDocument = `
-    mutation recordingFavorite($id: ID!) {
-  favorited: recordingFavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useRecordingFavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		RecordingFavoriteMutation,
-		TError,
-		RecordingFavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		RecordingFavoriteMutation,
-		TError,
-		RecordingFavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: RecordingFavoriteMutationVariables) =>
-			graphqlFetcher<
-				RecordingFavoriteMutation,
-				RecordingFavoriteMutationVariables
-			>(RecordingFavoriteDocument, variables)(),
-		options
-	);
-export const RecordingIsFavoritedDocument = `
-    query recordingIsFavorited($id: ID!) {
-  recording(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
-export const useRecordingIsFavoritedQuery = <
-	TData = RecordingIsFavoritedQuery,
-	TError = unknown
->(
-	variables: RecordingIsFavoritedQueryVariables,
-	options?: UseQueryOptions<RecordingIsFavoritedQuery, TError, TData>
-) =>
-	useQuery<RecordingIsFavoritedQuery, TError, TData>(
-		['recordingIsFavorited', variables],
-		graphqlFetcher<
-			RecordingIsFavoritedQuery,
-			RecordingIsFavoritedQueryVariables
-		>(RecordingIsFavoritedDocument, variables),
-		options
-	);
-export const RecordingUnfavoriteDocument = `
-    mutation recordingUnfavorite($id: ID!) {
-  favorited: recordingUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useRecordingUnfavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		RecordingUnfavoriteMutation,
-		TError,
-		RecordingUnfavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		RecordingUnfavoriteMutation,
-		TError,
-		RecordingUnfavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: RecordingUnfavoriteMutationVariables) =>
-			graphqlFetcher<
-				RecordingUnfavoriteMutation,
-				RecordingUnfavoriteMutationVariables
-			>(RecordingUnfavoriteDocument, variables)(),
-		options
-	);
-export const SequenceFavoriteDocument = `
-    mutation sequenceFavorite($id: ID!) {
-  favorited: sequenceFavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useSequenceFavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SequenceFavoriteMutation,
-		TError,
-		SequenceFavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SequenceFavoriteMutation,
-		TError,
-		SequenceFavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: SequenceFavoriteMutationVariables) =>
-			graphqlFetcher<
-				SequenceFavoriteMutation,
-				SequenceFavoriteMutationVariables
-			>(SequenceFavoriteDocument, variables)(),
-		options
-	);
-export const SequenceIsFavoritedDocument = `
-    query sequenceIsFavorited($id: ID!) {
-  sequence(id: $id) {
-    viewerHasFavorited
-    viewerPlaybackCompletedPercentage
-    recordings(viewerHasFavorited: true) {
-      aggregate {
-        count
-      }
-    }
-  }
-}
-    `;
-export const useSequenceIsFavoritedQuery = <
-	TData = SequenceIsFavoritedQuery,
-	TError = unknown
->(
-	variables: SequenceIsFavoritedQueryVariables,
-	options?: UseQueryOptions<SequenceIsFavoritedQuery, TError, TData>
-) =>
-	useQuery<SequenceIsFavoritedQuery, TError, TData>(
-		['sequenceIsFavorited', variables],
-		graphqlFetcher<SequenceIsFavoritedQuery, SequenceIsFavoritedQueryVariables>(
-			SequenceIsFavoritedDocument,
-			variables
-		),
-		options
-	);
-export const SequenceUnfavoriteDocument = `
-    mutation sequenceUnfavorite($id: ID!) {
-  favorited: sequenceUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useSequenceUnfavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SequenceUnfavoriteMutation,
-		TError,
-		SequenceUnfavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SequenceUnfavoriteMutation,
-		TError,
-		SequenceUnfavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: SequenceUnfavoriteMutationVariables) =>
-			graphqlFetcher<
-				SequenceUnfavoriteMutation,
-				SequenceUnfavoriteMutationVariables
-			>(SequenceUnfavoriteDocument, variables)(),
-		options
-	);
-export const SponsorFavoriteDocument = `
-    mutation sponsorFavorite($id: ID!) {
-  favorited: sponsorFavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useSponsorFavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SponsorFavoriteMutation,
-		TError,
-		SponsorFavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SponsorFavoriteMutation,
-		TError,
-		SponsorFavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: SponsorFavoriteMutationVariables) =>
-			graphqlFetcher<SponsorFavoriteMutation, SponsorFavoriteMutationVariables>(
-				SponsorFavoriteDocument,
-				variables
-			)(),
-		options
-	);
-export const SponsorIsFavoritedDocument = `
-    query sponsorIsFavorited($id: ID!) {
-  sponsor(id: $id) {
-    viewerHasFavorited
-  }
-}
-    `;
-export const useSponsorIsFavoritedQuery = <
-	TData = SponsorIsFavoritedQuery,
-	TError = unknown
->(
-	variables: SponsorIsFavoritedQueryVariables,
-	options?: UseQueryOptions<SponsorIsFavoritedQuery, TError, TData>
-) =>
-	useQuery<SponsorIsFavoritedQuery, TError, TData>(
-		['sponsorIsFavorited', variables],
-		graphqlFetcher<SponsorIsFavoritedQuery, SponsorIsFavoritedQueryVariables>(
-			SponsorIsFavoritedDocument,
-			variables
-		),
-		options
-	);
-export const SponsorUnfavoriteDocument = `
-    mutation sponsorUnfavorite($id: ID!) {
-  favorited: sponsorUnfavorite(id: $id) {
-    success
-  }
-}
-    `;
-export const useSponsorUnfavoriteMutation = <
-	TError = unknown,
-	TContext = unknown
->(
-	options?: UseMutationOptions<
-		SponsorUnfavoriteMutation,
-		TError,
-		SponsorUnfavoriteMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		SponsorUnfavoriteMutation,
-		TError,
-		SponsorUnfavoriteMutationVariables,
-		TContext
-	>(
-		(variables?: SponsorUnfavoriteMutationVariables) =>
-			graphqlFetcher<
-				SponsorUnfavoriteMutation,
-				SponsorUnfavoriteMutationVariables
-			>(SponsorUnfavoriteDocument, variables)(),
-		options
-	);
-export const AddPlaylistDocument = `
-    mutation addPlaylist($language: Language!, $title: String!, $isPublic: Boolean!, $recordingIds: [ID!]) {
-  playlistAdd(
-    input: {language: $language, title: $title, isPublic: $isPublic, recordingIds: $recordingIds}
-  ) {
-    id
-  }
-}
-    `;
-export const useAddPlaylistMutation = <TError = unknown, TContext = unknown>(
-	options?: UseMutationOptions<
-		AddPlaylistMutation,
-		TError,
-		AddPlaylistMutationVariables,
-		TContext
-	>
-) =>
-	useMutation<
-		AddPlaylistMutation,
-		TError,
-		AddPlaylistMutationVariables,
-		TContext
-	>(
-		(variables?: AddPlaylistMutationVariables) =>
-			graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(
-				AddPlaylistDocument,
-				variables
-			)(),
-		options
-	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetWithAuthGuardDataDocument = `query getWithAuthGuardData{me{user{email name}}}`;
 export async function getWithAuthGuardData<T>(
 	variables: ExactAlt<T, GetWithAuthGuardDataQueryVariables>
 ): Promise<GetWithAuthGuardDataQuery> {
 	return fetchApi(GetWithAuthGuardDataDocument, { variables });
 }
 
+export const LoginForgotPasswordDocument = `mutation loginForgotPassword($email:String!){userRecover(email:$email){errors{message}success}}`;
 export async function loginForgotPassword<T>(
 	variables: ExactAlt<T, LoginForgotPasswordMutationVariables>
 ): Promise<LoginForgotPasswordMutation> {
 	return fetchApi(LoginForgotPasswordDocument, { variables });
 }
 
+export const GetPlaylistButtonDataDocument = `query getPlaylistButtonData($language:Language!$recordingId:ID!){me{user{playlists(language:$language){nodes{id title hasRecording(id:$recordingId)}}}}}`;
 export async function getPlaylistButtonData<T>(
 	variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
 ): Promise<GetPlaylistButtonDataQuery> {
 	return fetchApi(GetPlaylistButtonDataDocument, { variables });
 }
 
+export const GetNotFoundPageDataDocument = `query getNotFoundPageData{websiteRecentRecordings(language:ENGLISH first:3){nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>
 ): Promise<GetNotFoundPageDataQuery> {
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
 
+export const GetRecordingPlaybackProgressDocument = `query getRecordingPlaybackProgress($id:ID!){recording(id:$id){viewerPlaybackSession{positionPercentage}}}`;
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
 ): Promise<GetRecordingPlaybackProgressQuery> {
 	return fetchApi(GetRecordingPlaybackProgressDocument, { variables });
 }
 
+export const RecordingPlaybackProgressSetDocument = `mutation recordingPlaybackProgressSet($id:ID!$percentage:Float!){recordingPlaybackSessionAdvance(recordingId:$id input:{positionPercentage:$percentage}){recording{viewerPlaybackSession{positionPercentage}}}}`;
 export async function recordingPlaybackProgressSet<T>(
 	variables: ExactAlt<T, RecordingPlaybackProgressSetMutationVariables>
 ): Promise<RecordingPlaybackProgressSetMutation> {
 	return fetchApi(RecordingPlaybackProgressSetDocument, { variables });
 }
 
+export const GetAboutPageDataDocument = `query getAboutPageData($id:ID!){page(id:$id){title body type slug}}`;
 export async function getAboutPageData<T>(
 	variables: ExactAlt<T, GetAboutPageDataQueryVariables>
 ): Promise<GetAboutPageDataQuery> {
 	return fetchApi(GetAboutPageDataDocument, { variables });
 }
 
+export const GetAboutStaticPathsDocument = `query getAboutStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAboutStaticPaths<T>(
 	variables: ExactAlt<T, GetAboutStaticPathsQueryVariables>
 ): Promise<GetAboutStaticPathsQuery> {
 	return fetchApi(GetAboutStaticPathsDocument, { variables });
 }
 
+export const GetAccountPlaylistsPageDataDocument = `query getAccountPlaylistsPageData($language:Language!){me{user{playlists(language:$language){nodes{id title isPublic summary recordings{aggregate{count}}}}}}}`;
 export async function getAccountPlaylistsPageData<T>(
 	variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
 ): Promise<GetAccountPlaylistsPageDataQuery> {
 	return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
 }
 
+export const AddAccountPlaylistDocument = `mutation addAccountPlaylist($isPublic:Boolean!$language:Language!$recordingIds:[ID!]$summary:String$title:String!){playlistAdd(input:{isPublic:$isPublic language:$language recordingIds:$recordingIds summary:$summary title:$title}){id}}`;
 export async function addAccountPlaylist<T>(
 	variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
 ): Promise<AddAccountPlaylistMutation> {
 	return fetchApi(AddAccountPlaylistDocument, { variables });
 }
 
+export const GetAccountPreferencesDataDocument = `query getAccountPreferencesData{me{user{...preferences}}}fragment preferences on User{autoplay language preferredAudioQuality timezone}`;
 export async function getAccountPreferencesData<T>(
 	variables: ExactAlt<T, GetAccountPreferencesDataQueryVariables>
 ): Promise<GetAccountPreferencesDataQuery> {
 	return fetchApi(GetAccountPreferencesDataDocument, { variables });
 }
 
+export const UpdateAccountPreferencesDocument = `mutation updateAccountPreferences($autoplay:Boolean!$language:Language!$preferredAudioQuality:RecordingQuality!$timezone:Timezone!){updateMyProfile(input:{autoplay:$autoplay language:$language preferredAudioQuality:$preferredAudioQuality timezone:$timezone}){errors{message}authenticatedUser{user{...preferences}}}}fragment preferences on User{autoplay language preferredAudioQuality timezone}`;
 export async function updateAccountPreferences<T>(
 	variables: ExactAlt<T, UpdateAccountPreferencesMutationVariables>
 ): Promise<UpdateAccountPreferencesMutation> {
 	return fetchApi(UpdateAccountPreferencesDocument, { variables });
 }
 
+export const GetProfileDataDocument = `query getProfileData{me{user{...profile}}}fragment profile on User{email givenName surname address1 address2 city province postalCode country}`;
 export async function getProfileData<T>(
 	variables: ExactAlt<T, GetProfileDataQueryVariables>
 ): Promise<GetProfileDataQuery> {
 	return fetchApi(GetProfileDataDocument, { variables });
 }
 
+export const UpdateProfileDataDocument = `mutation updateProfileData($email:String$password:String$givenName:String$surname:String){updateMyProfile(input:{email:$email password:$password givenName:$givenName surname:$surname}){errors{message}authenticatedUser{user{...profile}}}}fragment profile on User{email givenName surname address1 address2 city province postalCode country}`;
 export async function updateProfileData<T>(
 	variables: ExactAlt<T, UpdateProfileDataMutationVariables>
 ): Promise<UpdateProfileDataMutation> {
 	return fetchApi(UpdateProfileDataDocument, { variables });
 }
 
+export const RegisterDocument = `mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){errors{message}}}`;
 export async function register<T>(
 	variables: ExactAlt<T, RegisterMutationVariables>
 ): Promise<RegisterMutation> {
 	return fetchApi(RegisterDocument, { variables });
 }
 
+export const RegisterSocialDocument = `mutation registerSocial($socialId:String!$socialName:UserSocialServiceName!$socialToken:String!$givenName:String$surname:String){loginSocial(input:{socialId:$socialId socialName:$socialName socialToken:$socialToken givenName:$givenName surname:$surname}){authenticatedUser{sessionToken}errors{message}}}`;
 export async function registerSocial<T>(
 	variables: ExactAlt<T, RegisterSocialMutationVariables>
 ): Promise<RegisterSocialMutation> {
 	return fetchApi(RegisterSocialDocument, { variables });
 }
 
+export const RegisterIsLoggedInDocument = `query registerIsLoggedIn{me{user{email}}}`;
 export async function registerIsLoggedIn<T>(
 	variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
 ): Promise<RegisterIsLoggedInQuery> {
 	return fetchApi(RegisterIsLoggedInDocument, { variables });
 }
 
+export const ResetPasswordDocument = `mutation resetPassword($token:String!$password:String!){userReset(password:$password token:$token){errors{message}success}}`;
 export async function resetPassword<T>(
 	variables: ExactAlt<T, ResetPasswordMutationVariables>
 ): Promise<ResetPasswordMutation> {
 	return fetchApi(ResetPasswordDocument, { variables });
 }
 
+export const GetAudiobookDetailPageDataDocument = `query getAudiobookDetailPageData($id:ID!){audiobook(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getAudiobookDetailPageData<T>(
 	variables: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>
 ): Promise<GetAudiobookDetailPageDataQuery> {
 	return fetchApi(GetAudiobookDetailPageDataDocument, { variables });
 }
 
+export const GetAudiobookFeedDataDocument = `query getAudiobookFeedData($id:ID!){audiobook(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}...bookFeedDescription}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}fragment bookFeedDescription on Sequence{title recordings(first:25){nodes{authors:persons(role:WRITER){name}narrators:persons(role:SPEAKER){name}}}}`;
 export async function getAudiobookFeedData<T>(
 	variables: ExactAlt<T, GetAudiobookFeedDataQueryVariables>
 ): Promise<GetAudiobookFeedDataQuery> {
 	return fetchApi(GetAudiobookFeedDataDocument, { variables });
 }
 
+export const GetAudiobookDetailPathsDataDocument = `query getAudiobookDetailPathsData($language:Language!$first:Int){audiobooks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAudiobookDetailPathsData<T>(
 	variables: ExactAlt<T, GetAudiobookDetailPathsDataQueryVariables>
 ): Promise<GetAudiobookDetailPathsDataQuery> {
 	return fetchApi(GetAudiobookDetailPathsDataDocument, { variables });
 }
 
+export const GetAudiobookListPageDataDocument = `query getAudiobookListPageData($language:Language!$first:Int=12$offset:Int=0){audiobooks(language:$language first:$first offset:$offset orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getAudiobookListPageData<T>(
 	variables: ExactAlt<T, GetAudiobookListPageDataQueryVariables>
 ): Promise<GetAudiobookListPageDataQuery> {
 	return fetchApi(GetAudiobookListPageDataDocument, { variables });
 }
 
+export const GetAudiobookListPathsDataDocument = `query getAudiobookListPathsData($language:Language!){audiobooks(language:$language){aggregate{count}}}`;
 export async function getAudiobookListPathsData<T>(
 	variables: ExactAlt<T, GetAudiobookListPathsDataQueryVariables>
 ): Promise<GetAudiobookListPathsDataQuery> {
 	return fetchApi(GetAudiobookListPathsDataDocument, { variables });
 }
 
+export const GetAudiobookTrackDetailDataDocument = `query getAudiobookTrackDetailData($id:ID!){audiobookTrack(id:$id){...recording language}}fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}`;
 export async function getAudiobookTrackDetailData<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailDataQueryVariables>
 ): Promise<GetAudiobookTrackDetailDataQuery> {
 	return fetchApi(GetAudiobookTrackDetailDataDocument, { variables });
 }
 
+export const GetAudiobookTrackDetailStaticPathsDocument = `query getAudiobookTrackDetailStaticPaths($language:Language!$first:Int){audiobookTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAudiobookTrackDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailStaticPathsQueryVariables>
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
 }
 
+export const GetBlogPageDataDocument = `query getBlogPageData($language:Language!$offset:Int=0$first:Int=12){blogPosts(language:$language orderBy:{field:PUBLISHED_AT direction:DESC}first:$first offset:$offset){nodes{...cardPost}aggregate{count}}}fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}`;
 export async function getBlogPageData<T>(
 	variables: ExactAlt<T, GetBlogPageDataQueryVariables>
 ): Promise<GetBlogPageDataQuery> {
 	return fetchApi(GetBlogPageDataDocument, { variables });
 }
 
+export const GetBlogPathsDataDocument = `query getBlogPathsData($language:Language!){blogPosts(language:$language){aggregate{count}}}`;
 export async function getBlogPathsData<T>(
 	variables: ExactAlt<T, GetBlogPathsDataQueryVariables>
 ): Promise<GetBlogPathsDataQuery> {
 	return fetchApi(GetBlogPathsDataDocument, { variables });
 }
 
+export const GetBlogDetailDataDocument = `query getBlogDetailData($id:ID!$language:Language!){blogPost(id:$id){id title image{url(size:2100 cropMode:MAX_SIZE)}body canonicalPath(useFuturePath:true)canonicalUrl(useFuturePath:true)language publishDate readingDuration teaser}blogPosts(language:$language first:5 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardPost}}}fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}`;
 export async function getBlogDetailData<T>(
 	variables: ExactAlt<T, GetBlogDetailDataQueryVariables>
 ): Promise<GetBlogDetailDataQuery> {
 	return fetchApi(GetBlogDetailDataDocument, { variables });
 }
 
+export const GetBlogDetailStaticPathsDocument = `query getBlogDetailStaticPaths($language:Language!$first:Int){blogPosts(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getBlogDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetBlogDetailStaticPathsQueryVariables>
 ): Promise<GetBlogDetailStaticPathsQuery> {
 	return fetchApi(GetBlogDetailStaticPathsDocument, { variables });
 }
 
+export const GetCollectionDetailPageDataDocument = `query getCollectionDetailPageData($id:ID!){collection(id:$id){id title contentType startDate endDate duration description canonicalUrl(useFuturePath:true)language shareUrl location image{url(size:1000 cropMode:MAX_SIZE)}sponsor{id title canonicalPath(useFuturePath:true)...sponsorLockup}persons(first:3 role:SPEAKER orderBy:[{field:RECORDING_COUNT direction:DESC}{field:RECORDING_DOWNLOADS_ALL_TIME direction:DESC}]){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}sequences(first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}recordings(first:3 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}}}fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getCollectionDetailPageData<T>(
 	variables: ExactAlt<T, GetCollectionDetailPageDataQueryVariables>
 ): Promise<GetCollectionDetailPageDataQuery> {
 	return fetchApi(GetCollectionDetailPageDataDocument, { variables });
 }
 
+export const GetCollectionFeedDataDocument = `query getCollectionFeedData($id:ID!){collection(id:$id){title canonicalUrl(useFuturePath:true)language image{url(size:600)}recordings(first:25 orderBy:[{field:RECORDED_AT direction:ASC}]){aggregate{count}nodes{...generateFeed}}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getCollectionFeedData<T>(
 	variables: ExactAlt<T, GetCollectionFeedDataQueryVariables>
 ): Promise<GetCollectionFeedDataQuery> {
 	return fetchApi(GetCollectionFeedDataDocument, { variables });
 }
 
+export const GetCollectionDetailPathsDataDocument = `query getCollectionDetailPathsData($language:Language!$first:Int){collections(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getCollectionDetailPathsData<T>(
 	variables: ExactAlt<T, GetCollectionDetailPathsDataQueryVariables>
 ): Promise<GetCollectionDetailPathsDataQuery> {
 	return fetchApi(GetCollectionDetailPathsDataDocument, { variables });
 }
 
+export const GetCollectionListPageDataDocument = `query getCollectionListPageData($language:Language!$offset:Int$first:Int){collections(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getCollectionListPageData<T>(
 	variables: ExactAlt<T, GetCollectionListPageDataQueryVariables>
 ): Promise<GetCollectionListPageDataQuery> {
 	return fetchApi(GetCollectionListPageDataDocument, { variables });
 }
 
+export const GetCollectionListPathsDataDocument = `query getCollectionListPathsData($language:Language!){collections(language:$language){aggregate{count}}}`;
 export async function getCollectionListPathsData<T>(
 	variables: ExactAlt<T, GetCollectionListPathsDataQueryVariables>
 ): Promise<GetCollectionListPathsDataQuery> {
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
 
+export const GetCollectionPresentersPageDataDocument = `query getCollectionPresentersPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot persons(role:SPEAKER offset:$offset first:$first orderBy:[{field:NAME direction:ASC}]){nodes{...cardPerson}aggregate{count}}}}fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}`;
 export async function getCollectionPresentersPageData<T>(
 	variables: ExactAlt<T, GetCollectionPresentersPageDataQueryVariables>
 ): Promise<GetCollectionPresentersPageDataQuery> {
 	return fetchApi(GetCollectionPresentersPageDataDocument, { variables });
 }
 
+export const GetCollectionSequencesPageDataDocument = `query getCollectionSequencesPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot sequences(offset:$offset first:$first orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}}fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getCollectionSequencesPageData<T>(
 	variables: ExactAlt<T, GetCollectionSequencesPageDataQueryVariables>
 ): Promise<GetCollectionSequencesPageDataQuery> {
 	return fetchApi(GetCollectionSequencesPageDataDocument, { variables });
 }
 
+export const GetCollectionTeachingsPageDataDocument = `query getCollectionTeachingsPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot recordings(offset:$offset first:$first sequenceId:0 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardRecording}aggregate{count}}}}fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getCollectionTeachingsPageData<T>(
 	variables: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>
 ): Promise<GetCollectionTeachingsPageDataQuery> {
 	return fetchApi(GetCollectionTeachingsPageDataDocument, { variables });
 }
 
+export const SubmitContactPageDocument = `mutation submitContactPage($language:Language!$recipient:PageContactRecipient!$firstName:String!$lastName:String!$email:String!$body:String!){pageContactSubmit(input:{language:$language recipient:$recipient givenName:$firstName surname:$lastName email:$email body:$body}){success}}`;
 export async function submitContactPage<T>(
 	variables: ExactAlt<T, SubmitContactPageMutationVariables>
 ): Promise<SubmitContactPageMutation> {
 	return fetchApi(SubmitContactPageDocument, { variables });
 }
 
+export const GetDiscoverPageDataDocument = `query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getDiscoverPageData<T>(
 	variables: ExactAlt<T, GetDiscoverPageDataQueryVariables>
 ): Promise<GetDiscoverPageDataQuery> {
 	return fetchApi(GetDiscoverPageDataDocument, { variables });
 }
 
+export const GetDiscoverCollectionsPageDataDocument = `query getDiscoverCollectionsPageData($language:Language!){sequence(id:175){...cardSequence}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}`;
 export async function getDiscoverCollectionsPageData<T>(
 	variables: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>
 ): Promise<GetDiscoverCollectionsPageDataQuery> {
 	return fetchApi(GetDiscoverCollectionsPageDataDocument, { variables });
 }
 
+export const GetHomeStaticPropsDocument = `query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment testimonies on Testimony{id body author}fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}`;
 export async function getHomeStaticProps<T>(
 	variables: ExactAlt<T, GetHomeStaticPropsQueryVariables>
 ): Promise<GetHomeStaticPropsQuery> {
 	return fetchApi(GetHomeStaticPropsDocument, { variables });
 }
 
+export const GetLibraryHistoryPageDataDocument = `query getLibraryHistoryPageData($language:Language!$first:Int!$offset:Int!){me{user{downloadHistory(language:$language first:$first offset:$offset orderBy:[{field:CREATED_AT direction:DESC}]){aggregate{count}nodes{recording{...cardRecording}}pageInfo{hasNextPage}}}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getLibraryHistoryPageData<T>(
 	variables: ExactAlt<T, GetLibraryHistoryPageDataQueryVariables>
 ): Promise<GetLibraryHistoryPageDataQuery> {
 	return fetchApi(GetLibraryHistoryPageDataDocument, { variables });
 }
 
+export const GetLibraryDataDocument = `query getLibraryData($language:Language!$first:Int!$offset:Int!$groupSequences:Boolean!$hasVideo:Boolean$recordingDuration:IntegerRangeInput$recordingContentType:RecordingContentType$types:[FavoritableCatalogEntityType!]$viewerPlaybackStatus:RecordingViewerPlaybackStatus$sortField:FavoritesSortableField!$sortDirection:OrderByDirection!){me{user{favorites(language:$language first:$first offset:$offset groupSequences:$groupSequences recordingDuration:$recordingDuration recordingContentType:$recordingContentType hasVideo:$hasVideo types:$types viewerPlaybackStatus:$viewerPlaybackStatus orderBy:[{field:$sortField direction:$sortDirection}]){aggregate{count}nodes{...cardFavorite}}}}}fragment cardFavorite on UserFavorite{createdAt entity{__typename ...on Recording{...cardRecording}...on Sequence{viewerHasFavorited ...cardSequence ...cardRecordingStack}...on Collection{...cardCollection}...on Sponsor{...cardSponsor}...on Person{...cardPerson}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment cardRecordingStack on Sequence{contentType favoritedRecordings:recordings(viewerHasFavorited:true){nodes{sponsor{...sponsorLockup}...teaseRecording ...cardRecordingSequenceHat}}}fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}`;
 export async function getLibraryData<T>(
 	variables: ExactAlt<T, GetLibraryDataQueryVariables>
 ): Promise<GetLibraryDataQuery> {
 	return fetchApi(GetLibraryDataDocument, { variables });
 }
 
+export const GetLibraryPlaylistPageDataDocument = `query getLibraryPlaylistPageData($id:ID!){me{user{playlist(id:$id){title createdAt summary recordings(offset:0 first:1500){nodes{...cardRecording}aggregate{count}}}}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getLibraryPlaylistPageData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistPageDataQueryVariables>
 ): Promise<GetLibraryPlaylistPageDataQuery> {
 	return fetchApi(GetLibraryPlaylistPageDataDocument, { variables });
 }
 
+export const GetLibraryPlaylistsDataDocument = `query getLibraryPlaylistsData($language:Language!$offset:Int$first:Int){me{user{playlists(language:$language offset:$offset first:$first orderBy:[{field:CREATED_AT direction:DESC}]){nodes{...cardPlaylist}aggregate{count}}}}}fragment cardPlaylist on UserPlaylist{id title recordings(first:2){nodes{...teaseRecording}aggregate{count}}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getLibraryPlaylistsData<T>(
 	variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
 ): Promise<GetLibraryPlaylistsDataQuery> {
 	return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
 }
 
+export const GetPresenterAppearsPageDataDocument = `query getPresenterAppearsPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}collections(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getPresenterAppearsPageData<T>(
 	variables: ExactAlt<T, GetPresenterAppearsPageDataQueryVariables>
 ): Promise<GetPresenterAppearsPageDataQuery> {
 	return fetchApi(GetPresenterAppearsPageDataDocument, { variables });
 }
 
+export const GetPresenterDetailPageDataDocument = `query getPresenterDetailPageData($id:ID!$language:Language!){person(id:$id){id name description canonicalUrl(useFuturePath:true)language shareUrl imageWithFallback{url(size:128)}website sermons:recordings(contentType:SERMON){aggregate{count}}audiobookTracks:recordings(contentType:AUDIOBOOK_TRACK){aggregate{count}}musicTracks:recordings(contentType:MUSIC_TRACK){aggregate{count}}stories:recordings(contentType:STORY){aggregate{count}}essentialRecordings:recordings(first:3 isFeatured:true orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}}recentRecordings:recordings(first:3 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}topRecordings:recordings(first:3 orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}pageInfo{hasNextPage}}}sequences(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language persons:[{personId:$id}]first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(persons:[{personId:$id}]orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}}}pageInfo{hasNextPage}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getPresenterDetailPageData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPageDataQueryVariables>
 ): Promise<GetPresenterDetailPageDataQuery> {
 	return fetchApi(GetPresenterDetailPageDataDocument, { variables });
 }
 
+export const GetPresenterDetailPathsDataDocument = `query getPresenterDetailPathsData($language:Language!$first:Int){persons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getPresenterDetailPathsData<T>(
 	variables: ExactAlt<T, GetPresenterDetailPathsDataQueryVariables>
 ): Promise<GetPresenterDetailPathsDataQuery> {
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
 
+export const GetPresenterListPageDataDocument = `query getPresenterListPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}}personLetterCounts(language:$language){letter count}}`;
 export async function getPresenterListPageData<T>(
 	variables: ExactAlt<T, GetPresenterListPageDataQueryVariables>
 ): Promise<GetPresenterListPageDataQuery> {
 	return fetchApi(GetPresenterListPageDataDocument, { variables });
 }
 
+export const GetPresenterListPathsDataDocument = `query getPresenterListPathsData($language:Language!){personLetterCounts(language:$language){letter count}}`;
 export async function getPresenterListPathsData<T>(
 	variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
 ): Promise<GetPresenterListPathsDataQuery> {
 	return fetchApi(GetPresenterListPathsDataDocument, { variables });
 }
 
+export const GetPresenterRecordingsPageDataDocument = `query getPresenterRecordingsPageData($id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>
 ): Promise<GetPresenterRecordingsPageDataQuery> {
 	return fetchApi(GetPresenterRecordingsPageDataDocument, { variables });
 }
 
+export const GetPresenterRecordingsFeedDataDocument = `query getPresenterRecordingsFeedData($id:ID!){person(id:$id){id name image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getPresenterRecordingsFeedData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsFeedDataQueryVariables>
 ): Promise<GetPresenterRecordingsFeedDataQuery> {
 	return fetchApi(GetPresenterRecordingsFeedDataDocument, { variables });
 }
 
+export const GetPresenterSequencesPageDataDocument = `query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getPresenterSequencesPageData<T>(
 	variables: ExactAlt<T, GetPresenterSequencesPageDataQueryVariables>
 ): Promise<GetPresenterSequencesPageDataQuery> {
 	return fetchApi(GetPresenterSequencesPageDataDocument, { variables });
 }
 
+export const GetPresenterTopPageDataDocument = `query getPresenterTopPageData($id:ID!$offset:Int$first:Int){person(id:$id){id language ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getPresenterTopPageData<T>(
 	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
 ): Promise<GetPresenterTopPageDataQuery> {
 	return fetchApi(GetPresenterTopPageDataDocument, { variables });
 }
 
+export const GetMediaReleaseFormsPageDataDocument = `query getMediaReleaseFormsPageData($id:ID!){mediaReleaseForm(id:$id){id title summary isClosed}}`;
 export async function getMediaReleaseFormsPageData<T>(
 	variables: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>
 ): Promise<GetMediaReleaseFormsPageDataQuery> {
 	return fetchApi(GetMediaReleaseFormsPageDataDocument, { variables });
 }
 
+export const GetMediaReleaseFormsPathsDataDocument = `query getMediaReleaseFormsPathsData($language:Language!$first:Int!){mediaReleaseForms(language:$language first:$first){nodes{id}}}`;
 export async function getMediaReleaseFormsPathsData<T>(
 	variables: ExactAlt<T, GetMediaReleaseFormsPathsDataQueryVariables>
 ): Promise<GetMediaReleaseFormsPathsDataQuery> {
 	return fetchApi(GetMediaReleaseFormsPathsDataDocument, { variables });
 }
 
+export const SubmitMediaReleaseFormDocument = `mutation submitMediaReleaseForm($mediaReleaseFormId:ID!$mediaReleasePerson:MediaReleasePersonCreateInput!$comments:String!){mediaReleaseCreate(input:{mediaReleaseFormId:$mediaReleaseFormId mediaReleasePerson:$mediaReleasePerson notes:$comments}){errors{message}mediaRelease{id}}}`;
 export async function submitMediaReleaseForm<T>(
 	variables: ExactAlt<T, SubmitMediaReleaseFormMutationVariables>
 ): Promise<SubmitMediaReleaseFormMutation> {
 	return fetchApi(SubmitMediaReleaseFormDocument, { variables });
 }
 
+export const GetSearchResultsCollectionsDocument = `query getSearchResultsCollections($language:Language!$term:String!$first:Int!$offset:Int!){collections(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardCollection}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getSearchResultsCollections<T>(
 	variables: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>
 ): Promise<GetSearchResultsCollectionsQuery> {
 	return fetchApi(GetSearchResultsCollectionsDocument, { variables });
 }
 
+export const GetSearchResultsPageDataDocument = `query getSearchResultsPageData($language:Language!$term:String!){recordings(language:$language search:$term first:6){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}sequences(language:$language search:$term first:3){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}collections(language:$language search:$term first:3){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage}}sponsors(language:$language search:$term first:3){aggregate{count}nodes{...cardSponsor}pageInfo{hasNextPage}}persons(language:$language search:$term first:3){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}`;
 export async function getSearchResultsPageData<T>(
 	variables: ExactAlt<T, GetSearchResultsPageDataQueryVariables>
 ): Promise<GetSearchResultsPageDataQuery> {
 	return fetchApi(GetSearchResultsPageDataDocument, { variables });
 }
 
+export const GetSearchResultsPersonsDocument = `query getSearchResultsPersons($language:Language!$term:String!$first:Int!$offset:Int!){persons(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardPerson}}}fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}`;
 export async function getSearchResultsPersons<T>(
 	variables: ExactAlt<T, GetSearchResultsPersonsQueryVariables>
 ): Promise<GetSearchResultsPersonsQuery> {
 	return fetchApi(GetSearchResultsPersonsDocument, { variables });
 }
 
+export const GetSearchResultsSequencesDocument = `query getSearchResultsSequences($language:Language!$term:String!$first:Int!$offset:Int!){sequences(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSequence}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getSearchResultsSequences<T>(
 	variables: ExactAlt<T, GetSearchResultsSequencesQueryVariables>
 ): Promise<GetSearchResultsSequencesQuery> {
 	return fetchApi(GetSearchResultsSequencesDocument, { variables });
 }
 
+export const GetSearchResultsSponsorsDocument = `query getSearchResultsSponsors($language:Language!$term:String!$first:Int!$offset:Int!){sponsors(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardSponsor}}}fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}`;
 export async function getSearchResultsSponsors<T>(
 	variables: ExactAlt<T, GetSearchResultsSponsorsQueryVariables>
 ): Promise<GetSearchResultsSponsorsQuery> {
 	return fetchApi(GetSearchResultsSponsorsDocument, { variables });
 }
 
+export const GetSearchResultsRecordingsDocument = `query getSearchResultsRecordings($language:Language!$term:String!$first:Int!$offset:Int!){recordings(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSearchResultsRecordings<T>(
 	variables: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
 ): Promise<GetSearchResultsRecordingsQuery> {
 	return fetchApi(GetSearchResultsRecordingsDocument, { variables });
 }
 
+export const GetSeriesDetailPageDataDocument = `query getSeriesDetailPageData($id:ID!){series(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSeriesDetailPageData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPageDataQueryVariables>
 ): Promise<GetSeriesDetailPageDataQuery> {
 	return fetchApi(GetSeriesDetailPageDataDocument, { variables });
 }
 
+export const GetSeriesFeedDataDocument = `query getSeriesFeedData($id:ID!){series(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){aggregate{count}nodes{...generateFeed}}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getSeriesFeedData<T>(
 	variables: ExactAlt<T, GetSeriesFeedDataQueryVariables>
 ): Promise<GetSeriesFeedDataQuery> {
 	return fetchApi(GetSeriesFeedDataDocument, { variables });
 }
 
+export const GetSeriesDetailPathsDataDocument = `query getSeriesDetailPathsData($language:Language!$first:Int){serieses(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSeriesDetailPathsData<T>(
 	variables: ExactAlt<T, GetSeriesDetailPathsDataQueryVariables>
 ): Promise<GetSeriesDetailPathsDataQuery> {
 	return fetchApi(GetSeriesDetailPathsDataDocument, { variables });
 }
 
+export const GetSeriesListPageDataDocument = `query getSeriesListPageData($language:Language!$offset:Int$first:Int){serieses(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:ASC}]){nodes{...cardSequence}aggregate{count}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getSeriesListPageData<T>(
 	variables: ExactAlt<T, GetSeriesListPageDataQueryVariables>
 ): Promise<GetSeriesListPageDataQuery> {
 	return fetchApi(GetSeriesListPageDataDocument, { variables });
 }
 
+export const GetSeriesListPathsDataDocument = `query getSeriesListPathsData($language:Language!){serieses(language:$language){aggregate{count}}}`;
 export async function getSeriesListPathsData<T>(
 	variables: ExactAlt<T, GetSeriesListPathsDataQueryVariables>
 ): Promise<GetSeriesListPathsDataQuery> {
 	return fetchApi(GetSeriesListPathsDataDocument, { variables });
 }
 
+export const GetSermonDetailDataDocument = `query getSermonDetailData($id:ID!){sermon(id:$id){...recording language}}fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}`;
 export async function getSermonDetailData<T>(
 	variables: ExactAlt<T, GetSermonDetailDataQueryVariables>
 ): Promise<GetSermonDetailDataQuery> {
 	return fetchApi(GetSermonDetailDataDocument, { variables });
 }
 
+export const GetSermonDetailStaticPathsDocument = `query getSermonDetailStaticPaths($language:Language!$first:Int){sermons(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getSermonDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetSermonDetailStaticPathsQueryVariables>
 ): Promise<GetSermonDetailStaticPathsQuery> {
 	return fetchApi(GetSermonDetailStaticPathsDocument, { variables });
 }
 
+export const GetSermonListPageDataDocument = `query getSermonListPageData($language:Language!$hasVideo:Boolean$first:Int$offset:Int){sermons(language:$language hasVideo:$hasVideo first:$first offset:$offset orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSermonListPageData<T>(
 	variables: ExactAlt<T, GetSermonListPageDataQueryVariables>
 ): Promise<GetSermonListPageDataQuery> {
 	return fetchApi(GetSermonListPageDataDocument, { variables });
 }
 
+export const GetSermonListFeedDataDocument = `query getSermonListFeedData($language:Language!){sermons(language:$language first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getSermonListFeedData<T>(
 	variables: ExactAlt<T, GetSermonListFeedDataQueryVariables>
 ): Promise<GetSermonListFeedDataQuery> {
 	return fetchApi(GetSermonListFeedDataDocument, { variables });
 }
 
+export const GetSermonListPagePathsDataDocument = `query getSermonListPagePathsData($language:Language!$hasVideo:Boolean){sermons(language:$language hasVideo:$hasVideo){aggregate{count}}}`;
 export async function getSermonListPagePathsData<T>(
 	variables: ExactAlt<T, GetSermonListPagePathsDataQueryVariables>
 ): Promise<GetSermonListPagePathsDataQuery> {
 	return fetchApi(GetSermonListPagePathsDataDocument, { variables });
 }
 
+export const GetTrendingTeachingsPageDataDocument = `query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language first:24){nodes{recording{...cardRecording}}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getTrendingTeachingsPageData<T>(
 	variables: ExactAlt<T, GetTrendingTeachingsPageDataQueryVariables>
 ): Promise<GetTrendingTeachingsPageDataQuery> {
 	return fetchApi(GetTrendingTeachingsPageDataDocument, { variables });
 }
 
+export const GetSongAlbumsDetailPageDataDocument = `query getSongAlbumsDetailPageData($id:ID!){musicAlbum(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSongAlbumsDetailPageData<T>(
 	variables: ExactAlt<T, GetSongAlbumsDetailPageDataQueryVariables>
 ): Promise<GetSongAlbumsDetailPageDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPageDataDocument, { variables });
 }
 
+export const GetSongAlbumFeedDataDocument = `query getSongAlbumFeedData($id:ID!){musicAlbum(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getSongAlbumFeedData<T>(
 	variables: ExactAlt<T, GetSongAlbumFeedDataQueryVariables>
 ): Promise<GetSongAlbumFeedDataQuery> {
 	return fetchApi(GetSongAlbumFeedDataDocument, { variables });
 }
 
+export const GetSongAlbumsDetailPathsDataDocument = `query getSongAlbumsDetailPathsData($language:Language!$first:Int){musicAlbums(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSongAlbumsDetailPathsData<T>(
 	variables: ExactAlt<T, GetSongAlbumsDetailPathsDataQueryVariables>
 ): Promise<GetSongAlbumsDetailPathsDataQuery> {
 	return fetchApi(GetSongAlbumsDetailPathsDataDocument, { variables });
 }
 
+export const GetSongAlbumsListPageDataDocument = `query getSongAlbumsListPageData($language:Language!){musicAlbums(language:$language first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}aggregate{count}}musicBookTags(language:$language first:1000){nodes{id name recordings(first:1 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSongAlbumsListPageData<T>(
 	variables: ExactAlt<T, GetSongAlbumsListPageDataQueryVariables>
 ): Promise<GetSongAlbumsListPageDataQuery> {
 	return fetchApi(GetSongAlbumsListPageDataDocument, { variables });
 }
 
+export const GetSongBooksDetailPageDataDocument = `query getSongBooksDetailPageData($language:Language!$book:String!){musicTracks(language:$language tagName:$book first:1000 orderBy:[{field:PUBLISHED_AT direction:ASC}]){nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSongBooksDetailPageData<T>(
 	variables: ExactAlt<T, GetSongBooksDetailPageDataQueryVariables>
 ): Promise<GetSongBooksDetailPageDataQuery> {
 	return fetchApi(GetSongBooksDetailPageDataDocument, { variables });
 }
 
+export const GetBookSongDetailDataDocument = `query getBookSongDetailData($language:Language!$id:ID!$book:String!){musicTrack(id:$id){...recording language}recordings(language:$language tagName:$book first:1000 orderBy:[{field:TITLE direction:ASC}]){nodes{...teaseRecording}}}fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}`;
 export async function getBookSongDetailData<T>(
 	variables: ExactAlt<T, GetBookSongDetailDataQueryVariables>
 ): Promise<GetBookSongDetailDataQuery> {
 	return fetchApi(GetBookSongDetailDataDocument, { variables });
 }
 
+export const GetSongDetailDataDocument = `query getSongDetailData($id:ID!){musicTrack(id:$id){...recording language}}fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}`;
 export async function getSongDetailData<T>(
 	variables: ExactAlt<T, GetSongDetailDataQueryVariables>
 ): Promise<GetSongDetailDataQuery> {
 	return fetchApi(GetSongDetailDataDocument, { variables });
 }
 
+export const GetSongDetailStaticPathsDocument = `query getSongDetailStaticPaths($language:Language!$first:Int){musicTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSongDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetSongDetailStaticPathsQueryVariables>
 ): Promise<GetSongDetailStaticPathsQuery> {
 	return fetchApi(GetSongDetailStaticPathsDocument, { variables });
 }
 
+export const GetSponsorConferencesPageDataDocument = `query getSponsorConferencesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}conferences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}`;
 export async function getSponsorConferencesPageData<T>(
 	variables: ExactAlt<T, GetSponsorConferencesPageDataQueryVariables>
 ): Promise<GetSponsorConferencesPageDataQuery> {
 	return fetchApi(GetSponsorConferencesPageDataDocument, { variables });
 }
 
+export const GetSponsorConferencesPathsDataDocument = `query getSponsorConferencesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorConferencesPathsData<T>(
 	variables: ExactAlt<T, GetSponsorConferencesPathsDataQueryVariables>
 ): Promise<GetSponsorConferencesPathsDataQuery> {
 	return fetchApi(GetSponsorConferencesPathsDataDocument, { variables });
 }
 
+export const GetSponsorDetailPageDataDocument = `query getSponsorDetailPageData($id:ID!){sponsor(id:$id){id title location website description canonicalUrl(useFuturePath:true)language shareUrl image{url(size:128)}collections(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardCollection}}sequences(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardSequence}}recordings(first:3 collectionId:0 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}}}}fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSponsorDetailPageData<T>(
 	variables: ExactAlt<T, GetSponsorDetailPageDataQueryVariables>
 ): Promise<GetSponsorDetailPageDataQuery> {
 	return fetchApi(GetSponsorDetailPageDataDocument, { variables });
 }
 
+export const GetSponsorDetailPathsDataDocument = `query getSponsorDetailPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getSponsorDetailPathsData<T>(
 	variables: ExactAlt<T, GetSponsorDetailPathsDataQueryVariables>
 ): Promise<GetSponsorDetailPathsDataQuery> {
 	return fetchApi(GetSponsorDetailPathsDataDocument, { variables });
 }
 
+export const GetSponsorListPageDataDocument = `query getSponsorListPageData($language:Language!$startsWith:String){sponsors(language:$language startsWith:$startsWith first:1500 orderBy:[{field:TITLE direction:ASC}]){nodes{canonicalPath(useFuturePath:true)title image{url(size:128)}}}sponsorLetterCounts(language:$language){letter count}}`;
 export async function getSponsorListPageData<T>(
 	variables: ExactAlt<T, GetSponsorListPageDataQueryVariables>
 ): Promise<GetSponsorListPageDataQuery> {
 	return fetchApi(GetSponsorListPageDataDocument, { variables });
 }
 
+export const GetSponsorListPathsDataDocument = `query getSponsorListPathsData($language:Language!){sponsorLetterCounts(language:$language){letter count}}`;
 export async function getSponsorListPathsData<T>(
 	variables: ExactAlt<T, GetSponsorListPathsDataQueryVariables>
 ): Promise<GetSponsorListPathsDataQuery> {
 	return fetchApi(GetSponsorListPathsDataDocument, { variables });
 }
 
+export const GetSponsorSeriesPageDataDocument = `query getSponsorSeriesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}sequences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getSponsorSeriesPageData<T>(
 	variables: ExactAlt<T, GetSponsorSeriesPageDataQueryVariables>
 ): Promise<GetSponsorSeriesPageDataQuery> {
 	return fetchApi(GetSponsorSeriesPageDataDocument, { variables });
 }
 
+export const GetSponsorSeriesPathsDataDocument = `query getSponsorSeriesPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorSeriesPathsData<T>(
 	variables: ExactAlt<T, GetSponsorSeriesPathsDataQueryVariables>
 ): Promise<GetSponsorSeriesPathsDataQuery> {
 	return fetchApi(GetSponsorSeriesPathsDataDocument, { variables });
 }
 
+export const GetSponsorTeachingsPageDataDocument = `query getSponsorTeachingsPageData($id:ID!$offset:Int$first:Int){sponsor(id:$id){id ...sponsorPivot recordings(offset:$offset first:$first orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getSponsorTeachingsPageData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsPageDataQueryVariables>
 ): Promise<GetSponsorTeachingsPageDataQuery> {
 	return fetchApi(GetSponsorTeachingsPageDataDocument, { variables });
 }
 
+export const GetSponsorTeachingsFeedDataDocument = `query getSponsorTeachingsFeedData($id:ID!){sponsor(id:$id){title canonicalUrl(useFuturePath:true)language recordings(first:25 orderBy:[{field:RECORDED_AT direction:DESC}]){nodes{...generateFeed}}}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}`;
 export async function getSponsorTeachingsFeedData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsFeedDataQueryVariables>
 ): Promise<GetSponsorTeachingsFeedDataQuery> {
 	return fetchApi(GetSponsorTeachingsFeedDataDocument, { variables });
 }
 
+export const GetSponsorTeachingsPathsDataDocument = `query getSponsorTeachingsPathsData($language:Language!$first:Int){sponsors(language:$language first:$first){nodes{id}}}`;
 export async function getSponsorTeachingsPathsData<T>(
 	variables: ExactAlt<T, GetSponsorTeachingsPathsDataQueryVariables>
 ): Promise<GetSponsorTeachingsPathsDataQuery> {
 	return fetchApi(GetSponsorTeachingsPathsDataDocument, { variables });
 }
 
+export const GetStoryAlbumDetailPageDataDocument = `query getStoryAlbumDetailPageData($id:ID!){storySeason(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}`;
 export async function getStoryAlbumDetailPageData<T>(
 	variables: ExactAlt<T, GetStoryAlbumDetailPageDataQueryVariables>
 ): Promise<GetStoryAlbumDetailPageDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPageDataDocument, { variables });
 }
 
+export const GetStoryAlbumFeedDataDocument = `query getStoryAlbumFeedData($id:ID!){storySeason(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)recordings(first:25){nodes{...generateFeed}}language ...bookFeedDescription}}fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}fragment bookFeedDescription on Sequence{title recordings(first:25){nodes{authors:persons(role:WRITER){name}narrators:persons(role:SPEAKER){name}}}}`;
 export async function getStoryAlbumFeedData<T>(
 	variables: ExactAlt<T, GetStoryAlbumFeedDataQueryVariables>
 ): Promise<GetStoryAlbumFeedDataQuery> {
 	return fetchApi(GetStoryAlbumFeedDataDocument, { variables });
 }
 
+export const GetStoryAlbumDetailPathsDataDocument = `query getStoryAlbumDetailPathsData($language:Language!$first:Int){storySeasons(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getStoryAlbumDetailPathsData<T>(
 	variables: ExactAlt<T, GetStoryAlbumDetailPathsDataQueryVariables>
 ): Promise<GetStoryAlbumDetailPathsDataQuery> {
 	return fetchApi(GetStoryAlbumDetailPathsDataDocument, { variables });
 }
 
+export const GetStoriesAlbumsPageDataDocument = `query getStoriesAlbumsPageData($language:Language!$first:Int$offset:Int){storySeasons(language:$language first:$first offset:$offset){nodes{...cardSequence}aggregate{count}}}fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}`;
 export async function getStoriesAlbumsPageData<T>(
 	variables: ExactAlt<T, GetStoriesAlbumsPageDataQueryVariables>
 ): Promise<GetStoriesAlbumsPageDataQuery> {
 	return fetchApi(GetStoriesAlbumsPageDataDocument, { variables });
 }
 
+export const GetStoriesAlbumsPathDataDocument = `query getStoriesAlbumsPathData($language:Language!){storySeasons(language:$language){aggregate{count}}}`;
 export async function getStoriesAlbumsPathData<T>(
 	variables: ExactAlt<T, GetStoriesAlbumsPathDataQueryVariables>
 ): Promise<GetStoriesAlbumsPathDataQuery> {
 	return fetchApi(GetStoriesAlbumsPathDataDocument, { variables });
 }
 
+export const GetStoryDetailDataDocument = `query getStoryDetailData($id:ID!){story(id:$id){...recording language}}fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}`;
 export async function getStoryDetailData<T>(
 	variables: ExactAlt<T, GetStoryDetailDataQueryVariables>
 ): Promise<GetStoryDetailDataQuery> {
 	return fetchApi(GetStoryDetailDataDocument, { variables });
 }
 
+export const GetStoryDetailStaticPathsDocument = `query getStoryDetailStaticPaths($language:Language!$first:Int){stories(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getStoryDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetStoryDetailStaticPathsQueryVariables>
 ): Promise<GetStoryDetailStaticPathsQuery> {
 	return fetchApi(GetStoryDetailStaticPathsDocument, { variables });
 }
 
+export const GetTestimoniesPageDataDocument = `query getTestimoniesPageData($language:Language!$offset:Int$first:Int){testimonies(language:$language first:$first offset:$offset orderBy:{direction:DESC field:WRITTEN_DATE}){nodes{author body writtenDate}aggregate{count}}}`;
 export async function getTestimoniesPageData<T>(
 	variables: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
 ): Promise<GetTestimoniesPageDataQuery> {
 	return fetchApi(GetTestimoniesPageDataDocument, { variables });
 }
 
+export const GetTestimoniesPathsDataDocument = `query getTestimoniesPathsData($language:Language!){testimonies(language:$language){aggregate{count}}}`;
 export async function getTestimoniesPathsData<T>(
 	variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
 }
 
+export const CollectionFavoriteDocument = `mutation collectionFavorite($id:ID!){favorited:collectionFavorite(id:$id){success}}`;
 export async function collectionFavorite<T>(
 	variables: ExactAlt<T, CollectionFavoriteMutationVariables>
 ): Promise<CollectionFavoriteMutation> {
 	return fetchApi(CollectionFavoriteDocument, { variables });
 }
 
+export const CollectionIsFavoritedDocument = `query collectionIsFavorited($id:ID!){collection(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage}}`;
 export async function collectionIsFavorited<T>(
 	variables: ExactAlt<T, CollectionIsFavoritedQueryVariables>
 ): Promise<CollectionIsFavoritedQuery> {
 	return fetchApi(CollectionIsFavoritedDocument, { variables });
 }
 
+export const CollectionUnfavoriteDocument = `mutation collectionUnfavorite($id:ID!){favorited:collectionUnfavorite(id:$id){success}}`;
 export async function collectionUnfavorite<T>(
 	variables: ExactAlt<T, CollectionUnfavoriteMutationVariables>
 ): Promise<CollectionUnfavoriteMutation> {
 	return fetchApi(CollectionUnfavoriteDocument, { variables });
 }
 
+export const LoginDocument = `mutation login($email:String!$password:String!){login(input:{email:$email password:$password}){authenticatedUser{sessionToken}}}`;
 export async function login<T>(
 	variables: ExactAlt<T, LoginMutationVariables>
 ): Promise<LoginMutation> {
 	return fetchApi(LoginDocument, { variables });
 }
 
+export const PersonFavoriteDocument = `mutation personFavorite($id:ID!){favorited:personFavorite(id:$id){success}}`;
 export async function personFavorite<T>(
 	variables: ExactAlt<T, PersonFavoriteMutationVariables>
 ): Promise<PersonFavoriteMutation> {
 	return fetchApi(PersonFavoriteDocument, { variables });
 }
 
+export const PersonIsFavoritedDocument = `query personIsFavorited($id:ID!){person(id:$id){viewerHasFavorited}}`;
 export async function personIsFavorited<T>(
 	variables: ExactAlt<T, PersonIsFavoritedQueryVariables>
 ): Promise<PersonIsFavoritedQuery> {
 	return fetchApi(PersonIsFavoritedDocument, { variables });
 }
 
+export const PersonUnfavoriteDocument = `mutation personUnfavorite($id:ID!){favorited:personUnfavorite(id:$id){success}}`;
 export async function personUnfavorite<T>(
 	variables: ExactAlt<T, PersonUnfavoriteMutationVariables>
 ): Promise<PersonUnfavoriteMutation> {
 	return fetchApi(PersonUnfavoriteDocument, { variables });
 }
 
+export const RecordingFavoriteDocument = `mutation recordingFavorite($id:ID!){favorited:recordingFavorite(id:$id){success}}`;
 export async function recordingFavorite<T>(
 	variables: ExactAlt<T, RecordingFavoriteMutationVariables>
 ): Promise<RecordingFavoriteMutation> {
 	return fetchApi(RecordingFavoriteDocument, { variables });
 }
 
+export const RecordingIsFavoritedDocument = `query recordingIsFavorited($id:ID!){recording(id:$id){viewerHasFavorited}}`;
 export async function recordingIsFavorited<T>(
 	variables: ExactAlt<T, RecordingIsFavoritedQueryVariables>
 ): Promise<RecordingIsFavoritedQuery> {
 	return fetchApi(RecordingIsFavoritedDocument, { variables });
 }
 
+export const RecordingUnfavoriteDocument = `mutation recordingUnfavorite($id:ID!){favorited:recordingUnfavorite(id:$id){success}}`;
 export async function recordingUnfavorite<T>(
 	variables: ExactAlt<T, RecordingUnfavoriteMutationVariables>
 ): Promise<RecordingUnfavoriteMutation> {
 	return fetchApi(RecordingUnfavoriteDocument, { variables });
 }
 
+export const SequenceFavoriteDocument = `mutation sequenceFavorite($id:ID!){favorited:sequenceFavorite(id:$id){success}}`;
 export async function sequenceFavorite<T>(
 	variables: ExactAlt<T, SequenceFavoriteMutationVariables>
 ): Promise<SequenceFavoriteMutation> {
 	return fetchApi(SequenceFavoriteDocument, { variables });
 }
 
+export const SequenceIsFavoritedDocument = `query sequenceIsFavorited($id:ID!){sequence(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage recordings(viewerHasFavorited:true){aggregate{count}}}}`;
 export async function sequenceIsFavorited<T>(
 	variables: ExactAlt<T, SequenceIsFavoritedQueryVariables>
 ): Promise<SequenceIsFavoritedQuery> {
 	return fetchApi(SequenceIsFavoritedDocument, { variables });
 }
 
+export const SequenceUnfavoriteDocument = `mutation sequenceUnfavorite($id:ID!){favorited:sequenceUnfavorite(id:$id){success}}`;
 export async function sequenceUnfavorite<T>(
 	variables: ExactAlt<T, SequenceUnfavoriteMutationVariables>
 ): Promise<SequenceUnfavoriteMutation> {
 	return fetchApi(SequenceUnfavoriteDocument, { variables });
 }
 
+export const SponsorFavoriteDocument = `mutation sponsorFavorite($id:ID!){favorited:sponsorFavorite(id:$id){success}}`;
 export async function sponsorFavorite<T>(
 	variables: ExactAlt<T, SponsorFavoriteMutationVariables>
 ): Promise<SponsorFavoriteMutation> {
 	return fetchApi(SponsorFavoriteDocument, { variables });
 }
 
+export const SponsorIsFavoritedDocument = `query sponsorIsFavorited($id:ID!){sponsor(id:$id){viewerHasFavorited}}`;
 export async function sponsorIsFavorited<T>(
 	variables: ExactAlt<T, SponsorIsFavoritedQueryVariables>
 ): Promise<SponsorIsFavoritedQuery> {
 	return fetchApi(SponsorIsFavoritedDocument, { variables });
 }
 
+export const SponsorUnfavoriteDocument = `mutation sponsorUnfavorite($id:ID!){favorited:sponsorUnfavorite(id:$id){success}}`;
 export async function sponsorUnfavorite<T>(
 	variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>
 ): Promise<SponsorUnfavoriteMutation> {
 	return fetchApi(SponsorUnfavoriteDocument, { variables });
 }
 
+export const AddPlaylistDocument = `mutation addPlaylist($language:Language!$title:String!$isPublic:Boolean!$recordingIds:[ID!]){playlistAdd(input:{language:$language title:$title isPublic:$isPublic recordingIds:$recordingIds}){id}}`;
 export async function addPlaylist<T>(
 	variables: ExactAlt<T, AddPlaylistMutationVariables>
 ): Promise<AddPlaylistMutation> {

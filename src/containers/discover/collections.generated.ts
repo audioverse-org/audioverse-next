@@ -1,6 +1,7 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { CardPersonFragmentDoc } from '../../components/molecules/card/person.generated';
 import { CardCollectionFragmentDoc } from '../../components/molecules/card/collection.generated';
 import { CardSponsorFragmentDoc } from '../../components/molecules/card/sponsor.generated';
@@ -402,6 +403,7 @@ export const GetDiscoverCollectionsPageDataDocument = `
   }
 }
     ${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}
 ${CardPersonFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}`;
@@ -422,6 +424,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetDiscoverCollectionsPageDataDocument = `query getDiscoverCollectionsPageData($language:Language!){sequence(id:175){...cardSequence}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}`;
 export async function getDiscoverCollectionsPageData<T>(
 	variables: ExactAlt<T, GetDiscoverCollectionsPageDataQueryVariables>
 ): Promise<GetDiscoverCollectionsPageDataQuery> {

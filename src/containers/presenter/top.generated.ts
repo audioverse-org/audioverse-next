@@ -2,6 +2,10 @@ import * as Types from '../../lib/generated/graphql';
 
 import { PresenterPivotFragmentDoc } from './pivot.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetPresenterTopPageDataQueryVariables = Types.Exact<{
@@ -119,7 +123,11 @@ export const GetPresenterTopPageDataDocument = `
   }
 }
     ${PresenterPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterTopPageDataQuery = <
 	TData = GetPresenterTopPageDataQuery,
 	TError = unknown
@@ -137,6 +145,7 @@ export const useGetPresenterTopPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterTopPageDataDocument = `query getPresenterTopPageData($id:ID!$offset:Int$first:Int){person(id:$id){id language ...presenterPivot recordings(offset:$offset first:$first orderBy:[{field:DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardRecording}aggregate{count}}}}`;
 export async function getPresenterTopPageData<T>(
 	variables: ExactAlt<T, GetPresenterTopPageDataQueryVariables>
 ): Promise<GetPresenterTopPageDataQuery> {

@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -159,7 +163,11 @@ export const GetSermonListPageDataDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSermonListPageDataQuery = <
 	TData = GetSermonListPageDataQuery,
 	TError = unknown
@@ -229,18 +237,21 @@ export const useGetSermonListPagePathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSermonListPageDataDocument = `query getSermonListPageData($language:Language!$hasVideo:Boolean$first:Int$offset:Int){sermons(language:$language hasVideo:$hasVideo first:$first offset:$offset orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}aggregate{count}}}`;
 export async function getSermonListPageData<T>(
 	variables: ExactAlt<T, GetSermonListPageDataQueryVariables>
 ): Promise<GetSermonListPageDataQuery> {
 	return fetchApi(GetSermonListPageDataDocument, { variables });
 }
 
+export const GetSermonListFeedDataDocument = `query getSermonListFeedData($language:Language!){sermons(language:$language first:25 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...generateFeed}}}`;
 export async function getSermonListFeedData<T>(
 	variables: ExactAlt<T, GetSermonListFeedDataQueryVariables>
 ): Promise<GetSermonListFeedDataQuery> {
 	return fetchApi(GetSermonListFeedDataDocument, { variables });
 }
 
+export const GetSermonListPagePathsDataDocument = `query getSermonListPagePathsData($language:Language!$hasVideo:Boolean){sermons(language:$language hasVideo:$hasVideo){aggregate{count}}}`;
 export async function getSermonListPagePathsData<T>(
 	variables: ExactAlt<T, GetSermonListPagePathsDataQueryVariables>
 ): Promise<GetSermonListPagePathsDataQuery> {

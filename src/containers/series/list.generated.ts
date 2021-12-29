@@ -1,6 +1,7 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSeriesListPageDataQueryVariables = Types.Exact<{
@@ -88,7 +89,8 @@ export const GetSeriesListPageDataDocument = `
     }
   }
 }
-    ${CardSequenceFragmentDoc}`;
+    ${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetSeriesListPageDataQuery = <
 	TData = GetSeriesListPageDataQuery,
 	TError = unknown
@@ -130,12 +132,14 @@ export const useGetSeriesListPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSeriesListPageDataDocument = `query getSeriesListPageData($language:Language!$offset:Int$first:Int){serieses(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:ASC}]){nodes{...cardSequence}aggregate{count}}}`;
 export async function getSeriesListPageData<T>(
 	variables: ExactAlt<T, GetSeriesListPageDataQueryVariables>
 ): Promise<GetSeriesListPageDataQuery> {
 	return fetchApi(GetSeriesListPageDataDocument, { variables });
 }
 
+export const GetSeriesListPathsDataDocument = `query getSeriesListPathsData($language:Language!){serieses(language:$language){aggregate{count}}}`;
 export async function getSeriesListPathsData<T>(
 	variables: ExactAlt<T, GetSeriesListPathsDataQueryVariables>
 ): Promise<GetSeriesListPathsDataQuery> {

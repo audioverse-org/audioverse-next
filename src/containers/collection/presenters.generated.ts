@@ -90,6 +90,7 @@ export const useGetCollectionPresentersPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetCollectionPresentersPageDataDocument = `query getCollectionPresentersPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot persons(role:SPEAKER offset:$offset first:$first orderBy:[{field:NAME direction:ASC}]){nodes{...cardPerson}aggregate{count}}}}`;
 export async function getCollectionPresentersPageData<T>(
 	variables: ExactAlt<T, GetCollectionPresentersPageDataQueryVariables>
 ): Promise<GetCollectionPresentersPageDataQuery> {

@@ -2,6 +2,7 @@ import * as Types from '../../lib/generated/graphql';
 
 import { CollectionPivotFragmentDoc } from './pivot.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetCollectionSequencesPageDataQueryVariables = Types.Exact<{
@@ -100,7 +101,8 @@ export const GetCollectionSequencesPageDataDocument = `
   }
 }
     ${CollectionPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetCollectionSequencesPageDataQuery = <
 	TData = GetCollectionSequencesPageDataQuery,
 	TError = unknown
@@ -118,6 +120,7 @@ export const useGetCollectionSequencesPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetCollectionSequencesPageDataDocument = `query getCollectionSequencesPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot sequences(offset:$offset first:$first orderBy:[{field:TITLE direction:ASC}]){nodes{...cardSequence}aggregate{count}}}}`;
 export async function getCollectionSequencesPageData<T>(
 	variables: ExactAlt<T, GetCollectionSequencesPageDataQueryVariables>
 ): Promise<GetCollectionSequencesPageDataQuery> {

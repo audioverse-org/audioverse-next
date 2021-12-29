@@ -118,12 +118,14 @@ export const useGetCollectionListPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetCollectionListPageDataDocument = `query getCollectionListPageData($language:Language!$offset:Int$first:Int){collections(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}`;
 export async function getCollectionListPageData<T>(
 	variables: ExactAlt<T, GetCollectionListPageDataQueryVariables>
 ): Promise<GetCollectionListPageDataQuery> {
 	return fetchApi(GetCollectionListPageDataDocument, { variables });
 }
 
+export const GetCollectionListPathsDataDocument = `query getCollectionListPathsData($language:Language!){collections(language:$language){aggregate{count}}}`;
 export async function getCollectionListPathsData<T>(
 	variables: ExactAlt<T, GetCollectionListPathsDataQueryVariables>
 ): Promise<GetCollectionListPathsDataQuery> {

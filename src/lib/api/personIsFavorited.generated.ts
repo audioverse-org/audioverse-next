@@ -38,6 +38,7 @@ export const usePersonIsFavoritedQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const PersonIsFavoritedDocument = `query personIsFavorited($id:ID!){person(id:$id){viewerHasFavorited}}`;
 export async function personIsFavorited<T>(
 	variables: ExactAlt<T, PersonIsFavoritedQueryVariables>
 ): Promise<PersonIsFavoritedQuery> {

@@ -3,7 +3,11 @@ import * as Types from '../../lib/generated/graphql';
 import { SponsorLockupFragmentDoc } from '../../components/molecules/sponsorLockup.generated';
 import { CardPersonFragmentDoc } from '../../components/molecules/card/person.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
@@ -355,7 +359,11 @@ export const GetCollectionDetailPageDataDocument = `
     ${SponsorLockupFragmentDoc}
 ${CardPersonFragmentDoc}
 ${CardSequenceFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${PersonLockupFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionDetailPageDataQuery = <
 	TData = GetCollectionDetailPageDataQuery,
 	TError = unknown
@@ -433,18 +441,21 @@ export const useGetCollectionDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetCollectionDetailPageDataDocument = `query getCollectionDetailPageData($id:ID!){collection(id:$id){id title contentType startDate endDate duration description canonicalUrl(useFuturePath:true)language shareUrl location image{url(size:1000 cropMode:MAX_SIZE)}sponsor{id title canonicalPath(useFuturePath:true)...sponsorLockup}persons(first:3 role:SPEAKER orderBy:[{field:RECORDING_COUNT direction:DESC}{field:RECORDING_DOWNLOADS_ALL_TIME direction:DESC}]){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}sequences(first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}recordings(first:3 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}}}`;
 export async function getCollectionDetailPageData<T>(
 	variables: ExactAlt<T, GetCollectionDetailPageDataQueryVariables>
 ): Promise<GetCollectionDetailPageDataQuery> {
 	return fetchApi(GetCollectionDetailPageDataDocument, { variables });
 }
 
+export const GetCollectionFeedDataDocument = `query getCollectionFeedData($id:ID!){collection(id:$id){title canonicalUrl(useFuturePath:true)language image{url(size:600)}recordings(first:25 orderBy:[{field:RECORDED_AT direction:ASC}]){aggregate{count}nodes{...generateFeed}}}}`;
 export async function getCollectionFeedData<T>(
 	variables: ExactAlt<T, GetCollectionFeedDataQueryVariables>
 ): Promise<GetCollectionFeedDataQuery> {
 	return fetchApi(GetCollectionFeedDataDocument, { variables });
 }
 
+export const GetCollectionDetailPathsDataDocument = `query getCollectionDetailPathsData($language:Language!$first:Int){collections(language:$language first:$first){nodes{id canonicalPath(useFuturePath:true)}}}`;
 export async function getCollectionDetailPathsData<T>(
 	variables: ExactAlt<T, GetCollectionDetailPathsDataQueryVariables>
 ): Promise<GetCollectionDetailPathsDataQuery> {

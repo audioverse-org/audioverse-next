@@ -55,6 +55,7 @@ export const useSequenceIsFavoritedQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SequenceIsFavoritedDocument = `query sequenceIsFavorited($id:ID!){sequence(id:$id){viewerHasFavorited viewerPlaybackCompletedPercentage recordings(viewerHasFavorited:true){aggregate{count}}}}`;
 export async function sequenceIsFavorited<T>(
 	variables: ExactAlt<T, SequenceIsFavoritedQueryVariables>
 ): Promise<SequenceIsFavoritedQuery> {

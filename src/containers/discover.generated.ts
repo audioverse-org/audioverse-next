@@ -1,6 +1,10 @@
 import * as Types from '../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../components/templates/andMiniplayer.generated';
 import { CardSequenceFragmentDoc } from '../components/molecules/card/sequence.generated';
 import { CardCollectionFragmentDoc } from '../components/molecules/card/collection.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -478,6 +482,10 @@ export const GetDiscoverPageDataDocument = `
   }
 }
     ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetDiscoverPageDataQuery = <
@@ -497,6 +505,7 @@ export const useGetDiscoverPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetDiscoverPageDataDocument = `query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}`;
 export async function getDiscoverPageData<T>(
 	variables: ExactAlt<T, GetDiscoverPageDataQueryVariables>
 ): Promise<GetDiscoverPageDataQuery> {

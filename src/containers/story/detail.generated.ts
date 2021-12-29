@@ -1,6 +1,14 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { RecordingFragmentDoc } from '../../components/organisms/recording.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
+import { SequenceNavFragmentDoc } from '../../components/molecules/sequenceNav.generated';
+import { CopyrightInfoFragmentDoc } from '../../components/molecules/copyrightInfo.generated';
+import { PlayerFragmentDoc } from '../../components/molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../../components/molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../../components/molecules/buttonShareRecording.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetStoryDetailDataQueryVariables = Types.Exact<{
@@ -231,7 +239,15 @@ export const GetStoryDetailDataDocument = `
     language
   }
 }
-    ${RecordingFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetStoryDetailDataQuery = <
 	TData = GetStoryDetailDataQuery,
 	TError = unknown
@@ -273,12 +289,14 @@ export const useGetStoryDetailStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetStoryDetailDataDocument = `query getStoryDetailData($id:ID!){story(id:$id){...recording language}}`;
 export async function getStoryDetailData<T>(
 	variables: ExactAlt<T, GetStoryDetailDataQueryVariables>
 ): Promise<GetStoryDetailDataQuery> {
 	return fetchApi(GetStoryDetailDataDocument, { variables });
 }
 
+export const GetStoryDetailStaticPathsDocument = `query getStoryDetailStaticPaths($language:Language!$first:Int){stories(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getStoryDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetStoryDetailStaticPathsQueryVariables>
 ): Promise<GetStoryDetailStaticPathsQuery> {

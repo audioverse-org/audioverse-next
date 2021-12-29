@@ -1,6 +1,10 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetSearchResultsRecordingsQueryVariables = Types.Exact<{
@@ -92,7 +96,11 @@ export const GetSearchResultsRecordingsDocument = `
     }
   }
 }
-    ${CardRecordingFragmentDoc}`;
+    ${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetSearchResultsRecordingsQuery = <
 	TData = GetSearchResultsRecordingsQuery,
 	TError = unknown
@@ -110,6 +118,7 @@ export const useGetSearchResultsRecordingsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetSearchResultsRecordingsDocument = `query getSearchResultsRecordings($language:Language!$term:String!$first:Int!$offset:Int!){recordings(language:$language search:$term first:$first offset:$offset){aggregate{count}nodes{...cardRecording}}}`;
 export async function getSearchResultsRecordings<T>(
 	variables: ExactAlt<T, GetSearchResultsRecordingsQueryVariables>
 ): Promise<GetSearchResultsRecordingsQuery> {

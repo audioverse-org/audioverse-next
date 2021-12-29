@@ -44,6 +44,7 @@ export const usePersonUnfavoriteMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const PersonUnfavoriteDocument = `mutation personUnfavorite($id:ID!){favorited:personUnfavorite(id:$id){success}}`;
 export async function personUnfavorite<T>(
 	variables: ExactAlt<T, PersonUnfavoriteMutationVariables>
 ): Promise<PersonUnfavoriteMutation> {

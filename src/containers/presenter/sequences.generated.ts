@@ -2,6 +2,7 @@ import * as Types from '../../lib/generated/graphql';
 
 import { PresenterPivotFragmentDoc } from './pivot.generated';
 import { CardSequenceFragmentDoc } from '../../components/molecules/card/sequence.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetPresenterSequencesPageDataQueryVariables = Types.Exact<{
@@ -94,7 +95,8 @@ export const GetPresenterSequencesPageDataDocument = `
   }
 }
     ${PresenterPivotFragmentDoc}
-${CardSequenceFragmentDoc}`;
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
 export const useGetPresenterSequencesPageDataQuery = <
 	TData = GetPresenterSequencesPageDataQuery,
 	TError = unknown
@@ -112,6 +114,7 @@ export const useGetPresenterSequencesPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetPresenterSequencesPageDataDocument = `query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}`;
 export async function getPresenterSequencesPageData<T>(
 	variables: ExactAlt<T, GetPresenterSequencesPageDataQueryVariables>
 ): Promise<GetPresenterSequencesPageDataQuery> {

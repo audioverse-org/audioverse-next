@@ -97,12 +97,14 @@ export const useGetTestimoniesPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetTestimoniesPageDataDocument = `query getTestimoniesPageData($language:Language!$offset:Int$first:Int){testimonies(language:$language first:$first offset:$offset orderBy:{direction:DESC field:WRITTEN_DATE}){nodes{author body writtenDate}aggregate{count}}}`;
 export async function getTestimoniesPageData<T>(
 	variables: ExactAlt<T, GetTestimoniesPageDataQueryVariables>
 ): Promise<GetTestimoniesPageDataQuery> {
 	return fetchApi(GetTestimoniesPageDataDocument, { variables });
 }
 
+export const GetTestimoniesPathsDataDocument = `query getTestimoniesPathsData($language:Language!){testimonies(language:$language){aggregate{count}}}`;
 export async function getTestimoniesPathsData<T>(
 	variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 ): Promise<GetTestimoniesPathsDataQuery> {

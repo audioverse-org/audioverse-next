@@ -2,6 +2,10 @@ import * as Types from '../../lib/generated/graphql';
 
 import { CollectionPivotFragmentDoc } from './pivot.generated';
 import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetCollectionTeachingsPageDataQueryVariables = Types.Exact<{
@@ -118,7 +122,11 @@ export const GetCollectionTeachingsPageDataDocument = `
   }
 }
     ${CollectionPivotFragmentDoc}
-${CardRecordingFragmentDoc}`;
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionTeachingsPageDataQuery = <
 	TData = GetCollectionTeachingsPageDataQuery,
 	TError = unknown
@@ -136,6 +144,7 @@ export const useGetCollectionTeachingsPageDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetCollectionTeachingsPageDataDocument = `query getCollectionTeachingsPageData($id:ID!$offset:Int$first:Int){collection(id:$id){id ...collectionPivot recordings(offset:$offset first:$first sequenceId:0 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardRecording}aggregate{count}}}}`;
 export async function getCollectionTeachingsPageData<T>(
 	variables: ExactAlt<T, GetCollectionTeachingsPageDataQueryVariables>
 ): Promise<GetCollectionTeachingsPageDataQuery> {

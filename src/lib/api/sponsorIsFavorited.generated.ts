@@ -38,6 +38,7 @@ export const useSponsorIsFavoritedQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const SponsorIsFavoritedDocument = `query sponsorIsFavorited($id:ID!){sponsor(id:$id){viewerHasFavorited}}`;
 export async function sponsorIsFavorited<T>(
 	variables: ExactAlt<T, SponsorIsFavoritedQueryVariables>
 ): Promise<SponsorIsFavoritedQuery> {

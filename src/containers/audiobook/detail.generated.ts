@@ -1,6 +1,11 @@
 import * as Types from '../../lib/generated/graphql';
 
 import { SequenceFragmentDoc } from '../../components/organisms/sequence.generated';
+import { CardRecordingFragmentDoc } from '../../components/molecules/card/recording.generated';
+import { CardRecordingSequenceHatFragmentDoc } from '../../components/molecules/card/recordingSequenceHat.generated';
+import { PersonLockupFragmentDoc } from '../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../components/templates/andMiniplayer.generated';
 import { GenerateFeedFragmentDoc } from '../../lib/generateFeed.generated';
 import { BookFeedDescriptionFragmentDoc } from './bookFeedDescription.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -198,7 +203,12 @@ export const GetAudiobookDetailPageDataDocument = `
     language
   }
 }
-    ${SequenceFragmentDoc}`;
+    ${SequenceFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
 	TData = GetAudiobookDetailPageDataQuery,
 	TError = unknown
@@ -275,18 +285,21 @@ export const useGetAudiobookDetailPathsDataQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAudiobookDetailPageDataDocument = `query getAudiobookDetailPageData($id:ID!){audiobook(id:$id){...sequence canonicalUrl(useFuturePath:true)language}}`;
 export async function getAudiobookDetailPageData<T>(
 	variables: ExactAlt<T, GetAudiobookDetailPageDataQueryVariables>
 ): Promise<GetAudiobookDetailPageDataQuery> {
 	return fetchApi(GetAudiobookDetailPageDataDocument, { variables });
 }
 
+export const GetAudiobookFeedDataDocument = `query getAudiobookFeedData($id:ID!){audiobook(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}...bookFeedDescription}}`;
 export async function getAudiobookFeedData<T>(
 	variables: ExactAlt<T, GetAudiobookFeedDataQueryVariables>
 ): Promise<GetAudiobookFeedDataQuery> {
 	return fetchApi(GetAudiobookFeedDataDocument, { variables });
 }
 
+export const GetAudiobookDetailPathsDataDocument = `query getAudiobookDetailPathsData($language:Language!$first:Int){audiobooks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAudiobookDetailPathsData<T>(
 	variables: ExactAlt<T, GetAudiobookDetailPathsDataQueryVariables>
 ): Promise<GetAudiobookDetailPathsDataQuery> {

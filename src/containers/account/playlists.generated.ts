@@ -130,12 +130,14 @@ export const useAddAccountPlaylistMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAccountPlaylistsPageDataDocument = `query getAccountPlaylistsPageData($language:Language!){me{user{playlists(language:$language){nodes{id title isPublic summary recordings{aggregate{count}}}}}}}`;
 export async function getAccountPlaylistsPageData<T>(
 	variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
 ): Promise<GetAccountPlaylistsPageDataQuery> {
 	return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
 }
 
+export const AddAccountPlaylistDocument = `mutation addAccountPlaylist($isPublic:Boolean!$language:Language!$recordingIds:[ID!]$summary:String$title:String!){playlistAdd(input:{isPublic:$isPublic language:$language recordingIds:$recordingIds summary:$summary title:$title}){id}}`;
 export async function addAccountPlaylist<T>(
 	variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
 ): Promise<AddAccountPlaylistMutation> {

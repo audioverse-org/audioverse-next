@@ -1,6 +1,14 @@
 import * as Types from '../../../lib/generated/graphql';
 
 import { RecordingFragmentDoc } from '../../../components/organisms/recording.generated';
+import { PersonLockupFragmentDoc } from '../../../components/molecules/personLockup.generated';
+import { TeaseRecordingFragmentDoc } from '../../../components/molecules/teaseRecording.generated';
+import { AndMiniplayerFragmentDoc } from '../../../components/templates/andMiniplayer.generated';
+import { SequenceNavFragmentDoc } from '../../../components/molecules/sequenceNav.generated';
+import { CopyrightInfoFragmentDoc } from '../../../components/molecules/copyrightInfo.generated';
+import { PlayerFragmentDoc } from '../../../components/molecules/player.generated';
+import { ButtonDownloadFragmentDoc } from '../../../components/molecules/buttonDownload.generated';
+import { ButtonShareRecordingFragmentDoc } from '../../../components/molecules/buttonShareRecording.generated';
 import { useQuery, UseQueryOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/fetchApi';
 export type GetAudiobookTrackDetailDataQueryVariables = Types.Exact<{
@@ -231,7 +239,15 @@ export const GetAudiobookTrackDetailDataDocument = `
     language
   }
 }
-    ${RecordingFragmentDoc}`;
+    ${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
 export const useGetAudiobookTrackDetailDataQuery = <
 	TData = GetAudiobookTrackDetailDataQuery,
 	TError = unknown
@@ -277,12 +293,14 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetAudiobookTrackDetailDataDocument = `query getAudiobookTrackDetailData($id:ID!){audiobookTrack(id:$id){...recording language}}`;
 export async function getAudiobookTrackDetailData<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailDataQueryVariables>
 ): Promise<GetAudiobookTrackDetailDataQuery> {
 	return fetchApi(GetAudiobookTrackDetailDataDocument, { variables });
 }
 
+export const GetAudiobookTrackDetailStaticPathsDocument = `query getAudiobookTrackDetailStaticPaths($language:Language!$first:Int){audiobookTracks(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}`;
 export async function getAudiobookTrackDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailStaticPathsQueryVariables>
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {

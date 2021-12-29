@@ -148,18 +148,21 @@ export const useSubmitMediaReleaseFormMutation = <
 	);
 import { fetchApi } from '@lib/api/fetchApi';
 
+export const GetMediaReleaseFormsPageDataDocument = `query getMediaReleaseFormsPageData($id:ID!){mediaReleaseForm(id:$id){id title summary isClosed}}`;
 export async function getMediaReleaseFormsPageData<T>(
 	variables: ExactAlt<T, GetMediaReleaseFormsPageDataQueryVariables>
 ): Promise<GetMediaReleaseFormsPageDataQuery> {
 	return fetchApi(GetMediaReleaseFormsPageDataDocument, { variables });
 }
 
+export const GetMediaReleaseFormsPathsDataDocument = `query getMediaReleaseFormsPathsData($language:Language!$first:Int!){mediaReleaseForms(language:$language first:$first){nodes{id}}}`;
 export async function getMediaReleaseFormsPathsData<T>(
 	variables: ExactAlt<T, GetMediaReleaseFormsPathsDataQueryVariables>
 ): Promise<GetMediaReleaseFormsPathsDataQuery> {
 	return fetchApi(GetMediaReleaseFormsPathsDataDocument, { variables });
 }
 
+export const SubmitMediaReleaseFormDocument = `mutation submitMediaReleaseForm($mediaReleaseFormId:ID!$mediaReleasePerson:MediaReleasePersonCreateInput!$comments:String!){mediaReleaseCreate(input:{mediaReleaseFormId:$mediaReleaseFormId mediaReleasePerson:$mediaReleasePerson notes:$comments}){errors{message}mediaRelease{id}}}`;
 export async function submitMediaReleaseForm<T>(
 	variables: ExactAlt<T, SubmitMediaReleaseFormMutationVariables>
 ): Promise<SubmitMediaReleaseFormMutation> {
