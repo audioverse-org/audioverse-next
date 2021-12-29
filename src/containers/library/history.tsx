@@ -9,7 +9,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
-import { graphqlFetcher } from '@lib/api';
+import { graphqlFetcher } from '@lib/api/fetchApi';
 import {
 	GetLibraryHistoryPageDataDocument,
 	GetLibraryHistoryPageDataQuery,

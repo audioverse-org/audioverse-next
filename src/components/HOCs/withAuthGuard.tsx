@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Login from '@components/molecules/login';
-import { getCurrentRequest } from '@lib/api';
+import { getCurrentRequest } from '@lib/api/storeRequest';
 import { getSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 

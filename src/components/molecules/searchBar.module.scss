@@ -3,31 +3,49 @@
 .base {
 	flex-grow: 1;
 	display: flex;
+	min-width: 0;
 }
 
 .inner {
 	flex-grow: 1;
 	display: flex;
+	min-width: 0;
 	margin-left: auto;
 	margin-right: auto;
 	border-bottom: 0.5px solid rgba($ts-lightTone, 0.5);
-	font-family: $serif;
-	font-size: 22px;
-	font-weight: 400;
-	line-height: 33px;
-	color: $ts-dark;
 	letter-spacing: unset;
-	> * {
-		flex-grow: 1;
-		color: $ts-dark !important;
+	&.focused {
+		border-bottom-color: rgba($ts-dark, 0.5);
+		.icon {
+			color: $ts-red;
+		}
 	}
+}
+
+.inputWrapper {
+	flex-grow: 1;
+	display: flex;
+	min-width: 0;
+	align-items: center;
+	padding-bottom: 8px;
+
 	input {
-		font-family: $serif;
-		font-size: 22px;
-		line-height: 33px;
-		color: $ts-dark;
+		flex-grow: 1;
+		margin: 0;
+		margin-left: 8px;
+		padding: 0;
+		background: none;
+		border: none;
+		outline: none;
 		appearance: none;
+		min-width: 0;
+		&,
 		&::placeholder {
+			font-family: $serif;
+			font-size: 22px;
+			font-weight: 400;
+			line-height: 33px;
+			color: $ts-dark;
 			opacity: 1;
 		}
 		&::-webkit-search-cancel-button {
@@ -38,12 +56,13 @@
 		height: 24px;
 		cursor: pointer;
 	}
-	&.focused {
-		border-bottom-color: rgba($ts-dark, 0.5);
-		.icon {
-			color: $ts-red;
-		}
-	}
+}
+
+.icon,
+.clear {
+	display: flex;
+	align-items: center;
+	min-width: 0;
 }
 
 @media (min-width: $breakpoint-lg) {

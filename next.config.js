@@ -496,6 +496,12 @@ module.exports = withBundleAnalyzer(
 				use: ['@svgr/webpack'],
 			});
 
+			if (!dev) {
+				// https://formatjs.io/docs/guides/advanced-usage#react-intl-without-parser-40-smaller
+				config.resolve.alias['@formatjs/icu-messageformat-parser'] =
+					'@formatjs/icu-messageformat-parser/no-parser';
+			}
+
 			return config;
 		},
 		images: {

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
+import dynamic from 'next/dynamic';
 import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
-import Modal from '@components/organisms/modal';
 import { makeLoginRoute, makeRegisterRoute } from '@lib/routes';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -21,6 +21,8 @@ export const GlobalModalsContext = React.createContext<GlobalModalsContextType>(
 		confirmRemoveFavorite: () => void 0,
 	}
 );
+
+const LazyModal = dynamic(() => import('../organisms/modal'));
 
 interface AndGlobalModalsProps {
 	children: ReactNode;
@@ -158,9 +160,9 @@ export default function AndGlobalModals({
 	return (
 		<GlobalModalsContext.Provider value={globalModalsContext}>
 			{children}
-			<Modal open={isOpen} onClose={handleClose} title={title}>
+			<LazyModal open={isOpen} onClose={handleClose} title={title}>
 				{content}
-			</Modal>
+			</LazyModal>
 		</GlobalModalsContext.Provider>
 	);
 }

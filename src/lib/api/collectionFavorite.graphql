@@ -3,8 +3,3 @@ mutation collectionFavorite($id: ID!) {
 		success
 	}
 }
-mutation collectionFavorite($id: ID!) {
-	favorited: collectionFavorite(id: $id) {
-		success
-	}
-}
