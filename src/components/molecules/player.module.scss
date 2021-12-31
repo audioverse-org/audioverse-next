@@ -42,9 +42,11 @@
 	transition: opacity $transition-medium;
 }
 
-.posterPlayShown,
-.poster:hover {
-	.posterPlay {
+.posterPlayShown .posterPlay {
+	opacity: 1;
+}
+@media (hover: hover) {
+	.poster:hover .posterPlay {
 		opacity: 1;
 	}
 }
