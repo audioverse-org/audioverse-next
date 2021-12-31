@@ -11,6 +11,7 @@ import React, {
 import { unstable_batchedUpdates } from 'react-dom';
 import { useMutation } from 'react-query';
 import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
+import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {
@@ -157,6 +158,8 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
+	const [videojs, setVideojs] = useState<typeof VideoJs>();
+	import('video.js').then((v) => setVideojs(v));
 	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -372,7 +375,7 @@ export default function AndPlaybackContext({
 
 			const p =
 				player ||
-				(await import('video.js')).default(videoElRef.current, options);
+				(videojs as typeof VideoJs).default(videoElRef.current, options);
 
 			unstable_batchedUpdates(() => {
 				if (!player) {
