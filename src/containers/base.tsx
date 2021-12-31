@@ -7,7 +7,6 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from 'react-query';
-import 'video.js/dist/video-js.css';
 
 import withIntl from '@components/HOCs/withIntl';
 import LoadingIndicator from '@components/molecules/loadingIndicator';

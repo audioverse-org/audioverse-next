@@ -14,6 +14,7 @@ import { useFormattedTime } from '@lib/time';
 import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
 
+import 'video.js/dist/video-js.css';
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {

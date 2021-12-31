@@ -63,6 +63,13 @@ export const getSources = (
 	}));
 };
 
+export const shouldLoadRecordingPlaybackProgress = (
+	recording: AndMiniplayerFragment | null | undefined
+) =>
+	!!recording?.id &&
+	!(recording.id + '').includes('/') && // Bible ids
+	!!getSessionToken();
+
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
@@ -175,7 +182,7 @@ export default function AndPlaybackContext({
 			id: recording?.id || 0,
 		},
 		{
-			enabled: !!recording?.id && !!getSessionToken(),
+			enabled: shouldLoadRecordingPlaybackProgress(recording),
 		}
 	);
 	useEffect(() => {

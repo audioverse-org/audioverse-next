@@ -4,13 +4,12 @@ import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
+	shouldLoadRecordingPlaybackProgress,
 } from '@components/templates/andPlaybackContext';
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
 } from '@lib/generated/graphql';
-
-import { getSessionToken } from './cookies';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
@@ -70,7 +69,8 @@ export default function usePlaybackSession(
 		<div ref={portalContainerRef} data-testid="portal" />
 	);
 
-	const shouldLoadPlaybackProgress = !!recording?.id && !!getSessionToken();
+	const shouldLoadPlaybackProgress =
+		shouldLoadRecordingPlaybackProgress(recording);
 	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
 		{
 			id: recording?.id || 0,
