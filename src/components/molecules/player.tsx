@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonDownload from '@components/molecules/buttonDownload';
@@ -53,6 +53,7 @@ const Player = ({
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
+	const [posterHovered, setPosterHovered] = useState(false);
 
 	return (
 		<div
@@ -69,11 +70,13 @@ const Player = ({
 						<button
 							className={clsx(
 								styles.poster,
-								shouldShowPoster && styles.posterPlayShown
+								(shouldShowPoster || posterHovered) && styles.posterPlayShown
 							)}
 							onClick={() =>
 								session.isPaused ? session.play() : session.pause()
 							}
+							onTouchStart={() => setPosterHovered(true)}
+							onTouchEnd={() => setPosterHovered(false)}
 						>
 							{session.isVideoLoaded ? (
 								video
