@@ -28,7 +28,7 @@ import {
 import IconAlignLeft from '../../public/img/fa-align-left.svg';
 import IconBook from '../../public/img/fa-book.svg';
 import IconBookmark from '../../public/img/fa-bookmark.svg';
-import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
+// import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
 import IconCalendar from '../../public/img/fa-calendar.svg';
 import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
 import IconFacebook from '../../public/img/fa-facebook.svg';
@@ -254,15 +254,15 @@ export function getNavigationItems(
 						defaultMessage: 'The Team',
 					}),
 				},
-				{
-					key: 'purpose',
-					href: makeAboutPage(languageRoute, 7),
-					Icon: IconBullseyeHeavy,
-					label: intl.formatMessage({
-						id: `header__navItemStory-purpose`,
-						defaultMessage: 'Our Purpose',
-					}),
-				},
+				// {
+				// 	key: 'purpose',
+				// 	href: makeAboutPage(languageRoute, 7),
+				// 	Icon: IconBullseyeHeavy,
+				// 	label: intl.formatMessage({
+				// 		id: `header__navItemStory-purpose`,
+				// 		defaultMessage: 'Our Purpose',
+				// 	}),
+				// },
 				{
 					key: 'spiritofav',
 					href: makeAboutPage(languageRoute, 12),
