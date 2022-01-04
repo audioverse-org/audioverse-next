@@ -24,8 +24,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,
-		(d) => d.collections.nodes,
-		(d) => d.collections.aggregate?.count
+		(d) => d.conferences.nodes,
+		(d) => d.conferences.aggregate?.count
 	);
 }
 
@@ -33,6 +33,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getNumberedStaticPaths(
 		'conferences',
 		getCollectionListPathsData,
-		(d) => d?.collections.aggregate?.count
+		(d) => d?.conferences.aggregate?.count
 	);
 }

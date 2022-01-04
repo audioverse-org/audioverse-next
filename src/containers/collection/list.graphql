@@ -3,7 +3,7 @@ query getCollectionListPageData(
 	$offset: Int
 	$first: Int
 ) {
-	collections(
+	conferences(
 		language: $language
 		offset: $offset
 		first: $first
@@ -19,7 +19,7 @@ query getCollectionListPageData(
 }
 
 query getCollectionListPathsData($language: Language!) {
-	collections(language: $language) {
+	conferences(language: $language) {
 		aggregate {
 			count
 		}
