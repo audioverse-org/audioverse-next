@@ -634,9 +634,6 @@
   "header__navItemStory-donate": {
     "string": "Donate"
   },
-  "header__navItemStory-purpose": {
-    "string": "Our Purpose"
-  },
   "header__navItemStory-spiritOfAudioVerse": {
     "string": "Spirit of AudioVerse"
   },
@@ -959,6 +956,15 @@
   "molecule-buttonDownload__buttonLabel": {
     "comment": "download button label",
     "string": "downloads"
+  },
+  "molecule-buttonDownload__linkLabelHigh": {
+    "string": "High Quality ({size})"
+  },
+  "molecule-buttonDownload__linkLabelLow": {
+    "string": "Low Quality ({size})"
+  },
+  "molecule-buttonDownload__linkLabelMedium": {
+    "string": "Medium Quality ({size})"
   },
   "molecule-buttonDownload__menuAudioHeading": {
     "comment": "download button menu audio heading",
