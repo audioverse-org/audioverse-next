@@ -15317,7 +15317,7 @@ export const useGetPresenterRecordingsFeedDataQuery = <
 		options
 	);
 export const GetPresenterSequencesPageDataDocument = `
-query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
+query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
 ${PresenterPivotFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}`;
