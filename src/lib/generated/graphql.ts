@@ -8724,36 +8724,24 @@ export type GetDiscoverCollectionsPageDataQueryVariables = Exact<{
 
 export type GetDiscoverCollectionsPageDataQuery = {
 	__typename?: 'Query';
-	sequence:
+	collection:
 		| {
-				__typename?: 'Sequence';
+				__typename?: 'Collection';
 				id: string | number;
-				title: string;
 				canonicalPath: string;
-				contentType: SequenceContentType;
+				title: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
 				duration: number;
-				summary: string;
-				speakers: {
-					__typename?: 'PersonConnection';
-					nodes:
-						| Array<{
-								__typename?: 'Person';
-								name: string;
-								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-						  }>
-						| null
-						| undefined;
-				};
-				sequenceWriters: {
-					__typename?: 'PersonConnection';
-					nodes:
-						| Array<{
-								__typename?: 'Person';
-								name: string;
-								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-						  }>
+				collectionContentType: CollectionContentType;
+				image:
+					| { __typename?: 'Image'; id: string | number; url: string }
+					| null
+					| undefined;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
 						| null
 						| undefined;
 				};
@@ -15039,11 +15027,11 @@ export const useGetDiscoverPageDataQuery = <
 		options
 	);
 export const GetDiscoverCollectionsPageDataDocument = `
-query getDiscoverCollectionsPageData($language:Language!){sequence(id:175){...cardSequence}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+query getDiscoverCollectionsPageData($language:Language!){collection(id:428){...cardCollection}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+${CardCollectionFragmentDoc}
+${CardPersonFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
-${CardPersonFragmentDoc}
-${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}`;
 export const useGetDiscoverCollectionsPageDataQuery = <
 	TData = GetDiscoverCollectionsPageDataQuery,
