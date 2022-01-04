@@ -11,6 +11,7 @@ import React, {
 import { unstable_batchedUpdates } from 'react-dom';
 import { useMutation } from 'react-query';
 import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
+import * as VideoJs from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {
@@ -365,36 +366,30 @@ export default function AndPlaybackContext({
 	}, [recording, prefersAudio]);
 
 	useEffect(() => {
-		const loadPlayer = async () => {
-			// TODO: return if onLoad
-			if (!videoElRef.current) return;
-			if (!hasSources) return;
+		// TODO: return if onLoad
+		if (!videoElRef.current) return;
+		if (!hasSources) return;
 
-			const p =
-				player ||
-				(await import('video.js')).default(videoElRef.current, options);
+		const p = player || VideoJs.default(videoElRef.current, options);
 
-			unstable_batchedUpdates(() => {
-				if (!player) {
-					setPlayer(p);
-				} else if (sources) {
-					player.src(sources);
-				}
+		unstable_batchedUpdates(() => {
+			if (!player) {
+				setPlayer(p);
+			} else if (sources) {
+				player.src(sources);
+			}
 
-				setIsPaused(true);
-				const progress = serverProgress || 0;
-				_setProgress(progress);
+			setIsPaused(true);
+			const progress = serverProgress || 0;
+			_setProgress(progress);
 
-				setBufferedProgress(0);
+			setBufferedProgress(0);
 
-				p.currentTime(progress * duration);
-				setVolume(p.volume() * 100);
+			p.currentTime(progress * duration);
+			setVolume(p.volume() * 100);
 
-				setFingerprint(JSON.stringify(sources));
-			});
-		};
-		loadPlayer();
-
+			setFingerprint(JSON.stringify(sources));
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [options, hasSources, sources, videoElRef.current]);
 
