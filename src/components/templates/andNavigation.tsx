@@ -81,7 +81,11 @@ export default function AndNavigation({
 			return;
 		}
 
-		const scrollTop = Math.max(-document.body.getBoundingClientRect().top, 0);
+		const bodyRect = document.body.getBoundingClientRect();
+		const scrollTop = Math.min(
+			Math.max(-bodyRect.top, 0), // Not less than 0
+			bodyRect.height - window.innerHeight // Not beyond the end of the page (rubber-banding case)
+		);
 
 		const scrollingUp = scrollTop < lastScrollTop;
 		if (scrollingUp && headerSlideOffset + COLLAPSING_HEIGHT < scrollTop) {
