@@ -6,6 +6,7 @@ import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
+	SupportedLanguages,
 } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import getLanguageIds from '@lib/getLanguageIds';
@@ -14,7 +15,7 @@ type Getter<T> = (variables: { language: Language }) => Promise<T>;
 type Parser<T> = (data: T) => number | null | undefined;
 
 const makeLanguagePaths = async <T>(
-	language: Language,
+	language: SupportedLanguages,
 	innerSegment: string,
 	getter: Getter<T>,
 	parseCount: Parser<T>
