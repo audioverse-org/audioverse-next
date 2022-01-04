@@ -1419,12 +1419,6 @@
       "value": "Donate"
     }
   ],
-  "header__navItemStory-purpose": [
-    {
-      "type": 0,
-      "value": "Our Purpose"
-    }
-  ],
   "header__navItemStory-spiritOfAudioVerse": [
     {
       "type": 0,
@@ -2043,6 +2037,48 @@
     {
       "type": 0,
       "value": "downloads"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelHigh": [
+    {
+      "type": 0,
+      "value": "High Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelLow": [
+    {
+      "type": 0,
+      "value": "Low Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
+    }
+  ],
+  "molecule-buttonDownload__linkLabelMedium": [
+    {
+      "type": 0,
+      "value": "Medium Quality ("
+    },
+    {
+      "type": 1,
+      "value": "size"
+    },
+    {
+      "type": 0,
+      "value": ")"
     }
   ],
   "molecule-buttonDownload__menuAudioHeading": [

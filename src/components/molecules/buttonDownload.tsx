@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, MessageDescriptor, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
@@ -31,24 +31,35 @@ export default function ButtonDownload({
 		quality: 'high' | 'medium' | 'low',
 		filesize: string
 	) => {
-		const message: MessageDescriptor = {
-			high: {
-				id: 'molecule-buttonDownload__linkLabelHigh',
-				defaultMessage: 'High Quality ({size})',
-			},
-			medium: {
-				id: 'molecule-buttonDownload__linkLabelMedium',
-				defaultMessage: 'Medium Quality ({size})',
-			},
-			low: {
-				id: 'molecule-buttonDownload__linkLabelLow',
-				defaultMessage: 'Low Quality ({size})',
-			},
-		}[quality];
-
-		return intl.formatMessage(message, {
+		const values = {
 			size: readableBytes(filesize),
-		});
+		};
+		switch (quality) {
+			case 'high':
+				return intl.formatMessage(
+					{
+						id: 'molecule-buttonDownload__linkLabelHigh',
+						defaultMessage: 'High Quality ({size})',
+					},
+					values
+				);
+			case 'medium':
+				return intl.formatMessage(
+					{
+						id: 'molecule-buttonDownload__linkLabelMedium',
+						defaultMessage: 'Medium Quality ({size})',
+					},
+					values
+				);
+			case 'low':
+				return intl.formatMessage(
+					{
+						id: 'molecule-buttonDownload__linkLabelLow',
+						defaultMessage: 'Low Quality ({size})',
+					},
+					values
+				);
+		}
 	};
 
 	return (
