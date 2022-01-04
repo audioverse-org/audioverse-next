@@ -39,6 +39,23 @@ module.exports = withBundleAnalyzer(
 				})),
 				...Object.keys(languagePrefixMap).map((prefix) => ({
 					source: '/',
+					destination: `/${languagePrefixMap[prefix]}/discover`,
+					has: [
+						{
+							type: 'cookie',
+							key: 'avSession',
+							value: undefined,
+						},
+						{
+							type: 'cookie',
+							key: 'lang',
+							value: languagePrefixMap[prefix],
+						},
+					],
+					permanent: false,
+				})),
+				...Object.keys(languagePrefixMap).map((prefix) => ({
+					source: '/',
 					destination: `/${languagePrefixMap[prefix]}`,
 					has: [
 						{
