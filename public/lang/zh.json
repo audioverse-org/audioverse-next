@@ -1746,5 +1746,406 @@
   },
   "unstartedSeeAll": {
     "string": "查看所有未开始的内容"
+  },
+  "andOnboarding__intro": {
+    "string": "创建或登录账户，使用我们不断改进的功能来帮助你探索纯正教义。"
+  },
+  "app__features1Cta": {
+    "string": "探索音频"
+  },
+  "app__features1Heading": {
+    "string": "新旧的宝藏"
+  },
+  "app__features1Kicker": {
+    "string": "在丰富的属灵宝库中，自如探索鼓舞人心的内容。"
+  },
+  "app__features2Cta": {
+    "string": "查看最新内容"
+  },
+  "app__features2Heading": {
+    "string": "现代真理"
+  },
+  "app__features2Kicker": {
+    "string": "AudioVerse帮助你轻松查找你喜爱的讲员、大会和赞助者的最新内容。"
+  },
+  "app__features3Cta": {
+    "string": "探索卡片"
+  },
+  "app__features3Heading": {
+    "string": "连结而和谐的"
+  },
+  "app__features3Kicker": {
+    "string": "卡片包含诸如“育儿系列”之类的相关信息，方便你随时查看要点，详细页面则显示额外的背景与关联信息。"
+  },
+  "app__features4Cta": {
+    "string": "探索你的收藏"
+  },
+  "app__features4Heading": {
+    "string": "拯救你所爱之人"
+  },
+  "app__features4Kicker": {
+    "string": "收藏证道，以便后续收听，并通过各种设备上的同步更新，保留收听进度。"
+  },
+  "app__features5Cta": {
+    "string": "寻找可下载内容"
+  },
+  "app__features5Heading": {
+    "string": "为自己储备…"
+  },
+  "app__features5Kicker": {
+    "string": "将内容下载至你的设备，随时聆听，无需消耗流量。"
+  },
+  "bibleBook__disclaimer": {
+    "string": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
+  },
+  "buttonShare__emailSubject": {
+    "string": "请享受这份祝福"
+  },
+  "cardPost__typeLabel": {
+    "string": "博客"
+  },
+  "cardSlider__pageNumberLabel": {
+    "string": "第{number}页"
+  },
+  "cardSongBook__contributors": {
+    "string": "各种捐赠者"
+  },
+  "cardSongBook__numSongs": {
+    "string": "{count}首歌曲"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "查看所有讲员"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "讲员"
+  },
+  "collectionType__audiobookSeries": {
+    "string": "书籍系列"
+  },
+  "collectionType__conference": {
+    "string": "大会"
+  },
+  "collectionType__musicSeries": {
+    "string": "音乐系列"
+  },
+  "collectionType__storyProgram": {
+    "string": "故事节目"
+  },
+  "contact__bodyLabel": {
+    "string": "主体"
+  },
+  "contact__emailLabel": {
+    "string": "邮件地址"
+  },
+  "contact__emailPlaceholder": {
+    "string": "jane@example.com"
+  },
+  "contact__firstNameLabel": {
+    "string": "名"
+  },
+  "contact__firstNamePlaceholder": {
+    "string": "Jane"
+  },
+  "contact__intro": {
+    "string": "我们乐于听取用户意见，技术相关问题也不例外！你给予的反馈能够激励我们再接再厉，同时帮助我们为大家作出改善。如果你想与我们联系，请使用我们的表格，我们将会尽快给予答复。"
+  },
+  "contact__lastNameLabel": {
+    "string": "姓"
+  },
+  "contact__lastNamePlaceholder": {
+    "string": "Doe"
+  },
+  "contact__recipient": {
+    "string": "问题类型"
+  },
+  "contact__recipient-general": {
+    "string": "一般问题"
+  },
+  "contact__recipient-technical": {
+    "string": "需要帮助"
+  },
+  "contact__recipient-testimonials": {
+    "string": "分享见证"
+  },
+  "contact__submitLabel": {
+    "string": "提交"
+  },
+  "contact__success": {
+    "string": "提交成功！"
+  },
+  "contact__testimonyLabel": {
+    "string": "见证"
+  },
+  "contact__title": {
+    "string": "联系"
+  },
+  "discoverCollections_presentersHeading": {
+    "string": "讲员"
+  },
+  "downloadAppButton__altLabel": {
+    "string": "立即下载"
+  },
+  "embed__partInfo": {
+    "string": "共{count}部分的第{index}部分"
+  },
+  "give__amazonCta": {
+    "string": "立即购物"
+  },
+  "give__amazonDescription": {
+    "string": "你每次在AmazonSmile购物，AudioVerse都将获得0.5%的收益。{br}{br}如何操作？点击按钮即可。{br}{br}无需其它操作！请务必将新的AmazonSmile网站加入书签，否则你的浏览器很可能会默认返回常规Amazon网站。"
+  },
+  "give__amazonTitle": {
+    "string": "Amazon Smile"
+  },
+  "give__checkDescription": {
+    "string": "请确保支票抬头为AudioVerse。{br}{br}我们的邮寄地址为：{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+  },
+  "give__checkTitle": {
+    "string": "邮寄支票"
+  },
+  "give__estateCta": {
+    "string": "立即捐赠"
+  },
+  "give__estateDescription": {
+    "string": "你可以在财产规划中将AudioVerse作为受赠人，为AudioVerse的今日及未来发展作出贡献。最简单的方式是将AudioVerse作为你财务账户的受益人，或将本事工列入遗嘱或信托中。{br}{br}对于希望通过向主的工作奉献，产生持续影响，但仍需要资产收益的人而言，慈善捐赠年金也许是一个不错的选择。这种捐赠方式可使捐赠者和受赠者双方从中受益。AudioVerse正在与西部复临信徒基金会（WAF）合作，为我们的支持者提供这种捐赠方式。{br}{br}如果你想通过慈善捐赠年金向AudioVerse捐款，请直接通过其网站或电话与WAF联系。"
+  },
+  "give__estateDisclaimer": {
+    "string": "慈善捐赠年金在下列各州无法使用：阿拉巴马州（AL）、马里兰州（MD）和华盛顿州（WA）；加利福尼亚州（CA）和伊利诺州（IL）居民的捐赠年金由基督复临安息日会太平洋联合会（Pacific Union Conference of Seventh-day Adventists）管理；夏威夷州（HI）居民的捐赠年金由基督复临安息日会夏威夷区会（Hawaii Conference of Seventh-day Adventists）管理；其它所有州以AudioVerse为受益人的慈善捐赠年金都由西部复临信徒基金会管理。西部复临信徒基金会不提供法律建议。个人应寻求私人法律顾问的建议。"
+  },
+  "give__estateTitle": {
+    "string": "记得将AudioVerse纳入您的财产规划中"
+  },
+  "give__givingAssistantCta": {
+    "string": "立即购物"
+  },
+  "give__givingAssistantDescription": {
+    "string": "在1800多家受欢迎的在线零售商购物时使用“捐赠助理”（Giving Assistant），高达购买价格30%的资金将被捐赠给AudioVerse！这十分简单。“捐赠助理”帮你返现，而你可以选择想要捐赠给我们的金额。现在就试试寻找像梅西百货优惠券（Macy's Coupons）这样的超值优惠，以及像家得宝（Home Depot）和杰西潘尼（JC Penney）等杰出商家的优惠活动！"
+  },
+  "give__givingAssistantTitle": {
+    "string": "捐赠助理"
+  },
+  "give__heading": {
+    "string": "捐赠"
+  },
+  "give__paypalCta": {
+    "string": "立即捐赠"
+  },
+  "give__paypalDescription": {
+    "string": "请访问AudioVerse贝宝捐赠基金（Paypal Giving Fund）页面，开始向AudioVerse进行捐赠。您的捐款将100%用于事工，且没有任何手续费。通过这个渠道捐款，您将收到贝宝捐赠基金（Paypal Giving Fund），而非AudioVerse的可扣税收据。"
+  },
+  "give__paypalTitle": {
+    "string": "贝宝捐赠基金（PayPal Giving Fund）"
+  },
+  "header__navItemCollections-books": {
+    "string": "书籍"
+  },
+  "header__navItemCollections-conferences": {
+    "string": "大会"
+  },
+  "header__navItemCollections-presenters": {
+    "string": "讲员"
+  },
+  "header__navItemCollections-sponsors": {
+    "string": "赞助者"
+  },
+  "header__navItemContact": {
+    "string": "联系"
+  },
+  "header__navItemContact-facebook": {
+    "string": "脸书（Facebook）"
+  },
+  "header__navItemContact-general": {
+    "string": "一般问题"
+  },
+  "header__navItemContact-instagram": {
+    "string": "照片墙（Instagram）"
+  },
+  "header__navItemContact-support": {
+    "string": "需要帮助"
+  },
+  "header__navItemContact-testimony": {
+    "string": "分享见证"
+  },
+  "header__navItemContact-twitter": {
+    "string": "推特（Twitter）"
+  },
+  "header__navItemContact-youtube": {
+    "string": "油管（YouTube）"
+  },
+  "header__navItemLibrary-history": {
+    "string": "历史"
+  },
+  "header__navItemLibrary-playlists": {
+    "string": "播放列表"
+  },
+  "header__navItemLibrary-saved": {
+    "string": "已保存"
+  },
+  "header__navItemPresenters": {
+    "string": "讲员"
+  },
+  "header__navItemStory-blog": {
+    "string": "博客"
+  },
+  "homePage__learnStoryButtonLabel": {
+    "string": "了解我们的故事"
+  },
+  "homePage__newsletterEmail": {
+    "string": "邮件地址"
+  },
+  "homePage__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "homePage__newsletterHatTitle": {
+    "string": "订阅我们的时事通讯"
+  },
+  "homePage__newsletterName": {
+    "string": "姓名"
+  },
+  "homePage__newsletterNamePlaceholder": {
+    "string": "贝约瑟"
+  },
+  "homePage__newsletterSubscribe": {
+    "string": "订阅"
+  },
+  "homePage__tagline": {
+    "string": "纯正教义"
+  },
+  "libraryHistory__loadingMore": {
+    "string": "载入更多…"
+  },
+  "libraryNav__contentType": {
+    "string": "内容类型"
+  },
+  "libraryNav__contentType-all": {
+    "string": "全部"
+  },
+  "libraryNav__contentType-audiobooks": {
+    "string": "音频书籍"
+  },
+  "libraryNav__contentType-conferences": {
+    "string": "大会"
+  },
+  "libraryNav__contentType-music": {
+    "string": "音乐"
+  },
+  "libraryNav__contentType-people": {
+    "string": "人群"
+  },
+  "libraryNav__contentType-series": {
+    "string": "系列"
+  },
+  "libraryNav__contentType-sponsors": {
+    "string": "赞助者"
+  },
+  "libraryNav__contentType-stories": {
+    "string": "故事"
+  },
+  "libraryNav__contentType-teachings": {
+    "string": "证道"
+  },
+  "libraryNav__duration": {
+    "string": "时长"
+  },
+  "libraryNav__duration-all": {
+    "string": "全部"
+  },
+  "libraryNav__duration-long": {
+    "string": "45-60分钟"
+  },
+  "libraryNav__duration-medium": {
+    "string": "30-45分钟"
+  },
+  "libraryNav__duration-short": {
+    "string": "15-30分钟"
+  },
+  "libraryNav__duration-xlong": {
+    "string": "超过60分钟"
+  },
+  "libraryNav__filtersApplied": {
+    "string": "筛选已应用"
+  },
+  "libraryNav__mediaType": {
+    "string": "媒体类型"
+  },
+  "libraryNav__mediaType-all": {
+    "string": "全部"
+  },
+  "libraryNav__mediaType-audio": {
+    "string": "仅音频"
+  },
+  "libraryNav__mediaType-video": {
+    "string": "视频"
+  },
+  "libraryNav__playbackStatus": {
+    "string": "回放状态"
+  },
+  "libraryNav__playbackStatus-all": {
+    "string": "全部"
+  },
+  "libraryNav__playbackStatus-finished": {
+    "string": "已完成"
+  },
+  "libraryNav__playbackStatus-started": {
+    "string": "已开始"
+  },
+  "libraryNav__playbackStatus-unstarted": {
+    "string": "未开始"
+  },
+  "libraryNav__playlists": {
+    "string": "播放列表"
+  },
+  "libraryNav__saved": {
+    "string": "已保存"
+  },
+  "libraryNav__sort": {
+    "string": "排序"
+  },
+  "library__noMatchingCopy": {
+    "string": "添加项目为书签，或从“发现”页面收听项目。"
+  },
+  "library__noMatchingHeading": {
+    "string": "你尚未保存任何匹配项目"
+  },
+  "molecule-buttonGuest__downloadQuality": {
+    "string": "调整下载质量"
+  },
+  "molecule-buttonGuest__saving": {
+    "string": "保存至你的收藏"
+  },
+  "molecule-buttonGuest__syncing": {
+    "string": "在各个设备上同步"
+  },
+  "molecule-buttonShare__copied": {
+    "string": "已复制！"
+  },
+  "songsBooksDetail__contributors": {
+    "string": "各种捐赠者"
+  },
+  "songsBooksDetail__numSongs": {
+    "string": "{count}首歌曲"
+  },
+  "songsListPage__intro": {
+    "string": "若想将圣经片段牢记于心，以歌曲方式聆听上帝的话语是一种很棒的方式。按专辑或按圣经书卷进行收听。"
+  },
+  "songsListPage__tabAlbums": {
+    "string": "专辑"
+  },
+  "songsListPage__tabPassage": {
+    "string": "片段"
+  },
+  "songsListPage__title": {
+    "string": "圣经歌曲"
+  },
+  "testimonies__seeAll": {
+    "string": "查看所有见证"
+  },
+  "testimonies__submitTestimony": {
+    "string": "提交见证"
+  },
+  "time__hoursMinutesAndSeconds": {
+    "comment": "time hours, minutes and seconds",
+    "string": "{h}小时{m}分{s}秒"
   }
 }

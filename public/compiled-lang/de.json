@@ -125,6 +125,102 @@
       "value": "Spenden"
     }
   ],
+  "andOnboarding__intro": [
+    {
+      "type": 0,
+      "value": "Erstelle ein Konto oder melde dich an, um eine immer größer werdende Anzahl an Funktionen zum Studium der gesunden Lehre zu nutzen."
+    }
+  ],
+  "app__features1Cta": [
+    {
+      "type": 0,
+      "value": "Audio entdecken"
+    }
+  ],
+  "app__features1Heading": [
+    {
+      "type": 0,
+      "value": "Alte und neue Schätze"
+    }
+  ],
+  "app__features1Kicker": [
+    {
+      "type": 0,
+      "value": "Entdecke leicht zugängliche, inspirierende Inhalte aus den reich gefüllten Schatzkammern geistlicher Botschaften."
+    }
+  ],
+  "app__features2Cta": [
+    {
+      "type": 0,
+      "value": "Neueste Inhalte ansehen"
+    }
+  ],
+  "app__features2Heading": [
+    {
+      "type": 0,
+      "value": "Gegenwärtige Wahrheit"
+    }
+  ],
+  "app__features2Kicker": [
+    {
+      "type": 0,
+      "value": "AudioVerse erleichtert die Suche nach aktuellen Inhalten deiner Lieblingssprecher, Konferenzen und Sponsoren."
+    }
+  ],
+  "app__features3Cta": [
+    {
+      "type": 0,
+      "value": "Karten durchsuchen"
+    }
+  ],
+  "app__features3Heading": [
+    {
+      "type": 0,
+      "value": "Verbunden und harmonisch "
+    }
+  ],
+  "app__features3Kicker": [
+    {
+      "type": 0,
+      "value": "Karten zeigen relevante Informationen an, z. B. übergeordnete Serien. Auf den Detailseiten findest du zusätzliche Kontexte und Verknüpfungen. So behältst du den Überblick. "
+    }
+  ],
+  "app__features4Cta": [
+    {
+      "type": 0,
+      "value": "Bibliothek durchsuchen "
+    }
+  ],
+  "app__features4Heading": [
+    {
+      "type": 0,
+      "value": "Beliebte Inhalte speichern"
+    }
+  ],
+  "app__features4Kicker": [
+    {
+      "type": 0,
+      "value": "Stell dir deine eigene Bibliothek mit Inhalten zusammen, die du dir später anhören möchtest. Deine Einstellungen werden auf allen deinen Geräten synchronisiert."
+    }
+  ],
+  "app__features5Cta": [
+    {
+      "type": 0,
+      "value": "Finde Inhalte zum Herunterladen "
+    }
+  ],
+  "app__features5Heading": [
+    {
+      "type": 0,
+      "value": "Sammelt euch aber Schätze …"
+    }
+  ],
+  "app__features5Kicker": [
+    {
+      "type": 0,
+      "value": "Lade Inhalte auf deine Geräte herunter, um sie auch offline nutzen zu können, wenn du keinen Empfang hast oder dein Datenvolumen schonen möchtest."
+    }
+  ],
   "atom-progressBar__label": [
     {
       "type": 0,
@@ -147,6 +243,12 @@
     {
       "type": 0,
       "value": "Andere Kapitel im Buch"
+    }
+  ],
+  "bibleBook__disclaimer": [
+    {
+      "type": 0,
+      "value": "Die allgemeinen Geschäftsbedingungen für die Nutzung der Audiobibeln von Faith Comes By Hearing unterbinden das Herunterladen sowie die Integration bestimmter Funktionen auf unserer Plattform."
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -199,6 +301,12 @@
     {
       "type": 0,
       "value": " lesen"
+    }
+  ],
+  "buttonShare__emailSubject": [
+    {
+      "type": 0,
+      "value": "Sei gesegnet"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -289,6 +397,12 @@
       "value": " lesen"
     }
   ],
+  "cardPost__typeLabel": [
+    {
+      "type": 0,
+      "value": "Blog"
+    }
+  ],
   "cardSequence_audiobookType": [
     {
       "type": 0,
@@ -335,6 +449,16 @@
       "value": "Nächste Seite"
     }
   ],
+  "cardSlider__pageNumberLabel": [
+    {
+      "type": 0,
+      "value": "Seite "
+    },
+    {
+      "type": 1,
+      "value": "number"
+    }
+  ],
   "cardSlider__paginationLabel": [
     {
       "type": 0,
@@ -345,6 +469,22 @@
     {
       "type": 0,
       "value": "Vorherige Seite"
+    }
+  ],
+  "cardSongBook__contributors": [
+    {
+      "type": 0,
+      "value": "Verschiedene Mitwirkende "
+    }
+  ],
+  "cardSongBook__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Lieder"
     }
   ],
   "cardSong_sequenceLabel": [
@@ -411,6 +551,18 @@
     {
       "type": 0,
       "value": "Ort"
+    }
+  ],
+  "collectionDetail__presentersAllLabel": [
+    {
+      "type": 0,
+      "value": "Alle Sprecher anzeigen"
+    }
+  ],
+  "collectionDetail__presentersLabel": [
+    {
+      "type": 0,
+      "value": "Sprecher"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -493,10 +645,130 @@
       "value": "Konferenz"
     }
   ],
+  "collectionType__audiobookSeries": [
+    {
+      "type": 0,
+      "value": "Buchserie"
+    }
+  ],
+  "collectionType__conference": [
+    {
+      "type": 0,
+      "value": "Konferenz"
+    }
+  ],
+  "collectionType__musicSeries": [
+    {
+      "type": 0,
+      "value": "Musikserie"
+    }
+  ],
+  "collectionType__storyProgram": [
+    {
+      "type": 0,
+      "value": "Geschichtenprogramm"
+    }
+  ],
   "conferenceListPage__title": [
     {
       "type": 0,
       "value": "Konferenzen"
+    }
+  ],
+  "contact__bodyLabel": [
+    {
+      "type": 0,
+      "value": "Textkörper"
+    }
+  ],
+  "contact__emailLabel": [
+    {
+      "type": 0,
+      "value": "E-Mail-Adresse"
+    }
+  ],
+  "contact__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "contact__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "Vorname"
+    }
+  ],
+  "contact__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "contact__intro": [
+    {
+      "type": 0,
+      "value": "Wir hören gerne von unseren Nutzern, auch wenn es nur um technische Probleme geht! Euer Feedback ermutigt uns, diese Arbeit fortzusetzen und hilft uns, die Nutzererfahrung auch für andere Nutzer fortwährend zu verbessern. Wenn du mit uns Kontakt aufnehmen möchtest, nutze bitte das Kontaktformular dafür. Wir melden uns umgehend bei dir."
+    }
+  ],
+  "contact__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "Nachname"
+    }
+  ],
+  "contact__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Mustermann"
+    }
+  ],
+  "contact__recipient": [
+    {
+      "type": 0,
+      "value": "Art der Kontaktanfrage"
+    }
+  ],
+  "contact__recipient-general": [
+    {
+      "type": 0,
+      "value": "Allgemeine Anfrage"
+    }
+  ],
+  "contact__recipient-technical": [
+    {
+      "type": 0,
+      "value": "Technische Unterstützung "
+    }
+  ],
+  "contact__recipient-testimonials": [
+    {
+      "type": 0,
+      "value": "Erfahrungsbericht"
+    }
+  ],
+  "contact__submitLabel": [
+    {
+      "type": 0,
+      "value": "Senden"
+    }
+  ],
+  "contact__success": [
+    {
+      "type": 0,
+      "value": "Gesendet!"
+    }
+  ],
+  "contact__testimonyLabel": [
+    {
+      "type": 0,
+      "value": "Erfahrung"
+    }
+  ],
+  "contact__title": [
+    {
+      "type": 0,
+      "value": "Kontakt"
     }
   ],
   "container-sermonList__filterLabelAll": [
@@ -539,6 +811,12 @@
     {
       "type": 0,
       "value": "Empfohlene Sammlung"
+    }
+  ],
+  "discoverCollections_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Sprecher"
     }
   ],
   "discoverCollections_scriptureSongsHeading": [
@@ -625,6 +903,12 @@
       "value": "Beliebte Lehren"
     }
   ],
+  "downloadAppButton__altLabel": [
+    {
+      "type": 0,
+      "value": "Jetzt herunterladen"
+    }
+  ],
   "downloadAppButton__android": [
     {
       "type": 0,
@@ -681,6 +965,24 @@
       "value": " Minute(n)"
     }
   ],
+  "embed__partInfo": [
+    {
+      "type": 0,
+      "value": "Teil "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": " von "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    }
+  ],
   "generateFeed__audio": [
     {
       "type": 0,
@@ -729,6 +1031,218 @@
       "value": " AudioVerse. Individuelle Aufnahmen unterliegen dem Urheberrecht ihrer jeweiligen Eigentümer."
     }
   ],
+  "give__amazonCta": [
+    {
+      "type": 0,
+      "value": "Jetzt kaufen"
+    }
+  ],
+  "give__amazonDescription": [
+    {
+      "type": 0,
+      "value": "Von jedem Einkauf auf AmazonSmile erhält AudioVerse 0,5%. "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Wie? Klicke einfach auf den Button."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " Das war's schon! Achte darauf, die neue AmazonSmile Website als Lesezeichen abzuspeichern, damit dein Browser nicht automatisch auf die normale Amazon Webseite zurückkehrt."
+    }
+  ],
+  "give__amazonTitle": [
+    {
+      "type": 0,
+      "value": "Amazon Smile"
+    }
+  ],
+  "give__checkDescription": [
+    {
+      "type": 0,
+      "value": "Schecks bitte an AudioVerse ausstellen. "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Unsere Postanschrift lautet: "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "AudioVerse "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Postfach 2288 "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288 "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
+    }
+  ],
+  "give__checkTitle": [
+    {
+      "type": 0,
+      "value": "Scheck per Postversand"
+    }
+  ],
+  "give__estateCta": [
+    {
+      "type": 0,
+      "value": "Jetzt spenden"
+    }
+  ],
+  "give__estateDescription": [
+    {
+      "type": 0,
+      "value": "Du kannst AudioVerse nachhaltig unterstützen, indem du AudioVerse in deiner Nachlassplanung berücksichtigst. Am einfachsten geht das, indem du AudioVerse als Begünstigten auf deine Finanzkonten eintragen oder in dein Testament oder deinen Treuhandfonds aufnehmen lässt."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Wer dem Werk des Herrn ein dauerhaftes Vermächtnis hinterlassen möchte, aber auf sein Vermögen angewiesen ist, für den mag eine gemeinnützige Schenkungsrente eine gute Option sein. Diese Methode ist sowohl für den Geber als auch den Empfänger von Vorteil. Um unseren Unterstützern diese Option zu ermöglichen, arbeitet AudioVerse mit der Western Adventist Foundation (WAF) zusammen."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Bitte kontaktiere direkt die WAF telefonisch oder über ihre Webseite, wenn du AudioVerse eine Schenkungsrente zukommen lassen möchtest."
+    }
+  ],
+  "give__estateDisclaimer": [
+    {
+      "type": 0,
+      "value": "Gemeinnützige Schenkungsrenten sind in folgenden Staaten nicht möglich: Alabama, Maryland, Washington. Schenkungen aus Kalifornien und Illinois werden über die Pacific Union Conference der Gemeinde der Siebenten-Tags-Adventisten abgerechnet; Schenkungen von Personen aus Hawaii werden über die Hawaii Conference der Gemeinde der Siebenten-Tags-Adventisten abgerechnet. Alle anderen Schenkungsrenten zugunsten AudioVerse laufen über die Western Adventist Foundation.  Die Western Adventist Foundation bietet keine Rechtsberatung an. Einzelpersonen sollten sich von ihrem eigenen Rechtsbeistand beraten lassen. "
+    }
+  ],
+  "give__estateTitle": [
+    {
+      "type": 0,
+      "value": "AudioVerse in der Nachlassplanung berücksichtigen"
+    }
+  ],
+  "give__givingAssistantCta": [
+    {
+      "type": 0,
+      "value": "Jetzt kaufen"
+    }
+  ],
+  "give__givingAssistantDescription": [
+    {
+      "type": 0,
+      "value": "Spende bis zu 30% deines Einkaufswerts an AudioVerse bei über 1800 bekannten Onlinehändlern mithilfe des Giving Assistant! Das geht ganz einfach. Der Giving Assistant zahlt dir bei Onlinekäufen eingespartes Geld zurück. Einen Teil davon kannst du nach Belieben an uns spenden. Probiere es aus und entdecke günstige Angebote und Gutscheine bei zahlreichen Online-Shops wie Home Depot und JC Penney!"
+    }
+  ],
+  "give__givingAssistantTitle": [
+    {
+      "type": 0,
+      "value": "Giving Assistant"
+    }
+  ],
+  "give__heading": [
+    {
+      "type": 0,
+      "value": "Spenden"
+    }
+  ],
+  "give__paypalCta": [
+    {
+      "type": 0,
+      "value": "Jetzt spenden"
+    }
+  ],
+  "give__paypalDescription": [
+    {
+      "type": 0,
+      "value": "Um AudioVerse eine Spende zu senden, gehe auf den Paypal Spendenfonds von AudioVerse. Deine Spende wird zu 100% für die Tätigkeiten von AudioVerse eingesetzt, es entstehen keine Bearbeitungsgebühren. Der Paypal Spendenfonds (nicht AudioVerse) stellt dir anschließend eine steuerlich absetzbare Spendenquittung aus."
+    }
+  ],
+  "give__paypalTitle": [
+    {
+      "type": 0,
+      "value": "Paypal Spendenfonds"
+    }
+  ],
   "header__navItemBible": [
     {
       "type": 0,
@@ -759,10 +1273,28 @@
       "value": "Buch"
     }
   ],
+  "header__navItemCollections-books": [
+    {
+      "type": 0,
+      "value": "Bücher"
+    }
+  ],
   "header__navItemCollections-conference": [
     {
       "type": 0,
       "value": "Konferenz"
+    }
+  ],
+  "header__navItemCollections-conferences": [
+    {
+      "type": 0,
+      "value": "Konferenzen"
+    }
+  ],
+  "header__navItemCollections-presenters": [
+    {
+      "type": 0,
+      "value": "Sprecher"
     }
   ],
   "header__navItemCollections-series": [
@@ -789,10 +1321,64 @@
       "value": "Sponsor"
     }
   ],
+  "header__navItemCollections-sponsors": [
+    {
+      "type": 0,
+      "value": "Sponsoren"
+    }
+  ],
   "header__navItemCollections-stories": [
     {
       "type": 0,
       "value": "Geschichten"
+    }
+  ],
+  "header__navItemContact": [
+    {
+      "type": 0,
+      "value": "Kontakt"
+    }
+  ],
+  "header__navItemContact-facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "header__navItemContact-general": [
+    {
+      "type": 0,
+      "value": "Allgemeine Anfrage"
+    }
+  ],
+  "header__navItemContact-instagram": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "header__navItemContact-support": [
+    {
+      "type": 0,
+      "value": "Technische Unterstützung "
+    }
+  ],
+  "header__navItemContact-testimony": [
+    {
+      "type": 0,
+      "value": "Erfahrungsbericht"
+    }
+  ],
+  "header__navItemContact-twitter": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "header__navItemContact-youtube": [
+    {
+      "type": 0,
+      "value": "YouTube"
     }
   ],
   "header__navItemDiscover": [
@@ -805,6 +1391,24 @@
     {
       "type": 0,
       "value": "Bibliothek"
+    }
+  ],
+  "header__navItemLibrary-history": [
+    {
+      "type": 0,
+      "value": "Verlauf"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "Playlisten"
+    }
+  ],
+  "header__navItemLibrary-saved": [
+    {
+      "type": 0,
+      "value": "Gespeichert "
     }
   ],
   "header__navItemMore": [
@@ -831,10 +1435,22 @@
       "value": "Nutzungsbedingungen"
     }
   ],
+  "header__navItemPresenters": [
+    {
+      "type": 0,
+      "value": "Sprecher"
+    }
+  ],
   "header__navItemStory": [
     {
       "type": 0,
       "value": "Unsere Geschichte"
+    }
+  ],
+  "header__navItemStory-blog": [
+    {
+      "type": 0,
+      "value": "Blog"
     }
   ],
   "header__navItemStory-donate": [
@@ -999,6 +1615,42 @@
       "value": "AudioVerse beitreten"
     }
   ],
+  "homePage__learnStoryButtonLabel": [
+    {
+      "type": 0,
+      "value": "Erfahre mehr über uns"
+    }
+  ],
+  "homePage__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "E-Mail-Adresse"
+    }
+  ],
+  "homePage__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "homePage__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Für den Newsletter anmelden "
+    }
+  ],
+  "homePage__newsletterName": [
+    {
+      "type": 0,
+      "value": "Name"
+    }
+  ],
+  "homePage__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Joseph Bates"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -1009,6 +1661,12 @@
     {
       "type": 0,
       "value": "Update-Meldungen abonnieren"
+    }
+  ],
+  "homePage__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Abonnieren"
     }
   ],
   "homePage__recentContentSectionText": [
@@ -1089,6 +1747,12 @@
     {
       "type": 0,
       "value": "Kostenfreien Audiozugang unterstützen"
+    }
+  ],
+  "homePage__tagline": [
+    {
+      "type": 0,
+      "value": "Biblische Lehre"
     }
   ],
   "homePage__testimoniesSectionText": [
@@ -1187,6 +1851,12 @@
       "value": "Mehr laden"
     }
   ],
+  "libraryHistory__loadingMore": [
+    {
+      "type": 0,
+      "value": "Mehr laden…"
+    }
+  ],
   "libraryNav__all": [
     {
       "type": 0,
@@ -1199,10 +1869,112 @@
       "value": "Sammlungen"
     }
   ],
+  "libraryNav__contentType": [
+    {
+      "type": 0,
+      "value": "Art der Inhalte"
+    }
+  ],
+  "libraryNav__contentType-all": [
+    {
+      "type": 0,
+      "value": "Alle"
+    }
+  ],
+  "libraryNav__contentType-audiobooks": [
+    {
+      "type": 0,
+      "value": "Hörbücher"
+    }
+  ],
+  "libraryNav__contentType-conferences": [
+    {
+      "type": 0,
+      "value": "Konferenzen"
+    }
+  ],
+  "libraryNav__contentType-music": [
+    {
+      "type": 0,
+      "value": "Musik"
+    }
+  ],
+  "libraryNav__contentType-people": [
+    {
+      "type": 0,
+      "value": "Menschen "
+    }
+  ],
+  "libraryNav__contentType-series": [
+    {
+      "type": 0,
+      "value": "Serien"
+    }
+  ],
+  "libraryNav__contentType-sponsors": [
+    {
+      "type": 0,
+      "value": "Sponsoren"
+    }
+  ],
+  "libraryNav__contentType-stories": [
+    {
+      "type": 0,
+      "value": "Geschichten"
+    }
+  ],
+  "libraryNav__contentType-teachings": [
+    {
+      "type": 0,
+      "value": "Lehren"
+    }
+  ],
+  "libraryNav__duration": [
+    {
+      "type": 0,
+      "value": "Dauer"
+    }
+  ],
+  "libraryNav__duration-all": [
+    {
+      "type": 0,
+      "value": "Alle"
+    }
+  ],
+  "libraryNav__duration-long": [
+    {
+      "type": 0,
+      "value": "45–60 Minuten"
+    }
+  ],
+  "libraryNav__duration-medium": [
+    {
+      "type": 0,
+      "value": "30–45 Minuten"
+    }
+  ],
+  "libraryNav__duration-short": [
+    {
+      "type": 0,
+      "value": "15–30 Minuten"
+    }
+  ],
+  "libraryNav__duration-xlong": [
+    {
+      "type": 0,
+      "value": "Über 60 Minuten"
+    }
+  ],
   "libraryNav__filter": [
     {
       "type": 0,
       "value": "Filter"
+    }
+  ],
+  "libraryNav__filtersApplied": [
+    {
+      "type": 0,
+      "value": "Filter angewendet"
     }
   ],
   "libraryNav__finished": [
@@ -1215,6 +1987,78 @@
     {
       "type": 0,
       "value": "Verlauf"
+    }
+  ],
+  "libraryNav__mediaType": [
+    {
+      "type": 0,
+      "value": "Medientyp"
+    }
+  ],
+  "libraryNav__mediaType-all": [
+    {
+      "type": 0,
+      "value": "Alle"
+    }
+  ],
+  "libraryNav__mediaType-audio": [
+    {
+      "type": 0,
+      "value": "Nur Audio"
+    }
+  ],
+  "libraryNav__mediaType-video": [
+    {
+      "type": 0,
+      "value": "Video"
+    }
+  ],
+  "libraryNav__playbackStatus": [
+    {
+      "type": 0,
+      "value": "Playback Status"
+    }
+  ],
+  "libraryNav__playbackStatus-all": [
+    {
+      "type": 0,
+      "value": "Alle"
+    }
+  ],
+  "libraryNav__playbackStatus-finished": [
+    {
+      "type": 0,
+      "value": "Fertig"
+    }
+  ],
+  "libraryNav__playbackStatus-started": [
+    {
+      "type": 0,
+      "value": "Angefangen"
+    }
+  ],
+  "libraryNav__playbackStatus-unstarted": [
+    {
+      "type": 0,
+      "value": "Noch nicht begonnen"
+    }
+  ],
+  "libraryNav__playlists": [
+    {
+      "type": 0,
+      "value": "Playlisten"
+    }
+  ],
+  "libraryNav__saved": [
+    {
+      "type": 0,
+      "value": "Gespeichert "
+    }
+  ],
+  "libraryNav__sort": [
+    {
+      "type": 0,
+      "value": "Sortieren"
     }
   ],
   "libraryNav__sortAtoZ": [
@@ -1341,6 +2185,18 @@
     {
       "type": 0,
       "value": "Funktion nur für Mitglieder"
+    }
+  ],
+  "library__noMatchingCopy": [
+    {
+      "type": 0,
+      "value": "Höre dir Inhalte auf „Entdecken“ an oder versieh sie mit einem Lesezeichen für später."
+    }
+  ],
+  "library__noMatchingHeading": [
+    {
+      "type": 0,
+      "value": "Du hast noch keine entsprechenden Inhalte gespeichert."
     }
   ],
   "library__startedHeading": [
@@ -1493,6 +2349,12 @@
       "value": "Video-Downloads"
     }
   ],
+  "molecule-buttonGuest__downloadQuality": [
+    {
+      "type": 0,
+      "value": "Download-Qualität anpassen "
+    }
+  ],
   "molecule-buttonGuest__feature1": [
     {
       "type": 0,
@@ -1547,6 +2409,18 @@
       "value": "Als Gast fortfahren?"
     }
   ],
+  "molecule-buttonGuest__saving": [
+    {
+      "type": 0,
+      "value": "In meiner Bibliothek abspeichern "
+    }
+  ],
+  "molecule-buttonGuest__syncing": [
+    {
+      "type": 0,
+      "value": "Geräte synchronisieren"
+    }
+  ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
     {
       "type": 0,
@@ -1563,6 +2437,12 @@
     {
       "type": 0,
       "value": "teilen"
+    }
+  ],
+  "molecule-buttonShare__copied": [
+    {
+      "type": 0,
+      "value": "Kopiert!"
     }
   ],
   "molecule-buttonShare__copyLink": [
@@ -2695,6 +3575,22 @@
       "value": "Erfolgreich"
     }
   ],
+  "songsBooksDetail__contributors": [
+    {
+      "type": 0,
+      "value": "Verschiedene Mitwirkende "
+    }
+  ],
+  "songsBooksDetail__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " Lieder"
+    }
+  ],
   "songsListPage__1ChroniclesLabel": [
     {
       "type": 0,
@@ -3103,16 +3999,40 @@
       "value": "Bücher"
     }
   ],
+  "songsListPage__intro": [
+    {
+      "type": 0,
+      "value": "Präge dir Bibelstellen besser im Gedächtnis ein, indem du das Wort Gottes in musikalischer Form hörst. Höre dir Inhalte nach Alben oder Bibelbüchern an."
+    }
+  ],
   "songsListPage__sponsorTabLabel": [
     {
       "type": 0,
       "value": "Sponsoren"
     }
   ],
+  "songsListPage__tabAlbums": [
+    {
+      "type": 0,
+      "value": "Alben"
+    }
+  ],
+  "songsListPage__tabPassage": [
+    {
+      "type": 0,
+      "value": "Abschnitt"
+    }
+  ],
   "songsListPage__tagTabLabel": [
     {
       "type": 0,
       "value": "Tags"
+    }
+  ],
+  "songsListPage__title": [
+    {
+      "type": 0,
+      "value": "Bibel-Lieder"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -3317,10 +4237,44 @@
       "value": "Hast du ein großartiges Zeugnis? Erzähle uns deine Geschichte!"
     }
   ],
+  "testimonies__seeAll": [
+    {
+      "type": 0,
+      "value": "Alle Zeugnisse anzeigen"
+    }
+  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "Erzähle deine Geschichte weiter."
+    }
+  ],
+  "testimonies__submitTestimony": [
+    {
+      "type": 0,
+      "value": "Eine Erfahrung teilen"
+    }
+  ],
+  "time__hoursMinutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "h"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "s"
     }
   ],
   "time__minutesAndSeconds": [
