@@ -11,7 +11,9 @@ import StoryAlbumsList, {
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
 
-const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
+const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps, {
+	language: 'en',
+});
 
 function loadData() {
 	when(mockedFetchApi)

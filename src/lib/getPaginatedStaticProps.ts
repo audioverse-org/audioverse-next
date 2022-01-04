@@ -1,4 +1,6 @@
-import { REVALIDATE } from '@lib/constants';
+import find from 'lodash/find';
+
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getPaginatedData, PaginatedGetter } from '@lib/getPaginatedData';
@@ -35,6 +37,9 @@ export async function getPaginatedStaticProps<T, N>(
 		language: Language.English,
 		i: '1',
 	};
+	if (!find(LANGUAGES, (l) => l.base_url === languageRoute)) {
+		return formatPaginatedStaticProps(null as unknown as T, [], 0, +pageIndex);
+	}
 	const data = await getPaginatedData(pageIndex, getter, {
 		language: getLanguageIdByRoute(languageRoute),
 	});
