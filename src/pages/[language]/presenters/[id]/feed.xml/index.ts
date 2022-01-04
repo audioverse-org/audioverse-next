@@ -29,7 +29,7 @@ export async function getServerSideProps({
 	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 		const intl = await getIntl(languageRoute);
-		const feed = generateFeed(
+		const feed = await generateFeed(
 			languageRoute,
 			{
 				link: person.canonicalUrl,

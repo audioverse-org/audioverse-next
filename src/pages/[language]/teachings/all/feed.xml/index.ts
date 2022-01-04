@@ -24,7 +24,7 @@ export async function getServerSideProps({
 		res.setHeader('Content-Type', 'text/xml');
 		const intl = await getIntl(languageRoute);
 		const language = getLanguageByBaseUrl(languageRoute, 'en')?.display_name;
-		const feed = generateFeed(
+		const feed = await generateFeed(
 			languageRoute,
 			{
 				link: `https://www.audioverse.org${makeSermonListRoute(languageRoute)}`,

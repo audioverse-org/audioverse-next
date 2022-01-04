@@ -8016,7 +8016,7 @@ export type GetCollectionListPageDataQueryVariables = Exact<{
 
 export type GetCollectionListPageDataQuery = {
 	__typename?: 'Query';
-	collections: {
+	conferences: {
 		__typename?: 'CollectionConnection';
 		nodes:
 			| Array<{
@@ -8059,7 +8059,7 @@ export type GetCollectionListPathsDataQueryVariables = Exact<{
 
 export type GetCollectionListPathsDataQuery = {
 	__typename?: 'Query';
-	collections: {
+	conferences: {
 		__typename?: 'CollectionConnection';
 		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
@@ -8724,36 +8724,24 @@ export type GetDiscoverCollectionsPageDataQueryVariables = Exact<{
 
 export type GetDiscoverCollectionsPageDataQuery = {
 	__typename?: 'Query';
-	sequence:
+	collection:
 		| {
-				__typename?: 'Sequence';
+				__typename?: 'Collection';
 				id: string | number;
-				title: string;
 				canonicalPath: string;
-				contentType: SequenceContentType;
+				title: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
 				duration: number;
-				summary: string;
-				speakers: {
-					__typename?: 'PersonConnection';
-					nodes:
-						| Array<{
-								__typename?: 'Person';
-								name: string;
-								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-						  }>
-						| null
-						| undefined;
-				};
-				sequenceWriters: {
-					__typename?: 'PersonConnection';
-					nodes:
-						| Array<{
-								__typename?: 'Person';
-								name: string;
-								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-						  }>
+				collectionContentType: CollectionContentType;
+				image:
+					| { __typename?: 'Image'; id: string | number; url: string }
+					| null
+					| undefined;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
 						| null
 						| undefined;
 				};
@@ -14890,7 +14878,7 @@ export const useGetCollectionDetailPathsDataQuery = <
 		options
 	);
 export const GetCollectionListPageDataDocument = `
-query getCollectionListPageData($language:Language!$offset:Int$first:Int){collections(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+query getCollectionListPageData($language:Language!$offset:Int$first:Int){conferences(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
 ${CardCollectionFragmentDoc}`;
 export const useGetCollectionListPageDataQuery = <
 	TData = GetCollectionListPageDataQuery,
@@ -14908,7 +14896,7 @@ export const useGetCollectionListPageDataQuery = <
 		options
 	);
 export const GetCollectionListPathsDataDocument = `
-query getCollectionListPathsData($language:Language!){collections(language:$language){aggregate{count}}}
+query getCollectionListPathsData($language:Language!){conferences(language:$language){aggregate{count}}}
 `;
 export const useGetCollectionListPathsDataQuery = <
 	TData = GetCollectionListPathsDataQuery,
@@ -15039,11 +15027,11 @@ export const useGetDiscoverPageDataQuery = <
 		options
 	);
 export const GetDiscoverCollectionsPageDataDocument = `
-query getDiscoverCollectionsPageData($language:Language!){sequence(id:175){...cardSequence}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+query getDiscoverCollectionsPageData($language:Language!){collection(id:428){...cardCollection}persons(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+${CardCollectionFragmentDoc}
+${CardPersonFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
-${CardPersonFragmentDoc}
-${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}`;
 export const useGetDiscoverCollectionsPageDataQuery = <
 	TData = GetDiscoverCollectionsPageDataQuery,
@@ -15317,7 +15305,7 @@ export const useGetPresenterRecordingsFeedDataQuery = <
 		options
 	);
 export const GetPresenterSequencesPageDataDocument = `
-query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id role:SPEAKER}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
+query getPresenterSequencesPageData($language:Language!$id:ID!$offset:Int$first:Int){person(id:$id){id ...presenterPivot}sequences(language:$language offset:$offset first:$first persons:[{personId:$id}]orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}aggregate{count}}}
 ${PresenterPivotFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}`;

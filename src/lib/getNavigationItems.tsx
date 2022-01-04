@@ -39,12 +39,14 @@ import IconHistory from '../../public/img/fa-history.svg';
 import IconInbox from '../../public/img/fa-inbox.svg';
 import IconInstagram from '../../public/img/fa-instagram.svg';
 import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
+import IconLink from '../../public/img/fa-link.svg';
 import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
 import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
 import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
 import IconSeedling from '../../public/img/fa-seedling.svg';
 import IconSignOut from '../../public/img/fa-sign-out.svg';
+import IconStore from '../../public/img/fa-store.svg';
 import IconStream from '../../public/img/fa-stream.svg';
 import IconTwitter from '../../public/img/fa-twitter.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
@@ -392,6 +394,36 @@ export function getNavigationItems(
 				description: `Header nav link name: More`,
 			}),
 			children: [
+				{
+					key: 'store',
+					href: 'https://audioversestore.org',
+					isTargetBlank: true,
+					Icon: IconStore,
+					label: intl.formatMessage({
+						id: `header__navItemMore-store`,
+						defaultMessage: 'AudioVerse Store',
+					}),
+				},
+				{
+					key: 'ju',
+					href: 'https://journeysunscripted.com/',
+					isTargetBlank: true,
+					Icon: IconLink,
+					label: intl.formatMessage({
+						id: `header__navItemMore-ju`,
+						defaultMessage: 'Journeys Unscripted',
+					}),
+				},
+				{
+					key: 'swj',
+					href: 'https://startingwithjesus.com/',
+					isTargetBlank: true,
+					Icon: IconLink,
+					label: intl.formatMessage({
+						id: `header__navItemMore-swj`,
+						defaultMessage: 'Starting With Jesus',
+					}),
+				},
 				{
 					key: 'legal',
 					href: makeAboutPage(languageRoute, 3),
