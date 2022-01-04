@@ -27,7 +27,7 @@ import styles from './collections.module.scss';
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 
 export default function DiscoverCollections({
-	sequence,
+	collection,
 	persons,
 	serieses,
 	conferences,
@@ -54,7 +54,7 @@ export default function DiscoverCollections({
 	);
 	return (
 		<div>
-			{sequence && (
+			{collection && (
 				<>
 					<LineHeading>
 						<FormattedMessage
@@ -63,7 +63,7 @@ export default function DiscoverCollections({
 						/>
 					</LineHeading>
 					<div className={styles.featured}>
-						<CardSequence sequence={sequence} />
+						<CardCollection collection={collection} />
 					</div>
 				</>
 			)}
