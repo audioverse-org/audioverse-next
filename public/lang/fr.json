@@ -1746,5 +1746,406 @@
   },
   "unstartedSeeAll": {
     "string": "Vous tous les éléments non commencés"
+  },
+  "andOnboarding__intro": {
+    "string": "Créer un compte ou se connecter pour accéder à des fonctionnalités de plus en plus nombreuses et pour vous accompagner dans l'exploration de la saine doctrine."
+  },
+  "app__features1Cta": {
+    "string": "Découvrir en audio"
+  },
+  "app__features1Heading": {
+    "string": "Trésors nouveaux et anciens"
+  },
+  "app__features1Kicker": {
+    "string": "Trouvez facilement des contenus inspirants grâce à notre riche collection de contenus spirituels."
+  },
+  "app__features2Cta": {
+    "string": "Voir le contenu récent"
+  },
+  "app__features2Heading": {
+    "string": "La vérité au présent"
+  },
+  "app__features2Kicker": {
+    "string": "AudioVerse permet de trouver facilement du contenu récent, selon vos orateurs, conférences ou collaborateurs favoris."
+  },
+  "app__features3Cta": {
+    "string": "Voir les cartes"
+  },
+  "app__features3Heading": {
+    "string": "Connectées et harmonieuses"
+  },
+  "app__features3Kicker": {
+    "string": "Les cartes regroupent des informations pertinentes, par exemple le nom de la série dont l'élément est tiré, afin que vous puissiez toujours voir ce qui est vraiment important, avec des pages de détails qui montrent davantage de contexte et des liens."
+  },
+  "app__features4Cta": {
+    "string": "Explorer la bibliothèque"
+  },
+  "app__features4Heading": {
+    "string": "Sauvegardez vos éléments favoris"
+  },
+  "app__features4Kicker": {
+    "string": "Créez votre bibliothèque personnelle d'enseignements à écouter plus tard, et ne vous perdez plus dans votre écoute grâce à la synchronisation de vos appareils."
+  },
+  "app__features5Cta": {
+    "string": "Trouver du contenu à télécharger"
+  },
+  "app__features5Heading": {
+    "string": "Faites vos préparations…"
+  },
+  "app__features5Kicker": {
+    "string": "Téléchargez du contenu sur vos appareils pour pouvoir y accéder plus tard, pour ces moments où vous n'aurez pas de signal ou pour gérer votre consommation de données."
+  },
+  "bibleBook__disclaimer": {
+    "string": "Les conditions contractuelles d'usage des Bibles audio issues de Faith Comes By Hearing empêchent qu'elles soient disponibles au téléchargement et limitent leur intégration à certaines fonctionnalités de notre plate-forme."
+  },
+  "buttonShare__emailSubject": {
+    "string": "Vivez cette bénédiction"
+  },
+  "cardPost__typeLabel": {
+    "string": "Blog"
+  },
+  "cardSlider__pageNumberLabel": {
+    "string": "Page {number}"
+  },
+  "cardSongBook__contributors": {
+    "string": "Contributeurs divers"
+  },
+  "cardSongBook__numSongs": {
+    "string": "{count} chants"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "Voir tous les présentateurs"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "Présentateurs"
+  },
+  "collectionType__audiobookSeries": {
+    "string": "Séries de livres"
+  },
+  "collectionType__conference": {
+    "string": "Conférence"
+  },
+  "collectionType__musicSeries": {
+    "string": "Séries de musiques"
+  },
+  "collectionType__storyProgram": {
+    "string": "Programme d'histoires"
+  },
+  "contact__bodyLabel": {
+    "string": "Corps"
+  },
+  "contact__emailLabel": {
+    "string": "Adresse e-mail"
+  },
+  "contact__emailPlaceholder": {
+    "string": "jeanne@exemple.com"
+  },
+  "contact__firstNameLabel": {
+    "string": "Prénom"
+  },
+  "contact__firstNamePlaceholder": {
+    "string": "Jean"
+  },
+  "contact__intro": {
+    "string": "Nous apprécions recevoir vos messages, même si c'est au sujet de problèmes techniques ! Vos retours nous encouragent à persévérer dans notre travail et nous aident à améliorer l'expérience des autres utilisateurs. Si vous souhaitez nous contacter, merci d'utiliser le formulaire et nous vous répondrons le plus rapidement possible."
+  },
+  "contact__lastNameLabel": {
+    "string": "Nom de famille"
+  },
+  "contact__lastNamePlaceholder": {
+    "string": "Dupont"
+  },
+  "contact__recipient": {
+    "string": "Type de contact"
+  },
+  "contact__recipient-general": {
+    "string": "Contact général"
+  },
+  "contact__recipient-technical": {
+    "string": "Support technique"
+  },
+  "contact__recipient-testimonials": {
+    "string": "Partager un témoignage"
+  },
+  "contact__submitLabel": {
+    "string": "Envoyer"
+  },
+  "contact__success": {
+    "string": "Envoi réussi !"
+  },
+  "contact__testimonyLabel": {
+    "string": "Témoignage"
+  },
+  "contact__title": {
+    "string": "Contact"
+  },
+  "discoverCollections_presentersHeading": {
+    "string": "Présentateurs"
+  },
+  "downloadAppButton__altLabel": {
+    "string": "Télécharger maintenant"
+  },
+  "embed__partInfo": {
+    "string": "Partie {index} de {count}"
+  },
+  "give__amazonCta": {
+    "string": "Faire du shopping"
+  },
+  "give__amazonDescription": {
+    "string": "Pour chaque achat sur AmazonSmile, AudioVerse reçoit 0,5%.{br}{br}Comment ? Cliquez tout simplement sur le bouton.{br}{br}C'est tout ! Pensez à ajouter à vos favoris le nouveau site AmazonSmile, sinon votre navigateur vous ramènera automatiquement sur le site Amazon classique."
+  },
+  "give__amazonTitle": {
+    "string": "Amazon Smile"
+  },
+  "give__checkDescription": {
+    "string": "Merci de veiller à ce que vos chèques puissent être perçus par AudioVerse.{br}{br}Notre adresse postale est :{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+  },
+  "give__checkTitle": {
+    "string": "Envoi de chèques par courrier"
+  },
+  "give__estateCta": {
+    "string": "Donner maintenant"
+  },
+  "give__estateDescription": {
+    "string": "Vous pouvez participer à transformer AudioVerse aujourd'hui et demain, en faisant un lègue de vos biens à AudioVerse. Le moyen le plus simple est de faire d'AudioVerse un bénéficiaire légal de vos comptes financiers ou en incluant ce ministère dans votre testament.{br}{br}Pour ceux qui souhaitent laisser un héritage durable en donnant pour l'œuvre du Seigneur mais qui souhaitent conserver le bénéfice de leurs biens, une rente viagère peut être une bonne option. Cette méthode de don est conçue pour être avantageuse pour le donateur et pour le bénéficiaire. AudioVerse travaille avec la Western Adventist Foundation (WAF) pour offrir cette option de donation à ceux qui nous soutiennent.{br}{br}Si vous souhaitez offrir un don par rente viagère à AudioVerse, merci de contacter la WAF directement, via leur site internet ou par téléphone."
+  },
+  "give__estateDisclaimer": {
+    "string": "Aux États-Unis, les rentes viagères ne sont PAS DISPONIBLES pour les états suivants : Alabama, Maryland, Washington ; Les rentes pour les résidents de l'Illinois et de la Californie sont gérées par l'Union du Pacifique des Adventistes du septième jour ; les rentes viagères pour les résidents d'Hawaï sont gérées par la Fédération d'Hawaï des Adventistes du septième jour ; les rentes viagères au bénéfice d'AudioVerse venant d'autres états sont gérées par la Western Adventist Foundation. La Western Adventist Foundation ne fournit pas de conseil juridique. Les usagers sont invités à recourir par leurs propres moyens à un conseil juridique."
+  },
+  "give__estateTitle": {
+    "string": "Pensez à AudioVerse pour votre plan de succession"
+  },
+  "give__givingAssistantCta": {
+    "string": "Faire du shopping"
+  },
+  "give__givingAssistantDescription": {
+    "string": "Offrez jusqu'à 30 % de vos dépenses à AudioVerse quand vous faites vos achats en ligne grâce à Giving Assistant ! Cette fonctionnalité est disponible pour plus de 1800 sites de shopping populaires. C'est facile. Giving Assistant vous verse des remises en argent, et sur ces versements vous pouvez choisir quel montant vous nous donnez. Essayez-le dès maintenant, et vous trouverez d'excellentes affaires, comme des coupons d'Adidas, ainsi que des réductions pour des grandes marques telles que Apple et H&M !"
+  },
+  "give__givingAssistantTitle": {
+    "string": "Giving Assistant"
+  },
+  "give__heading": {
+    "string": "Faire un don"
+  },
+  "give__paypalCta": {
+    "string": "Donner maintenant"
+  },
+  "give__paypalDescription": {
+    "string": "Visitez la page PayPal Giving Fund d'AudioVerse pour faire votre don à AudioVerse. 100 % de votre don sera versé au ministère, sans frais de traitement. En faisant votre don par ce moyen, vous recevrez un reçu fiscal édité par PayPal Giving Fund et non par AudioVerse."
+  },
+  "give__paypalTitle": {
+    "string": "PayPal Giving Fund"
+  },
+  "header__navItemCollections-books": {
+    "string": "Livres"
+  },
+  "header__navItemCollections-conferences": {
+    "string": "Conférences"
+  },
+  "header__navItemCollections-presenters": {
+    "string": "Présentateurs"
+  },
+  "header__navItemCollections-sponsors": {
+    "string": "Collaborateurs"
+  },
+  "header__navItemContact": {
+    "string": "Contact"
+  },
+  "header__navItemContact-facebook": {
+    "string": "Facebook"
+  },
+  "header__navItemContact-general": {
+    "string": "Contact général"
+  },
+  "header__navItemContact-instagram": {
+    "string": "Instagram"
+  },
+  "header__navItemContact-support": {
+    "string": "Support technique"
+  },
+  "header__navItemContact-testimony": {
+    "string": "Partager un témoignage"
+  },
+  "header__navItemContact-twitter": {
+    "string": "Twitter"
+  },
+  "header__navItemContact-youtube": {
+    "string": "YouTube"
+  },
+  "header__navItemLibrary-history": {
+    "string": "Historique"
+  },
+  "header__navItemLibrary-playlists": {
+    "string": "Playlists"
+  },
+  "header__navItemLibrary-saved": {
+    "string": "Favoris"
+  },
+  "header__navItemPresenters": {
+    "string": "Présentateurs"
+  },
+  "header__navItemStory-blog": {
+    "string": "Blog"
+  },
+  "homePage__learnStoryButtonLabel": {
+    "string": "En savoir plus sur notre histoire"
+  },
+  "homePage__newsletterEmail": {
+    "string": "Adresse e-mail"
+  },
+  "homePage__newsletterEmailPlaceholder": {
+    "string": "jeandupont@email.com"
+  },
+  "homePage__newsletterHatTitle": {
+    "string": "Inscrivez-vous à notre newsletter"
+  },
+  "homePage__newsletterName": {
+    "string": "Nom"
+  },
+  "homePage__newsletterNamePlaceholder": {
+    "string": "Jean Dupont"
+  },
+  "homePage__newsletterSubscribe": {
+    "string": "S'abonner"
+  },
+  "homePage__tagline": {
+    "string": "La saine doctrine"
+  },
+  "libraryHistory__loadingMore": {
+    "string": "En cours de chargement..."
+  },
+  "libraryNav__contentType": {
+    "string": "Type de contenu"
+  },
+  "libraryNav__contentType-all": {
+    "string": "Tous"
+  },
+  "libraryNav__contentType-audiobooks": {
+    "string": "Livres audio"
+  },
+  "libraryNav__contentType-conferences": {
+    "string": "Conférences"
+  },
+  "libraryNav__contentType-music": {
+    "string": "Musiques"
+  },
+  "libraryNav__contentType-people": {
+    "string": "Personnes"
+  },
+  "libraryNav__contentType-series": {
+    "string": "Séries"
+  },
+  "libraryNav__contentType-sponsors": {
+    "string": "Collaborateurs"
+  },
+  "libraryNav__contentType-stories": {
+    "string": "Histoires"
+  },
+  "libraryNav__contentType-teachings": {
+    "string": "Enseignements"
+  },
+  "libraryNav__duration": {
+    "string": "Durée"
+  },
+  "libraryNav__duration-all": {
+    "string": "Tous"
+  },
+  "libraryNav__duration-long": {
+    "string": "45-60 minutes"
+  },
+  "libraryNav__duration-medium": {
+    "string": "30-45 minutes"
+  },
+  "libraryNav__duration-short": {
+    "string": "15-30 minutes"
+  },
+  "libraryNav__duration-xlong": {
+    "string": "Plus de 60 minutes"
+  },
+  "libraryNav__filtersApplied": {
+    "string": "Filtres appliqués"
+  },
+  "libraryNav__mediaType": {
+    "string": "Type de média"
+  },
+  "libraryNav__mediaType-all": {
+    "string": "Tous"
+  },
+  "libraryNav__mediaType-audio": {
+    "string": "Audio uniquement"
+  },
+  "libraryNav__mediaType-video": {
+    "string": "Vidéo"
+  },
+  "libraryNav__playbackStatus": {
+    "string": "Statut de lecture"
+  },
+  "libraryNav__playbackStatus-all": {
+    "string": "Tous"
+  },
+  "libraryNav__playbackStatus-finished": {
+    "string": "Terminés"
+  },
+  "libraryNav__playbackStatus-started": {
+    "string": "En cours"
+  },
+  "libraryNav__playbackStatus-unstarted": {
+    "string": "Non commencés"
+  },
+  "libraryNav__playlists": {
+    "string": "Playlists"
+  },
+  "libraryNav__saved": {
+    "string": "Favoris"
+  },
+  "libraryNav__sort": {
+    "string": "Trier"
+  },
+  "library__noMatchingCopy": {
+    "string": "Ajouter des éléments à vos favoris ou écoutez des éléments à partir de la page Découvrir."
+  },
+  "library__noMatchingHeading": {
+    "string": "Vous n'avez pas encore d'éléments correspondants parmi vos favoris"
+  },
+  "molecule-buttonGuest__downloadQuality": {
+    "string": "Ajustement de la qualité du téléchargement"
+  },
+  "molecule-buttonGuest__saving": {
+    "string": "Ajout à votre bibliothèque"
+  },
+  "molecule-buttonGuest__syncing": {
+    "string": "Synchronisation avec vos appareils"
+  },
+  "molecule-buttonShare__copied": {
+    "string": "Copié !"
+  },
+  "songsBooksDetail__contributors": {
+    "string": "Contributeurs divers"
+  },
+  "songsBooksDetail__numSongs": {
+    "string": "{count} chants"
+  },
+  "songsListPage__intro": {
+    "string": "Écouter la Parole de Dieu en musique est une belle manière de mémoriser des passages de la Bible. Écouter par album ou par livre de la Bible."
+  },
+  "songsListPage__tabAlbums": {
+    "string": "Albums"
+  },
+  "songsListPage__tabPassage": {
+    "string": "Passage"
+  },
+  "songsListPage__title": {
+    "string": "Chants bibliques"
+  },
+  "testimonies__seeAll": {
+    "string": "Voir tous les témoignages"
+  },
+  "testimonies__submitTestimony": {
+    "string": "Envoyer un témoignage"
+  },
+  "time__hoursMinutesAndSeconds": {
+    "comment": "time hours, minutes and seconds",
+    "string": "{h}:{m}:{s}"
   }
 }

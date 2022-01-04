@@ -125,6 +125,102 @@
       "value": "捐赠"
     }
   ],
+  "andOnboarding__intro": [
+    {
+      "type": 0,
+      "value": "创建或登录账户，使用我们不断改进的功能来帮助你探索纯正教义。"
+    }
+  ],
+  "app__features1Cta": [
+    {
+      "type": 0,
+      "value": "探索音频"
+    }
+  ],
+  "app__features1Heading": [
+    {
+      "type": 0,
+      "value": "新旧的宝藏"
+    }
+  ],
+  "app__features1Kicker": [
+    {
+      "type": 0,
+      "value": "在丰富的属灵宝库中，自如探索鼓舞人心的内容。"
+    }
+  ],
+  "app__features2Cta": [
+    {
+      "type": 0,
+      "value": "查看最新内容"
+    }
+  ],
+  "app__features2Heading": [
+    {
+      "type": 0,
+      "value": "现代真理"
+    }
+  ],
+  "app__features2Kicker": [
+    {
+      "type": 0,
+      "value": "AudioVerse帮助你轻松查找你喜爱的讲员、大会和赞助者的最新内容。"
+    }
+  ],
+  "app__features3Cta": [
+    {
+      "type": 0,
+      "value": "探索卡片"
+    }
+  ],
+  "app__features3Heading": [
+    {
+      "type": 0,
+      "value": "连结而和谐的"
+    }
+  ],
+  "app__features3Kicker": [
+    {
+      "type": 0,
+      "value": "卡片包含诸如“育儿系列”之类的相关信息，方便你随时查看要点，详细页面则显示额外的背景与关联信息。"
+    }
+  ],
+  "app__features4Cta": [
+    {
+      "type": 0,
+      "value": "探索你的收藏"
+    }
+  ],
+  "app__features4Heading": [
+    {
+      "type": 0,
+      "value": "拯救你所爱之人"
+    }
+  ],
+  "app__features4Kicker": [
+    {
+      "type": 0,
+      "value": "收藏证道，以便后续收听，并通过各种设备上的同步更新，保留收听进度。"
+    }
+  ],
+  "app__features5Cta": [
+    {
+      "type": 0,
+      "value": "寻找可下载内容"
+    }
+  ],
+  "app__features5Heading": [
+    {
+      "type": 0,
+      "value": "为自己储备…"
+    }
+  ],
+  "app__features5Kicker": [
+    {
+      "type": 0,
+      "value": "将内容下载至你的设备，随时聆听，无需消耗流量。"
+    }
+  ],
   "atom-progressBar__label": [
     {
       "type": 0,
@@ -147,6 +243,12 @@
     {
       "type": 0,
       "value": "本书其它章节"
+    }
+  ],
+  "bibleBook__disclaimer": [
+    {
+      "type": 0,
+      "value": "“信道从听道而来”音频圣经的合同条款，不允许本平台的下载以及部分功能的使用。"
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -199,6 +301,12 @@
     {
       "type": 0,
       "value": " 朗读"
+    }
+  ],
+  "buttonShare__emailSubject": [
+    {
+      "type": 0,
+      "value": "请享受这份祝福"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -293,6 +401,12 @@
       "value": " 朗读"
     }
   ],
+  "cardPost__typeLabel": [
+    {
+      "type": 0,
+      "value": "博客"
+    }
+  ],
   "cardSequence_audiobookType": [
     {
       "type": 0,
@@ -339,6 +453,20 @@
       "value": "下一页"
     }
   ],
+  "cardSlider__pageNumberLabel": [
+    {
+      "type": 0,
+      "value": "第"
+    },
+    {
+      "type": 1,
+      "value": "number"
+    },
+    {
+      "type": 0,
+      "value": "页"
+    }
+  ],
   "cardSlider__paginationLabel": [
     {
       "type": 0,
@@ -349,6 +477,22 @@
     {
       "type": 0,
       "value": "上一页"
+    }
+  ],
+  "cardSongBook__contributors": [
+    {
+      "type": 0,
+      "value": "各种捐赠者"
+    }
+  ],
+  "cardSongBook__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "首歌曲"
     }
   ],
   "cardSong_sequenceLabel": [
@@ -415,6 +559,18 @@
     {
       "type": 0,
       "value": "位置"
+    }
+  ],
+  "collectionDetail__presentersAllLabel": [
+    {
+      "type": 0,
+      "value": "查看所有讲员"
+    }
+  ],
+  "collectionDetail__presentersLabel": [
+    {
+      "type": 0,
+      "value": "讲员"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -497,10 +653,130 @@
       "value": "大会"
     }
   ],
+  "collectionType__audiobookSeries": [
+    {
+      "type": 0,
+      "value": "书籍系列"
+    }
+  ],
+  "collectionType__conference": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "collectionType__musicSeries": [
+    {
+      "type": 0,
+      "value": "音乐系列"
+    }
+  ],
+  "collectionType__storyProgram": [
+    {
+      "type": 0,
+      "value": "故事节目"
+    }
+  ],
   "conferenceListPage__title": [
     {
       "type": 0,
       "value": "大会"
+    }
+  ],
+  "contact__bodyLabel": [
+    {
+      "type": 0,
+      "value": "主体"
+    }
+  ],
+  "contact__emailLabel": [
+    {
+      "type": 0,
+      "value": "邮件地址"
+    }
+  ],
+  "contact__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "contact__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "名"
+    }
+  ],
+  "contact__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "contact__intro": [
+    {
+      "type": 0,
+      "value": "我们乐于听取用户意见，技术相关问题也不例外！你给予的反馈能够激励我们再接再厉，同时帮助我们为大家作出改善。如果你想与我们联系，请使用我们的表格，我们将会尽快给予答复。"
+    }
+  ],
+  "contact__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "姓"
+    }
+  ],
+  "contact__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "contact__recipient": [
+    {
+      "type": 0,
+      "value": "问题类型"
+    }
+  ],
+  "contact__recipient-general": [
+    {
+      "type": 0,
+      "value": "一般问题"
+    }
+  ],
+  "contact__recipient-technical": [
+    {
+      "type": 0,
+      "value": "需要帮助"
+    }
+  ],
+  "contact__recipient-testimonials": [
+    {
+      "type": 0,
+      "value": "分享见证"
+    }
+  ],
+  "contact__submitLabel": [
+    {
+      "type": 0,
+      "value": "提交"
+    }
+  ],
+  "contact__success": [
+    {
+      "type": 0,
+      "value": "提交成功！"
+    }
+  ],
+  "contact__testimonyLabel": [
+    {
+      "type": 0,
+      "value": "见证"
+    }
+  ],
+  "contact__title": [
+    {
+      "type": 0,
+      "value": "联系"
     }
   ],
   "container-sermonList__filterLabelAll": [
@@ -543,6 +819,12 @@
     {
       "type": 0,
       "value": "专题合集"
+    }
+  ],
+  "discoverCollections_presentersHeading": [
+    {
+      "type": 0,
+      "value": "讲员"
     }
   ],
   "discoverCollections_scriptureSongsHeading": [
@@ -629,6 +911,12 @@
       "value": "热门证道"
     }
   ],
+  "downloadAppButton__altLabel": [
+    {
+      "type": 0,
+      "value": "立即下载"
+    }
+  ],
   "downloadAppButton__android": [
     {
       "type": 0,
@@ -685,6 +973,28 @@
       "value": "分钟"
     }
   ],
+  "embed__partInfo": [
+    {
+      "type": 0,
+      "value": "共"
+    },
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "部分的第"
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": "部分"
+    }
+  ],
   "generateFeed__audio": [
     {
       "type": 0,
@@ -737,6 +1047,198 @@
       "value": "。各录音版权归属其各自所有者。"
     }
   ],
+  "give__amazonCta": [
+    {
+      "type": 0,
+      "value": "立即购物"
+    }
+  ],
+  "give__amazonDescription": [
+    {
+      "type": 0,
+      "value": "你每次在AmazonSmile购物，AudioVerse都将获得0.5%的收益。"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "如何操作？点击按钮即可。"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "无需其它操作！请务必将新的AmazonSmile网站加入书签，否则你的浏览器很可能会默认返回常规Amazon网站。"
+    }
+  ],
+  "give__amazonTitle": [
+    {
+      "type": 0,
+      "value": "Amazon Smile"
+    }
+  ],
+  "give__checkDescription": [
+    {
+      "type": 0,
+      "value": "请确保支票抬头为AudioVerse。"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "我们的邮寄地址为："
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
+    }
+  ],
+  "give__checkTitle": [
+    {
+      "type": 0,
+      "value": "邮寄支票"
+    }
+  ],
+  "give__estateCta": [
+    {
+      "type": 0,
+      "value": "立即捐赠"
+    }
+  ],
+  "give__estateDescription": [
+    {
+      "type": 0,
+      "value": "你可以在财产规划中将AudioVerse作为受赠人，为AudioVerse的今日及未来发展作出贡献。最简单的方式是将AudioVerse作为你财务账户的受益人，或将本事工列入遗嘱或信托中。"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "对于希望通过向主的工作奉献，产生持续影响，但仍需要资产收益的人而言，慈善捐赠年金也许是一个不错的选择。这种捐赠方式可使捐赠者和受赠者双方从中受益。AudioVerse正在与西部复临信徒基金会（WAF）合作，为我们的支持者提供这种捐赠方式。"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "如果你想通过慈善捐赠年金向AudioVerse捐款，请直接通过其网站或电话与WAF联系。"
+    }
+  ],
+  "give__estateDisclaimer": [
+    {
+      "type": 0,
+      "value": "慈善捐赠年金在下列各州无法使用：阿拉巴马州（AL）、马里兰州（MD）和华盛顿州（WA）；加利福尼亚州（CA）和伊利诺州（IL）居民的捐赠年金由基督复临安息日会太平洋联合会（Pacific Union Conference of Seventh-day Adventists）管理；夏威夷州（HI）居民的捐赠年金由基督复临安息日会夏威夷区会（Hawaii Conference of Seventh-day Adventists）管理；其它所有州以AudioVerse为受益人的慈善捐赠年金都由西部复临信徒基金会管理。西部复临信徒基金会不提供法律建议。个人应寻求私人法律顾问的建议。"
+    }
+  ],
+  "give__estateTitle": [
+    {
+      "type": 0,
+      "value": "记得将AudioVerse纳入您的财产规划中"
+    }
+  ],
+  "give__givingAssistantCta": [
+    {
+      "type": 0,
+      "value": "立即购物"
+    }
+  ],
+  "give__givingAssistantDescription": [
+    {
+      "type": 0,
+      "value": "在1800多家受欢迎的在线零售商购物时使用“捐赠助理”（Giving Assistant），高达购买价格30%的资金将被捐赠给AudioVerse！这十分简单。“捐赠助理”帮你返现，而你可以选择想要捐赠给我们的金额。现在就试试寻找像梅西百货优惠券（Macy's Coupons）这样的超值优惠，以及像家得宝（Home Depot）和杰西潘尼（JC Penney）等杰出商家的优惠活动！"
+    }
+  ],
+  "give__givingAssistantTitle": [
+    {
+      "type": 0,
+      "value": "捐赠助理"
+    }
+  ],
+  "give__heading": [
+    {
+      "type": 0,
+      "value": "捐赠"
+    }
+  ],
+  "give__paypalCta": [
+    {
+      "type": 0,
+      "value": "立即捐赠"
+    }
+  ],
+  "give__paypalDescription": [
+    {
+      "type": 0,
+      "value": "请访问AudioVerse贝宝捐赠基金（Paypal Giving Fund）页面，开始向AudioVerse进行捐赠。您的捐款将100%用于事工，且没有任何手续费。通过这个渠道捐款，您将收到贝宝捐赠基金（Paypal Giving Fund），而非AudioVerse的可扣税收据。"
+    }
+  ],
+  "give__paypalTitle": [
+    {
+      "type": 0,
+      "value": "贝宝捐赠基金（PayPal Giving Fund）"
+    }
+  ],
   "header__navItemBible": [
     {
       "type": 0,
@@ -767,10 +1269,28 @@
       "value": "书"
     }
   ],
+  "header__navItemCollections-books": [
+    {
+      "type": 0,
+      "value": "书籍"
+    }
+  ],
   "header__navItemCollections-conference": [
     {
       "type": 0,
       "value": "大会"
+    }
+  ],
+  "header__navItemCollections-conferences": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "header__navItemCollections-presenters": [
+    {
+      "type": 0,
+      "value": "讲员"
     }
   ],
   "header__navItemCollections-series": [
@@ -797,10 +1317,64 @@
       "value": "赞助者"
     }
   ],
+  "header__navItemCollections-sponsors": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
   "header__navItemCollections-stories": [
     {
       "type": 0,
       "value": "故事"
+    }
+  ],
+  "header__navItemContact": [
+    {
+      "type": 0,
+      "value": "联系"
+    }
+  ],
+  "header__navItemContact-facebook": [
+    {
+      "type": 0,
+      "value": "脸书（Facebook）"
+    }
+  ],
+  "header__navItemContact-general": [
+    {
+      "type": 0,
+      "value": "一般问题"
+    }
+  ],
+  "header__navItemContact-instagram": [
+    {
+      "type": 0,
+      "value": "照片墙（Instagram）"
+    }
+  ],
+  "header__navItemContact-support": [
+    {
+      "type": 0,
+      "value": "需要帮助"
+    }
+  ],
+  "header__navItemContact-testimony": [
+    {
+      "type": 0,
+      "value": "分享见证"
+    }
+  ],
+  "header__navItemContact-twitter": [
+    {
+      "type": 0,
+      "value": "推特（Twitter）"
+    }
+  ],
+  "header__navItemContact-youtube": [
+    {
+      "type": 0,
+      "value": "油管（YouTube）"
     }
   ],
   "header__navItemDiscover": [
@@ -813,6 +1387,24 @@
     {
       "type": 0,
       "value": "收藏"
+    }
+  ],
+  "header__navItemLibrary-history": [
+    {
+      "type": 0,
+      "value": "历史"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "播放列表"
+    }
+  ],
+  "header__navItemLibrary-saved": [
+    {
+      "type": 0,
+      "value": "已保存"
     }
   ],
   "header__navItemMore": [
@@ -839,10 +1431,22 @@
       "value": "使用条款"
     }
   ],
+  "header__navItemPresenters": [
+    {
+      "type": 0,
+      "value": "讲员"
+    }
+  ],
   "header__navItemStory": [
     {
       "type": 0,
       "value": "我们的故事"
+    }
+  ],
+  "header__navItemStory-blog": [
+    {
+      "type": 0,
+      "value": "博客"
     }
   ],
   "header__navItemStory-donate": [
@@ -1007,6 +1611,42 @@
       "value": "加入AudioVerse"
     }
   ],
+  "homePage__learnStoryButtonLabel": [
+    {
+      "type": 0,
+      "value": "了解我们的故事"
+    }
+  ],
+  "homePage__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "邮件地址"
+    }
+  ],
+  "homePage__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "homePage__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "订阅我们的时事通讯"
+    }
+  ],
+  "homePage__newsletterName": [
+    {
+      "type": 0,
+      "value": "姓名"
+    }
+  ],
+  "homePage__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "贝约瑟"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -1017,6 +1657,12 @@
     {
       "type": 0,
       "value": "订阅更新"
+    }
+  ],
+  "homePage__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "订阅"
     }
   ],
   "homePage__recentContentSectionText": [
@@ -1097,6 +1743,12 @@
     {
       "type": 0,
       "value": "支持免费音频"
+    }
+  ],
+  "homePage__tagline": [
+    {
+      "type": 0,
+      "value": "纯正教义"
     }
   ],
   "homePage__testimoniesSectionText": [
@@ -1195,6 +1847,12 @@
       "value": "加载更多"
     }
   ],
+  "libraryHistory__loadingMore": [
+    {
+      "type": 0,
+      "value": "载入更多…"
+    }
+  ],
   "libraryNav__all": [
     {
       "type": 0,
@@ -1207,10 +1865,112 @@
       "value": "合集"
     }
   ],
+  "libraryNav__contentType": [
+    {
+      "type": 0,
+      "value": "内容类型"
+    }
+  ],
+  "libraryNav__contentType-all": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "libraryNav__contentType-audiobooks": [
+    {
+      "type": 0,
+      "value": "音频书籍"
+    }
+  ],
+  "libraryNav__contentType-conferences": [
+    {
+      "type": 0,
+      "value": "大会"
+    }
+  ],
+  "libraryNav__contentType-music": [
+    {
+      "type": 0,
+      "value": "音乐"
+    }
+  ],
+  "libraryNav__contentType-people": [
+    {
+      "type": 0,
+      "value": "人群"
+    }
+  ],
+  "libraryNav__contentType-series": [
+    {
+      "type": 0,
+      "value": "系列"
+    }
+  ],
+  "libraryNav__contentType-sponsors": [
+    {
+      "type": 0,
+      "value": "赞助者"
+    }
+  ],
+  "libraryNav__contentType-stories": [
+    {
+      "type": 0,
+      "value": "故事"
+    }
+  ],
+  "libraryNav__contentType-teachings": [
+    {
+      "type": 0,
+      "value": "证道"
+    }
+  ],
+  "libraryNav__duration": [
+    {
+      "type": 0,
+      "value": "时长"
+    }
+  ],
+  "libraryNav__duration-all": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "libraryNav__duration-long": [
+    {
+      "type": 0,
+      "value": "45-60分钟"
+    }
+  ],
+  "libraryNav__duration-medium": [
+    {
+      "type": 0,
+      "value": "30-45分钟"
+    }
+  ],
+  "libraryNav__duration-short": [
+    {
+      "type": 0,
+      "value": "15-30分钟"
+    }
+  ],
+  "libraryNav__duration-xlong": [
+    {
+      "type": 0,
+      "value": "超过60分钟"
+    }
+  ],
   "libraryNav__filter": [
     {
       "type": 0,
       "value": "筛选"
+    }
+  ],
+  "libraryNav__filtersApplied": [
+    {
+      "type": 0,
+      "value": "筛选已应用"
     }
   ],
   "libraryNav__finished": [
@@ -1223,6 +1983,78 @@
     {
       "type": 0,
       "value": "历史记录"
+    }
+  ],
+  "libraryNav__mediaType": [
+    {
+      "type": 0,
+      "value": "媒体类型"
+    }
+  ],
+  "libraryNav__mediaType-all": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "libraryNav__mediaType-audio": [
+    {
+      "type": 0,
+      "value": "仅音频"
+    }
+  ],
+  "libraryNav__mediaType-video": [
+    {
+      "type": 0,
+      "value": "视频"
+    }
+  ],
+  "libraryNav__playbackStatus": [
+    {
+      "type": 0,
+      "value": "回放状态"
+    }
+  ],
+  "libraryNav__playbackStatus-all": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "libraryNav__playbackStatus-finished": [
+    {
+      "type": 0,
+      "value": "已完成"
+    }
+  ],
+  "libraryNav__playbackStatus-started": [
+    {
+      "type": 0,
+      "value": "已开始"
+    }
+  ],
+  "libraryNav__playbackStatus-unstarted": [
+    {
+      "type": 0,
+      "value": "未开始"
+    }
+  ],
+  "libraryNav__playlists": [
+    {
+      "type": 0,
+      "value": "播放列表"
+    }
+  ],
+  "libraryNav__saved": [
+    {
+      "type": 0,
+      "value": "已保存"
+    }
+  ],
+  "libraryNav__sort": [
+    {
+      "type": 0,
+      "value": "排序"
     }
   ],
   "libraryNav__sortAtoZ": [
@@ -1349,6 +2181,18 @@
     {
       "type": 0,
       "value": "会员专属功能"
+    }
+  ],
+  "library__noMatchingCopy": [
+    {
+      "type": 0,
+      "value": "添加项目为书签，或从“发现”页面收听项目。"
+    }
+  ],
+  "library__noMatchingHeading": [
+    {
+      "type": 0,
+      "value": "你尚未保存任何匹配项目"
     }
   ],
   "library__startedHeading": [
@@ -1501,6 +2345,12 @@
       "value": "视频下载"
     }
   ],
+  "molecule-buttonGuest__downloadQuality": [
+    {
+      "type": 0,
+      "value": "调整下载质量"
+    }
+  ],
   "molecule-buttonGuest__feature1": [
     {
       "type": 0,
@@ -1555,6 +2405,18 @@
       "value": "以游客身份继续吗？"
     }
   ],
+  "molecule-buttonGuest__saving": [
+    {
+      "type": 0,
+      "value": "保存至你的收藏"
+    }
+  ],
+  "molecule-buttonGuest__syncing": [
+    {
+      "type": 0,
+      "value": "在各个设备上同步"
+    }
+  ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
     {
       "type": 0,
@@ -1571,6 +2433,12 @@
     {
       "type": 0,
       "value": "分享"
+    }
+  ],
+  "molecule-buttonShare__copied": [
+    {
+      "type": 0,
+      "value": "已复制！"
     }
   ],
   "molecule-buttonShare__copyLink": [
@@ -2723,6 +3591,22 @@
       "value": "成功"
     }
   ],
+  "songsBooksDetail__contributors": [
+    {
+      "type": 0,
+      "value": "各种捐赠者"
+    }
+  ],
+  "songsBooksDetail__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": "首歌曲"
+    }
+  ],
   "songsListPage__1ChroniclesLabel": [
     {
       "type": 0,
@@ -3131,16 +4015,40 @@
       "value": "书"
     }
   ],
+  "songsListPage__intro": [
+    {
+      "type": 0,
+      "value": "若想将圣经片段牢记于心，以歌曲方式聆听上帝的话语是一种很棒的方式。按专辑或按圣经书卷进行收听。"
+    }
+  ],
   "songsListPage__sponsorTabLabel": [
     {
       "type": 0,
       "value": "赞助者"
     }
   ],
+  "songsListPage__tabAlbums": [
+    {
+      "type": 0,
+      "value": "专辑"
+    }
+  ],
+  "songsListPage__tabPassage": [
+    {
+      "type": 0,
+      "value": "片段"
+    }
+  ],
   "songsListPage__tagTabLabel": [
     {
       "type": 0,
       "value": "标签"
+    }
+  ],
+  "songsListPage__title": [
+    {
+      "type": 0,
+      "value": "圣经歌曲"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -3349,10 +4257,48 @@
       "value": "您有很棒的见证吗？告诉我们您的故事！"
     }
   ],
+  "testimonies__seeAll": [
+    {
+      "type": 0,
+      "value": "查看所有见证"
+    }
+  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "分享您的故事"
+    }
+  ],
+  "testimonies__submitTestimony": [
+    {
+      "type": 0,
+      "value": "提交见证"
+    }
+  ],
+  "time__hoursMinutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "h"
+    },
+    {
+      "type": 0,
+      "value": "小时"
+    },
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": "分"
+    },
+    {
+      "type": 1,
+      "value": "s"
+    },
+    {
+      "type": 0,
+      "value": "秒"
     }
   ],
   "time__minutesAndSeconds": [

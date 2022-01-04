@@ -125,6 +125,102 @@
       "value": "Пожертвовать"
     }
   ],
+  "andOnboarding__intro": [
+    {
+      "type": 0,
+      "value": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в исследовании здравого учения."
+    }
+  ],
+  "app__features1Cta": [
+    {
+      "type": 0,
+      "value": "Открыть аудио"
+    }
+  ],
+  "app__features1Heading": [
+    {
+      "type": 0,
+      "value": "Новые и Старые сокровищаНовые и Старые сокровища"
+    }
+  ],
+  "app__features1Kicker": [
+    {
+      "type": 0,
+      "value": "Легким образом откройте для себя вдохновляющий материал из хранилища духовного содержания. Несложным образом откройте для себя вдохновляющий материал из хранилищницы духовного содержания."
+    }
+  ],
+  "app__features2Cta": [
+    {
+      "type": 0,
+      "value": "Просмотр недавнего содержания"
+    }
+  ],
+  "app__features2Heading": [
+    {
+      "type": 0,
+      "value": "Истина для настоящего времени"
+    }
+  ],
+  "app__features2Kicker": [
+    {
+      "type": 0,
+      "value": "С помощью AudioVerse легче найти недавние материалы ваших любимых проповедников, конференций и спонсоров."
+    }
+  ],
+  "app__features3Cta": [
+    {
+      "type": 0,
+      "value": "Изучите карты"
+    }
+  ],
+  "app__features3Heading": [
+    {
+      "type": 0,
+      "value": "Взаимосвязанные и гармоничные"
+    }
+  ],
+  "app__features3Kicker": [
+    {
+      "type": 0,
+      "value": "Карты включают в себя соответствующую информацию, например, исходную серию, чтобы всегда можно было видеть то, что является по-настоящему важным. Прилагаются подробные страницы, где можно посмотреть дополнительный контекст и взаимосвязи."
+    }
+  ],
+  "app__features4Cta": [
+    {
+      "type": 0,
+      "value": "Изучить библиотеку"
+    }
+  ],
+  "app__features4Heading": [
+    {
+      "type": 0,
+      "value": "Спасти тех, кого любите"
+    }
+  ],
+  "app__features4Kicker": [
+    {
+      "type": 0,
+      "value": "Создайте библиотеку поучений, чтобы можно было позже прослушать; старайтесь преуспевать благодаря прогрессу, который синхронизируется на ваших устройствах."
+    }
+  ],
+  "app__features5Cta": [
+    {
+      "type": 0,
+      "value": "Найти содержание для скачивания"
+    }
+  ],
+  "app__features5Heading": [
+    {
+      "type": 0,
+      "value": "Положитесь на себя..."
+    }
+  ],
+  "app__features5Kicker": [
+    {
+      "type": 0,
+      "value": "Скачайте материал на свое устройство в моменты отсутствия сигнала или же просто во избежание того, чтобы закончились ваши данные."
+    }
+  ],
   "atom-progressBar__label": [
     {
       "type": 0,
@@ -147,6 +243,12 @@
     {
       "type": 0,
       "value": "Другие главы в книге"
+    }
+  ],
+  "bibleBook__disclaimer": [
+    {
+      "type": 0,
+      "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания и интеграции определенных функций на нашей платформе. "
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -199,6 +301,12 @@
     {
       "type": 0,
       "value": " прочитано"
+    }
+  ],
+  "buttonShare__emailSubject": [
+    {
+      "type": 0,
+      "value": "Возрадуйтесь этому благословению"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -301,6 +409,12 @@
       "value": " прочитано"
     }
   ],
+  "cardPost__typeLabel": [
+    {
+      "type": 0,
+      "value": "Блог"
+    }
+  ],
   "cardSequence_audiobookType": [
     {
       "type": 0,
@@ -351,6 +465,16 @@
       "value": "Следующая страница"
     }
   ],
+  "cardSlider__pageNumberLabel": [
+    {
+      "type": 0,
+      "value": "Страница "
+    },
+    {
+      "type": 1,
+      "value": "number"
+    }
+  ],
   "cardSlider__paginationLabel": [
     {
       "type": 0,
@@ -361,6 +485,22 @@
     {
       "type": 0,
       "value": "Предыдущая страница"
+    }
+  ],
+  "cardSongBook__contributors": [
+    {
+      "type": 0,
+      "value": "Различные участники"
+    }
+  ],
+  "cardSongBook__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " песня"
     }
   ],
   "cardSong_sequenceLabel": [
@@ -439,6 +579,18 @@
     {
       "type": 0,
       "value": "Местонахождение"
+    }
+  ],
+  "collectionDetail__presentersAllLabel": [
+    {
+      "type": 0,
+      "value": "Просмотреть всех выступающих"
+    }
+  ],
+  "collectionDetail__presentersLabel": [
+    {
+      "type": 0,
+      "value": "Выступающие"
     }
   ],
   "collectionDetail__sequenceCountLabel": [
@@ -529,10 +681,130 @@
       "value": "Конференция"
     }
   ],
+  "collectionType__audiobookSeries": [
+    {
+      "type": 0,
+      "value": "Серия книг"
+    }
+  ],
+  "collectionType__conference": [
+    {
+      "type": 0,
+      "value": "Конференция"
+    }
+  ],
+  "collectionType__musicSeries": [
+    {
+      "type": 0,
+      "value": "Серия музыкальных произведений"
+    }
+  ],
+  "collectionType__storyProgram": [
+    {
+      "type": 0,
+      "value": "Сюжетная программа"
+    }
+  ],
   "conferenceListPage__title": [
     {
       "type": 0,
       "value": "Конференции"
+    }
+  ],
+  "contact__bodyLabel": [
+    {
+      "type": 0,
+      "value": "Основная часть текста"
+    }
+  ],
+  "contact__emailLabel": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "contact__emailPlaceholder": [
+    {
+      "type": 0,
+      "value": "jane@example.com"
+    }
+  ],
+  "contact__firstNameLabel": [
+    {
+      "type": 0,
+      "value": "Имя"
+    }
+  ],
+  "contact__firstNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Jane"
+    }
+  ],
+  "contact__intro": [
+    {
+      "type": 0,
+      "value": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, поощряют нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой для заполнения, и мы с вами свяжемся в ближайшее время."
+    }
+  ],
+  "contact__lastNameLabel": [
+    {
+      "type": 0,
+      "value": "Фамилия"
+    }
+  ],
+  "contact__lastNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Doe"
+    }
+  ],
+  "contact__recipient": [
+    {
+      "type": 0,
+      "value": "Тип контакта"
+    }
+  ],
+  "contact__recipient-general": [
+    {
+      "type": 0,
+      "value": "Общий контакт"
+    }
+  ],
+  "contact__recipient-technical": [
+    {
+      "type": 0,
+      "value": "Запросить поддержку"
+    }
+  ],
+  "contact__recipient-testimonials": [
+    {
+      "type": 0,
+      "value": "Поделиться свидетельством"
+    }
+  ],
+  "contact__submitLabel": [
+    {
+      "type": 0,
+      "value": "Отправить"
+    }
+  ],
+  "contact__success": [
+    {
+      "type": 0,
+      "value": "Успешно отправлено!"
+    }
+  ],
+  "contact__testimonyLabel": [
+    {
+      "type": 0,
+      "value": "Свидетельство"
+    }
+  ],
+  "contact__title": [
+    {
+      "type": 0,
+      "value": "Контакт"
     }
   ],
   "container-sermonList__filterLabelAll": [
@@ -575,6 +847,12 @@
     {
       "type": 0,
       "value": "Рекомендуемая коллекция"
+    }
+  ],
+  "discoverCollections_presentersHeading": [
+    {
+      "type": 0,
+      "value": "Выступающие"
     }
   ],
   "discoverCollections_scriptureSongsHeading": [
@@ -661,6 +939,12 @@
       "value": "Поучения, которые в тренде"
     }
   ],
+  "downloadAppButton__altLabel": [
+    {
+      "type": 0,
+      "value": "Скачать сейчас"
+    }
+  ],
   "downloadAppButton__android": [
     {
       "type": 0,
@@ -725,6 +1009,24 @@
       "value": "m"
     }
   ],
+  "embed__partInfo": [
+    {
+      "type": 0,
+      "value": "Часть 1 "
+    },
+    {
+      "type": 1,
+      "value": "index"
+    },
+    {
+      "type": 0,
+      "value": " из 2 "
+    },
+    {
+      "type": 1,
+      "value": "count"
+    }
+  ],
   "generateFeed__audio": [
     {
       "type": 0,
@@ -777,6 +1079,206 @@
       "value": " AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
     }
   ],
+  "give__amazonCta": [
+    {
+      "type": 0,
+      "value": "Купить сейчас"
+    }
+  ],
+  "give__amazonDescription": [
+    {
+      "type": 0,
+      "value": "С каждой покупкой на AmazonSmile, AudioVerse получает 0.5%. "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": ". Как?  Просто нажмите на кнопку. "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе же ваш браузер по умолчанию вернется к обычному сайту Amazon."
+    }
+  ],
+  "give__amazonTitle": [
+    {
+      "type": 0,
+      "value": "Amazon Улыбка"
+    }
+  ],
+  "give__checkDescription": [
+    {
+      "type": 0,
+      "value": "Чек, пожалуйста, выписывайте на имя AudioVerse."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Адрес нашей электронной почты:"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " USA"
+    }
+  ],
+  "give__checkTitle": [
+    {
+      "type": 0,
+      "value": "Проверка по почте"
+    }
+  ],
+  "give__estateCta": [
+    {
+      "type": 0,
+      "value": "Пожертвовать сейчас"
+    }
+  ],
+  "give__estateDescription": [
+    {
+      "type": 0,
+      "value": "Сегодня и завтра вы можете повлиять на AudioVerse внеся, AudioVerse в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами."
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": " Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, но нуждается в пользовании своими активами, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для жертвователя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим жертвователям. "
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "1"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": ". Если Вы желаете внести пожертвование посредством благотворительного ежегодного взноса на AudioVerse, пожалуйста, свяжитесь с ЗАФ напрямую через веб-сайт или по телефону."
+    }
+  ],
+  "give__estateDisclaimer": [
+    {
+      "type": 0,
+      "value": "Ежегодные благотворительные взносы НЕВОЗМОЖНЫ  для следующих штатов: Алабама, Мэриленд и Вашингтон. Для жителей Калифорнии и Иллинойса ежегодные пожертвования вносятся Конференцией тихоокеанского униона адвентистов седьмого дня. Ежегодный взнос для жителей Гавайев выплачивается Гавайской конференцией адвентистов седьмого дня; а ежегодные  благотворительные взносы в пользу AudioVerse во всех других штатах предоставляются Западным адвентистским фондом. Западный адвентистский фонд не предоставляет юридических услуг. Физическим лицам следует обращаться за помощью к собственному юристу."
+    }
+  ],
+  "give__estateTitle": [
+    {
+      "type": 0,
+      "value": "Помните о AudioVerse в Вашем плане наследства."
+    }
+  ],
+  "give__givingAssistantCta": [
+    {
+      "type": 0,
+      "value": "Купить сейчас"
+    }
+  ],
+  "give__givingAssistantDescription": [
+    {
+      "type": 0,
+      "value": "Пожертвуйте до 30% от закупочной цены для AudioVerse, когда осуществляете покупки в 1800+ популярных интернет-магазинах с помощью Giving Assistant! Это легко. Giving Assistant возвращает Ваши деньги, а Вы выбираете, какую долю этой суммы Вы бы хотели пожертвовать. Воспользуйтесь сейчас и получите отличные предложения такие как Macy's Coupons. Также есть отличные места, такие как Home Depot и JC Penney, где можно сэкономить!"
+    }
+  ],
+  "give__givingAssistantTitle": [
+    {
+      "type": 0,
+      "value": "Giving Assistant"
+    }
+  ],
+  "give__heading": [
+    {
+      "type": 0,
+      "value": "Пожертвовать"
+    }
+  ],
+  "give__paypalCta": [
+    {
+      "type": 0,
+      "value": "Пожертвовать сейчас"
+    }
+  ],
+  "give__paypalDescription": [
+    {
+      "type": 0,
+      "value": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение, не запрашивая комиссии за обработку. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
+    }
+  ],
+  "give__paypalTitle": [
+    {
+      "type": 0,
+      "value": "Фонд пожертвований PayPal"
+    }
+  ],
   "header__navItemBible": [
     {
       "type": 0,
@@ -807,10 +1309,28 @@
       "value": "Книга"
     }
   ],
+  "header__navItemCollections-books": [
+    {
+      "type": 0,
+      "value": "Книги"
+    }
+  ],
   "header__navItemCollections-conference": [
     {
       "type": 0,
       "value": "Конференция"
+    }
+  ],
+  "header__navItemCollections-conferences": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "header__navItemCollections-presenters": [
+    {
+      "type": 0,
+      "value": "Выступающие"
     }
   ],
   "header__navItemCollections-series": [
@@ -837,10 +1357,64 @@
       "value": "Спонсор"
     }
   ],
+  "header__navItemCollections-sponsors": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
   "header__navItemCollections-stories": [
     {
       "type": 0,
       "value": "Истории"
+    }
+  ],
+  "header__navItemContact": [
+    {
+      "type": 0,
+      "value": "Контакт"
+    }
+  ],
+  "header__navItemContact-facebook": [
+    {
+      "type": 0,
+      "value": "Facebook"
+    }
+  ],
+  "header__navItemContact-general": [
+    {
+      "type": 0,
+      "value": "Общий контакт"
+    }
+  ],
+  "header__navItemContact-instagram": [
+    {
+      "type": 0,
+      "value": "Instagram"
+    }
+  ],
+  "header__navItemContact-support": [
+    {
+      "type": 0,
+      "value": "Запросить поддержку"
+    }
+  ],
+  "header__navItemContact-testimony": [
+    {
+      "type": 0,
+      "value": "Поделиться свидетельством"
+    }
+  ],
+  "header__navItemContact-twitter": [
+    {
+      "type": 0,
+      "value": "Twitter"
+    }
+  ],
+  "header__navItemContact-youtube": [
+    {
+      "type": 0,
+      "value": "YouTube"
     }
   ],
   "header__navItemDiscover": [
@@ -853,6 +1427,24 @@
     {
       "type": 0,
       "value": "Библиотека"
+    }
+  ],
+  "header__navItemLibrary-history": [
+    {
+      "type": 0,
+      "value": "История"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "Списки воспроизведений"
+    }
+  ],
+  "header__navItemLibrary-saved": [
+    {
+      "type": 0,
+      "value": "Сохранено"
     }
   ],
   "header__navItemMore": [
@@ -879,10 +1471,22 @@
       "value": "Условия использования"
     }
   ],
+  "header__navItemPresenters": [
+    {
+      "type": 0,
+      "value": "Выступающие"
+    }
+  ],
   "header__navItemStory": [
     {
       "type": 0,
       "value": "Наша история"
+    }
+  ],
+  "header__navItemStory-blog": [
+    {
+      "type": 0,
+      "value": "Блог"
     }
   ],
   "header__navItemStory-donate": [
@@ -1047,6 +1651,42 @@
       "value": "Вступить в AudioVerse"
     }
   ],
+  "homePage__learnStoryButtonLabel": [
+    {
+      "type": 0,
+      "value": "Узнайте о нашей истории"
+    }
+  ],
+  "homePage__newsletterEmail": [
+    {
+      "type": 0,
+      "value": "Адрес электронной почты"
+    }
+  ],
+  "homePage__newsletterEmailPlaceholder": [
+    {
+      "type": 0,
+      "value": "josephbates@email.com"
+    }
+  ],
+  "homePage__newsletterHatTitle": [
+    {
+      "type": 0,
+      "value": "Подписаться на рассылку нашего бюллетеня"
+    }
+  ],
+  "homePage__newsletterName": [
+    {
+      "type": 0,
+      "value": "Имя"
+    }
+  ],
+  "homePage__newsletterNamePlaceholder": [
+    {
+      "type": 0,
+      "value": "Джозеф Бейтс"
+    }
+  ],
   "homePage__newsletterSectionText": [
     {
       "type": 0,
@@ -1057,6 +1697,12 @@
     {
       "type": 0,
       "value": "Подписаться на Новости"
+    }
+  ],
+  "homePage__newsletterSubscribe": [
+    {
+      "type": 0,
+      "value": "Подписаться"
     }
   ],
   "homePage__recentContentSectionText": [
@@ -1137,6 +1783,12 @@
     {
       "type": 0,
       "value": "Поддержать бесплатные аудио файлы"
+    }
+  ],
+  "homePage__tagline": [
+    {
+      "type": 0,
+      "value": "Разумное учение"
     }
   ],
   "homePage__testimoniesSectionText": [
@@ -1235,6 +1887,12 @@
       "value": "Загрузить еще"
     }
   ],
+  "libraryHistory__loadingMore": [
+    {
+      "type": 0,
+      "value": "Загрузка более..."
+    }
+  ],
   "libraryNav__all": [
     {
       "type": 0,
@@ -1247,10 +1905,112 @@
       "value": "Подборки"
     }
   ],
+  "libraryNav__contentType": [
+    {
+      "type": 0,
+      "value": "Тип содержания"
+    }
+  ],
+  "libraryNav__contentType-all": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "libraryNav__contentType-audiobooks": [
+    {
+      "type": 0,
+      "value": "Аудиокниги"
+    }
+  ],
+  "libraryNav__contentType-conferences": [
+    {
+      "type": 0,
+      "value": "Конференции"
+    }
+  ],
+  "libraryNav__contentType-music": [
+    {
+      "type": 0,
+      "value": "Музыка"
+    }
+  ],
+  "libraryNav__contentType-people": [
+    {
+      "type": 0,
+      "value": "Люди"
+    }
+  ],
+  "libraryNav__contentType-series": [
+    {
+      "type": 0,
+      "value": "Серия"
+    }
+  ],
+  "libraryNav__contentType-sponsors": [
+    {
+      "type": 0,
+      "value": "Спонсоры"
+    }
+  ],
+  "libraryNav__contentType-stories": [
+    {
+      "type": 0,
+      "value": "Истории"
+    }
+  ],
+  "libraryNav__contentType-teachings": [
+    {
+      "type": 0,
+      "value": "Поучения"
+    }
+  ],
+  "libraryNav__duration": [
+    {
+      "type": 0,
+      "value": "Продолжительность"
+    }
+  ],
+  "libraryNav__duration-all": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "libraryNav__duration-long": [
+    {
+      "type": 0,
+      "value": "45-60 минут"
+    }
+  ],
+  "libraryNav__duration-medium": [
+    {
+      "type": 0,
+      "value": "30-45 минут"
+    }
+  ],
+  "libraryNav__duration-short": [
+    {
+      "type": 0,
+      "value": "15-30 минут"
+    }
+  ],
+  "libraryNav__duration-xlong": [
+    {
+      "type": 0,
+      "value": "Свыше 60 минут"
+    }
+  ],
   "libraryNav__filter": [
     {
       "type": 0,
       "value": "Фильтр"
+    }
+  ],
+  "libraryNav__filtersApplied": [
+    {
+      "type": 0,
+      "value": "Примененные фильтры"
     }
   ],
   "libraryNav__finished": [
@@ -1263,6 +2023,78 @@
     {
       "type": 0,
       "value": "История"
+    }
+  ],
+  "libraryNav__mediaType": [
+    {
+      "type": 0,
+      "value": "Тип носителя информации"
+    }
+  ],
+  "libraryNav__mediaType-all": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "libraryNav__mediaType-audio": [
+    {
+      "type": 0,
+      "value": "Только аудио"
+    }
+  ],
+  "libraryNav__mediaType-video": [
+    {
+      "type": 0,
+      "value": "Видео"
+    }
+  ],
+  "libraryNav__playbackStatus": [
+    {
+      "type": 0,
+      "value": "Статус воспроизведения"
+    }
+  ],
+  "libraryNav__playbackStatus-all": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "libraryNav__playbackStatus-finished": [
+    {
+      "type": 0,
+      "value": "Завершено"
+    }
+  ],
+  "libraryNav__playbackStatus-started": [
+    {
+      "type": 0,
+      "value": "Начатые"
+    }
+  ],
+  "libraryNav__playbackStatus-unstarted": [
+    {
+      "type": 0,
+      "value": "Не запущенный "
+    }
+  ],
+  "libraryNav__playlists": [
+    {
+      "type": 0,
+      "value": "Списки воспроизведений"
+    }
+  ],
+  "libraryNav__saved": [
+    {
+      "type": 0,
+      "value": "Сохранено"
+    }
+  ],
+  "libraryNav__sort": [
+    {
+      "type": 0,
+      "value": "Сортировать"
     }
   ],
   "libraryNav__sortAtoZ": [
@@ -1389,6 +2221,18 @@
     {
       "type": 0,
       "value": "Функция только для участников"
+    }
+  ],
+  "library__noMatchingCopy": [
+    {
+      "type": 0,
+      "value": "Добавить в закладки файлы или слушать файлы на странице Discover."
+    }
+  ],
+  "library__noMatchingHeading": [
+    {
+      "type": 0,
+      "value": "У Вас еще нет ни одного сохраненного подходящего файла."
     }
   ],
   "library__startedHeading": [
@@ -1541,6 +2385,12 @@
       "value": "Загрузки видео файлов"
     }
   ],
+  "molecule-buttonGuest__downloadQuality": [
+    {
+      "type": 0,
+      "value": "Настройка качества скачивания"
+    }
+  ],
   "molecule-buttonGuest__feature1": [
     {
       "type": 0,
@@ -1595,6 +2445,18 @@
       "value": "Продолжить как гость?"
     }
   ],
+  "molecule-buttonGuest__saving": [
+    {
+      "type": 0,
+      "value": "Сохранить в библиотеку"
+    }
+  ],
+  "molecule-buttonGuest__syncing": [
+    {
+      "type": 0,
+      "value": "Синхронизация между Вашими устройствами"
+    }
+  ],
   "molecule-buttonShareRecording__audioEmbedLabel": [
     {
       "type": 0,
@@ -1611,6 +2473,12 @@
     {
       "type": 0,
       "value": "поделиться"
+    }
+  ],
+  "molecule-buttonShare__copied": [
+    {
+      "type": 0,
+      "value": "Скопировано!"
     }
   ],
   "molecule-buttonShare__copyLink": [
@@ -2783,6 +3651,22 @@
       "value": "Успешно"
     }
   ],
+  "songsBooksDetail__contributors": [
+    {
+      "type": 0,
+      "value": "Различные участники"
+    }
+  ],
+  "songsBooksDetail__numSongs": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " песня"
+    }
+  ],
   "songsListPage__1ChroniclesLabel": [
     {
       "type": 0,
@@ -3191,16 +4075,40 @@
       "value": "Книги"
     }
   ],
+  "songsListPage__intro": [
+    {
+      "type": 0,
+      "value": "Слушать Слово Божье в музыкальной форме - отличный способ запомнить тексты Писания. Слушать по альбомам или по книгам Библии."
+    }
+  ],
   "songsListPage__sponsorTabLabel": [
     {
       "type": 0,
       "value": "Спонсоры"
     }
   ],
+  "songsListPage__tabAlbums": [
+    {
+      "type": 0,
+      "value": "Альбомы"
+    }
+  ],
+  "songsListPage__tabPassage": [
+    {
+      "type": 0,
+      "value": "Текст"
+    }
+  ],
   "songsListPage__tagTabLabel": [
     {
       "type": 0,
       "value": "Теги / метки"
+    }
+  ],
+  "songsListPage__title": [
+    {
+      "type": 0,
+      "value": "Песни из Писания"
     }
   ],
   "sopnsorTypeLockup_type": [
@@ -3417,10 +4325,48 @@
       "value": "Есть ли положительные свидетельства? Расскажите нам свою историю!"
     }
   ],
+  "testimonies__seeAll": [
+    {
+      "type": 0,
+      "value": "Просмотреть все свидетельства"
+    }
+  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "Поделитесь своей историей"
+    }
+  ],
+  "testimonies__submitTestimony": [
+    {
+      "type": 0,
+      "value": "Представить свидетельство"
+    }
+  ],
+  "time__hoursMinutesAndSeconds": [
+    {
+      "type": 1,
+      "value": "h"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "m"
+    },
+    {
+      "type": 0,
+      "value": ":"
+    },
+    {
+      "type": 1,
+      "value": "s"
+    },
+    {
+      "type": 0,
+      "value": " "
     }
   ],
   "time__minutesAndSeconds": [

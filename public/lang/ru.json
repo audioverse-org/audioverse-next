@@ -1746,5 +1746,406 @@
   },
   "unstartedSeeAll": {
     "string": "Посмотреть все не начатые"
+  },
+  "andOnboarding__intro": {
+    "string": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в исследовании здравого учения."
+  },
+  "app__features1Cta": {
+    "string": "Открыть аудио"
+  },
+  "app__features1Heading": {
+    "string": "Новые и Старые сокровищаНовые и Старые сокровища"
+  },
+  "app__features1Kicker": {
+    "string": "Легким образом откройте для себя вдохновляющий материал из хранилища духовного содержания. Несложным образом откройте для себя вдохновляющий материал из хранилищницы духовного содержания."
+  },
+  "app__features2Cta": {
+    "string": "Просмотр недавнего содержания"
+  },
+  "app__features2Heading": {
+    "string": "Истина для настоящего времени"
+  },
+  "app__features2Kicker": {
+    "string": "С помощью AudioVerse легче найти недавние материалы ваших любимых проповедников, конференций и спонсоров."
+  },
+  "app__features3Cta": {
+    "string": "Изучите карты"
+  },
+  "app__features3Heading": {
+    "string": "Взаимосвязанные и гармоничные"
+  },
+  "app__features3Kicker": {
+    "string": "Карты включают в себя соответствующую информацию, например, исходную серию, чтобы всегда можно было видеть то, что является по-настоящему важным. Прилагаются подробные страницы, где можно посмотреть дополнительный контекст и взаимосвязи."
+  },
+  "app__features4Cta": {
+    "string": "Изучить библиотеку"
+  },
+  "app__features4Heading": {
+    "string": "Спасти тех, кого любите"
+  },
+  "app__features4Kicker": {
+    "string": "Создайте библиотеку поучений, чтобы можно было позже прослушать; старайтесь преуспевать благодаря прогрессу, который синхронизируется на ваших устройствах."
+  },
+  "app__features5Cta": {
+    "string": "Найти содержание для скачивания"
+  },
+  "app__features5Heading": {
+    "string": "Положитесь на себя..."
+  },
+  "app__features5Kicker": {
+    "string": "Скачайте материал на свое устройство в моменты отсутствия сигнала или же просто во избежание того, чтобы закончились ваши данные."
+  },
+  "bibleBook__disclaimer": {
+    "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания и интеграции определенных функций на нашей платформе. "
+  },
+  "buttonShare__emailSubject": {
+    "string": "Возрадуйтесь этому благословению"
+  },
+  "cardPost__typeLabel": {
+    "string": "Блог"
+  },
+  "cardSlider__pageNumberLabel": {
+    "string": "Страница {number}"
+  },
+  "cardSongBook__contributors": {
+    "string": "Различные участники"
+  },
+  "cardSongBook__numSongs": {
+    "string": "{count} песня"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "Просмотреть всех выступающих"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "Выступающие"
+  },
+  "collectionType__audiobookSeries": {
+    "string": "Серия книг"
+  },
+  "collectionType__conference": {
+    "string": "Конференция"
+  },
+  "collectionType__musicSeries": {
+    "string": "Серия музыкальных произведений"
+  },
+  "collectionType__storyProgram": {
+    "string": "Сюжетная программа"
+  },
+  "contact__bodyLabel": {
+    "string": "Основная часть текста"
+  },
+  "contact__emailLabel": {
+    "string": "Адрес электронной почты"
+  },
+  "contact__emailPlaceholder": {
+    "string": "jane@example.com"
+  },
+  "contact__firstNameLabel": {
+    "string": "Имя"
+  },
+  "contact__firstNamePlaceholder": {
+    "string": "Jane"
+  },
+  "contact__intro": {
+    "string": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, поощряют нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой для заполнения, и мы с вами свяжемся в ближайшее время."
+  },
+  "contact__lastNameLabel": {
+    "string": "Фамилия"
+  },
+  "contact__lastNamePlaceholder": {
+    "string": "Doe"
+  },
+  "contact__recipient": {
+    "string": "Тип контакта"
+  },
+  "contact__recipient-general": {
+    "string": "Общий контакт"
+  },
+  "contact__recipient-technical": {
+    "string": "Запросить поддержку"
+  },
+  "contact__recipient-testimonials": {
+    "string": "Поделиться свидетельством"
+  },
+  "contact__submitLabel": {
+    "string": "Отправить"
+  },
+  "contact__success": {
+    "string": "Успешно отправлено!"
+  },
+  "contact__testimonyLabel": {
+    "string": "Свидетельство"
+  },
+  "contact__title": {
+    "string": "Контакт"
+  },
+  "discoverCollections_presentersHeading": {
+    "string": "Выступающие"
+  },
+  "downloadAppButton__altLabel": {
+    "string": "Скачать сейчас"
+  },
+  "embed__partInfo": {
+    "string": "Часть 1 {index} из 2 {count}"
+  },
+  "give__amazonCta": {
+    "string": "Купить сейчас"
+  },
+  "give__amazonDescription": {
+    "string": "С каждой покупкой на AmazonSmile, AudioVerse получает 0.5%. {br}{br}. Как?  Просто нажмите на кнопку. {br}{br} Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе же ваш браузер по умолчанию вернется к обычному сайту Amazon."
+  },
+  "give__amazonTitle": {
+    "string": "Amazon Улыбка"
+  },
+  "give__checkDescription": {
+    "string": "Чек, пожалуйста, выписывайте на имя AudioVerse.{br}1{br}Адрес нашей электронной почты:{br}{br} AudioVerse{br} PO Box 2288{br} Collegedale, TN 37315-2288{br} USA"
+  },
+  "give__checkTitle": {
+    "string": "Проверка по почте"
+  },
+  "give__estateCta": {
+    "string": "Пожертвовать сейчас"
+  },
+  "give__estateDescription": {
+    "string": "Сегодня и завтра вы можете повлиять на AudioVerse внеся, AudioVerse в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами.{br}{br} Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, но нуждается в пользовании своими активами, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для жертвователя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим жертвователям. {br}1{br}. Если Вы желаете внести пожертвование посредством благотворительного ежегодного взноса на AudioVerse, пожалуйста, свяжитесь с ЗАФ напрямую через веб-сайт или по телефону."
+  },
+  "give__estateDisclaimer": {
+    "string": "Ежегодные благотворительные взносы НЕВОЗМОЖНЫ  для следующих штатов: Алабама, Мэриленд и Вашингтон. Для жителей Калифорнии и Иллинойса ежегодные пожертвования вносятся Конференцией тихоокеанского униона адвентистов седьмого дня. Ежегодный взнос для жителей Гавайев выплачивается Гавайской конференцией адвентистов седьмого дня; а ежегодные  благотворительные взносы в пользу AudioVerse во всех других штатах предоставляются Западным адвентистским фондом. Западный адвентистский фонд не предоставляет юридических услуг. Физическим лицам следует обращаться за помощью к собственному юристу."
+  },
+  "give__estateTitle": {
+    "string": "Помните о AudioVerse в Вашем плане наследства."
+  },
+  "give__givingAssistantCta": {
+    "string": "Купить сейчас"
+  },
+  "give__givingAssistantDescription": {
+    "string": "Пожертвуйте до 30% от закупочной цены для AudioVerse, когда осуществляете покупки в 1800+ популярных интернет-магазинах с помощью Giving Assistant! Это легко. Giving Assistant возвращает Ваши деньги, а Вы выбираете, какую долю этой суммы Вы бы хотели пожертвовать. Воспользуйтесь сейчас и получите отличные предложения такие как Macy's Coupons. Также есть отличные места, такие как Home Depot и JC Penney, где можно сэкономить!"
+  },
+  "give__givingAssistantTitle": {
+    "string": "Giving Assistant"
+  },
+  "give__heading": {
+    "string": "Пожертвовать"
+  },
+  "give__paypalCta": {
+    "string": "Пожертвовать сейчас"
+  },
+  "give__paypalDescription": {
+    "string": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение, не запрашивая комиссии за обработку. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
+  },
+  "give__paypalTitle": {
+    "string": "Фонд пожертвований PayPal"
+  },
+  "header__navItemCollections-books": {
+    "string": "Книги"
+  },
+  "header__navItemCollections-conferences": {
+    "string": "Конференции"
+  },
+  "header__navItemCollections-presenters": {
+    "string": "Выступающие"
+  },
+  "header__navItemCollections-sponsors": {
+    "string": "Спонсоры"
+  },
+  "header__navItemContact": {
+    "string": "Контакт"
+  },
+  "header__navItemContact-facebook": {
+    "string": "Facebook"
+  },
+  "header__navItemContact-general": {
+    "string": "Общий контакт"
+  },
+  "header__navItemContact-instagram": {
+    "string": "Instagram"
+  },
+  "header__navItemContact-support": {
+    "string": "Запросить поддержку"
+  },
+  "header__navItemContact-testimony": {
+    "string": "Поделиться свидетельством"
+  },
+  "header__navItemContact-twitter": {
+    "string": "Twitter"
+  },
+  "header__navItemContact-youtube": {
+    "string": "YouTube"
+  },
+  "header__navItemLibrary-history": {
+    "string": "История"
+  },
+  "header__navItemLibrary-playlists": {
+    "string": "Списки воспроизведений"
+  },
+  "header__navItemLibrary-saved": {
+    "string": "Сохранено"
+  },
+  "header__navItemPresenters": {
+    "string": "Выступающие"
+  },
+  "header__navItemStory-blog": {
+    "string": "Блог"
+  },
+  "homePage__learnStoryButtonLabel": {
+    "string": "Узнайте о нашей истории"
+  },
+  "homePage__newsletterEmail": {
+    "string": "Адрес электронной почты"
+  },
+  "homePage__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "homePage__newsletterHatTitle": {
+    "string": "Подписаться на рассылку нашего бюллетеня"
+  },
+  "homePage__newsletterName": {
+    "string": "Имя"
+  },
+  "homePage__newsletterNamePlaceholder": {
+    "string": "Джозеф Бейтс"
+  },
+  "homePage__newsletterSubscribe": {
+    "string": "Подписаться"
+  },
+  "homePage__tagline": {
+    "string": "Разумное учение"
+  },
+  "libraryHistory__loadingMore": {
+    "string": "Загрузка более..."
+  },
+  "libraryNav__contentType": {
+    "string": "Тип содержания"
+  },
+  "libraryNav__contentType-all": {
+    "string": "Все"
+  },
+  "libraryNav__contentType-audiobooks": {
+    "string": "Аудиокниги"
+  },
+  "libraryNav__contentType-conferences": {
+    "string": "Конференции"
+  },
+  "libraryNav__contentType-music": {
+    "string": "Музыка"
+  },
+  "libraryNav__contentType-people": {
+    "string": "Люди"
+  },
+  "libraryNav__contentType-series": {
+    "string": "Серия"
+  },
+  "libraryNav__contentType-sponsors": {
+    "string": "Спонсоры"
+  },
+  "libraryNav__contentType-stories": {
+    "string": "Истории"
+  },
+  "libraryNav__contentType-teachings": {
+    "string": "Поучения"
+  },
+  "libraryNav__duration": {
+    "string": "Продолжительность"
+  },
+  "libraryNav__duration-all": {
+    "string": "Все"
+  },
+  "libraryNav__duration-long": {
+    "string": "45-60 минут"
+  },
+  "libraryNav__duration-medium": {
+    "string": "30-45 минут"
+  },
+  "libraryNav__duration-short": {
+    "string": "15-30 минут"
+  },
+  "libraryNav__duration-xlong": {
+    "string": "Свыше 60 минут"
+  },
+  "libraryNav__filtersApplied": {
+    "string": "Примененные фильтры"
+  },
+  "libraryNav__mediaType": {
+    "string": "Тип носителя информации"
+  },
+  "libraryNav__mediaType-all": {
+    "string": "Все"
+  },
+  "libraryNav__mediaType-audio": {
+    "string": "Только аудио"
+  },
+  "libraryNav__mediaType-video": {
+    "string": "Видео"
+  },
+  "libraryNav__playbackStatus": {
+    "string": "Статус воспроизведения"
+  },
+  "libraryNav__playbackStatus-all": {
+    "string": "Все"
+  },
+  "libraryNav__playbackStatus-finished": {
+    "string": "Завершено"
+  },
+  "libraryNav__playbackStatus-started": {
+    "string": "Начатые"
+  },
+  "libraryNav__playbackStatus-unstarted": {
+    "string": "Не запущенный "
+  },
+  "libraryNav__playlists": {
+    "string": "Списки воспроизведений"
+  },
+  "libraryNav__saved": {
+    "string": "Сохранено"
+  },
+  "libraryNav__sort": {
+    "string": "Сортировать"
+  },
+  "library__noMatchingCopy": {
+    "string": "Добавить в закладки файлы или слушать файлы на странице Discover."
+  },
+  "library__noMatchingHeading": {
+    "string": "У Вас еще нет ни одного сохраненного подходящего файла."
+  },
+  "molecule-buttonGuest__downloadQuality": {
+    "string": "Настройка качества скачивания"
+  },
+  "molecule-buttonGuest__saving": {
+    "string": "Сохранить в библиотеку"
+  },
+  "molecule-buttonGuest__syncing": {
+    "string": "Синхронизация между Вашими устройствами"
+  },
+  "molecule-buttonShare__copied": {
+    "string": "Скопировано!"
+  },
+  "songsBooksDetail__contributors": {
+    "string": "Различные участники"
+  },
+  "songsBooksDetail__numSongs": {
+    "string": "{count} песня"
+  },
+  "songsListPage__intro": {
+    "string": "Слушать Слово Божье в музыкальной форме - отличный способ запомнить тексты Писания. Слушать по альбомам или по книгам Библии."
+  },
+  "songsListPage__tabAlbums": {
+    "string": "Альбомы"
+  },
+  "songsListPage__tabPassage": {
+    "string": "Текст"
+  },
+  "songsListPage__title": {
+    "string": "Песни из Писания"
+  },
+  "testimonies__seeAll": {
+    "string": "Просмотреть все свидетельства"
+  },
+  "testimonies__submitTestimony": {
+    "string": "Представить свидетельство"
+  },
+  "time__hoursMinutesAndSeconds": {
+    "comment": "time hours, minutes and seconds",
+    "string": "{h}:{m}:{s} "
   }
 }
