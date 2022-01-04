@@ -34,7 +34,7 @@ export async function getServerSideProps({
 	if (res) {
 		res.setHeader('Content-Type', 'text/xml');
 
-		const feed = generateFeed(
+		const feed = await generateFeed(
 			languageRoute,
 			{
 				link: collection.canonicalUrl,

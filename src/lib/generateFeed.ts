@@ -56,6 +56,17 @@ export async function generateFeed(
 	if (subtitle) {
 		feed.addExtra('itunes:subtitle', subtitle);
 	}
+
+	// Hackfix for opting-out restricted podcasts from Google
+	if (
+		title.includes('Discovery Mountain') ||
+		(recordings.length &&
+			recordings[0].sponsor?.title.includes('Starting with Jesus')) ||
+		title === 'Sermons by John Bradshaw'
+	) {
+		feed.addExtra('googleplay:block', 'yes');
+	}
+
 	feed.addExtra('language', languageRoute);
 	feed.addExtra('itunes:explicit', 'no');
 	feed.addExtra('itunes:author', 'AudioVerse');
