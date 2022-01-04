@@ -19,7 +19,7 @@ function loadData() {
 	when(mockedFetchApi)
 		.calledWith(GetCollectionListPageDataDocument, expect.anything())
 		.mockResolvedValue({
-			collections: {
+			conferences: {
 				nodes: [
 					{
 						id: 'the_conference_id',
@@ -69,7 +69,7 @@ describe('conference list page', () => {
 		when(mockedFetchApi)
 			.calledWith(GetCollectionListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
-				collections: {
+				conferences: {
 					aggregate: {
 						count: 1,
 					},

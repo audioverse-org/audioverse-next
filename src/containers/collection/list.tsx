@@ -13,7 +13,7 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 export type CollectionListProps = PaginatedProps<
-	NonNullable<GetCollectionListPageDataQuery['collections']['nodes']>[0],
+	NonNullable<GetCollectionListPageDataQuery['conferences']['nodes']>[0],
 	GetCollectionListPageDataQuery
 >;
 
