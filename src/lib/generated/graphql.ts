@@ -8016,7 +8016,7 @@ export type GetCollectionListPageDataQueryVariables = Exact<{
 
 export type GetCollectionListPageDataQuery = {
 	__typename?: 'Query';
-	collections: {
+	conferences: {
 		__typename?: 'CollectionConnection';
 		nodes:
 			| Array<{
@@ -8059,7 +8059,7 @@ export type GetCollectionListPathsDataQueryVariables = Exact<{
 
 export type GetCollectionListPathsDataQuery = {
 	__typename?: 'Query';
-	collections: {
+	conferences: {
 		__typename?: 'CollectionConnection';
 		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
@@ -14890,7 +14890,7 @@ export const useGetCollectionDetailPathsDataQuery = <
 		options
 	);
 export const GetCollectionListPageDataDocument = `
-query getCollectionListPageData($language:Language!$offset:Int$first:Int){collections(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+query getCollectionListPageData($language:Language!$offset:Int$first:Int){conferences(language:$language offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
 ${CardCollectionFragmentDoc}`;
 export const useGetCollectionListPageDataQuery = <
 	TData = GetCollectionListPageDataQuery,
@@ -14908,7 +14908,7 @@ export const useGetCollectionListPageDataQuery = <
 		options
 	);
 export const GetCollectionListPathsDataDocument = `
-query getCollectionListPathsData($language:Language!){collections(language:$language){aggregate{count}}}
+query getCollectionListPathsData($language:Language!){conferences(language:$language){aggregate{count}}}
 `;
 export const useGetCollectionListPathsDataQuery = <
 	TData = GetCollectionListPathsDataQuery,
