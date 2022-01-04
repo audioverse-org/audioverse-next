@@ -24,7 +24,7 @@ export function setSessionToken(token: string): void {
 }
 
 export function setLanguageId(lang: string): void {
-	JSCookie.set(LANGUAGE_KEY, lang);
+	JSCookie.set(LANGUAGE_KEY, lang, { expires: 365 });
 }
 
 export function clearSessionToken(): void {
