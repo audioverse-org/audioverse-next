@@ -303,10 +303,28 @@
       "value": " read"
     }
   ],
-  "buttonShare__emailSubject": [
+  "buttonShareRecording__emailSubject": [
+    {
+      "type": 1,
+      "value": "title"
+    },
     {
       "type": 0,
-      "value": "Enjoy this blessing"
+      "value": " by "
+    },
+    {
+      "type": 1,
+      "value": "presenters"
+    }
+  ],
+  "buttonShare__emailSubjectSuffix": [
+    {
+      "type": 1,
+      "value": "subject"
+    },
+    {
+      "type": 0,
+      "value": " on AudioVerse"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -657,12 +675,6 @@
       "value": "All Conferences"
     }
   ],
-  "contact__bodyLabel": [
-    {
-      "type": 0,
-      "value": "Body"
-    }
-  ],
   "contact__emailLabel": [
     {
       "type": 0,
@@ -705,6 +717,18 @@
       "value": "Doe"
     }
   ],
+  "contact__messageLabel": [
+    {
+      "type": 0,
+      "value": "Message"
+    }
+  ],
+  "contact__messageSubmitted": [
+    {
+      "type": 0,
+      "value": "Your message has been submitted."
+    }
+  ],
   "contact__recipient": [
     {
       "type": 0,
@@ -735,16 +759,10 @@
       "value": "Submit"
     }
   ],
-  "contact__success": [
+  "contact__thankYou": [
     {
       "type": 0,
-      "value": "Successfully submitted!"
-    }
-  ],
-  "contact__testimonyLabel": [
-    {
-      "type": 0,
-      "value": "Testimony"
+      "value": "Thank you!"
     }
   ],
   "contact__title": [
@@ -1341,6 +1359,12 @@
       "value": "More"
     }
   ],
+  "header__navItemMore-ju": [
+    {
+      "type": 0,
+      "value": "Journeys Unscripted"
+    }
+  ],
   "header__navItemMore-legal": [
     {
       "type": 0,
@@ -1351,6 +1375,18 @@
     {
       "type": 0,
       "value": "Privacy"
+    }
+  ],
+  "header__navItemMore-store": [
+    {
+      "type": 0,
+      "value": "AudioVerse Store"
+    }
+  ],
+  "header__navItemMore-swj": [
+    {
+      "type": 0,
+      "value": "Starting With Jesus"
     }
   ],
   "header__navItemMore-terms": [
@@ -2889,6 +2925,24 @@
     {
       "type": 0,
       "value": "Sign up"
+    }
+  ],
+  "release__messageSubmitted": [
+    {
+      "type": 0,
+      "value": "Your form has been submitted."
+    }
+  ],
+  "release__thankYou": [
+    {
+      "type": 0,
+      "value": "Thank you!"
+    }
+  ],
+  "release__title": [
+    {
+      "type": 0,
+      "value": "Media Release Agreement"
     }
   ],
   "reset__confirmPasswordLabel": [

@@ -1,6 +1,5 @@
-import { LANGUAGES } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import { LANGUAGES, SupportedLanguages } from '@lib/constants';
 
-export default function getLanguageIds(): Language[] {
-	return Object.keys(LANGUAGES) as Language[];
+export default function getLanguageIds(): SupportedLanguages[] {
+	return Object.keys(LANGUAGES) as SupportedLanguages[];
 }

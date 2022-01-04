@@ -161,8 +161,11 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} read"
   },
-  "buttonShare__emailSubject": {
-    "string": "Enjoy this blessing"
+  "buttonShareRecording__emailSubject": {
+    "string": "{title} by {presenters}"
+  },
+  "buttonShare__emailSubjectSuffix": {
+    "string": "{subject} on AudioVerse"
   },
   "cardAudiobookTrack_readByLabel": {
     "string": "Read by {name}"
@@ -325,9 +328,6 @@
   "conferenceListPage__title": {
     "string": "All Conferences"
   },
-  "contact__bodyLabel": {
-    "string": "Body"
-  },
   "contact__emailLabel": {
     "string": "Email address"
   },
@@ -349,6 +349,12 @@
   "contact__lastNamePlaceholder": {
     "string": "Doe"
   },
+  "contact__messageLabel": {
+    "string": "Message"
+  },
+  "contact__messageSubmitted": {
+    "string": "Your message has been submitted."
+  },
   "contact__recipient": {
     "string": "Contact Type"
   },
@@ -364,11 +370,8 @@
   "contact__submitLabel": {
     "string": "Submit"
   },
-  "contact__success": {
-    "string": "Successfully submitted!"
-  },
-  "contact__testimonyLabel": {
-    "string": "Testimony"
+  "contact__thankYou": {
+    "string": "Thank you!"
   },
   "contact__title": {
     "string": "Contact"
@@ -601,11 +604,20 @@
     "comment": "Header nav link name: More",
     "string": "More"
   },
+  "header__navItemMore-ju": {
+    "string": "Journeys Unscripted"
+  },
   "header__navItemMore-legal": {
     "string": "Legal"
   },
   "header__navItemMore-privacy": {
     "string": "Privacy"
+  },
+  "header__navItemMore-store": {
+    "string": "AudioVerse Store"
+  },
+  "header__navItemMore-swj": {
+    "string": "Starting With Jesus"
   },
   "header__navItemMore-terms": {
     "string": "Terms of Use"
@@ -1395,6 +1407,15 @@
   },
   "register__submitButton": {
     "string": "Sign up"
+  },
+  "release__messageSubmitted": {
+    "string": "Your form has been submitted."
+  },
+  "release__thankYou": {
+    "string": "Thank you!"
+  },
+  "release__title": {
+    "string": "Media Release Agreement"
   },
   "reset__confirmPasswordLabel": {
     "string": "Confirm new password"

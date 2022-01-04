@@ -2,11 +2,16 @@ import flatten from 'lodash/flatten';
 import values from 'lodash/values';
 import { GetStaticPathsResult } from 'next';
 
-import { DETAIL_PRERENDER_LIMIT, LANGUAGES } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import {
+	DETAIL_PRERENDER_LIMIT,
+	LANGUAGES,
+	SupportedLanguages,
+} from '@lib/constants';
+
+import { Language } from './generated/graphql';
 
 type Getter<DATA> = (variables: {
-	language: Language;
+	language: SupportedLanguages;
 	first: number;
 }) => Promise<DATA>;
 
@@ -15,9 +20,11 @@ export async function getDetailStaticPaths<DATA, NODE>(
 	parseNodes: (data: DATA) => NODE[] | null | undefined,
 	pathMapper: (languageRoute: string, node: NODE) => string
 ): Promise<GetStaticPathsResult> {
-	const languages = values(Language);
+	const languages = values(Language).filter(
+		(l) => l !== Language.Nordic
+	) as SupportedLanguages[];
 
-	const pathSetPromises = languages.map(async (l: Language) => {
+	const pathSetPromises = languages.map(async (l) => {
 		const data = await getter({
 			language: l,
 			first: DETAIL_PRERENDER_LIMIT,

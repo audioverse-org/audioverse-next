@@ -7,8 +7,10 @@ export interface LanguageConfiguration {
 	display_name: string;
 }
 
+export type SupportedLanguages = Exclude<Language, 'NORDIC'>;
+
 export type LanguageConfigurations = {
-	[key in Language]: LanguageConfiguration;
+	[key in SupportedLanguages]: LanguageConfiguration;
 };
 
 export const LANGUAGES: LanguageConfigurations = {
@@ -18,7 +20,6 @@ export const LANGUAGES: LanguageConfigurations = {
 	GERMAN: { base_url: 'de', display_name: 'Deutsch' },
 	CHINESE: { base_url: 'zh', display_name: '中文' },
 	JAPANESE: { base_url: 'ja', display_name: '日本語' },
-	NORDIC: { base_url: 'no', display_name: 'Scandinavia' },
 	RUSSIAN: { base_url: 'ru', display_name: 'Русский' },
 };
 
