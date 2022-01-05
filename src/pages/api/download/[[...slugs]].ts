@@ -4,7 +4,9 @@ import forge from 'node-forge';
 import { getSessionToken } from '@lib/cookies';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-	const path = (req.query.slugs as string[]).join('/');
+	const path = (req.query.slugs as string[])
+		.map((s) => encodeURIComponent(s))
+		.join('/');
 	const sessionCookie = getSessionToken(req);
 	res.redirect(
 		`${
