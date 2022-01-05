@@ -37,7 +37,6 @@ function Sponsors({
 		url: makeSponsorListRoute(language, letter),
 	}));
 
-	let currentFirstLetter = '';
 	return (
 		<>
 			<ButtonBack
@@ -51,34 +50,21 @@ function Sponsors({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			<div>
-				{sponsors.map(({ canonicalPath, image, title }) => {
-					const nodeFirstLetter = title.substring(0, 1);
-					const letterHeading =
-						currentFirstLetter !== nodeFirstLetter ? (
-							<Heading2>{nodeFirstLetter}</Heading2>
-						) : null;
-					currentFirstLetter = nodeFirstLetter;
-
-					return (
-						<React.Fragment key={canonicalPath}>
-							{letterHeading}
-							<Card className={styles.card}>
-								<Link href={canonicalPath}>
-									<a className={styles.container}>
-										{image && (
-											<div className={styles.image}>
-												<RoundImage image={image.url} />
-											</div>
-										)}
-										<span className={styles.sponsorName}>{title}</span>
-									</a>
-								</Link>
-							</Card>
-						</React.Fragment>
-					);
-				})}
-			</div>
+			<Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
+			{sponsors.map(({ canonicalPath, image, title }) => (
+				<Card className={styles.card} key={canonicalPath}>
+					<Link href={canonicalPath}>
+						<a className={styles.container}>
+							{image && (
+								<div className={styles.image}>
+									<RoundImage image={image.url} />
+								</div>
+							)}
+							<span className={styles.sponsorName}>{title}</span>
+						</a>
+					</Link>
+				</Card>
+			))}
 		</>
 	);
 }
