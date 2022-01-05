@@ -9,8 +9,6 @@ module.exports = withBundleAnalyzer(
 	withPWA({
 		pwa: {
 			dest: 'public',
-			// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
-			buildExcludes: [/middleware-manifest\.json$/],
 		},
 		headers: [
 			{
