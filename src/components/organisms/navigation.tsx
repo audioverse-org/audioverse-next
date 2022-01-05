@@ -12,6 +12,7 @@ import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
+import { getSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
@@ -36,7 +37,14 @@ const Navigation = ({
 	const intl = useIntl();
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
-	const authResult = useGetWithAuthGuardDataQuery({}, { retry: false });
+	const sessionToken = getSessionToken();
+	const authResult = useGetWithAuthGuardDataQuery(
+		{},
+		{
+			enabled: !!sessionToken,
+			retry: false,
+		}
+	);
 	const user = authResult.data?.me?.user;
 
 	const iconSize = 24;
