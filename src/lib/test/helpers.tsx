@@ -8,6 +8,7 @@ import {
 	RenderResult,
 } from '@testing-library/react';
 import { when } from 'jest-when';
+import Cookie from 'js-cookie';
 import defaultsDeep from 'lodash/defaultsDeep';
 import set from 'lodash/set';
 import { GetServerSidePropsResult, GetStaticProps } from 'next';
@@ -44,6 +45,8 @@ export function loadRouter(router_: Partial<NextRouter>): void {
 }
 
 export function loadAuthGuardData(email: any = 'the_email'): void {
+	Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+
 	when(mockedFetchApi)
 		.calledWith(GetWithAuthGuardDataDocument, expect.anything())
 		.mockResolvedValue({

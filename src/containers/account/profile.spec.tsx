@@ -1,6 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import Cookie from 'js-cookie';
 import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
 import React from 'react';
@@ -25,6 +26,7 @@ import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 import resetAllMocks = jest.resetAllMocks;
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');
+jest.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
 
@@ -63,7 +65,10 @@ function loadData() {
 }
 
 describe('profile page', () => {
-	beforeEach(() => resetAllMocks());
+	beforeEach(() => {
+		resetAllMocks();
+		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+	});
 
 	it('dehydrates user', async () => {
 		mockedFetchApi.mockResolvedValue({
@@ -195,6 +200,8 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
+		Cookie.get = jest.fn().mockReturnValue({});
+
 		await renderWithIntl(<Profile />);
 
 		expect(mockedFetchApi).not.toBeCalledWith(

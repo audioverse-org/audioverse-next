@@ -1,6 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import Cookies from 'js-cookie';
 import React from 'react';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
@@ -39,6 +40,8 @@ describe('withAuthGuard', () => {
 	});
 
 	it('displays content on successful social login', async () => {
+		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+
 		const { getByText, queryByText } = await render();
 
 		expect(queryByText('hello world')).not.toBeInTheDocument();

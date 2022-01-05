@@ -1,5 +1,6 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Cookies from 'js-cookie';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
@@ -109,6 +110,8 @@ describe('playlists page', () => {
 	});
 
 	it('prompts for login if user not logged in', async () => {
+		Cookies.get = jest.fn().mockReturnValue({});
+
 		const { getByPlaceholderText } = await renderPage();
 
 		await waitFor(() => {

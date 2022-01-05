@@ -953,6 +953,12 @@
   "logout__inProcess": {
     "string": "Logging out..."
   },
+  "mediaFormatSwitcher__audio": {
+    "string": "Audio"
+  },
+  "mediaFormatSwitcher__video": {
+    "string": "Video"
+  },
   "molecule-buttonDownload__buttonLabel": {
     "comment": "download button label",
     "string": "downloads"
