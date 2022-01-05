@@ -10,7 +10,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import videojs from 'video.js';
+import * as videojs from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -26,7 +26,7 @@ import {
 	setPlayerMock,
 } from '@lib/test/helpers';
 
-jest.mock('video.js');
+jest.mock('video.js', () => ({ default: 'z' }));
 jest.mock('@lib/api/recordingIsFavorited');
 
 const recording: Partial<PlayerFragment> = {

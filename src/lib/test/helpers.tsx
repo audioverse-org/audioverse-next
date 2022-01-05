@@ -325,7 +325,9 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		...functions,
 	};
 
-	mockVideojs.mockReturnValue(mockPlayer);
+	jest.mock('video.js', () => ({ default: mockPlayer }));
+
+	// mockVideojs.mockReturnValue(mockPlayer);
 
 	return mockPlayer;
 }
