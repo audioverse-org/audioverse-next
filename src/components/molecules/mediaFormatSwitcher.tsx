@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
@@ -22,14 +23,20 @@ export default function MediaFormatSwitcher({
 				onClick={() => session.setPrefersAudio(true)}
 				aria-pressed={session.prefersAudio}
 			>
-				Audio
+				<FormattedMessage
+					id="mediaFormatSwitcher__audio"
+					defaultMessage="Audio"
+				/>
 			</button>
 			<button
 				className={styles.button}
 				onClick={() => session.setPrefersAudio(false)}
 				aria-pressed={!session.prefersAudio}
 			>
-				Video
+				<FormattedMessage
+					id="mediaFormatSwitcher__video"
+					defaultMessage="Video"
+				/>
 			</button>
 		</div>
 	);

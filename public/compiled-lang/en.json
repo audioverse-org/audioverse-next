@@ -2033,6 +2033,18 @@
       "value": "Logging out..."
     }
   ],
+  "mediaFormatSwitcher__audio": [
+    {
+      "type": 0,
+      "value": "Audio"
+    }
+  ],
+  "mediaFormatSwitcher__video": [
+    {
+      "type": 0,
+      "value": "Video"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,
