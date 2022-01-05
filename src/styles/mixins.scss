@@ -1,0 +1,7 @@
+@mixin sansFontFamily {
+	font-family: 'Inter', 'system-ui', sans-serif;
+
+	@supports (font-variation-settings: normal) {
+		font-family: 'Inter var', 'system-ui', sans-serif;
+	}
+}

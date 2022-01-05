@@ -1,3 +1,5 @@
+@use '../../styles/mixins.scss';
+
 @import '../../styles/common';
 
 .base {
@@ -7,7 +9,7 @@
 }
 
 .sans {
-	font-family: $sans;
+	@include mixins.sansFontFamily();
 }
 
 .unpadded {
