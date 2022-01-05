@@ -432,7 +432,7 @@ describe('localization usage', () => {
 			/>
 		);
 
-		expectNoUnlocalizedText(screen);
+		expectNoUnlocalizedText(screen, ['Z']);
 	});
 
 	it('localizes presenter recordings page', async () => {

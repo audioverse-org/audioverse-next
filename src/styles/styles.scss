@@ -1,3 +1,5 @@
+@use 'mixins.scss';
+
 @import 'inter.scss';
 
 // START normalize.css
@@ -9,13 +11,7 @@
 @import './common.scss';
 
 html {
-	font-family: $sans;
-}
-
-@supports (font-variation-settings: normal) {
-	html {
-		font-family: 'Inter var', 'system-ui', sans-serif;
-	}
+	@include mixins.sansFontFamily();
 }
 
 * {

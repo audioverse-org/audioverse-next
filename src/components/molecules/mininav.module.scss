@@ -1,3 +1,5 @@
+@use '../../styles/mixins.scss';
+
 @import '../../styles/common';
 
 .button {
@@ -7,7 +9,7 @@
 	border: none;
 	background: none;
 	color: $ts-dark;
-	font-family: $sans;
+	@include mixins.sansFontFamily();
 	font-weight: 700;
 	font-size: 11px;
 	line-height: 13.31px;

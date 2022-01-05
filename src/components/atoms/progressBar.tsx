@@ -39,7 +39,7 @@ export default function ProgressBar({
 					defaultMessage: 'progress',
 					description: 'progress bar label',
 				})}
-				readOnly={true}
+				readOnly={!setProgress}
 				onChange={(e) =>
 					setProgress && setProgress(parseInt(e.target.value) / 100)
 				}

@@ -36,7 +36,6 @@ function Presenters({
 		url: makePresenterListRoute(language, letter),
 	}));
 
-	let currentFirstLetter = '';
 	return (
 		<>
 			<ButtonBack
@@ -50,49 +49,34 @@ function Presenters({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			<div>
-				{persons.map(
-					({ canonicalPath, image, givenName, surname, summary }) => {
-						const nodeFirstLetter = surname.substring(0, 1);
-						const letterHeading =
-							currentFirstLetter !== nodeFirstLetter ? (
-								<Heading2>{nodeFirstLetter}</Heading2>
-							) : null;
-						currentFirstLetter = nodeFirstLetter;
-
-						return (
-							<React.Fragment key={canonicalPath}>
-								{letterHeading}
-								<Card className={styles.card}>
-									<Link href={canonicalPath}>
-										<a className={styles.container}>
-											<div className={styles.nameLockup}>
-												{image && (
-													<div className={styles.image}>
-														<RoundImage
-															image={image.url}
-															alt={`${surname}, ${givenName}`}
-														/>
-													</div>
-												)}
-												<span className={styles.name}>
-													{surname}, {givenName}
-												</span>
-											</div>
-											{summary && (
-												<span
-													className={styles.summary}
-													dangerouslySetInnerHTML={{ __html: summary }}
-												/>
-											)}
-										</a>
-									</Link>
-								</Card>
-							</React.Fragment>
-						);
-					}
-				)}
-			</div>
+			<Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2>
+			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
+				<Card className={styles.card} key={canonicalPath}>
+					<Link href={canonicalPath}>
+						<a className={styles.container}>
+							<div className={styles.nameLockup}>
+								{image && (
+									<div className={styles.image}>
+										<RoundImage
+											image={image.url}
+											alt={`${surname}, ${givenName}`}
+										/>
+									</div>
+								)}
+								<span className={styles.name}>
+									{surname}, {givenName}
+								</span>
+							</div>
+							{summary && (
+								<span
+									className={styles.summary}
+									dangerouslySetInnerHTML={{ __html: summary }}
+								/>
+							)}
+						</a>
+					</Link>
+				</Card>
+			))}
 		</>
 	);
 }
