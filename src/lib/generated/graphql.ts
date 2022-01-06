@@ -7272,11 +7272,12 @@ export type GetAudiobookFeedDataQueryVariables = Exact<{
 
 export type GetAudiobookFeedDataQuery = {
 	__typename?: 'Query';
-	audiobook:
+	sequence:
 		| {
 				__typename?: 'Sequence';
 				id: string | number;
 				title: string;
+				contentType: SequenceContentType;
 				canonicalUrl: string;
 				language: Language;
 				image: { __typename?: 'Image'; url: string } | null | undefined;
@@ -14623,7 +14624,7 @@ export const useGetAudiobookDetailPageDataQuery = <
 		options
 	);
 export const GetAudiobookFeedDataDocument = `
-query getAudiobookFeedData($id:ID!){audiobook(id:$id){id title image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}...bookFeedDescription}}
+query getAudiobookFeedData($id:ID!){sequence(id:$id){id title contentType image{url(size:600)}canonicalUrl(useFuturePath:true)language recordings(first:25){nodes{...generateFeed}}...bookFeedDescription}}
 ${GenerateFeedFragmentDoc}
 ${BookFeedDescriptionFragmentDoc}`;
 export const useGetAudiobookFeedDataQuery = <

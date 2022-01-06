@@ -4,6 +4,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import {
 	BookFeedDescriptionFragment,
 	getAudiobookFeedData,
+	SequenceContentType,
 } from '@lib/generated/graphql';
 import { generateFeed } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
@@ -51,12 +52,17 @@ export async function getServerSideProps({
 	const id = params?.id as string;
 	const languageRoute = params?.language as string;
 
-	const { audiobook: sequence } = await getAudiobookFeedData({
+	const { sequence } = await getAudiobookFeedData({
 		id,
 	}).catch(() => ({
-		audiobook: null,
+		sequence: null,
 	}));
-	if (!sequence || sequence.language !== getLanguageIdByRoute(languageRoute)) {
+	if (
+		!sequence ||
+		sequence.language !== getLanguageIdByRoute(languageRoute) ||
+		(sequence.contentType !== SequenceContentType.Audiobook &&
+			sequence.contentType !== SequenceContentType.StorySeason)
+	) {
 		return {
 			notFound: true,
 		};
