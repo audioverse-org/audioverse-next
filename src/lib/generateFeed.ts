@@ -3,6 +3,7 @@ import { Feed } from 'feed';
 // Using https://github.com/jpmonette/feed/pull/126
 import { ExtraItem } from 'feed/lib/typings';
 import he from 'he';
+import { GetServerSidePropsContext } from 'next';
 import striptags from 'striptags';
 
 import {
@@ -11,6 +12,11 @@ import {
 } from '@lib/generated/graphql';
 
 import getIntl from './getIntl';
+
+export const sendRSSHeaders = (res: GetServerSidePropsContext['res']) => {
+	res.setHeader('Content-Type', 'text/xml');
+	res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
+};
 
 export async function generateFeed(
 	languageRoute: string,

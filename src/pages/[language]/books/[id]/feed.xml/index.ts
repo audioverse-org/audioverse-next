@@ -6,7 +6,7 @@ import {
 	getAudiobookFeedData,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { generateFeed } from '@lib/generateFeed';
+import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
@@ -69,7 +69,7 @@ export async function getServerSideProps({
 	}
 
 	if (res) {
-		res.setHeader('Content-Type', 'text/xml');
+		sendRSSHeaders(res);
 
 		const feed = await generateFeed(
 			languageRoute,
