@@ -13,10 +13,7 @@ function withAuthGuard<P>(
 		const sessionToken = getSessionToken(getCurrentRequest());
 		const { data, isLoading } = useGetWithAuthGuardDataQuery(
 			{},
-			{
-				enabled: !!sessionToken,
-				retry: false,
-			}
+			{ retry: false }
 		);
 		const isUserLoggedIn = !!data?.me?.user.email;
 
