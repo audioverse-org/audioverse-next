@@ -28,6 +28,7 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/fa-bell.svg';
+import ImagePlayers from '../../public/img/players.jpeg';
 
 import styles from './home.module.scss';
 
@@ -270,7 +271,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</>
 					}
 					media={
-						<Image src="/img/players.jpeg" layout="fill" objectFit="cover" />
+						<Image
+							src={ImagePlayers}
+							layout="fill"
+							objectFit="cover"
+							sizes="(max-width: 664px) 100vw, 50vw"
+						/>
 					}
 					theme={BaseColors.CREAM}
 					reverse
