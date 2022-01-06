@@ -7,9 +7,10 @@ query getAudiobookDetailPageData($id: ID!) {
 }
 
 query getAudiobookFeedData($id: ID!) {
-	audiobook(id: $id) {
+	sequence(id: $id) {
 		id
 		title
+		contentType
 		image {
 			url(size: 600)
 		}

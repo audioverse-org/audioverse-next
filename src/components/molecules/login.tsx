@@ -3,6 +3,7 @@ import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
+import Alert from '@components/atoms/alert';
 import SocialLogin from '@components/molecules/socialLogin';
 import Modal from '@components/organisms/modal';
 import AndOnboarding from '@components/templates/andOnboarding';
@@ -60,8 +61,12 @@ export default function Login(): JSX.Element {
 	const onSubmit = async (e: FormEvent<HTMLElement>) => {
 		e.preventDefault();
 		try {
-			await login(email, password);
-			await queryClient.invalidateQueries();
+			const success = await login(email, password);
+			if (success) {
+				await queryClient.invalidateQueries();
+			} else {
+				setErrors(['Login failed']);
+			}
 		} catch (e) {
 			setErrors(['Login failed']);
 		}
@@ -77,11 +82,11 @@ export default function Login(): JSX.Element {
 
 			<form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
 				{!!errors.length && (
-					<ul>
+					<Alert className={styles.errorAlert}>
 						{errors.map((e) => (
-							<li key={e}>{e}</li>
+							<div key={e}>{e}</div>
 						))}
-					</ul>
+					</Alert>
 				)}
 				{successMessage && <p>{successMessage}</p>}
 

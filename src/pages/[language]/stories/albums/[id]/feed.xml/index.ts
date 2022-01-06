@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getStoryAlbumFeedData } from '@lib/generated/graphql';
-import { generateFeed } from '@lib/generateFeed';
+import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { formatBooksDescription } from '@pages/[language]/books/[id]/feed.xml';
 
@@ -28,7 +28,7 @@ export async function getServerSideProps({
 	}
 
 	if (res) {
-		res.setHeader('Content-Type', 'text/xml');
+		sendRSSHeaders(res);
 
 		const feed = await generateFeed(
 			languageRoute,

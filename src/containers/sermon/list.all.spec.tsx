@@ -205,7 +205,7 @@ describe('sermons list page', () => {
 			params: { i: '2', language: 'en' },
 		})) as any;
 
-		expect(props.revalidate).toBe(900);
+		expect(props.revalidate).toBe(14400);
 	});
 
 	it('links All button', async () => {

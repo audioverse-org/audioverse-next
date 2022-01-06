@@ -65,7 +65,7 @@ describe('testimonies pages', () => {
 			params: { i: '1', language: 'en' },
 		})) as any;
 
-		expect(revalidate).toBe(900);
+		expect(revalidate).toBe(14400);
 	});
 
 	it('gets testimony count', async () => {

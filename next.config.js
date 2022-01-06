@@ -110,6 +110,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/sermons/presenters/podcast/:presenterId/latest/:slug',
+					destination: '/en/presenters/:presenterId/feed.xml',
+					permanent: false,
+				},
+				{
 					source: '/:lang/account',
 					destination: '/:lang/account/login',
 					permanent: true,
