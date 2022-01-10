@@ -192,7 +192,7 @@
   },
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
-    "string": "Sponsor"
+    "string": "Collaborateur"
   },
   "cardStory_sequenceLabel": {
     "string": "Histoires"
@@ -239,7 +239,7 @@
     "string": "Enseignements individuels"
   },
   "collectionPresenterssDetail__heading": {
-    "string": "Tous les orateurs"
+    "string": "Présentateurs"
   },
   "collectionSequencesDetail__heading": {
     "string": "Toutes les séries"
@@ -288,7 +288,7 @@
     "string": "Orateurs"
   },
   "discoverCollections_sponsorsHeading": {
-    "string": "Sponsors"
+    "string": "Collaborateurs"
   },
   "discoverCollections_storiesHeading": {
     "string": "Histoires"
@@ -728,7 +728,7 @@
     "string": "E-mail"
   },
   "loginForm__emailPlaceholder": {
-    "string": "jeanne@exemple.com"
+    "string": "jean@exemple.com"
   },
   "loginForm__forgotPasswordButton": {
     "comment": "login form forgot password button",
@@ -1137,7 +1137,7 @@
     "string": "Les sermons de {name}"
   },
   "presentersList__title": {
-    "string": "Tous les orateurs"
+    "string": "Présentateurs"
   },
   "profile__buttonLabelDeleteAccount": {
     "string": "Supprimer le compte"
@@ -1174,7 +1174,7 @@
     "string": "E-mail"
   },
   "register__emailPlaceholder": {
-    "string": "jeanne@exemple.com"
+    "string": "jean@exemple.com"
   },
   "register__firstNameLabel": {
     "string": "Prénom"
@@ -1839,7 +1839,7 @@
     "string": "Adresse e-mail"
   },
   "contact__emailPlaceholder": {
-    "string": "jeanne@exemple.com"
+    "string": "jean@exemple.com"
   },
   "contact__firstNameLabel": {
     "string": "Prénom"

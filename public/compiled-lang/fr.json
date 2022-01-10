@@ -526,7 +526,7 @@
   "cardSponsor_hatTitle": [
     {
       "type": 0,
-      "value": "Sponsor"
+      "value": "Collaborateur"
     }
   ],
   "cardStory_sequenceLabel": [
@@ -630,7 +630,7 @@
   "collectionPresenterssDetail__heading": [
     {
       "type": 0,
-      "value": "Tous les orateurs"
+      "value": "Présentateurs"
     }
   ],
   "collectionSequencesDetail__heading": [
@@ -690,7 +690,7 @@
   "contact__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jeanne@exemple.com"
+      "value": "jean@exemple.com"
     }
   ],
   "contact__firstNameLabel": [
@@ -846,7 +846,7 @@
   "discoverCollections_sponsorsHeading": [
     {
       "type": 0,
-      "value": "Sponsors"
+      "value": "Collaborateurs"
     }
   ],
   "discoverCollections_storiesHeading": [
@@ -2254,7 +2254,7 @@
   "loginForm__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jeanne@exemple.com"
+      "value": "jean@exemple.com"
     }
   ],
   "loginForm__forgotPasswordButton": [
@@ -3082,7 +3082,7 @@
   "presentersList__title": [
     {
       "type": 0,
-      "value": "Tous les orateurs"
+      "value": "Présentateurs"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -3148,7 +3148,7 @@
   "register__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jeanne@exemple.com"
+      "value": "jean@exemple.com"
     }
   ],
   "register__firstNameLabel": [
