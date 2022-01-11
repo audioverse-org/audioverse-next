@@ -47,8 +47,9 @@
 			}
 		}
 	}
-	:global(.video-js.vjs-fluid) {
+	:global(.video-js) {
 		// handle responsive manually
+		width: auto;
 		height: $miniplayer-height;
 		padding-top: 0;
 	}

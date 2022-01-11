@@ -5,12 +5,15 @@
 	width: 100%;
 	padding-top: 55.95%;
 	background: $ts-dark;
-	> * {
+	> div,
+	:global(.video-js) {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
+		width: 100%;
+		height: 100%;
 	}
 }
 
