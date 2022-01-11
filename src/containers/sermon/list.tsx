@@ -80,7 +80,7 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 								<a
 									className={clsx(
 										styles.segmentedControl,
-										filter === 'filter' && styles.segmentedControlActive
+										filter === 'video' && styles.segmentedControlActive
 									)}
 								>
 									<FormattedMessage
