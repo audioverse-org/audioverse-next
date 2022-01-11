@@ -5,8 +5,7 @@
 	width: 100%;
 	padding-top: 55.95%;
 	background: $ts-dark;
-	> div,
-	> div > button > div > div > div {
+	> div, :global(.video-js) {
 		position: absolute;
 		top: 0;
 		left: 0;
