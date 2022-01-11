@@ -53,7 +53,7 @@ export default function AndMiniplayer({
 			>
 				{children}
 			</div>
-			{recording && <LazyMiniplayer />}
+			<LazyMiniplayer />
 		</>
 	);
 }
