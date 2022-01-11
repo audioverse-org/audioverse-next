@@ -6,7 +6,7 @@ import {
 
 import Book, { BookProps } from '@containers/bible/book';
 import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { makeBibleBookRoute } from '@lib/routes';
 
 export default Book;
@@ -28,6 +28,7 @@ export async function getStaticProps({
 	if (!version) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

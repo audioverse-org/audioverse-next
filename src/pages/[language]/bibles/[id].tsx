@@ -6,7 +6,7 @@ import {
 
 import Version, { VersionProps } from '@containers/bible/version';
 import { getBible, getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { makeBibleVersionRoute } from '@lib/routes';
 
 export default Version;
@@ -23,6 +23,7 @@ export async function getStaticProps({
 	if (!version) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

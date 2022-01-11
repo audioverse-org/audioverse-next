@@ -2,7 +2,7 @@ import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
 
 import Versions, { VersionsProps } from '@containers/bible/versions';
 import { getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { makeBibleListRoute } from '@lib/routes';
 
 export default Versions;
@@ -19,7 +19,7 @@ export async function getStaticProps(): Promise<
 		props: {
 			versions: response || [],
 		},
-		revalidate: REVALIDATE,
+		revalidate: response ? REVALIDATE : REVALIDATE_FAILURE,
 	};
 }
 
