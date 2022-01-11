@@ -1746,5 +1746,406 @@
   },
   "unstartedSeeAll": {
     "string": "Ver todo “No iniciado”"
+  },
+  "andOnboarding__intro": {
+    "string": "Cree una cuenta o inicie sesión y acceda a un conjunto de características cada vez mayor para ayudarle a explorar la sana doctrina."
+  },
+  "app__features1Cta": {
+    "string": "Encontrar audio"
+  },
+  "app__features1Heading": {
+    "string": "Tesoros nuevos y antiguos"
+  },
+  "app__features1Kicker": {
+    "string": "Encuentre fácilmente contenido inspirador en una amplia recopilación de contenido espiritual."
+  },
+  "app__features2Cta": {
+    "string": "Visualizar contenido reciente"
+  },
+  "app__features2Heading": {
+    "string": "La verdad presente"
+  },
+  "app__features2Kicker": {
+    "string": "AudioVerse facilita encontrar contenido reciente de sus oradores, conferencias y patrocinadores."
+  },
+  "app__features3Cta": {
+    "string": "Explorar tarjetas"
+  },
+  "app__features3Heading": {
+    "string": "Conectados y armoniosos"
+  },
+  "app__features3Kicker": {
+    "string": "Las tarjetas incluyen información relevante, como series para padres, para que siempre pueda ver lo que es realmente importante, con páginas de detalles que muestran contextos y conexiones adicionales."
+  },
+  "app__features4Cta": {
+    "string": "Explorar la biblioteca"
+  },
+  "app__features4Heading": {
+    "string": "Guarde sus favoritos"
+  },
+  "app__features4Kicker": {
+    "string": "Cree una biblioteca de lecciones para escuchar en otro momento y no volverá a perderse con el avance que se sincroniza en sus dispositivos."
+  },
+  "app__features5Cta": {
+    "string": "Encuentre contenido para descargar"
+  },
+  "app__features5Heading": {
+    "string": "Acumulen para sí..."
+  },
+  "app__features5Kicker": {
+    "string": "Descargar contenido en sus dispositivos para los momentos en los que no tenga señal o simplemente quiera evitar que sus datos se acaben."
+  },
+  "bibleBook__disclaimer": {
+    "string": "Los términos y condiciones que rigen el uso de Audiobiblias de Faith Comes By Hearing impiden la opción de descarga y la integración de ciertas funciones en nuestra plataforma."
+  },
+  "buttonShare__emailSubject": {
+    "string": "Disfrute de esta bendición"
+  },
+  "cardPost__typeLabel": {
+    "string": "Blog"
+  },
+  "cardSlider__pageNumberLabel": {
+    "string": "Página {number}"
+  },
+  "cardSongBook__contributors": {
+    "string": "Diversos oradores"
+  },
+  "cardSongBook__numSongs": {
+    "string": "{count} cantos"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "Ver todos los presentadores"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "Presentadores"
+  },
+  "collectionType__audiobookSeries": {
+    "string": "Series de libros"
+  },
+  "collectionType__conference": {
+    "string": "Conferencia"
+  },
+  "collectionType__musicSeries": {
+    "string": "Series musicales"
+  },
+  "collectionType__storyProgram": {
+    "string": "Programa de relatos"
+  },
+  "contact__bodyLabel": {
+    "string": "Cuerpo"
+  },
+  "contact__emailLabel": {
+    "string": "Dirección de correo electrónico"
+  },
+  "contact__emailPlaceholder": {
+    "string": "jane@example.com"
+  },
+  "contact__firstNameLabel": {
+    "string": "Nombre"
+  },
+  "contact__firstNamePlaceholder": {
+    "string": "Jane"
+  },
+  "contact__intro": {
+    "string": "Nos agrada saber de nuestros usuarios, aunque se trate de problemas técnicos. Los comentarios que nos brinda nos animan a seguir trabajando y nos ayudan a mejorar para los demás. Si desea ponerse en contacto con nosotros, utilice el siguiente formulario y nos comunicaremos con usted lo antes posible."
+  },
+  "contact__lastNameLabel": {
+    "string": "Apellido"
+  },
+  "contact__lastNamePlaceholder": {
+    "string": "Doe"
+  },
+  "contact__recipient": {
+    "string": "Tipo de contacto"
+  },
+  "contact__recipient-general": {
+    "string": "Contacto general"
+  },
+  "contact__recipient-technical": {
+    "string": "Solicitar asistencia"
+  },
+  "contact__recipient-testimonials": {
+    "string": "Compartir un testimonio"
+  },
+  "contact__submitLabel": {
+    "string": "Enviar"
+  },
+  "contact__success": {
+    "string": "Enviado correctamente"
+  },
+  "contact__testimonyLabel": {
+    "string": "Testimonio"
+  },
+  "contact__title": {
+    "string": "Contacto"
+  },
+  "discoverCollections_presentersHeading": {
+    "string": "Presentadores"
+  },
+  "downloadAppButton__altLabel": {
+    "string": "Descargar ahora"
+  },
+  "embed__partInfo": {
+    "string": "Parte {index} de {count}"
+  },
+  "give__amazonCta": {
+    "string": "Comprar ahora"
+  },
+  "give__amazonDescription": {
+    "string": "Por cada compra en AmazonSmile, AudioVerse recibe 0,5%. {br}{br} ¿Cómo? Simplemente haga clic en el botón {br} {br} ¡Eso es todo! Solo asegúrese de marcar el nuevo sitio web de AmazonSmile o, de lo contrario, es probable que su navegador vuelva por defecto al sitio normal de Amazon."
+  },
+  "give__amazonTitle": {
+    "string": "Amazon Smile"
+  },
+  "give__checkDescription": {
+    "string": "Los cheques deben emitirse a nombre de AudioVerse.{br}{br} Nuestra dirección postal es: {br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+  },
+  "give__checkTitle": {
+    "string": "Cheque por correo"
+  },
+  "give__estateCta": {
+    "string": "Donar ahora"
+  },
+  "give__estateDescription": {
+    "string": "Usted puede generar un impacto en AudioVerse ahora y en el futuro al hacer de AudioVerse un beneficiario de su plan de sucesión. La forma más fácil de hacer esto es designar a AudioVerse como beneficiario en sus cuentas bancarias o incluir este ministerio en su testamento o fideicomiso.{br}{br} Para quienes deseen dejar un legado duradero donando a la obra de Dios pero todavía necesitan beneficiarse de sus bienes, una donación benéfica anual puede ser una buena opción. Este método de donación tiene el objetivo de beneficiar tanto al donante como al receptor. AudioVerse trabaja con Western Adventist Foundation (WAF) para ofrecer esta opción de donación a nuestros seguidores. {br}{br}Si desea realizar una donación benéfica anual a AudioVerse, comuníquese con WAF directamente a través de su sitio web o por teléfono."
+  },
+  "give__estateDisclaimer": {
+    "string": "Las donaciones benéficas anuales NO ESTÁN DISPONIBLES en los siguientes Estados: AL, MD y WA. La Asociación Unión del Pacífico de la Iglesia Adventista del Séptimo Día administra las anualidades para los residentes de CA e IL. La Asociación Hawaiana de la Iglesia Adventista del Séptimo Día administra las anualidades para los residentes de HI. Y las donaciones benéficas anuales para AudioVerse en todos los demás Estados las administra Western Adventist Foundation. Western Adventist Foundation no brinda asesoría legal. Consulte con un asesor legal de su confianza."
+  },
+  "give__estateTitle": {
+    "string": "Acuérdese de AudioVerse en su plan patrimonial"
+  },
+  "give__givingAssistantCta": {
+    "string": "Comprar ahora"
+  },
+  "give__givingAssistantDescription": {
+    "string": "¡Done a AudioVerse hasta el 30% del precio de su compra usando Giving Assistant cuando compre en línea en tiendas minoristas populares a través de una línea 1800+! Es fácil. Giving Assistant le reembolsa el dinero y usted decide cuánto desea donarnos. Inténtelo ahora y encuentre excelentes ofertas como los cupones de Macy's, así como ahorros en lugares excelentes como Home Depot y JC Penney."
+  },
+  "give__givingAssistantTitle": {
+    "string": "Giving Assistant"
+  },
+  "give__heading": {
+    "string": "Donar"
+  },
+  "give__paypalCta": {
+    "string": "Donar ahora"
+  },
+  "give__paypalDescription": {
+    "string": "Visite la página de PayPal Giving Fund para AudioVerse para proceder a donar para AudioVerse. El 100% de su donación irá al ministerio sin gastos de procesamiento. Al donar por este canal, obtendrá un recibo deducible de impuestos de Paypal Giving Fund, no de AudioVerse."
+  },
+  "give__paypalTitle": {
+    "string": "PayPal Giving Fund"
+  },
+  "header__navItemCollections-books": {
+    "string": "Libros"
+  },
+  "header__navItemCollections-conferences": {
+    "string": "Conferencias"
+  },
+  "header__navItemCollections-presenters": {
+    "string": "Presentadores"
+  },
+  "header__navItemCollections-sponsors": {
+    "string": "Patrocinador"
+  },
+  "header__navItemContact": {
+    "string": "Contacto"
+  },
+  "header__navItemContact-facebook": {
+    "string": "Facebook"
+  },
+  "header__navItemContact-general": {
+    "string": "Contacto general"
+  },
+  "header__navItemContact-instagram": {
+    "string": "Instagram"
+  },
+  "header__navItemContact-support": {
+    "string": "Solicitar asistencia"
+  },
+  "header__navItemContact-testimony": {
+    "string": "Compartir un testimonio"
+  },
+  "header__navItemContact-twitter": {
+    "string": "Twitter"
+  },
+  "header__navItemContact-youtube": {
+    "string": "YouTube"
+  },
+  "header__navItemLibrary-history": {
+    "string": "Historial"
+  },
+  "header__navItemLibrary-playlists": {
+    "string": "Listas de reproducción"
+  },
+  "header__navItemLibrary-saved": {
+    "string": "Guardado"
+  },
+  "header__navItemPresenters": {
+    "string": "Presentadores"
+  },
+  "header__navItemStory-blog": {
+    "string": "Blog"
+  },
+  "homePage__learnStoryButtonLabel": {
+    "string": "Sepa más de nuestra historia"
+  },
+  "homePage__newsletterEmail": {
+    "string": "Dirección de correo electrónico"
+  },
+  "homePage__newsletterEmailPlaceholder": {
+    "string": "josephbates@email.com"
+  },
+  "homePage__newsletterHatTitle": {
+    "string": "Suscríbase a nuestro boletín de noticias"
+  },
+  "homePage__newsletterName": {
+    "string": "Nombre"
+  },
+  "homePage__newsletterNamePlaceholder": {
+    "string": "Joseph Bates"
+  },
+  "homePage__newsletterSubscribe": {
+    "string": "Suscríbase"
+  },
+  "homePage__tagline": {
+    "string": "La sana doctrina"
+  },
+  "libraryHistory__loadingMore": {
+    "string": "Cargando más..."
+  },
+  "libraryNav__contentType": {
+    "string": "Tipo de contenido"
+  },
+  "libraryNav__contentType-all": {
+    "string": "Todo"
+  },
+  "libraryNav__contentType-audiobooks": {
+    "string": "Audiolibros"
+  },
+  "libraryNav__contentType-conferences": {
+    "string": "Conferencias"
+  },
+  "libraryNav__contentType-music": {
+    "string": "Música"
+  },
+  "libraryNav__contentType-people": {
+    "string": "Gente"
+  },
+  "libraryNav__contentType-series": {
+    "string": "Series"
+  },
+  "libraryNav__contentType-sponsors": {
+    "string": "Patrocinador"
+  },
+  "libraryNav__contentType-stories": {
+    "string": "Historias"
+  },
+  "libraryNav__contentType-teachings": {
+    "string": "Lecciones"
+  },
+  "libraryNav__duration": {
+    "string": "Duración"
+  },
+  "libraryNav__duration-all": {
+    "string": "Todo"
+  },
+  "libraryNav__duration-long": {
+    "string": "45-60 minutos"
+  },
+  "libraryNav__duration-medium": {
+    "string": "30-45 minutos"
+  },
+  "libraryNav__duration-short": {
+    "string": "15-30 minutos"
+  },
+  "libraryNav__duration-xlong": {
+    "string": "Más de 60 minutos"
+  },
+  "libraryNav__filtersApplied": {
+    "string": "Filtros aplicados"
+  },
+  "libraryNav__mediaType": {
+    "string": "Tipo de medios"
+  },
+  "libraryNav__mediaType-all": {
+    "string": "Todo"
+  },
+  "libraryNav__mediaType-audio": {
+    "string": "Solo audio"
+  },
+  "libraryNav__mediaType-video": {
+    "string": "Video"
+  },
+  "libraryNav__playbackStatus": {
+    "string": "Estado de reproducción"
+  },
+  "libraryNav__playbackStatus-all": {
+    "string": "Todo"
+  },
+  "libraryNav__playbackStatus-finished": {
+    "string": "Finalizado"
+  },
+  "libraryNav__playbackStatus-started": {
+    "string": "Iniciado"
+  },
+  "libraryNav__playbackStatus-unstarted": {
+    "string": "No iniciado"
+  },
+  "libraryNav__playlists": {
+    "string": "Listas de reproducción"
+  },
+  "libraryNav__saved": {
+    "string": "Guardado"
+  },
+  "libraryNav__sort": {
+    "string": "Ordenar"
+  },
+  "library__noMatchingCopy": {
+    "string": "Marque sus audios favoritos o escúchelos en la página “Descubrir”."
+  },
+  "library__noMatchingHeading": {
+    "string": "Aún no tiene guardado ningún elemento coincidente"
+  },
+  "molecule-buttonGuest__downloadQuality": {
+    "string": "Modificar la calidad de la descarga"
+  },
+  "molecule-buttonGuest__saving": {
+    "string": "Guardando en su biblioteca"
+  },
+  "molecule-buttonGuest__syncing": {
+    "string": "Sincronizando entre sus dispositivos"
+  },
+  "molecule-buttonShare__copied": {
+    "string": "¡Copiado!"
+  },
+  "songsBooksDetail__contributors": {
+    "string": "Diversos oradores"
+  },
+  "songsBooksDetail__numSongs": {
+    "string": "{count} cantos"
+  },
+  "songsListPage__intro": {
+    "string": "Escuchar la Palabra de Dios musicalizada es una excelente manera de memorizar los pasajes de las Escrituras. Escuche por álbum o por libro de la Biblia."
+  },
+  "songsListPage__tabAlbums": {
+    "string": "Álbumes"
+  },
+  "songsListPage__tabPassage": {
+    "string": "Pasaje"
+  },
+  "songsListPage__title": {
+    "string": "Canciones basadas en las Escrituras"
+  },
+  "testimonies__seeAll": {
+    "string": "Ver todos los testimonios"
+  },
+  "testimonies__submitTestimony": {
+    "string": "Envíe un testimonio"
+  },
+  "time__hoursMinutesAndSeconds": {
+    "comment": "time hours, minutes and seconds",
+    "string": "{h}:{m}:{s}"
   }
 }
