@@ -243,7 +243,6 @@ export default function AndPlaybackContext({
 			poster: '/img/poster.jpg',
 			controls: false,
 			preload: 'auto',
-			fluid: true,
 			sources,
 		}),
 		[sources]
