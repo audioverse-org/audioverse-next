@@ -92,11 +92,13 @@
 			bottom: 0;
 			transition: opacity $transition-medium;
 			opacity: 0;
+			pointer-events: none;
 		}
 	}
 	@for $i from 0 through 4 {
 		&.slideActive#{$i} .slides > *:nth-child(#{$i + 1}) {
 			opacity: 1;
+			pointer-events: all;
 		}
 	}
 	$button-margin: 8.5px;
