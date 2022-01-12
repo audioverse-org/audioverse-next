@@ -133,6 +133,7 @@
 		flex-wrap: wrap;
 		> * {
 			flex: 0 0 calc(50% - 16px);
+			display: flex;
 			&:nth-child(odd) {
 				margin-right: 16px;
 			}
