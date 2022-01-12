@@ -8,7 +8,7 @@ import styles from './loadingIndicator.module.scss';
 
 const HIDE_DELAY = 1000; //ms
 
-const LoadingIndicator: React.FC = () => {
+const LoadingIndicator: React.VoidFunctionComponent = () => {
 	const isFetching = useIsFetching();
 	const isLoading = useRouterLoading();
 	const isAnyLoading = !!(isFetching || isLoading);
