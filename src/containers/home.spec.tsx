@@ -196,7 +196,7 @@ describe('home page', () => {
 			params: { language: 'en' },
 		})) as any;
 
-		expect(revalidate).toBe(14400);
+		expect(revalidate).toBe(3600);
 	});
 
 	it('generates static paths', async () => {
