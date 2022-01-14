@@ -1,5 +1,7 @@
 import sortBy from 'lodash/sortBy';
 
+import { getBibleBookContent } from '@lib/generated/graphql';
+
 const API_URL = 'https://4.dbt.io/api';
 const API_KEY = process.env.BIBLE_BRAIN_KEY;
 
@@ -52,6 +54,7 @@ export interface IBibleBookChapter {
 	title: string;
 	url: string;
 	duration: number;
+	text: string;
 }
 
 export async function getBibles(): Promise<IBibleVersion[] | null> {
@@ -106,6 +109,86 @@ export async function getBibleBookChapters(
 	if (!response) {
 		return [];
 	}
+	const bookIdMap: { [k: string]: string } = {
+		GEN: 'Gen',
+		EXO: 'Exod',
+		LEV: 'Lev',
+		NUM: 'Num',
+		DEU: 'Deut',
+		JOS: 'Josh',
+		JDG: 'Judg',
+		RUT: 'Ruth',
+		'1SA': '1Sam',
+		'2SA': '2Sam',
+		'1KI': '1Kgs',
+		'2KI': '2Kgs',
+		'1CH': '1Chr',
+		'2CH': '1Chr',
+		EZR: 'Ezra',
+		NEH: 'Neh',
+		EST: 'Esth',
+		JOB: 'Job',
+		PSA: 'Ps',
+		PRO: 'Prov',
+		ECC: 'Eccl',
+		SNG: 'Song',
+		ISA: 'Isa',
+		JER: 'Jer',
+		LAM: 'Lam',
+		EZK: 'Ezek',
+		DAN: 'Dan',
+		HOS: 'Hos',
+		JOL: 'Joel',
+		AMO: 'Amos',
+		OBA: 'Obad',
+		JON: 'Jonah',
+		MIX: 'Mic',
+		NAM: 'Nah',
+		HAB: 'Hab',
+		ZEP: 'Zeph',
+		HAG: 'Hag',
+		ZEC: 'Zech',
+		MAL: 'Mal',
+		MAT: 'Matt',
+		MRK: 'Mark',
+		LUK: 'Luke',
+		JHN: 'John',
+		ACT: 'Acts',
+		ROM: 'Rom',
+		'1CO': '1Cor',
+		'2CO': '2Cor',
+		GAL: 'Gal',
+		EPH: 'Eph',
+		PHP: 'Phil',
+		COL: 'Col',
+		'1TI': '1Thess',
+		'2TI': '2Thess',
+		'1TH': '1Tim',
+		'2TH': '2Tim',
+		TIT: 'Titus',
+		PHM: 'Phlm',
+		HEB: 'Heb',
+		JAS: 'Jas',
+		'1PE': '1Pet',
+		'2PE': '2Pet',
+		'1JN': '1John',
+		'2JN': '2John',
+		'3JN': '3John',
+		JUD: 'Jude',
+		REV: 'Rev',
+	};
+	const result = await getBibleBookContent({
+		bibleId: 'ENGKJVC',
+		bookId: `ENGKJVC-${bookIdMap[bookId]}`,
+	});
+	const textByChapterNumber = (result.audiobible?.book.chapters || []).reduce(
+		(carry, chapter) => {
+			const matches = chapter.text.match(/<p>.+<\/p>/) || [];
+			carry[+(chapter.id + '').split('-')[2]] = matches[0];
+			return carry;
+		},
+		{} as { [number: number]: string }
+	);
 
 	return sortBy(
 		response.data?.filter(({ book_id }) => book_id === bookId),
@@ -116,6 +199,7 @@ export async function getBibleBookChapters(
 		title: `${book_name} ${chapter_start}`,
 		url: path,
 		duration,
+		text: textByChapterNumber[chapter_start],
 	}));
 }
 
