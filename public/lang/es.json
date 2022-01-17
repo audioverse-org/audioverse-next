@@ -108,7 +108,7 @@
   },
   "blogDetailPage__readingDuration": {
     "comment": "Blog post detalle duración de la lectura",
-    "string": "{duration}leer"
+    "string": "{duration} leer"
   },
   "cardAudiobookTrack_readByLabel": {
     "string": "Leído por {name}"
@@ -131,7 +131,7 @@
   },
   "cardCollection_sequenceLabel": {
     "comment": "Etiqueta de recuento de secuencia de colección de tarjetas",
-    "string": "{count} serie"
+    "string": "{count} series"
   },
   "cardPerson_teachingsLabel": {
     "comment": "Tarjeta persona enseñanzas contar etiqueta",
@@ -142,7 +142,7 @@
   },
   "cardPost__readingDuration": {
     "comment": "Duración de la lectura del poste de la tarjeta",
-    "string": "{duration}leer"
+    "string": "{duration} leer"
   },
   "cardSequence_audiobookType": {
     "string": "Libro"
@@ -152,10 +152,10 @@
   },
   "cardSequence_sequenceLabel": {
     "comment": "Etiqueta de conteo de grabación de secuencia de tarjeta",
-    "string": "{count} partes"
+    "string": "{count, plural, one {1 parte} other {{count} partes}}"
   },
   "cardSequence_seriesType": {
-    "string": "Series"
+    "string": "Serie"
   },
   "cardSequence_storiesType": {
     "string": "Historias"
@@ -188,7 +188,7 @@
   },
   "cardSponsor__sequencesCountLabel": {
     "comment": "Etiqueta de recuento de la serie de detalles del patrocinador",
-    "string": "{count} serie"
+    "string": "{count} series"
   },
   "cardSponsor_hatTitle": {
     "comment": "Título del sombrero del patrocinador de la tarjeta",
@@ -208,7 +208,7 @@
   },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Etiqueta de recuento de secuencia de detalle de colección",
-    "string": "{count} serie"
+    "string": "{count} series"
   },
   "collectionDetail__seriesAllLabel": {
     "string": "Ver todas las series"
@@ -222,7 +222,7 @@
   },
   "collectionDetail__speakersLabel": {
     "comment": "Detalle de la colección altavoces etiqueta",
-    "string": "Altavoz"
+    "string": "Presentadores"
   },
   "collectionDetail__sponsorLabel": {
     "string": "Patrocinador"
@@ -285,7 +285,7 @@
     "string": "Series"
   },
   "discoverCollections_speakersHeading": {
-    "string": "Altavoz"
+    "string": "Presentadores"
   },
   "discoverCollections_sponsorsHeading": {
     "string": "Patrocinador"
@@ -412,7 +412,7 @@
     "string": "Canciones basadas en las Escrituras"
   },
   "header__navItemCollections-speaker": {
-    "string": "Altavoz"
+    "string": "Presentador"
   },
   "header__navItemCollections-sponsor": {
     "string": "Patrocinador"
@@ -453,7 +453,7 @@
   },
   "homePage__downloadAppSectionText": {
     "comment": "página de inicio descargar texto de la sección de la aplicación",
-    "string": "Si tiene un smartphone, descargue la app para llevar AudioVerse consigo donde que vaya. Reproduzca lecciones desde cualquier lugar mediante su conexión de red o descárguelas de antemano para escuchar por el camino sin usar datos."
+    "string": "Si tiene un smartphone, descargue la app para llevar AudioVerse consigo dondequiera que vaya. Reproduzca lecciones desde cualquier lugar mediante su conexión de red o descárguelas de antemano para escuchar por el camino sin usar datos."
   },
   "homePage__downloadAppSectionTitle": {
     "comment": "página de inicio descargar app título de la sección",
@@ -590,7 +590,7 @@
     "string": "Aún no tiene guardado ningún elemento en “Compilaciones”"
   },
   "libraryCollections__personsHeading": {
-    "string": "Altavoz"
+    "string": "Presentadores"
   },
   "libraryCollections__playlistsAlert": {
     "string": "En este momento, estamos reinventando la experiencia de la lista de reproducción. Usted todavía puede administrar sus listas de reproducción usando la aplicación móvil."
@@ -728,7 +728,7 @@
     "string": "Correo electrónico"
   },
   "loginForm__emailPlaceholder": {
-    "string": "jane@example.com"
+    "string": "jane@ejemplo.com"
   },
   "loginForm__forgotPasswordButton": {
     "comment": "formulario de inicio de sesión botón de contraseña olvidada",
@@ -963,7 +963,7 @@
     "string": "Patrocinador"
   },
   "personTypeLockup_type": {
-    "string": "Altavoz"
+    "string": "Presentador"
   },
   "playButton__pauseLabel": {
     "comment": "etiqueta de pausa del botón de reproducción",
@@ -1174,7 +1174,7 @@
     "string": "Correo electrónico"
   },
   "register__emailPlaceholder": {
-    "string": "jane@example.com"
+    "string": "jane@ejemplo.com"
   },
   "register__firstNameLabel": {
     "string": "Nombre"
@@ -1273,7 +1273,7 @@
     "string": "Ver todas las conferencias"
   },
   "search__personsHeading": {
-    "string": "Altavoz"
+    "string": "Presentadores"
   },
   "search__personsSeeAll": {
     "string": "Ver todos los presentadores"
@@ -1689,7 +1689,7 @@
   },
   "sponsorDetail__sequencesCountLabel": {
     "comment": "Etiqueta de recuento de la serie de detalles del patrocinador",
-    "string": "{count} serie"
+    "string": "{count} series"
   },
   "sponsorDetail__seriesAllLabel": {
     "string": "Ver todas las series"
@@ -1766,7 +1766,7 @@
     "string": "La verdad presente"
   },
   "app__features2Kicker": {
-    "string": "AudioVerse facilita encontrar contenido reciente de sus oradores, conferencias y patrocinadores."
+    "string": "AudioVerse facilita encontrar contenido reciente de sus presentadores, conferencias y patrocinadores."
   },
   "app__features3Cta": {
     "string": "Explorar tarjetas"
@@ -1839,7 +1839,7 @@
     "string": "Dirección de correo electrónico"
   },
   "contact__emailPlaceholder": {
-    "string": "jane@example.com"
+    "string": "jane@ejemplo.com"
   },
   "contact__firstNameLabel": {
     "string": "Nombre"

@@ -89,6 +89,7 @@ export default function Slider({
 						<li
 							key={i}
 							className={`${styles.dot} ${i === delta && styles.active}`}
+							onClick={() => setDelta(i)}
 							aria-label={intl.formatMessage(
 								{
 									id: 'cardSlider__pageNumberLabel',

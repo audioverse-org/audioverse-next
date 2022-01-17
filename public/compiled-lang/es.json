@@ -164,7 +164,7 @@
   "app__features2Kicker": [
     {
       "type": 0,
-      "value": "AudioVerse facilita encontrar contenido reciente de sus oradores, conferencias y patrocinadores."
+      "value": "AudioVerse facilita encontrar contenido reciente de sus presentadores, conferencias y patrocinadores."
     }
   ],
   "app__features3Cta": [
@@ -300,7 +300,7 @@
     },
     {
       "type": 0,
-      "value": "leer"
+      "value": " leer"
     }
   ],
   "buttonShare__emailSubject": [
@@ -368,7 +368,7 @@
     },
     {
       "type": 0,
-      "value": " serie"
+      "value": " series"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -394,7 +394,7 @@
     },
     {
       "type": 0,
-      "value": "leer"
+      "value": " leer"
     }
   ],
   "cardPost__typeLabel": [
@@ -417,18 +417,38 @@
   ],
   "cardSequence_sequenceLabel": [
     {
-      "type": 1,
+      "offset": 0,
+      "options": {
+        "one": {
+          "value": [
+            {
+              "type": 0,
+              "value": "1 parte"
+            }
+          ]
+        },
+        "other": {
+          "value": [
+            {
+              "type": 1,
+              "value": "count"
+            },
+            {
+              "type": 0,
+              "value": " partes"
+            }
+          ]
+        }
+      },
+      "pluralType": "cardinal",
+      "type": 6,
       "value": "count"
-    },
-    {
-      "type": 0,
-      "value": " partes"
     }
   ],
   "cardSequence_seriesType": [
     {
       "type": 0,
-      "value": "Series"
+      "value": "Serie"
     }
   ],
   "cardSequence_storiesType": [
@@ -520,7 +540,7 @@
     },
     {
       "type": 0,
-      "value": " serie"
+      "value": " series"
     }
   ],
   "cardSponsor_hatTitle": [
@@ -572,7 +592,7 @@
     },
     {
       "type": 0,
-      "value": " serie"
+      "value": " series"
     }
   ],
   "collectionDetail__seriesAllLabel": [
@@ -596,7 +616,7 @@
   "collectionDetail__speakersLabel": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentadores"
     }
   ],
   "collectionDetail__sponsorLabel": [
@@ -690,7 +710,7 @@
   "contact__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jane@example.com"
+      "value": "jane@ejemplo.com"
     }
   ],
   "contact__firstNameLabel": [
@@ -840,7 +860,7 @@
   "discoverCollections_speakersHeading": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentadores"
     }
   ],
   "discoverCollections_sponsorsHeading": [
@@ -1300,7 +1320,7 @@
   "header__navItemCollections-speaker": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentador"
     }
   ],
   "header__navItemCollections-sponsor": [
@@ -1516,7 +1536,7 @@
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
-      "value": "Si tiene un smartphone, descargue la app para llevar AudioVerse consigo donde que vaya. Reproduzca lecciones desde cualquier lugar mediante su conexión de red o descárguelas de antemano para escuchar por el camino sin usar datos."
+      "value": "Si tiene un smartphone, descargue la app para llevar AudioVerse consigo dondequiera que vaya. Reproduzca lecciones desde cualquier lugar mediante su conexión de red o descárguelas de antemano para escuchar por el camino sin usar datos."
     }
   ],
   "homePage__downloadAppSectionTitle": [
@@ -1794,7 +1814,7 @@
   "libraryCollections__personsHeading": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentadores"
     }
   ],
   "libraryCollections__playlistsAlert": [
@@ -2262,7 +2282,7 @@
   "loginForm__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jane@example.com"
+      "value": "jane@ejemplo.com"
     }
   ],
   "loginForm__forgotPasswordButton": [
@@ -2746,7 +2766,7 @@
   "personTypeLockup_type": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentador"
     }
   ],
   "playButton__pauseLabel": [
@@ -3156,7 +3176,7 @@
   "register__emailPlaceholder": [
     {
       "type": 0,
-      "value": "jane@example.com"
+      "value": "jane@ejemplo.com"
     }
   ],
   "register__firstNameLabel": [
@@ -3350,7 +3370,7 @@
   "search__personsHeading": [
     {
       "type": 0,
-      "value": "Altavoz"
+      "value": "Presentadores"
     }
   ],
   "search__personsSeeAll": [
@@ -4098,7 +4118,7 @@
     },
     {
       "type": 0,
-      "value": " serie"
+      "value": " series"
     }
   ],
   "sponsorDetail__seriesAllLabel": [
