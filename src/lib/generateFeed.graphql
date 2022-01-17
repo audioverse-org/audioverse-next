@@ -6,7 +6,7 @@ fragment generateFeed on Recording {
 	publishDate
 	audioFiles {
 		id
-		url
+		url(requestType: RSS)
 		filesize
 		duration
 		mimeType
@@ -14,7 +14,7 @@ fragment generateFeed on Recording {
 	}
 	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
 		id
-		url
+		url(requestType: RSS)
 		filesize
 		duration
 		mimeType

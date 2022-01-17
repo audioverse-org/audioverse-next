@@ -8,19 +8,19 @@ fragment andMiniplayer on Recording {
 		contentType
 	}
 	audioFiles {
-		url
+		url(requestType: STREAM)
 		filesize
 		mimeType
 		duration
 	}
 	videoFiles(allowedContainers: [M4A, M4V, MOV, MP4]) {
-		url
+		url(requestType: STREAM)
 		filesize
 		mimeType
 		duration
 	}
 	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
-		url
+		url(requestType: STREAM)
 		filesize
 		mimeType
 		duration
