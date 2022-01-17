@@ -1746,5 +1746,406 @@
   },
   "unstartedSeeAll": {
     "string": "始められていないものを全部表示"
+  },
+  "andOnboarding__intro": {
+    "string": "ご自分で調べて確かな教理を見出すために、ますます追加されていっている様々な項目にアクセスするには、今すぐログインまたはアカウトを作成してみませんか。"
+  },
+  "app__features1Cta": {
+    "string": "ディスカバー オーディオ"
+  },
+  "app__features1Heading": {
+    "string": "倉からの新しい宝と古い宝"
+  },
+  "app__features1Kicker": {
+    "string": "豊富な宝庫からインスピレーションを受けるスピィリチャルな項目を簡単に発見。"
+  },
+  "app__features2Cta": {
+    "string": "最近の項目を見る"
+  },
+  "app__features2Heading": {
+    "string": "現代の真理"
+  },
+  "app__features2Kicker": {
+    "string": "AudioVerseはお気に入りのスピーカ、コンフレンスや、スポンサーからの項目を見つけやすくする。"
+  },
+  "app__features3Cta": {
+    "string": "エキスプローラ カード"
+  },
+  "app__features3Heading": {
+    "string": "つながった調和"
+  },
+  "app__features3Kicker": {
+    "string": "カードには関連情報が含まれています。例えば、子育てシリーズの内容で重要なポイントと追加の文脈と関連のある内容の詳細ページのがあります。"
+  },
+  "app__features4Cta": {
+    "string": "探検ライブラリー"
+  },
+  "app__features4Heading": {
+    "string": "愛する人たちの救い"
+  },
+  "app__features4Kicker": {
+    "string": "後で聴くためのレッスン項目の個人ライブラリーを作成したら、全てのディバイスと同期されるから次のレッスンに迷わず進める。"
+  },
+  "app__features5Cta": {
+    "string": "ダウンロードしたい項目を検索"
+  },
+  "app__features5Heading": {
+    "string": "宝をたくわえなさい・・・"
+  },
+  "app__features5Kicker": {
+    "string": "項目を任意のデバイスにダウンロードして、電波がない時でも、データーの容量を節約したい時にでも視聴できる。"
+  },
+  "bibleBook__disclaimer": {
+    "string": "Faith Comes By Hearingのオーディオ聖書の使用を規定する利用規約により、ダウンロードやプラットフォームへの特定の機能の統合が妨げられています。"
+  },
+  "buttonShare__emailSubject": {
+    "string": "この恵を分ちたいです"
+  },
+  "cardPost__typeLabel": {
+    "string": "ブログ"
+  },
+  "cardSlider__pageNumberLabel": {
+    "string": "{number}ページ"
+  },
+  "cardSongBook__contributors": {
+    "string": "様々な投稿者"
+  },
+  "cardSongBook__numSongs": {
+    "string": "歌 {count}曲"
+  },
+  "collectionDetail__presentersAllLabel": {
+    "string": "全てのプリゼンターを表示"
+  },
+  "collectionDetail__presentersLabel": {
+    "comment": "Collection Detail speakers label",
+    "string": "プリゼンター"
+  },
+  "collectionType__audiobookSeries": {
+    "string": "ブックシリーズ"
+  },
+  "collectionType__conference": {
+    "string": "大会・総会"
+  },
+  "collectionType__musicSeries": {
+    "string": "音楽シリーズ"
+  },
+  "collectionType__storyProgram": {
+    "string": "ストーリー プログラム"
+  },
+  "contact__bodyLabel": {
+    "string": "本文"
+  },
+  "contact__emailLabel": {
+    "string": "メールアドレス"
+  },
+  "contact__emailPlaceholder": {
+    "string": "hanako@example.com"
+  },
+  "contact__firstNameLabel": {
+    "string": "名"
+  },
+  "contact__firstNamePlaceholder": {
+    "string": "Hanako"
+  },
+  "contact__intro": {
+    "string": "技術的な問題に関してでも、AudioVerseをご利用されているユーザー様方からのご連絡はいつも大歓迎です。皆様からの御意見やフィードバックによって私たちも励まされ、他の利用者のためにこのサイトを向上させることができます。お問い合わせ、ご連絡をご希望の場合は、このフォームをご利用ください。できる限り迅速にご応答いたします。"
+  },
+  "contact__lastNameLabel": {
+    "string": "姓"
+  },
+  "contact__lastNamePlaceholder": {
+    "string": "Suzuki"
+  },
+  "contact__recipient": {
+    "string": "お問い合わせ内容の部類"
+  },
+  "contact__recipient-general": {
+    "string": "一般的内容のお問い合わせ"
+  },
+  "contact__recipient-technical": {
+    "string": "技術的内容のお問い合わせ"
+  },
+  "contact__recipient-testimonials": {
+    "string": "個人的体験の証を共有"
+  },
+  "contact__submitLabel": {
+    "string": "提出送信"
+  },
+  "contact__success": {
+    "string": "ご連絡ありがとうございました。確かに通知を承りました！"
+  },
+  "contact__testimonyLabel": {
+    "string": "個人的体験の証"
+  },
+  "contact__title": {
+    "string": "お問い合わせ"
+  },
+  "discoverCollections_presentersHeading": {
+    "string": "プリゼンター"
+  },
+  "downloadAppButton__altLabel": {
+    "string": "今すぐダウンロード"
+  },
+  "embed__partInfo": {
+    "string": "{count}個の内の{index}部分を表示"
+  },
+  "give__amazonCta": {
+    "string": "ショッピング Now"
+  },
+  "give__amazonDescription": {
+    "string": "毎回 AmazonSmileでお買い物をされる都度に、 AudioVerseにお買い上げの 0.5%.{br}{br} が寄付されます。もっと知りたいですか?このボタンをクリックするだけです。{br}{br}　それで完了！開いたAmazonSmile のホームページをフラウザーでブックマーク(お気に入り)に登録をしてください。登録をされなければ、次回から元のAmazonのホームページに戻ってしまします。"
+  },
+  "give__amazonTitle": {
+    "string": "Amazon Smile"
+  },
+  "give__checkDescription": {
+    "string": "小切手での寄付金は下記の住所まAudioVerse宛の名義にお送りください。{br}{br} 住所：{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+  },
+  "give__checkTitle": {
+    "string": "小切手の郵送"
+  },
+  "give__estateCta": {
+    "string": "援助・寄付"
+  },
+  "give__estateDescription": {
+    "string": "AudioVerseを遺産設計管理プランに含めることで、AudioVerseの現在のミニストリーと明日に繋がる貢献をすることができます。これを行う最も簡単な方法は、AudioVerseを金融勘定の受益者にするか、遺言または信託にAudioVerseを含めることです。{br}{br}主の御用に貢献することによって永続的な遺産を残したいが、資産は放すことができない方にとって、慈善ギフト年金は良い選択肢かもしれません。この賜金方法は、寄付者と受益者の両方にとって有益になるかたちの設計になっています。AudioVerseは、Western Adventist Foundation（WAF）と協力して、援助してくださる方々にこの献金方法を提供しています。{br}{br}AudioVerseに慈善ギフト年金として賜金をされたい場合、ウェブサイトまたは電話で直接WAFにご連絡ください。"
+  },
+  "give__estateDisclaimer": {
+    "string": "慈善ギフト年金は、次の州では利用できません。AL、MD、および WA。 CA およびIL 居住者向けの年金は、セブンスデーアドベンチストの Pacific Union Conference  によって提供されます。 HI 居住者向けの年金は、セブンスデーアドベンチストのHawaii Conference によって提供されます。 他のすべての州で AudioVerse に慈善ギフト年金の寄付をするには、Western AdventistFoundation にご連絡ください。Western Adventist Foundation は法的アドバイスは一切提供されません。AudioVerse 利用者ご自身の法律顧問にご相談の上ご検討ください。"
+  },
+  "give__estateTitle": {
+    "string": "AudioVerse を遺産設計管理プランに入れて見ませんか。"
+  },
+  "give__givingAssistantCta": {
+    "string": "ショッピング Now"
+  },
+  "give__givingAssistantDescription": {
+    "string": "Giving Assistant を使って1800以上の人気オンライン店舗で買い物をするときに、購入価格の最大30％が AudioVerse に寄付されます！Giving Assistant を使うと簡単！Giving Assistant はお客様にキャッシュバックが払い戻され、その金額の何割をAudioVerseに寄付したいかが選択できます。今直ぐ、試して見ませんか。Macy'sのクーポン、やHome Depot や JC Penney などでの割引ももらえます。"
+  },
+  "give__givingAssistantTitle": {
+    "string": "Giving Assistant"
+  },
+  "give__heading": {
+    "string": "援助"
+  },
+  "give__paypalCta": {
+    "string": "援助・寄付"
+  },
+  "give__paypalDescription": {
+    "string": "AudioVerse に寄付をするには、AudioVerse のPaypal寄付基金にアクセスしてください。寄付金の100%が処理費なくAudioVerseのミニストリーに送くられます。Paypal寄付基金を通しての寄付の際、AudioVerseではなく、Paypalから直接、税控除の対象となる領収書が送られます。"
+  },
+  "give__paypalTitle": {
+    "string": "Paypal寄付基金"
+  },
+  "header__navItemCollections-books": {
+    "string": "図書"
+  },
+  "header__navItemCollections-conferences": {
+    "string": "大会・総会"
+  },
+  "header__navItemCollections-presenters": {
+    "string": "プリゼンター"
+  },
+  "header__navItemCollections-sponsors": {
+    "string": "主催者"
+  },
+  "header__navItemContact": {
+    "string": "お問い合わせ"
+  },
+  "header__navItemContact-facebook": {
+    "string": "Facebook"
+  },
+  "header__navItemContact-general": {
+    "string": "一般的内容のお問い合わせ"
+  },
+  "header__navItemContact-instagram": {
+    "string": "Instagram"
+  },
+  "header__navItemContact-support": {
+    "string": "技術的内容のお問い合わせ"
+  },
+  "header__navItemContact-testimony": {
+    "string": "個人的体験の証を共有"
+  },
+  "header__navItemContact-twitter": {
+    "string": "Twitter"
+  },
+  "header__navItemContact-youtube": {
+    "string": "YouTube"
+  },
+  "header__navItemLibrary-history": {
+    "string": "履歴"
+  },
+  "header__navItemLibrary-playlists": {
+    "string": "プレイリスト"
+  },
+  "header__navItemLibrary-saved": {
+    "string": "図書に保存"
+  },
+  "header__navItemPresenters": {
+    "string": "プリゼンター"
+  },
+  "header__navItemStory-blog": {
+    "string": "ブログ"
+  },
+  "homePage__learnStoryButtonLabel": {
+    "string": "AudioVerse の形成展開のストーリー"
+  },
+  "homePage__newsletterEmail": {
+    "string": "メールアドレス"
+  },
+  "homePage__newsletterEmailPlaceholder": {
+    "string": "taro_suzuki@email.com"
+  },
+  "homePage__newsletterHatTitle": {
+    "string": "ニュースレターを購読する"
+  },
+  "homePage__newsletterName": {
+    "string": "氏名"
+  },
+  "homePage__newsletterNamePlaceholder": {
+    "string": "Taro Suzuki"
+  },
+  "homePage__newsletterSubscribe": {
+    "string": "今、購読に登録する"
+  },
+  "homePage__tagline": {
+    "string": "確実な教理"
+  },
+  "libraryHistory__loadingMore": {
+    "string": "読み込み中・・・"
+  },
+  "libraryNav__contentType": {
+    "string": "項目の種類"
+  },
+  "libraryNav__contentType-all": {
+    "string": "全て"
+  },
+  "libraryNav__contentType-audiobooks": {
+    "string": "オーディオブック"
+  },
+  "libraryNav__contentType-conferences": {
+    "string": "大会・総会"
+  },
+  "libraryNav__contentType-music": {
+    "string": "音楽"
+  },
+  "libraryNav__contentType-people": {
+    "string": "人物"
+  },
+  "libraryNav__contentType-series": {
+    "string": "シリーズ"
+  },
+  "libraryNav__contentType-sponsors": {
+    "string": "主催者"
+  },
+  "libraryNav__contentType-stories": {
+    "string": "ストーリー"
+  },
+  "libraryNav__contentType-teachings": {
+    "string": "レッスン"
+  },
+  "libraryNav__duration": {
+    "string": "再生の長さ"
+  },
+  "libraryNav__duration-all": {
+    "string": "全て"
+  },
+  "libraryNav__duration-long": {
+    "string": "45-60 分"
+  },
+  "libraryNav__duration-medium": {
+    "string": "30-45 分"
+  },
+  "libraryNav__duration-short": {
+    "string": "15-30 分"
+  },
+  "libraryNav__duration-xlong": {
+    "string": "60 分以上"
+  },
+  "libraryNav__filtersApplied": {
+    "string": "絞り込み"
+  },
+  "libraryNav__mediaType": {
+    "string": "メディアの種類"
+  },
+  "libraryNav__mediaType-all": {
+    "string": "全て"
+  },
+  "libraryNav__mediaType-audio": {
+    "string": "オーディオのみ"
+  },
+  "libraryNav__mediaType-video": {
+    "string": "動画"
+  },
+  "libraryNav__playbackStatus": {
+    "string": "再生状況"
+  },
+  "libraryNav__playbackStatus-all": {
+    "string": "全て"
+  },
+  "libraryNav__playbackStatus-finished": {
+    "string": "終了"
+  },
+  "libraryNav__playbackStatus-started": {
+    "string": "途中まで聴いたアイテム"
+  },
+  "libraryNav__playbackStatus-unstarted": {
+    "string": "まだ聴き始めていない"
+  },
+  "libraryNav__playlists": {
+    "string": "プレイリスト"
+  },
+  "libraryNav__saved": {
+    "string": "図書に保存"
+  },
+  "libraryNav__sort": {
+    "string": "並び替え"
+  },
+  "library__noMatchingCopy": {
+    "string": "ディスカバーページからのアイテムをブックマークしたり、聴いたりする。"
+  },
+  "library__noMatchingHeading": {
+    "string": "一致するアイテムはまだ保存されていません"
+  },
+  "molecule-buttonGuest__downloadQuality": {
+    "string": "ダウンロードの質を調節中"
+  },
+  "molecule-buttonGuest__saving": {
+    "string": "図書の中にあるものを保存中"
+  },
+  "molecule-buttonGuest__syncing": {
+    "string": "全てのディバイスと同期中"
+  },
+  "molecule-buttonShare__copied": {
+    "string": "コピー完了！"
+  },
+  "songsBooksDetail__contributors": {
+    "string": "様々な投稿者"
+  },
+  "songsBooksDetail__numSongs": {
+    "string": "歌 {count}曲"
+  },
+  "songsListPage__intro": {
+    "string": "聖書の箇所を音楽に合わせて聴くと暗記しやすいです。アルバム別に聴く、もしくは聖書の書簡別に聴く。"
+  },
+  "songsListPage__tabAlbums": {
+    "string": "アルバム"
+  },
+  "songsListPage__tabPassage": {
+    "string": "聖書の箇所"
+  },
+  "songsListPage__title": {
+    "string": "聖句ソング"
+  },
+  "testimonies__seeAll": {
+    "string": "全ての証を表示"
+  },
+  "testimonies__submitTestimony": {
+    "string": "個人体験の証を投稿"
+  },
+  "time__hoursMinutesAndSeconds": {
+    "comment": "time hours, minutes and seconds",
+    "string": "{h}:{m}:{s}"
   }
 }
