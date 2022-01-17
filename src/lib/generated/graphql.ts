@@ -13881,6 +13881,29 @@ export type GetTestimoniesPathsDataQuery = {
 	};
 };
 
+export type GetBibleBookContentQueryVariables = Exact<{
+	bibleId: Scalars['ID'];
+	bookId: Scalars['ID'];
+}>;
+
+export type GetBibleBookContentQuery = {
+	__typename?: 'Query';
+	audiobible:
+		| {
+				__typename?: 'Bible';
+				book: {
+					__typename?: 'BibleBook';
+					chapters: Array<{
+						__typename?: 'BibleChapter';
+						id: string | number;
+						text: string;
+					}>;
+				};
+		  }
+		| null
+		| undefined;
+};
+
 export type CollectionFavoriteMutationVariables = Exact<{
 	id: Scalars['ID'];
 }>;
@@ -16315,6 +16338,24 @@ export const useGetTestimoniesPathsDataQuery = <
 		>(GetTestimoniesPathsDataDocument, variables),
 		options
 	);
+export const GetBibleBookContentDocument = `
+query getBibleBookContent($bibleId:ID!$bookId:ID!){audiobible(id:$bibleId){book(id:$bookId){chapters{id text}}}}
+`;
+export const useGetBibleBookContentQuery = <
+	TData = GetBibleBookContentQuery,
+	TError = unknown
+>(
+	variables: GetBibleBookContentQueryVariables,
+	options?: UseQueryOptions<GetBibleBookContentQuery, TError, TData>
+) =>
+	useQuery<GetBibleBookContentQuery, TError, TData>(
+		['getBibleBookContent', variables],
+		graphqlFetcher<GetBibleBookContentQuery, GetBibleBookContentQueryVariables>(
+			GetBibleBookContentDocument,
+			variables
+		),
+		options
+	);
 export const CollectionFavoriteDocument = `
 mutation collectionFavorite($id:ID!){favorited:collectionFavorite(id:$id){success}}
 `;
@@ -17327,6 +17368,12 @@ export async function getTestimoniesPathsData<T>(
 	variables: ExactAlt<T, GetTestimoniesPathsDataQueryVariables>
 ): Promise<GetTestimoniesPathsDataQuery> {
 	return fetchApi(GetTestimoniesPathsDataDocument, { variables });
+}
+
+export async function getBibleBookContent<T>(
+	variables: ExactAlt<T, GetBibleBookContentQueryVariables>
+): Promise<GetBibleBookContentQuery> {
+	return fetchApi(GetBibleBookContentDocument, { variables });
 }
 
 export async function collectionFavorite<T>(

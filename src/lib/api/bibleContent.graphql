@@ -1,0 +1,10 @@
+query getBibleBookContent($bibleId: ID!, $bookId: ID!) {
+	audiobible(id: $bibleId) {
+		book(id: $bookId) {
+			chapters {
+				id
+				text
+			}
+		}
+	}
+}

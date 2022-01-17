@@ -1,11 +1,14 @@
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
+import Button from '@components/molecules/button';
+import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
@@ -13,6 +16,7 @@ import Player from '@components/molecules/player';
 import SequenceNav from '@components/molecules/sequenceNav';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
+import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import {
 	IBibleBook,
 	IBibleBookChapter,
@@ -27,6 +31,9 @@ import {
 import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import IconBack from '../../../public/img/icon-back-light.svg';
+import IconBlog from '../../../public/img/icon-blog-light-small.svg';
+
 import styles from './book.module.scss';
 
 export interface BookProps {
@@ -36,7 +43,30 @@ export interface BookProps {
 	chapterNumber: string | number;
 }
 
-function Book({
+const Book = (params: Must<BookProps>) => {
+	const chapter = params.chapters.find(
+		({ number }) => number === +params.chapterNumber
+	);
+	const currentChapterNumber = chapter?.number || 1;
+	const playbackContext = useContext(PlaybackContext);
+	const currentRecordingId = playbackContext.getRecording()?.id;
+	const router = useRouter();
+	useEffect(() => {
+		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {
+			return;
+		}
+		const currentRecordingIdChapter = (currentRecordingId + '').split('/')[1];
+		if (+currentRecordingIdChapter !== currentChapterNumber) {
+			router.replace(router.asPath.replace(/\d+$/, currentRecordingIdChapter));
+		}
+	}, [currentChapterNumber, currentRecordingId, router]);
+
+	return useMemo(() => {
+		return <BookInner {...params} />;
+	}, [params]);
+};
+
+function BookInner({
 	version,
 	book,
 	chapters,
@@ -50,6 +80,7 @@ function Book({
 		makeBibleBookRoute(languageRoute, book.book_id, n);
 	const currentChapterNumber = chapter?.number || 1;
 
+	const [showingText, setShowingText] = useState(false);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const currentRef = useRef<HTMLDivElement>(null);
 	const [scrollPosition, setScrollPosition] = useState(0);
@@ -154,29 +185,68 @@ function Book({
 			</Link>
 			<div className={styles.content}>
 				<div className={styles.main}>
-					<Heading1>{chapter?.title}</Heading1>
-					<div className={styles.sequenceNav}>
-						<SequenceNav recording={recording} useInverse={false} />
-					</div>
-					{chapter?.url && (
-						<Player
-							recording={recording as PlayerFragment}
-							playlistRecordings={recordings.slice(
-								chapters.findIndex((c) => c.id === chapter?.id)
+					{showingText ? (
+						<>
+							<Button
+								type="secondary"
+								text={
+									<FormattedMessage
+										id="bibleBook__backToChapter"
+										defaultMessage="Back to Chapter Info"
+									/>
+								}
+								IconLeft={IconBack}
+								onClick={() => setShowingText(false)}
+								className={styles.backButton}
+							/>
+							<Heading1>{chapter?.title}</Heading1>
+							<ContentWidthLimiter>
+								<div
+									className={styles.chapterText}
+									dangerouslySetInnerHTML={{ __html: chapter?.text || '' }}
+								/>
+							</ContentWidthLimiter>
+						</>
+					) : (
+						<>
+							<Heading1>{chapter?.title}</Heading1>
+							<div className={styles.sequenceNav}>
+								<SequenceNav recording={recording} useInverse={false} />
+							</div>
+							{chapter?.url && (
+								<Player
+									recording={recording as PlayerFragment}
+									playlistRecordings={recordings.slice(
+										chapters.findIndex((c) => c.id === chapter?.id)
+									)}
+									backgroundColor={BaseColors.BIBLE_B}
+									disableUserFeatures
+								/>
 							)}
-							backgroundColor={BaseColors.BIBLE_B}
-							disableUserFeatures
-						/>
+							<div className={styles.definitions}>
+								<DefinitionList terms={details} textColor={BaseColors.DARK} />
+							</div>
+							<div className={styles.disclaimer}>
+								<FormattedMessage
+									id="bibleBook__disclaimer"
+									defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+								/>
+							</div>
+							<div className={styles.readAlong}>
+								<Button
+									type="secondary"
+									text={
+										<FormattedMessage
+											id="bibleBook__readAlong"
+											defaultMessage="Read Along"
+										/>
+									}
+									IconLeft={IconBlog}
+									onClick={() => setShowingText(!showingText)}
+								/>
+							</div>
+						</>
 					)}
-					<div className={styles.definitions}>
-						<DefinitionList terms={details} textColor={BaseColors.DARK} />
-					</div>
-					<div className={styles.disclaimer}>
-						<FormattedMessage
-							id="bibleBook__disclaimer"
-							defaultMessage="The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
-						/>
-					</div>
 				</div>
 
 				<div className={styles.chapters}>
