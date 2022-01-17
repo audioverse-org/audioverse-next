@@ -187,7 +187,7 @@ export async function getBibleBookChapters(
 			carry[+(chapter.id + '').split('-')[2]] = matches[0];
 			return carry;
 		},
-		{} as { [number: number]: string }
+		{} as Record<number, string>
 	);
 
 	return sortBy(
