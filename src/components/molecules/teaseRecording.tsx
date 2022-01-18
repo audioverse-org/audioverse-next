@@ -21,6 +21,7 @@ import IconClosure from '../../../public/img/icon-closure.svg';
 import IconDisclosure from '../../../public/img/icon-disclosure.svg';
 import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
 import IconPlay from '../../../public/img/icon-play.svg';
+import SuccessIcon from '../../../public/img/icon-success-light.svg';
 
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';
@@ -189,7 +190,8 @@ export default function TeaseRecording({
 					<span className={styles.duration}>
 						{useFormattedDuration(recording.duration)}
 					</span>
-					{progress > 0 && (
+					{progress >= 1 && <SuccessIcon />}
+					{progress > 0 && (progress < 1 || session.isLoaded) && (
 						<span className={styles.progress}>
 							<ProgressBar progress={progress} />
 						</span>
