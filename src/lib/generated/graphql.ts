@@ -78,6 +78,7 @@ export type AudioFile = Node & {
 };
 
 export type AudioFileUrlArgs = {
+	requestType?: InputMaybe<MediaFileRequestType>;
 	skipAnalytics: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -1125,6 +1126,13 @@ export enum MediaFileContainer {
 	Wav = 'WAV',
 	Wma = 'WMA',
 	Wmv = 'WMV',
+}
+
+/** The media file request types. */
+export enum MediaFileRequestType {
+	Download = 'DOWNLOAD',
+	Rss = 'RSS',
+	Stream = 'STREAM',
 }
 
 export type MediaFileResult = Attachment | AudioFile | VideoFile;
@@ -5562,6 +5570,7 @@ export type VideoFile = Node & {
 };
 
 export type VideoFileUrlArgs = {
+	requestType?: InputMaybe<MediaFileRequestType>;
 	skipAnalytics: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -14154,7 +14163,7 @@ export const CardRecordingSequenceHatFragmentDoc = `
 fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}
 `;
 export const AndMiniplayerFragmentDoc = `
-fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url filesize mimeType duration}}
+fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)filesize mimeType duration}}
 `;
 export const TeaseRecordingFragmentDoc = `
 fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}
@@ -14199,7 +14208,7 @@ export const SequenceNavFragmentDoc = `
 fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}
 `;
 export const ButtonDownloadFragmentDoc = `
-fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url filesize bitrate}}
+fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url(requestType:DOWNLOAD)filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url(requestType:DOWNLOAD)filesize bitrate}}
 `;
 export const ButtonShareRecordingFragmentDoc = `
 fragment buttonShareRecording on Recording{id title shareUrl speakers:persons(role:SPEAKER){name}}
@@ -14232,7 +14241,7 @@ export const SponsorPivotFragmentDoc = `
 fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
 `;
 export const GenerateFeedFragmentDoc = `
-fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}
+fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url(requestType:RSS)filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url(requestType:RSS)filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}
 `;
 export const BookFeedDescriptionFragmentDoc = `
 fragment bookFeedDescription on Sequence{title recordings(first:25){nodes{authors:persons(role:WRITER){name}narrators:persons(role:SPEAKER){name}}}}
