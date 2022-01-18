@@ -74,6 +74,16 @@ module.exports = withBundleAnalyzer(
 					permanent: false,
 				},
 				{
+					source: '/:lang/podcasts/latest',
+					destination: '/:lang/teachings/all/feed.xml',
+					permanent: false,
+				},
+				{
+					source: '/:lang/podcasts/trending',
+					destination: '/:lang/teachings/all/feed.xml',
+					permanent: false,
+				},
+				{
 					source: '/:lang/sermons/podcasts/latest',
 					destination: '/:lang/teachings/all/feed.xml',
 					permanent: true,
