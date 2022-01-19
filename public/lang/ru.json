@@ -1,16 +1,18 @@
 {
   "RecordingFavorite__favorite": {
     "comment": "Recording favorite button label",
-    "string": "Избранный (single). Избранные (plural)."
+    "string": "Избранный"
   },
   "RecordingFavorite__unfavorite": {
     "comment": "Recording unfavorite button label",
-    "string": "Неизбранный (single). Неизбранные (plural)."
+    "string": "Неизбранный"
   },
   "accountNav__audiopreferences": {
-    "string": "Предпочтения"
+    "comment": "",
+    "string": "Свойства"
   },
   "accountNav__profile": {
+    "comment": "",
     "string": "Профиль"
   },
   "accountPlaylists__buttonLabelSubmit": {
@@ -27,7 +29,7 @@
   },
   "accountPlaylists__inputLabelSummary": {
     "comment": "account playlists page input label summary",
-    "string": "резюме/краткий обзор"
+    "string": "Итоговый плейлист"
   },
   "accountPlaylists__inputLabelTitle": {
     "comment": "account playlists page input label title",
@@ -35,40 +37,50 @@
   },
   "accountPlaylists__labelPrivate": {
     "comment": "account playlists page playlist private label",
-    "string": "частный / личный"
+    "string": "личный"
   },
   "accountPlaylists__labelPublic": {
     "comment": "account playlists page playlist public label",
     "string": "Публичный"
   },
   "andGlobalModals__confirmRemoveFavorite-confirm": {
+    "comment": "",
     "string": "Удалить наименование"
   },
   "andGlobalModals__confirmRemoveFavorite-copy": {
+    "comment": "",
     "string": "Хотите ли Вы удалить наименование из Вашей библиотеки?"
   },
   "andGlobalModals__confirmRemoveFavorite-heading": {
+    "comment": "",
     "string": "Вы уверены?"
   },
   "andGlobalModals__confirmRemoveFavorite-keep": {
+    "comment": "",
     "string": "Сохранить наименование"
   },
   "andGlobalModals__continueAsGuest": {
+    "comment": "",
     "string": "Продолжить как гость"
   },
   "andGlobalModals__copy": {
-    "string": "Можете добавить аудио в закладку, чтобы иметь доступ в своей учетной записи. Другие функции, которые включают добавление аудио в Вашу библиотеку."
+    "comment": "",
+    "string": "Можете добавить закладку, чтобы иметь доступ в своей учетной записи. Другие функции, которые включают добавление аудио записи в Вашу библиотеку."
   },
   "andGlobalModals__createAccount": {
+    "comment": "",
     "string": "Создать учетную запись"
   },
   "andGlobalModals__heading": {
+    "comment": "",
     "string": "Функция только для участников"
   },
   "andGlobalModals__logIn": {
+    "comment": "",
     "string": "Войти"
   },
   "andNavigation__donate": {
+    "comment": "",
     "string": "Пожертвовать"
   },
   "atom-progressBar__label": {
@@ -76,58 +88,72 @@
     "string": "Прогресс"
   },
   "audiobookList__heading": {
+    "comment": "",
     "string": "Все аудиокниги"
   },
   "backButton__back": {
+    "comment": "",
     "string": "Назад"
   },
   "bibleBook__chapterListTitle": {
+    "comment": "",
     "string": "Другие главы в книге"
   },
   "bibleVersionTypeLockup__type": {
+    "comment": "",
     "string": "Версия Библии"
   },
   "bibleVersion__booksLabel": {
+    "comment": "",
     "string": "66 книг"
   },
   "bibleVersion__description": {
+    "comment": "",
     "string": "Описание"
   },
   "bibleVersion__sponsorLabel": {
-    "string": "Спонсор"
+    "comment": "",
+    "string": "Организатор"
   },
   "bibleVersions__heading": {
+    "comment": "",
     "string": "Библия"
   },
   "bibleVersions__intro": {
-    "string": "Лучший способ выучить разумную доктрину -слушать Слово Божье. Наш аудио Библии дадут Вам возможность слушать великие поучения от величайшего Учителя из всех."
+    "comment": "",
+    "string": "Лучший способ познакомиться с учением Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
-    "string": "Другие блогерские записи"
+    "string": "Другие записи блога"
   },
   "blogDetailPage__readingDuration": {
     "comment": "Blog post detail reading duration",
     "string": "{duration} прочитано"
   },
   "cardAudiobookTrack_readByLabel": {
+    "comment": "",
     "string": "Прочитано (кем-то) 1 {name}"
   },
   "cardAudiobookTrack_sequenceLabel": {
+    "comment": "",
     "string": "Книга"
   },
   "cardBibleBook__chaptersLabel": {
+    "comment": "",
     "string": "{count} главы"
   },
   "cardBibleBook__typeLabel": {
+    "comment": "",
     "string": "{abbreviation} Библия"
   },
   "cardBibleVersion__booksLabel": {
+    "comment": "",
     "string": "66 книг"
   },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
-    "string": "1 {count} поучения"
+    "string": "1 {count} темы"
   },
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
@@ -135,9 +161,10 @@
   },
   "cardPerson_teachingsLabel": {
     "comment": "Card person teachings count label",
-    "string": "1 {count} поучения"
+    "string": "1 {count} темы"
   },
   "cardPlaylist__typeLabel": {
+    "comment": "",
     "string": "Список воспроизведений"
   },
   "cardPost__readingDuration": {
@@ -145,23 +172,28 @@
     "string": "{duration} прочитано"
   },
   "cardSequence_audiobookType": {
+    "comment": "",
     "string": "Книга"
   },
   "cardSequence_scriptureSongsType": {
-    "string": "Песни из Писания"
+    "comment": "",
+    "string": "Песни на библейские тексты"
   },
   "cardSequence_sequenceLabel": {
     "comment": "Card sequence recording count label",
     "string": "1{count} части"
   },
   "cardSequence_seriesType": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинары"
   },
   "cardSequence_storiesType": {
+    "comment": "",
     "string": "Истории"
   },
   "cardSermon_sequenceLabel": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинары"
   },
   "cardSlider__nextPageLabel": {
     "comment": "card slider next page label",
@@ -176,78 +208,91 @@
     "string": "Предыдущая страница"
   },
   "cardSong_sequenceLabel": {
-    "string": "Песни из Писания"
+    "comment": "",
+    "string": "Песни на библейские тексты"
   },
   "cardSponsor__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
-    "string": " {count} Конференции"
+    "string": "{count} Конференции"
   },
   "cardSponsor__recordingsCountLabel": {
     "comment": "Sponsor Detail teachings count label",
-    "string": "1 {count} поучения"
+    "string": "1 {count} темы"
   },
   "cardSponsor__sequencesCountLabel": {
     "comment": "Sponsor Detail series count label",
-    "string": "1 {count} серия"
+    "string": "1 {count} семинар"
   },
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
-    "string": "Спонсор"
+    "string": "Организатор"
   },
   "cardStory_sequenceLabel": {
+    "comment": "",
     "string": "Истории"
   },
   "ccollectionTeachingsDetail__heading": {
-    "string": "Все индивидуальные поучения"
+    "comment": "",
+    "string": "Все темы по отдельности"
   },
   "collectionDetail__descriptionLabel": {
+    "comment": "",
     "string": "Описание"
   },
   "collectionDetail__locationLabel": {
+    "comment": "",
     "string": "Местонахождение"
   },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Collection Detail sequence count label",
-    "string": "1 {count} серия"
+    "string": "1 {count} Семинар"
   },
   "collectionDetail__seriesAllLabel": {
-    "string": "Смотреть все серии"
+    "comment": "",
+    "string": "Смотреть все части"
   },
   "collectionDetail__seriesLabel": {
     "comment": "Collection Detail series label",
-    "string": "Серия"
+    "string": "Семинары"
   },
   "collectionDetail__speakersAllLabel": {
+    "comment": "",
     "string": "Смотреть всех проповедующих"
   },
   "collectionDetail__speakersLabel": {
     "comment": "Collection Detail speakers label",
-    "string": "Проповедующие"
+    "string": "Проповедники"
   },
   "collectionDetail__sponsorLabel": {
-    "string": "Спонсор"
+    "comment": "",
+    "string": "Организатор"
   },
   "collectionDetail__teachingsAllLabel": {
-    "string": "Смотреть все индивидуальные поучения"
+    "comment": "",
+    "string": "Смотреть все отдельные темы"
   },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
-    "string": "1 {count} поучения"
+    "string": "1 {count} темы"
   },
   "collectionDetail__teachingsLabel": {
     "comment": "Collection Detail teachings label",
-    "string": "Индивидуальные поучения"
+    "string": "Отдельные темы"
   },
   "collectionPresenterssDetail__heading": {
-    "string": "Все проповедующие"
+    "comment": "",
+    "string": "Все проповедники"
   },
   "collectionSequencesDetail__heading": {
-    "string": "Все серии"
+    "comment": "",
+    "string": "Все семинары"
   },
   "collectionTypeLockup_type": {
+    "comment": "",
     "string": "Конференция"
   },
   "conferenceListPage__title": {
+    "comment": "",
     "string": "Конференции"
   },
   "container-sermonList__filterLabelAll": {
@@ -267,68 +312,88 @@
     "string": "Части этого материала подлежат следующим лицензионным условиям:"
   },
   "discoverCollections_audiobooksHeading": {
+    "comment": "",
     "string": "Аудиокниги"
   },
   "discoverCollections_conferencesHeading": {
+    "comment": "",
     "string": "Конференции"
   },
   "discoverCollections_featuredCollectionHeading": {
+    "comment": "",
     "string": "Рекомендуемая коллекция"
   },
   "discoverCollections_scriptureSongsHeading": {
-    "string": "Песни из Писания"
+    "comment": "",
+    "string": "Песни на библейские тексты"
   },
   "discoverCollections_seeAll": {
+    "comment": "",
     "string": "Смотреть все"
   },
   "discoverCollections_seriesHeading": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинар"
   },
   "discoverCollections_speakersHeading": {
-    "string": "Проповедующие"
+    "comment": "",
+    "string": "Проповедники"
   },
   "discoverCollections_sponsorsHeading": {
+    "comment": "",
     "string": "Спонсоры"
   },
   "discoverCollections_storiesHeading": {
+    "comment": "",
     "string": "Истории"
   },
   "discover__conferencesSeeAll": {
+    "comment": "",
     "string": "Смотреть все недавние конференции"
   },
   "discover__recentTeachingsSeeAll": {
-    "string": "Посмотреть все недавние поучения"
+    "comment": "",
+    "string": "Посмотреть все недавние проповеди"
   },
   "discover__storiesHeading": {
+    "comment": "",
     "string": "Недавние истории"
   },
   "discover__storiesSeeAll": {
+    "comment": "",
     "string": "Смотреть все недавние истории"
   },
   "discover__trendingTeachingsSeeAll": {
-    "string": "Смотреть все поучения, которые находятся в тренде"
+    "comment": "",
+    "string": "Смотреть все популяные проповеди"
   },
   "discover_conferencesHeading": {
+    "comment": "",
     "string": "Недавние конференции"
   },
   "discover_recentTeachingsHeading": {
-    "string": "Недавние поучения"
+    "comment": "",
+    "string": "Недавние проповеди"
   },
   "discover_trendingTeachingsHeading": {
-    "string": "Поучения, которые в тренде"
+    "comment": "",
+    "string": "Популяные проповеди"
   },
   "downloadAppButton__android": {
+    "comment": "",
     "string": "Приложение Android"
   },
   "downloadAppButton__ios": {
+    "comment": "",
     "string": "Приложение iOS"
   },
   "downloadAppButton__label": {
+    "comment": "",
     "string": "Скачать приложение"
   },
   "duration__hours": {
     "comment": "duration hours",
-    "string": " 1 {hours} час"
+    "string": "1 {hours} час"
   },
   "duration__hoursAndMinutes": {
     "comment": "duration hours and minutes",
@@ -339,15 +404,19 @@
     "string": "1 {minutes}m"
   },
   "generateFeed__audio": {
+    "comment": "",
     "string": "Аудио"
   },
   "generateFeed__subtitle": {
+    "comment": "",
     "string": "1{container}{format} 3{bitrate} kbps"
   },
   "generateFeed__video": {
+    "comment": "",
     "string": "Видео"
   },
   "generatedFeed__copyright": {
+    "comment": "",
     "string": "Эта лента Авторского Права 1 {year} AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
   },
   "header__navItemBlog": {
@@ -360,7 +429,7 @@
   },
   "header__navItemDiscover": {
     "comment": "Header nav link name: Discover",
-    "string": "Открыть"
+    "string": "Проповеди"
   },
   "header__navItemLibrary": {
     "comment": "Header nav link name: Library",
@@ -371,22 +440,28 @@
     "string": "Подробнее"
   },
   "header__navItemStory": {
+    "comment": "",
     "string": "Наша история"
   },
   "header__navItemStory-donate": {
+    "comment": "",
     "string": "Пожертвовать"
   },
   "header__navItemStory-purpose": {
+    "comment": "",
     "string": "Наша цель"
   },
   "header__navItemStory-spiritOfAudioVerse": {
+    "comment": "",
     "string": "Дух AudioVerse"
   },
   "header__navItemStory-team": {
+    "comment": "",
     "string": "Команда"
   },
   "header__navItemStory-testimonials": {
-    "string": "Свидетельства"
+    "comment": "",
+    "string": "Отзывы"
   },
   "header__navItemUser": {
     "comment": "Header nav link name: User Settings",
@@ -397,42 +472,55 @@
     "string": "Библия"
   },
   "header__navItemCollections-all": {
+    "comment": "",
     "string": "Все сборники"
   },
   "header__navItemCollections-book": {
+    "comment": "",
     "string": "Книга"
   },
   "header__navItemCollections-conference": {
+    "comment": "",
     "string": "Конференция"
   },
   "header__navItemCollections-series": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинар"
   },
   "header__navItemCollections-songs": {
-    "string": "Песни из Писания"
+    "comment": "",
+    "string": "Песни на библейские тексты"
   },
   "header__navItemCollections-speaker": {
-    "string": "Проповедующий"
+    "comment": "",
+    "string": "Проповедник"
   },
   "header__navItemCollections-sponsor": {
-    "string": "Спонсор"
+    "comment": "",
+    "string": "Организатор"
   },
   "header__navItemCollections-stories": {
+    "comment": "",
     "string": "Истории"
   },
   "header__navItemMore-legal": {
+    "comment": "",
     "string": "Законный"
   },
   "header__navItemMore-privacy": {
+    "comment": "",
     "string": "Конфиденциальность"
   },
   "header__navItemMore-terms": {
+    "comment": "",
     "string": "Условия использования"
   },
   "header__navItemUser-logout": {
+    "comment": "",
     "string": "Выйти из системы"
   },
   "header__navItemUser-profile": {
+    "comment": "",
     "string": "Профиль"
   },
   "homePage__addToLibraryPlaceholder": {
@@ -445,7 +533,7 @@
   },
   "homePage__createAccountSectionText": {
     "comment": "home page create account section text",
-    "string": "Создать учетную запись, чтобы получить больше Audioverse (Аудио стихов). Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+    "string": "Создать учетную запись, чтобы получить больше предложений от Audioverse. Загружайте проповеди, сохраняйте семинары в личную библиотеку, подписывайтесь на организаторов и проповедников, чтобы получать последние публикации."
   },
   "homePage__createAccountSectionTitle": {
     "comment": "home page create account section title",
@@ -453,7 +541,7 @@
   },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
-    "string": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Транслируйте поучения из любого места через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге без использования данных."
+    "string": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Слушайте проповеди в любом месте через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге офлайн."
   },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
@@ -501,7 +589,7 @@
   },
   "homePage__footerSocialTitle": {
     "comment": "home page footer social title",
-    "string": "Социальный"
+    "string": "Соцсети"
   },
   "homePage__footerTwitterLink": {
     "comment": "home page footer twitter link",
@@ -541,15 +629,15 @@
   },
   "homePage__soundDoctrineText": {
     "comment": "home page sound doctrine text",
-    "string": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Задавайтесь вопросами и вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
+    "string": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Разберитесь в сложных темах, вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
   },
   "homePage__soundDoctrineTitle": {
     "comment": "home: Sound Doctrine section title",
-    "string": "Здравая доктрина"
+    "string": "Здравое учение"
   },
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
-    "string": "Внести пожертвование"
+    "string": "Сделать пожертвование"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -557,7 +645,7 @@
   },
   "homePage__supportSectionText": {
     "comment": "home page support section text",
-    "string": "AudioVerse - это некоммерческое служение, существующее благодаря нашим жертвователям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны группе наших щедрых жертвователей. Подумайте, не готовы ли вы внести пожертвование сегодня, даже если это всего лишь 5 долларов в месяц, и помогите нам гарантировать дальнейшее распространение разумного учения."
+    "string": "AudioVerse - это некоммерческое служение, существующее благодаря пожертвованиям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны всем, кто поддерживает нас. Вы тоже можете поддержать наше служение, даже если это будет всего лишь 5 долларов ежемесячно, - это поможет нам и дальше распространять здравое учение."
   },
   "homePage__supportSectionTitle": {
     "comment": "home page support section title",
@@ -565,169 +653,222 @@
   },
   "homePage__testimoniesSectionText": {
     "comment": "home page testimonies section text",
-    "string": "Услышать от кого-то, кто пользуется AudioVerse."
+    "string": "Отзывы пользователей AudioVerse."
   },
   "home__testimoniesTitle": {
     "comment": "Testimonies slider title",
-    "string": "Свидетельства"
+    "string": "Отзывы"
   },
   "languageAlternativesAlert__dismiss": {
+    "comment": "",
     "string": "Отклонить"
   },
   "languageAlternativesAlert__message": {
-    "string": "Благодаря нашим жертвователям, а также международным партнерам, AudioVerse сегодня доступна на многих сайтах на разных языках. Поменяйте язык здесь или в меню."
+    "comment": "",
+    "string": "Благодаря вашим пожертвоаниям и помощи волонтеров из разных стран, служение AudioVerse сегодня доступно на разных языках. Поменяйте язык здесь или в меню."
   },
   "libraryCollections__collectionsHeading": {
+    "comment": "",
     "string": "Подборки"
   },
   "libraryCollections__dismiss": {
+    "comment": "",
     "string": "Отклонить"
   },
   "libraryCollections__emptyCopy": {
-    "string": "Добавить в закладки наименования, или прослушивайте аудио на странице Discover."
+    "comment": "",
+    "string": "Пометьте темы или прослушивайте аудио на странице Проповеди."
   },
   "libraryCollections__emptyHeading": {
+    "comment": "",
     "string": "У вас еще нет сохраненных элементов сборников"
   },
   "libraryCollections__personsHeading": {
-    "string": "Проповедующие"
+    "comment": "",
+    "string": "Проповедники"
   },
   "libraryCollections__playlistsAlert": {
-    "string": "В данный момент проводится повторное изображение опыта со списком воспроизведений. Вы можете управлять списком воспроизведений, используя мобильное приложение."
+    "comment": "",
+    "string": "В данный момент проводятся ремонтные работы в списках воппроизведения. Вы можете управлять списком воспроизведений, используя мобильное приложение."
   },
   "libraryCollections__playlistsHeading": {
+    "comment": "",
     "string": "Списки воспроизведений"
   },
   "libraryCollections__sponsorsHeading": {
-    "string": "Спонсоры"
+    "comment": "",
+    "string": "Организаторы"
   },
   "libraryError__cta": {
-    "string": "Перейти к разделу Discover"
+    "comment": "",
+    "string": "Перейти к разделу Проповеди"
   },
   "libraryHistory__emptyCopy": {
-    "string": "Найти файл для прослушивания на странице Discover."
+    "comment": "",
+    "string": "Найти файл для прослушивания на странице Проповеди."
   },
   "libraryHistory__emptyHeading": {
+    "comment": "",
     "string": "Нет прослушанных файлов"
   },
   "libraryHistory__loadMore": {
+    "comment": "",
     "string": "Загрузить еще"
   },
   "libraryNav__all": {
+    "comment": "",
     "string": "Все"
   },
   "libraryNav__collections": {
+    "comment": "",
     "string": "Подборки"
   },
   "libraryNav__filter": {
+    "comment": "",
     "string": "Фильтр"
   },
   "libraryNav__finished": {
+    "comment": "",
     "string": "Завершено"
   },
   "libraryNav__history": {
+    "comment": "",
     "string": "История"
   },
   "libraryNav__sortAtoZ": {
-    "string": "От А до Я (Russian alphabet) От А до Z (English alphabet)"
+    "comment": "",
+    "string": "От А до Z"
   },
   "libraryNav__sortNewest": {
+    "comment": "",
     "string": "От самых новых до самых старых"
   },
   "libraryNav__sortOldest": {
+    "comment": "",
     "string": "От самых старых до самых новых"
   },
   "libraryNav__sortZtoA": {
+    "comment": "",
     "string": "От Z до А"
   },
   "libraryNav__started": {
+    "comment": "",
     "string": "Начатые"
   },
   "libraryNav__unstarted": {
+    "comment": "",
     "string": "Не начатые"
   },
   "libraryPlaybackStatus__emptyCopy": {
-    "string": "Найти файл для прослушивания на странице Discover."
+    "comment": "",
+    "string": "Найти файл для прослушивания на странице Проповеди."
   },
   "libraryPlaybackStatus__finishedEmptyHeading": {
+    "comment": "",
     "string": "Ни один элемент еще не был завершен"
   },
   "libraryPlaybackStatus__startedEmptyHeading": {
+    "comment": "",
     "string": "Ни один элемент еще не был начатым"
   },
   "libraryPlaybackStatus__unstartedEmptyHeading": {
+    "comment": "",
     "string": "Нет ни одного сохраненного наименования"
   },
   "library__collectionsHeading": {
+    "comment": "",
     "string": "Подборки"
   },
   "library__collectionsSeeAll": {
+    "comment": "",
     "string": "Посмотреть все сборники"
   },
   "library__emptyCopy": {
-    "string": "Добавить в закладки файлы или слушать файлы на странице Discover."
+    "comment": "",
+    "string": "Добавить в закладки файлы или слушать записи на странице Проповеди."
   },
   "library__emptyHeading": {
+    "comment": "",
     "string": "Нет ни одного сохраненного наименования"
   },
   "library__finishedHeading": {
+    "comment": "",
     "string": "Завершено"
   },
   "library__finishedSeeAll": {
+    "comment": "",
     "string": "Посмотреть все завершенные"
   },
   "library__historyHeading": {
+    "comment": "",
     "string": "История"
   },
   "library__historySeeAll": {
+    "comment": "",
     "string": "Просмотреть всю историю"
   },
   "library__membersOnlyCopy": {
+    "comment": "",
     "string": "Войти в систему или создать учетную запись чтобы войти в библиотеку настроек."
   },
   "library__membersOnlyCta": {
+    "comment": "",
     "string": "Создать учетную запись или войти в систему"
   },
   "library__membersOnlyHeading": {
+    "comment": "",
     "string": "Функция только для участников"
   },
   "library__startedHeading": {
+    "comment": "",
     "string": "Начатые"
   },
   "library__startedSeeAll": {
+    "comment": "",
     "string": "Посмотреть все начатые"
   },
   "library__unstartedHeading": {
+    "comment": "",
     "string": "Не начатые"
   },
   "loadingCards-ariaLabel": {
+    "comment": "",
     "string": "Загрузка...."
   },
   "loginForm-reset__doneButton": {
+    "comment": "",
     "string": "Выполнено"
   },
   "loginForm-reset__emailLabel": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "loginForm-reset__emailPlaceholder": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "loginForm-reset__modalParagraph": {
+    "comment": "",
     "string": "Введите адрес электронной почты, связанный с вашей учетной записью, и мы отправим Вам ссылку для восстановления пароля."
   },
   "loginForm-reset__modalParagraphSent": {
+    "comment": "",
     "string": "Ссылка на восстановление пароля отправлена. Проверьте свою электронную почту и перейдите по ссылке чтобы восстановить пароль."
   },
   "loginForm-reset__modalTitle": {
+    "comment": "",
     "string": "Восстановить пароль"
   },
   "loginForm-reset__sendLinkButton": {
+    "comment": "",
     "string": "Отправить ссылку на восстановление пароля"
   },
   "loginForm__emailLabel": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "loginForm__emailPlaceholder": {
+    "comment": "",
     "string": "jane@example.com"
   },
   "loginForm__forgotPasswordButton": {
@@ -739,9 +880,11 @@
     "string": "Логин"
   },
   "loginForm__passwordLabel": {
+    "comment": "",
     "string": "Пароль"
   },
   "loginForm__passwordPlaceholder": {
+    "comment": "",
     "string": "∗∗∗∗∗∗∗"
   },
   "loginForm__resetPasswordErrorMessage": {
@@ -753,12 +896,15 @@
     "string": "Проверьте пришло ли на Вашу электронную почту сообщение с ссылкой на восстановление пароля"
   },
   "loginForm__signup": {
+    "comment": "",
     "string": "Зарегистрироваться"
   },
   "loginForm__signupIntro": {
+    "comment": "",
     "string": "У Вас нет учетной записи?"
   },
   "logout__inProcess": {
+    "comment": "",
     "string": "Выход из системы..."
   },
   "molecule-buttonDownload__buttonLabel": {
@@ -774,36 +920,47 @@
     "string": "Загрузки видео файлов"
   },
   "molecule-buttonGuest__feature1": {
+    "comment": "",
     "string": "Lorem ipsum dolor"
   },
   "molecule-buttonGuest__feature2": {
+    "comment": "",
     "string": "Et exictur purim multatim"
   },
   "molecule-buttonGuest__feature3": {
+    "comment": "",
     "string": "Dulipscum erudis fesin"
   },
   "molecule-buttonGuest__label": {
+    "comment": "",
     "string": "Продолжить как гость"
   },
   "molecule-buttonGuest__modalButtonLabelCreateAccount": {
+    "comment": "",
     "string": "Создать учетную запись"
   },
   "molecule-buttonGuest__modalButtonLabelGuest": {
+    "comment": "",
     "string": "Продолжить как гость"
   },
   "molecule-buttonGuest__modalButtonLabelLogIn": {
+    "comment": "",
     "string": "Войти"
   },
   "molecule-buttonGuest__modalParagraph": {
+    "comment": "",
     "string": "Без учетной записи вы не сможете воспользоваться некоторыми ключевыми функциями, например:"
   },
   "molecule-buttonGuest__modalTitle": {
+    "comment": "",
     "string": "Продолжить как гость?"
   },
   "molecule-buttonShareRecording__audioEmbedLabel": {
+    "comment": "",
     "string": "Код для встраивания аудио"
   },
   "molecule-buttonShareRecording__videoEmbedLabel": {
+    "comment": "",
     "string": "Код для встраивания видео"
   },
   "molecule-buttonShare__buttonLabel": {
@@ -811,15 +968,19 @@
     "string": "поделиться"
   },
   "molecule-buttonShare__copyLink": {
+    "comment": "",
     "string": "Скопировать ссылку"
   },
   "molecule-buttonShare__copyRSSLink": {
+    "comment": "",
     "string": "Скопировать RSS ссылку"
   },
   "molecule-buttonShare__email": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "molecule-buttonShare__facebook": {
+    "comment": "",
     "string": "Facebook"
   },
   "molecule-buttonShare__shareTitle": {
@@ -827,6 +988,7 @@
     "string": "Поделиться"
   },
   "molecule-buttonShare__twitter": {
+    "comment": "",
     "string": "Twitter"
   },
   "molecule-buttonSpeed__buttonLabel": {
@@ -834,30 +996,39 @@
     "string": "1 {speed}X"
   },
   "molecule-cardRecordingSequenceHat__addAlbum": {
+    "comment": "",
     "string": "Добавить альбом"
   },
   "molecule-cardRecordingSequenceHat__addBook": {
+    "comment": "",
     "string": "Добавить книгу"
   },
   "molecule-cardRecordingSequenceHat__addSeries": {
+    "comment": "",
     "string": "Добавить серию"
   },
   "molecule-cardRecordingSequenceHat__addStoryAlbum": {
+    "comment": "",
     "string": "Добавить альбом"
   },
   "molecule-cardRecordingSequenceHat__inLibrary": {
+    "comment": "",
     "string": "1 {inLibraryCount} из 2{totalCount} в Вашей библиотеке"
   },
   "molecule-cardRecordingSequenceHat__removeAlbum": {
+    "comment": "",
     "string": "Удалить альбом"
   },
   "molecule-cardRecordingSequenceHat__removeBook": {
+    "comment": "",
     "string": "Удалить книгу"
   },
   "molecule-cardRecordingSequenceHat__removeSeries": {
+    "comment": "",
     "string": "Удалить серию"
   },
   "molecule-cardRecordingSequenceHat__removeStoryAlbum": {
+    "comment": "",
     "string": "Удалить альбом"
   },
   "molecule-searchBar__label": {
@@ -865,9 +1036,11 @@
     "string": "Поиск"
   },
   "molecule-teaseRecording__lessPersons": {
+    "comment": "",
     "string": "Показать меньше"
   },
   "molecule-teaseRecording__morePersons": {
+    "comment": "",
     "string": "1{count} больше"
   },
   "molecule-teaseRecording__partInfo": {
@@ -876,11 +1049,11 @@
   },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
-    "string": "Данная транскрипция может быть автоматически выработана."
+    "string": "Данная транскрипция может быть сделана роботом."
   },
   "molecule-transcript__help": {
     "comment": "transcript assistance request",
-    "string": "Наша автоматически выработанная копия текста нуждается в Вашей помощи. Можете обращаться к нам по электронной почте с предложениями по редакции данного текста для блага Вас и других. Адрес: media@audioverse.org"
+    "string": "Данный текст нуждается в редакции. Можете обращаться к нам по электронной почте с предложениями по редакции данного текста для удобства пользователей. Адрес: media@audioverse.org"
   },
   "molecule-transcript__labelClose": {
     "comment": "transcript button label close",
@@ -891,36 +1064,47 @@
     "string": "Читать копию текста"
   },
   "molecules-pagination__nextLabel": {
+    "comment": "",
     "string": "Следующее"
   },
   "molecules-pagination__previousLabel": {
+    "comment": "",
     "string": "Предыдущее"
   },
   "navigation__backToMenu": {
+    "comment": "",
     "string": "Назад в меню"
   },
   "navigation__loginSignupCta": {
+    "comment": "",
     "string": "Войти в систему/зарегистрироваться"
   },
   "notFound__header": {
+    "comment": "",
     "string": "Приносим извинения!"
   },
   "notFound__message": {
-    "string": "Ссылка может быть взломана, либо не существует, либо же неверно напечатана."
+    "comment": "",
+    "string": "Ссылка может быть ошибочной, либо не существующей, либо же неверно напечатаной."
   },
   "notFound__subheader": {
+    "comment": "",
     "string": "Не удалось найти данную страницу"
   },
   "notFound__suggestionsHeader": {
+    "comment": "",
     "string": "Послушайте один из предложенных файлов"
   },
   "notFound__toDiscover": {
-    "string": "Назад на страницу Discover"
+    "comment": "",
+    "string": "Назад на страницу Проповеди"
   },
   "organism-modal__close": {
+    "comment": "",
     "string": "Закрыть"
   },
   "organism-recording__albumListTitle": {
+    "comment": "",
     "string": "Другие песни в альбоме"
   },
   "organism-recording__buttonLabelNext": {
@@ -944,11 +1128,12 @@
     "string": "Часть 1 {index}"
   },
   "organism-recording__readByLabel": {
+    "comment": "",
     "string": "Прочитано (кем-то) 1 {name}"
   },
   "organism-recording__seriesInfoTitle": {
     "comment": "Recording series info title",
-    "string": "Родительская серия"
+    "string": "Семинары для родителей"
   },
   "organism-recording__seriesListLabel": {
     "comment": "recording series list label",
@@ -963,6 +1148,7 @@
     "string": "Спонсор"
   },
   "personTypeLockup_type": {
+    "comment": "",
     "string": "Проповедующий"
   },
   "playButton__pauseLabel": {
@@ -1014,6 +1200,7 @@
     "string": "Вам нужно зайти в учётную запись, чтобы выполнить это действие "
   },
   "playlistDetail__createdLabel": {
+    "comment": "",
     "string": "Создано"
   },
   "playlistDetail__partsCountLabel": {
@@ -1021,57 +1208,75 @@
     "string": "1 {count} поучения"
   },
   "playlistDetail__summaryLabel": {
+    "comment": "",
     "string": "Резюме/краткий обзор"
   },
   "playlistDetail__type": {
+    "comment": "",
     "string": "Список воспроизведений"
   },
   "preferences__buttonLabelSaveChanges": {
+    "comment": "",
     "string": "Сохранить изменения"
   },
   "preferences__downloadSettings": {
+    "comment": "",
     "string": "Скачать настройки"
   },
   "preferences__downloadSettingsIntro": {
+    "comment": "",
     "string": "Выбрать, как Вы хотите скачать аудио файл."
   },
   "preferences__heading": {
+    "comment": "",
     "string": "Настройки учетной записи"
   },
   "preferences__inputAutoplay": {
+    "comment": "",
     "string": "Записи с автовоспроизведением"
   },
   "preferences__language": {
+    "comment": "",
     "string": "Язык"
   },
   "preferences__playbackSettings": {
+    "comment": "",
     "string": "Настройки воспроизведения"
   },
   "preferences__playbackSettingsIntro": {
-    "string": "Выберите должны ли записи по умолчанию воспроизводиться в автоматическом режиме."
+    "comment": "",
+    "string": "Выберите, должны ли записи по умолчанию воспроизводиться в автоматическом режиме."
   },
   "preferences__preferredAudioQuality": {
+    "comment": "",
     "string": "Предпочтительное качество звука"
   },
   "preferences__preferredAudioQuality-high": {
+    "comment": "",
     "string": "Высоко"
   },
   "preferences__preferredAudioQuality-low": {
+    "comment": "",
     "string": "Низко"
   },
   "preferences__preferredAudioQuality-medium": {
+    "comment": "",
     "string": "Средний"
   },
   "preferences__subheading": {
+    "comment": "",
     "string": "Предпочтения"
   },
   "preferences__timezone": {
+    "comment": "",
     "string": "Часовой пояс"
   },
   "presenterAppearsDetail__heading": {
+    "comment": "",
     "string": "Все также появляется в...."
   },
   "presenterDetail__alsoAppearsInLabel": {
+    "comment": "",
     "string": "Также появляется в...."
   },
   "presenterDetail__audiobookTracksCountLabel": {
@@ -1079,9 +1284,11 @@
     "string": "1 {count} Дорожка аудиокниги"
   },
   "presenterDetail__descriptionLabel": {
+    "comment": "",
     "string": "Описание"
   },
   "presenterDetail__essentialRecordingsLabel": {
+    "comment": "",
     "string": "Существенное {name}"
   },
   "presenterDetail__musicTracksCountLabel": {
@@ -1089,19 +1296,23 @@
     "string": "1{count} Музыкальные дорожки"
   },
   "presenterDetail__recentAllLabel": {
+    "comment": "",
     "string": "Просмотреть все недавние"
   },
   "presenterDetail__recentRecordingsLabel": {
+    "comment": "",
     "string": "Недавние"
   },
   "presenterDetail__seriesAllLabel": {
-    "string": "Смотреть все серии"
+    "comment": "",
+    "string": "Смотреть все части"
   },
   "presenterDetail__seriesLabel": {
     "comment": "Collection Detail series label",
-    "string": "Серия"
+    "string": "Семинары"
   },
   "presenterDetail__speakersAllLabel": {
+    "comment": "",
     "string": "Просмотреть все также появляется в...."
   },
   "presenterDetail__storiesCountLabel": {
@@ -1113,39 +1324,51 @@
     "string": "1 {count} поучения"
   },
   "presenterDetail__topAllLabel": {
-    "string": "Просмотреть большее количество часто прослушиваемых"
+    "comment": "",
+    "string": "Просмотреть большее самых популярных тем"
   },
   "presenterDetail__topRecordingsLabel": {
-    "string": "Часто прослушиваемые"
+    "comment": "",
+    "string": "Самые популярные"
   },
   "presenterDetail__websiteLabel": {
+    "comment": "",
     "string": "Веб-страница"
   },
   "presenterRecordingsDetail__heading": {
+    "comment": "",
     "string": "Все записи"
   },
   "presenterSequencesDetail__heading": {
+    "comment": "",
     "string": "Все серии"
   },
   "presenterTopDetail__heading": {
-    "string": "Часто прослушиваемые"
+    "comment": "",
+    "string": "Самые популярные"
   },
   "presentersFeed__description": {
+    "comment": "",
     "string": "Последние проповеди AudioVerse 1{name}"
   },
   "presentersFeed__title": {
+    "comment": "",
     "string": "Проповеди {name}"
   },
   "presentersList__title": {
-    "string": "Все проповедующие"
+    "comment": "",
+    "string": "Все проповедники"
   },
   "profile__buttonLabelDeleteAccount": {
+    "comment": "",
     "string": "Удалить учетную запись"
   },
   "profile__buttonLabelSaveChanges": {
+    "comment": "",
     "string": "Сохранить изменения"
   },
   "profile__heading": {
+    "comment": "",
     "string": "Настройки учетной записи"
   },
   "profile__inputLabelForEmail": {
@@ -1165,27 +1388,35 @@
     "string": "Пароль"
   },
   "profile__intro": {
+    "comment": "",
     "string": "Добавьте информацию о своей учетной записи для настройки своего опыта работы и управления информацией для входа в систему."
   },
   "profile__subheading": {
+    "comment": "",
     "string": "Профиль"
   },
   "register__emailLabel": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "register__emailPlaceholder": {
+    "comment": "",
     "string": "jane@example.com"
   },
   "register__firstNameLabel": {
+    "comment": "",
     "string": "Имя"
   },
   "register__firstNamePlaceholder": {
+    "comment": "",
     "string": "Jane"
   },
   "register__lastNameLabel": {
+    "comment": "",
     "string": "Фамилия"
   },
   "register__lastNamePlaceholder": {
+    "comment": "",
     "string": "Doe"
   },
   "register__loadingMessage": {
@@ -1193,21 +1424,27 @@
     "string": "Загрузка..."
   },
   "register__login": {
+    "comment": "",
     "string": "Логин"
   },
   "register__loginIntro": {
+    "comment": "",
     "string": "У Вас уже есть учетная запись?"
   },
   "register__newsletterSubscribe": {
+    "comment": "",
     "string": "Подписаться на рассылку бюллетеня"
   },
   "register__passwordLabel": {
+    "comment": "",
     "string": "Пароль"
   },
   "register__passwordPlaceholder": {
+    "comment": "",
     "string": "∗∗∗∗∗∗∗"
   },
   "register__submitButton": {
+    "comment": "",
     "string": "Зарегистрироваться"
   },
   "register__successMessage": {
@@ -1215,9 +1452,11 @@
     "string": "Успешно"
   },
   "reset__confirmPasswordLabel": {
+    "comment": "",
     "string": "Подтвердите Ваш новый пароль"
   },
   "reset__confirmPasswordPlaceholder": {
+    "comment": "",
     "string": "Подтвердите Ваш новый пароль"
   },
   "reset__errorGeneral": {
@@ -1233,15 +1472,19 @@
     "string": "Пожалуйста, введите пароль 2 раза"
   },
   "reset__intro": {
+    "comment": "",
     "string": "Создайте новый пароль для 1{email}."
   },
   "reset__passwordLabel": {
+    "comment": "",
     "string": "Новый пароль"
   },
   "reset__passwordPlaceholder": {
+    "comment": "",
     "string": "Новый пароль"
   },
   "reset__submitButton": {
+    "comment": "",
     "string": "Логин"
   },
   "reset__successMessage": {
@@ -1249,72 +1492,95 @@
     "string": "Пароль успешно изменен"
   },
   "rssAlternate__title": {
+    "comment": "",
     "string": "Канал RSS"
   },
   "searchCollections__heading": {
+    "comment": "",
     "string": "Все подходящие сборники"
   },
   "searchPersons__heading": {
+    "comment": "",
     "string": "Все подходящие лица"
   },
   "searchSequences__heading": {
+    "comment": "",
     "string": "Все подходящие последовательности"
   },
   "searchSponsors__heading": {
+    "comment": "",
     "string": "Все соответствующие спонсоры"
   },
   "searchTeachings__heading": {
+    "comment": "",
     "string": "Все подходящие поучения"
   },
   "search__conferencesHeading": {
+    "comment": "",
     "string": "Конференции"
   },
   "search__conferencesSeeAll": {
+    "comment": "",
     "string": "Посмотреть все конференции"
   },
   "search__personsHeading": {
+    "comment": "",
     "string": "Проповедующие"
   },
   "search__personsSeeAll": {
+    "comment": "",
     "string": "Смотреть всех проповедующих"
   },
   "search__resultsCount": {
+    "comment": "",
     "string": "1 {count} Результаты"
   },
   "search__sequencesHeading": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинары"
   },
   "search__sequencesSeeAll": {
-    "string": "Смотреть все серии"
+    "comment": "",
+    "string": "Смотреть все части"
   },
   "search__sponsorsHeading": {
-    "string": "Спонсоры"
+    "comment": "",
+    "string": "Организаторы"
   },
   "search__sponsorsSeeAll": {
+    "comment": "",
     "string": "Просмотреть список всех спонсоров"
   },
   "search__teachingsHeading": {
-    "string": "Поучения"
+    "comment": "",
+    "string": "Темы"
   },
   "search__teachingsSeeAll": {
-    "string": "Увидеть все поучения"
+    "comment": "",
+    "string": "Увидеть все проповеди"
   },
   "sequenceType__audiobookTitle": {
+    "comment": "",
     "string": "Книга"
   },
   "sequenceType__musicTrackTitle": {
-    "string": "Песни из Писания"
+    "comment": "",
+    "string": "Песни на библейские тексты"
   },
   "sequenceType__seriesTitle": {
-    "string": "Серия"
+    "comment": "",
+    "string": "Семинар"
   },
   "sequenceType__storyTitle": {
+    "comment": "",
     "string": "Истории"
   },
   "seriesDetail__conferenceLabel": {
+    "comment": "",
     "string": "Конференция родителей"
   },
   "seriesDetail__descriptionLabel": {
+    "comment": "",
     "string": "Описание"
   },
   "seriesDetail__partsCountLabel": {
@@ -1322,9 +1588,11 @@
     "string": "1{count} части"
   },
   "seriesDetail__recordedLabel": {
+    "comment": "",
     "string": "Записано"
   },
   "seriesDetail__sponsorLabel": {
+    "comment": "",
     "string": "Спонсор"
   },
   "seriesDetail__type": {
@@ -1332,6 +1600,7 @@
     "string": "Серия"
   },
   "seriesList__heading": {
+    "comment": "",
     "string": "Все серии"
   },
   "sermonDetailPage__attachments": {
@@ -1347,6 +1616,7 @@
     "string": "Описание"
   },
   "sermonDetailPage__disclaimer": {
+    "comment": "",
     "string": "Идеи, изложенные в этой записи, принадлежат ее авторам и могут не совпадать с мнением AudioVerse."
   },
   "sermonDetailPage__recordedTitle": {
@@ -1354,21 +1624,27 @@
     "string": "Записано"
   },
   "sermonList__heading": {
-    "string": "Все поучения"
+    "comment": "",
+    "string": "Все темы"
   },
   "sermonsList__filter": {
+    "comment": "",
     "string": "Фильтр"
   },
   "socialLogin__loginFacebookButton": {
+    "comment": "",
     "string": "Войти с помощью Facebook"
   },
   "socialLogin__loginGoogleButton": {
+    "comment": "",
     "string": "Войти с помощью Google"
   },
   "socialLogin__registerFacebookButton": {
+    "comment": "",
     "string": "Зарегистрируйтесь в Facebook"
   },
   "socialLogin__registerGoogleButton": {
+    "comment": "",
     "string": "Зарегистрируйтесь в Google"
   },
   "socialLogin__successMessage": {
@@ -1656,85 +1932,103 @@
     "string": "Теги / метки"
   },
   "sopnsorTypeLockup_type": {
-    "string": "Спонсор"
+    "comment": "",
+    "string": "Организатор"
   },
   "sponsorConferencesDetail__heading": {
+    "comment": "",
     "string": "Все конференции"
   },
   "sponsorDetail__collectionCountLabel": {
     "comment": "Sponsor Detail collection count label",
-    "string": " {count} Конференции"
+    "string": "{count} Конференции"
   },
   "sponsorDetail__conferencesAllLabel": {
+    "comment": "",
     "string": "Посмотреть все конференции"
   },
   "sponsorDetail__conferencesLabel": {
+    "comment": "",
     "string": "Конференции"
   },
   "sponsorDetail__descriptionLabel": {
+    "comment": "",
     "string": "Описание"
   },
   "sponsorDetail__locationLabel": {
+    "comment": "",
     "string": "Местонахождение"
   },
   "sponsorDetail__recentAllLabel": {
-    "string": "Посмотреть все недавние поучения"
+    "comment": "",
+    "string": "Посмотреть все недавние проповеди"
   },
   "sponsorDetail__recentLabel": {
-    "string": "Недавние поучения"
+    "comment": "",
+    "string": "Недавние пропоиведи"
   },
   "sponsorDetail__recordingsCountLabel": {
     "comment": "Sponsor Detail teachings count label",
-    "string": "1 {count} поучения"
+    "string": "1 {count} проповеди"
   },
   "sponsorDetail__sequencesCountLabel": {
     "comment": "Sponsor Detail series count label",
-    "string": "1 {count} серия"
+    "string": "1 {count} часть"
   },
   "sponsorDetail__seriesAllLabel": {
-    "string": "Смотреть все серии"
+    "comment": "",
+    "string": "Смотреть все части"
   },
   "sponsorDetail__seriesLabel": {
     "comment": "Collection Detail series label",
-    "string": "Серия"
+    "string": "Семинары"
   },
   "sponsorDetail__websiteLabel": {
+    "comment": "",
     "string": "Веб-страница"
   },
-  "sponsorSeriesDetail__heading": {
-    "string": "Все серии"
-  },
   "sponsorTeachingsDetail__heading": {
+    "comment": "",
     "string": "Все поучения"
   },
   "sponsorTeachingsFeed__description": {
+    "comment": "",
     "string": "Самые последние записи из {title} на AudioVerse"
   },
   "sponsorTeachingsFeed__title": {
+    "comment": "",
     "string": "Проповеди {name}"
   },
   "sponsorsList__title": {
-    "string": "Все спонсоры"
+    "comment": "",
+    "string": "Все организаторы"
   },
   "storyAlbumList__heading": {
+    "comment": "",
     "string": "Все истории"
   },
   "storyAlbumsFeed__description": {
+    "comment": "",
     "string": "{title}, {authors}, рассказано {narrators}"
   },
   "teachingsFeed__description": {
+    "comment": "",
     "string": "Презентация AudioVerse на {language}"
   },
   "teachingsFeed__title": {
+    "comment": "",
     "string": "Презентации AudioVerse ({language})"
   },
   "testimonies__heading": {
-    "string": "Свидетельства"
+    "comment": "",
+    "string": "Отзывы"
   },
   "testimonies__intro": {
-    "string": "Есть ли положительные свидетельства? Расскажите нам свою историю!"
+    "comment": "",
+    "string": "Имеете сильное свидетельство? Расскажите нам свою историю!"
   },
   "testimonies__shareYourStory": {
+    "comment": "",
     "string": "Поделитесь своей историей"
   },
   "time__minutesAndSeconds": {
@@ -1742,78 +2036,103 @@
     "string": "{m}:{s}"
   },
   "trendingTeachings__heading": {
-    "string": "Поучения, которые в тренде"
+    "comment": "",
+    "string": "Популярные проповеди"
   },
   "unstartedSeeAll": {
+    "comment": "",
     "string": "Посмотреть все не начатые"
   },
   "andOnboarding__intro": {
-    "string": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в исследовании здравого учения."
+    "comment": "",
+    "string": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в вырасти духовно."
   },
   "app__features1Cta": {
+    "comment": "",
     "string": "Открыть аудио"
   },
   "app__features1Heading": {
-    "string": "Новые и Старые сокровищаНовые и Старые сокровища"
+    "comment": "",
+    "string": "Новое и старое"
   },
   "app__features1Kicker": {
-    "string": "Легким образом откройте для себя вдохновляющий материал из хранилища духовного содержания. Несложным образом откройте для себя вдохновляющий материал из хранилищницы духовного содержания."
+    "comment": "",
+    "string": "Легко находите вдохновляющляющий материал из большого выбора духовной информации."
   },
   "app__features2Cta": {
+    "comment": "",
     "string": "Просмотр недавнего содержания"
   },
   "app__features2Heading": {
+    "comment": "",
     "string": "Истина для настоящего времени"
   },
   "app__features2Kicker": {
-    "string": "С помощью AudioVerse легче найти недавние материалы ваших любимых проповедников, конференций и спонсоров."
+    "comment": "",
+    "string": "С помощью AudioVerse легче найти последние материалы ваших любимых проповедников, конференций и спонсоров."
   },
   "app__features3Cta": {
+    "comment": "",
     "string": "Изучите карты"
   },
   "app__features3Heading": {
+    "comment": "",
     "string": "Взаимосвязанные и гармоничные"
   },
   "app__features3Kicker": {
+    "comment": "",
     "string": "Карты включают в себя соответствующую информацию, например, исходную серию, чтобы всегда можно было видеть то, что является по-настоящему важным. Прилагаются подробные страницы, где можно посмотреть дополнительный контекст и взаимосвязи."
   },
   "app__features4Cta": {
-    "string": "Изучить библиотеку"
+    "comment": "",
+    "string": "Просмотрите библиотеку"
   },
   "app__features4Heading": {
-    "string": "Спасти тех, кого любите"
+    "comment": "",
+    "string": "Спасите тех, кого любите"
   },
   "app__features4Kicker": {
-    "string": "Создайте библиотеку поучений, чтобы можно было позже прослушать; старайтесь преуспевать благодаря прогрессу, который синхронизируется на ваших устройствах."
+    "comment": "",
+    "string": "Создайте библиотеку проповедей, чтобы можно было позже прослушать; вы не запутаетесь в темах, которые слушаете на разных устройствах - они синхронизируются!"
   },
   "app__features5Cta": {
+    "comment": "",
     "string": "Найти содержание для скачивания"
   },
   "app__features5Heading": {
-    "string": "Положитесь на себя..."
+    "comment": "",
+    "string": "Отложите для себя..."
   },
   "app__features5Kicker": {
-    "string": "Скачайте материал на свое устройство в моменты отсутствия сигнала или же просто во избежание того, чтобы закончились ваши данные."
+    "comment": "",
+    "string": "Скачайте материал на свое устройство, чтобы слушать офлайн или же просто, чтобы не использовать сотовые данные."
   },
   "bibleBook__disclaimer": {
-    "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания и интеграции определенных функций на нашей платформе. "
+    "comment": "",
+    "string": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
   },
   "buttonShare__emailSubject": {
-    "string": "Возрадуйтесь этому благословению"
+    "comment": "",
+    "string": "Порадуйтесь этому благословению"
   },
   "cardPost__typeLabel": {
+    "comment": "",
     "string": "Блог"
   },
   "cardSlider__pageNumberLabel": {
+    "comment": "",
     "string": "Страница {number}"
   },
   "cardSongBook__contributors": {
+    "comment": "",
     "string": "Различные участники"
   },
   "cardSongBook__numSongs": {
+    "comment": "",
     "string": "{count} песня"
   },
   "collectionDetail__presentersAllLabel": {
+    "comment": "",
     "string": "Просмотреть всех выступающих"
   },
   "collectionDetail__presentersLabel": {
@@ -1821,331 +2140,439 @@
     "string": "Выступающие"
   },
   "collectionType__audiobookSeries": {
+    "comment": "",
     "string": "Серия книг"
   },
   "collectionType__conference": {
+    "comment": "",
     "string": "Конференция"
   },
   "collectionType__musicSeries": {
+    "comment": "",
     "string": "Серия музыкальных произведений"
   },
   "collectionType__storyProgram": {
+    "comment": "",
     "string": "Сюжетная программа"
   },
   "contact__bodyLabel": {
+    "comment": "",
     "string": "Основная часть текста"
   },
   "contact__emailLabel": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "contact__emailPlaceholder": {
+    "comment": "",
     "string": "jane@example.com"
   },
   "contact__firstNameLabel": {
+    "comment": "",
     "string": "Имя"
   },
   "contact__firstNamePlaceholder": {
+    "comment": "",
     "string": "Jane"
   },
   "contact__intro": {
-    "string": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, поощряют нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой для заполнения, и мы с вами свяжемся в ближайшее время."
+    "comment": "",
+    "string": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, побуждают нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой обращения, и мы с вами свяжемся в ближайшее время."
   },
   "contact__lastNameLabel": {
+    "comment": "",
     "string": "Фамилия"
   },
   "contact__lastNamePlaceholder": {
+    "comment": "",
     "string": "Doe"
   },
   "contact__recipient": {
+    "comment": "",
     "string": "Тип контакта"
   },
   "contact__recipient-general": {
+    "comment": "",
     "string": "Общий контакт"
   },
   "contact__recipient-technical": {
+    "comment": "",
     "string": "Запросить поддержку"
   },
   "contact__recipient-testimonials": {
-    "string": "Поделиться свидетельством"
+    "comment": "",
+    "string": "Написать отзыв"
   },
   "contact__submitLabel": {
+    "comment": "",
     "string": "Отправить"
   },
   "contact__success": {
+    "comment": "",
     "string": "Успешно отправлено!"
   },
   "contact__testimonyLabel": {
-    "string": "Свидетельство"
+    "comment": "",
+    "string": "Отзыв"
   },
   "contact__title": {
+    "comment": "",
     "string": "Контакт"
   },
   "discoverCollections_presentersHeading": {
+    "comment": "",
     "string": "Выступающие"
   },
   "downloadAppButton__altLabel": {
+    "comment": "",
     "string": "Скачать сейчас"
   },
   "embed__partInfo": {
+    "comment": "",
     "string": "Часть 1 {index} из 2 {count}"
   },
   "give__amazonCta": {
+    "comment": "",
     "string": "Купить сейчас"
   },
   "give__amazonDescription": {
-    "string": "С каждой покупкой на AmazonSmile, AudioVerse получает 0.5%. {br}{br}. Как?  Просто нажмите на кнопку. {br}{br} Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе же ваш браузер по умолчанию вернется к обычному сайту Amazon."
+    "comment": "",
+    "string": "С каждой покупкой на AmazonSmile, AudioVerse получает 0.5%. {br}{br}. Как?  Просто нажмите на кнопку. {br}{br} Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе ваш браузер по умолчанию вернется к обычному сайту Amazon."
   },
   "give__amazonTitle": {
+    "comment": "",
     "string": "Amazon Улыбка"
   },
   "give__checkDescription": {
+    "comment": "",
     "string": "Чек, пожалуйста, выписывайте на имя AudioVerse.{br}1{br}Адрес нашей электронной почты:{br}{br} AudioVerse{br} PO Box 2288{br} Collegedale, TN 37315-2288{br} USA"
   },
   "give__checkTitle": {
+    "comment": "",
     "string": "Проверка по почте"
   },
   "give__estateCta": {
+    "comment": "",
     "string": "Пожертвовать сейчас"
   },
   "give__estateDescription": {
-    "string": "Сегодня и завтра вы можете повлиять на AudioVerse внеся, AudioVerse в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами.{br}{br} Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, но нуждается в пользовании своими активами, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для жертвователя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим жертвователям. {br}1{br}. Если Вы желаете внести пожертвование посредством благотворительного ежегодного взноса на AudioVerse, пожалуйста, свяжитесь с ЗАФ напрямую через веб-сайт или по телефону."
+    "comment": "",
+    "string": "Вы можете поддержать служение AudioVerse внеся нас в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами.{br}{br} Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, не завещая свое имущество, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для дарителя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим спонсорам. {br}1{br}. Если Вы желаете внести пожертвование посредством благотворительного ежегодного взноса на AudioVerse, пожалуйста, свяжитесь с ЗАФ напрямую через веб-сайт или по телефону."
   },
   "give__estateDisclaimer": {
+    "comment": "",
     "string": "Ежегодные благотворительные взносы НЕВОЗМОЖНЫ  для следующих штатов: Алабама, Мэриленд и Вашингтон. Для жителей Калифорнии и Иллинойса ежегодные пожертвования вносятся Конференцией тихоокеанского униона адвентистов седьмого дня. Ежегодный взнос для жителей Гавайев выплачивается Гавайской конференцией адвентистов седьмого дня; а ежегодные  благотворительные взносы в пользу AudioVerse во всех других штатах предоставляются Западным адвентистским фондом. Западный адвентистский фонд не предоставляет юридических услуг. Физическим лицам следует обращаться за помощью к собственному юристу."
   },
   "give__estateTitle": {
-    "string": "Помните о AudioVerse в Вашем плане наследства."
+    "comment": "",
+    "string": "Укажите AudioVerse в Вашем завещании."
   },
   "give__givingAssistantCta": {
+    "comment": "",
     "string": "Купить сейчас"
   },
   "give__givingAssistantDescription": {
+    "comment": "",
     "string": "Пожертвуйте до 30% от закупочной цены для AudioVerse, когда осуществляете покупки в 1800+ популярных интернет-магазинах с помощью Giving Assistant! Это легко. Giving Assistant возвращает Ваши деньги, а Вы выбираете, какую долю этой суммы Вы бы хотели пожертвовать. Воспользуйтесь сейчас и получите отличные предложения такие как Macy's Coupons. Также есть отличные места, такие как Home Depot и JC Penney, где можно сэкономить!"
   },
   "give__givingAssistantTitle": {
+    "comment": "",
     "string": "Giving Assistant"
   },
   "give__heading": {
+    "comment": "",
     "string": "Пожертвовать"
   },
   "give__paypalCta": {
+    "comment": "",
     "string": "Пожертвовать сейчас"
   },
   "give__paypalDescription": {
-    "string": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение, не запрашивая комиссии за обработку. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
+    "comment": "",
+    "string": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение без комиссии за обработку платежа. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
   },
   "give__paypalTitle": {
+    "comment": "",
     "string": "Фонд пожертвований PayPal"
   },
   "header__navItemCollections-books": {
+    "comment": "",
     "string": "Книги"
   },
   "header__navItemCollections-conferences": {
+    "comment": "",
     "string": "Конференции"
   },
   "header__navItemCollections-presenters": {
+    "comment": "",
     "string": "Выступающие"
   },
   "header__navItemCollections-sponsors": {
-    "string": "Спонсоры"
+    "comment": "",
+    "string": "Организаторы"
   },
   "header__navItemContact": {
+    "comment": "",
     "string": "Контакт"
   },
   "header__navItemContact-facebook": {
+    "comment": "",
     "string": "Facebook"
   },
   "header__navItemContact-general": {
+    "comment": "",
     "string": "Общий контакт"
   },
   "header__navItemContact-instagram": {
+    "comment": "",
     "string": "Instagram"
   },
   "header__navItemContact-support": {
+    "comment": "",
     "string": "Запросить поддержку"
   },
   "header__navItemContact-testimony": {
+    "comment": "",
     "string": "Поделиться свидетельством"
   },
   "header__navItemContact-twitter": {
+    "comment": "",
     "string": "Twitter"
   },
   "header__navItemContact-youtube": {
+    "comment": "",
     "string": "YouTube"
   },
   "header__navItemLibrary-history": {
+    "comment": "",
     "string": "История"
   },
   "header__navItemLibrary-playlists": {
+    "comment": "",
     "string": "Списки воспроизведений"
   },
   "header__navItemLibrary-saved": {
+    "comment": "",
     "string": "Сохранено"
   },
   "header__navItemPresenters": {
+    "comment": "",
     "string": "Выступающие"
   },
   "header__navItemStory-blog": {
+    "comment": "",
     "string": "Блог"
   },
   "homePage__learnStoryButtonLabel": {
+    "comment": "",
     "string": "Узнайте о нашей истории"
   },
   "homePage__newsletterEmail": {
+    "comment": "",
     "string": "Адрес электронной почты"
   },
   "homePage__newsletterEmailPlaceholder": {
+    "comment": "",
     "string": "josephbates@email.com"
   },
   "homePage__newsletterHatTitle": {
+    "comment": "",
     "string": "Подписаться на рассылку нашего бюллетеня"
   },
   "homePage__newsletterName": {
+    "comment": "",
     "string": "Имя"
   },
   "homePage__newsletterNamePlaceholder": {
+    "comment": "",
     "string": "Джозеф Бейтс"
   },
   "homePage__newsletterSubscribe": {
+    "comment": "",
     "string": "Подписаться"
   },
   "homePage__tagline": {
-    "string": "Разумное учение"
+    "comment": "",
+    "string": "Здравое учение"
   },
   "libraryHistory__loadingMore": {
+    "comment": "",
     "string": "Загрузка более..."
   },
   "libraryNav__contentType": {
+    "comment": "",
     "string": "Тип содержания"
   },
   "libraryNav__contentType-all": {
+    "comment": "",
     "string": "Все"
   },
   "libraryNav__contentType-audiobooks": {
+    "comment": "",
     "string": "Аудиокниги"
   },
   "libraryNav__contentType-conferences": {
+    "comment": "",
     "string": "Конференции"
   },
   "libraryNav__contentType-music": {
+    "comment": "",
     "string": "Музыка"
   },
   "libraryNav__contentType-people": {
+    "comment": "",
     "string": "Люди"
   },
   "libraryNav__contentType-series": {
+    "comment": "",
     "string": "Серия"
   },
   "libraryNav__contentType-sponsors": {
+    "comment": "",
     "string": "Спонсоры"
   },
   "libraryNav__contentType-stories": {
+    "comment": "",
     "string": "Истории"
   },
   "libraryNav__contentType-teachings": {
-    "string": "Поучения"
+    "comment": "",
+    "string": "Проповеди"
   },
   "libraryNav__duration": {
+    "comment": "",
     "string": "Продолжительность"
   },
   "libraryNav__duration-all": {
+    "comment": "",
     "string": "Все"
   },
   "libraryNav__duration-long": {
+    "comment": "",
     "string": "45-60 минут"
   },
   "libraryNav__duration-medium": {
+    "comment": "",
     "string": "30-45 минут"
   },
   "libraryNav__duration-short": {
+    "comment": "",
     "string": "15-30 минут"
   },
   "libraryNav__duration-xlong": {
+    "comment": "",
     "string": "Свыше 60 минут"
   },
   "libraryNav__filtersApplied": {
+    "comment": "",
     "string": "Примененные фильтры"
   },
   "libraryNav__mediaType": {
+    "comment": "",
     "string": "Тип носителя информации"
   },
   "libraryNav__mediaType-all": {
+    "comment": "",
     "string": "Все"
   },
   "libraryNav__mediaType-audio": {
+    "comment": "",
     "string": "Только аудио"
   },
   "libraryNav__mediaType-video": {
+    "comment": "",
     "string": "Видео"
   },
   "libraryNav__playbackStatus": {
+    "comment": "",
     "string": "Статус воспроизведения"
   },
   "libraryNav__playbackStatus-all": {
+    "comment": "",
     "string": "Все"
   },
   "libraryNav__playbackStatus-finished": {
+    "comment": "",
     "string": "Завершено"
   },
   "libraryNav__playbackStatus-started": {
+    "comment": "",
     "string": "Начатые"
   },
   "libraryNav__playbackStatus-unstarted": {
-    "string": "Не запущенный "
+    "comment": "",
+    "string": "Не запущенный"
   },
   "libraryNav__playlists": {
+    "comment": "",
     "string": "Списки воспроизведений"
   },
   "libraryNav__saved": {
+    "comment": "",
     "string": "Сохранено"
   },
   "libraryNav__sort": {
+    "comment": "",
     "string": "Сортировать"
   },
   "library__noMatchingCopy": {
-    "string": "Добавить в закладки файлы или слушать файлы на странице Discover."
+    "comment": "",
+    "string": "Добавить в закладки файлы или слушать файлы на странице Проповеди."
   },
   "library__noMatchingHeading": {
+    "comment": "",
     "string": "У Вас еще нет ни одного сохраненного подходящего файла."
   },
   "molecule-buttonGuest__downloadQuality": {
+    "comment": "",
     "string": "Настройка качества скачивания"
   },
   "molecule-buttonGuest__saving": {
+    "comment": "",
     "string": "Сохранить в библиотеку"
   },
   "molecule-buttonGuest__syncing": {
+    "comment": "",
     "string": "Синхронизация между Вашими устройствами"
   },
   "molecule-buttonShare__copied": {
+    "comment": "",
     "string": "Скопировано!"
   },
   "songsBooksDetail__contributors": {
+    "comment": "",
     "string": "Различные участники"
   },
   "songsBooksDetail__numSongs": {
+    "comment": "",
     "string": "{count} песня"
   },
   "songsListPage__intro": {
+    "comment": "",
     "string": "Слушать Слово Божье в музыкальной форме - отличный способ запомнить тексты Писания. Слушать по альбомам или по книгам Библии."
   },
   "songsListPage__tabAlbums": {
+    "comment": "",
     "string": "Альбомы"
   },
   "songsListPage__tabPassage": {
+    "comment": "",
     "string": "Текст"
   },
   "songsListPage__title": {
+    "comment": "",
     "string": "Песни из Писания"
   },
   "testimonies__seeAll": {
+    "comment": "",
     "string": "Просмотреть все свидетельства"
   },
   "testimonies__submitTestimony": {
+    "comment": "",
     "string": "Представить свидетельство"
   },
   "time__hoursMinutesAndSeconds": {
     "comment": "time hours, minutes and seconds",
-    "string": "{h}:{m}:{s} "
+    "string": "{h}:{m}:{s}"
   }
 }
