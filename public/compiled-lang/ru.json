@@ -2,19 +2,19 @@
   "RecordingFavorite__favorite": [
     {
       "type": 0,
-      "value": "Избранный (single). Избранные (plural)."
+      "value": "Избранный"
     }
   ],
   "RecordingFavorite__unfavorite": [
     {
       "type": 0,
-      "value": "Неизбранный (single). Неизбранные (plural)."
+      "value": "Неизбранный"
     }
   ],
   "accountNav__audiopreferences": [
     {
       "type": 0,
-      "value": "Предпочтения"
+      "value": "Свойства"
     }
   ],
   "accountNav__profile": [
@@ -44,7 +44,7 @@
   "accountPlaylists__inputLabelSummary": [
     {
       "type": 0,
-      "value": "резюме/краткий обзор"
+      "value": "Итоговый плейлист"
     }
   ],
   "accountPlaylists__inputLabelTitle": [
@@ -56,7 +56,7 @@
   "accountPlaylists__labelPrivate": [
     {
       "type": 0,
-      "value": "частный / личный"
+      "value": "личный"
     }
   ],
   "accountPlaylists__labelPublic": [
@@ -98,7 +98,7 @@
   "andGlobalModals__copy": [
     {
       "type": 0,
-      "value": "Можете добавить аудио в закладку, чтобы иметь доступ в своей учетной записи. Другие функции, которые включают добавление аудио в Вашу библиотеку."
+      "value": "Можете добавить закладку, чтобы иметь доступ в своей учетной записи. Другие функции, которые включают добавление аудио записи в Вашу библиотеку."
     }
   ],
   "andGlobalModals__createAccount": [
@@ -128,7 +128,7 @@
   "andOnboarding__intro": [
     {
       "type": 0,
-      "value": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в исследовании здравого учения."
+      "value": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в вырасти духовно."
     }
   ],
   "app__features1Cta": [
@@ -140,13 +140,13 @@
   "app__features1Heading": [
     {
       "type": 0,
-      "value": "Новые и Старые сокровищаНовые и Старые сокровища"
+      "value": "Новое и старое"
     }
   ],
   "app__features1Kicker": [
     {
       "type": 0,
-      "value": "Легким образом откройте для себя вдохновляющий материал из хранилища духовного содержания. Несложным образом откройте для себя вдохновляющий материал из хранилищницы духовного содержания."
+      "value": "Легко находите вдохновляющляющий материал из большого выбора духовной информации."
     }
   ],
   "app__features2Cta": [
@@ -164,7 +164,7 @@
   "app__features2Kicker": [
     {
       "type": 0,
-      "value": "С помощью AudioVerse легче найти недавние материалы ваших любимых проповедников, конференций и спонсоров."
+      "value": "С помощью AudioVerse легче найти последние материалы ваших любимых проповедников, конференций и спонсоров."
     }
   ],
   "app__features3Cta": [
@@ -188,19 +188,19 @@
   "app__features4Cta": [
     {
       "type": 0,
-      "value": "Изучить библиотеку"
+      "value": "Просмотрите библиотеку"
     }
   ],
   "app__features4Heading": [
     {
       "type": 0,
-      "value": "Спасти тех, кого любите"
+      "value": "Спасите тех, кого любите"
     }
   ],
   "app__features4Kicker": [
     {
       "type": 0,
-      "value": "Создайте библиотеку поучений, чтобы можно было позже прослушать; старайтесь преуспевать благодаря прогрессу, который синхронизируется на ваших устройствах."
+      "value": "Создайте библиотеку проповедей, чтобы можно было позже прослушать; вы не запутаетесь в темах, которые слушаете на разных устройствах - они синхронизируются!"
     }
   ],
   "app__features5Cta": [
@@ -212,13 +212,13 @@
   "app__features5Heading": [
     {
       "type": 0,
-      "value": "Положитесь на себя..."
+      "value": "Отложите для себя..."
     }
   ],
   "app__features5Kicker": [
     {
       "type": 0,
-      "value": "Скачайте материал на свое устройство в моменты отсутствия сигнала или же просто во избежание того, чтобы закончились ваши данные."
+      "value": "Скачайте материал на свое устройство, чтобы слушать офлайн или же просто, чтобы не использовать сотовые данные."
     }
   ],
   "atom-progressBar__label": [
@@ -248,7 +248,7 @@
   "bibleBook__disclaimer": [
     {
       "type": 0,
-      "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания и интеграции определенных функций на нашей платформе. "
+      "value": "Условия, которые регулируют использование аудио Библии от \"Вера от слышания\" не дают возможности скачивания или делать интеграции определенных функций на нашей платформе. "
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -272,7 +272,7 @@
   "bibleVersion__sponsorLabel": [
     {
       "type": 0,
-      "value": "Спонсор"
+      "value": "Организатор"
     }
   ],
   "bibleVersions__heading": [
@@ -284,13 +284,13 @@
   "bibleVersions__intro": [
     {
       "type": 0,
-      "value": "Лучший способ выучить разумную доктрину -слушать Слово Божье. Наш аудио Библии дадут Вам возможность слушать великие поучения от величайшего Учителя из всех."
+      "value": "Лучший способ познакомиться с учением Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
     }
   ],
   "blogDetailPage__moreBlogPosts": [
     {
       "type": 0,
-      "value": "Другие блогерские записи"
+      "value": "Другие записи блога"
     }
   ],
   "blogDetailPage__readingDuration": [
@@ -306,7 +306,7 @@
   "buttonShare__emailSubject": [
     {
       "type": 0,
-      "value": "Возрадуйтесь этому благословению"
+      "value": "Порадуйтесь этому благословению"
     }
   ],
   "cardAudiobookTrack_readByLabel": [
@@ -362,7 +362,7 @@
     },
     {
       "type": 0,
-      "value": " поучения"
+      "value": " темы"
     }
   ],
   "cardCollection_sequenceLabel": [
@@ -390,7 +390,7 @@
     },
     {
       "type": 0,
-      "value": " поучения"
+      "value": " темы"
     }
   ],
   "cardPlaylist__typeLabel": [
@@ -424,7 +424,7 @@
   "cardSequence_scriptureSongsType": [
     {
       "type": 0,
-      "value": "Песни из Писания"
+      "value": "Песни на библейские тексты"
     }
   ],
   "cardSequence_sequenceLabel": [
@@ -444,7 +444,7 @@
   "cardSequence_seriesType": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "cardSequence_storiesType": [
@@ -456,7 +456,7 @@
   "cardSermon_sequenceLabel": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "cardSlider__nextPageLabel": [
@@ -506,14 +506,10 @@
   "cardSong_sequenceLabel": [
     {
       "type": 0,
-      "value": "Песни из Писания"
+      "value": "Песни на библейские тексты"
     }
   ],
   "cardSponsor__collectionCountLabel": [
-    {
-      "type": 0,
-      "value": " "
-    },
     {
       "type": 1,
       "value": "count"
@@ -534,7 +530,7 @@
     },
     {
       "type": 0,
-      "value": " поучения"
+      "value": " темы"
     }
   ],
   "cardSponsor__sequencesCountLabel": [
@@ -548,13 +544,13 @@
     },
     {
       "type": 0,
-      "value": " серия"
+      "value": " семинар"
     }
   ],
   "cardSponsor_hatTitle": [
     {
       "type": 0,
-      "value": "Спонсор"
+      "value": "Организатор"
     }
   ],
   "cardStory_sequenceLabel": [
@@ -566,7 +562,7 @@
   "ccollectionTeachingsDetail__heading": [
     {
       "type": 0,
-      "value": "Все индивидуальные поучения"
+      "value": "Все темы по отдельности"
     }
   ],
   "collectionDetail__descriptionLabel": [
@@ -604,19 +600,19 @@
     },
     {
       "type": 0,
-      "value": " серия"
+      "value": " Семинар"
     }
   ],
   "collectionDetail__seriesAllLabel": [
     {
       "type": 0,
-      "value": "Смотреть все серии"
+      "value": "Смотреть все части"
     }
   ],
   "collectionDetail__seriesLabel": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "collectionDetail__speakersAllLabel": [
@@ -628,19 +624,19 @@
   "collectionDetail__speakersLabel": [
     {
       "type": 0,
-      "value": "Проповедующие"
+      "value": "Проповедники"
     }
   ],
   "collectionDetail__sponsorLabel": [
     {
       "type": 0,
-      "value": "Спонсор"
+      "value": "Организатор"
     }
   ],
   "collectionDetail__teachingsAllLabel": [
     {
       "type": 0,
-      "value": "Смотреть все индивидуальные поучения"
+      "value": "Смотреть все отдельные темы"
     }
   ],
   "collectionDetail__teachingsCountLabel": [
@@ -654,25 +650,25 @@
     },
     {
       "type": 0,
-      "value": " поучения"
+      "value": " темы"
     }
   ],
   "collectionDetail__teachingsLabel": [
     {
       "type": 0,
-      "value": "Индивидуальные поучения"
+      "value": "Отдельные темы"
     }
   ],
   "collectionPresenterssDetail__heading": [
     {
       "type": 0,
-      "value": "Все проповедующие"
+      "value": "Все проповедники"
     }
   ],
   "collectionSequencesDetail__heading": [
     {
       "type": 0,
-      "value": "Все серии"
+      "value": "Все семинары"
     }
   ],
   "collectionTypeLockup_type": [
@@ -744,7 +740,7 @@
   "contact__intro": [
     {
       "type": 0,
-      "value": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, поощряют нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой для заполнения, и мы с вами свяжемся в ближайшее время."
+      "value": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, побуждают нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой обращения, и мы с вами свяжемся в ближайшее время."
     }
   ],
   "contact__lastNameLabel": [
@@ -780,7 +776,7 @@
   "contact__recipient-testimonials": [
     {
       "type": 0,
-      "value": "Поделиться свидетельством"
+      "value": "Написать отзыв"
     }
   ],
   "contact__submitLabel": [
@@ -798,7 +794,7 @@
   "contact__testimonyLabel": [
     {
       "type": 0,
-      "value": "Свидетельство"
+      "value": "Отзыв"
     }
   ],
   "contact__title": [
@@ -858,7 +854,7 @@
   "discoverCollections_scriptureSongsHeading": [
     {
       "type": 0,
-      "value": "Песни из Писания"
+      "value": "Песни на библейские тексты"
     }
   ],
   "discoverCollections_seeAll": [
@@ -870,13 +866,13 @@
   "discoverCollections_seriesHeading": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинар"
     }
   ],
   "discoverCollections_speakersHeading": [
     {
       "type": 0,
-      "value": "Проповедующие"
+      "value": "Проповедники"
     }
   ],
   "discoverCollections_sponsorsHeading": [
@@ -900,7 +896,7 @@
   "discover__recentTeachingsSeeAll": [
     {
       "type": 0,
-      "value": "Посмотреть все недавние поучения"
+      "value": "Посмотреть все недавние проповеди"
     }
   ],
   "discover__storiesHeading": [
@@ -918,7 +914,7 @@
   "discover__trendingTeachingsSeeAll": [
     {
       "type": 0,
-      "value": "Смотреть все поучения, которые находятся в тренде"
+      "value": "Смотреть все популяные проповеди"
     }
   ],
   "discover_conferencesHeading": [
@@ -930,13 +926,13 @@
   "discover_recentTeachingsHeading": [
     {
       "type": 0,
-      "value": "Недавние поучения"
+      "value": "Недавние проповеди"
     }
   ],
   "discover_trendingTeachingsHeading": [
     {
       "type": 0,
-      "value": "Поучения, которые в тренде"
+      "value": "Популяные проповеди"
     }
   ],
   "downloadAppButton__altLabel": [
@@ -966,7 +962,7 @@
   "duration__hours": [
     {
       "type": 0,
-      "value": " 1 "
+      "value": "1 "
     },
     {
       "type": 1,
@@ -1112,7 +1108,7 @@
     },
     {
       "type": 0,
-      "value": " Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе же ваш браузер по умолчанию вернется к обычному сайту Amazon."
+      "value": " Это все, что нужно! Пожалуйста, убедитесь, что Вы добавили в закладку веб-страницу нового AmazonSmile. Иначе ваш браузер по умолчанию вернется к обычному сайту Amazon."
     }
   ],
   "give__amazonTitle": [
@@ -1194,7 +1190,7 @@
   "give__estateDescription": [
     {
       "type": 0,
-      "value": "Сегодня и завтра вы можете повлиять на AudioVerse внеся, AudioVerse в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами."
+      "value": "Вы можете поддержать служение AudioVerse внеся нас в перечень получателей доли в Вашем наследстве. Самый простой способ это сделать - оформить AudioVerse выгодоприобретателем на Ваших финансовых счетах, либо включить служение в своё завещание или доверенность на распоряжение средствами."
     },
     {
       "type": 1,
@@ -1206,7 +1202,7 @@
     },
     {
       "type": 0,
-      "value": " Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, но нуждается в пользовании своими активами, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для жертвователя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим жертвователям. "
+      "value": " Для тех, кто хочет после себя оставить долгую память, жертвуя на труд Господень, не завещая свое имущество, хорошим вариантом может оказаться ежегодный благотворительный взнос. Данный метод пожертвования разработан, чтобы быть удобным, как для дарителя, так и для получателя. AudioVerse сотрудничает с Западным адвентистским фондом (ЗАФ) с целью предоставления такой возможности нашим спонсорам. "
     },
     {
       "type": 1,
@@ -1234,7 +1230,7 @@
   "give__estateTitle": [
     {
       "type": 0,
-      "value": "Помните о AudioVerse в Вашем плане наследства."
+      "value": "Укажите AudioVerse в Вашем завещании."
     }
   ],
   "give__givingAssistantCta": [
@@ -1270,7 +1266,7 @@
   "give__paypalDescription": [
     {
       "type": 0,
-      "value": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение, не запрашивая комиссии за обработку. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
+      "value": "Посетите страницу Фонда пожертвований на AudioVerse PayPal, чтобы Вы смогли пожертвовать на благо AudioVerse. 100% Ваших пожертвований будут направлены на служение без комиссии за обработку платежа. Делая пожертвования через этот канал, Вы получите квитанцию для вычета суммы с налогообложения от благотворительного фонда Paypal, но не от AudioVerse."
     }
   ],
   "give__paypalTitle": [
@@ -1336,31 +1332,31 @@
   "header__navItemCollections-series": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинар"
     }
   ],
   "header__navItemCollections-songs": [
     {
       "type": 0,
-      "value": "Песни из Писания"
+      "value": "Песни на библейские тексты"
     }
   ],
   "header__navItemCollections-speaker": [
     {
       "type": 0,
-      "value": "Проповедующий"
+      "value": "Проповедник"
     }
   ],
   "header__navItemCollections-sponsor": [
     {
       "type": 0,
-      "value": "Спонсор"
+      "value": "Организатор"
     }
   ],
   "header__navItemCollections-sponsors": [
     {
       "type": 0,
-      "value": "Спонсоры"
+      "value": "Организаторы"
     }
   ],
   "header__navItemCollections-stories": [
@@ -1420,7 +1416,7 @@
   "header__navItemDiscover": [
     {
       "type": 0,
-      "value": "Открыть"
+      "value": "Проповеди"
     }
   ],
   "header__navItemLibrary": [
@@ -1516,7 +1512,7 @@
   "header__navItemStory-testimonials": [
     {
       "type": 0,
-      "value": "Свидетельства"
+      "value": "Отзывы"
     }
   ],
   "header__navItemUser": [
@@ -1552,7 +1548,7 @@
   "homePage__createAccountSectionText": [
     {
       "type": 0,
-      "value": "Создать учетную запись, чтобы получить больше Audioverse (Аудио стихов). Download teachings, save series to your library, and subscribe to sponsors and speakers to always get the latest."
+      "value": "Создать учетную запись, чтобы получить больше предложений от Audioverse. Загружайте проповеди, сохраняйте семинары в личную библиотеку, подписывайтесь на организаторов и проповедников, чтобы получать последние публикации."
     }
   ],
   "homePage__createAccountSectionTitle": [
@@ -1564,7 +1560,7 @@
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
-      "value": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Транслируйте поучения из любого места через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге без использования данных."
+      "value": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Слушайте проповеди в любом месте через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге офлайн."
     }
   ],
   "homePage__downloadAppSectionTitle": [
@@ -1636,7 +1632,7 @@
   "homePage__footerSocialTitle": [
     {
       "type": 0,
-      "value": "Социальный"
+      "value": "Соцсети"
     }
   ],
   "homePage__footerTwitterLink": [
@@ -1752,19 +1748,19 @@
   "homePage__soundDoctrineText": [
     {
       "type": 0,
-      "value": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Задавайтесь вопросами и вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
+      "value": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Разберитесь в сложных темах, вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
     }
   ],
   "homePage__soundDoctrineTitle": [
     {
       "type": 0,
-      "value": "Здравая доктрина"
+      "value": "Здравое учение"
     }
   ],
   "homePage__supportSectionCTA": [
     {
       "type": 0,
-      "value": "Внести пожертвование"
+      "value": "Сделать пожертвование"
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -1776,7 +1772,7 @@
   "homePage__supportSectionText": [
     {
       "type": 0,
-      "value": "AudioVerse - это некоммерческое служение, существующее благодаря нашим жертвователям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны группе наших щедрых жертвователей. Подумайте, не готовы ли вы внести пожертвование сегодня, даже если это всего лишь 5 долларов в месяц, и помогите нам гарантировать дальнейшее распространение разумного учения."
+      "value": "AudioVerse - это некоммерческое служение, существующее благодаря пожертвованиям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны всем, кто поддерживает нас. Вы тоже можете поддержать наше служение, даже если это будет всего лишь 5 долларов ежемесячно, - это поможет нам и дальше распространять здравое учение."
     }
   ],
   "homePage__supportSectionTitle": [
@@ -1788,19 +1784,19 @@
   "homePage__tagline": [
     {
       "type": 0,
-      "value": "Разумное учение"
+      "value": "Здравое учение"
     }
   ],
   "homePage__testimoniesSectionText": [
     {
       "type": 0,
-      "value": "Услышать от кого-то, кто пользуется AudioVerse."
+      "value": "Отзывы пользователей AudioVerse."
     }
   ],
   "home__testimoniesTitle": [
     {
       "type": 0,
-      "value": "Свидетельства"
+      "value": "Отзывы"
     }
   ],
   "languageAlternativesAlert__dismiss": [
@@ -1812,7 +1808,7 @@
   "languageAlternativesAlert__message": [
     {
       "type": 0,
-      "value": "Благодаря нашим жертвователям, а также международным партнерам, AudioVerse сегодня доступна на многих сайтах на разных языках. Поменяйте язык здесь или в меню."
+      "value": "Благодаря вашим пожертвоаниям и помощи волонтеров из разных стран, служение AudioVerse сегодня доступно на разных языках. Поменяйте язык здесь или в меню."
     }
   ],
   "libraryCollections__collectionsHeading": [
@@ -1830,7 +1826,7 @@
   "libraryCollections__emptyCopy": [
     {
       "type": 0,
-      "value": "Добавить в закладки наименования, или прослушивайте аудио на странице Discover."
+      "value": "Пометьте темы или прослушивайте аудио на странице Проповеди."
     }
   ],
   "libraryCollections__emptyHeading": [
@@ -1842,13 +1838,13 @@
   "libraryCollections__personsHeading": [
     {
       "type": 0,
-      "value": "Проповедующие"
+      "value": "Проповедники"
     }
   ],
   "libraryCollections__playlistsAlert": [
     {
       "type": 0,
-      "value": "В данный момент проводится повторное изображение опыта со списком воспроизведений. Вы можете управлять списком воспроизведений, используя мобильное приложение."
+      "value": "В данный момент проводятся ремонтные работы в списках воппроизведения. Вы можете управлять списком воспроизведений, используя мобильное приложение."
     }
   ],
   "libraryCollections__playlistsHeading": [
@@ -1860,19 +1856,19 @@
   "libraryCollections__sponsorsHeading": [
     {
       "type": 0,
-      "value": "Спонсоры"
+      "value": "Организаторы"
     }
   ],
   "libraryError__cta": [
     {
       "type": 0,
-      "value": "Перейти к разделу Discover"
+      "value": "Перейти к разделу Проповеди"
     }
   ],
   "libraryHistory__emptyCopy": [
     {
       "type": 0,
-      "value": "Найти файл для прослушивания на странице Discover."
+      "value": "Найти файл для прослушивания на странице Проповеди."
     }
   ],
   "libraryHistory__emptyHeading": [
@@ -1962,7 +1958,7 @@
   "libraryNav__contentType-teachings": [
     {
       "type": 0,
-      "value": "Поучения"
+      "value": "Проповеди"
     }
   ],
   "libraryNav__duration": [
@@ -2076,7 +2072,7 @@
   "libraryNav__playbackStatus-unstarted": [
     {
       "type": 0,
-      "value": "Не запущенный "
+      "value": "Не запущенный"
     }
   ],
   "libraryNav__playlists": [
@@ -2100,7 +2096,7 @@
   "libraryNav__sortAtoZ": [
     {
       "type": 0,
-      "value": "От А до Я (Russian alphabet) От А до Z (English alphabet)"
+      "value": "От А до Z"
     }
   ],
   "libraryNav__sortNewest": [
@@ -2136,7 +2132,7 @@
   "libraryPlaybackStatus__emptyCopy": [
     {
       "type": 0,
-      "value": "Найти файл для прослушивания на странице Discover."
+      "value": "Найти файл для прослушивания на странице Проповеди."
     }
   ],
   "libraryPlaybackStatus__finishedEmptyHeading": [
@@ -2172,7 +2168,7 @@
   "library__emptyCopy": [
     {
       "type": 0,
-      "value": "Добавить в закладки файлы или слушать файлы на странице Discover."
+      "value": "Добавить в закладки файлы или слушать записи на странице Проповеди."
     }
   ],
   "library__emptyHeading": [
@@ -2226,7 +2222,7 @@
   "library__noMatchingCopy": [
     {
       "type": 0,
-      "value": "Добавить в закладки файлы или слушать файлы на странице Discover."
+      "value": "Добавить в закладки файлы или слушать файлы на странице Проповеди."
     }
   ],
   "library__noMatchingHeading": [
@@ -2648,13 +2644,13 @@
   "molecule-transcript__disclaimer": [
     {
       "type": 0,
-      "value": "Данная транскрипция может быть автоматически выработана."
+      "value": "Данная транскрипция может быть сделана роботом."
     }
   ],
   "molecule-transcript__help": [
     {
       "type": 0,
-      "value": "Наша автоматически выработанная копия текста нуждается в Вашей помощи. Можете обращаться к нам по электронной почте с предложениями по редакции данного текста для блага Вас и других. Адрес: media@audioverse.org"
+      "value": "Данный текст нуждается в редакции. Можете обращаться к нам по электронной почте с предложениями по редакции данного текста для удобства пользователей. Адрес: media@audioverse.org"
     }
   ],
   "molecule-transcript__labelClose": [
@@ -2702,7 +2698,7 @@
   "notFound__message": [
     {
       "type": 0,
-      "value": "Ссылка может быть взломана, либо не существует, либо же неверно напечатана."
+      "value": "Ссылка может быть ошибочной, либо не существующей, либо же неверно напечатаной."
     }
   ],
   "notFound__subheader": [
@@ -2720,7 +2716,7 @@
   "notFound__toDiscover": [
     {
       "type": 0,
-      "value": "Назад на страницу Discover"
+      "value": "Назад на страницу Проповеди"
     }
   ],
   "organism-modal__close": [
@@ -2782,7 +2778,7 @@
   "organism-recording__seriesInfoTitle": [
     {
       "type": 0,
-      "value": "Родительская серия"
+      "value": "Семинары для родителей"
     }
   ],
   "organism-recording__seriesListLabel": [
@@ -2958,7 +2954,7 @@
   "preferences__playbackSettingsIntro": [
     {
       "type": 0,
-      "value": "Выберите должны ли записи по умолчанию воспроизводиться в автоматическом режиме."
+      "value": "Выберите, должны ли записи по умолчанию воспроизводиться в автоматическом режиме."
     }
   ],
   "preferences__preferredAudioQuality": [
@@ -3068,13 +3064,13 @@
   "presenterDetail__seriesAllLabel": [
     {
       "type": 0,
-      "value": "Смотреть все серии"
+      "value": "Смотреть все части"
     }
   ],
   "presenterDetail__seriesLabel": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "presenterDetail__speakersAllLabel": [
@@ -3114,13 +3110,13 @@
   "presenterDetail__topAllLabel": [
     {
       "type": 0,
-      "value": "Просмотреть большее количество часто прослушиваемых"
+      "value": "Просмотреть большее самых популярных тем"
     }
   ],
   "presenterDetail__topRecordingsLabel": [
     {
       "type": 0,
-      "value": "Часто прослушиваемые"
+      "value": "Самые популярные"
     }
   ],
   "presenterDetail__websiteLabel": [
@@ -3144,7 +3140,7 @@
   "presenterTopDetail__heading": [
     {
       "type": 0,
-      "value": "Часто прослушиваемые"
+      "value": "Самые популярные"
     }
   ],
   "presentersFeed__description": [
@@ -3170,7 +3166,7 @@
   "presentersList__title": [
     {
       "type": 0,
-      "value": "Все проповедующие"
+      "value": "Все проповедники"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -3456,19 +3452,19 @@
   "search__sequencesHeading": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "search__sequencesSeeAll": [
     {
       "type": 0,
-      "value": "Смотреть все серии"
+      "value": "Смотреть все части"
     }
   ],
   "search__sponsorsHeading": [
     {
       "type": 0,
-      "value": "Спонсоры"
+      "value": "Организаторы"
     }
   ],
   "search__sponsorsSeeAll": [
@@ -3480,13 +3476,13 @@
   "search__teachingsHeading": [
     {
       "type": 0,
-      "value": "Поучения"
+      "value": "Темы"
     }
   ],
   "search__teachingsSeeAll": [
     {
       "type": 0,
-      "value": "Увидеть все поучения"
+      "value": "Увидеть все проповеди"
     }
   ],
   "sequenceType__audiobookTitle": [
@@ -3498,13 +3494,13 @@
   "sequenceType__musicTrackTitle": [
     {
       "type": 0,
-      "value": "Песни из Писания"
+      "value": "Песни на библейские тексты"
     }
   ],
   "sequenceType__seriesTitle": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинар"
     }
   ],
   "sequenceType__storyTitle": [
@@ -3612,7 +3608,7 @@
   "sermonList__heading": [
     {
       "type": 0,
-      "value": "Все поучения"
+      "value": "Все темы"
     }
   ],
   "sermonsList__filter": [
@@ -4114,7 +4110,7 @@
   "sopnsorTypeLockup_type": [
     {
       "type": 0,
-      "value": "Спонсор"
+      "value": "Организатор"
     }
   ],
   "sponsorConferencesDetail__heading": [
@@ -4124,10 +4120,6 @@
     }
   ],
   "sponsorDetail__collectionCountLabel": [
-    {
-      "type": 0,
-      "value": " "
-    },
     {
       "type": 1,
       "value": "count"
@@ -4164,13 +4156,13 @@
   "sponsorDetail__recentAllLabel": [
     {
       "type": 0,
-      "value": "Посмотреть все недавние поучения"
+      "value": "Посмотреть все недавние проповеди"
     }
   ],
   "sponsorDetail__recentLabel": [
     {
       "type": 0,
-      "value": "Недавние поучения"
+      "value": "Недавние пропоиведи"
     }
   ],
   "sponsorDetail__recordingsCountLabel": [
@@ -4184,7 +4176,7 @@
     },
     {
       "type": 0,
-      "value": " поучения"
+      "value": " проповеди"
     }
   ],
   "sponsorDetail__sequencesCountLabel": [
@@ -4198,31 +4190,25 @@
     },
     {
       "type": 0,
-      "value": " серия"
+      "value": " часть"
     }
   ],
   "sponsorDetail__seriesAllLabel": [
     {
       "type": 0,
-      "value": "Смотреть все серии"
+      "value": "Смотреть все части"
     }
   ],
   "sponsorDetail__seriesLabel": [
     {
       "type": 0,
-      "value": "Серия"
+      "value": "Семинары"
     }
   ],
   "sponsorDetail__websiteLabel": [
     {
       "type": 0,
       "value": "Веб-страница"
-    }
-  ],
-  "sponsorSeriesDetail__heading": [
-    {
-      "type": 0,
-      "value": "Все серии"
     }
   ],
   "sponsorTeachingsDetail__heading": [
@@ -4258,7 +4244,7 @@
   "sponsorsList__title": [
     {
       "type": 0,
-      "value": "Все спонсоры"
+      "value": "Все организаторы"
     }
   ],
   "storyAlbumList__heading": [
@@ -4316,13 +4302,13 @@
   "testimonies__heading": [
     {
       "type": 0,
-      "value": "Свидетельства"
+      "value": "Отзывы"
     }
   ],
   "testimonies__intro": [
     {
       "type": 0,
-      "value": "Есть ли положительные свидетельства? Расскажите нам свою историю!"
+      "value": "Имеете сильное свидетельство? Расскажите нам свою историю!"
     }
   ],
   "testimonies__seeAll": [
@@ -4363,10 +4349,6 @@
     {
       "type": 1,
       "value": "s"
-    },
-    {
-      "type": 0,
-      "value": " "
     }
   ],
   "time__minutesAndSeconds": [
@@ -4386,7 +4368,7 @@
   "trendingTeachings__heading": [
     {
       "type": 0,
-      "value": "Поучения, которые в тренде"
+      "value": "Популярные проповеди"
     }
   ],
   "unstartedSeeAll": [
