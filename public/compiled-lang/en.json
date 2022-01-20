@@ -239,6 +239,12 @@
       "value": "Back"
     }
   ],
+  "bibleBook__backToChapter": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
+    }
+  ],
   "bibleBook__chapterListTitle": [
     {
       "type": 0,
@@ -249,6 +255,12 @@
     {
       "type": 0,
       "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    }
+  ],
+  "bibleBook__readAlong": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -852,13 +864,13 @@
   "discover__conferencesSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Conferences"
+      "value": "See All Conferences"
     }
   ],
   "discover__recentTeachingsSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Teachings"
+      "value": "See All Teachings"
     }
   ],
   "discover__storiesHeading": [
@@ -870,7 +882,7 @@
   "discover__storiesSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Stories"
+      "value": "See All Stories"
     }
   ],
   "discover__trendingTeachingsSeeAll": [
@@ -2381,6 +2393,12 @@
     {
       "type": 0,
       "value": "Login/Sign up"
+    }
+  ],
+  "navigation__nameFallback": [
+    {
+      "type": 0,
+      "value": "User Account"
     }
   ],
   "notFound__header": [
