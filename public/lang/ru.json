@@ -100,7 +100,7 @@
     "string": "Библия"
   },
   "bibleVersions__intro": {
-    "string": "Лучший способ познакомиться с учением Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
+    "string": "Лучший способ постичь здравое учение Иисеса Христа - слушать Слово Божье. Наша аудио Библия поможет вам в этом."
   },
   "blogDetailPage__moreBlogPosts": {
     "comment": "Blog post detail more blog posts",
@@ -368,10 +368,10 @@
   },
   "header__navItemMore": {
     "comment": "Header nav link name: More",
-    "string": "Подробнее"
+    "string": "Еще"
   },
   "header__navItemStory": {
-    "string": "Наша история"
+    "string": "О нас"
   },
   "header__navItemStory-donate": {
     "string": "Пожертвовать"
@@ -421,7 +421,7 @@
     "string": "Истории"
   },
   "header__navItemMore-legal": {
-    "string": "Законный"
+    "string": "Юр. вопросы"
   },
   "header__navItemMore-privacy": {
     "string": "Конфиденциальность"
@@ -453,7 +453,7 @@
   },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
-    "string": "Если у Вас есть смартфон, скачайте приложение, чтобы Вы всегда могли пользоваться AudioVerse. Слушайте проповеди в любом месте через сетевое подключение или же загрузите их заранее, чтобы можно было слушать в дороге офлайн."
+    "string": "У Вас есть смартфон? Скачайте приложение AudioVerse и слушайте проповеди онлайн. Не имеете постоянного выхода в интернет? Загружайте проповеди и слушайте  офлайн."
   },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
@@ -517,15 +517,15 @@
   },
   "homePage__newsletterSectionTitle": {
     "comment": "home page newsletter section title",
-    "string": "Подписаться на Новости"
+    "string": "Подписаться на новости"
   },
   "homePage__recentContentSectionText": {
     "comment": "home page recent content section text",
-    "string": "Ознакомьтесь с некоторыми из наших аудиозаписей. Затем, когда будете готовы,&nbsp;<a>создайте учетную запись</a>, чтобы получить доступ к большему объему информации."
+    "string": "Ознакомьтесь с некоторыми из наших аудиозаписей. Затем, когда будете готовы, <a>создайте учетную запись</a>, чтобы получить доступ к большему объему информации."
   },
   "homePage__recentContentSectionTitle": {
     "comment": "home page recent content section title",
-    "string": "Последнее содержание"
+    "string": "Последние проповеди"
   },
   "homePage__recentPostsButtonLabel": {
     "comment": "home page recent posts button label",
@@ -537,15 +537,15 @@
   },
   "homePage__recentPostsSectionTitle": {
     "comment": "home page recent posts section title",
-    "string": "Недавние сообщения в блоге"
+    "string": "Последние публикации в блоге"
   },
   "homePage__soundDoctrineText": {
     "comment": "home page sound doctrine text",
-    "string": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Разберитесь в сложных темах, вдохновляйтесь, взрастая в своих отношениях с Иисусом через песни, проповеди, аудиокниги и библейские чтения."
+    "string": "AudioVerse - это платформа, на которой собраны лучшие адвентистские аудиоматериалы. Разберитесь в сложных библейских темах, вдохновляйтесь и развивайте отношения с Богом с помощью песн, проповедей, аудиокниг и библейских чтений."
   },
   "homePage__soundDoctrineTitle": {
     "comment": "home: Sound Doctrine section title",
-    "string": "Здравое учение"
+    "string": "Здравое библейское учение"
   },
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
@@ -557,7 +557,7 @@
   },
   "homePage__supportSectionText": {
     "comment": "home page support section text",
-    "string": "AudioVerse - это некоммерческое служение, существующее благодаря пожертвованиям. Создание, поддержка и улучшение технологической платформы требует больших затрат, и мы благодарны всем, кто поддерживает нас. Вы тоже можете поддержать наше служение, даже если это будет всего лишь 5 долларов ежемесячно, - это поможет нам и дальше распространять здравое учение."
+    "string": "AudioVerse - это некоммерческое служение, существующее благодаря пожертвованиям. Создание, поддержка и улучшение платформы требует больших затрат, и мы благодарны всем, кто поддерживает нас. Вы тоже можете поддержать наше служение, даже если это будет всего лишь 5 долларов ежемесячно, - это поможет нам и дальше распространять здравое библейское учение."
   },
   "homePage__supportSectionTitle": {
     "comment": "home page support section title",
@@ -808,7 +808,7 @@
   },
   "molecule-buttonShare__buttonLabel": {
     "comment": "share button label",
-    "string": "поделиться"
+    "string": "Поделиться"
   },
   "molecule-buttonShare__copyLink": {
     "string": "Скопировать ссылку"
@@ -952,7 +952,7 @@
   },
   "organism-recording__seriesListLabel": {
     "comment": "recording series list label",
-    "string": "Список серий"
+    "string": "Список серий проповедей"
   },
   "organism-recording__seriesListTitle": {
     "comment": "recording series list title",
@@ -960,7 +960,7 @@
   },
   "organism-recording__sponsorInfoTitle": {
     "comment": "recording sponsor info title",
-    "string": "Спонсор"
+    "string": "Организатор"
   },
   "personTypeLockup_type": {
     "string": "Проповедующий"
@@ -1291,7 +1291,7 @@
     "string": "Организаторы"
   },
   "search__sponsorsSeeAll": {
-    "string": "Просмотреть список всех спонсоров"
+    "string": "Просмотреть список всех организаторов"
   },
   "search__teachingsHeading": {
     "string": "Темы"
@@ -1325,7 +1325,7 @@
     "string": "Записано"
   },
   "seriesDetail__sponsorLabel": {
-    "string": "Спонсор"
+    "string": "Организатор"
   },
   "seriesDetail__type": {
     "comment": "Series Detail type label",
@@ -1649,7 +1649,7 @@
   },
   "songsListPage__sponsorTabLabel": {
     "comment": "Songs list page sponsor tab label",
-    "string": "Спонсоры"
+    "string": "Организаторы"
   },
   "songsListPage__tagTabLabel": {
     "comment": "Songs list page tag tab label",
@@ -1745,7 +1745,7 @@
     "string": "Посмотреть все не начатые"
   },
   "andOnboarding__intro": {
-    "string": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам в вырасти духовно."
+    "string": "Создайте или войдите в учетную запись и получите доступ к набору функций, которые помогут вам понять здравое библейское учение."
   },
   "app__features1Cta": {
     "string": "Открыть аудио"
@@ -1811,11 +1811,11 @@
     "string": "{count} песня"
   },
   "collectionDetail__presentersAllLabel": {
-    "string": "Просмотреть всех выступающих"
+    "string": "Просмотреть всех проповедников"
   },
   "collectionDetail__presentersLabel": {
     "comment": "Collection Detail speakers label",
-    "string": "Выступающие"
+    "string": "Проповедники"
   },
   "collectionType__audiobookSeries": {
     "string": "Серия книг"
@@ -1845,7 +1845,7 @@
     "string": "Jane"
   },
   "contact__intro": {
-    "string": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы от вас получаем, побуждают нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой обращения, и мы с вами свяжемся в ближайшее время."
+    "string": "Нам приятно получить отзыв пользователей, даже когда речь идет о технических проблемах! Комментарии, которые мы получаем, побуждают нас продолжать работу,  помогая при этом вносить улучшения для всех пользователей. Если вы желаете связаться с нами, пожалуйста, воспользуйтесь формой обращения, и мы с вами свяжемся в ближайшее время."
   },
   "contact__lastNameLabel": {
     "string": "Фамилия"
@@ -1878,7 +1878,7 @@
     "string": "Контакт"
   },
   "discoverCollections_presentersHeading": {
-    "string": "Выступающие"
+    "string": "Проповедники"
   },
   "downloadAppButton__altLabel": {
     "string": "Скачать сейчас"
@@ -1941,7 +1941,7 @@
     "string": "Конференции"
   },
   "header__navItemCollections-presenters": {
-    "string": "Выступающие"
+    "string": "Проповедники"
   },
   "header__navItemCollections-sponsors": {
     "string": "Организаторы"
@@ -1980,13 +1980,13 @@
     "string": "Сохранено"
   },
   "header__navItemPresenters": {
-    "string": "Выступающие"
+    "string": "Проповедники"
   },
   "header__navItemStory-blog": {
     "string": "Блог"
   },
   "homePage__learnStoryButtonLabel": {
-    "string": "Узнайте о нашей истории"
+    "string": "Узнайте о нас"
   },
   "homePage__newsletterEmail": {
     "string": "Адрес электронной почты"
@@ -2007,7 +2007,7 @@
     "string": "Подписаться"
   },
   "homePage__tagline": {
-    "string": "Здравое учение"
+    "string": "Здравое библейское учение"
   },
   "libraryHistory__loadingMore": {
     "string": "Загрузка более..."
@@ -2124,7 +2124,7 @@
     "string": "{count} песня"
   },
   "songsListPage__intro": {
-    "string": "Слушать Слово Божье в музыкальной форме - отличный способ запомнить тексты Писания. Слушать по альбомам или по книгам Библии."
+    "string": "Слушать Слово Божье в музыкальной форме - отличный способ запомнить библейские стихи. Слушать можно по альбомам или по книгам Библии."
   },
   "songsListPage__tabAlbums": {
     "string": "Альбомы"
@@ -2133,13 +2133,13 @@
     "string": "Текст"
   },
   "songsListPage__title": {
-    "string": "Песни из Писания"
+    "string": "Песни на библейские тексты"
   },
   "testimonies__seeAll": {
-    "string": "Просмотреть все свидетельства"
+    "string": "Просмотреть все отзывы"
   },
   "testimonies__submitTestimony": {
-    "string": "Представить свидетельство"
+    "string": "Послать отзыв"
   },
   "time__hoursMinutesAndSeconds": {
     "comment": "time hours, minutes and seconds",
