@@ -12,7 +12,7 @@ import {
 	getSongDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
 
 export default SongDetail;
 
@@ -27,7 +27,7 @@ export async function getStaticProps({
 	}).catch(() => ({
 		musicTrack: null,
 	}));
-	if (recording?.language !== getLanguageIdByRoute(params?.language)) {
+	if (recording?.language !== getLanguageIdByLegacyRoute(params?.language)) {
 		return {
 			notFound: true,
 		};

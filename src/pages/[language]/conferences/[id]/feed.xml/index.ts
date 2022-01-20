@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getCollectionFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
 
 export default function Feed(): void {
 	return void 0;
@@ -24,7 +24,7 @@ export async function getServerSideProps({
 	}));
 	if (
 		!collection ||
-		collection.language !== getLanguageIdByRoute(languageRoute)
+		collection.language !== getLanguageIdByLegacyRoute(languageRoute)
 	) {
 		return {
 			notFound: true,

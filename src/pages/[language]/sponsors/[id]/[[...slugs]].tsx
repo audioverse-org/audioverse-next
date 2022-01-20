@@ -12,7 +12,7 @@ import {
 	getSponsorDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
 
 export default SponsorDetail;
 
@@ -25,7 +25,7 @@ export async function getStaticProps({
 	const { sponsor } = await getSponsorDetailPageData({ id }).catch(() => ({
 		sponsor: null,
 	}));
-	if (sponsor?.language !== getLanguageIdByRoute(params?.language)) {
+	if (sponsor?.language !== getLanguageIdByLegacyRoute(params?.language)) {
 		return {
 			notFound: true,
 		};
