@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { getSponsorTeachingsFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
-import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default (): void => void 0;
 
@@ -23,7 +23,7 @@ export async function getServerSideProps({
 	}));
 	if (
 		!sponsor ||
-		sponsor.language !== getLanguageIdByLegacyRoute(params?.language)
+		sponsor.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
 	) {
 		return {
 			notFound: true,

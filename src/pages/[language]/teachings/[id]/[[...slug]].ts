@@ -13,7 +13,7 @@ import {
 	getSermonDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SermonDetail;
 
@@ -31,7 +31,9 @@ export async function getStaticProps({
 	const { sermon: recording } = await getSermonDetailData({ id }).catch(() => ({
 		sermon: null,
 	}));
-	if (recording?.language !== getLanguageIdByLegacyRoute(params?.language)) {
+	if (
+		recording?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};

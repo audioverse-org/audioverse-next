@@ -6,7 +6,7 @@ import {
 	SupportedLanguages,
 } from '@lib/constants';
 
-export function getLanguageIdByLegacyRoute(
+export function getLanguageIdByRouteOrLegacyRoute(
 	route: string | undefined
 ): SupportedLanguages | undefined {
 	return findKey(

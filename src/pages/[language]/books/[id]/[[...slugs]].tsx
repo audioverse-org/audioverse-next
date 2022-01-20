@@ -14,7 +14,7 @@ import {
 	getAudiobookDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default AudiobookDetail;
 
@@ -30,7 +30,9 @@ export async function getStaticProps({
 	}).catch(() => ({
 		audiobook: null,
 	}));
-	if (sequence?.language !== getLanguageIdByLegacyRoute(params?.language)) {
+	if (
+		sequence?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};

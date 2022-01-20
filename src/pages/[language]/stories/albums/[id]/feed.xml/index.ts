@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getStoryAlbumFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import { formatBooksDescription } from '@pages/[language]/books/[id]/feed.xml';
 
 export default (): void => void 0;
@@ -23,7 +23,7 @@ export async function getServerSideProps({
 	}));
 	if (
 		!sequence ||
-		sequence.language !== getLanguageIdByLegacyRoute(languageRoute)
+		sequence.language !== getLanguageIdByRouteOrLegacyRoute(languageRoute)
 	) {
 		return {
 			notFound: true,

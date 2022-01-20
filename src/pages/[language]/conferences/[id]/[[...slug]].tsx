@@ -14,7 +14,7 @@ import {
 	getCollectionDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByLegacyRoute } from '@lib/getLanguageIdByLegacyRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default CollectionDetail;
 
@@ -29,7 +29,9 @@ export async function getStaticProps({
 			collection: null,
 		})
 	);
-	if (collection?.language !== getLanguageIdByLegacyRoute(params?.language)) {
+	if (
+		collection?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};
