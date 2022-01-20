@@ -314,10 +314,10 @@ describe('register page', () => {
 		});
 	});
 
-	it('pops modal on guest click', async () => {
-		const { getByText } = await renderPage({ router });
+	it('pops modal on guest info click', async () => {
+		const { getByText, getByTestId } = await renderPage({ router });
 
-		userEvent.click(getByText('Continue as guest'));
+		userEvent.click(getByTestId('guest-info-button'));
 
 		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});

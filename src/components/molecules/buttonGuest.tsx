@@ -37,6 +37,7 @@ export default function ButtonGuest({
 				</Link>
 				<button
 					className={styles.link}
+					data-testid="guest-info-button"
 					onClick={(e) => {
 						e.preventDefault();
 						setIsGuestModalOpen(true);
