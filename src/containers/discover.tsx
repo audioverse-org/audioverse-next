@@ -43,7 +43,7 @@ export default function Discover({
 			seeAll: (
 				<FormattedMessage
 					id="discover__recentTeachingsSeeAll"
-					defaultMessage="See All Recent Teachings"
+					defaultMessage="See All Teachings"
 				/>
 			),
 			url: makeSermonListRoute(languageRoute, 'all', 1),
@@ -83,7 +83,7 @@ export default function Discover({
 			seeAll: (
 				<FormattedMessage
 					id="discover__storiesSeeAll"
-					defaultMessage="See All Recent Stories"
+					defaultMessage="See All Stories"
 				/>
 			),
 			url: makeStoryAlbumListPage(languageRoute),
@@ -110,7 +110,7 @@ export default function Discover({
 			seeAll: (
 				<FormattedMessage
 					id="discover__conferencesSeeAll"
-					defaultMessage="See All Recent Conferences"
+					defaultMessage="See All Conferences"
 				/>
 			),
 			url: makeConferenceListRoute(languageRoute),

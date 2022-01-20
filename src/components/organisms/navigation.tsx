@@ -153,7 +153,13 @@ const Navigation = ({
 										<span className={styles.accountAvatar}>
 											<IconUser />
 										</span>
-										<span className={styles.accountName}>{user.name}</span>
+										<span className={styles.accountName}>
+											{user.name ||
+												intl.formatMessage({
+													id: 'navigation__nameFallback',
+													defaultMessage: 'User Account',
+												})}
+										</span>
 									</a>
 									<span
 										className={styles.iconDisclosure}
