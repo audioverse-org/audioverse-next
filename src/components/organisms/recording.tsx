@@ -381,8 +381,17 @@ export function Recording({
 							</div>
 						</div>
 						<div
-							className={styles.overflowShadow}
+							className={styles.topOverflowShadow}
 							style={{ opacity: Math.min(1, scrollPosition / 100) }}
+						/>
+						<div
+							className={styles.bottomOverflowShadow}
+							style={{
+								opacity: Math.min(
+									1,
+									(scrollRef.current?.scrollTop || 0) - scrollPosition / 100
+								),
+							}}
 						/>
 					</div>
 				)}

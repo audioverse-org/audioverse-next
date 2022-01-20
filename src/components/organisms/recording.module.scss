@@ -207,35 +207,46 @@
 	border-bottom-right-radius: 16px;
 }
 
-@mixin shadowBackground($color) {
+@mixin shadowBackground($color, $direction) {
 	background: linear-gradient(
-		0deg,
+		$direction,
 		rgba($color, 0) 0%,
 		rgba($color, 0.75) 49.48%,
 		$color 100%
 	);
 }
-.overflowShadow {
+@mixin overflowShadow($direction) {
 	display: none;
 	@media (min-width: $breakpoint-xl) {
 		display: block;
 		position: absolute;
 		height: 82px;
-		top: 54px;
 		left: 0;
 		right: 0;
 		pointer-events: none;
 		.AUDIOBOOK_TRACK & {
-			@include shadowBackground($ts-bookB);
+			@include shadowBackground($ts-bookB, $direction);
 		}
 		.MUSIC_TRACK & {
-			@include shadowBackground($ts-songB);
+			@include shadowBackground($ts-songB, $direction);
 		}
 		.SERMON & {
-			@include shadowBackground($ts-white);
+			@include shadowBackground($ts-white, $direction);
 		}
 		.STORY & {
-			@include shadowBackground($ts-storyB);
+			@include shadowBackground($ts-storyB, $direction);
 		}
+	}
+}
+.topOverflowShadow {
+	@include overflowShadow(0deg);
+	@media (min-width: $breakpoint-xl) {
+		top: 54px;
+	}
+}
+.bottomOverflowShadow {
+	@include overflowShadow(180deg);
+	@media (min-width: $breakpoint-xl) {
+		bottom: 0;
 	}
 }
