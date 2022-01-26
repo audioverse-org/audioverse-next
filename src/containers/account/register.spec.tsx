@@ -22,6 +22,11 @@ const renderPage = buildRenderer(Register);
 const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
 
 describe('register page', () => {
+	beforeEach(() => {
+		jest.resetAllMocks();
+		Cookie.get = jest.fn().mockReturnValue({});
+	});
+
 	it('renders', async () => {
 		await renderPage({ router });
 	});
