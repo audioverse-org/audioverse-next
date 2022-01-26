@@ -15135,7 +15135,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 		options
 	);
 export const GetHomeStaticPropsDocument = `
-query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
+query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
