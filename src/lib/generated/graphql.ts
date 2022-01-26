@@ -5769,6 +5769,7 @@ export type CardFavoriteFragment = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -5885,6 +5886,7 @@ export type CardFavoriteFragment = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -5993,6 +5995,7 @@ export type CardPlaylistFragment = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -6069,6 +6072,7 @@ export type CardRecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6173,6 +6177,7 @@ export type CardRecordingStackFragment = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -6341,6 +6346,7 @@ export type PlayerFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6458,6 +6464,7 @@ export type TeaseRecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6526,6 +6533,7 @@ export type GetNotFoundPageDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -6639,6 +6647,7 @@ export type RecordingFragment = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -6699,6 +6708,7 @@ export type RecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6796,6 +6806,7 @@ export type SequenceFragment = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -6844,6 +6855,7 @@ export type AndMiniplayerFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -7262,6 +7274,7 @@ export type GetAudiobookDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -7538,6 +7551,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
+												logUrl: string | null | undefined;
 												filesize: string;
 												mimeType: string;
 												duration: number;
@@ -7607,6 +7621,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -7920,6 +7935,7 @@ export type GetCollectionDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -8281,6 +8297,7 @@ export type GetCollectionTeachingsPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -8376,6 +8393,7 @@ export type GetDiscoverPageDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -8447,6 +8465,7 @@ export type GetDiscoverPageDataQuery = {
 						videoStreams: Array<{
 							__typename?: 'VideoFile';
 							url: string;
+							logUrl: string | null | undefined;
 							filesize: string;
 							mimeType: string;
 							duration: number;
@@ -8528,6 +8547,7 @@ export type GetDiscoverPageDataQuery = {
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
+										logUrl: string | null | undefined;
 										filesize: string;
 										mimeType: string;
 										duration: number;
@@ -8696,6 +8716,7 @@ export type GetDiscoverPageDataQuery = {
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
+										logUrl: string | null | undefined;
 										filesize: string;
 										mimeType: string;
 										duration: number;
@@ -9106,6 +9127,7 @@ export type GetHomeStaticPropsQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -9223,6 +9245,7 @@ export type GetLibraryHistoryPageDataQuery = {
 										videoStreams: Array<{
 											__typename?: 'VideoFile';
 											url: string;
+											logUrl: string | null | undefined;
 											filesize: string;
 											mimeType: string;
 											duration: number;
@@ -9390,6 +9413,7 @@ export type GetLibraryDataQuery = {
 												videoStreams: Array<{
 													__typename?: 'VideoFile';
 													url: string;
+													logUrl: string | null | undefined;
 													filesize: string;
 													mimeType: string;
 													duration: number;
@@ -9524,6 +9548,7 @@ export type GetLibraryDataQuery = {
 																videoStreams: Array<{
 																	__typename?: 'VideoFile';
 																	url: string;
+																	logUrl: string | null | undefined;
 																	filesize: string;
 																	mimeType: string;
 																	duration: number;
@@ -9658,6 +9683,7 @@ export type GetLibraryPlaylistPageDataQuery = {
 												videoStreams: Array<{
 													__typename?: 'VideoFile';
 													url: string;
+													logUrl: string | null | undefined;
 													filesize: string;
 													mimeType: string;
 													duration: number;
@@ -9755,6 +9781,7 @@ export type GetLibraryPlaylistsDataQuery = {
 													videoStreams: Array<{
 														__typename?: 'VideoFile';
 														url: string;
+														logUrl: string | null | undefined;
 														filesize: string;
 														mimeType: string;
 														duration: number;
@@ -9944,6 +9971,7 @@ export type GetPresenterDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -10017,6 +10045,7 @@ export type GetPresenterDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -10087,6 +10116,7 @@ export type GetPresenterDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -10378,6 +10408,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -10601,6 +10632,7 @@ export type GetPresenterTopPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -10783,6 +10815,7 @@ export type GetSearchResultsPageDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -11146,6 +11179,7 @@ export type GetSearchResultsRecordingsQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -11249,6 +11283,7 @@ export type GetSeriesDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -11524,6 +11559,7 @@ export type GetSermonDetailDataQuery = {
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
+												logUrl: string | null | undefined;
 												filesize: string;
 												mimeType: string;
 												duration: number;
@@ -11593,6 +11629,7 @@ export type GetSermonDetailDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -11702,6 +11739,7 @@ export type GetSermonListPageDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -11842,6 +11880,7 @@ export type GetTrendingTeachingsPageDataQuery = {
 						videoStreams: Array<{
 							__typename?: 'VideoFile';
 							url: string;
+							logUrl: string | null | undefined;
 							filesize: string;
 							mimeType: string;
 							duration: number;
@@ -11946,6 +11985,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -12112,6 +12152,7 @@ export type GetSongAlbumsListPageDataQuery = {
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
+										logUrl: string | null | undefined;
 										filesize: string;
 										mimeType: string;
 										duration: number;
@@ -12224,6 +12265,7 @@ export type GetSongAlbumsListPageDataQuery = {
 									videoStreams: Array<{
 										__typename?: 'VideoFile';
 										url: string;
+										logUrl: string | null | undefined;
 										filesize: string;
 										mimeType: string;
 										duration: number;
@@ -12307,6 +12349,7 @@ export type GetSongBooksDetailPageDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -12433,6 +12476,7 @@ export type GetBookSongDetailDataQuery = {
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
+												logUrl: string | null | undefined;
 												filesize: string;
 												mimeType: string;
 												duration: number;
@@ -12502,6 +12546,7 @@ export type GetBookSongDetailDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -12572,6 +12617,7 @@ export type GetBookSongDetailDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
@@ -12696,6 +12742,7 @@ export type GetSongDetailDataQuery = {
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
+												logUrl: string | null | undefined;
 												filesize: string;
 												mimeType: string;
 												duration: number;
@@ -12765,6 +12812,7 @@ export type GetSongDetailDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -13052,6 +13100,7 @@ export type GetSponsorDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -13287,6 +13336,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -13473,6 +13523,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
@@ -13748,6 +13799,7 @@ export type GetStoryDetailDataQuery = {
 											videoStreams: Array<{
 												__typename?: 'VideoFile';
 												url: string;
+												logUrl: string | null | undefined;
 												filesize: string;
 												mimeType: string;
 												duration: number;
@@ -13817,6 +13869,7 @@ export type GetStoryDetailDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -14163,7 +14216,7 @@ export const CardRecordingSequenceHatFragmentDoc = `
 fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}
 `;
 export const AndMiniplayerFragmentDoc = `
-fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)filesize mimeType duration}}
+fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)logUrl filesize mimeType duration}}
 `;
 export const TeaseRecordingFragmentDoc = `
 fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}
