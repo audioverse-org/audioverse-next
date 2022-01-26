@@ -7,27 +7,29 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
-import CardBibleChapter from '@components/molecules/card/bibleChapter';
+import CardBibleBook from '@components/molecules/card/bibleBook';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
+import CardMasonry from '@components/molecules/cardMasonry';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import Input from '@components/molecules/form/input';
 import Section from '@components/organisms/section';
 import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
+import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
-	makeAboutPage,
-	makeBibleBookRoute,
+	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/fa-bell.svg';
+import IconForward from '../../public/img/icon-forward-light.svg';
 import ImagePlayers from '../../public/img/players.jpeg';
 
 import styles from './home.module.scss';
@@ -41,6 +43,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+	const isLoggedIn = !!getSessionToken();
 
 	const footerRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
@@ -92,16 +95,30 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									description="home page sound doctrine text"
 								/>
 							</p>
-							<Button
-								type="super"
-								href={makeAboutPage(languageRoute, 1)}
-								text={
-									<FormattedMessage
-										id="homePage__learnStoryButtonLabel"
-										defaultMessage="Learn about our story"
+							<div className={styles.primaryCtas}>
+								<Button
+									type="super"
+									href={makeDiscoverRoute(languageRoute)}
+									text={
+										<FormattedMessage
+											id="homePage__DiscoverAudioButtonLabel"
+											defaultMessage="Discover Audio"
+										/>
+									}
+								/>
+								{!isLoggedIn && (
+									<Button
+										type="primaryInverse"
+										href={makeRegisterRoute(languageRoute)}
+										text={
+											<FormattedMessage
+												id="homePage__CreateAccountButtonLabel"
+												defaultMessage="Create an Account"
+											/>
+										}
 									/>
-								}
-							/>
+								)}
+							</div>
 						</>
 					}
 					media={
@@ -116,25 +133,25 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					bleed
 				/>
 				<Section
-					className={styles.recentSection}
+					className={styles.latestSection}
 					text={
 						<>
 							<Heading1>
 								<FormattedMessage
-									id="homePage__recentContentSectionTitle"
-									defaultMessage="Recent Content"
-									description="home page recent content section title"
+									id="homePage__latestContentSectionTitle"
+									defaultMessage="Latest Content"
+									description="home page latest content section title"
 								/>
 							</Heading1>
 							<p className={clsx(styles.paragraph, styles.narrow)}>
 								<FormattedMessage
-									id="homePage__recentContentSectionText"
-									defaultMessage="Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
-									description="home page recent content section text"
+									id="homePage__latestContentSectionText"
+									defaultMessage="Explore a sample of some of our recent audio pieces. Then when you’re ready, <a>visit the Discover page</a> to see more."
+									description="home page latest content section text"
 									values={{
 										a: function a(chunks: string) {
 											return (
-												<Link href={makeRegisterRoute(languageRoute)}>
+												<Link href={makeDiscoverRoute(languageRoute)}>
 													<a className="decorated">{chunks}</a>
 												</Link>
 											);
@@ -142,35 +159,46 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									}}
 								/>
 							</p>
-							<Slider perSlide={3} responsiveOnMobile>
-								{recentRecordings.slice(0, 2).map((recording) => (
-									<div
-										className={styles.slideCard}
-										key={recording.canonicalPath}
-									>
-										<CardRecording recording={recording} />
-									</div>
-								))}
-								{languageRoute === 'en' && (
-									<div className={styles.slideCard}>
-										<CardBibleChapter
-											chapter={{
-												id: 'ENGKJV1/GEN',
-												title: 'Genesis 1',
-												url: makeBibleBookRoute(languageRoute, 'ENGKJV1/GEN'),
-											}}
-										/>
-									</div>
-								)}
-								{recentRecordings.slice(2).map((recording) => (
-									<div
-										className={styles.slideCard}
-										key={recording.canonicalPath}
-									>
-										<CardRecording recording={recording} />
-									</div>
-								))}
-							</Slider>
+
+							<div className={styles.latestContentWrapper}>
+								<CardMasonry
+									items={[
+										...recentRecordings.map(
+											(r) =>
+												({
+													type: 'recording',
+													data: r,
+												} as const)
+										),
+										{
+											type: 'bible',
+										} as const,
+									]}
+									render={({ data }) =>
+										data.type === 'recording' ? (
+											<CardRecording
+												key={data.data.title}
+												recording={data.data}
+											/>
+										) : (
+											<CardBibleBook
+												book={{
+													book_id: 'ENGKJV1/GEN',
+													name: 'Genesis',
+													bible: {
+														abbreviation: 'KJV',
+													},
+													name_short: 'Gen',
+													book_seq: '1',
+													chapters: Array.from(Array(50).keys()),
+													testament: 'OT',
+												}}
+											/>
+										)
+									}
+									key={`item-${recentRecordings.length}`}
+								/>
+							</div>
 						</>
 					}
 					center
@@ -202,6 +230,18 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								{posts.map((p) => (
 									<CardPost key={p.title} post={p} alternate />
 								))}
+							</div>
+							<div className={styles.postsSeeAll}>
+								<Button
+									type="secondary"
+									IconLeft={IconForward}
+									text={
+										<FormattedMessage
+											id="homePage__recentPostsSeeAll"
+											defaultMessage="See All Blog Posts"
+										/>
+									}
+								/>
 							</div>
 						</div>
 					}
