@@ -30,16 +30,18 @@ import hasVideo from '@lib/hasVideo';
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
-interface Playable {
-	url: string;
-	mimeType: string;
+interface Playable extends VideoJs.default.Tech.SourceObject {
 	duration: number;
+	logUrl?: string | null;
 }
 
 const getFiles = (
 	recording: AndMiniplayerFragment,
 	prefersAudio: boolean
-): Playable[] => {
+):
+	| AndMiniplayerFragment['audioFiles']
+	| AndMiniplayerFragment['videoFiles']
+	| AndMiniplayerFragment['videoStreams'] => {
 	if (!recording) return [];
 
 	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
@@ -54,13 +56,14 @@ const getFiles = (
 export const getSources = (
 	recording: AndMiniplayerFragment,
 	prefersAudio: boolean
-) => {
+): Playable[] => {
 	const files = getFiles(recording, prefersAudio) || [];
 
 	return files.map((f) => ({
 		src: f.url,
 		type: f.mimeType,
 		duration: f.duration,
+		logUrl: 'logUrl' in f ? f.logUrl : undefined,
 	}));
 };
 
@@ -169,9 +172,7 @@ export default function AndPlaybackContext({
 	const [volume, setVolume] = useState<number>(100);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
-	const [sources, setSources] = useState<
-		{ src: string; type: string; duration: number }[]
-	>([]);
+	const [sources, setSources] = useState<Playable[]>([]);
 	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
 	const [fingerprint, setFingerprint] = useState<string>();
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
@@ -372,6 +373,11 @@ export default function AndPlaybackContext({
 		const p = player || VideoJs.default(videoElRef.current, options);
 
 		unstable_batchedUpdates(() => {
+			const logUrl = sources.find((s) => s.logUrl)?.logUrl;
+			if (logUrl) {
+				fetch(logUrl);
+			}
+
 			if (!player) {
 				setPlayer(p);
 			} else if (sources) {
