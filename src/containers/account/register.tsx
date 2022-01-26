@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import withAuthGuard from '@components/HOCs/withAuthGuard';
 import Button from '@components/molecules/button';
 import ButtonGuest from '@components/molecules/buttonGuest';
 import Checkbox from '@components/molecules/form/checkbox';
@@ -15,6 +16,7 @@ import {
 import { makeDiscoverRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+import LoginRedirect from './loginRedirect';
 import styles from './register.module.scss';
 
 function Register(): JSX.Element {
@@ -186,4 +188,4 @@ function Register(): JSX.Element {
 	);
 }
 
-export default Register;
+export default withAuthGuard(LoginRedirect, Register);

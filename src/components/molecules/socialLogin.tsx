@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useQueryClient } from 'react-query';
 
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import { setSessionToken } from '@lib/cookies';
@@ -16,8 +17,8 @@ import Button from './button';
 import styles from './socialLogin.module.scss';
 
 export default function SocialLogin({
-	onSuccess,
 	isRegister,
+	onSuccess,
 }: {
 	onSuccess?: () => void;
 	isRegister?: boolean;
@@ -25,16 +26,17 @@ export default function SocialLogin({
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
 	const didUnmount = useDidUnmount();
+	const queryClient = useQueryClient();
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
 		useRegisterSocialMutation({
-			onSuccess: (response) => {
+			onSuccess: async (response) => {
 				const errors = response?.loginSocial.errors || [];
 				const token = response?.loginSocial.authenticatedUser?.sessionToken;
 
 				if (token && !errors.length) {
 					setSessionToken(token);
-					onSuccess && onSuccess();
+					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
 				} else if (!didUnmount.current) {
 					setErrors(errors.map((e) => e.message));
 				}
