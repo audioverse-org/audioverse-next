@@ -659,6 +659,12 @@
   "header__navItemUser-profile": {
     "string": "Profile"
   },
+  "homePage__CreateAccountButtonLabel": {
+    "string": "Create an Account"
+  },
+  "homePage__DiscoverAudioButtonLabel": {
+    "string": "Discover Audio"
+  },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
     "string": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
@@ -667,8 +673,13 @@
     "comment": "home page download app section title",
     "string": "Download the App"
   },
-  "homePage__learnStoryButtonLabel": {
-    "string": "Learn about our story"
+  "homePage__latestContentSectionText": {
+    "comment": "home page latest content section text",
+    "string": "Explore a sample of some of our recent audio pieces. Then when you’re ready, <a>visit the Discover page</a> to see more."
+  },
+  "homePage__latestContentSectionTitle": {
+    "comment": "home page latest content section title",
+    "string": "Latest Content"
   },
   "homePage__newsletterEmail": {
     "string": "Email Address"
@@ -696,14 +707,6 @@
   "homePage__newsletterSubscribe": {
     "string": "Subscribe"
   },
-  "homePage__recentContentSectionText": {
-    "comment": "home page recent content section text",
-    "string": "Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
-  },
-  "homePage__recentContentSectionTitle": {
-    "comment": "home page recent content section title",
-    "string": "Recent Content"
-  },
   "homePage__recentPostsSectionText": {
     "comment": "home page recent posts section text",
     "string": "Read through our blog to find articles about recent events, sermons, and conferences."
@@ -711,6 +714,9 @@
   "homePage__recentPostsSectionTitle": {
     "comment": "home page recent posts section title",
     "string": "Recent Blog Posts"
+  },
+  "homePage__recentPostsSeeAll": {
+    "string": "See All Blog Posts"
   },
   "homePage__soundDoctrineText": {
     "comment": "home page sound doctrine text",
