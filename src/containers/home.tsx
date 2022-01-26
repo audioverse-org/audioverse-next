@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
-import CardBibleChapter from '@components/molecules/card/bibleChapter';
+import CardBibleBook from '@components/molecules/card/bibleBook';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import CardMasonry from '@components/molecules/cardMasonry';
@@ -22,7 +22,6 @@ import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
-	makeBibleBookRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
@@ -182,11 +181,17 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												recording={data.data}
 											/>
 										) : (
-											<CardBibleChapter
-												chapter={{
-													id: 'ENGKJV1/GEN',
-													title: 'Genesis 1',
-													url: makeBibleBookRoute(languageRoute, 'ENGKJV1/GEN'),
+											<CardBibleBook
+												book={{
+													book_id: 'ENGKJV1/GEN',
+													name: 'Genesis',
+													bible: {
+														abbreviation: 'KJV',
+													},
+													name_short: 'Gen',
+													book_seq: '1',
+													chapters: Array.from(Array(50).keys()),
+													testament: 'OT',
 												}}
 											/>
 										)
