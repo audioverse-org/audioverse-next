@@ -203,7 +203,13 @@ describe('sermon detail page', () => {
 
 	it('includes player', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
 		});
 
 		await act(async () => {
@@ -217,7 +223,13 @@ describe('sermon detail page', () => {
 
 	it('sets poster', async () => {
 		loadSermonDetailData({
-			audioFiles: ['the_source'],
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
 		});
 
 		await act(async () => {
