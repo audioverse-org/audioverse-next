@@ -22,7 +22,7 @@ export default function CardRecordingStack({
 }: Props): JSX.Element | null {
 	const favoritedNodes = favoritedRecordings.nodes || [];
 	const recording = favoritedNodes[0];
-	const { sequence, sponsor } = recording;
+	const { sequence } = recording;
 	if (!sequence) return null; // Should never happen
 
 	const { hat, theme } = (
@@ -41,7 +41,7 @@ export default function CardRecordingStack({
 			},
 			[SequenceContentType.StorySeason]: {
 				theme: 'story',
-				hat: <CardHatStory {...{ sequence, sponsor }} />,
+				hat: <CardHatStory sequence={sequence} />,
 			},
 		} as const
 	)[contentType];

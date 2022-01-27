@@ -559,6 +559,12 @@
       "value": "Sponsor"
     }
   ],
+  "cardSponsor_sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
   "cardStory_sequenceLabel": [
     {
       "type": 0,
@@ -1901,6 +1907,12 @@
       "value": "Z to A"
     }
   ],
+  "library__createAccountHeading": [
+    {
+      "type": 0,
+      "value": "Create a free account"
+    }
+  ],
   "library__emptyCopy": [
     {
       "type": 0,
@@ -1913,22 +1925,16 @@
       "value": "You don’t have any items saved yet"
     }
   ],
-  "library__membersOnlyCopy": [
+  "library__freeAccountCopy": [
     {
       "type": 0,
-      "value": "Login or create an account to access the Library features."
+      "value": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
     }
   ],
   "library__membersOnlyCta": [
     {
       "type": 0,
       "value": "Create account or Login"
-    }
-  ],
-  "library__membersOnlyHeading": [
-    {
-      "type": 0,
-      "value": "Member-only feature"
     }
   ],
   "library__noMatchingCopy": [

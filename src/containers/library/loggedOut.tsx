@@ -20,14 +20,14 @@ export default function LibraryLoggedOut(): JSX.Element {
 			<Alert className={styles.membersOnlyAlert}>
 				<Heading2 className={styles.membersOnlyHeading}>
 					<FormattedMessage
-						id="library__membersOnlyHeading"
-						defaultMessage="Member-only feature"
+						id="library__createAccountHeading"
+						defaultMessage="Create a free account"
 					/>
 				</Heading2>
 				<p className={styles.membersOnlyCopy}>
 					<FormattedMessage
-						id="library__membersOnlyCopy"
-						defaultMessage="Login or create an account to access the Library features."
+						id="library__freeAccountCopy"
+						defaultMessage="Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
 					/>
 				</p>
 				<Button

@@ -30,6 +30,27 @@
 	}
 }
 
+.bannerImage {
+	aspect-ratio: 16/9;
+	width: 100%;
+	@supports not (aspect-ratio: 9 / 16) {
+		> * {
+			height: 0 !important;
+			padding-top: 56.25% !important;
+		}
+	}
+
+	@media (min-width: $breakpoint-md) {
+		aspect-ratio: 1/1;
+		@supports not (aspect-ratio: 1 / 1) {
+			> * {
+				height: 0 !important;
+				padding-top: 100% !important;
+			}
+		}
+	}
+}
+
 .narrow.narrow {
 	max-width: 560px;
 	margin: 0 auto 16px;

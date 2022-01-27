@@ -5746,6 +5746,16 @@ export type CardFavoriteFragment = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				sponsor:
+					| {
+							__typename?: 'Sponsor';
+							id: string | number;
+							title: string;
+							canonicalPath: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+					  }
+					| null
+					| undefined;
 				persons: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -5826,16 +5836,6 @@ export type CardFavoriteFragment = {
 								title: string;
 								duration: number;
 								recordingContentType: RecordingContentType;
-								sponsor:
-									| {
-											__typename?: 'Sponsor';
-											id: string | number;
-											title: string;
-											canonicalPath: string;
-											imageWithFallback: { __typename?: 'Image'; url: string };
-									  }
-									| null
-									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -5924,6 +5924,20 @@ export type CardFavoriteFragment = {
 						| undefined;
 				};
 		  };
+};
+
+export type CardHatSponsorFragment = {
+	__typename?: 'Recording';
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+		  }
+		| null
+		| undefined;
 };
 
 export type CardPersonFragment = {
@@ -6049,6 +6063,16 @@ export type CardRecordingFragment = {
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+		  }
+		| null
+		| undefined;
 	persons: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -6120,16 +6144,6 @@ export type CardRecordingStackFragment = {
 					title: string;
 					duration: number;
 					recordingContentType: RecordingContentType;
-					sponsor:
-						| {
-								__typename?: 'Sponsor';
-								id: string | number;
-								title: string;
-								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-						  }
-						| null
-						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -6510,6 +6524,16 @@ export type GetNotFoundPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -6783,6 +6807,16 @@ export type SequenceFragment = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -7251,6 +7285,19 @@ export type GetAudiobookDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -7912,6 +7959,19 @@ export type GetCollectionDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -8274,6 +8334,19 @@ export type GetCollectionTeachingsPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -8370,6 +8443,16 @@ export type GetDiscoverPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -8442,6 +8525,19 @@ export type GetDiscoverPageDataQuery = {
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
+						sponsor:
+							| {
+									__typename?: 'Sponsor';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+							  }
+							| null
+							| undefined;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -8524,6 +8620,19 @@ export type GetDiscoverPageDataQuery = {
 										canonicalPath: string;
 										imageWithFallback: { __typename?: 'Image'; url: string };
 									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
 									persons: Array<{
 										__typename?: 'Person';
 										name: string;
@@ -8693,6 +8802,19 @@ export type GetDiscoverPageDataQuery = {
 										canonicalPath: string;
 										imageWithFallback: { __typename?: 'Image'; url: string };
 									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
 									persons: Array<{
 										__typename?: 'Person';
 										name: string;
@@ -9104,6 +9226,16 @@ export type GetHomeStaticPropsQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -9222,6 +9354,19 @@ export type GetLibraryHistoryPageDataQuery = {
 											canonicalPath: string;
 											imageWithFallback: { __typename?: 'Image'; url: string };
 										}>;
+										sponsor:
+											| {
+													__typename?: 'Sponsor';
+													id: string | number;
+													title: string;
+													canonicalPath: string;
+													image:
+														| { __typename?: 'Image'; url: string }
+														| null
+														| undefined;
+											  }
+											| null
+											| undefined;
 										persons: Array<{
 											__typename?: 'Person';
 											name: string;
@@ -9387,6 +9532,19 @@ export type GetLibraryDataQuery = {
 														url: string;
 													};
 												}>;
+												sponsor:
+													| {
+															__typename?: 'Sponsor';
+															id: string | number;
+															title: string;
+															canonicalPath: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+													  }
+													| null
+													| undefined;
 												persons: Array<{
 													__typename?: 'Person';
 													name: string;
@@ -9476,19 +9634,6 @@ export type GetLibraryDataQuery = {
 																title: string;
 																duration: number;
 																recordingContentType: RecordingContentType;
-																sponsor:
-																	| {
-																			__typename?: 'Sponsor';
-																			id: string | number;
-																			title: string;
-																			canonicalPath: string;
-																			imageWithFallback: {
-																				__typename?: 'Image';
-																				url: string;
-																			};
-																	  }
-																	| null
-																	| undefined;
 																persons: Array<{
 																	__typename?: 'Person';
 																	name: string;
@@ -9657,6 +9802,19 @@ export type GetLibraryPlaylistPageDataQuery = {
 														url: string;
 													};
 												}>;
+												sponsor:
+													| {
+															__typename?: 'Sponsor';
+															id: string | number;
+															title: string;
+															canonicalPath: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+													  }
+													| null
+													| undefined;
 												persons: Array<{
 													__typename?: 'Person';
 													name: string;
@@ -9948,6 +10106,19 @@ export type GetPresenterDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -10022,6 +10193,19 @@ export type GetPresenterDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -10093,6 +10277,19 @@ export type GetPresenterDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -10385,6 +10582,19 @@ export type GetPresenterRecordingsPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -10609,6 +10819,19 @@ export type GetPresenterTopPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -10792,6 +11015,16 @@ export type GetSearchResultsPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -11156,6 +11389,16 @@ export type GetSearchResultsRecordingsQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -11260,6 +11503,19 @@ export type GetSeriesDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -11716,6 +11972,16 @@ export type GetSermonListPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -11857,6 +12123,19 @@ export type GetTrendingTeachingsPageDataQuery = {
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
+						sponsor:
+							| {
+									__typename?: 'Sponsor';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+							  }
+							| null
+							| undefined;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -11962,6 +12241,19 @@ export type GetSongAlbumsDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -12129,6 +12421,19 @@ export type GetSongAlbumsListPageDataQuery = {
 										canonicalPath: string;
 										imageWithFallback: { __typename?: 'Image'; url: string };
 									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
 									persons: Array<{
 										__typename?: 'Person';
 										name: string;
@@ -12242,6 +12547,19 @@ export type GetSongAlbumsListPageDataQuery = {
 										canonicalPath: string;
 										imageWithFallback: { __typename?: 'Image'; url: string };
 									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
 									persons: Array<{
 										__typename?: 'Person';
 										name: string;
@@ -12326,6 +12644,16 @@ export type GetSongBooksDetailPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
@@ -13077,6 +13405,19 @@ export type GetSponsorDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -13313,6 +13654,19 @@ export type GetSponsorTeachingsPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -13500,6 +13854,19 @@ export type GetStoryAlbumDetailPageDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -14215,6 +14582,9 @@ fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithF
 export const CardRecordingSequenceHatFragmentDoc = `
 fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}
 `;
+export const CardHatSponsorFragmentDoc = `
+fragment cardHatSponsor on Recording{sponsor{id title canonicalPath(useFuturePath:true)image{url(size:100)}}}
+`;
 export const AndMiniplayerFragmentDoc = `
 fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)logUrl filesize mimeType duration}}
 `;
@@ -14222,16 +14592,13 @@ export const TeaseRecordingFragmentDoc = `
 fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}
 `;
 export const CardRecordingFragmentDoc = `
-fragment cardRecording on Recording{...cardRecordingSequenceHat ...teaseRecording}
+fragment cardRecording on Recording{...cardRecordingSequenceHat ...cardHatSponsor ...teaseRecording}
 `;
 export const CardSequenceFragmentDoc = `
 fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}
 `;
-export const SponsorLockupFragmentDoc = `
-fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
-`;
 export const CardRecordingStackFragmentDoc = `
-fragment cardRecordingStack on Sequence{contentType favoritedRecordings:recordings(viewerHasFavorited:true){nodes{sponsor{...sponsorLockup}...teaseRecording ...cardRecordingSequenceHat}}}
+fragment cardRecordingStack on Sequence{contentType favoritedRecordings:recordings(viewerHasFavorited:true){nodes{...teaseRecording ...cardRecordingSequenceHat}}}
 `;
 export const CardCollectionFragmentDoc = `
 fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}
@@ -14256,6 +14623,9 @@ fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{
 `;
 export const CopyrightInfosFragmentDoc = `
 fragment copyrightInfos on Recording{id copyrightYear distributionAgreement{id}sponsor{id}...copyrightInfo}
+`;
+export const SponsorLockupFragmentDoc = `
+fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
 `;
 export const SequenceNavFragmentDoc = `
 fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}
@@ -14367,6 +14737,7 @@ query getNotFoundPageData{websiteRecentRecordings(language:ENGLISH first:3){node
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetNotFoundPageDataQuery = <
@@ -14691,6 +15062,7 @@ ${SequenceFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetAudiobookDetailPageDataQuery = <
@@ -14910,6 +15282,7 @@ ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionDetailPageDataQuery = <
@@ -15044,6 +15417,7 @@ ${CollectionPivotFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetCollectionTeachingsPageDataQuery = <
@@ -15093,6 +15467,7 @@ query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
@@ -15139,6 +15514,7 @@ query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${TestimoniesFragmentDoc}
@@ -15163,6 +15539,7 @@ query getLibraryHistoryPageData($language:Language!$first:Int!$offset:Int!){me{u
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryHistoryPageDataQuery = <
@@ -15186,11 +15563,11 @@ ${CardFavoriteFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${CardRecordingStackFragmentDoc}
-${SponsorLockupFragmentDoc}
 ${CardCollectionFragmentDoc}
 ${CardSponsorFragmentDoc}
 ${CardPersonFragmentDoc}`;
@@ -15214,6 +15591,7 @@ query getLibraryPlaylistPageData($id:ID!){me{user{playlist(id:$id){title created
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetLibraryPlaylistPageDataQuery = <
@@ -15276,6 +15654,7 @@ query getPresenterDetailPageData($id:ID!$language:Language!){person(id:$id){id n
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
@@ -15355,6 +15734,7 @@ ${PresenterPivotFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterRecordingsPageDataQuery = <
@@ -15416,6 +15796,7 @@ ${PresenterPivotFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetPresenterTopPageDataQuery = <
@@ -15519,6 +15900,7 @@ query getSearchResultsPageData($language:Language!$term:String!){recordings(lang
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
@@ -15600,6 +15982,7 @@ query getSearchResultsRecordings($language:Language!$term:String!$first:Int!$off
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSearchResultsRecordingsQuery = <
@@ -15623,6 +16006,7 @@ ${SequenceFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSeriesDetailPageDataQuery = <
@@ -15762,6 +16146,7 @@ query getSermonListPageData($language:Language!$hasVideo:Boolean$first:Int$offse
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSermonListPageDataQuery = <
@@ -15820,6 +16205,7 @@ query getTrendingTeachingsPageData($language:Language!){recordings:popularRecord
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetTrendingTeachingsPageDataQuery = <
@@ -15843,6 +16229,7 @@ ${SequenceFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsDetailPageDataQuery = <
@@ -15902,6 +16289,7 @@ ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSongAlbumsListPageDataQuery = <
@@ -15924,6 +16312,7 @@ query getSongBooksDetailPageData($language:Language!$book:String!){musicTracks(l
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSongBooksDetailPageDataQuery = <
@@ -16055,6 +16444,7 @@ ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorDetailPageDataQuery = <
@@ -16170,6 +16560,7 @@ ${SponsorPivotFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetSponsorTeachingsPageDataQuery = <
@@ -16229,6 +16620,7 @@ ${SequenceFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}`;
 export const useGetStoryAlbumDetailPageDataQuery = <

@@ -14,12 +14,14 @@ import CardStory from './story';
 interface CardSermonProps {
 	recording: CardRecordingFragment;
 	hideHat?: boolean;
+	hideSponsorHat?: boolean;
 	isOptionalLink?: boolean;
 }
 
 export default function CardRecording({
 	recording,
 	hideHat,
+	hideSponsorHat,
 	isOptionalLink,
 }: CardSermonProps): JSX.Element {
 	const { recordingContentType } = recording;
@@ -33,7 +35,11 @@ export default function CardRecording({
 		case RecordingContentType.MusicTrack:
 			return <CardSong {...{ song: recording, hideHat, isOptionalLink }} />;
 		case RecordingContentType.Sermon:
-			return <CardSermon {...{ recording, hideHat, isOptionalLink }} />;
+			return (
+				<CardSermon
+					{...{ recording, hideHat, isOptionalLink, hideSponsorHat }}
+				/>
+			);
 		case RecordingContentType.Story:
 			return <CardStory {...{ story: recording, hideHat, isOptionalLink }} />;
 

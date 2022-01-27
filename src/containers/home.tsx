@@ -122,15 +122,18 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</>
 					}
 					media={
-						<Image
-							src="/img/unsplash-headphones.jpg"
-							layout="fill"
-							objectFit="cover"
-							priority
-						/>
+						<div className={styles.bannerImage}>
+							<Image
+								src="/img/unsplash-headphones.jpg"
+								layout="fill"
+								objectFit="cover"
+								priority
+							/>
+						</div>
 					}
 					theme={BaseColors.DARK}
 					bleed
+					short
 				/>
 				<Section
 					className={styles.latestSection}

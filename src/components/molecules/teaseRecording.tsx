@@ -38,6 +38,7 @@ type Props = {
 	unpadded?: boolean;
 	playlistRecordings?: AndMiniplayerFragment[];
 	small?: boolean;
+	hideSinglePart?: boolean;
 	isOptionalLink?: boolean;
 	disableUserFeatures?: boolean;
 	disablePlayback?: boolean;
@@ -49,6 +50,7 @@ export default function TeaseRecording({
 	unpadded,
 	playlistRecordings,
 	small,
+	hideSinglePart,
 	isOptionalLink,
 	disableUserFeatures,
 	disablePlayback = false,
@@ -86,16 +88,24 @@ export default function TeaseRecording({
 
 	const inner = (
 		<>
-			{index && count && (
-				<div className={styles.part}>
+			<div className={styles.part}>
+				{index && count ? (
 					<FormattedMessage
 						id="molecule-teaseRecording__partInfo"
 						defaultMessage="Part {index} of {count}"
 						description="recording tease part info"
 						values={{ index, count }}
 					/>
-				</div>
-			)}
+				) : (
+					!hideSinglePart && (
+						<FormattedMessage
+							id="molecule-teaseRecording__individualTeaching"
+							defaultMessage="Individual Teaching"
+							values={{ index, count }}
+						/>
+					)
+				)}
+			</div>
 			<div className={styles.title}>
 				{small ? (
 					<Heading3 unpadded className={styles.heading}>
