@@ -22,6 +22,7 @@ import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
+	makeBlogPostListRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
@@ -244,6 +245,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											defaultMessage="See All Blog Posts"
 										/>
 									}
+									href={makeBlogPostListRoute(languageRoute)}
 								/>
 							</div>
 						</div>
