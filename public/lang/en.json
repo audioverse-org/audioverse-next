@@ -269,6 +269,9 @@
     "comment": "Card sponsor hat title",
     "string": "Sponsor"
   },
+  "cardSponsor_sponsorLabel": {
+    "string": "Sponsor"
+  },
   "cardStory_sequenceLabel": {
     "string": "Stories"
   },
@@ -883,20 +886,20 @@
   "libraryNav__sortZtoA": {
     "string": "Z to A"
   },
+  "library__createAccountHeading": {
+    "string": "Create a free account"
+  },
   "library__emptyCopy": {
     "string": "Bookmark items or listen to items from the Discover page."
   },
   "library__emptyHeading": {
     "string": "You don’t have any items saved yet"
   },
-  "library__membersOnlyCopy": {
-    "string": "Login or create an account to access the Library features."
+  "library__freeAccountCopy": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
   "library__membersOnlyCta": {
     "string": "Create account or Login"
-  },
-  "library__membersOnlyHeading": {
-    "string": "Member-only feature"
   },
   "library__noMatchingCopy": {
     "string": "Bookmark items or listen to items from the Discover page."

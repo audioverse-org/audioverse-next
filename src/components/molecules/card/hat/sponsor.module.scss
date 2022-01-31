@@ -1,0 +1,28 @@
+@import '../../../../styles/common';
+
+.wrapper {
+	--hatBg: #{$ts-lightTone};
+	--hatHoverColor: #{$ts-darkened-lightTone};
+}
+
+.hatContent {
+	background: var(--hatBg);
+	padding: 16px;
+	padding-top: 8px;
+	cursor: pointer;
+	&:hover {
+		background: var(--hatHoverColor);
+	}
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+}
+
+.image {
+	display: flex;
+	flex: 0 0 32px;
+	margin-right: 8px;
+}

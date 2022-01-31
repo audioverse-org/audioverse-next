@@ -16,7 +16,7 @@ import CardHat from '.';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;
-	recording: CardRecordingFragment;
+	recording: Pick<CardRecordingFragment, 'persons' | 'writers'>;
 }
 
 export default function CardHatAudiobook({

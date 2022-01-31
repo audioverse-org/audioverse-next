@@ -22,6 +22,7 @@ import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
+	makeBlogPostListRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
@@ -122,15 +123,18 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						</>
 					}
 					media={
-						<Image
-							src="/img/unsplash-headphones.jpg"
-							layout="fill"
-							objectFit="cover"
-							priority
-						/>
+						<div className={styles.bannerImage}>
+							<Image
+								src="/img/unsplash-headphones.jpg"
+								layout="fill"
+								objectFit="cover"
+								priority
+							/>
+						</div>
 					}
 					theme={BaseColors.DARK}
 					bleed
+					short
 				/>
 				<Section
 					className={styles.latestSection}
@@ -241,6 +245,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 											defaultMessage="See All Blog Posts"
 										/>
 									}
+									href={makeBlogPostListRoute(languageRoute)}
 								/>
 							</div>
 						</div>
