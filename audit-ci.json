@@ -5,6 +5,7 @@
 		1004967, // Not used with unsafe input
 		1006897, // Not used with unsafe input
 		1006899, // Not used with unsafe input
-		1006915 // Hosted with Vercel and therefore inapplicable
+		1006915, // Hosted with Vercel and therefore inapplicable
+		1006916 // Hosted with Vercel and therefore inapplicable
 	]
 }

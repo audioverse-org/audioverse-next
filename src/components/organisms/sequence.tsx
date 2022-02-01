@@ -183,7 +183,12 @@ export function Sequence({
 			{recordings.nodes?.length ? (
 				<CardGroup className={styles.cardGroup}>
 					{recordings.nodes.map((recording) => (
-						<CardRecording recording={recording} key={recording.id} hideHat />
+						<CardRecording
+							recording={recording}
+							key={recording.id}
+							hideHat
+							hideSponsorHat
+						/>
 					))}
 				</CardGroup>
 			) : null}
