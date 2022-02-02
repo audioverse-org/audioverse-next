@@ -27,6 +27,7 @@ function loadData() {
 				contentType: RecordingContentType.Story,
 				language: Language.English,
 				speakers: [],
+				writers: [],
 				attachments: [],
 				imageWithFallback: { url: '' },
 			},
