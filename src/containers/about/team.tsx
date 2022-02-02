@@ -41,7 +41,7 @@ export default function Team(): JSX.Element {
 			bio: (
 				<FormattedMessage
 					id="about__teamAlistairBio"
-					defaultMessage="Something about background and qualifications, Alistair leads the strategy at AudioVerse, talking with users and donors to inform the future of the ministry. He also speaks about topics and topics."
+					defaultMessage="From his stand-up desk, Alistair oversees the strategy and day-to-day management by ensuring that we are doing the right things and that we are doing things right."
 				/>
 			),
 		},
@@ -52,12 +52,12 @@ export default function Team(): JSX.Element {
 					defaultMessage="Business Manager"
 				/>
 			),
-			image: 'Debby',
+			image: '', // 'Debby'
 			name: 'Debby Williams',
 			bio: (
 				<FormattedMessage
 					id="about__teamDebbyBio"
-					defaultMessage="Something about background and qualifications, Debby runs the day to day operations at AudioVerse, working with presenters and ministries to get their content uploaded."
+					defaultMessage="With her background as a CPA, wife, and mother, Debby capably manages the finances, HR, and correspondence for the ministry."
 				/>
 			),
 		},
@@ -73,7 +73,7 @@ export default function Team(): JSX.Element {
 			bio: (
 				<FormattedMessage
 					id="about__teamNathanBio"
-					defaultMessage="Something about background and qualifications, Nathan is responsible for setting up the structure behind the AudioVerse platform. He enjoys enjoying things and hobbies and such."
+					defaultMessage="Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
 				/>
 			),
 		},
@@ -89,7 +89,7 @@ export default function Team(): JSX.Element {
 			bio: (
 				<FormattedMessage
 					id="about__teamLizBio"
-					defaultMessage="Something about background and qualifications, Liz works on the structure as well as the interface for the AudioVerse platform. She enjoys enjoying things and hobbies and such."
+					defaultMessage="A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
 				/>
 			),
 		},
@@ -101,11 +101,11 @@ export default function Team(): JSX.Element {
 				/>
 			),
 			image: 'Annette',
-			name: 'Annette Roblero',
+			name: 'Annette Roblero Miller',
 			bio: (
 				<FormattedMessage
 					id="about__teamAnnetteBio"
-					defaultMessage="Something about background and qualifications, Annette works on the structure as well as the interface for the AudioVerse platform. She enjoys enjoying things and hobbies and such."
+					defaultMessage="All the media on AudioVerse has Annette’s fingerprints on it. She works with partners, obtains content, edits them, and publishes them on AudioVerse."
 				/>
 			),
 		},
@@ -121,7 +121,7 @@ export default function Team(): JSX.Element {
 			bio: (
 				<FormattedMessage
 					id="about__teamMatthewBio"
-					defaultMessage="Something about background and qualifications, Matthew works on the structure as well as the interface for the AudioVerse platform. He enjoys enjoying things and hobbies and such."
+					defaultMessage="Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
 				/>
 			),
 		},
@@ -244,11 +244,13 @@ export default function Team(): JSX.Element {
 									iconColor={BaseColors.RED}
 								/>
 								<div className={styles.imageBackground}>
-									<Image
-										width={280}
-										height={187}
-										src={`/img/staff/${image}.jpg`}
-									/>
+									{image && (
+										<Image
+											width={280}
+											height={187}
+											src={`/img/staff/${image}.jpg`}
+										/>
+									)}
 								</div>
 								<Heading2 sans>{name}</Heading2>
 								<div className={styles.bio}>{bio}</div>
