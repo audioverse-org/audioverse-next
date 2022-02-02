@@ -205,6 +205,7 @@ describe('localization usage', () => {
 								] as any,
 							},
 						},
+						writers: [] as any,
 						speakers: [] as any,
 						imageWithFallback: { url: '' },
 					} as SermonDetailProps['recording']
@@ -583,7 +584,7 @@ describe('localization usage', () => {
 		[Login, {}],
 		[Reset, {}],
 		[profile, {}],
-		[Home, {}, ['Genesis 1', 'King James Version']],
+		[Home, {}, ['Genesis', 'King James Version']],
 		[
 			Player,
 			{

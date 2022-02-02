@@ -53,6 +53,7 @@ const recordingAudio: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	writers: [],
 	attachments: [],
 	imageWithFallback: { url: '' },
 };
@@ -72,6 +73,7 @@ const recordingVideo: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	writers: [],
 	attachments: [],
 	imageWithFallback: { url: '' },
 };
@@ -99,6 +101,7 @@ const recordingAudioVideo: Partial<RecordingFragment> = {
 		},
 	],
 	speakers: [],
+	writers: [],
 	attachments: [],
 	imageWithFallback: { url: '' },
 };

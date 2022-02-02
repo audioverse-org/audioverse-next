@@ -74,11 +74,7 @@ export default function Login(): JSX.Element {
 
 	return (
 		<AndOnboarding>
-			<SocialLogin
-				onSuccess={async () => {
-					await queryClient.invalidateQueries();
-				}}
-			/>
+			<SocialLogin />
 
 			<form onSubmit={onSubmit} data-testid="loginForm" className={styles.form}>
 				{!!errors.length && (

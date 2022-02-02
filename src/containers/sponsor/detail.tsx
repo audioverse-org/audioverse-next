@@ -164,6 +164,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 							<CardRecording
 								recording={recording}
 								key={recording.canonicalPath}
+								hideSponsorHat
 							/>
 						))}
 					</CardGroup>

@@ -40,7 +40,6 @@ function ReleaseDetail({
 		surname &&
 		email &&
 		address1 &&
-		address2 &&
 		city &&
 		province &&
 		postalCode &&

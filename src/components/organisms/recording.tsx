@@ -239,6 +239,51 @@ export function Recording({
 					content={`app-id=726998810, app-argument=avorg://recordings?id=${id}`}
 				/>
 				<link href={imageWithFallback.url} rel="image_src" />
+				<meta property="og:title" content={recording.title} />
+				<meta
+					property="og:description"
+					content={
+						{
+							[RecordingContentType.AudiobookTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_audiobook',
+									defaultMessage: 'Audiobook provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								}
+							),
+							[RecordingContentType.MusicTrack]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_music',
+									defaultMessage: 'Music by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								}
+							),
+							[RecordingContentType.Sermon]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_sermon',
+									defaultMessage: 'Teaching by {speakerName}',
+								},
+								{
+									speakerName: speakers.map(({ name }) => name).join(','),
+								}
+							),
+							[RecordingContentType.Story]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_story',
+									defaultMessage: 'Story by {writerName}',
+								},
+								{
+									writerName: writers.map(({ name }) => name).join(','),
+								}
+							),
+						}[contentType]
+					}
+				/>
+				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 			{overrideSequence
 				? makeHat(
@@ -381,8 +426,17 @@ export function Recording({
 							</div>
 						</div>
 						<div
-							className={styles.overflowShadow}
+							className={styles.topOverflowShadow}
 							style={{ opacity: Math.min(1, scrollPosition / 100) }}
+						/>
+						<div
+							className={styles.bottomOverflowShadow}
+							style={{
+								opacity: Math.min(
+									1,
+									(scrollRef.current?.scrollTop || 0) - scrollPosition / 100
+								),
+							}}
 						/>
 					</div>
 				)}

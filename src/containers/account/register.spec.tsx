@@ -22,6 +22,11 @@ const renderPage = buildRenderer(Register);
 const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
 
 describe('register page', () => {
+	beforeEach(() => {
+		jest.resetAllMocks();
+		Cookie.get = jest.fn().mockReturnValue({});
+	});
+
 	it('renders', async () => {
 		await renderPage({ router });
 	});
@@ -314,10 +319,10 @@ describe('register page', () => {
 		});
 	});
 
-	it('pops modal on guest click', async () => {
-		const { getByText } = await renderPage({ router });
+	it('pops modal on guest info click', async () => {
+		const { getByText, getByTestId } = await renderPage({ router });
 
-		userEvent.click(getByText('Continue as guest'));
+		userEvent.click(getByTestId('guest-info-button'));
 
 		expect(getByText('Continue as guest?')).toBeInTheDocument();
 	});

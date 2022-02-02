@@ -269,10 +269,10 @@ describe('home page', () => {
 		expect(getAllByText('the_song_collection_title')[1]).toBeInTheDocument();
 	});
 
-	it('renders chapter title', async () => {
+	it('renders Bible book title', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('Genesis 1')).toBeInTheDocument();
+		expect(getByText('Genesis')).toBeInTheDocument();
 	});
 
 	it('renders story title', async () => {

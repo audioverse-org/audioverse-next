@@ -129,11 +129,17 @@
   "backButton__back": {
     "string": "Back"
   },
+  "bibleBook__backToChapter": {
+    "string": "Back to Chapter Info"
+  },
   "bibleBook__chapterListTitle": {
     "string": "Other Chapters in Book"
   },
   "bibleBook__disclaimer": {
     "string": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+  },
+  "bibleBook__readAlong": {
+    "string": "Read Along"
   },
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
@@ -189,6 +195,15 @@
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
     "string": "{count} series"
+  },
+  "cardHatSponsor__addSponsor": {
+    "string": "Add Sponsor"
+  },
+  "cardHatSponsor__removeSponsor": {
+    "string": "Remove Sponsor"
+  },
+  "cardHatSponsor__sponsorLabel": {
+    "string": "Sponsor"
   },
   "cardPerson_teachingsLabel": {
     "comment": "Card person teachings count label",
@@ -420,16 +435,16 @@
     "string": "Stories"
   },
   "discover__conferencesSeeAll": {
-    "string": "See All Recent Conferences"
+    "string": "See All Conferences"
   },
   "discover__recentTeachingsSeeAll": {
-    "string": "See All Recent Teachings"
+    "string": "See All Teachings"
   },
   "discover__storiesHeading": {
     "string": "Recent Stories"
   },
   "discover__storiesSeeAll": {
-    "string": "See All Recent Stories"
+    "string": "See All Stories"
   },
   "discover__trendingTeachingsSeeAll": {
     "string": "See All Trending Teachings"
@@ -653,6 +668,12 @@
   "header__navItemUser-profile": {
     "string": "Profile"
   },
+  "homePage__CreateAccountButtonLabel": {
+    "string": "Create an Account"
+  },
+  "homePage__DiscoverAudioButtonLabel": {
+    "string": "Discover Audio"
+  },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
     "string": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
@@ -661,8 +682,13 @@
     "comment": "home page download app section title",
     "string": "Download the App"
   },
-  "homePage__learnStoryButtonLabel": {
-    "string": "Learn about our story"
+  "homePage__latestContentSectionText": {
+    "comment": "home page latest content section text",
+    "string": "Explore a sample of some of our recent audio pieces. Then when you’re ready, <a>visit the Discover page</a> to see more."
+  },
+  "homePage__latestContentSectionTitle": {
+    "comment": "home page latest content section title",
+    "string": "Latest Content"
   },
   "homePage__newsletterEmail": {
     "string": "Email Address"
@@ -690,14 +716,6 @@
   "homePage__newsletterSubscribe": {
     "string": "Subscribe"
   },
-  "homePage__recentContentSectionText": {
-    "comment": "home page recent content section text",
-    "string": "Explore a select few of our audio pieces. Then when you’re ready, <a>create an account</a> to view even more."
-  },
-  "homePage__recentContentSectionTitle": {
-    "comment": "home page recent content section title",
-    "string": "Recent Content"
-  },
   "homePage__recentPostsSectionText": {
     "comment": "home page recent posts section text",
     "string": "Read through our blog to find articles about recent events, sermons, and conferences."
@@ -705,6 +723,9 @@
   "homePage__recentPostsSectionTitle": {
     "comment": "home page recent posts section title",
     "string": "Recent Blog Posts"
+  },
+  "homePage__recentPostsSeeAll": {
+    "string": "See All Blog Posts"
   },
   "homePage__soundDoctrineText": {
     "comment": "home page sound doctrine text",
@@ -871,20 +892,20 @@
   "libraryNav__sortZtoA": {
     "string": "Z to A"
   },
+  "library__createAccountHeading": {
+    "string": "Create a free account"
+  },
   "library__emptyCopy": {
     "string": "Bookmark items or listen to items from the Discover page."
   },
   "library__emptyHeading": {
     "string": "You don’t have any items saved yet"
   },
-  "library__membersOnlyCopy": {
-    "string": "Login or create an account to access the Library features."
+  "library__freeAccountCopy": {
+    "string": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
   },
   "library__membersOnlyCta": {
     "string": "Create account or Login"
-  },
-  "library__membersOnlyHeading": {
-    "string": "Member-only feature"
   },
   "library__noMatchingCopy": {
     "string": "Bookmark items or listen to items from the Discover page."
@@ -1074,6 +1095,9 @@
     "comment": "search bar label",
     "string": "Search"
   },
+  "molecule-teaseRecording__individualTeaching": {
+    "string": "Individual Teaching"
+  },
   "molecule-teaseRecording__lessPersons": {
     "string": "Show less"
   },
@@ -1111,6 +1135,9 @@
   },
   "navigation__loginSignupCta": {
     "string": "Login/Sign up"
+  },
+  "navigation__nameFallback": {
+    "string": "User Account"
   },
   "notFound__header": {
     "string": "Sorry!"
@@ -1559,6 +1586,18 @@
   },
   "sermonDetailPage__disclaimer": {
     "string": "The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
+  },
+  "sermonDetailPage__openGraphDescription_audiobook": {
+    "string": "Audiobook provided by {sponsorName}"
+  },
+  "sermonDetailPage__openGraphDescription_music": {
+    "string": "Music by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_sermon": {
+    "string": "Teaching by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_story": {
+    "string": "Story by {writerName}"
   },
   "sermonDetailPage__recordedTitle": {
     "comment": "Sermon detail recorded date title",

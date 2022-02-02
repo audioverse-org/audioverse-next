@@ -26,19 +26,26 @@ export default function ButtonGuest({
 
 	return (
 		<>
-			<button
-				className={clsx(styles.link, className)}
-				onClick={(e) => {
-					e.preventDefault();
-					setIsGuestModalOpen(true);
-				}}
-			>
-				<FormattedMessage
-					id="molecule-buttonGuest__label"
-					defaultMessage="Continue as guest"
-				/>
-				<Icon />
-			</button>
+			<div className={clsx(styles.wrapper, className)}>
+				<Link href={makeDiscoverRoute(language)}>
+					<a className="decorated">
+						<FormattedMessage
+							id="molecule-buttonGuest__label"
+							defaultMessage="Continue as guest"
+						/>
+					</a>
+				</Link>
+				<button
+					className={styles.link}
+					data-testid="guest-info-button"
+					onClick={(e) => {
+						e.preventDefault();
+						setIsGuestModalOpen(true);
+					}}
+				>
+					<Icon />
+				</button>
+			</div>
 			<Modal
 				open={isGuestModalOpen}
 				onClose={() => setIsGuestModalOpen(false)}

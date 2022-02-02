@@ -239,6 +239,12 @@
       "value": "Back"
     }
   ],
+  "bibleBook__backToChapter": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
+    }
+  ],
   "bibleBook__chapterListTitle": [
     {
       "type": 0,
@@ -249,6 +255,12 @@
     {
       "type": 0,
       "value": "The terms and conditions governing the use of audio Bibles from Faith Comes By Hearing prevents the option to download and the integration of certain features on our platform."
+    }
+  ],
+  "bibleBook__readAlong": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "bibleVersionTypeLockup__type": [
@@ -387,6 +399,24 @@
     {
       "type": 0,
       "value": " series"
+    }
+  ],
+  "cardHatSponsor__addSponsor": [
+    {
+      "type": 0,
+      "value": "Add Sponsor"
+    }
+  ],
+  "cardHatSponsor__removeSponsor": [
+    {
+      "type": 0,
+      "value": "Remove Sponsor"
+    }
+  ],
+  "cardHatSponsor__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Sponsor"
     }
   ],
   "cardPerson_teachingsLabel": [
@@ -852,13 +882,13 @@
   "discover__conferencesSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Conferences"
+      "value": "See All Conferences"
     }
   ],
   "discover__recentTeachingsSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Teachings"
+      "value": "See All Teachings"
     }
   ],
   "discover__storiesHeading": [
@@ -870,7 +900,7 @@
   "discover__storiesSeeAll": [
     {
       "type": 0,
-      "value": "See All Recent Stories"
+      "value": "See All Stories"
     }
   ],
   "discover__trendingTeachingsSeeAll": [
@@ -1455,6 +1485,18 @@
       "value": "Profile"
     }
   ],
+  "homePage__CreateAccountButtonLabel": [
+    {
+      "type": 0,
+      "value": "Create an Account"
+    }
+  ],
+  "homePage__DiscoverAudioButtonLabel": [
+    {
+      "type": 0,
+      "value": "Discover Audio"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1467,10 +1509,30 @@
       "value": "Download the App"
     }
   ],
-  "homePage__learnStoryButtonLabel": [
+  "homePage__latestContentSectionText": [
     {
       "type": 0,
-      "value": "Learn about our story"
+      "value": "Explore a sample of some of our recent audio pieces. Then when you’re ready, "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "visit the Discover page"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " to see more."
+    }
+  ],
+  "homePage__latestContentSectionTitle": [
+    {
+      "type": 0,
+      "value": "Latest Content"
     }
   ],
   "homePage__newsletterEmail": [
@@ -1521,32 +1583,6 @@
       "value": "Subscribe"
     }
   ],
-  "homePage__recentContentSectionText": [
-    {
-      "type": 0,
-      "value": "Explore a select few of our audio pieces. Then when you’re ready, "
-    },
-    {
-      "children": [
-        {
-          "type": 0,
-          "value": "create an account"
-        }
-      ],
-      "type": 8,
-      "value": "a"
-    },
-    {
-      "type": 0,
-      "value": " to view even more."
-    }
-  ],
-  "homePage__recentContentSectionTitle": [
-    {
-      "type": 0,
-      "value": "Recent Content"
-    }
-  ],
   "homePage__recentPostsSectionText": [
     {
       "type": 0,
@@ -1557,6 +1593,12 @@
     {
       "type": 0,
       "value": "Recent Blog Posts"
+    }
+  ],
+  "homePage__recentPostsSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Blog Posts"
     }
   ],
   "homePage__soundDoctrineText": [
@@ -1877,6 +1919,12 @@
       "value": "Z to A"
     }
   ],
+  "library__createAccountHeading": [
+    {
+      "type": 0,
+      "value": "Create a free account"
+    }
+  ],
   "library__emptyCopy": [
     {
       "type": 0,
@@ -1889,22 +1937,16 @@
       "value": "You don’t have any items saved yet"
     }
   ],
-  "library__membersOnlyCopy": [
+  "library__freeAccountCopy": [
     {
       "type": 0,
-      "value": "Login or create an account to access the Library features."
+      "value": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
     }
   ],
   "library__membersOnlyCta": [
     {
       "type": 0,
       "value": "Create account or Login"
-    }
-  ],
-  "library__membersOnlyHeading": [
-    {
-      "type": 0,
-      "value": "Member-only feature"
     }
   ],
   "library__noMatchingCopy": [
@@ -2301,6 +2343,12 @@
       "value": "Search"
     }
   ],
+  "molecule-teaseRecording__individualTeaching": [
+    {
+      "type": 0,
+      "value": "Individual Teaching"
+    }
+  ],
   "molecule-teaseRecording__lessPersons": [
     {
       "type": 0,
@@ -2381,6 +2429,12 @@
     {
       "type": 0,
       "value": "Login/Sign up"
+    }
+  ],
+  "navigation__nameFallback": [
+    {
+      "type": 0,
+      "value": "User Account"
     }
   ],
   "notFound__header": [
@@ -3269,6 +3323,46 @@
     {
       "type": 0,
       "value": "The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_audiobook": [
+    {
+      "type": 0,
+      "value": "Audiobook provided by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_music": [
+    {
+      "type": 0,
+      "value": "Music by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_sermon": [
+    {
+      "type": 0,
+      "value": "Teaching by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_story": [
+    {
+      "type": 0,
+      "value": "Story by "
+    },
+    {
+      "type": 1,
+      "value": "writerName"
     }
   ],
   "sermonDetailPage__recordedTitle": [

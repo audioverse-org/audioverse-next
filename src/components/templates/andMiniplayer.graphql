@@ -21,6 +21,7 @@ fragment andMiniplayer on Recording {
 	}
 	videoStreams: videoFiles(allowedContainers: [M3U8_WEB]) {
 		url(requestType: STREAM)
+		logUrl
 		filesize
 		mimeType
 		duration

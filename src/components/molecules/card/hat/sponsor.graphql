@@ -1,0 +1,10 @@
+fragment cardHatSponsor on Recording {
+	sponsor {
+		id
+		title
+		canonicalPath(useFuturePath: true)
+		image {
+			url(size: 100)
+		}
+	}
+}
