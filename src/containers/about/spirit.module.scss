@@ -1,0 +1,32 @@
+@import '../../styles/common';
+
+.list {
+	font-family: $serif;
+	dt {
+		width: 32px;
+		float: left;
+		font-size: 17px;
+		font-weight: 700;
+	}
+	dd {
+		margin-left: 32px;
+	}
+	dt:first-of-type,
+	dd:first-of-type {
+		margin-bottom: 16px;
+	}
+	dt:not(:first-of-type),
+	dd:not(:first-of-type) {
+		padding-top: 16px;
+		padding-bottom: 16px;
+		border-top: 1px solid $ts-cream;
+	}
+	@media (min-width: $breakpoint-sm) {
+		dt {
+			width: 60px;
+		}
+		dd {
+			margin-left: 60px;
+		}
+	}
+}
