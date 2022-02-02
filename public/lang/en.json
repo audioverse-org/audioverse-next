@@ -343,6 +343,15 @@
   "conferenceListPage__title": {
     "string": "All Conferences"
   },
+  "conferencesPresenters__title": {
+    "string": "Presenters from {conferenceName}"
+  },
+  "conferencesSequences__title": {
+    "string": "Series from {conferenceName}"
+  },
+  "conferencesTeachings__title": {
+    "string": "Teachings from {conferenceName}"
+  },
   "contact__emailLabel": {
     "string": "Email address"
   },
@@ -1367,6 +1376,9 @@
   "presenterTopDetail__heading": {
     "string": "Most Listened"
   },
+  "presentersAppears__title": {
+    "string": "{personName} Also Appears In"
+  },
   "presentersFeed__description": {
     "string": "The latest AudioVerse sermons by {name}"
   },
@@ -1375,6 +1387,12 @@
   },
   "presentersList__title": {
     "string": "All Presenters"
+  },
+  "presentersSequences__title": {
+    "string": "Series by {personName}"
+  },
+  "presentersTeachings__title": {
+    "string": "Teachings by {personName}"
   },
   "profile__buttonLabelDeleteAccount": {
     "string": "Delete Account"
@@ -1701,8 +1719,17 @@
   "sponsorTeachingsFeed__title": {
     "string": "Sermons by {name}"
   },
+  "sponsorsConferences__title": {
+    "string": "Conferences by {sponsorName}"
+  },
   "sponsorsList__title": {
     "string": "All Sponsors"
+  },
+  "sponsorsSequences__title": {
+    "string": "Series by {sponsorName}"
+  },
+  "sponsorsTeachings__title": {
+    "string": "Teachings by {sponsorName}"
   },
   "storyAlbumList__heading": {
     "string": "All Stories"

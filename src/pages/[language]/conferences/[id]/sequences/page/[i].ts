@@ -12,6 +12,7 @@ import {
 	getCollectionSequencesPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default CollectionSequences;
@@ -21,13 +22,27 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
 	GetStaticPropsResult<CollectionSequencesProps>
 > {
+	const languageRoute = params?.language as string;
+	const intl = await getIntl(languageRoute);
+
 	const id = params?.id as string;
 	return getPaginatedStaticProps(
 		params,
 		({ first, offset }) =>
 			getCollectionSequencesPageData({ id, first, offset }),
 		(d) => d.collection?.sequences.nodes,
-		(d) => d.collection?.sequences.aggregate?.count
+		(d) => d.collection?.sequences.aggregate?.count,
+		(d) => ({
+			title: intl.formatMessage(
+				{
+					id: 'conferencesSequences__title',
+					defaultMessage: 'Series from {conferenceName}',
+				},
+				{
+					conferenceName: d?.collection?.title,
+				}
+			),
+		})
 	);
 }
 
