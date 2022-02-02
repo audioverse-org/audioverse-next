@@ -3325,6 +3325,46 @@
       "value": "The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
     }
   ],
+  "sermonDetailPage__openGraphDescription_audiobook": [
+    {
+      "type": 0,
+      "value": "Audiobook provided by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_music": [
+    {
+      "type": 0,
+      "value": "Music by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_sermon": [
+    {
+      "type": 0,
+      "value": "Teaching by "
+    },
+    {
+      "type": 1,
+      "value": "speakerName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_story": [
+    {
+      "type": 0,
+      "value": "Story by "
+    },
+    {
+      "type": 1,
+      "value": "writerName"
+    }
+  ],
   "sermonDetailPage__recordedTitle": [
     {
       "type": 0,

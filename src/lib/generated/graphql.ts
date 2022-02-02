@@ -12892,7 +12892,7 @@ export const PlayerFragmentDoc = `
 fragment player on Recording{id title ...andMiniplayer ...buttonDownload ...buttonShareRecording}
 `;
 export const RecordingFragmentDoc = `
-fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}
+fragment recording on Recording{id title contentType speakers:persons(role:SPEAKER){...personLockup}writers:persons(role:WRITER){...personLockup}attachments{filename url}description imageWithFallback{url(size:1200 cropMode:MAX_SIZE)}recordingDate recordingTags{nodes{tag{id name}}}sponsor{title canonicalPath(useFuturePath:true)}sequenceIndex sequence{id title contentType canonicalPath(useFuturePath:true)recordings(first:1000){nodes{...teaseRecording}aggregate{count}}}collection{title canonicalPath(useFuturePath:true)}transcript{text}canonicalUrl(useFuturePath:true)shareUrl ...sequenceNav ...copyrightInfo ...player}
 `;
 export const SequenceFragmentDoc = `
 fragment sequence on Sequence{id title contentType duration description startDate endDate collection{title canonicalPath(useFuturePath:true)}image{url(size:100)}sponsor{title canonicalPath(useFuturePath:true)}shareUrl recordings(first:250){aggregate{count}nodes{...cardRecording}}}

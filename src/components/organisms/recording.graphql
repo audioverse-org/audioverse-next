@@ -14,7 +14,7 @@ fragment recording on Recording {
 	}
 	description
 	imageWithFallback {
-		url(size: 1200)
+		url(size: 1200, cropMode: MAX_SIZE)
 	}
 	recordingDate
 	recordingTags {
