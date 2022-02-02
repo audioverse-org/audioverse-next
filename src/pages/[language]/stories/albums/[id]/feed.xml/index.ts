@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import { getStoryAlbumFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import { formatBooksDescription } from '@pages/[language]/books/[id]/feed.xml';
 
 export default (): void => void 0;
@@ -21,7 +21,10 @@ export async function getServerSideProps({
 	}).catch(() => ({
 		storySeason: null,
 	}));
-	if (!sequence || sequence.language !== getLanguageIdByRoute(languageRoute)) {
+	if (
+		!sequence ||
+		sequence.language !== getLanguageIdByRouteOrLegacyRoute(languageRoute)
+	) {
 		return {
 			notFound: true,
 		};

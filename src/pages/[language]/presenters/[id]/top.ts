@@ -11,7 +11,7 @@ import {
 	getPresenterTopPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import { makePresenterTopRecordingsRoute } from '@lib/routes';
 
 export default PresenterTop;
@@ -30,7 +30,9 @@ export async function getStaticProps({
 		person: null,
 	}));
 
-	if (person?.language !== getLanguageIdByRoute(params?.language)) {
+	if (
+		person?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};

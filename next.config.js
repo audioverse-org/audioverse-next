@@ -35,7 +35,7 @@ module.exports = withBundleAnalyzer(
 			};
 			return [
 				...Object.keys(languagePrefixMap).map((prefix) => ({
-					source: `/${prefix}/:path*`,
+					source: `/${prefix}/:path((?!podcasts\/latest|sermons\/podcasts\/latest|sermones\/podcasts\/ultima|predications\/podcasts\/plusrecent).*)`,
 					destination: `/${languagePrefixMap[prefix]}/:path*`,
 					statusCode: 301,
 				})),
@@ -72,11 +72,6 @@ module.exports = withBundleAnalyzer(
 					source: '/',
 					destination: '/en',
 					permanent: false,
-				},
-				{
-					source: '/:lang/sermons/podcasts/latest',
-					destination: '/:lang/teachings/all/feed.xml',
-					permanent: true,
 				},
 				{
 					source: '/:lang/sermons/seriess/podcast/:seriesId/latest/:slug',
@@ -434,6 +429,26 @@ module.exports = withBundleAnalyzer(
 		},
 		async rewrites() {
 			return [
+				{
+					source: '/:lang/podcasts/latest',
+					destination: '/:lang/teachings/all/feed.xml',
+				},
+				{
+					source: '/:lang/podcasts/trending',
+					destination: '/:lang/teachings/all/feed.xml',
+				},
+				{
+					source: '/:lang/sermons/podcasts/latest',
+					destination: '/:lang/teachings/all/feed.xml',
+				},
+				{
+					source: '/:lang/sermones/podcasts/ultima',
+					destination: '/:lang/teachings/all/feed.xml',
+				},
+				{
+					source: '/:lang/predications/podcasts/plusrecent',
+					destination: '/:lang/teachings/all/feed.xml',
+				},
 				{
 					source: '/:lang/blog',
 					destination: '/:lang/blog/page/1',
