@@ -37,7 +37,7 @@ module.exports = withBundleAnalyzer(
 				...Object.keys(languagePrefixMap).map((prefix) => ({
 					source: `/${prefix}/:path((?!podcasts\/latest|sermons\/podcasts\/latest|sermones\/podcasts\/ultima|predications\/podcasts\/plusrecent).*)`,
 					destination: `/${languagePrefixMap[prefix]}/:path*`,
-					permanent: true,
+					statusCode: 301,
 				})),
 				...Object.keys(languagePrefixMap).map((prefix) => ({
 					source: '/',
