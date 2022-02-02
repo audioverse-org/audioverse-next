@@ -71,6 +71,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		canonicalPath: '',
 		language: Language.English,
 		speakers: [],
+		writers: [],
 		audioFiles: [],
 		videoFiles: [],
 		attachments: [],

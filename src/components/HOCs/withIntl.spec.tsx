@@ -205,6 +205,7 @@ describe('localization usage', () => {
 								] as any,
 							},
 						},
+						writers: [] as any,
 						speakers: [] as any,
 						imageWithFallback: { url: '' },
 					} as SermonDetailProps['recording']

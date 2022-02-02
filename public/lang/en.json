@@ -1587,6 +1587,18 @@
   "sermonDetailPage__disclaimer": {
     "string": "The ideas in this recording are those of its contributors and may not necessarily reflect the views of AudioVerse."
   },
+  "sermonDetailPage__openGraphDescription_audiobook": {
+    "string": "Audiobook provided by {sponsorName}"
+  },
+  "sermonDetailPage__openGraphDescription_music": {
+    "string": "Music by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_sermon": {
+    "string": "Teaching by {speakerName}"
+  },
+  "sermonDetailPage__openGraphDescription_story": {
+    "string": "Story by {writerName}"
+  },
   "sermonDetailPage__recordedTitle": {
     "comment": "Sermon detail recorded date title",
     "string": "Recorded"
