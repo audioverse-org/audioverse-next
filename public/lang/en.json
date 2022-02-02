@@ -196,6 +196,15 @@
     "comment": "Card collection sequence count label",
     "string": "{count} series"
   },
+  "cardHatSponsor__addSponsor": {
+    "string": "Add Sponsor"
+  },
+  "cardHatSponsor__removeSponsor": {
+    "string": "Remove Sponsor"
+  },
+  "cardHatSponsor__sponsorLabel": {
+    "string": "Sponsor"
+  },
   "cardPerson_teachingsLabel": {
     "comment": "Card person teachings count label",
     "string": "{count} teachings"
@@ -267,9 +276,6 @@
   },
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
-    "string": "Sponsor"
-  },
-  "cardSponsor_sponsorLabel": {
     "string": "Sponsor"
   },
   "cardStory_sequenceLabel": {
@@ -1088,6 +1094,9 @@
   "molecule-searchBar__label": {
     "comment": "search bar label",
     "string": "Search"
+  },
+  "molecule-teaseRecording__individualTeaching": {
+    "string": "Individual Teaching"
   },
   "molecule-teaseRecording__lessPersons": {
     "string": "Show less"

@@ -401,6 +401,24 @@
       "value": " series"
     }
   ],
+  "cardHatSponsor__addSponsor": [
+    {
+      "type": 0,
+      "value": "Add Sponsor"
+    }
+  ],
+  "cardHatSponsor__removeSponsor": [
+    {
+      "type": 0,
+      "value": "Remove Sponsor"
+    }
+  ],
+  "cardHatSponsor__sponsorLabel": [
+    {
+      "type": 0,
+      "value": "Sponsor"
+    }
+  ],
   "cardPerson_teachingsLabel": [
     {
       "type": 1,
@@ -554,12 +572,6 @@
     }
   ],
   "cardSponsor_hatTitle": [
-    {
-      "type": 0,
-      "value": "Sponsor"
-    }
-  ],
-  "cardSponsor_sponsorLabel": [
     {
       "type": 0,
       "value": "Sponsor"
@@ -2329,6 +2341,12 @@
     {
       "type": 0,
       "value": "Search"
+    }
+  ],
+  "molecule-teaseRecording__individualTeaching": [
+    {
+      "type": 0,
+      "value": "Individual Teaching"
     }
   ],
   "molecule-teaseRecording__lessPersons": [
