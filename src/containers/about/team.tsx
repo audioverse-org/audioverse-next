@@ -137,20 +137,10 @@ export default function Team(): JSX.Element {
 			title: (
 				<FormattedMessage
 					id="about__teamBoardArakawaTitle"
-					defaultMessage="Chairman (Co-founder) | Physician, Guam"
+					defaultMessage="Chairman (Co-founder) | Physician, Albany, Oregon"
 				/>
 			),
 			image: 'Arakawa',
-		},
-		{
-			name: 'Chester Clark III',
-			title: (
-				<FormattedMessage
-					id="about__teamBoardClarkTitle"
-					defaultMessage="Pastor, Dalton SDA Church"
-				/>
-			),
-			image: 'Clark',
 		},
 		{
 			name: 'Alistair Huong',
@@ -161,6 +151,26 @@ export default function Team(): JSX.Element {
 				/>
 			),
 			image: 'Huong',
+		},
+		{
+			name: 'Vonn Williams',
+			title: (
+				<FormattedMessage
+					id="about__teamBoardWilliamsTitle"
+					defaultMessage="Treasurer | Finance Professional, Chattanooga, Tennessee"
+				/>
+			),
+			image: 'Williams',
+		},
+		{
+			name: 'Chester Clark III',
+			title: (
+				<FormattedMessage
+					id="about__teamBoardClarkTitle"
+					defaultMessage="Vice President for Administration, Georgia-Cumberland Conference"
+				/>
+			),
+			image: 'Clark',
 		},
 		{
 			name: 'Kathy Irizarry',
@@ -193,16 +203,6 @@ export default function Team(): JSX.Element {
 			image: 'Mackintosh',
 		},
 		{
-			name: 'Vonn Williams',
-			title: (
-				<FormattedMessage
-					id="about__teamBoardWilliamsTitle"
-					defaultMessage="Treasurer | Finance Professional, Chattanooga, Tennessee"
-				/>
-			),
-			image: 'Williams',
-		},
-		{
 			name: 'Jesse Zwiker',
 			title: (
 				<FormattedMessage
@@ -231,7 +231,7 @@ export default function Team(): JSX.Element {
 					<p>
 						<FormattedMessage
 							id="about__teamIntro"
-							defaultMessage="The AudioVerse Executive Team are responsible for the day-to-day operations of the ministry.&nbsp; This group of dedicated individuals with their their common passion for the proclamation of the three angels' messages is what keeps this ministry running."
+							defaultMessage="The AudioVerse Executive Team are responsible for the day-to-day operations of the ministry. This group of dedicated individuals with their their common passion for the proclamation of the three angels' messages is what keeps this ministry running."
 						/>
 					</p>
 					<div className={styles.cardGrid}>
