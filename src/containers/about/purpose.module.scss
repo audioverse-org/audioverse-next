@@ -1,0 +1,21 @@
+@import '../../styles/common';
+
+.list.list {
+	margin-top: 32px;
+	dt {
+		font-size: 16px;
+		font-weight: 700;
+	}
+	dd {
+		margin: 0 0 32px;
+	}
+	@media (min-width: $breakpoint-sm) {
+		dt {
+			width: 120px;
+			float: left;
+		}
+		dd {
+			margin-left: 150px;
+		}
+	}
+}

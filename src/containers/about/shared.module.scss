@@ -1,0 +1,78 @@
+@use '../../styles/mixins.scss';
+
+@import '../../styles/common';
+
+.base {
+	p,
+	dl {
+		margin: 0 0 16px;
+		font-family: $serif;
+		font-size: 15px;
+		line-height: 1.483333;
+	}
+	ol {
+		counter-reset: item;
+		li {
+			counter-increment: item;
+			&::marker {
+				content: counter(item, decimal-leading-zero);
+			}
+		}
+	}
+	figure {
+		width: 100;
+		margin: 0 0 16px;
+		padding: 0;
+	}
+	figcaption {
+		@include mixins.sansFontFamily();
+		color: $ts-midTone;
+	}
+}
+
+.bodyDeck.bodyDeck {
+	@include mixins.sansFontFamily();
+	font-size: 22px;
+}
+
+.image {
+	position: relative;
+	height: 346px;
+	width: 100%;
+	margin-top: 32px;
+	margin-bottom: 32px;
+}
+.imageLabeled {
+	.imageLabel {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		padding: 32px;
+		color: $ts-white;
+		font-family: $serif;
+		font-size: 22px;
+		font-weight: 700;
+		line-height: 1.21;
+		z-index: 2;
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(
+			0deg,
+			rgba(50, 62, 72, 0.7),
+			rgba(50, 62, 72, 0.7)
+		);
+	}
+}
+
+.navigation {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	margin: 48px 0 16px;
+}

@@ -6,7 +6,7 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
 import { GetAboutPageDataQuery } from '@lib/generated/graphql';
 
-import styles from './about.module.scss';
+import styles from './index.module.scss';
 
 export type AboutProps = GetAboutPageDataQuery;
 
