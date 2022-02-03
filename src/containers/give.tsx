@@ -20,9 +20,9 @@ export default function Blog(): JSX.Element {
 					<FormattedMessage id="give__heading" defaultMessage="Donate" />
 				</Heading1>
 				{/* WORKAROUND: https://stackoverflow.com/a/55322126/937377 */}
+				{/* eslint-disable-next-line @next/next/no-sync-scripts */}
 				<script
 					src="https://donorbox.org/widget.js"
-					async
 					{...{ paypalexpress: 'true' }}
 				/>
 				<iframe
