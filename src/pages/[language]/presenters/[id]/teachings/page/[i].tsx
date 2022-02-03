@@ -12,6 +12,7 @@ import {
 	getPresenterRecordingsPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
 export default PresenterRecordings;
@@ -21,6 +22,8 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; id: string; i: string }>): Promise<
 	GetStaticPropsResult<PresenterRecordingsProps>
 > {
+	const languageRoute = params?.language as string;
+	const intl = await getIntl(languageRoute);
 	const id = params?.id as string;
 
 	return await getPaginatedStaticProps(
@@ -28,7 +31,18 @@ export async function getStaticProps({
 		({ offset, first }) =>
 			getPresenterRecordingsPageData({ id, offset, first }),
 		(d) => d.person?.recordings?.nodes,
-		(d) => d.person?.recordings?.aggregate?.count
+		(d) => d.person?.recordings?.aggregate?.count,
+		(d) => ({
+			title: intl.formatMessage(
+				{
+					id: 'presentersTeachings__title',
+					defaultMessage: 'Teachings by {personName}',
+				},
+				{
+					personName: d?.person?.name,
+				}
+			),
+		})
 	);
 }
 

@@ -1119,6 +1119,36 @@
       "value": "All Conferences"
     }
   ],
+  "conferencesPresenters__title": [
+    {
+      "type": 0,
+      "value": "Presenters from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
+  "conferencesSequences__title": [
+    {
+      "type": 0,
+      "value": "Series from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
+  "conferencesTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings from "
+    },
+    {
+      "type": 1,
+      "value": "conferenceName"
+    }
+  ],
   "contact__emailLabel": [
     {
       "type": 0,
@@ -3291,6 +3321,16 @@
       "value": "Most Listened"
     }
   ],
+  "presentersAppears__title": [
+    {
+      "type": 1,
+      "value": "personName"
+    },
+    {
+      "type": 0,
+      "value": " Also Appears In"
+    }
+  ],
   "presentersFeed__description": [
     {
       "type": 0,
@@ -3315,6 +3355,26 @@
     {
       "type": 0,
       "value": "All Presenters"
+    }
+  ],
+  "presentersSequences__title": [
+    {
+      "type": 0,
+      "value": "Series by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
+    }
+  ],
+  "presentersTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
     }
   ],
   "profile__buttonLabelDeleteAccount": [
@@ -4005,10 +4065,40 @@
       "value": "name"
     }
   ],
+  "sponsorsConferences__title": [
+    {
+      "type": 0,
+      "value": "Conferences by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
   "sponsorsList__title": [
     {
       "type": 0,
       "value": "All Sponsors"
+    }
+  ],
+  "sponsorsSequences__title": [
+    {
+      "type": 0,
+      "value": "Series by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sponsorsTeachings__title": [
+    {
+      "type": 0,
+      "value": "Teachings by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
     }
   ],
   "storyAlbumList__heading": [

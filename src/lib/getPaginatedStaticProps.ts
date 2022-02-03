@@ -1,5 +1,6 @@
 import find from 'lodash/find';
 
+import { IBaseProps } from '@containers/base';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -31,7 +32,8 @@ export async function getPaginatedStaticProps<T, N>(
 		| undefined,
 	getter: PaginatedGetter<T, { language: Language }>,
 	parseNodes: (data: T) => N[] | null | undefined,
-	parseCount: (count: T) => number | null | undefined
+	parseCount: (count: T) => number | null | undefined,
+	parseExtraProps?: (data: T | null) => Record<string, unknown> & IBaseProps
 ): Promise<PaginatedStaticProps<T, N>> {
 	const { i: pageIndex, language: languageRoute } = params || {
 		language: Language.English,
@@ -45,20 +47,23 @@ export async function getPaginatedStaticProps<T, N>(
 	});
 	const nodes = (data && parseNodes(data)) || [];
 	const count = (data && parseCount(data)) || 0;
+	const extraProps = (parseExtraProps && parseExtraProps(data)) || {};
 
-	return formatPaginatedStaticProps(data, nodes, count, +pageIndex);
+	return formatPaginatedStaticProps(data, nodes, count, +pageIndex, extraProps);
 }
 
 export function formatPaginatedStaticProps<T, N>(
 	data: T | null,
 	nodes: N[],
 	count: number,
-	current = 1
+	current = 1,
+	extraProps: Record<string, unknown> & IBaseProps = {}
 ): PaginatedStaticProps<T, N> {
 	const total = getPaginationPageCount(count);
 
 	return {
 		props: {
+			...extraProps,
 			nodes,
 			pagination: {
 				total,
