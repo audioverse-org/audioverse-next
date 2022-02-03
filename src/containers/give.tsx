@@ -22,12 +22,12 @@ export default function Blog(): JSX.Element {
 				{/* WORKAROUND: https://stackoverflow.com/a/55322126/937377 */}
 				<script
 					src="https://donorbox.org/widget.js"
-					async={true}
+					async
 					{...{ paypalexpress: 'true' }}
 				/>
 				<iframe
 					src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
-					height="685px"
+					height="1100px"
 					width="100%"
 					style={{
 						maxWidth: '400px',
