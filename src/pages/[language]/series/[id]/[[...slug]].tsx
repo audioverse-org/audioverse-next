@@ -12,7 +12,7 @@ import {
 	getSeriesDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SeriesDetail;
 
@@ -27,7 +27,9 @@ export async function getStaticProps({
 	const { series } = await getSeriesDetailPageData({ id }).catch(() => ({
 		series: null,
 	}));
-	if (series?.language !== getLanguageIdByRoute(params?.language)) {
+	if (
+		series?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};

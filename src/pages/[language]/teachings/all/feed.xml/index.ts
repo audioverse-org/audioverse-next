@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { LANGUAGES } from '@lib/constants';
 import { getSermonListFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
-import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import { makeSermonListRoute } from '@lib/routes';
 
 export default (): void => void 0;
@@ -16,14 +16,20 @@ export async function getServerSideProps({
 	GetServerSidePropsResult<Record<string, unknown>>
 > {
 	const languageRoute = params?.language as string;
+	const languageId = getLanguageIdByRouteOrLegacyRoute(languageRoute);
+	if (!languageId) {
+		return {
+			notFound: true,
+		};
+	}
 	const { sermons } = await getSermonListFeedData({
-		language: getLanguageIdByRoute(languageRoute),
+		language: languageId,
 	});
 
 	if (res) {
 		sendRSSHeaders(res);
 		const intl = await getIntl(languageRoute);
-		const language = getLanguageByBaseUrl(languageRoute, 'en')?.display_name;
+		const language = LANGUAGES[languageId].display_name;
 		const feed = await generateFeed(
 			languageRoute,
 			{

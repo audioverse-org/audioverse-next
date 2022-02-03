@@ -5,6 +5,7 @@ export const ENTRIES_PER_PAGE = 12;
 export interface LanguageConfiguration {
 	base_url: string;
 	display_name: string;
+	legacy_base_url: string;
 }
 
 export type SupportedLanguages = Exclude<Language, 'NORDIC'>;
@@ -14,13 +15,41 @@ export type LanguageConfigurations = {
 };
 
 export const LANGUAGES: LanguageConfigurations = {
-	ENGLISH: { base_url: 'en', display_name: 'English' },
-	SPANISH: { base_url: 'es', display_name: 'Español' },
-	FRENCH: { base_url: 'fr', display_name: 'Français' },
-	GERMAN: { base_url: 'de', display_name: 'Deutsch' },
-	CHINESE: { base_url: 'zh', display_name: '中文' },
-	JAPANESE: { base_url: 'ja', display_name: '日本語' },
-	RUSSIAN: { base_url: 'ru', display_name: 'Русский' },
+	ENGLISH: {
+		base_url: 'en',
+		display_name: 'English',
+		legacy_base_url: 'english',
+	},
+	SPANISH: {
+		base_url: 'es',
+		display_name: 'Español',
+		legacy_base_url: 'espanol',
+	},
+	FRENCH: {
+		base_url: 'fr',
+		display_name: 'Français',
+		legacy_base_url: 'francais',
+	},
+	GERMAN: {
+		base_url: 'de',
+		display_name: 'Deutsch',
+		legacy_base_url: 'deutsch',
+	},
+	CHINESE: {
+		base_url: 'zh',
+		display_name: '中文',
+		legacy_base_url: 'zhongwen',
+	},
+	JAPANESE: {
+		base_url: 'ja',
+		display_name: '日本語',
+		legacy_base_url: 'japanese',
+	},
+	RUSSIAN: {
+		base_url: 'ru',
+		display_name: 'Русский',
+		legacy_base_url: 'russian',
+	},
 };
 
 export const IS_DEVELOPMENT =

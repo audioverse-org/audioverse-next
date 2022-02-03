@@ -5,7 +5,7 @@ import { GetSongDetailDataQuery } from '@lib/generated/graphql';
 export type SongTrack = NonNullable<GetSongDetailDataQuery['musicTrack']>;
 
 export interface SongDetailProps {
-	recording: SongTrack | null;
+	recording: SongTrack | null | undefined;
 }
 
 export default withFailStates<SongDetailProps>(

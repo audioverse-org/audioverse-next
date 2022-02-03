@@ -14,7 +14,7 @@ import {
 	getStoryAlbumDetailPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default StoryAlbumDetail;
 
@@ -30,7 +30,9 @@ export async function getStaticProps({
 	}).catch(() => ({
 		storySeason: null,
 	}));
-	if (sequence?.language !== getLanguageIdByRoute(params?.language)) {
+	if (
+		sequence?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};

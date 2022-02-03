@@ -8,7 +8,7 @@ import {
 } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default (): void => void 0;
 
@@ -59,7 +59,7 @@ export async function getServerSideProps({
 	}));
 	if (
 		!sequence ||
-		sequence.language !== getLanguageIdByRoute(languageRoute) ||
+		sequence.language !== getLanguageIdByRouteOrLegacyRoute(languageRoute) ||
 		(sequence.contentType !== SequenceContentType.Audiobook &&
 			sequence.contentType !== SequenceContentType.StorySeason)
 	) {

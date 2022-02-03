@@ -12,7 +12,7 @@ import {
 	getStoryDetailStaticPaths,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default Story;
 
@@ -27,7 +27,9 @@ export async function getStaticProps({
 	const { story: recording } = await getStoryDetailData({ id }).catch(() => ({
 		story: null,
 	}));
-	if (recording?.language !== getLanguageIdByRoute(params?.language)) {
+	if (
+		recording?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
+	) {
 		return {
 			notFound: true,
 		};
