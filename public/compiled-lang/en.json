@@ -11,6 +11,420 @@
       "value": "Unfavorite"
     }
   ],
+  "about__navPurpose": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "about__navSpirit": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "about__navStory": [
+    {
+      "type": 0,
+      "value": "Our Story"
+    }
+  ],
+  "about__navTeam": [
+    {
+      "type": 0,
+      "value": "The Team"
+    }
+  ],
+  "about__navTestimonials": [
+    {
+      "type": 0,
+      "value": "Testimonials"
+    }
+  ],
+  "about__purposeExcellence": [
+    {
+      "type": 0,
+      "value": "Biblical Excellence"
+    }
+  ],
+  "about__purposeExcellenceDescription": [
+    {
+      "type": 0,
+      "value": "AudioVerse holds a high standard for the content that is presented on its website. The guidelines for these messages are called the Spirit of AudioVerse and you can read them here. This spirit of excellence extends also to the way the ministry operates and in all its dealings."
+    }
+  ],
+  "about__purposeGiving": [
+    {
+      "type": 0,
+      "value": "Giving Freely"
+    }
+  ],
+  "about__purposeGivingDescription": [
+    {
+      "type": 0,
+      "value": "All around the world there are people who yearn for the Gospel, but they cannot afford to pay for it. These may be individuals in developing countries or simply young people in school. If the Gospel is to go to them too, then as many barriers must be removed as possible, and cost is one of them. This is only possible through the generous financial support of donors who believe in this mission."
+    }
+  ],
+  "about__purposeImageLabel": [
+    {
+      "type": 0,
+      "value": "Our vision is to hasten the Second Coming of our Lord Jesus Christ by making high quality Bible-based and Christ-centered media available to the whole world."
+    }
+  ],
+  "about__purposeIntro": [
+    {
+      "type": 0,
+      "value": "Our mission is to be a trustworthy global provider of Bible-based and Christ-centered media."
+    }
+  ],
+  "about__purposeReaching": [
+    {
+      "type": 0,
+      "value": "Reaching the World"
+    }
+  ],
+  "about__purposeReachingDescription": [
+    {
+      "type": 0,
+      "value": "Nearly 3 billion people have access to the Internet as of 2014, and that number is increasing every day. This number includes countless closed countries into which physical missionaries cannot easily go. Leveraging the ubiquity and cost-effective nature of the Internet, AudioVerse seeks to light up the world with access to Bible truth."
+    }
+  ],
+  "about__purposeSupport": [
+    {
+      "type": 0,
+      "value": "Support of the Adventist Church"
+    }
+  ],
+  "about__purposeSupportDescription": [
+    {
+      "type": 0,
+      "value": "AudioVerse is a supporting ministry of the Seventh-day Adventist Church, and seeks to be in full harmony with the church’s purpose and mission. AudioVerse is also a member of ASI (Adventist-laymen’s Services and Industries)."
+    }
+  ],
+  "about__purposeTitle": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "about__purposeWhat": [
+    {
+      "type": 0,
+      "value": "What drives AudioVerse?"
+    }
+  ],
+  "about__purposeWhy": [
+    {
+      "type": 0,
+      "value": "Why AudioVerse?"
+    }
+  ],
+  "about__purposeWhy1": [
+    {
+      "type": 0,
+      "value": "The Gospel must be preached to the world before Christ can come (Matt. 24:14). The world cannot hear the Gospel without a preacher (Rom. 10:14). AudioVerse exists to deliver the preacher freely to the whole world so that Jesus can come."
+    }
+  ],
+  "about__purposeWhy2": [
+    {
+      "type": 0,
+      "value": "Faith comes by hearing, and hearing by the Word of God (Rom 10:17). Man shall not live by bread alone, but by every word that proceeds from the mouth of God (Matt. 4:4). AudioVerse exists to nourish faith by giving easy access to the Word of God."
+    }
+  ],
+  "about__purposeWhy3": [
+    {
+      "type": 0,
+      "value": "Jesus is the Word (John 1:1). Jesus says that His Word is truth (John 17:17) and they are life (John 6:63). To know Jesus is to have eternal life (John 17:3). AudioVerse exists to help people know Jesus."
+    }
+  ],
+  "about__spirit1": [
+    {
+      "type": 0,
+      "value": "Materials should promote doctrines, theology, principles and values that have been established through a careful, thorough study of the Bible and the Spirit of Prophecy by trustworthy, experienced and godly people."
+    }
+  ],
+  "about__spirit10": [
+    {
+      "type": 0,
+      "value": "Materials should be completely truthful. Dishonesty or anything that is intentionally misleading is unacceptable."
+    }
+  ],
+  "about__spirit11": [
+    {
+      "type": 0,
+      "value": "Materials should be delivered in a spirit of reverence, respect, and humility, recognizing that they represent the Gospel of Jesus Christ. We reject an attitude that is spiteful, arrogant, vulgar, irreverent, flippant, frivolous, demeaning, or otherwise unChrist-like."
+    }
+  ],
+  "about__spirit12": [
+    {
+      "type": 0,
+      "value": "Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse."
+    }
+  ],
+  "about__spirit2": [
+    {
+      "type": 0,
+      "value": "Materials should affirm the Bible and the Spirit of Prophecy as reflected by the stated fundamental beliefs of the Seventh-day Adventist Church."
+    }
+  ],
+  "about__spirit3": [
+    {
+      "type": 0,
+      "value": "Materials should promote the reality that victory over sin is possible through the believer&rsquo;s dependence on the grace and power of Jesus Christ."
+    }
+  ],
+  "about__spirit4": [
+    {
+      "type": 0,
+      "value": "Materials should promote lifestyle and behavioral choices that are in harmony with principles from Scripture and the Spirit of Prophecy."
+    }
+  ],
+  "about__spirit5": [
+    {
+      "type": 0,
+      "value": "Materials should represent the historical-grammatical/historical-Biblical method of Biblical interpretation along with the historicist method of prophetic interpretation rather than futurism, preterism, higher criticism, imposed allegorical, or other speculative and unacceptable hermeneutics."
+    }
+  ],
+  "about__spirit6": [
+    {
+      "type": 0,
+      "value": "Materials should predominantly appeal to the mind and reason, rather than the speculative or sensational; neither hype, an unwarranted excitement, nor extra-Biblical predictions about the future, are acceptable."
+    }
+  ],
+  "about__spirit7": [
+    {
+      "type": 0,
+      "value": "Materials should represent a balanced and disciplined view of Scripture and the Spirit of Prophecy that reflects the entirety of these inspired writings. We do not advocate the overemphasis of one aspect to the exclusion of other equally important aspects nor do we condone viewpoints that extend beyond the proper application of Biblical and Spirit of Prophecy principles."
+    }
+  ],
+  "about__spirit8": [
+    {
+      "type": 0,
+      "value": "Materials should seek to provide lessons from history rather than revising or criticizing it to the detriment of our doctrines or teachings."
+    }
+  ],
+  "about__spirit9": [
+    {
+      "type": 0,
+      "value": "Materials should be supportive of the Seventh-day Adventist Church as well as her leadership and institutions. They are not to seek to tarnish or vilify the reputations of individuals or institutions."
+    }
+  ],
+  "about__spiritIntro": [
+    {
+      "type": 0,
+      "value": "AudioVerse provides free Bible-based and Christ-centered audiovisual resources aimed at inspiring and educating Seventh-day Adventists and all spiritually interested people around the world."
+    }
+  ],
+  "about__spiritPurpose": [
+    {
+      "type": 0,
+      "value": "Our main purpose is to proclaim the everlasting Gospel of Jesus Christ in order to hasten and to prepare the world for His imminent Second Coming. In view of this, AudioVerse upholds the following set of principles regarding the materials that we make available on this website:"
+    }
+  ],
+  "about__spiritTitle": [
+    {
+      "type": 0,
+      "value": "Spirit of AudioVerse"
+    }
+  ],
+  "about__story1": [
+    {
+      "type": 0,
+      "value": "They were excited about this idea not only because it would fulfill the immediate need (and make less work producing CDs!), but because they saw that these messages of hope, love, and the soon return of our Savior Jesus Christ, could be a blessing to people worldwide who were seeking knowledge and wisdom about God."
+    }
+  ],
+  "about__story2": [
+    {
+      "type": 0,
+      "value": "Curtis put the idea into action and quickly began developing a sermon website. A contest was held at Advent HOPE Sabbath School to choose the name, during which over 100 names were submitted. \"AudioVerse\" was the winner, and the AudioVerse.org website was launched on October 22, 2005."
+    }
+  ],
+  "about__story3": [
+    {
+      "type": 0,
+      "value": "Since that humble beginning, God demonstrated His providential leading of this ministry many times. The initial bandwidth for the website was donated by a friend of the ministry who operated his own Internet service provider, which was crucial in meeting the traffic generated early on. Later, an unsolicited donation enabled us to upgrade and expand our entire server infrastructure to better serve the whole world. Not to mention, tremendous partnerships have been developed with various ministries like ASI, AMEN, and GYC (along with many smaller affiliate GYCs)."
+    }
+  ],
+  "about__story4": [
+    {
+      "type": 0,
+      "value": "Website traffic has also grown tremendously. Now millions of sermons are downloaded and listened to every year! The people accessing these messages come from over 200 countries from all corners of the world including many closed or developing countries in the 10/40 window such as countries in the Middle East and China."
+    }
+  ],
+  "about__story5": [
+    {
+      "type": 0,
+      "value": "As this website has grown, we have had the opportunity to feature recordings in other languages than English. In an effort to reach as many people as possible, messages in Spanish, French, German, and Chinese are now available with more to come."
+    }
+  ],
+  "about__storyImageCaption": [
+    {
+      "type": 0,
+      "value": "The original AudioVerse design, in use from October 2005 to August 2006."
+    }
+  ],
+  "about__storyIntro": [
+    {
+      "type": 0,
+      "value": "AudioVerse began in 2005 as an idea by Tim Arakawa and Curtis Farnham, both poor graduate students at the time. It was spurred by increasing requests for sermon recordings from various ministries with which Tim and Curtis had been involved, including Advent HOPE Sabbath School, Restoration Ministry, and GYC Southwest (formerly Southwest Youth Conference)."
+    }
+  ],
+  "about__storyTitle": [
+    {
+      "type": 0,
+      "value": "Our Story"
+    }
+  ],
+  "about__team": [
+    {
+      "type": 0,
+      "value": "Digital Marketing Coordinator"
+    }
+  ],
+  "about__teamAlistairBio": [
+    {
+      "type": 0,
+      "value": "From his stand-up desk, Alistair oversees the strategy and day-to-day management by ensuring that we are doing the right things and that we are doing things right."
+    }
+  ],
+  "about__teamAnnetteBio": [
+    {
+      "type": 0,
+      "value": "All the media on AudioVerse has Annette’s fingerprints on it. She works with partners, obtains content, edits them, and publishes them on AudioVerse."
+    }
+  ],
+  "about__teamAssistantOperationsCoordinator": [
+    {
+      "type": 0,
+      "value": "Assistant Operations Coordinator"
+    }
+  ],
+  "about__teamBoard": [
+    {
+      "type": 0,
+      "value": "Board of Directors"
+    }
+  ],
+  "about__teamBoardArakawaTitle": [
+    {
+      "type": 0,
+      "value": "Chairman (Co-founder) | Physician, Albany, Oregon"
+    }
+  ],
+  "about__teamBoardClarkTitle": [
+    {
+      "type": 0,
+      "value": "Vice President for Administration, Georgia-Cumberland Conference"
+    }
+  ],
+  "about__teamBoardHuongTitle": [
+    {
+      "type": 0,
+      "value": "Secretary | Executive Director, AudioVerse"
+    }
+  ],
+  "about__teamBoardIntro": [
+    {
+      "type": 0,
+      "value": "The AudioVerse Board of Directors provides guidance and vision for the ministry. This dedicated group of individuals with their collective experience and wisdom helps the ministry steer a true course in advancing the work of the Lord."
+    }
+  ],
+  "about__teamBoardIrizarryTitle": [
+    {
+      "type": 0,
+      "value": "Physician, Amity, Arkansas"
+    }
+  ],
+  "about__teamBoardKimTitle": [
+    {
+      "type": 0,
+      "value": "Physician, Chattanooga, Tennessee"
+    }
+  ],
+  "about__teamBoardMackintoshTitle": [
+    {
+      "type": 0,
+      "value": "Director, NEWSTART Global"
+    }
+  ],
+  "about__teamBoardWilliamsTitle": [
+    {
+      "type": 0,
+      "value": "Treasurer | Finance Professional, Chattanooga, Tennessee"
+    }
+  ],
+  "about__teamBoardZwikerTitle": [
+    {
+      "type": 0,
+      "value": "President, Hyve International"
+    }
+  ],
+  "about__teamBusinessManager": [
+    {
+      "type": 0,
+      "value": "Business Manager"
+    }
+  ],
+  "about__teamDebbyBio": [
+    {
+      "type": 0,
+      "value": "With her background as a CPA, wife, and mother, Debby capably manages the finances, HR, and correspondence for the ministry."
+    }
+  ],
+  "about__teamExecutive": [
+    {
+      "type": 0,
+      "value": "Executive Team"
+    }
+  ],
+  "about__teamExecutiveDirector": [
+    {
+      "type": 0,
+      "value": "Executive Director"
+    }
+  ],
+  "about__teamIntro": [
+    {
+      "type": 0,
+      "value": "The AudioVerse Executive Team are responsible for the day-to-day operations of the ministry. This group of dedicated individuals with their their common passion for the proclamation of the three angels' messages is what keeps this ministry running."
+    }
+  ],
+  "about__teamLizBio": [
+    {
+      "type": 0,
+      "value": "A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
+    }
+  ],
+  "about__teamMatthewBio": [
+    {
+      "type": 0,
+      "value": "Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+    }
+  ],
+  "about__teamNathanBio": [
+    {
+      "type": 0,
+      "value": "Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
+    }
+  ],
+  "about__teamSoftwareEngineer": [
+    {
+      "type": 0,
+      "value": "Software Engineer"
+    }
+  ],
+  "about__teamTechnologyDirector": [
+    {
+      "type": 0,
+      "value": "Technology Director"
+    }
+  ],
+  "about__teamTitle": [
+    {
+      "type": 0,
+      "value": "The Team"
+    }
+  ],
   "accountNav__audiopreferences": [
     {
       "type": 0,
@@ -1477,6 +1891,12 @@
     {
       "type": 0,
       "value": "Donate"
+    }
+  ],
+  "header__navItemStory-purpose": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
     }
   ],
   "header__navItemStory-spiritOfAudioVerse": [
