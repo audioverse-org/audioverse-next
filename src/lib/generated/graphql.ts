@@ -2092,6 +2092,7 @@ export type MutationUserCreateArgs = {
 };
 
 export type MutationUserDeleteArgs = {
+	destroyData: InputMaybe<Scalars['Boolean']>;
 	userId: Scalars['ID'];
 };
 
@@ -5600,10 +5601,13 @@ export type GetWithAuthGuardDataQueryVariables = Exact<{
 
 export type GetWithAuthGuardDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: { __typename?: 'User'; email: string; name: string };
-	} | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: { __typename?: 'User'; email: string; name: string };
+		  }
+		| null
+		| undefined;
 };
 
 export type ButtonDownloadFragment = {
@@ -5644,18 +5648,21 @@ export type CardCollectionFragment = {
 	id: string | number;
 	canonicalPath: string;
 	title: string;
-	startDate: string | null;
-	endDate: string | null;
+	startDate: string | null | undefined;
+	endDate: string | null | undefined;
 	duration: number;
 	collectionContentType: CollectionContentType;
-	image: { __typename?: 'Image'; id: string | number; url: string } | null;
+	image:
+		| { __typename?: 'Image'; id: string | number; url: string }
+		| null
+		| undefined;
 	allSequences: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	allRecordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -5668,22 +5675,27 @@ export type CardFavoriteFragment = {
 				id: string | number;
 				canonicalPath: string;
 				title: string;
-				startDate: string | null;
-				endDate: string | null;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
 				duration: number;
 				collectionContentType: CollectionContentType;
-				image: {
-					__typename?: 'Image';
-					id: string | number;
-					url: string;
-				} | null;
+				image:
+					| { __typename?: 'Image'; id: string | number; url: string }
+					| null
+					| undefined;
 				allSequences: {
 					__typename?: 'SequenceConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 		  }
 		| {
@@ -5691,49 +5703,60 @@ export type CardFavoriteFragment = {
 				id: string | number;
 				name: string;
 				canonicalPath: string;
-				image: {
-					__typename?: 'Image';
-					id: string | number;
-					url: string;
-				} | null;
+				image:
+					| { __typename?: 'Image'; id: string | number; url: string }
+					| null
+					| undefined;
 				recordings: {
 					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 		  }
 		| {
 				__typename: 'Recording';
 				canonicalPath: string;
-				sequenceIndex: number | null;
+				sequenceIndex: number | null | undefined;
 				id: string | number;
 				title: string;
 				duration: number;
 				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							canonicalPath: string;
+							contentType: SequenceContentType;
+							title: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
+				sponsor:
+					| {
+							__typename?: 'Sponsor';
+							id: string | number;
+							title: string;
+							canonicalPath: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+					  }
+					| null
+					| undefined;
 				persons: Array<{
 					__typename?: 'Person';
 					name: string;
@@ -5757,7 +5780,7 @@ export type CardFavoriteFragment = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
-					logUrl: string | null;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
@@ -5774,83 +5797,104 @@ export type CardFavoriteFragment = {
 				summary: string;
 				speakers: {
 					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
+					nodes:
+						| Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+						  }>
+						| null
+						| undefined;
 				};
 				sequenceWriters: {
 					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
+					nodes:
+						| Array<{
+								__typename?: 'Person';
+								name: string;
+								canonicalPath: string;
+								imageWithFallback: { __typename?: 'Image'; url: string };
+						  }>
+						| null
+						| undefined;
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 				favoritedRecordings: {
 					__typename?: 'RecordingConnection';
-					nodes: Array<{
-						__typename?: 'Recording';
-						canonicalPath: string;
-						sequenceIndex: number | null;
-						id: string | number;
-						title: string;
-						duration: number;
-						recordingContentType: RecordingContentType;
-						persons: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}>;
-						sequence: {
-							__typename?: 'Sequence';
-							id: string | number;
-							canonicalPath: string;
-							contentType: SequenceContentType;
-							title: string;
-							recordings: {
-								__typename?: 'RecordingConnection';
-								aggregate: { __typename?: 'Aggregate'; count: number } | null;
-							};
-							image: { __typename?: 'Image'; url: string } | null;
-						} | null;
-						writers: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}>;
-						audioFiles: Array<{
-							__typename?: 'AudioFile';
-							url: string;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-						videoFiles: Array<{
-							__typename?: 'VideoFile';
-							url: string;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-						videoStreams: Array<{
-							__typename?: 'VideoFile';
-							url: string;
-							logUrl: string | null;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-					}> | null;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
 				};
 		  }
 		| {
@@ -5858,31 +5902,43 @@ export type CardFavoriteFragment = {
 				id: string | number;
 				title: string;
 				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
 				collections: {
 					__typename?: 'CollectionConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 				sequences: {
 					__typename?: 'SequenceConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 				recordings: {
 					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
 		  };
 };
 
 export type CardHatSponsorFragment = {
 	__typename?: 'Recording';
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		image: { __typename?: 'Image'; url: string } | null;
-	} | null;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+		  }
+		| null
+		| undefined;
 };
 
 export type CardPersonFragment = {
@@ -5890,10 +5946,13 @@ export type CardPersonFragment = {
 	id: string | number;
 	name: string;
 	canonicalPath: string;
-	image: { __typename?: 'Image'; id: string | number; url: string } | null;
+	image:
+		| { __typename?: 'Image'; id: string | number; url: string }
+		| null
+		| undefined;
 	recordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -5903,54 +5962,63 @@ export type CardPlaylistFragment = {
 	title: string;
 	recordings: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				title: string;
-				contentType: SequenceContentType;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								contentType: SequenceContentType;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -5960,43 +6028,52 @@ export type CardPostFragment = {
 	title: string;
 	teaser: string;
 	canonicalPath: string;
-	readingDuration: number | null;
-	image: { __typename?: 'Image'; url: string } | null;
+	readingDuration: number | null | undefined;
+	image: { __typename?: 'Image'; url: string } | null | undefined;
 };
 
 export type CardRecordingFragment = {
 	__typename?: 'Recording';
 	canonicalPath: string;
-	sequenceIndex: number | null;
+	sequenceIndex: number | null | undefined;
 	id: string | number;
 	title: string;
 	duration: number;
 	recordingContentType: RecordingContentType;
-	sequence: {
-		__typename?: 'Sequence';
-		id: string | number;
-		canonicalPath: string;
-		contentType: SequenceContentType;
-		title: string;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				id: string | number;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				title: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 	writers: Array<{
 		__typename?: 'Person';
 		name: string;
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		image: { __typename?: 'Image'; url: string } | null;
-	} | null;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+		  }
+		| null
+		| undefined;
 	persons: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -6020,7 +6097,7 @@ export type CardRecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
-		logUrl: string | null;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6029,17 +6106,23 @@ export type CardRecordingFragment = {
 
 export type CardRecordingSequenceHatFragment = {
 	__typename?: 'Recording';
-	sequence: {
-		__typename?: 'Sequence';
-		id: string | number;
-		canonicalPath: string;
-		contentType: SequenceContentType;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				id: string | number;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 	writers: Array<{
 		__typename?: 'Person';
 		name: string;
@@ -6053,61 +6136,70 @@ export type CardRecordingStackFragment = {
 	contentType: SequenceContentType;
 	favoritedRecordings: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -6121,25 +6213,31 @@ export type CardSequenceFragment = {
 	summary: string;
 	speakers: {
 		__typename?: 'PersonConnection';
-		nodes: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+			  }>
+			| null
+			| undefined;
 	};
 	sequenceWriters: {
 		__typename?: 'PersonConnection';
-		nodes: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+			  }>
+			| null
+			| undefined;
 	};
 	allRecordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -6148,55 +6246,66 @@ export type CardSponsorFragment = {
 	id: string | number;
 	title: string;
 	canonicalPath: string;
-	image: { __typename?: 'Image'; url: string } | null;
+	image: { __typename?: 'Image'; url: string } | null | undefined;
 	collections: {
 		__typename?: 'CollectionConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	sequences: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	recordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
 export type CopyrightInfoFragment = {
 	__typename?: 'Recording';
-	copyrightYear: number | null;
-	distributionAgreement: {
-		__typename?: 'DistributionAgreement';
-		sponsor: { __typename?: 'Sponsor'; title: string } | null;
-		license: {
-			__typename?: 'License';
-			summary: string;
-			image: { __typename?: 'Image'; url: string } | null;
-		} | null;
-	} | null;
-	sponsor: { __typename?: 'Sponsor'; title: string } | null;
+	copyrightYear: number | null | undefined;
+	distributionAgreement:
+		| {
+				__typename?: 'DistributionAgreement';
+				sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
+				license:
+					| {
+							__typename?: 'License';
+							summary: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+	sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
 };
 
 export type CopyrightInfosFragment = {
 	__typename?: 'Recording';
 	id: string | number;
-	copyrightYear: number | null;
-	distributionAgreement: {
-		__typename?: 'DistributionAgreement';
-		id: string | number;
-		sponsor: { __typename?: 'Sponsor'; title: string } | null;
-		license: {
-			__typename?: 'License';
-			summary: string;
-			image: { __typename?: 'Image'; url: string } | null;
-		} | null;
-	} | null;
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-	} | null;
+	copyrightYear: number | null | undefined;
+	distributionAgreement:
+		| {
+				__typename?: 'DistributionAgreement';
+				id: string | number;
+				sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
+				license:
+					| {
+							__typename?: 'License';
+							summary: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+	sponsor:
+		| { __typename?: 'Sponsor'; id: string | number; title: string }
+		| null
+		| undefined;
 };
 
 export type LoginForgotPasswordMutationVariables = Exact<{
@@ -6227,11 +6336,14 @@ export type PlayerFragment = {
 	duration: number;
 	isDownloadAllowed: boolean;
 	shareUrl: string;
-	sequence: {
-		__typename?: 'Sequence';
-		title: string;
-		contentType: SequenceContentType;
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				title: string;
+				contentType: SequenceContentType;
+		  }
+		| null
+		| undefined;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6249,7 +6361,7 @@ export type PlayerFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
-		logUrl: string | null;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6277,33 +6389,39 @@ export type GetPlaylistButtonDataQueryVariables = Exact<{
 
 export type GetPlaylistButtonDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlists: {
-				__typename?: 'UserPlaylistConnection';
-				nodes: Array<{
-					__typename?: 'UserPlaylist';
-					id: string | number;
-					title: string;
-					hasRecording: boolean;
-				}> | null;
-			};
-		};
-	} | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					playlists: {
+						__typename?: 'UserPlaylistConnection';
+						nodes:
+							| Array<{
+									__typename?: 'UserPlaylist';
+									id: string | number;
+									title: string;
+									hasRecording: boolean;
+							  }>
+							| null
+							| undefined;
+					};
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type SequenceNavFragment = {
 	__typename?: 'Recording';
-	sequencePreviousRecording: {
-		__typename?: 'Recording';
-		canonicalPath: string;
-	} | null;
-	sequenceNextRecording: {
-		__typename?: 'Recording';
-		canonicalPath: string;
-	} | null;
+	sequencePreviousRecording:
+		| { __typename?: 'Recording'; canonicalPath: string }
+		| null
+		| undefined;
+	sequenceNextRecording:
+		| { __typename?: 'Recording'; canonicalPath: string }
+		| null
+		| undefined;
 };
 
 export type SponsorLockupFragment = {
@@ -6317,7 +6435,7 @@ export type SponsorLockupFragment = {
 export type TeaseRecordingFragment = {
 	__typename?: 'Recording';
 	canonicalPath: string;
-	sequenceIndex: number | null;
+	sequenceIndex: number | null | undefined;
 	id: string | number;
 	title: string;
 	duration: number;
@@ -6328,16 +6446,22 @@ export type TeaseRecordingFragment = {
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
-	sequence: {
-		__typename?: 'Sequence';
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				id: string | number;
+				title: string;
+				contentType: SequenceContentType;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6355,7 +6479,7 @@ export type TeaseRecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
-		logUrl: string | null;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6368,68 +6492,80 @@ export type GetNotFoundPageDataQuery = {
 	__typename?: 'Query';
 	websiteRecentRecordings: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -6438,12 +6574,12 @@ export type RecordingFragment = {
 	id: string | number;
 	title: string;
 	contentType: RecordingContentType;
-	description: string | null;
-	recordingDate: string | null;
-	sequenceIndex: number | null;
+	description: string | null | undefined;
+	recordingDate: string | null | undefined;
+	sequenceIndex: number | null | undefined;
 	canonicalUrl: string;
 	shareUrl: string;
-	copyrightYear: number | null;
+	copyrightYear: number | null | undefined;
 	canonicalPath: string;
 	duration: number;
 	isDownloadAllowed: boolean;
@@ -6467,97 +6603,119 @@ export type RecordingFragment = {
 	imageWithFallback: { __typename?: 'Image'; url: string };
 	recordingTags: {
 		__typename?: 'RecordingTagConnection';
-		nodes: Array<{
-			__typename?: 'RecordingTag';
-			tag: { __typename?: 'Tag'; id: string | number; name: string };
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'RecordingTag';
+					tag: { __typename?: 'Tag'; id: string | number; name: string };
+			  }>
+			| null
+			| undefined;
 	};
-	sponsor: {
-		__typename?: 'Sponsor';
-		title: string;
-		canonicalPath: string;
-	} | null;
-	sequence: {
-		__typename?: 'Sequence';
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		canonicalPath: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	sponsor:
+		| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+		| null
+		| undefined;
+	sequence:
+		| {
+				__typename?: 'Sequence';
 				id: string | number;
 				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					title: string;
-					contentType: SequenceContentType;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
-	collection: {
-		__typename?: 'Collection';
-		title: string;
-		canonicalPath: string;
-	} | null;
-	transcript: { __typename?: 'Transcript'; text: string } | null;
-	sequencePreviousRecording: {
-		__typename?: 'Recording';
-		canonicalPath: string;
-	} | null;
-	sequenceNextRecording: {
-		__typename?: 'Recording';
-		canonicalPath: string;
-	} | null;
-	distributionAgreement: {
-		__typename?: 'DistributionAgreement';
-		sponsor: { __typename?: 'Sponsor'; title: string } | null;
-		license: {
-			__typename?: 'License';
-			summary: string;
-			image: { __typename?: 'Image'; url: string } | null;
-		} | null;
-	} | null;
+				contentType: SequenceContentType;
+				canonicalPath: string;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											title: string;
+											contentType: SequenceContentType;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+	collection:
+		| { __typename?: 'Collection'; title: string; canonicalPath: string }
+		| null
+		| undefined;
+	transcript: { __typename?: 'Transcript'; text: string } | null | undefined;
+	sequencePreviousRecording:
+		| { __typename?: 'Recording'; canonicalPath: string }
+		| null
+		| undefined;
+	sequenceNextRecording:
+		| { __typename?: 'Recording'; canonicalPath: string }
+		| null
+		| undefined;
+	distributionAgreement:
+		| {
+				__typename?: 'DistributionAgreement';
+				sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
+				license:
+					| {
+							__typename?: 'License';
+							summary: string;
+							image: { __typename?: 'Image'; url: string } | null | undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6575,7 +6733,7 @@ export type RecordingFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
-		logUrl: string | null;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6602,85 +6760,95 @@ export type SequenceFragment = {
 	contentType: SequenceContentType;
 	duration: number;
 	description: string;
-	startDate: string | null;
-	endDate: string | null;
+	startDate: string | null | undefined;
+	endDate: string | null | undefined;
 	shareUrl: string;
-	collection: {
-		__typename?: 'Collection';
-		title: string;
-		canonicalPath: string;
-	} | null;
-	image: { __typename?: 'Image'; url: string } | null;
-	sponsor: {
-		__typename?: 'Sponsor';
-		title: string;
-		canonicalPath: string;
-	} | null;
+	collection:
+		| { __typename?: 'Collection'; title: string; canonicalPath: string }
+		| null
+		| undefined;
+	image: { __typename?: 'Image'; url: string } | null | undefined;
+	sponsor:
+		| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+		| null
+		| undefined;
 	recordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -6697,11 +6865,14 @@ export type AndMiniplayerFragment = {
 	title: string;
 	canonicalPath: string;
 	duration: number;
-	sequence: {
-		__typename?: 'Sequence';
-		title: string;
-		contentType: SequenceContentType;
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				title: string;
+				contentType: SequenceContentType;
+		  }
+		| null
+		| undefined;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6719,7 +6890,7 @@ export type AndMiniplayerFragment = {
 	videoStreams: Array<{
 		__typename?: 'VideoFile';
 		url: string;
-		logUrl: string | null;
+		logUrl: string | null | undefined;
 		filesize: string;
 		mimeType: string;
 		duration: number;
@@ -6732,13 +6903,19 @@ export type GetRecordingPlaybackProgressQueryVariables = Exact<{
 
 export type GetRecordingPlaybackProgressQuery = {
 	__typename?: 'Query';
-	recording: {
-		__typename?: 'Recording';
-		viewerPlaybackSession: {
-			__typename?: 'RecordingPlaybackSession';
-			positionPercentage: number;
-		} | null;
-	} | null;
+	recording:
+		| {
+				__typename?: 'Recording';
+				viewerPlaybackSession:
+					| {
+							__typename?: 'RecordingPlaybackSession';
+							positionPercentage: number;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
 };
 
 export type RecordingPlaybackProgressSetMutationVariables = Exact<{
@@ -6750,13 +6927,19 @@ export type RecordingPlaybackProgressSetMutation = {
 	__typename?: 'Mutation';
 	recordingPlaybackSessionAdvance: {
 		__typename?: 'RecordingPayload';
-		recording: {
-			__typename?: 'Recording';
-			viewerPlaybackSession: {
-				__typename?: 'RecordingPlaybackSession';
-				positionPercentage: number;
-			} | null;
-		} | null;
+		recording:
+			| {
+					__typename?: 'Recording';
+					viewerPlaybackSession:
+						| {
+								__typename?: 'RecordingPlaybackSession';
+								positionPercentage: number;
+						  }
+						| null
+						| undefined;
+			  }
+			| null
+			| undefined;
 	};
 };
 
@@ -6766,13 +6949,16 @@ export type GetAboutPageDataQueryVariables = Exact<{
 
 export type GetAboutPageDataQuery = {
 	__typename?: 'Query';
-	page: {
-		__typename?: 'Page';
-		title: string;
-		body: string;
-		type: PageType;
-		slug: string;
-	} | null;
+	page:
+		| {
+				__typename?: 'Page';
+				title: string;
+				body: string;
+				type: PageType;
+				slug: string;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetAboutStaticPathsQueryVariables = Exact<{
@@ -6784,7 +6970,10 @@ export type GetAboutStaticPathsQuery = {
 	__typename?: 'Query';
 	pages: {
 		__typename?: 'PageConnection';
-		nodes: Array<{ __typename?: 'Page'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Page'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -6794,26 +6983,35 @@ export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
 
 export type GetAccountPlaylistsPageDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlists: {
-				__typename?: 'UserPlaylistConnection';
-				nodes: Array<{
-					__typename?: 'UserPlaylist';
-					id: string | number;
-					title: string;
-					isPublic: boolean;
-					summary: string;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					playlists: {
+						__typename?: 'UserPlaylistConnection';
+						nodes:
+							| Array<{
+									__typename?: 'UserPlaylist';
+									id: string | number;
+									title: string;
+									isPublic: boolean;
+									summary: string;
+									recordings: {
+										__typename?: 'RecordingConnection';
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }>
+							| null
+							| undefined;
 					};
-				}> | null;
-			};
-		};
-	} | null;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type AddAccountPlaylistMutationVariables = Exact<{
@@ -6835,16 +7033,19 @@ export type GetAccountPreferencesDataQueryVariables = Exact<{
 
 export type GetAccountPreferencesDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			autoplay: boolean;
-			language: UserLanguage;
-			preferredAudioQuality: RecordingQuality;
-			timezone: Timezone;
-		};
-	} | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					autoplay: boolean;
+					language: UserLanguage;
+					preferredAudioQuality: RecordingQuality;
+					timezone: Timezone;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type UpdateAccountPreferencesMutationVariables = Exact<{
@@ -6859,16 +7060,19 @@ export type UpdateAccountPreferencesMutation = {
 	updateMyProfile: {
 		__typename?: 'AuthenticatedUserPayload';
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
-		authenticatedUser: {
-			__typename?: 'AuthenticatedUser';
-			user: {
-				__typename?: 'User';
-				autoplay: boolean;
-				language: UserLanguage;
-				preferredAudioQuality: RecordingQuality;
-				timezone: Timezone;
-			};
-		} | null;
+		authenticatedUser:
+			| {
+					__typename?: 'AuthenticatedUser';
+					user: {
+						__typename?: 'User';
+						autoplay: boolean;
+						language: UserLanguage;
+						preferredAudioQuality: RecordingQuality;
+						timezone: Timezone;
+					};
+			  }
+			| null
+			| undefined;
 	};
 };
 
@@ -6884,21 +7088,24 @@ export type GetProfileDataQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetProfileDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			email: string;
-			givenName: string | null;
-			surname: string | null;
-			address1: string | null;
-			address2: string | null;
-			city: string | null;
-			province: string | null;
-			postalCode: string | null;
-			country: string | null;
-		};
-	} | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					email: string;
+					givenName: string | null | undefined;
+					surname: string | null | undefined;
+					address1: string | null | undefined;
+					address2: string | null | undefined;
+					city: string | null | undefined;
+					province: string | null | undefined;
+					postalCode: string | null | undefined;
+					country: string | null | undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type UpdateProfileDataMutationVariables = Exact<{
@@ -6913,35 +7120,38 @@ export type UpdateProfileDataMutation = {
 	updateMyProfile: {
 		__typename?: 'AuthenticatedUserPayload';
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
-		authenticatedUser: {
-			__typename?: 'AuthenticatedUser';
-			user: {
-				__typename?: 'User';
-				email: string;
-				givenName: string | null;
-				surname: string | null;
-				address1: string | null;
-				address2: string | null;
-				city: string | null;
-				province: string | null;
-				postalCode: string | null;
-				country: string | null;
-			};
-		} | null;
+		authenticatedUser:
+			| {
+					__typename?: 'AuthenticatedUser';
+					user: {
+						__typename?: 'User';
+						email: string;
+						givenName: string | null | undefined;
+						surname: string | null | undefined;
+						address1: string | null | undefined;
+						address2: string | null | undefined;
+						city: string | null | undefined;
+						province: string | null | undefined;
+						postalCode: string | null | undefined;
+						country: string | null | undefined;
+					};
+			  }
+			| null
+			| undefined;
 	};
 };
 
 export type ProfileFragment = {
 	__typename?: 'User';
 	email: string;
-	givenName: string | null;
-	surname: string | null;
-	address1: string | null;
-	address2: string | null;
-	city: string | null;
-	province: string | null;
-	postalCode: string | null;
-	country: string | null;
+	givenName: string | null | undefined;
+	surname: string | null | undefined;
+	address1: string | null | undefined;
+	address2: string | null | undefined;
+	city: string | null | undefined;
+	province: string | null | undefined;
+	postalCode: string | null | undefined;
+	country: string | null | undefined;
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -6971,10 +7181,10 @@ export type RegisterSocialMutation = {
 	__typename?: 'Mutation';
 	loginSocial: {
 		__typename?: 'AuthenticatedUserPayload';
-		authenticatedUser: {
-			__typename?: 'AuthenticatedUser';
-			sessionToken: string;
-		} | null;
+		authenticatedUser:
+			| { __typename?: 'AuthenticatedUser'; sessionToken: string }
+			| null
+			| undefined;
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
 };
@@ -6983,10 +7193,13 @@ export type RegisterIsLoggedInQueryVariables = Exact<{ [key: string]: never }>;
 
 export type RegisterIsLoggedInQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: { __typename?: 'User'; email: string };
-	} | null;
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: { __typename?: 'User'; email: string };
+		  }
+		| null
+		| undefined;
 };
 
 export type ResetPasswordMutationVariables = Exact<{
@@ -7009,96 +7222,118 @@ export type GetAudiobookDetailPageDataQueryVariables = Exact<{
 
 export type GetAudiobookDetailPageDataQuery = {
 	__typename?: 'Query';
-	audiobook: {
-		__typename?: 'Sequence';
-		canonicalUrl: string;
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		duration: number;
-		description: string;
-		startDate: string | null;
-		endDate: string | null;
-		shareUrl: string;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		image: { __typename?: 'Image'; url: string } | null;
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	audiobook:
+		| {
+				__typename?: 'Sequence';
+				canonicalUrl: string;
+				language: Language;
 				id: string | number;
 				title: string;
+				contentType: SequenceContentType;
 				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-		};
-	} | null;
+				description: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				shareUrl: string;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetAudiobookFeedDataQueryVariables = Exact<{
@@ -7107,50 +7342,62 @@ export type GetAudiobookFeedDataQueryVariables = Exact<{
 
 export type GetAudiobookFeedDataQuery = {
 	__typename?: 'Query';
-	sequence: {
-		__typename?: 'Sequence';
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		canonicalUrl: string;
-		language: Language;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
+	sequence:
+		| {
+				__typename?: 'Sequence';
 				id: string | number;
 				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				authors: Array<{ __typename?: 'Person'; name: string }>;
-				narrators: Array<{ __typename?: 'Person'; name: string }>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				contentType: SequenceContentType;
+				canonicalUrl: string;
+				language: Language;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								authors: Array<{ __typename?: 'Person'; name: string }>;
+								narrators: Array<{ __typename?: 'Person'; name: string }>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetAudiobookDetailPathsDataQueryVariables = Exact<{
@@ -7162,7 +7409,10 @@ export type GetAudiobookDetailPathsDataQuery = {
 	__typename?: 'Query';
 	audiobooks: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{ __typename?: 'Sequence'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sequence'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -7176,38 +7426,50 @@ export type GetAudiobookListPageDataQuery = {
 	__typename?: 'Query';
 	audiobooks: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -7219,7 +7481,7 @@ export type GetAudiobookListPathsDataQuery = {
 	__typename?: 'Query';
 	audiobooks: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -7229,390 +7491,167 @@ export type GetAudiobookTrackDetailDataQueryVariables = Exact<{
 
 export type GetAudiobookTrackDetailDataQuery = {
 	__typename?: 'Query';
-	audiobookTrack: {
-		__typename?: 'Recording';
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: RecordingContentType;
-		description: string | null;
-		recordingDate: string | null;
-		sequenceIndex: number | null;
-		canonicalUrl: string;
-		shareUrl: string;
-		copyrightYear: number | null;
-		canonicalPath: string;
-		duration: number;
-		isDownloadAllowed: boolean;
-		speakers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		writers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		attachments: Array<{
-			__typename?: 'Attachment';
-			filename: string;
-			url: string;
-		}>;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		recordingTags: {
-			__typename?: 'RecordingTagConnection';
-			nodes: Array<{
-				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string | number; name: string };
-			}> | null;
-		};
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		sequence: {
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			contentType: SequenceContentType;
-			canonicalPath: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						title: string;
-						contentType: SequenceContentType;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		} | null;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		transcript: { __typename?: 'Transcript'; text: string } | null;
-		sequencePreviousRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		sequenceNextRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		distributionAgreement: {
-			__typename?: 'DistributionAgreement';
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			license: {
-				__typename?: 'License';
-				summary: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-		} | null;
-		audioFiles: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoFiles: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoStreams: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			logUrl: string | null;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoDownloads: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			height: number;
-			width: number;
-		}>;
-		audioDownloads: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			bitrate: number;
-		}>;
-	} | null;
-};
-
-export type GetAudiobookTrackDetailStaticPathsQueryVariables = Exact<{
-	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetAudiobookTrackDetailStaticPathsQuery = {
-	__typename?: 'Query';
-	audiobookTracks: {
-		__typename?: 'RecordingConnection';
-		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
-	};
-};
-
-export type GetBlogPageDataQueryVariables = Exact<{
-	language: Language;
-	offset?: InputMaybe<Scalars['Int']>;
-	first?: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetBlogPageDataQuery = {
-	__typename?: 'Query';
-	blogPosts: {
-		__typename?: 'BlogPostConnection';
-		nodes: Array<{
-			__typename?: 'BlogPost';
-			publishDate: string;
-			title: string;
-			teaser: string;
-			canonicalPath: string;
-			readingDuration: number | null;
-			image: { __typename?: 'Image'; url: string } | null;
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetBlogPathsDataQueryVariables = Exact<{
-	language: Language;
-}>;
-
-export type GetBlogPathsDataQuery = {
-	__typename?: 'Query';
-	blogPosts: {
-		__typename?: 'BlogPostConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetBlogDetailDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-	language: Language;
-}>;
-
-export type GetBlogDetailDataQuery = {
-	__typename?: 'Query';
-	blogPost: {
-		__typename?: 'BlogPost';
-		id: string | number;
-		title: string;
-		body: string;
-		canonicalPath: string;
-		canonicalUrl: string;
-		language: Language;
-		publishDate: string;
-		readingDuration: number | null;
-		teaser: string;
-		image: { __typename?: 'Image'; url: string } | null;
-	} | null;
-	blogPosts: {
-		__typename?: 'BlogPostConnection';
-		nodes: Array<{
-			__typename?: 'BlogPost';
-			publishDate: string;
-			title: string;
-			teaser: string;
-			canonicalPath: string;
-			readingDuration: number | null;
-			image: { __typename?: 'Image'; url: string } | null;
-		}> | null;
-	};
-};
-
-export type GetBlogDetailStaticPathsQueryVariables = Exact<{
-	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetBlogDetailStaticPathsQuery = {
-	__typename?: 'Query';
-	blogPosts: {
-		__typename?: 'BlogPostConnection';
-		nodes: Array<{ __typename?: 'BlogPost'; canonicalPath: string }> | null;
-	};
-};
-
-export type GetCollectionDetailPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetCollectionDetailPageDataQuery = {
-	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		title: string;
-		contentType: CollectionContentType;
-		startDate: string | null;
-		endDate: string | null;
-		duration: number;
-		description: string;
-		canonicalUrl: string;
-		language: Language;
-		shareUrl: string;
-		location: string | null;
-		image: { __typename?: 'Image'; url: string } | null;
-		sponsor: {
-			__typename?: 'Sponsor';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		} | null;
-		persons: {
-			__typename?: 'PersonConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Person';
-				id: string | number;
-				name: string;
-				canonicalPath: string;
-				image: {
-					__typename?: 'Image';
-					id: string | number;
-					url: string;
-				} | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			}> | null;
-			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-		};
-		sequences: {
-			__typename?: 'SequenceConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Sequence';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				duration: number;
-				summary: string;
-				speakers: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
-				};
-				sequenceWriters: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
-				};
-				allRecordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			}> | null;
-			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-		};
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
+	audiobookTrack:
+		| {
 				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+				language: Language;
 				id: string | number;
 				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
 				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
 					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
 				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												logUrl: string | null | undefined;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -7630,15 +7669,346 @@ export type GetCollectionDetailPageDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
-					logUrl: string | null;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
 				}>;
-			}> | null;
-			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-		};
-	} | null;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
+};
+
+export type GetAudiobookTrackDetailStaticPathsQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetAudiobookTrackDetailStaticPathsQuery = {
+	__typename?: 'Query';
+	audiobookTracks: {
+		__typename?: 'RecordingConnection';
+		nodes:
+			| Array<{ __typename?: 'Recording'; canonicalPath: string }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetBlogPageDataQueryVariables = Exact<{
+	language: Language;
+	offset?: InputMaybe<Scalars['Int']>;
+	first?: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetBlogPageDataQuery = {
+	__typename?: 'Query';
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes:
+			| Array<{
+					__typename?: 'BlogPost';
+					publishDate: string;
+					title: string;
+					teaser: string;
+					canonicalPath: string;
+					readingDuration: number | null | undefined;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetBlogPathsDataQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetBlogPathsDataQuery = {
+	__typename?: 'Query';
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetBlogDetailDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+	language: Language;
+}>;
+
+export type GetBlogDetailDataQuery = {
+	__typename?: 'Query';
+	blogPost:
+		| {
+				__typename?: 'BlogPost';
+				id: string | number;
+				title: string;
+				body: string;
+				canonicalPath: string;
+				canonicalUrl: string;
+				language: Language;
+				publishDate: string;
+				readingDuration: number | null | undefined;
+				teaser: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+		  }
+		| null
+		| undefined;
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes:
+			| Array<{
+					__typename?: 'BlogPost';
+					publishDate: string;
+					title: string;
+					teaser: string;
+					canonicalPath: string;
+					readingDuration: number | null | undefined;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetBlogDetailStaticPathsQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetBlogDetailStaticPathsQuery = {
+	__typename?: 'Query';
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes:
+			| Array<{ __typename?: 'BlogPost'; canonicalPath: string }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetCollectionDetailPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetCollectionDetailPageDataQuery = {
+	__typename?: 'Query';
+	collection:
+		| {
+				__typename?: 'Collection';
+				id: string | number;
+				title: string;
+				contentType: CollectionContentType;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				duration: number;
+				description: string;
+				canonicalUrl: string;
+				language: Language;
+				shareUrl: string;
+				location: string | null | undefined;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				sponsor:
+					| {
+							__typename?: 'Sponsor';
+							id: string | number;
+							title: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+					  }
+					| null
+					| undefined;
+				persons: {
+					__typename?: 'PersonConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Person';
+								id: string | number;
+								name: string;
+								canonicalPath: string;
+								image:
+									| { __typename?: 'Image'; id: string | number; url: string }
+									| null
+									| undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+					pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								duration: number;
+								summary: string;
+								speakers: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								sequenceWriters: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								allRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+					pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetCollectionFeedDataQueryVariables = Exact<{
@@ -7647,47 +8017,62 @@ export type GetCollectionFeedDataQueryVariables = Exact<{
 
 export type GetCollectionFeedDataQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		title: string;
-		canonicalUrl: string;
-		language: Language;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				id: string | number;
+	collection:
+		| {
+				__typename?: 'Collection';
 				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				canonicalUrl: string;
+				language: Language;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetCollectionDetailPathsDataQueryVariables = Exact<{
@@ -7699,11 +8084,14 @@ export type GetCollectionDetailPathsDataQuery = {
 	__typename?: 'Query';
 	collections: {
 		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -7717,26 +8105,38 @@ export type GetCollectionListPageDataQuery = {
 	__typename?: 'Query';
 	conferences: {
 		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -7748,7 +8148,7 @@ export type GetCollectionListPathsDataQuery = {
 	__typename?: 'Query';
 	conferences: {
 		__typename?: 'CollectionConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -7767,32 +8167,43 @@ export type GetCollectionPresentersPageDataQueryVariables = Exact<{
 
 export type GetCollectionPresentersPageDataQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		contentType: CollectionContentType;
-		persons: {
-			__typename?: 'PersonConnection';
-			nodes: Array<{
-				__typename?: 'Person';
+	collection:
+		| {
+				__typename?: 'Collection';
 				id: string | number;
-				name: string;
+				title: string;
 				canonicalPath: string;
-				image: {
-					__typename?: 'Image';
-					id: string | number;
-					url: string;
-				} | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				contentType: CollectionContentType;
+				persons: {
+					__typename?: 'PersonConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Person';
+								id: string | number;
+								name: string;
+								canonicalPath: string;
+								image:
+									| { __typename?: 'Image'; id: string | number; url: string }
+									| null
+									| undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetCollectionSequencesPageDataQueryVariables = Exact<{
@@ -7803,48 +8214,72 @@ export type GetCollectionSequencesPageDataQueryVariables = Exact<{
 
 export type GetCollectionSequencesPageDataQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		contentType: CollectionContentType;
-		sequences: {
-			__typename?: 'SequenceConnection';
-			nodes: Array<{
-				__typename?: 'Sequence';
+	collection:
+		| {
+				__typename?: 'Collection';
 				id: string | number;
 				title: string;
 				canonicalPath: string;
-				contentType: SequenceContentType;
-				duration: number;
-				summary: string;
-				speakers: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
+				contentType: CollectionContentType;
+				sequences: {
+					__typename?: 'SequenceConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								duration: number;
+								summary: string;
+								speakers: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								sequenceWriters: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								allRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
 				};
-				sequenceWriters: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
-				};
-				allRecordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetCollectionTeachingsPageDataQueryVariables = Exact<{
@@ -7855,79 +8290,103 @@ export type GetCollectionTeachingsPageDataQueryVariables = Exact<{
 
 export type GetCollectionTeachingsPageDataQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		contentType: CollectionContentType;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	collection:
+		| {
+				__typename?: 'Collection';
 				id: string | number;
 				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+				canonicalPath: string;
+				contentType: CollectionContentType;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type SubmitContactPageMutationVariables = Exact<{
@@ -7952,724 +8411,134 @@ export type GetDiscoverPageDataQuery = {
 	__typename?: 'Query';
 	recentTeachings: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 	};
 	trendingTeachings: {
 		__typename?: 'PopularRecordingConnection';
-		nodes: Array<{
-			__typename?: 'PopularRecording';
-			recording: {
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			};
-		}> | null;
-	};
-	storySeasons: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						canonicalPath: string;
-						contentType: SequenceContentType;
-						title: string;
-						image: { __typename?: 'Image'; url: string } | null;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					writers: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sponsor: {
-						__typename?: 'Sponsor';
-						id: string | number;
-						title: string;
-						canonicalPath: string;
-						image: { __typename?: 'Image'; url: string } | null;
-					} | null;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-			};
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	conferences: {
-		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			sequences: {
-				__typename?: 'SequenceConnection';
-				nodes: Array<{
-					__typename?: 'Sequence';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					duration: number;
-					summary: string;
-					speakers: {
-						__typename?: 'PersonConnection';
-						nodes: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}> | null;
-					};
-					sequenceWriters: {
-						__typename?: 'PersonConnection';
-						nodes: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}> | null;
-					};
-					allRecordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				}> | null;
-			};
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						canonicalPath: string;
-						contentType: SequenceContentType;
-						title: string;
-						image: { __typename?: 'Image'; url: string } | null;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					writers: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sponsor: {
-						__typename?: 'Sponsor';
-						id: string | number;
-						title: string;
-						canonicalPath: string;
-						image: { __typename?: 'Image'; url: string } | null;
-					} | null;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-			};
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-};
-
-export type GetDiscoverCollectionsPageDataQueryVariables = Exact<{
-	language: Language;
-}>;
-
-export type GetDiscoverCollectionsPageDataQuery = {
-	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		canonicalPath: string;
-		title: string;
-		startDate: string | null;
-		endDate: string | null;
-		duration: number;
-		collectionContentType: CollectionContentType;
-		image: { __typename?: 'Image'; id: string | number; url: string } | null;
-		allSequences: {
-			__typename?: 'SequenceConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		allRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
-	persons: {
-		__typename?: 'PersonConnection';
-		nodes: Array<{
-			__typename?: 'Person';
-			id: string | number;
-			name: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	serieses: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	conferences: {
-		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	sponsors: {
-		__typename?: 'SponsorConnection';
-		nodes: Array<{
-			__typename?: 'Sponsor';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; url: string } | null;
-			collections: {
-				__typename?: 'CollectionConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			sequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	audiobooks: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	storySeasons: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-	musicAlbums: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-	};
-};
-
-export type GetHomeStaticPropsQueryVariables = Exact<{
-	language: Language;
-}>;
-
-export type GetHomeStaticPropsQuery = {
-	__typename?: 'Query';
-	websiteRecentRecordings: {
-		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
-	};
-	testimonies: {
-		__typename?: 'TestimonyConnection';
-		nodes: Array<{
-			__typename?: 'Testimony';
-			id: string | number;
-			body: string;
-			author: string;
-		}> | null;
-	};
-	blogPosts: {
-		__typename?: 'BlogPostConnection';
-		nodes: Array<{
-			__typename?: 'BlogPost';
-			publishDate: string;
-			title: string;
-			teaser: string;
-			canonicalPath: string;
-			readingDuration: number | null;
-			image: { __typename?: 'Image'; url: string } | null;
-		}> | null;
-	};
-};
-
-export type GetLibraryHistoryPageDataQueryVariables = Exact<{
-	language: Language;
-	first: Scalars['Int'];
-	offset: Scalars['Int'];
-}>;
-
-export type GetLibraryHistoryPageDataQuery = {
-	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			downloadHistory: {
-				__typename?: 'UserDownloadHistoryConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				nodes: Array<{
-					__typename?: 'UserDownloadHistory';
+		nodes:
+			| Array<{
+					__typename?: 'PopularRecording';
 					recording: {
 						__typename?: 'Recording';
 						canonicalPath: string;
-						sequenceIndex: number | null;
+						sequenceIndex: number | null | undefined;
 						id: string | number;
 						title: string;
 						duration: number;
 						recordingContentType: RecordingContentType;
-						sequence: {
-							__typename?: 'Sequence';
-							id: string | number;
-							canonicalPath: string;
-							contentType: SequenceContentType;
-							title: string;
-							image: { __typename?: 'Image'; url: string } | null;
-							recordings: {
-								__typename?: 'RecordingConnection';
-								aggregate: { __typename?: 'Aggregate'; count: number } | null;
-							};
-						} | null;
+						sequence:
+							| {
+									__typename?: 'Sequence';
+									id: string | number;
+									canonicalPath: string;
+									contentType: SequenceContentType;
+									title: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+									recordings: {
+										__typename?: 'RecordingConnection';
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }
+							| null
+							| undefined;
 						writers: Array<{
 							__typename?: 'Person';
 							name: string;
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
-						sponsor: {
-							__typename?: 'Sponsor';
-							id: string | number;
-							title: string;
-							canonicalPath: string;
-							image: { __typename?: 'Image'; url: string } | null;
-						} | null;
+						sponsor:
+							| {
+									__typename?: 'Sponsor';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+							  }
+							| null
+							| undefined;
 						persons: Array<{
 							__typename?: 'Person';
 							name: string;
@@ -8693,17 +8562,850 @@ export type GetLibraryHistoryPageDataQuery = {
 						videoStreams: Array<{
 							__typename?: 'VideoFile';
 							url: string;
-							logUrl: string | null;
+							logUrl: string | null | undefined;
 							filesize: string;
 							mimeType: string;
 							duration: number;
 						}>;
 					};
-				}> | null;
-				pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-			};
-		};
-	} | null;
+			  }>
+			| null
+			| undefined;
+	};
+	storySeasons: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										logUrl: string | null | undefined;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+							  }>
+							| null
+							| undefined;
+					};
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	conferences: {
+		__typename?: 'CollectionConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					sequences: {
+						__typename?: 'SequenceConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Sequence';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									contentType: SequenceContentType;
+									duration: number;
+									summary: string;
+									speakers: {
+										__typename?: 'PersonConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+											  }>
+											| null
+											| undefined;
+									};
+									sequenceWriters: {
+										__typename?: 'PersonConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+											  }>
+											| null
+											| undefined;
+									};
+									allRecordings: {
+										__typename?: 'RecordingConnection';
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }>
+							| null
+							| undefined;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										logUrl: string | null | undefined;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+							  }>
+							| null
+							| undefined;
+					};
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetDiscoverCollectionsPageDataQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetDiscoverCollectionsPageDataQuery = {
+	__typename?: 'Query';
+	collection:
+		| {
+				__typename?: 'Collection';
+				id: string | number;
+				canonicalPath: string;
+				title: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				duration: number;
+				collectionContentType: CollectionContentType;
+				image:
+					| { __typename?: 'Image'; id: string | number; url: string }
+					| null
+					| undefined;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+	persons: {
+		__typename?: 'PersonConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					id: string | number;
+					name: string;
+					canonicalPath: string;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	serieses: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	conferences: {
+		__typename?: 'CollectionConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	sponsors: {
+		__typename?: 'SponsorConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+					collections: {
+						__typename?: 'CollectionConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					sequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	audiobooks: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	storySeasons: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+	musicAlbums: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetHomeStaticPropsQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetHomeStaticPropsQuery = {
+	__typename?: 'Query';
+	websiteRecentRecordings: {
+		__typename?: 'RecordingConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
+	};
+	testimonies: {
+		__typename?: 'TestimonyConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Testimony';
+					id: string | number;
+					body: string;
+					author: string;
+			  }>
+			| null
+			| undefined;
+	};
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes:
+			| Array<{
+					__typename?: 'BlogPost';
+					publishDate: string;
+					title: string;
+					teaser: string;
+					canonicalPath: string;
+					readingDuration: number | null | undefined;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetLibraryHistoryPageDataQueryVariables = Exact<{
+	language: Language;
+	first: Scalars['Int'];
+	offset: Scalars['Int'];
+}>;
+
+export type GetLibraryHistoryPageDataQuery = {
+	__typename?: 'Query';
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					downloadHistory: {
+						__typename?: 'UserDownloadHistoryConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+						nodes:
+							| Array<{
+									__typename?: 'UserDownloadHistory';
+									recording: {
+										__typename?: 'Recording';
+										canonicalPath: string;
+										sequenceIndex: number | null | undefined;
+										id: string | number;
+										title: string;
+										duration: number;
+										recordingContentType: RecordingContentType;
+										sequence:
+											| {
+													__typename?: 'Sequence';
+													id: string | number;
+													canonicalPath: string;
+													contentType: SequenceContentType;
+													title: string;
+													image:
+														| { __typename?: 'Image'; url: string }
+														| null
+														| undefined;
+													recordings: {
+														__typename?: 'RecordingConnection';
+														aggregate:
+															| { __typename?: 'Aggregate'; count: number }
+															| null
+															| undefined;
+													};
+											  }
+											| null
+											| undefined;
+										writers: Array<{
+											__typename?: 'Person';
+											name: string;
+											canonicalPath: string;
+											imageWithFallback: { __typename?: 'Image'; url: string };
+										}>;
+										sponsor:
+											| {
+													__typename?: 'Sponsor';
+													id: string | number;
+													title: string;
+													canonicalPath: string;
+													image:
+														| { __typename?: 'Image'; url: string }
+														| null
+														| undefined;
+											  }
+											| null
+											| undefined;
+										persons: Array<{
+											__typename?: 'Person';
+											name: string;
+											canonicalPath: string;
+											imageWithFallback: { __typename?: 'Image'; url: string };
+										}>;
+										audioFiles: Array<{
+											__typename?: 'AudioFile';
+											url: string;
+											filesize: string;
+											mimeType: string;
+											duration: number;
+										}>;
+										videoFiles: Array<{
+											__typename?: 'VideoFile';
+											url: string;
+											filesize: string;
+											mimeType: string;
+											duration: number;
+										}>;
+										videoStreams: Array<{
+											__typename?: 'VideoFile';
+											url: string;
+											logUrl: string | null | undefined;
+											filesize: string;
+											mimeType: string;
+											duration: number;
+										}>;
+									};
+							  }>
+							| null
+							| undefined;
+						pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+					};
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetLibraryDataQueryVariables = Exact<{
@@ -8724,91 +9426,700 @@ export type GetLibraryDataQueryVariables = Exact<{
 
 export type GetLibraryDataQuery = {
 	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			favorites: {
-				__typename?: 'UserFavoriteConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				nodes: Array<{
-					__typename?: 'UserFavorite';
-					createdAt: string;
-					entity:
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					favorites: {
+						__typename?: 'UserFavoriteConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+						nodes:
+							| Array<{
+									__typename?: 'UserFavorite';
+									createdAt: string;
+									entity:
+										| {
+												__typename: 'Collection';
+												id: string | number;
+												canonicalPath: string;
+												title: string;
+												startDate: string | null | undefined;
+												endDate: string | null | undefined;
+												duration: number;
+												collectionContentType: CollectionContentType;
+												image:
+													| {
+															__typename?: 'Image';
+															id: string | number;
+															url: string;
+													  }
+													| null
+													| undefined;
+												allSequences: {
+													__typename?: 'SequenceConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+												allRecordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| {
+												__typename: 'Person';
+												id: string | number;
+												name: string;
+												canonicalPath: string;
+												image:
+													| {
+															__typename?: 'Image';
+															id: string | number;
+															url: string;
+													  }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| {
+												__typename: 'Recording';
+												canonicalPath: string;
+												sequenceIndex: number | null | undefined;
+												id: string | number;
+												title: string;
+												duration: number;
+												recordingContentType: RecordingContentType;
+												sequence:
+													| {
+															__typename?: 'Sequence';
+															id: string | number;
+															canonicalPath: string;
+															contentType: SequenceContentType;
+															title: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+															recordings: {
+																__typename?: 'RecordingConnection';
+																aggregate:
+																	| { __typename?: 'Aggregate'; count: number }
+																	| null
+																	| undefined;
+															};
+													  }
+													| null
+													| undefined;
+												writers: Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+												}>;
+												sponsor:
+													| {
+															__typename?: 'Sponsor';
+															id: string | number;
+															title: string;
+															canonicalPath: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+													  }
+													| null
+													| undefined;
+												persons: Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+												}>;
+												audioFiles: Array<{
+													__typename?: 'AudioFile';
+													url: string;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+												videoFiles: Array<{
+													__typename?: 'VideoFile';
+													url: string;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+												videoStreams: Array<{
+													__typename?: 'VideoFile';
+													url: string;
+													logUrl: string | null | undefined;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+										  }
+										| {
+												__typename: 'Sequence';
+												viewerHasFavorited: boolean;
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												duration: number;
+												summary: string;
+												speakers: {
+													__typename?: 'PersonConnection';
+													nodes:
+														| Array<{
+																__typename?: 'Person';
+																name: string;
+																canonicalPath: string;
+																imageWithFallback: {
+																	__typename?: 'Image';
+																	url: string;
+																};
+														  }>
+														| null
+														| undefined;
+												};
+												sequenceWriters: {
+													__typename?: 'PersonConnection';
+													nodes:
+														| Array<{
+																__typename?: 'Person';
+																name: string;
+																canonicalPath: string;
+																imageWithFallback: {
+																	__typename?: 'Image';
+																	url: string;
+																};
+														  }>
+														| null
+														| undefined;
+												};
+												allRecordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+												favoritedRecordings: {
+													__typename?: 'RecordingConnection';
+													nodes:
+														| Array<{
+																__typename?: 'Recording';
+																canonicalPath: string;
+																sequenceIndex: number | null | undefined;
+																id: string | number;
+																title: string;
+																duration: number;
+																recordingContentType: RecordingContentType;
+																persons: Array<{
+																	__typename?: 'Person';
+																	name: string;
+																	canonicalPath: string;
+																	imageWithFallback: {
+																		__typename?: 'Image';
+																		url: string;
+																	};
+																}>;
+																sequence:
+																	| {
+																			__typename?: 'Sequence';
+																			id: string | number;
+																			canonicalPath: string;
+																			contentType: SequenceContentType;
+																			title: string;
+																			recordings: {
+																				__typename?: 'RecordingConnection';
+																				aggregate:
+																					| {
+																							__typename?: 'Aggregate';
+																							count: number;
+																					  }
+																					| null
+																					| undefined;
+																			};
+																			image:
+																				| { __typename?: 'Image'; url: string }
+																				| null
+																				| undefined;
+																	  }
+																	| null
+																	| undefined;
+																writers: Array<{
+																	__typename?: 'Person';
+																	name: string;
+																	canonicalPath: string;
+																	imageWithFallback: {
+																		__typename?: 'Image';
+																		url: string;
+																	};
+																}>;
+																audioFiles: Array<{
+																	__typename?: 'AudioFile';
+																	url: string;
+																	filesize: string;
+																	mimeType: string;
+																	duration: number;
+																}>;
+																videoFiles: Array<{
+																	__typename?: 'VideoFile';
+																	url: string;
+																	filesize: string;
+																	mimeType: string;
+																	duration: number;
+																}>;
+																videoStreams: Array<{
+																	__typename?: 'VideoFile';
+																	url: string;
+																	logUrl: string | null | undefined;
+																	filesize: string;
+																	mimeType: string;
+																	duration: number;
+																}>;
+														  }>
+														| null
+														| undefined;
+												};
+										  }
+										| {
+												__typename: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												collections: {
+													__typename?: 'CollectionConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+												sequences: {
+													__typename?: 'SequenceConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  };
+							  }>
+							| null
+							| undefined;
+					};
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetLibraryPlaylistPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetLibraryPlaylistPageDataQuery = {
+	__typename?: 'Query';
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					playlist:
 						| {
-								__typename: 'Collection';
-								id: string | number;
-								canonicalPath: string;
+								__typename?: 'UserPlaylist';
 								title: string;
-								startDate: string | null;
-								endDate: string | null;
-								duration: number;
-								collectionContentType: CollectionContentType;
-								image: {
-									__typename?: 'Image';
-									id: string | number;
-									url: string;
-								} | null;
-								allSequences: {
-									__typename?: 'SequenceConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-								allRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-						  }
-						| {
-								__typename: 'Person';
-								id: string | number;
-								name: string;
-								canonicalPath: string;
-								image: {
-									__typename?: 'Image';
-									id: string | number;
-									url: string;
-								} | null;
+								createdAt: string;
+								summary: string;
 								recordings: {
 									__typename?: 'RecordingConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
+									nodes:
+										| Array<{
+												__typename?: 'Recording';
+												canonicalPath: string;
+												sequenceIndex: number | null | undefined;
+												id: string | number;
+												title: string;
+												duration: number;
+												recordingContentType: RecordingContentType;
+												sequence:
+													| {
+															__typename?: 'Sequence';
+															id: string | number;
+															canonicalPath: string;
+															contentType: SequenceContentType;
+															title: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+															recordings: {
+																__typename?: 'RecordingConnection';
+																aggregate:
+																	| { __typename?: 'Aggregate'; count: number }
+																	| null
+																	| undefined;
+															};
+													  }
+													| null
+													| undefined;
+												writers: Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+												}>;
+												sponsor:
+													| {
+															__typename?: 'Sponsor';
+															id: string | number;
+															title: string;
+															canonicalPath: string;
+															image:
+																| { __typename?: 'Image'; url: string }
+																| null
+																| undefined;
+													  }
+													| null
+													| undefined;
+												persons: Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+												}>;
+												audioFiles: Array<{
+													__typename?: 'AudioFile';
+													url: string;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+												videoFiles: Array<{
+													__typename?: 'VideoFile';
+													url: string;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+												videoStreams: Array<{
+													__typename?: 'VideoFile';
+													url: string;
+													logUrl: string | null | undefined;
+													filesize: string;
+													mimeType: string;
+													duration: number;
+												}>;
+										  }>
+										| null
+										| undefined;
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
 								};
 						  }
-						| {
-								__typename: 'Recording';
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetLibraryPlaylistsDataQueryVariables = Exact<{
+	language: Language;
+	offset: InputMaybe<Scalars['Int']>;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetLibraryPlaylistsDataQuery = {
+	__typename?: 'Query';
+	me:
+		| {
+				__typename?: 'AuthenticatedUser';
+				user: {
+					__typename?: 'User';
+					playlists: {
+						__typename?: 'UserPlaylistConnection';
+						nodes:
+							| Array<{
+									__typename?: 'UserPlaylist';
+									id: string | number;
+									title: string;
+									recordings: {
+										__typename?: 'RecordingConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Recording';
+													canonicalPath: string;
+													sequenceIndex: number | null | undefined;
+													id: string | number;
+													title: string;
+													duration: number;
+													recordingContentType: RecordingContentType;
+													persons: Array<{
+														__typename?: 'Person';
+														name: string;
+														canonicalPath: string;
+														imageWithFallback: {
+															__typename?: 'Image';
+															url: string;
+														};
+													}>;
+													sequence:
+														| {
+																__typename?: 'Sequence';
+																id: string | number;
+																title: string;
+																contentType: SequenceContentType;
+																recordings: {
+																	__typename?: 'RecordingConnection';
+																	aggregate:
+																		| {
+																				__typename?: 'Aggregate';
+																				count: number;
+																		  }
+																		| null
+																		| undefined;
+																};
+														  }
+														| null
+														| undefined;
+													audioFiles: Array<{
+														__typename?: 'AudioFile';
+														url: string;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+													videoFiles: Array<{
+														__typename?: 'VideoFile';
+														url: string;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+													videoStreams: Array<{
+														__typename?: 'VideoFile';
+														url: string;
+														logUrl: string | null | undefined;
+														filesize: string;
+														mimeType: string;
+														duration: number;
+													}>;
+											  }>
+											| null
+											| undefined;
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }>
+							| null
+							| undefined;
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetPresenterAppearsPageDataQueryVariables = Exact<{
+	language: Language;
+	id: Scalars['ID'];
+	offset: InputMaybe<Scalars['Int']>;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetPresenterAppearsPageDataQuery = {
+	__typename?: 'Query';
+	person:
+		| {
+				__typename?: 'Person';
+				id: string | number;
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
+	collections: {
+		__typename?: 'CollectionConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetPresenterDetailPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+	language: Language;
+}>;
+
+export type GetPresenterDetailPageDataQuery = {
+	__typename?: 'Query';
+	person:
+		| {
+				__typename?: 'Person';
+				id: string | number;
+				name: string;
+				description: string;
+				canonicalUrl: string;
+				language: Language;
+				shareUrl: string;
+				website: string | null | undefined;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				sermons: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				audiobookTracks: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				musicTracks: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				stories: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				essentialRecordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
 								canonicalPath: string;
-								sequenceIndex: number | null;
+								sequenceIndex: number | null | undefined;
 								id: string | number;
 								title: string;
 								duration: number;
 								recordingContentType: RecordingContentType;
-								sequence: {
-									__typename?: 'Sequence';
-									id: string | number;
-									canonicalPath: string;
-									contentType: SequenceContentType;
-									title: string;
-									image: { __typename?: 'Image'; url: string } | null;
-									recordings: {
-										__typename?: 'RecordingConnection';
-										aggregate: {
-											__typename?: 'Aggregate';
-											count: number;
-										} | null;
-									};
-								} | null;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
 								writers: Array<{
 									__typename?: 'Person';
 									name: string;
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
-								sponsor: {
-									__typename?: 'Sponsor';
-									id: string | number;
-									title: string;
-									canonicalPath: string;
-									image: { __typename?: 'Image'; url: string } | null;
-								} | null;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
 								persons: Array<{
 									__typename?: 'Person';
 									name: string;
@@ -8832,614 +10143,194 @@ export type GetLibraryDataQuery = {
 								videoStreams: Array<{
 									__typename?: 'VideoFile';
 									url: string;
-									logUrl: string | null;
+									logUrl: string | null | undefined;
 									filesize: string;
 									mimeType: string;
 									duration: number;
 								}>;
-						  }
-						| {
-								__typename: 'Sequence';
-								viewerHasFavorited: boolean;
+						  }>
+						| null
+						| undefined;
+				};
+				recentRecordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
 								id: string | number;
 								title: string;
-								canonicalPath: string;
-								contentType: SequenceContentType;
 								duration: number;
-								summary: string;
-								speakers: {
-									__typename?: 'PersonConnection';
-									nodes: Array<{
-										__typename?: 'Person';
-										name: string;
-										canonicalPath: string;
-										imageWithFallback: { __typename?: 'Image'; url: string };
-									}> | null;
-								};
-								sequenceWriters: {
-									__typename?: 'PersonConnection';
-									nodes: Array<{
-										__typename?: 'Person';
-										name: string;
-										canonicalPath: string;
-										imageWithFallback: { __typename?: 'Image'; url: string };
-									}> | null;
-								};
-								allRecordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-								favoritedRecordings: {
-									__typename?: 'RecordingConnection';
-									nodes: Array<{
-										__typename?: 'Recording';
-										canonicalPath: string;
-										sequenceIndex: number | null;
-										id: string | number;
-										title: string;
-										duration: number;
-										recordingContentType: RecordingContentType;
-										persons: Array<{
-											__typename?: 'Person';
-											name: string;
-											canonicalPath: string;
-											imageWithFallback: { __typename?: 'Image'; url: string };
-										}>;
-										sequence: {
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
 											__typename?: 'Sequence';
 											id: string | number;
 											canonicalPath: string;
 											contentType: SequenceContentType;
 											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
 											recordings: {
 												__typename?: 'RecordingConnection';
-												aggregate: {
-													__typename?: 'Aggregate';
-													count: number;
-												} | null;
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
 											};
-											image: { __typename?: 'Image'; url: string } | null;
-										} | null;
-										writers: Array<{
-											__typename?: 'Person';
-											name: string;
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
 											canonicalPath: string;
-											imageWithFallback: { __typename?: 'Image'; url: string };
-										}>;
-										audioFiles: Array<{
-											__typename?: 'AudioFile';
-											url: string;
-											filesize: string;
-											mimeType: string;
-											duration: number;
-										}>;
-										videoFiles: Array<{
-											__typename?: 'VideoFile';
-											url: string;
-											filesize: string;
-											mimeType: string;
-											duration: number;
-										}>;
-										videoStreams: Array<{
-											__typename?: 'VideoFile';
-											url: string;
-											logUrl: string | null;
-											filesize: string;
-											mimeType: string;
-											duration: number;
-										}>;
-									}> | null;
-								};
-						  }
-						| {
-								__typename: 'Sponsor';
-								id: string | number;
-								title: string;
-								canonicalPath: string;
-								image: { __typename?: 'Image'; url: string } | null;
-								collections: {
-									__typename?: 'CollectionConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-								sequences: {
-									__typename?: 'SequenceConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-								recordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-						  };
-				}> | null;
-			};
-		};
-	} | null;
-};
-
-export type GetLibraryPlaylistPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetLibraryPlaylistPageDataQuery = {
-	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlist: {
-				__typename?: 'UserPlaylist';
-				title: string;
-				createdAt: string;
-				summary: string;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					nodes: Array<{
-						__typename?: 'Recording';
-						canonicalPath: string;
-						sequenceIndex: number | null;
-						id: string | number;
-						title: string;
-						duration: number;
-						recordingContentType: RecordingContentType;
-						sequence: {
-							__typename?: 'Sequence';
-							id: string | number;
-							canonicalPath: string;
-							contentType: SequenceContentType;
-							title: string;
-							image: { __typename?: 'Image'; url: string } | null;
-							recordings: {
-								__typename?: 'RecordingConnection';
-								aggregate: { __typename?: 'Aggregate'; count: number } | null;
-							};
-						} | null;
-						writers: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}>;
-						sponsor: {
-							__typename?: 'Sponsor';
-							id: string | number;
-							title: string;
-							canonicalPath: string;
-							image: { __typename?: 'Image'; url: string } | null;
-						} | null;
-						persons: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}>;
-						audioFiles: Array<{
-							__typename?: 'AudioFile';
-							url: string;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-						videoFiles: Array<{
-							__typename?: 'VideoFile';
-							url: string;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-						videoStreams: Array<{
-							__typename?: 'VideoFile';
-							url: string;
-							logUrl: string | null;
-							filesize: string;
-							mimeType: string;
-							duration: number;
-						}>;
-					}> | null;
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 				};
-			} | null;
-		};
-	} | null;
-};
-
-export type GetLibraryPlaylistsDataQueryVariables = Exact<{
-	language: Language;
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetLibraryPlaylistsDataQuery = {
-	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: {
-			__typename?: 'User';
-			playlists: {
-				__typename?: 'UserPlaylistConnection';
-				nodes: Array<{
-					__typename?: 'UserPlaylist';
-					id: string | number;
-					title: string;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						nodes: Array<{
-							__typename?: 'Recording';
-							canonicalPath: string;
-							sequenceIndex: number | null;
-							id: string | number;
-							title: string;
-							duration: number;
-							recordingContentType: RecordingContentType;
-							persons: Array<{
-								__typename?: 'Person';
-								name: string;
+				topRecordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
 								canonicalPath: string;
-								imageWithFallback: { __typename?: 'Image'; url: string };
-							}>;
-							sequence: {
-								__typename?: 'Sequence';
+								sequenceIndex: number | null | undefined;
 								id: string | number;
 								title: string;
-								contentType: SequenceContentType;
-								recordings: {
-									__typename?: 'RecordingConnection';
-									aggregate: { __typename?: 'Aggregate'; count: number } | null;
-								};
-							} | null;
-							audioFiles: Array<{
-								__typename?: 'AudioFile';
-								url: string;
-								filesize: string;
-								mimeType: string;
 								duration: number;
-							}>;
-							videoFiles: Array<{
-								__typename?: 'VideoFile';
-								url: string;
-								filesize: string;
-								mimeType: string;
-								duration: number;
-							}>;
-							videoStreams: Array<{
-								__typename?: 'VideoFile';
-								url: string;
-								logUrl: string | null;
-								filesize: string;
-								mimeType: string;
-								duration: number;
-							}>;
-						}> | null;
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		};
-	} | null;
-};
-
-export type GetPresenterAppearsPageDataQueryVariables = Exact<{
-	language: Language;
-	id: Scalars['ID'];
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetPresenterAppearsPageDataQuery = {
-	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
-	collections: {
-		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetPresenterDetailPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-	language: Language;
-}>;
-
-export type GetPresenterDetailPageDataQuery = {
-	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		name: string;
-		description: string;
-		canonicalUrl: string;
-		language: Language;
-		shareUrl: string;
-		website: string | null;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		sermons: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		audiobookTracks: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		musicTracks: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		stories: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		essentialRecordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-		};
-		recentRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-		};
-		topRecordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-		};
-	} | null;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+				};
+		  }
+		| null
+		| undefined;
 	sequences: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
-	};
-	collections: {
-		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			sequences: {
-				__typename?: 'SequenceConnection';
-				nodes: Array<{
+		nodes:
+			| Array<{
 					__typename?: 'Sequence';
 					id: string | number;
 					title: string;
@@ -9449,38 +10340,125 @@ export type GetPresenterDetailPageDataQuery = {
 					summary: string;
 					speakers: {
 						__typename?: 'PersonConnection';
-						nodes: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}> | null;
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
 					};
 					sequenceWriters: {
 						__typename?: 'PersonConnection';
-						nodes: Array<{
-							__typename?: 'Person';
-							name: string;
-							canonicalPath: string;
-							imageWithFallback: { __typename?: 'Image'; url: string };
-						}> | null;
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
 					};
 					allRecordings: {
 						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
 					};
-				}> | null;
-			};
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+			  }>
+			| null
+			| undefined;
+		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
+	};
+	collections: {
+		__typename?: 'CollectionConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					sequences: {
+						__typename?: 'SequenceConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Sequence';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									contentType: SequenceContentType;
+									duration: number;
+									summary: string;
+									speakers: {
+										__typename?: 'PersonConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+											  }>
+											| null
+											| undefined;
+									};
+									sequenceWriters: {
+										__typename?: 'PersonConnection';
+										nodes:
+											| Array<{
+													__typename?: 'Person';
+													name: string;
+													canonicalPath: string;
+													imageWithFallback: {
+														__typename?: 'Image';
+														url: string;
+													};
+											  }>
+											| null
+											| undefined;
+									};
+									allRecordings: {
+										__typename?: 'RecordingConnection';
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }>
+							| null
+							| undefined;
+					};
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 };
@@ -9494,11 +10472,14 @@ export type GetPresenterDetailPathsDataQuery = {
 	__typename?: 'Query';
 	persons: {
 		__typename?: 'PersonConnection';
-		nodes: Array<{
-			__typename?: 'Person';
-			id: string | number;
-			canonicalPath: string;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					id: string | number;
+					canonicalPath: string;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -9511,14 +10492,17 @@ export type GetPresenterListPageDataQuery = {
 	__typename?: 'Query';
 	persons: {
 		__typename?: 'PersonConnection';
-		nodes: Array<{
-			__typename?: 'Person';
-			canonicalPath: string;
-			givenName: string;
-			surname: string;
-			summary: string;
-			image: { __typename?: 'Image'; url: string } | null;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					canonicalPath: string;
+					givenName: string;
+					surname: string;
+					summary: string;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
 	};
 	personLetterCounts: Array<{
 		__typename?: 'LetterCount';
@@ -9555,79 +10539,103 @@ export type GetPresenterRecordingsPageDataQueryVariables = Exact<{
 
 export type GetPresenterRecordingsPageDataQuery = {
 	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		name: string;
-		canonicalPath: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	person:
+		| {
+				__typename?: 'Person';
 				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
+				name: string;
+				canonicalPath: string;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
 };
 
 export type GetPresenterRecordingsFeedDataQueryVariables = Exact<{
@@ -9636,47 +10644,59 @@ export type GetPresenterRecordingsFeedDataQueryVariables = Exact<{
 
 export type GetPresenterRecordingsFeedDataQuery = {
 	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		name: string;
-		canonicalUrl: string;
-		language: Language;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
+	person:
+		| {
+				__typename?: 'Person';
 				id: string | number;
-				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				name: string;
+				canonicalUrl: string;
+				language: Language;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetPresenterSequencesPageDataQueryVariables = Exact<{
@@ -9688,47 +10708,62 @@ export type GetPresenterSequencesPageDataQueryVariables = Exact<{
 
 export type GetPresenterSequencesPageDataQuery = {
 	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		name: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
+	person:
+		| {
+				__typename?: 'Person';
+				id: string | number;
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
 	sequences: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -9740,80 +10775,104 @@ export type GetPresenterTopPageDataQueryVariables = Exact<{
 
 export type GetPresenterTopPageDataQuery = {
 	__typename?: 'Query';
-	person: {
-		__typename?: 'Person';
-		id: string | number;
-		language: Language;
-		name: string;
-		canonicalPath: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	person:
+		| {
+				__typename?: 'Person';
 				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
+				language: Language;
+				name: string;
+				canonicalPath: string;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
 };
 
 export type GetMediaReleaseFormsPageDataQueryVariables = Exact<{
@@ -9822,13 +10881,16 @@ export type GetMediaReleaseFormsPageDataQueryVariables = Exact<{
 
 export type GetMediaReleaseFormsPageDataQuery = {
 	__typename?: 'Query';
-	mediaReleaseForm: {
-		__typename?: 'MediaReleaseForm';
-		id: string | number;
-		title: string;
-		summary: string;
-		isClosed: boolean;
-	} | null;
+	mediaReleaseForm:
+		| {
+				__typename?: 'MediaReleaseForm';
+				id: string | number;
+				title: string;
+				summary: string;
+				isClosed: boolean;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetMediaReleaseFormsPathsDataQueryVariables = Exact<{
@@ -9840,10 +10902,10 @@ export type GetMediaReleaseFormsPathsDataQuery = {
 	__typename?: 'Query';
 	mediaReleaseForms: {
 		__typename?: 'MediaReleaseFormConnection';
-		nodes: Array<{
-			__typename?: 'MediaReleaseForm';
-			id: string | number;
-		}> | null;
+		nodes:
+			| Array<{ __typename?: 'MediaReleaseForm'; id: string | number }>
+			| null
+			| undefined;
 	};
 };
 
@@ -9858,7 +10920,10 @@ export type SubmitMediaReleaseFormMutation = {
 	mediaReleaseCreate: {
 		__typename?: 'MediaReleasePayload';
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
-		mediaRelease: { __typename?: 'MediaRelease'; id: string | number } | null;
+		mediaRelease:
+			| { __typename?: 'MediaRelease'; id: string | number }
+			| null
+			| undefined;
 	};
 };
 
@@ -9873,26 +10938,38 @@ export type GetSearchResultsCollectionsQuery = {
 	__typename?: 'Query';
 	collections: {
 		__typename?: 'CollectionConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -9905,169 +10982,226 @@ export type GetSearchResultsPageDataQuery = {
 	__typename?: 'Query';
 	recordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 	sequences: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 	collections: {
 		__typename?: 'CollectionConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Sponsor';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; url: string } | null;
-			collections: {
-				__typename?: 'CollectionConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			sequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+					collections: {
+						__typename?: 'CollectionConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					sequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 	persons: {
 		__typename?: 'PersonConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Person';
-			id: string | number;
-			name: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					id: string | number;
+					name: string;
+					canonicalPath: string;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
 };
@@ -10083,18 +11217,27 @@ export type GetSearchResultsPersonsQuery = {
 	__typename?: 'Query';
 	persons: {
 		__typename?: 'PersonConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Person';
-			id: string | number;
-			name: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Person';
+					id: string | number;
+					name: string;
+					canonicalPath: string;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10109,38 +11252,50 @@ export type GetSearchResultsSequencesQuery = {
 	__typename?: 'Query';
 	sequences: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10155,26 +11310,38 @@ export type GetSearchResultsSponsorsQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Sponsor';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			image: { __typename?: 'Image'; url: string } | null;
-			collections: {
-				__typename?: 'CollectionConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			sequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			recordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+					collections: {
+						__typename?: 'CollectionConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					sequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10189,371 +11356,56 @@ export type GetSearchResultsRecordingsQuery = {
 	__typename?: 'Query';
 	recordings: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
-	};
-};
-
-export type GetSeriesDetailPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetSeriesDetailPageDataQuery = {
-	__typename?: 'Query';
-	series: {
-		__typename?: 'Sequence';
-		canonicalUrl: string;
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		duration: number;
-		description: string;
-		startDate: string | null;
-		endDate: string | null;
-		shareUrl: string;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		image: { __typename?: 'Image'; url: string } | null;
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-		};
-	} | null;
-};
-
-export type GetSeriesFeedDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetSeriesFeedDataQuery = {
-	__typename?: 'Query';
-	series: {
-		__typename?: 'Sequence';
-		title: string;
-		canonicalUrl: string;
-		language: Language;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				id: string | number;
-				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
-};
-
-export type GetSeriesDetailPathsDataQueryVariables = Exact<{
-	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetSeriesDetailPathsDataQuery = {
-	__typename?: 'Query';
-	serieses: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{ __typename?: 'Sequence'; canonicalPath: string }> | null;
-	};
-};
-
-export type GetSeriesListPageDataQueryVariables = Exact<{
-	language: Language;
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetSeriesListPageDataQuery = {
-	__typename?: 'Query';
-	serieses: {
-		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetSeriesListPathsDataQueryVariables = Exact<{
-	language: Language;
-}>;
-
-export type GetSeriesListPathsDataQuery = {
-	__typename?: 'Query';
-	serieses: {
-		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetSermonDetailDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetSermonDetailDataQuery = {
-	__typename?: 'Query';
-	sermon: {
-		__typename?: 'Recording';
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: RecordingContentType;
-		description: string | null;
-		recordingDate: string | null;
-		sequenceIndex: number | null;
-		canonicalUrl: string;
-		shareUrl: string;
-		copyrightYear: number | null;
-		canonicalPath: string;
-		duration: number;
-		isDownloadAllowed: boolean;
-		speakers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		writers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		attachments: Array<{
-			__typename?: 'Attachment';
-			filename: string;
-			url: string;
-		}>;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		recordingTags: {
-			__typename?: 'RecordingTagConnection';
-			nodes: Array<{
-				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string | number; name: string };
-			}> | null;
-		};
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		sequence: {
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			contentType: SequenceContentType;
-			canonicalPath: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+		nodes:
+			| Array<{
 					__typename?: 'Recording';
 					canonicalPath: string;
-					sequenceIndex: number | null;
+					sequenceIndex: number | null | undefined;
 					id: string | number;
 					title: string;
 					duration: number;
 					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
 					persons: Array<{
 						__typename?: 'Person';
 						name: string;
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						title: string;
-						contentType: SequenceContentType;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -10571,74 +11423,490 @@ export type GetSermonDetailDataQuery = {
 					videoStreams: Array<{
 						__typename?: 'VideoFile';
 						url: string;
-						logUrl: string | null;
+						logUrl: string | null | undefined;
 						filesize: string;
 						mimeType: string;
 						duration: number;
 					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		} | null;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		transcript: { __typename?: 'Transcript'; text: string } | null;
-		sequencePreviousRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		sequenceNextRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		distributionAgreement: {
-			__typename?: 'DistributionAgreement';
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			license: {
-				__typename?: 'License';
-				summary: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-		} | null;
-		audioFiles: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoFiles: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoStreams: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			logUrl: string | null;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoDownloads: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			height: number;
-			width: number;
-		}>;
-		audioDownloads: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			bitrate: number;
-		}>;
-	} | null;
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetSeriesDetailPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetSeriesDetailPageDataQuery = {
+	__typename?: 'Query';
+	series:
+		| {
+				__typename?: 'Sequence';
+				canonicalUrl: string;
+				language: Language;
+				id: string | number;
+				title: string;
+				contentType: SequenceContentType;
+				duration: number;
+				description: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				shareUrl: string;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetSeriesFeedDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetSeriesFeedDataQuery = {
+	__typename?: 'Query';
+	series:
+		| {
+				__typename?: 'Sequence';
+				title: string;
+				canonicalUrl: string;
+				language: Language;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
+};
+
+export type GetSeriesDetailPathsDataQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetSeriesDetailPathsDataQuery = {
+	__typename?: 'Query';
+	serieses: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{ __typename?: 'Sequence'; canonicalPath: string }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetSeriesListPageDataQueryVariables = Exact<{
+	language: Language;
+	offset: InputMaybe<Scalars['Int']>;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetSeriesListPageDataQuery = {
+	__typename?: 'Query';
+	serieses: {
+		__typename?: 'SequenceConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetSeriesListPathsDataQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetSeriesListPathsDataQuery = {
+	__typename?: 'Query';
+	serieses: {
+		__typename?: 'SequenceConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetSermonDetailDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetSermonDetailDataQuery = {
+	__typename?: 'Query';
+	sermon:
+		| {
+				__typename?: 'Recording';
+				language: Language;
+				id: string | number;
+				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
+				duration: number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
+				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												logUrl: string | null | undefined;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					logUrl: string | null | undefined;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSermonDetailStaticPathsQueryVariables = Exact<{
@@ -10650,11 +11918,14 @@ export type GetSermonDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			id: string | number;
-			canonicalPath: string;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					id: string | number;
+					canonicalPath: string;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10669,69 +11940,81 @@ export type GetSermonListPageDataQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -10743,36 +12026,42 @@ export type GetSermonListFeedDataQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			id: string | number;
-			title: string;
-			contentType: RecordingContentType;
-			description: string | null;
-			publishDate: string | null;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				id: string | number;
-				url: string;
-				filesize: string;
-				duration: number;
-				mimeType: string;
-				bitrate: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				id: string | number;
-				url: string;
-				filesize: string;
-				duration: number;
-				mimeType: string;
-				bitrate: number;
-				container: string;
-			}>;
-			persons: Array<{ __typename?: 'Person'; name: string }>;
-			sequence: { __typename?: 'Sequence'; title: string } | null;
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					id: string | number;
+					title: string;
+					contentType: RecordingContentType;
+					description: string | null | undefined;
+					publishDate: string | null | undefined;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						id: string | number;
+						url: string;
+						filesize: string;
+						duration: number;
+						mimeType: string;
+						bitrate: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						id: string | number;
+						url: string;
+						filesize: string;
+						duration: number;
+						mimeType: string;
+						bitrate: number;
+						container: string;
+					}>;
+					persons: Array<{ __typename?: 'Person'; name: string }>;
+					sequence:
+						| { __typename?: 'Sequence'; title: string }
+						| null
+						| undefined;
+					sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10785,7 +12074,7 @@ export type GetSermonListPagePathsDataQuery = {
 	__typename?: 'Query';
 	sermons: {
 		__typename?: 'RecordingConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -10797,71 +12086,89 @@ export type GetTrendingTeachingsPageDataQuery = {
 	__typename?: 'Query';
 	recordings: {
 		__typename?: 'PopularRecordingConnection';
-		nodes: Array<{
-			__typename?: 'PopularRecording';
-			recording: {
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
-				id: string | number;
-				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		nodes:
+			| Array<{
+					__typename?: 'PopularRecording';
+					recording: {
+						__typename?: 'Recording';
+						canonicalPath: string;
+						sequenceIndex: number | null | undefined;
+						id: string | number;
+						title: string;
+						duration: number;
+						recordingContentType: RecordingContentType;
+						sequence:
+							| {
+									__typename?: 'Sequence';
+									id: string | number;
+									canonicalPath: string;
+									contentType: SequenceContentType;
+									title: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+									recordings: {
+										__typename?: 'RecordingConnection';
+										aggregate:
+											| { __typename?: 'Aggregate'; count: number }
+											| null
+											| undefined;
+									};
+							  }
+							| null
+							| undefined;
+						writers: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>;
+						sponsor:
+							| {
+									__typename?: 'Sponsor';
+									id: string | number;
+									title: string;
+									canonicalPath: string;
+									image:
+										| { __typename?: 'Image'; url: string }
+										| null
+										| undefined;
+							  }
+							| null
+							| undefined;
+						persons: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>;
+						audioFiles: Array<{
+							__typename?: 'AudioFile';
+							url: string;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
+						videoFiles: Array<{
+							__typename?: 'VideoFile';
+							url: string;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
+						videoStreams: Array<{
+							__typename?: 'VideoFile';
+							url: string;
+							logUrl: string | null | undefined;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
 					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			};
-		}> | null;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -10871,96 +12178,118 @@ export type GetSongAlbumsDetailPageDataQueryVariables = Exact<{
 
 export type GetSongAlbumsDetailPageDataQuery = {
 	__typename?: 'Query';
-	musicAlbum: {
-		__typename?: 'Sequence';
-		canonicalUrl: string;
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		duration: number;
-		description: string;
-		startDate: string | null;
-		endDate: string | null;
-		shareUrl: string;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		image: { __typename?: 'Image'; url: string } | null;
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	musicAlbum:
+		| {
+				__typename?: 'Sequence';
+				canonicalUrl: string;
+				language: Language;
 				id: string | number;
 				title: string;
+				contentType: SequenceContentType;
 				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-		};
-	} | null;
+				description: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				shareUrl: string;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSongAlbumFeedDataQueryVariables = Exact<{
@@ -10969,45 +12298,57 @@ export type GetSongAlbumFeedDataQueryVariables = Exact<{
 
 export type GetSongAlbumFeedDataQuery = {
 	__typename?: 'Query';
-	musicAlbum: {
-		__typename?: 'Sequence';
-		title: string;
-		canonicalUrl: string;
-		language: Language;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				id: string | number;
+	musicAlbum:
+		| {
+				__typename?: 'Sequence';
 				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				canonicalUrl: string;
+				language: Language;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSongAlbumsDetailPathsDataQueryVariables = Exact<{
@@ -11019,7 +12360,10 @@ export type GetSongAlbumsDetailPathsDataQuery = {
 	__typename?: 'Query';
 	musicAlbums: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{ __typename?: 'Sequence'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sequence'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -11031,177 +12375,231 @@ export type GetSongAlbumsListPageDataQuery = {
 	__typename?: 'Query';
 	musicAlbums: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
 					id: string | number;
 					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
 					duration: number;
-					recordingContentType: RecordingContentType;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						canonicalPath: string;
-						contentType: SequenceContentType;
-						title: string;
-						image: { __typename?: 'Image'; url: string } | null;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					writers: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sponsor: {
-						__typename?: 'Sponsor';
-						id: string | number;
-						title: string;
-						canonicalPath: string;
-						image: { __typename?: 'Image'; url: string } | null;
-					} | null;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-			};
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					summary: string;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										logUrl: string | null | undefined;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+							  }>
+							| null
+							| undefined;
+					};
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 	musicBookTags: {
 		__typename?: 'TagConnection';
-		nodes: Array<{
-			__typename?: 'Tag';
-			id: string | number;
-			name: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
+		nodes:
+			| Array<{
+					__typename?: 'Tag';
 					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						canonicalPath: string;
-						contentType: SequenceContentType;
-						title: string;
-						image: { __typename?: 'Image'; url: string } | null;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					writers: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sponsor: {
-						__typename?: 'Sponsor';
-						id: string | number;
-						title: string;
-						canonicalPath: string;
-						image: { __typename?: 'Image'; url: string } | null;
-					} | null;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
+					name: string;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Recording';
+									canonicalPath: string;
+									sequenceIndex: number | null | undefined;
+									id: string | number;
+									title: string;
+									duration: number;
+									recordingContentType: RecordingContentType;
+									sequence:
+										| {
+												__typename?: 'Sequence';
+												id: string | number;
+												canonicalPath: string;
+												contentType: SequenceContentType;
+												title: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+												recordings: {
+													__typename?: 'RecordingConnection';
+													aggregate:
+														| { __typename?: 'Aggregate'; count: number }
+														| null
+														| undefined;
+												};
+										  }
+										| null
+										| undefined;
+									writers: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									sponsor:
+										| {
+												__typename?: 'Sponsor';
+												id: string | number;
+												title: string;
+												canonicalPath: string;
+												image:
+													| { __typename?: 'Image'; url: string }
+													| null
+													| undefined;
+										  }
+										| null
+										| undefined;
+									persons: Array<{
+										__typename?: 'Person';
+										name: string;
+										canonicalPath: string;
+										imageWithFallback: { __typename?: 'Image'; url: string };
+									}>;
+									audioFiles: Array<{
+										__typename?: 'AudioFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoFiles: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+									videoStreams: Array<{
+										__typename?: 'VideoFile';
+										url: string;
+										logUrl: string | null | undefined;
+										filesize: string;
+										mimeType: string;
+										duration: number;
+									}>;
+							  }>
+							| null
+							| undefined;
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -11214,68 +12612,80 @@ export type GetSongBooksDetailPageDataQuery = {
 	__typename?: 'Query';
 	musicTracks: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				title: string;
-				image: { __typename?: 'Image'; url: string } | null;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			writers: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sponsor: {
-				__typename?: 'Sponsor';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								title: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					writers: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sponsor:
+						| {
+								__typename?: 'Sponsor';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								image: { __typename?: 'Image'; url: string } | null | undefined;
+						  }
+						| null
+						| undefined;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
 	};
 };
 
@@ -11287,578 +12697,167 @@ export type GetBookSongDetailDataQueryVariables = Exact<{
 
 export type GetBookSongDetailDataQuery = {
 	__typename?: 'Query';
-	musicTrack: {
-		__typename?: 'Recording';
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: RecordingContentType;
-		description: string | null;
-		recordingDate: string | null;
-		sequenceIndex: number | null;
-		canonicalUrl: string;
-		shareUrl: string;
-		copyrightYear: number | null;
-		canonicalPath: string;
-		duration: number;
-		isDownloadAllowed: boolean;
-		speakers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		writers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		attachments: Array<{
-			__typename?: 'Attachment';
-			filename: string;
-			url: string;
-		}>;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		recordingTags: {
-			__typename?: 'RecordingTagConnection';
-			nodes: Array<{
-				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string | number; name: string };
-			}> | null;
-		};
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		sequence: {
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			contentType: SequenceContentType;
-			canonicalPath: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						title: string;
-						contentType: SequenceContentType;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		} | null;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		transcript: { __typename?: 'Transcript'; text: string } | null;
-		sequencePreviousRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		sequenceNextRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		distributionAgreement: {
-			__typename?: 'DistributionAgreement';
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			license: {
-				__typename?: 'License';
-				summary: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-		} | null;
-		audioFiles: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoFiles: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoStreams: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			logUrl: string | null;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoDownloads: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			height: number;
-			width: number;
-		}>;
-		audioDownloads: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			bitrate: number;
-		}>;
-	} | null;
-	recordings: {
-		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			canonicalPath: string;
-			sequenceIndex: number | null;
-			id: string | number;
-			title: string;
-			duration: number;
-			recordingContentType: RecordingContentType;
-			persons: Array<{
-				__typename?: 'Person';
-				name: string;
-				canonicalPath: string;
-				imageWithFallback: { __typename?: 'Image'; url: string };
-			}>;
-			sequence: {
-				__typename?: 'Sequence';
-				id: string | number;
-				title: string;
-				contentType: SequenceContentType;
-				recordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			} | null;
-			audioFiles: Array<{
-				__typename?: 'AudioFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoFiles: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-			videoStreams: Array<{
-				__typename?: 'VideoFile';
-				url: string;
-				logUrl: string | null;
-				filesize: string;
-				mimeType: string;
-				duration: number;
-			}>;
-		}> | null;
-	};
-};
-
-export type GetSongDetailDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetSongDetailDataQuery = {
-	__typename?: 'Query';
-	musicTrack: {
-		__typename?: 'Recording';
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: RecordingContentType;
-		description: string | null;
-		recordingDate: string | null;
-		sequenceIndex: number | null;
-		canonicalUrl: string;
-		shareUrl: string;
-		copyrightYear: number | null;
-		canonicalPath: string;
-		duration: number;
-		isDownloadAllowed: boolean;
-		speakers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		writers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		attachments: Array<{
-			__typename?: 'Attachment';
-			filename: string;
-			url: string;
-		}>;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		recordingTags: {
-			__typename?: 'RecordingTagConnection';
-			nodes: Array<{
-				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string | number; name: string };
-			}> | null;
-		};
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		sequence: {
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			contentType: SequenceContentType;
-			canonicalPath: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
-					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
-					duration: number;
-					recordingContentType: RecordingContentType;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						title: string;
-						contentType: SequenceContentType;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		} | null;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		transcript: { __typename?: 'Transcript'; text: string } | null;
-		sequencePreviousRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		sequenceNextRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		distributionAgreement: {
-			__typename?: 'DistributionAgreement';
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			license: {
-				__typename?: 'License';
-				summary: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-		} | null;
-		audioFiles: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoFiles: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoStreams: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			logUrl: string | null;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoDownloads: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			height: number;
-			width: number;
-		}>;
-		audioDownloads: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			bitrate: number;
-		}>;
-	} | null;
-};
-
-export type GetSongDetailStaticPathsQueryVariables = Exact<{
-	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetSongDetailStaticPathsQuery = {
-	__typename?: 'Query';
-	musicTracks: {
-		__typename?: 'RecordingConnection';
-		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
-	};
-};
-
-export type GetSponsorConferencesPageDataQueryVariables = Exact<{
-	language: Language;
-	id: Scalars['ID'];
-	offset: InputMaybe<Scalars['Int']>;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetSponsorConferencesPageDataQuery = {
-	__typename?: 'Query';
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
-	conferences: {
-		__typename?: 'CollectionConnection';
-		nodes: Array<{
-			__typename?: 'Collection';
-			id: string | number;
-			canonicalPath: string;
-			title: string;
-			startDate: string | null;
-			endDate: string | null;
-			duration: number;
-			collectionContentType: CollectionContentType;
-			image: { __typename?: 'Image'; id: string | number; url: string } | null;
-			allSequences: {
-				__typename?: 'SequenceConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
-	};
-};
-
-export type GetSponsorConferencesPathsDataQueryVariables = Exact<{
-	language: Language;
-	first: InputMaybe<Scalars['Int']>;
-}>;
-
-export type GetSponsorConferencesPathsDataQuery = {
-	__typename?: 'Query';
-	sponsors: {
-		__typename?: 'SponsorConnection';
-		nodes: Array<{ __typename?: 'Sponsor'; id: string | number }> | null;
-	};
-};
-
-export type GetSponsorDetailPageDataQueryVariables = Exact<{
-	id: Scalars['ID'];
-}>;
-
-export type GetSponsorDetailPageDataQuery = {
-	__typename?: 'Query';
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		location: string | null;
-		website: string | null;
-		description: string;
-		canonicalUrl: string;
-		language: Language;
-		shareUrl: string;
-		image: { __typename?: 'Image'; url: string } | null;
-		collections: {
-			__typename?: 'CollectionConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Collection';
-				id: string | number;
-				canonicalPath: string;
-				title: string;
-				startDate: string | null;
-				endDate: string | null;
-				duration: number;
-				collectionContentType: CollectionContentType;
-				image: {
-					__typename?: 'Image';
-					id: string | number;
-					url: string;
-				} | null;
-				allSequences: {
-					__typename?: 'SequenceConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-				allRecordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			}> | null;
-		};
-		sequences: {
-			__typename?: 'SequenceConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Sequence';
-				id: string | number;
-				title: string;
-				canonicalPath: string;
-				contentType: SequenceContentType;
-				duration: number;
-				summary: string;
-				speakers: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
-				};
-				sequenceWriters: {
-					__typename?: 'PersonConnection';
-					nodes: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}> | null;
-				};
-				allRecordings: {
-					__typename?: 'RecordingConnection';
-					aggregate: { __typename?: 'Aggregate'; count: number } | null;
-				};
-			}> | null;
-		};
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
+	musicTrack:
+		| {
 				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+				language: Language;
 				id: string | number;
 				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
 				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
 					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
 				writers: Array<{
 					__typename?: 'Person';
 					name: string;
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
 				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												logUrl: string | null | undefined;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -11876,14 +12875,585 @@ export type GetSponsorDetailPageDataQuery = {
 				videoStreams: Array<{
 					__typename?: 'VideoFile';
 					url: string;
-					logUrl: string | null;
+					logUrl: string | null | undefined;
 					filesize: string;
 					mimeType: string;
 					duration: number;
 				}>;
-			}> | null;
-		};
-	} | null;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
+	recordings: {
+		__typename?: 'RecordingConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null | undefined;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sequence:
+						| {
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								contentType: SequenceContentType;
+								recordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }
+						| null
+						| undefined;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null | undefined;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+			  }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetSongDetailDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetSongDetailDataQuery = {
+	__typename?: 'Query';
+	musicTrack:
+		| {
+				__typename?: 'Recording';
+				language: Language;
+				id: string | number;
+				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
+				duration: number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
+				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												logUrl: string | null | undefined;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					logUrl: string | null | undefined;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
+};
+
+export type GetSongDetailStaticPathsQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetSongDetailStaticPathsQuery = {
+	__typename?: 'Query';
+	musicTracks: {
+		__typename?: 'RecordingConnection';
+		nodes:
+			| Array<{ __typename?: 'Recording'; canonicalPath: string }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetSponsorConferencesPageDataQueryVariables = Exact<{
+	language: Language;
+	id: Scalars['ID'];
+	offset: InputMaybe<Scalars['Int']>;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetSponsorConferencesPageDataQuery = {
+	__typename?: 'Query';
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
+	conferences: {
+		__typename?: 'CollectionConnection';
+		nodes:
+			| Array<{
+					__typename?: 'Collection';
+					id: string | number;
+					canonicalPath: string;
+					title: string;
+					startDate: string | null | undefined;
+					endDate: string | null | undefined;
+					duration: number;
+					collectionContentType: CollectionContentType;
+					image:
+						| { __typename?: 'Image'; id: string | number; url: string }
+						| null
+						| undefined;
+					allSequences: {
+						__typename?: 'SequenceConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
+	};
+};
+
+export type GetSponsorConferencesPathsDataQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetSponsorConferencesPathsDataQuery = {
+	__typename?: 'Query';
+	sponsors: {
+		__typename?: 'SponsorConnection';
+		nodes:
+			| Array<{ __typename?: 'Sponsor'; id: string | number }>
+			| null
+			| undefined;
+	};
+};
+
+export type GetSponsorDetailPageDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetSponsorDetailPageDataQuery = {
+	__typename?: 'Query';
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				location: string | null | undefined;
+				website: string | null | undefined;
+				description: string;
+				canonicalUrl: string;
+				language: Language;
+				shareUrl: string;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				collections: {
+					__typename?: 'CollectionConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Collection';
+								id: string | number;
+								canonicalPath: string;
+								title: string;
+								startDate: string | null | undefined;
+								endDate: string | null | undefined;
+								duration: number;
+								collectionContentType: CollectionContentType;
+								image:
+									| { __typename?: 'Image'; id: string | number; url: string }
+									| null
+									| undefined;
+								allSequences: {
+									__typename?: 'SequenceConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+								allRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Sequence';
+								id: string | number;
+								title: string;
+								canonicalPath: string;
+								contentType: SequenceContentType;
+								duration: number;
+								summary: string;
+								speakers: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								sequenceWriters: {
+									__typename?: 'PersonConnection';
+									nodes:
+										| Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+										  }>
+										| null
+										| undefined;
+								};
+								allRecordings: {
+									__typename?: 'RecordingConnection';
+									aggregate:
+										| { __typename?: 'Aggregate'; count: number }
+										| null
+										| undefined;
+								};
+						  }>
+						| null
+						| undefined;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSponsorDetailPathsDataQueryVariables = Exact<{
@@ -11895,7 +13465,10 @@ export type GetSponsorDetailPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Array<{ __typename?: 'Sponsor'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sponsor'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -11908,12 +13481,15 @@ export type GetSponsorListPageDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Array<{
-			__typename?: 'Sponsor';
-			canonicalPath: string;
-			title: string;
-			image: { __typename?: 'Image'; url: string } | null;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Sponsor';
+					canonicalPath: string;
+					title: string;
+					image: { __typename?: 'Image'; url: string } | null | undefined;
+			  }>
+			| null
+			| undefined;
 	};
 	sponsorLetterCounts: Array<{
 		__typename?: 'LetterCount';
@@ -11952,47 +13528,62 @@ export type GetSponsorSeriesPageDataQueryVariables = Exact<{
 
 export type GetSponsorSeriesPageDataQuery = {
 	__typename?: 'Query';
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
 	sequences: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -12005,7 +13596,10 @@ export type GetSponsorSeriesPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Array<{ __typename?: 'Sponsor'; id: string | number }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sponsor'; id: string | number }>
+			| null
+			| undefined;
 	};
 };
 
@@ -12017,79 +13611,103 @@ export type GetSponsorTeachingsPageDataQueryVariables = Exact<{
 
 export type GetSponsorTeachingsPageDataQuery = {
 	__typename?: 'Query';
-	sponsor: {
-		__typename?: 'Sponsor';
-		id: string | number;
-		title: string;
-		canonicalPath: string;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
 				id: string | number;
 				title: string;
-				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		imageWithFallback: { __typename?: 'Image'; url: string };
-	} | null;
+				canonicalPath: string;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+				imageWithFallback: { __typename?: 'Image'; url: string };
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSponsorTeachingsFeedDataQueryVariables = Exact<{
@@ -12098,45 +13716,57 @@ export type GetSponsorTeachingsFeedDataQueryVariables = Exact<{
 
 export type GetSponsorTeachingsFeedDataQuery = {
 	__typename?: 'Query';
-	sponsor: {
-		__typename?: 'Sponsor';
-		title: string;
-		canonicalUrl: string;
-		language: Language;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
-				id: string | number;
+	sponsor:
+		| {
+				__typename?: 'Sponsor';
 				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				canonicalUrl: string;
+				language: Language;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetSponsorTeachingsPathsDataQueryVariables = Exact<{
@@ -12148,7 +13778,10 @@ export type GetSponsorTeachingsPathsDataQuery = {
 	__typename?: 'Query';
 	sponsors: {
 		__typename?: 'SponsorConnection';
-		nodes: Array<{ __typename?: 'Sponsor'; id: string | number }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sponsor'; id: string | number }>
+			| null
+			| undefined;
 	};
 };
 
@@ -12158,96 +13791,118 @@ export type GetStoryAlbumDetailPageDataQueryVariables = Exact<{
 
 export type GetStoryAlbumDetailPageDataQuery = {
 	__typename?: 'Query';
-	storySeason: {
-		__typename?: 'Sequence';
-		canonicalUrl: string;
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: SequenceContentType;
-		duration: number;
-		description: string;
-		startDate: string | null;
-		endDate: string | null;
-		shareUrl: string;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		image: { __typename?: 'Image'; url: string } | null;
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			nodes: Array<{
-				__typename?: 'Recording';
-				canonicalPath: string;
-				sequenceIndex: number | null;
+	storySeason:
+		| {
+				__typename?: 'Sequence';
+				canonicalUrl: string;
+				language: Language;
 				id: string | number;
 				title: string;
+				contentType: SequenceContentType;
 				duration: number;
-				recordingContentType: RecordingContentType;
-				sequence: {
-					__typename?: 'Sequence';
-					id: string | number;
-					canonicalPath: string;
-					contentType: SequenceContentType;
-					title: string;
-					image: { __typename?: 'Image'; url: string } | null;
-					recordings: {
-						__typename?: 'RecordingConnection';
-						aggregate: { __typename?: 'Aggregate'; count: number } | null;
-					};
-				} | null;
-				writers: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				sponsor: {
-					__typename?: 'Sponsor';
-					id: string | number;
-					title: string;
-					canonicalPath: string;
-					image: { __typename?: 'Image'; url: string } | null;
-				} | null;
-				persons: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-				videoStreams: Array<{
-					__typename?: 'VideoFile';
-					url: string;
-					logUrl: string | null;
-					filesize: string;
-					mimeType: string;
-					duration: number;
-				}>;
-			}> | null;
-		};
-	} | null;
+				description: string;
+				startDate: string | null | undefined;
+				endDate: string | null | undefined;
+				shareUrl: string;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								canonicalPath: string;
+								sequenceIndex: number | null | undefined;
+								id: string | number;
+								title: string;
+								duration: number;
+								recordingContentType: RecordingContentType;
+								sequence:
+									| {
+											__typename?: 'Sequence';
+											id: string | number;
+											canonicalPath: string;
+											contentType: SequenceContentType;
+											title: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+											recordings: {
+												__typename?: 'RecordingConnection';
+												aggregate:
+													| { __typename?: 'Aggregate'; count: number }
+													| null
+													| undefined;
+											};
+									  }
+									| null
+									| undefined;
+								writers: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								sponsor:
+									| {
+											__typename?: 'Sponsor';
+											id: string | number;
+											title: string;
+											canonicalPath: string;
+											image:
+												| { __typename?: 'Image'; url: string }
+												| null
+												| undefined;
+									  }
+									| null
+									| undefined;
+								persons: Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+								}>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+								videoStreams: Array<{
+									__typename?: 'VideoFile';
+									url: string;
+									logUrl: string | null | undefined;
+									filesize: string;
+									mimeType: string;
+									duration: number;
+								}>;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetStoryAlbumFeedDataQueryVariables = Exact<{
@@ -12256,49 +13911,61 @@ export type GetStoryAlbumFeedDataQueryVariables = Exact<{
 
 export type GetStoryAlbumFeedDataQuery = {
 	__typename?: 'Query';
-	storySeason: {
-		__typename?: 'Sequence';
-		id: string | number;
-		title: string;
-		canonicalUrl: string;
-		language: Language;
-		image: { __typename?: 'Image'; url: string } | null;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			nodes: Array<{
-				__typename?: 'Recording';
+	storySeason:
+		| {
+				__typename?: 'Sequence';
 				id: string | number;
 				title: string;
-				contentType: RecordingContentType;
-				description: string | null;
-				publishDate: string | null;
-				authors: Array<{ __typename?: 'Person'; name: string }>;
-				narrators: Array<{ __typename?: 'Person'; name: string }>;
-				audioFiles: Array<{
-					__typename?: 'AudioFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-				}>;
-				videoFiles: Array<{
-					__typename?: 'VideoFile';
-					id: string | number;
-					url: string;
-					filesize: string;
-					duration: number;
-					mimeType: string;
-					bitrate: number;
-					container: string;
-				}>;
-				persons: Array<{ __typename?: 'Person'; name: string }>;
-				sequence: { __typename?: 'Sequence'; title: string } | null;
-				sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			}> | null;
-		};
-	} | null;
+				canonicalUrl: string;
+				language: Language;
+				image: { __typename?: 'Image'; url: string } | null | undefined;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					nodes:
+						| Array<{
+								__typename?: 'Recording';
+								id: string | number;
+								title: string;
+								contentType: RecordingContentType;
+								description: string | null | undefined;
+								publishDate: string | null | undefined;
+								authors: Array<{ __typename?: 'Person'; name: string }>;
+								narrators: Array<{ __typename?: 'Person'; name: string }>;
+								audioFiles: Array<{
+									__typename?: 'AudioFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+								}>;
+								videoFiles: Array<{
+									__typename?: 'VideoFile';
+									id: string | number;
+									url: string;
+									filesize: string;
+									duration: number;
+									mimeType: string;
+									bitrate: number;
+									container: string;
+								}>;
+								persons: Array<{ __typename?: 'Person'; name: string }>;
+								sequence:
+									| { __typename?: 'Sequence'; title: string }
+									| null
+									| undefined;
+								sponsor:
+									| { __typename?: 'Sponsor'; title: string }
+									| null
+									| undefined;
+						  }>
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type GetStoryAlbumDetailPathsDataQueryVariables = Exact<{
@@ -12310,7 +13977,10 @@ export type GetStoryAlbumDetailPathsDataQuery = {
 	__typename?: 'Query';
 	storySeasons: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{ __typename?: 'Sequence'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Sequence'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -12324,38 +13994,50 @@ export type GetStoriesAlbumsPageDataQuery = {
 	__typename?: 'Query';
 	storySeasons: {
 		__typename?: 'SequenceConnection';
-		nodes: Array<{
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			canonicalPath: string;
-			contentType: SequenceContentType;
-			duration: number;
-			summary: string;
-			speakers: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
+		nodes:
+			| Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
 					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			sequenceWriters: {
-				__typename?: 'PersonConnection';
-				nodes: Array<{
-					__typename?: 'Person';
-					name: string;
-					canonicalPath: string;
-					imageWithFallback: { __typename?: 'Image'; url: string };
-				}> | null;
-			};
-			allRecordings: {
-				__typename?: 'RecordingConnection';
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes:
+							| Array<{
+									__typename?: 'Person';
+									name: string;
+									canonicalPath: string;
+									imageWithFallback: { __typename?: 'Image'; url: string };
+							  }>
+							| null
+							| undefined;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						aggregate:
+							| { __typename?: 'Aggregate'; count: number }
+							| null
+							| undefined;
+					};
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -12367,7 +14049,7 @@ export type GetStoriesAlbumsPathDataQuery = {
 	__typename?: 'Query';
 	storySeasons: {
 		__typename?: 'SequenceConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -12377,168 +14059,205 @@ export type GetStoryDetailDataQueryVariables = Exact<{
 
 export type GetStoryDetailDataQuery = {
 	__typename?: 'Query';
-	story: {
-		__typename?: 'Recording';
-		language: Language;
-		id: string | number;
-		title: string;
-		contentType: RecordingContentType;
-		description: string | null;
-		recordingDate: string | null;
-		sequenceIndex: number | null;
-		canonicalUrl: string;
-		shareUrl: string;
-		copyrightYear: number | null;
-		canonicalPath: string;
-		duration: number;
-		isDownloadAllowed: boolean;
-		speakers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		writers: Array<{
-			__typename?: 'Person';
-			name: string;
-			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
-		}>;
-		attachments: Array<{
-			__typename?: 'Attachment';
-			filename: string;
-			url: string;
-		}>;
-		imageWithFallback: { __typename?: 'Image'; url: string };
-		recordingTags: {
-			__typename?: 'RecordingTagConnection';
-			nodes: Array<{
-				__typename?: 'RecordingTag';
-				tag: { __typename?: 'Tag'; id: string | number; name: string };
-			}> | null;
-		};
-		sponsor: {
-			__typename?: 'Sponsor';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		sequence: {
-			__typename?: 'Sequence';
-			id: string | number;
-			title: string;
-			contentType: SequenceContentType;
-			canonicalPath: string;
-			recordings: {
-				__typename?: 'RecordingConnection';
-				nodes: Array<{
-					__typename?: 'Recording';
+	story:
+		| {
+				__typename?: 'Recording';
+				language: Language;
+				id: string | number;
+				title: string;
+				contentType: RecordingContentType;
+				description: string | null | undefined;
+				recordingDate: string | null | undefined;
+				sequenceIndex: number | null | undefined;
+				canonicalUrl: string;
+				shareUrl: string;
+				copyrightYear: number | null | undefined;
+				canonicalPath: string;
+				duration: number;
+				isDownloadAllowed: boolean;
+				speakers: Array<{
+					__typename?: 'Person';
+					name: string;
 					canonicalPath: string;
-					sequenceIndex: number | null;
-					id: string | number;
-					title: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				attachments: Array<{
+					__typename?: 'Attachment';
+					filename: string;
+					url: string;
+				}>;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+				recordingTags: {
+					__typename?: 'RecordingTagConnection';
+					nodes:
+						| Array<{
+								__typename?: 'RecordingTag';
+								tag: { __typename?: 'Tag'; id: string | number; name: string };
+						  }>
+						| null
+						| undefined;
+				};
+				sponsor:
+					| { __typename?: 'Sponsor'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				sequence:
+					| {
+							__typename?: 'Sequence';
+							id: string | number;
+							title: string;
+							contentType: SequenceContentType;
+							canonicalPath: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								nodes:
+									| Array<{
+											__typename?: 'Recording';
+											canonicalPath: string;
+											sequenceIndex: number | null | undefined;
+											id: string | number;
+											title: string;
+											duration: number;
+											recordingContentType: RecordingContentType;
+											persons: Array<{
+												__typename?: 'Person';
+												name: string;
+												canonicalPath: string;
+												imageWithFallback: {
+													__typename?: 'Image';
+													url: string;
+												};
+											}>;
+											sequence:
+												| {
+														__typename?: 'Sequence';
+														id: string | number;
+														title: string;
+														contentType: SequenceContentType;
+														recordings: {
+															__typename?: 'RecordingConnection';
+															aggregate:
+																| { __typename?: 'Aggregate'; count: number }
+																| null
+																| undefined;
+														};
+												  }
+												| null
+												| undefined;
+											audioFiles: Array<{
+												__typename?: 'AudioFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoFiles: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+											videoStreams: Array<{
+												__typename?: 'VideoFile';
+												url: string;
+												logUrl: string | null | undefined;
+												filesize: string;
+												mimeType: string;
+												duration: number;
+											}>;
+									  }>
+									| null
+									| undefined;
+								aggregate:
+									| { __typename?: 'Aggregate'; count: number }
+									| null
+									| undefined;
+							};
+					  }
+					| null
+					| undefined;
+				collection:
+					| { __typename?: 'Collection'; title: string; canonicalPath: string }
+					| null
+					| undefined;
+				transcript:
+					| { __typename?: 'Transcript'; text: string }
+					| null
+					| undefined;
+				sequencePreviousRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				sequenceNextRecording:
+					| { __typename?: 'Recording'; canonicalPath: string }
+					| null
+					| undefined;
+				distributionAgreement:
+					| {
+							__typename?: 'DistributionAgreement';
+							sponsor:
+								| { __typename?: 'Sponsor'; title: string }
+								| null
+								| undefined;
+							license:
+								| {
+										__typename?: 'License';
+										summary: string;
+										image:
+											| { __typename?: 'Image'; url: string }
+											| null
+											| undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
 					duration: number;
-					recordingContentType: RecordingContentType;
-					persons: Array<{
-						__typename?: 'Person';
-						name: string;
-						canonicalPath: string;
-						imageWithFallback: { __typename?: 'Image'; url: string };
-					}>;
-					sequence: {
-						__typename?: 'Sequence';
-						id: string | number;
-						title: string;
-						contentType: SequenceContentType;
-						recordings: {
-							__typename?: 'RecordingConnection';
-							aggregate: { __typename?: 'Aggregate'; count: number } | null;
-						};
-					} | null;
-					audioFiles: Array<{
-						__typename?: 'AudioFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoFiles: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-					videoStreams: Array<{
-						__typename?: 'VideoFile';
-						url: string;
-						logUrl: string | null;
-						filesize: string;
-						mimeType: string;
-						duration: number;
-					}>;
-				}> | null;
-				aggregate: { __typename?: 'Aggregate'; count: number } | null;
-			};
-		} | null;
-		collection: {
-			__typename?: 'Collection';
-			title: string;
-			canonicalPath: string;
-		} | null;
-		transcript: { __typename?: 'Transcript'; text: string } | null;
-		sequencePreviousRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		sequenceNextRecording: {
-			__typename?: 'Recording';
-			canonicalPath: string;
-		} | null;
-		distributionAgreement: {
-			__typename?: 'DistributionAgreement';
-			sponsor: { __typename?: 'Sponsor'; title: string } | null;
-			license: {
-				__typename?: 'License';
-				summary: string;
-				image: { __typename?: 'Image'; url: string } | null;
-			} | null;
-		} | null;
-		audioFiles: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoFiles: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoStreams: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			logUrl: string | null;
-			filesize: string;
-			mimeType: string;
-			duration: number;
-		}>;
-		videoDownloads: Array<{
-			__typename?: 'VideoFile';
-			url: string;
-			filesize: string;
-			height: number;
-			width: number;
-		}>;
-		audioDownloads: Array<{
-			__typename?: 'AudioFile';
-			url: string;
-			filesize: string;
-			bitrate: number;
-		}>;
-	} | null;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					logUrl: string | null | undefined;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoDownloads: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					height: number;
+					width: number;
+				}>;
+				audioDownloads: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					bitrate: number;
+				}>;
+		  }
+		| null
+		| undefined;
 };
 
 export type GetStoryDetailStaticPathsQueryVariables = Exact<{
@@ -12550,7 +14269,10 @@ export type GetStoryDetailStaticPathsQuery = {
 	__typename?: 'Query';
 	stories: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
+		nodes:
+			| Array<{ __typename?: 'Recording'; canonicalPath: string }>
+			| null
+			| undefined;
 	};
 };
 
@@ -12564,13 +14286,16 @@ export type GetTestimoniesPageDataQuery = {
 	__typename?: 'Query';
 	testimonies: {
 		__typename?: 'TestimonyConnection';
-		nodes: Array<{
-			__typename?: 'Testimony';
-			author: string;
-			body: string;
-			writtenDate: string;
-		}> | null;
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		nodes:
+			| Array<{
+					__typename?: 'Testimony';
+					author: string;
+					body: string;
+					writtenDate: string;
+			  }>
+			| null
+			| undefined;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -12582,7 +14307,7 @@ export type GetTestimoniesPathsDataQuery = {
 	__typename?: 'Query';
 	testimonies: {
 		__typename?: 'TestimonyConnection';
-		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null | undefined;
 	};
 };
 
@@ -12593,17 +14318,20 @@ export type GetBibleBookContentQueryVariables = Exact<{
 
 export type GetBibleBookContentQuery = {
 	__typename?: 'Query';
-	audiobible: {
-		__typename?: 'Bible';
-		book: {
-			__typename?: 'BibleBook';
-			chapters: Array<{
-				__typename?: 'BibleChapter';
-				id: string | number;
-				text: string;
-			}>;
-		};
-	} | null;
+	audiobible:
+		| {
+				__typename?: 'Bible';
+				book: {
+					__typename?: 'BibleBook';
+					chapters: Array<{
+						__typename?: 'BibleChapter';
+						id: string | number;
+						text: string;
+					}>;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type CollectionFavoriteMutationVariables = Exact<{
@@ -12621,11 +14349,14 @@ export type CollectionIsFavoritedQueryVariables = Exact<{
 
 export type CollectionIsFavoritedQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		viewerHasFavorited: boolean;
-		viewerPlaybackCompletedPercentage: number;
-	} | null;
+	collection:
+		| {
+				__typename?: 'Collection';
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+		  }
+		| null
+		| undefined;
 };
 
 export type CollectionUnfavoriteMutationVariables = Exact<{
@@ -12646,10 +14377,10 @@ export type LoginMutation = {
 	__typename?: 'Mutation';
 	login: {
 		__typename?: 'AuthenticatedUserPayload';
-		authenticatedUser: {
-			__typename?: 'AuthenticatedUser';
-			sessionToken: string;
-		} | null;
+		authenticatedUser:
+			| { __typename?: 'AuthenticatedUser'; sessionToken: string }
+			| null
+			| undefined;
 	};
 };
 
@@ -12668,7 +14399,10 @@ export type PersonIsFavoritedQueryVariables = Exact<{
 
 export type PersonIsFavoritedQuery = {
 	__typename?: 'Query';
-	person: { __typename?: 'Person'; viewerHasFavorited: boolean } | null;
+	person:
+		| { __typename?: 'Person'; viewerHasFavorited: boolean }
+		| null
+		| undefined;
 };
 
 export type PersonUnfavoriteMutationVariables = Exact<{
@@ -12695,7 +14429,10 @@ export type RecordingIsFavoritedQueryVariables = Exact<{
 
 export type RecordingIsFavoritedQuery = {
 	__typename?: 'Query';
-	recording: { __typename?: 'Recording'; viewerHasFavorited: boolean } | null;
+	recording:
+		| { __typename?: 'Recording'; viewerHasFavorited: boolean }
+		| null
+		| undefined;
 };
 
 export type RecordingUnfavoriteMutationVariables = Exact<{
@@ -12722,15 +14459,21 @@ export type SequenceIsFavoritedQueryVariables = Exact<{
 
 export type SequenceIsFavoritedQuery = {
 	__typename?: 'Query';
-	sequence: {
-		__typename?: 'Sequence';
-		viewerHasFavorited: boolean;
-		viewerPlaybackCompletedPercentage: number;
-		recordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+	sequence:
+		| {
+				__typename?: 'Sequence';
+				viewerHasFavorited: boolean;
+				viewerPlaybackCompletedPercentage: number;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate:
+						| { __typename?: 'Aggregate'; count: number }
+						| null
+						| undefined;
+				};
+		  }
+		| null
+		| undefined;
 };
 
 export type SequenceUnfavoriteMutationVariables = Exact<{
@@ -12757,7 +14500,10 @@ export type SponsorIsFavoritedQueryVariables = Exact<{
 
 export type SponsorIsFavoritedQuery = {
 	__typename?: 'Query';
-	sponsor: { __typename?: 'Sponsor'; viewerHasFavorited: boolean } | null;
+	sponsor:
+		| { __typename?: 'Sponsor'; viewerHasFavorited: boolean }
+		| null
+		| undefined;
 };
 
 export type SponsorUnfavoriteMutationVariables = Exact<{
@@ -12786,8 +14532,8 @@ export type GenerateFeedFragment = {
 	id: string | number;
 	title: string;
 	contentType: RecordingContentType;
-	description: string | null;
-	publishDate: string | null;
+	description: string | null | undefined;
+	publishDate: string | null | undefined;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		id: string | number;
@@ -12808,8 +14554,8 @@ export type GenerateFeedFragment = {
 		container: string;
 	}>;
 	persons: Array<{ __typename?: 'Person'; name: string }>;
-	sequence: { __typename?: 'Sequence'; title: string } | null;
-	sponsor: { __typename?: 'Sponsor'; title: string } | null;
+	sequence: { __typename?: 'Sequence'; title: string } | null | undefined;
+	sponsor: { __typename?: 'Sponsor'; title: string } | null | undefined;
 };
 
 export type BookFeedDescriptionFragment = {
@@ -12817,11 +14563,14 @@ export type BookFeedDescriptionFragment = {
 	title: string;
 	recordings: {
 		__typename?: 'RecordingConnection';
-		nodes: Array<{
-			__typename?: 'Recording';
-			authors: Array<{ __typename?: 'Person'; name: string }>;
-			narrators: Array<{ __typename?: 'Person'; name: string }>;
-		}> | null;
+		nodes:
+			| Array<{
+					__typename?: 'Recording';
+					authors: Array<{ __typename?: 'Person'; name: string }>;
+					narrators: Array<{ __typename?: 'Person'; name: string }>;
+			  }>
+			| null
+			| undefined;
 	};
 };
 

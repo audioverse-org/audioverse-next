@@ -312,7 +312,7 @@
   "cardAudiobookTrack_readByLabel": [
     {
       "type": 0,
-      "value": "Прочитано (кем-то) 1 "
+      "value": "Прочитано (кем-то) "
     },
     {
       "type": 1,
@@ -353,10 +353,6 @@
   ],
   "cardCollection__teachingsCountLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -367,10 +363,6 @@
   ],
   "cardCollection_sequenceLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -380,10 +372,6 @@
     }
   ],
   "cardPerson_teachingsLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
@@ -428,10 +416,6 @@
     }
   ],
   "cardSequence_sequenceLabel": [
-    {
-      "type": 0,
-      "value": "1"
-    },
     {
       "type": 1,
       "value": "count"
@@ -521,10 +505,6 @@
   ],
   "cardSponsor__recordingsCountLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -534,10 +514,6 @@
     }
   ],
   "cardSponsor__sequencesCountLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
@@ -591,10 +567,6 @@
   ],
   "collectionDetail__sequenceCountLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -640,10 +612,6 @@
     }
   ],
   "collectionDetail__teachingsCountLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
@@ -961,10 +929,6 @@
   ],
   "duration__hours": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "hours"
     },
@@ -974,10 +938,6 @@
     }
   ],
   "duration__hoursAndMinutes": [
-    {
-      "type": 0,
-      "value": "1"
-    },
     {
       "type": 1,
       "value": "hours"
@@ -993,10 +953,6 @@
   ],
   "duration__minutes": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "minutes"
     },
@@ -1008,7 +964,7 @@
   "embed__partInfo": [
     {
       "type": 0,
-      "value": "Часть 1 "
+      "value": "Часть "
     },
     {
       "type": 1,
@@ -1016,7 +972,7 @@
     },
     {
       "type": 0,
-      "value": " из 2 "
+      "value": " из "
     },
     {
       "type": 1,
@@ -1031,12 +987,12 @@
   ],
   "generateFeed__subtitle": [
     {
-      "type": 0,
-      "value": "1"
-    },
-    {
       "type": 1,
       "value": "container"
+    },
+    {
+      "type": 0,
+      "value": " "
     },
     {
       "type": 1,
@@ -1044,7 +1000,7 @@
     },
     {
       "type": 0,
-      "value": " 3"
+      "value": ", "
     },
     {
       "type": 1,
@@ -1064,7 +1020,7 @@
   "generatedFeed__copyright": [
     {
       "type": 0,
-      "value": "Эта лента Авторского Права 1 "
+      "value": "Эта лента Авторского Права "
     },
     {
       "type": 1,
@@ -2515,10 +2471,6 @@
   ],
   "molecule-buttonSpeed__buttonLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "speed"
     },
@@ -2553,16 +2505,12 @@
   ],
   "molecule-cardRecordingSequenceHat__inLibrary": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "inLibraryCount"
     },
     {
       "type": 0,
-      "value": " из 2"
+      "value": " из "
     },
     {
       "type": 1,
@@ -2611,10 +2559,6 @@
   ],
   "molecule-teaseRecording__morePersons": [
     {
-      "type": 0,
-      "value": "1"
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -2626,7 +2570,7 @@
   "molecule-teaseRecording__partInfo": [
     {
       "type": 0,
-      "value": "Часть 1 "
+      "value": "Часть "
     },
     {
       "type": 1,
@@ -2634,7 +2578,7 @@
     },
     {
       "type": 0,
-      "value": " из 2 "
+      "value": " из "
     },
     {
       "type": 1,
@@ -2758,7 +2702,7 @@
   "organism-recording__partInfo": [
     {
       "type": 0,
-      "value": "Часть 1 "
+      "value": "Часть "
     },
     {
       "type": 1,
@@ -2768,7 +2712,7 @@
   "organism-recording__readByLabel": [
     {
       "type": 0,
-      "value": "Прочитано (кем-то) 1 "
+      "value": "Прочитано (кем-то) "
     },
     {
       "type": 1,
@@ -2884,10 +2828,6 @@
     }
   ],
   "playlistDetail__partsCountLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
@@ -3007,10 +2947,6 @@
   ],
   "presenterDetail__audiobookTracksCountLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -3036,10 +2972,6 @@
     }
   ],
   "presenterDetail__musicTracksCountLabel": [
-    {
-      "type": 0,
-      "value": "1"
-    },
     {
       "type": 1,
       "value": "count"
@@ -3081,10 +3013,6 @@
   ],
   "presenterDetail__storiesCountLabel": [
     {
-      "type": 0,
-      "value": "1"
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -3094,10 +3022,6 @@
     }
   ],
   "presenterDetail__teachingsCountLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
@@ -3146,7 +3070,7 @@
   "presentersFeed__description": [
     {
       "type": 0,
-      "value": "Последние проповеди AudioVerse 1"
+      "value": "Последние проповеди AudioVerse "
     },
     {
       "type": 1,
@@ -3340,7 +3264,7 @@
   "reset__intro": [
     {
       "type": 0,
-      "value": "Создайте новый пароль для 1"
+      "value": "Создайте новый пароль для "
     },
     {
       "type": 1,
@@ -3437,10 +3361,6 @@
   ],
   "search__resultsCount": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -3523,10 +3443,6 @@
   ],
   "seriesDetail__partsCountLabel": [
     {
-      "type": 0,
-      "value": "1"
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -3568,7 +3484,7 @@
   "sermonDetailPage__copyright": [
     {
       "type": 0,
-      "value": "Авторское право ⓒ 1"
+      "value": "Авторское право ⓒ "
     },
     {
       "type": 1,
@@ -3576,7 +3492,7 @@
     },
     {
       "type": 0,
-      "value": " 2"
+      "value": " "
     },
     {
       "type": 1,
@@ -4167,10 +4083,6 @@
   ],
   "sponsorDetail__recordingsCountLabel": [
     {
-      "type": 0,
-      "value": "1 "
-    },
-    {
       "type": 1,
       "value": "count"
     },
@@ -4180,10 +4092,6 @@
     }
   ],
   "sponsorDetail__sequencesCountLabel": [
-    {
-      "type": 0,
-      "value": "1 "
-    },
     {
       "type": 1,
       "value": "count"
