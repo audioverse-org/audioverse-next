@@ -2220,7 +2220,7 @@ type Mutation {
 		)
 	updateMyProfile(input: UserUpdateInput!): AuthenticatedUserPayload!
 	userCreate(input: UserCreateInput!): UserPayload!
-	userDelete(userId: ID!): SuccessPayload!
+	userDelete(destroyData: Boolean, userId: ID!): SuccessPayload!
 
 	"""
 	Mark all notifications read for the current viewer.

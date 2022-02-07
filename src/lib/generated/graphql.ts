@@ -2092,6 +2092,7 @@ export type MutationUserCreateArgs = {
 };
 
 export type MutationUserDeleteArgs = {
+	destroyData: InputMaybe<Scalars['Boolean']>;
 	userId: Scalars['ID'];
 };
 

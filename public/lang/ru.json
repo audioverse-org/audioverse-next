@@ -111,7 +111,7 @@
     "string": "{duration} прочитано"
   },
   "cardAudiobookTrack_readByLabel": {
-    "string": "Прочитано (кем-то) 1 {name}"
+    "string": "Прочитано (кем-то) {name}"
   },
   "cardAudiobookTrack_sequenceLabel": {
     "string": "Книга"
@@ -127,15 +127,15 @@
   },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
-    "string": "1 {count} темы"
+    "string": "{count} темы"
   },
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
-    "string": "1 {count} серия"
+    "string": "{count} серия"
   },
   "cardPerson_teachingsLabel": {
     "comment": "Card person teachings count label",
-    "string": "1 {count} темы"
+    "string": "{count} темы"
   },
   "cardPlaylist__typeLabel": {
     "string": "Список воспроизведений"
@@ -152,7 +152,7 @@
   },
   "cardSequence_sequenceLabel": {
     "comment": "Card sequence recording count label",
-    "string": "1{count} части"
+    "string": "{count} части"
   },
   "cardSequence_seriesType": {
     "string": "Семинары"
@@ -184,11 +184,11 @@
   },
   "cardSponsor__recordingsCountLabel": {
     "comment": "Sponsor Detail teachings count label",
-    "string": "1 {count} темы"
+    "string": "{count} темы"
   },
   "cardSponsor__sequencesCountLabel": {
     "comment": "Sponsor Detail series count label",
-    "string": "1 {count} семинар"
+    "string": "{count} семинар"
   },
   "cardSponsor_hatTitle": {
     "comment": "Card sponsor hat title",
@@ -208,7 +208,7 @@
   },
   "collectionDetail__sequenceCountLabel": {
     "comment": "Collection Detail sequence count label",
-    "string": "1 {count} Семинар"
+    "string": "{count} Семинар"
   },
   "collectionDetail__seriesAllLabel": {
     "string": "Смотреть все части"
@@ -232,7 +232,7 @@
   },
   "collectionDetail__teachingsCountLabel": {
     "comment": "Collection Detail teachings count label",
-    "string": "1 {count} темы"
+    "string": "{count} темы"
   },
   "collectionDetail__teachingsLabel": {
     "comment": "Collection Detail teachings label",
@@ -328,27 +328,27 @@
   },
   "duration__hours": {
     "comment": "duration hours",
-    "string": "1 {hours} час"
+    "string": "{hours} час"
   },
   "duration__hoursAndMinutes": {
     "comment": "duration hours and minutes",
-    "string": "1{hours} 2{minutes}"
+    "string": "{hours} 2{minutes}"
   },
   "duration__minutes": {
     "comment": "duration minutes",
-    "string": "1 {minutes}m"
+    "string": "{minutes}m"
   },
   "generateFeed__audio": {
     "string": "Аудио"
   },
   "generateFeed__subtitle": {
-    "string": "1{container}{format} 3{bitrate} kbps"
+    "string": "{container} {format}, {bitrate} kbps"
   },
   "generateFeed__video": {
     "string": "Видео"
   },
   "generatedFeed__copyright": {
-    "string": "Эта лента Авторского Права 1 {year} AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
+    "string": "Эта лента Авторского Права {year} AudioVerse Авторские права на отдельные записи принадлежат их соответствующим владельцам."
   },
   "header__navItemBlog": {
     "comment": "Header nav link name: Blog",
@@ -831,7 +831,7 @@
   },
   "molecule-buttonSpeed__buttonLabel": {
     "comment": "button speed button label",
-    "string": "1 {speed}X"
+    "string": "{speed}X"
   },
   "molecule-cardRecordingSequenceHat__addAlbum": {
     "string": "Добавить альбом"
@@ -846,7 +846,7 @@
     "string": "Добавить альбом"
   },
   "molecule-cardRecordingSequenceHat__inLibrary": {
-    "string": "1 {inLibraryCount} из 2{totalCount} в Вашей библиотеке"
+    "string": "{inLibraryCount} из {totalCount} в Вашей библиотеке"
   },
   "molecule-cardRecordingSequenceHat__removeAlbum": {
     "string": "Удалить альбом"
@@ -868,11 +868,11 @@
     "string": "Показать меньше"
   },
   "molecule-teaseRecording__morePersons": {
-    "string": "1{count} больше"
+    "string": "{count} больше"
   },
   "molecule-teaseRecording__partInfo": {
     "comment": "recording tease part info",
-    "string": "Часть 1 {index} из 2 {count}"
+    "string": "Часть {index} из {count}"
   },
   "molecule-transcript__disclaimer": {
     "comment": "transcript disclaimer",
@@ -941,10 +941,10 @@
   },
   "organism-recording__partInfo": {
     "comment": "recording part info",
-    "string": "Часть 1 {index}"
+    "string": "Часть {index}"
   },
   "organism-recording__readByLabel": {
-    "string": "Прочитано (кем-то) 1 {name}"
+    "string": "Прочитано (кем-то) {name}"
   },
   "organism-recording__seriesInfoTitle": {
     "comment": "Recording series info title",
@@ -1018,7 +1018,7 @@
   },
   "playlistDetail__partsCountLabel": {
     "comment": "Playlist Detail teachings count label",
-    "string": "1 {count} поучения"
+    "string": "{count} поучения"
   },
   "playlistDetail__summaryLabel": {
     "string": "Резюме/краткий обзор"
@@ -1076,7 +1076,7 @@
   },
   "presenterDetail__audiobookTracksCountLabel": {
     "comment": "Presenter detail audiobook tracks count label",
-    "string": "1 {count} Дорожка аудиокниги"
+    "string": "{count} Дорожка аудиокниги"
   },
   "presenterDetail__descriptionLabel": {
     "string": "Описание"
@@ -1086,7 +1086,7 @@
   },
   "presenterDetail__musicTracksCountLabel": {
     "comment": "Presenter detail music tracks count label",
-    "string": "1{count} Музыкальные дорожки"
+    "string": "{count} Музыкальные дорожки"
   },
   "presenterDetail__recentAllLabel": {
     "string": "Просмотреть все недавние"
@@ -1106,11 +1106,11 @@
   },
   "presenterDetail__storiesCountLabel": {
     "comment": "Presenter detail stories count label",
-    "string": "1{count} Истории"
+    "string": "{count} Истории"
   },
   "presenterDetail__teachingsCountLabel": {
     "comment": "Presenter detail teachings count label",
-    "string": "1 {count} поучения"
+    "string": "{count} поучения"
   },
   "presenterDetail__topAllLabel": {
     "string": "Просмотреть большее самых популярных тем"
@@ -1131,7 +1131,7 @@
     "string": "Самые популярные"
   },
   "presentersFeed__description": {
-    "string": "Последние проповеди AudioVerse 1{name}"
+    "string": "Последние проповеди AudioVerse {name}"
   },
   "presentersFeed__title": {
     "string": "Проповеди {name}"
@@ -1233,7 +1233,7 @@
     "string": "Пожалуйста, введите пароль 2 раза"
   },
   "reset__intro": {
-    "string": "Создайте новый пароль для 1{email}."
+    "string": "Создайте новый пароль для {email}."
   },
   "reset__passwordLabel": {
     "string": "Новый пароль"
@@ -1279,7 +1279,7 @@
     "string": "Смотреть всех проповедующих"
   },
   "search__resultsCount": {
-    "string": "1 {count} Результаты"
+    "string": "{count} Результаты"
   },
   "search__sequencesHeading": {
     "string": "Семинары"
@@ -1319,7 +1319,7 @@
   },
   "seriesDetail__partsCountLabel": {
     "comment": "Series Detail parts count label",
-    "string": "1{count} части"
+    "string": "{count} части"
   },
   "seriesDetail__recordedLabel": {
     "string": "Записано"
@@ -1340,7 +1340,7 @@
   },
   "sermonDetailPage__copyright": {
     "comment": "Copyright year and owner",
-    "string": "Авторское право ⓒ 1{year} 2{owner}."
+    "string": "Авторское право ⓒ {year} {owner}."
   },
   "sermonDetailPage__descriptionTitle": {
     "comment": "Sermon detail description title",
@@ -1685,11 +1685,11 @@
   },
   "sponsorDetail__recordingsCountLabel": {
     "comment": "Sponsor Detail teachings count label",
-    "string": "1 {count} проповеди"
+    "string": "{count} проповеди"
   },
   "sponsorDetail__sequencesCountLabel": {
     "comment": "Sponsor Detail series count label",
-    "string": "1 {count} часть"
+    "string": "{count} часть"
   },
   "sponsorDetail__seriesAllLabel": {
     "string": "Смотреть все части"
@@ -1884,7 +1884,7 @@
     "string": "Скачать сейчас"
   },
   "embed__partInfo": {
-    "string": "Часть 1 {index} из 2 {count}"
+    "string": "Часть {index} из {count}"
   },
   "give__amazonCta": {
     "string": "Купить сейчас"
