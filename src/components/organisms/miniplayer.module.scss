@@ -129,3 +129,12 @@
 		padding: 8px;
 	}
 }
+.slider {
+	:global(.MuiSlider-rail) {
+		width: calc(100% + 16px);
+	}
+	:global(.MuiSlider-rail),
+	:global(.MuiSlider-track) {
+		left: -8px !important;
+	}
+}

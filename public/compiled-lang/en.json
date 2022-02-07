@@ -2537,6 +2537,24 @@
       "value": "Video"
     }
   ],
+  "miniplayer__increaseVolume": [
+    {
+      "type": 0,
+      "value": "Increase volume"
+    }
+  ],
+  "miniplayer__reduceVolume": [
+    {
+      "type": 0,
+      "value": "Reduce volume"
+    }
+  ],
+  "miniplayer__volume": [
+    {
+      "type": 0,
+      "value": "Volume"
+    }
+  ],
   "molecule-buttonDownload__buttonLabel": [
     {
       "type": 0,

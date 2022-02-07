@@ -2,6 +2,7 @@ import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useContext } from 'react';
+import { useIntl } from 'react-intl';
 
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
@@ -18,6 +19,7 @@ import 'video.js/dist/video-js.css';
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {
+	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const volume = playbackContext.getVolume();
 	const recording = playbackContext.getRecording();
@@ -78,19 +80,28 @@ export default function Miniplayer(): JSX.Element | null {
 			</div>
 			<div className={styles.volume}>
 				<button
-					aria-label="reduce volume"
+					aria-label={intl.formatMessage({
+						id: 'miniplayer__reduceVolume',
+						defaultMessage: 'Reduce volume',
+					})}
 					onClick={() => playbackContext.setVolume(volume - 10)}
 				>
 					<IconVolumeLow />
 				</button>
-				{/*TODO: Localize*/}
 				<Slider
+					className={styles.slider}
 					value={volume}
 					onChange={(e, val) => playbackContext.setVolume(val as number)}
-					aria-label="volume"
+					aria-label={intl.formatMessage({
+						id: 'miniplayer__volume',
+						defaultMessage: 'Volume',
+					})}
 				/>
 				<button
-					aria-label="increase volume"
+					aria-label={intl.formatMessage({
+						id: 'miniplayer__increaseVolume',
+						defaultMessage: 'Increase volume',
+					})}
 					onClick={() => playbackContext.setVolume(volume + 10)}
 				>
 					<IconVolumeHigh />
