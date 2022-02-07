@@ -1199,6 +1199,15 @@
   "mediaFormatSwitcher__video": {
     "string": "Video"
   },
+  "miniplayer__increaseVolume": {
+    "string": "Increase volume"
+  },
+  "miniplayer__reduceVolume": {
+    "string": "Reduce volume"
+  },
+  "miniplayer__volume": {
+    "string": "Volume"
+  },
   "molecule-buttonDownload__buttonLabel": {
     "comment": "download button label",
     "string": "downloads"
