@@ -106,6 +106,7 @@
 }
 
 .volume {
+	flex: 0 0 200px;
 	display: flex;
 	align-items: center;
 	min-width: 150px;
@@ -115,6 +116,12 @@
 		border: none;
 		background: none;
 		cursor: pointer;
+		&:first-child {
+			margin-right: 8px;
+		}
+		&:last-child {
+			margin-left: 8px;
+		}
 	}
 	svg {
 		flex: 0 0 auto;
