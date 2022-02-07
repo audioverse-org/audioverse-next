@@ -550,7 +550,7 @@ describe('player', () => {
 
 			await findAllByLabelText('pause');
 
-			const control = getByLabelText('volume');
+			const control = getByLabelText('Volume');
 			expect(control).toHaveValue('70');
 		});
 	});
@@ -565,7 +565,7 @@ describe('player', () => {
 
 			await findAllByLabelText('pause');
 
-			const control = getByLabelText('volume');
+			const control = getByLabelText('Volume');
 
 			ReactTestUtils.Simulate.change(control, {
 				target: {
@@ -580,7 +580,7 @@ describe('player', () => {
 	it('does not show miniplayer if no recording loaded', async () => {
 		const { queryByLabelText } = await renderComponent();
 
-		expect(queryByLabelText('volume')).not.toBeInTheDocument();
+		expect(queryByLabelText('Volume')).not.toBeInTheDocument();
 	});
 
 	it('displays portal target when video is loaded', async () => {
@@ -1126,7 +1126,7 @@ describe('player', () => {
 			const player = getByLabelText('player');
 			await findByLabelText(player, 'pause');
 
-			userEvent.click(getByLabelText('reduce volume'));
+			userEvent.click(getByLabelText('Reduce volume'));
 		});
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.4));
@@ -1143,7 +1143,7 @@ describe('player', () => {
 			const player = getByLabelText('player');
 			await findByLabelText(player, 'pause');
 
-			userEvent.click(getByLabelText('increase volume'));
+			userEvent.click(getByLabelText('Increase volume'));
 
 			await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
 		});
