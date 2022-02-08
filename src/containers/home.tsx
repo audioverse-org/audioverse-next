@@ -125,7 +125,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					media={
 						<div className={styles.bannerImage}>
 							<Image
-								src="/img/unsplash-headphones.jpg"
+								src="/img/hero-av.jpg"
 								layout="fill"
 								objectFit="cover"
 								priority

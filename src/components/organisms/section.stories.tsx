@@ -19,9 +19,7 @@ export const DarkBleed = (): JSX.Element => (
 				<Button type="super" text="Join AudioVerse" href="#" />
 			</>
 		}
-		media={
-			<Image src="/img/unsplash-headphones.jpg" width={4724} height={3072} />
-		}
+		media={<Image src="/img/hero-av.jpg" width={4724} height={3072} />}
 		theme={BaseColors.DARK}
 	/>
 );

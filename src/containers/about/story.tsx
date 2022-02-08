@@ -24,7 +24,7 @@ export default function Story(): JSX.Element {
 			</Heading1>
 			<div className={sharedStyles.image}>
 				<Image
-					src="/img/unsplash-headphones.jpg"
+					src="/img/hero-av.jpg"
 					layout="fill"
 					objectFit="cover"
 					priority
