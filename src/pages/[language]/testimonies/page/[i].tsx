@@ -9,6 +9,8 @@ import {
 	getTestimoniesPageData,
 	getTestimoniesPathsData,
 } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -19,11 +21,18 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ i: string; language: string }>): Promise<
 	GetStaticPropsResult<TestimoniesProps>
 > {
+	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return getPaginatedStaticProps(
 		params,
 		getTestimoniesPageData,
 		(d) => d?.testimonies.nodes,
-		(d) => d?.testimonies.aggregate?.count
+		(d) => d?.testimonies.aggregate?.count,
+		() => ({
+			title: intl.formatMessage({
+				id: 'testimonies__title',
+				defaultMessage: 'Testimonials',
+			}),
+		})
 	);
 }
 

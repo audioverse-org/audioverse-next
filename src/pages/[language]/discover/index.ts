@@ -4,9 +4,11 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Discover, { DiscoverProps } from '@containers/discover';
 import { REVALIDATE } from '@lib/constants';
 import { getDiscoverPageData } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeDiscoverRoute } from '@lib/routes';
@@ -16,24 +18,31 @@ export default Discover;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<DiscoverProps>
+	GetStaticPropsResult<DiscoverProps & IBaseProps>
 > {
 	const language = getLanguageIdByRoute(params?.language);
+	const intl = await getIntl(language);
 	return {
-		props: await getDiscoverPageData({ language }).catch(() => ({
-			conferences: {
-				nodes: [],
-			},
-			recentTeachings: {
-				nodes: [],
-			},
-			storySeasons: {
-				nodes: [],
-			},
-			trendingTeachings: {
-				nodes: [],
-			},
-		})),
+		props: {
+			...(await getDiscoverPageData({ language }).catch(() => ({
+				conferences: {
+					nodes: [],
+				},
+				recentTeachings: {
+					nodes: [],
+				},
+				storySeasons: {
+					nodes: [],
+				},
+				trendingTeachings: {
+					nodes: [],
+				},
+			}))),
+			title: intl.formatMessage({
+				id: 'discover__title',
+				defaultMessage: 'Discover',
+			}),
+		},
 		revalidate: REVALIDATE,
 	};
 }

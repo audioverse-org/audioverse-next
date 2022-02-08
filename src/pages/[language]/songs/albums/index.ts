@@ -4,11 +4,13 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import StoryAlbumsList, {
 	SongAlbumsListProps,
 } from '@containers/song/albums/list';
 import { REVALIDATE } from '@lib/constants';
 import { getSongAlbumsListPageData } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeSongAlbumsListRoute } from '@lib/routes';
@@ -20,14 +22,20 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{
 	language: string;
 	i: string;
-}>): Promise<GetStaticPropsResult<SongAlbumsListProps>> {
+}>): Promise<GetStaticPropsResult<SongAlbumsListProps & IBaseProps>> {
+	const language = getLanguageIdByRoute(params?.language);
+	const intl = await getIntl(language);
 	const { musicAlbums, musicBookTags } = await getSongAlbumsListPageData({
-		language: getLanguageIdByRoute(params?.language),
+		language,
 	});
 	return {
 		props: {
 			musicAlbums,
 			musicBookTags,
+			title: intl.formatMessage({
+				id: 'storyAlbums__title',
+				defaultMessage: 'Scripture Songs',
+			}),
 		},
 		revalidate: REVALIDATE,
 	};

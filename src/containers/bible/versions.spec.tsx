@@ -10,7 +10,7 @@ import Versions, {
 jest.mock('@lib/api/bibleBrain');
 
 async function renderPage() {
-	const { props } = (await getStaticProps()) as any;
+	const { props } = (await getStaticProps({})) as any;
 	return renderWithIntl(<Versions {...props} />);
 }
 

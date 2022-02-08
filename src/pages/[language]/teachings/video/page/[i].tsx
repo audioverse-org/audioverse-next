@@ -4,11 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
 	getSermonListPageData,
 	getSermonListPagePathsData,
 } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -17,7 +20,7 @@ export default SermonList;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ i: string; language: string }>): Promise<
-	GetStaticPropsResult<SermonListProps>
+	GetStaticPropsResult<SermonListProps & IBaseProps>
 > {
 	const response = await getPaginatedStaticProps(
 		params,
@@ -30,11 +33,16 @@ export async function getStaticProps({
 		(d) => d.sermons.aggregate?.count
 	);
 
+	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return {
 		...response,
 		props: {
 			...response.props,
 			filter: 'video',
+			title: intl.formatMessage({
+				id: 'teachings__title',
+				defaultMessage: 'All Teachings',
+			}),
 		},
 	};
 }

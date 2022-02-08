@@ -9,6 +9,8 @@ import {
 	getSeriesListPageData,
 	getSeriesListPathsData,
 } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -19,11 +21,18 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; i: string }>): Promise<
 	GetStaticPropsResult<SeriesListProps>
 > {
+	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return getPaginatedStaticProps(
 		params,
 		getSeriesListPageData,
 		(d) => d.serieses.nodes,
-		(d) => d.serieses.aggregate?.count
+		(d) => d.serieses.aggregate?.count,
+		() => ({
+			title: intl.formatMessage({
+				id: 'seriesList__title',
+				defaultMessage: 'All Series',
+			}),
+		})
 	);
 }
 

@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Book, { BookProps } from '@containers/bible/book';
 import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
@@ -17,7 +18,7 @@ export async function getStaticProps({
 	id: string;
 	book: string;
 	chapter: string;
-}>): Promise<GetStaticPropsResult<BookProps>> {
+}>): Promise<GetStaticPropsResult<BookProps & IBaseProps>> {
 	const id = params?.id as string;
 	const book = params?.book as string;
 	const chapterNumber = params?.chapter as string;
@@ -48,6 +49,7 @@ export async function getStaticProps({
 			book: bibleBook,
 			chapters,
 			chapterNumber,
+			title: bibleBook.name,
 		},
 		revalidate: REVALIDATE,
 	};

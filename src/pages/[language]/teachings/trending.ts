@@ -4,10 +4,12 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import TrendingTeachings from '@containers/sermon/trending';
 import { TrendingTeachingsProps } from '@containers/sermon/trending';
 import { REVALIDATE } from '@lib/constants';
 import { getTrendingTeachingsPageData } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeTrendingSermonRoute } from '@lib/routes';
@@ -17,9 +19,10 @@ export default TrendingTeachings;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<TrendingTeachingsProps>
+	GetStaticPropsResult<TrendingTeachingsProps & IBaseProps>
 > {
 	const language = getLanguageIdByRoute(params?.language);
+	const intl = await getIntl(language);
 
 	const { recordings } = await getTrendingTeachingsPageData({
 		language,
@@ -27,7 +30,16 @@ export async function getStaticProps({
 		recordings: { nodes: null },
 	}));
 
-	return { props: recordings, revalidate: REVALIDATE };
+	return {
+		props: {
+			...recordings,
+			title: intl.formatMessage({
+				id: 'trending__title',
+				defaultMessage: 'Trending Teachings',
+			}),
+		},
+		revalidate: REVALIDATE,
+	};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {

@@ -11,6 +11,8 @@ import {
 	getCollectionListPageData,
 	getCollectionListPathsData,
 } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 
@@ -21,11 +23,18 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string; i: string }>): Promise<
 	GetStaticPropsResult<CollectionListProps>
 > {
+	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,
 		(d) => d.conferences.nodes,
-		(d) => d.conferences.aggregate?.count
+		(d) => d.conferences.aggregate?.count,
+		() => ({
+			title: intl.formatMessage({
+				id: 'conferences__title',
+				defaultMessage: 'All Conferences',
+			}),
+		})
 	);
 }
 
