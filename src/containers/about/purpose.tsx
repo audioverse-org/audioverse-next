@@ -33,7 +33,7 @@ export default function Purpose(): JSX.Element {
 			</Heading1>
 			<div className={clsx(sharedStyles.image, sharedStyles.imageLabeled)}>
 				<Image
-					src="/img/unsplash-headphones.jpg"
+					src="/img/hero-av.jpg"
 					layout="fill"
 					objectFit="cover"
 					priority
