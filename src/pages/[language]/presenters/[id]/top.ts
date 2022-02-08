@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import PresenterTop, { PresenterTopProps } from '@containers/presenter/top';
 import { REVALIDATE } from '@lib/constants';
 import {
@@ -11,7 +12,8 @@ import {
 	getPresenterTopPageData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import getIntl from '@lib/getIntl';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { makePresenterTopRecordingsRoute } from '@lib/routes';
 
 export default PresenterTop;
@@ -19,7 +21,7 @@ export default PresenterTop;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; id: string }>): Promise<
-	GetStaticPropsResult<PresenterTopProps>
+	GetStaticPropsResult<PresenterTopProps & IBaseProps>
 > {
 	const id = params?.id as string;
 	const { person } = await getPresenterTopPageData({
@@ -29,17 +31,28 @@ export async function getStaticProps({
 	}).catch(() => ({
 		person: null,
 	}));
+	const language = getLanguageIdByRoute(params?.language);
+	const intl = await getIntl(language);
 
-	if (
-		person?.language !== getLanguageIdByRouteOrLegacyRoute(params?.language)
-	) {
+	if (person?.language !== language) {
 		return {
 			notFound: true,
 		};
 	}
 
 	return {
-		props: { person },
+		props: {
+			person,
+			title: intl.formatMessage(
+				{
+					id: 'presentersTop__title',
+					defaultMessage: 'Most Listened by {personName}',
+				},
+				{
+					personName: person?.name,
+				}
+			),
+		},
 		revalidate: REVALIDATE,
 	};
 }

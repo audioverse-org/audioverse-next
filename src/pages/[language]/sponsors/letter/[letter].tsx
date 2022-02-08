@@ -4,12 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Sponsors, { SponsorsProps } from '@containers/sponsor/list';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getSponsorListPageData,
 	getSponsorListPathsData,
 } from '@lib/generated/graphql';
+import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
 import { makeSponsorListRoute } from '@lib/routes';
@@ -19,9 +21,10 @@ export default Sponsors;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string; letter: string }>): Promise<
-	GetStaticPropsResult<SponsorsProps>
+	GetStaticPropsResult<SponsorsProps & IBaseProps>
 > {
 	const language = getLanguageIdByRoute(params?.language);
+	const intl = await getIntl(language);
 	const letter = params?.letter as string;
 	const { sponsors, sponsorLetterCounts } = await getSponsorListPageData({
 		language,
@@ -36,6 +39,10 @@ export async function getStaticProps({
 		props: {
 			sponsors: sponsors.nodes || [],
 			sponsorLetterCounts,
+			title: intl.formatMessage({
+				id: 'sponsors__title',
+				defaultMessage: 'All Sponsors',
+			}),
 		},
 		revalidate: REVALIDATE,
 	};

@@ -12,6 +12,7 @@ import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
 import { BaseColors } from '@lib/constants';
 import {
 	AndMiniplayerFragment,
+	RecordingContentType,
 	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
@@ -97,13 +98,30 @@ export default function TeaseRecording({
 						values={{ index, count }}
 					/>
 				) : (
-					!hideSinglePart && (
+					!hideSinglePart &&
+					(recording.recordingContentType ===
+					RecordingContentType.AudiobookTrack ? (
+						<FormattedMessage
+							id="molecule-teaseRecording__individualChapter"
+							defaultMessage="Individual Chapter"
+						/>
+					) : recording.recordingContentType ===
+					  RecordingContentType.MusicTrack ? (
+						<FormattedMessage
+							id="molecule-teaseRecording__individualTrack"
+							defaultMessage="Individual Track"
+						/>
+					) : recording.recordingContentType === RecordingContentType.Sermon ? (
 						<FormattedMessage
 							id="molecule-teaseRecording__individualTeaching"
 							defaultMessage="Individual Teaching"
-							values={{ index, count }}
 						/>
-					)
+					) : (
+						<FormattedMessage
+							id="molecule-teaseRecording__individualStory"
+							defaultMessage="Individual Story"
+						/>
+					))
 				)}
 			</div>
 			<div className={styles.title}>

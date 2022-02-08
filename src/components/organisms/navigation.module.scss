@@ -14,7 +14,8 @@
 	}
 	li {
 		list-style-type: none;
-		margin-bottom: 20px;
+		height: 32px;
+		margin-bottom: 16px;
 		font-size: 18px;
 		font-weight: 400;
 		display: flex;
@@ -187,6 +188,7 @@
 	li {
 		margin-bottom: 16px;
 		font-size: 17px;
+		height: auto;
 		.icon {
 			width: 16px;
 			display: flex;

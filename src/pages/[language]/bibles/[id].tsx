@@ -4,6 +4,7 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { IBaseProps } from '@containers/base';
 import Version, { VersionProps } from '@containers/bible/version';
 import { getBible, getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
@@ -14,7 +15,7 @@ export default Version;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ id: string }>): Promise<
-	GetStaticPropsResult<VersionProps>
+	GetStaticPropsResult<VersionProps & IBaseProps>
 > {
 	const version = await getBible(params?.id || '').catch((e) => {
 		console.log(e);
@@ -30,6 +31,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			version,
+			title: version.title,
 		},
 		revalidate: REVALIDATE,
 	};
