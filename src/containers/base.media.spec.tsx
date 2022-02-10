@@ -261,6 +261,10 @@ describe('app media playback', () => {
 
 			const portal = result.getByTestId('portal');
 
+			await waitFor(() => {
+				expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
+			});
+
 			ReactTestUtils.Simulate.play(
 				getByTestId(portal, 'video-element'),
 				{} as any

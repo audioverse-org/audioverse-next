@@ -183,7 +183,7 @@ export default function AndPlaybackContext({
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
-	const [, setVolume] = useState<number>(100);
+	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 
 	const queryClient = useQueryClient();
 
@@ -420,7 +420,10 @@ export default function AndPlaybackContext({
 		}
 
 		if (videoHandler) {
-			videoHandler(video);
+			setTimeout(() => {
+				// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
+				videoHandler(video);
+			}, 0);
 			return;
 		}
 
