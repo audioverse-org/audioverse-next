@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
-import * as VideoJs from 'video.js';
+import type * as VideoJs from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {
@@ -164,6 +164,11 @@ export default function AndPlaybackContext({
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
+
+	const [videojs, setVideojs] = useState<typeof VideoJs>();
+	useEffect(() => {
+		import('video.js').then((v) => setVideojs(v));
+	}, []);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -343,59 +348,67 @@ export default function AndPlaybackContext({
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined
 		) => {
-			if (!videoElRef.current) return;
+			const currentVideoEl = videoElRef.current;
+			if (!currentVideoEl) return;
 
 			const sources = getSources(recording, prefersAudio || false);
 			sourcesRef.current = sources;
 
+			const resetPlayer = () => {
+				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
+				if (logUrl) {
+					fetch(logUrl).catch(() => {
+						// We don't want Promise rejections here to clutter the console
+					});
+				}
+
+				setIsPaused(true);
+				const serverProgress =
+					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
+						'getRecordingPlaybackProgress',
+						{ id: recording.id },
+					]);
+				const progress =
+					serverProgress?.recording?.viewerPlaybackSession
+						?.positionPercentage || 0;
+				_setProgress(progress);
+
+				setBufferedProgress(0);
+
+				playerRef.current?.currentTime(progress * playback.getDuration());
+
+				onLoadRef.current && onLoadRef.current(playback);
+				onLoadRef.current = undefined;
+			};
+
+			const options = {
+				poster: '/img/poster.jpg',
+				controls: false,
+				preload: 'auto',
+				defaultVolume: 1,
+				sources,
+			};
 			if (playerRef.current) {
 				playerRef.current.src(sources);
-			} else {
-				const p = VideoJs.default(videoElRef.current, {
-					poster: '/img/poster.jpg',
-					controls: false,
-					preload: 'auto',
-					defaultVolume: 1,
-					sources,
-				});
+				resetPlayer();
+			} else if (videojs) {
+				const p = videojs.default(currentVideoEl, options);
 				p.on('fullscreenchange', () => {
 					p.controls(p.isFullscreen());
 				});
 				playerRef.current = p;
-			}
-
-			const logUrl = sources.find((s) => s.logUrl)?.logUrl;
-			if (logUrl) {
-				fetch(logUrl).catch(() => {
-					// We don't want Promise rejections here to clutter the console
+				resetPlayer();
+			} else {
+				import('video.js').then((videoJsImport) => {
+					setVideojs(videoJsImport);
+					playerRef.current = videoJsImport.default(currentVideoEl, options);
+					resetPlayer();
 				});
 			}
-
-			setIsPaused(true);
-			const serverProgress =
-				queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
-					'getRecordingPlaybackProgress',
-					{ id: recording.id },
-				]);
-			const progress =
-				serverProgress?.recording?.viewerPlaybackSession?.positionPercentage ||
-				0;
-			_setProgress(progress);
-
-			setBufferedProgress(0);
-
-			playerRef.current.currentTime(progress * playback.getDuration());
-
-			onLoadRef.current && onLoadRef.current(playback);
-			onLoadRef.current = undefined;
 		},
 	};
 
 	useEffect(() => {
-		if (onLoadRef.current) {
-			return;
-		}
-
 		const video = videoRef.current;
 
 		if (!video) {
