@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import Alert from '@components/atoms/alert';
 import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
 import { login } from '@lib/api/login';
@@ -23,9 +24,10 @@ function Reset(): JSX.Element {
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const [errors, setErrors] = useState<string[]>([]);
 	const [successMessage, setSuccessMessage] = useState('');
+	const [isLoggingIn, setIsLoggingIn] = useState(false);
 	const intl = useIntl();
 
-	const { mutate } = useResetPasswordMutation({
+	const { mutate, isLoading } = useResetPasswordMutation({
 		onSuccess: (data) => {
 			const errors = data.userReset.errors;
 			if (errors.length) {
@@ -40,20 +42,24 @@ function Reset(): JSX.Element {
 				);
 			}
 		},
-		onError: () => {
-			setErrors([
-				intl.formatMessage({
-					id: 'reset__errorGeneral',
-					defaultMessage:
-						'Something went wrong while trying to reset your password',
-					description: 'password reset general submission error',
-				}),
-			]);
+		onError: ({ errors }: { errors?: Array<{ message: string }> }) => {
+			if (errors?.length) {
+				setErrors(errors?.map((e) => e?.message));
+			} else {
+				setErrors([
+					intl.formatMessage({
+						id: 'reset__errorGeneral',
+						defaultMessage:
+							'Something went wrong while trying to reset your password',
+						description: 'password reset general submission error',
+					}),
+				]);
+			}
 		},
 	});
 
-	const submit = (e?: FormEvent<HTMLFormElement>) => {
-		e?.preventDefault();
+	const submit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
 		if (!password || !passwordConfirm) {
 			setErrors([
@@ -78,10 +84,23 @@ function Reset(): JSX.Element {
 		mutate(
 			{ token, password },
 			{
-				onSuccess: () =>
-					login(email, password).then(() =>
-						router.push(makeDiscoverRoute(languageRoute))
-					),
+				onSuccess: async () => {
+					setIsLoggingIn(true);
+					try {
+						await login(email, password);
+						return router.push(makeDiscoverRoute(languageRoute));
+					} catch {
+						setErrors([
+							intl.formatMessage({
+								id: 'reset__errorGeneral',
+								defaultMessage:
+									'Something went wrong while trying to reset your password',
+								description: 'password reset general submission error',
+							}),
+						]);
+						setIsLoggingIn(false);
+					}
+				},
 			}
 		);
 	};
@@ -100,15 +119,15 @@ function Reset(): JSX.Element {
 					<FormattedMessage
 						id="reset__intro"
 						defaultMessage="Create a new password for {email}."
-						values={{ email: <strong>{email}</strong> }}
+						values={{ email: <strong>{email.replace(' ', '+')}</strong> }}
 					/>
 				</p>
 				{!!errors.length && (
-					<ul>
+					<Alert className={styles.errorAlert}>
 						{errors.map((e) => (
-							<li key={e}>{e}</li>
+							<div key={e}>{e}</div>
 						))}
-					</ul>
+					</Alert>
 				)}
 
 				<Input
@@ -142,8 +161,8 @@ function Reset(): JSX.Element {
 					text={
 						<FormattedMessage id="reset__submitButton" defaultMessage="Login" />
 					}
-					onClick={() => submit()}
 					className={styles.submit}
+					disabled={isLoading || isLoggingIn}
 				/>
 			</form>
 		</div>
