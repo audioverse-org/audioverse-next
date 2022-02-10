@@ -3,15 +3,13 @@ import React from 'react';
 import styles from './checkbox.module.scss';
 
 type CheckboxOptions = {
-	label: string;
+	label: string | JSX.Element;
 	checked: boolean;
 	toggleChecked: () => void;
-	type?: string;
 };
 
 export default function Checkbox({
 	label,
-	type,
 	checked,
 	toggleChecked,
 }: CheckboxOptions): JSX.Element {

@@ -6889,6 +6889,7 @@ export type GetProfileDataQuery = {
 		__typename?: 'AuthenticatedUser';
 		user: {
 			__typename?: 'User';
+			id: string | number;
 			email: string;
 			givenName: string | null;
 			surname: string | null;
@@ -6918,6 +6919,7 @@ export type UpdateProfileDataMutation = {
 			__typename?: 'AuthenticatedUser';
 			user: {
 				__typename?: 'User';
+				id: string | number;
 				email: string;
 				givenName: string | null;
 				surname: string | null;
@@ -6934,6 +6936,7 @@ export type UpdateProfileDataMutation = {
 
 export type ProfileFragment = {
 	__typename?: 'User';
+	id: string | number;
 	email: string;
 	givenName: string | null;
 	surname: string | null;
@@ -6943,6 +6946,19 @@ export type ProfileFragment = {
 	province: string | null;
 	postalCode: string | null;
 	country: string | null;
+};
+
+export type DeleteAccountMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type DeleteAccountMutation = {
+	__typename?: 'Mutation';
+	userDelete: {
+		__typename?: 'SuccessPayload';
+		success: boolean;
+		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
+	};
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -12899,7 +12915,7 @@ export const PreferencesFragmentDoc = `
 fragment preferences on User{autoplay language preferredAudioQuality timezone}
 `;
 export const ProfileFragmentDoc = `
-fragment profile on User{email givenName surname address1 address2 city province postalCode country}
+fragment profile on User{id email givenName surname address1 address2 city province postalCode country}
 `;
 export const CollectionPivotFragmentDoc = `
 fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}
@@ -13216,6 +13232,30 @@ export const useUpdateProfileDataMutation = <
 				UpdateProfileDataMutation,
 				UpdateProfileDataMutationVariables
 			>(UpdateProfileDataDocument, variables)(),
+		options
+	);
+export const DeleteAccountDocument = `
+mutation deleteAccount($id:ID!){userDelete(userId:$id destroyData:true){errors{message}success}}
+`;
+export const useDeleteAccountMutation = <TError = unknown, TContext = unknown>(
+	options?: UseMutationOptions<
+		DeleteAccountMutation,
+		TError,
+		DeleteAccountMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		DeleteAccountMutation,
+		TError,
+		DeleteAccountMutationVariables,
+		TContext
+	>(
+		(variables?: DeleteAccountMutationVariables) =>
+			graphqlFetcher<DeleteAccountMutation, DeleteAccountMutationVariables>(
+				DeleteAccountDocument,
+				variables
+			)(),
 		options
 	);
 export const RegisterDocument = `
@@ -15523,6 +15563,12 @@ export async function updateProfileData<T>(
 	variables: ExactAlt<T, UpdateProfileDataMutationVariables>
 ): Promise<UpdateProfileDataMutation> {
 	return fetchApi(UpdateProfileDataDocument, { variables });
+}
+
+export async function deleteAccount<T>(
+	variables: ExactAlt<T, DeleteAccountMutationVariables>
+): Promise<DeleteAccountMutation> {
+	return fetchApi(DeleteAccountDocument, { variables });
 }
 
 export async function register<T>(

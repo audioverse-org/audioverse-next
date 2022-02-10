@@ -104,7 +104,6 @@ function Playlists(): JSX.Element {
 					setValue={setSummary}
 				/>
 				<Checkbox
-					type="checkbox"
 					label={intl.formatMessage({
 						id: 'accountPlaylists__inputLabelPublic',
 						defaultMessage: 'public',

@@ -32,6 +32,7 @@ mutation updateProfileData(
 }
 
 fragment profile on User {
+	id
 	email
 	givenName
 	surname
@@ -41,4 +42,13 @@ fragment profile on User {
 	province
 	postalCode
 	country
+}
+
+mutation deleteAccount($id: ID!) {
+	userDelete(userId: $id, destroyData: true) {
+		errors {
+			message
+		}
+		success
+	}
 }

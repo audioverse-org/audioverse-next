@@ -29,3 +29,16 @@
 		color: $ts-red;
 	}
 }
+
+.deleteConfirmsList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	.label {
+		margin-left: 24px;
+	}
+}
+
+.acknowledgeStatements {
+	color: $ts-red;
+}
