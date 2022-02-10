@@ -15,7 +15,11 @@ export default function Login(): JSX.Element {
 		<AndOnboarding>
 			<SocialLogin />
 			<LoginForm
-				showRegister={() => router.push(makeRegisterRoute(languageRoute))}
+				showRegister={() =>
+					router.push(
+						makeRegisterRoute(languageRoute, router.query.back as string)
+					)
+				}
 			/>
 		</AndOnboarding>
 	);

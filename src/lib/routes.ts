@@ -224,14 +224,22 @@ export const makeContactRoute = (
 	subpath = '/general'
 ): string => `/${languageRoute}/contact${subpath}`;
 
-export const makeLoginRoute = (languageRoute: string): string =>
-	`/${languageRoute}/account/login`;
+export const makeLoginRoute = (
+	languageRoute: string,
+	redirectUrl?: string
+): string =>
+	`/${languageRoute}/account/login${redirectUrl ? `?back=${redirectUrl}` : ''}`;
 
 export const makeLogoutRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/logout`;
 
-export const makeRegisterRoute = (languageRoute: string): string =>
-	`/${languageRoute}/account/register`;
+export const makeRegisterRoute = (
+	languageRoute: string,
+	redirectUrl?: string
+): string =>
+	`/${languageRoute}/account/register${
+		redirectUrl ? `?back=${redirectUrl}` : ''
+	}`;
 
 export const makeAccountProfileRoute = (languageRoute: string): string =>
 	`/${languageRoute}/account/profile`;
@@ -288,3 +296,5 @@ export const makeReleaseRoute = (
 	languageRoute: string,
 	releaseId: Scalars['ID']
 ): string => `/${languageRoute}/releases/${releaseId}`;
+
+export const isRedirectRouteAllowed = (route: string) => route.startsWith('/');

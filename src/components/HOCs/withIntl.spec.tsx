@@ -630,6 +630,9 @@ describe('localization usage', () => {
 
 	scenarios.map((s: Scenario, i: number) => {
 		it(`Localizes scenario index ${i}`, async () => {
+			loadRouter({
+				query: {},
+			});
 			jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
 				isFavorited: false,
 				isLoading: false,
