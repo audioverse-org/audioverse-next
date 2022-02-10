@@ -6,6 +6,7 @@ import React from 'react';
 import Login from '@components/molecules/login';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import {
+	loadRouter,
 	mockedFetchApi,
 	renderWithIntl,
 	withMutedReactQueryLogger,
@@ -26,6 +27,7 @@ function loadForgotPasswordResponse({
 }
 
 describe('login form', () => {
+	beforeEach(() => loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
 		const { getByText } = await renderWithIntl(<Login />);
 
