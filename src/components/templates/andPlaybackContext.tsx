@@ -183,6 +183,7 @@ export default function AndPlaybackContext({
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
+	const [, setVolume] = useState<number>(100);
 
 	const queryClient = useQueryClient();
 
@@ -326,7 +327,10 @@ export default function AndPlaybackContext({
 		},
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
-		setVolume: (volume: number) => playerRef.current?.volume(volume / 100),
+		setVolume: (volume: number) => {
+			setVolume(volume);
+			playerRef.current?.volume(volume / 100);
+		},
 		setSpeed: (s: number) => playerRef.current?.playbackRate(s),
 		getSpeed: () => playerRef.current?.playbackRate() || 1,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
