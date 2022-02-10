@@ -5,7 +5,7 @@ import Alert from '@components/atoms/alert';
 import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import LibraryNav from '@components/organisms/libraryNav';
-import { makeRegisterRoute } from '@lib/routes';
+import { makeLibraryRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import baseStyles from './base.module.scss';
@@ -38,7 +38,10 @@ export default function LibraryLoggedOut(): JSX.Element {
 							defaultMessage="Create account or Login"
 						/>
 					}
-					href={makeRegisterRoute(languageRoute)}
+					href={makeRegisterRoute(
+						languageRoute,
+						makeLibraryRoute(languageRoute)
+					)}
 				/>
 			</Alert>
 		</div>

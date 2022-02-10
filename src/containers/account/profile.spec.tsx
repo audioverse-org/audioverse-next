@@ -18,6 +18,7 @@ import {
 import {
 	buildServerRenderer,
 	loadAuthGuardData,
+	loadRouter,
 	mockedFetchApi,
 	renderWithIntl,
 } from '@lib/test/helpers';
@@ -200,6 +201,9 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
+		loadRouter({
+			query: {},
+		});
 		Cookie.get = jest.fn().mockReturnValue({});
 
 		await renderWithIntl(<Profile />);

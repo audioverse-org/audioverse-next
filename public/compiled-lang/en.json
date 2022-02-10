@@ -479,6 +479,30 @@
       "value": "public"
     }
   ],
+  "andGlobalModals__authCopy": [
+    {
+      "type": 0,
+      "value": "Create a free account or login to access the Library features, like saving, viewing your history, and syncing across devices."
+    }
+  ],
+  "andGlobalModals__authLoginTitle": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
+  "andGlobalModals__authRegisterTitle": [
+    {
+      "type": 0,
+      "value": "Create Account"
+    }
+  ],
+  "andGlobalModals__authTitle": [
+    {
+      "type": 0,
+      "value": "Create a Free Account"
+    }
+  ],
   "andGlobalModals__confirmRemoveFavorite-confirm": [
     {
       "type": 0,
@@ -509,22 +533,10 @@
       "value": "Continue as guest"
     }
   ],
-  "andGlobalModals__copy": [
-    {
-      "type": 0,
-      "value": "You can bookmark audio to access later on your account. Other features include adding audio to your library."
-    }
-  ],
   "andGlobalModals__createAccount": [
     {
       "type": 0,
       "value": "Create Account"
-    }
-  ],
-  "andGlobalModals__heading": [
-    {
-      "type": 0,
-      "value": "Member Only Feature"
     }
   ],
   "andGlobalModals__logIn": [
@@ -713,6 +725,12 @@
       "value": "The best way to learn sound doctrine is by listening to the Word of God. Our audio Bibles give you the ability to listen to great teachings from the greatest teacher of all."
     }
   ],
+  "bible__title": [
+    {
+      "type": 0,
+      "value": "Bible"
+    }
+  ],
   "blogDetailPage__moreBlogPosts": [
     {
       "type": 0,
@@ -727,6 +745,18 @@
     {
       "type": 0,
       "value": " read"
+    }
+  ],
+  "blog__title": [
+    {
+      "type": 0,
+      "value": "All Blog Posts"
+    }
+  ],
+  "books__title": [
+    {
+      "type": 0,
+      "value": "All Audiobooks"
     }
   ],
   "buttonShareRecording__emailSubject": [
@@ -1149,6 +1179,12 @@
       "value": "conferenceName"
     }
   ],
+  "conferences__title": [
+    {
+      "type": 0,
+      "value": "All Conferences"
+    }
+  ],
   "contact__emailLabel": [
     {
       "type": 0,
@@ -1269,6 +1305,12 @@
       "value": "Portions of this production are covered under the following license terms:"
     }
   ],
+  "discoverCollections__title": [
+    {
+      "type": 0,
+      "value": "Discover Collections"
+    }
+  ],
   "discoverCollections_audiobooksHeading": [
     {
       "type": 0,
@@ -1345,6 +1387,12 @@
     {
       "type": 0,
       "value": "See All Stories"
+    }
+  ],
+  "discover__title": [
+    {
+      "type": 0,
+      "value": "Discover"
     }
   ],
   "discover__trendingTeachingsSeeAll": [
@@ -1693,6 +1741,12 @@
     {
       "type": 0,
       "value": "PayPal Giving Fund"
+    }
+  ],
+  "give__title": [
+    {
+      "type": 0,
+      "value": "Donate"
     }
   ],
   "header__navItemBible": [
@@ -2519,6 +2573,18 @@
       "value": "Don’t have an account?"
     }
   ],
+  "loginRedirect__message": [
+    {
+      "type": 0,
+      "value": "Redirecting..."
+    }
+  ],
+  "login__title": [
+    {
+      "type": 0,
+      "value": "Login"
+    }
+  ],
   "logout__inProcess": [
     {
       "type": 0,
@@ -2811,10 +2877,28 @@
       "value": "Search"
     }
   ],
+  "molecule-teaseRecording__individualChapter": [
+    {
+      "type": 0,
+      "value": "Individual Chapter"
+    }
+  ],
+  "molecule-teaseRecording__individualStory": [
+    {
+      "type": 0,
+      "value": "Individual Story"
+    }
+  ],
   "molecule-teaseRecording__individualTeaching": [
     {
       "type": 0,
       "value": "Individual Teaching"
+    }
+  ],
+  "molecule-teaseRecording__individualTrack": [
+    {
+      "type": 0,
+      "value": "Individual Track"
     }
   ],
   "molecule-teaseRecording__lessPersons": [
@@ -3013,6 +3097,18 @@
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "ourPurpose__title": [
+    {
+      "type": 0,
+      "value": "Our Purpose"
+    }
+  ],
+  "ourStory__title": [
+    {
+      "type": 0,
+      "value": "Our Story"
     }
   ],
   "personTypeLockup_type": [
@@ -3395,6 +3491,22 @@
       "value": "personName"
     }
   ],
+  "presentersTop__title": [
+    {
+      "type": 0,
+      "value": "Most Listened by "
+    },
+    {
+      "type": 1,
+      "value": "personName"
+    }
+  ],
+  "presenters__title": [
+    {
+      "type": 0,
+      "value": "All Presenters"
+    }
+  ],
   "profile__buttonLabelDeleteAccount": [
     {
       "type": 0,
@@ -3525,6 +3637,12 @@
     {
       "type": 0,
       "value": "Sign up"
+    }
+  ],
+  "register__title": [
+    {
+      "type": 0,
+      "value": "Register"
     }
   ],
   "release__messageSubmitted": [
@@ -3719,6 +3837,12 @@
       "value": "See All Teachings"
     }
   ],
+  "search__title": [
+    {
+      "type": 0,
+      "value": "Search"
+    }
+  ],
   "sequenceType__audiobookTitle": [
     {
       "type": 0,
@@ -3778,6 +3902,12 @@
     }
   ],
   "seriesList__heading": [
+    {
+      "type": 0,
+      "value": "All Series"
+    }
+  ],
+  "seriesList__title": [
     {
       "type": 0,
       "value": "All Series"
@@ -3911,6 +4041,16 @@
       "value": "success"
     }
   ],
+  "songBook__title": [
+    {
+      "type": 1,
+      "value": "book"
+    },
+    {
+      "type": 0,
+      "value": " Scripture Songs"
+    }
+  ],
   "songsBooksDetail__contributors": [
     {
       "type": 0,
@@ -3955,6 +4095,12 @@
     {
       "type": 0,
       "value": "Sponsor"
+    }
+  ],
+  "spiritOfAv__title": [
+    {
+      "type": 0,
+      "value": "Spirit Of AudioVerse"
     }
   ],
   "sponsorConferencesDetail__heading": [
@@ -4119,6 +4265,12 @@
       "value": "sponsorName"
     }
   ],
+  "sponsors__title": [
+    {
+      "type": 0,
+      "value": "All Sponsors"
+    }
+  ],
   "storyAlbumList__heading": [
     {
       "type": 0,
@@ -4147,6 +4299,12 @@
       "value": "narrators"
     }
   ],
+  "storyAlbums__title": [
+    {
+      "type": 0,
+      "value": "Scripture Songs"
+    }
+  ],
   "teachingsFeed__description": [
     {
       "type": 0,
@@ -4169,6 +4327,18 @@
     {
       "type": 0,
       "value": ")"
+    }
+  ],
+  "teachings__title": [
+    {
+      "type": 0,
+      "value": "All Teachings"
+    }
+  ],
+  "team__title": [
+    {
+      "type": 0,
+      "value": "Our Team"
     }
   ],
   "testimonies__heading": [
@@ -4199,6 +4369,12 @@
     {
       "type": 0,
       "value": "Submit a Testimony"
+    }
+  ],
+  "testimonies__title": [
+    {
+      "type": 0,
+      "value": "Testimonials"
     }
   ],
   "time__hoursMinutesAndSeconds": [
@@ -4238,6 +4414,12 @@
     }
   ],
   "trendingTeachings__heading": [
+    {
+      "type": 0,
+      "value": "Trending Teachings"
+    }
+  ],
+  "trending__title": [
     {
       "type": 0,
       "value": "Trending Teachings"

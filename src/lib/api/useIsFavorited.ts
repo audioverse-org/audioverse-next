@@ -60,7 +60,7 @@ export function useIsFavorited(
 	const toggleFavorited = () => {
 		const isLoggedOut = !getSessionToken();
 		if (isLoggedOut) {
-			return context.challengeAuth();
+			return context.challengeAuth(() => mutate());
 		}
 		const requiresConfirmation = router.pathname.includes(
 			'/[language]/library'

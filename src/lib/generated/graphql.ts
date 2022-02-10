@@ -6889,6 +6889,7 @@ export type GetProfileDataQuery = {
 		__typename?: 'AuthenticatedUser';
 		user: {
 			__typename?: 'User';
+			id: string | number;
 			email: string;
 			givenName: string | null;
 			surname: string | null;
@@ -6918,6 +6919,7 @@ export type UpdateProfileDataMutation = {
 			__typename?: 'AuthenticatedUser';
 			user: {
 				__typename?: 'User';
+				id: string | number;
 				email: string;
 				givenName: string | null;
 				surname: string | null;
@@ -6934,6 +6936,7 @@ export type UpdateProfileDataMutation = {
 
 export type ProfileFragment = {
 	__typename?: 'User';
+	id: string | number;
 	email: string;
 	givenName: string | null;
 	surname: string | null;
@@ -6943,6 +6946,19 @@ export type ProfileFragment = {
 	province: string | null;
 	postalCode: string | null;
 	country: string | null;
+};
+
+export type DeleteAccountMutationVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type DeleteAccountMutation = {
+	__typename?: 'Mutation';
+	userDelete: {
+		__typename?: 'SuccessPayload';
+		success: boolean;
+		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
+	};
 };
 
 export type RegisterMutationVariables = Exact<{
@@ -6956,6 +6972,10 @@ export type RegisterMutation = {
 	__typename?: 'Mutation';
 	signup: {
 		__typename?: 'AuthenticatedUserPayload';
+		authenticatedUser: {
+			__typename?: 'AuthenticatedUser';
+			sessionToken: string;
+		} | null;
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
 };
@@ -6978,16 +6998,6 @@ export type RegisterSocialMutation = {
 		} | null;
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
-};
-
-export type RegisterIsLoggedInQueryVariables = Exact<{ [key: string]: never }>;
-
-export type RegisterIsLoggedInQuery = {
-	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: { __typename?: 'User'; email: string };
-	} | null;
 };
 
 export type ResetPasswordMutationVariables = Exact<{
@@ -12905,7 +12915,7 @@ export const PreferencesFragmentDoc = `
 fragment preferences on User{autoplay language preferredAudioQuality timezone}
 `;
 export const ProfileFragmentDoc = `
-fragment profile on User{email givenName surname address1 address2 city province postalCode country}
+fragment profile on User{id email givenName surname address1 address2 city province postalCode country}
 `;
 export const CollectionPivotFragmentDoc = `
 fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}
@@ -13224,8 +13234,32 @@ export const useUpdateProfileDataMutation = <
 			>(UpdateProfileDataDocument, variables)(),
 		options
 	);
+export const DeleteAccountDocument = `
+mutation deleteAccount($id:ID!){userDelete(userId:$id destroyData:true){errors{message}success}}
+`;
+export const useDeleteAccountMutation = <TError = unknown, TContext = unknown>(
+	options?: UseMutationOptions<
+		DeleteAccountMutation,
+		TError,
+		DeleteAccountMutationVariables,
+		TContext
+	>
+) =>
+	useMutation<
+		DeleteAccountMutation,
+		TError,
+		DeleteAccountMutationVariables,
+		TContext
+	>(
+		(variables?: DeleteAccountMutationVariables) =>
+			graphqlFetcher<DeleteAccountMutation, DeleteAccountMutationVariables>(
+				DeleteAccountDocument,
+				variables
+			)(),
+		options
+	);
 export const RegisterDocument = `
-mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){errors{message}}}
+mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){authenticatedUser{sessionToken}errors{message}}}
 `;
 export const useRegisterMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
@@ -13265,24 +13299,6 @@ export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
 				RegisterSocialDocument,
 				variables
 			)(),
-		options
-	);
-export const RegisterIsLoggedInDocument = `
-query registerIsLoggedIn{me{user{email}}}
-`;
-export const useRegisterIsLoggedInQuery = <
-	TData = RegisterIsLoggedInQuery,
-	TError = unknown
->(
-	variables?: RegisterIsLoggedInQueryVariables,
-	options?: UseQueryOptions<RegisterIsLoggedInQuery, TError, TData>
-) =>
-	useQuery<RegisterIsLoggedInQuery, TError, TData>(
-		['registerIsLoggedIn', variables],
-		graphqlFetcher<RegisterIsLoggedInQuery, RegisterIsLoggedInQueryVariables>(
-			RegisterIsLoggedInDocument,
-			variables
-		),
 		options
 	);
 export const ResetPasswordDocument = `
@@ -15549,6 +15565,12 @@ export async function updateProfileData<T>(
 	return fetchApi(UpdateProfileDataDocument, { variables });
 }
 
+export async function deleteAccount<T>(
+	variables: ExactAlt<T, DeleteAccountMutationVariables>
+): Promise<DeleteAccountMutation> {
+	return fetchApi(DeleteAccountDocument, { variables });
+}
+
 export async function register<T>(
 	variables: ExactAlt<T, RegisterMutationVariables>
 ): Promise<RegisterMutation> {
@@ -15559,12 +15581,6 @@ export async function registerSocial<T>(
 	variables: ExactAlt<T, RegisterSocialMutationVariables>
 ): Promise<RegisterSocialMutation> {
 	return fetchApi(RegisterSocialDocument, { variables });
-}
-
-export async function registerIsLoggedIn<T>(
-	variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
-): Promise<RegisterIsLoggedInQuery> {
-	return fetchApi(RegisterIsLoggedInDocument, { variables });
 }
 
 export async function resetPassword<T>(

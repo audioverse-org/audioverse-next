@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
@@ -6,27 +7,58 @@ import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import Button from '@components/molecules/button';
+import Checkbox from '@components/molecules/form/checkbox';
 import Input from '@components/molecules/form/input';
 import AccountNav from '@components/organisms/accountNav';
-import { invalidateAndResetUserQueries } from '@lib/api/login';
+import Modal from '@components/organisms/modal';
+import { refetchUserQueries, resetUserQueries } from '@lib/api/login';
+import { clearSessionToken } from '@lib/cookies';
 import {
+	useDeleteAccountMutation,
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
+import { makeDiscoverRoute } from '@lib/routes';
+import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './profile.module.scss';
 
 function Profile(): JSX.Element {
+	const languageRoute = useLanguageRoute();
 	const queryClient = useQueryClient();
+	const router = useRouter();
 	const { data } = useGetProfileDataQuery() || {};
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [givenName, setGivenName] = useState('');
 	const [surname, setSurname] = useState('');
+	const [showingDeleteConfirm, setShowingDeleteConfirm] = useState(false);
+
+	const [acceptedDeletedImmediately, setAcceptedDeletedImmediately] =
+		useState(false);
+	const [acceptedLibraryLost, setAcceptedLibraryLost] = useState(false);
+	const [acceptedNoLogin, setAcceptedNoLogin] = useState(false);
+	const [mustAcknowledgeDisclosures, setMustAcknowledgeDisclosures] =
+		useState(false);
+
+	useEffect(() => {
+		if (acceptedDeletedImmediately && acceptedLibraryLost && acceptedNoLogin) {
+			setMustAcknowledgeDisclosures(false);
+		}
+	}, [acceptedDeletedImmediately, acceptedLibraryLost, acceptedNoLogin]);
+
+	useEffect(() => {
+		if (!showingDeleteConfirm) {
+			setAcceptedDeletedImmediately(false);
+			setAcceptedLibraryLost(false);
+			setAcceptedNoLogin(false);
+			setMustAcknowledgeDisclosures(false);
+		}
+	}, [showingDeleteConfirm]);
 
 	const { mutate } = useUpdateProfileDataMutation({
-		onSuccess: () => invalidateAndResetUserQueries(queryClient),
+		onSuccess: () => refetchUserQueries(queryClient),
 	});
 	const intl = useIntl();
 
@@ -51,6 +83,14 @@ function Profile(): JSX.Element {
 			surname,
 		});
 	}
+
+	const { isLoading, mutate: deleteAccountMutate } = useDeleteAccountMutation({
+		onSuccess: async () => {
+			clearSessionToken();
+			resetUserQueries(queryClient);
+			router.push(makeDiscoverRoute(languageRoute));
+		},
+	});
 
 	return (
 		<>
@@ -122,6 +162,10 @@ function Profile(): JSX.Element {
 							/>
 						}
 						className={styles.deleteButton}
+						onClick={(e) => {
+							e.preventDefault();
+							setShowingDeleteConfirm(true);
+						}}
 					/>
 
 					<div className={styles.buttonRow}>
@@ -138,6 +182,114 @@ function Profile(): JSX.Element {
 					</div>
 				</form>
 			</div>
+			<Modal
+				open={showingDeleteConfirm}
+				onClose={() => setShowingDeleteConfirm(false)}
+				title={
+					<FormattedMessage
+						id="profile__deleteConfirmTitle"
+						defaultMessage="Are you sure?"
+					/>
+				}
+				actions={
+					<>
+						<Button
+							onClick={() => {
+								if (
+									!acceptedDeletedImmediately ||
+									!acceptedLibraryLost ||
+									!acceptedNoLogin
+								) {
+									setMustAcknowledgeDisclosures(true);
+								} else {
+									setMustAcknowledgeDisclosures(false);
+									deleteAccountMutate({ id: data?.me?.user.id as number });
+								}
+							}}
+							type="super"
+							text={
+								<FormattedMessage
+									id="profile__deleteConfirmDelete"
+									defaultMessage="Delete account"
+								/>
+							}
+							disabled={isLoading}
+						/>
+						<Button
+							onClick={() => setShowingDeleteConfirm(false)}
+							type="primary"
+							text={
+								<FormattedMessage
+									id="profile__deleteConfirmNevermind"
+									defaultMessage="Never mind"
+								/>
+							}
+							disabled={isLoading}
+						/>
+					</>
+				}
+			>
+				<p>
+					<FormattedMessage
+						id="profile__deleteConfirmIntro"
+						defaultMessage="Do you want to delete your account? You cannot undo this action."
+					/>
+				</p>
+				<ul className={styles.deleteConfirmsList}>
+					<li>
+						<Checkbox
+							label={
+								<div className={styles.label}>
+									<FormattedMessage
+										id="profile__deleteConfirmImmediatelyDeleted"
+										defaultMessage="I understand that my account will be immediately deleted."
+									/>
+								</div>
+							}
+							checked={acceptedDeletedImmediately}
+							toggleChecked={() =>
+								setAcceptedDeletedImmediately(!acceptedDeletedImmediately)
+							}
+						/>
+					</li>
+					<li>
+						<Checkbox
+							label={
+								<div className={styles.label}>
+									<FormattedMessage
+										id="profile__deleteConfirmLibraryLost"
+										defaultMessage="I understand that all my saved library will be lost."
+									/>
+								</div>
+							}
+							checked={acceptedLibraryLost}
+							toggleChecked={() => setAcceptedLibraryLost(!acceptedLibraryLost)}
+						/>
+					</li>
+					<li>
+						<Checkbox
+							label={
+								<div className={styles.label}>
+									<FormattedMessage
+										id="profile__deleteConfirmNoLogin"
+										defaultMessage="I understand that I will no longer be able to log in unless I create a new account."
+									/>
+								</div>
+							}
+							checked={acceptedNoLogin}
+							toggleChecked={() => setAcceptedNoLogin(!acceptedNoLogin)}
+						/>
+					</li>
+				</ul>
+				{mustAcknowledgeDisclosures && (
+					<p className={styles.acknowledgeStatements}>
+						<FormattedMessage
+							id="profile__deleteConfirmAcknowledgeStatements"
+							defaultMessage="Please acknowledge all the above statements."
+						/>
+					</p>
+				)}
+			</Modal>
 		</>
 	);
 }

@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 
@@ -198,77 +198,85 @@ describe('password reset page', () => {
 	});
 
 	it('displays success message', async () => {
-		loadResetPasswordResponse({
-			success: true,
-			errors: [],
-		});
+		await act(async () => {
+			loadResetPasswordResponse({
+				success: true,
+				errors: [],
+			});
 
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-			router,
-		});
-
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
-
-		await waitFor(() => {
-			expect(
-				getByText('Your password was successfully changed')
-			).toBeInTheDocument();
-		});
-	});
-
-	it('does not display success message if not successful', async () => {
-		loadResetPasswordResponse({
-			success: false,
-			errors: [],
-		});
-
-		const { getByPlaceholderText, getByText, queryByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-			router,
-		});
-
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
-
-		await sleep();
-
-		expect(
-			queryByText('Your password was successfully changed')
-		).not.toBeInTheDocument();
-	});
-
-	it('hides form on success', async () => {
-		loadResetPasswordResponse({
-			success: true,
-			errors: [],
-		});
-
-		const { getByPlaceholderText, getByText, queryByPlaceholderText } =
-			await renderPage({
+			const { getByPlaceholderText, getByText } = await renderPage({
 				params: {
 					token: 'the_token',
 				},
 				router,
 			});
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+			userEvent.click(getByText('Login'));
 
-		await waitFor(() => {
-			expect(
-				getByText('Your password was successfully changed')
-			).toBeInTheDocument();
+			await waitFor(() => {
+				expect(
+					getByText('Your password was successfully changed')
+				).toBeInTheDocument();
+			});
 		});
+	});
 
-		expect(queryByPlaceholderText('New password')).not.toBeInTheDocument();
+	it('does not display success message if not successful', async () => {
+		await act(async () => {
+			loadResetPasswordResponse({
+				success: false,
+				errors: [],
+			});
+
+			const { getByPlaceholderText, getByText, queryByText } = await renderPage(
+				{
+					params: {
+						token: 'the_token',
+					},
+					router,
+				}
+			);
+
+			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+			userEvent.click(getByText('Login'));
+
+			await sleep();
+
+			expect(
+				queryByText('Your password was successfully changed')
+			).not.toBeInTheDocument();
+		});
+	});
+
+	it('hides form on success', async () => {
+		await act(async () => {
+			loadResetPasswordResponse({
+				success: true,
+				errors: [],
+			});
+
+			const { getByPlaceholderText, getByText, queryByPlaceholderText } =
+				await renderPage({
+					params: {
+						token: 'the_token',
+					},
+					router,
+				});
+
+			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+			userEvent.click(getByText('Login'));
+
+			await waitFor(() => {
+				expect(
+					getByText('Your password was successfully changed')
+				).toBeInTheDocument();
+			});
+
+			expect(queryByPlaceholderText('New password')).not.toBeInTheDocument();
+		});
 	});
 });

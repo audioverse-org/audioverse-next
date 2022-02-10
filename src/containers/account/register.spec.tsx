@@ -7,7 +7,6 @@ import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-
 
 import {
 	RegisterDocument,
-	RegisterIsLoggedInDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
@@ -286,15 +285,7 @@ describe('register page', () => {
 	});
 
 	it('does not display form if user logged in', async () => {
-		when(mockedFetchApi)
-			.calledWith(RegisterIsLoggedInDocument, expect.anything())
-			.mockResolvedValue({
-				me: {
-					user: {
-						email: 'the_email',
-					},
-				},
-			});
+		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 
 		const { queryByPlaceholderText } = await renderPage({ router });
 
