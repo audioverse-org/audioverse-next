@@ -169,7 +169,7 @@ const Navigation = ({
 									</span>
 								</>
 							) : (
-								<Link href={makeLoginRoute(languageRoute)}>
+								<Link href={makeLoginRoute(languageRoute, router.asPath)}>
 									<a className="decorated">
 										<span className={styles.accountAvatar}>
 											<IconUser />

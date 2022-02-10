@@ -17,7 +17,11 @@ function Register(): JSX.Element {
 		<AndOnboarding>
 			<SocialLogin isRegister />
 			<RegisterForm
-				showLogin={() => router.push(makeLoginRoute(languageRoute))}
+				showLogin={() =>
+					router.push(
+						makeLoginRoute(languageRoute, router.query.back as string)
+					)
+				}
 				onSuccess={() => router.push(makeDiscoverRoute(languageRoute))}
 			/>
 		</AndOnboarding>

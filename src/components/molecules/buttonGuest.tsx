@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import Modal from '@components/organisms/modal';
 import {
+	isRedirectRouteAllowed,
 	makeDiscoverRoute,
 	makeLoginRoute,
 	makeRegisterRoute,
@@ -23,11 +25,17 @@ export default function ButtonGuest({
 }): JSX.Element {
 	const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
 	const language = useLanguageRoute();
+	const router = useRouter();
+	const backRoute = router.query.back as string;
+	const redirectRoute =
+		backRoute && isRedirectRouteAllowed(backRoute)
+			? backRoute
+			: makeDiscoverRoute(language);
 
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-				<Link href={makeDiscoverRoute(language)}>
+				<Link href={redirectRoute}>
 					<a className="decorated">
 						<FormattedMessage
 							id="molecule-buttonGuest__label"
@@ -59,7 +67,7 @@ export default function ButtonGuest({
 					<>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
-							href={makeRegisterRoute(language)}
+							href={makeRegisterRoute(language, redirectRoute)}
 							type="super"
 							text={
 								<FormattedMessage
@@ -70,7 +78,7 @@ export default function ButtonGuest({
 						/>
 						<Button
 							onClick={() => setIsGuestModalOpen(false)}
-							href={makeLoginRoute(language)}
+							href={makeLoginRoute(language, redirectRoute)}
 							type="primary"
 							text={
 								<FormattedMessage
@@ -79,7 +87,7 @@ export default function ButtonGuest({
 								/>
 							}
 						/>
-						<Link href={makeDiscoverRoute(language)}>
+						<Link href={redirectRoute}>
 							<a className="decorated">
 								<FormattedMessage
 									id="molecule-buttonGuest__modalButtonLabelGuest"
