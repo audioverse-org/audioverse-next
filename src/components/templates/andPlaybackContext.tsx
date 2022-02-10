@@ -8,18 +8,17 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import { unstable_batchedUpdates } from 'react-dom';
-import { useMutation } from 'react-query';
-import type { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
+import { useMutation, useQueryClient } from 'react-query';
+import type { VideoJsPlayer } from 'video.js';
 import * as VideoJs from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
+	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
-	useGetRecordingPlaybackProgressQuery,
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
@@ -114,6 +113,10 @@ export type PlaybackContextType = {
 		video?: MutableRefObject<HTMLDivElement | null>;
 		videoEl?: MutableRefObject<HTMLVideoElement | null>;
 	};
+	_setRecording: (
+		recording: AndMiniplayerFragment,
+		prefersAudio?: boolean
+	) => void;
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
@@ -146,6 +149,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
+	_setRecording: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -161,40 +165,21 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
-	const [player, setPlayer] = useState<VideoJsPlayer>();
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
 	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
-	const [serverProgress, setServerProgress] = useState<number>(0);
+	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
+	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [volume, setVolume] = useState<number>(100);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
-	const [sources, setSources] = useState<Playable[]>([]);
-	const [onLoad, setOnLoad] = useState<(c: PlaybackContextType) => void>();
-	const [fingerprint, setFingerprint] = useState<string>();
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 
-	const { data, isLoading } = useGetRecordingPlaybackProgressQuery(
-		{
-			id: recording?.id || 0,
-		},
-		{
-			enabled: shouldLoadRecordingPlaybackProgress(recording),
-		}
-	);
-	useEffect(() => {
-		if (data?.recording?.viewerPlaybackSession) {
-			const p = data.recording.viewerPlaybackSession.positionPercentage;
-			setServerProgress(p);
-		} else {
-			setServerProgress(0);
-		}
-	}, [recording?.id, data, isLoading]);
+	const queryClient = useQueryClient();
 
 	const { mutate: updateProgress } = useMutation(
 		({
@@ -210,8 +195,14 @@ export default function AndPlaybackContext({
 		}
 	);
 
-	const playerBufferedEnd = player?.bufferedEnd();
-	const duration = sources[0]?.duration || recording?.duration || 0;
+	const sourcesRef = useRef<Playable[]>([]);
+	useEffect(() => {
+		if (!recording) return;
+		sourcesRef.current = getSources(recording, prefersAudio);
+	}, [recording, prefersAudio]);
+
+	const playerBufferedEnd = playerRef.current?.bufferedEnd();
+	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
@@ -220,7 +211,7 @@ export default function AndPlaybackContext({
 		).toFixed(2);
 		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
 		setBufferedProgress(newBufferedProgress);
-	}, [bufferedProgress, playerBufferedEnd, progress, duration, sources]);
+	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
 
 	const throttledUpdateProgress = useMemo(
 		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
@@ -236,47 +227,32 @@ export default function AndPlaybackContext({
 		[throttledUpdateProgress]
 	);
 
-	const hasSources = sources && sources.length > 0;
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
-
-	const options: VideoJsPlayerOptions = useMemo(
-		() => ({
-			poster: '/img/poster.jpg',
-			controls: false,
-			preload: 'auto',
-			sources,
-		}),
-		[sources]
-	);
 
 	useEffect(() => {
 		progressRef.current = progress;
 	}, [progress]);
 
+	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
 		play: () => {
-			player?.play();
+			playerRef.current?.play();
 			setIsPaused(false);
 		},
 		pause: () => {
-			player?.pause();
+			playerRef.current?.pause();
 			setIsPaused(true);
 		},
-		paused: () => {
-			return isPaused;
-		},
-		player: () => player,
-		getTime: () => {
-			return (
-				(!onLoad && player?.currentTime()) ||
-				serverProgress * playback.getDuration() ||
-				0
-			);
-		},
+		paused: () => isPaused,
+		player: () => playerRef.current,
+		getTime: () =>
+			(!onLoadRef.current && playerRef.current?.currentTime()) ||
+			progress * playback.getDuration() ||
+			0,
 		setTime: (t: number) => {
-			if (!player) return;
-			setProgress(t / player.duration());
-			player.currentTime(t);
+			if (!playerRef.current) return;
+			setProgress(t / playerRef.current.duration());
+			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
 			if (!recording) return;
@@ -284,19 +260,21 @@ export default function AndPlaybackContext({
 		},
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
-			return (!onLoad && player?.duration()) || duration;
+			return (
+				(!onLoadRef.current && playerRef.current?.duration()) ||
+				sourcesRef.current[0]?.duration ||
+				recordingRef.current?.duration ||
+				0
+			);
 		},
-		getProgress: () => {
-			return progress;
-		},
-		getBufferedProgress: () => {
-			return bufferedProgress;
-		},
+		getProgress: () => progress,
+		getBufferedProgress: () => bufferedProgress,
 		setProgress: (p: number, updatePlayer = true) => {
 			setProgress(p);
 			const duration = playback.getDuration();
-			if (!player || !duration || isNaN(duration) || !updatePlayer) return;
-			player.currentTime(p * duration);
+			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
+				return;
+			playerRef.current.currentTime(p * duration);
 		},
 		getRecording: () => recording,
 		loadRecording: (
@@ -304,18 +282,22 @@ export default function AndPlaybackContext({
 			options = {}
 		) => {
 			const { onLoad, prefersAudio } = options;
-			setOnLoad(() => onLoad);
+			onLoadRef.current = onLoad;
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
 				: [recordingOrRecordings];
 			setSourceRecordings(recordingsArray);
-			setRecording(recordingsArray[0]);
+			const newRecording = recordingsArray[0];
+			setRecording(newRecording);
+			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
 				setPrefersAudio(prefersAudio);
 			}
-			if (videoHandlerId && recordingsArray[0].id !== videoHandlerId) {
+			if (videoHandlerId && newRecording.id !== videoHandlerId) {
 				playback.unsetVideoHandler(videoHandlerId);
 			}
+
+			playback._setRecording(newRecording, prefersAudio);
 		},
 		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
 			setVideoHandlerId(id);
@@ -327,7 +309,7 @@ export default function AndPlaybackContext({
 			setVideoHandlerId(undefined);
 			setVideoHandler(undefined);
 		},
-		hasPlayer: () => !!player,
+		hasPlayer: () => !!playerRef.current,
 		hasVideo: () => !!recording && hasVideo(recording),
 		isShowingVideo: () => isShowingVideo,
 		getVideoLocation: () => {
@@ -337,19 +319,18 @@ export default function AndPlaybackContext({
 
 			return 'miniplayer';
 		},
-		supportsFullscreen: () => (player ? player.supportsFullScreen() : false),
-		getVolume: () => volume,
-		setVolume,
-		setSpeed: (s: number) => player?.playbackRate(s),
-		getSpeed: () => player?.playbackRate() || 1,
-		requestFullscreen: () => {
-			player?.requestFullscreen();
-		},
+		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
+		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
+		setVolume: (volume: number) => playerRef.current?.volume(volume / 100),
+		setSpeed: (s: number) => playerRef.current?.playbackRate(s),
+		getSpeed: () => playerRef.current?.playbackRate() || 1,
+		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			if (sourceRecordings && sourceRecordings.length > 1) {
 				setRecording(sourceRecordings[1]);
 				setSourceRecordings(sourceRecordings?.slice(1));
-				setOnLoad(() => () => playback.play());
+				onLoadRef.current = () => playback.play();
+				playback._setRecording(sourceRecordings[1], prefersAudio);
 			}
 		},
 		setIsPaused: (paused) => setIsPaused(paused),
@@ -358,58 +339,60 @@ export default function AndPlaybackContext({
 			video: videoRef,
 			videoEl: videoElRef,
 		}),
-	};
+		_setRecording: (
+			recording: AndMiniplayerFragment,
+			prefersAudio: boolean | undefined
+		) => {
+			if (!videoElRef.current) return;
 
-	useEffect(() => {
-		if (!recording) return;
-		setSources(getSources(recording, prefersAudio));
-	}, [recording, prefersAudio]);
+			const sources = getSources(recording, prefersAudio || false);
+			sourcesRef.current = sources;
 
-	useEffect(() => {
-		// TODO: return if onLoad
-		if (!videoElRef.current) return;
-		if (!hasSources) return;
-
-		const p = player || VideoJs.default(videoElRef.current, options);
-
-		unstable_batchedUpdates(() => {
-			const logUrl = sources.find((s) => s.logUrl)?.logUrl;
-			if (logUrl) {
-				fetch(logUrl);
+			if (playerRef.current) {
+				playerRef.current.src(sources);
+			} else {
+				const p = VideoJs.default(videoElRef.current, {
+					poster: '/img/poster.jpg',
+					controls: false,
+					preload: 'auto',
+					defaultVolume: 1,
+					sources,
+				});
+				p.on('fullscreenchange', () => {
+					p.controls(p.isFullscreen());
+				});
+				playerRef.current = p;
 			}
 
-			if (!player) {
-				setPlayer(p);
-			} else if (sources) {
-				player.src(sources);
+			const logUrl = sources.find((s) => s.logUrl)?.logUrl;
+			if (logUrl) {
+				fetch(logUrl).catch(() => {
+					// We don't want Promise rejections here to clutter the console
+				});
 			}
 
 			setIsPaused(true);
-			const progress = serverProgress || 0;
+			const serverProgress =
+				queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
+					'getRecordingPlaybackProgress',
+					{ id: recording.id },
+				]);
+			const progress =
+				serverProgress?.recording?.viewerPlaybackSession?.positionPercentage ||
+				0;
 			_setProgress(progress);
 
 			setBufferedProgress(0);
 
-			p.currentTime(progress * duration);
-			setVolume(p.volume() * 100);
+			playerRef.current.currentTime(progress * playback.getDuration());
 
-			setFingerprint(JSON.stringify(sources));
-		});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [options, hasSources, sources, videoElRef.current]);
-
-	useEffect(() => {
-		onLoad && onLoad(playback);
-		setOnLoad(undefined);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [fingerprint]);
+			onLoadRef.current && onLoadRef.current(playback);
+			onLoadRef.current = undefined;
+		},
+	};
 
 	useEffect(() => {
-		player?.volume(volume / 100);
-	}, [player, volume]);
-
-	useEffect(() => {
-		if (onLoad) {
+		if (onLoadRef.current) {
 			return;
 		}
 
@@ -444,14 +427,7 @@ export default function AndPlaybackContext({
 		}
 
 		destination.appendChild(video);
-	}, [videoHandlerId, videoHandler, isShowingVideo, onLoad]);
-
-	useEffect(() => {
-		if (!player) return;
-		player.on('fullscreenchange', () => {
-			player.controls(player.isFullscreen());
-		});
-	}, [player]);
+	}, [videoHandlerId, videoHandler, isShowingVideo]);
 
 	return (
 		<PlaybackContext.Provider value={playback}>

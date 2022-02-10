@@ -122,7 +122,9 @@ describe('player', () => {
 	});
 
 	it('sets current time', async () => {
-		const mockPlayer = setPlayerMock();
+		const mockPlayer = setPlayerMock({
+			duration: 1234,
+		});
 
 		const { getByLabelText } = await renderComponent();
 
