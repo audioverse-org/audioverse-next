@@ -64,7 +64,7 @@ export async function fetchApi<TData>(
 			headers,
 			errors: json.errors,
 		});
-		throw new Error('API encountered errors');
+		throw json;
 	}
 
 	return json.data;
