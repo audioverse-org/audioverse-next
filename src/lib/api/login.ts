@@ -6,16 +6,28 @@ import { login as _login } from '@lib/generated/graphql';
 export const USER_SESSION_QUERY_KEYS = [
 	['getWithAuthGuardData'],
 	['getProfileData'],
+	['isCollectionFavorited'],
+	['collectionIsFavorited'],
+	['isRecordingFavorited'],
+	['isSequenceFavorited'],
+	['sequenceIsFavorited'],
+	['isSponsorFavorited'],
 ];
 
-export function invalidateAndResetUserQueries(
+export async function resetUserQueries(
 	queryClient: QueryClient
 ): Promise<void> {
-	return Promise.all(
-		USER_SESSION_QUERY_KEYS.map((key) => queryClient.invalidateQueries(key))
-	).then(async () => {
-		await USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key));
-	});
+	await Promise.all(
+		USER_SESSION_QUERY_KEYS.map((key) => queryClient.resetQueries(key))
+	);
+}
+
+export async function refetchUserQueries(
+	queryClient: QueryClient
+): Promise<void> {
+	await Promise.all(
+		USER_SESSION_QUERY_KEYS.map((key) => queryClient.refetchQueries(key))
+	);
 }
 
 export async function login(email: string, password: string): Promise<boolean> {

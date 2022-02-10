@@ -6956,6 +6956,10 @@ export type RegisterMutation = {
 	__typename?: 'Mutation';
 	signup: {
 		__typename?: 'AuthenticatedUserPayload';
+		authenticatedUser: {
+			__typename?: 'AuthenticatedUser';
+			sessionToken: string;
+		} | null;
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
 };
@@ -6978,16 +6982,6 @@ export type RegisterSocialMutation = {
 		} | null;
 		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
-};
-
-export type RegisterIsLoggedInQueryVariables = Exact<{ [key: string]: never }>;
-
-export type RegisterIsLoggedInQuery = {
-	__typename?: 'Query';
-	me: {
-		__typename?: 'AuthenticatedUser';
-		user: { __typename?: 'User'; email: string };
-	} | null;
 };
 
 export type ResetPasswordMutationVariables = Exact<{
@@ -13225,7 +13219,7 @@ export const useUpdateProfileDataMutation = <
 		options
 	);
 export const RegisterDocument = `
-mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){errors{message}}}
+mutation register($email:String!$password:String!$firstName:String!$lastName:String!){signup(input:{email:$email password:$password givenName:$firstName surname:$lastName}){authenticatedUser{sessionToken}errors{message}}}
 `;
 export const useRegisterMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
@@ -13265,24 +13259,6 @@ export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
 				RegisterSocialDocument,
 				variables
 			)(),
-		options
-	);
-export const RegisterIsLoggedInDocument = `
-query registerIsLoggedIn{me{user{email}}}
-`;
-export const useRegisterIsLoggedInQuery = <
-	TData = RegisterIsLoggedInQuery,
-	TError = unknown
->(
-	variables?: RegisterIsLoggedInQueryVariables,
-	options?: UseQueryOptions<RegisterIsLoggedInQuery, TError, TData>
-) =>
-	useQuery<RegisterIsLoggedInQuery, TError, TData>(
-		['registerIsLoggedIn', variables],
-		graphqlFetcher<RegisterIsLoggedInQuery, RegisterIsLoggedInQueryVariables>(
-			RegisterIsLoggedInDocument,
-			variables
-		),
 		options
 	);
 export const ResetPasswordDocument = `
@@ -15559,12 +15535,6 @@ export async function registerSocial<T>(
 	variables: ExactAlt<T, RegisterSocialMutationVariables>
 ): Promise<RegisterSocialMutation> {
 	return fetchApi(RegisterSocialDocument, { variables });
-}
-
-export async function registerIsLoggedIn<T>(
-	variables: ExactAlt<T, RegisterIsLoggedInQueryVariables>
-): Promise<RegisterIsLoggedInQuery> {
-	return fetchApi(RegisterIsLoggedInDocument, { variables });
 }
 
 export async function resetPassword<T>(
