@@ -9,7 +9,7 @@ import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
@@ -17,6 +17,7 @@ function render() {
 }
 
 describe('withAuthGuard', () => {
+	beforeEach(() => loadRouter({ query: {} }));
 	it('displays login if no email', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
