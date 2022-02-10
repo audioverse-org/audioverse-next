@@ -12,6 +12,9 @@ mutation register(
 			surname: $lastName
 		}
 	) {
+		authenticatedUser {
+			sessionToken
+		}
 		errors {
 			message
 		}
@@ -39,14 +42,6 @@ mutation registerSocial(
 		}
 		errors {
 			message
-		}
-	}
-}
-
-query registerIsLoggedIn {
-	me {
-		user {
-			email
 		}
 	}
 }

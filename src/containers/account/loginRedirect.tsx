@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -12,5 +13,10 @@ export default function LoginRedirect(): JSX.Element {
 		router.push(makeDiscoverRoute(route));
 	}, [router, route]);
 
-	return <>redirecting...</>;
+	return (
+		<FormattedMessage
+			id="loginRedirect__message"
+			defaultMessage="Redirecting..."
+		/>
+	);
 }
