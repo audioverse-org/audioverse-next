@@ -1,4 +1,5 @@
 const withPWA = require('next-pwa');
+const path = require('path');
 
 const withBundleAnalyzer =
 	process.env.ANALYZE === 'true'
@@ -539,6 +540,14 @@ module.exports = withBundleAnalyzer(
 				test: /\.svg$/,
 				use: ['@svgr/webpack'],
 			});
+
+			// https://github.com/videojs/video.js/issues/6166#issuecomment-520539730
+			config.resolve.alias = {
+				...config.resolve.alias,
+				'video.js$': path.resolve(
+					'node_modules/video.js/dist/alt/video.novtt.js'
+				),
+			};
 
 			if (!dev) {
 				// https://formatjs.io/docs/guides/advanced-usage#react-intl-without-parser-40-smaller

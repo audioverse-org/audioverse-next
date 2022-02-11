@@ -84,6 +84,8 @@ describe('miniplayer template', () => {
 	});
 
 	it('loads recording', async () => {
+		setPlayerMock();
+
 		const { findByText } = await renderComponent({
 			props: {
 				children: (
