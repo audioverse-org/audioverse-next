@@ -62,6 +62,19 @@ function Base<P>({
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 					<link rel="stylesheet" href="https://use.typekit.net/bgc2sqi.css" />
+					<script
+						dangerouslySetInnerHTML={{
+							__html:
+								"window.fwSettings={'widget_id':73000001640};\n" +
+								'\t\t\t\t\t\t!function(){if("function"!=typeof window.FreshworksWidget){var n=function(){n.q.push(arguments)};n.q=[],window.FreshworksWidget=n}}()',
+						}}
+					/>
+					<script
+						type="text/javascript"
+						src="https://widget.freshworks.com/widgets/73000001640.js"
+						async
+						defer
+					/>
 				</Head>
 				<Script
 					id="google-analytics"
