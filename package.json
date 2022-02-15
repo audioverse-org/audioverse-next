@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
     "build:dev": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu next build --debug",
+    "build:webpack-only": "ENV_OVERRIDE=development NODE_ICU_DATA=node_modules/full-icu ./next-build-webpack-only.js",
     "audit": "audit-ci --config audit-ci.json",
     "checkTs": "tsc --noEmit",
     "format": "prettier --write .",
@@ -116,5 +117,10 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "type-fest": "^2.11.1",
     "typescript": "^4.4.2"
+  },
+  "nextBundleAnalysis": {
+    "budget": 204800,
+    "budgetPercentIncreaseRed": 90,
+    "showDetails": true
   }
 }
