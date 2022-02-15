@@ -159,75 +159,77 @@ export type BibleReference = {
 	verse: Maybe<Scalars['Int']>;
 };
 
-export enum BibleReferenceBook {
-	Acts = 'ACTS',
-	Amos = 'AMOS',
-	Colossians = 'COLOSSIANS',
-	Daniel = 'DANIEL',
-	Deuteronomy = 'DEUTERONOMY',
-	Ecclesiastes = 'ECCLESIASTES',
-	Ephesians = 'EPHESIANS',
-	Esther = 'ESTHER',
-	Exodus = 'EXODUS',
-	Ezekiel = 'EZEKIEL',
-	Ezra = 'EZRA',
-	FirstChronicles = 'FIRST_CHRONICLES',
-	FirstCorinthians = 'FIRST_CORINTHIANS',
-	FirstJohn = 'FIRST_JOHN',
-	FirstKings = 'FIRST_KINGS',
-	FirstPeter = 'FIRST_PETER',
-	FirstSamuel = 'FIRST_SAMUEL',
-	FirstThessalonians = 'FIRST_THESSALONIANS',
-	FirstTimothy = 'FIRST_TIMOTHY',
-	Galatians = 'GALATIANS',
-	Genesis = 'GENESIS',
-	Habakkuk = 'HABAKKUK',
-	Haggai = 'HAGGAI',
-	Hebrews = 'HEBREWS',
-	Hosea = 'HOSEA',
-	Isaiah = 'ISAIAH',
-	James = 'JAMES',
-	Jeremiah = 'JEREMIAH',
-	Job = 'JOB',
-	Joel = 'JOEL',
-	John = 'JOHN',
-	Jonah = 'JONAH',
-	Joshua = 'JOSHUA',
-	Jude = 'JUDE',
-	Judges = 'JUDGES',
-	Lamentations = 'LAMENTATIONS',
-	Leviticus = 'LEVITICUS',
-	Luke = 'LUKE',
-	Malachi = 'MALACHI',
-	Mark = 'MARK',
-	Matthew = 'MATTHEW',
-	Micah = 'MICAH',
-	Nahum = 'NAHUM',
-	Nehemiah = 'NEHEMIAH',
-	Numbers = 'NUMBERS',
-	Obadiah = 'OBADIAH',
-	Philemon = 'PHILEMON',
-	Philippians = 'PHILIPPIANS',
-	Proverbs = 'PROVERBS',
-	Psalms = 'PSALMS',
-	Revelation = 'REVELATION',
-	Romans = 'ROMANS',
-	Ruth = 'RUTH',
-	SecondChronicles = 'SECOND_CHRONICLES',
-	SecondCorinthians = 'SECOND_CORINTHIANS',
-	SecondJohn = 'SECOND_JOHN',
-	SecondKings = 'SECOND_KINGS',
-	SecondPeter = 'SECOND_PETER',
-	SecondSamuel = 'SECOND_SAMUEL',
-	SecondThessalonians = 'SECOND_THESSALONIANS',
-	SecondTimothy = 'SECOND_TIMOTHY',
-	SongOfSolomon = 'SONG_OF_SOLOMON',
-	ThirdJohn = 'THIRD_JOHN',
-	Titus = 'TITUS',
-	Zechariah = 'ZECHARIAH',
-	Zephaniah = 'ZEPHANIAH',
-}
+export const BibleReferenceBook = {
+	Acts: 'ACTS',
+	Amos: 'AMOS',
+	Colossians: 'COLOSSIANS',
+	Daniel: 'DANIEL',
+	Deuteronomy: 'DEUTERONOMY',
+	Ecclesiastes: 'ECCLESIASTES',
+	Ephesians: 'EPHESIANS',
+	Esther: 'ESTHER',
+	Exodus: 'EXODUS',
+	Ezekiel: 'EZEKIEL',
+	Ezra: 'EZRA',
+	FirstChronicles: 'FIRST_CHRONICLES',
+	FirstCorinthians: 'FIRST_CORINTHIANS',
+	FirstJohn: 'FIRST_JOHN',
+	FirstKings: 'FIRST_KINGS',
+	FirstPeter: 'FIRST_PETER',
+	FirstSamuel: 'FIRST_SAMUEL',
+	FirstThessalonians: 'FIRST_THESSALONIANS',
+	FirstTimothy: 'FIRST_TIMOTHY',
+	Galatians: 'GALATIANS',
+	Genesis: 'GENESIS',
+	Habakkuk: 'HABAKKUK',
+	Haggai: 'HAGGAI',
+	Hebrews: 'HEBREWS',
+	Hosea: 'HOSEA',
+	Isaiah: 'ISAIAH',
+	James: 'JAMES',
+	Jeremiah: 'JEREMIAH',
+	Job: 'JOB',
+	Joel: 'JOEL',
+	John: 'JOHN',
+	Jonah: 'JONAH',
+	Joshua: 'JOSHUA',
+	Jude: 'JUDE',
+	Judges: 'JUDGES',
+	Lamentations: 'LAMENTATIONS',
+	Leviticus: 'LEVITICUS',
+	Luke: 'LUKE',
+	Malachi: 'MALACHI',
+	Mark: 'MARK',
+	Matthew: 'MATTHEW',
+	Micah: 'MICAH',
+	Nahum: 'NAHUM',
+	Nehemiah: 'NEHEMIAH',
+	Numbers: 'NUMBERS',
+	Obadiah: 'OBADIAH',
+	Philemon: 'PHILEMON',
+	Philippians: 'PHILIPPIANS',
+	Proverbs: 'PROVERBS',
+	Psalms: 'PSALMS',
+	Revelation: 'REVELATION',
+	Romans: 'ROMANS',
+	Ruth: 'RUTH',
+	SecondChronicles: 'SECOND_CHRONICLES',
+	SecondCorinthians: 'SECOND_CORINTHIANS',
+	SecondJohn: 'SECOND_JOHN',
+	SecondKings: 'SECOND_KINGS',
+	SecondPeter: 'SECOND_PETER',
+	SecondSamuel: 'SECOND_SAMUEL',
+	SecondThessalonians: 'SECOND_THESSALONIANS',
+	SecondTimothy: 'SECOND_TIMOTHY',
+	SongOfSolomon: 'SONG_OF_SOLOMON',
+	ThirdJohn: 'THIRD_JOHN',
+	Titus: 'TITUS',
+	Zechariah: 'ZECHARIAH',
+	Zephaniah: 'ZEPHANIAH',
+} as const;
 
+export type BibleReferenceBook =
+	typeof BibleReferenceBook[keyof typeof BibleReferenceBook];
 /** A Bible reference. */
 export type BibleReferenceInput = {
 	book: BibleReferenceBook;
@@ -348,10 +350,12 @@ export type BlogPostPayload = {
 };
 
 /** Properties by which blog post connections can be ordered. */
-export enum BlogPostSortableField {
-	PublishedAt = 'PUBLISHED_AT',
-}
+export const BlogPostSortableField = {
+	PublishedAt: 'PUBLISHED_AT',
+} as const;
 
+export type BlogPostSortableField =
+	typeof BlogPostSortableField[keyof typeof BlogPostSortableField];
 export type BlogPostUpdateInput = {
 	body: InputMaybe<Scalars['String']>;
 	/** The number of days to feature blog post. */
@@ -364,16 +368,18 @@ export type BlogPostUpdateInput = {
 };
 
 /** The types of catalog entities. */
-export enum CatalogEntityType {
-	Collection = 'COLLECTION',
-	DistributionAgreement = 'DISTRIBUTION_AGREEMENT',
-	License = 'LICENSE',
-	Person = 'PERSON',
-	Recording = 'RECORDING',
-	Sequence = 'SEQUENCE',
-	Sponsor = 'SPONSOR',
-}
+export const CatalogEntityType = {
+	Collection: 'COLLECTION',
+	DistributionAgreement: 'DISTRIBUTION_AGREEMENT',
+	License: 'LICENSE',
+	Person: 'PERSON',
+	Recording: 'RECORDING',
+	Sequence: 'SEQUENCE',
+	Sponsor: 'SPONSOR',
+} as const;
 
+export type CatalogEntityType =
+	typeof CatalogEntityType[keyof typeof CatalogEntityType];
 export type CatalogHistoryComment = {
 	__typename?: 'CatalogHistoryComment';
 	isSticky: Scalars['Boolean'];
@@ -440,43 +446,49 @@ export type CatalogHistoryItemPayload = {
 };
 
 /** Properties by which history item connections can be ordered. */
-export enum CatalogHistoryItemSortableField {
-	CreatedAt = 'CREATED_AT',
-}
+export const CatalogHistoryItemSortableField = {
+	CreatedAt: 'CREATED_AT',
+} as const;
 
+export type CatalogHistoryItemSortableField =
+	typeof CatalogHistoryItemSortableField[keyof typeof CatalogHistoryItemSortableField];
 /** The supported types of catalog history items. */
-export enum CatalogHistoryItemType {
-	Archive = 'ARCHIVE',
-	CheckoutContent = 'CHECKOUT_CONTENT',
-	CheckoutLegal = 'CHECKOUT_LEGAL',
-	CheckoutTechnical = 'CHECKOUT_TECHNICAL',
-	Created = 'CREATED',
-	Deleted = 'DELETED',
-	EncodingError = 'ENCODING_ERROR',
-	FileUploaded = 'FILE_UPLOADED',
-	Hidden = 'HIDDEN',
-	InternalComment = 'INTERNAL_COMMENT',
-	MediaReleaseSubmit = 'MEDIA_RELEASE_SUBMIT',
-	RecordingScreeningCleared = 'RECORDING_SCREENING_CLEARED',
-	ScreeningContentAvailable = 'SCREENING_CONTENT_AVAILABLE',
-	ScreeningContentFlag = 'SCREENING_CONTENT_FLAG',
-	ScreeningLegalAvailable = 'SCREENING_LEGAL_AVAILABLE',
-	ScreeningLegalFlag = 'SCREENING_LEGAL_FLAG',
-	ScreeningTechnicalAvailable = 'SCREENING_TECHNICAL_AVAILABLE',
-	ScreeningTechnicalFlag = 'SCREENING_TECHNICAL_FLAG',
-	SystemError = 'SYSTEM_ERROR',
-	Unarchive = 'UNARCHIVE',
-	Updated = 'UPDATED',
-}
+export const CatalogHistoryItemType = {
+	Archive: 'ARCHIVE',
+	CheckoutContent: 'CHECKOUT_CONTENT',
+	CheckoutLegal: 'CHECKOUT_LEGAL',
+	CheckoutTechnical: 'CHECKOUT_TECHNICAL',
+	Created: 'CREATED',
+	Deleted: 'DELETED',
+	EncodingError: 'ENCODING_ERROR',
+	FileUploaded: 'FILE_UPLOADED',
+	Hidden: 'HIDDEN',
+	InternalComment: 'INTERNAL_COMMENT',
+	MediaReleaseSubmit: 'MEDIA_RELEASE_SUBMIT',
+	RecordingScreeningCleared: 'RECORDING_SCREENING_CLEARED',
+	ScreeningContentAvailable: 'SCREENING_CONTENT_AVAILABLE',
+	ScreeningContentFlag: 'SCREENING_CONTENT_FLAG',
+	ScreeningLegalAvailable: 'SCREENING_LEGAL_AVAILABLE',
+	ScreeningLegalFlag: 'SCREENING_LEGAL_FLAG',
+	ScreeningTechnicalAvailable: 'SCREENING_TECHNICAL_AVAILABLE',
+	ScreeningTechnicalFlag: 'SCREENING_TECHNICAL_FLAG',
+	SystemError: 'SYSTEM_ERROR',
+	Unarchive: 'UNARCHIVE',
+	Updated: 'UPDATED',
+} as const;
 
+export type CatalogHistoryItemType =
+	typeof CatalogHistoryItemType[keyof typeof CatalogHistoryItemType];
 /** The supported view filter of catalog history items. */
-export enum CatalogHistoryItemViewFilter {
-	Comments = 'COMMENTS',
-	Logs = 'LOGS',
-	Mentions = 'MENTIONS',
-	Stickies = 'STICKIES',
-}
+export const CatalogHistoryItemViewFilter = {
+	Comments: 'COMMENTS',
+	Logs: 'LOGS',
+	Mentions: 'MENTIONS',
+	Stickies: 'STICKIES',
+} as const;
 
+export type CatalogHistoryItemViewFilter =
+	typeof CatalogHistoryItemViewFilter[keyof typeof CatalogHistoryItemViewFilter];
 export type Collection = Node &
 	UniformResourceLocatable & {
 		__typename?: 'Collection';
@@ -606,13 +618,15 @@ export type CollectionConnection = {
 };
 
 /** The available types of collections. */
-export enum CollectionContentType {
-	AudiobookSeries = 'AUDIOBOOK_SERIES',
-	Conference = 'CONFERENCE',
-	MusicSeries = 'MUSIC_SERIES',
-	StoryProgram = 'STORY_PROGRAM',
-}
+export const CollectionContentType = {
+	AudiobookSeries: 'AUDIOBOOK_SERIES',
+	Conference: 'CONFERENCE',
+	MusicSeries: 'MUSIC_SERIES',
+	StoryProgram: 'STORY_PROGRAM',
+} as const;
 
+export type CollectionContentType =
+	typeof CollectionContentType[keyof typeof CollectionContentType];
 export type CollectionCreateInput = {
 	contentType: CollectionContentType;
 	description: InputMaybe<Scalars['String']>;
@@ -662,14 +676,16 @@ export type CollectionsOrder = {
 };
 
 /** Properties by which collection connections can be ordered. */
-export enum CollectionsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	RecordingCount = 'RECORDING_COUNT',
-	RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
-	Title = 'TITLE',
-}
+export const CollectionsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	RecordingCount: 'RECORDING_COUNT',
+	RecordingPublishedAt: 'RECORDING_PUBLISHED_AT',
+	Title: 'TITLE',
+} as const;
 
+export type CollectionsSortableField =
+	typeof CollectionsSortableField[keyof typeof CollectionsSortableField];
 /** The date range the items must fall in to be applicable. */
 export type DateRangeInput = {
 	/** The lower bound of the date range. */
@@ -786,12 +802,14 @@ export type DistributionAgreementsOrder = {
 };
 
 /** Properties by which distribution agreement connections can be ordered. */
-export enum DistributionAgreementsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
-}
+export const DistributionAgreementsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	Title: 'TITLE',
+} as const;
 
+export type DistributionAgreementsSortableField =
+	typeof DistributionAgreementsSortableField[keyof typeof DistributionAgreementsSortableField];
 export type Faq = Node & {
 	__typename?: 'Faq';
 	body: Scalars['String'];
@@ -873,21 +891,25 @@ export type FaqsOrder = {
 };
 
 /** Properties by which FAQ connections can be ordered. */
-export enum FaqsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Index = 'INDEX',
-	Title = 'TITLE',
-}
+export const FaqsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Index: 'INDEX',
+	Title: 'TITLE',
+} as const;
 
+export type FaqsSortableField =
+	typeof FaqsSortableField[keyof typeof FaqsSortableField];
 /** The types of catalog entities that may be favorited. */
-export enum FavoritableCatalogEntityType {
-	Collection = 'COLLECTION',
-	Person = 'PERSON',
-	Recording = 'RECORDING',
-	Sequence = 'SEQUENCE',
-	Sponsor = 'SPONSOR',
-}
+export const FavoritableCatalogEntityType = {
+	Collection: 'COLLECTION',
+	Person: 'PERSON',
+	Recording: 'RECORDING',
+	Sequence: 'SEQUENCE',
+	Sponsor: 'SPONSOR',
+} as const;
 
+export type FavoritableCatalogEntityType =
+	typeof FavoritableCatalogEntityType[keyof typeof FavoritableCatalogEntityType];
 export type FavoriteEntityUnion =
 	| Collection
 	| Person
@@ -901,11 +923,13 @@ export type FavoritesOrder = {
 };
 
 /** Properties by which user favorites connections can be ordered. */
-export enum FavoritesSortableField {
-	EntityTitle = 'ENTITY_TITLE',
-	FavoritedAt = 'FAVORITED_AT',
-}
+export const FavoritesSortableField = {
+	EntityTitle: 'ENTITY_TITLE',
+	FavoritedAt: 'FAVORITED_AT',
+} as const;
 
+export type FavoritesSortableField =
+	typeof FavoritesSortableField[keyof typeof FavoritesSortableField];
 export type Image = Node & {
 	__typename?: 'Image';
 	id: Scalars['ID'];
@@ -927,25 +951,27 @@ export type ImageConnectionSlim = {
 };
 
 /** The available image type containers. */
-export enum ImageContainer {
-	Avatar = 'AVATAR',
-	Collection = 'COLLECTION',
-	License = 'LICENSE',
-	News = 'NEWS',
-	Person = 'PERSON',
-	Sequence = 'SEQUENCE',
-	Site = 'SITE',
-	Sponsor = 'SPONSOR',
-}
+export const ImageContainer = {
+	Avatar: 'AVATAR',
+	Collection: 'COLLECTION',
+	License: 'LICENSE',
+	News: 'NEWS',
+	Person: 'PERSON',
+	Sequence: 'SEQUENCE',
+	Site: 'SITE',
+	Sponsor: 'SPONSOR',
+} as const;
 
+export type ImageContainer = typeof ImageContainer[keyof typeof ImageContainer];
 /** Aavailable crop modes for images. */
-export enum ImageCropMode {
+export const ImageCropMode = {
 	/** Resizes the image to the requested size and in the process crops parts from the original image. */
-	Default = 'DEFAULT',
+	Default: 'DEFAULT',
 	/** Scales the whole image content (no cropping) at the original aspect ratio to fit within the output size. */
-	MaxSize = 'MAX_SIZE',
-}
+	MaxSize: 'MAX_SIZE',
+} as const;
 
+export type ImageCropMode = typeof ImageCropMode[keyof typeof ImageCropMode];
 export type ImageEdge = {
 	__typename?: 'ImageEdge';
 	cursor: Scalars['String'];
@@ -995,17 +1021,18 @@ export type InternalContactInput = {
 };
 
 /** Supported languages */
-export enum Language {
-	Chinese = 'CHINESE',
-	English = 'ENGLISH',
-	French = 'FRENCH',
-	German = 'GERMAN',
-	Japanese = 'JAPANESE',
-	Nordic = 'NORDIC',
-	Russian = 'RUSSIAN',
-	Spanish = 'SPANISH',
-}
+export const Language = {
+	Chinese: 'CHINESE',
+	English: 'ENGLISH',
+	French: 'FRENCH',
+	German: 'GERMAN',
+	Japanese: 'JAPANESE',
+	Nordic: 'NORDIC',
+	Russian: 'RUSSIAN',
+	Spanish: 'SPANISH',
+} as const;
 
+export type Language = typeof Language[keyof typeof Language];
 export type LetterCount = {
 	__typename?: 'LetterCount';
 	count: Scalars['Int'];
@@ -1096,45 +1123,51 @@ export type LicensesOrder = {
 };
 
 /** Properties by which license connections can be ordered. */
-export enum LicensesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
-}
+export const LicensesSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	Title: 'TITLE',
+} as const;
 
+export type LicensesSortableField =
+	typeof LicensesSortableField[keyof typeof LicensesSortableField];
 /** The media file container types. */
-export enum MediaFileContainer {
-	Doc = 'DOC',
-	Docx = 'DOCX',
-	Flv = 'FLV',
-	Jpg = 'JPG',
-	Key = 'KEY',
-	M3U8Ios = 'M3U8_IOS',
-	M3U8Web = 'M3U8_WEB',
-	M4A = 'M4A',
-	M4V = 'M4V',
-	Mov = 'MOV',
-	Mp3 = 'MP3',
-	Mp4 = 'MP4',
-	Odp = 'ODP',
-	Odt = 'ODT',
-	Pages = 'PAGES',
-	Pdf = 'PDF',
-	Png = 'PNG',
-	Ppt = 'PPT',
-	Pptx = 'PPTX',
-	Wav = 'WAV',
-	Wma = 'WMA',
-	Wmv = 'WMV',
-}
+export const MediaFileContainer = {
+	Doc: 'DOC',
+	Docx: 'DOCX',
+	Flv: 'FLV',
+	Jpg: 'JPG',
+	Key: 'KEY',
+	M3U8Ios: 'M3U8_IOS',
+	M3U8Web: 'M3U8_WEB',
+	M4A: 'M4A',
+	M4V: 'M4V',
+	Mov: 'MOV',
+	Mp3: 'MP3',
+	Mp4: 'MP4',
+	Odp: 'ODP',
+	Odt: 'ODT',
+	Pages: 'PAGES',
+	Pdf: 'PDF',
+	Png: 'PNG',
+	Ppt: 'PPT',
+	Pptx: 'PPTX',
+	Wav: 'WAV',
+	Wma: 'WMA',
+	Wmv: 'WMV',
+} as const;
 
+export type MediaFileContainer =
+	typeof MediaFileContainer[keyof typeof MediaFileContainer];
 /** The media file request types. */
-export enum MediaFileRequestType {
-	Download = 'DOWNLOAD',
-	Rss = 'RSS',
-	Stream = 'STREAM',
-}
+export const MediaFileRequestType = {
+	Download: 'DOWNLOAD',
+	Rss: 'RSS',
+	Stream: 'STREAM',
+} as const;
 
+export type MediaFileRequestType =
+	typeof MediaFileRequestType[keyof typeof MediaFileRequestType];
 export type MediaFileResult = Attachment | AudioFile | VideoFile;
 
 export type MediaFileResultConnection = {
@@ -1152,19 +1185,21 @@ export type MediaFileResultEdge = {
 };
 
 /** The transcoding status of a media file upload. */
-export enum MediaFileTranscodingStatus {
+export const MediaFileTranscodingStatus = {
 	/** Transcoding completed. */
-	Complete = 'COMPLETE',
+	Complete: 'COMPLETE',
 	/** Transcoding failed. */
-	Failed = 'FAILED',
+	Failed: 'FAILED',
 	/** Transcoding in process. */
-	Processing = 'PROCESSING',
+	Processing: 'PROCESSING',
 	/** Waiting for transcoding slot. */
-	Queued = 'QUEUED',
+	Queued: 'QUEUED',
 	/** Not Yet Begun */
-	Unstarted = 'UNSTARTED',
-}
+	Unstarted: 'UNSTARTED',
+} as const;
 
+export type MediaFileTranscodingStatus =
+	typeof MediaFileTranscodingStatus[keyof typeof MediaFileTranscodingStatus];
 export type MediaFileUpload = Node & {
 	__typename?: 'MediaFileUpload';
 	/** Whether the current viewer may delete the file. */
@@ -1224,23 +1259,27 @@ export type MediaFileUploadsOrder = {
 };
 
 /** Properties by which media file uploads connections can be ordered. */
-export enum MediaFileUploadsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Filename = 'FILENAME',
-}
+export const MediaFileUploadsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Filename: 'FILENAME',
+} as const;
 
+export type MediaFileUploadsSortableField =
+	typeof MediaFileUploadsSortableField[keyof typeof MediaFileUploadsSortableField];
 export type MediaFilesOrder = {
 	direction: OrderByDirection;
 	field: MediaFilesSortableField;
 };
 
 /** Properties by which media files connections can be ordered. */
-export enum MediaFilesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Filename = 'FILENAME',
-	Filesize = 'FILESIZE',
-}
+export const MediaFilesSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Filename: 'FILENAME',
+	Filesize: 'FILESIZE',
+} as const;
 
+export type MediaFilesSortableField =
+	typeof MediaFilesSortableField[keyof typeof MediaFilesSortableField];
 export type MediaRelease = Node & {
 	__typename?: 'MediaRelease';
 	createdAt: Scalars['DateTime'];
@@ -1338,21 +1377,23 @@ export type MediaReleaseFormEdge = {
 };
 
 /** Content types of the media release form entities with content types. */
-export enum MediaReleaseFormEntityContentType {
-	Audiobook = 'AUDIOBOOK',
-	AudiobookSeries = 'AUDIOBOOK_SERIES',
-	AudiobookTrack = 'AUDIOBOOK_TRACK',
-	Conference = 'CONFERENCE',
-	MusicAlbum = 'MUSIC_ALBUM',
-	MusicSeries = 'MUSIC_SERIES',
-	MusicTrack = 'MUSIC_TRACK',
-	Series = 'SERIES',
-	Sermon = 'SERMON',
-	Story = 'STORY',
-	StoryProgram = 'STORY_PROGRAM',
-	StorySeason = 'STORY_SEASON',
-}
+export const MediaReleaseFormEntityContentType = {
+	Audiobook: 'AUDIOBOOK',
+	AudiobookSeries: 'AUDIOBOOK_SERIES',
+	AudiobookTrack: 'AUDIOBOOK_TRACK',
+	Conference: 'CONFERENCE',
+	MusicAlbum: 'MUSIC_ALBUM',
+	MusicSeries: 'MUSIC_SERIES',
+	MusicTrack: 'MUSIC_TRACK',
+	Series: 'SERIES',
+	Sermon: 'SERMON',
+	Story: 'STORY',
+	StoryProgram: 'STORY_PROGRAM',
+	StorySeason: 'STORY_SEASON',
+} as const;
 
+export type MediaReleaseFormEntityContentType =
+	typeof MediaReleaseFormEntityContentType[keyof typeof MediaReleaseFormEntityContentType];
 export type MediaReleaseFormOrder = {
 	direction: OrderByDirection;
 	field: MediaReleaseFormSortableField;
@@ -1365,13 +1406,15 @@ export type MediaReleaseFormPayload = {
 };
 
 /** Properties by which media release form connections can be ordered. */
-export enum MediaReleaseFormSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
-	Type = 'TYPE',
-}
+export const MediaReleaseFormSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	Title: 'TITLE',
+	Type: 'TYPE',
+} as const;
 
+export type MediaReleaseFormSortableField =
+	typeof MediaReleaseFormSortableField[keyof typeof MediaReleaseFormSortableField];
 export type MediaReleaseFormTemplate = {
 	__typename?: 'MediaReleaseFormTemplate';
 	summary: Scalars['String'];
@@ -1380,14 +1423,16 @@ export type MediaReleaseFormTemplate = {
 };
 
 /** Supported types of media release forms. */
-export enum MediaReleaseFormType {
-	Collection = 'COLLECTION',
-	Master = 'MASTER',
-	Recording = 'RECORDING',
-	Sequence = 'SEQUENCE',
-	Sponsor = 'SPONSOR',
-}
+export const MediaReleaseFormType = {
+	Collection: 'COLLECTION',
+	Master: 'MASTER',
+	Recording: 'RECORDING',
+	Sequence: 'SEQUENCE',
+	Sponsor: 'SPONSOR',
+} as const;
 
+export type MediaReleaseFormType =
+	typeof MediaReleaseFormType[keyof typeof MediaReleaseFormType];
 export type MediaReleaseFormUpdateInput = {
 	/** Required if `type` is `COLLECTION`. */
 	collectionId: InputMaybe<Scalars['ID']>;
@@ -1487,13 +1532,15 @@ export type MediaReleasePersonUpdateInput = {
 };
 
 /** Properties by which media release connections can be ordered. */
-export enum MediaReleaseSortableField {
-	CreatedAt = 'CREATED_AT',
-	GivenName = 'GIVEN_NAME',
-	Id = 'ID',
-	Surname = 'SURNAME',
-}
+export const MediaReleaseSortableField = {
+	CreatedAt: 'CREATED_AT',
+	GivenName: 'GIVEN_NAME',
+	Id: 'ID',
+	Surname: 'SURNAME',
+} as const;
 
+export type MediaReleaseSortableField =
+	typeof MediaReleaseSortableField[keyof typeof MediaReleaseSortableField];
 export type MediaReleaseUpdateInput = {
 	/** The personal information collected with the media release. */
 	mediaReleasePerson: InputMaybe<MediaReleasePersonUpdateInput>;
@@ -2136,17 +2183,19 @@ export type NotificationChannelEdge = {
 };
 
 /** The periods notifications can be sent on. */
-export enum NotificationFrequency {
+export const NotificationFrequency = {
 	/** Notifications will be sent in a daily digest. */
-	Daily = 'DAILY',
+	Daily: 'DAILY',
 	/** Notifications will be sent immediately. */
-	Immediate = 'IMMEDIATE',
+	Immediate: 'IMMEDIATE',
 	/** Notifications will be sent in a monthly digest. */
-	Monthly = 'MONTHLY',
+	Monthly: 'MONTHLY',
 	/** Notifications will be sent in a weekly digest. */
-	Weekly = 'WEEKLY',
-}
+	Weekly: 'WEEKLY',
+} as const;
 
+export type NotificationFrequency =
+	typeof NotificationFrequency[keyof typeof NotificationFrequency];
 export type NotificationSubscription = {
 	__typename?: 'NotificationSubscription';
 	frequency: NotificationFrequency;
@@ -2173,11 +2222,13 @@ export type NotificationSubscriptionInput = {
 };
 
 /** Possible directions in which to order a list of items when provided an `orderBy` argument. */
-export enum OrderByDirection {
-	Asc = 'ASC',
-	Desc = 'DESC',
-}
+export const OrderByDirection = {
+	Asc: 'ASC',
+	Desc: 'DESC',
+} as const;
 
+export type OrderByDirection =
+	typeof OrderByDirection[keyof typeof OrderByDirection];
 export type Page = Node & {
 	__typename?: 'Page';
 	body: Scalars['String'];
@@ -2212,12 +2263,14 @@ export type PageConnection = {
 };
 
 /** The available contact page recipients. */
-export enum PageContactRecipient {
-	General = 'GENERAL',
-	Technical = 'TECHNICAL',
-	Testimony = 'TESTIMONY',
-}
+export const PageContactRecipient = {
+	General: 'GENERAL',
+	Technical: 'TECHNICAL',
+	Testimony: 'TESTIMONY',
+} as const;
 
+export type PageContactRecipient =
+	typeof PageContactRecipient[keyof typeof PageContactRecipient];
 export type PageContactSubmitInput = {
 	body: Scalars['String'];
 	email: Scalars['String'];
@@ -2278,18 +2331,19 @@ export type PagePayload = {
 };
 
 /** The available page types. Only the `CUSTOM` type may have more than one `Page` per language. */
-export enum PageType {
-	About = 'ABOUT',
-	Blog = 'BLOG',
-	Custom = 'CUSTOM',
-	Legal = 'LEGAL',
-	Privacy = 'PRIVACY',
-	SpiritOfAv = 'SPIRIT_OF_AV',
-	Team = 'TEAM',
-	TermsOfUse = 'TERMS_OF_USE',
-	Testimonials = 'TESTIMONIALS',
-}
+export const PageType = {
+	About: 'ABOUT',
+	Blog: 'BLOG',
+	Custom: 'CUSTOM',
+	Legal: 'LEGAL',
+	Privacy: 'PRIVACY',
+	SpiritOfAv: 'SPIRIT_OF_AV',
+	Team: 'TEAM',
+	TermsOfUse: 'TERMS_OF_USE',
+	Testimonials: 'TESTIMONIALS',
+} as const;
 
+export type PageType = typeof PageType[keyof typeof PageType];
 export type PageUpdateInput = {
 	body: InputMaybe<Scalars['String']>;
 	isHidden: InputMaybe<Scalars['Boolean']>;
@@ -2304,12 +2358,14 @@ export type PagesOrder = {
 };
 
 /** Properties by which page connections can be ordered. */
-export enum PagesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Slug = 'SLUG',
-	Title = 'TITLE',
-}
+export const PagesSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Slug: 'SLUG',
+	Title: 'TITLE',
+} as const;
 
+export type PagesSortableField =
+	typeof PagesSortableField[keyof typeof PagesSortableField];
 export type Person = Node &
 	UniformResourceLocatable & {
 		__typename?: 'Person';
@@ -2511,26 +2567,30 @@ export type PersonsOrder = {
 };
 
 /** The roles a Person can hold. */
-export enum PersonsRoleField {
-	Artist = 'ARTIST',
-	Author = 'AUTHOR',
-	Composer = 'COMPOSER',
-	Narrator = 'NARRATOR',
-	Speaker = 'SPEAKER',
-	Translator = 'TRANSLATOR',
-	Writer = 'WRITER',
-}
+export const PersonsRoleField = {
+	Artist: 'ARTIST',
+	Author: 'AUTHOR',
+	Composer: 'COMPOSER',
+	Narrator: 'NARRATOR',
+	Speaker: 'SPEAKER',
+	Translator: 'TRANSLATOR',
+	Writer: 'WRITER',
+} as const;
 
+export type PersonsRoleField =
+	typeof PersonsRoleField[keyof typeof PersonsRoleField];
 /** Properties by which person connections can be ordered. */
-export enum PersonsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Name = 'NAME',
-	RecordingCount = 'RECORDING_COUNT',
-	RecordingDownloadsAllTime = 'RECORDING_DOWNLOADS_ALL_TIME',
-	RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
-}
+export const PersonsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	Name: 'NAME',
+	RecordingCount: 'RECORDING_COUNT',
+	RecordingDownloadsAllTime: 'RECORDING_DOWNLOADS_ALL_TIME',
+	RecordingPublishedAt: 'RECORDING_PUBLISHED_AT',
+} as const;
 
+export type PersonsSortableField =
+	typeof PersonsSortableField[keyof typeof PersonsSortableField];
 export type PlaybackSessionAdvanceInput = {
 	/** The playback position as a percentage of the recording duration. */
 	positionPercentage: Scalars['Float'];
@@ -3568,45 +3628,51 @@ export type RecordingContentScreeningEvaluationPayload = {
 };
 
 /** The content screening evaluation recommendations for a recording. */
-export enum RecordingContentScreeningEvaluationRecommendation {
-	Approve = 'APPROVE',
-	NeedsEditing = 'NEEDS_EDITING',
-	Pending = 'PENDING',
-	Reject = 'REJECT',
-}
+export const RecordingContentScreeningEvaluationRecommendation = {
+	Approve: 'APPROVE',
+	NeedsEditing: 'NEEDS_EDITING',
+	Pending: 'PENDING',
+	Reject: 'REJECT',
+} as const;
 
+export type RecordingContentScreeningEvaluationRecommendation =
+	typeof RecordingContentScreeningEvaluationRecommendation[keyof typeof RecordingContentScreeningEvaluationRecommendation];
 /** The content screening statuses of a recording. */
-export enum RecordingContentScreeningStatus {
+export const RecordingContentScreeningStatus = {
 	/** Approved by admin override */
-	AdminOverride = 'ADMIN_OVERRIDE',
+	AdminOverride: 'ADMIN_OVERRIDE',
 	/** Approved by screener consensus */
-	Approved = 'APPROVED',
+	Approved: 'APPROVED',
 	/** Awaiting final authorization (Screener consensus) */
-	ApprovedPendingAuthorization = 'APPROVED_PENDING_AUTHORIZATION',
+	ApprovedPendingAuthorization: 'APPROVED_PENDING_AUTHORIZATION',
 	/** Awaiting screener consensus */
-	PendingConsensus = 'PENDING_CONSENSUS',
+	PendingConsensus: 'PENDING_CONSENSUS',
 	/** Awaiting more evaluations */
-	PendingEvaluations = 'PENDING_EVALUATIONS',
+	PendingEvaluations: 'PENDING_EVALUATIONS',
 	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
+	PendingReevaluation: 'PENDING_REEVALUATION',
 	/** Approved by pre-approval */
-	Preapproved = 'PREAPPROVED',
+	Preapproved: 'PREAPPROVED',
 	/** Awaiting final authorization (Pre-approved) */
-	PreapprovedPendingAuthorization = 'PREAPPROVED_PENDING_AUTHORIZATION',
+	PreapprovedPendingAuthorization: 'PREAPPROVED_PENDING_AUTHORIZATION',
 	/** Rejected by screener consensus */
-	Rejected = 'REJECTED',
+	Rejected: 'REJECTED',
 	/** Screening not yet begun */
-	Unevaluated = 'UNEVALUATED',
-}
+	Unevaluated: 'UNEVALUATED',
+} as const;
 
+export type RecordingContentScreeningStatus =
+	typeof RecordingContentScreeningStatus[keyof typeof RecordingContentScreeningStatus];
 /** The available types of recordings. */
-export enum RecordingContentType {
-	AudiobookTrack = 'AUDIOBOOK_TRACK',
-	MusicTrack = 'MUSIC_TRACK',
-	Sermon = 'SERMON',
-	Story = 'STORY',
-}
+export const RecordingContentType = {
+	AudiobookTrack: 'AUDIOBOOK_TRACK',
+	MusicTrack: 'MUSIC_TRACK',
+	Sermon: 'SERMON',
+	Story: 'STORY',
+} as const;
 
+export type RecordingContentType =
+	typeof RecordingContentType[keyof typeof RecordingContentType];
 export type RecordingCreateInput = {
 	bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
 	collectionId: InputMaybe<Scalars['ID']>;
@@ -3648,18 +3714,20 @@ export type RecordingEdge = {
 };
 
 /** The legal screening statuses of a recording. */
-export enum RecordingLegalScreeningStatus {
-	AdminOverride = 'ADMIN_OVERRIDE',
-	Approved = 'APPROVED',
-	Pending = 'PENDING',
+export const RecordingLegalScreeningStatus = {
+	AdminOverride: 'ADMIN_OVERRIDE',
+	Approved: 'APPROVED',
+	Pending: 'PENDING',
 	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
-	Preapproved = 'PREAPPROVED',
-	Rejected = 'REJECTED',
+	PendingReevaluation: 'PENDING_REEVALUATION',
+	Preapproved: 'PREAPPROVED',
+	Rejected: 'REJECTED',
 	/** Not Yet Begun */
-	Unevaluated = 'UNEVALUATED',
-}
+	Unevaluated: 'UNEVALUATED',
+} as const;
 
+export type RecordingLegalScreeningStatus =
+	typeof RecordingLegalScreeningStatus[keyof typeof RecordingLegalScreeningStatus];
 export type RecordingPayload = {
 	__typename?: 'RecordingPayload';
 	errors: Array<InputValidationError>;
@@ -3689,12 +3757,14 @@ export type RecordingPlaybackSession = {
 };
 
 /** The available bitrates of recordings. */
-export enum RecordingQuality {
-	Highest = 'HIGHEST',
-	Low = 'LOW',
-	Lowest = 'LOWEST',
-}
+export const RecordingQuality = {
+	Highest: 'HIGHEST',
+	Low: 'LOW',
+	Lowest: 'LOWEST',
+} as const;
 
+export type RecordingQuality =
+	typeof RecordingQuality[keyof typeof RecordingQuality];
 export type RecordingScreeningCheckout = {
 	__typename?: 'RecordingScreeningCheckout';
 	/** The user who assigned the screener. */
@@ -3715,15 +3785,17 @@ export type RecordingScreeningCheckoutPayload = {
 };
 
 /** The recording content screening view filters. */
-export enum RecordingScreeningContentViewFilter {
+export const RecordingScreeningContentViewFilter = {
 	/** Limits recordings to those assigned to users other than the viewer. */
-	AssignedNonViewer = 'ASSIGNED_NON_VIEWER',
+	AssignedNonViewer: 'ASSIGNED_NON_VIEWER',
 	/** Limits recordings to those assigned to the viewer. */
-	AssignedViewer = 'ASSIGNED_VIEWER',
+	AssignedViewer: 'ASSIGNED_VIEWER',
 	/** Limits to unassigned recordings. */
-	Unassigned = 'UNASSIGNED',
-}
+	Unassigned: 'UNASSIGNED',
+} as const;
 
+export type RecordingScreeningContentViewFilter =
+	typeof RecordingScreeningContentViewFilter[keyof typeof RecordingScreeningContentViewFilter];
 export type RecordingScreeningIssue = Node & {
 	__typename?: 'RecordingScreeningIssue';
 	/** In HH:mm:ss format. */
@@ -3738,15 +3810,17 @@ export type RecordingScreeningIssue = Node & {
 };
 
 /** The recording screening issue categories. */
-export enum RecordingScreeningIssueCategory {
+export const RecordingScreeningIssueCategory = {
 	/** General Issues */
-	General = 'GENERAL',
+	General: 'GENERAL',
 	/** Spirit of AudioVerse */
-	SpiritOfAudioverse = 'SPIRIT_OF_AUDIOVERSE',
+	SpiritOfAudioverse: 'SPIRIT_OF_AUDIOVERSE',
 	/** Technical Issues */
-	Technical = 'TECHNICAL',
-}
+	Technical: 'TECHNICAL',
+} as const;
 
+export type RecordingScreeningIssueCategory =
+	typeof RecordingScreeningIssueCategory[keyof typeof RecordingScreeningIssueCategory];
 export type RecordingScreeningIssueConnection = {
 	__typename?: 'RecordingScreeningIssueConnection';
 	aggregate: Maybe<Aggregate>;
@@ -3783,11 +3857,13 @@ export type RecordingScreeningIssuePayload = {
 };
 
 /** The applicable recording format for the screening issue. */
-export enum RecordingScreeningIssueTarget {
-	Audio = 'AUDIO',
-	Video = 'VIDEO',
-}
+export const RecordingScreeningIssueTarget = {
+	Audio: 'AUDIO',
+	Video: 'VIDEO',
+} as const;
 
+export type RecordingScreeningIssueTarget =
+	typeof RecordingScreeningIssueTarget[keyof typeof RecordingScreeningIssueTarget];
 export type RecordingScreeningIssueType = Node & {
 	__typename?: 'RecordingScreeningIssueType';
 	category: RecordingScreeningIssueCategory;
@@ -3811,28 +3887,33 @@ export type RecordingScreeningIssueTypeEdge = {
 };
 
 /** Properties by which recording screening issue connections can be ordered. */
-export enum RecordingScreeningIssuesSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-}
+export const RecordingScreeningIssuesSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+} as const;
 
+export type RecordingScreeningIssuesSortableField =
+	typeof RecordingScreeningIssuesSortableField[keyof typeof RecordingScreeningIssuesSortableField];
 /** The supported screening evaluation methods. */
-export enum RecordingScreeningMethod {
-	Live = 'LIVE',
-	Recording = 'RECORDING',
-	ThirdPartyInfo = 'THIRD_PARTY_INFO',
-	Transcript = 'TRANSCRIPT',
-}
+export const RecordingScreeningMethod = {
+	Live: 'LIVE',
+	Recording: 'RECORDING',
+	ThirdPartyInfo: 'THIRD_PARTY_INFO',
+	Transcript: 'TRANSCRIPT',
+} as const;
 
+export type RecordingScreeningMethod =
+	typeof RecordingScreeningMethod[keyof typeof RecordingScreeningMethod];
 /** The stages a recording may be in. */
-export enum RecordingStage {
-	Draft = 'DRAFT',
-	Published = 'PUBLISHED',
-	Scheduling = 'SCHEDULING',
-	Screening = 'SCREENING',
-	Withdrawn = 'WITHDRAWN',
-}
+export const RecordingStage = {
+	Draft: 'DRAFT',
+	Published: 'PUBLISHED',
+	Scheduling: 'SCHEDULING',
+	Screening: 'SCREENING',
+	Withdrawn: 'WITHDRAWN',
+} as const;
 
+export type RecordingStage = typeof RecordingStage[keyof typeof RecordingStage];
 export type RecordingTag = {
 	__typename?: 'RecordingTag';
 	tag: Tag;
@@ -3877,31 +3958,35 @@ export type RecordingTagSuggestionEdge = {
 };
 
 /** The technical screening statuses of a recording. */
-export enum RecordingTechnicalScreeningStatus {
-	AdminOverride = 'ADMIN_OVERRIDE',
-	Approved = 'APPROVED',
-	Pending = 'PENDING',
+export const RecordingTechnicalScreeningStatus = {
+	AdminOverride: 'ADMIN_OVERRIDE',
+	Approved: 'APPROVED',
+	Pending: 'PENDING',
 	/** Awaiting re-evaluation */
-	PendingReevaluation = 'PENDING_REEVALUATION',
-	Rejected = 'REJECTED',
+	PendingReevaluation: 'PENDING_REEVALUATION',
+	Rejected: 'REJECTED',
 	/** Not Yet Begun */
-	Unevaluated = 'UNEVALUATED',
-}
+	Unevaluated: 'UNEVALUATED',
+} as const;
 
+export type RecordingTechnicalScreeningStatus =
+	typeof RecordingTechnicalScreeningStatus[keyof typeof RecordingTechnicalScreeningStatus];
 /** The status of a recording's transcript. */
-export enum RecordingTranscriptionStatus {
+export const RecordingTranscriptionStatus = {
 	/** Transcription completed. */
-	Complete = 'COMPLETE',
+	Complete: 'COMPLETE',
 	/** Transcription failed. */
-	Failed = 'FAILED',
+	Failed: 'FAILED',
 	/** Transcription in process. */
-	Processing = 'PROCESSING',
+	Processing: 'PROCESSING',
 	/** Transcription has been requested. */
-	Requested = 'REQUESTED',
+	Requested: 'REQUESTED',
 	/** Not Yet Begun */
-	Unstarted = 'UNSTARTED',
-}
+	Unstarted: 'UNSTARTED',
+} as const;
 
+export type RecordingTranscriptionStatus =
+	typeof RecordingTranscriptionStatus[keyof typeof RecordingTranscriptionStatus];
 export type RecordingUpdateInput = {
 	bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
 	collectionId: InputMaybe<Scalars['ID']>;
@@ -3936,31 +4021,35 @@ export type RecordingUpdateInput = {
 };
 
 /** Whether a viewer has played a recording or sequence. */
-export enum RecordingViewerPlaybackStatus {
-	Finished = 'FINISHED',
-	Started = 'STARTED',
-	Unstarted = 'UNSTARTED',
-}
+export const RecordingViewerPlaybackStatus = {
+	Finished: 'FINISHED',
+	Started: 'STARTED',
+	Unstarted: 'UNSTARTED',
+} as const;
 
+export type RecordingViewerPlaybackStatus =
+	typeof RecordingViewerPlaybackStatus[keyof typeof RecordingViewerPlaybackStatus];
 export type RecordingsOrder = {
 	direction: OrderByDirection;
 	field: RecordingsSortableField;
 };
 
 /** Properties by which recording connections can be ordered. */
-export enum RecordingsSortableField {
-	CollectionTitle = 'COLLECTION_TITLE',
-	CreatedAt = 'CREATED_AT',
-	DownloadsAllTime = 'DOWNLOADS_ALL_TIME',
-	Id = 'ID',
-	PublishedAt = 'PUBLISHED_AT',
-	RecordedAt = 'RECORDED_AT',
-	SequenceTitle = 'SEQUENCE_TITLE',
-	SponsorTitle = 'SPONSOR_TITLE',
-	Title = 'TITLE',
-	UpdatedAt = 'UPDATED_AT',
-}
+export const RecordingsSortableField = {
+	CollectionTitle: 'COLLECTION_TITLE',
+	CreatedAt: 'CREATED_AT',
+	DownloadsAllTime: 'DOWNLOADS_ALL_TIME',
+	Id: 'ID',
+	PublishedAt: 'PUBLISHED_AT',
+	RecordedAt: 'RECORDED_AT',
+	SequenceTitle: 'SEQUENCE_TITLE',
+	SponsorTitle: 'SPONSOR_TITLE',
+	Title: 'TITLE',
+	UpdatedAt: 'UPDATED_AT',
+} as const;
 
+export type RecordingsSortableField =
+	typeof RecordingsSortableField[keyof typeof RecordingsSortableField];
 export type Sequence = Node &
 	UniformResourceLocatable & {
 		__typename?: 'Sequence';
@@ -4074,13 +4163,15 @@ export type SequenceConnection = {
 };
 
 /** The available types of sequence. */
-export enum SequenceContentType {
-	Audiobook = 'AUDIOBOOK',
-	MusicAlbum = 'MUSIC_ALBUM',
-	Series = 'SERIES',
-	StorySeason = 'STORY_SEASON',
-}
+export const SequenceContentType = {
+	Audiobook: 'AUDIOBOOK',
+	MusicAlbum: 'MUSIC_ALBUM',
+	Series: 'SERIES',
+	StorySeason: 'STORY_SEASON',
+} as const;
 
+export type SequenceContentType =
+	typeof SequenceContentType[keyof typeof SequenceContentType];
 export type SequenceCreateInput = {
 	collectionId: InputMaybe<Scalars['ID']>;
 	contentType: SequenceContentType;
@@ -4115,14 +4206,16 @@ export type SequencePayload = {
 };
 
 /** Properties by which sequence connections can be ordered. */
-export enum SequenceSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	RecordingCount = 'RECORDING_COUNT',
-	RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
-	Title = 'TITLE',
-}
+export const SequenceSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	RecordingCount: 'RECORDING_COUNT',
+	RecordingPublishedAt: 'RECORDING_PUBLISHED_AT',
+	Title: 'TITLE',
+} as const;
 
+export type SequenceSortableField =
+	typeof SequenceSortableField[keyof typeof SequenceSortableField];
 export type SequenceUpdateInput = {
 	collectionId: InputMaybe<Scalars['ID']>;
 	description: InputMaybe<Scalars['String']>;
@@ -4346,14 +4439,16 @@ export type SponsorsOrder = {
 };
 
 /** Properties by which sponsor connections can be ordered. */
-export enum SponsorsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	RecordingCount = 'RECORDING_COUNT',
-	RecordingPublishedAt = 'RECORDING_PUBLISHED_AT',
-	Title = 'TITLE',
-}
+export const SponsorsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	RecordingCount: 'RECORDING_COUNT',
+	RecordingPublishedAt: 'RECORDING_PUBLISHED_AT',
+	Title: 'TITLE',
+} as const;
 
+export type SponsorsSortableField =
+	typeof SponsorsSortableField[keyof typeof SponsorsSortableField];
 export type SuccessPayload = {
 	__typename?: 'SuccessPayload';
 	errors: Array<InputValidationError>;
@@ -4420,22 +4515,26 @@ export type TagsOrder = {
 };
 
 /** Properties by which tags connections can be ordered. */
-export enum TagsSortableField {
-	Name = 'NAME',
-	RecordingCount = 'RECORDING_COUNT',
-	SermonCount = 'SERMON_COUNT',
-}
+export const TagsSortableField = {
+	Name: 'NAME',
+	RecordingCount: 'RECORDING_COUNT',
+	SermonCount: 'SERMON_COUNT',
+} as const;
 
+export type TagsSortableField =
+	typeof TagsSortableField[keyof typeof TagsSortableField];
 export type TestimoniesOrder = {
 	direction: OrderByDirection;
 	field: TestimoniesSortableField;
 };
 
 /** Properties by which testimony connections can be ordered. */
-export enum TestimoniesSortableField {
-	WrittenDate = 'WRITTEN_DATE',
-}
+export const TestimoniesSortableField = {
+	WrittenDate: 'WRITTEN_DATE',
+} as const;
 
+export type TestimoniesSortableField =
+	typeof TestimoniesSortableField[keyof typeof TestimoniesSortableField];
 /** A user testimony. */
 export type Testimony = Node & {
 	__typename?: 'Testimony';
@@ -4482,529 +4581,530 @@ export type TestimonyUpdateInput = {
 };
 
 /** The supported timezones. */
-export enum Timezone {
-	AfricaAbidjan = 'AFRICA_ABIDJAN',
-	AfricaAccra = 'AFRICA_ACCRA',
-	AfricaAddisAbaba = 'AFRICA_ADDIS_ABABA',
-	AfricaAlgiers = 'AFRICA_ALGIERS',
-	AfricaAsmara = 'AFRICA_ASMARA',
-	AfricaAsmera = 'AFRICA_ASMERA',
-	AfricaBamako = 'AFRICA_BAMAKO',
-	AfricaBangui = 'AFRICA_BANGUI',
-	AfricaBanjul = 'AFRICA_BANJUL',
-	AfricaBissau = 'AFRICA_BISSAU',
-	AfricaBlantyre = 'AFRICA_BLANTYRE',
-	AfricaBrazzaville = 'AFRICA_BRAZZAVILLE',
-	AfricaBujumbura = 'AFRICA_BUJUMBURA',
-	AfricaCairo = 'AFRICA_CAIRO',
-	AfricaCasablanca = 'AFRICA_CASABLANCA',
-	AfricaCeuta = 'AFRICA_CEUTA',
-	AfricaConakry = 'AFRICA_CONAKRY',
-	AfricaDakar = 'AFRICA_DAKAR',
-	AfricaDarEsSalaam = 'AFRICA_DAR_ES_SALAAM',
-	AfricaDjibouti = 'AFRICA_DJIBOUTI',
-	AfricaDouala = 'AFRICA_DOUALA',
-	AfricaElAaiun = 'AFRICA_EL_AAIUN',
-	AfricaFreetown = 'AFRICA_FREETOWN',
-	AfricaGaborone = 'AFRICA_GABORONE',
-	AfricaHarare = 'AFRICA_HARARE',
-	AfricaJohannesburg = 'AFRICA_JOHANNESBURG',
-	AfricaJuba = 'AFRICA_JUBA',
-	AfricaKampala = 'AFRICA_KAMPALA',
-	AfricaKhartoum = 'AFRICA_KHARTOUM',
-	AfricaKigali = 'AFRICA_KIGALI',
-	AfricaKinshasa = 'AFRICA_KINSHASA',
-	AfricaLagos = 'AFRICA_LAGOS',
-	AfricaLibreville = 'AFRICA_LIBREVILLE',
-	AfricaLome = 'AFRICA_LOME',
-	AfricaLuanda = 'AFRICA_LUANDA',
-	AfricaLubumbashi = 'AFRICA_LUBUMBASHI',
-	AfricaLusaka = 'AFRICA_LUSAKA',
-	AfricaMalabo = 'AFRICA_MALABO',
-	AfricaMaputo = 'AFRICA_MAPUTO',
-	AfricaMaseru = 'AFRICA_MASERU',
-	AfricaMbabane = 'AFRICA_MBABANE',
-	AfricaMogadishu = 'AFRICA_MOGADISHU',
-	AfricaMonrovia = 'AFRICA_MONROVIA',
-	AfricaNairobi = 'AFRICA_NAIROBI',
-	AfricaNdjamena = 'AFRICA_NDJAMENA',
-	AfricaNiamey = 'AFRICA_NIAMEY',
-	AfricaNouakchott = 'AFRICA_NOUAKCHOTT',
-	AfricaOuagadougou = 'AFRICA_OUAGADOUGOU',
-	AfricaPortoNovo = 'AFRICA_PORTO_NOVO',
-	AfricaSaoTome = 'AFRICA_SAO_TOME',
-	AfricaTimbuktu = 'AFRICA_TIMBUKTU',
-	AfricaTripoli = 'AFRICA_TRIPOLI',
-	AfricaTunis = 'AFRICA_TUNIS',
-	AfricaWindhoek = 'AFRICA_WINDHOEK',
-	AmericaAdak = 'AMERICA_ADAK',
-	AmericaAnchorage = 'AMERICA_ANCHORAGE',
-	AmericaAnguilla = 'AMERICA_ANGUILLA',
-	AmericaAntigua = 'AMERICA_ANTIGUA',
-	AmericaAraguaina = 'AMERICA_ARAGUAINA',
-	AmericaArgentinaBuenosAires = 'AMERICA_ARGENTINA_BUENOS_AIRES',
-	AmericaArgentinaCatamarca = 'AMERICA_ARGENTINA_CATAMARCA',
-	AmericaArgentinaComodrivadavia = 'AMERICA_ARGENTINA_COMODRIVADAVIA',
-	AmericaArgentinaCordoba = 'AMERICA_ARGENTINA_CORDOBA',
-	AmericaArgentinaJujuy = 'AMERICA_ARGENTINA_JUJUY',
-	AmericaArgentinaLaRioja = 'AMERICA_ARGENTINA_LA_RIOJA',
-	AmericaArgentinaMendoza = 'AMERICA_ARGENTINA_MENDOZA',
-	AmericaArgentinaRioGallegos = 'AMERICA_ARGENTINA_RIO_GALLEGOS',
-	AmericaArgentinaSalta = 'AMERICA_ARGENTINA_SALTA',
-	AmericaArgentinaSanJuan = 'AMERICA_ARGENTINA_SAN_JUAN',
-	AmericaArgentinaSanLuis = 'AMERICA_ARGENTINA_SAN_LUIS',
-	AmericaArgentinaTucuman = 'AMERICA_ARGENTINA_TUCUMAN',
-	AmericaArgentinaUshuaia = 'AMERICA_ARGENTINA_USHUAIA',
-	AmericaAruba = 'AMERICA_ARUBA',
-	AmericaAsuncion = 'AMERICA_ASUNCION',
-	AmericaAtikokan = 'AMERICA_ATIKOKAN',
-	AmericaAtka = 'AMERICA_ATKA',
-	AmericaBahia = 'AMERICA_BAHIA',
-	AmericaBahiaBanderas = 'AMERICA_BAHIA_BANDERAS',
-	AmericaBarbados = 'AMERICA_BARBADOS',
-	AmericaBelem = 'AMERICA_BELEM',
-	AmericaBelize = 'AMERICA_BELIZE',
-	AmericaBlancSablon = 'AMERICA_BLANC_SABLON',
-	AmericaBoaVista = 'AMERICA_BOA_VISTA',
-	AmericaBogota = 'AMERICA_BOGOTA',
-	AmericaBoise = 'AMERICA_BOISE',
-	AmericaBuenosAires = 'AMERICA_BUENOS_AIRES',
-	AmericaCambridgeBay = 'AMERICA_CAMBRIDGE_BAY',
-	AmericaCampoGrande = 'AMERICA_CAMPO_GRANDE',
-	AmericaCancun = 'AMERICA_CANCUN',
-	AmericaCaracas = 'AMERICA_CARACAS',
-	AmericaCatamarca = 'AMERICA_CATAMARCA',
-	AmericaCayenne = 'AMERICA_CAYENNE',
-	AmericaCayman = 'AMERICA_CAYMAN',
-	AmericaChicago = 'AMERICA_CHICAGO',
-	AmericaChihuahua = 'AMERICA_CHIHUAHUA',
-	AmericaCoralHarbour = 'AMERICA_CORAL_HARBOUR',
-	AmericaCordoba = 'AMERICA_CORDOBA',
-	AmericaCostaRica = 'AMERICA_COSTA_RICA',
-	AmericaCreston = 'AMERICA_CRESTON',
-	AmericaCuiaba = 'AMERICA_CUIABA',
-	AmericaCuracao = 'AMERICA_CURACAO',
-	AmericaDanmarkshavn = 'AMERICA_DANMARKSHAVN',
-	AmericaDawson = 'AMERICA_DAWSON',
-	AmericaDawsonCreek = 'AMERICA_DAWSON_CREEK',
-	AmericaDenver = 'AMERICA_DENVER',
-	AmericaDetroit = 'AMERICA_DETROIT',
-	AmericaDominica = 'AMERICA_DOMINICA',
-	AmericaEdmonton = 'AMERICA_EDMONTON',
-	AmericaEirunepe = 'AMERICA_EIRUNEPE',
-	AmericaElSalvador = 'AMERICA_EL_SALVADOR',
-	AmericaEnsenada = 'AMERICA_ENSENADA',
-	AmericaFortaleza = 'AMERICA_FORTALEZA',
-	AmericaFortNelson = 'AMERICA_FORT_NELSON',
-	AmericaFortWayne = 'AMERICA_FORT_WAYNE',
-	AmericaGlaceBay = 'AMERICA_GLACE_BAY',
-	AmericaGodthab = 'AMERICA_GODTHAB',
-	AmericaGooseBay = 'AMERICA_GOOSE_BAY',
-	AmericaGrandTurk = 'AMERICA_GRAND_TURK',
-	AmericaGrenada = 'AMERICA_GRENADA',
-	AmericaGuadeloupe = 'AMERICA_GUADELOUPE',
-	AmericaGuatemala = 'AMERICA_GUATEMALA',
-	AmericaGuayaquil = 'AMERICA_GUAYAQUIL',
-	AmericaGuyana = 'AMERICA_GUYANA',
-	AmericaHalifax = 'AMERICA_HALIFAX',
-	AmericaHavana = 'AMERICA_HAVANA',
-	AmericaHermosillo = 'AMERICA_HERMOSILLO',
-	AmericaIndianapolis = 'AMERICA_INDIANAPOLIS',
-	AmericaIndianaIndianapolis = 'AMERICA_INDIANA_INDIANAPOLIS',
-	AmericaIndianaKnox = 'AMERICA_INDIANA_KNOX',
-	AmericaIndianaMarengo = 'AMERICA_INDIANA_MARENGO',
-	AmericaIndianaPetersburg = 'AMERICA_INDIANA_PETERSBURG',
-	AmericaIndianaTellCity = 'AMERICA_INDIANA_TELL_CITY',
-	AmericaIndianaVevay = 'AMERICA_INDIANA_VEVAY',
-	AmericaIndianaVincennes = 'AMERICA_INDIANA_VINCENNES',
-	AmericaIndianaWinamac = 'AMERICA_INDIANA_WINAMAC',
-	AmericaInuvik = 'AMERICA_INUVIK',
-	AmericaIqaluit = 'AMERICA_IQALUIT',
-	AmericaJamaica = 'AMERICA_JAMAICA',
-	AmericaJujuy = 'AMERICA_JUJUY',
-	AmericaJuneau = 'AMERICA_JUNEAU',
-	AmericaKentuckyLouisville = 'AMERICA_KENTUCKY_LOUISVILLE',
-	AmericaKentuckyMonticello = 'AMERICA_KENTUCKY_MONTICELLO',
-	AmericaKnoxIn = 'AMERICA_KNOX_IN',
-	AmericaKralendijk = 'AMERICA_KRALENDIJK',
-	AmericaLaPaz = 'AMERICA_LA_PAZ',
-	AmericaLima = 'AMERICA_LIMA',
-	AmericaLosAngeles = 'AMERICA_LOS_ANGELES',
-	AmericaLouisville = 'AMERICA_LOUISVILLE',
-	AmericaLowerPrinces = 'AMERICA_LOWER_PRINCES',
-	AmericaMaceio = 'AMERICA_MACEIO',
-	AmericaManagua = 'AMERICA_MANAGUA',
-	AmericaManaus = 'AMERICA_MANAUS',
-	AmericaMarigot = 'AMERICA_MARIGOT',
-	AmericaMartinique = 'AMERICA_MARTINIQUE',
-	AmericaMatamoros = 'AMERICA_MATAMOROS',
-	AmericaMazatlan = 'AMERICA_MAZATLAN',
-	AmericaMendoza = 'AMERICA_MENDOZA',
-	AmericaMenominee = 'AMERICA_MENOMINEE',
-	AmericaMerida = 'AMERICA_MERIDA',
-	AmericaMetlakatla = 'AMERICA_METLAKATLA',
-	AmericaMexicoCity = 'AMERICA_MEXICO_CITY',
-	AmericaMiquelon = 'AMERICA_MIQUELON',
-	AmericaMoncton = 'AMERICA_MONCTON',
-	AmericaMonterrey = 'AMERICA_MONTERREY',
-	AmericaMontevideo = 'AMERICA_MONTEVIDEO',
-	AmericaMontreal = 'AMERICA_MONTREAL',
-	AmericaMontserrat = 'AMERICA_MONTSERRAT',
-	AmericaNassau = 'AMERICA_NASSAU',
-	AmericaNewYork = 'AMERICA_NEW_YORK',
-	AmericaNipigon = 'AMERICA_NIPIGON',
-	AmericaNome = 'AMERICA_NOME',
-	AmericaNoronha = 'AMERICA_NORONHA',
-	AmericaNorthDakotaBeulah = 'AMERICA_NORTH_DAKOTA_BEULAH',
-	AmericaNorthDakotaCenter = 'AMERICA_NORTH_DAKOTA_CENTER',
-	AmericaNorthDakotaNewSalem = 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
-	AmericaNuuk = 'AMERICA_NUUK',
-	AmericaOjinaga = 'AMERICA_OJINAGA',
-	AmericaPanama = 'AMERICA_PANAMA',
-	AmericaPangnirtung = 'AMERICA_PANGNIRTUNG',
-	AmericaParamaribo = 'AMERICA_PARAMARIBO',
-	AmericaPhoenix = 'AMERICA_PHOENIX',
-	AmericaPortoAcre = 'AMERICA_PORTO_ACRE',
-	AmericaPortoVelho = 'AMERICA_PORTO_VELHO',
-	AmericaPortAuPrince = 'AMERICA_PORT_AU_PRINCE',
-	AmericaPortOfSpain = 'AMERICA_PORT_OF_SPAIN',
-	AmericaPuertoRico = 'AMERICA_PUERTO_RICO',
-	AmericaPuntaArenas = 'AMERICA_PUNTA_ARENAS',
-	AmericaRainyRiver = 'AMERICA_RAINY_RIVER',
-	AmericaRankinInlet = 'AMERICA_RANKIN_INLET',
-	AmericaRecife = 'AMERICA_RECIFE',
-	AmericaRegina = 'AMERICA_REGINA',
-	AmericaResolute = 'AMERICA_RESOLUTE',
-	AmericaRioBranco = 'AMERICA_RIO_BRANCO',
-	AmericaRosario = 'AMERICA_ROSARIO',
-	AmericaSantarem = 'AMERICA_SANTAREM',
-	AmericaSantaIsabel = 'AMERICA_SANTA_ISABEL',
-	AmericaSantiago = 'AMERICA_SANTIAGO',
-	AmericaSantoDomingo = 'AMERICA_SANTO_DOMINGO',
-	AmericaSaoPaulo = 'AMERICA_SAO_PAULO',
-	AmericaScoresbysund = 'AMERICA_SCORESBYSUND',
-	AmericaShiprock = 'AMERICA_SHIPROCK',
-	AmericaSitka = 'AMERICA_SITKA',
-	AmericaStBarthelemy = 'AMERICA_ST_BARTHELEMY',
-	AmericaStJohns = 'AMERICA_ST_JOHNS',
-	AmericaStKitts = 'AMERICA_ST_KITTS',
-	AmericaStLucia = 'AMERICA_ST_LUCIA',
-	AmericaStThomas = 'AMERICA_ST_THOMAS',
-	AmericaStVincent = 'AMERICA_ST_VINCENT',
-	AmericaSwiftCurrent = 'AMERICA_SWIFT_CURRENT',
-	AmericaTegucigalpa = 'AMERICA_TEGUCIGALPA',
-	AmericaThule = 'AMERICA_THULE',
-	AmericaThunderBay = 'AMERICA_THUNDER_BAY',
-	AmericaTijuana = 'AMERICA_TIJUANA',
-	AmericaToronto = 'AMERICA_TORONTO',
-	AmericaTortola = 'AMERICA_TORTOLA',
-	AmericaVancouver = 'AMERICA_VANCOUVER',
-	AmericaVirgin = 'AMERICA_VIRGIN',
-	AmericaWhitehorse = 'AMERICA_WHITEHORSE',
-	AmericaWinnipeg = 'AMERICA_WINNIPEG',
-	AmericaYakutat = 'AMERICA_YAKUTAT',
-	AmericaYellowknife = 'AMERICA_YELLOWKNIFE',
-	AntarcticaCasey = 'ANTARCTICA_CASEY',
-	AntarcticaDavis = 'ANTARCTICA_DAVIS',
-	AntarcticaDumontdurville = 'ANTARCTICA_DUMONTDURVILLE',
-	AntarcticaMacquarie = 'ANTARCTICA_MACQUARIE',
-	AntarcticaMawson = 'ANTARCTICA_MAWSON',
-	AntarcticaMcmurdo = 'ANTARCTICA_MCMURDO',
-	AntarcticaPalmer = 'ANTARCTICA_PALMER',
-	AntarcticaRothera = 'ANTARCTICA_ROTHERA',
-	AntarcticaSouthPole = 'ANTARCTICA_SOUTH_POLE',
-	AntarcticaSyowa = 'ANTARCTICA_SYOWA',
-	AntarcticaTroll = 'ANTARCTICA_TROLL',
-	AntarcticaVostok = 'ANTARCTICA_VOSTOK',
-	ArcticLongyearbyen = 'ARCTIC_LONGYEARBYEN',
-	AsiaAden = 'ASIA_ADEN',
-	AsiaAlmaty = 'ASIA_ALMATY',
-	AsiaAmman = 'ASIA_AMMAN',
-	AsiaAnadyr = 'ASIA_ANADYR',
-	AsiaAqtau = 'ASIA_AQTAU',
-	AsiaAqtobe = 'ASIA_AQTOBE',
-	AsiaAshgabat = 'ASIA_ASHGABAT',
-	AsiaAshkhabad = 'ASIA_ASHKHABAD',
-	AsiaAtyrau = 'ASIA_ATYRAU',
-	AsiaBaghdad = 'ASIA_BAGHDAD',
-	AsiaBahrain = 'ASIA_BAHRAIN',
-	AsiaBaku = 'ASIA_BAKU',
-	AsiaBangkok = 'ASIA_BANGKOK',
-	AsiaBarnaul = 'ASIA_BARNAUL',
-	AsiaBeirut = 'ASIA_BEIRUT',
-	AsiaBishkek = 'ASIA_BISHKEK',
-	AsiaBrunei = 'ASIA_BRUNEI',
-	AsiaCalcutta = 'ASIA_CALCUTTA',
-	AsiaChita = 'ASIA_CHITA',
-	AsiaChoibalsan = 'ASIA_CHOIBALSAN',
-	AsiaChongqing = 'ASIA_CHONGQING',
-	AsiaChungking = 'ASIA_CHUNGKING',
-	AsiaColombo = 'ASIA_COLOMBO',
-	AsiaDacca = 'ASIA_DACCA',
-	AsiaDamascus = 'ASIA_DAMASCUS',
-	AsiaDhaka = 'ASIA_DHAKA',
-	AsiaDili = 'ASIA_DILI',
-	AsiaDubai = 'ASIA_DUBAI',
-	AsiaDushanbe = 'ASIA_DUSHANBE',
-	AsiaFamagusta = 'ASIA_FAMAGUSTA',
-	AsiaGaza = 'ASIA_GAZA',
-	AsiaHarbin = 'ASIA_HARBIN',
-	AsiaHebron = 'ASIA_HEBRON',
-	AsiaHongKong = 'ASIA_HONG_KONG',
-	AsiaHovd = 'ASIA_HOVD',
-	AsiaHoChiMinh = 'ASIA_HO_CHI_MINH',
-	AsiaIrkutsk = 'ASIA_IRKUTSK',
-	AsiaIstanbul = 'ASIA_ISTANBUL',
-	AsiaJakarta = 'ASIA_JAKARTA',
-	AsiaJayapura = 'ASIA_JAYAPURA',
-	AsiaJerusalem = 'ASIA_JERUSALEM',
-	AsiaKabul = 'ASIA_KABUL',
-	AsiaKamchatka = 'ASIA_KAMCHATKA',
-	AsiaKarachi = 'ASIA_KARACHI',
-	AsiaKashgar = 'ASIA_KASHGAR',
-	AsiaKathmandu = 'ASIA_KATHMANDU',
-	AsiaKatmandu = 'ASIA_KATMANDU',
-	AsiaKhandyga = 'ASIA_KHANDYGA',
-	AsiaKolkata = 'ASIA_KOLKATA',
-	AsiaKrasnoyarsk = 'ASIA_KRASNOYARSK',
-	AsiaKualaLumpur = 'ASIA_KUALA_LUMPUR',
-	AsiaKuching = 'ASIA_KUCHING',
-	AsiaKuwait = 'ASIA_KUWAIT',
-	AsiaMacao = 'ASIA_MACAO',
-	AsiaMacau = 'ASIA_MACAU',
-	AsiaMagadan = 'ASIA_MAGADAN',
-	AsiaMakassar = 'ASIA_MAKASSAR',
-	AsiaManila = 'ASIA_MANILA',
-	AsiaMuscat = 'ASIA_MUSCAT',
-	AsiaNicosia = 'ASIA_NICOSIA',
-	AsiaNovokuznetsk = 'ASIA_NOVOKUZNETSK',
-	AsiaNovosibirsk = 'ASIA_NOVOSIBIRSK',
-	AsiaOmsk = 'ASIA_OMSK',
-	AsiaOral = 'ASIA_ORAL',
-	AsiaPhnomPenh = 'ASIA_PHNOM_PENH',
-	AsiaPontianak = 'ASIA_PONTIANAK',
-	AsiaPyongyang = 'ASIA_PYONGYANG',
-	AsiaQatar = 'ASIA_QATAR',
-	AsiaQostanay = 'ASIA_QOSTANAY',
-	AsiaQyzylorda = 'ASIA_QYZYLORDA',
-	AsiaRangoon = 'ASIA_RANGOON',
-	AsiaRiyadh = 'ASIA_RIYADH',
-	AsiaSaigon = 'ASIA_SAIGON',
-	AsiaSakhalin = 'ASIA_SAKHALIN',
-	AsiaSamarkand = 'ASIA_SAMARKAND',
-	AsiaSeoul = 'ASIA_SEOUL',
-	AsiaShanghai = 'ASIA_SHANGHAI',
-	AsiaSingapore = 'ASIA_SINGAPORE',
-	AsiaSrednekolymsk = 'ASIA_SREDNEKOLYMSK',
-	AsiaTaipei = 'ASIA_TAIPEI',
-	AsiaTashkent = 'ASIA_TASHKENT',
-	AsiaTbilisi = 'ASIA_TBILISI',
-	AsiaTehran = 'ASIA_TEHRAN',
-	AsiaTelAviv = 'ASIA_TEL_AVIV',
-	AsiaThimbu = 'ASIA_THIMBU',
-	AsiaThimphu = 'ASIA_THIMPHU',
-	AsiaTokyo = 'ASIA_TOKYO',
-	AsiaTomsk = 'ASIA_TOMSK',
-	AsiaUjungPandang = 'ASIA_UJUNG_PANDANG',
-	AsiaUlaanbaatar = 'ASIA_ULAANBAATAR',
-	AsiaUlanBator = 'ASIA_ULAN_BATOR',
-	AsiaUrumqi = 'ASIA_URUMQI',
-	AsiaUstNera = 'ASIA_UST_NERA',
-	AsiaVientiane = 'ASIA_VIENTIANE',
-	AsiaVladivostok = 'ASIA_VLADIVOSTOK',
-	AsiaYakutsk = 'ASIA_YAKUTSK',
-	AsiaYangon = 'ASIA_YANGON',
-	AsiaYekaterinburg = 'ASIA_YEKATERINBURG',
-	AsiaYerevan = 'ASIA_YEREVAN',
-	AtlanticAzores = 'ATLANTIC_AZORES',
-	AtlanticBermuda = 'ATLANTIC_BERMUDA',
-	AtlanticCanary = 'ATLANTIC_CANARY',
-	AtlanticCapeVerde = 'ATLANTIC_CAPE_VERDE',
-	AtlanticFaeroe = 'ATLANTIC_FAEROE',
-	AtlanticFaroe = 'ATLANTIC_FAROE',
-	AtlanticJanMayen = 'ATLANTIC_JAN_MAYEN',
-	AtlanticMadeira = 'ATLANTIC_MADEIRA',
-	AtlanticReykjavik = 'ATLANTIC_REYKJAVIK',
-	AtlanticSouthGeorgia = 'ATLANTIC_SOUTH_GEORGIA',
-	AtlanticStanley = 'ATLANTIC_STANLEY',
-	AtlanticStHelena = 'ATLANTIC_ST_HELENA',
-	AustraliaAct = 'AUSTRALIA_ACT',
-	AustraliaAdelaide = 'AUSTRALIA_ADELAIDE',
-	AustraliaBrisbane = 'AUSTRALIA_BRISBANE',
-	AustraliaBrokenHill = 'AUSTRALIA_BROKEN_HILL',
-	AustraliaCanberra = 'AUSTRALIA_CANBERRA',
-	AustraliaCurrie = 'AUSTRALIA_CURRIE',
-	AustraliaDarwin = 'AUSTRALIA_DARWIN',
-	AustraliaEucla = 'AUSTRALIA_EUCLA',
-	AustraliaHobart = 'AUSTRALIA_HOBART',
-	AustraliaLhi = 'AUSTRALIA_LHI',
-	AustraliaLindeman = 'AUSTRALIA_LINDEMAN',
-	AustraliaLordHowe = 'AUSTRALIA_LORD_HOWE',
-	AustraliaMelbourne = 'AUSTRALIA_MELBOURNE',
-	AustraliaNorth = 'AUSTRALIA_NORTH',
-	AustraliaNsw = 'AUSTRALIA_NSW',
-	AustraliaPerth = 'AUSTRALIA_PERTH',
-	AustraliaQueensland = 'AUSTRALIA_QUEENSLAND',
-	AustraliaSouth = 'AUSTRALIA_SOUTH',
-	AustraliaSydney = 'AUSTRALIA_SYDNEY',
-	AustraliaTasmania = 'AUSTRALIA_TASMANIA',
-	AustraliaVictoria = 'AUSTRALIA_VICTORIA',
-	AustraliaWest = 'AUSTRALIA_WEST',
-	AustraliaYancowinna = 'AUSTRALIA_YANCOWINNA',
-	BrazilAcre = 'BRAZIL_ACRE',
-	BrazilDenoronha = 'BRAZIL_DENORONHA',
-	BrazilEast = 'BRAZIL_EAST',
-	BrazilWest = 'BRAZIL_WEST',
-	CanadaAtlantic = 'CANADA_ATLANTIC',
-	CanadaCentral = 'CANADA_CENTRAL',
-	CanadaEastern = 'CANADA_EASTERN',
-	CanadaMountain = 'CANADA_MOUNTAIN',
-	CanadaNewfoundland = 'CANADA_NEWFOUNDLAND',
-	CanadaPacific = 'CANADA_PACIFIC',
-	CanadaSaskatchewan = 'CANADA_SASKATCHEWAN',
-	CanadaYukon = 'CANADA_YUKON',
-	ChileContinental = 'CHILE_CONTINENTAL',
-	ChileEasterisland = 'CHILE_EASTERISLAND',
-	EtcGreenwich = 'ETC_GREENWICH',
-	EtcUct = 'ETC_UCT',
-	EtcUniversal = 'ETC_UNIVERSAL',
-	EtcUtc = 'ETC_UTC',
-	EtcZulu = 'ETC_ZULU',
-	EuropeAmsterdam = 'EUROPE_AMSTERDAM',
-	EuropeAndorra = 'EUROPE_ANDORRA',
-	EuropeAstrakhan = 'EUROPE_ASTRAKHAN',
-	EuropeAthens = 'EUROPE_ATHENS',
-	EuropeBelfast = 'EUROPE_BELFAST',
-	EuropeBelgrade = 'EUROPE_BELGRADE',
-	EuropeBerlin = 'EUROPE_BERLIN',
-	EuropeBratislava = 'EUROPE_BRATISLAVA',
-	EuropeBrussels = 'EUROPE_BRUSSELS',
-	EuropeBucharest = 'EUROPE_BUCHAREST',
-	EuropeBudapest = 'EUROPE_BUDAPEST',
-	EuropeBusingen = 'EUROPE_BUSINGEN',
-	EuropeChisinau = 'EUROPE_CHISINAU',
-	EuropeCopenhagen = 'EUROPE_COPENHAGEN',
-	EuropeDublin = 'EUROPE_DUBLIN',
-	EuropeGibraltar = 'EUROPE_GIBRALTAR',
-	EuropeGuernsey = 'EUROPE_GUERNSEY',
-	EuropeHelsinki = 'EUROPE_HELSINKI',
-	EuropeIsleOfMan = 'EUROPE_ISLE_OF_MAN',
-	EuropeIstanbul = 'EUROPE_ISTANBUL',
-	EuropeJersey = 'EUROPE_JERSEY',
-	EuropeKaliningrad = 'EUROPE_KALININGRAD',
-	EuropeKiev = 'EUROPE_KIEV',
-	EuropeKirov = 'EUROPE_KIROV',
-	EuropeLisbon = 'EUROPE_LISBON',
-	EuropeLjubljana = 'EUROPE_LJUBLJANA',
-	EuropeLondon = 'EUROPE_LONDON',
-	EuropeLuxembourg = 'EUROPE_LUXEMBOURG',
-	EuropeMadrid = 'EUROPE_MADRID',
-	EuropeMalta = 'EUROPE_MALTA',
-	EuropeMariehamn = 'EUROPE_MARIEHAMN',
-	EuropeMinsk = 'EUROPE_MINSK',
-	EuropeMonaco = 'EUROPE_MONACO',
-	EuropeMoscow = 'EUROPE_MOSCOW',
-	EuropeNicosia = 'EUROPE_NICOSIA',
-	EuropeOslo = 'EUROPE_OSLO',
-	EuropeParis = 'EUROPE_PARIS',
-	EuropePodgorica = 'EUROPE_PODGORICA',
-	EuropePrague = 'EUROPE_PRAGUE',
-	EuropeRiga = 'EUROPE_RIGA',
-	EuropeRome = 'EUROPE_ROME',
-	EuropeSamara = 'EUROPE_SAMARA',
-	EuropeSanMarino = 'EUROPE_SAN_MARINO',
-	EuropeSarajevo = 'EUROPE_SARAJEVO',
-	EuropeSaratov = 'EUROPE_SARATOV',
-	EuropeSimferopol = 'EUROPE_SIMFEROPOL',
-	EuropeSkopje = 'EUROPE_SKOPJE',
-	EuropeSofia = 'EUROPE_SOFIA',
-	EuropeStockholm = 'EUROPE_STOCKHOLM',
-	EuropeTallinn = 'EUROPE_TALLINN',
-	EuropeTirane = 'EUROPE_TIRANE',
-	EuropeTiraspol = 'EUROPE_TIRASPOL',
-	EuropeUlyanovsk = 'EUROPE_ULYANOVSK',
-	EuropeUzhgorod = 'EUROPE_UZHGOROD',
-	EuropeVaduz = 'EUROPE_VADUZ',
-	EuropeVatican = 'EUROPE_VATICAN',
-	EuropeVienna = 'EUROPE_VIENNA',
-	EuropeVilnius = 'EUROPE_VILNIUS',
-	EuropeVolgograd = 'EUROPE_VOLGOGRAD',
-	EuropeWarsaw = 'EUROPE_WARSAW',
-	EuropeZagreb = 'EUROPE_ZAGREB',
-	EuropeZaporozhye = 'EUROPE_ZAPOROZHYE',
-	EuropeZurich = 'EUROPE_ZURICH',
-	IndianAntananarivo = 'INDIAN_ANTANANARIVO',
-	IndianChagos = 'INDIAN_CHAGOS',
-	IndianChristmas = 'INDIAN_CHRISTMAS',
-	IndianCocos = 'INDIAN_COCOS',
-	IndianComoro = 'INDIAN_COMORO',
-	IndianKerguelen = 'INDIAN_KERGUELEN',
-	IndianMahe = 'INDIAN_MAHE',
-	IndianMaldives = 'INDIAN_MALDIVES',
-	IndianMauritius = 'INDIAN_MAURITIUS',
-	IndianMayotte = 'INDIAN_MAYOTTE',
-	IndianReunion = 'INDIAN_REUNION',
-	MexicoBajanorte = 'MEXICO_BAJANORTE',
-	MexicoBajasur = 'MEXICO_BAJASUR',
-	MexicoGeneral = 'MEXICO_GENERAL',
-	PacificApia = 'PACIFIC_APIA',
-	PacificAuckland = 'PACIFIC_AUCKLAND',
-	PacificBougainville = 'PACIFIC_BOUGAINVILLE',
-	PacificChatham = 'PACIFIC_CHATHAM',
-	PacificChuuk = 'PACIFIC_CHUUK',
-	PacificEaster = 'PACIFIC_EASTER',
-	PacificEfate = 'PACIFIC_EFATE',
-	PacificEnderbury = 'PACIFIC_ENDERBURY',
-	PacificFakaofo = 'PACIFIC_FAKAOFO',
-	PacificFiji = 'PACIFIC_FIJI',
-	PacificFunafuti = 'PACIFIC_FUNAFUTI',
-	PacificGalapagos = 'PACIFIC_GALAPAGOS',
-	PacificGambier = 'PACIFIC_GAMBIER',
-	PacificGuadalcanal = 'PACIFIC_GUADALCANAL',
-	PacificGuam = 'PACIFIC_GUAM',
-	PacificHonolulu = 'PACIFIC_HONOLULU',
-	PacificJohnston = 'PACIFIC_JOHNSTON',
-	PacificKanton = 'PACIFIC_KANTON',
-	PacificKiritimati = 'PACIFIC_KIRITIMATI',
-	PacificKosrae = 'PACIFIC_KOSRAE',
-	PacificKwajalein = 'PACIFIC_KWAJALEIN',
-	PacificMajuro = 'PACIFIC_MAJURO',
-	PacificMarquesas = 'PACIFIC_MARQUESAS',
-	PacificMidway = 'PACIFIC_MIDWAY',
-	PacificNauru = 'PACIFIC_NAURU',
-	PacificNiue = 'PACIFIC_NIUE',
-	PacificNorfolk = 'PACIFIC_NORFOLK',
-	PacificNoumea = 'PACIFIC_NOUMEA',
-	PacificPagoPago = 'PACIFIC_PAGO_PAGO',
-	PacificPalau = 'PACIFIC_PALAU',
-	PacificPitcairn = 'PACIFIC_PITCAIRN',
-	PacificPohnpei = 'PACIFIC_POHNPEI',
-	PacificPonape = 'PACIFIC_PONAPE',
-	PacificPortMoresby = 'PACIFIC_PORT_MORESBY',
-	PacificRarotonga = 'PACIFIC_RAROTONGA',
-	PacificSaipan = 'PACIFIC_SAIPAN',
-	PacificSamoa = 'PACIFIC_SAMOA',
-	PacificTahiti = 'PACIFIC_TAHITI',
-	PacificTarawa = 'PACIFIC_TARAWA',
-	PacificTongatapu = 'PACIFIC_TONGATAPU',
-	PacificTruk = 'PACIFIC_TRUK',
-	PacificWake = 'PACIFIC_WAKE',
-	PacificWallis = 'PACIFIC_WALLIS',
-	PacificYap = 'PACIFIC_YAP',
-	UsAlaska = 'US_ALASKA',
-	UsAleutian = 'US_ALEUTIAN',
-	UsArizona = 'US_ARIZONA',
-	UsCentral = 'US_CENTRAL',
-	UsEastern = 'US_EASTERN',
-	UsEastIndiana = 'US_EAST_INDIANA',
-	UsHawaii = 'US_HAWAII',
-	UsIndianaStarke = 'US_INDIANA_STARKE',
-	UsMichigan = 'US_MICHIGAN',
-	UsMountain = 'US_MOUNTAIN',
-	UsPacific = 'US_PACIFIC',
-	UsSamoa = 'US_SAMOA',
-}
+export const Timezone = {
+	AfricaAbidjan: 'AFRICA_ABIDJAN',
+	AfricaAccra: 'AFRICA_ACCRA',
+	AfricaAddisAbaba: 'AFRICA_ADDIS_ABABA',
+	AfricaAlgiers: 'AFRICA_ALGIERS',
+	AfricaAsmara: 'AFRICA_ASMARA',
+	AfricaAsmera: 'AFRICA_ASMERA',
+	AfricaBamako: 'AFRICA_BAMAKO',
+	AfricaBangui: 'AFRICA_BANGUI',
+	AfricaBanjul: 'AFRICA_BANJUL',
+	AfricaBissau: 'AFRICA_BISSAU',
+	AfricaBlantyre: 'AFRICA_BLANTYRE',
+	AfricaBrazzaville: 'AFRICA_BRAZZAVILLE',
+	AfricaBujumbura: 'AFRICA_BUJUMBURA',
+	AfricaCairo: 'AFRICA_CAIRO',
+	AfricaCasablanca: 'AFRICA_CASABLANCA',
+	AfricaCeuta: 'AFRICA_CEUTA',
+	AfricaConakry: 'AFRICA_CONAKRY',
+	AfricaDakar: 'AFRICA_DAKAR',
+	AfricaDarEsSalaam: 'AFRICA_DAR_ES_SALAAM',
+	AfricaDjibouti: 'AFRICA_DJIBOUTI',
+	AfricaDouala: 'AFRICA_DOUALA',
+	AfricaElAaiun: 'AFRICA_EL_AAIUN',
+	AfricaFreetown: 'AFRICA_FREETOWN',
+	AfricaGaborone: 'AFRICA_GABORONE',
+	AfricaHarare: 'AFRICA_HARARE',
+	AfricaJohannesburg: 'AFRICA_JOHANNESBURG',
+	AfricaJuba: 'AFRICA_JUBA',
+	AfricaKampala: 'AFRICA_KAMPALA',
+	AfricaKhartoum: 'AFRICA_KHARTOUM',
+	AfricaKigali: 'AFRICA_KIGALI',
+	AfricaKinshasa: 'AFRICA_KINSHASA',
+	AfricaLagos: 'AFRICA_LAGOS',
+	AfricaLibreville: 'AFRICA_LIBREVILLE',
+	AfricaLome: 'AFRICA_LOME',
+	AfricaLuanda: 'AFRICA_LUANDA',
+	AfricaLubumbashi: 'AFRICA_LUBUMBASHI',
+	AfricaLusaka: 'AFRICA_LUSAKA',
+	AfricaMalabo: 'AFRICA_MALABO',
+	AfricaMaputo: 'AFRICA_MAPUTO',
+	AfricaMaseru: 'AFRICA_MASERU',
+	AfricaMbabane: 'AFRICA_MBABANE',
+	AfricaMogadishu: 'AFRICA_MOGADISHU',
+	AfricaMonrovia: 'AFRICA_MONROVIA',
+	AfricaNairobi: 'AFRICA_NAIROBI',
+	AfricaNdjamena: 'AFRICA_NDJAMENA',
+	AfricaNiamey: 'AFRICA_NIAMEY',
+	AfricaNouakchott: 'AFRICA_NOUAKCHOTT',
+	AfricaOuagadougou: 'AFRICA_OUAGADOUGOU',
+	AfricaPortoNovo: 'AFRICA_PORTO_NOVO',
+	AfricaSaoTome: 'AFRICA_SAO_TOME',
+	AfricaTimbuktu: 'AFRICA_TIMBUKTU',
+	AfricaTripoli: 'AFRICA_TRIPOLI',
+	AfricaTunis: 'AFRICA_TUNIS',
+	AfricaWindhoek: 'AFRICA_WINDHOEK',
+	AmericaAdak: 'AMERICA_ADAK',
+	AmericaAnchorage: 'AMERICA_ANCHORAGE',
+	AmericaAnguilla: 'AMERICA_ANGUILLA',
+	AmericaAntigua: 'AMERICA_ANTIGUA',
+	AmericaAraguaina: 'AMERICA_ARAGUAINA',
+	AmericaArgentinaBuenosAires: 'AMERICA_ARGENTINA_BUENOS_AIRES',
+	AmericaArgentinaCatamarca: 'AMERICA_ARGENTINA_CATAMARCA',
+	AmericaArgentinaComodrivadavia: 'AMERICA_ARGENTINA_COMODRIVADAVIA',
+	AmericaArgentinaCordoba: 'AMERICA_ARGENTINA_CORDOBA',
+	AmericaArgentinaJujuy: 'AMERICA_ARGENTINA_JUJUY',
+	AmericaArgentinaLaRioja: 'AMERICA_ARGENTINA_LA_RIOJA',
+	AmericaArgentinaMendoza: 'AMERICA_ARGENTINA_MENDOZA',
+	AmericaArgentinaRioGallegos: 'AMERICA_ARGENTINA_RIO_GALLEGOS',
+	AmericaArgentinaSalta: 'AMERICA_ARGENTINA_SALTA',
+	AmericaArgentinaSanJuan: 'AMERICA_ARGENTINA_SAN_JUAN',
+	AmericaArgentinaSanLuis: 'AMERICA_ARGENTINA_SAN_LUIS',
+	AmericaArgentinaTucuman: 'AMERICA_ARGENTINA_TUCUMAN',
+	AmericaArgentinaUshuaia: 'AMERICA_ARGENTINA_USHUAIA',
+	AmericaAruba: 'AMERICA_ARUBA',
+	AmericaAsuncion: 'AMERICA_ASUNCION',
+	AmericaAtikokan: 'AMERICA_ATIKOKAN',
+	AmericaAtka: 'AMERICA_ATKA',
+	AmericaBahia: 'AMERICA_BAHIA',
+	AmericaBahiaBanderas: 'AMERICA_BAHIA_BANDERAS',
+	AmericaBarbados: 'AMERICA_BARBADOS',
+	AmericaBelem: 'AMERICA_BELEM',
+	AmericaBelize: 'AMERICA_BELIZE',
+	AmericaBlancSablon: 'AMERICA_BLANC_SABLON',
+	AmericaBoaVista: 'AMERICA_BOA_VISTA',
+	AmericaBogota: 'AMERICA_BOGOTA',
+	AmericaBoise: 'AMERICA_BOISE',
+	AmericaBuenosAires: 'AMERICA_BUENOS_AIRES',
+	AmericaCambridgeBay: 'AMERICA_CAMBRIDGE_BAY',
+	AmericaCampoGrande: 'AMERICA_CAMPO_GRANDE',
+	AmericaCancun: 'AMERICA_CANCUN',
+	AmericaCaracas: 'AMERICA_CARACAS',
+	AmericaCatamarca: 'AMERICA_CATAMARCA',
+	AmericaCayenne: 'AMERICA_CAYENNE',
+	AmericaCayman: 'AMERICA_CAYMAN',
+	AmericaChicago: 'AMERICA_CHICAGO',
+	AmericaChihuahua: 'AMERICA_CHIHUAHUA',
+	AmericaCoralHarbour: 'AMERICA_CORAL_HARBOUR',
+	AmericaCordoba: 'AMERICA_CORDOBA',
+	AmericaCostaRica: 'AMERICA_COSTA_RICA',
+	AmericaCreston: 'AMERICA_CRESTON',
+	AmericaCuiaba: 'AMERICA_CUIABA',
+	AmericaCuracao: 'AMERICA_CURACAO',
+	AmericaDanmarkshavn: 'AMERICA_DANMARKSHAVN',
+	AmericaDawson: 'AMERICA_DAWSON',
+	AmericaDawsonCreek: 'AMERICA_DAWSON_CREEK',
+	AmericaDenver: 'AMERICA_DENVER',
+	AmericaDetroit: 'AMERICA_DETROIT',
+	AmericaDominica: 'AMERICA_DOMINICA',
+	AmericaEdmonton: 'AMERICA_EDMONTON',
+	AmericaEirunepe: 'AMERICA_EIRUNEPE',
+	AmericaElSalvador: 'AMERICA_EL_SALVADOR',
+	AmericaEnsenada: 'AMERICA_ENSENADA',
+	AmericaFortaleza: 'AMERICA_FORTALEZA',
+	AmericaFortNelson: 'AMERICA_FORT_NELSON',
+	AmericaFortWayne: 'AMERICA_FORT_WAYNE',
+	AmericaGlaceBay: 'AMERICA_GLACE_BAY',
+	AmericaGodthab: 'AMERICA_GODTHAB',
+	AmericaGooseBay: 'AMERICA_GOOSE_BAY',
+	AmericaGrandTurk: 'AMERICA_GRAND_TURK',
+	AmericaGrenada: 'AMERICA_GRENADA',
+	AmericaGuadeloupe: 'AMERICA_GUADELOUPE',
+	AmericaGuatemala: 'AMERICA_GUATEMALA',
+	AmericaGuayaquil: 'AMERICA_GUAYAQUIL',
+	AmericaGuyana: 'AMERICA_GUYANA',
+	AmericaHalifax: 'AMERICA_HALIFAX',
+	AmericaHavana: 'AMERICA_HAVANA',
+	AmericaHermosillo: 'AMERICA_HERMOSILLO',
+	AmericaIndianapolis: 'AMERICA_INDIANAPOLIS',
+	AmericaIndianaIndianapolis: 'AMERICA_INDIANA_INDIANAPOLIS',
+	AmericaIndianaKnox: 'AMERICA_INDIANA_KNOX',
+	AmericaIndianaMarengo: 'AMERICA_INDIANA_MARENGO',
+	AmericaIndianaPetersburg: 'AMERICA_INDIANA_PETERSBURG',
+	AmericaIndianaTellCity: 'AMERICA_INDIANA_TELL_CITY',
+	AmericaIndianaVevay: 'AMERICA_INDIANA_VEVAY',
+	AmericaIndianaVincennes: 'AMERICA_INDIANA_VINCENNES',
+	AmericaIndianaWinamac: 'AMERICA_INDIANA_WINAMAC',
+	AmericaInuvik: 'AMERICA_INUVIK',
+	AmericaIqaluit: 'AMERICA_IQALUIT',
+	AmericaJamaica: 'AMERICA_JAMAICA',
+	AmericaJujuy: 'AMERICA_JUJUY',
+	AmericaJuneau: 'AMERICA_JUNEAU',
+	AmericaKentuckyLouisville: 'AMERICA_KENTUCKY_LOUISVILLE',
+	AmericaKentuckyMonticello: 'AMERICA_KENTUCKY_MONTICELLO',
+	AmericaKnoxIn: 'AMERICA_KNOX_IN',
+	AmericaKralendijk: 'AMERICA_KRALENDIJK',
+	AmericaLaPaz: 'AMERICA_LA_PAZ',
+	AmericaLima: 'AMERICA_LIMA',
+	AmericaLosAngeles: 'AMERICA_LOS_ANGELES',
+	AmericaLouisville: 'AMERICA_LOUISVILLE',
+	AmericaLowerPrinces: 'AMERICA_LOWER_PRINCES',
+	AmericaMaceio: 'AMERICA_MACEIO',
+	AmericaManagua: 'AMERICA_MANAGUA',
+	AmericaManaus: 'AMERICA_MANAUS',
+	AmericaMarigot: 'AMERICA_MARIGOT',
+	AmericaMartinique: 'AMERICA_MARTINIQUE',
+	AmericaMatamoros: 'AMERICA_MATAMOROS',
+	AmericaMazatlan: 'AMERICA_MAZATLAN',
+	AmericaMendoza: 'AMERICA_MENDOZA',
+	AmericaMenominee: 'AMERICA_MENOMINEE',
+	AmericaMerida: 'AMERICA_MERIDA',
+	AmericaMetlakatla: 'AMERICA_METLAKATLA',
+	AmericaMexicoCity: 'AMERICA_MEXICO_CITY',
+	AmericaMiquelon: 'AMERICA_MIQUELON',
+	AmericaMoncton: 'AMERICA_MONCTON',
+	AmericaMonterrey: 'AMERICA_MONTERREY',
+	AmericaMontevideo: 'AMERICA_MONTEVIDEO',
+	AmericaMontreal: 'AMERICA_MONTREAL',
+	AmericaMontserrat: 'AMERICA_MONTSERRAT',
+	AmericaNassau: 'AMERICA_NASSAU',
+	AmericaNewYork: 'AMERICA_NEW_YORK',
+	AmericaNipigon: 'AMERICA_NIPIGON',
+	AmericaNome: 'AMERICA_NOME',
+	AmericaNoronha: 'AMERICA_NORONHA',
+	AmericaNorthDakotaBeulah: 'AMERICA_NORTH_DAKOTA_BEULAH',
+	AmericaNorthDakotaCenter: 'AMERICA_NORTH_DAKOTA_CENTER',
+	AmericaNorthDakotaNewSalem: 'AMERICA_NORTH_DAKOTA_NEW_SALEM',
+	AmericaNuuk: 'AMERICA_NUUK',
+	AmericaOjinaga: 'AMERICA_OJINAGA',
+	AmericaPanama: 'AMERICA_PANAMA',
+	AmericaPangnirtung: 'AMERICA_PANGNIRTUNG',
+	AmericaParamaribo: 'AMERICA_PARAMARIBO',
+	AmericaPhoenix: 'AMERICA_PHOENIX',
+	AmericaPortoAcre: 'AMERICA_PORTO_ACRE',
+	AmericaPortoVelho: 'AMERICA_PORTO_VELHO',
+	AmericaPortAuPrince: 'AMERICA_PORT_AU_PRINCE',
+	AmericaPortOfSpain: 'AMERICA_PORT_OF_SPAIN',
+	AmericaPuertoRico: 'AMERICA_PUERTO_RICO',
+	AmericaPuntaArenas: 'AMERICA_PUNTA_ARENAS',
+	AmericaRainyRiver: 'AMERICA_RAINY_RIVER',
+	AmericaRankinInlet: 'AMERICA_RANKIN_INLET',
+	AmericaRecife: 'AMERICA_RECIFE',
+	AmericaRegina: 'AMERICA_REGINA',
+	AmericaResolute: 'AMERICA_RESOLUTE',
+	AmericaRioBranco: 'AMERICA_RIO_BRANCO',
+	AmericaRosario: 'AMERICA_ROSARIO',
+	AmericaSantarem: 'AMERICA_SANTAREM',
+	AmericaSantaIsabel: 'AMERICA_SANTA_ISABEL',
+	AmericaSantiago: 'AMERICA_SANTIAGO',
+	AmericaSantoDomingo: 'AMERICA_SANTO_DOMINGO',
+	AmericaSaoPaulo: 'AMERICA_SAO_PAULO',
+	AmericaScoresbysund: 'AMERICA_SCORESBYSUND',
+	AmericaShiprock: 'AMERICA_SHIPROCK',
+	AmericaSitka: 'AMERICA_SITKA',
+	AmericaStBarthelemy: 'AMERICA_ST_BARTHELEMY',
+	AmericaStJohns: 'AMERICA_ST_JOHNS',
+	AmericaStKitts: 'AMERICA_ST_KITTS',
+	AmericaStLucia: 'AMERICA_ST_LUCIA',
+	AmericaStThomas: 'AMERICA_ST_THOMAS',
+	AmericaStVincent: 'AMERICA_ST_VINCENT',
+	AmericaSwiftCurrent: 'AMERICA_SWIFT_CURRENT',
+	AmericaTegucigalpa: 'AMERICA_TEGUCIGALPA',
+	AmericaThule: 'AMERICA_THULE',
+	AmericaThunderBay: 'AMERICA_THUNDER_BAY',
+	AmericaTijuana: 'AMERICA_TIJUANA',
+	AmericaToronto: 'AMERICA_TORONTO',
+	AmericaTortola: 'AMERICA_TORTOLA',
+	AmericaVancouver: 'AMERICA_VANCOUVER',
+	AmericaVirgin: 'AMERICA_VIRGIN',
+	AmericaWhitehorse: 'AMERICA_WHITEHORSE',
+	AmericaWinnipeg: 'AMERICA_WINNIPEG',
+	AmericaYakutat: 'AMERICA_YAKUTAT',
+	AmericaYellowknife: 'AMERICA_YELLOWKNIFE',
+	AntarcticaCasey: 'ANTARCTICA_CASEY',
+	AntarcticaDavis: 'ANTARCTICA_DAVIS',
+	AntarcticaDumontdurville: 'ANTARCTICA_DUMONTDURVILLE',
+	AntarcticaMacquarie: 'ANTARCTICA_MACQUARIE',
+	AntarcticaMawson: 'ANTARCTICA_MAWSON',
+	AntarcticaMcmurdo: 'ANTARCTICA_MCMURDO',
+	AntarcticaPalmer: 'ANTARCTICA_PALMER',
+	AntarcticaRothera: 'ANTARCTICA_ROTHERA',
+	AntarcticaSouthPole: 'ANTARCTICA_SOUTH_POLE',
+	AntarcticaSyowa: 'ANTARCTICA_SYOWA',
+	AntarcticaTroll: 'ANTARCTICA_TROLL',
+	AntarcticaVostok: 'ANTARCTICA_VOSTOK',
+	ArcticLongyearbyen: 'ARCTIC_LONGYEARBYEN',
+	AsiaAden: 'ASIA_ADEN',
+	AsiaAlmaty: 'ASIA_ALMATY',
+	AsiaAmman: 'ASIA_AMMAN',
+	AsiaAnadyr: 'ASIA_ANADYR',
+	AsiaAqtau: 'ASIA_AQTAU',
+	AsiaAqtobe: 'ASIA_AQTOBE',
+	AsiaAshgabat: 'ASIA_ASHGABAT',
+	AsiaAshkhabad: 'ASIA_ASHKHABAD',
+	AsiaAtyrau: 'ASIA_ATYRAU',
+	AsiaBaghdad: 'ASIA_BAGHDAD',
+	AsiaBahrain: 'ASIA_BAHRAIN',
+	AsiaBaku: 'ASIA_BAKU',
+	AsiaBangkok: 'ASIA_BANGKOK',
+	AsiaBarnaul: 'ASIA_BARNAUL',
+	AsiaBeirut: 'ASIA_BEIRUT',
+	AsiaBishkek: 'ASIA_BISHKEK',
+	AsiaBrunei: 'ASIA_BRUNEI',
+	AsiaCalcutta: 'ASIA_CALCUTTA',
+	AsiaChita: 'ASIA_CHITA',
+	AsiaChoibalsan: 'ASIA_CHOIBALSAN',
+	AsiaChongqing: 'ASIA_CHONGQING',
+	AsiaChungking: 'ASIA_CHUNGKING',
+	AsiaColombo: 'ASIA_COLOMBO',
+	AsiaDacca: 'ASIA_DACCA',
+	AsiaDamascus: 'ASIA_DAMASCUS',
+	AsiaDhaka: 'ASIA_DHAKA',
+	AsiaDili: 'ASIA_DILI',
+	AsiaDubai: 'ASIA_DUBAI',
+	AsiaDushanbe: 'ASIA_DUSHANBE',
+	AsiaFamagusta: 'ASIA_FAMAGUSTA',
+	AsiaGaza: 'ASIA_GAZA',
+	AsiaHarbin: 'ASIA_HARBIN',
+	AsiaHebron: 'ASIA_HEBRON',
+	AsiaHongKong: 'ASIA_HONG_KONG',
+	AsiaHovd: 'ASIA_HOVD',
+	AsiaHoChiMinh: 'ASIA_HO_CHI_MINH',
+	AsiaIrkutsk: 'ASIA_IRKUTSK',
+	AsiaIstanbul: 'ASIA_ISTANBUL',
+	AsiaJakarta: 'ASIA_JAKARTA',
+	AsiaJayapura: 'ASIA_JAYAPURA',
+	AsiaJerusalem: 'ASIA_JERUSALEM',
+	AsiaKabul: 'ASIA_KABUL',
+	AsiaKamchatka: 'ASIA_KAMCHATKA',
+	AsiaKarachi: 'ASIA_KARACHI',
+	AsiaKashgar: 'ASIA_KASHGAR',
+	AsiaKathmandu: 'ASIA_KATHMANDU',
+	AsiaKatmandu: 'ASIA_KATMANDU',
+	AsiaKhandyga: 'ASIA_KHANDYGA',
+	AsiaKolkata: 'ASIA_KOLKATA',
+	AsiaKrasnoyarsk: 'ASIA_KRASNOYARSK',
+	AsiaKualaLumpur: 'ASIA_KUALA_LUMPUR',
+	AsiaKuching: 'ASIA_KUCHING',
+	AsiaKuwait: 'ASIA_KUWAIT',
+	AsiaMacao: 'ASIA_MACAO',
+	AsiaMacau: 'ASIA_MACAU',
+	AsiaMagadan: 'ASIA_MAGADAN',
+	AsiaMakassar: 'ASIA_MAKASSAR',
+	AsiaManila: 'ASIA_MANILA',
+	AsiaMuscat: 'ASIA_MUSCAT',
+	AsiaNicosia: 'ASIA_NICOSIA',
+	AsiaNovokuznetsk: 'ASIA_NOVOKUZNETSK',
+	AsiaNovosibirsk: 'ASIA_NOVOSIBIRSK',
+	AsiaOmsk: 'ASIA_OMSK',
+	AsiaOral: 'ASIA_ORAL',
+	AsiaPhnomPenh: 'ASIA_PHNOM_PENH',
+	AsiaPontianak: 'ASIA_PONTIANAK',
+	AsiaPyongyang: 'ASIA_PYONGYANG',
+	AsiaQatar: 'ASIA_QATAR',
+	AsiaQostanay: 'ASIA_QOSTANAY',
+	AsiaQyzylorda: 'ASIA_QYZYLORDA',
+	AsiaRangoon: 'ASIA_RANGOON',
+	AsiaRiyadh: 'ASIA_RIYADH',
+	AsiaSaigon: 'ASIA_SAIGON',
+	AsiaSakhalin: 'ASIA_SAKHALIN',
+	AsiaSamarkand: 'ASIA_SAMARKAND',
+	AsiaSeoul: 'ASIA_SEOUL',
+	AsiaShanghai: 'ASIA_SHANGHAI',
+	AsiaSingapore: 'ASIA_SINGAPORE',
+	AsiaSrednekolymsk: 'ASIA_SREDNEKOLYMSK',
+	AsiaTaipei: 'ASIA_TAIPEI',
+	AsiaTashkent: 'ASIA_TASHKENT',
+	AsiaTbilisi: 'ASIA_TBILISI',
+	AsiaTehran: 'ASIA_TEHRAN',
+	AsiaTelAviv: 'ASIA_TEL_AVIV',
+	AsiaThimbu: 'ASIA_THIMBU',
+	AsiaThimphu: 'ASIA_THIMPHU',
+	AsiaTokyo: 'ASIA_TOKYO',
+	AsiaTomsk: 'ASIA_TOMSK',
+	AsiaUjungPandang: 'ASIA_UJUNG_PANDANG',
+	AsiaUlaanbaatar: 'ASIA_ULAANBAATAR',
+	AsiaUlanBator: 'ASIA_ULAN_BATOR',
+	AsiaUrumqi: 'ASIA_URUMQI',
+	AsiaUstNera: 'ASIA_UST_NERA',
+	AsiaVientiane: 'ASIA_VIENTIANE',
+	AsiaVladivostok: 'ASIA_VLADIVOSTOK',
+	AsiaYakutsk: 'ASIA_YAKUTSK',
+	AsiaYangon: 'ASIA_YANGON',
+	AsiaYekaterinburg: 'ASIA_YEKATERINBURG',
+	AsiaYerevan: 'ASIA_YEREVAN',
+	AtlanticAzores: 'ATLANTIC_AZORES',
+	AtlanticBermuda: 'ATLANTIC_BERMUDA',
+	AtlanticCanary: 'ATLANTIC_CANARY',
+	AtlanticCapeVerde: 'ATLANTIC_CAPE_VERDE',
+	AtlanticFaeroe: 'ATLANTIC_FAEROE',
+	AtlanticFaroe: 'ATLANTIC_FAROE',
+	AtlanticJanMayen: 'ATLANTIC_JAN_MAYEN',
+	AtlanticMadeira: 'ATLANTIC_MADEIRA',
+	AtlanticReykjavik: 'ATLANTIC_REYKJAVIK',
+	AtlanticSouthGeorgia: 'ATLANTIC_SOUTH_GEORGIA',
+	AtlanticStanley: 'ATLANTIC_STANLEY',
+	AtlanticStHelena: 'ATLANTIC_ST_HELENA',
+	AustraliaAct: 'AUSTRALIA_ACT',
+	AustraliaAdelaide: 'AUSTRALIA_ADELAIDE',
+	AustraliaBrisbane: 'AUSTRALIA_BRISBANE',
+	AustraliaBrokenHill: 'AUSTRALIA_BROKEN_HILL',
+	AustraliaCanberra: 'AUSTRALIA_CANBERRA',
+	AustraliaCurrie: 'AUSTRALIA_CURRIE',
+	AustraliaDarwin: 'AUSTRALIA_DARWIN',
+	AustraliaEucla: 'AUSTRALIA_EUCLA',
+	AustraliaHobart: 'AUSTRALIA_HOBART',
+	AustraliaLhi: 'AUSTRALIA_LHI',
+	AustraliaLindeman: 'AUSTRALIA_LINDEMAN',
+	AustraliaLordHowe: 'AUSTRALIA_LORD_HOWE',
+	AustraliaMelbourne: 'AUSTRALIA_MELBOURNE',
+	AustraliaNorth: 'AUSTRALIA_NORTH',
+	AustraliaNsw: 'AUSTRALIA_NSW',
+	AustraliaPerth: 'AUSTRALIA_PERTH',
+	AustraliaQueensland: 'AUSTRALIA_QUEENSLAND',
+	AustraliaSouth: 'AUSTRALIA_SOUTH',
+	AustraliaSydney: 'AUSTRALIA_SYDNEY',
+	AustraliaTasmania: 'AUSTRALIA_TASMANIA',
+	AustraliaVictoria: 'AUSTRALIA_VICTORIA',
+	AustraliaWest: 'AUSTRALIA_WEST',
+	AustraliaYancowinna: 'AUSTRALIA_YANCOWINNA',
+	BrazilAcre: 'BRAZIL_ACRE',
+	BrazilDenoronha: 'BRAZIL_DENORONHA',
+	BrazilEast: 'BRAZIL_EAST',
+	BrazilWest: 'BRAZIL_WEST',
+	CanadaAtlantic: 'CANADA_ATLANTIC',
+	CanadaCentral: 'CANADA_CENTRAL',
+	CanadaEastern: 'CANADA_EASTERN',
+	CanadaMountain: 'CANADA_MOUNTAIN',
+	CanadaNewfoundland: 'CANADA_NEWFOUNDLAND',
+	CanadaPacific: 'CANADA_PACIFIC',
+	CanadaSaskatchewan: 'CANADA_SASKATCHEWAN',
+	CanadaYukon: 'CANADA_YUKON',
+	ChileContinental: 'CHILE_CONTINENTAL',
+	ChileEasterisland: 'CHILE_EASTERISLAND',
+	EtcGreenwich: 'ETC_GREENWICH',
+	EtcUct: 'ETC_UCT',
+	EtcUniversal: 'ETC_UNIVERSAL',
+	EtcUtc: 'ETC_UTC',
+	EtcZulu: 'ETC_ZULU',
+	EuropeAmsterdam: 'EUROPE_AMSTERDAM',
+	EuropeAndorra: 'EUROPE_ANDORRA',
+	EuropeAstrakhan: 'EUROPE_ASTRAKHAN',
+	EuropeAthens: 'EUROPE_ATHENS',
+	EuropeBelfast: 'EUROPE_BELFAST',
+	EuropeBelgrade: 'EUROPE_BELGRADE',
+	EuropeBerlin: 'EUROPE_BERLIN',
+	EuropeBratislava: 'EUROPE_BRATISLAVA',
+	EuropeBrussels: 'EUROPE_BRUSSELS',
+	EuropeBucharest: 'EUROPE_BUCHAREST',
+	EuropeBudapest: 'EUROPE_BUDAPEST',
+	EuropeBusingen: 'EUROPE_BUSINGEN',
+	EuropeChisinau: 'EUROPE_CHISINAU',
+	EuropeCopenhagen: 'EUROPE_COPENHAGEN',
+	EuropeDublin: 'EUROPE_DUBLIN',
+	EuropeGibraltar: 'EUROPE_GIBRALTAR',
+	EuropeGuernsey: 'EUROPE_GUERNSEY',
+	EuropeHelsinki: 'EUROPE_HELSINKI',
+	EuropeIsleOfMan: 'EUROPE_ISLE_OF_MAN',
+	EuropeIstanbul: 'EUROPE_ISTANBUL',
+	EuropeJersey: 'EUROPE_JERSEY',
+	EuropeKaliningrad: 'EUROPE_KALININGRAD',
+	EuropeKiev: 'EUROPE_KIEV',
+	EuropeKirov: 'EUROPE_KIROV',
+	EuropeLisbon: 'EUROPE_LISBON',
+	EuropeLjubljana: 'EUROPE_LJUBLJANA',
+	EuropeLondon: 'EUROPE_LONDON',
+	EuropeLuxembourg: 'EUROPE_LUXEMBOURG',
+	EuropeMadrid: 'EUROPE_MADRID',
+	EuropeMalta: 'EUROPE_MALTA',
+	EuropeMariehamn: 'EUROPE_MARIEHAMN',
+	EuropeMinsk: 'EUROPE_MINSK',
+	EuropeMonaco: 'EUROPE_MONACO',
+	EuropeMoscow: 'EUROPE_MOSCOW',
+	EuropeNicosia: 'EUROPE_NICOSIA',
+	EuropeOslo: 'EUROPE_OSLO',
+	EuropeParis: 'EUROPE_PARIS',
+	EuropePodgorica: 'EUROPE_PODGORICA',
+	EuropePrague: 'EUROPE_PRAGUE',
+	EuropeRiga: 'EUROPE_RIGA',
+	EuropeRome: 'EUROPE_ROME',
+	EuropeSamara: 'EUROPE_SAMARA',
+	EuropeSanMarino: 'EUROPE_SAN_MARINO',
+	EuropeSarajevo: 'EUROPE_SARAJEVO',
+	EuropeSaratov: 'EUROPE_SARATOV',
+	EuropeSimferopol: 'EUROPE_SIMFEROPOL',
+	EuropeSkopje: 'EUROPE_SKOPJE',
+	EuropeSofia: 'EUROPE_SOFIA',
+	EuropeStockholm: 'EUROPE_STOCKHOLM',
+	EuropeTallinn: 'EUROPE_TALLINN',
+	EuropeTirane: 'EUROPE_TIRANE',
+	EuropeTiraspol: 'EUROPE_TIRASPOL',
+	EuropeUlyanovsk: 'EUROPE_ULYANOVSK',
+	EuropeUzhgorod: 'EUROPE_UZHGOROD',
+	EuropeVaduz: 'EUROPE_VADUZ',
+	EuropeVatican: 'EUROPE_VATICAN',
+	EuropeVienna: 'EUROPE_VIENNA',
+	EuropeVilnius: 'EUROPE_VILNIUS',
+	EuropeVolgograd: 'EUROPE_VOLGOGRAD',
+	EuropeWarsaw: 'EUROPE_WARSAW',
+	EuropeZagreb: 'EUROPE_ZAGREB',
+	EuropeZaporozhye: 'EUROPE_ZAPOROZHYE',
+	EuropeZurich: 'EUROPE_ZURICH',
+	IndianAntananarivo: 'INDIAN_ANTANANARIVO',
+	IndianChagos: 'INDIAN_CHAGOS',
+	IndianChristmas: 'INDIAN_CHRISTMAS',
+	IndianCocos: 'INDIAN_COCOS',
+	IndianComoro: 'INDIAN_COMORO',
+	IndianKerguelen: 'INDIAN_KERGUELEN',
+	IndianMahe: 'INDIAN_MAHE',
+	IndianMaldives: 'INDIAN_MALDIVES',
+	IndianMauritius: 'INDIAN_MAURITIUS',
+	IndianMayotte: 'INDIAN_MAYOTTE',
+	IndianReunion: 'INDIAN_REUNION',
+	MexicoBajanorte: 'MEXICO_BAJANORTE',
+	MexicoBajasur: 'MEXICO_BAJASUR',
+	MexicoGeneral: 'MEXICO_GENERAL',
+	PacificApia: 'PACIFIC_APIA',
+	PacificAuckland: 'PACIFIC_AUCKLAND',
+	PacificBougainville: 'PACIFIC_BOUGAINVILLE',
+	PacificChatham: 'PACIFIC_CHATHAM',
+	PacificChuuk: 'PACIFIC_CHUUK',
+	PacificEaster: 'PACIFIC_EASTER',
+	PacificEfate: 'PACIFIC_EFATE',
+	PacificEnderbury: 'PACIFIC_ENDERBURY',
+	PacificFakaofo: 'PACIFIC_FAKAOFO',
+	PacificFiji: 'PACIFIC_FIJI',
+	PacificFunafuti: 'PACIFIC_FUNAFUTI',
+	PacificGalapagos: 'PACIFIC_GALAPAGOS',
+	PacificGambier: 'PACIFIC_GAMBIER',
+	PacificGuadalcanal: 'PACIFIC_GUADALCANAL',
+	PacificGuam: 'PACIFIC_GUAM',
+	PacificHonolulu: 'PACIFIC_HONOLULU',
+	PacificJohnston: 'PACIFIC_JOHNSTON',
+	PacificKanton: 'PACIFIC_KANTON',
+	PacificKiritimati: 'PACIFIC_KIRITIMATI',
+	PacificKosrae: 'PACIFIC_KOSRAE',
+	PacificKwajalein: 'PACIFIC_KWAJALEIN',
+	PacificMajuro: 'PACIFIC_MAJURO',
+	PacificMarquesas: 'PACIFIC_MARQUESAS',
+	PacificMidway: 'PACIFIC_MIDWAY',
+	PacificNauru: 'PACIFIC_NAURU',
+	PacificNiue: 'PACIFIC_NIUE',
+	PacificNorfolk: 'PACIFIC_NORFOLK',
+	PacificNoumea: 'PACIFIC_NOUMEA',
+	PacificPagoPago: 'PACIFIC_PAGO_PAGO',
+	PacificPalau: 'PACIFIC_PALAU',
+	PacificPitcairn: 'PACIFIC_PITCAIRN',
+	PacificPohnpei: 'PACIFIC_POHNPEI',
+	PacificPonape: 'PACIFIC_PONAPE',
+	PacificPortMoresby: 'PACIFIC_PORT_MORESBY',
+	PacificRarotonga: 'PACIFIC_RAROTONGA',
+	PacificSaipan: 'PACIFIC_SAIPAN',
+	PacificSamoa: 'PACIFIC_SAMOA',
+	PacificTahiti: 'PACIFIC_TAHITI',
+	PacificTarawa: 'PACIFIC_TARAWA',
+	PacificTongatapu: 'PACIFIC_TONGATAPU',
+	PacificTruk: 'PACIFIC_TRUK',
+	PacificWake: 'PACIFIC_WAKE',
+	PacificWallis: 'PACIFIC_WALLIS',
+	PacificYap: 'PACIFIC_YAP',
+	UsAlaska: 'US_ALASKA',
+	UsAleutian: 'US_ALEUTIAN',
+	UsArizona: 'US_ARIZONA',
+	UsCentral: 'US_CENTRAL',
+	UsEastern: 'US_EASTERN',
+	UsEastIndiana: 'US_EAST_INDIANA',
+	UsHawaii: 'US_HAWAII',
+	UsIndianaStarke: 'US_INDIANA_STARKE',
+	UsMichigan: 'US_MICHIGAN',
+	UsMountain: 'US_MOUNTAIN',
+	UsPacific: 'US_PACIFIC',
+	UsSamoa: 'US_SAMOA',
+} as const;
 
+export type Timezone = typeof Timezone[keyof typeof Timezone];
 export type Transcript = Node & {
 	__typename?: 'Transcript';
 	id: Scalars['ID'];
@@ -5250,10 +5350,12 @@ export type UserDownloadHistoryOrder = {
 };
 
 /** Properties by which user history connections can be ordered. */
-export enum UserDownloadHistorySortableField {
-	CreatedAt = 'CREATED_AT',
-}
+export const UserDownloadHistorySortableField = {
+	CreatedAt: 'CREATED_AT',
+} as const;
 
+export type UserDownloadHistorySortableField =
+	typeof UserDownloadHistorySortableField[keyof typeof UserDownloadHistorySortableField];
 export type UserEdge = {
 	__typename?: 'UserEdge';
 	cursor: Scalars['String'];
@@ -5281,62 +5383,63 @@ export type UserFavoriteEdge = {
 };
 
 /** User languages */
-export enum UserLanguage {
-	Abkhazian = 'ABKHAZIAN',
-	Afrikaans = 'AFRIKAANS',
-	Akan = 'AKAN',
-	Amharic = 'AMHARIC',
-	Bokmal = 'BOKMAL',
-	Burmese = 'BURMESE',
-	Cebuano = 'CEBUANO',
-	Chinese = 'CHINESE',
-	Croatian = 'CROATIAN',
-	Czech = 'CZECH',
-	Danish = 'DANISH',
-	Dinka = 'DINKA',
-	Dutch = 'DUTCH',
-	English = 'ENGLISH',
-	Erzya = 'ERZYA',
-	Filipino = 'FILIPINO',
-	Finnish = 'FINNISH',
-	French = 'FRENCH',
-	German = 'GERMAN',
-	Greek = 'GREEK',
-	Haitian = 'HAITIAN',
-	Hebrew = 'HEBREW',
-	Hindi = 'HINDI',
-	Hungarian = 'HUNGARIAN',
-	Indonesian = 'INDONESIAN',
-	Italian = 'ITALIAN',
-	Japanese = 'JAPANESE',
-	Kikuyu = 'KIKUYU',
-	Korean = 'KOREAN',
-	Latvian = 'LATVIAN',
-	Luo = 'LUO',
-	Malay = 'MALAY',
-	Mongolian = 'MONGOLIAN',
-	Nepali = 'NEPALI',
-	Norwegian = 'NORWEGIAN',
-	Philippine = 'PHILIPPINE',
-	Polish = 'POLISH',
-	Portuguese = 'PORTUGUESE',
-	Romanian = 'ROMANIAN',
-	Russian = 'RUSSIAN',
-	Samoan = 'SAMOAN',
-	Shan = 'SHAN',
-	Shona = 'SHONA',
-	Slovenian = 'SLOVENIAN',
-	Spanish = 'SPANISH',
-	Swahili = 'SWAHILI',
-	Swedish = 'SWEDISH',
-	Tagalog = 'TAGALOG',
-	Tamil = 'TAMIL',
-	Tswana = 'TSWANA',
-	Twi = 'TWI',
-	Xhosa = 'XHOSA',
-	Zulu = 'ZULU',
-}
+export const UserLanguage = {
+	Abkhazian: 'ABKHAZIAN',
+	Afrikaans: 'AFRIKAANS',
+	Akan: 'AKAN',
+	Amharic: 'AMHARIC',
+	Bokmal: 'BOKMAL',
+	Burmese: 'BURMESE',
+	Cebuano: 'CEBUANO',
+	Chinese: 'CHINESE',
+	Croatian: 'CROATIAN',
+	Czech: 'CZECH',
+	Danish: 'DANISH',
+	Dinka: 'DINKA',
+	Dutch: 'DUTCH',
+	English: 'ENGLISH',
+	Erzya: 'ERZYA',
+	Filipino: 'FILIPINO',
+	Finnish: 'FINNISH',
+	French: 'FRENCH',
+	German: 'GERMAN',
+	Greek: 'GREEK',
+	Haitian: 'HAITIAN',
+	Hebrew: 'HEBREW',
+	Hindi: 'HINDI',
+	Hungarian: 'HUNGARIAN',
+	Indonesian: 'INDONESIAN',
+	Italian: 'ITALIAN',
+	Japanese: 'JAPANESE',
+	Kikuyu: 'KIKUYU',
+	Korean: 'KOREAN',
+	Latvian: 'LATVIAN',
+	Luo: 'LUO',
+	Malay: 'MALAY',
+	Mongolian: 'MONGOLIAN',
+	Nepali: 'NEPALI',
+	Norwegian: 'NORWEGIAN',
+	Philippine: 'PHILIPPINE',
+	Polish: 'POLISH',
+	Portuguese: 'PORTUGUESE',
+	Romanian: 'ROMANIAN',
+	Russian: 'RUSSIAN',
+	Samoan: 'SAMOAN',
+	Shan: 'SHAN',
+	Shona: 'SHONA',
+	Slovenian: 'SLOVENIAN',
+	Spanish: 'SPANISH',
+	Swahili: 'SWAHILI',
+	Swedish: 'SWEDISH',
+	Tagalog: 'TAGALOG',
+	Tamil: 'TAMIL',
+	Tswana: 'TSWANA',
+	Twi: 'TWI',
+	Xhosa: 'XHOSA',
+	Zulu: 'ZULU',
+} as const;
 
+export type UserLanguage = typeof UserLanguage[keyof typeof UserLanguage];
 export type UserLanguageEntityInput = {
 	/** The entity type. */
 	entityType: CatalogEntityType;
@@ -5462,26 +5565,29 @@ export type UserPlaylistsOrder = {
 };
 
 /** Properties by which a user's playlists connection can be ordered. */
-export enum UserPlaylistsSortableField {
-	CreatedAt = 'CREATED_AT',
-	Id = 'ID',
-	Title = 'TITLE',
-}
+export const UserPlaylistsSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Id: 'ID',
+	Title: 'TITLE',
+} as const;
 
+export type UserPlaylistsSortableField =
+	typeof UserPlaylistsSortableField[keyof typeof UserPlaylistsSortableField];
 /** The administrative roles a user may hold. */
-export enum UserRole {
+export const UserRole = {
 	/** Language Administrator */
-	Administration = 'ADMINISTRATION',
-	Communications = 'COMMUNICATIONS',
-	ContentScreener = 'CONTENT_SCREENER',
-	Editor = 'EDITOR',
-	Equipment = 'EQUIPMENT',
-	LegalScreener = 'LEGAL_SCREENER',
-	Mediamanager = 'MEDIAMANAGER',
-	Stats = 'STATS',
-	TechnicalScreener = 'TECHNICAL_SCREENER',
-}
+	Administration: 'ADMINISTRATION',
+	Communications: 'COMMUNICATIONS',
+	ContentScreener: 'CONTENT_SCREENER',
+	Editor: 'EDITOR',
+	Equipment: 'EQUIPMENT',
+	LegalScreener: 'LEGAL_SCREENER',
+	Mediamanager: 'MEDIAMANAGER',
+	Stats: 'STATS',
+	TechnicalScreener: 'TECHNICAL_SCREENER',
+} as const;
 
+export type UserRole = typeof UserRole[keyof typeof UserRole];
 export type UserSignupInput = {
 	email: Scalars['String'];
 	givenName: InputMaybe<Scalars['String']>;
@@ -5490,12 +5596,14 @@ export type UserSignupInput = {
 };
 
 /** The supported social login services. */
-export enum UserSocialServiceName {
-	Apple = 'APPLE',
-	Facebook = 'FACEBOOK',
-	Google = 'GOOGLE',
-}
+export const UserSocialServiceName = {
+	Apple: 'APPLE',
+	Facebook: 'FACEBOOK',
+	Google: 'GOOGLE',
+} as const;
 
+export type UserSocialServiceName =
+	typeof UserSocialServiceName[keyof typeof UserSocialServiceName];
 export type UserUpdateInput = {
 	/** The first line of the address. Typically the street address or PO Box number. */
 	address1: InputMaybe<Scalars['String']>;
@@ -5540,12 +5648,14 @@ export type UsersOrder = {
 };
 
 /** Properties by which user connections can be ordered. */
-export enum UsersSortableField {
-	CreatedAt = 'CREATED_AT',
-	Email = 'EMAIL',
-	Id = 'ID',
-}
+export const UsersSortableField = {
+	CreatedAt: 'CREATED_AT',
+	Email: 'EMAIL',
+	Id: 'ID',
+} as const;
 
+export type UsersSortableField =
+	typeof UsersSortableField[keyof typeof UsersSortableField];
 export type VideoFile = Node & {
 	__typename?: 'VideoFile';
 	/** Bitrate of the video file in kbps. */
