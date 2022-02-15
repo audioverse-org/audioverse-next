@@ -611,7 +611,7 @@ describe('localization usage', () => {
 				},
 			},
 		],
-		[Transcript, {}],
+		[Transcript, { text: '' }],
 		[
 			SermonList,
 			{

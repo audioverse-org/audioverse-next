@@ -14,6 +14,7 @@ export default function Transcript({
 	useInverse: boolean;
 }): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const isManuallyCreatedTranscript = text.includes('<p>');
 
 	return (
 		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
@@ -39,20 +40,24 @@ export default function Transcript({
 			/>
 			{isOpen && (
 				<>
-					<p>
-						<FormattedMessage
-							id="molecule-transcript__disclaimer"
-							defaultMessage="This transcript may be automatically generated."
-							description="transcript disclaimer"
-						/>
-					</p>
-					<p>
-						<FormattedMessage
-							id="molecule-transcript__help"
-							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-							description="transcript assistance request"
-						/>
-					</p>
+					{!isManuallyCreatedTranscript && (
+						<>
+							<p>
+								<FormattedMessage
+									id="molecule-transcript__disclaimer"
+									defaultMessage="This transcript may be automatically generated."
+									description="transcript disclaimer"
+								/>
+							</p>
+							<p>
+								<FormattedMessage
+									id="molecule-transcript__help"
+									defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
+									description="transcript assistance request"
+								/>
+							</p>
+						</>
+					)}
 					<div
 						className={styles.text}
 						dangerouslySetInnerHTML={{ __html: text }}
