@@ -119,8 +119,8 @@
     "typescript": "^4.4.2"
   },
   "nextBundleAnalysis": {
-    "budget": 204800,
-    "budgetPercentIncreaseRed": 90,
+    "budget": 230400,
+    "budgetPercentIncreaseRed": 5,
     "showDetails": true
   }
 }
