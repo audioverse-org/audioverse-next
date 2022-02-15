@@ -18,6 +18,13 @@ $container-padding: 16px;
 	}
 }
 
+.bibleVersion {
+	background-color: $ts-bibleVersionH;
+	&:hover:not(.otherHovered) {
+		background-color: $ts-darkened-bibleH;
+	}
+}
+
 .imageContainer {
 	height: 124px;
 	position: relative;

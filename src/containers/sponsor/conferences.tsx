@@ -17,7 +17,7 @@ import { makeSponsorConferencesRoute } from '@lib/routes';
 import SponsorPivot from './pivot';
 
 export type SponsorConferencesProps = PaginatedProps<
-	NonNullable<GetSponsorConferencesPageDataQuery['conferences']['nodes']>[0],
+	NonNullable<GetSponsorConferencesPageDataQuery['collections']['nodes']>[0],
 	GetSponsorConferencesPageDataQuery
 >;
 

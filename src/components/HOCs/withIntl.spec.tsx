@@ -584,7 +584,43 @@ describe('localization usage', () => {
 		[Login, {}],
 		[Reset, {}],
 		[profile, {}],
-		[Home, {}, ['Genesis', 'King James Version']],
+		[
+			Home,
+			{
+				data: {
+					websiteRecentRecordings: {
+						nodes: [],
+					},
+					testimonies: {
+						nodes: [],
+					},
+					blogPosts: {
+						nodes: [],
+					},
+					bibleChapters: {
+						nodes: [
+							{
+								id: 'the_sequence_id',
+								title: 'Genesis',
+								canonicalPath: 'the_sequence_path',
+								contentType: SequenceContentType.BibleBook,
+								speakers: {
+									nodes: [],
+								},
+								allRecordings: {
+									nodes: [
+										{
+											canonicalPath: 'the_canonical_path',
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+			},
+			['KJV Bible', 'Genesis'],
+		],
 		[
 			Player,
 			{

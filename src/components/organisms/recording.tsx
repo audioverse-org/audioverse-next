@@ -9,6 +9,7 @@ import Heading1 from '@components/atoms/heading1';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import LineHeading from '@components/atoms/lineHeading';
+import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
 import CopyrightInfo from '@components/molecules/copyrightInfo';
 import DefinitionList, {
 	IDefinitionListTerm,
@@ -83,10 +84,12 @@ export function Recording({
 	const languageRoute = useLanguageRoute();
 
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
+	const isBibleChapter = contentType === RecordingContentType.BibleChapter;
 	const persons = isAudiobook ? writers : speakers;
-	const recordingDateString = recordingDate
-		? formatLongDateTime(parseRelativeDate(recordingDate) || '')
-		: undefined;
+	const recordingDateString =
+		recordingDate && !isBibleChapter
+			? formatLongDateTime(parseRelativeDate(recordingDate) || '')
+			: undefined;
 	const index = sequenceIndex;
 	const seriesItems = overrideSequence
 		? overrideSequence.seriesItems
@@ -117,7 +120,7 @@ export function Recording({
 			definition: <div dangerouslySetInnerHTML={{ __html: description }} />,
 		});
 	}
-	if (sequence) {
+	if (sequence && !isBibleChapter) {
 		details.push({
 			term: (
 				<FormattedMessage
@@ -137,7 +140,12 @@ export function Recording({
 	}
 	if (collection) {
 		details.push({
-			term: (
+			term: isBibleChapter ? (
+				<FormattedMessage
+					id="organism-recording__collectionInfoTitle"
+					defaultMessage="Parent Bible"
+				/>
+			) : (
 				<FormattedMessage
 					id="organism-recording__conferenceInfoTitle"
 					defaultMessage="Parent Conference"
@@ -214,7 +222,9 @@ export function Recording({
 	}
 
 	const playlistRecordings =
-		isAudiobook || contentType === RecordingContentType.MusicTrack
+		isAudiobook ||
+		isBibleChapter ||
+		contentType === RecordingContentType.MusicTrack
 			? recording.sequence?.recordings.nodes
 			: undefined;
 
@@ -253,6 +263,15 @@ export function Recording({
 									sponsorName: sponsor?.title || '',
 								}
 							),
+							[RecordingContentType.BibleChapter]: intl.formatMessage(
+								{
+									id: 'sermonDetailPage__openGraphDescription_bibleChapter',
+									defaultMessage: 'Bible Chapter provided by {sponsorName}',
+								},
+								{
+									sponsorName: sponsor?.title || '',
+								}
+							),
 							[RecordingContentType.MusicTrack]: intl.formatMessage(
 								{
 									id: 'sermonDetailPage__openGraphDescription_music',
@@ -285,22 +304,34 @@ export function Recording({
 				/>
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
-			{overrideSequence
-				? makeHat(
-						SequenceContentType.MusicAlbum,
-						startCase(overrideSequence.book),
-						makeBibleMusicRoute(languageRoute, overrideSequence.book)
-				  )
-				: recording.sequence &&
-				  makeHat(
-						recording.sequence.contentType,
-						recording.sequence.title,
-						recording.sequence.canonicalPath
-				  )}
+			{isBibleChapter && recording.collection ? (
+				<Link href={recording.collection.canonicalPath}>
+					<a className={styles.hat}>
+						<BibleVersionTypeLockup
+							label={recording.collection.title}
+							unpadded
+						/>
+						<h4>{recording.sequence?.title}</h4>
+					</a>
+				</Link>
+			) : overrideSequence ? (
+				makeHat(
+					SequenceContentType.MusicAlbum,
+					startCase(overrideSequence.book),
+					makeBibleMusicRoute(languageRoute, overrideSequence.book)
+				)
+			) : (
+				recording.sequence &&
+				makeHat(
+					recording.sequence.contentType,
+					recording.sequence.title,
+					recording.sequence.canonicalPath
+				)
+			)}
 			<div className={styles.content}>
 				<div className={styles.main}>
 					<div className={styles.meta}>
-						{index && !overrideSequence && (
+						{index && !overrideSequence && !isBibleChapter && (
 							<span className={styles.part}>
 								<FormattedMessage
 									id="organism-recording__partInfo"
@@ -311,20 +342,27 @@ export function Recording({
 							</span>
 						)}
 						<Heading1 className={clsx(audiobookHeadingStyle)}>{title}</Heading1>
-						<ul className={styles.speakers}>
-							{persons.map((speaker) => (
-								<li key={speaker.canonicalPath}>
-									<PersonLockup
-										person={speaker}
-										textColor={textSecondaryColor}
-										hoverColor={accentColor}
-										isLinked
-									/>
-								</li>
-							))}
-						</ul>
-						{isAudiobook && !!speakers.length && (
-							<Heading6 loose sans uppercase>
+						{!isBibleChapter && (
+							<ul className={styles.speakers}>
+								{persons.map((speaker) => (
+									<li key={speaker.canonicalPath}>
+										<PersonLockup
+											person={speaker}
+											textColor={textSecondaryColor}
+											hoverColor={accentColor}
+											isLinked
+										/>
+									</li>
+								))}
+							</ul>
+						)}
+						{(isAudiobook || isBibleChapter) && !!speakers.length && (
+							<Heading6
+								loose
+								sans
+								uppercase
+								className={clsx(isBibleChapter && styles.bibleReadBy)}
+							>
 								<FormattedMessage
 									id="organism-recording__readByLabel"
 									defaultMessage="Read by {name}"
@@ -365,6 +403,8 @@ export function Recording({
 								useInverse={useInverseButtons}
 							/>
 						)}
+
+						{/** TODO: add Bible Read Along */}
 
 						<HorizontalRule color={textRuleColor} />
 

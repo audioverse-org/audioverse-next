@@ -136,6 +136,7 @@ function BookInner({
 				toRecordingChapterNumber
 			)}`,
 			sequence: null,
+			collection: null,
 		};
 	}
 
@@ -164,7 +165,7 @@ function BookInner({
 		definition: (
 			<p>
 				<a
-					href={sponsor.url}
+					href={sponsor.website}
 					target="_blank"
 					className="decorated hover--salmon"
 					rel="noreferrer"
@@ -276,7 +277,7 @@ function BookInner({
 									<TeaseRecording
 										recording={{
 											...chapterToRecording(chapter),
-											recordingContentType: RecordingContentType.Sermon,
+											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
 											persons: [],
 										}}

@@ -10,6 +10,16 @@
 		--recordingTextSecondaryColor: #{$ts-lightTone};
 		--recordingWavesColor: #{$ts-bookH};
 	}
+	&.BIBLE_CHAPTER {
+		--recordingAccent: #{$ts-red};
+		--recordingBackground: #{$ts-bibleB};
+		--recordingHatTextColor: #{$ts-white};
+		--recordingHatBackground: #{$ts-bibleH};
+		--recordingHatHover: #{$ts-darkened-bibleH};
+		--recordingTextColor: #{$ts-dark};
+		--recordingTextSecondaryColor: #{$ts-midTone};
+		--recordingWavesColor: #{$ts-lightTone};
+	}
 	&.MUSIC_TRACK {
 		--recordingAccent: #{$ts-red};
 		--recordingBackground: #{$ts-songB};
@@ -57,7 +67,7 @@
 	}
 	&,
 	&:hover {
-		color: var(--recordingTextColor);
+		color: var(--recordingHatTextColor, --recordingTextColor);
 	}
 	&:hover {
 		text-decoration: none;
@@ -180,6 +190,10 @@
 	font-weight: 400;
 }
 
+.bibleReadBy {
+	color: $ts-midTone;
+}
+
 .attachment {
 	display: inline-flex;
 	align-items: center;
@@ -226,6 +240,9 @@
 		pointer-events: none;
 		.AUDIOBOOK_TRACK & {
 			@include shadowBackground($ts-bookB, $direction);
+		}
+		.BIBLE_CHAPTER & {
+			@include shadowBackground($ts-bibleB, $direction);
 		}
 		.MUSIC_TRACK & {
 			@include shadowBackground($ts-songB, $direction);

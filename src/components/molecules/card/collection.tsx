@@ -15,6 +15,7 @@ import {
 	CardCollectionFragment,
 	CardRecordingFragment,
 	CardSequenceFragment,
+	CollectionContentType,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
@@ -67,18 +68,20 @@ export default function CardCollection({
 			/>
 		</div>
 	);
+	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
 	return (
 		<Card>
 			<Link href={canonicalPath}>
 				<a
 					className={clsx(
 						styles.container,
+						isBibleVersion && styles.bibleVersion,
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 				>
 					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
-					{!!(startDate && endDate) && (
+					{!!(startDate && endDate) && !isBibleVersion && (
 						<Heading6 sans unpadded className={styles.date}>
 							{formatDateRange(startDate, endDate)}
 						</Heading6>
@@ -94,12 +97,20 @@ export default function CardCollection({
 						className={styles.sequencesLabel}
 					>
 						{allSequences.aggregate?.count ? (
-							<FormattedMessage
-								id="cardCollection_sequenceLabel"
-								defaultMessage="{count} series"
-								description="Card collection sequence count label"
-								values={{ count: allSequences.aggregate?.count }}
-							/>
+							isBibleVersion ? (
+								<FormattedMessage
+									id="cardCollection_booksLabel"
+									defaultMessage="{count} books"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="cardCollection_sequenceLabel"
+									defaultMessage="{count} series"
+									description="Card collection sequence count label"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							)
 						) : (
 							<FormattedMessage
 								id="cardCollection__teachingsCountLabel"
@@ -132,7 +143,9 @@ export default function CardCollection({
 								toggleFavorited();
 							}}
 							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-							backgroundColor={BaseColors.DARK}
+							backgroundColor={
+								isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
+							}
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
 						/>
 					</div>

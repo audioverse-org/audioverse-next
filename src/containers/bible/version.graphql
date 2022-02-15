@@ -1,0 +1,19 @@
+query getAudiobibleVersionData($id: ID!) {
+	collection(id: $id) {
+		id
+		title
+		description
+		contentType
+		canonicalPath(useFuturePath: true)
+		sponsor {
+			canonicalPath(useFuturePath: true)
+			title
+			website
+		}
+		sequences(first: 66, orderBy: [{ field: ID, direction: ASC }]) {
+			nodes {
+				...cardSequence
+			}
+		}
+	}
+}

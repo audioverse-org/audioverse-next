@@ -35,6 +35,15 @@ export function getRecordingTypeTheme(
 				theme: 'audiobookTrack',
 				useInverseButtons: true,
 			},
+			[RecordingContentType.BibleChapter]: {
+				accentColor: BaseColors.RED,
+				backgroundColor: BaseColors.BIBLE_B,
+				textColor: BaseColors.DARK,
+				textSecondaryColor: BaseColors.LIGHT_TONE,
+				textRuleColor: BaseColors.CREAM,
+				theme: 'chapter',
+				useInverseButtons: false,
+			},
 			[RecordingContentType.MusicTrack]: {
 				accentColor: BaseColors.RED,
 				backgroundColor: BaseColors.SONG_B,
