@@ -267,3 +267,17 @@
 		bottom: 0;
 	}
 }
+
+.transcriptWrapper {
+	margin-bottom: 16px;
+}
+
+.transcriptOpen {
+	svg {
+		transform: scaleY(-1);
+	}
+}
+
+.backToChapterButton {
+	margin-bottom: 16px;
+}

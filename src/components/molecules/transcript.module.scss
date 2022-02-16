@@ -1,13 +1,37 @@
-.base {
-	margin-bottom: 1rem;
-}
+@use '../../styles/mixins.scss';
 
-.open {
-	svg {
-		transform: scaleY(-1);
+@import '../../styles/common';
+
+.text.text {
+	p {
+		margin: 16px 0;
 	}
 }
 
-.text p {
-	margin: 0 0 16px;
+.bibleText.bibleText {
+	p {
+		font-family: $serif;
+		font-size: 15px;
+		line-height: 22px;
+	}
+	:global(.bible--q1),
+	:global(.bible--q2) {
+		margin: 0 0 0 16px;
+	}
+	:global(.bible--q1) {
+		margin-top: 16px;
+	}
+	:global(.bible--sc) {
+		font-variant: small-caps;
+	}
+	:global(.bible--it) {
+		font-style: italic;
+	}
+	sup {
+		top: -4px;
+		@include mixins.sansFontFamily();
+		font-size: 11px;
+		font-weight: 500;
+		color: $ts-midTone;
+	}
 }
