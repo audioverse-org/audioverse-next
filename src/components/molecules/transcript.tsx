@@ -15,6 +15,9 @@ export default function Transcript({
 }): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const isManuallyCreatedTranscript = text.includes('<p>');
+	const __html = isManuallyCreatedTranscript
+		? text
+		: text.replace(/\.\s+/g, '.<br><br>');
 
 	return (
 		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
@@ -58,10 +61,7 @@ export default function Transcript({
 							</p>
 						</>
 					)}
-					<div
-						className={styles.text}
-						dangerouslySetInnerHTML={{ __html: text }}
-					/>
+					<div className={styles.text} dangerouslySetInnerHTML={{ __html }} />
 				</>
 			)}
 		</div>
