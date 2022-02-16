@@ -150,19 +150,39 @@ export default function CardCollection({
 						/>
 					</div>
 					{sequences?.length || recordings?.length ? (
-						<div className={styles.subItems} ref={subRef}>
-							{sequences?.map((sequence) => (
-								<div className={styles.subItem} key={sequence.canonicalPath}>
-									<CardSequence sequence={sequence} slim />
-								</div>
-							))}
-							{!sequences?.length &&
-								recordings?.map((recording) => (
-									<div className={styles.subItem} key={recording.canonicalPath}>
-										<CardRecording recording={recording} isOptionalLink />
+						<>
+							<div className={styles.subItems} ref={subRef}>
+								{sequences?.map((sequence) => (
+									<div className={styles.subItem} key={sequence.canonicalPath}>
+										<CardSequence sequence={sequence} slim />
 									</div>
 								))}
-						</div>
+								{!sequences?.length &&
+									recordings?.map((recording) => (
+										<div
+											className={styles.subItem}
+											key={recording.canonicalPath}
+										>
+											<CardRecording recording={recording} isOptionalLink />
+										</div>
+									))}
+							</div>
+							{contentType === CollectionContentType.BibleVersion && (
+								<Heading6
+									large
+									loose
+									sans
+									unpadded
+									uppercase
+									className={styles.showAll}
+								>
+									<FormattedMessage
+										id="cardCollection__showAll"
+										defaultMessage="Show All"
+									/>
+								</Heading6>
+							)}
+						</>
 					) : null}
 				</a>
 			</Link>
