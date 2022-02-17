@@ -313,6 +313,7 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;
 		}),
+		defaultPlaybackRate: jest.fn(),
 		requestFullscreen: jest.fn(),
 		controls: jest.fn(),
 		supportsFullScreen: jest.fn(() => supportsFullScreen),

@@ -135,8 +135,9 @@ const Player = ({
 									description: 'player progress label',
 								})}
 								value={session.progress * 100}
-								onChange={(e) => {
-									const percent = parseInt(e.target.value) / 100;
+								onInput={(e) => {
+									const percent =
+										parseFloat((e.target as HTMLInputElement).value) / 100;
 									session.setProgress(percent);
 								}}
 							/>

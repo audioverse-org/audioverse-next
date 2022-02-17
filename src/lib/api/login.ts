@@ -30,13 +30,13 @@ export async function refetchUserQueries(
 	);
 }
 
-export async function login(email: string, password: string): Promise<boolean> {
+export async function login(email: string, password: string): Promise<true> {
 	const {
-		login: { authenticatedUser },
+		login: { authenticatedUser, errors },
 	} = await _login({ email, password });
 	if (authenticatedUser) {
 		setSessionToken(authenticatedUser.sessionToken);
 		return true;
 	}
-	return false;
+	throw new Error((errors?.length && errors[0].message) || '');
 }
