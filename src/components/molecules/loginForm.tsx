@@ -68,18 +68,19 @@ export default function LoginForm({
 		e.preventDefault();
 		setIsSubmitting(true);
 		try {
-			const success = await login(email, password);
-			if (success) {
-				await queryClient.invalidateQueries();
-				await refetchUserQueries(queryClient);
-				onSuccess && onSuccess();
-			} else {
-				setIsSubmitting(false);
-				setErrors(['Login failed']);
-			}
-		} catch (e) {
+			await login(email, password);
+			await queryClient.invalidateQueries();
+			await refetchUserQueries(queryClient);
+			onSuccess && onSuccess();
+		} catch (e: unknown) {
 			setIsSubmitting(false);
-			setErrors(['Login failed']);
+			setErrors([
+				(e as { message: string } | undefined)?.message ||
+					intl.formatMessage({
+						id: 'loginForm__loginFailureMessage',
+						defaultMessage: 'Login failed',
+					}),
+			]);
 		}
 	};
 
