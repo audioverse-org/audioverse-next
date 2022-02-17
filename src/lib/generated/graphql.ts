@@ -12661,6 +12661,7 @@ export type LoginMutation = {
 			__typename?: 'AuthenticatedUser';
 			sessionToken: string;
 		} | null;
+		errors: Array<{ __typename?: 'InputValidationError'; message: string }>;
 	};
 };
 
@@ -15152,7 +15153,7 @@ export const useCollectionUnfavoriteMutation = <
 		options
 	);
 export const LoginDocument = `
-mutation login($email:String!$password:String!){login(input:{email:$email password:$password}){authenticatedUser{sessionToken}}}
+mutation login($email:String!$password:String!){login(input:{email:$email password:$password}){authenticatedUser{sessionToken}errors{message}}}
 `;
 export const useLoginMutation = <TError = unknown, TContext = unknown>(
 	options?: UseMutationOptions<
