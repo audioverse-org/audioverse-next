@@ -40,8 +40,9 @@ export default function ProgressBar({
 					description: 'progress bar label',
 				})}
 				readOnly={!setProgress}
-				onChange={(e) =>
-					setProgress && setProgress(parseInt(e.target.value) / 100)
+				onInput={(e) =>
+					setProgress &&
+					setProgress(parseFloat((e.target as HTMLInputElement).value) / 100)
 				}
 				disabled={!setProgress}
 			/>

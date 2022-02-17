@@ -98,6 +98,9 @@
 	font-size: 14px;
 	font-weight: 400;
 	color: $ts-midTone;
+	> span {
+		font-variant-numeric: tabular-nums;
+	}
 	.bar {
 		flex-grow: 1;
 		margin-left: 16px;
