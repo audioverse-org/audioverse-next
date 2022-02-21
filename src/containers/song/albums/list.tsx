@@ -3,13 +3,17 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
+import ButtonBack from '@components/molecules/buttonBack';
 import CardSequence from '@components/molecules/card/sequence';
 import CardSongBook from '@components/molecules/card/songBook';
 import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
 import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
-import { makeBibleMusicTrackRoute } from '@lib/routes';
+import {
+	makeBibleMusicTrackRoute,
+	makeDiscoverCollectionsRoute,
+} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
@@ -26,6 +30,10 @@ function SongAlbumList({
 	return (
 		<>
 			<ContentWidthLimiter>
+				<ButtonBack
+					backUrl={makeDiscoverCollectionsRoute(languageRoute)}
+					className={styles.backButton}
+				/>
 				<Heading1>
 					<FormattedMessage
 						id="songsListPage__title"
