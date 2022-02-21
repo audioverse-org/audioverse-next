@@ -353,7 +353,12 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/trending/index',
-					destination: '/:lang/teachings/trending',
+					destination: '/:lang/teachings/trending/all',
+					permanent: true,
+				},
+				{
+					source: '/:lang/teachings/trending',
+					destination: '/:lang/teachings/trending/all',
 					permanent: true,
 				},
 				{

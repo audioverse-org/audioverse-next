@@ -625,16 +625,16 @@
   "contact__title": {
     "string": "Contact"
   },
-  "container-sermonList__filterLabelAll": {
-    "comment": "sermon list page filter all",
+  "recordingHasVideoFilter__filterAll": {
+    "comment": "recording has video filter all",
     "string": "All"
   },
-  "container-sermonList__filterLabelAudio": {
-    "comment": "sermon list page filter audio",
+  "recordingHasVideoFilter__filterAudio": {
+    "comment": "recording has video filter audio",
     "string": "Audio only"
   },
-  "container-sermonList__filterLabelVideo": {
-    "comment": "sermon list page filter video",
+  "recordingHasVideoFilter__filterVideo": {
+    "comment": "recording has video filter video",
     "string": "Video"
   },
   "copyrightInfos__multipleCopyrightExplanation": {
@@ -1906,7 +1906,7 @@
   "sermonList__heading": {
     "string": "All Teachings"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "Filter"
   },
   "socialLogin__loginFacebookButton": {

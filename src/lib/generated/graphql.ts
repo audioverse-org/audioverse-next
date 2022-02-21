@@ -10912,6 +10912,7 @@ export type GetSermonListPagePathsDataQuery = {
 
 export type GetTrendingTeachingsPageDataQueryVariables = Exact<{
 	language: Language;
+	hasVideo: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type GetTrendingTeachingsPageDataQuery = {
@@ -14581,7 +14582,7 @@ export const useGetSermonListPagePathsDataQuery = <
 		options
 	);
 export const GetTrendingTeachingsPageDataDocument = `
-query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language first:24){nodes{recording{...cardRecording}}}}
+query getTrendingTeachingsPageData($language:Language!$hasVideo:Boolean){recordings:popularRecordings(language:$language first:24 hasVideo:$hasVideo){nodes{recording{...cardRecording}}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}

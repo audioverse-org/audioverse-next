@@ -250,16 +250,16 @@
   "conferenceListPage__title": {
     "string": "大会・総会"
   },
-  "container-sermonList__filterLabelAll": {
-    "comment": "sermon list page filter all",
+  "recordingHasVideoFilter__filterAll": {
+    "comment": "recording has video filter all",
     "string": "全て"
   },
-  "container-sermonList__filterLabelAudio": {
-    "comment": "sermon list page filter audio",
+  "recordingHasVideoFilter__filterAudio": {
+    "comment": "recording has video filter audio",
     "string": "オーディオのみ"
   },
-  "container-sermonList__filterLabelVideo": {
-    "comment": "sermon list page filter video",
+  "recordingHasVideoFilter__filterVideo": {
+    "comment": "recording has video filter video",
     "string": "動画"
   },
   "copyrightInfos__multipleCopyrightExplanation": {
@@ -1356,7 +1356,7 @@
   "sermonList__heading": {
     "string": "全てのレッスン"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "絞る"
   },
   "socialLogin__loginFacebookButton": {

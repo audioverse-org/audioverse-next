@@ -250,15 +250,15 @@
   "conferenceListPage__title": {
     "string": "Conferencias"
   },
-  "container-sermonList__filterLabelAll": {
+  "recordingHasVideoFilter__filterAll": {
     "comment": "página de lista de sermones filtrar todo",
     "string": "Todo"
   },
-  "container-sermonList__filterLabelAudio": {
+  "recordingHasVideoFilter__filterAudio": {
     "comment": "sermón lista página filtro audio",
     "string": "Solo audio"
   },
-  "container-sermonList__filterLabelVideo": {
+  "recordingHasVideoFilter__filterVideo": {
     "comment": "sermón lista página filtro video",
     "string": "Video"
   },
@@ -1356,7 +1356,7 @@
   "sermonList__heading": {
     "string": "Todas las lecciones"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "Filtro"
   },
   "socialLogin__loginFacebookButton": {

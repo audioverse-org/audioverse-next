@@ -771,19 +771,19 @@
       "value": "Contact"
     }
   ],
-  "container-sermonList__filterLabelAll": [
+  "recordingHasVideoFilter__filterAll": [
     {
       "type": 0,
       "value": "Tous"
     }
   ],
-  "container-sermonList__filterLabelAudio": [
+  "recordingHasVideoFilter__filterAudio": [
     {
       "type": 0,
       "value": "Audio uniquement"
     }
   ],
-  "container-sermonList__filterLabelVideo": [
+  "recordingHasVideoFilter__filterVideo": [
     {
       "type": 0,
       "value": "Vidéo"
@@ -3519,7 +3519,7 @@
       "value": "Tous les enseignements"
     }
   ],
-  "sermonsList__filter": [
+  "recordingHasVideoFilter__filter": [
     {
       "type": 0,
       "value": "Filtre"

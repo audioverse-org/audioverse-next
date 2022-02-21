@@ -771,19 +771,19 @@
       "value": "Контакт"
     }
   ],
-  "container-sermonList__filterLabelAll": [
+  "recordingHasVideoFilter__filterAll": [
     {
       "type": 0,
       "value": "Все"
     }
   ],
-  "container-sermonList__filterLabelAudio": [
+  "recordingHasVideoFilter__filterAudio": [
     {
       "type": 0,
       "value": "Только аудио"
     }
   ],
-  "container-sermonList__filterLabelVideo": [
+  "recordingHasVideoFilter__filterVideo": [
     {
       "type": 0,
       "value": "Видео"
@@ -3527,7 +3527,7 @@
       "value": "Все темы"
     }
   ],
-  "sermonsList__filter": [
+  "recordingHasVideoFilter__filter": [
     {
       "type": 0,
       "value": "Фильтр"

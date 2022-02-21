@@ -1281,19 +1281,19 @@
       "value": "Contact"
     }
   ],
-  "container-sermonList__filterLabelAll": [
+  "recordingHasVideoFilter__filterAll": [
     {
       "type": 0,
       "value": "All"
     }
   ],
-  "container-sermonList__filterLabelAudio": [
+  "recordingHasVideoFilter__filterAudio": [
     {
       "type": 0,
       "value": "Audio only"
     }
   ],
-  "container-sermonList__filterLabelVideo": [
+  "recordingHasVideoFilter__filterVideo": [
     {
       "type": 0,
       "value": "Video"
@@ -4005,7 +4005,7 @@
       "value": "All Teachings"
     }
   ],
-  "sermonsList__filter": [
+  "recordingHasVideoFilter__filter": [
     {
       "type": 0,
       "value": "Filter"

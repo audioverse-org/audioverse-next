@@ -791,19 +791,19 @@
       "value": "Contacto"
     }
   ],
-  "container-sermonList__filterLabelAll": [
+  "recordingHasVideoFilter__filterAll": [
     {
       "type": 0,
       "value": "Todo"
     }
   ],
-  "container-sermonList__filterLabelAudio": [
+  "recordingHasVideoFilter__filterAudio": [
     {
       "type": 0,
       "value": "Solo audio"
     }
   ],
-  "container-sermonList__filterLabelVideo": [
+  "recordingHasVideoFilter__filterVideo": [
     {
       "type": 0,
       "value": "Video"
@@ -3547,7 +3547,7 @@
       "value": "Todas las lecciones"
     }
   ],
-  "sermonsList__filter": [
+  "recordingHasVideoFilter__filter": [
     {
       "type": 0,
       "value": "Filtro"

@@ -779,19 +779,19 @@
       "value": "联系"
     }
   ],
-  "container-sermonList__filterLabelAll": [
+  "recordingHasVideoFilter__filterAll": [
     {
       "type": 0,
       "value": "全部"
     }
   ],
-  "container-sermonList__filterLabelAudio": [
+  "recordingHasVideoFilter__filterAudio": [
     {
       "type": 0,
       "value": "仅音频"
     }
   ],
-  "container-sermonList__filterLabelVideo": [
+  "recordingHasVideoFilter__filterVideo": [
     {
       "type": 0,
       "value": "视频"
@@ -3555,7 +3555,7 @@
       "value": "所有证道"
     }
   ],
-  "sermonsList__filter": [
+  "recordingHasVideoFilter__filter": [
     {
       "type": 0,
       "value": "筛选"
