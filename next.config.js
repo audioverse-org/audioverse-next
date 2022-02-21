@@ -247,17 +247,17 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1',
-					destination: '/:lang/bibles/versions/457', // TODO: update with final ID
+					destination: '/:lang/bibles/versions/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
-					destination: '/:lang/bibles/versions/457', // TODO: update with final ID
+					destination: '/:lang/bibles/versions/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/versions/457', // TODO: update with final ID
+					destination: '/:lang/bibles/versions/472',
 					permanent: true,
 				},
 				{
