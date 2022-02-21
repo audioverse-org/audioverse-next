@@ -9,6 +9,7 @@ import TeaseRecordingStack from '../teaseRecordingStack';
 
 import CardWithTheme from './base/withTheme';
 import CardHatAudiobook from './hat/audiobook';
+import CardHatBibleBook from './hat/bibleBook';
 import CardHatSermon from './hat/sermon';
 import CardHatSong from './hat/song';
 import CardHatStory from './hat/story';
@@ -31,17 +32,21 @@ export default function CardRecordingStack({
 				theme: 'audiobookTrack',
 				hat: <CardHatAudiobook {...{ sequence, recording }} />,
 			},
+			[SequenceContentType.BibleBook]: {
+				theme: 'chapter',
+				hat: <CardHatBibleBook {...{ sequence }} />,
+			},
 			[SequenceContentType.MusicAlbum]: {
 				theme: 'song',
-				hat: <CardHatSong sequence={sequence} />,
+				hat: <CardHatSong {...{ sequence }} />,
 			},
 			[SequenceContentType.Series]: {
 				theme: 'sermon',
-				hat: <CardHatSermon sequence={sequence} />,
+				hat: <CardHatSermon {...{ sequence }} />,
 			},
 			[SequenceContentType.StorySeason]: {
 				theme: 'story',
-				hat: <CardHatStory sequence={sequence} />,
+				hat: <CardHatStory {...{ sequence }} />,
 			},
 		} as const
 	)[contentType];

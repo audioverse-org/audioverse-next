@@ -28,8 +28,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		(vars) => getSponsorConferencesPageData({ id, ...vars }),
-		(d) => d.conferences.nodes,
-		(d) => d.conferences.aggregate?.count,
+		(d) => d.collections.nodes,
+		(d) => d.collections.aggregate?.count,
 		(d) => ({
 			title: intl.formatMessage(
 				{

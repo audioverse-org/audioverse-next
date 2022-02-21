@@ -246,8 +246,18 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/versions/472',
+					permanent: false,
+				},
+				{
+					source: '/:lang/bibles/ENGKJV1/:path*',
+					destination: '/:lang/bibles/versions/472',
+					permanent: false,
+				},
+				{
 					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/versions/472',
 					permanent: true,
 				},
 				{
@@ -266,7 +276,7 @@ module.exports = withBundleAnalyzer(
 					permanent: false,
 				},
 				{
-					source: '/:lang/bibles/:bibleCode/:bookCode',
+					source: '/:lang/bibles/:bibleCode/:bookCode([\\w\\d]\\w+)',
 					destination: '/:lang/bibles/:bibleCode/:bookCode/1',
 					permanent: false,
 				},

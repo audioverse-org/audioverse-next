@@ -729,6 +729,7 @@ The available types of collections.
 """
 enum CollectionContentType {
 	AUDIOBOOK_SERIES
+	BIBLE_VERSION
 	CONFERENCE
 	MUSIC_SERIES
 	STORY_PROGRAM
@@ -4776,6 +4777,7 @@ The available types of recordings.
 """
 enum RecordingContentType {
 	AUDIOBOOK_TRACK
+	BIBLE_CHAPTER
 	MUSIC_TRACK
 	SERMON
 	STORY
@@ -5453,6 +5455,7 @@ The available types of sequence.
 """
 enum SequenceContentType {
 	AUDIOBOOK
+	BIBLE_BOOK
 	MUSIC_ALBUM
 	SERIES
 	STORY_SEASON

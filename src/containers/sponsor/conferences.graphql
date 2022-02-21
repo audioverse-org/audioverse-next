@@ -7,7 +7,7 @@ query getSponsorConferencesPageData(
 	sponsor(id: $id) {
 		...sponsorPivot
 	}
-	conferences(
+	collections(
 		language: $language
 		sponsorId: $id
 		offset: $offset

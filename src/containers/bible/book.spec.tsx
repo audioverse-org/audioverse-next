@@ -46,7 +46,7 @@ function loadPageData() {
 		title: 'the_version_title',
 		sponsor: {
 			title: 'the_sponsor_name',
-			url: 'the_sponsor_url',
+			website: 'the_sponsor_url',
 		},
 		books: [
 			{
@@ -101,7 +101,7 @@ describe('Bible book detail page', () => {
 				title: 'the_version_title',
 				sponsor: {
 					title: 'FCBH',
-					url: '',
+					website: '',
 				},
 				books: [
 					{

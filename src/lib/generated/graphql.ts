@@ -620,6 +620,7 @@ export type CollectionConnection = {
 /** The available types of collections. */
 export const CollectionContentType = {
 	AudiobookSeries: 'AUDIOBOOK_SERIES',
+	BibleVersion: 'BIBLE_VERSION',
 	Conference: 'CONFERENCE',
 	MusicSeries: 'MUSIC_SERIES',
 	StoryProgram: 'STORY_PROGRAM',
@@ -3666,6 +3667,7 @@ export type RecordingContentScreeningStatus =
 /** The available types of recordings. */
 export const RecordingContentType = {
 	AudiobookTrack: 'AUDIOBOOK_TRACK',
+	BibleChapter: 'BIBLE_CHAPTER',
 	MusicTrack: 'MUSIC_TRACK',
 	Sermon: 'SERMON',
 	Story: 'STORY',
@@ -4165,6 +4167,7 @@ export type SequenceConnection = {
 /** The available types of sequence. */
 export const SequenceContentType = {
 	Audiobook: 'AUDIOBOOK',
+	BibleBook: 'BIBLE_BOOK',
 	MusicAlbum: 'MUSIC_ALBUM',
 	Series: 'SERIES',
 	StorySeason: 'STORY_SEASON',
@@ -5743,13 +5746,6 @@ export type ButtonShareRecordingFragment = {
 	speakers: Array<{ __typename?: 'Person'; name: string }>;
 };
 
-export type CardBibleChapterFragment = {
-	__typename?: 'BibleChapter';
-	id: string | number;
-	title: string;
-	url: string;
-};
-
 export type CardCollectionFragment = {
 	__typename?: 'Collection';
 	id: string | number;
@@ -5831,6 +5827,7 @@ export type CardFavoriteFragment = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -5851,6 +5848,7 @@ export type CardFavoriteFragment = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -5903,8 +5901,13 @@ export type CardFavoriteFragment = {
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 				favoritedRecordings: {
 					__typename?: 'RecordingConnection';
 					nodes: Array<{
@@ -5932,6 +5935,7 @@ export type CardFavoriteFragment = {
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
 							image: { __typename?: 'Image'; url: string } | null;
+							collection: { __typename?: 'Collection'; title: string } | null;
 						} | null;
 						writers: Array<{
 							__typename?: 'Person';
@@ -5939,6 +5943,7 @@ export type CardFavoriteFragment = {
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
+						collection: { __typename?: 'Collection'; title: string } | null;
 						audioFiles: Array<{
 							__typename?: 'AudioFile';
 							url: string;
@@ -6038,6 +6043,7 @@ export type CardPlaylistFragment = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -6094,6 +6100,7 @@ export type CardRecordingFragment = {
 			__typename?: 'RecordingConnection';
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
+		collection: { __typename?: 'Collection'; title: string } | null;
 	} | null;
 	writers: Array<{
 		__typename?: 'Person';
@@ -6114,6 +6121,7 @@ export type CardRecordingFragment = {
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	}>;
+	collection: { __typename?: 'Collection'; title: string } | null;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6150,6 +6158,7 @@ export type CardRecordingSequenceHatFragment = {
 			__typename?: 'RecordingConnection';
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
+		collection: { __typename?: 'Collection'; title: string } | null;
 	} | null;
 	writers: Array<{
 		__typename?: 'Person';
@@ -6189,6 +6198,7 @@ export type CardRecordingStackFragment = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 				image: { __typename?: 'Image'; url: string } | null;
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -6196,6 +6206,7 @@ export type CardRecordingStackFragment = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -6250,8 +6261,10 @@ export type CardSequenceFragment = {
 	};
 	allRecordings: {
 		__typename?: 'RecordingConnection';
+		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
+	collection: { __typename?: 'Collection'; title: string } | null;
 };
 
 export type CardSponsorFragment = {
@@ -6343,6 +6356,7 @@ export type PlayerFragment = {
 		title: string;
 		contentType: SequenceContentType;
 	} | null;
+	collection: { __typename?: 'Collection'; title: string } | null;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6449,6 +6463,7 @@ export type TeaseRecordingFragment = {
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
 	} | null;
+	collection: { __typename?: 'Collection'; title: string } | null;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -6498,6 +6513,7 @@ export type GetNotFoundPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -6518,6 +6534,7 @@ export type GetNotFoundPageDataQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -6620,6 +6637,7 @@ export type RecordingFragment = {
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
 				} | null;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -6749,6 +6767,7 @@ export type SequenceFragment = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -6769,6 +6788,7 @@ export type SequenceFragment = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -6813,6 +6833,7 @@ export type AndMiniplayerFragment = {
 		title: string;
 		contentType: SequenceContentType;
 	} | null;
+	collection: { __typename?: 'Collection'; title: string } | null;
 	audioFiles: Array<{
 		__typename?: 'AudioFile';
 		url: string;
@@ -7175,6 +7196,7 @@ export type GetAudiobookDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -7195,6 +7217,7 @@ export type GetAudiobookDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -7325,8 +7348,13 @@ export type GetAudiobookListPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -7427,6 +7455,7 @@ export type GetAudiobookTrackDetailDataQuery = {
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
 					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -7524,6 +7553,320 @@ export type GetAudiobookTrackDetailStaticPathsQuery = {
 	audiobookTracks: {
 		__typename?: 'RecordingConnection';
 		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
+	};
+};
+
+export type GetAudiobibleBookDetailDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetAudiobibleBookDetailDataQuery = {
+	__typename?: 'Query';
+	recording: {
+		__typename?: 'Recording';
+		id: string | number;
+		title: string;
+		contentType: RecordingContentType;
+		description: string | null;
+		recordingDate: string | null;
+		sequenceIndex: number | null;
+		canonicalUrl: string;
+		shareUrl: string;
+		copyrightYear: number | null;
+		canonicalPath: string;
+		duration: number;
+		isDownloadAllowed: boolean;
+		speakers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
+		writers: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}>;
+		attachments: Array<{
+			__typename?: 'Attachment';
+			filename: string;
+			url: string;
+		}>;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+		recordingTags: {
+			__typename?: 'RecordingTagConnection';
+			nodes: Array<{
+				__typename?: 'RecordingTag';
+				tag: { __typename?: 'Tag'; id: string | number; name: string };
+			}> | null;
+		};
+		sponsor: {
+			__typename?: 'Sponsor';
+			title: string;
+			canonicalPath: string;
+		} | null;
+		sequence: {
+			__typename?: 'Sequence';
+			id: string | number;
+			title: string;
+			contentType: SequenceContentType;
+			canonicalPath: string;
+			recordings: {
+				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+					sequenceIndex: number | null;
+					id: string | number;
+					title: string;
+					duration: number;
+					recordingContentType: RecordingContentType;
+					persons: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}>;
+					sequence: {
+						__typename?: 'Sequence';
+						id: string | number;
+						title: string;
+						contentType: SequenceContentType;
+						recordings: {
+							__typename?: 'RecordingConnection';
+							aggregate: { __typename?: 'Aggregate'; count: number } | null;
+						};
+					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
+					audioFiles: Array<{
+						__typename?: 'AudioFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoFiles: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+					videoStreams: Array<{
+						__typename?: 'VideoFile';
+						url: string;
+						logUrl: string | null;
+						filesize: string;
+						mimeType: string;
+						duration: number;
+					}>;
+				}> | null;
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+		} | null;
+		collection: {
+			__typename?: 'Collection';
+			title: string;
+			canonicalPath: string;
+		} | null;
+		transcript: { __typename?: 'Transcript'; text: string } | null;
+		sequencePreviousRecording: {
+			__typename?: 'Recording';
+			canonicalPath: string;
+		} | null;
+		sequenceNextRecording: {
+			__typename?: 'Recording';
+			canonicalPath: string;
+		} | null;
+		distributionAgreement: {
+			__typename?: 'DistributionAgreement';
+			sponsor: { __typename?: 'Sponsor'; title: string } | null;
+			license: {
+				__typename?: 'License';
+				summary: string;
+				image: { __typename?: 'Image'; url: string } | null;
+			} | null;
+		} | null;
+		audioFiles: Array<{
+			__typename?: 'AudioFile';
+			url: string;
+			filesize: string;
+			mimeType: string;
+			duration: number;
+		}>;
+		videoFiles: Array<{
+			__typename?: 'VideoFile';
+			url: string;
+			filesize: string;
+			mimeType: string;
+			duration: number;
+		}>;
+		videoStreams: Array<{
+			__typename?: 'VideoFile';
+			url: string;
+			logUrl: string | null;
+			filesize: string;
+			mimeType: string;
+			duration: number;
+		}>;
+		videoDownloads: Array<{
+			__typename?: 'VideoFile';
+			url: string;
+			filesize: string;
+			height: number;
+			width: number;
+		}>;
+		audioDownloads: Array<{
+			__typename?: 'AudioFile';
+			url: string;
+			filesize: string;
+			bitrate: number;
+		}>;
+	} | null;
+};
+
+export type GetAudiobibleBookPathsDataQueryVariables = Exact<{
+	language: Language;
+	first: InputMaybe<Scalars['Int']>;
+}>;
+
+export type GetAudiobibleBookPathsDataQuery = {
+	__typename?: 'Query';
+	recordings: {
+		__typename?: 'RecordingConnection';
+		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
+	};
+};
+
+export type GetAudiobibleVersionDataQueryVariables = Exact<{
+	id: Scalars['ID'];
+}>;
+
+export type GetAudiobibleVersionDataQuery = {
+	__typename?: 'Query';
+	collection: {
+		__typename?: 'Collection';
+		id: string | number;
+		title: string;
+		description: string;
+		contentType: CollectionContentType;
+		canonicalPath: string;
+		sponsor: {
+			__typename?: 'Sponsor';
+			canonicalPath: string;
+			title: string;
+			website: string | null;
+		} | null;
+		sequences: {
+			__typename?: 'SequenceConnection';
+			nodes: Array<{
+				__typename?: 'Sequence';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}> | null;
+				};
+				sequenceWriters: {
+					__typename?: 'PersonConnection';
+					nodes: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}> | null;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				collection: { __typename?: 'Collection'; title: string } | null;
+			}> | null;
+		};
+	} | null;
+};
+
+export type GetAudiobibleVersionsDataQueryVariables = Exact<{
+	language: Language;
+}>;
+
+export type GetAudiobibleVersionsDataQuery = {
+	__typename?: 'Query';
+	collections: {
+		__typename?: 'CollectionConnection';
+		nodes: Array<{
+			__typename?: 'Collection';
+			id: string | number;
+			canonicalPath: string;
+			title: string;
+			startDate: string | null;
+			endDate: string | null;
+			duration: number;
+			collectionContentType: CollectionContentType;
+			sequences: {
+				__typename?: 'SequenceConnection';
+				nodes: Array<{
+					__typename?: 'Sequence';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					duration: number;
+					summary: string;
+					speakers: {
+						__typename?: 'PersonConnection';
+						nodes: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}> | null;
+					};
+					sequenceWriters: {
+						__typename?: 'PersonConnection';
+						nodes: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}> | null;
+					};
+					allRecordings: {
+						__typename?: 'RecordingConnection';
+						nodes: Array<{
+							__typename?: 'Recording';
+							canonicalPath: string;
+						}> | null;
+						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					};
+					collection: { __typename?: 'Collection'; title: string } | null;
+				}> | null;
+			};
+			image: { __typename?: 'Image'; id: string | number; url: string } | null;
+			allSequences: {
+				__typename?: 'SequenceConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+		}> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
 };
 
@@ -7687,8 +8030,13 @@ export type GetCollectionDetailPageDataQuery = {
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			}> | null;
 			pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 		};
@@ -7714,6 +8062,7 @@ export type GetCollectionDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -7734,6 +8083,7 @@ export type GetCollectionDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -7960,8 +8310,13 @@ export type GetCollectionSequencesPageDataQuery = {
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			}> | null;
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
@@ -8003,6 +8358,7 @@ export type GetCollectionTeachingsPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -8023,6 +8379,7 @@ export type GetCollectionTeachingsPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -8092,6 +8449,7 @@ export type GetDiscoverPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -8112,6 +8470,7 @@ export type GetDiscoverPageDataQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -8159,6 +8518,7 @@ export type GetDiscoverPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -8179,6 +8539,7 @@ export type GetDiscoverPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -8235,6 +8596,7 @@ export type GetDiscoverPageDataQuery = {
 							__typename?: 'RecordingConnection';
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
+						collection: { __typename?: 'Collection'; title: string } | null;
 					} | null;
 					writers: Array<{
 						__typename?: 'Person';
@@ -8255,6 +8617,7 @@ export type GetDiscoverPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -8299,8 +8662,13 @@ export type GetDiscoverPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 	conferences: {
@@ -8344,8 +8712,13 @@ export type GetDiscoverPageDataQuery = {
 					};
 					allRecordings: {
 						__typename?: 'RecordingConnection';
+						nodes: Array<{
+							__typename?: 'Recording';
+							canonicalPath: string;
+						}> | null;
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				}> | null;
 			};
 			recordings: {
@@ -8369,6 +8742,7 @@ export type GetDiscoverPageDataQuery = {
 							__typename?: 'RecordingConnection';
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
+						collection: { __typename?: 'Collection'; title: string } | null;
 					} | null;
 					writers: Array<{
 						__typename?: 'Person';
@@ -8389,6 +8763,7 @@ export type GetDiscoverPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -8495,8 +8870,13 @@ export type GetDiscoverCollectionsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 	conferences: {
@@ -8573,8 +8953,13 @@ export type GetDiscoverCollectionsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 	storySeasons: {
@@ -8607,8 +8992,13 @@ export type GetDiscoverCollectionsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 	musicAlbums: {
@@ -8641,8 +9031,13 @@ export type GetDiscoverCollectionsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 };
@@ -8674,6 +9069,7 @@ export type GetHomeStaticPropsQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -8694,6 +9090,7 @@ export type GetHomeStaticPropsQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -8739,6 +9136,45 @@ export type GetHomeStaticPropsQuery = {
 			image: { __typename?: 'Image'; url: string } | null;
 		}> | null;
 	};
+	bibleChapters: {
+		__typename?: 'SequenceConnection';
+		nodes: Array<{
+			__typename?: 'Sequence';
+			id: string | number;
+			title: string;
+			canonicalPath: string;
+			contentType: SequenceContentType;
+			duration: number;
+			summary: string;
+			speakers: {
+				__typename?: 'PersonConnection';
+				nodes: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}> | null;
+			};
+			sequenceWriters: {
+				__typename?: 'PersonConnection';
+				nodes: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}> | null;
+			};
+			allRecordings: {
+				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
+				aggregate: { __typename?: 'Aggregate'; count: number } | null;
+			};
+			collection: { __typename?: 'Collection'; title: string } | null;
+		}> | null;
+	};
 };
 
 export type GetLibraryHistoryPageDataQueryVariables = Exact<{
@@ -8777,6 +9213,7 @@ export type GetLibraryHistoryPageDataQuery = {
 								__typename?: 'RecordingConnection';
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
+							collection: { __typename?: 'Collection'; title: string } | null;
 						} | null;
 						writers: Array<{
 							__typename?: 'Person';
@@ -8797,6 +9234,7 @@ export type GetLibraryHistoryPageDataQuery = {
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
+						collection: { __typename?: 'Collection'; title: string } | null;
 						audioFiles: Array<{
 							__typename?: 'AudioFile';
 							url: string;
@@ -8916,6 +9354,10 @@ export type GetLibraryDataQuery = {
 											count: number;
 										} | null;
 									};
+									collection: {
+										__typename?: 'Collection';
+										title: string;
+									} | null;
 								} | null;
 								writers: Array<{
 									__typename?: 'Person';
@@ -8936,6 +9378,7 @@ export type GetLibraryDataQuery = {
 									canonicalPath: string;
 									imageWithFallback: { __typename?: 'Image'; url: string };
 								}>;
+								collection: { __typename?: 'Collection'; title: string } | null;
 								audioFiles: Array<{
 									__typename?: 'AudioFile';
 									url: string;
@@ -8988,8 +9431,13 @@ export type GetLibraryDataQuery = {
 								};
 								allRecordings: {
 									__typename?: 'RecordingConnection';
+									nodes: Array<{
+										__typename?: 'Recording';
+										canonicalPath: string;
+									}> | null;
 									aggregate: { __typename?: 'Aggregate'; count: number } | null;
 								};
+								collection: { __typename?: 'Collection'; title: string } | null;
 								favoritedRecordings: {
 									__typename?: 'RecordingConnection';
 									nodes: Array<{
@@ -9020,6 +9468,10 @@ export type GetLibraryDataQuery = {
 												} | null;
 											};
 											image: { __typename?: 'Image'; url: string } | null;
+											collection: {
+												__typename?: 'Collection';
+												title: string;
+											} | null;
 										} | null;
 										writers: Array<{
 											__typename?: 'Person';
@@ -9027,6 +9479,10 @@ export type GetLibraryDataQuery = {
 											canonicalPath: string;
 											imageWithFallback: { __typename?: 'Image'; url: string };
 										}>;
+										collection: {
+											__typename?: 'Collection';
+											title: string;
+										} | null;
 										audioFiles: Array<{
 											__typename?: 'AudioFile';
 											url: string;
@@ -9113,6 +9569,7 @@ export type GetLibraryPlaylistPageDataQuery = {
 								__typename?: 'RecordingConnection';
 								aggregate: { __typename?: 'Aggregate'; count: number } | null;
 							};
+							collection: { __typename?: 'Collection'; title: string } | null;
 						} | null;
 						writers: Array<{
 							__typename?: 'Person';
@@ -9133,6 +9590,7 @@ export type GetLibraryPlaylistPageDataQuery = {
 							canonicalPath: string;
 							imageWithFallback: { __typename?: 'Image'; url: string };
 						}>;
+						collection: { __typename?: 'Collection'; title: string } | null;
 						audioFiles: Array<{
 							__typename?: 'AudioFile';
 							url: string;
@@ -9207,6 +9665,7 @@ export type GetLibraryPlaylistsDataQuery = {
 									aggregate: { __typename?: 'Aggregate'; count: number } | null;
 								};
 							} | null;
+							collection: { __typename?: 'Collection'; title: string } | null;
 							audioFiles: Array<{
 								__typename?: 'AudioFile';
 								url: string;
@@ -9334,6 +9793,7 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9354,6 +9814,7 @@ export type GetPresenterDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -9400,6 +9861,7 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9420,6 +9882,7 @@ export type GetPresenterDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -9466,6 +9929,7 @@ export type GetPresenterDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9486,6 +9950,7 @@ export type GetPresenterDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -9542,8 +10007,13 @@ export type GetPresenterDetailPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
@@ -9588,8 +10058,13 @@ export type GetPresenterDetailPageDataQuery = {
 					};
 					allRecordings: {
 						__typename?: 'RecordingConnection';
+						nodes: Array<{
+							__typename?: 'Recording';
+							canonicalPath: string;
+						}> | null;
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				}> | null;
 			};
 			image: { __typename?: 'Image'; id: string | number; url: string } | null;
@@ -9702,6 +10177,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9722,6 +10198,7 @@ export type GetPresenterRecordingsPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -9846,8 +10323,13 @@ export type GetPresenterSequencesPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -9888,6 +10370,7 @@ export type GetPresenterTopPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -9908,6 +10391,7 @@ export type GetPresenterTopPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -10046,6 +10530,7 @@ export type GetSearchResultsPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -10066,6 +10551,7 @@ export type GetSearchResultsPageDataQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -10122,8 +10608,13 @@ export type GetSearchResultsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean };
 	};
@@ -10259,8 +10750,13 @@ export type GetSearchResultsSequencesQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 	};
 };
@@ -10330,6 +10826,7 @@ export type GetSearchResultsRecordingsQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -10350,6 +10847,7 @@ export type GetSearchResultsRecordingsQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -10427,6 +10925,7 @@ export type GetSeriesDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -10447,6 +10946,7 @@ export type GetSeriesDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -10573,8 +11073,13 @@ export type GetSeriesListPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -10675,6 +11180,7 @@ export type GetSermonDetailDataQuery = {
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
 					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -10809,6 +11315,7 @@ export type GetSermonListPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -10829,6 +11336,7 @@ export type GetSermonListPageDataQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -10939,6 +11447,7 @@ export type GetTrendingTeachingsPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -10959,6 +11468,7 @@ export type GetTrendingTeachingsPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -11037,6 +11547,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -11057,6 +11568,7 @@ export type GetSongAlbumsDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -11181,6 +11693,7 @@ export type GetSongAlbumsListPageDataQuery = {
 							__typename?: 'RecordingConnection';
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
+						collection: { __typename?: 'Collection'; title: string } | null;
 					} | null;
 					writers: Array<{
 						__typename?: 'Person';
@@ -11201,6 +11714,7 @@ export type GetSongAlbumsListPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -11245,8 +11759,13 @@ export type GetSongAlbumsListPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -11277,6 +11796,7 @@ export type GetSongAlbumsListPageDataQuery = {
 							__typename?: 'RecordingConnection';
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
+						collection: { __typename?: 'Collection'; title: string } | null;
 					} | null;
 					writers: Array<{
 						__typename?: 'Person';
@@ -11297,6 +11817,7 @@ export type GetSongAlbumsListPageDataQuery = {
 						canonicalPath: string;
 						imageWithFallback: { __typename?: 'Image'; url: string };
 					}>;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -11354,6 +11875,7 @@ export type GetSongBooksDetailPageDataQuery = {
 					__typename?: 'RecordingConnection';
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			} | null;
 			writers: Array<{
 				__typename?: 'Person';
@@ -11374,6 +11896,7 @@ export type GetSongBooksDetailPageDataQuery = {
 				canonicalPath: string;
 				imageWithFallback: { __typename?: 'Image'; url: string };
 			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -11485,6 +12008,7 @@ export type GetBookSongDetailDataQuery = {
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
 					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -11596,6 +12120,7 @@ export type GetBookSongDetailDataQuery = {
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
 			} | null;
+			collection: { __typename?: 'Collection'; title: string } | null;
 			audioFiles: Array<{
 				__typename?: 'AudioFile';
 				url: string;
@@ -11705,6 +12230,7 @@ export type GetSongDetailDataQuery = {
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
 					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -11821,7 +12347,7 @@ export type GetSponsorConferencesPageDataQuery = {
 		canonicalPath: string;
 		imageWithFallback: { __typename?: 'Image'; url: string };
 	} | null;
-	conferences: {
+	collections: {
 		__typename?: 'CollectionConnection';
 		nodes: Array<{
 			__typename?: 'Collection';
@@ -11934,8 +12460,13 @@ export type GetSponsorDetailPageDataQuery = {
 				};
 				allRecordings: {
 					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
 					aggregate: { __typename?: 'Aggregate'; count: number } | null;
 				};
+				collection: { __typename?: 'Collection'; title: string } | null;
 			}> | null;
 		};
 		recordings: {
@@ -11960,6 +12491,7 @@ export type GetSponsorDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -11980,6 +12512,7 @@ export type GetSponsorDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -12110,8 +12643,13 @@ export type GetSponsorSeriesPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -12164,6 +12702,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -12184,6 +12723,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -12324,6 +12864,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 						__typename?: 'RecordingConnection';
 						aggregate: { __typename?: 'Aggregate'; count: number } | null;
 					};
+					collection: { __typename?: 'Collection'; title: string } | null;
 				} | null;
 				writers: Array<{
 					__typename?: 'Person';
@@ -12344,6 +12885,7 @@ export type GetStoryAlbumDetailPageDataQuery = {
 					canonicalPath: string;
 					imageWithFallback: { __typename?: 'Image'; url: string };
 				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
 				audioFiles: Array<{
 					__typename?: 'AudioFile';
 					url: string;
@@ -12473,8 +13015,13 @@ export type GetStoriesAlbumsPageDataQuery = {
 			};
 			allRecordings: {
 				__typename?: 'RecordingConnection';
+				nodes: Array<{
+					__typename?: 'Recording';
+					canonicalPath: string;
+				}> | null;
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+			collection: { __typename?: 'Collection'; title: string } | null;
 		}> | null;
 		aggregate: { __typename?: 'Aggregate'; count: number } | null;
 	};
@@ -12575,6 +13122,7 @@ export type GetStoryDetailDataQuery = {
 							aggregate: { __typename?: 'Aggregate'; count: number } | null;
 						};
 					} | null;
+					collection: { __typename?: 'Collection'; title: string } | null;
 					audioFiles: Array<{
 						__typename?: 'AudioFile';
 						url: string;
@@ -12947,20 +13495,17 @@ export type BookFeedDescriptionFragment = {
 	};
 };
 
-export const CardBibleChapterFragmentDoc = `
-fragment cardBibleChapter on BibleChapter{id title url}
-`;
 export const PersonLockupFragmentDoc = `
 fragment personLockup on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
 `;
 export const CardRecordingSequenceHatFragmentDoc = `
-fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}}writers:persons(role:WRITER){...personLockup}}
+fragment cardRecordingSequenceHat on Recording{sequence{id canonicalPath(useFuturePath:true)contentType image{url(size:100)}recordings{aggregate{count}}collection{title}}writers:persons(role:WRITER){...personLockup}}
 `;
 export const CardHatSponsorFragmentDoc = `
 fragment cardHatSponsor on Recording{sponsor{id title canonicalPath(useFuturePath:true)image{url(size:100)}}}
 `;
 export const AndMiniplayerFragmentDoc = `
-fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)logUrl filesize mimeType duration}}
+fragment andMiniplayer on Recording{id title canonicalPath(useFuturePath:true)duration sequence{title contentType}collection{title}audioFiles{url(requestType:STREAM)filesize mimeType duration}videoFiles(allowedContainers:[M4A M4V MOV MP4]){url(requestType:STREAM)filesize mimeType duration}videoStreams:videoFiles(allowedContainers:[M3U8_WEB]){url(requestType:STREAM)logUrl filesize mimeType duration}}
 `;
 export const TeaseRecordingFragmentDoc = `
 fragment teaseRecording on Recording{...andMiniplayer recordingContentType:contentType canonicalPath(useFuturePath:true)persons(role:SPEAKER){...personLockup}sequenceIndex sequence{id recordings{aggregate{count}}}}
@@ -12969,7 +13514,7 @@ export const CardRecordingFragmentDoc = `
 fragment cardRecording on Recording{...cardRecordingSequenceHat ...cardHatSponsor ...teaseRecording}
 `;
 export const CardSequenceFragmentDoc = `
-fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:3){aggregate{count}}}
+fragment cardSequence on Sequence{id title canonicalPath(useFuturePath:true)contentType duration summary speakers:persons(role:SPEAKER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}sequenceWriters:persons(role:WRITER orderBy:[{field:NAME direction:ASC}]){nodes{...personLockup}}allRecordings:recordings(first:1){nodes{canonicalPath(useFuturePath:true)}aggregate{count}}collection{title}}
 `;
 export const CardRecordingStackFragmentDoc = `
 fragment cardRecordingStack on Sequence{contentType favoritedRecordings:recordings(viewerHasFavorited:true){nodes{...teaseRecording ...cardRecordingSequenceHat}}}
@@ -13582,6 +14127,89 @@ export const useGetAudiobookTrackDetailStaticPathsQuery = <
 		>(GetAudiobookTrackDetailStaticPathsDocument, variables),
 		options
 	);
+export const GetAudiobibleBookDetailDataDocument = `
+query getAudiobibleBookDetailData($id:ID!){recording(id:$id){...recording}}
+${RecordingFragmentDoc}
+${PersonLockupFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${SequenceNavFragmentDoc}
+${CopyrightInfoFragmentDoc}
+${PlayerFragmentDoc}
+${ButtonDownloadFragmentDoc}
+${ButtonShareRecordingFragmentDoc}`;
+export const useGetAudiobibleBookDetailDataQuery = <
+	TData = GetAudiobibleBookDetailDataQuery,
+	TError = unknown
+>(
+	variables: GetAudiobibleBookDetailDataQueryVariables,
+	options?: UseQueryOptions<GetAudiobibleBookDetailDataQuery, TError, TData>
+) =>
+	useQuery<GetAudiobibleBookDetailDataQuery, TError, TData>(
+		['getAudiobibleBookDetailData', variables],
+		graphqlFetcher<
+			GetAudiobibleBookDetailDataQuery,
+			GetAudiobibleBookDetailDataQueryVariables
+		>(GetAudiobibleBookDetailDataDocument, variables),
+		options
+	);
+export const GetAudiobibleBookPathsDataDocument = `
+query getAudiobibleBookPathsData($language:Language!$first:Int){recordings(language:$language first:$first contentType:BIBLE_CHAPTER){nodes{canonicalPath(useFuturePath:true)}}}
+`;
+export const useGetAudiobibleBookPathsDataQuery = <
+	TData = GetAudiobibleBookPathsDataQuery,
+	TError = unknown
+>(
+	variables: GetAudiobibleBookPathsDataQueryVariables,
+	options?: UseQueryOptions<GetAudiobibleBookPathsDataQuery, TError, TData>
+) =>
+	useQuery<GetAudiobibleBookPathsDataQuery, TError, TData>(
+		['getAudiobibleBookPathsData', variables],
+		graphqlFetcher<
+			GetAudiobibleBookPathsDataQuery,
+			GetAudiobibleBookPathsDataQueryVariables
+		>(GetAudiobibleBookPathsDataDocument, variables),
+		options
+	);
+export const GetAudiobibleVersionDataDocument = `
+query getAudiobibleVersionData($id:ID!){collection(id:$id){id title description contentType canonicalPath(useFuturePath:true)sponsor{canonicalPath(useFuturePath:true)title website}sequences(first:66 orderBy:[{field:ID direction:ASC}]){nodes{...cardSequence}}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const useGetAudiobibleVersionDataQuery = <
+	TData = GetAudiobibleVersionDataQuery,
+	TError = unknown
+>(
+	variables: GetAudiobibleVersionDataQueryVariables,
+	options?: UseQueryOptions<GetAudiobibleVersionDataQuery, TError, TData>
+) =>
+	useQuery<GetAudiobibleVersionDataQuery, TError, TData>(
+		['getAudiobibleVersionData', variables],
+		graphqlFetcher<
+			GetAudiobibleVersionDataQuery,
+			GetAudiobibleVersionDataQueryVariables
+		>(GetAudiobibleVersionDataDocument, variables),
+		options
+	);
+export const GetAudiobibleVersionsDataDocument = `
+query getAudiobibleVersionsData($language:Language!){collections(language:$language contentType:BIBLE_VERSION first:10 orderBy:[{field:TITLE direction:ASC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:ID direction:ASC}]){nodes{...cardSequence}}}aggregate{count}}}
+${CardCollectionFragmentDoc}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const useGetAudiobibleVersionsDataQuery = <
+	TData = GetAudiobibleVersionsDataQuery,
+	TError = unknown
+>(
+	variables: GetAudiobibleVersionsDataQueryVariables,
+	options?: UseQueryOptions<GetAudiobibleVersionsDataQuery, TError, TData>
+) =>
+	useQuery<GetAudiobibleVersionsDataQuery, TError, TData>(
+		['getAudiobibleVersionsData', variables],
+		graphqlFetcher<
+			GetAudiobibleVersionsDataQuery,
+			GetAudiobibleVersionsDataQueryVariables
+		>(GetAudiobibleVersionsDataDocument, variables),
+		options
+	);
 export const GetBlogPageDataDocument = `
 query getBlogPageData($language:Language!$offset:Int=0$first:Int=12){blogPosts(language:$language orderBy:{field:PUBLISHED_AT direction:DESC}first:$first offset:$offset){nodes{...cardPost}aggregate{count}}}
 ${CardPostFragmentDoc}`;
@@ -13843,7 +14471,7 @@ export const useSubmitContactPageMutation = <
 		options
 	);
 export const GetDiscoverPageDataDocument = `
-query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}
+query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language contentType:SERMON first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -13890,7 +14518,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 		options
 	);
 export const GetHomeStaticPropsDocument = `
-query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
+query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}bibleChapters:sequences(language:$language first:1 contentType:BIBLE_BOOK){nodes{...cardSequence}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -13898,7 +14526,8 @@ ${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${TestimoniesFragmentDoc}
-${CardPostFragmentDoc}`;
+${CardPostFragmentDoc}
+${CardSequenceFragmentDoc}`;
 export const useGetHomeStaticPropsQuery = <
 	TData = GetHomeStaticPropsQuery,
 	TError = unknown
@@ -14581,7 +15210,7 @@ export const useGetSermonListPagePathsDataQuery = <
 		options
 	);
 export const GetTrendingTeachingsPageDataDocument = `
-query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language first:24){nodes{recording{...cardRecording}}}}
+query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language contentType:SERMON first:24){nodes{recording{...cardRecording}}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -14781,7 +15410,7 @@ export const useGetSongDetailStaticPathsQuery = <
 		options
 	);
 export const GetSponsorConferencesPageDataDocument = `
-query getSponsorConferencesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}conferences(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
+query getSponsorConferencesPageData($language:Language!$id:ID!$offset:Int$first:Int){sponsor(id:$id){...sponsorPivot}collections(language:$language sponsorId:$id offset:$offset first:$first orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}aggregate{count}}}
 ${SponsorPivotFragmentDoc}
 ${CardCollectionFragmentDoc}`;
 export const useGetSponsorConferencesPageDataQuery = <
@@ -15740,6 +16369,30 @@ export async function getAudiobookTrackDetailStaticPaths<T>(
 	variables: ExactAlt<T, GetAudiobookTrackDetailStaticPathsQueryVariables>
 ): Promise<GetAudiobookTrackDetailStaticPathsQuery> {
 	return fetchApi(GetAudiobookTrackDetailStaticPathsDocument, { variables });
+}
+
+export async function getAudiobibleBookDetailData<T>(
+	variables: ExactAlt<T, GetAudiobibleBookDetailDataQueryVariables>
+): Promise<GetAudiobibleBookDetailDataQuery> {
+	return fetchApi(GetAudiobibleBookDetailDataDocument, { variables });
+}
+
+export async function getAudiobibleBookPathsData<T>(
+	variables: ExactAlt<T, GetAudiobibleBookPathsDataQueryVariables>
+): Promise<GetAudiobibleBookPathsDataQuery> {
+	return fetchApi(GetAudiobibleBookPathsDataDocument, { variables });
+}
+
+export async function getAudiobibleVersionData<T>(
+	variables: ExactAlt<T, GetAudiobibleVersionDataQueryVariables>
+): Promise<GetAudiobibleVersionDataQuery> {
+	return fetchApi(GetAudiobibleVersionDataDocument, { variables });
+}
+
+export async function getAudiobibleVersionsData<T>(
+	variables: ExactAlt<T, GetAudiobibleVersionsDataQueryVariables>
+): Promise<GetAudiobibleVersionsDataQuery> {
+	return fetchApi(GetAudiobibleVersionsDataDocument, { variables });
 }
 
 export async function getBlogPageData<T>(
