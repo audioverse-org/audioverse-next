@@ -771,24 +771,6 @@
       "value": "Контакт"
     }
   ],
-  "recordingHasVideoFilter__filterAll": [
-    {
-      "type": 0,
-      "value": "Все"
-    }
-  ],
-  "recordingHasVideoFilter__filterAudio": [
-    {
-      "type": 0,
-      "value": "Только аудио"
-    }
-  ],
-  "recordingHasVideoFilter__filterVideo": [
-    {
-      "type": 0,
-      "value": "Видео"
-    }
-  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
@@ -1351,7 +1333,7 @@
       "value": "Запросить поддержку"
     }
   ],
-  "header__navItemContact-testimony": [
+  "header__navItemContact-testimonial": [
     {
       "type": 0,
       "value": "Поделиться свидетельством"
@@ -1749,7 +1731,7 @@
       "value": "Отзывы пользователей AudioVerse."
     }
   ],
-  "home__testimoniesTitle": [
+  "home__testimonialsTitle": [
     {
       "type": 0,
       "value": "Отзывы"
@@ -3147,6 +3129,30 @@
       "value": "Профиль"
     }
   ],
+  "recordingHasVideoFilter__filter": [
+    {
+      "type": 0,
+      "value": "Фильтр"
+    }
+  ],
+  "recordingHasVideoFilter__filterAll": [
+    {
+      "type": 0,
+      "value": "Все"
+    }
+  ],
+  "recordingHasVideoFilter__filterAudio": [
+    {
+      "type": 0,
+      "value": "Только аудио"
+    }
+  ],
+  "recordingHasVideoFilter__filterVideo": [
+    {
+      "type": 0,
+      "value": "Видео"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3525,12 +3531,6 @@
     {
       "type": 0,
       "value": "Все темы"
-    }
-  ],
-  "recordingHasVideoFilter__filter": [
-    {
-      "type": 0,
-      "value": "Фильтр"
     }
   ],
   "socialLogin__loginFacebookButton": [
@@ -4231,7 +4231,7 @@
       "value": "Поделитесь своей историей"
     }
   ],
-  "testimonies__submitTestimony": [
+  "testimonies__submitTestimonial": [
     {
       "type": 0,
       "value": "Послать отзыв"

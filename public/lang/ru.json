@@ -567,7 +567,7 @@
     "comment": "home page testimonies section text",
     "string": "Отзывы пользователей AudioVerse."
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
     "string": "Отзывы"
   },
@@ -1961,7 +1961,7 @@
   "header__navItemContact-support": {
     "string": "Запросить поддержку"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "Поделиться свидетельством"
   },
   "header__navItemContact-twitter": {
@@ -2138,7 +2138,7 @@
   "testimonies__seeAll": {
     "string": "Просмотреть все отзывы"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "Послать отзыв"
   },
   "time__hoursMinutesAndSeconds": {

@@ -771,24 +771,6 @@
       "value": "Contact"
     }
   ],
-  "recordingHasVideoFilter__filterAll": [
-    {
-      "type": 0,
-      "value": "Tous"
-    }
-  ],
-  "recordingHasVideoFilter__filterAudio": [
-    {
-      "type": 0,
-      "value": "Audio uniquement"
-    }
-  ],
-  "recordingHasVideoFilter__filterVideo": [
-    {
-      "type": 0,
-      "value": "Vidéo"
-    }
-  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
@@ -1343,7 +1325,7 @@
       "value": "Support technique"
     }
   ],
-  "header__navItemContact-testimony": [
+  "header__navItemContact-testimonial": [
     {
       "type": 0,
       "value": "Partager un témoignage"
@@ -1741,7 +1723,7 @@
       "value": "Écoutez le témoignage de quelques utilisateurs d'AudioVerse."
     }
   ],
-  "home__testimoniesTitle": [
+  "home__testimonialsTitle": [
     {
       "type": 0,
       "value": "Témoignages"
@@ -3139,6 +3121,30 @@
       "value": "Profil"
     }
   ],
+  "recordingHasVideoFilter__filter": [
+    {
+      "type": 0,
+      "value": "Filtre"
+    }
+  ],
+  "recordingHasVideoFilter__filterAll": [
+    {
+      "type": 0,
+      "value": "Tous"
+    }
+  ],
+  "recordingHasVideoFilter__filterAudio": [
+    {
+      "type": 0,
+      "value": "Audio uniquement"
+    }
+  ],
+  "recordingHasVideoFilter__filterVideo": [
+    {
+      "type": 0,
+      "value": "Vidéo"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3517,12 +3523,6 @@
     {
       "type": 0,
       "value": "Tous les enseignements"
-    }
-  ],
-  "recordingHasVideoFilter__filter": [
-    {
-      "type": 0,
-      "value": "Filtre"
     }
   ],
   "socialLogin__loginFacebookButton": [
@@ -4229,7 +4229,7 @@
       "value": "Partagez votre histoire"
     }
   ],
-  "testimonies__submitTestimony": [
+  "testimonies__submitTestimonial": [
     {
       "type": 0,
       "value": "Envoyer un témoignage"

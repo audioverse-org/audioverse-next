@@ -567,7 +567,7 @@
     "comment": "home page testimonies section text",
     "string": "听听一些AudioVerse使用者的看法。"
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
     "string": "见证"
   },
@@ -1964,7 +1964,7 @@
   "header__navItemContact-support": {
     "string": "需要帮助"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "分享见证"
   },
   "header__navItemContact-twitter": {
@@ -2141,7 +2141,7 @@
   "testimonies__seeAll": {
     "string": "查看所有见证"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "提交见证"
   },
   "time__hoursMinutesAndSeconds": {

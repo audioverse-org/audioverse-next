@@ -567,7 +567,7 @@
     "comment": "home page testimonies section text",
     "string": "Écoutez le témoignage de quelques utilisateurs d'AudioVerse."
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
     "string": "Témoignages"
   },
@@ -1964,7 +1964,7 @@
   "header__navItemContact-support": {
     "string": "Support technique"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "Partager un témoignage"
   },
   "header__navItemContact-twitter": {
@@ -2141,7 +2141,7 @@
   "testimonies__seeAll": {
     "string": "Voir tous les témoignages"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "Envoyer un témoignage"
   },
   "time__hoursMinutesAndSeconds": {

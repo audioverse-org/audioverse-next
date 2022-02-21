@@ -32,7 +32,7 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 					text={
 						<FormattedMessage
 							id="testimonies__seeAll"
-							defaultMessage="See all Testimonies"
+							defaultMessage="See all Testimonials"
 						/>
 					}
 					href={makeTestimoniesRoute(languageRoute)}
@@ -41,8 +41,8 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 					type="secondary"
 					text={
 						<FormattedMessage
-							id="testimonies__submitTestimony"
-							defaultMessage="Submit a Testimony"
+							id="testimonies__submitTestimonial"
+							defaultMessage="Submit a Testimonial"
 						/>
 					}
 					href={makeTestimonySubmitRoute(languageRoute)}

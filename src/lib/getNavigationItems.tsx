@@ -333,8 +333,8 @@ export function getNavigationItems(
 					href: makeTestimonySubmitRoute(languageRoute),
 					Icon: IconCommentHeavy,
 					label: intl.formatMessage({
-						id: `header__navItemContact-testimony`,
-						defaultMessage: 'Share Testimony',
+						id: `header__navItemContact-testimonial`,
+						defaultMessage: 'Share Testimonial',
 					}),
 				},
 				{
