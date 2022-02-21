@@ -20,7 +20,10 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 		<Slider>
 			{testimonies.map((t) => (
 				<blockquote className={styles.testimony} key={t.id}>
-					<p className={styles.body}>{t.body}</p>
+					<p
+						className={styles.body}
+						dangerouslySetInnerHTML={{ __html: t.body.replace(/<[^>]+>/g, '') }}
+					></p>
 					<footer>
 						<cite className={styles.author}>{t.author}</cite>
 					</footer>
