@@ -1,10 +1,31 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import Alert from '@components/atoms/alert';
+
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
 
 import Button from './button';
 import styles from './transcript.module.scss';
+
+// @see https://stackoverflow.com/a/37400795/168581
+function splitText(text: string): string[] {
+	const paragraphs: string[] = [];
+	const sentenceRegex = /[^.!?]+([.!?]+|\s*$)/g;
+	const sentences = text.match(sentenceRegex);
+
+	let paragraph = '';
+	sentences?.forEach((sentence, index) => {
+		paragraph += sentence;
+
+		if (paragraph.length >= 200 || index === sentences.length - 1) {
+			paragraphs.push(paragraph);
+			paragraph = '';
+		}
+	});
+
+	return paragraphs.length === 0 ? [text] : paragraphs;
+}
 
 export default function Transcript({
 	text,
@@ -17,7 +38,9 @@ export default function Transcript({
 	const isManuallyCreatedTranscript = text.includes('<p>');
 	const __html = isManuallyCreatedTranscript
 		? text
-		: text.replace(/\.\s+/g, '.<br><br>');
+		: splitText(text)
+				.map((t) => `<p>${t}</p>`)
+				.join('');
 
 	return (
 		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
@@ -44,7 +67,7 @@ export default function Transcript({
 			{isOpen && (
 				<>
 					{!isManuallyCreatedTranscript && (
-						<>
+						<Alert className={styles.alert}>
 							<p>
 								<FormattedMessage
 									id="molecule-transcript__disclaimer"
@@ -59,7 +82,7 @@ export default function Transcript({
 									description="transcript assistance request"
 								/>
 							</p>
-						</>
+						</Alert>
 					)}
 					<div className={styles.text} dangerouslySetInnerHTML={{ __html }} />
 				</>
