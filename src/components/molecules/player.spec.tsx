@@ -836,16 +836,6 @@ describe('player', () => {
 		expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
 	});
 
-	it('loads videojs speed', async () => {
-		setPlayerMock({ playbackRate: 2 });
-
-		const { getByLabelText, findByText } = await renderComponent();
-
-		userEvent.click(getByLabelText('play'));
-
-		await findByText('2x');
-	});
-
 	it('has download icon', async () => {
 		const { getByLabelText } = await renderComponent();
 
