@@ -355,19 +355,25 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									</div>
 									<form
 										className={styles.newsletterBody}
-										action="https://audioverse.z2systems.com/np/clients/audioverse/submitSubscription.jsp"
+										action="https://audioverseministry.activehosted.com/proc.php"
 										method="POST"
 										target="_blank"
 									>
-										<input type="hidden" name="subscription" value="5" />
+										<input type="hidden" name="u" value="1" />
+										<input type="hidden" name="f" value="1" />
+										<input type="hidden" name="s" />
+										<input type="hidden" name="c" value="0" />
+										<input type="hidden" name="m" value="0" />
+										<input type="hidden" name="act" value="sub" />
+										<input type="hidden" name="v" value="2" />
 										<input
 											type="hidden"
-											name="skipDuplicateRequestCheck"
-											value="1"
+											name="or"
+											value="445d2cef308b6a40ab929cfde6f32b3c"
 										/>
 										<div className={styles.newsletterFieldRow}>
 											<Input
-												name="subscriber.name"
+												name="fullname"
 												type="text"
 												label={
 													<FormattedMessage
@@ -383,7 +389,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												setValue={setName}
 											/>
 											<Input
-												name="subscriber.email1"
+												name="email"
 												type="text"
 												label={
 													<FormattedMessage
