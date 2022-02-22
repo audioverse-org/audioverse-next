@@ -11,7 +11,7 @@ import styles from './transcript.module.scss';
 // @see https://stackoverflow.com/a/37400795/168581
 function splitText(text: string): string[] {
 	const paragraphs: string[] = [];
-	const sentenceRegex = /[^.!?]+([.!?]+|\s*$)/g;
+	const sentenceRegex = /.*?[.!?]+(\s+|$)/g;
 	const sentences = text.match(sentenceRegex);
 
 	let paragraph = '';
