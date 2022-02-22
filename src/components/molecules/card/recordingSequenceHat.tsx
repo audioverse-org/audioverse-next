@@ -36,6 +36,18 @@ const getSequenceLabel = (
 					defaultMessage="Add Book"
 				/>
 			);
+		case SequenceContentType.BibleBook:
+			return isFavorited ? (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__removeBibleBook"
+					defaultMessage="Remove Book"
+				/>
+			) : (
+				<FormattedMessage
+					id="molecule-cardRecordingSequenceHat__addBibleBook"
+					defaultMessage="Add Book"
+				/>
+			);
 		case SequenceContentType.MusicAlbum:
 			return isFavorited ? (
 				<FormattedMessage

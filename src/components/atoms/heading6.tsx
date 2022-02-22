@@ -8,6 +8,7 @@ type Props = {
 	large?: boolean;
 	loose?: boolean;
 	sans?: boolean;
+	ultralight?: boolean;
 	unpadded?: boolean;
 	uppercase?: boolean;
 	className?: string;
@@ -18,6 +19,7 @@ export default function Heading6({
 	large,
 	loose,
 	sans,
+	ultralight,
 	unpadded,
 	uppercase,
 	className,
@@ -31,6 +33,7 @@ export default function Heading6({
 				loose && styles.loose,
 				large && styles.large,
 				uppercase && styles.uppercase,
+				ultralight && styles.ultralight,
 				className
 			)}
 		>

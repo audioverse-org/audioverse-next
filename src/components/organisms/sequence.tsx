@@ -65,6 +65,8 @@ export function Sequence({
 		switch (contentType) {
 			case SequenceContentType.Audiobook:
 				return makeAudiobookFeedRoute;
+			case SequenceContentType.BibleBook:
+				return () => undefined;
 			case SequenceContentType.MusicAlbum:
 				return makeSongAlbumFeedRoute;
 			case SequenceContentType.Series:

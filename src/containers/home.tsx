@@ -7,9 +7,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
-import CardBibleBook from '@components/molecules/card/bibleBook';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
+import CardSequence from '@components/molecules/card/sequence';
 import CardMasonry from '@components/molecules/cardMasonry';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import Input from '@components/molecules/form/input';
@@ -71,6 +71,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
+	const bibleChapters = data?.bibleChapters.nodes || [];
 
 	const features = getAppFeatures(languageRoute);
 
@@ -174,9 +175,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 													data: r,
 												} as const)
 										),
-										{
-											type: 'bible',
-										} as const,
+										...(languageRoute === 'en'
+											? [
+													{
+														type: 'bible',
+													} as const,
+											  ]
+											: []),
 									]}
 									render={({ data }) =>
 										data.type === 'recording' ? (
@@ -185,19 +190,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												recording={data.data}
 											/>
 										) : (
-											<CardBibleBook
-												book={{
-													book_id: 'ENGKJV1/GEN',
-													name: 'Genesis',
-													bible: {
-														abbreviation: 'KJV',
-													},
-													name_short: 'Gen',
-													book_seq: '1',
-													chapters: Array.from(Array(50).keys()),
-													testament: 'OT',
-												}}
-											/>
+											<CardSequence sequence={bibleChapters[0]} />
 										)
 									}
 									key={`item-${recentRecordings.length}`}

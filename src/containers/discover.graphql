@@ -8,7 +8,11 @@ query getDiscoverPageData($language: Language!) {
 			...cardRecording
 		}
 	}
-	trendingTeachings: popularRecordings(language: $language, first: 6) {
+	trendingTeachings: popularRecordings(
+		language: $language
+		contentType: SERMON
+		first: 6
+	) {
 		nodes {
 			recording {
 				...cardRecording

@@ -9,6 +9,7 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { BaseColors } from '@lib/constants';
+import { SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 
@@ -35,7 +36,9 @@ export default function Miniplayer(): JSX.Element | null {
 		sequenceLine = (
 			<div className={styles.series} aria-label="series">
 				<Icon width={13} height={13} />
-				{recording.sequence.title}
+				{recording.sequence.contentType === SequenceContentType.BibleBook
+					? recording.collection?.title
+					: recording.sequence.title}
 			</div>
 		);
 	}

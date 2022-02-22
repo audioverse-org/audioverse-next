@@ -22,4 +22,13 @@ query getHomeStaticProps($language: Language!) {
 			...cardPost
 		}
 	}
+	bibleChapters: sequences(
+		language: $language
+		first: 1
+		contentType: BIBLE_BOOK
+	) {
+		nodes {
+			...cardSequence
+		}
+	}
 }

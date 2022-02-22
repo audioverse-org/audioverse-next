@@ -182,6 +182,25 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		blogPosts: {
 			nodes: [post],
 		},
+		bibleChapters: {
+			nodes: [
+				{
+					title: 'Genesis',
+					canonicalPath: 'the_sequence_path',
+					contentType: SequenceContentType.BibleBook,
+					speakers: {
+						nodes: [],
+					},
+					allRecordings: {
+						nodes: [
+							{
+								canonicalPath: 'the_canonical_path',
+							},
+						],
+					},
+				},
+			],
+		},
 	}
 );
 
