@@ -53,11 +53,13 @@ export default function CardSequence({
 		useIsSequenceFavorited(sequence.id);
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 	const router = useRouter();
+	const isBibleBook = sequence.contentType === SequenceContentType.BibleBook;
 
 	const {
 		contentType,
 		allRecordings,
 		canonicalPath,
+		collection,
 		duration,
 		summary,
 		title,
@@ -85,6 +87,15 @@ export default function CardSequence({
 					id: 'cardSequence_audiobookType',
 					defaultMessage: 'Book',
 				}),
+				labelColor: BaseColors.WHITE,
+			},
+			[SequenceContentType.BibleBook]: {
+				Icon: BookIcon,
+				accentColor: BaseColors.SALMON,
+				backgroundColor: BaseColors.BIBLE_H,
+				iconColor: BaseColors.WHITE,
+				textColor: BaseColors.LIGHT_TONE,
+				label: collection?.title.includes('New') ? 'NKJV Bible' : 'KJV Bible',
 				labelColor: BaseColors.WHITE,
 			},
 			[SequenceContentType.MusicAlbum]: {
@@ -148,70 +159,97 @@ export default function CardSequence({
 					}
 					className={clsx(
 						styles.title,
-						contentType === SequenceContentType.Audiobook &&
+						(contentType === SequenceContentType.Audiobook || isBibleBook) &&
 							styles.audiobookTitle,
+						isBibleBook && styles.bibleBookTitle,
 						contentType === SequenceContentType.StorySeason && styles.storyTitle
 					)}
 				>
 					{title}
 				</Heading2>
+				{isBibleBook && (
+					<Heading6
+						loose
+						sans
+						uppercase
+						ultralight
+						className={styles.bibleReadBy}
+					>
+						<FormattedMessage
+							id="cardSequence_readByLabel"
+							defaultMessage="Read By {name}"
+							values={{
+								name: (speakers.nodes || [])[0]?.name,
+							}}
+						/>
+					</Heading6>
+				)}
 				{summary && (
 					<div
 						dangerouslySetInnerHTML={{ __html: summary }}
 						className={styles.kicker}
 					></div>
 				)}
-				{!!persons.length && (
-					<div className={styles.persons}>
-						{(personsExpanded ? persons : persons.slice(0, 2)).map((p) => (
-							<PersonLockup
-								person={p}
-								textColor={textColor}
-								hoverColor={accentColor}
-								key={p.canonicalPath}
-								isLinked
-								isOptionalLink
-								small
-							/>
-						))}
-						{persons.length > 2 && (
-							<div
-								className={styles.morePersons}
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									setPersonsExpanded(!personsExpanded);
-								}}
-							>
-								{personsExpanded ? <IconClosure /> : <IconDisclosure />}
-								<Heading6 sans loose unpadded uppercase>
-									{personsExpanded ? (
-										<FormattedMessage
-											id="molecule-teaseRecording__lessPersons"
-											defaultMessage="Show less"
-										/>
-									) : (
-										<FormattedMessage
-											id="molecule-teaseRecording__morePersons"
-											defaultMessage="{count} more"
-											values={{
-												count: persons.length - 2,
-											}}
-										/>
-									)}
-								</Heading6>
-							</div>
-						)}
-					</div>
-				)}
+				{!!persons.length &&
+					sequence.contentType !== SequenceContentType.BibleBook && (
+						<div className={styles.persons}>
+							{(personsExpanded ? persons : persons.slice(0, 2)).map((p) => (
+								<PersonLockup
+									person={p}
+									textColor={textColor}
+									hoverColor={accentColor}
+									key={p.canonicalPath}
+									isLinked
+									isOptionalLink
+									small
+								/>
+							))}
+							{persons.length > 2 && (
+								<div
+									className={styles.morePersons}
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										setPersonsExpanded(!personsExpanded);
+									}}
+								>
+									{personsExpanded ? <IconClosure /> : <IconDisclosure />}
+									<Heading6 sans loose unpadded uppercase>
+										{personsExpanded ? (
+											<FormattedMessage
+												id="molecule-teaseRecording__lessPersons"
+												defaultMessage="Show less"
+											/>
+										) : (
+											<FormattedMessage
+												id="molecule-teaseRecording__morePersons"
+												defaultMessage="{count} more"
+												values={{
+													count: persons.length - 2,
+												}}
+											/>
+										)}
+									</Heading6>
+								</div>
+							)}
+						</div>
+					)}
 			</div>
 			<Heading6 sans unpadded uppercase loose className={styles.partsLabel}>
-				<FormattedMessage
-					id="cardSequence_sequenceLabel"
-					defaultMessage="{count} parts"
-					description="Card sequence recording count label"
-					values={{ count: allRecordings.aggregate?.count }}
-				/>
+				{isBibleBook ? (
+					<FormattedMessage
+						id="cardSequence_chaptersLabel"
+						defaultMessage="{count} chapters"
+						values={{ count: allRecordings.aggregate?.count }}
+					/>
+				) : (
+					<FormattedMessage
+						id="cardSequence_sequenceLabel"
+						defaultMessage="{count} parts"
+						description="Card sequence recording count label"
+						values={{ count: allRecordings.aggregate?.count }}
+					/>
+				)}
 			</Heading6>
 			<div
 				className={clsx(styles.details, isFavorited && styles.detailsWithLike)}
@@ -255,6 +293,9 @@ export default function CardSequence({
 		(isHovered || isSubHovered) && styles.otherHovered,
 		styles[contentType]
 	);
+	const linkUrl =
+		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||
+		canonicalPath;
 	return (
 		<Card>
 			{slim ? (
@@ -263,13 +304,13 @@ export default function CardSequence({
 					onClick={(e) => {
 						e.preventDefault();
 						e.stopPropagation();
-						router.push(canonicalPath);
+						router.push(linkUrl);
 					}}
 				>
 					{inner}
 				</div>
 			) : (
-				<Link href={canonicalPath}>
+				<Link href={linkUrl}>
 					<a className={className}>{inner}</a>
 				</Link>
 			)}

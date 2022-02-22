@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -7,6 +8,7 @@ import HorizontalRule from '@components/atoms/horizontalRule';
 import withFailStates from '@components/HOCs/withFailStates';
 import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
 import CardBibleBook from '@components/molecules/card/bibleBook';
+import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
@@ -15,15 +17,16 @@ import DefinitionList, {
 import Tease from '@components/molecules/tease';
 import { IBibleVersion } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
+import { GetAudiobibleVersionDataQuery } from '@lib/generated/graphql';
 
 import styles from './version.module.scss';
 
 export interface VersionProps {
-	version: IBibleVersion;
+	version: IBibleVersion | GetAudiobibleVersionDataQuery['collection'];
 }
 
 function Version({ version }: Must<VersionProps>): JSX.Element {
-	const { books, title, description, sponsor } = version;
+	const { title, description, sponsor } = version;
 
 	const details: IDefinitionListTerm[] = [];
 	if (description) {
@@ -37,26 +40,63 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 			definition: <p>{description}</p>,
 		});
 	}
-	details.push({
-		term: (
-			<FormattedMessage
-				id="bibleVersion__sponsorLabel"
-				defaultMessage="Sponsor"
-			/>
-		),
-		definition: (
-			<p>
-				<a
-					href={sponsor.url}
-					target="_blank"
-					className="decorated hover--salmon"
-					rel="noreferrer"
-				>
-					{sponsor.title}
-				</a>
-			</p>
-		),
-	});
+	if (sponsor && 'canonicalPath' in sponsor && sponsor.canonicalPath) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="bibleVersion__sponsorLabel"
+					defaultMessage="Sponsor"
+				/>
+			),
+			definition: (
+				<Link href={sponsor.canonicalPath}>
+					<a className="decorated hover--salmon">{sponsor.title}</a>
+				</Link>
+			),
+		});
+		if (sponsor.website) {
+			details.push({
+				term: (
+					<FormattedMessage
+						id="bibleVersion__websiteLabel"
+						defaultMessage="Website"
+					/>
+				),
+				definition: (
+					<Link href={sponsor.website}>
+						<a
+							className="decorated hover--salmon"
+							target="_blank"
+							rel="nofollow noreferrer"
+						>
+							{sponsor.website}
+						</a>
+					</Link>
+				),
+			});
+		}
+	} else if (sponsor?.website) {
+		details.push({
+			term: (
+				<FormattedMessage
+					id="bibleVersion__sponsorLabel"
+					defaultMessage="Sponsor"
+				/>
+			),
+			definition: (
+				<p>
+					<a
+						href={sponsor.website}
+						target="_blank"
+						className="decorated hover--salmon"
+						rel="noreferrer"
+					>
+						{sponsor.title}
+					</a>
+				</p>
+			),
+		});
+	}
 
 	return (
 		<Tease className={styles.container}>
@@ -73,9 +113,13 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 				<DefinitionList terms={details} textColor={BaseColors.LIGHT_TONE} />
 			</ContentWidthLimiter>
 			<CardGroup>
-				{books.map((book) => (
-					<CardBibleBook book={book} key={book.book_id} />
-				))}
+				{'books' in version
+					? version.books.map((book) => (
+							<CardBibleBook book={book} key={book.book_id} />
+					  ))
+					: version.sequences.nodes?.map((s) => (
+							<CardSequence sequence={s} key={s.id} />
+					  ))}
 			</CardGroup>
 		</Tease>
 	);

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import clsx from 'clsx';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Alert from '@components/atoms/alert';
+import { RecordingContentType } from '@lib/generated/graphql';
 
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-
-import Button from './button';
 import styles from './transcript.module.scss';
 
 // @see https://stackoverflow.com/a/37400795/168581
@@ -29,13 +28,12 @@ function splitText(text: string): string[] {
 
 export default function Transcript({
 	text,
-	useInverse,
+	recordingContentType,
 }: {
 	text: string;
-	useInverse: boolean;
+	recordingContentType: RecordingContentType;
 }): JSX.Element {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const isManuallyCreatedTranscript = text.includes('<p>');
+	const isManuallyCreatedTranscript = text.includes('<p');
 	const __html = isManuallyCreatedTranscript
 		? text
 		: splitText(text)
@@ -43,50 +41,33 @@ export default function Transcript({
 				.join('');
 
 	return (
-		<div className={`${styles.base} ${isOpen ? styles.open : ''}`}>
-			<Button
-				type={useInverse ? 'secondaryInverse' : 'secondary'}
-				onClick={() => setIsOpen(!isOpen)}
-				text={
-					isOpen ? (
+		<>
+			{!isManuallyCreatedTranscript && (
+				<Alert className={styles.alert}>
+					<p>
 						<FormattedMessage
-							id="molecule-transcript__labelClose"
-							defaultMessage="Hide Transcript"
-							description="transcript button label close"
+							id="molecule-transcript__disclaimer"
+							defaultMessage="This transcript may be automatically generated."
+							description="transcript disclaimer"
 						/>
-					) : (
+					</p>
+					<p>
 						<FormattedMessage
-							id="molecule-transcript__labelOpen"
-							defaultMessage="Read Transcript"
-							description="transcript button label open"
+							id="molecule-transcript__help"
+							defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
+							description="transcript assistance request"
 						/>
-					)
-				}
-				IconLeft={IconDisclosure}
-			/>
-			{isOpen && (
-				<>
-					{!isManuallyCreatedTranscript && (
-						<Alert className={styles.alert}>
-							<p>
-								<FormattedMessage
-									id="molecule-transcript__disclaimer"
-									defaultMessage="This transcript may be automatically generated."
-									description="transcript disclaimer"
-								/>
-							</p>
-							<p>
-								<FormattedMessage
-									id="molecule-transcript__help"
-									defaultMessage="Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org"
-									description="transcript assistance request"
-								/>
-							</p>
-						</Alert>
-					)}
-					<div className={styles.text} dangerouslySetInnerHTML={{ __html }} />
-				</>
+					</p>
+				</Alert>
 			)}
-		</div>
+			<div
+				className={clsx(
+					styles.text,
+					recordingContentType === RecordingContentType.BibleChapter &&
+						styles.bibleText
+				)}
+				dangerouslySetInnerHTML={{ __html }}
+			/>
+		</>
 	);
 }

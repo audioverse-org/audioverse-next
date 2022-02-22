@@ -11,6 +11,9 @@ fragment cardRecordingSequenceHat on Recording {
 				count
 			}
 		}
+		collection {
+			title
+		}
 	}
 	writers: persons(role: WRITER) {
 		...personLockup

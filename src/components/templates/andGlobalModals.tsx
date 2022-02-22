@@ -5,9 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import Button from '@components/molecules/button';
-import LoginForm from '@components/molecules/loginForm';
-import SocialLogin from '@components/molecules/socialLogin';
-import RegisterForm from '@components/organisms/registerForm';
 import { refetchUserQueries } from '@lib/api';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
@@ -26,6 +23,10 @@ export const GlobalModalsContext = React.createContext<GlobalModalsContextType>(
 );
 
 const LazyModal = dynamic(() => import('../organisms/modal'));
+const LazyModalRegisterForm = dynamic(
+	() => import('../organisms/modalRegisterForm')
+);
+const LazyModalLoginForm = dynamic(() => import('../organisms/modalLoginForm'));
 
 interface AndGlobalModalsProps {
 	children: ReactNode;
@@ -87,42 +88,23 @@ export default function AndGlobalModals({
 				);
 			content =
 				authState === 'register' ? (
-					<>
-						<SocialLogin
-							onSuccess={async () => {
-								handleClose();
-								onConfirm && onConfirm();
-								await refetchUserQueries(queryClient);
-							}}
-						/>
-						<RegisterForm
-							showLogin={() => setAuthState('login')}
-							onSuccess={async () => {
-								handleClose();
-								onConfirm && onConfirm();
-								await refetchUserQueries(queryClient);
-							}}
-							hideGuestButton
-						/>
-					</>
+					<LazyModalRegisterForm
+						onSuccess={async () => {
+							handleClose();
+							onConfirm && onConfirm();
+							await refetchUserQueries(queryClient);
+						}}
+						showLogin={() => setAuthState('login')}
+					/>
 				) : authState === 'login' ? (
-					<>
-						<SocialLogin
-							onSuccess={async () => {
-								handleClose();
-								onConfirm && onConfirm();
-								await refetchUserQueries(queryClient);
-							}}
-						/>
-						<LoginForm
-							showRegister={() => setAuthState('register')}
-							onSuccess={() => {
-								handleClose();
-								onConfirm && onConfirm();
-							}}
-							hideGuestButton
-						/>
-					</>
+					<LazyModalLoginForm
+						onSuccess={async () => {
+							handleClose();
+							onConfirm && onConfirm();
+							await refetchUserQueries(queryClient);
+						}}
+						showRegister={() => setAuthState('register')}
+					/>
 				) : (
 					<>
 						<p>
