@@ -1,5 +1,0 @@
-fragment cardBibleChapter on BibleChapter {
-	id
-	title
-	url
-}

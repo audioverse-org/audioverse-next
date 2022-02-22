@@ -144,6 +144,7 @@ export enum BaseColors {
 	LIGHT_TONE = 'lightTone',
 	MID_TONE = 'midTone',
 	BIBLE_B = 'bibleB',
+	BIBLE_H = 'bibleH',
 	BOOK_B = 'bookB',
 	BOOK_H = 'bookH',
 	SONG_B = 'songB',

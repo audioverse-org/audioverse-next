@@ -28,7 +28,7 @@ const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 			url: 'sponsor_image',
 		},
 	},
-	conferences: {
+	collections: {
 		nodes: [
 			{
 				id: 'the_conference_id',

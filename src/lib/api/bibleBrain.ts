@@ -13,7 +13,7 @@ export interface IBibleVersion {
 	books: IBibleBook[];
 	sponsor: {
 		title: string;
-		url: string;
+		website: string;
 	};
 }
 export interface IBible {
@@ -65,11 +65,6 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 
 	return [
 		{
-			id: 'ENGKJV1',
-			title: 'King James Version',
-			abbreviation: 'KJV',
-		},
-		{
 			id: 'ENGKJV2',
 			title: 'King James Version (Dramatized)',
 			abbreviation: 'KJV',
@@ -83,7 +78,7 @@ export async function getBibles(): Promise<IBibleVersion[] | null> {
 		})),
 		sponsor: {
 			title: 'Faith Comes By Hearing',
-			url: 'http://www.faithcomesbyhearing.com/',
+			website: 'http://www.faithcomesbyhearing.com/',
 		},
 		...v,
 	}));

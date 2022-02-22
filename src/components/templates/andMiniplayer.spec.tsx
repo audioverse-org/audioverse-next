@@ -71,6 +71,7 @@ describe('miniplayer template', () => {
 									],
 									audioFiles: [],
 									videoStreams: [],
+									collection: null,
 								});
 								c.play();
 							}}

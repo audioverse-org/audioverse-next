@@ -1,20 +1,27 @@
 import React from 'react';
 
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { renderWithIntl } from '@lib/test/helpers';
+import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
+import { buildLoader, renderWithIntl } from '@lib/test/helpers';
 import Version, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles/[id]';
+} from '@pages/[language]/bibles/[id]/[[...slugs]]';
 
 jest.mock('@lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps({
-		params: { id: 'the_version_id' },
+		params: { id: 'ENGKJV2' },
 	})) as any;
 	return renderWithIntl(<Version {...props} />);
 }
+
+const loadData = buildLoader(GetAudiobibleVersionsDataDocument, {
+	collections: {
+		nodes: [],
+	},
+});
 
 function loadPageData() {
 	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
@@ -23,7 +30,7 @@ function loadPageData() {
 		title: 'the_version_title',
 		sponsor: {
 			title: 'FCBH',
-			url: '',
+			website: '',
 		},
 		books: [
 			{
@@ -54,6 +61,8 @@ describe('version detail page', () => {
 	});
 
 	it('generates paths', async () => {
+		loadData();
+
 		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
 			{
 				id: 'the_version_id',
@@ -61,7 +70,7 @@ describe('version detail page', () => {
 				title: 'the_version_title',
 				sponsor: {
 					title: 'FCBH',
-					url: '',
+					website: '',
 				},
 				books: [],
 			} as bibleBrain.IBibleVersion,

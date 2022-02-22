@@ -18,9 +18,15 @@ fragment cardSequence on Sequence {
 			...personLockup
 		}
 	}
-	allRecordings: recordings(first: 3) {
+	allRecordings: recordings(first: 1) {
+		nodes {
+			canonicalPath(useFuturePath: true)
+		}
 		aggregate {
 			count
 		}
+	}
+	collection {
+		title
 	}
 }
