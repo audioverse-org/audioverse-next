@@ -355,7 +355,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									</div>
 									<form
 										className={styles.newsletterBody}
-										action="https://audioverseministry.activehosted.com/proc.php"
+										action="https://audioverse.activehosted.com/proc.php"
 										method="POST"
 										target="_blank"
 									>
@@ -369,7 +369,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										<input
 											type="hidden"
 											name="or"
-											value="445d2cef308b6a40ab929cfde6f32b3c"
+											value="e2e4794f66cb49fa14b643a5f9d6536b"
 										/>
 										<div className={styles.newsletterFieldRow}>
 											<Input
