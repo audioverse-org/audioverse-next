@@ -1,11 +1,7 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
-import Button from '@components/molecules/button';
 import Slider from '@components/organisms/slider';
 import { TestimoniesFragment } from '@lib/generated/graphql';
-import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
 
@@ -14,8 +10,6 @@ interface TestimoniesProps {
 }
 
 const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
-	const languageRoute = useLanguageRoute();
-
 	return (
 		<Slider>
 			{testimonies.map((t) => (
@@ -26,28 +20,6 @@ const Testimonies = ({ testimonies }: TestimoniesProps): JSX.Element => {
 					</footer>
 				</blockquote>
 			))}
-			<div className={styles.ctas}>
-				<Button
-					type="super"
-					text={
-						<FormattedMessage
-							id="testimonies__seeAll"
-							defaultMessage="See all Testimonies"
-						/>
-					}
-					href={makeTestimoniesRoute(languageRoute)}
-				/>
-				<Button
-					type="secondary"
-					text={
-						<FormattedMessage
-							id="testimonies__submitTestimony"
-							defaultMessage="Submit a Testimony"
-						/>
-					}
-					href={makeTestimonySubmitRoute(languageRoute)}
-				/>
-			</div>
 		</Slider>
 	);
 };
