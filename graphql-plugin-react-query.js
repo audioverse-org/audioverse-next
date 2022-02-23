@@ -1,13 +1,8 @@
 const {
 	ReactQueryVisitor,
 } = require('@graphql-codegen/typescript-react-query');
-const {
-	concatAST,
-	Kind,
-	visit,
-	print,
-	stripIgnoredCharacters,
-} = require('graphql');
+const { concatAST, Kind, print, stripIgnoredCharacters } = require('graphql');
+const { oldVisit } = require('@graphql-codegen/plugin-helpers');
 
 class AVReactQueryVisitor extends ReactQueryVisitor {
 	constructor(schema, fragments, rawConfig, documents) {
@@ -67,7 +62,7 @@ module.exports = {
 			config,
 			documents
 		);
-		const visitorResult = visit(allAst, { leave: visitor });
+		const visitorResult = oldVisit(allAst, { leave: visitor });
 
 		return {
 			prepend: [...visitor.getImports(), visitor.getFetcherImplementation()],

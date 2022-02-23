@@ -13599,7 +13599,9 @@ export const useGetWithAuthGuardDataQuery = <
 	options?: UseQueryOptions<GetWithAuthGuardDataQuery, TError, TData>
 ) =>
 	useQuery<GetWithAuthGuardDataQuery, TError, TData>(
-		['getWithAuthGuardData', variables],
+		variables === undefined
+			? ['getWithAuthGuardData']
+			: ['getWithAuthGuardData', variables],
 		graphqlFetcher<
 			GetWithAuthGuardDataQuery,
 			GetWithAuthGuardDataQueryVariables
@@ -13626,6 +13628,7 @@ export const useLoginForgotPasswordMutation = <
 		LoginForgotPasswordMutationVariables,
 		TContext
 	>(
+		['loginForgotPassword'],
 		(variables?: LoginForgotPasswordMutationVariables) =>
 			graphqlFetcher<
 				LoginForgotPasswordMutation,
@@ -13667,7 +13670,9 @@ export const useGetNotFoundPageDataQuery = <
 	options?: UseQueryOptions<GetNotFoundPageDataQuery, TError, TData>
 ) =>
 	useQuery<GetNotFoundPageDataQuery, TError, TData>(
-		['getNotFoundPageData', variables],
+		variables === undefined
+			? ['getNotFoundPageData']
+			: ['getNotFoundPageData', variables],
 		graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(
 			GetNotFoundPageDataDocument,
 			variables
@@ -13712,6 +13717,7 @@ export const useRecordingPlaybackProgressSetMutation = <
 		RecordingPlaybackProgressSetMutationVariables,
 		TContext
 	>(
+		['recordingPlaybackProgressSet'],
 		(variables?: RecordingPlaybackProgressSetMutationVariables) =>
 			graphqlFetcher<
 				RecordingPlaybackProgressSetMutation,
@@ -13793,6 +13799,7 @@ export const useAddAccountPlaylistMutation = <
 		AddAccountPlaylistMutationVariables,
 		TContext
 	>(
+		['addAccountPlaylist'],
 		(variables?: AddAccountPlaylistMutationVariables) =>
 			graphqlFetcher<
 				AddAccountPlaylistMutation,
@@ -13811,7 +13818,9 @@ export const useGetAccountPreferencesDataQuery = <
 	options?: UseQueryOptions<GetAccountPreferencesDataQuery, TError, TData>
 ) =>
 	useQuery<GetAccountPreferencesDataQuery, TError, TData>(
-		['getAccountPreferencesData', variables],
+		variables === undefined
+			? ['getAccountPreferencesData']
+			: ['getAccountPreferencesData', variables],
 		graphqlFetcher<
 			GetAccountPreferencesDataQuery,
 			GetAccountPreferencesDataQueryVariables
@@ -13838,6 +13847,7 @@ export const useUpdateAccountPreferencesMutation = <
 		UpdateAccountPreferencesMutationVariables,
 		TContext
 	>(
+		['updateAccountPreferences'],
 		(variables?: UpdateAccountPreferencesMutationVariables) =>
 			graphqlFetcher<
 				UpdateAccountPreferencesMutation,
@@ -13856,7 +13866,9 @@ export const useGetProfileDataQuery = <
 	options?: UseQueryOptions<GetProfileDataQuery, TError, TData>
 ) =>
 	useQuery<GetProfileDataQuery, TError, TData>(
-		['getProfileData', variables],
+		variables === undefined
+			? ['getProfileData']
+			: ['getProfileData', variables],
 		graphqlFetcher<GetProfileDataQuery, GetProfileDataQueryVariables>(
 			GetProfileDataDocument,
 			variables
@@ -13883,6 +13895,7 @@ export const useUpdateProfileDataMutation = <
 		UpdateProfileDataMutationVariables,
 		TContext
 	>(
+		['updateProfileData'],
 		(variables?: UpdateProfileDataMutationVariables) =>
 			graphqlFetcher<
 				UpdateProfileDataMutation,
@@ -13907,6 +13920,7 @@ export const useDeleteAccountMutation = <TError = unknown, TContext = unknown>(
 		DeleteAccountMutationVariables,
 		TContext
 	>(
+		['deleteAccount'],
 		(variables?: DeleteAccountMutationVariables) =>
 			graphqlFetcher<DeleteAccountMutation, DeleteAccountMutationVariables>(
 				DeleteAccountDocument,
@@ -13926,6 +13940,7 @@ export const useRegisterMutation = <TError = unknown, TContext = unknown>(
 	>
 ) =>
 	useMutation<RegisterMutation, TError, RegisterMutationVariables, TContext>(
+		['register'],
 		(variables?: RegisterMutationVariables) =>
 			graphqlFetcher<RegisterMutation, RegisterMutationVariables>(
 				RegisterDocument,
@@ -13950,6 +13965,7 @@ export const useRegisterSocialMutation = <TError = unknown, TContext = unknown>(
 		RegisterSocialMutationVariables,
 		TContext
 	>(
+		['registerSocial'],
 		(variables?: RegisterSocialMutationVariables) =>
 			graphqlFetcher<RegisterSocialMutation, RegisterSocialMutationVariables>(
 				RegisterSocialDocument,
@@ -13974,6 +13990,7 @@ export const useResetPasswordMutation = <TError = unknown, TContext = unknown>(
 		ResetPasswordMutationVariables,
 		TContext
 	>(
+		['resetPassword'],
 		(variables?: ResetPasswordMutationVariables) =>
 			graphqlFetcher<ResetPasswordMutation, ResetPasswordMutationVariables>(
 				ResetPasswordDocument,
@@ -14463,6 +14480,7 @@ export const useSubmitContactPageMutation = <
 		SubmitContactPageMutationVariables,
 		TContext
 	>(
+		['submitContactPage'],
 		(variables?: SubmitContactPageMutationVariables) =>
 			graphqlFetcher<
 				SubmitContactPageMutation,
@@ -14879,6 +14897,7 @@ export const useSubmitMediaReleaseFormMutation = <
 		SubmitMediaReleaseFormMutationVariables,
 		TContext
 	>(
+		['submitMediaReleaseForm'],
 		(variables?: SubmitMediaReleaseFormMutationVariables) =>
 			graphqlFetcher<
 				SubmitMediaReleaseFormMutation,
@@ -15839,6 +15858,7 @@ export const useCollectionFavoriteMutation = <
 		CollectionFavoriteMutationVariables,
 		TContext
 	>(
+		['collectionFavorite'],
 		(variables?: CollectionFavoriteMutationVariables) =>
 			graphqlFetcher<
 				CollectionFavoriteMutation,
@@ -15884,6 +15904,7 @@ export const useCollectionUnfavoriteMutation = <
 		CollectionUnfavoriteMutationVariables,
 		TContext
 	>(
+		['collectionUnfavorite'],
 		(variables?: CollectionUnfavoriteMutationVariables) =>
 			graphqlFetcher<
 				CollectionUnfavoriteMutation,
@@ -15903,6 +15924,7 @@ export const useLoginMutation = <TError = unknown, TContext = unknown>(
 	>
 ) =>
 	useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
+		['login'],
 		(variables?: LoginMutationVariables) =>
 			graphqlFetcher<LoginMutation, LoginMutationVariables>(
 				LoginDocument,
@@ -15927,6 +15949,7 @@ export const usePersonFavoriteMutation = <TError = unknown, TContext = unknown>(
 		PersonFavoriteMutationVariables,
 		TContext
 	>(
+		['personFavorite'],
 		(variables?: PersonFavoriteMutationVariables) =>
 			graphqlFetcher<PersonFavoriteMutation, PersonFavoriteMutationVariables>(
 				PersonFavoriteDocument,
@@ -15972,6 +15995,7 @@ export const usePersonUnfavoriteMutation = <
 		PersonUnfavoriteMutationVariables,
 		TContext
 	>(
+		['personUnfavorite'],
 		(variables?: PersonUnfavoriteMutationVariables) =>
 			graphqlFetcher<
 				PersonUnfavoriteMutation,
@@ -15999,6 +16023,7 @@ export const useRecordingFavoriteMutation = <
 		RecordingFavoriteMutationVariables,
 		TContext
 	>(
+		['recordingFavorite'],
 		(variables?: RecordingFavoriteMutationVariables) =>
 			graphqlFetcher<
 				RecordingFavoriteMutation,
@@ -16044,6 +16069,7 @@ export const useRecordingUnfavoriteMutation = <
 		RecordingUnfavoriteMutationVariables,
 		TContext
 	>(
+		['recordingUnfavorite'],
 		(variables?: RecordingUnfavoriteMutationVariables) =>
 			graphqlFetcher<
 				RecordingUnfavoriteMutation,
@@ -16071,6 +16097,7 @@ export const useSequenceFavoriteMutation = <
 		SequenceFavoriteMutationVariables,
 		TContext
 	>(
+		['sequenceFavorite'],
 		(variables?: SequenceFavoriteMutationVariables) =>
 			graphqlFetcher<
 				SequenceFavoriteMutation,
@@ -16116,6 +16143,7 @@ export const useSequenceUnfavoriteMutation = <
 		SequenceUnfavoriteMutationVariables,
 		TContext
 	>(
+		['sequenceUnfavorite'],
 		(variables?: SequenceUnfavoriteMutationVariables) =>
 			graphqlFetcher<
 				SequenceUnfavoriteMutation,
@@ -16143,6 +16171,7 @@ export const useSponsorFavoriteMutation = <
 		SponsorFavoriteMutationVariables,
 		TContext
 	>(
+		['sponsorFavorite'],
 		(variables?: SponsorFavoriteMutationVariables) =>
 			graphqlFetcher<SponsorFavoriteMutation, SponsorFavoriteMutationVariables>(
 				SponsorFavoriteDocument,
@@ -16188,6 +16217,7 @@ export const useSponsorUnfavoriteMutation = <
 		SponsorUnfavoriteMutationVariables,
 		TContext
 	>(
+		['sponsorUnfavorite'],
 		(variables?: SponsorUnfavoriteMutationVariables) =>
 			graphqlFetcher<
 				SponsorUnfavoriteMutation,
@@ -16212,6 +16242,7 @@ export const useAddPlaylistMutation = <TError = unknown, TContext = unknown>(
 		AddPlaylistMutationVariables,
 		TContext
 	>(
+		['addPlaylist'],
 		(variables?: AddPlaylistMutationVariables) =>
 			graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(
 				AddPlaylistDocument,
