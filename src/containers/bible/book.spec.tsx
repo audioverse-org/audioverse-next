@@ -153,6 +153,9 @@ describe('Bible book detail page', () => {
 	});
 
 	it('includes player', async () => {
+		window.fetch = jest.fn().mockReturnValueOnce({
+			catch: () => undefined,
+		});
 		loadPageData();
 
 		await act(async () => {
@@ -160,5 +163,6 @@ describe('Bible book detail page', () => {
 			userEvent.click(getAllByLabelText('play')[0]);
 		});
 		expect(videojs).toBeCalled();
+		expect(window.fetch).toBeCalled();
 	});
 });
