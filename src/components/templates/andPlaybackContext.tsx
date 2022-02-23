@@ -366,7 +366,10 @@ export default function AndPlaybackContext({
 			const resetPlayer = () => {
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
 				if (logUrl) {
-					fetch(logUrl).catch(() => {
+					fetch(logUrl, {
+						method: 'HEAD',
+						mode: 'no-cors',
+					}).catch(() => {
 						// We don't want Promise rejections here to clutter the console
 					});
 				}
