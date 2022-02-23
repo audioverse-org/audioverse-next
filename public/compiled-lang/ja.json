@@ -791,24 +791,6 @@
       "value": "お問い合わせ"
     }
   ],
-  "container-sermonList__filterLabelAll": [
-    {
-      "type": 0,
-      "value": "全て"
-    }
-  ],
-  "container-sermonList__filterLabelAudio": [
-    {
-      "type": 0,
-      "value": "オーディオのみ"
-    }
-  ],
-  "container-sermonList__filterLabelVideo": [
-    {
-      "type": 0,
-      "value": "動画"
-    }
-  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
@@ -1359,7 +1341,7 @@
       "value": "技術的内容のお問い合わせ"
     }
   ],
-  "header__navItemContact-testimony": [
+  "header__navItemContact-testimonial": [
     {
       "type": 0,
       "value": "個人的体験の証を共有"
@@ -1753,7 +1735,7 @@
       "value": "AudioVerseを利用している方々の声"
     }
   ],
-  "home__testimoniesTitle": [
+  "home__testimonialsTitle": [
     {
       "type": 0,
       "value": "証し"
@@ -3171,6 +3153,30 @@
       "value": "プロフィール"
     }
   ],
+  "recordingHasVideoFilter__filter": [
+    {
+      "type": 0,
+      "value": "絞る"
+    }
+  ],
+  "recordingHasVideoFilter__filterAll": [
+    {
+      "type": 0,
+      "value": "全て"
+    }
+  ],
+  "recordingHasVideoFilter__filterAudio": [
+    {
+      "type": 0,
+      "value": "オーディオのみ"
+    }
+  ],
+  "recordingHasVideoFilter__filterVideo": [
+    {
+      "type": 0,
+      "value": "動画"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3541,12 +3547,6 @@
     {
       "type": 0,
       "value": "全てのレッスン"
-    }
-  ],
-  "sermonsList__filter": [
-    {
-      "type": 0,
-      "value": "絞る"
     }
   ],
   "socialLogin__loginFacebookButton": [
@@ -4265,7 +4265,7 @@
       "value": "あなたのストーリーをシェアして下さい！"
     }
   ],
-  "testimonies__submitTestimony": [
+  "testimonies__submitTestimonial": [
     {
       "type": 0,
       "value": "個人体験の証を投稿"
