@@ -5,7 +5,7 @@ query getDiscoverCollectionsPageData($language: Language!) {
 	persons(
 		language: $language
 		first: 3
-		orderBy: [{ field: RECORDING_COUNT, direction: DESC }]
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
 	) {
 		nodes {
 			...cardPerson
@@ -32,7 +32,7 @@ query getDiscoverCollectionsPageData($language: Language!) {
 	sponsors(
 		language: $language
 		first: 3
-		orderBy: [{ field: RECORDING_COUNT, direction: DESC }]
+		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
 	) {
 		nodes {
 			...cardSponsor
