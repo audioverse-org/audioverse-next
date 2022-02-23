@@ -271,9 +271,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							<>
 								<Heading1 className={styles.testimoniesHeading}>
 									<FormattedMessage
-										id="home__testimoniesTitle"
-										defaultMessage="Testimonies"
-										description="Testimonies slider title"
+										id="home__testimonialsTitle"
+										defaultMessage="Testimonials"
+										description="Testimonials slider title"
 									/>
 								</Heading1>
 								<Testimonies testimonies={testimonies} />

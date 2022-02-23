@@ -250,16 +250,16 @@
   "conferenceListPage__title": {
     "string": "Конференции"
   },
-  "container-sermonList__filterLabelAll": {
-    "comment": "sermon list page filter all",
+  "recordingHasVideoFilter__filterAll": {
+    "comment": "recording has video filter all",
     "string": "Все"
   },
-  "container-sermonList__filterLabelAudio": {
-    "comment": "sermon list page filter audio",
+  "recordingHasVideoFilter__filterAudio": {
+    "comment": "recording has video filter audio",
     "string": "Только аудио"
   },
-  "container-sermonList__filterLabelVideo": {
-    "comment": "sermon list page filter video",
+  "recordingHasVideoFilter__filterVideo": {
+    "comment": "recording has video filter video",
     "string": "Видео"
   },
   "copyrightInfos__multipleCopyrightExplanation": {
@@ -567,7 +567,7 @@
     "comment": "home page testimonies section text",
     "string": "Отзывы пользователей AudioVerse."
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
     "string": "Отзывы"
   },
@@ -1356,7 +1356,7 @@
   "sermonList__heading": {
     "string": "Все темы"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "Фильтр"
   },
   "socialLogin__loginFacebookButton": {
@@ -1961,7 +1961,7 @@
   "header__navItemContact-support": {
     "string": "Запросить поддержку"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "Поделиться свидетельством"
   },
   "header__navItemContact-twitter": {
@@ -2138,7 +2138,7 @@
   "testimonies__seeAll": {
     "string": "Просмотреть все отзывы"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "Послать отзыв"
   },
   "time__hoursMinutesAndSeconds": {
