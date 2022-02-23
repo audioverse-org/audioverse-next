@@ -366,6 +366,9 @@
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
   },
+  "bibleVersion__websiteLabel": {
+    "string": "Website"
+  },
   "bibleVersions__heading": {
     "string": "Bible"
   },
@@ -410,9 +413,18 @@
   "cardBibleVersion__booksLabel": {
     "string": "66 Books"
   },
+  "cardBibleVersion__showAll": {
+    "string": "Show All"
+  },
+  "cardCollection__showAll": {
+    "string": "Show All"
+  },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
     "string": "{count} teachings"
+  },
+  "cardCollection_booksLabel": {
+    "string": "{count} books"
   },
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
@@ -443,6 +455,12 @@
   },
   "cardSequence_audiobookType": {
     "string": "Book"
+  },
+  "cardSequence_chaptersLabel": {
+    "string": "{count} chapters"
+  },
+  "cardSequence_readByLabel": {
+    "string": "Read By {name}"
   },
   "cardSequence_scriptureSongsType": {
     "string": "Scripture Songs"
@@ -552,6 +570,9 @@
   },
   "collectionType__audiobookSeries": {
     "string": "Book Series"
+  },
+  "collectionType__bibleVersion": {
+    "string": "Bible Version"
   },
   "collectionType__conference": {
     "string": "Conference"
@@ -984,6 +1005,9 @@
   "homePage__tagline": {
     "string": "Sound Doctrine"
   },
+  "homePage__testimoniesIntro": {
+    "string": "See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
+  },
   "home__testimonialsTitle": {
     "comment": "Testimonials slider title",
     "string": "Testimonials"
@@ -1319,6 +1343,9 @@
   "molecule-cardRecordingSequenceHat__addAlbum": {
     "string": "Add Album"
   },
+  "molecule-cardRecordingSequenceHat__addBibleBook": {
+    "string": "Add Book"
+  },
   "molecule-cardRecordingSequenceHat__addBook": {
     "string": "Add Book"
   },
@@ -1333,6 +1360,9 @@
   },
   "molecule-cardRecordingSequenceHat__removeAlbum": {
     "string": "Remove Album"
+  },
+  "molecule-cardRecordingSequenceHat__removeBibleBook": {
+    "string": "Remove Book"
   },
   "molecule-cardRecordingSequenceHat__removeBook": {
     "string": "Remove Book"
@@ -1421,6 +1451,9 @@
   "organism-recording__albumListTitle": {
     "string": "Other Songs in Album"
   },
+  "organism-recording__backToChapterInfo": {
+    "string": "Back to Chapter Info"
+  },
   "organism-recording__buttonLabelNext": {
     "comment": "recording next button label",
     "string": "Next"
@@ -1428,6 +1461,9 @@
   "organism-recording__buttonLabelPrevious": {
     "comment": "recording previous button label",
     "string": "Previous"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
   },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Recording conference info title",
@@ -1440,6 +1476,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "Part {index}"
+  },
+  "organism-recording__readAlongLabel": {
+    "string": "Read Along"
   },
   "organism-recording__readByLabel": {
     "string": "Read by {name}"
@@ -1871,6 +1910,9 @@
   "sequenceType__audiobookTitle": {
     "string": "Book"
   },
+  "sequenceType__bibleBookTitle": {
+    "string": "Bible Book"
+  },
   "sequenceType__musicTrackTitle": {
     "string": "Scripture Songs"
   },
@@ -1919,6 +1961,9 @@
   },
   "sermonDetailPage__openGraphDescription_audiobook": {
     "string": "Audiobook provided by {sponsorName}"
+  },
+  "sermonDetailPage__openGraphDescription_bibleChapter": {
+    "string": "Bible Chapter provided by {sponsorName}"
   },
   "sermonDetailPage__openGraphDescription_music": {
     "string": "Music by {speakerName}"
@@ -2076,14 +2121,8 @@
   "testimonies__intro": {
     "string": "Have a great testimony? Tell us your story!"
   },
-  "testimonies__seeAll": {
-    "string": "See all Testimonials"
-  },
   "testimonies__shareYourStory": {
     "string": "Share your story"
-  },
-  "testimonies__submitTestimonial": {
-    "string": "Submit a Testimonial"
   },
   "testimonies__title": {
     "string": "Testimonials"
