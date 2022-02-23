@@ -5,16 +5,10 @@ fragment cardSponsor on Sponsor {
 	image {
 		url(size: 128)
 	}
-	collections(
-		first: 2
-		orderBy: [{ field: RECORDING_PUBLISHED_AT, direction: DESC }]
-	) {
+	collections {
 		aggregate {
 			count
 		}
-		# nodes {
-		# 	...CollectionCard
-		# } TODO
 	}
 	sequences {
 		aggregate {

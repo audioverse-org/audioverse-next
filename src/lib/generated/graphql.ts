@@ -13524,7 +13524,7 @@ export const CardCollectionFragmentDoc = `
 fragment cardCollection on Collection{id canonicalPath(useFuturePath:true)collectionContentType:contentType title startDate endDate duration image{id url(size:240 cropMode:DEFAULT)}allSequences:sequences{aggregate{count}}allRecordings:recordings(sequenceId:0){aggregate{count}}}
 `;
 export const CardSponsorFragmentDoc = `
-fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections(first:2 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}
+fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}collections{aggregate{count}}sequences{aggregate{count}}recordings{aggregate{count}}}
 `;
 export const CardPersonFragmentDoc = `
 fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}
@@ -15467,7 +15467,7 @@ export const useGetSponsorConferencesPathsDataQuery = <
 		options
 	);
 export const GetSponsorDetailPageDataDocument = `
-query getSponsorDetailPageData($id:ID!){sponsor(id:$id){id title location website description canonicalUrl(useFuturePath:true)language shareUrl image{url(size:128)}collections(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardCollection}}sequences(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardSequence}}recordings(first:3 collectionId:0 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}}}}
+query getSponsorDetailPageData($id:ID!){sponsor(id:$id){id title location website description canonicalUrl(useFuturePath:true)language shareUrl image{url(size:128)}collections(first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardCollection}}sequences(first:3 contentType:null orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardSequence}}recordings(first:3 collectionId:0 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}}}}
 ${CardCollectionFragmentDoc}
 ${CardSequenceFragmentDoc}
 ${PersonLockupFragmentDoc}
