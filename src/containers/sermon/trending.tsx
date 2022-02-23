@@ -6,26 +6,34 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
+import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
 import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
+import { makeDiscoverRoute, makeTrendingSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './trending.module.scss';
 
 export type TrendingTeachingsProps = NonNullable<
 	GetTrendingTeachingsPageDataQuery['recordings']
->;
+> & { filter: string };
 
 function TeachingsTrending({
 	nodes,
+	filter,
 }: Must<TrendingTeachingsProps>): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	return (
 		<div>
-			<ButtonBack
-				backUrl={makeDiscoverRoute(languageRoute)}
-				className={styles.back}
-			/>
+			<div className={styles.filterRow}>
+				<ButtonBack
+					backUrl={makeDiscoverRoute(languageRoute)}
+					className={styles.back}
+				/>
+				<RecordingHasVideoFilter
+					filter={filter}
+					makeRoute={makeTrendingSermonRoute}
+				/>
+			</div>
 			<Heading1>
 				<FormattedMessage
 					id="trendingTeachings__heading"

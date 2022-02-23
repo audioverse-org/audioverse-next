@@ -4,7 +4,11 @@ query getHomeStaticProps($language: Language!) {
 			...cardRecording
 		}
 	}
-	testimonies(language: $language, first: 3) {
+	testimonies(
+		language: $language
+		first: 3
+		orderBy: [{ field: WRITTEN_DATE, direction: DESC }]
+	) {
 		nodes {
 			...testimonies
 		}

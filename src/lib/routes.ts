@@ -63,8 +63,10 @@ export const makeSermonListRoute = (
 export const makeSermonsFeedRoute = (languageRoute: string): string =>
 	`/${languageRoute}/teachings/all/feed.xml`;
 
-export const makeTrendingSermonRoute = (languageRoute: string): string =>
-	`/${languageRoute}/teachings/trending`;
+export const makeTrendingSermonRoute = (
+	languageRoute: string,
+	filter = 'all'
+): string => `/${languageRoute}/teachings/trending/${filter}`;
 
 export const makeBibleListRoute = (languageRoute: string): string =>
 	`/${languageRoute}/bibles`;

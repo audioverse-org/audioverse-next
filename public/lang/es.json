@@ -250,15 +250,15 @@
   "conferenceListPage__title": {
     "string": "Conferencias"
   },
-  "container-sermonList__filterLabelAll": {
+  "recordingHasVideoFilter__filterAll": {
     "comment": "página de lista de sermones filtrar todo",
     "string": "Todo"
   },
-  "container-sermonList__filterLabelAudio": {
+  "recordingHasVideoFilter__filterAudio": {
     "comment": "sermón lista página filtro audio",
     "string": "Solo audio"
   },
-  "container-sermonList__filterLabelVideo": {
+  "recordingHasVideoFilter__filterVideo": {
     "comment": "sermón lista página filtro video",
     "string": "Video"
   },
@@ -567,7 +567,7 @@
     "comment": "página de inicio testimonios sección texto",
     "string": "Conozca a algunos que utilizan AudioVerse."
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonios título slider",
     "string": "Testimonios"
   },
@@ -1356,7 +1356,7 @@
   "sermonList__heading": {
     "string": "Todas las lecciones"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "Filtro"
   },
   "socialLogin__loginFacebookButton": {
@@ -1964,7 +1964,7 @@
   "header__navItemContact-support": {
     "string": "Solicitar asistencia"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "Compartir un testimonio"
   },
   "header__navItemContact-twitter": {
@@ -2141,7 +2141,7 @@
   "testimonies__seeAll": {
     "string": "Ver todos los testimonios"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "Envíe un testimonio"
   },
   "time__hoursMinutesAndSeconds": {
