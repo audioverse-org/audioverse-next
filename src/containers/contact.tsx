@@ -132,7 +132,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 								{
 									label: intl.formatMessage({
 										id: 'contact__recipient-testimonials',
-										defaultMessage: 'Share Testimony',
+										defaultMessage: 'Share Testimonial',
 									}),
 									value: PageContactRecipient.Testimony,
 								},

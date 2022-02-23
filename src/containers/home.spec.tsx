@@ -251,7 +251,7 @@ describe('home page', () => {
 	it('includes testimonies', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('Testimonies')).toBeInTheDocument();
+		expect(getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('falls back to English', async () => {
@@ -259,7 +259,7 @@ describe('home page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Testimonies')).toBeInTheDocument();
+		expect(getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('renders song title', async () => {

@@ -332,12 +332,12 @@ export default function AndPlaybackContext({
 			setVolume(volume);
 			playerRef.current?.volume(volume / 100);
 		},
+		getSpeed: () => _speed,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
 			playerRef.current?.defaultPlaybackRate(s);
 			_setSpeed(s);
 		},
-		getSpeed: () => playerRef.current?.playbackRate() || _speed,
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			if (sourceRecordings && sourceRecordings.length > 1) {
@@ -366,7 +366,10 @@ export default function AndPlaybackContext({
 			const resetPlayer = () => {
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
 				if (logUrl) {
-					fetch(logUrl).catch(() => {
+					fetch(logUrl, {
+						method: 'HEAD',
+						mode: 'no-cors',
+					}).catch(() => {
 						// We don't want Promise rejections here to clutter the console
 					});
 				}

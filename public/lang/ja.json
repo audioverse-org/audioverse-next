@@ -250,16 +250,16 @@
   "conferenceListPage__title": {
     "string": "大会・総会"
   },
-  "container-sermonList__filterLabelAll": {
-    "comment": "sermon list page filter all",
+  "recordingHasVideoFilter__filterAll": {
+    "comment": "recording has video filter all",
     "string": "全て"
   },
-  "container-sermonList__filterLabelAudio": {
-    "comment": "sermon list page filter audio",
+  "recordingHasVideoFilter__filterAudio": {
+    "comment": "recording has video filter audio",
     "string": "オーディオのみ"
   },
-  "container-sermonList__filterLabelVideo": {
-    "comment": "sermon list page filter video",
+  "recordingHasVideoFilter__filterVideo": {
+    "comment": "recording has video filter video",
     "string": "動画"
   },
   "copyrightInfos__multipleCopyrightExplanation": {
@@ -567,7 +567,7 @@
     "comment": "home page testimonies section text",
     "string": "AudioVerseを利用している方々の声"
   },
-  "home__testimoniesTitle": {
+  "home__testimonialsTitle": {
     "comment": "Testimonies slider title",
     "string": "証し"
   },
@@ -1356,7 +1356,7 @@
   "sermonList__heading": {
     "string": "全てのレッスン"
   },
-  "sermonsList__filter": {
+  "recordingHasVideoFilter__filter": {
     "string": "絞る"
   },
   "socialLogin__loginFacebookButton": {
@@ -1964,7 +1964,7 @@
   "header__navItemContact-support": {
     "string": "技術的内容のお問い合わせ"
   },
-  "header__navItemContact-testimony": {
+  "header__navItemContact-testimonial": {
     "string": "個人的体験の証を共有"
   },
   "header__navItemContact-twitter": {
@@ -2141,7 +2141,7 @@
   "testimonies__seeAll": {
     "string": "全ての証を表示"
   },
-  "testimonies__submitTestimony": {
+  "testimonies__submitTestimonial": {
     "string": "個人体験の証を投稿"
   },
   "time__hoursMinutesAndSeconds": {
