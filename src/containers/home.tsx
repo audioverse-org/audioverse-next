@@ -26,6 +26,7 @@ import {
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
+	makeTestimoniesRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -276,6 +277,21 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										description="Testimonials slider title"
 									/>
 								</Heading1>
+								<p className={clsx(styles.paragraph, styles.narrow)}>
+									<FormattedMessage
+										id="homePage__testimoniesIntro"
+										defaultMessage="See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
+										values={{
+											a: function a(chunks: string) {
+												return (
+													<Link href={makeTestimoniesRoute(languageRoute)}>
+														<a className="decorated">{chunks}</a>
+													</Link>
+												);
+											},
+										}}
+									/>
+								</p>
 								<Testimonies testimonies={testimonies} />
 							</>
 						}

@@ -713,6 +713,12 @@
       "value": "Sponsor"
     }
   ],
+  "bibleVersion__websiteLabel": [
+    {
+      "type": 0,
+      "value": "Website"
+    }
+  ],
   "bibleVersions__heading": [
     {
       "type": 0,
@@ -825,6 +831,18 @@
       "value": "66 Books"
     }
   ],
+  "cardBibleVersion__showAll": [
+    {
+      "type": 0,
+      "value": "Show All"
+    }
+  ],
+  "cardCollection__showAll": [
+    {
+      "type": 0,
+      "value": "Show All"
+    }
+  ],
   "cardCollection__teachingsCountLabel": [
     {
       "type": 1,
@@ -833,6 +851,16 @@
     {
       "type": 0,
       "value": " teachings"
+    }
+  ],
+  "cardCollection_booksLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " books"
     }
   ],
   "cardCollection_sequenceLabel": [
@@ -899,6 +927,26 @@
     {
       "type": 0,
       "value": "Book"
+    }
+  ],
+  "cardSequence_chaptersLabel": [
+    {
+      "type": 1,
+      "value": "count"
+    },
+    {
+      "type": 0,
+      "value": " chapters"
+    }
+  ],
+  "cardSequence_readByLabel": [
+    {
+      "type": 0,
+      "value": "Read By "
+    },
+    {
+      "type": 1,
+      "value": "name"
     }
   ],
   "cardSequence_scriptureSongsType": [
@@ -1123,6 +1171,12 @@
     {
       "type": 0,
       "value": "Book Series"
+    }
+  ],
+  "collectionType__bibleVersion": [
+    {
+      "type": 0,
+      "value": "Bible Version"
     }
   ],
   "collectionType__conference": [
@@ -2123,6 +2177,26 @@
       "value": "Sound Doctrine"
     }
   ],
+  "homePage__testimoniesIntro": [
+    {
+      "type": 0,
+      "value": "See what some of our listeners have shared about using AudioVerse. "
+    },
+    {
+      "children": [
+        {
+          "type": 0,
+          "value": "Visit the Testimonials page"
+        }
+      ],
+      "type": 8,
+      "value": "a"
+    },
+    {
+      "type": 0,
+      "value": " to see even more."
+    }
+  ],
   "home__testimonialsTitle": [
     {
       "type": 0,
@@ -2799,6 +2873,12 @@
       "value": "Add Album"
     }
   ],
+  "molecule-cardRecordingSequenceHat__addBibleBook": [
+    {
+      "type": 0,
+      "value": "Add Book"
+    }
+  ],
   "molecule-cardRecordingSequenceHat__addBook": [
     {
       "type": 0,
@@ -2839,6 +2919,12 @@
     {
       "type": 0,
       "value": "Remove Album"
+    }
+  ],
+  "molecule-cardRecordingSequenceHat__removeBibleBook": [
+    {
+      "type": 0,
+      "value": "Remove Book"
     }
   ],
   "molecule-cardRecordingSequenceHat__removeBook": [
@@ -3019,6 +3105,12 @@
       "value": "Other Songs in Album"
     }
   ],
+  "organism-recording__backToChapterInfo": [
+    {
+      "type": 0,
+      "value": "Back to Chapter Info"
+    }
+  ],
   "organism-recording__buttonLabelNext": [
     {
       "type": 0,
@@ -3029,6 +3121,12 @@
     {
       "type": 0,
       "value": "Previous"
+    }
+  ],
+  "organism-recording__collectionInfoTitle": [
+    {
+      "type": 0,
+      "value": "Parent Bible"
     }
   ],
   "organism-recording__conferenceInfoTitle": [
@@ -3051,6 +3149,12 @@
     {
       "type": 1,
       "value": "index"
+    }
+  ],
+  "organism-recording__readAlongLabel": [
+    {
+      "type": 0,
+      "value": "Read Along"
     }
   ],
   "organism-recording__readByLabel": [
@@ -3909,6 +4013,12 @@
       "value": "Book"
     }
   ],
+  "sequenceType__bibleBookTitle": [
+    {
+      "type": 0,
+      "value": "Bible Book"
+    }
+  ],
   "sequenceType__musicTrackTitle": [
     {
       "type": 0,
@@ -4017,6 +4127,16 @@
     {
       "type": 0,
       "value": "Audiobook provided by "
+    },
+    {
+      "type": 1,
+      "value": "sponsorName"
+    }
+  ],
+  "sermonDetailPage__openGraphDescription_bibleChapter": [
+    {
+      "type": 0,
+      "value": "Bible Chapter provided by "
     },
     {
       "type": 1,
@@ -4407,22 +4527,10 @@
       "value": "Have a great testimony? Tell us your story!"
     }
   ],
-  "testimonies__seeAll": [
-    {
-      "type": 0,
-      "value": "See all Testimonials"
-    }
-  ],
   "testimonies__shareYourStory": [
     {
       "type": 0,
       "value": "Share your story"
-    }
-  ],
-  "testimonies__submitTestimonial": [
-    {
-      "type": 0,
-      "value": "Submit a Testimonial"
     }
   ],
   "testimonies__title": [
