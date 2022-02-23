@@ -791,24 +791,6 @@
       "value": "Contacto"
     }
   ],
-  "container-sermonList__filterLabelAll": [
-    {
-      "type": 0,
-      "value": "Todo"
-    }
-  ],
-  "container-sermonList__filterLabelAudio": [
-    {
-      "type": 0,
-      "value": "Solo audio"
-    }
-  ],
-  "container-sermonList__filterLabelVideo": [
-    {
-      "type": 0,
-      "value": "Video"
-    }
-  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
@@ -1371,7 +1353,7 @@
       "value": "Solicitar asistencia"
     }
   ],
-  "header__navItemContact-testimony": [
+  "header__navItemContact-testimonial": [
     {
       "type": 0,
       "value": "Compartir un testimonio"
@@ -1769,7 +1751,7 @@
       "value": "Conozca a algunos que utilizan AudioVerse."
     }
   ],
-  "home__testimoniesTitle": [
+  "home__testimonialsTitle": [
     {
       "type": 0,
       "value": "Testimonios"
@@ -3167,6 +3149,30 @@
       "value": "Perfil"
     }
   ],
+  "recordingHasVideoFilter__filter": [
+    {
+      "type": 0,
+      "value": "Filtro"
+    }
+  ],
+  "recordingHasVideoFilter__filterAll": [
+    {
+      "type": 0,
+      "value": "Todo"
+    }
+  ],
+  "recordingHasVideoFilter__filterAudio": [
+    {
+      "type": 0,
+      "value": "Solo audio"
+    }
+  ],
+  "recordingHasVideoFilter__filterVideo": [
+    {
+      "type": 0,
+      "value": "Video"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3545,12 +3551,6 @@
     {
       "type": 0,
       "value": "Todas las lecciones"
-    }
-  ],
-  "sermonsList__filter": [
-    {
-      "type": 0,
-      "value": "Filtro"
     }
   ],
   "socialLogin__loginFacebookButton": [
@@ -4257,7 +4257,7 @@
       "value": "Comparta su historia"
     }
   ],
-  "testimonies__submitTestimony": [
+  "testimonies__submitTestimonial": [
     {
       "type": 0,
       "value": "Envíe un testimonio"

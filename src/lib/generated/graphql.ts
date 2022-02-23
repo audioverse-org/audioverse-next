@@ -11420,6 +11420,7 @@ export type GetSermonListPagePathsDataQuery = {
 
 export type GetTrendingTeachingsPageDataQueryVariables = Exact<{
 	language: Language;
+	hasVideo: InputMaybe<Scalars['Boolean']>;
 }>;
 
 export type GetTrendingTeachingsPageDataQuery = {
@@ -14536,7 +14537,7 @@ export const useGetDiscoverCollectionsPageDataQuery = <
 		options
 	);
 export const GetHomeStaticPropsDocument = `
-query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3){nodes{...testimonies}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}bibleChapters:sequences(language:$language first:1 contentType:BIBLE_BOOK){nodes{...cardSequence}}}
+query getHomeStaticProps($language:Language!){websiteRecentRecordings(language:$language){nodes{...cardRecording}}testimonies(language:$language first:3 orderBy:[{field:WRITTEN_DATE direction:DESC}]){nodes{...testimonies}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}bibleChapters:sequences(language:$language first:1 contentType:BIBLE_BOOK){nodes{...cardSequence}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -15229,7 +15230,7 @@ export const useGetSermonListPagePathsDataQuery = <
 		options
 	);
 export const GetTrendingTeachingsPageDataDocument = `
-query getTrendingTeachingsPageData($language:Language!){recordings:popularRecordings(language:$language contentType:SERMON first:24){nodes{recording{...cardRecording}}}}
+query getTrendingTeachingsPageData($language:Language!$hasVideo:Boolean){recordings:popularRecordings(language:$language first:24 contentType:SERMON hasVideo:$hasVideo){nodes{recording{...cardRecording}}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}

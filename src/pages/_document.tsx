@@ -5,7 +5,9 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang={this.props.__NEXT_DATA__.query.language as string}>
-				<Head />
+				<Head>
+					<link rel="stylesheet" href="https://use.typekit.net/bgc2sqi.css" />
+				</Head>
 				<body>
 					<Main />
 					<NextScript />
