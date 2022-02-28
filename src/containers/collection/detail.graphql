@@ -28,9 +28,6 @@ query getCollectionDetailPageData($id: ID!) {
 				{ field: RECORDING_DOWNLOADS_ALL_TIME, direction: DESC }
 			]
 		) {
-			aggregate {
-				count
-			}
 			nodes {
 				...cardPerson
 			}
