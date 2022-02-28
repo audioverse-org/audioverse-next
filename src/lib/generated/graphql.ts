@@ -6290,6 +6290,7 @@ export type CardSponsorFragment = {
 export type CopyrightInfoFragment = {
 	__typename?: 'Recording';
 	copyrightYear: number | null;
+	contentType: RecordingContentType;
 	distributionAgreement: {
 		__typename?: 'DistributionAgreement';
 		sponsor: { __typename?: 'Sponsor'; title: string } | null;
@@ -6299,6 +6300,7 @@ export type CopyrightInfoFragment = {
 			image: { __typename?: 'Image'; url: string } | null;
 		} | null;
 	} | null;
+	collection: { __typename?: 'Collection'; title: string } | null;
 	sponsor: { __typename?: 'Sponsor'; title: string } | null;
 };
 
@@ -6306,6 +6308,7 @@ export type CopyrightInfosFragment = {
 	__typename?: 'Recording';
 	id: string | number;
 	copyrightYear: number | null;
+	contentType: RecordingContentType;
 	distributionAgreement: {
 		__typename?: 'DistributionAgreement';
 		id: string | number;
@@ -6321,6 +6324,7 @@ export type CopyrightInfosFragment = {
 		id: string | number;
 		title: string;
 	} | null;
+	collection: { __typename?: 'Collection'; title: string } | null;
 };
 
 export type LoginForgotPasswordMutationVariables = Exact<{
@@ -7981,7 +7985,6 @@ export type GetCollectionDetailPageDataQuery = {
 		} | null;
 		persons: {
 			__typename?: 'PersonConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			nodes: Array<{
 				__typename?: 'Person';
 				id: string | number;
@@ -13539,7 +13542,7 @@ export const CardPostFragmentDoc = `
 fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}
 `;
 export const CopyrightInfoFragmentDoc = `
-fragment copyrightInfo on Recording{copyrightYear distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}sponsor{title}}
+fragment copyrightInfo on Recording{copyrightYear contentType distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}collection{title}sponsor{title}}
 `;
 export const CopyrightInfosFragmentDoc = `
 fragment copyrightInfos on Recording{id copyrightYear distributionAgreement{id}sponsor{id}...copyrightInfo}
@@ -14301,7 +14304,7 @@ export const useGetBlogDetailStaticPathsQuery = <
 		options
 	);
 export const GetCollectionDetailPageDataDocument = `
-query getCollectionDetailPageData($id:ID!){collection(id:$id){id title contentType startDate endDate duration description canonicalUrl(useFuturePath:true)language shareUrl location image{url(size:1000 cropMode:MAX_SIZE)}sponsor{id title canonicalPath(useFuturePath:true)...sponsorLockup}persons(first:3 role:SPEAKER orderBy:[{field:RECORDING_COUNT direction:DESC}{field:RECORDING_DOWNLOADS_ALL_TIME direction:DESC}]){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage}}sequences(first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}recordings(first:3 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}}}
+query getCollectionDetailPageData($id:ID!){collection(id:$id){id title contentType startDate endDate duration description canonicalUrl(useFuturePath:true)language shareUrl location image{url(size:1000 cropMode:MAX_SIZE)}sponsor{id title canonicalPath(useFuturePath:true)...sponsorLockup}persons(first:3 role:SPEAKER orderBy:[{field:RECORDING_COUNT direction:DESC}{field:RECORDING_DOWNLOADS_ALL_TIME direction:DESC}]){nodes{...cardPerson}pageInfo{hasNextPage}}sequences(first:3 orderBy:[{field:RECORDING_COUNT direction:DESC}]){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage}}recordings(first:3 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage}}}}
 ${SponsorLockupFragmentDoc}
 ${CardPersonFragmentDoc}
 ${CardSequenceFragmentDoc}

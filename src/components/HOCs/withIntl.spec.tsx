@@ -379,9 +379,6 @@ describe('localization usage', () => {
 						},
 					},
 					persons: {
-						aggregate: {
-							count: 0,
-						},
 						nodes: [],
 						pageInfo: {
 							hasNextPage: false,
