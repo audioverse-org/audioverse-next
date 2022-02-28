@@ -191,7 +191,10 @@ export default function CardSequence({
 					></div>
 				)}
 				{!!persons.length &&
-					sequence.contentType !== SequenceContentType.BibleBook && (
+					sequence.contentType !== SequenceContentType.BibleBook &&
+					(!recordings?.length ||
+						sequence.contentType === SequenceContentType.Audiobook ||
+						sequence.contentType === SequenceContentType.MusicAlbum) && (
 						<div className={styles.persons}>
 							{(personsExpanded ? persons : persons.slice(0, 2)).map((p) => (
 								<PersonLockup
