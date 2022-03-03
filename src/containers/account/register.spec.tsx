@@ -243,7 +243,9 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(Cookie.set).toBeCalledWith('avSession', 'the_token');
+			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
+				expires: 7,
+			});
 		});
 	});
 

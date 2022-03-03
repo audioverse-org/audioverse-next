@@ -20,7 +20,7 @@ export function getLanguageId(
 }
 
 export function setSessionToken(token: string): void {
-	JSCookie.set(SESSION_KEY, token);
+	JSCookie.set(SESSION_KEY, token, { expires: 7 });
 }
 
 export function setLanguageId(lang: string): void {
