@@ -4,11 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import LineHeading from '@components/atoms/lineHeading';
 import Button from '@components/molecules/button';
 import CardCollection from '@components/molecules/card/collection';
+import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 import {
+	makeBlogPostListRoute,
 	makeConferenceListRoute,
 	makeSermonListRoute,
 	makeStoryAlbumListPage,
@@ -27,6 +29,7 @@ export default function Discover({
 	trendingTeachings,
 	storySeasons,
 	conferences,
+	blogPosts,
 }: DiscoverProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const sections = [
@@ -65,6 +68,24 @@ export default function Discover({
 				/>
 			),
 			url: makeTrendingSermonRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="discover_recentBlogHeading"
+					defaultMessage="Recent Blog Posts"
+				/>
+			),
+			cards: blogPosts.nodes?.map((post) => (
+				<CardPost post={post} key={post.canonicalPath} />
+			)),
+			seeAll: (
+				<FormattedMessage
+					id="discover__recentBlogSeeAll"
+					defaultMessage="See All Blog Posts"
+				/>
+			),
+			url: makeBlogPostListRoute(languageRoute),
 		},
 		{
 			heading: (
