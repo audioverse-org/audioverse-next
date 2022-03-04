@@ -244,7 +244,7 @@ describe('register page', () => {
 
 		await waitFor(() => {
 			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
-				expires: 7,
+				expires: 14,
 			});
 		});
 	});
