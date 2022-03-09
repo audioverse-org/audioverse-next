@@ -119,7 +119,7 @@ export function getNavigationItems(
 					}),
 				},
 				{
-					key: 'saved',
+					key: 'history',
 					href: makeLibraryRoute(languageRoute, 'history'),
 					Icon: IconHistory,
 					label: intl.formatMessage({

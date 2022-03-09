@@ -142,6 +142,10 @@ export default function AndNavigation({
 							onClick={() => push(playbackRecording.canonicalPath || '')}
 							color={BaseColors.RED}
 							backgroundColor={BaseColors.CREAM}
+							aria-label={intl.formatMessage({
+								id: 'andNavigation__playing',
+								defaultMessage: 'Playing',
+							})}
 						/>
 					)}
 				</div>

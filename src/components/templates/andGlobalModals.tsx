@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -134,15 +133,6 @@ export default function AndGlobalModals({
 									/>
 								}
 							/>
-							<a
-								onClick={handleClose}
-								className={clsx(styles.continueAsGuest, 'decorated')}
-							>
-								<FormattedMessage
-									id="andGlobalModals__continueAsGuest"
-									defaultMessage="Continue as guest"
-								/>
-							</a>
 						</div>
 					</>
 				);

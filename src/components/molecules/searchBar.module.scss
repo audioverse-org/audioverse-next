@@ -65,6 +65,14 @@
 	min-width: 0;
 }
 
+.icon {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
 @media (min-width: $breakpoint-lg) {
 	.clearHidden.clearHidden {
 		display: none;

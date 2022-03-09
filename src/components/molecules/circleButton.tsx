@@ -33,6 +33,7 @@ const CircleButton: React.FC<ICircleButtonProps> = React.forwardRef(
 					className,
 					`hover-bg--darkened-${backgroundColor}`
 				)}
+				title={props['aria-label']}
 				{...props}
 				ref={ref}
 			>

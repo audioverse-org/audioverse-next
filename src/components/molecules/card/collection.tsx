@@ -20,11 +20,9 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
-import IconButton from '../iconButton';
 
 import styles from './collection.module.scss';
 import CardRecording from './recording';
@@ -135,17 +133,14 @@ export default function CardCollection({
 								<ProgressBar progress={playbackCompletedPercentage} />
 							)}
 						</div>
-						<IconButton
+						<ButtonFavorite
+							isFavorited={!!isFavorited}
+							toggleFavorited={toggleFavorited}
 							ref={ref}
-							Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-							onClick={(e) => {
-								e.preventDefault();
-								toggleFavorited();
-							}}
-							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
 							backgroundColor={
 								isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
 							}
+							light
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
 						/>
 					</div>
