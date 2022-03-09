@@ -37,6 +37,9 @@ export async function getStaticProps({
 				trendingTeachings: {
 					nodes: [],
 				},
+				blogPosts: {
+					nodes: [],
+				},
 			}))),
 			title: intl.formatMessage({
 				id: 'discover__title',

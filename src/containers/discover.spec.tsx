@@ -81,6 +81,20 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+		blogPosts: {
+			nodes: [
+				{
+					image: {
+						url: 'the_post_image_url',
+					},
+					publishDate: '2019-12-03T09:54:33Z',
+					title: 'the_post_title',
+					teaser: 'the_post_teaser',
+					canonicalPath: 'the_post_path',
+					readingDuration: 9 * 60,
+				},
+			],
+		},
 	}
 );
 

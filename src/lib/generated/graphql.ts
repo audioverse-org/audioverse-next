@@ -4286,7 +4286,7 @@ export type SponsorCanonicalUrlArgs = {
 
 export type SponsorCollectionsArgs = {
 	after: InputMaybe<Scalars['String']>;
-	contentType?: InputMaybe<CollectionContentType>;
+	contentType: InputMaybe<CollectionContentType>;
 	first: InputMaybe<Scalars['Int']>;
 	includeUnpublished: InputMaybe<Scalars['Boolean']>;
 	offset: InputMaybe<Scalars['Int']>;
@@ -8800,6 +8800,18 @@ export type GetDiscoverPageDataQuery = {
 				__typename?: 'RecordingConnection';
 				aggregate: { __typename?: 'Aggregate'; count: number } | null;
 			};
+		}> | null;
+	};
+	blogPosts: {
+		__typename?: 'BlogPostConnection';
+		nodes: Array<{
+			__typename?: 'BlogPost';
+			publishDate: string;
+			title: string;
+			teaser: string;
+			canonicalPath: string;
+			readingDuration: number | null;
+			image: { __typename?: 'Image'; url: string } | null;
 		}> | null;
 	};
 };
@@ -14493,7 +14505,7 @@ export const useSubmitContactPageMutation = <
 		options
 	);
 export const GetDiscoverPageDataDocument = `
-query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language contentType:SERMON first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}}
+query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language contentType:SERMON first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -14501,7 +14513,8 @@ ${CardHatSponsorFragmentDoc}
 ${TeaseRecordingFragmentDoc}
 ${AndMiniplayerFragmentDoc}
 ${CardSequenceFragmentDoc}
-${CardCollectionFragmentDoc}`;
+${CardCollectionFragmentDoc}
+${CardPostFragmentDoc}`;
 export const useGetDiscoverPageDataQuery = <
 	TData = GetDiscoverPageDataQuery,
 	TError = unknown

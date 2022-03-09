@@ -5547,7 +5547,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		Return the elements that come after the specified cursor.
 		"""
 		after: String
-		contentType: CollectionContentType = CONFERENCE
+		contentType: CollectionContentType
 
 		"""
 		Return up to the first `n` elements from the list.
