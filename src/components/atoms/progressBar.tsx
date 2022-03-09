@@ -34,6 +34,7 @@ export default function ProgressBar({
 			<input
 				type="range"
 				value={progress * 100}
+				step={0.0001}
 				aria-label={intl.formatMessage({
 					id: 'atom-progressBar__label',
 					defaultMessage: 'progress',
