@@ -11,9 +11,7 @@ import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { CardPersonFragment } from '@lib/generated/graphql';
 
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like-light.svg';
-import IconButton from '../iconButton';
+import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';
 
 import styles from './person.module.scss';
@@ -66,11 +64,11 @@ export default function CardPerson({
 					{/* TODO: sub-recordings */}
 				</a>
 			</Link>
-			<IconButton
-				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onClick={() => toggleFavorited()}
-				color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+			<ButtonFavorite
+				isFavorited={!!isFavorited}
+				toggleFavorited={toggleFavorited}
 				backgroundColor={BaseColors.SMART_PLAYLIST_H}
+				light
 				className={clsx(styles.like, isFavorited && styles.likeActive)}
 			/>
 		</Card>

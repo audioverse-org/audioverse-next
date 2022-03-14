@@ -272,9 +272,6 @@
   "andGlobalModals__confirmRemoveFavorite-keep": {
     "string": "Keep item"
   },
-  "andGlobalModals__continueAsGuest": {
-    "string": "Continue as guest"
-  },
   "andGlobalModals__createAccount": {
     "string": "Create Account"
   },
@@ -283,6 +280,9 @@
   },
   "andNavigation__donate": {
     "string": "Donate"
+  },
+  "andNavigation__playing": {
+    "string": "Playing"
   },
   "andOnboarding__intro": {
     "string": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
@@ -683,6 +683,9 @@
   "discover__conferencesSeeAll": {
     "string": "See All Conferences"
   },
+  "discover__recentBlogSeeAll": {
+    "string": "See All Blog Posts"
+  },
   "discover__recentTeachingsSeeAll": {
     "string": "See All Teachings"
   },
@@ -700,6 +703,9 @@
   },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
+  },
+  "discover_recentBlogHeading": {
+    "string": "Recent Blog Posts"
   },
   "discover_recentTeachingsHeading": {
     "string": "Recent Teachings"
@@ -1874,14 +1880,14 @@
   "search__conferencesHeading": {
     "string": "Conferences"
   },
-  "search__conferencesSeeAll": {
-    "string": "See All Conferences"
+  "search__conferencesSeeAllMatching": {
+    "string": "See All Matching Conferences"
   },
   "search__personsHeading": {
     "string": "Presenters"
   },
-  "search__personsSeeAll": {
-    "string": "See All Presenters"
+  "search__personsSeeAllMatching": {
+    "string": "See All Matching Presenters"
   },
   "search__resultsCount": {
     "string": "{count} Results"
@@ -1889,20 +1895,20 @@
   "search__sequencesHeading": {
     "string": "Series"
   },
-  "search__sequencesSeeAll": {
-    "string": "See All Series"
+  "search__sequencesSeeAllMatching": {
+    "string": "See All Matching Series"
   },
   "search__sponsorsHeading": {
     "string": "Sponsors"
   },
-  "search__sponsorsSeeAll": {
-    "string": "See All Sponsors"
+  "search__sponsorsSeeAllMatching": {
+    "string": "See All Matching Sponsors"
   },
   "search__teachingsHeading": {
     "string": "Teachings"
   },
-  "search__teachingsSeeAll": {
-    "string": "See All Teachings"
+  "search__teachingsSeeAllMatching": {
+    "string": "See All Matching Teachings"
   },
   "search__title": {
     "string": "Search"

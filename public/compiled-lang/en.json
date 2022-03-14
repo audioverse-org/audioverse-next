@@ -527,12 +527,6 @@
       "value": "Keep item"
     }
   ],
-  "andGlobalModals__continueAsGuest": [
-    {
-      "type": 0,
-      "value": "Continue as guest"
-    }
-  ],
   "andGlobalModals__createAccount": [
     {
       "type": 0,
@@ -549,6 +543,12 @@
     {
       "type": 0,
       "value": "Donate"
+    }
+  ],
+  "andNavigation__playing": [
+    {
+      "type": 0,
+      "value": "Playing"
     }
   ],
   "andOnboarding__intro": [
@@ -1407,6 +1407,12 @@
       "value": "See All Conferences"
     }
   ],
+  "discover__recentBlogSeeAll": [
+    {
+      "type": 0,
+      "value": "See All Blog Posts"
+    }
+  ],
   "discover__recentTeachingsSeeAll": [
     {
       "type": 0,
@@ -1441,6 +1447,12 @@
     {
       "type": 0,
       "value": "Recent Conferences"
+    }
+  ],
+  "discover_recentBlogHeading": [
+    {
+      "type": 0,
+      "value": "Recent Blog Posts"
     }
   ],
   "discover_recentTeachingsHeading": [
@@ -3937,10 +3949,10 @@
       "value": "Conferences"
     }
   ],
-  "search__conferencesSeeAll": [
+  "search__conferencesSeeAllMatching": [
     {
       "type": 0,
-      "value": "See All Conferences"
+      "value": "See All Matching Conferences"
     }
   ],
   "search__personsHeading": [
@@ -3949,10 +3961,10 @@
       "value": "Presenters"
     }
   ],
-  "search__personsSeeAll": [
+  "search__personsSeeAllMatching": [
     {
       "type": 0,
-      "value": "See All Presenters"
+      "value": "See All Matching Presenters"
     }
   ],
   "search__resultsCount": [
@@ -3971,10 +3983,10 @@
       "value": "Series"
     }
   ],
-  "search__sequencesSeeAll": [
+  "search__sequencesSeeAllMatching": [
     {
       "type": 0,
-      "value": "See All Series"
+      "value": "See All Matching Series"
     }
   ],
   "search__sponsorsHeading": [
@@ -3983,10 +3995,10 @@
       "value": "Sponsors"
     }
   ],
-  "search__sponsorsSeeAll": [
+  "search__sponsorsSeeAllMatching": [
     {
       "type": 0,
-      "value": "See All Sponsors"
+      "value": "See All Matching Sponsors"
     }
   ],
   "search__teachingsHeading": [
@@ -3995,10 +4007,10 @@
       "value": "Teachings"
     }
   ],
-  "search__teachingsSeeAll": [
+  "search__teachingsSeeAllMatching": [
     {
       "type": 0,
-      "value": "See All Teachings"
+      "value": "See All Matching Teachings"
     }
   ],
   "search__title": [

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -38,6 +38,19 @@ const Navigation = ({
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
 	const sessionToken = getSessionToken();
+
+	useEffect(() => {
+		const onRouteChange = (url: string) => {
+			const isUrlLanguageHome = !url.replace(/(^\/|\/$)/g, '').includes('/');
+			if (isUrlLanguageHome) {
+				setSubmenu('');
+			}
+		};
+		Router.events.on('routeChangeComplete', onRouteChange);
+		return () => {
+			Router.events.off('routeChangeComplete', onRouteChange);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (sessionToken) {

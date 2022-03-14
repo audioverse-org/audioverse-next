@@ -12,9 +12,7 @@ import { BaseColors } from '@lib/constants';
 import { CardSponsorFragment } from '@lib/generated/graphql';
 
 import UserPlusIcon from '../../../../public/img/fa-user-plus.svg';
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like-light.svg';
-import IconButton from '../iconButton';
+import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
 
 import styles from './sponsor.module.scss';
@@ -96,11 +94,11 @@ export default function CardSponsor({
 					{/* TODO: sub-conferences */}
 				</a>
 			</Link>
-			<IconButton
-				Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-				onClick={() => toggleFavorited()}
-				color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+			<ButtonFavorite
+				isFavorited={!!isFavorited}
+				toggleFavorited={toggleFavorited}
 				backgroundColor={BaseColors.LIGHT_TONE}
+				light
 				className={clsx(styles.like, isFavorited && styles.likeActive)}
 			/>
 		</Card>

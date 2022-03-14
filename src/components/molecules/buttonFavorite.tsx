@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Ref } from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
@@ -10,55 +10,64 @@ import IconLike from '../../../public/img/icon-like.svg';
 import { isBackgroundColorDark } from './buttonPlay';
 import IconButton from './iconButton';
 
-export default function ButtonFavorite({
-	isFavorited,
-	toggleFavorited,
-	light,
-	backgroundColor,
-	className,
-}: {
+type Props = {
 	isFavorited: boolean;
 	toggleFavorited: () => void;
 	light?: boolean;
 	backgroundColor: BaseColors;
 	className?: string;
-}): JSX.Element {
-	const intl = useIntl();
-	const label = isFavorited
-		? intl.formatMessage({
-				id: 'RecordingFavorite__unfavorite',
-				defaultMessage: 'Unfavorite',
-				description: 'Recording unfavorite button label',
-		  })
-		: intl.formatMessage({
-				id: 'RecordingFavorite__favorite',
-				defaultMessage: 'Favorite',
-				description: 'Recording favorite button label',
-		  });
+	ref?: Ref<HTMLButtonElement>;
+};
 
-	const IconUnavorite = light ? IconLikeLight : IconLike;
-	const isDarkTheme = isBackgroundColorDark(backgroundColor);
+const ButtonFavorite: React.VoidFunctionComponent<Props> = React.forwardRef(
+	function ButtonFavorite(
+		{ isFavorited, toggleFavorited, light, backgroundColor, className }: Props,
+		ref: Ref<HTMLButtonElement>
+	): JSX.Element {
+		const intl = useIntl();
+		const label = isFavorited
+			? intl.formatMessage({
+					id: 'RecordingFavorite__unfavorite',
+					defaultMessage: 'Unfavorite',
+					description: 'Recording unfavorite button label',
+			  })
+			: intl.formatMessage({
+					id: 'RecordingFavorite__favorite',
+					defaultMessage: 'Favorite',
+					description: 'Recording favorite button label',
+			  });
 
-	const iconColor = isFavorited
-		? isDarkTheme
-			? BaseColors.SALMON
-			: BaseColors.RED
-		: isDarkTheme
-		? BaseColors.WHITE
-		: BaseColors.DARK;
+		const IconUnavorite = light ? IconLikeLight : IconLike;
+		const isDarkTheme = isBackgroundColorDark(backgroundColor);
 
-	return (
-		<IconButton
-			Icon={isFavorited ? IconLikeActive : IconUnavorite}
-			onClick={() => toggleFavorited()}
-			color={iconColor}
-			{...{
-				backgroundColor,
-				className,
-				'aria-label': label,
-				'aria-pressed': isFavorited,
-				'data-testid': isFavorited ? 'unfavorite-icon' : 'favorite-icon',
-			}}
-		/>
-	);
-}
+		const iconColor = isFavorited
+			? isDarkTheme
+				? BaseColors.SALMON
+				: BaseColors.RED
+			: isDarkTheme
+			? BaseColors.WHITE
+			: BaseColors.DARK;
+
+		return (
+			<IconButton
+				Icon={isFavorited ? IconLikeActive : IconUnavorite}
+				onClick={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					toggleFavorited();
+				}}
+				color={iconColor}
+				{...{
+					backgroundColor,
+					className,
+					'aria-label': label,
+					'aria-pressed': isFavorited,
+					'data-testid': isFavorited ? 'unfavorite-icon' : 'favorite-icon',
+					ref,
+				}}
+			/>
+		);
+	}
+);
+
+export default ButtonFavorite;

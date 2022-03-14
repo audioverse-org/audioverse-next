@@ -1,7 +1,7 @@
 {
 	"low": true,
 	"allowlist": [
-		1054172, // Not used with unsafe input
-		1054369 // Not used with unsafe input
+		1059402, // Not used at runtime
+		1059599 // Not used at runtime
 	]
 }

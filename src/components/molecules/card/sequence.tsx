@@ -25,10 +25,8 @@ import ListIcon from '../../../../public/img/fa-list-alt.svg';
 import MusicIcon from '../../../../public/img/fa-music-light.svg';
 import IconClosure from '../../../../public/img/icon-closure.svg';
 import IconDisclosure from '../../../../public/img/icon-disclosure.svg';
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
-import IconButton from '../iconButton';
+import ButtonFavorite from '../buttonFavorite';
 import PersonLockup from '../personLockup';
 import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';
@@ -67,15 +65,7 @@ export default function CardSequence({
 		sequenceWriters: writers,
 	} = sequence;
 
-	const {
-		Icon,
-		accentColor,
-		backgroundColor,
-		iconColor,
-		textColor,
-		label,
-		labelColor,
-	} = (
+	const { Icon, accentColor, backgroundColor, textColor, label, labelColor } = (
 		{
 			[SequenceContentType.Audiobook]: {
 				Icon: BookIcon,
@@ -264,16 +254,12 @@ export default function CardSequence({
 						<ProgressBar progress={playbackCompletedPercentage} />
 					)}
 				</div>
-				<IconButton
+				<ButtonFavorite
+					isFavorited={!!isFavorited}
+					toggleFavorited={toggleFavorited}
 					ref={ref}
-					Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-					onClick={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
-						toggleFavorited();
-					}}
-					color={isFavorited ? accentColor : iconColor}
 					backgroundColor={backgroundColor}
+					light
 					className={clsx(styles.like, isFavorited && styles.likeActive)}
 				/>
 			</div>
