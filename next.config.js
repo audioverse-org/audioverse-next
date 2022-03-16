@@ -146,6 +146,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/registrar/help',
+					destination: '/:lang/account/login',
+					permanent: true,
+				},
+				{
 					source: '/:lang/blog/page/1',
 					destination: '/:lang/blog',
 					permanent: true,
