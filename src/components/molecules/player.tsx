@@ -13,6 +13,7 @@ import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
@@ -54,7 +55,9 @@ const Player = ({
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
-
+	useGlobalSpaceDown(() => {
+		session.isPaused ? session.play() : session.pause();
+	});
 	return (
 		<div
 			data-testid={recording.id}
