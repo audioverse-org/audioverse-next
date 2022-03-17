@@ -3,12 +3,12 @@
 module.exports = {
 	siteUrl: process.env.SITE_URL || 'https://audioverse.org',
 	generateRobotsTxt: true,
-  robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        disallow: ['/*/search'],
-      },
-    ]
-  }
+	robotsTxtOptions: {
+		policies: [
+			{
+				userAgent: '*',
+				disallow: ['/*/search'],
+			},
+		],
+	},
 };
