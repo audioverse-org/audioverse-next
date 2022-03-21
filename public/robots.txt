@@ -1,6 +1,6 @@
 # *
 User-agent: *
-Allow: /
+Disallow: /*/search
 
 # Host
 Host: https://audioverse.org
