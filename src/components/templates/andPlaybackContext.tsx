@@ -1,5 +1,5 @@
-import chromecast from '@silvermine/videojs-chromecast';
 import airplay from '@silvermine/videojs-airplay';
+import chromecast from '@silvermine/videojs-chromecast';
 import throttle from 'lodash/throttle';
 import React, {
 	MutableRefObject,
