@@ -1,3 +1,5 @@
+import chromecast from '@silvermine/videojs-chromecast';
+import airplay from '@silvermine/videojs-airplay';
 import throttle from 'lodash/throttle';
 import React, {
 	MutableRefObject,
@@ -11,6 +13,8 @@ import React, {
 import { useMutation, useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
+import '@silvermine/videojs-chromecast/dist/silvermine-videojs-chromecast.css';
+import '@silvermine/videojs-airplay/dist/silvermine-videojs-airplay.css';
 
 import { getSessionToken } from '@lib/cookies';
 import {
@@ -21,7 +25,6 @@ import {
 	Scalars,
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
-
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
 
@@ -167,7 +170,12 @@ export default function AndPlaybackContext({
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		import('video.js').then((v) => setVideojs(v));
+		import('video.js').then((v) => {
+			chromecast(v.default);
+			airplay(v.default);
+			setVideojs(v);
+		});
+		// require('@silvermine/videojs-chromecast')(videojs, { preloadWebComponents: true });
 	}, []);
 
 	const [sourceRecordings, setSourceRecordings] =
@@ -399,9 +407,17 @@ export default function AndPlaybackContext({
 				preload: 'auto',
 				defaultVolume: 1,
 				sources,
+				techOrder: ['chromecast', 'html5'], // You may have more Tech, such as Flash or HLS
+				plugins: {
+					chromecast: {},
+					airPlay: {
+						addButtonToControlBar: false, // defaults to `true`
+					},
+				},
 			};
 			if (playerRef.current) {
 				playerRef.current.src(sources);
+
 				resetPlayer();
 			} else if (videojs) {
 				const p = videojs.default(currentVideoEl, options);
@@ -412,6 +428,8 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else {
 				import('video.js').then((videoJsImport) => {
+					chromecast(videoJsImport.default);
+					airplay(videoJsImport.default);
 					setVideojs(videoJsImport);
 					playerRef.current = videoJsImport.default(currentVideoEl, options);
 					resetPlayer();
