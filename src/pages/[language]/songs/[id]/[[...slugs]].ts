@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SongDetail, { SongDetailProps } from '@containers/song/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSongDetailData,
 	getSongDetailStaticPaths,
@@ -32,6 +32,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

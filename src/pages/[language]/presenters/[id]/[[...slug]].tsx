@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import PresenterDetail, {
 	PresenterDetailProps,
 } from '@containers/presenter/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getPresenterDetailPageData,
 	getPresenterDetailPathsData,
@@ -47,6 +47,7 @@ export async function getStaticProps({
 	if (result.person?.language !== routeLanguage) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

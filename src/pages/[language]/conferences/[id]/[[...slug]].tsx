@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import CollectionDetail, {
 	CollectionDetailProps,
 } from '@containers/collection/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getCollectionDetailPageData,
 	getCollectionDetailPathsData,
@@ -34,6 +34,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 	return {

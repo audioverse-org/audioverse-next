@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getBlogDetailData,
 	getBlogDetailStaticPaths,
@@ -32,6 +32,7 @@ export async function getStaticProps({
 	if (blogPost?.language !== routeLanguage) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
