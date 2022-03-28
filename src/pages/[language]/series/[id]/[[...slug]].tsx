@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
@@ -32,6 +32,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

@@ -8,7 +8,7 @@ import AudiobookDetail, {
 	AudiobookDetailProps,
 } from '@containers/audiobook/detail';
 import { IBaseProps } from '@containers/base';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getAudiobookDetailPageData,
 	getAudiobookDetailPathsData,
@@ -35,6 +35,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
