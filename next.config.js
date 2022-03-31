@@ -232,7 +232,7 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
-					destination: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
@@ -252,17 +252,17 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: true,
 				},
 				{
