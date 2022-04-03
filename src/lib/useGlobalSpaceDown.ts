@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export default (callBack: () => unknown, disabled?: boolean) => {
 	const handleKeyDown = (event: KeyboardEvent) => {
-		if ((event.target as HTMLElement).tagName == 'INPUT' || event.key != ' ') {
+		if ((event.target as HTMLElement).tagName != 'BODY' || event.key != ' ') {
 			return;
 		}
 		callBack();
