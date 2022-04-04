@@ -7,7 +7,7 @@ import striptags from 'striptags';
 
 import { IBaseProps } from '@containers/base';
 import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
@@ -36,6 +36,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

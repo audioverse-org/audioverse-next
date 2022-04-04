@@ -39,6 +39,7 @@ export async function getStaticProps({
 	if (!bibleBook) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 	const chapters = await getBibleBookChapters(id, bibleBook.testament, book);

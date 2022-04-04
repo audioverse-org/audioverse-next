@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import SongBookTrack, {
 	SongBookTrackProps,
 } from '@containers/song/books/track';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getBookSongDetailData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
@@ -34,6 +34,7 @@ export async function getStaticProps({
 	if (recording?.language !== languageRoute) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

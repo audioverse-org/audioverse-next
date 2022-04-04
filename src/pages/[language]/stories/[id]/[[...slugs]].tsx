@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Story, { StoryDetailProps } from '@containers/story/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getStoryDetailData,
 	getStoryDetailStaticPaths,
@@ -32,6 +32,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

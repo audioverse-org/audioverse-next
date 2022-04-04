@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SermonEmbed, { SermonEmbedProps } from '@containers/sermon/embed';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
@@ -35,6 +35,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

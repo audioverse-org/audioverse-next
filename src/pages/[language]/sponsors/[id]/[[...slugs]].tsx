@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSponsorDetailPageData,
 	getSponsorDetailPathsData,
@@ -30,6 +30,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
