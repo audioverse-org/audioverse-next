@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getStoryAlbumDetailPageData,
 	getStoryAlbumDetailPathsData,
@@ -35,6 +35,7 @@ export async function getStaticProps({
 	) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
