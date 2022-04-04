@@ -22,6 +22,8 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
+// import airplay from '../../lib/videojs-airplay/dist/silvermine-videojs-airplay';
+
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
 
@@ -167,7 +169,15 @@ export default function AndPlaybackContext({
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		import('video.js').then((v) => setVideojs(v));
+		import('video.js').then((v) => {
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			require('@silvermine/videojs-airplay')(v.default);
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			require('@silvermine/videojs-chromecast')(v.default, {
+				preloadWebComponents: true,
+			});
+			setVideojs(v);
+		});
 	}, []);
 
 	const [sourceRecordings, setSourceRecordings] =
@@ -399,12 +409,20 @@ export default function AndPlaybackContext({
 				preload: 'auto',
 				defaultVolume: 1,
 				sources,
+				techOrder: ['chromecast', 'html5'],
+				plugins: {
+					chromecast: {},
+					airPlay: {
+						addButtonToControlBar: false,
+					},
+				},
 			};
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else if (videojs) {
 				const p = videojs.default(currentVideoEl, options);
+				console.log(p);
 				p.on('fullscreenchange', () => {
 					p.controls(p.isFullscreen());
 				});
@@ -412,6 +430,12 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else {
 				import('video.js').then((videoJsImport) => {
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					require('@silvermine/videojs-airplay')(videoJsImport);
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					require('@silvermine/videojs-chromecast')(videoJsImport, {
+						preloadWebComponents: true,
+					});
 					setVideojs(videoJsImport);
 					playerRef.current = videoJsImport.default(currentVideoEl, options);
 					resetPlayer();
