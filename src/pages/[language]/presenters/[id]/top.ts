@@ -6,7 +6,7 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import PresenterTop, { PresenterTopProps } from '@containers/presenter/top';
-import { REVALIDATE } from '@lib/constants';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getPresenterDetailPathsData,
 	getPresenterTopPageData,
@@ -37,6 +37,7 @@ export async function getStaticProps({
 	if (person?.language !== language) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 

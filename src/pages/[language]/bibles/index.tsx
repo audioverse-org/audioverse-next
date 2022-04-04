@@ -28,17 +28,18 @@ export async function getStaticProps({
 		language: getLanguageIdByRoute(params?.language),
 	}).catch(() => ({ collections: { nodes: [] } }));
 
-	if (!response || !apiBibles?.collections.nodes) {
+	if (!apiBibles?.collections.nodes) {
 		return {
 			notFound: true,
+			revalidate: REVALIDATE_FAILURE,
 		};
 	}
 
 	const intl = await getIntl(getLanguageIdByRoute(params?.language));
 	return {
 		props: {
-			versions: [...response, ...apiBibles.collections.nodes].sort((a, b) =>
-				a.title.localeCompare(b.title)
+			versions: [...(response || []), ...apiBibles.collections.nodes].sort(
+				(a, b) => a.title.localeCompare(b.title)
 			),
 			title: intl.formatMessage({
 				id: 'bible__title',
