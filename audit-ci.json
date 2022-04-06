@@ -2,7 +2,8 @@
 	"low": true,
 	"allowlist": [
 		1064646, // Not used at runtime
-		1064843, // Not used at runtime
-		1067285 // Not used at runtime
+		1067300, // Not used at runtime
+		1067301, // Not used at runtime
+		1067342 // Not used at runtime
 	]
 }
