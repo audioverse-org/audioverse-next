@@ -22,8 +22,6 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
-// import airplay from '../../lib/videojs-airplay/dist/silvermine-videojs-airplay';
-
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
 
@@ -422,7 +420,6 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else if (videojs) {
 				const p = videojs.default(currentVideoEl, options);
-				console.log(p);
 				p.on('fullscreenchange', () => {
 					p.controls(p.isFullscreen());
 				});
