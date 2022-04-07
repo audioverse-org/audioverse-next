@@ -146,6 +146,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/registrar/help',
+					destination: '/:lang/account/login',
+					permanent: true,
+				},
+				{
 					source: '/:lang/blog/page/1',
 					destination: '/:lang/blog',
 					permanent: true,
@@ -227,7 +232,7 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
-					destination: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
@@ -247,17 +252,17 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/bibles/ENGKJV1/:path*',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/versions/472',
+					destination: '/:lang/bibles/472',
 					permanent: true,
 				},
 				{
