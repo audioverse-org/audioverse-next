@@ -34,6 +34,10 @@ interface Playable extends VideoJs.default.Tech.SourceObject {
 	logUrl?: string | null;
 }
 
+interface VideoJsPlayerWithOverlay extends VideoJsPlayer {
+	overlay: (options: object) => void;
+}
+
 const getFiles = (
 	recording: AndMiniplayerFragment,
 	prefersAudio: boolean
@@ -106,12 +110,15 @@ export type PlaybackContextType = {
 	getSpeed: () => number;
 	getDuration: () => number;
 	requestFullscreen: () => void;
+	isFullscreen: () => boolean | undefined;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
 	getRefs: () => {
 		origin?: MutableRefObject<HTMLDivElement | null>;
 		video?: MutableRefObject<HTMLDivElement | null>;
 		videoEl?: MutableRefObject<HTMLVideoElement | null>;
+		videoOverlay?: MutableRefObject<HTMLDivElement | null>;
+		titleOverlay?: MutableRefObject<HTMLDivElement | null>;
 	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
@@ -145,6 +152,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setSpeed: () => undefined,
 	getSpeed: () => 1,
 	getDuration: () => 0,
+	isFullscreen: () => false,
 	requestFullscreen: () => undefined,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
@@ -164,10 +172,16 @@ export default function AndPlaybackContext({
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
+	const videoOverlayRef = useRef<HTMLDivElement>(null);
+	const titleOverlayRef = useRef<HTMLDivElement>(null);
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		import('video.js').then((v) => setVideojs(v));
+		import('video.js').then((v) => {
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			require('videojs-overlay');
+			setVideojs(v);
+		});
 	}, []);
 
 	const [sourceRecordings, setSourceRecordings] =
@@ -338,7 +352,26 @@ export default function AndPlaybackContext({
 			playerRef.current?.defaultPlaybackRate(s);
 			_setSpeed(s);
 		},
-		requestFullscreen: () => playerRef.current?.requestFullscreen(),
+		isFullscreen: () => playerRef.current?.isFullscreen(),
+		requestFullscreen: () => {
+			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
+			overlayPlayer.requestFullscreen();
+			overlayPlayer.controlBar.hide();
+			overlayPlayer.overlay({
+				overlays: [
+					{
+						content: videoOverlayRef.current,
+						start: 0,
+						end: overlayPlayer.duration() + 10,
+					},
+					{
+						content: titleOverlayRef.current,
+						start: 'pause',
+						end: 'playing',
+					},
+				],
+			});
+		},
 		advanceRecording: () => {
 			if (sourceRecordings && sourceRecordings.length > 1) {
 				setRecording(sourceRecordings[1]);
@@ -352,6 +385,8 @@ export default function AndPlaybackContext({
 			origin: originRef,
 			video: videoRef,
 			videoEl: videoElRef,
+			videoOverlay: videoOverlayRef,
+			titleOverlay: titleOverlayRef,
 		}),
 		_setRecording: (
 			recording: AndMiniplayerFragment,
@@ -412,6 +447,8 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else {
 				import('video.js').then((videoJsImport) => {
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					require('videojs-overlay');
 					setVideojs(videoJsImport);
 					playerRef.current = videoJsImport.default(currentVideoEl, options);
 					resetPlayer();

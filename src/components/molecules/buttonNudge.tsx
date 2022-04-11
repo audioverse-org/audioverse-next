@@ -6,8 +6,10 @@ import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import IconJumpBackMediumDark from '../../../public/img/icon-jump-back-medium-dark.svg';
 import IconJumpBackMedium from '../../../public/img/icon-jump-back-medium.svg';
 import IconJumpBack from '../../../public/img/icon-jump-back.svg';
+import IconJumpForwardMediumDark from '../../../public/img/icon-jump-forward-medium-dark.svg';
 import IconJumpForwardMedium from '../../../public/img/icon-jump-forward-medium.svg';
 import IconJumpForward from '../../../public/img/icon-jump-forward.svg';
 
@@ -20,11 +22,13 @@ export default function ButtonNudge({
 	backgroundColor,
 	reverse = false,
 	large,
+	dark = false,
 }: {
 	recording: AndMiniplayerFragment;
 	backgroundColor: BaseColors;
 	reverse?: boolean;
 	large?: boolean;
+	dark?: boolean;
 }): JSX.Element {
 	const intl = useIntl();
 	const session = usePlaybackSession(recording);
@@ -46,10 +50,14 @@ export default function ButtonNudge({
 			Icon={
 				reverse
 					? large
-						? IconJumpBackMedium
+						? dark
+							? IconJumpBackMediumDark
+							: IconJumpBackMedium
 						: IconJumpBack
 					: large
-					? IconJumpForwardMedium
+					? dark
+						? IconJumpForwardMediumDark
+						: IconJumpForwardMedium
 					: IconJumpForward
 			}
 			onClick={() => session.shiftTime(reverse ? -15 : 15)}
