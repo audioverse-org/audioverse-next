@@ -704,6 +704,9 @@
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
   },
+  "discover_featuredTeachingsHeading": {
+    "string": "Featured Teachings"
+  },
   "discover_recentBlogHeading": {
     "string": "Recent Blog Posts"
   },
