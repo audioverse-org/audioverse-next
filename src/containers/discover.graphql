@@ -19,6 +19,15 @@ query getDiscoverPageData($language: Language!) {
 			}
 		}
 	}
+	featuredTeachings: featuredRecordings(
+		language: $language
+		contentType: SERMON
+		first: 3
+	) {
+		nodes {
+			...cardRecording
+		}
+	}
 	storySeasons(
 		language: $language
 		first: 3
