@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import LineHeading from '@components/atoms/lineHeading';
 import Button from '@components/molecules/button';
 import CardCollection from '@components/molecules/card/collection';
+import CardFavoriteEntity from '@components/molecules/card/favoriteEntity';
 import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
@@ -27,7 +28,7 @@ import styles from './collections.module.scss';
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 
 export default function DiscoverCollections({
-	collection,
+	websiteFeaturedCollection,
 	persons,
 	serieses,
 	conferences,
@@ -54,7 +55,7 @@ export default function DiscoverCollections({
 	);
 	return (
 		<div>
-			{collection && (
+			{websiteFeaturedCollection && (
 				<>
 					<LineHeading>
 						<FormattedMessage
@@ -63,7 +64,7 @@ export default function DiscoverCollections({
 						/>
 					</LineHeading>
 					<div className={styles.featured}>
-						<CardCollection collection={collection} />
+						<CardFavoriteEntity entity={websiteFeaturedCollection} />
 					</div>
 				</>
 			)}
