@@ -30,7 +30,7 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				{
 					recording: {
 						title: 'the_sermon_title2',
-						canonicalPath: 'the_sermon_path',
+						canonicalPath: 'the_sermon_path2',
 						recordingContentType: RecordingContentType.Sermon,
 						persons: [],
 					},
@@ -41,7 +41,7 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 			nodes: [
 				{
 					title: 'the_sermon_title3',
-					canonicalPath: 'the_sermon_path',
+					canonicalPath: 'the_sermon_path3',
 					recordingContentType: RecordingContentType.Sermon,
 					persons: [],
 				},

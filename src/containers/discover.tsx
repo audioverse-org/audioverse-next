@@ -80,6 +80,7 @@ export default function Discover({
 			cards: featuredTeachings.nodes?.map((recording) => (
 				<CardRecording recording={recording} key={recording.canonicalPath} />
 			)),
+			url: 'featured',
 		},
 		{
 			heading: (
