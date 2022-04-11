@@ -167,7 +167,15 @@ export default function AndPlaybackContext({
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		import('video.js').then((v) => setVideojs(v));
+		import('video.js').then((v) => {
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			require('@silvermine/videojs-airplay')(v.default);
+			// eslint-disable-next-line @typescript-eslint/no-var-requires
+			require('@silvermine/videojs-chromecast')(v.default, {
+				preloadWebComponents: true,
+			});
+			setVideojs(v);
+		});
 	}, []);
 
 	const [sourceRecordings, setSourceRecordings] =
@@ -399,6 +407,13 @@ export default function AndPlaybackContext({
 				preload: 'auto',
 				defaultVolume: 1,
 				sources,
+				techOrder: ['chromecast', 'html5'],
+				plugins: {
+					chromecast: {},
+					airPlay: {
+						addButtonToControlBar: false,
+					},
+				},
 			};
 			if (playerRef.current) {
 				playerRef.current.src(sources);
@@ -412,6 +427,12 @@ export default function AndPlaybackContext({
 				resetPlayer();
 			} else {
 				import('video.js').then((videoJsImport) => {
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					require('@silvermine/videojs-airplay')(videoJsImport);
+					// eslint-disable-next-line @typescript-eslint/no-var-requires
+					require('@silvermine/videojs-chromecast')(videoJsImport, {
+						preloadWebComponents: true,
+					});
 					setVideojs(videoJsImport);
 					playerRef.current = videoJsImport.default(currentVideoEl, options);
 					resetPlayer();
