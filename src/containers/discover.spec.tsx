@@ -37,6 +37,16 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				},
 			],
 		},
+		featuredTeachings: {
+			nodes: [
+				{
+					title: 'the_sermon_title3',
+					canonicalPath: 'the_sermon_path',
+					recordingContentType: RecordingContentType.Sermon,
+					persons: [],
+				},
+			],
+		},
 		storySeasons: {
 			nodes: [
 				{
