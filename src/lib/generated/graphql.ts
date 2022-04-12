@@ -12849,7 +12849,7 @@ export type GetSponsorConferencesPageDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 	collections: {
 		__typename?: 'CollectionConnection';
@@ -13098,7 +13098,7 @@ export type SponsorPivotFragment = {
 	id: string | number;
 	title: string;
 	canonicalPath: string;
-	imageWithFallback: { __typename?: 'Image'; url: string };
+	image: { __typename?: 'Image'; url: string } | null;
 };
 
 export type GetSponsorSeriesPageDataQueryVariables = Exact<{
@@ -13115,7 +13115,7 @@ export type GetSponsorSeriesPageDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 	sequences: {
 		__typename?: 'SequenceConnection';
@@ -13253,7 +13253,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 			}> | null;
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 };
 
@@ -14087,7 +14087,7 @@ export const PresenterPivotFragmentDoc = `
 fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
 `;
 export const SponsorPivotFragmentDoc = `
-fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}}
 `;
 export const GenerateFeedFragmentDoc = `
 fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url(requestType:RSS)filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url(requestType:RSS)filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}

@@ -2,7 +2,7 @@ fragment sponsorPivot on Sponsor {
 	id
 	title
 	canonicalPath(useFuturePath: true)
-	imageWithFallback {
+	image {
 		url(size: 128)
 	}
 }
