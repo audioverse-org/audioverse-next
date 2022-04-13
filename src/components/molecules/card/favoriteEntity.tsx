@@ -12,10 +12,12 @@ import CardSponsor from './sponsor';
 
 interface CardEntityProps {
 	entity: CardFavoriteEntityFragment;
+	disableSequenceStack?: boolean;
 }
 
 export default function CardFavoriteEntity({
 	entity,
+	disableSequenceStack,
 }: CardEntityProps): JSX.Element {
 	switch (entity.__typename) {
 		case 'Collection':
@@ -25,7 +27,7 @@ export default function CardFavoriteEntity({
 		case 'Recording':
 			return <CardRecording recording={entity} />;
 		case 'Sequence':
-			return entity.viewerHasFavorited ? (
+			return entity.viewerHasFavorited || disableSequenceStack ? (
 				<CardSequence sequence={entity} />
 			) : (
 				<CardRecordingStack sequence={entity} />
