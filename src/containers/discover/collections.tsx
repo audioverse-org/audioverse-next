@@ -64,7 +64,10 @@ export default function DiscoverCollections({
 						/>
 					</LineHeading>
 					<div className={styles.featured}>
-						<CardFavoriteEntity entity={websiteFeaturedCollection} />
+						<CardFavoriteEntity
+							entity={websiteFeaturedCollection}
+							disableSequenceStack
+						/>
 					</div>
 				</>
 			)}
