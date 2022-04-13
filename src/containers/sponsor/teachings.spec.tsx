@@ -26,7 +26,7 @@ const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
 		id: 'the_sponsor_id',
 		title: 'the_sponsor_title',
 		canonicalPath: '/the_sponsor_path',
-		imageWithFallback: {
+		image: {
 			url: 'the_sponsor_image',
 		},
 		recordings: {
@@ -132,9 +132,7 @@ describe('sponsor teachings page', () => {
 	it('skips image display if sponsor has none', async () => {
 		loadData({
 			sponsor: {
-				imageWithFallback: {
-					url: null as any,
-				},
+				image: null as any,
 			},
 		});
 
