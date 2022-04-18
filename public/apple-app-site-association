@@ -15,11 +15,14 @@
             {
                 "appID": "T636GPF37H.org.audioverse.mobile-beta",
                 "paths": [
+                  "/*/discover",
+                  "/*/discover/collections",
                   "/*/teachings/*",
                   "/*/series/*",
                   "/*/bibles/*",
                   "/*/books/*",
                   "/*/songs/*",
+                  "/*/stories/*",
                   "/*/conferences/*",
                   "/*/presenters/*",
                   "/*/sponsors/*"
