@@ -360,7 +360,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							</>
 						}
 						media={
-							<div className={styles.newsletterWrapper}>
+							<div className={styles.newsletterWrapper} id="newsletter-signup">
 								<div className={styles.newsletterBox}>
 									<div className={styles.newsletterHat}>
 										<IconBell />
