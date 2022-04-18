@@ -15,6 +15,15 @@ module.exports = withBundleAnalyzer(
 		},
 		headers: [
 			{
+				source: '/apple-app-site-association',
+				headers: [
+					{
+						key: 'Content-Type',
+						value: 'application/json',
+					},
+				],
+			},
+			{
 				source: '/(.*)',
 				headers: [
 					{
