@@ -411,9 +411,11 @@ export default function AndPlaybackContext({
 				sources,
 				techOrder: ['chromecast', 'html5'],
 				plugins: {
-					chromecast: {},
+					chromecast: {
+						addButtonToControlBar: false, // Use custom designed button
+					},
 					airPlay: {
-						addButtonToControlBar: false,
+						addButtonToControlBar: false, // Use custom designed button
 					},
 				},
 			};
