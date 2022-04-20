@@ -31,6 +31,9 @@ export async function getStaticProps({
 				recentTeachings: {
 					nodes: [],
 				},
+				featuredTeachings: {
+					nodes: [],
+				},
 				storySeasons: {
 					nodes: [],
 				},

@@ -1,6 +1,6 @@
 query getDiscoverCollectionsPageData($language: Language!) {
-	collection(id: 428) {
-		...cardCollection
+	websiteFeaturedCollection {
+		...cardFavoriteEntity
 	}
 	persons(
 		language: $language

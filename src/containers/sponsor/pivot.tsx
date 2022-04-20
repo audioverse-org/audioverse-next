@@ -18,8 +18,7 @@ export default function SponsorPivot({
 	sponsor,
 	children,
 }: PropsWithChildren<Props>): JSX.Element {
-	const { title, imageWithFallback, canonicalPath } = sponsor;
-	const image = imageWithFallback.url;
+	const { title, image, canonicalPath } = sponsor;
 
 	return (
 		<Tease className={styles.container}>
@@ -29,7 +28,7 @@ export default function SponsorPivot({
 				<div className={styles.titleLockup}>
 					{image && (
 						<div className={styles.logo}>
-							<RoundImage image={image} alt={title} />
+							<RoundImage image={image.url} alt={title} />
 						</div>
 					)}
 					<Heading2 sans unpadded>

@@ -1449,6 +1449,12 @@
       "value": "Recent Conferences"
     }
   ],
+  "discover_featuredTeachingsHeading": [
+    {
+      "type": 0,
+      "value": "Featured Teachings"
+    }
+  ],
   "discover_recentBlogHeading": [
     {
       "type": 0,

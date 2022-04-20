@@ -2700,6 +2700,7 @@ export type Query = {
 	testimony: Maybe<Testimony>;
 	user: Maybe<User>;
 	users: UserConnection;
+	websiteFeaturedCollection: Maybe<FavoriteEntityUnion>;
 	websiteRecentRecordings: RecordingConnection;
 	websites: WebsiteConnection;
 };
@@ -5990,6 +5991,225 @@ export type CardFavoriteFragment = {
 		  };
 };
 
+type CardFavoriteEntity_Collection_Fragment = {
+	__typename: 'Collection';
+	id: string | number;
+	canonicalPath: string;
+	title: string;
+	startDate: string | null;
+	endDate: string | null;
+	duration: number;
+	collectionContentType: CollectionContentType;
+	image: { __typename?: 'Image'; id: string | number; url: string } | null;
+	allSequences: {
+		__typename?: 'SequenceConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+	allRecordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+};
+
+type CardFavoriteEntity_Person_Fragment = {
+	__typename: 'Person';
+	id: string | number;
+	name: string;
+	canonicalPath: string;
+	image: { __typename?: 'Image'; id: string | number; url: string } | null;
+	recordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+};
+
+type CardFavoriteEntity_Recording_Fragment = {
+	__typename: 'Recording';
+	canonicalPath: string;
+	sequenceIndex: number | null;
+	id: string | number;
+	title: string;
+	duration: number;
+	recordingContentType: RecordingContentType;
+	sequence: {
+		__typename?: 'Sequence';
+		id: string | number;
+		canonicalPath: string;
+		contentType: SequenceContentType;
+		title: string;
+		image: { __typename?: 'Image'; url: string } | null;
+		recordings: {
+			__typename?: 'RecordingConnection';
+			aggregate: { __typename?: 'Aggregate'; count: number } | null;
+		};
+		collection: { __typename?: 'Collection'; title: string } | null;
+	} | null;
+	writers: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	sponsor: {
+		__typename?: 'Sponsor';
+		id: string | number;
+		title: string;
+		canonicalPath: string;
+		image: { __typename?: 'Image'; url: string } | null;
+	} | null;
+	persons: Array<{
+		__typename?: 'Person';
+		name: string;
+		canonicalPath: string;
+		imageWithFallback: { __typename?: 'Image'; url: string };
+	}>;
+	collection: { __typename?: 'Collection'; title: string } | null;
+	audioFiles: Array<{
+		__typename?: 'AudioFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+		duration: number;
+	}>;
+	videoFiles: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		filesize: string;
+		mimeType: string;
+		duration: number;
+	}>;
+	videoStreams: Array<{
+		__typename?: 'VideoFile';
+		url: string;
+		logUrl: string | null;
+		filesize: string;
+		mimeType: string;
+		duration: number;
+	}>;
+};
+
+type CardFavoriteEntity_Sequence_Fragment = {
+	__typename: 'Sequence';
+	viewerHasFavorited: boolean;
+	id: string | number;
+	title: string;
+	canonicalPath: string;
+	contentType: SequenceContentType;
+	duration: number;
+	summary: string;
+	speakers: {
+		__typename?: 'PersonConnection';
+		nodes: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}> | null;
+	};
+	sequenceWriters: {
+		__typename?: 'PersonConnection';
+		nodes: Array<{
+			__typename?: 'Person';
+			name: string;
+			canonicalPath: string;
+			imageWithFallback: { __typename?: 'Image'; url: string };
+		}> | null;
+	};
+	allRecordings: {
+		__typename?: 'RecordingConnection';
+		nodes: Array<{ __typename?: 'Recording'; canonicalPath: string }> | null;
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+	collection: { __typename?: 'Collection'; title: string } | null;
+	favoritedRecordings: {
+		__typename?: 'RecordingConnection';
+		nodes: Array<{
+			__typename?: 'Recording';
+			canonicalPath: string;
+			sequenceIndex: number | null;
+			id: string | number;
+			title: string;
+			duration: number;
+			recordingContentType: RecordingContentType;
+			persons: Array<{
+				__typename?: 'Person';
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+			}>;
+			sequence: {
+				__typename?: 'Sequence';
+				id: string | number;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				title: string;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				image: { __typename?: 'Image'; url: string } | null;
+				collection: { __typename?: 'Collection'; title: string } | null;
+			} | null;
+			writers: Array<{
+				__typename?: 'Person';
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
+			audioFiles: Array<{
+				__typename?: 'AudioFile';
+				url: string;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+			videoFiles: Array<{
+				__typename?: 'VideoFile';
+				url: string;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+			videoStreams: Array<{
+				__typename?: 'VideoFile';
+				url: string;
+				logUrl: string | null;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+		}> | null;
+	};
+};
+
+type CardFavoriteEntity_Sponsor_Fragment = {
+	__typename: 'Sponsor';
+	id: string | number;
+	title: string;
+	canonicalPath: string;
+	image: { __typename?: 'Image'; url: string } | null;
+	collections: {
+		__typename?: 'CollectionConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+	sequences: {
+		__typename?: 'SequenceConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+	recordings: {
+		__typename?: 'RecordingConnection';
+		aggregate: { __typename?: 'Aggregate'; count: number } | null;
+	};
+};
+
+export type CardFavoriteEntityFragment =
+	| CardFavoriteEntity_Collection_Fragment
+	| CardFavoriteEntity_Person_Fragment
+	| CardFavoriteEntity_Recording_Fragment
+	| CardFavoriteEntity_Sequence_Fragment
+	| CardFavoriteEntity_Sponsor_Fragment;
+
 export type CardHatSponsorFragment = {
 	__typename?: 'Recording';
 	sponsor: {
@@ -8568,6 +8788,73 @@ export type GetDiscoverPageDataQuery = {
 			};
 		}> | null;
 	};
+	featuredTeachings: {
+		__typename?: 'RecordingConnection';
+		nodes: Array<{
+			__typename?: 'Recording';
+			canonicalPath: string;
+			sequenceIndex: number | null;
+			id: string | number;
+			title: string;
+			duration: number;
+			recordingContentType: RecordingContentType;
+			sequence: {
+				__typename?: 'Sequence';
+				id: string | number;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				title: string;
+				image: { __typename?: 'Image'; url: string } | null;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				collection: { __typename?: 'Collection'; title: string } | null;
+			} | null;
+			writers: Array<{
+				__typename?: 'Person';
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+			}>;
+			sponsor: {
+				__typename?: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null;
+			} | null;
+			persons: Array<{
+				__typename?: 'Person';
+				name: string;
+				canonicalPath: string;
+				imageWithFallback: { __typename?: 'Image'; url: string };
+			}>;
+			collection: { __typename?: 'Collection'; title: string } | null;
+			audioFiles: Array<{
+				__typename?: 'AudioFile';
+				url: string;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+			videoFiles: Array<{
+				__typename?: 'VideoFile';
+				url: string;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+			videoStreams: Array<{
+				__typename?: 'VideoFile';
+				url: string;
+				logUrl: string | null;
+				filesize: string;
+				mimeType: string;
+				duration: number;
+			}>;
+		}> | null;
+	};
 	storySeasons: {
 		__typename?: 'SequenceConnection';
 		nodes: Array<{
@@ -8822,25 +9109,226 @@ export type GetDiscoverCollectionsPageDataQueryVariables = Exact<{
 
 export type GetDiscoverCollectionsPageDataQuery = {
 	__typename?: 'Query';
-	collection: {
-		__typename?: 'Collection';
-		id: string | number;
-		canonicalPath: string;
-		title: string;
-		startDate: string | null;
-		endDate: string | null;
-		duration: number;
-		collectionContentType: CollectionContentType;
-		image: { __typename?: 'Image'; id: string | number; url: string } | null;
-		allSequences: {
-			__typename?: 'SequenceConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-		allRecordings: {
-			__typename?: 'RecordingConnection';
-			aggregate: { __typename?: 'Aggregate'; count: number } | null;
-		};
-	} | null;
+	websiteFeaturedCollection:
+		| {
+				__typename: 'Collection';
+				id: string | number;
+				canonicalPath: string;
+				title: string;
+				startDate: string | null;
+				endDate: string | null;
+				duration: number;
+				collectionContentType: CollectionContentType;
+				image: {
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				} | null;
+				allSequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+		  }
+		| {
+				__typename: 'Person';
+				id: string | number;
+				name: string;
+				canonicalPath: string;
+				image: {
+					__typename?: 'Image';
+					id: string | number;
+					url: string;
+				} | null;
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+		  }
+		| {
+				__typename: 'Recording';
+				canonicalPath: string;
+				sequenceIndex: number | null;
+				id: string | number;
+				title: string;
+				duration: number;
+				recordingContentType: RecordingContentType;
+				sequence: {
+					__typename?: 'Sequence';
+					id: string | number;
+					canonicalPath: string;
+					contentType: SequenceContentType;
+					title: string;
+					image: { __typename?: 'Image'; url: string } | null;
+					recordings: {
+						__typename?: 'RecordingConnection';
+						aggregate: { __typename?: 'Aggregate'; count: number } | null;
+					};
+					collection: { __typename?: 'Collection'; title: string } | null;
+				} | null;
+				writers: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				sponsor: {
+					__typename?: 'Sponsor';
+					id: string | number;
+					title: string;
+					canonicalPath: string;
+					image: { __typename?: 'Image'; url: string } | null;
+				} | null;
+				persons: Array<{
+					__typename?: 'Person';
+					name: string;
+					canonicalPath: string;
+					imageWithFallback: { __typename?: 'Image'; url: string };
+				}>;
+				collection: { __typename?: 'Collection'; title: string } | null;
+				audioFiles: Array<{
+					__typename?: 'AudioFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoFiles: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+				videoStreams: Array<{
+					__typename?: 'VideoFile';
+					url: string;
+					logUrl: string | null;
+					filesize: string;
+					mimeType: string;
+					duration: number;
+				}>;
+		  }
+		| {
+				__typename: 'Sequence';
+				viewerHasFavorited: boolean;
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				contentType: SequenceContentType;
+				duration: number;
+				summary: string;
+				speakers: {
+					__typename?: 'PersonConnection';
+					nodes: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}> | null;
+				};
+				sequenceWriters: {
+					__typename?: 'PersonConnection';
+					nodes: Array<{
+						__typename?: 'Person';
+						name: string;
+						canonicalPath: string;
+						imageWithFallback: { __typename?: 'Image'; url: string };
+					}> | null;
+				};
+				allRecordings: {
+					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+					}> | null;
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				collection: { __typename?: 'Collection'; title: string } | null;
+				favoritedRecordings: {
+					__typename?: 'RecordingConnection';
+					nodes: Array<{
+						__typename?: 'Recording';
+						canonicalPath: string;
+						sequenceIndex: number | null;
+						id: string | number;
+						title: string;
+						duration: number;
+						recordingContentType: RecordingContentType;
+						persons: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>;
+						sequence: {
+							__typename?: 'Sequence';
+							id: string | number;
+							canonicalPath: string;
+							contentType: SequenceContentType;
+							title: string;
+							recordings: {
+								__typename?: 'RecordingConnection';
+								aggregate: { __typename?: 'Aggregate'; count: number } | null;
+							};
+							image: { __typename?: 'Image'; url: string } | null;
+							collection: { __typename?: 'Collection'; title: string } | null;
+						} | null;
+						writers: Array<{
+							__typename?: 'Person';
+							name: string;
+							canonicalPath: string;
+							imageWithFallback: { __typename?: 'Image'; url: string };
+						}>;
+						collection: { __typename?: 'Collection'; title: string } | null;
+						audioFiles: Array<{
+							__typename?: 'AudioFile';
+							url: string;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
+						videoFiles: Array<{
+							__typename?: 'VideoFile';
+							url: string;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
+						videoStreams: Array<{
+							__typename?: 'VideoFile';
+							url: string;
+							logUrl: string | null;
+							filesize: string;
+							mimeType: string;
+							duration: number;
+						}>;
+					}> | null;
+				};
+		  }
+		| {
+				__typename: 'Sponsor';
+				id: string | number;
+				title: string;
+				canonicalPath: string;
+				image: { __typename?: 'Image'; url: string } | null;
+				collections: {
+					__typename?: 'CollectionConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				sequences: {
+					__typename?: 'SequenceConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+				recordings: {
+					__typename?: 'RecordingConnection';
+					aggregate: { __typename?: 'Aggregate'; count: number } | null;
+				};
+		  }
+		| null;
 	persons: {
 		__typename?: 'PersonConnection';
 		nodes: Array<{
@@ -12361,7 +12849,7 @@ export type GetSponsorConferencesPageDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 	collections: {
 		__typename?: 'CollectionConnection';
@@ -12610,7 +13098,7 @@ export type SponsorPivotFragment = {
 	id: string | number;
 	title: string;
 	canonicalPath: string;
-	imageWithFallback: { __typename?: 'Image'; url: string };
+	image: { __typename?: 'Image'; url: string } | null;
 };
 
 export type GetSponsorSeriesPageDataQueryVariables = Exact<{
@@ -12627,7 +13115,7 @@ export type GetSponsorSeriesPageDataQuery = {
 		id: string | number;
 		title: string;
 		canonicalPath: string;
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 	sequences: {
 		__typename?: 'SequenceConnection';
@@ -12765,7 +13253,7 @@ export type GetSponsorTeachingsPageDataQuery = {
 			}> | null;
 			aggregate: { __typename?: 'Aggregate'; count: number } | null;
 		};
-		imageWithFallback: { __typename?: 'Image'; url: string };
+		image: { __typename?: 'Image'; url: string } | null;
 	} | null;
 };
 
@@ -13544,8 +14032,11 @@ fragment cardSponsor on Sponsor{id title canonicalPath(useFuturePath:true)image{
 export const CardPersonFragmentDoc = `
 fragment cardPerson on Person{id name canonicalPath(useFuturePath:true)image{id url(size:128)}recordings(first:2 orderBy:[{field:PUBLISHED_AT direction:DESC}]){aggregate{count}}}
 `;
+export const CardFavoriteEntityFragmentDoc = `
+fragment cardFavoriteEntity on FavoriteEntityUnion{__typename ...on Recording{...cardRecording}...on Sequence{viewerHasFavorited ...cardSequence ...cardRecordingStack}...on Collection{...cardCollection}...on Sponsor{...cardSponsor}...on Person{...cardPerson}}
+`;
 export const CardFavoriteFragmentDoc = `
-fragment cardFavorite on UserFavorite{createdAt entity{__typename ...on Recording{...cardRecording}...on Sequence{viewerHasFavorited ...cardSequence ...cardRecordingStack}...on Collection{...cardCollection}...on Sponsor{...cardSponsor}...on Person{...cardPerson}}}
+fragment cardFavorite on UserFavorite{createdAt entity{...cardFavoriteEntity}}
 `;
 export const CardPlaylistFragmentDoc = `
 fragment cardPlaylist on UserPlaylist{id title recordings(first:2){nodes{...teaseRecording}aggregate{count}}}
@@ -13596,7 +14087,7 @@ export const PresenterPivotFragmentDoc = `
 fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
 `;
 export const SponsorPivotFragmentDoc = `
-fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+fragment sponsorPivot on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}}
 `;
 export const GenerateFeedFragmentDoc = `
 fragment generateFeed on Recording{id title contentType description publishDate audioFiles{id url(requestType:RSS)filesize duration mimeType bitrate}videoFiles(allowedContainers:[M4A M4V MOV MP4]){id url(requestType:RSS)filesize duration mimeType bitrate container}persons(role:SPEAKER){name}sequence{title}sponsor{title}}
@@ -14505,7 +14996,7 @@ export const useSubmitContactPageMutation = <
 		options
 	);
 export const GetDiscoverPageDataDocument = `
-query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language contentType:SERMON first:6){nodes{recording{...cardRecording}}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
+query getDiscoverPageData($language:Language!){recentTeachings:sermons(language:$language first:6 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardRecording}}trendingTeachings:popularRecordings(language:$language contentType:SERMON first:6){nodes{recording{...cardRecording}}}featuredTeachings:featuredRecordings(language:$language contentType:SERMON first:3){nodes{...cardRecording}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence recordings(first:2){nodes{...cardRecording}}}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection sequences(first:2 orderBy:[{field:RECORDING_COUNT direction:DESC}]){nodes{...cardSequence}}recordings(first:2 sequenceId:0 orderBy:[{field:PUBLISHED_AT direction:DESC}]){nodes{...cardRecording}}}}blogPosts(language:$language first:3 orderBy:{field:PUBLISHED_AT direction:DESC}){nodes{...cardPost}}}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
@@ -14531,12 +15022,19 @@ export const useGetDiscoverPageDataQuery = <
 		options
 	);
 export const GetDiscoverCollectionsPageDataDocument = `
-query getDiscoverCollectionsPageData($language:Language!){collection(id:428){...cardCollection}persons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
-${CardCollectionFragmentDoc}
-${CardPersonFragmentDoc}
-${CardSequenceFragmentDoc}
+query getDiscoverCollectionsPageData($language:Language!){websiteFeaturedCollection{...cardFavoriteEntity}persons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardPerson}}serieses(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}conferences(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardCollection}}sponsors(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSponsor}}audiobooks(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}storySeasons(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}musicAlbums(language:$language first:3 orderBy:[{field:RECORDING_PUBLISHED_AT direction:DESC}]){nodes{...cardSequence}}}
+${CardFavoriteEntityFragmentDoc}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}
-${CardSponsorFragmentDoc}`;
+${CardHatSponsorFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}
+${CardSequenceFragmentDoc}
+${CardRecordingStackFragmentDoc}
+${CardCollectionFragmentDoc}
+${CardSponsorFragmentDoc}
+${CardPersonFragmentDoc}`;
 export const useGetDiscoverCollectionsPageDataQuery = <
 	TData = GetDiscoverCollectionsPageDataQuery,
 	TError = unknown
@@ -14604,6 +15102,7 @@ export const useGetLibraryHistoryPageDataQuery = <
 export const GetLibraryDataDocument = `
 query getLibraryData($language:Language!$first:Int!$offset:Int!$groupSequences:Boolean!$hasVideo:Boolean$recordingDuration:IntegerRangeInput$recordingContentType:RecordingContentType$types:[FavoritableCatalogEntityType!]$viewerPlaybackStatus:RecordingViewerPlaybackStatus$sortField:FavoritesSortableField!$sortDirection:OrderByDirection!){me{user{favorites(language:$language first:$first offset:$offset groupSequences:$groupSequences recordingDuration:$recordingDuration recordingContentType:$recordingContentType hasVideo:$hasVideo types:$types viewerPlaybackStatus:$viewerPlaybackStatus orderBy:[{field:$sortField direction:$sortDirection}]){aggregate{count}nodes{...cardFavorite}}}}}
 ${CardFavoriteFragmentDoc}
+${CardFavoriteEntityFragmentDoc}
 ${CardRecordingFragmentDoc}
 ${CardRecordingSequenceHatFragmentDoc}
 ${PersonLockupFragmentDoc}

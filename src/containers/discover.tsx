@@ -27,6 +27,7 @@ export type DiscoverProps = GetDiscoverPageDataQuery;
 export default function Discover({
 	recentTeachings,
 	trendingTeachings,
+	featuredTeachings,
 	storySeasons,
 	conferences,
 	blogPosts,
@@ -68,6 +69,18 @@ export default function Discover({
 				/>
 			),
 			url: makeTrendingSermonRoute(languageRoute),
+		},
+		{
+			heading: (
+				<FormattedMessage
+					id="discover_featuredTeachingsHeading"
+					defaultMessage="Featured Teachings"
+				/>
+			),
+			cards: featuredTeachings.nodes?.map((recording) => (
+				<CardRecording recording={recording} key={recording.canonicalPath} />
+			)),
+			url: 'featured',
 		},
 		{
 			heading: (
@@ -144,13 +157,17 @@ export default function Discover({
 				<div key={url}>
 					<LineHeading>{heading}</LineHeading>
 					<CardGroup>{cards}</CardGroup>
-					<Button
-						type="secondary"
-						text={seeAll}
-						href={url}
-						IconRight={ForwardIcon}
-						className={styles.seeAllButton}
-					/>
+					{seeAll ? (
+						<Button
+							type="secondary"
+							text={seeAll}
+							href={url}
+							IconRight={ForwardIcon}
+							className={styles.seeAllButton}
+						/>
+					) : (
+						<div className={styles.seeAllButton} />
+					)}
 				</div>
 			))}
 		</>

@@ -1,0 +1,20 @@
+fragment cardFavoriteEntity on FavoriteEntityUnion {
+	__typename
+	... on Recording {
+		...cardRecording
+	}
+	... on Sequence {
+		viewerHasFavorited
+		...cardSequence
+		...cardRecordingStack
+	}
+	... on Collection {
+		...cardCollection
+	}
+	... on Sponsor {
+		...cardSponsor
+	}
+	... on Person {
+		...cardPerson
+	}
+}
