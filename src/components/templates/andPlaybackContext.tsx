@@ -167,14 +167,16 @@ export default function AndPlaybackContext({
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		import('video.js').then((v) => {
-			// eslint-disable-next-line @typescript-eslint/no-var-requires
-			require('@silvermine/videojs-airplay')(v.default);
-			// eslint-disable-next-line @typescript-eslint/no-var-requires
-			require('@silvermine/videojs-chromecast')(v.default, {
+		Promise.all([
+			import('video.js'),
+			import('@silvermine/videojs-airplay'),
+			import('@silvermine/videojs-chromecast'),
+		]).then(([vJS, airplay, chromecast]) => {
+			airplay.default(vJS.default);
+			chromecast.default(vJS.default, {
 				preloadWebComponents: true,
 			});
-			setVideojs(v);
+			setVideojs(vJS);
 		});
 	}, []);
 
@@ -426,15 +428,17 @@ export default function AndPlaybackContext({
 				playerRef.current = p;
 				resetPlayer();
 			} else {
-				import('video.js').then((videoJsImport) => {
-					// eslint-disable-next-line @typescript-eslint/no-var-requires
-					require('@silvermine/videojs-airplay')(videoJsImport);
-					// eslint-disable-next-line @typescript-eslint/no-var-requires
-					require('@silvermine/videojs-chromecast')(videoJsImport, {
+				Promise.all([
+					import('video.js'),
+					import('@silvermine/videojs-airplay'),
+					import('@silvermine/videojs-chromecast'),
+				]).then(([vJS, airplay, chromecast]) => {
+					airplay.default(vJS.default);
+					chromecast.default(vJS.default, {
 						preloadWebComponents: true,
 					});
-					setVideojs(videoJsImport);
-					playerRef.current = videoJsImport.default(currentVideoEl, options);
+					setVideojs(vJS);
+					playerRef.current = vJS.default(currentVideoEl, options);
 					resetPlayer();
 				});
 			}
