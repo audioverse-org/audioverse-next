@@ -24,3 +24,5 @@ declare module 'react-facebook-login/dist/facebook-login-render-props' {
 		ReactFacebookLoginState
 	> {}
 }
+
+declare module 'videojs-overlay'
