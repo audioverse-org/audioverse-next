@@ -177,10 +177,7 @@ export default function AndPlaybackContext({
 
 	const [videojs, setVideojs] = useState<typeof VideoJs>();
 	useEffect(() => {
-		Promise.all([
-			import('video.js'),
-			import('videojs-overlay')
-		]).then(([v]) => {
+		Promise.all([import('video.js'), import('videojs-overlay')]).then(([v]) => {
 			setVideojs(v);
 		});
 	}, []);
@@ -447,14 +444,13 @@ export default function AndPlaybackContext({
 				playerRef.current = p;
 				resetPlayer();
 			} else {
-				Promise.all([
-					import('video.js'),
-					import('videojs-overlay')
-				]).then(([videoJsImport]) => {
-					setVideojs(videoJsImport);
-					playerRef.current = videoJsImport.default(currentVideoEl, options);
-					resetPlayer();
-				});
+				Promise.all([import('video.js'), import('videojs-overlay')]).then(
+					([videoJsImport]) => {
+						setVideojs(videoJsImport);
+						playerRef.current = videoJsImport.default(currentVideoEl, options);
+						resetPlayer();
+					}
+				);
 			}
 		},
 	};
