@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
@@ -21,6 +22,7 @@ export interface IBaseProps {
 	description?: string | null;
 	canonicalUrl?: string | null;
 	dehydratedState?: DehydratedState;
+	imageUrl?: string | null;
 }
 
 const queryClient = new QueryClient({
@@ -40,8 +42,14 @@ function Base<P>({
 	Component: typeof React.Component;
 	pageProps: P & IBaseProps;
 }): JSX.Element {
-	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
-		pageProps;
+	const {
+		description,
+		disableSidebar,
+		title,
+		canonicalUrl,
+		dehydratedState,
+		imageUrl,
+	} = pageProps;
 
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
@@ -78,6 +86,32 @@ function Base<P>({
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `<!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->`,
+					}}
+				/>
+				<NextSeo
+					title={title ? `${title}|` : '' + 'AudioVerse'}
+					description={description ? description : ''}
+					canonical={canonicalUrl ? canonicalUrl : ''}
+					openGraph={{
+						url: `${canonicalUrl}`,
+						description: `${description}`,
+						images: [
+							{
+								url: `${imageUrl ? imageUrl : '/favicon.svg'}`,
+								height: 600,
+								width: 800,
+								alt: 'preview image',
+							},
+						],
+						site_name: 'AudioVerse',
+					}}
+					twitter={{
+						handle: '@AudioVerse',
+						site: '@AudioVerse',
+						cardType: 'summary_large_image',
+					}}
+					facebook={{
+						appId: `${process.env.FACEBOOK_APP_ID || ''}`,
 					}}
 				/>
 				<QueryClientProvider client={queryClient}>
