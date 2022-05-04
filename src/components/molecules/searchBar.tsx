@@ -36,7 +36,7 @@ export default function SearchBar({
 				className={clsx(styles.inner, isFocused && styles.focused)}
 			>
 				<div className={styles.inputWrapper}>
-					<button type="submit" className={styles.icon}>
+					<button type="submit" className={styles.icon} aria-label="search">
 						<IconSearch width={24} height={24} />
 					</button>
 					<input

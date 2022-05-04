@@ -18,6 +18,7 @@ const Header = (): JSX.Element => {
 							alt="AudioVerse"
 							width={161}
 							height={23}
+							layout="intrinsic"
 						/>
 					</a>
 				</Link>

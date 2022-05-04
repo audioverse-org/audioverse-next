@@ -125,5 +125,9 @@
     "budget": 230400,
     "budgetPercentIncreaseRed": 5,
     "showDetails": true
+  },
+    "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }

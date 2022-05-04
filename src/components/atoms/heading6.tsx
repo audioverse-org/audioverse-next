@@ -25,11 +25,12 @@ export default function Heading6({
 	className,
 }: PropsWithChildren<Props>): JSX.Element {
 	return (
-		<h6
+		<h1
 			className={clsx(
 				baseStyles.base,
 				sans && baseStyles.sans,
 				unpadded && baseStyles.unpadded,
+				styles.h6,
 				loose && styles.loose,
 				large && styles.large,
 				uppercase && styles.uppercase,
@@ -38,6 +39,6 @@ export default function Heading6({
 			)}
 		>
 			{children}
-		</h6>
+		</h1>
 	);
 }

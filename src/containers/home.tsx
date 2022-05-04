@@ -131,6 +131,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								layout="fill"
 								objectFit="cover"
 								priority
+								alt="Home page main image"
 							/>
 						</div>
 					}
@@ -259,7 +260,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										<Button type="super" href={url} text={cta} />
 									</>
 								}
-								media={<Image src={image} layout="fill" objectFit="cover" />}
+								media={
+									<Image
+										src={image}
+										layout="fill"
+										objectFit="cover"
+										alt={heading?.props?.defaultMessage?.[0].value}
+									/>
+								}
 								theme={BaseColors.DARK}
 								className={styles.featureSlide}
 							/>
@@ -330,6 +338,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							layout="fill"
 							objectFit="cover"
 							sizes="(max-width: 664px) 100vw, 50vw"
+							alt={intl.formatMessage({
+								id: 'homePage__downloadAppSectionTitle',
+								defaultMessage: 'Download the App',
+								description: 'home page download app section title',
+							})}
 						/>
 					}
 					theme={BaseColors.CREAM}
@@ -471,6 +484,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							src="/img/unsplash-support.jpg"
 							layout="fill"
 							objectFit="cover"
+							alt={intl.formatMessage({
+								id: 'homePage__supportSectionTitle',
+								defaultMessage: 'Support free audio',
+								description: 'home page support section title',
+							})}
 						/>
 					}
 					theme={BaseColors.LIGHT_TONE}
@@ -480,7 +498,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			</div>
 			<div className={styles.footerWrapper} ref={footerRef}>
 				<div className={styles.footer}>
-					<Image src="/img/logo.svg" width={161} height={23} />
+					<Image
+						src="/img/logo.svg"
+						width={161}
+						height={23}
+						alt="logo"
+						layout="intrinsic"
+					/>
 					<Heading3 sans unpadded>
 						<FormattedMessage
 							id="homePage__tagline"

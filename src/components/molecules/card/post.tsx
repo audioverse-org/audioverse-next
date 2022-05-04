@@ -30,7 +30,13 @@ export default function CardPost({
 	const duration = useFormattedDuration(dur);
 	const heroImage = post.image?.url && (
 		<div className={clsx(alternate && styles.alternate)}>
-			<Image src={post.image.url} alt={post.title} width={500} height={260} />
+			<Image
+				src={post.image.url}
+				alt={post.title || 'Blog Image'}
+				width={500}
+				height={260}
+				layout="intrinsic"
+			/>
 		</div>
 	);
 	return (
