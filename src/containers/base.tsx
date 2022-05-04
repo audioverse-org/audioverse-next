@@ -58,9 +58,6 @@ function Base<P>({
 		<>
 			<React.StrictMode>
 				<Head>
-					<title>{title ? `${title} | ` : ''}AudioVerse</title>
-					{description && <meta name="description" content={description} />}
-					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 					<meta
 						name="viewport"
 						content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
@@ -89,7 +86,7 @@ function Base<P>({
 					}}
 				/>
 				<NextSeo
-					title={title ? `${title}|` : '' + 'AudioVerse'}
+					title={title ? `${title}|AudioVerse` : 'AudioVerse'}
 					description={description ? description : ''}
 					canonical={canonicalUrl ? canonicalUrl : ''}
 					openGraph={{
