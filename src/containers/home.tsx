@@ -1,5 +1,5 @@
-import { BrandJsonLd } from 'next-seo';
 import clsx from 'clsx';
+import { BrandJsonLd } from 'next-seo';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
