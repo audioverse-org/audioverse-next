@@ -1,3 +1,4 @@
+import { BrandJsonLd } from 'next-seo';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -80,6 +81,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 
 	return (
 		<>
+			<BrandJsonLd
+				slogan="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
+				id="https://www.audioverse.org"
+				logo="/favicon.svg"
+				aggregateRating={{
+					ratingValue: '5',
+				}}
+			/>
 			<div className={styles.wrapper}>
 				<Section
 					text={
