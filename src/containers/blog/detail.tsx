@@ -1,3 +1,4 @@
+import { ArticleJsonLd } from 'next-seo';
 import Image from 'next/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -34,6 +35,14 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 	const duration = useFormattedDuration(readingDuration || 0);
 	return (
 		<div className={styles.container}>
+			<ArticleJsonLd
+				url={'https://www.audioverse.org' + canonicalPath}
+				title={title}
+				images={[image?.url || '']}
+				datePublished={publishDate}
+				authorName="AudioVerse"
+				description={body}
+			/>
 			{image ? (
 				<div className={styles.imageContainer}>
 					<Image src={image.url} alt={title} layout="fill" objectFit="cover" />
