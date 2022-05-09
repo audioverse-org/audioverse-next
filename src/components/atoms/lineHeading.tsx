@@ -17,15 +17,16 @@ export default function LineHeading({
 	small?: boolean;
 }): JSX.Element {
 	return (
-		<h5
+		<h1
 			className={clsx(
 				styles.heading,
+				styles.h1,
 				className,
 				color === BaseColors.SALMON && styles.salmon,
 				small && styles.small
 			)}
 		>
 			{children}
-		</h5>
+		</h1>
 	);
 }
