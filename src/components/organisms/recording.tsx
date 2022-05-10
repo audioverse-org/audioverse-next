@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { CourseJsonLd } from 'next-seo';
 import startCase from 'lodash/startCase';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -249,6 +250,13 @@ export function Recording({
 
 	return (
 		<Tease className={clsx(styles.base, styles[contentType])}>
+			<CourseJsonLd
+				courseName={title}
+				description={description as string}
+				provider={{
+					name: 'AudioVerse',
+				}}
+			/>
 			<Head>
 				<meta
 					name="apple-itunes-app"

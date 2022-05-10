@@ -1,3 +1,4 @@
+import { SiteLinksSearchBoxJsonLd } from 'next-seo';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -153,6 +154,15 @@ export default function Discover({
 
 	return (
 		<>
+			<SiteLinksSearchBoxJsonLd
+				url="https://www.audioverse.org"
+				potentialActions={[
+					{
+						target: `https://www.audioverse.org/en/search?q`,
+						queryInput: 'teachings',
+					},
+				]}
+			/>
 			{sections.map(({ heading, cards, seeAll, url }) => (
 				<div key={url}>
 					<LineHeading>{heading}</LineHeading>
