@@ -1,3 +1,4 @@
+import { SiteLinksSearchBoxJsonLd } from 'next-seo';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -55,6 +56,15 @@ export default function DiscoverCollections({
 	);
 	return (
 		<div>
+			<SiteLinksSearchBoxJsonLd
+				url="https://www.audioverse.org"
+				potentialActions={[
+					{
+						target: `https://www.audioverse.org/en/search?q`,
+						queryInput: 'collections',
+					},
+				]}
+			/>
 			{websiteFeaturedCollection && (
 				<>
 					<LineHeading>
