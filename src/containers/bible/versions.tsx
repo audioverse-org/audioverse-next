@@ -1,3 +1,4 @@
+import { SiteLinksSearchBoxJsonLd } from 'next-seo';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -23,6 +24,15 @@ export interface VersionsProps {
 function Versions({ versions }: VersionsProps): JSX.Element {
 	return (
 		<Tease className={styles.tease} fullBleed={false}>
+			<SiteLinksSearchBoxJsonLd
+				url="https://www.audioverse.org"
+				potentialActions={[
+					{
+						target: `https://www.audioverse.org/en/search?q`,
+						queryInput: 'bibles',
+					},
+				]}
+			/>
 			<ContentWidthLimiter>
 				<Heading1>
 					<FormattedMessage
