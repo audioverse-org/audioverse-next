@@ -85,9 +85,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				slogan="AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings."
 				id="https://www.audioverse.org"
 				logo="/favicon.svg"
-				aggregateRating={{
-					ratingValue: '5',
-				}}
+				// aggregateRating={{
+				// 	ratingValue: '5',
+				// }}
 			/>
 			<div className={styles.wrapper}>
 				<Section
