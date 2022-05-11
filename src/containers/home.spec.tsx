@@ -182,6 +182,25 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 		blogPosts: {
 			nodes: [post],
 		},
+		bibleChapters: {
+			nodes: [
+				{
+					title: 'Genesis',
+					canonicalPath: 'the_sequence_path',
+					contentType: SequenceContentType.BibleBook,
+					speakers: {
+						nodes: [],
+					},
+					allRecordings: {
+						nodes: [
+							{
+								canonicalPath: 'the_canonical_path',
+							},
+						],
+					},
+				},
+			],
+		},
 	}
 );
 
@@ -232,7 +251,7 @@ describe('home page', () => {
 	it('includes testimonies', async () => {
 		const { getByText } = await renderPage();
 
-		expect(getByText('Testimonies')).toBeInTheDocument();
+		expect(getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('falls back to English', async () => {
@@ -240,7 +259,7 @@ describe('home page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Testimonies')).toBeInTheDocument();
+		expect(getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('renders song title', async () => {

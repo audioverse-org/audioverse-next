@@ -10,6 +10,7 @@ import InherentSizeImage from '@components/atoms/inherentSizeImage';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardPerson from '@components/molecules/card/person';
 import CardRecording from '@components/molecules/card/recording';
@@ -19,7 +20,6 @@ import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
-import IconButton from '@components/molecules/iconButton';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
@@ -36,8 +36,6 @@ import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
-import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -169,11 +167,11 @@ function CollectionDetail({
 							triggerClassName={styles.iconButton}
 							rssUrl={makeCollectionFeedRoute(lang, id)}
 						/>
-						<IconButton
-							Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-							onClick={() => toggleFavorited()}
-							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
+						<ButtonFavorite
+							isFavorited={!!isFavorited}
+							toggleFavorited={toggleFavorited}
 							backgroundColor={BaseColors.DARK}
+							light
 							className={styles.iconButton}
 						/>
 					</div>

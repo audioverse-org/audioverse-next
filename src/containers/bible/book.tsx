@@ -105,6 +105,14 @@ function BookInner({
 		sequence: null;
 	} {
 		const toRecordingChapterNumber = chapter?.number as number;
+		let fakeAlias = 'KJV';
+		try {
+			const urlPathnameComponents =
+				new URL(chapter?.url || '').pathname.match(/(\d+)_([^_]+)/i) || [];
+			fakeAlias = `KJV_${urlPathnameComponents[2]}_${urlPathnameComponents[1]}`;
+		} catch (e) {
+			// ignore
+		}
 		return {
 			id: chapter?.id || '',
 			title: chapter?.title || '',
@@ -116,7 +124,9 @@ function BookInner({
 					mimeType: 'audio/mpeg',
 					filesize: 'unknown',
 					duration: chapter?.duration || 0,
-				},
+					logUrl: `https://www.audioverse.org/en/download/audiobible/${fakeAlias}/filename.mp3`,
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				} as any,
 			],
 			sequencePreviousRecording:
 				toRecordingChapterNumber > 1
@@ -136,6 +146,7 @@ function BookInner({
 				toRecordingChapterNumber
 			)}`,
 			sequence: null,
+			collection: null,
 		};
 	}
 
@@ -164,7 +175,7 @@ function BookInner({
 		definition: (
 			<p>
 				<a
-					href={sponsor.url}
+					href={sponsor.website}
 					target="_blank"
 					className="decorated hover--salmon"
 					rel="noreferrer"
@@ -276,7 +287,7 @@ function BookInner({
 									<TeaseRecording
 										recording={{
 											...chapterToRecording(chapter),
-											recordingContentType: RecordingContentType.Sermon,
+											recordingContentType: RecordingContentType.BibleChapter,
 											sequenceIndex: null,
 											persons: [],
 										}}

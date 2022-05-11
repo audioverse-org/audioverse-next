@@ -7,6 +7,7 @@ import {
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import CardAudiobookTrack from './audiobookTrack';
+import CardBibleChapter from './bibleChapter';
 import CardSermon from './sermon';
 import CardSong from './song';
 import CardStory from './story';
@@ -32,6 +33,8 @@ export default function CardRecording({
 					{...{ track: recording, hideHat, isOptionalLink }}
 				/>
 			);
+		case RecordingContentType.BibleChapter:
+			return <CardBibleChapter {...{ recording, hideHat, isOptionalLink }} />;
 		case RecordingContentType.MusicTrack:
 			return <CardSong {...{ song: recording, hideHat, isOptionalLink }} />;
 		case RecordingContentType.Sermon:

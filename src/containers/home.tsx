@@ -7,9 +7,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading3 from '@components/atoms/heading3';
 import Button from '@components/molecules/button';
-import CardBibleBook from '@components/molecules/card/bibleBook';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
+import CardSequence from '@components/molecules/card/sequence';
 import CardMasonry from '@components/molecules/cardMasonry';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import Input from '@components/molecules/form/input';
@@ -26,6 +26,7 @@ import {
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
+	makeTestimoniesRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -71,6 +72,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
 	const posts = data?.blogPosts.nodes || [];
+	const bibleChapters = data?.bibleChapters.nodes || [];
 
 	const features = getAppFeatures(languageRoute);
 
@@ -174,9 +176,13 @@ export default function Home({ data }: HomeProps): JSX.Element {
 													data: r,
 												} as const)
 										),
-										{
-											type: 'bible',
-										} as const,
+										...(languageRoute === 'en'
+											? [
+													{
+														type: 'bible',
+													} as const,
+											  ]
+											: []),
 									]}
 									render={({ data }) =>
 										data.type === 'recording' ? (
@@ -185,19 +191,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												recording={data.data}
 											/>
 										) : (
-											<CardBibleBook
-												book={{
-													book_id: 'ENGKJV1/GEN',
-													name: 'Genesis',
-													bible: {
-														abbreviation: 'KJV',
-													},
-													name_short: 'Gen',
-													book_seq: '1',
-													chapters: Array.from(Array(50).keys()),
-													testament: 'OT',
-												}}
-											/>
+											<CardSequence sequence={bibleChapters[0]} />
 										)
 									}
 									key={`item-${recentRecordings.length}`}
@@ -278,11 +272,26 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							<>
 								<Heading1 className={styles.testimoniesHeading}>
 									<FormattedMessage
-										id="home__testimoniesTitle"
-										defaultMessage="Testimonies"
-										description="Testimonies slider title"
+										id="home__testimonialsTitle"
+										defaultMessage="Testimonials"
+										description="Testimonials slider title"
 									/>
 								</Heading1>
+								<p className={clsx(styles.paragraph, styles.narrow)}>
+									<FormattedMessage
+										id="homePage__testimoniesIntro"
+										defaultMessage="See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
+										values={{
+											a: function a(chunks: string) {
+												return (
+													<Link href={makeTestimoniesRoute(languageRoute)}>
+														<a className="decorated">{chunks}</a>
+													</Link>
+												);
+											},
+										}}
+									/>
+								</p>
 								<Testimonies testimonies={testimonies} />
 							</>
 						}
@@ -351,7 +360,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							</>
 						}
 						media={
-							<div className={styles.newsletterWrapper}>
+							<div className={styles.newsletterWrapper} id="newsletter-signup">
 								<div className={styles.newsletterBox}>
 									<div className={styles.newsletterHat}>
 										<IconBell />
@@ -362,19 +371,25 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									</div>
 									<form
 										className={styles.newsletterBody}
-										action="https://audioverse.z2systems.com/np/clients/audioverse/submitSubscription.jsp"
+										action="https://audioverse.activehosted.com/proc.php"
 										method="POST"
 										target="_blank"
 									>
-										<input type="hidden" name="subscription" value="5" />
+										<input type="hidden" name="u" value="1" />
+										<input type="hidden" name="f" value="1" />
+										<input type="hidden" name="s" />
+										<input type="hidden" name="c" value="0" />
+										<input type="hidden" name="m" value="0" />
+										<input type="hidden" name="act" value="sub" />
+										<input type="hidden" name="v" value="2" />
 										<input
 											type="hidden"
-											name="skipDuplicateRequestCheck"
-											value="1"
+											name="or"
+											value="e2e4794f66cb49fa14b643a5f9d6536b"
 										/>
 										<div className={styles.newsletterFieldRow}>
 											<Input
-												name="subscriber.name"
+												name="fullname"
 												type="text"
 												label={
 													<FormattedMessage
@@ -390,7 +405,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												setValue={setName}
 											/>
 											<Input
-												name="subscriber.email1"
+												name="email"
 												type="text"
 												label={
 													<FormattedMessage

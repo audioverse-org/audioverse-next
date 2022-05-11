@@ -9,6 +9,7 @@ import LineHeading from '@components/atoms/lineHeading';
 import RoundImage from '@components/atoms/roundImage';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardCollection from '@components/molecules/card/collection';
 import CardRecording from '@components/molecules/card/recording';
@@ -18,7 +19,6 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
-import IconButton from '@components/molecules/iconButton';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
@@ -34,8 +34,6 @@ import {
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icon-forward-light.svg';
-import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -164,11 +162,11 @@ function PresenterDetail({
 						triggerClassName={styles.iconButton}
 						rssUrl={makePresenterFeedRoute(lang, id)}
 					/>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? BaseColors.RED : BaseColors.DARK}
+					<ButtonFavorite
+						isFavorited={!!isFavorited}
+						toggleFavorited={toggleFavorited}
 						backgroundColor={BaseColors.SMART_PLAYLIST_H}
+						light
 						className={styles.iconButton}
 					/>
 				</div>

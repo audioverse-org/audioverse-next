@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import BibleIcon from '../../public/img/fa-bible.svg';
 import AudiobookIcon from '../../public/img/fa-book-light.svg';
 import StoryIcon from '../../public/img/fa-feather-light.svg';
 import ListIcon from '../../public/img/fa-list-alt.svg';
@@ -11,6 +12,7 @@ import { SequenceContentType } from './generated/graphql';
 
 type ISequenceTypeTheme = {
 	backgroundColor:
+		| BaseColors.BIBLE_B
 		| BaseColors.BOOK_H
 		| BaseColors.SONG_H
 		| BaseColors.CREAM
@@ -37,6 +39,19 @@ export function getSequenceTypeTheme(
 					<FormattedMessage
 						id="sequenceType__audiobookTitle"
 						defaultMessage="Book"
+					/>
+				),
+			},
+			[SequenceContentType.BibleBook]: {
+				backgroundColor: BaseColors.BIBLE_B,
+				iconColor: BaseColors.SALMON,
+				ruleColor: BaseColors.MID_TONE,
+				textColor: BaseColors.WHITE,
+				Icon: BibleIcon,
+				label: (
+					<FormattedMessage
+						id="sequenceType__bibleBookTitle"
+						defaultMessage="Bible Book"
 					/>
 				),
 			},

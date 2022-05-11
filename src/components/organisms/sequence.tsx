@@ -7,6 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import HorizontalRule from '@components/atoms/horizontalRule';
 import RoundImage from '@components/atoms/roundImage';
+import ButtonFavorite from '@components/molecules/buttonFavorite';
 import { isBackgroundColorDark } from '@components/molecules/buttonPlay';
 import ButtonShare from '@components/molecules/buttonShare';
 import CardRecording from '@components/molecules/card/recording';
@@ -15,7 +16,6 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
-import IconButton from '@components/molecules/iconButton';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
@@ -31,9 +31,6 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
-
-import LikeActiveIcon from '../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../public/img/icon-like-light.svg';
 
 import styles from './sequence.module.scss';
 
@@ -65,6 +62,8 @@ export function Sequence({
 		switch (contentType) {
 			case SequenceContentType.Audiobook:
 				return makeAudiobookFeedRoute;
+			case SequenceContentType.BibleBook:
+				return () => undefined;
 			case SequenceContentType.MusicAlbum:
 				return makeSongAlbumFeedRoute;
 			case SequenceContentType.Series:
@@ -76,7 +75,7 @@ export function Sequence({
 		}
 	})()(languageRoute, id);
 
-	const { textColor, ruleColor, iconColor, backgroundColor } =
+	const { textColor, ruleColor, backgroundColor } =
 		getSequenceTypeTheme(contentType);
 	const linkClasses = clsx(
 		'decorated',
@@ -169,11 +168,11 @@ export function Sequence({
 						triggerClassName={styles.iconButton}
 						rssUrl={rssUrl}
 					/>
-					<IconButton
-						Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-						onClick={() => toggleFavorited()}
-						color={isFavorited ? iconColor : textColor}
+					<ButtonFavorite
+						isFavorited={!!isFavorited}
+						toggleFavorited={toggleFavorited}
 						backgroundColor={backgroundColor}
+						light
 						className={styles.iconButton}
 					/>
 				</div>

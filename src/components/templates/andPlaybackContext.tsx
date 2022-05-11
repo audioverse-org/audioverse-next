@@ -184,6 +184,7 @@ export default function AndPlaybackContext({
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
+	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
 	const queryClient = useQueryClient();
 
@@ -331,8 +332,12 @@ export default function AndPlaybackContext({
 			setVolume(volume);
 			playerRef.current?.volume(volume / 100);
 		},
-		setSpeed: (s: number) => playerRef.current?.playbackRate(s),
-		getSpeed: () => playerRef.current?.playbackRate() || 1,
+		getSpeed: () => _speed,
+		setSpeed: (s: number) => {
+			playerRef.current?.playbackRate(s);
+			playerRef.current?.defaultPlaybackRate(s);
+			_setSpeed(s);
+		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			if (sourceRecordings && sourceRecordings.length > 1) {
@@ -361,7 +366,10 @@ export default function AndPlaybackContext({
 			const resetPlayer = () => {
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
 				if (logUrl) {
-					fetch(logUrl).catch(() => {
+					fetch(logUrl, {
+						method: 'HEAD',
+						mode: 'no-cors',
+					}).catch(() => {
 						// We don't want Promise rejections here to clutter the console
 					});
 				}
@@ -385,7 +393,7 @@ export default function AndPlaybackContext({
 				onLoadRef.current = undefined;
 			};
 
-			const options = {
+			const options: VideoJs.VideoJsPlayerOptions = {
 				poster: '/img/poster.jpg',
 				controls: false,
 				preload: 'auto',

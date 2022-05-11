@@ -13,17 +13,28 @@ module.exports = withBundleAnalyzer(
 			// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
 			buildExcludes: [/server\/middleware-manifest\.json$/],
 		},
-		headers: [
-			{
-				source: '/(.*)',
-				headers: [
-					{
-						key: 'Permissions-Policy',
-						value: 'interest-cohort=()',
-					},
-				],
-			},
-		],
+		headers() {
+			return [
+				{
+					source: '/apple-app-site-association',
+					headers: [
+						{
+							key: 'Content-Type',
+							value: 'application/json',
+						},
+					],
+				},
+				{
+					source: '/(.*)',
+					headers: [
+						{
+							key: 'Permissions-Policy',
+							value: 'interest-cohort=()',
+						},
+					],
+				},
+			];
+		},
 		async redirects() {
 			const languagePrefixMap = {
 				english: 'en',
@@ -146,6 +157,11 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/registrar/help',
+					destination: '/:lang/account/login',
+					permanent: true,
+				},
+				{
 					source: '/:lang/blog/page/1',
 					destination: '/:lang/blog',
 					permanent: true,
@@ -227,7 +243,7 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/audiobibles/books/ENGKJV/:testamentCode/:bookCode/1',
-					destination: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/472',
 					permanent: false,
 				},
 				{
@@ -246,8 +262,18 @@ module.exports = withBundleAnalyzer(
 					permanent: true,
 				},
 				{
+					source: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/472',
+					permanent: false,
+				},
+				{
+					source: '/:lang/bibles/ENGKJV1/:path*',
+					destination: '/:lang/bibles/472',
+					permanent: false,
+				},
+				{
 					source: '/:lang/audiobibles/books/ENGKJV/1',
-					destination: '/:lang/bibles/ENGKJV1',
+					destination: '/:lang/bibles/472',
 					permanent: true,
 				},
 				{
@@ -266,7 +292,7 @@ module.exports = withBundleAnalyzer(
 					permanent: false,
 				},
 				{
-					source: '/:lang/bibles/:bibleCode/:bookCode',
+					source: '/:lang/bibles/:bibleCode/:bookCode([\\w\\d]\\w+)',
 					destination: '/:lang/bibles/:bibleCode/:bookCode/1',
 					permanent: false,
 				},
@@ -353,7 +379,12 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/trending/index',
-					destination: '/:lang/teachings/trending',
+					destination: '/:lang/teachings/trending/all',
+					permanent: true,
+				},
+				{
+					source: '/:lang/teachings/trending',
+					destination: '/:lang/teachings/trending/all',
 					permanent: true,
 				},
 				{

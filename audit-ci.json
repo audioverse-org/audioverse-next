@@ -1,9 +1,9 @@
 {
 	"low": true,
 	"allowlist": [
-		1004946, // Not used with unsafe input
-		1004967, // Not used with unsafe input
-		1006897, // Not used with unsafe input
-		1006899 // Not used with unsafe input
+		1067300, // Not used at runtime
+		1067301, // Not used at runtime
+		1067342, // Not used at runtime
+		1067442 // Not used at runtime
 	]
 }

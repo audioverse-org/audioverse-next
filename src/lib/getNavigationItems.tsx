@@ -45,7 +45,6 @@ import IconLock from '../../public/img/fa-lock-heavy.svg';
 import IconMusic from '../../public/img/fa-music.svg';
 import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
 import IconSeedling from '../../public/img/fa-seedling.svg';
-import IconSignOut from '../../public/img/fa-sign-out.svg';
 import IconStore from '../../public/img/fa-store.svg';
 import IconStream from '../../public/img/fa-stream.svg';
 import IconTwitter from '../../public/img/fa-twitter.svg';
@@ -61,6 +60,7 @@ import IconContact from '../../public/img/icon-contact.svg';
 import IconMore from '../../public/img/icon-more.svg';
 import IconOurStory from '../../public/img/icon-our-story.svg';
 import IconSearch from '../../public/img/icon-search.svg';
+import IconSignOut from '../../public/img/icon-sign-out.svg';
 
 export type INavigationItem = {
 	key: string;
@@ -119,7 +119,7 @@ export function getNavigationItems(
 					}),
 				},
 				{
-					key: 'saved',
+					key: 'history',
 					href: makeLibraryRoute(languageRoute, 'history'),
 					Icon: IconHistory,
 					label: intl.formatMessage({
@@ -333,8 +333,8 @@ export function getNavigationItems(
 					href: makeTestimonySubmitRoute(languageRoute),
 					Icon: IconCommentHeavy,
 					label: intl.formatMessage({
-						id: `header__navItemContact-testimony`,
-						defaultMessage: 'Share Testimony',
+						id: `header__navItemContact-testimonial`,
+						defaultMessage: 'Share Testimonial',
 					}),
 				},
 				{

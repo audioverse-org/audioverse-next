@@ -1,5 +1,6 @@
 fragment copyrightInfo on Recording {
 	copyrightYear
+	contentType
 	distributionAgreement {
 		sponsor {
 			title
@@ -10,6 +11,9 @@ fragment copyrightInfo on Recording {
 				url(size: 100, cropMode: MAX_SIZE)
 			}
 		}
+	}
+	collection {
+		title
 	}
 	sponsor {
 		title

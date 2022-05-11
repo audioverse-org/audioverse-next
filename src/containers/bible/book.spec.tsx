@@ -46,7 +46,7 @@ function loadPageData() {
 		title: 'the_version_title',
 		sponsor: {
 			title: 'the_sponsor_name',
-			url: 'the_sponsor_url',
+			website: 'the_sponsor_url',
 		},
 		books: [
 			{
@@ -101,7 +101,7 @@ describe('Bible book detail page', () => {
 				title: 'the_version_title',
 				sponsor: {
 					title: 'FCBH',
-					url: '',
+					website: '',
 				},
 				books: [
 					{
@@ -153,6 +153,9 @@ describe('Bible book detail page', () => {
 	});
 
 	it('includes player', async () => {
+		window.fetch = jest.fn().mockReturnValueOnce({
+			catch: () => undefined,
+		});
 		loadPageData();
 
 		await act(async () => {
@@ -160,5 +163,6 @@ describe('Bible book detail page', () => {
 			userEvent.click(getAllByLabelText('play')[0]);
 		});
 		expect(videojs).toBeCalled();
+		expect(window.fetch).toBeCalled();
 	});
 });

@@ -272,9 +272,6 @@
   "andGlobalModals__confirmRemoveFavorite-keep": {
     "string": "Keep item"
   },
-  "andGlobalModals__continueAsGuest": {
-    "string": "Continue as guest"
-  },
   "andGlobalModals__createAccount": {
     "string": "Create Account"
   },
@@ -283,6 +280,9 @@
   },
   "andNavigation__donate": {
     "string": "Donate"
+  },
+  "andNavigation__playing": {
+    "string": "Playing"
   },
   "andOnboarding__intro": {
     "string": "Create or login to an account and access a growing set of features to help you explore sound doctrine."
@@ -366,6 +366,9 @@
   "bibleVersion__sponsorLabel": {
     "string": "Sponsor"
   },
+  "bibleVersion__websiteLabel": {
+    "string": "Website"
+  },
   "bibleVersions__heading": {
     "string": "Bible"
   },
@@ -410,9 +413,18 @@
   "cardBibleVersion__booksLabel": {
     "string": "66 Books"
   },
+  "cardBibleVersion__showAll": {
+    "string": "Show All"
+  },
+  "cardCollection__showAll": {
+    "string": "Show All"
+  },
   "cardCollection__teachingsCountLabel": {
     "comment": "Card collection teachings count label",
     "string": "{count} teachings"
+  },
+  "cardCollection_booksLabel": {
+    "string": "{count} books"
   },
   "cardCollection_sequenceLabel": {
     "comment": "Card collection sequence count label",
@@ -443,6 +455,12 @@
   },
   "cardSequence_audiobookType": {
     "string": "Book"
+  },
+  "cardSequence_chaptersLabel": {
+    "string": "{count} chapters"
+  },
+  "cardSequence_readByLabel": {
+    "string": "Read By {name}"
   },
   "cardSequence_scriptureSongsType": {
     "string": "Scripture Songs"
@@ -553,6 +571,9 @@
   "collectionType__audiobookSeries": {
     "string": "Book Series"
   },
+  "collectionType__bibleVersion": {
+    "string": "Bible Version"
+  },
   "collectionType__conference": {
     "string": "Conference"
   },
@@ -614,7 +635,7 @@
     "string": "Request Support"
   },
   "contact__recipient-testimonials": {
-    "string": "Share Testimony"
+    "string": "Share Testimonial"
   },
   "contact__submitLabel": {
     "string": "Submit"
@@ -624,18 +645,6 @@
   },
   "contact__title": {
     "string": "Contact"
-  },
-  "container-sermonList__filterLabelAll": {
-    "comment": "sermon list page filter all",
-    "string": "All"
-  },
-  "container-sermonList__filterLabelAudio": {
-    "comment": "sermon list page filter audio",
-    "string": "Audio only"
-  },
-  "container-sermonList__filterLabelVideo": {
-    "comment": "sermon list page filter video",
-    "string": "Video"
   },
   "copyrightInfos__multipleCopyrightExplanation": {
     "comment": "Copyright infos component multiple copyright explanation",
@@ -674,6 +683,9 @@
   "discover__conferencesSeeAll": {
     "string": "See All Conferences"
   },
+  "discover__recentBlogSeeAll": {
+    "string": "See All Blog Posts"
+  },
   "discover__recentTeachingsSeeAll": {
     "string": "See All Teachings"
   },
@@ -691,6 +703,12 @@
   },
   "discover_conferencesHeading": {
     "string": "Recent Conferences"
+  },
+  "discover_featuredTeachingsHeading": {
+    "string": "Featured Teachings"
+  },
+  "discover_recentBlogHeading": {
+    "string": "Recent Blog Posts"
   },
   "discover_recentTeachingsHeading": {
     "string": "Recent Teachings"
@@ -832,8 +850,8 @@
   "header__navItemContact-support": {
     "string": "Request Support"
   },
-  "header__navItemContact-testimony": {
-    "string": "Share Testimony"
+  "header__navItemContact-testimonial": {
+    "string": "Share Testimonial"
   },
   "header__navItemContact-twitter": {
     "string": "Twitter"
@@ -996,9 +1014,12 @@
   "homePage__tagline": {
     "string": "Sound Doctrine"
   },
-  "home__testimoniesTitle": {
-    "comment": "Testimonies slider title",
-    "string": "Testimonies"
+  "homePage__testimoniesIntro": {
+    "string": "See what some of our listeners have shared about using AudioVerse. <a>Visit the Testimonials page</a> to see even more."
+  },
+  "home__testimonialsTitle": {
+    "comment": "Testimonials slider title",
+    "string": "Testimonials"
   },
   "languageAlternativesAlert__dismiss": {
     "string": "Dismiss"
@@ -1197,6 +1218,9 @@
     "comment": "login form login button",
     "string": "Login"
   },
+  "loginForm__loginFailureMessage": {
+    "string": "Login failed"
+  },
   "loginForm__passwordLabel": {
     "string": "Password"
   },
@@ -1328,6 +1352,9 @@
   "molecule-cardRecordingSequenceHat__addAlbum": {
     "string": "Add Album"
   },
+  "molecule-cardRecordingSequenceHat__addBibleBook": {
+    "string": "Add Book"
+  },
   "molecule-cardRecordingSequenceHat__addBook": {
     "string": "Add Book"
   },
@@ -1342,6 +1369,9 @@
   },
   "molecule-cardRecordingSequenceHat__removeAlbum": {
     "string": "Remove Album"
+  },
+  "molecule-cardRecordingSequenceHat__removeBibleBook": {
+    "string": "Remove Book"
   },
   "molecule-cardRecordingSequenceHat__removeBook": {
     "string": "Remove Book"
@@ -1430,6 +1460,9 @@
   "organism-recording__albumListTitle": {
     "string": "Other Songs in Album"
   },
+  "organism-recording__backToChapterInfo": {
+    "string": "Back to Chapter Info"
+  },
   "organism-recording__buttonLabelNext": {
     "comment": "recording next button label",
     "string": "Next"
@@ -1437,6 +1470,9 @@
   "organism-recording__buttonLabelPrevious": {
     "comment": "recording previous button label",
     "string": "Previous"
+  },
+  "organism-recording__collectionInfoTitle": {
+    "string": "Parent Bible"
   },
   "organism-recording__conferenceInfoTitle": {
     "comment": "Recording conference info title",
@@ -1449,6 +1485,9 @@
   "organism-recording__partInfo": {
     "comment": "recording part info",
     "string": "Part {index}"
+  },
+  "organism-recording__readAlongLabel": {
+    "string": "Read Along"
   },
   "organism-recording__readByLabel": {
     "string": "Read by {name}"
@@ -1673,6 +1712,30 @@
   "profile__buttonLabelSaveChanges": {
     "string": "Save changes"
   },
+  "profile__deleteConfirmAcknowledgeStatements": {
+    "string": "Please acknowledge all the above statements."
+  },
+  "profile__deleteConfirmDelete": {
+    "string": "Delete account"
+  },
+  "profile__deleteConfirmImmediatelyDeleted": {
+    "string": "I understand that my account will be immediately deleted."
+  },
+  "profile__deleteConfirmIntro": {
+    "string": "Do you want to delete your account? You cannot undo this action."
+  },
+  "profile__deleteConfirmLibraryLost": {
+    "string": "I understand that all my saved library will be lost."
+  },
+  "profile__deleteConfirmNevermind": {
+    "string": "Never mind"
+  },
+  "profile__deleteConfirmNoLogin": {
+    "string": "I understand that I will no longer be able to log in unless I create a new account."
+  },
+  "profile__deleteConfirmTitle": {
+    "string": "Are you sure?"
+  },
   "profile__heading": {
     "string": "Account Settings"
   },
@@ -1697,6 +1760,21 @@
   },
   "profile__subheading": {
     "string": "Profile"
+  },
+  "recordingHasVideoFilter__filter": {
+    "string": "Filter"
+  },
+  "recordingHasVideoFilter__filterAll": {
+    "comment": "recording has video filter all",
+    "string": "All"
+  },
+  "recordingHasVideoFilter__filterAudio": {
+    "comment": "recording has video filter audio",
+    "string": "Audio only"
+  },
+  "recordingHasVideoFilter__filterVideo": {
+    "comment": "recording has video filter video",
+    "string": "Video"
   },
   "register__emailLabel": {
     "string": "Email"
@@ -1805,14 +1883,14 @@
   "search__conferencesHeading": {
     "string": "Conferences"
   },
-  "search__conferencesSeeAll": {
-    "string": "See All Conferences"
+  "search__conferencesSeeAllMatching": {
+    "string": "See All Matching Conferences"
   },
   "search__personsHeading": {
     "string": "Presenters"
   },
-  "search__personsSeeAll": {
-    "string": "See All Presenters"
+  "search__personsSeeAllMatching": {
+    "string": "See All Matching Presenters"
   },
   "search__resultsCount": {
     "string": "{count} Results"
@@ -1820,26 +1898,29 @@
   "search__sequencesHeading": {
     "string": "Series"
   },
-  "search__sequencesSeeAll": {
-    "string": "See All Series"
+  "search__sequencesSeeAllMatching": {
+    "string": "See All Matching Series"
   },
   "search__sponsorsHeading": {
     "string": "Sponsors"
   },
-  "search__sponsorsSeeAll": {
-    "string": "See All Sponsors"
+  "search__sponsorsSeeAllMatching": {
+    "string": "See All Matching Sponsors"
   },
   "search__teachingsHeading": {
     "string": "Teachings"
   },
-  "search__teachingsSeeAll": {
-    "string": "See All Teachings"
+  "search__teachingsSeeAllMatching": {
+    "string": "See All Matching Teachings"
   },
   "search__title": {
     "string": "Search"
   },
   "sequenceType__audiobookTitle": {
     "string": "Book"
+  },
+  "sequenceType__bibleBookTitle": {
+    "string": "Bible Book"
   },
   "sequenceType__musicTrackTitle": {
     "string": "Scripture Songs"
@@ -1890,6 +1971,9 @@
   "sermonDetailPage__openGraphDescription_audiobook": {
     "string": "Audiobook provided by {sponsorName}"
   },
+  "sermonDetailPage__openGraphDescription_bibleChapter": {
+    "string": "Bible Chapter provided by {sponsorName}"
+  },
   "sermonDetailPage__openGraphDescription_music": {
     "string": "Music by {speakerName}"
   },
@@ -1905,9 +1989,6 @@
   },
   "sermonList__heading": {
     "string": "All Teachings"
-  },
-  "sermonsList__filter": {
-    "string": "Filter"
   },
   "socialLogin__loginFacebookButton": {
     "string": "Login with Facebook"
@@ -2049,14 +2130,8 @@
   "testimonies__intro": {
     "string": "Have a great testimony? Tell us your story!"
   },
-  "testimonies__seeAll": {
-    "string": "See all Testimonies"
-  },
   "testimonies__shareYourStory": {
     "string": "Share your story"
-  },
-  "testimonies__submitTestimony": {
-    "string": "Submit a Testimony"
   },
   "testimonies__title": {
     "string": "Testimonials"

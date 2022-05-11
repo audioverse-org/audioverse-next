@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BaseColors } from '@lib/constants';
 import { CollectionContentType } from '@lib/generated/graphql';
 
+import BibleIcon from '../../../public/img/fa-bible.svg';
 import ListIcon from '../../../public/img/fa-list.svg';
 
 import TypeLockup from './typeLockup';
@@ -20,6 +21,12 @@ export default function CollectionTypeLockup({
 			<FormattedMessage
 				id="collectionType__audiobookSeries"
 				defaultMessage="Book Series"
+			/>
+		),
+		[CollectionContentType.BibleVersion]: (
+			<FormattedMessage
+				id="collectionType__bibleVersion"
+				defaultMessage="Bible Version"
 			/>
 		),
 		[CollectionContentType.Conference]: (
@@ -43,7 +50,11 @@ export default function CollectionTypeLockup({
 	}[contentType];
 	return (
 		<TypeLockup
-			Icon={ListIcon}
+			Icon={
+				contentType === CollectionContentType.BibleVersion
+					? BibleIcon
+					: ListIcon
+			}
 			label={label}
 			iconColor={BaseColors.SALMON}
 			textColor={BaseColors.WHITE}

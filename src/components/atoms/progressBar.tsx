@@ -34,14 +34,16 @@ export default function ProgressBar({
 			<input
 				type="range"
 				value={progress * 100}
+				step={0.0001}
 				aria-label={intl.formatMessage({
 					id: 'atom-progressBar__label',
 					defaultMessage: 'progress',
 					description: 'progress bar label',
 				})}
 				readOnly={!setProgress}
-				onChange={(e) =>
-					setProgress && setProgress(parseInt(e.target.value) / 100)
+				onInput={(e) =>
+					setProgress &&
+					setProgress(parseFloat((e.target as HTMLInputElement).value) / 100)
 				}
 				disabled={!setProgress}
 			/>

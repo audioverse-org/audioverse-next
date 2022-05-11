@@ -19,6 +19,7 @@ generates:
     config:
       fetcher: '@lib/api/fetchApi#graphqlFetcher'
       avoidOptionals: true
+      enumsAsConst: true
       scalars:
         ID: 'string | number'
         Date: 'string'

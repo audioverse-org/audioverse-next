@@ -15,15 +15,14 @@ import {
 	CardCollectionFragment,
 	CardRecordingFragment,
 	CardSequenceFragment,
+	CollectionContentType,
 } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
-import LikeIcon from '../../../../public/img/icon-like-light.svg';
 import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
-import IconButton from '../iconButton';
 
 import styles from './collection.module.scss';
 import CardRecording from './recording';
@@ -67,18 +66,20 @@ export default function CardCollection({
 			/>
 		</div>
 	);
+	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
 	return (
 		<Card>
 			<Link href={canonicalPath}>
 				<a
 					className={clsx(
 						styles.container,
+						isBibleVersion && styles.bibleVersion,
 						(isHovered || isSubHovered) && styles.otherHovered
 					)}
 				>
 					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
-					{!!(startDate && endDate) && (
+					{!!(startDate && endDate) && !isBibleVersion && (
 						<Heading6 sans unpadded className={styles.date}>
 							{formatDateRange(startDate, endDate)}
 						</Heading6>
@@ -94,12 +95,20 @@ export default function CardCollection({
 						className={styles.sequencesLabel}
 					>
 						{allSequences.aggregate?.count ? (
-							<FormattedMessage
-								id="cardCollection_sequenceLabel"
-								defaultMessage="{count} series"
-								description="Card collection sequence count label"
-								values={{ count: allSequences.aggregate?.count }}
-							/>
+							isBibleVersion ? (
+								<FormattedMessage
+									id="cardCollection_booksLabel"
+									defaultMessage="{count} books"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="cardCollection_sequenceLabel"
+									defaultMessage="{count} series"
+									description="Card collection sequence count label"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							)
 						) : (
 							<FormattedMessage
 								id="cardCollection__teachingsCountLabel"
@@ -124,32 +133,51 @@ export default function CardCollection({
 								<ProgressBar progress={playbackCompletedPercentage} />
 							)}
 						</div>
-						<IconButton
+						<ButtonFavorite
+							isFavorited={!!isFavorited}
+							toggleFavorited={toggleFavorited}
 							ref={ref}
-							Icon={isFavorited ? LikeActiveIcon : LikeIcon}
-							onClick={(e) => {
-								e.preventDefault();
-								toggleFavorited();
-							}}
-							color={isFavorited ? BaseColors.SALMON : BaseColors.WHITE}
-							backgroundColor={BaseColors.DARK}
+							backgroundColor={
+								isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
+							}
+							light
 							className={clsx(styles.like, isFavorited && styles.likeActive)}
 						/>
 					</div>
 					{sequences?.length || recordings?.length ? (
-						<div className={styles.subItems} ref={subRef}>
-							{sequences?.map((sequence) => (
-								<div className={styles.subItem} key={sequence.canonicalPath}>
-									<CardSequence sequence={sequence} slim />
-								</div>
-							))}
-							{!sequences?.length &&
-								recordings?.map((recording) => (
-									<div className={styles.subItem} key={recording.canonicalPath}>
-										<CardRecording recording={recording} isOptionalLink />
+						<>
+							<div className={styles.subItems} ref={subRef}>
+								{sequences?.map((sequence) => (
+									<div className={styles.subItem} key={sequence.canonicalPath}>
+										<CardSequence sequence={sequence} slim />
 									</div>
 								))}
-						</div>
+								{!sequences?.length &&
+									recordings?.map((recording) => (
+										<div
+											className={styles.subItem}
+											key={recording.canonicalPath}
+										>
+											<CardRecording recording={recording} isOptionalLink />
+										</div>
+									))}
+							</div>
+							{contentType === CollectionContentType.BibleVersion && (
+								<Heading6
+									large
+									loose
+									sans
+									unpadded
+									uppercase
+									className={styles.showAll}
+								>
+									<FormattedMessage
+										id="cardCollection__showAll"
+										defaultMessage="Show All"
+									/>
+								</Heading6>
+							)}
+						</>
 					) : null}
 				</a>
 			</Link>

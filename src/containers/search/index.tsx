@@ -69,8 +69,8 @@ function Search({ language }: SearchProps): JSX.Element {
 			)),
 			seeAll: recordings.pageInfo.hasNextPage && (
 				<FormattedMessage
-					id="search__teachingsSeeAll"
-					defaultMessage="See All Teachings"
+					id="search__teachingsSeeAllMatching"
+					defaultMessage="See All Matching Teachings"
 				/>
 			),
 			url: makeSearchTeachingsRoute(languageRoute, term),
@@ -89,8 +89,8 @@ function Search({ language }: SearchProps): JSX.Element {
 			)),
 			seeAll: persons.pageInfo.hasNextPage && (
 				<FormattedMessage
-					id="search__personsSeeAll"
-					defaultMessage="See All Presenters"
+					id="search__personsSeeAllMatching"
+					defaultMessage="See All Matching Presenters"
 				/>
 			),
 			url: makeSearchPersonsRoute(languageRoute, term),
@@ -109,8 +109,8 @@ function Search({ language }: SearchProps): JSX.Element {
 			)),
 			seeAll: sequences.pageInfo.hasNextPage && (
 				<FormattedMessage
-					id="search__sequencesSeeAll"
-					defaultMessage="See All Series"
+					id="search__sequencesSeeAllMatching"
+					defaultMessage="See All Matching Series"
 				/>
 			),
 			url: makeSearchSequencesRoute(languageRoute, term),
@@ -132,8 +132,8 @@ function Search({ language }: SearchProps): JSX.Element {
 			)),
 			seeAll: collections.pageInfo.hasNextPage && (
 				<FormattedMessage
-					id="search__conferencesSeeAll"
-					defaultMessage="See All Conferences"
+					id="search__conferencesSeeAllMatching"
+					defaultMessage="See All Matching Conferences"
 				/>
 			),
 			url: makeSearchCollectionsRoute(languageRoute, term),
@@ -152,8 +152,8 @@ function Search({ language }: SearchProps): JSX.Element {
 			)),
 			seeAll: sponsors.pageInfo.hasNextPage && (
 				<FormattedMessage
-					id="search__sponsorsSeeAll"
-					defaultMessage="See All Sponsors"
+					id="search__sponsorsSeeAllMatching"
+					defaultMessage="See All Matching Sponsors"
 				/>
 			),
 			url: makeSearchSponsorsRoute(languageRoute, term),

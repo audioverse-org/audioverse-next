@@ -89,41 +89,44 @@ export default function TeaseRecording({
 
 	const inner = (
 		<>
-			<div className={styles.part}>
-				{index && count ? (
-					<FormattedMessage
-						id="molecule-teaseRecording__partInfo"
-						defaultMessage="Part {index} of {count}"
-						description="recording tease part info"
-						values={{ index, count }}
-					/>
-				) : (
-					!hideSinglePart &&
-					(recording.recordingContentType ===
-					RecordingContentType.AudiobookTrack ? (
+			{recording.recordingContentType !== RecordingContentType.BibleChapter && (
+				<div className={styles.part}>
+					{index && count ? (
 						<FormattedMessage
-							id="molecule-teaseRecording__individualChapter"
-							defaultMessage="Individual Chapter"
-						/>
-					) : recording.recordingContentType ===
-					  RecordingContentType.MusicTrack ? (
-						<FormattedMessage
-							id="molecule-teaseRecording__individualTrack"
-							defaultMessage="Individual Track"
-						/>
-					) : recording.recordingContentType === RecordingContentType.Sermon ? (
-						<FormattedMessage
-							id="molecule-teaseRecording__individualTeaching"
-							defaultMessage="Individual Teaching"
+							id="molecule-teaseRecording__partInfo"
+							defaultMessage="Part {index} of {count}"
+							description="recording tease part info"
+							values={{ index, count }}
 						/>
 					) : (
-						<FormattedMessage
-							id="molecule-teaseRecording__individualStory"
-							defaultMessage="Individual Story"
-						/>
-					))
-				)}
-			</div>
+						!hideSinglePart &&
+						(recording.recordingContentType ===
+						RecordingContentType.AudiobookTrack ? (
+							<FormattedMessage
+								id="molecule-teaseRecording__individualChapter"
+								defaultMessage="Individual Chapter"
+							/>
+						) : recording.recordingContentType ===
+						  RecordingContentType.MusicTrack ? (
+							<FormattedMessage
+								id="molecule-teaseRecording__individualTrack"
+								defaultMessage="Individual Track"
+							/>
+						) : recording.recordingContentType ===
+						  RecordingContentType.Sermon ? (
+							<FormattedMessage
+								id="molecule-teaseRecording__individualTeaching"
+								defaultMessage="Individual Teaching"
+							/>
+						) : (
+							<FormattedMessage
+								id="molecule-teaseRecording__individualStory"
+								defaultMessage="Individual Story"
+							/>
+						))
+					)}
+				</div>
+			)}
 			<div className={styles.title}>
 				{small ? (
 					<Heading3 unpadded className={styles.heading}>

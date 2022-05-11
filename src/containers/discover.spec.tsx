@@ -30,10 +30,20 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 				{
 					recording: {
 						title: 'the_sermon_title2',
-						canonicalPath: 'the_sermon_path',
+						canonicalPath: 'the_sermon_path2',
 						recordingContentType: RecordingContentType.Sermon,
 						persons: [],
 					},
+				},
+			],
+		},
+		featuredTeachings: {
+			nodes: [
+				{
+					title: 'the_sermon_title3',
+					canonicalPath: 'the_sermon_path3',
+					recordingContentType: RecordingContentType.Sermon,
+					persons: [],
 				},
 			],
 		},
@@ -78,6 +88,20 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 							count: 0,
 						},
 					},
+				},
+			],
+		},
+		blogPosts: {
+			nodes: [
+				{
+					image: {
+						url: 'the_post_image_url',
+					},
+					publishDate: '2019-12-03T09:54:33Z',
+					title: 'the_post_title',
+					teaser: 'the_post_teaser',
+					canonicalPath: 'the_post_path',
+					readingDuration: 9 * 60,
 				},
 			],
 		},

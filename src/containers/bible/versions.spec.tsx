@@ -1,7 +1,8 @@
 import React from 'react';
 
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { renderWithIntl } from '@lib/test/helpers';
+import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
+import { buildLoader, renderWithIntl } from '@lib/test/helpers';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
@@ -14,7 +15,14 @@ async function renderPage() {
 	return renderWithIntl(<Versions {...props} />);
 }
 
+const loadData = buildLoader(GetAudiobibleVersionsDataDocument, {
+	collections: {
+		nodes: [],
+	},
+});
+
 function loadPageData() {
+	loadData();
 	jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
 		{
 			id: 'the_version_id',
@@ -22,7 +30,7 @@ function loadPageData() {
 			title: 'the_version_title',
 			sponsor: {
 				title: 'FCBH',
-				url: '',
+				website: '',
 			},
 			books: [],
 		} as bibleBrain.IBibleVersion,
@@ -64,8 +72,8 @@ describe('versions list', () => {
 	it('renders 404', async () => {
 		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
 
-		const { getByText } = await renderPage();
+		const { notFound } = (await getStaticProps({})) as any;
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(notFound).toBe(true);
 	});
 });

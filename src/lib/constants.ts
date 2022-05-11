@@ -8,7 +8,7 @@ export interface LanguageConfiguration {
 	legacy_base_url: string;
 }
 
-export type SupportedLanguages = Exclude<Language, 'NORDIC'>;
+export type SupportedLanguages = Language;
 
 export type LanguageConfigurations = {
 	[key in SupportedLanguages]: LanguageConfiguration;
@@ -49,6 +49,11 @@ export const LANGUAGES: LanguageConfigurations = {
 		base_url: 'ru',
 		display_name: 'Русский',
 		legacy_base_url: 'russian',
+	},
+	NORDIC: {
+		base_url: 'no',
+		display_name: 'Scandinavia',
+		legacy_base_url: 'no',
 	},
 };
 
@@ -144,6 +149,7 @@ export enum BaseColors {
 	LIGHT_TONE = 'lightTone',
 	MID_TONE = 'midTone',
 	BIBLE_B = 'bibleB',
+	BIBLE_H = 'bibleH',
 	BOOK_B = 'bookB',
 	BOOK_H = 'bookH',
 	SONG_B = 'songB',

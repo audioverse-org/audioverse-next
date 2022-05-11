@@ -779,24 +779,6 @@
       "value": "联系"
     }
   ],
-  "container-sermonList__filterLabelAll": [
-    {
-      "type": 0,
-      "value": "全部"
-    }
-  ],
-  "container-sermonList__filterLabelAudio": [
-    {
-      "type": 0,
-      "value": "仅音频"
-    }
-  ],
-  "container-sermonList__filterLabelVideo": [
-    {
-      "type": 0,
-      "value": "视频"
-    }
-  ],
   "copyrightInfos__multipleCopyrightExplanation": [
     {
       "type": 0,
@@ -1359,7 +1341,7 @@
       "value": "需要帮助"
     }
   ],
-  "header__navItemContact-testimony": [
+  "header__navItemContact-testimonial": [
     {
       "type": 0,
       "value": "分享见证"
@@ -1757,7 +1739,7 @@
       "value": "听听一些AudioVerse使用者的看法。"
     }
   ],
-  "home__testimoniesTitle": [
+  "home__testimonialsTitle": [
     {
       "type": 0,
       "value": "见证"
@@ -3175,6 +3157,30 @@
       "value": "档案"
     }
   ],
+  "recordingHasVideoFilter__filter": [
+    {
+      "type": 0,
+      "value": "筛选"
+    }
+  ],
+  "recordingHasVideoFilter__filterAll": [
+    {
+      "type": 0,
+      "value": "全部"
+    }
+  ],
+  "recordingHasVideoFilter__filterAudio": [
+    {
+      "type": 0,
+      "value": "仅音频"
+    }
+  ],
+  "recordingHasVideoFilter__filterVideo": [
+    {
+      "type": 0,
+      "value": "视频"
+    }
+  ],
   "register__emailLabel": [
     {
       "type": 0,
@@ -3553,12 +3559,6 @@
     {
       "type": 0,
       "value": "所有证道"
-    }
-  ],
-  "sermonsList__filter": [
-    {
-      "type": 0,
-      "value": "筛选"
     }
   ],
   "socialLogin__loginFacebookButton": [
@@ -4269,7 +4269,7 @@
       "value": "分享您的故事"
     }
   ],
-  "testimonies__submitTestimony": [
+  "testimonies__submitTestimonial": [
     {
       "type": 0,
       "value": "提交见证"

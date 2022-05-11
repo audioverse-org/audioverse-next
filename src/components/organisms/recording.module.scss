@@ -10,6 +10,16 @@
 		--recordingTextSecondaryColor: #{$ts-lightTone};
 		--recordingWavesColor: #{$ts-bookH};
 	}
+	&.BIBLE_CHAPTER {
+		--recordingAccent: #{$ts-red};
+		--recordingBackground: #{$ts-bibleB};
+		--recordingHatTextColor: #{$ts-white};
+		--recordingHatBackground: #{$ts-bibleH};
+		--recordingHatHover: #{$ts-darkened-bibleH};
+		--recordingTextColor: #{$ts-dark};
+		--recordingTextSecondaryColor: #{$ts-midTone};
+		--recordingWavesColor: #{$ts-lightTone};
+	}
 	&.MUSIC_TRACK {
 		--recordingAccent: #{$ts-red};
 		--recordingBackground: #{$ts-songB};
@@ -57,7 +67,7 @@
 	}
 	&,
 	&:hover {
-		color: var(--recordingTextColor);
+		color: var(--recordingHatTextColor, --recordingTextColor);
 	}
 	&:hover {
 		text-decoration: none;
@@ -120,7 +130,7 @@
 		margin-bottom: 0;
 		padding-bottom: 16px;
 		background: var(--recordingBackground);
-		z-index: 1;
+		z-index: 10;
 	}
 }
 .seriesItems {
@@ -180,6 +190,10 @@
 	font-weight: 400;
 }
 
+.bibleReadBy {
+	color: $ts-midTone;
+}
+
 .attachment {
 	display: inline-flex;
 	align-items: center;
@@ -227,6 +241,9 @@
 		.AUDIOBOOK_TRACK & {
 			@include shadowBackground($ts-bookB, $direction);
 		}
+		.BIBLE_CHAPTER & {
+			@include shadowBackground($ts-bibleB, $direction);
+		}
 		.MUSIC_TRACK & {
 			@include shadowBackground($ts-songB, $direction);
 		}
@@ -249,4 +266,18 @@
 	@media (min-width: $breakpoint-xl) {
 		bottom: 0;
 	}
+}
+
+.transcriptWrapper {
+	margin-bottom: 16px;
+}
+
+.transcriptOpen {
+	svg {
+		transform: scaleY(-1);
+	}
+}
+
+.backToChapterButton {
+	margin-bottom: 16px;
 }

@@ -130,7 +130,7 @@ describe('player', () => {
 
 		const input = getByLabelText('progress');
 
-		ReactTestUtils.Simulate.change(input, {
+		ReactTestUtils.Simulate.input(input, {
 			target: {
 				value: 50,
 			},
@@ -158,7 +158,7 @@ describe('player', () => {
 			},
 		});
 
-		ReactTestUtils.Simulate.change(getByLabelText('progress'), {
+		ReactTestUtils.Simulate.input(getByLabelText('progress'), {
 			target: {
 				value: 50,
 			},
@@ -193,7 +193,7 @@ describe('player', () => {
 
 		const input = getByLabelText('progress');
 
-		ReactTestUtils.Simulate.change(input, {
+		ReactTestUtils.Simulate.input(input, {
 			target: {
 				value: 50,
 			},
@@ -277,7 +277,7 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.change(getAllByLabelText('progress')[0], {
+		ReactTestUtils.Simulate.input(getAllByLabelText('progress')[0], {
 			target: {
 				value: 50,
 			},
@@ -344,7 +344,7 @@ describe('player', () => {
 			},
 		});
 
-		ReactTestUtils.Simulate.change(result.getByLabelText('progress'), {
+		ReactTestUtils.Simulate.input(result.getByLabelText('progress'), {
 			target: {
 				value: 50,
 			},
@@ -533,7 +533,7 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.change(getByLabelText(firstPlayer, 'progress'), {
+		ReactTestUtils.Simulate.input(getByLabelText(firstPlayer, 'progress'), {
 			target: {
 				value: 50,
 			},
@@ -686,7 +686,7 @@ describe('player', () => {
 
 			await findByLabelText(miniplayer, 'pause');
 
-			ReactTestUtils.Simulate.change(progressInput, {
+			ReactTestUtils.Simulate.input(progressInput, {
 				target: {
 					value: 70,
 				},
@@ -834,16 +834,6 @@ describe('player', () => {
 			userEvent.click(getByText('1x'));
 		});
 		expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
-	});
-
-	it('loads videojs speed', async () => {
-		setPlayerMock({ playbackRate: 2 });
-
-		const { getByLabelText, findByText } = await renderComponent();
-
-		userEvent.click(getByLabelText('play'));
-
-		await findByText('2x');
 	});
 
 	it('has download icon', async () => {

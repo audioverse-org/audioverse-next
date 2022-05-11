@@ -13,6 +13,7 @@ import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment, PlayerFragment } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
@@ -54,6 +55,10 @@ const Player = ({
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
+
+	useGlobalSpaceDown(() => {
+		session.isPaused ? session.play() : session.pause();
+	});
 
 	return (
 		<div
@@ -135,8 +140,10 @@ const Player = ({
 									description: 'player progress label',
 								})}
 								value={session.progress * 100}
-								onChange={(e) => {
-									const percent = parseInt(e.target.value) / 100;
+								step={0.0001}
+								onInput={(e) => {
+									const percent =
+										parseFloat((e.target as HTMLInputElement).value) / 100;
 									session.setProgress(percent);
 								}}
 							/>

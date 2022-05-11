@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { Router, useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import ActiveLink from '@components/atoms/activeLink';
@@ -12,7 +12,7 @@ import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
-import { getSessionToken } from '@lib/cookies';
+import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
@@ -38,6 +38,26 @@ const Navigation = ({
 	const router = useRouter();
 	const [submenu, setSubmenu] = useState('');
 	const sessionToken = getSessionToken();
+
+	useEffect(() => {
+		const onRouteChange = (url: string) => {
+			const isUrlLanguageHome = !url.replace(/(^\/|\/$)/g, '').includes('/');
+			if (isUrlLanguageHome) {
+				setSubmenu('');
+			}
+		};
+		Router.events.on('routeChangeComplete', onRouteChange);
+		return () => {
+			Router.events.off('routeChangeComplete', onRouteChange);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (sessionToken) {
+			setSessionToken(sessionToken);
+		}
+	}, [router.asPath, sessionToken]);
+
 	const authResult = useGetWithAuthGuardDataQuery(
 		{},
 		{

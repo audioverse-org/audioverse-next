@@ -1,5 +1,10 @@
-query getTrendingTeachingsPageData($language: Language!) {
-	recordings: popularRecordings(language: $language, first: 24) {
+query getTrendingTeachingsPageData($language: Language!, $hasVideo: Boolean) {
+	recordings: popularRecordings(
+		language: $language
+		first: 24
+		contentType: SERMON
+		hasVideo: $hasVideo
+	) {
 		nodes {
 			recording {
 				...cardRecording

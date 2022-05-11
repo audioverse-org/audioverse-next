@@ -39,7 +39,7 @@ export async function getStaticProps({
 				persons: {
 					nodes: [],
 				},
-				collection: null,
+				websiteFeaturedCollection: null,
 				serieses: {
 					nodes: [],
 				},
