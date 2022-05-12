@@ -753,6 +753,12 @@
       "value": " read"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "Blog Image"
+    }
+  ],
   "blog__title": [
     {
       "type": 0,
@@ -2055,6 +2061,12 @@
       "value": "Discover Audio"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "Snapshots of playlist of people listening to podcasts on smart device."
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -2091,6 +2103,12 @@
     {
       "type": 0,
       "value": "Latest Content"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "A women wearing headphone and reading book outdoors."
     }
   ],
   "homePage__newsletterEmail": [
@@ -2175,6 +2193,12 @@
     {
       "type": 0,
       "value": "Make a donation"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "A person sitting on a chair sharing his thought to a group of people with his laptop displayed on the table."
     }
   ],
   "homePage__supportSectionText": [
@@ -2663,6 +2687,12 @@
     {
       "type": 0,
       "value": "Login"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse Logo"
     }
   ],
   "logout__inProcess": [

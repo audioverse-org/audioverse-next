@@ -303,6 +303,12 @@
       "value": " 朗读"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "博客图片"
+    }
+  ],
   "buttonShare__emailSubject": [
     {
       "type": 0,
@@ -1503,6 +1509,12 @@
       "value": "创建账户"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "在智能设备上收听播客的人的播放列表快照"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1597,6 +1609,12 @@
     {
       "type": 0,
       "value": "了解我们的故事"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "一个戴着耳机在户外看书的女人."
     }
   ],
   "homePage__newsletterEmail": [
@@ -1707,6 +1725,12 @@
     {
       "type": 0,
       "value": "捐赠"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "一个坐在椅子上的人用他的笔记本电脑在桌子上与一群人分享他的想法"
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -2301,6 +2325,12 @@
     {
       "type": 0,
       "value": "没有账户吗？"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse 标识"
     }
   ],
   "logout__inProcess": [

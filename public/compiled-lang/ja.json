@@ -303,6 +303,12 @@
       "value": "分"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "ブログ画像"
+    }
+  ],
   "buttonShare__emailSubject": [
     {
       "type": 0,
@@ -1503,6 +1509,12 @@
       "value": "今すぐマイアカウントを作成する"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "スマートデバイスでポッドキャストを聴いている人のプレイリストのスナップショット"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1597,6 +1609,12 @@
     {
       "type": 0,
       "value": "AudioVerse の形成展開のストーリー"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "ヘッドフォンを着用し、屋外で本を読んでいる女性."
     }
   ],
   "homePage__newsletterEmail": [
@@ -1703,6 +1721,12 @@
     {
       "type": 0,
       "value": "支援をする"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "椅子に座って、テーブルにノートパソコンを表示して人々のグループに自分の考えを共有している人"
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -2297,6 +2321,12 @@
     {
       "type": 0,
       "value": "アカウントを作成されていいないですか？"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse ロゴ"
     }
   ],
   "logout__inProcess": [

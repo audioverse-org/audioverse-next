@@ -339,9 +339,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							objectFit="cover"
 							sizes="(max-width: 664px) 100vw, 50vw"
 							alt={intl.formatMessage({
-								id: 'homePage__downloadAppSectionTitle',
-								defaultMessage: 'Download the App',
-								description: 'home page download app section title',
+								id: 'homePage__downloadAppSectionImageDesc',
+								defaultMessage:
+									'Snapshots of playlist of people listening to podcasts on smart device.',
+								description: 'home page download app section image desc',
 							})}
 						/>
 					}
@@ -485,9 +486,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							layout="fill"
 							objectFit="cover"
 							alt={intl.formatMessage({
-								id: 'homePage__supportSectionTitle',
-								defaultMessage: 'Support free audio',
-								description: 'home page support section title',
+								id: 'homePage__supportSectionImageDesc',
+								defaultMessage:
+									'A person sitting on a chair sharing his thought to a group of people with his laptop displayed on the table.',
+								description: 'home page support section image desc',
 							})}
 						/>
 					}
@@ -502,7 +504,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 						src="/img/logo.svg"
 						width={161}
 						height={23}
-						alt="logo"
+						alt={intl.formatMessage({
+							id: 'logo__alt',
+							defaultMessage: 'Audioverse Logo',
+						})}
 						layout="intrinsic"
 					/>
 					<Heading3 sans unpadded>

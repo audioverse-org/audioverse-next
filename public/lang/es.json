@@ -110,6 +110,9 @@
     "comment": "Blog post detalle duración de la lectura",
     "string": "{duration} leer"
   },
+  "blog__imageDesc": {
+    "string":"Imagen del blog"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "Leído por {name}"
   },
@@ -455,6 +458,10 @@
     "comment": "página de inicio descargar texto de la sección de la aplicación",
     "string": "Si tiene un smartphone, descargue la app para llevar AudioVerse consigo dondequiera que vaya. Reproduzca lecciones desde cualquier lugar mediante su conexión de red o descárguelas de antemano para escuchar por el camino sin usar datos."
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "instantáneas de la lista de reproducción de personas que escuchan podcasts en dispositivos inteligentes."
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "página de inicio descargar app título de la sección",
     "string": "Descargar la aplicación"
@@ -550,6 +557,10 @@
   "homePage__supportSectionCTA": {
     "comment": "página de inicio sección de soporte cta",
     "string": "Haga una donación"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "Una persona sentada en una silla compartiendo su pensamiento con un grupo de personas con su computadora portátil en la mesa"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "página de inicio sección de soporte marcador de posición de imagen",
@@ -757,6 +768,9 @@
   },
   "loginForm__signupIntro": {
     "string": "¿No tiene una cuenta?"
+  },
+  "logo__alt":{
+    "string": "AudioVerse logotipo"
   },
   "logout__inProcess": {
     "string": "Cerrar sesión..."
@@ -1991,6 +2005,11 @@
   "homePage__learnStoryButtonLabel": {
     "string": "Sepa más de nuestra historia"
   },
+
+  "homePage__mainImageDesc": {
+    "string": "Una mujer con auriculares y leyendo un libro al aire libre."
+  },
+
   "homePage__newsletterEmail": {
     "string": "Dirección de correo electrónico"
   },

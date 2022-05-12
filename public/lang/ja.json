@@ -110,6 +110,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration}分"
   },
+  "blog__imageDesc": {
+    "string":"ブログ画像"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "語り手{name}"
   },
@@ -455,6 +458,10 @@
     "comment": "home page download app section text",
     "string": "スマホでAudioVerseのアプリをダウンロードして、どこででも聞けるどのレッスンもネットワーク環境内でストリーミングが可能。事前にダウンロードすれば、データを使用せずに外出先でも聴ける。"
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "スマートデバイスでポッドキャストを聴いている人のプレイリストのスナップショット"
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
     "string": "アプリをダウンロードする"
@@ -550,6 +557,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "支援をする"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "椅子に座って、テーブルにノートパソコンを表示して人々のグループに自分の考えを共有している人"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -757,6 +768,9 @@
   },
   "loginForm__signupIntro": {
     "string": "アカウントを作成されていいないですか？"
+  },
+  "logo__alt":{
+    "string": "AudioVerse ロゴ"
   },
   "logout__inProcess": {
     "string": "ログアウト中・・・"
@@ -1991,9 +2005,15 @@
   "homePage__learnStoryButtonLabel": {
     "string": "AudioVerse の形成展開のストーリー"
   },
+
+  "homePage__mainImageDesc": {
+    "string": "ヘッドフォンを着用し、屋外で本を読んでいる女性."
+  },
+
   "homePage__newsletterEmail": {
     "string": "メールアドレス"
   },
+  
   "homePage__newsletterEmailPlaceholder": {
     "string": "taro_suzuki@email.com"
   },

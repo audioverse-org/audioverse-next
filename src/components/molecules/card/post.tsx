@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
@@ -26,13 +26,21 @@ export default function CardPost({
 	post,
 	alternate,
 }: CardPostProps): JSX.Element {
+	const intl = useIntl();
+
 	const dur = post.readingDuration || 0;
 	const duration = useFormattedDuration(dur);
 	const heroImage = post.image?.url && (
 		<div className={clsx(alternate && styles.alternate)}>
 			<Image
 				src={post.image.url}
-				alt={post.title || 'Blog Image'}
+				alt={
+					post.title ||
+					intl.formatMessage({
+						id: 'blog__imageDesc',
+						defaultMessage: 'Blog Image',
+					})
+				}
 				width={500}
 				height={260}
 				layout="intrinsic"
