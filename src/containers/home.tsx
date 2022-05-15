@@ -80,10 +80,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const isEnglish = languageRoute === 'en';
 
 	const formatedSlogan = intl.formatMessage({
-		id: 'brand_slogan',
+		id: 'homePage__soundDoctrineText',
 		defaultMessage:
 			'AudioVerse is a platform curating the best in Adventist audio content. Be challenged and inspired to grow in your relationship with Jesus through songs, sermons, audiobooks, and Bible readings.',
-		description: 'AudioVerse Slogan',
+		description: 'home page sound doctrine text',
 	});
 
 	return (

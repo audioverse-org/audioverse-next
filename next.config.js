@@ -12,7 +12,6 @@ module.exports = withBundleAnalyzer(
 			dest: 'public',
 			// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
 			buildExcludes: [/server\/middleware-manifest\.json$/],
-			scope: '/src',
 			publicExcludes: ['!lang/*.json', '!compiled-lang/*.json'],
 		},
 		headers() {
