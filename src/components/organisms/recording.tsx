@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { CourseJsonLd } from 'next-seo';
 import startCase from 'lodash/startCase';
+import { CourseJsonLd } from 'next-seo';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
