@@ -48,6 +48,7 @@ import IconSeedling from '../../public/img/fa-seedling.svg';
 import IconStore from '../../public/img/fa-store.svg';
 import IconStream from '../../public/img/fa-stream.svg';
 import IconTwitter from '../../public/img/fa-twitter.svg';
+import IconQuestionCircle from '../../public/img/fa-question-circle.svg';
 import IconUser from '../../public/img/fa-user-heavy.svg';
 import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
 import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
@@ -394,6 +395,16 @@ export function getNavigationItems(
 				description: `Header nav link name: More`,
 			}),
 			children: [
+				{
+					key: 'help',
+					href: 'https://help.audioverse.org/support/home',
+					isTargetBlank: true,
+					Icon: IconQuestionCircle,
+					label: intl.formatMessage({
+						id: `header__navItemMore-help`,
+						defaultMessage: 'Get Help',
+					}),
+				},
 				{
 					key: 'store',
 					href: 'https://audioversestore.org',

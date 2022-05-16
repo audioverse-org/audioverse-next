@@ -4,6 +4,7 @@ import React, { PropsWithChildren, useContext } from 'react';
 
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
+import HelpWidget from '@components/molecules/helpWidget';
 
 const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 
@@ -46,12 +47,15 @@ export default function AndMiniplayer({
 			</div>
 
 			<div
-				className={
-					recording &&
-					clsx(styles.contentWithPlayer, 'andMiniplayer--withPlayer')
-				}
+				className={clsx({
+					[styles.contentWithPlayer]: !!recording,
+					'andMiniplayer--withPlayer': !!recording,
+				})}
 			>
 				{children}
+				<div className={styles.helpButton}>
+					<HelpWidget />
+				</div>
 			</div>
 			<LazyMiniplayer />
 		</>

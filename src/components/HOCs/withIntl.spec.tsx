@@ -165,55 +165,57 @@ describe('localization usage', () => {
 	});
 
 	it('localizes sermon detail page', async () => {
-		jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
-			isFavorited: false,
-			isLoading: false,
-			toggleFavorited: {} as any,
-		});
-		const screen = await renderWithQueryProvider(
-			<SermonDetail
-				recording={
-					{
-						contentType: RecordingContentType.Sermon,
-						description: 'z',
-						recordingDate: '2003-03-01T09:30:00.000Z',
-						recordingTags: {
-							nodes: [
-								{
-									tag: {
-										id: 'z',
-										name: 'z',
+		await act(async () => {
+			jest.spyOn(api, 'useIsRecordingFavorited').mockReturnValue({
+				isFavorited: false,
+				isLoading: false,
+				toggleFavorited: {} as any,
+			});
+			const screen = await renderWithQueryProvider(
+				<SermonDetail
+					recording={
+						{
+							contentType: RecordingContentType.Sermon,
+							description: 'z',
+							recordingDate: '2003-03-01T09:30:00.000Z',
+							recordingTags: {
+								nodes: [
+									{
+										tag: {
+											id: 'z',
+											name: 'z',
+										},
 									},
+								],
+							},
+							attachments: [
+								{
+									filename: 'z',
+									url: 'z',
 								},
 							],
-						},
-						attachments: [
-							{
-								filename: 'z',
-								url: 'z',
+							sequenceIndex: 1,
+							sequence: {
+								contentType: SequenceContentType.Series,
+								canonicalPath: 'z',
+								recordings: {
+									nodes: [
+										{ id: 1, canonicalPath: 'z', persons: [] },
+										{ id: 2, canonicalPath: 'z', persons: [] },
+										{ id: 3, canonicalPath: 'z', persons: [] },
+									] as any,
+								},
 							},
-						],
-						sequenceIndex: 1,
-						sequence: {
-							contentType: SequenceContentType.Series,
-							canonicalPath: 'z',
-							recordings: {
-								nodes: [
-									{ id: 1, canonicalPath: 'z', persons: [] },
-									{ id: 2, canonicalPath: 'z', persons: [] },
-									{ id: 3, canonicalPath: 'z', persons: [] },
-								] as any,
-							},
-						},
-						writers: [] as any,
-						speakers: [] as any,
-						imageWithFallback: { url: '' },
-					} as SermonDetailProps['recording']
-				}
-			/>
-		);
+							writers: [] as any,
+							speakers: [] as any,
+							imageWithFallback: { url: '' },
+						} as SermonDetailProps['recording']
+					}
+				/>
+			);
 
-		expectNoUnlocalizedText(screen);
+			expectNoUnlocalizedText(screen);
+		});
 	});
 
 	it('localizes Unfavorite button', async () => {

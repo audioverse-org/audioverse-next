@@ -107,8 +107,3 @@ describe('miniplayer template', () => {
 		await findByText('the_recording_title');
 	});
 });
-
-// TODO:
-// does not show miniplayer if no recording loaded
-// displays recording in portal if matching portal provided
-// start using react-router so that media can continue playing while navigating

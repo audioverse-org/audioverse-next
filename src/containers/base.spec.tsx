@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
@@ -20,16 +20,18 @@ describe('app', () => {
 
 	it('sets title', async () => {
 		await act(async () => {
-			const { getByTestId } = await render(
+			await render(
 				<MyApp
 					Component={(() => null) as unknown as typeof React.Component}
 					pageProps={{}}
 				/>
 			);
 
-			const head = getByTestId('head');
+			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
-			expect(head.innerHTML).toContain('AudioVerse');
+			expect(heads).toEqual(
+				expect.arrayContaining([expect.stringContaining('AudioVerse')])
+			);
 		});
 	});
 
@@ -75,13 +77,17 @@ describe('app', () => {
 
 	it('sets title with props', async () => {
 		await act(async () => {
-			const { getByTestId } = await renderApp(() => <>h</>, {
+			await renderApp(() => <>h</>, {
 				title: 'the_prop_title',
 			});
 
-			const head = getByTestId('head');
+			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
-			expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
+			expect(heads).toEqual(
+				expect.arrayContaining([
+					expect.stringContaining(`the_prop_title | AudioVerse`),
+				])
+			);
 		});
 	});
 });
