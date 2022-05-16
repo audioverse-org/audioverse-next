@@ -2,9 +2,10 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import React, { PropsWithChildren, useContext } from 'react';
 
+import HelpWidget from '@components/molecules/helpWidget';
+
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
-import HelpWidget from '@components/molecules/helpWidget';
 
 const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 

@@ -1,6 +1,7 @@
-import { buildRenderer } from '@lib/test/helpers';
-import HelpWidget from '@components/molecules/helpWidget';
 import { screen } from '@testing-library/react';
+
+import HelpWidget from '@components/molecules/helpWidget';
+import { buildRenderer } from '@lib/test/helpers';
 
 const renderComponent = buildRenderer(HelpWidget);
 const mockBeacon = jest.fn();
