@@ -4,9 +4,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
+import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
 
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const { data } = useGetHelpWidgetDataQuery();
 
 	useEffect(() => {
 		window.Beacon('init', 'e73e9329-30be-4766-99bb-6bfdd739e316');
@@ -21,6 +23,19 @@ export default function HelpWidget(): JSX.Element {
 			window.Beacon('off', 'close', handleClose);
 		};
 	}, []);
+
+	useEffect(() => {
+		const d = data?.me?.user;
+		if (!d) {
+			return;
+		}
+
+		window.Beacon('identify', {
+			email: d.email,
+			name: d.name,
+			avatar: d.image?.url || '',
+		});
+	}, [data]);
 
 	return (
 		<>

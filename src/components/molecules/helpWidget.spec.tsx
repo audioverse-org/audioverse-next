@@ -1,13 +1,31 @@
 import { act, screen, waitFor } from '@testing-library/react';
+import { when } from 'jest-when';
 
 import HelpWidget from '@components/molecules/helpWidget';
-import { buildRenderer } from '@lib/test/helpers';
+import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
+import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
 
 jest.mock('next/script');
 
 const renderComponent = buildRenderer(HelpWidget);
 
 const mockBeacon = window.Beacon as jest.Mock;
+
+function loadData() {
+	when(mockedFetchApi)
+		.calledWith(GetHelpWidgetDataDocument, expect.anything())
+		.mockResolvedValue({
+			me: {
+				user: {
+					name: 'the_name',
+					email: 'the_email',
+					image: {
+						url: 'the_image_url',
+					},
+				},
+			},
+		});
+}
 
 describe('help widget', () => {
 	it('opens widget on click', async () => {
@@ -62,5 +80,17 @@ describe('help widget', () => {
 		unmount();
 
 		expect(mockBeacon).toBeCalledWith('off', 'close', expect.any(Function));
+	});
+
+	it('identifies user', async () => {
+		loadData();
+
+		await renderComponent();
+
+		expect(mockBeacon).toBeCalledWith('identify', {
+			name: 'the_name',
+			email: 'the_email',
+			avatar: 'the_image_url',
+		});
 	});
 });

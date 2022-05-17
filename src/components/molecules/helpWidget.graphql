@@ -1,0 +1,11 @@
+query getHelpWidgetData {
+	me {
+		user {
+			name
+			image {
+				url(size: 200)
+			}
+			email
+		}
+	}
+}
