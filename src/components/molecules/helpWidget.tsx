@@ -11,12 +11,14 @@ export default function HelpWidget(): JSX.Element {
 	useEffect(() => {
 		window.Beacon('init', 'e73e9329-30be-4766-99bb-6bfdd739e316');
 
-		window.Beacon('on', 'close', () => {
+		const handleClose = (): void => {
 			setIsOpen(false);
-		});
+		};
+
+		window.Beacon('on', 'close', handleClose);
 
 		return () => {
-			window.Beacon('off', 'close');
+			window.Beacon('off', 'close', handleClose);
 		};
 	}, []);
 

@@ -55,4 +55,12 @@ describe('help widget', () => {
 
 		expect(mockBeacon).toBeCalledWith('init', expect.any(String));
 	});
+
+	it('unsubscribes using specific callback', async () => {
+		const { unmount } = await renderComponent();
+
+		unmount();
+
+		expect(mockBeacon).toBeCalledWith('off', 'close', expect.any(Function));
+	});
 });
