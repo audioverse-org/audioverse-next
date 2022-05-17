@@ -445,7 +445,7 @@ export function Recording({
 											}
 											IconLeft={IconBlogLight}
 										/>
-									) : (
+									) : contentType !== RecordingContentType.AudiobookTrack ? (
 										<div
 											className={clsx(
 												styles.transcriptWrapper,
@@ -483,7 +483,7 @@ export function Recording({
 												/>
 											)}
 										</div>
-									))}
+									) : null)}
 
 								<HorizontalRule color={textRuleColor} />
 

@@ -97,9 +97,7 @@ $container-padding: 16px;
 	-webkit-box-orient: vertical;
 	line-clamp: 2;
 	overflow: hidden;
-	p {
-		margin-top: 0;
-	}
+	line-height: 1.21;
 }
 
 .persons > * {
