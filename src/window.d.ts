@@ -20,7 +20,17 @@ export declare global {
 				options?: { type?: 'sidebar' | 'modal' }
 			): unknown;
 			(method: 'navigate', route: string): unknown;
-			(method: 'identify', userObject: Record<string, string>): unknown;
+			(
+				method: 'identify',
+				userObject: {
+					name: string;
+					email: string;
+					company?: string;
+					jobTitle?: string;
+					avatar?: string;
+					[propertyId: string]: string | number;
+				}
+			): unknown;
 			(
 				method: 'prefill',
 				formObject: {
