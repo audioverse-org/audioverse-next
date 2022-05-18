@@ -388,7 +388,7 @@ describe('localization usage', () => {
 						id: '234',
 						title: 'z',
 						canonicalPath: '...',
-						imageWithFallback: {
+						image: {
 							url: '',
 						},
 					},

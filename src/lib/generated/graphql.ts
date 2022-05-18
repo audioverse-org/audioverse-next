@@ -6660,7 +6660,7 @@ export type SponsorLockupFragment = {
 	id: string | number;
 	title: string;
 	canonicalPath: string;
-	imageWithFallback: { __typename?: 'Image'; url: string };
+	image: { __typename?: 'Image'; url: string } | null;
 };
 
 export type TeaseRecordingFragment = {
@@ -8201,7 +8201,7 @@ export type GetCollectionDetailPageDataQuery = {
 			id: string | number;
 			title: string;
 			canonicalPath: string;
-			imageWithFallback: { __typename?: 'Image'; url: string };
+			image: { __typename?: 'Image'; url: string } | null;
 		} | null;
 		persons: {
 			__typename?: 'PersonConnection';
@@ -14051,7 +14051,7 @@ export const CopyrightInfosFragmentDoc = `
 fragment copyrightInfos on Recording{id copyrightYear distributionAgreement{id}sponsor{id}...copyrightInfo}
 `;
 export const SponsorLockupFragmentDoc = `
-fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
+fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}}
 `;
 export const SequenceNavFragmentDoc = `
 fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}

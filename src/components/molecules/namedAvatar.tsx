@@ -34,7 +34,9 @@ export default function NamedAvatar({
 	const inner = (
 		<>
 			{image && <RoundImage image={image} small={small} />}
-			<div className={styles.title}>{name}</div>
+			<div className={clsx(styles.title, image && styles.titleWithImage)}>
+				{name}
+			</div>
 		</>
 	);
 	const containerClasses = clsx(styles.container, baseColorStyles[textColor]);
