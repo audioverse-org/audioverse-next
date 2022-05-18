@@ -23,6 +23,7 @@ import {
 } from '@lib/generated/graphql';
 import {
 	buildStaticRenderer,
+	loadQuery,
 	loadRouter,
 	mockedFetchApi,
 	renderWithIntl,
@@ -33,7 +34,6 @@ import SermonDetail, {
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
 
-jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
 jest.mock(
@@ -87,26 +87,25 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		.mockResolvedValue({ sermon });
 }
 
-const renderPage = buildStaticRenderer(
-	(props: SermonDetailProps) => {
-		return (
-			<AndPlaybackContext>
-				<AndMiniplayer>
-					<SermonDetail {...props} />
-				</AndMiniplayer>
-			</AndPlaybackContext>
-		);
-	},
-	getStaticProps,
-	{
-		language: 'en',
-		id: 'the_sermon_id',
-	}
-);
+const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
+	return (
+		<AndPlaybackContext>
+			<AndMiniplayer>
+				<SermonDetail {...props} />
+			</AndMiniplayer>
+		</AndPlaybackContext>
+	);
+}, getStaticProps);
 
 describe('sermon detail page', () => {
 	beforeEach(() => {
-		loadRouter({ isFallback: false });
+		loadRouter({
+			isFallback: false,
+			query: {
+				language: 'en',
+				id: 'the_sermon_id',
+			},
+		});
 		setPlayerMock();
 	});
 
@@ -456,11 +455,11 @@ describe('sermon detail page', () => {
 			language: Language.Spanish,
 		});
 
-		const { getAllByText } = await renderPage({
-			params: {
-				language: 'es',
-			},
+		loadQuery({
+			language: 'es',
 		});
+
+		const { getAllByText } = await renderPage();
 
 		const link = getAllByText('series_title')[0]
 			.parentElement as HTMLLinkElement;

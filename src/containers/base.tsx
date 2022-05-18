@@ -46,10 +46,12 @@ function Base<P>({
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
+
 	return (
 		<>
 			<React.StrictMode>
 				<Head>
+					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
 					{description && <meta name="description" content={description} />}
 					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}

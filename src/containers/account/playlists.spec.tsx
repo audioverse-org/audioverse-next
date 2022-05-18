@@ -44,10 +44,6 @@ const defaults = {
 const loadData = buildLoader(GetAccountPlaylistsPageDataDocument, defaults);
 
 describe('playlists page', () => {
-	beforeEach(() => {
-		jest.resetAllMocks();
-	});
-
 	it('lists playlists', async () => {
 		loadData();
 		loadAuthGuardData();

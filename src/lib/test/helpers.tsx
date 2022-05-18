@@ -20,7 +20,7 @@ import { PartialDeep } from 'type-fest';
 import videojs from 'video.js';
 
 import withIntl from '@components/HOCs/withIntl';
-import { fetchApi } from '@lib/api';
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetPlaylistButtonDataQuery,
 	GetWithAuthGuardDataDocument,
@@ -29,19 +29,32 @@ import { sleep } from '@lib/sleep';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
 
+export let mockedRouter: NextRouter;
+
 export function loadQuery(query: ParsedUrlQuery = {}): void {
 	loadRouter({ query });
 }
 
-export function loadRouter(router_: Partial<NextRouter>): void {
+export function loadRouter(router_: Partial<NextRouter> = {}): NextRouter {
 	const val = {
 		events: {
-			on: () => undefined,
+			on: jest.fn(),
 		},
+		push: jest.fn().mockResolvedValue(true),
 		prefetch: async () => undefined,
+		route: '/',
+		pathname: '/',
+		query: {},
+		asPath: '/',
+		basePath: '/',
+		isLocaleDomain: false,
 		...router_,
-	};
+	} as NextRouter;
+
 	jest.spyOn(router, 'useRouter').mockReturnValue(val as any);
+	mockedRouter = val;
+
+	return val;
 }
 
 export function loadAuthGuardData(email: any = 'the_email'): void {
@@ -105,18 +118,18 @@ export function buildRenderer<
 ): Renderer<P> {
 	const {
 		getProps = undefined,
-		defaultParams = {},
+		// defaultParams = {},
 		defaultProps = {},
 	} = options;
 	return async (
 		options: RendererOptions<P> = {}
 	): Promise<RenderResult & { queryClient: QueryClient }> => {
-		const { params = {}, props, router = {} } = options;
-		const fullParams = { ...defaultParams, ...params };
+		const { params = {}, props } = options;
+		const fullParams = { ...params, ...mockedRouter.query };
 		const props_ = getProps
 			? await getProps(fullParams)
 			: props || defaultProps;
-		loadRouter({ query: fullParams, ...router });
+		// loadRouter({ query: fullParams, ...router });
 		return renderWithIntl(<Component {...props_} />);
 	};
 }

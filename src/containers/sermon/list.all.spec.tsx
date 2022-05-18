@@ -13,7 +13,11 @@ import {
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	loadQuery,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
@@ -22,10 +26,7 @@ import SermonList, {
 jest.mock('next/router');
 jest.mock('next/head');
 
-const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
 export function loadSermonListPagePathsData(count: number): void {
 	when(mockedFetchApi)
@@ -65,6 +66,10 @@ export function loadSermonListData({
 describe('sermons list page', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
+		loadQuery({
+			language: 'en',
+			i: '1',
+		});
 	});
 
 	it('can be rendered', async () => {
@@ -223,10 +228,9 @@ describe('sermons list page', () => {
 
 	it('links All button using lang', async () => {
 		loadSermonListData();
+		loadQuery({ language: 'es' });
 
-		const { getByRole, getByText } = await renderPage({
-			params: { language: 'es' },
-		});
+		const { getByRole, getByText } = await renderPage();
 
 		userEvent.click(getByText('Filtro'));
 
@@ -270,8 +274,9 @@ describe('sermons list page', () => {
 
 	it('localizes pagination', async () => {
 		loadSermonListData();
+		loadQuery({ language: 'es' });
 
-		const { getByText } = await renderPage({ params: { language: 'es' } }),
+		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/es/teachings/all/page/1');

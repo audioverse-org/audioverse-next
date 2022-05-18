@@ -6,6 +6,7 @@ import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import {
 	buildRenderer,
+	loadQuery,
 	mockedFetchApi,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
@@ -34,42 +35,39 @@ function loadResetPasswordResponse({
 		});
 }
 
-const router = { push: () => Promise.resolve(true) };
-
 describe('password reset page', () => {
 	beforeEach(() => {
 		loadResetPasswordResponse();
 	});
 
 	it('renders', async () => {
-		await renderPage({ router });
+		await renderPage();
 	});
 
 	it('renders password field', async () => {
-		const { getByPlaceholderText } = await renderPage({ router });
+		const { getByPlaceholderText } = await renderPage();
 
 		expect(getByPlaceholderText('New password')).toBeInTheDocument();
 	});
 
 	it('renders password confirm field', async () => {
-		const { getByPlaceholderText } = await renderPage({ router });
+		const { getByPlaceholderText } = await renderPage();
 
 		expect(getByPlaceholderText('Confirm new password')).toBeInTheDocument();
 	});
 
 	it('renders submit button', async () => {
-		const { getByText } = await renderPage({ router });
+		const { getByText } = await renderPage();
 
 		expect(getByText('Login'));
 	});
 
 	it('submits password change', async () => {
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-			router,
+		loadQuery({
+			token: 'the_token',
 		});
+
+		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
@@ -90,7 +88,6 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
-			router,
 		});
 
 		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
@@ -107,7 +104,6 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
-			router,
 		});
 
 		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
@@ -124,7 +120,6 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
-			router,
 		});
 
 		userEvent.click(getByText('Login'));
@@ -139,7 +134,6 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
-			router,
 		});
 
 		userEvent.type(getByPlaceholderText('New password'), 'the_pass');
@@ -160,7 +154,6 @@ describe('password reset page', () => {
 			params: {
 				token: 'the_token',
 			},
-			router,
 		});
 
 		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
@@ -182,7 +175,6 @@ describe('password reset page', () => {
 				params: {
 					token: 'the_token',
 				},
-				router,
 			});
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
@@ -208,7 +200,6 @@ describe('password reset page', () => {
 				params: {
 					token: 'the_token',
 				},
-				router,
 			});
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
@@ -235,7 +226,6 @@ describe('password reset page', () => {
 					params: {
 						token: 'the_token',
 					},
-					router,
 				}
 			);
 
@@ -257,14 +247,12 @@ describe('password reset page', () => {
 				success: true,
 				errors: [],
 			});
+			loadQuery({
+				token: 'the_token',
+			});
 
 			const { getByPlaceholderText, getByText, queryByPlaceholderText } =
-				await renderPage({
-					params: {
-						token: 'the_token',
-					},
-					router,
-				});
+				await renderPage();
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');

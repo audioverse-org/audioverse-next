@@ -19,25 +19,16 @@ import Book, {
 
 jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
-jest.mock('next/router');
 
-const renderPage = buildStaticRenderer(
-	(props: BookProps) => {
-		return (
-			<AndPlaybackContext>
-				<AndMiniplayer>
-					<Book {...props} />
-				</AndMiniplayer>
-			</AndPlaybackContext>
-		);
-	},
-	getStaticProps,
-	{
-		id: 'the_version_id',
-		book: 'the_book_shortname',
-		chapter: '1',
-	}
-);
+const renderPage = buildStaticRenderer((props: BookProps) => {
+	return (
+		<AndPlaybackContext>
+			<AndMiniplayer>
+				<Book {...props} />
+			</AndMiniplayer>
+		</AndPlaybackContext>
+	);
+}, getStaticProps);
 
 function loadPageData() {
 	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
@@ -84,6 +75,11 @@ describe('Bible book detail page', () => {
 		setPlayerMock();
 		loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
+			query: {
+				id: 'the_version_id',
+				book: 'the_book_shortname',
+				chapter: '1',
+			},
 		});
 	});
 

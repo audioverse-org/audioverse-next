@@ -16,9 +16,7 @@ import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
 jest.mock('next/router');
 
-const renderPage = buildStaticRenderer(Home, getStaticProps, {
-	language: 'en',
-});
+const renderPage = buildStaticRenderer(Home, getStaticProps);
 
 const audiobookTrack = {
 	title: 'the_audiobook_track_title',
@@ -206,7 +204,6 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 
 describe('home page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
 		loadData();
 	});
 
@@ -237,7 +234,9 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		await renderPage({ params: { language: 'es' } });
+		loadQuery({ language: 'es' });
+
+		await renderPage();
 
 		await waitFor(() =>
 			expect(mockedFetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {

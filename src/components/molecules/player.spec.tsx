@@ -15,7 +15,7 @@ import videojs from 'video.js';
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import * as api from '@lib/api';
+import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import {
@@ -28,6 +28,8 @@ import {
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
+
+const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
 
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -72,7 +74,7 @@ describe('player', () => {
 	beforeEach(() => {
 		setPlayerMock();
 		loadRouter({});
-		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(false);
+		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 
 	it('has button', async () => {

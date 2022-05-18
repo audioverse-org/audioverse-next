@@ -8,6 +8,7 @@ import {
 import {
 	buildLoader,
 	buildStaticRenderer,
+	loadQuery,
 	mockedFetchApi,
 } from '@lib/test/helpers';
 import SeriesDetail, {
@@ -15,10 +16,7 @@ import SeriesDetail, {
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
 
-const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps, {
-	language: 'en',
-	id: 'the_series_id',
-});
+const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
 const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 	series: {
@@ -55,6 +53,13 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 });
 
 describe('series detail page', () => {
+	beforeEach(() => {
+		loadQuery({
+			language: 'en',
+			id: 'the_series_id',
+		});
+	});
+
 	it('gets series data', async () => {
 		loadData();
 

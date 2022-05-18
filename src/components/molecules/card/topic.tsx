@@ -23,11 +23,13 @@ export default function CardTopic({
 		<CardWithTheme {...{ theme }}>
 			<CardHat
 				title="Family"
+				/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
 				label="TODO"
 				url={topicRecording.sequence?.canonicalPath || ''}
 				icon={<HatIcon />}
 				longHat
 			>
+				{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 				<h1>TODO</h1>
 			</CardHat>
 			<TeaseRecording {...{ recording: topicRecording, theme }} />

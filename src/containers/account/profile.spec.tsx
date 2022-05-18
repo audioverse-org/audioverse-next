@@ -8,8 +8,7 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
-import { login } from '@lib/api';
-import * as api from '@lib/api';
+import { login } from '@lib/api/login';
 import { storeRequest } from '@lib/api/storeRequest';
 import {
 	GetProfileDataDocument,
@@ -24,12 +23,13 @@ import {
 } from '@lib/test/helpers';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
-import resetAllMocks = jest.resetAllMocks;
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');
 jest.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
+
+const mockedLogin = login as jest.Mock;
 
 const userBefore = {
 	givenName: 'the_given_name',
@@ -67,7 +67,6 @@ function loadData() {
 
 describe('profile page', () => {
 	beforeEach(() => {
-		resetAllMocks();
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 	});
 
@@ -121,8 +120,6 @@ describe('profile page', () => {
 	});
 
 	it('makes login request', async () => {
-		jest.spyOn(api, 'login');
-
 		const { getByPlaceholderText, getByText } = await renderPage();
 
 		const emailField = getByPlaceholderText('jane@example.com');
@@ -133,7 +130,7 @@ describe('profile page', () => {
 		await userEvent.type(passwordField, 'the_password');
 		loginButton.click();
 
-		expect(api.login).toHaveBeenCalledWith('the_email', 'the_password');
+		expect(login).toHaveBeenCalledWith('the_email', 'the_password');
 	});
 
 	it('stores request', async () => {
@@ -145,7 +142,7 @@ describe('profile page', () => {
 	});
 
 	it('catches login errors', async () => {
-		jest.spyOn(api, 'login').mockImplementation(() => {
+		mockedLogin.mockImplementation(() => {
 			throw new Error();
 		});
 
@@ -171,7 +168,7 @@ describe('profile page', () => {
 	});
 
 	it('invalidates cache on successful login', async () => {
-		jest.spyOn(api, 'login').mockResolvedValue(true);
+		mockedLogin.mockResolvedValue(true);
 
 		const { getByText, findByText } = await renderPage();
 
@@ -190,7 +187,10 @@ describe('profile page', () => {
 	});
 
 	it('logs in with email and password', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage();
+		const { getByText, getByPlaceholderText, findByPlaceholderText } =
+			await renderPage();
+
+		await findByPlaceholderText('jane@example.com');
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'the_password');

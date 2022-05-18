@@ -9,7 +9,7 @@ export function getValidLanguage(language: string | undefined): Language {
 		(l) => l.base_url === language
 	) as Language;
 
-	if (!langKey) throw Error('Missing or invalid language');
+	if (!langKey) return 'ENGLISH';
 
 	return langKey;
 }

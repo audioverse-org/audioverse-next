@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import React from 'react';
@@ -9,6 +10,7 @@ import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { data } = useGetHelpWidgetDataQuery();
+	const router = useRouter();
 
 	useEffect(() => {
 		window.Beacon('init', 'e73e9329-30be-4766-99bb-6bfdd739e316');
@@ -36,6 +38,18 @@ export default function HelpWidget(): JSX.Element {
 			avatar: d.image?.url || '',
 		});
 	}, [data]);
+
+	useEffect(() => {
+		router.events.on('routeChangeComplete', (url: string) => {
+			window.Beacon('event', {
+				type: 'page-viewed',
+				url,
+				title: document.title,
+			});
+		});
+
+		// TODO: return cleanup function
+	}, [router]);
 
 	return (
 		<>

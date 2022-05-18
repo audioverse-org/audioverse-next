@@ -8,6 +8,7 @@ import {
 import {
 	buildLoader,
 	buildStaticRenderer,
+	loadQuery,
 	mockedFetchApi,
 } from '@lib/test/helpers';
 import BlogPostDetail, {
@@ -15,10 +16,7 @@ import BlogPostDetail, {
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
 
-const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps, {
-	language: 'en',
-	id: 'the_blog_post_id',
-});
+const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 
 const loadData = buildLoader(GetBlogDetailDataDocument, {
 	blogPost: {
@@ -34,6 +32,13 @@ const loadData = buildLoader(GetBlogDetailDataDocument, {
 });
 
 describe('blog post detail page', () => {
+	beforeEach(() => {
+		loadQuery({
+			language: 'en',
+			id: 'the_blog_post_id',
+		});
+	});
+
 	it('renders post', async () => {
 		loadData();
 

@@ -5,18 +5,26 @@ import {
 	GetSongAlbumsDetailPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	loadQuery,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
 
-const renderPage = buildStaticRenderer(Song, getStaticProps, {
-	language: 'en',
-	id: 'the_album_id',
-});
+const renderPage = buildStaticRenderer(Song, getStaticProps);
 
 describe('song album detail page', () => {
+	beforeEach(() => {
+		loadQuery({
+			language: 'en',
+			id: 'the_album_id',
+		});
+	});
+
 	it('renders', async () => {
 		when(mockedFetchApi)
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())

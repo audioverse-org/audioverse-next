@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
-import React, { PropsWithChildren, useContext } from 'react';
+import React, { PropsWithChildren, useContext, useEffect } from 'react';
 
 import HelpWidget from '@components/molecules/helpWidget';
 
@@ -22,6 +22,11 @@ export default function AndMiniplayer({
 	} = playbackContext.getRefs();
 
 	const recording = playbackContext.getRecording();
+
+	useEffect(() => {
+		document.body.classList.toggle('body--with-miniplayer', !!recording);
+	}, [recording]);
+
 	return (
 		<>
 			<div ref={originRef} className={styles.videoOrigin}>

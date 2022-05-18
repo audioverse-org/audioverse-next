@@ -106,4 +106,29 @@ describe('miniplayer template', () => {
 
 		await findByText('the_recording_title');
 	});
+
+	it('sets class on body when miniplayer loaded', async () => {
+		setPlayerMock();
+
+		const { findByText } = await renderComponent({
+			props: {
+				children: (
+					<AndMiniplayer>
+						<ContextUser
+							func={(c) => {
+								c.loadRecording({
+									title: 'the_recording_title',
+									canonicalPath: 'the_recording_path',
+								} as any);
+							}}
+						/>
+					</AndMiniplayer>
+				),
+			},
+		});
+
+		await findByText('the_recording_title');
+
+		expect(document.body).toHaveClass('body--with-miniplayer');
+	});
 });

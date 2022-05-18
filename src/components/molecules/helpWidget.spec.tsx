@@ -3,7 +3,7 @@ import { when } from 'jest-when';
 
 import HelpWidget from '@components/molecules/helpWidget';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildRenderer, loadRouter, mockedFetchApi } from '@lib/test/helpers';
 
 jest.mock('next/script');
 
@@ -91,6 +91,30 @@ describe('help widget', () => {
 			name: 'the_name',
 			email: 'the_email',
 			avatar: 'the_image_url',
+		});
+	});
+
+	it('registers page views with beacon', async () => {
+		const router = loadRouter();
+
+		await renderComponent();
+
+		const calls = (router.events.on as jest.Mock).mock.calls;
+
+		await waitFor(() => {
+			expect(router.events.on).toBeCalled();
+		});
+
+		const callback = calls[0][1];
+
+		window.document.title = 'the_title';
+
+		callback('the_url');
+
+		expect(mockBeacon).toBeCalledWith('event', {
+			type: 'page-viewed',
+			url: 'the_url',
+			title: 'the_title',
 		});
 	});
 });

@@ -22,7 +22,6 @@ const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
 
 describe('register page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
 		Cookie.get = jest.fn().mockReturnValue({});
 	});
 
@@ -313,7 +312,7 @@ describe('register page', () => {
 	});
 
 	it('pops modal on guest info click', async () => {
-		const { getByText, getByTestId } = await renderPage({ router });
+		const { getByText, getByTestId } = await renderPage();
 
 		userEvent.click(getByTestId('guest-info-button'));
 

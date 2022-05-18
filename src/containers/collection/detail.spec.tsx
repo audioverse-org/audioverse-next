@@ -6,16 +6,17 @@ import {
 	Language,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import {
+	buildStaticRenderer,
+	loadQuery,
+	mockedFetchApi,
+} from '@lib/test/helpers';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
 
-const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps, {
-	language: 'en',
-	id: 'the_collection_id',
-});
+const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);
 
 function loadData() {
 	when(mockedFetchApi)
@@ -91,6 +92,13 @@ function loadData() {
 }
 
 describe('collection detail page', () => {
+	beforeEach(() => {
+		loadQuery({
+			language: 'en',
+			id: 'the_collection_id',
+		});
+	});
+
 	it('renders', async () => {
 		loadData();
 

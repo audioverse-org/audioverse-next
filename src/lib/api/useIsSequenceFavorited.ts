@@ -9,8 +9,7 @@ import {
 } from '@lib/generated/graphql';
 
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
-
-import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from '.';
+import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';
 
 interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
 	recordingsFavoritedCount: number | undefined;

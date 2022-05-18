@@ -1,15 +1,15 @@
 import { waitFor } from '@testing-library/react';
 
-import { buildRenderer, loadAuthGuardData } from '@lib/test/helpers';
+import {
+	buildRenderer,
+	loadAuthGuardData,
+	mockedRouter,
+} from '@lib/test/helpers';
 import Login from '@pages/[language]/account/login';
 
 const renderPage = buildRenderer(Login);
 
 describe('login page', () => {
-	it('renders', async () => {
-		await renderPage();
-	});
-
 	it('renders login form', async () => {
 		const { getByPlaceholderText } = await renderPage();
 
@@ -19,12 +19,10 @@ describe('login page', () => {
 	it('redirects when user authenticated', async () => {
 		loadAuthGuardData();
 
-		const push = jest.fn();
-
-		await renderPage({ router: { push } });
+		await renderPage();
 
 		await waitFor(() => {
-			expect(push).toBeCalledWith('/en/discover');
+			expect(mockedRouter.push).toBeCalledWith('/en/discover');
 		});
 	});
 });

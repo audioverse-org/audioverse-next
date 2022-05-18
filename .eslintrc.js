@@ -14,6 +14,7 @@ module.exports = {
 		'@mizdra/layout-shift',
 		'react-hooks',
 		'lodash',
+		'@calm/react-intl',
 	],
 	extends: [
 		'eslint:recommended',
@@ -31,6 +32,28 @@ module.exports = {
 		jest: true,
 	},
 	rules: {
+		'@calm/react-intl/missing-formatted-message': [
+			2,
+			{
+				noTrailingWhitespace: true,
+				ignoreLinks: false,
+				enforceLabels: true,
+				enforceImageAlts: true,
+				enforceInputProps: true,
+			},
+		],
+		'@calm/react-intl/missing-attribute': [
+			2,
+			{
+				noTrailingWhitespace: true,
+				noSpreadOperator: true,
+				requireDescription: false,
+				formatDefineMessages: true,
+				requireIdAsString: true,
+				requireDefaultMessage: true,
+			},
+		],
+		'@calm/react-intl/missing-values': 2,
 		'sort-imports': [
 			'error',
 			{
@@ -91,6 +114,9 @@ module.exports = {
 			files: ['*.spec.ts', '*.spec.tsx', 'src/__mocks__/**/*'],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
+				'@calm/react-intl/missing-formatted-message': 'off',
+				'@calm/react-intl/missing-attribute': 'off',
+				'@calm/react-intl/missing-values': 'off',
 			},
 		},
 	],
