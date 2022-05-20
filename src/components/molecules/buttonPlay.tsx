@@ -22,6 +22,7 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 		BaseColors.STORY_B,
 		BaseColors.STORY_H,
 		BaseColors.TOPIC_B,
+		BaseColors.BIBLE_H,
 	].includes(backgroundColor);
 
 export default function ButtonPlay({
