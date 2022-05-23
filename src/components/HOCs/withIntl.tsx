@@ -12,7 +12,7 @@ const withIntl = <P extends Record<string, unknown>>(
 		const language = useLanguageRoute();
 		const [messages, setMessages] = React.useState({});
 		React.useEffect(() => {
-			getIntlMessages(language).then((m) => setMessages(m));
+			setMessages(getIntlMessages(language));
 		}, [language]);
 
 		return (

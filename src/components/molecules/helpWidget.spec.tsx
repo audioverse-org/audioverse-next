@@ -87,10 +87,12 @@ describe('help widget', () => {
 
 		await renderComponent();
 
-		expect(mockBeacon).toBeCalledWith('identify', {
-			name: 'the_name',
-			email: 'the_email',
-			avatar: 'the_image_url',
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('identify', {
+				name: 'the_name',
+				email: 'the_email',
+				avatar: 'the_image_url',
+			});
 		});
 	});
 

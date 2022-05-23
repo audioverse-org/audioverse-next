@@ -45,7 +45,9 @@ describe('withAuthGuard', () => {
 
 		const { getByText, queryByText } = await render();
 
-		expect(queryByText('hello world')).not.toBeInTheDocument();
+		await waitFor(() =>
+			expect(queryByText('hello world')).not.toBeInTheDocument()
+		);
 
 		when(mockedFetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())

@@ -27,8 +27,8 @@ import {
 	loadRouter,
 	mockedFetchApi,
 	renderWithIntl,
-	setPlayerMock,
 } from '@lib/test/helpers';
+import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,

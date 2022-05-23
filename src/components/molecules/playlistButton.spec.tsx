@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import set from 'lodash/set';
 import React from 'react';
 
 import PlaylistButton from '@components/molecules/playlistButton';
@@ -14,17 +15,30 @@ import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 import {
 	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
+	GetPlaylistButtonDataQuery,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import {
-	makePlaylistButtonData,
 	mockedFetchApi,
 	renderWithIntl,
-	resolveWithDelay,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
+import { resolveWithDelay } from '@lib/test/resolveWithDelay';
 
 jest.mock('@lib/api/setPlaylistMembership');
+
+const makePlaylistButtonData = (
+	playlists: any[] | undefined = undefined
+): GetPlaylistButtonDataQuery => {
+	const value = playlists || [
+		{
+			id: 'playlist_id',
+			title: 'playlist_title',
+		},
+	];
+
+	return set({} as any, 'me.user.playlists.nodes', value);
+};
 
 const loadComponentData = (playlists: any[] | undefined = undefined) => {
 	when(mockedFetchApi)

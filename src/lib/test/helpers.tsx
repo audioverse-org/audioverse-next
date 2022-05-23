@@ -1,31 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParsedUrlQuery } from 'querystring';
 
-import {
-	act,
-	render,
-	RenderOptions,
-	RenderResult,
-} from '@testing-library/react';
+import { RenderOptions, RenderResult } from '@testing-library/react';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import defaultsDeep from 'lodash/defaultsDeep';
-import set from 'lodash/set';
 import { GetServerSidePropsResult, GetStaticProps } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
 import React, { ComponentType, ReactElement } from 'react';
-import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import { QueryClient } from 'react-query';
 import { PartialDeep } from 'type-fest';
-import videojs from 'video.js';
 
-import withIntl from '@components/HOCs/withIntl';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetPlaylistButtonDataQuery,
-	GetWithAuthGuardDataDocument,
-} from '@lib/generated/graphql';
-import { sleep } from '@lib/sleep';
+import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 export const mockedFetchApi = fetchApi as jest.Mock;
 
@@ -169,13 +158,7 @@ export async function renderWithIntl(
 	ui: ReactElement,
 	renderOptions?: RenderOptions
 ): Promise<RenderResult & { queryClient: QueryClient }> {
-	const WithIntl = withIntl(() => ui);
-
-	let result = {} as RenderResult & { queryClient: QueryClient };
-	await act(async () => {
-		result = await renderWithQueryProvider(<WithIntl />, renderOptions);
-	});
-	return result;
+	return renderWithProviders(ui, renderOptions);
 }
 
 // TODO: Merge with buildRenderer, or just make it private
@@ -183,162 +166,8 @@ export async function renderWithQueryProvider(
 	ui: ReactElement,
 	renderOptions?: RenderOptions
 ): Promise<RenderResult & { queryClient: QueryClient }> {
-	const queryClient = new QueryClient();
-	const result = await render(
-		<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
-		renderOptions
-	);
-
-	return {
-		...result,
-		queryClient,
-	};
+	return renderWithProviders(ui, renderOptions);
 }
 
-export function resolveWithDelay(
-	mock: jest.SpyInstance,
-	ms = 50,
-	value: any = undefined
-): void {
-	mock.mockImplementation(() => sleep({ ms, value }));
-}
-
-export async function withMutedReactQueryLogger(
-	func: () => Promise<any>
-): Promise<any> {
-	const noop = () => {
-		// do nothing
-	};
-
-	setLogger({
-		log: noop,
-		warn: noop,
-		error: noop,
-	});
-
-	const result = await func();
-
-	setLogger(window.console);
-
-	return result;
-}
-
-export const makePlaylistButtonData = (
-	playlists: any[] | undefined = undefined
-): GetPlaylistButtonDataQuery => {
-	const value = playlists || [
-		{
-			id: 'playlist_id',
-			title: 'playlist_title',
-		},
-	];
-
-	return set({} as any, 'me.user.playlists.nodes', value);
-};
-
-interface SetPlayerMockOptions {
-	isPaused?: boolean;
-	time?: number;
-	duration?: number;
-	volume?: number;
-	playbackRate?: number;
-	functions?: Partial<videojs.Player>;
-	supportsFullScreen?: boolean;
-	isFullscreen?: boolean;
-}
-
-type MockPlayer = Pick<
-	videojs.Player,
-	| 'play'
-	| 'pause'
-	| 'paused'
-	| 'currentTime'
-	| 'duration'
-	| 'src'
-	| 'volume'
-	| 'options'
-	| 'controlBar'
-	| 'playbackRate'
-	| 'requestFullscreen'
-	| 'controls'
-	| 'supportsFullScreen'
-	| 'on'
-> & {
-	_updateOptions: (options: SetPlayerMockOptions) => void;
-	_fire: (event: string, data?: any) => void;
-};
-
-export const mockVideojs = videojs as unknown as jest.Mock;
-
-export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
-	let {
-		isPaused = true,
-		time = 50,
-		duration = 100,
-		volume = 0.5,
-		playbackRate = 1,
-		functions = {},
-	} = options;
-	const { supportsFullScreen = true, isFullscreen = false } = options;
-
-	const handlers: Record<string, Array<(data: any) => any>> = {};
-
-	const mockPlayer: MockPlayer = {
-		_updateOptions: (options) => {
-			const update = (key: keyof SetPlayerMockOptions, fallback: any) => {
-				if (!(key in options)) return fallback;
-				if (options[key] === undefined) return fallback;
-				return options[key];
-			};
-			isPaused = update('isPaused', isPaused);
-			time = update('time', time);
-			duration = update('duration', duration);
-			functions = update('functions', functions);
-		},
-		_fire: (event: string, data: any = null) => {
-			handlers[event]?.map((fn: (data: any) => any) => fn(data));
-		},
-		play: jest.fn(async () => {
-			isPaused = false;
-		}),
-		pause: jest.fn(() => {
-			isPaused = true;
-			return mockPlayer as unknown as videojs.Player;
-		}),
-		paused: jest.fn(() => isPaused),
-		currentTime: jest.fn((newTime: number | null = null) => {
-			if (newTime !== null) time = newTime;
-			return time;
-		}),
-		volume: jest.fn((newVolume: number | null = null) => {
-			if (newVolume !== null) volume = newVolume;
-			return volume;
-		}) as any,
-		duration: jest.fn(() => duration),
-		src: jest.fn(),
-		options: jest.fn(),
-		controlBar: {
-			createEl: jest.fn(),
-			dispose: jest.fn(),
-		} as any,
-		playbackRate: jest.fn((newRate?: number) => {
-			if (newRate) playbackRate = newRate;
-			return playbackRate;
-		}),
-		defaultPlaybackRate: jest.fn(),
-		requestFullscreen: jest.fn(),
-		controls: jest.fn(),
-		supportsFullScreen: jest.fn(() => supportsFullScreen),
-		isFullscreen: jest.fn(() => isFullscreen),
-		on: jest.fn((event: string, fn: (data: any) => any) => {
-			if (!(event in handlers)) handlers[event] = [];
-			handlers[event].push(fn);
-		}) as any,
-		bufferedEnd: jest.fn(),
-		...functions,
-	};
-
-	mockVideojs.mockReturnValue(mockPlayer);
-
-	return mockPlayer;
-}
+export { default as withMutedReactQueryLogger } from './withMutedReactQueryLogger';
+export { default as setPlayerMock } from './setPlayerMock';

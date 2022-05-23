@@ -4,7 +4,7 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	ignorePatterns: ['fileMock.js'],
+	ignorePatterns: ['fileMock.js', '.eslintrc.js'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
 		'import',
@@ -111,7 +111,13 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.spec.ts', '*.spec.tsx', 'src/__mocks__/**/*'],
+			files: [
+				'*.spec.ts',
+				'*.spec.tsx',
+				'**/__mocks__/**/*',
+				'**/__tests__/**/*',
+				'src/lib/test/**/*',
+			],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
 				'@calm/react-intl/missing-formatted-message': 'off',

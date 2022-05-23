@@ -18,13 +18,8 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import {
-	buildRenderer,
-	loadRouter,
-	mockVideojs,
-	renderWithIntl,
-	setPlayerMock,
-} from '@lib/test/helpers';
+import { buildRenderer, loadRouter, renderWithIntl } from '@lib/test/helpers';
+import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
@@ -1183,9 +1178,9 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
-
 		await waitFor(() => {
+			const miniplayer = result.getByLabelText('miniplayer');
+
 			expect(getByText(miniplayer, '2:00')).toBeInTheDocument();
 		});
 	});

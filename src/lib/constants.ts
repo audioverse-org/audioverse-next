@@ -1,3 +1,5 @@
+import { ResolvedIntlConfig } from 'react-intl';
+
 import { Language } from './generated/graphql';
 
 export const ENTRIES_PER_PAGE = 12;
@@ -6,6 +8,7 @@ export interface LanguageConfiguration {
 	base_url: string;
 	display_name: string;
 	legacy_base_url: string;
+	messages: ResolvedIntlConfig['messages'];
 }
 
 export type SupportedLanguages = Language;
@@ -19,41 +22,49 @@ export const LANGUAGES: LanguageConfigurations = {
 		base_url: 'en',
 		display_name: 'English',
 		legacy_base_url: 'english',
+		messages: require(`../../public/compiled-lang/en.json`),
 	},
 	SPANISH: {
 		base_url: 'es',
 		display_name: 'Español',
 		legacy_base_url: 'espanol',
+		messages: require(`../../public/compiled-lang/es.json`),
 	},
 	FRENCH: {
 		base_url: 'fr',
 		display_name: 'Français',
 		legacy_base_url: 'francais',
+		messages: require(`../../public/compiled-lang/fr.json`),
 	},
 	GERMAN: {
 		base_url: 'de',
 		display_name: 'Deutsch',
 		legacy_base_url: 'deutsch',
+		messages: require(`../../public/compiled-lang/de.json`),
 	},
 	CHINESE: {
 		base_url: 'zh',
 		display_name: '中文',
 		legacy_base_url: 'zhongwen',
+		messages: require(`../../public/compiled-lang/zh.json`),
 	},
 	JAPANESE: {
 		base_url: 'ja',
 		display_name: '日本語',
 		legacy_base_url: 'japanese',
+		messages: require(`../../public/compiled-lang/ja.json`),
 	},
 	RUSSIAN: {
 		base_url: 'ru',
 		display_name: 'Русский',
 		legacy_base_url: 'russian',
+		messages: require(`../../public/compiled-lang/ru.json`),
 	},
 	NORDIC: {
 		base_url: 'no',
 		display_name: 'Scandinavia',
 		legacy_base_url: 'no',
+		messages: require(`../../public/compiled-lang/no.json`),
 	},
 };
 
