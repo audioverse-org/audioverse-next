@@ -129,7 +129,6 @@ export function buildRenderer<
 		const props_ = getProps
 			? await getProps(fullParams)
 			: props || defaultProps;
-		// loadRouter({ query: fullParams, ...router });
 		return renderWithIntl(<Component {...props_} />);
 	};
 }

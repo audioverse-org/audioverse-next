@@ -54,7 +54,7 @@ export default function Miniplayer(): JSX.Element | null {
 			className={styles.miniplayer}
 			aria-label={intl.formatMessage({
 				id: 'miniplayer__label',
-				defaultMessage: 'Miniplayer',
+				defaultMessage: 'miniplayer',
 			})}
 		>
 			<div className={styles.player}>
