@@ -1,11 +1,13 @@
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import React, { PropsWithChildren, useContext } from 'react';
+
+import Miniplayer from '@components/organisms/miniplayer';
 
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
 
-const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
+// const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 
 export default function AndMiniplayer({
 	children,
@@ -53,7 +55,7 @@ export default function AndMiniplayer({
 			>
 				{children}
 			</div>
-			<LazyMiniplayer />
+			<Miniplayer />
 		</>
 	);
 }
