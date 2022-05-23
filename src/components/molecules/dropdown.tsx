@@ -1,4 +1,5 @@
-import dynamic from 'next/dynamic';
+import { Menu } from '@mui/material';
+// import dynamic from 'next/dynamic';
 import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
 
 import styles from './dropdown.module.scss';
@@ -14,7 +15,7 @@ type Props = {
 	children?: ReactNode | ((handleClose: () => void) => ReactNode);
 };
 
-const LazyMenu = dynamic(() => import('@material-ui/core/Menu'));
+// const LazyMenu = dynamic(() => import('@material-ui/core/Menu'));
 
 export default function Dropdown({
 	id,
@@ -39,13 +40,12 @@ export default function Dropdown({
 				'aria-controls': id,
 				isOpen: !!anchorEl,
 			})}
-			<LazyMenu
+			<Menu
 				id={id}
 				open={Boolean(anchorEl)}
 				onClose={handleClose}
 				keepMounted
 				anchorEl={anchorEl}
-				getContentAnchorEl={null}
 				anchorOrigin={{
 					vertical: 'bottom',
 					horizontal: alignment,
@@ -59,7 +59,7 @@ export default function Dropdown({
 				}}
 			>
 				{typeof children === 'function' ? children(handleClose) : children}
-			</LazyMenu>
+			</Menu>
 		</>
 	);
 }

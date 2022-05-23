@@ -1,4 +1,4 @@
-import Slider from '@material-ui/core/Slider';
+import Slider from '@mui/material/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useContext } from 'react';
