@@ -5,6 +5,7 @@ import {
 	getByLabelText,
 	getByText,
 	queryByLabelText,
+	screen,
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -202,9 +203,11 @@ describe('player', () => {
 	it('does not reload player on play', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		expect(mockPlayer.src).not.toBeCalled();
 	});
@@ -445,6 +448,8 @@ describe('player', () => {
 
 		userEvent.click(poster.parentElement as HTMLElement);
 
+		await screen.findAllByLabelText('pause');
+
 		expect(queryByAltText('the_sermon_title')).not.toBeInTheDocument();
 	});
 
@@ -604,6 +609,8 @@ describe('player', () => {
 
 		userEvent.click(poster.parentElement as HTMLElement);
 
+		await screen.findAllByLabelText('pause');
+
 		expect(getByTestId('portal')).toBeInTheDocument();
 	});
 
@@ -640,6 +647,8 @@ describe('player', () => {
 		const result = await renderComponent();
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -698,6 +707,8 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
+		await screen.findAllByLabelText('pause');
+
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		expect(getByText(miniplayer, 'the_sequence_title')).toBeInTheDocument();
@@ -724,6 +735,8 @@ describe('player', () => {
 		});
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -775,6 +788,8 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
+		await screen.findAllByLabelText('pause');
+
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		expect(getByLabelText(miniplayer, 'back 15 seconds')).toBeInTheDocument();
@@ -784,6 +799,8 @@ describe('player', () => {
 		const result = await renderComponent();
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -922,6 +939,8 @@ describe('player', () => {
 		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
 
 		userEvent.click(poster.parentElement as HTMLElement);
+
+		await screen.findAllByLabelText('pause');
 
 		const player = result.getByLabelText('player');
 

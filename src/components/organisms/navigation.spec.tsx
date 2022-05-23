@@ -1,7 +1,9 @@
+import { screen } from '@testing-library/react';
 import React from 'react';
 
 import Navigation from '@components/organisms/navigation';
 import { loadRouter, renderWithIntl } from '@lib/test/helpers';
+
 jest.mock('@lib/api/fetchApi');
 
 const renderNavigation = async () => {
@@ -20,8 +22,10 @@ describe('navigation', () => {
 			asPath: '/en/discover',
 		});
 
-		const { getByText } = await renderNavigation();
+		await renderNavigation();
 
-		expect(getByText('Discover').parentElement).toHaveClass('active');
+		await screen.findByText('Download App');
+
+		expect(screen.getByText('Discover').parentElement).toHaveClass('active');
 	});
 });

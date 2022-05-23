@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParsedUrlQuery } from 'querystring';
 
-import { RenderOptions, RenderResult } from '@testing-library/react';
+import { act, RenderOptions, RenderResult } from '@testing-library/react';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import defaultsDeep from 'lodash/defaultsDeep';
@@ -113,12 +113,18 @@ export function buildRenderer<
 	return async (
 		options: RendererOptions<P> = {}
 	): Promise<RenderResult & { queryClient: QueryClient }> => {
-		const { params = {}, props } = options;
-		const fullParams = { ...params, ...mockedRouter.query };
-		const props_ = getProps
-			? await getProps(fullParams)
-			: props || defaultProps;
-		return renderWithIntl(<Component {...props_} />);
+		let result;
+		await act(async () => {
+			const { params = {}, props } = options;
+			const fullParams = { ...params, ...mockedRouter.query };
+			const props_ = getProps
+				? await getProps(fullParams)
+				: props || defaultProps;
+			result = renderWithIntl(<Component {...props_} />);
+		});
+		return result as unknown as Promise<
+			RenderResult & { queryClient: QueryClient }
+		>;
 	};
 }
 
