@@ -5,11 +5,8 @@ import {
 	GetSeriesListPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	buildLoader,
-	buildStaticRenderer,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SeriesList, {
 	getStaticPaths,
 	getStaticProps,

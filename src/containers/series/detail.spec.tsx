@@ -5,8 +5,8 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
+import { buildLoader } from '@lib/test/buildLoader';
 import {
-	buildLoader,
 	buildStaticRenderer,
 	loadQuery,
 	mockedFetchApi,

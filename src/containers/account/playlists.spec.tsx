@@ -8,12 +8,10 @@ import {
 	AddAccountPlaylistDocument,
 	GetAccountPlaylistsPageDataDocument,
 } from '@lib/generated/graphql';
-import {
-	buildLoader,
-	buildRenderer,
-	loadAuthGuardData,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import { mockedFetchApi } from '@lib/test/helpers';
+import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 
 import Playlists from './playlists';
 

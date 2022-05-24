@@ -6,7 +6,8 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildLoader, buildStaticRenderer } from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildStaticRenderer } from '@lib/test/helpers';
 import Discover, { getStaticProps } from '@pages/[language]/discover';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps, {

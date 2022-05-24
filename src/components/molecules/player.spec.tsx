@@ -19,7 +19,8 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import { buildRenderer, loadRouter } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import { loadRouter } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 

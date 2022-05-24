@@ -5,11 +5,8 @@ import {
 	GetSponsorTeachingsPathsDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import {
-	buildLoader,
-	buildStaticRenderer,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,

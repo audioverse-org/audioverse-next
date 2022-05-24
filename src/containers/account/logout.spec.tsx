@@ -1,7 +1,7 @@
 import { act } from '@testing-library/react';
 
 import { useLogout } from '@lib/api/useLogout';
-import { buildRenderer } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
 import Logout from '@pages/[language]/account/logout';
 
 jest.mock('@lib/api/useLogout');

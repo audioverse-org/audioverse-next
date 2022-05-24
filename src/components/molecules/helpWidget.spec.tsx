@@ -3,7 +3,8 @@ import { when } from 'jest-when';
 
 import HelpWidget from '@components/molecules/helpWidget';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
-import { buildRenderer, loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
 
 jest.mock('next/script');
 

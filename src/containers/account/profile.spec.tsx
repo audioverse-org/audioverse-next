@@ -14,12 +14,9 @@ import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
 } from '@lib/generated/graphql';
-import {
-	buildServerRenderer,
-	loadAuthGuardData,
-	loadRouter,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildServerRenderer } from '@lib/test/buildServerRenderer';
+import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 

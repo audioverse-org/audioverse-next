@@ -1,26 +1,19 @@
-type ExactAlt<T, Shape> = T extends Shape
-	? Exclude<keyof T, keyof Shape> extends never
-		? T
-		: never
-	: never;
+import { RenderResult } from '@testing-library/react';
+import { QueryClient } from 'react-query';
 
-// WORKAROUND: https://github.com/sindresorhus/type-fest/issues/117
-type Must<T> = {
-	[P in keyof T]-?: NonNullable<T[P]>;
-};
+declare global {
+	type ExactAlt<T, Shape> = T extends Shape
+		? Exclude<keyof T, keyof Shape> extends never
+			? T
+			: never
+		: never;
 
-declare module 'react-facebook-login/dist/facebook-login-render-props' {
-	import {
-		ReactFacebookLoginProps as _ReactFacebookLoginProps,
-		ReactFacebookLoginState,
-	} from 'react-facebook-login';
+	// WORKAROUND: https://github.com/sindresorhus/type-fest/issues/117
+	type Must<T> = {
+		[P in keyof T]-?: NonNullable<T[P]>;
+	};
 
-	export interface ReactFacebookLoginProps extends _ReactFacebookLoginProps {
-		render: React.FC<{ onClick: () => void }>;
-	}
-
-	export default class ReactFacebookLogin extends React.Component<
-		ReactFacebookLoginProps,
-		ReactFacebookLoginState
-	> {}
+	type Renderer<P> = (
+		options?: RendererOptions<P>
+	) => Promise<RenderResult & { queryClient: QueryClient }>;
 }

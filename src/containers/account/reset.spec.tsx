@@ -4,8 +4,8 @@ import { when } from 'jest-when';
 
 import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
+import { buildRenderer } from '@lib/test/buildRenderer';
 import {
-	buildRenderer,
 	loadQuery,
 	mockedFetchApi,
 	withMutedReactQueryLogger,
