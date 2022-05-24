@@ -6,15 +6,13 @@ import {
 	Language,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
+
+import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 
@@ -33,7 +31,7 @@ const loadData = buildLoader(GetBlogDetailDataDocument, {
 
 describe('blog post detail page', () => {
 	beforeEach(() => {
-		loadQuery({
+		_loadQuery({
 			language: 'en',
 			id: 'the_blog_post_id',
 		});

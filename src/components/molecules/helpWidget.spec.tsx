@@ -4,7 +4,9 @@ import { when } from 'jest-when';
 import HelpWidget from '@components/molecules/helpWidget';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import { mockedFetchApi } from '@lib/test/helpers';
+
+import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('next/script');
 
@@ -98,7 +100,7 @@ describe('help widget', () => {
 	});
 
 	it('registers page views with beacon', async () => {
-		const router = loadRouter();
+		const router = _loadRouter();
 
 		await renderComponent();
 

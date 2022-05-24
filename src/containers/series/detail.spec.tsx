@@ -6,15 +6,13 @@ import {
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
+
+import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
@@ -54,7 +52,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 
 describe('series detail page', () => {
 	beforeEach(() => {
-		loadQuery({
+		_loadQuery({
 			language: 'en',
 			id: 'the_series_id',
 		});

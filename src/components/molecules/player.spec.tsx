@@ -20,9 +20,10 @@ import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { loadRouter } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
+
+import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
@@ -71,7 +72,7 @@ const renderComponent = buildRenderer(
 describe('player', () => {
 	beforeEach(() => {
 		setPlayerMock();
-		loadRouter({});
+		_loadRouter({});
 		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 

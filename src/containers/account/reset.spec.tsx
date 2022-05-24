@@ -5,12 +5,10 @@ import { when } from 'jest-when';
 import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import {
-	loadQuery,
-	mockedFetchApi,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import { mockedFetchApi, withMutedReactQueryLogger } from '@lib/test/helpers';
 import Reset from '@pages/[language]/account/reset';
+
+import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildRenderer(Reset);
 
@@ -63,7 +61,7 @@ describe('password reset page', () => {
 	});
 
 	it('submits password change', async () => {
-		loadQuery({
+		_loadQuery({
 			token: 'the_token',
 		});
 
@@ -247,7 +245,7 @@ describe('password reset page', () => {
 				success: true,
 				errors: [],
 			});
-			loadQuery({
+			_loadQuery({
 				token: 'the_token',
 			});
 

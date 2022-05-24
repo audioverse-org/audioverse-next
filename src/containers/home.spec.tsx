@@ -7,12 +7,10 @@ import {
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
+
+import { _loadQuery } from '../__mocks__/next/router';
 
 jest.mock('next/router');
 
@@ -234,7 +232,7 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		loadQuery({ language: 'es' });
+		_loadQuery({ language: 'es' });
 
 		await renderPage();
 
@@ -254,7 +252,7 @@ describe('home page', () => {
 	});
 
 	it('falls back to English', async () => {
-		loadQuery({ language: 'ak' });
+		_loadQuery({ language: 'ak' });
 
 		const { getByText } = await renderPage();
 

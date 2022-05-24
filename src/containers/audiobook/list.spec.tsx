@@ -8,17 +8,19 @@ import {
 	GetAudiobookListPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import { mockedFetchApi } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/books/page/[i]';
 
+import { _loadRouter } from '../../__mocks__/next/router';
+
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
 ) {
-	loadRouter({ query: params });
+	_loadRouter({ query: params });
 
 	const { props } = (await getStaticProps({
 		params: { language: 'en', i: '1', ...params },

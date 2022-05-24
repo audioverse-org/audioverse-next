@@ -4,15 +4,13 @@ import {
 	GetSongBooksDetailPageDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/book/[book]';
+
+import { _loadQuery } from '../../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 
@@ -45,7 +43,7 @@ function loadData() {
 
 describe('song book detail page', () => {
 	beforeEach(() => {
-		loadQuery({
+		_loadQuery({
 			language: 'en',
 			book: 'Genesis',
 		});

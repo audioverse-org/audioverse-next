@@ -15,10 +15,12 @@ import {
 	UpdateProfileDataDocument,
 } from '@lib/generated/graphql';
 import { buildServerRenderer } from '@lib/test/buildServerRenderer';
-import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import { mockedFetchApi } from '@lib/test/helpers';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+
+import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');
@@ -198,7 +200,7 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
-		loadRouter({
+		_loadRouter({
 			query: {},
 		});
 		Cookie.get = jest.fn().mockReturnValue({});

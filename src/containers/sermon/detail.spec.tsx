@@ -21,18 +21,15 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	loadRouter,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
+
+import { _loadQuery, _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
@@ -99,7 +96,7 @@ const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
 
 describe('sermon detail page', () => {
 	beforeEach(() => {
-		loadRouter({
+		_loadRouter({
 			isFallback: false,
 			query: {
 				language: 'en',
@@ -184,7 +181,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('shows loading screen', async () => {
-		loadRouter({ isFallback: true });
+		_loadRouter({ isFallback: true });
 
 		const { getByLabelText } = await renderWithProviders(
 			<SermonDetail recording={null} />,
@@ -456,7 +453,7 @@ describe('sermon detail page', () => {
 			language: Language.Spanish,
 		});
 
-		loadQuery({
+		_loadQuery({
 			language: 'es',
 		});
 

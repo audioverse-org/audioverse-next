@@ -13,15 +13,13 @@ import {
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
+
+import { _loadQuery } from '../../__mocks__/next/router';
 
 jest.mock('next/router');
 jest.mock('next/head');
@@ -66,7 +64,7 @@ export function loadSermonListData({
 describe('sermons list page', () => {
 	beforeEach(() => {
 		jest.resetAllMocks();
-		loadQuery({
+		_loadQuery({
 			language: 'en',
 			i: '1',
 		});
@@ -228,7 +226,7 @@ describe('sermons list page', () => {
 
 	it('links All button using lang', async () => {
 		loadSermonListData();
-		loadQuery({ language: 'es' });
+		_loadQuery({ language: 'es' });
 
 		const { getByRole, getByText } = await renderPage();
 
@@ -274,7 +272,7 @@ describe('sermons list page', () => {
 
 	it('localizes pagination', async () => {
 		loadSermonListData();
-		loadQuery({ language: 'es' });
+		_loadQuery({ language: 'es' });
 
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;

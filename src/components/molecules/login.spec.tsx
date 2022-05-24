@@ -5,12 +5,10 @@ import React from 'react';
 
 import Login from '@components/molecules/login';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
-import {
-	loadRouter,
-	mockedFetchApi,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import { mockedFetchApi, withMutedReactQueryLogger } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
+
+import { _loadRouter } from '../../__mocks__/next/router';
 
 function loadForgotPasswordResponse({
 	success = true,
@@ -27,7 +25,7 @@ function loadForgotPasswordResponse({
 }
 
 describe('login form', () => {
-	beforeEach(() => loadRouter({ query: {} }));
+	beforeEach(() => _loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
 		const { getByText } = await renderWithProviders(<Login />, undefined);
 

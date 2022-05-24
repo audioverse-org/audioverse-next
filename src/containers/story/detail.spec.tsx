@@ -6,15 +6,13 @@ import {
 	Language,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
 import Story, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/[id]/[[...slugs]]';
+
+import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(Story, getStaticProps);
 
@@ -37,7 +35,7 @@ function loadData() {
 
 describe('story detail page', () => {
 	beforeEach(() => {
-		loadQuery({
+		_loadQuery({
 			language: 'en',
 			id: 'the_story_id',
 		});

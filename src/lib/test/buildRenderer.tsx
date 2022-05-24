@@ -3,8 +3,9 @@ import { NextRouter } from 'next/router';
 import React, { ComponentType } from 'react';
 import { QueryClient } from 'react-query';
 
-import { mockedRouter } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
+
+import { _mockedRouter } from '../../__mocks__/next/router';
 
 // TODO: Only accept props if getProps not provided
 // TODO: Only accept params if getProps provided
@@ -39,7 +40,7 @@ export function buildRenderer<
 		let result;
 		await act(async () => {
 			const { params = {}, props } = options;
-			const fullParams = { ...params, ...mockedRouter.query };
+			const fullParams = { ...params, ..._mockedRouter.query };
 			const props_ = getProps
 				? await getProps(fullParams)
 				: props || defaultProps;

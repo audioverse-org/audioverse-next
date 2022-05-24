@@ -7,8 +7,10 @@ import RecordingButtonFavorite from '@components/molecules/recordingButtonFavori
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import { loadRouter, withMutedReactQueryLogger } from '@lib/test/helpers';
+import { withMutedReactQueryLogger } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
+
+import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
@@ -38,7 +40,7 @@ const mockSetRecordingFavorited = setRecordingFavorited as jest.Mock;
 
 describe('recording favorite button', () => {
 	beforeEach(() => {
-		loadRouter({
+		_loadRouter({
 			pathname: '/en/discover',
 		});
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
