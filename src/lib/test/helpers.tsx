@@ -120,7 +120,7 @@ export function buildRenderer<
 			const props_ = getProps
 				? await getProps(fullParams)
 				: props || defaultProps;
-			result = renderWithIntl(<Component {...props_} />);
+			result = renderWithProviders(<Component {...props_} />, undefined);
 		});
 		return result as unknown as Promise<
 			RenderResult & { queryClient: QueryClient }
@@ -157,14 +157,6 @@ export function buildServerRenderer<
 	};
 
 	return buildRenderer(Component, { getProps, defaultParams });
-}
-
-// TODO: Merge with buildRenderer, or just make it private
-export async function renderWithIntl(
-	ui: ReactElement,
-	renderOptions?: RenderOptions
-): Promise<RenderResult & { queryClient: QueryClient }> {
-	return renderWithProviders(ui, renderOptions);
 }
 
 // TODO: Merge with buildRenderer, or just make it private

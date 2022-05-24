@@ -26,8 +26,8 @@ import {
 	loadQuery,
 	loadRouter,
 	mockedFetchApi,
-	renderWithIntl,
 } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
@@ -186,8 +186,9 @@ describe('sermon detail page', () => {
 	it('shows loading screen', async () => {
 		loadRouter({ isFallback: true });
 
-		const { getByLabelText } = await renderWithIntl(
-			<SermonDetail recording={null} />
+		const { getByLabelText } = await renderWithProviders(
+			<SermonDetail recording={null} />,
+			undefined
 		);
 
 		expect(getByLabelText('Loading…')).toBeInTheDocument();

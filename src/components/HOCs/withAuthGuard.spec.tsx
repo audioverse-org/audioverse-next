@@ -1,19 +1,26 @@
-import { waitFor } from '@testing-library/react';
+import { RenderOptions, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookies from 'js-cookie';
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { QueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
-	return renderWithIntl(<Comp />);
+	return (async function (
+		ui: ReactElement,
+		renderOptions?: RenderOptions
+	): Promise<RenderResult & { queryClient: QueryClient }> {
+		return renderWithProviders(ui, renderOptions);
+	})(<Comp />);
 }
 
 describe('withAuthGuard', () => {

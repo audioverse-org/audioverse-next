@@ -19,7 +19,8 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import { buildRenderer, loadRouter, renderWithIntl } from '@lib/test/helpers';
+import { buildRenderer, loadRouter } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 
 jest.mock('video.js');
@@ -391,7 +392,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithIntl(
+		const { getByTestId } = await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -403,7 +404,8 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>
+			</AndPlaybackContext>,
+			undefined
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -513,7 +515,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithIntl(
+		const { getByTestId } = await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -525,7 +527,8 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>
+			</AndPlaybackContext>,
+			undefined
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');

@@ -8,7 +8,8 @@ import {
 	GetAudiobookListPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { loadRouter, mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { loadRouter, mockedFetchApi } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
@@ -23,7 +24,7 @@ async function renderPage(
 		params: { language: 'en', i: '1', ...params },
 	})) as any;
 
-	return renderWithIntl(<AudiobooksList {...props} />);
+	return renderWithProviders(<AudiobooksList {...props} />, undefined);
 }
 
 function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {

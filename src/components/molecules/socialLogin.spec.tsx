@@ -5,7 +5,8 @@ import React from 'react';
 
 import SocialLogin from '@components/molecules/socialLogin';
 import { RegisterSocialDocument } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { mockedFetchApi } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {
@@ -23,8 +24,9 @@ describe('social login', () => {
 
 		let didCallbackRun = false;
 
-		const { getByText } = await renderWithIntl(
-			<SocialLogin onSuccess={() => (didCallbackRun = true)} />
+		const { getByText } = await renderWithProviders(
+			<SocialLogin onSuccess={() => (didCallbackRun = true)} />,
+			undefined
 		);
 
 		userEvent.click(getByText('Login with Facebook'));

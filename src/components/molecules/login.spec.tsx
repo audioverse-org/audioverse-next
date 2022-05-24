@@ -8,9 +8,9 @@ import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import {
 	loadRouter,
 	mockedFetchApi,
-	renderWithIntl,
 	withMutedReactQueryLogger,
 } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 function loadForgotPasswordResponse({
 	success = true,
@@ -29,7 +29,7 @@ function loadForgotPasswordResponse({
 describe('login form', () => {
 	beforeEach(() => loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
-		const { getByText } = await renderWithIntl(<Login />);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		expect(getByText('Forgot password?'));
 	});
@@ -37,7 +37,10 @@ describe('login form', () => {
 	it('triggers forgot password email', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -55,7 +58,10 @@ describe('login form', () => {
 	it('shows forgot password success message', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -77,7 +83,10 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -96,7 +105,7 @@ describe('login form', () => {
 		});
 
 		const { getByText, getByPlaceholderText, queryByText } =
-			await renderWithIntl(<Login />);
+			await renderWithProviders(<Login />, undefined);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -118,8 +127,9 @@ describe('login form', () => {
 				.calledWith(LoginForgotPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 
-			const { getByText, getByPlaceholderText } = await renderWithIntl(
-				<Login />
+			const { getByText, getByPlaceholderText } = await renderWithProviders(
+				<Login />,
+				undefined
 			);
 
 			userEvent.click(getByText('Forgot password?'));
@@ -143,7 +153,10 @@ describe('login form', () => {
 			errors: [{ message: 'error_one' }, { message: 'error_two' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 

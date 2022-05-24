@@ -18,11 +18,8 @@ import {
 	GetPlaylistButtonDataQuery,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
-import {
-	mockedFetchApi,
-	renderWithIntl,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import { mockedFetchApi, withMutedReactQueryLogger } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import { resolveWithDelay } from '@lib/test/resolveWithDelay';
 
 jest.mock('@lib/api/setPlaylistMembership');
@@ -51,8 +48,9 @@ const renderComponent = async ({
 }: {
 	recordingId?: string;
 } = {}) => {
-	const result = await renderWithIntl(
-		<PlaylistButton recordingId={recordingId} />
+	const result = await renderWithProviders(
+		<PlaylistButton recordingId={recordingId} />,
+		undefined
 	);
 	const container = result.container as HTMLElement;
 

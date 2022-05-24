@@ -19,8 +19,8 @@ import {
 	loadAuthGuardData,
 	loadRouter,
 	mockedFetchApi,
-	renderWithIntl,
 } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
 jest.mock('@lib/api/login');
@@ -206,7 +206,7 @@ describe('profile page', () => {
 		});
 		Cookie.get = jest.fn().mockReturnValue({});
 
-		await renderWithIntl(<Profile />);
+		await renderWithProviders(<Profile />, undefined);
 
 		expect(mockedFetchApi).not.toBeCalledWith(
 			GetProfileDataDocument,

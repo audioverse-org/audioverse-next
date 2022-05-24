@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { Language } from '@lib/generated/graphql';
-import { loadQuery, renderWithIntl } from '@lib/test/helpers';
+import { loadQuery } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/search';
 
 const renderPage = async () => {
-	return renderWithIntl(<Search language={Language.English} />);
+	return renderWithProviders(<Search language={Language.English} />, undefined);
 };
 
 describe('search', () => {

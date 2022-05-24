@@ -7,19 +7,17 @@ import RecordingButtonFavorite from '@components/molecules/recordingButtonFavori
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import {
-	loadRouter,
-	renderWithIntl,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import { loadRouter, withMutedReactQueryLogger } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('js-cookie');
 
 const renderComponent = async () => {
-	const result = await renderWithIntl(
-		<RecordingButtonFavorite id="-1" backgroundColor={BaseColors.WHITE} />
+	const result = await renderWithProviders(
+		<RecordingButtonFavorite id="-1" backgroundColor={BaseColors.WHITE} />,
+		undefined
 	);
 	const button =
 		result.queryByLabelText('Favorite') ||

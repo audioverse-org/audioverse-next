@@ -7,7 +7,8 @@ import {
 	GetTestimoniesPathsDataDocument,
 	Testimony,
 } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import { mockedFetchApi } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
@@ -48,7 +49,7 @@ async function renderPage() {
 	const params = { i: '1', language: 'en' };
 	const { props } = (await getStaticProps({ params })) as any;
 
-	return renderWithIntl(<Testimonies {...props} />);
+	return renderWithProviders(<Testimonies {...props} />, undefined);
 }
 
 describe('testimonies pages', () => {
