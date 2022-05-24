@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParsedUrlQuery } from 'querystring';
 
-import { act, RenderOptions, RenderResult } from '@testing-library/react';
+import { act, RenderResult } from '@testing-library/react';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import defaultsDeep from 'lodash/defaultsDeep';
 import { GetServerSidePropsResult, GetStaticProps } from 'next';
 import * as router from 'next/router';
 import { NextRouter } from 'next/router';
-import React, { ComponentType, ReactElement } from 'react';
+import React, { ComponentType } from 'react';
 import { QueryClient } from 'react-query';
 import { PartialDeep } from 'type-fest';
 
@@ -157,14 +157,6 @@ export function buildServerRenderer<
 	};
 
 	return buildRenderer(Component, { getProps, defaultParams });
-}
-
-// TODO: Merge with buildRenderer, or just make it private
-export async function renderWithQueryProvider(
-	ui: ReactElement,
-	renderOptions?: RenderOptions
-): Promise<RenderResult & { queryClient: QueryClient }> {
-	return renderWithProviders(ui, renderOptions);
 }
 
 export { default as withMutedReactQueryLogger } from './withMutedReactQueryLogger';
