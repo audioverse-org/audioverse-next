@@ -12,4 +12,6 @@ declare module 'react-facebook-login/dist/facebook-login-render-props' {
 		ReactFacebookLoginProps,
 		ReactFacebookLoginState
 	> {}
+
+	declare function __setFacebookResponse(response: Partial<Response>): void;
 }

@@ -1,5 +1,4 @@
 import { waitFor } from '@testing-library/react';
-// @ts-ignore
 import { __mockedRouter } from 'next/router';
 
 import { buildRenderer } from '@lib/test/buildRenderer';

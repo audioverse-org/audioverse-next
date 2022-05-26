@@ -1,6 +1,5 @@
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-// @ts-ignore
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';

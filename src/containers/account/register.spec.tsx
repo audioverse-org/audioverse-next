@@ -2,7 +2,6 @@ import { act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
-// @ts-ignore because this is a helper function in manual mock
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
 import { fetchApi } from '@lib/api/fetchApi';
@@ -252,7 +251,7 @@ describe('register page', () => {
 	it('does not register failed login', async () => {
 		await act(async () => {
 			__setFacebookResponse({
-				status: 'FAILED',
+				status: 300,
 			});
 
 			const { getByText } = await renderPage({ router });
@@ -274,7 +273,8 @@ describe('register page', () => {
 
 	it('displays facebook login error', async () => {
 		__setFacebookResponse({
-			status: 'FAILED',
+			status: 300,
+			statusText: 'FAILED',
 		});
 
 		const { getByText } = await renderPage({ router });
@@ -282,7 +282,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(getByText('FAILED')).toBeInTheDocument();
+			expect(getByText('300: FAILED')).toBeInTheDocument();
 		});
 	});
 
