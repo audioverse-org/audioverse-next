@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
@@ -226,11 +226,11 @@ describe('sermons list page', () => {
 		loadSermonListData();
 		__loadQuery({ language: 'es' });
 
-		const { getByRole, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filtro'));
+		userEvent.click(await screen.findByText('Filtro'));
 
-		expect(getByRole('link', { name: 'Todo' })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: 'Todo' })).toHaveAttribute(
 			'href',
 			'/es/teachings/all/page/1'
 		);

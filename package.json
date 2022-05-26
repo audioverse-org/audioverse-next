@@ -24,9 +24,9 @@
     "postinstall": "husky install",
     "graphql:codegen": "graphql-codegen --config .graphqlrc.yml",
     "lighthouse": "npx lhci autorun",
-    "analyze": "ANALYZE=true npm run build:dev",
-    "analyze:server": "BUNDLE_ANALYZE=server npm run build:dev",
-    "analyze:browser": "BUNDLE_ANALYZE=browser npm run build:dev"
+    "analyze": "ANALYZE=true npm run build:webpack-only",
+    "analyze:server": "BUNDLE_ANALYZE=server npm run build:webpack-only",
+    "analyze:browser": "BUNDLE_ANALYZE=browser npm run build:webpack-only"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
