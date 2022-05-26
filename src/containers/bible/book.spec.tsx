@@ -1,5 +1,7 @@
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+// @ts-ignore
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';
 
@@ -7,13 +9,12 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { BookProps } from '@containers/bible/book';
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { buildStaticRenderer, setPlayerMock } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import setPlayerMock from '@lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
@@ -71,7 +72,7 @@ describe('Bible book detail page', () => {
 
 	beforeEach(() => {
 		setPlayerMock();
-		_loadRouter({
+		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {
 				id: 'the_version_id',

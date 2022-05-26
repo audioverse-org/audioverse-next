@@ -8,7 +8,7 @@ import AndPlaybackContext, {
 } from '@components/templates/andPlaybackContext';
 import { SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { setPlayerMock } from '@lib/test/helpers';
+import setPlayerMock from '@lib/test/setPlayerMock';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 

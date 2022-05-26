@@ -7,6 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import { __loadQuery, __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
@@ -14,6 +15,7 @@ import videojs from 'video.js';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
@@ -21,15 +23,13 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
-
-import { _loadQuery, _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
@@ -40,7 +40,7 @@ jest.mock(
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
 		.mockResolvedValue({
 			sermons: {
@@ -79,7 +79,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		...sermon,
 	};
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonDetailDataDocument, expect.anything())
 		.mockResolvedValue({ sermon });
 }
@@ -96,7 +96,7 @@ const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
 
 describe('sermon detail page', () => {
 	beforeEach(() => {
-		_loadRouter({
+		__loadRouter({
 			isFallback: false,
 			query: {
 				language: 'en',
@@ -112,15 +112,12 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
-				GetSermonDetailStaticPathsDocument,
-				{
-					variables: {
-						language: 'ENGLISH',
-						first: 10,
-					},
-				}
-			)
+			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
+				variables: {
+					language: 'ENGLISH',
+					first: 10,
+				},
+			})
 		);
 	});
 
@@ -130,15 +127,12 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
-				GetSermonDetailStaticPathsDocument,
-				{
-					variables: {
-						language: 'SPANISH',
-						first: 10,
-					},
-				}
-			)
+			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
+				variables: {
+					language: 'SPANISH',
+					first: 10,
+				},
+			})
 		);
 	});
 
@@ -159,7 +153,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
@@ -171,7 +165,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
@@ -181,7 +175,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('shows loading screen', async () => {
-		_loadRouter({ isFallback: true });
+		__loadRouter({ isFallback: true });
 
 		const { getByLabelText } = await renderWithProviders(
 			<SermonDetail recording={null} />,
@@ -381,7 +375,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes time recorded', async () => {
-		mockedFetchApi.mockResolvedValue({});
+		(fetchApi as jest.Mock).mockResolvedValue({});
 
 		loadSermonDetailData({
 			speakers: [
@@ -453,7 +447,7 @@ describe('sermon detail page', () => {
 			language: Language.Spanish,
 		});
 
-		_loadQuery({
+		__loadQuery({
 			language: 'es',
 		});
 
@@ -571,7 +565,7 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
+			expect(fetchApi).toBeCalledWith(
 				GetSermonDetailDataDocument,
 				expect.anything()
 			)
@@ -703,7 +697,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on fetch error', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

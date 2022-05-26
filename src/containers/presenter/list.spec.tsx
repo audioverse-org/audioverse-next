@@ -1,10 +1,11 @@
 import { when } from 'jest-when';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetPresenterListPageDataDocument,
 	GetPresenterListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
@@ -16,9 +17,9 @@ const renderPage = buildStaticRenderer(Presenters, getStaticProps, {
 });
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetPresenterListPageDataDocument, expect.anything())
-		.mockReturnValue({
+		.mockResolvedValue({
 			persons: {
 				nodes: [
 					{
@@ -48,7 +49,7 @@ function loadData() {
 
 describe('presenter list page', () => {
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetPresenterListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
@@ -68,7 +69,7 @@ describe('presenter list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetPresenterListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				personLetterCounts: [

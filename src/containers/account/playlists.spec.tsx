@@ -4,13 +4,13 @@ import Cookies from 'js-cookie';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	AddAccountPlaylistDocument,
 	GetAccountPlaylistsPageDataDocument,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { mockedFetchApi } from '@lib/test/helpers';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 
 import Playlists from './playlists';
@@ -129,7 +129,7 @@ describe('playlists page', () => {
 		userEvent.click(getByText('Add Playlist'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(AddAccountPlaylistDocument, {
+			expect(fetchApi).toBeCalledWith(AddAccountPlaylistDocument, {
 				variables: {
 					isPublic: false,
 					language: 'ENGLISH',
@@ -157,7 +157,7 @@ describe('playlists page', () => {
 		userEvent.click(getByText('Add Playlist'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(
+			expect(fetchApi).toBeCalledWith(
 				GetAccountPlaylistsPageDataDocument,
 				expect.anything()
 			);
@@ -181,7 +181,7 @@ describe('playlists page', () => {
 		userEvent.click(getByText('Add Playlist'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(AddAccountPlaylistDocument, {
+			expect(fetchApi).toBeCalledWith(AddAccountPlaylistDocument, {
 				variables: {
 					isPublic: true,
 					language: 'ENGLISH',
@@ -253,7 +253,7 @@ describe('playlists page', () => {
 			expect(getByText('missing title')).toBeInTheDocument();
 		});
 
-		expect(mockedFetchApi).not.toBeCalledWith(
+		expect(fetchApi).not.toBeCalledWith(
 			AddAccountPlaylistDocument,
 			expect.anything()
 		);

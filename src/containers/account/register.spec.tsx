@@ -5,13 +5,13 @@ import Cookie from 'js-cookie';
 // @ts-ignore because this is a helper function in manual mock
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { mockedFetchApi } from '@lib/test/helpers';
 import Register from '@pages/[language]/account/register';
 
 jest.mock('js-cookie');
@@ -81,7 +81,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterDocument, {
 				variables: {
 					email: 'email',
 					password: 'pass',
@@ -106,7 +106,7 @@ describe('register page', () => {
 	});
 
 	it('displays returned errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterDocument, expect.anything())
 			.mockResolvedValue({
 				signup: {
@@ -156,7 +156,7 @@ describe('register page', () => {
 	});
 
 	it('renders google signon errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -178,7 +178,7 @@ describe('register page', () => {
 	});
 
 	it('renders facebook signon errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -215,7 +215,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
 				variables: {
 					socialId: 'the_user_id',
 					socialName: 'FACEBOOK',
@@ -228,7 +228,7 @@ describe('register page', () => {
 	});
 
 	it('saves facebook login session token', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -265,7 +265,7 @@ describe('register page', () => {
 
 			await sleep();
 
-			expect(mockedFetchApi).not.toBeCalledWith(
+			expect(fetchApi).not.toBeCalledWith(
 				RegisterSocialDocument,
 				expect.anything()
 			);
@@ -300,7 +300,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
 				variables: {
 					socialId: 'the_user_id',
 					socialName: 'GOOGLE',

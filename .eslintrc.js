@@ -4,7 +4,7 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	ignorePatterns: ['fileMock.js', '.eslintrc.js'],
+	ignorePatterns: ['**/*.js'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
 		'import',
@@ -80,9 +80,9 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/no-unused-vars': [
-			'warn',
+			'error',
 			{
-				argsIgnorePattern: '(type|of|returns)',
+				varsIgnorePattern: '_',
 			},
 		],
 		'@typescript-eslint/interface-name-prefix': 'off',

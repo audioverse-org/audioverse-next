@@ -1,21 +1,20 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SeriesList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/page/[i]';
 
-const renderPage = buildStaticRenderer(SeriesList, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(SeriesList, getStaticProps);
 
 const loadData = buildLoader(GetSeriesListPageDataDocument, {
 	serieses: {
@@ -40,12 +39,15 @@ const loadData = buildLoader(GetSeriesListPageDataDocument, {
 });
 
 describe('series list page', () => {
-	it('renders', async () => {
-		await renderPage();
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSeriesListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				serieses: {
@@ -87,7 +89,7 @@ describe('series list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSeriesListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

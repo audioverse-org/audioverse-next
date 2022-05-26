@@ -1,22 +1,22 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetStoriesAlbumsPageDataDocument,
 	GetStoriesAlbumsPathDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
 
-const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps, {
-	language: 'en',
-});
+const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			storySeasons: {
@@ -39,10 +39,16 @@ function loadData() {
 }
 
 describe('stories list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+		});
+	});
+
 	it('renders', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(
+		expect(fetchApi).toBeCalledWith(
 			GetStoriesAlbumsPageDataDocument,
 			expect.anything()
 		);
@@ -57,7 +63,7 @@ describe('stories list page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetStoriesAlbumsPathDataDocument, expect.anything())
 			.mockResolvedValue({
 				storySeasons: {
@@ -99,7 +105,7 @@ describe('stories list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
 			.mockResolvedValue({
 				storySeasons: {

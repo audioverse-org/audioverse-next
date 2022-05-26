@@ -1,3 +1,4 @@
+import { __loadQuery } from 'next/router';
 import React from 'react';
 
 import { Language } from '@lib/generated/graphql';
@@ -7,15 +8,13 @@ import Search, {
 	getStaticProps,
 } from '@pages/[language]/search';
 
-import { _loadQuery } from '../../__mocks__/next/router';
-
 const renderPage = async () => {
 	return renderWithProviders(<Search language={Language.English} />, undefined);
 };
 
 describe('search', () => {
 	it('renders', async () => {
-		_loadQuery();
+		__loadQuery();
 
 		await renderPage();
 	});

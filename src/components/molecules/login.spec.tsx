@@ -1,20 +1,20 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import Login from '@components/molecules/login';
+import { fetchApi } from '@lib/api/fetchApi';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
-import { mockedFetchApi, withMutedReactQueryLogger } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
-
-import { _loadRouter } from '../../__mocks__/next/router';
+import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 
 function loadForgotPasswordResponse({
 	success = true,
 	errors = [],
 }: { success?: boolean; errors?: { message: string }[] } = {}) {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(LoginForgotPasswordDocument, expect.anything())
 		.mockResolvedValue({
 			userRecover: {
@@ -25,7 +25,7 @@ function loadForgotPasswordResponse({
 }
 
 describe('login form', () => {
-	beforeEach(() => _loadRouter({ query: {} }));
+	beforeEach(() => __loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
 		const { getByText } = await renderWithProviders(<Login />, undefined);
 
@@ -45,7 +45,7 @@ describe('login form', () => {
 		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
 		userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
+			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
 					email: 'the_email',
 				},
@@ -121,7 +121,7 @@ describe('login form', () => {
 
 	it('displays generic error on fetch error', async () => {
 		await withMutedReactQueryLogger(async () => {
-			when(mockedFetchApi)
+			when(fetchApi)
 				.calledWith(LoginForgotPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 

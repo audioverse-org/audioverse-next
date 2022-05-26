@@ -1,12 +1,11 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import { when } from 'jest-when';
+import { __loadRouter } from 'next/router';
 
 import HelpWidget from '@components/molecules/helpWidget';
+import { fetchApi } from '@lib/api/fetchApi';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { mockedFetchApi } from '@lib/test/helpers';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('next/script');
 
@@ -15,7 +14,7 @@ const renderComponent = buildRenderer(HelpWidget);
 const mockBeacon = window.Beacon as jest.Mock;
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetHelpWidgetDataDocument, expect.anything())
 		.mockResolvedValue({
 			me: {
@@ -100,7 +99,7 @@ describe('help widget', () => {
 	});
 
 	it('registers page views with beacon', async () => {
-		const router = _loadRouter();
+		const router = __loadRouter();
 
 		await renderComponent();
 

@@ -1,10 +1,9 @@
 import { act, render, screen } from '@testing-library/react';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import MyApp from '@pages/_app';
-
-import { _loadRouter } from '../__mocks__/next/router';
 
 const renderApp = (component: any, props: any) => {
 	return render(<MyApp Component={component} pageProps={props} />);
@@ -12,7 +11,7 @@ const renderApp = (component: any, props: any) => {
 
 describe('app', () => {
 	beforeEach(() => {
-		_loadRouter({
+		__loadRouter({
 			pathname: '/[language]/discover',
 			query: {},
 			asPath: '',

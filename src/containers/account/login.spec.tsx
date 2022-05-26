@@ -1,10 +1,10 @@
 import { waitFor } from '@testing-library/react';
+// @ts-ignore
+import { __mockedRouter } from 'next/router';
 
 import { buildRenderer } from '@lib/test/buildRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import Login from '@pages/[language]/account/login';
-
-import { _mockedRouter } from '../../__mocks__/next/router';
 
 const renderPage = buildRenderer(Login);
 
@@ -21,7 +21,7 @@ describe('login page', () => {
 		await renderPage();
 
 		await waitFor(() => {
-			expect(_mockedRouter.push).toBeCalledWith('/en/discover');
+			expect(__mockedRouter.push).toBeCalledWith('/en/discover');
 		});
 	});
 });

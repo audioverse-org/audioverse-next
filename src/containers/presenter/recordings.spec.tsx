@@ -1,24 +1,22 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetPresenterDetailPathsDataDocument,
 	GetPresenterRecordingsPageDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/teachings/page/[i]';
 
-const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps, {
-	language: 'en',
-	id: 'the_presenter_id',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			person: {
@@ -50,8 +48,16 @@ function loadData() {
 }
 
 describe('presenter recordings page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			id: 'the_presenter_id',
+			i: '1',
+		});
+	});
+
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetPresenterDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				persons: {
@@ -107,7 +113,7 @@ describe('presenter recordings page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

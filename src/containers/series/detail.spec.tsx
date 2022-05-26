@@ -1,3 +1,6 @@
+import { __loadQuery } from 'next/router';
+
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
@@ -6,13 +9,11 @@ import {
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
-
-import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
@@ -52,7 +53,7 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 
 describe('series detail page', () => {
 	beforeEach(() => {
-		_loadQuery({
+		__loadQuery({
 			language: 'en',
 			id: 'the_series_id',
 		});
@@ -63,7 +64,7 @@ describe('series detail page', () => {
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSeriesDetailPageDataDocument, {
 			variables: {
 				id: 'the_series_id',
 			},
@@ -79,7 +80,7 @@ describe('series detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		mockedFetchApi.mockRejectedValue(undefined);
+		(fetchApi as jest.Mock).mockRejectedValue(undefined);
 
 		const { getByText } = await renderPage();
 
@@ -89,7 +90,7 @@ describe('series detail page', () => {
 	it('gets static path data', async () => {
 		await getStaticPaths();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				first: 10,
@@ -100,7 +101,7 @@ describe('series detail page', () => {
 	it('gets static path data for all languages', async () => {
 		await getStaticPaths();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'SPANISH',
 				first: 10,
@@ -109,7 +110,7 @@ describe('series detail page', () => {
 	});
 
 	it('returns static paths', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			serieses: {
 				nodes: [
 					{

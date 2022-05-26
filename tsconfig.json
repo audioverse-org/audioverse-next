@@ -26,7 +26,8 @@
 			"@lib/*": ["src/lib/*"],
 			"@components/*": ["src/components/*"],
 			"@containers/*": ["src/containers/*"],
-			"@pages/*": ["src/pages/*"]
+			"@pages/*": ["src/pages/*"],
+			"@root/*": ["*"]
 		},
 		"incremental": true
 	},

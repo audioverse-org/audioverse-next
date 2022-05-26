@@ -1,5 +1,7 @@
 import { waitFor } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetHomeStaticPropsDocument,
 	GetHomeStaticPropsQuery,
@@ -7,10 +9,8 @@ import {
 	SequenceContentType,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
-
-import { _loadQuery } from '../__mocks__/next/router';
 
 jest.mock('next/router');
 
@@ -232,12 +232,12 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		_loadQuery({ language: 'es' });
+		__loadQuery({ language: 'es' });
 
 		await renderPage();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {
+			expect(fetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {
 				variables: {
 					language: 'SPANISH',
 				},
@@ -252,7 +252,7 @@ describe('home page', () => {
 	});
 
 	it('falls back to English', async () => {
-		_loadQuery({ language: 'ak' });
+		__loadQuery({ language: 'ak' });
 
 		const { getByText } = await renderPage();
 

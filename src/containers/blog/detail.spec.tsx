@@ -1,18 +1,18 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
 	Language,
 } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
-
-import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 
@@ -31,7 +31,7 @@ const loadData = buildLoader(GetBlogDetailDataDocument, {
 
 describe('blog post detail page', () => {
 	beforeEach(() => {
-		_loadQuery({
+		__loadQuery({
 			language: 'en',
 			id: 'the_blog_post_id',
 		});
@@ -46,7 +46,7 @@ describe('blog post detail page', () => {
 		expect(getByText('the_blog_post_teaser')).toBeInTheDocument();
 		expect(getByText('8m read')).toBeInTheDocument();
 
-		expect(mockedFetchApi).toBeCalledWith(GetBlogDetailDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetBlogDetailDataDocument, {
 			variables: {
 				id: 'the_blog_post_id',
 				language: 'ENGLISH',
@@ -55,7 +55,7 @@ describe('blog post detail page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetBlogDetailStaticPathsDocument, expect.anything())
 			.mockResolvedValue({
 				blogPosts: {
@@ -69,7 +69,7 @@ describe('blog post detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetBlogDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

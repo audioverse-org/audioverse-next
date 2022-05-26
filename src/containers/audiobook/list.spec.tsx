@@ -1,6 +1,8 @@
 import { when } from 'jest-when';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import {
 	GetAudiobookListPageDataDocument,
@@ -8,19 +10,16 @@ import {
 	GetAudiobookListPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { mockedFetchApi } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/books/page/[i]';
 
-import { _loadRouter } from '../../__mocks__/next/router';
-
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
 ) {
-	_loadRouter({ query: params });
+	__loadRouter({ query: params });
 
 	const { props } = (await getStaticProps({
 		params: { language: 'en', i: '1', ...params },
@@ -30,7 +29,7 @@ async function renderPage(
 }
 
 function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetAudiobookListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			audiobooks: {
@@ -56,7 +55,7 @@ describe('audiobook list page', () => {
 	it('renders', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetAudiobookListPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetAudiobookListPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				first: ENTRIES_PER_PAGE,
@@ -74,7 +73,7 @@ describe('audiobook list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetAudiobookListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				audiobooks: {

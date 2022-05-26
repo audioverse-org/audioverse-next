@@ -1,21 +1,21 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSongBooksDetailPageDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/book/[book]';
 
-import { _loadQuery } from '../../../__mocks__/next/router';
-
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSongBooksDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			musicTracks: {
@@ -43,7 +43,7 @@ function loadData() {
 
 describe('song book detail page', () => {
 	beforeEach(() => {
-		_loadQuery({
+		__loadQuery({
 			language: 'en',
 			book: 'Genesis',
 		});
@@ -54,7 +54,7 @@ describe('song book detail page', () => {
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSongBooksDetailPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSongBooksDetailPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				book: 'Genesis',
@@ -77,7 +77,7 @@ describe('song book detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSongBooksDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

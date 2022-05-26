@@ -2,8 +2,6 @@ import '@testing-library/jest-dom/extend-expect';
 import 'jest-canvas-mock';
 import { resetAllWhenMocks } from 'jest-when';
 
-import { _loadRouter } from './src/__mocks__/next/router';
-
 jest.mock('@lib/api/fetchApi');
 jest.mock('video.js');
 
@@ -20,9 +18,4 @@ beforeAll(() => {
 beforeEach(() => {
 	jest.resetAllMocks();
 	resetAllWhenMocks();
-	_loadRouter({
-		query: {
-			language: 'en',
-		},
-	});
 });

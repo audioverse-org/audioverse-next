@@ -2,7 +2,9 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
@@ -13,21 +15,18 @@ import {
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
 
-import { _loadQuery } from '../../__mocks__/next/router';
-
-jest.mock('next/router');
 jest.mock('next/head');
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
 export function loadSermonListPagePathsData(count: number): void {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonListPagePathsDataDocument, expect.anything())
 		.mockResolvedValue({
 			sermons: {
@@ -42,7 +41,7 @@ export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	mockedFetchApi.mockResolvedValue({
+	(fetchApi as jest.Mock).mockResolvedValue({
 		sermons: {
 			nodes: nodes || [
 				{
@@ -63,8 +62,7 @@ export function loadSermonListData({
 
 describe('sermons list page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
-		_loadQuery({
+		__loadQuery({
 			language: 'en',
 			i: '1',
 		});
@@ -110,7 +108,7 @@ describe('sermons list page', () => {
 	it('uses language codes to get sermon counts', async () => {
 		await getStaticPaths();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
 			variables: { language: 'ENGLISH', hasVideo: null },
 		});
 	});
@@ -121,7 +119,7 @@ describe('sermons list page', () => {
 		await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
+			expect(fetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 				variables: {
 					language: 'ENGLISH',
 					hasVideo: null,
@@ -142,7 +140,7 @@ describe('sermons list page', () => {
 
 	it('renders 404 on api error', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
@@ -226,7 +224,7 @@ describe('sermons list page', () => {
 
 	it('links All button using lang', async () => {
 		loadSermonListData();
-		_loadQuery({ language: 'es' });
+		__loadQuery({ language: 'es' });
 
 		const { getByRole, getByText } = await renderPage();
 
@@ -272,7 +270,7 @@ describe('sermons list page', () => {
 
 	it('localizes pagination', async () => {
 		loadSermonListData();
-		_loadQuery({ language: 'es' });
+		__loadQuery({ language: 'es' });
 
 		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
@@ -291,7 +289,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes speaker name', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			sermons: {
 				nodes: [
 					{

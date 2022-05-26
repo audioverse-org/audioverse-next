@@ -4,10 +4,12 @@ import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import { login } from '@lib/api/login';
 import { storeRequest } from '@lib/api/storeRequest';
 import {
@@ -15,12 +17,9 @@ import {
 	UpdateProfileDataDocument,
 } from '@lib/generated/graphql';
 import { buildServerRenderer } from '@lib/test/buildServerRenderer';
-import { mockedFetchApi } from '@lib/test/helpers';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');
@@ -45,7 +44,7 @@ const userAfter = {
 function loadData() {
 	loadAuthGuardData();
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetProfileDataDocument, expect.anything())
 		.mockResolvedValue({
 			me: {
@@ -53,7 +52,7 @@ function loadData() {
 			},
 		});
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(UpdateProfileDataDocument, expect.anything())
 		.mockResolvedValue({
 			updateMyProfile: {
@@ -70,7 +69,7 @@ describe('profile page', () => {
 	});
 
 	it('dehydrates user', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'the_name',
@@ -92,7 +91,7 @@ describe('profile page', () => {
 	});
 
 	it('includes first name', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'first',
@@ -173,7 +172,7 @@ describe('profile page', () => {
 
 		userEvent.click(getByText('Login'));
 
-		mockedFetchApi.mockResolvedValueOnce({
+		(fetchApi as jest.Mock).mockResolvedValueOnce({
 			me: {
 				user: {
 					givenName: 'first',
@@ -200,14 +199,14 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
-		_loadRouter({
+		__loadRouter({
 			query: {},
 		});
 		Cookie.get = jest.fn().mockReturnValue({});
 
 		await renderWithProviders(<Profile />, undefined);
 
-		expect(mockedFetchApi).not.toBeCalledWith(
+		expect(fetchApi).not.toBeCalledWith(
 			GetProfileDataDocument,
 			expect.anything()
 		);
@@ -252,7 +251,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					...userBefore,
 					email: 'the_email123',
@@ -275,7 +274,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					...userBefore,
 					password: 'the_password',
@@ -287,7 +286,7 @@ describe('profile page', () => {
 	it('loads mutated email on success', async () => {
 		loadData();
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetProfileDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
@@ -311,7 +310,7 @@ describe('profile page', () => {
 	it('loads mutated name on success', async () => {
 		loadData();
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetProfileDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
@@ -376,7 +375,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					password: null,
 					...userBefore,

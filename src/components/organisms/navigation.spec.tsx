@@ -1,10 +1,9 @@
 import { screen } from '@testing-library/react';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import Navigation from '@components/organisms/navigation';
 import renderWithProviders from '@lib/test/renderWithProviders';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('@lib/api/fetchApi');
 
@@ -21,7 +20,7 @@ const renderNavigation = async () => {
 
 describe('navigation', () => {
 	it('sets active class on active link', async () => {
-		_loadRouter({
+		__loadRouter({
 			asPath: '/en/discover',
 		});
 

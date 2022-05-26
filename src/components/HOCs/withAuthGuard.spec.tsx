@@ -2,18 +2,17 @@ import { RenderOptions, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookies from 'js-cookie';
+import { __loadRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
-import { mockedFetchApi } from '@lib/test/helpers';
 import renderWithProviders from '@lib/test/renderWithProviders';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
@@ -26,9 +25,9 @@ function render() {
 }
 
 describe('withAuthGuard', () => {
-	beforeEach(() => _loadRouter({ query: {} }));
+	beforeEach(() => __loadRouter({ query: {} }));
 	it('displays login if no email', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
@@ -58,7 +57,7 @@ describe('withAuthGuard', () => {
 			expect(queryByText('hello world')).not.toBeInTheDocument()
 		);
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -69,7 +68,7 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {

@@ -1,14 +1,14 @@
 import { act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { mockedFetchApi, withMutedReactQueryLogger } from '@lib/test/helpers';
+import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import Reset from '@pages/[language]/account/reset';
-
-import { _loadQuery } from '../../__mocks__/next/router';
 
 const renderPage = buildRenderer(Reset);
 
@@ -16,7 +16,7 @@ function loadResetPasswordResponse({
 	success = true,
 	errors = [],
 }: { success?: boolean; errors?: { message: string }[] } = {}) {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(ResetPasswordDocument, expect.anything())
 		.mockResolvedValue({
 			userReset: {
@@ -24,7 +24,7 @@ function loadResetPasswordResponse({
 				errors,
 			},
 		});
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(LoginDocument, expect.anything())
 		.mockResolvedValue({
 			login: {
@@ -61,7 +61,7 @@ describe('password reset page', () => {
 	});
 
 	it('submits password change', async () => {
-		_loadQuery({
+		__loadQuery({
 			token: 'the_token',
 		});
 
@@ -72,7 +72,7 @@ describe('password reset page', () => {
 		userEvent.click(getByText('Login'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(ResetPasswordDocument, {
+			expect(fetchApi).toBeCalledWith(ResetPasswordDocument, {
 				variables: {
 					token: 'the_token',
 					password: 'new_pass',
@@ -94,7 +94,7 @@ describe('password reset page', () => {
 
 		await sleep();
 
-		expect(mockedFetchApi).not.toBeCalled();
+		expect(fetchApi).not.toBeCalled();
 	});
 
 	it('displays password mismatch error', async () => {
@@ -165,7 +165,7 @@ describe('password reset page', () => {
 
 	it('displays generic error on http error', async () => {
 		await withMutedReactQueryLogger(async () => {
-			when(mockedFetchApi)
+			when(fetchApi)
 				.calledWith(ResetPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 
@@ -245,7 +245,7 @@ describe('password reset page', () => {
 				success: true,
 				errors: [],
 			});
-			_loadQuery({
+			__loadQuery({
 				token: 'the_token',
 			});
 

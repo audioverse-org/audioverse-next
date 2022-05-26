@@ -9,6 +9,7 @@ import {
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
@@ -22,8 +23,6 @@ import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
-
-import { _loadRouter } from '../../__mocks__/next/router';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
@@ -72,7 +71,7 @@ const renderComponent = buildRenderer(
 describe('player', () => {
 	beforeEach(() => {
 		setPlayerMock();
-		_loadRouter({});
+		__loadRouter({});
 		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 

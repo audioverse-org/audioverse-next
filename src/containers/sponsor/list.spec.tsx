@@ -1,10 +1,11 @@
 import { when } from 'jest-when';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSponsorListPageDataDocument,
 	GetSponsorListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
@@ -16,7 +17,7 @@ const renderPage = buildStaticRenderer(Sponsors, getStaticProps, {
 });
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSponsorListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			sponsors: {
@@ -62,7 +63,7 @@ describe('sponsor list page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSponsorListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				sponsorLetterCounts: [
@@ -89,7 +90,7 @@ describe('sponsor list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSponsorListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
