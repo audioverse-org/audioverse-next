@@ -9,15 +9,15 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 
-export default function renderWithProviders(
+export default async function renderWithProviders(
 	ui: React.ReactElement,
 	renderOptions?: RenderOptions
-): RenderResult & { queryClient: QueryClient } {
+): Promise<RenderResult & { queryClient: QueryClient }> {
 	const queryClient = new QueryClient();
 	const WithIntl = withIntl(() => ui);
 
 	let result = {} as RenderResult;
-	act(() => {
+	await act(async () => {
 		result = render(
 			<QueryClientProvider client={queryClient}>
 				<WithIntl />

@@ -36,6 +36,9 @@ function loadResetPasswordResponse({
 describe('password reset page', () => {
 	beforeEach(() => {
 		loadResetPasswordResponse();
+		__loadQuery({
+			token: 'the_token',
+		});
 	});
 
 	it('renders', async () => {
@@ -61,10 +64,6 @@ describe('password reset page', () => {
 	});
 
 	it('submits password change', async () => {
-		__loadQuery({
-			token: 'the_token',
-		});
-
 		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
@@ -82,11 +81,7 @@ describe('password reset page', () => {
 	});
 
 	it('does not submit mismatched password', async () => {
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
@@ -98,11 +93,7 @@ describe('password reset page', () => {
 	});
 
 	it('displays password mismatch error', async () => {
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'pass_one');
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
@@ -114,11 +105,7 @@ describe('password reset page', () => {
 	});
 
 	it('requires password input', async () => {
-		const { getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByText } = await renderPage();
 
 		userEvent.click(getByText('Login'));
 
@@ -128,11 +115,7 @@ describe('password reset page', () => {
 	});
 
 	it('requires password confirm input', async () => {
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'the_pass');
 		userEvent.click(getByText('Login'));
@@ -148,11 +131,7 @@ describe('password reset page', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByPlaceholderText, getByText } = await renderPage({
-			params: {
-				token: 'the_token',
-			},
-		});
+		const { getByPlaceholderText, getByText } = await renderPage();
 
 		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
@@ -169,11 +148,7 @@ describe('password reset page', () => {
 				.calledWith(ResetPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 
-			const { getByPlaceholderText, getByText } = await renderPage({
-				params: {
-					token: 'the_token',
-				},
-			});
+			const { getByPlaceholderText, getByText } = await renderPage();
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
@@ -194,11 +169,7 @@ describe('password reset page', () => {
 				errors: [],
 			});
 
-			const { getByPlaceholderText, getByText } = await renderPage({
-				params: {
-					token: 'the_token',
-				},
-			});
+			const { getByPlaceholderText, getByText } = await renderPage();
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
@@ -219,13 +190,8 @@ describe('password reset page', () => {
 				errors: [],
 			});
 
-			const { getByPlaceholderText, getByText, queryByText } = await renderPage(
-				{
-					params: {
-						token: 'the_token',
-					},
-				}
-			);
+			const { getByPlaceholderText, getByText, queryByText } =
+				await renderPage();
 
 			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');

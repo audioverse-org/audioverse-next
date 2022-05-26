@@ -5,11 +5,10 @@ import { buildRenderer, Renderer } from '@lib/test/buildRenderer';
 
 export function buildStaticRenderer<
 	C extends ComponentType<any>,
-	F extends GetStaticProps<any, any>,
-	P extends Partial<Parameters<F>[0]['params']>
->(Component: C, getStaticProps: F, defaultParams: P = {} as P): Renderer<P> {
+	F extends GetStaticProps<any, any>
+>(Component: C, getStaticProps: F): Renderer {
 	const getProps = async (p: any) =>
 		((await getStaticProps({ params: p })) as any).props;
 
-	return buildRenderer(Component, { getProps, defaultParams });
+	return buildRenderer(Component, { getProps });
 }

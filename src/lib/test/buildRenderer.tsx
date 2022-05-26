@@ -1,4 +1,4 @@
-import { act, RenderResult } from '@testing-library/react';
+import { RenderResult } from '@testing-library/react';
 import { __mockedRouter, NextRouter } from 'next/router';
 import React, { ComponentType } from 'react';
 import { QueryClient } from 'react-query';
@@ -7,47 +7,36 @@ import renderWithProviders from '@lib/test/renderWithProviders';
 
 // TODO: Only accept props if getProps not provided
 // TODO: Only accept params if getProps provided
-type RendererOptions<P> = {
-	params?: Partial<P>;
+type RendererOptions = {
 	props?: any; // TODO: restrict to props component actually accepts
 	router?: Partial<NextRouter>;
 };
 
-export type Renderer<P> = (
-	options?: RendererOptions<P>
+export type Renderer = (
+	options?: RendererOptions
 ) => Promise<RenderResult & { queryClient: QueryClient }>;
 
 // TODO: Consider how to simplify this function. Perhaps extract a simple
 //   version and rename this function to `buildPageRenderer` or similar.
 export function buildRenderer<
 	C extends ComponentType<any>,
-	F extends (params: any) => Promise<any>,
-	P extends Partial<Parameters<F>[0]['params']>
+	F extends (params: any) => Promise<any>
 >(
 	Component: C,
 	options: {
 		getProps?: F;
-		defaultParams?: P;
 		defaultProps?: any; // TODO: restrict to props component actually accepts
 	} = {}
-): Renderer<P> {
-	const {
-		getProps = undefined,
-		// defaultParams = {},
-		defaultProps = {},
-	} = options;
+): Renderer {
+	const { getProps = undefined, defaultProps = {} } = options;
 	return async (
-		options: RendererOptions<P> = {}
+		options: RendererOptions = {}
 	): Promise<RenderResult & { queryClient: QueryClient }> => {
-		let result;
-		await act(async () => {
-			const { params = {}, props } = options;
-			const fullParams = { ...params, ...__mockedRouter.query };
-			const props_ = getProps
-				? await getProps(fullParams)
-				: props || defaultProps;
-			result = renderWithProviders(<Component {...props_} />, undefined);
-		});
+		const { props } = options;
+		const props_ = getProps
+			? await getProps(__mockedRouter.query)
+			: props || defaultProps;
+		const result = renderWithProviders(<Component {...props_} />, undefined);
 		return result as unknown as Promise<
 			RenderResult & { queryClient: QueryClient }
 		>;

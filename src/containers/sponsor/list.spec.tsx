@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
@@ -11,10 +12,7 @@ import Sponsors, {
 	getStaticProps,
 } from '@pages/[language]/sponsors/letter/[letter]';
 
-const renderPage = buildStaticRenderer(Sponsors, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 
 function loadData() {
 	when(fetchApi)
@@ -46,6 +44,13 @@ function loadData() {
 }
 
 describe('sponsor list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
+	});
+
 	it('renders page title', async () => {
 		loadData();
 

@@ -33,12 +33,7 @@ describe('sermon audio list page', () => {
 	it('gets audio filtered sermons', async () => {
 		loadSermonListData();
 
-		await renderPage({
-			params: {
-				i: '1',
-				language: 'en',
-			},
-		});
+		await renderPage();
 
 		expect(fetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 			variables: {

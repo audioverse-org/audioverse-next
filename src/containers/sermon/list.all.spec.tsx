@@ -177,9 +177,9 @@ describe('sermons list page', () => {
 	it('calculates pages using items per page', async () => {
 		loadSermonListData({ count: 36 });
 
-		const { getByText } = await renderPage({
-			params: { i: '3', language: 'en' },
-		});
+		__loadQuery({ i: '3', language: 'en' });
+
+		const { getByText } = await renderPage();
 
 		expect(() => getByText('4')).toThrow();
 	});
@@ -187,7 +187,9 @@ describe('sermons list page', () => {
 	it('handles string page index', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '3', language: 'en' } });
+		__loadQuery({ i: '3', language: 'en' });
+
+		await renderPage();
 	});
 
 	it('links pagination properly', async () => {

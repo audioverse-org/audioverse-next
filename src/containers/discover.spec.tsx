@@ -1,4 +1,5 @@
 import { waitFor } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
 
 import {
 	GetDiscoverPageDataDocument,
@@ -10,9 +11,7 @@ import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '@pages/[language]/discover';
 
-const renderPage = buildStaticRenderer(Discover, getStaticProps, {
-	language: 'en',
-});
+const renderPage = buildStaticRenderer(Discover, getStaticProps);
 const loadData = buildLoader<GetDiscoverPageDataQuery>(
 	GetDiscoverPageDataDocument,
 	{
@@ -110,6 +109,12 @@ const loadData = buildLoader<GetDiscoverPageDataQuery>(
 );
 
 describe('discover page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+		});
+	});
+
 	it('renders titles', async () => {
 		loadData();
 

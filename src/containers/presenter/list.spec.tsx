@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
@@ -11,10 +12,7 @@ import Presenters, {
 	getStaticProps,
 } from '@pages/[language]/presenters/letter/[letter]';
 
-const renderPage = buildStaticRenderer(Presenters, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(Presenters, getStaticProps);
 
 function loadData() {
 	when(fetchApi)
@@ -48,6 +46,13 @@ function loadData() {
 }
 
 describe('presenter list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
+	});
+
 	it('renders 404', async () => {
 		when(fetchApi)
 			.calledWith(GetPresenterListPageDataDocument, expect.anything())

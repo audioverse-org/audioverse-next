@@ -1,4 +1,5 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
@@ -11,10 +12,7 @@ import Songs, {
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
 
-const renderPage = buildStaticRenderer(Songs, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
 function loadData() {
 	when(fetchApi)
@@ -59,6 +57,13 @@ function loadData() {
 }
 
 describe('songs list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
+	});
+
 	it('renders', async () => {
 		loadData();
 
