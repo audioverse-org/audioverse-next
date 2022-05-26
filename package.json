@@ -23,7 +23,10 @@
     "precommit": "npm run format && npm run lint:fix && npm run checkTs",
     "postinstall": "husky install",
     "graphql:codegen": "graphql-codegen --config .graphqlrc.yml",
-    "lighthouse": "npx lhci autorun"
+    "lighthouse": "npx lhci autorun",
+    "analyze": "ANALYZE=true npm run build",
+    "analyze:server": "BUNDLE_ANALYZE=server npm run build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser npm run build"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
