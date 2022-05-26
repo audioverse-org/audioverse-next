@@ -33,7 +33,7 @@ module.exports = {
 	},
 	rules: {
 		'@calm/react-intl/missing-formatted-message': [
-			2,
+			'error',
 			{
 				noTrailingWhitespace: true,
 				ignoreLinks: false,
@@ -43,7 +43,7 @@ module.exports = {
 			},
 		],
 		'@calm/react-intl/missing-attribute': [
-			2,
+			'error',
 			{
 				noTrailingWhitespace: true,
 				noSpreadOperator: true,

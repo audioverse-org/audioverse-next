@@ -7,5 +7,9 @@ export default function getIntlMessages(
 ): ResolvedIntlConfig['messages'] {
 	const lang = getLanguageByBaseUrl(languageRoute, 'en');
 
-	return lang?.messages || {};
+	if (!lang) {
+		throw new Error(`Language "${languageRoute}" not found`);
+	}
+
+	return require(`../../public/compiled-lang/${lang.base_url}.json`);
 }

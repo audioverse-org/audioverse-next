@@ -27,7 +27,6 @@
 			"@components/*": ["src/components/*"],
 			"@containers/*": ["src/containers/*"],
 			"@pages/*": ["src/pages/*"],
-			"@root/*": ["*"]
 		},
 		"incremental": true
 	},
