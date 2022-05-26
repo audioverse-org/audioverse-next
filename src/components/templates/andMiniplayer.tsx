@@ -2,8 +2,6 @@ import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import React, { PropsWithChildren, useContext, useEffect } from 'react';
 
-import HelpWidget from '@components/molecules/helpWidget';
-
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
 
@@ -59,9 +57,6 @@ export default function AndMiniplayer({
 				})}
 			>
 				{children}
-				<div className={styles.helpButton}>
-					<HelpWidget />
-				</div>
 			</div>
 			<LazyMiniplayer />
 		</>
