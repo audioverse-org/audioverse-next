@@ -1804,9 +1804,6 @@
   "register__loginIntro": {
     "string": "Already have an account?"
   },
-  "register__newsletterSubscribe": {
-    "string": "Subscribe to Newsletter"
-  },
   "register__passwordLabel": {
     "string": "Password"
   },
