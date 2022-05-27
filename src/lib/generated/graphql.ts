@@ -1,5 +1,5 @@
 import { useQuery, UseQueryOptions, useMutation, UseMutationOptions } from 'react-query';
-import { graphqlFetcher } from '@lib/api/fetchApi';
+import { graphqlFetcher } from '@lib/api/graphqlFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
