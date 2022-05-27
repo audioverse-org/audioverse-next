@@ -4,6 +4,7 @@ import {
 	getByLabelText,
 	getByTestId,
 	getByText,
+	screen,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -204,9 +205,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByLabelText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
+		await act(async () => {
 			userEvent.click(getByLabelText('play'));
 		});
 
@@ -1351,6 +1352,25 @@ describe('sermon detail page', () => {
 
 			expect(queryByText('Video Downloads')).not.toBeInTheDocument();
 		});
+	});
+
+	it('plays media on same tick as click', async () => {
+		loadSermonDetailData();
+
+		const mockPlayer = setPlayerMock();
+
+		await renderPage();
+
+		const playButton = screen.getByLabelText('play');
+
+		await act(async () => {
+			userEvent.click(playButton);
+		});
+
+		// This is an attempt to test that we've fixed the "NotAllowedError"
+		// thrown by Safari when media is played asynchronously after a
+		// user interaction.
+		expect(mockPlayer.play).toHaveBeenCalledTimes(1);
 	});
 });
 

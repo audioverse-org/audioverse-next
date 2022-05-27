@@ -354,6 +354,9 @@
   "bibleBook__readAlong": {
     "string": "Read Along"
   },
+  "bibleBook__typeLabel": {
+    "string": "KJV Bible"
+  },
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
   },
@@ -1259,8 +1262,14 @@
   "miniplayer__increaseVolume": {
     "string": "Increase volume"
   },
+  "miniplayer__label": {
+    "string": "miniplayer"
+  },
   "miniplayer__reduceVolume": {
     "string": "Reduce volume"
+  },
+  "miniplayer__series": {
+    "string": "Series"
   },
   "miniplayer__volume": {
     "string": "Volume"
@@ -1816,14 +1825,47 @@
   "register__title": {
     "string": "Register"
   },
+  "release__address1": {
+    "string": "Address line 1"
+  },
+  "release__address2": {
+    "string": "Address line 2"
+  },
+  "release__city": {
+    "string": "City"
+  },
+  "release__comments": {
+    "string": "Comments"
+  },
+  "release__country": {
+    "string": "Country"
+  },
+  "release__email": {
+    "string": "Email"
+  },
+  "release__givenName": {
+    "string": "Given name"
+  },
   "release__messageSubmitted": {
     "string": "Your form has been submitted."
+  },
+  "release__phone": {
+    "string": "Phone"
+  },
+  "release__province": {
+    "string": "State / Province"
+  },
+  "release__surname": {
+    "string": "Surname"
   },
   "release__thankYou": {
     "string": "Thank you!"
   },
   "release__title": {
     "string": "Media Release Agreement"
+  },
+  "release__zip": {
+    "string": "Postal Code"
   },
   "reset__confirmPasswordLabel": {
     "string": "Confirm new password"
