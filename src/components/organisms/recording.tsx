@@ -445,7 +445,8 @@ export function Recording({
 											}
 											IconLeft={IconBlogLight}
 										/>
-									) : contentType !== RecordingContentType.AudiobookTrack ? (
+									) : contentType !== RecordingContentType.AudiobookTrack &&
+									  contentType !== RecordingContentType.MusicTrack ? (
 										<div
 											className={clsx(
 												styles.transcriptWrapper,
