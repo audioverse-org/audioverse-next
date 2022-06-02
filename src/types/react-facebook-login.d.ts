@@ -1,14 +1,3 @@
-type ExactAlt<T, Shape> = T extends Shape
-	? Exclude<keyof T, keyof Shape> extends never
-		? T
-		: never
-	: never;
-
-// WORKAROUND: https://github.com/sindresorhus/type-fest/issues/117
-type Must<T> = {
-	[P in keyof T]-?: NonNullable<T[P]>;
-};
-
 declare module 'react-facebook-login/dist/facebook-login-render-props' {
 	import {
 		ReactFacebookLoginProps as _ReactFacebookLoginProps,
@@ -23,4 +12,6 @@ declare module 'react-facebook-login/dist/facebook-login-render-props' {
 		ReactFacebookLoginProps,
 		ReactFacebookLoginState
 	> {}
+
+	declare function __setFacebookResponse(response: Partial<Response>): void;
 }

@@ -14,7 +14,7 @@ let res: Response = {
 	userID: 'the_user_id',
 };
 
-export function __setFacebookResponse(response: Response): void {
+export function __setFacebookResponse(response: Partial<Response>): void {
 	res = response;
 }
 

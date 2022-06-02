@@ -1,5 +1,5 @@
-import React from 'react';
-import { IntlProvider } from 'react-intl';
+import React, { useState } from 'react';
+import { IntlProvider, ResolvedIntlConfig } from 'react-intl';
 
 import getIntlMessages from '@lib/getIntlMessages';
 import handleIntlError from '@lib/handleIntlError';
@@ -10,9 +10,12 @@ const withIntl = <P extends Record<string, unknown>>(
 ): React.ComponentType<P> => {
 	function WithIntl(props: P) {
 		const language = useLanguageRoute();
-		const [messages, setMessages] = React.useState({});
+		const [messages, setMessages] = useState<ResolvedIntlConfig['messages']>(
+			{}
+		);
+
 		React.useEffect(() => {
-			getIntlMessages(language).then((m) => setMessages(m));
+			getIntlMessages(language).then(setMessages);
 		}, [language]);
 
 		return (

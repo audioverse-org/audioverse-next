@@ -689,6 +689,12 @@
       "value": "Read Along"
     }
   ],
+  "bibleBook__typeLabel": [
+    {
+      "type": 0,
+      "value": "KJV Bible"
+    }
+  ],
   "bibleVersionTypeLockup__type": [
     {
       "type": 0,
@@ -2689,10 +2695,22 @@
       "value": "Increase volume"
     }
   ],
+  "miniplayer__label": [
+    {
+      "type": 0,
+      "value": "miniplayer"
+    }
+  ],
   "miniplayer__reduceVolume": [
     {
       "type": 0,
       "value": "Reduce volume"
+    }
+  ],
+  "miniplayer__series": [
+    {
+      "type": 0,
+      "value": "Series"
     }
   ],
   "miniplayer__volume": [
@@ -3797,12 +3815,6 @@
       "value": "Already have an account?"
     }
   ],
-  "register__newsletterSubscribe": [
-    {
-      "type": 0,
-      "value": "Subscribe to Newsletter"
-    }
-  ],
   "register__passwordLabel": [
     {
       "type": 0,
@@ -3827,10 +3839,70 @@
       "value": "Register"
     }
   ],
+  "release__address1": [
+    {
+      "type": 0,
+      "value": "Address line 1"
+    }
+  ],
+  "release__address2": [
+    {
+      "type": 0,
+      "value": "Address line 2"
+    }
+  ],
+  "release__city": [
+    {
+      "type": 0,
+      "value": "City"
+    }
+  ],
+  "release__comments": [
+    {
+      "type": 0,
+      "value": "Comments"
+    }
+  ],
+  "release__country": [
+    {
+      "type": 0,
+      "value": "Country"
+    }
+  ],
+  "release__email": [
+    {
+      "type": 0,
+      "value": "Email"
+    }
+  ],
+  "release__givenName": [
+    {
+      "type": 0,
+      "value": "Given name"
+    }
+  ],
   "release__messageSubmitted": [
     {
       "type": 0,
       "value": "Your form has been submitted."
+    }
+  ],
+  "release__phone": [
+    {
+      "type": 0,
+      "value": "Phone"
+    }
+  ],
+  "release__province": [
+    {
+      "type": 0,
+      "value": "State / Province"
+    }
+  ],
+  "release__surname": [
+    {
+      "type": 0,
+      "value": "Surname"
     }
   ],
   "release__thankYou": [
@@ -3843,6 +3915,12 @@
     {
       "type": 0,
       "value": "Media Release Agreement"
+    }
+  ],
+  "release__zip": [
+    {
+      "type": 0,
+      "value": "Postal Code"
     }
   ],
   "reset__confirmPasswordLabel": [

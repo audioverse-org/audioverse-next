@@ -2,15 +2,15 @@ import { act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
-// @ts-ignore because this is a helper function in manual mock
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
-import { buildRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 
 jest.mock('js-cookie');
@@ -22,7 +22,6 @@ const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
 
 describe('register page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
 		Cookie.get = jest.fn().mockReturnValue({});
 	});
 
@@ -81,7 +80,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterDocument, {
 				variables: {
 					email: 'email',
 					password: 'pass',
@@ -106,7 +105,7 @@ describe('register page', () => {
 	});
 
 	it('displays returned errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterDocument, expect.anything())
 			.mockResolvedValue({
 				signup: {
@@ -156,7 +155,7 @@ describe('register page', () => {
 	});
 
 	it('renders google signon errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -178,7 +177,7 @@ describe('register page', () => {
 	});
 
 	it('renders facebook signon errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -215,7 +214,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
 				variables: {
 					socialId: 'the_user_id',
 					socialName: 'FACEBOOK',
@@ -228,7 +227,7 @@ describe('register page', () => {
 	});
 
 	it('saves facebook login session token', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(RegisterSocialDocument, expect.anything())
 			.mockResolvedValue({
 				loginSocial: {
@@ -252,7 +251,7 @@ describe('register page', () => {
 	it('does not register failed login', async () => {
 		await act(async () => {
 			__setFacebookResponse({
-				status: 'FAILED',
+				status: 300,
 			});
 
 			const { getByText } = await renderPage({ router });
@@ -265,7 +264,7 @@ describe('register page', () => {
 
 			await sleep();
 
-			expect(mockedFetchApi).not.toBeCalledWith(
+			expect(fetchApi).not.toBeCalledWith(
 				RegisterSocialDocument,
 				expect.anything()
 			);
@@ -274,7 +273,8 @@ describe('register page', () => {
 
 	it('displays facebook login error', async () => {
 		__setFacebookResponse({
-			status: 'FAILED',
+			status: 300,
+			statusText: 'FAILED',
 		});
 
 		const { getByText } = await renderPage({ router });
@@ -282,7 +282,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(getByText('FAILED')).toBeInTheDocument();
+			expect(getByText('300: FAILED')).toBeInTheDocument();
 		});
 	});
 
@@ -300,7 +300,7 @@ describe('register page', () => {
 		userEvent.click(getByText('Sign up with Google'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(RegisterSocialDocument, {
+			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
 				variables: {
 					socialId: 'the_user_id',
 					socialName: 'GOOGLE',
@@ -313,7 +313,7 @@ describe('register page', () => {
 	});
 
 	it('pops modal on guest info click', async () => {
-		const { getByText, getByTestId } = await renderPage({ router });
+		const { getByText, getByTestId } = await renderPage();
 
 		userEvent.click(getByTestId('guest-info-button'));
 

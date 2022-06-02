@@ -34,7 +34,13 @@ export default function Miniplayer(): JSX.Element | null {
 	if (recording.sequence) {
 		const { Icon } = getSequenceTypeTheme(recording.sequence.contentType);
 		sequenceLine = (
-			<div className={styles.series} aria-label="series">
+			<div
+				className={styles.series}
+				aria-label={intl.formatMessage({
+					id: 'miniplayer__series',
+					defaultMessage: 'Series',
+				})}
+			>
 				<Icon width={13} height={13} />
 				{recording.sequence.contentType === SequenceContentType.BibleBook
 					? recording.collection?.title
@@ -44,7 +50,13 @@ export default function Miniplayer(): JSX.Element | null {
 	}
 
 	return (
-		<div className={styles.miniplayer} aria-label="miniplayer">
+		<div
+			className={styles.miniplayer}
+			aria-label={intl.formatMessage({
+				id: 'miniplayer__label',
+				defaultMessage: 'miniplayer',
+			})}
+		>
 			<div className={styles.player}>
 				{/*TODO: Get rid of ID; use ref instead*/}
 				<div id="mini-player" className={styles.pane} />
