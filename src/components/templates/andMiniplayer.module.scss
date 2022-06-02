@@ -11,3 +11,18 @@
 	visibility: hidden !important;
 	height: 0;
 }
+
+.helpButton {
+	position: fixed;
+	bottom: 24px;
+	right: calc(24px + env(safe-area-inset-right));
+	z-index: 1;
+}
+
+:global(.andMiniplayer--withPlayer) .helpButton {
+	bottom: $miniplayer-height + 24px;
+}
+
+.andMiniplayer :global(.BeaconContainer) {
+	bottom: 31px + 24px + 24px;
+}
