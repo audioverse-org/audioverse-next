@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
+import IconQuestionCircle from '@public/img/icon-question-circle.svg';
 
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -69,6 +70,7 @@ export default function HelpWidget(): JSX.Element {
 						defaultMessage="Help"
 					/>
 				}
+				IconLeft={IconQuestionCircle}
 				onClick={() => {
 					window.Beacon(isOpen ? 'close' : 'open');
 					setIsOpen(!isOpen);
