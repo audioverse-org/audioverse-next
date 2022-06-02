@@ -16,7 +16,7 @@
 	position: fixed;
 	bottom: 24px;
 	right: calc(24px + env(safe-area-inset-right));
-	z-index: 1;
+	z-index: 999;
 }
 
 :global(.andMiniplayer--withPlayer) .helpButton {
