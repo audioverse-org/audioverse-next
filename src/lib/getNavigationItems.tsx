@@ -397,7 +397,7 @@ export function getNavigationItems(
 			children: [
 				{
 					key: 'help',
-					href: 'https://help.audioverse.org/support/home',
+					href: 'https://help.audioverse.org/',
 					isTargetBlank: true,
 					Icon: IconQuestionCircle,
 					label: intl.formatMessage({
