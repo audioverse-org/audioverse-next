@@ -1,9 +1,11 @@
 @import '../../styles/common';
 
+$button-height: 31px;
+
 .base {
 	display: inline-flex;
 	align-items: center;
-	height: 31px;
+	height: $button-height;
 	padding: 3.5px 8px;
 	border-radius: 4px;
 	background: transparent;
