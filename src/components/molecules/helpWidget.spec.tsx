@@ -140,4 +140,17 @@ describe('help widget', () => {
 			expect.any(Function)
 		);
 	});
+
+	it('translates strings', async () => {
+		await renderComponent();
+
+		expect(window.Beacon).toBeCalledWith(
+			'config',
+			expect.objectContaining({
+				labels: expect.objectContaining({
+					suggestedForYou: expect.any(String),
+				}),
+			})
+		);
+	});
 });

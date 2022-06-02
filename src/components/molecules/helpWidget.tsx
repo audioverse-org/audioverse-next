@@ -6,12 +6,14 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
+import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icon-question-circle.svg';
 
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { data } = useGetHelpWidgetDataQuery();
 	const router = useRouter();
+	const labels = useHelpScoutLabels();
 
 	useEffect(() => {
 		window.Beacon('init', 'e73e9329-30be-4766-99bb-6bfdd739e316');
@@ -26,6 +28,10 @@ export default function HelpWidget(): JSX.Element {
 			window.Beacon('off', 'close', handleClose);
 		};
 	}, []);
+
+	useEffect(() => {
+		window.Beacon('config', { labels });
+	}, [labels]);
 
 	useEffect(() => {
 		const d = data?.me?.user;
