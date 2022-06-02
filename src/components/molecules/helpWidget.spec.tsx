@@ -121,4 +121,23 @@ describe('help widget', () => {
 			title: 'the_title',
 		});
 	});
+
+	it('unregisters route change listener on unmount', async () => {
+		const router = __loadRouter();
+
+		await renderComponent();
+
+		await waitFor(() => {
+			expect(router.events.on).toBeCalled();
+		});
+
+		const { unmount } = await renderComponent();
+
+		unmount();
+
+		expect(router.events.off).toBeCalledWith(
+			'routeChangeComplete',
+			expect.any(Function)
+		);
+	});
 });

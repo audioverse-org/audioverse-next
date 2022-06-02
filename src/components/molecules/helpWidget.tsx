@@ -40,15 +40,17 @@ export default function HelpWidget(): JSX.Element {
 	}, [data]);
 
 	useEffect(() => {
-		router.events.on('routeChangeComplete', (url: string) => {
+		const listener = (url: string) => {
 			window.Beacon('event', {
 				type: 'page-viewed',
 				url,
 				title: document.title,
 			});
-		});
-
-		// TODO: return cleanup function
+		};
+		router.events.on('routeChangeComplete', listener);
+		return () => {
+			router.events.off('routeChangeComplete', listener);
+		};
 	}, [router]);
 
 	return (
