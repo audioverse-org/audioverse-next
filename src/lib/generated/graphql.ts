@@ -5913,6 +5913,11 @@ export type CopyrightInfoFragment = { __typename?: 'Recording', copyrightYear: n
 
 export type CopyrightInfosFragment = { __typename?: 'Recording', id: string | number, copyrightYear: number | null, contentType: RecordingContentType, distributionAgreement: { __typename?: 'DistributionAgreement', id: string | number, sponsor: { __typename?: 'Sponsor', title: string } | null, license: { __typename?: 'License', summary: string, image: { __typename?: 'Image', url: string } | null } | null } | null, sponsor: { __typename?: 'Sponsor', id: string | number, title: string } | null, collection: { __typename?: 'Collection', title: string } | null };
 
+export type GetHelpWidgetDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHelpWidgetDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', name: string, email: string, image: { __typename?: 'Image', url: string } | null } } | null };
+
 export type LoginForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -7037,6 +7042,21 @@ export const useGetWithAuthGuardDataQuery = <
     useQuery<GetWithAuthGuardDataQuery, TError, TData>(
       variables === undefined ? ['getWithAuthGuardData'] : ['getWithAuthGuardData', variables],
       graphqlFetcher<GetWithAuthGuardDataQuery, GetWithAuthGuardDataQueryVariables>(GetWithAuthGuardDataDocument, variables),
+      options
+    );
+export const GetHelpWidgetDataDocument = `
+query getHelpWidgetData{me{user{name image{url(size:200)}email}}}
+`;
+export const useGetHelpWidgetDataQuery = <
+      TData = GetHelpWidgetDataQuery,
+      TError = unknown
+    >(
+      variables?: GetHelpWidgetDataQueryVariables,
+      options?: UseQueryOptions<GetHelpWidgetDataQuery, TError, TData>
+    ) =>
+    useQuery<GetHelpWidgetDataQuery, TError, TData>(
+      variables === undefined ? ['getHelpWidgetData'] : ['getHelpWidgetData', variables],
+      graphqlFetcher<GetHelpWidgetDataQuery, GetHelpWidgetDataQueryVariables>(GetHelpWidgetDataDocument, variables),
       options
     );
 export const LoginForgotPasswordDocument = `
@@ -9066,6 +9086,12 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
+
+							export async function getHelpWidgetData<T>(
+								variables: ExactAlt<T, GetHelpWidgetDataQueryVariables>
+							): Promise<GetHelpWidgetDataQuery> {
+								return fetchApi(GetHelpWidgetDataDocument, { variables });
+							}
 
 							export async function loginForgotPassword<T>(
 								variables: ExactAlt<T, LoginForgotPasswordMutationVariables>
