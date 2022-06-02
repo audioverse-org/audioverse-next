@@ -8,5 +8,7 @@ export function useLogout(): Promise<void> {
 	const queryClient = useQueryClient();
 
 	clearSessionToken();
+	window.Beacon('logout');
+
 	return resetUserQueries(queryClient);
 }
