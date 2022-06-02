@@ -203,7 +203,7 @@
 
 .footerWrapper {
 	position: fixed;
-	bottom: 32px;
+	bottom: $grid-gap;
 	left: 0;
 	right: 0;
 	padding-left: 24px;
@@ -233,10 +233,14 @@
 	margin-bottom: 8px;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	flex-wrap: wrap;
+	padding-right: 75px + $grid-gap;
+	
+	.logo {
+		margin-right: $grid-gap;
+	}
 
 	h3 {
 		font-size: 18px;
-		text-align: right;
 	}
 }

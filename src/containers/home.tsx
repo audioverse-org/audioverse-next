@@ -480,7 +480,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			</div>
 			<div className={styles.footerWrapper} ref={footerRef}>
 				<div className={styles.footer}>
-					<Image src="/img/logo.svg" width={161} height={23} />
+					<span className={styles.logo}>
+						<Image src="/img/logo.svg" width={161} height={23} />
+					</span>
 					<Heading3 sans unpadded>
 						<FormattedMessage
 							id="homePage__tagline"
