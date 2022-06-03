@@ -9,7 +9,7 @@ import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icon-question-circle.svg';
 
-export default function HelpWidget(): JSX.Element {
+function Inner(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { data } = useGetHelpWidgetDataQuery();
 	const router = useRouter();
@@ -84,4 +84,12 @@ export default function HelpWidget(): JSX.Element {
 			/>
 		</>
 	);
+}
+
+export default function HelpWidget() {
+	if (!window.Beacon) {
+		return null;
+	}
+
+	return <Inner />;
 }

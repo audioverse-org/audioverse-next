@@ -153,4 +153,10 @@ describe('help widget', () => {
 			})
 		);
 	});
+
+	it('handles unset beacon', async () => {
+		window.Beacon = undefined as any;
+
+		await expect(renderComponent()).resolves.not.toThrow();
+	});
 });
