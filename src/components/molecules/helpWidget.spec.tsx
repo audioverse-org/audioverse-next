@@ -1,17 +1,20 @@
 import { act, screen, waitFor } from '@testing-library/react';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
+import Script from 'next/script';
 
 import HelpWidget from '@components/molecules/helpWidget';
 import { fetchApi } from '@lib/api/fetchApi';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
+import getBeacon from '@lib/getBeacon';
 import { buildRenderer } from '@lib/test/buildRenderer';
 
 jest.mock('next/script');
 
 const renderComponent = buildRenderer(HelpWidget);
 
-const mockBeacon = window.Beacon as jest.Mock;
+const mockGetBeacon = getBeacon as jest.Mock;
+const mockBeacon = jest.fn() as jest.Mock;
 
 function loadData() {
 	when(fetchApi)
@@ -30,10 +33,15 @@ function loadData() {
 }
 
 describe('help widget', () => {
+	beforeEach(() => {
+		mockGetBeacon.mockReturnValue(mockBeacon);
+	});
+
 	it('opens widget on click', async () => {
 		await renderComponent();
 
-		const button = screen.getByRole('button');
+		const button = await screen.findByRole('button');
+
 		button.click();
 
 		await waitFor(() => {
@@ -144,7 +152,7 @@ describe('help widget', () => {
 	it('translates strings', async () => {
 		await renderComponent();
 
-		expect(window.Beacon).toBeCalledWith(
+		expect(mockBeacon).toBeCalledWith(
 			'config',
 			expect.objectContaining({
 				labels: expect.objectContaining({
@@ -155,8 +163,21 @@ describe('help widget', () => {
 	});
 
 	it('handles unset beacon', async () => {
-		window.Beacon = undefined as any;
+		mockGetBeacon.mockReturnValue(undefined);
 
 		await expect(renderComponent()).resolves.not.toThrow();
+	});
+
+	it('renders script to load beacon', async () => {
+		mockGetBeacon.mockReturnValue(undefined);
+
+		await renderComponent();
+
+		expect(Script).toBeCalledWith(
+			expect.objectContaining({
+				id: 'beaconOnLoad',
+			}),
+			expect.anything()
+		);
 	});
 });

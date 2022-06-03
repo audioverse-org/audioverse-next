@@ -14,9 +14,10 @@ import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
-import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { useNavigationItems } from '@lib/useNavigationItems';
+import { INavigationItem } from '@lib/useNavigationItems';
 
 import IconUser from '../../../public/img/fa-user-heavy.svg';
 import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
@@ -67,9 +68,10 @@ const Navigation = ({
 	);
 	const user = authResult.data?.me?.user;
 
-	const iconSize = 24;
-	const navigationItems = getNavigationItems(router, intl, languageRoute);
-	const submenuItem = navigationItems.find(({ key }) => submenu === key);
+	const navigationItems = useNavigationItems();
+	const submenuItem = navigationItems.find(
+		({ key }: INavigationItem) => submenu === key
+	);
 
 	return (
 		<header className={styles.header}>
@@ -106,46 +108,51 @@ const Navigation = ({
 						<ul>
 							{navigationItems
 								.slice(0, -1)
-								.map(({ Icon, key, label, href, children }) => {
-									const inner = (
-										<>
-											{Icon && (
-												<span className={styles.icon}>
-													<Icon width={iconSize} height={iconSize} />
-												</span>
-											)}
-											<span className={styles.label}>{label}</span>
-										</>
-									);
+								.map(
+									({ Icon, key, label, href, children }: INavigationItem) => {
+										const inner = (
+											<>
+												{Icon && (
+													<span className={styles.icon}>
+														<Icon />
+													</span>
+												)}
+												<span className={styles.label}>{label}</span>
+											</>
+										);
 
-									return (
-										<li key={key}>
-											{href ? (
-												<ActiveLink href={href} activeClassName={styles.active}>
-													<a className={styles.navLink}>{inner}</a>
-												</ActiveLink>
-											) : (
-												<a
-													className={styles.navLink}
-													onClick={() => setSubmenu(key)}
-												>
-													{inner}
-												</a>
-											)}
-											{children && (
-												<span
-													className={styles.iconDisclosure}
-													onClick={(e) => {
-														e.preventDefault();
-														setSubmenu(key);
-													}}
-												>
-													<IconDisclosure />
-												</span>
-											)}
-										</li>
-									);
-								})}
+										return (
+											<li key={key}>
+												{href ? (
+													<ActiveLink
+														href={href}
+														activeClassName={styles.active}
+													>
+														<a className={styles.navLink}>{inner}</a>
+													</ActiveLink>
+												) : (
+													<a
+														className={styles.navLink}
+														onClick={() => setSubmenu(key)}
+													>
+														{inner}
+													</a>
+												)}
+												{children && (
+													<span
+														className={styles.iconDisclosure}
+														onClick={(e) => {
+															e.preventDefault();
+															setSubmenu(key);
+														}}
+													>
+														<IconDisclosure />
+													</span>
+												)}
+											</li>
+										);
+									}
+								)}
 						</ul>
 
 						<Button
@@ -233,7 +240,7 @@ const Navigation = ({
 											onClick,
 											isDivider,
 											isTargetBlank,
-										}) => (
+										}: INavigationItem) => (
 											<li key={key}>
 												{isDivider ? (
 													<div className={styles.divider} />

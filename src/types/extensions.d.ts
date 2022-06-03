@@ -3,4 +3,7 @@ declare module '*.scss' {
 	export default value;
 }
 
-declare module '*.svg';
+declare module '*.svg' {
+	const value: React.ComponentType;
+	export default value;
+}

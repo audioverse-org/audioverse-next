@@ -18,10 +18,10 @@ import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 import { BaseColors } from '@lib/constants';
-import { getNavigationItems } from '@lib/getNavigationItems';
 import isServerSide from '@lib/isServerSide';
 import { makeDonateRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { useNavigationItems } from '@lib/useNavigationItems';
 
 import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
 import IconListening from '../../../public/img/icon-listening.svg';
@@ -117,7 +117,7 @@ export default function AndNavigation({
 		};
 	}, [listener]);
 
-	const navigationItems = getNavigationItems(router, intl, languageRoute);
+	const navigationItems = useNavigationItems();
 	const playbackRecording = playbackContext.getRecording();
 	return (
 		<div className={styles.positioner}>

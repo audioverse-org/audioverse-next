@@ -6,51 +6,58 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
+import getBeacon from '@lib/getBeacon';
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icon-question-circle.svg';
 
+import { Beacon } from '../../types/window';
+
 const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 
-function Inner(): JSX.Element {
+export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [beacon, setBeacon] = useState<Beacon>(getBeacon);
 	const { data } = useGetHelpWidgetDataQuery();
 	const router = useRouter();
 	const labels = useHelpScoutLabels();
 
 	useEffect(() => {
-		window.Beacon('init', BEACON_ID);
+		if (!beacon) return;
+
+		beacon('init', BEACON_ID);
 
 		const handleClose = (): void => {
 			setIsOpen(false);
 		};
 
-		window.Beacon('on', 'close', handleClose);
+		beacon('on', 'close', handleClose);
 
 		return () => {
-			window.Beacon('off', 'close', handleClose);
+			beacon('off', 'close', handleClose);
 		};
-	}, []);
+	}, [beacon]);
 
 	useEffect(() => {
-		window.Beacon('config', { labels });
-	}, [labels]);
+		beacon && beacon('config', { labels });
+	}, [beacon, labels]);
 
 	useEffect(() => {
 		const d = data?.me?.user;
-		if (!d) {
+		if (!d || !beacon) {
 			return;
 		}
 
-		window.Beacon('identify', {
+		beacon('identify', {
 			email: d.email,
 			name: d.name,
 			avatar: d.image?.url || '',
 		});
-	}, [data]);
+	}, [beacon, data]);
 
 	useEffect(() => {
+		if (!beacon) return;
 		const listener = (url: string) => {
-			window.Beacon('event', {
+			beacon('event', {
 				type: 'page-viewed',
 				url,
 				title: document.title,
@@ -60,38 +67,36 @@ function Inner(): JSX.Element {
 		return () => {
 			router.events.off('routeChangeComplete', listener);
 		};
-	}, [router]);
+	}, [beacon, router]);
 
 	return (
 		<>
 			<Script
 				id="beaconOnLoad"
-				dangerouslySetInnerHTML={{
-					__html: `!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});`,
+				src="/helpscout.js"
+				onLoad={() => {
+					const b = getBeacon();
+					if (b) {
+						setBeacon(() => b);
+					}
 				}}
 			/>
-			<Button
-				type="super"
-				text={
-					<FormattedMessage
-						id="helpWidget__buttonLabel"
-						defaultMessage="Help"
-					/>
-				}
-				IconLeft={IconQuestionCircle}
-				onClick={() => {
-					window.Beacon(isOpen ? 'close' : 'open');
-					setIsOpen(!isOpen);
-				}}
-			/>
+			{beacon && (
+				<Button
+					type="super"
+					text={
+						<FormattedMessage
+							id="helpWidget__buttonLabel"
+							defaultMessage="Help"
+						/>
+					}
+					IconLeft={IconQuestionCircle}
+					onClick={() => {
+						beacon(isOpen ? 'close' : 'open');
+						setIsOpen(!isOpen);
+					}}
+				/>
+			)}
 		</>
 	);
-}
-
-export default function HelpWidget() {
-	if (!window.Beacon) {
-		return null;
-	}
-
-	return <Inner />;
 }

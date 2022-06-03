@@ -43,6 +43,7 @@ describe('recording favorite button', () => {
 			pathname: '/en/discover',
 		});
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 
 	it('shows favorite button', async () => {

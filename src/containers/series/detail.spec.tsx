@@ -80,7 +80,7 @@ describe('series detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		(fetchApi as jest.Mock).mockRejectedValue(undefined);
+		(fetchApi as jest.Mock).mockRejectedValueOnce(undefined);
 
 		const { getByText } = await renderPage();
 

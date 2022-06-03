@@ -1,6 +1,6 @@
-import { NextRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React from 'react';
-import { IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
@@ -24,44 +24,44 @@ import {
 	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
 } from '@lib/routes';
-
-import IconAlignLeft from '../../public/img/fa-align-left.svg';
-import IconBook from '../../public/img/fa-book.svg';
-import IconBookmark from '../../public/img/fa-bookmark.svg';
-import IconBullseyeHeavy from '../../public/img/fa-bullseye-heavy.svg';
-import IconCalendar from '../../public/img/fa-calendar.svg';
-import IconCommentHeavy from '../../public/img/fa-comment-heavy.svg';
-import IconFacebook from '../../public/img/fa-facebook.svg';
-import IconFeather from '../../public/img/fa-feather.svg';
-import IconFireHeavy from '../../public/img/fa-fire-heavy.svg';
-import IconHeartHeavy from '../../public/img/fa-heart-heavy.svg';
-import IconHistory from '../../public/img/fa-history.svg';
-import IconInbox from '../../public/img/fa-inbox.svg';
-import IconInstagram from '../../public/img/fa-instagram.svg';
-import IconLandmark from '../../public/img/fa-landmark-heavy.svg';
-import IconLink from '../../public/img/fa-link.svg';
-import IconListAltHeavy from '../../public/img/fa-list-alt.svg';
-import IconLock from '../../public/img/fa-lock-heavy.svg';
-import IconMusic from '../../public/img/fa-music.svg';
-import IconNewpaper from '../../public/img/fa-newspaper-heavy.svg';
-import IconQuestionCircle from '../../public/img/fa-question-circle.svg';
-import IconSeedling from '../../public/img/fa-seedling.svg';
-import IconStore from '../../public/img/fa-store.svg';
-import IconStream from '../../public/img/fa-stream.svg';
-import IconTwitter from '../../public/img/fa-twitter.svg';
-import IconUser from '../../public/img/fa-user-heavy.svg';
-import IconUserPlusHeavy from '../../public/img/fa-user-plus-heavy.svg';
-import IconUsersHeavy from '../../public/img/fa-users-heavy.svg';
-import IconYouTube from '../../public/img/fa-youtube.svg';
-import IconAccount from '../../public/img/icon-account.svg';
-import IconBible from '../../public/img/icon-bible.svg';
-import IconBooks from '../../public/img/icon-books.svg';
-import IconCollections from '../../public/img/icon-collections.svg';
-import IconContact from '../../public/img/icon-contact.svg';
-import IconMore from '../../public/img/icon-more.svg';
-import IconOurStory from '../../public/img/icon-our-story.svg';
-import IconSearch from '../../public/img/icon-search.svg';
-import IconSignOut from '../../public/img/icon-sign-out.svg';
+import useLanguageRoute from '@lib/useLanguageRoute';
+import IconAlignLeft from '@public/img/fa-align-left.svg';
+import IconBook from '@public/img/fa-book.svg';
+import IconBookmark from '@public/img/fa-bookmark.svg';
+import IconBullseyeHeavy from '@public/img/fa-bullseye-heavy.svg';
+import IconCalendar from '@public/img/fa-calendar.svg';
+import IconCommentHeavy from '@public/img/fa-comment-heavy.svg';
+import IconFacebook from '@public/img/fa-facebook.svg';
+import IconFeather from '@public/img/fa-feather.svg';
+import IconFireHeavy from '@public/img/fa-fire-heavy.svg';
+import IconHeartHeavy from '@public/img/fa-heart-heavy.svg';
+import IconHistory from '@public/img/fa-history.svg';
+import IconInbox from '@public/img/fa-inbox.svg';
+import IconInstagram from '@public/img/fa-instagram.svg';
+import IconLandmark from '@public/img/fa-landmark-heavy.svg';
+import IconLink from '@public/img/fa-link.svg';
+import IconListAltHeavy from '@public/img/fa-list-alt.svg';
+import IconLock from '@public/img/fa-lock-heavy.svg';
+import IconMusic from '@public/img/fa-music.svg';
+import IconNewpaper from '@public/img/fa-newspaper-heavy.svg';
+import IconQuestionCircle from '@public/img/fa-question-circle.svg';
+import IconSeedling from '@public/img/fa-seedling.svg';
+import IconStore from '@public/img/fa-store.svg';
+import IconStream from '@public/img/fa-stream.svg';
+import IconTwitter from '@public/img/fa-twitter.svg';
+import IconUser from '@public/img/fa-user-heavy.svg';
+import IconUserPlusHeavy from '@public/img/fa-user-plus-heavy.svg';
+import IconUsersHeavy from '@public/img/fa-users-heavy.svg';
+import IconYouTube from '@public/img/fa-youtube.svg';
+import IconAccount from '@public/img/icon-account.svg';
+import IconBible from '@public/img/icon-bible.svg';
+import IconBooks from '@public/img/icon-books.svg';
+import IconCollections from '@public/img/icon-collections.svg';
+import IconContact from '@public/img/icon-contact.svg';
+import IconMore from '@public/img/icon-more.svg';
+import IconOurStory from '@public/img/icon-our-story.svg';
+import IconSearch from '@public/img/icon-search.svg';
+import IconSignOut from '@public/img/icon-sign-out.svg';
 
 export type INavigationItem = {
 	key: string;
@@ -69,17 +69,17 @@ export type INavigationItem = {
 	onClick?: (props: { popSubmenu: () => void }) => void;
 	isDivider?: true;
 	isTargetBlank?: true;
-	Icon: React.ElementType | null;
+	Icon?: React.ComponentType;
 	label: string;
 	children?: INavigationItem[];
 	childNode?: JSX.Element;
 };
 
-export function getNavigationItems(
-	router: NextRouter,
-	intl: IntlShape,
-	languageRoute: string
-): INavigationItem[] {
+export function useNavigationItems(): INavigationItem[] {
+	const router = useRouter();
+	const intl = useIntl();
+	const languageRoute = useLanguageRoute();
+
 	return [
 		{
 			key: 'discover',
@@ -340,7 +340,6 @@ export function getNavigationItems(
 				},
 				{
 					key: 'divider',
-					Icon: null,
 					label: '',
 					isDivider: true,
 				},
@@ -468,16 +467,14 @@ export function getNavigationItems(
 					<li>
 						<LanguageButton
 							buttonType="secondary"
-							onClick={(baseUrl) => {
-								router.push(`/${baseUrl}/`);
-							}}
+							onClick={(url) => router.push(`/${url}/`)}
 						/>
 					</li>
 					<li>
 						<DownloadAppButton
 							buttonType="secondary"
 							menuAlignment="left"
-							id="getNavigationItems-downloadApp"
+							id="useNavigationItems-downloadApp"
 						/>
 					</li>
 				</>
@@ -485,7 +482,6 @@ export function getNavigationItems(
 		},
 		{
 			key: 'account',
-			Icon: null,
 			label: intl.formatMessage({
 				id: `header__navItemUser`,
 				defaultMessage: 'User Settings',
