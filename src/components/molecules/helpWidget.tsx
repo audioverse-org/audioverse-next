@@ -9,6 +9,8 @@ import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icon-question-circle.svg';
 
+const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
+
 function Inner(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { data } = useGetHelpWidgetDataQuery();
@@ -16,7 +18,7 @@ function Inner(): JSX.Element {
 	const labels = useHelpScoutLabels();
 
 	useEffect(() => {
-		window.Beacon('init', 'e73e9329-30be-4766-99bb-6bfdd739e316');
+		window.Beacon('init', BEACON_ID);
 
 		const handleClose = (): void => {
 			setIsOpen(false);
