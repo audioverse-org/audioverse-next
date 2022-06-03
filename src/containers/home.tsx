@@ -30,8 +30,8 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBell from '../../public/img/fa-bell.svg';
-import IconForward from '../../public/img/icon-forward-light.svg';
+import IconBell from '../../public/img/icons/fa-bell.svg';
+import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '../../public/img/players.jpeg';
 
 import styles from './home.module.scss';

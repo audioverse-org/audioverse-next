@@ -19,9 +19,9 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import { INavigationItem } from '@lib/useNavigationItems';
 
-import IconUser from '../../../public/img/fa-user-heavy.svg';
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconExit from '../../../public/img/icon-exit.svg';
+import IconUser from '../../../public/img/icons/fa-user-heavy.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
+import IconExit from '../../../public/img/icons/icon-exit.svg';
 
 import styles from './navigation.module.scss';
 

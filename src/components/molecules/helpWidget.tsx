@@ -8,7 +8,7 @@ import Button from '@components/molecules/button';
 import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
 import getBeacon from '@lib/getBeacon';
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
-import IconQuestionCircle from '@public/img/icon-question-circle.svg';
+import IconQuestionCircle from '@public/img/icons/icon-question-circle.svg';
 
 import { Beacon } from '../../types/window';
 
