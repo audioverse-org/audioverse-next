@@ -25,7 +25,7 @@
 			margin-right: 8px;
 			display: flex;
 			color: $ts-dark;
-			@include recolor($ts-dark, 1)
+			@include recolor($ts-dark, 1);
 		}
 		.label {
 			flex-grow: 1;
@@ -45,7 +45,7 @@
 		&,
 		.icon {
 			color: $ts-red;
-			@include recolor($ts-red, 1)
+			@include recolor($ts-red, 1);
 		}
 	}
 	@media (min-width: $breakpoint-lg) {
@@ -54,7 +54,7 @@
 			.icon,
 			.iconDisclosure {
 				color: $ts-red;
-				@include recolor($ts-red, 1)
+				@include recolor($ts-red, 1);
 			}
 		}
 	}
