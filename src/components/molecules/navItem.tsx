@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ActiveLink from '@components/atoms/activeLink';
+// TODO: Split into its own SCSS module
 import styles from '@components/organisms/navigation.module.scss';
 import { INavigationItem } from '@lib/useNavigationItems';
 
@@ -17,11 +18,7 @@ export default function NavItem({
 
 	const inner = (
 		<>
-			{Icon && (
-				<span className={styles.icon}>
-					<Icon />
-				</span>
-			)}
+			<span className={styles.icon}>{Icon && <Icon />}</span>
 			<span className={styles.label}>{label}</span>
 		</>
 	);

@@ -39,6 +39,61 @@ export type INavigationItem = {
 	childNode?: JSX.Element;
 };
 
+// TODO: Find a way to reduce boilerplate without increasing bundle size
+const iconMap = {
+	icon_search: dynamic(() => import('@public/img/icons/icon-search.svg')),
+	icon_books: dynamic(() => import('@public/img/icons/icon-books.svg')),
+	fa_bookmark: dynamic(() => import('@public/img/icons/fa-bookmark.svg')),
+	fa_stream: dynamic(() => import('@public/img/icons/fa-stream.svg')),
+	fa_history: dynamic(() => import('@public/img/icons/fa-history.svg')),
+	icon_bible: dynamic(() => import('@public/img/icons/icon-bible.svg')),
+	icon_collections: dynamic(
+		() => import('@public/img/icons/icon-collections.svg')
+	),
+	fa_list_alt: dynamic(() => import('@public/img/icons/fa-list-alt.svg')),
+	fa_user_plus_heavy: dynamic(
+		() => import('@public/img/icons/fa-user-plus-heavy.svg')
+	),
+	fa_calendar: dynamic(() => import('@public/img/icons/fa-calendar.svg')),
+	fa_user_heavy: dynamic(() => import('@public/img/icons/fa-user-heavy.svg')),
+	fa_feather: dynamic(() => import('@public/img/icons/fa-feather.svg')),
+	fa_book: dynamic(() => import('@public/img/icons/fa-book.svg')),
+	fa_music: dynamic(() => import('@public/img/icons/fa-music.svg')),
+	icon_account: dynamic(() => import('@public/img/icons/icon-account.svg')),
+	icon_our_story: dynamic(() => import('@public/img/icons/icon-our-story.svg')),
+	fa_seedling: dynamic(() => import('@public/img/icons/fa-seedling.svg')),
+	fa_users_heavy: dynamic(() => import('@public/img/icons/fa-users-heavy.svg')),
+	fa_bullseye_heavy: dynamic(
+		() => import('@public/img/icons/fa-bullseye-heavy.svg')
+	),
+	fa_fire_heavy: dynamic(() => import('@public/img/icons/fa-fire-heavy.svg')),
+	fa_align_left: dynamic(() => import('@public/img/icons/fa-align-left.svg')),
+	fa_comment_heavy: dynamic(
+		() => import('@public/img/icons/fa-comment-heavy.svg')
+	),
+	fa_heart_heavy: dynamic(() => import('@public/img/icons/fa-heart-heavy.svg')),
+	icon_contact: dynamic(() => import('@public/img/icons/icon-contact.svg')),
+	fa_inbox: dynamic(() => import('@public/img/icons/fa-inbox.svg')),
+	fa_facebook: dynamic(() => import('@public/img/icons/fa-facebook.svg')),
+	fa_instagram: dynamic(() => import('@public/img/icons/fa-instagram.svg')),
+	fa_twitter: dynamic(() => import('@public/img/icons/fa-twitter.svg')),
+	fa_youtube: dynamic(() => import('@public/img/icons/fa-youtube.svg')),
+	icon_more: dynamic(() => import('@public/img/icons/icon-more.svg')),
+	fa_question_circle: dynamic(
+		() => import('@public/img/icons/fa-question-circle.svg')
+	),
+	fa_link: dynamic(() => import('@public/img/icons/fa-link.svg')),
+	fa_landmark_heavy: dynamic(
+		() => import('@public/img/icons/fa-landmark-heavy.svg')
+	),
+	fa_lock_heavy: dynamic(() => import('@public/img/icons/fa-lock-heavy.svg')),
+	fa_newspaper_heavy: dynamic(
+		() => import('@public/img/icons/fa-newspaper-heavy.svg')
+	),
+	icon_sign_out: dynamic(() => import('@public/img/icons/icon-sign-out.svg')),
+	fa_store: dynamic(() => import('@public/img/icons/fa-store.svg')),
+};
+
 export function useNavigationItems(): INavigationItem[] {
 	const router = useRouter();
 	const intl = useIntl();
@@ -48,7 +103,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'discover',
 			href: makeDiscoverRoute(languageRoute),
-			Icon: dynamic(() => import('@public/img/icons/icon-search.svg')),
+			Icon: iconMap.icon_search,
 			label: intl.formatMessage({
 				id: `header__navItemDiscover`,
 				defaultMessage: 'Discover',
@@ -58,7 +113,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'library',
 			href: makeLibraryRoute(languageRoute),
-			Icon: dynamic(() => import('@public/img/icons/icon-books.svg')),
+			Icon: iconMap.icon_books,
 			label: intl.formatMessage({
 				id: `header__navItemLibrary`,
 				defaultMessage: 'Library',
@@ -68,7 +123,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'saved',
 					href: makeLibraryRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-bookmark.svg')),
+					Icon: iconMap.fa_bookmark,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-saved`,
 						defaultMessage: 'Saved',
@@ -77,7 +132,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'playlists',
 					href: makeLibraryRoute(languageRoute, 'playlists'),
-					Icon: dynamic(() => import('@public/img/icons/fa-stream.svg')),
+					Icon: iconMap.fa_stream,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-playlists`,
 						defaultMessage: 'Playlists',
@@ -86,7 +141,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'history',
 					href: makeLibraryRoute(languageRoute, 'history'),
-					Icon: dynamic(() => import('@public/img/icons/fa-history.svg')),
+					Icon: iconMap.fa_history,
 					label: intl.formatMessage({
 						id: `header__navItemLibrary-history`,
 						defaultMessage: 'History',
@@ -99,7 +154,7 @@ export function useNavigationItems(): INavigationItem[] {
 					{
 						key: 'bibles',
 						href: makeBibleListRoute(languageRoute),
-						Icon: dynamic(() => import('@public/img/icons/icon-bible.svg')),
+						Icon: iconMap.icon_bible,
 						label: intl.formatMessage({
 							id: `header__navItemBible`,
 							defaultMessage: 'Bible',
@@ -111,7 +166,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'collections',
 			href: makeDiscoverCollectionsRoute(languageRoute),
-			Icon: dynamic(() => import('@public/img/icons/icon-collections.svg')),
+			Icon: iconMap.icon_collections,
 			label: intl.formatMessage({
 				id: `header__navItemCollections`,
 				defaultMessage: 'Collections',
@@ -121,7 +176,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'all',
 					href: makeDiscoverCollectionsRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-list-alt.svg')),
+					Icon: iconMap.fa_list_alt,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-all`,
 						defaultMessage: 'All Collections',
@@ -130,9 +185,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'sponsors',
 					href: makeSponsorListRoute(languageRoute),
-					Icon: dynamic(
-						() => import('@public/img/icons/fa-user-plus-heavy.svg')
-					),
+					Icon: iconMap.fa_user_plus_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-sponsors`,
 						defaultMessage: 'Sponsors',
@@ -141,7 +194,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'conferences',
 					href: makeConferenceListRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-calendar.svg')),
+					Icon: iconMap.fa_calendar,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-conferences`,
 						defaultMessage: 'Conferences',
@@ -150,7 +203,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'presenter',
 					href: makePresenterListRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-user-heavy.svg')),
+					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-presenters`,
 						defaultMessage: 'Presenters',
@@ -159,7 +212,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'stories',
 					href: makeStoryAlbumListPage(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-feather.svg')),
+					Icon: iconMap.fa_feather,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-stories`,
 						defaultMessage: 'Stories',
@@ -168,7 +221,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'books',
 					href: makeAudiobookListRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-book.svg')),
+					Icon: iconMap.fa_book,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-books`,
 						defaultMessage: 'Books',
@@ -177,7 +230,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'songs',
 					href: makeSongAlbumsListRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-music.svg')),
+					Icon: iconMap.fa_music,
 					label: intl.formatMessage({
 						id: `header__navItemCollections-songs`,
 						defaultMessage: 'Scripture Songs',
@@ -188,7 +241,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'presenters',
 			href: makePresenterListRoute(languageRoute),
-			Icon: dynamic(() => import('@public/img/icons/icon-account.svg')),
+			Icon: iconMap.icon_account,
 			label: intl.formatMessage({
 				id: `header__navItemPresenters`,
 				defaultMessage: 'Presenters',
@@ -197,7 +250,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'story',
 			href: makeAboutPage(languageRoute, 1),
-			Icon: dynamic(() => import('@public/img/icons/icon-our-story.svg')),
+			Icon: iconMap.icon_our_story,
 			label: intl.formatMessage({
 				id: `header__navItemStory`,
 				defaultMessage: 'Our Story',
@@ -206,7 +259,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'about',
 					href: makeAboutPage(languageRoute, 1),
-					Icon: dynamic(() => import('@public/img/icons/fa-seedling.svg')),
+					Icon: iconMap.fa_seedling,
 					label: intl.formatMessage({
 						id: `header__navItemStory`,
 						defaultMessage: 'Our Story',
@@ -215,7 +268,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'meettheteam',
 					href: makeAboutPage(languageRoute, 13),
-					Icon: dynamic(() => import('@public/img/icons/fa-users-heavy.svg')),
+					Icon: iconMap.fa_users_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-team`,
 						defaultMessage: 'The Team',
@@ -224,9 +277,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'purpose',
 					href: makeAboutPage(languageRoute, 7),
-					Icon: dynamic(
-						() => import('@public/img/icons/fa-bullseye-heavy.svg')
-					),
+					Icon: iconMap.fa_bullseye_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-purpose`,
 						defaultMessage: 'Our Purpose',
@@ -235,7 +286,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'spiritofav',
 					href: makeAboutPage(languageRoute, 12),
-					Icon: dynamic(() => import('@public/img/icons/fa-fire-heavy.svg')),
+					Icon: iconMap.fa_fire_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-spiritOfAudioVerse`,
 						defaultMessage: 'Spirit of AudioVerse',
@@ -244,7 +295,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'blog',
 					href: makeBlogPostListRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-align-left.svg')),
+					Icon: iconMap.fa_align_left,
 					label: intl.formatMessage({
 						id: `header__navItemStory-blog`,
 						defaultMessage: 'Blog',
@@ -253,7 +304,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'testimonials',
 					href: makeTestimoniesRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-comment-heavy.svg')),
+					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-testimonials`,
 						defaultMessage: 'Testimonials',
@@ -262,7 +313,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'donate',
 					href: makeDonateRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-heart-heavy.svg')),
+					Icon: iconMap.fa_heart_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemStory-donate`,
 						defaultMessage: 'Donate',
@@ -273,7 +324,7 @@ export function useNavigationItems(): INavigationItem[] {
 		{
 			key: 'contact',
 			href: makeContactRoute(languageRoute),
-			Icon: dynamic(() => import('@public/img/icons/icon-contact.svg')),
+			Icon: iconMap.icon_contact,
 			label: intl.formatMessage({
 				id: `header__navItemContact`,
 				defaultMessage: 'Contact',
@@ -282,7 +333,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'general',
 					href: makeContactRoute(languageRoute, '/general'),
-					Icon: dynamic(() => import('@public/img/icons/fa-inbox.svg')),
+					Icon: iconMap.fa_inbox,
 					label: intl.formatMessage({
 						id: `header__navItemContact-general`,
 						defaultMessage: 'General Contact',
@@ -291,7 +342,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'support',
 					href: makeContactRoute(languageRoute, '/support'),
-					Icon: dynamic(() => import('@public/img/icons/fa-comment-heavy.svg')),
+					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemContact-support`,
 						defaultMessage: 'Request Support',
@@ -300,7 +351,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'testimony',
 					href: makeTestimonySubmitRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-comment-heavy.svg')),
+					Icon: iconMap.fa_comment_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemContact-testimonial`,
 						defaultMessage: 'Share Testimonial',
@@ -314,7 +365,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'facebook',
 					href: 'https://www.facebook.com/AudioVerse',
-					Icon: dynamic(() => import('@public/img/icons/fa-facebook.svg')),
+					Icon: iconMap.fa_facebook,
 					label: intl.formatMessage({
 						id: `header__navItemContact-facebook`,
 						defaultMessage: 'Facebook',
@@ -324,7 +375,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'instagram',
 					href: 'https://www.instagram.com/audioverse/',
-					Icon: dynamic(() => import('@public/img/icons/fa-instagram.svg')),
+					Icon: iconMap.fa_instagram,
 					label: intl.formatMessage({
 						id: `header__navItemContact-instagram`,
 						defaultMessage: 'Instagram',
@@ -334,7 +385,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'twitter',
 					href: 'https://www.twitter.com/audioverse/',
-					Icon: dynamic(() => import('@public/img/icons/fa-twitter.svg')),
+					Icon: iconMap.fa_twitter,
 					label: intl.formatMessage({
 						id: `header__navItemContact-twitter`,
 						defaultMessage: 'Twitter',
@@ -344,7 +395,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'youtube',
 					href: 'https://www.youtube.com/user/AudioVerseMinistry',
-					Icon: dynamic(() => import('@public/img/icons/fa-youtube.svg')),
+					Icon: iconMap.fa_youtube,
 					label: intl.formatMessage({
 						id: `header__navItemContact-youtube`,
 						defaultMessage: 'YouTube',
@@ -355,7 +406,7 @@ export function useNavigationItems(): INavigationItem[] {
 		},
 		{
 			key: 'more',
-			Icon: dynamic(() => import('@public/img/icons/icon-more.svg')),
+			Icon: iconMap.icon_more,
 			label: intl.formatMessage({
 				id: `header__navItemMore`,
 				defaultMessage: 'More',
@@ -366,9 +417,7 @@ export function useNavigationItems(): INavigationItem[] {
 					key: 'help',
 					href: 'https://help.audioverse.org/',
 					isTargetBlank: true,
-					Icon: dynamic(
-						() => import('@public/img/icons/fa-question-circle.svg')
-					),
+					Icon: iconMap.fa_question_circle,
 					label: intl.formatMessage({
 						id: `header__navItemMore-help`,
 						defaultMessage: 'Get Help',
@@ -378,7 +427,7 @@ export function useNavigationItems(): INavigationItem[] {
 					key: 'store',
 					href: 'https://audioversestore.org',
 					isTargetBlank: true,
-					Icon: dynamic(() => import('@public/img/icons/fa-store.svg')),
+					Icon: iconMap.fa_store,
 					label: intl.formatMessage({
 						id: `header__navItemMore-store`,
 						defaultMessage: 'AudioVerse Store',
@@ -388,7 +437,7 @@ export function useNavigationItems(): INavigationItem[] {
 					key: 'ju',
 					href: 'https://journeysunscripted.com/',
 					isTargetBlank: true,
-					Icon: dynamic(() => import('@public/img/icons/fa-link.svg')),
+					Icon: iconMap.fa_link,
 					label: intl.formatMessage({
 						id: `header__navItemMore-ju`,
 						defaultMessage: 'Journeys Unscripted',
@@ -398,7 +447,7 @@ export function useNavigationItems(): INavigationItem[] {
 					key: 'swj',
 					href: 'https://startingwithjesus.com/',
 					isTargetBlank: true,
-					Icon: dynamic(() => import('@public/img/icons/fa-link.svg')),
+					Icon: iconMap.fa_link,
 					label: intl.formatMessage({
 						id: `header__navItemMore-swj`,
 						defaultMessage: 'Starting With Jesus',
@@ -407,9 +456,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'legal',
 					href: makeAboutPage(languageRoute, 3),
-					Icon: dynamic(
-						() => import('@public/img/icons/fa-landmark-heavy.svg')
-					),
+					Icon: iconMap.fa_landmark_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-legal`,
 						defaultMessage: 'Legal',
@@ -418,7 +465,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'privacy',
 					href: makeAboutPage(languageRoute, 4),
-					Icon: dynamic(() => import('@public/img/icons/fa-lock-heavy.svg')),
+					Icon: iconMap.fa_lock_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-privacy`,
 						defaultMessage: 'Privacy',
@@ -427,9 +474,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'terms',
 					href: makeAboutPage(languageRoute, 5),
-					Icon: dynamic(
-						() => import('@public/img/icons/fa-newspaper-heavy.svg')
-					),
+					Icon: iconMap.fa_newspaper_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemMore-terms`,
 						defaultMessage: 'Terms of Use',
@@ -465,7 +510,7 @@ export function useNavigationItems(): INavigationItem[] {
 				{
 					key: 'profile',
 					href: makeAccountProfileRoute(languageRoute),
-					Icon: dynamic(() => import('@public/img/icons/fa-user-heavy.svg')),
+					Icon: iconMap.fa_user_heavy,
 					label: intl.formatMessage({
 						id: `header__navItemUser-profile`,
 						defaultMessage: 'Profile',
@@ -475,7 +520,7 @@ export function useNavigationItems(): INavigationItem[] {
 					key: 'logout',
 					href: makeLogoutRoute(languageRoute),
 					onClick: ({ popSubmenu }) => popSubmenu(),
-					Icon: dynamic(() => import('@public/img/icons/icon-sign-out.svg')),
+					Icon: iconMap.icon_sign_out,
 					label: intl.formatMessage({
 						id: `header__navItemUser-logout`,
 						defaultMessage: 'Log Out',
