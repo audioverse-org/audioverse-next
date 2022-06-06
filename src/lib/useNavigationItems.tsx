@@ -1,8 +1,8 @@
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import Icon from '@components/atoms/icon';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import {
@@ -27,47 +27,73 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-const IconAlignLeft = () => <Icon src="/img/icons/fa-align-left.svg" />;
-const IconBook = () => <Icon src="/img/icons/fa-book.svg" />;
-const IconBookmark = () => <Icon src="/img/icons/fa-bookmark.svg" />;
-const IconBullseyeHeavy = () => <Icon src="/img/icons/fa-bullseye-heavy.svg" />;
-const IconCalendar = () => <Icon src="/img/icons/fa-calendar.svg" />;
-const IconCommentHeavy = () => <Icon src="/img/icons/fa-comment-heavy.svg" />;
-const IconFacebook = () => <Icon src="/img/icons/fa-facebook.svg" />;
-const IconFeather = () => <Icon src="/img/icons/fa-feather.svg" />;
-const IconFireHeavy = () => <Icon src="/img/icons/fa-fire-heavy.svg" />;
-const IconHeartHeavy = () => <Icon src="/img/icons/fa-heart-heavy.svg" />;
-const IconHistory = () => <Icon src="/img/icons/fa-history.svg" />;
-const IconInbox = () => <Icon src="/img/icons/fa-inbox.svg" />;
-const IconInstagram = () => <Icon src="/img/icons/fa-instagram.svg" />;
-const IconLandmark = () => <Icon src="/img/icons/fa-landmark-heavy.svg" />;
-const IconLink = () => <Icon src="/img/icons/fa-link.svg" />;
-const IconListAltHeavy = () => <Icon src="/img/icons/fa-list-alt.svg" />;
-const IconLock = () => <Icon src="/img/icons/fa-lock-heavy.svg" />;
-const IconMusic = () => <Icon src="/img/icons/fa-music.svg" />;
-const IconNewpaper = () => <Icon src="/img/icons/fa-newspaper-heavy.svg" />;
-const IconQuestionCircle = () => (
-	<Icon src="/img/icons/fa-question-circle.svg" />
+const IconAlignLeft = dynamic(
+	() => import('@public/img/icons/fa-align-left.svg')
 );
-const IconSeedling = () => <Icon src="/img/icons/fa-seedling.svg" />;
-const IconStore = () => <Icon src="/img/icons/fa-store.svg" />;
-const IconStream = () => <Icon src="/img/icons/fa-stream.svg" />;
-const IconTwitter = () => <Icon src="/img/icons/fa-twitter.svg" />;
-const IconUser = () => <Icon src="/img/icons/fa-user-heavy.svg" />;
-const IconUserPlusHeavy = () => (
-	<Icon src="/img/icons/fa-user-plus-heavy.svg" />
+const IconBook = dynamic(() => import('@public/img/icons/fa-book.svg'));
+const IconBookmark = dynamic(() => import('@public/img/icons/fa-bookmark.svg'));
+const IconBullseyeHeavy = dynamic(
+	() => import('@public/img/icons/fa-bullseye-heavy.svg')
 );
-const IconUsersHeavy = () => <Icon src="/img/icons/fa-users-heavy.svg" />;
-const IconYouTube = () => <Icon src="/img/icons/fa-youtube.svg" />;
-const IconAccount = () => <Icon src="/img/icons/icon-account.svg" />;
-const IconBible = () => <Icon src="/img/icons/icon-bible.svg" />;
-const IconBooks = () => <Icon src="/img/icons/icon-books.svg" />;
-const IconCollections = () => <Icon src="/img/icons/icon-collections.svg" />;
-const IconContact = () => <Icon src="/img/icons/icon-contact.svg" />;
-const IconMore = () => <Icon src="/img/icons/icon-more.svg" />;
-const IconOurStory = () => <Icon src="/img/icons/icon-our-story.svg" />;
-const IconSearch = () => <Icon src="/img/icons/icon-search.svg" />;
-const IconSignOut = () => <Icon src="/img/icons/icon-sign-out.svg" />;
+const IconCalendar = dynamic(() => import('@public/img/icons/fa-calendar.svg'));
+const IconCommentHeavy = dynamic(
+	() => import('@public/img/icons/fa-comment-heavy.svg')
+);
+const IconFacebook = dynamic(() => import('@public/img/icons/fa-facebook.svg'));
+const IconFeather = dynamic(() => import('@public/img/icons/fa-feather.svg'));
+const IconFireHeavy = dynamic(
+	() => import('@public/img/icons/fa-fire-heavy.svg')
+);
+const IconHeartHeavy = dynamic(
+	() => import('@public/img/icons/fa-heart-heavy.svg')
+);
+const IconHistory = dynamic(() => import('@public/img/icons/fa-history.svg'));
+const IconInbox = dynamic(() => import('@public/img/icons/fa-inbox.svg'));
+const IconInstagram = dynamic(
+	() => import('@public/img/icons/fa-instagram.svg')
+);
+const IconLandmark = dynamic(
+	() => import('@public/img/icons/fa-landmark-heavy.svg')
+);
+const IconLink = dynamic(() => import('@public/img/icons/fa-link.svg'));
+const IconListAltHeavy = dynamic(
+	() => import('@public/img/icons/fa-list-alt.svg')
+);
+const IconLock = dynamic(() => import('@public/img/icons/fa-lock-heavy.svg'));
+const IconMusic = dynamic(() => import('@public/img/icons/fa-music.svg'));
+const IconNewpaper = dynamic(
+	() => import('@public/img/icons/fa-newspaper-heavy.svg')
+);
+const IconQuestionCircle = dynamic(
+	() => import('@public/img/icons/fa-question-circle.svg')
+);
+const IconSeedling = dynamic(() => import('@public/img/icons/fa-seedling.svg'));
+const IconStore = dynamic(() => import('@public/img/icons/fa-store.svg'));
+const IconStream = dynamic(() => import('@public/img/icons/fa-stream.svg'));
+const IconTwitter = dynamic(() => import('@public/img/icons/fa-twitter.svg'));
+const IconUser = dynamic(() => import('@public/img/icons/fa-user-heavy.svg'));
+const IconUserPlusHeavy = dynamic(
+	() => import('@public/img/icons/fa-user-plus-heavy.svg')
+);
+const IconUsersHeavy = dynamic(
+	() => import('@public/img/icons/fa-users-heavy.svg')
+);
+const IconYouTube = dynamic(() => import('@public/img/icons/fa-youtube.svg'));
+const IconAccount = dynamic(() => import('@public/img/icons/icon-account.svg'));
+const IconBible = dynamic(() => import('@public/img/icons/icon-bible.svg'));
+const IconBooks = dynamic(() => import('@public/img/icons/icon-books.svg'));
+const IconCollections = dynamic(
+	() => import('@public/img/icons/icon-collections.svg')
+);
+const IconContact = dynamic(() => import('@public/img/icons/icon-contact.svg'));
+const IconMore = dynamic(() => import('@public/img/icons/icon-more.svg'));
+const IconOurStory = dynamic(
+	() => import('@public/img/icons/icon-our-story.svg')
+);
+const IconSearch = dynamic(() => import('@public/img/icons/icon-search.svg'));
+const IconSignOut = dynamic(
+	() => import('@public/img/icons/icon-sign-out.svg')
+);
 
 export type INavigationItem = {
 	key: string;
