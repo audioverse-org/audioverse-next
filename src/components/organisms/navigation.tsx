@@ -4,12 +4,12 @@ import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
+import NavItem from '@components/molecules/navItem';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
@@ -106,53 +106,9 @@ const Navigation = ({
 						</div>
 
 						<ul>
-							{navigationItems
-								.slice(0, -1)
-								.map(
-									({ Icon, key, label, href, children }: INavigationItem) => {
-										const inner = (
-											<>
-												{Icon && (
-													<span className={styles.icon}>
-														<Icon />
-													</span>
-												)}
-												<span className={styles.label}>{label}</span>
-											</>
-										);
-
-										return (
-											<li key={key}>
-												{href ? (
-													<ActiveLink
-														href={href}
-														activeClassName={styles.active}
-													>
-														<a className={styles.navLink}>{inner}</a>
-													</ActiveLink>
-												) : (
-													<a
-														className={styles.navLink}
-														onClick={() => setSubmenu(key)}
-													>
-														{inner}
-													</a>
-												)}
-												{children && (
-													<span
-														className={styles.iconDisclosure}
-														onClick={(e) => {
-															e.preventDefault();
-															setSubmenu(key);
-														}}
-													>
-														<IconDisclosure />
-													</span>
-												)}
-											</li>
-										);
-									}
-								)}
+							{navigationItems.slice(0, -1).map((item: INavigationItem) => (
+								<NavItem key={item.key} item={item} setSubmenu={setSubmenu} />
+							))}
 						</ul>
 
 						<Button

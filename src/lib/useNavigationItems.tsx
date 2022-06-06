@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import Icon from '@components/atoms/icon';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
 import {
@@ -25,43 +26,48 @@ import {
 	makeTestimonySubmitRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import IconAlignLeft from '@public/img/icons/fa-align-left.svg';
-import IconBook from '@public/img/icons/fa-book.svg';
-import IconBookmark from '@public/img/icons/fa-bookmark.svg';
-import IconBullseyeHeavy from '@public/img/icons/fa-bullseye-heavy.svg';
-import IconCalendar from '@public/img/icons/fa-calendar.svg';
-import IconCommentHeavy from '@public/img/icons/fa-comment-heavy.svg';
-import IconFacebook from '@public/img/icons/fa-facebook.svg';
-import IconFeather from '@public/img/icons/fa-feather.svg';
-import IconFireHeavy from '@public/img/icons/fa-fire-heavy.svg';
-import IconHeartHeavy from '@public/img/icons/fa-heart-heavy.svg';
-import IconHistory from '@public/img/icons/fa-history.svg';
-import IconInbox from '@public/img/icons/fa-inbox.svg';
-import IconInstagram from '@public/img/icons/fa-instagram.svg';
-import IconLandmark from '@public/img/icons/fa-landmark-heavy.svg';
-import IconLink from '@public/img/icons/fa-link.svg';
-import IconListAltHeavy from '@public/img/icons/fa-list-alt.svg';
-import IconLock from '@public/img/icons/fa-lock-heavy.svg';
-import IconMusic from '@public/img/icons/fa-music.svg';
-import IconNewpaper from '@public/img/icons/fa-newspaper-heavy.svg';
-import IconQuestionCircle from '@public/img/icons/fa-question-circle.svg';
-import IconSeedling from '@public/img/icons/fa-seedling.svg';
-import IconStore from '@public/img/icons/fa-store.svg';
-import IconStream from '@public/img/icons/fa-stream.svg';
-import IconTwitter from '@public/img/icons/fa-twitter.svg';
-import IconUser from '@public/img/icons/fa-user-heavy.svg';
-import IconUserPlusHeavy from '@public/img/icons/fa-user-plus-heavy.svg';
-import IconUsersHeavy from '@public/img/icons/fa-users-heavy.svg';
-import IconYouTube from '@public/img/icons/fa-youtube.svg';
-import IconAccount from '@public/img/icons/icon-account.svg';
-import IconBible from '@public/img/icons/icon-bible.svg';
-import IconBooks from '@public/img/icons/icon-books.svg';
-import IconCollections from '@public/img/icons/icon-collections.svg';
-import IconContact from '@public/img/icons/icon-contact.svg';
-import IconMore from '@public/img/icons/icon-more.svg';
-import IconOurStory from '@public/img/icons/icon-our-story.svg';
-import IconSearch from '@public/img/icons/icon-search.svg';
-import IconSignOut from '@public/img/icons/icon-sign-out.svg';
+
+const IconAlignLeft = () => <Icon src="/img/icons/fa-align-left.svg" />;
+const IconBook = () => <Icon src="/img/icons/fa-book.svg" />;
+const IconBookmark = () => <Icon src="/img/icons/fa-bookmark.svg" />;
+const IconBullseyeHeavy = () => <Icon src="/img/icons/fa-bullseye-heavy.svg" />;
+const IconCalendar = () => <Icon src="/img/icons/fa-calendar.svg" />;
+const IconCommentHeavy = () => <Icon src="/img/icons/fa-comment-heavy.svg" />;
+const IconFacebook = () => <Icon src="/img/icons/fa-facebook.svg" />;
+const IconFeather = () => <Icon src="/img/icons/fa-feather.svg" />;
+const IconFireHeavy = () => <Icon src="/img/icons/fa-fire-heavy.svg" />;
+const IconHeartHeavy = () => <Icon src="/img/icons/fa-heart-heavy.svg" />;
+const IconHistory = () => <Icon src="/img/icons/fa-history.svg" />;
+const IconInbox = () => <Icon src="/img/icons/fa-inbox.svg" />;
+const IconInstagram = () => <Icon src="/img/icons/fa-instagram.svg" />;
+const IconLandmark = () => <Icon src="/img/icons/fa-landmark-heavy.svg" />;
+const IconLink = () => <Icon src="/img/icons/fa-link.svg" />;
+const IconListAltHeavy = () => <Icon src="/img/icons/fa-list-alt.svg" />;
+const IconLock = () => <Icon src="/img/icons/fa-lock-heavy.svg" />;
+const IconMusic = () => <Icon src="/img/icons/fa-music.svg" />;
+const IconNewpaper = () => <Icon src="/img/icons/fa-newspaper-heavy.svg" />;
+const IconQuestionCircle = () => (
+	<Icon src="/img/icons/fa-question-circle.svg" />
+);
+const IconSeedling = () => <Icon src="/img/icons/fa-seedling.svg" />;
+const IconStore = () => <Icon src="/img/icons/fa-store.svg" />;
+const IconStream = () => <Icon src="/img/icons/fa-stream.svg" />;
+const IconTwitter = () => <Icon src="/img/icons/fa-twitter.svg" />;
+const IconUser = () => <Icon src="/img/icons/fa-user-heavy.svg" />;
+const IconUserPlusHeavy = () => (
+	<Icon src="/img/icons/fa-user-plus-heavy.svg" />
+);
+const IconUsersHeavy = () => <Icon src="/img/icons/fa-users-heavy.svg" />;
+const IconYouTube = () => <Icon src="/img/icons/fa-youtube.svg" />;
+const IconAccount = () => <Icon src="/img/icons/icon-account.svg" />;
+const IconBible = () => <Icon src="/img/icons/icon-bible.svg" />;
+const IconBooks = () => <Icon src="/img/icons/icon-books.svg" />;
+const IconCollections = () => <Icon src="/img/icons/icon-collections.svg" />;
+const IconContact = () => <Icon src="/img/icons/icon-contact.svg" />;
+const IconMore = () => <Icon src="/img/icons/icon-more.svg" />;
+const IconOurStory = () => <Icon src="/img/icons/icon-our-story.svg" />;
+const IconSearch = () => <Icon src="/img/icons/icon-search.svg" />;
+const IconSignOut = () => <Icon src="/img/icons/icon-sign-out.svg" />;
 
 export type INavigationItem = {
 	key: string;
