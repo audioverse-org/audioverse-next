@@ -4736,21 +4736,22 @@ enum RecordingContentScreeningStatus {
 	Awaiting final authorization (Screener consensus)
 	"""
 	APPROVED_PENDING_AUTHORIZATION
+		@deprecated(reason: "To be replaced by `PREAPPROVED`.")
 
 	"""
 	Awaiting screener consensus
 	"""
-	PENDING_CONSENSUS
+	PENDING_CONSENSUS @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting more evaluations
 	"""
-	PENDING_EVALUATIONS
+	PENDING_EVALUATIONS @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 
 	"""
 	Approved by pre-approval
@@ -4761,6 +4762,7 @@ enum RecordingContentScreeningStatus {
 	Awaiting final authorization (Pre-approved)
 	"""
 	PREAPPROVED_PENDING_AUTHORIZATION
+		@deprecated(reason: "To be replaced by `PREAPPROVED`.")
 
 	"""
 	Rejected by screener consensus
@@ -4839,12 +4841,12 @@ The legal screening statuses of a recording.
 enum RecordingLegalScreeningStatus {
 	ADMIN_OVERRIDE
 	APPROVED
-	PENDING
+	PENDING @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 	PREAPPROVED
 	REJECTED
 
@@ -5119,12 +5121,12 @@ The technical screening statuses of a recording.
 enum RecordingTechnicalScreeningStatus {
 	ADMIN_OVERRIDE
 	APPROVED
-	PENDING
+	PENDING @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 	REJECTED
 
 	"""
@@ -7374,10 +7376,10 @@ enum UserRole {
 	COMMUNICATIONS
 	CONTENT_SCREENER
 	EDITOR
-	EQUIPMENT
+	EQUIPMENT @deprecated(reason: "No longer used.")
 	LEGAL_SCREENER
-	MEDIAMANAGER
-	STATS
+	MEDIAMANAGER @deprecated(reason: "No longer used.")
+	STATS @deprecated(reason: "No longer used.")
 	TECHNICAL_SCREENER
 }
 

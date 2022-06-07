@@ -24,8 +24,6 @@ export default function HelpWidget(): JSX.Element {
 	useEffect(() => {
 		if (!beacon) return;
 
-		beacon('init', BEACON_ID);
-
 		const handleClose = (): void => {
 			setIsOpen(false);
 		};
@@ -38,10 +36,6 @@ export default function HelpWidget(): JSX.Element {
 	}, [beacon]);
 
 	useEffect(() => {
-		beacon && beacon('config', { labels });
-	}, [beacon, labels]);
-
-	useEffect(() => {
 		const d = data?.me?.user;
 		if (!d || !beacon) {
 			return;
@@ -50,7 +44,6 @@ export default function HelpWidget(): JSX.Element {
 		beacon('identify', {
 			email: d.email,
 			name: d.name,
-			avatar: d.image?.url || '',
 		});
 	}, [beacon, data]);
 
@@ -77,6 +70,8 @@ export default function HelpWidget(): JSX.Element {
 				onLoad={() => {
 					const b = getBeacon();
 					if (b) {
+						b('config', { labels });
+						b('init', BEACON_ID);
 						setBeacon(() => b);
 					}
 				}}
