@@ -70,18 +70,12 @@ describe('help widget', () => {
 		});
 
 		await act(async () => {
-			mockBeacon.mock.calls[1][2]();
+			mockBeacon.mock.calls[0][2]();
 		});
 
 		button.click();
 
 		expect(mockBeacon).not.toBeCalledWith('close');
-	});
-
-	it('initializes beacon', async () => {
-		await renderComponent();
-
-		expect(mockBeacon).toBeCalledWith('init', expect.any(String));
 	});
 
 	it('unsubscribes using specific callback', async () => {
@@ -101,7 +95,6 @@ describe('help widget', () => {
 			expect(mockBeacon).toBeCalledWith('identify', {
 				name: 'the_name',
 				email: 'the_email',
-				avatar: 'the_image_url',
 			});
 		});
 	});
@@ -146,19 +139,6 @@ describe('help widget', () => {
 		expect(router.events.off).toBeCalledWith(
 			'routeChangeComplete',
 			expect.any(Function)
-		);
-	});
-
-	it('translates strings', async () => {
-		await renderComponent();
-
-		expect(mockBeacon).toBeCalledWith(
-			'config',
-			expect.objectContaining({
-				labels: expect.objectContaining({
-					suggestedForYou: expect.any(String),
-				}),
-			})
 		);
 	});
 

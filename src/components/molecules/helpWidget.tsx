@@ -16,7 +16,7 @@ const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 
 export default function HelpWidget(): JSX.Element {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [beacon, setBeacon] = useState<Beacon>();
+	const [beacon, setBeacon] = useState<Beacon>(getBeacon);
 	const { data } = useGetHelpWidgetDataQuery();
 	const router = useRouter();
 	const labels = useHelpScoutLabels();
