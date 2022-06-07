@@ -9,7 +9,7 @@ import {
 } from '@lib/generated/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
-import IconLike from '../../../../public/img/icon-like-light.svg';
+import IconLike from '../../../../public/img/icons/icon-like-light.svg';
 import Button from '../button';
 
 import styles from './recordingSequenceHat.module.scss';

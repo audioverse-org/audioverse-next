@@ -34,10 +34,10 @@ import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { makeBibleMusicRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-import IconBlogLight from '../../../public/img/icon-blog-light-small.svg';
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconDownload from '../../../public/img/icon-download.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
+import IconBlogLight from '../../../public/img/icons/icon-blog-light-small.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
+import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './recording.module.scss';
 

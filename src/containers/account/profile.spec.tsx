@@ -66,6 +66,11 @@ function loadData() {
 describe('profile page', () => {
 	beforeEach(() => {
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		try {
+			(fetchApi as jest.Mock).mockReset();
+		} catch {
+			// ignore
+		}
 	});
 
 	it('dehydrates user', async () => {
@@ -203,6 +208,7 @@ describe('profile page', () => {
 			query: {},
 		});
 		Cookie.get = jest.fn().mockReturnValue({});
+		(fetchApi as jest.Mock).mockResolvedValue({});
 
 		await renderWithProviders(<Profile />, undefined);
 

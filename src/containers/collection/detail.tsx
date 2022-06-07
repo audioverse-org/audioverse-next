@@ -35,7 +35,7 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ForwardIcon from '../../../public/img/icon-forward-light.svg';
+import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
 

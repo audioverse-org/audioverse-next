@@ -31,8 +31,8 @@ import {
 import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-import IconBlog from '../../../public/img/icon-blog-light-small.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
+import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
 
 import styles from './book.module.scss';
 

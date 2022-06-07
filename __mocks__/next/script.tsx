@@ -1,7 +1,3 @@
 import React from 'react';
 
-function Script() {
-	return <div />;
-}
-
-export default Script;
+export default jest.fn(() => <div />);

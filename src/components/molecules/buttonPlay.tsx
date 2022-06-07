@@ -6,10 +6,10 @@ import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import IconPauseLarge from '../../../public/img/icon-pause-large.svg';
-import IconPause from '../../../public/img/icon-pause-medium.svg';
-import IconPlayLarge from '../../../public/img/icon-play-large.svg';
-import IconPlay from '../../../public/img/icon-play-medium.svg';
+import IconPauseLarge from '../../../public/img/icons/icon-pause-large.svg';
+import IconPause from '../../../public/img/icons/icon-pause-medium.svg';
+import IconPlayLarge from '../../../public/img/icons/icon-play-large.svg';
+import IconPlay from '../../../public/img/icons/icon-play-medium.svg';
 
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';

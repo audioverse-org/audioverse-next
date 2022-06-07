@@ -13,6 +13,7 @@ function makeRouter(router_: Partial<NextRouter> = {}) {
 	return {
 		events: {
 			on: jest.fn(),
+			off: jest.fn(),
 		},
 		push: jest.fn().mockResolvedValue(true),
 		prefetch: async () => undefined,

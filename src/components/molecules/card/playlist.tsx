@@ -9,8 +9,8 @@ import { CardPlaylistFragment } from '@lib/generated/graphql';
 import { makePlaylistDetailRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ListIcon from '../../../../public/img/fa-list.svg';
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
+import ListIcon from '../../../../public/img/icons/fa-list.svg';
+import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
 import IconButton from '../iconButton';
 import TeaseRecordingStack from '../teaseRecordingStack';
 import TypeLockup from '../typeLockup';

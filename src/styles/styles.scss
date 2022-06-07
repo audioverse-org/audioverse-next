@@ -1,14 +1,9 @@
 @use 'mixins.scss';
 
 @import 'inter.scss';
-
-// START normalize.css
-
 @import '../../node_modules/normalize.css/normalize.css';
-
-// END normalize.css
-
 @import './common.scss';
+@import '../components/molecules/button.module.scss';
 
 html {
 	@include mixins.sansFontFamily();
@@ -20,7 +15,7 @@ html {
 		color: $ts-cream;
 		background: $ts-dark;
 	}
-	transition-property: color, border-color, background-color;
+	transition-property: color, border-color, background-color, filter;
 	transition-duration: $transition-quick;
 	transition-timing-function: linear;
 }
@@ -197,5 +192,25 @@ p {
 
 .video-js {
 	.vjs-poster {
+	}
+}
+
+/* HelpScout Customizations */
+
+$close-button-height: 30px;
+$beacon-height: $button-height + $close-button-height + $grid-gap * 3;
+
+.BeaconContainer {
+	@media (min-width: $breakpoint-lg) {
+		right: $grid-gap !important;
+		bottom: $button-height + $grid-gap * 2 !important;
+		height: calc(100% - #{$beacon-height}) !important;
+	}
+}
+
+.body--with-miniplayer .BeaconContainer {
+	@media (min-width: $breakpoint-lg) {
+		bottom: $miniplayer-height + $button-height + $grid-gap * 2 !important;
+		height: calc(100% - #{$miniplayer-height + $beacon-height}) !important;
 	}
 }
