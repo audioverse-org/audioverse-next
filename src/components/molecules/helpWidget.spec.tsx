@@ -11,10 +11,16 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 
 jest.mock('next/script');
 
-const renderComponent = buildRenderer(HelpWidget);
-
 const mockGetBeacon = getBeacon as jest.Mock;
 const mockBeacon = jest.fn() as jest.Mock;
+
+const renderComponent = buildRenderer(HelpWidget);
+const runOnLoad = () => {
+	const props = (Script as jest.Mock).mock.calls[0][0];
+	act(() => {
+		props.onLoad();
+	});
+};
 
 function loadData() {
 	when(fetchApi)
@@ -70,7 +76,7 @@ describe('help widget', () => {
 		});
 
 		await act(async () => {
-			mockBeacon.mock.calls[1][2]();
+			mockBeacon.mock.calls[0][2]();
 		});
 
 		button.click();
@@ -80,6 +86,8 @@ describe('help widget', () => {
 
 	it('initializes beacon', async () => {
 		await renderComponent();
+
+		runOnLoad();
 
 		expect(mockBeacon).toBeCalledWith('init', expect.any(String));
 	});
@@ -101,7 +109,6 @@ describe('help widget', () => {
 			expect(mockBeacon).toBeCalledWith('identify', {
 				name: 'the_name',
 				email: 'the_email',
-				avatar: 'the_image_url',
 			});
 		});
 	});
@@ -151,6 +158,8 @@ describe('help widget', () => {
 
 	it('translates strings', async () => {
 		await renderComponent();
+
+		runOnLoad();
 
 		expect(mockBeacon).toBeCalledWith(
 			'config',
