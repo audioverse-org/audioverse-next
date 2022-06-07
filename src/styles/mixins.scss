@@ -6,12 +6,8 @@
 	}
 }
 
-// ********************
-// fadeIn
-// ********************
 // https://gist.github.com/chasewoodford/2939636
-$prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
-@mixin keyframe-fadeIn {
+@keyframes fadeIn {
 	0% {
 		opacity: 0;
 	}
@@ -19,26 +15,6 @@ $prefix: '-moz-', '-webkit-', '-o-', '-ms-', '';
 		opacity: 1;
 	}
 }
-@-moz-keyframes fadeIn {
-	@include keyframe-fadeIn;
+@mixin fadeIn($duration) {
+	animation: fadeIn $duration;
 }
-@-webkit-keyframes fadeIn {
-	@include keyframe-fadeIn;
-}
-@-o-keyframes fadeIn {
-	@include keyframe-fadeIn;
-}
-@-ms-keyframes fadeIn {
-	@include keyframe-fadeIn;
-}
-@keyframes fadeIn {
-	@include keyframe-fadeIn;
-}
-@mixin fadeIn($arg) {
-	$keyframe-name: fadeIn;
-	$duration: $arg;
-	@each $p in $prefix {
-		#{$p}animation: $keyframe-name $duration;
-	}
-}
-// e.g. @include fadeIn( 2s );

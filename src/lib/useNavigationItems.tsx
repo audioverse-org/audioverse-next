@@ -39,7 +39,6 @@ export type INavigationItem = {
 	childNode?: JSX.Element;
 };
 
-// TODO: Find a way to reduce boilerplate without increasing bundle size
 const iconMap = {
 	icon_search: dynamic(() => import('@public/img/icons/icon-search.svg')),
 	icon_books: dynamic(() => import('@public/img/icons/icon-books.svg')),
