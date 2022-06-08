@@ -4,7 +4,6 @@ import { resetAllWhenMocks } from 'jest-when';
 
 jest.mock('@lib/api/fetchApi');
 jest.mock('video.js');
-jest.mock('@lib/getBeacon');
 
 // WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
 beforeAll(() => {

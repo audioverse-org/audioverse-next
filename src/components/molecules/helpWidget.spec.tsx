@@ -6,12 +6,11 @@ import Script from 'next/script';
 import HelpWidget from '@components/molecules/helpWidget';
 import { fetchApi } from '@lib/api/fetchApi';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
-import getBeacon from '@lib/getBeacon';
 import { buildRenderer } from '@lib/test/buildRenderer';
+import filterByExpectation from '@lib/test/getMatchingCall';
 
 jest.mock('next/script');
 
-const mockGetBeacon = getBeacon as jest.Mock;
 const mockBeacon = jest.fn() as jest.Mock;
 
 const renderComponent = buildRenderer(HelpWidget);
@@ -40,11 +39,13 @@ function loadData() {
 
 describe('help widget', () => {
 	beforeEach(() => {
-		mockGetBeacon.mockReturnValue(mockBeacon);
+		window.Beacon = mockBeacon;
 	});
 
 	it('opens widget on click', async () => {
 		await renderComponent();
+
+		runOnLoad();
 
 		const button = await screen.findByRole('button');
 
@@ -58,6 +59,8 @@ describe('help widget', () => {
 	it('closes widget on second click', async () => {
 		await renderComponent();
 
+		runOnLoad();
+
 		const button = screen.getByRole('button');
 		button.click();
 		button.click();
@@ -68,6 +71,8 @@ describe('help widget', () => {
 	it('catches widget close event', async () => {
 		await renderComponent();
 
+		runOnLoad();
+
 		const button = screen.getByRole('button');
 		button.click();
 
@@ -75,8 +80,13 @@ describe('help widget', () => {
 			expect(mockBeacon).toBeCalledWith('on', 'close', expect.any(Function));
 		});
 
+		const matches = filterByExpectation(
+			mockBeacon.mock.calls,
+			expect.arrayContaining(['on', 'close', expect.any(Function)])
+		);
+
 		await act(async () => {
-			mockBeacon.mock.calls[0][2]();
+			matches[matches.length - 1][2]();
 		});
 
 		button.click();
@@ -95,6 +105,8 @@ describe('help widget', () => {
 	it('unsubscribes using specific callback', async () => {
 		const { unmount } = await renderComponent();
 
+		runOnLoad();
+
 		unmount();
 
 		expect(mockBeacon).toBeCalledWith('off', 'close', expect.any(Function));
@@ -104,6 +116,8 @@ describe('help widget', () => {
 		loadData();
 
 		await renderComponent();
+
+		runOnLoad();
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('identify', {
@@ -118,22 +132,33 @@ describe('help widget', () => {
 
 		await renderComponent();
 
+		runOnLoad();
+
+		await screen.findByRole('button');
+
 		const calls = (router.events.on as jest.Mock).mock.calls;
 
 		await waitFor(() => {
 			expect(router.events.on).toBeCalled();
 		});
 
-		const callback = calls[0][1];
+		const matches = filterByExpectation(
+			calls,
+			expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
+		);
+
+		const callback = matches[matches.length - 1][1];
 
 		window.document.title = 'the_title';
 
 		callback('the_url');
 
-		expect(mockBeacon).toBeCalledWith('event', {
-			type: 'page-viewed',
-			url: 'the_url',
-			title: 'the_title',
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('event', {
+				type: 'page-viewed',
+				url: 'the_url',
+				title: 'the_title',
+			});
 		});
 	});
 
@@ -172,13 +197,13 @@ describe('help widget', () => {
 	});
 
 	it('handles unset beacon', async () => {
-		mockGetBeacon.mockReturnValue(undefined);
+		window.Beacon = undefined;
 
 		await expect(renderComponent()).resolves.not.toThrow();
 	});
 
 	it('renders script to load beacon', async () => {
-		mockGetBeacon.mockReturnValue(undefined);
+		window.Beacon = undefined;
 
 		await renderComponent();
 
