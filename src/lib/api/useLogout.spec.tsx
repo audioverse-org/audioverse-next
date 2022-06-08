@@ -1,13 +1,11 @@
 import React from 'react';
 
 import { useLogout } from '@lib/api/useLogout';
-import getBeacon from '@lib/getBeacon';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
 const mockBeacon = jest.fn();
-const mockGetBeacon = getBeacon as jest.Mock;
 
-mockGetBeacon.mockImplementation(() => mockBeacon);
+window.Beacon = mockBeacon;
 
 const Component = () => {
 	useLogout();

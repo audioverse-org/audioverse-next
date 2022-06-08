@@ -201,7 +201,7 @@ $close-button-height: 30px;
 $beacon-height: $button-height + $close-button-height + $grid-gap * 3;
 
 .BeaconContainer {
-	@media (min-width: $breakpoint-lg) {
+	@media (min-width: 451px) {
 		right: $grid-gap !important;
 		bottom: $button-height + $grid-gap * 2 !important;
 		height: calc(100% - #{$beacon-height}) !important;

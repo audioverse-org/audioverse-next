@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 
 import { clearSessionToken } from '@lib/cookies';
-import getBeacon from '@lib/getBeacon';
+import isServerSide from '@lib/isServerSide';
 
 import { resetUserQueries } from './login';
 
@@ -9,8 +9,10 @@ export function useLogout(): Promise<void> {
 	const queryClient = useQueryClient();
 
 	clearSessionToken();
-	const beacon = getBeacon();
-	beacon && beacon('logout');
+
+	if (!isServerSide()) {
+		window.Beacon && window.Beacon('logout');
+	}
 
 	return resetUserQueries(queryClient);
 }
