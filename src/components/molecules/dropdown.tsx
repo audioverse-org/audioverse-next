@@ -14,7 +14,7 @@ type Props = {
 	children?: ReactNode | ((handleClose: () => void) => ReactNode);
 };
 
-const LazyMenu = dynamic(() => import('@material-ui/core/Menu'));
+const LazyMenu = dynamic(() => import('@mui/material/Menu'));
 
 export default function Dropdown({
 	id,
@@ -45,7 +45,6 @@ export default function Dropdown({
 				onClose={handleClose}
 				keepMounted
 				anchorEl={anchorEl}
-				getContentAnchorEl={null}
 				anchorOrigin={{
 					vertical: 'bottom',
 					horizontal: alignment,

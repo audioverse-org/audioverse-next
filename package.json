@@ -30,7 +30,9 @@
     "svgo": "svgo -f ./public/img/icons-raw -o ./public/img/icons"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.3",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.8.3",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
     "dayjs": "^1.10.7",
