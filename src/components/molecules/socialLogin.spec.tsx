@@ -4,8 +4,8 @@ import { when } from 'jest-when';
 import React from 'react';
 
 import SocialLogin from '@components/molecules/socialLogin';
+import { RegisterSocialDocument } from '@containers/account/register.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import { RegisterSocialDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
 describe('social login', () => {

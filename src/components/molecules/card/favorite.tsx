@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardFavoriteFragment } from '@lib/generated/graphql';
+import { CardFavoriteFragment } from '@components/molecules/card/favorite.gql';
 
 import CardFavoriteEntity from './favoriteEntity';
 

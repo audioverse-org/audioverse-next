@@ -10,7 +10,7 @@ import SponsorConferences, {
 import {
 	getSponsorConferencesPageData,
 	getSponsorConferencesPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/sponsor/conferences.gql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';

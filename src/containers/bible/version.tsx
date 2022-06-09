@@ -15,9 +15,9 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import Tease from '@components/molecules/tease';
+import { GetAudiobibleVersionDataQuery } from '@containers/bible/version.gql';
 import { IBibleVersion } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import { GetAudiobibleVersionDataQuery } from '@lib/generated/graphql';
 
 import styles from './version.module.scss';
 

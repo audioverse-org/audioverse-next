@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Slider from '@components/organisms/slider';
-import { TestimoniesFragment } from '@lib/generated/graphql';
+import { TestimoniesFragment } from '@components/organisms/testimonies.gql';
 
 import styles from './testimonies.module.scss';
 

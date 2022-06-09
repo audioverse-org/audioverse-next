@@ -4,9 +4,7 @@ import { __loadQuery } from 'next/router';
 import {
 	GetDiscoverPageDataDocument,
 	GetDiscoverPageDataQuery,
-	RecordingContentType,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@containers/discover.gql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '@pages/[language]/discover';

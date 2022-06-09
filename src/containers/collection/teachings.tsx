@@ -6,15 +6,13 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { CollectionPivotFragment } from '@containers/collection/pivot.gql';
 import { BaseColors } from '@lib/constants';
-import {
-	CollectionPivotFragment,
-	GetCollectionTeachingsPageDataQuery,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeCollectionTeachingsRoute } from '@lib/routes';
 
 import CollectionPivot from './pivot';
+import { GetCollectionTeachingsPageDataQuery } from './teachings.gql';
 
 export type CollectionTeachingsProps = PaginatedProps<
 	NonNullable<

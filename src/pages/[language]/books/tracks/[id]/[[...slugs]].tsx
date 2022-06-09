@@ -7,12 +7,12 @@ import {
 import AudiobookTrackDetail, {
 	AudiobookTrackDetailProps,
 } from '@containers/audiobook/tracks/detail';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getAudiobookTrackDetailData,
 	getAudiobookTrackDetailStaticPaths,
-} from '@lib/generated/graphql';
+} from '@containers/audiobook/tracks/detail.gql';
+import { IBaseProps } from '@containers/base';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

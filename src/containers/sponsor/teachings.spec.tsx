@@ -1,12 +1,11 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSponsorTeachingsPageDataDocument,
 	GetSponsorTeachingsPathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+} from '@containers/sponsor/teachings.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SponsorTeachings, {

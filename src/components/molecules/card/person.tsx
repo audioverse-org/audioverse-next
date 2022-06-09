@@ -7,9 +7,9 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
+import { CardPersonFragment } from '@components/molecules/card/person.gql';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { CardPersonFragment } from '@lib/generated/graphql';
 
 import ButtonFavorite from '../buttonFavorite';
 import PersonTypeLockup from '../personTypeLockup';

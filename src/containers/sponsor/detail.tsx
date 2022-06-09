@@ -21,9 +21,9 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
+import { GetSponsorDetailPageDataQuery } from '@containers/sponsor/detail.gql';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
-import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeSponsorConferencesRoute,
 	makeSponsorFeedRoute,

@@ -6,10 +6,7 @@ import he from 'he';
 import { GetServerSidePropsContext } from 'next';
 import striptags from 'striptags';
 
-import {
-	GenerateFeedFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import { GenerateFeedFragment } from '@lib/generateFeed.gql';
 
 import getIntl from './getIntl';
 

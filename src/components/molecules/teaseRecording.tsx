@@ -8,13 +8,10 @@ import Heading2 from '@components/atoms/heading2';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
+import { TeaseRecordingFragment } from '@components/molecules/teaseRecording.gql';
+import { AndMiniplayerFragment } from '@components/templates/andMiniplayer.gql';
 import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import {
-	AndMiniplayerFragment,
-	RecordingContentType,
-	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 

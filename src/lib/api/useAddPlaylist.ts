@@ -3,7 +3,7 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 import { QueryKey, useQueryClient } from 'react-query';
 
-import { useAddPlaylistMutation } from '@lib/generated/graphql';
+import { useAddPlaylistMutation } from '@lib/api/useAddPlaylist.gql';
 import { useLanguageId } from '@lib/useLanguageId';
 
 interface MutateVariables {

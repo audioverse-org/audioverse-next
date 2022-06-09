@@ -6,7 +6,7 @@ import CardRecording from '@components/molecules/card/recording';
 import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
 import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
+import { GetSermonListPageDataQuery } from '@containers/sermon/list.gql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeDiscoverRoute,

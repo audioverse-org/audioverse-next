@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import Blog, { BlogProps } from '@containers/blog';
-import { getBlogPageData, getBlogPathsData } from '@lib/generated/graphql';
+import { getBlogPageData, getBlogPathsData } from '@containers/blog.gql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';

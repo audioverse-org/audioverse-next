@@ -9,7 +9,6 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { BaseColors } from '@lib/constants';
-import { SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 
@@ -17,6 +16,7 @@ import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
 
 import 'video.js/dist/video-js.css';
+
 import styles from './miniplayer.module.scss';
 
 export default function Miniplayer(): JSX.Element | null {

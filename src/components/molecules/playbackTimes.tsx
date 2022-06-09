@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PlayerFragment } from '@lib/generated/graphql';
+import { PlayerFragment } from '@components/molecules/player.gql';
 import { useFormattedTime } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 

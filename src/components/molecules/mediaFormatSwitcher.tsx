@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { PlayerFragment } from '@lib/generated/graphql';
+import { PlayerFragment } from '@components/molecules/player.gql';
 import hasVideo from '@lib/hasVideo';
 import usePlaybackSession from '@lib/usePlaybackSession';
 

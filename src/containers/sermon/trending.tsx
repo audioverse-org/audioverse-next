@@ -7,7 +7,7 @@ import ButtonBack from '@components/molecules/buttonBack';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
-import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
+import { GetTrendingTeachingsPageDataQuery } from '@containers/sermon/trending.gql';
 import { makeDiscoverRoute, makeTrendingSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

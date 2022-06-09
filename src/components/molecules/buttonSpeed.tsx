@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
+import { AndMiniplayerFragment } from '@components/templates/andMiniplayer.gql';
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import { isBackgroundColorDark } from './buttonPlay';

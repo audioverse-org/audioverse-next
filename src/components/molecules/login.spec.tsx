@@ -5,8 +5,8 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import Login from '@components/molecules/login';
+import { LoginForgotPasswordDocument } from '@components/molecules/login.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 

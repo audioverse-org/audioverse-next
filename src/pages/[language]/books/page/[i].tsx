@@ -10,7 +10,7 @@ import AudiobooksList, {
 import {
 	getAudiobookListPageData,
 	getAudiobookListPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/audiobook/list.gql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';

@@ -5,14 +5,13 @@ import {
 } from 'next';
 
 import { Recording } from '@components/organisms/recording';
+import { RecordingFragment } from '@components/organisms/recording.gql';
 import { IBaseProps } from '@containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getAudiobibleBookDetailData,
 	getAudiobibleBookPathsData,
-	RecordingContentType,
-	RecordingFragment,
-} from '@lib/generated/graphql';
+} from '@containers/bible/book.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default Recording;

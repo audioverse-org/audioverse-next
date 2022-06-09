@@ -1,4 +1,5 @@
-import { recordingFavorite, recordingUnfavorite } from '@lib/generated/graphql';
+import { recordingFavorite } from '@lib/api/recordingFavorite.gql';
+import { recordingUnfavorite } from '@lib/api/recordingUnfavorite.gql';
 
 export function setRecordingFavorited(
 	id: number | string,

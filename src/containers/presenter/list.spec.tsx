@@ -1,11 +1,11 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetPresenterListPageDataDocument,
 	GetPresenterListPathsDataDocument,
-} from '@lib/generated/graphql';
+} from '@containers/presenter/list.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,

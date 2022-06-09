@@ -8,11 +8,11 @@ import { IBaseProps } from '@containers/base';
 import CollectionDetail, {
 	CollectionDetailProps,
 } from '@containers/collection/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getCollectionDetailPageData,
 	getCollectionDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/collection/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

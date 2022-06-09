@@ -4,11 +4,11 @@ import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
-} from '@lib/generated/graphql';
+} from '@containers/account/register.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';

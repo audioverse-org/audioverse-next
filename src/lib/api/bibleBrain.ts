@@ -1,6 +1,6 @@
 import sortBy from 'lodash/sortBy';
 
-import { getBibleBookContent } from '@lib/generated/graphql';
+import { getBibleBookContent } from '@lib/api/bibleContent.gql';
 
 const API_URL = 'https://4.dbt.io/api';
 const API_KEY = process.env.BIBLE_BRAIN_KEY;

@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import ReleaseDetail, { ReleaseDetailProps } from '@containers/release/detail';
-import { REVALIDATE } from '@lib/constants';
 import {
 	getMediaReleaseFormsPageData,
 	getMediaReleaseFormsPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/release/detail.gql';
+import { REVALIDATE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { makeReleaseRoute } from '@lib/routes';
 

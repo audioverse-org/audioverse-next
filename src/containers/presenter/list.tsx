@@ -9,7 +9,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
+import { GetPresenterListPageDataQuery } from '@containers/presenter/list.gql';
 import {
 	makeDiscoverCollectionsRoute,
 	makePresenterListRoute,

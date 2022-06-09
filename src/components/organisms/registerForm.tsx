@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Button from '@components/molecules/button';
 import ButtonGuest from '@components/molecules/buttonGuest';
 import Input from '@components/molecules/form/input';
+import { useRegisterMutation } from '@containers/account/register.gql';
 import { setSessionToken } from '@lib/cookies';
-import { useRegisterMutation } from '@lib/generated/graphql';
 
 import styles from './registerForm.module.scss';
 

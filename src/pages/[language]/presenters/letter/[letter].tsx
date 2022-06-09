@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Presenters, { PresentersProps } from '@containers/presenter/list';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getPresenterListPageData,
 	getPresenterListPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/presenter/list.gql';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';

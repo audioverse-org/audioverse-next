@@ -12,7 +12,7 @@ import Textarea from '@components/molecules/form/textarea';
 import {
 	GetMediaReleaseFormsPageDataQuery,
 	useSubmitMediaReleaseFormMutation,
-} from '@lib/generated/graphql';
+} from '@containers/release/detail.gql';
 
 import styles from './detail.module.scss';
 

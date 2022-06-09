@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 
 import TypeLockup from './typeLockup';

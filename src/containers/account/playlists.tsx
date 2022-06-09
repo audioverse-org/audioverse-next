@@ -8,7 +8,7 @@ import Input from '@components/molecules/form/input';
 import {
 	useAddAccountPlaylistMutation,
 	useGetAccountPlaylistsPageDataQuery,
-} from '@lib/generated/graphql';
+} from '@containers/account/playlists.gql';
 import { useLanguageId } from '@lib/useLanguageId';
 
 // TODO: use this code when building out playlist management

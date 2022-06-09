@@ -11,13 +11,13 @@ import Checkbox from '@components/molecules/form/checkbox';
 import Input from '@components/molecules/form/input';
 import AccountNav from '@components/organisms/accountNav';
 import Modal from '@components/organisms/modal';
-import { refetchUserQueries, resetUserQueries } from '@lib/api/login';
-import { clearSessionToken } from '@lib/cookies';
 import {
 	useDeleteAccountMutation,
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
-} from '@lib/generated/graphql';
+} from '@containers/account/profile.gql';
+import { refetchUserQueries, resetUserQueries } from '@lib/api/login';
+import { clearSessionToken } from '@lib/cookies';
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -203,7 +203,7 @@ function Profile(): JSX.Element {
 									setMustAcknowledgeDisclosures(true);
 								} else {
 									setMustAcknowledgeDisclosures(false);
-									deleteAccountMutate({ id: data?.me?.user.id as number });
+									deleteAccountMutate({ id: data?.me?.user.id as string });
 								}
 							}}
 							type="super"

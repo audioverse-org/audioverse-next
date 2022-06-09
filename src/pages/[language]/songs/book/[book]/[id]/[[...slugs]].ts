@@ -8,8 +8,8 @@ import { IBaseProps } from '@containers/base';
 import SongBookTrack, {
 	SongBookTrackProps,
 } from '@containers/song/books/track';
+import { getBookSongDetailData } from '@containers/song/books/track.gql';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getBookSongDetailData } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 
 export default SongBookTrack;

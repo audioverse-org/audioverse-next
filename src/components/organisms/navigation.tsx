@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
+import { useGetWithAuthGuardDataQuery } from '@components/HOCs/withAuthGuard.gql';
 import Button from '@components/molecules/button';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
@@ -13,7 +14,6 @@ import NavItem from '@components/molecules/navItem';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
-import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';

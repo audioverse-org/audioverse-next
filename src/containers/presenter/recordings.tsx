@@ -7,11 +7,9 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
+import { PresenterPivotFragment } from '@containers/presenter/pivot.gql';
+import { GetPresenterRecordingsPageDataQuery } from '@containers/presenter/recordings.gql';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterRecordingsPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makePresenterFeedRoute,

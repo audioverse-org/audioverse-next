@@ -6,11 +6,9 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { PresenterPivotFragment } from '@containers/presenter/pivot.gql';
+import { GetPresenterSequencesPageDataQuery } from '@containers/presenter/sequences.gql';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterSequencesPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makePresenterSequencesRoute } from '@lib/routes';
 

@@ -1,4 +1,4 @@
-import { RecordingFragment } from './generated/graphql';
+import { RecordingFragment } from '@components/organisms/recording.gql';
 
 export default function hasVideo(
 	recording: Pick<RecordingFragment, 'videoStreams' | 'videoFiles'>

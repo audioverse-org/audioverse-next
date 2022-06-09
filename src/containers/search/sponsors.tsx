@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardSponsor from '@components/molecules/card/sponsor';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSearchResultsSponsorsQuery } from '@lib/generated/graphql';
+import { GetSearchResultsSponsorsQuery } from '@containers/search/sponsors.gql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSearchRoute, makeSearchSponsorsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';

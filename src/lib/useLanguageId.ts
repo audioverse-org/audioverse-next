@@ -1,4 +1,3 @@
-import { Language } from '@lib/generated/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

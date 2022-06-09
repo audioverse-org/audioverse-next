@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getCollectionFeedData } from '@lib/generated/graphql';
+import { getCollectionFeedData } from '@containers/collection/detail.gql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

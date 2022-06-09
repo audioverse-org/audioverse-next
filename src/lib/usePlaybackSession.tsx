@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
+	AndMiniplayerFragment,
+	useGetRecordingPlaybackProgressQuery,
+} from '@components/templates/andMiniplayer.gql';
+import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
 } from '@components/templates/andPlaybackContext';
-import {
-	AndMiniplayerFragment,
-	useGetRecordingPlaybackProgressQuery,
-} from '@lib/generated/graphql';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;

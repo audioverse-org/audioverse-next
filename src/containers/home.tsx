@@ -18,7 +18,6 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
-import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
@@ -34,6 +33,7 @@ import IconBell from '../../public/img/icons/fa-bell.svg';
 import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '../../public/img/players.jpeg';
 
+import { GetHomeStaticPropsQuery } from './home.gql';
 import styles from './home.module.scss';
 
 export type HomeProps = {

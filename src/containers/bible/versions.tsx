@@ -8,8 +8,8 @@ import CardCollection from '@components/molecules/card/collection';
 import CardMasonry from '@components/molecules/cardMasonry';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Tease from '@components/molecules/tease';
+import { GetAudiobibleVersionsDataQuery } from '@containers/bible/versions.gql';
 import { IBibleVersion } from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataQuery } from '@lib/generated/graphql';
 
 import styles from './versions.module.scss';
 

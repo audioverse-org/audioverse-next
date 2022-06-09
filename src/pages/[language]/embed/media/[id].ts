@@ -5,12 +5,12 @@ import {
 } from 'next';
 
 import { IBaseProps } from '@containers/base';
-import SermonEmbed, { SermonEmbedProps } from '@containers/sermon/embed';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
-} from '@lib/generated/graphql';
+} from '@containers/sermon/detail.gql';
+import SermonEmbed, { SermonEmbedProps } from '@containers/sermon/embed';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

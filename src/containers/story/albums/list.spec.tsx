@@ -1,12 +1,11 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetStoriesAlbumsPageDataDocument,
 	GetStoriesAlbumsPathDataDocument,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@containers/story/albums/list.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import StoryAlbumsList, {
 	getStaticPaths,

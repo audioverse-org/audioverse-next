@@ -9,7 +9,7 @@ import SermonList, { SermonListProps } from '@containers/sermon/list';
 import {
 	getSermonListPageData,
 	getSermonListPagePathsData,
-} from '@lib/generated/graphql';
+} from '@containers/sermon/list.gql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';

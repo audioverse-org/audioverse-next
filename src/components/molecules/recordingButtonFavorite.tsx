@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
 import { BaseColors } from '@lib/constants';
-import { Scalars } from '@lib/generated/graphql';
 
 import ButtonFavorite from './buttonFavorite';
 

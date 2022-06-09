@@ -8,7 +8,7 @@ import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
+import { GetDiscoverPageDataQuery } from '@containers/discover.gql';
 import {
 	makeBlogPostListRoute,
 	makeConferenceListRoute,

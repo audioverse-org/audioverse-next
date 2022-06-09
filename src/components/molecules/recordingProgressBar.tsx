@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import { AndMiniplayerFragment } from '@components/templates/andMiniplayer.gql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import ProgressBar from '../atoms/progressBar';

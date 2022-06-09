@@ -1,7 +1,6 @@
 import { __loadQuery } from 'next/router';
 import React from 'react';
 
-import { Language } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,

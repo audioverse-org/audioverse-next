@@ -4,17 +4,16 @@ import { when } from 'jest-when';
 import { useRouter } from 'next/router';
 import { __loadQuery } from 'next/router';
 
+import {
+	GetSermonListPageDataDocument,
+	GetSermonListPagePathsDataDocument,
+} from '@containers/sermon/list.gql';
 import { fetchApi } from '@lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
 } from '@lib/constants';
-import {
-	GetSermonListPageDataDocument,
-	GetSermonListPagePathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,

@@ -7,7 +7,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { GetSermonDetailDataQuery } from '@containers/sermon/detail.gql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 

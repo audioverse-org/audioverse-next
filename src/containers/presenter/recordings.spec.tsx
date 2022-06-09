@@ -1,12 +1,9 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
+import { GetPresenterDetailPathsDataDocument } from '@containers/presenter/detail.gql';
+import { GetPresenterRecordingsPageDataDocument } from '@containers/presenter/recordings.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetPresenterDetailPathsDataDocument,
-	GetPresenterRecordingsPageDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import PresenterRecordings, {
 	getStaticPaths,

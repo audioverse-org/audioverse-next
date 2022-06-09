@@ -14,10 +14,7 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
-import {
-	Language,
-	useGetSearchResultsPageDataQuery,
-} from '@lib/generated/graphql';
+import { useGetSearchResultsPageDataQuery } from '@containers/search/index.gql';
 import {
 	makeSearchCollectionsRoute,
 	makeSearchPersonsRoute,

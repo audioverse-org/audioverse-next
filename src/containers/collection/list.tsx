@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetCollectionListPageDataQuery } from '@lib/generated/graphql';
+import { GetCollectionListPageDataQuery } from '@containers/collection/list.gql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeConferenceListRoute,

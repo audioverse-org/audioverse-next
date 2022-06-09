@@ -1,5 +1,3 @@
-import { Scalars } from './generated/graphql';
-
 const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePresenterListRoute = (

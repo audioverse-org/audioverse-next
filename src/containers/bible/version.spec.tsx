@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { GetAudiobibleVersionsDataDocument } from '@containers/bible/versions.gql';
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Version, {

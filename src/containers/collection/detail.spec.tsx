@@ -1,13 +1,11 @@
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
-	Language,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@containers/collection/detail.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import CollectionDetail, {
 	getStaticPaths,

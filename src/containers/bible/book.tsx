@@ -13,7 +13,9 @@ import DefinitionList, {
 	IDefinitionListTerm,
 } from '@components/molecules/definitionList';
 import Player from '@components/molecules/player';
+import { PlayerFragment } from '@components/molecules/player.gql';
 import SequenceNav from '@components/molecules/sequenceNav';
+import { SequenceNavFragment } from '@components/molecules/sequenceNav.gql';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
@@ -23,11 +25,6 @@ import {
 	IBibleVersion,
 } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
-import {
-	PlayerFragment,
-	RecordingContentType,
-	SequenceNavFragment,
-} from '@lib/generated/graphql';
 import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

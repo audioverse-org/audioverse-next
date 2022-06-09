@@ -10,22 +10,41 @@ generates:
             - '# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)'
             - '# ------------------------------------------------------ '
       - schema-ast
-  src/lib/generated/graphql.ts:
+  src/types/generated.ts:
     plugins:
-      - 'typescript'
-      - 'typescript-operations'
-      - 'graphql-plugin-react-query.js'
-      - 'graphql-plugin-getters.js'
+      - add:
+          content:
+            - '// ------------------------------------------------------'
+            - '// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)'
+            - '// ------------------------------------------------------ '
+      - typescript
     config:
-      fetcher: '@lib/api/graphqlFetcher#graphqlFetcher'
       avoidOptionals: true
       enumsAsConst: true
+      defaultScalarType: unknown
       scalars:
         ID: 'string | number'
         Date: 'string'
         DateTime: 'string'
         RelativeDateTime: 'string'
         URL: 'string'
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .gql.ts
+      baseTypesPath: types/generated.ts
+    plugins:
+      - add:
+          content:
+            - '// ------------------------------------------------------'
+            - '// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)'
+            - '// ------------------------------------------------------ '
+      - 'typescript-operations'
+      - 'typescript-react-query'
+      - 'graphql-plugin-getters.js'
+    config:
+      fetcher: '@lib/api/graphqlFetcher#graphqlFetcher'
+      dedupeFragments: true
 hooks:
   afterAllFileWrite:
     - prettier --write

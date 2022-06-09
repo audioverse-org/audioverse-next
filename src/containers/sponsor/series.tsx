@@ -6,11 +6,9 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
+import { SponsorPivotFragment } from '@containers/sponsor/pivot.gql';
+import { GetSponsorSeriesPageDataQuery } from '@containers/sponsor/series.gql';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSponsorSeriesPageDataQuery,
-	SponsorPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorSeriesRoute } from '@lib/routes';
 

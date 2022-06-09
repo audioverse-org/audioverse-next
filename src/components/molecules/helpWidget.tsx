@@ -5,7 +5,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
-import { useGetHelpWidgetDataQuery } from '@lib/generated/graphql';
+import { useGetHelpWidgetDataQuery } from '@components/molecules/helpWidget.gql';
 import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icons/icon-question-circle.svg';
 

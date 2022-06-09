@@ -3,7 +3,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Alert from '@components/atoms/alert';
-import { RecordingContentType } from '@lib/generated/graphql';
 
 import styles from './transcript.module.scss';
 

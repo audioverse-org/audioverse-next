@@ -1,7 +1,4 @@
-import {
-	recordingIsFavorited as _recordingIsFavorited,
-	Scalars,
-} from '@lib/generated/graphql';
+import { recordingIsFavorited as _recordingIsFavorited } from './recordingIsFavorited.gql';
 
 export function recordingIsFavorited(id: Scalars['ID']): Promise<boolean> {
 	return _recordingIsFavorited({ id }).then(

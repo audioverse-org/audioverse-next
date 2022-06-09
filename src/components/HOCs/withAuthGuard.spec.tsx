@@ -7,11 +7,9 @@ import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
+import { GetWithAuthGuardDataDocument } from '@components/HOCs/withAuthGuard.gql';
+import { RegisterSocialDocument } from '@containers/account/register.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetWithAuthGuardDataDocument,
-	RegisterSocialDocument,
-} from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
 function render() {

@@ -8,8 +8,6 @@ import {
 	SupportedLanguages,
 } from '@lib/constants';
 
-import { Language } from './generated/graphql';
-
 type Getter<DATA> = (variables: {
 	language: SupportedLanguages;
 	first: number;

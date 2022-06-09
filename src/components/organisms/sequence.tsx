@@ -18,9 +18,9 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
+import { SequenceFragment } from '@components/organisms/sequence.gql';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
-import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import {
 	makeAudiobookFeedRoute,

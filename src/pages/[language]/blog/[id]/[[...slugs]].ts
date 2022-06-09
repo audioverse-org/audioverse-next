@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getBlogDetailData,
 	getBlogDetailStaticPaths,
-} from '@lib/generated/graphql';
+} from '@containers/blog/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 

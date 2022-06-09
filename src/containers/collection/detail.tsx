@@ -25,7 +25,6 @@ import Tease from '@components/molecules/tease';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeCollectionFeedRoute,
 	makeCollectionPresentersRoute,
@@ -37,6 +36,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
+import { GetCollectionDetailPageDataQuery } from './detail.gql';
 import styles from './detail.module.scss';
 
 export type CollectionDetailProps = GetCollectionDetailPageDataQuery;

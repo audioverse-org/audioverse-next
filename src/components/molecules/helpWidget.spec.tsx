@@ -4,8 +4,8 @@ import { __loadRouter } from 'next/router';
 import Script from 'next/script';
 
 import HelpWidget from '@components/molecules/helpWidget';
+import { GetHelpWidgetDataDocument } from '@components/molecules/helpWidget.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 

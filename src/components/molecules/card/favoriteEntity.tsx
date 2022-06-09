@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardFavoriteEntityFragment } from '@lib/generated/graphql';
+import { CardFavoriteEntityFragment } from '@components/molecules/card/favoriteEntity.gql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import CardCollection from './collection';

@@ -7,9 +7,9 @@ import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardColumn from '@components/molecules/card/column';
 import CardPost from '@components/molecules/card/post';
+import { GetBlogDetailDataQuery } from '@containers/blog/detail.gql';
 import { BaseColors } from '@lib/constants';
 import { formatLongDate } from '@lib/date';
-import { GetBlogDetailDataQuery } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
 import styles from './detail.module.scss';

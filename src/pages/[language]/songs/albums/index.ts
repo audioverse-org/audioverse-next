@@ -8,8 +8,8 @@ import { IBaseProps } from '@containers/base';
 import StoryAlbumsList, {
 	SongAlbumsListProps,
 } from '@containers/song/albums/list';
+import { getSongAlbumsListPageData } from '@containers/song/albums/list.gql';
 import { REVALIDATE } from '@lib/constants';
-import { getSongAlbumsListPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';

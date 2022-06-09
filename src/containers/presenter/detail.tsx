@@ -23,7 +23,6 @@ import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
-import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
 import {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterFeedRoute,
@@ -35,6 +34,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
+import { GetPresenterDetailPageDataQuery } from './detail.gql';
 import styles from './detail.module.scss';
 
 export type PresenterDetailProps = GetPresenterDetailPageDataQuery;

@@ -6,9 +6,9 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Versions, { VersionsProps } from '@containers/bible/versions';
+import { getAudiobibleVersionsData } from '@containers/bible/versions.gql';
 import { getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getAudiobibleVersionsData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { makeBibleListRoute } from '@lib/routes';

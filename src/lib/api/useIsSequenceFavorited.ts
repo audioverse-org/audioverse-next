@@ -1,12 +1,11 @@
 import { useQueryClient } from 'react-query';
 
-import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
-import { getSessionToken } from '@lib/cookies';
 import {
-	Scalars,
 	SequenceIsFavoritedQuery,
 	useSequenceIsFavoritedQuery,
-} from '@lib/generated/graphql';
+} from '@lib/api/sequenceIsFavorited.gql';
+import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
+import { getSessionToken } from '@lib/cookies';
 
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';

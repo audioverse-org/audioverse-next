@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Sponsors, { SponsorsProps } from '@containers/sponsor/list';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getSponsorListPageData,
 	getSponsorListPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/sponsor/list.gql';
+import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';

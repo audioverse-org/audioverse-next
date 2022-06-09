@@ -8,7 +8,7 @@ import SeriesList, { SeriesListProps } from '@containers/series/list';
 import {
 	getSeriesListPageData,
 	getSeriesListPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/series/list.gql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';

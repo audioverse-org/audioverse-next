@@ -3,12 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { QueryKey } from 'react-query';
 import ReactTooltip from 'react-tooltip';
 
+import { useGetPlaylistButtonDataQuery } from '@components/molecules/playlistButton.gql';
 import { useAddPlaylist } from '@lib/api/useAddPlaylist';
 import { useSetPlaylistMembership } from '@lib/api/useSetPlaylistMembership';
-import {
-	useGetPlaylistButtonDataQuery,
-	UserPlaylist,
-} from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 
 import styles from './playlistButton.module.scss';

@@ -12,11 +12,8 @@ import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
+import { GetSongBooksDetailPageDataQuery } from '@containers/song/books/detail.gql';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSongBooksDetailPageDataQuery,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import {
 	makeBibleMusicRoute,
 	makeBibleMusicTrackRoute,

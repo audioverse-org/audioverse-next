@@ -8,11 +8,11 @@ import { IBaseProps } from '@containers/base';
 import PresenterDetail, {
 	PresenterDetailProps,
 } from '@containers/presenter/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getPresenterDetailPageData,
 	getPresenterDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/presenter/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 

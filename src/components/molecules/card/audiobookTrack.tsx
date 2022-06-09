@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
+import { CardRecordingFragment } from '@components/molecules/card/recording.gql';
 
 import TeaseRecording from '../teaseRecording';
 

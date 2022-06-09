@@ -10,7 +10,7 @@ import CollectionList, {
 import {
 	getCollectionListPageData,
 	getCollectionListPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/collection/list.gql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';

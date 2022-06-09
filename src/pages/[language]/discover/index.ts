@@ -6,8 +6,8 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Discover, { DiscoverProps } from '@containers/discover';
+import { getDiscoverPageData } from '@containers/discover.gql';
 import { REVALIDATE } from '@lib/constants';
-import { getDiscoverPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';

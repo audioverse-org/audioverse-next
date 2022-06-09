@@ -10,7 +10,7 @@ import StoryAlbumsList, {
 import {
 	getStoriesAlbumsPageData,
 	getStoriesAlbumsPathData,
-} from '@lib/generated/graphql';
+} from '@containers/story/albums/list.gql';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
 

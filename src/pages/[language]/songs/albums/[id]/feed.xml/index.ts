@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getSongAlbumFeedData } from '@lib/generated/graphql';
+import { getSongAlbumFeedData } from '@containers/song/albums/detail.gql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

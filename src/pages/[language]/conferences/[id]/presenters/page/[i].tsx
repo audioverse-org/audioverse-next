@@ -4,13 +4,11 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
+import { getCollectionDetailPathsData } from '@containers/collection/detail.gql';
 import CollectionPresenters, {
 	CollectionPresentersProps,
 } from '@containers/collection/presenters';
-import {
-	getCollectionDetailPathsData,
-	getCollectionPresentersPageData,
-} from '@lib/generated/graphql';
+import { getCollectionPresentersPageData } from '@containers/collection/presenters.gql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';

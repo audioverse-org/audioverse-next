@@ -1,14 +1,11 @@
 import uniq from 'lodash/uniq';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import {
-	BookFeedDescriptionFragment,
-	getAudiobookFeedData,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { getAudiobookFeedData } from '@containers/audiobook/detail.gql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { BookFeedDescriptionFragment } from '@pages/[language]/books/[id]/feed.xml/bookFeedDescription.gql';
 
 export default (): void => void 0;
 

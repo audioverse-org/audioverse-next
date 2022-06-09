@@ -9,13 +9,12 @@ import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
 import {
 	GetLibraryHistoryPageDataDocument,
 	GetLibraryHistoryPageDataQuery,
 	GetLibraryHistoryPageDataQueryVariables,
-	Language,
-} from '@lib/generated/graphql';
+} from '@containers/library/history.gql';
+import { graphqlFetcher } from '@lib/api/graphqlFetcher';
 
 import baseStyles from './base.module.scss';
 import styles from './history.module.scss';

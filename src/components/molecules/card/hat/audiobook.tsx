@@ -3,8 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
+import { CardRecordingFragment } from '@components/molecules/card/recording.gql';
 import { BaseColors } from '@lib/constants';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';
 import PersonLockup from '../../personLockup';

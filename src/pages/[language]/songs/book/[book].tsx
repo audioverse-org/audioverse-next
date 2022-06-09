@@ -9,8 +9,8 @@ import { IBaseProps } from '@containers/base';
 import SongBookDetail, {
 	SongBooksDetailProps,
 } from '@containers/song/books/detail';
+import { getSongBooksDetailPageData } from '@containers/song/books/detail.gql';
 import { BIBLE_BOOKS, REVALIDATE } from '@lib/constants';
-import { getSongBooksDetailPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';

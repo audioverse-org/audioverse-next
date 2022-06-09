@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { AndMiniplayerFragment } from '@components/templates/andMiniplayer.gql';
 import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icons/icon-pause-large.svg';

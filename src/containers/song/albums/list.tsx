@@ -9,7 +9,7 @@ import CardSongBook from '@components/molecules/card/songBook';
 import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
-import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
+import { GetSongAlbumsListPageDataQuery } from '@containers/song/albums/list.gql';
 import {
 	makeBibleMusicTrackRoute,
 	makeDiscoverCollectionsRoute,

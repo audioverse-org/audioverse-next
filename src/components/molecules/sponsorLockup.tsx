@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SponsorLockupFragment } from '@lib/generated/graphql';
+import { SponsorLockupFragment } from '@components/molecules/sponsorLockup.gql';
 
 import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 

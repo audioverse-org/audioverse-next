@@ -3,8 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
+import { ResetPasswordDocument } from '@containers/account/reset.gql';
 import { fetchApi } from '@lib/api/fetchApi';
-import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
+import { LoginDocument } from '@lib/api/login.gql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';

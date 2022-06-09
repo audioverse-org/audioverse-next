@@ -1,12 +1,11 @@
 import { useQueryClient } from 'react-query';
 
-import { setCollectionFavorited } from '@lib/api/setCollectionFavorited';
-import { getSessionToken } from '@lib/cookies';
 import {
 	CollectionIsFavoritedQuery,
-	Scalars,
 	useCollectionIsFavoritedQuery,
-} from '@lib/generated/graphql';
+} from '@lib/api/collectionIsFavorited.gql';
+import { setCollectionFavorited } from '@lib/api/setCollectionFavorited';
+import { getSessionToken } from '@lib/cookies';
 
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 

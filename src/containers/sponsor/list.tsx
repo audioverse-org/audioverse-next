@@ -9,7 +9,7 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
+import { GetSponsorListPageDataQuery } from '@containers/sponsor/list.gql';
 import {
 	makeDiscoverCollectionsRoute,
 	makeSponsorListRoute,

@@ -1,6 +1,6 @@
 import withFailStates from '@components/HOCs/withFailStates';
 import { Recording } from '@components/organisms/recording';
-import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { GetSermonDetailDataQuery } from '@containers/sermon/detail.gql';
 
 export interface SermonDetailProps {
 	recording: GetSermonDetailDataQuery['sermon'];

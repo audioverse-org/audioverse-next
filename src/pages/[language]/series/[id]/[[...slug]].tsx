@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/series/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

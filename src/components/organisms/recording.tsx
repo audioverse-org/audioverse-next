@@ -22,14 +22,10 @@ import SequenceNav from '@components/molecules/sequenceNav';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
+import { TeaseRecordingFragment } from '@components/molecules/teaseRecording.gql';
 import Transcript from '@components/molecules/transcript';
+import { RecordingFragment } from '@components/organisms/recording.gql';
 import { formatLongDateTime, parseRelativeDate } from '@lib/date';
-import {
-	RecordingContentType,
-	RecordingFragment,
-	SequenceContentType,
-	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { makeBibleMusicRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';

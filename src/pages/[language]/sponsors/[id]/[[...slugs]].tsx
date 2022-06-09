@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import SponsorDetail, { SponsorDetailProps } from '@containers/sponsor/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSponsorDetailPageData,
 	getSponsorDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/sponsor/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

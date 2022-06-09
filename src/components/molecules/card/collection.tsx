@@ -8,15 +8,11 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
+import { CardCollectionFragment } from '@components/molecules/card/collection.gql';
+import { CardSequenceFragment } from '@components/molecules/card/sequence.gql';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import {
-	CardCollectionFragment,
-	CardRecordingFragment,
-	CardSequenceFragment,
-	CollectionContentType,
-} from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
@@ -26,6 +22,7 @@ import CollectionTypeLockup from '../collectionTypeLockup';
 
 import styles from './collection.module.scss';
 import CardRecording from './recording';
+import { CardRecordingFragment } from './recording.gql';
 import CardSequence from './sequence';
 
 interface CardCollectionProps {

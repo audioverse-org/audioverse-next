@@ -5,9 +5,12 @@ import {
 } from 'next';
 
 import About, { AboutProps } from '@containers/about';
+import {
+	getAboutPageData,
+	getAboutStaticPaths,
+} from '@containers/about/index.gql';
 import { IBaseProps } from '@containers/base';
 import { REVALIDATE } from '@lib/constants';
-import { getAboutPageData, getAboutStaticPaths } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default About;

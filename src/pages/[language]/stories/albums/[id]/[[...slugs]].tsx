@@ -8,11 +8,11 @@ import { IBaseProps } from '@containers/base';
 import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getStoryAlbumDetailPageData,
 	getStoryAlbumDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/story/albums/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

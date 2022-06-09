@@ -7,8 +7,8 @@ import {
 import { IBaseProps } from '@containers/base';
 import TrendingTeachings from '@containers/sermon/trending';
 import { TrendingTeachingsProps } from '@containers/sermon/trending';
+import { getTrendingTeachingsPageData } from '@containers/sermon/trending.gql';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getTrendingTeachingsPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';

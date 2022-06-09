@@ -7,10 +7,8 @@ import {
 import PresenterAppears, {
 	PresenterAppearsProps,
 } from '@containers/presenter/appears';
-import {
-	getPresenterAppearsPageData,
-	getPresenterDetailPathsData,
-} from '@lib/generated/graphql';
+import { getPresenterAppearsPageData } from '@containers/presenter/appears.gql';
+import { getPresenterDetailPathsData } from '@containers/presenter/detail.gql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';

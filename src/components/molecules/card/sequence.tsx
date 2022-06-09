@@ -8,13 +8,10 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
+import { CardRecordingFragment } from '@components/molecules/card/recording.gql';
+import { CardSequenceFragment } from '@components/molecules/card/sequence.gql';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
-import {
-	CardRecordingFragment,
-	CardSequenceFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';

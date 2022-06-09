@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetAudiobookListPageDataQuery } from '@lib/generated/graphql';
+import { GetAudiobookListPageDataQuery } from '@containers/audiobook/list.gql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makeAudiobookListRoute,

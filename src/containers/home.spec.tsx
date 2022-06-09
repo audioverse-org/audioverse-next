@@ -1,13 +1,11 @@
 import { waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetHomeStaticPropsDocument,
 	GetHomeStaticPropsQuery,
-	RecordingContentType,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@containers/home.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';

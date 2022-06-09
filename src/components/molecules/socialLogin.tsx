@@ -5,12 +5,9 @@ import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
+import { useRegisterSocialMutation } from '@containers/account/register.gql';
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import { setSessionToken } from '@lib/cookies';
-import {
-	useRegisterSocialMutation,
-	UserSocialServiceName,
-} from '@lib/generated/graphql';
 import useDidUnmount from '@lib/useDidUnmount';
 
 import Button from './button';

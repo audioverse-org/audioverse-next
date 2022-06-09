@@ -5,7 +5,7 @@ import ButtonBack from '@components/molecules/buttonBack';
 import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Tease from '@components/molecules/tease';
-import { CollectionPivotFragment } from '@lib/generated/graphql';
+import { CollectionPivotFragment } from '@containers/collection/pivot.gql';
 
 import styles from './pivot.module.scss';
 

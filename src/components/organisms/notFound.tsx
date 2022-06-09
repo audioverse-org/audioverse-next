@@ -7,7 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetNotFoundPageDataQuery } from '@lib/generated/graphql';
+import { GetNotFoundPageDataQuery } from '@components/organisms/notFound.gql';
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

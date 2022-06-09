@@ -4,9 +4,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import Alert from '@components/atoms/alert';
+import { useLoginForgotPasswordMutation } from '@components/molecules/login.gql';
 import Modal from '@components/organisms/modal';
 import { login, refetchUserQueries } from '@lib/api/login';
-import { useLoginForgotPasswordMutation } from '@lib/generated/graphql';
 
 import Button from './button';
 import ButtonGuest from './buttonGuest';

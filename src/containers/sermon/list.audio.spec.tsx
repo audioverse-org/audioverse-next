@@ -1,11 +1,11 @@
 import { __loadQuery } from 'next/router';
 
 import { loadSermonListData } from '@containers/sermon/list.all.spec';
-import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
-} from '@lib/generated/graphql';
+} from '@containers/sermon/list.gql';
+import { fetchApi } from '@lib/api/fetchApi';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
 import SermonList, {

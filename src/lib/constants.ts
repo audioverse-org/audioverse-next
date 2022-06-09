@@ -1,5 +1,3 @@
-import { Language } from './generated/graphql';
-
 export const ENTRIES_PER_PAGE = 12;
 
 export interface LanguageConfiguration {

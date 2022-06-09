@@ -11,13 +11,13 @@ import set from 'lodash/set';
 import React from 'react';
 
 import PlaylistButton from '@components/molecules/playlistButton';
-import { fetchApi } from '@lib/api/fetchApi';
-import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 import {
-	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
 	GetPlaylistButtonDataQuery,
-} from '@lib/generated/graphql';
+} from '@components/molecules/playlistButton.gql';
+import { fetchApi } from '@lib/api/fetchApi';
+import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
+import { AddPlaylistDocument } from '@lib/api/useAddPlaylist.gql';
 import { sleep } from '@lib/sleep';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import { resolveWithDelay } from '@lib/test/resolveWithDelay';

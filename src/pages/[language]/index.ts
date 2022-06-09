@@ -6,8 +6,8 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Home, { HomeProps } from '@containers/home';
+import { getHomeStaticProps } from '@containers/home.gql';
 import { REVALIDATE } from '@lib/constants';
-import { getHomeStaticProps } from '@lib/generated/graphql';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { getValidLanguage } from '@lib/getValidLanguage';
 

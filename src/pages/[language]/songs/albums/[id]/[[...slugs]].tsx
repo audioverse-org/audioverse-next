@@ -6,11 +6,11 @@ import {
 
 import { IBaseProps } from '@containers/base';
 import Song, { SongAlbumDetailProps } from '@containers/song/albums/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import {
 	getSongAlbumsDetailPageData,
 	getSongAlbumsDetailPathsData,
-} from '@lib/generated/graphql';
+} from '@containers/song/albums/detail.gql';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 

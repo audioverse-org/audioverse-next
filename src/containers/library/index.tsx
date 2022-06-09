@@ -9,15 +9,9 @@ import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
-	FavoritableCatalogEntityType,
-	FavoritesSortableField,
 	GetLibraryDataQueryVariables,
-	Language,
-	OrderByDirection,
-	RecordingContentType,
-	RecordingViewerPlaybackStatus,
 	useGetLibraryDataQuery,
-} from '@lib/generated/graphql';
+} from '@containers/library/index.gql';
 
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';
