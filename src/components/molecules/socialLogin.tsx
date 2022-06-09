@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
@@ -109,7 +109,7 @@ export default function SocialLogin({
 							centered
 						/>
 					)}
-					callback={(response) => {
+					onSuccess={(response) => {
 						const name = get(response, 'name', '');
 						const [givenName, surname] = name.split(' ');
 						const socialId = get(response, 'userID');
@@ -117,7 +117,7 @@ export default function SocialLogin({
 						const status = get(response, 'status');
 						const statusText = get(response, 'statusText');
 
-						if (!socialToken) {
+						if (!socialId || !socialToken) {
 							if (status) {
 								setErrors([`${status}: ${statusText}`]);
 							}
@@ -132,7 +132,6 @@ export default function SocialLogin({
 							surname,
 						});
 					}}
-					disableMobileRedirect
 				/>
 
 				<Button

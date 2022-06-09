@@ -30,6 +30,7 @@
     "svgo": "svgo -f ./public/img/icons-raw -o ./public/img/icons"
   },
   "dependencies": {
+    "@greatsumini/react-facebook-login": "^3.2.0",
     "@material-ui/core": "^4.12.3",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
@@ -47,7 +48,6 @@
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
     "react-intl": "^5.20.12",
     "react-query": "^3.25.1",
@@ -87,7 +87,6 @@
     "@types/node-forge": "^1.0.0",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "@types/react-facebook-login": "^4.1.4",
     "@types/react-is": "^17.0.3",
     "@types/video.js": "^7.3.31",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
