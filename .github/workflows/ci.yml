@@ -68,11 +68,10 @@ jobs:
             ${{steps.waitFor200.outputs.url}}/es
             ${{steps.waitFor200.outputs.url}}/en/discover
             ${{steps.waitFor200.outputs.url}}/en/teachings/all/page/1
-            ${{steps.waitFor200.outputs.url}}/en/teachings/28411/07-john-the-baptist
+            ${{steps.waitFor200.outputs.url}}/en/teachings/300
             ${{steps.waitFor200.outputs.url}}/en/bibles
-            ${{steps.waitFor200.outputs.url}}/en/bibles/472/king-james-version
-            ${{steps.waitFor200.outputs.url}}/en/bibles/chapters/26965/genesis-1
             ${{steps.waitFor200.outputs.url}}/en/presenters/1309/amanda-anguish
+          runs: 3
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Add comment
