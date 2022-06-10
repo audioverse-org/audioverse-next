@@ -77,10 +77,20 @@ jobs:
           runs: 3
           uploadArtifacts: true
           temporaryPublicStorage: true
+      - name: Format comment
+        uses: actions/github-script@v6
+        id: formatComment
+        with:
+          script: |
+            const parsed = JSON.parse('${{steps.lighthouse.outputs.links}}');
+            const keys = Object.keys(parsed);
+            const lines = keys.map(k => `- [${k}](${parsed[k]})`);
+            return lines.join('\n');
+          result-encoding: string
       - name: Add comment
         uses: mshick/add-pr-comment@v1
         with:
-          message: ${{steps.lighthouse.outputs.links}}
+          message: ${{steps.formatComment.outputs.result}}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   test:
     runs-on: ubuntu-latest
