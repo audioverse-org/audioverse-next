@@ -60,6 +60,7 @@ jobs:
           check_interval: 10
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v9
+        id: lighthouse
         with:
           urls: |
             ${{steps.waitFor200.outputs.url}}/
@@ -74,6 +75,11 @@ jobs:
             ${{steps.waitFor200.outputs.url}}/en/presenters/1309/amanda-anguish
           uploadArtifacts: true
           temporaryPublicStorage: true
+      - name: Add comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: ${{steps.lighthouse.outputs.links}}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
