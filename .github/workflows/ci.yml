@@ -54,6 +54,8 @@ jobs:
     steps:
       # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
       - uses: actions/checkout@v1
+      - name: Delete default configuration
+        run: rm .lighthouserc.yaml
       - name: Wait for Vercel preview URL
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitFor200
