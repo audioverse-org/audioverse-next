@@ -4,7 +4,6 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	ignorePatterns: ['**/*.js', 'src/lib/generated/**/*'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
 		'import',
