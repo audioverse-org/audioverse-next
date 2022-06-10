@@ -34,3 +34,12 @@ npm run graphql:codegen
 ```
 
 Compiles to `src/lib/generated/graphql.ts`
+
+## Eslint
+
+Debugging commands:
+
+```bash
+DEBUG=eslint:cli-engine npm run lint
+TIMING=1 npm run lint
+```
