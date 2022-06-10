@@ -48,23 +48,32 @@ jobs:
         run: |
           echo "The following files are not formatted:"
           echo "${{steps.prettier-run.outputs.prettier_output}}"
-  build:
+  lighthouse:
     runs-on: ubuntu-latest
+    needs: Vercel
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - name: Wait for Vercel preview URL
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: waitFor200
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build:dev
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
       - name: Run Lighthouse
-        # TODO: remove `|| true` when we're ready to get serious about lighthouse errors
-        run: npm run lighthouse || true
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          urls: |
+            ${{steps.waitFor200.outputs.url}}/
+            ${{steps.waitFor200.outputs.url}}/en
+            ${{steps.waitFor200.outputs.url}}/es
+            ${{steps.waitFor200.outputs.url}}/en/discover
+            ${{steps.waitFor200.outputs.url}}/en/teachings/all/page/1
+            ${{steps.waitFor200.outputs.url}}/en/teachings/28411/07-john-the-baptist
+            ${{steps.waitFor200.outputs.url}}/en/bibles
+            ${{steps.waitFor200.outputs.url}}/en/bibles/472/king-james-version
+            ${{steps.waitFor200.outputs.url}}/en/bibles/chapters/26965/genesis-1
+            ${{steps.waitFor200.outputs.url}}/en/presenters/1309/amanda-anguish
+          uploadArtifacts: true
+          temporaryPublicStorage: true
   test:
     runs-on: ubuntu-latest
     steps:
