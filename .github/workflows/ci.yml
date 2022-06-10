@@ -87,7 +87,7 @@ jobs:
             const parsed = JSON.parse('${{steps.lighthouse.outputs.links}}');
             const keys = Object.keys(parsed);
             const lines = keys.map(k => `- [${k}](${parsed[k]})`);
-            return lines.join('\n');
+            return `# Lighthouse Results\n\n${lines.join('\n')}`;
           result-encoding: string
       - name: Add comment
         uses: mshick/add-pr-comment@v1
