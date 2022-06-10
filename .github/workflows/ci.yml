@@ -50,7 +50,6 @@ jobs:
           echo "${{steps.prettier-run.outputs.prettier_output}}"
   lighthouse:
     runs-on: ubuntu-latest
-    needs: Vercel
     steps:
       - name: Wait for Vercel preview URL
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
