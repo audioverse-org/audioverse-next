@@ -57,7 +57,8 @@ jobs:
         id: waitFor200
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 60
+          max_timeout: 20 * 60
+          check_interval: 10
       - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v9
         with:
