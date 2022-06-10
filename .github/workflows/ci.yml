@@ -51,6 +51,8 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
+      # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
+      - uses: actions/checkout@v1
       - name: Wait for Vercel preview URL
         uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
         id: waitFor200
