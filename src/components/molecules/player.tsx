@@ -16,6 +16,9 @@ import hasVideo from '@lib/hasVideo';
 import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import IconAirPlayAudio from '../../../public/img/icon-airplay-audio.svg';
+import IconAirPlayVideo from '../../../public/img/icon-airplay-video.svg';
+import IconChromeCast from '../../../public/img/icon-chromecast.svg';
 import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
 import IconPause from '../../../public/img/icon-pause-large.svg';
 import IconPlay from '../../../public/img/icon-play-large.svg';
@@ -184,6 +187,33 @@ const Player = ({
 							<IconFullscreen />
 						</CircleButton>
 					)}
+					<CircleButton
+						onClick={() => session.chromecastTrigger()}
+						backgroundColor={backgroundColor}
+						aria-label={intl.formatMessage({
+							id: 'player__chromeCastLabel',
+							defaultMessage: 'chromeCast',
+							description: 'player chromeCast button label',
+						})}
+					>
+						<IconChromeCast />
+					</CircleButton>
+
+					<CircleButton
+						onClick={() => session.airPlayTrigger()}
+						backgroundColor={backgroundColor}
+						aria-label={intl.formatMessage({
+							id: 'player__airPlayLabel',
+							defaultMessage: 'airPlay',
+							description: 'player airPlay button label',
+						})}
+					>
+						{shouldShowVideoControls ? (
+							<IconAirPlayVideo />
+						) : (
+							<IconAirPlayAudio />
+						)}
+					</CircleButton>
 					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />
 					<ButtonShareRecording

@@ -977,6 +977,14 @@
     "comment": "player fullscreen button label",
     "string": "全画面表示"
   },
+  "player__chromeCastLabel": {
+    "comment": "player chromecast button label",
+    "string": "クロームキャスト"
+  },
+  "player__airPlayLabel": {
+    "comment": "player airplay button label",
+    "string": "エアプレイ"
+  },
   "player__nudgeBack": {
     "comment": "player nudge-back label",
     "string": "15秒前"

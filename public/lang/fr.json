@@ -977,6 +977,14 @@
     "comment": "player fullscreen button label",
     "string": "plein écran"
   },
+  "player__chromeCastLabel": {
+    "comment": "étiquette du bouton du lecteur chromecast",
+    "string": "diffusé"
+  },
+  "player__airPlayLabel": {
+    "comment": "étiquette du bouton airplay du lecteur",
+    "string": "diffusé"
+  },
   "player__nudgeBack": {
     "comment": "player nudge-back label",
     "string": "reculer de 15 secondes"

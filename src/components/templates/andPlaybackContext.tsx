@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import Script from 'next/script';
 import React, {
 	MutableRefObject,
 	ReactNode,
@@ -76,6 +77,8 @@ export const shouldLoadRecordingPlaybackProgress = (
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
+	chromecastTrigger: () => void;
+	airPlayTrigger: () => void;
 	pause: () => void;
 	paused: () => boolean;
 	getTime: () => number;
@@ -150,6 +153,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
 	_setRecording: () => undefined,
+	chromecastTrigger: () => undefined,
+	airPlayTrigger: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -256,6 +261,8 @@ export default function AndPlaybackContext({
 			playerRef.current?.play();
 			setIsPaused(false);
 		},
+		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
+		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequest'),
 		pause: () => {
 			playerRef.current?.pause();
 			setIsPaused(true);
@@ -412,10 +419,10 @@ export default function AndPlaybackContext({
 				techOrder: ['chromecast', 'html5'],
 				plugins: {
 					chromecast: {
-						addButtonToControlBar: false, // Use custom designed button
+						addButtonToControlBar: true, // Use custom designed button
 					},
 					airPlay: {
-						addButtonToControlBar: false, // Use custom designed button
+						addButtonToControlBar: true, // Use custom designed button
 					},
 				},
 			};
@@ -485,8 +492,11 @@ export default function AndPlaybackContext({
 	}, [videoHandlerId, videoHandler, isShowingVideo]);
 
 	return (
-		<PlaybackContext.Provider value={playback}>
-			{children}
-		</PlaybackContext.Provider>
+		<>
+			<Script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" />
+			<PlaybackContext.Provider value={playback}>
+				{children}
+			</PlaybackContext.Provider>
+		</>
 	);
 }

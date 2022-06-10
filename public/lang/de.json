@@ -977,6 +977,16 @@
     "comment": "player fullscreen button label",
     "string": "Vollbild"
   },
+
+  "player__chromeCastLabel": {
+    "comment": "player chromecast button label",
+    "string": "Chromguss"
+  },
+  "player__airPlayLabel": {
+    "comment": "player airplay button label",
+    "string": "airplay"
+  },
+
   "player__nudgeBack": {
     "comment": "player nudge-back label",
     "string": "15 Sekunden zurück"
