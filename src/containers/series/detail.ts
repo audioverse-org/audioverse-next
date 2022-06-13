@@ -6,7 +6,6 @@ export interface SeriesDetailProps {
 	sequence: GetSeriesDetailPageDataQuery['series'];
 }
 
-export default withFailStates<SeriesDetailProps>(
-	Sequence,
-	({ sequence }) => !sequence
-);
+export default withFailStates<SeriesDetailProps>(Sequence, {
+	useShould404: ({ sequence }) => !sequence,
+});

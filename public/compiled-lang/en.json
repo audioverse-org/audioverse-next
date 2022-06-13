@@ -4667,6 +4667,20 @@
       "value": "Search"
     }
   ],
+  "search__titleDynamic": [
+    {
+      "type": 0,
+      "value": "Search | \""
+    },
+    {
+      "type": 1,
+      "value": "term"
+    },
+    {
+      "type": 0,
+      "value": "\" | AudioVerse"
+    }
+  ],
   "sequenceType__audiobookTitle": [
     {
       "type": 0,
