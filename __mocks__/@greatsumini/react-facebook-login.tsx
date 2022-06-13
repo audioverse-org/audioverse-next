@@ -1,8 +1,6 @@
-import {
-	LoginResponse
-} from '@greatsumini/react-facebook-login';
+import { LoginResponse } from '@greatsumini/react-facebook-login';
 
-type Response = Partial<LoginResponse['authResponse'] & {name: string}>;
+type Response = Partial<LoginResponse['authResponse'] & { name: string }>;
 
 let res: Response = {
 	accessToken: 'the_access_token',
@@ -19,7 +17,7 @@ export default function FacebookLogin({
 	render,
 }: {
 	onSuccess: (response: any) => void;
-	render: (renderProps: {onClick: () => void}) => JSX.Element;
+	render: (renderProps: { onClick: () => void }) => JSX.Element;
 }): JSX.Element {
-	return render({onClick: () => onSuccess(res)});
+	return render({ onClick: () => onSuccess(res) });
 }
