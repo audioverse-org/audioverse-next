@@ -5,16 +5,6 @@
 			{
 				"appID": "T636GPF37H.org.audioverse.mobile",
 				"paths": [
-					"/*/sermons/*",
-					"/*/audiobibles/*",
-					"/*/audiobooks/*",
-					"/*/music/*",
-					"/*/topics/*"
-				]
-			},
-			{
-				"appID": "T636GPF37H.org.audioverse.mobile-beta",
-				"paths": [
 					"/*/discover",
 					"/*/discover/collections",
 					"/*/teachings/*",
@@ -32,8 +22,7 @@
 	},
 	"webcredentials": {
 		"apps": [
-			"T636GPF37H.org.audioverse.mobile",
-			"T636GPF37H.org.audioverse.mobile-beta"
+			"T636GPF37H.org.audioverse.mobile"
 		]
 	}
 }
