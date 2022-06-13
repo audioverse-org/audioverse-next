@@ -32,6 +32,20 @@ function loadData() {
 					image: {
 						url: 'the_image_url',
 					},
+
+					address1: 'the_address1',
+					address2: 'the_address2',
+					autoplay: true,
+					city: 'the_city',
+					country: 'the_country',
+					createdAt: new Date(),
+					id: 'the_id',
+					isSuperuser: true,
+					language: 'the_language',
+					lastActivity: new Date(),
+					postalCode: 'the_postalCode',
+					province: 'the_province',
+					timezone: 'the_timezone',
 				},
 			},
 		});
@@ -213,5 +227,36 @@ describe('help widget', () => {
 			}),
 			expect.anything()
 		);
+	});
+
+	it('provides account info', async () => {
+		loadData();
+
+		await renderComponent();
+
+		runOnLoad();
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith(
+				'session-data',
+				expect.objectContaining({
+					name: 'the_name',
+					email: 'the_email',
+					address1: 'the_address1',
+					address2: 'the_address2',
+					autoplay: 'true',
+					city: 'the_city',
+					country: 'the_country',
+					createdAt: expect.any(String),
+					id: 'the_id',
+					isSuperuser: 'true',
+					language: 'the_language',
+					lastActivity: expect.any(String),
+					postalCode: 'the_postalCode',
+					province: 'the_province',
+					timezone: 'the_timezone',
+				})
+			);
+		});
 	});
 });

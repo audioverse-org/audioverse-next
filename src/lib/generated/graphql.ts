@@ -5916,7 +5916,7 @@ export type CopyrightInfosFragment = { __typename?: 'Recording', id: string | nu
 export type GetHelpWidgetDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetHelpWidgetDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', name: string, email: string, image: { __typename?: 'Image', url: string } | null } } | null };
+export type GetHelpWidgetDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', id: string | number, createdAt: string, lastActivity: string, name: string, email: string, language: UserLanguage, timezone: Timezone, address1: string | null, address2: string | null, city: string | null, province: string | null, country: string | null, postalCode: string | null, autoplay: boolean, isSuperuser: boolean } } | null };
 
 export type LoginForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
@@ -7045,7 +7045,7 @@ export const useGetWithAuthGuardDataQuery = <
       options
     );
 export const GetHelpWidgetDataDocument = `
-query getHelpWidgetData{me{user{name image{url(size:200)}email}}}
+query getHelpWidgetData{me{user{id createdAt lastActivity name email language timezone address1 address2 city province country postalCode autoplay isSuperuser}}}
 `;
 export const useGetHelpWidgetDataQuery = <
       TData = GetHelpWidgetDataQuery,
