@@ -6,7 +6,6 @@ export interface SermonDetailProps {
 	recording: GetSermonDetailDataQuery['sermon'];
 }
 
-export default withFailStates<SermonDetailProps>(
-	Recording,
-	(props) => !props.recording
-);
+export default withFailStates<SermonDetailProps>(Recording, {
+	should404: (props) => !props.recording,
+});

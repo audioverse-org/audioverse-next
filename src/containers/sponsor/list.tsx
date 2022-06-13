@@ -69,4 +69,6 @@ function Sponsors({
 	);
 }
 
-export default withFailStates(Sponsors, ({ sponsors }) => !sponsors?.length);
+export default withFailStates(Sponsors, {
+	should404: ({ sponsors }) => !sponsors?.length,
+});

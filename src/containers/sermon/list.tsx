@@ -49,7 +49,6 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 	);
 }
 
-export default withFailStates(
-	SermonList,
-	(props: SermonListProps) => !props.nodes?.length
-);
+export default withFailStates(SermonList, {
+	should404: (props: SermonListProps) => !props.nodes?.length,
+});

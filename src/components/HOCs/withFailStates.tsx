@@ -4,10 +4,16 @@ import React from 'react';
 import LoadingCards from '@components/molecules/loadingCards';
 import NotFound from '@components/organisms/notFound';
 
+type WithFailStateOptions<P> = {
+	should404?: (props: P) => boolean;
+};
+
 const withFailStates = <P,>(
 	Component: React.ComponentType<Must<P>>,
-	should404?: (props: P) => boolean
+	options: WithFailStateOptions<P> = {}
 ): React.ComponentType<P> => {
+	const { should404 } = options;
+
 	function WithFailStates(props: P) {
 		const { isFallback = false } = useRouter() || {};
 
@@ -21,6 +27,7 @@ const withFailStates = <P,>(
 
 		return <Component {...(props as Must<P>)} />;
 	}
+
 	return WithFailStates;
 };
 export default withFailStates;

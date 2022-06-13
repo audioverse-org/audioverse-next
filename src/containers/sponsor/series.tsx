@@ -51,4 +51,6 @@ function SponsorSeries({
 	);
 }
 
-export default withFailStates(SponsorSeries, ({ nodes }) => !nodes?.length);
+export default withFailStates(SponsorSeries, {
+	should404: ({ nodes }) => !nodes?.length,
+});

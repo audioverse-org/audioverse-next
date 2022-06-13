@@ -307,4 +307,6 @@ function PresenterDetail({
 	);
 }
 
-export default withFailStates(PresenterDetail, ({ person }) => !person);
+export default withFailStates(PresenterDetail, {
+	should404: ({ person }) => !person,
+});

@@ -270,7 +270,6 @@ function CollectionDetail({
 	);
 }
 
-export default withFailStates(
-	CollectionDetail,
-	({ collection }) => !collection
-);
+export default withFailStates(CollectionDetail, {
+	should404: ({ collection }) => !collection,
+});

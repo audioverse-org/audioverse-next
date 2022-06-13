@@ -41,4 +41,6 @@ export function AudiobooksList({
 	);
 }
 
-export default withFailStates(AudiobooksList, ({ nodes }) => !nodes.length);
+export default withFailStates(AudiobooksList, {
+	should404: ({ nodes }) => !nodes.length,
+});

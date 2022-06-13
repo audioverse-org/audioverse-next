@@ -2,7 +2,7 @@ import omit from 'lodash/omit';
 import reduce from 'lodash/reduce';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
@@ -30,6 +30,7 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './index.module.scss';
+import Head from 'next/head';
 
 export type SearchProps = {
 	language: Language;
@@ -39,14 +40,34 @@ function Search({ language }: SearchProps): JSX.Element {
 	const languageRoute = useLanguageRoute();
 	const { query } = useRouter();
 	const term = query.q as string;
+	const intl = useIntl();
 
 	const { data, isLoading } = useGetSearchResultsPageDataQuery({
 		language,
 		term,
 	});
 
+	const head = (
+		<Head>
+			<title>
+				{intl.formatMessage(
+					{
+						id: 'search__titleDynamic',
+						defaultMessage: 'Search | "{term}" | AudioVerse',
+					},
+					{ term }
+				)}
+			</title>
+		</Head>
+	);
+
 	if (isLoading || !data) {
-		return <LoadingCards />;
+		return (
+			<>
+				{head}
+				<LoadingCards />
+			</>
+		);
 	}
 
 	const resultsCount = reduce(
@@ -161,6 +182,7 @@ function Search({ language }: SearchProps): JSX.Element {
 	}
 	return (
 		<>
+			{head}
 			<h5>
 				<FormattedMessage
 					id="search__resultsCount"

@@ -30,4 +30,6 @@ function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Blog, ({ nodes }) => !nodes.length);
+export default withFailStates(Blog, {
+	should404: ({ nodes }) => !nodes.length,
+});

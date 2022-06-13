@@ -39,7 +39,6 @@ function SearchPersons({ nodes, pagination }: SearchPersonsProps) {
 	);
 }
 
-export default withFailStates(
-	SearchPersons,
-	(props: SearchPersonsProps) => !props.nodes?.length
-);
+export default withFailStates(SearchPersons, {
+	should404: (props: SearchPersonsProps) => !props.nodes?.length,
+});

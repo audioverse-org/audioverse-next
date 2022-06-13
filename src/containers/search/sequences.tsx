@@ -39,7 +39,6 @@ function SearchSequences({ nodes, pagination }: SearchSequencesProps) {
 	);
 }
 
-export default withFailStates(
-	SearchSequences,
-	(props: SearchSequencesProps) => !props.nodes?.length
-);
+export default withFailStates(SearchSequences, {
+	should404: (props: SearchSequencesProps) => !props.nodes?.length,
+});

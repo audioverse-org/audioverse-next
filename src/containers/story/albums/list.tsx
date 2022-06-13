@@ -42,4 +42,6 @@ function StoryAlbumsList({
 	);
 }
 
-export default withFailStates(StoryAlbumsList, ({ nodes }) => !nodes?.length);
+export default withFailStates(StoryAlbumsList, {
+	should404: ({ nodes }) => !nodes?.length,
+});

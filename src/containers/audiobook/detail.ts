@@ -6,7 +6,6 @@ export interface AudiobookDetailProps {
 	sequence: GetAudiobookDetailPageDataQuery['audiobook'];
 }
 
-export default withFailStates<AudiobookDetailProps>(
-	Sequence,
-	(props) => !props.sequence
-);
+export default withFailStates<AudiobookDetailProps>(Sequence, {
+	should404: (props) => !props.sequence,
+});

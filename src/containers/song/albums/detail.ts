@@ -6,7 +6,6 @@ export interface SongAlbumDetailProps {
 	sequence: GetSongAlbumsDetailPageDataQuery['musicAlbum'];
 }
 
-export default withFailStates<SongAlbumDetailProps>(
-	Sequence,
-	({ sequence }) => !sequence
-);
+export default withFailStates<SongAlbumDetailProps>(Sequence, {
+	should404: ({ sequence }) => !sequence,
+});

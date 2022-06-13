@@ -25,4 +25,4 @@ function About({ page: { body, title, slug } }: Must<AboutProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(About, ({ page }) => !page);
+export default withFailStates(About, { should404: ({ page }) => !page });

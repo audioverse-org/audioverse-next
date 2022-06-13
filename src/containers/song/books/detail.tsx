@@ -102,7 +102,6 @@ function SongBooksDetail({
 	);
 }
 
-export default withFailStates(
-	SongBooksDetail,
-	({ musicTracks }) => !musicTracks.length
-);
+export default withFailStates(SongBooksDetail, {
+	should404: ({ musicTracks }) => !musicTracks.length,
+});

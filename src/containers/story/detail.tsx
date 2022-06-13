@@ -6,7 +6,6 @@ export interface StoryDetailProps {
 	recording: GetStoryDetailDataQuery['story'];
 }
 
-export default withFailStates<StoryDetailProps>(
-	Recording,
-	(props) => !props.recording
-);
+export default withFailStates<StoryDetailProps>(Recording, {
+	should404: (props) => !props.recording,
+});

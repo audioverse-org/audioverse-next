@@ -53,4 +53,6 @@ function PresenterAppears({
 	);
 }
 
-export default withFailStates(PresenterAppears, ({ nodes }) => !nodes.length);
+export default withFailStates(PresenterAppears, {
+	should404: ({ nodes }) => !nodes.length,
+});

@@ -59,4 +59,6 @@ function SponsorTeachings({
 	);
 }
 
-export default withFailStates(SponsorTeachings, ({ nodes }) => !nodes?.length);
+export default withFailStates(SponsorTeachings, {
+	should404: ({ nodes }) => !nodes?.length,
+});

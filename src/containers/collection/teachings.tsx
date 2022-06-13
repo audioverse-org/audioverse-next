@@ -58,7 +58,6 @@ function CollectionTeachings({
 	);
 }
 
-export default withFailStates(
-	CollectionTeachings,
-	({ nodes }) => !nodes.length
-);
+export default withFailStates(CollectionTeachings, {
+	should404: ({ nodes }) => !nodes.length,
+});

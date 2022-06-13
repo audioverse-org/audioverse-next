@@ -2237,6 +2237,9 @@
   "search__title": {
     "string": "Search"
   },
+  "search__titleDynamic": {
+    "string": "Search | \"{term}\" | AudioVerse"
+  },
   "sequenceType__audiobookTitle": {
     "string": "Book"
   },
