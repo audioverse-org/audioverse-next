@@ -50,15 +50,23 @@ export default function HelpWidget(): JSX.Element {
 			return;
 		}
 
-		doBeacon('identify', {
-			email: d.email,
-			name: d.name,
-		});
-
 		doBeacon(
 			'session-data',
 			mapValues(d, (v) => v?.toString() || 'undefined')
 		);
+
+		doBeacon('prefill', {
+			name: d.name,
+		});
+
+		const isEmailPrivate = d.email.includes('@privaterelay.appleid.com');
+
+		if (isEmailPrivate) return;
+
+		doBeacon('identify', {
+			email: d.email,
+			name: d.name,
+		});
 	}, [doBeacon, data]);
 
 	useEffect(() => {

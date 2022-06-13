@@ -1,13 +1,12 @@
 import { act, screen, waitFor } from '@testing-library/react';
-import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import Script from 'next/script';
 
 import HelpWidget from '@components/molecules/helpWidget';
-import { fetchApi } from '@lib/api/fetchApi';
 import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
+import { buildLoader } from '@lib/test/buildLoader';
 
 jest.mock('next/script');
 
@@ -21,35 +20,31 @@ const runOnLoad = () => {
 	});
 };
 
-function loadData() {
-	when(fetchApi)
-		.calledWith(GetHelpWidgetDataDocument, expect.anything())
-		.mockResolvedValue({
-			me: {
-				user: {
-					name: 'the_name',
-					email: 'the_email',
-					image: {
-						url: 'the_image_url',
-					},
-
-					address1: 'the_address1',
-					address2: 'the_address2',
-					autoplay: true,
-					city: 'the_city',
-					country: 'the_country',
-					createdAt: new Date(),
-					id: 'the_id',
-					isSuperuser: true,
-					language: 'the_language',
-					lastActivity: new Date(),
-					postalCode: 'the_postalCode',
-					province: 'the_province',
-					timezone: 'the_timezone',
-				},
+const loadData = buildLoader(GetHelpWidgetDataDocument, {
+	me: {
+		user: {
+			name: 'the_name',
+			email: 'the_email',
+			image: {
+				url: 'the_image_url',
 			},
-		});
-}
+
+			address1: 'the_address1',
+			address2: 'the_address2',
+			autoplay: true,
+			city: 'the_city',
+			country: 'the_country',
+			createdAt: new Date(),
+			id: 'the_id',
+			isSuperuser: true,
+			language: 'the_language',
+			lastActivity: new Date(),
+			postalCode: 'the_postalCode',
+			province: 'the_province',
+			timezone: 'the_timezone',
+		},
+	},
+});
 
 describe('help widget', () => {
 	beforeEach(() => {
@@ -255,6 +250,45 @@ describe('help widget', () => {
 					postalCode: 'the_postalCode',
 					province: 'the_province',
 					timezone: 'the_timezone',
+				})
+			);
+		});
+	});
+
+	it('does not identify user if using private email', async () => {
+		loadData({
+			me: {
+				user: {
+					email: '123@privaterelay.appleid.com',
+				},
+			},
+		});
+
+		await renderComponent();
+
+		runOnLoad();
+
+		expect(mockBeacon).not.toBeCalledWith('identify', expect.any(Object));
+	});
+
+	it('prefills name when email is private', async () => {
+		loadData({
+			me: {
+				user: {
+					email: '123@privaterelay.appleid.com',
+				},
+			},
+		});
+
+		await renderComponent();
+
+		runOnLoad();
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith(
+				'prefill',
+				expect.objectContaining({
+					name: 'the_name',
 				})
 			);
 		});
