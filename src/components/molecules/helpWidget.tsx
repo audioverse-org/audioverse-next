@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Button from '@components/molecules/button';
@@ -10,6 +9,7 @@ import useHelpScoutLabels from '@lib/useHelpScoutLabels';
 import IconQuestionCircle from '@public/img/icons/icon-question-circle.svg';
 
 import { Beacon } from '../../types/window';
+import mapValues from 'lodash/mapValues';
 
 const BEACON_ID = 'e73e9329-30be-4766-99bb-6bfdd739e316';
 
@@ -54,6 +54,11 @@ export default function HelpWidget(): JSX.Element {
 			email: d.email,
 			name: d.name,
 		});
+
+		doBeacon(
+			'session-data',
+			mapValues(d, (v) => v?.toString() || 'undefined')
+		);
 	}, [doBeacon, data]);
 
 	useEffect(() => {

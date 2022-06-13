@@ -58,7 +58,6 @@ function CollectionSequences({
 	);
 }
 
-export default withFailStates(
-	CollectionSequences,
-	({ nodes }) => !nodes.length
-);
+export default withFailStates(CollectionSequences, {
+	useShould404: ({ nodes }) => !nodes.length,
+});

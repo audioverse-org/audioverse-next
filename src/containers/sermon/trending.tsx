@@ -49,4 +49,6 @@ function TeachingsTrending({
 	);
 }
 
-export default withFailStates(TeachingsTrending, ({ nodes }) => !nodes?.length);
+export default withFailStates(TeachingsTrending, {
+	useShould404: ({ nodes }) => !nodes?.length,
+});

@@ -236,4 +236,6 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(SponsorDetail, ({ sponsor }) => !sponsor);
+export default withFailStates(SponsorDetail, {
+	useShould404: ({ sponsor }) => !sponsor,
+});
