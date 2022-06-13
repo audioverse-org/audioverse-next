@@ -37,27 +37,71 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
-  build:
+        timeout-minutes: 1
+  prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Run Prettier
+        id: prettier-run
+        uses: rutajdash/prettier-cli-action@v1.0.0
         with:
-          node-version: 16.15.0
-      - uses: actions/cache@v2
+          file_pattern: '**/*.{js,jsx,ts,tsx}'
+          config_path: ./.prettierrc
+        timeout-minutes: 1
+      # This step only runs if prettier finds errors causing the previous step to fail
+      # This steps lists the files where errors were found
+      - name: Prettier Output
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          echo "The following files are not formatted:"
+          echo "${{steps.prettier-run.outputs.prettier_output}}"
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
+      - uses: actions/checkout@v1
+      - name: Delete default configuration
+        run: rm .lighthouserc.yaml
+      - name: Wait for Vercel preview URL
+        uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
+        id: waitFor200
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build:dev
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 1200
+          check_interval: 10
       - name: Run Lighthouse
-        # TODO: remove `|| true` when we're ready to get serious about lighthouse errors
-        run: npm run lighthouse || true
+        uses: treosh/lighthouse-ci-action@v9
+        id: lighthouse
+        with:
+          urls: |
+            ${{steps.waitFor200.outputs.url}}/
+            ${{steps.waitFor200.outputs.url}}/en
+            ${{steps.waitFor200.outputs.url}}/es
+            ${{steps.waitFor200.outputs.url}}/en/discover
+            ${{steps.waitFor200.outputs.url}}/en/teachings/all/page/1
+            ${{steps.waitFor200.outputs.url}}/en/teachings/300
+            ${{steps.waitFor200.outputs.url}}/en/bibles
+            ${{steps.waitFor200.outputs.url}}/en/presenters/1309/amanda-anguish
+          runs: 3
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Format comment
+        uses: actions/github-script@v6
+        id: formatComment
+        with:
+          script: |
+            const parsed = JSON.parse('${{steps.lighthouse.outputs.links}}');
+            const keys = Object.keys(parsed);
+            const lines = keys.map(k => `- [${k}](${parsed[k]})`);
+            return `# Lighthouse Results\n\n${lines.join('\n')}`;
+          result-encoding: string
+      - name: Add comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: ${{steps.formatComment.outputs.result}}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
   test:
     runs-on: ubuntu-latest
     steps:
