@@ -6,7 +6,6 @@ module.exports = {
 	},
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
-		'import',
 		'formatjs',
 		'testing-library',
 		'jest-dom',
@@ -65,7 +64,6 @@ module.exports = {
 				varsIgnorePattern: '_',
 			},
 		],
-		'import/order': 'off',
 		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'testing-library/prefer-screen-queries': 'off',
@@ -81,14 +79,6 @@ module.exports = {
 	settings: {
 		react: {
 			version: 'detect',
-		},
-		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx'],
-		},
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
-			},
 		},
 	},
 	overrides: [
