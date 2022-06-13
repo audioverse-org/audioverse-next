@@ -4,10 +4,8 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	ignorePatterns: ['**/*.js', 'src/lib/generated/**/*'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
-		'import',
 		'formatjs',
 		'testing-library',
 		'jest-dom',
@@ -21,7 +19,6 @@ module.exports = {
 		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
-		'plugin:prettier/recommended',
 		'plugin:testing-library/dom',
 		'plugin:jest-dom/recommended',
 		'plugin:@next/next/recommended',
@@ -61,30 +58,13 @@ module.exports = {
 				ignoreCase: true,
 			},
 		],
-		'import/order': [
-			'error',
-			{
-				groups: [
-					'builtin',
-					'external',
-					'internal',
-					'parent',
-					'sibling',
-					'index',
-				],
-				'newlines-between': 'always',
-				alphabetize: {
-					order: 'asc',
-					caseInsensitive: true,
-				},
-			},
-		],
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
 				varsIgnorePattern: '_',
 			},
 		],
+		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'testing-library/prefer-screen-queries': 'off',
 		'testing-library/await-async-utils': 'off',
@@ -99,14 +79,6 @@ module.exports = {
 	settings: {
 		react: {
 			version: 'detect',
-		},
-		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx'],
-		},
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
-			},
 		},
 	},
 	overrides: [

@@ -1,11 +1,21 @@
 query getHelpWidgetData {
 	me {
 		user {
+			id
+			createdAt
+			lastActivity
 			name
-			image {
-				url(size: 200)
-			}
 			email
+			language
+			timezone
+			address1
+			address2
+			city
+			province
+			country
+			postalCode
+			autoplay
+			isSuperuser
 		}
 	}
 }
