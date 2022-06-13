@@ -48,5 +48,5 @@ function SongBookTrack({
 }
 
 export default withFailStates(SongBookTrack, {
-	should404: (props) => !props.recording,
+	useShould404: (props) => !props.recording,
 });

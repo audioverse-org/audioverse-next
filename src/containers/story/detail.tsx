@@ -7,5 +7,5 @@ export interface StoryDetailProps {
 }
 
 export default withFailStates<StoryDetailProps>(Recording, {
-	should404: (props) => !props.recording,
+	useShould404: (props) => !props.recording,
 });

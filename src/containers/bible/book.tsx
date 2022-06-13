@@ -321,5 +321,5 @@ function BookInner({
 }
 
 export default withFailStates(Book, {
-	should404: ({ chapters }: BookProps) => !chapters.length,
+	useShould404: ({ chapters }: BookProps) => !chapters.length,
 });

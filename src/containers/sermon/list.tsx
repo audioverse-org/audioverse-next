@@ -50,5 +50,5 @@ function SermonList({ nodes, pagination, filter }: SermonListProps) {
 }
 
 export default withFailStates(SermonList, {
-	should404: (props: SermonListProps) => !props.nodes?.length,
+	useShould404: (props: SermonListProps) => !props.nodes?.length,
 });

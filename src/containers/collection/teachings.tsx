@@ -59,5 +59,5 @@ function CollectionTeachings({
 }
 
 export default withFailStates(CollectionTeachings, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

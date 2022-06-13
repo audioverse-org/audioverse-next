@@ -7,5 +7,5 @@ export interface SermonDetailProps {
 }
 
 export default withFailStates<SermonDetailProps>(Recording, {
-	should404: (props) => !props.recording,
+	useShould404: (props) => !props.recording,
 });

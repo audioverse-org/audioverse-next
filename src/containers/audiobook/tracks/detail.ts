@@ -7,5 +7,5 @@ export interface AudiobookTrackDetailProps {
 }
 
 export default withFailStates<AudiobookTrackDetailProps>(Recording, {
-	should404: (props) => !props.recording,
+	useShould404: (props) => !props.recording,
 });

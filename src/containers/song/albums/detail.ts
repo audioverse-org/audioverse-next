@@ -7,5 +7,5 @@ export interface SongAlbumDetailProps {
 }
 
 export default withFailStates<SongAlbumDetailProps>(Sequence, {
-	should404: ({ sequence }) => !sequence,
+	useShould404: ({ sequence }) => !sequence,
 });

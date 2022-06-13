@@ -82,5 +82,5 @@ function Presenters({
 }
 
 export default withFailStates(Presenters, {
-	should404: ({ persons }) => !persons?.length,
+	useShould404: ({ persons }) => !persons?.length,
 });

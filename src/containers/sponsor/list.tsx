@@ -70,5 +70,5 @@ function Sponsors({
 }
 
 export default withFailStates(Sponsors, {
-	should404: ({ sponsors }) => !sponsors?.length,
+	useShould404: ({ sponsors }) => !sponsors?.length,
 });

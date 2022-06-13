@@ -50,5 +50,5 @@ function TeachingsTrending({
 }
 
 export default withFailStates(TeachingsTrending, {
-	should404: ({ nodes }) => !nodes?.length,
+	useShould404: ({ nodes }) => !nodes?.length,
 });

@@ -7,5 +7,5 @@ export interface StoryAlbumDetailProps {
 }
 
 export default withFailStates<StoryAlbumDetailProps>(Sequence, {
-	should404: (props) => !props.sequence,
+	useShould404: (props) => !props.sequence,
 });

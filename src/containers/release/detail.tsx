@@ -208,5 +208,5 @@ function ReleaseDetail({
 }
 
 export default withFailStates(ReleaseDetail, {
-	should404: ({ mediaReleaseForm }) => !mediaReleaseForm,
+	useShould404: ({ mediaReleaseForm }) => !mediaReleaseForm,
 });

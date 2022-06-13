@@ -59,5 +59,5 @@ function CollectionPresenters({
 }
 
 export default withFailStates(CollectionPresenters, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

@@ -37,5 +37,5 @@ function SeriesList({ nodes, pagination }: SeriesListProps): JSX.Element {
 }
 
 export default withFailStates(SeriesList, {
-	should404: ({ nodes }) => !nodes?.length,
+	useShould404: ({ nodes }) => !nodes?.length,
 });

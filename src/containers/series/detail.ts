@@ -7,5 +7,5 @@ export interface SeriesDetailProps {
 }
 
 export default withFailStates<SeriesDetailProps>(Sequence, {
-	should404: ({ sequence }) => !sequence,
+	useShould404: ({ sequence }) => !sequence,
 });

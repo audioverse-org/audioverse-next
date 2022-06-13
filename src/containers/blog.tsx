@@ -31,5 +31,5 @@ function Blog({ nodes: blogPosts, pagination }: BlogProps): JSX.Element {
 }
 
 export default withFailStates(Blog, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

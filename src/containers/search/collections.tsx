@@ -40,5 +40,5 @@ function SearchCollections({ nodes, pagination }: SearchCollectionsProps) {
 }
 
 export default withFailStates(SearchCollections, {
-	should404: (props: SearchCollectionsProps) => !props.nodes?.length,
+	useShould404: (props: SearchCollectionsProps) => !props.nodes?.length,
 });

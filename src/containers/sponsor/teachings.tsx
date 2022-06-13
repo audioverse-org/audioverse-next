@@ -60,5 +60,5 @@ function SponsorTeachings({
 }
 
 export default withFailStates(SponsorTeachings, {
-	should404: ({ nodes }) => !nodes?.length,
+	useShould404: ({ nodes }) => !nodes?.length,
 });

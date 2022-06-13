@@ -126,5 +126,5 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 }
 
 export default withFailStates(Version, {
-	should404: ({ version }) => !version,
+	useShould404: ({ version }) => !version,
 });

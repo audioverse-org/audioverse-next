@@ -59,5 +59,5 @@ function CollectionSequences({
 }
 
 export default withFailStates(CollectionSequences, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

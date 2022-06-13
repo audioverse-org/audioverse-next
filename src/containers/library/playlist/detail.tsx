@@ -106,5 +106,5 @@ function LibraryPlaylistDetail({
 }
 
 export default withFailStates(LibraryPlaylistDetail, {
-	should404: ({ playlist }) => !playlist,
+	useShould404: ({ playlist }) => !playlist,
 });

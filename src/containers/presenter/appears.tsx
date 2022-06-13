@@ -54,5 +54,5 @@ function PresenterAppears({
 }
 
 export default withFailStates(PresenterAppears, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

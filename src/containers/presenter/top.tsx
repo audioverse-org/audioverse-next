@@ -38,5 +38,5 @@ function PresenterTop({
 }
 
 export default withFailStates(PresenterTop, {
-	should404: ({ person }) => !person,
+	useShould404: ({ person }) => !person,
 });

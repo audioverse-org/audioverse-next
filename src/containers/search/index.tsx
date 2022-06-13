@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
@@ -36,18 +37,11 @@ export type SearchProps = {
 	language: Language;
 };
 
-function Search({ language }: SearchProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
-	const { query } = useRouter();
-	const term = query.q as string;
+function SearchHead(): JSX.Element {
 	const intl = useIntl();
+	const term = useRouter().query.q;
 
-	const { data, isLoading } = useGetSearchResultsPageDataQuery({
-		language,
-		term,
-	});
-
-	const head = (
+	return (
 		<Head>
 			<title>
 				{intl.formatMessage(
@@ -60,14 +54,20 @@ function Search({ language }: SearchProps): JSX.Element {
 			</title>
 		</Head>
 	);
+}
 
-	if (isLoading || !data) {
-		return (
-			<>
-				{head}
-				<LoadingCards />
-			</>
-		);
+function Search({ language }: SearchProps): JSX.Element {
+	const languageRoute = useLanguageRoute();
+	const { query } = useRouter();
+	const term = query.q as string;
+
+	const { data } = useGetSearchResultsPageDataQuery({
+		language,
+		term,
+	});
+
+	if (!data) {
+		throw new Error('Unreachable');
 	}
 
 	const resultsCount = reduce(
@@ -182,7 +182,7 @@ function Search({ language }: SearchProps): JSX.Element {
 	}
 	return (
 		<>
-			{head}
+			<SearchHead />
 			<h5>
 				<FormattedMessage
 					id="search__resultsCount"
@@ -211,4 +211,35 @@ function Search({ language }: SearchProps): JSX.Element {
 	);
 }
 
-export default withFailStates(Search);
+export default withFailStates(Search, {
+	useShould404: ({ language }) => {
+		const { query } = useRouter();
+		const term = query.q as string;
+		const { isLoading, data } = useGetSearchResultsPageDataQuery({
+			language,
+			term,
+		});
+		return !isLoading && !data;
+	},
+	useIsLoading: ({ language }) => {
+		const { query } = useRouter();
+		const term = query.q as string;
+		const { isLoading } = useGetSearchResultsPageDataQuery({
+			language,
+			term,
+		});
+		return isLoading;
+	},
+	Loading: () => (
+		<>
+			<SearchHead />
+			<LoadingCards />
+		</>
+	),
+	NotFound: () => (
+		<>
+			<SearchHead />
+			<NotFoundBase />
+		</>
+	),
+});

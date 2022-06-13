@@ -52,5 +52,5 @@ function SponsorConferences({
 }
 
 export default withFailStates(SponsorConferences, {
-	should404: ({ nodes }) => !nodes?.length,
+	useShould404: ({ nodes }) => !nodes?.length,
 });

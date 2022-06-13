@@ -40,5 +40,5 @@ function SearchTeachings({ nodes, pagination }: SearchTeachingsProps) {
 }
 
 export default withFailStates(SearchTeachings, {
-	should404: (props: SearchTeachingsProps) => !props.nodes?.length,
+	useShould404: (props: SearchTeachingsProps) => !props.nodes?.length,
 });

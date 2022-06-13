@@ -54,5 +54,5 @@ function PresenterSequences({
 }
 
 export default withFailStates(PresenterSequences, {
-	should404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes }) => !nodes.length,
 });

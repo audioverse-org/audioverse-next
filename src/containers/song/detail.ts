@@ -9,5 +9,5 @@ export interface SongDetailProps {
 }
 
 export default withFailStates<SongDetailProps>(Recording, {
-	should404: (props) => !props.recording,
+	useShould404: (props) => !props.recording,
 });

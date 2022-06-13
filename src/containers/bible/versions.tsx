@@ -56,5 +56,5 @@ function Versions({ versions }: VersionsProps): JSX.Element {
 }
 
 export default withFailStates(Versions, {
-	should404: ({ versions }) => !versions.length,
+	useShould404: ({ versions }) => !versions.length,
 });

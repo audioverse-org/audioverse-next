@@ -308,5 +308,5 @@ function PresenterDetail({
 }
 
 export default withFailStates(PresenterDetail, {
-	should404: ({ person }) => !person,
+	useShould404: ({ person }) => !person,
 });

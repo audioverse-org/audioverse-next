@@ -271,5 +271,5 @@ function CollectionDetail({
 }
 
 export default withFailStates(CollectionDetail, {
-	should404: ({ collection }) => !collection,
+	useShould404: ({ collection }) => !collection,
 });
