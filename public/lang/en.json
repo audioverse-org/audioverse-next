@@ -649,10 +649,6 @@
   "contact__title": {
     "string": "Contact"
   },
-  "copyrightInfos__multipleCopyrightExplanation": {
-    "comment": "Copyright infos component multiple copyright explanation",
-    "string": "Portions of this production are covered under the following license terms:"
-  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
