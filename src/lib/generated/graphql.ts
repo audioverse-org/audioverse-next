@@ -5911,8 +5911,6 @@ export type CardSponsorFragment = { __typename?: 'Sponsor', id: string | number,
 
 export type CopyrightInfoFragment = { __typename?: 'Recording', copyrightYear: number | null, contentType: RecordingContentType, distributionAgreement: { __typename?: 'DistributionAgreement', sponsor: { __typename?: 'Sponsor', title: string } | null, license: { __typename?: 'License', summary: string, image: { __typename?: 'Image', url: string } | null } | null } | null, collection: { __typename?: 'Collection', title: string } | null, sponsor: { __typename?: 'Sponsor', title: string } | null };
 
-export type CopyrightInfosFragment = { __typename?: 'Recording', id: string | number, copyrightYear: number | null, contentType: RecordingContentType, distributionAgreement: { __typename?: 'DistributionAgreement', id: string | number, sponsor: { __typename?: 'Sponsor', title: string } | null, license: { __typename?: 'License', summary: string, image: { __typename?: 'Image', url: string } | null } | null } | null, sponsor: { __typename?: 'Sponsor', id: string | number, title: string } | null, collection: { __typename?: 'Collection', title: string } | null };
-
 export type GetHelpWidgetDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6978,17 +6976,14 @@ fragment cardPlaylist on UserPlaylist{id title recordings(first:2){nodes{...teas
 export const CardPostFragmentDoc = `
 fragment cardPost on BlogPost{image{url(size:500 cropMode:MAX_SIZE)}publishDate title teaser canonicalPath(useFuturePath:true)readingDuration}
 `;
-export const CopyrightInfoFragmentDoc = `
-fragment copyrightInfo on Recording{copyrightYear contentType distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}collection{title}sponsor{title}}
-`;
-export const CopyrightInfosFragmentDoc = `
-fragment copyrightInfos on Recording{id copyrightYear distributionAgreement{id}sponsor{id}...copyrightInfo}
-`;
 export const SponsorLockupFragmentDoc = `
 fragment sponsorLockup on Sponsor{id title canonicalPath(useFuturePath:true)image{url(size:128)}}
 `;
 export const SequenceNavFragmentDoc = `
 fragment sequenceNav on Recording{sequencePreviousRecording{canonicalPath(useFuturePath:true)}sequenceNextRecording{canonicalPath(useFuturePath:true)}}
+`;
+export const CopyrightInfoFragmentDoc = `
+fragment copyrightInfo on Recording{copyrightYear contentType distributionAgreement{sponsor{title}license{summary image{url(size:100 cropMode:MAX_SIZE)}}}collection{title}sponsor{title}}
 `;
 export const ButtonDownloadFragmentDoc = `
 fragment buttonDownload on Recording{isDownloadAllowed videoDownloads:videoFiles(allowedContainers:MP4){url(requestType:DOWNLOAD)filesize height width}audioDownloads:audioFiles(allowedContainers:MP3){url(requestType:DOWNLOAD)filesize bitrate}}
@@ -9070,7 +9065,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 							): Promise<GetWithAuthGuardDataQuery> {
 								return fetchApi(GetWithAuthGuardDataDocument, { variables });
 							}
-
 
 
 
