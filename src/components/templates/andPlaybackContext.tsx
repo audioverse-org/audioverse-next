@@ -1,6 +1,5 @@
 import throttle from 'lodash/throttle';
 import React, {
-	MutableRefObject,
 	ReactNode,
 	useCallback,
 	useEffect,
@@ -21,11 +20,13 @@ import {
 	Scalars,
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import styles from '@components/templates/andMiniplayer.module.scss';
+import 'video.js/dist/video-js.css';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
 
-// If this solution becomes unviable, for instance, due to needing to
+// If this solution becomes impractical, for instance, due to needing to
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
@@ -108,11 +109,6 @@ export type PlaybackContextType = {
 	requestFullscreen: () => void;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
-	getRefs: () => {
-		origin?: MutableRefObject<HTMLDivElement | null>;
-		video?: MutableRefObject<HTMLDivElement | null>;
-		videoEl?: MutableRefObject<HTMLVideoElement | null>;
-	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
 		prefersAudio?: boolean
@@ -148,7 +144,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	requestFullscreen: () => undefined,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
-	getRefs: () => ({}),
 	_setRecording: () => undefined,
 });
 
@@ -345,11 +340,6 @@ export default function AndPlaybackContext({
 			}
 		},
 		setIsPaused: (paused) => setIsPaused(paused),
-		getRefs: () => ({
-			origin: originRef,
-			video: videoRef,
-			videoEl: videoElRef,
-		}),
 		_setRecording: (
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined
@@ -453,6 +443,28 @@ export default function AndPlaybackContext({
 
 	return (
 		<PlaybackContext.Provider value={playback}>
+			<div ref={originRef} className={styles.videoOrigin}>
+				<div ref={videoRef} className={styles.playerElement}>
+					<div data-vjs-player={true}>
+						<video
+							ref={videoElRef}
+							className="video-js"
+							playsInline
+							data-testid="video-element"
+							onTimeUpdate={() => {
+								if (!playerRef.current) return;
+								const t = playerRef.current.currentTime();
+								const d = playerRef.current.duration();
+								const p = d ? t / d : 0;
+								playback.setProgress(p, false);
+							}}
+							onPause={() => playback.setIsPaused(true)}
+							onPlay={() => playback.setIsPaused(false)}
+							onEnded={() => playback.advanceRecording()}
+						/>
+					</div>
+				</div>
+			</div>
 			{children}
 		</PlaybackContext.Provider>
 	);

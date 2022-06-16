@@ -6,7 +6,6 @@ import Heading6 from '@components/atoms/heading6';
 import withFailStates from '@components/HOCs/withFailStates';
 import PersonLockup from '@components/molecules/personLockup';
 import Player from '@components/molecules/player';
-import AndMiniplayer from '@components/templates/andMiniplayer';
 import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
@@ -42,66 +41,59 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 		);
 	}
 	return (
-		<AndMiniplayer>
-			<div className={styles.base}>
-				{sequenceHat}
-				<div className={styles.content}>
-					<div className={styles.titleRow}>
-						<div className={styles.text}>
-							{sequenceIndex && sequence && (
-								<Heading6 large sans className={styles.part}>
-									<FormattedMessage
-										id="embed__partInfo"
-										defaultMessage="Part {index} of {count}"
-										values={{
-											index: sequenceIndex,
-											count: sequence.recordings.aggregate?.count,
-										}}
-									/>
-								</Heading6>
-							)}
-							<Heading1 className={styles.title}>
-								<a
-									href={canonicalUrl}
-									target="_top"
-									className={styles.titleLink}
-								>
-									{title}
-								</a>
-							</Heading1>
-						</div>
-						<a
-							className={styles.logo}
-							href="https://www.audioverse.org/"
-							target="_top"
-						>
-							<Logo />
-						</a>
-					</div>
-					<ul className={styles.speakers}>
-						{persons.map((speaker) => (
-							<li key={speaker.canonicalPath}>
-								<PersonLockup
-									person={speaker}
-									textColor={textSecondaryColor}
-									hoverColor={accentColor}
-									isLinked
+		<div className={styles.base}>
+			{sequenceHat}
+			<div className={styles.content}>
+				<div className={styles.titleRow}>
+					<div className={styles.text}>
+						{sequenceIndex && sequence && (
+							<Heading6 large sans className={styles.part}>
+								<FormattedMessage
+									id="embed__partInfo"
+									defaultMessage="Part {index} of {count}"
+									values={{
+										index: sequenceIndex,
+										count: sequence.recordings.aggregate?.count,
+									}}
 								/>
-							</li>
-						))}
-					</ul>
-
-					<Player
-						{...{
-							recording,
-							backgroundColor,
-							// prefersAudio: true,
-							compact: true,
-						}}
-					/>
+							</Heading6>
+						)}
+						<Heading1 className={styles.title}>
+							<a href={canonicalUrl} target="_top" className={styles.titleLink}>
+								{title}
+							</a>
+						</Heading1>
+					</div>
+					<a
+						className={styles.logo}
+						href="https://www.audioverse.org/"
+						target="_top"
+					>
+						<Logo />
+					</a>
 				</div>
+				<ul className={styles.speakers}>
+					{persons.map((speaker) => (
+						<li key={speaker.canonicalPath}>
+							<PersonLockup
+								person={speaker}
+								textColor={textSecondaryColor}
+								hoverColor={accentColor}
+								isLinked
+							/>
+						</li>
+					))}
+				</ul>
+
+				<Player
+					{...{
+						recording,
+						backgroundColor,
+						compact: true,
+					}}
+				/>
 			</div>
-		</AndMiniplayer>
+		</div>
 	);
 }
 
