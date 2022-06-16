@@ -50,12 +50,23 @@
 	font-weight: 600;
 }
 
+.titleRow {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	width: 0;
+	flex: 1 1 auto;
+}
+
 .title {
-	width: 416px;
+	padding-right: 10vw;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 .titleLink {
 	&,
 	&:hover {
@@ -64,12 +75,8 @@
 	}
 }
 
-.titleRow {
-	display: flex;
-	align-items: center;
-	> *:first-child {
-		flex-grow: 1;
-	}
+.logo {
+	flex: 0 0 auto;
 }
 
 .speakers {

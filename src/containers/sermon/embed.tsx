@@ -47,7 +47,7 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 				{sequenceHat}
 				<div className={styles.content}>
 					<div className={styles.titleRow}>
-						<div>
+						<div className={styles.text}>
 							{sequenceIndex && sequence && (
 								<Heading6 large sans className={styles.part}>
 									<FormattedMessage
@@ -70,7 +70,11 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 								</a>
 							</Heading1>
 						</div>
-						<a href="https://www.audioverse.org/" target="_top">
+						<a
+							className={styles.logo}
+							href="https://www.audioverse.org/"
+							target="_top"
+						>
 							<Logo />
 						</a>
 					</div>
