@@ -10,14 +10,14 @@ type Props = {
 } & Omit<INamedAvatarProps, 'name' | 'image' | 'href'>;
 
 export default function SponsorLockup({
-	sponsor: { title, imageWithFallback, canonicalPath },
+	sponsor: { title, image, canonicalPath },
 	isLinked,
 	...props
 }: Props): JSX.Element {
 	return (
 		<NamedAvatar
 			name={title}
-			image={imageWithFallback.url}
+			image={image?.url}
 			href={isLinked ? canonicalPath : undefined}
 			{...props}
 		/>

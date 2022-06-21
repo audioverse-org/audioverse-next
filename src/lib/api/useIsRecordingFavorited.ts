@@ -14,17 +14,36 @@ export function useIsRecordingFavorited(
 	disabled?: boolean
 ): IUseIsFavoritedResult {
 	const queryClient = useQueryClient();
+
+	const queryKey = [
+		RECORDING_FAVORITED_QUERY_KEY_PREFIX,
+		{ recordingId, sequenceId },
+	];
+
+	const favoritedQueryFn = () => {
+		if (disabled) {
+			return Promise.resolve(false);
+		}
+
+		return recordingIsFavorited(recordingId);
+	};
+
+	const setFavoriteQueryFn = (isFavorited: boolean) => {
+		return setRecordingFavorited(recordingId, isFavorited).then((result) => {
+			if (!isFavorited && sequenceId) {
+				// When a recording in a sequence is unfavorited the sequence is unfavorited
+				queryClient.setQueryData(['isSequenceFavorited', sequenceId], false);
+			}
+			return result;
+		});
+	};
+
+	const invalidateQueryKeys = [['sequenceIsFavorited', { id: sequenceId }]];
+
 	return useIsFavorited(
-		[RECORDING_FAVORITED_QUERY_KEY_PREFIX, { recordingId, sequenceId }],
-		() => (disabled ? false : recordingIsFavorited(recordingId)),
-		(isFavorited) =>
-			setRecordingFavorited(recordingId, isFavorited).then((result) => {
-				if (!isFavorited && sequenceId) {
-					// When a recording in a sequence is unfavorited the sequence is unfavorited
-					queryClient.setQueryData(['isSequenceFavorited', sequenceId], false);
-				}
-				return result;
-			}),
-		[['sequenceIsFavorited', { id: sequenceId }]]
+		queryKey,
+		favoritedQueryFn,
+		setFavoriteQueryFn,
+		invalidateQueryKeys
 	);
 }

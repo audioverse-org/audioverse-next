@@ -1,22 +1,21 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetCollectionListPageDataDocument,
 	GetCollectionListPathsDataDocument,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/page/[i]';
 
-const renderPage = buildStaticRenderer(CollectionList, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(CollectionList, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetCollectionListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			conferences: {
@@ -48,10 +47,17 @@ function loadData() {
 }
 
 describe('conference list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
+	});
+
 	it('renders', async () => {
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(
+		expect(fetchApi).toBeCalledWith(
 			GetCollectionListPageDataDocument,
 			expect.anything()
 		);
@@ -66,7 +72,7 @@ describe('conference list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetCollectionListPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				conferences: {
@@ -101,7 +107,7 @@ describe('conference list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetCollectionListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

@@ -4,23 +4,21 @@ module.exports = {
 		project: 'tsconfig.json',
 		sourceType: 'module',
 	},
-	ignorePatterns: ['fileMock.js'],
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
-		'import',
 		'formatjs',
 		'testing-library',
 		'jest-dom',
 		'@mizdra/layout-shift',
 		'react-hooks',
 		'lodash',
+		'@calm/react-intl',
 	],
 	extends: [
 		'eslint:recommended',
 		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
-		'plugin:prettier/recommended',
 		'plugin:testing-library/dom',
 		'plugin:jest-dom/recommended',
 		'plugin:@next/next/recommended',
@@ -31,6 +29,28 @@ module.exports = {
 		jest: true,
 	},
 	rules: {
+		'@calm/react-intl/missing-formatted-message': [
+			'error',
+			{
+				noTrailingWhitespace: true,
+				ignoreLinks: false,
+				enforceLabels: true,
+				enforceImageAlts: true,
+				enforceInputProps: true,
+			},
+		],
+		'@calm/react-intl/missing-attribute': [
+			'error',
+			{
+				noTrailingWhitespace: true,
+				noSpreadOperator: true,
+				requireDescription: false,
+				formatDefineMessages: true,
+				requireIdAsString: true,
+				requireDefaultMessage: true,
+			},
+		],
+		'@calm/react-intl/missing-values': 2,
 		'sort-imports': [
 			'error',
 			{
@@ -38,30 +58,13 @@ module.exports = {
 				ignoreCase: true,
 			},
 		],
-		'import/order': [
+		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
-				groups: [
-					'builtin',
-					'external',
-					'internal',
-					'parent',
-					'sibling',
-					'index',
-				],
-				'newlines-between': 'always',
-				alphabetize: {
-					order: 'asc',
-					caseInsensitive: true,
-				},
+				varsIgnorePattern: '_',
 			},
 		],
-		'@typescript-eslint/no-unused-vars': [
-			'warn',
-			{
-				argsIgnorePattern: '(type|of|returns)',
-			},
-		],
+		'no-mixed-spaces-and-tabs': 'off',
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'testing-library/prefer-screen-queries': 'off',
 		'testing-library/await-async-utils': 'off',
@@ -77,20 +80,21 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
-		'import/parsers': {
-			'@typescript-eslint/parser': ['.ts', '.tsx'],
-		},
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
-			},
-		},
 	},
 	overrides: [
 		{
-			files: ['*.spec.ts', '*.spec.tsx', 'src/__mocks__/**/*'],
+			files: [
+				'*.spec.ts',
+				'*.spec.tsx',
+				'**/__mocks__/**/*',
+				'**/__tests__/**/*',
+				'src/lib/test/**/*',
+			],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
+				'@calm/react-intl/missing-formatted-message': 'off',
+				'@calm/react-intl/missing-attribute': 'off',
+				'@calm/react-intl/missing-values': 'off',
 			},
 		},
 	],

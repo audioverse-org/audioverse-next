@@ -19,9 +19,9 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 import IconAirPlayAudio from '../../../public/img/icon-airplay-audio.svg';
 import IconAirPlayVideo from '../../../public/img/icon-airplay-video.svg';
 import IconChromeCast from '../../../public/img/icon-chromecast.svg';
-import IconFullscreen from '../../../public/img/icon-fullscreen.svg';
-import IconPause from '../../../public/img/icon-pause-large.svg';
-import IconPlay from '../../../public/img/icon-play-large.svg';
+import IconFullscreen from '../../../public/img/icons/icon-fullscreen.svg';
+import IconPause from '../../../public/img/icons/icon-pause-large.svg';
+import IconPlay from '../../../public/img/icons/icon-play-large.svg';
 
 import CircleButton from './circleButton';
 import styles from './player.module.scss';

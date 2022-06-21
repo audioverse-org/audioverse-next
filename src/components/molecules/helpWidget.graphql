@@ -1,0 +1,21 @@
+query getHelpWidgetData {
+	me {
+		user {
+			id
+			createdAt
+			lastActivity
+			name
+			email
+			language
+			timezone
+			address1
+			address2
+			city
+			province
+			country
+			postalCode
+			autoplay
+			isSuperuser
+		}
+	}
+}

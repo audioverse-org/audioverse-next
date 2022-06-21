@@ -2,7 +2,8 @@ import React from 'react';
 
 import * as bibleBrain from '@lib/api/bibleBrain';
 import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
-import { buildLoader, renderWithIntl } from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Version, {
 	getStaticPaths,
 	getStaticProps,
@@ -14,7 +15,7 @@ async function renderPage() {
 	const { props } = (await getStaticProps({
 		params: { id: 'ENGKJV2' },
 	})) as any;
-	return renderWithIntl(<Version {...props} />);
+	return renderWithProviders(<Version {...props} />, undefined);
 }
 
 const loadData = buildLoader(GetAudiobibleVersionsDataDocument, {

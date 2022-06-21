@@ -5,3 +5,16 @@
 		font-family: 'Inter var', 'system-ui', sans-serif;
 	}
 }
+
+// https://gist.github.com/chasewoodford/2939636
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@mixin fadeIn($duration) {
+	animation: fadeIn $duration;
+}

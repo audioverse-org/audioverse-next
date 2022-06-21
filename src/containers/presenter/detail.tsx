@@ -33,7 +33,7 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ForwardIcon from '../../../public/img/icon-forward-light.svg';
+import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -307,4 +307,6 @@ function PresenterDetail({
 	);
 }
 
-export default withFailStates(PresenterDetail, ({ person }) => !person);
+export default withFailStates(PresenterDetail, {
+	useShould404: ({ person }) => !person,
+});

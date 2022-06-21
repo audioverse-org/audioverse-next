@@ -5,9 +5,11 @@ import {
 	getByLabelText,
 	getByText,
 	queryByLabelText,
+	screen,
 	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
@@ -15,19 +17,17 @@ import videojs from 'video.js';
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import * as api from '@lib/api';
+import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { BaseColors } from '@lib/constants';
 import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import {
-	buildRenderer,
-	loadRouter,
-	mockVideojs,
-	renderWithIntl,
-	setPlayerMock,
-} from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import renderWithProviders from '@lib/test/renderWithProviders';
+import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
+
+const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
 
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -71,8 +71,8 @@ const renderComponent = buildRenderer(
 describe('player', () => {
 	beforeEach(() => {
 		setPlayerMock();
-		loadRouter({});
-		jest.spyOn(api, 'recordingIsFavorited').mockResolvedValue(false);
+		__loadRouter({});
+		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 
 	it('has button', async () => {
@@ -205,9 +205,11 @@ describe('player', () => {
 	it('does not reload player on play', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		expect(mockPlayer.src).not.toBeCalled();
 	});
@@ -391,7 +393,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithIntl(
+		const { getByTestId } = await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -403,7 +405,8 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>
+			</AndPlaybackContext>,
+			undefined
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -447,6 +450,8 @@ describe('player', () => {
 		const poster = getByAltText('the_sermon_title') as HTMLElement;
 
 		userEvent.click(poster.parentElement as HTMLElement);
+
+		await screen.findAllByLabelText('pause');
 
 		expect(queryByAltText('the_sermon_title')).not.toBeInTheDocument();
 	});
@@ -511,7 +516,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithIntl(
+		const { getByTestId } = await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -523,7 +528,8 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>
+			</AndPlaybackContext>,
+			undefined
 		);
 
 		const firstPlayer = getByTestId('first_sermon_id');
@@ -607,6 +613,8 @@ describe('player', () => {
 
 		userEvent.click(poster.parentElement as HTMLElement);
 
+		await screen.findAllByLabelText('pause');
+
 		expect(getByTestId('portal')).toBeInTheDocument();
 	});
 
@@ -643,6 +651,8 @@ describe('player', () => {
 		const result = await renderComponent();
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -701,6 +711,8 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
+		await screen.findAllByLabelText('pause');
+
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		expect(getByText(miniplayer, 'the_sequence_title')).toBeInTheDocument();
@@ -727,6 +739,8 @@ describe('player', () => {
 		});
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -778,6 +792,8 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
+		await screen.findAllByLabelText('pause');
+
 		const miniplayer = result.getByLabelText('miniplayer');
 
 		expect(getByLabelText(miniplayer, 'back 15 seconds')).toBeInTheDocument();
@@ -787,6 +803,8 @@ describe('player', () => {
 		const result = await renderComponent();
 
 		userEvent.click(result.getByLabelText('play'));
+
+		await screen.findAllByLabelText('pause');
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -925,6 +943,8 @@ describe('player', () => {
 		const poster = result.getByAltText('the_sermon_title') as HTMLElement;
 
 		userEvent.click(poster.parentElement as HTMLElement);
+
+		await screen.findAllByLabelText('pause');
 
 		const player = result.getByLabelText('player');
 
@@ -1181,9 +1201,9 @@ describe('player', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
-
 		await waitFor(() => {
+			const miniplayer = result.getByLabelText('miniplayer');
+
 			expect(getByText(miniplayer, '2:00')).toBeInTheDocument();
 		});
 	});

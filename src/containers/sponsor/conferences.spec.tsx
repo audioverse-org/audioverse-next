@@ -1,24 +1,19 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSponsorConferencesPageDataDocument,
 	GetSponsorConferencesPathsDataDocument,
 } from '@lib/generated/graphql';
-import {
-	buildLoader,
-	buildStaticRenderer,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SponsorConferences, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 
-const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps, {
-	language: 'en',
-	id: 'the_sponsor_id',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps);
 
 const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 	sponsor: {
@@ -53,12 +48,16 @@ const loadData = buildLoader(GetSponsorConferencesPageDataDocument, {
 });
 
 describe('sponsor conferences page', () => {
-	it('renders', async () => {
-		await renderPage();
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			id: 'the_sponsor_id',
+			i: '1',
+		});
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSponsorConferencesPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				sponsors: {
@@ -111,7 +110,7 @@ describe('sponsor conferences page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSponsorConferencesPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

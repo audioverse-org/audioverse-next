@@ -8,7 +8,6 @@ export interface SongDetailProps {
 	recording: SongTrack | null | undefined;
 }
 
-export default withFailStates<SongDetailProps>(
-	Recording,
-	(props) => !props.recording
-);
+export default withFailStates<SongDetailProps>(Recording, {
+	useShould404: (props) => !props.recording,
+});

@@ -163,6 +163,12 @@ interface AndMiniplayerProps {
 
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 
+type VideoJsType = typeof VideoJs;
+type Airplay = { default: (vjs: unknown) => unknown };
+type Chromecast = {
+	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
+};
+
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
@@ -170,20 +176,13 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
-	const [videojs, setVideojs] = useState<typeof VideoJs>();
-	useEffect(() => {
-		Promise.all([
-			import('video.js'),
-			import('@silvermine/videojs-airplay'),
-			import('@silvermine/videojs-chromecast'),
-		]).then(([vJS, airplay, chromecast]) => {
-			airplay.default(vJS.default);
-			chromecast.default(vJS.default, {
-				preloadWebComponents: true,
-			});
-			setVideojs(vJS);
-		});
-	}, []);
+	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
+	const [airplay] = useState<Promise<Airplay>>(
+		() => import('@silvermine/videojs-airplay')
+	);
+	const [chromecast] = useState<Promise<Chromecast>>(
+		() => import('@silvermine/videojs-chromecast')
+	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -285,7 +284,7 @@ export default function AndPlaybackContext({
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
 			return (
-				(!onLoadRef.current && playerRef.current?.duration()) ||
+				playerRef.current?.duration() ||
 				sourcesRef.current[0]?.duration ||
 				recordingRef.current?.duration ||
 				0
@@ -426,28 +425,21 @@ export default function AndPlaybackContext({
 					},
 				},
 			};
+
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
-			} else if (videojs) {
-				const p = videojs.default(currentVideoEl, options);
-				p.on('fullscreenchange', () => {
-					p.controls(p.isFullscreen());
-				});
-				playerRef.current = p;
-				resetPlayer();
 			} else {
-				Promise.all([
-					import('video.js'),
-					import('@silvermine/videojs-airplay'),
-					import('@silvermine/videojs-chromecast'),
-				]).then(([vJS, airplay, chromecast]) => {
-					airplay.default(vJS.default);
-					chromecast.default(vJS.default, {
+				videojs.then(async (v) => {
+					(await airplay).default(v.default);
+					(await chromecast).default(v.default, {
 						preloadWebComponents: true,
 					});
-					setVideojs(vJS);
-					playerRef.current = vJS.default(currentVideoEl, options);
+					const p = v.default(currentVideoEl, options);
+					p.on('fullscreenchange', () => {
+						p.controls(p.isFullscreen());
+					});
+					playerRef.current = p;
 					resetPlayer();
 				});
 			}

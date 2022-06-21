@@ -11,7 +11,7 @@ import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { CardSponsorFragment } from '@lib/generated/graphql';
 
-import UserPlusIcon from '../../../../public/img/fa-user-plus.svg';
+import UserPlusIcon from '../../../../public/img/icons/fa-user-plus.svg';
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
 

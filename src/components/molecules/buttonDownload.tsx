@@ -6,7 +6,7 @@ import { BaseColors } from '@lib/constants';
 import { ButtonDownloadFragment } from '@lib/generated/graphql';
 import { readableBytes } from '@lib/readableBytes';
 
-import IconDownload from '../../../public/img/icon-download.svg';
+import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './buttonDownload.module.scss';
 import { isBackgroundColorDark } from './buttonPlay';

@@ -1,19 +1,24 @@
+import { __loadQuery } from 'next/router';
 import React from 'react';
 
 import { Language } from '@lib/generated/graphql';
-import { loadQuery, renderWithIntl } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/search';
 
+import { screen, waitFor } from '@testing-library/react';
+
+jest.mock('next/head');
+
 const renderPage = async () => {
-	return renderWithIntl(<Search language={Language.English} />);
+	return renderWithProviders(<Search language={Language.English} />, undefined);
 };
 
 describe('search', () => {
 	it('renders', async () => {
-		loadQuery();
+		__loadQuery();
 
 		await renderPage();
 	});
@@ -32,5 +37,19 @@ describe('search', () => {
 		})) as any;
 
 		expect(props).toBeDefined();
+	});
+
+	it('includes search term in title', async () => {
+		__loadQuery({
+			q: 'test',
+		});
+
+		await renderPage();
+
+		await waitFor(() => {
+			expect(screen.getByTestId('head')).toHaveTextContent(
+				'Search | "test" | AudioVerse'
+			);
+		});
 	});
 });

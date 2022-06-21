@@ -44,4 +44,6 @@ function CollectionList({
 	);
 }
 
-export default withFailStates(CollectionList, ({ nodes }) => !nodes?.length);
+export default withFailStates(CollectionList, {
+	useShould404: ({ nodes }) => !nodes?.length,
+});

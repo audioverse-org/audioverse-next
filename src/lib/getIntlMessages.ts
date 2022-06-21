@@ -7,5 +7,9 @@ export default function getIntlMessages(
 ): Promise<ResolvedIntlConfig['messages']> {
 	const lang = getLanguageByBaseUrl(languageRoute, 'en');
 
-	return import(`../../public/compiled-lang/${lang?.base_url}.json`);
+	if (!lang) {
+		throw new Error(`Language "${languageRoute}" not found`);
+	}
+
+	return import(`../../public/compiled-lang/${lang.base_url}.json`);
 }

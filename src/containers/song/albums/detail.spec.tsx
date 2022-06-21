@@ -1,24 +1,30 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSongAlbumsDetailPageDataDocument,
 	GetSongAlbumsDetailPathsDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
 
-const renderPage = buildStaticRenderer(Song, getStaticProps, {
-	language: 'en',
-	id: 'the_album_id',
-});
+const renderPage = buildStaticRenderer(Song, getStaticProps);
 
 describe('song album detail page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			id: 'the_album_id',
+		});
+	});
+
 	it('renders', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())
 			.mockResolvedValue({
 				musicAlbum: {
@@ -43,7 +49,7 @@ describe('song album detail page', () => {
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSongAlbumsDetailPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSongAlbumsDetailPageDataDocument, {
 			variables: {
 				id: 'the_album_id',
 			},
@@ -51,7 +57,7 @@ describe('song album detail page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSongAlbumsDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				musicAlbums: {
@@ -69,7 +75,7 @@ describe('song album detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

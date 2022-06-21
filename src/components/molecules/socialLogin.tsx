@@ -115,10 +115,11 @@ export default function SocialLogin({
 						const socialId = get(response, 'userID');
 						const socialToken = get(response, 'accessToken');
 						const status = get(response, 'status');
+						const statusText = get(response, 'statusText');
 
 						if (!socialToken) {
 							if (status) {
-								setErrors([status]);
+								setErrors([`${status}: ${statusText}`]);
 							}
 							return;
 						}
