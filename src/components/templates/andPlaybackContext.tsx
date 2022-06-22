@@ -9,8 +9,8 @@ import React, {
 	useState,
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
+import type { VideoJsPlayer } from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {

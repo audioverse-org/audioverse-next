@@ -5,6 +5,8 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
+jest.mock('videojs-overlay');
+
 const renderApp = (component: any, props: any) => {
 	return render(<MyApp Component={component} pageProps={props} />);
 };
@@ -18,7 +20,7 @@ describe('app', () => {
 		});
 	});
 
-	it('sets title', async () => {
+	it('sets title this one', async () => {
 		await act(async () => {
 			const { getByTestId } = await render(
 				<MyApp
