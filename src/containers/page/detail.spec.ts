@@ -16,8 +16,6 @@ const loadData = buildLoader(GetCustomDetailPageDataDocument, {
 	page: {
 		title: 'the_title',
 		body: 'the_body',
-		type: 'the_type',
-		slug: 'the_slug',
 	},
 });
 const loadStaticPathsData = buildLoader(
@@ -26,9 +24,8 @@ const loadStaticPathsData = buildLoader(
 		pages: {
 			nodes: [
 				{
-					id: 'the_id',
-					slug: 'the_slug',
 					type: 'CUSTOM',
+					canonicalPath: 'the_canonical_path',
 				},
 			],
 		},
@@ -54,7 +51,7 @@ describe('CustomPageDetail', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/en/page/the_id/the_slug');
+		expect(paths).toContain('the_canonical_path');
 	});
 
 	it('skips non-custom pages', async () => {
@@ -62,9 +59,8 @@ describe('CustomPageDetail', () => {
 			pages: {
 				nodes: [
 					{
-						id: 'the_id',
-						slug: 'the_slug',
 						type: 'not_custom',
+						canonicalPath: 'the_canonical_path'
 					},
 				],
 			},
@@ -72,7 +68,7 @@ describe('CustomPageDetail', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).not.toContain('/en/page/the_id/the_slug');
+		expect(paths).not.toContain('the_canonical_path');
 	});
 
 	it('includes body', async () => {
