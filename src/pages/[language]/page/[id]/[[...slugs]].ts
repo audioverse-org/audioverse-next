@@ -38,6 +38,6 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getCustomDetailPageStaticPaths,
 		(d) => d.pages.nodes?.filter((p) => p.type === PageType.Custom),
-		(l, n) => `/${l}/page/${n.id}/${n.slug}`
+		(_, { canonicalPath }) => canonicalPath
 	);
 }

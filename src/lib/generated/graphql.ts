@@ -6333,7 +6333,7 @@ export type GetCustomDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetCustomDetailPageDataQuery = { __typename?: 'Query', page: { __typename?: 'Page', title: string, body: string, type: PageType, slug: string } | null };
+export type GetCustomDetailPageDataQuery = { __typename?: 'Query', page: { __typename?: 'Page', title: string, body: string } | null };
 
 export type GetCustomDetailPageStaticPathsQueryVariables = Exact<{
   language: Language;
@@ -6341,7 +6341,7 @@ export type GetCustomDetailPageStaticPathsQueryVariables = Exact<{
 }>;
 
 
-export type GetCustomDetailPageStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', id: string | number, slug: string, type: PageType }> | null } };
+export type GetCustomDetailPageStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', type: PageType, canonicalPath: string }> | null } };
 
 export type GetPresenterAppearsPageDataQueryVariables = Exact<{
   language: Language;
@@ -7861,7 +7861,7 @@ export const useGetLibraryPlaylistsDataQuery = <
       options
     );
 export const GetCustomDetailPageDataDocument = `
-query getCustomDetailPageData($id:ID!){page(id:$id){title body type slug}}
+query getCustomDetailPageData($id:ID!){page(id:$id){title body}}
 `;
 export const useGetCustomDetailPageDataQuery = <
       TData = GetCustomDetailPageDataQuery,
@@ -7876,7 +7876,7 @@ export const useGetCustomDetailPageDataQuery = <
       options
     );
 export const GetCustomDetailPageStaticPathsDocument = `
-query getCustomDetailPageStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{id slug type}}}
+query getCustomDetailPageStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{type canonicalPath(useFuturePath:true)}}}
 `;
 export const useGetCustomDetailPageStaticPathsQuery = <
       TData = GetCustomDetailPageStaticPathsQuery,

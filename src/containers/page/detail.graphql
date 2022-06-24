@@ -2,17 +2,14 @@ query getCustomDetailPageData($id: ID!) {
 	page(id: $id) {
 		title
 		body
-		type
-		slug
 	}
 }
 
 query getCustomDetailPageStaticPaths($language: Language!, $first: Int!) {
 	pages(language: $language, first: $first) {
 		nodes {
-			id
-			slug
 			type
+			canonicalPath(useFuturePath: true)
 		}
 	}
 }
