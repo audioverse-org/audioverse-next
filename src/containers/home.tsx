@@ -131,7 +131,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								layout="fill"
 								objectFit="cover"
 								priority
-								alt="Home page main image"
+								alt={intl.formatMessage({
+									id: 'homePage__mainImageDesc',
+									defaultMessage:
+										'A women wearing headphone and reading book outdoors.',
+								})}
 							/>
 						</div>
 					}

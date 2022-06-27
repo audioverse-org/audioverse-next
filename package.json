@@ -110,7 +110,7 @@
     "husky": "^7.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.5.1",
-    "jest-canvas-mock": "^2.3.1",
+    "jest-canvas-mock": "^2.4.0",
     "jest-date-mock": "^1.0.8",
     "jest-when": "^3.5.1",
     "next-sitemap": "^2.5.10",

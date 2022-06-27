@@ -354,6 +354,7 @@ export default function AndPlaybackContext({
 		requestFullscreen: () => {
 			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
 			overlayPlayer.requestFullscreen();
+			console.log(overlayPlayer.overlay, 'overlayPlayer');
 			overlayPlayer.controlBar.hide();
 			overlayPlayer.overlay({
 				overlays: [

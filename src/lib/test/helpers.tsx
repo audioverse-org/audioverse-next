@@ -27,6 +27,10 @@ import {
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 
+interface VideoJsPlayerWithOverlay extends videojs.Player {
+	overlay: (options: object) => void;
+}
+
 export const mockedFetchApi = fetchApi as jest.Mock;
 
 export function loadQuery(query: ParsedUrlQuery = {}): void {
@@ -236,7 +240,7 @@ interface SetPlayerMockOptions {
 }
 
 type MockPlayer = Pick<
-	videojs.Player,
+	VideoJsPlayerWithOverlay,
 	| 'play'
 	| 'pause'
 	| 'paused'
@@ -251,6 +255,7 @@ type MockPlayer = Pick<
 	| 'controls'
 	| 'supportsFullScreen'
 	| 'on'
+	| 'overlay'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 	_fire: (event: string, data?: any) => void;
@@ -305,9 +310,11 @@ export function setPlayerMock(options: SetPlayerMockOptions = {}): MockPlayer {
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
 		options: jest.fn(),
+		overlay: jest.fn(),
 		controlBar: {
 			createEl: jest.fn(),
 			dispose: jest.fn(),
+			hide: jest.fn(),
 		} as any,
 		playbackRate: jest.fn((newRate?: number) => {
 			if (newRate) playbackRate = newRate;
