@@ -5983,7 +5983,7 @@ export type GetAboutStaticPathsQueryVariables = Exact<{
 }>;
 
 
-export type GetAboutStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', canonicalPath: string }> | null } };
+export type GetAboutStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', canonicalPath: string, type: PageType }> | null } };
 
 export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
   language: Language;
@@ -7160,7 +7160,7 @@ export const useGetAboutPageDataQuery = <
       options
     );
 export const GetAboutStaticPathsDocument = `
-query getAboutStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)}}}
+query getAboutStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{canonicalPath(useFuturePath:true)type}}}
 `;
 export const useGetAboutStaticPathsQuery = <
       TData = GetAboutStaticPathsQuery,
