@@ -11,8 +11,12 @@ interface SetPlayerMockOptions {
 	isFullscreen?: boolean;
 }
 
+interface VideoJsPlayerWithOverlay extends videojs.Player {
+	overlay: (options: object) => void;
+}
+
 type MockPlayer = Pick<
-	videojs.Player,
+	VideoJsPlayerWithOverlay,
 	| 'play'
 	| 'pause'
 	| 'paused'
@@ -27,6 +31,7 @@ type MockPlayer = Pick<
 	| 'controls'
 	| 'supportsFullScreen'
 	| 'on'
+	| 'overlay'
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 	_fire: (event: string, data?: any) => void;
@@ -86,11 +91,13 @@ export default function setPlayerMock(
 		controlBar: {
 			createEl: jest.fn(),
 			dispose: jest.fn(),
+			hide: jest.fn(),
 		} as any,
 		playbackRate: jest.fn((newRate?: number) => {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;
 		}),
+		overlay: jest.fn(),
 		defaultPlaybackRate: jest.fn(),
 		requestFullscreen: jest.fn(),
 		controls: jest.fn(),

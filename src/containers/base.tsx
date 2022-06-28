@@ -106,7 +106,6 @@ function Base<P>({
 							href: '/apple-touch-icon.png',
 						},
 					]}
-					// TODO: Don't include empty tags
 					description={description ? description : ''}
 					canonical={canonicalUrl ? canonicalUrl : ''}
 					openGraph={{

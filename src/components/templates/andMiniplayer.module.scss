@@ -95,6 +95,5 @@
 :global(.andMiniplayer--withPlayer) .helpButton {
 	@media (min-width: $breakpoint-lg) {
 		bottom: $miniplayer-height + $grid-gap;
-
 	}
 }
