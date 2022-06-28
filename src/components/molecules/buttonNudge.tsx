@@ -6,12 +6,12 @@ import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import IconJumpBackMediumDark from '../../../public/img/icon-jump-back-medium-dark.svg';
-import IconJumpBackMedium from '../../../public/img/icon-jump-back-medium.svg';
-import IconJumpBack from '../../../public/img/icon-jump-back.svg';
-import IconJumpForwardMediumDark from '../../../public/img/icon-jump-forward-medium-dark.svg';
-import IconJumpForwardMedium from '../../../public/img/icon-jump-forward-medium.svg';
-import IconJumpForward from '../../../public/img/icon-jump-forward.svg';
+import IconJumpBackMediumDark from '../../../public/img/icons/icon-jump-back-medium-dark.svg';
+import IconJumpBackMedium from '../../../public/img/icons/icon-jump-back-medium.svg';
+import IconJumpBack from '../../../public/img/icons/icon-jump-back.svg';
+import IconJumpForwardMediumDark from '../../../public/img/icons/icon-jump-forward-medium-dark.svg';
+import IconJumpForwardMedium from '../../../public/img/icons/icon-jump-forward-medium.svg';
+import IconJumpForward from '../../../public/img/icons/icon-jump-forward.svg';
 
 import styles from './buttonNudge.module.scss';
 import { isBackgroundColorDark } from './buttonPlay';
