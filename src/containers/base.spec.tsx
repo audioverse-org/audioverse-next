@@ -23,7 +23,7 @@ describe('app', () => {
 	});
 	afterEach(cleanup);
 
-	it('sets title this one', async () => {
+	it('sets title', async () => {
 		await act(async () => {
 			await render(
 				<MyApp
