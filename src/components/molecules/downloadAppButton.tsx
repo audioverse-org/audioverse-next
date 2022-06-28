@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconDownload from '../../../public/img/icon-download-light.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
+import IconDownload from '../../../public/img/icons/icon-download-light.svg';
 
 import Button, { IButtonType } from './button';
 import styles from './downloadAppButton.module.scss';

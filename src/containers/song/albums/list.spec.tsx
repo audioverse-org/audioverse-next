@@ -1,22 +1,21 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSongAlbumsListPageDataDocument,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Songs, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
 
-const renderPage = buildStaticRenderer(Songs, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSongAlbumsListPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			musicAlbums: {
@@ -58,12 +57,19 @@ function loadData() {
 }
 
 describe('songs list page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
+	});
+
 	it('renders', async () => {
 		loadData();
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSongAlbumsListPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSongAlbumsListPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 			},

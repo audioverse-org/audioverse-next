@@ -16,6 +16,8 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 
+import styles from './base.module.scss';
+
 export interface IBaseProps {
 	disableSidebar?: boolean;
 	title?: string;
@@ -54,14 +56,10 @@ function Base<P>({
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
+
 	return (
-		<>
+		<div className={styles.base}>
 			<React.StrictMode>
-				{/* <Head>
-					<link rel="icon" href="/favicon.ico" sizes="any" />
-					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				</Head> */}
 				<Script
 					id="google-analytics"
 					strategy="afterInteractive"
@@ -152,7 +150,7 @@ function Base<P>({
 					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
-		</>
+		</div>
 	);
 }
 

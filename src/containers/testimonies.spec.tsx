@@ -1,20 +1,21 @@
 import { when } from 'jest-when';
 import React from 'react';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import {
 	GetTestimoniesPageDataDocument,
 	GetTestimoniesPathsDataDocument,
 	Testimony,
 } from '@lib/generated/graphql';
-import { mockedFetchApi, renderWithIntl } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetTestimoniesPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			testimonies: {
@@ -33,7 +34,7 @@ function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 }
 
 function setEntityCount(count: number) {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetTestimoniesPathsDataDocument, expect.anything())
 		.mockResolvedValue({
 			testimonies: {
@@ -48,7 +49,7 @@ async function renderPage() {
 	const params = { i: '1', language: 'en' };
 	const { props } = (await getStaticProps({ params })) as any;
 
-	return renderWithIntl(<Testimonies {...props} />);
+	return renderWithProviders(<Testimonies {...props} />, undefined);
 }
 
 describe('testimonies pages', () => {
@@ -73,7 +74,7 @@ describe('testimonies pages', () => {
 
 		await getStaticPaths();
 
-		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesPathsDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetTestimoniesPathsDataDocument, {
 			variables: { language: 'ENGLISH' },
 		});
 	});
@@ -99,7 +100,7 @@ describe('testimonies pages', () => {
 
 		await getStaticProps({ params: { language: 'en', i: '1' } });
 
-		expect(mockedFetchApi).toBeCalledWith(GetTestimoniesPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetTestimoniesPageDataDocument, {
 			variables: {
 				language: 'ENGLISH',
 				offset: 0,

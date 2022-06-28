@@ -18,8 +18,8 @@ import { BaseColors } from '@lib/constants';
 import { formatLongDateTime } from '@lib/date';
 import { GetLibraryPlaylistPageDataQuery } from '@lib/generated/graphql';
 
-import ListIcon from '../../../../public/img/fa-list.svg';
-import LikeActiveIcon from '../../../../public/img/icon-like-active.svg';
+import ListIcon from '../../../../public/img/icons/fa-list.svg';
+import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
 
 import styles from './detail.module.scss';
 
@@ -105,7 +105,6 @@ function LibraryPlaylistDetail({
 	);
 }
 
-export default withFailStates(
-	LibraryPlaylistDetail,
-	({ playlist }) => !playlist
-);
+export default withFailStates(LibraryPlaylistDetail, {
+	useShould404: ({ playlist }) => !playlist,
+});

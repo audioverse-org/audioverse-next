@@ -4,9 +4,11 @@ import {
 	getByLabelText,
 	getByTestId,
 	getByText,
+	screen,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import { __loadQuery, __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
@@ -14,6 +16,7 @@ import videojs from 'video.js';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
@@ -21,19 +24,14 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	buildStaticRenderer,
-	loadRouter,
-	mockedFetchApi,
-	renderWithIntl,
-	setPlayerMock,
-} from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import renderWithProviders from '@lib/test/renderWithProviders';
+import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
 
-jest.mock('next/router');
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
 jest.mock(
@@ -43,7 +41,7 @@ jest.mock(
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
 		.mockResolvedValue({
 			sermons: {
@@ -82,31 +80,30 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		...sermon,
 	};
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonDetailDataDocument, expect.anything())
 		.mockResolvedValue({ sermon });
 }
 
-const renderPage = buildStaticRenderer(
-	(props: SermonDetailProps) => {
-		return (
-			<AndPlaybackContext>
-				<AndMiniplayer>
-					<SermonDetail {...props} />
-				</AndMiniplayer>
-			</AndPlaybackContext>
-		);
-	},
-	getStaticProps,
-	{
-		language: 'en',
-		id: 'the_sermon_id',
-	}
-);
+const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
+	return (
+		<AndPlaybackContext>
+			<AndMiniplayer>
+				<SermonDetail {...props} />
+			</AndMiniplayer>
+		</AndPlaybackContext>
+	);
+}, getStaticProps);
 
 describe('sermon detail page', () => {
 	beforeEach(() => {
-		loadRouter({ isFallback: false });
+		__loadRouter({
+			isFallback: false,
+			query: {
+				language: 'en',
+				id: 'the_sermon_id',
+			},
+		});
 		setPlayerMock();
 	});
 
@@ -116,15 +113,12 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
-				GetSermonDetailStaticPathsDocument,
-				{
-					variables: {
-						language: 'ENGLISH',
-						first: 10,
-					},
-				}
-			)
+			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
+				variables: {
+					language: 'ENGLISH',
+					first: 10,
+				},
+			})
 		);
 	});
 
@@ -134,15 +128,12 @@ describe('sermon detail page', () => {
 		await getStaticPaths();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
-				GetSermonDetailStaticPathsDocument,
-				{
-					variables: {
-						language: 'SPANISH',
-						first: 10,
-					},
-				}
-			)
+			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
+				variables: {
+					language: 'SPANISH',
+					first: 10,
+				},
+			})
 		);
 	});
 
@@ -163,7 +154,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
@@ -175,7 +166,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
@@ -185,10 +176,11 @@ describe('sermon detail page', () => {
 	});
 
 	it('shows loading screen', async () => {
-		loadRouter({ isFallback: true });
+		__loadRouter({ isFallback: true });
 
-		const { getByLabelText } = await renderWithIntl(
-			<SermonDetail recording={null} />
+		const { getByLabelText } = await renderWithProviders(
+			<SermonDetail recording={null} />,
+			undefined
 		);
 
 		expect(getByLabelText('Loading…')).toBeInTheDocument();
@@ -213,9 +205,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByLabelText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
+		await act(async () => {
 			userEvent.click(getByLabelText('play'));
 		});
 
@@ -384,7 +376,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes time recorded', async () => {
-		mockedFetchApi.mockResolvedValue({});
+		(fetchApi as jest.Mock).mockResolvedValue({});
 
 		loadSermonDetailData({
 			speakers: [
@@ -456,11 +448,11 @@ describe('sermon detail page', () => {
 			language: Language.Spanish,
 		});
 
-		const { getAllByText } = await renderPage({
-			params: {
-				language: 'es',
-			},
+		__loadQuery({
+			language: 'es',
 		});
+
+		const { getAllByText } = await renderPage();
 
 		const link = getAllByText('series_title')[0]
 			.parentElement as HTMLLinkElement;
@@ -574,7 +566,7 @@ describe('sermon detail page', () => {
 		const { getByText } = await renderPage();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(
+			expect(fetchApi).toBeCalledWith(
 				GetSermonDetailDataDocument,
 				expect.anything()
 			)
@@ -706,7 +698,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on fetch error', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
@@ -1360,6 +1352,25 @@ describe('sermon detail page', () => {
 
 			expect(queryByText('Video Downloads')).not.toBeInTheDocument();
 		});
+	});
+
+	it('plays media on same tick as click', async () => {
+		loadSermonDetailData();
+
+		const mockPlayer = setPlayerMock();
+
+		await renderPage();
+
+		const playButton = screen.getByLabelText('play');
+
+		await act(async () => {
+			userEvent.click(playButton);
+		});
+
+		// This is an attempt to test that we've fixed the "NotAllowedError"
+		// thrown by Safari when media is played asynchronously after a
+		// user interaction.
+		expect(mockPlayer.play).toHaveBeenCalledTimes(1);
 	});
 });
 

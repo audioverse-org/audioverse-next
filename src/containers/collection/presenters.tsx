@@ -58,7 +58,6 @@ function CollectionPresenters({
 	);
 }
 
-export default withFailStates(
-	CollectionPresenters,
-	({ nodes }) => !nodes.length
-);
+export default withFailStates(CollectionPresenters, {
+	useShould404: ({ nodes }) => !nodes.length,
+});

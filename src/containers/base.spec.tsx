@@ -1,8 +1,8 @@
 import { act, cleanup, render } from '@testing-library/react';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 jest.mock('videojs-overlay');
@@ -15,7 +15,7 @@ jest.mock('next/head');
 
 describe('app', () => {
 	beforeEach(() => {
-		loadRouter({
+		__loadRouter({
 			pathname: '/[language]/discover',
 			query: {},
 			asPath: '',
@@ -33,6 +33,7 @@ describe('app', () => {
 			);
 
 			const head = getByTestId('head');
+
 			expect(head.innerHTML).toContain('AudioVerse');
 		});
 	});

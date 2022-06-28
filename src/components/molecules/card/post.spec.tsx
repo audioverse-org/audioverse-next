@@ -1,5 +1,5 @@
 import CardPost from '@components/molecules/card/post';
-import { buildRenderer } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
 
 const renderComponent = buildRenderer(CardPost);
 

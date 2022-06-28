@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Alert from '@components/atoms/alert';
 import Heading1 from '@components/atoms/heading1';
@@ -22,6 +22,7 @@ function ReleaseDetail({
 	mediaReleaseForm,
 }: Must<ReleaseDetailProps>): JSX.Element {
 	const { isClosed, summary } = mediaReleaseForm;
+	const intl = useIntl();
 
 	const [givenName, setGivenName] = useState('');
 	const [surname, setSurname] = useState('');
@@ -103,46 +104,91 @@ function ReleaseDetail({
 						{!isClosed && (
 							<form className={styles.form} onSubmit={onSubmit}>
 								<Input
-									label="First name"
+									label={intl.formatMessage({
+										id: 'release__givenName',
+										defaultMessage: 'Given name',
+									})}
 									value={givenName}
 									setValue={setGivenName}
 								/>
 								<Input
-									label="Last name"
+									label={intl.formatMessage({
+										id: 'release__surname',
+										defaultMessage: 'Surname',
+									})}
 									value={surname}
 									setValue={setSurname}
 								/>
 								<Input
-									label="Email"
+									label={intl.formatMessage({
+										id: 'release__email',
+										defaultMessage: 'Email',
+									})}
 									type="email"
 									value={email}
 									setValue={setEmail}
 								/>
-								<Input label="Phone Number" value={phone} setValue={setPhone} />
 								<Input
-									label="Address"
+									label={intl.formatMessage({
+										id: 'release__phone',
+										defaultMessage: 'Phone',
+									})}
+									value={phone}
+									setValue={setPhone}
+								/>
+								<Input
+									label={intl.formatMessage({
+										id: 'release__address1',
+										defaultMessage: 'Address line 1',
+									})}
 									value={address1}
 									setValue={setAddress1}
 								/>
 								<Input
-									label="Address 2"
+									label={intl.formatMessage({
+										id: 'release__address2',
+										defaultMessage: 'Address line 2',
+									})}
 									value={address2}
 									setValue={setAddress2}
 								/>
-								<Input label="City" value={city} setValue={setCity} />
 								<Input
-									label="State / Province"
+									label={intl.formatMessage({
+										id: 'release__city',
+										defaultMessage: 'City',
+									})}
+									value={city}
+									setValue={setCity}
+								/>
+								<Input
+									label={intl.formatMessage({
+										id: 'release__province',
+										defaultMessage: 'State / Province',
+									})}
 									value={province}
 									setValue={setProvince}
 								/>
 								<Input
-									label="Zip / Postal Code"
+									label={intl.formatMessage({
+										id: 'release__zip',
+										defaultMessage: 'Postal Code',
+									})}
 									value={postalCode}
 									setValue={setPostalCode}
 								/>
-								<Input label="Country" value={country} setValue={setCountry} />
+								<Input
+									label={intl.formatMessage({
+										id: 'release__country',
+										defaultMessage: 'Country',
+									})}
+									value={country}
+									setValue={setCountry}
+								/>
 								<Textarea
-									label="Comments"
+									label={intl.formatMessage({
+										id: 'release__comments',
+										defaultMessage: 'Comments',
+									})}
 									value={comments}
 									setValue={setComments}
 								/>
@@ -161,7 +207,6 @@ function ReleaseDetail({
 	);
 }
 
-export default withFailStates(
-	ReleaseDetail,
-	({ mediaReleaseForm }) => !mediaReleaseForm
-);
+export default withFailStates(ReleaseDetail, {
+	useShould404: ({ mediaReleaseForm }) => !mediaReleaseForm,
+});

@@ -13,8 +13,8 @@ import { SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 
-import IconVolumeHigh from '../../../public/img/icon-volume-high.svg';
-import IconVolumeLow from '../../../public/img/icon-volume-low.svg';
+import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
+import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
 
 import 'video.js/dist/video-js.css';
 import styles from './miniplayerOverlay.module.scss';

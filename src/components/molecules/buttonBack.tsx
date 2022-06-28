@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button, { IButtonType } from '@components/molecules/button';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
 
 export default function ButtonBack({
 	backUrl,
