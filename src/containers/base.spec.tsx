@@ -79,13 +79,13 @@ describe('app', () => {
 
 	it('sets title with props', async () => {
 		await act(async () => {
-			const { getAllByTestId } = await renderApp(() => <>h</>, {
+			const { getByTestId } = await renderApp(() => <>h</>, {
 				title: 'the_prop_title',
 			});
 
-			const head = getAllByTestId('head');
+			const head = getByTestId('head');
 
-			expect(head[0].innerHTML).toContain('the_prop_title | AudioVerse');
+			expect(head.innerHTML).toContain('the_prop_title | AudioVerse');
 		});
 	});
 });
