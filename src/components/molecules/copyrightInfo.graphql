@@ -7,9 +7,6 @@ fragment copyrightInfo on Recording {
 		}
 		license {
 			summary
-			image {
-				url(size: 100, cropMode: MAX_SIZE)
-			}
 		}
 	}
 	collection {

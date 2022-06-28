@@ -91,4 +91,6 @@ function BlogPostDetail({ blogPost, blogPosts }: Must<BlogPostDetailProps>) {
 	);
 }
 
-export default withFailStates(BlogPostDetail, (props) => !props.blogPost);
+export default withFailStates(BlogPostDetail, {
+	useShould404: (props) => !props.blogPost,
+});

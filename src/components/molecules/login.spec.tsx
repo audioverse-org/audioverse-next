@@ -1,22 +1,20 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import Login from '@components/molecules/login';
+import { fetchApi } from '@lib/api/fetchApi';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
-import {
-	loadRouter,
-	mockedFetchApi,
-	renderWithIntl,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 
 function loadForgotPasswordResponse({
 	success = true,
 	errors = [],
 }: { success?: boolean; errors?: { message: string }[] } = {}) {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(LoginForgotPasswordDocument, expect.anything())
 		.mockResolvedValue({
 			userRecover: {
@@ -27,9 +25,9 @@ function loadForgotPasswordResponse({
 }
 
 describe('login form', () => {
-	beforeEach(() => loadRouter({ query: {} }));
+	beforeEach(() => __loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
-		const { getByText } = await renderWithIntl(<Login />);
+		const { getByText } = await renderWithProviders(<Login />, undefined);
 
 		expect(getByText('Forgot password?'));
 	});
@@ -37,14 +35,17 @@ describe('login form', () => {
 	it('triggers forgot password email', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
 		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
 		userEvent.click(getByText('Send reset link'));
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
+			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
 					email: 'the_email',
 				},
@@ -55,7 +56,10 @@ describe('login form', () => {
 	it('shows forgot password success message', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -77,7 +81,10 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -96,7 +103,7 @@ describe('login form', () => {
 		});
 
 		const { getByText, getByPlaceholderText, queryByText } =
-			await renderWithIntl(<Login />);
+			await renderWithProviders(<Login />, undefined);
 
 		userEvent.click(getByText('Forgot password?'));
 
@@ -114,12 +121,13 @@ describe('login form', () => {
 
 	it('displays generic error on fetch error', async () => {
 		await withMutedReactQueryLogger(async () => {
-			when(mockedFetchApi)
+			when(fetchApi)
 				.calledWith(LoginForgotPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 
-			const { getByText, getByPlaceholderText } = await renderWithIntl(
-				<Login />
+			const { getByText, getByPlaceholderText } = await renderWithProviders(
+				<Login />,
+				undefined
 			);
 
 			userEvent.click(getByText('Forgot password?'));
@@ -143,7 +151,10 @@ describe('login form', () => {
 			errors: [{ message: 'error_one' }, { message: 'error_two' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithIntl(<Login />);
+		const { getByText, getByPlaceholderText } = await renderWithProviders(
+			<Login />,
+			undefined
+		);
 
 		userEvent.click(getByText('Forgot password?'));
 

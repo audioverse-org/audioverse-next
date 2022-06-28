@@ -32,7 +32,7 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ForwardIcon from '../../../public/img/icon-forward-light.svg';
+import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -236,4 +236,6 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 	);
 }
 
-export default withFailStates(SponsorDetail, ({ sponsor }) => !sponsor);
+export default withFailStates(SponsorDetail, {
+	useShould404: ({ sponsor }) => !sponsor,
+});

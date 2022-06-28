@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
 import Button from '@components/molecules/button';
-import { refetchUserQueries } from '@lib/api';
+import { refetchUserQueries } from '@lib/api/login';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import styles from './andGlobalModals.module.scss';

@@ -1,24 +1,23 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetStoryDetailDataDocument,
 	GetStoryDetailStaticPathsDocument,
 	Language,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Story, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/[id]/[[...slugs]]';
 
-const renderPage = buildStaticRenderer(Story, getStaticProps, {
-	language: 'en',
-	id: 'the_story_id',
-});
+const renderPage = buildStaticRenderer(Story, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetStoryDetailDataDocument, expect.anything())
 		.mockResolvedValue({
 			story: {
@@ -35,12 +34,19 @@ function loadData() {
 }
 
 describe('story detail page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			id: 'the_story_id',
+		});
+	});
+
 	it('renders', async () => {
 		loadData();
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetStoryDetailDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetStoryDetailDataDocument, {
 			variables: { id: 'the_story_id' },
 		});
 	});
@@ -54,7 +60,7 @@ describe('story detail page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetStoryDetailStaticPathsDocument, expect.anything())
 			.mockResolvedValue({
 				stories: {
@@ -72,7 +78,7 @@ describe('story detail page', () => {
 	});
 
 	it('catches fetch error and renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetStoryDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 

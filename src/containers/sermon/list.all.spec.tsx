@@ -1,8 +1,10 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { useRouter } from 'next/router';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
@@ -13,22 +15,18 @@ import {
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
 
-jest.mock('next/router');
 jest.mock('next/head');
 
-const renderPage = buildStaticRenderer(SermonList, getStaticProps, {
-	language: 'en',
-	i: '1',
-});
+const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
 export function loadSermonListPagePathsData(count: number): void {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetSermonListPagePathsDataDocument, expect.anything())
 		.mockResolvedValue({
 			sermons: {
@@ -43,7 +41,7 @@ export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	mockedFetchApi.mockResolvedValue({
+	(fetchApi as jest.Mock).mockResolvedValue({
 		sermons: {
 			nodes: nodes || [
 				{
@@ -64,7 +62,10 @@ export function loadSermonListData({
 
 describe('sermons list page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
+		__loadQuery({
+			language: 'en',
+			i: '1',
+		});
 	});
 
 	it('can be rendered', async () => {
@@ -107,7 +108,7 @@ describe('sermons list page', () => {
 	it('uses language codes to get sermon counts', async () => {
 		await getStaticPaths();
 
-		expect(mockedFetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetSermonListPagePathsDataDocument, {
 			variables: { language: 'ENGLISH', hasVideo: null },
 		});
 	});
@@ -118,7 +119,7 @@ describe('sermons list page', () => {
 		await getStaticProps({ params: { i: '2', language: 'en' } });
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
+			expect(fetchApi).toBeCalledWith(GetSermonListPageDataDocument, {
 				variables: {
 					language: 'ENGLISH',
 					hasVideo: null,
@@ -139,7 +140,7 @@ describe('sermons list page', () => {
 
 	it('renders 404 on api error', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetSermonListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
@@ -176,9 +177,9 @@ describe('sermons list page', () => {
 	it('calculates pages using items per page', async () => {
 		loadSermonListData({ count: 36 });
 
-		const { getByText } = await renderPage({
-			params: { i: '3', language: 'en' },
-		});
+		__loadQuery({ i: '3', language: 'en' });
+
+		const { getByText } = await renderPage();
 
 		expect(() => getByText('4')).toThrow();
 	});
@@ -186,7 +187,9 @@ describe('sermons list page', () => {
 	it('handles string page index', async () => {
 		loadSermonListData();
 
-		await renderPage({ params: { i: '3', language: 'en' } });
+		__loadQuery({ i: '3', language: 'en' });
+
+		await renderPage();
 	});
 
 	it('links pagination properly', async () => {
@@ -223,14 +226,13 @@ describe('sermons list page', () => {
 
 	it('links All button using lang', async () => {
 		loadSermonListData();
+		__loadQuery({ language: 'es' });
 
-		const { getByRole, getByText } = await renderPage({
-			params: { language: 'es' },
-		});
+		await renderPage();
 
-		userEvent.click(getByText('Filtro'));
+		userEvent.click(await screen.findByText('Filtro'));
 
-		expect(getByRole('link', { name: 'Todo' })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: 'Todo' })).toHaveAttribute(
 			'href',
 			'/es/teachings/all/page/1'
 		);
@@ -270,8 +272,9 @@ describe('sermons list page', () => {
 
 	it('localizes pagination', async () => {
 		loadSermonListData();
+		__loadQuery({ language: 'es' });
 
-		const { getByText } = await renderPage({ params: { language: 'es' } }),
+		const { getByText } = await renderPage(),
 			link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/es/teachings/all/page/1');
@@ -288,7 +291,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes speaker name', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			sermons: {
 				nodes: [
 					{

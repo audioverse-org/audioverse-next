@@ -1,5 +1,4 @@
 import { NextSeo } from 'next-seo';
-// import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
 import {
@@ -15,6 +14,8 @@ import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
+
+import styles from './base.module.scss';
 
 export interface IBaseProps {
 	disableSidebar?: boolean;
@@ -54,14 +55,10 @@ function Base<P>({
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
+
 	return (
-		<>
+		<div className={styles.base}>
 			<React.StrictMode>
-				{/* <Head>
-					<link rel="icon" href="/favicon.ico" sizes="any" />
-					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				</Head> */}
 				<Script
 					id="google-analytics"
 					strategy="afterInteractive"
@@ -84,7 +81,7 @@ function Base<P>({
 					title={title ? `${title} | AudioVerse` : 'AudioVerse'}
 					additionalMetaTags={[
 						{
-							name: 'theme-color',
+							name: 'viewport',
 							content:
 								'width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover',
 						},
@@ -109,6 +106,7 @@ function Base<P>({
 							href: '/apple-touch-icon.png',
 						},
 					]}
+					// TODO: Don't include empty tags
 					description={description ? description : ''}
 					canonical={canonicalUrl ? canonicalUrl : ''}
 					openGraph={{
@@ -152,7 +150,7 @@ function Base<P>({
 					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
-		</>
+		</div>
 	);
 }
 

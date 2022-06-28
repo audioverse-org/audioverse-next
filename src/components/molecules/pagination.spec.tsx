@@ -1,6 +1,8 @@
-import React from 'react';
+import { RenderOptions, RenderResult } from '@testing-library/react';
+import React, { ReactElement } from 'react';
+import { QueryClient } from 'react-query';
 
-import { renderWithIntl } from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
 
 import Pagination, { pagination } from './pagination';
 
@@ -10,9 +12,12 @@ const renderPagination = ({
 	makeRoute = (languageRoute: string, pageIndex: number): string =>
 		`${languageRoute}/the_route/page/${pageIndex}`,
 } = {}) => {
-	return renderWithIntl(
-		<Pagination current={current} total={total} makeRoute={makeRoute} />
-	);
+	return (async function (
+		ui: ReactElement,
+		renderOptions?: RenderOptions
+	): Promise<RenderResult & { queryClient: QueryClient }> {
+		return renderWithProviders(ui, renderOptions);
+	})(<Pagination current={current} total={total} makeRoute={makeRoute} />);
 };
 
 describe('pagination component', () => {
@@ -115,22 +120,27 @@ describe('pagination algorithm', () => {
 	});
 
 	it('handles missing current', async () => {
-		await renderWithIntl(
+		await renderWithProviders(
 			<Pagination
 				{...({ total: 3, base: 'base', makeRoute: () => '' } as any)}
-			/>
+			/>,
+			undefined
 		);
 	});
 
 	it('handles missing total', async () => {
-		await renderWithIntl(
-			<Pagination {...({ current: 1, base: 'base' } as any)} />
+		await renderWithProviders(
+			<Pagination {...({ current: 1, base: 'base' } as any)} />,
+			undefined
 		);
 	});
 
 	it('handles missing base', async () => {
-		await renderWithIntl(
-			<Pagination {...({ current: 1, total: 3, makeRoute: () => '' } as any)} />
+		await renderWithProviders(
+			<Pagination
+				{...({ current: 1, total: 3, makeRoute: () => '' } as any)}
+			/>,
+			undefined
 		);
 	});
 });

@@ -6,6 +6,9 @@
 	padding: 16px;
 	background: $ts-bibleVersionH;
 	cursor: pointer;
+	&:hover:not(.otherHovered) {
+		background-color: $ts-darkened-bibleH;
+	}
 }
 
 .title {

@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React, { PropsWithChildren, useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { RecordingFragment, SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
+import React, { PropsWithChildren, useContext, useEffect } from 'react';
 
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
@@ -14,6 +14,7 @@ const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 const LazyMiniplayerOverlay = dynamic(
 	() => import('../organisms/miniplayerOverlay')
 );
+const LazyHelpWidget = dynamic(() => import('../molecules/helpWidget'));
 
 export default function AndMiniplayer({
 	children,
@@ -44,6 +45,11 @@ export default function AndMiniplayer({
 			</div>
 		);
 	}
+
+	useEffect(() => {
+		document.body.classList.toggle('body--with-miniplayer', !!recording);
+	}, [recording]);
+
 	return (
 		<>
 			<div ref={originRef} className={styles.videoOrigin}>
@@ -70,12 +76,15 @@ export default function AndMiniplayer({
 			</div>
 
 			<div
-				className={
-					recording &&
-					clsx(styles.contentWithPlayer, 'andMiniplayer--withPlayer')
-				}
+				className={clsx({
+					[styles.contentWithPlayer]: !!recording,
+					'andMiniplayer--withPlayer': !!recording,
+				})}
 			>
 				{children}
+				<div className={styles.helpButton}>
+					<LazyHelpWidget />
+				</div>
 			</div>
 			<div ref={titleOverlayRef}>
 				{player?.isFullscreen() && (

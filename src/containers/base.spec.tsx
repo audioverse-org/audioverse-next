@@ -1,8 +1,8 @@
-import { act, cleanup, render } from '@testing-library/react';
+import { act, cleanup, render, screen } from '@testing-library/react';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import { loadRouter } from '@lib/test/helpers';
 import MyApp from '@pages/_app';
 
 jest.mock('videojs-overlay');
@@ -15,7 +15,7 @@ jest.mock('next/head');
 
 describe('app', () => {
 	beforeEach(() => {
-		loadRouter({
+		__loadRouter({
 			pathname: '/[language]/discover',
 			query: {},
 			asPath: '',
@@ -25,15 +25,18 @@ describe('app', () => {
 
 	it('sets title this one', async () => {
 		await act(async () => {
-			const { getByTestId } = await render(
+			await render(
 				<MyApp
 					Component={(() => null) as unknown as typeof React.Component}
 					pageProps={{}}
 				/>
 			);
 
-			const head = getByTestId('head');
-			expect(head.innerHTML).toContain('AudioVerse');
+			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+
+			expect(heads).toEqual(
+				expect.arrayContaining([expect.stringContaining('AudioVerse')])
+			);
 		});
 	});
 
@@ -79,13 +82,17 @@ describe('app', () => {
 
 	it('sets title with props', async () => {
 		await act(async () => {
-			const { getAllByTestId } = await renderApp(() => <>h</>, {
+			await renderApp(() => <>h</>, {
 				title: 'the_prop_title',
 			});
 
-			const head = getAllByTestId('head');
+			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
-			expect(head[0].innerHTML).toContain('the_prop_title | AudioVerse');
+			expect(heads).toEqual(
+				expect.arrayContaining([
+					expect.stringContaining(`the_prop_title | AudioVerse`),
+				])
+			);
 		});
 	});
 });

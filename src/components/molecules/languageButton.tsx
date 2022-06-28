@@ -7,8 +7,8 @@ import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconLanguage from '../../../public/img/icon-language-light.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
+import IconLanguage from '../../../public/img/icons/icon-language-light.svg';
 
 import Button, { IButtonType } from './button';
 import Dropdown from './dropdown';

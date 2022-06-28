@@ -1,24 +1,20 @@
 import { waitFor } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetHomeStaticPropsDocument,
 	GetHomeStaticPropsQuery,
 	RecordingContentType,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	buildLoader,
-	buildStaticRenderer,
-	loadQuery,
-	mockedFetchApi,
-} from '@lib/test/helpers';
+import { buildLoader } from '@lib/test/buildLoader';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
 jest.mock('next/router');
 
-const renderPage = buildStaticRenderer(Home, getStaticProps, {
-	language: 'en',
-});
+const renderPage = buildStaticRenderer(Home, getStaticProps);
 
 const audiobookTrack = {
 	title: 'the_audiobook_track_title',
@@ -206,7 +202,6 @@ const loadData = buildLoader<GetHomeStaticPropsQuery>(
 
 describe('home page', () => {
 	beforeEach(() => {
-		jest.resetAllMocks();
 		loadData();
 	});
 
@@ -237,10 +232,12 @@ describe('home page', () => {
 	});
 
 	it('queries with language', async () => {
-		await renderPage({ params: { language: 'es' } });
+		__loadQuery({ language: 'es' });
+
+		await renderPage();
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {
+			expect(fetchApi).toBeCalledWith(GetHomeStaticPropsDocument, {
 				variables: {
 					language: 'SPANISH',
 				},
@@ -255,7 +252,7 @@ describe('home page', () => {
 	});
 
 	it('falls back to English', async () => {
-		loadQuery({ language: 'ak' });
+		__loadQuery({ language: 'ak' });
 
 		const { getByText } = await renderPage();
 
