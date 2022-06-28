@@ -7,7 +7,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	const path = (req.query.slugs as string[])
 		.map((s) => encodeURIComponent(s))
 		.join('/');
-	const sessionCookie = getSessionToken(req);
+	const sessionCookie =
+		getSessionToken(req) || (req.headers['x-av-session'] as string);
 	res.redirect(
 		`${
 			new URL(process.env.NEXT_PUBLIC_API_URL as string).origin
