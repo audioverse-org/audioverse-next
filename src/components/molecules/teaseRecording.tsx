@@ -18,11 +18,11 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import IconClosure from '../../../public/img/icon-closure.svg';
-import IconDisclosure from '../../../public/img/icon-disclosure.svg';
-import IconListeningAnimated from '../../../public/img/icon-listening-animated.svg';
-import IconPlay from '../../../public/img/icon-play.svg';
-import SuccessIcon from '../../../public/img/icon-success-light.svg';
+import IconClosure from '../../../public/img/icons/icon-closure.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure.svg';
+import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
+import IconPlay from '../../../public/img/icons/icon-play.svg';
+import SuccessIcon from '../../../public/img/icons/icon-success-light.svg';
 
 import ButtonFavorite from './buttonFavorite';
 import { CardTheme } from './card/base/withCardTheme';

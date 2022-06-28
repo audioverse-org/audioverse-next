@@ -39,7 +39,6 @@ function SearchSponsors({ nodes, pagination }: SearchSponsorsProps) {
 	);
 }
 
-export default withFailStates(
-	SearchSponsors,
-	(props: SearchSponsorsProps) => !props.nodes?.length
-);
+export default withFailStates(SearchSponsors, {
+	useShould404: (props: SearchSponsorsProps) => !props.nodes?.length,
+});

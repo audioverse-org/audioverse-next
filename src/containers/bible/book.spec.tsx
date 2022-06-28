@@ -1,5 +1,6 @@
 import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';
 
@@ -7,11 +8,8 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { BookProps } from '@containers/bible/book';
 import * as bibleBrain from '@lib/api/bibleBrain';
-import {
-	buildStaticRenderer,
-	loadRouter,
-	setPlayerMock,
-} from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import setPlayerMock from '@lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
@@ -19,25 +17,16 @@ import Book, {
 
 jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
-jest.mock('next/router');
 
-const renderPage = buildStaticRenderer(
-	(props: BookProps) => {
-		return (
-			<AndPlaybackContext>
-				<AndMiniplayer>
-					<Book {...props} />
-				</AndMiniplayer>
-			</AndPlaybackContext>
-		);
-	},
-	getStaticProps,
-	{
-		id: 'the_version_id',
-		book: 'the_book_shortname',
-		chapter: '1',
-	}
-);
+const renderPage = buildStaticRenderer((props: BookProps) => {
+	return (
+		<AndPlaybackContext>
+			<AndMiniplayer>
+				<Book {...props} />
+			</AndMiniplayer>
+		</AndPlaybackContext>
+	);
+}, getStaticProps);
 
 function loadPageData() {
 	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
@@ -82,8 +71,13 @@ describe('Bible book detail page', () => {
 
 	beforeEach(() => {
 		setPlayerMock();
-		loadRouter({
+		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
+			query: {
+				id: 'the_version_id',
+				book: 'the_book_shortname',
+				chapter: '1',
+			},
 		});
 	});
 

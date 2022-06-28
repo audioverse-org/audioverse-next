@@ -64,7 +64,6 @@ function PresenterRecordings({
 	);
 }
 
-export default withFailStates(
-	PresenterRecordings,
-	({ nodes }) => !nodes.length
-);
+export default withFailStates(PresenterRecordings, {
+	useShould404: ({ nodes }) => !nodes.length,
+});

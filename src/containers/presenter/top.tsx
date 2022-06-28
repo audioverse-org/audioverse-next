@@ -37,4 +37,6 @@ function PresenterTop({
 	);
 }
 
-export default withFailStates(PresenterTop, ({ person }) => !person);
+export default withFailStates(PresenterTop, {
+	useShould404: ({ person }) => !person,
+});

@@ -6,7 +6,7 @@ import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
 import { CardRecordingFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../../public/img/fa-book-light.svg';
+import HatIcon from '../../../../../public/img/icons/fa-book-light.svg';
 import PersonLockup from '../../personLockup';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 

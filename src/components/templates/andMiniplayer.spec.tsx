@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react';
 import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -7,7 +6,8 @@ import AndPlaybackContext, {
 	PlaybackContextType,
 } from '@components/templates/andPlaybackContext';
 import { SequenceContentType } from '@lib/generated/graphql';
-import { buildRenderer, setPlayerMock } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
+import setPlayerMock from '@lib/test/setPlayerMock';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -81,7 +81,7 @@ describe('miniplayer template', () => {
 			},
 		});
 
-		await waitFor(() => expect(mockPlayer.play).toBeCalled());
+		expect(mockPlayer.play).toBeCalled();
 	});
 
 	it('loads recording', async () => {
@@ -106,9 +106,29 @@ describe('miniplayer template', () => {
 
 		await findByText('the_recording_title');
 	});
-});
 
-// TODO:
-// does not show miniplayer if no recording loaded
-// displays recording in portal if matching portal provided
-// start using react-router so that media can continue playing while navigating
+	it('sets class on body when miniplayer loaded', async () => {
+		setPlayerMock();
+
+		const { findByText } = await renderComponent({
+			props: {
+				children: (
+					<AndMiniplayer>
+						<ContextUser
+							func={(c) => {
+								c.loadRecording({
+									title: 'the_recording_title',
+									canonicalPath: 'the_recording_path',
+								} as any);
+							}}
+						/>
+					</AndMiniplayer>
+				),
+			},
+		});
+
+		await findByText('the_recording_title');
+
+		expect(document.body).toHaveClass('body--with-miniplayer');
+	});
+});

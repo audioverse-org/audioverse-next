@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { BaseColors } from '@lib/constants';
 import { CollectionContentType } from '@lib/generated/graphql';
 
-import BibleIcon from '../../../public/img/fa-bible.svg';
-import ListIcon from '../../../public/img/fa-list.svg';
+import BibleIcon from '../../../public/img/icons/fa-bible.svg';
+import ListIcon from '../../../public/img/icons/fa-list.svg';
 
 import TypeLockup from './typeLockup';
 

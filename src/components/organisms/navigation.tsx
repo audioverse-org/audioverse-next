@@ -4,23 +4,24 @@ import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import ActiveLink from '@components/atoms/activeLink';
 import Heading3 from '@components/atoms/heading3';
 import Heading6 from '@components/atoms/heading6';
 import Button from '@components/molecules/button';
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
+import NavItem from '@components/molecules/navItem';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
-import { getNavigationItems } from '@lib/getNavigationItems';
 import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { useNavigationItems } from '@lib/useNavigationItems';
+import { INavigationItem } from '@lib/useNavigationItems';
 
-import IconUser from '../../../public/img/fa-user-heavy.svg';
-import IconDisclosure from '../../../public/img/icon-disclosure-light-small.svg';
-import IconExit from '../../../public/img/icon-exit.svg';
+import IconUser from '../../../public/img/icons/fa-user-heavy.svg';
+import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-small.svg';
+import IconExit from '../../../public/img/icons/icon-exit.svg';
 
 import styles from './navigation.module.scss';
 
@@ -67,9 +68,10 @@ const Navigation = ({
 	);
 	const user = authResult.data?.me?.user;
 
-	const iconSize = 24;
-	const navigationItems = getNavigationItems(router, intl, languageRoute);
-	const submenuItem = navigationItems.find(({ key }) => submenu === key);
+	const navigationItems = useNavigationItems();
+	const submenuItem = navigationItems.find(
+		({ key }: INavigationItem) => submenu === key
+	);
 
 	return (
 		<header className={styles.header}>
@@ -104,48 +106,9 @@ const Navigation = ({
 						</div>
 
 						<ul>
-							{navigationItems
-								.slice(0, -1)
-								.map(({ Icon, key, label, href, children }) => {
-									const inner = (
-										<>
-											{Icon && (
-												<span className={styles.icon}>
-													<Icon width={iconSize} height={iconSize} />
-												</span>
-											)}
-											<span className={styles.label}>{label}</span>
-										</>
-									);
-
-									return (
-										<li key={key}>
-											{href ? (
-												<ActiveLink href={href} activeClassName={styles.active}>
-													<a className={styles.navLink}>{inner}</a>
-												</ActiveLink>
-											) : (
-												<a
-													className={styles.navLink}
-													onClick={() => setSubmenu(key)}
-												>
-													{inner}
-												</a>
-											)}
-											{children && (
-												<span
-													className={styles.iconDisclosure}
-													onClick={(e) => {
-														e.preventDefault();
-														setSubmenu(key);
-													}}
-												>
-													<IconDisclosure />
-												</span>
-											)}
-										</li>
-									);
-								})}
+							{navigationItems.slice(0, -1).map((item: INavigationItem) => (
+								<NavItem key={item.key} item={item} setSubmenu={setSubmenu} />
+							))}
 						</ul>
 
 						<Button
@@ -233,7 +196,7 @@ const Navigation = ({
 											onClick,
 											isDivider,
 											isTargetBlank,
-										}) => (
+										}: INavigationItem) => (
 											<li key={key}>
 												{isDivider ? (
 													<div className={styles.divider} />

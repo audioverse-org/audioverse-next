@@ -5,5 +5,6 @@ public
 package.json
 package-lock.json
 seeds
+generated
 *.handlebars
 /.lighthouseci

@@ -10,6 +10,7 @@ export default function Logout(): JSX.Element {
 	const router = useRouter();
 	const languageRoute = useLanguageRoute();
 	const [loggedOut, setLoggedOut] = useState(false);
+
 	useLogout().then(() => setLoggedOut(true));
 
 	useEffect(() => {

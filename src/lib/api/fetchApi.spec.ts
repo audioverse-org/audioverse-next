@@ -1,7 +1,7 @@
 import set from 'lodash/set';
 
-import { storeRequest } from '@lib/api';
 import { fetchApi } from '@lib/api/fetchApi';
+import { storeRequest } from '@lib/api/storeRequest';
 
 const noopQuery = 'query noop { noop { noop } }';
 

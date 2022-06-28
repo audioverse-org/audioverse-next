@@ -12,7 +12,7 @@ import { formatLongDate } from '@lib/date';
 import { CardPostFragment } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
-import IconAlignLeft from '../../../../public/img/fa-align-left.svg';
+import IconAlignLeft from '../../../../public/img/icons/fa-align-left.svg';
 import TypeLockup from '../typeLockup';
 
 import styles from './post.module.scss';
