@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import Head from 'next/head';
+// import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
 import {
@@ -57,16 +57,11 @@ function Base<P>({
 	return (
 		<>
 			<React.StrictMode>
-				<Head>
-					<meta
-						name="viewport"
-						content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"
-					/>
-					<meta name="theme-color" content="#efebeb" />
+				{/* <Head>
 					<link rel="icon" href="/favicon.ico" sizes="any" />
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 					<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-				</Head>
+				</Head> */}
 				<Script
 					id="google-analytics"
 					strategy="afterInteractive"
@@ -86,7 +81,34 @@ function Base<P>({
 					}}
 				/>
 				<NextSeo
-					title={title ? `${title}|AudioVerse` : 'AudioVerse'}
+					title={title ? `${title} | AudioVerse` : 'AudioVerse'}
+					additionalMetaTags={[
+						{
+							name: 'theme-color',
+							content:
+								'width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover',
+						},
+						{
+							name: 'theme-color',
+							content: '#efebeb',
+						},
+					]}
+					additionalLinkTags={[
+						{
+							rel: 'icon',
+							href: '/favicon.ico',
+							sizes: 'any',
+						},
+						{
+							rel: 'icon',
+							href: '/favicon.svg',
+							type: 'image/svg+xml',
+						},
+						{
+							rel: 'apple-touch-icon',
+							href: '/apple-touch-icon.png',
+						},
+					]}
 					description={description ? description : ''}
 					canonical={canonicalUrl ? canonicalUrl : ''}
 					openGraph={{

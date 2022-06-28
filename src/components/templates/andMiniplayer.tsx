@@ -88,7 +88,7 @@ export default function AndMiniplayer({
 									defaultMessage="Part {index} of {total}"
 									values={{
 										index: teaseRecording?.sequenceIndex,
-										total: teaseRecording?.sequence?.recordings.nodes?.length,
+										total: teaseRecording?.sequence?.recordings?.nodes?.length,
 									}}
 								/>
 							</div>
@@ -96,14 +96,14 @@ export default function AndMiniplayer({
 							<div className={styles.authorBox}>
 								<div className={styles.authorAvatar}>
 									<Image
-										src={teaseRecording?.speakers[0].imageWithFallback.url}
+										src={teaseRecording?.speakers[0]?.imageWithFallback?.url}
 										alt="speaker-avatar"
 										width={30}
 										height={30}
 									/>
 								</div>
 								<div className={styles.authorText}>
-									{teaseRecording?.speakers[0].name}
+									{teaseRecording?.speakers[0]?.name}
 								</div>
 							</div>
 						</div>
