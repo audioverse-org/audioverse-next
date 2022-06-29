@@ -123,7 +123,7 @@ describe('testimonies pages', () => {
 		loadTestimonies();
 
 		const { getByText } = await renderPage();
-			const link = getByText('1') as HTMLAnchorElement;
+		const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/testimonies');
 	});

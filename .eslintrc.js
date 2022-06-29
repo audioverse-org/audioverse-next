@@ -83,7 +83,11 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
-		'testing-library/custom-renders': ['renderPage', 'renderComponent', 'renderWithProviders'],
+		'testing-library/custom-renders': [
+			'renderPage',
+			'renderComponent',
+			'renderWithProviders',
+		],
 	},
 	overrides: [
 		{
