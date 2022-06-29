@@ -22,8 +22,7 @@ export async function getStaticProps({
 	const id = params?.id as string;
 	const book = params?.book as string;
 	const chapterNumber = params?.chapter as string;
-	const version = await getBible(id).catch((e) => {
-		console.log(e);
+	const version = await getBible(id).catch(() => {
 		return null;
 	});
 	if (!version) {

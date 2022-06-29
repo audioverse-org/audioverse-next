@@ -1,4 +1,3 @@
-import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -14,9 +13,11 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
+import { waitFor } from '@testing-library/react';
 
 jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
+jest.mock('@components/molecules/helpWidget');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
@@ -79,12 +80,6 @@ describe('Bible book detail page', () => {
 				chapter: '1',
 			},
 		});
-	});
-
-	it('renders', async () => {
-		loadPageData();
-
-		await renderPage();
 	});
 
 	it('generates paths', async () => {
@@ -150,13 +145,17 @@ describe('Bible book detail page', () => {
 		window.fetch = jest.fn().mockReturnValueOnce({
 			catch: () => undefined,
 		});
+
 		loadPageData();
 
-		await act(async () => {
-			const { getAllByLabelText } = await renderPage();
-			userEvent.click(getAllByLabelText('play')[0]);
+		const { getAllByLabelText } = await renderPage();
+
+		userEvent.click(getAllByLabelText('play')[0]);
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
 		});
-		expect(videojs).toBeCalled();
+
 		expect(window.fetch).toBeCalled();
 	});
 });

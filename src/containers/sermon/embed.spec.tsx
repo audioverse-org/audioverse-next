@@ -1,11 +1,11 @@
 import { buildRenderer } from '@lib/test/buildRenderer';
-import SermonEmbed from '@containers/sermon/embed';
+import SermonEmbed, { SermonEmbedProps } from '@containers/sermon/embed';
 import { screen } from '@testing-library/react';
 import { RecordingContentType } from '@lib/generated/graphql';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import React from 'react';
 
-const renderComponent = buildRenderer(
+const renderComponent = buildRenderer<SermonEmbedProps>(
 	(p) => (
 		<AndPlaybackContext>
 			<SermonEmbed {...p} />

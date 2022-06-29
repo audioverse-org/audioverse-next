@@ -69,18 +69,17 @@ describe('pagination component', () => {
 
 	it('uses url base', async () => {
 		const { getByText } = await renderPagination({
-				total: 2,
-				makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
-			}),
-			link = getByText('Next') as HTMLAnchorElement;
+			total: 2,
+			makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
+		});
+		const link = getByText('Next') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/presenters/page/2');
 	});
 });
 
 describe('pagination algorithm', () => {
-	// https://gist.github.com/kottenator/9d936eb3e4e3c3e02598
-	const runner = test.each([
+	const scenarios: [number, (number | string)[]][] = [
 		[1, [1, 2, 3, '...', 20]],
 		[2, [1, 2, 3, 4, '...', 20]],
 		[3, [1, 2, 3, 4, 5, '...', 20]],
@@ -101,9 +100,9 @@ describe('pagination algorithm', () => {
 		[18, [1, '...', 16, 17, 18, 19, 20]],
 		[19, [1, '...', 17, 18, 19, 20]],
 		[20, [1, '...', 18, 19, 20]],
-	]);
+	];
 
-	runner('pagination(%i, 20)', (index, expected) => {
+	test.each(scenarios)('pagination(%i, 20)', (index, expected) => {
 		expect(pagination(index, 20)).toStrictEqual(expected);
 	});
 
@@ -120,27 +119,36 @@ describe('pagination algorithm', () => {
 	});
 
 	it('handles missing current', async () => {
-		await renderWithProviders(
-			<Pagination
-				{...({ total: 3, base: 'base', makeRoute: () => '' } as any)}
-			/>,
-			undefined
-		);
+		const render = () =>
+			renderWithProviders(
+				<Pagination
+					{...({ total: 3, base: 'base', makeRoute: () => '' } as any)}
+				/>,
+				undefined
+			);
+
+		await expect(render).not.toThrow();
 	});
 
 	it('handles missing total', async () => {
-		await renderWithProviders(
-			<Pagination {...({ current: 1, base: 'base' } as any)} />,
-			undefined
-		);
+		const render = () =>
+			renderWithProviders(
+				<Pagination {...({ current: 1, base: 'base' } as any)} />,
+				undefined
+			);
+
+		await expect(render).not.toThrow();
 	});
 
 	it('handles missing base', async () => {
-		await renderWithProviders(
-			<Pagination
-				{...({ current: 1, total: 3, makeRoute: () => '' } as any)}
-			/>,
-			undefined
-		);
+		const render = () =>
+			renderWithProviders(
+				<Pagination
+					{...({ current: 1, total: 3, makeRoute: () => '' } as any)}
+				/>,
+				undefined
+			);
+
+		await expect(render).not.toThrow();
 	});
 });

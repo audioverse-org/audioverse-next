@@ -3,21 +3,18 @@ import React from 'react';
 
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import renderWithProviders from '@lib/test/renderWithProviders';
-import useRouterLoading from '@lib/useRouterLoading';
+import useIsLoading from '@lib/useIsLoading';
 
-jest.mock('@lib/useRouterLoading');
+jest.mock('@lib/useIsLoading');
 
-const mockUseRouterLoading = useRouterLoading as jest.Mock;
+const mockUseIsLoading = useIsLoading as jest.Mock;
 
 describe('loading indicator', () => {
 	it('shows indicator when router loading', async () => {
-		mockUseRouterLoading.mockReturnValue(true);
+		mockUseIsLoading.mockReturnValue(true);
 
 		await renderWithProviders(<LoadingIndicator />);
 
-		expect(screen.getByTestId('loading-indicator')).toHaveClass(
-			'visible',
-			'loading'
-		);
+		expect(screen.getByTestId('loading-indicator')).toHaveClass('loading');
 	});
 });

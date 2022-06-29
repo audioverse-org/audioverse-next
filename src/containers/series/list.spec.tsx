@@ -13,6 +13,7 @@ import SeriesList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SeriesList, getStaticProps);
 
@@ -65,11 +66,11 @@ describe('series list page', () => {
 	it('lists series', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByText('the_series_title').parentElement?.parentElement
-		).toHaveAttribute('href', '/the_series_path');
+			screen.getByRole('link', { name: /the_series_title/ })
+		).toHaveAttribute('href', 'the_series_path');
 	});
 
 	it('renders page title', async () => {

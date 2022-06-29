@@ -41,13 +41,13 @@ import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './recording.module.scss';
 
-interface RecordingProps {
+export type RecordingProps = {
 	recording: RecordingFragment;
 	overrideSequence?: {
 		book: string;
 		seriesItems: TeaseRecordingFragment[];
 	};
-}
+};
 
 export function Recording({
 	recording,

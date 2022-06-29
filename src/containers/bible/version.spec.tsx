@@ -47,12 +47,6 @@ function loadPageData() {
 }
 
 describe('version detail page', () => {
-	it('renders', async () => {
-		loadPageData();
-
-		await renderPage();
-	});
-
 	it('lists books', async () => {
 		loadPageData();
 

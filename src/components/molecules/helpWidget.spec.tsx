@@ -7,6 +7,8 @@ import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 import { buildLoader } from '@lib/test/buildLoader';
+import userEvent from '@testing-library/user-event';
+import { __waitForIntlMessages } from '@lib/useIntlMessages';
 
 jest.mock('next/script');
 
@@ -78,7 +80,7 @@ describe('help widget', () => {
 
 		const button = await screen.findByRole('button');
 
-		button.click();
+		userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('open');
@@ -91,10 +93,18 @@ describe('help widget', () => {
 		await awaitReady();
 
 		const button = screen.getByRole('button');
-		button.click();
-		button.click();
 
-		expect(mockBeacon).toBeCalledWith('close');
+		userEvent.click(button);
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('open');
+		});
+
+		userEvent.click(button);
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('close');
+		});
 	});
 
 	it('catches widget close event', async () => {
@@ -103,7 +113,7 @@ describe('help widget', () => {
 		await awaitReady();
 
 		const button = screen.getByRole('button');
-		button.click();
+		userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('on', 'close', expect.any(Function));
@@ -118,7 +128,7 @@ describe('help widget', () => {
 			matches[matches.length - 1][2]();
 		});
 
-		button.click();
+		userEvent.click(button);
 
 		expect(mockBeacon).not.toBeCalledWith('close');
 	});
@@ -191,6 +201,8 @@ describe('help widget', () => {
 			'routeChangeComplete',
 			expect.any(Function)
 		);
+
+		await __waitForIntlMessages();
 	});
 
 	it('translates strings', async () => {
@@ -260,9 +272,11 @@ describe('help widget', () => {
 
 	it('does not identify user if using private email', async () => {
 		loadData({
-			me: {
-				user: {
-					email: '123@privaterelay.appleid.com',
+			data: {
+				me: {
+					user: {
+						email: '123@privaterelay.appleid.com',
+					},
 				},
 			},
 		});
@@ -276,9 +290,11 @@ describe('help widget', () => {
 
 	it('prefills name when email is private', async () => {
 		loadData({
-			me: {
-				user: {
-					email: '123@privaterelay.appleid.com',
+			data: {
+				me: {
+					user: {
+						email: '123@privaterelay.appleid.com',
+					},
 				},
 			},
 		});

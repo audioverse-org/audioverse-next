@@ -1,21 +1,45 @@
-import { __loadQuery, __mockedRouter } from 'next/router';
+import { __loadQuery } from 'next/router';
 
-import {
-	loadSermonListData,
-	loadSermonListPagePathsData,
-} from '@containers/sermon/list.all.spec';
 import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
 import SermonList, {
+	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/video/page/[i]';
+import { buildLoader } from '@lib/test/buildLoader';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
+
+const loadPathsData = buildLoader(GetSermonListPagePathsDataDocument, {
+	sermons: {
+		aggregate: {
+			count: 0,
+		},
+	},
+});
+
+const loadPageData = buildLoader(GetSermonListPageDataDocument, {
+	sermons: {
+		nodes: [
+			{
+				id: 'the_sermon_id',
+				title: 'the_sermon_title',
+				canonicalPath: 'the_sermon_path',
+				recordingContentType: RecordingContentType.Sermon,
+				videoFiles: [],
+				persons: [],
+			},
+		],
+		aggregate: {
+			count: 100,
+		},
+	},
+});
 
 describe('sermon video list page', () => {
 	beforeEach(() => {
@@ -34,7 +58,15 @@ describe('sermon video list page', () => {
 	});
 
 	it('generates filtered pages', async () => {
-		loadSermonListPagePathsData(1);
+		loadPathsData({
+			data: {
+				sermons: {
+					aggregate: {
+						count: 1,
+					},
+				},
+			},
+		});
 
 		const result = await getStaticPaths();
 
@@ -47,7 +79,7 @@ describe('sermon video list page', () => {
 			language: 'en',
 		});
 
-		loadSermonListData();
+		loadPageData();
 
 		await renderPage();
 
@@ -62,7 +94,7 @@ describe('sermon video list page', () => {
 	});
 
 	it('includes filter in pagination', async () => {
-		loadSermonListData();
+		loadPageData();
 
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;

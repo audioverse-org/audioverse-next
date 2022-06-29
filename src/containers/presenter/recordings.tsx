@@ -8,10 +8,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterRecordingsPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
+import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import {
 	makePresenterFeedRoute,
@@ -36,10 +33,13 @@ function PresenterRecordings({
 	nodes,
 	data: { person },
 	pagination,
-}: Must<PresenterRecordingsProps> & {
-	data: { person: Must<PresenterPivotFragment> };
-}): JSX.Element {
+}: Must<PresenterRecordingsProps>): JSX.Element {
 	const languageRoute = useLanguageRoute();
+
+	if (!person) {
+		throw new Error('Unreachable');
+	}
+
 	return (
 		<PresenterPivot {...{ person }}>
 			<RssAlternate url={makePresenterFeedRoute(languageRoute, person.id)} />
@@ -65,5 +65,5 @@ function PresenterRecordings({
 }
 
 export default withFailStates(PresenterRecordings, {
-	useShould404: ({ nodes }) => !nodes.length,
+	useShould404: ({ nodes, data }) => !nodes.length || !data?.person,
 });

@@ -429,7 +429,7 @@ describe('generateFeed', () => {
 					title: 'Be Done with Fear',
 					contentType: RecordingContentType.Sermon,
 					description:
-						'<p>Learn how to take a sledge hammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</p>',
+						'<p>Learn how to take a sledgehammer to Satan’s kingdom and build up the walls of Zion! Faith, rightly understood, will change your life from boring to amazing, from feebleness to power, and from failure to triumph! Paul Ratsara, who faced the guns of kidnappers and the crocodiles of the Congo, with nothing but faith, will join Jay Gallimore in this powerful life-changing seminar. They want young Christians to have great influence, to go up against Babylon and rescue multitudes of Satan’s victims. If put this seminar into practice, it will change your life and the world around you!</p>',
 					publishDate: '2020-02-03T06:50:11.000Z',
 					audioFiles: [
 						{
@@ -713,7 +713,7 @@ describe('generateFeed', () => {
 					title: 'The Roots of Postmodern Logic',
 					contentType: RecordingContentType.Sermon,
 					description:
-						'<p>While there are growing churches in both urban and country settings, church-goers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God&rsquo;s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</p>',
+						'<p>While there are growing churches in both urban and country settings, churchgoers and students today are actually less likely to keep a Christian worldview than in the past. In fact, the greater part of our contemporary society today does not even believe in absolute truth. A modern-day disciple of Christ out of touch with this culture is like an uninformed missionary trying to teach in a foreign country. To share God&rsquo;s Word effectively in the twenty-first century, soul-winners need to know how to connect with and confront a society of postmodern thinkers. In this seminar, Pastor Christian Martin shows how we can reach the present age with the everlasting gospel.</p>',
 					publishDate: '2020-02-10T03:45:57.000Z',
 					audioFiles: [
 						{
@@ -759,7 +759,7 @@ describe('generateFeed', () => {
 					title: 'When I don’t Feel Like It',
 					contentType: RecordingContentType.Sermon,
 					description:
-						'<p>Sam Walters will be unpacking what it means to live life evangelistically. Many times people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</p>',
+						'<p>Sam Walters will be unpacking what it means to live life evangelistically. Many times, people live lives that are segregated into different sectors, where their spirituality does not necessarily permeate the rest of their lives. Discover how your relationship with God can become visible, audible and tangible to those around you, whether at your workplace, university, with family or whatever setting you find yourself in.</p>',
 					publishDate: '2020-02-03T06:46:29.000Z',
 					audioFiles: [
 						{
@@ -805,7 +805,7 @@ describe('generateFeed', () => {
 					title: 'Original Leadership',
 					contentType: RecordingContentType.Sermon,
 					description:
-						'<p>Many feel overwhelmed by the thought of taking on a leadership position, often because of preconceived ideas of the type of skills required to fulfill the role. Yet, through studying scripture and seeking out illustrations in every day life, you will find out that anyone can be a leader because the best leaders are those that lead from who they are--their character. Come for inspiration on how to embrace being the type of leader God has created you to be in the spheres of influence he has placed you.</p>',
+						'<p>Many feel overwhelmed by the thought of taking on a leadership position, often because of preconceived ideas of the type of skills required to fulfill the role. Yet, through studying scripture and seeking out illustrations in everyday life, you will find out that anyone can be a leader because the best leaders are those that lead from who they are--their character. Come for inspiration on how to embrace being the type of leader God has created you to be in the spheres of influence he has placed you.</p>',
 					publishDate: '2020-02-10T03:47:26.000Z',
 					audioFiles: [
 						{

@@ -60,6 +60,7 @@ export const LANGUAGES: LanguageConfigurations = {
 export const IS_DEVELOPMENT =
 	process.env.NODE_ENV === 'development' ||
 	process.env.ENV_OVERRIDE === 'development';
+export const IS_TEST = process.env.JEST_WORKER_ID !== undefined;
 export const IS_PRODUCTION_DEPLOYMENT = process.env.VERCEL_ENV === 'production';
 export const DETAIL_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 25 : 10;
 export const LIST_PRERENDER_LIMIT = IS_PRODUCTION_DEPLOYMENT ? 10 : 2;

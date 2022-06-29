@@ -1,12 +1,7 @@
 import Head from 'next/head';
 import Script from 'next/script';
-import React, { useEffect } from 'react';
-import {
-	DehydratedState,
-	Hydrate,
-	QueryClient,
-	QueryClientProvider,
-} from 'react-query';
+import React, { StrictMode, useEffect } from 'react';
+import { DehydratedState, useHydrate } from 'react-query';
 
 import withIntl from '@components/HOCs/withIntl';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
@@ -16,6 +11,7 @@ import AndNavigation from '@components/templates/andNavigation';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 
 import styles from './base.module.scss';
+import withQueryClientProvider from '@components/HOCs/withQueryClientProvider';
 
 export interface IBaseProps {
 	disableSidebar?: boolean;
@@ -25,25 +21,19 @@ export interface IBaseProps {
 	dehydratedState?: DehydratedState;
 }
 
-const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: false,
-		},
-	},
-});
-
 export const GA_TRACKING_ID = 'GTM-5HNWR6';
 
 function Base<P>({
 	Component,
 	pageProps,
 }: {
-	Component: typeof React.Component;
+	Component: (props: P) => JSX.Element;
 	pageProps: P & IBaseProps;
 }): JSX.Element {
 	const { description, disableSidebar, title, canonicalUrl, dehydratedState } =
 		pageProps;
+
+	useHydrate(dehydratedState);
 
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
@@ -51,7 +41,7 @@ function Base<P>({
 
 	return (
 		<div className={styles.base}>
-			<React.StrictMode>
+			<StrictMode>
 				<Head>
 					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
@@ -71,12 +61,12 @@ function Base<P>({
 					strategy="afterInteractive"
 					dangerouslySetInnerHTML={{
 						__html: `
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer', '${GA_TRACKING_ID}');
-  `,
+				  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				  })(window,document,'script','dataLayer', '${GA_TRACKING_ID}');
+				`,
 					}}
 				/>
 				<script
@@ -84,27 +74,23 @@ function Base<P>({
 						__html: `<!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->`,
 					}}
 				/>
-				<QueryClientProvider client={queryClient}>
-					<Hydrate state={dehydratedState}>
-						<AndGlobalModals>
-							<LoadingIndicator />
-							<AndPlaybackContext>
-								{disableSidebar ? (
+				<LoadingIndicator />
+				<AndGlobalModals>
+					<AndPlaybackContext>
+						{disableSidebar ? (
+							<Component {...pageProps} />
+						) : (
+							<AndMiniplayer>
+								<AndNavigation>
 									<Component {...pageProps} />
-								) : (
-									<AndMiniplayer>
-										<AndNavigation>
-											<Component {...pageProps} />
-										</AndNavigation>
-									</AndMiniplayer>
-								)}
-							</AndPlaybackContext>
-						</AndGlobalModals>
-					</Hydrate>
-				</QueryClientProvider>
-			</React.StrictMode>
+								</AndNavigation>
+							</AndMiniplayer>
+						)}
+					</AndPlaybackContext>
+				</AndGlobalModals>
+			</StrictMode>
 		</div>
 	);
 }
 
-export default withIntl(Base);
+export default withQueryClientProvider(withIntl(Base));

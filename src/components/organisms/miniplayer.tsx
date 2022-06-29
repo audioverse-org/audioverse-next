@@ -21,6 +21,7 @@ import styles from './miniplayer.module.scss';
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
+	const miniplayerRef = playbackContext.getMiniplayerRef();
 	const volume = playbackContext.getVolume();
 	const recording = playbackContext.getRecording();
 	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
@@ -57,8 +58,11 @@ export default function Miniplayer(): JSX.Element | null {
 			})}
 		>
 			<div className={styles.player}>
-				{/*TODO: Get rid of ID; use ref instead*/}
-				<div id="mini-player" className={styles.pane} />
+				<div
+					data-testid="miniplayerPortal"
+					ref={miniplayerRef}
+					className={styles.pane}
+				/>
 				<div className={clsx(styles.controls, isShowingVideo && styles.hidden)}>
 					<ButtonNudge
 						recording={recording}

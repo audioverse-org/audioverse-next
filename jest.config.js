@@ -19,4 +19,5 @@ module.exports = {
 	},
 	setupFiles: ['jest-date-mock'],
 	setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
+	resetMocks: true,
 };

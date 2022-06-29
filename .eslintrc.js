@@ -8,6 +8,7 @@ module.exports = {
 		'@typescript-eslint/eslint-plugin',
 		'formatjs',
 		'testing-library',
+		'jest',
 		'jest-dom',
 		'@mizdra/layout-shift',
 		'react-hooks',
@@ -19,7 +20,8 @@ module.exports = {
 		'plugin:@typescript-eslint/eslint-recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
-		'plugin:testing-library/dom',
+		'plugin:testing-library/react',
+		'plugin:jest/recommended',
 		'plugin:jest-dom/recommended',
 		'plugin:@next/next/recommended',
 	],
@@ -61,10 +63,11 @@ module.exports = {
 		'@typescript-eslint/no-unused-vars': [
 			'error',
 			{
-				varsIgnorePattern: '_',
+				varsIgnorePattern: '^_$',
 			},
 		],
 		'no-mixed-spaces-and-tabs': 'off',
+		'one-var': ['error', 'never'],
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'testing-library/prefer-screen-queries': 'off',
 		'testing-library/await-async-utils': 'off',
@@ -80,6 +83,7 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
+		'testing-library/custom-renders': ['renderPage', 'renderComponent', 'renderWithProviders'],
 	},
 	overrides: [
 		{

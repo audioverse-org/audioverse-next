@@ -97,6 +97,6 @@ function SermonEmbed({ recording }: Must<SermonEmbedProps>) {
 	);
 }
 
-export default withFailStates<SermonEmbedProps>(SermonEmbed, {
-	useShould404: (props) => !props.recording,
+export default withFailStates(SermonEmbed, {
+	useShould404: ({ recording }: SermonEmbedProps) => !recording,
 });

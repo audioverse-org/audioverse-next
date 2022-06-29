@@ -14,7 +14,7 @@ type WithFailStateOptions<P> = {
 const withFailStates = <P,>(
 	Component: React.ComponentType<Must<P>>,
 	options: WithFailStateOptions<P> = {}
-): React.ComponentType<P> => {
+): ((props: P) => JSX.Element) => {
 	const {
 		useShould404 = () => false,
 		useIsLoading = () => false,
@@ -22,7 +22,7 @@ const withFailStates = <P,>(
 		NotFound = NotFoundBase,
 	} = options;
 
-	function WithFailStates(props: P) {
+	function WithFailStates(props: P): JSX.Element {
 		const { isFallback = false } = useRouter() || {};
 		const should404 = useShould404(props);
 		const isLoading = useIsLoading(props);
@@ -35,7 +35,7 @@ const withFailStates = <P,>(
 			return <Loading />;
 		}
 
-		return <Component {...(props as Must<P>)} />;
+		return <Component {...(props as never)} />;
 	}
 
 	return WithFailStates;

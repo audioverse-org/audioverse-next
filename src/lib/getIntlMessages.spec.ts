@@ -7,8 +7,10 @@ describe('getIntlMessages', () => {
 	it('handles all base urls', async () => {
 		const languages = values(LANGUAGES);
 
-		languages.forEach((l) => {
-			getIntlMessages(l.base_url);
-		});
+		expect(() => {
+			languages.forEach((l) => {
+				getIntlMessages(l.base_url);
+			});
+		}).not.toThrow();
 	});
 });

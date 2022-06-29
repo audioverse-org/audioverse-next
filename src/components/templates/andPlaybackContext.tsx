@@ -15,6 +15,7 @@ import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
+	Maybe,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
@@ -105,6 +106,7 @@ export type PlaybackContextType = {
 	setVolume: (v: number) => void;
 	setSpeed: (s: number) => void;
 	getSpeed: () => number;
+	getMiniplayerRef: () => Maybe<React.RefObject<HTMLDivElement>>;
 	getDuration: () => number;
 	requestFullscreen: () => void;
 	advanceRecording: () => void;
@@ -136,6 +138,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	isShowingVideo: () => false,
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
+	getMiniplayerRef: () => null,
 	getVolume: () => 100,
 	setVolume: () => undefined,
 	setSpeed: () => undefined,
@@ -159,6 +162,7 @@ export default function AndPlaybackContext({
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
+	const miniplayerRef = useRef<HTMLDivElement>(null);
 
 	const [videojs] = useState<Promise<typeof VideoJs>>(() => import('video.js'));
 
@@ -242,6 +246,7 @@ export default function AndPlaybackContext({
 			playerRef.current?.pause();
 			setIsPaused(true);
 		},
+		getMiniplayerRef: () => miniplayerRef,
 		paused: () => isPaused,
 		player: () => playerRef.current,
 		getTime: () =>
@@ -420,12 +425,8 @@ export default function AndPlaybackContext({
 		}
 
 		function findDestination() {
-			if (isShowingVideo) {
-				// TODO: use ref instead of ID
-				return document.getElementById('mini-player');
-			}
-
-			return originRef.current;
+			const ref = isShowingVideo ? miniplayerRef : originRef;
+			return ref.current;
 		}
 
 		const destination = findDestination();

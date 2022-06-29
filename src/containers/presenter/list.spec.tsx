@@ -24,7 +24,7 @@ function loadData() {
 						id: 'the_person_id',
 						surname: 'the_person_surname',
 						givenName: 'the_person_givenName',
-						canonicalPath: 'the_person_path',
+						canonicalPath: '/the_person_path',
 						summary: 'the_person_summary',
 						image: {
 							url: 'the_person_image',

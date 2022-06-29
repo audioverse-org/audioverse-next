@@ -1,5 +1,4 @@
-import get from 'lodash/get';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -43,18 +42,20 @@ export default function SocialLogin({
 			},
 		});
 
+	const setGoogleError = useCallback(() => {
+		setErrors(['Error: Google login was unsuccessful']);
+	}, []);
+
 	const { signIn } = useGoogleLogin({
 		clientId: GOOGLE_CLIENT_ID,
-		onFailure: (error) => {
-			console.log('Google oAuth error');
-			console.log(error);
-			// TODO: Figure out error format and display it
-		},
+		onFailure: setGoogleError,
 		onSuccess: (response) => {
-			const socialId = get(response, 'googleId');
-			const socialToken = get(response, 'accessToken');
-			const givenName = get(response, 'profileObj.givenName');
-			const surname = get(response, 'profileObj.familyName');
+			if (!('googleId' in response)) return setGoogleError();
+
+			const socialId = response.googleId;
+			const socialToken = response.accessToken;
+			const givenName = response.profileObj.givenName;
+			const surname = response.profileObj.familyName;
 
 			mutateSocial({
 				socialName: UserSocialServiceName.Google,
@@ -110,19 +111,16 @@ export default function SocialLogin({
 						/>
 					)}
 					callback={(response) => {
-						const name = get(response, 'name', '');
-						const [givenName, surname] = name.split(' ');
-						const socialId = get(response, 'userID');
-						const socialToken = get(response, 'accessToken');
-						const status = get(response, 'status');
-						const statusText = get(response, 'statusText');
-
-						if (!socialToken) {
-							if (status) {
-								setErrors([`${status}: ${statusText}`]);
-							}
+						if (!('userID' in response)) {
+							const status = response?.status || 'Error';
+							setErrors([`${status}: Facebook login was unsuccessful`]);
 							return;
 						}
+
+						const name = response.name || '';
+						const [givenName, surname] = name.split(' ');
+						const socialId = response.userID;
+						const socialToken = response.accessToken;
 
 						mutateSocial({
 							socialName: UserSocialServiceName.Facebook,

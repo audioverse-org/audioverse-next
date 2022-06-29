@@ -1,8 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
-import { useRouter } from 'next/router';
-import { __loadQuery } from 'next/router';
+import { __loadQuery, useRouter } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
@@ -20,45 +19,37 @@ import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
+import { buildLoader } from '@lib/test/buildLoader';
 
 jest.mock('next/head');
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
-export function loadSermonListPagePathsData(count: number): void {
-	when(fetchApi)
-		.calledWith(GetSermonListPagePathsDataDocument, expect.anything())
-		.mockResolvedValue({
-			sermons: {
-				aggregate: {
-					count,
-				},
-			},
-		});
-}
-
-export function loadSermonListData({
-	nodes = undefined,
-	count = undefined,
-}: { nodes?: any[]; count?: number } = {}): void {
-	(fetchApi as jest.Mock).mockResolvedValue({
-		sermons: {
-			nodes: nodes || [
-				{
-					id: 'the_sermon_id',
-					title: 'the_sermon_title',
-					canonicalPath: 'the_sermon_path',
-					recordingContentType: RecordingContentType.Sermon,
-					videoFiles: [],
-					persons: [],
-				},
-			],
-			aggregate: {
-				count: count || 100,
-			},
+const loadPathsData = buildLoader(GetSermonListPagePathsDataDocument, {
+	sermons: {
+		aggregate: {
+			count: 0,
 		},
-	});
-}
+	},
+});
+
+const loadPageData = buildLoader(GetSermonListPageDataDocument, {
+	sermons: {
+		nodes: [
+			{
+				id: 'the_sermon_id',
+				title: 'the_sermon_title',
+				canonicalPath: 'the_sermon_path',
+				recordingContentType: RecordingContentType.Sermon,
+				videoFiles: [],
+				persons: [],
+			},
+		],
+		aggregate: {
+			count: 100,
+		},
+	},
+});
 
 describe('sermons list page', () => {
 	beforeEach(() => {
@@ -68,14 +59,16 @@ describe('sermons list page', () => {
 		});
 	});
 
-	it('can be rendered', async () => {
-		loadSermonListData();
-
-		await renderPage();
-	});
-
 	it('generates static paths', async () => {
-		loadSermonListPagePathsData(1);
+		loadPathsData({
+			data: {
+				sermons: {
+					aggregate: {
+						count: 1,
+					},
+				},
+			},
+		});
 
 		const result = await getStaticPaths();
 
@@ -83,7 +76,15 @@ describe('sermons list page', () => {
 	});
 
 	it('generates in all languages', async () => {
-		loadSermonListPagePathsData(1);
+		loadPathsData({
+			data: {
+				sermons: {
+					aggregate: {
+						count: 1,
+					},
+				},
+			},
+		});
 
 		const result = await getStaticPaths();
 
@@ -97,7 +98,15 @@ describe('sermons list page', () => {
 	});
 
 	it('generates all pages in language', async () => {
-		loadSermonListPagePathsData(LIST_PRERENDER_LIMIT * ENTRIES_PER_PAGE);
+		loadPathsData({
+			data: {
+				sermons: {
+					aggregate: {
+						count: LIST_PRERENDER_LIMIT * ENTRIES_PER_PAGE,
+					},
+				},
+			},
+		});
 
 		const result = await getStaticPaths();
 
@@ -114,7 +123,16 @@ describe('sermons list page', () => {
 	});
 
 	it('gets sermons for list page', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		await getStaticProps({ params: { i: '2', language: 'en' } });
 
@@ -131,7 +149,7 @@ describe('sermons list page', () => {
 	});
 
 	it('displays sermons list', async () => {
-		loadSermonListData();
+		loadPageData();
 
 		const { getByText } = await renderPage();
 
@@ -151,7 +169,15 @@ describe('sermons list page', () => {
 
 	it('returns 404 on empty data', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		loadSermonListData({ nodes: [] });
+
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: [],
+				},
+			},
+			merge: false,
+		});
 
 		const { getByText } = await renderPage();
 
@@ -159,7 +185,16 @@ describe('sermons list page', () => {
 	});
 
 	it('includes pagination', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const { getByText } = await renderPage();
 
@@ -167,7 +202,16 @@ describe('sermons list page', () => {
 	});
 
 	it('links to last pagination page', async () => {
-		loadSermonListData({ count: 75 });
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: 75,
+					},
+				},
+			},
+		});
 
 		const { getByText } = await renderPage();
 
@@ -175,7 +219,16 @@ describe('sermons list page', () => {
 	});
 
 	it('calculates pages using items per page', async () => {
-		loadSermonListData({ count: 36 });
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: 36,
+					},
+				},
+			},
+		});
 
 		__loadQuery({ i: '3', language: 'en' });
 
@@ -185,24 +238,51 @@ describe('sermons list page', () => {
 	});
 
 	it('handles string page index', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		__loadQuery({ i: '3', language: 'en' });
 
-		await renderPage();
+		await expect(renderPage).not.toThrow();
 	});
 
 	it('links pagination properly', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
-		const { getByText } = await renderPage(),
-			link = getByText('1') as HTMLAnchorElement;
+		const { getByText } = await renderPage();
+		const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/teachings/all/page/1');
 	});
 
 	it('revalidates static pages', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const props = (await getStaticProps({
 			params: { i: '2', language: 'en' },
@@ -212,7 +292,16 @@ describe('sermons list page', () => {
 	});
 
 	it('links All button', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const { getByRole, getByText } = await renderPage();
 
@@ -225,7 +314,16 @@ describe('sermons list page', () => {
 	});
 
 	it('links All button using lang', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 		__loadQuery({ language: 'es' });
 
 		await renderPage();
@@ -239,7 +337,16 @@ describe('sermons list page', () => {
 	});
 
 	it('links Video button', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const { getByRole, getByText } = await renderPage();
 
@@ -252,7 +359,16 @@ describe('sermons list page', () => {
 	});
 
 	it('links Audio button', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const { getByRole, getByText } = await renderPage();
 
@@ -271,17 +387,35 @@ describe('sermons list page', () => {
 	});
 
 	it('localizes pagination', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 		__loadQuery({ language: 'es' });
 
-		const { getByText } = await renderPage(),
-			link = getByText('1') as HTMLAnchorElement;
+		const { getByText } = await renderPage();
+		const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/es/teachings/all/page/1');
 	});
 
 	it('sets rss head link', async () => {
-		loadSermonListData();
+		loadPageData({
+			data: {
+				sermons: {
+					nodes: undefined,
+					aggregate: {
+						count: undefined,
+					},
+				},
+			},
+		});
 
 		const { getByTestId } = await renderPage();
 

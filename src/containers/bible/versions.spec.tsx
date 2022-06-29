@@ -39,12 +39,6 @@ function loadPageData() {
 }
 
 describe('versions list', () => {
-	it('renders', async () => {
-		loadPageData();
-
-		await renderPage();
-	});
-
 	it('renders versions', async () => {
 		loadPageData();
 

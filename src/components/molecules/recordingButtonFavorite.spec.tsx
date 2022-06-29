@@ -10,27 +10,24 @@ import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
 import { BaseColors } from '@lib/constants';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import { resolveWithDelay } from '@lib/test/resolveWithDelay';
 
 jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
 jest.mock('js-cookie');
 
+function getButton() {
+	return screen.getByLabelText(/favorite/i);
+}
+
 const renderComponent = async () => {
-	const result = await renderWithProviders(
+	const view = await renderWithProviders(
 		<RecordingButtonFavorite id="-1" backgroundColor={BaseColors.WHITE} />,
 		undefined
 	);
-	const button =
-		result.queryByLabelText('Favorite') ||
-		result.queryByLabelText('Unfavorite');
-
-	if (!button) {
-		throw new Error("Can't find button");
-	}
-
 	return {
-		...result,
-		button,
+		...view,
+		button: getButton(),
 	};
 };
 
@@ -93,7 +90,7 @@ describe('recording favorite button', () => {
 		await withMutedReactQueryLogger(async () => {
 			const { button, findByLabelText } = await renderComponent();
 
-			mockSetRecordingFavorited.mockRejectedValue('error');
+			resolveWithDelay(mockSetRecordingFavorited, { resolve: false });
 
 			userEvent.click(button);
 

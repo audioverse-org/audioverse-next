@@ -130,8 +130,10 @@ describe('sponsor teachings page', () => {
 
 	it('skips image display if sponsor has none', async () => {
 		loadData({
-			sponsor: {
-				image: null as any,
+			data: {
+				sponsor: {
+					image: null as any,
+				},
 			},
 		});
 

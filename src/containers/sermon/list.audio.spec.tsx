@@ -1,18 +1,37 @@
 import { __loadQuery } from 'next/router';
 
-import { loadSermonListData } from '@containers/sermon/list.all.spec';
 import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
+	RecordingContentType,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
 import SermonList, {
+	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/audio/page/[i]';
+import { buildLoader } from '@lib/test/buildLoader';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
+
+const loadPageData = buildLoader(GetSermonListPageDataDocument, {
+	sermons: {
+		nodes: [
+			{
+				id: 'the_sermon_id',
+				title: 'the_sermon_title',
+				canonicalPath: 'the_sermon_path',
+				recordingContentType: RecordingContentType.Sermon,
+				videoFiles: [],
+				persons: [],
+			},
+		],
+		aggregate: {
+			count: 100,
+		},
+	},
+});
 
 describe('sermon audio list page', () => {
 	beforeEach(() => {
@@ -31,7 +50,7 @@ describe('sermon audio list page', () => {
 	});
 
 	it('gets audio filtered sermons', async () => {
-		loadSermonListData();
+		loadPageData();
 
 		await renderPage();
 
@@ -46,7 +65,7 @@ describe('sermon audio list page', () => {
 	});
 
 	it('includes filter in pagination', async () => {
-		loadSermonListData();
+		loadPageData();
 
 		const { getByText } = await renderPage();
 		const link = getByText('1') as HTMLAnchorElement;

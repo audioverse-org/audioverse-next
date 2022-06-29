@@ -8,7 +8,7 @@ const mockBeacon = jest.fn();
 window.Beacon = mockBeacon;
 
 const Component = () => {
-	useLogout();
+	const _ = useLogout();
 
 	return <></>;
 };

@@ -7,10 +7,7 @@ import CardCollection from '@components/molecules/card/collection';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSponsorConferencesPageDataQuery,
-	SponsorPivotFragment,
-} from '@lib/generated/graphql';
+import { GetSponsorConferencesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorConferencesRoute } from '@lib/routes';
 
@@ -25,9 +22,11 @@ function SponsorConferences({
 	nodes,
 	data: { sponsor },
 	pagination,
-}: Must<SponsorConferencesProps> & {
-	data: { sponsor: Must<SponsorPivotFragment> };
-}): JSX.Element {
+}: Must<SponsorConferencesProps>): JSX.Element {
+	if (!sponsor) {
+		throw new Error('Unreachable');
+	}
+
 	return (
 		<SponsorPivot {...{ sponsor }}>
 			<LineHeading color={BaseColors.RED}>
@@ -52,5 +51,7 @@ function SponsorConferences({
 }
 
 export default withFailStates(SponsorConferences, {
-	useShould404: ({ nodes }) => !nodes?.length,
+	useShould404: (props) => {
+		return !props?.nodes?.length || !props?.data?.sponsor;
+	},
 });

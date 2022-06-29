@@ -7,17 +7,17 @@
 	right: 0;
 	height: 4px;
 	margin-bottom: -4px;
-	display: none;
 	background: $ts-lightTone;
 	z-index: 1000;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity $transition-quick;
 	> * {
 		background: $ts-bufferTone;
 		height: 4px;
 	}
-	&.visible {
-		display: block;
-	}
 	&.loading {
+		animation: show 1s;
 		> * {
 			width: 90%;
 			animation: run $loading-animation-duration ease-out;
@@ -31,5 +31,14 @@
 	}
 	100% {
 		width: 90%;
+	}
+}
+
+@keyframes show {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 1;
 	}
 }

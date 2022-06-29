@@ -1,36 +1,26 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
-import { useIsFetching } from 'react-query';
-
-import useRouterLoading from '@lib/useRouterLoading';
+import React from 'react';
 
 import styles from './loadingIndicator.module.scss';
-
-const HIDE_DELAY = 1000; //ms
+import { useIntl } from 'react-intl';
+import useIsLoading from '@lib/useIsLoading';
 
 const LoadingIndicator: React.VoidFunctionComponent = () => {
-	const isFetching = useIsFetching();
-	const isLoading = useRouterLoading();
-	const isAnyLoading = !!(isFetching || isLoading);
-	const [visible, setVisible] = React.useState(false);
-
-	useEffect(() => {
-		if (isAnyLoading) {
-			setVisible(true);
-		} else {
-			const timer = setTimeout(() => setVisible(false), HIDE_DELAY);
-			return () => clearTimeout(timer);
-		}
-	}, [isAnyLoading]);
+	const intl = useIntl();
+	const isLoading = useIsLoading();
 
 	return (
 		<div
-			className={clsx(
-				styles.bar,
-				visible && styles.visible,
-				isAnyLoading && styles.loading
-			)}
+			className={clsx(styles.bar, isLoading && styles.loading)}
 			data-testid="loading-indicator"
+			aria-label={
+				isLoading
+					? intl.formatMessage({
+							id: 'loadingIndicator.loading',
+							defaultMessage: 'Loading...',
+					  })
+					: ''
+			}
 		>
 			<div />
 		</div>

@@ -17,12 +17,6 @@ const renderPage = async () => {
 };
 
 describe('search', () => {
-	it('renders', async () => {
-		__loadQuery();
-
-		await renderPage();
-	});
-
 	it('registers search paths', async () => {
 		const { paths } = await getStaticPaths();
 

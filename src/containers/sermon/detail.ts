@@ -1,10 +1,10 @@
 import withFailStates from '@components/HOCs/withFailStates';
-import { Recording } from '@components/organisms/recording';
-import { GetSermonDetailDataQuery } from '@lib/generated/graphql';
+import { Recording, RecordingProps } from '@components/organisms/recording';
+import { Maybe } from '@lib/generated/graphql';
 
-export interface SermonDetailProps {
-	recording: GetSermonDetailDataQuery['sermon'];
-}
+export type SermonDetailProps = {
+	recording: Maybe<RecordingProps['recording']>;
+};
 
 export default withFailStates<SermonDetailProps>(Recording, {
 	useShould404: (props) => !props.recording,

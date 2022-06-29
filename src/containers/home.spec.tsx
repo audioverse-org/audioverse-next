@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
@@ -367,11 +367,11 @@ describe('home page', () => {
 	});
 
 	it('links post title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByText('the_post_title').parentElement?.parentElement
-		).toHaveAttribute('href', '/the_post_path');
+			await screen.findByRole('link', { name: /the_post_title/ })
+		).toHaveAttribute('href', 'the_post_path');
 	});
 });
 

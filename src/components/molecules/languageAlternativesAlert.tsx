@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { Router, useRouter } from 'next/router';
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import InfoBox from '@components/atoms/infoBox';
@@ -24,13 +24,10 @@ export default function LanguageAlternativesAlert(): JSX.Element | null {
 
 	const router = useRouter();
 
-	const setCurrentRouteToCookie = useMemo(
-		() => () => {
-			setLanguageId(languageRoute);
-			setShowingAlert(false);
-		},
-		[languageRoute]
-	);
+	const setCurrentRouteToCookie = useCallback(() => {
+		setLanguageId(languageRoute);
+		setShowingAlert(false);
+	}, [languageRoute]);
 
 	useEffect(() => {
 		Router.events.on('routeChangeStart', setCurrentRouteToCookie);

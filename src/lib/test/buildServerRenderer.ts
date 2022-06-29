@@ -1,14 +1,18 @@
-import { GetServerSidePropsResult } from 'next';
+import { GetServerSideProps } from 'next';
 import { ComponentType } from 'react';
 
 import { buildRenderer, Renderer } from '@lib/test/buildRenderer';
+import { ParsedUrlQuery } from 'querystring';
 
-export function buildServerRenderer<
-	C extends ComponentType<any>,
-	F extends (context: any) => Promise<GetServerSidePropsResult<any>>
->(Component: C, getServerSideProps: F): Renderer {
-	const getProps = async (p: any) => {
-		const result = await getServerSideProps({ params: p, query: p } as any);
+export function buildServerRenderer<P, F extends GetServerSideProps<P>>(
+	Component: ComponentType<P>,
+	getServerSideProps: F
+): Renderer<P> {
+	const getProps = async (query: ParsedUrlQuery) => {
+		const result = await getServerSideProps({
+			query: query,
+			params: query,
+		} as any);
 		if (!('props' in result)) {
 			throw new Error('Failed to get server props');
 		}

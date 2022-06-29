@@ -86,8 +86,10 @@ describe('sponsor series page', () => {
 
 	it('skips sponsor image if none provided', async () => {
 		loadData({
-			sponsor: {
-				image: null as any,
+			data: {
+				sponsor: {
+					image: null as any,
+				},
 			},
 		});
 

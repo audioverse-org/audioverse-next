@@ -20,8 +20,7 @@ export async function getStaticProps({
 }: GetStaticPropsContext<{ language: string }>): Promise<
 	GetStaticPropsResult<VersionsProps & IBaseProps>
 > {
-	const response = await getBibles().catch((e) => {
-		console.log(e);
+	const response = await getBibles().catch(() => {
 		return null;
 	});
 	const apiBibles = await getAudiobibleVersionsData({

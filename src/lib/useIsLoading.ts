@@ -1,12 +1,19 @@
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
+import { useIsFetching } from 'react-query';
 
 // https://stackoverflow.com/a/63755519/937377
-const useRouterLoading = (): boolean => {
+const useIsLoading = (): boolean => {
 	const [loading, setLoading] = useState(false);
+	const isFetching = useIsFetching();
+	// TODO: Also check useIsMutating()
 	useEffect(() => {
-		const start = () => setLoading(true);
-		const end = () => setLoading(false);
+		const start = () => {
+			setLoading(true);
+		};
+		const end = () => {
+			setLoading(false);
+		};
 		Router.events.on('routeChangeStart', start);
 		Router.events.on('routeChangeComplete', end);
 		Router.events.on('routeChangeError', end);
@@ -16,7 +23,7 @@ const useRouterLoading = (): boolean => {
 			Router.events.off('routeChangeError', end);
 		};
 	}, []);
-	return loading;
+	return loading || isFetching > 0;
 };
 
-export default useRouterLoading;
+export default useIsLoading;

@@ -2,12 +2,16 @@ import { ParsedUrlQuery } from 'querystring';
 
 import Router_, { NextRouter } from 'next/router';
 
-const Router: typeof Router_ = {
-	events: {
-		on: jest.fn(),
-		off: jest.fn(),
-	},
-} as any;
+const makeDefault = () => {
+	return {
+		events: {
+			on: jest.fn(),
+			off: jest.fn(),
+		},
+	} as any;
+};
+
+let Router: typeof Router_ = makeDefault();
 
 function makeRouter(router_: Partial<NextRouter> = {}) {
 	return {
@@ -45,6 +49,7 @@ const useRouter = jest.fn();
 beforeEach(() => {
 	__loadRouter();
 	useRouter.mockImplementation(() => __mockedRouter);
+	Router = makeDefault();
 });
 
 export { Router, useRouter, __mockedRouter, __loadRouter, __loadQuery };

@@ -62,6 +62,8 @@ export default function Button({
 			<a {..._props}>{inner}</a>
 		</Link>
 	) : (
-		<button {..._props}>{inner}</button>
+		<button disabled={!!disabled} {..._props}>
+			{inner}
+		</button>
 	);
 }

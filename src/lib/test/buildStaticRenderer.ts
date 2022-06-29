@@ -1,14 +1,18 @@
-import { GetStaticProps } from 'next';
 import { ComponentType } from 'react';
 
 import { buildRenderer, Renderer } from '@lib/test/buildRenderer';
+import { GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
-export function buildStaticRenderer<
-	C extends ComponentType<any>,
-	F extends GetStaticProps<any, any>
->(Component: C, getStaticProps: F): Renderer {
-	const getProps = async (p: any) =>
-		((await getStaticProps({ params: p })) as any).props;
+export function buildStaticRenderer<P, F extends GetStaticProps<P, any>>(
+	Component: ComponentType<P>,
+	getStaticProps: F
+): Renderer<P> {
+	const getProps = async (query: ParsedUrlQuery): Promise<Partial<P>> => {
+		const result = await getStaticProps({ params: query });
+
+		return 'props' in result ? result.props : {};
+	};
 
 	return buildRenderer(Component, { getProps });
 }

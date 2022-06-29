@@ -8,6 +8,7 @@ import AndPlaybackContext, {
 import { SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import setPlayerMock from '@lib/test/setPlayerMock';
+import { waitFor } from '@testing-library/react';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -28,11 +29,7 @@ function ContextUser({
 	return <>{text}</>;
 }
 
-describe('miniplayer template', () => {
-	it('renders', async () => {
-		await renderComponent();
-	});
-
+describe('andMiniplayer', () => {
 	it('renders children', async () => {
 		const { getByText } = await renderComponent({
 			props: {
@@ -81,7 +78,9 @@ describe('miniplayer template', () => {
 			},
 		});
 
-		expect(mockPlayer.play).toBeCalled();
+		await waitFor(() => {
+			expect(mockPlayer.play).toBeCalled();
+		});
 	});
 
 	it('loads recording', async () => {
@@ -104,7 +103,9 @@ describe('miniplayer template', () => {
 			},
 		});
 
-		await findByText('the_recording_title');
+		await expect(
+			findByText('the_recording_title')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('sets class on body when miniplayer loaded', async () => {

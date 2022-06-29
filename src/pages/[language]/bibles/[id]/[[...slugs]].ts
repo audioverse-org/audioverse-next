@@ -25,8 +25,7 @@ export async function getStaticProps({
 > {
 	let props: VersionProps & IBaseProps;
 	if (params?.id.includes('K')) {
-		const version = await getBible(params?.id || '').catch((e) => {
-			console.log(e);
+		const version = await getBible(params?.id || '').catch(() => {
 			return null;
 		});
 		if (!version) {

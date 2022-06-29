@@ -8,10 +8,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSponsorTeachingsPageDataQuery,
-	SponsorPivotFragment,
-} from '@lib/generated/graphql';
+import { GetSponsorTeachingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -31,10 +28,13 @@ function SponsorTeachings({
 	nodes,
 	data: { sponsor },
 	pagination,
-}: Must<SponsorTeachingsProps> & {
-	data: { sponsor: Must<SponsorPivotFragment> };
-}): JSX.Element {
+}: Must<SponsorTeachingsProps>): JSX.Element {
 	const languageRoute = useLanguageRoute();
+
+	if (!sponsor) {
+		throw new Error('Unreachable');
+	}
+
 	return (
 		<SponsorPivot {...{ sponsor }}>
 			<RssAlternate url={makeSponsorFeedRoute(languageRoute, sponsor.id)} />
@@ -60,5 +60,5 @@ function SponsorTeachings({
 }
 
 export default withFailStates(SponsorTeachings, {
-	useShould404: ({ nodes }) => !nodes?.length,
+	useShould404: ({ nodes, data }) => !nodes?.length || !data?.sponsor,
 });

@@ -2416,6 +2416,7 @@ export const PageType = {
   Custom: 'CUSTOM',
   Legal: 'LEGAL',
   Privacy: 'PRIVACY',
+  Purpose: 'PURPOSE',
   SpiritOfAv: 'SPIRIT_OF_AV',
   Team: 'TEAM',
   TermsOfUse: 'TERMS_OF_USE',
@@ -5927,14 +5928,6 @@ export type PersonLockupFragment = { __typename?: 'Person', name: string, canoni
 
 export type PlayerFragment = { __typename?: 'Recording', id: string | number, title: string, canonicalPath: string, duration: number, isDownloadAllowed: boolean, shareUrl: string, sequence: { __typename?: 'Sequence', title: string, contentType: SequenceContentType } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }>, videoDownloads: Array<{ __typename?: 'VideoFile', url: string, filesize: string, height: number, width: number }>, audioDownloads: Array<{ __typename?: 'AudioFile', url: string, filesize: string, bitrate: number }>, speakers: Array<{ __typename?: 'Person', name: string }> };
 
-export type GetPlaylistButtonDataQueryVariables = Exact<{
-  language: Language;
-  recordingId: Scalars['ID'];
-}>;
-
-
-export type GetPlaylistButtonDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', playlists: { __typename?: 'UserPlaylistConnection', nodes: Array<{ __typename?: 'UserPlaylist', id: string | number, title: string, hasRecording: boolean }> | null } } } | null };
-
 export type SequenceNavFragment = { __typename?: 'Recording', sequencePreviousRecording: { __typename?: 'Recording', canonicalPath: string } | null, sequenceNextRecording: { __typename?: 'Recording', canonicalPath: string } | null };
 
 export type SponsorLockupFragment = { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null };
@@ -5983,24 +5976,6 @@ export type GetAboutStaticPathsQueryVariables = Exact<{
 
 
 export type GetAboutStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', canonicalPath: string }> | null } };
-
-export type GetAccountPlaylistsPageDataQueryVariables = Exact<{
-  language: Language;
-}>;
-
-
-export type GetAccountPlaylistsPageDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', playlists: { __typename?: 'UserPlaylistConnection', nodes: Array<{ __typename?: 'UserPlaylist', id: string | number, title: string, isPublic: boolean, summary: string, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null } } } | null };
-
-export type AddAccountPlaylistMutationVariables = Exact<{
-  isPublic: Scalars['Boolean'];
-  language: Language;
-  recordingIds: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-  summary: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
-}>;
-
-
-export type AddAccountPlaylistMutation = { __typename?: 'Mutation', playlistAdd: { __typename?: 'UserPlaylist', id: string | number } };
 
 export type GetAccountPreferencesDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6917,16 +6892,6 @@ export type SponsorUnfavoriteMutationVariables = Exact<{
 
 export type SponsorUnfavoriteMutation = { __typename?: 'Mutation', favorited: { __typename?: 'SuccessPayload', success: boolean } };
 
-export type AddPlaylistMutationVariables = Exact<{
-  language: Language;
-  title: Scalars['String'];
-  isPublic: Scalars['Boolean'];
-  recordingIds: InputMaybe<Array<Scalars['ID']> | Scalars['ID']>;
-}>;
-
-
-export type AddPlaylistMutation = { __typename?: 'Mutation', playlistAdd: { __typename?: 'UserPlaylist', id: string | number } };
-
 export type GenerateFeedFragment = { __typename?: 'Recording', id: string | number, title: string, contentType: RecordingContentType, description: string | null, publishDate: string | null, audioFiles: Array<{ __typename?: 'AudioFile', id: string | number, url: string, filesize: string, duration: number, mimeType: string, bitrate: number }>, videoFiles: Array<{ __typename?: 'VideoFile', id: string | number, url: string, filesize: string, duration: number, mimeType: string, bitrate: number, container: string }>, persons: Array<{ __typename?: 'Person', name: string }>, sequence: { __typename?: 'Sequence', title: string } | null, sponsor: { __typename?: 'Sponsor', title: string } | null };
 
 export type BookFeedDescriptionFragment = { __typename?: 'Sequence', title: string, recordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', authors: Array<{ __typename?: 'Person', name: string }>, narrators: Array<{ __typename?: 'Person', name: string }> }> | null } };
@@ -7066,21 +7031,6 @@ export const useLoginForgotPasswordMutation = <
       (variables?: LoginForgotPasswordMutationVariables) => graphqlFetcher<LoginForgotPasswordMutation, LoginForgotPasswordMutationVariables>(LoginForgotPasswordDocument, variables)(),
       options
     );
-export const GetPlaylistButtonDataDocument = `
-query getPlaylistButtonData($language:Language!$recordingId:ID!){me{user{playlists(language:$language){nodes{id title hasRecording(id:$recordingId)}}}}}
-`;
-export const useGetPlaylistButtonDataQuery = <
-      TData = GetPlaylistButtonDataQuery,
-      TError = unknown
-    >(
-      variables: GetPlaylistButtonDataQueryVariables,
-      options?: UseQueryOptions<GetPlaylistButtonDataQuery, TError, TData>
-    ) =>
-    useQuery<GetPlaylistButtonDataQuery, TError, TData>(
-      ['getPlaylistButtonData', variables],
-      graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
-      options
-    );
 export const GetNotFoundPageDataDocument = `
 query getNotFoundPageData{websiteRecentRecordings(language:ENGLISH first:3){nodes{...cardRecording}}}
 ${CardRecordingFragmentDoc}
@@ -7156,33 +7106,6 @@ export const useGetAboutStaticPathsQuery = <
     useQuery<GetAboutStaticPathsQuery, TError, TData>(
       ['getAboutStaticPaths', variables],
       graphqlFetcher<GetAboutStaticPathsQuery, GetAboutStaticPathsQueryVariables>(GetAboutStaticPathsDocument, variables),
-      options
-    );
-export const GetAccountPlaylistsPageDataDocument = `
-query getAccountPlaylistsPageData($language:Language!){me{user{playlists(language:$language){nodes{id title isPublic summary recordings{aggregate{count}}}}}}}
-`;
-export const useGetAccountPlaylistsPageDataQuery = <
-      TData = GetAccountPlaylistsPageDataQuery,
-      TError = unknown
-    >(
-      variables: GetAccountPlaylistsPageDataQueryVariables,
-      options?: UseQueryOptions<GetAccountPlaylistsPageDataQuery, TError, TData>
-    ) =>
-    useQuery<GetAccountPlaylistsPageDataQuery, TError, TData>(
-      ['getAccountPlaylistsPageData', variables],
-      graphqlFetcher<GetAccountPlaylistsPageDataQuery, GetAccountPlaylistsPageDataQueryVariables>(GetAccountPlaylistsPageDataDocument, variables),
-      options
-    );
-export const AddAccountPlaylistDocument = `
-mutation addAccountPlaylist($isPublic:Boolean!$language:Language!$recordingIds:[ID!]$summary:String$title:String!){playlistAdd(input:{isPublic:$isPublic language:$language recordingIds:$recordingIds summary:$summary title:$title}){id}}
-`;
-export const useAddAccountPlaylistMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>) =>
-    useMutation<AddAccountPlaylistMutation, TError, AddAccountPlaylistMutationVariables, TContext>(
-      ['addAccountPlaylist'],
-      (variables?: AddAccountPlaylistMutationVariables) => graphqlFetcher<AddAccountPlaylistMutation, AddAccountPlaylistMutationVariables>(AddAccountPlaylistDocument, variables)(),
       options
     );
 export const GetAccountPreferencesDataDocument = `
@@ -9046,18 +8969,6 @@ export const useSponsorUnfavoriteMutation = <
       (variables?: SponsorUnfavoriteMutationVariables) => graphqlFetcher<SponsorUnfavoriteMutation, SponsorUnfavoriteMutationVariables>(SponsorUnfavoriteDocument, variables)(),
       options
     );
-export const AddPlaylistDocument = `
-mutation addPlaylist($language:Language!$title:String!$isPublic:Boolean!$recordingIds:[ID!]){playlistAdd(input:{language:$language title:$title isPublic:$isPublic recordingIds:$recordingIds}){id}}
-`;
-export const useAddPlaylistMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(options?: UseMutationOptions<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>) =>
-    useMutation<AddPlaylistMutation, TError, AddPlaylistMutationVariables, TContext>(
-      ['addPlaylist'],
-      (variables?: AddPlaylistMutationVariables) => graphqlFetcher<AddPlaylistMutation, AddPlaylistMutationVariables>(AddPlaylistDocument, variables)(),
-      options
-    );
 import { fetchApi } from '@lib/api/fetchApi' 
 
 							export async function getWithAuthGuardData<T>(
@@ -9095,12 +9006,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 
 
 
-							export async function getPlaylistButtonData<T>(
-								variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
-							): Promise<GetPlaylistButtonDataQuery> {
-								return fetchApi(GetPlaylistButtonDataDocument, { variables });
-							}
-
 
 
 
@@ -9135,18 +9040,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetAboutStaticPathsQueryVariables>
 							): Promise<GetAboutStaticPathsQuery> {
 								return fetchApi(GetAboutStaticPathsDocument, { variables });
-							}
-
-							export async function getAccountPlaylistsPageData<T>(
-								variables: ExactAlt<T, GetAccountPlaylistsPageDataQueryVariables>
-							): Promise<GetAccountPlaylistsPageDataQuery> {
-								return fetchApi(GetAccountPlaylistsPageDataDocument, { variables });
-							}
-
-							export async function addAccountPlaylist<T>(
-								variables: ExactAlt<T, AddAccountPlaylistMutationVariables>
-							): Promise<AddAccountPlaylistMutation> {
-								return fetchApi(AddAccountPlaylistDocument, { variables });
 							}
 
 							export async function getAccountPreferencesData<T>(
@@ -9828,11 +9721,5 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, SponsorUnfavoriteMutationVariables>
 							): Promise<SponsorUnfavoriteMutation> {
 								return fetchApi(SponsorUnfavoriteDocument, { variables });
-							}
-
-							export async function addPlaylist<T>(
-								variables: ExactAlt<T, AddPlaylistMutationVariables>
-							): Promise<AddPlaylistMutation> {
-								return fetchApi(AddPlaylistDocument, { variables });
 							}
 

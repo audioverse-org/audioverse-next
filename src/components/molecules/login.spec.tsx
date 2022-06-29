@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
@@ -29,7 +29,7 @@ describe('login form', () => {
 	it('renders forgot password link', async () => {
 		const { getByText } = await renderWithProviders(<Login />, undefined);
 
-		expect(getByText('Forgot password?'));
+		expect(getByText('Forgot password?')).toBeInTheDocument();
 	});
 
 	it('triggers forgot password email', async () => {
@@ -66,13 +66,15 @@ describe('login form', () => {
 		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
 		userEvent.click(getByText('Send reset link'));
 
-		await waitFor(() => {
-			expect(
-				getByText(
-					'Reset link sent. Check your email and use the link to reset your password.'
-				)
-			);
-		});
+		await expect(
+			screen.findByText(
+				'Reset link sent. Check your email and use the link to reset your password.'
+			)
+		).resolves.toBeInTheDocument();
+
+		await expect(
+			screen.findByText('Check your email for a password reset link')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('shows API error', async () => {
@@ -92,7 +94,7 @@ describe('login form', () => {
 		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('the_error'));
+			expect(getByText('the_error')).toBeInTheDocument();
 		});
 	});
 
@@ -111,7 +113,7 @@ describe('login form', () => {
 		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('the_error'));
+			expect(getByText('the_error')).toBeInTheDocument();
 		});
 
 		expect(
@@ -140,7 +142,7 @@ describe('login form', () => {
 					getByText(
 						'Something went wrong while trying to send a password reset link'
 					)
-				);
+				).toBeInTheDocument();
 			});
 		});
 	});
@@ -162,7 +164,7 @@ describe('login form', () => {
 		userEvent.click(getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('error_two'));
+			expect(getByText('error_two')).toBeInTheDocument();
 		});
 	});
 });

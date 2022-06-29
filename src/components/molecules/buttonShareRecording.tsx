@@ -43,24 +43,26 @@ export default function ButtonShareRecording({
 		>
 			{!disableEmbedCode && (
 				<div className={styles.container}>
-					<Heading6 sans loose uppercase large>
-						{shareVideo ? (
-							<FormattedMessage
-								id="molecule-buttonShareRecording__videoEmbedLabel"
-								defaultMessage="Video Embed Code"
-							/>
-						) : (
-							<FormattedMessage
-								id="molecule-buttonShareRecording__audioEmbedLabel"
-								defaultMessage="Audio Embed Code"
-							/>
-						)}
-					</Heading6>
-					<input
-						className={styles.embedCode}
-						readOnly={true}
-						value={embedCode}
-					/>
+					<label>
+						<Heading6 sans loose uppercase large>
+							{shareVideo ? (
+								<FormattedMessage
+									id="molecule-buttonShareRecording__videoEmbedLabel"
+									defaultMessage="Video Embed Code"
+								/>
+							) : (
+								<FormattedMessage
+									id="molecule-buttonShareRecording__audioEmbedLabel"
+									defaultMessage="Audio Embed Code"
+								/>
+							)}
+						</Heading6>
+						<input
+							className={styles.embedCode}
+							readOnly={true}
+							value={embedCode}
+						/>
+					</label>
 				</div>
 			)}
 		</ButtonShare>

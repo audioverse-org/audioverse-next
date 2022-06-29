@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { act, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
@@ -107,7 +107,7 @@ describe('profile page', () => {
 
 		const { findByDisplayValue } = await renderPage();
 
-		await findByDisplayValue('first');
+		await expect(findByDisplayValue('first')).resolves.toBeInTheDocument();
 	});
 
 	it('displays email field if unauthenticated', async () => {
@@ -123,6 +123,8 @@ describe('profile page', () => {
 	});
 
 	it('makes login request', async () => {
+		mockedLogin.mockRejectedValue('the_error');
+
 		const { getByPlaceholderText, getByText } = await renderPage();
 
 		const emailField = getByPlaceholderText('jane@example.com');
@@ -131,9 +133,11 @@ describe('profile page', () => {
 
 		await userEvent.type(emailField, 'the_email');
 		await userEvent.type(passwordField, 'the_password');
-		loginButton.click();
+		userEvent.click(loginButton);
 
 		expect(login).toHaveBeenCalledWith('the_email', 'the_password');
+
+		await screen.findByText('Login failed');
 	});
 
 	it('stores request', async () => {
@@ -153,9 +157,11 @@ describe('profile page', () => {
 
 		const loginButton = getByText('Login');
 
-		loginButton.click();
+		userEvent.click(loginButton);
 
-		expect(getByText('Login failed')).toBeInTheDocument();
+		await expect(
+			screen.findByText('Login failed')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('prevents default form submission', async () => {
@@ -165,7 +171,9 @@ describe('profile page', () => {
 			preventDefault: jest.fn(),
 		};
 
-		ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
+		await act(() => {
+			ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
+		});
 
 		await waitFor(() => expect(event.preventDefault).toHaveBeenCalled());
 	});
@@ -186,10 +194,12 @@ describe('profile page', () => {
 			},
 		});
 
-		await findByText('First name');
+		await expect(findByText('First name')).resolves.toBeInTheDocument();
 	});
 
 	it('logs in with email and password', async () => {
+		mockedLogin.mockRejectedValue('the_error');
+
 		const { getByText, getByPlaceholderText, findByPlaceholderText } =
 			await renderPage();
 
@@ -201,6 +211,8 @@ describe('profile page', () => {
 		userEvent.click(getByText('Login'));
 
 		expect(login).toBeCalledWith('the_email', 'the_password');
+
+		await screen.findByText('Login failed');
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
@@ -311,6 +323,13 @@ describe('profile page', () => {
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
 		});
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				UpdateProfileDataDocument,
+				expect.anything()
+			);
+		});
 	});
 
 	it('loads mutated name on success', async () => {
@@ -334,6 +353,13 @@ describe('profile page', () => {
 
 		await waitFor(() => {
 			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
+		});
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				UpdateProfileDataDocument,
+				expect.anything()
+			);
 		});
 	});
 

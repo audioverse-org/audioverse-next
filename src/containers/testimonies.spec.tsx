@@ -53,12 +53,6 @@ async function renderPage() {
 }
 
 describe('testimonies pages', () => {
-	it('renders', async () => {
-		loadTestimonies();
-
-		await renderPage();
-	});
-
 	it('revalidates', async () => {
 		loadTestimonies();
 
@@ -128,8 +122,8 @@ describe('testimonies pages', () => {
 	it('links pagination properly', async () => {
 		loadTestimonies();
 
-		const { getByText } = await renderPage(),
-			link = getByText('1') as HTMLAnchorElement;
+		const { getByText } = await renderPage();
+			const link = getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/testimonies');
 	});
@@ -157,6 +151,6 @@ describe('testimonies pages', () => {
 	});
 
 	it('renders without testimonies', async () => {
-		await renderPage();
+		await expect(renderPage).not.toThrow();
 	});
 });

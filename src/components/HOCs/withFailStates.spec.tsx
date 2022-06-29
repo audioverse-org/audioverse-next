@@ -10,9 +10,9 @@ describe('withFailStates HOC', () => {
 	it('supports no should404 prop', async () => {
 		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
 
-		const Comp = () => <p>hello world</p>,
-			Hoc = withFailStates(Comp);
+		const Comp = () => <p>hello world</p>;
+		const Hoc = withFailStates(Comp);
 
-		await render(<Hoc />);
+		await expect(() => render(<Hoc />)).not.toThrow();
 	});
 });

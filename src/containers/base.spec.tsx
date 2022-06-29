@@ -1,12 +1,28 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import MyApp from '@pages/_app';
+import defaultsDeep from 'lodash/defaultsDeep';
+import { __waitForIntlMessages } from '@lib/useIntlMessages';
 
-const renderApp = (component: any, props: any) => {
-	return render(<MyApp Component={component} pageProps={props} />);
+jest.mock('@components/molecules/helpWidget');
+jest.mock('@components/molecules/loadingIndicator');
+
+const renderComponent = async (
+	props: Partial<Parameters<typeof MyApp>[0]> = {}
+) => {
+	const p = defaultsDeep(props, {
+		Component: () => <>hello world</>,
+		pageProps: {},
+	});
+
+	const view = render(<MyApp {...p} />);
+
+	await __waitForIntlMessages();
+
+	return view;
 };
 
 describe('app', () => {
@@ -19,75 +35,79 @@ describe('app', () => {
 	});
 
 	it('sets title', async () => {
-		await act(async () => {
-			await render(
-				<MyApp
-					Component={(() => null) as unknown as typeof React.Component}
-					pageProps={{}}
-				/>
-			);
+		await renderComponent();
 
-			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+		await screen.findByText('hello world');
 
-			expect(heads).toEqual(
-				expect.arrayContaining([expect.stringContaining('AudioVerse')])
-			);
-		});
+		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+
+		expect(heads).toEqual(
+			expect.arrayContaining([expect.stringContaining('AudioVerse')])
+		);
 	});
 
 	it('rehydrates react-query', async () => {
-		await act(async () => {
-			const queryClient = new QueryClient();
+		const queryClient = new QueryClient();
 
-			await queryClient.prefetchQuery('myQuery', async () => 'myResult');
+		await queryClient.prefetchQuery('myQuery', async () => 'myResult');
 
-			const spy = jest.fn();
+		const spy = jest.fn();
 
-			const { getByText } = await renderApp(
-				() => {
-					const { data: myQuery } = useQuery('myQuery', spy);
-					return <>{myQuery}</>;
-				},
-				{
-					dehydratedState: dehydrate(queryClient),
-				}
-			);
-
-			expect(getByText('myResult')).toBeInTheDocument();
+		await renderComponent({
+			Component: () => {
+				const { data: myQuery } = useQuery('myQuery', spy);
+				return <>{myQuery}</>;
+			},
+			pageProps: {
+				dehydratedState: dehydrate(queryClient),
+			},
 		});
+
+		await expect(screen.findByText('myResult')).resolves.toBeInTheDocument();
 	});
 
 	it('includes sidebar', async () => {
-		await act(async () => {
-			const { getByText } = await renderApp(() => <>h</>, {});
-
-			expect(getByText('More')).toBeInTheDocument();
+		const { getByText } = await renderComponent({
+			Component: () => <>h</>,
+			pageProps: {},
 		});
+
+		await screen.findByText('h');
+
+		expect(getByText('More')).toBeInTheDocument();
 	});
 
 	it('disables sidebar', async () => {
-		await act(async () => {
-			const { queryByText } = await renderApp(() => <>h</>, {
+		const { queryByText } = await renderComponent({
+			Component: () => <>h</>,
+			pageProps: {
 				disableSidebar: true,
-			});
-
-			expect(queryByText('More')).not.toBeInTheDocument();
+			},
 		});
+
+		await screen.findByText('h');
+
+		expect(queryByText('More')).not.toBeInTheDocument();
 	});
 
 	it('sets title with props', async () => {
-		await act(async () => {
-			await renderApp(() => <>h</>, {
+		await renderComponent({
+			Component: () => {
+				return <>h</>;
+			},
+			pageProps: {
 				title: 'the_prop_title',
-			});
-
-			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
-
-			expect(heads).toEqual(
-				expect.arrayContaining([
-					expect.stringContaining(`the_prop_title | AudioVerse`),
-				])
-			);
+			},
 		});
+
+		await screen.findByText('h');
+
+		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+
+		expect(heads).toEqual(
+			expect.arrayContaining([
+				expect.stringContaining(`the_prop_title | AudioVerse`),
+			])
+		);
 	});
 });

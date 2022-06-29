@@ -146,7 +146,7 @@ describe('collection detail page', () => {
 
 		expect(getAllByText('the_sponsor_title')[1]).toHaveAttribute(
 			'href',
-			'/the_sponsor_path'
+			'the_sponsor_path'
 		);
 	});
 
