@@ -20,7 +20,7 @@ import { PartialDeep } from 'type-fest';
 import videojs from 'video.js';
 
 import withIntl from '@components/HOCs/withIntl';
-import { fetchApi } from '@lib/api';
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetPlaylistButtonDataQuery,
 	GetWithAuthGuardDataDocument,

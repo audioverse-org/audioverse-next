@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { RecordingFragment, SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
@@ -19,6 +19,7 @@ const LazyHelpWidget = dynamic(() => import('../molecules/helpWidget'));
 export default function AndMiniplayer({
 	children,
 }: PropsWithChildren<unknown>): JSX.Element {
+	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const player = playbackContext.player();
 
@@ -37,7 +38,13 @@ export default function AndMiniplayer({
 	if (teaseRecording?.sequence) {
 		const { Icon } = getSequenceTypeTheme(teaseRecording.sequence.contentType);
 		sequenceLine = (
-			<div className={styles.series} aria-label="series">
+			<div
+				className={styles.series}
+				aria-label={intl.formatMessage({
+					id: 'miniplayer__series',
+					defaultMessage: 'Series',
+				})}
+			>
 				<Icon width={13} height={13} />
 				{teaseRecording.sequence.contentType === SequenceContentType.BibleBook
 					? teaseRecording.collection?.title
@@ -106,7 +113,7 @@ export default function AndMiniplayer({
 								<div className={styles.authorAvatar}>
 									<Image
 										src={teaseRecording?.speakers[0]?.imageWithFallback?.url}
-										alt="speaker-avatar"
+										alt={teaseRecording?.speakers[0]?.name}
 										width={30}
 										height={30}
 									/>

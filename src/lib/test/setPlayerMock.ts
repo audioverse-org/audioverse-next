@@ -32,7 +32,6 @@ type MockPlayer = Pick<
 	| 'supportsFullScreen'
 	| 'on'
 	| 'overlay'
-
 > & {
 	_updateOptions: (options: SetPlayerMockOptions) => void;
 	_fire: (event: string, data?: any) => void;
