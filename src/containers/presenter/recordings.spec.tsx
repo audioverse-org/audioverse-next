@@ -12,6 +12,7 @@ import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/teachings/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps);
 
@@ -77,17 +78,17 @@ describe('presenter recordings page', () => {
 	it('lists presenter recordings', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_recording_title')).toBeInTheDocument();
+		expect(screen.getByText('the_recording_title')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute(
+		expect(screen.getByText('1')).toHaveAttribute(
 			'href',
 			'/en/presenters/the_presenter_id/teachings'
 		);
@@ -96,17 +97,17 @@ describe('presenter recordings page', () => {
 	it('displays speaker name', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_presenter_name')).toBeInTheDocument();
+		expect(screen.getByText('the_presenter_name')).toBeInTheDocument();
 	});
 
 	it('displays person image', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_presenter_name')).toHaveAttribute(
+		expect(screen.getByAltText('the_presenter_name')).toHaveAttribute(
 			'src',
 			'the_presenter_image'
 		);
@@ -117,8 +118,8 @@ describe('presenter recordings page', () => {
 			.calledWith(GetPresenterRecordingsPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

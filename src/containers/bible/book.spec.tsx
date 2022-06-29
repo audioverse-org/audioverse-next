@@ -13,7 +13,7 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 jest.mock('@lib/api/bibleBrain');
 jest.mock('video.js');
@@ -109,33 +109,33 @@ describe('Bible book detail page', () => {
 	it('displays chapter title', async () => {
 		loadPageData();
 
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_chapter_title')[0]).toBeInTheDocument();
+		expect(screen.getAllByText('the_chapter_title')[0]).toBeInTheDocument();
 	});
 
 	it('displays version abbreviation', async () => {
 		loadPageData();
 
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('KJV Bible')[0]).toBeInTheDocument();
+		expect(screen.getAllByText('KJV Bible')[0]).toBeInTheDocument();
 	});
 
 	it('displays sponsor name', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_name')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_name')).toBeInTheDocument();
 	});
 
 	it('displays sponsor url', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_name')).toHaveAttribute(
+		expect(screen.getByText('the_sponsor_name')).toHaveAttribute(
 			'href',
 			'the_sponsor_url'
 		);
@@ -148,9 +148,9 @@ describe('Bible book detail page', () => {
 
 		loadPageData();
 
-		const { getAllByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getAllByLabelText('play')[0]);
+		userEvent.click(screen.getAllByLabelText('play')[0]);
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();

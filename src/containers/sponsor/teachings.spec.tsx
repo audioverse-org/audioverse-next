@@ -13,6 +13,7 @@ import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps);
 
@@ -67,41 +68,44 @@ describe('sponsor teachings page', () => {
 	it('lists recordings', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_recording_title')).toBeInTheDocument();
+		expect(screen.getByText('the_recording_title')).toBeInTheDocument();
 	});
 
 	it('displays sponsor title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('displays subpage title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Teachings')).toBeInTheDocument();
+		expect(screen.getByText('All Teachings')).toBeInTheDocument();
 	});
 
 	it('links back to detail page', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Back')).toHaveAttribute('href', '/the_sponsor_path');
+		expect(screen.getByText('Back')).toHaveAttribute(
+			'href',
+			'/the_sponsor_path'
+		);
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute(
+		expect(screen.getByText('1')).toHaveAttribute(
 			'href',
 			'/en/sponsors/the_sponsor_id/teachings'
 		);
@@ -112,17 +116,17 @@ describe('sponsor teachings page', () => {
 			.calledWith(GetSponsorTeachingsPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('displays sponsor image', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
+		expect(screen.getByAltText('the_sponsor_title')).toHaveAttribute(
 			'src',
 			'the_sponsor_image'
 		);
@@ -137,8 +141,8 @@ describe('sponsor teachings page', () => {
 			},
 		});
 
-		const { queryByAltText } = await renderPage();
+		await renderPage();
 
-		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
+		expect(screen.queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
 	});
 });

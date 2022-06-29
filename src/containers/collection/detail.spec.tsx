@@ -13,6 +13,7 @@ import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);
 
@@ -112,17 +113,17 @@ describe('collection detail page', () => {
 	it('lists sequences', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sequence_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sequence_title')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_collection_title')).toBeInTheDocument();
+		expect(screen.getByText('the_collection_title')).toBeInTheDocument();
 	});
 
 	it('generates static paths', async () => {
@@ -142,9 +143,9 @@ describe('collection detail page', () => {
 	it('renders sponsor link', async () => {
 		loadData();
 
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_sponsor_title')[1]).toHaveAttribute(
+		expect(screen.getAllByText('the_sponsor_title')[1]).toHaveAttribute(
 			'href',
 			'the_sponsor_path'
 		);
@@ -155,25 +156,25 @@ describe('collection detail page', () => {
 			.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('renders conference dates', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Dec 19 – 23, 2007')).toBeInTheDocument();
+		expect(screen.getByText('Dec 19 – 23, 2007')).toBeInTheDocument();
 	});
 
 	it('links to RSS feed', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Copy RSS Link')).toHaveAttribute(
+		expect(screen.getByText('Copy RSS Link')).toHaveAttribute(
 			'href',
 			'/en/conferences/the_collection_id/feed.xml'
 		);

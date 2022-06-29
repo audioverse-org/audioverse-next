@@ -27,23 +27,20 @@ function loadForgotPasswordResponse({
 describe('login form', () => {
 	beforeEach(() => __loadRouter({ query: {} }));
 	it('renders forgot password link', async () => {
-		const { getByText } = await renderWithProviders(<Login />, undefined);
+		await renderWithProviders(<Login />, undefined);
 
-		expect(getByText('Forgot password?')).toBeInTheDocument();
+		expect(screen.getByText('Forgot password?')).toBeInTheDocument();
 	});
 
 	it('triggers forgot password email', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined
-		);
+		await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		userEvent.click(screen.getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(screen.getByText('Send reset link'));
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(LoginForgotPasswordDocument, {
 				variables: {
@@ -56,15 +53,12 @@ describe('login form', () => {
 	it('shows forgot password success message', async () => {
 		loadForgotPasswordResponse();
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined
-		);
+		await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		userEvent.click(screen.getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(screen.getByText('Send reset link'));
 
 		await expect(
 			screen.findByText(
@@ -83,18 +77,15 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined
-		);
+		await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		userEvent.click(screen.getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(screen.getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('the_error')).toBeInTheDocument();
+			expect(screen.getByText('the_error')).toBeInTheDocument();
 		});
 	});
 
@@ -104,20 +95,19 @@ describe('login form', () => {
 			errors: [{ message: 'the_error' }],
 		});
 
-		const { getByText, getByPlaceholderText, queryByText } =
-			await renderWithProviders(<Login />, undefined);
+		await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		userEvent.click(screen.getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(screen.getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('the_error')).toBeInTheDocument();
+			expect(screen.getByText('the_error')).toBeInTheDocument();
 		});
 
 		expect(
-			queryByText('Check your email for a password reset link')
+			screen.queryByText('Check your email for a password reset link')
 		).not.toBeInTheDocument();
 	});
 
@@ -127,19 +117,16 @@ describe('login form', () => {
 				.calledWith(LoginForgotPasswordDocument, expect.anything())
 				.mockRejectedValue('oops');
 
-			const { getByText, getByPlaceholderText } = await renderWithProviders(
-				<Login />,
-				undefined
-			);
+			await renderWithProviders(<Login />, undefined);
 
-			userEvent.click(getByText('Forgot password?'));
+			userEvent.click(screen.getByText('Forgot password?'));
 
-			userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-			userEvent.click(getByText('Send reset link'));
+			userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+			userEvent.click(screen.getByText('Send reset link'));
 
 			await waitFor(() => {
 				expect(
-					getByText(
+					screen.getByText(
 						'Something went wrong while trying to send a password reset link'
 					)
 				).toBeInTheDocument();
@@ -153,18 +140,15 @@ describe('login form', () => {
 			errors: [{ message: 'error_one' }, { message: 'error_two' }],
 		});
 
-		const { getByText, getByPlaceholderText } = await renderWithProviders(
-			<Login />,
-			undefined
-		);
+		await renderWithProviders(<Login />, undefined);
 
-		userEvent.click(getByText('Forgot password?'));
+		userEvent.click(screen.getByText('Forgot password?'));
 
-		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
-		userEvent.click(getByText('Send reset link'));
+		userEvent.type(screen.getByPlaceholderText('Email address'), 'the_email');
+		userEvent.click(screen.getByText('Send reset link'));
 
 		await waitFor(() => {
-			expect(getByText('error_two')).toBeInTheDocument();
+			expect(screen.getByText('error_two')).toBeInTheDocument();
 		});
 	});
 });

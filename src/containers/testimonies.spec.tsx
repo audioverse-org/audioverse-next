@@ -13,6 +13,7 @@ import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
+import { screen } from '@testing-library/react';
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 	when(fetchApi)
@@ -106,24 +107,24 @@ describe('testimonies pages', () => {
 	it('lists testimonies', async () => {
 		loadTestimonies();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_testimony_body')).toBeInTheDocument();
+		expect(screen.getByText('the_testimony_body')).toBeInTheDocument();
 	});
 
 	it('paginates', async () => {
 		loadTestimonies();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toBeInTheDocument();
+		expect(screen.getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadTestimonies();
 
-		const { getByText } = await renderPage();
-		const link = getByText('1') as HTMLAnchorElement;
+		await renderPage();
+		const link = screen.getByText('1') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/testimonies');
 	});
@@ -137,17 +138,19 @@ describe('testimonies pages', () => {
 			},
 		]);
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(() => getByText('<p>text</p>')).toThrow();
+		expect(() => screen.getByText('<p>text</p>')).toThrow();
 	});
 
 	it('includes names', async () => {
 		loadTestimonies();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_testimony_author, 10/20/21')).toBeInTheDocument();
+		expect(
+			screen.getByText('the_testimony_author, 10/20/21')
+		).toBeInTheDocument();
 	});
 
 	it('renders without testimonies', async () => {

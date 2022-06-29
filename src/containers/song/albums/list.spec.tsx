@@ -11,6 +11,7 @@ import Songs, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
@@ -79,9 +80,9 @@ describe('songs list page', () => {
 	it('lists albums', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_album_title')).toBeInTheDocument();
+		expect(screen.getByText('the_album_title')).toBeInTheDocument();
 	});
 
 	it('renders static paths', async () => {
@@ -93,35 +94,35 @@ describe('songs list page', () => {
 	it('links album entries', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('the_album_title').parentElement?.parentElement;
-
-		expect(link).toHaveAttribute('href', '/the_album_path');
+		expect(
+			screen.getByRole('link', { name: /the_album_title/ })
+		).toHaveAttribute('href', '/the_album_path');
 	});
 
 	it('renders album list title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Albums')).toBeInTheDocument();
+		expect(screen.getByText('Albums')).toBeInTheDocument();
 	});
 
 	it('renders Bible book titles', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('3 John')).toBeInTheDocument();
+		expect(screen.getByText('3 John')).toBeInTheDocument();
 	});
 
 	it('slugifies Bible book urls', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('3 John').parentElement).toHaveAttribute(
+		expect(screen.getByRole('link', { name: /3 John/ })).toHaveAttribute(
 			'href',
 			'/en/songs/book/3-john'
 		);
@@ -130,8 +131,8 @@ describe('songs list page', () => {
 	it('includes books tab title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Passage')).toBeInTheDocument();
+		expect(screen.getByText('Passage')).toBeInTheDocument();
 	});
 });

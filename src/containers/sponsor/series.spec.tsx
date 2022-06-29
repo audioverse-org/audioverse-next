@@ -13,6 +13,7 @@ import SponsorSeries, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/series/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SponsorSeries, getStaticProps);
 
@@ -76,9 +77,9 @@ describe('sponsor series page', () => {
 	it('renders sponsor image', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
+		expect(screen.getByAltText('the_sponsor_title')).toHaveAttribute(
 			'src',
 			'the_sponsor_image'
 		);
@@ -93,41 +94,41 @@ describe('sponsor series page', () => {
 			},
 		});
 
-		const { queryByAltText } = await renderPage();
+		await renderPage();
 
-		expect(queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
+		expect(screen.queryByAltText('the_sponsor_title')).not.toBeInTheDocument();
 	});
 
 	it('renders sponsor title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('renders page subtitle', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Series')).toBeInTheDocument();
+		expect(screen.getByText('Series')).toBeInTheDocument();
 	});
 
 	it('lists series', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_series_title')).toBeInTheDocument();
+		expect(screen.getByText('the_series_title')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute(
+		expect(screen.getByText('1')).toHaveAttribute(
 			'href',
 			'/en/sponsors/the_sponsor_id/series'
 		);
@@ -138,8 +139,8 @@ describe('sponsor series page', () => {
 			.calledWith(GetSponsorSeriesPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

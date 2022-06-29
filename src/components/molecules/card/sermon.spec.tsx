@@ -37,14 +37,14 @@ describe('card sermon', () => {
 	});
 
 	it('has play button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('play')).toBeInTheDocument();
+		expect(screen.getByLabelText('play')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('Favorite')).toBeInTheDocument();
+		expect(screen.getByLabelText('Favorite')).toBeInTheDocument();
 	});
 });

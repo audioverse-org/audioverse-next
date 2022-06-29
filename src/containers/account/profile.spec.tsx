@@ -105,31 +105,33 @@ describe('profile page', () => {
 			},
 		});
 
-		const { findByDisplayValue } = await renderPage();
+		await renderPage();
 
-		await expect(findByDisplayValue('first')).resolves.toBeInTheDocument();
+		await expect(
+			screen.findByDisplayValue('first')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('displays email field if unauthenticated', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('displays password field if unauthenticated', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
 	});
 
 	it('makes login request', async () => {
 		mockedLogin.mockRejectedValue('the_error');
 
-		const { getByPlaceholderText, getByText } = await renderPage();
+		await renderPage();
 
-		const emailField = getByPlaceholderText('jane@example.com');
-		const passwordField = getByPlaceholderText('∗∗∗∗∗∗∗');
-		const loginButton = getByText('Login');
+		const emailField = screen.getByPlaceholderText('jane@example.com');
+		const passwordField = screen.getByPlaceholderText('∗∗∗∗∗∗∗');
+		const loginButton = screen.getByText('Login');
 
 		await userEvent.type(emailField, 'the_email');
 		await userEvent.type(passwordField, 'the_password');
@@ -153,9 +155,9 @@ describe('profile page', () => {
 			throw new Error();
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const loginButton = getByText('Login');
+		const loginButton = screen.getByText('Login');
 
 		userEvent.click(loginButton);
 
@@ -165,14 +167,14 @@ describe('profile page', () => {
 	});
 
 	it('prevents default form submission', async () => {
-		const { getByTestId } = await renderPage();
+		await renderPage();
 
 		const event = {
 			preventDefault: jest.fn(),
 		};
 
 		await act(() => {
-			ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
+			ReactTestUtils.Simulate.submit(screen.getByTestId('loginForm'), event);
 		});
 
 		await waitFor(() => expect(event.preventDefault).toHaveBeenCalled());
@@ -181,9 +183,9 @@ describe('profile page', () => {
 	it('invalidates cache on successful login', async () => {
 		mockedLogin.mockResolvedValue(true);
 
-		const { getByText, findByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Login'));
+		userEvent.click(screen.getByText('Login'));
 
 		(fetchApi as jest.Mock).mockResolvedValueOnce({
 			me: {
@@ -194,21 +196,26 @@ describe('profile page', () => {
 			},
 		});
 
-		await expect(findByText('First name')).resolves.toBeInTheDocument();
+		await expect(screen.findByText('First name')).resolves.toBeInTheDocument();
 	});
 
 	it('logs in with email and password', async () => {
 		mockedLogin.mockRejectedValue('the_error');
 
-		const { getByText, getByPlaceholderText, findByPlaceholderText } =
-			await renderPage();
+		await renderPage();
 
-		await findByPlaceholderText('jane@example.com');
+		await screen.findByPlaceholderText('jane@example.com');
 
-		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
-		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'the_password');
+		await userEvent.type(
+			screen.getByPlaceholderText('jane@example.com'),
+			'the_email'
+		);
+		await userEvent.type(
+			screen.getByPlaceholderText('∗∗∗∗∗∗∗'),
+			'the_password'
+		);
 
-		userEvent.click(getByText('Login'));
+		userEvent.click(screen.getByText('Login'));
 
 		expect(login).toBeCalledWith('the_email', 'the_password');
 
@@ -233,40 +240,40 @@ describe('profile page', () => {
 	it('renders email field', async () => {
 		loadData();
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		expect(getByLabelText('Email')).toBeInTheDocument();
+		expect(screen.getByLabelText('Email')).toBeInTheDocument();
 	});
 
 	it('loads user email', async () => {
 		loadData();
 
-		const { getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 	});
 
 	it('renders password field', async () => {
 		loadData();
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		expect(getByLabelText('Password')).toBeInTheDocument();
+		expect(screen.getByLabelText('Password')).toBeInTheDocument();
 	});
 
 	it('submits email change', async () => {
 		loadData();
 
-		const { getByLabelText, getByText, getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('Email'), '123');
-		userEvent.click(getByText('Save changes'));
+		userEvent.type(screen.getByLabelText('Email'), '123');
+		userEvent.click(screen.getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -282,14 +289,14 @@ describe('profile page', () => {
 	it('submits password', async () => {
 		loadData();
 
-		const { getByLabelText, getByText, getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.type(getByLabelText('Password'), 'the_password');
-		userEvent.click(getByText('Save changes'));
+		userEvent.type(screen.getByLabelText('Password'), 'the_password');
+		userEvent.click(screen.getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
@@ -316,12 +323,12 @@ describe('profile page', () => {
 				},
 			});
 
-		const { getByText, getByDisplayValue } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Save changes'));
+		userEvent.click(screen.getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_new_email')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_new_email')).toBeInTheDocument();
 		});
 
 		await waitFor(() => {
@@ -347,12 +354,14 @@ describe('profile page', () => {
 				},
 			});
 
-		const { getByText, getByDisplayValue } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Save changes'));
+		userEvent.click(screen.getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_new_given_name')).toBeInTheDocument();
+			expect(
+				screen.getByDisplayValue('the_new_given_name')
+			).toBeInTheDocument();
 		});
 
 		await waitFor(() => {
@@ -366,31 +375,34 @@ describe('profile page', () => {
 	it('sets email input type to email', async () => {
 		loadData();
 
-		const { getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toHaveAttribute('type', 'email');
+			expect(screen.getByDisplayValue('the_email')).toHaveAttribute(
+				'type',
+				'email'
+			);
 		});
 	});
 
 	it('renders surname', async () => {
 		loadData();
 
-		const { getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_surname')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_surname')).toBeInTheDocument();
 		});
 	});
 
 	it('all initial user data', async () => {
 		loadData();
 
-		const { getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
 			Object.values(userBefore).map((v) => {
-				expect(getByDisplayValue(v)).toBeInTheDocument();
+				expect(screen.getByDisplayValue(v)).toBeInTheDocument();
 			});
 		});
 	});
@@ -398,13 +410,13 @@ describe('profile page', () => {
 	it('saves all form data', async () => {
 		loadData();
 
-		const { getByText, getByDisplayValue } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
+			expect(screen.getByDisplayValue('the_email')).toBeInTheDocument();
 		});
 
-		userEvent.click(getByText('Save changes'));
+		userEvent.click(screen.getByText('Save changes'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {

@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
 import {
@@ -118,10 +118,10 @@ describe('discover page', () => {
 	it('renders titles', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByText('the_sermon_title')).toBeInTheDocument();
+			expect(screen.getByText('the_sermon_title')).toBeInTheDocument();
 		});
 	});
 });

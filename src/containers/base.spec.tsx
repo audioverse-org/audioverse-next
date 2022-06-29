@@ -67,18 +67,18 @@ describe('app', () => {
 	});
 
 	it('includes sidebar', async () => {
-		const { getByText } = await renderComponent({
+		await renderComponent({
 			Component: () => <>h</>,
 			pageProps: {},
 		});
 
 		await screen.findByText('h');
 
-		expect(getByText('More')).toBeInTheDocument();
+		expect(screen.getByText('More')).toBeInTheDocument();
 	});
 
 	it('disables sidebar', async () => {
-		const { queryByText } = await renderComponent({
+		await renderComponent({
 			Component: () => <>h</>,
 			pageProps: {
 				disableSidebar: true,
@@ -87,7 +87,7 @@ describe('app', () => {
 
 		await screen.findByText('h');
 
-		expect(queryByText('More')).not.toBeInTheDocument();
+		expect(screen.queryByText('More')).not.toBeInTheDocument();
 	});
 
 	it('sets title with props', async () => {

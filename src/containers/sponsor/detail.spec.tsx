@@ -13,6 +13,7 @@ import SponsorDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SponsorDetail, getStaticProps);
 
@@ -85,17 +86,17 @@ describe('sponsor detail page', () => {
 	it('displays sponsor title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('displays sponsor image', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_sponsor_title')).toHaveAttribute(
+		expect(screen.getByAltText('the_sponsor_title')).toHaveAttribute(
 			'src',
 			'the_sponsor_image'
 		);
@@ -106,33 +107,33 @@ describe('sponsor detail page', () => {
 			.calledWith(GetSponsorDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('displays location', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_location')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_location')).toBeInTheDocument();
 	});
 
 	it('displays website', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_website')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_website')).toBeInTheDocument();
 	});
 
 	it('renders description html', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('description')).toBeInTheDocument();
+		expect(screen.getByText('description')).toBeInTheDocument();
 	});
 });
 

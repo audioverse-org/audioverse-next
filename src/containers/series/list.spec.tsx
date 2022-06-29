@@ -76,17 +76,17 @@ describe('series list page', () => {
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Series')).toBeInTheDocument();
+		expect(screen.getByText('Series')).toBeInTheDocument();
 	});
 
 	it('links pagination', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/series');
+		expect(screen.getByText('1')).toHaveAttribute('href', '/en/series');
 	});
 
 	it('renders 404', async () => {
@@ -94,8 +94,8 @@ describe('series list page', () => {
 			.calledWith(GetSeriesListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

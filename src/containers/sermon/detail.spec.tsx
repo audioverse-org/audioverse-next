@@ -1,11 +1,4 @@
-import {
-	findByLabelText,
-	getByLabelText,
-	getByTestId,
-	getByText,
-	screen,
-	waitFor,
-} from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
@@ -167,28 +160,25 @@ describe('sermon detail page', () => {
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('shows loading screen', async () => {
 		__loadRouter({ isFallback: true });
 
-		const { getByLabelText } = await renderWithProviders(
-			<SermonDetail recording={null} />,
-			undefined
-		);
+		await renderWithProviders(<SermonDetail recording={null} />, undefined);
 
-		expect(getByLabelText('Loading…')).toBeInTheDocument();
+		expect(screen.getByLabelText('Loading…')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		expect(getByLabelText('Favorite')).toBeInTheDocument();
+		expect(screen.getByLabelText('Favorite')).toBeInTheDocument();
 	});
 
 	it('includes player', async () => {
@@ -202,9 +192,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -222,9 +212,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalledWith(
@@ -244,9 +234,9 @@ describe('sermon detail page', () => {
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Audio'));
+		userEvent.click(screen.getByText('Audio'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalledWith(
@@ -272,9 +262,9 @@ describe('sermon detail page', () => {
 			videoStreams: [],
 		});
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalledWith(
@@ -300,9 +290,9 @@ describe('sermon detail page', () => {
 			videoStreams: [],
 		});
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
 			expect(videojs).toBeCalledWith(
@@ -326,9 +316,9 @@ describe('sermon detail page', () => {
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 		});
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('Play Audio')).not.toBeInTheDocument();
+		expect(screen.queryByText('Play Audio')).not.toBeInTheDocument();
 	});
 
 	it('shows speaker name', async () => {
@@ -346,9 +336,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_name').length > 0).toBeTruthy();
+		expect(screen.getAllByText('the_name').length > 0).toBeTruthy();
 	});
 
 	it('includes sponsor title', async () => {
@@ -359,9 +349,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_title')).toBeInTheDocument();
+		expect(screen.getByText('the_title')).toBeInTheDocument();
 	});
 
 	it('includes time recorded', async () => {
@@ -381,9 +371,9 @@ describe('sermon detail page', () => {
 			recordingDate: '253-03-01 09:30:00',
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('March 1, 253, 9:30 AM')).toBeInTheDocument();
+		expect(screen.getByText('March 1, 253, 9:30 AM')).toBeInTheDocument();
 	});
 
 	it('includes series title', async () => {
@@ -395,17 +385,19 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('series_title').length).toBeGreaterThanOrEqual(2);
+		expect(screen.getAllByText('series_title').length).toBeGreaterThanOrEqual(
+			2
+		);
 	});
 
 	it('does not include series heading if no series', async () => {
 		loadSermonDetailData();
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('Series')).not.toBeInTheDocument();
+		expect(screen.queryByText('Series')).not.toBeInTheDocument();
 	});
 
 	it('links series title', async () => {
@@ -457,9 +449,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Copyright ⓒ1999 the_sponsor.')).toBeInTheDocument();
+		expect(
+			screen.getByText('Copyright ⓒ1999 the_sponsor.')
+		).toBeInTheDocument();
 	});
 
 	it('falls back to top-level sponsor', async () => {
@@ -470,9 +464,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Copyright ⓒ1999 the_sponsor.')).toBeInTheDocument();
+		expect(
+			screen.getByText('Copyright ⓒ1999 the_sponsor.')
+		).toBeInTheDocument();
 	});
 
 	it('displays license summary', async () => {
@@ -484,17 +480,17 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_license_summary')).toBeInTheDocument();
+		expect(screen.getByText('the_license_summary')).toBeInTheDocument();
 	});
 
 	it('does not display missing copyright image', async () => {
 		loadSermonDetailData();
 
-		const { queryByAltText } = await renderPage();
+		await renderPage();
 
-		expect(queryByAltText('copyright')).not.toBeInTheDocument();
+		expect(screen.queryByAltText('copyright')).not.toBeInTheDocument();
 	});
 
 	it('links video downloads', async () => {
@@ -508,9 +504,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('High Quality (1 GB)') as HTMLLinkElement;
+		const link = screen.getByText('High Quality (1 GB)') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_url');
 	});
@@ -526,9 +522,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('High Quality (1 GB)') as HTMLLinkElement;
+		const link = screen.getByText('High Quality (1 GB)') as HTMLLinkElement;
 
 		expect(link.href).toContain('the_url');
 	});
@@ -550,7 +546,7 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		await waitFor(() =>
 			expect(fetchApi).toBeCalledWith(
@@ -559,7 +555,7 @@ describe('sermon detail page', () => {
 			)
 		);
 
-		expect(getByText('sibling_title')).toBeInTheDocument();
+		expect(screen.getByText('sibling_title')).toBeInTheDocument();
 	});
 
 	it('includes transcripts', async () => {
@@ -569,11 +565,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		userEvent.click(screen.getByText('Read Transcript'));
 
-		expect(getByText('the_transcript_text')).toBeInTheDocument();
+		expect(screen.getByText('the_transcript_text')).toBeInTheDocument();
 	});
 
 	it('notes probable auto generation', async () => {
@@ -583,12 +579,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		userEvent.click(screen.getByText('Read Transcript'));
 
 		expect(
-			getByText('This transcript may be automatically generated.')
+			screen.getByText('This transcript may be automatically generated.')
 		).toBeInTheDocument();
 	});
 
@@ -599,12 +595,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		userEvent.click(screen.getByText('Read Transcript'));
 
 		expect(
-			getByText(
+			screen.getByText(
 				'Our auto-generated transcripts need your help. Feel free to e-mail us your edited text of this transcript for your benefit and others. media@audioverse.org'
 			)
 		).toBeInTheDocument();
@@ -617,9 +613,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('Transcript')).not.toBeInTheDocument();
+		expect(screen.queryByText('Transcript')).not.toBeInTheDocument();
 	});
 
 	it('includes share url', async () => {
@@ -627,11 +623,11 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText, getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		userEvent.click(screen.getByLabelText('share'));
 
-		expect((getByText('Copy Link') as HTMLAnchorElement).href).toContain(
+		expect((screen.getByText('Copy Link') as HTMLAnchorElement).href).toContain(
 			'the_share_url'
 		);
 	});
@@ -641,11 +637,11 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText, getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		userEvent.click(screen.getByLabelText('share'));
 
-		expect(getByText('Copy Link')).toBeInTheDocument();
+		expect(screen.getByText('Copy Link')).toBeInTheDocument();
 	});
 
 	it('includes share title', async () => {
@@ -653,29 +649,29 @@ describe('sermon detail page', () => {
 			shareUrl: 'the_share_url',
 		});
 
-		const { getByText, getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		userEvent.click(screen.getByLabelText('share'));
 
-		expect(getByText('Share')).toBeInTheDocument();
+		expect(screen.getByText('Share')).toBeInTheDocument();
 	});
 
 	it('has embed input', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		userEvent.click(screen.getByLabelText('share'));
 
-		expect(getByText('Audio Embed Code')).toBeInTheDocument();
+		expect(screen.getByText('Audio Embed Code')).toBeInTheDocument();
 	});
 
 	it('populates embed input', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		userEvent.click(screen.getByLabelText('share'));
 
 		await expect(
 			screen.findByDisplayValue(
@@ -690,9 +686,9 @@ describe('sermon detail page', () => {
 			.calledWith(GetSermonDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('renders part number', async () => {
@@ -705,9 +701,9 @@ describe('sermon detail page', () => {
 			sequenceIndex: 1,
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Part 1')).toBeInTheDocument();
+		expect(screen.getByText('Part 1')).toBeInTheDocument();
 	});
 
 	it('links to previous recording', async () => {
@@ -724,9 +720,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Previous')).toHaveAttribute('href', '/en/teachings/1');
+		expect(screen.getByText('Previous')).toHaveAttribute(
+			'href',
+			'/en/teachings/1'
+		);
 	});
 
 	it('links to next recording', async () => {
@@ -743,9 +742,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Next')).toHaveAttribute('href', '/en/teachings/3');
+		expect(screen.getByText('Next')).toHaveAttribute('href', '/en/teachings/3');
 	});
 
 	it('links sponsor title', async () => {
@@ -757,9 +756,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('sponsor_title')).toHaveAttribute('href', '/sponsor_path');
+		expect(screen.getByText('sponsor_title')).toHaveAttribute(
+			'href',
+			'/sponsor_path'
+		);
 	});
 
 	it('sets head title', async () => {
@@ -791,17 +793,19 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const player = view.getByLabelText('player');
+		const player = within(screen.getByLabelText('player'));
 
-		userEvent.click(view.getByText('Audio'));
-		await findByLabelText(player, 'play');
-		userEvent.click(getByLabelText(player, 'play'));
-		userEvent.click(view.getByText('Video'));
-		userEvent.click(view.getByText('Audio'));
-		await findByLabelText(player, 'play');
-		expect(getByLabelText(player, 'play')).toBeInTheDocument();
+		userEvent.click(screen.getByText('Audio'));
+
+		const play = await player.findByLabelText('play');
+
+		userEvent.click(play);
+		userEvent.click(screen.getByText('Video'));
+		userEvent.click(screen.getByText('Audio'));
+
+		await expect(player.findByLabelText('play')).resolves.toBeInTheDocument();
 	});
 
 	it('displays both format buttons at the same time', async () => {
@@ -822,10 +826,10 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Audio')).toBeInTheDocument();
-		expect(getByText('Video')).toBeInTheDocument();
+		expect(screen.getByText('Audio')).toBeInTheDocument();
+		expect(screen.getByText('Video')).toBeInTheDocument();
 	});
 
 	it('marks video format as pressed', async () => {
@@ -846,9 +850,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Video')).toHaveAttribute('aria-pressed', 'true');
+		expect(screen.getByText('Video')).toHaveAttribute('aria-pressed', 'true');
 	});
 
 	it('marks audio format as pressed', async () => {
@@ -869,11 +873,11 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Audio'));
+		userEvent.click(screen.getByText('Audio'));
 
-		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+		expect(screen.getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -898,9 +902,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
+		expect(screen.getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
 	});
 
 	it('only displays time once when viewing audio for video', async () => {
@@ -922,13 +926,13 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		userEvent.click(view.getByText('Audio'));
+		userEvent.click(screen.getByText('Audio'));
 
-		const player = view.getByLabelText('player');
+		const player = within(screen.getByLabelText('player'));
 
-		expect(getByText(player, '0:00')).toBeInTheDocument();
+		expect(player.getByText('0:00')).toBeInTheDocument();
 
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
@@ -942,9 +946,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('the_transcript_text')).not.toBeInTheDocument();
+		expect(screen.queryByText('the_transcript_text')).not.toBeInTheDocument();
 	});
 
 	it('uses hide verb for button', async () => {
@@ -954,11 +958,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Read Transcript'));
+		userEvent.click(screen.getByText('Read Transcript'));
 
-		expect(getByText('Hide Transcript')).toBeInTheDocument();
+		expect(screen.getByText('Hide Transcript')).toBeInTheDocument();
 	});
 
 	it('displays play buttons for sequence recordings', async () => {
@@ -978,11 +982,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		expect(getByLabelText(sidebar, 'play')).toBeInTheDocument();
+		expect(sidebar.getByLabelText('play')).toBeInTheDocument();
 	});
 
 	it('loads series video into miniplayer on first click', async () => {
@@ -1003,16 +1007,16 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		userEvent.click(sidebar.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = within(screen.getByLabelText('miniplayer'));
 
 		await waitFor(() => {
-			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+			expect(miniplayer.getByTestId('video-element')).toBeInTheDocument();
 		});
 	});
 
@@ -1034,21 +1038,21 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const player = view.getByLabelText('player');
+		const player = within(screen.getByLabelText('player'));
 
-		userEvent.click(getByLabelText(player, 'play'));
+		userEvent.click(player.getByLabelText('play'));
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		userEvent.click(sidebar.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = within(screen.getByLabelText('miniplayer'));
 
-		await waitFor(() => {
-			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
-		});
+		await expect(
+			miniplayer.findByTestId('video-element')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('starts at beginning when playing series recording', async () => {
@@ -1072,34 +1076,31 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
-		const player = view.getByLabelText('player');
+		await renderPage();
 
-		userEvent.click(getByLabelText(player, 'play'));
+		const player = within(screen.getByLabelText('player'));
 
-		await waitFor(() => {
-			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
-		});
+		userEvent.click(player.getByLabelText('play'));
+
+		await expect(player.findByLabelText('pause')).resolves.toBeInTheDocument();
 
 		mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
-		await waitFor(() => {
-			expect(getByText(player, '0:50')).toBeInTheDocument();
-		});
+		await expect(player.findByText('0:50')).resolves.toBeInTheDocument();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		userEvent.click(getByLabelText(sidebar, 'play'));
+		userEvent.click(sidebar.getByLabelText('play'));
 
 		expect(mockPlayer.currentTime).toBeCalledWith(0);
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = within(screen.getByLabelText('miniplayer'));
 
-		await waitFor(() => {
-			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
-		});
+		await expect(miniplayer.findByLabelText('progress')).resolves.toHaveValue(
+			'0'
+		);
 	});
 
 	it('displays durations in sidebar', async () => {
@@ -1120,13 +1121,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		await waitFor(() => {
-			expect(getByText(sidebar, '5m')).toBeInTheDocument();
-		});
+		await expect(sidebar.findByText('5m')).resolves.toBeInTheDocument();
 	});
 
 	it('displays favorite button for sequence recordings', async () => {
@@ -1146,11 +1145,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
-		expect(getByLabelText(sidebar, 'Favorite')).toBeInTheDocument();
+		expect(sidebar.getByLabelText('Favorite')).toBeInTheDocument();
 	});
 
 	it('displays part info', async () => {
@@ -1178,12 +1177,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const sidebar = view.getByLabelText('series list');
+		const sidebar = within(screen.getByLabelText('series list'));
 
 		await waitFor(() => {
-			expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
+			expect(sidebar.getByText('Part 1 of 3')).toBeInTheDocument();
 		});
 	});
 
@@ -1196,11 +1195,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
+		await renderPage();
 
-		const metadata = view.getByLabelText('metadata');
+		const metadata = within(screen.getByLabelText('metadata'));
 
-		expect(getByText(metadata, 'series_title')).toBeInTheDocument();
+		expect(metadata.getByText('series_title')).toBeInTheDocument();
 	});
 
 	it('links series title in metadata', async () => {
@@ -1213,9 +1212,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
-		const metadata = view.getByLabelText('metadata');
-		const link = getByText(metadata, 'series_title');
+		await renderPage();
+		const metadata = within(screen.getByLabelText('metadata'));
+		const link = metadata.getByText('series_title');
 
 		expect(link).toHaveAttribute(
 			'href',
@@ -1231,10 +1230,11 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
-		const metadata = view.getByLabelText('metadata');
+		await renderPage();
 
-		expect(getByText(metadata, 'collection_title')).toBeInTheDocument();
+		const metadata = within(screen.getByLabelText('metadata'));
+
+		expect(metadata.getByText('collection_title')).toBeInTheDocument();
 	});
 
 	it('links conference title in metadata', async () => {
@@ -1246,9 +1246,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		const view = await renderPage();
-		const metadata = view.getByLabelText('metadata');
-		const link = getByText(metadata, 'conference_title');
+		await renderPage();
+		const metadata = within(screen.getByLabelText('metadata'));
+		const link = metadata.getByText('conference_title');
 
 		expect(link).toHaveAttribute(
 			'href',
@@ -1259,9 +1259,9 @@ describe('sermon detail page', () => {
 	it('does not show video downloads header in downloads menu if no video downloads', async () => {
 		loadSermonDetailData();
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('Video Downloads')).not.toBeInTheDocument();
+		expect(screen.queryByText('Video Downloads')).not.toBeInTheDocument();
 	});
 });
 

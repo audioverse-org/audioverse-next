@@ -1,4 +1,9 @@
-import { RenderOptions, RenderResult, waitFor } from '@testing-library/react';
+import {
+	RenderOptions,
+	RenderResult,
+	screen,
+	waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookies from 'js-cookie';
@@ -37,24 +42,24 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		const { getByPlaceholderText } = await render();
+		await render();
 
-		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('offers social login', async () => {
-		const { getByText } = await render();
+		await render();
 
-		expect(getByText('Login with Google')).toBeInTheDocument();
+		expect(screen.getByText('Login with Google')).toBeInTheDocument();
 	});
 
 	it('displays content on successful social login', async () => {
 		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 
-		const { getByText, queryByText } = await render();
+		await render();
 
 		await waitFor(() =>
-			expect(queryByText('hello world')).not.toBeInTheDocument()
+			expect(screen.queryByText('hello world')).not.toBeInTheDocument()
 		);
 
 		when(fetchApi)
@@ -78,10 +83,10 @@ describe('withAuthGuard', () => {
 				},
 			});
 
-		userEvent.click(getByText('Login with Google'));
+		userEvent.click(screen.getByText('Login with Google'));
 
 		await waitFor(() => {
-			expect(getByText('hello world')).toBeInTheDocument();
+			expect(screen.getByText('hello world')).toBeInTheDocument();
 		});
 	});
 });

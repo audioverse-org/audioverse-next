@@ -12,6 +12,7 @@ import SponsorConferences, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps);
 
@@ -77,33 +78,33 @@ describe('sponsor conferences page', () => {
 	it('lists conferences', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_conference_title')).toBeInTheDocument();
+		expect(screen.getByText('the_conference_title')).toBeInTheDocument();
 	});
 
 	it('renders sponsor title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('renders page subtitle', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Conferences')).toBeInTheDocument();
+		expect(screen.getByText('All Conferences')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute(
+		expect(screen.getByText('1')).toHaveAttribute(
 			'href',
 			'/en/sponsors/the_sponsor_id/conferences'
 		);
@@ -114,9 +115,9 @@ describe('sponsor conferences page', () => {
 			.calledWith(GetSponsorConferencesPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });
 

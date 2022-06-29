@@ -1,11 +1,14 @@
 import CardPost from '@components/molecules/card/post';
 import { buildRenderer } from '@lib/test/buildRenderer';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { __nextLink } from 'next/link';
 
 const renderComponent = buildRenderer(CardPost);
 
 describe('card post', () => {
 	it('does not display zero rounded duration', async () => {
-		const { getByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				post: {
 					readingDuration: 10,
@@ -14,11 +17,11 @@ describe('card post', () => {
 			},
 		});
 
-		expect(getByText('1m read')).toBeInTheDocument();
+		expect(screen.getByText('1m read')).toBeInTheDocument();
 	});
 
 	it('links hero', async () => {
-		const { getByAltText } = await renderComponent({
+		await renderComponent({
 			props: {
 				post: {
 					title: 'the_title',
@@ -30,8 +33,16 @@ describe('card post', () => {
 			},
 		});
 
-		expect(
-			getByAltText('the_title').parentElement?.parentElement
-		).toHaveAttribute('href', 'the_path');
+		const hero = screen.getByAltText('the_title');
+
+		userEvent.click(hero);
+
+		expect(__nextLink).toHaveBeenCalledWith(
+			expect.objectContaining({
+				props: expect.objectContaining({
+					href: 'the_path',
+				}),
+			})
+		);
 	});
 });

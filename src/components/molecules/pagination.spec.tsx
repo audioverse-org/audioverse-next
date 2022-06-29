@@ -1,4 +1,4 @@
-import { RenderOptions, RenderResult } from '@testing-library/react';
+import { RenderOptions, RenderResult, screen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
@@ -22,57 +22,57 @@ const renderPagination = ({
 
 describe('pagination component', () => {
 	it('has next button', async () => {
-		const { getByText } = await renderPagination({ total: 2 });
+		await renderPagination({ total: 2 });
 
-		expect(getByText('Next')).toBeInTheDocument();
+		expect(screen.getByText('Next')).toBeInTheDocument();
 	});
 
 	it('has previous button', async () => {
-		const { getByText } = await renderPagination({ current: 2, total: 2 });
+		await renderPagination({ current: 2, total: 2 });
 
-		expect(getByText('Previous')).toBeInTheDocument();
+		expect(screen.getByText('Previous')).toBeInTheDocument();
 	});
 
 	it('hides next when unneeded', async () => {
-		const { getByText } = await renderPagination();
+		await renderPagination();
 
-		expect(() => getByText('Next')).toThrow();
+		expect(() => screen.getByText('Next')).toThrow();
 	});
 
 	it('hides previous when unneeded', async () => {
-		const { getByText } = await renderPagination();
+		await renderPagination();
 
-		expect(() => getByText('Previous')).toThrow();
+		expect(() => screen.getByText('Previous')).toThrow();
 	});
 
 	it('sets next href', async () => {
-		const { getByText } = await renderPagination({
+		await renderPagination({
 			total: 2,
 			makeRoute: (l, i) => `/${l}/teachings/page/${i}`,
 		});
-		const link = getByText('Next') as HTMLAnchorElement;
+		const link = screen.getByText('Next') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/teachings/page/2');
 	});
 
 	it('includes dots', async () => {
-		const { getByText } = await renderPagination({ total: 100 });
+		await renderPagination({ total: 100 });
 
-		expect(getByText('...')).toBeInTheDocument();
+		expect(screen.getByText('...')).toBeInTheDocument();
 	});
 
 	it('unlinks dots', async () => {
-		const { getByText } = await renderPagination({ total: 100 });
+		await renderPagination({ total: 100 });
 
-		expect(getByText('...')).not.toHaveAttribute('href');
+		expect(screen.getByText('...')).not.toHaveAttribute('href');
 	});
 
 	it('uses url base', async () => {
-		const { getByText } = await renderPagination({
+		await renderPagination({
 			total: 2,
 			makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
 		});
-		const link = getByText('Next') as HTMLAnchorElement;
+		const link = screen.getByText('Next') as HTMLAnchorElement;
 
 		expect(link.href).toContain('/en/presenters/page/2');
 	});

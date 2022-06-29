@@ -151,9 +151,9 @@ describe('sermons list page', () => {
 	it('displays sermons list', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sermon_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sermon_title')).toBeInTheDocument();
 	});
 
 	it('renders 404 on api error', async () => {
@@ -162,9 +162,9 @@ describe('sermons list page', () => {
 			.calledWith(GetSermonListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('returns 404 on empty data', async () => {
@@ -179,9 +179,9 @@ describe('sermons list page', () => {
 			merge: false,
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {
@@ -196,9 +196,9 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toBeInTheDocument();
+		expect(screen.getByText('1')).toBeInTheDocument();
 	});
 
 	it('links to last pagination page', async () => {
@@ -213,9 +213,9 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('3')).toBeInTheDocument();
+		expect(screen.getByText('3')).toBeInTheDocument();
 	});
 
 	it('calculates pages using items per page', async () => {
@@ -232,9 +232,9 @@ describe('sermons list page', () => {
 
 		__loadQuery({ i: '3', language: 'en' });
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(() => getByText('4')).toThrow();
+		expect(() => screen.getByText('4')).toThrow();
 	});
 
 	it('handles string page index', async () => {
@@ -266,10 +266,11 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
-		const link = getByText('1') as HTMLAnchorElement;
-
-		expect(link.href).toContain('/en/teachings/all/page/1');
+		await renderPage();
+		expect(screen.getByText('1')).toHaveAttribute(
+			'href',
+			'/en/teachings/all/page/1'
+		);
 	});
 
 	it('revalidates static pages', async () => {
@@ -303,11 +304,11 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByRole, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		userEvent.click(screen.getByText('Filter'));
 
-		expect(getByRole('link', { name: 'All' })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: 'All' })).toHaveAttribute(
 			'href',
 			'/en/teachings/all/page/1'
 		);
@@ -348,11 +349,11 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByRole, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		userEvent.click(screen.getByText('Filter'));
 
-		expect(getByRole('link', { name: 'Video' })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: 'Video' })).toHaveAttribute(
 			'href',
 			'/en/teachings/video/page/1'
 		);
@@ -370,11 +371,11 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByRole, getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Filter'));
+		userEvent.click(screen.getByText('Filter'));
 
-		expect(getByRole('link', { name: 'Audio only' })).toHaveAttribute(
+		expect(screen.getByRole('link', { name: 'Audio only' })).toHaveAttribute(
 			'href',
 			'/en/teachings/audio/page/1'
 		);
@@ -399,10 +400,11 @@ describe('sermons list page', () => {
 		});
 		__loadQuery({ language: 'es' });
 
-		const { getByText } = await renderPage();
-		const link = getByText('1') as HTMLAnchorElement;
-
-		expect(link.href).toContain('/es/teachings/all/page/1');
+		await renderPage();
+		expect(screen.getByText('1')).toHaveAttribute(
+			'href',
+			'/es/teachings/all/page/1'
+		);
 	});
 
 	it('sets rss head link', async () => {
@@ -417,9 +419,9 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByTestId } = await renderPage();
+		await renderPage();
 
-		const head = getByTestId('head');
+		const head = screen.getByTestId('head');
 
 		expect(head.innerHTML).toContain('/en/teachings/all/feed.xml');
 	});
@@ -448,8 +450,8 @@ describe('sermons list page', () => {
 			},
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_name')).toBeInTheDocument();
+		expect(screen.getByText('the_name')).toBeInTheDocument();
 	});
 });

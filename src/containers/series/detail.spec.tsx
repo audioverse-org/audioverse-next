@@ -14,6 +14,7 @@ import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
@@ -74,17 +75,17 @@ describe('series detail page', () => {
 	it('renders title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_series_title')).toBeInTheDocument();
+		expect(screen.getByText('the_series_title')).toBeInTheDocument();
 	});
 
 	it('renders 404', async () => {
 		(fetchApi as jest.Mock).mockRejectedValueOnce(undefined);
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('gets static path data', async () => {
@@ -128,17 +129,17 @@ describe('series detail page', () => {
 	it('lists recordings', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_recording_title')).toBeInTheDocument();
+		expect(screen.getByText('the_recording_title')).toBeInTheDocument();
 	});
 
 	it('renders series image', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_series_title')).toHaveAttribute(
+		expect(screen.getByAltText('the_series_title')).toHaveAttribute(
 			'src',
 			'the_series_image'
 		);
@@ -147,9 +148,9 @@ describe('series detail page', () => {
 	it('links to sponsor', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toHaveAttribute(
+		expect(screen.getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
 			'the_sponsor_path'
 		);
@@ -158,9 +159,9 @@ describe('series detail page', () => {
 	it('links to conference', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_conference_title')).toHaveAttribute(
+		expect(screen.getByText('the_conference_title')).toHaveAttribute(
 			'href',
 			'the_conference_path'
 		);
@@ -175,17 +176,17 @@ describe('series detail page', () => {
 			},
 		});
 
-		const { queryByText } = await renderPage();
+		await renderPage();
 
-		expect(queryByText('Conference')).not.toBeInTheDocument();
+		expect(screen.queryByText('Conference')).not.toBeInTheDocument();
 	});
 
 	it('links rss feed', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Copy RSS Link')).toHaveAttribute(
+		expect(screen.getByText('Copy RSS Link')).toHaveAttribute(
 			'href',
 			'/en/series/the_series_id/feed.xml'
 		);

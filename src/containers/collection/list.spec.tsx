@@ -11,6 +11,7 @@ import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(CollectionList, getStaticProps);
 
@@ -66,9 +67,9 @@ describe('conference list page', () => {
 	it('lists conferences', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_conference_title')).toBeInTheDocument();
+		expect(screen.getByText('the_conference_title')).toBeInTheDocument();
 	});
 
 	it('generates static paths', async () => {
@@ -90,20 +91,19 @@ describe('conference list page', () => {
 	it('links entries', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_conference_title').parentElement).toHaveAttribute(
-			'href',
-			'the_conference_path'
-		);
+		expect(
+			screen.getByRole('link', { name: /the_conference_title/ })
+		).toHaveAttribute('href', 'the_conference_path');
 	});
 
 	it('renders pagination', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toHaveAttribute('href', '/en/conferences');
+		expect(screen.getByText('1')).toHaveAttribute('href', '/en/conferences');
 	});
 
 	it('renders 404', async () => {
@@ -111,16 +111,16 @@ describe('conference list page', () => {
 			.calledWith(GetCollectionListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Conferences')).toBeInTheDocument();
+		expect(screen.getByText('All Conferences')).toBeInTheDocument();
 	});
 });

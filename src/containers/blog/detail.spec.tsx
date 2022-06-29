@@ -13,6 +13,7 @@ import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 
@@ -40,11 +41,11 @@ describe('blog post detail page', () => {
 	it('renders post', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_blog_post_title')).toBeInTheDocument();
-		expect(getByText('the_blog_post_teaser')).toBeInTheDocument();
-		expect(getByText('8m read')).toBeInTheDocument();
+		expect(screen.getByText('the_blog_post_title')).toBeInTheDocument();
+		expect(screen.getByText('the_blog_post_teaser')).toBeInTheDocument();
+		expect(screen.getByText('8m read')).toBeInTheDocument();
 
 		expect(fetchApi).toBeCalledWith(GetBlogDetailDataDocument, {
 			variables: {
@@ -73,8 +74,8 @@ describe('blog post detail page', () => {
 			.calledWith(GetBlogDetailDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

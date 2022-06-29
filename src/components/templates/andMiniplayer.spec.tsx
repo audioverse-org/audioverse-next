@@ -8,7 +8,7 @@ import AndPlaybackContext, {
 import { SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import setPlayerMock from '@lib/test/setPlayerMock';
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -31,13 +31,13 @@ function ContextUser({
 
 describe('andMiniplayer', () => {
 	it('renders children', async () => {
-		const { getByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				children: <p>testing</p>,
 			},
 		});
 
-		expect(getByText('testing')).toBeInTheDocument();
+		expect(screen.getByText('testing')).toBeInTheDocument();
 	});
 
 	it('plays media', async () => {
@@ -86,7 +86,7 @@ describe('andMiniplayer', () => {
 	it('loads recording', async () => {
 		setPlayerMock();
 
-		const { findByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				children: (
 					<AndMiniplayer>
@@ -104,14 +104,14 @@ describe('andMiniplayer', () => {
 		});
 
 		await expect(
-			findByText('the_recording_title')
+			screen.findByText('the_recording_title')
 		).resolves.toBeInTheDocument();
 	});
 
 	it('sets class on body when miniplayer loaded', async () => {
 		setPlayerMock();
 
-		const { findByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				children: (
 					<AndMiniplayer>
@@ -128,7 +128,7 @@ describe('andMiniplayer', () => {
 			},
 		});
 
-		await findByText('the_recording_title');
+		await screen.findByText('the_recording_title');
 
 		expect(document.body).toHaveClass('body--with-miniplayer');
 	});

@@ -69,8 +69,6 @@ module.exports = {
 		'no-mixed-spaces-and-tabs': 'off',
 		'one-var': ['error', 'never'],
 		'@typescript-eslint/interface-name-prefix': 'off',
-		'testing-library/prefer-screen-queries': 'off',
-		'testing-library/await-async-utils': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'formatjs/no-offset': 'error',
 		'@mizdra/layout-shift/require-size-attributes': 2,
@@ -87,6 +85,7 @@ module.exports = {
 			'renderPage',
 			'renderComponent',
 			'renderWithProviders',
+			'renderApp',
 		],
 	},
 	overrides: [

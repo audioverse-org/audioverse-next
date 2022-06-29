@@ -12,6 +12,7 @@ import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 
@@ -57,9 +58,9 @@ describe('stories list page', () => {
 	it('lists stories', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_story_title')).toBeInTheDocument();
+		expect(screen.getByText('the_story_title')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -81,25 +82,25 @@ describe('stories list page', () => {
 	it('includes page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Stories')).toBeInTheDocument();
+		expect(screen.getByText('Stories')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('1')).toBeInTheDocument();
+		expect(screen.getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('1') as HTMLLinkElement;
+		const link = screen.getByText('1') as HTMLLinkElement;
 
 		expect(link).toHaveAttribute('href', '/en/stories/albums');
 	});
@@ -113,21 +114,18 @@ describe('stories list page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('links stories properly', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('the_story_title') as HTMLLinkElement;
-
-		expect(link.parentElement?.parentElement).toHaveAttribute(
-			'href',
-			'the_story_path'
-		);
+		expect(
+			screen.getByRole('link', { name: /the_story_title/ })
+		).toHaveAttribute('href', 'the_story_path');
 	});
 });

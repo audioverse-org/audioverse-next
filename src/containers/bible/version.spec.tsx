@@ -8,6 +8,7 @@ import Version, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 jest.mock('@lib/api/bibleBrain');
 
@@ -50,9 +51,9 @@ describe('version detail page', () => {
 	it('lists books', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Genesis')).toBeInTheDocument();
+		expect(screen.getByText('Genesis')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -79,18 +80,18 @@ describe('version detail page', () => {
 	it('links books', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('Genesis').parentElement as HTMLLinkElement;
+		const link = screen.getByRole('link', { name: /Genesis/ });
 
-		expect(link.href).toContain('/en/bibles/ENGESVC/Gen');
+		expect(link).toHaveAttribute('href', '/en/bibles/ENGESVC/Gen/1');
 	});
 
 	it('renders 404', async () => {
 		jest.spyOn(bibleBrain, 'getBible').mockResolvedValue(null);
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

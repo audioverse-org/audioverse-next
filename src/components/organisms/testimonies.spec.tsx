@@ -1,5 +1,6 @@
 import Testimonies from '@components/organisms/testimonies';
 import { buildRenderer } from '@lib/test/buildRenderer';
+import { screen } from '@testing-library/react';
 
 const renderComponent = buildRenderer(Testimonies, {
 	defaultProps: {
@@ -15,20 +16,20 @@ const renderComponent = buildRenderer(Testimonies, {
 
 describe('testimonies', () => {
 	it('renders testimonies', async () => {
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByText('the_body')).toBeInTheDocument();
+		expect(screen.getByText('the_body')).toBeInTheDocument();
 	});
 
 	it('renders authors', async () => {
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByText('the_author')).toBeInTheDocument();
+		expect(screen.getByText('the_author')).toBeInTheDocument();
 	});
 
 	it('renders in slider', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('Next page')).toBeInTheDocument();
+		expect(screen.getByLabelText('Next page')).toBeInTheDocument();
 	});
 });

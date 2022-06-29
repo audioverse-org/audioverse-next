@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import { __mockedRouter } from 'next/router';
 
 import { buildRenderer } from '@lib/test/buildRenderer';
@@ -9,9 +9,9 @@ const renderPage = buildRenderer(Login);
 
 describe('login page', () => {
 	it('renders login form', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('redirects when user authenticated', async () => {

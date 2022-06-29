@@ -1,14 +1,4 @@
-import {
-	act,
-	findByLabelText,
-	findByTestId,
-	findByText,
-	getByLabelText,
-	getByText,
-	queryByLabelText,
-	screen,
-	waitFor,
-} from '@testing-library/react';
+import { act, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -105,17 +95,17 @@ describe('player', () => {
 	});
 
 	it('has button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('play')).toBeInTheDocument();
+		expect(screen.getByLabelText('play')).toBeInTheDocument();
 	});
 
 	it('plays when clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
 			// to be called with nothing
@@ -124,26 +114,26 @@ describe('player', () => {
 	});
 
 	it('toggles play/pause buttons', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
+		userEvent.click(within(player).getByLabelText('play'));
 
-		expect(await findByLabelText(player, 'pause')).toBeInTheDocument();
+		expect(await within(player).findByLabelText('pause')).toBeInTheDocument();
 	});
 
 	it('toggles back to play button', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		userEvent.click(getByLabelText(player, 'play'));
-		await findByLabelText(player, 'pause');
+		userEvent.click(within(player).getByLabelText('play'));
+		await within(player).findByLabelText('pause');
 
-		userEvent.click(getByLabelText(player, 'pause'));
+		userEvent.click(within(player).getByLabelText('pause'));
 
-		expect(await findByLabelText(player, 'play')).toBeInTheDocument();
+		expect(await within(player).findByLabelText('play')).toBeInTheDocument();
 	});
 
 	it('sets current time', async () => {
@@ -185,9 +175,9 @@ describe('player', () => {
 	it('updates scrubber on time update', async () => {
 		const player = setPlayerMock({ duration: 300 });
 
-		const { getByLabelText, getAllByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -196,7 +186,7 @@ describe('player', () => {
 		await simulateMediaTick();
 
 		await waitFor(() =>
-			expect(getAllByLabelText('progress')[0]).toHaveValue('25')
+			expect(screen.getAllByLabelText('progress')[0]).toHaveValue('25')
 		);
 	});
 
@@ -225,18 +215,18 @@ describe('player', () => {
 	it('nudges back 15 seconds', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const player = view.getByLabelText('player');
-		await findByLabelText(player, 'pause');
+		const player = screen.getByLabelText('player');
+		await within(player).findByLabelText('pause');
 
 		mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
-		userEvent.click(getByLabelText(player, 'back 15 seconds'));
+		userEvent.click(within(player).getByLabelText('back 15 seconds'));
 
 		expect(mockPlayer.currentTime).toBeCalledWith(35);
 	});
@@ -244,18 +234,18 @@ describe('player', () => {
 	it('nudges forward 15 seconds', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const player = view.getByLabelText('player');
-		await findByLabelText(player, 'pause');
+		const player = screen.getByLabelText('player');
+		await within(player).findByLabelText('pause');
 
 		mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
-		userEvent.click(getByLabelText(player, 'forward 15 seconds'));
+		userEvent.click(within(player).getByLabelText('forward 15 seconds'));
 
 		await waitFor(() => {
 			expect(mockPlayer.currentTime).toBeCalledWith(65);
@@ -271,9 +261,9 @@ describe('player', () => {
 	it('handles scrubber update after initial recording load', async () => {
 		const mockPlayer = setPlayerMock({ duration: 300 });
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -285,7 +275,7 @@ describe('player', () => {
 	it('plays video on poster click', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByAltText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -302,7 +292,7 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await waitFor(() => expect(mockPlayer.play).toBeCalled());
 	});
@@ -320,7 +310,7 @@ describe('player', () => {
 			},
 		});
 
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -340,8 +330,8 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		const player = view.getByLabelText('player');
-		userEvent.click(getByLabelText(player, 'play'));
+		const player = screen.getByLabelText('player');
+		userEvent.click(within(player).getByLabelText('play'));
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
@@ -379,7 +369,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithProviders(
+		await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -395,14 +385,14 @@ describe('player', () => {
 			undefined
 		);
 
-		const firstPlayer = getByTestId('first_sermon_id');
-		const secondPlayer = getByTestId('second_sermon_id');
+		const firstPlayer = screen.getByTestId('first_sermon_id');
+		const secondPlayer = screen.getByTestId('second_sermon_id');
 
-		userEvent.click(getByLabelText(firstPlayer, 'play'));
+		userEvent.click(within(firstPlayer).getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		userEvent.click(getByLabelText(secondPlayer, 'play'));
+		userEvent.click(within(secondPlayer).getByLabelText('play'));
 
 		await waitFor(() =>
 			expect(mockPlayer.src).toBeCalledWith([
@@ -416,7 +406,7 @@ describe('player', () => {
 	});
 
 	it('does not show poster when video playing', async () => {
-		const { getByAltText, queryByAltText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -433,15 +423,15 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await screen.findAllByLabelText('pause');
 
-		expect(queryByAltText('the_sermon_title')).not.toBeInTheDocument();
+		expect(screen.queryByAltText('the_sermon_title')).not.toBeInTheDocument();
 	});
 
 	it('does not show audio controls when video playing', async () => {
-		const { getByAltText, getByLabelText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -458,13 +448,13 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		const player = getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		expect(queryByLabelText(player, 'pause')).not.toBeInTheDocument();
+		expect(within(player).queryByLabelText('pause')).not.toBeInTheDocument();
 	});
 
 	it('isolates recording progress between recordings', async () => {
@@ -498,7 +488,7 @@ describe('player', () => {
 			speakers: [],
 		};
 
-		const { getByTestId } = await renderWithProviders(
+		await renderWithProviders(
 			<AndPlaybackContext>
 				<AndMiniplayer>
 					<Player
@@ -514,39 +504,39 @@ describe('player', () => {
 			undefined
 		);
 
-		const firstPlayer = getByTestId('first_sermon_id');
-		const secondPlayer = getByTestId('second_sermon_id');
+		const firstPlayer = screen.getByTestId('first_sermon_id');
+		const secondPlayer = screen.getByTestId('second_sermon_id');
 
-		userEvent.click(getByLabelText(firstPlayer, 'play'));
+		userEvent.click(within(firstPlayer).getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
 		await updateProgress();
 
-		expect(getByLabelText(secondPlayer, 'progress')).toHaveValue('0');
+		expect(within(secondPlayer).getByLabelText('progress')).toHaveValue('0');
 	});
 
 	it('has volume control', async () => {
 		setPlayerMock({ volume: 0.7 });
 
-		const { getByLabelText, findAllByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		await findAllByLabelText('pause');
+		await screen.findAllByLabelText('pause');
 
-		const control = getByLabelText('Volume');
+		const control = screen.getByLabelText('Volume');
 		expect(control).toHaveValue('70');
 	});
 
 	it('sets volume', async () => {
 		const playerMock = setPlayerMock();
 
-		const { getByLabelText, findAllByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		await findAllByLabelText('pause');
+		await screen.findAllByLabelText('pause');
 
 		await updateVolume();
 
@@ -554,13 +544,13 @@ describe('player', () => {
 	});
 
 	it('does not show miniplayer if no recording loaded', async () => {
-		const { queryByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(queryByLabelText('Volume')).not.toBeInTheDocument();
+		expect(screen.queryByLabelText('Volume')).not.toBeInTheDocument();
 	});
 
 	it('displays portal target when video is loaded', async () => {
-		const { getByAltText, getByTestId } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -577,17 +567,17 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await screen.findAllByLabelText('pause');
 
-		expect(getByTestId('portal')).toBeInTheDocument();
+		expect(screen.getByTestId('portal')).toBeInTheDocument();
 	});
 
 	it('plays video through portal', async () => {
 		setPlayerMock();
 
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -604,56 +594,56 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(view.getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		const portal = view.getByTestId('portal');
+		const portal = screen.getByTestId('portal');
 
 		await expect(
-			findByTestId(portal, 'video-element')
+			within(portal).findByTestId('video-element')
 		).resolves.toBeInTheDocument();
 	});
 
 	it('displays progress bar in miniplayer', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await screen.findAllByLabelText('pause');
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		expect(getByLabelText(miniplayer, 'progress')).toBeInTheDocument();
+		expect(within(miniplayer).getByLabelText('progress')).toBeInTheDocument();
 	});
 
 	it('sets miniplayer progress value', async () => {
 		const mockPlayer = setPlayerMock({ duration: 100 });
 
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
-		await findByLabelText(miniplayer, 'pause');
+		const miniplayer = screen.getByLabelText('miniplayer');
+		await within(miniplayer).findByLabelText('pause');
 
 		mockPlayer.currentTime(25);
 
 		await simulateMediaTick();
 
 		await waitFor(() => {
-			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('25');
+			expect(within(miniplayer).getByLabelText('progress')).toHaveValue('25');
 		});
 	});
 
 	it('accepts progress change from miniplayer progress bar', async () => {
 		const mockPlayer = setPlayerMock({ time: 25, duration: 100 });
 
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		await findByLabelText(miniplayer, 'pause');
+		await within(miniplayer).findByLabelText('pause');
 
 		await updateProgress(70);
 
@@ -661,19 +651,21 @@ describe('player', () => {
 	});
 
 	it('displays series in miniplayer', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await screen.findAllByLabelText('pause');
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		expect(getByText(miniplayer, 'the_sequence_title')).toBeInTheDocument();
+		expect(
+			within(miniplayer).getByText('the_sequence_title')
+		).toBeInTheDocument();
 	});
 
 	it('does not attempt series display if no series', async () => {
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -692,35 +684,39 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await screen.findAllByLabelText('pause');
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		expect(queryByLabelText(miniplayer, 'series')).not.toBeInTheDocument();
+		expect(
+			within(miniplayer).queryByLabelText('series')
+		).not.toBeInTheDocument();
 	});
 
 	it('has pause button in miniplayer', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		expect(await findByLabelText(miniplayer, 'pause')).toBeInTheDocument();
+		expect(
+			await within(miniplayer).findByLabelText('pause')
+		).toBeInTheDocument();
 	});
 
 	it('has play button in miniplayer', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		userEvent.click(await findByLabelText(miniplayer, 'pause'));
+		userEvent.click(await within(miniplayer).findByLabelText('pause'));
 
-		expect(getByLabelText(miniplayer, 'play')).toBeInTheDocument();
+		expect(within(miniplayer).getByLabelText('play')).toBeInTheDocument();
 	});
 
 	it('toggles between miniplayer play and pause buttons', async () => {
@@ -730,73 +726,75 @@ describe('player', () => {
 
 		const miniplayer = screen.getByLabelText('miniplayer');
 
-		await findByLabelText(miniplayer, 'pause');
+		await within(miniplayer).findByLabelText('pause');
 
-		expect(queryByLabelText(miniplayer, 'play')).not.toBeInTheDocument();
+		expect(within(miniplayer).queryByLabelText('play')).not.toBeInTheDocument();
 	});
 
 	it('has nudge back button', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await screen.findAllByLabelText('pause');
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
-		expect(getByLabelText(miniplayer, 'back 15 seconds')).toBeInTheDocument();
+		expect(
+			within(miniplayer).getByLabelText('back 15 seconds')
+		).toBeInTheDocument();
 	});
 
 	it('has nudge forward button', async () => {
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await screen.findAllByLabelText('pause');
 
-		const miniplayer = view.getByLabelText('miniplayer');
+		const miniplayer = screen.getByLabelText('miniplayer');
 
 		expect(
-			getByLabelText(miniplayer, 'forward 15 seconds')
+			within(miniplayer).getByLabelText('forward 15 seconds')
 		).toBeInTheDocument();
 	});
 
 	it('has speed button', async () => {
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByText('1x')).toBeInTheDocument();
+		expect(screen.getByText('1x')).toBeInTheDocument();
 	});
 
 	it('switches labels', async () => {
-		const { getByText, findByText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByText('1x'));
+		userEvent.click(screen.getByText('1x'));
 
-		await findByText('1.25x');
+		await screen.findByText('1.25x');
 
-		userEvent.click(getByText('1.25x'));
+		userEvent.click(screen.getByText('1.25x'));
 
-		await findByText('1.5x');
+		await screen.findByText('1.5x');
 
-		userEvent.click(getByText('1.5x'));
+		userEvent.click(screen.getByText('1.5x'));
 
-		await findByText('1.75x');
+		await screen.findByText('1.75x');
 
-		userEvent.click(getByText('1.75x'));
+		userEvent.click(screen.getByText('1.75x'));
 
-		await findByText('2x');
+		await screen.findByText('2x');
 
-		userEvent.click(getByText('2x'));
+		userEvent.click(screen.getByText('2x'));
 
-		await expect(findByText('1x')).resolves.toBeInTheDocument();
+		await expect(screen.findByText('1x')).resolves.toBeInTheDocument();
 	});
 
 	it('changes speed', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByText('1x'));
+		userEvent.click(screen.getByText('1x'));
 
 		await waitFor(() => {
 			expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
@@ -804,25 +802,25 @@ describe('player', () => {
 	});
 
 	it('has download icon', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('downloads')).toBeInTheDocument();
+		expect(screen.getByLabelText('downloads')).toBeInTheDocument();
 	});
 
 	it('has share button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('share')).toBeInTheDocument();
+		expect(screen.getByLabelText('share')).toBeInTheDocument();
 	});
 
 	it('has favorite button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('share')).toBeInTheDocument();
+		expect(screen.getByLabelText('share')).toBeInTheDocument();
 	});
 
 	it('shows progress when video shown', async () => {
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -839,17 +837,17 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(view.getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
 		await waitFor(() => {
-			expect(getByLabelText(player, 'progress')).toBeInTheDocument();
+			expect(within(player).getByLabelText('progress')).toBeInTheDocument();
 		});
 	});
 
 	it('shows progress when video not loaded yet', async () => {
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -864,13 +862,13 @@ describe('player', () => {
 			},
 		});
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		expect(getByLabelText(player, 'progress')).toBeInTheDocument();
+		expect(within(player).getByLabelText('progress')).toBeInTheDocument();
 	});
 
 	it('includes recording duration', async () => {
-		const view = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -887,21 +885,21 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(view.getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
 		await screen.findAllByLabelText('pause');
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
 		await waitFor(() => {
-			expect(getByText(player, '1:40')).toBeInTheDocument();
+			expect(within(player).getByText('1:40')).toBeInTheDocument();
 		});
 	});
 
 	it('defaults to api duration if recording not loaded', async () => {
 		mockVideojs.mockReturnValue(null);
 
-		const { findByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -917,11 +915,11 @@ describe('player', () => {
 			},
 		});
 
-		await expect(findByText('1:00')).resolves.toBeInTheDocument();
+		await expect(screen.findByText('1:00')).resolves.toBeInTheDocument();
 	});
 
 	it('has fullscreen button', async () => {
-		const { getByLabelText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -937,13 +935,13 @@ describe('player', () => {
 			},
 		});
 
-		expect(getByLabelText('fullscreen')).toBeInTheDocument();
+		expect(screen.getByLabelText('fullscreen')).toBeInTheDocument();
 	});
 
 	it('launches fullscreen when button clicked', async () => {
 		const mockPlayer = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -961,7 +959,7 @@ describe('player', () => {
 			},
 		});
 
-		userEvent.click(getByLabelText('fullscreen'));
+		userEvent.click(screen.getByLabelText('fullscreen'));
 
 		await waitFor(() => {
 			expect(mockPlayer.requestFullscreen).toBeCalled();
@@ -971,9 +969,9 @@ describe('player', () => {
 	it('enables controls when launch fullscreen', async () => {
 		const mockPlayer = setPlayerMock({ isFullscreen: true });
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -985,9 +983,9 @@ describe('player', () => {
 	it('disables controls when user exits fullscreen', async () => {
 		const mockPlayer = setPlayerMock({ isFullscreen: false });
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -999,35 +997,35 @@ describe('player', () => {
 	it('displays current time', async () => {
 		const mockPlayer = setPlayerMock({ time: 50 });
 
-		const view = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(view.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
-			expect(view.getAllByLabelText('pause')).not.toHaveLength(0);
+			expect(screen.getAllByLabelText('pause')).not.toHaveLength(0);
 		});
 
 		mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
-		const player = view.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
 		await waitFor(() => {
-			expect(getByText(player, '0:50')).toBeInTheDocument();
+			expect(within(player).getByText('0:50')).toBeInTheDocument();
 		});
 	});
 
 	it('displays zero time if recording not loaded', async () => {
-		const { getByText } = await renderComponent();
+		await renderComponent();
 
 		await waitFor(() => {
-			expect(getByText('0:00')).toBeInTheDocument();
+			expect(screen.getByText('0:00')).toBeInTheDocument();
 		});
 	});
 
 	it('displays times for videos', async () => {
-		const { getByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					...recording,
@@ -1043,42 +1041,42 @@ describe('player', () => {
 			},
 		});
 
-		expect(getByText('0:00')).toBeInTheDocument();
+		expect(screen.getByText('0:00')).toBeInTheDocument();
 	});
 
 	it('does not show fullscreen button for audio', async () => {
-		const { queryByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(queryByLabelText('fullscreen')).not.toBeInTheDocument();
+		expect(screen.queryByLabelText('fullscreen')).not.toBeInTheDocument();
 	});
 
 	it('handles initial zero duration', async () => {
 		setPlayerMock({ time: 0, duration: 0 });
 
-		const { getByLabelText, getAllByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
 		await simulateMediaTick();
 
 		await waitFor(() =>
-			expect(getAllByLabelText('progress')[0]).toHaveValue('0')
+			expect(screen.getAllByLabelText('progress')[0]).toHaveValue('0')
 		);
 	});
 
 	it('has working volume down button', async () => {
 		const playerMock = setPlayerMock();
 
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		userEvent.click(getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const player = getByLabelText('player');
-		await findByLabelText(player, 'pause');
+		const player = screen.getByLabelText('player');
+		await within(player).findByLabelText('pause');
 
-		userEvent.click(getByLabelText('Reduce volume'));
+		userEvent.click(screen.getByLabelText('Reduce volume'));
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.4));
 	});
@@ -1091,7 +1089,7 @@ describe('player', () => {
 		userEvent.click(await screen.findByLabelText('play'));
 
 		const player = screen.getByLabelText('player');
-		await findByLabelText(player, 'pause');
+		await within(player).findByLabelText('pause');
 
 		userEvent.click(screen.getByLabelText('Increase volume'));
 
@@ -1115,7 +1113,7 @@ describe('player', () => {
 
 		const miniplayer = screen.getByLabelText('miniplayer');
 
-		await findByText(miniplayer, '0:50');
+		await within(miniplayer).findByText('0:50');
 	});
 
 	it('displays duration in miniplayer', async () => {
@@ -1135,7 +1133,9 @@ describe('player', () => {
 
 		const miniplayer = await screen.findByLabelText('miniplayer');
 
-		await expect(findByText(miniplayer, '2:00')).resolves.toBeInTheDocument();
+		await expect(
+			within(miniplayer).findByText('2:00')
+		).resolves.toBeInTheDocument();
 	});
 });
 

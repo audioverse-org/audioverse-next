@@ -30,52 +30,54 @@ describe('register page', () => {
 	});
 
 	it('renders email field', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('jane@example.com')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('jane@example.com')).toBeInTheDocument();
 	});
 
 	it('renders password field', async () => {
-		const { getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
+		expect(screen.getByPlaceholderText('∗∗∗∗∗∗∗')).toBeInTheDocument();
 	});
 
 	it('renders sign up button', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sign up')).toBeInTheDocument();
+		expect(screen.getByText('Sign up')).toBeInTheDocument();
 	});
 
 	it('resets errors on click', async () => {
-		const { getByText, getByPlaceholderText, queryByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
-		expect(queryByText('please type password twice')).not.toBeInTheDocument();
+		expect(
+			screen.queryByText('please type password twice')
+		).not.toBeInTheDocument();
 	});
 
 	it('renders missing email error', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
-		expect(getByText('email is required')).toBeInTheDocument();
+		expect(screen.getByText('email is required')).toBeInTheDocument();
 	});
 
 	it('registers user', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		userEvent.type(getByPlaceholderText('Jane'), 'Matthew');
-		userEvent.type(getByPlaceholderText('Doe'), 'Leffler');
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('Jane'), 'Matthew');
+		userEvent.type(screen.getByPlaceholderText('Doe'), 'Leffler');
+		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterDocument, {
@@ -90,15 +92,15 @@ describe('register page', () => {
 	});
 
 	it('displays loading state', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(getByText('loading...')).toBeInTheDocument();
+			expect(screen.getByText('loading...')).toBeInTheDocument();
 		});
 	});
 
@@ -115,28 +117,28 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText, getByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
-		userEvent.click(getByText('Sign up'));
+		userEvent.click(screen.getByText('Sign up'));
 
 		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
+			expect(screen.getByText('the_error_message')).toBeInTheDocument();
 		});
 	});
 
 	it('renders continue with Facebook', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sign up with Facebook')).toBeInTheDocument();
+		expect(screen.getByText('Sign up with Facebook')).toBeInTheDocument();
 	});
 
 	it('renders continue with Google', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sign up with Google')).toBeInTheDocument();
+		expect(screen.getByText('Sign up with Google')).toBeInTheDocument();
 	});
 
 	it('renders google signon errors', async () => {
@@ -152,12 +154,12 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Google'));
+		userEvent.click(screen.getByText('Sign up with Google'));
 
 		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
+			expect(screen.getByText('the_error_message')).toBeInTheDocument();
 		});
 	});
 
@@ -174,29 +176,29 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
+			expect(screen.getByText('the_error_message')).toBeInTheDocument();
 		});
 	});
 
 	it('renders social login success', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
-			expect(getByText('success')).toBeInTheDocument();
+			expect(screen.getByText('success')).toBeInTheDocument();
 		});
 	});
 
 	it('hits api with facebook registration', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -222,9 +224,9 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
@@ -238,13 +240,13 @@ describe('register page', () => {
 			status: 300,
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByText('Sign up with Facebook')).toBeInTheDocument();
+			expect(screen.getByText('Sign up with Facebook')).toBeInTheDocument();
 		});
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await sleep();
 
@@ -259,13 +261,13 @@ describe('register page', () => {
 			status: 300,
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(screen.getByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(
-				getByText('300: Facebook login was unsuccessful')
+				screen.getByText('300: Facebook login was unsuccessful')
 			).toBeInTheDocument();
 		});
 	});
@@ -273,15 +275,15 @@ describe('register page', () => {
 	it('does not display form if user logged in', async () => {
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
 
-		const { queryByPlaceholderText } = await renderPage();
+		await renderPage();
 
-		expect(queryByPlaceholderText('email')).not.toBeInTheDocument();
+		expect(screen.queryByPlaceholderText('email')).not.toBeInTheDocument();
 	});
 
 	it('sends Google login data to API', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByText('Sign up with Google'));
+		userEvent.click(screen.getByText('Sign up with Google'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -297,11 +299,11 @@ describe('register page', () => {
 	});
 
 	it('pops modal on guest info click', async () => {
-		const { getByText, getByTestId } = await renderPage();
+		await renderPage();
 
-		userEvent.click(getByTestId('guest-info-button'));
+		userEvent.click(screen.getByTestId('guest-info-button'));
 
-		expect(getByText('Continue as guest?')).toBeInTheDocument();
+		expect(screen.getByText('Continue as guest?')).toBeInTheDocument();
 	});
 
 	it('displays Google login error', async () => {

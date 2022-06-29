@@ -246,121 +246,127 @@ describe('home page', () => {
 	});
 
 	it('includes testimonies', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Testimonials')).toBeInTheDocument();
+		expect(screen.getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('falls back to English', async () => {
 		__loadQuery({ language: 'ak' });
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Testimonials')).toBeInTheDocument();
+		expect(screen.getByText('Testimonials')).toBeInTheDocument();
 	});
 
 	it('renders song title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		await waitFor(() => {
-			expect(getByText('the_song_title')).toBeInTheDocument();
+			expect(screen.getByText('the_song_title')).toBeInTheDocument();
 		});
 	});
 
 	it('renders song person', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_song_person_name')).toBeInTheDocument();
+		expect(screen.getByText('the_song_person_name')).toBeInTheDocument();
 	});
 
 	it('renders song duration', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('5m')).toBeInTheDocument();
+		expect(screen.getByText('5m')).toBeInTheDocument();
 	});
 
 	it('renders song collection title', async () => {
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_song_collection_title')[1]).toBeInTheDocument();
+		expect(
+			screen.getAllByText('the_song_collection_title')[1]
+		).toBeInTheDocument();
 	});
 
 	it('renders Bible book title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Genesis')).toBeInTheDocument();
+		expect(screen.getByText('Genesis')).toBeInTheDocument();
 	});
 
 	it('renders story title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_story_title')).toBeInTheDocument();
+		expect(screen.getByText('the_story_title')).toBeInTheDocument();
 	});
 
 	it('renders story duration', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('21m')).toBeInTheDocument();
+		expect(screen.getByText('21m')).toBeInTheDocument();
 	});
 
 	it('renders story parts total', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Part 1 of 7')).toBeInTheDocument();
+		expect(screen.getByText('Part 1 of 7')).toBeInTheDocument();
 	});
 
 	it('renders story sequence title', async () => {
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_story_sequence_title')[1]).toBeInTheDocument();
+		expect(
+			screen.getAllByText('the_story_sequence_title')[1]
+		).toBeInTheDocument();
 	});
 
 	it('renders recording title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_recording_title')).toBeInTheDocument();
+		expect(screen.getByText('the_recording_title')).toBeInTheDocument();
 	});
 
 	it('renders recording sequence title', async () => {
-		const { getAllByText } = await renderPage();
+		await renderPage();
 
-		expect(getAllByText('the_recording_sequence_title')[1]).toBeInTheDocument();
+		expect(
+			screen.getAllByText('the_recording_sequence_title')[1]
+		).toBeInTheDocument();
 	});
 
 	it('renders recording sequence part info', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Part 1 of 15')).toBeInTheDocument();
+		expect(screen.getByText('Part 1 of 15')).toBeInTheDocument();
 	});
 
 	it('renders post titles', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_post_title')).toBeInTheDocument();
+		expect(screen.getByText('the_post_title')).toBeInTheDocument();
 	});
 
 	it('renders post date', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('December 3, 2019')).toBeInTheDocument();
+		expect(screen.getByText('December 3, 2019')).toBeInTheDocument();
 	});
 
 	it('renders post teaser', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_post_teaser')).toBeInTheDocument();
+		expect(screen.getByText('the_post_teaser')).toBeInTheDocument();
 	});
 
 	it('renders read time', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('9m read')).toBeInTheDocument();
+		expect(screen.getByText('9m read')).toBeInTheDocument();
 	});
 
 	it('renders post image', async () => {
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
-		expect(getByAltText('the_post_title')).toHaveAttribute(
+		expect(screen.getByAltText('the_post_title')).toHaveAttribute(
 			'src',
 			'the_post_image_url'
 		);

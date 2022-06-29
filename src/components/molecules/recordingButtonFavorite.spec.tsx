@@ -44,17 +44,19 @@ describe('recording favorite button', () => {
 	});
 
 	it('shows favorite button', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('Favorite')).toBeInTheDocument();
+		expect(screen.getByLabelText('Favorite')).toBeInTheDocument();
 	});
 
 	it('shows unfavorite button', async () => {
 		mockRecordingIsFavorited.mockResolvedValue(true);
 
-		const { findByLabelText } = await renderComponent();
+		await renderComponent();
 
-		await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
+		await expect(
+			screen.findByLabelText('Unfavorite')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('gets favorited status', async () => {
@@ -76,26 +78,32 @@ describe('recording favorite button', () => {
 	});
 
 	it('updates button when clicked', async () => {
-		const { findByLabelText, button } = await renderComponent();
+		const { button } = await renderComponent();
 
 		mockRecordingIsFavorited.mockResolvedValue(true);
 		mockSetRecordingFavorited.mockResolvedValue(true);
 
 		userEvent.click(button);
 
-		await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
+		await expect(
+			screen.findByLabelText('Unfavorite')
+		).resolves.toBeInTheDocument();
 	});
 
 	it('rolls back state if API fails', async () => {
 		await withMutedReactQueryLogger(async () => {
-			const { button, findByLabelText } = await renderComponent();
+			const { button } = await renderComponent();
 
 			resolveWithDelay(mockSetRecordingFavorited, { resolve: false });
 
 			userEvent.click(button);
 
-			await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
-			await expect(findByLabelText('Favorite')).resolves.toBeInTheDocument();
+			await expect(
+				screen.findByLabelText('Unfavorite')
+			).resolves.toBeInTheDocument();
+			await expect(
+				screen.findByLabelText('Favorite')
+			).resolves.toBeInTheDocument();
 		});
 	});
 
@@ -105,20 +113,22 @@ describe('recording favorite button', () => {
 
 		isFavoritedSpy.mockResolvedValue(false);
 
-		const { button, findByLabelText } = await renderComponent();
+		const { button } = await renderComponent();
 
 		isFavoritedSpy.mockResolvedValue(true);
 
 		userEvent.click(button);
 
-		await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
-		await expect(findByLabelText('Favorite')).rejects.toThrow();
+		await expect(
+			screen.findByLabelText('Unfavorite')
+		).resolves.toBeInTheDocument();
+		await expect(screen.findByLabelText('Favorite')).rejects.toThrow();
 	});
 
 	it('sets aria-pressed=false', async () => {
-		const { getByLabelText } = await renderComponent();
+		await renderComponent();
 
-		expect(getByLabelText('Favorite')).not.toHaveAttribute(
+		expect(screen.getByLabelText('Favorite')).not.toHaveAttribute(
 			'aria-pressed',
 			'true'
 		);
@@ -127,18 +137,18 @@ describe('recording favorite button', () => {
 	it('sets aria-pressed=true', async () => {
 		mockRecordingIsFavorited.mockResolvedValue(true);
 
-		const { findByLabelText } = await renderComponent();
+		await renderComponent();
 
-		await expect(findByLabelText('Unfavorite')).resolves.toHaveAttribute(
+		await expect(screen.findByLabelText('Unfavorite')).resolves.toHaveAttribute(
 			'aria-pressed',
 			'true'
 		);
 	});
 
 	it('uses favorite icon', async () => {
-		const { getByTestId } = await renderComponent();
+		await renderComponent();
 
-		expect(getByTestId('favorite-icon')).toBeInTheDocument();
+		expect(screen.getByTestId('favorite-icon')).toBeInTheDocument();
 	});
 
 	it('uses unfavorite icon', async () => {

@@ -11,6 +11,7 @@ import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/letter/[letter]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 
@@ -54,17 +55,17 @@ describe('sponsor list page', () => {
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Sponsors')).toBeInTheDocument();
+		expect(screen.getByText('All Sponsors')).toBeInTheDocument();
 	});
 
 	it('lists sponsors', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -86,12 +87,11 @@ describe('sponsor list page', () => {
 	it('links entries', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title').parentElement).toHaveAttribute(
-			'href',
-			'the_sponsor_path'
-		);
+		expect(
+			screen.getByRole('link', { name: 'the_sponsor_title' })
+		).toHaveAttribute('href', 'the_sponsor_path');
 	});
 
 	it('renders 404', async () => {
@@ -99,8 +99,8 @@ describe('sponsor list page', () => {
 			.calledWith(GetSponsorListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

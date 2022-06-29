@@ -13,6 +13,7 @@ import Story, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Story, getStaticProps);
 
@@ -54,9 +55,9 @@ describe('story detail page', () => {
 	it('includes story title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_story_title')).toBeInTheDocument();
+		expect(screen.getByText('the_story_title')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -82,8 +83,8 @@ describe('story detail page', () => {
 			.calledWith(GetStoryDetailDataDocument, expect.anything())
 			.mockRejectedValue('Oops!');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });

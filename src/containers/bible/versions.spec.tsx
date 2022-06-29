@@ -8,6 +8,7 @@ import Versions, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles';
+import { screen } from '@testing-library/react';
 
 jest.mock('@lib/api/bibleBrain');
 
@@ -42,9 +43,9 @@ describe('versions list', () => {
 	it('renders versions', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_version_title')).toBeInTheDocument();
+		expect(screen.getByText('the_version_title')).toBeInTheDocument();
 	});
 
 	it('provides language paths', async () => {
@@ -56,12 +57,11 @@ describe('versions list', () => {
 	it('links entries', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('the_version_title')
-			.parentElement as HTMLLinkElement;
+		const link = screen.getByRole('link', { name: /the_version_title/ });
 
-		expect(link.href).toContain('/en/bibles/the_version_id');
+		expect(link).toHaveAttribute('href', '/en/bibles/the_version_id');
 	});
 
 	it('renders 404', async () => {

@@ -12,6 +12,7 @@ import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/teachings/video/page/[i]';
 import { buildLoader } from '@lib/test/buildLoader';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
@@ -96,9 +97,11 @@ describe('sermon video list page', () => {
 	it('includes filter in pagination', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
-		const link = getByText('1') as HTMLAnchorElement;
+		await renderPage();
 
-		expect(link.href).toContain('/en/teachings/video/page/1');
+		expect(screen.getByText('1')).toHaveAttribute(
+			'href',
+			'/en/teachings/video/page/1'
+		);
 	});
 });

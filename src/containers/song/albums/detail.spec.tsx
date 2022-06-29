@@ -12,6 +12,7 @@ import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 
@@ -79,8 +80,8 @@ describe('song album detail page', () => {
 			.calledWith(GetSongAlbumsDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });
