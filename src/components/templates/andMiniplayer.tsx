@@ -41,8 +41,8 @@ export default function AndMiniplayer({
 			<div
 				className={styles.series}
 				aria-label={intl.formatMessage({
-					id: 'miniplayer__series',
-					defaultMessage: 'Series',
+					id: 'andMiniplayer__seriesLabel',
+					defaultMessage: 'series',
 				})}
 			>
 				<Icon width={13} height={13} />

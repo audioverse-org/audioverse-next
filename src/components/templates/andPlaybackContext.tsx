@@ -433,7 +433,7 @@ export default function AndPlaybackContext({
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else {
-				videojs.then((v) => {
+				Promise.all([videojs, import('videojs-overlay')]).then(([v]) => {
 					const p = v.default(currentVideoEl, options);
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());

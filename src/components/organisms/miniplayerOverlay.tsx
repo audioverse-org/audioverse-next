@@ -37,8 +37,8 @@ export default function MiniplayerOverlay(): JSX.Element | null {
 			<div
 				className={styles.series}
 				aria-label={intl.formatMessage({
-					id: 'miniplayer__series',
-					defaultMessage: 'Series',
+					id: 'miniplayerOverlay__series',
+					defaultMessage: 'series',
 				})}
 			>
 				<Icon width={13} height={13} />

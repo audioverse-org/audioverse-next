@@ -1,5 +1,4 @@
 import { NextSeo } from 'next-seo';
-// import Head from 'next/head';
 import Script from 'next/script';
 import React, { useEffect } from 'react';
 import {
@@ -82,7 +81,7 @@ function Base<P>({
 					title={title ? `${title} | AudioVerse` : 'AudioVerse'}
 					additionalMetaTags={[
 						{
-							name: 'theme-color',
+							name: 'viewport',
 							content:
 								'width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover',
 						},

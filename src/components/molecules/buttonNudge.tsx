@@ -6,8 +6,8 @@ import { BaseColors } from '@lib/constants';
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
-import IconJumpBackMediumDark from '../../../public/img/icon-jump-back-medium-dark.svg';
-import IconJumpForwardMediumDark from '../../../public/img/icon-jump-forward-medium-dark.svg';
+import IconJumpBackMediumDark from '../../../public/img/icons/icon-jump-back-medium-dark.svg';
+import IconJumpForwardMediumDark from '../../../public/img/icons/icon-jump-forward-medium-dark.svg';
 import IconJumpBackMedium from '../../../public/img/icons/icon-jump-back-medium.svg';
 import IconJumpBack from '../../../public/img/icons/icon-jump-back.svg';
 import IconJumpForwardMedium from '../../../public/img/icons/icon-jump-forward-medium.svg';
