@@ -6303,6 +6303,21 @@ export type GetLibraryPlaylistsDataQueryVariables = Exact<{
 
 export type GetLibraryPlaylistsDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', playlists: { __typename?: 'UserPlaylistConnection', nodes: Array<{ __typename?: 'UserPlaylist', id: string | number, title: string, recordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sequence: { __typename?: 'Sequence', id: string | number, title: string, contentType: SequenceContentType, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null } } } | null };
 
+export type GetCustomDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetCustomDetailPageDataQuery = { __typename?: 'Query', page: { __typename?: 'Page', title: string, body: string, type: PageType, slug: string } | null };
+
+export type GetCustomDetailPageStaticPathsQueryVariables = Exact<{
+  language: Language;
+  first: Scalars['Int'];
+}>;
+
+
+export type GetCustomDetailPageStaticPathsQuery = { __typename?: 'Query', pages: { __typename?: 'PageConnection', nodes: Array<{ __typename?: 'Page', id: string | number, slug: string, type: PageType }> | null } };
+
 export type GetPresenterAppearsPageDataQueryVariables = Exact<{
   language: Language;
   id: Scalars['ID'];
@@ -7766,6 +7781,36 @@ export const useGetLibraryPlaylistsDataQuery = <
     useQuery<GetLibraryPlaylistsDataQuery, TError, TData>(
       ['getLibraryPlaylistsData', variables],
       graphqlFetcher<GetLibraryPlaylistsDataQuery, GetLibraryPlaylistsDataQueryVariables>(GetLibraryPlaylistsDataDocument, variables),
+      options
+    );
+export const GetCustomDetailPageDataDocument = `
+query getCustomDetailPageData($id:ID!){page(id:$id){title body type slug}}
+`;
+export const useGetCustomDetailPageDataQuery = <
+      TData = GetCustomDetailPageDataQuery,
+      TError = unknown
+    >(
+      variables: GetCustomDetailPageDataQueryVariables,
+      options?: UseQueryOptions<GetCustomDetailPageDataQuery, TError, TData>
+    ) =>
+    useQuery<GetCustomDetailPageDataQuery, TError, TData>(
+      ['getCustomDetailPageData', variables],
+      graphqlFetcher<GetCustomDetailPageDataQuery, GetCustomDetailPageDataQueryVariables>(GetCustomDetailPageDataDocument, variables),
+      options
+    );
+export const GetCustomDetailPageStaticPathsDocument = `
+query getCustomDetailPageStaticPaths($language:Language!$first:Int!){pages(language:$language first:$first){nodes{id slug type}}}
+`;
+export const useGetCustomDetailPageStaticPathsQuery = <
+      TData = GetCustomDetailPageStaticPathsQuery,
+      TError = unknown
+    >(
+      variables: GetCustomDetailPageStaticPathsQueryVariables,
+      options?: UseQueryOptions<GetCustomDetailPageStaticPathsQuery, TError, TData>
+    ) =>
+    useQuery<GetCustomDetailPageStaticPathsQuery, TError, TData>(
+      ['getCustomDetailPageStaticPaths', variables],
+      graphqlFetcher<GetCustomDetailPageStaticPathsQuery, GetCustomDetailPageStaticPathsQueryVariables>(GetCustomDetailPageStaticPathsDocument, variables),
       options
     );
 export const GetPresenterAppearsPageDataDocument = `
@@ -9275,6 +9320,18 @@ import { fetchApi } from '@lib/api/fetchApi'
 								variables: ExactAlt<T, GetLibraryPlaylistsDataQueryVariables>
 							): Promise<GetLibraryPlaylistsDataQuery> {
 								return fetchApi(GetLibraryPlaylistsDataDocument, { variables });
+							}
+
+							export async function getCustomDetailPageData<T>(
+								variables: ExactAlt<T, GetCustomDetailPageDataQueryVariables>
+							): Promise<GetCustomDetailPageDataQuery> {
+								return fetchApi(GetCustomDetailPageDataDocument, { variables });
+							}
+
+							export async function getCustomDetailPageStaticPaths<T>(
+								variables: ExactAlt<T, GetCustomDetailPageStaticPathsQueryVariables>
+							): Promise<GetCustomDetailPageStaticPathsQuery> {
+								return fetchApi(GetCustomDetailPageStaticPathsDocument, { variables });
 							}
 
 							export async function getPresenterAppearsPageData<T>(
