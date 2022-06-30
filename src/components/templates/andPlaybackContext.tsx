@@ -8,8 +8,8 @@ import React, {
 	useState,
 } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
+import type { VideoJsPlayer } from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
 import {
@@ -22,8 +22,7 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import styles from '@components/templates/andMiniplayer.module.scss';
-// TODO: This caused the bundle size to jump by 10 KB
-import 'video.js/dist/video-js.css';
+import dynamic from 'next/dynamic';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -31,6 +30,10 @@ import 'video.js/dist/video-js.css';
 // If this solution becomes impractical, for instance, due to needing to
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
+
+const LazyVideoPlayer = dynamic(
+	() => import('@components/components/molecules/videoPlayer')
+);
 
 interface Playable extends VideoJs.default.Tech.SourceObject {
 	duration: number;
@@ -446,26 +449,21 @@ export default function AndPlaybackContext({
 	return (
 		<PlaybackContext.Provider value={playback}>
 			<div ref={originRef} className={styles.videoOrigin}>
-				<div ref={videoRef} className={styles.playerElement}>
-					<div data-vjs-player={true}>
-						<video
-							ref={videoElRef}
-							className="video-js"
-							playsInline
-							data-testid="video-element"
-							onTimeUpdate={() => {
-								if (!playerRef.current) return;
-								const t = playerRef.current.currentTime();
-								const d = playerRef.current.duration();
-								const p = d ? t / d : 0;
-								playback.setProgress(p, false);
-							}}
-							onPause={() => playback.setIsPaused(true)}
-							onPlay={() => playback.setIsPaused(false)}
-							onEnded={() => playback.advanceRecording()}
-						/>
-					</div>
-				</div>
+				<LazyVideoPlayer
+					className={styles.playerElement}
+					videoRef={videoRef}
+					videoElRef={videoElRef}
+					onTimeUpdate={() => {
+						if (!playerRef.current) return;
+						const t = playerRef.current.currentTime();
+						const d = playerRef.current.duration();
+						const p = d ? t / d : 0;
+						playback.setProgress(p, false);
+					}}
+					onPause={() => playback.setIsPaused(true)}
+					onPlay={() => playback.setIsPaused(false)}
+					onEnded={() => playback.advanceRecording()}
+				/>
 			</div>
 			{children}
 		</PlaybackContext.Provider>
