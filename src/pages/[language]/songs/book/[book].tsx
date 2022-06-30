@@ -14,7 +14,7 @@ import { getSongBooksDetailPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeBibleMusicRoute } from '@lib/routes';
+import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
 
 export default SongBookDetail;
 

@@ -7,13 +7,13 @@ import Button from '@components/molecules/button';
 import Input from '@components/molecules/form/input';
 import { login } from '@lib/api/login';
 import { useResetPasswordMutation } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useQueryString } from '@lib/useQueryString';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
 
 import styles from './reset.module.scss';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 function Reset(): JSX.Element {
 	const router = useRouter();

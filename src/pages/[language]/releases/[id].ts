@@ -12,7 +12,7 @@ import {
 	getMediaReleaseFormsPathsData,
 } from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { makeReleaseRoute } from '@lib/routes';
+import { makeReleaseRoute } from '@lib/routes/makeReleaseRoute';
 
 export default ReleaseDetail;
 

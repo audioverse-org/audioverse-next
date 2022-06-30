@@ -8,7 +8,7 @@ import { IBaseProps } from '@containers/base';
 import Book, { BookProps } from '@containers/bible/book';
 import { getBible, getBibleBookChapters, getBibles } from '@lib/api/bibleBrain';
 import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { makeBibleBookRoute } from '@lib/routes';
+import { makeBibleBookRoute } from '@lib/routes/makeBibleBookRoute';
 
 export default Book;
 

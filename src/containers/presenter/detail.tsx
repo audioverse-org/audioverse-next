@@ -24,18 +24,16 @@ import Tease from '@components/molecules/tease';
 import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makePresenterAlsoAppearsInRoute,
-	makePresenterFeedRoute,
-	makePresenterRecordingsRoute,
-	makePresenterSequencesRoute,
-	makePresenterTopRecordingsRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
+import { makePresenterRecordingsRoute } from '@lib/routes/makePresenterRecordingsRoute';
+import { makePresenterFeedRoute } from '@lib/routes/makePresenterFeedRoute';
+import { makePresenterTopRecordingsRoute } from '@lib/routes/makePresenterTopRecordingsRoute';
+import { makePresenterSequencesRoute } from '@lib/routes/makePresenterSequencesRoute';
+import { makePresenterAlsoAppearsInRoute } from '@lib/routes/makePresenterAlsoAppearsInRoute';
 
 export type PresenterDetailProps = GetPresenterDetailPageDataQuery;
 

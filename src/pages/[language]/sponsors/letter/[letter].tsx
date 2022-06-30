@@ -14,7 +14,7 @@ import {
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
-import { makeSponsorListRoute } from '@lib/routes';
+import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
 
 export default Sponsors;
 

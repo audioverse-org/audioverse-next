@@ -10,7 +10,6 @@ import {
 	CardRecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { makeBibleMusicRoute, makeBibleMusicTrackRoute } from '@lib/routes';
 import useHover from '@lib/useHover';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -19,6 +18,8 @@ import TeaseRecordingStack from '../teaseRecordingStack';
 
 import CardWithTheme from './base/withTheme';
 import styles from './songBook.module.scss';
+import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
+import { makeBibleMusicTrackRoute } from '@lib/routes/makeBibleMusicTrackRoute';
 
 interface CardSongProps {
 	book: string;

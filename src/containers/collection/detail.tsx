@@ -26,18 +26,16 @@ import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeCollectionFeedRoute,
-	makeCollectionPresentersRoute,
-	makeCollectionSequencesRoute,
-	makeCollectionTeachingsRoute,
-} from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
+import { makeCollectionFeedRoute } from '@lib/routes/makeCollectionFeedRoute';
+import { makeCollectionSequencesRoute } from '@lib/routes/makeCollectionSequencesRoute';
+import { makeCollectionPresentersRoute } from '@lib/routes/makeCollectionPresentersRoute';
+import { makeCollectionTeachingsRoute } from '@lib/routes/makeCollectionTeachingsRoute';
 
 export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
 

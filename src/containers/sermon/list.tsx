@@ -8,12 +8,10 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeDiscoverRoute,
-	makeSermonListRoute,
-	makeSermonsFeedRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSermonListRoute } from '@lib/routes/makeSermonListRoute';
+import { makeSermonsFeedRoute } from '@lib/routes/makeSermonsFeedRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 export type SermonListProps = PaginatedProps<
 	NonNullable<GetSermonListPageDataQuery['sermons']['nodes']>[0],

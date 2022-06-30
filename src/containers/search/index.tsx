@@ -19,19 +19,17 @@ import {
 	Language,
 	useGetSearchResultsPageDataQuery,
 } from '@lib/generated/graphql';
-import {
-	makeSearchCollectionsRoute,
-	makeSearchPersonsRoute,
-	makeSearchSequencesRoute,
-	makeSearchSponsorsRoute,
-	makeSearchTeachingsRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './index.module.scss';
 import Head from 'next/head';
+import { makeSearchCollectionsRoute } from '@lib/routes/makeSearchCollectionsRoute';
+import { makeSearchPersonsRoute } from '@lib/routes/makeSearchPersonsRoute';
+import { makeSearchSequencesRoute } from '@lib/routes/makeSearchSequencesRoute';
+import { makeSearchSponsorsRoute } from '@lib/routes/makeSearchSponsorsRoute';
+import { makeSearchTeachingsRoute } from '@lib/routes/makeSearchTeachingsRoute';
 
 export type SearchProps = {
 	language: Language;

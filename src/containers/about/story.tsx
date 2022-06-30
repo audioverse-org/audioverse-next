@@ -6,12 +6,12 @@ import Heading1 from '@components/atoms/heading1';
 import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
-import { makeAboutPage } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import sharedStyles from './shared.module.scss';
+import { makeAboutPage } from '@lib/routes/makeAboutPage';
 
 export default function Story(): JSX.Element {
 	const languageRoute = useLanguageRoute();

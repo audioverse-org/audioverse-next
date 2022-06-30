@@ -5,11 +5,12 @@ import Alert from '@components/atoms/alert';
 import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import LibraryNav from '@components/organisms/libraryNav';
-import { makeLibraryRoute, makeRegisterRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import baseStyles from './base.module.scss';
 import styles from './loggedOut.module.scss';
+import { makeRegisterRoute } from '@lib/routes/makeRegisterRoute';
+import { makeLibraryRoute } from '@lib/routes/makeLibraryRoute';
 
 export default function LibraryLoggedOut(): JSX.Element {
 	const languageRoute = useLanguageRoute();

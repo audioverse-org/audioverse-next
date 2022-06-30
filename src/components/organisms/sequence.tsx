@@ -22,17 +22,15 @@ import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import {
-	makeAudiobookFeedRoute,
-	makeSeriesFeedRoute,
-	makeSongAlbumFeedRoute,
-	makeStoryAlbumFeedRoute,
-} from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './sequence.module.scss';
+import { makeSeriesFeedRoute } from '@lib/routes/makeSeriesFeedRoute';
+import { makeAudiobookFeedRoute } from '@lib/routes/makeAudiobookFeedRoute';
+import { makeStoryAlbumFeedRoute } from '@lib/routes/makeStoryAlbumFeedRoute';
+import { makeSongAlbumFeedRoute } from '@lib/routes/makeSongAlbumFeedRoute';
 
 export function Sequence({
 	sequence,

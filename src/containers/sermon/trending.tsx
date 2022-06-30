@@ -8,10 +8,11 @@ import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
 import { GetTrendingTeachingsPageDataQuery } from '@lib/generated/graphql';
-import { makeDiscoverRoute, makeTrendingSermonRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './trending.module.scss';
+import { makeTrendingSermonRoute } from '@lib/routes/makeTrendingSermonRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 export type TrendingTeachingsProps = NonNullable<
 	GetTrendingTeachingsPageDataQuery['recordings']

@@ -6,11 +6,9 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetStoriesAlbumsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeDiscoverCollectionsRoute,
-	makeStoryAlbumListPage,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeStoryAlbumListPage } from '@lib/routes/makeStoryAlbumListPage';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],

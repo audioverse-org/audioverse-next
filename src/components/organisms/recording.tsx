@@ -31,7 +31,6 @@ import {
 	TeaseRecordingFragment,
 } from '@lib/generated/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { makeBibleMusicRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -40,6 +39,7 @@ import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-smal
 import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './recording.module.scss';
+import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
 
 export type RecordingProps = {
 	recording: RecordingFragment;

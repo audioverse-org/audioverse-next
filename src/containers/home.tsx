@@ -21,13 +21,6 @@ import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
-import {
-	makeBlogPostListRoute,
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeRegisterRoute,
-	makeTestimoniesRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
@@ -35,6 +28,11 @@ import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '../../public/img/players.jpeg';
 
 import styles from './home.module.scss';
+import { makeTestimoniesRoute } from '@lib/routes/makeTestimoniesRoute';
+import { makeBlogPostListRoute } from '@lib/routes/makeBlogPostListRoute';
+import { makeRegisterRoute } from '@lib/routes/makeRegisterRoute';
+import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 export type HomeProps = {
 	data: GetHomeStaticPropsQuery | undefined;

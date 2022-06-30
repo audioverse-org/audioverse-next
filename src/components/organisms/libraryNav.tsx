@@ -9,13 +9,13 @@ import Button from '@components/molecules/button';
 import Dropdown from '@components/molecules/dropdown';
 import Mininav from '@components/molecules/mininav';
 import { SORT_MAP } from '@containers/library';
-import { makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconFilter from '../../../public/img/icons/icon-filter-light.svg';
 import IconSort from '../../../public/img/icons/icon-sort-light.svg';
 
 import styles from './libraryNav.module.scss';
+import { makeLibraryRoute } from '@lib/routes/makeLibraryRoute';
 
 type Props = {
 	currentNavHref: string | null;

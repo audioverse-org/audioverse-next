@@ -24,17 +24,15 @@ import Tease from '@components/molecules/tease';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorDetailPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeSponsorConferencesRoute,
-	makeSponsorFeedRoute,
-	makeSponsorSeriesRoute,
-	makeSponsorTeachingsRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
+import { makeSponsorFeedRoute } from '@lib/routes/makeSponsorFeedRoute';
+import { makeSponsorTeachingsRoute } from '@lib/routes/makeSponsorTeachingsRoute';
+import { makeSponsorConferencesRoute } from '@lib/routes/makeSponsorConferencesRoute';
+import { makeSponsorSeriesRoute } from '@lib/routes/makeSponsorSeriesRoute';
 
 export type SponsorDetailProps = GetSponsorDetailPageDataQuery;
 

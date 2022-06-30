@@ -6,8 +6,9 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSeriesListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeDiscoverCollectionsRoute, makeSeriesListRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSeriesListRoute } from '@lib/routes/makeSeriesListRoute';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export type SeriesListProps = PaginatedProps<
 	NonNullable<GetSeriesListPageDataQuery['serieses']['nodes']>[0],

@@ -10,7 +10,6 @@ import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
-import { makeAboutPage } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
@@ -18,6 +17,7 @@ import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './purpose.module.scss';
 import sharedStyles from './shared.module.scss';
+import { makeAboutPage } from '@lib/routes/makeAboutPage';
 
 export default function Purpose(): JSX.Element {
 	const languageRoute = useLanguageRoute();

@@ -28,13 +28,14 @@ import {
 	RecordingContentType,
 	SequenceNavFragment,
 } from '@lib/generated/graphql';
-import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
 
 import styles from './book.module.scss';
+import { makeBibleVersionRoute } from '@lib/routes/makeBibleVersionRoute';
+import { makeBibleBookRoute } from '@lib/routes/makeBibleBookRoute';
 
 export interface BookProps {
 	version: IBibleVersion;

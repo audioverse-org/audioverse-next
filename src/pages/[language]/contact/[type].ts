@@ -9,7 +9,8 @@ import Contact, { ContactProps } from '@containers/contact';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeContactRoute, makeTestimonySubmitRoute } from '@lib/routes';
+import { makeTestimonySubmitRoute } from '@lib/routes/makeTestimonySubmitRoute';
+import { makeContactRoute } from '@lib/routes/makeContactRoute';
 
 export default Contact;
 

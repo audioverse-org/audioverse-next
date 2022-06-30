@@ -14,7 +14,7 @@ import {
 	getAudiobibleVersionsData,
 	Language,
 } from '@lib/generated/graphql';
-import { makeBibleVersionRoute } from '@lib/routes';
+import { makeBibleVersionRoute } from '@lib/routes/makeBibleVersionRoute';
 
 export default Version;
 

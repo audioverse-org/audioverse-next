@@ -12,9 +12,9 @@ import {
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterSequencesRoute } from '@lib/routes';
 
 import PresenterPivot from './pivot';
+import { makePresenterSequencesRoute } from '@lib/routes/makePresenterSequencesRoute';
 
 export type PresenterSequencesProps = PaginatedProps<
 	NonNullable<

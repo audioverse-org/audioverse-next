@@ -10,7 +10,6 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import TypeLockup from '@components/molecules/typeLockup';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
-import { makeAboutPage } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import IconUser from '../../../public/img/icons/fa-user-light.svg';
@@ -19,6 +18,7 @@ import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import sharedStyles from './shared.module.scss';
 import styles from './team.module.scss';
+import { makeAboutPage } from '@lib/routes/makeAboutPage';
 
 export default function Team(): JSX.Element {
 	const languageRoute = useLanguageRoute();

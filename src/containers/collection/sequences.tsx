@@ -12,9 +12,9 @@ import {
 	GetCollectionSequencesPageDataQuery,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeCollectionSequencesRoute } from '@lib/routes';
 
 import CollectionPivot from './pivot';
+import { makeCollectionSequencesRoute } from '@lib/routes/makeCollectionSequencesRoute';
 
 export type CollectionSequencesProps = PaginatedProps<
 	NonNullable<

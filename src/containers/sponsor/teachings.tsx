@@ -10,10 +10,11 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorTeachingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
+import { makeSponsorFeedRoute } from '@lib/routes/makeSponsorFeedRoute';
+import { makeSponsorTeachingsRoute } from '@lib/routes/makeSponsorTeachingsRoute';
 
 export type SponsorTeachingsProps = PaginatedProps<
 	NonNullable<

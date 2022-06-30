@@ -17,15 +17,13 @@ import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import {
-	makeBibleMusicRoute,
-	makeBibleMusicTrackRoute,
-	makeSongAlbumsListRoute,
-} from '@lib/routes';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './detail.module.scss';
+import { makeSongAlbumsListRoute } from '@lib/routes/makeSongAlbumsListRoute';
+import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
+import { makeBibleMusicTrackRoute } from '@lib/routes/makeBibleMusicTrackRoute';
 
 export type SongBooksDetailProps = {
 	book: string;

@@ -6,7 +6,7 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { GetBlogPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeBlogPostListRoute } from '@lib/routes';
+import { makeBlogPostListRoute } from '@lib/routes/makeBlogPostListRoute';
 
 export type BlogProps = PaginatedProps<
 	NonNullable<GetBlogPageDataQuery['blogPosts']['nodes']>[0],

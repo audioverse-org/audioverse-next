@@ -8,10 +8,11 @@ import Pagination from '@components/molecules/pagination';
 import AboutNav from '@components/organisms/aboutNav';
 import { GetTestimoniesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
+import { makeTestimoniesRoute } from '@lib/routes/makeTestimoniesRoute';
+import { makeTestimonySubmitRoute } from '@lib/routes/makeTestimonySubmitRoute';
 
 export type TestimoniesProps = PaginatedProps<
 	NonNullable<GetTestimoniesPageDataQuery['testimonies']['nodes']>[0],

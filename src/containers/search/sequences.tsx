@@ -7,8 +7,9 @@ import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsSequencesQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSearchRoute, makeSearchSequencesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSearchRoute } from '@lib/routes/makeSearchRoute';
+import { makeSearchSequencesRoute } from '@lib/routes/makeSearchSequencesRoute';
 
 export type SearchSequencesProps = PaginatedProps<
 	NonNullable<GetSearchResultsSequencesQuery['sequences']['nodes']>[0],

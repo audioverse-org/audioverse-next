@@ -5,27 +5,25 @@ import { useIntl } from 'react-intl';
 
 import DownloadAppButton from '@components/molecules/downloadAppButton';
 import LanguageButton from '@components/molecules/languageButton';
-import {
-	makeAboutPage,
-	makeAccountProfileRoute,
-	makeAudiobookListRoute,
-	makeBibleListRoute,
-	makeBlogPostListRoute,
-	makeConferenceListRoute,
-	makeContactRoute,
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-	makeDonateRoute,
-	makeLibraryRoute,
-	makeLogoutRoute,
-	makePresenterListRoute,
-	makeSongAlbumsListRoute,
-	makeSponsorListRoute,
-	makeStoryAlbumListPage,
-	makeTestimoniesRoute,
-	makeTestimonySubmitRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makePresenterListRoute } from '@lib/routes/makePresenterListRoute';
+import { makeBibleListRoute } from '@lib/routes/makeBibleListRoute';
+import { makeAudiobookListRoute } from '@lib/routes/makeAudiobookListRoute';
+import { makeStoryAlbumListPage } from '@lib/routes/makeStoryAlbumListPage';
+import { makeSongAlbumsListRoute } from '@lib/routes/makeSongAlbumsListRoute';
+import { makeConferenceListRoute } from '@lib/routes/makeConferenceListRoute';
+import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
+import { makeTestimoniesRoute } from '@lib/routes/makeTestimoniesRoute';
+import { makeTestimonySubmitRoute } from '@lib/routes/makeTestimonySubmitRoute';
+import { makeBlogPostListRoute } from '@lib/routes/makeBlogPostListRoute';
+import { makeAboutPage } from '@lib/routes/makeAboutPage';
+import { makeContactRoute } from '@lib/routes/makeContactRoute';
+import { makeLogoutRoute } from '@lib/routes/makeLogoutRoute';
+import { makeAccountProfileRoute } from '@lib/routes/makeAccountProfileRoute';
+import { makeLibraryRoute } from '@lib/routes/makeLibraryRoute';
+import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export type INavigationItem = {
 	key: string;

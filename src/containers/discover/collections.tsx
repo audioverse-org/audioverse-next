@@ -10,20 +10,18 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
 import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
-import {
-	makeAudiobookListRoute,
-	makeConferenceListRoute,
-	makePresenterListRoute,
-	makeSeriesListRoute,
-	makeSongAlbumsListRoute,
-	makeSponsorListRoute,
-	makeStoryAlbumListPage,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './collections.module.scss';
+import { makePresenterListRoute } from '@lib/routes/makePresenterListRoute';
+import { makeSeriesListRoute } from '@lib/routes/makeSeriesListRoute';
+import { makeAudiobookListRoute } from '@lib/routes/makeAudiobookListRoute';
+import { makeStoryAlbumListPage } from '@lib/routes/makeStoryAlbumListPage';
+import { makeSongAlbumsListRoute } from '@lib/routes/makeSongAlbumsListRoute';
+import { makeConferenceListRoute } from '@lib/routes/makeConferenceListRoute';
+import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
 
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 

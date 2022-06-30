@@ -10,7 +10,7 @@ import { REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeDonateRoute } from '@lib/routes';
+import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
 
 export default Give;
 

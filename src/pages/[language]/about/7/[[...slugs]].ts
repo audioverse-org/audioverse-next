@@ -10,7 +10,7 @@ import { REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeAboutPage } from '@lib/routes';
+import { makeAboutPage } from '@lib/routes/makeAboutPage';
 
 export default Purpose;
 

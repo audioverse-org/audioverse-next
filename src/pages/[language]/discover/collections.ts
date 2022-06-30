@@ -13,7 +13,7 @@ import { getDiscoverCollectionsPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeDiscoverCollectionsRoute } from '@lib/routes';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export default DiscoverCollections;
 

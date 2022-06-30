@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useLogout } from '@lib/api/useLogout';
-import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 export default function Logout(): JSX.Element {
 	const router = useRouter();

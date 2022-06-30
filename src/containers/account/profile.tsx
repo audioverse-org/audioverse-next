@@ -18,10 +18,10 @@ import {
 	useGetProfileDataQuery,
 	useUpdateProfileDataMutation,
 } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './profile.module.scss';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 function Profile(): JSX.Element {
 	const languageRoute = useLanguageRoute();

@@ -14,7 +14,6 @@ import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
 import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
-import { makeDonateRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import { INavigationItem } from '@lib/useNavigationItems';
@@ -24,6 +23,8 @@ import IconDisclosure from '../../../public/img/icons/icon-disclosure-light-smal
 import IconExit from '../../../public/img/icons/icon-exit.svg';
 
 import styles from './navigation.module.scss';
+import { makeLoginRoute } from '@lib/routes/makeLoginRoute';
+import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
 
 const Navigation = ({
 	onExit,

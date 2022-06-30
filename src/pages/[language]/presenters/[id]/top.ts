@@ -14,7 +14,7 @@ import {
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makePresenterTopRecordingsRoute } from '@lib/routes';
+import { makePresenterTopRecordingsRoute } from '@lib/routes/makePresenterTopRecordingsRoute';
 
 export default PresenterTop;
 

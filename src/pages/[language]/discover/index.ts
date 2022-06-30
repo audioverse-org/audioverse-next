@@ -11,7 +11,7 @@ import { getDiscoverPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeDiscoverRoute } from '@lib/routes';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 export default Discover;
 

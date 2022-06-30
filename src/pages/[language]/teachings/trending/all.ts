@@ -12,7 +12,7 @@ import { getTrendingTeachingsPageData } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeTrendingSermonRoute } from '@lib/routes';
+import { makeTrendingSermonRoute } from '@lib/routes/makeTrendingSermonRoute';
 
 export default TrendingTeachings;
 

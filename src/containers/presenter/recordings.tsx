@@ -10,13 +10,11 @@ import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
 import { GetPresenterRecordingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makePresenterFeedRoute,
-	makePresenterRecordingsRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import PresenterPivot from './pivot';
+import { makePresenterRecordingsRoute } from '@lib/routes/makePresenterRecordingsRoute';
+import { makePresenterFeedRoute } from '@lib/routes/makePresenterFeedRoute';
 
 export type PresenterRecordingsProps = PaginatedProps<
 	NonNullable<

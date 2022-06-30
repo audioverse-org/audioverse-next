@@ -14,7 +14,7 @@ import {
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
-import { makePresenterListRoute } from '@lib/routes';
+import { makePresenterListRoute } from '@lib/routes/makePresenterListRoute';
 
 export default Presenters;
 

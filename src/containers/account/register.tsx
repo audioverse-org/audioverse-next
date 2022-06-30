@@ -5,10 +5,11 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import SocialLogin from '@components/molecules/socialLogin';
 import RegisterForm from '@components/organisms/registerForm';
 import AndOnboarding from '@components/templates/andOnboarding';
-import { makeDiscoverRoute, makeLoginRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import LoginRedirect from './loginRedirect';
+import { makeLoginRoute } from '@lib/routes/makeLoginRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 function Register(): JSX.Element {
 	const router = useRouter();

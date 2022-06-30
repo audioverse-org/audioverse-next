@@ -1,12 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-	makeDiscoverCollectionsRoute,
-	makeDiscoverRoute,
-	makeLibraryRoute,
-	makeSermonListRoute,
-} from '@lib/routes';
+import { makeSermonListRoute } from '@lib/routes/makeSermonListRoute';
+import { makeLibraryRoute } from '@lib/routes/makeLibraryRoute';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export type IAppFeature = {
 	heading: JSX.Element;

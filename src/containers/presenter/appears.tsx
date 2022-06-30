@@ -12,9 +12,9 @@ import {
 	PresenterPivotFragment,
 } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makePresenterAlsoAppearsInRoute } from '@lib/routes';
 
 import PresenterPivot from './pivot';
+import { makePresenterAlsoAppearsInRoute } from '@lib/routes/makePresenterAlsoAppearsInRoute';
 
 export type PresenterAppearsProps = PaginatedProps<
 	NonNullable<

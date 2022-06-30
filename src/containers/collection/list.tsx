@@ -6,11 +6,9 @@ import CardCollection from '@components/molecules/card/collection';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetCollectionListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import {
-	makeConferenceListRoute,
-	makeDiscoverCollectionsRoute,
-} from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeConferenceListRoute } from '@lib/routes/makeConferenceListRoute';
+import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
 
 export type CollectionListProps = PaginatedProps<
 	NonNullable<GetCollectionListPageDataQuery['conferences']['nodes']>[0],

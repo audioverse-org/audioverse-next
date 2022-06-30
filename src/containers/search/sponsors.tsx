@@ -7,8 +7,9 @@ import CardSponsor from '@components/molecules/card/sponsor';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
 import { GetSearchResultsSponsorsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSearchRoute, makeSearchSponsorsRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSearchRoute } from '@lib/routes/makeSearchRoute';
+import { makeSearchSponsorsRoute } from '@lib/routes/makeSearchSponsorsRoute';
 
 export type SearchSponsorsProps = PaginatedProps<
 	NonNullable<GetSearchResultsSponsorsQuery['sponsors']['nodes']>[0],

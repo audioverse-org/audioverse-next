@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import Alert from '@components/atoms/alert';
 import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
-import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './libraryError.module.scss';
+import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 
 type Props = {
 	title: JSX.Element | string;

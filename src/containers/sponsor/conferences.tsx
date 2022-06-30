@@ -9,9 +9,9 @@ import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
 import { GetSponsorConferencesPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorConferencesRoute } from '@lib/routes';
 
 import SponsorPivot from './pivot';
+import { makeSponsorConferencesRoute } from '@lib/routes/makeSponsorConferencesRoute';
 
 export type SponsorConferencesProps = PaginatedProps<
 	NonNullable<GetSponsorConferencesPageDataQuery['collections']['nodes']>[0],
