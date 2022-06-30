@@ -4,7 +4,8 @@ import React from 'react';
 
 function Image(props: ImageProps): JSX.Element {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { width, height, className, unoptimized, priority, ...rest } = props;
+	const { width, height, className, unoptimized, priority, loader, ...rest } =
+		props;
 	const atts = transform(rest, (result: any, val, key) => {
 		result[key.toLowerCase()] = val;
 	});
