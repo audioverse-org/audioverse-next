@@ -162,7 +162,7 @@ describe('sermon detail page', () => {
 
 		await renderPage();
 
-		expect(screen.getByText('Sorry!')).toBeInTheDocument();
+		await expect(screen.findByText('Sorry!')).resolves.toBeInTheDocument();
 	});
 
 	it('shows loading screen', async () => {
