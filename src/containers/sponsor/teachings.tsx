@@ -25,16 +25,18 @@ export type SponsorTeachingsProps = PaginatedProps<
 	GetSponsorTeachingsPageDataQuery
 >;
 
+type SponsorTeachingsPropsNarrowed = {
+	data: {
+		sponsor: NonNullable<GetSponsorTeachingsPageDataQuery['sponsor']>;
+	};
+};
+
 function SponsorTeachings({
 	nodes,
 	data: { sponsor },
 	pagination,
-}: Must<SponsorTeachingsProps>): JSX.Element {
+}: Must<SponsorTeachingsProps> & SponsorTeachingsPropsNarrowed): JSX.Element {
 	const languageRoute = useLanguageRoute();
-
-	if (!sponsor) {
-		throw new Error('Unreachable');
-	}
 
 	return (
 		<SponsorPivot {...{ sponsor }}>
@@ -60,6 +62,9 @@ function SponsorTeachings({
 	);
 }
 
-export default withFailStates(SponsorTeachings, {
+export default withFailStates<
+	SponsorTeachingsProps,
+	SponsorTeachingsPropsNarrowed
+>(SponsorTeachings, {
 	useShould404: ({ nodes, data }) => !nodes?.length || !data?.sponsor,
 });

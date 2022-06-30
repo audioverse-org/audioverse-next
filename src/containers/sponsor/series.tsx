@@ -18,15 +18,17 @@ export type SponsorSeriesProps = PaginatedProps<
 	GetSponsorSeriesPageDataQuery
 >;
 
+type SponsorSeriesPropsNarrowed = {
+	data: {
+		sponsor: NonNullable<GetSponsorSeriesPageDataQuery['sponsor']>;
+	};
+};
+
 function SponsorSeries({
 	nodes,
 	data: { sponsor },
 	pagination,
-}: Must<SponsorSeriesProps>): JSX.Element {
-	if (!sponsor) {
-		throw new Error('Unreachable');
-	}
-
+}: Must<SponsorSeriesProps> & SponsorSeriesPropsNarrowed): JSX.Element {
 	return (
 		<SponsorPivot {...{ sponsor }}>
 			<LineHeading color={BaseColors.RED}>
@@ -50,6 +52,9 @@ function SponsorSeries({
 	);
 }
 
-export default withFailStates(SponsorSeries, {
-	useShould404: ({ nodes, data }) => !nodes?.length || !data?.sponsor,
-});
+export default withFailStates<SponsorSeriesProps, SponsorSeriesPropsNarrowed>(
+	SponsorSeries,
+	{
+		useShould404: ({ nodes, data }) => !nodes?.length || !data?.sponsor,
+	}
+);

@@ -11,8 +11,8 @@ type WithFailStateOptions<P> = {
 	NotFound?: () => JSX.Element;
 };
 
-const withFailStates = <P,>(
-	Component: React.ComponentType<Must<P>>,
+const withFailStates = <P, NarrowedReturnType = unknown>(
+	Component: React.ComponentType<Must<P> & NarrowedReturnType>,
 	options: WithFailStateOptions<P> = {}
 ): ((props: P) => JSX.Element) => {
 	const {
@@ -35,7 +35,7 @@ const withFailStates = <P,>(
 			return <Loading />;
 		}
 
-		return <Component {...(props as never)} />;
+		return <Component {...(props as Must<P> & NarrowedReturnType)} />;
 	}
 
 	return WithFailStates;

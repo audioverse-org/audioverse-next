@@ -27,16 +27,19 @@ export type PresenterRecordingsProps = PaginatedProps<
 	GetPresenterRecordingsPageDataQuery
 >;
 
+type PresenterRecordingsPropsNarrowed = {
+	data: {
+		person: NonNullable<GetPresenterRecordingsPageDataQuery['person']>;
+	};
+};
+
 function PresenterRecordings({
 	nodes,
 	data: { person },
 	pagination,
-}: Must<PresenterRecordingsProps>): JSX.Element {
+}: Must<PresenterRecordingsProps> &
+	PresenterRecordingsPropsNarrowed): JSX.Element {
 	const languageRoute = useLanguageRoute();
-
-	if (!person) {
-		throw new Error('Unreachable');
-	}
 
 	return (
 		<PresenterPivot {...{ person }}>
@@ -62,6 +65,9 @@ function PresenterRecordings({
 	);
 }
 
-export default withFailStates(PresenterRecordings, {
+export default withFailStates<
+	PresenterRecordingsProps,
+	PresenterRecordingsPropsNarrowed
+>(PresenterRecordings, {
 	useShould404: ({ nodes, data }) => !nodes.length || !data?.person,
 });
