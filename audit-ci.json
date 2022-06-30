@@ -5,6 +5,9 @@
 		"GHSA-r683-j2x4-v87g", // Not used at runtime
 		"GHSA-93q8-gq69-wqmw", // Not used at runtime
 		"GHSA-23wx-cgxq-vpwx", // Not used at runtime
-		"GHSA-7gc6-qh9x-w6h8" // Not used at runtime
+		"GHSA-7gc6-qh9x-w6h8", // Not used at runtime
+		"GHSA-pfrx-2q88-qq97", // Not used at runtime
+		"GHSA-xvf7-4v9q-58w6", // Not used at runtime
+		"GHSA-pgw7-wx7w-2w33" // Not used at runtime
 	]
 }
