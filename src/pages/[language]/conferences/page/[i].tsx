@@ -7,14 +7,14 @@ import {
 import CollectionList, {
 	CollectionListProps,
 } from '@containers/collection/list';
-import {
-	getCollectionListPageData,
-	getCollectionListPathsData,
-} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import {
+	getCollectionListPageData,
+	getCollectionListPathsData,
+} from '@containers/collection/__generated__/list';
 
 export default CollectionList;
 

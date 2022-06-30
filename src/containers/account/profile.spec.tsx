@@ -12,14 +12,14 @@ import { hydrate, QueryClient } from 'react-query';
 import { fetchApi } from '@lib/api/fetchApi';
 import { login } from '@lib/api/login';
 import { storeRequest } from '@lib/api/storeRequest';
-import {
-	GetProfileDataDocument,
-	UpdateProfileDataDocument,
-} from '@lib/generated/graphql';
 import { buildServerRenderer } from '@lib/test/buildServerRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+import {
+	GetProfileDataDocument,
+	UpdateProfileDataDocument,
+} from './__generated__/profile';
 
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');

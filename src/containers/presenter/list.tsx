@@ -9,12 +9,12 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
 import { makePresenterListRoute } from '@lib/routes/makePresenterListRoute';
 import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
+import { GetPresenterListPageDataQuery } from '@containers/presenter/__generated__/list';
 
 export type PresentersProps = {
 	persons: NonNullable<GetPresenterListPageDataQuery['persons']['nodes']>;

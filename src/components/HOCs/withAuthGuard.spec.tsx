@@ -13,11 +13,9 @@ import { QueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetWithAuthGuardDataDocument,
-	RegisterSocialDocument,
-} from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
+import { GetWithAuthGuardDataDocument } from '@components/HOCs/__generated__/withAuthGuard';
+import { RegisterSocialDocument } from '@containers/account/__generated__/register';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);

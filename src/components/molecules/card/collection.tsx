@@ -11,12 +11,7 @@ import Card from '@components/molecules/card';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import {
-	CardCollectionFragment,
-	CardRecordingFragment,
-	CardSequenceFragment,
-	CollectionContentType,
-} from '@lib/generated/graphql';
+import { CollectionContentType } from '@src/__generated__/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
@@ -27,6 +22,9 @@ import CollectionTypeLockup from '../collectionTypeLockup';
 import styles from './collection.module.scss';
 import CardRecording from './recording';
 import CardSequence from './sequence';
+import { CardCollectionFragment } from '@components/molecules/card/__generated__/collection';
+import { CardSequenceFragment } from '@components/molecules/card/__generated__/sequence';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 interface CardCollectionProps {
 	collection: CardCollectionFragment;

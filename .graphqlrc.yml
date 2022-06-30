@@ -10,16 +10,34 @@ generates:
             - '# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)'
             - '# ------------------------------------------------------ '
       - schema-ast
-  src/lib/generated/graphql.ts:
+  src/__generated__/graphql.ts:
     plugins:
       - 'typescript'
+    config:
+      enumsAsConst: true
+      avoidOptionals: true
+      defaultScalarType: unknown
+      scalars:
+        ID: 'string | number'
+        Date: 'string'
+        DateTime: 'string'
+        RelativeDateTime: 'string'
+        URL: 'string'
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: __generated__/graphql.ts
+      extension: .ts
+      folder: __generated__
+    plugins:
       - 'typescript-operations'
-      - 'graphql-plugin-react-query.js'
+      - 'typescript-react-query'
       - 'graphql-plugin-getters.js'
     config:
       fetcher: '@lib/api/graphqlFetcher#graphqlFetcher'
+      dedupeFragments: true
       avoidOptionals: true
-      enumsAsConst: true
+      defaultScalarType: unknown
       scalars:
         ID: 'string | number'
         Date: 'string'

@@ -1,6 +1,6 @@
 import withFailStates from '@components/HOCs/withFailStates';
 import { Sequence } from '@components/organisms/sequence';
-import { GetSeriesDetailPageDataQuery } from '@lib/generated/graphql';
+import { GetSeriesDetailPageDataQuery } from '@containers/series/__generated__/detail';
 
 export interface SeriesDetailProps {
 	sequence: GetSeriesDetailPageDataQuery['series'];

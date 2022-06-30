@@ -1,4 +1,4 @@
-import { Scalars } from '@lib/generated/graphql';
+import { Scalars } from '@src/__generated__/graphql';
 
 export const makeCollectionSequencesRoute = (
 	languageRoute: string,

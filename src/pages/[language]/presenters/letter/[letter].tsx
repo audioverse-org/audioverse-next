@@ -7,14 +7,14 @@ import {
 import { IBaseProps } from '@containers/base';
 import Presenters, { PresentersProps } from '@containers/presenter/list';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import {
-	getPresenterListPageData,
-	getPresenterListPathsData,
-} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
 import { makePresenterListRoute } from '@lib/routes/makePresenterListRoute';
+import {
+	getPresenterListPageData,
+	getPresenterListPathsData,
+} from '@containers/presenter/__generated__/list';
 
 export default Presenters;
 

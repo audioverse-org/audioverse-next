@@ -5,11 +5,11 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardSponsor from '@components/molecules/card/sponsor';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSearchResultsSponsorsQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeSearchRoute } from '@lib/routes/makeSearchRoute';
 import { makeSearchSponsorsRoute } from '@lib/routes/makeSearchSponsorsRoute';
+import { GetSearchResultsSponsorsQuery } from '@containers/search/__generated__/sponsors';
 
 export type SearchSponsorsProps = PaginatedProps<
 	NonNullable<GetSearchResultsSponsorsQuery['sponsors']['nodes']>[0],

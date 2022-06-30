@@ -2,17 +2,17 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSongAlbumsDetailPageDataDocument,
-	GetSongAlbumsDetailPathsDataDocument,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
 import { screen } from '@testing-library/react';
+import {
+	GetSongAlbumsDetailPageDataDocument,
+	GetSongAlbumsDetailPathsDataDocument,
+} from '@containers/song/albums/__generated__/detail';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 

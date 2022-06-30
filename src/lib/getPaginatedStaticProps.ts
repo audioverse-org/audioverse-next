@@ -2,7 +2,7 @@ import find from 'lodash/find';
 
 import { IBaseProps } from '@containers/base';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getPaginatedData, PaginatedGetter } from '@lib/getPaginatedData';
 import getPaginationPageCount from '@lib/getPaginationPageCount';

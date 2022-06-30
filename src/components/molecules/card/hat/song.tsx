@@ -2,12 +2,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading2 from '@components/atoms/heading2';
-import { CardRecordingFragment } from '@lib/generated/graphql';
 
 import HatIcon from '../../../../../public/img/icons/fa-music-light.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 
 import CardHat from '.';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 interface Props {
 	sequence: NonNullable<CardRecordingFragment['sequence']>;

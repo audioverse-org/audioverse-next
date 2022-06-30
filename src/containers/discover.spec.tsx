@@ -2,14 +2,16 @@ import { screen, waitFor } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 
 import {
-	GetDiscoverPageDataDocument,
-	GetDiscoverPageDataQuery,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '@pages/[language]/discover';
+import {
+	GetDiscoverPageDataDocument,
+	GetDiscoverPageDataQuery,
+} from '@containers/__generated__/discover';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 const loadData = buildLoader<GetDiscoverPageDataQuery>(

@@ -7,11 +7,11 @@ import Heading2 from '@components/atoms/heading2';
 import Button from '@components/molecules/button';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetNotFoundPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './notFound.module.scss';
 import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import { GetNotFoundPageDataQuery } from '@components/organisms/__generated__/notFound';
 
 export type NotFoundProps = Partial<GetNotFoundPageDataQuery>;
 

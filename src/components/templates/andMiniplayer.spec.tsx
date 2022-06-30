@@ -5,7 +5,7 @@ import AndPlaybackContext, {
 	PlaybackContext,
 	PlaybackContextType,
 } from '@components/templates/andPlaybackContext';
-import { SequenceContentType } from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import { screen, waitFor } from '@testing-library/react';

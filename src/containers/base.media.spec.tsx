@@ -8,12 +8,12 @@ import videojs from 'video.js';
 import { Recording } from '@components/organisms/recording';
 import {
 	RecordingContentType,
-	RecordingFragment,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
 import { __waitForIntlMessages } from '@lib/useIntlMessages';
+import { RecordingFragment } from '@components/organisms/__generated__/recording';
 
 jest.mock('@lib/useIntlMessages');
 jest.mock('@components/molecules/loadingIndicator');

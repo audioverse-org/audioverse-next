@@ -6,9 +6,9 @@ import React from 'react';
 
 import Login from '@components/molecules/login';
 import { fetchApi } from '@lib/api/fetchApi';
-import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import { LoginForgotPasswordDocument } from '@components/molecules/__generated__/login';
 
 function loadForgotPasswordResponse({
 	success = true,

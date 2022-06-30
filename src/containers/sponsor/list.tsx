@@ -9,12 +9,12 @@ import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
 import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
 import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
+import { GetSponsorListPageDataQuery } from '@containers/sponsor/__generated__/list';
 
 export type SponsorsProps = {
 	sponsors: NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>;

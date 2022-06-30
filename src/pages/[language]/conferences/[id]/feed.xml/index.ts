@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getCollectionFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getCollectionFeedData } from '@containers/collection/__generated__/detail';
 
 export default function Feed(): void {
 	return void 0;

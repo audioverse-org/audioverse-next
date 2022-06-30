@@ -16,12 +16,12 @@ import Tease from '@components/molecules/tease';
 import TypeLockup from '@components/molecules/typeLockup';
 import { BaseColors } from '@lib/constants';
 import { formatLongDateTime } from '@lib/date';
-import { GetLibraryPlaylistPageDataQuery } from '@lib/generated/graphql';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
 
 import styles from './detail.module.scss';
+import { GetLibraryPlaylistPageDataQuery } from '@containers/library/playlist/__generated__/detail';
 
 export type ILibraryPlaylistDetailProps = {
 	playlist: NonNullable<

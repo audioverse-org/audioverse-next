@@ -7,14 +7,12 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterSequencesPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 
 import PresenterPivot from './pivot';
 import { makePresenterSequencesRoute } from '@lib/routes/makePresenterSequencesRoute';
+import { GetPresenterSequencesPageDataQuery } from '@containers/presenter/__generated__/sequences';
+import { PresenterPivotFragment } from '@containers/presenter/__generated__/pivot';
 
 export type PresenterSequencesProps = PaginatedProps<
 	NonNullable<

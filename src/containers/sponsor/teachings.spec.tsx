@@ -2,11 +2,7 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorTeachingsPageDataDocument,
-	GetSponsorTeachingsPathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import { RecordingContentType } from '@src/__generated__/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SponsorTeachings, {
@@ -14,6 +10,10 @@ import SponsorTeachings, {
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
 import { screen } from '@testing-library/react';
+import {
+	GetSponsorTeachingsPageDataDocument,
+	GetSponsorTeachingsPathsDataDocument,
+} from '@containers/sponsor/__generated__/teachings';
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps);
 

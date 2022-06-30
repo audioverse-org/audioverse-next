@@ -4,18 +4,18 @@ import React from 'react';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import {
-	GetAudiobookListPageDataDocument,
-	GetAudiobookListPageDataQuery,
-	GetAudiobookListPathsDataDocument,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/books/page/[i]';
 import { screen } from '@testing-library/react';
+import {
+	GetAudiobookListPageDataDocument,
+	GetAudiobookListPageDataQuery,
+	GetAudiobookListPathsDataDocument,
+} from '@containers/audiobook/__generated__/list';
 
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}

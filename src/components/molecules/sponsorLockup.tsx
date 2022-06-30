@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { SponsorLockupFragment } from '@lib/generated/graphql';
-
 import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
+import { SponsorLockupFragment } from '@components/molecules/__generated__/sponsorLockup';
 
 type Props = {
 	sponsor: SponsorLockupFragment;

@@ -1,6 +1,6 @@
 import withFailStates from '@components/HOCs/withFailStates';
 import { Sequence } from '@components/organisms/sequence';
-import { GetSongAlbumsDetailPageDataQuery } from '@lib/generated/graphql';
+import { GetSongAlbumsDetailPageDataQuery } from '@containers/song/albums/__generated__/detail';
 
 export interface SongAlbumDetailProps {
 	sequence: GetSongAlbumsDetailPageDataQuery['musicAlbum'];

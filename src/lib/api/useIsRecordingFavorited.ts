@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 
 import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
-import { Scalars } from '@lib/generated/graphql';
+import { Scalars } from '@src/__generated__/graphql';
 
 import { recordingIsFavorited } from './recordingIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';

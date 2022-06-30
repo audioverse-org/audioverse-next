@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getPresenterRecordingsFeedData } from '@lib/generated/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getPresenterRecordingsFeedData } from '@containers/presenter/__generated__/recordings';
 
 export default (): void => void 0;
 

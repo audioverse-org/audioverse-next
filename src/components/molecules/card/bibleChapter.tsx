@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
-
 import TeaseRecording from '../teaseRecording';
 
 import CardWithTheme from './base/withTheme';
 import CardHatBibleBook from './hat/bibleBook';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 interface CardBibleChapterProps {
 	recording: CardRecordingFragment;

@@ -2,12 +2,10 @@ import clsx from 'clsx';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-	CopyrightInfoFragment,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import { RecordingContentType } from '@src/__generated__/graphql';
 
 import styles from './copyrightInfo.module.scss';
+import { CopyrightInfoFragment } from '@components/molecules/__generated__/copyrightInfo';
 
 interface CopyrightInfoProps {
 	recording: CopyrightInfoFragment;

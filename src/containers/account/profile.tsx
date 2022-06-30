@@ -13,15 +13,15 @@ import AccountNav from '@components/organisms/accountNav';
 import Modal from '@components/organisms/modal';
 import { refetchUserQueries, resetUserQueries } from '@lib/api/login';
 import { clearSessionToken } from '@lib/cookies';
-import {
-	useDeleteAccountMutation,
-	useGetProfileDataQuery,
-	useUpdateProfileDataMutation,
-} from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './profile.module.scss';
 import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import {
+	useDeleteAccountMutation,
+	useGetProfileDataQuery,
+	useUpdateProfileDataMutation,
+} from '@containers/account/__generated__/profile';
 
 function Profile(): JSX.Element {
 	const languageRoute = useLanguageRoute();

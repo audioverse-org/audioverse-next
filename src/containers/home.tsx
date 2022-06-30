@@ -18,7 +18,6 @@ import Slider from '@components/organisms/slider';
 import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
-import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -33,9 +32,10 @@ import { makeBlogPostListRoute } from '@lib/routes/makeBlogPostListRoute';
 import { makeRegisterRoute } from '@lib/routes/makeRegisterRoute';
 import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
 import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import { GetHomeStaticPropsQuery } from './__generated__/home';
 
 export type HomeProps = {
-	data: GetHomeStaticPropsQuery | undefined;
+	data?: GetHomeStaticPropsQuery;
 };
 
 export default function Home({ data }: HomeProps): JSX.Element {

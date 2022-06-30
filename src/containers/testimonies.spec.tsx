@@ -3,17 +3,17 @@ import React from 'react';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
-import {
-	GetTestimoniesPageDataDocument,
-	GetTestimoniesPathsDataDocument,
-	Testimony,
-} from '@lib/generated/graphql';
+import { Testimony } from '@src/__generated__/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
 import { screen } from '@testing-library/react';
+import {
+	GetTestimoniesPageDataDocument,
+	GetTestimoniesPathsDataDocument,
+} from '@containers/__generated__/testimonies';
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 	when(fetchApi)

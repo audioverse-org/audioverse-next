@@ -9,7 +9,6 @@ import CardPerson from '@components/molecules/card/person';
 import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetDiscoverCollectionsPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -22,6 +21,7 @@ import { makeStoryAlbumListPage } from '@lib/routes/makeStoryAlbumListPage';
 import { makeSongAlbumsListRoute } from '@lib/routes/makeSongAlbumsListRoute';
 import { makeConferenceListRoute } from '@lib/routes/makeConferenceListRoute';
 import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
+import { GetDiscoverCollectionsPageDataQuery } from '@containers/discover/__generated__/collections';
 
 export type IDiscoverCollectionsProps = GetDiscoverCollectionsPageDataQuery;
 

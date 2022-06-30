@@ -15,11 +15,13 @@ import {
 	Language,
 	RecordingQuality,
 	Timezone,
-	useGetAccountPreferencesDataQuery,
-	useUpdateAccountPreferencesMutation,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 
 import styles from './preferences.module.scss';
+import {
+	useGetAccountPreferencesDataQuery,
+	useUpdateAccountPreferencesMutation,
+} from '@containers/account/__generated__/preferences';
 
 function Profile(): JSX.Element {
 	const queryClient = useQueryClient();

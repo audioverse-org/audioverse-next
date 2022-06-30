@@ -8,7 +8,6 @@ import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardGroup from '@components/molecules/cardGroup';
-import { GetDiscoverPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../public/img/icons/icon-forward-light.svg';
@@ -19,6 +18,7 @@ import { makeTrendingSermonRoute } from '@lib/routes/makeTrendingSermonRoute';
 import { makeStoryAlbumListPage } from '@lib/routes/makeStoryAlbumListPage';
 import { makeConferenceListRoute } from '@lib/routes/makeConferenceListRoute';
 import { makeBlogPostListRoute } from '@lib/routes/makeBlogPostListRoute';
+import { GetDiscoverPageDataQuery } from '@containers/__generated__/discover';
 
 export type DiscoverProps = GetDiscoverPageDataQuery;
 

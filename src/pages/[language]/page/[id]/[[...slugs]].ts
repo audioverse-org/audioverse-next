@@ -7,12 +7,12 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 import { IBaseProps } from '@containers/base';
+import { PageType } from '@src/__generated__/graphql';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import {
 	getCustomDetailPageData,
 	getCustomDetailPageStaticPaths,
-	PageType,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+} from '@containers/page/__generated__/detail';
 
 export default CustomPageDetail;
 

@@ -3,16 +3,14 @@ import React, { PropsWithChildren } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import {
-	CardRecordingSequenceHatFragment,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import IconLike from '../../../../public/img/icons/icon-like-light.svg';
 import Button from '../button';
 
 import styles from './recordingSequenceHat.module.scss';
+import { CardRecordingSequenceHatFragment } from '@components/molecules/card/__generated__/recordingSequenceHat';
 
 interface Props {
 	sequence: NonNullable<CardRecordingSequenceHatFragment['sequence']>;

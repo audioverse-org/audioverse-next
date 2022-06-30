@@ -9,12 +9,12 @@ import StoryAlbumDetail, {
 	StoryAlbumDetailProps,
 } from '@containers/story/albums/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getStoryAlbumDetailPageData,
 	getStoryAlbumDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/story/albums/__generated__/detail';
 
 export default StoryAlbumDetail;
 

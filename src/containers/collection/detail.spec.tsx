@@ -2,18 +2,17 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetCollectionDetailPageDataDocument,
-	GetCollectionDetailPathsDataDocument,
-	Language,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { Language, SequenceContentType } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
 import { screen } from '@testing-library/react';
+import {
+	GetCollectionDetailPageDataDocument,
+	GetCollectionDetailPathsDataDocument,
+} from '@containers/collection/__generated__/detail';
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { SequenceNavFragment } from '@lib/generated/graphql';
-
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import Button from './button';
 import styles from './sequenceNav.module.scss';
+import { SequenceNavFragment } from '@components/molecules/__generated__/sequenceNav';
 
 export default function SequenceNav({
 	recording: { sequencePreviousRecording, sequenceNextRecording },

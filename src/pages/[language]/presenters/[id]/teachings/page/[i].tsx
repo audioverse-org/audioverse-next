@@ -7,13 +7,11 @@ import {
 import PresenterRecordings, {
 	PresenterRecordingsProps,
 } from '@containers/presenter/recordings';
-import {
-	getPresenterDetailPathsData,
-	getPresenterRecordingsPageData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getPresenterDetailPathsData } from '@containers/presenter/__generated__/detail';
+import { getPresenterRecordingsPageData } from '@containers/presenter/__generated__/recordings';
 
 export default PresenterRecordings;
 

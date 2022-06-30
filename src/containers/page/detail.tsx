@@ -1,8 +1,8 @@
 import React from 'react';
-import { GetCustomDetailPageDataQuery } from '@lib/generated/graphql';
 import withFailStates from '@components/HOCs/withFailStates';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Heading1 from '@components/atoms/heading1';
+import { GetCustomDetailPageDataQuery } from '@containers/page/__generated__/detail';
 
 export type CustomPageDetailProps = GetCustomDetailPageDataQuery;
 

@@ -3,12 +3,12 @@ import { __loadRouter, __mockedRouter } from 'next/router';
 import Script from 'next/script';
 
 import HelpWidget from '@components/molecules/helpWidget';
-import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 import { buildLoader } from '@lib/test/buildLoader';
 import userEvent from '@testing-library/user-event';
 import { __waitForIntlMessages } from '@lib/useIntlMessages';
+import { GetHelpWidgetDataDocument } from '@components/molecules/__generated__/helpWidget';
 
 jest.mock('next/script');
 

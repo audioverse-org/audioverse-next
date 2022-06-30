@@ -10,12 +10,10 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
 import { fetchApi } from '@lib/api/fetchApi';
 import {
-	GetSermonDetailDataDocument,
-	GetSermonDetailStaticPathsDocument,
 	Language,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock from '@lib/test/setPlayerMock';
@@ -24,6 +22,10 @@ import SermonDetail, {
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
 import { simulateMediaTick } from '@lib/test/simulateMediaTick';
+import {
+	GetSermonDetailDataDocument,
+	GetSermonDetailStaticPathsDocument,
+} from './__generated__/detail';
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');

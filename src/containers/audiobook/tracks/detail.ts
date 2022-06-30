@@ -1,6 +1,6 @@
 import withFailStates from '@components/HOCs/withFailStates';
 import { Recording } from '@components/organisms/recording';
-import { GetAudiobookTrackDetailDataQuery } from '@lib/generated/graphql';
+import { GetAudiobookTrackDetailDataQuery } from '@containers/audiobook/tracks/__generated__/detail';
 
 export interface AudiobookTrackDetailProps {
 	recording: GetAudiobookTrackDetailDataQuery['audiobookTrack'];

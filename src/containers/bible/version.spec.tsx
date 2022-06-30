@@ -1,7 +1,6 @@
 import React from 'react';
 
 import * as bibleBrain from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Version, {
@@ -9,6 +8,7 @@ import Version, {
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[[...slugs]]';
 import { screen } from '@testing-library/react';
+import { GetAudiobibleVersionsDataDocument } from '@containers/bible/__generated__/versions';
 
 jest.mock('@lib/api/bibleBrain');
 

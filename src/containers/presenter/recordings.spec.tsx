@@ -2,17 +2,15 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetPresenterDetailPathsDataDocument,
-	GetPresenterRecordingsPageDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import { RecordingContentType } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/teachings/page/[i]';
 import { screen } from '@testing-library/react';
+import { GetPresenterRecordingsPageDataDocument } from '@containers/presenter/__generated__/recordings';
+import { GetPresenterDetailPathsDataDocument } from '@containers/presenter/__generated__/detail';
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps);
 

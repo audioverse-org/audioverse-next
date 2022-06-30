@@ -9,7 +9,7 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { BaseColors } from '@lib/constants';
-import { SequenceContentType } from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 

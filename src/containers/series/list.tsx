@@ -4,11 +4,11 @@ import { FormattedMessage } from 'react-intl';
 import withFailStates from '@components/HOCs/withFailStates';
 import CardSequence from '@components/molecules/card/sequence';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSeriesListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeSeriesListRoute } from '@lib/routes/makeSeriesListRoute';
 import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
+import { GetSeriesListPageDataQuery } from '@containers/series/__generated__/list';
 
 export type SeriesListProps = PaginatedProps<
 	NonNullable<GetSeriesListPageDataQuery['serieses']['nodes']>[0],

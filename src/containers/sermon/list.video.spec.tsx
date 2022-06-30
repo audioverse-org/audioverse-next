@@ -1,11 +1,7 @@
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSermonListPageDataDocument,
-	GetSermonListPagePathsDataDocument,
-	RecordingContentType,
-} from '@lib/generated/graphql';
+import { RecordingContentType } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
@@ -13,6 +9,10 @@ import SermonList, {
 } from '@pages/[language]/teachings/video/page/[i]';
 import { buildLoader } from '@lib/test/buildLoader';
 import { screen } from '@testing-library/react';
+import {
+	GetSermonListPageDataDocument,
+	GetSermonListPagePathsDataDocument,
+} from '@containers/sermon/__generated__/list';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 

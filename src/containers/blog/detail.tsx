@@ -9,10 +9,10 @@ import CardColumn from '@components/molecules/card/column';
 import CardPost from '@components/molecules/card/post';
 import { BaseColors } from '@lib/constants';
 import { formatLongDate } from '@lib/date';
-import { GetBlogDetailDataQuery } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 
 import styles from './detail.module.scss';
+import { GetBlogDetailDataQuery } from '@containers/blog/__generated__/detail';
 
 export type BlogPost = NonNullable<GetBlogDetailDataQuery['blogPost']>;
 

@@ -6,14 +6,12 @@ import { useQueryClient } from 'react-query';
 
 import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
 import { setSessionToken } from '@lib/cookies';
-import {
-	useRegisterSocialMutation,
-	UserSocialServiceName,
-} from '@lib/generated/graphql';
+import { UserSocialServiceName } from '@src/__generated__/graphql';
 import useDidUnmount from '@lib/useDidUnmount';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';
+import { useRegisterSocialMutation } from '@containers/account/__generated__/register';
 
 export default function SocialLogin({
 	isRegister,

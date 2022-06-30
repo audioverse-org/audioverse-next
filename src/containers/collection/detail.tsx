@@ -25,7 +25,6 @@ import Tease from '@components/molecules/tease';
 import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
-import { GetCollectionDetailPageDataQuery } from '@lib/generated/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -36,6 +35,7 @@ import { makeCollectionFeedRoute } from '@lib/routes/makeCollectionFeedRoute';
 import { makeCollectionSequencesRoute } from '@lib/routes/makeCollectionSequencesRoute';
 import { makeCollectionPresentersRoute } from '@lib/routes/makeCollectionPresentersRoute';
 import { makeCollectionTeachingsRoute } from '@lib/routes/makeCollectionTeachingsRoute';
+import { GetCollectionDetailPageDataQuery } from '@containers/collection/__generated__/detail';
 
 export type CollectionDetailProps = GetCollectionDetailPageDataQuery;
 

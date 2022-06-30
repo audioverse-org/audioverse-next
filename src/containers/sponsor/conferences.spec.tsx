@@ -2,10 +2,6 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorConferencesPageDataDocument,
-	GetSponsorConferencesPathsDataDocument,
-} from '@lib/generated/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SponsorConferences, {
@@ -13,6 +9,10 @@ import SponsorConferences, {
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
 import { screen } from '@testing-library/react';
+import {
+	GetSponsorConferencesPageDataDocument,
+	GetSponsorConferencesPathsDataDocument,
+} from '@containers/sponsor/__generated__/conferences';
 
 const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps);
 

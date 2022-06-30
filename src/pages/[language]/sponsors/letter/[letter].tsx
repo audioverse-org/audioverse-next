@@ -7,14 +7,14 @@ import {
 import { IBaseProps } from '@containers/base';
 import Sponsors, { SponsorsProps } from '@containers/sponsor/list';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
-import {
-	getSponsorListPageData,
-	getSponsorListPathsData,
-} from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import getLanguageIds from '@lib/getLanguageIds';
 import { makeSponsorListRoute } from '@lib/routes/makeSponsorListRoute';
+import {
+	getSponsorListPageData,
+	getSponsorListPathsData,
+} from '@containers/sponsor/__generated__/list';
 
 export default Sponsors;
 

@@ -13,7 +13,6 @@ import NavItem from '@components/molecules/navItem';
 import SearchBar from '@components/molecules/searchBar';
 import Header from '@components/organisms/header';
 import { getSessionToken, setSessionToken } from '@lib/cookies';
-import { useGetWithAuthGuardDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { useNavigationItems } from '@lib/useNavigationItems';
 import { INavigationItem } from '@lib/useNavigationItems';
@@ -25,6 +24,7 @@ import IconExit from '../../../public/img/icons/icon-exit.svg';
 import styles from './navigation.module.scss';
 import { makeLoginRoute } from '@lib/routes/makeLoginRoute';
 import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
+import { useGetWithAuthGuardDataQuery } from '@components/HOCs/__generated__/withAuthGuard';
 
 const Navigation = ({
 	onExit,
@@ -94,7 +94,9 @@ const Navigation = ({
 							<LanguageButton
 								buttonType="secondary"
 								onClick={(baseUrl) => {
-									router.push(`/${baseUrl}/`);
+									router.push(`/${baseUrl}/`).then(() => {
+										// noop
+									});
 								}}
 								className={styles.languageButton}
 							/>

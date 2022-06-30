@@ -7,8 +7,7 @@ import {
 	LANGUAGES,
 	SupportedLanguages,
 } from '@lib/constants';
-
-import { Language } from './generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 
 type Getter<DATA> = (variables: {
 	language: SupportedLanguages;

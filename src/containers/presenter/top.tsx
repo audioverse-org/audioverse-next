@@ -6,12 +6,10 @@ import withFailStates from '@components/HOCs/withFailStates';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import { BaseColors } from '@lib/constants';
-import {
-	GetPresenterTopPageDataQuery,
-	PresenterPivotFragment,
-} from '@lib/generated/graphql';
 
 import PresenterPivot from './pivot';
+import { GetPresenterTopPageDataQuery } from '@containers/presenter/__generated__/top';
+import { PresenterPivotFragment } from '@containers/presenter/__generated__/pivot';
 
 export type PresenterTopProps = GetPresenterTopPageDataQuery;
 

@@ -6,9 +6,9 @@ import ButtonBack from '@components/molecules/buttonBack';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
-import { PresenterPivotFragment } from '@lib/generated/graphql';
 
 import styles from './pivot.module.scss';
+import { PresenterPivotFragment } from '@containers/presenter/__generated__/pivot';
 
 type Props = {
 	person: PresenterPivotFragment;

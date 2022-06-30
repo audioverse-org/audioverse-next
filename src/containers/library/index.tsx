@@ -11,16 +11,18 @@ import LibraryNav from '@components/organisms/libraryNav';
 import {
 	FavoritableCatalogEntityType,
 	FavoritesSortableField,
-	GetLibraryDataQueryVariables,
 	Language,
 	OrderByDirection,
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
-	useGetLibraryDataQuery,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';
+import {
+	GetLibraryDataQueryVariables,
+	useGetLibraryDataQuery,
+} from '@containers/library/__generated__';
 
 export const SORT_MAP = {
 	new: [FavoritesSortableField.FavoritedAt, OrderByDirection.Desc],

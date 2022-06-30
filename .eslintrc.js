@@ -90,6 +90,13 @@ module.exports = {
 	},
 	overrides: [
 		{
+			files: ['**/__generated__/**'],
+			rules: {
+				'@typescript-eslint/no-unused-vars': 'off',
+				'sort-imports': 'off',
+			},
+		},
+		{
 			files: [
 				'*.spec.ts',
 				'*.spec.tsx',

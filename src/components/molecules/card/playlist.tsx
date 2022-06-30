@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import { BaseColors } from '@lib/constants';
-import { CardPlaylistFragment } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
@@ -17,6 +16,7 @@ import TypeLockup from '../typeLockup';
 import CardWithTheme from './base/withTheme';
 import styles from './playlist.module.scss';
 import { makePlaylistDetailRoute } from '@lib/routes/makePlaylistDetailRoute';
+import { CardPlaylistFragment } from '@components/molecules/card/__generated__/playlist';
 
 interface Props {
 	playlist: CardPlaylistFragment;

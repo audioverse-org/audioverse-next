@@ -2,16 +2,16 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetSponsorListPageDataDocument,
-	GetSponsorListPathsDataDocument,
-} from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/letter/[letter]';
 import { screen } from '@testing-library/react';
+import {
+	GetSponsorListPageDataDocument,
+	GetSponsorListPathsDataDocument,
+} from '@containers/sponsor/__generated__/list';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 

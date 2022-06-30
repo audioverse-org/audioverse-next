@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { CardFavoriteEntityFragment } from '@lib/generated/graphql';
 import { UnreachableCaseError } from '@lib/typeHelpers';
 
 import CardCollection from './collection';
@@ -9,6 +8,7 @@ import CardRecording from './recording';
 import CardRecordingStack from './recordingStack';
 import CardSequence from './sequence';
 import CardSponsor from './sponsor';
+import { CardFavoriteEntityFragment } from '@components/molecules/card/__generated__/favoriteEntity';
 
 interface CardEntityProps {
 	entity: CardFavoriteEntityFragment;

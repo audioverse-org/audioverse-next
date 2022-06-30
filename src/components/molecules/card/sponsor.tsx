@@ -9,13 +9,13 @@ import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
 import { useIsSponsorFavorited } from '@lib/api/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
-import { CardSponsorFragment } from '@lib/generated/graphql';
 
 import UserPlusIcon from '../../../../public/img/icons/fa-user-plus.svg';
 import ButtonFavorite from '../buttonFavorite';
 import TypeLockup from '../typeLockup';
 
 import styles from './sponsor.module.scss';
+import { CardSponsorFragment } from '@components/molecules/card/__generated__/sponsor';
 
 interface CardSponsorProps {
 	sponsor: CardSponsorFragment;

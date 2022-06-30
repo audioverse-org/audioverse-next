@@ -6,12 +6,12 @@ import CardRecording from '@components/molecules/card/recording';
 import RecordingHasVideoFilter from '@components/molecules/recordingHasVideoFilter';
 import RssAlternate from '@components/molecules/rssAlternate';
 import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSermonListPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeSermonListRoute } from '@lib/routes/makeSermonListRoute';
 import { makeSermonsFeedRoute } from '@lib/routes/makeSermonsFeedRoute';
 import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
+import { GetSermonListPageDataQuery } from '@containers/sermon/__generated__/list';
 
 export type SermonListProps = PaginatedProps<
 	NonNullable<GetSermonListPageDataQuery['sermons']['nodes']>[0],

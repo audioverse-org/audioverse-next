@@ -9,12 +9,12 @@ import CardSongBook from '@components/molecules/card/songBook';
 import CardGroup from '@components/molecules/cardGroup';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Mininav from '@components/molecules/mininav';
-import { GetSongAlbumsListPageDataQuery } from '@lib/generated/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import styles from './list.module.scss';
 import { makeBibleMusicTrackRoute } from '@lib/routes/makeBibleMusicTrackRoute';
 import { makeDiscoverCollectionsRoute } from '@lib/routes/makeDiscoverCollectionsRoute';
+import { GetSongAlbumsListPageDataQuery } from '@containers/song/albums/__generated__/list';
 
 export type SongAlbumsListProps = GetSongAlbumsListPageDataQuery;
 

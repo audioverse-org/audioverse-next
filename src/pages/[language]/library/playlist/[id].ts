@@ -4,7 +4,7 @@ import LibraryPlaylistDetail, {
 	ILibraryPlaylistDetailProps,
 } from '@containers/library/playlist/detail';
 import { storeRequest } from '@lib/api/storeRequest';
-import { getLibraryPlaylistPageData } from '@lib/generated/graphql';
+import { getLibraryPlaylistPageData } from '@containers/library/playlist/__generated__/detail';
 
 export default LibraryPlaylistDetail;
 

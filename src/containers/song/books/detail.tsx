@@ -13,10 +13,7 @@ import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { BaseColors } from '@lib/constants';
-import {
-	GetSongBooksDetailPageDataQuery,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -24,6 +21,7 @@ import styles from './detail.module.scss';
 import { makeSongAlbumsListRoute } from '@lib/routes/makeSongAlbumsListRoute';
 import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
 import { makeBibleMusicTrackRoute } from '@lib/routes/makeBibleMusicTrackRoute';
+import { GetSongBooksDetailPageDataQuery } from '@containers/song/books/__generated__/detail';
 
 export type SongBooksDetailProps = {
 	book: string;

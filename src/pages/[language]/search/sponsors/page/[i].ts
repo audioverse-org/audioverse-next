@@ -4,8 +4,8 @@ import SearchSponsors, {
 	SearchSponsorsProps,
 } from '@containers/search/sponsors';
 import { storeRequest } from '@lib/api/storeRequest';
-import { getSearchResultsSponsors } from '@lib/generated/graphql';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getSearchResultsSponsors } from '@containers/search/__generated__/sponsors';
 
 export default SearchSponsors;
 

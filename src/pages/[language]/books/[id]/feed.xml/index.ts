@@ -1,47 +1,12 @@
-import uniq from 'lodash/uniq';
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import {
-	BookFeedDescriptionFragment,
-	getAudiobookFeedData,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import getIntl from '@lib/getIntl';
 import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getAudiobookFeedData } from '@containers/audiobook/__generated__/detail';
+import { formatBooksDescription } from '@lib/formatBooksDescription';
 
 export default (): void => void 0;
-
-export const formatBooksDescription = async (
-	languageRoute: string,
-	sequence: BookFeedDescriptionFragment
-): Promise<string> => {
-	const intl = await getIntl(languageRoute);
-	const getPersonNameString = (persons: { name: string }[]) => {
-		return uniq(persons.map(({ name }) => name)).join(', ');
-	};
-	return intl.formatMessage(
-		{
-			id: 'storyAlbumsFeed__description',
-			defaultMessage: '{title}, by {authors}, narrated by {narrators}',
-		},
-		{
-			title: sequence.title,
-			authors: getPersonNameString(
-				(sequence.recordings.nodes || []).reduce(
-					(carry, { authors }) => [...carry, ...authors],
-					[] as { name: string }[]
-				)
-			),
-			narrators: getPersonNameString(
-				(sequence.recordings.nodes || []).reduce(
-					(carry, { narrators }) => [...carry, ...narrators],
-					[] as { name: string }[]
-				)
-			),
-		}
-	);
-};
 
 export async function getServerSideProps({
 	params,

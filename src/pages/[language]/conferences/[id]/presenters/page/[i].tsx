@@ -7,13 +7,11 @@ import {
 import CollectionPresenters, {
 	CollectionPresentersProps,
 } from '@containers/collection/presenters';
-import {
-	getCollectionDetailPathsData,
-	getCollectionPresentersPageData,
-} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 import getIntl from '@lib/getIntl';
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getCollectionPresentersPageData } from '@containers/collection/__generated__/presenters';
+import { getCollectionDetailPathsData } from '@containers/collection/__generated__/detail';
 
 export default CollectionPresenters;
 

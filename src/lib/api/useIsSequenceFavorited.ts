@@ -2,14 +2,14 @@ import { useQueryClient } from 'react-query';
 
 import { setSequenceFavorited } from '@lib/api/setSequenceFavorited';
 import { getSessionToken } from '@lib/cookies';
-import {
-	Scalars,
-	SequenceIsFavoritedQuery,
-	useSequenceIsFavoritedQuery,
-} from '@lib/generated/graphql';
+import { Scalars } from '@src/__generated__/graphql';
 
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 import { RECORDING_FAVORITED_QUERY_KEY_PREFIX } from './useIsRecordingFavorited';
+import {
+	SequenceIsFavoritedQuery,
+	useSequenceIsFavoritedQuery,
+} from '@lib/api/__generated__/sequenceIsFavorited';
 
 interface IUseIsSequenceFavoritedResult extends IUseIsFavoritedResult {
 	recordingsFavoritedCount: number | undefined;

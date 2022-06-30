@@ -2,13 +2,13 @@ import { useQueryClient } from 'react-query';
 
 import { setCollectionFavorited } from '@lib/api/setCollectionFavorited';
 import { getSessionToken } from '@lib/cookies';
-import {
-	CollectionIsFavoritedQuery,
-	Scalars,
-	useCollectionIsFavoritedQuery,
-} from '@lib/generated/graphql';
+import { Scalars } from '@src/__generated__/graphql';
 
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
+import {
+	CollectionIsFavoritedQuery,
+	useCollectionIsFavoritedQuery,
+} from '@lib/api/__generated__/collectionIsFavorited';
 
 interface IUseIsCollectionFavoritedResult extends IUseIsFavoritedResult {
 	playbackCompletedPercentage: number;

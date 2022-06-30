@@ -12,17 +12,16 @@ import type * as VideoJs from 'video.js';
 import type { VideoJsPlayer } from 'video.js';
 
 import { getSessionToken } from '@lib/cookies';
-import {
-	AndMiniplayerFragment,
-	GetRecordingPlaybackProgressQuery,
-	Maybe,
-	recordingPlaybackProgressSet,
-	RecordingPlaybackProgressSetMutationVariables,
-	Scalars,
-} from '@lib/generated/graphql';
+import { Maybe, Scalars } from '@src/__generated__/graphql';
 import hasVideo from '@lib/hasVideo';
 import styles from '@components/templates/andMiniplayer.module.scss';
 import dynamic from 'next/dynamic';
+import {
+	AndMiniplayerFragment,
+	GetRecordingPlaybackProgressQuery,
+	recordingPlaybackProgressSet,
+	RecordingPlaybackProgressSetMutationVariables,
+} from '@components/templates/__generated__/andMiniplayer';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js

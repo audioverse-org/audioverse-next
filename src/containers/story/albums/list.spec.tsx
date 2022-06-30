@@ -2,17 +2,17 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	GetStoriesAlbumsPageDataDocument,
-	GetStoriesAlbumsPathDataDocument,
-	SequenceContentType,
-} from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
 import { screen } from '@testing-library/react';
+import {
+	GetStoriesAlbumsPageDataDocument,
+	GetStoriesAlbumsPathDataDocument,
+} from '@containers/story/albums/__generated__/list';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 

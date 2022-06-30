@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
-
 import TeaseRecording from '../teaseRecording';
 
 import CardWithTheme from './base/withTheme';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 interface Props {
 	recording: CardRecordingFragment;

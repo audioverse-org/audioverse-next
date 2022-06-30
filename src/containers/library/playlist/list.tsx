@@ -9,15 +9,13 @@ import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
 import LibraryError from '@components/organisms/libraryError';
 import LibraryNav from '@components/organisms/libraryNav';
-import {
-	Language,
-	useGetLibraryPlaylistsDataQuery,
-} from '@lib/generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 
 import baseStyles from '../base.module.scss';
 import LibraryLoggedOut from '../loggedOut';
 
 import styles from './list.module.scss';
+import { useGetLibraryPlaylistsDataQuery } from '@containers/library/playlist/__generated__/list';
 
 export type ILibraryPlaylistsProps = {
 	language: Language;

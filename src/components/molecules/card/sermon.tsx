@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { CardRecordingFragment } from '@lib/generated/graphql';
-
 import TeaseRecording from '../teaseRecording';
 
 import CardWithTheme from './base/withTheme';
 import CardHatSermon from './hat/sermon';
 import CardHatSponsor from './hat/sponsor';
+import { CardRecordingFragment } from '@components/molecules/card/__generated__/recording';
 
 export interface CardSermonProps {
 	recording: CardRecordingFragment;

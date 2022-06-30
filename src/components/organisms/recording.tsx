@@ -26,10 +26,8 @@ import Transcript from '@components/molecules/transcript';
 import { formatLongDateTime, parseRelativeDate } from '@lib/date';
 import {
 	RecordingContentType,
-	RecordingFragment,
 	SequenceContentType,
-	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
@@ -40,6 +38,8 @@ import IconDownload from '../../../public/img/icons/icon-download.svg';
 
 import styles from './recording.module.scss';
 import { makeBibleMusicRoute } from '@lib/routes/makeBibleMusicRoute';
+import { RecordingFragment } from '@components/organisms/__generated__/recording';
+import { TeaseRecordingFragment } from '@components/molecules/__generated__/teaseRecording';
 
 export type RecordingProps = {
 	recording: RecordingFragment;

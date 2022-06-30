@@ -1,7 +1,7 @@
 import { buildRenderer } from '@lib/test/buildRenderer';
 import SermonEmbed, { SermonEmbedProps } from '@containers/sermon/embed';
 import { screen } from '@testing-library/react';
-import { RecordingContentType } from '@lib/generated/graphql';
+import { RecordingContentType } from '@src/__generated__/graphql';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import React from 'react';
 

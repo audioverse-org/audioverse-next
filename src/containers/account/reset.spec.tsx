@@ -4,11 +4,12 @@ import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import Reset from '@pages/[language]/account/reset';
+import { ResetPasswordDocument } from '@containers/account/__generated__/reset';
+import { LoginDocument } from '@lib/api/__generated__/login';
 
 const renderPage = buildRenderer(Reset);
 

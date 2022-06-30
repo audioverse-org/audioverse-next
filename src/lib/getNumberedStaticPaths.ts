@@ -8,7 +8,7 @@ import {
 	LIST_PRERENDER_LIMIT,
 	SupportedLanguages,
 } from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+import { Language } from '@src/__generated__/graphql';
 import getLanguageIds from '@lib/getLanguageIds';
 
 type Getter<T> = (variables: { language: Language }) => Promise<T>;

@@ -9,9 +9,9 @@ import CardMasonry from '@components/molecules/cardMasonry';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import Tease from '@components/molecules/tease';
 import { IBibleVersion } from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataQuery } from '@lib/generated/graphql';
 
 import styles from './versions.module.scss';
+import { GetAudiobibleVersionsDataQuery } from '@containers/bible/__generated__/versions';
 
 export interface VersionsProps {
 	versions: Array<

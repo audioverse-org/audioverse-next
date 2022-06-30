@@ -1,5 +1,5 @@
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
-import { Scalars } from '@lib/generated/graphql';
+import { Scalars } from '@src/__generated__/graphql';
 
 import { personIsFavorited } from './personIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';

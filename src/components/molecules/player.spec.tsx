@@ -9,12 +9,13 @@ import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import { BaseColors } from '@lib/constants';
 import { simulateMediaTick } from '@lib/test/simulateMediaTick';
+import { PlayerFragment } from '@components/molecules/__generated__/player';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');

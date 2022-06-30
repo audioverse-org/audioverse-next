@@ -9,7 +9,7 @@ import {
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
-} from '@lib/generated/graphql';
+} from '@components/templates/__generated__/andMiniplayer';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;

@@ -2,12 +2,10 @@ import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
-	GetSeriesDetailPageDataDocument,
-	GetSeriesDetailPathsDataDocument,
 	Language,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@src/__generated__/graphql';
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import SeriesDetail, {
@@ -15,6 +13,10 @@ import SeriesDetail, {
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
 import { screen } from '@testing-library/react';
+import {
+	GetSeriesDetailPageDataDocument,
+	GetSeriesDetailPathsDataDocument,
+} from '@containers/series/__generated__/detail';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 

@@ -7,9 +7,9 @@ import {
 import { IBaseProps } from '@containers/base';
 import Home, { HomeProps } from '@containers/home';
 import { REVALIDATE } from '@lib/constants';
-import { getHomeStaticProps } from '@lib/generated/graphql';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { getValidLanguage } from '@lib/getValidLanguage';
+import { getHomeStaticProps } from '@containers/__generated__/home';
 
 export default Home;
 

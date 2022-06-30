@@ -7,12 +7,12 @@ import {
 import { IBaseProps } from '@containers/base';
 import SongDetail, { SongDetailProps } from '@containers/song/detail';
 import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
 import {
 	getSongDetailData,
 	getSongDetailStaticPaths,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@containers/song/__generated__/detail';
 
 export default SongDetail;
 

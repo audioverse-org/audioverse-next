@@ -42,6 +42,6 @@ export async function __waitForIntlMessages() {
 				})
 			);
 		},
-		{ timeout: 10000 }
+		{ timeout: 5000 }
 	);
 }

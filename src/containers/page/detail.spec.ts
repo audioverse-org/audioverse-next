@@ -4,12 +4,12 @@ import CustomPageDetail, {
 	getStaticProps,
 } from '@pages/[language]/page/[id]/[[...slugs]]';
 import { buildLoader } from '@lib/test/buildLoader';
+import { screen } from '@testing-library/react';
+import { __loadQuery } from 'next/router';
 import {
 	GetCustomDetailPageDataDocument,
 	GetCustomDetailPageStaticPathsDocument,
-} from '@lib/generated/graphql';
-import { screen } from '@testing-library/react';
-import { __loadQuery } from 'next/router';
+} from '@containers/page/__generated__/detail';
 
 const renderPage = buildStaticRenderer(CustomPageDetail, getStaticProps);
 const loadData = buildLoader(GetCustomDetailPageDataDocument, {

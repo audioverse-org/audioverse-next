@@ -20,7 +20,7 @@ import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
-import { SequenceContentType, SequenceFragment } from '@lib/generated/graphql';
+import { SequenceContentType } from '@src/__generated__/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedDuration } from '@lib/time';
 import { UnreachableCaseError } from '@lib/typeHelpers';
@@ -31,6 +31,7 @@ import { makeSeriesFeedRoute } from '@lib/routes/makeSeriesFeedRoute';
 import { makeAudiobookFeedRoute } from '@lib/routes/makeAudiobookFeedRoute';
 import { makeStoryAlbumFeedRoute } from '@lib/routes/makeStoryAlbumFeedRoute';
 import { makeSongAlbumFeedRoute } from '@lib/routes/makeSongAlbumFeedRoute';
+import { SequenceFragment } from '@components/organisms/__generated__/sequence';
 
 export function Sequence({
 	sequence,

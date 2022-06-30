@@ -8,13 +8,13 @@ import CardGroup from '@components/molecules/cardGroup';
 import Pagination from '@components/molecules/pagination';
 import RssAlternate from '@components/molecules/rssAlternate';
 import { BaseColors } from '@lib/constants';
-import { GetSponsorTeachingsPageDataQuery } from '@lib/generated/graphql';
 import { PaginatedProps } from '@lib/getPaginatedStaticProps';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
 import { makeSponsorFeedRoute } from '@lib/routes/makeSponsorFeedRoute';
 import { makeSponsorTeachingsRoute } from '@lib/routes/makeSponsorTeachingsRoute';
+import { GetSponsorTeachingsPageDataQuery } from '@containers/sponsor/__generated__/teachings';
 
 export type SponsorTeachingsProps = PaginatedProps<
 	NonNullable<

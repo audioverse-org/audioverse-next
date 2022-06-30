@@ -5,15 +5,15 @@ import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
 import { fetchApi } from '@lib/api/fetchApi';
-import {
-	RegisterDocument,
-	RegisterSocialDocument,
-} from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 import { useGoogleLogin } from 'react-google-login';
 import { __loadRouter } from 'next/router';
+import {
+	RegisterDocument,
+	RegisterSocialDocument,
+} from '@containers/account/__generated__/register';
 
 jest.mock('js-cookie');
 
