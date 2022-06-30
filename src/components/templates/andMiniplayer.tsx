@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React, { PropsWithChildren, useContext } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { PropsWithChildren, useContext, useEffect } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { RecordingFragment, SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
@@ -14,10 +14,12 @@ const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 const LazyMiniplayerOverlay = dynamic(
 	() => import('../organisms/miniplayerOverlay')
 );
+const LazyHelpWidget = dynamic(() => import('../molecules/helpWidget'));
 
 export default function AndMiniplayer({
 	children,
 }: PropsWithChildren<unknown>): JSX.Element {
+	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const player = playbackContext.player();
 
@@ -36,7 +38,13 @@ export default function AndMiniplayer({
 	if (teaseRecording?.sequence) {
 		const { Icon } = getSequenceTypeTheme(teaseRecording.sequence.contentType);
 		sequenceLine = (
-			<div className={styles.series} aria-label="series">
+			<div
+				className={styles.series}
+				aria-label={intl.formatMessage({
+					id: 'andMiniplayer__seriesLabel',
+					defaultMessage: 'series',
+				})}
+			>
 				<Icon width={13} height={13} />
 				{teaseRecording.sequence.contentType === SequenceContentType.BibleBook
 					? teaseRecording.collection?.title
@@ -44,6 +52,11 @@ export default function AndMiniplayer({
 			</div>
 		);
 	}
+
+	useEffect(() => {
+		document.body.classList.toggle('body--with-miniplayer', !!recording);
+	}, [recording]);
+
 	return (
 		<>
 			<div ref={originRef} className={styles.videoOrigin}>
@@ -70,12 +83,15 @@ export default function AndMiniplayer({
 			</div>
 
 			<div
-				className={
-					recording &&
-					clsx(styles.contentWithPlayer, 'andMiniplayer--withPlayer')
-				}
+				className={clsx({
+					[styles.contentWithPlayer]: !!recording,
+					'andMiniplayer--withPlayer': !!recording,
+				})}
 			>
 				{children}
+				<div className={styles.helpButton}>
+					<LazyHelpWidget />
+				</div>
 			</div>
 			<div ref={titleOverlayRef}>
 				{player?.isFullscreen() && (
@@ -97,7 +113,7 @@ export default function AndMiniplayer({
 								<div className={styles.authorAvatar}>
 									<Image
 										src={teaseRecording?.speakers[0]?.imageWithFallback?.url}
-										alt="speaker-avatar"
+										alt={teaseRecording?.speakers[0]?.name}
 										width={30}
 										height={30}
 									/>

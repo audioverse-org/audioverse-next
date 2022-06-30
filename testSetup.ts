@@ -15,6 +15,6 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-	jest.resetAllMocks();
+	jest.clearAllMocks();
 	resetAllWhenMocks();
 });

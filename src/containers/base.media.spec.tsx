@@ -11,18 +11,18 @@ import {
 	render,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
 import { Recording } from '@components/organisms/recording';
-// import AndMiniplayer from '@components/templates/andMiniplayer';
 import {
 	RecordingContentType,
 	RecordingFragment,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { loadRouter, setPlayerMock } from '@lib/test/helpers';
+import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
 
 const sequence = {
@@ -123,7 +123,7 @@ const renderApp = async (
 	recording: Partial<RecordingFragment>,
 	container: any = undefined
 ) => {
-	loadRouter({
+	__loadRouter({
 		pathname: '/[language]/discover',
 		query: {},
 		asPath: '',
@@ -196,7 +196,7 @@ describe('app media playback', () => {
 
 			userEvent.click(result.getByAltText('the_sermon_title'));
 
-			const miniplayer = result.getByLabelText('miniplayer');
+			const miniplayer = await result.findByLabelText('miniplayer');
 
 			await waitFor(() => {
 				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();

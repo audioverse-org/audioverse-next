@@ -15,6 +15,7 @@ const Header = (): JSX.Element => {
 					<a className={styles.link}>
 						<Image
 							src="/img/logo.svg"
+							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
 							alt="AudioVerse"
 							width={161}
 							height={23}

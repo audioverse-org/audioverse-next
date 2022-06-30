@@ -1,24 +1,23 @@
 import { when } from 'jest-when';
+import { __loadQuery } from 'next/router';
 
+import { fetchApi } from '@lib/api/fetchApi';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
 	Language,
 	SequenceContentType,
 } from '@lib/generated/graphql';
-import { buildStaticRenderer, mockedFetchApi } from '@lib/test/helpers';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/[id]/[[...slug]]';
 
-const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps, {
-	language: 'en',
-	id: 'the_collection_id',
-});
+const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);
 
 function loadData() {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			collection: {
@@ -91,12 +90,19 @@ function loadData() {
 }
 
 describe('collection detail page', () => {
+	beforeEach(() => {
+		__loadQuery({
+			language: 'en',
+			id: 'the_collection_id',
+		});
+	});
+
 	it('renders', async () => {
 		loadData();
 
 		await renderPage();
 
-		expect(mockedFetchApi).toBeCalledWith(GetCollectionDetailPageDataDocument, {
+		expect(fetchApi).toBeCalledWith(GetCollectionDetailPageDataDocument, {
 			variables: {
 				id: 'the_collection_id',
 			},
@@ -120,7 +126,7 @@ describe('collection detail page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetCollectionDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				collections: {
@@ -145,7 +151,7 @@ describe('collection detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 

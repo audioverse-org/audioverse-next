@@ -8,8 +8,8 @@ import AboutNav from '@components/organisms/aboutNav';
 import { makeAboutPage, makeTestimoniesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-import IconForward from '../../../public/img/icon-forward-light.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
+import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import sharedStyles from './shared.module.scss';
 import styles from './spirit.module.scss';

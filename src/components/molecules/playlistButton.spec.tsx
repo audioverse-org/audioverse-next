@@ -7,27 +7,39 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
+import set from 'lodash/set';
 import React from 'react';
 
 import PlaylistButton from '@components/molecules/playlistButton';
+import { fetchApi } from '@lib/api/fetchApi';
 import { setPlaylistMembership } from '@lib/api/setPlaylistMembership';
 import {
 	AddPlaylistDocument,
 	GetPlaylistButtonDataDocument,
+	GetPlaylistButtonDataQuery,
 } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
-import {
-	makePlaylistButtonData,
-	mockedFetchApi,
-	renderWithIntl,
-	resolveWithDelay,
-	withMutedReactQueryLogger,
-} from '@lib/test/helpers';
+import renderWithProviders from '@lib/test/renderWithProviders';
+import { resolveWithDelay } from '@lib/test/resolveWithDelay';
+import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 
 jest.mock('@lib/api/setPlaylistMembership');
 
+const makePlaylistButtonData = (
+	playlists: any[] | undefined = undefined
+): GetPlaylistButtonDataQuery => {
+	const value = playlists || [
+		{
+			id: 'playlist_id',
+			title: 'playlist_title',
+		},
+	];
+
+	return set({} as any, 'me.user.playlists.nodes', value);
+};
+
 const loadComponentData = (playlists: any[] | undefined = undefined) => {
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetPlaylistButtonDataDocument, expect.anything())
 		.mockResolvedValue(makePlaylistButtonData(playlists));
 };
@@ -37,8 +49,9 @@ const renderComponent = async ({
 }: {
 	recordingId?: string;
 } = {}) => {
-	const result = await renderWithIntl(
-		<PlaylistButton recordingId={recordingId} />
+	const result = await renderWithProviders(
+		<PlaylistButton recordingId={recordingId} />,
+		undefined
 	);
 	const container = result.container as HTMLElement;
 
@@ -56,7 +69,7 @@ const renderComponent = async ({
 		getButton: () => getByText(container, 'Add to Playlist'),
 		waitForDataCall: (count = 1) =>
 			waitFor(() => {
-				const matches = mockedFetchApi.mock.calls.filter((c) => {
+				const matches = (fetchApi as jest.Mock).mock.calls.filter((c) => {
 					return c[0] === GetPlaylistButtonDataDocument;
 				});
 				expect(matches).toHaveLength(count);
@@ -229,7 +242,7 @@ describe('playlist button', () => {
 		});
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(GetPlaylistButtonDataDocument, {
+			expect(fetchApi).toBeCalledWith(GetPlaylistButtonDataDocument, {
 				variables: {
 					language: 'ENGLISH',
 					recordingId: 'recording_id',
@@ -273,7 +286,7 @@ describe('playlist button', () => {
 		await userAddPlaylist('the_title');
 
 		await waitFor(() =>
-			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+			expect(fetchApi).toBeCalledWith(AddPlaylistDocument, {
 				variables: {
 					language: 'ENGLISH',
 					title: 'the_title',
@@ -319,7 +332,7 @@ describe('playlist button', () => {
 		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+			expect(fetchApi).toBeCalledWith(AddPlaylistDocument, {
 				variables: {
 					language: 'ENGLISH',
 					title: 'the_title',
@@ -365,7 +378,7 @@ describe('playlist button', () => {
 
 		await waitForDataCall();
 
-		resolveWithDelay(mockedFetchApi, 50, makePlaylistButtonData([]));
+		resolveWithDelay(fetchApi as jest.Mock, 50, makePlaylistButtonData([]));
 
 		await userAddPlaylist('the_title');
 
@@ -387,7 +400,7 @@ describe('playlist button', () => {
 
 		// Load slow query to clobber
 
-		resolveWithDelay(mockedFetchApi, 50, {
+		resolveWithDelay(fetchApi as jest.Mock, 50, {
 			me: {
 				user: {
 					playlists: {
@@ -441,7 +454,7 @@ describe('playlist button', () => {
 
 	it('rolls back if mutation fails', async () => {
 		await withMutedReactQueryLogger(async () => {
-			mockedFetchApi.mockResolvedValue(makePlaylistButtonData());
+			(fetchApi as jest.Mock).mockResolvedValue(makePlaylistButtonData());
 
 			const { waitForDataCall, userAddPlaylist, getEntry } =
 				await renderComponent();
@@ -449,9 +462,9 @@ describe('playlist button', () => {
 			await waitForDataCall();
 
 			// load new playlist into response to avoid cache invalidation causing a pass
-			resolveWithDelay(mockedFetchApi, 50, makePlaylistButtonData());
+			resolveWithDelay(fetchApi as jest.Mock, 50, makePlaylistButtonData());
 
-			when(mockedFetchApi)
+			when(fetchApi)
 				.calledWith(AddPlaylistDocument, expect.anything())
 				.mockRejectedValue('Oops!');
 
@@ -518,7 +531,7 @@ describe('playlist button', () => {
 		await userAddPlaylist('the_title');
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(AddPlaylistDocument, {
+			expect(fetchApi).toBeCalledWith(AddPlaylistDocument, {
 				variables: {
 					language: 'ENGLISH',
 					title: 'the_title',

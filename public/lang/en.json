@@ -354,6 +354,9 @@
   "bibleBook__readAlong": {
     "string": "Read Along"
   },
+  "bibleBook__typeLabel": {
+    "string": "KJV Bible"
+  },
   "bibleVersionTypeLockup__type": {
     "string": "Bible Version"
   },
@@ -649,10 +652,6 @@
   "contact__title": {
     "string": "Contact"
   },
-  "copyrightInfos__multipleCopyrightExplanation": {
-    "comment": "Copyright infos component multiple copyright explanation",
-    "string": "Portions of this production are covered under the following license terms:"
-  },
   "discoverCollections__title": {
     "string": "Discover Collections"
   },
@@ -883,6 +882,9 @@
     "comment": "Header nav link name: More",
     "string": "More"
   },
+  "header__navItemMore-help": {
+    "string": "Get Help"
+  },
   "header__navItemMore-ju": {
     "string": "Journeys Unscripted"
   },
@@ -934,6 +936,285 @@
   },
   "header__navItemUser-profile": {
     "string": "Profile"
+  },
+  "helpScout.addReply": {
+    "string": "Add a reply"
+  },
+  "helpScout.addYourMessageHere": {
+    "string": "Add your message here..."
+  },
+  "helpScout.answer": {
+    "string": "Answers"
+  },
+  "helpScout.ask": {
+    "string": "Ask"
+  },
+  "helpScout.attachAFile": {
+    "string": "Attach a file"
+  },
+  "helpScout.attachmentErrorText": {
+    "string": "There was a problem uploading your attachment. Please try again in a moment."
+  },
+  "helpScout.attachmentSizeErrorText": {
+    "string": "Attachments may be no larger than 10MB"
+  },
+  "helpScout.beaconButtonChatMinimize": {
+    "string": "Minimize chat"
+  },
+  "helpScout.beaconButtonChatOpen": {
+    "string": "Open chat"
+  },
+  "helpScout.beaconButtonClose": {
+    "string": "Close"
+  },
+  "helpScout.cantFindAnswer": {
+    "string": "Can’t find an answer?"
+  },
+  "helpScout.chatAvailabilityChangeMessage": {
+    "string": "Our team’s availability has changed and there’s no longer anyone available to chat. Send us a message instead and we’ll get back to you."
+  },
+  "helpScout.chatButtonDescription": {
+    "string": "We’re online right now, talk with our team in real-time"
+  },
+  "helpScout.chatButtonLabel": {
+    "string": "Chat"
+  },
+  "helpScout.chatConnected": {
+    "string": "Connected to"
+  },
+  "helpScout.chatEndCalloutHeading": {
+    "string": "All done!"
+  },
+  "helpScout.chatEndCalloutLink": {
+    "string": "Return home"
+  },
+  "helpScout.chatEndCalloutMessage": {
+    "string": "A copy of this conversation will land in your inbox shortly."
+  },
+  "helpScout.chatEndUnassignedCalloutHeading": {
+    "string": "Sorry about that"
+  },
+  "helpScout.chatEndUnassignedCalloutMessage": {
+    "string": "It looks like nobody made it to your chat. We’ll send you an email response as soon as possible."
+  },
+  "helpScout.chatEndWaitingCustomerHeading": {
+    "string": "Sorry about that"
+  },
+  "helpScout.chatEndWaitingCustomerMessage": {
+    "string": "Your question has been added to our email queue and we’ll get back to you shortly."
+  },
+  "helpScout.chatEnded": {
+    "string": "ended the chat"
+  },
+  "helpScout.chatHeadingSublabel": {
+    "string": "We'll be with you soon"
+  },
+  "helpScout.chatHeadingTitle": {
+    "string": "Chat with our team"
+  },
+  "helpScout.chatbotAgentDisconnectedMessage": {
+    "string": "has disconnected from the chat. It’s possible they lost their internet connection, so I’m looking for someone else to take over. Sorry for the delay!"
+  },
+  "helpScout.chatbotConfirmationMessage": {
+    "string": "Thanks! Someone from our team will jump into the chat soon."
+  },
+  "helpScout.chatbotGenericErrorMessage": {
+    "string": "Something went wrong sending your message, please try again in a few minutes."
+  },
+  "helpScout.chatbotGreet": {
+    "string": "Hi there! You can begin by asking your question below. Someone will be with you shortly."
+  },
+  "helpScout.chatbotInactivityPrompt": {
+    "string": "Since the chat has gone idle, I’ll end this chat in a few minutes."
+  },
+  "helpScout.chatbotInvalidEmailMessage": {
+    "string": "Looks like you’ve entered an invalid email address. Want to try again?"
+  },
+  "helpScout.chatbotName": {
+    "string": "Help Bot"
+  },
+  "helpScout.chatbotPromptEmail": {
+    "string": "Got it. Real quick, what’s your email address? We’ll use it for any follow-up messages."
+  },
+  "helpScout.continueEditing": {
+    "string": "Continue writing..."
+  },
+  "helpScout.customFieldsValidationLabel": {
+    "string": "Please complete all fields"
+  },
+  "helpScout.defaultMessageErrorText": {
+    "string": "There was a problem sending your message. Please try again in a moment."
+  },
+  "helpScout.docsArticleErrorText": {
+    "string": "There was a problem retrieving this article. Please double-check your internet connection and try again."
+  },
+  "helpScout.docsSearchEmptyText": {
+    "string": "We couldn’t find any articles that match your search."
+  },
+  "helpScout.docsSearchErrorText": {
+    "string": "There was a problem retrieving articles. Please double-check your internet connection and try again."
+  },
+  "helpScout.emailContinueConversation": {
+    "string": "If you’ve got any other questions, feel free to hit reply and continue the conversation."
+  },
+  "helpScout.emailCopyOfDiscussion": {
+    "string": "Here’s a copy of your discussion"
+  },
+  "helpScout.emailEndedLineItem": {
+    "string": "ended the chat"
+  },
+  "helpScout.emailGreeting": {
+    "string": "Hey"
+  },
+  "helpScout.emailHeading": {
+    "string": "Today's chat with"
+  },
+  "helpScout.emailJoinedLineItem": {
+    "string": "joined the chat"
+  },
+  "helpScout.emailLabel": {
+    "string": "Email address"
+  },
+  "helpScout.emailValidationLabel": {
+    "string": "Please use a valid email address"
+  },
+  "helpScout.emailYou": {
+    "string": "You"
+  },
+  "helpScout.endChat": {
+    "string": "End chat"
+  },
+  "helpScout.ending": {
+    "string": "Ending..."
+  },
+  "helpScout.escalationQuestionFeedback": {
+    "string": "Did this answer your question?"
+  },
+  "helpScout.escalationQuestionFeedbackNo": {
+    "string": "No"
+  },
+  "helpScout.escalationQuestionFeedbackYes": {
+    "string": "Yes"
+  },
+  "helpScout.escalationSearchText": {
+    "string": "Browse our help docs for an answer to your question"
+  },
+  "helpScout.escalationTalkText": {
+    "string": "Talk with a friendly member of our support team"
+  },
+  "helpScout.escalationTalkTitle": {
+    "string": "Talk to us"
+  },
+  "helpScout.escalationThanksFeedback": {
+    "string": "Thanks for the feedback"
+  },
+  "helpScout.escalationWhatNext": {
+    "string": "What next?"
+  },
+  "helpScout.firstAFewQuestions": {
+    "string": "Let's begin with a few questions."
+  },
+  "helpScout.getInTouch": {
+    "string": "Get in touch"
+  },
+  "helpScout.history": {
+    "string": "History"
+  },
+  "helpScout.howCanWeHelp": {
+    "string": "How can we help?"
+  },
+  "helpScout.justNow": {
+    "string": "Just Now"
+  },
+  "helpScout.lastUpdated": {
+    "string": "Last updated"
+  },
+  "helpScout.mayNotBeEmpty": {
+    "string": "May not be empty"
+  },
+  "helpScout.messageButtonLabel": {
+    "string": "Email"
+  },
+  "helpScout.messageConfirmationText": {
+    "string": "You'll receive an email reply within a few hours."
+  },
+  "helpScout.messageLabel": {
+    "string": "How can we help?"
+  },
+  "helpScout.messageSubmitLabel": {
+    "string": "Send a message"
+  },
+  "helpScout.nameLabel": {
+    "string": "Name"
+  },
+  "helpScout.next": {
+    "string": "Next"
+  },
+  "helpScout.noTimeToWaitAround": {
+    "string": "No time to wait around? We usually respond within a few hours"
+  },
+  "helpScout.nothingFound": {
+    "string": "Hmm..."
+  },
+  "helpScout.previousMessageErrorText": {
+    "string": "There was a problem retrieving this message. Please double-check your Internet connection and try again."
+  },
+  "helpScout.previousMessages": {
+    "string": "Previous Conversations"
+  },
+  "helpScout.received": {
+    "string": "Received"
+  },
+  "helpScout.relatedArticles": {
+    "string": "Related Articles"
+  },
+  "helpScout.responseTime": {
+    "string": "We usually respond within a few hours"
+  },
+  "helpScout.searchLabel": {
+    "string": "What can we help you with?"
+  },
+  "helpScout.sendAMessage": {
+    "string": "Send a message"
+  },
+  "helpScout.sendMessage": {
+    "string": "Send message"
+  },
+  "helpScout.subjectLabel": {
+    "string": "Subject"
+  },
+  "helpScout.suggestedForYou": {
+    "string": "Instant Answers"
+  },
+  "helpScout.tryAgain": {
+    "string": "Try again"
+  },
+  "helpScout.tryBroaderTerm": {
+    "string": "Try searching a broader term, or"
+  },
+  "helpScout.uploadAnImage": {
+    "string": "Upload an image"
+  },
+  "helpScout.viewAndUpdateMessage": {
+    "string": "You can view and update your message in"
+  },
+  "helpScout.waitingForAnAnswer": {
+    "string": "Waiting for an answer"
+  },
+  "helpScout.weAreOnIt": {
+    "string": "We're on it!"
+  },
+  "helpScout.wereHereToHelp": {
+    "string": "Start a conversation"
+  },
+  "helpScout.whatMethodWorks": {
+    "string": "What channel do you prefer?"
+  },
+  "helpScout.you": {
+    "string": "You"
+  },
+  "helpWidget__buttonLabel": {
+    "string": "Help"
   },
   "homePage__CreateAccountButtonLabel": {
     "string": "Create an Account"
@@ -1278,8 +1559,14 @@
   "miniplayer__increaseVolume": {
     "string": "Increase volume"
   },
+  "miniplayer__label": {
+    "string": "miniplayer"
+  },
   "miniplayer__reduceVolume": {
     "string": "Reduce volume"
+  },
+  "miniplayer__series": {
+    "string": "Series"
   },
   "miniplayer__volume": {
     "string": "Volume"
@@ -1823,9 +2110,6 @@
   "register__loginIntro": {
     "string": "Already have an account?"
   },
-  "register__newsletterSubscribe": {
-    "string": "Subscribe to Newsletter"
-  },
   "register__passwordLabel": {
     "string": "Password"
   },
@@ -1838,14 +2122,47 @@
   "register__title": {
     "string": "Register"
   },
+  "release__address1": {
+    "string": "Address line 1"
+  },
+  "release__address2": {
+    "string": "Address line 2"
+  },
+  "release__city": {
+    "string": "City"
+  },
+  "release__comments": {
+    "string": "Comments"
+  },
+  "release__country": {
+    "string": "Country"
+  },
+  "release__email": {
+    "string": "Email"
+  },
+  "release__givenName": {
+    "string": "Given name"
+  },
   "release__messageSubmitted": {
     "string": "Your form has been submitted."
+  },
+  "release__phone": {
+    "string": "Phone"
+  },
+  "release__province": {
+    "string": "State / Province"
+  },
+  "release__surname": {
+    "string": "Surname"
   },
   "release__thankYou": {
     "string": "Thank you!"
   },
   "release__title": {
     "string": "Media Release Agreement"
+  },
+  "release__zip": {
+    "string": "Postal Code"
   },
   "reset__confirmPasswordLabel": {
     "string": "Confirm new password"
@@ -1934,6 +2251,9 @@
   },
   "search__title": {
     "string": "Search"
+  },
+  "search__titleDynamic": {
+    "string": "Search | \"{term}\" | AudioVerse"
   },
   "sequenceType__audiobookTitle": {
     "string": "Book"

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import LineHeading from '@components/atoms/lineHeading';
@@ -31,8 +31,8 @@ import {
 import { makeBibleBookRoute, makeBibleVersionRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-import IconBlog from '../../../public/img/icon-blog-light-small.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
+import IconBlog from '../../../public/img/icons/icon-blog-light-small.svg';
 
 import styles from './book.module.scss';
 
@@ -75,6 +75,7 @@ function BookInner({
 	const { id, description, sponsor } = version;
 	const languageRoute = useLanguageRoute();
 	const chapter = chapters.find(({ number }) => number === +chapterNumber);
+	const intl = useIntl();
 
 	const makeCanonicalPath = (n: number) =>
 		makeBibleBookRoute(languageRoute, book.book_id, n);
@@ -190,7 +191,14 @@ function BookInner({
 		<Tease>
 			<Link href={makeBibleVersionRoute(languageRoute, id)}>
 				<a className={styles.hat}>
-					<BibleVersionTypeLockup unpadded={true} label="KJV Bible" />
+					<BibleVersionTypeLockup
+						unpadded={true}
+						label={intl.formatMessage({
+							id: 'bibleBook__typeLabel',
+							// TODO: Make dynamic?
+							defaultMessage: 'KJV Bible',
+						})}
+					/>
 					<h4>{book.name}</h4>
 				</a>
 			</Link>
@@ -312,7 +320,6 @@ function BookInner({
 	);
 }
 
-export default withFailStates(
-	Book,
-	({ chapters }: BookProps) => !chapters.length
-);
+export default withFailStates(Book, {
+	useShould404: ({ chapters }: BookProps) => !chapters.length,
+});

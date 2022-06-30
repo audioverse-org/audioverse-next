@@ -39,7 +39,6 @@ function SearchCollections({ nodes, pagination }: SearchCollectionsProps) {
 	);
 }
 
-export default withFailStates(
-	SearchCollections,
-	(props: SearchCollectionsProps) => !props.nodes?.length
-);
+export default withFailStates(SearchCollections, {
+	useShould404: (props: SearchCollectionsProps) => !props.nodes?.length,
+});

@@ -39,7 +39,6 @@ function SearchTeachings({ nodes, pagination }: SearchTeachingsProps) {
 	);
 }
 
-export default withFailStates(
-	SearchTeachings,
-	(props: SearchTeachingsProps) => !props.nodes?.length
-);
+export default withFailStates(SearchTeachings, {
+	useShould404: (props: SearchTeachingsProps) => !props.nodes?.length,
+});

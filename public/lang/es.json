@@ -265,10 +265,6 @@
     "comment": "sermón lista página filtro video",
     "string": "Video"
   },
-  "copyrightInfos__multipleCopyrightExplanation": {
-    "comment": "Copyright infos componente explicación de derechos de autor múltiple",
-    "string": "Partes de esta producción están protegidas por los siguientes términos de licencia:"
-  },
   "discoverCollections_audiobooksHeading": {
     "string": "Audiolibros"
   },

@@ -265,10 +265,6 @@
     "comment": "recording has video filter video",
     "string": "Video"
   },
-  "copyrightInfos__multipleCopyrightExplanation": {
-    "comment": "Copyright infos component multiple copyright explanation",
-    "string": "Teile dieser Produktion unterliegen den folgenden Lizenzbedingungen:"
-  },
   "discoverCollections_audiobooksHeading": {
     "string": "Hörbücher"
   },

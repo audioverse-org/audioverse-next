@@ -20,7 +20,7 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import useHover from '@lib/useHover';
 
-import SuccessIcon from '../../../../public/img/icon-success-light.svg';
+import SuccessIcon from '../../../../public/img/icons/icon-success-light.svg';
 import ButtonFavorite from '../buttonFavorite';
 import CollectionTypeLockup from '../collectionTypeLockup';
 

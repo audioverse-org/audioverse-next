@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import BibleIcon from '../../public/img/fa-bible.svg';
-import AudiobookIcon from '../../public/img/fa-book-light.svg';
-import StoryIcon from '../../public/img/fa-feather-light.svg';
-import ListIcon from '../../public/img/fa-list-alt.svg';
-import SongIcon from '../../public/img/fa-music-light.svg';
+import BibleIcon from '../../public/img/icons/fa-bible.svg';
+import AudiobookIcon from '../../public/img/icons/fa-book-light.svg';
+import StoryIcon from '../../public/img/icons/fa-feather-light.svg';
+import ListIcon from '../../public/img/icons/fa-list-alt.svg';
+import SongIcon from '../../public/img/icons/fa-music-light.svg';
 
 import { BaseColors } from './constants';
 import { SequenceContentType } from './generated/graphql';

@@ -35,7 +35,7 @@ import {
 import { useFormattedDuration } from '@lib/time';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import ForwardIcon from '../../../public/img/icon-forward-light.svg';
+import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 
 import styles from './detail.module.scss';
 
@@ -270,7 +270,6 @@ function CollectionDetail({
 	);
 }
 
-export default withFailStates(
-	CollectionDetail,
-	({ collection }) => !collection
-);
+export default withFailStates(CollectionDetail, {
+	useShould404: ({ collection }) => !collection,
+});

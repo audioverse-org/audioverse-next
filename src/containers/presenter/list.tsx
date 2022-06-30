@@ -81,4 +81,6 @@ function Presenters({
 	);
 }
 
-export default withFailStates(Presenters, ({ persons }) => !persons?.length);
+export default withFailStates(Presenters, {
+	useShould404: ({ persons }) => !persons?.length,
+});

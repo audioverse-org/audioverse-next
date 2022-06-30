@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import Button from '@components/molecules/button';
 import ButtonGuest from '@components/molecules/buttonGuest';
-import Checkbox from '@components/molecules/form/checkbox';
 import Input from '@components/molecules/form/input';
 import { setSessionToken } from '@lib/cookies';
 import { useRegisterMutation } from '@lib/generated/graphql';
@@ -26,7 +25,6 @@ function RegisterForm({
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [newsletter, setNewsletter] = useState(true);
 
 	const {
 		mutate,
@@ -135,14 +133,6 @@ function RegisterForm({
 				type="password"
 				value={password}
 				setValue={setPassword}
-			/>
-			<Checkbox
-				label={intl.formatMessage({
-					id: 'register__newsletterSubscribe',
-					defaultMessage: 'Subscribe to Newsletter',
-				})}
-				checked={newsletter}
-				toggleChecked={() => setNewsletter(!newsletter)}
 			/>
 
 			<div className={styles.actions}>

@@ -265,10 +265,6 @@
     "comment": "recording has video filter video",
     "string": "视频"
   },
-  "copyrightInfos__multipleCopyrightExplanation": {
-    "comment": "Copyright infos component multiple copyright explanation",
-    "string": "本产品的部分内容受以下许可条款约束："
-  },
   "discoverCollections_audiobooksHeading": {
     "string": "音频书籍"
   },

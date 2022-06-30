@@ -1,4 +1,5 @@
 @import '../../styles/common';
+@import '../../styles/mixins';
 
 .header {
 	display: flex;
@@ -23,7 +24,11 @@
 		.icon {
 			margin-right: 8px;
 			display: flex;
+			width: 24px;
 			color: $ts-dark;
+			svg {
+				@include fadeIn($transition-quick);
+			}
 		}
 		.label {
 			flex-grow: 1;

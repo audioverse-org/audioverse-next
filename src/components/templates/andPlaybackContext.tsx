@@ -175,12 +175,7 @@ export default function AndPlaybackContext({
 	const videoOverlayRef = useRef<HTMLDivElement>(null);
 	const titleOverlayRef = useRef<HTMLDivElement>(null);
 
-	const [videojs, setVideojs] = useState<typeof VideoJs>();
-	useEffect(() => {
-		Promise.all([import('video.js'), import('videojs-overlay')]).then(([v]) => {
-			setVideojs(v);
-		});
-	}, []);
+	const [videojs] = useState<Promise<typeof VideoJs>>(() => import('video.js'));
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -280,7 +275,7 @@ export default function AndPlaybackContext({
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
 			return (
-				(!onLoadRef.current && playerRef.current?.duration()) ||
+				playerRef.current?.duration() ||
 				sourcesRef.current[0]?.duration ||
 				recordingRef.current?.duration ||
 				0
@@ -354,7 +349,6 @@ export default function AndPlaybackContext({
 		requestFullscreen: () => {
 			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
 			overlayPlayer.requestFullscreen();
-			console.log(overlayPlayer.overlay, 'overlayPlayer');
 			overlayPlayer.controlBar.hide();
 			overlayPlayer.overlay({
 				overlays: [
@@ -434,24 +428,19 @@ export default function AndPlaybackContext({
 				defaultVolume: 1,
 				sources,
 			};
+
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
-			} else if (videojs) {
-				const p = videojs.default(currentVideoEl, options);
-				p.on('fullscreenchange', () => {
-					p.controls(p.isFullscreen());
-				});
-				playerRef.current = p;
-				resetPlayer();
 			} else {
-				Promise.all([import('video.js'), import('videojs-overlay')]).then(
-					([videoJsImport]) => {
-						setVideojs(videoJsImport);
-						playerRef.current = videoJsImport.default(currentVideoEl, options);
-						resetPlayer();
-					}
-				);
+				Promise.all([videojs, import('videojs-overlay')]).then(([v]) => {
+					const p = v.default(currentVideoEl, options);
+					p.on('fullscreenchange', () => {
+						p.controls(p.isFullscreen());
+					});
+					playerRef.current = p;
+					resetPlayer();
+				});
 			}
 		},
 	};

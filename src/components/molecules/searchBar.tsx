@@ -6,8 +6,8 @@ import { useIntl } from 'react-intl';
 import { makeSearchRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconExit from '../../../public/img/icon-exit.svg';
-import IconSearch from '../../../public/img/icon-search.svg';
+import IconExit from '../../../public/img/icons/icon-exit.svg';
+import IconSearch from '../../../public/img/icons/icon-search.svg';
 
 import styles from './searchBar.module.scss';
 
@@ -60,7 +60,6 @@ export default function SearchBar({
 								: intl.formatMessage({
 										id: 'molecule-searchBar__label',
 										defaultMessage: 'Search',
-										description: 'search bar label',
 								  })
 						}
 					/>

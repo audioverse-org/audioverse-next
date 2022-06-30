@@ -15,6 +15,8 @@ import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 
+import styles from './base.module.scss';
+
 export interface IBaseProps {
 	disableSidebar?: boolean;
 	title?: string;
@@ -46,10 +48,12 @@ function Base<P>({
 	useEffect(() => {
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
+
 	return (
-		<>
+		<div className={styles.base}>
 			<React.StrictMode>
 				<Head>
+					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 					<title>{title ? `${title} | ` : ''}AudioVerse</title>
 					{description && <meta name="description" content={description} />}
 					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
@@ -99,7 +103,7 @@ function Base<P>({
 					</Hydrate>
 				</QueryClientProvider>
 			</React.StrictMode>
-		</>
+		</div>
 	);
 }
 

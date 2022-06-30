@@ -12,8 +12,8 @@ import { SORT_MAP } from '@containers/library';
 import { makeLibraryRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconFilter from '../../../public/img/icon-filter-light.svg';
-import IconSort from '../../../public/img/icon-sort-light.svg';
+import IconFilter from '../../../public/img/icons/icon-filter-light.svg';
+import IconSort from '../../../public/img/icons/icon-sort-light.svg';
 
 import styles from './libraryNav.module.scss';
 
