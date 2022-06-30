@@ -22,6 +22,7 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import styles from '@components/templates/andMiniplayer.module.scss';
+// TODO: This caused the bundle size to jump by 10 KB
 import 'video.js/dist/video-js.css';
 
 // Source:
