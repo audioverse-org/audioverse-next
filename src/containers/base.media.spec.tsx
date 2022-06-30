@@ -183,7 +183,7 @@ describe('app media playback', () => {
 		await waitFor(() =>
 			expect(isVideoInContainer(view.getPlayer())).toBe(true)
 		);
-	});
+	}, 10000);
 
 	it('hides controls when video in miniplayer', async () => {
 		const view = await renderApp(true, recordingVideo);
