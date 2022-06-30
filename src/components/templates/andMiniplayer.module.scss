@@ -1,4 +1,5 @@
-@import '../../styles/common';
+@use '../../styles/mixins.scss';
+@import '../../styles/common.scss';
 
 .contentWithPlayer {
 	@media (min-width: $breakpoint-lg) {
@@ -29,6 +30,7 @@
 	transform: translateY(-50%);
 	padding: 50px;
 	text-align: left;
+	font-family: $serif;
 }
 
 .sequenceText {
@@ -49,25 +51,29 @@
 	font-size: 44px;
 	font-weight: 700;
 	padding-top: 10px;
+	line-height: 110%;
 }
 
 .authorBox {
-	padding-top: 10px;
+	padding-top: 15px;
 }
 
 .authorAvatar {
 	display: inline-block;
 	vertical-align: middle;
-	padding: 10px;
+	overflow: hidden;
 	border-radius: 100%;
 }
 
 .authorText {
-	color: white;
+	color: #cdd9e3;
 	font-size: 16px;
 	font-weight: 400;
 	display: inline-block;
 	vertical-align: middle;
+	padding-left: 10px;
+	line-height: 19px;
+	@include mixins.sansFontFamily();
 }
 
 .series {

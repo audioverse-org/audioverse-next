@@ -19,7 +19,11 @@ import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
 import 'video.js/dist/video-js.css';
 import styles from './miniplayer.module.scss';
 
-export default function Miniplayer(): JSX.Element | null {
+export default function Miniplayer({
+	overlay,
+}: {
+	overlay?: boolean;
+}): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const volume = playbackContext.getVolume();
@@ -51,7 +55,7 @@ export default function Miniplayer(): JSX.Element | null {
 
 	return (
 		<div
-			className={styles.miniplayer}
+			className={clsx(styles.miniplayer, overlay && styles.overlay)}
 			aria-label={intl.formatMessage({
 				id: 'miniplayer__label',
 				defaultMessage: 'miniplayer',
@@ -60,32 +64,43 @@ export default function Miniplayer(): JSX.Element | null {
 			<div className={styles.player}>
 				{/*TODO: Get rid of ID; use ref instead*/}
 				<div id="mini-player" className={styles.pane} />
-				<div className={clsx(styles.controls, isShowingVideo && styles.hidden)}>
+				<div
+					className={clsx(
+						styles.controls,
+						overlay && styles.overlay,
+						isShowingVideo && styles.hidden
+					)}
+				>
 					<ButtonNudge
 						recording={recording}
 						reverse={true}
-						backgroundColor={BaseColors.WHITE}
+						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 						large
+						dark={overlay && true}
 					/>
 					<ButtonPlay
 						recording={recording}
-						backgroundColor={BaseColors.WHITE}
+						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+						active
 					/>
 					<ButtonNudge
 						recording={recording}
-						backgroundColor={BaseColors.WHITE}
+						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 						large
+						dark={overlay && true}
 					/>
 				</div>
 			</div>
 			<div className={styles.meta}>
 				<Link href={recording.canonicalPath}>
-					<a className={styles.link}>
+					<a className={clsx(styles.link, overlay && styles.overlay)}>
 						{sequenceLine}
-						<h4 className={styles.title}>{recording.title}</h4>
+						<h4 className={clsx(styles.title, overlay && styles.overlay)}>
+							{recording.title}
+						</h4>
 					</a>
 				</Link>
-				<div className={styles.progress}>
+				<div className={clsx(styles.progress, overlay && styles.overlay)}>
 					<span>{timeString}</span>
 					<span className={styles.bar}>
 						<RecordingProgressBar recording={recording} />
@@ -104,7 +119,7 @@ export default function Miniplayer(): JSX.Element | null {
 					<IconVolumeLow />
 				</button>
 				<Slider
-					className={styles.slider}
+					className={clsx(styles.slider, overlay && styles.overlay)}
 					value={volume}
 					onChange={(e, val) => playbackContext.setVolume(val as number)}
 					aria-label={intl.formatMessage({

@@ -11,9 +11,6 @@ import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
 
 const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
-const LazyMiniplayerOverlay = dynamic(
-	() => import('../organisms/miniplayerOverlay')
-);
 const LazyHelpWidget = dynamic(() => import('../molecules/helpWidget'));
 
 export default function AndMiniplayer({
@@ -127,7 +124,7 @@ export default function AndMiniplayer({
 				)}
 			</div>
 			<div ref={videoOverlayRef}>
-				{player?.isFullscreen() && <LazyMiniplayerOverlay />}
+				{player?.isFullscreen() && <LazyMiniplayer overlay />}
 			</div>
 			<LazyMiniplayer />
 		</>

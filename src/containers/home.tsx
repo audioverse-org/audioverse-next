@@ -92,9 +92,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 				slogan={formatedSlogan}
 				id="https://www.audioverse.org"
 				logo="/favicon.svg"
-				// aggregateRating={{
-				// 	ratingValue: '5',
-				// }}
 			/>
 			<div className={styles.wrapper}>
 				<Section

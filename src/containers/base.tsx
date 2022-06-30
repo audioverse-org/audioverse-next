@@ -106,11 +106,11 @@ function Base<P>({
 							href: '/apple-touch-icon.png',
 						},
 					]}
-					description={description ? description : ''}
-					canonical={canonicalUrl ? canonicalUrl : ''}
+					description={description ? description : undefined}
+					canonical={canonicalUrl ? canonicalUrl : undefined}
 					openGraph={{
-						url: `${canonicalUrl}`,
-						description: `${description}`,
+						url: description ? description : undefined,
+						description: canonicalUrl ? canonicalUrl : undefined,
 						images: [
 							{
 								url: `${imageUrl ? imageUrl : '/favicon.svg'}`,
