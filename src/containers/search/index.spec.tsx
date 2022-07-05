@@ -46,4 +46,12 @@ describe('search', () => {
 			);
 		});
 	});
+
+	it('omits search term if none provided', () => {
+		__loadQuery({ q: '' });
+
+		renderPage();
+
+		expect(screen.getByTestId('head')).toHaveTextContent('Search | AudioVerse');
+	});
 });

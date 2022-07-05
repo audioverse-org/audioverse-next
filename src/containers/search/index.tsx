@@ -39,11 +39,18 @@ function SearchHead(): JSX.Element {
 	return (
 		<Head>
 			<title>
-				<FormattedMessage
-					id="search__titleDynamic"
-					defaultMessage='Search | "{term}" | AudioVerse'
-					values={{ term }}
-				/>
+				{term ? (
+					<FormattedMessage
+						id="search__titleDynamic"
+						defaultMessage='Search | "{term}" | AudioVerse'
+						values={{ term }}
+					/>
+				) : (
+					<FormattedMessage
+						id="search__title"
+						defaultMessage="Search | AudioVerse"
+					/>
+				)}
 			</title>
 		</Head>
 	);
