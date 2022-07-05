@@ -15,7 +15,7 @@ import IconButton from '@components/molecules/iconButton';
 import Tease from '@components/molecules/tease';
 import TypeLockup from '@components/molecules/typeLockup';
 import { BaseColors } from '@lib/constants';
-import { formatLongDateTime } from '@lib/date';
+import { useFormattedLongDateTime } from '@lib/date';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';
@@ -33,21 +33,18 @@ function LibraryPlaylistDetail({
 	playlist,
 }: Must<ILibraryPlaylistDetailProps>): JSX.Element {
 	const { title, recordings, createdAt, summary } = playlist;
-
-	const details: IDefinitionListTerm[] = [];
-	if (createdAt) {
-		details.push({
+	const dateString = useFormattedLongDateTime(createdAt);
+	const details: IDefinitionListTerm[] = [
+		createdAt && {
 			term: (
 				<FormattedMessage
 					id="playlistDetail__createdLabel"
 					defaultMessage="Created"
 				/>
 			),
-			definition: <p>{formatLongDateTime(createdAt)}</p>,
-		});
-	}
-	if (summary) {
-		details.push({
+			definition: <p>{dateString}</p>,
+		},
+		summary && {
 			term: (
 				<FormattedMessage
 					id="playlistDetail__summaryLabel"
@@ -55,8 +52,8 @@ function LibraryPlaylistDetail({
 				/>
 			),
 			definition: <div>{summary}</div>,
-		});
-	}
+		},
+	];
 
 	return (
 		<Tease className={styles.container}>

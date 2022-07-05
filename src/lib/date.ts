@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 /**
  * This takes a GraphQL `RelativeDateTime` and returns a JS Date
@@ -19,7 +20,21 @@ export const formatLongDate = (date: string | Date): string => {
 	});
 };
 
-export const formatLongDateTime = (date: string | Date): string => {
+export const useFormattedLongDateTime = (
+	date?: string | Date
+): string | undefined => {
+	// WORKAROUND: toLocaleString returns different values in SSR vs in browser,
+	// causing hydration errors.
+	// https://nextjs.org/docs/messages/react-hydration-error
+	// https://www.joshwcomeau.com/react/the-perils-of-rehydration/
+	const [didMount, setDidMount] = useState(false);
+
+	useEffect(() => {
+		setDidMount(true);
+	}, []);
+
+	if (!didMount || !date) return;
+
 	return new Date(date).toLocaleString('default', {
 		hour: 'numeric',
 		minute: 'numeric',

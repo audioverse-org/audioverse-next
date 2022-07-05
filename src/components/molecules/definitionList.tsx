@@ -8,10 +8,14 @@ import baseColorStyles from '../atoms/baseColors.module.scss';
 
 import styles from './definitionList.module.scss';
 
-export type IDefinitionListTerm = {
+type Falsy = false | 0 | '' | null | undefined;
+
+type Term = {
 	term: JSX.Element | string;
 	definition: JSX.Element | string;
 };
+
+export type IDefinitionListTerm = Term | Falsy;
 
 type Props = {
 	terms: IDefinitionListTerm[];
@@ -24,16 +28,18 @@ export default function DefinitionList({
 }: Props): JSX.Element {
 	return (
 		<dl className={clsx(styles.dl, baseColorStyles[textColor])}>
-			{terms.map(({ term, definition }, index) => (
-				<React.Fragment key={index}>
-					<dt className={styles.dt}>
-						<Heading6 sans unpadded uppercase>
-							{term}
-						</Heading6>
-					</dt>
-					<dd className={styles.dd}>{definition}</dd>
-				</React.Fragment>
-			))}
+			{terms
+				.filter((t): t is Term => !!t)
+				.map(({ term, definition }, index) => (
+					<React.Fragment key={index}>
+						<dt className={styles.dt}>
+							<Heading6 sans unpadded uppercase>
+								{term}
+							</Heading6>
+						</dt>
+						<dd className={styles.dd}>{definition}</dd>
+					</React.Fragment>
+				))}
 		</dl>
 	);
 }

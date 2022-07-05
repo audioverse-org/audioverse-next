@@ -23,7 +23,7 @@ import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
 import Transcript from '@components/molecules/transcript';
-import { formatLongDateTime, parseRelativeDate } from '@lib/date';
+import { parseRelativeDate, useFormattedLongDateTime } from '@lib/date';
 import {
 	RecordingContentType,
 	SequenceContentType,
@@ -92,10 +92,13 @@ export function Recording({
 	const isAudiobook = contentType === RecordingContentType.AudiobookTrack;
 	const isBibleChapter = contentType === RecordingContentType.BibleChapter;
 	const persons = isAudiobook ? writers : speakers;
-	const recordingDateString =
+
+	const relativeDate =
 		recordingDate && !isBibleChapter
-			? formatLongDateTime(parseRelativeDate(recordingDate) || '')
+			? parseRelativeDate(recordingDate)
 			: undefined;
+
+	const recordingDateString = useFormattedLongDateTime(relativeDate);
 	const index = sequenceIndex;
 	const seriesItems = overrideSequence
 		? overrideSequence.seriesItems
