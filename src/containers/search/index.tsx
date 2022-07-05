@@ -15,7 +15,6 @@ import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
-import { Language } from '@src/__generated__/graphql';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
@@ -28,10 +27,9 @@ import { makeSearchSequencesRoute } from '@lib/routes/makeSearchSequencesRoute';
 import { makeSearchSponsorsRoute } from '@lib/routes/makeSearchSponsorsRoute';
 import { makeSearchTeachingsRoute } from '@lib/routes/makeSearchTeachingsRoute';
 import { useGetSearchResultsPageDataQuery } from '@containers/search/__generated__';
+import { useLanguageId } from '@lib/useLanguageId';
 
-export type SearchProps = {
-	language: Language;
-};
+export type SearchProps = Record<string, never>;
 
 function SearchHead(): JSX.Element {
 	const term = useRouter().query.q;
@@ -56,15 +54,23 @@ function SearchHead(): JSX.Element {
 	);
 }
 
-function Search({ language }: SearchProps): JSX.Element {
-	const languageRoute = useLanguageRoute();
+function useSearchResults() {
 	const { query } = useRouter();
+	const language = useLanguageId();
 	const term = query.q as string;
 
-	const { data } = useGetSearchResultsPageDataQuery({
-		language,
+	return {
+		...useGetSearchResultsPageDataQuery({
+			language,
+			term,
+		}),
 		term,
-	});
+	};
+}
+
+function Search(): JSX.Element {
+	const languageRoute = useLanguageRoute();
+	const { data, term } = useSearchResults();
 
 	if (!data) {
 		throw new Error('Unreachable');
@@ -212,24 +218,11 @@ function Search({ language }: SearchProps): JSX.Element {
 }
 
 export default withFailStates(Search, {
-	useShould404: ({ language }) => {
-		const { query } = useRouter();
-		const term = query.q as string;
-		const { isLoading, data } = useGetSearchResultsPageDataQuery({
-			language,
-			term,
-		});
+	useShould404: () => {
+		const { isLoading, data } = useSearchResults();
 		return !isLoading && !data;
 	},
-	useIsLoading: ({ language }) => {
-		const { query } = useRouter();
-		const term = query.q as string;
-		const { isLoading } = useGetSearchResultsPageDataQuery({
-			language,
-			term,
-		});
-		return isLoading;
-	},
+	useIsLoading: () => useSearchResults().isLoading,
 	Loading: () => (
 		<>
 			<SearchHead />

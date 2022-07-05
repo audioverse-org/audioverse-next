@@ -1,19 +1,15 @@
 import { __loadQuery } from 'next/router';
 import React from 'react';
 
-import { Language } from '@src/__generated__/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
-import Search, {
-	getStaticPaths,
-	getStaticProps,
-} from '@pages/[language]/search';
+import Search, { getStaticPaths } from '@pages/[language]/search';
 
 import { screen, waitFor } from '@testing-library/react';
 
 jest.mock('next/head');
 
 const renderPage = async () => {
-	return renderWithProviders(<Search language={Language.English} />, undefined);
+	return renderWithProviders(<Search />, undefined);
 };
 
 describe('search', () => {
@@ -21,16 +17,6 @@ describe('search', () => {
 		const { paths } = await getStaticPaths();
 
 		expect(paths).toContain('/en/search');
-	});
-
-	it('includes props', async () => {
-		const { props } = (await getStaticProps({
-			params: {
-				language: 'en',
-			},
-		})) as any;
-
-		expect(props).toBeDefined();
 	});
 
 	it('includes search term in title', async () => {
