@@ -37,58 +37,119 @@ export type INavigationItem = {
 	childNode?: JSX.Element;
 };
 
+// WORKAROUND: https://stackoverflow.com/a/72334062/937377
+const noSsr = { ssr: false };
+
 const iconMap = {
-	icon_search: dynamic(() => import('@public/img/icons/icon-search.svg')),
-	icon_books: dynamic(() => import('@public/img/icons/icon-books.svg')),
-	fa_bookmark: dynamic(() => import('@public/img/icons/fa-bookmark.svg')),
-	fa_stream: dynamic(() => import('@public/img/icons/fa-stream.svg')),
-	fa_history: dynamic(() => import('@public/img/icons/fa-history.svg')),
-	icon_bible: dynamic(() => import('@public/img/icons/icon-bible.svg')),
+	icon_search: dynamic(
+		() => import('@public/img/icons/icon-search.svg'),
+		noSsr
+	),
+	icon_books: dynamic(() => import('@public/img/icons/icon-books.svg'), noSsr),
+	fa_bookmark: dynamic(
+		() => import('@public/img/icons/fa-bookmark.svg'),
+		noSsr
+	),
+	fa_stream: dynamic(() => import('@public/img/icons/fa-stream.svg'), noSsr),
+	fa_history: dynamic(() => import('@public/img/icons/fa-history.svg'), noSsr),
+	icon_bible: dynamic(() => import('@public/img/icons/icon-bible.svg'), noSsr),
 	icon_collections: dynamic(
-		() => import('@public/img/icons/icon-collections.svg')
+		() => import('@public/img/icons/icon-collections.svg'),
+		noSsr
 	),
-	fa_list_alt: dynamic(() => import('@public/img/icons/fa-list-alt.svg')),
+	fa_list_alt: dynamic(
+		() => import('@public/img/icons/fa-list-alt.svg'),
+		noSsr
+	),
 	fa_user_plus_heavy: dynamic(
-		() => import('@public/img/icons/fa-user-plus-heavy.svg')
+		() => import('@public/img/icons/fa-user-plus-heavy.svg'),
+		noSsr
 	),
-	fa_calendar: dynamic(() => import('@public/img/icons/fa-calendar.svg')),
-	fa_user_heavy: dynamic(() => import('@public/img/icons/fa-user-heavy.svg')),
-	fa_feather: dynamic(() => import('@public/img/icons/fa-feather.svg')),
-	fa_book: dynamic(() => import('@public/img/icons/fa-book.svg')),
-	fa_music: dynamic(() => import('@public/img/icons/fa-music.svg')),
-	icon_account: dynamic(() => import('@public/img/icons/icon-account.svg')),
-	icon_our_story: dynamic(() => import('@public/img/icons/icon-our-story.svg')),
-	fa_seedling: dynamic(() => import('@public/img/icons/fa-seedling.svg')),
-	fa_users_heavy: dynamic(() => import('@public/img/icons/fa-users-heavy.svg')),
+	fa_calendar: dynamic(
+		() => import('@public/img/icons/fa-calendar.svg'),
+		noSsr
+	),
+	fa_user_heavy: dynamic(
+		() => import('@public/img/icons/fa-user-heavy.svg'),
+		noSsr
+	),
+	fa_feather: dynamic(() => import('@public/img/icons/fa-feather.svg'), noSsr),
+	fa_book: dynamic(() => import('@public/img/icons/fa-book.svg'), noSsr),
+	fa_music: dynamic(() => import('@public/img/icons/fa-music.svg'), noSsr),
+	icon_account: dynamic(
+		() => import('@public/img/icons/icon-account.svg'),
+		noSsr
+	),
+	icon_our_story: dynamic(
+		() => import('@public/img/icons/icon-our-story.svg'),
+		noSsr
+	),
+	fa_seedling: dynamic(
+		() => import('@public/img/icons/fa-seedling.svg'),
+		noSsr
+	),
+	fa_users_heavy: dynamic(
+		() => import('@public/img/icons/fa-users-heavy.svg'),
+		noSsr
+	),
 	fa_bullseye_heavy: dynamic(
-		() => import('@public/img/icons/fa-bullseye-heavy.svg')
+		() => import('@public/img/icons/fa-bullseye-heavy.svg'),
+		noSsr
 	),
-	fa_fire_heavy: dynamic(() => import('@public/img/icons/fa-fire-heavy.svg')),
-	fa_align_left: dynamic(() => import('@public/img/icons/fa-align-left.svg')),
+	fa_fire_heavy: dynamic(
+		() => import('@public/img/icons/fa-fire-heavy.svg'),
+		noSsr
+	),
+	fa_align_left: dynamic(
+		() => import('@public/img/icons/fa-align-left.svg'),
+		noSsr
+	),
 	fa_comment_heavy: dynamic(
-		() => import('@public/img/icons/fa-comment-heavy.svg')
+		() => import('@public/img/icons/fa-comment-heavy.svg'),
+		noSsr
 	),
-	fa_heart_heavy: dynamic(() => import('@public/img/icons/fa-heart-heavy.svg')),
-	icon_contact: dynamic(() => import('@public/img/icons/icon-contact.svg')),
-	fa_inbox: dynamic(() => import('@public/img/icons/fa-inbox.svg')),
-	fa_facebook: dynamic(() => import('@public/img/icons/fa-facebook.svg')),
-	fa_instagram: dynamic(() => import('@public/img/icons/fa-instagram.svg')),
-	fa_twitter: dynamic(() => import('@public/img/icons/fa-twitter.svg')),
-	fa_youtube: dynamic(() => import('@public/img/icons/fa-youtube.svg')),
-	icon_more: dynamic(() => import('@public/img/icons/icon-more.svg')),
+	fa_heart_heavy: dynamic(
+		() => import('@public/img/icons/fa-heart-heavy.svg'),
+		noSsr
+	),
+	icon_contact: dynamic(
+		() => import('@public/img/icons/icon-contact.svg'),
+		noSsr
+	),
+	fa_inbox: dynamic(() => import('@public/img/icons/fa-inbox.svg'), noSsr),
+	fa_facebook: dynamic(
+		() => import('@public/img/icons/fa-facebook.svg'),
+		noSsr
+	),
+	fa_instagram: dynamic(
+		() => import('@public/img/icons/fa-instagram.svg'),
+		noSsr
+	),
+	fa_twitter: dynamic(() => import('@public/img/icons/fa-twitter.svg'), noSsr),
+	fa_youtube: dynamic(() => import('@public/img/icons/fa-youtube.svg'), noSsr),
+	icon_more: dynamic(() => import('@public/img/icons/icon-more.svg'), noSsr),
 	fa_question_circle: dynamic(
-		() => import('@public/img/icons/fa-question-circle.svg')
+		() => import('@public/img/icons/fa-question-circle.svg'),
+		noSsr
 	),
-	fa_link: dynamic(() => import('@public/img/icons/fa-link.svg')),
+	fa_link: dynamic(() => import('@public/img/icons/fa-link.svg'), noSsr),
 	fa_landmark_heavy: dynamic(
-		() => import('@public/img/icons/fa-landmark-heavy.svg')
+		() => import('@public/img/icons/fa-landmark-heavy.svg'),
+		noSsr
 	),
-	fa_lock_heavy: dynamic(() => import('@public/img/icons/fa-lock-heavy.svg')),
+	fa_lock_heavy: dynamic(
+		() => import('@public/img/icons/fa-lock-heavy.svg'),
+		noSsr
+	),
 	fa_newspaper_heavy: dynamic(
-		() => import('@public/img/icons/fa-newspaper-heavy.svg')
+		() => import('@public/img/icons/fa-newspaper-heavy.svg'),
+		noSsr
 	),
-	icon_sign_out: dynamic(() => import('@public/img/icons/icon-sign-out.svg')),
-	fa_store: dynamic(() => import('@public/img/icons/fa-store.svg')),
+	icon_sign_out: dynamic(
+		() => import('@public/img/icons/icon-sign-out.svg'),
+		noSsr
+	),
+	fa_store: dynamic(() => import('@public/img/icons/fa-store.svg'), noSsr),
 };
 
 export function useNavigationItems(): INavigationItem[] {

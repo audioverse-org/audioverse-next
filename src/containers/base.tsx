@@ -39,12 +39,13 @@ function Base<P>({
 		document.body.classList.toggle('body--no-sidebar', disableSidebar);
 	}, [disableSidebar]);
 
+	const fullTitle = title ? `${title} | AudioVerse` : 'AudioVerse';
+
 	return (
 		<div className={styles.base}>
 			<StrictMode>
 				<Head>
-					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
-					<title>{title ? `${title} | ` : ''}AudioVerse</title>
+					<title>{fullTitle}</title>
 					{description && <meta name="description" content={description} />}
 					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 					<meta

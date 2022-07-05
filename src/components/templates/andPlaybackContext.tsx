@@ -31,7 +31,9 @@ import {
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
 const LazyVideoPlayer = dynamic(
-	() => import('@components/components/molecules/videoPlayer')
+	() => import('@components/components/molecules/videoPlayer'),
+	// WORKAROUND: https://stackoverflow.com/a/72334062/937377
+	{ ssr: false }
 );
 
 interface Playable extends VideoJs.default.Tech.SourceObject {
