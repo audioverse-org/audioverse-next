@@ -2,7 +2,7 @@ import omit from 'lodash/omit';
 import reduce from 'lodash/reduce';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
@@ -33,23 +33,26 @@ export type SearchProps = Record<string, never>;
 
 function SearchHead(): JSX.Element {
 	const term = useRouter().query.q;
+	const intl = useIntl();
+
+	const t = term
+		? intl.formatMessage(
+				{
+					id: 'search__titleDynamic',
+					defaultMessage: 'Search | "{term}" | AudioVerse',
+				},
+				{
+					term,
+				}
+		  )
+		: intl.formatMessage({
+				id: 'search__title',
+				defaultMessage: 'Search | AudioVerse',
+		  });
 
 	return (
 		<Head>
-			<title>
-				{term ? (
-					<FormattedMessage
-						id="search__titleDynamic"
-						defaultMessage='Search | "{term}" | AudioVerse'
-						values={{ term }}
-					/>
-				) : (
-					<FormattedMessage
-						id="search__title"
-						defaultMessage="Search | AudioVerse"
-					/>
-				)}
-			</title>
+			<title>{t}</title>
 		</Head>
 	);
 }
