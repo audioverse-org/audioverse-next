@@ -8,7 +8,6 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { BookProps } from '@containers/bible/book';
 import * as bibleBrain from '@lib/api/bibleBrain';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import setPlayerMock from '@lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
@@ -71,7 +70,6 @@ describe('Bible book detail page', () => {
 	});
 
 	beforeEach(() => {
-		setPlayerMock();
 		__loadRouter({
 			asPath: '/en/bibles/ENGESVC/Gen/1',
 			query: {

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
 import React from 'react';
-import videojs from 'video.js';
+import videojs, { __mockPlayer } from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
@@ -16,7 +16,6 @@ import {
 } from '@src/__generated__/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock from '@lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
@@ -96,7 +95,6 @@ describe('sermon detail page', () => {
 				id: 'the_sermon_id',
 			},
 		});
-		setPlayerMock();
 	});
 
 	it('gets sermons', async () => {
@@ -1058,8 +1056,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('starts at beginning when playing series recording', async () => {
-		const mockPlayer = setPlayerMock();
-
 		loadSermonDetailData({
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			sequence: {
@@ -1086,7 +1082,7 @@ describe('sermon detail page', () => {
 
 		await expect(player.findByLabelText('pause')).resolves.toBeInTheDocument();
 
-		mockPlayer.currentTime(50);
+		__mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
@@ -1096,7 +1092,7 @@ describe('sermon detail page', () => {
 
 		userEvent.click(sidebar.getByLabelText('play'));
 
-		expect(mockPlayer.currentTime).toBeCalledWith(0);
+		expect(__mockPlayer.currentTime).toBeCalledWith(0);
 
 		const miniplayer = within(screen.getByLabelText('miniplayer'));
 

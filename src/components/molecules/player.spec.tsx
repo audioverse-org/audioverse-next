@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import videojs from 'video.js';
+import videojs, { __mockPlayer } from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -11,11 +11,11 @@ import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import { BaseColors } from '@lib/constants';
 import { simulateMediaTick } from '@lib/test/simulateMediaTick';
 import { PlayerFragment } from '@components/molecules/__generated__/player';
+import { __loadMockPlayer } from 'video.js';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
@@ -64,6 +64,7 @@ const renderComponent = buildRenderer<PlayerProps>(
 
 const updateProgress = async (progress = 50) => {
 	const input = screen.getAllByLabelText('progress')[0];
+
 	await act(async () => {
 		ReactTestUtils.Simulate.input(input, {
 			target: {
@@ -71,6 +72,7 @@ const updateProgress = async (progress = 50) => {
 			},
 		} as any);
 	});
+
 	return input;
 };
 
@@ -90,7 +92,7 @@ async function updateVolume(volume = 70) {
 
 describe('player', () => {
 	beforeEach(() => {
-		setPlayerMock();
+		__loadMockPlayer();
 		__loadRouter({});
 		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
@@ -102,15 +104,13 @@ describe('player', () => {
 	});
 
 	it('plays when clicked', async () => {
-		const mockPlayer = setPlayerMock();
-
 		await renderComponent();
 
 		userEvent.click(screen.getByLabelText('play'));
 
 		await waitFor(() => {
 			// to be called with nothing
-			expect(mockPlayer.play).toBeCalledWith();
+			expect(__mockPlayer.play).toBeCalledWith();
 		});
 	});
 
@@ -138,7 +138,7 @@ describe('player', () => {
 	});
 
 	it('sets current time', async () => {
-		const mockPlayer = setPlayerMock({
+		__loadMockPlayer({
 			duration: 1234,
 		});
 
@@ -146,11 +146,13 @@ describe('player', () => {
 
 		await updateProgress();
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(617));
+		await waitFor(() => {
+			expect(__mockPlayer.currentTime).toBeCalledWith(617);
+		});
 	});
 
 	it('treats range output as percentage', async () => {
-		const mockPlayer = setPlayerMock({ duration: 300 });
+		__loadMockPlayer({ duration: 300 });
 
 		await renderComponent({
 			props: {
@@ -170,11 +172,11 @@ describe('player', () => {
 
 		await updateProgress();
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
+		await waitFor(() => expect(__mockPlayer.currentTime).toBeCalledWith(150));
 	});
 
 	it('updates scrubber on time update', async () => {
-		const player = setPlayerMock({ duration: 300 });
+		const player = __loadMockPlayer({ duration: 300 });
 
 		await renderComponent();
 
@@ -192,7 +194,7 @@ describe('player', () => {
 	});
 
 	it('updates progress on scrub', async () => {
-		setPlayerMock({ duration: 300 });
+		__loadMockPlayer({ duration: 300 });
 
 		await renderComponent();
 
@@ -202,7 +204,7 @@ describe('player', () => {
 	});
 
 	it('does not reload player on play', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent();
 
@@ -210,11 +212,11 @@ describe('player', () => {
 
 		await screen.findAllByLabelText('pause');
 
-		expect(mockPlayer.src).not.toBeCalled();
+		expect(__mockPlayer.src).not.toBeCalled();
 	});
 
 	it('nudges back 15 seconds', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent();
 
@@ -223,17 +225,17 @@ describe('player', () => {
 		const player = screen.getByLabelText('player');
 		await within(player).findByLabelText('pause');
 
-		mockPlayer.currentTime(50);
+		__mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
 		userEvent.click(within(player).getByLabelText('back 15 seconds'));
 
-		expect(mockPlayer.currentTime).toBeCalledWith(35);
+		expect(__mockPlayer.currentTime).toBeCalledWith(35);
 	});
 
 	it('nudges forward 15 seconds', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent();
 
@@ -242,14 +244,14 @@ describe('player', () => {
 		const player = screen.getByLabelText('player');
 		await within(player).findByLabelText('pause');
 
-		mockPlayer.currentTime(50);
+		__mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
 		userEvent.click(within(player).getByLabelText('forward 15 seconds'));
 
 		await waitFor(() => {
-			expect(mockPlayer.currentTime).toBeCalledWith(65);
+			expect(__mockPlayer.currentTime).toBeCalledWith(65);
 		});
 	});
 
@@ -260,7 +262,7 @@ describe('player', () => {
 	});
 
 	it('handles scrubber update after initial recording load', async () => {
-		const mockPlayer = setPlayerMock({ duration: 300 });
+		__loadMockPlayer({ duration: 300 });
 
 		await renderComponent();
 
@@ -270,11 +272,11 @@ describe('player', () => {
 
 		await updateProgress();
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
+		await waitFor(() => expect(__mockPlayer.currentTime).toBeCalledWith(150));
 	});
 
 	it('plays video on poster click', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent({
 			props: {
@@ -295,15 +297,15 @@ describe('player', () => {
 
 		userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		await waitFor(() => expect(mockPlayer.play).toBeCalled());
+		await waitFor(() => expect(__mockPlayer.play).toBeCalled());
 	});
 
 	it('tracks scrubber click when duration not yet known', async () => {
-		const mockPlayer = setPlayerMock({
+		__loadMockPlayer({
 			duration: NaN,
 			functions: {
 				play: jest.fn(async () => {
-					mockPlayer._updateOptions({
+					__mockPlayer._updateOptions({
 						isPaused: false,
 						duration: 300,
 					});
@@ -334,11 +336,11 @@ describe('player', () => {
 		const player = screen.getByLabelText('player');
 		userEvent.click(within(player).getByLabelText('play'));
 
-		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
+		await waitFor(() => expect(__mockPlayer.currentTime).toBeCalledWith(150));
 	});
 
 	it('overloads different recording', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		const recording1: Partial<PlayerFragment> = {
 			id: 'first_sermon_id',
@@ -396,7 +398,7 @@ describe('player', () => {
 		userEvent.click(within(secondPlayer).getByLabelText('play'));
 
 		await waitFor(() =>
-			expect(mockPlayer.src).toBeCalledWith([
+			expect(__mockPlayer.src).toBeCalledWith([
 				{
 					duration: 2345,
 					src: 'second_source_src',
@@ -518,7 +520,7 @@ describe('player', () => {
 	});
 
 	it('has volume control', async () => {
-		setPlayerMock({ volume: 0.7 });
+		__loadMockPlayer({ volume: 0.7 });
 
 		await renderComponent();
 
@@ -531,8 +533,6 @@ describe('player', () => {
 	});
 
 	it('sets volume', async () => {
-		const playerMock = setPlayerMock();
-
 		await renderComponent();
 
 		userEvent.click(screen.getByLabelText('play'));
@@ -541,7 +541,7 @@ describe('player', () => {
 
 		await updateVolume();
 
-		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
+		await waitFor(() => expect(__mockPlayer.volume).toBeCalledWith(0.7));
 	});
 
 	it('does not show miniplayer if no recording loaded', async () => {
@@ -576,7 +576,7 @@ describe('player', () => {
 	});
 
 	it('plays video through portal', async () => {
-		setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent({
 			props: {
@@ -617,7 +617,7 @@ describe('player', () => {
 	});
 
 	it('sets miniplayer progress value', async () => {
-		const mockPlayer = setPlayerMock({ duration: 100 });
+		__loadMockPlayer({ duration: 100 });
 
 		await renderComponent();
 
@@ -626,7 +626,7 @@ describe('player', () => {
 		const miniplayer = screen.getByLabelText('miniplayer');
 		await within(miniplayer).findByLabelText('pause');
 
-		mockPlayer.currentTime(25);
+		__mockPlayer.currentTime(25);
 
 		await simulateMediaTick();
 
@@ -636,7 +636,7 @@ describe('player', () => {
 	});
 
 	it('accepts progress change from miniplayer progress bar', async () => {
-		const mockPlayer = setPlayerMock({ time: 25, duration: 100 });
+		__loadMockPlayer({ time: 25, duration: 100 });
 
 		await renderComponent();
 
@@ -648,7 +648,7 @@ describe('player', () => {
 
 		await updateProgress(70);
 
-		expect(mockPlayer.currentTime).toBeCalledWith(70);
+		expect(__mockPlayer.currentTime).toBeCalledWith(70);
 	});
 
 	it('displays series in miniplayer', async () => {
@@ -791,14 +791,12 @@ describe('player', () => {
 	});
 
 	it('changes speed', async () => {
-		const mockPlayer = setPlayerMock();
-
 		await renderComponent();
 
 		userEvent.click(screen.getByText('1x'));
 
 		await waitFor(() => {
-			expect(mockPlayer.playbackRate).toBeCalledWith(1.25);
+			expect(__mockPlayer.playbackRate).toBeCalledWith(1.25);
 		});
 	});
 
@@ -898,7 +896,9 @@ describe('player', () => {
 	});
 
 	it('defaults to api duration if recording not loaded', async () => {
-		mockVideojs.mockReturnValue(null);
+		__loadMockPlayer({
+			player: null,
+		});
 
 		await renderComponent({
 			props: {
@@ -940,7 +940,7 @@ describe('player', () => {
 	});
 
 	it('launches fullscreen when button clicked', async () => {
-		const mockPlayer = setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent({
 			props: {
@@ -963,12 +963,12 @@ describe('player', () => {
 		userEvent.click(screen.getByLabelText('fullscreen'));
 
 		await waitFor(() => {
-			expect(mockPlayer.requestFullscreen).toBeCalled();
+			expect(__mockPlayer.requestFullscreen).toBeCalled();
 		});
 	});
 
 	it('enables controls when launch fullscreen', async () => {
-		const mockPlayer = setPlayerMock({ isFullscreen: true });
+		__loadMockPlayer({ isFullscreen: true });
 
 		await renderComponent();
 
@@ -976,13 +976,13 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		mockPlayer._fire('fullscreenchange');
+		__mockPlayer._fire('fullscreenchange');
 
-		expect(mockPlayer.controls).toBeCalledWith(true);
+		expect(__mockPlayer.controls).toBeCalledWith(true);
 	});
 
 	it('disables controls when user exits fullscreen', async () => {
-		const mockPlayer = setPlayerMock({ isFullscreen: false });
+		__loadMockPlayer({ isFullscreen: false });
 
 		await renderComponent();
 
@@ -990,13 +990,13 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		mockPlayer._fire('fullscreenchange');
+		__mockPlayer._fire('fullscreenchange');
 
-		expect(mockPlayer.controls).toBeCalledWith(false);
+		expect(__mockPlayer.controls).toBeCalledWith(false);
 	});
 
 	it('displays current time', async () => {
-		const mockPlayer = setPlayerMock({ time: 50 });
+		__loadMockPlayer({ time: 50 });
 
 		await renderComponent();
 
@@ -1006,7 +1006,7 @@ describe('player', () => {
 			expect(screen.getAllByLabelText('pause')).not.toHaveLength(0);
 		});
 
-		mockPlayer.currentTime(50);
+		__mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
@@ -1052,7 +1052,7 @@ describe('player', () => {
 	});
 
 	it('handles initial zero duration', async () => {
-		setPlayerMock({ time: 0, duration: 0 });
+		__loadMockPlayer({ time: 0, duration: 0 });
 
 		await renderComponent();
 
@@ -1068,7 +1068,7 @@ describe('player', () => {
 	});
 
 	it('has working volume down button', async () => {
-		const playerMock = setPlayerMock();
+		const playerMock = __loadMockPlayer();
 
 		await renderComponent();
 
@@ -1083,7 +1083,7 @@ describe('player', () => {
 	});
 
 	it('has working volume up button', async () => {
-		const playerMock = setPlayerMock();
+		const playerMock = __loadMockPlayer();
 
 		await renderComponent();
 
@@ -1098,7 +1098,7 @@ describe('player', () => {
 	});
 
 	it('displays current time in miniplayer', async () => {
-		const mockPlayer = setPlayerMock({ time: 50 });
+		__loadMockPlayer({ time: 50 });
 
 		await renderComponent();
 
@@ -1108,7 +1108,7 @@ describe('player', () => {
 			expect(screen.getAllByLabelText('pause')).not.toHaveLength(0);
 		});
 
-		mockPlayer.currentTime(50);
+		__mockPlayer.currentTime(50);
 
 		await simulateMediaTick();
 
@@ -1118,7 +1118,7 @@ describe('player', () => {
 	});
 
 	it('displays duration in miniplayer', async () => {
-		setPlayerMock({ duration: 120 });
+		__loadMockPlayer({ duration: 120 });
 
 		await renderComponent({
 			props: {

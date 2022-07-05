@@ -1,18 +1,24 @@
-import videojs from 'video.js';
+import type og from 'video.js';
 
-interface SetPlayerMockOptions {
+type Options = {
 	isPaused?: boolean;
 	time?: number;
 	duration?: number;
 	volume?: number;
 	playbackRate?: number;
-	functions?: Partial<videojs.Player>;
+	functions?: Partial<og.Player>;
 	supportsFullScreen?: boolean;
 	isFullscreen?: boolean;
-}
+};
+
+type SetPlayerMockOptions =
+	| Options
+	| {
+			player: unknown;
+	  };
 
 type MockPlayer = Pick<
-	videojs.Player,
+	og.Player,
 	| 'play'
 	| 'pause'
 	| 'paused'
@@ -28,15 +34,17 @@ type MockPlayer = Pick<
 	| 'supportsFullScreen'
 	| 'on'
 > & {
-	_updateOptions: (options: SetPlayerMockOptions) => void;
+	_updateOptions: (options: Options) => void;
 	_fire: (event: string, data?: any) => void;
 };
 
-export const mockVideojs = videojs as unknown as jest.Mock;
+let __mockPlayer: MockPlayer;
 
-export default function setPlayerMock(
-	options: SetPlayerMockOptions = {}
-): MockPlayer {
+function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
+	if ('player' in options) {
+		return options.player as MockPlayer;
+	}
+
 	let {
 		isPaused = true,
 		time = 50,
@@ -44,14 +52,15 @@ export default function setPlayerMock(
 		volume = 0.5,
 		playbackRate = 1,
 		functions = {},
+		supportsFullScreen = true,
+		isFullscreen = false,
 	} = options;
-	const { supportsFullScreen = true, isFullscreen = false } = options;
 
 	const handlers: Record<string, Array<(data: any) => any>> = {};
 
-	const mockPlayer: MockPlayer = {
+	__mockPlayer = {
 		_updateOptions: (options) => {
-			const update = (key: keyof SetPlayerMockOptions, fallback: any) => {
+			const update = (key: keyof Options, fallback: any) => {
 				if (!(key in options)) return fallback;
 				if (options[key] === undefined) return fallback;
 				return options[key];
@@ -69,7 +78,7 @@ export default function setPlayerMock(
 		}),
 		pause: jest.fn(() => {
 			isPaused = true;
-			return mockPlayer as unknown as videojs.Player;
+			return __mockPlayer as unknown as og.Player;
 		}),
 		paused: jest.fn(() => isPaused),
 		currentTime: jest.fn((newTime: number | null = null) => {
@@ -104,7 +113,21 @@ export default function setPlayerMock(
 		...functions,
 	};
 
-	mockVideojs.mockReturnValue(mockPlayer);
-
-	return mockPlayer;
+	return __mockPlayer;
 }
+
+const videojs = jest.fn(() => __mockPlayer);
+
+beforeEach(() => {
+	__loadMockPlayer();
+	videojs.mockImplementation(() => __mockPlayer);
+});
+
+declare module 'video.js' {
+	const __mockPlayer: MockPlayer;
+	function __loadMockPlayer(options?: SetPlayerMockOptions): MockPlayer;
+}
+
+export { __mockPlayer, __loadMockPlayer };
+
+export default videojs;

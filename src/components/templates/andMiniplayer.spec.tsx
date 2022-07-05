@@ -7,8 +7,8 @@ import AndPlaybackContext, {
 } from '@components/templates/andPlaybackContext';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import setPlayerMock from '@lib/test/setPlayerMock';
 import { screen, waitFor } from '@testing-library/react';
+import { __loadMockPlayer } from 'video.js';
 
 const renderComponent = buildRenderer(AndPlaybackContext);
 
@@ -41,7 +41,7 @@ describe('andMiniplayer', () => {
 	});
 
 	it('plays media', async () => {
-		const mockPlayer = setPlayerMock();
+		const mockPlayer = __loadMockPlayer();
 
 		await renderComponent({
 			props: {
@@ -84,7 +84,7 @@ describe('andMiniplayer', () => {
 	});
 
 	it('loads recording', async () => {
-		setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent({
 			props: {
@@ -109,7 +109,7 @@ describe('andMiniplayer', () => {
 	});
 
 	it('sets class on body when miniplayer loaded', async () => {
-		setPlayerMock();
+		__loadMockPlayer();
 
 		await renderComponent({
 			props: {
