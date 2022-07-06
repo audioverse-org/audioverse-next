@@ -110,7 +110,7 @@ export type PlaybackContextType = {
 	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
-	getVolume: () => number;
+	getVolume: () => Percent;
 	setVolume: (v: Percent) => void;
 	setSpeed: (s: number) => void;
 	getSpeed: () => number;
@@ -335,7 +335,10 @@ export default function AndPlaybackContext({
 			return 'miniplayer';
 		},
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
-		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
+		getVolume: (): Percent => {
+			const v = Math.round((playerRef.current?.volume() ?? 1) * 100);
+			return v as Percent;
+		},
 		setVolume: (v: Percent) => playerRef.current?.volume(v / 100),
 		getSpeed: () => _speed,
 		setSpeed: (s: number) => {
