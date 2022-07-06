@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { useLogout } from '@lib/api/useLogout';
+import { useLogout } from '@lib/api/hooks/useLogout';
 import useLanguageRoute from '@lib/useLanguageRoute';
 import { makeDiscoverRoute } from '@lib/routes/makeDiscoverRoute';
 

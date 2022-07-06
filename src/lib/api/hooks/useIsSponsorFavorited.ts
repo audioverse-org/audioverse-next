@@ -1,7 +1,7 @@
 import { setSponsorFavorited } from '@lib/api/setSponsorFavorited';
 import { Scalars } from '@src/__generated__/graphql';
 
-import { sponsorIsFavorited } from './sponsorIsFavorited';
+import { sponsorIsFavorited } from '../sponsorIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 
 export function useIsSponsorFavorited(

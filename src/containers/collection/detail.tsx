@@ -22,7 +22,7 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import SponsorLockup from '@components/molecules/sponsorLockup';
 import Tease from '@components/molecules/tease';
-import { useIsCollectionFavorited } from '@lib/api/useIsCollectionFavorited';
+import { useIsCollectionFavorited } from '@lib/api/hooks/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { useFormattedDuration } from '@lib/time';

@@ -30,8 +30,10 @@ import {
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
 
+// import LazyVideoPlayer from '@components/molecules/videoPlayer';
+
 const LazyVideoPlayer = dynamic(
-	() => import('@components/components/molecules/videoPlayer'),
+	() => import('@components/molecules/videoPlayer'),
 	// WORKAROUND: https://stackoverflow.com/a/72334062/937377
 	{ ssr: false }
 );
@@ -81,7 +83,6 @@ export const shouldLoadRecordingPlaybackProgress = (
 	!!getSessionToken();
 
 export type PlaybackContextType = {
-	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
 	play: () => void;
 	pause: () => void;
 	paused: () => boolean;
@@ -123,7 +124,6 @@ export type PlaybackContextType = {
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
-	player: () => undefined,
 	play: () => undefined,
 	pause: () => undefined,
 	paused: () => true,
@@ -178,7 +178,6 @@ export default function AndPlaybackContext({
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJsPlayer>();
-	const progressRef = useRef<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
@@ -237,10 +236,6 @@ export default function AndPlaybackContext({
 
 	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
 
-	useEffect(() => {
-		progressRef.current = progress;
-	}, [progress]);
-
 	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -248,12 +243,12 @@ export default function AndPlaybackContext({
 			setIsPaused(false);
 		},
 		pause: () => {
+			console.log('pause');
 			playerRef.current?.pause();
 			setIsPaused(true);
 		},
 		getMiniplayerRef: () => miniplayerRef,
 		paused: () => isPaused,
-		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
 			progress * playback.getDuration() ||
@@ -349,7 +344,13 @@ export default function AndPlaybackContext({
 				playback._setRecording(sourceRecordings[1], prefersAudio);
 			}
 		},
-		setIsPaused: (paused) => setIsPaused(paused),
+		setIsPaused: (paused) => {
+			// console.log('setIsPaused', paused);
+			// if (paused) {
+			// 	console.trace();
+			// }
+			setIsPaused(paused);
+		},
 		_setRecording: (
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined
@@ -407,6 +408,22 @@ export default function AndPlaybackContext({
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());
 					});
+					p.on('timeupdate', () => {
+						if (!playerRef.current) return;
+						const t = playerRef.current.currentTime();
+						const d = playerRef.current.duration();
+						const p = d ? t / d : 0;
+						playback.setProgress(p, false);
+					});
+					p.on('pause', () => {
+						playback.setIsPaused(true);
+					});
+					p.on('play', () => {
+						playback.setIsPaused(false);
+					});
+					p.on('ended', () => {
+						playback.advanceRecording();
+					});
 					playerRef.current = p;
 					resetPlayer();
 				});
@@ -430,6 +447,7 @@ export default function AndPlaybackContext({
 		}
 
 		function findDestination() {
+			console.log('findDestination');
 			const ref = isShowingVideo ? miniplayerRef : originRef;
 			return ref.current;
 		}
@@ -454,16 +472,6 @@ export default function AndPlaybackContext({
 					className={styles.playerElement}
 					videoRef={videoRef}
 					videoElRef={videoElRef}
-					onTimeUpdate={() => {
-						if (!playerRef.current) return;
-						const t = playerRef.current.currentTime();
-						const d = playerRef.current.duration();
-						const p = d ? t / d : 0;
-						playback.setProgress(p, false);
-					}}
-					onPause={() => playback.setIsPaused(true)}
-					onPlay={() => playback.setIsPaused(false)}
-					onEnded={() => playback.advanceRecording()}
 				/>
 			</div>
 			{children}

@@ -1,9 +1,9 @@
-import { useLogout } from '@lib/api/useLogout';
+import { useLogout } from '@lib/api/hooks/useLogout';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Logout from '@pages/[language]/account/logout';
 import { __loadRouter } from 'next/router';
 
-jest.mock('@lib/api/useLogout');
+jest.mock('@lib/api/hooks/useLogout');
 
 const renderPage = buildRenderer(Logout);
 const mockUseLogout = useLogout as jest.Mock;

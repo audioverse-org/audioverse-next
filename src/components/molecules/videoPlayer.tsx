@@ -2,14 +2,11 @@ import React from 'react';
 import 'video.js/dist/video-js.css';
 
 export default function VideoPlayer(props: {
+	className?: string;
 	videoRef: React.RefObject<HTMLDivElement>;
 	videoElRef: React.RefObject<HTMLVideoElement>;
-	onTimeUpdate: () => void;
-	onPause: () => void;
-	onPlay: () => void;
-	onEnded: () => void;
-	className?: string;
 }) {
+	console.log('VideoPlayer');
 	return (
 		<div ref={props.videoRef} className={props.className}>
 			<div data-vjs-player={true}>
@@ -18,10 +15,9 @@ export default function VideoPlayer(props: {
 					className="video-js"
 					playsInline
 					data-testid="video-element"
-					onTimeUpdate={props.onTimeUpdate}
-					onPause={props.onPause}
-					onPlay={props.onPlay}
-					onEnded={props.onEnded}
+					onPause={(e) => {
+						console.log(e);
+					}}
 				/>
 			</div>
 		</div>

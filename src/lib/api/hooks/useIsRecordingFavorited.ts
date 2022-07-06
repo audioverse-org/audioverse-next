@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
 import { Scalars } from '@src/__generated__/graphql';
 
-import { recordingIsFavorited } from './recordingIsFavorited';
+import { recordingIsFavorited } from '../recordingIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 
 export const RECORDING_FAVORITED_QUERY_KEY_PREFIX = 'isRecordingFavorited';

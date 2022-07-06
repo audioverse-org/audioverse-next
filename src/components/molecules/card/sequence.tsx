@@ -8,7 +8,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
-import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
+import { useIsSequenceFavorited } from '@lib/api/hooks/useIsSequenceFavorited';
 import { BaseColors } from '@lib/constants';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { getRecordingTypeTheme } from '@lib/getRecordingTheme';

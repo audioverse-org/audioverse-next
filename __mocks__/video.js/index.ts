@@ -1,4 +1,5 @@
 import type og from 'video.js';
+import ReactTestUtils, { act } from 'react-dom/test-utils';
 
 type Options = {
 	isPaused?: boolean;
@@ -113,15 +114,12 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 		...functions,
 	};
 
+	videojs.mockImplementation(() => __mockPlayer);
+
 	return __mockPlayer;
 }
 
 const videojs = jest.fn(() => __mockPlayer);
-
-beforeEach(() => {
-	__loadMockPlayer();
-	videojs.mockImplementation(() => __mockPlayer);
-});
 
 declare module 'video.js' {
 	const __mockPlayer: MockPlayer;
