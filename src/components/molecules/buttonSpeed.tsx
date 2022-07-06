@@ -3,27 +3,26 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
-import usePlaybackSession from '@lib/usePlaybackSession';
 
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';
 import CircleButton from './circleButton';
-import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import useSpeed, { SPEEDS } from '@lib/api/hooks/useSpeed';
+import { PlayerFragment } from '@components/molecules/__generated__/player';
 
 export default function ButtonSpeed({
 	recording,
 	backgroundColor,
 }: {
-	recording: AndMiniplayerFragment;
+	recording: PlayerFragment;
 	backgroundColor: BaseColors;
 }): JSX.Element {
-	const { setSpeed, speed } = usePlaybackSession(recording);
-	const speeds = [1, 1.25, 1.5, 1.75, 2];
+	const [speed, setSpeed] = useSpeed(recording);
 
 	return (
 		<CircleButton
 			onClick={() => {
-				const newSpeed = speeds.find((s) => s > (speed || 0)) || speeds[0];
+				const newSpeed = SPEEDS.find((s) => s > (speed || 0)) || SPEEDS[0];
 				setSpeed(newSpeed);
 			}}
 			backgroundColor={backgroundColor}

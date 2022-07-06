@@ -83,8 +83,8 @@ export const shouldLoadRecordingPlaybackProgress = (
 	!!getSessionToken();
 
 export type PlaybackContextType = {
-	on: (event: string, callback: (...args: unknown[]) => void) => void;
-	off: (event: string, callback: (...args: unknown[]) => void) => void;
+	on: (event: VideoJsEvent, callback: (...args: unknown[]) => void) => void;
+	off: (event: VideoJsEvent, callback: (...args: unknown[]) => void) => void;
 	play: () => void;
 	pause: () => void;
 	paused: () => boolean;
@@ -187,7 +187,6 @@ export default function AndPlaybackContext({
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
-	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
 	const queryClient = useQueryClient();
 
@@ -254,7 +253,6 @@ export default function AndPlaybackContext({
 			setIsPaused(false);
 		},
 		pause: () => {
-			console.log('pause');
 			playerRef.current?.pause();
 			setIsPaused(true);
 		},
@@ -340,11 +338,10 @@ export default function AndPlaybackContext({
 			return v as Percent;
 		},
 		setVolume: (v: Percent) => playerRef.current?.volume(v / 100),
-		getSpeed: () => _speed,
+		getSpeed: () => playerRef.current?.playbackRate() ?? 1,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
 			playerRef.current?.defaultPlaybackRate(s);
-			_setSpeed(s);
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
@@ -452,7 +449,6 @@ export default function AndPlaybackContext({
 		}
 
 		function findDestination() {
-			console.log('findDestination');
 			const ref = isShowingVideo ? miniplayerRef : originRef;
 			return ref.current;
 		}

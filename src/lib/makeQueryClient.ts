@@ -1,10 +1,8 @@
 import { QueryClient } from 'react-query';
 import { IS_TEST } from '@lib/constants';
 
-const DEBUG = false;
-
 export default function makeQueryClient() {
-	const client = new QueryClient({
+	return new QueryClient({
 		defaultOptions: {
 			queries: {
 				refetchOnWindowFocus: false,
@@ -14,12 +12,4 @@ export default function makeQueryClient() {
 			},
 		},
 	});
-
-	if (DEBUG) {
-		client.getQueryCache().subscribe(() => {
-			console.log('query event');
-		});
-	}
-
-	return client;
 }

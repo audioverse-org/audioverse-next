@@ -3,13 +3,13 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
 	getSources,
 	PlaybackContext,
-	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
 } from '@components/templates/andPlaybackContext';
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
 } from '@components/templates/__generated__/andMiniplayer';
+import useWithRecording from '@lib/api/hooks/useWithRecording';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
@@ -41,7 +41,6 @@ export default function usePlaybackSession(
 		prefersAudio?: boolean;
 	} = {}
 ): PlaybackSessionInfo {
-	const { playlistRecordings } = options;
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 	const isLoaded =
@@ -68,6 +67,8 @@ export default function usePlaybackSession(
 	const [video] = useState<JSX.Element>(
 		<div ref={portalContainerRef} data-testid="portal" />
 	);
+
+	const withRecording = useWithRecording(recording, options);
 
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
@@ -110,30 +111,14 @@ export default function usePlaybackSession(
 		[]
 	);
 
-	function afterLoad(func: (c: PlaybackContextType) => void) {
-		if (!recording) return;
-
-		if (isLoaded) {
-			func(context);
-			return;
-		}
-
-		context.loadRecording(playlistRecordings || recording, {
-			onLoad: (c: PlaybackContextType) => {
-				func(c);
-			},
-			prefersAudio: options.prefersAudio,
-		});
-	}
-
 	function shiftTime(delta: number) {
-		afterLoad((c) => {
+		withRecording((c) => {
 			c.setTime(c.getTime() + delta);
 		});
 	}
 
 	function setProgress(percent: number) {
-		afterLoad((c) => c.setProgress(percent));
+		withRecording((c) => c.setProgress(percent));
 	}
 
 	function pause() {
@@ -144,7 +129,7 @@ export default function usePlaybackSession(
 	}
 
 	function play() {
-		afterLoad((c) => c.play());
+		withRecording((c) => c.play());
 	}
 
 	function setPrefersAudio(prefersAudio: boolean) {
@@ -160,12 +145,12 @@ export default function usePlaybackSession(
 	}
 
 	function setSpeed(speed: number) {
-		afterLoad((c) => c.setSpeed(speed));
+		withRecording((c) => c.setSpeed(speed));
 		setSpeedFingerprint(speed);
 	}
 
 	function requestFullscreen() {
-		afterLoad((c) => c.requestFullscreen());
+		withRecording((c) => c.requestFullscreen());
 	}
 
 	function getVideo() {

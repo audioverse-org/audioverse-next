@@ -6,7 +6,6 @@ export default function VideoPlayer(props: {
 	videoRef: React.RefObject<HTMLDivElement>;
 	videoElRef: React.RefObject<HTMLVideoElement>;
 }) {
-	// console.log('VideoPlayer');
 	return (
 		<div ref={props.videoRef} className={props.className}>
 			<div data-vjs-player={true}>
@@ -15,9 +14,6 @@ export default function VideoPlayer(props: {
 					className="video-js"
 					playsInline
 					data-testid="video-element"
-					onPause={(e) => {
-						console.log(e);
-					}}
 				/>
 			</div>
 		</div>

@@ -2,25 +2,23 @@ import React, { useContext, useEffect } from 'react';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 
 export default function useVolume(): [Percent, (v: number) => void] {
-	const playbackContext = useContext(PlaybackContext);
-	const [volume, _setVolume] = React.useState<Percent>(
-		playbackContext.getVolume()
-	);
+	const context = useContext(PlaybackContext);
+	const [volume, _setVolume] = React.useState<Percent>(context.getVolume);
 
 	useEffect(() => {
 		const fn = () => {
-			_setVolume(playbackContext.getVolume());
+			_setVolume(context.getVolume());
 		};
 		fn();
-		playbackContext.on('volumechange', fn);
+		context.on('volumechange', fn);
 		return () => {
-			playbackContext.off('volumechange', fn);
+			context.off('volumechange', fn);
 		};
-	}, [playbackContext]);
+	}, [context]);
 
 	const setVolume = (value: number) => {
 		const v = Math.max(0, Math.min(100, value)) as Percent;
-		playbackContext.setVolume(v);
+		context.setVolume(v);
 	};
 
 	return [volume, setVolume];

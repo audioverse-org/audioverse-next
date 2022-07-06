@@ -40,6 +40,8 @@ type MockPlayer = Pick<
 	_fire: (event: string, data?: any) => void;
 };
 
+const videojs = jest.fn(() => __mockPlayer);
+
 let __mockPlayer: MockPlayer;
 
 function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
@@ -123,8 +125,6 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 
 	return __mockPlayer;
 }
-
-const videojs = jest.fn(() => __mockPlayer);
 
 declare module 'video.js' {
 	const __mockPlayer: MockPlayer;

@@ -91,9 +91,9 @@ async function updateVolume(volume = 70) {
 
 describe('player', () => {
 	beforeEach(() => {
-		__loadMockPlayer();
 		__loadRouter({});
 		mockRecordingIsFavorited.mockResolvedValue(false);
+		__loadMockPlayer();
 	});
 
 	it('has button', async () => {
@@ -793,9 +793,15 @@ describe('player', () => {
 	});
 
 	it('changes speed', async () => {
+		__loadMockPlayer();
+
 		await renderComponent();
 
 		userEvent.click(screen.getByText('1x'));
+
+		await waitFor(() => {
+			expect(__mockPlayer.on).toBeCalled();
+		});
 
 		await waitFor(() => {
 			expect(__mockPlayer.playbackRate).toBeCalledWith(1.25);
