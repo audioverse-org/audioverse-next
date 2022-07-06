@@ -83,6 +83,8 @@ export const shouldLoadRecordingPlaybackProgress = (
 	!!getSessionToken();
 
 export type PlaybackContextType = {
+	on: (event: string, callback: (...args: unknown[]) => void) => void;
+	off: (event: string, callback: (...args: unknown[]) => void) => void;
 	play: () => void;
 	pause: () => void;
 	paused: () => boolean;
@@ -109,7 +111,7 @@ export type PlaybackContextType = {
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
 	getVolume: () => number;
-	setVolume: (v: number) => void;
+	setVolume: (v: Percent) => void;
 	setSpeed: (s: number) => void;
 	getSpeed: () => number;
 	getMiniplayerRef: () => Maybe<React.RefObject<HTMLDivElement>>;
@@ -124,6 +126,8 @@ export type PlaybackContextType = {
 };
 
 export const PlaybackContext = React.createContext<PlaybackContextType>({
+	on: () => undefined,
+	off: () => undefined,
 	play: () => undefined,
 	pause: () => undefined,
 	paused: () => true,
@@ -183,7 +187,6 @@ export default function AndPlaybackContext({
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
-	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
 	const queryClient = useQueryClient();
@@ -238,6 +241,14 @@ export default function AndPlaybackContext({
 
 	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
+		on: (event, handler) => {
+			if (!playerRef.current) return;
+			playerRef.current.on(event, handler);
+		},
+		off: (event, handler) => {
+			if (!playerRef.current) return;
+			playerRef.current.off(event, handler);
+		},
 		play: () => {
 			playerRef.current?.play();
 			setIsPaused(false);
@@ -325,10 +336,7 @@ export default function AndPlaybackContext({
 		},
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
-		setVolume: (volume: number) => {
-			setVolume(volume);
-			playerRef.current?.volume(volume / 100);
-		},
+		setVolume: (v: Percent) => playerRef.current?.volume(v / 100),
 		getSpeed: () => _speed,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
@@ -344,13 +352,7 @@ export default function AndPlaybackContext({
 				playback._setRecording(sourceRecordings[1], prefersAudio);
 			}
 		},
-		setIsPaused: (paused) => {
-			// console.log('setIsPaused', paused);
-			// if (paused) {
-			// 	console.trace();
-			// }
-			setIsPaused(paused);
-		},
+		setIsPaused,
 		_setRecording: (
 			recording: AndMiniplayerFragment,
 			prefersAudio: boolean | undefined

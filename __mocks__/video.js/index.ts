@@ -34,6 +34,7 @@ type MockPlayer = Pick<
 	| 'controls'
 	| 'supportsFullScreen'
 	| 'on'
+	| 'off'
 > & {
 	_updateOptions: (options: Options) => void;
 	_fire: (event: string, data?: any) => void;
@@ -109,6 +110,10 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 		on: jest.fn((event: string, fn: (data: any) => any) => {
 			if (!(event in handlers)) handlers[event] = [];
 			handlers[event].push(fn);
+		}) as any,
+		off: jest.fn((event: string, fn: (data: any) => any) => {
+			if (!(event in handlers)) return;
+			handlers[event] = handlers[event].filter((f) => f !== fn);
 		}) as any,
 		bufferedEnd: jest.fn(),
 		...functions,

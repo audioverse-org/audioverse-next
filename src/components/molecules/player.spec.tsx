@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import videojs, { __mockPlayer } from 'video.js';
+import videojs, { __loadMockPlayer, __mockPlayer } from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
@@ -15,7 +15,6 @@ import renderWithProviders from '@lib/test/renderWithProviders';
 import { BaseColors } from '@lib/constants';
 import { simulateMediaTick } from '@lib/test/simulateMediaTick';
 import { PlayerFragment } from '@components/molecules/__generated__/player';
-import { __loadMockPlayer } from 'video.js';
 
 jest.mock('video.js');
 jest.mock('@lib/api/recordingIsFavorited');
@@ -529,7 +528,10 @@ describe('player', () => {
 		await screen.findAllByLabelText('pause');
 
 		const control = screen.getByLabelText('Volume');
-		expect(control).toHaveValue('70');
+
+		await waitFor(() => {
+			expect(control).toHaveValue('70');
+		});
 	});
 
 	it('sets volume', async () => {
@@ -1074,8 +1076,11 @@ describe('player', () => {
 
 		userEvent.click(screen.getByLabelText('play'));
 
-		const player = screen.getByLabelText('player');
-		await within(player).findByLabelText('pause');
+		await within(screen.getByLabelText('player')).findByLabelText('pause');
+
+		await waitFor(() => {
+			expect(screen.getByLabelText('Volume')).toHaveValue('50');
+		});
 
 		userEvent.click(screen.getByLabelText('Reduce volume'));
 
@@ -1091,6 +1096,10 @@ describe('player', () => {
 
 		const player = screen.getByLabelText('player');
 		await within(player).findByLabelText('pause');
+
+		await waitFor(() => {
+			expect(screen.getByLabelText('Volume')).toHaveValue('50');
+		});
 
 		userEvent.click(screen.getByLabelText('Increase volume'));
 
@@ -1137,6 +1146,25 @@ describe('player', () => {
 		await expect(
 			within(miniplayer).findByText('2:00')
 		).resolves.toBeInTheDocument();
+	});
+
+	it('unloads volume handler', async () => {
+		const { unmount } = await renderComponent();
+
+		userEvent.click(await screen.findByLabelText('play'));
+
+		await waitFor(() => {
+			expect(screen.getAllByLabelText('pause')).not.toHaveLength(0);
+		});
+
+		unmount();
+
+		await waitFor(() => {
+			expect(__mockPlayer.off).toBeCalledWith(
+				'volumechange',
+				expect.any(Function)
+			);
+		});
 	});
 });
 

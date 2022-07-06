@@ -1,4 +1,3 @@
-import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useContext } from 'react';
@@ -13,16 +12,13 @@ import { SequenceContentType } from '@src/__generated__/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
 
-import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
-import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
-
 import styles from './miniplayer.module.scss';
+import { Volume } from '@components/molecules/volume';
 
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
 	const playbackContext = useContext(PlaybackContext);
 	const miniplayerRef = playbackContext.getMiniplayerRef();
-	const volume = playbackContext.getVolume();
 	const recording = playbackContext.getRecording();
 	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
 	const timeString = useFormattedTime(playbackContext.getTime());
@@ -96,35 +92,7 @@ export default function Miniplayer(): JSX.Element | null {
 					<span>{durationString}</span>
 				</div>
 			</div>
-			<div className={styles.volume}>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__reduceVolume',
-						defaultMessage: 'Reduce volume',
-					})}
-					onClick={() => playbackContext.setVolume(volume - 10)}
-				>
-					<IconVolumeLow />
-				</button>
-				<Slider
-					className={styles.slider}
-					value={volume}
-					onChange={(e, val) => playbackContext.setVolume(val as number)}
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__volume',
-						defaultMessage: 'Volume',
-					})}
-				/>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__increaseVolume',
-						defaultMessage: 'Increase volume',
-					})}
-					onClick={() => playbackContext.setVolume(volume + 10)}
-				>
-					<IconVolumeHigh />
-				</button>
-			</div>
+			<Volume />
 		</div>
 	);
 }

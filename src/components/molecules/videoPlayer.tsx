@@ -6,7 +6,7 @@ export default function VideoPlayer(props: {
 	videoRef: React.RefObject<HTMLDivElement>;
 	videoElRef: React.RefObject<HTMLVideoElement>;
 }) {
-	console.log('VideoPlayer');
+	// console.log('VideoPlayer');
 	return (
 		<div ref={props.videoRef} className={props.className}>
 			<div data-vjs-player={true}>
