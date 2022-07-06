@@ -4,7 +4,7 @@ import {
 } from '@components/templates/andPlaybackContext';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
 import { useContext } from 'react';
-import useIsLoaded from '@lib/api/hooks/useIsLoaded';
+import useIsLoaded from '@lib/hooks/useIsLoaded';
 
 type Action = (c: PlaybackContextType) => void;
 

@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 import { clearSessionToken } from '@lib/cookies';
 import isServerSide from '@lib/isServerSide';
 
-import { resetUserQueries } from '../login';
+import { resetUserQueries } from '../api/login';
 
 export function useLogout(): Promise<void> {
 	const queryClient = useQueryClient();

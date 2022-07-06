@@ -18,7 +18,7 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
 import Tease from '@components/molecules/tease';
-import { useIsSequenceFavorited } from '@lib/api/hooks/useIsSequenceFavorited';
+import { useIsSequenceFavorited } from '@lib/hooks/useIsSequenceFavorited';
 import { formatDateRange } from '@lib/date';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';

@@ -9,7 +9,7 @@ import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
 } from '@components/templates/__generated__/andMiniplayer';
-import useWithRecording from '@lib/api/hooks/useWithRecording';
+import useWithRecording from '@lib/hooks/useWithRecording';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;

@@ -21,7 +21,7 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import PersonTypeLockup from '@components/molecules/personTypeLockup';
 import Tease from '@components/molecules/tease';
-import { useIsPersonFavorited } from '@lib/api/hooks/useIsPersonFavorited';
+import { useIsPersonFavorited } from '@lib/hooks/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

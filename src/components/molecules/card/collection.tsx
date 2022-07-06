@@ -8,7 +8,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import ProgressBar from '@components/atoms/progressBar';
 import Card from '@components/molecules/card';
-import { useIsCollectionFavorited } from '@lib/api/hooks/useIsCollectionFavorited';
+import { useIsCollectionFavorited } from '@lib/hooks/useIsCollectionFavorited';
 import { BaseColors } from '@lib/constants';
 import { formatDateRange } from '@lib/date';
 import { CollectionContentType } from '@src/__generated__/graphql';

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
-import useWithRecording from '@lib/api/hooks/useWithRecording';
+import useWithRecording from '@lib/hooks/useWithRecording';
 
 export const SPEEDS = [1, 1.25, 1.5, 1.75, 2];
 

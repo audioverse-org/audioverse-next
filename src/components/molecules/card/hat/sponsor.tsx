@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
 import Button from '@components/molecules/button';
-import { useIsSponsorFavorited } from '@lib/api/hooks/useIsSponsorFavorited';
+import { useIsSponsorFavorited } from '@lib/hooks/useIsSponsorFavorited';
 
 import HatIcon from '../../../../../public/img/icons/fa-user-plus.svg';
 import IconLike from '../../../../../public/img/icons/icon-like-light.svg';

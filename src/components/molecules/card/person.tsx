@@ -7,7 +7,7 @@ import Heading2 from '@components/atoms/heading2';
 import Heading6 from '@components/atoms/heading6';
 import RoundImage from '@components/atoms/roundImage';
 import Card from '@components/molecules/card';
-import { useIsPersonFavorited } from '@lib/api/hooks/useIsPersonFavorited';
+import { useIsPersonFavorited } from '@lib/hooks/useIsPersonFavorited';
 import { BaseColors } from '@lib/constants';
 
 import ButtonFavorite from '../buttonFavorite';

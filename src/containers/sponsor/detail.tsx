@@ -21,7 +21,7 @@ import DefinitionList, {
 } from '@components/molecules/definitionList';
 import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
 import Tease from '@components/molecules/tease';
-import { useIsSponsorFavorited } from '@lib/api/hooks/useIsSponsorFavorited';
+import { useIsSponsorFavorited } from '@lib/hooks/useIsSponsorFavorited';
 import { BaseColors } from '@lib/constants';
 import useLanguageRoute from '@lib/useLanguageRoute';
 

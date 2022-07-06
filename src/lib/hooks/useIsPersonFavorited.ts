@@ -1,7 +1,7 @@
 import { setPersonFavorited } from '@lib/api/setPersonFavorited';
 import { Scalars } from '@src/__generated__/graphql';
 
-import { personIsFavorited } from '../personIsFavorited';
+import { personIsFavorited } from '../api/personIsFavorited';
 import { IUseIsFavoritedResult, useIsFavorited } from './useIsFavorited';
 
 export function useIsPersonFavorited(id: Scalars['ID']): IUseIsFavoritedResult {

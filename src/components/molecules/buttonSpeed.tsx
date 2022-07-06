@@ -7,7 +7,7 @@ import { BaseColors } from '@lib/constants';
 import { isBackgroundColorDark } from './buttonPlay';
 import styles from './buttonSpeed.module.scss';
 import CircleButton from './circleButton';
-import useSpeed, { SPEEDS } from '@lib/api/hooks/useSpeed';
+import useSpeed, { SPEEDS } from '@lib/hooks/useSpeed';
 import { PlayerFragment } from '@components/molecules/__generated__/player';
 
 export default function ButtonSpeed({

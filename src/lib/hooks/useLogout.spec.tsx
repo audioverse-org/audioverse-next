@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useLogout } from '@lib/api/hooks/useLogout';
+import { useLogout } from '@lib/hooks/useLogout';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
 const mockBeacon = jest.fn();

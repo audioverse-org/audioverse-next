@@ -4,7 +4,7 @@ import IconVolumeLow from '@public/img/icons/icon-volume-low.svg';
 import Slider from '@material-ui/core/Slider';
 import IconVolumeHigh from '@public/img/icons/icon-volume-high.svg';
 import React from 'react';
-import useVolume from '@lib/api/hooks/useVolume';
+import useVolume from '@lib/hooks/useVolume';
 
 export function Volume() {
 	const intl = useIntl();
