@@ -18,7 +18,6 @@ interface PlaybackSessionInfo {
 	play: () => void;
 	requestFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
-	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
 	progress: number;
 	bufferedProgress: number;
@@ -27,7 +26,6 @@ interface PlaybackSessionInfo {
 	isVideoLoaded: boolean;
 	isPaused: boolean;
 	isPlaying: boolean;
-	speed: number;
 	time: number;
 	duration: number;
 	getVideo: () => JSX.Element;
@@ -49,7 +47,6 @@ export default function usePlaybackSession(
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
 	const supportsFullscreen = context.supportsFullscreen();
-	const speed = context.getSpeed();
 	const duration = isLoaded
 		? context.getDuration()
 		: (recording &&
@@ -59,7 +56,6 @@ export default function usePlaybackSession(
 	const progress = isLoaded ? context.getProgress() : _progress;
 	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
 	const time = isLoaded ? context.getTime() : duration * progress;
-	const [, setSpeedFingerprint] = useState<number>(speed);
 	const isPaused = !isLoaded || context.paused();
 	const isPlaying = isLoaded && !context.paused();
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
@@ -144,11 +140,6 @@ export default function usePlaybackSession(
 		});
 	}
 
-	function setSpeed(speed: number) {
-		withRecording((c) => c.setSpeed(speed));
-		setSpeedFingerprint(speed);
-	}
-
 	function requestFullscreen() {
 		withRecording((c) => c.requestFullscreen());
 	}
@@ -164,7 +155,6 @@ export default function usePlaybackSession(
 		pause,
 		play,
 		setPrefersAudio,
-		setSpeed,
 		requestFullscreen,
 		isLoaded,
 		progress,
@@ -177,7 +167,6 @@ export default function usePlaybackSession(
 		isPlaying,
 		prefersAudio,
 		getVideo,
-		speed,
 		supportsFullscreen,
 	};
 }
