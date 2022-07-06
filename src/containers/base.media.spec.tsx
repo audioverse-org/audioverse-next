@@ -10,10 +10,10 @@ import {
 	RecordingContentType,
 	SequenceContentType,
 } from '@src/__generated__/graphql';
-import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
 import { __waitForIntlMessages } from '@lib/useIntlMessages';
 import { RecordingFragment } from '@components/organisms/__generated__/recording';
+import { __mockPlayer } from 'video.js';
 
 jest.mock('@lib/useIntlMessages');
 jest.mock('@components/molecules/loadingIndicator');
@@ -161,8 +161,6 @@ const findControls = async () => {
 };
 
 describe('app media playback', () => {
-	beforeEach(() => setPlayerMock());
-
 	it('moves video to and from miniplayer', async () => {
 		const view = await renderApp(true, recordingVideo);
 
@@ -229,6 +227,7 @@ describe('app media playback', () => {
 				await within(portal).findByTestId('video-element'),
 				{} as any
 			);
+			__mockPlayer._fire('pause');
 		});
 
 		await expect(
@@ -260,6 +259,7 @@ describe('app media playback', () => {
 				within(portal).getByTestId('video-element'),
 				{} as any
 			);
+			__mockPlayer._fire('play');
 		});
 
 		await within(miniplayer).findByLabelText('pause');
@@ -353,5 +353,29 @@ describe('app media playback', () => {
 		await waitFor(() => {
 			expect(videojs).toBeCalled();
 		});
+	});
+
+	it('does not pause video when video moved to miniplayer', async () => {
+		const view = await renderApp(true, recordingVideo);
+
+		userEvent.click(screen.getByAltText('the_sermon_title'));
+
+		await waitFor(() =>
+			expect(isVideoInContainer(view.getPlayer())).toBe(true)
+		);
+
+		await view.rerender(false);
+
+		await waitFor(() => {
+			expect(isVideoInContainer(view.getMiniplayer())).toBe(true);
+		});
+
+		const miniplayer = screen.getByLabelText('miniplayer');
+
+		await expect(
+			within(miniplayer).findByLabelText('pause')
+		).resolves.toBeInTheDocument();
+
+		expect(__mockPlayer.pause).not.toHaveBeenCalled();
 	});
 });
