@@ -85,16 +85,16 @@ export default function DiscoverCollections({
 			{makeSeeAllButton(makePresenterListRoute(language))}
 			<LineHeading>
 				<FormattedMessage
-					id="discoverCollections_seriesHeading"
-					defaultMessage="Series"
+					id="discoverCollections_audiobooksHeading"
+					defaultMessage="Audiobooks"
 				/>
 			</LineHeading>
 			<CardGroup className={styles.cardGroup}>
-				{serieses.nodes?.map((s) => (
-					<CardSequence sequence={s} key={s.canonicalPath} />
+				{audiobooks.nodes?.map((n) => (
+					<CardSequence sequence={n} key={n.canonicalPath} />
 				))}
 			</CardGroup>
-			{makeSeeAllButton(makeSeriesListRoute(language, 1))}
+			{makeSeeAllButton(makeAudiobookListRoute(language, 1))}
 			<LineHeading>
 				<FormattedMessage
 					id="discoverCollections_conferencesHeading"
@@ -121,18 +121,6 @@ export default function DiscoverCollections({
 			{makeSeeAllButton(makeSponsorListRoute(language))}
 			<LineHeading>
 				<FormattedMessage
-					id="discoverCollections_audiobooksHeading"
-					defaultMessage="Audiobooks"
-				/>
-			</LineHeading>
-			<CardGroup className={styles.cardGroup}>
-				{audiobooks.nodes?.map((n) => (
-					<CardSequence sequence={n} key={n.canonicalPath} />
-				))}
-			</CardGroup>
-			{makeSeeAllButton(makeAudiobookListRoute(language, 1))}
-			<LineHeading>
-				<FormattedMessage
 					id="discoverCollections_storiesHeading"
 					defaultMessage="Stories"
 				/>
@@ -155,6 +143,18 @@ export default function DiscoverCollections({
 				))}
 			</CardGroup>
 			{makeSeeAllButton(makeSongAlbumsListRoute(language))}
+			<LineHeading>
+				<FormattedMessage
+					id="discoverCollections_seriesHeading"
+					defaultMessage="Series"
+				/>
+			</LineHeading>
+			<CardGroup className={styles.cardGroup}>
+				{serieses.nodes?.map((s) => (
+					<CardSequence sequence={s} key={s.canonicalPath} />
+				))}
+			</CardGroup>
+			{makeSeeAllButton(makeSeriesListRoute(language, 1))}
 		</div>
 	);
 }
