@@ -8,8 +8,8 @@ import AboutNav from '@components/organisms/aboutNav';
 import { makeAboutPage, makeTestimoniesRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBack from '../../../public/img/icon-back-light.svg';
-import IconForward from '../../../public/img/icon-forward-light.svg';
+import IconBack from '../../../public/img/icons/icon-back-light.svg';
+import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import sharedStyles from './shared.module.scss';
 import styles from './spirit.module.scss';
@@ -59,7 +59,7 @@ export default function SpiritOfAv(): JSX.Element {
 						<dd>
 							<FormattedMessage
 								id="about__spirit3"
-								defaultMessage="Materials should promote the reality that victory over sin is possible through the believer&rsquo;s dependence on the grace and power of Jesus Christ."
+								defaultMessage="Materials should promote the reality that victory over sin is possible through the believer's dependence on the grace and power of Jesus Christ."
 							/>
 						</dd>
 						<dt>04</dt>
@@ -122,7 +122,7 @@ export default function SpiritOfAv(): JSX.Element {
 						<dd>
 							<FormattedMessage
 								id="about__spirit12"
-								defaultMessage="Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse."
+								defaultMessage="Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse, and are Seventh-day Adventists in good standing."
 							/>
 						</dd>
 					</dl>

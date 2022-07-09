@@ -1,8 +1,9 @@
+import { screen } from '@testing-library/react';
 import React from 'react';
 
 import CardSermon, { CardSermonProps } from '@components/molecules/card/sermon';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import { buildRenderer } from '@lib/test/helpers';
+import { buildRenderer } from '@lib/test/buildRenderer';
 
 const Page = (props: CardSermonProps): JSX.Element => {
 	return (
@@ -24,7 +25,7 @@ const renderComponent = buildRenderer(Page, {
 
 describe('card sermon', () => {
 	it('links card', async () => {
-		const { getByText } = await renderComponent({
+		await renderComponent({
 			props: {
 				recording: {
 					id: 'the_id',
@@ -35,10 +36,9 @@ describe('card sermon', () => {
 			},
 		});
 
-		expect(getByText('the_title').parentElement?.parentElement).toHaveAttribute(
-			'href',
-			'/the_path'
-		);
+		expect(
+			screen.getByText('the_title').parentElement?.parentElement
+		).toHaveAttribute('href', '/the_path');
 	});
 
 	it('has play button', async () => {

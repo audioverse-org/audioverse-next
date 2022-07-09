@@ -124,16 +124,18 @@ export default function Blog(): JSX.Element {
 						}}
 					/>
 				</p>
+				{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
 				<address>
 					Western Adventist Foundation
 					<br />
 					<a
-						href="http://www.wafsda.org"
+						href="https://www.wafsda.org"
 						target="_blank"
 						rel="noreferrer"
 						className="decorated"
+						/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
 					>
-						http://www.wafsda.org
+						https://www.wafsda.org
 					</a>
 					<br />
 					866-356-5595

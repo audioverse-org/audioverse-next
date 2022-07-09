@@ -6,7 +6,6 @@ export interface StoryAlbumDetailProps {
 	sequence: GetStoryAlbumDetailPageDataQuery['storySeason'];
 }
 
-export default withFailStates<StoryAlbumDetailProps>(
-	Sequence,
-	(props) => !props.sequence
-);
+export default withFailStates<StoryAlbumDetailProps>(Sequence, {
+	useShould404: (props) => !props.sequence,
+});

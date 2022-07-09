@@ -9,7 +9,7 @@ import AboutNav from '@components/organisms/aboutNav';
 import { makeAboutPage } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconForward from '../../../public/img/icon-forward-light.svg';
+import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 
 import sharedStyles from './shared.module.scss';
 
@@ -62,9 +62,7 @@ export default function Story(): JSX.Element {
 					<p>
 						<FormattedMessage
 							id="about__story2"
-							defaultMessage={
-								'Curtis put the idea into action and quickly began developing a sermon website. A contest was held at Advent HOPE Sabbath School to choose the name, during which over 100 names were submitted. "AudioVerse" was the winner, and the AudioVerse.org website was launched on October 22, 2005.'
-							}
+							defaultMessage='Curtis put the idea into action and quickly began developing a sermon website. A contest was held at Advent HOPE Sabbath School to choose the name, during which over 100 names were submitted. "AudioVerse" was the winner, and the AudioVerse.org website was launched on October 22, 2005.'
 						/>
 					</p>
 					<p>

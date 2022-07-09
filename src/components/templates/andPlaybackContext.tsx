@@ -262,7 +262,7 @@ export default function AndPlaybackContext({
 			setIsPaused(false);
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
-		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequest'),
+		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		pause: () => {
 			playerRef.current?.pause();
 			setIsPaused(true);
@@ -285,7 +285,7 @@ export default function AndPlaybackContext({
 		getPrefersAudio: () => prefersAudio,
 		getDuration: () => {
 			return (
-				(!onLoadRef.current && playerRef.current?.duration()) ||
+				playerRef.current?.duration() ||
 				sourcesRef.current[0]?.duration ||
 				recordingRef.current?.duration ||
 				0
@@ -426,6 +426,7 @@ export default function AndPlaybackContext({
 					},
 				},
 			};
+
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();

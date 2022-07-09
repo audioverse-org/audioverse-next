@@ -5,7 +5,7 @@ import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
 import { CardRecordingFragment } from '@lib/generated/graphql';
 
-import HatIcon from '../../../../../public/img/fa-list-alt.svg';
+import HatIcon from '../../../../../public/img/icons/fa-list-alt.svg';
 import CardRecordingSequenceHat from '../recordingSequenceHat';
 
 import styles from './sermon.module.scss';

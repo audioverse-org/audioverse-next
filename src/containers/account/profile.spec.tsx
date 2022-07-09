@@ -4,32 +4,30 @@ import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
+import { __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
-import { login } from '@lib/api';
-import * as api from '@lib/api';
+import { fetchApi } from '@lib/api/fetchApi';
+import { login } from '@lib/api/login';
 import { storeRequest } from '@lib/api/storeRequest';
 import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
 } from '@lib/generated/graphql';
-import {
-	buildServerRenderer,
-	loadAuthGuardData,
-	loadRouter,
-	mockedFetchApi,
-	renderWithIntl,
-} from '@lib/test/helpers';
+import { buildServerRenderer } from '@lib/test/buildServerRenderer';
+import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
+import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
 
-import resetAllMocks = jest.resetAllMocks;
 jest.mock('@lib/api/login');
 jest.mock('@lib/api/storeRequest');
 jest.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
+
+const mockedLogin = login as jest.Mock;
 
 const userBefore = {
 	givenName: 'the_given_name',
@@ -46,7 +44,7 @@ const userAfter = {
 function loadData() {
 	loadAuthGuardData();
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(GetProfileDataDocument, expect.anything())
 		.mockResolvedValue({
 			me: {
@@ -54,7 +52,7 @@ function loadData() {
 			},
 		});
 
-	when(mockedFetchApi)
+	when(fetchApi)
 		.calledWith(UpdateProfileDataDocument, expect.anything())
 		.mockResolvedValue({
 			updateMyProfile: {
@@ -67,12 +65,16 @@ function loadData() {
 
 describe('profile page', () => {
 	beforeEach(() => {
-		resetAllMocks();
 		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		try {
+			(fetchApi as jest.Mock).mockReset();
+		} catch {
+			// ignore
+		}
 	});
 
 	it('dehydrates user', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'the_name',
@@ -94,7 +96,7 @@ describe('profile page', () => {
 	});
 
 	it('includes first name', async () => {
-		mockedFetchApi.mockResolvedValue({
+		(fetchApi as jest.Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'first',
@@ -121,8 +123,6 @@ describe('profile page', () => {
 	});
 
 	it('makes login request', async () => {
-		jest.spyOn(api, 'login');
-
 		const { getByPlaceholderText, getByText } = await renderPage();
 
 		const emailField = getByPlaceholderText('jane@example.com');
@@ -133,7 +133,7 @@ describe('profile page', () => {
 		await userEvent.type(passwordField, 'the_password');
 		loginButton.click();
 
-		expect(api.login).toHaveBeenCalledWith('the_email', 'the_password');
+		expect(login).toHaveBeenCalledWith('the_email', 'the_password');
 	});
 
 	it('stores request', async () => {
@@ -145,7 +145,7 @@ describe('profile page', () => {
 	});
 
 	it('catches login errors', async () => {
-		jest.spyOn(api, 'login').mockImplementation(() => {
+		mockedLogin.mockImplementation(() => {
 			throw new Error();
 		});
 
@@ -171,13 +171,13 @@ describe('profile page', () => {
 	});
 
 	it('invalidates cache on successful login', async () => {
-		jest.spyOn(api, 'login').mockResolvedValue(true);
+		mockedLogin.mockResolvedValue(true);
 
 		const { getByText, findByText } = await renderPage();
 
 		userEvent.click(getByText('Login'));
 
-		mockedFetchApi.mockResolvedValueOnce({
+		(fetchApi as jest.Mock).mockResolvedValueOnce({
 			me: {
 				user: {
 					givenName: 'first',
@@ -190,7 +190,10 @@ describe('profile page', () => {
 	});
 
 	it('logs in with email and password', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage();
+		const { getByText, getByPlaceholderText, findByPlaceholderText } =
+			await renderPage();
+
+		await findByPlaceholderText('jane@example.com');
 
 		await userEvent.type(getByPlaceholderText('jane@example.com'), 'the_email');
 		await userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'the_password');
@@ -201,14 +204,15 @@ describe('profile page', () => {
 	});
 
 	it('does not fetch profile data if not logged in', async () => {
-		loadRouter({
+		__loadRouter({
 			query: {},
 		});
 		Cookie.get = jest.fn().mockReturnValue({});
+		(fetchApi as jest.Mock).mockResolvedValue({});
 
-		await renderWithIntl(<Profile />);
+		await renderWithProviders(<Profile />, undefined);
 
-		expect(mockedFetchApi).not.toBeCalledWith(
+		expect(fetchApi).not.toBeCalledWith(
 			GetProfileDataDocument,
 			expect.anything()
 		);
@@ -253,7 +257,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					...userBefore,
 					email: 'the_email123',
@@ -276,7 +280,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					...userBefore,
 					password: 'the_password',
@@ -288,7 +292,7 @@ describe('profile page', () => {
 	it('loads mutated email on success', async () => {
 		loadData();
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetProfileDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
@@ -312,7 +316,7 @@ describe('profile page', () => {
 	it('loads mutated name on success', async () => {
 		loadData();
 
-		when(mockedFetchApi)
+		when(fetchApi)
 			.calledWith(GetProfileDataDocument, expect.anything())
 			.mockResolvedValue({
 				me: {
@@ -377,7 +381,7 @@ describe('profile page', () => {
 		userEvent.click(getByText('Save changes'));
 
 		await waitFor(() => {
-			expect(mockedFetchApi).toBeCalledWith(UpdateProfileDataDocument, {
+			expect(fetchApi).toBeCalledWith(UpdateProfileDataDocument, {
 				variables: {
 					password: null,
 					...userBefore,

@@ -30,8 +30,8 @@ import {
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import IconBell from '../../public/img/fa-bell.svg';
-import IconForward from '../../public/img/icon-forward-light.svg';
+import IconBell from '../../public/img/icons/fa-bell.svg';
+import IconForward from '../../public/img/icons/icon-forward-light.svg';
 import ImagePlayers from '../../public/img/players.jpeg';
 
 import styles from './home.module.scss';
@@ -480,7 +480,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			</div>
 			<div className={styles.footerWrapper} ref={footerRef}>
 				<div className={styles.footer}>
-					<Image src="/img/logo.svg" width={161} height={23} />
+					<span className={styles.logo}>
+						<Image src="/img/logo.svg" width={161} height={23} />
+					</span>
 					<Heading3 sans unpadded>
 						<FormattedMessage
 							id="homePage__tagline"
