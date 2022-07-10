@@ -18,7 +18,7 @@ export default function NavItem({
 
 	const inner = (
 		<>
-			<span className={styles.icon}>{Icon && <Icon />}</span>
+			<div className={styles.icon}>{Icon && <Icon />}</div>
 			<span className={styles.label}>{label}</span>
 		</>
 	);

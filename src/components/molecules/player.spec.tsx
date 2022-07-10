@@ -85,9 +85,9 @@ describe('player', () => {
 		const mockPlayer = setPlayerMock();
 
 		await act(async () => {
-			const { getByLabelText } = await renderComponent();
+			await renderComponent();
 
-			userEvent.click(getByLabelText('play'));
+			userEvent.click(await screen.findByLabelText('play'));
 		});
 
 		// to be called with nothing
