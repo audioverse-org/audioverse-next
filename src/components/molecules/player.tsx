@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonDownload from '@components/molecules/buttonDownload';
@@ -16,6 +16,8 @@ import hasVideo from '@lib/hasVideo';
 import useGlobalSpaceDown from '@lib/useGlobalSpaceDown';
 import usePlaybackSession from '@lib/usePlaybackSession';
 
+import IconAirPlayAudio from '../../../public/img/icon-airplay-audio.svg';
+import IconChromeCast from '../../../public/img/icon-chromecast.svg';
 import IconFullscreen from '../../../public/img/icons/icon-fullscreen.svg';
 import IconPause from '../../../public/img/icons/icon-pause-large.svg';
 import IconPlay from '../../../public/img/icons/icon-play-large.svg';
@@ -55,10 +57,21 @@ const Player = ({
 	const shouldShowVideoControls = !shouldShowAudioControls;
 	const video = session.getVideo();
 	const [posterHovered, setPosterHovered] = useState(false);
+	const [browser, setBrowser] = useState<string | null>(null);
 
 	useGlobalSpaceDown(() => {
 		session.isPaused ? session.play() : session.pause();
 	});
+
+	useEffect(() => {
+		if (navigator.userAgent.match(/chrome|chromium|crios/i)) {
+			setBrowser('chrome');
+		} else if (navigator.userAgent.match(/safari/i)) {
+			setBrowser('safari');
+		} else {
+			setBrowser(null);
+		}
+	}, []);
 
 	return (
 		<div
@@ -184,6 +197,33 @@ const Player = ({
 							<IconFullscreen />
 						</CircleButton>
 					)}
+					{browser === 'chrome' && (
+						<CircleButton
+							onClick={() => session.chromecastTrigger()}
+							backgroundColor={backgroundColor}
+							aria-label={intl.formatMessage({
+								id: 'player__chromeCastLabel',
+								defaultMessage: 'chromeCast',
+								description: 'player chromeCast button label',
+							})}
+						>
+							<IconChromeCast />
+						</CircleButton>
+					)}
+					{browser === 'safari' && (
+						<CircleButton
+							onClick={() => session.airPlayTrigger()}
+							backgroundColor={backgroundColor}
+							aria-label={intl.formatMessage({
+								id: 'player__airPlayLabel',
+								defaultMessage: 'airPlay',
+								description: 'player airPlay button label',
+							})}
+						>
+							<IconAirPlayAudio />
+						</CircleButton>
+					)}
+
 					<ButtonSpeed {...{ recording, backgroundColor }} />
 					<ButtonDownload {...{ recording, backgroundColor }} />
 					<ButtonShareRecording

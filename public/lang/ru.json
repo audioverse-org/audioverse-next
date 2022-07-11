@@ -973,6 +973,14 @@
     "comment": "player fullscreen button label",
     "string": "Режим полного экрана"
   },
+  "player__chromeCastLabel": {
+    "comment": "player chromecast button label",
+    "string": "хромкаст"
+  },
+  "player__airPlayLabel": {
+    "comment": "player airplay button label",
+    "string": "трансляция"
+  },
   "player__nudgeBack": {
     "comment": "player nudge-back label",
     "string": "Перемотать назад на 15 секунд"

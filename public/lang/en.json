@@ -1816,6 +1816,14 @@
     "comment": "player fullscreen button label",
     "string": "fullscreen"
   },
+  "player__chromeCastLabel": {
+    "comment": "player chromecast button label",
+    "string": "fullscreen"
+  },
+  "player__airPlayLabel": {
+    "comment": "player airplay button label",
+    "string": "fullscreen"
+  },
   "player__nudgeBack": {
     "comment": "player nudge-back label",
     "string": "back 15 seconds"

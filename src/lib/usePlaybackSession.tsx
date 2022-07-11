@@ -16,6 +16,8 @@ interface PlaybackSessionInfo {
 	setProgress: (percent: number) => void;
 	pause: () => void;
 	play: () => void;
+	chromecastTrigger: () => void;
+	airPlayTrigger: () => void;
 	requestFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	setSpeed: (speed: number) => void;
@@ -173,6 +175,14 @@ export default function usePlaybackSession(
 		return video;
 	}
 
+	function chromecastTrigger() {
+		afterLoad((c) => c.chromecastTrigger());
+	}
+
+	function airPlayTrigger() {
+		afterLoad((c) => c.airPlayTrigger());
+	}
+
 	return {
 		shiftTime,
 		setProgress,
@@ -181,6 +191,8 @@ export default function usePlaybackSession(
 		setPrefersAudio,
 		setSpeed,
 		requestFullscreen,
+		chromecastTrigger,
+		airPlayTrigger,
 		isLoaded,
 		progress,
 		bufferedProgress,
