@@ -15,6 +15,8 @@ import type * as VideoJs from 'video.js';
 import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
+	ButtonDownloadFragment,
+	ButtonShareRecordingFragment,
 	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
@@ -89,7 +91,11 @@ export type PlaybackContextType = {
 	getProgress: () => number;
 	getBufferedProgress: () => number;
 	setProgress: (p: number, updatePlayer?: boolean) => void;
-	getRecording: () => AndMiniplayerFragment | undefined;
+	getRecording: () =>
+		| AndMiniplayerFragment
+		| undefined
+		| ButtonDownloadFragment
+		| ButtonShareRecordingFragment;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 		options?: {
@@ -110,6 +116,7 @@ export type PlaybackContextType = {
 	getSpeed: () => number;
 	getDuration: () => number;
 	requestFullscreen: () => void;
+	exitFullscreen: () => void;
 	isFullscreen: () => boolean | undefined;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
@@ -154,6 +161,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getDuration: () => 0,
 	isFullscreen: () => false,
 	requestFullscreen: () => undefined,
+	exitFullscreen: () => undefined,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
@@ -248,6 +256,7 @@ export default function AndPlaybackContext({
 	}, [progress]);
 
 	const recordingRef = useRef<AndMiniplayerFragment>();
+	console.log(playerRef.current, 'from current');
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
@@ -346,6 +355,8 @@ export default function AndPlaybackContext({
 			_setSpeed(s);
 		},
 		isFullscreen: () => playerRef.current?.isFullscreen(),
+		exitFullscreen: () => playerRef.current?.exitFullscreen(),
+
 		requestFullscreen: () => {
 			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
 			overlayPlayer.requestFullscreen();

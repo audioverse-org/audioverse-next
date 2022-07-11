@@ -127,6 +127,21 @@
 	}
 }
 
+.rightButtons {
+	flex: 0 0 20px;
+	display: flex;
+	align-items: center;
+	margin-right: 24px;
+}
+
+.hide {
+	display: none !important;
+}
+
+.show {
+	display: flex !important;
+}
+
 .volume {
 	flex: 0 0 200px;
 	display: flex;
@@ -162,7 +177,11 @@
 	&.overlay {
 		:global(.MuiSlider-rail),
 		:global(.MuiSlider-track) {
-			color: $ts-red;
+			color: $ts-salmon;
 		}
 	}
+}
+
+.overlay {
+	--progressColor: #{$ts-salmon};
 }

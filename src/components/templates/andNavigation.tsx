@@ -29,6 +29,7 @@ import MoreIcon from '../../../public/img/icons/icon-more.svg';
 
 import styles from './andNavigation.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
+import { AndMiniplayerFragment } from '@lib/generated/graphql';
 
 const SUBNAV_HEIGHT = 32;
 const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;
@@ -139,7 +140,12 @@ export default function AndNavigation({
 							Icon={
 								playbackContext.paused() ? IconListening : IconListeningAnimated
 							}
-							onClick={() => push(playbackRecording.canonicalPath || '')}
+							onClick={() =>
+								push(
+									(playbackRecording as AndMiniplayerFragment).canonicalPath ||
+										''
+								)
+							}
 							color={BaseColors.RED}
 							backgroundColor={BaseColors.CREAM}
 							aria-label={intl.formatMessage({

@@ -24,6 +24,7 @@ import {
 } from '@lib/api/bibleBrain';
 import { BaseColors } from '@lib/constants';
 import {
+	AndMiniplayerFragment,
 	PlayerFragment,
 	RecordingContentType,
 	SequenceNavFragment,
@@ -49,7 +50,9 @@ const Book = (params: Must<BookProps>) => {
 	);
 	const currentChapterNumber = chapter?.number || 1;
 	const playbackContext = useContext(PlaybackContext);
-	const currentRecordingId = playbackContext.getRecording()?.id;
+	const currentRecordingId = (
+		playbackContext.getRecording() as AndMiniplayerFragment
+	)?.id;
 	const router = useRouter();
 	useEffect(() => {
 		if (!currentRecordingId || !(currentRecordingId + '').includes('/')) {

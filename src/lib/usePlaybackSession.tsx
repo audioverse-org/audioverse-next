@@ -17,6 +17,7 @@ interface PlaybackSessionInfo {
 	pause: () => void;
 	play: () => void;
 	requestFullscreen: () => void;
+	exitFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
@@ -45,7 +46,9 @@ export default function usePlaybackSession(
 	const context = useContext(PlaybackContext);
 	const loadedRecording = context.getRecording();
 	const isLoaded =
-		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
+		!!recording &&
+		!!loadedRecording &&
+		(loadedRecording as AndMiniplayerFragment).id === recording.id;
 	const isAudioLoaded = isLoaded && !context.isShowingVideo();
 	const isVideoLoaded = isLoaded && context.isShowingVideo();
 	const prefersAudio = context.getPrefersAudio();
@@ -68,7 +71,6 @@ export default function usePlaybackSession(
 	const [video] = useState<JSX.Element>(
 		<div ref={portalContainerRef} data-testid="portal" />
 	);
-
 	const shouldLoadPlaybackProgress =
 		shouldLoadRecordingPlaybackProgress(recording);
 	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
@@ -168,6 +170,10 @@ export default function usePlaybackSession(
 		afterLoad((c) => c.requestFullscreen());
 	}
 
+	function exitFullscreen() {
+		afterLoad((c) => c.exitFullscreen());
+	}
+
 	function getVideo() {
 		if (!isPortalActive) setIsPortalActive(true);
 		return video;
@@ -194,5 +200,6 @@ export default function usePlaybackSession(
 		getVideo,
 		speed,
 		supportsFullscreen,
+		exitFullscreen,
 	};
 }

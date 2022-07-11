@@ -1,7 +1,7 @@
 import Slider from '@material-ui/core/Slider';
 import clsx from 'clsx';
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import ButtonNudge from '@components/molecules/buttonNudge';
@@ -9,15 +9,28 @@ import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
 import { BaseColors } from '@lib/constants';
-import { SequenceContentType } from '@lib/generated/graphql';
+import {
+	AndMiniplayerFragment,
+	ButtonDownloadFragment,
+	ButtonShareRecordingFragment,
+	SequenceContentType,
+} from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
 import { useFormattedTime } from '@lib/time';
+import ButtonDownload from '@components/molecules/buttonDownload';
+import ButtonShareRecording from '@components/molecules/buttonShareRecording';
+// import ButtonSpeed from '@components/molecules/buttonSpeed';
+import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
 
 import IconVolumeHigh from '../../../public/img/icons/icon-volume-high.svg';
 import IconVolumeLow from '../../../public/img/icons/icon-volume-low.svg';
+import IconExitFullscreen from '../../../public/img/icons/icon-exit-fullscreen.svg';
 
 import 'video.js/dist/video-js.css';
 import styles from './miniplayer.module.scss';
+import hasVideo from '@lib/hasVideo';
+import CircleButton from '@components/molecules/circleButton';
+import usePlaybackSession from '@lib/usePlaybackSession';
 
 export default function Miniplayer({
 	overlay,
@@ -28,15 +41,23 @@ export default function Miniplayer({
 	const playbackContext = useContext(PlaybackContext);
 	const volume = playbackContext.getVolume();
 	const recording = playbackContext.getRecording();
+	const recordingAMF = recording as AndMiniplayerFragment;
+	const recordingBDF = recording as ButtonDownloadFragment;
+	const recordingBSRF = recording as ButtonShareRecordingFragment;
+
 	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';
 	const timeString = useFormattedTime(playbackContext.getTime());
 	const durationString = useFormattedTime(playbackContext.getDuration());
-
+	const session = usePlaybackSession(recordingAMF, {});
+	const [showOverlayVolumeControl, setShowOverlayVolumeControl] =
+		useState<boolean>(false);
 	if (!recording) return null;
+	const shouldShowAudioControls = !hasVideo(recordingAMF);
+	const shouldShowVideoControls = !shouldShowAudioControls;
 
 	let sequenceLine = null;
-	if (recording.sequence) {
-		const { Icon } = getSequenceTypeTheme(recording.sequence.contentType);
+	if (recordingAMF.sequence) {
+		const { Icon } = getSequenceTypeTheme(recordingAMF.sequence.contentType);
 		sequenceLine = (
 			<div
 				className={styles.series}
@@ -46,9 +67,9 @@ export default function Miniplayer({
 				})}
 			>
 				<Icon width={13} height={13} />
-				{recording.sequence.contentType === SequenceContentType.BibleBook
-					? recording.collection?.title
-					: recording.sequence.title}
+				{recordingAMF.sequence.contentType === SequenceContentType.BibleBook
+					? recordingAMF.collection?.title
+					: recordingAMF.sequence.title}
 			</div>
 		);
 	}
@@ -72,19 +93,19 @@ export default function Miniplayer({
 					)}
 				>
 					<ButtonNudge
-						recording={recording}
+						recording={recordingAMF}
 						reverse={true}
 						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 						large
 						dark={overlay && true}
 					/>
 					<ButtonPlay
-						recording={recording}
+						recording={recordingAMF}
 						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 						active
 					/>
 					<ButtonNudge
-						recording={recording}
+						recording={recordingAMF}
 						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 						large
 						dark={overlay && true}
@@ -92,51 +113,139 @@ export default function Miniplayer({
 				</div>
 			</div>
 			<div className={styles.meta}>
-				<Link href={recording.canonicalPath}>
+				<Link href={recordingAMF.canonicalPath}>
 					<a className={clsx(styles.link, overlay && styles.overlay)}>
 						{sequenceLine}
 						<h4 className={clsx(styles.title, overlay && styles.overlay)}>
-							{recording.title}
+							{recordingAMF.title}
 						</h4>
 					</a>
 				</Link>
 				<div className={clsx(styles.progress, overlay && styles.overlay)}>
 					<span>{timeString}</span>
 					<span className={styles.bar}>
-						<RecordingProgressBar recording={recording} />
+						<RecordingProgressBar recording={recordingAMF} />
 					</span>
 					<span>{durationString}</span>
 				</div>
 			</div>
-			<div className={styles.volume}>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__reduceVolume',
-						defaultMessage: 'Reduce volume',
-					})}
-					onClick={() => playbackContext.setVolume(volume - 10)}
-				>
-					<IconVolumeLow />
-				</button>
-				<Slider
-					className={clsx(styles.slider, overlay && styles.overlay)}
-					value={volume}
-					onChange={(e, val) => playbackContext.setVolume(val as number)}
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__volume',
-						defaultMessage: 'Volume',
-					})}
-				/>
-				<button
-					aria-label={intl.formatMessage({
-						id: 'miniplayer__increaseVolume',
-						defaultMessage: 'Increase volume',
-					})}
-					onClick={() => playbackContext.setVolume(volume + 10)}
-				>
-					<IconVolumeHigh />
-				</button>
-			</div>
+
+			{overlay ? (
+				<>
+					<div
+						className={clsx(
+							styles.rightButtons,
+							showOverlayVolumeControl ? styles.hide : styles.show
+						)}
+					>
+						<ButtonDownload
+							recording={recordingBDF}
+							backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+						/>
+						<ButtonShareRecording
+							{...{
+								recording: recordingBSRF,
+								shareVideo: shouldShowVideoControls,
+							}}
+							backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+						/>
+						<RecordingButtonFavorite
+							id={recordingAMF.id}
+							backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+						/>
+						{/* <ButtonSpeed
+						{...{ recording }}
+						backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+					/> */}
+						{shouldShowVideoControls && (
+							<CircleButton
+								onClick={() => session.exitFullscreen()}
+								backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
+								aria-label={intl.formatMessage({
+									id: 'player__fullscreenButtonLabel',
+									defaultMessage: 'fullscreen',
+									description: 'player fullscreen button label',
+								})}
+							>
+								<IconExitFullscreen />
+							</CircleButton>
+						)}
+						<button
+							aria-label={intl.formatMessage({
+								id: 'miniplayer__reduceVolume',
+								defaultMessage: 'Reduce volume',
+							})}
+							onClick={() => setShowOverlayVolumeControl(true)}
+						>
+							<IconVolumeLow />
+						</button>
+					</div>
+					<div
+						className={clsx(
+							styles.volume,
+							showOverlayVolumeControl ? styles.show : styles.hide
+						)}
+					>
+						<button
+							aria-label={intl.formatMessage({
+								id: 'miniplayer__reduceVolume',
+								defaultMessage: 'Reduce volume',
+							})}
+							onClick={() => setShowOverlayVolumeControl(false)}
+						>
+							<IconVolumeHigh />
+						</button>
+						<Slider
+							className={clsx(styles.slider, overlay && styles.overlay)}
+							value={volume}
+							onChange={(e, val) => playbackContext.setVolume(val as number)}
+							aria-label={intl.formatMessage({
+								id: 'miniplayer__volume',
+								defaultMessage: 'Volume',
+							})}
+						/>
+						<button
+							aria-label={intl.formatMessage({
+								id: 'miniplayer__increaseVolume',
+								defaultMessage: 'Increase volume',
+							})}
+							onClick={() => setShowOverlayVolumeControl(false)}
+						>
+							<IconVolumeLow />
+						</button>
+					</div>
+				</>
+			) : (
+				<div className={styles.volume}>
+					<button
+						aria-label={intl.formatMessage({
+							id: 'miniplayer__reduceVolume',
+							defaultMessage: 'Reduce volume',
+						})}
+						onClick={() => playbackContext.setVolume(volume - 10)}
+					>
+						<IconVolumeLow />
+					</button>
+					<Slider
+						className={clsx(styles.slider, overlay && styles.overlay)}
+						value={volume}
+						onChange={(e, val) => playbackContext.setVolume(val as number)}
+						aria-label={intl.formatMessage({
+							id: 'miniplayer__volume',
+							defaultMessage: 'Volume',
+						})}
+					/>
+					<button
+						aria-label={intl.formatMessage({
+							id: 'miniplayer__increaseVolume',
+							defaultMessage: 'Increase volume',
+						})}
+						onClick={() => playbackContext.setVolume(volume + 10)}
+					>
+						<IconVolumeHigh />
+					</button>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -58,7 +58,7 @@
 			@mixin bar-thumb {
 				height: 4px;
 				width: 4px;
-				background-color: $ts-red;
+				background-color: var(--progressColor, $ts-red);
 				border: none;
 				border-radius: 4px;
 				transition: width $transition-quick, height $transition-quick,
