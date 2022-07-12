@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
-	getSources,
 	PlaybackContext,
 	PlaybackContextType,
 } from '@components/templates/andPlaybackContext';
@@ -10,6 +9,7 @@ import {
 	useGetRecordingPlaybackProgressQuery,
 } from '@lib/generated/graphql';
 import { shouldLoadRecordingPlaybackProgress } from '@lib/shouldLoadRecordingPlaybackProgress';
+import { formatSources } from '@lib/formatSources';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
@@ -56,7 +56,8 @@ export default function usePlaybackSession(
 	const duration = isLoaded
 		? context.getDuration()
 		: (recording &&
-				(getSources(recording, false)[0]?.duration || recording?.duration)) ||
+				(formatSources(recording, false)[0]?.duration ||
+					recording?.duration)) ||
 		  0;
 	const [_progress, _setProgress] = useState<number>(0);
 	const progress = isLoaded ? context.getProgress() : _progress;

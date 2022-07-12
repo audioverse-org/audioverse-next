@@ -22,6 +22,7 @@ import {
 	Scalars,
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import { formatSources, Playable } from '@lib/formatSources';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -29,43 +30,6 @@ import hasVideo from '@lib/hasVideo';
 // If this solution becomes unviable, for instance, due to needing to
 // update more props than just sources, this alternative approach may work:
 // https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
-
-interface Playable extends VideoJs.default.Tech.SourceObject {
-	duration: number;
-	logUrl?: string | null;
-}
-
-const getFiles = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-):
-	| AndMiniplayerFragment['audioFiles']
-	| AndMiniplayerFragment['videoFiles']
-	| AndMiniplayerFragment['videoStreams'] => {
-	if (!recording) return [];
-
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
-
-export const getSources = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-): Playable[] => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-		duration: f.duration,
-		logUrl: 'logUrl' in f ? f.logUrl : undefined,
-	}));
-};
 
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
@@ -212,7 +176,7 @@ export default function AndPlaybackContext({
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
 		if (!recording) return;
-		sourcesRef.current = getSources(recording, prefersAudio);
+		sourcesRef.current = formatSources(recording, prefersAudio);
 	}, [recording, prefersAudio]);
 
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
@@ -369,7 +333,7 @@ export default function AndPlaybackContext({
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
 
-			const sources = getSources(recording, prefersAudio || false);
+			const sources = formatSources(recording, prefersAudio || false);
 			sourcesRef.current = sources;
 
 			const resetPlayer = () => {
