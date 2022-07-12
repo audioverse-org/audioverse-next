@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import Script from 'next/script';
 import React, {
 	ReactNode,
 	useCallback,
@@ -86,6 +87,8 @@ export type PlaybackContextType = {
 	on: (event: VideoJsEvent, callback: (...args: unknown[]) => void) => void;
 	off: (event: VideoJsEvent, callback: (...args: unknown[]) => void) => void;
 	play: () => void;
+	chromecastTrigger: () => void;
+	airPlayTrigger: () => void;
 	pause: () => void;
 	paused: () => boolean;
 	getTime: () => number;
@@ -157,6 +160,8 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
 	_setRecording: () => undefined,
+	chromecastTrigger: () => undefined,
+	airPlayTrigger: () => undefined,
 });
 
 interface AndMiniplayerProps {
@@ -164,6 +169,12 @@ interface AndMiniplayerProps {
 }
 
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
+
+type VideoJsType = typeof VideoJs;
+type Airplay = { default: (vjs: unknown) => unknown };
+type Chromecast = {
+	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
+};
 
 export default function AndPlaybackContext({
 	children,
@@ -173,7 +184,13 @@ export default function AndPlaybackContext({
 	const originRef = useRef<HTMLDivElement>(null);
 	const miniplayerRef = useRef<HTMLDivElement>(null);
 
-	const [videojs] = useState<Promise<typeof VideoJs>>(() => import('video.js'));
+	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
+	const [airplay] = useState<Promise<Airplay>>(
+		() => import('@silvermine/videojs-airplay')
+	);
+	const [chromecast] = useState<Promise<Chromecast>>(
+		() => import('@silvermine/videojs-chromecast')
+	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -252,6 +269,8 @@ export default function AndPlaybackContext({
 			playerRef.current?.play();
 			setIsPaused(false);
 		},
+		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
+		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		pause: () => {
 			playerRef.current?.pause();
 			setIsPaused(true);
@@ -399,13 +418,26 @@ export default function AndPlaybackContext({
 				preload: 'auto',
 				defaultVolume: 1,
 				sources,
+				techOrder: ['chromecast', 'html5'],
+				plugins: {
+					chromecast: {
+						addButtonToControlBar: true, // Use custom designed button
+					},
+					airPlay: {
+						addButtonToControlBar: true, // Use custom designed button
+					},
+				},
 			};
 
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else {
-				videojs.then((v) => {
+				videojs.then(async (v) => {
+					(await airplay).default(v.default);
+					(await chromecast).default(v.default, {
+						preloadWebComponents: true,
+					});
 					const p = v.default(currentVideoEl, options);
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());
@@ -467,15 +499,18 @@ export default function AndPlaybackContext({
 	}, [videoHandlerId, videoHandler, isShowingVideo]);
 
 	return (
-		<PlaybackContext.Provider value={playback}>
-			<div ref={originRef} className={styles.videoOrigin}>
-				<LazyVideoPlayer
-					className={styles.playerElement}
-					videoRef={videoRef}
-					videoElRef={videoElRef}
-				/>
-			</div>
-			{children}
-		</PlaybackContext.Provider>
+		<>
+			<Script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" />
+			<PlaybackContext.Provider value={playback}>
+				<div ref={originRef} className={styles.videoOrigin}>
+					<LazyVideoPlayer
+						className={styles.playerElement}
+						videoRef={videoRef}
+						videoElRef={videoElRef}
+					/>
+				</div>
+				{children}
+			</PlaybackContext.Provider>
+		</>
 	);
 }
