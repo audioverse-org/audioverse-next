@@ -27,7 +27,7 @@ import IconListening from '../../../public/img/icons/icon-listening.svg';
 import MoreIcon from '../../../public/img/icons/icon-more.svg';
 
 import styles from './andNavigation.module.scss';
-import { PlaybackContext } from './andPlaybackContext';
+import { VjsContext } from './andVjs';
 import { makeDonateRoute } from '@lib/routes/makeDonateRoute';
 
 const SUBNAV_HEIGHT = 32;
@@ -52,7 +52,7 @@ export default function AndNavigation({
 		asPath,
 	} = router;
 	const languageRoute = useLanguageRoute();
-	const playbackContext = useContext(PlaybackContext);
+	const playbackContext = useContext(VjsContext);
 	const [showingMenu, setShowingMenu] = useState(false);
 	const [term, setTerm] = useState((q as string) || '');
 	useEffect(() => {

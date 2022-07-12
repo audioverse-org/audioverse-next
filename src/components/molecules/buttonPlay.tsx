@@ -3,7 +3,6 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { BaseColors } from '@lib/constants';
-import usePlaybackSession from '@lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icons/icon-pause-large.svg';
 import IconPause from '../../../public/img/icons/icon-pause-medium.svg';
@@ -13,6 +12,7 @@ import IconPlay from '../../../public/img/icons/icon-play-medium.svg';
 import styles from './buttonPlay.module.scss';
 import IconButton from './iconButton';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import usePaused from '@lib/hooks/usePaused';
 
 export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 	[
@@ -25,6 +25,16 @@ export const isBackgroundColorDark = (backgroundColor: BaseColors): boolean =>
 		BaseColors.BIBLE_H,
 	].includes(backgroundColor);
 
+export type ButtonPlayProps = {
+	recording: AndMiniplayerFragment;
+	backgroundColor: BaseColors;
+	playlistRecordings?: AndMiniplayerFragment[];
+	large?: boolean;
+	active?: boolean;
+	prefersAudio?: boolean;
+	className?: string;
+};
+
 export default function ButtonPlay({
 	recording,
 	playlistRecordings,
@@ -33,37 +43,35 @@ export default function ButtonPlay({
 	active,
 	prefersAudio,
 	className,
-}: {
-	recording: AndMiniplayerFragment;
-	backgroundColor: BaseColors;
-	playlistRecordings?: AndMiniplayerFragment[];
-	large?: boolean;
-	active?: boolean;
-	prefersAudio?: boolean;
-	className?: string;
-}): JSX.Element {
-	const { isPaused, play, pause } = usePlaybackSession(recording, {
+}: ButtonPlayProps): JSX.Element {
+	const intl = useIntl();
+
+	// setPaused is not stable. If I use useEffect to run setPaused,
+	// my test passes, implying that the original function is not
+	// functional, but a later version of the function is.
+	const [paused, setPaused] = usePaused(recording, {
 		playlistRecordings,
 		prefersAudio,
 	});
-	const intl = useIntl();
 
-	const label = isPaused
-		? intl.formatMessage({
-				id: 'playButton__playLabel',
-				defaultMessage: 'play',
-				description: 'play button play label',
-		  })
-		: intl.formatMessage({
-				id: 'playButton__pauseLabel',
-				defaultMessage: 'pause',
-				description: 'play button pause label',
-		  });
+	console.log('ButtonPlay', paused);
+
+	const labelPlay = intl.formatMessage({
+		id: 'playButton__playLabel',
+		defaultMessage: 'play',
+		description: 'play button play label',
+	});
+
+	const labelPause = intl.formatMessage({
+		id: 'playButton__pauseLabel',
+		defaultMessage: 'pause',
+		description: 'play button pause label',
+	});
 
 	return (
 		<IconButton
 			Icon={
-				isPaused
+				paused
 					? large
 						? IconPlayLarge
 						: IconPlay
@@ -71,7 +79,7 @@ export default function ButtonPlay({
 					? IconPauseLarge
 					: IconPause
 			}
-			onClick={() => (isPaused ? play() : pause())}
+			onClick={() => setPaused(!paused)}
 			color={
 				active
 					? isBackgroundColorDark(backgroundColor)
@@ -83,7 +91,7 @@ export default function ButtonPlay({
 			}
 			backgroundColor={backgroundColor}
 			className={clsx(styles.base, large && styles.large, className)}
-			aria-label={label}
+			aria-label={paused ? labelPlay : labelPause}
 		/>
 	);
 }

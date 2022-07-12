@@ -16,7 +16,7 @@ import Player from '@components/molecules/player';
 import SequenceNav from '@components/molecules/sequenceNav';
 import Tease from '@components/molecules/tease';
 import TeaseRecording from '@components/molecules/teaseRecording';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
+import { VjsContext } from '@components/templates/andVjs';
 import {
 	IBibleBook,
 	IBibleBookChapter,
@@ -47,7 +47,7 @@ const Book = (params: Must<BookProps>) => {
 		({ number }) => number === +params.chapterNumber
 	);
 	const currentChapterNumber = chapter?.number || 1;
-	const playbackContext = useContext(PlaybackContext);
+	const playbackContext = useContext(VjsContext);
 	const currentRecordingId = playbackContext.getRecording()?.id;
 	const router = useRouter();
 	useEffect(() => {

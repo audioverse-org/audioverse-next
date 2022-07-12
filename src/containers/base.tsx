@@ -8,7 +8,7 @@ import LoadingIndicator from '@components/molecules/loadingIndicator';
 import AndGlobalModals from '@components/templates/andGlobalModals';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndNavigation from '@components/templates/andNavigation';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
+import AndVjs from '@components/templates/andVjs';
 
 import styles from './base.module.scss';
 import withQueryClientProvider from '@components/HOCs/withQueryClientProvider';
@@ -77,7 +77,7 @@ function Base<P>({
 				/>
 				<LoadingIndicator />
 				<AndGlobalModals>
-					<AndPlaybackContext>
+					<AndVjs>
 						{disableSidebar ? (
 							<Component {...pageProps} />
 						) : (
@@ -87,7 +87,7 @@ function Base<P>({
 								</AndNavigation>
 							</AndMiniplayer>
 						)}
-					</AndPlaybackContext>
+					</AndVjs>
 				</AndGlobalModals>
 			</StrictMode>
 		</div>

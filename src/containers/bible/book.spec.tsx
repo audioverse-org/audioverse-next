@@ -4,7 +4,7 @@ import React from 'react';
 import videojs from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
+import AndVjs from '@components/templates/andVjs';
 import { BookProps } from '@containers/bible/book';
 import * as bibleBrain from '@lib/api/bibleBrain';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
@@ -20,11 +20,11 @@ jest.mock('@components/molecules/helpWidget');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
-		<AndPlaybackContext>
+		<AndVjs>
 			<AndMiniplayer>
 				<Book {...props} />
 			</AndMiniplayer>
-		</AndPlaybackContext>
+		</AndVjs>
 	);
 }, getStaticProps);
 

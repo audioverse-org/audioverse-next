@@ -18,8 +18,7 @@ type SetPlayerMockOptions =
 			player: unknown;
 	  };
 
-type MockPlayer = Pick<
-	og.Player,
+type MockedMethodName =
 	| 'play'
 	| 'pause'
 	| 'paused'
@@ -34,8 +33,9 @@ type MockPlayer = Pick<
 	| 'controls'
 	| 'supportsFullScreen'
 	| 'on'
-	| 'off'
-> & {
+	| 'off';
+
+type MockPlayer = Pick<og.Player, MockedMethodName> & {
 	_updateOptions: (options: Options) => void;
 	_fire: (event: string, data?: any) => void;
 };
@@ -43,6 +43,9 @@ type MockPlayer = Pick<
 const videojs = jest.fn(() => __mockPlayer);
 
 let __mockPlayer: MockPlayer;
+
+type Handler = (data: any) => any;
+type Handlers = Record<string, Array<Handler>>;
 
 function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 	if ('player' in options) {
@@ -60,7 +63,29 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 		isFullscreen = false,
 	} = options;
 
-	const handlers: Record<string, Array<(data: any) => any>> = {};
+	const handlers: Handlers = {};
+	const oneTimeHandlers: Handlers = {};
+
+	const appendHandler = (
+		event: VideoJsEvent | VideoJsEvent[],
+		handler: Handler,
+		handlers: Handlers
+	) => {
+		if (Array.isArray(event)) {
+			event.forEach((e) => appendHandler(e, handler, handlers));
+		} else {
+			if (!(event in handlers)) {
+				handlers[event] = [];
+			}
+			handlers[event].push(handler);
+		}
+	};
+
+	const _fire = (event: string, data: any = null) => {
+		handlers[event]?.map((fn: (data: any) => any) => fn(data));
+		oneTimeHandlers[event]?.map((fn: (data: any) => any) => fn(data));
+		delete oneTimeHandlers[event];
+	};
 
 	__mockPlayer = {
 		_updateOptions: (options) => {
@@ -74,19 +99,22 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 			duration = update('duration', duration);
 			functions = update('functions', functions);
 		},
-		_fire: (event: string, data: any = null) => {
-			handlers[event]?.map((fn: (data: any) => any) => fn(data));
-		},
+		_fire,
 		play: jest.fn(async () => {
 			isPaused = false;
+			_fire('play');
 		}),
 		pause: jest.fn(() => {
 			isPaused = true;
+			_fire('pause');
 			return __mockPlayer as unknown as og.Player;
 		}),
 		paused: jest.fn(() => isPaused),
 		currentTime: jest.fn((newTime: number | null = null) => {
-			if (newTime !== null) time = newTime;
+			if (newTime !== null) {
+				time = newTime;
+				_fire('timeupdate');
+			}
 			return time;
 		}),
 		volume: jest.fn((newVolume: number | null = null) => {
@@ -94,7 +122,9 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 			return volume;
 		}) as any,
 		duration: jest.fn(() => duration),
-		src: jest.fn(),
+		src: jest.fn(() => {
+			_fire('canplay');
+		}) as any,
 		options: jest.fn(),
 		controlBar: {
 			createEl: jest.fn(),
@@ -109,13 +139,15 @@ function __loadMockPlayer(options: SetPlayerMockOptions = {}): MockPlayer {
 		controls: jest.fn(),
 		supportsFullScreen: jest.fn(() => supportsFullScreen),
 		isFullscreen: jest.fn(() => isFullscreen),
-		on: jest.fn((event: string, fn: (data: any) => any) => {
-			if (!(event in handlers)) handlers[event] = [];
-			handlers[event].push(fn);
+		on: jest.fn((event: VideoJsEvent | VideoJsEvent[], fn: Handler) => {
+			appendHandler(event, fn, handlers);
 		}) as any,
 		off: jest.fn((event: string, fn: (data: any) => any) => {
 			if (!(event in handlers)) return;
 			handlers[event] = handlers[event].filter((f) => f !== fn);
+		}) as any,
+		one: jest.fn((event: VideoJsEvent | VideoJsEvent[], fn: Handler) => {
+			appendHandler(event, fn, oneTimeHandlers);
 		}) as any,
 		bufferedEnd: jest.fn(),
 		...functions,

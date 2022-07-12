@@ -27,6 +27,7 @@ import PersonLockup from './personLockup';
 import styles from './teaseRecording.module.scss';
 import { TeaseRecordingFragment } from '@components/molecules/__generated__/teaseRecording';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import useProgress from '@lib/hooks/useProgress';
 
 const isThemeDark = (theme: CardTheme): boolean =>
 	['audiobookTrack', 'story', 'topic'].includes(theme);
@@ -62,7 +63,7 @@ export default function TeaseRecording({
 	);
 	const router = useRouter();
 	const session = usePlaybackSession(recording, { playlistRecordings });
-	const progress = session.progress;
+	const [progress] = useProgress(recording, { playlistRecordings });
 	const [personsExpanded, setPersonsExpanded] = useState(false);
 
 	const index = recording.sequenceIndex;

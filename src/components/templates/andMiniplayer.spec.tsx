@@ -1,23 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext, {
-	PlaybackContext,
-	PlaybackContextType,
-} from '@components/templates/andPlaybackContext';
+import AndVjs, {
+	VjsContext,
+	VjsContextType,
+} from '@components/templates/andVjs';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import { screen, waitFor } from '@testing-library/react';
 import { __loadMockPlayer } from 'video.js';
 
-const renderComponent = buildRenderer(AndPlaybackContext);
+const renderComponent = buildRenderer(AndVjs);
 
 function ContextUser({
 	func,
 }: {
-	func: (context: PlaybackContextType, setText: (t: string) => void) => void;
+	func: (context: VjsContextType, setText: (t: string) => void) => void;
 }): JSX.Element {
-	const playbackContext = useContext(PlaybackContext);
+	const playbackContext = useContext(VjsContext);
 	const hasPlayer = playbackContext.hasPlayer();
 	const [text, setText] = useState<string>('child');
 

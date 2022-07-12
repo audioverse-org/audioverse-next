@@ -6,7 +6,7 @@ import React from 'react';
 import videojs, { __mockPlayer } from 'video.js';
 
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
+import AndVjs from '@components/templates/andVjs';
 import { SermonDetailProps } from '@containers/sermon/detail';
 import { fetchApi } from '@lib/api/fetchApi';
 import {
@@ -78,11 +78,11 @@ function loadSermonDetailData(sermon: any = undefined): void {
 
 const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
 	return (
-		<AndPlaybackContext>
+		<AndVjs>
 			<AndMiniplayer>
 				<SermonDetail {...props} />
 			</AndMiniplayer>
-		</AndPlaybackContext>
+		</AndVjs>
 	);
 }, getStaticProps);
 

@@ -4,6 +4,7 @@ import usePlaybackSession from '@lib/usePlaybackSession';
 
 import ProgressBar from '../atoms/progressBar';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import useProgress from '@lib/hooks/useProgress';
 
 interface ProgressBarProps {
 	recording: AndMiniplayerFragment;
@@ -14,8 +15,8 @@ export default function RecordingProgressBar({
 	recording,
 	interactive = true,
 }: ProgressBarProps): JSX.Element {
-	const { progress, bufferedProgress, setProgress } =
-		usePlaybackSession(recording);
+	const { bufferedProgress } = usePlaybackSession(recording);
+	const [progress, setProgress] = useProgress(recording);
 	return (
 		<ProgressBar
 			{...{ progress, bufferedProgress }}

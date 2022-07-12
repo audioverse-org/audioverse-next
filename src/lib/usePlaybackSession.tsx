@@ -1,31 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import {
-	getSources,
-	PlaybackContext,
-	shouldLoadRecordingPlaybackProgress,
-} from '@components/templates/andPlaybackContext';
-import {
-	AndMiniplayerFragment,
-	useGetRecordingPlaybackProgressQuery,
-} from '@components/templates/__generated__/andMiniplayer';
+import { getSources, VjsContext } from '@components/templates/andVjs';
+import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
 import useWithRecording from '@lib/hooks/useWithRecording';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
-	setProgress: (percent: number) => void;
-	pause: () => void;
-	play: () => void;
 	requestFullscreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	isLoaded: boolean;
-	progress: number;
 	bufferedProgress: number;
 	prefersAudio: boolean;
 	isAudioLoaded: boolean;
 	isVideoLoaded: boolean;
-	isPaused: boolean;
-	isPlaying: boolean;
 	time: number;
 	duration: number;
 	getVideo: () => JSX.Element;
@@ -39,25 +26,24 @@ export default function usePlaybackSession(
 		prefersAudio?: boolean;
 	} = {}
 ): PlaybackSessionInfo {
-	const context = useContext(PlaybackContext);
-	const loadedRecording = context.getRecording();
+	const context = useContext(VjsContext);
+	const loadedRecording = context?.getRecording();
 	const isLoaded =
 		!!recording && !!loadedRecording && loadedRecording.id === recording.id;
-	const isAudioLoaded = isLoaded && !context.isShowingVideo();
-	const isVideoLoaded = isLoaded && context.isShowingVideo();
-	const prefersAudio = context.getPrefersAudio();
-	const supportsFullscreen = context.supportsFullscreen();
+	const isAudioLoaded = isLoaded && !context?.isShowingVideo();
+	const isVideoLoaded = isLoaded && !!context?.isShowingVideo();
+	const prefersAudio = !!context?.getPrefersAudio();
+	const supportsFullscreen = !!context?.supportsFullscreen();
 	const duration = isLoaded
-		? context.getDuration()
+		? context?.getDuration() || 0
 		: (recording &&
 				(getSources(recording, false)[0]?.duration || recording?.duration)) ||
 		  0;
-	const [_progress, _setProgress] = useState<number>(0);
-	const progress = isLoaded ? context.getProgress() : _progress;
-	const bufferedProgress = isLoaded ? context.getBufferedProgress() : 0;
-	const time = isLoaded ? context.getTime() : duration * progress;
-	const isPaused = !isLoaded || context.paused();
-	const isPlaying = isLoaded && !context.paused();
+
+	const bufferedProgress = isLoaded ? context?.getBufferedProgress() || 0 : 0;
+	const time = isLoaded
+		? context?.getTime() || 0
+		: (duration || 0) * (context?.getProgress() || 0);
 	const [isPortalActive, setIsPortalActive] = useState<boolean>(false);
 	const portalContainerRef = useRef<HTMLDivElement>(null);
 	const [video] = useState<JSX.Element>(
@@ -66,31 +52,10 @@ export default function usePlaybackSession(
 
 	const withRecording = useWithRecording(recording, options);
 
-	const shouldLoadPlaybackProgress =
-		shouldLoadRecordingPlaybackProgress(recording);
-	const { data, isLoading, refetch } = useGetRecordingPlaybackProgressQuery(
-		{
-			id: recording?.id || 0,
-		},
-		{
-			enabled: shouldLoadPlaybackProgress,
-		}
-	);
-	useEffect(() => {
-		if (data?.recording?.viewerPlaybackSession) {
-			_setProgress(data?.recording?.viewerPlaybackSession.positionPercentage);
-		}
-	}, [data, isLoading]);
-	useEffect(() => {
-		if (!isLoaded && shouldLoadPlaybackProgress) {
-			refetch();
-		}
-	}, [isLoaded, shouldLoadPlaybackProgress, refetch]);
-
 	useEffect(() => {
 		if (!recording || !isLoaded || !isPortalActive) return;
 
-		context.setVideoHandler(recording.id, (el) => {
+		context?.setVideoHandler(recording.id, (el) => {
 			if (!el) return;
 			portalContainerRef.current?.appendChild(el);
 		});
@@ -101,7 +66,7 @@ export default function usePlaybackSession(
 		() => () => {
 			if (!isPortalActive || !recording) return;
 			// TODO: provide recording ID when unloading?
-			context.unsetVideoHandler(recording.id);
+			context?.unsetVideoHandler(recording.id);
 		},
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[]
@@ -113,29 +78,14 @@ export default function usePlaybackSession(
 		});
 	}
 
-	function setProgress(percent: number) {
-		withRecording((c) => c.setProgress(percent));
-	}
-
-	function pause() {
-		// TODO: Maybe only if `isLoaded` is true
-		// Or perhaps throw an exception, since the user should never be presented
-		// with a pause button for a recording that isn't loaded.
-		context.pause();
-	}
-
-	function play() {
-		withRecording((c) => c.play());
-	}
-
 	function setPrefersAudio(prefersAudio: boolean) {
 		if (!recording) return;
 
 		if (isLoaded) {
-			context.setPrefersAudio(prefersAudio);
+			context?.setPrefersAudio(prefersAudio);
 		}
 
-		context.loadRecording(recording, {
+		context?.loadRecording(recording, {
 			prefersAudio,
 		});
 	}
@@ -151,20 +101,14 @@ export default function usePlaybackSession(
 
 	return {
 		shiftTime,
-		setProgress,
-		pause,
-		play,
 		setPrefersAudio,
 		requestFullscreen,
 		isLoaded,
-		progress,
 		bufferedProgress,
 		time,
 		duration,
 		isAudioLoaded,
 		isVideoLoaded,
-		isPaused,
-		isPlaying,
 		prefersAudio,
 		getVideo,
 		supportsFullscreen,

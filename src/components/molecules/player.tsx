@@ -24,6 +24,8 @@ import styles from './player.module.scss';
 import RecordingButtonFavorite from './recordingButtonFavorite';
 import { PlayerFragment } from '@components/molecules/__generated__/player';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import useProgress from '@lib/hooks/useProgress';
+import usePaused from '@lib/hooks/usePaused';
 
 export interface PlayerProps {
 	recording: PlayerFragment;
@@ -47,10 +49,17 @@ const Player = ({
 		playlistRecordings,
 		prefersAudio,
 	});
+	const [progress, setProgress] = useProgress(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
+	const [paused, setPaused] = usePaused(recording, {
+		playlistRecordings,
+		prefersAudio,
+	});
+
 	const shouldShowPoster =
-		hasVideo(recording) &&
-		!prefersAudio &&
-		(!session.isLoaded || session.isPaused);
+		hasVideo(recording) && !prefersAudio && (!session.isLoaded || paused);
 	const shouldShowAudioControls =
 		!hasVideo(recording) || session.isAudioLoaded || prefersAudio;
 	const shouldShowVideoControls = !shouldShowAudioControls;
@@ -58,7 +67,7 @@ const Player = ({
 	const [posterHovered, setPosterHovered] = useState(false);
 
 	useGlobalSpaceDown(() => {
-		session.isPaused ? session.play() : session.pause();
+		setPaused(!paused);
 	});
 
 	return (
@@ -78,9 +87,7 @@ const Player = ({
 								styles.poster,
 								(shouldShowPoster || posterHovered) && styles.posterPlayShown
 							)}
-							onClick={() =>
-								session.isPaused ? session.play() : session.pause()
-							}
+							onClick={() => setPaused(!paused)}
 							onTouchStart={() => setPosterHovered(true)}
 							onTouchEnd={() => setPosterHovered(false)}
 						>
@@ -96,7 +103,7 @@ const Player = ({
 								/>
 							)}
 							<span className={styles.posterPlay}>
-								{session.isPaused ? <IconPlay /> : <IconPause />}
+								{paused ? <IconPlay /> : <IconPause />}
 							</span>
 						</button>
 					</div>
@@ -128,7 +135,7 @@ const Player = ({
 							className={styles.waves}
 							style={
 								{
-									'--progress': `${session.progress * 100}%`,
+									'--progress': `${progress * 100}%`,
 									'--buffered': `${session.bufferedProgress * 100}%`,
 								} as CSSProperties
 							}
@@ -140,12 +147,12 @@ const Player = ({
 									defaultMessage: 'progress',
 									description: 'player progress label',
 								})}
-								value={session.progress * 100}
+								value={progress * 100}
 								step={0.0001}
 								onInput={(e) => {
 									const percent =
 										parseFloat((e.target as HTMLInputElement).value) / 100;
-									session.setProgress(percent);
+									setProgress(percent);
 								}}
 							/>
 						</div>

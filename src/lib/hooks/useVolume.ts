@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
+import { VjsContext } from '@components/templates/andVjs';
 
 export default function useVolume(): [Percent, (v: number) => void] {
-	const context = useContext(PlaybackContext);
+	const context = useContext(VjsContext);
 	const [volume, _setVolume] = React.useState<Percent>(context.getVolume);
 
 	useEffect(() => {

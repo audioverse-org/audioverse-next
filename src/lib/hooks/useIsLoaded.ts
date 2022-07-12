@@ -1,15 +1,21 @@
 import { useContext } from 'react';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
+import { VjsContext } from '@components/templates/andVjs';
 import { AndMiniplayerFragment } from '@components/templates/__generated__/andMiniplayer';
+import useVjsValue from '@lib/hooks/useVjsValue';
+import videojs from 'video.js';
+import ReadyState = videojs.ReadyState;
 
 export default function useIsLoaded(recording: AndMiniplayerFragment | null) {
-	const context = useContext(PlaybackContext);
+	const c = useContext(VjsContext);
+	const [readyState] = useVjsValue<ReadyState>({
+		e: ['canplay'],
+		get: (c) => c.vjs.readyState(),
+		defaultValue: ReadyState.HaveNothing,
+	});
 
-	const loadedRecording = context.getRecording();
-
+	if (!c) return false;
 	if (!recording) return false;
+	if (readyState === ReadyState.HaveNothing) return false;
 
-	if (!loadedRecording) return false;
-
-	return loadedRecording.id === recording.id;
+	return recording?.id === c?.recording?.id;
 }

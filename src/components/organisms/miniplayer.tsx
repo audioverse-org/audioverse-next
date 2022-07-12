@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl';
 import ButtonNudge from '@components/molecules/buttonNudge';
 import ButtonPlay from '@components/molecules/buttonPlay';
 import RecordingProgressBar from '@components/molecules/recordingProgressBar';
-import { PlaybackContext } from '@components/templates/andPlaybackContext';
+import { VjsContext } from '@components/templates/andVjs';
 import { BaseColors } from '@lib/constants';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
@@ -17,7 +17,7 @@ import { Volume } from '@components/molecules/volume';
 
 export default function Miniplayer(): JSX.Element | null {
 	const intl = useIntl();
-	const playbackContext = useContext(PlaybackContext);
+	const playbackContext = useContext(VjsContext);
 	const miniplayerRef = playbackContext.getMiniplayerRef();
 	const recording = playbackContext.getRecording();
 	const isShowingVideo = playbackContext.getVideoLocation() === 'miniplayer';

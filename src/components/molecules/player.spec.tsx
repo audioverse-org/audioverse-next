@@ -7,7 +7,7 @@ import videojs, { __loadMockPlayer, __mockPlayer } from 'video.js';
 
 import Player, { PlayerProps } from '@components/molecules/player';
 import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
+import AndVjs from '@components/templates/andVjs';
 import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
 import { SequenceContentType } from '@src/__generated__/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
@@ -47,11 +47,11 @@ const recording: Partial<PlayerFragment> = {
 const renderComponent = buildRenderer<PlayerProps>(
 	(props: PlayerProps) => {
 		return (
-			<AndPlaybackContext>
+			<AndVjs>
 				<AndMiniplayer>
 					<Player {...props} />
 				</AndMiniplayer>
-			</AndPlaybackContext>
+			</AndVjs>
 		);
 	},
 	{
@@ -87,6 +87,14 @@ async function updateVolume(volume = 70) {
 	});
 
 	return control;
+}
+
+async function play() {
+	const player = screen.getByLabelText('player');
+
+	userEvent.click(within(player).getByLabelText('play'));
+
+	await within(player).findByLabelText('pause');
 }
 
 describe('player', () => {
@@ -129,6 +137,7 @@ describe('player', () => {
 		const player = screen.getByLabelText('player');
 
 		userEvent.click(within(player).getByLabelText('play'));
+
 		await within(player).findByLabelText('pause');
 
 		userEvent.click(within(player).getByLabelText('pause'));
@@ -142,6 +151,12 @@ describe('player', () => {
 		});
 
 		await renderComponent();
+
+		const player = screen.getByLabelText('player');
+
+		userEvent.click(within(player).getByLabelText('play'));
+
+		await within(player).findByLabelText('pause');
 
 		await updateProgress();
 
@@ -168,6 +183,8 @@ describe('player', () => {
 				},
 			},
 		});
+
+		await play();
 
 		await updateProgress();
 
@@ -328,7 +345,7 @@ describe('player', () => {
 			},
 		});
 
-		await updateProgress();
+		await updateProgress(50);
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -372,7 +389,7 @@ describe('player', () => {
 		};
 
 		await renderWithProviders(
-			<AndPlaybackContext>
+			<AndVjs>
 				<AndMiniplayer>
 					<Player
 						recording={recording1 as PlayerFragment}
@@ -383,7 +400,7 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>,
+			</AndVjs>,
 			undefined
 		);
 
@@ -491,7 +508,7 @@ describe('player', () => {
 		};
 
 		await renderWithProviders(
-			<AndPlaybackContext>
+			<AndVjs>
 				<AndMiniplayer>
 					<Player
 						recording={recording1 as PlayerFragment}
@@ -502,7 +519,7 @@ describe('player', () => {
 						backgroundColor={BaseColors.WHITE}
 					/>
 				</AndMiniplayer>
-			</AndPlaybackContext>,
+			</AndVjs>,
 			undefined
 		);
 
@@ -1112,16 +1129,14 @@ describe('player', () => {
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.6));
 	});
 
-	it('displays current time in miniplayer', async () => {
+	it.only('displays current time in miniplayer', async () => {
 		__loadMockPlayer({ time: 50 });
 
 		await renderComponent();
 
-		userEvent.click(await screen.findByLabelText('play'));
-
-		await waitFor(() => {
-			expect(screen.getAllByLabelText('pause')).not.toHaveLength(0);
-		});
+		const player = screen.getByLabelText('player');
+		userEvent.click(within(player).getByLabelText('play'));
+		await within(player).findByLabelText('pause');
 
 		__mockPlayer.currentTime(50);
 

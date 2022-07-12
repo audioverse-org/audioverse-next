@@ -1,3 +1,4 @@
+// https://www.w3.org/2010/05/video/mediaevents.html
 // https://github.com/alex-barstow/video.js/blob/9f0167b2f1dc36db318ca9ed329f8b460d8dd028/src/js/player.js#L58
 type VideoJsProxiedEvent =
 	| 'progress'
@@ -26,6 +27,7 @@ type VideoJsManagedEvent =
 	| 'playing'
 	| 'seeking'
 	| 'seeked'
+	| 'play'
 	| 'pause'
 	| 'ended'
 	| 'fullscreenerror'
