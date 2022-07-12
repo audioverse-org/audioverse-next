@@ -152,11 +152,11 @@ export default function usePlaybackSession(
 	}
 
 	function chromecastTrigger() {
-		afterLoad((c) => c.chromecastTrigger());
+		withRecording((c) => c.chromecastTrigger());
 	}
 
 	function airPlayTrigger() {
-		afterLoad((c) => c.airPlayTrigger());
+		withRecording((c) => c.airPlayTrigger());
 	}
 
 	return {
