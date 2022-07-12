@@ -17,7 +17,7 @@ export default function LineHeading({
 	small?: boolean;
 }): JSX.Element {
 	return (
-		<h1
+		<h5
 			className={clsx(
 				styles.heading,
 				styles.h1,
@@ -27,6 +27,6 @@ export default function LineHeading({
 			)}
 		>
 			{children}
-		</h1>
+		</h5>
 	);
 }

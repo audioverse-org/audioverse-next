@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
 	makeDiscoverCollectionsRoute,
@@ -9,7 +9,7 @@ import {
 } from '@lib/routes';
 
 export type IAppFeature = {
-	heading: JSX.Element;
+	heading: string;
 	kicker: JSX.Element;
 	cta: JSX.Element;
 	url: string;
@@ -17,15 +17,15 @@ export type IAppFeature = {
 	backgroundColor: string;
 };
 
-export function getAppFeatures(languageRoute: string): IAppFeature[] {
+export function GetAppFeatures(languageRoute: string): IAppFeature[] {
+	const intl = useIntl();
+
 	return [
 		{
-			heading: (
-				<FormattedMessage
-					id="app__features1Heading"
-					defaultMessage="Treasures New and Old"
-				/>
-			),
+			heading: intl.formatMessage({
+				id: 'app__features1Heading',
+				defaultMessage: 'Treasures New and Old',
+			}),
 			kicker: (
 				<FormattedMessage
 					id="app__features1Kicker"
@@ -42,12 +42,10 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			backgroundColor: '#FF6E6E',
 		},
 		{
-			heading: (
-				<FormattedMessage
-					id="app__features2Heading"
-					defaultMessage="Present Truth"
-				/>
-			),
+			heading: intl.formatMessage({
+				id: 'app__features2Heading',
+				defaultMessage: 'Present Truth',
+			}),
 			kicker: (
 				<FormattedMessage
 					id="app__features2Kicker"
@@ -64,12 +62,10 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			backgroundColor: '#325763',
 		},
 		{
-			heading: (
-				<FormattedMessage
-					id="app__features3Heading"
-					defaultMessage="Connected and Harmonious"
-				/>
-			),
+			heading: intl.formatMessage({
+				id: 'app__features3Heading',
+				defaultMessage: 'Connected and Harmonious',
+			}),
 			kicker: (
 				<FormattedMessage
 					id="app__features3Kicker"
@@ -86,12 +82,10 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			backgroundColor: '#6B7680',
 		},
 		{
-			heading: (
-				<FormattedMessage
-					id="app__features4Heading"
-					defaultMessage="Save the Ones You Love"
-				/>
-			),
+			heading: intl.formatMessage({
+				id: 'app__features4Heading',
+				defaultMessage: 'Save the Ones You Love',
+			}),
 			kicker: (
 				<FormattedMessage
 					id="app__features4Kicker"
@@ -108,12 +102,10 @@ export function getAppFeatures(languageRoute: string): IAppFeature[] {
 			backgroundColor: '#EFEBEB',
 		},
 		{
-			heading: (
-				<FormattedMessage
-					id="app__features5Heading"
-					defaultMessage="Lay Up for Yourselves…"
-				/>
-			),
+			heading: intl.formatMessage({
+				id: 'app__features5Heading',
+				defaultMessage: 'Lay Up for Yourselves…',
+			}),
 			kicker: (
 				<FormattedMessage
 					id="app__features5Kicker"
