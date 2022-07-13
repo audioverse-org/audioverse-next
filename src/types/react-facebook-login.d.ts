@@ -15,5 +15,3 @@ declare module 'react-facebook-login/dist/facebook-login-render-props' {
 
 	declare function __setFacebookResponse(response: Partial<Response>): void;
 }
-
-declare module 'videojs-overlay';

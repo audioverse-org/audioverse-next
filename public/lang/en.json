@@ -80,13 +80,13 @@
     "string": "Materials should be delivered in a spirit of reverence, respect, and humility, recognizing that they represent the Gospel of Jesus Christ. We reject an attitude that is spiteful, arrogant, vulgar, irreverent, flippant, frivolous, demeaning, or otherwise unChrist-like."
   },
   "about__spirit12": {
-    "string": "Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse."
+    "string": "Materials should be from presenters who are associated with organizations or groups who uphold and represent the above-described spirit of AudioVerse, and are Seventh-day Adventists in good standing."
   },
   "about__spirit2": {
     "string": "Materials should affirm the Bible and the Spirit of Prophecy as reflected by the stated fundamental beliefs of the Seventh-day Adventist Church."
   },
   "about__spirit3": {
-    "string": "Materials should promote the reality that victory over sin is possible through the believer&rsquo;s dependence on the grace and power of Jesus Christ."
+    "string": "Materials should promote the reality that victory over sin is possible through the believer's dependence on the grace and power of Jesus Christ."
   },
   "about__spirit4": {
     "string": "Materials should promote lifestyle and behavioral choices that are in harmony with principles from Scripture and the Spirit of Prophecy."
@@ -1833,6 +1833,14 @@
   },
   "player__fullscreenButtonLabel": {
     "comment": "player fullscreen button label",
+    "string": "fullscreen"
+  },
+  "player__chromeCastLabel": {
+    "comment": "player chromecast button label",
+    "string": "fullscreen"
+  },
+  "player__airPlayLabel": {
+    "comment": "player airplay button label",
     "string": "fullscreen"
   },
   "player__nudgeBack": {

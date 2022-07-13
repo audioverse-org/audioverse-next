@@ -3,9 +3,8 @@
 @import 'inter.scss';
 @import '../../node_modules/normalize.css/normalize.css';
 @import './overlay.scss';
-
-// END normalize.css
-
+@import '../../node_modules/@silvermine/videojs-airplay/dist/silvermine-videojs-airplay.css';
+@import '../../node_modules/@silvermine/videojs-chromecast/dist/silvermine-videojs-chromecast.css';
 @import './common.scss';
 @import '../components/molecules/button.module.scss';
 

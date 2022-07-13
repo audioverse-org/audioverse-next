@@ -11,6 +11,7 @@ query getAboutStaticPaths($language: Language!, $first: Int!) {
 	pages(language: $language, first: $first) {
 		nodes {
 			canonicalPath(useFuturePath: true)
+			type
 		}
 	}
 }

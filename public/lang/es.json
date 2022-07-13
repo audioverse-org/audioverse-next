@@ -987,6 +987,15 @@
     "comment": "etiqueta de botón de pantalla completa del reproductor",
     "string": "pantalla completa"
   },
+  "player__chromeCastLabel": {
+    "comment": "etiqueta del botón de Chromecast del reproductor",
+    "string": "cromado"
+  },
+  "player__airPlayLabel": {
+    "comment": "etiqueta del botón de reproducción de aire del jugador",
+    "string": "salida en antena"
+  },
+
   "player__nudgeBack": {
     "comment": "etiqueta del jugador nudge-back",
     "string": "retroceder 15 segundos"

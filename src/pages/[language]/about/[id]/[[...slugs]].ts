@@ -7,7 +7,11 @@ import {
 import About, { AboutProps } from '@containers/about';
 import { IBaseProps } from '@containers/base';
 import { REVALIDATE } from '@lib/constants';
-import { getAboutPageData, getAboutStaticPaths } from '@lib/generated/graphql';
+import {
+	getAboutPageData,
+	getAboutStaticPaths,
+	PageType,
+} from '@lib/generated/graphql';
 import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
 
 export default About;
@@ -37,7 +41,7 @@ export async function getStaticProps({
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	return getDetailStaticPaths(
 		getAboutStaticPaths,
-		(d) => d.pages.nodes,
+		(d) => d.pages.nodes?.filter((p) => p.type === PageType.About),
 		(l, { canonicalPath }) => canonicalPath
 	);
 }
