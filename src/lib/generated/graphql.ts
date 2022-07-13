@@ -2416,7 +2416,6 @@ export const PageType = {
   Custom: 'CUSTOM',
   Legal: 'LEGAL',
   Privacy: 'PRIVACY',
-  Purpose: 'PURPOSE',
   SpiritOfAv: 'SPIRIT_OF_AV',
   Team: 'TEAM',
   TermsOfUse: 'TERMS_OF_USE',
