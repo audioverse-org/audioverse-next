@@ -17,7 +17,7 @@ export type IAppFeature = {
 	backgroundColor: string;
 };
 
-export function GetAppFeatures(languageRoute: string): IAppFeature[] {
+export function useAppFeatures(languageRoute: string): IAppFeature[] {
 	const intl = useIntl();
 
 	return [

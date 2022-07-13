@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Slider from '@components/organisms/slider';
-import { GetAppFeatures } from '@lib/getAppFeatures';
+import { useAppFeatures } from '@lib/useAppFeatures';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
@@ -16,7 +16,7 @@ export default function AndOnboarding({
 	children: ReactNode;
 }): JSX.Element {
 	const languageRoute = useLanguageRoute();
-	const features = GetAppFeatures(languageRoute);
+	const features = useAppFeatures(languageRoute);
 
 	return (
 		<div className={styles.page}>

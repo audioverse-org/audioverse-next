@@ -19,7 +19,7 @@ import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { GetAppFeatures } from '@lib/getAppFeatures';
+import { useAppFeatures } from '@lib/useAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
 	makeBlogPostListRoute,
@@ -74,7 +74,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const posts = data?.blogPosts.nodes || [];
 	const bibleChapters = data?.bibleChapters.nodes || [];
 
-	const features = GetAppFeatures(languageRoute);
+	const features = useAppFeatures(languageRoute);
 
 	const isEnglish = languageRoute === 'en';
 
