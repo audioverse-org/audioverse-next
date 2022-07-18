@@ -12,7 +12,20 @@ module.exports = withBundleAnalyzer(
 			dest: 'public',
 			// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
 			buildExcludes: [/server\/middleware-manifest\.json$/],
-			publicExcludes: ['!lang/*.json', '!compiled-lang/*.json'],
+			publicExcludes: [
+				'!lang/*.json',
+				'!compiled-lang/*.json',
+				'!img/features',
+				'!img/board',
+				'!img/icons',
+				'!img/staff',
+				'!img/players.jpeg',
+				'!img/hero-av-full.jpg',
+				'!img/hero-av.jpg',
+				'!img/unsplash-support.jpg',
+				'!img/audioverse-ancient-screenshot.jpg',
+				'!img/poster.jpg',
+			],
 		},
 		headers() {
 			return [

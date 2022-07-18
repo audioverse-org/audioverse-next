@@ -60,7 +60,7 @@ export default function Miniplayer({
 		const { Icon } = getSequenceTypeTheme(recordingAMF.sequence.contentType);
 		sequenceLine = (
 			<div
-				className={styles.series}
+				className={clsx(styles.series, overlay && styles.overlay)}
 				aria-label={intl.formatMessage({
 					id: 'miniplayer__series',
 					defaultMessage: 'Series',
@@ -159,7 +159,7 @@ export default function Miniplayer({
 					/> */}
 						{shouldShowVideoControls && (
 							<CircleButton
-								onClick={() => session.exitFullscreen()}
+								onClick={() => session?.cancelFullScreen()}
 								backgroundColor={overlay ? BaseColors.DARK : BaseColors.WHITE}
 								aria-label={intl.formatMessage({
 									id: 'player__fullscreenButtonLabel',

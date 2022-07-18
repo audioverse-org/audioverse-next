@@ -53,7 +53,6 @@ export default function AndMiniplayer({
 	useEffect(() => {
 		document.body.classList.toggle('body--with-miniplayer', !!recording);
 	}, [recording]);
-
 	return (
 		<>
 			<div ref={originRef} className={styles.videoOrigin}>
@@ -95,16 +94,19 @@ export default function AndMiniplayer({
 					<div className={styles.titleOverlayBox}>
 						<div className={styles.titleOverlayContent}>
 							<div className={styles.sequenceType}>{sequenceLine}</div>
-							<div className={styles.partInfo}>
-								<FormattedMessage
-									id="andMiniplayer__partOfPart"
-									defaultMessage="Part {index} of {total}"
-									values={{
-										index: teaseRecording?.sequenceIndex,
-										total: teaseRecording?.sequence?.recordings?.nodes?.length,
-									}}
-								/>
-							</div>
+							{sequenceLine !== null && (
+								<div className={styles.partInfo}>
+									<FormattedMessage
+										id="andMiniplayer__partOfPart"
+										defaultMessage="Part {index} of {total}"
+										values={{
+											index: teaseRecording?.sequenceIndex,
+											total:
+												teaseRecording?.sequence?.recordings?.nodes?.length,
+										}}
+									/>
+								</div>
+							)}
 							<div className={styles.titleText}>{teaseRecording?.title}</div>
 							<div className={styles.authorBox}>
 								<div className={styles.authorAvatar}>

@@ -116,7 +116,7 @@ export type PlaybackContextType = {
 	getSpeed: () => number;
 	getDuration: () => number;
 	requestFullscreen: () => void;
-	exitFullscreen: () => void;
+	cancelFullScreen: () => void;
 	isFullscreen: () => boolean | undefined;
 	advanceRecording: () => void;
 	setIsPaused: (paused: boolean) => void;
@@ -161,7 +161,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	getDuration: () => 0,
 	isFullscreen: () => false,
 	requestFullscreen: () => undefined,
-	exitFullscreen: () => undefined,
+	cancelFullScreen: () => undefined,
 	advanceRecording: () => undefined,
 	setIsPaused: () => undefined,
 	getRefs: () => ({}),
@@ -256,7 +256,6 @@ export default function AndPlaybackContext({
 	}, [progress]);
 
 	const recordingRef = useRef<AndMiniplayerFragment>();
-	console.log(playerRef.current, 'from current');
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
@@ -355,17 +354,21 @@ export default function AndPlaybackContext({
 			_setSpeed(s);
 		},
 		isFullscreen: () => playerRef.current?.isFullscreen(),
-		exitFullscreen: () => playerRef.current?.exitFullscreen(),
+		cancelFullScreen: () => {
+			playerRef?.current?.exitFullscreen();
+			playerRef.current?.isFullscreen(false);
+		},
 
 		requestFullscreen: () => {
 			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
 			overlayPlayer.requestFullscreen();
+			overlayPlayer.isFullscreen(true);
 			overlayPlayer.controlBar.hide();
 			overlayPlayer.overlay({
 				overlays: [
 					{
 						content: videoOverlayRef.current,
-						start: 0,
+						start: 'fullscreenchange',
 						end: overlayPlayer.duration() + 10,
 					},
 					{

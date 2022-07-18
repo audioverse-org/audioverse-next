@@ -17,7 +17,7 @@ interface PlaybackSessionInfo {
 	pause: () => void;
 	play: () => void;
 	requestFullscreen: () => void;
-	exitFullscreen: () => void;
+	cancelFullScreen: () => void;
 	setPrefersAudio: (prefersAudio: boolean) => void;
 	setSpeed: (speed: number) => void;
 	isLoaded: boolean;
@@ -170,8 +170,8 @@ export default function usePlaybackSession(
 		afterLoad((c) => c.requestFullscreen());
 	}
 
-	function exitFullscreen() {
-		afterLoad((c) => c.exitFullscreen());
+	function cancelFullScreen() {
+		afterLoad((c) => c.cancelFullScreen());
 	}
 
 	function getVideo() {
@@ -200,6 +200,6 @@ export default function usePlaybackSession(
 		getVideo,
 		speed,
 		supportsFullscreen,
-		exitFullscreen,
+		cancelFullScreen,
 	};
 }
