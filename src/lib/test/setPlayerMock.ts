@@ -94,7 +94,6 @@ export default function setPlayerMock(
 			dispose: jest.fn(),
 			hide: jest.fn(),
 		} as any,
-		overlay: jest.fn(),
 		playbackRate: jest.fn((newRate?: number) => {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;
