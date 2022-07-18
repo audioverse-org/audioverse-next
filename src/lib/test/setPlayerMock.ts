@@ -88,6 +88,7 @@ export default function setPlayerMock(
 		duration: jest.fn(() => duration),
 		src: jest.fn(),
 		options: jest.fn(),
+		overlay: jest.fn(),
 		controlBar: {
 			createEl: jest.fn(),
 			dispose: jest.fn(),

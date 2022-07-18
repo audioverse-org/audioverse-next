@@ -20,6 +20,7 @@ export default function LineHeading({
 		<h5
 			className={clsx(
 				styles.heading,
+				styles.h1,
 				className,
 				color === BaseColors.SALMON && styles.salmon,
 				small && styles.small

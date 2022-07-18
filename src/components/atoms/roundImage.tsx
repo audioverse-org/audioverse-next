@@ -24,8 +24,10 @@ export default function RoundImage({
 		<Image
 			alt={alt}
 			src={image}
+			loader={() => image}
 			width={size}
 			height={size}
+			layout="intrinsic"
 			className={clsx(
 				styles.base,
 				large && styles.large,

@@ -1,12 +1,11 @@
 import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import React, { PropsWithChildren, useContext, useEffect } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { RecordingFragment, SequenceContentType } from '@lib/generated/graphql';
 import { getSequenceTypeTheme } from '@lib/getSequenceType';
-import React, { PropsWithChildren, useContext, useEffect } from 'react';
-
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
 
@@ -53,6 +52,7 @@ export default function AndMiniplayer({
 	useEffect(() => {
 		document.body.classList.toggle('body--with-miniplayer', !!recording);
 	}, [recording]);
+
 	return (
 		<>
 			<div ref={originRef} className={styles.videoOrigin}>

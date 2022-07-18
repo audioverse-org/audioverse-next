@@ -110,6 +110,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} 朗读"
   },
+  "blog__imageDesc": {
+    "string":"博客图片"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "由{name}朗读"
   },
@@ -451,6 +454,10 @@
     "comment": "home page download app section text",
     "string": "在智能手机上下载这款应用，就可以随处使用AudioVerse。在任何地方通过网络在线收听或收看证道，也可以预先下载证道，随时聆听，无需消耗流量。"
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "在智能设备上收听播客的人的播放列表快照"
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
     "string": "下载应用"
@@ -546,6 +553,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "捐赠"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "一个坐在椅子上的人用他的笔记本电脑在桌子上与一群人分享他的想法"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -753,6 +764,9 @@
   },
   "loginForm__signupIntro": {
     "string": "没有账户吗？"
+  },
+  "logo__alt":{
+    "string": "AudioVerse 标识"
   },
   "logout__inProcess": {
     "string": "登出中……"
@@ -1986,6 +2000,9 @@
   },
   "homePage__learnStoryButtonLabel": {
     "string": "了解我们的故事"
+  },
+  "homePage__mainImageDesc": {
+    "string": "一个戴着耳机在户外看书的女人."
   },
   "homePage__newsletterEmail": {
     "string": "邮件地址"

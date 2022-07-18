@@ -110,6 +110,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} de lecture"
   },
+  "blog__imageDesc": {
+    "string":"Image du blogue"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "Lu par {name}"
   },
@@ -451,6 +454,10 @@
     "comment": "home page download app section text",
     "string": "Si vous avez un smartphone, téléchargez l'application pour emporter AudioVerse partout avec vous. Écoutez des enseignements de n'importe où via votre connexion internet ou téléchargez-les à l'avance pour les écouter en déplacement sans utiliser votre forfait de données."
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "instantanés de la liste de lecture de personnes écoutant des podcasts sur un appareil intelligent."
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
     "string": "Télécharger l'application"
@@ -546,6 +553,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "Faire un don"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "Une personne assise sur une chaise partageant sa pensée avec un groupe de personnes avec son ordinateur portable affiché sur la table"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -753,6 +764,9 @@
   },
   "loginForm__signupIntro": {
     "string": "Vous n'avez pas de compte ?"
+  },
+  "logo__alt":{
+    "string": "AudioVerse Logo"
   },
   "logout__inProcess": {
     "string": "Déconnexion..."
@@ -1987,6 +2001,12 @@
   "homePage__learnStoryButtonLabel": {
     "string": "En savoir plus sur notre histoire"
   },
+
+  "homePage__mainImageDesc": {
+    "string": "Une femme portant un casque et lisant un livre à l'extérieur."
+  },
+
+  
   "homePage__newsletterEmail": {
     "string": "Adresse e-mail"
   },

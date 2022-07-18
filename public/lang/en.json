@@ -389,6 +389,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} read"
   },
+  "blog__imageDesc": {
+    "string":"Blog Image"
+  },
   "blog__title": {
     "string": "All Blog Posts"
   },
@@ -1223,6 +1226,10 @@
     "comment": "home page download app section text",
     "string": "If you have a smartphone, download the app to take AudioVerse with you wherever you go. Stream teachings from anywhere or download to your device. New app coming in 2022."
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "Snapshots of playlist of people listening to podcasts on smart device."
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
     "string": "Download the App"
@@ -1235,6 +1242,11 @@
     "comment": "home page latest content section title",
     "string": "Latest Content"
   },
+
+  "homePage__mainImageDesc": {
+    "string": "A women wearing headphone and reading book outdoors."
+  },
+
   "homePage__newsletterEmail": {
     "string": "Email Address"
   },
@@ -1283,6 +1295,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "Make a donation"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "A person sitting on a chair sharing his thought to a group of people with his laptop displayed on the table."
   },
   "homePage__supportSectionText": {
     "comment": "home page support section text",
@@ -1527,6 +1543,9 @@
   },
   "login__title": {
     "string": "Login"
+  },
+  "logo__alt":{
+    "string": "AudioVerse Logo"
   },
   "logout__inProcess": {
     "string": "Logging out..."

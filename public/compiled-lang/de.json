@@ -303,6 +303,12 @@
       "value": " lesen"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "Blog-Bild"
+    }
+  ],
   "buttonShare__emailSubject": [
     {
       "type": 0,
@@ -1501,6 +1507,12 @@
       "value": "Ein Konto erstellen"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "Schnappschüsse der Wiedergabeliste von Personen, die Podcasts auf einem Smart-Gerät anhören."
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1595,6 +1607,12 @@
     {
       "type": 0,
       "value": "Erfahre mehr über uns"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "Eine Frau mit Kopfhörer und Lesebuch im Freien"
     }
   ],
   "homePage__newsletterEmail": [
@@ -1705,6 +1723,12 @@
     {
       "type": 0,
       "value": "Spenden"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "Eine Person, die auf einem Stuhl sitzt und einer Gruppe von Menschen seine Gedanken mitteilt, während ihr Laptop auf dem Tisch steht"
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -2299,6 +2323,12 @@
     {
       "type": 0,
       "value": "Du hast kein Zugangskonto?"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse Fírmenzeichen"
     }
   ],
   "logout__inProcess": [

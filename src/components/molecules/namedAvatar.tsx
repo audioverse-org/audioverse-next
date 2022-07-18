@@ -33,7 +33,7 @@ export default function NamedAvatar({
 }: INamedAvatarProps): JSX.Element {
 	const inner = (
 		<>
-			{image && <RoundImage image={image} small={small} />}
+			{image && <RoundImage image={image} small={small} alt={name} />}
 			<div className={clsx(styles.title, image && styles.titleWithImage)}>
 				{name}
 			</div>

@@ -30,6 +30,7 @@ export default function Heading6({
 				baseStyles.base,
 				sans && baseStyles.sans,
 				unpadded && baseStyles.unpadded,
+				styles.h6,
 				loose && styles.loose,
 				large && styles.large,
 				uppercase && styles.uppercase,

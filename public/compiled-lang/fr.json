@@ -303,6 +303,12 @@
       "value": " de lecture"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "Image du blogue"
+    }
+  ],
   "buttonShare__emailSubject": [
     {
       "type": 0,
@@ -1481,6 +1487,12 @@
       "value": "Créer un compte"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "instantanés de la liste de lecture de personnes écoutant des podcasts sur un appareil intelligent."
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1575,6 +1587,12 @@
     {
       "type": 0,
       "value": "En savoir plus sur notre histoire"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "Une femme portant un casque et lisant un livre à l'extérieur."
     }
   ],
   "homePage__newsletterEmail": [
@@ -1685,6 +1703,12 @@
     {
       "type": 0,
       "value": "Faire un don"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "Une personne assise sur une chaise partageant sa pensée avec un groupe de personnes avec son ordinateur portable affiché sur la table"
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -2279,6 +2303,12 @@
     {
       "type": 0,
       "value": "Vous n'avez pas de compte ?"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse Logo"
     }
   ],
   "logout__inProcess": [

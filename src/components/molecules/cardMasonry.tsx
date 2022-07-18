@@ -20,6 +20,8 @@ export default function CardMasonry<T>({
 			className={clsx(styles.base, className)}
 			columnGutter={20}
 			columnWidth={300}
+			aria-owns
+			role="list"
 		/>
 	);
 }

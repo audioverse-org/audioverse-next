@@ -20,7 +20,7 @@ import Testimonies from '@components/organisms/testimonies';
 import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { getAppFeatures } from '@lib/getAppFeatures';
+import { GetAppFeatures } from '@lib/getAppFeatures';
 import isServerSide from '@lib/isServerSide';
 import {
 	makeBlogPostListRoute,
@@ -74,7 +74,7 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const posts = data?.blogPosts.nodes || [];
 	const bibleChapters = data?.bibleChapters.nodes || [];
 
-	const features = getAppFeatures(languageRoute);
+	const features = GetAppFeatures(languageRoute);
 
 	const isEnglish = languageRoute === 'en';
 
@@ -143,6 +143,11 @@ export default function Home({ data }: HomeProps): JSX.Element {
 								layout="fill"
 								objectFit="cover"
 								priority
+								alt={intl.formatMessage({
+									id: 'homePage__mainImageDesc',
+									defaultMessage:
+										'A women wearing headphone and reading book outdoors.',
+								})}
 							/>
 						</div>
 					}
@@ -271,7 +276,14 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										<Button type="super" href={url} text={cta} />
 									</>
 								}
-								media={<Image src={image} layout="fill" objectFit="cover" />}
+								media={
+									<Image
+										src={image}
+										layout="fill"
+										objectFit="cover"
+										alt={heading}
+									/>
+								}
 								theme={BaseColors.DARK}
 								className={styles.featureSlide}
 							/>
@@ -342,6 +354,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							layout="fill"
 							objectFit="cover"
 							sizes="(max-width: 664px) 100vw, 50vw"
+							alt={intl.formatMessage({
+								id: 'homePage__downloadAppSectionImageDesc',
+								defaultMessage:
+									'Snapshots of playlist of people listening to podcasts on smart device.',
+								description: 'home page download app section image desc',
+							})}
 						/>
 					}
 					theme={BaseColors.CREAM}
@@ -483,6 +501,12 @@ export default function Home({ data }: HomeProps): JSX.Element {
 							src="/img/unsplash-support.jpg"
 							layout="fill"
 							objectFit="cover"
+							alt={intl.formatMessage({
+								id: 'homePage__supportSectionImageDesc',
+								defaultMessage:
+									'A person sitting on a chair sharing his thought to a group of people with his laptop displayed on the table.',
+								description: 'home page support section image desc',
+							})}
 						/>
 					}
 					theme={BaseColors.LIGHT_TONE}
@@ -493,7 +517,16 @@ export default function Home({ data }: HomeProps): JSX.Element {
 			<div className={styles.footerWrapper} ref={footerRef}>
 				<div className={styles.footer}>
 					<span className={styles.logo}>
-						<Image src="/img/logo.svg" width={161} height={23} />
+						<Image
+							src="/img/logo.svg"
+							width={161}
+							height={23}
+							alt={intl.formatMessage({
+								id: 'logo__alt',
+								defaultMessage: 'Audioverse Logo',
+							})}
+							layout="intrinsic"
+						/>
 					</span>
 					<Heading3 sans unpadded>
 						<FormattedMessage

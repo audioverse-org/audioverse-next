@@ -303,6 +303,12 @@
       "value": " прочитано"
     }
   ],
+  "blog__imageDesc": [
+    {
+      "type": 0,
+      "value": "Изображение блога"
+    }
+  ],
   "buttonShare__emailSubject": [
     {
       "type": 0,
@@ -1489,6 +1495,12 @@
       "value": "Создать учетную запись"
     }
   ],
+  "homePage__downloadAppSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "снимки списка воспроизведения людей, слушающих подкасты на смарт-устройстве"
+    }
+  ],
   "homePage__downloadAppSectionText": [
     {
       "type": 0,
@@ -1583,6 +1595,12 @@
     {
       "type": 0,
       "value": "Узнайте о нас"
+    }
+  ],
+  "homePage__mainImageDesc": [
+    {
+      "type": 0,
+      "value": "Женщина в наушниках и читает книгу на улице."
     }
   ],
   "homePage__newsletterEmail": [
@@ -1693,6 +1711,12 @@
     {
       "type": 0,
       "value": "Сделать пожертвование"
+    }
+  ],
+  "homePage__supportSectionImageDesc": [
+    {
+      "type": 0,
+      "value": "Человек, сидящий на стуле, делится своими мыслями с группой людей со своим ноутбуком на столе."
     }
   ],
   "homePage__supportSectionImagePlaceholder": [
@@ -2287,6 +2311,12 @@
     {
       "type": 0,
       "value": "У Вас нет учетной записи?"
+    }
+  ],
+  "logo__alt": [
+    {
+      "type": 0,
+      "value": "AudioVerse логотип"
     }
   ],
   "logout__inProcess": [

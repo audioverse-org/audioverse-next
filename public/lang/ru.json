@@ -110,6 +110,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} прочитано"
   },
+  "blog__imageDesc": {
+    "string":"Изображение блога"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "Прочитано (кем-то) {name}"
   },
@@ -451,6 +454,10 @@
     "comment": "home page download app section text",
     "string": "У Вас есть смартфон? Скачайте приложение AudioVerse и слушайте проповеди онлайн. Не имеете постоянного выхода в интернет? Загружайте проповеди и слушайте  офлайн."
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "снимки списка воспроизведения людей, слушающих подкасты на смарт-устройстве"
+  },
   "homePage__downloadAppSectionTitle": {
     "comment": "home page download app section title",
     "string": "Скачать приложение"
@@ -546,6 +553,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "Сделать пожертвование"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "Человек, сидящий на стуле, делится своими мыслями с группой людей со своим ноутбуком на столе."
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -753,6 +764,9 @@
   },
   "loginForm__signupIntro": {
     "string": "У Вас нет учетной записи?"
+  },
+  "logo__alt":{
+    "string": "AudioVerse логотип"
   },
   "logout__inProcess": {
     "string": "Выход из системы..."
@@ -1983,6 +1997,9 @@
   },
   "homePage__learnStoryButtonLabel": {
     "string": "Узнайте о нас"
+  },
+  "homePage__mainImageDesc": {
+    "string": "Женщина в наушниках и читает книгу на улице."
   },
   "homePage__newsletterEmail": {
     "string": "Адрес электронной почты"

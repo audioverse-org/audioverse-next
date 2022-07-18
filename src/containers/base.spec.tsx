@@ -23,7 +23,7 @@ describe('app', () => {
 	});
 	afterEach(cleanup);
 
-	it('sets title', async () => {
+	it('sets title this one', async () => {
 		await act(async () => {
 			const { getByTestId } = await render(
 				<MyApp

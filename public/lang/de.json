@@ -110,6 +110,9 @@
     "comment": "Blog post detail reading duration",
     "string": "{duration} lesen"
   },
+  "blog__imageDesc": {
+    "string":"Blog-Bild"
+  },
   "cardAudiobookTrack_readByLabel": {
     "string": "Lesen nach {name}"
   },
@@ -447,6 +450,10 @@
     "comment": "home page create account section title",
     "string": "Ein Konto erstellen"
   },
+  "homePage__downloadAppSectionImageDesc": {
+    "comment": "home page download app section Image Description",
+    "string": "Schnappschüsse der Wiedergabeliste von Personen, die Podcasts auf einem Smart-Gerät anhören."
+  },
   "homePage__downloadAppSectionText": {
     "comment": "home page download app section text",
     "string": "Wenn du ein Smartphone hast, lade die App herunter, um AudioVerse überall von unterwegs nutzen zu können. Streame Inhalte ortsungebunden über deine Netzwerkanbindung oder lade sie im Vorfeld herunter, um sie unterwegs anzuhören, ohne dein Datenvolumen zu belasten."
@@ -507,6 +514,11 @@
     "comment": "home page join audioverse button label",
     "string": "AudioVerse beitreten"
   },
+
+  "homePage__mainImageDesc": {
+    "string": "Eine Frau mit Kopfhörer und Lesebuch im Freien"
+  },
+
   "homePage__newsletterSectionText": {
     "comment": "home page newsletter section text",
     "string": "Möchtest du benachrichtigt werden, wenn wir neue Funktionen freischalten, Konferenzen besuchen oder neue AudioVerse-Inhalte veröffentlichen? Abonniere unseren Newsletter, um Updates zu erhalten."
@@ -546,6 +558,10 @@
   "homePage__supportSectionCTA": {
     "comment": "home page support section cta",
     "string": "Spenden"
+  },
+  "homePage__supportSectionImageDesc": {
+    "comment": "home page support section image desc",
+    "string": "Eine Person, die auf einem Stuhl sitzt und einer Gruppe von Menschen seine Gedanken mitteilt, während ihr Laptop auf dem Tisch steht"
   },
   "homePage__supportSectionImagePlaceholder": {
     "comment": "home page support section image placeholder",
@@ -753,6 +769,9 @@
   },
   "loginForm__signupIntro": {
     "string": "Du hast kein Zugangskonto?"
+  },
+  "logo__alt":{
+    "string": "AudioVerse Fírmenzeichen"
   },
   "logout__inProcess": {
     "string": "Ausloggen..."
