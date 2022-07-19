@@ -200,6 +200,7 @@ export default function AndPlaybackContext({
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
+	const [, setFullscreen] = useState<boolean>(false);
 
 	const queryClient = useQueryClient();
 
@@ -355,11 +356,13 @@ export default function AndPlaybackContext({
 		},
 		isFullscreen: () => playerRef.current?.isFullscreen(),
 		cancelFullScreen: () => {
+			setFullscreen(false);
 			playerRef?.current?.exitFullscreen();
 			playerRef.current?.isFullscreen(false);
 		},
 
 		requestFullscreen: () => {
+			setFullscreen(true);
 			const overlayPlayer = playerRef.current as VideoJsPlayerWithOverlay;
 			overlayPlayer.requestFullscreen();
 			overlayPlayer.isFullscreen(true);
