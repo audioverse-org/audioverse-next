@@ -80,16 +80,16 @@ export default function Team(): JSX.Element {
 		{
 			title: (
 				<FormattedMessage
-					id="about__team"
-					defaultMessage="Digital Marketing Coordinator"
+					id="about__teamMarketingDirector"
+					defaultMessage="Director of Marketing"
 				/>
 			),
-			image: 'Liz.jpg',
-			name: 'Liz Neascu',
+			image: '', // 'Abe'
+			name: 'Abe Sendros',
 			bio: (
 				<FormattedMessage
-					id="about__teamLizBio"
-					defaultMessage="A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
+					id="about__teamAbeBio"
+					defaultMessage="With his extensive marketing experience from the corporate world, Abe helps expand our reach to new users through a data-driven approach and insightful research."
 				/>
 			),
 		},
@@ -112,16 +112,16 @@ export default function Team(): JSX.Element {
 		{
 			title: (
 				<FormattedMessage
-					id="about__teamMarketingDirector"
-					defaultMessage="Director of Marketing"
+					id="about__team"
+					defaultMessage="Digital Marketing Coordinator"
 				/>
 			),
-			image: '', // 'Abe'
-			name: 'Abe Sendros',
+			image: 'Liz.jpg',
+			name: 'Liz Neascu',
 			bio: (
 				<FormattedMessage
-					id="about__teamAbeBio"
-					defaultMessage="With his extensive marketing experience from the corporate world, Abe helps expand our reach to new users through a data-driven approach and insightful research."
+					id="about__teamLizBio"
+					defaultMessage="A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
 				/>
 			),
 		},
