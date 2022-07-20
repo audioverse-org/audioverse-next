@@ -36,7 +36,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Executive Director"
 				/>
 			),
-			image: 'Alistair',
+			image: 'Alistair.jpg',
 			name: 'Alistair Huong',
 			bio: (
 				<FormattedMessage
@@ -65,15 +65,15 @@ export default function Team(): JSX.Element {
 			title: (
 				<FormattedMessage
 					id="about__teamTechnologyDirector"
-					defaultMessage="Technology Director"
+					defaultMessage="Director of Technology"
 				/>
 			),
-			image: 'Nathan',
-			name: 'Nathan Arthur',
+			image: '', // 'John'
+			name: 'John Peregrino',
 			bio: (
 				<FormattedMessage
-					id="about__teamNathanBio"
-					defaultMessage="Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
+					id="about__teamPeregrinoBio"
+					defaultMessage="John brings years of software project management expertise to oversee our product design and engineering. He keeps the ministry’s technology humming."
 				/>
 			),
 		},
@@ -84,7 +84,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Digital Marketing Coordinator"
 				/>
 			),
-			image: 'Liz',
+			image: 'Liz.jpg',
 			name: 'Liz Neascu',
 			bio: (
 				<FormattedMessage
@@ -100,7 +100,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Assistant Operations Coordinator"
 				/>
 			),
-			image: 'Annette',
+			image: 'Annette.jpg',
 			name: 'Annette Roblero Miller',
 			bio: (
 				<FormattedMessage
@@ -112,16 +112,16 @@ export default function Team(): JSX.Element {
 		{
 			title: (
 				<FormattedMessage
-					id="about__teamSoftwareEngineer"
-					defaultMessage="Software Engineer"
+					id="about__teamMarketingDirector"
+					defaultMessage="Director of Marketing"
 				/>
 			),
-			image: 'Matthew',
-			name: 'Matthew Leffler',
+			image: '', // 'Abe'
+			name: 'Abe Sendros',
 			bio: (
 				<FormattedMessage
-					id="about__teamMatthewBio"
-					defaultMessage="Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+					id="about__teamAbeBio"
+					defaultMessage="With his extensive marketing experience from the corporate world, Abe helps expand our reach to new users through a data-driven approach and insightful research."
 				/>
 			),
 		},
@@ -140,7 +140,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Chairman (Co-founder) | Physician, Albany, Oregon"
 				/>
 			),
-			image: 'Arakawa',
+			image: 'Arakawa.jpg',
 		},
 		{
 			name: 'Alistair Huong',
@@ -150,7 +150,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Secretary | Executive Director, AudioVerse"
 				/>
 			),
-			image: 'Huong',
+			image: 'Huong.jpg',
 		},
 		{
 			name: 'Vonn Williams',
@@ -160,7 +160,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Treasurer | Finance Professional, Chattanooga, Tennessee"
 				/>
 			),
-			image: 'Williams',
+			image: 'Williams.jpg',
 		},
 		{
 			name: 'Chester Clark III',
@@ -170,7 +170,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Vice President for Administration, Georgia-Cumberland Conference"
 				/>
 			),
-			image: 'Clark',
+			image: 'Clark.jpg',
 		},
 		{
 			name: 'Kathy Irizarry',
@@ -180,7 +180,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="Physician, Amity, Arkansas"
 				/>
 			),
-			image: 'Irizarry',
+			image: 'Irizarry.jpg',
 		},
 		{
 			name: 'Eli Kim',
@@ -190,17 +190,17 @@ export default function Team(): JSX.Element {
 					defaultMessage="Physician, Chattanooga, Tennessee"
 				/>
 			),
-			image: 'Kim',
+			image: 'Kim.jpg',
 		},
 		{
-			name: 'Don Mackintosh',
+			name: 'Cory Reeves',
 			title: (
 				<FormattedMessage
-					id="about__teamBoardMackintoshTitle"
-					defaultMessage="Director, NEWSTART Global"
+					id="about__teamBoardReevesTitle"
+					defaultMessage="Pastor, Carolina Conference of Seventh-day Adventists"
 				/>
 			),
-			image: 'Mackintosh',
+			image: 'Reeves.png',
 		},
 		{
 			name: 'Jesse Zwiker',
@@ -210,7 +210,7 @@ export default function Team(): JSX.Element {
 					defaultMessage="President, Hyve International"
 				/>
 			),
-			image: 'Zwiker',
+			image: 'Zwiker.jpg',
 		},
 	];
 
@@ -248,7 +248,7 @@ export default function Team(): JSX.Element {
 										<Image
 											width={280}
 											height={187}
-											src={`/img/staff/${image}.jpg`}
+											src={`/img/staff/${image}`}
 										/>
 									)}
 								</div>
@@ -273,7 +273,7 @@ export default function Team(): JSX.Element {
 					<div className={styles.boardList}>
 						{boardMembers.map(({ image, name, title }) => (
 							<div key={name}>
-								<RoundImage image={`/img/board/${image}.jpg`} />
+								<RoundImage image={`/img/board/${image}`} />
 								<span className={styles.name}>{name}</span>
 								<span className={styles.title}>{title}</span>
 							</div>
