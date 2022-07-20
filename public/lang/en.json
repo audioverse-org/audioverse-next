@@ -142,6 +142,9 @@
   "about__team": {
     "string": "Digital Marketing Coordinator"
   },
+  "about__teamAbeBio": {
+    "string": "With his extensive marketing experience from the corporate world, Abe helps expand our reach to new users through a data-driven approach and insightful research."
+  },
   "about__teamAlistairBio": {
     "string": "From his stand-up desk, Alistair oversees the strategy and day-to-day management by ensuring that we are doing the right things and that we are doing things right."
   },
@@ -172,8 +175,8 @@
   "about__teamBoardKimTitle": {
     "string": "Physician, Chattanooga, Tennessee"
   },
-  "about__teamBoardMackintoshTitle": {
-    "string": "Director, NEWSTART Global"
+  "about__teamBoardReevesTitle": {
+    "string": "Pastor, Carolina Conference of Seventh-day Adventists"
   },
   "about__teamBoardWilliamsTitle": {
     "string": "Treasurer | Finance Professional, Chattanooga, Tennessee"
@@ -199,17 +202,14 @@
   "about__teamLizBio": {
     "string": "A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
   },
-  "about__teamMatthewBio": {
-    "string": "Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+  "about__teamMarketingDirector": {
+    "string": "Director of Marketing"
   },
-  "about__teamNathanBio": {
-    "string": "Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
-  },
-  "about__teamSoftwareEngineer": {
-    "string": "Software Engineer"
+  "about__teamPeregrinoBio": {
+    "string": "John brings years of software project management expertise to oversee our product design and engineering. He keeps the ministry’s technology humming."
   },
   "about__teamTechnologyDirector": {
-    "string": "Technology Director"
+    "string": "Director of Technology"
   },
   "about__teamTitle": {
     "string": "The Team"
@@ -1812,16 +1812,16 @@
     "comment": "play button play label",
     "string": "play"
   },
-  "player__fullscreenButtonLabel": {
-    "comment": "player fullscreen button label",
-    "string": "fullscreen"
+  "player__airPlayLabel": {
+    "comment": "player airPlay button label",
+    "string": "airPlay"
   },
   "player__chromeCastLabel": {
-    "comment": "player chromecast button label",
-    "string": "fullscreen"
+    "comment": "player chromeCast button label",
+    "string": "chromeCast"
   },
-  "player__airPlayLabel": {
-    "comment": "player airplay button label",
+  "player__fullscreenButtonLabel": {
+    "comment": "player fullscreen button label",
     "string": "fullscreen"
   },
   "player__nudgeBack": {

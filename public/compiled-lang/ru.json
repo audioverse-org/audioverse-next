@@ -2737,6 +2737,18 @@
       "value": "Воспроизвести"
     }
   ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "трансляция"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "хромкаст"
+    }
+  ],
   "player__fullscreenButtonLabel": [
     {
       "type": 0,

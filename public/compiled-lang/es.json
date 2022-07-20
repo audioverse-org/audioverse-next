@@ -2757,6 +2757,18 @@
       "value": "reproducir"
     }
   ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "salida en antena"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "cromado"
+    }
+  ],
   "player__fullscreenButtonLabel": [
     {
       "type": 0,

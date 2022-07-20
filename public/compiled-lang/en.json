@@ -281,6 +281,12 @@
       "value": "Digital Marketing Coordinator"
     }
   ],
+  "about__teamAbeBio": [
+    {
+      "type": 0,
+      "value": "With his extensive marketing experience from the corporate world, Abe helps expand our reach to new users through a data-driven approach and insightful research."
+    }
+  ],
   "about__teamAlistairBio": [
     {
       "type": 0,
@@ -341,10 +347,10 @@
       "value": "Physician, Chattanooga, Tennessee"
     }
   ],
-  "about__teamBoardMackintoshTitle": [
+  "about__teamBoardReevesTitle": [
     {
       "type": 0,
-      "value": "Director, NEWSTART Global"
+      "value": "Pastor, Carolina Conference of Seventh-day Adventists"
     }
   ],
   "about__teamBoardWilliamsTitle": [
@@ -395,28 +401,22 @@
       "value": "A social media dynamo, e-commerce go-getter, and energetic marketer, Liz helps grow our social media audience and oversees our digital marketing efforts."
     }
   ],
-  "about__teamMatthewBio": [
+  "about__teamMarketingDirector": [
     {
       "type": 0,
-      "value": "Frontend, backend, full-stack and more. Matthew churns out code and builds beautiful things all while walking on a treadmill."
+      "value": "Director of Marketing"
     }
   ],
-  "about__teamNathanBio": [
+  "about__teamPeregrinoBio": [
     {
       "type": 0,
-      "value": "Nathan contributes to the ministry by solving big problems, managing development projects, and keeping the ministry’s technology humming."
-    }
-  ],
-  "about__teamSoftwareEngineer": [
-    {
-      "type": 0,
-      "value": "Software Engineer"
+      "value": "John brings years of software project management expertise to oversee our product design and engineering. He keeps the ministry’s technology humming."
     }
   ],
   "about__teamTechnologyDirector": [
     {
       "type": 0,
-      "value": "Technology Director"
+      "value": "Director of Technology"
     }
   ],
   "about__teamTitle": [
@@ -3813,6 +3813,18 @@
     {
       "type": 0,
       "value": "play"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "airPlay"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "chromeCast"
     }
   ],
   "player__fullscreenButtonLabel": [

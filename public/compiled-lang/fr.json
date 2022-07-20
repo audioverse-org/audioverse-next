@@ -2729,6 +2729,18 @@
       "value": "lecture"
     }
   ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "diffusé"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "diffusé"
+    }
+  ],
   "player__fullscreenButtonLabel": [
     {
       "type": 0,

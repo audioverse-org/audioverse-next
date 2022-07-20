@@ -2749,6 +2749,18 @@
       "value": "Play"
     }
   ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "airplay"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "Chromguss"
+    }
+  ],
   "player__fullscreenButtonLabel": [
     {
       "type": 0,

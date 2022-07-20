@@ -2765,6 +2765,18 @@
       "value": "播放"
     }
   ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "空中播放"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "铬铸"
+    }
+  ],
   "player__fullscreenButtonLabel": [
     {
       "type": 0,
