@@ -464,8 +464,9 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/qr-code',
-					destination: 'https://qr.audioverse.org/',
+					destination: 'http://qr.audioverse.org/',
 					permanent: true,
+					basePath: false,
 				},
 			];
 		},
