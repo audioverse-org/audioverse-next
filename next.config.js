@@ -462,6 +462,11 @@ module.exports = withBundleAnalyzer(
 					destination: '/:lang/contact/general',
 					permanent: false,
 				},
+				{
+					source: '/qr-code',
+					destination: 'https://qr.audioverse.org/',
+					permanent: true,
+				},
 			];
 		},
 		async rewrites() {
