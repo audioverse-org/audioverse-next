@@ -1,4 +1,8 @@
-const withPWA = require('next-pwa');
+const withPWA = require('next-pwa')({
+	dest: 'public',
+	// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
+	buildExcludes: [/server\/middleware-manifest\.json$/],
+});
 const path = require('path');
 
 const withBundleAnalyzer =
@@ -8,11 +12,6 @@ const withBundleAnalyzer =
 
 module.exports = withBundleAnalyzer(
 	withPWA({
-		pwa: {
-			dest: 'public',
-			// WORKAROUND: https://github.com/shadowwalker/next-pwa/issues/288#issuecomment-955777098
-			buildExcludes: [/server\/middleware-manifest\.json$/],
-		},
 		headers() {
 			return [
 				{
