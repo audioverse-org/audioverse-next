@@ -1231,12 +1231,6 @@
       "value": "Blog"
     }
   ],
-  "header__navItemCollections": [
-    {
-      "type": 0,
-      "value": "Sammlungen"
-    }
-  ],
   "header__navItemCollections-all": [
     {
       "type": 0,
@@ -2747,6 +2741,18 @@
     {
       "type": 0,
       "value": "Play"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "airplay"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "Chromguss"
     }
   ],
   "player__fullscreenButtonLabel": [

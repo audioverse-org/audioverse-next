@@ -1809,10 +1809,10 @@
       "value": "Bible"
     }
   ],
-  "header__navItemCollections": [
+  "header__navItemBrowse": [
     {
       "type": 0,
-      "value": "Collections"
+      "value": "Browse"
     }
   ],
   "header__navItemCollections-all": [
@@ -3813,6 +3813,18 @@
     {
       "type": 0,
       "value": "play"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "airPlay"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "chromeCast"
     }
   ],
   "player__fullscreenButtonLabel": [

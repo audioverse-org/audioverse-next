@@ -350,10 +350,6 @@
     "comment": "Header nav link name: Blog",
     "string": "Blog"
   },
-  "header__navItemCollections": {
-    "comment": "Header nav link name: Collections",
-    "string": "Collections"
-  },
   "header__navItemDiscover": {
     "comment": "Header nav link name: Discover",
     "string": "Découvrir"

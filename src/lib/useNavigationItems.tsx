@@ -110,66 +110,13 @@ export function useNavigationItems(): INavigationItem[] {
 			}),
 		},
 		{
-			key: 'library',
-			href: makeLibraryRoute(languageRoute),
-			Icon: iconMap.icon_books,
-			label: intl.formatMessage({
-				id: `header__navItemLibrary`,
-				defaultMessage: 'Library',
-				description: `Header nav link name: Library`,
-			}),
-			children: [
-				{
-					key: 'saved',
-					href: makeLibraryRoute(languageRoute),
-					Icon: iconMap.fa_bookmark,
-					label: intl.formatMessage({
-						id: `header__navItemLibrary-saved`,
-						defaultMessage: 'Saved',
-					}),
-				},
-				{
-					key: 'playlists',
-					href: makeLibraryRoute(languageRoute, 'playlists'),
-					Icon: iconMap.fa_stream,
-					label: intl.formatMessage({
-						id: `header__navItemLibrary-playlists`,
-						defaultMessage: 'Playlists',
-					}),
-				},
-				{
-					key: 'history',
-					href: makeLibraryRoute(languageRoute, 'history'),
-					Icon: iconMap.fa_history,
-					label: intl.formatMessage({
-						id: `header__navItemLibrary-history`,
-						defaultMessage: 'History',
-					}),
-				},
-			],
-		},
-		...(languageRoute === 'en'
-			? [
-					{
-						key: 'bibles',
-						href: makeBibleListRoute(languageRoute),
-						Icon: iconMap.icon_bible,
-						label: intl.formatMessage({
-							id: `header__navItemBible`,
-							defaultMessage: 'Bible',
-							description: `Header nav link name: Bible`,
-						}),
-					},
-			  ]
-			: []),
-		{
 			key: 'collections',
 			href: makeDiscoverCollectionsRoute(languageRoute),
 			Icon: iconMap.icon_collections,
 			label: intl.formatMessage({
-				id: `header__navItemCollections`,
-				defaultMessage: 'Collections',
-				description: `Header nav link name: Collections`,
+				id: `header__navItemBrowse`,
+				defaultMessage: 'Browse',
+				description: `Header nav link name: Browse`,
 			}),
 			children: [
 				{
@@ -233,6 +180,59 @@ export function useNavigationItems(): INavigationItem[] {
 					label: intl.formatMessage({
 						id: `header__navItemCollections-songs`,
 						defaultMessage: 'Scripture Songs',
+					}),
+				},
+			],
+		},
+		...(languageRoute === 'en'
+			? [
+					{
+						key: 'bibles',
+						href: makeBibleListRoute(languageRoute),
+						Icon: iconMap.icon_bible,
+						label: intl.formatMessage({
+							id: `header__navItemBible`,
+							defaultMessage: 'Bible',
+							description: `Header nav link name: Bible`,
+						}),
+					},
+			  ]
+			: []),
+		{
+			key: 'library',
+			href: makeLibraryRoute(languageRoute),
+			Icon: iconMap.icon_books,
+			label: intl.formatMessage({
+				id: `header__navItemLibrary`,
+				defaultMessage: 'Library',
+				description: `Header nav link name: Library`,
+			}),
+			children: [
+				{
+					key: 'saved',
+					href: makeLibraryRoute(languageRoute),
+					Icon: iconMap.fa_bookmark,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-saved`,
+						defaultMessage: 'Saved',
+					}),
+				},
+				{
+					key: 'playlists',
+					href: makeLibraryRoute(languageRoute, 'playlists'),
+					Icon: iconMap.fa_stream,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-playlists`,
+						defaultMessage: 'Playlists',
+					}),
+				},
+				{
+					key: 'history',
+					href: makeLibraryRoute(languageRoute, 'history'),
+					Icon: iconMap.fa_history,
+					label: intl.formatMessage({
+						id: `header__navItemLibrary-history`,
+						defaultMessage: 'History',
 					}),
 				},
 			],

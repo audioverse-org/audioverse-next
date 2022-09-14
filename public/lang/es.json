@@ -350,10 +350,6 @@
     "comment": "Nombre del enlace de navegación del encabezado: Blog",
     "string": "Blog"
   },
-  "header__navItemCollections": {
-    "comment": "Nombre del enlace de navegación del encabezado: Colecciones",
-    "string": "Compilaciones"
-  },
   "header__navItemDiscover": {
     "comment": "Nombre del enlace de navegación del encabezado: Discover",
     "string": "Descubrir"

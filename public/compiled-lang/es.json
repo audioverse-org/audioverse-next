@@ -1239,12 +1239,6 @@
       "value": "Blog"
     }
   ],
-  "header__navItemCollections": [
-    {
-      "type": 0,
-      "value": "Compilaciones"
-    }
-  ],
   "header__navItemCollections-all": [
     {
       "type": 0,
@@ -2755,6 +2749,18 @@
     {
       "type": 0,
       "value": "reproducir"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "salida en antena"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "cromado"
     }
   ],
   "player__fullscreenButtonLabel": [

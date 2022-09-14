@@ -1227,12 +1227,6 @@
       "value": "ブログ"
     }
   ],
-  "header__navItemCollections": [
-    {
-      "type": 0,
-      "value": "コレクション"
-    }
-  ],
   "header__navItemCollections-all": [
     {
       "type": 0,
@@ -2739,6 +2733,18 @@
     {
       "type": 0,
       "value": "再生"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "エアプレイ"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "クロームキャスト"
     }
   ],
   "player__fullscreenButtonLabel": [
