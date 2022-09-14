@@ -809,9 +809,9 @@
     "comment": "Header nav link name: Bible",
     "string": "Bible"
   },
-  "header__navItemCollections": {
-    "comment": "Header nav link name: Collections",
-    "string": "Collections"
+  "header__navItemBrowse": {
+    "comment": "Header nav link name: Browse",
+    "string": "Browse"
   },
   "header__navItemCollections-all": {
     "string": "All Collections"
@@ -1812,16 +1812,16 @@
     "comment": "play button play label",
     "string": "play"
   },
-  "player__fullscreenButtonLabel": {
-    "comment": "player fullscreen button label",
-    "string": "fullscreen"
+  "player__airPlayLabel": {
+    "comment": "player airPlay button label",
+    "string": "airPlay"
   },
   "player__chromeCastLabel": {
-    "comment": "player chromecast button label",
-    "string": "fullscreen"
+    "comment": "player chromeCast button label",
+    "string": "chromeCast"
   },
-  "player__airPlayLabel": {
-    "comment": "player airplay button label",
+  "player__fullscreenButtonLabel": {
+    "comment": "player fullscreen button label",
     "string": "fullscreen"
   },
   "player__nudgeBack": {

@@ -1211,12 +1211,6 @@
       "value": "Blog"
     }
   ],
-  "header__navItemCollections": [
-    {
-      "type": 0,
-      "value": "Collections"
-    }
-  ],
   "header__navItemCollections-all": [
     {
       "type": 0,
@@ -2727,6 +2721,18 @@
     {
       "type": 0,
       "value": "lecture"
+    }
+  ],
+  "player__airPlayLabel": [
+    {
+      "type": 0,
+      "value": "diffusé"
+    }
+  ],
+  "player__chromeCastLabel": [
+    {
+      "type": 0,
+      "value": "diffusé"
     }
   ],
   "player__fullscreenButtonLabel": [
