@@ -5,6 +5,7 @@
 		"GHSA-93q8-gq69-wqmw", // Not used at runtime
 		"GHSA-pfrx-2q88-qq97", // Not used at runtime
 		"GHSA-xvf7-4v9q-58w6", // Not used at runtime
-		"GHSA-9pgh-qqpf-7wqj" // Not used at runtime
+		"GHSA-9pgh-qqpf-7wqj", // Not used at runtime
+		"GHSA-f8q6-p94x-37v3" // Not used at runtime
 	]
 }
