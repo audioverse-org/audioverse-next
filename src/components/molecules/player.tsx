@@ -5,7 +5,9 @@ import { useIntl } from 'react-intl';
 
 import ButtonDownload from '@components/molecules/buttonDownload';
 import ButtonNudge from '@components/molecules/buttonNudge';
-import ButtonPlay from '@components/molecules/buttonPlay';
+import ButtonPlay, {
+	isBackgroundColorDark,
+} from '@components/molecules/buttonPlay';
 import ButtonShareRecording from '@components/molecules/buttonShareRecording';
 import ButtonSpeed from '@components/molecules/buttonSpeed';
 import PlaybackTimes from '@components/molecules/playbackTimes';
@@ -72,6 +74,10 @@ const Player = ({
 			setBrowser(null);
 		}
 	}, []);
+
+	const iconColor = isBackgroundColorDark(backgroundColor)
+		? BaseColors.WHITE
+		: BaseColors.DARK;
 
 	return (
 		<div
@@ -194,7 +200,7 @@ const Player = ({
 								description: 'player fullscreen button label',
 							})}
 						>
-							<IconFullscreen />
+							<IconFullscreen color={iconColor} />
 						</CircleButton>
 					)}
 					{browser === 'chrome' && (
@@ -207,7 +213,7 @@ const Player = ({
 								description: 'player chromeCast button label',
 							})}
 						>
-							<IconChromeCast />
+							<IconChromeCast color={iconColor} />
 						</CircleButton>
 					)}
 					{browser === 'safari' && (
@@ -220,7 +226,7 @@ const Player = ({
 								description: 'player airPlay button label',
 							})}
 						>
-							<IconAirPlayAudio />
+							<IconAirPlayAudio color={iconColor} />
 						</CircleButton>
 					)}
 
