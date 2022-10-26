@@ -95,6 +95,11 @@ module.exports = withBundleAnalyzer(
 					permanent: false,
 				},
 				{
+					source: '/brochure',
+					destination: '/en',
+					permanent: false,
+				},
+				{
 					source: '/:lang/sermons/seriess/podcast/:seriesId/latest/:slug',
 					destination: '/:lang/series/:seriesId/feed.xml',
 					permanent: true,
