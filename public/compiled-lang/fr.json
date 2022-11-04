@@ -1355,7 +1355,7 @@
       "value": "Playlists"
     }
   ],
-  "header__navItemLibrary-saved": [
+  "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "Favoris"
@@ -1999,7 +1999,7 @@
       "value": "Playlists"
     }
   ],
-  "libraryNav__saved": [
+  "libraryNav__listenLater": [
     {
       "type": 0,
       "value": "Favoris"

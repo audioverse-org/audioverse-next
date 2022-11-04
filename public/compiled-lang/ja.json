@@ -1371,7 +1371,7 @@
       "value": "プレイリスト"
     }
   ],
-  "header__navItemLibrary-saved": [
+  "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "図書に保存"
@@ -2011,7 +2011,7 @@
       "value": "プレイリスト"
     }
   ],
-  "libraryNav__saved": [
+  "libraryNav__listenLater": [
     {
       "type": 0,
       "value": "図書に保存"

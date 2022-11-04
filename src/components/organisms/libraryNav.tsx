@@ -33,7 +33,13 @@ export default function LibraryNav({
 
 	/* eslint-disable react/jsx-key */
 	const navItems: [JSX.Element, string][] = [
-		[<FormattedMessage id="libraryNav__saved" defaultMessage="Saved" />, ''],
+		[
+			<FormattedMessage
+				id="libraryNav__listenLater"
+				defaultMessage="Listen Later"
+			/>,
+			'',
+		],
 		[
 			<FormattedMessage
 				id="libraryNav__playlists"
