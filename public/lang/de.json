@@ -1981,7 +1981,7 @@
   "header__navItemLibrary-playlists": {
     "string": "Playlisten"
   },
-  "header__navItemLibrary-saved": {
+  "header__navItemLibrary-listenLater": {
     "string": "Gespeichert "
   },
   "header__navItemPresenters": {
@@ -2098,7 +2098,7 @@
   "libraryNav__playlists": {
     "string": "Playlisten"
   },
-  "libraryNav__saved": {
+  "libraryNav__listenLater": {
     "string": "Gespeichert "
   },
   "libraryNav__sort": {

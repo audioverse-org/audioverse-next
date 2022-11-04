@@ -1363,7 +1363,7 @@
       "value": "Списки воспроизведений"
     }
   ],
-  "header__navItemLibrary-saved": [
+  "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "Сохранено"
@@ -2007,7 +2007,7 @@
       "value": "Списки воспроизведений"
     }
   ],
-  "libraryNav__saved": [
+  "libraryNav__listenLater": [
     {
       "type": 0,
       "value": "Сохранено"

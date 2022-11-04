@@ -1375,7 +1375,7 @@
       "value": "Playlisten"
     }
   ],
-  "header__navItemLibrary-saved": [
+  "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "Gespeichert "
@@ -2019,7 +2019,7 @@
       "value": "Playlisten"
     }
   ],
-  "libraryNav__saved": [
+  "libraryNav__listenLater": [
     {
       "type": 0,
       "value": "Gespeichert "

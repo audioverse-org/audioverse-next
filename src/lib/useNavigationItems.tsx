@@ -213,8 +213,8 @@ export function useNavigationItems(): INavigationItem[] {
 					href: makeLibraryRoute(languageRoute),
 					Icon: iconMap.fa_bookmark,
 					label: intl.formatMessage({
-						id: `header__navItemLibrary-saved`,
-						defaultMessage: 'Saved',
+						id: `header__navItemLibrary-listenLater`,
+						defaultMessage: 'Listen Later',
 					}),
 				},
 				{
