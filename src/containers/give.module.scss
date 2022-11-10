@@ -30,13 +30,18 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	a,
-	img {
-		display: inline-block;
+	a {
+		display: block;
 		flex: 1 1 0;
-		width: auto;
-		height: auto;
 		min-width: 300px;
 		min-height: 0;
+	}
+	img {
+		display: block;
+		width: auto;
+		height: auto;
+		min-width: 0;
+		min-height: 0;
+		max-width: 100%;
 	}
 }
