@@ -10,6 +10,7 @@ import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
 
 import styles from './give.module.scss';
+import Link from 'next/link';
 
 export default function Blog(): JSX.Element {
 	return (
@@ -41,15 +42,19 @@ export default function Blog(): JSX.Element {
 						scrolling="no"
 						allow="payment"
 					/>
-					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img
-						src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
-						width={555}
-						height={330}
-						onError={(e: SyntheticEvent<HTMLImageElement>) =>
-							(e.currentTarget.style.display = 'none')
-						}
-					/>
+					<Link href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html">
+						<a>
+							{/* eslint-disable-next-line @next/next/no-img-element */}
+							<img
+								src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
+								width={555}
+								height={330}
+								onError={(e: SyntheticEvent<HTMLImageElement>) =>
+									(e.currentTarget.style.display = 'none')
+								}
+							/>
+						</a>
+					</Link>
 				</div>
 				<Heading2>
 					<FormattedMessage
