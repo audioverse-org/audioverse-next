@@ -29,4 +29,13 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	align-items: flex-start;
+	img {
+		display: inline-block;
+		flex: 1 1 0;
+		width: auto;
+		height: auto;
+		min-width: 300px;
+		min-height: 0;
+	}
 }

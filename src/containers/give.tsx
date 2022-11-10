@@ -8,7 +8,6 @@ import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
-import Image from 'next/image';
 
 import styles from './give.module.scss';
 
@@ -44,7 +43,8 @@ export default function Blog(): JSX.Element {
 						scrolling="no"
 						allow="payment"
 					/>
-					<Image
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img
 						src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
 						width={555}
 						height={330}
