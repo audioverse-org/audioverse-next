@@ -24,3 +24,9 @@
 	font-size: 11px;
 	line-height: 1.21;
 }
+
+.twoUp {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}

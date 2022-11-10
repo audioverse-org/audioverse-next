@@ -8,6 +8,7 @@ import Button from '@components/molecules/button';
 import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
 import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
+import Image from 'next/image';
 
 import styles from './give.module.scss';
 
@@ -27,21 +28,28 @@ export default function Blog(): JSX.Element {
 					src="https://donorbox.org/widget.js"
 					{...{ paypalexpress: 'true' }}
 				/>
-				<iframe
-					src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
-					height="1100px"
-					width="100%"
-					style={{
-						maxWidth: '400px',
-						minWidth: '310px',
-						maxHeight: 'none !important',
-					}}
-					seamless
-					name="donorbox"
-					frameBorder="0"
-					scrolling="no"
-					allow="payment"
-				/>
+				<div className={styles.twoUp}>
+					<iframe
+						src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
+						height="1100px"
+						width="100%"
+						style={{
+							maxWidth: '400px',
+							minWidth: '310px',
+							maxHeight: 'none !important',
+						}}
+						seamless
+						name="donorbox"
+						frameBorder="0"
+						scrolling="no"
+						allow="payment"
+					/>
+					<Image
+						src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
+						width={555}
+						height={330}
+					/>
+				</div>
 				<Heading2>
 					<FormattedMessage
 						id="give__paypalTitle"

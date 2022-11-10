@@ -604,7 +604,7 @@ module.exports = withBundleAnalyzer(
 			return config;
 		},
 		images: {
-			domains: ['ik.imagekit.io'],
+			domains: ['ik.imagekit.io', 's3.amazonaws.com'],
 		},
 	})
 );
