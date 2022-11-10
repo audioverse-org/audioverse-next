@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
@@ -48,6 +48,9 @@ export default function Blog(): JSX.Element {
 						src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
 						width={555}
 						height={330}
+						onError={(e: SyntheticEvent<HTMLImageElement>) =>
+							(e.currentTarget.style.display = 'none')
+						}
 					/>
 				</div>
 				<Heading2>
