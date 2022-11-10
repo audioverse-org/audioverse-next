@@ -11,8 +11,6 @@ import { BaseColors } from '@lib/constants';
 
 import styles from './give.module.scss';
 
-// hello world
-
 export default function Blog(): JSX.Element {
 	return (
 		<div className={styles.wrapper}>
