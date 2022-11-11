@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
@@ -10,6 +10,7 @@ import AboutNav from '@components/organisms/aboutNav';
 import { BaseColors } from '@lib/constants';
 
 import styles from './give.module.scss';
+import Link from 'next/link';
 
 export default function Blog(): JSX.Element {
 	return (
@@ -25,21 +26,36 @@ export default function Blog(): JSX.Element {
 					src="https://donorbox.org/widget.js"
 					{...{ paypalexpress: 'true' }}
 				/>
-				<iframe
-					src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
-					height="1100px"
-					width="100%"
-					style={{
-						maxWidth: '400px',
-						minWidth: '310px',
-						maxHeight: 'none !important',
-					}}
-					seamless
-					name="donorbox"
-					frameBorder="0"
-					scrolling="no"
-					allow="payment"
-				/>
+				<div className={styles.twoUp}>
+					<iframe
+						src="https://donorbox.org/embed/audioverse-give?hide_donation_meter=true&designation=Where%20Needed%20Most"
+						height="1100px"
+						width="100%"
+						style={{
+							maxWidth: '400px',
+							minWidth: '310px',
+							maxHeight: 'none !important',
+						}}
+						seamless
+						name="donorbox"
+						frameBorder="0"
+						scrolling="no"
+						allow="payment"
+					/>
+					<Link href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html">
+						<a>
+							{/* eslint-disable-next-line @next/next/no-img-element */}
+							<img
+								src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
+								width={555}
+								height={330}
+								onError={(e: SyntheticEvent<HTMLImageElement>) =>
+									(e.currentTarget.style.display = 'none')
+								}
+							/>
+						</a>
+					</Link>
+				</div>
 				<Heading2>
 					<FormattedMessage
 						id="give__paypalTitle"
