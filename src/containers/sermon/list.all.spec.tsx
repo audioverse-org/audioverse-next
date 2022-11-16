@@ -254,14 +254,13 @@ describe('sermons list page', () => {
 	it('links Audio button', async () => {
 		loadSermonListData();
 
-		const { getByRole, getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
 		userEvent.click(getByText('Filter'));
 
-		expect(getByRole('link', { name: 'Audio only' })).toHaveAttribute(
-			'href',
-			'/en/teachings/audio/page/1'
-		);
+		expect(
+			await screen.findByRole('link', { name: 'Audio only' })
+		).toHaveAttribute('href', '/en/teachings/audio/page/1');
 	});
 
 	it('does not include video paths', async () => {

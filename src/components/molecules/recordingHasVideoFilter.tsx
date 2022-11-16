@@ -20,7 +20,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 	const language = useLanguageRoute();
 
 	return (
-        <Dropdown
+		<Dropdown
 			id="filterMenu"
 			trigger={({ isOpen, ...props }) => (
 				<Button
@@ -41,49 +41,53 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 			<div className={styles.dropdownContainer}>
 				<div className={styles.segmentedControlWrapper}>
 					<Link
-                        href={makeRoute(language, 'all', 1)}
-                        className={clsx(
-                            styles.segmentedControl,
-                            filter === 'all' && styles.segmentedControlActive
-                        )}>
-
-                        <FormattedMessage
-                            id="recordingHasVideoFilter__filterAll"
-                            defaultMessage="All"
-                            description="recording has video filter all"
-                        />
-
-                    </Link>
+						href={makeRoute(language, 'all', 1)}
+						className={clsx(
+							styles.segmentedControl,
+							filter === 'all' && styles.segmentedControlActive
+						)}
+					>
+						<a>
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterAll"
+								defaultMessage="All"
+								description="recording has video filter all"
+							/>
+						</a>
+					</Link>
 					<Link
-                        href={makeRoute(language, 'video', 1)}
-                        className={clsx(
-                            styles.segmentedControl,
-                            filter === 'video' && styles.segmentedControlActive
-                        )}>
-
-                        <FormattedMessage
-                            id="recordingHasVideoFilter__filterVideo"
-                            defaultMessage="Video"
-                            description="recording has video filter video"
-                        />
-
-                    </Link>
+						href={makeRoute(language, 'video', 1)}
+						className={clsx(
+							styles.segmentedControl,
+							filter === 'video' && styles.segmentedControlActive
+						)}
+					>
+						<a>
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterVideo"
+								defaultMessage="Video"
+								description="recording has video filter video"
+							/>
+						</a>
+					</Link>
 					<Link
-                        href={makeRoute(language, 'audio', 1)}
-                        className={clsx(
-                            styles.segmentedControl,
-                            filter === 'audio' && styles.segmentedControlActive
-                        )}>
-
-                        <FormattedMessage
-                            id="recordingHasVideoFilter__filterAudio"
-                            defaultMessage="Audio only"
-                            description="recording has video filter audio"
-                        />
-
-                    </Link>
+						href={makeRoute(language, 'audio', 1)}
+						className={clsx(
+							styles.segmentedControl,
+							filter === 'audio' && styles.segmentedControlActive
+						)}
+					>
+						<a>
+							{' '}
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterAudio"
+								defaultMessage="Audio only"
+								description="recording has video filter audio"
+							/>
+						</a>
+					</Link>
 				</div>
 			</div>
 		</Dropdown>
-    );
+	);
 }

@@ -37,34 +37,36 @@ function Sponsors({
 		url: makeSponsorListRoute(language, letter),
 	}));
 
-	return <>
-        <ButtonBack
-            backUrl={makeDiscoverCollectionsRoute(language)}
-            className={styles.back}
-        />
-        <Heading1 className={styles.heading}>
-            <FormattedMessage
-                id="sponsorsList__title"
-                defaultMessage="All Sponsors"
-            />
-        </Heading1>
-        <JumpBar links={jumpLinks} />
-        <Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
-        {sponsors.map(({ canonicalPath, image, title }) => (
-            <Card className={styles.card} key={canonicalPath}>
-                <Link href={canonicalPath} className={styles.container}>
-
-                    {image && (
-                        <div className={styles.image}>
-                            <RoundImage image={image.url} />
-                        </div>
-                    )}
-                    <span className={styles.sponsorName}>{title}</span>
-
-                </Link>
-            </Card>
-        ))}
-    </>;
+	return (
+		<>
+			<ButtonBack
+				backUrl={makeDiscoverCollectionsRoute(language)}
+				className={styles.back}
+			/>
+			<Heading1 className={styles.heading}>
+				<FormattedMessage
+					id="sponsorsList__title"
+					defaultMessage="All Sponsors"
+				/>
+			</Heading1>
+			<JumpBar links={jumpLinks} />
+			<Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
+			{sponsors.map(({ canonicalPath, image, title }) => (
+				<Card className={styles.card} key={canonicalPath}>
+					<Link href={canonicalPath} className={styles.container}>
+						<a>
+							{image && (
+								<div className={styles.image}>
+									<RoundImage image={image.url} />
+								</div>
+							)}
+							<span className={styles.sponsorName}>{title}</span>
+						</a>
+					</Link>
+				</Card>
+			))}
+		</>
+	);
 }
 
 export default withFailStates(Sponsors, {

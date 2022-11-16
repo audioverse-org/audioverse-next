@@ -275,7 +275,7 @@ export default function LibraryNav({
 			</Heading6>
 			<div className={styles.optionGroup}>
 				{options.map(([label, value]) => (
-					(<Link
+					<Link
 						href={{
 							pathname: router.pathname,
 							query: {
@@ -285,22 +285,22 @@ export default function LibraryNav({
 						}}
 						key={value}
 					>
-
-                        <input
-                            type="checkbox"
-                            checked={value === currentOption}
-                            readOnly
-                        />
-                        {label}
-
-                    </Link>)
+						<a>
+							<input
+								type="checkbox"
+								checked={value === currentOption}
+								readOnly
+							/>
+							{label}
+						</a>
+					</Link>
 				))}
 			</div>
 		</div>
 	);
 
 	return (
-        <div className={styles.subnav}>
+		<div className={styles.subnav}>
 			<Mininav
 				items={navItems.map(([label, slug]) => ({
 					id: slug,
@@ -343,17 +343,17 @@ export default function LibraryNav({
 											},
 										}}
 									>
-
-                                        <input
-                                            type="radio"
-                                            name="library-sort"
-                                            value={sort}
-                                            checked={querySort === sort}
-                                            readOnly
-                                        />
-                                        {label}
-
-                                    </Link>
+										<a>
+											<input
+												type="radio"
+												name="library-sort"
+												value={sort}
+												checked={querySort === sort}
+												readOnly
+											/>
+											{label}
+										</a>
+									</Link>
 								</p>
 							))}
 						</div>
@@ -433,5 +433,5 @@ export default function LibraryNav({
 				</div>
 			)}
 		</div>
-    );
+	);
 }
