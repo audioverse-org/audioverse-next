@@ -50,7 +50,7 @@ export default function Miniplayer(): JSX.Element | null {
 	}
 
 	return (
-        <div
+		<div
 			className={styles.miniplayer}
 			aria-label={intl.formatMessage({
 				id: 'miniplayer__label',
@@ -80,11 +80,11 @@ export default function Miniplayer(): JSX.Element | null {
 			</div>
 			<div className={styles.meta}>
 				<Link href={recording.canonicalPath} className={styles.link}>
-
-                    {sequenceLine}
-                    <h4 className={styles.title}>{recording.title}</h4>
-
-                </Link>
+					<a>
+						{sequenceLine}
+						<h4 className={styles.title}>{recording.title}</h4>
+					</a>
+				</Link>
 				<div className={styles.progress}>
 					<span>{timeString}</span>
 					<span className={styles.bar}>
@@ -123,5 +123,5 @@ export default function Miniplayer(): JSX.Element | null {
 				</button>
 			</div>
 		</div>
-    );
+	);
 }

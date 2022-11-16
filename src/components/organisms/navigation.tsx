@@ -74,7 +74,7 @@ const Navigation = ({
 	);
 
 	return (
-        <header className={styles.header}>
+		<header className={styles.header}>
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileRow}>
 					<Header />
@@ -152,17 +152,20 @@ const Navigation = ({
 									</span>
 								</>
 							) : (
-								(<Link href={makeLoginRoute(languageRoute, router.asPath)} className="decorated">
-
-                                    <span className={styles.accountAvatar}>
-                                        <IconUser />
-                                    </span>
-                                    <FormattedMessage
-                                        id="navigation__loginSignupCta"
-                                        defaultMessage="Login/Sign up"
-                                    />
-
-                                </Link>)
+								<Link
+									href={makeLoginRoute(languageRoute, router.asPath)}
+									className="decorated"
+								>
+									<a>
+										<span className={styles.accountAvatar}>
+											<IconUser />
+										</span>
+										<FormattedMessage
+											id="navigation__loginSignupCta"
+											defaultMessage="Login/Sign up"
+										/>
+									</a>
+								</Link>
 							)}
 						</div>
 					</div>
@@ -201,27 +204,28 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													(<Link
-                                                        href={href as string}
-                                                        className={styles.navLink}
-                                                        onClick={
-                                                            onClick
-                                                                ? () =>
-                                                                        onClick({
-                                                                            popSubmenu: () => setSubmenu(''),
-                                                                        })
-                                                                : undefined
-                                                        }
-                                                        target={isTargetBlank ? '_blank' : '_self'}>
-
-                                                        {Icon && (
-                                                            <span className={styles.icon}>
-                                                                <Icon />
-                                                            </span>
-                                                        )}
-                                                        <span>{label}</span>
-
-                                                    </Link>)
+													<Link
+														href={href as string}
+														className={styles.navLink}
+														onClick={
+															onClick
+																? () =>
+																		onClick({
+																			popSubmenu: () => setSubmenu(''),
+																		})
+																: undefined
+														}
+														target={isTargetBlank ? '_blank' : '_self'}
+													>
+														<a>
+															{Icon && (
+																<span className={styles.icon}>
+																	<Icon />
+																</span>
+															)}
+															<span>{label}</span>
+														</a>
+													</Link>
 												)}
 											</li>
 										)
@@ -233,7 +237,7 @@ const Navigation = ({
 				</div>
 			</div>
 		</header>
-    );
+	);
 };
 
 export default Navigation;

@@ -50,7 +50,7 @@ const PaginationEntry = ({
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	return (
-        <li
+		<li
 			className={clsx(
 				styles.link,
 				isActive && styles.active,
@@ -60,13 +60,13 @@ const PaginationEntry = ({
 		>
 			{Number.isInteger(page) && makeRoute ? (
 				<Link href={makeRoute(languageRoute, +page)}>
-					{label || page}
+					<a>{label || page}</a>
 				</Link>
 			) : (
 				label || page
 			)}
 		</li>
-    );
+	);
 };
 
 export default function Pagination({

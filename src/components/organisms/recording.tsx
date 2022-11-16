@@ -138,7 +138,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={sequence.canonicalPath} className={linkClass}>
-						{sequence.title}
+						<a>{sequence.title}</a>
 					</Link>
 				</p>
 			),
@@ -161,7 +161,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={collection.canonicalPath} className={linkClass}>
-						{collection.title}
+						<a>{collection.title}</a>
 					</Link>
 				</p>
 			),
@@ -179,7 +179,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={sponsor.canonicalPath} className={linkClass}>
-						{sponsor.title}
+						<a>{sponsor.title}</a>
 					</Link>
 				</p>
 			),
@@ -239,16 +239,16 @@ export function Recording({
 		title: string,
 		href: string
 	) => (
-		(<Link href={href} className={styles.hat}>
-
-            <SequenceTypeLockup contentType={sequenceContentType} unpadded />
-            <h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
-
-        </Link>)
+		<Link href={href} className={styles.hat}>
+			<a>
+				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
+				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
+			</a>
+		</Link>
 	);
 
 	return (
-        <Tease className={clsx(styles.base, styles[contentType])}>
+		<Tease className={clsx(styles.base, styles[contentType])}>
 			<Head>
 				<meta
 					name="apple-itunes-app"
@@ -311,15 +311,15 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 			{isBibleChapter && recording.collection ? (
-				(<Link href={recording.collection.canonicalPath} className={styles.hat}>
-
-                    <BibleVersionTypeLockup
-                        label={recording.collection.title}
-                        unpadded
-                    />
-                    <h4>{recording.sequence?.title}</h4>
-
-                </Link>)
+				<Link href={recording.collection.canonicalPath} className={styles.hat}>
+					<a>
+						<BibleVersionTypeLockup
+							label={recording.collection.title}
+							unpadded
+						/>
+						<h4>{recording.sequence?.title}</h4>
+					</a>
+				</Link>
 			) : overrideSequence ? (
 				makeHat(
 					SequenceContentType.MusicAlbum,
@@ -564,5 +564,5 @@ export function Recording({
 				)}
 			</div>
 		</Tease>
-    );
+	);
 }

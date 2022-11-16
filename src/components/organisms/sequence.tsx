@@ -103,7 +103,7 @@ export function Sequence({
 			definition: (
 				<p>
 					<Link href={collection.canonicalPath} className={linkClasses}>
-						{collection.title}
+						<a>{collection.title}</a>
 					</Link>
 				</p>
 			),
@@ -119,7 +119,7 @@ export function Sequence({
 			),
 			definition: (
 				<Link href={sponsor.canonicalPath} className={linkClasses}>
-					{sponsor.title}
+					<a>{sponsor.title}</a>
 				</Link>
 			),
 		});
