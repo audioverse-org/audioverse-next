@@ -34,8 +34,8 @@ export default function LinkButton({
 			{children}
 		</div>
 	) : (
-		<Link href={href}>
-			<a className={className}>{children}</a>
+		<Link href={href} className={className}>
+			{children}
 		</Link>
 	);
 }

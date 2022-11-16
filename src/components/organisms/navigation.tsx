@@ -74,7 +74,7 @@ const Navigation = ({
 	);
 
 	return (
-		<header className={styles.header}>
+        <header className={styles.header}>
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileRow}>
 					<Header />
@@ -152,17 +152,17 @@ const Navigation = ({
 									</span>
 								</>
 							) : (
-								<Link href={makeLoginRoute(languageRoute, router.asPath)}>
-									<a className="decorated">
-										<span className={styles.accountAvatar}>
-											<IconUser />
-										</span>
-										<FormattedMessage
-											id="navigation__loginSignupCta"
-											defaultMessage="Login/Sign up"
-										/>
-									</a>
-								</Link>
+								(<Link href={makeLoginRoute(languageRoute, router.asPath)} className="decorated">
+
+                                    <span className={styles.accountAvatar}>
+                                        <IconUser />
+                                    </span>
+                                    <FormattedMessage
+                                        id="navigation__loginSignupCta"
+                                        defaultMessage="Login/Sign up"
+                                    />
+
+                                </Link>)
 							)}
 						</div>
 					</div>
@@ -201,27 +201,27 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													<Link href={href as string}>
-														<a
-															className={styles.navLink}
-															onClick={
-																onClick
-																	? () =>
-																			onClick({
-																				popSubmenu: () => setSubmenu(''),
-																			})
-																	: undefined
-															}
-															target={isTargetBlank ? '_blank' : '_self'}
-														>
-															{Icon && (
-																<span className={styles.icon}>
-																	<Icon />
-																</span>
-															)}
-															<span>{label}</span>
-														</a>
-													</Link>
+													(<Link
+                                                        href={href as string}
+                                                        className={styles.navLink}
+                                                        onClick={
+                                                            onClick
+                                                                ? () =>
+                                                                        onClick({
+                                                                            popSubmenu: () => setSubmenu(''),
+                                                                        })
+                                                                : undefined
+                                                        }
+                                                        target={isTargetBlank ? '_blank' : '_self'}>
+
+                                                        {Icon && (
+                                                            <span className={styles.icon}>
+                                                                <Icon />
+                                                            </span>
+                                                        )}
+                                                        <span>{label}</span>
+
+                                                    </Link>)
 												)}
 											</li>
 										)
@@ -233,7 +233,7 @@ const Navigation = ({
 				</div>
 			</div>
 		</header>
-	);
+    );
 };
 
 export default Navigation;

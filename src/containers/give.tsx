@@ -14,7 +14,7 @@ import Link from 'next/link';
 
 export default function Blog(): JSX.Element {
 	return (
-		<div className={styles.wrapper}>
+        <div className={styles.wrapper}>
 			<AboutNav current="donate" />
 			<ContentWidthLimiter>
 				<Heading1 className={styles.heading}>
@@ -43,18 +43,18 @@ export default function Blog(): JSX.Element {
 						allow="payment"
 					/>
 					<Link href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html">
-						<a>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
-								width={555}
-								height={330}
-								onError={(e: SyntheticEvent<HTMLImageElement>) =>
-									(e.currentTarget.style.display = 'none')
-								}
-							/>
-						</a>
-					</Link>
+
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
+                            width={555}
+                            height={330}
+                            onError={(e: SyntheticEvent<HTMLImageElement>) =>
+                                (e.currentTarget.style.display = 'none')
+                            }
+                        />
+
+                    </Link>
 				</div>
 				<Heading2>
 					<FormattedMessage
@@ -188,5 +188,5 @@ export default function Blog(): JSX.Element {
 				</p>
 			</ContentWidthLimiter>
 		</div>
-	);
+    );
 }

@@ -36,49 +36,47 @@ function Presenters({
 		url: makePresenterListRoute(language, letter),
 	}));
 
-	return (
-		<>
-			<ButtonBack
-				backUrl={makeDiscoverCollectionsRoute(language)}
-				className={styles.back}
-			/>
-			<Heading1 className={styles.heading}>
-				<FormattedMessage
-					id="presentersList__title"
-					defaultMessage="All Presenters"
-				/>
-			</Heading1>
-			<JumpBar links={jumpLinks} />
-			<Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2>
-			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
-				<Card className={styles.card} key={canonicalPath}>
-					<Link href={canonicalPath}>
-						<a className={styles.container}>
-							<div className={styles.nameLockup}>
-								{image && (
-									<div className={styles.image}>
-										<RoundImage
-											image={image.url}
-											alt={`${surname}, ${givenName}`}
-										/>
-									</div>
-								)}
-								<span className={styles.name}>
-									{surname}, {givenName}
-								</span>
-							</div>
-							{summary && (
-								<span
-									className={styles.summary}
-									dangerouslySetInnerHTML={{ __html: summary }}
-								/>
-							)}
-						</a>
-					</Link>
-				</Card>
-			))}
-		</>
-	);
+	return <>
+        <ButtonBack
+            backUrl={makeDiscoverCollectionsRoute(language)}
+            className={styles.back}
+        />
+        <Heading1 className={styles.heading}>
+            <FormattedMessage
+                id="presentersList__title"
+                defaultMessage="All Presenters"
+            />
+        </Heading1>
+        <JumpBar links={jumpLinks} />
+        <Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2>
+        {persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
+            <Card className={styles.card} key={canonicalPath}>
+                <Link href={canonicalPath} className={styles.container}>
+
+                    <div className={styles.nameLockup}>
+                        {image && (
+                            <div className={styles.image}>
+                                <RoundImage
+                                    image={image.url}
+                                    alt={`${surname}, ${givenName}`}
+                                />
+                            </div>
+                        )}
+                        <span className={styles.name}>
+                            {surname}, {givenName}
+                        </span>
+                    </div>
+                    {summary && (
+                        <span
+                            className={styles.summary}
+                            dangerouslySetInnerHTML={{ __html: summary }}
+                        />
+                    )}
+
+                </Link>
+            </Card>
+        ))}
+    </>;
 }
 
 export default withFailStates(Presenters, {

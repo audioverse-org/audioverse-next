@@ -286,7 +286,7 @@ export default function CardSequence({
 		(isBibleBook && (sequence.allRecordings.nodes || [])[0].canonicalPath) ||
 		canonicalPath;
 	return (
-		<Card>
+        <Card>
 			{slim ? (
 				<div
 					className={className}
@@ -299,10 +299,10 @@ export default function CardSequence({
 					{inner}
 				</div>
 			) : (
-				<Link href={linkUrl}>
-					<a className={className}>{inner}</a>
+				<Link href={linkUrl} className={className}>
+					{inner}
 				</Link>
 			)}
 		</Card>
-	);
+    );
 }

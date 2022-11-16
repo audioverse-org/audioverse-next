@@ -12,12 +12,12 @@ type Props = {
 
 export default function JumpBar({ links }: Props): JSX.Element | null {
 	return (
-		<div className={styles.jumpBar}>
+        <div className={styles.jumpBar}>
 			{links.map(({ url, text }) => (
 				<Link key={text} href={url}>
-					<a>{text}</a>
+					{text}
 				</Link>
 			))}
 		</div>
-	);
+    );
 }

@@ -57,7 +57,7 @@ export default function CardBibleBook({
 
 	const linkUrl = makeBibleBookRoute(languageRoute, id);
 	return (
-		<Card className={styles.card}>
+        <Card className={styles.card}>
 			{isOptionalLink ? (
 				<div
 					className={styles.container}
@@ -70,10 +70,10 @@ export default function CardBibleBook({
 					{inner}
 				</div>
 			) : (
-				<Link href={linkUrl}>
-					<a className={styles.container}>{inner}</a>
+				<Link href={linkUrl} className={styles.container}>
+					{inner}
 				</Link>
 			)}
 		</Card>
-	);
+    );
 }

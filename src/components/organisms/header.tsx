@@ -9,22 +9,22 @@ import styles from './header.module.scss';
 const Header = (): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	return (
-		<header className={styles.header}>
+        <header className={styles.header}>
 			<h1>
-				<Link href={`/${languageRoute}`}>
-					<a className={styles.link}>
-						<Image
-							src="/img/logo.svg"
-							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
-							alt="AudioVerse"
-							width={161}
-							height={23}
-						/>
-					</a>
-				</Link>
+				<Link href={`/${languageRoute}`} className={styles.link}>
+
+                    <Image
+                        src="/img/logo.svg"
+                        /* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
+                        alt="AudioVerse"
+                        width={161}
+                        height={23}
+                    />
+
+                </Link>
 			</h1>
 		</header>
-	);
+    );
 };
 
 export default Header;

@@ -26,7 +26,7 @@ export default function Mininav({
 	className,
 }: Props): JSX.Element {
 	return (
-		<div
+        <div
 			className={clsx(
 				styles.miniNav,
 				compact && styles.compact,
@@ -45,8 +45,8 @@ export default function Mininav({
 						key={id}
 						className={clsx(isActive && styles.miniNavActive)}
 					>
-						<Link href={url}>
-							<a onClick={onClick}>{label}</a>
+						<Link href={url} onClick={onClick}>
+							{label}
 						</Link>
 					</Heading6>
 				) : (
@@ -60,5 +60,5 @@ export default function Mininav({
 				);
 			})}
 		</div>
-	);
+    );
 }

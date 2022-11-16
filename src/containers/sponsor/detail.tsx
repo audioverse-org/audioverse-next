@@ -73,11 +73,15 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 				defaultMessage: 'Website',
 			}),
 			definition: (
-				<Link href={website}>
-					<a className="decorated" target="_blank" rel="nofollow noreferrer">
-						{website}
-					</a>
-				</Link>
+				(<Link
+                    href={website}
+                    className="decorated"
+                    target="_blank"
+                    rel="nofollow noreferrer">
+
+                    {website}
+
+                </Link>)
 			),
 		});
 	}

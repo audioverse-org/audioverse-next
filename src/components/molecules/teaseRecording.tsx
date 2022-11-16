@@ -233,7 +233,7 @@ export default function TeaseRecording({
 	);
 
 	return (
-		<div className={clsx(styles.container, small && styles.small)}>
+        <div className={clsx(styles.container, small && styles.small)}>
 			{isOptionalLink ? (
 				<div
 					className={clsx(
@@ -249,11 +249,13 @@ export default function TeaseRecording({
 					{inner}
 				</div>
 			) : (
-				<Link href={recording.canonicalPath}>
-					<a className={clsx(styles.content, unpadded && styles.unpadded)}>
-						{inner}
-					</a>
-				</Link>
+				(<Link
+                    href={recording.canonicalPath}
+                    className={clsx(styles.content, unpadded && styles.unpadded)}>
+
+                    {inner}
+
+                </Link>)
 			)}
 
 			{!disableUserFeatures && (
@@ -270,5 +272,5 @@ export default function TeaseRecording({
 				/>
 			)}
 		</div>
-	);
+    );
 }
