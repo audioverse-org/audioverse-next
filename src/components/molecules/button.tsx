@@ -59,7 +59,7 @@ export default function Button({
 	);
 	return href ? (
 		<Link href={href} {..._props}>
-			{inner}
+			<a>{inner}</a>
 		</Link>
 	) : (
 		<button {..._props}>{inner}</button>
