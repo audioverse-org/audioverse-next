@@ -6,6 +6,8 @@ jest.mock('@lib/api/fetchApi');
 jest.mock('video.js');
 jest.mock('@silvermine/videojs-airplay');
 jest.mock('@silvermine/videojs-chromecast');
+jest.mock('next/image');
+jest.mock('next/legacy/image');
 
 // WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
 beforeAll(() => {
