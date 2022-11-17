@@ -11,6 +11,7 @@ import Songs, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
@@ -130,8 +131,8 @@ describe('songs list page', () => {
 	it('includes books tab title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Passage')).toBeInTheDocument();
+		expect(await screen.findByText('Passage')).toBeInTheDocument();
 	});
 });

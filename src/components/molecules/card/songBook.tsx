@@ -37,50 +37,48 @@ export default function CardSongBook({
 	const theme = 'songBook';
 
 	return (
-        <CardWithTheme {...{ theme }}>
+		<CardWithTheme {...{ theme }}>
 			<Link
-                href={makeBibleMusicRoute(languageRoute, book)}
-                className={clsx(
-                    styles.container,
-                    isSubHovered && styles.otherHovered
-                )}>
-
-                <SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />
-                <Heading2 sans className={styles.header}>
-                    {startCase(book)}
-                </Heading2>
-                <Heading6 sans uppercase loose className={styles.contributors}>
-                    <FormattedMessage
-                        id="cardSongBook__contributors"
-                        defaultMessage="Various Contributors"
-                    />
-                </Heading6>
-                <Heading6 sans uppercase loose unpadded className={styles.songCount}>
-                    <FormattedMessage
-                        id="cardSongBook__numSongs"
-                        defaultMessage="{count} songs"
-                        values={{ count: recordingCount }}
-                    />
-                </Heading6>
-                {recordings?.length ? (
-                    <div className={styles.subRecordings} ref={subRef}>
-                        <TeaseRecordingStack
-                            recordings={recordings.map((r) => ({
-                                ...r,
-                                canonicalPath: makeBibleMusicTrackRoute(
-                                    languageRoute,
-                                    book,
-                                    r.canonicalPath
-                                ),
-                            }))}
-                            theme="song"
-                            isOptionalLink
-                            allSmall
-                        />
-                    </div>
-                ) : null}
-
-            </Link>
+				href={makeBibleMusicRoute(languageRoute, book)}
+				className={clsx(styles.container, isSubHovered && styles.otherHovered)}
+			>
+				<a>
+					<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />
+					<Heading2 sans className={styles.header}>
+						{startCase(book)}
+					</Heading2>
+					<Heading6 sans uppercase loose className={styles.contributors}>
+						<FormattedMessage
+							id="cardSongBook__contributors"
+							defaultMessage="Various Contributors"
+						/>
+					</Heading6>
+					<Heading6 sans uppercase loose unpadded className={styles.songCount}>
+						<FormattedMessage
+							id="cardSongBook__numSongs"
+							defaultMessage="{count} songs"
+							values={{ count: recordingCount }}
+						/>
+					</Heading6>
+					{recordings?.length ? (
+						<div className={styles.subRecordings} ref={subRef}>
+							<TeaseRecordingStack
+								recordings={recordings.map((r) => ({
+									...r,
+									canonicalPath: makeBibleMusicTrackRoute(
+										languageRoute,
+										book,
+										r.canonicalPath
+									),
+								}))}
+								theme="song"
+								isOptionalLink
+								allSmall
+							/>
+						</div>
+					) : null}
+				</a>
+			</Link>
 		</CardWithTheme>
-    );
+	);
 }

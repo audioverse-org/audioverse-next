@@ -78,7 +78,6 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 						)}
 					>
 						<a>
-							{' '}
 							<FormattedMessage
 								id="recordingHasVideoFilter__filterAudio"
 								defaultMessage="Audio only"
