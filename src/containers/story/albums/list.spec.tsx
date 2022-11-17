@@ -127,7 +127,7 @@ describe('stories list page', () => {
 
 		expect(link.parentElement?.parentElement).toHaveAttribute(
 			'href',
-			'/the_story_path'
+			'the_story_path'
 		);
 	});
 });
