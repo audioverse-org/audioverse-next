@@ -14,6 +14,7 @@ import {
 	useSubmitContactPageMutation,
 } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
+import Link from 'next/link';
 
 import styles from './contact.module.scss';
 
@@ -100,6 +101,16 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 					id="contact__intro"
 					defaultMessage="We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, please use the form with us and we’ll get back to you as quickly as possible."
 				/>
+			</p>
+			<p className={styles.intro}>
+				<Link href="https://help.audioverse.org/">
+					<a className="decorated" target="_blank">
+						<FormattedMessage
+							id="contact__help"
+							defaultMessage="View help articles"
+						/>
+					</a>
+				</Link>
 			</p>
 			<ContentWidthLimiter>
 				<form onSubmit={onSubmit} className={styles.form}>
