@@ -47,13 +47,11 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							filter === 'all' && styles.segmentedControlActive
 						)}
 					>
-						<a>
-							<FormattedMessage
-								id="recordingHasVideoFilter__filterAll"
-								defaultMessage="All"
-								description="recording has video filter all"
-							/>
-						</a>
+						<FormattedMessage
+							id="recordingHasVideoFilter__filterAll"
+							defaultMessage="All"
+							description="recording has video filter all"
+						/>
 					</Link>
 					<Link
 						href={makeRoute(language, 'video', 1)}
@@ -62,13 +60,11 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							filter === 'video' && styles.segmentedControlActive
 						)}
 					>
-						<a>
-							<FormattedMessage
-								id="recordingHasVideoFilter__filterVideo"
-								defaultMessage="Video"
-								description="recording has video filter video"
-							/>
-						</a>
+						<FormattedMessage
+							id="recordingHasVideoFilter__filterVideo"
+							defaultMessage="Video"
+							description="recording has video filter video"
+						/>
 					</Link>
 					<Link
 						href={makeRoute(language, 'audio', 1)}
@@ -77,13 +73,11 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							filter === 'audio' && styles.segmentedControlActive
 						)}
 					>
-						<a>
-							<FormattedMessage
-								id="recordingHasVideoFilter__filterAudio"
-								defaultMessage="Audio only"
-								description="recording has video filter audio"
-							/>
-						</a>
+						<FormattedMessage
+							id="recordingHasVideoFilter__filterAudio"
+							defaultMessage="Audio only"
+							description="recording has video filter audio"
+						/>
 					</Link>
 				</div>
 			</div>

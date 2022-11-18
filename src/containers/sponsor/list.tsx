@@ -54,14 +54,12 @@ function Sponsors({
 			{sponsors.map(({ canonicalPath, image, title }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} className={styles.container}>
-						<a>
-							{image && (
-								<div className={styles.image}>
-									<RoundImage image={image.url} />
-								</div>
-							)}
-							<span className={styles.sponsorName}>{title}</span>
-						</a>
+						{image && (
+							<div className={styles.image}>
+								<RoundImage image={image.url} />
+							</div>
+						)}
+						<span className={styles.sponsorName}>{title}</span>
 					</Link>
 				</Card>
 			))}

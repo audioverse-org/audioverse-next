@@ -71,10 +71,18 @@ describe('help widget', () => {
 		runOnLoad();
 
 		const button = screen.getByRole('button');
-		button.click();
+
 		button.click();
 
-		expect(mockBeacon).toBeCalledWith('close');
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('open');
+		});
+
+		button.click();
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('close');
+		});
 	});
 
 	it('catches widget close event', async () => {

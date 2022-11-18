@@ -300,7 +300,7 @@ export default function CardSequence({
 				</div>
 			) : (
 				<Link href={linkUrl} className={className}>
-					<a>{inner}</a>
+					{inner}
 				</Link>
 			)}
 		</Card>

@@ -53,27 +53,25 @@ function Presenters({
 			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} className={styles.container}>
-						<a>
-							<div className={styles.nameLockup}>
-								{image && (
-									<div className={styles.image}>
-										<RoundImage
-											image={image.url}
-											alt={`${surname}, ${givenName}`}
-										/>
-									</div>
-								)}
-								<span className={styles.name}>
-									{surname}, {givenName}
-								</span>
-							</div>
-							{summary && (
-								<span
-									className={styles.summary}
-									dangerouslySetInnerHTML={{ __html: summary }}
-								/>
+						<div className={styles.nameLockup}>
+							{image && (
+								<div className={styles.image}>
+									<RoundImage
+										image={image.url}
+										alt={`${surname}, ${givenName}`}
+									/>
+								</div>
 							)}
-						</a>
+							<span className={styles.name}>
+								{surname}, {givenName}
+							</span>
+						</div>
+						{summary && (
+							<span
+								className={styles.summary}
+								dangerouslySetInnerHTML={{ __html: summary }}
+							/>
+						)}
 					</Link>
 				</Card>
 			))}

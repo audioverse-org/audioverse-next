@@ -71,7 +71,7 @@ export default function CardBibleBook({
 				</div>
 			) : (
 				<Link href={linkUrl} className={styles.container}>
-					<a>{inner}</a>
+					{inner}
 				</Link>
 			)}
 		</Card>

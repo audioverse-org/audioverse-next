@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
@@ -149,13 +149,13 @@ describe('profile page', () => {
 			throw new Error();
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const loginButton = getByText('Login');
+		const loginButton = screen.getByText('Login');
 
 		loginButton.click();
 
-		expect(getByText('Login failed')).toBeInTheDocument();
+		expect(await screen.findByText('Login failed')).toBeInTheDocument();
 	});
 
 	it('prevents default form submission', async () => {

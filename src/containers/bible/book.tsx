@@ -193,17 +193,15 @@ function BookInner({
 				href={makeBibleVersionRoute(languageRoute, id)}
 				className={styles.hat}
 			>
-				<a>
-					<BibleVersionTypeLockup
-						unpadded={true}
-						label={intl.formatMessage({
-							id: 'bibleBook__typeLabel',
-							// TODO: Make dynamic?
-							defaultMessage: 'KJV Bible',
-						})}
-					/>
-					<h4>{book.name}</h4>
-				</a>
+				<BibleVersionTypeLockup
+					unpadded={true}
+					label={intl.formatMessage({
+						id: 'bibleBook__typeLabel',
+						// TODO: Make dynamic?
+						defaultMessage: 'KJV Bible',
+					})}
+				/>
+				<h4>{book.name}</h4>
 			</Link>
 			<div className={styles.content}>
 				<div className={styles.main}>

@@ -1,4 +1,4 @@
-import { act, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';
@@ -122,11 +122,11 @@ describe('register page', () => {
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
 		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
 
+		console.log(getByText('Sign up').outerHTML);
+
 		userEvent.click(getByText('Sign up'));
 
-		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
-		});
+		expect(await screen.findByText('the_error_message')).toBeInTheDocument();
 	});
 
 	it('displays success message', async () => {
@@ -143,9 +143,11 @@ describe('register page', () => {
 	});
 
 	it('renders continue with Facebook', async () => {
-		const { getByText } = await renderPage({ router });
+		await renderPage({ router });
 
-		expect(getByText('Sign up with Facebook')).toBeInTheDocument();
+		expect(
+			await screen.findByText('Sign up with Facebook')
+		).toBeInTheDocument();
 	});
 
 	it('renders continue with Google', async () => {
@@ -191,7 +193,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('the_error_message')).toBeInTheDocument();
@@ -201,7 +203,7 @@ describe('register page', () => {
 	it('renders social login success', async () => {
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('success')).toBeInTheDocument();
@@ -209,9 +211,9 @@ describe('register page', () => {
 	});
 
 	it('hits api with facebook registration', async () => {
-		const { getByText } = await renderPage({ router });
+		await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(RegisterSocialDocument, {
@@ -237,9 +239,9 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage({ router });
+		await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(Cookie.set).toBeCalledWith('avSession', 'the_token', {
@@ -249,26 +251,20 @@ describe('register page', () => {
 	});
 
 	it('does not register failed login', async () => {
-		await act(async () => {
-			__setFacebookResponse({
-				status: 300,
-			});
-
-			const { getByText } = await renderPage({ router });
-
-			await waitFor(() => {
-				expect(getByText('Sign up with Facebook')).toBeInTheDocument();
-			});
-
-			userEvent.click(getByText('Sign up with Facebook'));
-
-			await sleep();
-
-			expect(fetchApi).not.toBeCalledWith(
-				RegisterSocialDocument,
-				expect.anything()
-			);
+		__setFacebookResponse({
+			status: 300,
 		});
+
+		await renderPage({ router });
+
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
+
+		await sleep();
+
+		expect(fetchApi).not.toBeCalledWith(
+			RegisterSocialDocument,
+			expect.anything()
+		);
 	});
 
 	it('displays facebook login error', async () => {
@@ -279,7 +275,7 @@ describe('register page', () => {
 
 		const { getByText } = await renderPage({ router });
 
-		userEvent.click(getByText('Sign up with Facebook'));
+		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
 		await waitFor(() => {
 			expect(getByText('300: FAILED')).toBeInTheDocument();

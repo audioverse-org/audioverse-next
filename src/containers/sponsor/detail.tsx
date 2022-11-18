@@ -79,7 +79,7 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					target="_blank"
 					rel="nofollow noreferrer"
 				>
-					<a>{website}</a>
+					{website}
 				</Link>
 			),
 		});

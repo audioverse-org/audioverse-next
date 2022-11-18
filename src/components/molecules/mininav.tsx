@@ -46,7 +46,7 @@ export default function Mininav({
 						className={clsx(isActive && styles.miniNavActive)}
 					>
 						<Link href={url} onClick={onClick}>
-							<a>{label}</a>
+							{label}
 						</Link>
 					</Heading6>
 				) : (

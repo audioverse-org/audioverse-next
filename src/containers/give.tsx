@@ -43,17 +43,15 @@ export default function Blog(): JSX.Element {
 						allow="payment"
 					/>
 					<Link href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html">
-						<a>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
-								width={555}
-								height={330}
-								onError={(e: SyntheticEvent<HTMLImageElement>) =>
-									(e.currentTarget.style.display = 'none')
-								}
-							/>
-						</a>
+						{/* eslint-disable-next-line @next/next/no-img-element */}
+						<img
+							src="https://s3.amazonaws.com/Client_Files/AudioVerse/av-progress-bar.png"
+							width={555}
+							height={330}
+							onError={(e: SyntheticEvent<HTMLImageElement>) =>
+								(e.currentTarget.style.display = 'none')
+							}
+						/>
 					</Link>
 				</div>
 				<Heading2>

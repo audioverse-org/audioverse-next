@@ -85,7 +85,7 @@ function CollectionDetail({
 			}),
 			definition: (
 				<Link href={sponsor.canonicalPath} className="decorated hover--salmon">
-					<a>{sponsor.title}</a>
+					{sponsor.title}
 				</Link>
 			),
 		});

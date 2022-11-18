@@ -156,15 +156,13 @@ const Navigation = ({
 									href={makeLoginRoute(languageRoute, router.asPath)}
 									className="decorated"
 								>
-									<a>
-										<span className={styles.accountAvatar}>
-											<IconUser />
-										</span>
-										<FormattedMessage
-											id="navigation__loginSignupCta"
-											defaultMessage="Login/Sign up"
-										/>
-									</a>
+									<span className={styles.accountAvatar}>
+										<IconUser />
+									</span>
+									<FormattedMessage
+										id="navigation__loginSignupCta"
+										defaultMessage="Login/Sign up"
+									/>
 								</Link>
 							)}
 						</div>
@@ -217,14 +215,12 @@ const Navigation = ({
 														}
 														target={isTargetBlank ? '_blank' : '_self'}
 													>
-														<a>
-															{Icon && (
-																<span className={styles.icon}>
-																	<Icon />
-																</span>
-															)}
-															<span>{label}</span>
-														</a>
+														{Icon && (
+															<span className={styles.icon}>
+																<Icon />
+															</span>
+														)}
+														<span>{label}</span>
 													</Link>
 												)}
 											</li>

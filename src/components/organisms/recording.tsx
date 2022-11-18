@@ -138,7 +138,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={sequence.canonicalPath} className={linkClass}>
-						<a>{sequence.title}</a>
+						{sequence.title}
 					</Link>
 				</p>
 			),
@@ -161,7 +161,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={collection.canonicalPath} className={linkClass}>
-						<a>{collection.title}</a>
+						{collection.title}
 					</Link>
 				</p>
 			),
@@ -179,7 +179,7 @@ export function Recording({
 			definition: (
 				<p>
 					<Link href={sponsor.canonicalPath} className={linkClass}>
-						<a>{sponsor.title}</a>
+						{sponsor.title}
 					</Link>
 				</p>
 			),
@@ -240,10 +240,8 @@ export function Recording({
 		href: string
 	) => (
 		<Link href={href} className={styles.hat}>
-			<a>
-				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
-				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
-			</a>
+			<SequenceTypeLockup contentType={sequenceContentType} unpadded />
+			<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
 		</Link>
 	);
 
@@ -312,13 +310,8 @@ export function Recording({
 			</Head>
 			{isBibleChapter && recording.collection ? (
 				<Link href={recording.collection.canonicalPath} className={styles.hat}>
-					<a>
-						<BibleVersionTypeLockup
-							label={recording.collection.title}
-							unpadded
-						/>
-						<h4>{recording.sequence?.title}</h4>
-					</a>
+					<BibleVersionTypeLockup label={recording.collection.title} unpadded />
+					<h4>{recording.sequence?.title}</h4>
 				</Link>
 			) : overrideSequence ? (
 				makeHat(

@@ -80,10 +80,8 @@ export default function Miniplayer(): JSX.Element | null {
 			</div>
 			<div className={styles.meta}>
 				<Link href={recording.canonicalPath} className={styles.link}>
-					<a>
-						{sequenceLine}
-						<h4 className={styles.title}>{recording.title}</h4>
-					</a>
+					{sequenceLine}
+					<h4 className={styles.title}>{recording.title}</h4>
 				</Link>
 				<div className={styles.progress}>
 					<span>{timeString}</span>

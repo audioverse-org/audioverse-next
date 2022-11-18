@@ -87,7 +87,7 @@ function PresenterDetail({
 					rel="noreferrer noopener"
 					className="decorated"
 				>
-					<a>{website}</a>
+					{website}
 				</Link>
 			),
 		});

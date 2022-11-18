@@ -253,7 +253,7 @@ export default function TeaseRecording({
 					href={recording.canonicalPath}
 					className={clsx(styles.content, unpadded && styles.unpadded)}
 				>
-					<a>{inner}</a>
+					{inner}
 				</Link>
 			)}
 

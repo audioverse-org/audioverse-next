@@ -10,6 +10,7 @@ import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
 import { BaseColors } from '@lib/constants';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import loadControlledPromise from '@lib/test/loadControlledPromise';
 
 jest.mock('@lib/api/recordingIsFavorited');
 jest.mock('@lib/api/setRecordingFavorited');
@@ -93,11 +94,14 @@ describe('recording favorite button', () => {
 		await withMutedReactQueryLogger(async () => {
 			const { button, findByLabelText } = await renderComponent();
 
-			mockSetRecordingFavorited.mockRejectedValue('error');
+			const { reject } = loadControlledPromise(mockSetRecordingFavorited);
 
 			userEvent.click(button);
 
 			await expect(findByLabelText('Unfavorite')).resolves.toBeInTheDocument();
+
+			reject();
+
 			await expect(findByLabelText('Favorite')).resolves.toBeInTheDocument();
 		});
 	});

@@ -1,4 +1,4 @@
-import { RenderOptions, RenderResult } from '@testing-library/react';
+import { RenderOptions, RenderResult, screen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
@@ -68,11 +68,15 @@ describe('pagination component', () => {
 	});
 
 	it('uses url base', async () => {
-		const { getByText } = await renderPagination({
-				total: 2,
-				makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
-			}),
-			link = getByText('Next') as HTMLAnchorElement;
+		await renderPagination({
+			total: 2,
+			makeRoute: (l, i) => `/${l}/presenters/page/${i}`,
+		});
+
+		const link = (await screen.findByText('Next')) as HTMLAnchorElement;
+
+		console.log({ link });
+		console.log(link.outerHTML);
 
 		expect(link.href).toContain('/en/presenters/page/2');
 	});

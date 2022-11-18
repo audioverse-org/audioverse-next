@@ -12,15 +12,13 @@ const Header = (): JSX.Element => {
 		<header className={styles.header}>
 			<h1>
 				<Link href={`/${languageRoute}`} className={styles.link}>
-					<a>
-						<Image
-							src="/img/logo.svg"
-							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
-							alt="AudioVerse"
-							width={161}
-							height={23}
-						/>
-					</a>
+					<Image
+						src="/img/logo.svg"
+						/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
+						alt="AudioVerse"
+						width={161}
+						height={23}
+					/>
 				</Link>
 			</h1>
 		</header>

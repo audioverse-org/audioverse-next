@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
@@ -19,75 +19,65 @@ describe('app', () => {
 	});
 
 	it('sets title', async () => {
-		await act(async () => {
-			await render(
-				<MyApp
-					Component={(() => null) as unknown as typeof React.Component}
-					pageProps={{}}
-				/>
-			);
+		await render(
+			<MyApp
+				Component={(() => null) as unknown as typeof React.Component}
+				pageProps={{}}
+			/>
+		);
 
-			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
-			expect(heads).toEqual(
-				expect.arrayContaining([expect.stringContaining('AudioVerse')])
-			);
-		});
+		expect(heads).toEqual(
+			expect.arrayContaining([expect.stringContaining('AudioVerse')])
+		);
 	});
 
 	it('rehydrates react-query', async () => {
-		await act(async () => {
-			const queryClient = new QueryClient();
+		const queryClient = new QueryClient();
 
-			await queryClient.prefetchQuery('myQuery', async () => 'myResult');
+		await queryClient.prefetchQuery('myQuery', async () => 'myResult');
 
-			const spy = jest.fn();
+		const spy = jest.fn();
 
-			const { getByText } = await renderApp(
-				() => {
-					const { data: myQuery } = useQuery('myQuery', spy);
-					return <>{myQuery}</>;
-				},
-				{
-					dehydratedState: dehydrate(queryClient),
-				}
-			);
+		const { getByText } = await renderApp(
+			() => {
+				const { data: myQuery } = useQuery('myQuery', spy);
+				return <>{myQuery}</>;
+			},
+			{
+				dehydratedState: dehydrate(queryClient),
+			}
+		);
 
-			expect(getByText('myResult')).toBeInTheDocument();
-		});
+		expect(getByText('myResult')).toBeInTheDocument();
 	});
 
 	it('includes sidebar', async () => {
-		await act(async () => {
-			const { getByText } = await renderApp(() => <>h</>, {});
+		const { getByText } = await renderApp(() => <>h</>, {});
 
-			expect(getByText('More')).toBeInTheDocument();
-		});
+		expect(getByText('More')).toBeInTheDocument();
 	});
 
 	it('disables sidebar', async () => {
-		await act(async () => {
-			const { queryByText } = await renderApp(() => <>h</>, {
-				disableSidebar: true,
-			});
-
-			expect(queryByText('More')).not.toBeInTheDocument();
+		const { queryByText } = await renderApp(() => <>h</>, {
+			disableSidebar: true,
 		});
+
+		expect(queryByText('More')).not.toBeInTheDocument();
 	});
 
 	it('sets title with props', async () => {
-		await act(async () => {
-			await renderApp(() => <>h</>, {
-				title: 'the_prop_title',
-			});
-
-			const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
-
-			expect(heads).toEqual(
-				expect.arrayContaining([
-					expect.stringContaining(`the_prop_title | AudioVerse`),
-				])
-			);
+		await renderApp(() => <>h</>, {
+			title: 'the_prop_title',
 		});
+
+		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+
+		expect(heads).toEqual(
+			expect.arrayContaining([
+				expect.stringContaining(`the_prop_title | AudioVerse`),
+			])
+		);
 	});
 });

@@ -38,12 +38,10 @@ export default function CardHat(
 	if (isSimple(props)) {
 		return (
 			<Link href={url} className={clsx(styles.hat)}>
-				<a>
-					<div className={styles.hatBar}>
-						<span className={styles.hatIcon}>{icon}</span>
-						<span className={styles.hatTitle}>{title}</span>
-					</div>
-				</a>
+				<div className={styles.hatBar}>
+					<span className={styles.hatIcon}>{icon}</span>
+					<span className={styles.hatTitle}>{title}</span>
+				</div>
 			</Link>
 		);
 	}
