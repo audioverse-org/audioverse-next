@@ -105,7 +105,7 @@ type Beacon = {
 	(method: 'destroy'): unknown;
 	(method: 'open' | 'close' | 'toggle'): unknown;
 	(method: 'search', query: string): unknown;
-	(method: 'suggest', suggestions: Suggestion[]): unknown;
+	(method: 'suggest', suggestions?: Suggestion[]): unknown;
 	(
 		method: 'article',
 		articleId: string,
