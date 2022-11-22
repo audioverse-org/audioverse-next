@@ -1,10 +1,5 @@
 import { findByLabelText, waitFor } from '@testing-library/dom';
-import {
-	getByLabelText,
-	getByTestId,
-	getByText,
-	screen,
-} from '@testing-library/react';
+import { getByLabelText, getByTestId, getByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
