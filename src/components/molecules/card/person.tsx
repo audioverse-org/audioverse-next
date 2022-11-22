@@ -27,40 +27,42 @@ export default function CardPerson({
 	const { canonicalPath, image, name, recordings } = person;
 	return (
 		<Card>
-			<Link href={canonicalPath} className={styles.container}>
-				<div className={styles.stretch}>
-					<PersonTypeLockup />
-					<Heading2 unpadded sans className={styles.title}>
-						{image && (
-							<div className={styles.image}>
-								<RoundImage image={image.url} alt={name} />
-							</div>
+			<Link href={canonicalPath} className={styles.container} legacyBehavior>
+				<a>
+					<div className={styles.stretch}>
+						<PersonTypeLockup />
+						<Heading2 unpadded sans className={styles.title}>
+							{image && (
+								<div className={styles.image}>
+									<RoundImage image={image.url} alt={name} />
+								</div>
+							)}
+							{name}
+						</Heading2>
+					</div>
+					<div
+						className={clsx(
+							styles.details,
+							isFavorited && styles.detailsWithLike
 						)}
-						{name}
-					</Heading2>
-				</div>
-				<div
-					className={clsx(
-						styles.details,
-						isFavorited && styles.detailsWithLike
-					)}
-				>
-					<Heading6
-						sans
-						unpadded
-						uppercase
-						loose
-						className={styles.teachingsLabel}
 					>
-						<FormattedMessage
-							id="cardPerson_teachingsLabel"
-							defaultMessage="{count} teachings"
-							description="Card person teachings count label"
-							values={{ count: recordings.aggregate?.count }}
-						/>
-					</Heading6>
-				</div>
-				{/* TODO: sub-recordings */}
+						<Heading6
+							sans
+							unpadded
+							uppercase
+							loose
+							className={styles.teachingsLabel}
+						>
+							<FormattedMessage
+								id="cardPerson_teachingsLabel"
+								defaultMessage="{count} teachings"
+								description="Card person teachings count label"
+								values={{ count: recordings.aggregate?.count }}
+							/>
+						</Heading6>
+					</div>
+					{/* TODO: sub-recordings */}
+				</a>
 			</Link>
 			<ButtonFavorite
 				isFavorited={!!isFavorited}

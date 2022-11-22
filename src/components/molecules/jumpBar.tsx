@@ -14,8 +14,8 @@ export default function JumpBar({ links }: Props): JSX.Element | null {
 	return (
 		<div className={styles.jumpBar}>
 			{links.map(({ url, text }) => (
-				<Link key={text} href={url}>
-					{text}
+				<Link key={text} href={url} legacyBehavior>
+					<a>{text}</a>
 				</Link>
 			))}
 		</div>

@@ -284,9 +284,16 @@ export default function LibraryNav({
 							},
 						}}
 						key={value}
+						legacyBehavior
 					>
-						<input type="checkbox" checked={value === currentOption} readOnly />
-						{label}
+						<a>
+							<input
+								type="checkbox"
+								checked={value === currentOption}
+								readOnly
+							/>
+							{label}
+						</a>
 					</Link>
 				))}
 			</div>
@@ -336,15 +343,18 @@ export default function LibraryNav({
 												sort,
 											},
 										}}
+										legacyBehavior
 									>
-										<input
-											type="radio"
-											name="library-sort"
-											value={sort}
-											checked={querySort === sort}
-											readOnly
-										/>
-										{label}
+										<a>
+											<input
+												type="radio"
+												name="library-sort"
+												value={sort}
+												checked={querySort === sort}
+												readOnly
+											/>
+											{label}
+										</a>
 									</Link>
 								</p>
 							))}

@@ -32,65 +32,67 @@ export default function CardSponsor({
 
 	return (
 		<Card>
-			<Link href={canonicalPath} className={styles.container}>
-				<TypeLockup
-					Icon={UserPlusIcon}
-					label={intl.formatMessage({
-						id: 'cardSponsor_hatTitle',
-						defaultMessage: 'Sponsor',
-						description: 'Card sponsor hat title',
-					})}
-					iconColor={BaseColors.RED}
-					textColor={BaseColors.DARK}
-				/>
-				<div className={styles.titleLockup}>
-					{image && (
-						<div className={styles.logo}>
-							<RoundImage image={image.url} alt={title} />
-						</div>
-					)}
-					<Heading2 sans unpadded className={styles.title}>
-						{title}
-					</Heading2>
-				</div>
-				<div
-					className={clsx(
-						styles.details,
-						isFavorited && styles.detailsWithLike
-					)}
-				>
-					<Heading6
-						sans
-						unpadded
-						uppercase
-						loose
-						className={styles.conferencesLabel}
-					>
-						{collections.aggregate?.count ? (
-							<FormattedMessage
-								id="cardSponsor__collectionCountLabel"
-								defaultMessage="{count} Conferences"
-								description="Sponsor Detail collection count label"
-								values={{ count: collections.aggregate?.count }}
-							/>
-						) : sequences.aggregate?.count ? (
-							<FormattedMessage
-								id="cardSponsor__sequencesCountLabel"
-								defaultMessage="{count} Series"
-								description="Sponsor Detail series count label"
-								values={{ count: sequences.aggregate?.count }}
-							/>
-						) : (
-							<FormattedMessage
-								id="cardSponsor__recordingsCountLabel"
-								defaultMessage="{count} Teachings"
-								description="Sponsor Detail teachings count label"
-								values={{ count: recordings.aggregate?.count }}
-							/>
+			<Link href={canonicalPath} className={styles.container} legacyBehavior>
+				<a>
+					<TypeLockup
+						Icon={UserPlusIcon}
+						label={intl.formatMessage({
+							id: 'cardSponsor_hatTitle',
+							defaultMessage: 'Sponsor',
+							description: 'Card sponsor hat title',
+						})}
+						iconColor={BaseColors.RED}
+						textColor={BaseColors.DARK}
+					/>
+					<div className={styles.titleLockup}>
+						{image && (
+							<div className={styles.logo}>
+								<RoundImage image={image.url} alt={title} />
+							</div>
 						)}
-					</Heading6>
-				</div>
-				{/* TODO: sub-conferences */}
+						<Heading2 sans unpadded className={styles.title}>
+							{title}
+						</Heading2>
+					</div>
+					<div
+						className={clsx(
+							styles.details,
+							isFavorited && styles.detailsWithLike
+						)}
+					>
+						<Heading6
+							sans
+							unpadded
+							uppercase
+							loose
+							className={styles.conferencesLabel}
+						>
+							{collections.aggregate?.count ? (
+								<FormattedMessage
+									id="cardSponsor__collectionCountLabel"
+									defaultMessage="{count} Conferences"
+									description="Sponsor Detail collection count label"
+									values={{ count: collections.aggregate?.count }}
+								/>
+							) : sequences.aggregate?.count ? (
+								<FormattedMessage
+									id="cardSponsor__sequencesCountLabel"
+									defaultMessage="{count} Series"
+									description="Sponsor Detail series count label"
+									values={{ count: sequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="cardSponsor__recordingsCountLabel"
+									defaultMessage="{count} Teachings"
+									description="Sponsor Detail teachings count label"
+									values={{ count: recordings.aggregate?.count }}
+								/>
+							)}
+						</Heading6>
+					</div>
+					{/* TODO: sub-conferences */}
+				</a>
 			</Link>
 			<ButtonFavorite
 				isFavorited={!!isFavorited}

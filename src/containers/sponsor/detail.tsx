@@ -78,8 +78,9 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 					className="decorated"
 					target="_blank"
 					rel="nofollow noreferrer"
+					legacyBehavior
 				>
-					{website}
+					<a>{website}</a>
 				</Link>
 			),
 		});

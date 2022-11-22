@@ -11,14 +11,16 @@ const Header = (): JSX.Element => {
 	return (
 		<header className={styles.header}>
 			<h1>
-				<Link href={`/${languageRoute}`} className={styles.link}>
-					<Image
-						src="/img/logo.svg"
-						/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
-						alt="AudioVerse"
-						width={161}
-						height={23}
-					/>
+				<Link href={`/${languageRoute}`} className={styles.link} legacyBehavior>
+					<a>
+						<Image
+							src="/img/logo.svg"
+							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */
+							alt="AudioVerse"
+							width={161}
+							height={23}
+						/>
+					</a>
 				</Link>
 			</h1>
 		</header>

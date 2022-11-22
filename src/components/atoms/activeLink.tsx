@@ -1,10 +1,11 @@
 import clsx from 'clsx';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import React, { Children, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 type ActiveLinkProps = LinkProps & {
 	children: ReactElement;
+	className?: string;
 	activeClassName: string;
 };
 
@@ -12,28 +13,18 @@ type ActiveLinkProps = LinkProps & {
 
 const ActiveLink = ({
 	children,
+	className,
 	activeClassName,
 	...props
 }: ActiveLinkProps): JSX.Element => {
 	const router = useRouter();
 	const asPath = router.asPath.replace(/\?.*/, '');
-
-	const child = Children.only(children);
-
-	if (!child) throw new Error('Could not find child');
-
-	const childClassName = child.props.className || '';
-
-	const className =
-		asPath === props.href || asPath === props.as
-			? clsx(childClassName, activeClassName)
-			: childClassName;
+	const isActive = asPath === props.href || asPath === props.as;
+	const classes = isActive ? clsx(className, activeClassName) : className;
 
 	return (
-		<Link {...props}>
-			{React.cloneElement(child, {
-				className: className || null,
-			})}
+		<Link className={classes || ''} {...props} legacyBehavior>
+			<a aria-current={isActive ? 'page' : false}>{children}</a>
 		</Link>
 	);
 };

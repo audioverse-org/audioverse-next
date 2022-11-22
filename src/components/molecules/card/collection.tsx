@@ -76,106 +76,112 @@ export default function CardCollection({
 					isBibleVersion && styles.bibleVersion,
 					(isHovered || isSubHovered) && styles.otherHovered
 				)}
+				legacyBehavior
 			>
-				<CollectionTypeLockup contentType={contentType} />
-				{heroImage}
-				{!!(startDate && endDate) && !isBibleVersion && (
-					<Heading6 sans unpadded className={styles.date}>
-						{formatDateRange(startDate, endDate)}
-					</Heading6>
-				)}
-				<Heading2 unpadded className={styles.title}>
-					{title}
-				</Heading2>
-				<Heading6
-					sans
-					unpadded
-					uppercase
-					loose
-					className={styles.sequencesLabel}
-				>
-					{allSequences.aggregate?.count ? (
-						isBibleVersion ? (
-							<FormattedMessage
-								id="cardCollection_booksLabel"
-								defaultMessage="{count} books"
-								values={{ count: allSequences.aggregate?.count }}
-							/>
+				<a>
+					<CollectionTypeLockup contentType={contentType} />
+					{heroImage}
+					{!!(startDate && endDate) && !isBibleVersion && (
+						<Heading6 sans unpadded className={styles.date}>
+							{formatDateRange(startDate, endDate)}
+						</Heading6>
+					)}
+					<Heading2 unpadded className={styles.title}>
+						{title}
+					</Heading2>
+					<Heading6
+						sans
+						unpadded
+						uppercase
+						loose
+						className={styles.sequencesLabel}
+					>
+						{allSequences.aggregate?.count ? (
+							isBibleVersion ? (
+								<FormattedMessage
+									id="cardCollection_booksLabel"
+									defaultMessage="{count} books"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							) : (
+								<FormattedMessage
+									id="cardCollection_sequenceLabel"
+									defaultMessage="{count} series"
+									description="Card collection sequence count label"
+									values={{ count: allSequences.aggregate?.count }}
+								/>
+							)
 						) : (
 							<FormattedMessage
-								id="cardCollection_sequenceLabel"
-								defaultMessage="{count} series"
-								description="Card collection sequence count label"
-								values={{ count: allSequences.aggregate?.count }}
+								id="cardCollection__teachingsCountLabel"
+								defaultMessage="{count} teachings"
+								description="Card collection teachings count label"
+								values={{ count: allRecordings.aggregate?.count }}
 							/>
-						)
-					) : (
-						<FormattedMessage
-							id="cardCollection__teachingsCountLabel"
-							defaultMessage="{count} teachings"
-							description="Card collection teachings count label"
-							values={{ count: allRecordings.aggregate?.count }}
-						/>
-					)}
-				</Heading6>
-				<div
-					className={clsx(
-						styles.details,
-						isFavorited && styles.detailsWithLike
-					)}
-				>
-					<div className={styles.duration}>
-						{useFormattedDuration(duration)}
-					</div>
-					{playbackCompletedPercentage >= 1 && <SuccessIcon />}
-					<div className={styles.progress}>
-						{playbackCompletedPercentage > 0 && (
-							<ProgressBar progress={playbackCompletedPercentage} />
 						)}
+					</Heading6>
+					<div
+						className={clsx(
+							styles.details,
+							isFavorited && styles.detailsWithLike
+						)}
+					>
+						<div className={styles.duration}>
+							{useFormattedDuration(duration)}
+						</div>
+						{playbackCompletedPercentage >= 1 && <SuccessIcon />}
+						<div className={styles.progress}>
+							{playbackCompletedPercentage > 0 && (
+								<ProgressBar progress={playbackCompletedPercentage} />
+							)}
+						</div>
+						<ButtonFavorite
+							isFavorited={!!isFavorited}
+							toggleFavorited={toggleFavorited}
+							ref={ref}
+							backgroundColor={
+								isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
+							}
+							light
+							className={clsx(styles.like, isFavorited && styles.likeActive)}
+						/>
 					</div>
-					<ButtonFavorite
-						isFavorited={!!isFavorited}
-						toggleFavorited={toggleFavorited}
-						ref={ref}
-						backgroundColor={
-							isBibleVersion ? BaseColors.BIBLE_H : BaseColors.DARK
-						}
-						light
-						className={clsx(styles.like, isFavorited && styles.likeActive)}
-					/>
-				</div>
-				{sequences?.length || recordings?.length ? (
-					<>
-						<div className={styles.subItems} ref={subRef}>
-							{sequences?.map((sequence) => (
-								<div className={styles.subItem} key={sequence.canonicalPath}>
-									<CardSequence sequence={sequence} slim />
-								</div>
-							))}
-							{!sequences?.length &&
-								recordings?.map((recording) => (
-									<div className={styles.subItem} key={recording.canonicalPath}>
-										<CardRecording recording={recording} isOptionalLink />
+					{sequences?.length || recordings?.length ? (
+						<>
+							<div className={styles.subItems} ref={subRef}>
+								{sequences?.map((sequence) => (
+									<div className={styles.subItem} key={sequence.canonicalPath}>
+										<CardSequence sequence={sequence} slim />
 									</div>
 								))}
-						</div>
-						{contentType === CollectionContentType.BibleVersion && (
-							<Heading6
-								large
-								loose
-								sans
-								unpadded
-								uppercase
-								className={styles.showAll}
-							>
-								<FormattedMessage
-									id="cardCollection__showAll"
-									defaultMessage="Show All"
-								/>
-							</Heading6>
-						)}
-					</>
-				) : null}
+								{!sequences?.length &&
+									recordings?.map((recording) => (
+										<div
+											className={styles.subItem}
+											key={recording.canonicalPath}
+										>
+											<CardRecording recording={recording} isOptionalLink />
+										</div>
+									))}
+							</div>
+							{contentType === CollectionContentType.BibleVersion && (
+								<Heading6
+									large
+									loose
+									sans
+									unpadded
+									uppercase
+									className={styles.showAll}
+								>
+									<FormattedMessage
+										id="cardCollection__showAll"
+										defaultMessage="Show All"
+									/>
+								</Heading6>
+							)}
+						</>
+					) : null}
+				</a>
 			</Link>
 		</Card>
 	);

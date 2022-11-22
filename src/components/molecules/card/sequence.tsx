@@ -299,8 +299,8 @@ export default function CardSequence({
 					{inner}
 				</div>
 			) : (
-				<Link href={linkUrl} className={className}>
-					{inner}
+				<Link href={linkUrl} className={className} legacyBehavior>
+					<a>{inner}</a>
 				</Link>
 			)}
 		</Card>

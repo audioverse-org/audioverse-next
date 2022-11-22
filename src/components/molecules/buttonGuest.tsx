@@ -35,11 +35,13 @@ export default function ButtonGuest({
 	return (
 		<>
 			<div className={clsx(styles.wrapper, className)}>
-				<Link href={redirectRoute} className="decorated">
-					<FormattedMessage
-						id="molecule-buttonGuest__label"
-						defaultMessage="Continue as guest"
-					/>
+				<Link href={redirectRoute} className="decorated" legacyBehavior>
+					<a>
+						<FormattedMessage
+							id="molecule-buttonGuest__label"
+							defaultMessage="Continue as guest"
+						/>
+					</a>
 				</Link>
 				<button
 					className={styles.link}
@@ -85,11 +87,13 @@ export default function ButtonGuest({
 								/>
 							}
 						/>
-						<Link href={redirectRoute} className="decorated">
-							<FormattedMessage
-								id="molecule-buttonGuest__modalButtonLabelGuest"
-								defaultMessage="Continue as guest"
-							/>
+						<Link href={redirectRoute} className="decorated" legacyBehavior>
+							<a>
+								<FormattedMessage
+									id="molecule-buttonGuest__modalButtonLabelGuest"
+									defaultMessage="Continue as guest"
+								/>
+							</a>
 						</Link>
 					</>
 				}

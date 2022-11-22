@@ -46,12 +46,15 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							styles.segmentedControl,
 							filter === 'all' && styles.segmentedControlActive
 						)}
+						legacyBehavior
 					>
-						<FormattedMessage
-							id="recordingHasVideoFilter__filterAll"
-							defaultMessage="All"
-							description="recording has video filter all"
-						/>
+						<a>
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterAll"
+								defaultMessage="All"
+								description="recording has video filter all"
+							/>
+						</a>
 					</Link>
 					<Link
 						href={makeRoute(language, 'video', 1)}
@@ -59,12 +62,15 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							styles.segmentedControl,
 							filter === 'video' && styles.segmentedControlActive
 						)}
+						legacyBehavior
 					>
-						<FormattedMessage
-							id="recordingHasVideoFilter__filterVideo"
-							defaultMessage="Video"
-							description="recording has video filter video"
-						/>
+						<a>
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterVideo"
+								defaultMessage="Video"
+								description="recording has video filter video"
+							/>
+						</a>
 					</Link>
 					<Link
 						href={makeRoute(language, 'audio', 1)}
@@ -72,12 +78,15 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							styles.segmentedControl,
 							filter === 'audio' && styles.segmentedControlActive
 						)}
+						legacyBehavior
 					>
-						<FormattedMessage
-							id="recordingHasVideoFilter__filterAudio"
-							defaultMessage="Audio only"
-							description="recording has video filter audio"
-						/>
+						<a>
+							<FormattedMessage
+								id="recordingHasVideoFilter__filterAudio"
+								defaultMessage="Audio only"
+								description="recording has video filter audio"
+							/>
+						</a>
 					</Link>
 				</div>
 			</div>

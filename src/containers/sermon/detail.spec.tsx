@@ -61,7 +61,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		contentType: RecordingContentType.Sermon,
-		canonicalPath: '',
+		canonicalPath: 'the_canonical_path',
 		language: Language.English,
 		speakers: [],
 		writers: [],
@@ -370,6 +370,7 @@ describe('sermon detail page', () => {
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
+				canonicalPath: 'the_path',
 			},
 		});
 
@@ -406,6 +407,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 		});
 
@@ -483,6 +485,7 @@ describe('sermon detail page', () => {
 			copyrightYear: 1999,
 			sponsor: {
 				title: 'the_sponsor',
+				canonicalPath: 'the_path',
 			},
 		});
 
@@ -553,6 +556,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_path',
 				recordings: {
 					nodes: [
 						{
@@ -716,6 +720,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 			sequenceIndex: 1,
 		});
@@ -731,6 +736,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 			sequenceIndex: 2,
 			sequencePreviousRecording: {
@@ -750,6 +756,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 			},
 			sequenceIndex: 2,
 			sequenceNextRecording: {
@@ -972,6 +979,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_sequence_path',
 				recordings: {
 					nodes: [
 						{
@@ -996,6 +1004,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1027,6 +1036,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1065,6 +1075,7 @@ describe('sermon detail page', () => {
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_sequence_path',
 				recordings: {
 					nodes: [
 						{
@@ -1161,6 +1172,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1188,6 +1200,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1212,6 +1225,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1248,6 +1262,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 		});
 
@@ -1283,6 +1298,7 @@ describe('sermon detail page', () => {
 			collection: {
 				id: 'collection_id',
 				title: 'collection_title',
+				canonicalPath: 'the_collection_path',
 			},
 		});
 

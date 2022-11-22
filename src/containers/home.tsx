@@ -160,8 +160,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 												<Link
 													href={makeDiscoverRoute(languageRoute)}
 													className="decorated"
+													legacyBehavior
 												>
-													{chunks}
+													<a>{chunks}</a>
 												</Link>
 											);
 										},
@@ -290,8 +291,9 @@ export default function Home({ data }: HomeProps): JSX.Element {
 													<Link
 														href={makeTestimoniesRoute(languageRoute)}
 														className="decorated"
+														legacyBehavior
 													>
-														{chunks}
+														<a>{chunks}</a>
 													</Link>
 												);
 											},

@@ -53,13 +53,19 @@ function Sponsors({
 			<Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
 			{sponsors.map(({ canonicalPath, image, title }) => (
 				<Card className={styles.card} key={canonicalPath}>
-					<Link href={canonicalPath} className={styles.container}>
-						{image && (
-							<div className={styles.image}>
-								<RoundImage image={image.url} />
-							</div>
-						)}
-						<span className={styles.sponsorName}>{title}</span>
+					<Link
+						href={canonicalPath}
+						className={styles.container}
+						legacyBehavior
+					>
+						<a>
+							{image && (
+								<div className={styles.image}>
+									<RoundImage image={image.url} />
+								</div>
+							)}
+							<span className={styles.sponsorName}>{title}</span>
+						</a>
 					</Link>
 				</Card>
 			))}

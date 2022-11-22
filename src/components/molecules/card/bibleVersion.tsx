@@ -31,35 +31,38 @@ export default function CardBibleVersion({ version }: Props): JSX.Element {
 			<Link
 				href={makeBibleVersionRoute(languageRoute, id)}
 				className={clsx(styles.column, isSubHovered && styles.otherHovered)}
+				legacyBehavior
 			>
-				<BibleVersionTypeLockup />
-				<Heading2 className={styles.title}>{title}</Heading2>
-				<Heading6 sans uppercase loose className={styles.booksLabel}>
-					<FormattedMessage
-						id="cardBibleVersion__booksLabel"
-						defaultMessage="66 Books"
-					/>
-				</Heading6>
-				<div ref={subRef}>
-					{books.slice(0, 2).map((book) => (
-						<div className={styles.book} key={book.book_id}>
-							<CardBibleBook book={book} isOptionalLink />
-						</div>
-					))}
-				</div>
-				<Heading6
-					large
-					loose
-					sans
-					unpadded
-					uppercase
-					className={styles.showAll}
-				>
-					<FormattedMessage
-						id="cardBibleVersion__showAll"
-						defaultMessage="Show All"
-					/>
-				</Heading6>
+				<a>
+					<BibleVersionTypeLockup />
+					<Heading2 className={styles.title}>{title}</Heading2>
+					<Heading6 sans uppercase loose className={styles.booksLabel}>
+						<FormattedMessage
+							id="cardBibleVersion__booksLabel"
+							defaultMessage="66 Books"
+						/>
+					</Heading6>
+					<div ref={subRef}>
+						{books.slice(0, 2).map((book) => (
+							<div className={styles.book} key={book.book_id}>
+								<CardBibleBook book={book} isOptionalLink />
+							</div>
+						))}
+					</div>
+					<Heading6
+						large
+						loose
+						sans
+						unpadded
+						uppercase
+						className={styles.showAll}
+					>
+						<FormattedMessage
+							id="cardBibleVersion__showAll"
+							defaultMessage="Show All"
+						/>
+					</Heading6>
+				</a>
 			</Link>
 		</Card>
 	);

@@ -155,14 +155,17 @@ const Navigation = ({
 								<Link
 									href={makeLoginRoute(languageRoute, router.asPath)}
 									className="decorated"
+									legacyBehavior
 								>
-									<span className={styles.accountAvatar}>
-										<IconUser />
-									</span>
-									<FormattedMessage
-										id="navigation__loginSignupCta"
-										defaultMessage="Login/Sign up"
-									/>
+									<a>
+										<span className={styles.accountAvatar}>
+											<IconUser />
+										</span>
+										<FormattedMessage
+											id="navigation__loginSignupCta"
+											defaultMessage="Login/Sign up"
+										/>
+									</a>
 								</Link>
 							)}
 						</div>
@@ -214,13 +217,16 @@ const Navigation = ({
 																: undefined
 														}
 														target={isTargetBlank ? '_blank' : '_self'}
+														legacyBehavior
 													>
-														{Icon && (
-															<span className={styles.icon}>
-																<Icon />
-															</span>
-														)}
-														<span>{label}</span>
+														<a>
+															{Icon && (
+																<span className={styles.icon}>
+																	<Icon />
+																</span>
+															)}
+															<span>{label}</span>
+														</a>
 													</Link>
 												)}
 											</li>

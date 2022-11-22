@@ -137,8 +137,12 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={sequence.canonicalPath} className={linkClass}>
-						{sequence.title}
+					<Link
+						href={sequence.canonicalPath}
+						className={linkClass}
+						legacyBehavior
+					>
+						<a>{sequence.title}</a>
 					</Link>
 				</p>
 			),
@@ -160,8 +164,12 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={collection.canonicalPath} className={linkClass}>
-						{collection.title}
+					<Link
+						href={collection.canonicalPath}
+						className={linkClass}
+						legacyBehavior
+					>
+						<a>{collection.title}</a>
 					</Link>
 				</p>
 			),
@@ -178,8 +186,12 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={sponsor.canonicalPath} className={linkClass}>
-						{sponsor.title}
+					<Link
+						href={sponsor.canonicalPath}
+						className={linkClass}
+						legacyBehavior
+					>
+						<a>{sponsor.title}</a>
 					</Link>
 				</p>
 			),
@@ -239,9 +251,11 @@ export function Recording({
 		title: string,
 		href: string
 	) => (
-		<Link href={href} className={styles.hat}>
-			<SequenceTypeLockup contentType={sequenceContentType} unpadded />
-			<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
+		<Link href={href} className={styles.hat} legacyBehavior>
+			<a>
+				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
+				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
+			</a>
 		</Link>
 	);
 
@@ -309,9 +323,18 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 			{isBibleChapter && recording.collection ? (
-				<Link href={recording.collection.canonicalPath} className={styles.hat}>
-					<BibleVersionTypeLockup label={recording.collection.title} unpadded />
-					<h4>{recording.sequence?.title}</h4>
+				<Link
+					href={recording.collection.canonicalPath}
+					className={styles.hat}
+					legacyBehavior
+				>
+					<a>
+						<BibleVersionTypeLockup
+							label={recording.collection.title}
+							unpadded
+						/>
+						<h4>{recording.sequence?.title}</h4>
+					</a>
 				</Link>
 			) : overrideSequence ? (
 				makeHat(
