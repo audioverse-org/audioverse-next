@@ -23,8 +23,10 @@ const ActiveLink = ({
 	const classes = isActive ? clsx(className, activeClassName) : className;
 
 	return (
-		<Link className={classes || ''} {...props} legacyBehavior>
-			<a aria-current={isActive ? 'page' : false}>{children}</a>
+		<Link {...props} legacyBehavior>
+			<a className={classes || ''} aria-current={isActive ? 'page' : false}>
+				{children}
+			</a>
 		</Link>
 	);
 };
