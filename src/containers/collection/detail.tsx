@@ -84,12 +84,8 @@ function CollectionDetail({
 				defaultMessage: 'Sponsor',
 			}),
 			definition: (
-				<Link
-					href={sponsor.canonicalPath}
-					className="decorated hover--salmon"
-					legacyBehavior
-				>
-					<a>{sponsor.title}</a>
+				<Link href={sponsor.canonicalPath} legacyBehavior>
+					<a className="decorated hover--salmon">{sponsor.title}</a>
 				</Link>
 			),
 		});

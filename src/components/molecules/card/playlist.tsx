@@ -28,12 +28,8 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 	const theme = 'playlistItem';
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link
-				href={makePlaylistDetailRoute(languageRoute, id)}
-				className={styles.container}
-				legacyBehavior
-			>
-				<a>
+			<Link href={makePlaylistDetailRoute(languageRoute, id)} legacyBehavior>
+				<a className={styles.container}>
 					<div className={styles.stretch}>
 						<TypeLockup
 							Icon={ListIcon}

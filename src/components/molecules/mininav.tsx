@@ -45,8 +45,8 @@ export default function Mininav({
 						key={id}
 						className={clsx(isActive && styles.miniNavActive)}
 					>
-						<Link href={url} onClick={onClick} legacyBehavior>
-							<a>{label}</a>
+						<Link href={url} legacyBehavior>
+							<a onClick={onClick}>{label}</a>
 						</Link>
 					</Heading6>
 				) : (

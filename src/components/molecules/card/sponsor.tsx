@@ -32,8 +32,8 @@ export default function CardSponsor({
 
 	return (
 		<Card>
-			<Link href={canonicalPath} className={styles.container} legacyBehavior>
-				<a>
+			<Link href={canonicalPath} legacyBehavior>
+				<a className={styles.container}>
 					<TypeLockup
 						Icon={UserPlusIcon}
 						label={intl.formatMessage({

@@ -58,8 +58,8 @@ export default function Button({
 		</>
 	);
 	return href ? (
-		<Link href={href} {..._props} legacyBehavior>
-			<a>{inner}</a>
+		<Link href={href} legacyBehavior>
+			<a {..._props}>{inner}</a>
 		</Link>
 	) : (
 		<button {..._props}>{inner}</button>

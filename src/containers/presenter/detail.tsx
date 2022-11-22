@@ -85,10 +85,9 @@ function PresenterDetail({
 					href={website}
 					target="_blank"
 					rel="noreferrer noopener"
-					className="decorated"
 					legacyBehavior
 				>
-					<a>{website}</a>
+					<a className="decorated">{website}</a>
 				</Link>
 			),
 		});

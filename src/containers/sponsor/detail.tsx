@@ -75,12 +75,11 @@ function SponsorDetail({ sponsor }: Must<SponsorDetailProps>): JSX.Element {
 			definition: (
 				<Link
 					href={website}
-					className="decorated"
 					target="_blank"
 					rel="nofollow noreferrer"
 					legacyBehavior
 				>
-					<a>{website}</a>
+					<a className="decorated">{website}</a>
 				</Link>
 			),
 		});

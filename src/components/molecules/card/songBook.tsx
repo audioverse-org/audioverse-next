@@ -38,12 +38,13 @@ export default function CardSongBook({
 
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link
-				href={makeBibleMusicRoute(languageRoute, book)}
-				className={clsx(styles.container, isSubHovered && styles.otherHovered)}
-				legacyBehavior
-			>
-				<a>
+			<Link href={makeBibleMusicRoute(languageRoute, book)} legacyBehavior>
+				<a
+					className={clsx(
+						styles.container,
+						isSubHovered && styles.otherHovered
+					)}
+				>
 					<SequenceTypeLockup contentType={SequenceContentType.MusicAlbum} />
 					<Heading2 sans className={styles.header}>
 						{startCase(book)}

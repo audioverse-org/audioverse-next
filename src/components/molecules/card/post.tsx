@@ -35,12 +35,8 @@ export default function CardPost({
 	);
 	return (
 		<Card>
-			<Link
-				href={post.canonicalPath}
-				className={styles.container}
-				legacyBehavior
-			>
-				<a>
+			<Link href={post.canonicalPath} legacyBehavior>
+				<a className={styles.container}>
 					{alternate && (
 						<div className={styles.type}>
 							<TypeLockup

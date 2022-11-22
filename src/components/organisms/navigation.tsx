@@ -154,10 +154,9 @@ const Navigation = ({
 							) : (
 								<Link
 									href={makeLoginRoute(languageRoute, router.asPath)}
-									className="decorated"
 									legacyBehavior
 								>
-									<a>
+									<a className="decorated">
 										<span className={styles.accountAvatar}>
 											<IconUser />
 										</span>
@@ -207,7 +206,6 @@ const Navigation = ({
 												) : (
 													<Link
 														href={href as string}
-														className={styles.navLink}
 														onClick={
 															onClick
 																? () =>
@@ -219,7 +217,7 @@ const Navigation = ({
 														target={isTargetBlank ? '_blank' : '_self'}
 														legacyBehavior
 													>
-														<a>
+														<a className={styles.navLink}>
 															{Icon && (
 																<span className={styles.icon}>
 																	<Icon />

@@ -34,8 +34,8 @@ export default function LinkButton({
 			{children}
 		</div>
 	) : (
-		<Link href={href} className={className} legacyBehavior>
-			<a>{children}</a>
+		<Link href={href} legacyBehavior>
+			<a className={className}>{children}</a>
 		</Link>
 	);
 }

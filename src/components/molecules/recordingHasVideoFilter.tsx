@@ -40,15 +40,13 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 		>
 			<div className={styles.dropdownContainer}>
 				<div className={styles.segmentedControlWrapper}>
-					<Link
-						href={makeRoute(language, 'all', 1)}
-						className={clsx(
-							styles.segmentedControl,
-							filter === 'all' && styles.segmentedControlActive
-						)}
-						legacyBehavior
-					>
-						<a>
+					<Link href={makeRoute(language, 'all', 1)} legacyBehavior>
+						<a
+							className={clsx(
+								styles.segmentedControl,
+								filter === 'all' && styles.segmentedControlActive
+							)}
+						>
 							<FormattedMessage
 								id="recordingHasVideoFilter__filterAll"
 								defaultMessage="All"
@@ -56,15 +54,13 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							/>
 						</a>
 					</Link>
-					<Link
-						href={makeRoute(language, 'video', 1)}
-						className={clsx(
-							styles.segmentedControl,
-							filter === 'video' && styles.segmentedControlActive
-						)}
-						legacyBehavior
-					>
-						<a>
+					<Link href={makeRoute(language, 'video', 1)} legacyBehavior>
+						<a
+							className={clsx(
+								styles.segmentedControl,
+								filter === 'video' && styles.segmentedControlActive
+							)}
+						>
 							<FormattedMessage
 								id="recordingHasVideoFilter__filterVideo"
 								defaultMessage="Video"
@@ -72,15 +68,13 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							/>
 						</a>
 					</Link>
-					<Link
-						href={makeRoute(language, 'audio', 1)}
-						className={clsx(
-							styles.segmentedControl,
-							filter === 'audio' && styles.segmentedControlActive
-						)}
-						legacyBehavior
-					>
-						<a>
+					<Link href={makeRoute(language, 'audio', 1)} legacyBehavior>
+						<a
+							className={clsx(
+								styles.segmentedControl,
+								filter === 'audio' && styles.segmentedControlActive
+							)}
+						>
 							<FormattedMessage
 								id="recordingHasVideoFilter__filterAudio"
 								defaultMessage="Audio only"

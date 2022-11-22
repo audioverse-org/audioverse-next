@@ -11,8 +11,8 @@ const Header = (): JSX.Element => {
 	return (
 		<header className={styles.header}>
 			<h1>
-				<Link href={`/${languageRoute}`} className={styles.link} legacyBehavior>
-					<a>
+				<Link href={`/${languageRoute}`} legacyBehavior>
+					<a className={styles.link}>
 						<Image
 							src="/img/logo.svg"
 							/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */

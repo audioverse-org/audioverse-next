@@ -69,16 +69,14 @@ export default function CardCollection({
 	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
 	return (
 		<Card>
-			<Link
-				href={canonicalPath}
-				className={clsx(
-					styles.container,
-					isBibleVersion && styles.bibleVersion,
-					(isHovered || isSubHovered) && styles.otherHovered
-				)}
-				legacyBehavior
-			>
-				<a>
+			<Link href={canonicalPath} legacyBehavior>
+				<a
+					className={clsx(
+						styles.container,
+						isBibleVersion && styles.bibleVersion,
+						(isHovered || isSubHovered) && styles.otherHovered
+					)}
+				>
 					<CollectionTypeLockup contentType={contentType} />
 					{heroImage}
 					{!!(startDate && endDate) && !isBibleVersion && (

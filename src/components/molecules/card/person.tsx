@@ -27,8 +27,8 @@ export default function CardPerson({
 	const { canonicalPath, image, name, recordings } = person;
 	return (
 		<Card>
-			<Link href={canonicalPath} className={styles.container} legacyBehavior>
-				<a>
+			<Link href={canonicalPath} legacyBehavior>
+				<a className={styles.container}>
 					<div className={styles.stretch}>
 						<PersonTypeLockup />
 						<Heading2 unpadded sans className={styles.title}>

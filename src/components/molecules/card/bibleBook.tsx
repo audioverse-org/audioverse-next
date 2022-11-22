@@ -70,8 +70,8 @@ export default function CardBibleBook({
 					{inner}
 				</div>
 			) : (
-				<Link href={linkUrl} className={styles.container} legacyBehavior>
-					<a>{inner}</a>
+				<Link href={linkUrl} legacyBehavior>
+					<a className={styles.container}>{inner}</a>
 				</Link>
 			)}
 		</Card>
