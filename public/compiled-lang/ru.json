@@ -1357,16 +1357,16 @@
       "value": "История"
     }
   ],
-  "header__navItemLibrary-playlists": [
-    {
-      "type": 0,
-      "value": "Списки воспроизведений"
-    }
-  ],
   "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "Сохранено"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "Списки воспроизведений"
     }
   ],
   "header__navItemMore": [
@@ -1947,6 +1947,12 @@
       "value": "История"
     }
   ],
+  "libraryNav__listenLater": [
+    {
+      "type": 0,
+      "value": "Сохранено"
+    }
+  ],
   "libraryNav__mediaType": [
     {
       "type": 0,
@@ -2005,12 +2011,6 @@
     {
       "type": 0,
       "value": "Списки воспроизведений"
-    }
-  ],
-  "libraryNav__listenLater": [
-    {
-      "type": 0,
-      "value": "Сохранено"
     }
   ],
   "libraryNav__sort": [

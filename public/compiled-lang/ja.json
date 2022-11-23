@@ -1365,16 +1365,16 @@
       "value": "履歴"
     }
   ],
-  "header__navItemLibrary-playlists": [
-    {
-      "type": 0,
-      "value": "プレイリスト"
-    }
-  ],
   "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "図書に保存"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "プレイリスト"
     }
   ],
   "header__navItemMore": [
@@ -1951,6 +1951,12 @@
       "value": "履歴"
     }
   ],
+  "libraryNav__listenLater": [
+    {
+      "type": 0,
+      "value": "図書に保存"
+    }
+  ],
   "libraryNav__mediaType": [
     {
       "type": 0,
@@ -2009,12 +2015,6 @@
     {
       "type": 0,
       "value": "プレイリスト"
-    }
-  ],
-  "libraryNav__listenLater": [
-    {
-      "type": 0,
-      "value": "図書に保存"
     }
   ],
   "libraryNav__sort": [
