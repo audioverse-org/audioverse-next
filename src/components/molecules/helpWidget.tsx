@@ -76,6 +76,7 @@ export default function HelpWidget(): JSX.Element {
 				url,
 				title: document.title,
 			});
+			doBeacon('suggest');
 		};
 		router.events.on('routeChangeComplete', listener);
 		return () => {

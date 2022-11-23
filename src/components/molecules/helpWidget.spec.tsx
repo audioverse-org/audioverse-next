@@ -1,5 +1,5 @@
 import { act, screen, waitFor } from '@testing-library/react';
-import { __loadRouter } from 'next/router';
+import { __loadRouter, __mockedRouter } from 'next/router';
 import Script from 'next/script';
 
 import HelpWidget from '@components/molecules/helpWidget';
@@ -10,7 +10,7 @@ import { buildLoader } from '@lib/test/buildLoader';
 
 jest.mock('next/script');
 
-const mockBeacon = jest.fn() as jest.Mock;
+const mockBeacon = jest.fn();
 
 const renderComponent = buildRenderer(HelpWidget);
 const runOnLoad = () => {
@@ -18,6 +18,25 @@ const runOnLoad = () => {
 	act(() => {
 		props.onLoad();
 	});
+};
+const awaitReady = async () => {
+	await runOnLoad();
+
+	await waitFor(() => {
+		expect(__mockedRouter.events.on).toBeCalled();
+	});
+};
+const getRouteListener = async () => {
+	const matches = filterByExpectation(
+		(__mockedRouter.events.on as jest.Mock).mock.calls,
+		expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
+	);
+
+	return matches[matches.length - 1][1];
+};
+const runRouteListener = async (route = 'the_url') => {
+	const listener = await getRouteListener();
+	listener(route);
 };
 
 const loadData = buildLoader(GetHelpWidgetDataDocument, {
@@ -48,13 +67,14 @@ const loadData = buildLoader(GetHelpWidgetDataDocument, {
 
 describe('help widget', () => {
 	beforeEach(() => {
+		__loadRouter();
 		window.Beacon = mockBeacon;
 	});
 
 	it('opens widget on click', async () => {
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		const button = await screen.findByRole('button');
 
@@ -68,7 +88,7 @@ describe('help widget', () => {
 	it('closes widget on second click', async () => {
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		const button = screen.getByRole('button');
 
@@ -88,7 +108,7 @@ describe('help widget', () => {
 	it('catches widget close event', async () => {
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		const button = screen.getByRole('button');
 		button.click();
@@ -114,7 +134,7 @@ describe('help widget', () => {
 	it('initializes beacon', async () => {
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		expect(mockBeacon).toBeCalledWith('init', expect.any(String));
 	});
@@ -122,7 +142,7 @@ describe('help widget', () => {
 	it('unsubscribes using specific callback', async () => {
 		const { unmount } = await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		unmount();
 
@@ -134,7 +154,7 @@ describe('help widget', () => {
 
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('identify', {
@@ -145,30 +165,13 @@ describe('help widget', () => {
 	});
 
 	it('registers page views with beacon', async () => {
-		const router = __loadRouter();
-
 		await renderComponent();
 
-		runOnLoad();
-
-		await screen.findByRole('button');
-
-		const calls = (router.events.on as jest.Mock).mock.calls;
-
-		await waitFor(() => {
-			expect(router.events.on).toBeCalled();
-		});
-
-		const matches = filterByExpectation(
-			calls,
-			expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
-		);
-
-		const callback = matches[matches.length - 1][1];
+		await awaitReady();
 
 		window.document.title = 'the_title';
 
-		callback('the_url');
+		await runRouteListener();
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('event', {
@@ -201,7 +204,7 @@ describe('help widget', () => {
 	it('translates strings', async () => {
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		expect(mockBeacon).toBeCalledWith(
 			'config',
@@ -237,7 +240,7 @@ describe('help widget', () => {
 
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith(
@@ -274,7 +277,7 @@ describe('help widget', () => {
 
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		expect(mockBeacon).not.toBeCalledWith('identify', expect.any(Object));
 	});
@@ -290,7 +293,7 @@ describe('help widget', () => {
 
 		await renderComponent();
 
-		runOnLoad();
+		await awaitReady();
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith(
@@ -300,5 +303,15 @@ describe('help widget', () => {
 				})
 			);
 		});
+	});
+
+	it('triggers suggest on page-viewed', async () => {
+		await renderComponent();
+
+		await awaitReady();
+
+		await runRouteListener();
+
+		expect(mockBeacon).toBeCalledWith('suggest');
 	});
 });
