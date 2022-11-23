@@ -70,6 +70,7 @@ function Profile(): JSX.Element {
 		[Language.Nordic]: 'Nordic',
 		[Language.Russian]: 'Русский',
 		[Language.Spanish]: 'Español',
+		[Language.Portuguese]: 'Português',
 	};
 
 	return (
