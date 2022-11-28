@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { MasonryProps, RenderComponentProps } from 'masonic';
+import { MasonryProps } from 'masonic';
 import React from 'react';
 import dynamic from 'next/dynamic';
 
@@ -12,26 +12,15 @@ const Masonry = dynamic<MasonryProps<unknown>>(
 	}
 );
 
-type Props<T> = {
-	items: T[];
-	render: React.ComponentType<RenderComponentProps<T>>;
-	className?: string;
-};
-
-export default function CardMasonry<T>({
-	className,
-	items,
-	render,
-}: Props<T>): JSX.Element {
+export default function CardMasonry<T>(props: MasonryProps<T>): JSX.Element {
 	return (
 		<Masonry
-			items={items}
-			render={
-				render as unknown as React.ComponentType<RenderComponentProps<unknown>>
-			}
-			className={clsx(styles.base, className)}
-			columnGutter={20}
-			columnWidth={300}
+			{...{
+				columnGutter: 20,
+				columnWidth: 300,
+				...(props as MasonryProps<unknown>),
+				className: clsx(styles.base, props.className),
+			}}
 		/>
 	);
 }
