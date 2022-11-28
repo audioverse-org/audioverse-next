@@ -1,13 +1,16 @@
 import clsx from 'clsx';
-import { RenderComponentProps } from 'masonic';
+import { MasonryProps, RenderComponentProps } from 'masonic';
 import React from 'react';
 import dynamic from 'next/dynamic';
 
 import styles from './cardMasonry.module.scss';
 
-const Masonry = dynamic(() => import('masonic').then((mod) => mod.Masonry), {
-	ssr: false,
-});
+const Masonry = dynamic<MasonryProps<unknown>>(
+	() => import('masonic').then((mod) => mod.Masonry),
+	{
+		ssr: false,
+	}
+);
 
 type Props<T> = {
 	items: T[];
