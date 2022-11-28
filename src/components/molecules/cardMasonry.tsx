@@ -1,8 +1,13 @@
 import clsx from 'clsx';
-import { Masonry, RenderComponentProps } from 'masonic';
-import React, { useEffect } from 'react';
+import { RenderComponentProps } from 'masonic';
+import React from 'react';
+import dynamic from 'next/dynamic';
 
 import styles from './cardMasonry.module.scss';
+
+const Masonry = dynamic(() => import('masonic').then((mod) => mod.Masonry), {
+	ssr: false,
+});
 
 type Props<T> = {
 	items: T[];
@@ -12,26 +17,18 @@ type Props<T> = {
 
 export default function CardMasonry<T>({
 	className,
-	...props
+	items,
+	render,
 }: Props<T>): JSX.Element {
-	// WORKAROUND
-	// https://github.com/jaredLunde/masonic/issues/123#issuecomment-1279883331
-	// https://github.com/vercel/next.js/discussions/35773#discussioncomment-3441844
-	const [showComponent, setShowComponent] = React.useState(false);
-	useEffect(() => {
-		setShowComponent(true);
-	}, []);
-
 	return (
-		<>
-			{showComponent && (
-				<Masonry
-					{...props}
-					className={clsx(styles.base, className)}
-					columnGutter={20}
-					columnWidth={300}
-				/>
-			)}
-		</>
+		<Masonry
+			items={items}
+			render={
+				render as unknown as React.ComponentType<RenderComponentProps<unknown>>
+			}
+			className={clsx(styles.base, className)}
+			columnGutter={20}
+			columnWidth={300}
+		/>
 	);
 }
