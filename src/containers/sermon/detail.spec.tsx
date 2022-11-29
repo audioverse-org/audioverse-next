@@ -1,5 +1,10 @@
 import { findByLabelText, waitFor } from '@testing-library/dom';
-import { getByLabelText, getByTestId, getByText } from '@testing-library/react';
+import {
+	act,
+	getByLabelText,
+	getByTestId,
+	getByText,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadQuery, __loadRouter } from 'next/router';
@@ -891,6 +896,8 @@ describe('sermon detail page', () => {
 		userEvent.click(getByText('Audio'));
 
 		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('does not mark audio pressed when video selected', async () => {
@@ -942,6 +949,8 @@ describe('sermon detail page', () => {
 		const player = result.getByLabelText('player');
 
 		expect(getByText(player, '0:00')).toBeInTheDocument();
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('hides transcript', async () => {
@@ -1025,6 +1034,8 @@ describe('sermon detail page', () => {
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('loads series video into miniplayer after loading detail video into portal', async () => {
@@ -1061,6 +1072,8 @@ describe('sermon detail page', () => {
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('starts at beginning when playing series recording', async () => {
@@ -1094,12 +1107,16 @@ describe('sermon detail page', () => {
 			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
 		});
 
+		const miniplayer = result.getByLabelText('miniplayer');
+
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		await waitFor(() => {
 			expect(getByText(player, '0:50')).toBeInTheDocument();
@@ -1110,8 +1127,6 @@ describe('sermon detail page', () => {
 		userEvent.click(getByLabelText(sidebar, 'play'));
 
 		expect(mockPlayer.currentTime).toBeCalledWith(0);
-
-		const miniplayer = result.getByLabelText('miniplayer');
 
 		await waitFor(() => {
 			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');

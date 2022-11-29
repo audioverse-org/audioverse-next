@@ -1,4 +1,5 @@
 import {
+	act,
 	findByLabelText,
 	findByTestId,
 	getByLabelText,
@@ -125,11 +126,13 @@ describe('player', () => {
 
 		const input = getByLabelText('progress');
 
-		ReactTestUtils.Simulate.input(input, {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(input, {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(617));
 	});
@@ -153,11 +156,13 @@ describe('player', () => {
 			},
 		});
 
-		ReactTestUtils.Simulate.input(getByLabelText('progress'), {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(getByLabelText('progress'), {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
@@ -173,7 +178,12 @@ describe('player', () => {
 
 		player.currentTime(75);
 
-		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		await waitFor(() =>
 			expect(getAllByLabelText('progress')[0]).toHaveValue('25')
@@ -187,11 +197,13 @@ describe('player', () => {
 
 		const input = getByLabelText('progress');
 
-		ReactTestUtils.Simulate.input(input, {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(input, {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(input).toHaveValue('50'));
 	});
@@ -220,10 +232,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		userEvent.click(getByLabelText(player, 'back 15 seconds'));
 
@@ -242,10 +256,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		userEvent.click(getByLabelText(player, 'forward 15 seconds'));
 
@@ -269,11 +285,13 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.input(getAllByLabelText('progress')[0], {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(getAllByLabelText('progress')[0], {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(mockPlayer.currentTime).toBeCalledWith(150));
 	});
@@ -334,11 +352,13 @@ describe('player', () => {
 			},
 		});
 
-		ReactTestUtils.Simulate.input(result.getByLabelText('progress'), {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(result.getByLabelText('progress'), {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
@@ -527,11 +547,13 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.input(getByLabelText(firstPlayer, 'progress'), {
-			target: {
-				value: 50,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(getByLabelText(firstPlayer, 'progress'), {
+				target: {
+					value: 50,
+				},
+			} as any);
+		});
 
 		expect(getByLabelText(secondPlayer, 'progress')).toHaveValue('0');
 	});
@@ -560,11 +582,13 @@ describe('player', () => {
 
 		const control = getByLabelText('Volume');
 
-		ReactTestUtils.Simulate.change(control, {
-			target: {
-				value: 70,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.change(control, {
+				target: {
+					value: 70,
+				},
+			} as any);
+		});
 
 		await waitFor(() => expect(playerMock.volume).toBeCalledWith(0.7));
 	});
@@ -655,10 +679,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(25);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		await waitFor(() => {
 			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('25');
@@ -677,11 +703,13 @@ describe('player', () => {
 
 		await findByLabelText(miniplayer, 'pause');
 
-		ReactTestUtils.Simulate.input(progressInput, {
-			target: {
-				value: 70,
-			},
-		} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.input(progressInput, {
+				target: {
+					value: 70,
+				},
+			} as any);
+		});
 
 		expect(mockPlayer.currentTime).toBeCalledWith(70);
 	});
@@ -874,6 +902,8 @@ describe('player', () => {
 		await waitFor(() => {
 			expect(getByLabelText(player, 'progress')).toBeInTheDocument();
 		});
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('shows progress when video not loaded yet', async () => {
@@ -1039,10 +1069,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		const player = result.getByLabelText('player');
 
@@ -1094,7 +1126,12 @@ describe('player', () => {
 
 		await waitFor(() => expect(videojs).toBeCalled());
 
-		ReactTestUtils.Simulate.timeUpdate(getByTestId('video-element'), {} as any);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		await waitFor(() =>
 			expect(getAllByLabelText('progress')[0]).toHaveValue('0')
@@ -1144,10 +1181,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(50);
 
-		ReactTestUtils.Simulate.timeUpdate(
-			result.getByTestId('video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.timeUpdate(
+				result.getByTestId('video-element'),
+				{} as any
+			);
+		});
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
