@@ -9,6 +9,7 @@ import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import Reset from '@pages/[language]/account/reset';
+import loadControlledPromise from '@lib/test/loadControlledPromise';
 
 const renderPage = buildRenderer(Reset);
 
@@ -182,18 +183,33 @@ describe('password reset page', () => {
 	});
 
 	it('does not display success message if not successful', async () => {
-		loadResetPasswordResponse({
-			success: false,
-			errors: [],
-		});
+		loadResetPasswordResponse();
+
+		const fetchMock = when(fetchApi).calledWith(
+			ResetPasswordDocument,
+			expect.anything()
+		);
+
+		const { resolve } = loadControlledPromise(fetchMock);
 
 		const { getByPlaceholderText, getByText, queryByText } = await renderPage();
+
+		await waitFor(() => expect(getByText('Login')).toBeEnabled());
 
 		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
 		userEvent.click(getByText('Login'));
 
-		await sleep();
+		await waitFor(() => expect(getByText('Login')).toBeDisabled());
+
+		resolve({
+			userReset: {
+				success: false,
+				errors: [],
+			},
+		});
+
+		await waitFor(() => expect(getByText('Login')).toBeEnabled());
 
 		expect(
 			queryByText('Your password was successfully changed')
