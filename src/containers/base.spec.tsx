@@ -1,12 +1,19 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import MyApp from '@pages/_app';
+import getIntlMessages from '@lib/getIntlMessages';
 
-const renderApp = (component: any, props: any) => {
-	return render(<MyApp Component={component} pageProps={props} />);
+const renderApp = async (component: any, props: any) => {
+	const view = render(<MyApp Component={component} pageProps={props} />);
+
+	await act(async () => {
+		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+	});
+
+	return view;
 };
 
 describe('app', () => {
@@ -38,19 +45,22 @@ describe('app', () => {
 
 		await queryClient.prefetchQuery('myQuery', async () => 'myResult');
 
-		const spy = jest.fn();
+		let initial: any;
 
-		const { getByText } = await renderApp(
+		await renderApp(
 			() => {
-				const { data: myQuery } = useQuery('myQuery', spy);
-				return <>{myQuery}</>;
+				const { data: myQuery } = useQuery('myQuery', jest.fn());
+
+				if (initial === undefined) {
+					initial = myQuery === undefined ? 'undefined' : myQuery;
+				}
 			},
 			{
 				dehydratedState: dehydrate(queryClient),
 			}
 		);
 
-		expect(getByText('myResult')).toBeInTheDocument();
+		expect(initial).toEqual('myResult');
 	});
 
 	it('includes sidebar', async () => {

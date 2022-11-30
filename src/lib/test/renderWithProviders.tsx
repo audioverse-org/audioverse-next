@@ -33,7 +33,6 @@ export default async function renderWithProviders(
 
 	await act(async () => {
 		await jest.mocked(getIntlMessages).mock.results[0]?.value;
-		// await new Promise((resolve) => setTimeout(resolve, 0));
 	});
 
 	return {
