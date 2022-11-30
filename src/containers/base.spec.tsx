@@ -26,12 +26,7 @@ describe('app', () => {
 	});
 
 	it('sets title', async () => {
-		await render(
-			<MyApp
-				Component={(() => null) as unknown as typeof React.Component}
-				pageProps={{}}
-			/>
-		);
+		await renderApp(() => null, {});
 
 		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
 
