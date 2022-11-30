@@ -9,7 +9,6 @@ import {
 	RegisterDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
-import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 
@@ -259,7 +258,7 @@ describe('register page', () => {
 
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
 
-		await sleep();
+		await screen.findByText(/300/);
 
 		expect(fetchApi).not.toBeCalledWith(
 			RegisterSocialDocument,

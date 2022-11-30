@@ -88,6 +88,7 @@ describe('password reset page', () => {
 		userEvent.type(getByPlaceholderText('Confirm new password'), 'pass_two');
 		userEvent.click(getByText('Login'));
 
+		// TODO: don't use sleep
 		await sleep();
 
 		expect(fetchApi).not.toBeCalled();
