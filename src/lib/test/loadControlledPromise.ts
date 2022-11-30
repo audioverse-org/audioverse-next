@@ -1,15 +1,28 @@
-export default function loadControlledPromise(mock: any) {
+export const createControlledPromise = () => {
 	let resolve: (value?: unknown) => void = () => {
 		throw new Error('called resolve before definition');
 	};
+
 	let reject: (value?: unknown) => void = () => {
 		throw new Error('called reject before definition');
 	};
-	const response = new Promise((res, rej) => {
+
+	const promise = new Promise((res, rej) => {
 		resolve = res;
 		reject = rej;
 	});
-	jest.mocked(mock).mockReturnValue(response);
+
+	return {
+		resolve,
+		reject,
+		promise,
+	};
+};
+
+export default function loadControlledPromise(mock: any) {
+	const { resolve, reject, promise } = createControlledPromise();
+
+	jest.mocked(mock).mockReturnValue(promise);
 
 	return { resolve, reject };
 }
