@@ -1,15 +1,13 @@
 import {
+	act,
 	findByLabelText,
 	findByTestId,
-	queryByTestId,
-	waitFor,
-} from '@testing-library/dom';
-import {
-	act,
 	getByLabelText,
 	getByTestId,
+	queryByTestId,
 	render,
 	screen,
+	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';

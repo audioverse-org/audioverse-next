@@ -1,9 +1,10 @@
-import { findByLabelText, waitFor } from '@testing-library/dom';
 import {
 	act,
+	findByLabelText,
 	getByLabelText,
 	getByTestId,
 	getByText,
+	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
