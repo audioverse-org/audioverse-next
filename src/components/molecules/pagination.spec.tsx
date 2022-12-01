@@ -75,9 +75,6 @@ describe('pagination component', () => {
 
 		const link = (await screen.findByText('Next')) as HTMLAnchorElement;
 
-		console.log({ link });
-		console.log(link.outerHTML);
-
 		expect(link.href).toContain('/en/presenters/page/2');
 	});
 });

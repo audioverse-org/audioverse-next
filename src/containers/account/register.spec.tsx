@@ -120,9 +120,6 @@ describe('register page', () => {
 
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
 		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
-
-		console.log(getByText('Sign up').outerHTML);
-
 		userEvent.click(getByText('Sign up'));
 
 		expect(await screen.findByText('the_error_message')).toBeInTheDocument();

@@ -4,7 +4,13 @@ import {
 	queryByTestId,
 	waitFor,
 } from '@testing-library/dom';
-import { getByLabelText, getByTestId, render } from '@testing-library/react';
+import {
+	act,
+	getByLabelText,
+	getByTestId,
+	render,
+	screen,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -19,6 +25,7 @@ import {
 } from '@lib/generated/graphql';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
+import getIntlMessages from '@lib/getIntlMessages';
 
 const sequence = {
 	id: 'the_sequence_id',
@@ -124,13 +131,17 @@ const renderApp = async (
 		asPath: '',
 	});
 
-	const result = await render(
+	const result = render(
 		<MyApp
 			Component={Page as any}
 			pageProps={{ includePlayer, recording } as any}
 		/>,
 		{ container }
 	);
+
+	await act(async () => {
+		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+	});
 
 	return {
 		...result,
@@ -163,6 +174,10 @@ describe('app media playback', () => {
 		await result.rerender(true);
 
 		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+
+		userEvent.click(screen.getByLabelText('pause'));
+
+		await screen.findByLabelText('play');
 	});
 
 	it('hides controls when video in miniplayer', async () => {
@@ -222,10 +237,12 @@ describe('app media playback', () => {
 
 		const portal = result.getByTestId('portal');
 
-		ReactTestUtils.Simulate.pause(
-			await findByTestId(portal, 'video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.pause(
+				await findByTestId(portal, 'video-element'),
+				{} as any
+			);
+		});
 
 		await findByLabelText(miniplayer, 'play');
 	});
@@ -249,10 +266,12 @@ describe('app media playback', () => {
 			expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
 		});
 
-		ReactTestUtils.Simulate.play(
-			getByTestId(portal, 'video-element'),
-			{} as any
-		);
+		await act(async () => {
+			ReactTestUtils.Simulate.play(
+				getByTestId(portal, 'video-element'),
+				{} as any
+			);
+		});
 
 		await findByLabelText(miniplayer, 'pause');
 	});
@@ -265,6 +284,10 @@ describe('app media playback', () => {
 		});
 
 		userEvent.click(result.getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
 
 		const miniplayer = result.getByLabelText('miniplayer');
 
@@ -309,6 +332,10 @@ describe('app media playback', () => {
 
 		userEvent.click(result.getByText('Audio'));
 
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
+
 		const miniplayer = result.getByLabelText('miniplayer');
 		const pane = miniplayer.querySelector('#mini-player');
 
@@ -331,6 +358,10 @@ describe('app media playback', () => {
 		});
 
 		userEvent.click(result.getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
 
 		expect(videojs).not.toBeCalledWith(
 			expect.anything(),
