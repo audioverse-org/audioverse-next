@@ -1,4 +1,4 @@
-import { findByLabelText, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import Cookie from 'js-cookie';

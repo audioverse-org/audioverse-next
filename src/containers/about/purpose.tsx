@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from "next/legacy/image";
+import Image from 'next/legacy/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 

@@ -3,7 +3,6 @@ import {
 	render,
 	RenderOptions,
 	RenderResult,
-	waitFor,
 } from '@testing-library/react';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
