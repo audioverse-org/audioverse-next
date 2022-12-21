@@ -224,8 +224,6 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 					</div>
 				</form>
 			</ContentWidthLimiter>
-
-				
 		</>
 	);
 }
