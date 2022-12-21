@@ -98,7 +98,16 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 			<p className={styles.intro}>
 				<FormattedMessage
 					id="contact__intro"
-					defaultMessage="We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, please use the form with us and we’ll get back to you as quickly as possible."
+					defaultMessage="We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, use the form below or write us at our mailing address. We’ll get back with you as quickly as possible."
+				/>
+			</p>
+			<p>
+				<FormattedMessage
+					id="contact__mailingAddress"
+					defaultMessage="AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
+					values={{
+						br: <br />,
+					}}
 				/>
 			</p>
 			<ContentWidthLimiter>
@@ -215,6 +224,8 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 					</div>
 				</form>
 			</ContentWidthLimiter>
+
+				
 		</>
 	);
 }
