@@ -579,6 +579,11 @@ type Collection implements Node & UniformResourceLocatable {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -657,6 +662,7 @@ type Collection implements Node & UniformResourceLocatable {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequences(
@@ -885,6 +891,11 @@ type DistributionAgreement implements Node {
 		contentScreeningStatus: RecordingContentScreeningStatus
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -963,6 +974,7 @@ type DistributionAgreement implements Node {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sponsor: Sponsor
@@ -1259,6 +1271,7 @@ enum Language {
 	GERMAN
 	JAPANESE
 	NORDIC
+	PORTUGUESE
 	RUSSIAN
 	SPANISH
 }
@@ -2570,6 +2583,11 @@ type Person implements Node & UniformResourceLocatable {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -2643,6 +2661,7 @@ type Person implements Node & UniformResourceLocatable {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 
 		"""
@@ -2826,6 +2845,23 @@ input PlaybackSessionAdvanceInput {
 	positionPercentage: Float!
 }
 
+type PopularPerson {
+	person: Person!
+	weight: Float!
+}
+
+type PopularPersonConnection {
+	aggregate: Aggregate
+	edges: [PopularPersonEdge!]
+	nodes: [PopularPerson!]
+	pageInfo: PageInfo!
+}
+
+type PopularPersonEdge {
+	cursor: String!
+	node: PopularPerson!
+}
+
 type PopularRecording {
 	recording: Recording!
 	weight: Float!
@@ -2940,6 +2976,11 @@ type Query {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -3023,6 +3064,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	audiobooks(
@@ -3242,6 +3284,40 @@ type Query {
 		"""
 		offset: Int
 	): BlogPostConnection!
+	featuredPersons(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+		collectionId: ID
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Whether to include unpublished persons. Requires `EDITOR` role.
+		"""
+		includeUnpublished: Boolean
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+		role: PersonsRoleField
+		search: String
+		sequenceId: ID
+		sponsorId: ID
+		sponsorIds: [ID!]
+		startsWith: String
+
+		"""
+		Filters persons by those with published recordings of any of the provided content types.
+		"""
+		withContentTypes: [RecordingContentType!]
+	): PersonConnection!
 	featuredRecordings(
 		"""
 		Return the elements that come after the specified cursor.
@@ -3251,8 +3327,13 @@ type Query {
 		collectionId: ID
 		collectionIds: [ID!]
 		contentScreeningStatus: RecordingContentScreeningStatus
-		contentType: RecordingContentType
+		contentType: RecordingContentType = SERMON
 		distributionAgreementId: ID
+
+		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
 
 		"""
 		Return up to the first `n` elements from the list.
@@ -3332,11 +3413,67 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
-		@deprecated(
-			reason: "`featuredRecordings` is replaced by `recordings(isFeatured: true)`"
-		)
+	featuredSequences(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+		collectionId: ID
+		collectionIds: [ID!]
+		contentType: SequenceContentType
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Whether to include unpublished sequences. Requires `EDITOR` role.
+		"""
+		includeUnpublished: Boolean
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+
+		"""
+		The sequence must be associated with one of the persons provided.
+		"""
+		persons: [RecordingPersonInput!]
+		search: String
+		sponsorId: ID
+		sponsorIds: [ID!]
+	): SequenceConnection!
+	featuredSponsors(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Whether to include unpublished sponsors. Requires `EDITOR` role.
+		"""
+		includeUnpublished: Boolean
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+		search: String
+		startsWith: String
+		withMusic: Boolean
+	): SponsorConnection!
 	license(id: ID!): License
 	licenses(
 		"""
@@ -3582,6 +3719,11 @@ type Query {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -3665,6 +3807,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	notificationChannels(
@@ -3765,6 +3908,40 @@ type Query {
 		"""
 		withContentTypes: [RecordingContentType!]
 	): PersonConnection!
+	popularPersons(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+		collectionId: ID
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Whether to include unpublished persons. Requires `EDITOR` role.
+		"""
+		includeUnpublished: Boolean
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+		role: PersonsRoleField
+		search: String
+		sequenceId: ID
+		sponsorId: ID
+		sponsorIds: [ID!]
+		startsWith: String
+
+		"""
+		Filters persons by those with published recordings of any of the provided content types.
+		"""
+		withContentTypes: [RecordingContentType!]
+	): PopularPersonConnection!
 	popularRecordings(
 		"""
 		Return the elements that come after the specified cursor.
@@ -3776,6 +3953,11 @@ type Query {
 		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
+
+		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
 
 		"""
 		Return up to the first `n` elements from the list.
@@ -3856,6 +4038,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): PopularRecordingConnection!
 	recording(
@@ -3893,6 +4076,11 @@ type Query {
 		contentScreeningStatus: RecordingContentScreeningStatus
 		contentType: RecordingContentType
 		distributionAgreementId: ID
+
+		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
 
 		"""
 		Return up to the first `n` elements from the list.
@@ -3978,6 +4166,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequence(id: ID!): Sequence
@@ -4066,6 +4255,11 @@ type Query {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -4149,6 +4343,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sponsor(id: ID!): Sponsor
@@ -4195,6 +4390,11 @@ type Query {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -4278,6 +4478,7 @@ type Query {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	story(id: ID!): Recording
@@ -4395,6 +4596,25 @@ type Query {
 		orderBy: [TestimoniesOrder!]
 	): TestimonyConnection!
 	testimony(id: ID!): Testimony
+	topic(id: ID!): Topic
+	topics(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+		language: Language!
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+		orderBy: [TopicsOrder!]
+	): TopicConnection!
 	user(id: ID!): User
 	users(
 		"""
@@ -4736,21 +4956,22 @@ enum RecordingContentScreeningStatus {
 	Awaiting final authorization (Screener consensus)
 	"""
 	APPROVED_PENDING_AUTHORIZATION
+		@deprecated(reason: "To be replaced by `PREAPPROVED`.")
 
 	"""
 	Awaiting screener consensus
 	"""
-	PENDING_CONSENSUS
+	PENDING_CONSENSUS @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting more evaluations
 	"""
-	PENDING_EVALUATIONS
+	PENDING_EVALUATIONS @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 
 	"""
 	Approved by pre-approval
@@ -4761,6 +4982,7 @@ enum RecordingContentScreeningStatus {
 	Awaiting final authorization (Pre-approved)
 	"""
 	PREAPPROVED_PENDING_AUTHORIZATION
+		@deprecated(reason: "To be replaced by `PREAPPROVED`.")
 
 	"""
 	Rejected by screener consensus
@@ -4839,12 +5061,12 @@ The legal screening statuses of a recording.
 enum RecordingLegalScreeningStatus {
 	ADMIN_OVERRIDE
 	APPROVED
-	PENDING
+	PENDING @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 	PREAPPROVED
 	REJECTED
 
@@ -4891,6 +5113,16 @@ type RecordingPlaybackSession {
 	"""
 	positionPercentage: Float!
 	updatedAt: DateTime!
+}
+
+"""
+The playback session status for a recording.
+"""
+enum RecordingPlaybackSessionStatus {
+	"""
+	The viewer has never started playing the recording.
+	"""
+	UNSTARTED
 }
 
 """
@@ -5119,12 +5351,12 @@ The technical screening statuses of a recording.
 enum RecordingTechnicalScreeningStatus {
 	ADMIN_OVERRIDE
 	APPROVED
-	PENDING
+	PENDING @deprecated(reason: "To be removed.")
 
 	"""
 	Awaiting re-evaluation
 	"""
-	PENDING_REEVALUATION
+	PENDING_REEVALUATION @deprecated(reason: "To be removed.")
 	REJECTED
 
 	"""
@@ -5339,6 +5571,11 @@ type Sequence implements Node & UniformResourceLocatable {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -5415,6 +5652,7 @@ type Sequence implements Node & UniformResourceLocatable {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 
@@ -5656,6 +5894,11 @@ type Sponsor implements Node & UniformResourceLocatable {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -5733,6 +5976,7 @@ type Sponsor implements Node & UniformResourceLocatable {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	sequences(
@@ -5903,6 +6147,11 @@ type Tag implements Node {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -5971,6 +6220,7 @@ type Tag implements Node {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 }
@@ -6471,6 +6721,7 @@ enum Timezone {
 	EUROPE_KALININGRAD
 	EUROPE_KIEV
 	EUROPE_KIROV
+	EUROPE_KYIV
 	EUROPE_LISBON
 	EUROPE_LJUBLJANA
 	EUROPE_LONDON
@@ -6582,6 +6833,99 @@ enum Timezone {
 	US_SAMOA
 }
 
+type Topic implements Node {
+	description: String!
+
+	"""
+	The combined duration of the topic's recordings in seconds.
+	"""
+	duration: Float!
+	hidingReason: String
+	id: ID!
+	isHidden: Boolean
+	items(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+	): TopicItemConnection!
+	language: Language!
+	parentTopic: Topic
+	subTopics(
+		"""
+		Return the elements that come after the specified cursor.
+		"""
+		after: String
+
+		"""
+		Return up to the first `n` elements from the list.
+		"""
+		first: Int
+
+		"""
+		Return the elements that come after the specified offset.
+		"""
+		offset: Int
+		orderBy: [TopicsOrder!]
+	): TopicConnection!
+	summary: String!
+	title: String!
+}
+
+type TopicConnection {
+	aggregate: Aggregate
+	edges: [TopicEdge!]
+	nodes: [Topic!]
+	pageInfo: PageInfo!
+}
+
+type TopicEdge {
+	cursor: String!
+	node: Topic!
+}
+
+union TopicEntityUnion = Recording | Sequence
+
+type TopicItem {
+	entity: TopicEntityUnion!
+}
+
+type TopicItemConnection {
+	aggregate: Aggregate
+	edges: [TopicItemEdge!]
+	nodes: [TopicItem!]
+	pageInfo: PageInfo!
+}
+
+type TopicItemEdge {
+	cursor: String!
+	node: TopicItem!
+}
+
+input TopicsOrder {
+	direction: OrderByDirection!
+	field: TopicsSortableField!
+}
+
+"""
+Properties by which topic connections can be ordered.
+"""
+enum TopicsSortableField {
+	FEATURED
+	ID
+	TITLE
+}
+
 type Transcript implements Node {
 	id: ID!
 	text: String!
@@ -6646,6 +6990,7 @@ type User implements Node {
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
+		hasIncompletePlaybackSession: Boolean
 		language: Language!
 
 		"""
@@ -6703,6 +7048,11 @@ type User implements Node {
 		collectionIds: [ID!]
 		contentScreeningStatus: RecordingContentScreeningStatus
 		distributionAgreementId: ID
+
+		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
 
 		"""
 		Return up to the first `n` elements from the list.
@@ -6783,6 +7133,7 @@ type User implements Node {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	favorites(
@@ -7239,6 +7590,11 @@ type UserPlaylist implements Node {
 		distributionAgreementId: ID
 
 		"""
+		The duration of the recording must fall within the range in seconds.
+		"""
+		duration: IntegerRangeInput
+
+		"""
 		Return up to the first `n` elements from the list.
 		"""
 		first: Int
@@ -7316,6 +7672,7 @@ type UserPlaylist implements Node {
 		"""
 		updatedDates: [DateRangeInput!]
 		viewerHasFavorited: Boolean
+		viewerPlaybackSessionStatus: RecordingPlaybackSessionStatus
 		websiteIds: [ID!]
 	): RecordingConnection!
 	summary: String!
@@ -7374,10 +7731,10 @@ enum UserRole {
 	COMMUNICATIONS
 	CONTENT_SCREENER
 	EDITOR
-	EQUIPMENT
+	EQUIPMENT @deprecated(reason: "No longer used.")
 	LEGAL_SCREENER
-	MEDIAMANAGER
-	STATS
+	MEDIAMANAGER @deprecated(reason: "No longer used.")
+	STATS @deprecated(reason: "No longer used.")
 	TECHNICAL_SCREENER
 }
 
