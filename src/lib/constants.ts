@@ -55,6 +55,11 @@ export const LANGUAGES: LanguageConfigurations = {
 		display_name: 'Scandinavia',
 		legacy_base_url: 'no',
 	},
+	PORTUGUESE: {
+		base_url: 'pt',
+		display_name: 'Português',
+		legacy_base_url: 'pt',
+	},
 };
 
 export const IS_DEVELOPMENT =

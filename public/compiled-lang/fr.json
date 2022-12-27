@@ -1349,16 +1349,16 @@
       "value": "Historique"
     }
   ],
-  "header__navItemLibrary-playlists": [
-    {
-      "type": 0,
-      "value": "Playlists"
-    }
-  ],
   "header__navItemLibrary-listenLater": [
     {
       "type": 0,
       "value": "Favoris"
+    }
+  ],
+  "header__navItemLibrary-playlists": [
+    {
+      "type": 0,
+      "value": "Playlists"
     }
   ],
   "header__navItemMore": [
@@ -1939,6 +1939,12 @@
       "value": "Historique"
     }
   ],
+  "libraryNav__listenLater": [
+    {
+      "type": 0,
+      "value": "Favoris"
+    }
+  ],
   "libraryNav__mediaType": [
     {
       "type": 0,
@@ -1997,12 +2003,6 @@
     {
       "type": 0,
       "value": "Playlists"
-    }
-  ],
-  "libraryNav__listenLater": [
-    {
-      "type": 0,
-      "value": "Favoris"
     }
   ],
   "libraryNav__sort": [
