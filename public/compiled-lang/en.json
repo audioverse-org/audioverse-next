@@ -1293,6 +1293,36 @@
       "value": "Doe"
     }
   ],
+  "contact__mailingAddress": [
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
+    }
+  ],
   "contact__messageLabel": [
     {
       "type": 0,
