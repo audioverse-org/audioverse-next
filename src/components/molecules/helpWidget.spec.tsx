@@ -7,25 +7,29 @@ import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 import { buildLoader } from '@lib/test/buildLoader';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('next/script');
 
 const mockBeacon = jest.fn();
 
 const renderComponent = buildRenderer(HelpWidget);
+
 const runOnLoad = () => {
 	const props = (Script as jest.Mock).mock.calls[0][0];
 	act(() => {
 		props.onLoad();
 	});
 };
+
 const awaitReady = async () => {
-	await runOnLoad();
+	runOnLoad();
 
 	await waitFor(() => {
 		expect(__mockedRouter.events.on).toBeCalled();
 	});
 };
+
 const getRouteListener = async () => {
 	const matches = filterByExpectation(
 		(__mockedRouter.events.on as jest.Mock).mock.calls,
@@ -34,6 +38,7 @@ const getRouteListener = async () => {
 
 	return matches[matches.length - 1][1];
 };
+
 const runRouteListener = async (route = 'the_url') => {
 	const listener = await getRouteListener();
 	listener(route);
@@ -78,7 +83,7 @@ describe('help widget', () => {
 
 		const button = await screen.findByRole('button');
 
-		button.click();
+		userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('open');
@@ -91,10 +96,18 @@ describe('help widget', () => {
 		await awaitReady();
 
 		const button = screen.getByRole('button');
-		button.click();
-		button.click();
 
-		expect(mockBeacon).toBeCalledWith('close');
+		userEvent.click(button);
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('open');
+		});
+
+		userEvent.click(button);
+
+		await waitFor(() => {
+			expect(mockBeacon).toBeCalledWith('close');
+		});
 	});
 
 	it('catches widget close event', async () => {
@@ -103,7 +116,8 @@ describe('help widget', () => {
 		await awaitReady();
 
 		const button = screen.getByRole('button');
-		button.click();
+
+		userEvent.click(button);
 
 		await waitFor(() => {
 			expect(mockBeacon).toBeCalledWith('on', 'close', expect.any(Function));
@@ -118,7 +132,7 @@ describe('help widget', () => {
 			matches[matches.length - 1][2]();
 		});
 
-		button.click();
+		userEvent.click(button);
 
 		expect(mockBeacon).not.toBeCalledWith('close');
 	});

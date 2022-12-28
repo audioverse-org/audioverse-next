@@ -5,14 +5,14 @@ import getIntlMessages from '@lib/getIntlMessages';
 import handleIntlError from '@lib/handleIntlError';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
+type Messages = ResolvedIntlConfig['messages'];
+
 const withIntl = <P extends Record<string, unknown>>(
 	Component: React.ComponentType<P>
 ): React.ComponentType<P> => {
 	function WithIntl(props: P) {
 		const language = useLanguageRoute();
-		const [messages, setMessages] = useState<ResolvedIntlConfig['messages']>(
-			{}
-		);
+		const [messages, setMessages] = useState<Messages>({});
 
 		React.useEffect(() => {
 			getIntlMessages(language).then(setMessages);

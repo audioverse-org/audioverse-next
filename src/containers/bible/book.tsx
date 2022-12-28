@@ -189,7 +189,7 @@ function BookInner({
 
 	return (
 		<Tease>
-			<Link href={makeBibleVersionRoute(languageRoute, id)}>
+			<Link href={makeBibleVersionRoute(languageRoute, id)} legacyBehavior>
 				<a className={styles.hat}>
 					<BibleVersionTypeLockup
 						unpadded={true}

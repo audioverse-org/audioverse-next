@@ -97,7 +97,7 @@ describe('presenter list page', () => {
 		expect(
 			getByText('the_person_surname, the_person_givenName').parentElement
 				?.parentElement
-		).toHaveAttribute('href', '/the_person_path');
+		).toHaveAttribute('href', 'the_person_path');
 	});
 
 	it('includes presenter images', async () => {

@@ -42,7 +42,10 @@ export default function Blog(): JSX.Element {
 						scrolling="no"
 						allow="payment"
 					/>
-					<Link href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html">
+					<Link
+						href="https://www.audioverse.org/en/blog/567/meat-in-due-season.html"
+						legacyBehavior
+					>
 						<a>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							<img

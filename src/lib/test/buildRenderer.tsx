@@ -36,7 +36,9 @@ export function buildRenderer<
 		const props_ = getProps
 			? await getProps(__mockedRouter.query)
 			: props || defaultProps;
+
 		const result = renderWithProviders(<Component {...props_} />, undefined);
+
 		return result as unknown as Promise<
 			RenderResult & { queryClient: QueryClient }
 		>;

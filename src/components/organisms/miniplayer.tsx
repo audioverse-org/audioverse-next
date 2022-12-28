@@ -79,7 +79,7 @@ export default function Miniplayer(): JSX.Element | null {
 				</div>
 			</div>
 			<div className={styles.meta}>
-				<Link href={recording.canonicalPath}>
+				<Link href={recording.canonicalPath} legacyBehavior>
 					<a className={styles.link}>
 						{sequenceLine}
 						<h4 className={styles.title}>{recording.title}</h4>

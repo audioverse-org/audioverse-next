@@ -152,7 +152,10 @@ const Navigation = ({
 									</span>
 								</>
 							) : (
-								<Link href={makeLoginRoute(languageRoute, router.asPath)}>
+								<Link
+									href={makeLoginRoute(languageRoute, router.asPath)}
+									legacyBehavior
+								>
 									<a className="decorated">
 										<span className={styles.accountAvatar}>
 											<IconUser />
@@ -201,19 +204,20 @@ const Navigation = ({
 												{isDivider ? (
 													<div className={styles.divider} />
 												) : (
-													<Link href={href as string}>
-														<a
-															className={styles.navLink}
-															onClick={
-																onClick
-																	? () =>
-																			onClick({
-																				popSubmenu: () => setSubmenu(''),
-																			})
-																	: undefined
-															}
-															target={isTargetBlank ? '_blank' : '_self'}
-														>
+													<Link
+														href={href as string}
+														onClick={
+															onClick
+																? () =>
+																		onClick({
+																			popSubmenu: () => setSubmenu(''),
+																		})
+																: undefined
+														}
+														target={isTargetBlank ? '_blank' : '_self'}
+														legacyBehavior
+													>
+														<a className={styles.navLink}>
 															{Icon && (
 																<span className={styles.icon}>
 																	<Icon />

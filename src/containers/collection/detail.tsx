@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -84,7 +84,7 @@ function CollectionDetail({
 				defaultMessage: 'Sponsor',
 			}),
 			definition: (
-				<Link href={sponsor.canonicalPath}>
+				<Link href={sponsor.canonicalPath} legacyBehavior>
 					<a className="decorated hover--salmon">{sponsor.title}</a>
 				</Link>
 			),

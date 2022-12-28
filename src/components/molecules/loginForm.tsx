@@ -216,6 +216,7 @@ export default function LoginForm({
 			>
 				<p>
 					{hasSentPasswordReset ? (
+						/* TODO: This may be a lie, since it appears this message is displayed before the mutation has resolved. If the mutation fails, we don't want to show this success message. */
 						<FormattedMessage
 							id="loginForm-reset__modalParagraphSent"
 							defaultMessage="Reset link sent. Check your email and use the link to reset your password."

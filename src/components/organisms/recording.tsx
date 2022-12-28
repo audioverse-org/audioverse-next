@@ -137,7 +137,7 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={sequence.canonicalPath}>
+					<Link href={sequence.canonicalPath} legacyBehavior>
 						<a className={linkClass}>{sequence.title}</a>
 					</Link>
 				</p>
@@ -160,7 +160,7 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={collection.canonicalPath}>
+					<Link href={collection.canonicalPath} legacyBehavior>
 						<a className={linkClass}>{collection.title}</a>
 					</Link>
 				</p>
@@ -178,7 +178,7 @@ export function Recording({
 			),
 			definition: (
 				<p>
-					<Link href={sponsor.canonicalPath}>
+					<Link href={sponsor.canonicalPath} legacyBehavior>
 						<a className={linkClass}>{sponsor.title}</a>
 					</Link>
 				</p>
@@ -239,7 +239,7 @@ export function Recording({
 		title: string,
 		href: string
 	) => (
-		<Link href={href}>
+		<Link href={href} legacyBehavior>
 			<a className={styles.hat}>
 				<SequenceTypeLockup contentType={sequenceContentType} unpadded />
 				<h4 className={clsx(audiobookHeadingStyle)}>{title}</h4>
@@ -311,7 +311,7 @@ export function Recording({
 				<meta property="og:image" content={imageWithFallback.url} />
 			</Head>
 			{isBibleChapter && recording.collection ? (
-				<Link href={recording.collection.canonicalPath}>
+				<Link href={recording.collection.canonicalPath} legacyBehavior>
 					<a className={styles.hat}>
 						<BibleVersionTypeLockup
 							label={recording.collection.title}

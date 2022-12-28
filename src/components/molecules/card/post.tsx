@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -35,7 +35,7 @@ export default function CardPost({
 	);
 	return (
 		<Card>
-			<Link href={post.canonicalPath}>
+			<Link href={post.canonicalPath} legacyBehavior>
 				<a className={styles.container}>
 					{alternate && (
 						<div className={styles.type}>

@@ -130,13 +130,13 @@ describe('collection detail page', () => {
 			.calledWith(GetCollectionDetailPathsDataDocument, expect.anything())
 			.mockResolvedValue({
 				collections: {
-					nodes: [{ canonicalPath: '/the_collection_path' }],
+					nodes: [{ canonicalPath: 'the_collection_path' }],
 				},
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/the_collection_path');
+		expect(paths).toContain('the_collection_path');
 	});
 
 	it('renders sponsor link', async () => {
@@ -146,7 +146,7 @@ describe('collection detail page', () => {
 
 		expect(getAllByText('the_sponsor_title')[1]).toHaveAttribute(
 			'href',
-			'/the_sponsor_path'
+			'the_sponsor_path'
 		);
 	});
 

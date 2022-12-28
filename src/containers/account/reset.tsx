@@ -28,7 +28,7 @@ function Reset(): JSX.Element {
 	const intl = useIntl();
 
 	const { mutate, isLoading } = useResetPasswordMutation({
-		onSuccess: (data) => {
+		onSuccess: async (data) => {
 			const errors = data.userReset.errors;
 			if (errors.length) {
 				setErrors(errors.map((e) => e.message));
@@ -40,6 +40,21 @@ function Reset(): JSX.Element {
 						description: 'password reset success message',
 					})
 				);
+				setIsLoggingIn(true);
+				try {
+					await login(email, password);
+					return router.push(makeDiscoverRoute(languageRoute));
+				} catch {
+					setErrors([
+						intl.formatMessage({
+							id: 'reset__errorGeneral',
+							defaultMessage:
+								'Something went wrong while trying to reset your password',
+							description: 'password reset general submission error',
+						}),
+					]);
+					setIsLoggingIn(false);
+				}
 			}
 		},
 		onError: ({ errors }: { errors?: Array<{ message: string }> }) => {
@@ -56,6 +71,7 @@ function Reset(): JSX.Element {
 				]);
 			}
 		},
+		onSettled: () => setIsLoggingIn(false),
 	});
 
 	const submit = (e: FormEvent<HTMLFormElement>) => {
@@ -81,28 +97,7 @@ function Reset(): JSX.Element {
 			]);
 			return;
 		}
-		mutate(
-			{ token, password },
-			{
-				onSuccess: async () => {
-					setIsLoggingIn(true);
-					try {
-						await login(email, password);
-						return router.push(makeDiscoverRoute(languageRoute));
-					} catch {
-						setErrors([
-							intl.formatMessage({
-								id: 'reset__errorGeneral',
-								defaultMessage:
-									'Something went wrong while trying to reset your password',
-								description: 'password reset general submission error',
-							}),
-						]);
-						setIsLoggingIn(false);
-					}
-				},
-			}
-		);
+		mutate({ token, password });
 	};
 
 	if (successMessage) {

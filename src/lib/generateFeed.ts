@@ -47,7 +47,7 @@ export async function generateFeed(
 			{
 				id: 'generatedFeed__copyright',
 				defaultMessage:
-					'This feed Copyright {year} AudioVerse.  Individual recordings are copyrighted by their respective owners.',
+					'This feed Copyright {year} AudioVerse. Individual recordings are copyrighted by their respective owners.',
 			},
 			{
 				year: new Date().getFullYear(),
