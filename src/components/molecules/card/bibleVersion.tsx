@@ -28,7 +28,7 @@ export default function CardBibleVersion({ version }: Props): JSX.Element {
 
 	return (
 		<Card>
-			<Link href={makeBibleVersionRoute(languageRoute, id)}>
+			<Link href={makeBibleVersionRoute(languageRoute, id)} legacyBehavior>
 				<a className={clsx(styles.column, isSubHovered && styles.otherHovered)}>
 					<BibleVersionTypeLockup />
 					<Heading2 className={styles.title}>{title}</Heading2>

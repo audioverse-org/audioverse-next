@@ -59,7 +59,7 @@ const PaginationEntry = ({
 			data-testid={isActive ? 'active' : ''}
 		>
 			{Number.isInteger(page) && makeRoute ? (
-				<Link href={makeRoute(languageRoute, +page)}>
+				<Link href={makeRoute(languageRoute, +page)} legacyBehavior>
 					<a>{label || page}</a>
 				</Link>
 			) : (

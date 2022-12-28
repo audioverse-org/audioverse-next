@@ -1,10 +1,10 @@
-import { findByLabelText, waitFor } from '@testing-library/dom';
 import {
 	act,
+	findByLabelText,
 	getByLabelText,
 	getByTestId,
 	getByText,
-	screen,
+	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
@@ -34,10 +34,6 @@ import SermonDetail, {
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
-jest.mock(
-	'next/link',
-	() => (props: any) => React.cloneElement(props.children, { href: props.href })
-);
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {
@@ -66,7 +62,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		id: 'the_sermon_id',
 		title: 'the_sermon_title',
 		contentType: RecordingContentType.Sermon,
-		canonicalPath: '',
+		canonicalPath: 'the_canonical_path',
 		language: Language.English,
 		speakers: [],
 		writers: [],
@@ -207,11 +203,11 @@ describe('sermon detail page', () => {
 
 		const { getByLabelText } = await renderPage();
 
-		await act(async () => {
-			userEvent.click(getByLabelText('play'));
-		});
+		userEvent.click(getByLabelText('play'));
 
-		expect(videojs).toBeCalled();
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
 	});
 
 	it('sets poster', async () => {
@@ -225,10 +221,12 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByLabelText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
-			userEvent.click(getByLabelText('play'));
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
 		});
 
 		expect(videojs).toBeCalledWith(
@@ -247,10 +245,12 @@ describe('sermon detail page', () => {
 			videoStreams: [{ url: 'video_url', mimeType: 'video_mimetype' }],
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			userEvent.click(getByText('Audio'));
+		userEvent.click(getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
 		});
 
 		const calls = (videojs as any as jest.Mock).mock.calls;
@@ -277,12 +277,14 @@ describe('sermon detail page', () => {
 			videoStreams: [],
 		});
 
-		await act(async () => {
-			const { getByAltText } = await renderPage();
+		const { getByAltText } = await renderPage();
 
-			const poster = getByAltText('the_sermon_title') as HTMLElement;
+		const poster = getByAltText('the_sermon_title') as HTMLElement;
 
-			userEvent.click(poster.parentElement as HTMLElement);
+		userEvent.click(poster.parentElement as HTMLElement);
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
 		});
 
 		const calls = (videojs as any as jest.Mock).mock.calls;
@@ -309,10 +311,12 @@ describe('sermon detail page', () => {
 			videoStreams: [],
 		});
 
-		await act(async () => {
-			const { getByLabelText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
-			userEvent.click(getByLabelText('play'));
+		userEvent.click(getByLabelText('play'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
 		});
 
 		const calls = (videojs as any as jest.Mock).mock.calls;
@@ -367,6 +371,7 @@ describe('sermon detail page', () => {
 			sponsor: {
 				title: 'the_title',
 				location: 'the_location',
+				canonicalPath: 'the_path',
 			},
 		});
 
@@ -403,6 +408,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 		});
 
@@ -480,6 +486,7 @@ describe('sermon detail page', () => {
 			copyrightYear: 1999,
 			sponsor: {
 				title: 'the_sponsor',
+				canonicalPath: 'the_path',
 			},
 		});
 
@@ -550,6 +557,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_path',
 				recordings: {
 					nodes: [
 						{
@@ -713,6 +721,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 			sequenceIndex: 1,
 		});
@@ -728,6 +737,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 			sequenceIndex: 2,
 			sequencePreviousRecording: {
@@ -747,6 +757,7 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 			},
 			sequenceIndex: 2,
 			sequenceNextRecording: {
@@ -785,37 +796,35 @@ describe('sermon detail page', () => {
 	});
 
 	it('sets paused to true when switching formats', async () => {
-		await act(async () => {
-			loadSermonDetailData({
-				id: 'another_id',
-				audioFiles: [
-					{
-						url: 'the_source_src',
-						mimeType: 'the_source_type',
-						filesize: 'the_source_size',
-					},
-				],
-				videoFiles: [
-					{
-						url: 'the_source_src',
-						mimeType: 'the_source_type',
-						filesize: 'the_source_size',
-					},
-				],
-			});
-
-			const result = await renderPage();
-
-			const player = result.getByLabelText('player');
-
-			userEvent.click(result.getByText('Audio'));
-			await findByLabelText(player, 'play');
-			userEvent.click(getByLabelText(player, 'play'));
-			userEvent.click(result.getByText('Video'));
-			userEvent.click(result.getByText('Audio'));
-			await findByLabelText(player, 'play');
-			expect(getByLabelText(player, 'play')).toBeInTheDocument();
+		loadSermonDetailData({
+			id: 'another_id',
+			audioFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
+			videoFiles: [
+				{
+					url: 'the_source_src',
+					mimeType: 'the_source_type',
+					filesize: 'the_source_size',
+				},
+			],
 		});
+
+		const result = await renderPage();
+
+		const player = result.getByLabelText('player');
+
+		userEvent.click(result.getByText('Audio'));
+		await findByLabelText(player, 'play');
+		userEvent.click(getByLabelText(player, 'play'));
+		userEvent.click(result.getByText('Video'));
+		userEvent.click(result.getByText('Audio'));
+		await findByLabelText(player, 'play');
+		expect(getByLabelText(player, 'play')).toBeInTheDocument();
 	});
 
 	it('displays both format buttons at the same time', async () => {
@@ -836,12 +845,10 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			expect(getByText('Audio')).toBeInTheDocument();
-			expect(getByText('Video')).toBeInTheDocument();
-		});
+		expect(getByText('Audio')).toBeInTheDocument();
+		expect(getByText('Video')).toBeInTheDocument();
 	});
 
 	it('marks video format as pressed', async () => {
@@ -862,11 +869,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			expect(getByText('Video')).toHaveAttribute('aria-pressed', 'true');
-		});
+		expect(getByText('Video')).toHaveAttribute('aria-pressed', 'true');
 	});
 
 	it('marks audio format as pressed', async () => {
@@ -887,13 +892,13 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			userEvent.click(getByText('Audio'));
+		userEvent.click(getByText('Audio'));
 
-			expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
-		});
+		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'true');
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('does not mark audio pressed when video selected', async () => {
@@ -914,11 +919,9 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
-		});
+		expect(getByText('Audio')).toHaveAttribute('aria-pressed', 'false');
 	});
 
 	it('only displays time once when viewing audio for video', async () => {
@@ -940,15 +943,15 @@ describe('sermon detail page', () => {
 			],
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			userEvent.click(result.getByText('Audio'));
+		userEvent.click(result.getByText('Audio'));
 
-			const player = result.getByLabelText('player');
+		const player = result.getByLabelText('player');
 
-			expect(getByText(player, '0:00')).toBeInTheDocument();
-		});
+		expect(getByText(player, '0:00')).toBeInTheDocument();
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('hides transcript', async () => {
@@ -958,11 +961,9 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const { queryByText } = await renderPage();
+		const { queryByText } = await renderPage();
 
-			expect(queryByText('the_transcript_text')).not.toBeInTheDocument();
-		});
+		expect(queryByText('the_transcript_text')).not.toBeInTheDocument();
 	});
 
 	it('uses hide verb for button', async () => {
@@ -972,19 +973,18 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const { getByText } = await renderPage();
+		const { getByText } = await renderPage();
 
-			userEvent.click(getByText('Read Transcript'));
+		userEvent.click(getByText('Read Transcript'));
 
-			expect(getByText('Hide Transcript')).toBeInTheDocument();
-		});
+		expect(getByText('Hide Transcript')).toBeInTheDocument();
 	});
 
 	it('displays play buttons for sequence recordings', async () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_sequence_path',
 				recordings: {
 					nodes: [
 						{
@@ -998,19 +998,18 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			expect(getByLabelText(sidebar, 'play')).toBeInTheDocument();
-		});
+		expect(getByLabelText(sidebar, 'play')).toBeInTheDocument();
 	});
 
 	it('loads series video into miniplayer on first click', async () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1025,25 +1024,26 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			userEvent.click(getByLabelText(sidebar, 'play'));
+		userEvent.click(getByLabelText(sidebar, 'play'));
 
-			const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = result.getByLabelText('miniplayer');
 
-			await waitFor(() => {
-				expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('loads series video into miniplayer after loading detail video into portal', async () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1073,6 +1073,8 @@ describe('sermon detail page', () => {
 		await waitFor(() => {
 			expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
 		});
+
+		await waitFor(() => expect(videojs).toBeCalled());
 	});
 
 	it('starts at beginning when playing series recording', async () => {
@@ -1082,6 +1084,7 @@ describe('sermon detail page', () => {
 			audioFiles: [{ url: 'audio_url', mimeType: 'audio_mimetype' }],
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'the_sequence_path',
 				recordings: {
 					nodes: [
 						{
@@ -1096,38 +1099,38 @@ describe('sermon detail page', () => {
 			},
 		});
 
+		const result = await renderPage();
+		const player = result.getByLabelText('player');
+
+		userEvent.click(getByLabelText(player, 'play'));
+
+		await waitFor(() => {
+			expect(getByLabelText(player, 'pause')).toBeInTheDocument();
+		});
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		mockPlayer.currentTime(50);
+
 		await act(async () => {
-			const result = await renderPage();
-			const player = result.getByLabelText('player');
-
-			userEvent.click(getByLabelText(player, 'play'));
-
-			await waitFor(() => {
-				expect(getByLabelText(player, 'pause')).toBeInTheDocument();
-			});
-
-			mockPlayer.currentTime(50);
-
 			ReactTestUtils.Simulate.timeUpdate(
 				result.getByTestId('video-element'),
 				{} as any
 			);
+		});
 
-			await waitFor(() => {
-				expect(getByText(player, '0:50')).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(getByText(player, '0:50')).toBeInTheDocument();
+		});
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			userEvent.click(getByLabelText(sidebar, 'play'));
+		userEvent.click(getByLabelText(sidebar, 'play'));
 
-			expect(mockPlayer.currentTime).toBeCalledWith(0);
+		expect(mockPlayer.currentTime).toBeCalledWith(0);
 
-			const miniplayer = result.getByLabelText('miniplayer');
-
-			await waitFor(() => {
-				expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
-			});
+		await waitFor(() => {
+			expect(getByLabelText(miniplayer, 'progress')).toHaveValue('0');
 		});
 	});
 
@@ -1180,6 +1183,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1194,14 +1198,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			await waitFor(() => {
-				expect(getByText(sidebar, '5m')).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(getByText(sidebar, '5m')).toBeInTheDocument();
 		});
 	});
 
@@ -1209,6 +1211,7 @@ describe('sermon detail page', () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1222,19 +1225,18 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			expect(getByLabelText(sidebar, 'Favorite')).toBeInTheDocument();
-		});
+		expect(getByLabelText(sidebar, 'Favorite')).toBeInTheDocument();
 	});
 
 	it('displays part info', async () => {
 		loadSermonDetailData({
 			sequence: {
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 				recordings: {
 					nodes: [
 						{
@@ -1256,14 +1258,12 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const sidebar = result.getByLabelText('series list');
+		const sidebar = result.getByLabelText('series list');
 
-			await waitFor(() => {
-				expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
-			});
+		await waitFor(() => {
+			expect(getByText(sidebar, 'Part 1 of 3')).toBeInTheDocument();
 		});
 	});
 
@@ -1273,16 +1273,15 @@ describe('sermon detail page', () => {
 				id: 'series_id',
 				title: 'series_title',
 				contentType: SequenceContentType.Series,
+				canonicalPath: 'series_path',
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
+		const result = await renderPage();
 
-			const metadata = result.getByLabelText('metadata');
+		const metadata = result.getByLabelText('metadata');
 
-			expect(getByText(metadata, 'series_title')).toBeInTheDocument();
-		});
+		expect(getByText(metadata, 'series_title')).toBeInTheDocument();
 	});
 
 	it('links series title in metadata', async () => {
@@ -1295,16 +1294,14 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
-			const metadata = result.getByLabelText('metadata');
-			const link = getByText(metadata, 'series_title');
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
+		const link = getByText(metadata, 'series_title');
 
-			expect(link).toHaveAttribute(
-				'href',
-				expect.stringContaining('/series_path')
-			);
-		});
+		expect(link).toHaveAttribute(
+			'href',
+			expect.stringContaining('/series_path')
+		);
 	});
 
 	it('includes collection title in metadata', async () => {
@@ -1312,15 +1309,14 @@ describe('sermon detail page', () => {
 			collection: {
 				id: 'collection_id',
 				title: 'collection_title',
+				canonicalPath: 'the_collection_path',
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
-			const metadata = result.getByLabelText('metadata');
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
 
-			expect(getByText(metadata, 'collection_title')).toBeInTheDocument();
-		});
+		expect(getByText(metadata, 'collection_title')).toBeInTheDocument();
 	});
 
 	it('links conference title in metadata', async () => {
@@ -1332,45 +1328,22 @@ describe('sermon detail page', () => {
 			},
 		});
 
-		await act(async () => {
-			const result = await renderPage();
-			const metadata = result.getByLabelText('metadata');
-			const link = getByText(metadata, 'conference_title');
+		const result = await renderPage();
+		const metadata = result.getByLabelText('metadata');
+		const link = getByText(metadata, 'conference_title');
 
-			expect(link).toHaveAttribute(
-				'href',
-				expect.stringContaining('/conference_path')
-			);
-		});
+		expect(link).toHaveAttribute(
+			'href',
+			expect.stringContaining('/conference_path')
+		);
 	});
 
 	it('does not show video downloads header in downloads menu if no video downloads', async () => {
 		loadSermonDetailData();
 
-		await act(async () => {
-			const { queryByText } = await renderPage();
+		const { queryByText } = await renderPage();
 
-			expect(queryByText('Video Downloads')).not.toBeInTheDocument();
-		});
-	});
-
-	it('plays media on same tick as click', async () => {
-		loadSermonDetailData();
-
-		const mockPlayer = setPlayerMock();
-
-		await renderPage();
-
-		const playButton = screen.getByLabelText('play');
-
-		await act(async () => {
-			userEvent.click(playButton);
-		});
-
-		// This is an attempt to test that we've fixed the "NotAllowedError"
-		// thrown by Safari when media is played asynchronously after a
-		// user interaction.
-		expect(mockPlayer.play).toHaveBeenCalledTimes(1);
+		expect(queryByText('Video Downloads')).not.toBeInTheDocument();
 	});
 });
 

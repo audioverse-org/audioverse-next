@@ -27,9 +27,7 @@ export default function Textarea({
 					value={value}
 					onChange={(e) => setValue(e.target.value)}
 					placeholder={placeholder}
-				>
-					{value}
-				</textarea>
+				/>
 			</label>
 		</div>
 	);

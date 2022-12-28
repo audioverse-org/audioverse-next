@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -157,7 +157,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 									values={{
 										a: function a(chunks: string) {
 											return (
-												<Link href={makeDiscoverRoute(languageRoute)}>
+												<Link
+													href={makeDiscoverRoute(languageRoute)}
+													legacyBehavior
+												>
 													<a className="decorated">{chunks}</a>
 												</Link>
 											);
@@ -284,7 +287,10 @@ export default function Home({ data }: HomeProps): JSX.Element {
 										values={{
 											a: function a(chunks: string) {
 												return (
-													<Link href={makeTestimoniesRoute(languageRoute)}>
+													<Link
+														href={makeTestimoniesRoute(languageRoute)}
+														legacyBehavior
+													>
 														<a className="decorated">{chunks}</a>
 													</Link>
 												);

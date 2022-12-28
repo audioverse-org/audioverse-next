@@ -32,7 +32,7 @@ export default function CardSponsor({
 
 	return (
 		<Card>
-			<Link href={canonicalPath}>
+			<Link href={canonicalPath} legacyBehavior>
 				<a className={styles.container}>
 					<TypeLockup
 						Icon={UserPlusIcon}

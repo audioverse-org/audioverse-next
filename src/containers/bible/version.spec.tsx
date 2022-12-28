@@ -8,6 +8,7 @@ import Version, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[[...slugs]]';
+import { screen } from '@testing-library/react';
 
 jest.mock('@lib/api/bibleBrain');
 
@@ -85,9 +86,9 @@ describe('version detail page', () => {
 	it('links books', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		const link = getByText('Genesis').parentElement as HTMLLinkElement;
+		const link = screen.getByRole('link', { name: /Genesis/ }) as any;
 
 		expect(link.href).toContain('/en/bibles/ENGESVC/Gen');
 	});

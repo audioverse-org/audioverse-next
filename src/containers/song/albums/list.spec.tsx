@@ -11,6 +11,7 @@ import Songs, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
@@ -23,7 +24,7 @@ function loadData() {
 					{
 						id: 'the_album_id',
 						title: 'the_album_title',
-						canonicalPath: '/the_album_path',
+						canonicalPath: 'the_album_path',
 						contentType: SequenceContentType.MusicAlbum,
 						imageWithFallback: {
 							url: 'the_album_cover',
@@ -97,7 +98,7 @@ describe('songs list page', () => {
 
 		const link = getByText('the_album_title').parentElement?.parentElement;
 
-		expect(link).toHaveAttribute('href', '/the_album_path');
+		expect(link).toHaveAttribute('href', 'the_album_path');
 	});
 
 	it('renders album list title', async () => {
@@ -130,8 +131,8 @@ describe('songs list page', () => {
 	it('includes books tab title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Passage')).toBeInTheDocument();
+		expect(await screen.findByText('Passage')).toBeInTheDocument();
 	});
 });

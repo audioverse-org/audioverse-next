@@ -102,7 +102,7 @@ export function Sequence({
 			),
 			definition: (
 				<p>
-					<Link href={collection.canonicalPath}>
+					<Link href={collection.canonicalPath} legacyBehavior>
 						<a className={linkClasses}>{collection.title}</a>
 					</Link>
 				</p>
@@ -118,7 +118,7 @@ export function Sequence({
 				/>
 			),
 			definition: (
-				<Link href={sponsor.canonicalPath}>
+				<Link href={sponsor.canonicalPath} legacyBehavior>
 					<a className={linkClasses}>{sponsor.title}</a>
 				</Link>
 			),

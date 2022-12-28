@@ -59,13 +59,13 @@ describe('blog post detail page', () => {
 			.calledWith(GetBlogDetailStaticPathsDocument, expect.anything())
 			.mockResolvedValue({
 				blogPosts: {
-					nodes: [{ canonicalPath: '/the_blog_post_path' }],
+					nodes: [{ canonicalPath: 'the_blog_post_path' }],
 				},
 			});
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/the_blog_post_path');
+		expect(paths).toContain('the_blog_post_path');
 	});
 
 	it('renders 404', async () => {

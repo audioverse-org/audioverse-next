@@ -28,6 +28,12 @@ describe('navigation', () => {
 
 		await screen.findByText('Download App');
 
-		expect(screen.getByText('Discover').parentElement).toHaveClass('active');
+		// expect(screen.getByText('Discover').parentElement).toHaveClass('active');
+
+		expect(
+			screen.getByRole('link', {
+				name: 'Discover',
+			})
+		).toHaveAttribute('aria-current', 'page');
 	});
 });

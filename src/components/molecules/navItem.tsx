@@ -26,8 +26,12 @@ export default function NavItem({
 	return (
 		<li>
 			{href ? (
-				<ActiveLink href={href} activeClassName={styles.active}>
-					<a className={styles.navLink}>{inner}</a>
+				<ActiveLink
+					href={href}
+					className={styles.navLink}
+					activeClassName={styles.active}
+				>
+					{inner}
 				</ActiveLink>
 			) : (
 				<a className={styles.navLink} onClick={() => setSubmenu(key)}>

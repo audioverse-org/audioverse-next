@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
@@ -62,17 +62,12 @@ describe('login form', () => {
 		);
 
 		userEvent.click(getByText('Forgot password?'));
-
 		userEvent.type(getByPlaceholderText('Email address'), 'the_email');
 		userEvent.click(getByText('Send reset link'));
 
-		await waitFor(() => {
-			expect(
-				getByText(
-					'Reset link sent. Check your email and use the link to reset your password.'
-				)
-			);
-		});
+		expect(await screen.findByText(/Reset link sent/)).toBeInTheDocument();
+
+		await screen.findByText('Check your email for a password reset link');
 	});
 
 	it('shows API error', async () => {

@@ -58,10 +58,12 @@ export default function Button({
 		</>
 	);
 	return href ? (
-		<Link href={href}>
+		<Link href={href} legacyBehavior>
 			<a {..._props}>{inner}</a>
 		</Link>
 	) : (
-		<button {..._props}>{inner}</button>
+		<button disabled={disabled === true} {..._props}>
+			{inner}
+		</button>
 	);
 }

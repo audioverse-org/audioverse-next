@@ -1,14 +1,13 @@
 import {
+	act,
 	findByLabelText,
 	findByTestId,
-	queryByTestId,
-	waitFor,
-} from '@testing-library/dom';
-import {
-	act,
 	getByLabelText,
 	getByTestId,
+	queryByTestId,
 	render,
+	screen,
+	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
@@ -24,6 +23,7 @@ import {
 } from '@lib/generated/graphql';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
+import getIntlMessages from '@lib/getIntlMessages';
 
 const sequence = {
 	id: 'the_sequence_id',
@@ -129,13 +129,17 @@ const renderApp = async (
 		asPath: '',
 	});
 
-	const result = await render(
+	const result = render(
 		<MyApp
 			Component={Page as any}
 			pageProps={{ includePlayer, recording } as any}
 		/>,
 		{ container }
 	);
+
+	await act(async () => {
+		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+	});
 
 	return {
 		...result,
@@ -153,217 +157,215 @@ describe('app media playback', () => {
 	beforeEach(() => setPlayerMock());
 
 	it('moves video to and from miniplayer', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingVideo);
+		const result = await renderApp(true, recordingVideo);
 
-			userEvent.click(result.getByAltText('the_sermon_title'));
+		userEvent.click(result.getByAltText('the_sermon_title'));
 
-			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
 
-			await result.rerender(false);
+		await result.rerender(false);
 
-			await waitFor(() => {
-				result.expectVideoLocation(result.getMiniplayer());
-			});
-
-			await result.rerender(true);
-
-			await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+		await waitFor(() => {
+			result.expectVideoLocation(result.getMiniplayer());
 		});
+
+		await result.rerender(true);
+
+		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+
+		userEvent.click(screen.getByLabelText('pause'));
+
+		await screen.findByLabelText('play');
 	});
 
 	it('hides controls when video in miniplayer', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingVideo);
+		const result = await renderApp(true, recordingVideo);
 
-			userEvent.click(result.getByAltText('the_sermon_title'));
+		userEvent.click(result.getByAltText('the_sermon_title'));
 
-			await result.rerender(false);
+		await result.rerender(false);
 
-			const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = result.getByLabelText('miniplayer');
 
-			await findByLabelText(miniplayer, 'pause');
+		await findByLabelText(miniplayer, 'pause');
 
-			const controls = getByLabelText(miniplayer, 'pause').parentElement;
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
-			expect(controls).toHaveClass('hidden');
-		});
+		expect(controls).toHaveClass('hidden');
 	});
 
 	it('shows controls when video not in miniplayer', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingVideo);
+		const result = await renderApp(true, recordingVideo);
 
-			userEvent.click(result.getByAltText('the_sermon_title'));
+		userEvent.click(result.getByAltText('the_sermon_title'));
 
-			const miniplayer = await result.findByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
-			await waitFor(() => {
-				expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();
-			});
-
-			const controls = getByLabelText(miniplayer, 'pause').parentElement;
-
-			expect(controls).not.toHaveClass('hidden');
+		await waitFor(() => {
+			expect(getByLabelText(miniplayer, 'pause')).toBeInTheDocument();
 		});
+
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+
+		expect(controls).not.toHaveClass('hidden');
 	});
 
 	it('shows controls when not playing video', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingAudio);
+		const result = await renderApp(true, recordingAudio);
 
-			userEvent.click(result.getByLabelText('play'));
+		userEvent.click(result.getByLabelText('play'));
 
-			const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = result.getByLabelText('miniplayer');
 
-			await findByLabelText(miniplayer, 'pause');
+		await findByLabelText(miniplayer, 'pause');
 
-			const controls = getByLabelText(miniplayer, 'pause').parentElement;
+		const controls = getByLabelText(miniplayer, 'pause').parentElement;
 
-			expect(controls).not.toHaveClass('hidden');
-		});
+		expect(controls).not.toHaveClass('hidden');
 	});
 
 	it('handles pause event', async () => {
+		const result = await renderApp(true, recordingVideo);
+
+		userEvent.click(result.getByAltText('the_sermon_title'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await findByLabelText(miniplayer, 'pause');
+
+		const portal = result.getByTestId('portal');
+
 		await act(async () => {
-			const result = await renderApp(true, recordingVideo);
-
-			userEvent.click(result.getByAltText('the_sermon_title'));
-
-			const miniplayer = result.getByLabelText('miniplayer');
-
-			await findByLabelText(miniplayer, 'pause');
-
-			const portal = result.getByTestId('portal');
-
 			ReactTestUtils.Simulate.pause(
 				await findByTestId(portal, 'video-element'),
 				{} as any
 			);
-
-			await findByLabelText(miniplayer, 'play');
 		});
+
+		await findByLabelText(miniplayer, 'play');
 	});
 
 	it('handles play event', async () => {
+		const result = await renderApp(true, recordingVideo);
+
+		userEvent.click(result.getByAltText('the_sermon_title'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await findByLabelText(miniplayer, 'pause');
+
+		userEvent.click(getByLabelText(miniplayer, 'pause'));
+
+		await findByLabelText(miniplayer, 'play');
+
+		const portal = result.getByTestId('portal');
+
+		await waitFor(() => {
+			expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
+		});
+
 		await act(async () => {
-			const result = await renderApp(true, recordingVideo);
-
-			userEvent.click(result.getByAltText('the_sermon_title'));
-
-			const miniplayer = result.getByLabelText('miniplayer');
-
-			await findByLabelText(miniplayer, 'pause');
-
-			userEvent.click(getByLabelText(miniplayer, 'pause'));
-
-			await findByLabelText(miniplayer, 'play');
-
-			const portal = result.getByTestId('portal');
-
-			await waitFor(() => {
-				expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
-			});
-
 			ReactTestUtils.Simulate.play(
 				getByTestId(portal, 'video-element'),
 				{} as any
 			);
-
-			await findByLabelText(miniplayer, 'pause');
 		});
+
+		await findByLabelText(miniplayer, 'pause');
 	});
 
 	it('moves player out of miniplayer when not showing video', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp(true, recordingAudioVideo);
 
-			await waitFor(() => {
-				expect(result.getByText('Audio')).toBeInTheDocument();
-			});
-
-			userEvent.click(result.getByText('Audio'));
-
-			const miniplayer = result.getByLabelText('miniplayer');
-
-			await findByLabelText(miniplayer, 'play');
-
-			expect(
-				queryByTestId(miniplayer, 'video-element')
-			).not.toBeInTheDocument();
+		await waitFor(() => {
+			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
+
+		userEvent.click(result.getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		await findByLabelText(miniplayer, 'play');
+
+		expect(queryByTestId(miniplayer, 'video-element')).not.toBeInTheDocument();
 	});
 
 	it('never shows video in miniplayer when still on detail page', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp(true, recordingAudioVideo);
 
-			await waitFor(() => {
-				expect(result.getByText('Audio')).toBeInTheDocument();
-			});
-
-			userEvent.click(result.getByText('Audio'));
-
-			const player = result.getByLabelText('player');
-
-			await waitFor(() => {
-				expect(getByLabelText(player, 'play')).toBeInTheDocument();
-			});
-
-			userEvent.click(result.getByText('Video'));
-
-			const miniplayer = result.getByLabelText('miniplayer');
-
-			// expect video-element to never appear in miniplayer
-			await expect(async () => {
-				await waitFor(() => {
-					expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
-				});
-			}).rejects.toEqual(expect.anything());
+		await waitFor(() => {
+			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
+
+		userEvent.click(result.getByText('Audio'));
+
+		const player = result.getByLabelText('player');
+
+		await waitFor(() => {
+			expect(getByLabelText(player, 'play')).toBeInTheDocument();
+		});
+
+		userEvent.click(result.getByText('Video'));
+
+		const miniplayer = result.getByLabelText('miniplayer');
+
+		// expect video-element to never appear in miniplayer
+		await expect(async () => {
+			await waitFor(() => {
+				expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
+			});
+		}).rejects.toEqual(expect.anything());
 	});
 
 	it('never shows video in miniplayer when loading recording by audio select', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp(true, recordingAudioVideo);
 
-			await waitFor(() => {
-				expect(result.getByText('Audio')).toBeInTheDocument();
-			});
-
-			userEvent.click(result.getByText('Audio'));
-
-			const miniplayer = result.getByLabelText('miniplayer');
-			const pane = miniplayer.querySelector('#mini-player');
-
-			if (!pane) throw new Error('unable to find pane');
-
-			pane.appendChild = jest.fn();
-
-			const player = result.getByLabelText('player');
-
-			await findByLabelText(player, 'play');
-
-			expect(pane.appendChild).not.toHaveBeenCalled();
+		await waitFor(() => {
+			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
+
+		userEvent.click(result.getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
+
+		const miniplayer = result.getByLabelText('miniplayer');
+		const pane = miniplayer.querySelector('#mini-player');
+
+		if (!pane) throw new Error('unable to find pane');
+
+		pane.appendChild = jest.fn();
+
+		const player = result.getByLabelText('player');
+
+		await findByLabelText(player, 'play');
+
+		expect(pane.appendChild).not.toHaveBeenCalled();
 	});
 
 	it('does not load video when audio selected for recording with video', async () => {
-		await act(async () => {
-			const result = await renderApp(true, recordingAudioVideo);
+		const result = await renderApp(true, recordingAudioVideo);
 
-			await waitFor(() => {
-				expect(result.getByText('Audio')).toBeInTheDocument();
-			});
-
-			userEvent.click(result.getByText('Audio'));
-
-			expect(videojs).not.toBeCalledWith(
-				expect.anything(),
-				expect.objectContaining({
-					sources: [{ src: 'video_source_src' }],
-				})
-			);
+		await waitFor(() => {
+			expect(result.getByText('Audio')).toBeInTheDocument();
 		});
+
+		userEvent.click(result.getByText('Audio'));
+
+		await waitFor(() => {
+			expect(videojs).toBeCalled();
+		});
+
+		expect(videojs).not.toBeCalledWith(
+			expect.anything(),
+			expect.objectContaining({
+				sources: [{ src: 'video_source_src' }],
+			})
+		);
 	});
 });

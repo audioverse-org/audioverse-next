@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -11,7 +11,7 @@ const Header = (): JSX.Element => {
 	return (
 		<header className={styles.header}>
 			<h1>
-				<Link href={`/${languageRoute}`}>
+				<Link href={`/${languageRoute}`} legacyBehavior>
 					<a className={styles.link}>
 						<Image
 							src="/img/logo.svg"
