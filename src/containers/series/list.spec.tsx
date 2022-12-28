@@ -69,7 +69,7 @@ describe('series list page', () => {
 
 		expect(
 			getByText('the_series_title').parentElement?.parentElement
-		).toHaveAttribute('href', '/the_series_path');
+		).toHaveAttribute('href', 'the_series_path');
 	});
 
 	it('renders page title', async () => {

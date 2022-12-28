@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -69,7 +69,7 @@ export default function CardCollection({
 	const isBibleVersion = contentType === CollectionContentType.BibleVersion;
 	return (
 		<Card>
-			<Link href={canonicalPath}>
+			<Link href={canonicalPath} legacyBehavior>
 				<a
 					className={clsx(
 						styles.container,

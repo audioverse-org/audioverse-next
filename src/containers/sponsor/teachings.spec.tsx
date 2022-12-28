@@ -20,7 +20,7 @@ const loadData = buildLoader(GetSponsorTeachingsPageDataDocument, {
 	sponsor: {
 		id: 'the_sponsor_id',
 		title: 'the_sponsor_title',
-		canonicalPath: '/the_sponsor_path',
+		canonicalPath: 'the_sponsor_path',
 		image: {
 			url: 'the_sponsor_image',
 		},
@@ -93,7 +93,7 @@ describe('sponsor teachings page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Back')).toHaveAttribute('href', '/the_sponsor_path');
+		expect(getByText('Back')).toHaveAttribute('href', 'the_sponsor_path');
 	});
 
 	it('links pagination properly', async () => {

@@ -38,7 +38,7 @@ export default function CardSongBook({
 
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link href={makeBibleMusicRoute(languageRoute, book)}>
+			<Link href={makeBibleMusicRoute(languageRoute, book)} legacyBehavior>
 				<a
 					className={clsx(
 						styles.container,

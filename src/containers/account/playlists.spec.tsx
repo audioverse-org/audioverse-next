@@ -154,7 +154,16 @@ describe('playlists page', () => {
 		userEvent.type(getByLabelText('title'), 'the_title');
 		userEvent.type(getByLabelText('summary'), 'the_summary');
 
+		jest.mocked(fetchApi).mockClear();
+
 		userEvent.click(getByText('Add Playlist'));
+
+		await waitFor(() => {
+			expect(fetchApi).toBeCalledWith(
+				AddAccountPlaylistDocument,
+				expect.anything()
+			);
+		});
 
 		await waitFor(() => {
 			expect(fetchApi).toBeCalledWith(

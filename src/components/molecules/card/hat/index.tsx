@@ -37,7 +37,7 @@ export default function CardHat(
 
 	if (isSimple(props)) {
 		return (
-			<Link href={url}>
+			<Link href={url} legacyBehavior>
 				<a className={clsx(styles.hat)}>
 					<div className={styles.hatBar}>
 						<span className={styles.hatIcon}>{icon}</span>

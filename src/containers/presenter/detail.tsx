@@ -81,10 +81,13 @@ function PresenterDetail({
 				defaultMessage: 'Website',
 			}),
 			definition: (
-				<Link href={website}>
-					<a target="_blank" rel="noreferrer noopener" className="decorated">
-						{website}
-					</a>
+				<Link
+					href={website}
+					target="_blank"
+					rel="noreferrer noopener"
+					legacyBehavior
+				>
+					<a className="decorated">{website}</a>
 				</Link>
 			),
 		});

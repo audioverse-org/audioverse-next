@@ -1,25 +1,26 @@
 import clsx from 'clsx';
-import { Masonry, RenderComponentProps } from 'masonic';
+import { MasonryProps } from 'masonic';
 import React from 'react';
+import dynamic from 'next/dynamic';
 
 import styles from './cardMasonry.module.scss';
 
-type Props<T> = {
-	items: T[];
-	render: React.ComponentType<RenderComponentProps<T>>;
-	className?: string;
-};
+const Masonry = dynamic<MasonryProps<unknown>>(
+	() => import('masonic').then((mod) => mod.Masonry),
+	{
+		ssr: false,
+	}
+);
 
-export default function CardMasonry<T>({
-	className,
-	...props
-}: Props<T>): JSX.Element {
+export default function CardMasonry<T>(props: MasonryProps<T>): JSX.Element {
 	return (
 		<Masonry
-			{...props}
-			className={clsx(styles.base, className)}
-			columnGutter={20}
-			columnWidth={300}
+			{...{
+				columnGutter: 20,
+				columnWidth: 300,
+				...(props as MasonryProps<unknown>),
+				className: clsx(styles.base, props.className),
+			}}
 		/>
 	);
 }

@@ -371,7 +371,7 @@ describe('home page', () => {
 
 		expect(
 			getByText('the_post_title').parentElement?.parentElement
-		).toHaveAttribute('href', '/the_post_path');
+		).toHaveAttribute('href', 'the_post_path');
 	});
 });
 

@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadRouter } from 'next/router';
 import React from 'react';
@@ -150,13 +150,15 @@ describe('Bible book detail page', () => {
 		window.fetch = jest.fn().mockReturnValueOnce({
 			catch: () => undefined,
 		});
+
 		loadPageData();
 
-		await act(async () => {
-			const { getAllByLabelText } = await renderPage();
-			userEvent.click(getAllByLabelText('play')[0]);
-		});
-		expect(videojs).toBeCalled();
+		const { getAllByLabelText } = await renderPage();
+
+		userEvent.click(getAllByLabelText('play')[0]);
+
+		await waitFor(() => expect(videojs).toBeCalled());
+
 		expect(window.fetch).toBeCalled();
 	});
 });

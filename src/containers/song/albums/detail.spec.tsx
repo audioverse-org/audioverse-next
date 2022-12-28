@@ -63,7 +63,7 @@ describe('song album detail page', () => {
 				musicAlbums: {
 					nodes: [
 						{
-							canonicalPath: '/the_album_path',
+							canonicalPath: 'the_album_path',
 						},
 					],
 				},
@@ -71,7 +71,7 @@ describe('song album detail page', () => {
 
 		const { paths } = await getStaticPaths();
 
-		expect(paths).toContain('/the_album_path');
+		expect(paths).toContain('the_album_path');
 	});
 
 	it('renders 404', async () => {

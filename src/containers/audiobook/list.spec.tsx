@@ -137,7 +137,7 @@ describe('audiobook list page', () => {
 
 		const link = getAllByRole('link')[1] as HTMLLinkElement;
 
-		expect(link.href).toContain('/the_book_path');
+		expect(link.href).toContain('the_book_path');
 	});
 
 	it('renders page title', async () => {

@@ -90,7 +90,7 @@ describe('sponsor list page', () => {
 
 		expect(getByText('the_sponsor_title').parentElement).toHaveAttribute(
 			'href',
-			'/the_sponsor_path'
+			'the_sponsor_path'
 		);
 	});
 
