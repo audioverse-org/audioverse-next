@@ -43,6 +43,7 @@ module.exports = withBundleAnalyzer(
 				francais: 'fr',
 				french: 'fr',
 				zhongwen: 'zh',
+				portuguese: 'pt',
 			};
 			return [
 				...Object.keys(languagePrefixMap).map((prefix) => ({

@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions, useMutation, UseMutationOptions } from 'react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from 'react-query';
 import { graphqlFetcher } from '@lib/api/graphqlFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -12,15 +12,10 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date value string in YYYY-MM-DD format. Example value: "2020-10-05". */
   Date: string;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: string;
-  /** A timezone-less date-time string in YYYY-MM-DD HH:mm:ss format. Example value: "2020-10-05 12:30:00". */
   RelativeDateTime: string;
-  /** A field whose value conforms to the standard URL format as specified in RF3986: https://www.ietf.org/rfc/rfc3986.txt. */
   URL: string;
-  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
@@ -553,6 +548,7 @@ export type CollectionRecordingsArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -577,6 +573,7 @@ export type CollectionRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -715,6 +712,7 @@ export type DistributionAgreementRecordingsArgs = {
   collectionId: InputMaybe<Scalars['ID']>;
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -739,6 +737,7 @@ export type DistributionAgreementRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -1006,6 +1005,7 @@ export const Language = {
   German: 'GERMAN',
   Japanese: 'JAPANESE',
   Nordic: 'NORDIC',
+  Portuguese: 'PORTUGUESE',
   Russian: 'RUSSIAN',
   Spanish: 'SPANISH'
 } as const;
@@ -2533,6 +2533,7 @@ export type PersonRecordingsArgs = {
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -2556,6 +2557,7 @@ export type PersonRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
   withRole: InputMaybe<PersonsRoleField>;
 };
@@ -2677,6 +2679,26 @@ export type PlaybackSessionAdvanceInput = {
   positionPercentage: Scalars['Float'];
 };
 
+export type PopularPerson = {
+  __typename?: 'PopularPerson';
+  person: Person;
+  weight: Scalars['Float'];
+};
+
+export type PopularPersonConnection = {
+  __typename?: 'PopularPersonConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<PopularPersonEdge>>;
+  nodes: Maybe<Array<PopularPerson>>;
+  pageInfo: PageInfo;
+};
+
+export type PopularPersonEdge = {
+  __typename?: 'PopularPersonEdge';
+  cursor: Scalars['String'];
+  node: PopularPerson;
+};
+
 export type PopularRecording = {
   __typename?: 'PopularRecording';
   recording: Recording;
@@ -2724,8 +2746,10 @@ export type Query = {
   faqCategories: Maybe<FaqCategoryConnection>;
   faqs: FaqConnection;
   featuredBlogPosts: BlogPostConnection;
-  /** @deprecated `featuredRecordings` is replaced by `recordings(isFeatured: true)` */
+  featuredPersons: PersonConnection;
   featuredRecordings: RecordingConnection;
+  featuredSequences: SequenceConnection;
+  featuredSponsors: SponsorConnection;
   license: Maybe<License>;
   licenses: LicenseConnection;
   me: Maybe<AuthenticatedUser>;
@@ -2752,6 +2776,7 @@ export type Query = {
   /** Returns the number of persons beginning with each letter. */
   personLetterCounts: Array<LetterCount>;
   persons: PersonConnection;
+  popularPersons: PopularPersonConnection;
   popularRecordings: PopularRecordingConnection;
   recording: Maybe<Recording>;
   recordingScreeningIssueType: Maybe<RecordingScreeningIssueType>;
@@ -2778,6 +2803,8 @@ export type Query = {
   tags: TagConnection;
   testimonies: TestimonyConnection;
   testimony: Maybe<Testimony>;
+  topic: Maybe<Topic>;
+  topics: TopicConnection;
   user: Maybe<User>;
   users: UserConnection;
   websiteFeaturedCollection: Maybe<FavoriteEntityUnion>;
@@ -2853,6 +2880,7 @@ export type QueryAudiobookTracksArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -2878,6 +2906,7 @@ export type QueryAudiobookTracksArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3007,14 +3036,32 @@ export type QueryFeaturedBlogPostsArgs = {
 };
 
 
+export type QueryFeaturedPersonsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  collectionId: InputMaybe<Scalars['ID']>;
+  first: InputMaybe<Scalars['Int']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  language: Language;
+  offset: InputMaybe<Scalars['Int']>;
+  role: InputMaybe<PersonsRoleField>;
+  search: InputMaybe<Scalars['String']>;
+  sequenceId: InputMaybe<Scalars['ID']>;
+  sponsorId: InputMaybe<Scalars['ID']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  startsWith: InputMaybe<Scalars['String']>;
+  withContentTypes: InputMaybe<Array<RecordingContentType>>;
+};
+
+
 export type QueryFeaturedRecordingsArgs = {
   after: InputMaybe<Scalars['String']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
   collectionId: InputMaybe<Scalars['ID']>;
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
-  contentType: InputMaybe<RecordingContentType>;
+  contentType?: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3038,7 +3085,36 @@ export type QueryFeaturedRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
+};
+
+
+export type QueryFeaturedSequencesArgs = {
+  after: InputMaybe<Scalars['String']>;
+  collectionId: InputMaybe<Scalars['ID']>;
+  collectionIds: InputMaybe<Array<Scalars['ID']>>;
+  contentType: InputMaybe<SequenceContentType>;
+  first: InputMaybe<Scalars['Int']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  language: Language;
+  offset: InputMaybe<Scalars['Int']>;
+  persons: InputMaybe<Array<RecordingPersonInput>>;
+  search: InputMaybe<Scalars['String']>;
+  sponsorId: InputMaybe<Scalars['ID']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+};
+
+
+export type QueryFeaturedSponsorsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  language: Language;
+  offset: InputMaybe<Scalars['Int']>;
+  search: InputMaybe<Scalars['String']>;
+  startsWith: InputMaybe<Scalars['String']>;
+  withMusic: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -3193,6 +3269,7 @@ export type QueryMusicTracksArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3218,6 +3295,7 @@ export type QueryMusicTracksArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3280,6 +3358,23 @@ export type QueryPersonsArgs = {
 };
 
 
+export type QueryPopularPersonsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  collectionId: InputMaybe<Scalars['ID']>;
+  first: InputMaybe<Scalars['Int']>;
+  includeUnpublished: InputMaybe<Scalars['Boolean']>;
+  language: Language;
+  offset: InputMaybe<Scalars['Int']>;
+  role: InputMaybe<PersonsRoleField>;
+  search: InputMaybe<Scalars['String']>;
+  sequenceId: InputMaybe<Scalars['ID']>;
+  sponsorId: InputMaybe<Scalars['ID']>;
+  sponsorIds: InputMaybe<Array<Scalars['ID']>>;
+  startsWith: InputMaybe<Scalars['String']>;
+  withContentTypes: InputMaybe<Array<RecordingContentType>>;
+};
+
+
 export type QueryPopularRecordingsArgs = {
   after: InputMaybe<Scalars['String']>;
   bibleReferences: InputMaybe<Array<BibleReferenceRangeInput>>;
@@ -3288,6 +3383,7 @@ export type QueryPopularRecordingsArgs = {
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3312,6 +3408,7 @@ export type QueryPopularRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3342,6 +3439,7 @@ export type QueryRecordingsArgs = {
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3367,6 +3465,7 @@ export type QueryRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3426,6 +3525,7 @@ export type QuerySermonsArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3451,6 +3551,7 @@ export type QuerySermonsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3485,6 +3586,7 @@ export type QueryStoriesArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -3510,6 +3612,7 @@ export type QueryStoriesArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -3582,6 +3685,20 @@ export type QueryTestimoniesArgs = {
 
 export type QueryTestimonyArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryTopicArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryTopicsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  language: Language;
+  offset: InputMaybe<Scalars['Int']>;
+  orderBy: InputMaybe<Array<TopicsOrder>>;
 };
 
 
@@ -3915,6 +4032,13 @@ export type RecordingPlaybackSession = {
   updatedAt: Scalars['DateTime'];
 };
 
+/** The playback session status for a recording. */
+export const RecordingPlaybackSessionStatus = {
+  /** The viewer has never started playing the recording. */
+  Unstarted: 'UNSTARTED'
+} as const;
+
+export type RecordingPlaybackSessionStatus = typeof RecordingPlaybackSessionStatus[keyof typeof RecordingPlaybackSessionStatus];
 /** The available bitrates of recordings. */
 export const RecordingQuality = {
   Highest: 'HIGHEST',
@@ -4280,6 +4404,7 @@ export type SequenceRecordingsArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -4302,6 +4427,7 @@ export type SequenceRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -4479,6 +4605,7 @@ export type SponsorRecordingsArgs = {
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -4502,6 +4629,7 @@ export type SponsorRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -4626,6 +4754,7 @@ export type TagRecordingsArgs = {
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   contentType: InputMaybe<RecordingContentType>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -4648,6 +4777,7 @@ export type TagRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -5147,6 +5277,7 @@ export const Timezone = {
   EuropeKaliningrad: 'EUROPE_KALININGRAD',
   EuropeKiev: 'EUROPE_KIEV',
   EuropeKirov: 'EUROPE_KIROV',
+  EuropeKyiv: 'EUROPE_KYIV',
   EuropeLisbon: 'EUROPE_LISBON',
   EuropeLjubljana: 'EUROPE_LJUBLJANA',
   EuropeLondon: 'EUROPE_LONDON',
@@ -5259,6 +5390,85 @@ export const Timezone = {
 } as const;
 
 export type Timezone = typeof Timezone[keyof typeof Timezone];
+export type Topic = Node & {
+  __typename?: 'Topic';
+  description: Scalars['String'];
+  /** The combined duration of the topic's recordings in seconds. */
+  duration: Scalars['Float'];
+  hidingReason: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  isHidden: Maybe<Scalars['Boolean']>;
+  items: TopicItemConnection;
+  language: Language;
+  parentTopic: Maybe<Topic>;
+  subTopics: TopicConnection;
+  summary: Scalars['String'];
+  title: Scalars['String'];
+};
+
+
+export type TopicItemsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+};
+
+
+export type TopicSubTopicsArgs = {
+  after: InputMaybe<Scalars['String']>;
+  first: InputMaybe<Scalars['Int']>;
+  offset: InputMaybe<Scalars['Int']>;
+  orderBy: InputMaybe<Array<TopicsOrder>>;
+};
+
+export type TopicConnection = {
+  __typename?: 'TopicConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<TopicEdge>>;
+  nodes: Maybe<Array<Topic>>;
+  pageInfo: PageInfo;
+};
+
+export type TopicEdge = {
+  __typename?: 'TopicEdge';
+  cursor: Scalars['String'];
+  node: Topic;
+};
+
+export type TopicEntityUnion = Recording | Sequence;
+
+export type TopicItem = {
+  __typename?: 'TopicItem';
+  entity: TopicEntityUnion;
+};
+
+export type TopicItemConnection = {
+  __typename?: 'TopicItemConnection';
+  aggregate: Maybe<Aggregate>;
+  edges: Maybe<Array<TopicItemEdge>>;
+  nodes: Maybe<Array<TopicItem>>;
+  pageInfo: PageInfo;
+};
+
+export type TopicItemEdge = {
+  __typename?: 'TopicItemEdge';
+  cursor: Scalars['String'];
+  node: TopicItem;
+};
+
+export type TopicsOrder = {
+  direction: OrderByDirection;
+  field: TopicsSortableField;
+};
+
+/** Properties by which topic connections can be ordered. */
+export const TopicsSortableField = {
+  Featured: 'FEATURED',
+  Id: 'ID',
+  Title: 'TITLE'
+} as const;
+
+export type TopicsSortableField = typeof TopicsSortableField[keyof typeof TopicsSortableField];
 export type Transcript = Node & {
   __typename?: 'Transcript';
   id: Scalars['ID'];
@@ -5334,6 +5544,7 @@ export type User = Node & {
 export type UserDownloadHistoryArgs = {
   after: InputMaybe<Scalars['String']>;
   first: InputMaybe<Scalars['Int']>;
+  hasIncompletePlaybackSession: InputMaybe<Scalars['Boolean']>;
   language: Language;
   offset: InputMaybe<Scalars['Int']>;
   orderBy: InputMaybe<Array<UserDownloadHistoryOrder>>;
@@ -5364,6 +5575,7 @@ export type UserFavoriteRecordingsArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -5388,6 +5600,7 @@ export type UserFavoriteRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
@@ -5668,6 +5881,7 @@ export type UserPlaylistRecordingsArgs = {
   collectionIds: InputMaybe<Array<Scalars['ID']>>;
   contentScreeningStatus: InputMaybe<RecordingContentScreeningStatus>;
   distributionAgreementId: InputMaybe<Scalars['ID']>;
+  duration: InputMaybe<IntegerRangeInput>;
   first: InputMaybe<Scalars['Int']>;
   hasVideo: InputMaybe<Scalars['Boolean']>;
   includeUnpublished: InputMaybe<Scalars['Boolean']>;
@@ -5691,6 +5905,7 @@ export type UserPlaylistRecordingsArgs = {
   technicalScreeningStatus: InputMaybe<RecordingTechnicalScreeningStatus>;
   updatedDates: InputMaybe<Array<DateRangeInput>>;
   viewerHasFavorited: InputMaybe<Scalars['Boolean']>;
+  viewerPlaybackSessionStatus: InputMaybe<RecordingPlaybackSessionStatus>;
   websiteIds: InputMaybe<Array<Scalars['ID']>>;
 };
 
