@@ -613,6 +613,9 @@
   "contact__firstNamePlaceholder": {
     "string": "Jane"
   },
+  "contact__help": {
+    "string": "View help articles"
+  },
   "contact__intro": {
     "string": "We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, please use the form with us and we’ll get back to you as quickly as possible."
   },

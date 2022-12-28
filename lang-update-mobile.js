@@ -3,7 +3,7 @@
 const lodash = require('lodash');
 const fs = require('fs');
 
-const languages = ['es', 'fr', 'de', 'ja', 'ru', 'zh'];
+const languages = ['es', 'fr', 'de', 'ja', 'ru', 'zh', 'pt'];
 
 const appLangs = require('../audioverse-mobile/locales/en.json');
 const appKeys = Object.keys(appLangs);

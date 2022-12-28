@@ -1269,6 +1269,12 @@
       "value": "Jane"
     }
   ],
+  "contact__help": [
+    {
+      "type": 0,
+      "value": "View help articles"
+    }
+  ],
   "contact__intro": [
     {
       "type": 0,
