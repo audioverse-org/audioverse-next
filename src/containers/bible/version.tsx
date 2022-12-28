@@ -49,7 +49,7 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 				/>
 			),
 			definition: (
-				<Link href={sponsor.canonicalPath}>
+				<Link href={sponsor.canonicalPath} legacyBehavior>
 					<a className="decorated hover--salmon">{sponsor.title}</a>
 				</Link>
 			),
@@ -63,14 +63,13 @@ function Version({ version }: Must<VersionProps>): JSX.Element {
 					/>
 				),
 				definition: (
-					<Link href={sponsor.website}>
-						<a
-							className="decorated hover--salmon"
-							target="_blank"
-							rel="nofollow noreferrer"
-						>
-							{sponsor.website}
-						</a>
+					<Link
+						href={sponsor.website}
+						target="_blank"
+						rel="nofollow noreferrer"
+						legacyBehavior
+					>
+						<a className="decorated hover--salmon">{sponsor.website}</a>
 					</Link>
 				),
 			});

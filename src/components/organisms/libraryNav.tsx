@@ -284,6 +284,7 @@ export default function LibraryNav({
 							},
 						}}
 						key={value}
+						legacyBehavior
 					>
 						<a>
 							<input
@@ -342,6 +343,7 @@ export default function LibraryNav({
 												sort,
 											},
 										}}
+										legacyBehavior
 									>
 										<a>
 											<input

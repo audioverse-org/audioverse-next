@@ -151,7 +151,7 @@ describe('series detail page', () => {
 
 		expect(getByText('the_sponsor_title')).toHaveAttribute(
 			'href',
-			'/the_sponsor_path'
+			'the_sponsor_path'
 		);
 	});
 
@@ -162,7 +162,7 @@ describe('series detail page', () => {
 
 		expect(getByText('the_conference_title')).toHaveAttribute(
 			'href',
-			'/the_conference_path'
+			'the_conference_path'
 		);
 	});
 

@@ -40,18 +40,17 @@ export type SearchProps = {
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
 	const term = useRouter().query.q;
+	const title = intl.formatMessage(
+		{
+			id: 'search__titleDynamic',
+			defaultMessage: 'Search | "{term}" | AudioVerse',
+		},
+		{ term }
+	);
 
 	return (
 		<Head>
-			<title>
-				{intl.formatMessage(
-					{
-						id: 'search__titleDynamic',
-						defaultMessage: 'Search | "{term}" | AudioVerse',
-					},
-					{ term }
-				)}
-			</title>
+			<title>{title}</title>
 		</Head>
 	);
 }

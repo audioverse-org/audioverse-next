@@ -28,7 +28,7 @@ export default function CardPlaylist({ playlist }: Props): JSX.Element {
 	const theme = 'playlistItem';
 	return (
 		<CardWithTheme {...{ theme }}>
-			<Link href={makePlaylistDetailRoute(languageRoute, id)}>
+			<Link href={makePlaylistDetailRoute(languageRoute, id)} legacyBehavior>
 				<a className={styles.container}>
 					<div className={styles.stretch}>
 						<TypeLockup

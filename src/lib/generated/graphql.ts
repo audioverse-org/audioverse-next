@@ -6142,14 +6142,6 @@ export type PersonLockupFragment = { __typename?: 'Person', name: string, canoni
 
 export type PlayerFragment = { __typename?: 'Recording', id: string | number, title: string, canonicalPath: string, duration: number, isDownloadAllowed: boolean, shareUrl: string, sequence: { __typename?: 'Sequence', title: string, contentType: SequenceContentType } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }>, videoDownloads: Array<{ __typename?: 'VideoFile', url: string, filesize: string, height: number, width: number }>, audioDownloads: Array<{ __typename?: 'AudioFile', url: string, filesize: string, bitrate: number }>, speakers: Array<{ __typename?: 'Person', name: string }> };
 
-export type GetPlaylistButtonDataQueryVariables = Exact<{
-  language: Language;
-  recordingId: Scalars['ID'];
-}>;
-
-
-export type GetPlaylistButtonDataQuery = { __typename?: 'Query', me: { __typename?: 'AuthenticatedUser', user: { __typename?: 'User', playlists: { __typename?: 'UserPlaylistConnection', nodes: Array<{ __typename?: 'UserPlaylist', id: string | number, title: string, hasRecording: boolean }> | null } } } | null };
-
 export type SequenceNavFragment = { __typename?: 'Recording', sequencePreviousRecording: { __typename?: 'Recording', canonicalPath: string } | null, sequenceNextRecording: { __typename?: 'Recording', canonicalPath: string } | null };
 
 export type SponsorLockupFragment = { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null };
@@ -7294,21 +7286,6 @@ export const useLoginForgotPasswordMutation = <
     useMutation<LoginForgotPasswordMutation, TError, LoginForgotPasswordMutationVariables, TContext>(
       ['loginForgotPassword'],
       (variables?: LoginForgotPasswordMutationVariables) => graphqlFetcher<LoginForgotPasswordMutation, LoginForgotPasswordMutationVariables>(LoginForgotPasswordDocument, variables)(),
-      options
-    );
-export const GetPlaylistButtonDataDocument = `
-query getPlaylistButtonData($language:Language!$recordingId:ID!){me{user{playlists(language:$language){nodes{id title hasRecording(id:$recordingId)}}}}}
-`;
-export const useGetPlaylistButtonDataQuery = <
-      TData = GetPlaylistButtonDataQuery,
-      TError = unknown
-    >(
-      variables: GetPlaylistButtonDataQueryVariables,
-      options?: UseQueryOptions<GetPlaylistButtonDataQuery, TError, TData>
-    ) =>
-    useQuery<GetPlaylistButtonDataQuery, TError, TData>(
-      ['getPlaylistButtonData', variables],
-      graphqlFetcher<GetPlaylistButtonDataQuery, GetPlaylistButtonDataQueryVariables>(GetPlaylistButtonDataDocument, variables),
       options
     );
 export const GetNotFoundPageDataDocument = `
@@ -9354,12 +9331,6 @@ import { fetchApi } from '@lib/api/fetchApi'
 							}
 
 
-
-							export async function getPlaylistButtonData<T>(
-								variables: ExactAlt<T, GetPlaylistButtonDataQueryVariables>
-							): Promise<GetPlaylistButtonDataQuery> {
-								return fetchApi(GetPlaylistButtonDataDocument, { variables });
-							}
 
 
 

@@ -3863,36 +3863,6 @@
       "value": "progress"
     }
   ],
-  "playlistButton__createButton": [
-    {
-      "type": 0,
-      "value": "Create"
-    }
-  ],
-  "playlistButton__newPlaylistInputPlaceholder": [
-    {
-      "type": 0,
-      "value": "New Playlist"
-    }
-  ],
-  "playlistButton__publicToggle": [
-    {
-      "type": 0,
-      "value": "Public"
-    }
-  ],
-  "playlistButton__trigger": [
-    {
-      "type": 0,
-      "value": "Add to Playlist"
-    }
-  ],
-  "playlistButton__unauthenticated": [
-    {
-      "type": 0,
-      "value": "You must be logged in to perform this action"
-    }
-  ],
   "playlistDetail__createdLabel": [
     {
       "type": 0,

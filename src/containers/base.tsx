@@ -54,7 +54,7 @@ function Base<P>({
 			<React.StrictMode>
 				<Head>
 					{/* eslint-disable-next-line @calm/react-intl/missing-formatted-message */}
-					<title>{title ? `${title} | ` : ''}AudioVerse</title>
+					<title>{title ? `${title} | AudioVerse` : 'AudioVerse'}</title>
 					{description && <meta name="description" content={description} />}
 					{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 					<meta

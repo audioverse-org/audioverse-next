@@ -40,7 +40,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 		>
 			<div className={styles.dropdownContainer}>
 				<div className={styles.segmentedControlWrapper}>
-					<Link href={makeRoute(language, 'all', 1)}>
+					<Link href={makeRoute(language, 'all', 1)} legacyBehavior>
 						<a
 							className={clsx(
 								styles.segmentedControl,
@@ -54,7 +54,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							/>
 						</a>
 					</Link>
-					<Link href={makeRoute(language, 'video', 1)}>
+					<Link href={makeRoute(language, 'video', 1)} legacyBehavior>
 						<a
 							className={clsx(
 								styles.segmentedControl,
@@ -68,7 +68,7 @@ export default function RecordingHasVideoFilter({ filter, makeRoute }: Props) {
 							/>
 						</a>
 					</Link>
-					<Link href={makeRoute(language, 'audio', 1)}>
+					<Link href={makeRoute(language, 'audio', 1)} legacyBehavior>
 						<a
 							className={clsx(
 								styles.segmentedControl,
