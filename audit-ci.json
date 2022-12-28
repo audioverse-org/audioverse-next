@@ -7,6 +7,9 @@
 		"GHSA-xvf7-4v9q-58w6", // Not used at runtime
 		"GHSA-9pgh-qqpf-7wqj", // Not used at runtime
 		"GHSA-f8q6-p94x-37v3", // Not used at runtime
-		"GHSA-hrpp-h998-j3pp" // Not used at runtime because this deals with lighthouse, a website performance test library, and this is only used in dev ci
+		"GHSA-hrpp-h998-j3pp", // Not used at runtime because this deals with lighthouse, a website performance test library, and this is only used in dev ci
+		"GHSA-w573-4hg7-7wgq", // Not used at runtime because this is only used in dev ci
+		"GHSA-76p3-8jx3-jpfq", // Not used at runtime because this is only used in dev ci
+		"GHSA-3rfm-jhwj-7488"  // Not used at runtime because this is only used in dev ci
 	]
 }
