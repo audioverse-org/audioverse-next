@@ -1278,7 +1278,7 @@
   "contact__intro": [
     {
       "type": 0,
-      "value": "We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, please use the form with us and we’ll get back to you as quickly as possible."
+      "value": "We love to hear from our users, even if it’s about technical issues! The feedback you give us encourages to keep up the work and helps us improve things for everyone else. If you’d like to get in touch with us, use the form below or write us at our mailing address. We’ll get back with you as quickly as possible."
     }
   ],
   "contact__lastNameLabel": [
@@ -1291,6 +1291,36 @@
     {
       "type": 0,
       "value": "Doe"
+    }
+  ],
+  "contact__mailingAddress": [
+    {
+      "type": 0,
+      "value": "AudioVerse"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "PO Box 2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "Collegedale, TN 37315-2288"
+    },
+    {
+      "type": 1,
+      "value": "br"
+    },
+    {
+      "type": 0,
+      "value": "USA"
     }
   ],
   "contact__messageLabel": [
