@@ -59,6 +59,9 @@ jobs:
           echo "${{steps.prettier-run.outputs.prettier_output}}"
   lighthouse:
     runs-on: ubuntu-latest
+    permissions:
+      checks: read
+      pull-requests: write
     steps:
       # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
       - uses: actions/checkout@v1
