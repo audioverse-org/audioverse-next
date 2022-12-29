@@ -11,6 +11,9 @@ defaults:
   run:
     working-directory: ./
 
+permissions:
+  pull-requests: write
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
