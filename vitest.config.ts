@@ -17,7 +17,7 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
-		setupFiles: 'testSetup.ts',
+		setupFiles: process.env.STRICT ? 'testSetup.strict.ts' : 'testSetup.ts',
 		css: {
 			include: /.+\.module\.scss/,
 		},

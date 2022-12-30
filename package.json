@@ -17,7 +17,7 @@
     "start": "NODE_ICU_DATA=node_modules/full-icu next start",
     "test": "TZ=UTC vitest",
     "test:ui": "TZ=UTC vitest --ui",
-    "test:strict": "TZ=UTC jest --config=jest.config.strict.js",
+    "test:strict": "TZ=UTC STRICT=true vitest",
     "extract": "formatjs extract 'src/**/*.ts*' --ignore 'src/**/*.d.ts*' --throws --extract-source-location --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file public/lang/en.json --format lang-formatter.js",
     "extract:new": "./lang-extract-new.js",
     "compile": "formatjs compile-folder --ast public/lang public/compiled-lang --format lang-formatter.js",
