@@ -9,7 +9,7 @@ import Versions, {
 	getStaticProps,
 } from '@pages/[language]/bibles';
 
-jest.mock('@lib/api/bibleBrain');
+vi.mock('@lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps({})) as any;
@@ -24,7 +24,7 @@ const loadData = buildLoader(GetAudiobibleVersionsDataDocument, {
 
 function loadPageData() {
 	loadData();
-	jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+	vi.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
 		{
 			id: 'the_version_id',
 			abbreviation: 'KJV',
@@ -71,7 +71,7 @@ describe('versions list', () => {
 	});
 
 	it('renders 404', async () => {
-		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
+		vi.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
 
 		const { notFound } = (await getStaticProps({})) as any;
 

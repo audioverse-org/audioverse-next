@@ -4,18 +4,18 @@ import Router_, { NextRouter } from 'next/router';
 
 const Router: typeof Router_ = {
 	events: {
-		on: jest.fn(),
-		off: jest.fn(),
+		on: vi.fn(),
+		off: vi.fn(),
 	},
 } as any;
 
 function makeRouter(router_: Partial<NextRouter> = {}) {
 	return {
 		events: {
-			on: jest.fn(),
-			off: jest.fn(),
+			on: vi.fn(),
+			off: vi.fn(),
 		},
-		push: jest.fn().mockResolvedValue(true),
+		push: vi.fn().mockResolvedValue(true),
 		prefetch: async () => undefined,
 		route: '/',
 		pathname: '/',
@@ -40,7 +40,7 @@ const __loadQuery = (query: ParsedUrlQuery = {}) => {
 	return __mockedRouter;
 };
 
-const useRouter = jest.fn();
+const useRouter = vi.fn();
 
 beforeEach(() => {
 	__loadRouter();

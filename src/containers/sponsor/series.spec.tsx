@@ -1,7 +1,6 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetSponsorSeriesPageDataDocument,
 	GetSponsorSeriesPathsDataDocument,
@@ -56,17 +55,15 @@ describe('sponsor series page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorSeriesPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsors: {
-					nodes: [
-						{
-							id: 'the_sponsor_id',
-						},
-					],
-				},
-			});
+		__load(GetSponsorSeriesPathsDataDocument, {
+			sponsors: {
+				nodes: [
+					{
+						id: 'the_sponsor_id',
+					},
+				],
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -132,9 +129,7 @@ describe('sponsor series page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorSeriesPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSponsorSeriesPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

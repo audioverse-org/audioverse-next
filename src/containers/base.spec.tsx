@@ -10,11 +10,14 @@ const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);
 
 	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+		await vi.mocked(getIntlMessages).mock.results[0]?.value;
 	});
 
 	return view;
 };
+
+const getHeads = async () =>
+	(await screen.findAllByTestId('head')).map((el) => el.innerHTML);
 
 describe('app', () => {
 	beforeEach(() => {
@@ -28,7 +31,7 @@ describe('app', () => {
 	it('sets title', async () => {
 		await renderApp(() => null, {});
 
-		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+		const heads = await getHeads();
 
 		expect(heads).toEqual(
 			expect.arrayContaining([expect.stringContaining('AudioVerse')])
@@ -44,7 +47,7 @@ describe('app', () => {
 
 		await renderApp(
 			() => {
-				const { data: myQuery } = useQuery('myQuery', jest.fn());
+				const { data: myQuery } = useQuery('myQuery', vi.fn());
 
 				if (initial === undefined) {
 					initial = myQuery === undefined ? 'undefined' : myQuery;
@@ -77,7 +80,7 @@ describe('app', () => {
 			title: 'the_prop_title',
 		});
 
-		const heads = screen.getAllByTestId('head').map((el) => el.innerHTML);
+		const heads = await getHeads();
 
 		expect(heads).toEqual(
 			expect.arrayContaining([

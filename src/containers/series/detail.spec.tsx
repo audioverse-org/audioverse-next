@@ -80,7 +80,7 @@ describe('series detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		(fetchApi as jest.Mock).mockRejectedValueOnce(undefined);
+		(fetchApi as vi.Mock).mockRejectedValueOnce(undefined);
 
 		const { getByText } = await renderPage();
 
@@ -110,7 +110,7 @@ describe('series detail page', () => {
 	});
 
 	it('returns static paths', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		(fetchApi as vi.Mock).mockResolvedValue({
 			serieses: {
 				nodes: [
 					{

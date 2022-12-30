@@ -1,7 +1,7 @@
 import './testSetup';
 
-const errorSpy = jest.spyOn(global.console, 'error');
-const warnSpy = jest.spyOn(global.console, 'warn');
+const errorSpy = vi.spyOn(global.console, 'error');
+const warnSpy = vi.spyOn(global.console, 'warn');
 
 afterEach(() => {
 	expect(errorSpy).not.toHaveBeenCalled();

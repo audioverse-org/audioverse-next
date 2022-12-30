@@ -24,10 +24,10 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
 
-jest.mock('video.js');
-jest.mock('@lib/api/recordingIsFavorited');
+vi.mock('video.js');
+vi.mock('@lib/api/recordingIsFavorited');
 
-const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
+const mockRecordingIsFavorited = recordingIsFavorited as vi.Mock;
 
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -327,7 +327,7 @@ describe('player', () => {
 		const mockPlayer = setPlayerMock({
 			duration: NaN,
 			functions: {
-				play: jest.fn(async () => {
+				play: vi.fn(async () => {
 					mockPlayer._updateOptions({
 						isPaused: false,
 						duration: 300,

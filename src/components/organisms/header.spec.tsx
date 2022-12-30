@@ -2,8 +2,9 @@ import React from 'react';
 
 import Header from '@components/organisms/header';
 import renderWithProviders from '@lib/test/renderWithProviders';
+import { screen } from '@testing-library/react';
 
-jest.mock('@lib/api/fetchApi');
+vi.mock('@lib/api/fetchApi');
 
 const renderHeader = async () => {
 	return renderWithProviders(<Header />, undefined);
@@ -17,11 +18,10 @@ describe('header', () => {
 	});
 
 	it('links logo', async () => {
-		const { getByAltText } = await renderHeader();
+		await renderHeader();
 
-		const logo = getByAltText('AudioVerse');
-		const link = logo.parentElement as HTMLLinkElement;
+		const link = screen.getByRole('link');
 
-		expect(link.href).toContain('/en');
+		expect(link).toHaveAttribute('href', '/en');
 	});
 });

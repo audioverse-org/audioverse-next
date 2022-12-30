@@ -5,7 +5,7 @@ import React from 'react';
 import Navigation from '@components/organisms/navigation';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
-jest.mock('@lib/api/fetchApi');
+vi.mock('@lib/api/fetchApi');
 
 const renderNavigation = async () => {
 	return renderWithProviders(

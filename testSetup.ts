@@ -1,14 +1,34 @@
 import '@testing-library/jest-dom/extend-expect';
-import 'jest-canvas-mock';
-import { resetAllWhenMocks } from 'jest-when';
+import { cleanup } from '@testing-library/react';
+import matchers, {
+	TestingLibraryMatchers,
+} from '@testing-library/jest-dom/matchers';
+import { forwardRef, Suspense } from 'react';
 
-jest.mock('@lib/api/fetchApi');
-jest.mock('video.js');
-jest.mock('@silvermine/videojs-airplay');
-jest.mock('@silvermine/videojs-chromecast');
-jest.mock('next/image');
-jest.mock('next/legacy/image');
-jest.mock('@lib/getIntlMessages');
+const m: TestingLibraryMatchers<string, void> = matchers;
+
+expect.extend(m);
+
+vi.mock('@lib/api/fetchApi');
+vi.mock('video.js');
+vi.mock('@silvermine/videojs-airplay');
+vi.mock('@silvermine/videojs-chromecast');
+vi.mock('next/image');
+vi.mock('next/legacy/image');
+vi.mock('@lib/getIntlMessages');
+vi.mock('next/router');
+vi.mock('react-facebook-login/dist/facebook-login-render-props');
+vi.mock('react-google-login');
+vi.mock('@material-ui/core/Slider');
+vi.mock('next/image');
+vi.mock('next/script');
+vi.mock('masonic');
+vi.mock('next/dynamic');
+vi.mock('next/head');
+
+afterEach(() => {
+	cleanup();
+});
 
 // WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
 beforeAll(() => {
@@ -19,6 +39,9 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-	jest.clearAllMocks();
-	resetAllWhenMocks();
+	vi.clearAllMocks();
 });
+
+module.exports = async () => {
+	process.env.TZ = 'UTC';
+};

@@ -5,9 +5,10 @@ import {
 	getByTestId,
 	getByText,
 	waitFor,
+	screen,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
+
 import { __loadQuery, __loadRouter } from 'next/router';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -16,7 +17,7 @@ import videojs from 'video.js';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
@@ -32,29 +33,27 @@ import SermonDetail, {
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
 
-jest.mock('video.js');
-jest.mock('@lib/api/fetchApi');
+vi.mock('video.js');
+vi.mock('@lib/api/fetchApi');
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {
-	when(fetchApi)
-		.calledWith(GetSermonDetailStaticPathsDocument, expect.anything())
-		.mockResolvedValue({
-			sermons: {
-				nodes: [
-					{
-						id: 'sermon_id',
-						canonicalPath: '/en/teachings/sermon_id',
-						recordingDate: '2020-06-01T09:30:00.000Z',
-					},
-					{
-						id: 'sermon_id',
-						canonicalPath: '/es/teachings/sermon_id',
-						recordingDate: '2020-06-01T09:30:00.000Z',
-					},
-				],
-			},
-		});
+	__load(GetSermonDetailStaticPathsDocument, {
+		sermons: {
+			nodes: [
+				{
+					id: 'sermon_id',
+					canonicalPath: '/en/teachings/sermon_id',
+					recordingDate: '2020-06-01T09:30:00.000Z',
+				},
+				{
+					id: 'sermon_id',
+					canonicalPath: '/es/teachings/sermon_id',
+					recordingDate: '2020-06-01T09:30:00.000Z',
+				},
+			],
+		},
+	});
 }
 
 function loadSermonDetailData(sermon: any = undefined): void {
@@ -76,9 +75,7 @@ function loadSermonDetailData(sermon: any = undefined): void {
 		...sermon,
 	};
 
-	when(fetchApi)
-		.calledWith(GetSermonDetailDataDocument, expect.anything())
-		.mockResolvedValue({ sermon });
+	__load(GetSermonDetailDataDocument, { sermon });
 }
 
 const renderPage = buildStaticRenderer((props: SermonDetailProps) => {
@@ -150,9 +147,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('catches API errors', async () => {
-		when(fetchApi)
-			.calledWith(GetSermonDetailDataDocument, expect.anything())
-			.mockRejectedValue('Oops!');
+		__loadReject(GetSermonDetailDataDocument, 'Oops!');
 
 		const result = (await getStaticProps({
 			params: { language: 'en', id: '1' },
@@ -162,9 +157,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on missing sermon', async () => {
-		when(fetchApi)
-			.calledWith(GetSermonDetailDataDocument, expect.anything())
-			.mockRejectedValue('Oops!');
+		__loadReject(GetSermonDetailDataDocument, 'Oops!');
 
 		const { getByText } = await renderPage();
 
@@ -253,7 +246,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as jest.Mock).mock.calls;
+		const calls = (videojs as any as vi.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -287,7 +280,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as jest.Mock).mock.calls;
+		const calls = (videojs as any as vi.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -319,7 +312,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as jest.Mock).mock.calls;
+		const calls = (videojs as any as vi.Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -381,8 +374,6 @@ describe('sermon detail page', () => {
 	});
 
 	it('includes time recorded', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({});
-
 		loadSermonDetailData({
 			speakers: [
 				{
@@ -397,9 +388,11 @@ describe('sermon detail page', () => {
 			recordingDate: '253-03-01 09:30:00',
 		});
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('March 1, 253, 9:30 AM')).toBeInTheDocument();
+		expect(
+			await screen.findByText('March 1, 253, 9:30 AM')
+		).toBeInTheDocument();
 	});
 
 	it('includes series title', async () => {
@@ -694,11 +687,16 @@ describe('sermon detail page', () => {
 	it('populates embed input', async () => {
 		loadSermonDetailData();
 
-		const { getByLabelText, getByText } = await renderPage();
+		const { getByLabelText } = await renderPage();
 
-		userEvent.click(getByLabelText('share'));
+		const button = getByLabelText('share');
 
-		const input = getByText('Audio Embed Code').nextSibling as HTMLInputElement;
+		await waitFor(() => expect(button).toBeEnabled());
+
+		userEvent.click(button);
+
+		const input = (await screen.findByText('Audio Embed Code'))
+			.nextSibling as HTMLInputElement;
 
 		expect(input.value).toContain(
 			'https://www.audioverse.org/english/embed/media/the_sermon_id'
@@ -706,9 +704,7 @@ describe('sermon detail page', () => {
 	});
 
 	it('renders 404 on fetch error', async () => {
-		when(fetchApi)
-			.calledWith(GetSermonDetailDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSermonDetailDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

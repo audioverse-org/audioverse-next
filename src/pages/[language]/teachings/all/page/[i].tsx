@@ -29,8 +29,8 @@ export async function getStaticProps({
 				...variables,
 				hasVideo: null,
 			}),
-		(d) => d.sermons.nodes,
-		(d) => d.sermons.aggregate?.count
+		(d) => d.sermons?.nodes,
+		(d) => d.sermons?.aggregate?.count
 	);
 
 	const intl = await getIntl(getLanguageIdByRoute(params?.language));

@@ -1,7 +1,6 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetSongBooksDetailPageDataDocument,
 	RecordingContentType,
@@ -15,30 +14,28 @@ import Song, {
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetSongBooksDetailPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			musicTracks: {
-				nodes: [
-					{
-						id: 'first_song_id',
-						title: 'first_song_title',
-						canonicalPath: 'first_song_path',
-						contentType: RecordingContentType.MusicTrack,
-						shareUrl: 'first_song_shareurl',
-						persons: [],
-					},
-					{
-						id: 'second_song_id',
-						title: 'second_song_title',
-						canonicalPath: 'second_song_path',
-						contentType: RecordingContentType.MusicTrack,
-						shareUrl: 'second_song_shareurl',
-						persons: [],
-					},
-				],
-			},
-		});
+	__load(GetSongBooksDetailPageDataDocument, {
+		musicTracks: {
+			nodes: [
+				{
+					id: 'first_song_id',
+					title: 'first_song_title',
+					canonicalPath: 'first_song_path',
+					contentType: RecordingContentType.MusicTrack,
+					shareUrl: 'first_song_shareurl',
+					persons: [],
+				},
+				{
+					id: 'second_song_id',
+					title: 'second_song_title',
+					canonicalPath: 'second_song_path',
+					contentType: RecordingContentType.MusicTrack,
+					shareUrl: 'second_song_shareurl',
+					persons: [],
+				},
+			],
+		},
+	});
 }
 
 describe('song book detail page', () => {
@@ -77,9 +74,7 @@ describe('song book detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSongBooksDetailPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSongBooksDetailPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

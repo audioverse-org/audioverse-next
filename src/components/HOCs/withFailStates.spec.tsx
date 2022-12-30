@@ -4,11 +4,11 @@ import React from 'react';
 
 import withFailStates from '@components/HOCs/withFailStates';
 
-jest.mock('next/router');
+vi.mock('next/router');
 
 describe('withFailStates HOC', () => {
 	it('supports no should404 prop', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		(useRouter as vi.Mock).mockReturnValue({ isFallback: false });
 
 		const Comp = () => <p>hello world</p>,
 			Hoc = withFailStates(Comp);

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`generateFeed matches handles no recordings 1`] = `
+exports[`generateFeed > matches handles no recordings 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
     <channel>
@@ -25,7 +25,7 @@ exports[`generateFeed matches handles no recordings 1`] = `
 </rss>"
 `;
 
-exports[`generateFeed matches prior conference feed 1`] = `
+exports[`generateFeed > matches prior conference feed 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
     <channel>
@@ -701,7 +701,7 @@ exports[`generateFeed matches prior conference feed 1`] = `
 </rss>"
 `;
 
-exports[`generateFeed matches prior story season feed 1`] = `
+exports[`generateFeed > matches prior story season feed 1`] = `
 "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
 <rss version=\\"2.0\\" xmlns:itunes=\\"http://www.itunes.com/dtds/podcast-1.0.dtd\\" xmlns:googleplay=\\"http://www.google.com/schemas/play-podcasts/1.0\\">
     <channel>

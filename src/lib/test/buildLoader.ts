@@ -1,8 +1,7 @@
-import { when } from 'jest-when';
 import defaultsDeep from 'lodash/defaultsDeep';
 import { PartialDeep } from 'type-fest';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load } from '@lib/api/fetchApi';
 
 export function buildLoader<T>(
 	document: string,
@@ -16,9 +15,7 @@ export function buildLoader<T>(
 	// should disallow including data in defaults that isn't in type
 	return (data: PartialDeep<T> | Record<string, never> = {}) => {
 		const value = defaultsDeep(data, defaults);
-		when(fetchApi)
-			.calledWith(document, expect.anything())
-			.mockResolvedValue(value);
+		__load(document, value);
 		return value;
 	};
 }

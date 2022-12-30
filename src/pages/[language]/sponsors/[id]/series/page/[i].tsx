@@ -26,8 +26,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		(vars) => getSponsorSeriesPageData({ ...vars, id }),
-		(d) => d.sequences.nodes,
-		(d) => d.sequences.aggregate?.count,
+		(d) => d.sequences?.nodes,
+		(d) => d.sequences?.aggregate?.count,
 		(d) => ({
 			title: intl.formatMessage(
 				{

@@ -99,6 +99,7 @@ export default function Slider({
 									number: i + 1,
 								}
 							)}
+							aria-current={i === delta}
 						/>
 					))}
 				</ul>

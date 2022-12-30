@@ -44,97 +44,133 @@ const opts = {
 };
 
 const iconMap = {
-	icon_search: dynamic(() => import('@public/img/icons/icon-search.svg'), opts),
-	icon_books: dynamic(() => import('@public/img/icons/icon-books.svg'), opts),
-	fa_bookmark: dynamic(() => import('@public/img/icons/fa-bookmark.svg'), opts),
-	fa_stream: dynamic(() => import('@public/img/icons/fa-stream.svg'), opts),
-	fa_history: dynamic(() => import('@public/img/icons/fa-history.svg'), opts),
-	icon_bible: dynamic(() => import('@public/img/icons/icon-bible.svg'), opts),
+	icon_search: dynamic(
+		() => import('@/../public/img/icons/icon-search.svg'),
+		opts
+	),
+	icon_books: dynamic(
+		() => import('@/../public/img/icons/icon-books.svg'),
+		opts
+	),
+	fa_bookmark: dynamic(
+		() => import('@/../public/img/icons/fa-bookmark.svg'),
+		opts
+	),
+	fa_stream: dynamic(() => import('@/../public/img/icons/fa-stream.svg'), opts),
+	fa_history: dynamic(
+		() => import('@/../public/img/icons/fa-history.svg'),
+		opts
+	),
+	icon_bible: dynamic(
+		() => import('@/../public/img/icons/icon-bible.svg'),
+		opts
+	),
 	icon_collections: dynamic(
-		() => import('@public/img/icons/icon-collections.svg'),
+		() => import('@/../public/img/icons/icon-collections.svg'),
 		opts
 	),
-	fa_list_alt: dynamic(() => import('@public/img/icons/fa-list-alt.svg'), opts),
+	fa_list_alt: dynamic(
+		() => import('@/../public/img/icons/fa-list-alt.svg'),
+		opts
+	),
 	fa_user_plus_heavy: dynamic(
-		() => import('@public/img/icons/fa-user-plus-heavy.svg'),
+		() => import('@/../public/img/icons/fa-user-plus-heavy.svg'),
 		opts
 	),
-	fa_calendar: dynamic(() => import('@public/img/icons/fa-calendar.svg'), opts),
+	fa_calendar: dynamic(
+		() => import('@/../public/img/icons/fa-calendar.svg'),
+		opts
+	),
 	fa_user_heavy: dynamic(
-		() => import('@public/img/icons/fa-user-heavy.svg'),
+		() => import('@/../public/img/icons/fa-user-heavy.svg'),
 		opts
 	),
-	fa_feather: dynamic(() => import('@public/img/icons/fa-feather.svg'), opts),
-	fa_book: dynamic(() => import('@public/img/icons/fa-book.svg'), opts),
-	fa_music: dynamic(() => import('@public/img/icons/fa-music.svg'), opts),
+	fa_feather: dynamic(
+		() => import('@/../public/img/icons/fa-feather.svg'),
+		opts
+	),
+	fa_book: dynamic(() => import('@/../public/img/icons/fa-book.svg'), opts),
+	fa_music: dynamic(() => import('@/../public/img/icons/fa-music.svg'), opts),
 	icon_account: dynamic(
-		() => import('@public/img/icons/icon-account.svg'),
+		() => import('@/../public/img/icons/icon-account.svg'),
 		opts
 	),
 	icon_our_story: dynamic(
-		() => import('@public/img/icons/icon-our-story.svg'),
+		() => import('@/../public/img/icons/icon-our-story.svg'),
 		opts
 	),
-	fa_seedling: dynamic(() => import('@public/img/icons/fa-seedling.svg'), opts),
+	fa_seedling: dynamic(
+		() => import('@/../public/img/icons/fa-seedling.svg'),
+		opts
+	),
 	fa_users_heavy: dynamic(
-		() => import('@public/img/icons/fa-users-heavy.svg'),
+		() => import('@/../public/img/icons/fa-users-heavy.svg'),
 		opts
 	),
 	fa_bullseye_heavy: dynamic(
-		() => import('@public/img/icons/fa-bullseye-heavy.svg'),
+		() => import('@/../public/img/icons/fa-bullseye-heavy.svg'),
 		opts
 	),
 	fa_fire_heavy: dynamic(
-		() => import('@public/img/icons/fa-fire-heavy.svg'),
+		() => import('@/../public/img/icons/fa-fire-heavy.svg'),
 		opts
 	),
 	fa_align_left: dynamic(
-		() => import('@public/img/icons/fa-align-left.svg'),
+		() => import('@/../public/img/icons/fa-align-left.svg'),
 		opts
 	),
 	fa_comment_heavy: dynamic(
-		() => import('@public/img/icons/fa-comment-heavy.svg'),
+		() => import('@/../public/img/icons/fa-comment-heavy.svg'),
 		opts
 	),
 	fa_heart_heavy: dynamic(
-		() => import('@public/img/icons/fa-heart-heavy.svg'),
+		() => import('@/../public/img/icons/fa-heart-heavy.svg'),
 		opts
 	),
 	icon_contact: dynamic(
-		() => import('@public/img/icons/icon-contact.svg'),
+		() => import('@/../public/img/icons/icon-contact.svg'),
 		opts
 	),
-	fa_inbox: dynamic(() => import('@public/img/icons/fa-inbox.svg'), opts),
-	fa_facebook: dynamic(() => import('@public/img/icons/fa-facebook.svg'), opts),
+	fa_inbox: dynamic(() => import('@/../public/img/icons/fa-inbox.svg'), opts),
+	fa_facebook: dynamic(
+		() => import('@/../public/img/icons/fa-facebook.svg'),
+		opts
+	),
 	fa_instagram: dynamic(
-		() => import('@public/img/icons/fa-instagram.svg'),
+		() => import('@/../public/img/icons/fa-instagram.svg'),
 		opts
 	),
-	fa_twitter: dynamic(() => import('@public/img/icons/fa-twitter.svg'), opts),
-	fa_youtube: dynamic(() => import('@public/img/icons/fa-youtube.svg'), opts),
-	icon_more: dynamic(() => import('@public/img/icons/icon-more.svg'), opts),
+	fa_twitter: dynamic(
+		() => import('@/../public/img/icons/fa-twitter.svg'),
+		opts
+	),
+	fa_youtube: dynamic(
+		() => import('@/../public/img/icons/fa-youtube.svg'),
+		opts
+	),
+	icon_more: dynamic(() => import('@/../public/img/icons/icon-more.svg'), opts),
 	fa_question_circle: dynamic(
-		() => import('@public/img/icons/fa-question-circle.svg'),
+		() => import('@/../public/img/icons/fa-question-circle.svg'),
 		opts
 	),
-	fa_link: dynamic(() => import('@public/img/icons/fa-link.svg'), opts),
+	fa_link: dynamic(() => import('@/../public/img/icons/fa-link.svg'), opts),
 	fa_landmark_heavy: dynamic(
-		() => import('@public/img/icons/fa-landmark-heavy.svg'),
+		() => import('@/../public/img/icons/fa-landmark-heavy.svg'),
 		opts
 	),
 	fa_lock_heavy: dynamic(
-		() => import('@public/img/icons/fa-lock-heavy.svg'),
+		() => import('@/../public/img/icons/fa-lock-heavy.svg'),
 		opts
 	),
 	fa_newspaper_heavy: dynamic(
-		() => import('@public/img/icons/fa-newspaper-heavy.svg'),
+		() => import('@/../public/img/icons/fa-newspaper-heavy.svg'),
 		opts
 	),
 	icon_sign_out: dynamic(
-		() => import('@public/img/icons/icon-sign-out.svg'),
+		() => import('@/../public/img/icons/icon-sign-out.svg'),
 		opts
 	),
-	fa_store: dynamic(() => import('@public/img/icons/fa-store.svg'), opts),
+	fa_store: dynamic(() => import('@/../public/img/icons/fa-store.svg'), opts),
 };
 
 export function useNavigationItems(): INavigationItem[] {

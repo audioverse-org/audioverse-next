@@ -5,9 +5,9 @@ import LoadingIndicator from '@components/molecules/loadingIndicator';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import useRouterLoading from '@lib/useRouterLoading';
 
-jest.mock('@lib/useRouterLoading');
+vi.mock('@lib/useRouterLoading');
 
-const mockUseRouterLoading = useRouterLoading as jest.Mock;
+const mockUseRouterLoading = useRouterLoading as vi.Mock;
 
 describe('loading indicator', () => {
 	it('shows indicator when router loading', async () => {
@@ -15,9 +15,6 @@ describe('loading indicator', () => {
 
 		await renderWithProviders(<LoadingIndicator />);
 
-		expect(screen.getByTestId('loading-indicator')).toHaveClass(
-			'visible',
-			'loading'
-		);
+		expect(await screen.findByRole('progressbar')).toBeVisible();
 	});
 });

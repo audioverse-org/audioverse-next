@@ -10,7 +10,7 @@ import Search, {
 
 import { screen, waitFor } from '@testing-library/react';
 
-jest.mock('next/head');
+vi.mock('next/head');
 
 const renderPage = async () => {
 	return renderWithProviders(<Search language={Language.English} />, undefined);

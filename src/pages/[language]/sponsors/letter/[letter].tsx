@@ -37,7 +37,7 @@ export async function getStaticProps({
 	}));
 	return {
 		props: {
-			sponsors: sponsors.nodes || [],
+			sponsors: sponsors?.nodes || [],
 			sponsorLetterCounts,
 			title: intl.formatMessage({
 				id: 'sponsors__title',

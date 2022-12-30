@@ -5,11 +5,11 @@ import { storeRequest } from '@lib/api/storeRequest';
 
 const noopQuery = 'query noop { noop { noop } }';
 
-global.fetch = jest.fn();
-jest.unmock('@lib/api/fetchApi');
+global.fetch = vi.fn();
+vi.unmock('@lib/api/fetchApi');
 
 const mockFetchResponse = () => {
-	(global.fetch as jest.Mock).mockResolvedValue({
+	(global.fetch as vi.Mock).mockResolvedValue({
 		text: () => Promise.resolve(JSON.stringify('result')),
 		ok: true,
 	});

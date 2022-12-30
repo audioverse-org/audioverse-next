@@ -1,10 +1,9 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load } from '@lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
@@ -12,16 +11,16 @@ import {
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 
-jest.mock('js-cookie');
-jest.mock('react-google-login');
+vi.mock('js-cookie');
+vi.mock('react-google-login');
 
 const renderPage = buildRenderer(Register);
 
-const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
+const router = { push: () => vi.fn().mockResolvedValue(true) } as any;
 
 describe('register page', () => {
 	beforeEach(() => {
-		Cookie.get = jest.fn().mockReturnValue({});
+		Cookie.get = vi.fn().mockReturnValue({});
 	});
 
 	it('renders', async () => {
@@ -104,17 +103,15 @@ describe('register page', () => {
 	});
 
 	it('displays returned errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterDocument, expect.anything())
-			.mockResolvedValue({
-				signup: {
-					errors: [
-						{
-							message: 'the_error_message',
-						},
-					],
-				},
-			});
+		__load(RegisterDocument, {
+			signup: {
+				errors: [
+					{
+						message: 'the_error_message',
+					},
+				],
+			},
+		});
 
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
@@ -153,17 +150,15 @@ describe('register page', () => {
 	});
 
 	it('renders google signon errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					errors: [
-						{
-							message: 'the_error_message',
-						},
-					],
-				},
-			});
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				errors: [
+					{
+						message: 'the_error_message',
+					},
+				],
+			},
+		});
 
 		const { getByText } = await renderPage({ router });
 
@@ -175,17 +170,15 @@ describe('register page', () => {
 	});
 
 	it('renders facebook signon errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					errors: [
-						{
-							message: 'the_error_message',
-						},
-					],
-				},
-			});
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				errors: [
+					{
+						message: 'the_error_message',
+					},
+				],
+			},
+		});
 
 		const { getByText } = await renderPage({ router });
 
@@ -225,15 +218,13 @@ describe('register page', () => {
 	});
 
 	it('saves facebook login session token', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					authenticatedUser: {
-						sessionToken: 'the_token',
-					},
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
 				},
-			});
+			},
+		});
 
 		await renderPage({ router });
 
@@ -279,7 +270,7 @@ describe('register page', () => {
 	});
 
 	it('does not display form if user logged in', async () => {
-		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookie.get = vi.fn().mockReturnValue({ avSession: 'abc123' });
 
 		const { queryByPlaceholderText } = await renderPage({ router });
 

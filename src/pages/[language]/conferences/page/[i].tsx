@@ -27,8 +27,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,
-		(d) => d.conferences.nodes,
-		(d) => d.conferences.aggregate?.count,
+		(d) => d.conferences?.nodes,
+		(d) => d.conferences?.aggregate?.count,
 		() => ({
 			title: intl.formatMessage({
 				id: 'conferences__title',

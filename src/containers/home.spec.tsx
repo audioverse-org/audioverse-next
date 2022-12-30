@@ -12,7 +12,7 @@ import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Home, { getStaticPaths, getStaticProps } from '@pages/[language]';
 
-jest.mock('next/router');
+vi.mock('next/router');
 
 const renderPage = buildStaticRenderer(Home, getStaticProps);
 

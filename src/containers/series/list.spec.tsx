@@ -1,7 +1,6 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
@@ -47,15 +46,13 @@ describe('series list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSeriesListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				serieses: {
-					aggregate: {
-						count: 1,
-					},
+		__load(GetSeriesListPathsDataDocument, {
+			serieses: {
+				aggregate: {
+					count: 1,
 				},
-			});
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -89,9 +86,7 @@ describe('series list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSeriesListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSeriesListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

@@ -1,7 +1,6 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
@@ -55,13 +54,11 @@ describe('blog post detail page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetBlogDetailStaticPathsDocument, expect.anything())
-			.mockResolvedValue({
-				blogPosts: {
-					nodes: [{ canonicalPath: 'the_blog_post_path' }],
-				},
-			});
+		__load(GetBlogDetailStaticPathsDocument, {
+			blogPosts: {
+				nodes: [{ canonicalPath: 'the_blog_post_path' }],
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -69,9 +66,7 @@ describe('blog post detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetBlogDetailDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetBlogDetailDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

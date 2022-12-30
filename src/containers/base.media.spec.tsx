@@ -138,7 +138,7 @@ const renderApp = async (
 	);
 
 	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+		await vi.mocked(getIntlMessages).mock.results[0]?.value;
 	});
 
 	return {
@@ -154,7 +154,9 @@ const renderApp = async (
 };
 
 describe('app media playback', () => {
-	beforeEach(() => setPlayerMock());
+	beforeEach(() => {
+		setPlayerMock();
+	});
 
 	it('moves video to and from miniplayer', async () => {
 		const result = await renderApp(true, recordingVideo);
@@ -162,6 +164,8 @@ describe('app media playback', () => {
 		userEvent.click(result.getByAltText('the_sermon_title'));
 
 		await waitFor(() => result.expectVideoLocation(result.getPlayer()));
+
+		await screen.findByLabelText('miniplayer');
 
 		await result.rerender(false);
 
@@ -185,13 +189,13 @@ describe('app media playback', () => {
 
 		await result.rerender(false);
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
-		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+		const pause = getByLabelText(miniplayer, 'pause');
 
-		expect(controls).toHaveClass('hidden');
+		await waitFor(() => expect(pause).not.toBeVisible());
 	});
 
 	it('shows controls when video not in miniplayer', async () => {
@@ -339,7 +343,7 @@ describe('app media playback', () => {
 
 		if (!pane) throw new Error('unable to find pane');
 
-		pane.appendChild = jest.fn();
+		pane.appendChild = vi.fn();
 
 		const player = result.getByLabelText('player');
 

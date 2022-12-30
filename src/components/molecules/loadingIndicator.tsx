@@ -31,6 +31,8 @@ const LoadingIndicator: React.VoidFunctionComponent = () => {
 				isAnyLoading && styles.loading
 			)}
 			data-testid="loading-indicator"
+			role="progressbar"
+			aria-hidden={!visible}
 		>
 			<div />
 		</div>

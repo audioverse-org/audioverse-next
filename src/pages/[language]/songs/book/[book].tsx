@@ -35,7 +35,7 @@ export async function getStaticProps({
 	return {
 		props: {
 			book,
-			musicTracks: musicTracks.nodes || [],
+			musicTracks: musicTracks?.nodes || [],
 			title: intl.formatMessage(
 				{
 					id: 'songBook__title',

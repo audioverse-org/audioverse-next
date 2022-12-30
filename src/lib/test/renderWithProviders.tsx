@@ -31,7 +31,7 @@ export default async function renderWithProviders(
 	);
 
 	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+		await vi.mocked(getIntlMessages).mock.results[0]?.value;
 	});
 
 	return {

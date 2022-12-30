@@ -1,7 +1,6 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi, __load } from '@lib/api/fetchApi';
 import {
 	GetStoriesAlbumsPageDataDocument,
 	GetStoriesAlbumsPathDataDocument,
@@ -16,26 +15,24 @@ import StoryAlbumsList, {
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			storySeasons: {
-				nodes: [
-					{
-						id: 'the_story_id',
-						title: 'the_story_title',
-						canonicalPath: 'the_story_path',
-						contentType: SequenceContentType.StorySeason,
-						speakers: [],
-						allRecordings: {
-							aggregate: {
-								count: 0,
-							},
+	__load(GetStoriesAlbumsPageDataDocument, {
+		storySeasons: {
+			nodes: [
+				{
+					id: 'the_story_id',
+					title: 'the_story_title',
+					canonicalPath: 'the_story_path',
+					contentType: SequenceContentType.StorySeason,
+					speakers: [],
+					allRecordings: {
+						aggregate: {
+							count: 0,
 						},
 					},
-				],
-			},
-		});
+				},
+			],
+		},
+	});
 }
 
 describe('stories list page', () => {
@@ -63,15 +60,13 @@ describe('stories list page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(fetchApi)
-			.calledWith(GetStoriesAlbumsPathDataDocument, expect.anything())
-			.mockResolvedValue({
-				storySeasons: {
-					aggregate: {
-						count: 1,
-					},
+		__load(GetStoriesAlbumsPathDataDocument, {
+			storySeasons: {
+				aggregate: {
+					count: 1,
 				},
-			});
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -105,13 +100,11 @@ describe('stories list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
-			.mockResolvedValue({
-				storySeasons: {
-					nodes: [],
-				},
-			});
+		__load(GetStoriesAlbumsPageDataDocument, {
+			storySeasons: {
+				nodes: [],
+			},
+		});
 
 		const { getByText } = await renderPage();
 

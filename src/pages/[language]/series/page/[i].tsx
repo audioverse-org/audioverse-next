@@ -25,8 +25,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		getSeriesListPageData,
-		(d) => d.serieses.nodes,
-		(d) => d.serieses.aggregate?.count,
+		(d) => d.serieses?.nodes,
+		(d) => d.serieses?.aggregate?.count,
 		() => ({
 			title: intl.formatMessage({
 				id: 'seriesList__title',

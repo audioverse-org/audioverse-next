@@ -135,7 +135,7 @@ describe('card slider', () => {
 			},
 		});
 
-		expect(getByLabelText('Page 1')).toHaveClass('active');
+		expect(getByLabelText('Page 1')).toHaveAttribute('aria-current', 'true');
 	});
 
 	it('calculates dot count dynamically', async () => {

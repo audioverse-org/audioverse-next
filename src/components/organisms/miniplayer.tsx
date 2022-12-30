@@ -52,6 +52,7 @@ export default function Miniplayer(): JSX.Element | null {
 	return (
 		<div
 			className={styles.miniplayer}
+			// TODO: Remove aria-label since this is a non-interactive element
 			aria-label={intl.formatMessage({
 				id: 'miniplayer__label',
 				defaultMessage: 'miniplayer',

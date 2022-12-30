@@ -32,7 +32,7 @@ type MockPlayer = Pick<
 	_fire: (event: string, data?: any) => void;
 };
 
-export const mockVideojs = videojs as unknown as jest.Mock;
+export const mockVideojs = videojs as unknown as vi.Mock;
 
 export default function setPlayerMock(
 	options: SetPlayerMockOptions = {}
@@ -64,43 +64,43 @@ export default function setPlayerMock(
 		_fire: (event: string, data: any = null) => {
 			handlers[event]?.map((fn: (data: any) => any) => fn(data));
 		},
-		play: jest.fn(async () => {
+		play: vi.fn(async () => {
 			isPaused = false;
 		}),
-		pause: jest.fn(() => {
+		pause: vi.fn(() => {
 			isPaused = true;
 			return mockPlayer as unknown as videojs.Player;
 		}),
-		paused: jest.fn(() => isPaused),
-		currentTime: jest.fn((newTime: number | null = null) => {
+		paused: vi.fn(() => isPaused),
+		currentTime: vi.fn((newTime: number | null = null) => {
 			if (newTime !== null) time = newTime;
 			return time;
 		}),
-		volume: jest.fn((newVolume: number | null = null) => {
+		volume: vi.fn((newVolume: number | null = null) => {
 			if (newVolume !== null) volume = newVolume;
 			return volume;
 		}) as any,
-		duration: jest.fn(() => duration),
-		src: jest.fn(),
-		options: jest.fn(),
+		duration: vi.fn(() => duration),
+		src: vi.fn(),
+		options: vi.fn(),
 		controlBar: {
-			createEl: jest.fn(),
-			dispose: jest.fn(),
+			createEl: vi.fn(),
+			dispose: vi.fn(),
 		} as any,
-		playbackRate: jest.fn((newRate?: number) => {
+		playbackRate: vi.fn((newRate?: number) => {
 			if (newRate) playbackRate = newRate;
 			return playbackRate;
 		}),
-		defaultPlaybackRate: jest.fn(),
-		requestFullscreen: jest.fn(),
-		controls: jest.fn(),
-		supportsFullScreen: jest.fn(() => supportsFullScreen),
-		isFullscreen: jest.fn(() => isFullscreen),
-		on: jest.fn((event: string, fn: (data: any) => any) => {
+		defaultPlaybackRate: vi.fn(),
+		requestFullscreen: vi.fn(),
+		controls: vi.fn(),
+		supportsFullScreen: vi.fn(() => supportsFullScreen),
+		isFullscreen: vi.fn(() => isFullscreen),
+		on: vi.fn((event: string, fn: (data: any) => any) => {
 			if (!(event in handlers)) handlers[event] = [];
 			handlers[event].push(fn);
 		}) as any,
-		bufferedEnd: jest.fn(),
+		bufferedEnd: vi.fn(),
 		...functions,
 	};
 

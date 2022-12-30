@@ -4,10 +4,10 @@ import { useLogout } from '@lib/api/useLogout';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Logout from '@pages/[language]/account/logout';
 
-jest.mock('@lib/api/useLogout');
+vi.mock('@lib/api/useLogout');
 
 const renderPage = buildRenderer(Logout);
-const mockUseLogout = useLogout as jest.Mock;
+const mockUseLogout = useLogout as vi.Mock;
 
 describe('logout route', () => {
 	it('logs out', async () => {

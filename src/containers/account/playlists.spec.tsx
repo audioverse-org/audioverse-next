@@ -104,7 +104,7 @@ describe('playlists page', () => {
 	});
 
 	it('prompts for login if user not logged in', async () => {
-		Cookies.get = jest.fn().mockReturnValue({});
+		Cookies.get = vi.fn().mockReturnValue({});
 
 		const { getByPlaceholderText } = await renderPage();
 
@@ -154,7 +154,7 @@ describe('playlists page', () => {
 		userEvent.type(getByLabelText('title'), 'the_title');
 		userEvent.type(getByLabelText('summary'), 'the_summary');
 
-		jest.mocked(fetchApi).mockClear();
+		vi.mocked(fetchApi).mockClear();
 
 		userEvent.click(getByText('Add Playlist'));
 
