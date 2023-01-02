@@ -25,7 +25,7 @@ export default function SocialLogin({
 }): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
-	const didUnmount = useDidUnmount();
+	// const didUnmount = useDidUnmount();
 	const queryClient = useQueryClient();
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
@@ -33,12 +33,12 @@ export default function SocialLogin({
 			onSuccess: async (response) => {
 				const errors = response?.loginSocial.errors || [];
 				const token = response?.loginSocial.authenticatedUser?.sessionToken;
-
 				if (token && !errors.length) {
 					setSessionToken(token);
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
-				} else if (!didUnmount.current) {
+				} else {
 					setErrors(errors.map((e) => e.message));
+					return Promise.reject(errors);
 				}
 			},
 		});
@@ -116,14 +116,14 @@ export default function SocialLogin({
 						const socialToken = get(response, 'accessToken');
 						const status = get(response, 'status');
 						const statusText = get(response, 'statusText');
-
 						if (!socialToken) {
+							console.log('no social token');
 							if (status) {
 								setErrors([`${status}: ${statusText}`]);
 							}
 							return;
 						}
-
+						console.log('before mutate');
 						mutateSocial({
 							socialName: UserSocialServiceName.Facebook,
 							socialId,
@@ -131,6 +131,7 @@ export default function SocialLogin({
 							givenName,
 							surname,
 						});
+						console.log('after mutate');
 					}}
 					disableMobileRedirect
 				/>
