@@ -1,3 +1,5 @@
+import { beforeEach, vi } from 'vitest';
+
 declare module '../fetchApi' {
 	const __load: (query: string, result: any) => void;
 	const __loadReject: (query: string, result: any) => void;

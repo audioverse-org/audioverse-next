@@ -26,7 +26,6 @@ module.exports = {
 	root: true,
 	env: {
 		browser: true,
-		jest: true,
 	},
 	rules: {
 		'@calm/react-intl/missing-formatted-message': [

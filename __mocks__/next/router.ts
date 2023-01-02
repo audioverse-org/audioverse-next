@@ -1,6 +1,7 @@
 import { ParsedUrlQuery } from 'querystring';
 
 import Router_, { NextRouter } from 'next/router';
+import { beforeEach, vi } from 'vitest';
 
 const Router: typeof Router_ = {
 	events: {

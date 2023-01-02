@@ -1,4 +1,5 @@
 import { ResolvedIntlConfig } from 'react-intl';
+import { vi } from 'vitest';
 
 type GetIntlMessages = (
 	languageRoute: string

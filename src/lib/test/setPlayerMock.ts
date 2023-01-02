@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { vi } from 'vitest';
 
 interface SetPlayerMockOptions {
 	isPaused?: boolean;
@@ -32,7 +33,7 @@ type MockPlayer = Pick<
 	_fire: (event: string, data?: any) => void;
 };
 
-export const mockVideojs = videojs as unknown as vi.Mock;
+export const mockVideojs = vi.mocked(videojs);
 
 export default function setPlayerMock(
 	options: SetPlayerMockOptions = {}
@@ -104,7 +105,7 @@ export default function setPlayerMock(
 		...functions,
 	};
 
-	mockVideojs.mockReturnValue(mockPlayer);
+	mockVideojs.mockReturnValue(mockPlayer as unknown as videojs.Player);
 
 	return mockPlayer;
 }

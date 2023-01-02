@@ -15,7 +15,6 @@ export default defineConfig({
 		}),
 	],
 	test: {
-		globals: true,
 		environment: 'jsdom',
 		setupFiles: process.env.STRICT ? 'testSetup.strict.ts' : 'testSetup.ts',
 		css: {

@@ -1,9 +1,8 @@
-import '@testing-library/jest-dom/extend-expect';
 import { cleanup } from '@testing-library/react';
 import matchers, {
 	TestingLibraryMatchers,
 } from '@testing-library/jest-dom/matchers';
-import { forwardRef, Suspense } from 'react';
+import { vi, expect, afterEach, beforeAll, beforeEach } from 'vitest';
 
 const m: TestingLibraryMatchers<string, void> = matchers;
 
@@ -26,6 +25,8 @@ vi.mock('next/script');
 vi.mock('masonic');
 vi.mock('next/dynamic');
 vi.mock('next/head');
+
+(globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
 
 afterEach(() => {
 	cleanup();
