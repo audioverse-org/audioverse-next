@@ -123,19 +123,21 @@ describe('password reset page', () => {
 	});
 
 	it('displays api errors', async () => {
-		loadResetPasswordResponse({
-			success: false,
-			errors: [{ message: 'the_error' }],
-		});
+		withMutedReactQueryLogger(async () => {
+			loadResetPasswordResponse({
+				success: false,
+				errors: [{ message: 'the_error' }],
+			});
 
-		const { getByPlaceholderText, getByText } = await renderPage();
+			const { getByPlaceholderText, getByText } = await renderPage();
 
-		userEvent.type(getByPlaceholderText('New password'), 'new_pass');
-		userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
-		userEvent.click(getByText('Login'));
+			userEvent.type(getByPlaceholderText('New password'), 'new_pass');
+			userEvent.type(getByPlaceholderText('Confirm new password'), 'new_pass');
+			userEvent.click(getByText('Login'));
 
-		await waitFor(() => {
-			expect(getByText('the_error')).toBeInTheDocument();
+			await waitFor(() => {
+				expect(getByText('the_error')).toBeInTheDocument();
+			});
 		});
 	});
 
@@ -150,10 +152,16 @@ describe('password reset page', () => {
 			userEvent.click(getByText('Login'));
 
 			await waitFor(() => {
-				expect(
-					getByText('Something went wrong while trying to reset your password')
-				).toBeInTheDocument();
+				expect(screen.getByText('Login')).not.toBeEnabled();
 			});
+
+			await waitFor(() => {
+				expect(screen.getByText('Login')).toBeEnabled();
+			});
+
+			expect(
+				getByText('Something went wrong while trying to reset your password')
+			).toBeInTheDocument();
 		});
 	});
 

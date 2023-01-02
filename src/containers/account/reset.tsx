@@ -32,6 +32,7 @@ function Reset(): JSX.Element {
 			const errors = data.userReset.errors;
 			if (errors.length) {
 				setErrors(errors.map((e) => e.message));
+				return Promise.reject(errors);
 			} else if (data.userReset.success) {
 				setSuccessMessage(
 					intl.formatMessage({
@@ -54,6 +55,7 @@ function Reset(): JSX.Element {
 						}),
 					]);
 					setIsLoggingIn(false);
+					return Promise.reject();
 				}
 			}
 		},
