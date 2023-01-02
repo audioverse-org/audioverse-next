@@ -220,11 +220,11 @@ describe('app media playback', () => {
 
 		userEvent.click(result.getByLabelText('play'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
-		await findByLabelText(miniplayer, 'pause');
+		const pause = await findByLabelText(miniplayer, 'pause');
 
-		const controls = getByLabelText(miniplayer, 'pause').parentElement;
+		const controls = pause.parentElement;
 
 		expect(controls).not.toHaveClass('hidden');
 	});
@@ -255,7 +255,7 @@ describe('app media playback', () => {
 
 		userEvent.click(result.getByAltText('the_sermon_title'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
@@ -292,7 +292,7 @@ describe('app media playback', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'play');
 
@@ -316,7 +316,7 @@ describe('app media playback', () => {
 
 		userEvent.click(result.getByText('Video'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
 		// expect video-element to never appear in miniplayer
 		await expect(async () => {
@@ -339,7 +339,7 @@ describe('app media playback', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 		const pane = miniplayer.querySelector('#mini-player');
 
 		if (!pane) throw new Error('unable to find pane');
