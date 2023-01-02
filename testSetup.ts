@@ -9,6 +9,7 @@ const m: TestingLibraryMatchers<string, void> = matchers;
 
 expect.extend(m);
 
+// TODO: Alphabetize these mock statements
 vi.mock('@lib/api/fetchApi');
 vi.mock('video.js');
 vi.mock('@silvermine/videojs-airplay');
@@ -39,6 +40,7 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
+	// TODO: Do this in vitest.config.js instead
 	vi.clearAllMocks();
 });
 

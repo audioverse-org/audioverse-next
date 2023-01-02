@@ -233,7 +233,7 @@ describe('app media playback', () => {
 
 		userEvent.click(result.getByAltText('the_sermon_title'));
 
-		const miniplayer = result.getByLabelText('miniplayer');
+		const miniplayer = await result.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
