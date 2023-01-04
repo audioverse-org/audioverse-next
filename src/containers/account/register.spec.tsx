@@ -99,7 +99,7 @@ describe('register page', () => {
 		});
 	});
 
-	it.only('displays loading state', async () => {
+	it('displays loading state', async () => {
 		await renderPage({ router });
 
 		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
