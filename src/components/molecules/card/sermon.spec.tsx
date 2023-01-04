@@ -101,8 +101,6 @@ describe('card sermon', () => {
 	// 		},
 	// 	});
 	//
-	// 	console.log('clicking play');
-	//
 	// 	userEvent.click(getByLabelText('play'));
 	//
 	// 	await waitFor(() => {

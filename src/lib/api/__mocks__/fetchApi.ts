@@ -29,7 +29,16 @@ export const fetchApi = vi.fn();
 
 beforeEach(() => {
 	m.clear();
-	fetchApi
-		.mockReset()
-		.mockImplementation((q) => Promise.resolve(m.get(q)?.data));
+	fetchApi.mockReset().mockImplementation((q) => {
+		const { data, resolve } = m.get(q) ?? {
+			data: null,
+			resolve: false,
+		};
+
+		if (resolve) {
+			return Promise.resolve(data);
+		}
+
+		return Promise.reject(data);
+	});
 });

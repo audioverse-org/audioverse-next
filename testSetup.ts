@@ -3,6 +3,7 @@ import matchers, {
 	TestingLibraryMatchers,
 } from '@testing-library/jest-dom/matchers';
 import { vi, expect, afterEach, beforeAll, beforeEach } from 'vitest';
+import { setLogger } from 'react-query';
 
 const m: TestingLibraryMatchers<string, void> = matchers;
 
@@ -26,16 +27,24 @@ vi.mock('masonic');
 vi.mock('next/dynamic');
 vi.mock('next/head');
 
-afterEach(() => {
-	cleanup();
-});
-
 // WORKAROUND: https://github.com/keppelen/react-facebook-login/issues/217#issuecomment-375652793
 beforeAll(() => {
 	const fbScript = document.createElement('script');
 	fbScript.id = 'facebook-jssdk';
 
 	document.body.appendChild(fbScript);
+});
+
+beforeEach(() => {
+	setLogger({
+		log: () => {},
+		warn: () => {},
+		error: () => {},
+	});
+});
+
+afterEach(() => {
+	cleanup();
 });
 
 module.exports = async () => {

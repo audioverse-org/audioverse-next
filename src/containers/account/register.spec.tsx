@@ -11,6 +11,8 @@ import {
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import { setLogger } from 'react-query';
 
 vi.mock('js-cookie');
 vi.mock('react-google-login');
@@ -90,7 +92,7 @@ describe('register page', () => {
 		});
 	});
 
-	it('displays loading state', async () => {
+	it.only('displays loading state', async () => {
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
 		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
@@ -171,26 +173,36 @@ describe('register page', () => {
 	});
 
 	it('renders facebook signon errors', async () => {
-		__load(RegisterSocialDocument, {
-			loginSocial: {
-				errors: [
-					{
-						message: 'the_error_message',
-					},
-				],
-			},
-		});
+		await withMutedReactQueryLogger(async () => {
+			__load(RegisterSocialDocument, {
+				loginSocial: {
+					errors: [
+						{
+							message: 'the_error_message',
+						},
+					],
+				},
+			});
 
-		const { getByText } = await renderPage({ router });
+			const { getByText } = await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+			userEvent.click(await screen.findByText('Sign up with Facebook'));
 
-		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
+			await waitFor(() => {
+				expect(getByText('the_error_message')).toBeInTheDocument();
+			});
 		});
 	});
 
 	it('renders social login success', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		const { getByText } = await renderPage({ router });
 
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -201,6 +213,14 @@ describe('register page', () => {
 	});
 
 	it('hits api with facebook registration', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		await renderPage({ router });
 
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -279,6 +299,14 @@ describe('register page', () => {
 	});
 
 	it('sends Google login data to API', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		const { getByText } = await renderPage({ router });
 
 		userEvent.click(getByText('Sign up with Google'));

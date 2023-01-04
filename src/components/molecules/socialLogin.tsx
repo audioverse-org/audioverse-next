@@ -37,8 +37,16 @@ export default function SocialLogin({
 					setSessionToken(token);
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
 				} else {
-					setErrors(errors.map((e) => e.message));
 					return Promise.reject(errors);
+				}
+			},
+			onError: (e) => {
+				if (e instanceof Array) {
+					setErrors(e.map((e) => e.message));
+				} else if (e instanceof Error) {
+					setErrors([e.message]);
+				} else {
+					setErrors(['Unknown error occurred']);
 				}
 			},
 		});
@@ -117,13 +125,11 @@ export default function SocialLogin({
 						const status = get(response, 'status');
 						const statusText = get(response, 'statusText');
 						if (!socialToken) {
-							console.log('no social token');
 							if (status) {
 								setErrors([`${status}: ${statusText}`]);
 							}
 							return;
 						}
-						console.log('before mutate');
 						mutateSocial({
 							socialName: UserSocialServiceName.Facebook,
 							socialId,
@@ -131,7 +137,6 @@ export default function SocialLogin({
 							givenName,
 							surname,
 						});
-						console.log('after mutate');
 					}}
 					disableMobileRedirect
 				/>
