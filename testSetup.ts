@@ -26,8 +26,6 @@ vi.mock('masonic');
 vi.mock('next/dynamic');
 vi.mock('next/head');
 
-(globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;
-
 afterEach(() => {
 	cleanup();
 });
