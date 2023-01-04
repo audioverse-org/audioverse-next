@@ -12,6 +12,7 @@ import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/testimonies/page/[i]';
+import { describe, it, expect } from 'vitest';
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {
 	__load(GetTestimoniesPageDataDocument, {

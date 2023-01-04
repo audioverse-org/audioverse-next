@@ -11,6 +11,7 @@ import SponsorConferences, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/[id]/conferences/page/[i]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(SponsorConferences, getStaticProps);
 

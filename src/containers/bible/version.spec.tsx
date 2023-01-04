@@ -9,6 +9,7 @@ import Version, {
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[[...slugs]]';
 import { screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('@lib/api/bibleBrain');
 

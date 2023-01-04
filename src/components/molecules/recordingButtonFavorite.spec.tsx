@@ -11,6 +11,7 @@ import { BaseColors } from '@lib/constants';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import loadControlledPromise from '@lib/test/loadControlledPromise';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 
 vi.mock('@lib/api/recordingIsFavorited');
 vi.mock('@lib/api/setRecordingFavorited');
@@ -35,8 +36,8 @@ const renderComponent = async () => {
 	};
 };
 
-const mockRecordingIsFavorited = recordingIsFavorited as vi.Mock;
-const mockSetRecordingFavorited = setRecordingFavorited as vi.Mock;
+const mockRecordingIsFavorited = recordingIsFavorited as Mock;
+const mockSetRecordingFavorited = setRecordingFavorited as Mock;
 
 describe('recording favorite button', () => {
 	beforeEach(() => {

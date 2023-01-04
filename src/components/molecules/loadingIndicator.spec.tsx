@@ -4,10 +4,11 @@ import React from 'react';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import useRouterLoading from '@lib/useRouterLoading';
+import { Mock, vi, describe, it, expect } from 'vitest';
 
 vi.mock('@lib/useRouterLoading');
 
-const mockUseRouterLoading = useRouterLoading as vi.Mock;
+const mockUseRouterLoading = useRouterLoading as Mock;
 
 describe('loading indicator', () => {
 	it('shows indicator when router loading', async () => {

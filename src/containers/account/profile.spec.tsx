@@ -19,6 +19,7 @@ import { buildServerRenderer } from '@lib/test/buildServerRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
 vi.mock('@lib/api/login');
 vi.mock('@lib/api/storeRequest');
@@ -26,7 +27,7 @@ vi.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
 
-const mockedLogin = login as vi.Mock;
+const mockedLogin = login as Mock;
 
 const userBefore = {
 	givenName: 'the_given_name',
@@ -64,7 +65,7 @@ describe('profile page', () => {
 	});
 
 	it('dehydrates user', async () => {
-		(fetchApi as vi.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'the_name',
@@ -86,7 +87,7 @@ describe('profile page', () => {
 	});
 
 	it('includes first name', async () => {
-		(fetchApi as vi.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'first',
@@ -204,7 +205,7 @@ describe('profile page', () => {
 			query: {},
 		});
 		Cookie.get = vi.fn().mockReturnValue({});
-		(fetchApi as vi.Mock).mockResolvedValue({});
+		(fetchApi as Mock).mockResolvedValue({});
 
 		await renderWithProviders(<Profile />, undefined);
 

@@ -32,6 +32,7 @@ import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 
 vi.mock('video.js');
 vi.mock('@lib/api/fetchApi');
@@ -246,7 +247,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as vi.Mock).mock.calls;
+		const calls = (videojs as any as Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -280,7 +281,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as vi.Mock).mock.calls;
+		const calls = (videojs as any as Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(
@@ -312,7 +313,7 @@ describe('sermon detail page', () => {
 			expect(videojs).toBeCalled();
 		});
 
-		const calls = (videojs as any as vi.Mock).mock.calls;
+		const calls = (videojs as any as Mock).mock.calls;
 		const sourceSets = calls.map((c) => c[1].sources);
 
 		expect(sourceSets).toEqual(

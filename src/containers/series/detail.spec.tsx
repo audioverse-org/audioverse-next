@@ -14,6 +14,7 @@ import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
+import { describe, it, expect, beforeEach, Mock } from 'vitest';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
@@ -80,7 +81,7 @@ describe('series detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		(fetchApi as vi.Mock).mockRejectedValueOnce(undefined);
+		(fetchApi as Mock).mockRejectedValueOnce(undefined);
 
 		const { getByText } = await renderPage();
 
@@ -110,7 +111,7 @@ describe('series detail page', () => {
 	});
 
 	it('returns static paths', async () => {
-		(fetchApi as vi.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			serieses: {
 				nodes: [
 					{

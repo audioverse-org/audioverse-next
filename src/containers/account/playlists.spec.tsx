@@ -12,6 +12,7 @@ import {
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
+import { describe, it, expect, vi } from 'vitest';
 
 import Playlists from './playlists';
 

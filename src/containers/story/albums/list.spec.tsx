@@ -11,6 +11,7 @@ import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 

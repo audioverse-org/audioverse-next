@@ -1,4 +1,5 @@
 import { fetchApi, __load } from './fetchApi';
+import { vi, describe, it, expect } from 'vitest';
 
 vi.mock('./fetchApi');
 

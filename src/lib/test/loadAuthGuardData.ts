@@ -2,6 +2,7 @@ import Cookie from 'js-cookie';
 
 import { __load } from '@lib/api/fetchApi';
 import { GetWithAuthGuardDataDocument } from '@lib/generated/graphql';
+import { vi } from 'vitest';
 
 export function loadAuthGuardData(email: any = 'the_email'): void {
 	Cookie.get = vi.fn().mockReturnValue({ avSession: 'abc123' });

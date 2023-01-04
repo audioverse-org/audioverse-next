@@ -9,6 +9,7 @@ import Search, {
 } from '@pages/[language]/search';
 
 import { screen, waitFor } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('next/head');
 

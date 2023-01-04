@@ -10,6 +10,7 @@ import Song, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/songs/book/[book]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);
 

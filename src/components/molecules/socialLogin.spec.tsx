@@ -7,6 +7,7 @@ import { fetchApi, __load } from '@lib/api/fetchApi';
 import { RegisterSocialDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import { describe, it, expect, vi } from 'vitest';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {

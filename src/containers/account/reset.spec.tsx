@@ -9,6 +9,7 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import Reset from '@pages/[language]/account/reset';
 import loadControlledPromise from '@lib/test/loadControlledPromise';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildRenderer(Reset);
 

@@ -23,11 +23,12 @@ import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 
 vi.mock('video.js');
 vi.mock('@lib/api/recordingIsFavorited');
 
-const mockRecordingIsFavorited = recordingIsFavorited as vi.Mock;
+const mockRecordingIsFavorited = recordingIsFavorited as Mock;
 
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',

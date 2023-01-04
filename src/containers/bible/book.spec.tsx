@@ -14,6 +14,15 @@ import Book, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
+import {
+	describe,
+	it,
+	expect,
+	beforeEach,
+	vi,
+	beforeAll,
+	afterAll,
+} from 'vitest';
 
 vi.mock('@lib/api/bibleBrain');
 vi.mock('video.js');

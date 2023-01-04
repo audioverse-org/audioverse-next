@@ -8,6 +8,7 @@ import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 function loadForgotPasswordResponse({
 	success = true,

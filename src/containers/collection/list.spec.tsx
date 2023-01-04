@@ -10,6 +10,7 @@ import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/conferences/page/[i]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(CollectionList, getStaticProps);
 

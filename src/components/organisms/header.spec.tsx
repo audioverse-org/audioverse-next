@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '@components/organisms/header';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import { screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
 
 vi.mock('@lib/api/fetchApi');
 

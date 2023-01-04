@@ -10,6 +10,7 @@ import {
 } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 vi.mock('js-cookie');
 vi.mock('react-google-login');

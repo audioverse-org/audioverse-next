@@ -12,6 +12,7 @@ import Story, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/[id]/[[...slugs]]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(Story, getStaticProps);
 

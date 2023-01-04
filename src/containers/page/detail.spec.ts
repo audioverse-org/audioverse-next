@@ -10,6 +10,7 @@ import {
 } from '@lib/generated/graphql';
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(CustomPageDetail, getStaticProps);
 const loadData = buildLoader(GetCustomDetailPageDataDocument, {

@@ -1,3 +1,5 @@
+import { vi } from 'vitest';
+
 export const createControlledPromise = () => {
 	let resolve: (value?: unknown) => void = () => {
 		throw new Error('called resolve before definition');

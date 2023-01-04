@@ -8,6 +8,7 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 import { buildLoader } from '@lib/test/buildLoader';
 import userEvent from '@testing-library/user-event';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 
 vi.mock('next/script');
 
@@ -16,7 +17,7 @@ const mockBeacon = vi.fn();
 const renderComponent = buildRenderer(HelpWidget);
 
 const runOnLoad = () => {
-	const props = (Script as vi.Mock).mock.calls[0][0];
+	const props = (Script as Mock).mock.calls[0][0];
 	act(() => {
 		props.onLoad();
 	});
@@ -32,7 +33,7 @@ const awaitReady = async () => {
 
 const getRouteListener = async () => {
 	const matches = filterByExpectation(
-		(__mockedRouter.events.on as vi.Mock).mock.calls,
+		(__mockedRouter.events.on as Mock).mock.calls,
 		expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
 	);
 

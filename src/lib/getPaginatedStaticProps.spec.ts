@@ -1,4 +1,5 @@
 import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { expect, describe, it } from 'vitest';
 
 describe('getPaginatedStaticProps', () => {
 	it('defaults nodes to empty array', async () => {

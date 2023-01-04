@@ -12,6 +12,7 @@ import SeriesList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/page/[i]';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(SeriesList, getStaticProps);
 

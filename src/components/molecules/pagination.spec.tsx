@@ -5,6 +5,7 @@ import { QueryClient } from 'react-query';
 import renderWithProviders from '@lib/test/renderWithProviders';
 
 import Pagination, { pagination } from './pagination';
+import { describe, it, expect, test } from 'vitest';
 
 const renderPagination = ({
 	current = 1,

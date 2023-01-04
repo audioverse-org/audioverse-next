@@ -10,6 +10,7 @@ import {
 import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Discover, { getStaticProps } from '@pages/[language]/discover';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);
 const loadData = buildLoader<GetDiscoverPageDataQuery>(

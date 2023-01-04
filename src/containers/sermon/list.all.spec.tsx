@@ -20,6 +20,7 @@ import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
+import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
 
 vi.mock('next/head');
 
@@ -39,7 +40,7 @@ export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	(fetchApi as vi.Mock).mockResolvedValue({
+	(fetchApi as Mock).mockResolvedValue({
 		sermons: {
 			nodes: nodes || [
 				{
@@ -137,7 +138,7 @@ describe('sermons list page', () => {
 	});
 
 	it('renders 404 on api error', async () => {
-		(useRouter as vi.Mock).mockReturnValue({ isFallback: false });
+		(useRouter as Mock).mockReturnValue({ isFallback: false });
 		__loadReject(GetSermonListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
@@ -146,7 +147,7 @@ describe('sermons list page', () => {
 	});
 
 	it('returns 404 on empty data', async () => {
-		(useRouter as vi.Mock).mockReturnValue({ isFallback: false });
+		(useRouter as Mock).mockReturnValue({ isFallback: false });
 		loadSermonListData({ nodes: [] });
 
 		await renderPage();
@@ -285,7 +286,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes speaker name', async () => {
-		(fetchApi as vi.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			sermons: {
 				nodes: [
 					{

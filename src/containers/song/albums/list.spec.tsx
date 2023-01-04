@@ -11,6 +11,7 @@ import Songs, {
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
 import { screen } from '@testing-library/react';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 

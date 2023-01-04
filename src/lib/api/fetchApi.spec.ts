@@ -2,6 +2,7 @@ import set from 'lodash/set';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import { storeRequest } from '@lib/api/storeRequest';
+import { vi, Mock, describe, it, expect } from 'vitest';
 
 const noopQuery = 'query noop { noop { noop } }';
 
@@ -9,7 +10,7 @@ global.fetch = vi.fn();
 vi.unmock('@lib/api/fetchApi');
 
 const mockFetchResponse = () => {
-	(global.fetch as vi.Mock).mockResolvedValue({
+	(global.fetch as Mock).mockResolvedValue({
 		text: () => Promise.resolve(JSON.stringify('result')),
 		ok: true,
 	});

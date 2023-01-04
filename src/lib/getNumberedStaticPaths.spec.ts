@@ -4,6 +4,7 @@ import {
 	LIST_PRERENDER_LIMIT,
 } from '@lib/constants';
 import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
+import { describe, it, expect } from 'vitest';
 
 describe('getNumberedStaticPaths', () => {
 	it('enforces list render limit', async () => {

@@ -12,6 +12,7 @@ import {
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
