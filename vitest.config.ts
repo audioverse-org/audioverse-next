@@ -15,6 +15,7 @@ export default defineConfig({
 		}),
 	],
 	test: {
+		clearMocks: true,
 		environment: 'jsdom',
 		setupFiles: process.env.STRICT ? 'testSetup.strict.ts' : 'testSetup.ts',
 		css: {

@@ -46,6 +46,7 @@ export default function setPlayerMock(
 		playbackRate = 1,
 		functions = {},
 	} = options;
+
 	const { supportsFullScreen = true, isFullscreen = false } = options;
 
 	const handlers: Record<string, Array<(data: any) => any>> = {};

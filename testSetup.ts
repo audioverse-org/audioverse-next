@@ -40,11 +40,6 @@ beforeAll(() => {
 	document.body.appendChild(fbScript);
 });
 
-beforeEach(() => {
-	// TODO: Do this in vitest.config.js instead
-	vi.clearAllMocks();
-});
-
 module.exports = async () => {
 	process.env.TZ = 'UTC';
 };

@@ -216,35 +216,31 @@ describe('app media playback', () => {
 	});
 
 	it('shows controls when not playing video', async () => {
-		const result = await renderApp(true, recordingAudio);
+		await renderApp(true, recordingAudio);
 
-		userEvent.click(result.getByLabelText('play'));
+		userEvent.click(screen.getByLabelText('play'));
 
-		const miniplayer = await result.findByLabelText('miniplayer');
-
+		const miniplayer = await screen.findByLabelText('miniplayer');
 		const pause = await findByLabelText(miniplayer, 'pause');
-
 		const controls = pause.parentElement;
 
 		expect(controls).not.toHaveClass('hidden');
 	});
 
 	it('handles pause event', async () => {
-		const result = await renderApp(true, recordingVideo);
+		await renderApp(true, recordingVideo);
 
-		userEvent.click(result.getByAltText('the_sermon_title'));
+		userEvent.click(screen.getByAltText('the_sermon_title'));
 
-		const miniplayer = await result.findByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		await findByLabelText(miniplayer, 'pause');
 
-		const portal = result.getByTestId('portal');
+		const portal = screen.getByTestId('portal');
+		const video = await findByTestId(portal, 'video-element');
 
 		await act(async () => {
-			ReactTestUtils.Simulate.pause(
-				await findByTestId(portal, 'video-element'),
-				{} as any
-			);
+			ReactTestUtils.Simulate.pause(video, {} as any);
 		});
 
 		await findByLabelText(miniplayer, 'play');
@@ -299,26 +295,24 @@ describe('app media playback', () => {
 		expect(queryByTestId(miniplayer, 'video-element')).not.toBeInTheDocument();
 	});
 
+	// ALSO PROBLEMATIC
 	it('never shows video in miniplayer when still on detail page', async () => {
-		const result = await renderApp(true, recordingAudioVideo);
+		await renderApp(true, recordingAudioVideo);
 
-		await waitFor(() => {
-			expect(result.getByText('Audio')).toBeInTheDocument();
-		});
+		const audio = await screen.findByText('Audio');
 
-		userEvent.click(result.getByText('Audio'));
+		userEvent.click(audio);
 
-		const player = result.getByLabelText('player');
+		const player = screen.getByLabelText('player');
 
-		await waitFor(() => {
-			expect(getByLabelText(player, 'play')).toBeInTheDocument();
-		});
+		await findByLabelText(player, 'play');
 
-		userEvent.click(result.getByText('Video'));
+		userEvent.click(screen.getByText('Video'));
 
-		const miniplayer = await result.findByLabelText('miniplayer');
+		const miniplayer = await screen.findByLabelText('miniplayer');
 
 		// expect video-element to never appear in miniplayer
+		// TODO: find a more efficent way to test this
 		await expect(async () => {
 			await waitFor(() => {
 				expect(getByTestId(miniplayer, 'video-element')).toBeInTheDocument();
