@@ -35,6 +35,7 @@ function RegisterForm({
 
 	const intl = useIntl();
 
+	// TODO: Move this to an onSuccess callback on the mutation
 	useEffect(() => {
 		if (dataRegister?.signup.errors.length) {
 			setErrors(dataRegister?.signup.errors.map((e) => e.message));

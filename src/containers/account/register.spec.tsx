@@ -12,18 +12,25 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import { setLogger } from 'react-query';
+import { buildLoader } from '@lib/test/buildLoader';
 
 vi.mock('js-cookie');
 vi.mock('react-google-login');
 
 const renderPage = buildRenderer(Register);
-
 const router = { push: () => vi.fn().mockResolvedValue(true) } as any;
+const loadRegisterData = buildLoader(RegisterDocument, {
+	signup: {
+		errors: [],
+	},
+});
+const loadRegisterSocialData = buildLoader(RegisterSocialDocument, {});
 
 describe('register page', () => {
 	beforeEach(() => {
 		Cookie.get = vi.fn().mockReturnValue({});
+		loadRegisterData();
+		loadRegisterSocialData();
 	});
 
 	it('renders', async () => {
@@ -93,16 +100,13 @@ describe('register page', () => {
 	});
 
 	it.only('displays loading state', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.click(screen.getByText('Sign up'));
 
-		userEvent.click(getByText('Sign up'));
-
-		await waitFor(() => {
-			expect(getByText('loading...')).toBeInTheDocument();
-		});
+		expect(await screen.findByText('loading...')).toBeInTheDocument();
 	});
 
 	it('displays returned errors', async () => {
