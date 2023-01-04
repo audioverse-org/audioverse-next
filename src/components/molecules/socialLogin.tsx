@@ -11,7 +11,6 @@ import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
 } from '@lib/generated/graphql';
-import useDidUnmount from '@lib/useDidUnmount';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';
@@ -25,7 +24,6 @@ export default function SocialLogin({
 }): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
-	// const didUnmount = useDidUnmount();
 	const queryClient = useQueryClient();
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
