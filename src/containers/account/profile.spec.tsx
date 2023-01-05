@@ -155,15 +155,15 @@ describe('profile page', () => {
 	});
 
 	it('prevents default form submission', async () => {
-		const { getByTestId } = await renderPage();
+		await renderPage();
+
+		const loginForm = screen.getByTestId('loginForm');
 
 		const event = {
 			preventDefault: vi.fn(),
 		};
 
-		await act(async () => {
-			ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
-		});
+		ReactTestUtils.Simulate.submit(loginForm, event);
 
 		await waitFor(() => expect(event.preventDefault).toHaveBeenCalled());
 	});
