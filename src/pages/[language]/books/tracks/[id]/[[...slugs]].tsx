@@ -6,15 +6,15 @@ import {
 
 import AudiobookTrackDetail, {
 	AudiobookTrackDetailProps,
-} from '@containers/audiobook/tracks/detail';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+} from '@/containers/audiobook/tracks/detail';
+import { IBaseProps } from '@/containers/base';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getAudiobookTrackDetailData,
 	getAudiobookTrackDetailStaticPaths,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default AudiobookTrackDetail;
 

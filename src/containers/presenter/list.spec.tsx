@@ -1,48 +1,46 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetPresenterListPageDataDocument,
 	GetPresenterListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/letter/[letter]';
+} from '@/pages/[language]/presenters/letter/[letter]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Presenters, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetPresenterListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			persons: {
-				nodes: [
-					{
-						id: 'the_person_id',
-						surname: 'the_person_surname',
-						givenName: 'the_person_givenName',
-						canonicalPath: 'the_person_path',
-						summary: 'the_person_summary',
-						image: {
-							url: 'the_person_image',
-						},
-						recordings: {
-							aggregate: {
-								count: 0,
-							},
+	__load(GetPresenterListPageDataDocument, {
+		persons: {
+			nodes: [
+				{
+					id: 'the_person_id',
+					surname: 'the_person_surname',
+					givenName: 'the_person_givenName',
+					canonicalPath: 'the_person_path',
+					summary: 'the_person_summary',
+					image: {
+						url: 'the_person_image',
+					},
+					recordings: {
+						aggregate: {
+							count: 0,
 						},
 					},
-				],
-			},
-			personLetterCounts: [
-				{
-					letter: 'A',
 				},
 			],
-		});
+		},
+		personLetterCounts: [
+			{
+				letter: 'A',
+			},
+		],
+	});
 }
 
 describe('presenter list page', () => {
@@ -54,9 +52,7 @@ describe('presenter list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetPresenterListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetPresenterListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 
@@ -74,15 +70,13 @@ describe('presenter list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetPresenterListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				personLetterCounts: [
-					{
-						letter: 'A',
-					},
-				],
-			});
+		__load(GetPresenterListPathsDataDocument, {
+			personLetterCounts: [
+				{
+					letter: 'A',
+				},
+			],
+		});
 
 		const { paths } = await getStaticPaths();
 

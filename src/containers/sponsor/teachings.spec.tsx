@@ -1,18 +1,18 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSponsorTeachingsPageDataDocument,
 	GetSponsorTeachingsPathsDataDocument,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
+} from '@/pages/[language]/sponsors/[id]/teachings/page/[i]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps);
 
@@ -51,13 +51,11 @@ describe('sponsor teachings page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorTeachingsPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsors: {
-					nodes: [{ id: 'the_sponsor_id' }],
-				},
-			});
+		__load(GetSponsorTeachingsPathsDataDocument, {
+			sponsors: {
+				nodes: [{ id: 'the_sponsor_id' }],
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -108,9 +106,7 @@ describe('sponsor teachings page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorTeachingsPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSponsorTeachingsPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

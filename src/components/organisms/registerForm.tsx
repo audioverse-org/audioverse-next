@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Button from '@components/molecules/button';
-import ButtonGuest from '@components/molecules/buttonGuest';
-import Input from '@components/molecules/form/input';
-import { setSessionToken } from '@lib/cookies';
-import { useRegisterMutation } from '@lib/generated/graphql';
+import Button from '@/components/molecules/button';
+import ButtonGuest from '@/components/molecules/buttonGuest';
+import Input from '@/components/molecules/form/input';
+import { setSessionToken } from '@/lib/cookies';
+import { useRegisterMutation } from '@/lib/generated/graphql';
 
 import styles from './registerForm.module.scss';
 
@@ -35,6 +35,7 @@ function RegisterForm({
 
 	const intl = useIntl();
 
+	// TODO: Move this to an onSuccess callback on the mutation
 	useEffect(() => {
 		if (dataRegister?.signup.errors.length) {
 			setErrors(dataRegister?.signup.errors.map((e) => e.message));

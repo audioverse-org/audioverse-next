@@ -1,18 +1,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import { BaseColors } from '@lib/constants';
+import LineHeading from '@/components/atoms/lineHeading';
+import withFailStates from '@/components/HOCs/withFailStates';
+import CardSequence from '@/components/molecules/card/sequence';
+import CardGroup from '@/components/molecules/cardGroup';
+import Pagination from '@/components/molecules/pagination';
+import { BaseColors } from '@/lib/constants';
 import {
 	CollectionPivotFragment,
 	GetCollectionSequencesPageDataQuery,
-} from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeCollectionSequencesRoute } from '@lib/routes';
+} from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
+import { makeCollectionSequencesRoute } from '@/lib/routes';
 
 import CollectionPivot from './pivot';
 

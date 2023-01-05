@@ -1,9 +1,10 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import CardSermon from '@components/molecules/card/sermon';
-import Slider from '@components/organisms/slider';
-import { buildRenderer } from '@lib/test/buildRenderer';
+import CardSermon from '@/components/molecules/card/sermon';
+import Slider from '@/components/organisms/slider';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import { describe, expect, it } from 'vitest';
 
 const renderComponent = buildRenderer(Slider);
 
@@ -135,7 +136,7 @@ describe('card slider', () => {
 			},
 		});
 
-		expect(getByLabelText('Page 1')).toHaveClass('active');
+		expect(getByLabelText('Page 1')).toHaveAttribute('aria-current', 'true');
 	});
 
 	it('calculates dot count dynamically', async () => {

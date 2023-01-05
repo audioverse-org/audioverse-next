@@ -4,19 +4,19 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading3 from '@components/atoms/heading3';
-import Heading6 from '@components/atoms/heading6';
-import ProgressBar from '@components/atoms/progressBar';
-import { useIsRecordingFavorited } from '@lib/api/useIsRecordingFavorited';
-import { BaseColors } from '@lib/constants';
+import Heading2 from '@/components/atoms/heading2';
+import Heading3 from '@/components/atoms/heading3';
+import Heading6 from '@/components/atoms/heading6';
+import ProgressBar from '@/components/atoms/progressBar';
+import { useIsRecordingFavorited } from '@/lib/api/useIsRecordingFavorited';
+import { BaseColors } from '@/lib/constants';
 import {
 	AndMiniplayerFragment,
 	RecordingContentType,
 	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
-import { useFormattedDuration } from '@lib/time';
-import usePlaybackSession from '@lib/usePlaybackSession';
+} from '@/lib/generated/graphql';
+import { useFormattedDuration } from '@/lib/time';
+import usePlaybackSession from '@/lib/usePlaybackSession';
 
 import IconClosure from '../../../public/img/icons/icon-closure.svg';
 import IconDisclosure from '../../../public/img/icons/icon-disclosure.svg';

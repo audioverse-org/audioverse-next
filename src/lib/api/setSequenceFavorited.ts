@@ -1,4 +1,4 @@
-import { sequenceFavorite, sequenceUnfavorite } from '@lib/generated/graphql';
+import { sequenceFavorite, sequenceUnfavorite } from '@/lib/generated/graphql';
 
 export async function setSequenceFavorited(
 	id: number | string,

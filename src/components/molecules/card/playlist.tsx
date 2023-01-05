@@ -2,12 +2,12 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import { BaseColors } from '@lib/constants';
-import { CardPlaylistFragment } from '@lib/generated/graphql';
-import { makePlaylistDetailRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import { BaseColors } from '@/lib/constants';
+import { CardPlaylistFragment } from '@/lib/generated/graphql';
+import { makePlaylistDetailRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import ListIcon from '../../../../public/img/icons/fa-list.svg';
 import LikeActiveIcon from '../../../../public/img/icons/icon-like-active.svg';

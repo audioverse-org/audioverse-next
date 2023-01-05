@@ -5,13 +5,12 @@ import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
-import { setSessionToken } from '@lib/cookies';
+import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@/lib/constants';
+import { setSessionToken } from '@/lib/cookies';
 import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
-} from '@lib/generated/graphql';
-import useDidUnmount from '@lib/useDidUnmount';
+} from '@/lib/generated/graphql';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';
@@ -25,7 +24,6 @@ export default function SocialLogin({
 }): JSX.Element {
 	const [errors, setErrors] = useState<string[]>([]);
 	const intl = useIntl();
-	const didUnmount = useDidUnmount();
 	const queryClient = useQueryClient();
 
 	const { mutate: mutateSocial, isSuccess: isSuccessSocial } =
@@ -33,12 +31,20 @@ export default function SocialLogin({
 			onSuccess: async (response) => {
 				const errors = response?.loginSocial.errors || [];
 				const token = response?.loginSocial.authenticatedUser?.sessionToken;
-
 				if (token && !errors.length) {
 					setSessionToken(token);
 					onSuccess ? onSuccess() : await queryClient.invalidateQueries();
-				} else if (!didUnmount.current) {
-					setErrors(errors.map((e) => e.message));
+				} else {
+					return Promise.reject(errors);
+				}
+			},
+			onError: (e) => {
+				if (e instanceof Array) {
+					setErrors(e.map((e) => e.message));
+				} else if (e instanceof Error) {
+					setErrors([e.message]);
+				} else {
+					setErrors(['Unknown error occurred']);
 				}
 			},
 		});
@@ -116,14 +122,12 @@ export default function SocialLogin({
 						const socialToken = get(response, 'accessToken');
 						const status = get(response, 'status');
 						const statusText = get(response, 'statusText');
-
 						if (!socialToken) {
 							if (status) {
 								setErrors([`${status}: ${statusText}`]);
 							}
 							return;
 						}
-
 						mutateSocial({
 							socialName: UserSocialServiceName.Facebook,
 							socialId,

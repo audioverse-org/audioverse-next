@@ -4,31 +4,31 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading3 from '@components/atoms/heading3';
-import Button from '@components/molecules/button';
-import CardPost from '@components/molecules/card/post';
-import CardRecording from '@components/molecules/card/recording';
-import CardSequence from '@components/molecules/card/sequence';
-import CardMasonry from '@components/molecules/cardMasonry';
-import DownloadAppButton from '@components/molecules/downloadAppButton';
-import Input from '@components/molecules/form/input';
-import Section from '@components/organisms/section';
-import Slider from '@components/organisms/slider';
-import Testimonies from '@components/organisms/testimonies';
-import { BaseColors } from '@lib/constants';
-import { getSessionToken } from '@lib/cookies';
-import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
-import { getAppFeatures } from '@lib/getAppFeatures';
-import isServerSide from '@lib/isServerSide';
+import Heading1 from '@/components/atoms/heading1';
+import Heading3 from '@/components/atoms/heading3';
+import Button from '@/components/molecules/button';
+import CardPost from '@/components/molecules/card/post';
+import CardRecording from '@/components/molecules/card/recording';
+import CardSequence from '@/components/molecules/card/sequence';
+import CardMasonry from '@/components/molecules/cardMasonry';
+import DownloadAppButton from '@/components/molecules/downloadAppButton';
+import Input from '@/components/molecules/form/input';
+import Section from '@/components/organisms/section';
+import Slider from '@/components/organisms/slider';
+import Testimonies from '@/components/organisms/testimonies';
+import { BaseColors } from '@/lib/constants';
+import { getSessionToken } from '@/lib/cookies';
+import { GetHomeStaticPropsQuery } from '@/lib/generated/graphql';
+import { getAppFeatures } from '@/lib/getAppFeatures';
+import isServerSide from '@/lib/isServerSide';
 import {
 	makeBlogPostListRoute,
 	makeDiscoverRoute,
 	makeDonateRoute,
 	makeRegisterRoute,
 	makeTestimoniesRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import IconBell from '../../public/img/icons/fa-bell.svg';
 import IconForward from '../../public/img/icons/icon-forward-light.svg';

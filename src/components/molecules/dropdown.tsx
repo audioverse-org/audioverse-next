@@ -1,5 +1,10 @@
 import dynamic from 'next/dynamic';
-import React, { MouseEvent, PropsWithChildren, ReactNode } from 'react';
+import React, {
+	MouseEvent,
+	PropsWithChildren,
+	ReactNode,
+	Suspense,
+} from 'react';
 
 import styles from './dropdown.module.scss';
 
@@ -9,12 +14,15 @@ type Props = {
 		onClick: (event: MouseEvent) => void;
 		['aria-controls']: string;
 		isOpen: boolean;
+		disabled?: boolean;
 	}) => JSX.Element;
 	alignment?: 'left' | 'right';
 	children?: ReactNode | ((handleClose: () => void) => ReactNode);
 };
 
-const LazyMenu = dynamic(() => import('@material-ui/core/Menu'));
+const LazyMenu = dynamic(() => import('@material-ui/core/Menu'), {
+	suspense: false,
+});
 
 export default function Dropdown({
 	id,
@@ -33,7 +41,14 @@ export default function Dropdown({
 	};
 
 	return (
-		<>
+		<Suspense
+			fallback={trigger({
+				onClick: handleClick,
+				'aria-controls': id,
+				isOpen: !!anchorEl,
+				disabled: true,
+			})}
+		>
 			{trigger({
 				onClick: handleClick,
 				'aria-controls': id,
@@ -60,6 +75,6 @@ export default function Dropdown({
 			>
 				{typeof children === 'function' ? children(handleClose) : children}
 			</LazyMenu>
-		</>
+		</Suspense>
 	);
 }

@@ -1,46 +1,44 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSponsorListPageDataDocument,
 	GetSponsorListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/letter/[letter]';
+} from '@/pages/[language]/sponsors/letter/[letter]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetSponsorListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			sponsors: {
-				nodes: [
-					{
-						id: 'the_sponsor_id',
-						title: 'the_sponsor_title',
-						canonicalPath: 'the_sponsor_path',
-						imageWithFallback: {
-							url: 'the_sponsor_image',
-						},
-						collections: {
-							aggregate: {
-								count: 1,
-							},
+	__load(GetSponsorListPageDataDocument, {
+		sponsors: {
+			nodes: [
+				{
+					id: 'the_sponsor_id',
+					title: 'the_sponsor_title',
+					canonicalPath: 'the_sponsor_path',
+					imageWithFallback: {
+						url: 'the_sponsor_image',
+					},
+					collections: {
+						aggregate: {
+							count: 1,
 						},
 					},
-				],
-			},
-			sponsorLetterCounts: [
-				{
-					letter: 'A',
 				},
 			],
-		});
+		},
+		sponsorLetterCounts: [
+			{
+				letter: 'A',
+			},
+		],
+	});
 }
 
 describe('sponsor list page', () => {
@@ -68,15 +66,13 @@ describe('sponsor list page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsorLetterCounts: [
-					{
-						letter: 'A',
-					},
-				],
-			});
+		__load(GetSponsorListPathsDataDocument, {
+			sponsorLetterCounts: [
+				{
+					letter: 'A',
+				},
+			],
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -95,9 +91,7 @@ describe('sponsor list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSponsorListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

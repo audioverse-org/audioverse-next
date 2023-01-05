@@ -4,19 +4,28 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 import videojs from 'video.js';
 
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { BookProps } from '@containers/bible/book';
-import * as bibleBrain from '@lib/api/bibleBrain';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import setPlayerMock from '@lib/test/setPlayerMock';
+import AndMiniplayer from '@/components/templates/andMiniplayer';
+import AndPlaybackContext from '@/components/templates/andPlaybackContext';
+import { BookProps } from '@/containers/bible/book';
+import * as bibleBrain from '@/lib/api/bibleBrain';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
+import setPlayerMock from '@/lib/test/setPlayerMock';
 import Book, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles/[id]/[book]/[chapter]';
+} from '@/pages/[language]/bibles/[id]/[book]/[chapter]';
+import {
+	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
+} from 'vitest';
 
-jest.mock('@lib/api/bibleBrain');
-jest.mock('video.js');
+vi.mock('@/lib/api/bibleBrain');
+vi.mock('video.js');
 
 const renderPage = buildStaticRenderer((props: BookProps) => {
 	return (
@@ -29,7 +38,7 @@ const renderPage = buildStaticRenderer((props: BookProps) => {
 }, getStaticProps);
 
 function loadPageData() {
-	jest.spyOn(bibleBrain, 'getBible').mockResolvedValue({
+	vi.spyOn(bibleBrain, 'getBible').mockResolvedValue({
 		id: 'the_version_id',
 		abbreviation: 'KJV',
 		title: 'the_version_title',
@@ -48,7 +57,7 @@ function loadPageData() {
 			},
 		],
 	} as bibleBrain.IBibleVersion);
-	jest.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
+	vi.spyOn(bibleBrain, 'getBibleBookChapters').mockResolvedValue([
 		{
 			id: 'GEN/1',
 			duration: 123,
@@ -88,7 +97,7 @@ describe('Bible book detail page', () => {
 	});
 
 	it('generates paths', async () => {
-		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+		vi.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
 			{
 				id: 'the_version_id',
 				abbreviation: 'KJV',
@@ -147,7 +156,7 @@ describe('Bible book detail page', () => {
 	});
 
 	it('includes player', async () => {
-		window.fetch = jest.fn().mockReturnValueOnce({
+		window.fetch = vi.fn().mockReturnValueOnce({
 			catch: () => undefined,
 		});
 

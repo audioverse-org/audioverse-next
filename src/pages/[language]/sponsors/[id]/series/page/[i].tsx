@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SponsorSeries, { SponsorSeriesProps } from '@containers/sponsor/series';
+import SponsorSeries, { SponsorSeriesProps } from '@/containers/sponsor/series';
 import {
 	getSponsorSeriesPageData,
 	getSponsorSeriesPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default SponsorSeries;
 
@@ -26,8 +26,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		(vars) => getSponsorSeriesPageData({ ...vars, id }),
-		(d) => d.sequences.nodes,
-		(d) => d.sequences.aggregate?.count,
+		(d) => d.sequences?.nodes,
+		(d) => d.sequences?.aggregate?.count,
 		(d) => ({
 			title: intl.formatMessage(
 				{

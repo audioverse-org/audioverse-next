@@ -1,27 +1,25 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import Login from '@components/molecules/login';
-import { fetchApi } from '@lib/api/fetchApi';
-import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
+import Login from '@/components/molecules/login';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
+import { LoginForgotPasswordDocument } from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 function loadForgotPasswordResponse({
 	success = true,
 	errors = [],
 }: { success?: boolean; errors?: { message: string }[] } = {}) {
-	when(fetchApi)
-		.calledWith(LoginForgotPasswordDocument, expect.anything())
-		.mockResolvedValue({
-			userRecover: {
-				success,
-				errors,
-			},
-		});
+	__load(LoginForgotPasswordDocument, {
+		userRecover: {
+			success,
+			errors,
+		},
+	});
 }
 
 describe('login form', () => {
@@ -116,9 +114,7 @@ describe('login form', () => {
 
 	it('displays generic error on fetch error', async () => {
 		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(LoginForgotPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+			__loadReject(LoginForgotPasswordDocument, 'oops');
 
 			const { getByText, getByPlaceholderText } = await renderWithProviders(
 				<Login />,

@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import BlogPostDetail, { BlogPostDetailProps } from '@containers/blog/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { IBaseProps } from '@/containers/base';
+import BlogPostDetail, { BlogPostDetailProps } from '@/containers/blog/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getBlogDetailData,
 	getBlogDetailStaticPaths,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
 
 export default BlogPostDetail;
 

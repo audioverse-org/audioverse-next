@@ -1,92 +1,90 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
 	Language,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/conferences/[id]/[[...slug]]';
+} from '@/pages/[language]/conferences/[id]/[[...slug]]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			collection: {
-				id: 'the_collection_id',
-				title: 'the_collection_title',
-				startDate: '2007-12-19',
-				endDate: '2007-12-23',
-				language: Language.English,
-				sponsor: {
-					id: 'the_sponsor_id',
-					title: 'the_sponsor_title',
-					canonicalPath: 'the_sponsor_path',
-					imageWithFallback: {
-						url: 'the_sponsor_image_url',
-					},
-				},
-				persons: {
-					aggregate: {
-						count: 1,
-					},
-					nodes: [
-						{
-							id: 'the_person_id',
-							name: 'the_person_name',
-							canonicalPath: 'the_person_url',
-							imageWithFallback: {
-								url: 'the_person_image_url',
-							},
-							recordings: {
-								aggregate: {
-									count: 0,
-								},
-							},
-						},
-					],
-					pageInfo: {
-						hasNextPage: false,
-					},
-				},
-				sequences: {
-					aggregate: {
-						count: 1,
-					},
-					nodes: [
-						{
-							id: 'the_sequence_id',
-							title: 'the_sequence_title',
-							contentType: SequenceContentType.Series,
-							canonicalPath: 'the_sequence_path',
-							allRecordings: {
-								aggregate: {
-									count: 1,
-								},
-							},
-							speakers: [],
-						},
-					],
-					pageInfo: {
-						hasNextPage: false,
-					},
-				},
-				recordings: {
-					nodes: [],
-					pageInfo: {
-						hasNextPage: false,
-					},
+	__load(GetCollectionDetailPageDataDocument, {
+		collection: {
+			id: 'the_collection_id',
+			title: 'the_collection_title',
+			startDate: '2007-12-19',
+			endDate: '2007-12-23',
+			language: Language.English,
+			sponsor: {
+				id: 'the_sponsor_id',
+				title: 'the_sponsor_title',
+				canonicalPath: 'the_sponsor_path',
+				imageWithFallback: {
+					url: 'the_sponsor_image_url',
 				},
 			},
-		});
+			persons: {
+				aggregate: {
+					count: 1,
+				},
+				nodes: [
+					{
+						id: 'the_person_id',
+						name: 'the_person_name',
+						canonicalPath: 'the_person_url',
+						imageWithFallback: {
+							url: 'the_person_image_url',
+						},
+						recordings: {
+							aggregate: {
+								count: 0,
+							},
+						},
+					},
+				],
+				pageInfo: {
+					hasNextPage: false,
+				},
+			},
+			sequences: {
+				aggregate: {
+					count: 1,
+				},
+				nodes: [
+					{
+						id: 'the_sequence_id',
+						title: 'the_sequence_title',
+						contentType: SequenceContentType.Series,
+						canonicalPath: 'the_sequence_path',
+						allRecordings: {
+							aggregate: {
+								count: 1,
+							},
+						},
+						speakers: [],
+					},
+				],
+				pageInfo: {
+					hasNextPage: false,
+				},
+			},
+			recordings: {
+				nodes: [],
+				pageInfo: {
+					hasNextPage: false,
+				},
+			},
+		},
+	});
 }
 
 describe('collection detail page', () => {
@@ -126,13 +124,11 @@ describe('collection detail page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetCollectionDetailPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				collections: {
-					nodes: [{ canonicalPath: 'the_collection_path' }],
-				},
-			});
+		__load(GetCollectionDetailPathsDataDocument, {
+			collections: {
+				nodes: [{ canonicalPath: 'the_collection_path' }],
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -151,9 +147,7 @@ describe('collection detail page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetCollectionDetailPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetCollectionDetailPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

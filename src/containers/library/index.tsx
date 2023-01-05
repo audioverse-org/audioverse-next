@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import CardFavorite from '@components/molecules/card/favorite';
-import CardMasonry from '@components/molecules/cardMasonry';
-import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
-import LibraryNav from '@components/organisms/libraryNav';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import CardFavorite from '@/components/molecules/card/favorite';
+import CardMasonry from '@/components/molecules/cardMasonry';
+import LoadingCards from '@/components/molecules/loadingCards';
+import LibraryError from '@/components/organisms/libraryError';
+import LibraryNav from '@/components/organisms/libraryNav';
 import {
 	FavoritableCatalogEntityType,
 	FavoritesSortableField,
@@ -17,7 +17,7 @@ import {
 	RecordingContentType,
 	RecordingViewerPlaybackStatus,
 	useGetLibraryDataQuery,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
 import LibraryLoggedOut from './loggedOut';

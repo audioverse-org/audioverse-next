@@ -1,18 +1,18 @@
-import { waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import React from 'react';
 
-import SocialLogin from '@components/molecules/socialLogin';
-import { fetchApi } from '@lib/api/fetchApi';
-import { RegisterSocialDocument } from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import SocialLogin from '@/components/molecules/socialLogin';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
+import { RegisterSocialDocument } from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import { describe, expect, it } from 'vitest';
 
 describe('social login', () => {
 	it('does not run onSuccess callback if errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
+		withMutedReactQueryLogger(async () => {
+			__load(RegisterSocialDocument, {
 				loginSocial: {
 					errors: [
 						{
@@ -22,17 +22,19 @@ describe('social login', () => {
 				},
 			});
 
-		let didCallbackRun = false;
+			let didCallbackRun = false;
 
-		const { getByText } = await renderWithProviders(
-			<SocialLogin onSuccess={() => (didCallbackRun = true)} />,
-			undefined
-		);
+			const { getByText } = await renderWithProviders(
+				<SocialLogin onSuccess={() => (didCallbackRun = true)} />
+			);
 
-		userEvent.click(getByText('Login with Facebook'));
+			userEvent.click(getByText('Login with Facebook'));
 
-		await waitFor(() => expect(fetchApi).toBeCalled());
+			await waitFor(() => expect(fetchApi).toBeCalled());
 
-		expect(didCallbackRun).toBeFalsy();
+			expect(didCallbackRun).toBeFalsy();
+
+			await screen.findByText(/the_error_message/);
+		});
 	});
 });

@@ -6,7 +6,7 @@ import {
 	DETAIL_PRERENDER_LIMIT,
 	LANGUAGES,
 	SupportedLanguages,
-} from '@lib/constants';
+} from '@/lib/constants';
 
 import { Language } from './generated/graphql';
 

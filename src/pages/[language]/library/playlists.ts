@@ -2,9 +2,9 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
 import LibraryPlaylists, {
 	ILibraryPlaylistsProps,
-} from '@containers/library/playlist/list';
-import { storeRequest } from '@lib/api/storeRequest';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
+} from '@/containers/library/playlist/list';
+import { storeRequest } from '@/lib/api/storeRequest';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
 
 export default LibraryPlaylists;
 

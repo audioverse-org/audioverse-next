@@ -1,6 +1,6 @@
-import { getCurrentRequest } from '@lib/api/storeRequest';
-import { getSessionToken } from '@lib/cookies';
-import { sleep } from '@lib/sleep';
+import { getCurrentRequest } from '@/lib/api/storeRequest';
+import { getSessionToken } from '@/lib/cookies';
+import { sleep } from '@/lib/sleep';
 
 const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||
@@ -44,7 +44,13 @@ export async function fetchApi<TData>(
 	}
 
 	if (!res.ok) {
-		console.error({ text, res, query, variables, headers });
+		console.error('Response is not ok', {
+			text,
+			res,
+			query,
+			variables,
+			headers,
+		});
 		throw new Error(`HTTP request failed: ${res.status} ${res.statusText}`);
 	}
 
@@ -53,12 +59,19 @@ export async function fetchApi<TData>(
 	try {
 		json = JSON.parse(text);
 	} catch (error) {
-		console.error({ error, text, res, query, variables, headers });
+		console.error('Failed to parse JSON response', {
+			error,
+			text,
+			res,
+			query,
+			variables,
+			headers,
+		});
 		throw error;
 	}
 
 	if (json.errors) {
-		console.error({
+		console.error('Failed to parse JSON response without errors', {
 			query,
 			variables,
 			headers,

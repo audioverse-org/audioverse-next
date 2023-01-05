@@ -1,10 +1,10 @@
 import React from 'react';
 
-import withFailStates from '@components/HOCs/withFailStates';
-import { Recording } from '@components/organisms/recording';
-import { GetBookSongDetailDataQuery } from '@lib/generated/graphql';
-import { makeBibleMusicTrackRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import withFailStates from '@/components/HOCs/withFailStates';
+import { Recording } from '@/components/organisms/recording';
+import { GetBookSongDetailDataQuery } from '@/lib/generated/graphql';
+import { makeBibleMusicTrackRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 export type SongTrack = NonNullable<GetBookSongDetailDataQuery['musicTrack']>;
 

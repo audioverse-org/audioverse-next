@@ -1,60 +1,58 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSongAlbumsListPageDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Songs, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/albums';
+} from '@/pages/[language]/songs/albums';
 import { screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetSongAlbumsListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			musicAlbums: {
-				nodes: [
-					{
-						id: 'the_album_id',
-						title: 'the_album_title',
-						canonicalPath: 'the_album_path',
-						contentType: SequenceContentType.MusicAlbum,
-						imageWithFallback: {
-							url: 'the_album_cover',
-						},
-						speakers: {
-							nodes: [],
-						},
-						sponsor: {
-							title: 'the_album_sponsor',
-						},
-						allRecordings: {
-							aggregate: {
-								count: 0,
-							},
+	__load(GetSongAlbumsListPageDataDocument, {
+		musicAlbums: {
+			nodes: [
+				{
+					id: 'the_album_id',
+					title: 'the_album_title',
+					canonicalPath: 'the_album_path',
+					contentType: SequenceContentType.MusicAlbum,
+					imageWithFallback: {
+						url: 'the_album_cover',
+					},
+					speakers: {
+						nodes: [],
+					},
+					sponsor: {
+						title: 'the_album_sponsor',
+					},
+					allRecordings: {
+						aggregate: {
+							count: 0,
 						},
 					},
-				],
-			},
-			musicBookTags: {
-				nodes: [
-					{
-						id: 'the_tag_id',
-						name: '3 John',
-						recordings: {
-							nodes: [],
-						},
+				},
+			],
+		},
+		musicBookTags: {
+			nodes: [
+				{
+					id: 'the_tag_id',
+					name: '3 John',
+					recordings: {
+						nodes: [],
 					},
-				],
-			},
-		});
+				},
+			],
+		},
+	});
 }
 
 describe('songs list page', () => {

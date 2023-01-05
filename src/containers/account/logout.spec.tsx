@@ -1,13 +1,14 @@
 import { act } from '@testing-library/react';
 
-import { useLogout } from '@lib/api/useLogout';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import Logout from '@pages/[language]/account/logout';
+import { useLogout } from '@/lib/api/useLogout';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import Logout from '@/pages/[language]/account/logout';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('@lib/api/useLogout');
+vi.mock('@/lib/api/useLogout');
 
 const renderPage = buildRenderer(Logout);
-const mockUseLogout = useLogout as jest.Mock;
+const mockUseLogout = useLogout as Mock;
 
 describe('logout route', () => {
 	it('logs out', async () => {

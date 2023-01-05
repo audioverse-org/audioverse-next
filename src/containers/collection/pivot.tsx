@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 
-import Heading2 from '@components/atoms/heading2';
-import ButtonBack from '@components/molecules/buttonBack';
-import CollectionTypeLockup from '@components/molecules/collectionTypeLockup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import Tease from '@components/molecules/tease';
-import { CollectionPivotFragment } from '@lib/generated/graphql';
+import Heading2 from '@/components/atoms/heading2';
+import ButtonBack from '@/components/molecules/buttonBack';
+import CollectionTypeLockup from '@/components/molecules/collectionTypeLockup';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import Tease from '@/components/molecules/tease';
+import { CollectionPivotFragment } from '@/lib/generated/graphql';
 
 import styles from './pivot.module.scss';
 

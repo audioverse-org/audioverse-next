@@ -1,16 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '@components/HOCs/withFailStates';
-import CardSequence from '@components/molecules/card/sequence';
-import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetStoriesAlbumsPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+import withFailStates from '@/components/HOCs/withFailStates';
+import CardSequence from '@/components/molecules/card/sequence';
+import PaginatedCardList from '@/components/organisms/paginatedCardList';
+import { GetStoriesAlbumsPageDataQuery } from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
 import {
 	makeDiscoverCollectionsRoute,
 	makeStoryAlbumListPage,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],

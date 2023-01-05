@@ -14,20 +14,21 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import Player, { PlayerProps } from '@components/molecules/player';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { BaseColors } from '@lib/constants';
-import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
+import Player, { PlayerProps } from '@/components/molecules/player';
+import AndMiniplayer from '@/components/templates/andMiniplayer';
+import AndPlaybackContext from '@/components/templates/andPlaybackContext';
+import { recordingIsFavorited } from '@/lib/api/recordingIsFavorited';
+import { BaseColors } from '@/lib/constants';
+import { PlayerFragment, SequenceContentType } from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import setPlayerMock, { mockVideojs } from '@/lib/test/setPlayerMock';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('video.js');
-jest.mock('@lib/api/recordingIsFavorited');
+vi.mock('video.js');
+vi.mock('@/lib/api/recordingIsFavorited');
 
-const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
+const mockRecordingIsFavorited = recordingIsFavorited as Mock;
 
 const recording: Partial<PlayerFragment> = {
 	id: 'the_sermon_id',
@@ -327,7 +328,7 @@ describe('player', () => {
 		const mockPlayer = setPlayerMock({
 			duration: NaN,
 			functions: {
-				play: jest.fn(async () => {
+				play: vi.fn(async () => {
 					mockPlayer._updateOptions({
 						isPaused: false,
 						duration: 300,
@@ -959,7 +960,7 @@ describe('player', () => {
 	});
 
 	it('defaults to api duration if recording not loaded', async () => {
-		mockVideojs.mockReturnValue(null);
+		mockVideojs.mockReturnValue(null as any);
 
 		const { findByText } = await renderComponent({
 			props: {

@@ -1,27 +1,36 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
-} from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import Register from '@pages/[language]/account/register';
+} from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import Register from '@/pages/[language]/account/register';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import { buildLoader } from '@/lib/test/buildLoader';
 
-jest.mock('js-cookie');
-jest.mock('react-google-login');
+vi.mock('js-cookie');
+vi.mock('react-google-login');
 
 const renderPage = buildRenderer(Register);
-
-const router = { push: () => jest.fn().mockResolvedValue(true) } as any;
+const router = { push: () => vi.fn().mockResolvedValue(true) } as any;
+const loadRegisterData = buildLoader(RegisterDocument, {
+	signup: {
+		errors: [],
+	},
+});
+const loadRegisterSocialData = buildLoader(RegisterSocialDocument, {});
 
 describe('register page', () => {
 	beforeEach(() => {
-		Cookie.get = jest.fn().mockReturnValue({});
+		Cookie.get = vi.fn().mockReturnValue({});
+		loadRegisterData();
+		loadRegisterSocialData();
 	});
 
 	it('renders', async () => {
@@ -91,30 +100,25 @@ describe('register page', () => {
 	});
 
 	it('displays loading state', async () => {
-		const { getByText, getByPlaceholderText } = await renderPage({ router });
+		await renderPage({ router });
 
-		userEvent.type(getByPlaceholderText('jane@example.com'), 'email');
-		userEvent.type(getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.type(screen.getByPlaceholderText('jane@example.com'), 'email');
+		userEvent.type(screen.getByPlaceholderText('∗∗∗∗∗∗∗'), 'pass');
+		userEvent.click(screen.getByText('Sign up'));
 
-		userEvent.click(getByText('Sign up'));
-
-		await waitFor(() => {
-			expect(getByText('loading...')).toBeInTheDocument();
-		});
+		expect(await screen.findByText('loading...')).toBeInTheDocument();
 	});
 
 	it('displays returned errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterDocument, expect.anything())
-			.mockResolvedValue({
-				signup: {
-					errors: [
-						{
-							message: 'the_error_message',
-						},
-					],
-				},
-			});
+		__load(RegisterDocument, {
+			signup: {
+				errors: [
+					{
+						message: 'the_error_message',
+					},
+				],
+			},
+		});
 
 		const { getByText, getByPlaceholderText } = await renderPage({ router });
 
@@ -153,17 +157,15 @@ describe('register page', () => {
 	});
 
 	it('renders google signon errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					errors: [
-						{
-							message: 'the_error_message',
-						},
-					],
-				},
-			});
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				errors: [
+					{
+						message: 'the_error_message',
+					},
+				],
+			},
+		});
 
 		const { getByText } = await renderPage({ router });
 
@@ -175,9 +177,8 @@ describe('register page', () => {
 	});
 
 	it('renders facebook signon errors', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
+		await withMutedReactQueryLogger(async () => {
+			__load(RegisterSocialDocument, {
 				loginSocial: {
 					errors: [
 						{
@@ -187,16 +188,25 @@ describe('register page', () => {
 				},
 			});
 
-		const { getByText } = await renderPage({ router });
+			const { getByText } = await renderPage({ router });
 
-		userEvent.click(await screen.findByText('Sign up with Facebook'));
+			userEvent.click(await screen.findByText('Sign up with Facebook'));
 
-		await waitFor(() => {
-			expect(getByText('the_error_message')).toBeInTheDocument();
+			await waitFor(() => {
+				expect(getByText('the_error_message')).toBeInTheDocument();
+			});
 		});
 	});
 
 	it('renders social login success', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		const { getByText } = await renderPage({ router });
 
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -207,6 +217,14 @@ describe('register page', () => {
 	});
 
 	it('hits api with facebook registration', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		await renderPage({ router });
 
 		userEvent.click(await screen.findByText('Sign up with Facebook'));
@@ -225,15 +243,13 @@ describe('register page', () => {
 	});
 
 	it('saves facebook login session token', async () => {
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					authenticatedUser: {
-						sessionToken: 'the_token',
-					},
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
 				},
-			});
+			},
+		});
 
 		await renderPage({ router });
 
@@ -279,7 +295,7 @@ describe('register page', () => {
 	});
 
 	it('does not display form if user logged in', async () => {
-		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookie.get = vi.fn().mockReturnValue({ avSession: 'abc123' });
 
 		const { queryByPlaceholderText } = await renderPage({ router });
 
@@ -287,6 +303,14 @@ describe('register page', () => {
 	});
 
 	it('sends Google login data to API', async () => {
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				authenticatedUser: {
+					sessionToken: 'the_token',
+				},
+			},
+		});
+
 		const { getByText } = await renderPage({ router });
 
 		userEvent.click(getByText('Sign up with Google'));

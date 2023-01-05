@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 
-import { LanguageConfiguration, LANGUAGES } from '@lib/constants';
+import { LanguageConfiguration, LANGUAGES } from '@/lib/constants';
 
 export default function getLanguageByBaseUrl(
 	base_url: string,

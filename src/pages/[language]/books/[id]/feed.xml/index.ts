@@ -5,10 +5,10 @@ import {
 	BookFeedDescriptionFragment,
 	getAudiobookFeedData,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@/lib/generated/graphql';
+import { generateFeed, sendRSSHeaders } from '@/lib/generateFeed';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default (): void => void 0;
 

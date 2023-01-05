@@ -1,18 +1,18 @@
 import { RenderOptions, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import Cookies from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import { fetchApi } from '@lib/api/fetchApi';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import { __load } from '@/lib/api/fetchApi';
 import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
-} from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+} from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);
@@ -26,16 +26,15 @@ function render() {
 
 describe('withAuthGuard', () => {
 	beforeEach(() => __loadRouter({ query: {} }));
+
 	it('displays login if no email', async () => {
-		when(fetchApi)
-			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
-			.mockResolvedValue({
-				me: {
-					user: {
-						email: null,
-					},
+		__load(GetWithAuthGuardDataDocument, {
+			me: {
+				user: {
+					email: null,
 				},
-			});
+			},
+		});
 
 		const { getByPlaceholderText } = await render();
 
@@ -49,7 +48,7 @@ describe('withAuthGuard', () => {
 	});
 
 	it('displays content on successful social login', async () => {
-		Cookies.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookies.get = vi.fn().mockReturnValue({ avSession: 'abc123' });
 
 		const { getByText, queryByText } = await render();
 
@@ -57,26 +56,22 @@ describe('withAuthGuard', () => {
 			expect(queryByText('hello world')).not.toBeInTheDocument()
 		);
 
-		when(fetchApi)
-			.calledWith(RegisterSocialDocument, expect.anything())
-			.mockResolvedValue({
-				loginSocial: {
-					errors: [],
-					authenticatedUser: {
-						sessionToken: 'the_token',
-					},
+		__load(RegisterSocialDocument, {
+			loginSocial: {
+				errors: [],
+				authenticatedUser: {
+					sessionToken: 'the_token',
 				},
-			});
+			},
+		});
 
-		when(fetchApi)
-			.calledWith(GetWithAuthGuardDataDocument, expect.anything())
-			.mockResolvedValue({
-				me: {
-					user: {
-						email: 'the_email',
-					},
+		__load(GetWithAuthGuardDataDocument, {
+			me: {
+				user: {
+					email: 'the_email',
 				},
-			});
+			},
+		});
 
 		userEvent.click(getByText('Login with Google'));
 

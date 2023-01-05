@@ -2,36 +2,36 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import LineHeading from '@components/atoms/lineHeading';
-import RoundImage from '@components/atoms/roundImage';
-import withFailStates from '@components/HOCs/withFailStates';
-import Button from '@components/molecules/button';
-import ButtonFavorite from '@components/molecules/buttonFavorite';
-import ButtonShare from '@components/molecules/buttonShare';
-import CardCollection from '@components/molecules/card/collection';
-import CardRecording from '@components/molecules/card/recording';
-import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import HorizontalRule from '@/components/atoms/horizontalRule';
+import LineHeading from '@/components/atoms/lineHeading';
+import RoundImage from '@/components/atoms/roundImage';
+import withFailStates from '@/components/HOCs/withFailStates';
+import Button from '@/components/molecules/button';
+import ButtonFavorite from '@/components/molecules/buttonFavorite';
+import ButtonShare from '@/components/molecules/buttonShare';
+import CardCollection from '@/components/molecules/card/collection';
+import CardRecording from '@/components/molecules/card/recording';
+import CardSequence from '@/components/molecules/card/sequence';
+import CardGroup from '@/components/molecules/cardGroup';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import PersonTypeLockup from '@components/molecules/personTypeLockup';
-import Tease from '@components/molecules/tease';
-import { useIsPersonFavorited } from '@lib/api/useIsPersonFavorited';
-import { BaseColors } from '@lib/constants';
-import { GetPresenterDetailPageDataQuery } from '@lib/generated/graphql';
+} from '@/components/molecules/definitionList';
+import PersonTypeLockup from '@/components/molecules/personTypeLockup';
+import Tease from '@/components/molecules/tease';
+import { useIsPersonFavorited } from '@/lib/api/useIsPersonFavorited';
+import { BaseColors } from '@/lib/constants';
+import { GetPresenterDetailPageDataQuery } from '@/lib/generated/graphql';
 import {
 	makePresenterAlsoAppearsInRoute,
 	makePresenterFeedRoute,
 	makePresenterRecordingsRoute,
 	makePresenterSequencesRoute,
 	makePresenterTopRecordingsRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 

@@ -6,14 +6,14 @@ import {
 
 import PresenterSequences, {
 	PresenterSequencesProps,
-} from '@containers/presenter/sequences';
+} from '@/containers/presenter/sequences';
 import {
 	getPresenterDetailPathsData,
 	getPresenterSequencesPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default PresenterSequences;
 

@@ -1,3 +1,4 @@
 import React from 'react';
+import { vi } from 'vitest';
 
-export default jest.fn(() => <div />);
+export default vi.fn(() => <div />);

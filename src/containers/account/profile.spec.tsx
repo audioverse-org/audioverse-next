@@ -1,33 +1,35 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import Cookie from 'js-cookie';
 import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
 import { __loadRouter } from 'next/router';
 import React from 'react';
-import ReactTestUtils, { act } from 'react-dom/test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { login } from '@lib/api/login';
-import { storeRequest } from '@lib/api/storeRequest';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
+import { login } from '@/lib/api/login';
+import { storeRequest } from '@/lib/api/storeRequest';
 import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
-} from '@lib/generated/graphql';
-import { buildServerRenderer } from '@lib/test/buildServerRenderer';
-import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+} from '@/lib/generated/graphql';
+import { buildServerRenderer } from '@/lib/test/buildServerRenderer';
+import { loadAuthGuardData } from '@/lib/test/loadAuthGuardData';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import Profile, {
+	getServerSideProps,
+} from '@/pages/[language]/account/profile';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('@lib/api/login');
-jest.mock('@lib/api/storeRequest');
-jest.mock('js-cookie');
+vi.mock('@/lib/api/login');
+vi.mock('@/lib/api/storeRequest');
+vi.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);
 
-const mockedLogin = login as jest.Mock;
+const mockedLogin = login as Mock;
 
 const userBefore = {
 	givenName: 'the_given_name',
@@ -44,37 +46,28 @@ const userAfter = {
 function loadData() {
 	loadAuthGuardData();
 
-	when(fetchApi)
-		.calledWith(GetProfileDataDocument, expect.anything())
-		.mockResolvedValue({
-			me: {
-				user: userBefore,
-			},
-		});
+	__load(GetProfileDataDocument, {
+		me: {
+			user: userBefore,
+		},
+	});
 
-	when(fetchApi)
-		.calledWith(UpdateProfileDataDocument, expect.anything())
-		.mockResolvedValue({
-			updateMyProfile: {
-				authenticatedUser: {
-					user: userAfter,
-				},
+	__load(UpdateProfileDataDocument, {
+		updateMyProfile: {
+			authenticatedUser: {
+				user: userAfter,
 			},
-		});
+		},
+	});
 }
 
 describe('profile page', () => {
 	beforeEach(() => {
-		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
-		try {
-			(fetchApi as jest.Mock).mockReset();
-		} catch {
-			// ignore
-		}
+		Cookie.get = vi.fn().mockReturnValue({ avSession: 'abc123' });
 	});
 
 	it('dehydrates user', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'the_name',
@@ -96,7 +89,7 @@ describe('profile page', () => {
 	});
 
 	it('includes first name', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			me: {
 				user: {
 					givenName: 'first',
@@ -164,15 +157,15 @@ describe('profile page', () => {
 	});
 
 	it('prevents default form submission', async () => {
-		const { getByTestId } = await renderPage();
+		await renderPage();
+
+		const loginForm = screen.getByTestId('loginForm');
 
 		const event = {
-			preventDefault: jest.fn(),
+			preventDefault: vi.fn(),
 		};
 
-		await act(async () => {
-			ReactTestUtils.Simulate.submit(getByTestId('loginForm'), event);
-		});
+		ReactTestUtils.Simulate.submit(loginForm, event);
 
 		await waitFor(() => expect(event.preventDefault).toHaveBeenCalled());
 	});
@@ -213,8 +206,8 @@ describe('profile page', () => {
 		__loadRouter({
 			query: {},
 		});
-		Cookie.get = jest.fn().mockReturnValue({});
-		(fetchApi as jest.Mock).mockResolvedValue({});
+		Cookie.get = vi.fn().mockReturnValue({});
+		(fetchApi as Mock).mockResolvedValue({});
 
 		await renderWithProviders(<Profile />, undefined);
 
@@ -235,11 +228,9 @@ describe('profile page', () => {
 	it('loads user email', async () => {
 		loadData();
 
-		const { getByDisplayValue } = await renderPage();
+		await renderPage();
 
-		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
-		});
+		expect(await screen.findByDisplayValue('the_email')).toBeInTheDocument();
 	});
 
 	it('renders password field', async () => {
@@ -298,17 +289,15 @@ describe('profile page', () => {
 	it('loads mutated email on success', async () => {
 		loadData();
 
-		when(fetchApi)
-			.calledWith(GetProfileDataDocument, expect.anything())
-			.mockResolvedValue({
-				me: {
-					user: {
-						givenName: 'the_new_given_name',
-						surname: 'the_new_surname',
-						email: 'the_new_email',
-					},
+		__load(GetProfileDataDocument, {
+			me: {
+				user: {
+					givenName: 'the_new_given_name',
+					surname: 'the_new_surname',
+					email: 'the_new_email',
 				},
-			});
+			},
+		});
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
@@ -329,17 +318,15 @@ describe('profile page', () => {
 	it('loads mutated name on success', async () => {
 		loadData();
 
-		when(fetchApi)
-			.calledWith(GetProfileDataDocument, expect.anything())
-			.mockResolvedValue({
-				me: {
-					user: {
-						givenName: 'the_new_given_name',
-						surname: 'the_new_surname',
-						email: 'the_new_email',
-					},
+		__load(GetProfileDataDocument, {
+			me: {
+				user: {
+					givenName: 'the_new_given_name',
+					surname: 'the_new_surname',
+					email: 'the_new_email',
 				},
-			});
+			},
+		});
 
 		const { getByText, getByDisplayValue } = await renderPage();
 
@@ -392,11 +379,9 @@ describe('profile page', () => {
 	it('saves all form data', async () => {
 		loadData();
 
-		const { getByText, getByDisplayValue } = await renderPage();
+		const { getByText } = await renderPage();
 
-		await waitFor(() => {
-			expect(getByDisplayValue('the_email')).toBeInTheDocument();
-		});
+		await screen.findByDisplayValue('the_email');
 
 		userEvent.click(getByText('Save changes'));
 

@@ -4,17 +4,18 @@ import Cookie from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
-import { BaseColors } from '@lib/constants';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import RecordingButtonFavorite from '@/components/molecules/recordingButtonFavorite';
+import { recordingIsFavorited } from '@/lib/api/recordingIsFavorited';
+import { setRecordingFavorited } from '@/lib/api/setRecordingFavorited';
+import { BaseColors } from '@/lib/constants';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import loadControlledPromise from '@/lib/test/loadControlledPromise';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('@lib/api/recordingIsFavorited');
-jest.mock('@lib/api/setRecordingFavorited');
-jest.mock('js-cookie');
+vi.mock('@/lib/api/recordingIsFavorited');
+vi.mock('@/lib/api/setRecordingFavorited');
+vi.mock('js-cookie');
 
 const renderComponent = async () => {
 	const result = await renderWithProviders(
@@ -35,15 +36,15 @@ const renderComponent = async () => {
 	};
 };
 
-const mockRecordingIsFavorited = recordingIsFavorited as jest.Mock;
-const mockSetRecordingFavorited = setRecordingFavorited as jest.Mock;
+const mockRecordingIsFavorited = recordingIsFavorited as Mock;
+const mockSetRecordingFavorited = setRecordingFavorited as Mock;
 
 describe('recording favorite button', () => {
 	beforeEach(() => {
 		__loadRouter({
 			pathname: '/en/discover',
 		});
-		Cookie.get = jest.fn().mockReturnValue({ avSession: 'abc123' });
+		Cookie.get = vi.fn().mockReturnValue({ avSession: 'abc123' });
 		mockRecordingIsFavorited.mockResolvedValue(false);
 	});
 

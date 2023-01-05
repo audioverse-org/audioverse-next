@@ -1,49 +1,47 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetCollectionListPageDataDocument,
 	GetCollectionListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/conferences/page/[i]';
+} from '@/pages/[language]/conferences/page/[i]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(CollectionList, getStaticProps);
 
 function loadData() {
-	when(fetchApi)
-		.calledWith(GetCollectionListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			conferences: {
-				nodes: [
-					{
-						id: 'the_conference_id',
-						title: 'the_conference_title',
-						canonicalPath: 'the_conference_path',
-						imageWithFallback: {
-							url: 'the_conference_image',
-						},
-						sponsor: {
-							title: 'the_conference_sponsor',
-						},
-						allSequences: {
-							aggregate: {
-								count: 0,
-							},
-						},
-						allRecordings: {
-							aggregate: {
-								count: 0,
-							},
+	__load(GetCollectionListPageDataDocument, {
+		conferences: {
+			nodes: [
+				{
+					id: 'the_conference_id',
+					title: 'the_conference_title',
+					canonicalPath: 'the_conference_path',
+					imageWithFallback: {
+						url: 'the_conference_image',
+					},
+					sponsor: {
+						title: 'the_conference_sponsor',
+					},
+					allSequences: {
+						aggregate: {
+							count: 0,
 						},
 					},
-				],
-			},
-		});
+					allRecordings: {
+						aggregate: {
+							count: 0,
+						},
+					},
+				},
+			],
+		},
+	});
 }
 
 describe('conference list page', () => {
@@ -72,15 +70,13 @@ describe('conference list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetCollectionListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				conferences: {
-					aggregate: {
-						count: 1,
-					},
+		__load(GetCollectionListPathsDataDocument, {
+			conferences: {
+				aggregate: {
+					count: 1,
 				},
-			});
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -107,9 +103,7 @@ describe('conference list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetCollectionListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetCollectionListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

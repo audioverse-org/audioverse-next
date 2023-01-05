@@ -1,3 +1,5 @@
+import { vi } from 'vitest';
+
 export const createControlledPromise = () => {
 	let resolve: (value?: unknown) => void = () => {
 		throw new Error('called resolve before definition');
@@ -22,7 +24,7 @@ export const createControlledPromise = () => {
 export default function loadControlledPromise(mock: any) {
 	const { resolve, reject, promise } = createControlledPromise();
 
-	jest.mocked(mock).mockReturnValue(promise);
+	vi.mocked(mock).mockReturnValue(promise);
 
 	return { resolve, reject };
 }

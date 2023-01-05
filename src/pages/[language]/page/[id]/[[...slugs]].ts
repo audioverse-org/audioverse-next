@@ -1,18 +1,18 @@
 import CustomPageDetail, {
 	CustomPageDetailProps,
-} from '@containers/page/detail';
+} from '@/containers/page/detail';
 import {
 	GetStaticPathsResult,
 	GetStaticPropsContext,
 	GetStaticPropsResult,
 } from 'next';
-import { IBaseProps } from '@containers/base';
+import { IBaseProps } from '@/containers/base';
 import {
 	getCustomDetailPageData,
 	getCustomDetailPageStaticPaths,
 	PageType,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
 
 export default CustomPageDetail;
 

@@ -6,15 +6,15 @@ import {
 
 import CollectionList, {
 	CollectionListProps,
-} from '@containers/collection/list';
+} from '@/containers/collection/list';
 import {
 	getCollectionListPageData,
 	getCollectionListPathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '@/lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default CollectionList;
 
@@ -27,8 +27,8 @@ export async function getStaticProps({
 	return getPaginatedStaticProps(
 		params,
 		getCollectionListPageData,
-		(d) => d.conferences.nodes,
-		(d) => d.conferences.aggregate?.count,
+		(d) => d.conferences?.nodes,
+		(d) => d.conferences?.aggregate?.count,
 		() => ({
 			title: intl.formatMessage({
 				id: 'conferences__title',

@@ -8,6 +8,7 @@
 		"allowSyntheticDefaultImports": true,
 		"target": "es6",
 		"lib": ["es2017", "es2019", "dom"],
+		"types": ["@types/testing-library__jest-dom"],
 		"sourceMap": true,
 		"outDir": "./dist",
 		"baseUrl": "./",
@@ -23,14 +24,11 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"paths": {
-			"@lib/*": ["src/lib/*"],
-			"@components/*": ["src/components/*"],
-			"@containers/*": ["src/containers/*"],
-			"@pages/*": ["src/pages/*"],
-			"@public/*": ["public/*"]
+			"@public/*": ["public/*"],
+			"@/*": ["src/*"]
 		},
 		"incremental": true
 	},
-	"exclude": ["./*.js"],
+	"exclude": ["./*.js", "**/@types/jest/*"],
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

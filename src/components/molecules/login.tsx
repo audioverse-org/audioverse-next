@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import AndOnboarding from '@components/templates/andOnboarding';
-import { makeRegisterRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import AndOnboarding from '@/components/templates/andOnboarding';
+import { makeRegisterRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import LoginForm from './loginForm';
 import SocialLogin from './socialLogin';

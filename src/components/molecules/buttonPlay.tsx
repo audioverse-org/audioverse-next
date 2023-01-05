@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { BaseColors } from '@lib/constants';
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
-import usePlaybackSession from '@lib/usePlaybackSession';
+import { BaseColors } from '@/lib/constants';
+import { AndMiniplayerFragment } from '@/lib/generated/graphql';
+import usePlaybackSession from '@/lib/usePlaybackSession';
 
 import IconPauseLarge from '../../../public/img/icons/icon-pause-large.svg';
 import IconPause from '../../../public/img/icons/icon-pause-medium.svg';

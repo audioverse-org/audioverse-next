@@ -1,3 +1,3 @@
-const Image = jest.requireActual('../image');
+import Image from '../image';
 
-export default Image.default;
+export default Image;

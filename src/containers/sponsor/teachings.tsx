@@ -1,20 +1,20 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import RssAlternate from '@components/molecules/rssAlternate';
-import { BaseColors } from '@lib/constants';
+import LineHeading from '@/components/atoms/lineHeading';
+import withFailStates from '@/components/HOCs/withFailStates';
+import CardRecording from '@/components/molecules/card/recording';
+import CardGroup from '@/components/molecules/cardGroup';
+import Pagination from '@/components/molecules/pagination';
+import RssAlternate from '@/components/molecules/rssAlternate';
+import { BaseColors } from '@/lib/constants';
 import {
 	GetSponsorTeachingsPageDataQuery,
 	SponsorPivotFragment,
-} from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
+import { makeSponsorFeedRoute, makeSponsorTeachingsRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import SponsorPivot from './pivot';
 

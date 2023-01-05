@@ -1,47 +1,46 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
+
 import { useRouter } from 'next/router';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
-} from '@lib/constants';
+} from '@/lib/constants';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/all/page/[i]';
+} from '@/pages/[language]/teachings/all/page/[i]';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('next/head');
+vi.mock('next/head');
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 
 export function loadSermonListPagePathsData(count: number): void {
-	when(fetchApi)
-		.calledWith(GetSermonListPagePathsDataDocument, expect.anything())
-		.mockResolvedValue({
-			sermons: {
-				aggregate: {
-					count,
-				},
+	__load(GetSermonListPagePathsDataDocument, {
+		sermons: {
+			aggregate: {
+				count,
 			},
-		});
+		},
+	});
 }
 
 export function loadSermonListData({
 	nodes = undefined,
 	count = undefined,
 }: { nodes?: any[]; count?: number } = {}): void {
-	(fetchApi as jest.Mock).mockResolvedValue({
+	(fetchApi as Mock).mockResolvedValue({
 		sermons: {
 			nodes: nodes || [
 				{
@@ -139,10 +138,8 @@ describe('sermons list page', () => {
 	});
 
 	it('renders 404 on api error', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
-		when(fetchApi)
-			.calledWith(GetSermonListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		(useRouter as Mock).mockReturnValue({ isFallback: false });
+		__loadReject(GetSermonListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 
@@ -150,7 +147,7 @@ describe('sermons list page', () => {
 	});
 
 	it('returns 404 on empty data', async () => {
-		(useRouter as jest.Mock).mockReturnValue({ isFallback: false });
+		(useRouter as Mock).mockReturnValue({ isFallback: false });
 		loadSermonListData({ nodes: [] });
 
 		await renderPage();
@@ -289,7 +286,7 @@ describe('sermons list page', () => {
 	});
 
 	it('includes speaker name', async () => {
-		(fetchApi as jest.Mock).mockResolvedValue({
+		(fetchApi as Mock).mockResolvedValue({
 			sermons: {
 				nodes: [
 					{

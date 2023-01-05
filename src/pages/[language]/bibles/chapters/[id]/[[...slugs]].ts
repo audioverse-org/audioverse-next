@@ -4,16 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { Recording } from '@components/organisms/recording';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { Recording } from '@/components/organisms/recording';
+import { IBaseProps } from '@/containers/base';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getAudiobibleBookDetailData,
 	getAudiobibleBookPathsData,
 	RecordingContentType,
 	RecordingFragment,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
 
 export default Recording;
 

@@ -1,6 +1,6 @@
-import withFailStates from '@components/HOCs/withFailStates';
-import { Sequence } from '@components/organisms/sequence';
-import { GetAudiobookDetailPageDataQuery } from '@lib/generated/graphql';
+import withFailStates from '@/components/HOCs/withFailStates';
+import { Sequence } from '@/components/organisms/sequence';
+import { GetAudiobookDetailPageDataQuery } from '@/lib/generated/graphql';
 
 export interface AudiobookDetailProps {
 	sequence: GetAudiobookDetailPageDataQuery['audiobook'];

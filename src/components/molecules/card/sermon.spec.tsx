@@ -1,9 +1,12 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import CardSermon, { CardSermonProps } from '@components/molecules/card/sermon';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import { buildRenderer } from '@lib/test/buildRenderer';
+import CardSermon, {
+	CardSermonProps,
+} from '@/components/molecules/card/sermon';
+import AndMiniplayer from '@/components/templates/andMiniplayer';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import { describe, expect, it } from 'vitest';
 
 const Page = (props: CardSermonProps): JSX.Element => {
 	return (
@@ -99,8 +102,6 @@ describe('card sermon', () => {
 	// 			progress: 0,
 	// 		},
 	// 	});
-	//
-	// 	console.log('clicking play');
 	//
 	// 	userEvent.click(getByLabelText('play'));
 	//

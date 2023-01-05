@@ -4,8 +4,8 @@ import {
 	LanguageConfiguration,
 	LANGUAGES,
 	SupportedLanguages,
-} from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
+} from '@/lib/constants';
+import { Language } from '@/lib/generated/graphql';
 
 export function getLanguageIdByRoute(
 	route: string | undefined,

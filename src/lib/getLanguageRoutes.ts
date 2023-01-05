@@ -1,4 +1,4 @@
-import { LANGUAGES } from '@lib/constants';
+import { LANGUAGES } from '@/lib/constants';
 
 import getLanguageIds from './getLanguageIds';
 

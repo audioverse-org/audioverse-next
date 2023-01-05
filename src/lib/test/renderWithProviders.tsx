@@ -7,8 +7,9 @@ import {
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import withIntl from '@components/HOCs/withIntl';
-import getIntlMessages from '@lib/getIntlMessages';
+import withIntl from '@/components/HOCs/withIntl';
+import getIntlMessages from '@/lib/getIntlMessages';
+import { vi } from 'vitest';
 
 export default async function renderWithProviders(
 	ui: React.ReactElement,
@@ -31,7 +32,7 @@ export default async function renderWithProviders(
 	);
 
 	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
+		await vi.mocked(getIntlMessages).mock.results[0]?.value;
 	});
 
 	return {

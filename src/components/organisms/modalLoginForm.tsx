@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LoginForm from '@components/molecules/loginForm';
-import SocialLogin from '@components/molecules/socialLogin';
+import LoginForm from '@/components/molecules/loginForm';
+import SocialLogin from '@/components/molecules/socialLogin';
 
 type Props = {
 	onSuccess: () => Promise<void>;

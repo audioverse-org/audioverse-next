@@ -2,22 +2,22 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import withFailStates from '@components/HOCs/withFailStates';
-import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
-import CardBibleBook from '@components/molecules/card/bibleBook';
-import CardSequence from '@components/molecules/card/sequence';
-import CardGroup from '@components/molecules/cardGroup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
+import Heading1 from '@/components/atoms/heading1';
+import Heading6 from '@/components/atoms/heading6';
+import HorizontalRule from '@/components/atoms/horizontalRule';
+import withFailStates from '@/components/HOCs/withFailStates';
+import BibleVersionTypeLockup from '@/components/molecules/bibleVersionTypeLockup';
+import CardBibleBook from '@/components/molecules/card/bibleBook';
+import CardSequence from '@/components/molecules/card/sequence';
+import CardGroup from '@/components/molecules/cardGroup';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import Tease from '@components/molecules/tease';
-import { IBibleVersion } from '@lib/api/bibleBrain';
-import { BaseColors } from '@lib/constants';
-import { GetAudiobibleVersionDataQuery } from '@lib/generated/graphql';
+} from '@/components/molecules/definitionList';
+import Tease from '@/components/molecules/tease';
+import { IBibleVersion } from '@/lib/api/bibleBrain';
+import { BaseColors } from '@/lib/constants';
+import { GetAudiobibleVersionDataQuery } from '@/lib/generated/graphql';
 
 import styles from './version.module.scss';
 

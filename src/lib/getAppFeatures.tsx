@@ -6,7 +6,7 @@ import {
 	makeDiscoverRoute,
 	makeLibraryRoute,
 	makeSermonListRoute,
-} from '@lib/routes';
+} from '@/lib/routes';
 
 export type IAppFeature = {
 	heading: JSX.Element;

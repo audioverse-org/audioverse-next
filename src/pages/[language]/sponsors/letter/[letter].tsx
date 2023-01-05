@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Sponsors, { SponsorsProps } from '@containers/sponsor/list';
-import { LANGUAGES, REVALIDATE } from '@lib/constants';
+import { IBaseProps } from '@/containers/base';
+import Sponsors, { SponsorsProps } from '@/containers/sponsor/list';
+import { LANGUAGES, REVALIDATE } from '@/lib/constants';
 import {
 	getSponsorListPageData,
 	getSponsorListPathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import getLanguageIds from '@lib/getLanguageIds';
-import { makeSponsorListRoute } from '@lib/routes';
+} from '@/lib/generated/graphql';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import getLanguageIds from '@/lib/getLanguageIds';
+import { makeSponsorListRoute } from '@/lib/routes';
 
 export default Sponsors;
 
@@ -37,7 +37,7 @@ export async function getStaticProps({
 	}));
 	return {
 		props: {
-			sponsors: sponsors.nodes || [],
+			sponsors: sponsors?.nodes || [],
 			sponsorLetterCounts,
 			title: intl.formatMessage({
 				id: 'sponsors__title',

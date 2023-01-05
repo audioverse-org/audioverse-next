@@ -7,8 +7,8 @@ import {
 	useQueryClient,
 } from 'react-query';
 
-import { GlobalModalsContext } from '@components/templates/andGlobalModals';
-import { getSessionToken } from '@lib/cookies';
+import { GlobalModalsContext } from '@/components/templates/andGlobalModals';
+import { getSessionToken } from '@/lib/cookies';
 
 export type IUseIsFavoritedResult = {
 	isFavorited: boolean | undefined;

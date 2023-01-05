@@ -2,20 +2,20 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useInfiniteQuery } from 'react-query';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Button from '@components/molecules/button';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
-import LibraryNav from '@components/organisms/libraryNav';
-import { graphqlFetcher } from '@lib/api/graphqlFetcher';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import Button from '@/components/molecules/button';
+import CardRecording from '@/components/molecules/card/recording';
+import CardGroup from '@/components/molecules/cardGroup';
+import LoadingCards from '@/components/molecules/loadingCards';
+import LibraryError from '@/components/organisms/libraryError';
+import LibraryNav from '@/components/organisms/libraryNav';
+import { graphqlFetcher } from '@/lib/api/graphqlFetcher';
 import {
 	GetLibraryHistoryPageDataDocument,
 	GetLibraryHistoryPageDataQuery,
 	GetLibraryHistoryPageDataQueryVariables,
 	Language,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import baseStyles from './base.module.scss';
 import styles from './history.module.scss';

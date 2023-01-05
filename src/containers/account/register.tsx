@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import SocialLogin from '@components/molecules/socialLogin';
-import RegisterForm from '@components/organisms/registerForm';
-import AndOnboarding from '@components/templates/andOnboarding';
-import { makeDiscoverRoute, makeLoginRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import SocialLogin from '@/components/molecules/socialLogin';
+import RegisterForm from '@/components/organisms/registerForm';
+import AndOnboarding from '@/components/templates/andOnboarding';
+import { makeDiscoverRoute, makeLoginRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import LoginRedirect from './loginRedirect';
 

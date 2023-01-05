@@ -4,20 +4,20 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import ProgressBar from '@components/atoms/progressBar';
-import Card from '@components/molecules/card';
-import { useIsSequenceFavorited } from '@lib/api/useIsSequenceFavorited';
-import { BaseColors } from '@lib/constants';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import ProgressBar from '@/components/atoms/progressBar';
+import Card from '@/components/molecules/card';
+import { useIsSequenceFavorited } from '@/lib/api/useIsSequenceFavorited';
+import { BaseColors } from '@/lib/constants';
 import {
 	CardRecordingFragment,
 	CardSequenceFragment,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { useFormattedDuration } from '@lib/time';
-import useHover from '@lib/useHover';
+} from '@/lib/generated/graphql';
+import { getRecordingTypeTheme } from '@/lib/getRecordingTheme';
+import { useFormattedDuration } from '@/lib/time';
+import useHover from '@/lib/useHover';
 
 import BookIcon from '../../../../public/img/icons/fa-book-light.svg';
 import FeatherIcon from '../../../../public/img/icons/fa-feather-light.svg';

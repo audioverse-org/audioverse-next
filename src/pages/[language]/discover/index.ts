@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Discover, { DiscoverProps } from '@containers/discover';
-import { REVALIDATE } from '@lib/constants';
-import { getDiscoverPageData } from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeDiscoverRoute } from '@lib/routes';
+import { IBaseProps } from '@/containers/base';
+import Discover, { DiscoverProps } from '@/containers/discover';
+import { REVALIDATE } from '@/lib/constants';
+import { getDiscoverPageData } from '@/lib/generated/graphql';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@/lib/getLanguageRoutes';
+import { makeDiscoverRoute } from '@/lib/routes';
 
 export default Discover;
 

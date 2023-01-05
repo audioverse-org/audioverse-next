@@ -1,18 +1,18 @@
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSeriesListPageDataDocument,
 	GetSeriesListPathsDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SeriesList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/series/page/[i]';
+} from '@/pages/[language]/series/page/[i]';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SeriesList, getStaticProps);
 
@@ -47,15 +47,13 @@ describe('series list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSeriesListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				serieses: {
-					aggregate: {
-						count: 1,
-					},
+		__load(GetSeriesListPathsDataDocument, {
+			serieses: {
+				aggregate: {
+					count: 1,
 				},
-			});
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 
@@ -89,9 +87,7 @@ describe('series list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetSeriesListPageDataDocument, expect.anything())
-			.mockRejectedValue('oops');
+		__loadReject(GetSeriesListPageDataDocument, 'oops');
 
 		const { getByText } = await renderPage();
 

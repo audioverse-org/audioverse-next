@@ -1,15 +1,16 @@
 import set from 'lodash/set';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { storeRequest } from '@lib/api/storeRequest';
+import { fetchApi } from '@/lib/api/fetchApi';
+import { storeRequest } from '@/lib/api/storeRequest';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
 const noopQuery = 'query noop { noop { noop } }';
 
-global.fetch = jest.fn();
-jest.unmock('@lib/api/fetchApi');
+global.fetch = vi.fn();
+vi.unmock('@/lib/api/fetchApi');
 
 const mockFetchResponse = () => {
-	(global.fetch as jest.Mock).mockResolvedValue({
+	(global.fetch as Mock).mockResolvedValue({
 		text: () => Promise.resolve(JSON.stringify('result')),
 		ok: true,
 	});

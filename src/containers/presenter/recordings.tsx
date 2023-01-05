@@ -1,23 +1,23 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import CardRecording from '@components/molecules/card/recording';
-import CardGroup from '@components/molecules/cardGroup';
-import Pagination from '@components/molecules/pagination';
-import RssAlternate from '@components/molecules/rssAlternate';
-import { BaseColors } from '@lib/constants';
+import LineHeading from '@/components/atoms/lineHeading';
+import withFailStates from '@/components/HOCs/withFailStates';
+import CardRecording from '@/components/molecules/card/recording';
+import CardGroup from '@/components/molecules/cardGroup';
+import Pagination from '@/components/molecules/pagination';
+import RssAlternate from '@/components/molecules/rssAlternate';
+import { BaseColors } from '@/lib/constants';
 import {
 	GetPresenterRecordingsPageDataQuery,
 	PresenterPivotFragment,
-} from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
 import {
 	makePresenterFeedRoute,
 	makePresenterRecordingsRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import PresenterPivot from './pivot';
 

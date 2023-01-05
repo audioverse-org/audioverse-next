@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Versions, { VersionsProps } from '@containers/bible/versions';
-import { getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
-import { getAudiobibleVersionsData } from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { makeBibleListRoute } from '@lib/routes';
+import { IBaseProps } from '@/containers/base';
+import Versions, { VersionsProps } from '@/containers/bible/versions';
+import { getBibles } from '@/lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
+import { getAudiobibleVersionsData } from '@/lib/generated/graphql';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { makeBibleListRoute } from '@/lib/routes';
 
 export default Versions;
 
@@ -24,11 +24,12 @@ export async function getStaticProps({
 		console.log(e);
 		return null;
 	});
+
 	const apiBibles = await getAudiobibleVersionsData({
 		language: getLanguageIdByRoute(params?.language),
 	}).catch(() => ({ collections: { nodes: [] } }));
 
-	if (!apiBibles?.collections.nodes) {
+	if (!apiBibles?.collections.nodes || !response || !response.length) {
 		return {
 			notFound: true,
 			revalidate: REVALIDATE_FAILURE,

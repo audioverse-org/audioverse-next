@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading6 from '@components/atoms/heading6';
-import { BaseColors } from '@lib/constants';
-import { ButtonDownloadFragment } from '@lib/generated/graphql';
-import { readableBytes } from '@lib/readableBytes';
+import Heading6 from '@/components/atoms/heading6';
+import { BaseColors } from '@/lib/constants';
+import { ButtonDownloadFragment } from '@/lib/generated/graphql';
+import { readableBytes } from '@/lib/readableBytes';
 
 import IconDownload from '../../../public/img/icons/icon-download.svg';
 

@@ -1,20 +1,20 @@
-import { when } from 'jest-when';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { ENTRIES_PER_PAGE } from '@lib/constants';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
+import { ENTRIES_PER_PAGE } from '@/lib/constants';
 import {
 	GetAudiobookListPageDataDocument,
 	GetAudiobookListPageDataQuery,
 	GetAudiobookListPathsDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+} from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/books/page/[i]';
+} from '@/pages/[language]/books/page/[i]';
+import { describe, expect, it } from 'vitest';
 
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}
@@ -29,26 +29,24 @@ async function renderPage(
 }
 
 function loadData(data: Partial<GetAudiobookListPageDataQuery> = {}) {
-	when(fetchApi)
-		.calledWith(GetAudiobookListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			audiobooks: {
-				nodes: [
-					{
-						id: 'the_book_id',
-						title: 'the_book_title',
-						canonicalPath: 'the_book_path',
-						contentType: SequenceContentType.Audiobook,
-						sequenceWriters: [],
-						allRecordings: {},
-					},
-				],
-				aggregate: {
-					count: 100,
+	__load(GetAudiobookListPageDataDocument, {
+		audiobooks: {
+			nodes: [
+				{
+					id: 'the_book_id',
+					title: 'the_book_title',
+					canonicalPath: 'the_book_path',
+					contentType: SequenceContentType.Audiobook,
+					sequenceWriters: [],
+					allRecordings: {},
 				},
+			],
+			aggregate: {
+				count: 100,
 			},
-			...data,
-		});
+		},
+		...data,
+	});
 }
 
 describe('audiobook list page', () => {
@@ -73,15 +71,13 @@ describe('audiobook list page', () => {
 	});
 
 	it('generates static paths', async () => {
-		when(fetchApi)
-			.calledWith(GetAudiobookListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				audiobooks: {
-					aggregate: {
-						count: 1,
-					},
+		__load(GetAudiobookListPathsDataDocument, {
+			audiobooks: {
+				aggregate: {
+					count: 1,
 				},
-			});
+			},
+		});
 
 		const { paths } = await getStaticPaths();
 

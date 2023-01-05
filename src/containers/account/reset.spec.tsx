@@ -1,15 +1,15 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { when } from 'jest-when';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
-import { sleep } from '@lib/sleep';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import Reset from '@pages/[language]/account/reset';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
+import { LoginDocument, ResetPasswordDocument } from '@/lib/generated/graphql';
+import { sleep } from '@/lib/sleep';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import Reset from '@/pages/[language]/account/reset';
+import loadControlledPromise from '@/lib/test/loadControlledPromise';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildRenderer(Reset);
 
@@ -17,21 +17,17 @@ function loadResetPasswordResponse({
 	success = true,
 	errors = [],
 }: { success?: boolean; errors?: { message: string }[] } = {}) {
-	when(fetchApi)
-		.calledWith(ResetPasswordDocument, expect.anything())
-		.mockResolvedValue({
-			userReset: {
-				success,
-				errors,
-			},
-		});
-	when(fetchApi)
-		.calledWith(LoginDocument, expect.anything())
-		.mockResolvedValue({
-			login: {
-				authenticatedUser: {},
-			},
-		});
+	__load(ResetPasswordDocument, {
+		userReset: {
+			success,
+			errors,
+		},
+	});
+	__load(LoginDocument, {
+		login: {
+			authenticatedUser: {},
+		},
+	});
 }
 
 describe('password reset page', () => {
@@ -146,9 +142,7 @@ describe('password reset page', () => {
 
 	it('displays generic error on http error', async () => {
 		await withMutedReactQueryLogger(async () => {
-			when(fetchApi)
-				.calledWith(ResetPasswordDocument, expect.anything())
-				.mockRejectedValue('oops');
+			__loadReject(ResetPasswordDocument, 'oops');
 
 			const { getByPlaceholderText, getByText } = await renderPage();
 
@@ -157,10 +151,16 @@ describe('password reset page', () => {
 			userEvent.click(getByText('Login'));
 
 			await waitFor(() => {
-				expect(
-					getByText('Something went wrong while trying to reset your password')
-				).toBeInTheDocument();
+				expect(screen.getByText('Login')).toBeDisabled();
 			});
+
+			await waitFor(() => {
+				expect(screen.getByText('Login')).toBeEnabled();
+			});
+
+			expect(
+				getByText('Something went wrong while trying to reset your password')
+			).toBeInTheDocument();
 		});
 	});
 
@@ -186,12 +186,12 @@ describe('password reset page', () => {
 	it('does not display success message if not successful', async () => {
 		loadResetPasswordResponse();
 
-		const fetchMock = when(fetchApi).calledWith(
-			ResetPasswordDocument,
-			expect.anything()
-		);
+		// const fetchMock = when(fetchApi).calledWith(
+		// 	ResetPasswordDocument,
+		// 	expect.anything()
+		// );
 
-		const { resolve } = loadControlledPromise(fetchMock);
+		const { resolve } = loadControlledPromise(fetchApi);
 
 		const { getByPlaceholderText, getByText, queryByText } = await renderPage();
 

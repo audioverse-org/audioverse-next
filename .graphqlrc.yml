@@ -17,7 +17,7 @@ generates:
       - 'graphql-plugin-react-query.js'
       - 'graphql-plugin-getters.js'
     config:
-      fetcher: '@lib/api/graphqlFetcher#graphqlFetcher'
+      fetcher: '@/lib/api/graphqlFetcher#graphqlFetcher'
       avoidOptionals: true
       enumsAsConst: true
       scalars:

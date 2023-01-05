@@ -3,10 +3,10 @@ import { Router, useRouter } from 'next/router';
 import React, { useEffect, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import InfoBox from '@components/atoms/infoBox';
-import { getLanguageId, setLanguageId } from '@lib/cookies';
-import isServerSide from '@lib/isServerSide';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import InfoBox from '@/components/atoms/infoBox';
+import { getLanguageId, setLanguageId } from '@/lib/cookies';
+import isServerSide from '@/lib/isServerSide';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import styles from './languageAlternativesAlert.module.scss';
 import LanguageButton from './languageButton';

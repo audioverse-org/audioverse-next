@@ -4,9 +4,9 @@ import MuiModal from '@material-ui/core/Modal';
 import React, { ReactNode } from 'react';
 import { useIntl } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import IconButton from '@components/molecules/iconButton';
-import { BaseColors } from '@lib/constants';
+import Heading2 from '@/components/atoms/heading2';
+import IconButton from '@/components/molecules/iconButton';
+import { BaseColors } from '@/lib/constants';
 
 import IconClose from '../../../public/img/icons/fa-times.svg';
 

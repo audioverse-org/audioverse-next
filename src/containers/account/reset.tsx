@@ -2,14 +2,14 @@ import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import Button from '@components/molecules/button';
-import Input from '@components/molecules/form/input';
-import { login } from '@lib/api/login';
-import { useResetPasswordMutation } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useQueryString } from '@lib/useQueryString';
+import Alert from '@/components/atoms/alert';
+import Button from '@/components/molecules/button';
+import Input from '@/components/molecules/form/input';
+import { login } from '@/lib/api/login';
+import { useResetPasswordMutation } from '@/lib/generated/graphql';
+import { makeDiscoverRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
+import { useQueryString } from '@/lib/useQueryString';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
 
@@ -32,6 +32,7 @@ function Reset(): JSX.Element {
 			const errors = data.userReset.errors;
 			if (errors.length) {
 				setErrors(errors.map((e) => e.message));
+				return Promise.reject(errors);
 			} else if (data.userReset.success) {
 				setSuccessMessage(
 					intl.formatMessage({
@@ -54,6 +55,7 @@ function Reset(): JSX.Element {
 						}),
 					]);
 					setIsLoggingIn(false);
+					return Promise.reject();
 				}
 			}
 		},

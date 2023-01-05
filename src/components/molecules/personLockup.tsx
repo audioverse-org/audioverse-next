@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PersonLockupFragment } from '@lib/generated/graphql';
+import { PersonLockupFragment } from '@/lib/generated/graphql';
 
 import NamedAvatar, { INamedAvatarProps } from './namedAvatar';
 

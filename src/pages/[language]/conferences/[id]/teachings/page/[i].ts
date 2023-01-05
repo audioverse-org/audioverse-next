@@ -6,14 +6,14 @@ import {
 
 import CollectionTeachings, {
 	CollectionTeachingsProps,
-} from '@containers/collection/teachings';
+} from '@/containers/collection/teachings';
 import {
 	getCollectionDetailPathsData,
 	getCollectionTeachingsPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default CollectionTeachings;
 

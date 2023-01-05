@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SocialLogin from '@components/molecules/socialLogin';
+import SocialLogin from '@/components/molecules/socialLogin';
 
 import RegisterForm from './registerForm';
 

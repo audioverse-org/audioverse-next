@@ -7,9 +7,9 @@ import {
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
 	SupportedLanguages,
-} from '@lib/constants';
-import { Language } from '@lib/generated/graphql';
-import getLanguageIds from '@lib/getLanguageIds';
+} from '@/lib/constants';
+import { Language } from '@/lib/generated/graphql';
+import getLanguageIds from '@/lib/getLanguageIds';
 
 type Getter<T> = (variables: { language: Language }) => Promise<T>;
 type Parser<T> = (data: T) => number | null | undefined;

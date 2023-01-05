@@ -4,16 +4,16 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import SermonList, { SermonListProps } from '@containers/sermon/list';
+import { IBaseProps } from '@/containers/base';
+import SermonList, { SermonListProps } from '@/containers/sermon/list';
 import {
 	getSermonListPageData,
 	getSermonListPagePathsData,
-} from '@lib/generated/graphql';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { getNumberedStaticPaths } from '@/lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default SermonList;
 
@@ -29,8 +29,8 @@ export async function getStaticProps({
 				...variables,
 				hasVideo: null,
 			}),
-		(d) => d.sermons.nodes,
-		(d) => d.sermons.aggregate?.count
+		(d) => d.sermons?.nodes,
+		(d) => d.sermons?.aggregate?.count
 	);
 
 	const intl = await getIntl(getLanguageIdByRoute(params?.language));

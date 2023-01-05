@@ -1,15 +1,17 @@
 import React from 'react';
 
-import * as bibleBrain from '@lib/api/bibleBrain';
-import { GetAudiobibleVersionsDataDocument } from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import * as bibleBrain from '@/lib/api/bibleBrain';
+import { GetAudiobibleVersionsDataDocument } from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 import Versions, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/bibles';
+} from '@/pages/[language]/bibles';
+import { describe, expect, it, vi } from 'vitest';
+import { screen } from '@testing-library/react';
 
-jest.mock('@lib/api/bibleBrain');
+vi.mock('@/lib/api/bibleBrain');
 
 async function renderPage() {
 	const { props } = (await getStaticProps({})) as any;
@@ -24,7 +26,7 @@ const loadData = buildLoader(GetAudiobibleVersionsDataDocument, {
 
 function loadPageData() {
 	loadData();
-	jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
+	vi.spyOn(bibleBrain, 'getBibles').mockResolvedValue([
 		{
 			id: 'the_version_id',
 			abbreviation: 'KJV',
@@ -39,18 +41,12 @@ function loadPageData() {
 }
 
 describe('versions list', () => {
-	it('renders', async () => {
-		loadPageData();
-
-		await renderPage();
-	});
-
 	it('renders versions', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_version_title')).toBeInTheDocument();
+		expect(await screen.findByText('the_version_title')).toBeInTheDocument();
 	});
 
 	it('provides language paths', async () => {
@@ -71,7 +67,7 @@ describe('versions list', () => {
 	});
 
 	it('renders 404', async () => {
-		jest.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
+		vi.spyOn(bibleBrain, 'getBibles').mockResolvedValue([]);
 
 		const { notFound } = (await getStaticProps({})) as any;
 

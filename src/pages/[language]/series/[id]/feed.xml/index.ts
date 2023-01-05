@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getSeriesFeedData } from '@lib/generated/graphql';
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+import { getSeriesFeedData } from '@/lib/generated/graphql';
+import { generateFeed, sendRSSHeaders } from '@/lib/generateFeed';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default (): void => void 0;
 

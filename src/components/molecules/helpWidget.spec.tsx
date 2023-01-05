@@ -2,21 +2,22 @@ import { act, screen, waitFor } from '@testing-library/react';
 import { __loadRouter, __mockedRouter } from 'next/router';
 import Script from 'next/script';
 
-import HelpWidget from '@components/molecules/helpWidget';
-import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import filterByExpectation from '@lib/test/getMatchingCall';
-import { buildLoader } from '@lib/test/buildLoader';
+import HelpWidget from '@/components/molecules/helpWidget';
+import { GetHelpWidgetDataDocument } from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import filterByExpectation from '@/lib/test/getMatchingCall';
+import { buildLoader } from '@/lib/test/buildLoader';
 import userEvent from '@testing-library/user-event';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-jest.mock('next/script');
+vi.mock('next/script');
 
-const mockBeacon = jest.fn();
+const mockBeacon = vi.fn();
 
 const renderComponent = buildRenderer(HelpWidget);
 
 const runOnLoad = () => {
-	const props = (Script as jest.Mock).mock.calls[0][0];
+	const props = (Script as Mock).mock.calls[0][0];
 	act(() => {
 		props.onLoad();
 	});
@@ -32,7 +33,7 @@ const awaitReady = async () => {
 
 const getRouteListener = async () => {
 	const matches = filterByExpectation(
-		(__mockedRouter.events.on as jest.Mock).mock.calls,
+		(__mockedRouter.events.on as Mock).mock.calls,
 		expect.arrayContaining(['routeChangeComplete', expect.any(Function)])
 	);
 
