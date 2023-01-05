@@ -52,12 +52,19 @@ const loadData = buildLoader(GetSeriesDetailPageDataDocument, {
 	},
 });
 
+const loadPaths = buildLoader(GetSeriesDetailPathsDataDocument, {
+	serieses: {
+		nodes: [],
+	},
+});
+
 describe('series detail page', () => {
 	beforeEach(() => {
 		__loadQuery({
 			language: 'en',
 			id: 'the_series_id',
 		});
+		loadPaths();
 	});
 
 	it('gets series data', async () => {
