@@ -5,6 +5,7 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
 	plugins: [
+		// @ts-ignore
 		ViteAliases({
 			useConfig: true,
 			useTypescript: true,
