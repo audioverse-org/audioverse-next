@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import { getStoryAlbumFeedData } from '@lib/generated/graphql';
-import { generateFeed, sendRSSHeaders } from '@lib/generateFeed';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
-import { formatBooksDescription } from '@pages/[language]/books/[id]/feed.xml';
+import { getStoryAlbumFeedData } from '@/lib/generated/graphql';
+import { generateFeed, sendRSSHeaders } from '@/lib/generateFeed';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
+import { formatBooksDescription } from '@/pages/[language]/books/[id]/feed.xml';
 
 export default (): void => void 0;
 

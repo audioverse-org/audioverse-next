@@ -4,13 +4,13 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import Card from '@components/molecules/card';
-import { BaseColors } from '@lib/constants';
-import { formatLongDate } from '@lib/date';
-import { CardPostFragment } from '@lib/generated/graphql';
-import { useFormattedDuration } from '@lib/time';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import Card from '@/components/molecules/card';
+import { BaseColors } from '@/lib/constants';
+import { formatLongDate } from '@/lib/date';
+import { CardPostFragment } from '@/lib/generated/graphql';
+import { useFormattedDuration } from '@/lib/time';
 
 import IconAlignLeft from '../../../../public/img/icons/fa-align-left.svg';
 import TypeLockup from '../typeLockup';

@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { useEffect } from 'react';
 import { useIsFetching } from 'react-query';
 
-import useRouterLoading from '@lib/useRouterLoading';
+import useRouterLoading from '@/lib/useRouterLoading';
 
 import styles from './loadingIndicator.module.scss';
 

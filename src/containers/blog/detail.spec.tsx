@@ -1,17 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
 	Language,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/blog/[id]/[[...slugs]]';
+} from '@/pages/[language]/blog/[id]/[[...slugs]]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);

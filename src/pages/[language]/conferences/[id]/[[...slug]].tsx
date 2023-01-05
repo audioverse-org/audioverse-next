@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
+import { IBaseProps } from '@/containers/base';
 import CollectionDetail, {
 	CollectionDetailProps,
-} from '@containers/collection/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+} from '@/containers/collection/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getCollectionDetailPageData,
 	getCollectionDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default CollectionDetail;
 

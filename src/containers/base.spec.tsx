@@ -3,8 +3,8 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
-import MyApp from '@pages/_app';
-import getIntlMessages from '@lib/getIntlMessages';
+import MyApp from '@/pages/_app';
+import getIntlMessages from '@/lib/getIntlMessages';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const renderApp = async (component: any, props: any) => {

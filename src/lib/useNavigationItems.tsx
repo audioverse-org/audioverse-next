@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import DownloadAppButton from '@components/molecules/downloadAppButton';
-import LanguageButton from '@components/molecules/languageButton';
+import DownloadAppButton from '@/components/molecules/downloadAppButton';
+import LanguageButton from '@/components/molecules/languageButton';
 import {
 	makeAboutPage,
 	makeAccountProfileRoute,
@@ -24,8 +24,8 @@ import {
 	makeStoryAlbumListPage,
 	makeTestimoniesRoute,
 	makeTestimonySubmitRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 export type INavigationItem = {
 	key: string;

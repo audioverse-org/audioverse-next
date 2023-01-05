@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { makeSearchRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { makeSearchRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import IconExit from '../../../public/img/icons/icon-exit.svg';
 import IconSearch from '../../../public/img/icons/icon-search.svg';

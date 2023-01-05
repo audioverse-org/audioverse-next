@@ -7,8 +7,8 @@ import {
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import withIntl from '@components/HOCs/withIntl';
-import getIntlMessages from '@lib/getIntlMessages';
+import withIntl from '@/components/HOCs/withIntl';
+import getIntlMessages from '@/lib/getIntlMessages';
 import { vi } from 'vitest';
 
 export default async function renderWithProviders(

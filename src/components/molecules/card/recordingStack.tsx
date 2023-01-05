@@ -3,7 +3,7 @@ import React from 'react';
 import {
 	CardRecordingStackFragment,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import TeaseRecordingStack from '../teaseRecordingStack';
 

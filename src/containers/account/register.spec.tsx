@@ -3,16 +3,16 @@ import userEvent from '@testing-library/user-event';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { __load, fetchApi } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
-} from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import Register from '@pages/[language]/account/register';
+} from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import Register from '@/pages/[language]/account/register';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import { buildLoader } from '@lib/test/buildLoader';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import { buildLoader } from '@/lib/test/buildLoader';
 
 vi.mock('js-cookie');
 vi.mock('react-google-login');

@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import useRouterQuery from '@lib/useRouterQuery';
+import useRouterQuery from '@/lib/useRouterQuery';
 
 export function useQueryString(key: string): string | undefined {
 	const query = useRouterQuery();

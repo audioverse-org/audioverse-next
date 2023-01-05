@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { IntlProvider, ResolvedIntlConfig } from 'react-intl';
 
-import getIntlMessages from '@lib/getIntlMessages';
-import handleIntlError from '@lib/handleIntlError';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import getIntlMessages from '@/lib/getIntlMessages';
+import handleIntlError from '@/lib/handleIntlError';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 type Messages = ResolvedIntlConfig['messages'];
 

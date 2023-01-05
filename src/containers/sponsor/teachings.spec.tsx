@@ -1,17 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSponsorTeachingsPageDataDocument,
 	GetSponsorTeachingsPathsDataDocument,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SponsorTeachings, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/teachings/page/[i]';
+} from '@/pages/[language]/sponsors/[id]/teachings/page/[i]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SponsorTeachings, getStaticProps);

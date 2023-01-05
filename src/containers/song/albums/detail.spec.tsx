@@ -1,16 +1,16 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSongAlbumsDetailPageDataDocument,
 	GetSongAlbumsDetailPathsDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Song, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/albums/[id]/[[...slugs]]';
+} from '@/pages/[language]/songs/albums/[id]/[[...slugs]]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Song, getStaticProps);

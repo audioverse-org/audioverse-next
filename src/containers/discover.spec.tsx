@@ -6,10 +6,10 @@ import {
 	GetDiscoverPageDataQuery,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import Discover, { getStaticProps } from '@pages/[language]/discover';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
+import Discover, { getStaticProps } from '@/pages/[language]/discover';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Discover, getStaticProps);

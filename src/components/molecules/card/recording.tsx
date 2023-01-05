@@ -3,8 +3,8 @@ import React from 'react';
 import {
 	CardRecordingFragment,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { UnreachableCaseError } from '@lib/typeHelpers';
+} from '@/lib/generated/graphql';
+import { UnreachableCaseError } from '@/lib/typeHelpers';
 
 import CardAudiobookTrack from './audiobookTrack';
 import CardBibleChapter from './bibleChapter';

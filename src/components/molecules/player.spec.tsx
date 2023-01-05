@@ -14,19 +14,19 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import Player, { PlayerProps } from '@components/molecules/player';
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { BaseColors } from '@lib/constants';
-import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
+import Player, { PlayerProps } from '@/components/molecules/player';
+import AndMiniplayer from '@/components/templates/andMiniplayer';
+import AndPlaybackContext from '@/components/templates/andPlaybackContext';
+import { recordingIsFavorited } from '@/lib/api/recordingIsFavorited';
+import { BaseColors } from '@/lib/constants';
+import { PlayerFragment, SequenceContentType } from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import setPlayerMock, { mockVideojs } from '@/lib/test/setPlayerMock';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('video.js');
-vi.mock('@lib/api/recordingIsFavorited');
+vi.mock('@/lib/api/recordingIsFavorited');
 
 const mockRecordingIsFavorited = recordingIsFavorited as Mock;
 

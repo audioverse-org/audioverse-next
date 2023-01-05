@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import {
 	CopyrightInfoFragment,
 	RecordingContentType,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import styles from './copyrightInfo.module.scss';
 

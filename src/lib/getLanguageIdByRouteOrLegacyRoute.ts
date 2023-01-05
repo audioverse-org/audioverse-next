@@ -4,7 +4,7 @@ import {
 	LanguageConfiguration,
 	LANGUAGES,
 	SupportedLanguages,
-} from '@lib/constants';
+} from '@/lib/constants';
 
 export function getLanguageIdByRouteOrLegacyRoute(
 	route: string | undefined

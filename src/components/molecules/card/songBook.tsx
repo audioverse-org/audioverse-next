@@ -4,15 +4,15 @@ import Link from 'next/link';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
 import {
 	CardRecordingFragment,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { makeBibleMusicRoute, makeBibleMusicTrackRoute } from '@lib/routes';
-import useHover from '@lib/useHover';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/generated/graphql';
+import { makeBibleMusicRoute, makeBibleMusicTrackRoute } from '@/lib/routes';
+import useHover from '@/lib/useHover';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import SequenceTypeLockup from '../sequenceTypeLockup';
 import TeaseRecordingStack from '../teaseRecordingStack';

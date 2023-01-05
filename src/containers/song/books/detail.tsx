@@ -2,28 +2,28 @@ import startCase from 'lodash/startCase';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import withFailStates from '@components/HOCs/withFailStates';
-import ButtonBack from '@components/molecules/buttonBack';
-import ButtonShare from '@components/molecules/buttonShare';
-import CardSong from '@components/molecules/card/song';
-import CardGroup from '@components/molecules/cardGroup';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
-import Tease from '@components/molecules/tease';
-import { BaseColors } from '@lib/constants';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import withFailStates from '@/components/HOCs/withFailStates';
+import ButtonBack from '@/components/molecules/buttonBack';
+import ButtonShare from '@/components/molecules/buttonShare';
+import CardSong from '@/components/molecules/card/song';
+import CardGroup from '@/components/molecules/cardGroup';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import SequenceTypeLockup from '@/components/molecules/sequenceTypeLockup';
+import Tease from '@/components/molecules/tease';
+import { BaseColors } from '@/lib/constants';
 import {
 	GetSongBooksDetailPageDataQuery,
 	SequenceContentType,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 import {
 	makeBibleMusicRoute,
 	makeBibleMusicTrackRoute,
 	makeSongAlbumsListRoute,
-} from '@lib/routes';
-import { useFormattedDuration } from '@lib/time';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import { useFormattedDuration } from '@/lib/time';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import styles from './detail.module.scss';
 

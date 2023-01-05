@@ -4,13 +4,13 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import Register from '@containers/account/register';
-import { IBaseProps } from '@containers/base';
-import { REVALIDATE } from '@lib/constants';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeRegisterRoute } from '@lib/routes';
+import Register from '@/containers/account/register';
+import { IBaseProps } from '@/containers/base';
+import { REVALIDATE } from '@/lib/constants';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@/lib/getLanguageRoutes';
+import { makeRegisterRoute } from '@/lib/routes';
 
 export default Register;
 

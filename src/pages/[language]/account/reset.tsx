@@ -1,7 +1,7 @@
 import { GetServerSidePropsResult } from 'next';
 
-import Reset from '@containers/account/reset';
-import { IBaseProps } from '@containers/base';
+import Reset from '@/containers/account/reset';
+import { IBaseProps } from '@/containers/base';
 
 export default Reset;
 

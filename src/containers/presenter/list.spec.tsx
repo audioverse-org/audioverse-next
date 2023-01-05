@@ -1,15 +1,15 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetPresenterListPageDataDocument,
 	GetPresenterListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/letter/[letter]';
+} from '@/pages/[language]/presenters/letter/[letter]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Presenters, getStaticProps);

@@ -1,16 +1,16 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetPresenterDetailPathsDataDocument,
 	GetPresenterRecordingsPageDataDocument,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/presenters/[id]/teachings/page/[i]';
+} from '@/pages/[language]/presenters/[id]/teachings/page/[i]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps);

@@ -1,7 +1,7 @@
 import { QueryClient } from 'react-query';
 
-import { setSessionToken } from '@lib/cookies';
-import { login as _login } from '@lib/generated/graphql';
+import { setSessionToken } from '@/lib/cookies';
+import { login as _login } from '@/lib/generated/graphql';
 
 export const USER_SESSION_QUERY_KEYS = [
 	['getWithAuthGuardData'],

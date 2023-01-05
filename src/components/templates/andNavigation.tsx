@@ -10,18 +10,18 @@ import React, {
 } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Button from '@components/molecules/button';
-import IconButton from '@components/molecules/iconButton';
-import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
-import Mininav from '@components/molecules/mininav';
-import SearchBar from '@components/molecules/searchBar';
-import Header from '@components/organisms/header';
-import Navigation from '@components/organisms/navigation';
-import { BaseColors } from '@lib/constants';
-import isServerSide from '@lib/isServerSide';
-import { makeDonateRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useNavigationItems } from '@lib/useNavigationItems';
+import Button from '@/components/molecules/button';
+import IconButton from '@/components/molecules/iconButton';
+import LanguageAlternativesAlert from '@/components/molecules/languageAlternativesAlert';
+import Mininav from '@/components/molecules/mininav';
+import SearchBar from '@/components/molecules/searchBar';
+import Header from '@/components/organisms/header';
+import Navigation from '@/components/organisms/navigation';
+import { BaseColors } from '@/lib/constants';
+import isServerSide from '@/lib/isServerSide';
+import { makeDonateRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
+import { useNavigationItems } from '@/lib/useNavigationItems';
 
 import IconListeningAnimated from '../../../public/img/icons/icon-listening-animated.svg';
 import IconListening from '../../../public/img/icons/icon-listening.svg';

@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { isRedirectRouteAllowed, makeDiscoverRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import { isRedirectRouteAllowed, makeDiscoverRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 export default function LoginRedirect(): JSX.Element {
 	const router = useRouter();

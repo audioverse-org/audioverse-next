@@ -4,11 +4,11 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import TrendingTeachings from '@containers/sermon/trending';
-import { TrendingTeachingsProps } from '@containers/sermon/trending';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeTrendingSermonRoute } from '@lib/routes';
+import { IBaseProps } from '@/containers/base';
+import TrendingTeachings from '@/containers/sermon/trending';
+import { TrendingTeachingsProps } from '@/containers/sermon/trending';
+import { getLanguageRoutes } from '@/lib/getLanguageRoutes';
+import { makeTrendingSermonRoute } from '@/lib/routes';
 
 import { trendingStaticProps } from './all';
 

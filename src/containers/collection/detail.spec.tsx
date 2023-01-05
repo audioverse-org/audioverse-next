@@ -1,17 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetCollectionDetailPageDataDocument,
 	GetCollectionDetailPathsDataDocument,
 	Language,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import CollectionDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/conferences/[id]/[[...slug]]';
+} from '@/pages/[language]/conferences/[id]/[[...slug]]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(CollectionDetail, getStaticProps);

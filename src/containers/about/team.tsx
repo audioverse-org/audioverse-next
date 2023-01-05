@@ -2,16 +2,16 @@ import Image from 'next/legacy/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import RoundImage from '@components/atoms/roundImage';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import TypeLockup from '@components/molecules/typeLockup';
-import AboutNav from '@components/organisms/aboutNav';
-import { BaseColors } from '@lib/constants';
-import { makeAboutPage } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading1 from '@/components/atoms/heading1';
+import Heading2 from '@/components/atoms/heading2';
+import RoundImage from '@/components/atoms/roundImage';
+import Button from '@/components/molecules/button';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import TypeLockup from '@/components/molecules/typeLockup';
+import AboutNav from '@/components/organisms/aboutNav';
+import { BaseColors } from '@/lib/constants';
+import { makeAboutPage } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import IconUser from '../../../public/img/icons/fa-user-light.svg';
 import IconBack from '../../../public/img/icons/icon-back-light.svg';

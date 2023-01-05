@@ -5,12 +5,12 @@ import { useGoogleLogin } from 'react-google-login';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@lib/constants';
-import { setSessionToken } from '@lib/cookies';
+import { FACEBOOK_APP_ID, GOOGLE_CLIENT_ID } from '@/lib/constants';
+import { setSessionToken } from '@/lib/cookies';
 import {
 	useRegisterSocialMutation,
 	UserSocialServiceName,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import Button from './button';
 import styles from './socialLogin.module.scss';

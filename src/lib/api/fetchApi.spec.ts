@@ -1,13 +1,13 @@
 import set from 'lodash/set';
 
-import { fetchApi } from '@lib/api/fetchApi';
-import { storeRequest } from '@lib/api/storeRequest';
+import { fetchApi } from '@/lib/api/fetchApi';
+import { storeRequest } from '@/lib/api/storeRequest';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
 const noopQuery = 'query noop { noop { noop } }';
 
 global.fetch = vi.fn();
-vi.unmock('@lib/api/fetchApi');
+vi.unmock('@/lib/api/fetchApi');
 
 const mockFetchResponse = () => {
 	(global.fetch as Mock).mockResolvedValue({

@@ -3,17 +3,17 @@ import { __loadQuery, __mockedRouter } from 'next/router';
 import {
 	loadSermonListData,
 	loadSermonListPagePathsData,
-} from '@containers/sermon/list.all.spec';
-import { fetchApi } from '@lib/api/fetchApi';
+} from '@/containers/sermon/list.all.spec';
+import { fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import { getStaticPaths } from '@pages/[language]/teachings/video/page/[i]';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
+import { getStaticPaths } from '@/pages/[language]/teachings/video/page/[i]';
 import SermonList, {
 	getStaticProps,
-} from '@pages/[language]/teachings/video/page/[i]';
+} from '@/pages/[language]/teachings/video/page/[i]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);

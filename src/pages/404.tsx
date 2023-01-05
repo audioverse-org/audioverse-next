@@ -1,7 +1,7 @@
 import { GetStaticPropsResult } from 'next';
 
-import NotFound, { NotFoundProps } from '@components/organisms/notFound';
-import { getNotFoundPageData } from '@lib/generated/graphql';
+import NotFound, { NotFoundProps } from '@/components/organisms/notFound';
+import { getNotFoundPageData } from '@/lib/generated/graphql';
 
 export default NotFound;
 

@@ -2,12 +2,12 @@ import Image from 'next/legacy/image';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import AboutNav from '@components/organisms/aboutNav';
-import { makeAboutPage } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading1 from '@/components/atoms/heading1';
+import Button from '@/components/molecules/button';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import AboutNav from '@/components/organisms/aboutNav';
+import { makeAboutPage } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import IconForward from '../../../public/img/icons/icon-forward-light.svg';
 

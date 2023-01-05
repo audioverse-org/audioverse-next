@@ -3,9 +3,9 @@ import React, { ReactNode, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import Button from '@components/molecules/button';
-import { refetchUserQueries } from '@lib/api/login';
-import { UnreachableCaseError } from '@lib/typeHelpers';
+import Button from '@/components/molecules/button';
+import { refetchUserQueries } from '@/lib/api/login';
+import { UnreachableCaseError } from '@/lib/typeHelpers';
 
 import styles from './andGlobalModals.module.scss';
 

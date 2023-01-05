@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Heading1 from '@components/atoms/heading1';
-import withFailStates from '@components/HOCs/withFailStates';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import AboutNav from '@components/organisms/aboutNav';
-import { GetAboutPageDataQuery } from '@lib/generated/graphql';
+import Heading1 from '@/components/atoms/heading1';
+import withFailStates from '@/components/HOCs/withFailStates';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import AboutNav from '@/components/organisms/aboutNav';
+import { GetAboutPageDataQuery } from '@/lib/generated/graphql';
 
 import styles from './index.module.scss';
 

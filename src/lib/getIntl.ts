@@ -1,8 +1,8 @@
 import { createIntl, IntlShape } from 'react-intl';
 
-import getIntlMessages from '@lib/getIntlMessages';
-import getLanguageByBaseUrl from '@lib/getLanguageByBaseUrl';
-import handleIntlError from '@lib/handleIntlError';
+import getIntlMessages from '@/lib/getIntlMessages';
+import getLanguageByBaseUrl from '@/lib/getLanguageByBaseUrl';
+import handleIntlError from '@/lib/handleIntlError';
 
 export default async function getIntl(
 	languageRoute: string

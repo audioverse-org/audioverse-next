@@ -1,12 +1,12 @@
 import { __loadQuery } from 'next/router';
 import React from 'react';
 
-import { Language } from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+import { Language } from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/search';
+} from '@/pages/[language]/search';
 
 import { screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';

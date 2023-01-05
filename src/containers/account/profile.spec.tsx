@@ -8,21 +8,23 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
-import { __load, fetchApi } from '@lib/api/fetchApi';
-import { login } from '@lib/api/login';
-import { storeRequest } from '@lib/api/storeRequest';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
+import { login } from '@/lib/api/login';
+import { storeRequest } from '@/lib/api/storeRequest';
 import {
 	GetProfileDataDocument,
 	UpdateProfileDataDocument,
-} from '@lib/generated/graphql';
-import { buildServerRenderer } from '@lib/test/buildServerRenderer';
-import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
+} from '@/lib/generated/graphql';
+import { buildServerRenderer } from '@/lib/test/buildServerRenderer';
+import { loadAuthGuardData } from '@/lib/test/loadAuthGuardData';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import Profile, {
+	getServerSideProps,
+} from '@/pages/[language]/account/profile';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-vi.mock('@lib/api/login');
-vi.mock('@lib/api/storeRequest');
+vi.mock('@/lib/api/login');
+vi.mock('@/lib/api/storeRequest');
 vi.mock('js-cookie');
 
 const renderPage = buildServerRenderer(Profile, getServerSideProps);

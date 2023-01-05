@@ -13,15 +13,15 @@ import { useMutation, useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
 
-import { getSessionToken } from '@lib/cookies';
+import { getSessionToken } from '@/lib/cookies';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
 	recordingPlaybackProgressSet,
 	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
-} from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
+} from '@/lib/generated/graphql';
+import hasVideo from '@/lib/hasVideo';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js

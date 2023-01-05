@@ -1,8 +1,8 @@
 import React, { MouseEvent, PropsWithChildren, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading6 from '@components/atoms/heading6';
-import { BaseColors } from '@lib/constants';
+import Heading6 from '@/components/atoms/heading6';
+import { BaseColors } from '@/lib/constants';
 
 import IconShareLight from '../../../public/img/icons/icon-share-light.svg';
 import IconShare from '../../../public/img/icons/icon-share.svg';

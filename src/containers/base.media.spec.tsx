@@ -15,15 +15,15 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import { Recording } from '@components/organisms/recording';
+import { Recording } from '@/components/organisms/recording';
 import {
 	RecordingContentType,
 	RecordingFragment,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import setPlayerMock from '@lib/test/setPlayerMock';
-import MyApp from '@pages/_app';
-import getIntlMessages from '@lib/getIntlMessages';
+} from '@/lib/generated/graphql';
+import setPlayerMock from '@/lib/test/setPlayerMock';
+import MyApp from '@/pages/_app';
+import getIntlMessages from '@/lib/getIntlMessages';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const sequence = {

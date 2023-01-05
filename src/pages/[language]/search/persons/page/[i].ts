@@ -1,9 +1,9 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
-import SearchPersons, { SearchPersonsProps } from '@containers/search/persons';
-import { storeRequest } from '@lib/api/storeRequest';
-import { getSearchResultsPersons } from '@lib/generated/graphql';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import SearchPersons, { SearchPersonsProps } from '@/containers/search/persons';
+import { storeRequest } from '@/lib/api/storeRequest';
+import { getSearchResultsPersons } from '@/lib/generated/graphql';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default SearchPersons;
 

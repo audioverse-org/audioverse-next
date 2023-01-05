@@ -1,16 +1,16 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, fetchApi } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetStoriesAlbumsPageDataDocument,
 	GetStoriesAlbumsPathDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/stories/albums/page/[i]';
+} from '@/pages/[language]/stories/albums/page/[i]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);

@@ -6,14 +6,14 @@ import {
 
 import CollectionSequences, {
 	CollectionSequencesProps,
-} from '@containers/collection/sequences';
+} from '@/containers/collection/sequences';
 import {
 	getCollectionDetailPathsData,
 	getCollectionSequencesPageData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default CollectionSequences;
 

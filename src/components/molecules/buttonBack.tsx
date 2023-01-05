@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Button, { IButtonType } from '@components/molecules/button';
+import Button, { IButtonType } from '@/components/molecules/button';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 

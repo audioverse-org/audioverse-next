@@ -6,14 +6,14 @@ import {
 
 import SponsorConferences, {
 	SponsorConferencesProps,
-} from '@containers/sponsor/conferences';
+} from '@/containers/sponsor/conferences';
 import {
 	getSponsorConferencesPageData,
 	getSponsorConferencesPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default SponsorConferences;
 

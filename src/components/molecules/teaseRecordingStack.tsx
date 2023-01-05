@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import TeaseRecording from '@components/molecules/teaseRecording';
-import { TeaseRecordingFragment } from '@lib/generated/graphql';
+import TeaseRecording from '@/components/molecules/teaseRecording';
+import { TeaseRecordingFragment } from '@/lib/generated/graphql';
 
 import WithCardTheme, { CardTheme } from './card/base/withCardTheme';
 import styles from './teaseRecordingStack.module.scss';

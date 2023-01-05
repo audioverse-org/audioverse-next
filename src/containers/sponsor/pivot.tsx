@@ -1,12 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 
-import Heading2 from '@components/atoms/heading2';
-import RoundImage from '@components/atoms/roundImage';
-import ButtonBack from '@components/molecules/buttonBack';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import SponsorTypeLockup from '@components/molecules/sponsorTypeLockup';
-import Tease from '@components/molecules/tease';
-import { SponsorPivotFragment } from '@lib/generated/graphql';
+import Heading2 from '@/components/atoms/heading2';
+import RoundImage from '@/components/atoms/roundImage';
+import ButtonBack from '@/components/molecules/buttonBack';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import SponsorTypeLockup from '@/components/molecules/sponsorTypeLockup';
+import Tease from '@/components/molecules/tease';
+import { SponsorPivotFragment } from '@/lib/generated/graphql';
 
 import styles from './pivot.module.scss';
 

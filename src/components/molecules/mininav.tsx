@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React, { MouseEvent } from 'react';
 
-import Heading6 from '@components/atoms/heading6';
+import Heading6 from '@/components/atoms/heading6';
 
 import styles from './mininav.module.scss';
 

@@ -1,15 +1,15 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSponsorListPageDataDocument,
 	GetSponsorListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/letter/[letter]';
+} from '@/pages/[language]/sponsors/letter/[letter]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);

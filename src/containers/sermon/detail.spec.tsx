@@ -14,28 +14,28 @@ import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import videojs from 'video.js';
 
-import AndMiniplayer from '@components/templates/andMiniplayer';
-import AndPlaybackContext from '@components/templates/andPlaybackContext';
-import { SermonDetailProps } from '@containers/sermon/detail';
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import AndMiniplayer from '@/components/templates/andMiniplayer';
+import AndPlaybackContext from '@/components/templates/andPlaybackContext';
+import { SermonDetailProps } from '@/containers/sermon/detail';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
 	Language,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import setPlayerMock from '@lib/test/setPlayerMock';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import setPlayerMock from '@/lib/test/setPlayerMock';
 import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/[id]/[[...slug]]';
+} from '@/pages/[language]/teachings/[id]/[[...slug]]';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('video.js');
-vi.mock('@lib/api/fetchApi');
+vi.mock('@/lib/api/fetchApi');
 // WORKAROUND: https://github.com/vercel/next.js/issues/16864#issuecomment-702069418
 
 function loadSermonDetailPathsData() {

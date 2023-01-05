@@ -3,7 +3,7 @@ import { __mockedRouter, NextRouter } from 'next/router';
 import React, { ComponentType } from 'react';
 import { QueryClient } from 'react-query';
 
-import renderWithProviders from '@lib/test/renderWithProviders';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 
 // TODO: Only accept props if getProps not provided
 // TODO: Only accept params if getProps provided

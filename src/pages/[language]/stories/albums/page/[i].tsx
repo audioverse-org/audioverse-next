@@ -6,13 +6,13 @@ import {
 
 import StoryAlbumsList, {
 	StoryAlbumsListProps,
-} from '@containers/story/albums/list';
+} from '@/containers/story/albums/list';
 import {
 	getStoriesAlbumsPageData,
 	getStoriesAlbumsPathData,
-} from '@lib/generated/graphql';
-import { getNumberedStaticPaths } from '@lib/getNumberedStaticPaths';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getNumberedStaticPaths } from '@/lib/getNumberedStaticPaths';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default StoryAlbumsList;
 

@@ -1,6 +1,6 @@
-import { getCurrentRequest } from '@lib/api/storeRequest';
-import { getSessionToken } from '@lib/cookies';
-import { sleep } from '@lib/sleep';
+import { getCurrentRequest } from '@/lib/api/storeRequest';
+import { getSessionToken } from '@/lib/cookies';
+import { sleep } from '@/lib/sleep';
 
 const API_URL =
 	process.env.NEXT_PUBLIC_API_URL ||

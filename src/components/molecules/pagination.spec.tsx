@@ -2,7 +2,7 @@ import { RenderOptions, RenderResult, screen } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
-import renderWithProviders from '@lib/test/renderWithProviders';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 
 import Pagination, { pagination } from './pagination';
 import { describe, expect, it, test } from 'vitest';

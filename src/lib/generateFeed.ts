@@ -9,7 +9,7 @@ import striptags from 'striptags';
 import {
 	GenerateFeedFragment,
 	RecordingContentType,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import getIntl from './getIntl';
 

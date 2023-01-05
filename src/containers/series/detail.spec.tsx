@@ -1,19 +1,19 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi } from '@lib/api/fetchApi';
+import { fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSeriesDetailPageDataDocument,
 	GetSeriesDetailPathsDataDocument,
 	Language,
 	RecordingContentType,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildLoader } from '@lib/test/buildLoader';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildLoader } from '@/lib/test/buildLoader';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/series/[id]/[[...slug]]';
+} from '@/pages/[language]/series/[id]/[[...slug]]';
 import { beforeEach, describe, expect, it, Mock } from 'vitest';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);

@@ -4,14 +4,14 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import SponsorSeries, { SponsorSeriesProps } from '@containers/sponsor/series';
+import SponsorSeries, { SponsorSeriesProps } from '@/containers/sponsor/series';
 import {
 	getSponsorSeriesPageData,
 	getSponsorSeriesPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import getIntl from '@lib/getIntl';
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import getIntl from '@/lib/getIntl';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 
 export default SponsorSeries;
 

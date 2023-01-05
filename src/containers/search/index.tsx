@@ -4,29 +4,29 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import NotFoundBase from '@components/organisms/notFound';
-import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
-import Button from '@components/molecules/button';
-import CardCollection from '@components/molecules/card/collection';
-import CardPerson from '@components/molecules/card/person';
-import CardRecording from '@components/molecules/card/recording';
-import CardSequence from '@components/molecules/card/sequence';
-import CardSponsor from '@components/molecules/card/sponsor';
-import CardGroup from '@components/molecules/cardGroup';
-import LoadingCards from '@components/molecules/loadingCards';
+import NotFoundBase from '@/components/organisms/notFound';
+import LineHeading from '@/components/atoms/lineHeading';
+import withFailStates from '@/components/HOCs/withFailStates';
+import Button from '@/components/molecules/button';
+import CardCollection from '@/components/molecules/card/collection';
+import CardPerson from '@/components/molecules/card/person';
+import CardRecording from '@/components/molecules/card/recording';
+import CardSequence from '@/components/molecules/card/sequence';
+import CardSponsor from '@/components/molecules/card/sponsor';
+import CardGroup from '@/components/molecules/cardGroup';
+import LoadingCards from '@/components/molecules/loadingCards';
 import {
 	Language,
 	useGetSearchResultsPageDataQuery,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 import {
 	makeSearchCollectionsRoute,
 	makeSearchPersonsRoute,
 	makeSearchSequencesRoute,
 	makeSearchSponsorsRoute,
 	makeSearchTeachingsRoute,
-} from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 

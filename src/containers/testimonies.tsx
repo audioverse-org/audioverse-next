@@ -1,15 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import Pagination from '@components/molecules/pagination';
-import AboutNav from '@components/organisms/aboutNav';
-import { GetTestimoniesPageDataQuery } from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading1 from '@/components/atoms/heading1';
+import Button from '@/components/molecules/button';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import Pagination from '@/components/molecules/pagination';
+import AboutNav from '@/components/organisms/aboutNav';
+import { GetTestimoniesPageDataQuery } from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
+import { makeTestimoniesRoute, makeTestimonySubmitRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import styles from './testimonies.module.scss';
 

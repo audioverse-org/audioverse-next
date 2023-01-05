@@ -4,12 +4,12 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Contact, { ContactProps } from '@containers/contact';
-import getIntl from '@lib/getIntl';
-import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { makeContactRoute, makeTestimonySubmitRoute } from '@lib/routes';
+import { IBaseProps } from '@/containers/base';
+import Contact, { ContactProps } from '@/containers/contact';
+import getIntl from '@/lib/getIntl';
+import { getLanguageIdByRoute } from '@/lib/getLanguageIdByRoute';
+import { getLanguageRoutes } from '@/lib/getLanguageRoutes';
+import { makeContactRoute, makeTestimonySubmitRoute } from '@/lib/routes';
 
 export default Contact;
 

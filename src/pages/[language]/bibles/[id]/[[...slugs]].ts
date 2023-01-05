@@ -4,17 +4,17 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Version, { VersionProps } from '@containers/bible/version';
-import { getBible, getBibles } from '@lib/api/bibleBrain';
-import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { IBaseProps } from '@/containers/base';
+import Version, { VersionProps } from '@/containers/bible/version';
+import { getBible, getBibles } from '@/lib/api/bibleBrain';
+import { LANGUAGES, REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	CollectionContentType,
 	getAudiobibleVersionData,
 	getAudiobibleVersionsData,
 	Language,
-} from '@lib/generated/graphql';
-import { makeBibleVersionRoute } from '@lib/routes';
+} from '@/lib/generated/graphql';
+import { makeBibleVersionRoute } from '@/lib/routes';
 
 export default Version;
 

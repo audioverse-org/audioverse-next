@@ -2,7 +2,7 @@ import Image from 'next/legacy/image';
 import Link from 'next/link';
 import React from 'react';
 
-import useLanguageRoute from '@lib/useLanguageRoute';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import styles from './header.module.scss';
 

@@ -4,15 +4,15 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import SeriesDetail, { SeriesDetailProps } from '@containers/series/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { IBaseProps } from '@/containers/base';
+import SeriesDetail, { SeriesDetailProps } from '@/containers/series/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getSeriesDetailPageData,
 	getSeriesDetailPathsData,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SeriesDetail;
 

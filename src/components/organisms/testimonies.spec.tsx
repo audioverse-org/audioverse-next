@@ -1,5 +1,5 @@
-import Testimonies from '@components/organisms/testimonies';
-import { buildRenderer } from '@lib/test/buildRenderer';
+import Testimonies from '@/components/organisms/testimonies';
+import { buildRenderer } from '@/lib/test/buildRenderer';
 import { describe, expect, it } from 'vitest';
 
 const renderComponent = buildRenderer(Testimonies, {

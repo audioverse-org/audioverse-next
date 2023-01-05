@@ -5,11 +5,11 @@ import {
 	PlaybackContext,
 	PlaybackContextType,
 	shouldLoadRecordingPlaybackProgress,
-} from '@components/templates/andPlaybackContext';
+} from '@/components/templates/andPlaybackContext';
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;

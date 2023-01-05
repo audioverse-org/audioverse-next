@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import React, { CSSProperties, ReactNode, useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import Button from '@components/molecules/button';
+import Button from '@/components/molecules/button';
 
 import ArrowLeft from '../../../public/img/icons/icon-back-light.svg';
 import ArrowRight from '../../../public/img/icons/icon-forward-light.svg';

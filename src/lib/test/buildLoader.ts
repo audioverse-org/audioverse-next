@@ -1,7 +1,7 @@
 import defaultsDeep from 'lodash/defaultsDeep';
 import { PartialDeep } from 'type-fest';
 
-import { __load } from '@lib/api/fetchApi';
+import { __load } from '@/lib/api/fetchApi';
 
 export function buildLoader<T>(
 	document: string,

@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import withFailStates from '@components/HOCs/withFailStates';
-import CardRecording from '@components/molecules/card/recording';
-import PaginatedCardList from '@components/organisms/paginatedCardList';
-import { GetSearchResultsRecordingsQuery } from '@lib/generated/graphql';
-import { PaginatedProps } from '@lib/getPaginatedStaticProps';
-import { makeSearchRoute, makeSearchTeachingsRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import withFailStates from '@/components/HOCs/withFailStates';
+import CardRecording from '@/components/molecules/card/recording';
+import PaginatedCardList from '@/components/organisms/paginatedCardList';
+import { GetSearchResultsRecordingsQuery } from '@/lib/generated/graphql';
+import { PaginatedProps } from '@/lib/getPaginatedStaticProps';
+import { makeSearchRoute, makeSearchTeachingsRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 export type SearchTeachingsProps = PaginatedProps<
 	NonNullable<GetSearchResultsRecordingsQuery['recordings']['nodes']>[0],

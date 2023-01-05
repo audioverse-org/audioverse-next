@@ -1,5 +1,5 @@
-import { ENTRIES_PER_PAGE } from '@lib/constants';
-import getPageOffset from '@lib/getPageOffset';
+import { ENTRIES_PER_PAGE } from '@/lib/constants';
+import getPageOffset from '@/lib/getPageOffset';
 
 export interface PaginatedGetter<T, E> {
 	(variables: { offset: number; first: number } & E): Promise<T>;

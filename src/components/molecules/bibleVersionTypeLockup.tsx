@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { BaseColors } from '@lib/constants';
+import { BaseColors } from '@/lib/constants';
 
 import BibleIcon from '../../../public/img/icons/fa-bible.svg';
 

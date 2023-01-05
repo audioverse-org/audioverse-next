@@ -5,34 +5,34 @@ import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading6 from '@components/atoms/heading6';
-import HorizontalRule from '@components/atoms/horizontalRule';
-import LineHeading from '@components/atoms/lineHeading';
-import BibleVersionTypeLockup from '@components/molecules/bibleVersionTypeLockup';
-import Button from '@components/molecules/button';
-import CopyrightInfo from '@components/molecules/copyrightInfo';
+import Heading1 from '@/components/atoms/heading1';
+import Heading6 from '@/components/atoms/heading6';
+import HorizontalRule from '@/components/atoms/horizontalRule';
+import LineHeading from '@/components/atoms/lineHeading';
+import BibleVersionTypeLockup from '@/components/molecules/bibleVersionTypeLockup';
+import Button from '@/components/molecules/button';
+import CopyrightInfo from '@/components/molecules/copyrightInfo';
 import DefinitionList, {
 	IDefinitionListTerm,
-} from '@components/molecules/definitionList';
-import MediaFormatSwitcher from '@components/molecules/mediaFormatSwitcher';
-import PersonLockup from '@components/molecules/personLockup';
-import Player from '@components/molecules/player';
-import SequenceNav from '@components/molecules/sequenceNav';
-import SequenceTypeLockup from '@components/molecules/sequenceTypeLockup';
-import Tease from '@components/molecules/tease';
-import TeaseRecording from '@components/molecules/teaseRecording';
-import Transcript from '@components/molecules/transcript';
-import { formatLongDateTime, parseRelativeDate } from '@lib/date';
+} from '@/components/molecules/definitionList';
+import MediaFormatSwitcher from '@/components/molecules/mediaFormatSwitcher';
+import PersonLockup from '@/components/molecules/personLockup';
+import Player from '@/components/molecules/player';
+import SequenceNav from '@/components/molecules/sequenceNav';
+import SequenceTypeLockup from '@/components/molecules/sequenceTypeLockup';
+import Tease from '@/components/molecules/tease';
+import TeaseRecording from '@/components/molecules/teaseRecording';
+import Transcript from '@/components/molecules/transcript';
+import { formatLongDateTime, parseRelativeDate } from '@/lib/date';
 import {
 	RecordingContentType,
 	RecordingFragment,
 	SequenceContentType,
 	TeaseRecordingFragment,
-} from '@lib/generated/graphql';
-import { getRecordingTypeTheme } from '@lib/getRecordingTheme';
-import { makeBibleMusicRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+} from '@/lib/generated/graphql';
+import { getRecordingTypeTheme } from '@/lib/getRecordingTheme';
+import { makeBibleMusicRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import IconBack from '../../../public/img/icons/icon-back-light.svg';
 import IconBlogLight from '../../../public/img/icons/icon-blog-light-small.svg';

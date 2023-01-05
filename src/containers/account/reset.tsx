@@ -2,14 +2,14 @@ import { useRouter } from 'next/router';
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import Button from '@components/molecules/button';
-import Input from '@components/molecules/form/input';
-import { login } from '@lib/api/login';
-import { useResetPasswordMutation } from '@lib/generated/graphql';
-import { makeDiscoverRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
-import { useQueryString } from '@lib/useQueryString';
+import Alert from '@/components/atoms/alert';
+import Button from '@/components/molecules/button';
+import Input from '@/components/molecules/form/input';
+import { login } from '@/lib/api/login';
+import { useResetPasswordMutation } from '@/lib/generated/graphql';
+import { makeDiscoverRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
+import { useQueryString } from '@/lib/useQueryString';
 
 import LogoLarge from '../../../public/img/logo-large.svg';
 

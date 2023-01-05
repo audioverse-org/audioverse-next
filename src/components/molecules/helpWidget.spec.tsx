@@ -2,11 +2,11 @@ import { act, screen, waitFor } from '@testing-library/react';
 import { __loadRouter, __mockedRouter } from 'next/router';
 import Script from 'next/script';
 
-import HelpWidget from '@components/molecules/helpWidget';
-import { GetHelpWidgetDataDocument } from '@lib/generated/graphql';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import filterByExpectation from '@lib/test/getMatchingCall';
-import { buildLoader } from '@lib/test/buildLoader';
+import HelpWidget from '@/components/molecules/helpWidget';
+import { GetHelpWidgetDataDocument } from '@/lib/generated/graphql';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import filterByExpectation from '@/lib/test/getMatchingCall';
+import { buildLoader } from '@/lib/test/buildLoader';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 

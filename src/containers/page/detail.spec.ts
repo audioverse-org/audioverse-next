@@ -1,13 +1,13 @@
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import CustomPageDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/page/[id]/[[...slugs]]';
-import { buildLoader } from '@lib/test/buildLoader';
+} from '@/pages/[language]/page/[id]/[[...slugs]]';
+import { buildLoader } from '@/lib/test/buildLoader';
 import {
 	GetCustomDetailPageDataDocument,
 	GetCustomDetailPageStaticPathsDocument,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 import { screen } from '@testing-library/react';
 import { __loadQuery } from 'next/router';
 import { beforeEach, describe, expect, it } from 'vitest';

@@ -1,18 +1,18 @@
 import React, { FormEvent, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import Alert from '@components/atoms/alert';
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import withFailStates from '@components/HOCs/withFailStates';
-import Button from '@components/molecules/button';
-import ContentWidthLimiter from '@components/molecules/contentWidthLimiter';
-import Input from '@components/molecules/form/input';
-import Textarea from '@components/molecules/form/textarea';
+import Alert from '@/components/atoms/alert';
+import Heading1 from '@/components/atoms/heading1';
+import Heading2 from '@/components/atoms/heading2';
+import withFailStates from '@/components/HOCs/withFailStates';
+import Button from '@/components/molecules/button';
+import ContentWidthLimiter from '@/components/molecules/contentWidthLimiter';
+import Input from '@/components/molecules/form/input';
+import Textarea from '@/components/molecules/form/textarea';
 import {
 	GetMediaReleaseFormsPageDataQuery,
 	useSubmitMediaReleaseFormMutation,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import styles from './detail.module.scss';
 

@@ -1,7 +1,7 @@
 import values from 'lodash/values';
 
-import { LANGUAGES } from '@lib/constants';
-import getIntlMessages from '@lib/getIntlMessages';
+import { LANGUAGES } from '@/lib/constants';
+import getIntlMessages from '@/lib/getIntlMessages';
 import { describe, it } from 'vitest';
 
 describe('getIntlMessages', () => {

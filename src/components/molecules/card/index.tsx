@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { ReactNode } from 'react';
 
-import styles from '@components/molecules/card/index.module.scss';
+import styles from '@/components/molecules/card/index.module.scss';
 
 interface CardProps {
 	children?: ReactNode;

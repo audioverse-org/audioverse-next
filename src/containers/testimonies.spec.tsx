@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { __load, fetchApi } from '@lib/api/fetchApi';
-import { ENTRIES_PER_PAGE } from '@lib/constants';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
+import { ENTRIES_PER_PAGE } from '@/lib/constants';
 import {
 	GetTestimoniesPageDataDocument,
 	GetTestimoniesPathsDataDocument,
 	Testimony,
-} from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+} from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 import Testimonies, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/testimonies/page/[i]';
+} from '@/pages/[language]/testimonies/page/[i]';
 import { describe, expect, it } from 'vitest';
 
 function loadTestimonies(nodes: Partial<Testimony>[] | null = null): void {

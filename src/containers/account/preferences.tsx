@@ -3,21 +3,21 @@ import React, { FormEvent, useEffect, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useQueryClient } from 'react-query';
 
-import Heading1 from '@components/atoms/heading1';
-import Heading2 from '@components/atoms/heading2';
-import Heading3 from '@components/atoms/heading3';
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import Button from '@components/molecules/button';
-import Checkbox from '@components/molecules/form/checkbox';
-import Select from '@components/molecules/form/select';
-import AccountNav from '@components/organisms/accountNav';
+import Heading1 from '@/components/atoms/heading1';
+import Heading2 from '@/components/atoms/heading2';
+import Heading3 from '@/components/atoms/heading3';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import Button from '@/components/molecules/button';
+import Checkbox from '@/components/molecules/form/checkbox';
+import Select from '@/components/molecules/form/select';
+import AccountNav from '@/components/organisms/accountNav';
 import {
 	Language,
 	RecordingQuality,
 	Timezone,
 	useGetAccountPreferencesDataQuery,
 	useUpdateAccountPreferencesMutation,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import styles from './preferences.module.scss';
 

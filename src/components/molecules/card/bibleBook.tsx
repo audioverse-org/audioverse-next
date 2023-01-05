@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import Heading2 from '@components/atoms/heading2';
-import Heading6 from '@components/atoms/heading6';
-import { IBibleBook } from '@lib/api/bibleBrain';
-import { makeBibleBookRoute } from '@lib/routes';
-import useLanguageRoute from '@lib/useLanguageRoute';
+import Heading2 from '@/components/atoms/heading2';
+import Heading6 from '@/components/atoms/heading6';
+import { IBibleBook } from '@/lib/api/bibleBrain';
+import { makeBibleBookRoute } from '@/lib/routes';
+import useLanguageRoute from '@/lib/useLanguageRoute';
 
 import BibleVersionTypeLockup from '../bibleVersionTypeLockup';
 

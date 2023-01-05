@@ -1,15 +1,15 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, fetchApi } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetSongAlbumsListPageDataDocument,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Songs, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/songs/albums';
+} from '@/pages/[language]/songs/albums';
 import { screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 

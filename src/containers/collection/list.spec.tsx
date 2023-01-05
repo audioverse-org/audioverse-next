@@ -1,15 +1,15 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetCollectionListPageDataDocument,
 	GetCollectionListPathsDataDocument,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import CollectionList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/conferences/page/[i]';
+} from '@/pages/[language]/conferences/page/[i]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(CollectionList, getStaticProps);

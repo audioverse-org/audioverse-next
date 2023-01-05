@@ -2,13 +2,13 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
-import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
-import { sleep } from '@lib/sleep';
-import { buildRenderer } from '@lib/test/buildRenderer';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import Reset from '@pages/[language]/account/reset';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
+import { LoginDocument, ResetPasswordDocument } from '@/lib/generated/graphql';
+import { sleep } from '@/lib/sleep';
+import { buildRenderer } from '@/lib/test/buildRenderer';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import Reset from '@/pages/[language]/account/reset';
+import loadControlledPromise from '@/lib/test/loadControlledPromise';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildRenderer(Reset);

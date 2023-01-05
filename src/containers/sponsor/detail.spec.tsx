@@ -1,17 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@/lib/api/fetchApi';
 import {
 	GetSponsorDetailPageDataDocument,
 	GetSponsorDetailPathsDataDocument,
 	Language,
 	SequenceContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SponsorDetail, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/sponsors/[id]/[[...slugs]]';
+} from '@/pages/[language]/sponsors/[id]/[[...slugs]]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SponsorDetail, getStaticProps);

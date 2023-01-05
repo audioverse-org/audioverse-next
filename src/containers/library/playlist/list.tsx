@@ -2,17 +2,17 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import InfoBox from '@components/atoms/infoBox';
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import CardPlaylist from '@components/molecules/card/playlist';
-import CardMasonry from '@components/molecules/cardMasonry';
-import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
-import LibraryNav from '@components/organisms/libraryNav';
+import InfoBox from '@/components/atoms/infoBox';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import CardPlaylist from '@/components/molecules/card/playlist';
+import CardMasonry from '@/components/molecules/cardMasonry';
+import LoadingCards from '@/components/molecules/loadingCards';
+import LibraryError from '@/components/organisms/libraryError';
+import LibraryNav from '@/components/organisms/libraryNav';
 import {
 	Language,
 	useGetLibraryPlaylistsDataQuery,
-} from '@lib/generated/graphql';
+} from '@/lib/generated/graphql';
 
 import baseStyles from '../base.module.scss';
 import LibraryLoggedOut from '../loggedOut';

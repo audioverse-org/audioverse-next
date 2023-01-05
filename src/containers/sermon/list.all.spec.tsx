@@ -4,22 +4,22 @@ import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
 	LIST_PRERENDER_LIMIT,
-} from '@lib/constants';
+} from '@/lib/constants';
 import {
 	GetSermonListPageDataDocument,
 	GetSermonListPagePathsDataDocument,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import SermonList, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/teachings/all/page/[i]';
+} from '@/pages/[language]/teachings/all/page/[i]';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('next/head');

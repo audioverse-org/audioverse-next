@@ -2,7 +2,7 @@ import { cleanup } from '@testing-library/react';
 import matchers, {
 	TestingLibraryMatchers,
 } from '@testing-library/jest-dom/matchers';
-import { vi, expect, afterEach, beforeAll, beforeEach } from 'vitest';
+import { afterEach, beforeAll, beforeEach, expect, vi } from 'vitest';
 import { setLogger } from 'react-query';
 
 const m: TestingLibraryMatchers<string, void> = matchers;
@@ -10,13 +10,13 @@ const m: TestingLibraryMatchers<string, void> = matchers;
 expect.extend(m);
 
 // TODO: Alphabetize these mock statements
-vi.mock('@lib/api/fetchApi');
+vi.mock('@/lib/api/fetchApi');
 vi.mock('video.js');
 vi.mock('@silvermine/videojs-airplay');
 vi.mock('@silvermine/videojs-chromecast');
 vi.mock('next/image');
 vi.mock('next/legacy/image');
-vi.mock('@lib/getIntlMessages');
+vi.mock('@/lib/getIntlMessages');
 vi.mock('next/router');
 vi.mock('react-facebook-login/dist/facebook-login-render-props');
 vi.mock('react-google-login');
@@ -37,9 +37,15 @@ beforeAll(() => {
 
 beforeEach(() => {
 	setLogger({
-		log: () => {},
-		warn: () => {},
-		error: () => {},
+		log: () => {
+			// noop
+		},
+		warn: () => {
+			// noop
+		},
+		error: () => {
+			// noop
+		},
 	});
 });
 

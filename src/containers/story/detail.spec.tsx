@@ -1,17 +1,17 @@
 import { __loadQuery } from 'next/router';
 
-import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@/lib/api/fetchApi';
 import {
 	GetStoryDetailDataDocument,
 	GetStoryDetailStaticPathsDocument,
 	Language,
 	RecordingContentType,
-} from '@lib/generated/graphql';
-import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+} from '@/lib/generated/graphql';
+import { buildStaticRenderer } from '@/lib/test/buildStaticRenderer';
 import Story, {
 	getStaticPaths,
 	getStaticProps,
-} from '@pages/[language]/stories/[id]/[[...slugs]]';
+} from '@/pages/[language]/stories/[id]/[[...slugs]]';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Story, getStaticProps);

@@ -1,4 +1,4 @@
-import { getPaginatedStaticProps } from '@lib/getPaginatedStaticProps';
+import { getPaginatedStaticProps } from '@/lib/getPaginatedStaticProps';
 import { describe, expect, it } from 'vitest';
 
 describe('getPaginatedStaticProps', () => {

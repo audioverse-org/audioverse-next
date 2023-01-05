@@ -4,12 +4,12 @@ import {
 	GetStaticPropsResult,
 } from 'next';
 
-import { IBaseProps } from '@containers/base';
-import Home, { HomeProps } from '@containers/home';
-import { REVALIDATE } from '@lib/constants';
-import { getHomeStaticProps } from '@lib/generated/graphql';
-import { getLanguageRoutes } from '@lib/getLanguageRoutes';
-import { getValidLanguage } from '@lib/getValidLanguage';
+import { IBaseProps } from '@/containers/base';
+import Home, { HomeProps } from '@/containers/home';
+import { REVALIDATE } from '@/lib/constants';
+import { getHomeStaticProps } from '@/lib/generated/graphql';
+import { getLanguageRoutes } from '@/lib/getLanguageRoutes';
+import { getValidLanguage } from '@/lib/getValidLanguage';
 
 export default Home;
 

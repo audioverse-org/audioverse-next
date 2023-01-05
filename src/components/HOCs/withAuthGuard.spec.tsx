@@ -5,13 +5,13 @@ import { __loadRouter } from 'next/router';
 import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
-import withAuthGuard from '@components/HOCs/withAuthGuard';
-import { __load } from '@lib/api/fetchApi';
+import withAuthGuard from '@/components/HOCs/withAuthGuard';
+import { __load } from '@/lib/api/fetchApi';
 import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
-} from '@lib/generated/graphql';
-import renderWithProviders from '@lib/test/renderWithProviders';
+} from '@/lib/generated/graphql';
+import renderWithProviders from '@/lib/test/renderWithProviders';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 function render() {

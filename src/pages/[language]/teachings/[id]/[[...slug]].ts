@@ -5,15 +5,15 @@ import {
 } from 'next';
 import striptags from 'striptags';
 
-import { IBaseProps } from '@containers/base';
-import SermonDetail, { SermonDetailProps } from '@containers/sermon/detail';
-import { REVALIDATE, REVALIDATE_FAILURE } from '@lib/constants';
+import { IBaseProps } from '@/containers/base';
+import SermonDetail, { SermonDetailProps } from '@/containers/sermon/detail';
+import { REVALIDATE, REVALIDATE_FAILURE } from '@/lib/constants';
 import {
 	getSermonDetailData,
 	getSermonDetailStaticPaths,
-} from '@lib/generated/graphql';
-import { getDetailStaticPaths } from '@lib/getDetailStaticPaths';
-import { getLanguageIdByRouteOrLegacyRoute } from '@lib/getLanguageIdByRouteOrLegacyRoute';
+} from '@/lib/generated/graphql';
+import { getDetailStaticPaths } from '@/lib/getDetailStaticPaths';
+import { getLanguageIdByRouteOrLegacyRoute } from '@/lib/getLanguageIdByRouteOrLegacyRoute';
 
 export default SermonDetail;
 

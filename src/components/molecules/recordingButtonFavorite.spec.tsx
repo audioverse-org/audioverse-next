@@ -4,17 +4,17 @@ import Cookie from 'js-cookie';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import RecordingButtonFavorite from '@components/molecules/recordingButtonFavorite';
-import { recordingIsFavorited } from '@lib/api/recordingIsFavorited';
-import { setRecordingFavorited } from '@lib/api/setRecordingFavorited';
-import { BaseColors } from '@lib/constants';
-import renderWithProviders from '@lib/test/renderWithProviders';
-import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import loadControlledPromise from '@lib/test/loadControlledPromise';
+import RecordingButtonFavorite from '@/components/molecules/recordingButtonFavorite';
+import { recordingIsFavorited } from '@/lib/api/recordingIsFavorited';
+import { setRecordingFavorited } from '@/lib/api/setRecordingFavorited';
+import { BaseColors } from '@/lib/constants';
+import renderWithProviders from '@/lib/test/renderWithProviders';
+import withMutedReactQueryLogger from '@/lib/test/withMutedReactQueryLogger';
+import loadControlledPromise from '@/lib/test/loadControlledPromise';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-vi.mock('@lib/api/recordingIsFavorited');
-vi.mock('@lib/api/setRecordingFavorited');
+vi.mock('@/lib/api/recordingIsFavorited');
+vi.mock('@/lib/api/setRecordingFavorited');
 vi.mock('js-cookie');
 
 const renderComponent = async () => {
