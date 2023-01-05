@@ -1,11 +1,10 @@
-import { advanceTo } from 'jest-date-mock';
-
 import { RecordingContentType } from './generated/graphql';
 import { generateFeed } from './generateFeed';
+import { describe, expect, it, beforeAll, vi } from 'vitest';
 
 describe('generateFeed', () => {
 	beforeAll(() => {
-		advanceTo(new Date(2021, 8, 13, 12, 34, 56));
+		vi.setSystemTime(new Date(2021, 8, 13, 12, 34, 56));
 	});
 
 	it('matches handles no recordings', async () => {
