@@ -32,7 +32,7 @@ beforeEach(() => {
 	fetchApi.mockReset().mockImplementation((q) => {
 		const { data, resolve } = m.get(q) ?? {
 			data: null,
-			resolve: false,
+			resolve: true,
 		};
 
 		if (resolve) {
