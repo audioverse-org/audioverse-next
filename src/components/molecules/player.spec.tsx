@@ -960,7 +960,7 @@ describe('player', () => {
 	});
 
 	it('defaults to api duration if recording not loaded', async () => {
-		mockVideojs.mockReturnValue(null);
+		mockVideojs.mockReturnValue(null as any);
 
 		const { findByText } = await renderComponent({
 			props: {
