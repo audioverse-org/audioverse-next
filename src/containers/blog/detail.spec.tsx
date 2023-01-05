@@ -1,6 +1,6 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
 import {
 	GetBlogDetailDataDocument,
 	GetBlogDetailStaticPathsDocument,
@@ -12,7 +12,7 @@ import BlogPostDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/blog/[id]/[[...slugs]]';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(BlogPostDetail, getStaticProps);
 

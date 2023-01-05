@@ -6,13 +6,13 @@ import React, { ReactElement } from 'react';
 import { QueryClient } from 'react-query';
 
 import withAuthGuard from '@components/HOCs/withAuthGuard';
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load } from '@lib/api/fetchApi';
 import {
 	GetWithAuthGuardDataDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 function render() {
 	const Comp = withAuthGuard(() => <>hello world</>);

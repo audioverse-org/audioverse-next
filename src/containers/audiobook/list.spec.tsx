@@ -1,7 +1,7 @@
 import { __loadRouter } from 'next/router';
 import React from 'react';
 
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@lib/api/fetchApi';
 import { ENTRIES_PER_PAGE } from '@lib/constants';
 import {
 	GetAudiobookListPageDataDocument,
@@ -14,7 +14,7 @@ import AudiobooksList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/books/page/[i]';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 async function renderPage(
 	params: Partial<Parameters<typeof getStaticProps>[0]['params']> = {}

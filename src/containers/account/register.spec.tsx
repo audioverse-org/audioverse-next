@@ -3,14 +3,14 @@ import userEvent from '@testing-library/user-event';
 import Cookie from 'js-cookie';
 import { __setFacebookResponse } from 'react-facebook-login/dist/facebook-login-render-props';
 
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@lib/api/fetchApi';
 import {
 	RegisterDocument,
 	RegisterSocialDocument,
 } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import Register from '@pages/[language]/account/register';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import { buildLoader } from '@lib/test/buildLoader';
 

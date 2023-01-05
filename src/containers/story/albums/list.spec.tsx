@@ -1,6 +1,6 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@lib/api/fetchApi';
 import {
 	GetStoriesAlbumsPageDataDocument,
 	GetStoriesAlbumsPathDataDocument,
@@ -11,7 +11,7 @@ import StoryAlbumsList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/stories/albums/page/[i]';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(StoryAlbumsList, getStaticProps);
 

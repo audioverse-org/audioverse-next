@@ -2,7 +2,7 @@ import set from 'lodash/set';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import { storeRequest } from '@lib/api/storeRequest';
-import { vi, Mock, describe, it, expect } from 'vitest';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
 const noopQuery = 'query noop { noop { noop } }';
 

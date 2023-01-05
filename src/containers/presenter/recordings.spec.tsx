@@ -1,6 +1,6 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject } from '@lib/api/fetchApi';
 import {
 	GetPresenterDetailPathsDataDocument,
 	GetPresenterRecordingsPageDataDocument,
@@ -11,7 +11,7 @@ import PresenterRecordings, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/[id]/teachings/page/[i]';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(PresenterRecordings, getStaticProps);
 

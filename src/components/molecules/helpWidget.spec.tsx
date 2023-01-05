@@ -8,7 +8,7 @@ import { buildRenderer } from '@lib/test/buildRenderer';
 import filterByExpectation from '@lib/test/getMatchingCall';
 import { buildLoader } from '@lib/test/buildLoader';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('next/script');
 

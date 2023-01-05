@@ -11,7 +11,7 @@ import { getStaticPaths } from '@pages/[language]/teachings/audio/page/[i]';
 import SermonList, {
 	getStaticProps,
 } from '@pages/[language]/teachings/audio/page/[i]';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(SermonList, getStaticProps);
 

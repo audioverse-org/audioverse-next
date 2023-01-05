@@ -4,7 +4,7 @@ import { __mockedRouter } from 'next/router';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import Login from '@pages/[language]/account/login';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const renderPage = buildRenderer(Login);
 

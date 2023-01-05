@@ -4,11 +4,11 @@ import { __loadRouter } from 'next/router';
 import React from 'react';
 
 import Login from '@components/molecules/login';
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
 import { LoginForgotPasswordDocument } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 function loadForgotPasswordResponse({
 	success = true,

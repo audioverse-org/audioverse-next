@@ -4,7 +4,7 @@ import React from 'react';
 import LoadingIndicator from '@components/molecules/loadingIndicator';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import useRouterLoading from '@lib/useRouterLoading';
-import { Mock, vi, describe, it, expect } from 'vitest';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('@lib/useRouterLoading');
 

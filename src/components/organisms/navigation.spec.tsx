@@ -4,7 +4,7 @@ import React from 'react';
 
 import Navigation from '@components/organisms/navigation';
 import renderWithProviders from '@lib/test/renderWithProviders';
-import { describe, it, vi, expect } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@lib/api/fetchApi');
 

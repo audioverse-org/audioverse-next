@@ -24,7 +24,7 @@ import {
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
 import getIntlMessages from '@lib/getIntlMessages';
-import { beforeEach, expect, it, describe, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const sequence = {
 	id: 'the_sequence_id',

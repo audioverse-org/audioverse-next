@@ -23,7 +23,7 @@ import { PlayerFragment, SequenceContentType } from '@lib/generated/graphql';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import setPlayerMock, { mockVideojs } from '@lib/test/setPlayerMock';
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('video.js');
 vi.mock('@lib/api/recordingIsFavorited');

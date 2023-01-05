@@ -14,7 +14,7 @@ import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
-import { describe, it, expect, beforeEach, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock } from 'vitest';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 

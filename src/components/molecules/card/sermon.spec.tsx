@@ -4,7 +4,7 @@ import React from 'react';
 import CardSermon, { CardSermonProps } from '@components/molecules/card/sermon';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const Page = (props: CardSermonProps): JSX.Element => {
 	return (

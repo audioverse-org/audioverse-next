@@ -15,13 +15,13 @@ import Book, {
 	getStaticProps,
 } from '@pages/[language]/bibles/[id]/[book]/[chapter]';
 import {
-	describe,
-	it,
-	expect,
-	beforeEach,
-	vi,
-	beforeAll,
 	afterAll,
+	beforeAll,
+	beforeEach,
+	describe,
+	expect,
+	it,
+	vi,
 } from 'vitest';
 
 vi.mock('@lib/api/bibleBrain');

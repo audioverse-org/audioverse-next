@@ -5,9 +5,7 @@ import React, { PropsWithChildren, useContext, useEffect } from 'react';
 import styles from './andMiniplayer.module.scss';
 import { PlaybackContext } from './andPlaybackContext';
 
-const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'), {
-	loading: () => <div>loading</div>,
-});
+const LazyMiniplayer = dynamic(() => import('../organisms/miniplayer'));
 const LazyHelpWidget = dynamic(() => import('../molecules/helpWidget'));
 
 export default function AndMiniplayer({

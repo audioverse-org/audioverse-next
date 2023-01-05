@@ -5,7 +5,7 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import MyApp from '@pages/_app';
 import getIntlMessages from '@lib/getIntlMessages';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);

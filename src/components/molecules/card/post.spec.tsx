@@ -1,6 +1,6 @@
 import CardPost from '@components/molecules/card/post';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const renderComponent = buildRenderer(CardPost);
 

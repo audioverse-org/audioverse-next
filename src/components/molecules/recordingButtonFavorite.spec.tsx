@@ -11,7 +11,7 @@ import { BaseColors } from '@lib/constants';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import loadControlledPromise from '@lib/test/loadControlledPromise';
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('@lib/api/recordingIsFavorited');
 vi.mock('@lib/api/setRecordingFavorited');

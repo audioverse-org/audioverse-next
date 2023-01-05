@@ -1,6 +1,6 @@
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSongAlbumsListPageDataDocument,
 	SequenceContentType,
@@ -11,7 +11,7 @@ import Songs, {
 	getStaticProps,
 } from '@pages/[language]/songs/albums';
 import { screen } from '@testing-library/react';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildStaticRenderer(Songs, getStaticProps);
 

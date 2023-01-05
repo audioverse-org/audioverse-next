@@ -8,7 +8,7 @@ import Versions, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/bibles';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { screen } from '@testing-library/react';
 
 vi.mock('@lib/api/bibleBrain');

@@ -4,7 +4,7 @@ import React from 'react';
 import CardSermon from '@components/molecules/card/sermon';
 import Slider from '@components/organisms/slider';
 import { buildRenderer } from '@lib/test/buildRenderer';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const renderComponent = buildRenderer(Slider);
 

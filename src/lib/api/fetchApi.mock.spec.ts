@@ -1,5 +1,5 @@
-import { fetchApi, __load } from './fetchApi';
-import { vi, describe, it, expect } from 'vitest';
+import { __load, fetchApi } from './fetchApi';
+import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('./fetchApi');
 

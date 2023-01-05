@@ -2,14 +2,14 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
 import { LoginDocument, ResetPasswordDocument } from '@lib/generated/graphql';
 import { sleep } from '@lib/sleep';
 import { buildRenderer } from '@lib/test/buildRenderer';
 import withMutedReactQueryLogger from '@lib/test/withMutedReactQueryLogger';
 import Reset from '@pages/[language]/account/reset';
 import loadControlledPromise from '@lib/test/loadControlledPromise';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 
 const renderPage = buildRenderer(Reset);
 
@@ -151,7 +151,7 @@ describe('password reset page', () => {
 			userEvent.click(getByText('Login'));
 
 			await waitFor(() => {
-				expect(screen.getByText('Login')).not.toBeEnabled();
+				expect(screen.getByText('Login')).toBeDisabled();
 			});
 
 			await waitFor(() => {

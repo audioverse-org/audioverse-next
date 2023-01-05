@@ -5,10 +5,10 @@ import get from 'lodash/get';
 import { GetServerSidePropsContext } from 'next';
 import { __loadRouter } from 'next/router';
 import React from 'react';
-import ReactTestUtils, { act } from 'react-dom/test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { hydrate, QueryClient } from 'react-query';
 
-import { fetchApi, __load } from '@lib/api/fetchApi';
+import { __load, fetchApi } from '@lib/api/fetchApi';
 import { login } from '@lib/api/login';
 import { storeRequest } from '@lib/api/storeRequest';
 import {
@@ -19,7 +19,7 @@ import { buildServerRenderer } from '@lib/test/buildServerRenderer';
 import { loadAuthGuardData } from '@lib/test/loadAuthGuardData';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Profile, { getServerSideProps } from '@pages/[language]/account/profile';
-import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('@lib/api/login');
 vi.mock('@lib/api/storeRequest');

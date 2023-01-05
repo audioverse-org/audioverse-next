@@ -1,6 +1,6 @@
 import { RecordingContentType } from './generated/graphql';
 import { generateFeed } from './generateFeed';
-import { describe, expect, it, beforeAll, vi } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 describe('generateFeed', () => {
 	beforeAll(() => {

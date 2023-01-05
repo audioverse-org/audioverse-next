@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { useRouter } from 'next/router';
 import { __loadQuery } from 'next/router';
 
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
 import {
 	ENTRIES_PER_PAGE,
 	LANGUAGES,
@@ -20,7 +20,7 @@ import SermonList, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/all/page/[i]';
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('next/head');
 

@@ -4,8 +4,8 @@ import {
 	getByLabelText,
 	getByTestId,
 	getByText,
-	waitFor,
 	screen,
+	waitFor,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -17,7 +17,7 @@ import videojs from 'video.js';
 import AndMiniplayer from '@components/templates/andMiniplayer';
 import AndPlaybackContext from '@components/templates/andPlaybackContext';
 import { SermonDetailProps } from '@containers/sermon/detail';
-import { fetchApi, __load, __loadReject } from '@lib/api/fetchApi';
+import { __load, __loadReject, fetchApi } from '@lib/api/fetchApi';
 import {
 	GetSermonDetailDataDocument,
 	GetSermonDetailStaticPathsDocument,
@@ -32,7 +32,7 @@ import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
-import { describe, it, expect, beforeEach, vi, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 vi.mock('video.js');
 vi.mock('@lib/api/fetchApi');
