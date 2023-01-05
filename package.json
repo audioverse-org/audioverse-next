@@ -2,7 +2,6 @@
   "name": "audioverse-next",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "NODE_ICU_DATA=node_modules/full-icu next build",
@@ -115,7 +114,6 @@
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "type-fest": "^2.12.0",
     "typescript": "^4.4.2",
-    "vite-aliases": "^0.9.8",
     "vite-plugin-svgr": "^2.4.0",
     "vitest": "^0.26.2",
     "vitest-mock-extended": "^1.0.8"
