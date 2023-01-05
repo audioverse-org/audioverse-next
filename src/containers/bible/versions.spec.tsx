@@ -9,6 +9,7 @@ import Versions, {
 	getStaticProps,
 } from '@pages/[language]/bibles';
 import { describe, it, expect, vi } from 'vitest';
+import { screen } from '@testing-library/react';
 
 vi.mock('@lib/api/bibleBrain');
 
@@ -43,9 +44,9 @@ describe('versions list', () => {
 	it('renders versions', async () => {
 		loadPageData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_version_title')).toBeInTheDocument();
+		expect(await screen.findByText('the_version_title')).toBeInTheDocument();
 	});
 
 	it('provides language paths', async () => {
