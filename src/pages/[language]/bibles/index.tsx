@@ -24,11 +24,12 @@ export async function getStaticProps({
 		console.log(e);
 		return null;
 	});
+
 	const apiBibles = await getAudiobibleVersionsData({
 		language: getLanguageIdByRoute(params?.language),
 	}).catch(() => ({ collections: { nodes: [] } }));
 
-	if (!apiBibles?.collections.nodes) {
+	if (!apiBibles?.collections.nodes || !response || !response.length) {
 		return {
 			notFound: true,
 			revalidate: REVALIDATE_FAILURE,
