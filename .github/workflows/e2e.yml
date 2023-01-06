@@ -28,6 +28,7 @@ jobs:
             --sitemap-find https://www.audioverse.org \
             --sitemap-replace ${{github.event.deployment_status.target_url}}
       - name: Add comment
+        uses: actions/github-script@v5
         env:
           BODY_PREFIX: '<!-- pa11y-ci results -->'
         with:
