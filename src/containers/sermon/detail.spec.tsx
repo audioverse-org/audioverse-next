@@ -31,6 +31,7 @@ import SermonDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/teachings/[id]/[[...slug]]';
+import { DETAIL_PRERENDER_LIMIT } from '@lib/constants';
 
 jest.mock('video.js');
 jest.mock('@lib/api/fetchApi');
@@ -112,7 +113,7 @@ describe('sermon detail page', () => {
 			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
 				variables: {
 					language: 'ENGLISH',
-					first: 10,
+					first: DETAIL_PRERENDER_LIMIT,
 				},
 			})
 		);
@@ -127,7 +128,7 @@ describe('sermon detail page', () => {
 			expect(fetchApi).toBeCalledWith(GetSermonDetailStaticPathsDocument, {
 				variables: {
 					language: 'SPANISH',
-					first: 10,
+					first: DETAIL_PRERENDER_LIMIT,
 				},
 			})
 		);
