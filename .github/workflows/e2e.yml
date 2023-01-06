@@ -24,8 +24,6 @@ jobs:
         run: npm ci
       - name: Scan for issues
         run: |
-          npx pa11y --debug ${{github.event.deployment_status.target_url}}/en/about/1
-
           npx pa11y-ci \
             --sitemap ${{github.event.deployment_status.target_url}}/sitemap-0.xml \
             --sitemap-find https://www.audioverse.org \
