@@ -1,6 +1,37 @@
 name: E2E
 on: [deployment_status]
 jobs:
+  accessibility:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      checks: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.15.0
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Scan for issues
+        run: |
+          npx pa11y-ci \
+            --sitemap ${{github.event.deployment_status.target_url}}/sitemap-0.xml \
+            --sitemap-find https://www.audioverse.org \
+            --sitemap-replace ${{github.event.deployment_status.target_url}}
+      - name: Upload results
+        uses: actions/upload-artifact@v2
+        with:
+          name: pa11y-results
+          path: reports
   lighthouse:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest

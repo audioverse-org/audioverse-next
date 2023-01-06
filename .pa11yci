@@ -1,0 +1,18 @@
+{
+	"defaults": {
+		"standard": "WCAG2AA",
+		"runners": [
+			"htmlcs",
+			"axe"
+		],
+		"reporters": [
+			"pa11y-ci-reporter-cli-summary",
+			[
+				"pa11y-ci-reporter-html",
+				{
+					"destination": "./reports"
+				}
+			]
+		]
+	}
+}
