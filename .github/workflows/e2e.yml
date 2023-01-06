@@ -30,6 +30,7 @@ jobs:
             --sitemap-replace ${{github.event.deployment_status.target_url}} \
             --sitemap-exclude 'https?:\/\/[\w\.-]+\/(?!en)\w\w\/'
       - name: Add comment
+        if: always()
         uses: actions/github-script@v5
         env:
           BODY_PREFIX: '<!-- pa11y-ci results -->'
@@ -38,6 +39,7 @@ jobs:
             const script = require('./.github/workflows/scripts/pa11y-ci.js')
             await script({ context, core, github })
       - name: Upload results
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: pa11y-results
