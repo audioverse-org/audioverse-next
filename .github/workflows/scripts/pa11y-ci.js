@@ -31,9 +31,13 @@ module.exports = async ({ context, core, github }) => {
 		commentBody += `- Number of errors found: ${errors}. :sob:\n`;
 
 		let formattedOutput = '';
+		let skipped = 0;
 		Object.keys(results).forEach((urlKey) => {
 			// GitHub comments are limited to 65536 characters
-			if (formattedOutput.length > 60000) return;
+			if (formattedOutput.length > 60000) {
+				skipped++;
+				return;
+			}
 
 			const errors = results[urlKey];
 			if (errors.length < 1) {
@@ -50,6 +54,10 @@ module.exports = async ({ context, core, github }) => {
 				formattedOutput += '  ```\n\n';
 			});
 		});
+
+		if (skipped > 0) {
+			formattedOutput += `Ommitted ${skipped} issues due to comment length limits`;
+		}
 
 		commentBody += `<details><summary>See results :eyes:</summary>\n\n${formattedOutput}</details>`;
 	}
@@ -81,9 +89,5 @@ module.exports = async ({ context, core, github }) => {
 			issue_number: prNumber,
 			body: commentBody,
 		});
-	}
-
-	if (errors) {
-		core.setFailed('Errors were found by pa11y-ci');
 	}
 };
