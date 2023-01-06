@@ -12,6 +12,12 @@
 				{
 					"destination": "./reports"
 				}
+			],
+			[
+				"json",
+				{
+					"fileName": "./reports/results.json"
+				}
 			]
 		]
 	}
