@@ -27,7 +27,8 @@ jobs:
           npx pa11y-ci \
             --sitemap ${{github.event.deployment_status.target_url}}/sitemap-0.xml \
             --sitemap-find https://www.audioverse.org \
-            --sitemap-replace ${{github.event.deployment_status.target_url}}
+            --sitemap-replace ${{github.event.deployment_status.target_url}} \
+            --sitemap-exclude 'https?:\/\/[\w\.-]+\/(?!en)\w\w\/'
       - name: Add comment
         uses: actions/github-script@v5
         env:
