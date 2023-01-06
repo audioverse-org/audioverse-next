@@ -32,6 +32,9 @@ module.exports = async ({ context, core, github }) => {
 
 		let formattedOutput = '';
 		Object.keys(results).forEach((urlKey) => {
+			// GitHub comments are limited to 65536 characters
+			if (formattedOutput.length > 60000) return;
+
 			const errors = results[urlKey];
 			if (errors.length < 1) {
 				return;
