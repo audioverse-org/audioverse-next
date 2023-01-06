@@ -9303,21 +9303,6 @@ export async function getWithAuthGuardData<T>(
 	return fetchApi(GetWithAuthGuardDataDocument, { variables });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export async function getHelpWidgetData<T>(
 	variables: ExactAlt<T, GetHelpWidgetDataQueryVariables>
 ): Promise<GetHelpWidgetDataQuery> {
@@ -9330,19 +9315,11 @@ export async function loginForgotPassword<T>(
 	return fetchApi(LoginForgotPasswordDocument, { variables });
 }
 
-
-
-
-
-
 export async function getNotFoundPageData<T>(
 	variables: ExactAlt<T, GetNotFoundPageDataQueryVariables>
 ): Promise<GetNotFoundPageDataQuery> {
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
-
-
-
 
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
@@ -9548,7 +9525,6 @@ export async function getCollectionListPathsData<T>(
 	return fetchApi(GetCollectionListPathsDataDocument, { variables });
 }
 
-
 export async function getCollectionPresentersPageData<T>(
 	variables: ExactAlt<T, GetCollectionPresentersPageDataQueryVariables>
 ): Promise<GetCollectionPresentersPageDataQuery> {
@@ -9656,7 +9632,6 @@ export async function getPresenterListPathsData<T>(
 ): Promise<GetPresenterListPathsDataQuery> {
 	return fetchApi(GetPresenterListPathsDataDocument, { variables });
 }
-
 
 export async function getPresenterRecordingsPageData<T>(
 	variables: ExactAlt<T, GetPresenterRecordingsPageDataQueryVariables>
@@ -9886,7 +9861,6 @@ export async function getSponsorListPathsData<T>(
 	return fetchApi(GetSponsorListPathsDataDocument, { variables });
 }
 
-
 export async function getSponsorSeriesPageData<T>(
 	variables: ExactAlt<T, GetSponsorSeriesPageDataQueryVariables>
 ): Promise<GetSponsorSeriesPageDataQuery> {
@@ -10078,4 +10052,3 @@ export async function addPlaylist<T>(
 ): Promise<AddPlaylistMutation> {
 	return fetchApi(AddPlaylistDocument, { variables });
 }
-

@@ -6,6 +6,7 @@ function generateCodeSnippets(documents, shouldProcess, makeSnippet) {
 				.map(makeSnippet)
 				.join('\n');
 		})
+		.filter((x) => !!x.length)
 		.join('\n');
 }
 
