@@ -89,6 +89,7 @@ jobs:
           comment-author: 'github-actions[bot]'
           body-includes: '# Lighthouse Results'
       - name: Create or update comment
+        if: always()
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
