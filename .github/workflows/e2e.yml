@@ -81,8 +81,17 @@ jobs:
             const lines = keys.map(k => `- [${k}](${parsed[k]})`);
             return `# Lighthouse Results\n\n${lines.join('\n')}`;
           result-encoding: string
-      - name: Add comment
-        uses: mshick/add-pr-comment@v1
+      - name: Find comment
+        uses: peter-evans/find-comment@v2
+        id: fc
         with:
-          message: ${{steps.formatComment.outputs.result}}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: '# Lighthouse Results'
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: ${{steps.formatComment.outputs.result}}
+          edit-mode: replace
