@@ -73,7 +73,9 @@ jobs:
           temporaryPublicStorage: true
       - name: Add comment
         uses: actions/github-script@v5
+        env:
+          LIGHTHOUSE_LINKS: ${{ steps.lighthouse.outputs.links }}
         with:
           script: |
             const script = require('./.github/workflows/scripts/lighthouse.js')
-            await script({ context, core, github, steps })
+            await script({ context, core, github })

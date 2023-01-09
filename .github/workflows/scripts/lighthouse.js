@@ -1,6 +1,6 @@
 // SOURCE: https://ashleemboyer.com/blog/how-i-added-a-pa11y-ci-github-action-to-my-next-js-site
 
-module.exports = async ({ context, core, github, steps }) => {
+module.exports = async ({ context, core, github }) => {
 	// Find this PR & do nothing if this isn't a PR
 	const { data } = await github.rest.repos.listPullRequestsAssociatedWithCommit(
 		{
@@ -15,7 +15,7 @@ module.exports = async ({ context, core, github, steps }) => {
 	}
 
 	// Read the lighthouse output and build the comment body
-	const parsed = JSON.parse(steps.lighthouse.outputs.links);
+	const parsed = JSON.parse(process.env.LIGHTHOUSE_LINKS);
 	const keys = Object.keys(parsed);
 	const lines = keys.map((k) => `- [${k}](${parsed[k]})`);
 	const commentBody = `# Lighthouse Results\n\n${lines.join('\n')}`;
