@@ -14,6 +14,7 @@ import SeriesDetail, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/series/[id]/[[...slug]]';
+import { DETAIL_PRERENDER_LIMIT } from '@lib/constants';
 
 const renderPage = buildStaticRenderer(SeriesDetail, getStaticProps);
 
@@ -93,7 +94,7 @@ describe('series detail page', () => {
 		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'ENGLISH',
-				first: 10,
+				first: DETAIL_PRERENDER_LIMIT,
 			},
 		});
 	});
@@ -104,7 +105,7 @@ describe('series detail page', () => {
 		expect(fetchApi).toBeCalledWith(GetSeriesDetailPathsDataDocument, {
 			variables: {
 				language: 'SPANISH',
-				first: 10,
+				first: DETAIL_PRERENDER_LIMIT,
 			},
 		});
 	});
