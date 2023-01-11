@@ -6,12 +6,20 @@ function generateCodeSnippets(documents, shouldProcess, makeSnippet) {
 				.map(makeSnippet)
 				.join('\n');
 		})
+		.filter((x) => !!x.length)
 		.join('\n');
 }
 
 function capitalize(string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+const template = (fnName, varType, returnType, docName) => `
+export async function ${fnName}<T>(
+	variables: ExactAlt<T, ${varType}>
+): Promise<${returnType}> {
+	return fetchApi(${docName}, { variables });
+}`;
 
 module.exports = {
 	plugin: (schema, documents, config, info) => {
@@ -21,12 +29,12 @@ module.exports = {
 			(def) => {
 				const capitalName = capitalize(def.name.value);
 				const capitalType = capitalize(def.operation);
-				return `
-							export async function ${def.name.value}<T>(
-								variables: ExactAlt<T, ${capitalName}${capitalType}Variables>
-							): Promise<${capitalName}${capitalType}> {
-								return fetchApi(${capitalName}Document, { variables });
-							}`;
+				const fnName = def.name.value;
+				const varType = `${capitalName}${capitalType}Variables`;
+				const returnType = `${capitalName}${capitalType}`;
+				const docName = `${capitalName}Document`;
+
+				return template(fnName, varType, returnType, docName);
 			}
 		);
 
