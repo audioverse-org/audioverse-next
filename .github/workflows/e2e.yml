@@ -1,0 +1,45 @@
+name: E2E
+on: [deployment_status]
+jobs:
+  lighthouse:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      checks: read
+      pull-requests: write
+    steps:
+      # WORKAROUND: https://github.com/treosh/lighthouse-ci-action/issues/21
+      - uses: actions/checkout@v2
+      - name: Delete default configuration
+        run: rm .lighthouserc.yaml
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v9
+        id: lighthouse
+        with:
+          urls: |
+            ${{github.event.deployment_status.target_url}}/
+            ${{github.event.deployment_status.target_url}}/en
+            ${{github.event.deployment_status.target_url}}/es
+            ${{github.event.deployment_status.target_url}}/en/discover
+            ${{github.event.deployment_status.target_url}}/en/teachings/all/page/1
+            ${{github.event.deployment_status.target_url}}/en/teachings/300
+            ${{github.event.deployment_status.target_url}}/en/bibles
+            ${{github.event.deployment_status.target_url}}/en/presenters/1309/amanda-anguish
+          runs: 3
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+      - name: Format comment
+        uses: actions/github-script@v6
+        id: formatComment
+        with:
+          script: |
+            const parsed = JSON.parse('${{steps.lighthouse.outputs.links}}');
+            const keys = Object.keys(parsed);
+            const lines = keys.map(k => `- [${k}](${parsed[k]})`);
+            return `# Lighthouse Results\n\n${lines.join('\n')}`;
+          result-encoding: string
+      - name: Add comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: ${{steps.formatComment.outputs.result}}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
