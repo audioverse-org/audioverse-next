@@ -172,14 +172,15 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 	const sourcesRef = useRef<Playable[]>([]);
 	const recordingRef = useRef<AndMiniplayerFragment>();
 
+	// Punted Refs
+	const playerRef = useRef<VideoJsPlayer>();
+
 	// State
-	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
@@ -213,12 +214,12 @@ export default function AndPlaybackContext({
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
-			progress, // We've always buffered as much as we're playing
+			state.progress, // We've always buffered as much as we're playing
 			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
 		).toFixed(2);
 		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
 		setBufferedProgress(newBufferedProgress);
-	}, [bufferedProgress, playerBufferedEnd, progress, duration]);
+	}, [bufferedProgress, playerBufferedEnd, state.progress, duration]);
 
 	const throttledUpdateProgress = useMemo(
 		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
@@ -229,14 +230,14 @@ export default function AndPlaybackContext({
 			throttledUpdateProgress({
 				percentage: p,
 			});
-			_setProgress(p);
+			dispatch({ type: 'SET_PROGRESS', payload: p });
 		},
 		[throttledUpdateProgress]
 	);
 
 	useEffect(() => {
-		progressRef.current = progress;
-	}, [progress]);
+		progressRef.current = state.progress;
+	}, [state.progress]);
 
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -252,7 +253,7 @@ export default function AndPlaybackContext({
 		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
-			progress * playback.getDuration() ||
+			state.progress * playback.getDuration() ||
 			0,
 		setTime: (t: number) => {
 			if (!playerRef.current) return;
@@ -267,7 +268,7 @@ export default function AndPlaybackContext({
 				0
 			);
 		},
-		getProgress: () => progress,
+		getProgress: () => state.progress,
 		getBufferedProgress: () => bufferedProgress,
 		setProgress: (p: number, updatePlayer = true) => {
 			setProgress(p);
@@ -369,7 +370,7 @@ export default function AndPlaybackContext({
 				const progress =
 					serverProgress?.recording?.viewerPlaybackSession
 						?.positionPercentage || 0;
-				_setProgress(progress);
+				dispatch({ type: 'SET_PROGRESS', payload: progress });
 
 				setBufferedProgress(0);
 

@@ -19,6 +19,10 @@ export type PlaybackAction =
 				id: Scalars['ID'];
 				handler: (el: Element) => void;
 			};
+	  }
+	| {
+			type: 'SET_PROGRESS';
+			payload: number;
 	  };
 
 export type PlaybackState = {
@@ -33,6 +37,7 @@ export type PlaybackState = {
 	videoHandlerId?: Scalars['ID'];
 	sourceRecordings: AndMiniplayerFragment[];
 	videoLocation?: 'miniplayer' | 'portal';
+	progress: number;
 };
 
 export const initialState: PlaybackState = {
@@ -43,6 +48,7 @@ export const initialState: PlaybackState = {
 	chromecast: import('@silvermine/videojs-chromecast'),
 	isShowingVideo: false,
 	sourceRecordings: [],
+	progress: 0,
 };
 
 function updateIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -99,6 +105,10 @@ export function reducer(
 			return updateState(state, {
 				recording: state.sourceRecordings[1],
 				sourceRecordings: state.sourceRecordings.slice(1),
+			});
+		case 'SET_PROGRESS':
+			return updateState(state, {
+				progress: action.payload,
 			});
 		default:
 			return state;
