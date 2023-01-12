@@ -272,7 +272,6 @@ export default function AndPlaybackContext({
 			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
-			if (!state.recording) return;
 			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 		},
 		getPrefersAudio: () => state.prefersAudio,

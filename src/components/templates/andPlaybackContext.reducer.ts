@@ -45,6 +45,7 @@ export function reducer(
 		case 'PAUSE':
 			return { ...state, paused: true };
 		case 'SET_PREFERS_AUDIO':
+			if (!state.recording) return state;
 			return {
 				...state,
 				prefersAudio: action.payload,
