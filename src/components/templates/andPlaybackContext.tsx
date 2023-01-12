@@ -248,7 +248,7 @@ export default function AndPlaybackContext({
 		},
 		hasPlayer: () => !!state.player,
 		supportsFullscreen: () => state.player?.supportsFullScreen() || false,
-		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
+		getVolume: () => (state.player?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {
 			dispatch({ type: 'SET_VOLUME', payload: volume });
 		},
