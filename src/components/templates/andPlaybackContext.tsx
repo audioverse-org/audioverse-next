@@ -6,6 +6,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useMemo,
+	useReducer,
 	useRef,
 	useState,
 } from 'react';
@@ -22,6 +23,7 @@ import {
 	Scalars,
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import { initialState, reducer } from './andPlaybackContext.reducer';
 
 // Source:
 // https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
@@ -172,6 +174,8 @@ type Chromecast = {
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
+	const [state, dispatch] = useReducer(reducer, initialState);
+
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
@@ -192,7 +196,6 @@ export default function AndPlaybackContext({
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [isPaused, setIsPaused] = useState<boolean>(true);
 	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
@@ -258,15 +261,15 @@ export default function AndPlaybackContext({
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
-			setIsPaused(false);
+			dispatch({ type: 'PLAY' });
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
 		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		pause: () => {
 			playerRef.current?.pause();
-			setIsPaused(true);
+			dispatch({ type: 'PAUSE' });
 		},
-		paused: () => isPaused,
+		paused: () => state.paused,
 		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
@@ -363,7 +366,9 @@ export default function AndPlaybackContext({
 				playback._setRecording(sourceRecordings[1], prefersAudio);
 			}
 		},
-		setIsPaused: (paused) => setIsPaused(paused),
+		setIsPaused: (paused) => {
+			dispatch({ type: paused ? 'PAUSE' : 'PLAY' });
+		},
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
@@ -390,7 +395,7 @@ export default function AndPlaybackContext({
 					});
 				}
 
-				setIsPaused(true);
+				dispatch({ type: 'PAUSE' });
 				const serverProgress =
 					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
 						'getRecordingPlaybackProgress',
