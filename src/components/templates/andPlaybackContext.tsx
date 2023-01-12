@@ -425,9 +425,7 @@ export default function AndPlaybackContext({
 	useEffect(() => {
 		const video = videoRef.current;
 
-		if (!video) {
-			return;
-		}
+		if (!video) return;
 
 		if (state.videoHandler) {
 			setTimeout(() => {
@@ -445,11 +443,7 @@ export default function AndPlaybackContext({
 
 		const destination = findDestination();
 
-		if (!destination) {
-			return;
-		}
-
-		if (destination === video.parentElement) {
+		if (!destination || destination === video.parentElement) {
 			return;
 		}
 
