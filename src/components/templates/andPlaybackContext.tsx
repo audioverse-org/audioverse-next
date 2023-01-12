@@ -333,7 +333,7 @@ export default function AndPlaybackContext({
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
-			if (state.sourceRecordings && state.sourceRecordings.length > 1) {
+			if (state.sourceRecordings.length > 1) {
 				dispatch({ type: 'SET_RECORDING', payload: state.sourceRecordings[1] });
 				dispatch({
 					type: 'SET_SOURCE_RECORDINGS',
