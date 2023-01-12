@@ -181,7 +181,6 @@ export default function AndPlaybackContext({
 	const playerRef = useRef<VideoJsPlayer>();
 
 	// State
-	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
 	// Computed
@@ -316,7 +315,7 @@ export default function AndPlaybackContext({
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {
-			setVolume(volume);
+			dispatch({ type: 'SET_VOLUME', payload: volume });
 			playerRef.current?.volume(volume / 100);
 		},
 		getSpeed: () => _speed,

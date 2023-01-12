@@ -27,6 +27,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_BUFFERED_PROGRESS';
 			payload: number;
+	  }
+	| {
+			type: 'SET_VOLUME';
+			payload: number;
 	  };
 
 export type PlaybackState = {
@@ -43,6 +47,7 @@ export type PlaybackState = {
 	videoLocation?: 'miniplayer' | 'portal';
 	progress: number;
 	bufferedProgress: number;
+	volume: number;
 };
 
 export const initialState: PlaybackState = {
@@ -55,6 +60,7 @@ export const initialState: PlaybackState = {
 	sourceRecordings: [],
 	progress: 0,
 	bufferedProgress: 0,
+	volume: 100,
 };
 
 function updateIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -119,6 +125,10 @@ export function reducer(
 		case 'SET_BUFFERED_PROGRESS':
 			return updateState(state, {
 				bufferedProgress: action.payload,
+			});
+		case 'SET_VOLUME':
+			return updateState(state, {
+				volume: action.payload,
 			});
 		default:
 			return state;
