@@ -88,6 +88,7 @@ export function reducer(
 			};
 		case 'ADVANCE':
 			if (state.sourceRecordings.length < 2) return state;
+			// TODO: update isShowingVideo with new recording
 			return {
 				...state,
 				recording: state.sourceRecordings[1],
