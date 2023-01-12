@@ -149,9 +149,8 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null); // 2
 	const originRef = useRef<HTMLDivElement>(null); // 2
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
-	const videoHandlerIdRef = useRef<Scalars['ID']>();
-	const sourcesRef = useRef<Playable[]>([]);
-	const recordingRef = useRef<AndMiniplayerFragment>();
+	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
+	const sourcesRef = useRef<Playable[]>([]); // 4
 
 	// Punted Refs
 	const playerRef = useRef<VideoJsPlayer>();
@@ -203,7 +202,7 @@ export default function AndPlaybackContext({
 			return (
 				playerRef.current?.duration() ||
 				sourcesRef.current[0]?.duration ||
-				recordingRef.current?.duration ||
+				state.recording?.duration ||
 				0
 			);
 		},
@@ -227,7 +226,6 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_RECORDINGS', payload: recordingsArray });
 			const newRecording = recordingsArray[0];
 
-			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
 				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 			}
