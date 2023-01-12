@@ -101,7 +101,7 @@ function updateState(
 }
 
 function setBufferedProgress(state: PlaybackState, progress: number) {
-	throttledUpdateProgress(state, progress);
+	updateServerProgress(state, progress);
 
 	const p = Math.max(
 		state.bufferedProgress, // Don't ever reduce the buffered amount
@@ -116,18 +116,14 @@ function setBufferedProgress(state: PlaybackState, progress: number) {
 
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 
-function updateProgress(state: PlaybackState, progress: number) {
-	if (!getSessionToken() || !state.recording) {
-		return Promise.resolve() as Promise<unknown>;
-	}
-	return recordingPlaybackProgressSet({
-		id: state.recording.id,
-		percentage: progress,
-	});
-}
-
-const throttledUpdateProgress = throttle(
-	updateProgress,
+const updateServerProgress = throttle(
+	(state: PlaybackState, progress: number) => {
+		if (!getSessionToken() || !state.recording) return;
+		recordingPlaybackProgressSet({
+			id: state.recording.id,
+			percentage: progress,
+		});
+	},
 	SERVER_UPDATE_WAIT_TIME,
 	{ leading: true }
 );
