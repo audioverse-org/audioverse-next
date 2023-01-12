@@ -1,4 +1,5 @@
 import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import hasVideo from '@lib/hasVideo';
 
 export type PlaybackAction =
 	| {
@@ -19,6 +20,7 @@ export type PlaybackState = {
 	recording?: AndMiniplayerFragment;
 	videojs: Promise<typeof import('video.js')>;
 	airplay: Promise<typeof import('@silvermine/videojs-airplay')>;
+	isShowingVideo: boolean;
 };
 
 export const initialState: PlaybackState = {
@@ -26,7 +28,12 @@ export const initialState: PlaybackState = {
 	prefersAudio: false,
 	videojs: import('video.js'),
 	airplay: import('@silvermine/videojs-airplay'),
+	isShowingVideo: false,
 };
+
+function isShowingVideo(state: PlaybackState): boolean {
+	return !!state.recording && hasVideo(state.recording) && !state.prefersAudio;
+}
 
 export function reducer(
 	state: PlaybackState,
@@ -38,9 +45,23 @@ export function reducer(
 		case 'PAUSE':
 			return { ...state, paused: true };
 		case 'SET_PREFERS_AUDIO':
-			return { ...state, prefersAudio: action.payload };
+			return {
+				...state,
+				prefersAudio: action.payload,
+				isShowingVideo: isShowingVideo({
+					...state,
+					prefersAudio: action.payload,
+				}),
+			};
 		case 'SET_RECORDING':
-			return { ...state, recording: action.payload };
+			return {
+				...state,
+				recording: action.payload,
+				isShowingVideo: isShowingVideo({
+					...state,
+					recording: action.payload,
+				}),
+			};
 		default:
 			return state;
 	}

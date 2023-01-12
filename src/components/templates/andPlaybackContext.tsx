@@ -244,9 +244,6 @@ export default function AndPlaybackContext({
 		[throttledUpdateProgress]
 	);
 
-	const isShowingVideo =
-		!!state.recording && hasVideo(state.recording) && !state.prefersAudio;
-
 	useEffect(() => {
 		progressRef.current = progress;
 	}, [progress]);
@@ -331,9 +328,9 @@ export default function AndPlaybackContext({
 		},
 		hasPlayer: () => !!playerRef.current,
 		hasVideo: () => !!state.recording && hasVideo(state.recording),
-		isShowingVideo: () => isShowingVideo,
+		isShowingVideo: () => state.isShowingVideo,
 		getVideoLocation: () => {
-			if (!isShowingVideo) return null;
+			if (!state.isShowingVideo) return null;
 
 			if (videoHandler) return 'portal';
 
@@ -461,7 +458,7 @@ export default function AndPlaybackContext({
 		}
 
 		function findDestination() {
-			if (isShowingVideo) {
+			if (state.isShowingVideo) {
 				// TODO: use ref instead of ID
 				return document.getElementById('mini-player');
 			}
@@ -480,7 +477,7 @@ export default function AndPlaybackContext({
 		}
 
 		destination.appendChild(video);
-	}, [videoHandlerId, videoHandler, isShowingVideo]);
+	}, [videoHandlerId, videoHandler, state.isShowingVideo]);
 
 	return (
 		<>
