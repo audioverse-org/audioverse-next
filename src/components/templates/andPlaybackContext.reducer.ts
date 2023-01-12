@@ -45,12 +45,9 @@ export const initialState: PlaybackState = {
 	sourceRecordings: [],
 };
 
-function updateIsShowingVideo(state: PlaybackState): PlaybackState {
-	return {
-		...state,
-		isShowingVideo:
-			!!state.recording && hasVideo(state.recording) && !state.prefersAudio,
-	};
+function updateIsShowingVideo(s: PlaybackState): PlaybackState {
+	const n = !!s.recording && hasVideo(s.recording) && !s.prefersAudio;
+	return { ...s, isShowingVideo: n };
 }
 
 function updateVideoLocation(state: PlaybackState): PlaybackState {
@@ -60,10 +57,7 @@ function updateVideoLocation(state: PlaybackState): PlaybackState {
 		return 'miniplayer';
 	};
 
-	return {
-		...state,
-		videoLocation: f(state),
-	};
+	return { ...state, videoLocation: f(state) };
 }
 
 function updateState(
