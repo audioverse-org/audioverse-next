@@ -16,6 +16,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_VIDEO_HANDLER';
 			payload?: (el: Element) => void;
+	  }
+	| {
+			type: 'SET_SOURCE_RECORDINGS';
+			payload: AndMiniplayerFragment[];
 	  };
 
 export type PlaybackState = {
@@ -27,6 +31,7 @@ export type PlaybackState = {
 	chromecast: Promise<typeof import('@silvermine/videojs-chromecast')>;
 	isShowingVideo: boolean;
 	videoHandler?: (el: Element) => void;
+	sourceRecordings?: AndMiniplayerFragment[];
 };
 
 export const initialState: PlaybackState = {
@@ -74,6 +79,11 @@ export function reducer(
 			return {
 				...state,
 				videoHandler: action.payload,
+			};
+		case 'SET_SOURCE_RECORDINGS':
+			return {
+				...state,
+				sourceRecordings: action.payload,
 			};
 		default:
 			return state;

@@ -171,8 +171,6 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
-	const [sourceRecordings, setSourceRecordings] =
-		useState<AndMiniplayerFragment[]>();
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
@@ -289,7 +287,7 @@ export default function AndPlaybackContext({
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
 				: [recordingOrRecordings];
-			setSourceRecordings(recordingsArray);
+			dispatch({ type: 'SET_SOURCE_RECORDINGS', payload: recordingsArray });
 			const newRecording = recordingsArray[0];
 			dispatch({ type: 'SET_RECORDING', payload: newRecording });
 			recordingRef.current = newRecording;
@@ -335,11 +333,14 @@ export default function AndPlaybackContext({
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
-			if (sourceRecordings && sourceRecordings.length > 1) {
-				dispatch({ type: 'SET_RECORDING', payload: sourceRecordings[1] });
-				setSourceRecordings(sourceRecordings?.slice(1));
+			if (state.sourceRecordings && state.sourceRecordings.length > 1) {
+				dispatch({ type: 'SET_RECORDING', payload: state.sourceRecordings[1] });
+				dispatch({
+					type: 'SET_SOURCE_RECORDINGS',
+					payload: state.sourceRecordings?.slice(1),
+				});
 				onLoadRef.current = () => playback.play();
-				playback._setRecording(sourceRecordings[1], state.prefersAudio);
+				playback._setRecording(state.sourceRecordings[1], state.prefersAudio);
 			}
 		},
 		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
