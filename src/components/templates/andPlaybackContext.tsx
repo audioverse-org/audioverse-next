@@ -253,8 +253,6 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_VOLUME', payload: volume });
 		},
 		setSpeed: (s: number) => {
-			playerRef.current?.playbackRate(s);
-			playerRef.current?.defaultPlaybackRate(s);
 			dispatch({ type: 'SET_SPEED', payload: s });
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),

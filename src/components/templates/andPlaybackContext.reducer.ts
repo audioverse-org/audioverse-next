@@ -177,6 +177,8 @@ export function reducer(
 				volume: action.payload,
 			});
 		case 'SET_SPEED':
+			state.player?.playbackRate(action.payload);
+			state.player?.defaultPlaybackRate(action.payload);
 			return updateState(state, {
 				speed: action.payload,
 			});
