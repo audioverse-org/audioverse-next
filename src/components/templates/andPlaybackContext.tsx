@@ -18,13 +18,6 @@ import {
 } from '@lib/generated/graphql';
 import { initialState, reducer } from './andPlaybackContext.reducer';
 
-// Source:
-// https://github.com/vercel/next.js/blob/canary/examples/with-videojs/components/Player.js
-
-// If this solution becomes unviable, for instance, due to needing to
-// update more props than just sources, this alternative approach may work:
-// https://github.com/videojs/video.js/issues/4970#issuecomment-520591504
-
 interface Playable extends VideoJs.default.Tech.SourceObject {
 	duration: number;
 	logUrl?: string | null;
@@ -154,8 +147,6 @@ interface AndMiniplayerProps {
 	children: ReactNode;
 }
 
-const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
-
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
@@ -229,7 +220,6 @@ export default function AndPlaybackContext({
 				0
 			);
 		},
-		getBufferedProgress: () => state.bufferedProgress,
 		setProgress: (p: number, updatePlayer = true) => {
 			dispatch({ type: 'SET_PROGRESS', payload: p });
 			const duration = playback.getDuration();
@@ -388,6 +378,7 @@ export default function AndPlaybackContext({
 		paused: () => state.paused,
 		getProgress: () => state.progress,
 		getSpeed: () => state.speed,
+		getBufferedProgress: () => state.bufferedProgress,
 	};
 
 	useEffect(() => {
