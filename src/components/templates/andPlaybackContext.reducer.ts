@@ -10,16 +10,12 @@ export type PlaybackAction =
 			payload: boolean;
 	  }
 	| {
-			type: 'SET_RECORDING';
-			payload: AndMiniplayerFragment;
+			type: 'SET_RECORDINGS';
+			payload: AndMiniplayerFragment[];
 	  }
 	| {
 			type: 'SET_VIDEO_HANDLER';
 			payload?: (el: Element) => void;
-	  }
-	| {
-			type: 'SET_SOURCE_RECORDINGS';
-			payload: AndMiniplayerFragment[];
 	  };
 
 export type PlaybackState = {
@@ -84,17 +80,14 @@ export function reducer(
 			return updateState(state, {
 				prefersAudio: action.payload,
 			});
-		case 'SET_RECORDING':
+		case 'SET_RECORDINGS':
 			return updateState(state, {
-				recording: action.payload,
+				recording: action.payload[0],
+				sourceRecordings: action.payload,
 			});
 		case 'SET_VIDEO_HANDLER':
 			return updateState(state, {
 				videoHandler: action.payload,
-			});
-		case 'SET_SOURCE_RECORDINGS':
-			return updateState(state, {
-				sourceRecordings: action.payload,
 			});
 		case 'ADVANCE':
 			if (state.sourceRecordings.length < 2) return state;

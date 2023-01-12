@@ -284,12 +284,13 @@ export default function AndPlaybackContext({
 		) => {
 			const { onLoad, prefersAudio } = options;
 			onLoadRef.current = onLoad;
+
 			const recordingsArray = Array.isArray(recordingOrRecordings)
 				? recordingOrRecordings
 				: [recordingOrRecordings];
-			dispatch({ type: 'SET_SOURCE_RECORDINGS', payload: recordingsArray });
+			dispatch({ type: 'SET_RECORDINGS', payload: recordingsArray });
 			const newRecording = recordingsArray[0];
-			dispatch({ type: 'SET_RECORDING', payload: newRecording });
+
 			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
 				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
@@ -311,8 +312,6 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
 		hasPlayer: () => !!playerRef.current,
-		isShowingVideo: () => state.isShowingVideo,
-		getVideoLocation: () => state.videoLocation,
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {
@@ -333,7 +332,6 @@ export default function AndPlaybackContext({
 				playback._setRecording(state.sourceRecordings[1], state.prefersAudio);
 			}
 		},
-		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
@@ -414,6 +412,11 @@ export default function AndPlaybackContext({
 				});
 			}
 		},
+
+		// DONE
+		isShowingVideo: () => state.isShowingVideo,
+		getVideoLocation: () => state.videoLocation,
+		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
 	};
 
 	useEffect(() => {
