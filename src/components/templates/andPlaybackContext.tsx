@@ -145,11 +145,10 @@ export default function AndPlaybackContext({
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	// Refs
-	const videoRef = useRef<HTMLDivElement>(null);
-	const videoElRef = useRef<HTMLVideoElement>(null);
-	const originRef = useRef<HTMLDivElement>(null);
-	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
-	const progressRef = useRef<number>(0);
+	const videoRef = useRef<HTMLDivElement>(null); // 2
+	const videoElRef = useRef<HTMLVideoElement>(null); // 2
+	const originRef = useRef<HTMLDivElement>(null); // 2
+	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 	const sourcesRef = useRef<Playable[]>([]);
 	const recordingRef = useRef<AndMiniplayerFragment>();
@@ -175,10 +174,6 @@ export default function AndPlaybackContext({
 			payload: (playerBufferedEnd || 0) / duration,
 		});
 	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
-
-	useEffect(() => {
-		progressRef.current = state.progress;
-	}, [state.progress]);
 
 	const playback: PlaybackContextType = {
 		play: () => {
