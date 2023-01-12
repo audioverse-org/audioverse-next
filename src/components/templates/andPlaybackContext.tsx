@@ -356,9 +356,7 @@ export default function AndPlaybackContext({
 				playback._setRecording(sourceRecordings[1], state.prefersAudio);
 			}
 		},
-		setIsPaused: (paused) => {
-			dispatch({ type: paused ? 'PAUSE' : 'PLAY' });
-		},
+		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
 		getRefs: () => ({
 			origin: originRef,
 			video: videoRef,
