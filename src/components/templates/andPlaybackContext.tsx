@@ -190,7 +190,6 @@ export default function AndPlaybackContext({
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
-	const [recording, setRecording] = useState<AndMiniplayerFragment>();
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
@@ -208,11 +207,11 @@ export default function AndPlaybackContext({
 		({
 			percentage,
 		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
-			if (!getSessionToken() || !recording) {
+			if (!getSessionToken() || !state.recording) {
 				return Promise.resolve() as Promise<unknown>;
 			}
 			return recordingPlaybackProgressSet({
-				id: recording.id,
+				id: state.recording.id,
 				percentage,
 			});
 		}
@@ -220,12 +219,13 @@ export default function AndPlaybackContext({
 
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
-		if (!recording) return;
-		sourcesRef.current = getSources(recording, state.prefersAudio);
-	}, [recording, state.prefersAudio]);
+		if (!state.recording) return;
+		sourcesRef.current = getSources(state.recording, state.prefersAudio);
+	}, [state.recording, state.prefersAudio]);
 
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
+	const duration =
+		sourcesRef.current[0]?.duration || state.recording?.duration || 0;
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
@@ -251,7 +251,7 @@ export default function AndPlaybackContext({
 	);
 
 	const isShowingVideo =
-		!!recording && hasVideo(recording) && !state.prefersAudio;
+		!!state.recording && hasVideo(state.recording) && !state.prefersAudio;
 
 	useEffect(() => {
 		progressRef.current = progress;
@@ -281,7 +281,7 @@ export default function AndPlaybackContext({
 			playerRef.current.currentTime(t);
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
-			if (!recording) return;
+			if (!state.recording) return;
 			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 		},
 		getPrefersAudio: () => state.prefersAudio,
@@ -302,7 +302,7 @@ export default function AndPlaybackContext({
 				return;
 			playerRef.current.currentTime(p * duration);
 		},
-		getRecording: () => recording,
+		getRecording: () => state.recording,
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			options = {}
@@ -314,7 +314,7 @@ export default function AndPlaybackContext({
 				: [recordingOrRecordings];
 			setSourceRecordings(recordingsArray);
 			const newRecording = recordingsArray[0];
-			setRecording(newRecording);
+			dispatch({ type: 'SET_RECORDING', payload: newRecording });
 			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
 				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
@@ -336,7 +336,7 @@ export default function AndPlaybackContext({
 			setVideoHandler(undefined);
 		},
 		hasPlayer: () => !!playerRef.current,
-		hasVideo: () => !!recording && hasVideo(recording),
+		hasVideo: () => !!state.recording && hasVideo(state.recording),
 		isShowingVideo: () => isShowingVideo,
 		getVideoLocation: () => {
 			if (!isShowingVideo) return null;
@@ -360,7 +360,7 @@ export default function AndPlaybackContext({
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
 			if (sourceRecordings && sourceRecordings.length > 1) {
-				setRecording(sourceRecordings[1]);
+				dispatch({ type: 'SET_RECORDING', payload: sourceRecordings[1] });
 				setSourceRecordings(sourceRecordings?.slice(1));
 				onLoadRef.current = () => playback.play();
 				playback._setRecording(sourceRecordings[1], state.prefersAudio);
