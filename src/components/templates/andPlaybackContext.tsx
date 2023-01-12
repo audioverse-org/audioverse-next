@@ -184,7 +184,7 @@ export default function AndPlaybackContext({
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
 		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
 		getTime: () =>
-			(!onLoadRef.current && playerRef.current?.currentTime()) ||
+			(!onLoadRef.current && state.player?.currentTime()) ||
 			state.progress * playback.getDuration() ||
 			0,
 		setTime: (t: number) => {
