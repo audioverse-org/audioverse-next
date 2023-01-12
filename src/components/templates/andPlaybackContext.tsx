@@ -183,7 +183,6 @@ export default function AndPlaybackContext({
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
 		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
-		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
 			state.progress * playback.getDuration() ||
@@ -369,6 +368,7 @@ export default function AndPlaybackContext({
 		getSpeed: () => state.speed,
 		getBufferedProgress: () => state.bufferedProgress,
 		pause: () => dispatch({ type: 'PAUSE' }),
+		player: () => state.player,
 	};
 
 	useEffect(() => {
