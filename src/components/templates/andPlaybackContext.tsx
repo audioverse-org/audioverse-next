@@ -180,9 +180,6 @@ export default function AndPlaybackContext({
 	// Punted Refs
 	const playerRef = useRef<VideoJsPlayer>();
 
-	// State
-	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
-
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
 	const duration =
@@ -318,11 +315,11 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_VOLUME', payload: volume });
 			playerRef.current?.volume(volume / 100);
 		},
-		getSpeed: () => _speed,
+		getSpeed: () => state.speed,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
 			playerRef.current?.defaultPlaybackRate(s);
-			_setSpeed(s);
+			dispatch({ type: 'SET_SPEED', payload: s });
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {

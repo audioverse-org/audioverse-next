@@ -31,6 +31,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_VOLUME';
 			payload: number;
+	  }
+	| {
+			type: 'SET_SPEED';
+			payload: number;
 	  };
 
 export type PlaybackState = {
@@ -48,6 +52,7 @@ export type PlaybackState = {
 	progress: number;
 	bufferedProgress: number;
 	volume: number;
+	speed: number;
 };
 
 export const initialState: PlaybackState = {
@@ -61,6 +66,7 @@ export const initialState: PlaybackState = {
 	progress: 0,
 	bufferedProgress: 0,
 	volume: 100,
+	speed: 1,
 };
 
 function updateIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -129,6 +135,10 @@ export function reducer(
 		case 'SET_VOLUME':
 			return updateState(state, {
 				volume: action.payload,
+			});
+		case 'SET_SPEED':
+			return updateState(state, {
+				speed: action.payload,
 			});
 		default:
 			return state;
