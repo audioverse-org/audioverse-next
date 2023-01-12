@@ -18,12 +18,14 @@ export type PlaybackState = {
 	prefersAudio: boolean;
 	recording?: AndMiniplayerFragment;
 	videojs: Promise<typeof import('video.js')>;
+	airplay: Promise<typeof import('@silvermine/videojs-airplay')>;
 };
 
 export const initialState: PlaybackState = {
 	paused: true,
 	prefersAudio: false,
 	videojs: import('video.js'),
+	airplay: import('@silvermine/videojs-airplay'),
 };
 
 export function reducer(
