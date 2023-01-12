@@ -246,7 +246,7 @@ export default function AndPlaybackContext({
 			if (id !== videoHandlerIdRef.current) return;
 			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
-		hasPlayer: () => !!playerRef.current,
+		hasPlayer: () => !!state.player,
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {
