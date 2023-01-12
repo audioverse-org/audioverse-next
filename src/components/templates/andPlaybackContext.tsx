@@ -196,7 +196,6 @@ export default function AndPlaybackContext({
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [prefersAudio, setPrefersAudio] = useState(false);
 	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
@@ -222,8 +221,8 @@ export default function AndPlaybackContext({
 	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
 		if (!recording) return;
-		sourcesRef.current = getSources(recording, prefersAudio);
-	}, [recording, prefersAudio]);
+		sourcesRef.current = getSources(recording, state.prefersAudio);
+	}, [recording, state.prefersAudio]);
 
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
 	const duration = sourcesRef.current[0]?.duration || recording?.duration || 0;
@@ -251,7 +250,8 @@ export default function AndPlaybackContext({
 		[throttledUpdateProgress]
 	);
 
-	const isShowingVideo = !!recording && hasVideo(recording) && !prefersAudio;
+	const isShowingVideo =
+		!!recording && hasVideo(recording) && !state.prefersAudio;
 
 	useEffect(() => {
 		progressRef.current = progress;
@@ -282,9 +282,9 @@ export default function AndPlaybackContext({
 		},
 		setPrefersAudio: (prefersAudio: boolean) => {
 			if (!recording) return;
-			setPrefersAudio(prefersAudio);
+			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 		},
-		getPrefersAudio: () => prefersAudio,
+		getPrefersAudio: () => state.prefersAudio,
 		getDuration: () => {
 			return (
 				playerRef.current?.duration() ||
@@ -317,7 +317,7 @@ export default function AndPlaybackContext({
 			setRecording(newRecording);
 			recordingRef.current = newRecording;
 			if (typeof prefersAudio === 'boolean') {
-				setPrefersAudio(prefersAudio);
+				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 			}
 			if (videoHandlerId && newRecording.id !== videoHandlerId) {
 				playback.unsetVideoHandler(videoHandlerId);
@@ -363,7 +363,7 @@ export default function AndPlaybackContext({
 				setRecording(sourceRecordings[1]);
 				setSourceRecordings(sourceRecordings?.slice(1));
 				onLoadRef.current = () => playback.play();
-				playback._setRecording(sourceRecordings[1], prefersAudio);
+				playback._setRecording(sourceRecordings[1], state.prefersAudio);
 			}
 		},
 		setIsPaused: (paused) => {
