@@ -181,8 +181,6 @@ export default function AndPlaybackContext({
 			playerRef.current?.play();
 			dispatch({ type: 'PLAY' });
 		},
-		chromecastTrigger: () => dispatch({ type: 'TRIGGER_CHROMECAST' }),
-		airPlayTrigger: () => dispatch({ type: 'TRIGGER_AIRPLAY' }),
 		getTime: () =>
 			(!onLoadRef.current && state.player?.currentTime()) ||
 			state.progress * playback.getDuration() ||
@@ -245,9 +243,6 @@ export default function AndPlaybackContext({
 		unsetVideoHandler: (id: Scalars['ID']) => {
 			if (id !== videoHandlerIdRef.current) return;
 			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
-		},
-		setSpeed: (s: number) => {
-			dispatch({ type: 'SET_SPEED', payload: s });
 		},
 		requestFullscreen: () => playerRef.current?.requestFullscreen(),
 		advanceRecording: () => {
@@ -365,6 +360,9 @@ export default function AndPlaybackContext({
 		getVolume: () => (state.player?.volume() ?? 1) * 100,
 		setVolume: (volume: number) =>
 			dispatch({ type: 'SET_VOLUME', payload: volume }),
+		chromecastTrigger: () => dispatch({ type: 'TRIGGER_CHROMECAST' }),
+		airPlayTrigger: () => dispatch({ type: 'TRIGGER_AIRPLAY' }),
+		setSpeed: (s: number) => dispatch({ type: 'SET_SPEED', payload: s }),
 	};
 
 	useEffect(() => {
