@@ -31,7 +31,7 @@ export type PlaybackState = {
 	chromecast: Promise<typeof import('@silvermine/videojs-chromecast')>;
 	isShowingVideo: boolean;
 	videoHandler?: (el: Element) => void;
-	sourceRecordings?: AndMiniplayerFragment[];
+	sourceRecordings: AndMiniplayerFragment[];
 };
 
 export const initialState: PlaybackState = {
@@ -41,6 +41,7 @@ export const initialState: PlaybackState = {
 	airplay: import('@silvermine/videojs-airplay'),
 	chromecast: import('@silvermine/videojs-chromecast'),
 	isShowingVideo: false,
+	sourceRecordings: [],
 };
 
 function isShowingVideo(state: PlaybackState): boolean {
