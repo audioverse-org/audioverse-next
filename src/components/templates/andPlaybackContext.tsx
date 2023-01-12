@@ -188,12 +188,12 @@ export default function AndPlaybackContext({
 			state.progress * playback.getDuration() ||
 			0,
 		setTime: (t: number) => {
-			if (!playerRef.current) return;
+			if (!state.player) return;
 			dispatch({
 				type: 'SET_PROGRESS',
-				payload: t / playerRef.current.duration(),
+				payload: t / state.player.duration(),
 			});
-			playerRef.current.currentTime(t);
+			state.player.currentTime(t);
 		},
 		getDuration: () => {
 			return (
