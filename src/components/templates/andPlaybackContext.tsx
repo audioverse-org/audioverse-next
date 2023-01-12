@@ -101,7 +101,6 @@ export type PlaybackContextType = {
 	setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => void;
 	unsetVideoHandler: (id: Scalars['ID']) => void;
 	hasPlayer: () => boolean;
-	hasVideo: () => boolean;
 	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
 	getVideoLocation: () => 'miniplayer' | 'portal' | null;
@@ -141,7 +140,6 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	setVideoHandler: () => undefined,
 	unsetVideoHandler: () => undefined,
 	hasPlayer: () => false,
-	hasVideo: () => false,
 	isShowingVideo: () => false,
 	getVideoLocation: () => null,
 	getRecording: () => undefined,
@@ -317,7 +315,6 @@ export default function AndPlaybackContext({
 			setVideoHandler(undefined);
 		},
 		hasPlayer: () => !!playerRef.current,
-		hasVideo: () => !!state.recording && hasVideo(state.recording),
 		isShowingVideo: () => state.isShowingVideo,
 		getVideoLocation: () => {
 			if (!state.isShowingVideo) return null;
