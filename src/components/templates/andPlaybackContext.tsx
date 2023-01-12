@@ -167,19 +167,28 @@ export default function AndPlaybackContext({
 }: AndMiniplayerProps): JSX.Element {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
+	// Refs
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
-
-	const [progress, _setProgress] = useState<number>(0);
-	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
+	const sourcesRef = useRef<Playable[]>([]);
+	const recordingRef = useRef<AndMiniplayerFragment>();
+
+	// State
+	const [progress, _setProgress] = useState<number>(0);
+	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
+	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
+
+	// Computed
+	const playerBufferedEnd = playerRef.current?.bufferedEnd();
+	const duration =
+		sourcesRef.current[0]?.duration || state.recording?.duration || 0;
 
 	const queryClient = useQueryClient();
 
@@ -197,15 +206,11 @@ export default function AndPlaybackContext({
 		}
 	);
 
-	const sourcesRef = useRef<Playable[]>([]);
 	useEffect(() => {
 		if (!state.recording) return;
 		sourcesRef.current = getSources(state.recording, state.prefersAudio);
 	}, [state.recording, state.prefersAudio]);
 
-	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration =
-		sourcesRef.current[0]?.duration || state.recording?.duration || 0;
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
 			bufferedProgress, // Don't ever reduce the buffered amount
@@ -234,7 +239,6 @@ export default function AndPlaybackContext({
 		progressRef.current = progress;
 	}, [progress]);
 
-	const recordingRef = useRef<AndMiniplayerFragment>();
 	const playback: PlaybackContextType = {
 		play: () => {
 			playerRef.current?.play();
@@ -246,7 +250,6 @@ export default function AndPlaybackContext({
 			playerRef.current?.pause();
 			dispatch({ type: 'PAUSE' });
 		},
-		paused: () => state.paused,
 		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
@@ -257,9 +260,6 @@ export default function AndPlaybackContext({
 			setProgress(t / playerRef.current.duration());
 			playerRef.current.currentTime(t);
 		},
-		setPrefersAudio: (prefersAudio: boolean) =>
-			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio }),
-		getPrefersAudio: () => state.prefersAudio,
 		getDuration: () => {
 			return (
 				playerRef.current?.duration() ||
@@ -277,7 +277,6 @@ export default function AndPlaybackContext({
 				return;
 			playerRef.current.currentTime(p * duration);
 		},
-		getRecording: () => state.recording,
 		loadRecording: (
 			recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
 			options = {}
@@ -417,6 +416,11 @@ export default function AndPlaybackContext({
 		isShowingVideo: () => state.isShowingVideo,
 		getVideoLocation: () => state.videoLocation,
 		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
+		getRecording: () => state.recording,
+		setPrefersAudio: (prefersAudio: boolean) =>
+			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio }),
+		getPrefersAudio: () => state.prefersAudio,
+		paused: () => state.paused,
 	};
 
 	useEffect(() => {
