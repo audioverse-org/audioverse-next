@@ -94,6 +94,18 @@ function updateState(
 	return s2;
 }
 
+function updateBufferedProgress(state: PlaybackState, progress: number) {
+	const p = Math.max(
+		state.bufferedProgress, // Don't ever reduce the buffered amount
+		state.progress, // We've always buffered as much as we're playing
+		progress // Actually use computed progress
+	);
+
+	return updateState(state, {
+		bufferedProgress: p >= 0.99 ? 1 : +p.toFixed(2),
+	});
+}
+
 export function reducer(
 	state: PlaybackState,
 	action: PlaybackAction
@@ -129,9 +141,7 @@ export function reducer(
 				progress: action.payload,
 			});
 		case 'SET_BUFFERED_PROGRESS':
-			return updateState(state, {
-				bufferedProgress: action.payload,
-			});
+			return updateBufferedProgress(state, action.payload);
 		case 'SET_VOLUME':
 			return updateState(state, {
 				volume: action.payload,

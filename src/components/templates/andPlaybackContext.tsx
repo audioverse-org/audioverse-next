@@ -207,13 +207,10 @@ export default function AndPlaybackContext({
 	}, [state.recording, state.prefersAudio]);
 
 	useEffect(() => {
-		let newBufferedProgress = +Math.max(
-			state.bufferedProgress, // Don't ever reduce the buffered amount
-			state.progress, // We've always buffered as much as we're playing
-			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
-		).toFixed(2);
-		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
-		dispatch({ type: 'SET_BUFFERED_PROGRESS', payload: newBufferedProgress });
+		dispatch({
+			type: 'SET_BUFFERED_PROGRESS',
+			payload: (playerBufferedEnd || 0) / duration,
+		});
 	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
 
 	const throttledUpdateProgress = useMemo(
@@ -315,7 +312,6 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_VOLUME', payload: volume });
 			playerRef.current?.volume(volume / 100);
 		},
-		getSpeed: () => state.speed,
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
 			playerRef.current?.defaultPlaybackRate(s);
@@ -422,6 +418,7 @@ export default function AndPlaybackContext({
 		getPrefersAudio: () => state.prefersAudio,
 		paused: () => state.paused,
 		getProgress: () => state.progress,
+		getSpeed: () => state.speed,
 	};
 
 	useEffect(() => {
