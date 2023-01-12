@@ -1,4 +1,4 @@
-import { AndMiniplayerFragment } from '@lib/generated/graphql';
+import { AndMiniplayerFragment, Scalars } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 
 export type PlaybackAction =
@@ -15,7 +15,10 @@ export type PlaybackAction =
 	  }
 	| {
 			type: 'SET_VIDEO_HANDLER';
-			payload?: (el: Element) => void;
+			payload?: {
+				id: Scalars['ID'];
+				handler: (el: Element) => void;
+			};
 	  };
 
 export type PlaybackState = {
@@ -27,6 +30,7 @@ export type PlaybackState = {
 	chromecast: Promise<typeof import('@silvermine/videojs-chromecast')>;
 	isShowingVideo: boolean;
 	videoHandler?: (el: Element) => void;
+	videoHandlerId?: Scalars['ID'];
 	sourceRecordings: AndMiniplayerFragment[];
 	videoLocation?: 'miniplayer' | 'portal';
 };
@@ -87,7 +91,8 @@ export function reducer(
 			});
 		case 'SET_VIDEO_HANDLER':
 			return updateState(state, {
-				videoHandler: action.payload,
+				videoHandlerId: action.payload?.id,
+				videoHandler: action.payload?.handler,
 			});
 		case 'ADVANCE':
 			if (state.sourceRecordings.length < 2) return state;

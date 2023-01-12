@@ -181,7 +181,6 @@ export default function AndPlaybackContext({
 	// State
 	const [progress, _setProgress] = useState<number>(0);
 	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
-	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
@@ -294,20 +293,24 @@ export default function AndPlaybackContext({
 			if (typeof prefersAudio === 'boolean') {
 				dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
 			}
-			if (videoHandlerId && newRecording.id !== videoHandlerId) {
-				playback.unsetVideoHandler(videoHandlerId);
+			if (state.videoHandlerId && newRecording.id !== state.videoHandlerId) {
+				playback.unsetVideoHandler(state.videoHandlerId);
 			}
 
 			playback._setRecording(newRecording, prefersAudio);
 		},
 		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
-			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
-			dispatch({ type: 'SET_VIDEO_HANDLER', payload: handler });
+			dispatch({
+				type: 'SET_VIDEO_HANDLER',
+				payload: {
+					id,
+					handler,
+				},
+			});
 		},
 		unsetVideoHandler: (id: Scalars['ID']) => {
 			if (id !== videoHandlerIdRef.current) return;
-			setVideoHandlerId(undefined);
 			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
 		hasPlayer: () => !!playerRef.current,
@@ -445,7 +448,7 @@ export default function AndPlaybackContext({
 		}
 
 		destination.appendChild(video);
-	}, [videoHandlerId, state.videoHandler, state.isShowingVideo]);
+	}, [state.videoHandlerId, state.videoHandler, state.isShowingVideo]);
 
 	return (
 		<>
