@@ -179,7 +179,6 @@ export default function AndPlaybackContext({
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>();
 	const playerRef = useRef<VideoJsPlayer>();
 	const progressRef = useRef<number>(0);
-	const [videoHandler, setVideoHandler] = useState<(el: Element) => void>();
 	const [videoHandlerId, setVideoHandlerId] = useState<Scalars['ID']>();
 	const videoHandlerIdRef = useRef<Scalars['ID']>();
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
@@ -307,19 +306,19 @@ export default function AndPlaybackContext({
 		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
 			setVideoHandlerId(id);
 			videoHandlerIdRef.current = id;
-			setVideoHandler(() => handler);
+			dispatch({ type: 'SET_VIDEO_HANDLER', payload: handler });
 		},
 		unsetVideoHandler: (id: Scalars['ID']) => {
 			if (id !== videoHandlerIdRef.current) return;
 			setVideoHandlerId(undefined);
-			setVideoHandler(undefined);
+			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
 		hasPlayer: () => !!playerRef.current,
 		isShowingVideo: () => state.isShowingVideo,
 		getVideoLocation: () => {
 			if (!state.isShowingVideo) return null;
 
-			if (videoHandler) return 'portal';
+			if (state.videoHandler) return 'portal';
 
 			return 'miniplayer';
 		},
@@ -434,10 +433,10 @@ export default function AndPlaybackContext({
 			return;
 		}
 
-		if (videoHandler) {
+		if (state.videoHandler) {
 			setTimeout(() => {
 				// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
-				videoHandler(video);
+				state.videoHandler?.(video);
 			}, 0);
 			return;
 		}
@@ -462,7 +461,7 @@ export default function AndPlaybackContext({
 		}
 
 		destination.appendChild(video);
-	}, [videoHandlerId, videoHandler, state.isShowingVideo]);
+	}, [videoHandlerId, state.videoHandler, state.isShowingVideo]);
 
 	return (
 		<>

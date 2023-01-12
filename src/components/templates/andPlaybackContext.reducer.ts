@@ -12,6 +12,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_RECORDING';
 			payload: AndMiniplayerFragment;
+	  }
+	| {
+			type: 'SET_VIDEO_HANDLER';
+			payload?: (el: Element) => void;
 	  };
 
 export type PlaybackState = {
@@ -22,6 +26,7 @@ export type PlaybackState = {
 	airplay: Promise<typeof import('@silvermine/videojs-airplay')>;
 	chromecast: Promise<typeof import('@silvermine/videojs-chromecast')>;
 	isShowingVideo: boolean;
+	videoHandler?: (el: Element) => void;
 };
 
 export const initialState: PlaybackState = {
@@ -64,6 +69,11 @@ export function reducer(
 					...state,
 					recording: action.payload,
 				}),
+			};
+		case 'SET_VIDEO_HANDLER':
+			return {
+				...state,
+				videoHandler: action.payload,
 			};
 		default:
 			return state;
