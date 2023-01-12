@@ -197,7 +197,7 @@ export default function AndPlaybackContext({
 		},
 		getDuration: () => {
 			return (
-				playerRef.current?.duration() ||
+				state.player?.duration() ||
 				sourcesRef.current[0]?.duration ||
 				state.recording?.duration ||
 				0
