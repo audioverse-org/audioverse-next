@@ -263,9 +263,8 @@ export default function AndPlaybackContext({
 			setProgress(t / playerRef.current.duration());
 			playerRef.current.currentTime(t);
 		},
-		setPrefersAudio: (prefersAudio: boolean) => {
-			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio });
-		},
+		setPrefersAudio: (prefersAudio: boolean) =>
+			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio }),
 		getPrefersAudio: () => state.prefersAudio,
 		getDuration: () => {
 			return (
