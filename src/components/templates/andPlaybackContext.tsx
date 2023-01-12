@@ -144,15 +144,17 @@ export default function AndPlaybackContext({
 }: AndMiniplayerProps): JSX.Element {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	// Refs
+	// HTML Refs
 	const videoRef = useRef<HTMLDivElement>(null); // 2
 	const videoElRef = useRef<HTMLVideoElement>(null); // 2
 	const originRef = useRef<HTMLDivElement>(null); // 2
+
+	// Refs
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
-	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
 	const sourcesRef = useRef<Playable[]>([]); // 4
 
 	// Punted Refs
+	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
 	const playerRef = useRef<VideoJsPlayer>();
 
 	// Computed
@@ -181,10 +183,6 @@ export default function AndPlaybackContext({
 		},
 		chromecastTrigger: () => playerRef.current?.trigger('chromecastRequested'),
 		airPlayTrigger: () => playerRef.current?.trigger('airPlayRequested'),
-		pause: () => {
-			playerRef.current?.pause();
-			dispatch({ type: 'PAUSE' });
-		},
 		player: () => playerRef.current,
 		getTime: () =>
 			(!onLoadRef.current && playerRef.current?.currentTime()) ||
@@ -352,6 +350,7 @@ export default function AndPlaybackContext({
 						p.controls(p.isFullscreen());
 					});
 					playerRef.current = p;
+					dispatch({ type: 'SET_PLAYER', payload: p });
 					resetPlayer();
 				});
 			}
@@ -369,6 +368,7 @@ export default function AndPlaybackContext({
 		getProgress: () => state.progress,
 		getSpeed: () => state.speed,
 		getBufferedProgress: () => state.bufferedProgress,
+		pause: () => dispatch({ type: 'PAUSE' }),
 	};
 
 	useEffect(() => {

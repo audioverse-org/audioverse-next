@@ -6,6 +6,7 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import throttle from 'lodash/throttle';
+import { VideoJsPlayer } from 'video.js';
 
 export type PlaybackAction =
 	| {
@@ -41,6 +42,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_SPEED';
 			payload: number;
+	  }
+	| {
+			type: 'SET_PLAYER';
+			payload: VideoJsPlayer;
 	  };
 
 export type PlaybackState = {
@@ -59,6 +64,7 @@ export type PlaybackState = {
 	bufferedProgress: number;
 	volume: number;
 	speed: number;
+	player?: VideoJsPlayer;
 };
 
 export const initialState: PlaybackState = {
@@ -136,6 +142,7 @@ export function reducer(
 		case 'PLAY':
 			return updateState(state, { paused: false });
 		case 'PAUSE':
+			state.player?.pause();
 			return updateState(state, { paused: true });
 		case 'SET_PREFERS_AUDIO':
 			if (!state.recording) return state;
@@ -171,6 +178,10 @@ export function reducer(
 		case 'SET_SPEED':
 			return updateState(state, {
 				speed: action.payload,
+			});
+		case 'SET_PLAYER':
+			return updateState(state, {
+				player: action.payload,
 			});
 		default:
 			return state;
