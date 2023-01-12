@@ -22,7 +22,6 @@ import {
 	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
 } from '@lib/generated/graphql';
-import hasVideo from '@lib/hasVideo';
 import { initialState, reducer } from './andPlaybackContext.reducer';
 
 // Source:
