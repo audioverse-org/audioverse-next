@@ -3,7 +3,7 @@ import hasVideo from '@lib/hasVideo';
 
 export type PlaybackAction =
 	| {
-			type: 'PLAY' | 'PAUSE';
+			type: 'PLAY' | 'PAUSE' | 'ADVANCE';
 	  }
 	| {
 			type: 'SET_PREFERS_AUDIO';
@@ -85,6 +85,13 @@ export function reducer(
 			return {
 				...state,
 				sourceRecordings: action.payload,
+			};
+		case 'ADVANCE':
+			if (state.sourceRecordings.length < 2) return state;
+			return {
+				...state,
+				recording: state.sourceRecordings[1],
+				sourceRecordings: state.sourceRecordings.slice(1),
 			};
 		default:
 			return state;
