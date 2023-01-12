@@ -432,10 +432,8 @@ export default function AndPlaybackContext({
 		if (!video) return;
 
 		if (state.videoHandler) {
-			setTimeout(() => {
-				// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
-				state.videoHandler?.(video);
-			}, 0);
+			// Move the video on the next tick to avoid FOPV (flash-of-previous-video ;))
+			setTimeout(() => state.videoHandler?.(video), 0);
 			return;
 		}
 
@@ -443,11 +441,9 @@ export default function AndPlaybackContext({
 			? document.getElementById('mini-player')
 			: originRef.current;
 
-		if (!destination || destination === video.parentElement) {
-			return;
+		if (destination && destination !== video.parentElement) {
+			destination.appendChild(video);
 		}
-
-		destination.appendChild(video);
 	}, [state.videoHandlerId, state.videoHandler, state.isShowingVideo]);
 
 	return (
