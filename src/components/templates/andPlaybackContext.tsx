@@ -1,16 +1,12 @@
-import throttle from 'lodash/throttle';
 import Script from 'next/script';
 import React, {
 	MutableRefObject,
 	ReactNode,
-	useCallback,
 	useEffect,
-	useMemo,
 	useReducer,
 	useRef,
-	useState,
 } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
 
@@ -18,8 +14,6 @@ import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
-	recordingPlaybackProgressSet,
-	RecordingPlaybackProgressSetMutationVariables,
 	Scalars,
 } from '@lib/generated/graphql';
 import { initialState, reducer } from './andPlaybackContext.reducer';
@@ -199,10 +193,6 @@ export default function AndPlaybackContext({
 		});
 	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
 
-	const setProgress = useCallback((p: number) => {
-		dispatch({ type: 'SET_PROGRESS', payload: p });
-	}, []);
-
 	useEffect(() => {
 		progressRef.current = state.progress;
 	}, [state.progress]);
@@ -225,7 +215,10 @@ export default function AndPlaybackContext({
 			0,
 		setTime: (t: number) => {
 			if (!playerRef.current) return;
-			setProgress(t / playerRef.current.duration());
+			dispatch({
+				type: 'SET_PROGRESS',
+				payload: t / playerRef.current.duration(),
+			});
 			playerRef.current.currentTime(t);
 		},
 		getDuration: () => {
@@ -238,7 +231,7 @@ export default function AndPlaybackContext({
 		},
 		getBufferedProgress: () => state.bufferedProgress,
 		setProgress: (p: number, updatePlayer = true) => {
-			setProgress(p);
+			dispatch({ type: 'SET_PROGRESS', payload: p });
 			const duration = playback.getDuration();
 			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
 				return;
