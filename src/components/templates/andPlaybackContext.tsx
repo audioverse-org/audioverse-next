@@ -102,7 +102,7 @@ export type PlaybackContextType = {
 	hasPlayer: () => boolean;
 	supportsFullscreen: () => boolean;
 	isShowingVideo: () => boolean;
-	getVideoLocation: () => 'miniplayer' | 'portal' | null;
+	getVideoLocation: () => 'miniplayer' | 'portal' | undefined;
 	getVolume: () => number;
 	setVolume: (v: number) => void;
 	setSpeed: (s: number) => void;
@@ -140,7 +140,7 @@ export const PlaybackContext = React.createContext<PlaybackContextType>({
 	unsetVideoHandler: () => undefined,
 	hasPlayer: () => false,
 	isShowingVideo: () => false,
-	getVideoLocation: () => null,
+	getVideoLocation: () => undefined,
 	getRecording: () => undefined,
 	getVolume: () => 100,
 	setVolume: () => undefined,
@@ -312,13 +312,7 @@ export default function AndPlaybackContext({
 		},
 		hasPlayer: () => !!playerRef.current,
 		isShowingVideo: () => state.isShowingVideo,
-		getVideoLocation: () => {
-			if (!state.isShowingVideo) return null;
-
-			if (state.videoHandler) return 'portal';
-
-			return 'miniplayer';
-		},
+		getVideoLocation: () => state.videoLocation,
 		supportsFullscreen: () => playerRef.current?.supportsFullScreen() || false,
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {

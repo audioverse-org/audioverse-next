@@ -32,6 +32,7 @@ export type PlaybackState = {
 	isShowingVideo: boolean;
 	videoHandler?: (el: Element) => void;
 	sourceRecordings: AndMiniplayerFragment[];
+	videoLocation?: 'miniplayer' | 'portal';
 };
 
 export const initialState: PlaybackState = {
@@ -48,52 +49,67 @@ function isShowingVideo(state: PlaybackState): boolean {
 	return !!state.recording && hasVideo(state.recording) && !state.prefersAudio;
 }
 
+function getVideoLocation(
+	state: PlaybackState
+): PlaybackState['videoLocation'] {
+	if (!state.isShowingVideo) return undefined;
+	if (state.videoHandler) return 'portal';
+	return 'miniplayer';
+}
+
+function updateState(
+	state: PlaybackState,
+	newState: Partial<PlaybackState>
+): PlaybackState {
+	const _isShowingVideo = isShowingVideo({
+		...state,
+		...newState,
+	});
+
+	return {
+		...state,
+		...newState,
+		isShowingVideo: _isShowingVideo,
+		videoLocation: getVideoLocation({
+			...state,
+			...newState,
+			isShowingVideo: _isShowingVideo,
+		}),
+	};
+}
+
 export function reducer(
 	state: PlaybackState,
 	action: PlaybackAction
 ): PlaybackState {
 	switch (action.type) {
 		case 'PLAY':
-			return { ...state, paused: false };
+			return updateState(state, { paused: false });
 		case 'PAUSE':
-			return { ...state, paused: true };
+			return updateState(state, { paused: true });
 		case 'SET_PREFERS_AUDIO':
 			if (!state.recording) return state;
-			return {
-				...state,
+			return updateState(state, {
 				prefersAudio: action.payload,
-				isShowingVideo: isShowingVideo({
-					...state,
-					prefersAudio: action.payload,
-				}),
-			};
+			});
 		case 'SET_RECORDING':
-			return {
-				...state,
+			return updateState(state, {
 				recording: action.payload,
-				isShowingVideo: isShowingVideo({
-					...state,
-					recording: action.payload,
-				}),
-			};
+			});
 		case 'SET_VIDEO_HANDLER':
-			return {
-				...state,
+			return updateState(state, {
 				videoHandler: action.payload,
-			};
+			});
 		case 'SET_SOURCE_RECORDINGS':
-			return {
-				...state,
+			return updateState(state, {
 				sourceRecordings: action.payload,
-			};
+			});
 		case 'ADVANCE':
 			if (state.sourceRecordings.length < 2) return state;
-			// TODO: update isShowingVideo with new recording
-			return {
-				...state,
+			return updateState(state, {
 				recording: state.sourceRecordings[1],
 				sourceRecordings: state.sourceRecordings.slice(1),
-			};
+			});
 		default:
 			return state;
 	}
