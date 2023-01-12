@@ -165,7 +165,6 @@ interface AndMiniplayerProps {
 
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 
-type VideoJsType = typeof VideoJs;
 type Airplay = { default: (vjs: unknown) => unknown };
 type Chromecast = {
 	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
@@ -180,7 +179,6 @@ export default function AndPlaybackContext({
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
 
-	const [videojs] = useState<Promise<VideoJsType>>(() => import('video.js'));
 	const [airplay] = useState<Promise<Airplay>>(
 		() => import('@silvermine/videojs-airplay')
 	);
@@ -435,7 +433,7 @@ export default function AndPlaybackContext({
 				playerRef.current.src(sources);
 				resetPlayer();
 			} else {
-				videojs.then(async (v) => {
+				state.videojs.then(async (v) => {
 					(await airplay).default(v.default);
 					(await chromecast).default(v.default, {
 						preloadWebComponents: true,

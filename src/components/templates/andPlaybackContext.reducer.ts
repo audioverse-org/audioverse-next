@@ -17,11 +17,13 @@ export type PlaybackState = {
 	paused: boolean;
 	prefersAudio: boolean;
 	recording?: AndMiniplayerFragment;
+	videojs: Promise<typeof import('video.js')>;
 };
 
 export const initialState: PlaybackState = {
 	paused: true,
 	prefersAudio: false,
+	videojs: import('video.js'),
 };
 
 export function reducer(
