@@ -172,6 +172,7 @@ export function reducer(
 		case 'SET_BUFFERED_PROGRESS':
 			return setBufferedProgress(state, action.payload);
 		case 'SET_VOLUME':
+			state.player?.volume(action.payload / 100);
 			return updateState(state, {
 				volume: action.payload,
 			});

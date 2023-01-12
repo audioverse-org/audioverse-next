@@ -251,7 +251,6 @@ export default function AndPlaybackContext({
 		getVolume: () => (playerRef.current?.volume() ?? 1) * 100,
 		setVolume: (volume: number) => {
 			dispatch({ type: 'SET_VOLUME', payload: volume });
-			playerRef.current?.volume(volume / 100);
 		},
 		setSpeed: (s: number) => {
 			playerRef.current?.playbackRate(s);
