@@ -187,20 +187,6 @@ export default function AndPlaybackContext({
 
 	const queryClient = useQueryClient();
 
-	const { mutate: updateProgress } = useMutation(
-		({
-			percentage,
-		}: Pick<RecordingPlaybackProgressSetMutationVariables, 'percentage'>) => {
-			if (!getSessionToken() || !state.recording) {
-				return Promise.resolve() as Promise<unknown>;
-			}
-			return recordingPlaybackProgressSet({
-				id: state.recording.id,
-				percentage,
-			});
-		}
-	);
-
 	useEffect(() => {
 		if (!state.recording) return;
 		sourcesRef.current = getSources(state.recording, state.prefersAudio);
@@ -213,19 +199,9 @@ export default function AndPlaybackContext({
 		});
 	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
 
-	const throttledUpdateProgress = useMemo(
-		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
-		[updateProgress]
-	);
-	const setProgress = useCallback(
-		(p: number) => {
-			throttledUpdateProgress({
-				percentage: p,
-			});
-			dispatch({ type: 'SET_PROGRESS', payload: p });
-		},
-		[throttledUpdateProgress]
-	);
+	const setProgress = useCallback((p: number) => {
+		dispatch({ type: 'SET_PROGRESS', payload: p });
+	}, []);
 
 	useEffect(() => {
 		progressRef.current = state.progress;

@@ -1,5 +1,11 @@
-import { AndMiniplayerFragment, Scalars } from '@lib/generated/graphql';
+import { getSessionToken } from '@lib/cookies';
+import {
+	AndMiniplayerFragment,
+	recordingPlaybackProgressSet,
+	Scalars,
+} from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
+import throttle from 'lodash/throttle';
 
 export type PlaybackAction =
 	| {
@@ -95,6 +101,8 @@ function updateState(
 }
 
 function setBufferedProgress(state: PlaybackState, progress: number) {
+	throttledUpdateProgress(state, progress);
+
 	const p = Math.max(
 		state.bufferedProgress, // Don't ever reduce the buffered amount
 		state.progress, // We've always buffered as much as we're playing
@@ -105,6 +113,24 @@ function setBufferedProgress(state: PlaybackState, progress: number) {
 		bufferedProgress: p >= 0.99 ? 1 : +p.toFixed(2),
 	});
 }
+
+const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
+
+function updateProgress(state: PlaybackState, progress: number) {
+	if (!getSessionToken() || !state.recording) {
+		return Promise.resolve() as Promise<unknown>;
+	}
+	return recordingPlaybackProgressSet({
+		id: state.recording.id,
+		percentage: progress,
+	});
+}
+
+const throttledUpdateProgress = throttle(
+	updateProgress,
+	SERVER_UPDATE_WAIT_TIME,
+	{ leading: true }
+);
 
 export function reducer(
 	state: PlaybackState,
