@@ -20,6 +20,7 @@ export type PlaybackState = {
 	recording?: AndMiniplayerFragment;
 	videojs: Promise<typeof import('video.js')>;
 	airplay: Promise<typeof import('@silvermine/videojs-airplay')>;
+	chromecast: Promise<typeof import('@silvermine/videojs-chromecast')>;
 	isShowingVideo: boolean;
 };
 
@@ -28,6 +29,7 @@ export const initialState: PlaybackState = {
 	prefersAudio: false,
 	videojs: import('video.js'),
 	airplay: import('@silvermine/videojs-airplay'),
+	chromecast: import('@silvermine/videojs-chromecast'),
 	isShowingVideo: false,
 };
 

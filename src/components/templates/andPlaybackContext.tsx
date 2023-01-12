@@ -165,10 +165,6 @@ interface AndMiniplayerProps {
 
 const SERVER_UPDATE_WAIT_TIME = 5 * 1000;
 
-type Chromecast = {
-	default: (vjs: unknown, options: Record<string, unknown>) => unknown;
-};
-
 export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
@@ -177,10 +173,6 @@ export default function AndPlaybackContext({
 	const videoRef = useRef<HTMLDivElement>(null);
 	const videoElRef = useRef<HTMLVideoElement>(null);
 	const originRef = useRef<HTMLDivElement>(null);
-
-	const [chromecast] = useState<Promise<Chromecast>>(
-		() => import('@silvermine/videojs-chromecast')
-	);
 
 	const [sourceRecordings, setSourceRecordings] =
 		useState<AndMiniplayerFragment[]>();
@@ -425,7 +417,7 @@ export default function AndPlaybackContext({
 			} else {
 				state.videojs.then(async (v) => {
 					(await state.airplay).default(v.default);
-					(await chromecast).default(v.default, {
+					(await state.chromecast).default(v.default, {
 						preloadWebComponents: true,
 					});
 					const p = v.default(currentVideoEl, options);
