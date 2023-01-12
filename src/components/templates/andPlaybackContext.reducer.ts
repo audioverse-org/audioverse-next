@@ -10,7 +10,12 @@ import { VideoJsPlayer } from 'video.js';
 
 export type PlaybackAction =
 	| {
-			type: 'PLAY' | 'PAUSE' | 'ADVANCE';
+			type:
+				| 'PLAY'
+				| 'PAUSE'
+				| 'ADVANCE'
+				| 'TRIGGER_CHROMECAST'
+				| 'TRIGGER_AIRPLAY';
 	  }
 	| {
 			type: 'SET_PREFERS_AUDIO';
@@ -186,6 +191,12 @@ export function reducer(
 			return updateState(state, {
 				player: action.payload,
 			});
+		case 'TRIGGER_CHROMECAST':
+			state.player?.trigger('chromecastRequested');
+			return state;
+		case 'TRIGGER_AIRPLAY':
+			state.player?.trigger('airPlayRequested');
+			return state;
 		default:
 			return state;
 	}
