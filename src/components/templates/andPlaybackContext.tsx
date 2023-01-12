@@ -9,8 +9,6 @@ import React, {
 import { useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
 import type * as VideoJs from 'video.js';
-
-import { getSessionToken } from '@lib/cookies';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
@@ -54,13 +52,6 @@ export const getSources = (
 		logUrl: 'logUrl' in f ? f.logUrl : undefined,
 	}));
 };
-
-export const shouldLoadRecordingPlaybackProgress = (
-	recording: AndMiniplayerFragment | null | undefined
-) =>
-	!!recording?.id &&
-	!(recording.id + '').includes('/') && // Bible ids
-	!!getSessionToken();
 
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods

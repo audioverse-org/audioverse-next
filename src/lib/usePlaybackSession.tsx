@@ -4,12 +4,12 @@ import {
 	getSources,
 	PlaybackContext,
 	PlaybackContextType,
-	shouldLoadRecordingPlaybackProgress,
 } from '@components/templates/andPlaybackContext';
 import {
 	AndMiniplayerFragment,
 	useGetRecordingPlaybackProgressQuery,
 } from '@lib/generated/graphql';
+import { getSessionToken } from './cookies';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
@@ -35,6 +35,13 @@ interface PlaybackSessionInfo {
 	getVideo: () => JSX.Element;
 	supportsFullscreen: boolean;
 }
+
+const shouldLoadRecordingPlaybackProgress = (
+	recording: AndMiniplayerFragment | null | undefined
+) =>
+	!!recording?.id &&
+	!(recording.id + '').includes('/') && // Bible ids
+	!!getSessionToken();
 
 export default function usePlaybackSession(
 	recording: AndMiniplayerFragment | null,
