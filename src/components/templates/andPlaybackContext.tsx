@@ -276,7 +276,7 @@ export default function AndPlaybackContext({
 				playback._setRecording(
 					state.sourceRecordings[1],
 					state.prefersAudio,
-					onLoadRef.current
+					() => playback.play()
 				);
 			}
 		},
