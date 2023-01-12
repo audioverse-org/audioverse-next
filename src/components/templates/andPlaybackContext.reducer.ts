@@ -69,12 +69,12 @@ export const initialState: PlaybackState = {
 	speed: 1,
 };
 
-function updateIsShowingVideo(s: PlaybackState): PlaybackState {
+function syncIsShowingVideo(s: PlaybackState): PlaybackState {
 	const n = !!s.recording && hasVideo(s.recording) && !s.prefersAudio;
 	return { ...s, isShowingVideo: n };
 }
 
-function updateVideoLocation(state: PlaybackState): PlaybackState {
+function syncVideoLocation(state: PlaybackState): PlaybackState {
 	const f = (s: PlaybackState) => {
 		if (!s.isShowingVideo) return undefined;
 		if (s.videoHandler) return 'portal';
@@ -89,12 +89,12 @@ function updateState(
 	newState: Partial<PlaybackState>
 ): PlaybackState {
 	const s0 = { ...state, ...newState };
-	const s1 = updateIsShowingVideo(s0);
-	const s2 = updateVideoLocation(s1);
+	const s1 = syncIsShowingVideo(s0);
+	const s2 = syncVideoLocation(s1);
 	return s2;
 }
 
-function updateBufferedProgress(state: PlaybackState, progress: number) {
+function setBufferedProgress(state: PlaybackState, progress: number) {
 	const p = Math.max(
 		state.bufferedProgress, // Don't ever reduce the buffered amount
 		state.progress, // We've always buffered as much as we're playing
@@ -141,7 +141,7 @@ export function reducer(
 				progress: action.payload,
 			});
 		case 'SET_BUFFERED_PROGRESS':
-			return updateBufferedProgress(state, action.payload);
+			return setBufferedProgress(state, action.payload);
 		case 'SET_VOLUME':
 			return updateState(state, {
 				volume: action.payload,
