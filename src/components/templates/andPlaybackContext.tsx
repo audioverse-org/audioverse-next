@@ -246,12 +246,6 @@ export default function AndPlaybackContext({
 			if (id !== videoHandlerIdRef.current) return;
 			dispatch({ type: 'SET_VIDEO_HANDLER', payload: undefined });
 		},
-		hasPlayer: () => !!state.player,
-		supportsFullscreen: () => state.player?.supportsFullScreen() || false,
-		getVolume: () => (state.player?.volume() ?? 1) * 100,
-		setVolume: (volume: number) => {
-			dispatch({ type: 'SET_VOLUME', payload: volume });
-		},
 		setSpeed: (s: number) => {
 			dispatch({ type: 'SET_SPEED', payload: s });
 		},
@@ -366,6 +360,11 @@ export default function AndPlaybackContext({
 		getBufferedProgress: () => state.bufferedProgress,
 		pause: () => dispatch({ type: 'PAUSE' }),
 		player: () => state.player,
+		hasPlayer: () => !!state.player,
+		supportsFullscreen: () => state.player?.supportsFullScreen() || false,
+		getVolume: () => (state.player?.volume() ?? 1) * 100,
+		setVolume: (volume: number) =>
+			dispatch({ type: 'SET_VOLUME', payload: volume }),
 	};
 
 	useEffect(() => {
