@@ -96,7 +96,8 @@ export type PlaybackContextType = {
 	};
 	_setRecording: (
 		recording: AndMiniplayerFragment,
-		prefersAudio?: boolean
+		prefersAudio?: boolean,
+		onLoad?: (c: PlaybackContextType) => void
 	) => void;
 };
 
@@ -239,7 +240,7 @@ export default function AndPlaybackContext({
 				playback.unsetVideoHandler(state.videoHandlerId);
 			}
 
-			playback._setRecording(newRecording, prefersAudio);
+			playback._setRecording(newRecording, prefersAudio, onLoad);
 		},
 		setVideoHandler: (id: Scalars['ID'], handler: (el: Element) => void) => {
 			videoHandlerIdRef.current = id;
@@ -272,7 +273,11 @@ export default function AndPlaybackContext({
 			if (state.sourceRecordings.length > 1) {
 				dispatch({ type: 'ADVANCE' });
 				onLoadRef.current = () => playback.play();
-				playback._setRecording(state.sourceRecordings[1], state.prefersAudio);
+				playback._setRecording(
+					state.sourceRecordings[1],
+					state.prefersAudio,
+					onLoadRef.current
+				);
 			}
 		},
 		getRefs: () => ({
@@ -282,7 +287,8 @@ export default function AndPlaybackContext({
 		}),
 		_setRecording: (
 			recording: AndMiniplayerFragment,
-			prefersAudio: boolean | undefined
+			prefersAudio: boolean | undefined,
+			onLoad?: (playback: PlaybackContextType) => void
 		) => {
 			const currentVideoEl = videoElRef.current;
 			if (!currentVideoEl) return;
@@ -318,7 +324,7 @@ export default function AndPlaybackContext({
 
 				playerRef.current?.currentTime(progress * playback.getDuration());
 
-				onLoadRef.current && onLoadRef.current(playback);
+				onLoad && onLoad(playback);
 				onLoadRef.current = undefined;
 			};
 
