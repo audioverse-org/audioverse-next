@@ -45,37 +45,35 @@ export const initialState: PlaybackState = {
 	sourceRecordings: [],
 };
 
-function isShowingVideo(state: PlaybackState): boolean {
-	return !!state.recording && hasVideo(state.recording) && !state.prefersAudio;
+function updateIsShowingVideo(state: PlaybackState): PlaybackState {
+	return {
+		...state,
+		isShowingVideo:
+			!!state.recording && hasVideo(state.recording) && !state.prefersAudio,
+	};
 }
 
-function getVideoLocation(
-	state: PlaybackState
-): PlaybackState['videoLocation'] {
-	if (!state.isShowingVideo) return undefined;
-	if (state.videoHandler) return 'portal';
-	return 'miniplayer';
+function updateVideoLocation(state: PlaybackState): PlaybackState {
+	const f = (s: PlaybackState) => {
+		if (!s.isShowingVideo) return undefined;
+		if (s.videoHandler) return 'portal';
+		return 'miniplayer';
+	};
+
+	return {
+		...state,
+		videoLocation: f(state),
+	};
 }
 
 function updateState(
 	state: PlaybackState,
 	newState: Partial<PlaybackState>
 ): PlaybackState {
-	const _isShowingVideo = isShowingVideo({
-		...state,
-		...newState,
-	});
-
-	return {
-		...state,
-		...newState,
-		isShowingVideo: _isShowingVideo,
-		videoLocation: getVideoLocation({
-			...state,
-			...newState,
-			isShowingVideo: _isShowingVideo,
-		}),
-	};
+	const s0 = { ...state, ...newState };
+	const s1 = updateIsShowingVideo(s0);
+	const s2 = updateVideoLocation(s1);
+	return s2;
 }
 
 export function reducer(
