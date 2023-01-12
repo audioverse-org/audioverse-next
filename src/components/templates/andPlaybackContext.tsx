@@ -438,12 +438,9 @@ export default function AndPlaybackContext({
 		}
 
 		function findDestination() {
-			if (state.isShowingVideo) {
-				// TODO: use ref instead of ID
-				return document.getElementById('mini-player');
-			}
-
-			return originRef.current;
+			return state.isShowingVideo
+				? document.getElementById('mini-player')
+				: originRef.current;
 		}
 
 		const destination = findDestination();
