@@ -435,13 +435,9 @@ export default function AndPlaybackContext({
 			return;
 		}
 
-		function findDestination() {
-			return state.isShowingVideo
-				? document.getElementById('mini-player')
-				: originRef.current;
-		}
-
-		const destination = findDestination();
+		const destination = state.isShowingVideo
+			? document.getElementById('mini-player')
+			: originRef.current;
 
 		if (!destination || destination === video.parentElement) {
 			return;
