@@ -181,7 +181,6 @@ export default function AndPlaybackContext({
 	const playerRef = useRef<VideoJsPlayer>();
 
 	// State
-	const [bufferedProgress, setBufferedProgress] = useState<number>(0);
 	const [, setVolume] = useState<number>(100); // Ensure that volume changes trigger rerenders
 	const [_speed, _setSpeed] = useState<number>(1); // Ensure that speed changes trigger rerenders and are preserved across tracks
 
@@ -213,13 +212,13 @@ export default function AndPlaybackContext({
 
 	useEffect(() => {
 		let newBufferedProgress = +Math.max(
-			bufferedProgress, // Don't ever reduce the buffered amount
+			state.bufferedProgress, // Don't ever reduce the buffered amount
 			state.progress, // We've always buffered as much as we're playing
 			(playerBufferedEnd || 0) / duration // Actually compute current buffered progress
 		).toFixed(2);
 		if (newBufferedProgress >= 0.99) newBufferedProgress = 1;
-		setBufferedProgress(newBufferedProgress);
-	}, [bufferedProgress, playerBufferedEnd, state.progress, duration]);
+		dispatch({ type: 'SET_BUFFERED_PROGRESS', payload: newBufferedProgress });
+	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
 
 	const throttledUpdateProgress = useMemo(
 		() => throttle(updateProgress, SERVER_UPDATE_WAIT_TIME, { leading: true }),
@@ -268,8 +267,7 @@ export default function AndPlaybackContext({
 				0
 			);
 		},
-		getProgress: () => state.progress,
-		getBufferedProgress: () => bufferedProgress,
+		getBufferedProgress: () => state.bufferedProgress,
 		setProgress: (p: number, updatePlayer = true) => {
 			setProgress(p);
 			const duration = playback.getDuration();
@@ -362,17 +360,19 @@ export default function AndPlaybackContext({
 				}
 
 				dispatch({ type: 'PAUSE' });
+
 				const serverProgress =
 					queryClient.getQueryData<GetRecordingPlaybackProgressQuery>([
 						'getRecordingPlaybackProgress',
 						{ id: recording.id },
 					]);
+
 				const progress =
 					serverProgress?.recording?.viewerPlaybackSession
 						?.positionPercentage || 0;
-				dispatch({ type: 'SET_PROGRESS', payload: progress });
 
-				setBufferedProgress(0);
+				dispatch({ type: 'SET_PROGRESS', payload: progress });
+				dispatch({ type: 'SET_BUFFERED_PROGRESS', payload: 0 });
 
 				playerRef.current?.currentTime(progress * playback.getDuration());
 
@@ -425,6 +425,7 @@ export default function AndPlaybackContext({
 			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio }),
 		getPrefersAudio: () => state.prefersAudio,
 		paused: () => state.paused,
+		getProgress: () => state.progress,
 	};
 
 	useEffect(() => {

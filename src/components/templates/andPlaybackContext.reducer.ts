@@ -23,6 +23,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_PROGRESS';
 			payload: number;
+	  }
+	| {
+			type: 'SET_BUFFERED_PROGRESS';
+			payload: number;
 	  };
 
 export type PlaybackState = {
@@ -38,6 +42,7 @@ export type PlaybackState = {
 	sourceRecordings: AndMiniplayerFragment[];
 	videoLocation?: 'miniplayer' | 'portal';
 	progress: number;
+	bufferedProgress: number;
 };
 
 export const initialState: PlaybackState = {
@@ -49,6 +54,7 @@ export const initialState: PlaybackState = {
 	isShowingVideo: false,
 	sourceRecordings: [],
 	progress: 0,
+	bufferedProgress: 0,
 };
 
 function updateIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -109,6 +115,10 @@ export function reducer(
 		case 'SET_PROGRESS':
 			return updateState(state, {
 				progress: action.payload,
+			});
+		case 'SET_BUFFERED_PROGRESS':
+			return updateState(state, {
+				bufferedProgress: action.payload,
 			});
 		default:
 			return state;
