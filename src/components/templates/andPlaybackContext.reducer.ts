@@ -76,6 +76,7 @@ export type PlaybackState = {
 	speed: number;
 	player?: VideoJsPlayer;
 	sources: Playable[];
+	duration: number;
 };
 
 export const initialState: PlaybackState = {
@@ -91,6 +92,7 @@ export const initialState: PlaybackState = {
 	volume: 100,
 	speed: 1,
 	sources: [],
+	duration: 0,
 };
 
 function syncIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -117,6 +119,13 @@ function syncSources(state: PlaybackState): PlaybackState {
 	};
 }
 
+function syncDuration(state: PlaybackState): PlaybackState {
+	return {
+		...state,
+		duration: state.sources[0]?.duration || state.recording?.duration || 0,
+	};
+}
+
 function updateState(
 	state: PlaybackState,
 	newState: Partial<PlaybackState>
@@ -125,7 +134,8 @@ function updateState(
 	const s1 = syncIsShowingVideo(s0);
 	const s2 = syncVideoLocation(s1);
 	const s3 = syncSources(s2);
-	return s3;
+	const s4 = syncDuration(s3);
+	return s4;
 }
 
 function setBufferedProgress(state: PlaybackState, progress: number) {

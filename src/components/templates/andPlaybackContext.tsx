@@ -123,7 +123,7 @@ export default function AndPlaybackContext({
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration = state.sources[0]?.duration || state.recording?.duration || 0;
+	const duration = state.duration;
 
 	const queryClient = useQueryClient();
 
