@@ -106,6 +106,7 @@ export default function AndPlaybackContext({
 	children,
 }: AndMiniplayerProps): JSX.Element {
 	const [state, dispatch] = useReducer(reducer, initialState);
+	const queryClient = useQueryClient();
 
 	// HTML Refs
 	const videoRef = useRef<HTMLDivElement>(null); // 2
@@ -115,15 +116,11 @@ export default function AndPlaybackContext({
 	// Refs
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
 	const sourcesRef = useRef<Playable[]>([]); // 3
-
-	// Punted Refs
 	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
 	const playerRef = useRef<VideoJsPlayer>(); // 9
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-
-	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		if (!state.recording) return;
@@ -283,8 +280,8 @@ export default function AndPlaybackContext({
 		getVideoLocation: () => state.videoLocation,
 		setIsPaused: (paused) => dispatch({ type: paused ? 'PAUSE' : 'PLAY' }),
 		getRecording: () => state.recording,
-		setPrefersAudio: (prefersAudio: boolean) =>
-			dispatch({ type: 'SET_PREFERS_AUDIO', payload: prefersAudio }),
+		setPrefersAudio: (pref: boolean) =>
+			dispatch({ type: 'SET_PREFERS_AUDIO', payload: pref }),
 		getPrefersAudio: () => state.prefersAudio,
 		paused: () => state.paused,
 		getProgress: () => state.progress,
