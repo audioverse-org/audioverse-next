@@ -56,6 +56,10 @@ export type PlaybackAction =
 	| {
 			type: 'SET_SOURCES';
 			payload: Playable[];
+	  }
+	| {
+			type: 'SET_TIME';
+			payload: number;
 	  };
 
 export type PlaybackState = {
@@ -203,6 +207,12 @@ export function reducer(
 			});
 		case 'SET_BUFFERED_PROGRESS':
 			return setBufferedProgress(state, action.payload);
+		case 'SET_TIME':
+			if (!state.player) return state;
+			state.player.currentTime(action.payload);
+			return updateState(state, {
+				progress: action.payload / state.duration,
+			});
 		case 'SET_VOLUME':
 			state.player?.volume(action.payload / 100);
 			return updateState(state, {

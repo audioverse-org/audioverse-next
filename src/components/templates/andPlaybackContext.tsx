@@ -123,7 +123,6 @@ export default function AndPlaybackContext({
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration = state.duration;
 
 	const queryClient = useQueryClient();
 
@@ -136,9 +135,14 @@ export default function AndPlaybackContext({
 	useEffect(() => {
 		dispatch({
 			type: 'SET_BUFFERED_PROGRESS',
-			payload: (playerBufferedEnd || 0) / duration,
+			payload: (playerBufferedEnd || 0) / state.duration,
 		});
-	}, [state.bufferedProgress, playerBufferedEnd, state.progress, duration]);
+	}, [
+		state.bufferedProgress,
+		playerBufferedEnd,
+		state.progress,
+		state.duration,
+	]);
 
 	const playback: PlaybackContextType = {
 		play: () => {
@@ -149,14 +153,11 @@ export default function AndPlaybackContext({
 			(!onLoadRef.current && state.player?.currentTime()) ||
 			state.progress * playback.getDuration() ||
 			0,
-		setTime: (t: number) => {
-			if (!state.player) return;
+		setTime: (t: number) =>
 			dispatch({
-				type: 'SET_PROGRESS',
-				payload: t / state.player.duration(),
-			});
-			state.player.currentTime(t);
-		},
+				type: 'SET_TIME',
+				payload: t,
+			}),
 		getDuration: () =>
 			state.player?.duration() ||
 			sourcesRef.current[0]?.duration ||
