@@ -7,6 +7,7 @@ import {
 import hasVideo from '@lib/hasVideo';
 import throttle from 'lodash/throttle';
 import { VideoJsPlayer } from 'video.js';
+import type * as VideoJs from 'video.js';
 
 export type PlaybackAction =
 	| {
@@ -51,7 +52,16 @@ export type PlaybackAction =
 	| {
 			type: 'SET_PLAYER';
 			payload: VideoJsPlayer;
+	  }
+	| {
+			type: 'SET_SOURCES';
+			payload: Playable[];
 	  };
+
+interface Playable extends VideoJs.default.Tech.SourceObject {
+	duration: number;
+	logUrl?: string | null;
+}
 
 export type PlaybackState = {
 	paused: boolean;
@@ -70,6 +80,7 @@ export type PlaybackState = {
 	volume: number;
 	speed: number;
 	player?: VideoJsPlayer;
+	sources: Playable[];
 };
 
 export const initialState: PlaybackState = {
@@ -84,6 +95,7 @@ export const initialState: PlaybackState = {
 	bufferedProgress: 0,
 	volume: 100,
 	speed: 1,
+	sources: [],
 };
 
 function syncIsShowingVideo(s: PlaybackState): PlaybackState {
@@ -197,6 +209,10 @@ export function reducer(
 		case 'TRIGGER_AIRPLAY':
 			state.player?.trigger('airPlayRequested');
 			return state;
+		case 'SET_SOURCES':
+			return updateState(state, {
+				sources: action.payload,
+			});
 		default:
 			return state;
 	}

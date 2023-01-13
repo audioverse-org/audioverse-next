@@ -159,14 +159,15 @@ export default function AndPlaybackContext({
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
-	const duration =
-		sourcesRef.current[0]?.duration || state.recording?.duration || 0;
+	const duration = state.sources[0]?.duration || state.recording?.duration || 0;
 
 	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		if (!state.recording) return;
-		sourcesRef.current = getSources(state.recording, state.prefersAudio);
+		const n = getSources(state.recording, state.prefersAudio);
+		sourcesRef.current = n;
+		dispatch({ type: 'SET_SOURCES', payload: n });
 	}, [state.recording, state.prefersAudio]);
 
 	useEffect(() => {
@@ -193,14 +194,11 @@ export default function AndPlaybackContext({
 			});
 			state.player.currentTime(t);
 		},
-		getDuration: () => {
-			return (
-				state.player?.duration() ||
-				sourcesRef.current[0]?.duration ||
-				state.recording?.duration ||
-				0
-			);
-		},
+		getDuration: () =>
+			state.player?.duration() ||
+			sourcesRef.current[0]?.duration ||
+			state.recording?.duration ||
+			0,
 		setProgress: (p: number, updatePlayer = true) => {
 			dispatch({ type: 'SET_PROGRESS', payload: p });
 			const duration = playback.getDuration();
@@ -271,6 +269,7 @@ export default function AndPlaybackContext({
 
 			const sources = getSources(recording, prefersAudio || false);
 			sourcesRef.current = sources;
+			dispatch({ type: 'SET_SOURCES', payload: sources });
 
 			const resetPlayer = () => {
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;
