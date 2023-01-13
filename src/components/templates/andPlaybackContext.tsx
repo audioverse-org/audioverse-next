@@ -117,7 +117,7 @@ export default function AndPlaybackContext({
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
 	const sourcesRef = useRef<Playable[]>([]); // 3
 	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
-	const playerRef = useRef<VideoJsPlayer>(); // 9
+	const playerRef = useRef<VideoJsPlayer>(); // 8
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
