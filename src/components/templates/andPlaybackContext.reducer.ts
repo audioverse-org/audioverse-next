@@ -237,6 +237,9 @@ export function reducer(
 				speed: action.payload,
 			});
 		case 'SET_PLAYER':
+			action.payload.on('fullscreenchange', () => {
+				action.payload.controls(action.payload.isFullscreen());
+			});
 			return updateState(state, {
 				player: action.payload,
 			});

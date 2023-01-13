@@ -114,11 +114,11 @@ export default function AndPlaybackContext({
 
 	// Refs
 	const onLoadRef = useRef<(c: PlaybackContextType) => void>(); // 4
-	const sourcesRef = useRef<Playable[]>([]); // 4
+	const sourcesRef = useRef<Playable[]>([]); // 3
 
 	// Punted Refs
 	const videoHandlerIdRef = useRef<Scalars['ID']>(); // 2
-	const playerRef = useRef<VideoJsPlayer>();
+	const playerRef = useRef<VideoJsPlayer>(); // 9
 
 	// Computed
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
@@ -272,9 +272,6 @@ export default function AndPlaybackContext({
 					const p = v.default(currentVideoEl, {
 						...state.options,
 						sources,
-					});
-					p.on('fullscreenchange', () => {
-						p.controls(p.isFullscreen());
 					});
 					playerRef.current = p;
 					dispatch({ type: 'SET_PLAYER', payload: p });
