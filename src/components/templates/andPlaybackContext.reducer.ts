@@ -54,10 +54,6 @@ export type PlaybackAction =
 			payload: VideoJsPlayer;
 	  }
 	| {
-			type: 'SET_SOURCES';
-			payload: Playable[];
-	  }
-	| {
 			type: 'SET_TIME';
 			payload: number;
 	  };
@@ -234,10 +230,6 @@ export function reducer(
 		case 'TRIGGER_AIRPLAY':
 			state.player?.trigger('airPlayRequested');
 			return state;
-		case 'SET_SOURCES':
-			return updateState(state, {
-				sources: action.payload,
-			});
 		default:
 			return state;
 	}

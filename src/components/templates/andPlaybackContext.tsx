@@ -153,11 +153,6 @@ export default function AndPlaybackContext({
 			(!onLoadRef.current && state.player?.currentTime()) ||
 			state.progress * playback.getDuration() ||
 			0,
-		setTime: (t: number) =>
-			dispatch({
-				type: 'SET_TIME',
-				payload: t,
-			}),
 		getDuration: () =>
 			state.player?.duration() ||
 			sourcesRef.current[0]?.duration ||
@@ -325,6 +320,7 @@ export default function AndPlaybackContext({
 		chromecastTrigger: () => dispatch({ type: 'TRIGGER_CHROMECAST' }),
 		airPlayTrigger: () => dispatch({ type: 'TRIGGER_AIRPLAY' }),
 		setSpeed: (s: number) => dispatch({ type: 'SET_SPEED', payload: s }),
+		setTime: (t: number) => dispatch({ type: 'SET_TIME', payload: t }),
 	};
 
 	useEffect(() => {
