@@ -269,10 +269,8 @@ export default function AndPlaybackContext({
 					(await state.chromecast).default(v.default, {
 						preloadWebComponents: true,
 					});
-					const p = v.default(currentVideoEl, {
-						...state.options,
-						sources,
-					});
+					const o = { ...state.options, sources };
+					const p = v.default(currentVideoEl, o);
 					playerRef.current = p;
 					dispatch({ type: 'SET_PLAYER', payload: p });
 					resetPlayer();
