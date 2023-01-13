@@ -187,6 +187,7 @@ export function reducer(
 ): PlaybackState {
 	switch (action.type) {
 		case 'PLAY':
+			state.player?.play();
 			return updateState(state, { paused: false });
 		case 'PAUSE':
 			state.player?.pause();

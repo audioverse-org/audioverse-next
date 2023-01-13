@@ -140,10 +140,7 @@ export default function AndPlaybackContext({
 	]);
 
 	const playback: PlaybackContextType = {
-		play: () => {
-			playerRef.current?.play();
-			dispatch({ type: 'PLAY' });
-		},
+		play: () => dispatch({ type: 'PLAY' }),
 		getTime: () =>
 			(!onLoadRef.current && state.player?.currentTime()) ||
 			state.progress * playback.getDuration() ||
