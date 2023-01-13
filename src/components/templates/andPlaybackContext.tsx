@@ -29,7 +29,7 @@ export type PlaybackContextType = {
 	getPrefersAudio: () => boolean;
 	getProgress: () => number;
 	getBufferedProgress: () => number;
-	setProgress: (p: number, updatePlayer?: boolean) => void;
+	setProgress: (p: number) => void;
 	getRecording: () => AndMiniplayerFragment | undefined;
 	loadRecording: (
 		recordingOrRecordings: AndMiniplayerFragment | AndMiniplayerFragment[],
@@ -163,11 +163,10 @@ export default function AndPlaybackContext({
 			sourcesRef.current[0]?.duration ||
 			state.recording?.duration ||
 			0,
-		setProgress: (p: number, updatePlayer = true) => {
+		setProgress: (p: number) => {
 			dispatch({ type: 'SET_PROGRESS', payload: p });
 			const duration = playback.getDuration();
-			if (!playerRef.current || !duration || isNaN(duration) || !updatePlayer)
-				return;
+			if (!playerRef.current || !duration || isNaN(duration)) return;
 			playerRef.current.currentTime(p * duration);
 		},
 		loadRecording: (
