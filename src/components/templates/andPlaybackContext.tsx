@@ -8,7 +8,6 @@ import React, {
 } from 'react';
 import { useQueryClient } from 'react-query';
 import type { VideoJsPlayer } from 'video.js';
-import type * as VideoJs from 'video.js';
 import {
 	AndMiniplayerFragment,
 	GetRecordingPlaybackProgressQuery,
