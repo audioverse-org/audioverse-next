@@ -128,7 +128,6 @@ function syncVideoLocation(state: PlaybackState): PlaybackState {
 
 function syncSources(state: PlaybackState): PlaybackState {
 	if (!state.recording) return state;
-
 	return {
 		...state,
 		sources: getSources(state.recording, state.prefersAudio),

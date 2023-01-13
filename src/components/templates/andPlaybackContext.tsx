@@ -124,8 +124,7 @@ export default function AndPlaybackContext({
 
 	useEffect(() => {
 		if (!state.recording) return;
-		const n = getSources(state.recording, state.prefersAudio);
-		sourcesRef.current = n;
+		sourcesRef.current = getSources(state.recording, state.prefersAudio);
 	}, [state.recording, state.prefersAudio]);
 
 	useEffect(() => {
