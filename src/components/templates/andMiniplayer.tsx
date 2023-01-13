@@ -12,7 +12,6 @@ export default function AndMiniplayer({
 	children,
 }: PropsWithChildren<unknown>): JSX.Element {
 	const playbackContext = useContext(PlaybackContext);
-	const player = playbackContext.player();
 
 	const {
 		origin: originRef,
