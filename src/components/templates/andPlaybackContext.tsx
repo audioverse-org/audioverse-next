@@ -15,43 +15,7 @@ import {
 	Scalars,
 } from '@lib/generated/graphql';
 import { initialState, reducer } from './andPlaybackContext.reducer';
-
-interface Playable extends VideoJs.default.Tech.SourceObject {
-	duration: number;
-	logUrl?: string | null;
-}
-
-const getFiles = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-):
-	| AndMiniplayerFragment['audioFiles']
-	| AndMiniplayerFragment['videoFiles']
-	| AndMiniplayerFragment['videoStreams'] => {
-	if (!recording) return [];
-
-	const { videoStreams = [], videoFiles = [], audioFiles = [] } = recording;
-
-	if (prefersAudio) return audioFiles;
-	if (videoStreams.length > 0) return videoStreams;
-	if (videoFiles.length > 0) return videoFiles;
-
-	return audioFiles;
-};
-
-export const getSources = (
-	recording: AndMiniplayerFragment,
-	prefersAudio: boolean
-): Playable[] => {
-	const files = getFiles(recording, prefersAudio) || [];
-
-	return files.map((f) => ({
-		src: f.url,
-		type: f.mimeType,
-		duration: f.duration,
-		logUrl: 'logUrl' in f ? f.logUrl : undefined,
-	}));
-};
+import getSources, { Playable } from '@lib/getSources';
 
 export type PlaybackContextType = {
 	player: () => VideoJsPlayer | undefined; // TODO: remove this in favor of single-purpose methods
@@ -167,7 +131,6 @@ export default function AndPlaybackContext({
 		if (!state.recording) return;
 		const n = getSources(state.recording, state.prefersAudio);
 		sourcesRef.current = n;
-		dispatch({ type: 'SET_SOURCES', payload: n });
 	}, [state.recording, state.prefersAudio]);
 
 	useEffect(() => {
@@ -269,7 +232,6 @@ export default function AndPlaybackContext({
 
 			const sources = getSources(recording, prefersAudio || false);
 			sourcesRef.current = sources;
-			dispatch({ type: 'SET_SOURCES', payload: sources });
 
 			const resetPlayer = () => {
 				const logUrl = sources.find((s) => s.logUrl)?.logUrl;

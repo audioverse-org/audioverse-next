@@ -7,7 +7,7 @@ import {
 import hasVideo from '@lib/hasVideo';
 import throttle from 'lodash/throttle';
 import { VideoJsPlayer } from 'video.js';
-import type * as VideoJs from 'video.js';
+import getSources, { Playable } from '@lib/getSources';
 
 export type PlaybackAction =
 	| {
@@ -57,11 +57,6 @@ export type PlaybackAction =
 			type: 'SET_SOURCES';
 			payload: Playable[];
 	  };
-
-interface Playable extends VideoJs.default.Tech.SourceObject {
-	duration: number;
-	logUrl?: string | null;
-}
 
 export type PlaybackState = {
 	paused: boolean;
@@ -113,6 +108,15 @@ function syncVideoLocation(state: PlaybackState): PlaybackState {
 	return { ...state, videoLocation: f(state) };
 }
 
+function syncSources(state: PlaybackState): PlaybackState {
+	if (!state.recording) return state;
+
+	return {
+		...state,
+		sources: getSources(state.recording, state.prefersAudio),
+	};
+}
+
 function updateState(
 	state: PlaybackState,
 	newState: Partial<PlaybackState>
@@ -120,7 +124,8 @@ function updateState(
 	const s0 = { ...state, ...newState };
 	const s1 = syncIsShowingVideo(s0);
 	const s2 = syncVideoLocation(s1);
-	return s2;
+	const s3 = syncSources(s2);
+	return s3;
 }
 
 function setBufferedProgress(state: PlaybackState, progress: number) {

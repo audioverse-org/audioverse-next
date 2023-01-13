@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import {
-	getSources,
 	PlaybackContext,
 	PlaybackContextType,
 } from '@components/templates/andPlaybackContext';
@@ -10,6 +9,7 @@ import {
 	useGetRecordingPlaybackProgressQuery,
 } from '@lib/generated/graphql';
 import { getSessionToken } from './cookies';
+import getSources from './getSources';
 
 interface PlaybackSessionInfo {
 	shiftTime: (delta: number) => void;
