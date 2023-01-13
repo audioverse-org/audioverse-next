@@ -6,7 +6,7 @@ import {
 } from '@lib/generated/graphql';
 import hasVideo from '@lib/hasVideo';
 import throttle from 'lodash/throttle';
-import { VideoJsPlayer } from 'video.js';
+import { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
 import getSources, { Playable } from '@lib/getSources';
 
 export type PlaybackAction =
@@ -77,6 +77,7 @@ export type PlaybackState = {
 	player?: VideoJsPlayer;
 	sources: Playable[];
 	duration: number;
+	options: VideoJsPlayerOptions;
 };
 
 export const initialState: PlaybackState = {
@@ -93,6 +94,21 @@ export const initialState: PlaybackState = {
 	speed: 1,
 	sources: [],
 	duration: 0,
+	options: {
+		poster: '/img/poster.jpg',
+		controls: false,
+		preload: 'auto',
+		defaultVolume: 1,
+		techOrder: ['chromecast', 'html5'],
+		plugins: {
+			chromecast: {
+				addButtonToControlBar: true, // Use custom designed button
+			},
+			airPlay: {
+				addButtonToControlBar: true, // Use custom designed button
+			},
+		},
+	},
 };
 
 function syncIsShowingVideo(s: PlaybackState): PlaybackState {

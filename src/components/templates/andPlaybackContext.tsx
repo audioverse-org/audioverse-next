@@ -261,23 +261,6 @@ export default function AndPlaybackContext({
 				onLoadRef.current = undefined;
 			};
 
-			const options: VideoJs.VideoJsPlayerOptions = {
-				poster: '/img/poster.jpg',
-				controls: false,
-				preload: 'auto',
-				defaultVolume: 1,
-				sources,
-				techOrder: ['chromecast', 'html5'],
-				plugins: {
-					chromecast: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
-					airPlay: {
-						addButtonToControlBar: true, // Use custom designed button
-					},
-				},
-			};
-
 			if (playerRef.current) {
 				playerRef.current.src(sources);
 				resetPlayer();
@@ -287,7 +270,10 @@ export default function AndPlaybackContext({
 					(await state.chromecast).default(v.default, {
 						preloadWebComponents: true,
 					});
-					const p = v.default(currentVideoEl, options);
+					const p = v.default(currentVideoEl, {
+						...state.options,
+						sources,
+					});
 					p.on('fullscreenchange', () => {
 						p.controls(p.isFullscreen());
 					});
