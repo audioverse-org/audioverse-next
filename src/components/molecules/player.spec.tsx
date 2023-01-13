@@ -170,7 +170,7 @@ describe('player', () => {
 	it('updates scrubber on time update', async () => {
 		const player = setPlayerMock({ duration: 300 });
 
-		const { getByTestId, getAllByLabelText } = await renderComponent();
+		const { getAllByLabelText } = await renderComponent();
 
 		userEvent.click(await screen.findByLabelText('play'));
 
@@ -178,11 +178,12 @@ describe('player', () => {
 
 		player.currentTime(75);
 
+		await waitFor(() => {
+			expect(player.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				getByTestId('video-element'),
-				{} as any
-			);
+			player._fire('timeupdate');
 		});
 
 		await waitFor(() =>
@@ -679,11 +680,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(25);
 
+		await waitFor(() => {
+			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				result.getByTestId('video-element'),
-				{} as any
-			);
+			mockPlayer._fire('timeupdate');
 		});
 
 		await waitFor(() => {
@@ -1069,11 +1071,12 @@ describe('player', () => {
 
 		mockPlayer.currentTime(50);
 
+		await waitFor(() => {
+			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				result.getByTestId('video-element'),
-				{} as any
-			);
+			mockPlayer._fire('timeupdate');
 		});
 
 		const player = result.getByLabelText('player');
@@ -1175,17 +1178,16 @@ describe('player', () => {
 
 		userEvent.click(await result.findByLabelText('play'));
 
-		await waitFor(() => {
-			expect(result.getAllByLabelText('pause')).not.toHaveLength(0);
-		});
+		await screen.findAllByLabelText('pause');
 
 		mockPlayer.currentTime(50);
 
+		await waitFor(() => {
+			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				result.getByTestId('video-element'),
-				{} as any
-			);
+			mockPlayer._fire('timeupdate');
 		});
 
 		const miniplayer = result.getByLabelText('miniplayer');

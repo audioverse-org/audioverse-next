@@ -123,6 +123,20 @@ export default function AndPlaybackContext({
 	const playerBufferedEnd = playerRef.current?.bufferedEnd();
 
 	useEffect(() => {
+		if (!state.player) return;
+		state.player.on('timeupdate', () => {
+			if (!state.player) return;
+			const t = state.player.currentTime();
+			const d = state.player.duration();
+			const p = d ? t / d : 0;
+			dispatch({
+				type: 'SET_PROGRESS',
+				payload: p,
+			});
+		});
+	}, [state.player]);
+
+	useEffect(() => {
 		if (!state.recording) return;
 		sourcesRef.current = getSources(state.recording, state.prefersAudio);
 	}, [state.recording, state.prefersAudio]);

@@ -1113,11 +1113,12 @@ describe('sermon detail page', () => {
 
 		mockPlayer.currentTime(50);
 
+		await waitFor(() => {
+			expect(mockPlayer.on).toBeCalledWith('timeupdate', expect.anything());
+		});
+
 		await act(async () => {
-			ReactTestUtils.Simulate.timeUpdate(
-				result.getByTestId('video-element'),
-				{} as any
-			);
+			mockPlayer._fire('timeupdate');
 		});
 
 		await waitFor(() => {

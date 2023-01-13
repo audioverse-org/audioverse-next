@@ -36,13 +36,6 @@ export default function AndMiniplayer({
 							className="video-js"
 							playsInline
 							data-testid="video-element"
-							onTimeUpdate={() => {
-								if (!player) return;
-								const t = player.currentTime();
-								const d = player.duration();
-								const p = d ? t / d : 0;
-								playbackContext.setProgress(p, false);
-							}}
 							onPause={() => playbackContext.setIsPaused(true)}
 							onPlay={() => playbackContext.setIsPaused(false)}
 							onEnded={() => playbackContext.advanceRecording()}
