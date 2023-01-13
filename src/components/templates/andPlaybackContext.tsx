@@ -320,11 +320,9 @@ export default function AndPlaybackContext({
 	}, [state.videoHandlerId, state.videoHandler, state.isShowingVideo]);
 
 	return (
-		<>
+		<PlaybackContext.Provider value={playback}>
 			<Script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" />
-			<PlaybackContext.Provider value={playback}>
-				{children}
-			</PlaybackContext.Provider>
-		</>
+			{children}
+		</PlaybackContext.Provider>
 	);
 }
