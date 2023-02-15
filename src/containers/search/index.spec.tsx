@@ -1,7 +1,12 @@
 import { __loadQuery } from 'next/router';
 import React from 'react';
 
-import { Language } from '@lib/generated/graphql';
+import {
+	GetSearchResultsPageDataDocument,
+	GetSearchResultsPageDataQuery,
+	Language,
+	RecordingContentType,
+} from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
 import Search, {
 	getStaticPaths,
@@ -9,6 +14,8 @@ import Search, {
 } from '@pages/[language]/search';
 
 import { screen, waitFor } from '@testing-library/react';
+import { buildLoader } from '@lib/test/buildLoader';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('next/head');
 
@@ -16,11 +23,33 @@ const renderPage = async () => {
 	return renderWithProviders(<Search language={Language.English} />, undefined);
 };
 
-describe('search', () => {
-	it('renders', async () => {
-		__loadQuery();
+const empty = {
+	aggregate: {
+		count: 0,
+	},
+	nodes: [],
+	pageInfo: {
+		hasNextPage: false,
+	},
+};
 
-		await renderPage();
+const loadData = buildLoader<GetSearchResultsPageDataQuery>(
+	GetSearchResultsPageDataDocument,
+	{
+		recordings: empty,
+		sequences: empty,
+		collections: empty,
+		sponsors: empty,
+		persons: empty,
+	}
+);
+
+describe('search', () => {
+	beforeEach(() => {
+		__loadQuery({
+			q: 'test',
+		});
+		loadData();
 	});
 
 	it('registers search paths', async () => {
@@ -40,10 +69,6 @@ describe('search', () => {
 	});
 
 	it('includes search term in title', async () => {
-		__loadQuery({
-			q: 'test',
-		});
-
 		await renderPage();
 
 		await waitFor(() => {
@@ -52,4 +77,42 @@ describe('search', () => {
 			);
 		});
 	});
+
+	it('filters to presenters', async () => {
+		loadData({
+			recordings: {
+				nodes: [
+					{
+						__typename: 'Recording',
+						id: 'recording',
+						title: 'the_recording_title',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+						canonicalPath: '/en/recordings/recording',
+					},
+				],
+			},
+		});
+
+		await renderPage();
+
+		await screen.findByText('the_recording_title');
+
+		userEvent.click(screen.getByRole('button', { name: 'Presenters' }));
+
+		expect(screen.queryByText('the_recording_title')).not.toBeInTheDocument();
+	});
+
+	it('does not show empty sections on all tab', async () => {
+		await renderPage();
+
+		expect(
+			screen.queryByRole('heading', {
+				name: 'Presenters',
+			})
+		).not.toBeInTheDocument();
+	});
 });
+
+// TODO
+// result type tabs
