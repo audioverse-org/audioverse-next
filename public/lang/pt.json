@@ -39,7 +39,7 @@
 	"about__navSpirit": {
 
 
-		"string": "Sentido do AudioVerse"
+		"string": "Espírito do AudioVerse"
 
 
 	},
@@ -1017,7 +1017,7 @@
 	"audiobookList__heading": {
 
 
-		"string": "Todos os Audiolivros"
+		"string": "Todos Audiolivros"
 
 
 	},
@@ -1176,7 +1176,7 @@
 	"blog__title": {
 
 
-		"string": "Todos os posts do Blog"
+		"string": "Todas postagens do Blog"
 
 
 	},
@@ -1185,7 +1185,7 @@
 	"books__title": {
 
 
-		"string": "Todos os Audiolivros"
+		"string": "Todos Audiolivros"
 
 
 	},
@@ -1581,7 +1581,7 @@
 	"ccollectionTeachingsDetail__heading": {
 
 
-		"string": "Todos os Ensinamentos Individuais"
+		"string": "Todos Ensinamentos Individuais"
 
 
 	},
@@ -1608,7 +1608,7 @@
 	"collectionDetail__presentersAllLabel": {
 
 
-		"string": "Ver todos os oradores"
+		"string": "Ver todos Oradores"
 
 
 	},
@@ -1671,7 +1671,7 @@
 	"collectionDetail__teachingsAllLabel": {
 
 
-		"string": "Ver todos os ensinamentos individuais"
+		"string": "Ver todos ensinamentos individuais"
 
 
 	},
@@ -1704,7 +1704,7 @@
 	"collectionPresenterssDetail__heading": {
 
 
-		"string": "Todos os oradores"
+		"string": "Todos Oradores"
 
 
 	},
@@ -1767,7 +1767,7 @@
 	"conferenceListPage__title": {
 
 
-		"string": "Todos os congressos"
+		"string": "Todos Congressos"
 
 
 	},
@@ -1803,7 +1803,7 @@
 	"conferences__title": {
 
 
-		"string": "Todos os congressos"
+		"string": "Todos Congressos"
 
 
 	},
@@ -2064,7 +2064,7 @@
 	"discover__conferencesSeeAll": {
 
 
-		"string": "Ver todos os congressos"
+		"string": "Ver todos Congressos"
 
 
 	},
@@ -2082,7 +2082,7 @@
 	"discover__recentTeachingsSeeAll": {
 
 
-		"string": "Ver todos os ensinamentos"
+		"string": "Ver todos Ensinamentos"
 
 
 	},
@@ -2100,7 +2100,7 @@
 	"discover__storiesSeeAll": {
 
 
-		"string": "Ver todas as histórias"
+		"string": "Ver todas Histórias"
 
 
 	},
@@ -2118,7 +2118,7 @@
 	"discover__trendingTeachingsSeeAll": {
 
 
-		"string": "Ver todos os Ensinamentos em Tendência"
+		"string": "Ver todos Ensinamentos em alta"
 
 
 	},
@@ -2163,7 +2163,7 @@
 	"discover_trendingTeachingsHeading": {
 
 
-		"string": "Ensinamentos em tendência"
+		"string": "Ensinamentos em alta"
 
 
 	},
@@ -2454,10 +2454,10 @@
 	"header__navItemBrowse": {
 
 
-		"comment": "Nome do link de navegação principal: Navegar",
+		"comment": "Nome do link de navegação principal: Explorar",
 
 
-		"string": "Navegar"
+		"string": "Explorar"
 
 
 	},
@@ -2634,7 +2634,7 @@
 	"header__navItemLibrary-listenLater": {
 
 
-		"string": "Escute mais tarde"
+		"string": "Escute Depois"
 
 
 	},
@@ -2772,7 +2772,7 @@
 	"header__navItemStory-spiritOfAudioVerse": {
 
 
-		"string": "Sentido do AudioVerse"
+		"string": "Espírito do AudioVerse"
 
 
 	},
@@ -4203,7 +4203,7 @@
 	"libraryNav__listenLater": {
 
 
-		"string": "Escute mais tarde"
+		"string": "Escute Depois"
 
 
 	},
@@ -5925,7 +5925,7 @@
 	"presentersList__title": {
 
 
-		"string": "Todos os oradores"
+		"string": "Todos Oradores"
 
 
 	},
@@ -5961,7 +5961,7 @@
 	"presenters__title": {
 
 
-		"string": "Todos os oradores"
+		"string": "Todos Oradores"
 
 
 	},
@@ -6564,7 +6564,7 @@
 	"searchSponsors__heading": {
 
 
-		"string": "Todos os patrocinadores correspondentes"
+		"string": "Todos patrocinadores correspondentes"
 
 
 	},
@@ -6573,7 +6573,7 @@
 	"searchTeachings__heading": {
 
 
-		"string": "Todos os ensinamentos correspondentes"
+		"string": "Todos Ensinamentos correspondentes"
 
 
 	},
@@ -6591,7 +6591,7 @@
 	"search__conferencesSeeAllMatching": {
 
 
-		"string": "Ver todos os congressos correspondentes."
+		"string": "Ver todos Congressos correspondentes."
 
 
 	},
@@ -6609,7 +6609,7 @@
 	"search__personsSeeAllMatching": {
 
 
-		"string": "Ver todos os oradores correspondentes"
+		"string": "Ver todos Oradores correspondentes"
 
 
 	},
@@ -6654,7 +6654,7 @@
 	"search__sponsorsSeeAllMatching": {
 
 
-		"string": "Ver todos os patrocinadores correspondentes"
+		"string": "Ver todos Patrocinadores correspondentes"
 
 
 	},
@@ -6672,7 +6672,7 @@
 	"search__teachingsSeeAllMatching": {
 
 
-		"string": "Ver todos os ensinamentos correspondentes"
+		"string": "Ver todos Ensinamentos correspondentes"
 
 
 	},
@@ -6912,7 +6912,7 @@
 	"sermonList__heading": {
 
 
-		"string": "Todos os ensinamentos"
+		"string": "Todos Ensinamentos"
 
 
 	},
@@ -7041,7 +7041,7 @@
 	"spiritOfAv__title": {
 
 
-		"string": "Sentido do AudioVerse"
+		"string": "Espírito do AudioVerse"
 
 
 	},
@@ -7050,7 +7050,7 @@
 	"sponsorConferencesDetail__heading": {
 
 
-		"string": "Todos os congressos"
+		"string": "Todos congressos"
 
 
 	},
@@ -7071,7 +7071,7 @@
 	"sponsorDetail__conferencesAllLabel": {
 
 
-		"string": "Ver todos os congressos"
+		"string": "Ver todos congressos"
 
 
 	},
@@ -7107,7 +7107,7 @@
 	"sponsorDetail__recentAllLabel": {
 
 
-		"string": "Ver todos os ensinamentos recentes"
+		"string": "Ver todos ensinamentos recentes"
 
 
 	},
@@ -7188,7 +7188,7 @@
 	"sponsorTeachingsDetail__heading": {
 
 
-		"string": "Todos os ensinamentos"
+		"string": "Todos ensinamentos"
 
 
 	},
@@ -7224,7 +7224,7 @@
 	"sponsorsList__title": {
 
 
-		"string": "Todos os patrocinadores"
+		"string": "Todos patrocinadores"
 
 
 	},
@@ -7251,7 +7251,7 @@
 	"sponsors__title": {
 
 
-		"string": "Todos os patrocinadores"
+		"string": "Todos patrocinadores"
 
 
 	},
@@ -7305,7 +7305,7 @@
 	"teachings__title": {
 
 
-		"string": "Todos os ensinamentos"
+		"string": "Todos ensinamentos"
 
 
 	},
@@ -7383,7 +7383,7 @@
 	"trendingTeachings__heading": {
 
 
-		"string": "Ensinamentos em tendência"
+		"string": "Ensinamentos em alta"
 
 
 	},
@@ -7392,7 +7392,7 @@
 	"trending__title": {
 
 
-		"string": "Ensinamentos em tendência"
+		"string": "Ensinamentos em alta"
 
 
 	}
