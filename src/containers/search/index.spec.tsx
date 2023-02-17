@@ -113,6 +113,3 @@ describe('search', () => {
 		).not.toBeInTheDocument();
 	});
 });
-
-// TODO
-// result type tabs
