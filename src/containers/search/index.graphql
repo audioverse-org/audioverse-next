@@ -1,5 +1,10 @@
-query getSearchResultsPageData($language: Language!, $term: String!) {
-	recordings(language: $language, search: $term, first: 6) {
+query getSearchRecordings(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	recordings(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
@@ -8,9 +13,18 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	serieses(language: $language, search: $term, first: 3) {
+}
+
+query getSearchSeries(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	serieses(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
@@ -19,9 +33,23 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	conferences(language: $language, search: $term, first: 3) {
+}
+
+query getSearchConferences(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	conferences(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
 		aggregate {
 			count
 		}
@@ -30,9 +58,18 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	sponsors(language: $language, search: $term, first: 3) {
+}
+
+query getSearchSponsors(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	sponsors(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
@@ -41,9 +78,18 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	persons(language: $language, search: $term, first: 3) {
+}
+
+query getSearchPersons(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	persons(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
@@ -52,9 +98,18 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	audiobooks(language: $language, search: $term, first: 3) {
+}
+
+query getSearchAudiobooks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	audiobooks(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
@@ -63,9 +118,23 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	musicTracks(language: $language, search: $term, first: 3) {
+}
+
+query getSearchMusicTracks(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	musicTracks(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
 		aggregate {
 			count
 		}
@@ -74,9 +143,23 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
-	storyPrograms(language: $language, search: $term, first: 3) {
+}
+
+query getSearchStoryPrograms(
+	$language: Language!
+	$term: String!
+	$first: Int!
+	$after: String
+) {
+	storyPrograms(
+		language: $language
+		search: $term
+		first: $first
+		after: $after
+	) {
 		aggregate {
 			count
 		}
@@ -85,6 +168,7 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		pageInfo {
 			hasNextPage
+			endCursor
 		}
 	}
 }

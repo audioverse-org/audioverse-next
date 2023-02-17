@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-
 import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
@@ -10,18 +9,24 @@ import CardInferred, {
 } from '@components/molecules/card/inferred';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
-import {
-	GetSearchResultsPageDataQuery,
-	useGetSearchResultsPageDataQuery,
-} from '@lib/generated/graphql';
-
 import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
-
 import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
 import { useLanguageId } from '@lib/useLanguageId';
+import {
+	useGetSearchAudiobooksQuery,
+	useGetSearchConferencesQuery,
+	useGetSearchMusicTracksQuery,
+	useGetSearchPersonsQuery,
+	useGetSearchRecordingsQuery,
+	useGetSearchSeriesQuery,
+	useGetSearchSponsorsQuery,
+	useGetSearchStoryProgramsQuery,
+} from '@lib/generated/graphql';
+import { ValueOf } from 'type-fest';
+import { UseQueryResult } from 'react-query';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -41,8 +46,22 @@ function SearchHead(): JSX.Element {
 	);
 }
 
+const Tab = {
+	All: 'all',
+	Presenters: 'presenters',
+	Teachings: 'teachings',
+	Series: 'series',
+	Books: 'books',
+	Sponsors: 'sponsors',
+	Conferences: 'conferences',
+	Music: 'music',
+	Stories: 'stories',
+};
+
+type TabId = ValueOf<typeof Tab>;
+
 type Section = {
-	id: string;
+	id: TabId;
 	heading: JSX.Element;
 	seeAll: JSX.Element;
 	select: (d: GetSearchResultsPageDataQuery) => {
@@ -55,7 +74,7 @@ type Section = {
 
 const sections: Section[] = [
 	{
-		id: 'presenters',
+		id: Tab.Presenters,
 		heading: (
 			<FormattedMessage
 				id="search__presentersHeading"
@@ -71,7 +90,7 @@ const sections: Section[] = [
 		select: (d) => d.persons,
 	},
 	{
-		id: 'teachings',
+		id: Tab.Teachings,
 		heading: (
 			<FormattedMessage
 				id="search__teachingsHeading"
@@ -87,7 +106,7 @@ const sections: Section[] = [
 		select: (d) => d.recordings,
 	},
 	{
-		id: 'series',
+		id: Tab.Series,
 		heading: (
 			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
 		),
@@ -100,7 +119,7 @@ const sections: Section[] = [
 		select: (d) => d.serieses,
 	},
 	{
-		id: 'books',
+		id: Tab.Books,
 		heading: (
 			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
 		),
@@ -113,7 +132,7 @@ const sections: Section[] = [
 		select: (d) => d.audiobooks,
 	},
 	{
-		id: 'sponsors',
+		id: Tab.Sponsors,
 		heading: (
 			<FormattedMessage
 				id="search__sponsorsHeading"
@@ -129,7 +148,7 @@ const sections: Section[] = [
 		select: (d) => d.sponsors,
 	},
 	{
-		id: 'conferences',
+		id: Tab.Conferences,
 		heading: (
 			<FormattedMessage
 				id="search__conferencesHeading"
@@ -145,7 +164,7 @@ const sections: Section[] = [
 		select: (d) => d.conferences,
 	},
 	{
-		id: 'music',
+		id: Tab.Music,
 		heading: (
 			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
 		),
@@ -158,7 +177,7 @@ const sections: Section[] = [
 		select: (d) => d.musicTracks,
 	},
 	{
-		id: 'stories',
+		id: Tab.Stories,
 		heading: (
 			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
 		),
@@ -172,21 +191,49 @@ const sections: Section[] = [
 	},
 ];
 
-function useSearchResults() {
+function useSearchResults(): {
+	isLoading: boolean;
+	results: Record<TabId, UseQueryResult>;
+} {
 	const term = useQueryString('q') || '';
 	const language = useLanguageId();
 
-	return useGetSearchResultsPageDataQuery({
-		language,
+	const vars = {
 		term,
-	});
+		language,
+		first: 3,
+		after: null,
+	};
+
+	const recordings = useGetSearchRecordingsQuery(vars);
+	const series = useGetSearchSeriesQuery(vars);
+	const conferences = useGetSearchConferencesQuery(vars);
+	const sponsors = useGetSearchSponsorsQuery(vars);
+	const persons = useGetSearchPersonsQuery(vars);
+	const audiobooks = useGetSearchAudiobooksQuery(vars);
+	const musicTracks = useGetSearchMusicTracksQuery(vars);
+	const storyPrograms = useGetSearchStoryProgramsQuery(vars);
+
+	const results = {
+		recordings,
+		series,
+		conferences,
+		sponsors,
+		persons,
+		audiobooks,
+		musicTracks,
+		storyPrograms,
+	};
+
+	return {
+		isLoading: Object.values(results).some((r) => r.isLoading),
+		results,
+	};
 }
 
 function Search(): JSX.Element {
 	const [tab, setTab] = useState('all');
-	const { data } = useSearchResults();
-
-	if (!data) throw new Error('Unreachable');
+	const results = useSearchResults();
 
 	return (
 		<>
@@ -242,10 +289,7 @@ function Search(): JSX.Element {
 }
 
 export default withFailStates(Search, {
-	useShould404: () => {
-		const { isLoading, data } = useSearchResults();
-		return !isLoading && !data;
-	},
+	useShould404: () => false,
 	useIsLoading: () => {
 		const { isLoading } = useSearchResults();
 		return isLoading;
