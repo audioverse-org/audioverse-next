@@ -62,7 +62,13 @@ function SearchHead(): JSX.Element {
 type Section = {
 	id: string;
 	heading: JSX.Element;
-	getEntities: (d: GetSearchResultsPageDataQuery) => InferrableEntity[] | null;
+	seeAll: JSX.Element;
+	select: (d: GetSearchResultsPageDataQuery) => {
+		nodes: InferrableEntity[] | null;
+		pageInfo: {
+			hasNextPage: boolean;
+		};
+	};
 };
 
 const sections: Section[] = [
@@ -74,7 +80,13 @@ const sections: Section[] = [
 				defaultMessage="Presenters"
 			/>
 		),
-		getEntities: (d) => d.persons.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__presentersSeeAll"
+				defaultMessage="See All Matching Presenters"
+			/>
+		),
+		select: (d) => d.persons,
 	},
 	{
 		id: 'teachings',
@@ -84,21 +96,39 @@ const sections: Section[] = [
 				defaultMessage="Teachings"
 			/>
 		),
-		getEntities: (d) => d.recordings.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__teachingsSeeAll"
+				defaultMessage="See All Matching Teachings"
+			/>
+		),
+		select: (d) => d.recordings,
 	},
 	{
 		id: 'series',
 		heading: (
 			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
 		),
-		getEntities: (d) => d.serieses.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__seriesSeeAll"
+				defaultMessage="See All Matching Series"
+			/>
+		),
+		select: (d) => d.serieses,
 	},
 	{
 		id: 'books',
 		heading: (
 			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
 		),
-		getEntities: (d) => d.audiobooks.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__booksSeeAll"
+				defaultMessage="See All Matching Audiobooks"
+			/>
+		),
+		select: (d) => d.audiobooks,
 	},
 	{
 		id: 'sponsors',
@@ -108,7 +138,13 @@ const sections: Section[] = [
 				defaultMessage="Sponsors"
 			/>
 		),
-		getEntities: (d) => d.sponsors.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__sponsorsSeeAll"
+				defaultMessage="See All Matching Sponsors"
+			/>
+		),
+		select: (d) => d.sponsors,
 	},
 	{
 		id: 'conferences',
@@ -118,21 +154,39 @@ const sections: Section[] = [
 				defaultMessage="Conferences"
 			/>
 		),
-		getEntities: (d) => d.conferences.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__conferencesSeeAll"
+				defaultMessage="See All Matching Conferences"
+			/>
+		),
+		select: (d) => d.conferences,
 	},
 	{
 		id: 'music',
 		heading: (
 			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
 		),
-		getEntities: (d) => d.musicTracks.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__musicSeeAll"
+				defaultMessage="See All Matching Music"
+			/>
+		),
+		select: (d) => d.musicTracks,
 	},
 	{
 		id: 'stories',
 		heading: (
 			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
 		),
-		getEntities: (d) => d.storyPrograms.nodes,
+		seeAll: (
+			<FormattedMessage
+				id="search__storiesSeeAll"
+				defaultMessage="See All Matching Stories"
+			/>
+		),
+		select: (d) => d.storyPrograms,
 	},
 ];
 
@@ -170,8 +224,10 @@ function Search({ language }: SearchProps): JSX.Element {
 				]}
 			/>
 			{sections.map((s) => {
-				const l = s.getEntities(data) || [];
+				const d = s.select(data);
+				const l = d.nodes || [];
 				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
+				const url = '';
 
 				if (!isVisible) return null;
 
@@ -183,17 +239,17 @@ function Search({ language }: SearchProps): JSX.Element {
 								<CardInferred key={e.id} entity={e} />
 							))}
 						</CardGroup>
-						{/* {seeAll ? (
-						<Button
-							type="secondary"
-							text={seeAll}
-							href={url}
-							IconRight={ForwardIcon}
-							className={styles.seeAllButton}
-						/>
-					) : (
-						<div className={styles.seeAllButton} />
-					)} */}
+						{d.pageInfo.hasNextPage ? (
+							<Button
+								type="secondary"
+								text={s.seeAll}
+								href={url}
+								IconRight={ForwardIcon}
+								className={styles.seeAllButton}
+							/>
+						) : (
+							<div className={styles.seeAllButton} />
+						)}
 					</div>
 				);
 			})}
