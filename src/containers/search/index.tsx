@@ -205,24 +205,15 @@ function useSearchResults(): {
 		after: null,
 	};
 
-	const recordings = useGetSearchRecordingsQuery(vars);
-	const series = useGetSearchSeriesQuery(vars);
-	const conferences = useGetSearchConferencesQuery(vars);
-	const sponsors = useGetSearchSponsorsQuery(vars);
-	const persons = useGetSearchPersonsQuery(vars);
-	const audiobooks = useGetSearchAudiobooksQuery(vars);
-	const musicTracks = useGetSearchMusicTracksQuery(vars);
-	const storyPrograms = useGetSearchStoryProgramsQuery(vars);
-
-	const results = {
-		recordings,
-		series,
-		conferences,
-		sponsors,
-		persons,
-		audiobooks,
-		musicTracks,
-		storyPrograms,
+	const results: Record<TabId, UseQueryResult> = {
+		recordings: useGetSearchRecordingsQuery(vars),
+		series: useGetSearchSeriesQuery(vars),
+		conferences: useGetSearchConferencesQuery(vars),
+		sponsors: useGetSearchSponsorsQuery(vars),
+		persons: useGetSearchPersonsQuery(vars),
+		audiobooks: useGetSearchAudiobooksQuery(vars),
+		musicTracks: useGetSearchMusicTracksQuery(vars),
+		storyPrograms: useGetSearchStoryProgramsQuery(vars),
 	};
 
 	return {
