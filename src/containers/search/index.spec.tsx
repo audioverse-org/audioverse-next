@@ -37,10 +37,13 @@ const loadData = buildLoader<GetSearchResultsPageDataQuery>(
 	GetSearchResultsPageDataDocument,
 	{
 		recordings: empty,
-		sequences: empty,
-		collections: empty,
+		serieses: empty,
+		conferences: empty,
 		sponsors: empty,
 		persons: empty,
+		audiobooks: empty,
+		musicTracks: empty,
+		storyPrograms: empty,
 	}
 );
 
