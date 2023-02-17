@@ -234,12 +234,10 @@ describe('app media playback', () => {
 		await findByLabelText(miniplayer, 'pause');
 
 		const portal = result.getByTestId('portal');
+		const video = await findByTestId(portal, 'video-element');
 
 		await act(async () => {
-			ReactTestUtils.Simulate.pause(
-				await findByTestId(portal, 'video-element'),
-				{} as any
-			);
+			ReactTestUtils.Simulate.pause(video, {} as any);
 		});
 
 		await findByLabelText(miniplayer, 'play');
@@ -264,11 +262,10 @@ describe('app media playback', () => {
 			expect(getByTestId(portal, 'video-element')).toBeInTheDocument();
 		});
 
+		const video = getByTestId(portal, 'video-element');
+
 		await act(async () => {
-			ReactTestUtils.Simulate.play(
-				getByTestId(portal, 'video-element'),
-				{} as any
-			);
+			ReactTestUtils.Simulate.play(video, {} as any);
 		});
 
 		await findByLabelText(miniplayer, 'pause');

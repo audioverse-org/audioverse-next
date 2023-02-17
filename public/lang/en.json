@@ -760,15 +760,6 @@
   "generatedFeed__copyright": {
     "string": "This feed Copyright {year} AudioVerse. Individual recordings are copyrighted by their respective owners."
   },
-  "give__amazonCta": {
-    "string": "Shop Now"
-  },
-  "give__amazonDescription": {
-    "string": "With every purchase on AmazonSmile, AudioVerse receives 0.5%.{br}{br}How? Just click on the button.{br}{br}That's all there is to it! Just be sure to bookmark the new AmazonSmile website or else your browser will likely default back to the regular Amazon site."
-  },
-  "give__amazonTitle": {
-    "string": "Amazon Smile"
-  },
   "give__checkDescription": {
     "string": "Please make checks payable to AudioVerse.{br}{br}Our mailing address is:{br}{br}AudioVerse{br}PO Box 2288{br}Collegedale, TN 37315-2288{br}USA"
   },

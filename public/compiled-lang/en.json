@@ -1641,48 +1641,6 @@
       "value": " AudioVerse. Individual recordings are copyrighted by their respective owners."
     }
   ],
-  "give__amazonCta": [
-    {
-      "type": 0,
-      "value": "Shop Now"
-    }
-  ],
-  "give__amazonDescription": [
-    {
-      "type": 0,
-      "value": "With every purchase on AmazonSmile, AudioVerse receives 0.5%."
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": "How? Just click on the button."
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 1,
-      "value": "br"
-    },
-    {
-      "type": 0,
-      "value": "That's all there is to it! Just be sure to bookmark the new AmazonSmile website or else your browser will likely default back to the regular Amazon site."
-    }
-  ],
-  "give__amazonTitle": [
-    {
-      "type": 0,
-      "value": "Amazon Smile"
-    }
-  ],
   "give__checkDescription": [
     {
       "type": 0,
