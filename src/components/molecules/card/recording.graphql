@@ -1,4 +1,5 @@
 fragment cardRecording on Recording {
+	__typename
 	...cardRecordingSequenceHat
 	...cardHatSponsor
 	...teaseRecording

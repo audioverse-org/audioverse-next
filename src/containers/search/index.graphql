@@ -10,7 +10,7 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 			hasNextPage
 		}
 	}
-	sequences(language: $language, search: $term, first: 3) {
+	serieses(language: $language, search: $term, first: 3) {
 		aggregate {
 			count
 		}
@@ -21,7 +21,7 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 			hasNextPage
 		}
 	}
-	collections(language: $language, search: $term, first: 3) {
+	conferences(language: $language, search: $term, first: 3) {
 		aggregate {
 			count
 		}
@@ -49,6 +49,39 @@ query getSearchResultsPageData($language: Language!, $term: String!) {
 		}
 		nodes {
 			...cardPerson
+		}
+		pageInfo {
+			hasNextPage
+		}
+	}
+	audiobooks(language: $language, search: $term, first: 3) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardSequence
+		}
+		pageInfo {
+			hasNextPage
+		}
+	}
+	musicTracks(language: $language, search: $term, first: 3) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardRecording
+		}
+		pageInfo {
+			hasNextPage
+		}
+	}
+	storyPrograms(language: $language, search: $term, first: 3) {
+		aggregate {
+			count
+		}
+		nodes {
+			...cardCollection
 		}
 		pageInfo {
 			hasNextPage

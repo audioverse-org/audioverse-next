@@ -11,11 +11,15 @@ import CardPerson from '@components/molecules/card/person';
 import CardRecording from '@components/molecules/card/recording';
 import CardSequence from '@components/molecules/card/sequence';
 import CardSponsor from '@components/molecules/card/sponsor';
+import CardInferred, {
+	InferrableEntity,
+} from '@components/molecules/card/inferred';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
 import {
 	GetSearchResultsPageDataQuery,
 	Language,
+	Person,
 	useGetSearchResultsPageDataQuery,
 } from '@lib/generated/graphql';
 import {
@@ -55,11 +59,13 @@ function SearchHead(): JSX.Element {
 	);
 }
 
-const sectionDefinitions: {
+type Section = {
 	id: string;
 	heading: JSX.Element;
-	makeCards: (data: GetSearchResultsPageDataQuery) => JSX.Element[];
-}[] = [
+	getEntities: (d: GetSearchResultsPageDataQuery) => InferrableEntity[] | null;
+};
+
+const sections: Section[] = [
 	{
 		id: 'presenters',
 		heading: (
@@ -68,18 +74,7 @@ const sectionDefinitions: {
 				defaultMessage="Presenters"
 			/>
 		),
-		makeCards: (d) =>
-			(d.persons.nodes || []).map((p) => <CardPerson key={p.id} person={p} />),
-	},
-	{
-		id: 'topics',
-		heading: (
-			<FormattedMessage id="search__topicsHeading" defaultMessage="Topics" />
-		),
-		makeCards: (d) =>
-			(d.collections.nodes || []).map((c) => (
-				<CardCollection key={c.id} collection={c} />
-			)),
+		getEntities: (d) => d.persons.nodes,
 	},
 	{
 		id: 'teachings',
@@ -89,53 +84,55 @@ const sectionDefinitions: {
 				defaultMessage="Teachings"
 			/>
 		),
-		makeCards: (d) =>
-			(d.recordings.nodes || []).map((r) => (
-				<CardRecording key={r.id} recording={r} />
-			)),
+		getEntities: (d) => d.recordings.nodes,
 	},
 	{
 		id: 'series',
 		heading: (
 			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
 		),
-		makeCards: (d) =>
-			(d.sequences.nodes || []).map((s) => (
-				<CardSequence key={s.id} sequence={s} />
-			)),
+		getEntities: (d) => d.serieses.nodes,
+	},
+	{
+		id: 'books',
+		heading: (
+			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
+		),
+		getEntities: (d) => d.audiobooks.nodes,
+	},
+	{
+		id: 'sponsors',
+		heading: (
+			<FormattedMessage
+				id="search__sponsorsHeading"
+				defaultMessage="Sponsors"
+			/>
+		),
+		getEntities: (d) => d.sponsors.nodes,
+	},
+	{
+		id: 'conferences',
+		heading: (
+			<FormattedMessage
+				id="search__conferencesHeading"
+				defaultMessage="Conferences"
+			/>
+		),
+		getEntities: (d) => d.conferences.nodes,
+	},
+	{
+		id: 'music',
+		heading: (
+			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
+		),
+		getEntities: (d) => d.musicTracks.nodes,
 	},
 	{
 		id: 'stories',
 		heading: (
 			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
 		),
-		makeCards: (d) =>
-			(d.collections.nodes || []).map((c) => (
-				<CardCollection key={c.id} collection={c} />
-			)),
-	},
-	{
-		id: 'scripture-songs',
-		heading: (
-			<FormattedMessage
-				id="search__scriptureSongsHeading"
-				defaultMessage="Scripture Songs"
-			/>
-		),
-		makeCards: (d) =>
-			(d.collections.nodes || []).map((c) => (
-				<CardCollection key={c.id} collection={c} />
-			)),
-	},
-	{
-		id: 'books',
-		heading: (
-			<FormattedMessage id="search__booksHeading" defaultMessage="Books" />
-		),
-		makeCards: (d) =>
-			(d.collections.nodes || []).map((c) => (
-				<CardCollection key={c.id} collection={c} />
-			)),
+		getEntities: (d) => d.storyPrograms.nodes,
 	},
 ];
 
@@ -164,7 +161,7 @@ function Search({ language }: SearchProps): JSX.Element {
 						isActive: tab === 'all',
 						onClick: () => setTab('all'),
 					},
-					...sectionDefinitions.map(({ id, heading }) => ({
+					...sections.map(({ id, heading }) => ({
 						id,
 						label: heading,
 						isActive: tab === id,
@@ -172,16 +169,20 @@ function Search({ language }: SearchProps): JSX.Element {
 					})),
 				]}
 			/>
-			{sectionDefinitions.map((s) => {
-				const isVisible = tab === 'all' || tab === s.id;
-				const cards = s.makeCards(data);
+			{sections.map((s) => {
+				const l = s.getEntities(data) || [];
+				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
 
-				if (!isVisible || (!cards.length && tab === 'all')) return null;
+				if (!isVisible) return null;
 
 				return (
 					<div key={s.id}>
 						<LineHeading>{s.heading}</LineHeading>
-						<CardGroup>{cards}</CardGroup>
+						<CardGroup>
+							{l.map((e) => (
+								<CardInferred key={e.id} entity={e} />
+							))}
+						</CardGroup>
 						{/* {seeAll ? (
 						<Button
 							type="secondary"

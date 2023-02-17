@@ -1,4 +1,5 @@
 fragment cardPerson on Person {
+	__typename
 	id
 	name
 	canonicalPath(useFuturePath: true)
