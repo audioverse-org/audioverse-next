@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '@containers/base';
-import Search, { SearchProps } from '@containers/search';
+import Search from '@containers/search';
 import { REVALIDATE } from '@lib/constants';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -17,13 +17,12 @@ export default Search;
 export async function getStaticProps({
 	params,
 }: GetStaticPropsContext<{ language: string }>): Promise<
-	GetStaticPropsResult<SearchProps & IBaseProps>
+	GetStaticPropsResult<IBaseProps>
 > {
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	return {
 		props: {
-			language,
 			title: intl.formatMessage({
 				id: 'search__title',
 				defaultMessage: 'Search',

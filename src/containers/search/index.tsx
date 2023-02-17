@@ -12,7 +12,6 @@ import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
 import {
 	GetSearchResultsPageDataQuery,
-	Language,
 	useGetSearchResultsPageDataQuery,
 } from '@lib/generated/graphql';
 
@@ -22,10 +21,7 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-
-export type SearchProps = {
-	language: Language;
-};
+import { useLanguageId } from '@lib/useLanguageId';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -176,14 +172,19 @@ const sections: Section[] = [
 	},
 ];
 
-function Search({ language }: SearchProps): JSX.Element {
-	const [tab, setTab] = useState('all');
+function useSearchResults() {
 	const term = useQueryString('q') || '';
+	const language = useLanguageId();
 
-	const { data } = useGetSearchResultsPageDataQuery({
+	return useGetSearchResultsPageDataQuery({
 		language,
 		term,
 	});
+}
+
+function Search(): JSX.Element {
+	const [tab, setTab] = useState('all');
+	const { data } = useSearchResults();
 
 	if (!data) {
 		throw new Error('Unreachable');
@@ -242,20 +243,12 @@ function Search({ language }: SearchProps): JSX.Element {
 }
 
 export default withFailStates(Search, {
-	useShould404: ({ language }) => {
-		const term = useQueryString('q') || '';
-		const { isLoading, data } = useGetSearchResultsPageDataQuery({
-			language,
-			term,
-		});
+	useShould404: () => {
+		const { isLoading, data } = useSearchResults();
 		return !isLoading && !data;
 	},
-	useIsLoading: ({ language }) => {
-		const term = useQueryString('q') || '';
-		const { isLoading } = useGetSearchResultsPageDataQuery({
-			language,
-			term,
-		});
+	useIsLoading: () => {
+		const { isLoading } = useSearchResults();
 		return isLoading;
 	},
 	Loading: () => (
