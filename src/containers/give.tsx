@@ -82,30 +82,6 @@ export default function Blog(): JSX.Element {
 				<HorizontalRule color={BaseColors.CREAM} className={styles.rule} />
 				<Heading2>
 					<FormattedMessage
-						id="give__amazonTitle"
-						defaultMessage="Amazon Smile"
-					/>
-				</Heading2>
-				<p>
-					<FormattedMessage
-						id="give__amazonDescription"
-						defaultMessage="With every purchase on AmazonSmile, AudioVerse receives 0.5%.{br}{br}How? Just click on the button.{br}{br}That's all there is to it! Just be sure to bookmark the new AmazonSmile website or else your browser will likely default back to the regular Amazon site."
-						values={{
-							br: <br />,
-						}}
-					/>
-				</p>
-				<Button
-					type="primary"
-					text={
-						<FormattedMessage id="give__amazonCta" defaultMessage="Shop Now" />
-					}
-					href="http://smile.amazon.com/ch/27-1861510"
-					target="_blank"
-				/>
-				<HorizontalRule color={BaseColors.CREAM} className={styles.rule} />
-				<Heading2>
-					<FormattedMessage
 						id="give__givingAssistantTitle"
 						defaultMessage="Giving Assistant"
 					/>
