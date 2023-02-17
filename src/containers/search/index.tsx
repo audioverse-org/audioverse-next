@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -22,6 +21,7 @@ import ForwardIcon from '../../../public/img/icons/icon-forward-light.svg';
 import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
+import { useQueryString } from '@lib/useQueryString';
 
 export type SearchProps = {
 	language: Language;
@@ -29,7 +29,7 @@ export type SearchProps = {
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
-	const term = useRouter().query.q;
+	const term = useQueryString('q');
 	const title = intl.formatMessage(
 		{
 			id: 'search__titleDynamic',
@@ -178,8 +178,7 @@ const sections: Section[] = [
 
 function Search({ language }: SearchProps): JSX.Element {
 	const [tab, setTab] = useState('all');
-	const { query } = useRouter();
-	const term = query.q as string;
+	const term = useQueryString('q') || '';
 
 	const { data } = useGetSearchResultsPageDataQuery({
 		language,
@@ -244,8 +243,7 @@ function Search({ language }: SearchProps): JSX.Element {
 
 export default withFailStates(Search, {
 	useShould404: ({ language }) => {
-		const { query } = useRouter();
-		const term = query.q as string;
+		const term = useQueryString('q') || '';
 		const { isLoading, data } = useGetSearchResultsPageDataQuery({
 			language,
 			term,
@@ -253,8 +251,7 @@ export default withFailStates(Search, {
 		return !isLoading && !data;
 	},
 	useIsLoading: ({ language }) => {
-		const { query } = useRouter();
-		const term = query.q as string;
+		const term = useQueryString('q') || '';
 		const { isLoading } = useGetSearchResultsPageDataQuery({
 			language,
 			term,
