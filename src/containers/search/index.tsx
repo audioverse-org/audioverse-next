@@ -186,9 +186,8 @@ function Search(): JSX.Element {
 	const [tab, setTab] = useState('all');
 	const { data } = useSearchResults();
 
-	if (!data) {
-		throw new Error('Unreachable');
-	}
+	if (!data) throw new Error('Unreachable');
+
 	return (
 		<>
 			<SearchHead />
