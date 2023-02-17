@@ -19,9 +19,7 @@ import userEvent from '@testing-library/user-event';
 
 jest.mock('next/head');
 
-const renderPage = async () => {
-	return renderWithProviders(<Search language={Language.English} />, undefined);
-};
+const renderPage = () => renderWithProviders(<Search />);
 
 const empty = {
 	aggregate: {
