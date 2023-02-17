@@ -227,7 +227,7 @@ function Search({ language }: SearchProps): JSX.Element {
 				const d = s.select(data);
 				const l = d.nodes || [];
 				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
-				const url = '';
+				const showSeeAll = d.pageInfo.hasNextPage && tab === 'all';
 
 				if (!isVisible) return null;
 
@@ -239,13 +239,13 @@ function Search({ language }: SearchProps): JSX.Element {
 								<CardInferred key={e.id} entity={e} />
 							))}
 						</CardGroup>
-						{d.pageInfo.hasNextPage ? (
+						{showSeeAll ? (
 							<Button
 								type="secondary"
 								text={s.seeAll}
-								href={url}
 								IconRight={ForwardIcon}
 								className={styles.seeAllButton}
+								onClick={() => setTab(s.id)}
 							/>
 						) : (
 							<div className={styles.seeAllButton} />
