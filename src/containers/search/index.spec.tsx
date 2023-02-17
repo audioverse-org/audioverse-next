@@ -4,7 +4,6 @@ import React from 'react';
 import {
 	GetSearchResultsPageDataDocument,
 	GetSearchResultsPageDataQuery,
-	Language,
 	RecordingContentType,
 } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
