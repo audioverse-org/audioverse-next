@@ -51,7 +51,7 @@ type Section = {
 	seeAll: JSX.Element;
 };
 
-const sections: Section[] = [
+export const sectionDefinitions: Section[] = [
 	{
 		id: Tab.Presenters,
 		heading: (
@@ -176,7 +176,7 @@ type RichSection = Section & {
 
 export default function useSections(tab: TabId): {
 	isLoading: boolean;
-	sections: RichSection[];
+	visible: RichSection[];
 } {
 	const term = useQueryString('q') || '';
 	const language = useLanguageId();
@@ -199,7 +199,7 @@ export default function useSections(tab: TabId): {
 		stories: useGetSearchStoryProgramsQuery(vars),
 	};
 
-	const richSections = sections.map((s) => ({
+	const richSections = sectionDefinitions.map((s) => ({
 		...s,
 		getData: () => getData(results[s.id]),
 		getNodes: () => getData(results[s.id])?.nodes || [],
@@ -208,7 +208,9 @@ export default function useSections(tab: TabId): {
 
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
-		sections:
-			tab === 'all' ? richSections : richSections.filter((s) => s.id === tab),
+		visible:
+			tab === 'all'
+				? richSections.filter((s) => s.getNodes().length > 0)
+				: richSections.filter((s) => s.id === tab),
 	};
 }

@@ -14,7 +14,7 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSections, { TabId } from './index.useSections';
+import useSections, { sectionDefinitions, TabId } from './index.useSections';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -49,7 +49,7 @@ function Search(): JSX.Element {
 						isActive: tab === 'all',
 						onClick: () => setTab('all'),
 					},
-					...sections.sections.map(({ id, heading }) => ({
+					...sectionDefinitions.map(({ id, heading }) => ({
 						id,
 						label: heading,
 						isActive: tab === id,
@@ -57,35 +57,25 @@ function Search(): JSX.Element {
 					})),
 				]}
 			/>
-			{sections.sections.map((s) => {
-				const l = s.getNodes();
-				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
-				const showSeeAll = s.hasNextPage && tab === 'all';
-
-				if (!isVisible) return null;
-
-				return (
-					<div key={s.id}>
-						<LineHeading>{s.heading}</LineHeading>
-						<CardGroup>
-							{l.map((e: InferrableEntity) => (
-								<CardInferred key={e.id} entity={e} />
-							))}
-						</CardGroup>
-						{showSeeAll ? (
-							<Button
-								type="secondary"
-								text={s.seeAll}
-								IconRight={ForwardIcon}
-								className={styles.seeAllButton}
-								onClick={() => setTab(s.id)}
-							/>
-						) : (
-							<div className={styles.seeAllButton} />
-						)}
-					</div>
-				);
-			})}
+			{sections.visible.map((s) => (
+				<div className={styles.section} key={s.id}>
+					<LineHeading>{s.heading}</LineHeading>
+					<CardGroup>
+						{s.getNodes().map((e: InferrableEntity) => (
+							<CardInferred key={e.id} entity={e} />
+						))}
+					</CardGroup>
+					{s.hasNextPage && tab === 'all' && (
+						<Button
+							type="secondary"
+							text={s.seeAll}
+							IconRight={ForwardIcon}
+							className={styles.seeAllButton}
+							onClick={() => setTab(s.id)}
+						/>
+					)}
+				</div>
+			))}
 		</>
 	);
 }
