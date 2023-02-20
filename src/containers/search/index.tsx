@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
@@ -20,19 +20,15 @@ import useSections, {
 } from './index.useSections';
 
 function SearchHead(): JSX.Element {
-	const intl = useIntl();
-	const term = useQueryString('q');
-	const title = intl.formatMessage(
-		{
-			id: 'search__titleDynamic',
-			defaultMessage: 'Search | "{term}" | AudioVerse',
-		},
-		{ term }
-	);
-
 	return (
 		<Head>
-			<title>{title}</title>
+			<title>
+				<FormattedMessage
+					id="search__titleDynamic"
+					defaultMessage='Search | "{term}" | AudioVerse'
+					values={{ term: useQueryString('q') }}
+				/>
+			</title>
 		</Head>
 	);
 }
