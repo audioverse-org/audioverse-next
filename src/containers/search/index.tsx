@@ -58,10 +58,9 @@ function Search(): JSX.Element {
 				]}
 			/>
 			{sections.sections.map((s) => {
-				const d = s.getData();
-				const l = d?.nodes || [];
+				const l = s.getNodes();
 				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
-				const showSeeAll = d?.pageInfo.hasNextPage && tab === 'all';
+				const showSeeAll = s.hasNextPage && tab === 'all';
 
 				if (!isVisible) return null;
 

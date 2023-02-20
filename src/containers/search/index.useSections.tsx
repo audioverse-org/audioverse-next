@@ -168,11 +168,15 @@ function getData(result: QueryResult): QueryShape | undefined {
 	) as QueryShape;
 }
 
+type RichSection = Section & {
+	getData: () => QueryShape | undefined;
+	getNodes: () => InferrableEntity[];
+	hasNextPage: boolean;
+};
+
 export default function useSections(tab: TabId): {
 	isLoading: boolean;
-	sections: (Section & {
-		getData: () => QueryShape | undefined;
-	})[];
+	sections: RichSection[];
 } {
 	const term = useQueryString('q') || '';
 	const language = useLanguageId();
@@ -195,11 +199,16 @@ export default function useSections(tab: TabId): {
 		stories: useGetSearchStoryProgramsQuery(vars),
 	};
 
+	const richSections = sections.map((s) => ({
+		...s,
+		getData: () => getData(results[s.id]),
+		getNodes: () => getData(results[s.id])?.nodes || [],
+		hasNextPage: getData(results[s.id])?.pageInfo.hasNextPage || false,
+	}));
+
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
-		sections: sections.map((s) => ({
-			...s,
-			getData: () => getData(results[s.id]),
-		})),
+		sections:
+			tab === 'all' ? richSections : richSections.filter((s) => s.id === tab),
 	};
 }
