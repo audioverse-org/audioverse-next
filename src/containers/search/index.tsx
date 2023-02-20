@@ -25,8 +25,7 @@ import {
 	useGetSearchSponsorsQuery,
 	useGetSearchStoryProgramsQuery,
 } from '@lib/generated/graphql';
-import { ValueOf } from 'type-fest';
-import { UseQueryResult } from 'react-query';
+import { QueryObserverResult } from 'react-query';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -46,7 +45,18 @@ function SearchHead(): JSX.Element {
 	);
 }
 
-const Tab = {
+type TabId =
+	| 'all'
+	| 'presenters'
+	| 'teachings'
+	| 'series'
+	| 'books'
+	| 'sponsors'
+	| 'conferences'
+	| 'music'
+	| 'stories';
+
+const Tab: Record<string, TabId> = {
 	All: 'all',
 	Presenters: 'presenters',
 	Teachings: 'teachings',
@@ -58,142 +68,27 @@ const Tab = {
 	Stories: 'stories',
 };
 
-type TabId = ValueOf<typeof Tab>;
+type QueryShape = {
+	aggregate: {
+		count: number;
+	} | null;
+	nodes: InferrableEntity[] | null;
+	pageInfo: {
+		hasNextPage: boolean;
+		endCursor: string | null;
+	};
+};
 
 type Section = {
 	id: TabId;
 	heading: JSX.Element;
 	seeAll: JSX.Element;
-	select: (d: GetSearchResultsPageDataQuery) => {
-		nodes: InferrableEntity[] | null;
-		pageInfo: {
-			hasNextPage: boolean;
-		};
-	};
+	getData: () => QueryShape | undefined;
 };
 
-const sections: Section[] = [
-	{
-		id: Tab.Presenters,
-		heading: (
-			<FormattedMessage
-				id="search__presentersHeading"
-				defaultMessage="Presenters"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__presentersSeeAll"
-				defaultMessage="See All Matching Presenters"
-			/>
-		),
-		select: (d) => d.persons,
-	},
-	{
-		id: Tab.Teachings,
-		heading: (
-			<FormattedMessage
-				id="search__teachingsHeading"
-				defaultMessage="Teachings"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__teachingsSeeAll"
-				defaultMessage="See All Matching Teachings"
-			/>
-		),
-		select: (d) => d.recordings,
-	},
-	{
-		id: Tab.Series,
-		heading: (
-			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__seriesSeeAll"
-				defaultMessage="See All Matching Series"
-			/>
-		),
-		select: (d) => d.serieses,
-	},
-	{
-		id: Tab.Books,
-		heading: (
-			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__booksSeeAll"
-				defaultMessage="See All Matching Audiobooks"
-			/>
-		),
-		select: (d) => d.audiobooks,
-	},
-	{
-		id: Tab.Sponsors,
-		heading: (
-			<FormattedMessage
-				id="search__sponsorsHeading"
-				defaultMessage="Sponsors"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__sponsorsSeeAll"
-				defaultMessage="See All Matching Sponsors"
-			/>
-		),
-		select: (d) => d.sponsors,
-	},
-	{
-		id: Tab.Conferences,
-		heading: (
-			<FormattedMessage
-				id="search__conferencesHeading"
-				defaultMessage="Conferences"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__conferencesSeeAll"
-				defaultMessage="See All Matching Conferences"
-			/>
-		),
-		select: (d) => d.conferences,
-	},
-	{
-		id: Tab.Music,
-		heading: (
-			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__musicSeeAll"
-				defaultMessage="See All Matching Music"
-			/>
-		),
-		select: (d) => d.musicTracks,
-	},
-	{
-		id: Tab.Stories,
-		heading: (
-			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__storiesSeeAll"
-				defaultMessage="See All Matching Stories"
-			/>
-		),
-		select: (d) => d.storyPrograms,
-	},
-];
-
-function useSearchResults(): {
+function useSections(): {
 	isLoading: boolean;
-	results: Record<TabId, UseQueryResult>;
+	sections: Section[];
 } {
 	const term = useQueryString('q') || '';
 	const language = useLanguageId();
@@ -205,26 +100,170 @@ function useSearchResults(): {
 		after: null,
 	};
 
-	const results: Record<TabId, UseQueryResult> = {
-		recordings: useGetSearchRecordingsQuery(vars),
-		series: useGetSearchSeriesQuery(vars),
-		conferences: useGetSearchConferencesQuery(vars),
-		sponsors: useGetSearchSponsorsQuery(vars),
-		persons: useGetSearchPersonsQuery(vars),
-		audiobooks: useGetSearchAudiobooksQuery(vars),
-		musicTracks: useGetSearchMusicTracksQuery(vars),
-		storyPrograms: useGetSearchStoryProgramsQuery(vars),
+	const presenters = useGetSearchPersonsQuery(vars);
+	const teachings = useGetSearchRecordingsQuery(vars);
+	const series = useGetSearchSeriesQuery(vars);
+	const books = useGetSearchAudiobooksQuery(vars);
+	const sponsors = useGetSearchSponsorsQuery(vars);
+	const conferences = useGetSearchConferencesQuery(vars);
+	const music = useGetSearchMusicTracksQuery(vars);
+	const stories = useGetSearchStoryProgramsQuery(vars);
+
+	const results = {
+		presenters,
+		teachings,
+		series,
+		books,
+		sponsors,
+		conferences,
+		music,
+		stories,
 	};
+
+	function getData(
+		result: QueryObserverResult<{
+			[queryName: string]: QueryShape | string;
+		}>
+	): QueryShape | undefined {
+		return Object.values(result.data || {}).find(
+			(v) => typeof v !== 'string'
+		) as QueryShape;
+	}
+
+	const sections: Section[] = [
+		{
+			id: Tab.Presenters,
+			heading: (
+				<FormattedMessage
+					id="search__presentersHeading"
+					defaultMessage="Presenters"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__presentersSeeAll"
+					defaultMessage="See All Matching Presenters"
+				/>
+			),
+			getData: () => getData(presenters),
+		},
+		{
+			id: Tab.Teachings,
+			heading: (
+				<FormattedMessage
+					id="search__teachingsHeading"
+					defaultMessage="Teachings"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__teachingsSeeAll"
+					defaultMessage="See All Matching Teachings"
+				/>
+			),
+			getData: () => getData(teachings),
+		},
+		{
+			id: Tab.Series,
+			heading: (
+				<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__seriesSeeAll"
+					defaultMessage="See All Matching Series"
+				/>
+			),
+			getData: () => getData(series),
+		},
+		{
+			id: Tab.Books,
+			heading: (
+				<FormattedMessage
+					id="search__booksHeading"
+					defaultMessage="Audiobooks"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__booksSeeAll"
+					defaultMessage="See All Matching Audiobooks"
+				/>
+			),
+			getData: () => getData(books),
+		},
+		{
+			id: Tab.Sponsors,
+			heading: (
+				<FormattedMessage
+					id="search__sponsorsHeading"
+					defaultMessage="Sponsors"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__sponsorsSeeAll"
+					defaultMessage="See All Matching Sponsors"
+				/>
+			),
+			getData: () => getData(sponsors),
+		},
+		{
+			id: Tab.Conferences,
+			heading: (
+				<FormattedMessage
+					id="search__conferencesHeading"
+					defaultMessage="Conferences"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__conferencesSeeAll"
+					defaultMessage="See All Matching Conferences"
+				/>
+			),
+			getData: () => getData(conferences),
+		},
+		{
+			id: Tab.Music,
+			heading: (
+				<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__musicSeeAll"
+					defaultMessage="See All Matching Music"
+				/>
+			),
+			getData: () => getData(music),
+		},
+		{
+			id: Tab.Stories,
+			heading: (
+				<FormattedMessage
+					id="search__storiesHeading"
+					defaultMessage="Stories"
+				/>
+			),
+			seeAll: (
+				<FormattedMessage
+					id="search__storiesSeeAll"
+					defaultMessage="See All Matching Stories"
+				/>
+			),
+			getData: () => getData(stories),
+		},
+	];
 
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
-		results,
+		sections,
 	};
 }
 
 function Search(): JSX.Element {
 	const [tab, setTab] = useState('all');
-	const results = useSearchResults();
+	const sections = useSections();
 
 	return (
 		<>
@@ -237,7 +276,7 @@ function Search(): JSX.Element {
 						isActive: tab === 'all',
 						onClick: () => setTab('all'),
 					},
-					...sections.map(({ id, heading }) => ({
+					...sections.sections.map(({ id, heading }) => ({
 						id,
 						label: heading,
 						isActive: tab === id,
@@ -245,11 +284,11 @@ function Search(): JSX.Element {
 					})),
 				]}
 			/>
-			{sections.map((s) => {
-				const d = s.select(data);
-				const l = d.nodes || [];
+			{sections.sections.map((s) => {
+				const d = s.getData();
+				const l = d?.nodes || [];
 				const isVisible = (tab === 'all' && l.length > 0) || tab === s.id;
-				const showSeeAll = d.pageInfo.hasNextPage && tab === 'all';
+				const showSeeAll = d?.pageInfo.hasNextPage && tab === 'all';
 
 				if (!isVisible) return null;
 
@@ -257,7 +296,7 @@ function Search(): JSX.Element {
 					<div key={s.id}>
 						<LineHeading>{s.heading}</LineHeading>
 						<CardGroup>
-							{l.map((e) => (
+							{l.map((e: InferrableEntity) => (
 								<CardInferred key={e.id} entity={e} />
 							))}
 						</CardGroup>
@@ -281,10 +320,7 @@ function Search(): JSX.Element {
 
 export default withFailStates(Search, {
 	useShould404: () => false,
-	useIsLoading: () => {
-		const { isLoading } = useSearchResults();
-		return isLoading;
-	},
+	useIsLoading: () => useSections().isLoading,
 	Loading: () => (
 		<>
 			<SearchHead />
