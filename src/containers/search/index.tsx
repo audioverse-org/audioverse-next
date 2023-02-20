@@ -14,7 +14,10 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSections, { sectionDefinitions, TabId } from './index.useSections';
+import useSections, {
+	TabId,
+	sectionDefinitions as tabs,
+} from './index.useSections';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -36,7 +39,7 @@ function SearchHead(): JSX.Element {
 
 function Search(): JSX.Element {
 	const [tab, setTab] = useState<TabId>('all');
-	const sections = useSections(tab);
+	const { visible } = useSections(tab);
 
 	return (
 		<>
@@ -49,7 +52,7 @@ function Search(): JSX.Element {
 						isActive: tab === 'all',
 						onClick: () => setTab('all'),
 					},
-					...sectionDefinitions.map(({ id, heading }) => ({
+					...tabs.map(({ id, heading }) => ({
 						id,
 						label: heading,
 						isActive: tab === id,
@@ -57,7 +60,7 @@ function Search(): JSX.Element {
 					})),
 				]}
 			/>
-			{sections.visible.map((s) => (
+			{visible.map((s) => (
 				<div className={styles.section} key={s.id}>
 					<LineHeading>{s.heading}</LineHeading>
 					<CardGroup>
