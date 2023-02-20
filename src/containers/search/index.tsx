@@ -60,7 +60,7 @@ function Search(): JSX.Element {
 				<div className={styles.section} key={s.id}>
 					<LineHeading>{s.heading}</LineHeading>
 					<CardGroup>
-						{s.getNodes().map((e: InferrableEntity) => (
+						{s.nodes.map((e: InferrableEntity) => (
 							<CardInferred key={e.id} entity={e} />
 						))}
 					</CardGroup>

@@ -169,8 +169,8 @@ function getData(result: QueryResult): QueryShape | undefined {
 }
 
 type RichSection = Section & {
-	getData: () => QueryShape | undefined;
-	getNodes: () => InferrableEntity[];
+	innerData: QueryShape | undefined;
+	nodes: InferrableEntity[];
 	hasNextPage: boolean;
 };
 
@@ -201,8 +201,8 @@ export default function useSections(tab: TabId): {
 
 	const richSections = sectionDefinitions.map((s) => ({
 		...s,
-		getData: () => getData(results[s.id]),
-		getNodes: () => getData(results[s.id])?.nodes || [],
+		innerData: getData(results[s.id]),
+		nodes: getData(results[s.id])?.nodes || [],
 		hasNextPage: getData(results[s.id])?.pageInfo.hasNextPage || false,
 	}));
 
@@ -210,7 +210,7 @@ export default function useSections(tab: TabId): {
 		isLoading: Object.values(results).some((r) => r.isLoading),
 		visible:
 			tab === 'all'
-				? richSections.filter((s) => s.getNodes().length > 0)
+				? richSections.filter((s) => s.nodes.length > 0)
 				: richSections.filter((s) => s.id === tab),
 	};
 }
