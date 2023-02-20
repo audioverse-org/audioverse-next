@@ -178,12 +178,9 @@ export default function useSections(tab: TabId): {
 	isLoading: boolean;
 	visible: RichSection[];
 } {
-	const term = useQueryString('q') || '';
-	const language = useLanguageId();
-
 	const vars = {
-		term,
-		language,
+		term: useQueryString('q') || '',
+		language: useLanguageId(),
 		first: 3,
 		after: null,
 	};
