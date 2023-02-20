@@ -199,7 +199,12 @@ export default function useSections(tab: TabId): {
 		stories: useGetSearchStoryProgramsQuery(vars),
 	};
 
-	const richSections = sectionDefinitions.map((s) => ({
+	const visible =
+		tab === 'all'
+			? sectionDefinitions.filter((s) => getData(results[s.id])?.nodes?.length)
+			: [sectionDefinitions.find((s) => s.id === tab) as Section];
+
+	const rich = visible.map((s) => ({
 		...s,
 		innerData: getData(results[s.id]),
 		nodes: getData(results[s.id])?.nodes || [],
@@ -208,9 +213,6 @@ export default function useSections(tab: TabId): {
 
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
-		visible:
-			tab === 'all'
-				? richSections.filter((s) => s.nodes.length > 0)
-				: richSections.filter((s) => s.id === tab),
+		visible: rich,
 	};
 }
