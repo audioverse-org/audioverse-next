@@ -14,21 +14,119 @@ import {
 	useGetSearchStoryProgramsQuery,
 } from '@lib/generated/graphql';
 import { QueryObserverResult } from 'react-query';
-import { ValueOf } from 'type-fest';
 
-const Tab: Record<string, string> = {
-	All: 'all',
-	Presenters: 'presenters',
-	Teachings: 'teachings',
-	Series: 'series',
-	Books: 'books',
-	Sponsors: 'sponsors',
-	Conferences: 'conferences',
-	Music: 'music',
-	Stories: 'stories',
+type Section = {
+	heading: JSX.Element;
+	seeAll?: JSX.Element;
 };
 
-export type TabId = ValueOf<typeof Tab>;
+export const definitions: Record<string, Section> = {
+	all: {
+		heading: <FormattedMessage id="search__allHeading" defaultMessage="All" />,
+	},
+	presenters: {
+		heading: (
+			<FormattedMessage
+				id="search__presentersHeading"
+				defaultMessage="Presenters"
+			/>
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__presentersSeeAll"
+				defaultMessage="See All Matching Presenters"
+			/>
+		),
+	},
+	teachings: {
+		heading: (
+			<FormattedMessage
+				id="search__teachingsHeading"
+				defaultMessage="Teachings"
+			/>
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__teachingsSeeAll"
+				defaultMessage="See All Matching Teachings"
+			/>
+		),
+	},
+	series: {
+		heading: (
+			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__seriesSeeAll"
+				defaultMessage="See All Matching Series"
+			/>
+		),
+	},
+	books: {
+		heading: (
+			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__booksSeeAll"
+				defaultMessage="See All Matching Audiobooks"
+			/>
+		),
+	},
+	sponsors: {
+		heading: (
+			<FormattedMessage
+				id="search__sponsorsHeading"
+				defaultMessage="Sponsors"
+			/>
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__sponsorsSeeAll"
+				defaultMessage="See All Matching Sponsors"
+			/>
+		),
+	},
+	conferences: {
+		heading: (
+			<FormattedMessage
+				id="search__conferencesHeading"
+				defaultMessage="Conferences"
+			/>
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__conferencesSeeAll"
+				defaultMessage="See All Matching Conferences"
+			/>
+		),
+	},
+	music: {
+		heading: (
+			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__musicSeeAll"
+				defaultMessage="See All Matching Music"
+			/>
+		),
+	},
+	stories: {
+		heading: (
+			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
+		),
+		seeAll: (
+			<FormattedMessage
+				id="search__storiesSeeAll"
+				defaultMessage="See All Matching Stories"
+			/>
+		),
+	},
+};
+
+export type TabId = keyof typeof definitions;
 
 type QueryShape = {
 	aggregate: {
@@ -45,130 +143,14 @@ type QueryResult = QueryObserverResult<{
 	[queryName: string]: QueryShape | string;
 }>;
 
-type Section = {
-	id: TabId;
-	heading: JSX.Element;
-	seeAll: JSX.Element;
-};
-
-export const sectionDefinitions: Section[] = [
-	{
-		id: Tab.Presenters,
-		heading: (
-			<FormattedMessage
-				id="search__presentersHeading"
-				defaultMessage="Presenters"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__presentersSeeAll"
-				defaultMessage="See All Matching Presenters"
-			/>
-		),
-	},
-	{
-		id: Tab.Teachings,
-		heading: (
-			<FormattedMessage
-				id="search__teachingsHeading"
-				defaultMessage="Teachings"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__teachingsSeeAll"
-				defaultMessage="See All Matching Teachings"
-			/>
-		),
-	},
-	{
-		id: Tab.Series,
-		heading: (
-			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__seriesSeeAll"
-				defaultMessage="See All Matching Series"
-			/>
-		),
-	},
-	{
-		id: Tab.Books,
-		heading: (
-			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__booksSeeAll"
-				defaultMessage="See All Matching Audiobooks"
-			/>
-		),
-	},
-	{
-		id: Tab.Sponsors,
-		heading: (
-			<FormattedMessage
-				id="search__sponsorsHeading"
-				defaultMessage="Sponsors"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__sponsorsSeeAll"
-				defaultMessage="See All Matching Sponsors"
-			/>
-		),
-	},
-	{
-		id: Tab.Conferences,
-		heading: (
-			<FormattedMessage
-				id="search__conferencesHeading"
-				defaultMessage="Conferences"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__conferencesSeeAll"
-				defaultMessage="See All Matching Conferences"
-			/>
-		),
-	},
-	{
-		id: Tab.Music,
-		heading: (
-			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__musicSeeAll"
-				defaultMessage="See All Matching Music"
-			/>
-		),
-	},
-	{
-		id: Tab.Stories,
-		heading: (
-			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__storiesSeeAll"
-				defaultMessage="See All Matching Stories"
-			/>
-		),
-	},
-];
-
 function getData(result: QueryResult): QueryShape | undefined {
-	return Object.values(result.data || {}).find(
+	return Object.values(result?.data || {}).find(
 		(v) => typeof v !== 'string'
 	) as QueryShape;
 }
 
 type RichSection = Section & {
+	id: TabId;
 	innerData: QueryShape | undefined;
 	nodes: InferrableEntity[];
 	hasNextPage: boolean;
@@ -196,16 +178,19 @@ export default function useSections(tab: TabId): {
 		stories: useGetSearchStoryProgramsQuery(vars),
 	};
 
+	const entries = Object.entries(definitions);
+
 	const visible =
 		tab === 'all'
-			? sectionDefinitions.filter((s) => getData(results[s.id])?.nodes?.length)
-			: [sectionDefinitions.find((s) => s.id === tab) as Section];
+			? entries.filter(([k]) => getData(results[k])?.nodes?.length)
+			: [entries.find(([k]) => k === tab) as [TabId, Section]];
 
-	const rich = visible.map((s) => ({
+	const rich = visible.map(([k, s]) => ({
 		...s,
-		innerData: getData(results[s.id]),
-		nodes: getData(results[s.id])?.nodes || [],
-		hasNextPage: getData(results[s.id])?.pageInfo.hasNextPage || false,
+		id: k,
+		innerData: getData(results[k]),
+		nodes: getData(results[k])?.nodes || [],
+		hasNextPage: getData(results[k])?.pageInfo.hasNextPage || false,
 	}));
 
 	return {

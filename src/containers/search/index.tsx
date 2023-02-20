@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
@@ -14,21 +14,23 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSections, {
-	TabId,
-	sectionDefinitions as tabs,
-} from './index.useSections';
+import useSections, { TabId, definitions as tabs } from './index.useSections';
 
 function SearchHead(): JSX.Element {
+	// WORKAROUND: We can't use the <FormattedMessage> component here because
+	// next/head renders outside of our IntlProvider. So we use useIntl() to
+	// get the intl object and format the message manually.
+	const intl = useIntl();
+	const title = intl.formatMessage(
+		{
+			id: 'search__titleDynamic',
+			defaultMessage: 'Search | "{term}" | AudioVerse',
+		},
+		{ term: useQueryString('q') }
+	);
 	return (
 		<Head>
-			<title>
-				<FormattedMessage
-					id="search__titleDynamic"
-					defaultMessage='Search | "{term}" | AudioVerse'
-					values={{ term: useQueryString('q') }}
-				/>
-			</title>
+			<title>{title}</title>
 		</Head>
 	);
 }
@@ -41,20 +43,12 @@ function Search(): JSX.Element {
 		<>
 			<SearchHead />
 			<Mininav
-				items={[
-					{
-						id: 'all',
-						label: 'All',
-						isActive: tab === 'all',
-						onClick: () => setTab('all'),
-					},
-					...tabs.map(({ id, heading }) => ({
-						id,
-						label: heading,
-						isActive: tab === id,
-						onClick: () => setTab(id),
-					})),
-				]}
+				items={Object.entries(tabs).map(([id, { heading }]) => ({
+					id,
+					label: heading,
+					isActive: tab === id,
+					onClick: () => setTab(id),
+				}))}
 			/>
 			{visible.map((s) => (
 				<div className={styles.section} key={s.id}>
