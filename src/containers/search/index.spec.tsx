@@ -2,8 +2,22 @@ import { __loadQuery } from 'next/router';
 import React from 'react';
 
 import {
-	GetSearchResultsPageDataDocument,
-	GetSearchResultsPageDataQuery,
+	GetSearchAudiobooksDocument,
+	GetSearchAudiobooksQuery,
+	GetSearchConferencesDocument,
+	GetSearchConferencesQuery,
+	GetSearchMusicTracksDocument,
+	GetSearchMusicTracksQuery,
+	GetSearchPersonsDocument,
+	GetSearchPersonsQuery,
+	GetSearchRecordingsDocument,
+	GetSearchRecordingsQuery,
+	GetSearchSeriesDocument,
+	GetSearchSeriesQuery,
+	GetSearchSponsorsDocument,
+	GetSearchSponsorsQuery,
+	GetSearchStoryProgramsDocument,
+	GetSearchStoryProgramsQuery,
 	RecordingContentType,
 } from '@lib/generated/graphql';
 import renderWithProviders from '@lib/test/renderWithProviders';
@@ -30,16 +44,55 @@ const empty = {
 	},
 };
 
-const loadData = buildLoader<GetSearchResultsPageDataQuery>(
-	GetSearchResultsPageDataDocument,
+const loadRecordings = buildLoader<GetSearchRecordingsQuery>(
+	GetSearchRecordingsDocument,
 	{
 		recordings: empty,
-		serieses: empty,
+	}
+);
+
+const loadSeries = buildLoader<GetSearchSeriesQuery>(GetSearchSeriesDocument, {
+	serieses: empty,
+});
+
+const loadConferences = buildLoader<GetSearchConferencesQuery>(
+	GetSearchConferencesDocument,
+	{
 		conferences: empty,
+	}
+);
+
+const loadSponsors = buildLoader<GetSearchSponsorsQuery>(
+	GetSearchSponsorsDocument,
+	{
 		sponsors: empty,
+	}
+);
+
+const loadPersons = buildLoader<GetSearchPersonsQuery>(
+	GetSearchPersonsDocument,
+	{
 		persons: empty,
+	}
+);
+
+const loadAudiobooks = buildLoader<GetSearchAudiobooksQuery>(
+	GetSearchAudiobooksDocument,
+	{
 		audiobooks: empty,
+	}
+);
+
+const loadMusicTracks = buildLoader<GetSearchMusicTracksQuery>(
+	GetSearchMusicTracksDocument,
+	{
 		musicTracks: empty,
+	}
+);
+
+const loadStoryPrograms = buildLoader<GetSearchStoryProgramsQuery>(
+	GetSearchStoryProgramsDocument,
+	{
 		storyPrograms: empty,
 	}
 );
@@ -49,7 +102,14 @@ describe('search', () => {
 		__loadQuery({
 			q: 'test',
 		});
-		loadData();
+		loadRecordings();
+		loadSeries();
+		loadConferences();
+		loadSponsors();
+		loadPersons();
+		loadAudiobooks();
+		loadMusicTracks();
+		loadStoryPrograms();
 	});
 
 	it('registers search paths', async () => {
@@ -79,7 +139,7 @@ describe('search', () => {
 	});
 
 	it('filters to presenters', async () => {
-		loadData({
+		loadRecordings({
 			recordings: {
 				nodes: [
 					{

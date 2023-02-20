@@ -28,7 +28,7 @@ const Tab: Record<string, string> = {
 	Stories: 'stories',
 };
 
-type TabId = ValueOf<typeof Tab>;
+export type TabId = ValueOf<typeof Tab>;
 
 type QueryShape = {
 	aggregate: {
@@ -168,7 +168,7 @@ function getData(result: QueryResult): QueryShape | undefined {
 	) as QueryShape;
 }
 
-export default function useSections(): {
+export default function useSections(tab: TabId): {
 	isLoading: boolean;
 	sections: (Section & {
 		getData: () => QueryShape | undefined;

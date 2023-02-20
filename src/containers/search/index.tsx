@@ -14,7 +14,7 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSections from './index.useSections';
+import useSections, { TabId } from './index.useSections';
 
 function SearchHead(): JSX.Element {
 	const intl = useIntl();
@@ -35,8 +35,8 @@ function SearchHead(): JSX.Element {
 }
 
 function Search(): JSX.Element {
-	const [tab, setTab] = useState('all');
-	const sections = useSections();
+	const [tab, setTab] = useState<TabId>('all');
+	const sections = useSections(tab);
 
 	return (
 		<>
@@ -93,7 +93,7 @@ function Search(): JSX.Element {
 
 export default withFailStates(Search, {
 	useShould404: () => false,
-	useIsLoading: () => useSections().isLoading,
+	useIsLoading: () => useSections('all').isLoading,
 	Loading: () => (
 		<>
 			<SearchHead />
