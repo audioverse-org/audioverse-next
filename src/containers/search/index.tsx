@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
@@ -35,9 +35,36 @@ function SearchHead(): JSX.Element {
 	);
 }
 
+function useOnScreen(ref: RefObject<HTMLElement>): boolean {
+	const [isIntersecting, setIntersecting] = useState(false);
+
+	const observer = useMemo(
+		() =>
+			new IntersectionObserver(([entry]) =>
+				setIntersecting(entry.isIntersecting)
+			),
+		[]
+	);
+
+	useEffect(() => {
+		observer.observe(ref.current as HTMLElement);
+		return () => observer.disconnect();
+	}, [ref, observer]);
+
+	return isIntersecting;
+}
+
 function Search(): JSX.Element {
 	const [tab, setTab] = useState<TabId>('all');
-	const { visible } = useSections(tab);
+	const { visible, loadMore, isLoading } = useSections(tab);
+	const endRef = useRef<HTMLDivElement>(null);
+	const shouldLoadMore = useOnScreen(endRef);
+
+	useEffect(() => {
+		if (tab !== 'all' && shouldLoadMore && !isLoading) {
+			loadMore();
+		}
+	}, [tab, shouldLoadMore, isLoading, loadMore]);
 
 	return (
 		<>
@@ -50,25 +77,29 @@ function Search(): JSX.Element {
 					onClick: () => setTab(id),
 				}))}
 			/>
-			{visible.map((s) => (
-				<div className={styles.section} key={s.id}>
-					<LineHeading>{s.heading}</LineHeading>
-					<CardGroup>
-						{s.nodes.map((e: InferrableEntity) => (
-							<CardInferred key={e.id} entity={e} />
-						))}
-					</CardGroup>
-					{s.hasNextPage && tab === 'all' && (
-						<Button
-							type="secondary"
-							text={s.seeAll}
-							IconRight={ForwardIcon}
-							className={styles.seeAllButton}
-							onClick={() => setTab(s.id)}
-						/>
-					)}
-				</div>
-			))}
+			{visible.map((s) => {
+				const nodes = tab === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+				return (
+					<div className={styles.section} key={s.id}>
+						<LineHeading>{s.heading}</LineHeading>
+						<CardGroup>
+							{nodes.map((e: InferrableEntity) => (
+								<CardInferred key={e.id} entity={e} />
+							))}
+						</CardGroup>
+						{s.hasNextPage && tab === 'all' && (
+							<Button
+								type="secondary"
+								text={s.seeAll}
+								IconRight={ForwardIcon}
+								className={styles.seeAllButton}
+								onClick={() => setTab(s.id)}
+							/>
+						)}
+					</div>
+				);
+			})}
+			<div ref={endRef} />
 		</>
 	);
 }

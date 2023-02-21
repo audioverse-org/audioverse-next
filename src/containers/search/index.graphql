@@ -4,7 +4,7 @@ query getSearchRecordings(
 	$first: Int!
 	$after: String
 ) {
-	recordings(language: $language, search: $term, first: $first, after: $after) {
+	sermons(language: $language, search: $term, first: $first, after: $after) {
 		aggregate {
 			count
 		}
