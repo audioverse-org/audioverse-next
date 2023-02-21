@@ -21,6 +21,7 @@ const PAGE_SIZE = 10;
 type Section = {
 	heading: JSX.Element;
 	seeAll?: JSX.Element;
+	document?: string;
 };
 
 export const definitions: Record<string, Section> = {
@@ -40,6 +41,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Presenters"
 			/>
 		),
+		document: GetSearchPersonsDocument,
 	},
 	teachings: {
 		heading: (
@@ -54,6 +56,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Teachings"
 			/>
 		),
+		document: GetSearchRecordingsDocument,
 	},
 	series: {
 		heading: (
@@ -65,6 +68,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Series"
 			/>
 		),
+		document: GetSearchSeriesDocument,
 	},
 	books: {
 		heading: (
@@ -76,6 +80,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Audiobooks"
 			/>
 		),
+		document: GetSearchAudiobooksDocument,
 	},
 	sponsors: {
 		heading: (
@@ -90,6 +95,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Sponsors"
 			/>
 		),
+		document: GetSearchSponsorsDocument,
 	},
 	conferences: {
 		heading: (
@@ -104,6 +110,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Conferences"
 			/>
 		),
+		document: GetSearchConferencesDocument,
 	},
 	music: {
 		heading: (
@@ -115,6 +122,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Music"
 			/>
 		),
+		document: GetSearchMusicTracksDocument,
 	},
 	stories: {
 		heading: (
@@ -126,6 +134,7 @@ export const definitions: Record<string, Section> = {
 				defaultMessage="See All Matching Stories"
 			/>
 		),
+		document: GetSearchStoryProgramsDocument,
 	},
 };
 
@@ -215,47 +224,21 @@ export default function useSections(tab: TabId): {
 			});
 	}
 
+	function useSearchQuery(tab: TabId) {
+		const doc = definitions[tab].document;
+		if (!doc) throw new Error('No document for tab');
+		return useInfiniteQuery(['search', tab, vars], f(doc), opts);
+	}
+
 	const results: Record<TabId, QueryResult> = {
-		presenters: useInfiniteQuery(
-			['search', 'presenters', vars],
-			f(GetSearchPersonsDocument),
-			opts
-		),
-		teachings: useInfiniteQuery(
-			['search', 'teachings', vars],
-			f(GetSearchRecordingsDocument),
-			opts
-		),
-		series: useInfiniteQuery(
-			['search', 'series', vars],
-			f(GetSearchSeriesDocument),
-			opts
-		),
-		books: useInfiniteQuery(
-			['search', 'books', vars],
-			f(GetSearchAudiobooksDocument),
-			opts
-		),
-		sponsors: useInfiniteQuery(
-			['search', 'sponsors', vars],
-			f(GetSearchSponsorsDocument),
-			opts
-		),
-		conferences: useInfiniteQuery(
-			['search', 'conferences', vars],
-			f(GetSearchConferencesDocument),
-			opts
-		),
-		music: useInfiniteQuery(
-			['search', 'music', vars],
-			f(GetSearchMusicTracksDocument),
-			opts
-		),
-		stories: useInfiniteQuery(
-			['search', 'stories', vars],
-			f(GetSearchStoryProgramsDocument),
-			opts
-		),
+		presenters: useSearchQuery('presenters'),
+		teachings: useSearchQuery('teachings'),
+		series: useSearchQuery('series'),
+		books: useSearchQuery('books'),
+		sponsors: useSearchQuery('sponsors'),
+		conferences: useSearchQuery('conferences'),
+		music: useSearchQuery('music'),
+		stories: useSearchQuery('stories'),
 	};
 
 	const entries = Object.entries(definitions);
