@@ -47,7 +47,7 @@ const empty = {
 const loadRecordings = buildLoader<GetSearchRecordingsQuery>(
 	GetSearchRecordingsDocument,
 	{
-		recordings: empty,
+		sermons: empty,
 	}
 );
 
@@ -110,6 +110,15 @@ describe('search', () => {
 		loadAudiobooks();
 		loadMusicTracks();
 		loadStoryPrograms();
+
+		// IntersectionObserver isn't available in test environment
+		const mockIntersectionObserver = jest.fn();
+		mockIntersectionObserver.mockReturnValue({
+			observe: () => null,
+			unobserve: () => null,
+			disconnect: () => null,
+		});
+		window.IntersectionObserver = mockIntersectionObserver;
 	});
 
 	it('registers search paths', async () => {
@@ -140,7 +149,7 @@ describe('search', () => {
 
 	it('filters to presenters', async () => {
 		loadRecordings({
-			recordings: {
+			sermons: {
 				nodes: [
 					{
 						__typename: 'Recording',
