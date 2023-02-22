@@ -199,11 +199,7 @@ function getNextPageParam(lastPage: {
 	return data?.pageInfo.hasNextPage ? data.pageInfo.endCursor : undefined;
 }
 
-const opts = {
-	getNextPageParam,
-};
-
-export default function useSections(tab: TabId): {
+export default function useSearch(tab: TabId): {
 	isLoading: boolean;
 	visible: RichSection[];
 	loadMore: () => void;
@@ -214,20 +210,16 @@ export default function useSections(tab: TabId): {
 		first: PAGE_SIZE,
 	};
 
-	function f(doc: string) {
-		return ({ pageParam = null }) =>
-			fetchApi<OuterData>(doc, {
-				variables: {
-					...vars,
-					after: pageParam,
-				},
-			});
-	}
-
 	function useSearchQuery(tab: TabId) {
 		const doc = definitions[tab].document;
 		if (!doc) throw new Error('No document for tab');
-		return useInfiniteQuery(['search', tab, vars], f(doc), opts);
+		const fn = ({ after = null }) =>
+			fetchApi<OuterData>(doc, {
+				variables: { ...vars, after },
+			});
+		return useInfiniteQuery(['search', tab, vars], fn, {
+			getNextPageParam,
+		});
 	}
 
 	const results: Record<TabId, QueryResult> = {
@@ -245,9 +237,7 @@ export default function useSections(tab: TabId): {
 
 	const visible =
 		tab === 'all'
-			? entries.filter(([k]) => {
-					return reduceInnerData(results[k]).nodes?.length;
-			  })
+			? entries.filter(([k]) => reduceInnerData(results[k]).nodes?.length)
 			: [entries.find(([k]) => k === tab) as [TabId, Section]];
 
 	const rich = visible.map(([k, s]) => {

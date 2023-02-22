@@ -14,7 +14,7 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSections, { TabId, definitions as tabs } from './index.useSections';
+import useSearch, { TabId, definitions as tabs } from './index.useSections';
 
 function SearchHead(): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because
@@ -56,7 +56,7 @@ function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 
 function Search(): JSX.Element {
 	const [tab, setTab] = useState<TabId>('all');
-	const { visible, loadMore, isLoading } = useSections(tab);
+	const { visible, loadMore, isLoading } = useSearch(tab);
 	const endRef = useRef<HTMLDivElement>(null);
 	const shouldLoadMore = useOnScreen(endRef);
 
@@ -106,7 +106,7 @@ function Search(): JSX.Element {
 
 export default withFailStates(Search, {
 	useShould404: () => false,
-	useIsLoading: () => useSections('all').isLoading,
+	useIsLoading: () => useSearch('all').isLoading,
 	Loading: () => (
 		<>
 			<SearchHead />
