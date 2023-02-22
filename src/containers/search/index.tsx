@@ -14,7 +14,7 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSearch, { FilterId, filters as tabs } from './index.useSearch';
+import useSearch, { FilterId, filters } from './index.useSearch';
 
 function SearchHead(): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because
@@ -70,7 +70,7 @@ function Search(): JSX.Element {
 		<>
 			<SearchHead />
 			<Mininav
-				items={Object.entries(tabs).map(([id, { heading }]) => ({
+				items={Object.entries(filters).map(([id, { heading }]) => ({
 					id,
 					label: heading,
 					isActive: tab === id,
