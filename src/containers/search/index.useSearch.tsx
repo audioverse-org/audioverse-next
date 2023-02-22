@@ -236,21 +236,21 @@ export default function useSearch(tab: FilterId): {
 		stories: useFilterQuery('stories'),
 	};
 
-	const entries = Object.entries(filters);
+	const entries = Object.entries(results);
 
 	const visible =
 		tab === 'all'
 			? entries.filter(([k]) => reduceInnerData(results[k]).nodes?.length)
-			: [entries.find(([k]) => k === tab) as [FilterId, Filter]];
+			: [entries.find(([k]) => k === tab) as [FilterId, QueryResult]];
 
-	const rich = visible.map(([k, s]) => {
-		const data = reduceInnerData(results[k]);
+	const rich = visible.map(([k, r]) => {
+		const data = reduceInnerData(r);
 		return {
-			...s,
+			...filters[k],
 			id: k,
 			innerData: data,
-			nodes: data?.nodes || [],
-			hasNextPage: results[k].hasNextPage || false,
+			nodes: data.nodes || [],
+			hasNextPage: r.hasNextPage || false,
 		};
 	});
 
@@ -259,9 +259,7 @@ export default function useSearch(tab: FilterId): {
 		visible: rich,
 		loadMore: () => {
 			const r = results[tab];
-			if (r.hasNextPage) {
-				r.fetchNextPage();
-			}
+			if (r.hasNextPage) r.fetchNextPage();
 		},
 	};
 }
