@@ -194,7 +194,7 @@ function getNextPageParam(lastPage: {
 	return data?.pageInfo.hasNextPage ? data.pageInfo.endCursor : undefined;
 }
 
-export default function useSearch(tab: FilterId): {
+export default function useSearch(filter: FilterId): {
 	isLoading: boolean;
 	visible: AugmentedFilter[];
 	loadMore: () => void;
@@ -205,8 +205,8 @@ export default function useSearch(tab: FilterId): {
 		first: PAGE_SIZE,
 	};
 
-	function useFilterQuery(tab: FilterId) {
-		const doc = filters[tab].document;
+	function useFilterQuery(filter: FilterId) {
+		const doc = filters[filter].document;
 		if (!doc) throw new Error('No document for filter');
 		const fn = ({ pageParam = null }) =>
 			fetchApi<OuterData>(doc, {
@@ -215,7 +215,7 @@ export default function useSearch(tab: FilterId): {
 					after: pageParam,
 				},
 			});
-		return useInfiniteQuery(['search', tab, vars], fn, {
+		return useInfiniteQuery(['search', filter, vars], fn, {
 			getNextPageParam,
 		});
 	}
@@ -234,9 +234,9 @@ export default function useSearch(tab: FilterId): {
 	const entries = Object.entries(results);
 
 	const visible =
-		tab === 'all'
+		filter === 'all'
 			? entries.filter(([k]) => reduceNodes(results[k]).length)
-			: [entries.find(([k]) => k === tab) as [FilterId, QueryResult]];
+			: [entries.find(([k]) => k === filter) as [FilterId, QueryResult]];
 
 	const augmented = visible.map(([k, r]) => ({
 		...filters[k],
@@ -249,7 +249,7 @@ export default function useSearch(tab: FilterId): {
 		isLoading: Object.values(results).some((r) => r.isLoading),
 		visible: augmented,
 		loadMore: () => {
-			const r = results[tab];
+			const r = results[filter];
 			if (r.hasNextPage) r.fetchNextPage();
 		},
 	};
