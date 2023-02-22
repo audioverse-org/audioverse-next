@@ -18,13 +18,13 @@ import { fetchApi } from '@lib/api/fetchApi';
 
 const PAGE_SIZE = 10;
 
-type Section = {
+type Filter = {
 	heading: JSX.Element;
 	seeAll?: JSX.Element;
 	document?: string;
 };
 
-export const definitions: Record<string, Section> = {
+export const filters: Record<string, Filter> = {
 	all: {
 		heading: <FormattedMessage id="search__allHeading" defaultMessage="All" />,
 	},
@@ -138,7 +138,7 @@ export const definitions: Record<string, Section> = {
 	},
 };
 
-export type TabId = keyof typeof definitions;
+export type FilterId = keyof typeof filters;
 
 type InnerData = {
 	aggregate: {
@@ -185,8 +185,8 @@ function reduceInnerData(result: QueryResult): InnerData {
 	};
 }
 
-type RichSection = Section & {
-	id: TabId;
+type AugmentedFilter = Filter & {
+	id: FilterId;
 	innerData: InnerData | undefined;
 	nodes: InferrableEntity[];
 	hasNextPage: boolean;
@@ -199,9 +199,9 @@ function getNextPageParam(lastPage: {
 	return data?.pageInfo.hasNextPage ? data.pageInfo.endCursor : undefined;
 }
 
-export default function useSearch(tab: TabId): {
+export default function useSearch(tab: FilterId): {
 	isLoading: boolean;
-	visible: RichSection[];
+	visible: AugmentedFilter[];
 	loadMore: () => void;
 } {
 	const vars = {
@@ -210,8 +210,8 @@ export default function useSearch(tab: TabId): {
 		first: PAGE_SIZE,
 	};
 
-	function useSearchQuery(tab: TabId) {
-		const doc = definitions[tab].document;
+	function useSearchQuery(tab: FilterId) {
+		const doc = filters[tab].document;
 		if (!doc) throw new Error('No document for tab');
 		const fn = ({ pageParam = null }) =>
 			fetchApi<OuterData>(doc, {
@@ -225,7 +225,7 @@ export default function useSearch(tab: TabId): {
 		});
 	}
 
-	const results: Record<TabId, QueryResult> = {
+	const results: Record<FilterId, QueryResult> = {
 		presenters: useSearchQuery('presenters'),
 		teachings: useSearchQuery('teachings'),
 		series: useSearchQuery('series'),
@@ -236,12 +236,12 @@ export default function useSearch(tab: TabId): {
 		stories: useSearchQuery('stories'),
 	};
 
-	const entries = Object.entries(definitions);
+	const entries = Object.entries(filters);
 
 	const visible =
 		tab === 'all'
 			? entries.filter(([k]) => reduceInnerData(results[k]).nodes?.length)
-			: [entries.find(([k]) => k === tab) as [TabId, Section]];
+			: [entries.find(([k]) => k === tab) as [FilterId, Filter]];
 
 	const rich = visible.map(([k, s]) => {
 		const data = reduceInnerData(results[k]);
