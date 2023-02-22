@@ -97,14 +97,12 @@ export default function useSearch(filter: EntityFilterId): {
 		music: useFilterQuery('music'),
 		stories: useFilterQuery('stories'),
 	};
-
+	const result = results[filter];
 	const entries = Object.entries(results);
-
 	const visible =
 		filter === 'all'
 			? entries.filter(([, r]) => reduceNodes(r).length)
 			: [entries.find(([k]) => k === filter) as [EntityFilterId, QueryResult]];
-
 	const augmented = visible.map(([k, r]) => ({
 		...filters[k],
 		id: k,
@@ -115,7 +113,6 @@ export default function useSearch(filter: EntityFilterId): {
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
 		visible: augmented,
-		loadMore: () =>
-			results[filter].hasNextPage && results[filter].fetchNextPage(),
+		loadMore: () => result.hasNextPage && result.fetchNextPage(),
 	};
 }
