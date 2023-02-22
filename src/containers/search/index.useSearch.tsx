@@ -184,7 +184,7 @@ function reduceNodes(result: QueryResult): InferrableEntity[] {
 	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
 	const datas: InnerData[] = values.filter(isInnerData);
 
-	return datas.flatMap((d) => d.nodes || []) || [];
+	return datas.map((d) => d.nodes || []).flat();
 }
 
 function getNextPageParam(lastPage: {
