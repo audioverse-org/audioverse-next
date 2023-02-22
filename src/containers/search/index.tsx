@@ -16,6 +16,7 @@ import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
 import useSearch from './index.useSearch';
 import { EntityFilterId, filters } from './index.filters';
+import isServerSide from '@lib/isServerSide';
 
 function SearchHead(): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because
@@ -38,16 +39,17 @@ function SearchHead(): JSX.Element {
 
 function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	const [isIntersecting, setIntersecting] = useState(false);
+	const enabled = !isServerSide();
 
-	const observer = useMemo(
-		() =>
-			new IntersectionObserver(([entry]) =>
-				setIntersecting(entry.isIntersecting)
-			),
-		[]
-	);
+	const observer = useMemo(() => {
+		if (!enabled) return null;
+		return new IntersectionObserver(([entry]) =>
+			setIntersecting(entry.isIntersecting)
+		);
+	}, [enabled]);
 
 	useEffect(() => {
+		if (!observer) return;
 		observer.observe(ref.current as HTMLElement);
 		return () => observer.disconnect();
 	}, [ref, observer]);
