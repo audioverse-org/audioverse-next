@@ -41,6 +41,7 @@ const empty = {
 	nodes: [],
 	pageInfo: {
 		hasNextPage: false,
+		endCursor: null,
 	},
 };
 
@@ -150,6 +151,9 @@ describe('search', () => {
 	it('filters to presenters', async () => {
 		loadRecordings({
 			sermons: {
+				aggregate: {
+					count: 1,
+				},
 				nodes: [
 					{
 						__typename: 'Recording',
@@ -180,5 +184,31 @@ describe('search', () => {
 				name: 'Presenters',
 			})
 		).not.toBeInTheDocument();
+	});
+
+	it('shows teachings on teachings tab', async () => {
+		loadRecordings({
+			sermons: {
+				aggregate: {
+					count: 1,
+				},
+				nodes: [
+					{
+						__typename: 'Recording',
+						id: 'recording',
+						title: 'the_recording_title',
+						recordingContentType: RecordingContentType.Sermon,
+						persons: [],
+						canonicalPath: '/en/recordings/recording',
+					},
+				],
+			},
+		});
+
+		await renderPage();
+
+		userEvent.click(screen.getByRole('button', { name: 'Teachings' }));
+
+		await screen.findByText('the_recording_title');
 	});
 });

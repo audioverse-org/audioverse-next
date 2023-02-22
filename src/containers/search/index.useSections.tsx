@@ -173,14 +173,14 @@ function isInnerData(d: unknown): d is InnerData {
 	);
 }
 
-function reduceInnerData(result: QueryResult): InnerData | undefined {
-	const pages = result?.data?.pages || [];
-	const values = pages.flatMap((p) => Object.values(p));
-	const datas = values.filter(isInnerData);
+function reduceInnerData(result: QueryResult): InnerData {
+	const pages: OuterData[] = result?.data?.pages || [];
+	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
+	const datas: InnerData[] = values.filter(isInnerData);
 
 	return {
 		aggregate: datas[0]?.aggregate,
-		nodes: datas.flatMap((d) => d.nodes || []),
+		nodes: datas.flatMap((d) => d.nodes || []) || [],
 		pageInfo: datas[datas.length - 1]?.pageInfo,
 	};
 }
@@ -245,7 +245,9 @@ export default function useSections(tab: TabId): {
 
 	const visible =
 		tab === 'all'
-			? entries.filter(([k]) => reduceInnerData(results[k])?.nodes?.length)
+			? entries.filter(([k]) => {
+					return reduceInnerData(results[k]).nodes?.length;
+			  })
 			: [entries.find(([k]) => k === tab) as [TabId, Section]];
 
 	const rich = visible.map(([k, s]) => {
