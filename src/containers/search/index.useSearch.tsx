@@ -54,11 +54,11 @@ function reduceNodes(result: QueryResult): InferrableEntity[] {
 	return datas.map((d) => d.nodes || []).flat();
 }
 
-function getNextPageParam(lastPage: {
-	[queryName: string]: InnerData | string;
-}) {
-	const data = Object.values(lastPage).find(isInnerData);
-	return data?.pageInfo.hasNextPage ? data.pageInfo.endCursor : undefined;
+function getNextPageParam(lastPage: OuterData) {
+	const d = Object.values(lastPage).find(isInnerData);
+	if (!d) return undefined;
+	const p = d.pageInfo;
+	return p.hasNextPage ? p.endCursor : undefined;
 }
 
 export default function useSearch(filter: EntityFilterId): {
