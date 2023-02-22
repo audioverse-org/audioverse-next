@@ -180,7 +180,7 @@ function isInnerData(d: unknown): d is InnerData {
 }
 
 function reduceNodes(result: QueryResult): InferrableEntity[] {
-	const pages: OuterData[] = result?.data?.pages || [];
+	const pages: OuterData[] = result.data?.pages || [];
 	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
 	const datas: InnerData[] = values.filter(isInnerData);
 
