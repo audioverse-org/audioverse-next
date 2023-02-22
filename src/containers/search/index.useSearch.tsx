@@ -210,9 +210,9 @@ export default function useSearch(tab: FilterId): {
 		first: PAGE_SIZE,
 	};
 
-	function useSearchQuery(tab: FilterId) {
+	function useFilterQuery(tab: FilterId) {
 		const doc = filters[tab].document;
-		if (!doc) throw new Error('No document for tab');
+		if (!doc) throw new Error('No document for filter');
 		const fn = ({ pageParam = null }) =>
 			fetchApi<OuterData>(doc, {
 				variables: {
@@ -226,14 +226,14 @@ export default function useSearch(tab: FilterId): {
 	}
 
 	const results: Record<FilterId, QueryResult> = {
-		presenters: useSearchQuery('presenters'),
-		teachings: useSearchQuery('teachings'),
-		series: useSearchQuery('series'),
-		books: useSearchQuery('books'),
-		sponsors: useSearchQuery('sponsors'),
-		conferences: useSearchQuery('conferences'),
-		music: useSearchQuery('music'),
-		stories: useSearchQuery('stories'),
+		presenters: useFilterQuery('presenters'),
+		teachings: useFilterQuery('teachings'),
+		series: useFilterQuery('series'),
+		books: useFilterQuery('books'),
+		sponsors: useFilterQuery('sponsors'),
+		conferences: useFilterQuery('conferences'),
+		music: useFilterQuery('music'),
+		stories: useFilterQuery('stories'),
 	};
 
 	const entries = Object.entries(filters);
