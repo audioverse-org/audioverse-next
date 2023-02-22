@@ -213,9 +213,12 @@ export default function useSearch(tab: TabId): {
 	function useSearchQuery(tab: TabId) {
 		const doc = definitions[tab].document;
 		if (!doc) throw new Error('No document for tab');
-		const fn = ({ after = null }) =>
+		const fn = ({ pageParam = null }) =>
 			fetchApi<OuterData>(doc, {
-				variables: { ...vars, after },
+				variables: {
+					...vars,
+					after: pageParam,
+				},
 			});
 		return useInfiniteQuery(['search', tab, vars], fn, {
 			getNextPageParam,
