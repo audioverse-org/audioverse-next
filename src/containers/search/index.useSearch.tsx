@@ -24,6 +24,31 @@ type Filter = {
 	document?: string;
 };
 
+export type FilterId = keyof typeof filters;
+
+type InnerData = {
+	aggregate: {
+		count: number;
+	} | null;
+	nodes: InferrableEntity[] | null;
+	pageInfo: {
+		hasNextPage: boolean;
+		endCursor: string | null;
+	};
+};
+
+type OuterData = {
+	[queryName: string]: InnerData | string;
+};
+
+type QueryResult = InfiniteQueryObserverResult<OuterData>;
+
+type AugmentedFilter = Filter & {
+	id: FilterId;
+	nodes: InferrableEntity[];
+	hasNextPage: boolean;
+};
+
 export const filters: Record<string, Filter> = {
 	all: {
 		heading: <FormattedMessage id="search__allHeading" defaultMessage="All" />,
@@ -138,25 +163,6 @@ export const filters: Record<string, Filter> = {
 	},
 };
 
-export type FilterId = keyof typeof filters;
-
-type InnerData = {
-	aggregate: {
-		count: number;
-	} | null;
-	nodes: InferrableEntity[] | null;
-	pageInfo: {
-		hasNextPage: boolean;
-		endCursor: string | null;
-	};
-};
-
-type OuterData = {
-	[queryName: string]: InnerData | string;
-};
-
-type QueryResult = InfiniteQueryObserverResult<OuterData>;
-
 function isObject(d: unknown): d is Record<string, unknown> {
 	return typeof d === 'object' && d !== null;
 }
@@ -180,12 +186,6 @@ function reduceNodes(result: QueryResult): InferrableEntity[] {
 
 	return datas.flatMap((d) => d.nodes || []) || [];
 }
-
-type AugmentedFilter = Filter & {
-	id: FilterId;
-	nodes: InferrableEntity[];
-	hasNextPage: boolean;
-};
 
 function getNextPageParam(lastPage: {
 	[queryName: string]: InnerData | string;
