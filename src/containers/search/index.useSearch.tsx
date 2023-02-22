@@ -163,7 +163,7 @@ function isObject(d: unknown): d is Record<string, unknown> {
 
 function isInnerData(d: unknown): d is InnerData {
 	if (!isObject(d)) return false;
-	const { aggregate, nodes, pageInfo } = d as Record<string, unknown>;
+	const { aggregate, nodes, pageInfo } = d;
 	return (
 		(aggregate === null || isObject(aggregate)) &&
 		Array.isArray(nodes) &&
