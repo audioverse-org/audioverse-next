@@ -173,16 +173,12 @@ function isInnerData(d: unknown): d is InnerData {
 	);
 }
 
-function reduceInnerData(result: QueryResult): InnerData {
+function reduceNodes(result: QueryResult): InferrableEntity[] {
 	const pages: OuterData[] = result?.data?.pages || [];
 	const values: (InnerData | string)[] = pages.flatMap((p) => Object.values(p));
 	const datas: InnerData[] = values.filter(isInnerData);
 
-	return {
-		aggregate: datas[0]?.aggregate,
-		nodes: datas.flatMap((d) => d.nodes || []) || [],
-		pageInfo: datas[datas.length - 1]?.pageInfo,
-	};
+	return datas.flatMap((d) => d.nodes || []) || [];
 }
 
 type AugmentedFilter = Filter & {
@@ -239,18 +235,15 @@ export default function useSearch(tab: FilterId): {
 
 	const visible =
 		tab === 'all'
-			? entries.filter(([k]) => reduceInnerData(results[k]).nodes?.length)
+			? entries.filter(([k]) => reduceNodes(results[k]).length)
 			: [entries.find(([k]) => k === tab) as [FilterId, QueryResult]];
 
-	const augmented = visible.map(([k, r]) => {
-		const data = reduceInnerData(r);
-		return {
-			...filters[k],
-			id: k,
-			nodes: data.nodes || [],
-			hasNextPage: r.hasNextPage || false,
-		};
-	});
+	const augmented = visible.map(([k, r]) => ({
+		...filters[k],
+		id: k,
+		nodes: reduceNodes(r),
+		hasNextPage: r.hasNextPage || false,
+	}));
 
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
