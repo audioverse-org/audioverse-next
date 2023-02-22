@@ -242,7 +242,7 @@ export default function useSearch(tab: FilterId): {
 			? entries.filter(([k]) => reduceInnerData(results[k]).nodes?.length)
 			: [entries.find(([k]) => k === tab) as [FilterId, QueryResult]];
 
-	const rich = visible.map(([k, r]) => {
+	const augmented = visible.map(([k, r]) => {
 		const data = reduceInnerData(r);
 		return {
 			...filters[k],
@@ -254,7 +254,7 @@ export default function useSearch(tab: FilterId): {
 
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
-		visible: rich,
+		visible: augmented,
 		loadMore: () => {
 			const r = results[tab];
 			if (r.hasNextPage) r.fetchNextPage();
