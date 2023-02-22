@@ -235,7 +235,7 @@ export default function useSearch(filter: FilterId): {
 
 	const visible =
 		filter === 'all'
-			? entries.filter(([k]) => reduceNodes(results[k]).length)
+			? entries.filter(([, r]) => reduceNodes(r).length)
 			: [entries.find(([k]) => k === filter) as [FilterId, QueryResult]];
 
 	const augmented = visible.map(([k, r]) => ({
