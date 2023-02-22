@@ -83,6 +83,7 @@ export default function useSearch(filter: EntityFilterId): {
 			});
 		return useInfiniteQuery(['search', filter, vars], fn, {
 			getNextPageParam,
+			enabled: !!vars.term,
 		});
 	}
 
