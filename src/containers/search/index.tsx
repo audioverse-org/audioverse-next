@@ -14,7 +14,8 @@ import styles from './index.module.scss';
 import Head from 'next/head';
 import Mininav from '@components/molecules/mininav';
 import { useQueryString } from '@lib/useQueryString';
-import useSearch, { FilterId, filters } from './index.useSearch';
+import useSearch from './index.useSearch';
+import { EntityFilterId, filters } from './index.filters';
 
 function SearchHead(): JSX.Element {
 	// WORKAROUND: We can't use the <FormattedMessage> component here because
@@ -55,7 +56,7 @@ function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 }
 
 function Search(): JSX.Element {
-	const [tab, setTab] = useState<FilterId>('all');
+	const [tab, setTab] = useState<EntityFilterId>('all');
 	const { visible, loadMore, isLoading } = useSearch(tab);
 	const endRef = useRef<HTMLDivElement>(null);
 	const endReached = useOnScreen(endRef);

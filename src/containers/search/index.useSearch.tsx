@@ -1,30 +1,11 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { InferrableEntity } from '@components/molecules/card/inferred';
 import { useQueryString } from '@lib/useQueryString';
 import { useLanguageId } from '@lib/useLanguageId';
-import {
-	GetSearchAudiobooksDocument,
-	GetSearchConferencesDocument,
-	GetSearchMusicTracksDocument,
-	GetSearchPersonsDocument,
-	GetSearchRecordingsDocument,
-	GetSearchSeriesDocument,
-	GetSearchSponsorsDocument,
-	GetSearchStoryProgramsDocument,
-} from '@lib/generated/graphql';
 import { InfiniteQueryObserverResult, useInfiniteQuery } from 'react-query';
 import { fetchApi } from '@lib/api/fetchApi';
+import { EntityFilter, EntityFilterId, filters } from './index.filters';
 
 const PAGE_SIZE = 10;
-
-type Filter = {
-	heading: JSX.Element;
-	seeAll?: JSX.Element;
-	document?: string;
-};
-
-export type FilterId = keyof typeof filters;
 
 type InnerData = {
 	aggregate: {
@@ -43,124 +24,10 @@ type OuterData = {
 
 type QueryResult = InfiniteQueryObserverResult<OuterData>;
 
-type AugmentedFilter = Filter & {
-	id: FilterId;
+type AugmentedFilter = EntityFilter & {
+	id: EntityFilterId;
 	nodes: InferrableEntity[];
 	hasNextPage: boolean;
-};
-
-export const filters: Record<string, Filter> = {
-	all: {
-		heading: <FormattedMessage id="search__allHeading" defaultMessage="All" />,
-	},
-	presenters: {
-		heading: (
-			<FormattedMessage
-				id="search__presentersHeading"
-				defaultMessage="Presenters"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__presentersSeeAll"
-				defaultMessage="See All Matching Presenters"
-			/>
-		),
-		document: GetSearchPersonsDocument,
-	},
-	teachings: {
-		heading: (
-			<FormattedMessage
-				id="search__teachingsHeading"
-				defaultMessage="Teachings"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__teachingsSeeAll"
-				defaultMessage="See All Matching Teachings"
-			/>
-		),
-		document: GetSearchRecordingsDocument,
-	},
-	series: {
-		heading: (
-			<FormattedMessage id="search__seriesHeading" defaultMessage="Series" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__seriesSeeAll"
-				defaultMessage="See All Matching Series"
-			/>
-		),
-		document: GetSearchSeriesDocument,
-	},
-	books: {
-		heading: (
-			<FormattedMessage id="search__booksHeading" defaultMessage="Audiobooks" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__booksSeeAll"
-				defaultMessage="See All Matching Audiobooks"
-			/>
-		),
-		document: GetSearchAudiobooksDocument,
-	},
-	sponsors: {
-		heading: (
-			<FormattedMessage
-				id="search__sponsorsHeading"
-				defaultMessage="Sponsors"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__sponsorsSeeAll"
-				defaultMessage="See All Matching Sponsors"
-			/>
-		),
-		document: GetSearchSponsorsDocument,
-	},
-	conferences: {
-		heading: (
-			<FormattedMessage
-				id="search__conferencesHeading"
-				defaultMessage="Conferences"
-			/>
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__conferencesSeeAll"
-				defaultMessage="See All Matching Conferences"
-			/>
-		),
-		document: GetSearchConferencesDocument,
-	},
-	music: {
-		heading: (
-			<FormattedMessage id="search__musicHeading" defaultMessage="Music" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__musicSeeAll"
-				defaultMessage="See All Matching Music"
-			/>
-		),
-		document: GetSearchMusicTracksDocument,
-	},
-	stories: {
-		heading: (
-			<FormattedMessage id="search__storiesHeading" defaultMessage="Stories" />
-		),
-		seeAll: (
-			<FormattedMessage
-				id="search__storiesSeeAll"
-				defaultMessage="See All Matching Stories"
-			/>
-		),
-		document: GetSearchStoryProgramsDocument,
-	},
 };
 
 function isObject(d: unknown): d is Record<string, unknown> {
@@ -194,7 +61,7 @@ function getNextPageParam(lastPage: {
 	return data?.pageInfo.hasNextPage ? data.pageInfo.endCursor : undefined;
 }
 
-export default function useSearch(filter: FilterId): {
+export default function useSearch(filter: EntityFilterId): {
 	isLoading: boolean;
 	visible: AugmentedFilter[];
 	loadMore: () => void;
@@ -205,7 +72,7 @@ export default function useSearch(filter: FilterId): {
 		first: PAGE_SIZE,
 	};
 
-	function useFilterQuery(filter: FilterId) {
+	function useFilterQuery(filter: EntityFilterId) {
 		const doc = filters[filter].document;
 		if (!doc) throw new Error('No document for filter');
 		const fn = ({ pageParam = null }) =>
@@ -220,7 +87,7 @@ export default function useSearch(filter: FilterId): {
 		});
 	}
 
-	const results: Record<FilterId, QueryResult> = {
+	const results: Record<EntityFilterId, QueryResult> = {
 		presenters: useFilterQuery('presenters'),
 		teachings: useFilterQuery('teachings'),
 		series: useFilterQuery('series'),
@@ -236,7 +103,7 @@ export default function useSearch(filter: FilterId): {
 	const visible =
 		filter === 'all'
 			? entries.filter(([, r]) => reduceNodes(r).length)
-			: [entries.find(([k]) => k === filter) as [FilterId, QueryResult]];
+			: [entries.find(([k]) => k === filter) as [EntityFilterId, QueryResult]];
 
 	const augmented = visible.map(([k, r]) => ({
 		...filters[k],
