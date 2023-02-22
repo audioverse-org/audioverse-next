@@ -115,9 +115,7 @@ export default function useSearch(filter: EntityFilterId): {
 	return {
 		isLoading: Object.values(results).some((r) => r.isLoading),
 		visible: augmented,
-		loadMore: () => {
-			const r = results[filter];
-			if (r.hasNextPage) r.fetchNextPage();
-		},
+		loadMore: () =>
+			results[filter].hasNextPage && results[filter].fetchNextPage(),
 	};
 }
