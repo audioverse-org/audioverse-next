@@ -58,13 +58,13 @@ function Search(): JSX.Element {
 	const [tab, setTab] = useState<FilterId>('all');
 	const { visible, loadMore, isLoading } = useSearch(tab);
 	const endRef = useRef<HTMLDivElement>(null);
-	const shouldLoadMore = useOnScreen(endRef);
+	const endReached = useOnScreen(endRef);
 
 	useEffect(() => {
-		if (tab !== 'all' && shouldLoadMore && !isLoading) {
+		if (tab !== 'all' && endReached && !isLoading) {
 			loadMore();
 		}
-	}, [tab, shouldLoadMore, isLoading, loadMore]);
+	}, [tab, endReached, isLoading, loadMore]);
 
 	return (
 		<>
