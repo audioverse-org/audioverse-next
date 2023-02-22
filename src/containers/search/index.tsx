@@ -1,6 +1,5 @@
 import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
-import NotFoundBase from '@components/organisms/notFound';
 import LineHeading from '@components/atoms/lineHeading';
 import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
@@ -106,18 +105,11 @@ function Search(): JSX.Element {
 }
 
 export default withFailStates(Search, {
-	useShould404: () => false,
 	useIsLoading: () => useSearch('all').isLoading,
 	Loading: () => (
 		<>
 			<SearchHead />
 			<LoadingCards />
-		</>
-	),
-	NotFound: () => (
-		<>
-			<SearchHead />
-			<NotFoundBase />
 		</>
 	),
 });
