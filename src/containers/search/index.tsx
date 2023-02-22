@@ -61,9 +61,7 @@ function Search(): JSX.Element {
 	const endReached = useOnScreen(endRef);
 
 	useEffect(() => {
-		if (tab !== 'all' && endReached && !isLoading) {
-			loadMore();
-		}
+		tab !== 'all' && endReached && !isLoading && loadMore();
 	}, [tab, endReached, isLoading, loadMore]);
 
 	return (
