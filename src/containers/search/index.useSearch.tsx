@@ -187,7 +187,6 @@ function reduceInnerData(result: QueryResult): InnerData {
 
 type AugmentedFilter = Filter & {
 	id: FilterId;
-	innerData: InnerData | undefined;
 	nodes: InferrableEntity[];
 	hasNextPage: boolean;
 };
@@ -248,7 +247,6 @@ export default function useSearch(tab: FilterId): {
 		return {
 			...filters[k],
 			id: k,
-			innerData: data,
 			nodes: data.nodes || [],
 			hasNextPage: r.hasNextPage || false,
 		};
