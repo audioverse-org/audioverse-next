@@ -99,10 +99,9 @@ export default function useSearch(filter: EntityFilterId): {
 	};
 	const result = results[filter];
 	const entries = Object.entries(results);
-	const visible =
-		filter === 'all'
-			? entries.filter(([, r]) => reduceNodes(r).length)
-			: [entries.find(([k]) => k === filter) as [EntityFilterId, QueryResult]];
+	const nonEmpty = entries.filter(([, r]) => reduceNodes(r).length);
+	const visible: [EntityFilterId, QueryResult][] =
+		filter === 'all' ? nonEmpty : [[filter, result]];
 	const augmented = visible.map(([k, r]) => ({
 		...filters[k],
 		id: k,
