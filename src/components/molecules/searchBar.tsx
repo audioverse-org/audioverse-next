@@ -72,7 +72,7 @@ export default function SearchBar({
 				</div>
 			</form>
 			<button
-				className={clsx(term ?? styles.hide)}
+				className={clsx(styles.cancel, term ?? styles.hide)}
 				onClick={() => onChange(undefined)}
 			>
 				<FormattedMessage
