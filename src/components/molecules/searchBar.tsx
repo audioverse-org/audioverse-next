@@ -24,6 +24,9 @@ export default function SearchBar({
 	const languageRoute = useLanguageRoute();
 	const router = useRouter();
 	const [isFocused, setIsFocused] = useState(false);
+	const { pathname } = useRouter();
+	const shouldHideCancelButton =
+		pathname.includes('/[language]/search') || term === undefined;
 
 	return (
 		<div className={clsx(styles.base, className)}>
@@ -72,7 +75,7 @@ export default function SearchBar({
 				</div>
 			</form>
 			<button
-				className={clsx(styles.cancel, term ?? styles.hide)}
+				className={clsx(styles.cancel, shouldHideCancelButton && styles.hide)}
 				onClick={() => onChange(undefined)}
 			>
 				<FormattedMessage
