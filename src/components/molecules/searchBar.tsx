@@ -58,7 +58,7 @@ export default function SearchBar({
 						}
 					/>
 					{term && (
-						<div className={clsx(styles.clear, term ? '' : styles.clearHidden)}>
+						<div className={clsx(styles.clear, term ?? styles.hide)}>
 							<button
 								onClick={(e) => {
 									e.preventDefault();
@@ -67,16 +67,19 @@ export default function SearchBar({
 							>
 								<IconExit width={24} height={24} />
 							</button>
-							<button onClick={() => onChange(undefined)}>
-								<FormattedMessage
-									id="molecule-searchBar__cancel"
-									defaultMessage="Cancel"
-								/>
-							</button>
 						</div>
 					)}
 				</div>
 			</form>
+			<button
+				className={clsx(term ?? styles.hide)}
+				onClick={() => onChange(undefined)}
+			>
+				<FormattedMessage
+					id="molecule-searchBar__cancel"
+					defaultMessage="Cancel"
+				/>
+			</button>
 		</div>
 	);
 }
