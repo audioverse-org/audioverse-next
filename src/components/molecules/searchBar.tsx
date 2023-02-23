@@ -35,7 +35,7 @@ export default function SearchBar({
 						name="q"
 						type="search"
 						autoComplete="off"
-						value={term}
+						value={term ?? ''}
 						onChange={({ target }) => onChange(target.value)}
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setIsFocused(false)}
