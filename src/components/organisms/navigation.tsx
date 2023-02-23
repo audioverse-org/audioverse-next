@@ -32,7 +32,7 @@ const Navigation = ({
 }: {
 	onExit: () => void;
 	searchTerm: string | undefined;
-	onSearchChange: (term: string) => void;
+	onSearchChange: (term: string | undefined) => void;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
 	const intl = useIntl();

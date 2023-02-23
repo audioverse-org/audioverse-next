@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { makeSearchRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -67,7 +67,12 @@ export default function SearchBar({
 							>
 								<IconExit width={24} height={24} />
 							</a>
-							<button onClick={() => onChange(undefined)}>Cancel</button>
+							<button onClick={() => onChange(undefined)}>
+								<FormattedMessage
+									id="molecule-searchBar__cancel"
+									defaultMessage="Cancel"
+								/>
+							</button>
 						</div>
 					)}
 				</div>
