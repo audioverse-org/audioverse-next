@@ -8,6 +8,7 @@ import SearchBar from '@components/molecules/searchBar';
 import styles from './andNavigation.module.scss';
 import MobileHeader from '@components/organisms/mobileHeader';
 import Drawer from '@components/organisms/drawer';
+import SearchResults from '@containers/search';
 
 export default function AndNavigation({
 	children,
@@ -49,7 +50,7 @@ export default function AndNavigation({
 								shouldShowSearch && styles.searchShown
 							)}
 						/>
-						<div>{children}</div>
+						{term ? <SearchResults term={term} /> : children}
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@ import { useQueryString } from '@lib/useQueryString';
 import { useLanguageId } from '@lib/useLanguageId';
 import { InfiniteQueryObserverResult, useInfiniteQuery } from 'react-query';
 import { fetchApi } from '@lib/api/fetchApi';
-import { EntityFilter, EntityFilterId, filters } from './index.filters';
+import { EntityFilter, EntityFilterId, filters } from './searchResults.filters';
 
 const PAGE_SIZE = 10;
 
@@ -60,13 +60,16 @@ function getNextPageParam(lastPage: OuterData) {
 	return p.hasNextPage ? p.endCursor : undefined;
 }
 
-export default function useSearch(filter: EntityFilterId): {
+export default function useResults(
+	filter: EntityFilterId,
+	term: string
+): {
 	isLoading: boolean;
 	visible: AugmentedFilter[];
 	loadMore: () => void;
 } {
 	const vars = {
-		term: useQueryString('q') || '',
+		term,
 		language: useLanguageId(),
 		first: PAGE_SIZE,
 	};

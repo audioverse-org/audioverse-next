@@ -6155,6 +6155,86 @@ export type GetNotFoundPageDataQuery = { __typename?: 'Query', websiteRecentReco
 
 export type RecordingFragment = { __typename?: 'Recording', id: string | number, title: string, contentType: RecordingContentType, description: string | null, recordingDate: string | null, sequenceIndex: number | null, canonicalUrl: string, shareUrl: string, copyrightYear: number | null, canonicalPath: string, duration: number, isDownloadAllowed: boolean, speakers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, attachments: Array<{ __typename?: 'Attachment', filename: string, url: string }>, imageWithFallback: { __typename?: 'Image', url: string }, recordingTags: { __typename?: 'RecordingTagConnection', nodes: Array<{ __typename?: 'RecordingTag', tag: { __typename?: 'Tag', id: string | number, name: string } }> | null }, sponsor: { __typename?: 'Sponsor', title: string, canonicalPath: string } | null, sequence: { __typename?: 'Sequence', id: string | number, title: string, contentType: SequenceContentType, canonicalPath: string, recordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sequence: { __typename?: 'Sequence', id: string | number, title: string, contentType: SequenceContentType, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } } | null, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null } } | null, collection: { __typename?: 'Collection', title: string, canonicalPath: string } | null, transcript: { __typename?: 'Transcript', text: string } | null, sequencePreviousRecording: { __typename?: 'Recording', canonicalPath: string } | null, sequenceNextRecording: { __typename?: 'Recording', canonicalPath: string } | null, distributionAgreement: { __typename?: 'DistributionAgreement', sponsor: { __typename?: 'Sponsor', title: string } | null, license: { __typename?: 'License', summary: string } | null } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }>, videoDownloads: Array<{ __typename?: 'VideoFile', url: string, filesize: string, height: number, width: number }>, audioDownloads: Array<{ __typename?: 'AudioFile', url: string, filesize: string, bitrate: number }> };
 
+export type GetSearchRecordingsQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchRecordingsQuery = { __typename?: 'Query', sermons: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, sequence: { __typename?: 'Sequence', id: string | number, canonicalPath: string, contentType: SequenceContentType, title: string, image: { __typename?: 'Image', url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null } | null, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sponsor: { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null } | null, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchSeriesQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchSeriesQuery = { __typename?: 'Query', serieses: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sequence', id: string | number, title: string, canonicalPath: string, contentType: SequenceContentType, duration: number, summary: string, speakers: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, sequenceWriters: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, allRecordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchConferencesQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchConferencesQuery = { __typename?: 'Query', conferences: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Collection', id: string | number, canonicalPath: string, title: string, startDate: string | null, endDate: string | null, duration: number, collectionContentType: CollectionContentType, image: { __typename?: 'Image', id: string | number, url: string } | null, allSequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, allRecordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchSponsorsQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchSponsorsQuery = { __typename?: 'Query', sponsors: { __typename?: 'SponsorConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null, collections: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, sequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchPersonsQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchPersonsQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Person', id: string | number, name: string, canonicalPath: string, image: { __typename?: 'Image', id: string | number, url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchAudiobooksQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchAudiobooksQuery = { __typename?: 'Query', audiobooks: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sequence', id: string | number, title: string, canonicalPath: string, contentType: SequenceContentType, duration: number, summary: string, speakers: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, sequenceWriters: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, allRecordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchMusicTracksQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchMusicTracksQuery = { __typename?: 'Query', musicTracks: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, sequence: { __typename?: 'Sequence', id: string | number, canonicalPath: string, contentType: SequenceContentType, title: string, image: { __typename?: 'Image', url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null } | null, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sponsor: { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null } | null, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
+export type GetSearchStoryProgramsQueryVariables = Exact<{
+  language: Language;
+  term: Scalars['String'];
+  first: Scalars['Int'];
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetSearchStoryProgramsQuery = { __typename?: 'Query', storyPrograms: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Collection', id: string | number, canonicalPath: string, title: string, startDate: string | null, endDate: string | null, duration: number, collectionContentType: CollectionContentType, image: { __typename?: 'Image', id: string | number, url: string } | null, allSequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, allRecordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
+
 export type SequenceFragment = { __typename?: 'Sequence', id: string | number, title: string, contentType: SequenceContentType, duration: number, description: string, startDate: string | null, endDate: string | null, shareUrl: string, collection: { __typename?: 'Collection', title: string, canonicalPath: string } | null, image: { __typename?: 'Image', url: string } | null, sponsor: { __typename?: 'Sponsor', title: string, canonicalPath: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, sequence: { __typename?: 'Sequence', id: string | number, canonicalPath: string, contentType: SequenceContentType, title: string, image: { __typename?: 'Image', url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null } | null, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sponsor: { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null } | null, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null } };
 
 export type TestimoniesFragment = { __typename?: 'Testimony', id: string | number, body: string, author: string };
@@ -6661,86 +6741,6 @@ export type GetSearchResultsCollectionsQueryVariables = Exact<{
 
 
 export type GetSearchResultsCollectionsQuery = { __typename?: 'Query', collections: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Collection', id: string | number, canonicalPath: string, title: string, startDate: string | null, endDate: string | null, duration: number, collectionContentType: CollectionContentType, image: { __typename?: 'Image', id: string | number, url: string } | null, allSequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, allRecordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null } };
-
-export type GetSearchRecordingsQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchRecordingsQuery = { __typename?: 'Query', sermons: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, sequence: { __typename?: 'Sequence', id: string | number, canonicalPath: string, contentType: SequenceContentType, title: string, image: { __typename?: 'Image', url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null } | null, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sponsor: { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null } | null, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchSeriesQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchSeriesQuery = { __typename?: 'Query', serieses: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sequence', id: string | number, title: string, canonicalPath: string, contentType: SequenceContentType, duration: number, summary: string, speakers: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, sequenceWriters: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, allRecordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchConferencesQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchConferencesQuery = { __typename?: 'Query', conferences: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Collection', id: string | number, canonicalPath: string, title: string, startDate: string | null, endDate: string | null, duration: number, collectionContentType: CollectionContentType, image: { __typename?: 'Image', id: string | number, url: string } | null, allSequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, allRecordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchSponsorsQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchSponsorsQuery = { __typename?: 'Query', sponsors: { __typename?: 'SponsorConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null, collections: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, sequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchPersonsQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchPersonsQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Person', id: string | number, name: string, canonicalPath: string, image: { __typename?: 'Image', id: string | number, url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchAudiobooksQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchAudiobooksQuery = { __typename?: 'Query', audiobooks: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Sequence', id: string | number, title: string, canonicalPath: string, contentType: SequenceContentType, duration: number, summary: string, speakers: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, sequenceWriters: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }> | null }, allRecordings: { __typename?: 'RecordingConnection', nodes: Array<{ __typename?: 'Recording', canonicalPath: string }> | null, aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchMusicTracksQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchMusicTracksQuery = { __typename?: 'Query', musicTracks: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Recording', canonicalPath: string, sequenceIndex: number | null, id: string | number, title: string, duration: number, recordingContentType: RecordingContentType, sequence: { __typename?: 'Sequence', id: string | number, canonicalPath: string, contentType: SequenceContentType, title: string, image: { __typename?: 'Image', url: string } | null, recordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, collection: { __typename?: 'Collection', title: string } | null } | null, writers: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, sponsor: { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null } | null, persons: Array<{ __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } }>, collection: { __typename?: 'Collection', title: string } | null, audioFiles: Array<{ __typename?: 'AudioFile', url: string, filesize: string, mimeType: string, duration: number }>, videoFiles: Array<{ __typename?: 'VideoFile', url: string, filesize: string, mimeType: string, duration: number }>, videoStreams: Array<{ __typename?: 'VideoFile', url: string, logUrl: string | null, filesize: string, mimeType: string, duration: number }> }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
-
-export type GetSearchStoryProgramsQueryVariables = Exact<{
-  language: Language;
-  term: Scalars['String'];
-  first: Scalars['Int'];
-  after: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type GetSearchStoryProgramsQuery = { __typename?: 'Query', storyPrograms: { __typename?: 'CollectionConnection', aggregate: { __typename?: 'Aggregate', count: number } | null, nodes: Array<{ __typename: 'Collection', id: string | number, canonicalPath: string, title: string, startDate: string | null, endDate: string | null, duration: number, collectionContentType: CollectionContentType, image: { __typename?: 'Image', id: string | number, url: string } | null, allSequences: { __typename?: 'SequenceConnection', aggregate: { __typename?: 'Aggregate', count: number } | null }, allRecordings: { __typename?: 'RecordingConnection', aggregate: { __typename?: 'Aggregate', count: number } | null } }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
 
 export type GetSearchResultsPersonsQueryVariables = Exact<{
   language: Language;
@@ -7378,6 +7378,138 @@ export const useGetNotFoundPageDataQuery = <
     useQuery<GetNotFoundPageDataQuery, TError, TData>(
       variables === undefined ? ['getNotFoundPageData'] : ['getNotFoundPageData', variables],
       graphqlFetcher<GetNotFoundPageDataQuery, GetNotFoundPageDataQueryVariables>(GetNotFoundPageDataDocument, variables),
+      options
+    );
+export const GetSearchRecordingsDocument = `
+query getSearchRecordings($language:Language!$term:String!$first:Int!$after:String){sermons(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage endCursor}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
+export const useGetSearchRecordingsQuery = <
+      TData = GetSearchRecordingsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchRecordingsQueryVariables,
+      options?: UseQueryOptions<GetSearchRecordingsQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchRecordingsQuery, TError, TData>(
+      ['getSearchRecordings', variables],
+      graphqlFetcher<GetSearchRecordingsQuery, GetSearchRecordingsQueryVariables>(GetSearchRecordingsDocument, variables),
+      options
+    );
+export const GetSearchSeriesDocument = `
+query getSearchSeries($language:Language!$term:String!$first:Int!$after:String){serieses(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage endCursor}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const useGetSearchSeriesQuery = <
+      TData = GetSearchSeriesQuery,
+      TError = unknown
+    >(
+      variables: GetSearchSeriesQueryVariables,
+      options?: UseQueryOptions<GetSearchSeriesQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchSeriesQuery, TError, TData>(
+      ['getSearchSeries', variables],
+      graphqlFetcher<GetSearchSeriesQuery, GetSearchSeriesQueryVariables>(GetSearchSeriesDocument, variables),
+      options
+    );
+export const GetSearchConferencesDocument = `
+query getSearchConferences($language:Language!$term:String!$first:Int!$after:String){conferences(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage endCursor}}}
+${CardCollectionFragmentDoc}`;
+export const useGetSearchConferencesQuery = <
+      TData = GetSearchConferencesQuery,
+      TError = unknown
+    >(
+      variables: GetSearchConferencesQueryVariables,
+      options?: UseQueryOptions<GetSearchConferencesQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchConferencesQuery, TError, TData>(
+      ['getSearchConferences', variables],
+      graphqlFetcher<GetSearchConferencesQuery, GetSearchConferencesQueryVariables>(GetSearchConferencesDocument, variables),
+      options
+    );
+export const GetSearchSponsorsDocument = `
+query getSearchSponsors($language:Language!$term:String!$first:Int!$after:String){sponsors(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSponsor}pageInfo{hasNextPage endCursor}}}
+${CardSponsorFragmentDoc}`;
+export const useGetSearchSponsorsQuery = <
+      TData = GetSearchSponsorsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchSponsorsQueryVariables,
+      options?: UseQueryOptions<GetSearchSponsorsQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchSponsorsQuery, TError, TData>(
+      ['getSearchSponsors', variables],
+      graphqlFetcher<GetSearchSponsorsQuery, GetSearchSponsorsQueryVariables>(GetSearchSponsorsDocument, variables),
+      options
+    );
+export const GetSearchPersonsDocument = `
+query getSearchPersons($language:Language!$term:String!$first:Int!$after:String){persons(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage endCursor}}}
+${CardPersonFragmentDoc}`;
+export const useGetSearchPersonsQuery = <
+      TData = GetSearchPersonsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchPersonsQueryVariables,
+      options?: UseQueryOptions<GetSearchPersonsQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchPersonsQuery, TError, TData>(
+      ['getSearchPersons', variables],
+      graphqlFetcher<GetSearchPersonsQuery, GetSearchPersonsQueryVariables>(GetSearchPersonsDocument, variables),
+      options
+    );
+export const GetSearchAudiobooksDocument = `
+query getSearchAudiobooks($language:Language!$term:String!$first:Int!$after:String){audiobooks(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage endCursor}}}
+${CardSequenceFragmentDoc}
+${PersonLockupFragmentDoc}`;
+export const useGetSearchAudiobooksQuery = <
+      TData = GetSearchAudiobooksQuery,
+      TError = unknown
+    >(
+      variables: GetSearchAudiobooksQueryVariables,
+      options?: UseQueryOptions<GetSearchAudiobooksQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchAudiobooksQuery, TError, TData>(
+      ['getSearchAudiobooks', variables],
+      graphqlFetcher<GetSearchAudiobooksQuery, GetSearchAudiobooksQueryVariables>(GetSearchAudiobooksDocument, variables),
+      options
+    );
+export const GetSearchMusicTracksDocument = `
+query getSearchMusicTracks($language:Language!$term:String!$first:Int!$after:String){musicTracks(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage endCursor}}}
+${CardRecordingFragmentDoc}
+${CardRecordingSequenceHatFragmentDoc}
+${PersonLockupFragmentDoc}
+${CardHatSponsorFragmentDoc}
+${TeaseRecordingFragmentDoc}
+${AndMiniplayerFragmentDoc}`;
+export const useGetSearchMusicTracksQuery = <
+      TData = GetSearchMusicTracksQuery,
+      TError = unknown
+    >(
+      variables: GetSearchMusicTracksQueryVariables,
+      options?: UseQueryOptions<GetSearchMusicTracksQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchMusicTracksQuery, TError, TData>(
+      ['getSearchMusicTracks', variables],
+      graphqlFetcher<GetSearchMusicTracksQuery, GetSearchMusicTracksQueryVariables>(GetSearchMusicTracksDocument, variables),
+      options
+    );
+export const GetSearchStoryProgramsDocument = `
+query getSearchStoryPrograms($language:Language!$term:String!$first:Int!$after:String){storyPrograms(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage endCursor}}}
+${CardCollectionFragmentDoc}`;
+export const useGetSearchStoryProgramsQuery = <
+      TData = GetSearchStoryProgramsQuery,
+      TError = unknown
+    >(
+      variables: GetSearchStoryProgramsQueryVariables,
+      options?: UseQueryOptions<GetSearchStoryProgramsQuery, TError, TData>
+    ) =>
+    useQuery<GetSearchStoryProgramsQuery, TError, TData>(
+      ['getSearchStoryPrograms', variables],
+      graphqlFetcher<GetSearchStoryProgramsQuery, GetSearchStoryProgramsQueryVariables>(GetSearchStoryProgramsDocument, variables),
       options
     );
 export const GetRecordingPlaybackProgressDocument = `
@@ -8366,138 +8498,6 @@ export const useGetSearchResultsCollectionsQuery = <
     useQuery<GetSearchResultsCollectionsQuery, TError, TData>(
       ['getSearchResultsCollections', variables],
       graphqlFetcher<GetSearchResultsCollectionsQuery, GetSearchResultsCollectionsQueryVariables>(GetSearchResultsCollectionsDocument, variables),
-      options
-    );
-export const GetSearchRecordingsDocument = `
-query getSearchRecordings($language:Language!$term:String!$first:Int!$after:String){sermons(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage endCursor}}}
-${CardRecordingFragmentDoc}
-${CardRecordingSequenceHatFragmentDoc}
-${PersonLockupFragmentDoc}
-${CardHatSponsorFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${AndMiniplayerFragmentDoc}`;
-export const useGetSearchRecordingsQuery = <
-      TData = GetSearchRecordingsQuery,
-      TError = unknown
-    >(
-      variables: GetSearchRecordingsQueryVariables,
-      options?: UseQueryOptions<GetSearchRecordingsQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchRecordingsQuery, TError, TData>(
-      ['getSearchRecordings', variables],
-      graphqlFetcher<GetSearchRecordingsQuery, GetSearchRecordingsQueryVariables>(GetSearchRecordingsDocument, variables),
-      options
-    );
-export const GetSearchSeriesDocument = `
-query getSearchSeries($language:Language!$term:String!$first:Int!$after:String){serieses(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage endCursor}}}
-${CardSequenceFragmentDoc}
-${PersonLockupFragmentDoc}`;
-export const useGetSearchSeriesQuery = <
-      TData = GetSearchSeriesQuery,
-      TError = unknown
-    >(
-      variables: GetSearchSeriesQueryVariables,
-      options?: UseQueryOptions<GetSearchSeriesQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchSeriesQuery, TError, TData>(
-      ['getSearchSeries', variables],
-      graphqlFetcher<GetSearchSeriesQuery, GetSearchSeriesQueryVariables>(GetSearchSeriesDocument, variables),
-      options
-    );
-export const GetSearchConferencesDocument = `
-query getSearchConferences($language:Language!$term:String!$first:Int!$after:String){conferences(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage endCursor}}}
-${CardCollectionFragmentDoc}`;
-export const useGetSearchConferencesQuery = <
-      TData = GetSearchConferencesQuery,
-      TError = unknown
-    >(
-      variables: GetSearchConferencesQueryVariables,
-      options?: UseQueryOptions<GetSearchConferencesQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchConferencesQuery, TError, TData>(
-      ['getSearchConferences', variables],
-      graphqlFetcher<GetSearchConferencesQuery, GetSearchConferencesQueryVariables>(GetSearchConferencesDocument, variables),
-      options
-    );
-export const GetSearchSponsorsDocument = `
-query getSearchSponsors($language:Language!$term:String!$first:Int!$after:String){sponsors(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSponsor}pageInfo{hasNextPage endCursor}}}
-${CardSponsorFragmentDoc}`;
-export const useGetSearchSponsorsQuery = <
-      TData = GetSearchSponsorsQuery,
-      TError = unknown
-    >(
-      variables: GetSearchSponsorsQueryVariables,
-      options?: UseQueryOptions<GetSearchSponsorsQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchSponsorsQuery, TError, TData>(
-      ['getSearchSponsors', variables],
-      graphqlFetcher<GetSearchSponsorsQuery, GetSearchSponsorsQueryVariables>(GetSearchSponsorsDocument, variables),
-      options
-    );
-export const GetSearchPersonsDocument = `
-query getSearchPersons($language:Language!$term:String!$first:Int!$after:String){persons(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardPerson}pageInfo{hasNextPage endCursor}}}
-${CardPersonFragmentDoc}`;
-export const useGetSearchPersonsQuery = <
-      TData = GetSearchPersonsQuery,
-      TError = unknown
-    >(
-      variables: GetSearchPersonsQueryVariables,
-      options?: UseQueryOptions<GetSearchPersonsQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchPersonsQuery, TError, TData>(
-      ['getSearchPersons', variables],
-      graphqlFetcher<GetSearchPersonsQuery, GetSearchPersonsQueryVariables>(GetSearchPersonsDocument, variables),
-      options
-    );
-export const GetSearchAudiobooksDocument = `
-query getSearchAudiobooks($language:Language!$term:String!$first:Int!$after:String){audiobooks(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardSequence}pageInfo{hasNextPage endCursor}}}
-${CardSequenceFragmentDoc}
-${PersonLockupFragmentDoc}`;
-export const useGetSearchAudiobooksQuery = <
-      TData = GetSearchAudiobooksQuery,
-      TError = unknown
-    >(
-      variables: GetSearchAudiobooksQueryVariables,
-      options?: UseQueryOptions<GetSearchAudiobooksQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchAudiobooksQuery, TError, TData>(
-      ['getSearchAudiobooks', variables],
-      graphqlFetcher<GetSearchAudiobooksQuery, GetSearchAudiobooksQueryVariables>(GetSearchAudiobooksDocument, variables),
-      options
-    );
-export const GetSearchMusicTracksDocument = `
-query getSearchMusicTracks($language:Language!$term:String!$first:Int!$after:String){musicTracks(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardRecording}pageInfo{hasNextPage endCursor}}}
-${CardRecordingFragmentDoc}
-${CardRecordingSequenceHatFragmentDoc}
-${PersonLockupFragmentDoc}
-${CardHatSponsorFragmentDoc}
-${TeaseRecordingFragmentDoc}
-${AndMiniplayerFragmentDoc}`;
-export const useGetSearchMusicTracksQuery = <
-      TData = GetSearchMusicTracksQuery,
-      TError = unknown
-    >(
-      variables: GetSearchMusicTracksQueryVariables,
-      options?: UseQueryOptions<GetSearchMusicTracksQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchMusicTracksQuery, TError, TData>(
-      ['getSearchMusicTracks', variables],
-      graphqlFetcher<GetSearchMusicTracksQuery, GetSearchMusicTracksQueryVariables>(GetSearchMusicTracksDocument, variables),
-      options
-    );
-export const GetSearchStoryProgramsDocument = `
-query getSearchStoryPrograms($language:Language!$term:String!$first:Int!$after:String){storyPrograms(language:$language search:$term first:$first after:$after){aggregate{count}nodes{...cardCollection}pageInfo{hasNextPage endCursor}}}
-${CardCollectionFragmentDoc}`;
-export const useGetSearchStoryProgramsQuery = <
-      TData = GetSearchStoryProgramsQuery,
-      TError = unknown
-    >(
-      variables: GetSearchStoryProgramsQueryVariables,
-      options?: UseQueryOptions<GetSearchStoryProgramsQuery, TError, TData>
-    ) =>
-    useQuery<GetSearchStoryProgramsQuery, TError, TData>(
-      ['getSearchStoryPrograms', variables],
-      graphqlFetcher<GetSearchStoryProgramsQuery, GetSearchStoryProgramsQueryVariables>(GetSearchStoryProgramsDocument, variables),
       options
     );
 export const GetSearchResultsPersonsDocument = `
@@ -9501,6 +9501,54 @@ export async function getNotFoundPageData<T>(
 	return fetchApi(GetNotFoundPageDataDocument, { variables });
 }
 
+export async function getSearchRecordings<T>(
+	variables: ExactAlt<T, GetSearchRecordingsQueryVariables>
+): Promise<GetSearchRecordingsQuery> {
+	return fetchApi(GetSearchRecordingsDocument, { variables });
+}
+
+export async function getSearchSeries<T>(
+	variables: ExactAlt<T, GetSearchSeriesQueryVariables>
+): Promise<GetSearchSeriesQuery> {
+	return fetchApi(GetSearchSeriesDocument, { variables });
+}
+
+export async function getSearchConferences<T>(
+	variables: ExactAlt<T, GetSearchConferencesQueryVariables>
+): Promise<GetSearchConferencesQuery> {
+	return fetchApi(GetSearchConferencesDocument, { variables });
+}
+
+export async function getSearchSponsors<T>(
+	variables: ExactAlt<T, GetSearchSponsorsQueryVariables>
+): Promise<GetSearchSponsorsQuery> {
+	return fetchApi(GetSearchSponsorsDocument, { variables });
+}
+
+export async function getSearchPersons<T>(
+	variables: ExactAlt<T, GetSearchPersonsQueryVariables>
+): Promise<GetSearchPersonsQuery> {
+	return fetchApi(GetSearchPersonsDocument, { variables });
+}
+
+export async function getSearchAudiobooks<T>(
+	variables: ExactAlt<T, GetSearchAudiobooksQueryVariables>
+): Promise<GetSearchAudiobooksQuery> {
+	return fetchApi(GetSearchAudiobooksDocument, { variables });
+}
+
+export async function getSearchMusicTracks<T>(
+	variables: ExactAlt<T, GetSearchMusicTracksQueryVariables>
+): Promise<GetSearchMusicTracksQuery> {
+	return fetchApi(GetSearchMusicTracksDocument, { variables });
+}
+
+export async function getSearchStoryPrograms<T>(
+	variables: ExactAlt<T, GetSearchStoryProgramsQueryVariables>
+): Promise<GetSearchStoryProgramsQuery> {
+	return fetchApi(GetSearchStoryProgramsDocument, { variables });
+}
+
 export async function getRecordingPlaybackProgress<T>(
 	variables: ExactAlt<T, GetRecordingPlaybackProgressQueryVariables>
 ): Promise<GetRecordingPlaybackProgressQuery> {
@@ -9859,54 +9907,6 @@ export async function getSearchResultsCollections<T>(
 	variables: ExactAlt<T, GetSearchResultsCollectionsQueryVariables>
 ): Promise<GetSearchResultsCollectionsQuery> {
 	return fetchApi(GetSearchResultsCollectionsDocument, { variables });
-}
-
-export async function getSearchRecordings<T>(
-	variables: ExactAlt<T, GetSearchRecordingsQueryVariables>
-): Promise<GetSearchRecordingsQuery> {
-	return fetchApi(GetSearchRecordingsDocument, { variables });
-}
-
-export async function getSearchSeries<T>(
-	variables: ExactAlt<T, GetSearchSeriesQueryVariables>
-): Promise<GetSearchSeriesQuery> {
-	return fetchApi(GetSearchSeriesDocument, { variables });
-}
-
-export async function getSearchConferences<T>(
-	variables: ExactAlt<T, GetSearchConferencesQueryVariables>
-): Promise<GetSearchConferencesQuery> {
-	return fetchApi(GetSearchConferencesDocument, { variables });
-}
-
-export async function getSearchSponsors<T>(
-	variables: ExactAlt<T, GetSearchSponsorsQueryVariables>
-): Promise<GetSearchSponsorsQuery> {
-	return fetchApi(GetSearchSponsorsDocument, { variables });
-}
-
-export async function getSearchPersons<T>(
-	variables: ExactAlt<T, GetSearchPersonsQueryVariables>
-): Promise<GetSearchPersonsQuery> {
-	return fetchApi(GetSearchPersonsDocument, { variables });
-}
-
-export async function getSearchAudiobooks<T>(
-	variables: ExactAlt<T, GetSearchAudiobooksQueryVariables>
-): Promise<GetSearchAudiobooksQuery> {
-	return fetchApi(GetSearchAudiobooksDocument, { variables });
-}
-
-export async function getSearchMusicTracks<T>(
-	variables: ExactAlt<T, GetSearchMusicTracksQueryVariables>
-): Promise<GetSearchMusicTracksQuery> {
-	return fetchApi(GetSearchMusicTracksDocument, { variables });
-}
-
-export async function getSearchStoryPrograms<T>(
-	variables: ExactAlt<T, GetSearchStoryProgramsQueryVariables>
-): Promise<GetSearchStoryProgramsQuery> {
-	return fetchApi(GetSearchStoryProgramsDocument, { variables });
 }
 
 export async function getSearchResultsPersons<T>(
