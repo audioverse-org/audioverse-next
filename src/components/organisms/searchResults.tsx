@@ -85,7 +85,7 @@ function Search({ term }: { term?: string }): JSX.Element {
 				const nodes = tab === 'all' ? s.nodes.slice(0, 3) : s.nodes;
 				return (
 					<div className={styles.section} key={s.id}>
-						<LineHeading>{s.heading}</LineHeading>
+						<LineHeading variant="overline">{s.heading}</LineHeading>
 						<CardGroup>
 							{nodes.map((e: InferrableEntity) => (
 								<CardInferred key={e.id} entity={e} />

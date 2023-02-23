@@ -16,6 +16,17 @@
 	}
 }
 
+.overline {
+	position: relative;
+	padding-top: 8px;
+	&:after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
 .small {
 	font-size: 12px;
 	line-height: 14.52px;
