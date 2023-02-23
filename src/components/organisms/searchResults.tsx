@@ -72,6 +72,7 @@ function Search({ term }: { term?: string }): JSX.Element {
 		<>
 			<SearchHead />
 			<Mininav
+				className={styles.filters}
 				theme="light"
 				items={Object.entries(filters).map(([id, { heading }]) => ({
 					id,
