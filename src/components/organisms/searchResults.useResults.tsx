@@ -1,5 +1,4 @@
 import { InferrableEntity } from '@components/molecules/card/inferred';
-import { useQueryString } from '@lib/useQueryString';
 import { useLanguageId } from '@lib/useLanguageId';
 import { InfiniteQueryObserverResult, useInfiniteQuery } from 'react-query';
 import { fetchApi } from '@lib/api/fetchApi';
