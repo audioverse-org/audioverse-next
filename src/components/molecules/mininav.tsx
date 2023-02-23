@@ -6,6 +6,11 @@ import Heading6 from '@components/atoms/heading6';
 
 import styles from './mininav.module.scss';
 
+const Theme = {
+	default: undefined,
+	light: styles.light,
+};
+
 type Props = {
 	items: {
 		id: string;
@@ -17,6 +22,7 @@ type Props = {
 	compact?: boolean;
 	disabled?: boolean;
 	className?: string;
+	theme?: keyof typeof Theme;
 };
 
 export default function Mininav({
@@ -24,6 +30,7 @@ export default function Mininav({
 	compact,
 	disabled,
 	className,
+	theme = 'default',
 }: Props): JSX.Element {
 	return (
 		<div
@@ -31,7 +38,8 @@ export default function Mininav({
 				styles.miniNav,
 				compact && styles.compact,
 				disabled && styles.miniNavDisabled,
-				className
+				className,
+				Theme[theme]
 			)}
 		>
 			{items.map(({ label, url, onClick, isActive, id }) => {
