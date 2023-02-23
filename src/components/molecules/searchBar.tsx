@@ -16,8 +16,8 @@ export default function SearchBar({
 	term,
 	onChange,
 }: {
-	term: string;
-	onChange: (term: string) => void;
+	term: string | undefined;
+	onChange: (term: string | undefined) => void;
 	className?: string;
 }): JSX.Element {
 	const intl = useIntl();
@@ -67,6 +67,7 @@ export default function SearchBar({
 							>
 								<IconExit width={24} height={24} />
 							</a>
+							<button onClick={() => onChange(undefined)}>Cancel</button>
 						</div>
 					)}
 				</div>

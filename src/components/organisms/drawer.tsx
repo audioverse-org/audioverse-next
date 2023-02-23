@@ -16,7 +16,7 @@ export default function Drawer({
 	showingMenu: boolean;
 	onExit: () => void;
 	onSearchChange: (term: string) => void;
-	searchTerm: string;
+	searchTerm?: string;
 }): JSX.Element {
 	useEffect(() => {
 		Router.events.on('routeChangeStart', onExit);

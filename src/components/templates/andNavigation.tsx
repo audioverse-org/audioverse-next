@@ -19,8 +19,8 @@ export default function AndNavigation({
 		query: { q },
 		pathname,
 	} = useRouter();
-	const param = q?.toString() || '';
-	const [term, setTerm] = useState<string>(param);
+	const param = q?.toString();
+	const [term, setTerm] = useState<string | undefined>(param);
 	const [showingMenu, setShowingMenu] = useState(false);
 	const shouldShowSearch =
 		pathname.includes('/[language]/discover') ||
@@ -50,7 +50,7 @@ export default function AndNavigation({
 								shouldShowSearch && styles.searchShown
 							)}
 						/>
-						{term ? <SearchResults term={term} /> : children}
+						{term === undefined ? children : <SearchResults term={term} />}
 					</div>
 				</div>
 			</div>

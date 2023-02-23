@@ -31,7 +31,7 @@ const Navigation = ({
 	onSearchChange,
 }: {
 	onExit: () => void;
-	searchTerm: string;
+	searchTerm: string | undefined;
 	onSearchChange: (term: string) => void;
 }): JSX.Element => {
 	const languageRoute = useLanguageRoute();
