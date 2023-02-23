@@ -21,8 +21,6 @@ export default function SearchBar({
 	className?: string;
 }): JSX.Element {
 	const intl = useIntl();
-	const languageRoute = useLanguageRoute();
-	const router = useRouter();
 	const [isFocused, setIsFocused] = useState(false);
 	const { pathname } = useRouter();
 	const shouldHideCancelButton =
@@ -30,18 +28,9 @@ export default function SearchBar({
 
 	return (
 		<div className={clsx(styles.base, className)}>
-			<form
-				action={makeSearchRoute(languageRoute)}
-				onSubmit={(e) => {
-					e.preventDefault();
-					router.push(makeSearchRoute(languageRoute, term));
-				}}
-				className={clsx(styles.inner, isFocused && styles.focused)}
-			>
+			<div className={clsx(styles.inner, isFocused && styles.focused)}>
 				<div className={styles.inputWrapper}>
-					<button type="submit" className={styles.icon}>
-						<IconSearch width={24} height={24} />
-					</button>
+					<IconSearch width={24} height={24} />
 					<input
 						name="q"
 						type="search"
@@ -73,7 +62,7 @@ export default function SearchBar({
 						</div>
 					)}
 				</div>
-			</form>
+			</div>
 			<button
 				className={clsx(styles.cancel, shouldHideCancelButton && styles.hide)}
 				onClick={() => onChange(undefined)}
