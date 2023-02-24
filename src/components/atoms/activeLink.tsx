@@ -18,6 +18,9 @@ const ActiveLink = ({
 	...props
 }: ActiveLinkProps): JSX.Element => {
 	const { asPath } = useRouter();
+	// TODO: See if useRouter exposes a prop for the current path without the query string
+	// to avoid the need for this regex
+	// https://nextjs.org/docs/api-reference/next/router#router-object
 	const p = asPath.replace(/\?.*/, '');
 	const isActive = p === props.href || p === props.as;
 
