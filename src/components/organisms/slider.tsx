@@ -56,13 +56,11 @@ export default function Slider({
 				styles[`slideActive${delta}`]
 			)}
 			data-testid="slider"
-			style={
-				{
-					'--perSlide': perSlide,
-					'--activeSlide': delta,
-					overflow: clip ? 'hidden' : 'visible',
-				} as CSSProperties
-			}
+			style={{
+				'--perSlide': perSlide,
+				'--activeSlide': delta,
+				overflow: clip ? 'hidden' : 'visible',
+			}}
 		>
 			<div className={styles.slides}>{children}</div>
 			<div className={styles.controls}>

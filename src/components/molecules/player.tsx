@@ -144,12 +144,10 @@ const Player = ({
 					<div className={styles.controlGrow}>
 						<div
 							className={styles.waves}
-							style={
-								{
-									'--progress': `${session.progress * 100}%`,
-									'--buffered': `${session.bufferedProgress * 100}%`,
-								} as CSSProperties
-							}
+							style={{
+								'--progress': `${session.progress * 100}%`,
+								'--buffered': `${session.bufferedProgress * 100}%`,
+							}}
 						>
 							<input
 								type="range"
