@@ -70,7 +70,7 @@ function Search({ term }: { term?: string }): JSX.Element {
 
 	return (
 		<>
-			<SearchHead />
+			<SearchHead term={term} />
 			<Mininav
 				className={styles.filters}
 				theme="light"
@@ -113,9 +113,9 @@ export default withFailStates(Search, {
 		const q = useQueryString('q');
 		return useSearch('all', term || q || '').isLoading;
 	},
-	Loading: () => (
+	Loading: ({ term }: { term?: string }) => (
 		<>
-			<SearchHead />
+			<SearchHead term={term} />
 			<LoadingCards />
 		</>
 	),
