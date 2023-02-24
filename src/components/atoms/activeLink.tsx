@@ -17,14 +17,16 @@ const ActiveLink = ({
 	activeClassName,
 	...props
 }: ActiveLinkProps): JSX.Element => {
-	const router = useRouter();
-	const asPath = router.asPath.replace(/\?.*/, '');
-	const isActive = asPath === props.href || asPath === props.as;
-	const classes = isActive ? clsx(className, activeClassName) : className;
+	const { asPath } = useRouter();
+	const p = asPath.replace(/\?.*/, '');
+	const isActive = p === props.href || p === props.as;
 
 	return (
 		<Link {...props} legacyBehavior>
-			<a className={classes || ''} aria-current={isActive ? 'page' : false}>
+			<a
+				className={clsx(className, isActive && activeClassName)}
+				aria-current={isActive ? 'page' : false}
+			>
 				{children}
 			</a>
 		</Link>
