@@ -55,6 +55,7 @@ export default function AndNavigation({
 	const playbackContext = useContext(PlaybackContext);
 	const [showingMenu, setShowingMenu] = useState(false);
 	const [term, setTerm] = useState((q as string) || '');
+
 	useEffect(() => {
 		const onRouteChange = () => setShowingMenu(false);
 		Router.events.on('routeChangeStart', onRouteChange);
@@ -62,15 +63,17 @@ export default function AndNavigation({
 			Router.events.off('routeChangeStart', onRouteChange);
 		};
 	}, []);
+
 	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
+
 	useEffect(() => {
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.toggle('scrollDisabledMobile', showingMenu);
 	}, [showingMenu]);
+
 	const onPageWithSearchBox =
 		pathname.includes('/[language]/discover') ||
 		pathname.includes('/[language]/search');
-
 	const headerTitleRef = useRef<HTMLDivElement>(null);
 	const subnavRef = useRef<HTMLDivElement>(null);
 	const [lastScrollTop, setLastScrollTop] = useState<number>(0);
@@ -110,6 +113,7 @@ export default function AndNavigation({
 
 		setLastScrollTop(scrollTop);
 	}, [headerSlideOffset, lastScrollTop]);
+
 	useEffect(() => {
 		window.addEventListener('scroll', listener);
 		return () => {
@@ -119,6 +123,7 @@ export default function AndNavigation({
 
 	const navigationItems = useNavigationItems();
 	const playbackRecording = playbackContext.getRecording();
+
 	return (
 		<div className={styles.positioner}>
 			<div className={styles.mobileHeader}>
@@ -161,6 +166,7 @@ export default function AndNavigation({
 							compact
 							className={styles.mobileSubnavItems}
 						/>
+						{/* TODO: Use a button instead of anchor element to improve accessibility */}
 						<a
 							className={styles.mobileHeaderMore}
 							onClick={(e) => {
