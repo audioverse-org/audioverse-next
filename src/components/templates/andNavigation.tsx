@@ -126,6 +126,7 @@ export default function AndNavigation({
 
 	return (
 		<div className={styles.positioner}>
+			{/* TODO: extract mobile header */}
 			<div className={styles.mobileHeader}>
 				<div className={styles.mobileHeaderTitle} ref={headerTitleRef}>
 					<Header />
