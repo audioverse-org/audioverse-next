@@ -12,7 +12,9 @@ export default function ButtonPlayback(): JSX.Element {
 	const intl = useIntl();
 	const { push } = useRouter();
 
-	// TODO: Figure out how to use an anchor element instead of a button element for this component
+	// TODO: Figure out how to use an anchor element instead of a button element for this component.
+	// Could do this by updating the IconButton component to accept an href prop and choose which
+	// element to render based on whether an href or onclick prop was provided.
 	return (
 		<IconButton
 			Icon={context.paused() ? IconListening : IconListeningAnimated}
