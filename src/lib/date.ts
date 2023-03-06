@@ -20,13 +20,7 @@ export const formatLongDate = (date: string | Date): string => {
 };
 
 export const formatLongDateTime = (date: string | Date): string => {
-	return new Date(date).toLocaleString('default', {
-		hour: 'numeric',
-		minute: 'numeric',
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-	});
+	return dayjs(new Date(date)).format('MMMM D, YYYY, h:mm A');
 };
 
 export const formatDateRange = (
