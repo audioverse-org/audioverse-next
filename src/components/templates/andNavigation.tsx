@@ -139,6 +139,7 @@ export default function AndNavigation({
 						}
 						href={makeDonateRoute(languageRoute)}
 					/>
+					{/* TODO: extract media playback indicator */}
 					{playbackRecording && (
 						<IconButton
 							Icon={
