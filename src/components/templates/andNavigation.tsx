@@ -20,7 +20,7 @@ export default function AndNavigation({
 	} = useRouter();
 	const [term, setTerm] = useState((q as string) || '');
 	const [showingMenu, setShowingMenu] = useState(false);
-	const onPageWithSearchBox =
+	const showSearch =
 		pathname.includes('/[language]/discover') ||
 		pathname.includes('/[language]/search');
 
@@ -44,7 +44,7 @@ export default function AndNavigation({
 							onChange={(v) => setTerm(v)}
 							className={clsx(
 								styles.searchBox,
-								onPageWithSearchBox && styles.searchShown
+								showSearch && styles.searchShown
 							)}
 						/>
 						<div>{children}</div>
