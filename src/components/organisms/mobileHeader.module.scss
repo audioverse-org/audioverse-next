@@ -1,0 +1,62 @@
+@import '../../styles/common';
+
+.mobileHeader {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+    z-index: 10;
+    background: $ts-cream;
+}
+
+.mobileHeaderTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px calc(24px + env(safe-area-inset-right)) 22px calc(24px + env(safe-area-inset-left));
+    z-index: 1;
+    background: $ts-cream;
+
+    > :first-child {
+        flex-grow: 1;
+    }
+
+    > :nth-child(n + 2) {
+        margin-left: 16px;
+    }
+}
+
+.mobileSubnavWrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $ts-cream;
+}
+
+.mobileSubnav {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0 calc(24px + env(safe-area-inset-right)) 8px calc(24px + env(safe-area-inset-left));
+}
+
+.mobileSubnavItems {
+    height: 24px;
+    margin-right: 16px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.mobileHeaderMore {
+    position: absolute;
+    right: 0;
+    height: 24px;
+}
+
+@media (min-width: $breakpoint-lg) {
+    .mobileHeader {
+        display: none;
+    }
+}
