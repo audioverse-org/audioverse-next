@@ -18,13 +18,14 @@ export default function AndNavigation({
 		query: { q },
 		pathname,
 	} = useRouter();
-	const [term, setTerm] = useState<string>(q?.toString() || '');
+	const param = q?.toString() || '';
+	const [term, setTerm] = useState<string>(param);
 	const [showingMenu, setShowingMenu] = useState(false);
 	const shouldShowSearch =
 		pathname.includes('/[language]/discover') ||
 		pathname.includes('/[language]/search');
 
-	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
+	useEffect(() => setTerm(param), [param, pathname]);
 
 	return (
 		<div className={styles.positioner}>
