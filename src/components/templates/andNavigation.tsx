@@ -14,11 +14,10 @@ export default function AndNavigation({
 }: {
 	children: ReactNode;
 }): JSX.Element {
-	const router = useRouter();
 	const {
 		query: { q },
 		pathname,
-	} = router;
+	} = useRouter();
 	const [term, setTerm] = useState((q as string) || '');
 	const [showingMenu, setShowingMenu] = useState(false);
 	const onPageWithSearchBox =
