@@ -4,11 +4,10 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
 import SearchBar from '@components/molecules/searchBar';
-import Header from '@components/organisms/header';
-import Navigation from '@components/organisms/navigation';
 
 import styles from './andNavigation.module.scss';
 import MobileHeader from '@components/organisms/mobileHeader';
+import Drawer from '@components/organisms/drawer';
 
 export default function AndNavigation({
 	children,
@@ -44,21 +43,12 @@ export default function AndNavigation({
 			<MobileHeader setShowingMenu={setShowingMenu} />
 			<div className={styles.wrapper}>
 				<div className={styles.base}>
-					<div
-						className={clsx(
-							styles.navigation,
-							showingMenu && styles.navigationShown
-						)}
-					>
-						<div className={styles.header}>
-							<Header />
-						</div>
-						<Navigation
-							onExit={() => setShowingMenu(false)}
-							searchTerm={term}
-							onSearchChange={(v) => setTerm(v)}
-						/>
-					</div>
+					<Drawer
+						showingMenu={showingMenu}
+						onExit={() => setShowingMenu(false)}
+						onSearchChange={(v) => setTerm(v)}
+						searchTerm={term}
+					/>
 					<div className={styles.content}>
 						<LanguageAlternativesAlert />
 						<SearchBar
