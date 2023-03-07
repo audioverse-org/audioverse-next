@@ -17,9 +17,7 @@ import { useNavigationItems } from '@lib/useNavigationItems';
 import MoreIcon from '../../../public/img/icons/icon-more.svg';
 import ButtonPlayback from '@components/molecules/buttonPlayback';
 import { PlaybackContext } from '@components/templates/andPlaybackContext';
-
-// TODO: Extract relevant styles to a separate module.
-import styles from '../templates/andNavigation.module.scss';
+import styles from './mobileHeader.module.scss';
 
 const SUBNAV_HEIGHT = 32;
 const HEADER_TITLE_PADDING_TOP_DIFFERENCE = 8;

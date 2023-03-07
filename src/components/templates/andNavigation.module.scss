@@ -14,58 +14,6 @@
 	flex-grow: 1;
 }
 
-.mobileHeader {
-	position: sticky;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 32px;
-	z-index: 10;
-}
-.mobileHeader,
-.mobileHeaderTitle,
-.mobileSubnavWrapper {
-	background: $ts-cream;
-}
-.mobileHeaderTitle {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 24px calc(24px + env(safe-area-inset-right)) 22px
-		calc(24px + env(safe-area-inset-left));
-	z-index: 1;
-	> :first-child {
-		flex-grow: 1;
-	}
-	> :nth-child(n + 2) {
-		margin-left: 16px;
-	}
-}
-.mobileSubnavWrapper {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
-}
-.mobileSubnav {
-	display: flex;
-	align-items: center;
-	position: relative;
-	margin: 0 calc(24px + env(safe-area-inset-right)) 8px
-		calc(24px + env(safe-area-inset-left));
-}
-.mobileSubnavItems {
-	height: 24px;
-	margin-right: 16px;
-	flex-wrap: wrap;
-	overflow: hidden;
-}
-.mobileHeaderMore {
-	position: absolute;
-	right: 0;
-	height: 24px;
-}
-
 .navigation {
 	position: fixed;
 	height: 100%;
@@ -78,11 +26,13 @@
 	z-index: 1000;
 	transition: transform $transition-medium;
 	transform: translateX(100%);
+
 	@media (min-width: $breakpoint-lg) {
 		padding-left: 24px;
 		padding-right: 24px;
 	}
 }
+
 .header {
 	display: none;
 }
@@ -93,16 +43,18 @@
 
 .content {
 	flex: 0 1 100vw;
-	padding: 24px calc(24px + env(safe-area-inset-right)) 24px
-		calc(24px + env(safe-area-inset-left));
+	padding: 24px calc(24px + env(safe-area-inset-right)) 24px calc(24px + env(safe-area-inset-left));
 	max-width: 100vw;
 	margin: 0 auto;
+
 	@media (min-width: $content-maxWidth-sm) {
 		max-width: $content-maxWidth-sm;
 	}
+
 	@media (min-width: $breakpoint-md) {
 		max-width: 100vw;
 	}
+
 	@media (min-width: $content-maxWidth) {
 		max-width: $content-maxWidth;
 	}
@@ -110,19 +62,18 @@
 
 .searchBox {
 	margin-bottom: 24px;
+
 	&:not(.searchShown) {
 		display: none;
 	}
 }
 
 @media (min-width: $breakpoint-lg) {
-	.mobileHeader {
-		display: none;
-	}
 	.header {
 		display: block;
 		margin: 32px;
 	}
+
 	.navigation {
 		position: fixed;
 		width: $sidebar-width;
@@ -133,15 +84,18 @@
 		background: $ts-white;
 		z-index: unset;
 	}
+
 	:global(.andMiniplayer--withPlayer) .navigation {
 		padding-bottom: $miniplayer-height;
 	}
+
 	.content {
 		flex: 0 0 100vw;
 		padding-left: #{$sidebar-width + 24px};
 		display: flex;
 		flex-direction: column;
 	}
+
 	.searchBox.searchBox {
 		display: inherit;
 	}
