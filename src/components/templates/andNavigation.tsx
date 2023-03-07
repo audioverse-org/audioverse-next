@@ -18,7 +18,7 @@ export default function AndNavigation({
 		query: { q },
 		pathname,
 	} = useRouter();
-	const [term, setTerm] = useState((q as string) || '');
+	const [term, setTerm] = useState<string>(q?.toString() || '');
 	const [showingMenu, setShowingMenu] = useState(false);
 	const shouldShowSearch =
 		pathname.includes('/[language]/discover') ||
