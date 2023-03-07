@@ -56,9 +56,7 @@ export default function AndNavigation({
 						<Navigation
 							onExit={() => setShowingMenu(false)}
 							searchTerm={term}
-							onSearchChange={(value) => {
-								setTerm(value);
-							}}
+							onSearchChange={(v) => setTerm(v)}
 						/>
 					</div>
 					<div className={styles.content}>
