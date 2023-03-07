@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useState } from 'react';
 
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
@@ -25,17 +25,6 @@ export default function AndNavigation({
 		pathname.includes('/[language]/search');
 
 	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
-
-	useEffect(() => {
-		const fn = () => setShowingMenu(false);
-		Router.events.on('routeChangeStart', fn);
-		return () => Router.events.off('routeChangeStart', fn);
-	}, []);
-
-	useEffect(() => {
-		const body = document.getElementsByTagName('body')[0];
-		body.classList.toggle('scrollDisabledMobile', showingMenu);
-	}, [showingMenu]);
 
 	return (
 		<div className={styles.positioner}>
