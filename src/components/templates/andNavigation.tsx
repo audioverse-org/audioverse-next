@@ -63,9 +63,7 @@ export default function AndNavigation({
 						<LanguageAlternativesAlert />
 						<SearchBar
 							term={term}
-							onChange={(value) => {
-								setTerm(value);
-							}}
+							onChange={(v) => setTerm(v)}
 							className={clsx(
 								styles.searchBox,
 								onPageWithSearchBox && styles.searchShown
