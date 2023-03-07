@@ -14,33 +14,6 @@
 	flex-grow: 1;
 }
 
-.navigation {
-	position: fixed;
-	height: 100%;
-	width: 100vw;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	padding: 24px 0 calc(24px + env(safe-area-inset-bottom));
-	background: $ts-cream;
-	z-index: 1000;
-	transition: transform $transition-medium;
-	transform: translateX(100%);
-
-	@media (min-width: $breakpoint-lg) {
-		padding-left: 24px;
-		padding-right: 24px;
-	}
-}
-
-.header {
-	display: none;
-}
-
-.navigationShown {
-	transform: translateX(0%);
-}
-
 .content {
 	flex: 0 1 100vw;
 	padding: 24px calc(24px + env(safe-area-inset-right)) 24px calc(24px + env(safe-area-inset-left));
@@ -69,26 +42,6 @@
 }
 
 @media (min-width: $breakpoint-lg) {
-	.header {
-		display: block;
-		margin: 32px;
-	}
-
-	.navigation {
-		position: fixed;
-		width: $sidebar-width;
-		padding: 0;
-		overflow: scroll;
-		transform: translate(0);
-		animation: none;
-		background: $ts-white;
-		z-index: unset;
-	}
-
-	:global(.andMiniplayer--withPlayer) .navigation {
-		padding-bottom: $miniplayer-height;
-	}
-
 	.content {
 		flex: 0 0 100vw;
 		padding-left: #{$sidebar-width + 24px};

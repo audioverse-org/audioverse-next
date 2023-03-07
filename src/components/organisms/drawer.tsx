@@ -4,7 +4,7 @@ import React from 'react';
 import Header from '@components/organisms/header';
 import Navigation from '@components/organisms/navigation';
 
-import styles from '../templates/andNavigation.module.scss';
+import styles from './drawer.module.scss';
 
 export default function Drawer({
 	showingMenu,
