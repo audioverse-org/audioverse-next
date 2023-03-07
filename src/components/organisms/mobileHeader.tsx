@@ -29,31 +29,34 @@ const COLLAPSING_HEIGHT =
 
 export default function MobileHeader({
 	setShowingMenu,
+	scrollRef,
 }: {
 	setShowingMenu: (showingMenu: boolean) => void;
+	scrollRef: React.RefObject<HTMLDivElement>;
 }): JSX.Element {
 	const { asPath } = useRouter();
 	const languageRoute = useLanguageRoute();
 	const navigationItems = useNavigationItems();
 	const playbackContext = useContext(PlaybackContext);
 	const playbackRecording = playbackContext.getRecording();
+	const headerRef = useRef<HTMLDivElement>(null);
 	const headerTitleRef = useRef<HTMLDivElement>(null);
-	const subnavRef = useRef<HTMLDivElement>(null);
 	const [lastScrollTop, setLastScrollTop] = useState<number>(0);
 	const [headerSlideOffset, setHeaderSlideOffset] = useState<number>(0);
 
 	const listener = useCallback(() => {
-		if (isServerSide() || !subnavRef.current || !headerTitleRef.current) {
+		if (
+			isServerSide() ||
+			!headerRef.current ||
+			!headerTitleRef.current ||
+			!scrollRef.current
+		) {
 			return;
 		}
 
-		const bodyRect = document.body.getBoundingClientRect();
-		const scrollTop = Math.min(
-			Math.max(-bodyRect.top, 0), // Not less than 0
-			bodyRect.height - window.innerHeight // Not beyond the end of the page (rubber-banding case)
-		);
-
+		const scrollTop = scrollRef.current.scrollTop;
 		const scrollingUp = scrollTop < lastScrollTop;
+
 		if (scrollingUp && headerSlideOffset + COLLAPSING_HEIGHT < scrollTop) {
 			setHeaderSlideOffset(Math.max(lastScrollTop - COLLAPSING_HEIGHT, 0));
 		} else if (!scrollingUp && headerSlideOffset > scrollTop) {
@@ -70,22 +73,22 @@ export default function MobileHeader({
 		headerTitleRef.current.style.paddingBottom = `${
 			22 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE
 		}px`;
-		subnavRef.current.style.top = `calc(100% - ${
-			transitionProgress * SUBNAV_HEIGHT
-		}px)`;
+		headerRef.current.style.paddingBottom = `${
+			(1 - transitionProgress) * SUBNAV_HEIGHT
+		}px`;
 
 		setLastScrollTop(scrollTop);
-	}, [headerSlideOffset, lastScrollTop]);
+	}, [headerSlideOffset, lastScrollTop, scrollRef]);
 
 	useEffect(() => {
-		window.addEventListener('scroll', listener);
-		return () => {
-			window.removeEventListener('scroll', listener);
-		};
-	}, [listener]);
+		if (isServerSide() || !scrollRef.current) return;
+		const el = scrollRef.current;
+		el.addEventListener('scroll', listener);
+		return () => el.removeEventListener('scroll', listener);
+	}, [listener, scrollRef]);
 
 	return (
-		<div className={styles.mobileHeader}>
+		<div className={styles.mobileHeader} ref={headerRef}>
 			<div className={styles.mobileHeaderTitle} ref={headerTitleRef}>
 				<Header />
 				<Button
@@ -100,7 +103,7 @@ export default function MobileHeader({
 				/>
 				{playbackRecording && <ButtonPlayback />}
 			</div>
-			<div className={styles.mobileSubnavWrapper} ref={subnavRef}>
+			<div className={styles.mobileSubnavWrapper}>
 				<div className={styles.mobileSubnav}>
 					<Mininav
 						items={navigationItems.slice(0, -2).map((item) => ({

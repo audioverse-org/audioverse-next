@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
 import SearchBar from '@components/molecules/searchBar';
@@ -24,12 +24,13 @@ export default function AndNavigation({
 	const shouldShowSearch =
 		pathname.includes('/[language]/discover') ||
 		pathname.includes('/[language]/search');
+	const scrollRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => setTerm(param), [param, pathname]);
 
 	return (
 		<div className={styles.positioner}>
-			<MobileHeader setShowingMenu={setShowingMenu} />
+			<MobileHeader scrollRef={scrollRef} setShowingMenu={setShowingMenu} />
 			<div className={styles.wrapper}>
 				<div className={styles.base}>
 					<Drawer
@@ -38,7 +39,7 @@ export default function AndNavigation({
 						onSearchChange={(v) => setTerm(v)}
 						searchTerm={term}
 					/>
-					<div className={styles.content}>
+					<div ref={scrollRef} className={styles.content}>
 						<LanguageAlternativesAlert />
 						<SearchBar
 							term={term}

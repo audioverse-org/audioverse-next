@@ -5,7 +5,6 @@
     top: 0;
     display: flex;
     flex-direction: column;
-    margin-bottom: 32px;
     z-index: 10;
     background: $ts-cream;
 }
@@ -29,9 +28,9 @@
 
 .mobileSubnavWrapper {
     position: absolute;
-    top: 100%;
     left: 0;
     right: 0;
+    bottom: 0;
     background: $ts-cream;
 }
 
