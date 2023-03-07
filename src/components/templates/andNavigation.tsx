@@ -29,11 +29,9 @@ export default function AndNavigation({
 	useEffect(() => setTerm((q as string) || ''), [q, pathname]);
 
 	useEffect(() => {
-		const onRouteChange = () => setShowingMenu(false);
-		Router.events.on('routeChangeStart', onRouteChange);
-		return () => {
-			Router.events.off('routeChangeStart', onRouteChange);
-		};
+		const fn = () => setShowingMenu(false);
+		Router.events.on('routeChangeStart', fn);
+		return () => Router.events.off('routeChangeStart', fn);
 	}, []);
 
 	useEffect(() => {
