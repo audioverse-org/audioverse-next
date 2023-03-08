@@ -38,9 +38,7 @@ export default function AndNavigation({
 				<div ref={scrollRef} className={styles.content}>
 					<LanguageAlternativesAlert />
 					<SearchBar term={term} onChange={(v) => setTerm(v)} />
-					<div>
-						{term === undefined ? children : <SearchResults term={term} />}
-					</div>
+					{term === undefined ? children : <SearchResults term={term} />}
 					<Footer scrollRef={scrollRef} />
 				</div>
 			</div>
