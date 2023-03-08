@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
@@ -21,9 +20,6 @@ export default function AndNavigation({
 	const param = q?.toString();
 	const [term, setTerm] = useState<string | undefined>(param);
 	const [showingMenu, setShowingMenu] = useState(false);
-	const shouldShowSearch =
-		pathname.includes('/[language]/discover') ||
-		pathname.includes('/[language]/search');
 	const scrollRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => setTerm(param), [param, pathname]);
@@ -41,14 +37,7 @@ export default function AndNavigation({
 				/>
 				<div ref={scrollRef} className={styles.content}>
 					<LanguageAlternativesAlert />
-					<SearchBar
-						term={term}
-						onChange={(v) => setTerm(v)}
-						className={clsx(
-							styles.searchBox,
-							shouldShowSearch && styles.searchShown
-						)}
-					/>
+					<SearchBar term={term} onChange={(v) => setTerm(v)} />
 					<div>
 						{term === undefined ? children : <SearchResults term={term} />}
 					</div>

@@ -32,17 +32,3 @@
 	height: 100vh;
 	overflow: scroll;
 }
-
-.searchBox {
-	margin-bottom: 24px;
-
-	&:not(.searchShown) {
-		display: none;
-	}
-}
-
-@media (min-width: $breakpoint-lg) {
-	.searchBox.searchBox {
-		display: inherit;
-	}
-}
