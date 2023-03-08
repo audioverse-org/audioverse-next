@@ -29,31 +29,32 @@ export default function AndNavigation({
 	useEffect(() => setTerm(param), [param, pathname]);
 
 	return (
-		<div className={styles.positioner}>
+		<>
 			<MobileHeader scrollRef={scrollRef} setShowingMenu={setShowingMenu} />
-			<div className={styles.wrapper}>
-				<div className={styles.base}>
-					<Drawer
-						showingMenu={showingMenu}
-						onExit={() => setShowingMenu(false)}
-						onSearchChange={(v) => setTerm(v)}
-						searchTerm={term}
+
+			<div className={styles.base}>
+				<Drawer
+					showingMenu={showingMenu}
+					onExit={() => setShowingMenu(false)}
+					onSearchChange={(v) => setTerm(v)}
+					searchTerm={term}
+				/>
+				<div ref={scrollRef} className={styles.content}>
+					<LanguageAlternativesAlert />
+					<SearchBar
+						term={term}
+						onChange={(v) => setTerm(v)}
+						className={clsx(
+							styles.searchBox,
+							shouldShowSearch && styles.searchShown
+						)}
 					/>
-					<div ref={scrollRef} className={styles.content}>
-						<LanguageAlternativesAlert />
-						<SearchBar
-							term={term}
-							onChange={(v) => setTerm(v)}
-							className={clsx(
-								styles.searchBox,
-								shouldShowSearch && styles.searchShown
-							)}
-						/>
+					<div>
 						{term === undefined ? children : <SearchResults term={term} />}
-						<Footer scrollRef={scrollRef} />
 					</div>
+					<Footer scrollRef={scrollRef} />
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
