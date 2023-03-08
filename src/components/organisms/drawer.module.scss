@@ -6,7 +6,7 @@
 
 .navigation {
     position: fixed;
-    height: 100%;
+    height: 100vh;
     width: 100vw;
     top: 0;
     display: flex;
@@ -34,7 +34,7 @@
     }
 
     .navigation {
-        position: fixed;
+        position: static;
         width: $sidebar-width;
         padding: 0;
         overflow: scroll;

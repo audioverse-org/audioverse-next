@@ -11,12 +11,14 @@
 		margin-top: 0;
 	}
 }
+
 .paragraph {
 	margin: 0 0 16px;
 }
 
 .tagline {
 	margin-bottom: 8px;
+
 	@media (min-width: $breakpoint-lg) {
 		font-size: 48px;
 	}
@@ -25,7 +27,8 @@
 .primaryCtas {
 	display: flex;
 	align-items: center;
-	> * {
+
+	>* {
 		margin-right: 16px;
 	}
 }
@@ -33,8 +36,9 @@
 .bannerImage {
 	aspect-ratio: 16/9;
 	width: 100%;
+
 	@supports not (aspect-ratio: 9 / 16) {
-		> * {
+		>* {
 			height: 0 !important;
 			padding-top: 56.25% !important;
 		}
@@ -42,8 +46,9 @@
 
 	@media (min-width: $breakpoint-md) {
 		aspect-ratio: 1/1;
+
 		@supports not (aspect-ratio: 1 / 1) {
-			> * {
+			>* {
 				height: 0 !important;
 				padding-top: 100% !important;
 			}
@@ -54,6 +59,7 @@
 .narrow.narrow {
 	max-width: 560px;
 	margin: 0 auto 16px;
+
 	@media (min-width: $breakpoint-lg) {
 		margin-bottom: 32px;
 	}
@@ -66,41 +72,49 @@
 .latestSection {
 	@media (max-width: #{$breakpoint-lg - 1px}) {
 		overflow: visible;
-		> *:first-child {
+
+		>*:first-child {
 			height: auto;
 		}
 	}
 }
+
 .latestContentWrapper {
 	margin: 0 8px;
 }
 
 .blogSection {
 	margin: 16px 11px;
+
 	@media (min-width: $breakpoint-md) {
 		margin: 16px;
 	}
+
 	@media (min-width: $breakpoint-xl) {
 		margin: 48px 48px 32px;
 	}
 }
 
 .posts {
-	> * {
+	>* {
 		margin-bottom: 16px;
 	}
+
 	@media (min-width: $breakpoint-md) {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-gap: 0 16px;
 	}
+
 	@media (min-width: $breakpoint-xl) {
 		grid-template-columns: repeat(3, 1fr);
 	}
 }
+
 .postsSquare {
 	grid-template-columns: repeat(2, 1fr);
 }
+
 .postsSeeAll {
 	margin-top: 16px;
 	display: flex;
@@ -114,35 +128,44 @@
 	padding-top: 200%;
 	background: $ts-dark;
 	border-radius: 16px;
-	> * {
+
+	>* {
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 	}
+
 	@media (min-width: 425px) {
 		padding-top: 175%;
 	}
+
 	@media (min-width: 475px) {
 		padding-top: 160%;
 	}
+
 	@media (min-width: $breakpoint-sm) {
 		padding-top: 150%;
 	}
+
 	@media (min-width: $breakpoint-md) {
 		padding-top: 50%;
 	}
+
 	@media (min-width: $breakpoint-lg) {
 		padding-top: calc((100vw - 300px) / 2);
 	}
+
 	@media (min-width: $content-maxWidth) {
 		padding-top: calc(#{$content-maxWidth - $sidebar-width - 35px - 24px} / 2);
 	}
 }
+
 .featureSlide {
 	margin: 0 !important;
-	> *:last-child {
+
+	>*:last-child {
 		padding-bottom: 56px;
 	}
 }
@@ -150,97 +173,65 @@
 .newsletterPromoTitle {
 	margin-bottom: 8px;
 }
+
 .newsletterPromoKicker {
 	margin: 0;
 }
+
 .newsletterWrapper {
 	width: 100%;
+
 	@media (min-width: $breakpoint-lg) {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 }
+
 .newsletterBox {
 	margin: 16px;
 	background: $ts-white;
 	border-radius: 16px;
 	overflow: hidden;
 	flex: 1;
+
 	@media (min-width: $breakpoint-xl) {
 		margin: 48px;
 	}
 }
+
 .newsletterHat {
 	height: 49px;
 	display: flex;
 	align-items: center;
 	padding: 16px;
 	background: $ts-red;
-	> svg {
+
+	>svg {
 		margin-top: 3px;
 		margin-right: 4px;
 	}
 }
+
 .newsletterBody {
 	padding: 16px;
 	color: $ts-dark;
 }
+
 .newsletterFieldRow {
 	@media (min-width: $breakpoint-xl) {
 		display: flex;
-		> * {
+
+		>* {
 			max-width: 50%;
+
 			&:first-child {
 				padding-right: 8px;
 			}
+
 			&:last-child {
 				padding-left: 8px;
 			}
 		}
-	}
-}
-
-.footerWrapper {
-	position: fixed;
-	bottom: $grid-gap;
-	left: 0;
-	right: 0;
-	padding-left: 24px;
-	padding-right: 24px;
-	margin: 0 auto;
-	opacity: 0;
-	pointer-events: none;
-
-	max-width: 100vw;
-	@media (min-width: $content-maxWidth-sm) {
-		max-width: $content-maxWidth-sm;
-	}
-	@media (min-width: $breakpoint-md) {
-		max-width: 100vw;
-	}
-	@media (min-width: $content-maxWidth) {
-		max-width: $content-maxWidth;
-	}
-	@media (min-width: $breakpoint-lg) {
-		padding-left: #{$sidebar-width + 24px};
-	}
-	@media (min-width: $breakpoint-xl) {
-		padding-left: #{$sidebar-width + 35px};
-	}
-}
-.footer {
-	margin-bottom: 8px;
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-	padding-right: 75px + $grid-gap;
-
-	.logo {
-		margin-right: $grid-gap;
-	}
-
-	h3 {
-		font-size: 18px;
 	}
 }
