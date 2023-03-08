@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-
 import LanguageAlternativesAlert from '@components/molecules/languageAlternativesAlert';
 import SearchBar from '@components/molecules/searchBar';
-
 import styles from './andNavigation.module.scss';
 import MobileHeader from '@components/organisms/mobileHeader';
 import Drawer from '@components/organisms/drawer';
+import Footer from '@components/organisms/footer';
 
 export default function AndNavigation({
 	children,
@@ -50,6 +49,7 @@ export default function AndNavigation({
 							)}
 						/>
 						<div>{children}</div>
+						<Footer scrollRef={scrollRef} />
 					</div>
 				</div>
 			</div>
