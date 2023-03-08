@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
-import Heading3 from '@components/atoms/heading3';
+
 import Button from '@components/molecules/button';
 import CardPost from '@components/molecules/card/post';
 import CardRecording from '@components/molecules/card/recording';
@@ -20,7 +20,6 @@ import { BaseColors } from '@lib/constants';
 import { getSessionToken } from '@lib/cookies';
 import { GetHomeStaticPropsQuery } from '@lib/generated/graphql';
 import { getAppFeatures } from '@lib/getAppFeatures';
-import isServerSide from '@lib/isServerSide';
 import {
 	makeBlogPostListRoute,
 	makeDiscoverRoute,
@@ -46,28 +45,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const isLoggedIn = !!getSessionToken();
-
-	const footerRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		const currentFooterRef = footerRef.current;
-		if (!currentFooterRef || isServerSide()) {
-			return;
-		}
-		const onScroll = () => {
-			currentFooterRef.style.opacity = `${
-				1 -
-				Math.min(
-					(document.body.scrollHeight -
-						document.documentElement.scrollTop -
-						window.innerHeight) /
-						60,
-					1
-				)
-			}`;
-		};
-		window.addEventListener('scroll', onScroll);
-		() => window.removeEventListener('scroll', onScroll);
-	}, []);
 
 	const recentRecordings = data?.websiteRecentRecordings.nodes || [];
 	const testimonies = data?.testimonies.nodes || [];
@@ -483,19 +460,6 @@ export default function Home({ data }: HomeProps): JSX.Element {
 					bleed
 					tall
 				/>
-			</div>
-			<div className={styles.footerWrapper} ref={footerRef}>
-				<div className={styles.footer}>
-					<span className={styles.logo}>
-						<Image src="/img/logo.svg" width={161} height={23} />
-					</span>
-					<Heading3 sans unpadded>
-						<FormattedMessage
-							id="homePage__tagline"
-							defaultMessage="Sound Doctrine"
-						/>
-					</Heading3>
-				</div>
 			</div>
 		</>
 	);
