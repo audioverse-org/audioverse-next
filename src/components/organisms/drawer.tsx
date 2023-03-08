@@ -15,7 +15,7 @@ export default function Drawer({
 }: {
 	showingMenu: boolean;
 	onExit: () => void;
-	onSearchChange: (term: string) => void;
+	onSearchChange: (term: string | undefined) => void;
 	searchTerm?: string;
 }): JSX.Element {
 	useEffect(() => {
