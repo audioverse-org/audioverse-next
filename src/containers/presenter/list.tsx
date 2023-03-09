@@ -52,7 +52,7 @@ function Presenters({
 			<Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2>
 			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
 				<Card className={styles.card} key={canonicalPath}>
-					<Link href={canonicalPath}>
+					<Link href={canonicalPath} legacyBehavior>
 						<a className={styles.container}>
 							<div className={styles.nameLockup}>
 								{image && (
