@@ -12,6 +12,7 @@ import Sponsors, {
 	getStaticProps,
 } from '@pages/[language]/sponsors/letter/[letter]';
 import { buildLoader } from '@lib/test/buildLoader';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 const loadData = buildLoader(GetSponsorListPageDataDocument, {
@@ -49,15 +50,15 @@ describe('sponsor list page', () => {
 	});
 
 	it('renders page title', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Sponsors')).toBeInTheDocument();
+		expect(screen.getByText('All Sponsors')).toBeInTheDocument();
 	});
 
 	it('lists sponsors', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title')).toBeInTheDocument();
+		expect(screen.getByText('the_sponsor_title')).toBeInTheDocument();
 	});
 
 	it('generates paths', async () => {
@@ -77,9 +78,9 @@ describe('sponsor list page', () => {
 	});
 
 	it('links entries', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('the_sponsor_title').parentElement).toHaveAttribute(
+		expect(screen.getByText('the_sponsor_title').parentElement).toHaveAttribute(
 			'href',
 			'the_sponsor_path'
 		);
@@ -90,8 +91,8 @@ describe('sponsor list page', () => {
 			.calledWith(GetSponsorListPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 });
