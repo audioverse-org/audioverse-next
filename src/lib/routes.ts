@@ -173,6 +173,9 @@ export const makeSponsorListRoute = (
 	letter?: string
 ): string => `/${languageRoute}/sponsors${letter ? `/letter/${letter}` : ''}`;
 
+export const makeSponsorListAllRoute = (languageRoute: string): string =>
+	`/${languageRoute}/sponsors/all`;
+
 export const makeSponsorTeachingsRoute = (
 	languageRoute: string,
 	sponsorId: Scalars['ID'],
