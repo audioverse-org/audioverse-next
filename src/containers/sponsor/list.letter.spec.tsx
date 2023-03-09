@@ -81,10 +81,11 @@ describe('sponsor list page', () => {
 	it('links entries', async () => {
 		await renderPage();
 
-		expect(screen.getByText('the_sponsor_title').parentElement).toHaveAttribute(
-			'href',
-			'the_sponsor_path'
-		);
+		const link = screen.getByRole('link', {
+			name: 'the_sponsor_title',
+		});
+
+		expect(link).toHaveAttribute('href', 'the_sponsor_path');
 	});
 
 	it('renders 404', async () => {
