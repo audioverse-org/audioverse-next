@@ -41,6 +41,7 @@ const loadData = buildLoader(GetSponsorListPageDataDocument, {
 
 describe('sponsor list page', () => {
 	beforeEach(() => {
+		loadData();
 		__loadQuery({
 			language: 'en',
 			i: '1',
@@ -48,16 +49,12 @@ describe('sponsor list page', () => {
 	});
 
 	it('renders page title', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('All Sponsors')).toBeInTheDocument();
 	});
 
 	it('lists sponsors', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_title')).toBeInTheDocument();
@@ -80,8 +77,6 @@ describe('sponsor list page', () => {
 	});
 
 	it('links entries', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_sponsor_title').parentElement).toHaveAttribute(
