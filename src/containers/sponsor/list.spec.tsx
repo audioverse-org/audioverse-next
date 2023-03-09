@@ -15,6 +15,7 @@ import { buildLoader } from '@lib/test/buildLoader';
 import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
+
 const loadData = buildLoader(GetSponsorListPageDataDocument, {
 	sponsors: {
 		nodes: [
@@ -33,6 +34,14 @@ const loadData = buildLoader(GetSponsorListPageDataDocument, {
 			},
 		],
 	},
+	sponsorLetterCounts: [
+		{
+			letter: 'A',
+		},
+	],
+});
+
+const loadPathsData = buildLoader(GetSponsorListPathsDataDocument, {
 	sponsorLetterCounts: [
 		{
 			letter: 'A',
@@ -62,15 +71,7 @@ describe('sponsor list page', () => {
 	});
 
 	it('generates paths', async () => {
-		when(fetchApi)
-			.calledWith(GetSponsorListPathsDataDocument, expect.anything())
-			.mockResolvedValue({
-				sponsorLetterCounts: [
-					{
-						letter: 'A',
-					},
-				],
-			});
+		loadPathsData();
 
 		const { paths } = await getStaticPaths();
 
