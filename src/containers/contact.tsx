@@ -112,7 +112,7 @@ export default function Contact({ type }: Must<ContactProps>): JSX.Element {
 				/>
 			</p>
 			<p className={styles.intro}>
-				<Link href="https://help.audioverse.org/">
+				<Link href="https://help.audioverse.org/" legacyBehavior>
 					<a className="decorated" target="_blank">
 						<FormattedMessage
 							id="contact__help"
