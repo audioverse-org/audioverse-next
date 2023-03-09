@@ -49,11 +49,6 @@
 }
 
 @media (min-width: $breakpoint-lg) {
-	.content {
-		display: flex;
-		flex-direction: column;
-	}
-
 	.searchBox.searchBox {
 		display: inherit;
 	}
