@@ -11,37 +11,33 @@ import Sponsors, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/sponsors/letter/[letter]';
+import { buildLoader } from '@lib/test/buildLoader';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
-
-function loadData() {
-	when(fetchApi)
-		.calledWith(GetSponsorListPageDataDocument, expect.anything())
-		.mockResolvedValue({
-			sponsors: {
-				nodes: [
-					{
-						id: 'the_sponsor_id',
-						title: 'the_sponsor_title',
-						canonicalPath: 'the_sponsor_path',
-						imageWithFallback: {
-							url: 'the_sponsor_image',
-						},
-						collections: {
-							aggregate: {
-								count: 1,
-							},
-						},
-					},
-				],
-			},
-			sponsorLetterCounts: [
-				{
-					letter: 'A',
+const loadData = buildLoader(GetSponsorListPageDataDocument, {
+	sponsors: {
+		nodes: [
+			{
+				id: 'the_sponsor_id',
+				title: 'the_sponsor_title',
+				canonicalPath: 'the_sponsor_path',
+				imageWithFallback: {
+					url: 'the_sponsor_image',
 				},
-			],
-		});
-}
+				collections: {
+					aggregate: {
+						count: 1,
+					},
+				},
+			},
+		],
+	},
+	sponsorLetterCounts: [
+		{
+			letter: 'A',
+		},
+	],
+});
 
 describe('sponsor list page', () => {
 	beforeEach(() => {
