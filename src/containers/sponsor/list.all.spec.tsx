@@ -1,7 +1,10 @@
-import { buildRenderer } from '@lib/test/buildRenderer';
-import Sponsors, { getStaticPaths } from '@pages/[language]/sponsors/all';
+import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
+import Sponsors, {
+	getStaticPaths,
+	getStaticProps,
+} from '@pages/[language]/sponsors/all';
 
-const renderPage = buildRenderer(Sponsors);
+const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 
 describe('sponsor list all page', () => {
 	it('renders', async () => {
