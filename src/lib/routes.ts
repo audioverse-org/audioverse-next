@@ -1,5 +1,10 @@
 import { Scalars } from './generated/graphql';
 
+// TODO: break file apart to improve bundling
+
+// TODO: update to improve dx, maybe something like:
+// routes.lang(ENGLISH).presenters.list('B')
+
 const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
 export const makePresenterListRoute = (
