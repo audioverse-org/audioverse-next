@@ -1,3 +1,8 @@
-import Sponsors from './list';
+import Sponsors, { SponsorsProps } from './list';
+import React from 'react';
 
-export default Sponsors;
+type Props = Omit<SponsorsProps, 'sponsors'>;
+
+export default function AllSponsors(props: Props) {
+	return <Sponsors {...props} title="All" sponsors={[]} />;
+}

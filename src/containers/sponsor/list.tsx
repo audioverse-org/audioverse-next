@@ -8,7 +8,10 @@ import RoundImage from '@components/atoms/roundImage';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetSponsorListLetterPageDataQuery } from '@lib/generated/graphql';
+import {
+	GetSponsorListLetterCountsQuery,
+	SponsorListEntryFragment,
+} from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
 	makeSponsorListRoute,
@@ -18,10 +21,11 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import styles from './list.module.scss';
 
 export type SponsorsProps = {
-	sponsors: NonNullable<GetSponsorListLetterPageDataQuery['sponsors']['nodes']>;
+	sponsors: SponsorListEntryFragment[];
 	sponsorLetterCounts: NonNullable<
-		GetSponsorListLetterPageDataQuery['sponsorLetterCounts']
+		GetSponsorListLetterCountsQuery['sponsorLetterCounts']
 	>;
+	title?: string;
 };
 
 // TODO: replace with sponsors landing page (featured, recent, trending, etc.)
@@ -29,6 +33,7 @@ export type SponsorsProps = {
 export default function Sponsors({
 	sponsors,
 	sponsorLetterCounts,
+	title,
 }: SponsorsProps): JSX.Element {
 	const language = useLanguageRoute();
 	const jumpLinks = sponsorLetterCounts.map(({ letter }) => ({
@@ -49,7 +54,8 @@ export default function Sponsors({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			<Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2>
+			{/* <Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2> */}
+			{title && <Heading2>{title}</Heading2>}
 			{sponsors.map(({ canonicalPath, image, title }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} legacyBehavior>
