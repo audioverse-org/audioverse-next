@@ -1,4 +1,4 @@
-import Sponsors from '@containers/sponsor/list/list.all';
+import Sponsors from '@containers/sponsor/list/all';
 import {
 	getSponsorListLetterCounts,
 	GetSponsorListLetterCountsQuery,
