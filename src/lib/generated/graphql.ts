@@ -6890,14 +6890,13 @@ export type GetSponsorDetailPathsDataQueryVariables = Exact<{
 
 export type GetSponsorDetailPathsDataQuery = { __typename?: 'Query', sponsors: { __typename?: 'SponsorConnection', nodes: Array<{ __typename?: 'Sponsor', canonicalPath: string }> | null } };
 
-export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
-
-export type GetSponsorListLetterCountsQueryVariables = Exact<{
+export type GetSponsorListAllPageDataQueryVariables = Exact<{
   language: Language;
+  after: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetSponsorListLetterCountsQuery = { __typename?: 'Query', sponsorLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
+export type GetSponsorListAllPageDataQuery = { __typename?: 'Query', sponsors: { __typename?: 'SponsorConnection', nodes: Array<{ __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } } };
 
 export type GetSponsorListLetterPageDataQueryVariables = Exact<{
   language: Language;
@@ -6906,6 +6905,15 @@ export type GetSponsorListLetterPageDataQueryVariables = Exact<{
 
 
 export type GetSponsorListLetterPageDataQuery = { __typename?: 'Query', sponsors: { __typename?: 'SponsorConnection', nodes: Array<{ __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null }> | null }, sponsorLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
+
+export type SponsorListEntryFragment = { __typename?: 'Sponsor', canonicalPath: string, title: string, image: { __typename?: 'Image', url: string } | null };
+
+export type GetSponsorListLetterCountsQueryVariables = Exact<{
+  language: Language;
+}>;
+
+
+export type GetSponsorListLetterCountsQuery = { __typename?: 'Query', sponsorLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
 
 export type SponsorPivotFragment = { __typename?: 'Sponsor', id: string | number, title: string, canonicalPath: string, image: { __typename?: 'Image', url: string } | null };
 
@@ -8802,19 +8810,19 @@ export const useGetSponsorDetailPathsDataQuery = <
       graphqlFetcher<GetSponsorDetailPathsDataQuery, GetSponsorDetailPathsDataQueryVariables>(GetSponsorDetailPathsDataDocument, variables),
       options
     );
-export const GetSponsorListLetterCountsDocument = `
-query getSponsorListLetterCounts($language:Language!){sponsorLetterCounts(language:$language){letter count}}
-`;
-export const useGetSponsorListLetterCountsQuery = <
-      TData = GetSponsorListLetterCountsQuery,
+export const GetSponsorListAllPageDataDocument = `
+query getSponsorListAllPageData($language:Language!$after:String){sponsors(language:$language orderBy:[{field:TITLE direction:ASC}]first:20 after:$after){nodes{...sponsorListEntry}pageInfo{hasNextPage endCursor}}}
+${SponsorListEntryFragmentDoc}`;
+export const useGetSponsorListAllPageDataQuery = <
+      TData = GetSponsorListAllPageDataQuery,
       TError = unknown
     >(
-      variables: GetSponsorListLetterCountsQueryVariables,
-      options?: UseQueryOptions<GetSponsorListLetterCountsQuery, TError, TData>
+      variables: GetSponsorListAllPageDataQueryVariables,
+      options?: UseQueryOptions<GetSponsorListAllPageDataQuery, TError, TData>
     ) =>
-    useQuery<GetSponsorListLetterCountsQuery, TError, TData>(
-      ['getSponsorListLetterCounts', variables],
-      graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, variables),
+    useQuery<GetSponsorListAllPageDataQuery, TError, TData>(
+      ['getSponsorListAllPageData', variables],
+      graphqlFetcher<GetSponsorListAllPageDataQuery, GetSponsorListAllPageDataQueryVariables>(GetSponsorListAllPageDataDocument, variables),
       options
     );
 export const GetSponsorListLetterPageDataDocument = `
@@ -8830,6 +8838,21 @@ export const useGetSponsorListLetterPageDataQuery = <
     useQuery<GetSponsorListLetterPageDataQuery, TError, TData>(
       ['getSponsorListLetterPageData', variables],
       graphqlFetcher<GetSponsorListLetterPageDataQuery, GetSponsorListLetterPageDataQueryVariables>(GetSponsorListLetterPageDataDocument, variables),
+      options
+    );
+export const GetSponsorListLetterCountsDocument = `
+query getSponsorListLetterCounts($language:Language!){sponsorLetterCounts(language:$language){letter count}}
+`;
+export const useGetSponsorListLetterCountsQuery = <
+      TData = GetSponsorListLetterCountsQuery,
+      TError = unknown
+    >(
+      variables: GetSponsorListLetterCountsQueryVariables,
+      options?: UseQueryOptions<GetSponsorListLetterCountsQuery, TError, TData>
+    ) =>
+    useQuery<GetSponsorListLetterCountsQuery, TError, TData>(
+      ['getSponsorListLetterCounts', variables],
+      graphqlFetcher<GetSponsorListLetterCountsQuery, GetSponsorListLetterCountsQueryVariables>(GetSponsorListLetterCountsDocument, variables),
       options
     );
 export const GetSponsorSeriesPageDataDocument = `
@@ -9854,16 +9877,22 @@ export async function getSponsorDetailPathsData<T>(
 	return fetchApi(GetSponsorDetailPathsDataDocument, { variables });
 }
 
-export async function getSponsorListLetterCounts<T>(
-	variables: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
-): Promise<GetSponsorListLetterCountsQuery> {
-	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
+export async function getSponsorListAllPageData<T>(
+	variables: ExactAlt<T, GetSponsorListAllPageDataQueryVariables>
+): Promise<GetSponsorListAllPageDataQuery> {
+	return fetchApi(GetSponsorListAllPageDataDocument, { variables });
 }
 
 export async function getSponsorListLetterPageData<T>(
 	variables: ExactAlt<T, GetSponsorListLetterPageDataQueryVariables>
 ): Promise<GetSponsorListLetterPageDataQuery> {
 	return fetchApi(GetSponsorListLetterPageDataDocument, { variables });
+}
+
+export async function getSponsorListLetterCounts<T>(
+	variables: ExactAlt<T, GetSponsorListLetterCountsQueryVariables>
+): Promise<GetSponsorListLetterCountsQuery> {
+	return fetchApi(GetSponsorListLetterCountsDocument, { variables });
 }
 
 export async function getSponsorSeriesPageData<T>(
