@@ -33,7 +33,7 @@ export default function Footer({
 
 		currentScrollRef.addEventListener('scroll', fn);
 		router.events.on('routeChangeComplete', fn);
-		() => {
+		return () => {
 			currentScrollRef.removeEventListener('scroll', fn);
 			router.events.off('routeChangeComplete', fn);
 		};
