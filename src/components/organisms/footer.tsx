@@ -26,8 +26,11 @@ export default function Footer({
 		const fn = () => {
 			const scrollHeight = currentScrollRef.scrollHeight;
 			const scrollTop = currentScrollRef.scrollTop;
-			const opacity =
-				1 - Math.min((scrollHeight - scrollTop - window.innerHeight) / 60, 1);
+			const distanceFromBottom = scrollHeight - scrollTop - window.innerHeight;
+			const maxDistance = 60;
+			const opacityFactor = Math.min(distanceFromBottom / maxDistance, 1);
+			const opacity = 1 - opacityFactor;
+
 			currentFooterRef.style.opacity = opacity.toString();
 		};
 
