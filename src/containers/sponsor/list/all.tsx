@@ -16,15 +16,17 @@ export default function AllSponsors(props: Props) {
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
-	const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
+	const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery(
 		['sponsors'],
-		({ pageParam = null }) =>
-			fetchApi(GetSponsorListAllPageDataDocument, {
+		({ pageParam = null }) => {
+			console.log('fetching sponsors', pageParam);
+			return fetchApi(GetSponsorListAllPageDataDocument, {
 				variables: {
 					language,
 					after: pageParam,
 				},
-			}),
+			});
+		},
 		{
 			getNextPageParam: ({ sponsors }: GetSponsorListAllPageDataQuery) =>
 				sponsors.pageInfo.hasNextPage ? sponsors.pageInfo.endCursor : undefined,
@@ -34,10 +36,10 @@ export default function AllSponsors(props: Props) {
 	const sponsors = data?.pages.flatMap((p) => p.sponsors.nodes || []) || [];
 
 	useEffect(() => {
-		if (hasNextPage && hasReachedEnd) {
+		if (hasNextPage && hasReachedEnd && !isLoading) {
 			fetchNextPage();
 		}
-	}, [hasNextPage, hasReachedEnd, fetchNextPage]);
+	}, [hasNextPage, hasReachedEnd, fetchNextPage, isLoading]);
 
 	return (
 		<>
