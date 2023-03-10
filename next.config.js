@@ -548,7 +548,7 @@ module.exports = withBundleAnalyzer(
 				},
 				{
 					source: '/:lang/sponsors',
-					destination: '/:lang/sponsors/letter/A',
+					destination: '/:lang/sponsors/all',
 				},
 				{
 					source: '/:lang/sponsors/:id/conferences',
