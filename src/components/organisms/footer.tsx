@@ -34,11 +34,22 @@ export default function Footer({
 			currentFooterRef.style.opacity = opacity.toString();
 		};
 
+		const observer = new MutationObserver(fn);
+
+		observer.observe(currentScrollRef, {
+			subtree: true,
+			childList: true,
+			attributes: true,
+			characterData: true,
+		});
+
 		currentScrollRef.addEventListener('scroll', fn);
 		router.events.on('routeChangeComplete', fn);
+
 		return () => {
 			currentScrollRef.removeEventListener('scroll', fn);
 			router.events.off('routeChangeComplete', fn);
+			observer.disconnect();
 		};
 	}, [scrollRef, router]);
 
