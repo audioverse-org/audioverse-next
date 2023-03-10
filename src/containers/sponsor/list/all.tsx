@@ -18,14 +18,13 @@ export default function AllSponsors(props: Props) {
 
 	const { data, hasNextPage, fetchNextPage } = useInfiniteQuery(
 		['sponsors'],
-		({ pageParam = null }) => {
-			return fetchApi(GetSponsorListAllPageDataDocument, {
+		({ pageParam = null }) =>
+			fetchApi(GetSponsorListAllPageDataDocument, {
 				variables: {
 					language,
 					after: pageParam,
 				},
-			});
-		},
+			}),
 		{
 			getNextPageParam: ({ sponsors }: GetSponsorListAllPageDataQuery) =>
 				sponsors.pageInfo.hasNextPage ? sponsors.pageInfo.endCursor : undefined,
@@ -35,12 +34,7 @@ export default function AllSponsors(props: Props) {
 	const sponsors = data?.pages.flatMap((p) => p.sponsors.nodes || []) || [];
 
 	useEffect(() => {
-		console.log({
-			hasNextPage,
-			hasReachedEnd,
-		});
 		if (hasNextPage && hasReachedEnd) {
-			console.log('fetching next page');
 			fetchNextPage();
 		}
 	}, [hasNextPage, hasReachedEnd, fetchNextPage]);
