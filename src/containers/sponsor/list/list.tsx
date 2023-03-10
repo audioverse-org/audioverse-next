@@ -14,6 +14,7 @@ import {
 } from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
+	makeSponsorListAllRoute,
 	makeSponsorListRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -36,10 +37,16 @@ export default function Sponsors({
 	title,
 }: SponsorsProps): JSX.Element {
 	const language = useLanguageRoute();
-	const jumpLinks = sponsorLetterCounts.map(({ letter }) => ({
-		text: letter,
-		url: makeSponsorListRoute(language, letter),
-	}));
+	const jumpLinks = [
+		{
+			text: 'All',
+			url: makeSponsorListAllRoute(language),
+		},
+		...sponsorLetterCounts.map(({ letter }) => ({
+			text: letter,
+			url: makeSponsorListRoute(language, letter),
+		})),
+	];
 
 	return (
 		<>
