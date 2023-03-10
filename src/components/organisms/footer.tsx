@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import isServerSide from '@lib/isServerSide';
 import React from 'react';
 import styles from './footer.module.scss';
+import { useRouter } from 'next/router';
 
 export default function Footer({
 	scrollRef,
@@ -12,6 +13,7 @@ export default function Footer({
 	scrollRef: React.RefObject<HTMLDivElement>;
 }): JSX.Element {
 	const footerRef = useRef<HTMLDivElement>(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		const currentFooterRef = footerRef.current;
@@ -21,7 +23,7 @@ export default function Footer({
 			return;
 		}
 
-		const onScroll = () => {
+		const fn = () => {
 			const scrollHeight = currentScrollRef.scrollHeight;
 			const scrollTop = currentScrollRef.scrollTop;
 			const opacity =
@@ -29,9 +31,13 @@ export default function Footer({
 			currentFooterRef.style.opacity = opacity.toString();
 		};
 
-		currentScrollRef.addEventListener('scroll', onScroll);
-		() => currentScrollRef.removeEventListener('scroll', onScroll);
-	}, [scrollRef]);
+		currentScrollRef.addEventListener('scroll', fn);
+		router.events.on('routeChangeComplete', fn);
+		() => {
+			currentScrollRef.removeEventListener('scroll', fn);
+			router.events.off('routeChangeComplete', fn);
+		};
+	}, [scrollRef, router]);
 
 	return (
 		<div className={styles.footerWrapper} ref={footerRef}>
