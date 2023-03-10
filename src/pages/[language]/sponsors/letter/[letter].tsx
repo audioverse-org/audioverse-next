@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '@containers/base';
-import Sponsors, { SponsorsProps } from '@containers/sponsor/list.letter';
+import Sponsors, { SponsorsProps } from '@containers/sponsor/list/list.letter';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getSponsorListLetterCounts,
