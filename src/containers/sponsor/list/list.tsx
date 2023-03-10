@@ -54,7 +54,6 @@ export default function Sponsors({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			{/* <Heading2>{sponsors[0].title.substring(0, 1).toUpperCase()}</Heading2> */}
 			{title && <Heading2>{title}</Heading2>}
 			{sponsors.map(({ canonicalPath, image, title }) => (
 				<Card className={styles.card} key={canonicalPath}>
