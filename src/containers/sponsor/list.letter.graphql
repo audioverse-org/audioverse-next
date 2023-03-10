@@ -1,0 +1,16 @@
+query getSponsorListLetterPageData($language: Language!, $startsWith: String) {
+	sponsors(
+		language: $language
+		startsWith: $startsWith
+		first: 1500
+		orderBy: [{ field: TITLE, direction: ASC }]
+	) {
+		nodes {
+			...sponsorListEntry
+		}
+	}
+	sponsorLetterCounts(language: $language) {
+		letter
+		count
+	}
+}

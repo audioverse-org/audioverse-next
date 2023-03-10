@@ -5,11 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
-import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetSponsorListPageDataQuery } from '@lib/generated/graphql';
+import { GetSponsorListLetterPageDataQuery } from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
 	makeSponsorListRoute,
@@ -19,15 +18,15 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import styles from './list.module.scss';
 
 export type SponsorsProps = {
-	sponsors: NonNullable<GetSponsorListPageDataQuery['sponsors']['nodes']>;
+	sponsors: NonNullable<GetSponsorListLetterPageDataQuery['sponsors']['nodes']>;
 	sponsorLetterCounts: NonNullable<
-		GetSponsorListPageDataQuery['sponsorLetterCounts']
+		GetSponsorListLetterPageDataQuery['sponsorLetterCounts']
 	>;
 };
 
 // TODO: replace with sponsors landing page (featured, recent, trending, etc.)
 
-function Sponsors({
+export default function Sponsors({
 	sponsors,
 	sponsorLetterCounts,
 }: SponsorsProps): JSX.Element {
@@ -68,7 +67,3 @@ function Sponsors({
 		</>
 	);
 }
-
-export default withFailStates(Sponsors, {
-	useShould404: ({ sponsors }) => !sponsors?.length,
-});

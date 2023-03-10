@@ -3,8 +3,8 @@ import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
-	GetSponsorListPageDataDocument,
-	GetSponsorListPathsDataDocument,
+	GetSponsorListLetterCountsDocument,
+	GetSponsorListLetterPageDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Sponsors, {
@@ -16,7 +16,7 @@ import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Sponsors, getStaticProps);
 
-const loadData = buildLoader(GetSponsorListPageDataDocument, {
+const loadData = buildLoader(GetSponsorListLetterPageDataDocument, {
 	sponsors: {
 		nodes: [
 			{
@@ -41,7 +41,7 @@ const loadData = buildLoader(GetSponsorListPageDataDocument, {
 	],
 });
 
-const loadPathsData = buildLoader(GetSponsorListPathsDataDocument, {
+const loadPathsData = buildLoader(GetSponsorListLetterCountsDocument, {
 	sponsorLetterCounts: [
 		{
 			letter: 'A',
@@ -90,7 +90,7 @@ describe('sponsor list page', () => {
 
 	it('renders 404', async () => {
 		when(fetchApi)
-			.calledWith(GetSponsorListPageDataDocument, expect.anything())
+			.calledWith(GetSponsorListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
 		await renderPage();

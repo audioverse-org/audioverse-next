@@ -8,8 +8,8 @@ import { IBaseProps } from '@containers/base';
 import Sponsors, { SponsorsProps } from '@containers/sponsor/list.letter';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
-	getSponsorListPageData,
-	getSponsorListPathsData,
+	getSponsorListLetterCounts,
+	getSponsorListLetterPageData,
 } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -26,7 +26,7 @@ export async function getStaticProps({
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	const letter = params?.letter as string;
-	const { sponsors, sponsorLetterCounts } = await getSponsorListPageData({
+	const { sponsors, sponsorLetterCounts } = await getSponsorListLetterPageData({
 		language,
 		startsWith: letter,
 	}).catch(() => ({
@@ -52,7 +52,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const keys = getLanguageIds();
 	const pathSets = await Promise.all(
 		keys.map(async (language) => {
-			const { sponsorLetterCounts } = await getSponsorListPathsData({
+			const { sponsorLetterCounts } = await getSponsorListLetterCounts({
 				language,
 			});
 			return (sponsorLetterCounts || []).map(({ letter }) =>

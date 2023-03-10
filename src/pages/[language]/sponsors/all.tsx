@@ -1,13 +1,28 @@
 import Sponsors from '@containers/sponsor/list.all';
+import {
+	getSponsorListLetterCounts,
+	GetSponsorListLetterCountsQuery,
+} from '@lib/generated/graphql';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makeSponsorListAllRoute } from '@lib/routes';
-import { GetStaticPathsResult, GetStaticPropsResult } from 'next';
+import {
+	GetStaticPathsResult,
+	GetStaticPropsContext,
+	GetStaticPropsResult,
+} from 'next';
 
 export default Sponsors;
 
-export function getStaticProps(): GetStaticPropsResult<unknown> {
+export async function getStaticProps({
+	params,
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<GetSponsorListLetterCountsQuery>
+> {
 	return {
-		props: {},
+		props: await getSponsorListLetterCounts({
+			language: getLanguageIdByRoute(params?.language),
+		}),
 	};
 }
 

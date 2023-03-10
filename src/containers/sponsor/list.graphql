@@ -1,25 +1,12 @@
-query getSponsorListPageData($language: Language!, $startsWith: String) {
-	sponsors(
-		language: $language
-		startsWith: $startsWith
-		first: 1500
-		orderBy: [{ field: TITLE, direction: ASC }]
-	) {
-		nodes {
-			canonicalPath(useFuturePath: true)
-			title
-			image {
-				url(size: 128)
-			}
-		}
-	}
-	sponsorLetterCounts(language: $language) {
-		letter
-		count
+fragment sponsorListEntry on Sponsor {
+	canonicalPath(useFuturePath: true)
+	title
+	image {
+		url(size: 128)
 	}
 }
 
-query getSponsorListPathsData($language: Language!) {
+query getSponsorListLetterCounts($language: Language!) {
 	sponsorLetterCounts(language: $language) {
 		letter
 		count
