@@ -5,7 +5,7 @@ import {
 } from 'next';
 
 import { IBaseProps } from '@containers/base';
-import Presenters, { PresentersProps } from '@containers/presenter/list';
+import Presenters, { PresentersProps } from '@containers/presenter/list/list';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
 	getPresenterListPageData,
