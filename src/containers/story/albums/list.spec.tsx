@@ -81,9 +81,7 @@ describe('stories list page', () => {
 	it('links pagination properly', async () => {
 		await renderPage();
 
-		const link = screen.getByText('1') as HTMLLinkElement;
-
-		expect(link).toHaveAttribute('href', '/en/stories/albums');
+		expect(screen.getByText('1')).toHaveAttribute('href', '/en/stories/albums');
 	});
 
 	it('renders empty state message', async () => {
@@ -106,11 +104,10 @@ describe('stories list page', () => {
 	it('links stories properly', async () => {
 		await renderPage();
 
-		const link = screen.getByText('the_story_title') as HTMLLinkElement;
+		const link = screen.getByRole('link', {
+			name: /the_story_title/,
+		});
 
-		expect(link.parentElement?.parentElement).toHaveAttribute(
-			'href',
-			'the_story_path'
-		);
+		expect(link).toHaveAttribute('href', 'the_story_path');
 	});
 });
