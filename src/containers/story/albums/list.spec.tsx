@@ -40,11 +40,10 @@ describe('stories list page', () => {
 		__loadQuery({
 			language: 'en',
 		});
+		loadData();
 	});
 
 	it('lists stories', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('the_story_title')).toBeInTheDocument();
@@ -67,24 +66,18 @@ describe('stories list page', () => {
 	});
 
 	it('includes page title', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('Stories')).toBeInTheDocument();
 	});
 
 	it('includes pagination', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		expect(getByText('1')).toBeInTheDocument();
 	});
 
 	it('links pagination properly', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		const link = getByText('1') as HTMLLinkElement;
@@ -107,8 +100,6 @@ describe('stories list page', () => {
 	});
 
 	it('links stories properly', async () => {
-		loadData();
-
 		const { getByText } = await renderPage();
 
 		const link = getByText('the_story_title') as HTMLLinkElement;
