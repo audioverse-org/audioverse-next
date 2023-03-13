@@ -86,13 +86,16 @@ describe('stories list page', () => {
 	});
 
 	it('renders 404', async () => {
-		when(fetchApi)
-			.calledWith(GetStoriesAlbumsPageDataDocument, expect.anything())
-			.mockResolvedValue({
+		loadData(
+			{
 				storySeasons: {
 					nodes: [],
 				},
-			});
+			},
+			{
+				useDefaults: false,
+			}
+		);
 
 		const { getByText } = await renderPage();
 

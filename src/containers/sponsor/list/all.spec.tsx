@@ -33,6 +33,6 @@ describe('sponsor list all page', () => {
 	it('renders page title', async () => {
 		await renderPage();
 
-		expect(screen.getByText('All')).toBeInTheDocument();
+		expect(screen.getByRole('heading', { name: 'All' })).toBeInTheDocument();
 	});
 });
