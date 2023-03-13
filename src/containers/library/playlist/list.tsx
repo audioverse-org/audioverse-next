@@ -7,7 +7,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardPlaylist from '@components/molecules/card/playlist';
 import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
+import EmptyState from '@components/organisms/emptyState';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
 	Language,
@@ -72,7 +72,7 @@ function LibraryPlaylists({ language }: ILibraryPlaylistsProps): JSX.Element {
 					/>
 				</>
 			) : (
-				<LibraryError
+				<EmptyState
 					title={
 						<FormattedMessage
 							id="libraryCollections__emptyHeading"

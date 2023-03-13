@@ -11,7 +11,7 @@ import {
 	makeStoryAlbumListPage,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
-import LibraryError from '@components/organisms/libraryError';
+import EmptyState from '@components/organisms/emptyState';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],
@@ -26,7 +26,7 @@ export default function StoryAlbumsList({
 
 	if (!nodes.length) {
 		return (
-			<LibraryError
+			<EmptyState
 				title={
 					<FormattedMessage
 						id="storyAlbumList__emptyStateTitle"

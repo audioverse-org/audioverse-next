@@ -6,7 +6,7 @@ import withAuthGuard from '@components/HOCs/withAuthGuard';
 import CardFavorite from '@components/molecules/card/favorite';
 import CardMasonry from '@components/molecules/cardMasonry';
 import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
+import EmptyState from '@components/organisms/emptyState';
 import LibraryNav from '@components/organisms/libraryNav';
 import {
 	FavoritableCatalogEntityType,
@@ -143,7 +143,7 @@ function Library({ language }: ILibraryProps): JSX.Element {
 					key={`item-${items.length}`}
 				/>
 			) : filtersApplied ? (
-				<LibraryError
+				<EmptyState
 					title={
 						<FormattedMessage
 							id="library__noMatchingHeading"
@@ -158,7 +158,7 @@ function Library({ language }: ILibraryProps): JSX.Element {
 					}
 				/>
 			) : (
-				<LibraryError
+				<EmptyState
 					title={
 						<FormattedMessage
 							id="library__emptyHeading"
