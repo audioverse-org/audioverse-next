@@ -85,7 +85,7 @@ describe('stories list page', () => {
 		expect(link).toHaveAttribute('href', '/en/stories/albums');
 	});
 
-	it('renders 404', async () => {
+	it('renders empty state message', async () => {
 		loadData(
 			{
 				storySeasons: {
@@ -99,7 +99,7 @@ describe('stories list page', () => {
 
 		const { getByText } = await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(getByText('Nothing here!')).toBeInTheDocument();
 	});
 
 	it('links stories properly', async () => {

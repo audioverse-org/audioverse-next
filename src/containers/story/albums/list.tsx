@@ -11,17 +11,37 @@ import {
 	makeStoryAlbumListPage,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
+import LibraryError from '@components/organisms/libraryError';
 
 export type StoryAlbumsListProps = PaginatedProps<
 	NonNullable<GetStoriesAlbumsPageDataQuery['storySeasons']['nodes']>[0],
 	GetStoriesAlbumsPageDataQuery
 >;
 
-function StoryAlbumsList({
+export default function StoryAlbumsList({
 	nodes,
 	pagination,
 }: StoryAlbumsListProps): JSX.Element {
 	const language = useLanguageRoute();
+
+	if (!nodes.length) {
+		return (
+			<LibraryError
+				title={
+					<FormattedMessage
+						id="storyAlbumList__emptyStateTitle"
+						defaultMessage="Nothing here!"
+					/>
+				}
+				message={
+					<FormattedMessage
+						id="storyAlbumList__emptyStateMessage"
+						defaultMessage="There are no story albums to show."
+					/>
+				}
+			/>
+		);
+	}
 
 	return (
 		<PaginatedCardList
@@ -41,7 +61,3 @@ function StoryAlbumsList({
 		</PaginatedCardList>
 	);
 }
-
-export default withFailStates(StoryAlbumsList, {
-	useShould404: ({ nodes }) => !nodes?.length,
-});
