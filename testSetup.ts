@@ -30,4 +30,16 @@ beforeEach(() => {
 		disconnect: () => null,
 	});
 	window.IntersectionObserver = mockIntersectionObserver;
+
+	global.MutationObserver = class {
+		constructor() {
+			// noop
+		}
+		disconnect() {
+			// noop
+		}
+		observe() {
+			// noop
+		}
+	} as any;
 });

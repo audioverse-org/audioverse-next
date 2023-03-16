@@ -1,4 +1,5 @@
 import Sponsors from '@containers/sponsor/list/all';
+import { REVALIDATE } from '@lib/constants';
 import {
 	getSponsorListLetterCounts,
 	GetSponsorListLetterCountsQuery,
@@ -23,12 +24,13 @@ export async function getStaticProps({
 		props: await getSponsorListLetterCounts({
 			language: getLanguageIdByRoute(params?.language),
 		}),
+		revalidate: REVALIDATE,
 	};
 }
 
 export function getStaticPaths(): GetStaticPathsResult {
 	return {
 		paths: getLanguageRoutes().map(makeSponsorListAllRoute),
-		fallback: false,
+		fallback: 'blocking',
 	};
 }

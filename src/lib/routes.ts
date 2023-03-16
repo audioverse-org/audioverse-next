@@ -12,6 +12,9 @@ export const makePresenterListRoute = (
 	letter?: string
 ): string => `/${languageRoute}/presenters${letter ? `/letter/${letter}` : ''}`;
 
+export const makePresenterListAllRoute = (languageRoute: string): string =>
+	`/${languageRoute}/presenters/all`;
+
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
