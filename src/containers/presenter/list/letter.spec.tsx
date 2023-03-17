@@ -48,6 +48,7 @@ function loadData() {
 
 describe('presenter list page', () => {
 	beforeEach(() => {
+		loadData();
 		__loadQuery({
 			language: 'en',
 			i: '1',
@@ -65,8 +66,6 @@ describe('presenter list page', () => {
 	});
 
 	it('lists presenters', async () => {
-		loadData();
-
 		await renderPage();
 
 		expect(
@@ -91,8 +90,6 @@ describe('presenter list page', () => {
 	});
 
 	it('links presenters', async () => {
-		loadData();
-
 		await renderPage();
 
 		expect(
@@ -102,8 +99,6 @@ describe('presenter list page', () => {
 	});
 
 	it('includes presenter images', async () => {
-		loadData();
-
 		await renderPage();
 
 		expect(
@@ -112,8 +107,6 @@ describe('presenter list page', () => {
 	});
 
 	it('renders page title', async () => {
-		loadData();
-
 		await renderPage();
 
 		expect(screen.getByText('All Presenters')).toBeInTheDocument();
