@@ -11,6 +11,7 @@ import Presenters, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/letter/[letter]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Presenters, getStaticProps);
 
@@ -58,18 +59,18 @@ describe('presenter list page', () => {
 			.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('lists presenters', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByText('the_person_surname, the_person_givenName')
+			screen.getByText('the_person_surname, the_person_givenName')
 		).toBeInTheDocument();
 	});
 
@@ -92,10 +93,10 @@ describe('presenter list page', () => {
 	it('links presenters', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByText('the_person_surname, the_person_givenName').parentElement
+			screen.getByText('the_person_surname, the_person_givenName').parentElement
 				?.parentElement
 		).toHaveAttribute('href', 'the_person_path');
 	});
@@ -103,19 +104,19 @@ describe('presenter list page', () => {
 	it('includes presenter images', async () => {
 		loadData();
 
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByAltText('the_person_surname, the_person_givenName')
+			screen.getByAltText('the_person_surname, the_person_givenName')
 		).toHaveAttribute('src', 'the_person_image');
 	});
 
 	it('renders page title', async () => {
 		loadData();
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All Presenters')).toBeInTheDocument();
+		expect(screen.getByText('All Presenters')).toBeInTheDocument();
 	});
 
 	// TODO: Consider adding RSS feed
