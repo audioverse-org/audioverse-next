@@ -46,5 +46,4 @@ describe('presenter list all', () => {
 	});
 });
 
-// lists presenters
 // includes all link
