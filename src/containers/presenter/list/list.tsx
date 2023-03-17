@@ -14,6 +14,7 @@ import {
 } from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
+	makePresenterListAllRoute,
 	makePresenterListRoute,
 } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
@@ -40,7 +41,7 @@ export default function Presenters({
 				id: 'presentersList__all',
 				defaultMessage: 'All',
 			}),
-			url: makePresenterListRoute(language),
+			url: makePresenterListAllRoute(language),
 		},
 		...personLetterCounts.map(({ letter }) => ({
 			text: letter,
