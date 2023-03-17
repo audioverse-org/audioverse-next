@@ -92,10 +92,11 @@ describe('presenter list page', () => {
 	it('links presenters', async () => {
 		await renderPage();
 
-		expect(
-			screen.getByText('the_person_surname, the_person_givenName').parentElement
-				?.parentElement
-		).toHaveAttribute('href', 'the_person_path');
+		const link = screen.getByRole('link', {
+			name: /the_person_surname, the_person_givenName/,
+		});
+
+		expect(link).toHaveAttribute('href', 'the_person_path');
 	});
 
 	it('includes presenter images', async () => {
