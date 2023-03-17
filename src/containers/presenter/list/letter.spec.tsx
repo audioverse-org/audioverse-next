@@ -3,8 +3,8 @@ import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
-	GetPresenterListPageDataDocument,
-	GetPresenterListPathsDataDocument,
+	GetPersonListLetterCountsDocument,
+	GetPresenterListLetterPageDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Presenters, {
@@ -16,7 +16,7 @@ const renderPage = buildStaticRenderer(Presenters, getStaticProps);
 
 function loadData() {
 	when(fetchApi)
-		.calledWith(GetPresenterListPageDataDocument, expect.anything())
+		.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			persons: {
 				nodes: [
@@ -55,7 +55,7 @@ describe('presenter list page', () => {
 
 	it('renders 404', async () => {
 		when(fetchApi)
-			.calledWith(GetPresenterListPageDataDocument, expect.anything())
+			.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
 		const { getByText } = await renderPage();
@@ -75,7 +75,7 @@ describe('presenter list page', () => {
 
 	it('generates static paths', async () => {
 		when(fetchApi)
-			.calledWith(GetPresenterListPathsDataDocument, expect.anything())
+			.calledWith(GetPersonListLetterCountsDocument, expect.anything())
 			.mockResolvedValue({
 				personLetterCounts: [
 					{

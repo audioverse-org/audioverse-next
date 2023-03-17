@@ -1,0 +1,26 @@
+query getPresenterListAllPageData($language: Language!, $after: String) {
+	persons(
+		language: $language
+		orderBy: [{ field: NAME, direction: ASC }]
+		first: 20
+		after: $after
+	) {
+		nodes {
+			canonicalPath(useFuturePath: true)
+			givenName
+			surname
+			image {
+				url(size: 128)
+			}
+			summary
+		}
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
+	}
+	personLetterCounts(language: $language) {
+		letter
+		count
+	}
+}

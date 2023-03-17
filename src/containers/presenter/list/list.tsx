@@ -5,11 +5,13 @@ import { FormattedMessage } from 'react-intl';
 import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
 import RoundImage from '@components/atoms/roundImage';
-import withFailStates from '@components/HOCs/withFailStates';
 import ButtonBack from '@components/molecules/buttonBack';
 import Card from '@components/molecules/card';
 import JumpBar from '@components/molecules/jumpBar';
-import { GetPresenterListPageDataQuery } from '@lib/generated/graphql';
+import {
+	GetPersonListLetterCountsQuery,
+	PresenterListEntryFragment,
+} from '@lib/generated/graphql';
 import {
 	makeDiscoverCollectionsRoute,
 	makePresenterListRoute,
@@ -19,16 +21,16 @@ import useLanguageRoute from '@lib/useLanguageRoute';
 import styles from './list.module.scss';
 
 export type PresentersProps = {
-	persons: NonNullable<GetPresenterListPageDataQuery['persons']['nodes']>;
-	personLetterCounts: NonNullable<
-		GetPresenterListPageDataQuery['personLetterCounts']
-	>;
+	persons: PresenterListEntryFragment[];
+	personLetterCounts: GetPersonListLetterCountsQuery['personLetterCounts'];
+	title: string;
 };
 // TODO: replace with presenters landing page (featured, recent, trending, etc.)
 
-function Presenters({
+export default function Presenters({
 	persons,
 	personLetterCounts,
+	title,
 }: PresentersProps): JSX.Element {
 	const language = useLanguageRoute();
 	const jumpLinks = personLetterCounts.map(({ letter }) => ({
@@ -49,7 +51,8 @@ function Presenters({
 				/>
 			</Heading1>
 			<JumpBar links={jumpLinks} />
-			<Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2>
+			{/* <Heading2>{persons[0].surname.substring(0, 1).toUpperCase()}</Heading2> */}
+			<Heading2>{title}</Heading2>
 			{persons.map(({ canonicalPath, image, givenName, surname, summary }) => (
 				<Card className={styles.card} key={canonicalPath}>
 					<Link href={canonicalPath} legacyBehavior>
@@ -80,7 +83,3 @@ function Presenters({
 		</>
 	);
 }
-
-export default withFailStates(Presenters, {
-	useShould404: ({ persons }) => !persons?.length,
-});

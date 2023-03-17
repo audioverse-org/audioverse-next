@@ -1,3 +1,8 @@
+import {
+	GetPersonListLetterCountsDocument,
+	GetPresenterListAllPageDataDocument,
+} from '@lib/generated/graphql';
+import { buildLoader } from '@lib/test/buildLoader';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import All, {
 	getStaticPaths,
@@ -6,9 +11,24 @@ import All, {
 
 const renderPage = buildStaticRenderer(All, getStaticProps);
 
+const loadServerData = buildLoader(GetPersonListLetterCountsDocument, {
+	personLetterCounts: [
+		{
+			letter: 'A',
+		},
+	],
+});
+
+const loadClientData = buildLoader(GetPresenterListAllPageDataDocument, {
+	persons: {
+		nodes: [],
+	},
+});
+
 describe('presenter list all', () => {
-	it('renders', async () => {
-		await renderPage();
+	beforeEach(() => {
+		loadServerData();
+		loadClientData();
 	});
 
 	it('generates paths', async () => {
@@ -18,4 +38,13 @@ describe('presenter list all', () => {
 
 		expect(m).toBeTruthy();
 	});
+
+	it('displays "All" heading', async () => {
+		const { getByText } = await renderPage();
+
+		expect(getByText('All')).toBeInTheDocument();
+	});
 });
+
+// lists presenters
+// includes all link

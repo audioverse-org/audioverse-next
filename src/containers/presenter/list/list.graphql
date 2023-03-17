@@ -1,27 +1,14 @@
-query getPresenterListPageData($language: Language!, $startsWith: String) {
-	persons(
-		language: $language
-		startsWith: $startsWith
-		first: 1500
-		orderBy: [{ field: NAME, direction: ASC }]
-	) {
-		nodes {
-			canonicalPath(useFuturePath: true)
-			givenName
-			surname
-			image {
-				url(size: 128)
-			}
-			summary
-		}
+fragment presenterListEntry on Person {
+	canonicalPath(useFuturePath: true)
+	givenName
+	surname
+	image {
+		url(size: 128)
 	}
-	personLetterCounts(language: $language) {
-		letter
-		count
-	}
+	summary
 }
 
-query getPresenterListPathsData($language: Language!) {
+query getPersonListLetterCounts($language: Language!) {
 	personLetterCounts(language: $language) {
 		letter
 		count

@@ -1,16 +1,27 @@
 import All from '@containers/presenter/list/all';
 import { REVALIDATE } from '@lib/constants';
+import {
+	getPersonListLetterCounts,
+	GetPersonListLetterCountsQuery,
+} from '@lib/generated/graphql';
+import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
 import { getLanguageRoutes } from '@lib/getLanguageRoutes';
 import { makePresenterListAllRoute } from '@lib/routes';
-import { GetStaticPropsResult } from 'next';
+import { GetStaticPropsContext, GetStaticPropsResult } from 'next';
 
 export default All;
 
-export function getStaticProps(): Promise<GetStaticPropsResult<unknown>> {
-	return Promise.resolve({
-		props: {},
+export async function getStaticProps({
+	params,
+}: GetStaticPropsContext<{ language: string }>): Promise<
+	GetStaticPropsResult<GetPersonListLetterCountsQuery>
+> {
+	return {
+		props: await getPersonListLetterCounts({
+			language: getLanguageIdByRoute(params?.language),
+		}),
 		revalidate: REVALIDATE,
-	});
+	};
 }
 
 export function getStaticPaths() {

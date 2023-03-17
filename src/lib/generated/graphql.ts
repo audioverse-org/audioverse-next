@@ -6576,20 +6576,30 @@ export type GetPresenterDetailPathsDataQueryVariables = Exact<{
 
 export type GetPresenterDetailPathsDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', id: string | number, canonicalPath: string }> | null } };
 
-export type GetPresenterListPageDataQueryVariables = Exact<{
+export type GetPresenterListAllPageDataQueryVariables = Exact<{
+  language: Language;
+  after: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetPresenterListAllPageDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null }> | null, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor: string | null } }, personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
+
+export type GetPresenterListLetterPageDataQueryVariables = Exact<{
   language: Language;
   startsWith: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetPresenterListPageDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null }> | null }, personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
+export type GetPresenterListLetterPageDataQuery = { __typename?: 'Query', persons: { __typename?: 'PersonConnection', nodes: Array<{ __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null }> | null }, personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
 
-export type GetPresenterListPathsDataQueryVariables = Exact<{
+export type PresenterListEntryFragment = { __typename?: 'Person', canonicalPath: string, givenName: string, surname: string, summary: string, image: { __typename?: 'Image', url: string } | null };
+
+export type GetPersonListLetterCountsQueryVariables = Exact<{
   language: Language;
 }>;
 
 
-export type GetPresenterListPathsDataQuery = { __typename?: 'Query', personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
+export type GetPersonListLetterCountsQuery = { __typename?: 'Query', personLetterCounts: Array<{ __typename?: 'LetterCount', letter: string, count: number }> };
 
 export type PresenterPivotFragment = { __typename?: 'Person', name: string, canonicalPath: string, imageWithFallback: { __typename?: 'Image', url: string } };
 
@@ -7243,6 +7253,9 @@ fragment profile on User{id email givenName surname address1 address2 city provi
 `;
 export const CollectionPivotFragmentDoc = `
 fragment collectionPivot on Collection{title canonicalPath(useFuturePath:true)contentType}
+`;
+export const PresenterListEntryFragmentDoc = `
+fragment presenterListEntry on Person{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}
 `;
 export const PresenterPivotFragmentDoc = `
 fragment presenterPivot on Person{name canonicalPath(useFuturePath:true)imageWithFallback{url(size:128)}}
@@ -8148,34 +8161,49 @@ export const useGetPresenterDetailPathsDataQuery = <
       graphqlFetcher<GetPresenterDetailPathsDataQuery, GetPresenterDetailPathsDataQueryVariables>(GetPresenterDetailPathsDataDocument, variables),
       options
     );
-export const GetPresenterListPageDataDocument = `
-query getPresenterListPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}}personLetterCounts(language:$language){letter count}}
+export const GetPresenterListAllPageDataDocument = `
+query getPresenterListAllPageData($language:Language!$after:String){persons(language:$language orderBy:[{field:NAME direction:ASC}]first:20 after:$after){nodes{canonicalPath(useFuturePath:true)givenName surname image{url(size:128)}summary}pageInfo{hasNextPage endCursor}}personLetterCounts(language:$language){letter count}}
 `;
-export const useGetPresenterListPageDataQuery = <
-      TData = GetPresenterListPageDataQuery,
+export const useGetPresenterListAllPageDataQuery = <
+      TData = GetPresenterListAllPageDataQuery,
       TError = unknown
     >(
-      variables: GetPresenterListPageDataQueryVariables,
-      options?: UseQueryOptions<GetPresenterListPageDataQuery, TError, TData>
+      variables: GetPresenterListAllPageDataQueryVariables,
+      options?: UseQueryOptions<GetPresenterListAllPageDataQuery, TError, TData>
     ) =>
-    useQuery<GetPresenterListPageDataQuery, TError, TData>(
-      ['getPresenterListPageData', variables],
-      graphqlFetcher<GetPresenterListPageDataQuery, GetPresenterListPageDataQueryVariables>(GetPresenterListPageDataDocument, variables),
+    useQuery<GetPresenterListAllPageDataQuery, TError, TData>(
+      ['getPresenterListAllPageData', variables],
+      graphqlFetcher<GetPresenterListAllPageDataQuery, GetPresenterListAllPageDataQueryVariables>(GetPresenterListAllPageDataDocument, variables),
       options
     );
-export const GetPresenterListPathsDataDocument = `
-query getPresenterListPathsData($language:Language!){personLetterCounts(language:$language){letter count}}
-`;
-export const useGetPresenterListPathsDataQuery = <
-      TData = GetPresenterListPathsDataQuery,
+export const GetPresenterListLetterPageDataDocument = `
+query getPresenterListLetterPageData($language:Language!$startsWith:String){persons(language:$language startsWith:$startsWith first:1500 orderBy:[{field:NAME direction:ASC}]){nodes{...presenterListEntry}}personLetterCounts(language:$language){letter count}}
+${PresenterListEntryFragmentDoc}`;
+export const useGetPresenterListLetterPageDataQuery = <
+      TData = GetPresenterListLetterPageDataQuery,
       TError = unknown
     >(
-      variables: GetPresenterListPathsDataQueryVariables,
-      options?: UseQueryOptions<GetPresenterListPathsDataQuery, TError, TData>
+      variables: GetPresenterListLetterPageDataQueryVariables,
+      options?: UseQueryOptions<GetPresenterListLetterPageDataQuery, TError, TData>
     ) =>
-    useQuery<GetPresenterListPathsDataQuery, TError, TData>(
-      ['getPresenterListPathsData', variables],
-      graphqlFetcher<GetPresenterListPathsDataQuery, GetPresenterListPathsDataQueryVariables>(GetPresenterListPathsDataDocument, variables),
+    useQuery<GetPresenterListLetterPageDataQuery, TError, TData>(
+      ['getPresenterListLetterPageData', variables],
+      graphqlFetcher<GetPresenterListLetterPageDataQuery, GetPresenterListLetterPageDataQueryVariables>(GetPresenterListLetterPageDataDocument, variables),
+      options
+    );
+export const GetPersonListLetterCountsDocument = `
+query getPersonListLetterCounts($language:Language!){personLetterCounts(language:$language){letter count}}
+`;
+export const useGetPersonListLetterCountsQuery = <
+      TData = GetPersonListLetterCountsQuery,
+      TError = unknown
+    >(
+      variables: GetPersonListLetterCountsQueryVariables,
+      options?: UseQueryOptions<GetPersonListLetterCountsQuery, TError, TData>
+    ) =>
+    useQuery<GetPersonListLetterCountsQuery, TError, TData>(
+      ['getPersonListLetterCounts', variables],
+      graphqlFetcher<GetPersonListLetterCountsQuery, GetPersonListLetterCountsQueryVariables>(GetPersonListLetterCountsDocument, variables),
       options
     );
 export const GetPresenterRecordingsPageDataDocument = `
@@ -9649,16 +9677,22 @@ export async function getPresenterDetailPathsData<T>(
 	return fetchApi(GetPresenterDetailPathsDataDocument, { variables });
 }
 
-export async function getPresenterListPageData<T>(
-	variables: ExactAlt<T, GetPresenterListPageDataQueryVariables>
-): Promise<GetPresenterListPageDataQuery> {
-	return fetchApi(GetPresenterListPageDataDocument, { variables });
+export async function getPresenterListAllPageData<T>(
+	variables: ExactAlt<T, GetPresenterListAllPageDataQueryVariables>
+): Promise<GetPresenterListAllPageDataQuery> {
+	return fetchApi(GetPresenterListAllPageDataDocument, { variables });
 }
 
-export async function getPresenterListPathsData<T>(
-	variables: ExactAlt<T, GetPresenterListPathsDataQueryVariables>
-): Promise<GetPresenterListPathsDataQuery> {
-	return fetchApi(GetPresenterListPathsDataDocument, { variables });
+export async function getPresenterListLetterPageData<T>(
+	variables: ExactAlt<T, GetPresenterListLetterPageDataQueryVariables>
+): Promise<GetPresenterListLetterPageDataQuery> {
+	return fetchApi(GetPresenterListLetterPageDataDocument, { variables });
+}
+
+export async function getPersonListLetterCounts<T>(
+	variables: ExactAlt<T, GetPersonListLetterCountsQueryVariables>
+): Promise<GetPersonListLetterCountsQuery> {
+	return fetchApi(GetPersonListLetterCountsDocument, { variables });
 }
 
 export async function getPresenterRecordingsPageData<T>(
