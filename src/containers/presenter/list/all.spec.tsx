@@ -43,7 +43,17 @@ describe('presenter list all', () => {
 	it('displays "All" heading', async () => {
 		await renderPage();
 
-		expect(screen.getByText('All')).toBeInTheDocument();
+		expect(
+			screen.getByRole('heading', {
+				name: 'All',
+			})
+		).toBeInTheDocument();
+	});
+
+	it('has All link', async () => {
+		await renderPage();
+
+		expect(screen.getByRole('link', { name: 'All' })).toBeInTheDocument();
 	});
 });
 

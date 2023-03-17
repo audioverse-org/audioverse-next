@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
@@ -33,10 +33,20 @@ export default function Presenters({
 	title,
 }: PresentersProps): JSX.Element {
 	const language = useLanguageRoute();
-	const jumpLinks = personLetterCounts.map(({ letter }) => ({
-		text: letter,
-		url: makePresenterListRoute(language, letter),
-	}));
+	const intl = useIntl();
+	const jumpLinks = [
+		{
+			text: intl.formatMessage({
+				id: 'presentersList__all',
+				defaultMessage: 'All',
+			}),
+			url: makePresenterListRoute(language),
+		},
+		...personLetterCounts.map(({ letter }) => ({
+			text: letter,
+			url: makePresenterListRoute(language, letter),
+		})),
+	];
 
 	return (
 		<>

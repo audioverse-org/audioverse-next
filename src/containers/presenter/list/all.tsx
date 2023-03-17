@@ -8,9 +8,11 @@ import { useInfiniteQuery } from 'react-query';
 import useOnScreen from '@lib/hooks/useOnScreen';
 import { fetchApi } from '@lib/api/fetchApi';
 import { useLanguageId } from '@lib/useLanguageId';
+import { useIntl } from 'react-intl';
 
 export default function All(props: PresentersProps) {
 	const endRef = useRef<HTMLDivElement>(null);
+	const intl = useIntl();
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
@@ -40,7 +42,14 @@ export default function All(props: PresentersProps) {
 
 	return (
 		<>
-			<List {...props} title="All" persons={persons} />
+			<List
+				{...props}
+				title={intl.formatMessage({
+					id: 'presentersListAll__all',
+					defaultMessage: 'All',
+				})}
+				persons={persons}
+			/>
 			<div ref={endRef} />
 		</>
 	);

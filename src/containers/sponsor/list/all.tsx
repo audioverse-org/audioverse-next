@@ -8,11 +8,13 @@ import {
 } from '@lib/generated/graphql';
 import { useLanguageId } from '@lib/useLanguageId';
 import useOnScreen from '@lib/hooks/useOnScreen';
+import { useIntl } from 'react-intl';
 
 type Props = Omit<SponsorsProps, 'sponsors'>;
 
 export default function AllSponsors(props: Props) {
 	const endRef = useRef<HTMLDivElement>(null);
+	const intl = useIntl();
 	const hasReachedEnd = useOnScreen(endRef);
 	const language = useLanguageId();
 
@@ -42,7 +44,14 @@ export default function AllSponsors(props: Props) {
 
 	return (
 		<>
-			<Sponsors {...props} title="All" sponsors={sponsors} />
+			<Sponsors
+				{...props}
+				title={intl.formatMessage({
+					id: 'sponsorsListAll__all',
+					defaultMessage: 'All',
+				})}
+				sponsors={sponsors}
+			/>
 			<div ref={endRef} />
 		</>
 	);

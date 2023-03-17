@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import Heading1 from '@components/atoms/heading1';
 import Heading2 from '@components/atoms/heading2';
@@ -37,9 +37,13 @@ export default function Sponsors({
 	title,
 }: SponsorsProps): JSX.Element {
 	const language = useLanguageRoute();
+	const intl = useIntl();
 	const jumpLinks = [
 		{
-			text: 'All',
+			text: intl.formatMessage({
+				id: 'sponsorsList__all',
+				defaultMessage: 'All',
+			}),
 			url: makeSponsorListAllRoute(language),
 		},
 		...sponsorLetterCounts.map(({ letter }) => ({
