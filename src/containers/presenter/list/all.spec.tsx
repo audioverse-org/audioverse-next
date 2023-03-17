@@ -8,6 +8,7 @@ import All, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/all';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(All, getStaticProps);
 
@@ -40,9 +41,9 @@ describe('presenter list all', () => {
 	});
 
 	it('displays "All" heading', async () => {
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('All')).toBeInTheDocument();
+		expect(screen.getByText('All')).toBeInTheDocument();
 	});
 });
 
