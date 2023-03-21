@@ -7,7 +7,7 @@ import Button from '@components/molecules/button';
 import CardRecording from '@components/molecules/card/recording';
 import CardGroup from '@components/molecules/cardGroup';
 import LoadingCards from '@components/molecules/loadingCards';
-import LibraryError from '@components/organisms/libraryError';
+import EmptyState from '@components/organisms/emptyState';
 import LibraryNav from '@components/organisms/libraryNav';
 import { graphqlFetcher } from '@lib/api/graphqlFetcher';
 import {
@@ -103,7 +103,7 @@ function LibraryHistory({ language }: ILibraryHistoryProps): JSX.Element {
 					)}
 				</>
 			) : (
-				<LibraryError
+				<EmptyState
 					title={
 						<FormattedMessage
 							id="libraryHistory__emptyHeading"

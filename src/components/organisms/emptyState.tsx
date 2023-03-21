@@ -7,14 +7,14 @@ import Button from '@components/molecules/button';
 import { makeDiscoverRoute } from '@lib/routes';
 import useLanguageRoute from '@lib/useLanguageRoute';
 
-import styles from './libraryError.module.scss';
+import styles from './emptyState.module.scss';
 
 type Props = {
 	title: JSX.Element | string;
 	message: JSX.Element | string;
 };
 
-export default function LibraryError({ title, message }: Props): JSX.Element {
+export default function EmptyState({ title, message }: Props): JSX.Element {
 	const languageRoute = useLanguageRoute();
 
 	return (
@@ -25,6 +25,7 @@ export default function LibraryError({ title, message }: Props): JSX.Element {
 				type="super"
 				text={
 					<FormattedMessage
+						// TODO: Rename message ID to match component name, ensuring translations are not lost
 						id="libraryError__cta"
 						defaultMessage="Go to Discover"
 					/>

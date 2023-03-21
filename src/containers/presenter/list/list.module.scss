@@ -1,4 +1,4 @@
-@import '../../styles/common';
+@import '/src/styles/common';
 
 .back {
 	margin-top: 8px;
@@ -13,14 +13,18 @@
 	padding: 16px;
 	background-color: $ts-smartPlaylistH;
 	transition-duration: $transition-medium;
+
 	&:hover {
 		background-color: $ts-darkened-smartPlaylistH;
 	}
+
 	display: flex;
 	flex-direction: column;
+
 	&:hover {
 		color: $ts-dark;
 	}
+
 	@media (min-width: $breakpoint-lg) {
 		flex-direction: row;
 		align-items: center;
@@ -56,6 +60,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+
 	@media (min-width: $breakpoint-lg) {
 		margin-top: 0;
 		flex: 0 0 67%;

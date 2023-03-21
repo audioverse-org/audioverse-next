@@ -23,7 +23,7 @@ import {
 } from '@lib/generated/graphql';
 import setPlayerMock from '@lib/test/setPlayerMock';
 import MyApp from '@pages/_app';
-import getIntlMessages from '@lib/getIntlMessages';
+import { __awaitIntlMessages } from '@lib/getIntlMessages';
 
 const sequence = {
 	id: 'the_sequence_id',
@@ -137,9 +137,7 @@ const renderApp = async (
 		{ container }
 	);
 
-	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
-	});
+	await __awaitIntlMessages();
 
 	return {
 		...result,

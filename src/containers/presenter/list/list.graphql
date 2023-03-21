@@ -1,0 +1,16 @@
+fragment presenterListEntry on Person {
+	canonicalPath(useFuturePath: true)
+	givenName
+	surname
+	image {
+		url(size: 128)
+	}
+	summary
+}
+
+query getPersonListLetterCounts($language: Language!) {
+	personLetterCounts(language: $language) {
+		letter
+		count
+	}
+}

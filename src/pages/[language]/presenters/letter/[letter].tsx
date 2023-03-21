@@ -5,11 +5,11 @@ import {
 } from 'next';
 
 import { IBaseProps } from '@containers/base';
-import Presenters, { PresentersProps } from '@containers/presenter/list';
+import Presenters, { PresentersProps } from '@containers/presenter/list/letter';
 import { LANGUAGES, REVALIDATE } from '@lib/constants';
 import {
-	getPresenterListPageData,
-	getPresenterListPathsData,
+	getPersonListLetterCounts,
+	getPresenterListLetterPageData,
 } from '@lib/generated/graphql';
 import getIntl from '@lib/getIntl';
 import { getLanguageIdByRoute } from '@lib/getLanguageIdByRoute';
@@ -26,7 +26,7 @@ export async function getStaticProps({
 	const language = getLanguageIdByRoute(params?.language);
 	const intl = await getIntl(language);
 	const letter = params?.letter as string;
-	const { persons, personLetterCounts } = await getPresenterListPageData({
+	const { persons, personLetterCounts } = await getPresenterListLetterPageData({
 		language,
 		startsWith: letter,
 	}).catch(() => ({
@@ -52,7 +52,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 	const keys = getLanguageIds();
 	const pathSets = await Promise.all(
 		keys.map(async (language) => {
-			const { personLetterCounts } = await getPresenterListPathsData({
+			const { personLetterCounts } = await getPersonListLetterCounts({
 				language,
 			});
 			return (personLetterCounts || []).map(({ letter }) =>

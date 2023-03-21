@@ -89,6 +89,7 @@ module.exports = {
 				'**/__mocks__/**/*',
 				'**/__tests__/**/*',
 				'src/lib/test/**/*',
+				'testSetup.ts',
 			],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',

@@ -1,17 +1,15 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { __loadRouter } from 'next/router';
 import React from 'react';
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 import MyApp from '@pages/_app';
-import getIntlMessages from '@lib/getIntlMessages';
+import { __awaitIntlMessages } from '@lib/getIntlMessages';
 
 const renderApp = async (component: any, props: any) => {
 	const view = render(<MyApp Component={component} pageProps={props} />);
 
-	await act(async () => {
-		await jest.mocked(getIntlMessages).mock.results[0]?.value;
-	});
+	await __awaitIntlMessages();
 
 	return view;
 };

@@ -1,0 +1,15 @@
+query getPresenterListLetterPageData(
+	$language: Language!
+	$startsWith: String
+) {
+	persons(
+		language: $language
+		startsWith: $startsWith
+		first: 1500
+		orderBy: [{ field: NAME, direction: ASC }]
+	) {
+		nodes {
+			...presenterListEntry
+		}
+	}
+}

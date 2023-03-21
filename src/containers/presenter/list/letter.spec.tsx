@@ -3,20 +3,21 @@ import { __loadQuery } from 'next/router';
 
 import { fetchApi } from '@lib/api/fetchApi';
 import {
-	GetPresenterListPageDataDocument,
-	GetPresenterListPathsDataDocument,
+	GetPersonListLetterCountsDocument,
+	GetPresenterListLetterPageDataDocument,
 } from '@lib/generated/graphql';
 import { buildStaticRenderer } from '@lib/test/buildStaticRenderer';
 import Presenters, {
 	getStaticPaths,
 	getStaticProps,
 } from '@pages/[language]/presenters/letter/[letter]';
+import { screen } from '@testing-library/react';
 
 const renderPage = buildStaticRenderer(Presenters, getStaticProps);
 
 function loadData() {
 	when(fetchApi)
-		.calledWith(GetPresenterListPageDataDocument, expect.anything())
+		.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 		.mockResolvedValue({
 			persons: {
 				nodes: [
@@ -47,6 +48,7 @@ function loadData() {
 
 describe('presenter list page', () => {
 	beforeEach(() => {
+		loadData();
 		__loadQuery({
 			language: 'en',
 			i: '1',
@@ -55,27 +57,25 @@ describe('presenter list page', () => {
 
 	it('renders 404', async () => {
 		when(fetchApi)
-			.calledWith(GetPresenterListPageDataDocument, expect.anything())
+			.calledWith(GetPresenterListLetterPageDataDocument, expect.anything())
 			.mockRejectedValue('oops');
 
-		const { getByText } = await renderPage();
+		await renderPage();
 
-		expect(getByText('Sorry!')).toBeInTheDocument();
+		expect(screen.getByText('Sorry!')).toBeInTheDocument();
 	});
 
 	it('lists presenters', async () => {
-		loadData();
-
-		const { getByText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByText('the_person_surname, the_person_givenName')
+			screen.getByText('the_person_surname, the_person_givenName')
 		).toBeInTheDocument();
 	});
 
 	it('generates static paths', async () => {
 		when(fetchApi)
-			.calledWith(GetPresenterListPathsDataDocument, expect.anything())
+			.calledWith(GetPersonListLetterCountsDocument, expect.anything())
 			.mockResolvedValue({
 				personLetterCounts: [
 					{
@@ -90,32 +90,27 @@ describe('presenter list page', () => {
 	});
 
 	it('links presenters', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
+		const link = screen.getByRole('link', {
+			name: /the_person_surname, the_person_givenName/,
+		});
 
-		expect(
-			getByText('the_person_surname, the_person_givenName').parentElement
-				?.parentElement
-		).toHaveAttribute('href', 'the_person_path');
+		expect(link).toHaveAttribute('href', 'the_person_path');
 	});
 
 	it('includes presenter images', async () => {
-		loadData();
-
-		const { getByAltText } = await renderPage();
+		await renderPage();
 
 		expect(
-			getByAltText('the_person_surname, the_person_givenName')
+			screen.getByAltText('the_person_surname, the_person_givenName')
 		).toHaveAttribute('src', 'the_person_image');
 	});
 
 	it('renders page title', async () => {
-		loadData();
+		await renderPage();
 
-		const { getByText } = await renderPage();
-
-		expect(getByText('All Presenters')).toBeInTheDocument();
+		expect(screen.getByText('All Presenters')).toBeInTheDocument();
 	});
 
 	// TODO: Consider adding RSS feed
