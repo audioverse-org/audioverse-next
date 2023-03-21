@@ -1,7 +1,6 @@
 import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { useIntl } from 'react-intl';
 import LineHeading from '@components/atoms/lineHeading';
-import withFailStates from '@components/HOCs/withFailStates';
 import Button from '@components/molecules/button';
 import CardInferred, {
 	InferrableEntity,
