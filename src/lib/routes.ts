@@ -7,98 +7,208 @@ import { Scalars } from './generated/graphql';
 
 const slug = (s: string): string => s.replace(/\s/g, '-').toLowerCase();
 
+const node = <T>(
+	r: string,
+	extend: (r: string) => T = () => ({} as T)
+): {
+	get: () => string;
+} & T => ({
+	get: () => r,
+	...extend(r),
+});
+
+const paginatedNode = <T>(
+	r: string,
+	extend: (r: string) => T = () => ({} as T)
+): {
+	get: () => string;
+	page: (page: string | number) => {
+		get: () => string;
+	};
+} & T =>
+	node(r, (r) => ({
+		page: (page: string | number = 1) => ({
+			get: () => `${r}/page/${page}`,
+		}),
+		...extend(r),
+	}));
+
+const presenters = (r: string) => ({
+	letter: (letter: string) => node(`${r}/letter/${letter}`),
+	all: node(`${r}/all`),
+	id: (personId: Scalars['ID']) =>
+		node(`${r}/${personId}`, (r) => ({
+			teachings: paginatedNode(`${r}/teachings`),
+			feed: node(`${r}/feed.xml`),
+			top: node(`${r}/top`),
+			sequences: paginatedNode(`${r}/sequences`),
+			appears: paginatedNode(`${r}/appears`),
+		})),
+});
+
+const series = (r: string) => ({
+	id: (seriesId: Scalars['ID']) => ({
+		feed: node(`${r}/${seriesId}/feed.xml`),
+	}),
+});
+
+const teachings = (r: string) => ({
+	filter: (filter = 'all') => paginatedNode(`${r}/${filter}`),
+	all: {
+		feed: node(`${r}/all/feed.xml`),
+	},
+	trending: {
+		filter: (filter = 'all') => node(`${r}/trending/${filter}`),
+	},
+});
+
+const bibles = (r: string) => ({
+	versionId: (versionId: Scalars['ID']) => node(`${r}/${versionId}`),
+	bookId: (bookId: Scalars['ID']) =>
+		node(`${r}/${bookId}`, (r) => ({
+			chapterNumber: (chapterNumber: Scalars['ID']) =>
+				node(`${r}/${chapterNumber}`),
+		})),
+});
+
+const books = (r: string) => ({
+	id: (bookId: Scalars['ID']) =>
+		node(`${r}/${bookId}`, (r) => ({
+			feed: node(`${r}/feed.xml`),
+		})),
+});
+
+const root = {
+	lang: (languageRoute: string) => {
+		const r = `/${languageRoute}`;
+		return {
+			presenters: node(`${r}/presenters`, presenters),
+			series: paginatedNode(`${r}/series`, series),
+			teachings: node(`${r}/teachings`, teachings),
+			bibles: node(`${r}/bibles`, bibles),
+			books: paginatedNode(`${r}/books`, books),
+		};
+	},
+};
+
+export default root;
+
+// LEGACY:
+
 export const makePresenterListRoute = (
 	languageRoute: string,
 	letter?: string
-): string => `/${languageRoute}/presenters${letter ? `/letter/${letter}` : ''}`;
+): string =>
+	letter
+		? root.lang(languageRoute).presenters.letter(letter).get()
+		: root.lang(languageRoute).presenters.get();
 
 export const makePresenterListAllRoute = (languageRoute: string): string =>
-	`/${languageRoute}/presenters/all`;
+	root.lang(languageRoute).presenters.all.get();
 
 export const makePresenterRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/presenters/${personId}/teachings${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	page > 1
+		? root
+				.lang(languageRoute)
+				.presenters.id(personId)
+				.teachings.page(page)
+				.get()
+		: root.lang(languageRoute).presenters.id(personId).teachings.get();
 
 export const makePresenterFeedRoute = (
 	languageRoute: string,
 	personId: Scalars['ID']
-): string => `/${languageRoute}/presenters/${personId}/feed.xml`;
+): string => root.lang(languageRoute).presenters.id(personId).feed.get();
 
 export const makePresenterTopRecordingsRoute = (
 	languageRoute: string,
 	personId: Scalars['ID']
-): string => `/${languageRoute}/presenters/${personId}/top`;
+): string => root.lang(languageRoute).presenters.id(personId).top.get();
 
 export const makePresenterSequencesRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/presenters/${personId}/sequences${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	page > 1
+		? root
+				.lang(languageRoute)
+				.presenters.id(personId)
+				.sequences.page(page)
+				.get()
+		: root.lang(languageRoute).presenters.id(personId).sequences.get();
 
 export const makePresenterAlsoAppearsInRoute = (
 	languageRoute: string,
 	personId: Scalars['ID'],
 	page: string | number = 1
 ): string =>
-	`/${languageRoute}/presenters/${personId}/appears${
-		page > 1 ? `/page/${page}` : ''
-	}`;
+	page > 1
+		? root.lang(languageRoute).presenters.id(personId).appears.page(page).get()
+		: root.lang(languageRoute).presenters.id(personId).appears.get();
 
 export const makeSeriesFeedRoute = (
 	languageRoute: string,
 	seriesId: Scalars['ID']
-): string => `/${languageRoute}/series/${seriesId}/feed.xml`;
+): string => root.lang(languageRoute).series.id(seriesId).feed.get();
 
 export const makeSeriesListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/series${page > 1 ? `/page/${page}` : ''}`;
+): string =>
+	page > 1
+		? root.lang(languageRoute).series.page(page).get()
+		: root.lang(languageRoute).series.get();
 
 export const makeSermonListRoute = (
 	languageRoute: string,
 	filter = 'all',
 	page: string | number = 1
-): string => `/${languageRoute}/teachings/${filter}/page/${page}`;
+): string => root.lang(languageRoute).teachings.filter(filter).page(page).get();
 
 export const makeSermonsFeedRoute = (languageRoute: string): string =>
-	`/${languageRoute}/teachings/all/feed.xml`;
+	root.lang(languageRoute).teachings.all.feed.get();
 
 export const makeTrendingSermonRoute = (
 	languageRoute: string,
 	filter = 'all'
-): string => `/${languageRoute}/teachings/trending/${filter}`;
+): string => root.lang(languageRoute).teachings.trending.filter(filter).get();
 
 export const makeBibleListRoute = (languageRoute: string): string =>
-	`/${languageRoute}/bibles`;
+	root.lang(languageRoute).bibles.get();
 
 export const makeBibleVersionRoute = (
 	languageRoute: string,
 	versionId: Scalars['ID']
-): string => `/${languageRoute}/bibles/${versionId}`;
+): string => root.lang(languageRoute).bibles.versionId(versionId).get();
 
 export const makeBibleBookRoute = (
 	languageRoute: string,
 	bookId: Scalars['ID'],
 	chapterNumber: Scalars['ID'] = 1
-): string => `/${languageRoute}/bibles/${bookId + ''}/${chapterNumber}`;
+): string =>
+	root
+		.lang(languageRoute)
+		.bibles.bookId(bookId)
+		.chapterNumber(chapterNumber)
+		.get();
 
 export const makeAudiobookFeedRoute = (
 	languageRoute: string,
 	bookId: Scalars['ID']
-): string => `/${languageRoute}/books/${bookId}/feed.xml`;
+): string => root.lang(languageRoute).books.id(bookId).feed.get();
 
 export const makeAudiobookListRoute = (
 	languageRoute: string,
 	page: string | number = 1
-): string => `/${languageRoute}/books${page > 1 ? `/page/${page}` : ''}`;
+): string =>
+	page > 1
+		? root.lang(languageRoute).books.page(page).get()
+		: root.lang(languageRoute).books.get();
 
 export const makeStoryAlbumFeedRoute = (
 	languageRoute: string,
