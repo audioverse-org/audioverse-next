@@ -39,7 +39,7 @@ function SearchHead({ term }: { term?: string }): JSX.Element {
 
 function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	const [isIntersecting, setIntersecting] = useState(false);
-	const enabled = !isServerSide();
+	const enabled = !isServerSide() && ref.current;
 
 	const observer = useMemo(() => {
 		if (!enabled) return null;
@@ -49,15 +49,15 @@ function useOnScreen(ref: RefObject<HTMLElement>): boolean {
 	}, [enabled]);
 
 	useEffect(() => {
-		if (!observer) return;
-		observer.observe(ref.current as HTMLElement);
+		if (!observer || !ref.current) return;
+		observer.observe(ref.current);
 		return () => observer.disconnect();
 	}, [ref, observer]);
 
 	return isIntersecting;
 }
 
-function Search({ term }: { term?: string }): JSX.Element {
+export default function Search({ term }: { term?: string }): JSX.Element {
 	const [tab, setTab] = useState<EntityFilterId>('all');
 	const q = useQueryString('q');
 	const { visible, loadMore, isLoading } = useSearch(tab, term || q || '');
@@ -81,42 +81,34 @@ function Search({ term }: { term?: string }): JSX.Element {
 					onClick: () => setTab(id),
 				}))}
 			/>
-			{visible.map((s) => {
-				const nodes = tab === 'all' ? s.nodes.slice(0, 3) : s.nodes;
-				return (
-					<div className={styles.section} key={s.id}>
-						<LineHeading variant="overline">{s.heading}</LineHeading>
-						<CardGroup>
-							{nodes.map((e: InferrableEntity) => (
-								<CardInferred key={e.id} entity={e} />
-							))}
-						</CardGroup>
-						{s.hasNextPage && tab === 'all' && (
-							<Button
-								type="secondary"
-								text={s.seeAll}
-								IconRight={ForwardIcon}
-								className={styles.seeAllButton}
-								onClick={() => setTab(s.id)}
-							/>
-						)}
-					</div>
-				);
-			})}
-			<div ref={endRef} />
+			{isLoading && <LoadingCards />}
+			{!isLoading && (
+				<>
+					{visible.map((s) => {
+						const nodes = tab === 'all' ? s.nodes.slice(0, 3) : s.nodes;
+						return (
+							<div className={styles.section} key={s.id}>
+								<LineHeading variant="overline">{s.heading}</LineHeading>
+								<CardGroup>
+									{nodes.map((e: InferrableEntity) => (
+										<CardInferred key={e.id} entity={e} />
+									))}
+								</CardGroup>
+								{s.hasNextPage && tab === 'all' && (
+									<Button
+										type="secondary"
+										text={s.seeAll}
+										IconRight={ForwardIcon}
+										className={styles.seeAllButton}
+										onClick={() => setTab(s.id)}
+									/>
+								)}
+							</div>
+						);
+					})}
+					<div ref={endRef} />
+				</>
+			)}
 		</>
 	);
 }
-
-export default withFailStates(Search, {
-	useIsLoading: ({ term }) => {
-		const q = useQueryString('q');
-		return useSearch('all', term || q || '').isLoading;
-	},
-	Loading: ({ term }: { term?: string }) => (
-		<>
-			<SearchHead term={term} />
-			<LoadingCards />
-		</>
-	),
-});
