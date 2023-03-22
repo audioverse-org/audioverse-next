@@ -27,32 +27,13 @@ const COLLAPSING_HEIGHT =
 	HEADER_TITLE_PADDING_TOP_DIFFERENCE +
 	HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
 
-export default function MobileHeader({
-	setShowingMenu,
-	scrollRef,
-}: {
-	setShowingMenu: (showingMenu: boolean) => void;
-	scrollRef: React.RefObject<HTMLDivElement>;
-}): JSX.Element {
-	const { asPath } = useRouter();
-	const languageRoute = useLanguageRoute();
-	const navigationItems = useNavigationItems();
-	const playbackContext = useContext(PlaybackContext);
-	const playbackRecording = playbackContext.getRecording();
-	const headerRef = useRef<HTMLDivElement>(null);
-	const headerTitleRef = useRef<HTMLDivElement>(null);
+function useTransitionProgress(scrollRef: React.RefObject<HTMLDivElement>) {
 	const [lastScrollTop, setLastScrollTop] = useState<number>(0);
 	const [headerSlideOffset, setHeaderSlideOffset] = useState<number>(0);
+	const [progress, setProgress] = useState<number>(0);
 
 	const listener = useCallback(() => {
-		if (
-			isServerSide() ||
-			!headerRef.current ||
-			!headerTitleRef.current ||
-			!scrollRef.current
-		) {
-			return;
-		}
+		if (isServerSide() || !scrollRef.current) return;
 
 		const scrollTop = scrollRef.current.scrollTop;
 		const isScrollingUp = scrollTop < lastScrollTop;
@@ -67,16 +48,7 @@ export default function MobileHeader({
 			Math.max(Math.min(scrollTop - headerSlideOffset, COLLAPSING_HEIGHT), 0) /
 			COLLAPSING_HEIGHT;
 
-		headerTitleRef.current.style.paddingTop = `${
-			24 - transitionProgress * HEADER_TITLE_PADDING_TOP_DIFFERENCE
-		}px`;
-		headerTitleRef.current.style.paddingBottom = `${
-			22 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE
-		}px`;
-		headerRef.current.style.paddingBottom = `${
-			(1 - transitionProgress) * SUBNAV_HEIGHT
-		}px`;
-
+		setProgress(transitionProgress);
 		setLastScrollTop(scrollTop);
 	}, [headerSlideOffset, lastScrollTop, scrollRef]);
 
@@ -86,6 +58,39 @@ export default function MobileHeader({
 		el.addEventListener('scroll', listener);
 		return () => el.removeEventListener('scroll', listener);
 	}, [listener, scrollRef]);
+
+	return progress;
+}
+
+export default function MobileHeader({
+	setShowingMenu,
+	scrollRef,
+}: {
+	setShowingMenu: (showingMenu: boolean) => void;
+	scrollRef: React.RefObject<HTMLDivElement>;
+}): JSX.Element {
+	const { asPath } = useRouter();
+	const languageRoute = useLanguageRoute();
+	const navigationItems = useNavigationItems();
+	const playbackContext = useContext(PlaybackContext);
+	const playbackRecording = playbackContext.getRecording();
+	const headerRef = useRef<HTMLDivElement>(null);
+	const headerTitleRef = useRef<HTMLDivElement>(null);
+	const transitionProgress = useTransitionProgress(scrollRef);
+
+	useEffect(() => {
+		if (isServerSide() || !headerRef.current || !headerTitleRef.current) return;
+
+		const titlePaddingTop =
+			24 - transitionProgress * HEADER_TITLE_PADDING_TOP_DIFFERENCE;
+		const titlePaddingBottom =
+			22 - transitionProgress * HEADER_TITLE_PADDING_BOTTOM_DIFFERENCE;
+		const headerPaddingBottom = (1 - transitionProgress) * SUBNAV_HEIGHT;
+
+		headerTitleRef.current.style.paddingTop = `${titlePaddingTop}px`;
+		headerTitleRef.current.style.paddingBottom = `${titlePaddingBottom}px`;
+		headerRef.current.style.paddingBottom = `${headerPaddingBottom}px`;
+	}, [transitionProgress]);
 
 	return (
 		<div className={styles.mobileHeader} ref={headerRef}>
