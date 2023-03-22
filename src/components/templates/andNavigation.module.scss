@@ -8,27 +8,11 @@
 }
 
 .content {
-	--maxWidth: 100vw;
-
-	@media (min-width: $content-maxWidth-sm) {
-		--maxWidth: #{$content-maxWidth-sm};
-	}
-
-	@media (min-width: $breakpoint-md) {
-		--maxWidth: 100vw;
-	}
-
-	@media (min-width: $content-maxWidth) {
-		--maxWidth: #{$content-maxWidth};
-	}
-
-	--maxWidthPadding: calc((100vw - var(--maxWidth)) / 2);
-
 	flex: 0 1 100vw;
 	padding-top: 24px;
 	padding-bottom: 96px;
-	padding-right: calc(24px + env(safe-area-inset-right) + var(--maxWidthPadding));
-	padding-left: calc(24px + env(safe-area-inset-left) + var(--maxWidthPadding));
 	height: 100vh;
 	overflow: scroll;
+
+	@include content-horizontal-padding();
 }
