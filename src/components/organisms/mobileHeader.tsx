@@ -44,11 +44,11 @@ function useTransitionProgress(scrollRef: React.RefObject<HTMLDivElement>) {
 			setHeaderSlideOffset(scrollTop);
 		}
 
-		const transitionProgress =
+		const progress =
 			Math.max(Math.min(scrollTop - headerSlideOffset, COLLAPSING_HEIGHT), 0) /
 			COLLAPSING_HEIGHT;
 
-		setProgress(transitionProgress);
+		setProgress(progress);
 		setLastScrollTop(scrollTop);
 	}, [headerSlideOffset, lastScrollTop, scrollRef]);
 
